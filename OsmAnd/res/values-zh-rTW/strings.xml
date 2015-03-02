@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1920,21 +1920,21 @@
 	<string name="video">視訊</string>
 	<string name="photo">照片</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
-
-	<string name="plugin_nautical_descr1">啟動此檢視更改地圖到航海顯示樣式，從而顯示所有航海航行的標記和航線標誌。</string>
-	<string name="plugin_nautical_descr2">包含了全部可利用的全球航海標誌的一個單一下載的地圖檔案，被稱為 \'全球航線標識\'。</string>
-	<string name="plugin_ski_descr1">啟動此檢視，更改了地圖樣式到 \'冬天和滑雪 \'。顯示出冬天的條件下，所有的景觀特徵。</string>
-	<string name="plugin_ski_descr2">全球地圖上顯示所有的滑雪斜坡和越野滑雪路線，在此檢視之下可獲得\'世界滑雪地圖\'下載。</string>
-	<string name="plugin_touringview_descr1">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。</string>
-	<string name="plugin_touringview_descr3">不需要下載特殊的地圖，視圖是從我們標準的地圖所建立的。</string>
-	<string name="plugin_touringview_descr2">此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。</string>
+	<string name="plugin_nautical_descr">啟動此檢視更改地圖到航海顯示樣式，從而顯示所有航海航行的標記和航線標誌。
+		\n\n包含了全部可利用的全球航海標誌的一個單一下載的地圖檔案，被稱為 \'全球航線標識\'。
+		\n\n此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。
+	</string>
+	<string name="plugin_ski_descr">啟動此檢視，更改了地圖樣式到 \'冬天和滑雪 \'。顯示出冬天的條件下，所有的景觀特徵。
+		\n\n全球地圖上顯示所有的滑雪斜坡和越野滑雪路線，在此檢視之下可獲得\'世界滑雪地圖\'下載。
+		\n\n此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。
+	</string>
+	<string name="plugin_touringview_descr">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。
+		\n\n此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。
+		\n\n不需要下載特殊的地圖，視圖是從我們標準的地圖所建立的。
+		\n\n此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。
+	</string>
 	<string name="days_behind">之後的日子</string>
 	<string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
-	<string name="plugin_nautical_descr3">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
-
-	<string name="plugin_ski_descr3">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
-
-	<string name="plugin_touringview_descr4">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
 	<string name="rename_failed">重新命名失敗。</string>
 	<string name="currently_recording_track">現在正在錄製軌跡</string>
 	<string name="back_to_map">返回地圖</string>

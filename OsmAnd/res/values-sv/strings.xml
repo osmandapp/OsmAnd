@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1818,21 +1818,21 @@
 	<string name="audio">Ljud</string>
 	<string name="video">Video</string>
 	<string name="photo">Foton</string>
-	<string name="plugin_nautical_descr1">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.</string>
-	<string name="plugin_nautical_descr2">En kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.</string>
-	<string name="plugin_nautical_descr3">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
-
-	<string name="plugin_ski_descr1">Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.</string>
-	<string name="plugin_ski_descr2">En global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Hämtningar som \'World ski map\'.</string>
-	<string name="plugin_ski_descr3">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
-
-	<string name="plugin_touringview_descr3">Ingen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.</string>
-	<string name="plugin_touringview_descr4">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
-	<string name="plugin_touringview_descr1">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.</string>
+	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.
+		\n\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.
+		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
+	</string>
+	<string name="plugin_ski_descr">Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.
+		\n\nEn global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Hämtningar som \'World ski map\'.
+		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
+	</string>
+	<string name="plugin_touringview_descr">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
+		\n\nDenna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken). Den visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.
+		\n\nIngen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.
+		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
+	</string>
 	<string name="location_on_map">Plats:\n Lat %1$s\n Lon %2$s</string>
-	<string name="plugin_touringview_descr2">Denna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken). Den visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.</string>
 	<string name="plugin_touringview_name">Vägkartsvy</string>
-
 	<string name="days_behind">dagar efter</string>
 	<string name="watch">Visa</string>
 	<string name="rename_failed">Namnbytet misslyckades.</string>

@@ -16,20 +16,7 @@
 	<string name="days_behind">days behind</string>
 	<string name="currently_recording_track">Currently recording track</string>
 	<string name="back_to_map">Back to map</string>
-	<string name="plugin_nautical_descr1">Activating this view changes the map style to Nautical, thus showing all nautical navigation marks and chart symbols.</string>
-	<string name="plugin_nautical_descr2">A map file containing all nautical symbols globally is available as one single download called \'World seamarks\'.</string>
-	<string name="plugin_nautical_descr3">This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
-
-	<string name="plugin_ski_descr1">Activating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions.</string>
-	<string name="plugin_ski_descr2">A global map displaying all ski slopes and cross country ski routes in this view is available under Downloads as \'World ski map\'.</string>
-	<string name="plugin_ski_descr3">This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
-
-	<string name="plugin_touringview_descr1">Activating this view changes the map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.</string>
-	<string name="plugin_touringview_descr2">This view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks). It also clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.</string>
-	<string name="plugin_touringview_descr3">A special map download is not needed, the view is created from our standard maps.</string>
-	<string name="plugin_touringview_descr4">This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
 	<string name="plugin_touringview_name">Touring map view</string>
-
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Photo</string>

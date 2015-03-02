@@ -19,9 +19,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_ski_descr1) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_ski_descr2) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_ski_descr3);
+		return app.getString(net.osmand.plus.R.string.plugin_ski_descr);
 	}
 
 	@Override

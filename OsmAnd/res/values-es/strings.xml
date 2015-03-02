@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1934,19 +1934,20 @@
 	<string name="audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_nautical_descr1">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.</string>
-	<string name="plugin_nautical_descr2">Un archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.</string>
-	<string name="plugin_nautical_descr3">Esta vista se puede revertir desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
-
-	<string name="plugin_ski_descr1">Activar esta vista cambia el estilo de mapa a \'invierno y esquí\', mostrando las características de terreno en condiciones invernales.</string>
-	<string name="plugin_ski_descr2">Un mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.</string>
-	<string name="plugin_ski_descr3">Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.</string>
-
-	<string name="plugin_touringview_descr1">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.</string>
-	<string name="plugin_touringview_descr2">Esta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.</string>
+	<string name="plugin_nautical_descr">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.
+		\n\nUn archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.
+		\n\nEsta vista se puede revertir desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .
+	</string>
+	<string name="plugin_ski_descr">Activar esta vista cambia el estilo de mapa a \'invierno y esquí\', mostrando las características de terreno en condiciones invernales.
+		\n\nUn mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.
+		\n\nEsta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.
+	</string>
+	<string name="plugin_touringview_descr">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
+		\n\nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
+		\n\nNo es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.
+		\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'.
+	</string>
 	<string name="days_behind">días atrás</string>
-	<string name="plugin_touringview_descr3">No es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.</string>
-	<string name="plugin_touringview_descr4">Esta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'.</string>
 	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
 	<string name="plugin_touringview_name">Vista de mapa Touring</string>

@@ -44,11 +44,11 @@
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке</string>
     <string name="monitoring_control_stop">Стоп</string>
     <string name="map_widget_audionotes">Аудио заметки</string>
-    <string name="audionotes_plugin_description">Делайте аудио-видео заметки во время путешествия</string>
+    <string name="audionotes_plugin_description">Предоставляет возможность делать аудио-видео заметки во время путешествия</string>
     <string name="audionotes_plugin_name">Аудио-видео заметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
-    <string name="srtm_plugin_name">Линии высот (внешний плагин)</string>
+    <string name="srtm_plugin_name">Линии высот</string>
 	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Плагин OsMoDroid устарел и нуждается в обновлении.</string>
@@ -1019,7 +1019,7 @@
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Точка парковки</string>
   <string name="osmand_parking_plugin_description">Внешний плагин (отдельная загрузка) позволяет запоминать место парковки вашего автомобиля.</string>
-  <string name="osmand_parking_plugin_name">Парковочное место (внешний плагин)</string>
+  <string name="osmand_parking_plugin_name">Парковочное место</string>
   <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
   <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
   <string name="starting_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
@@ -1895,4 +1895,6 @@
 	<string name="audio">Аудио</string>
 	<string name="video">Видео</string>
 	<string name="photo">Фото</string>
+	<string name="rename_failed">Не удалось переименовать.</string>
+	<string name="back_to_map">Вернуться на карту</string>
 	</resources>
