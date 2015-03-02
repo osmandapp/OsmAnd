@@ -16,7 +16,7 @@
 			android:id="@+id/plugin_image"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:maxHeight="144dp"
+			android:maxHeight="200dp"
 			android:maxWidth="360dp"
 			android:adjustViewBounds= "true"
 			android:scaleType="fitCenter"
