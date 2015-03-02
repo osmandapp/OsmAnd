@@ -653,4 +653,13 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		return null;
 	}
 	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.distance_calculator;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_marker_dark;
+	}
 }

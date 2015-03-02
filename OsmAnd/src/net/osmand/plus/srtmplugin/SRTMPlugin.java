@@ -31,6 +31,17 @@ public class SRTMPlugin extends OsmandPlugin {
 		this.app = app;
 	}
 	
+	@Override
+	public int getLogoResourceId() {
+		// TODO 
+		return super.getLogoResourceId();
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.contour_lines;
+	}
+	
 
 	@Override
 	public String getDescription() {

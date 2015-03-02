@@ -13,11 +13,13 @@
 		tools:context=".activities.PluginActivity">
 
 		<ImageView
+			android:id="@+id/plugin_image"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:maxHeight="144dp"
 			android:maxWidth="360dp"
-			android:scaleType="centerInside"
+			android:adjustViewBounds= "true"
+			android:scaleType="fitCenter"
 			android:layout_gravity="center_horizontal"
 			android:src="@drawable/extension_stub"/>
 

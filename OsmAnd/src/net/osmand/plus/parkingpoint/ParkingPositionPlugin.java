@@ -514,4 +514,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public Class<? extends Activity> getSettingsActivity() {
 		return null;
 	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.parking_position;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_parking_dark;
+	}
 }

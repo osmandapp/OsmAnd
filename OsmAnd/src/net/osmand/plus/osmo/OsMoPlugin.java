@@ -24,7 +24,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
@@ -46,9 +45,6 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -70,7 +66,11 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	public OsMoPlugin(final OsmandApplication app) {
 		this.app = app;
-		
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.osmo_monitoring;
 	}
 
 	@Override

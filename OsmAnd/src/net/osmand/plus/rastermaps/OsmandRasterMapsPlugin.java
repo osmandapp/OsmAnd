@@ -23,7 +23,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -31,11 +30,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -61,6 +56,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public boolean init(OsmandApplication app, Activity activity) {
 		settings = app.getSettings();
 		return true;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_world_globe_dark;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.online_maps;
 	}
 	
 	@Override

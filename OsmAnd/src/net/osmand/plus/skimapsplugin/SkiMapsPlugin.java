@@ -26,6 +26,18 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(net.osmand.plus.R.string.plugin_ski_name);
 	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.ski_map;
+	}
+	
 	@Override
 	public boolean init(final OsmandApplication app, final Activity activity) {
 		if(activity != null) {

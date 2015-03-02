@@ -21,6 +21,11 @@ public class TouringViewPlugin extends OsmandPlugin {
 	public String getDescription() {
 		return app.getString(net.osmand.plus.R.string.plugin_touringview_descr);
 	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.touring_map_view;
+	}
 
 	@Override
 	public String getName() {
