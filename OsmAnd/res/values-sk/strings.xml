@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1021,7 +1021,7 @@
   <string name="osmand_parking_am">dopoludnia</string>
   <string name="osmand_parking_position_name">Parkovací bod</string>
   <string name="osmand_parking_plugin_description">Externý zásuvný modul (samostatne stiahnuteľný), ktorý umožňuje zapamätať umiestnenie vášho zaparkovaného auta.</string>
-  <string name="osmand_parking_plugin_name">Parkovacie miesto (externý zásuvný modul)</string>
+  <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
   <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
   <string name="starting_point_too_far">Počiatočný bod je príliš ďaleko od najbližšej cesty.</string>
@@ -1173,7 +1173,7 @@
     <string name="audionotes_plugin_description">Zobrazí tlačidlo na vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Externý doplnok (samostatne stiahnuteľný), ktorý umožňuje sťahovanie offline vrstevníc a tieňovaní svahov (Nastavenia → Správca mapových súborov → vyberte požadovaný typ máp).</string>
-    <string name="srtm_plugin_name">Vrstevnice (externý zásuvný modul)</string>
+    <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
     
