@@ -34,7 +34,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
-import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivity;
@@ -46,6 +45,7 @@ import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -590,8 +590,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				if (app.getLocationProvider().getLastKnownLocation() != null) {
-					new ShareLocation(mapActivity).run();
+				Location location = app.getLocationProvider().getLastKnownLocation();
+				if (location == null) {
+					mapActivity.shareLocation(location.getLatitude(), location.getLongitude(),
+							mapActivity.getMapView().getZoom());
 				} else {
 					Toast.makeText(app, R.string.unknown_location, Toast.LENGTH_LONG).show();
 				}

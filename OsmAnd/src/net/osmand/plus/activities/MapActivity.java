@@ -51,6 +51,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -60,12 +62,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -839,5 +845,53 @@ public class MapActivity extends AccessibleActivity {
 		return getWindow().getDecorView().findViewById(android.R.id.content);
 	}
 
+	/** Share/SEND location to another app for a specific action (message, QRCode, etc) */
+	public void shareLocation(double latitude, double longitude, int zoom) {
+		String shortOsmandNetUrl = MapUtils.buildShortOsmandNetUrl(latitude, longitude, zoom);
+		String geoUrl = MapUtils.buildGeoUrl(latitude, longitude, zoom);
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_SUBJECT, geoUrl);
+		intent.putExtra(Intent.EXTRA_TEXT,
+						getString(R.string.send_location_sms_pattern, geoUrl, shortOsmandNetUrl));
 
+		GeoParsedPoint point = new GeoParsedPoint(latitude, longitude, zoom);
+		Uri uri = Uri.parse(point.getGeoUriString());
+		if (uri == null) {
+			startActivity(intent);
+		} else {
+			// launch a chooser with both SEND and VIEW receivers
+			String osmandPackageName = getPackageName();
+			PackageManager pm = getPackageManager();
+			Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+			viewIntent.setData(uri);
+			Intent chooser = Intent.createChooser(intent, getString(R.string.send_location_way_choose_title));
+			/*
+			 * Prepend "View in" to applicable apps, otherwise they will show
+			 * up twice identically
+			 */
+			List<ResolveInfo> resInfo = pm.queryIntentActivities(viewIntent, 0);
+			ArrayList<Intent> extraIntents = new ArrayList<Intent>(1);
+			for (int i = 0; i < resInfo.size(); i++) {
+				// Extract label, append, and repackage in LabeledIntent
+				ResolveInfo ri = resInfo.get(i);
+				String packageName = ri.activityInfo.packageName;
+				if (osmandPackageName.equals(packageName))
+					continue; // no need to display this app
+				// make sure we have a working Intent
+				Intent extraIntent = new Intent();
+				extraIntent.setComponent(new ComponentName(packageName, ri.activityInfo.name));
+				extraIntent.setAction(Intent.ACTION_VIEW);
+				extraIntent.setData(uri);
+				ComponentName launchname = extraIntent.resolveActivity(pm);
+				if (launchname != null) {
+					extraIntent.setComponent(launchname);
+					String label = String.format(getString(R.string.view_in), ri.loadLabel(pm));
+					extraIntents.add(new LabeledIntent(extraIntent, packageName, label, ri.icon));
+				}
+			}
+			chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents.toArray(new Intent[extraIntents.size()]));
+			startActivity(chooser);
+		}
+	}
 }

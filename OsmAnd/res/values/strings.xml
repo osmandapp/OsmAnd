@@ -1952,6 +1952,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="arrived_at_destination">You have arrived at your destination</string>
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
+	<string name="view_in">view in %1$s</string>
 	<string name="close">Close</string>
 	<string name="loading_data">Loading data…</string>
 	<string name="reading_indexes">Reading local data…</string>

@@ -4,6 +4,7 @@ package net.osmand.util;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -281,7 +282,13 @@ public class MapUtils {
 	public static String buildGeoUrl(double latitude, double longitude, int zoom) {
         return "geo:" + ((float) latitude) + "," + ((float)longitude) + "?z=" + zoom;
 	}
-	
+
+    public static String buildShortOsmandNetUrl(double latitude, double longitude, int zoom){
+		// TODO change this to HTTPS once it is setup!
+		return String.format(Locale.ENGLISH, "http://osmand.net/go?lat=%s&lon=%s&z=%d",
+							 latitude, longitude, zoom);
+	}
+
 	// Examples
 //	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
 //	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
