@@ -67,7 +67,6 @@
 		android:layout_marginRight="0dp"
 		android:layout_marginTop="0dp"
 		android:layout_weight="1"
-		android:background="?attr/expandable_list_background"
 		android:groupIndicator="@android:color/transparent"/>
 
 
