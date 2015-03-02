@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1885,4 +1885,5 @@
 
 	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
-</resources>
+<string name="selected_tracks">Ischertadu</string>
+	</resources>
