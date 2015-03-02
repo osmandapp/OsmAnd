@@ -134,7 +134,7 @@ public class GpxUiHelper {
 									 final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject){
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<String> allGpxList = getSortedGPXFilenames(dir);
+		final List<String> allGpxList = getSortedGPXFilenames(dir, false);
 		if(allGpxList.isEmpty()){
 			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
@@ -155,7 +155,7 @@ public class GpxUiHelper {
 			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<String> list = getSortedGPXFilenames(dir);
+		final List<String> list = getSortedGPXFilenames(dir, false);
 		if(list.isEmpty()){
 			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
@@ -359,9 +359,9 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	public static List<String> getSortedGPXFilenamesByDate(File dir) {
+	public static List<String> getSortedGPXFilenamesByDate(File dir, boolean absolutePath) {
 		final Map<String, Long> mp = new HashMap<String, Long>();
-		readGpxDirectory(dir, mp, "");
+		readGpxDirectory(dir, mp, "", absolutePath);
 		ArrayList<String> list = new ArrayList<String>(mp.keySet());
 		Collections.sort(list, new Comparator<String>() {
 			@Override
@@ -381,9 +381,9 @@ public class GpxUiHelper {
 	}
 
 	
-	public static List<String> getSortedGPXFilenames(File dir) {
+	public static List<String> getSortedGPXFilenames(File dir, boolean absolutePath) {
 		final Map<String, Long> mp = new HashMap<String, Long>();
-		readGpxDirectory(dir, mp, "");
+		readGpxDirectory(dir, mp, "", absolutePath);
 		ArrayList<String> list = new ArrayList<String>(mp.keySet());
 		Collections.sort(list, new Comparator<String>() {
 			@Override
@@ -400,15 +400,17 @@ public class GpxUiHelper {
 		return list;
 	}
 
-	private static void readGpxDirectory(File dir, final Map<String, Long> map, String parent) {
+	private static void readGpxDirectory(File dir, final Map<String, Long> map, String parent, 
+			boolean absolutePath) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
 					if (f.getName().toLowerCase().endsWith(".gpx")) { //$NON-NLS-1$
-						map.put(parent + f.getName(), f.lastModified());
+						map.put(absolutePath ? f.getAbsolutePath() :
+								parent + f.getName(), f.lastModified());
 					} else if (f.isDirectory()) {
-						readGpxDirectory(f, map, parent + f.getName() + "/");
+						readGpxDirectory(f, map, parent + f.getName() + "/", absolutePath);
 					}
 				}
 			}

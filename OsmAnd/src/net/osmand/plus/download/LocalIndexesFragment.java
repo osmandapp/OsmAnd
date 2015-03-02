@@ -207,7 +207,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
 		if (resId == R.string.local_index_mi_rename) {
-			renameFile(info);
+			renameFile(getActivity(), new File(info.getPathToData()), new Runnable() {
+				
+				@Override
+				public void run() {
+					reloadIndexes();
+				}
+			});
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 		} else if (resId == R.string.local_index_mi_delete) {
@@ -227,29 +233,32 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
-	private void renameFile(LocalIndexInfo info) {
-		final File f = new File(info.getPathToData());
-		Builder b = new AlertDialog.Builder(getActivity());
+	public static void renameFile(final Activity a, final File f, final Runnable callback) {
+		Builder b = new AlertDialog.Builder(a);
 		if(f.exists()){
-			final EditText editText = new EditText(getActivity());
-			editText.setText(f.getName());
+			int xt = f.getName().lastIndexOf('.');
+			final String ext = f.getName().substring(xt);
+			final EditText editText = new EditText(a);
+			editText.setText(f.getName().subSequence(0, xt));
 			b.setView(editText);
 			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					String newName = editText.getText().toString();
+					String newName = editText.getText().toString() + ext;
 					File dest = new File(f.getParentFile(), newName);
 					if (dest.exists()) {
-						AccessibleToast.makeText(getDownloadActivity(), R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(a, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
-						if(!f.getParentFile().exists()) {
-							f.getParentFile().mkdirs();
+						if(!dest.getParentFile().exists()) {
+							dest.getParentFile().mkdirs();
 						}
 						if(f.renameTo(dest)){
-							reloadIndexes();
+							if(callback != null) { 
+								callback.run();
+							}
 						} else {
-							AccessibleToast.makeText(getDownloadActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(a, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 						}
 					}
 					

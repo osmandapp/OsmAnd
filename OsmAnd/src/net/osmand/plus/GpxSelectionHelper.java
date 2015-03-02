@@ -311,6 +311,7 @@ public class GpxSelectionHelper {
 		if(!Algorithms.isEmpty(load)) {
 			try {
 				JSONArray ar = new JSONArray(load);
+				boolean save = false;
 				for(int i = 0; i < ar.length(); i++) {
 					JSONObject obj = ar.getJSONObject(i);
 					if(obj.has(FILE)) {
@@ -319,10 +320,17 @@ public class GpxSelectionHelper {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
-						selectGpxFile(gpx, true, false);
+						if(gpx.warning != null) {
+							save = true;
+						} else {
+							selectGpxFile(gpx, true, false);
+						}
 					} else if(obj.has(CURRENT_TRACK)) {
 						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
 					}
+				}
+				if(save) {
+					saveCurrentSelections();
 				}
 			} catch (Exception e) {
 				app.getSettings().SELECTED_GPX.set("");

@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+    <string name="selected_tracks">Selected</string>
 	<string name="turn_off_all">Turn_off_all</string>
 	<string name="showed_on_map">Showed on map</string>
 	<string name="rename_failed">Rename failed.</string>
