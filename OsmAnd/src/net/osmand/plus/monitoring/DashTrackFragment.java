@@ -47,7 +47,7 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	private Drawable gpxOnMap;
 	private Drawable gpxNormal;
-	private boolean previousRecordingState;
+	private boolean updateEnable;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,7 +83,14 @@ public class DashTrackFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateEnable = true;
 		setupGpxFiles();
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		updateEnable = false;
 	}
 
 	private void setupGpxFiles() {
@@ -91,12 +98,12 @@ public class DashTrackFragment extends DashBaseFragment {
 		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final OsmandApplication app = getMyApplication();
 		
-		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		final List<String> list  = new ArrayList<String>();
 		for(SelectedGpxFile sg :  app.getSelectedGpxHelper().getSelectedGPXFiles() ) {
 			if(!sg.isShowCurrentTrack()) {
 				GPXFile gpxFile = sg.getGpxFile();
 				if(gpxFile != null) {
+					System.out.println(gpxFile.path);
 					list.add(gpxFile.path);
 				}
 			}
@@ -106,7 +113,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			totalCount --;
 		}
 		if(list.size() < totalCount) {
-			final List<String> res = GpxUiHelper.getSortedGPXFilenamesByDate(dir);
+			final List<String> res = GpxUiHelper.getSortedGPXFilenamesByDate(dir, true);
 			for(String r : res) {
 				if(!list.contains(r)) {
 					list.add(r);
@@ -127,41 +134,30 @@ public class DashTrackFragment extends DashBaseFragment {
 		LinearLayout tracks = (LinearLayout) mainView.findViewById(R.id.items);
 		tracks.removeAllViews();
 
-		previousRecordingState = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
-		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
-			AvailableGPXFragment.createCurrentTrackView(view, app);
-
-
-			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-			((TextView)view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
-			String points = String.valueOf(currentTrack.getGpxFile().points.size());
-
-			((TextView) view.findViewById(R.id.points_count)).setText(points);
-			((TextView)view.findViewById(R.id.distance)).setText(
-					OsmAndFormatter.getFormattedDistance(savingTrackHelper.getDistance(), app));
-			tracks.addView(view);
-			startHandler(view);
-		}
+		AvailableGPXFragment.createCurrentTrackView(view, app);
+		((TextView) view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+		tracks.addView(view);
+		startHandler(view);
 
 		for (String filename : list) {
-			final File f = new File(dir, filename);
+			System.out.println(" >> " + filename);
+			final File f = new File(filename);
 			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 			info.subfolder = "";
 			info.file = f;
-
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.udpateGpxInfoView(view, info, app, gpxNormal, gpxOnMap, true);
-			view.setOnClickListener(new View.OnClickListener() {
+			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+			AvailableGPXFragment.udpateGpxInfoView(v, info, app, gpxNormal, gpxOnMap, true);
+			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showOnMap(GPXUtilities.loadGPXFile(app, f));
 				}
 			});
-			tracks.addView(view);
+			tracks.addView(v);
 		}
 	}
 
@@ -177,22 +173,16 @@ public class DashTrackFragment extends DashBaseFragment {
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	private void startHandler(final View v){
+	private void startHandler(final View v) {
 		Handler updateCurrentRecordingTrack = new Handler();
-		if (previousRecordingState != getMyApplication().getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
-			setupGpxFiles();
-		} else {
-			updateCurrentRecordingTrack.postDelayed(new Runnable() {
-				@Override
-				public void run() {
+		updateCurrentRecordingTrack.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (updateEnable) {
 					AvailableGPXFragment.updateCurrentTrack(v, getActivity(), getMyApplication());
-
-					if (v != null) {
-						startHandler(v);
-					}
+					startHandler(v);
 				}
-			}, 2000);
-		}
-
+			}
+		}, 1500);
 	}
 }

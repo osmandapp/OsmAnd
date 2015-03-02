@@ -16,18 +16,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"/>
 
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"/>
-
-		<Button
-			android:id="@+id/map_btn"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/expandable_list_item_background"
-			android:text="@string/back_to_map"/>
-
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/on_map_layout"

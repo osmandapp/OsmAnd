@@ -60,6 +60,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private float distance = 0;
 	private boolean isRecording = false;
 	private SelectedGpxFile currentTrack;
+	private int points;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -202,6 +203,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 		distance = 0;
+		points = 0;
 		return warnings;
 	}
 
@@ -393,6 +395,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = description;
 		currentTrack.getModifiableGpxFile().points.add(pt);
+		points++;
 		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
 	}
 	
@@ -424,6 +427,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public float getDistance() {
 		return distance;
+	}
+	
+	public int getPoints() {
+		return points;
 	}
 	
 	public long getLastTimeUpdated() {
