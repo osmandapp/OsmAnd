@@ -140,6 +140,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		AvailableGPXFragment.createCurrentTrackView(view, app);
 		((TextView) view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
 		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+		view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 		tracks.addView(view);
 		startHandler(view);
 

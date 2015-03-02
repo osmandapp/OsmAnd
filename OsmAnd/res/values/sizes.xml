@@ -42,6 +42,7 @@
 	<dimen name="favorite_icon_size">24dp</dimen>
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
+	<dimen name="gpx_text_top_margin">6dp</dimen>
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

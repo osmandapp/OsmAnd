@@ -43,6 +43,12 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
+	private Drawable addressIcon;
+	private Drawable favoriteIcon;
+	private Drawable locationIcon;
+	private Drawable poiIcon;
+	private Drawable wptIcon;
+	private Drawable noteIcon;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +63,31 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				clearButton.setVisibility(View.GONE);
 			}
 		});
+		loadIcons();
 		return view;
+	}
+
+	private void loadIcons() {
+		addressIcon = getResources().getDrawable(R.drawable.ic_type_coordinates);
+		favoriteIcon = getResources().getDrawable(R.drawable.ic_action_fav_dark);
+		locationIcon = getResources().getDrawable(R.drawable.ic_action_marker_dark);
+		poiIcon = getResources().getDrawable(R.drawable.ic_action_gabout_dark);
+		wptIcon = getResources().getDrawable(R.drawable.ic_action_flage_dark);
+		noteIcon = getResources().getDrawable(R.drawable.ic_action_note_dark);
+		if (getMyApplication().getSettings().isLightContent()) {
+			addressIcon = addressIcon.mutate();
+			addressIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			favoriteIcon = favoriteIcon.mutate();
+			favoriteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			locationIcon = locationIcon.mutate();
+			locationIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			poiIcon = poiIcon.mutate();
+			poiIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			wptIcon = wptIcon.mutate();
+			wptIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			noteIcon = noteIcon.mutate();
+			noteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+		}
 	}
 
 	@Override
@@ -65,7 +95,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		super.onCreate(savedInstanceState);
 		helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity().getApplicationContext());
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -73,8 +103,8 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		setListAdapter(historyAdapter);
 		setHasOptionsMenu(true);
 	}
-	
-	
+
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -97,18 +127,18 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
 		historyAdapter.clear();
-		for(HistoryEntry entry : helper.getHistoryEntries()){
+		for (HistoryEntry entry : helper.getHistoryEntries()) {
 			historyAdapter.add(entry);
 		}
 		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
-		
+
 	}
 
 	@Override
 	public void locationUpdate(LatLon l) {
 		//location = l;
-		if(historyAdapter != null) {
+		if (historyAdapter != null) {
 			historyAdapter.updateLocation(l);
 		}
 	}
@@ -175,18 +205,36 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			ImageView arrow = (ImageView) row.findViewById(R.id.direction);
 			arrow.setImageDrawable(arrowImage);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
-			final HistoryEntry model = getItem(position);
+			final HistoryEntry historyEntry = getItem(position);
 			if (location != null) {
-				int dist = (int) (MapUtils.getDistance(location, model.getLat(), model.getLon()));
+				int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));
 				distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()) + "  ";
 			}
 			distanceText.setText(distance);
-			nameText.setText(model.getName().getName(), BufferType.SPANNABLE);
+			nameText.setText(historyEntry.getName().getName(), BufferType.SPANNABLE);
+			ImageView icon  =((ImageView) row.findViewById(R.id.icon));
+
+			if (historyEntry.getName().isAddress()) {
+				icon.setImageDrawable(addressIcon);
+			} else if (historyEntry.getName().isFavorite()) {
+				icon.setImageDrawable(favoriteIcon);
+			} else if (historyEntry.getName().isLocation()) {
+				icon.setImageDrawable(locationIcon);
+			} else if (historyEntry.getName().isPoi()) {
+				icon.setImageDrawable(poiIcon);
+			} else if (historyEntry.getName().isWpt()) {
+				icon.setImageDrawable(wptIcon);
+			} else if (historyEntry.getName().isAvNote()) {
+				icon.setImageDrawable(noteIcon);
+			} else {
+				icon.setImageDrawable(addressIcon);
+			}
+
 
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectModel(model, v);
+					selectModel(historyEntry, v);
 				}
 
 			});
@@ -197,8 +245,8 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
-		if(getActivity() instanceof SearchActivity) {
-			 ((SearchActivity) getActivity()).getClearToolbar(false);
+		if (getActivity() instanceof SearchActivity) {
+			((SearchActivity) getActivity()).getClearToolbar(false);
 		}
 	}
 

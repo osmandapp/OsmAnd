@@ -66,6 +66,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
@@ -267,6 +268,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		v.findViewById(R.id.options).setVisibility(View.GONE);
 		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 		save.setImageDrawable(icon);
 	}
 
@@ -787,6 +789,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
 			}
 			udpateGpxInfoView(v, child, app, gpxNormal, gpxOnMap, false);
+
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -820,6 +823,27 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				icon.setVisibility(View.VISIBLE);
 				options.setVisibility(View.VISIBLE);
 			}
+
+			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.check_item);
+			if (isSelectedGroup(groupPosition)) {
+				checkItem.setVisibility(View.VISIBLE);
+				v.findViewById(R.id.options).setVisibility(View.GONE);
+			} else {
+				checkItem.setVisibility(View.GONE);
+			}
+
+			final SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByName(child.getFileName());
+			checkItem.setChecked(selectedGpxFile != null);
+			checkItem.setOnClickListener( new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (child.gpx != null) {
+						selectedGpxHelper.selectGpxFile(child.gpx, checkItem.isChecked(), false);
+					} else {
+						selectedGpxHelper.getSelectedGPXFiles().remove(selectedGpxFile);
+					}
+				}
+			});
 
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -1420,6 +1444,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (sgpx != null) {
 			icon.setImageDrawable(gpxOnMap);
 			analysis = sgpx.getTrackAnalysis();
+
 		}
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
@@ -1473,6 +1498,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			descr.setVisibility(View.GONE);
 		}
+
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
 }

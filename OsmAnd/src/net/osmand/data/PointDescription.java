@@ -107,6 +107,9 @@ public class PointDescription {
 		return POINT_TYPE_FAVORITE.equals(type);
 	}
 
+	public boolean isAvNote() {
+		return POINT_TYPE_NOTE.equals(type);
+	}
 
 	@Override
 	public int hashCode() {

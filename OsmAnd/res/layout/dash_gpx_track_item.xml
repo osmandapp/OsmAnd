@@ -23,46 +23,47 @@
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:focusable="false"
-			android:visibility="gone"
 			android:layout_marginLeft="@dimen/local_index_check_right_margin"
-			android:layout_marginTop="@dimen/favorites_icon_top_margin"/>
+			android:layout_marginTop="@dimen/favorites_icon_top_margin"
+			android:focusable="false"
+			android:visibility="gone"/>
 
 		<ImageView
 			android:id="@+id/icon"
-			android:src="@drawable/ic_gpx_track"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:visibility="gone"
 			android:layout_marginLeft="@dimen/list_content_padding"
 			android:layout_marginTop="@dimen/favorites_icon_top_margin"
-			android:focusable="false"/>
+			android:focusable="false"
+			android:src="@drawable/ic_gpx_track"
+			android:visibility="gone"/>
 
 
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:gravity="center_vertical"
 			android:layout_marginLeft="@dimen/subHeaderMarginLeft"
 			android:layout_marginRight="@dimen/showAllButtonMarginRight"
 			android:layout_weight="1"
+			android:gravity="center_vertical"
 			android:orientation="vertical">
 
 			<TextView
 				android:id="@+id/name"
-				android:textSize="@dimen/dashFavNameTextSize"
+				android:layout_marginTop="@dimen/gpx_text_top_margin"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/dashFavNameTextSize"
 				tools:text="@string/validate_gpx_upload_name_pwd"/>
 
 			<LinearLayout
+				android:id="@+id/read_section"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:id="@+id/read_section"
-				android:visibility="visible"
-				android:orientation="horizontal">
+				android:orientation="horizontal"
+				android:visibility="visible">
 
 				<ImageView
 					android:id="@+id/points_icon"
@@ -77,24 +78,24 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-					android:textSize="@dimen/download_descr_text_size"
-					android:textColor="?android:textColorSecondary"/>
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/download_descr_text_size"/>
 
 				<ImageView
 					android:id="@+id/distance_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					android:layout_gravity="center_vertical"
+					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					android:src="@drawable/ic_small_distance"/>
 
 				<TextView
 					android:id="@+id/distance"
 					android:layout_width="wrap_content"
-					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/download_descr_text_size"
-					android:textColor="?android:textColorSecondary"/>
+					android:layout_marginRight="@dimen/gpx_small_text_margin"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/download_descr_text_size"/>
 
 				<ImageView
 					android:id="@+id/time_icon"
@@ -109,69 +110,71 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-					android:textSize="@dimen/download_descr_text_size"
-					android:textColor="?android:textColorSecondary"/>
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/download_descr_text_size"/>
 			</LinearLayout>
 
 			<LinearLayout
+				android:id="@+id/unknown_section"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:id="@+id/unknown_section"
-				android:visibility="gone"
-				android:orientation="horizontal">
+				android:orientation="horizontal"
+				android:visibility="gone">
 
 				<TextView
 					android:id="@+id/date_and_size_details"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/download_descr_text_size"
-					android:textColor="?android:textColorSecondary"/>
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/download_descr_text_size"/>
 
 			</LinearLayout>
 
 
 			<TextView
 				android:id="@+id/description"
-				android:visibility="gone"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/download_descr_text_size"
-				android:textColor="?android:textColorPrimary"/>
+				android:visibility="gone"/>
 		</LinearLayout>
 
 		<ImageButton
 			android:id="@+id/stop"
-			android:visibility="gone"
 			android:layout_width="@dimen/dashListItemHeight"
 			android:layout_height="@dimen/dashListItemHeight"
 			android:layout_gravity="center_vertical"
 			android:background="?attr/options_button_background"
 			android:src="@drawable/ic_action_rec_stop"
+			android:visibility="gone"
 			tools:visibility="visible"/>
 
 		<ImageButton
 			android:id="@+id/show_on_map"
-			android:visibility="gone"
-			tools:visibility="visible"
 			android:layout_width="@dimen/dashListItemHeight"
 			android:layout_height="@dimen/dashListItemHeight"
-			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:background="?attr/options_button_background"
-			android:src="@drawable/ic_action_gsave_dark"/>
+			android:src="@drawable/ic_action_gsave_dark"
+			android:visibility="gone"
+			tools:visibility="visible"/>
 
 		<ImageButton
 			android:id="@+id/options"
-			android:visibility="gone"
 			android:layout_width="@dimen/list_item_height"
 			android:layout_height="@dimen/list_item_height"
 			android:background="?attr/options_button_background"
 			android:focusable="false"
-			android:src="?attr/list_settings_icon"/>
+			android:src="?attr/list_settings_icon"
+			android:visibility="gone"/>
 
-<!--
-		<include layout="@layout/check_item_rel" />
-		-->
+		<include android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:layout_gravity="top"
+				 layout="@layout/check_item_rel"/>
+
 	</LinearLayout>
 
 

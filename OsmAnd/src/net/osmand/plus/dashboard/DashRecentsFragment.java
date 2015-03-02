@@ -21,7 +21,9 @@ import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -42,6 +44,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
+	Drawable icon;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,6 +68,11 @@ public class DashRecentsFragment extends DashLocationFragment {
 				activity.startActivity(search);
 			}
 		});
+		icon = getResources().getDrawable(R.drawable.ic_type_coordinates);
+		if (getMyApplication().getSettings().isLightContent()) {
+			icon = icon.mutate();
+			icon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+		}
 		return view;
 	}
 	
@@ -121,7 +129,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 
 			((ImageView) view.findViewById(R.id.icon)).
-					setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), Color.BLUE));
+					setImageDrawable(icon);
 
 			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
