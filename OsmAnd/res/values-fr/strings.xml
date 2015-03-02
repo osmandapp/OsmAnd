@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1964,4 +1964,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="back_to_map">Retour à la carte</string>
 	<string name="turn_off_all">Tout éteindre</string>
 	<string name="showed_on_map">Affiché sur la carte</string>
+	<string name="selected_tracks">Sélectionné</string>
 	</resources>
