@@ -163,13 +163,14 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			paint.setStrokeWidth(12 * tb.getDensity());
 			TIntArrayList tx = new TIntArrayList();
 			TIntArrayList ty = new TIntArrayList();
 			for (int i = 0; i < points.size(); i++) {
 				Location o = points.get(i);
-				int x = tb.getPixXFromLonNoRot(o.getLongitude());
-				int y = tb.getPixYFromLatNoRot(o.getLatitude());
+				int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 				tx.add(x);
 				ty.add(y);
 			}
@@ -196,6 +197,7 @@ public class RouteLayer extends OsmandMapLayer {
 					}
 				}
 			}
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
