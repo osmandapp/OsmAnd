@@ -16,6 +16,7 @@ import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
@@ -29,6 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.LocalIndexesFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -1166,7 +1168,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPostExecute(String result) {
-			selectedGpxHelper.runUiListeners();
 			getActivity().setProgressBarIndeterminateVisibility(false);
 			allGpxAdapter.refreshSelected();
 			allGpxAdapter.notifyDataSetChanged();
@@ -1211,7 +1212,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (info.gpx != null) {
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, selected, true);
 					allGpxAdapter.notifyDataSetChanged();
-					selectedGpxHelper.runUiListeners();
 				}
 			}
 		}.execute(info);
@@ -1276,12 +1276,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		GpxInfo item = allGpxAdapter.getChild(groupPosition, childPosition);
+		
+		
 		if (!selectionMode) {
-			item.setExpanded(!item.isExpanded());
-			if (item.isExpanded()) {
-				descriptionLoader = new LoadLocalIndexDescriptionTask();
-				descriptionLoader.execute(item);
-			}
+			Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
+			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, item.file.getAbsolutePath());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(newIntent);
+//			item.setExpanded(!item.isExpanded());
+//			if (item.isExpanded()) {
+//				descriptionLoader = new LoadLocalIndexDescriptionTask();
+//				descriptionLoader.execute(item);
+//			}
 		} else {
 			if (!selectedItems.contains(item)) {
 				selectedItems.add(item);

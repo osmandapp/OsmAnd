@@ -1,8 +1,6 @@
 package net.osmand.plus.activities;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.PopupMenu;
-import android.view.*;
+
 import gnu.trove.list.array.TIntArrayList;
 
 import java.text.Collator;
@@ -16,6 +14,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -34,8 +33,17 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.PopupMenu;
 import android.text.Html;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -58,7 +66,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
 //	private SearchView searchView;
 	private OsmandApplication app;
-	private GpxSelectionHelper selectedGpxHelper;
 	private SelectedGPXAdapter adapter;
 	private boolean lightContent;
 	private Activity activity;
@@ -72,7 +79,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		app = (OsmandApplication) activity.getApplication();
-		selectedGpxHelper = app.getSelectedGpxHelper();
 	}
 	
 	public Activity getMyActivity() {
@@ -90,14 +96,21 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		setContent();
-		selectedGpxHelper.setUiListener(SelectedGPXFragment.class, 
-					new Runnable() {
-			
-			@Override
-			public void run() {
-				adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());				
-			}
-		});
+		List<GpxDisplayGroup> displayGrous = getContent();
+		adapter.setDisplayGroups(displayGrous);
+	}
+
+	private List<GpxDisplayGroup> getContent() {
+		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		List<GpxDisplayGroup> displayGrous = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		if(getActivity() instanceof TrackActivity) {
+			selectedGpxHelper.collectDisplayGroups(displayGrous, getGpx());
+		}
+		return displayGrous;
+	}
+
+	private GPXFile getGpx() {
+		return ((TrackActivity) getActivity()).getResult();
 	}
 
 
@@ -109,7 +122,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			adapter = new SelectedGPXAdapter(getExpandableListView());
 			setAdapter(adapter);
 		}
-		List<GpxDisplayGroup> groups = selectedGpxHelper.getDisplayGroups();
+		List<GpxDisplayGroup> groups = getContent();
 		if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
 			groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(groups);
 			Iterator<GpxDisplayGroup> it = groups.iterator();
@@ -135,12 +148,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		selectedGpxHelper.setUiListener(SelectedGPXFragment.class, null);
-	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View vs = super.onCreateView(inflater, container, savedInstanceState);
@@ -246,7 +253,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		((FavoritesActivity) getActivity()).getClearToolbar(false);
+		((TrackActivity) getActivity()).getClearToolbar(false);
 	}
 
 	public void showProgressBar() {
@@ -286,7 +293,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, model);
 		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, model);
 		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
-		vis.setChecked(true);
+		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(), android.R.layout.simple_spinner_item, options);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -301,14 +308,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!vis.isChecked()) {
-					app.getSelectedGpxHelper().selectGpxFile(model.getGpx(), false, false);
-					SelectedGPXFragment.this.adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
-					app.getSelectedGpxHelper().runUiListeners();
-				} else {
-					updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
-				}
-				
+				app.getSelectedGpxHelper().selectGpxFile(model.getGpx(), vis.isChecked(), true);
+				updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
 			}
 		});
 		

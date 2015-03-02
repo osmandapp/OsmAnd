@@ -9,11 +9,12 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -58,6 +59,10 @@ public class OsmAndAppCustomization {
 	
 	public Class<SearchActivity> getSearchActivity(){
 		return SearchActivity.class;
+	}
+	
+	public Class<TrackActivity> getTrackActivity(){
+		return TrackActivity.class;
 	}
 	
 	public Class<FavoritesActivity> getFavoritesActivity(){

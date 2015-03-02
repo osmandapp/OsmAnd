@@ -2,13 +2,7 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -21,6 +15,11 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.graphics.Bitmap;
 
 public class GpxSelectionHelper {
@@ -33,7 +32,6 @@ public class GpxSelectionHelper {
 //			new BooleanPreference("show_current_gpx_track", false).makeGlobal().cache();
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<SelectedGpxFile>();
 	private SavingTrackHelper savingTrackHelper;
-	private Map<Class<?>, Runnable> uiListeners = new LinkedHashMap<Class<?>, Runnable>();
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication) {
 		this.app = osmandApplication;
@@ -71,7 +69,7 @@ public class GpxSelectionHelper {
 		return dg;
 	}
 
-	private void collectDisplayGroups(List<GpxDisplayGroup> dg, GPXFile g) {
+	public void collectDisplayGroups(List<GpxDisplayGroup> dg, GPXFile g) {
 		String name = g.path;
 		if(g.showCurrentTrack){
 			name =  getString(R.string.gpx_available_current_track);
@@ -389,19 +387,6 @@ public class GpxSelectionHelper {
 		saveCurrentSelections();
 	}
 	
-	public void setUiListener(Class<?> key, Runnable listener) {
-		if(listener == null) {
-			uiListeners.remove(key);
-		} else {
-			uiListeners.put(key, listener);
-		}
-	}
-	
-	public void runUiListeners() {
-		for(Runnable r : uiListeners.values()) {
-			r.run();
-		}
-	}
 	
 	public static class SelectedGpxFile {
 		public boolean notShowNavigationDialog = false;
