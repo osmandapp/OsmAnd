@@ -1841,8 +1841,8 @@ s často kladenými otázkami.</string>
 <string name="edit_group">Upravit skupinu</string>
     <string name="nautical_maps_missing">Pro zobrazování námořních map je třeba stáhnout speciální mapu</string>
 	<string name="world_ski_missing">Pro zobrazování lyžařských map je třeba stáhnout speciální mapu</string>
-    <string name="plugin_ski_name">Lyžařské mapy</string>
-    <string name="plugin_nautical_name">Námořní mapy</string>
+    <string name="plugin_ski_name">Lyžařský mapový pohled</string>
+    <string name="plugin_nautical_name">Námořní mapový pohled</string>
     <string name="share_note">Sdílet poznámku</string>
 	<string name="rename_recording">Přejmenovat záznam</string>
 	<string name="notes">Poznámky</string>
@@ -1855,4 +1855,11 @@ s často kladenými otázkami.</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografie</string>
 	<string name="watch">Zobrazit</string>
-	</resources>
+	<string name="selected_tracks">Vybrané</string>
+	<string name="showed_on_map">Zobrazené na mapě</string>
+	<string name="rename_failed">Přejmenování selhalo.</string>
+	<string name="currently_recording_track">Právě zaznamenávaná trasa</string>
+	<string name="back_to_map">Zpět na mapu</string>
+	<string name="plugin_touringview_name">Cestovní mapový pohled (Touring view)</string>
+	<string name="rendering_attr_pisteGrooming_name">Úprava sjezdovky</string>
+    </resources>

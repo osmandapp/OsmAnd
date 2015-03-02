@@ -912,7 +912,7 @@
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto de aparcamiento</string>
   <string name="osmand_parking_plugin_description">Extra adicional (descarga aparte) que permite guardar la ubicación de tu automóvil aparcado.</string>
-  <string name="osmand_parking_plugin_name">Posición de aparcamiento (plugin externo)</string>
+  <string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
   <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
   <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
   <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
@@ -1074,7 +1074,7 @@
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">Extra adicional (descarga aparte) que permite descargar curvas de nivel y relieve sombreado (\'Opciones\' → \'Gestionar mapas\' → \'Descargar\' → Seleccionar el tipo de mapa deseado). Estos se pueden mostrar en combinación con los mapas sin conexión OsmAnd.</string>
-    <string name="srtm_plugin_name">Contornos de nivel (plugin externo)</string>
+    <string name="srtm_plugin_name">Contornos de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     
@@ -1957,5 +1957,5 @@
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
-	<string name="selected_tracks">Seleccionado(s)</string>
+	<string name="selected_tracks">Seleccionada(s)</string>
 	</resources>

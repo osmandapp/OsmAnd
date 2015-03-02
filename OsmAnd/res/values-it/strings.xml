@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -2116,4 +2116,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="showed_on_map">Visualizzato sulla mappa</string>
 	<string name="days_behind">giorni fa</string>
 	<string name="currently_recording_track">Traccia attualmente in registrazione</string>
-</resources>
+<string name="selected_tracks">Selezionato</string>
+	</resources>
