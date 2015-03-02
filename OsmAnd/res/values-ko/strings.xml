@@ -92,7 +92,7 @@
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-	<string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'트랙 레코딩\' 설정을 통해서 트랙을 기록하세요."</string>
+	<string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'여행 레코딩\' 설정을 통해서 트랙을 기록하세요."</string>
 	<string name="show_current_gpx_title">현재의 GPX 경로를 표시합니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
@@ -370,10 +370,9 @@
 	<string name="level_to_switch_vector_raster">최소 벡터 줌 레벨</string>
 
 	<string name="tip_location_sharing">위치 공유</string>
-	<string name="tip_location_sharing_t">"여행 도중 관심 지점의 위치를 가족 또는 친구와 공유할 수 있습니다.
-\n\t원하는 위치를 공유하기 위해:
-\n\t\'맵 컨텍스트 메뉴\' -&gt; \'위치 공유\' 메뉴를 사용합니다.
-\n\t그런 다음 위치를 공유할 방법을 선택합니다. 선택사항에 따라: E-Mail, SMS(문자), 또는 클립보드로 위치 좌표를 복사합니다. "</string>
+	<string name="tip_location_sharing_t">"가족 또는 친구와 여행 도중 관심 지점의 위치를 공유할 수 있습니다.
+\n\'위치사용\' 컨텍스트 메뉴 -&gt; \'위치 공유\' 메뉴를 사용합니다.
+\n그런 다음 위치를 공유할 방법을 선택합니다. 선택사항은: E-Mail, SMS(문자), 또는 클립보드로 위치 좌표를 복사합니다. "</string>
 
 	<string name="tip_favorites">즐겨찾기 포인트</string>
 	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
@@ -1118,8 +1117,8 @@
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">트랙 레코딩</string>
-    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
+    <string name="monitoring_settings">여행 레코딩</string>
+    <string name="monitoring_settings_descr">여행을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 운행을 가능하게 합니다.</string>
@@ -1340,13 +1339,13 @@
 \n\n안전 기능 ↵
 \n- 옵션에서 자동화 된 낮 / 야간 표시 전환 ↵
 \n- 옵션에서 설정 한 제한 속도를 초과하면 알람으로 안내 ↵
-\n- 옵션에서 속도에 따라지도의 확대 축소 ↵
-\n- 당신의 친구가 당신 을 찾을 수 있도록 위치를 공유 ↵ ↵
+\n- 옵션에서 속도에 따라 지도의 확대 축소 ↵
+\n- 당신의 친구가 당신을 찾을 수 있도록 위치를 공유 ↵ ↵
 \n\n자전거와 보행자의 기능 ↵
 \n-지도는 야외 전용 산책로, 하이킹 및 자전거 도로를 포함 ↵
-\n- 자전거 및 보행자를위한 특별한 경로 설정 및 표시 모드 ↵
+\n- 자전거 및 보행자를 위한 특별한 경로 설정 및 표시 모드 ↵
 \n- 옵션에서 노선명을 포함한 대중 교통 정류장 (버스, 트램, 기차) ↵
-\n- 옵션에서 로컬 GPX 파일 또는 온라인을 이용한 기록 서비스 ↵
+\n- 옵션에서 로컬 GPX 파일 또는 온라인을 이용한 여행 기록 서비스 ↵
 \n- 옵션에서 속도 및 고도 표시 ↵
 \n- 등고선과 언덕 음영 표시 (추가 플러그인을 통해) ↵ ↵
 \n\n직접 OpenStreetMap에 기여 ↵
@@ -1511,7 +1510,7 @@
 	<string name="map_settings_descr">지도 표시를 구성합니다</string>
 	<string name="osmand_accessibility_description">접근성(내게 필요한) 기능에 대한 설정을 표시하기.</string>
 	<string name="extra_settings">고급 설정</string>
-	<string name="osmand_monitoring_description">로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 경로를 기록하기 위한 설정 기능을 표시합니다.</string>
+	<string name="osmand_monitoring_description">로컬 GPX 파일이나 온라인 웹 서비스로 여행을 기록하기 위한 버튼과 설정 기능을 표시합니다.</string>
 	<string name="osmand_extra_settings_description">고급 맵 구성(지도 상세보기) 및 일부 장치 특성에 대한 설정을 표시합니다.</string>
 	<string name="osmand_development_plugin_description">모의 주행이나 렌더링 성능 표시와 같은 개발 및 디버깅 기능에 대한 설정을 표시합니다.</string>
 	<string name="plugins_screen">플러그인</string>
@@ -1681,14 +1680,14 @@
 \n- 지도는 걷기, 하이킹, 자전거 길, 아웃도어 활동을 포함한다,
 \n- 자전거와 보행자를 위한 특별한 길찾기와 표시모드
 \n- 옵션으로 도로 이름을 포함한 대중교통 정거장 표시 (버스, 전차, 기차)
-\n- 옵션으로 로컬 GPX파일 또는 온라인으로 트랙 기록 저장
+\n- 옵션으로 로컬 GPX파일 또는 온라인으로 여행 기록 저장
 \n- 옵션으로 속도와 고도 표시
 \n- 등고선과 음영 표시(부가적인 플러그인을 통해서)
 \n\n직접 OSM에 공헌하기
 \n- 지도 버그 보고
 \n- 앱에서 직접 OSM으로 GPX파일 업로드하기
 \n- 포인트 추가 및 포인트를 OSM에 업로드하기
-\n- 옵션으로 백그라운드 모드로 트랙기록(기기가 절전 모드로 있는 동안)
+\n- 옵션으로 백그라운드 모드로 여행기록(기기가 절전 모드로 있는 동안)
 \n\nOsmAnd 는 오픈 소스 이고 적극적으로 개발되었습니다. 모두가 버그를 보고 번역을 개선 하거나 새로운 기능을 코딩하여 앱에 기여할 수 있습니다.
 \n이 프로젝트는 개발자와 사용자의 상호작용으로 모든 형태에 의해 지속적인 개선을 희망합니다. 프로젝트 진행상황은 새로운 기능의 개발, 코딩, 테스트를 투자하는 재정 지원에 의존하고 있습니다.
 \nOsmAnd+ 를 구입하여 앱이 한 단계 성장하는데 도움을 주세요! 그것은 특정한 새로운 기능을 투자하는, 또는 osmand.net 에 대한 일반적인 기부를 하는 것도 가능합니다.
@@ -1990,8 +1989,8 @@
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 경로를 기록하기 위해 설정을 보여줍니다.</string>
-    <string name="record_plugin_name">경로 레코딩</string>
+    <string name="record_plugin_description">"지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는온라인  웹 서비스를 사용하여 여행을 기록하기 위한 설정을 보여줍니다."</string>
+    <string name="record_plugin_name">여행 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
@@ -2179,5 +2178,5 @@
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
 	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
-	<string name="selected_tracks">선탹</string>
+	<string name="selected_tracks">선택된 트랙</string>
 	</resources>
