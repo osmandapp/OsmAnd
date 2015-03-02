@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1840,4 +1840,5 @@
 	<string name="back_to_map">Tillbaka till kartan</string>
 	<string name="turn_off_all">Stäng av alla</string>
 	<string name="showed_on_map">Visade på kartan</string>
+	<string name="selected_tracks">Markerade</string>
 	</resources>
