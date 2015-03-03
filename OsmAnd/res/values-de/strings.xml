@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1198,8 +1198,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Park-Position</string>
-	<string name="osmand_parking_plugin_description">Dieses Modul speichert den Standort eines geparkten Fahrzeugs.</string>
-	<string name="osmand_parking_plugin_name">Parkplatz-Standort (Externes Plugin)</string>
+	<string name="osmand_parking_plugin_description">Dieses Modul (separater Download) speichert den Standort eines geparkten Fahrzeugs.</string>
+	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
 	<string name="gpxup_public">Öffentlich</string>
@@ -1299,8 +1299,8 @@
 	<string name="zxing_barcode_scanner_not_found">Barcode-Scanner-Anwendung nicht installiert. Soll im Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unfertig</string>
-	<string name="srtm_plugin_name">Höhenlinien (Externes Plugin)</string>
-	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen\ -&gt; \'Karten-Management\ -&gt; \'Herunterladen\ -&gt; \'Kartentyp wählen\).</string>
+	<string name="srtm_plugin_name">Höhenlinien</string>
+	<string name="srtm_plugin_description">Dieses extra herunterladbare Plugin ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen -&gt; \'Karten-Management -&gt; \'Herunterladen -&gt; \'Kartentyp wählen). Diese Darstellung kann mit den regulären Offline-Karten von Osmand kombiniert werden.</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1411,7 +1411,7 @@
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
 	<string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
-	<string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen.</string>
+	<string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen. Stationen daraus können gespeichert und für eine Routenplanung verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
 	<string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
 	<string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
@@ -2090,4 +2090,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_pisteRoutes_name">Pisten</string>
 	<string name="export">Export</string>
 	<string name="watch">Ansehen</string>
+	<string name="selected_tracks">Ausgewählt</string>
+	<string name="turn_off_all">alles_abschalten</string>
+	<string name="showed_on_map">Auf Karte angezeigt</string>
+	<string name="share_note">Notiz mitteilen</string>
 	</resources>
