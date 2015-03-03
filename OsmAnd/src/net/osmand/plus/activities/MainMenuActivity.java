@@ -8,6 +8,7 @@ import java.util.Random;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -58,10 +59,6 @@ import android.widget.TextView;
 /**
  */
 public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
-	private static final String LATEST_CHANGES_URL = "changes-1.9.html";
-	public static final boolean TIPS_AND_TRICKS = false;
-	public static final int APP_EXIT_CODE = 4;
-	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
@@ -150,7 +147,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		haveHomeButton = false;
 		if (getIntent() != null) {
 			Intent intent = getIntent();
-			if (intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)) {
+			if (intent.getExtras() != null && intent.getExtras().containsKey(AppInitializer.APP_EXIT_KEY)) {
 				getMyApplication().closeApplication(this);
 				return;
 			}
@@ -179,9 +176,10 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			actionBarBackground.setCallback(mDrawableCallback);
 		}
 
-		boolean firstTime = initApp(this, getMyApplication());
+		AppInitializer initializer = new AppInitializer();
+		boolean firstTime = initializer.initApp(this, getMyApplication());
 		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
-			checkPreviousRunsForExceptions(firstTime);
+			initializer.checkPreviousRunsForExceptions(this, firstTime);
 		}
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -223,7 +221,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == APP_EXIT_CODE) {
+		if (resultCode == AppInitializer.APP_EXIT_CODE) {
 			getMyApplication().closeApplication(this);
 		}
 	}
@@ -238,103 +236,10 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	}
 
 
-	protected boolean initApp(final Activity activity, OsmandApplication app) {
-		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		// restore follow route mode
-		if (app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()) {
-			startMapActivity();
-			return false;
-		}
-		boolean firstTime = false;
-		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
-		boolean appVersionChanged = false;
-		if (!pref.contains(FIRST_TIME_APP_RUN)) {
-			firstTime = true;
-			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			appVersionChanged = true;
-		}
-		if (appCustomization.showFirstTimeRunAndTips(firstTime, appVersionChanged)) {
-			if (firstTime) {
-				applicationInstalledFirstTime();
-			} else {
-				int i = pref.getInt(TIPS_SHOW, 0);
-				if (i < 7) {
-					pref.edit().putInt(TIPS_SHOW, ++i).commit();
-				}
-				if (i == 1 || i == 5 || appVersionChanged) {
-					if (TIPS_AND_TRICKS) {
-						TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
-						Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
-						dlg.show();
-					} else {
-						if (appVersionChanged) {
-							final Intent helpIntent = new Intent(activity, HelpActivity.class);
-							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
-							helpIntent.putExtra(HelpActivity.URL, LATEST_CHANGES_URL);
-							activity.startActivity(helpIntent);
-						}
-					}
-				}
-			}
-		}
-
-		return firstTime;
-	}
-
 	private void startMapActivity() {
 		final Intent mapIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		startActivityForResult(mapIndent, 0);
 	}
-
-	private void applicationInstalledFirstTime() {
-		boolean netOsmandWasInstalled = false;
-		try {
-			ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
-			netOsmandWasInstalled = applicationInfo != null && !Version.isFreeVersion(getMyApplication());
-		} catch (NameNotFoundException e) {
-			netOsmandWasInstalled = false;
-		}
-
-		if (netOsmandWasInstalled) {
-//			Builder builder = new AccessibleAlertBuilder(this);
-//			builder.setMessage(R.string.osmand_net_previously_installed);
-//			builder.setPositiveButton(R.string.default_buttons_ok, null);
-//			builder.show();
-		} else {
-			Builder builder = new AccessibleAlertBuilder(this);
-			builder.setMessage(R.string.first_time_msg);
-			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
-				}
-
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-	}
-
-	public void checkPreviousRunsForExceptions(boolean firstTime) {
-		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final OsmandApplication app = ((OsmandApplication) getApplication());
-		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
-		if (file.exists() && file.length() > 0) {
-			if (size != file.length() && !firstTime) {
-				addErrorFragment();
-			}
-			getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
-		} else {
-			if (size > 0) {
-				getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
-			}
-		}
-	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -357,7 +262,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	public boolean onOptionsItemSelected(MenuItem item) {
 		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 		if (item.getItemId() == HELP_ID) {
-			if (TIPS_AND_TRICKS) {
+			if (AppInitializer.TIPS_AND_TRICKS) {
 				TipsAndTricksActivity activity = new TipsAndTricksActivity(this);
 				Dialog dlg = activity.getDialogToShowTips(false, true);
 				dlg.show();
@@ -373,54 +278,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		}
 		return true;
 	}
-
-	protected void checkVectorIndexesDownloaded() {
-		MapRenderRepositories maps = getMyApplication().getResourceManager().getRenderer();
-		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
-		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
-		// do not show each time 
-		if (check && new Random().nextInt() % 5 == 1) {
-			Builder builder = new AccessibleAlertBuilder(this);
-			if (maps.isEmpty()) {
-				builder.setMessage(R.string.vector_data_missing);
-			} else if (!maps.basemapExists()) {
-				builder.setMessage(R.string.basemap_missing);
-			} else {
-				return;
-			}
-			builder.setPositiveButton(R.string.download_files, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, DownloadActivity.class));
-				}
-
-			});
-			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					getPreferences(MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
-				}
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-
-	}
-
-//	private static void enableLink(final Activity activity, String textVersion, TextView textVersionView) {
-//		SpannableString content = new SpannableString(textVersion);
-//		content.setSpan(new ClickableSpan() {
-//
-//			@Override
-//			public void onClick(View widget) {
-//				final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
-//				activity.startActivityForResult(mapIntent, 0);
-//			}
-//		}, 0, content.length(), 0);
-//		textVersionView.setText(content);
-//		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
-//	}
 
 	@Override
 	public void updateProgress(boolean updateOnlyProgress) {

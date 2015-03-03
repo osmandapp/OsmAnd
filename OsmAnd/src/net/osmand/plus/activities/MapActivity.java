@@ -41,6 +41,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.OsmAndConstants;
@@ -140,6 +141,14 @@ public class MapActivity extends AccessibleActivity {
 		
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
+
+		AppInitializer initializer = new AppInitializer();
+		boolean firstTime = initializer.initApp(this, getMyApplication());
+		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
+			if (initializer.checkPreviousRunsForExceptions(this, firstTime)){
+				dashboardOnMap.addErrorFragment();
+			}
+		}
 
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
