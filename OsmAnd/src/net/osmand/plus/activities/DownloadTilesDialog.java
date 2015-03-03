@@ -172,7 +172,8 @@ public class DownloadTilesDialog {
 									rm.getTileImageForMapSync(tileId, map, x, y, z, true);
 									requests++;
 								}
-								if (!cancel) {
+								//ilasica I think we don`t need it
+								/*if (!cancel) {
 									if (requests >= limitRequests) {
 										requests = 0;
 
@@ -184,14 +185,15 @@ public class DownloadTilesDialog {
 											}
 										}
 									}
-								}
+								}*/
 							}
 						}
 						
 					}
 					if(cancel){
 						instance.refuseAllPreviousRequests();
-					} else {
+					} //ilasica I think we don`t need it
+					/*else {
 						while (instance.isSomethingBeingDownloaded()) {
 							try {
 								Thread.sleep(500);
@@ -199,7 +201,7 @@ public class DownloadTilesDialog {
 								throw new IllegalArgumentException(e);
 							}
 						}
-					}
+					}*/
 					mapView.refreshMap();
 				} catch (Exception e) {
 					log.error("Exception while downloading tiles ", e); //$NON-NLS-1$

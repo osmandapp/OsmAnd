@@ -129,9 +129,10 @@ public class AsyncLoadingThread extends Thread {
 						}
 					}
 				}
-				sleep(750);
+//ilasica I don`t understand why we need dalay
+/*				sleep(750);
 			} catch (InterruptedException e) {
-				log.error(e, e);
+				log.error(e, e);*/
 			} catch (RuntimeException e) {
 				log.error(e, e);
 			}

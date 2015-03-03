@@ -272,7 +272,8 @@ public class ResourceManager {
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 	private boolean searchAmenitiesInProgress;
 
-	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
+	//There is nothing to synchronize 
+	public /*synchronized*/ String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
 		if (map == null) {
 			builder.append(IndexConstants.TEMP_SOURCE_TO_LOAD);
