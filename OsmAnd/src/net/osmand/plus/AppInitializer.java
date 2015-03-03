@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.activities.HelpActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TipsAndTricksActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -41,7 +41,9 @@ public class AppInitializer {
 		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
 		// restore follow route mode
 		if (app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()) {
-			startMapActivity(activity);
+			if(!(activity instanceof MapActivity)) {
+				startMapActivity(activity);
+			}
 			return false;
 		}
 

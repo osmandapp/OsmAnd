@@ -42,7 +42,8 @@ public class DashboardOnMap {
 
 	public void createDashboardView() {
 		dashboardView = (FrameLayout) ma.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
-		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT));
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -51,15 +52,13 @@ public class DashboardOnMap {
 		};
 		dashboardView.findViewById(R.id.content).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
-		((FrameLayout)ma.getMapView().getParent()).addView(dashboardView);
+		((FrameLayout) ma.findViewById(R.id.ParentLayout)).addView(dashboardView);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(ma)
 					.withDrawable(ma.getResources().getDrawable(R.drawable.ic_action_map))
-					.withButtonColor(Color.parseColor("#ff8f00"))
-					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
-					.withMargins(0, 0, 16, 16)
-					.create();
+					.withButtonColor(Color.parseColor("#ff8f00")).withGravity(Gravity.BOTTOM | Gravity.RIGHT)
+					.withMargins(0, 0, 16, 16).create();
 			fabButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -71,7 +70,8 @@ public class DashboardOnMap {
 		}
 
 		if (ScreenOrientationHelper.isOrientationPortrait(ma)) {
-			((NotifyingScrollView)dashboardView.findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
+			((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll))
+					.setOnScrollChangedListener(onScrollChangedListener);
 		}
 
 	}
@@ -100,7 +100,7 @@ public class DashboardOnMap {
 
 	// To animate view slide out from right to left
 	public void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(0,0,ma.getMapView().getHeight(),0);
+		TranslateAnimation animate = new TranslateAnimation(0,0,ma.findViewById(R.id.ParentLayout).getHeight(),0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
@@ -108,7 +108,7 @@ public class DashboardOnMap {
 	}
 
 	public void hide(View view) {
-		TranslateAnimation animate = new TranslateAnimation(0, 0, 0, ma.getMapView().getHeight());
+		TranslateAnimation animate = new TranslateAnimation(0, 0, 0, ma.findViewById(R.id.ParentLayout).getHeight());
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {

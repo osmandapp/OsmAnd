@@ -138,21 +138,27 @@ public class MapActivity extends AccessibleActivity {
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
-		
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
-
-		AppInitializer initializer = new AppInitializer();
-		boolean firstTime = initializer.initApp(this, getMyApplication());
-		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
-			if (initializer.checkPreviousRunsForExceptions(this, firstTime)){
-				dashboardOnMap.addErrorFragment();
+		
+		dashboardOnMap = new DashboardOnMap(this);
+		dashboardOnMap.createDashboardView();
+		if (getMyApplication().isApplicationInitializing()) {
+			AppInitializer initializer = new AppInitializer();
+			boolean firstTime = initializer.initApp(this, getMyApplication());
+			if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
+				if (initializer.checkPreviousRunsForExceptions(this, firstTime)) {
+					dashboardOnMap.addErrorFragment();
+				}
 			}
+			dashboardOnMap.setDashboardVisibility(true);
 		}
-
+		
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
+		
+		
 		parseLaunchIntentLocation();
 		
 		if(settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
@@ -234,11 +240,8 @@ public class MapActivity extends AccessibleActivity {
 		mapActions.prepareStartOptionsMenu();
 	
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
-		dashboardOnMap = new DashboardOnMap(this);
-		dashboardOnMap.createDashboardView();
-
-
 	}
+	
 	public void addLockView(FrameLayout lockView) {
 		this.lockView = lockView;
 	}

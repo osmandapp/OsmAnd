@@ -304,6 +304,9 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
     }
 
     private void loadStyleFromStream(String name, InputStream source) {
+    	if(source == null) {
+    		return;
+    	}
         if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
             if (source != null) {
                 try {
@@ -329,7 +332,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             return;
         } finally {
             try {
-                source.close();
+            	source.close();
             } catch(IOException e) {}
         }
 

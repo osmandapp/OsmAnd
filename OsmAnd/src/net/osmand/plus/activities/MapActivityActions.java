@@ -951,10 +951,16 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void disableDrawer(){
+		if(mDrawerLayout == null) {
+			return;
+		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
 	public void enableDrawer(){
+		if(mDrawerLayout == null) {
+			return;
+		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 	}
 
