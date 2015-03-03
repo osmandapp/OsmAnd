@@ -20,4 +20,25 @@
 	<string name="poi_bicycle_shop">Sykkelbutikk</string>
 	<string name="poi_art_shop">Kunsthandler</string>
 	<string name="poi_shoes">Skobutikk</string>
+	<string name="poi_musical_instrument_shop">Musikkinstrumenter</string>
+	<string name="poi_organic_shop">Økologisk mat</string>
+	<string name="poi_second_hand">Bruktbutikk</string>
+	<string name="poi_marketplace">Markedsplass</string>
+	<string name="poi_police">Politi</string>
+	<string name="poi_fire_station">Brannstasjon</string>
+	<string name="poi_emergency_phone">Nødtelefon</string>
+	<string name="poi_fire_hydrant">Brannhydrant</string>
+	<string name="poi_fire_extinguisher">Brannslokningsapparat</string>
+	<string name="poi_charging_station">Ladestasjon</string>
+	<string name="poi_parking">Parkering</string>
+	<string name="poi_public_transport_platform_bus">Bussholdeplass</string>
+	<string name="poi_bus_stop">Bussholdeplass</string>
+	<string name="poi_bus_station">Busstasjon</string>
+	<string name="poi_railway_station">Jernbanestasjon</string>
+	<string name="poi_railway_platform">Jernbaneperrong</string>
+	<string name="poi_subway_station">T-banestasjon</string>
+	<string name="poi_taxi">Taxiholdeplass</string>
+
+	<string name="poi_airport">Flyplass</string>
+	<string name="poi_ferry_terminal">Fergeterminal</string>
 	</resources>
