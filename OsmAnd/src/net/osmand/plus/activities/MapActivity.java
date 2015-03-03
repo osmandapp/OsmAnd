@@ -303,6 +303,9 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public void onBackPressed() {
+		if (dashboardOnMap.isVisible()){
+			dashboardOnMap.setDashboardVisibility(false);
+		}
 		if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
 		}
@@ -843,4 +846,7 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 
+	public DashboardOnMap getDashboard() {
+		return dashboardOnMap;
+	}
 }

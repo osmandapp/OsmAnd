@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
@@ -20,7 +21,8 @@ import net.osmand.plus.monitoring.DashTrackFragment;
 import net.osmand.plus.views.controls.FloatingActionButton;
 
 /**
- * Created by dummy on 03.03.15.
+ * Created by Denis
+ * on 03.03.15.
  */
 public class DashboardOnMap {
 
@@ -29,6 +31,7 @@ public class DashboardOnMap {
 	FloatingActionButton fabButton;
 	boolean floatingButtonVisible = false;
 	private FrameLayout dashboardView;
+	private boolean visible = false;
 
 
 	public DashboardOnMap(MapActivity ma) {
@@ -74,21 +77,47 @@ public class DashboardOnMap {
 
 
 	public void setDashboardVisibility(boolean visible) {
+		this.visible = visible;
 		if (visible) {
 			addDashboardFragments();
 			dashboardView.setVisibility(View.VISIBLE);
 			if (floatingButtonVisible) {
 				fabButton.showFloatingActionButton();
 			}
+			open(dashboardView.findViewById(R.id.content));
+			ma.getMapActions().disableDrawer();
 			//View close = dashboardView.findViewById(R.id.close_dashboard);
 			if (ScreenOrientationHelper.isOrientationPortrait(ma)) {
 				//close.setVisibility(View.VISIBLE);
 			} else {
 				//close.setVisibility(View.GONE);
 			}
+			ma.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
+			ma.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 		} else {
-			ma.findViewById(R.id.dashboard).setVisibility(View.GONE);
+			ma.getMapActions().enableDrawer();
+			dashboardView.setVisibility(View.GONE);
+			hide(dashboardView.findViewById(R.id.content));
+			ma.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
+			ma.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
 		}
+	}
+
+	// To animate view slide out from right to left
+	public void open(View view){
+		TranslateAnimation animate = new TranslateAnimation(0,0,ma.getMapView().getHeight(),0);
+		animate.setDuration(500);
+		animate.setFillAfter(true);
+		view.startAnimation(animate);
+		view.setVisibility(View.VISIBLE);
+	}
+
+	public void hide(View view){
+		TranslateAnimation animate = new TranslateAnimation(0,0,0,ma.getMapView().getHeight());
+		animate.setDuration(500);
+		animate.setFillAfter(true);
+		view.startAnimation(animate);
+		view.setVisibility(View.GONE);
 	}
 
 	private void addDashboardFragments(){
@@ -159,4 +188,7 @@ public class DashboardOnMap {
 		}
 	};
 
+	public boolean isVisible() {
+		return visible;
+	}
 }

@@ -703,7 +703,7 @@ public class MapActivityActions implements DialogProvider {
 //				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
 //				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //				mapActivity.startActivity(newIntent);
-				mapActivity.setDashboardVisibility(true);
+				mapActivity.getDashboard().setDashboardVisibility(true);
 				return true;
 			}
 		}).reg();
@@ -947,6 +947,14 @@ public class MapActivityActions implements DialogProvider {
 		refreshDrawer = false;
 		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null));
+	}
+
+	public void disableDrawer(){
+		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+	}
+
+	public void enableDrawer(){
+		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 	}
 
 	public void openIntermediatePointsDialog(){

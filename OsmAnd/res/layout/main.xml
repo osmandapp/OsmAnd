@@ -33,12 +33,21 @@
 			android:contentDescription="@string/map_view"
 			android:visibility="gone"/>
 
+		<FrameLayout android:id="@+id/MapInfoControls"
+					 android:layout_width="match_parent"
+					 android:layout_height="match_parent"/>
+
 		<LinearLayout
 			android:id="@+id/dialog_layout"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:orientation="horizontal"/>
+
+
+		<FrameLayout android:id="@+id/MapButtons"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
 	</FrameLayout>
 
 	<ListView

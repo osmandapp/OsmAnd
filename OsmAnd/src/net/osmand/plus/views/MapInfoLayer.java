@@ -220,6 +220,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void createControls() {
+		FrameLayout parent = (FrameLayout) ((FrameLayout) view.getParent()).findViewById(R.id.MapInfoControls);
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
@@ -239,7 +240,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect statusBarPadding = new Rect();
 		statusBar.getBackground().getPadding(statusBarPadding);
 		// 3. put into frame parent layout controls
-		FrameLayout parent = (FrameLayout) view.getParent();
+
 		// status bar hides own top part 
 		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top - statusBarPadding.bottom ;
 		// we want that status bar lays over map stack controls
