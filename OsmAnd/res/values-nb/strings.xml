@@ -1015,7 +1015,7 @@
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="monitoring_control_stop">Stopp</string>
     <string name="index_srtm_ele">Koter</string>
-    <string name="srtm_plugin_name">Koter (eksternt programtillegg)</string>
+    <string name="srtm_plugin_name">Koter</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
     <string name="download_srtm_maps">Koter</string>
@@ -1203,4 +1203,5 @@
 	<string name="roads_only">Bare veier</string>
     <string name="free">"Ledig %1$s "</string>
 	<string name="device_memory">Enhetsminne</string>
-    </resources>
+    <string name="back_to_map">Tilbake til kart</string>
+	</resources>
