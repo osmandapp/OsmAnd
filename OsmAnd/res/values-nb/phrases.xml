@@ -41,4 +41,32 @@
 
 	<string name="poi_airport">Flyplass</string>
 	<string name="poi_ferry_terminal">Fergeterminal</string>
+	<string name="poi_lighthouse">Fyrtårn</string>
+
+	<string name="poi_bicycle_rental">Sykkelutleie</string>
+	<string name="poi_bicycle_parking">Sykkelparkering</string>
+
+	<string name="poi_aerialway_gondola">Gondol</string>
+	<string name="poi_bridge">Bru</string>
+
+	<string name="poi_post_office">Postkontor</string>
+	<string name="poi_post_box">Postkasse</string>
+	<string name="poi_telephone">Telefon</string>
+	<string name="poi_windmill">Vindmølle</string>
+	<string name="poi_kindergarten">Barnehage</string>
+	<string name="poi_university">Universitet</string>
+
+	<string name="poi_village">Landsby</string>
+	<string name="poi_town">By</string>
+	<string name="poi_city">By</string>
+	<string name="poi_hamlet">Grend</string>
+	<string name="poi_suburb">Forstad</string>
+	<string name="poi_place_farm">Gårdsbruk</string>
+
+	<string name="poi_pharmacy">Apotek</string>
+	<string name="poi_hospital">Sykehus</string>
+	<string name="poi_first_aid">Førstehjelp</string>
+	<string name="poi_dentist">Tannlege</string>
+	<string name="poi_healthcare_alternative">Alternativ medisin</string>
+	<string name="poi_city_wall">Bymur</string>
 	</resources>
