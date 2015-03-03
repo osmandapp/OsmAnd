@@ -1897,6 +1897,6 @@
 	<string name="photo">Фото</string>
 	<string name="rename_failed">Не удалось переименовать.</string>
 	<string name="back_to_map">Вернуться на карту</string>
-	<string name="location_on_map">Координаты:↵\n Широта %1$s↵\n Долгота %2$s</string>
+	<string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
 	<string name="currently_recording_track">Текущий пишущийся трек</string>
 	</resources>
