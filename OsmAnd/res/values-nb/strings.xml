@@ -1055,7 +1055,7 @@
 	<string name="close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
 	<string name="advanced_settings">Avansert</string>
-	<string name="srtm_plugin_description">Eksternt programtillegg (separat nedlasting) muliggjør å laste ned offline koter og relieff-skygger (\'Innstillinger\' → \'Karthåndtering\' → \'Last ned\' → Velg ønsket karttype). Disse kan vises i kombinasjon med OsmAnd offline-kart.</string>
+	<string name="srtm_plugin_description"></string>
     <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
 \n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
 \n\nEtter at den globale regionlisten er hentet fra internett, trykk på en oppføring for å laste ned eller oppdatere en fil. Vær oppmerksom på filtypevelgeren nær toppen av skjermen for å velge den typen nedlasting du ønsker (vanlige kart, relieff-overlegg etc.).
