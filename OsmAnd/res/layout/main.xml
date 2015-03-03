@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v4.widget.DrawerLayout
+	android:id="@+id/drawer_layout"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clipChildren="false"
-        android:keepScreenOn="true"
-        android:orientation="vertical">
+	<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				 android:layout_width="fill_parent"
+				 android:layout_height="fill_parent"
+				 android:clipChildren="false"
+				 android:keepScreenOn="true"
+				 android:orientation="vertical">
 
-        <ViewStub
-            android:id="@+id/atlasMapRendererViewStub"
-            android:inflatedId="@+id/atlasMapRendererView"
-            android:layout="@layout/atlas_map_renderer_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+		<ViewStub
+			android:id="@+id/atlasMapRendererViewStub"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:inflatedId="@+id/atlasMapRendererView"
+			android:layout="@layout/atlas_map_renderer_view"/>
 
-        <net.osmand.plus.views.OsmAndMapSurfaceView
-            android:id="@+id/MapView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:contentDescription="@string/map_view"
-            android:visibility="gone" />
+		<net.osmand.plus.views.OsmAndMapSurfaceView
+			android:id="@+id/MapView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:contentDescription="@string/map_view"
+			android:visibility="gone"/>
 
-        <net.osmand.plus.views.OsmAndMapLayersView
-            android:id="@+id/MapLayersView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:contentDescription="@string/map_view"
-            android:visibility="gone" />
+		<net.osmand.plus.views.OsmAndMapLayersView
+			android:id="@+id/MapLayersView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:contentDescription="@string/map_view"
+			android:visibility="gone"/>
 
-        <LinearLayout
-            android:id="@+id/dialog_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal" />
-    </FrameLayout>
+		<FrameLayout android:id="@+id/MapInfoControls"
+					 android:layout_width="match_parent"
+					 android:layout_height="match_parent"/>
 
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
+		<LinearLayout
+			android:id="@+id/dialog_layout"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="horizontal"/>
+
+
+		<FrameLayout android:id="@+id/MapButtons"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+	</FrameLayout>
+
+	<ListView
+		android:id="@+id/left_drawer"
+		android:layout_width="280dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
 		android:background="?attr/expandable_list_background"
-        android:divider="@drawable/divider"
-        android:dividerHeight="1dp" />
+		android:choiceMode="singleChoice"
+		android:divider="@drawable/divider"
+		android:dividerHeight="1dp"/>
 
 </android.support.v4.widget.DrawerLayout>

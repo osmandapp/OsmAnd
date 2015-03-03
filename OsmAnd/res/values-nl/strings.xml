@@ -1947,7 +1947,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">Bewaar uw tracks met één tik op de kaart. Bekijk de instellingen voor het opnemen van uw trip naar een lokaal GPX bestand of online door middel van een web service.</string>
+    <string name="record_plugin_description">Activeert de functie om uw tracks met één tik op de kaart te bewaren. En toont de instellingen voor het opnemen van uw trip naar een lokaal GPX bestand of naar een online web service.</string>
     <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
@@ -2036,7 +2036,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_orange_name">Oranje</string>
     <string name="rendering_value_germanRoadAtlas_name">Duitse wegenkaart</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikaanse wegenkaart</string>
-    <string name="routing_attr_no_new_routing_name">Gebruik routeberekening v1.9 niet</string>
+    <string name="routing_attr_no_new_routing_name">Gebruik extra routeberekening v1.9 niet</string>
     <string name="routing_attr_no_new_routing_description">Gebruik de routeregels van vóór versie 1.9</string>
     <string name="traffic_warning_railways">Spoorweg overgang</string>
 	<string name="traffic_warning_pedestrian">Voetgangers oversteekplaats</string>
@@ -2060,7 +2060,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="recents">RECENT</string>
 	<string name="navigation_over_track">Navigatie over spoor starten?</string>
 	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
-    <string name="save_track_to_gpx_globally_headline">Spoorloggen op aanvraag</string>
+    <string name="save_track_to_gpx_globally_headline">Gpx spoor loggen op aanvraag</string>
 	<string name="enable_proxy_title">HTTP-proxy aanzetten</string>
 	<string name="enable_proxy_descr">HTTP-proxy instellen voor alle netwerkverzoeken</string>
 	<string name="proxy_host_title">Proxy-host</string>
@@ -2073,10 +2073,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="plugin_settings_button_caption">Instellingen</string>
 <string name="edit_group">Bewerk groep</string>
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
-<string name="plugin_nautical_name">Nautische kaarten</string>
-    <string name="world_ski_missing">Om skikaarten te kunnen gebruiken moet u aparte kaarten downloaden.</string>
-    <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken moet u aparte kaarten downloaden.</string>
+<string name="plugin_nautical_name">Nautische kaartweergave</string>
+    <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
+    <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
 	<string name="enable_plugin2">Activeren</string>
 	<string name="disable_plugin2">Deactiveren</string>
 	<string name="get_plugin">Verkrijg</string>
-</resources>
+<string name="currently_recording_track">Huidige opname track</string>
+	<string name="watch">Bekijk</string>
+	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
+	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
+    </resources>

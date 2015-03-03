@@ -115,7 +115,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 		if (points.size() > 3){
 			points = points.subList(0, 3);
 		}
-		for (final HistoryEntry point : points) {
+		for (final HistoryEntry historyEntry : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_favorites_item, null, false);
 			TextView name = (TextView) view.findViewById(R.id.name);
@@ -133,33 +133,42 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
-				updateArrow(getActivity(), loc, new LatLon(point.getLat(), point.getLon()), direction,
+				updateArrow(getActivity(), loc, new LatLon(historyEntry.getLat(), historyEntry.getLon()), direction,
 						10, R.drawable.ic_destination_arrow, heading);
 			}
 			arrows.add(direction);
-			name.setText(point.getName().getName());
+			name.setText(historyEntry.getName().getName());
 
 			//LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(point.getLat(), point.getLon(),
+			int dist = (int) (MapUtils.getDistance(historyEntry.getLat(), historyEntry.getLon(),
 					loc.getLatitude(), loc.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLat(), point.getLon(), 
-							point.getName());
+					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), historyEntry.getLat(), historyEntry.getLon(),
+							historyEntry.getName());
 				}
 			});
 			label.setText(distance, TextView.BufferType.SPANNABLE);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getMyApplication().getSettings().setMapLocationToShow(point.getLat(), point.getLon(), 15, 
-							point.getName(), true,
-							point); //$NON-NLS-1$
+					getMyApplication().getSettings().setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(), 15,
+							historyEntry.getName(), true,
+							historyEntry); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
+
+			String typeName = historyEntry.getName().getTypeName();
+			if (typeName !=null && !typeName.isEmpty()){
+				view.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
+				((TextView) view.findViewById(R.id.group_name)).setText(typeName);
+			} else {
+				view.findViewById(R.id.group_image).setVisibility(View.GONE);
+				((TextView) view.findViewById(R.id.group_name)).setText("");
+			}
 			favorites.addView(view);
 		}
 		updateLocation(location);

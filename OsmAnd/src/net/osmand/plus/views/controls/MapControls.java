@@ -65,7 +65,8 @@ public abstract class MapControls {
 	protected Button addButton(FrameLayout parent, int stringId, int resourceId) {
 		return addButton(parent, stringId, resourceId, 0);
 	}
-		protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
+
+	protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
 		Context ctx = mapActivity;
 		Button button = new Button(ctx);
 		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);

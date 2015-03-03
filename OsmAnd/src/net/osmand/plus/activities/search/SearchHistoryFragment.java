@@ -230,6 +230,14 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				icon.setImageDrawable(addressIcon);
 			}
 
+			String typeName = historyEntry.getName().getTypeName();
+			if (typeName !=null && !typeName.isEmpty()){
+				row.findViewById(R.id.type_name_icon).setVisibility(View.VISIBLE);
+				((TextView) row.findViewById(R.id.type_name)).setText(typeName);
+			} else {
+				row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
+				((TextView) row.findViewById(R.id.type_name)).setText("");
+			}
 
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override

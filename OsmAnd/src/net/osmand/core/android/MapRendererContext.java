@@ -17,6 +17,7 @@ import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
+import net.osmand.core.jni.MapRendererSetupOptions;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
@@ -231,6 +232,14 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	}
 	
 	private void applyCurrentContextToView() {
+		mapRendererView.setMapRendererSetupOptionsConfigurator(
+				new MapRendererView.IMapRendererSetupOptionsConfigurator() {
+					@Override
+					public void configureMapRendererSetupOptions(
+							MapRendererSetupOptions mapRendererSetupOptions) {
+						mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+					}
+				});
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);

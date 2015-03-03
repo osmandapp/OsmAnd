@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	android:id="@+id/dashboard"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="#70000000"
+	android:visibility="gone">
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center"
+		android:layout_height="match_parent">
+
+		<net.osmand.plus.dashboard.NotifyingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+													   android:layout_width="360dp"
+													   android:layout_height="match_parent"
+													   android:id="@+id/main_scroll">
+
+			<LinearLayout
+				android:id="@+id/content"
+				android:paddingTop="@dimen/dashboard_map_top_padding"
+				android:paddingBottom="@dimen/dashboard_map_bottom_padding"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"/>
+
+		</net.osmand.plus.dashboard.NotifyingScrollView>
+
+	</LinearLayout>
+
+</FrameLayout>

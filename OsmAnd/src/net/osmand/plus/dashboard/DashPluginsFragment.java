@@ -25,9 +25,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 21.11.2014.
+ * Created by Denis
+ * on 21.11.2014.
  */
 public class DashPluginsFragment extends DashBaseFragment {
+
+	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
+
 	private final CompoundButton.OnCheckedChangeListener enableDisableListener =
 			new CompoundButton.OnCheckedChangeListener() {
 		@Override
