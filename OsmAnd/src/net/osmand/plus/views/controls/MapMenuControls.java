@@ -58,6 +58,9 @@ public class MapMenuControls extends MapControls {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		if(mapActivity.findViewById(R.id.MapButtons).getVisibility() == View.GONE) {
+			return;
+		}
 		drawApplicationMode(canvas, nightMode != null && nightMode.isNightMode());
 	}
 	

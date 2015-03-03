@@ -1,5 +1,11 @@
 package net.osmand.plus.dashboard;
 
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.views.controls.FloatingActionButton;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
@@ -9,16 +15,11 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
-
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.views.controls.FloatingActionButton;
 
 /**
  * Created by Denis
@@ -90,10 +91,10 @@ public class DashboardOnMap {
 			ma.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 		} else {
 			ma.getMapActions().enableDrawer();
-			dashboardView.setVisibility(View.GONE);
 			hide(dashboardView.findViewById(R.id.content));
 			ma.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
 			ma.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
+			fabButton.hideFloatingActionButton();
 		}
 	}
 
@@ -106,13 +107,31 @@ public class DashboardOnMap {
 		view.setVisibility(View.VISIBLE);
 	}
 
-	public void hide(View view){
-		TranslateAnimation animate = new TranslateAnimation(0,0,0,ma.getMapView().getHeight());
+	public void hide(View view) {
+		TranslateAnimation animate = new TranslateAnimation(0, 0, 0, ma.getMapView().getHeight());
 		animate.setDuration(500);
 		animate.setFillAfter(true);
+		animate.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				dashboardView.setVisibility(View.GONE);
+			}
+		});
 		view.startAnimation(animate);
 		view.setVisibility(View.GONE);
 	}
+	
 
 	private void addDashboardFragments(){
 		FragmentManager manager =ma. getSupportFragmentManager();

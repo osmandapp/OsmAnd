@@ -384,31 +384,7 @@ public class MapActivity extends AccessibleActivity {
 		checkExternalStorage();
 		showAndHideMapPosition();
 
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
-		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow();
-		Object toShow = settings.getAndClearObjectToShow();
-		int status = settings.isRouteToPointNavigateAndClear();
-		if(status != 0){
-			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
-			Location loc = new Location("map");
-			loc.setLatitude(mapView.getLatitude());
-			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
-		}
-		if(mapLabelToShow != null && latLonToShow != null){
-			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow.getFullPlainName(this, 
-					latLonToShow.getLatitude(), latLonToShow.getLongitude()));
-		}
-		if (latLonToShow != null && !latLonToShow.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
-					settings.getMapZoomToShow(), true);
-		}
-		if(latLonToShow != null) {
-			// remember if map should come back to isMapLinkedToLocation=true
-			mapViewTrackingUtilities.setMapLinkedToLocation(false);
-		}
+		readLocationToShow();
 
         final Intent intent = getIntent();
 		if (intent != null) {
@@ -456,6 +432,34 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.handleOnResume();
 		}
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
+	}
+
+	public void readLocationToShow() {
+		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
+		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow();
+		Object toShow = settings.getAndClearObjectToShow();
+		int status = settings.isRouteToPointNavigateAndClear();
+		if(status != 0){
+			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
+			Location loc = new Location("map");
+			loc.setLatitude(mapView.getLatitude());
+			loc.setLongitude(mapView.getLongitude());
+			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
+		}
+		if(mapLabelToShow != null && latLonToShow != null){
+			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow.getFullPlainName(this, 
+					latLonToShow.getLatitude(), latLonToShow.getLongitude()));
+		}
+		if (latLonToShow != null && !latLonToShow.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
+					settings.getMapZoomToShow(), true);
+		}
+		if(latLonToShow != null) {
+			// remember if map should come back to isMapLinkedToLocation=true
+			mapViewTrackingUtilities.setMapLinkedToLocation(false);
+		}
 	}
 
 
@@ -835,9 +839,14 @@ public class MapActivity extends AccessibleActivity {
 
 	
 	public static void launchMapActivityMoveToTop(Context activity){
-		Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext()).getAppCustomization().getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		activity.startActivity(newIntent);
+		if(activity instanceof MapActivity) {
+			((MapActivity) activity).getDashboard().setDashboardVisibility(false);
+			((MapActivity) activity).readLocationToShow();
+		} else {
+			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext()).getAppCustomization().getMapActivity());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			activity.startActivity(newIntent);
+		}
 	}
 
 	
