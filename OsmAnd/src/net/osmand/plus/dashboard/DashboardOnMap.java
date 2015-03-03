@@ -86,12 +86,6 @@ public class DashboardOnMap {
 			}
 			open(dashboardView.findViewById(R.id.content));
 			ma.getMapActions().disableDrawer();
-			//View close = dashboardView.findViewById(R.id.close_dashboard);
-			if (ScreenOrientationHelper.isOrientationPortrait(ma)) {
-				//close.setVisibility(View.VISIBLE);
-			} else {
-				//close.setVisibility(View.GONE);
-			}
 			ma.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
 			ma.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 		} else {
@@ -147,7 +141,7 @@ public class DashboardOnMap {
 
 	}
 
-	private void addErrorFragment() {
+	public void addErrorFragment() {
 		FragmentManager manager = ma.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null) {
