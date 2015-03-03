@@ -915,8 +915,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Emplacement de stationnement</string>
-  <string name="osmand_parking_plugin_description">Ce greffon (téléchargement requis) permet d\'enregistrer l\'emplacement où est garé votre véhicule.</string>
-  <string name="osmand_parking_plugin_name">Emplacement de stationnement (greffon externe)</string>
+  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement où est garé votre véhicule.</string>
+  <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
   <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
   <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
@@ -1100,7 +1100,7 @@
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
     <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux et les reliefs de montagne pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner le type de carte désiré), et de les utiliser avec les cartes hors-ligne.</string>
-    <string name="srtm_plugin_name">Courbes de niveau (greffon supplémentaire)</string>
+    <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
     <string name="index_srtm_parts">parties</string>
@@ -1926,7 +1926,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="disable_plugin2">Désactiver</string>
 	<string name="get_plugin">Obtenir</string>
 <string name="plugin_ski_name">Pistes de ski</string>
-    <string name="plugin_nautical_name">Cartes marines</string>
+    <string name="plugin_nautical_name">Carte marine</string>
     <string name="world_ski_missing">Pour afficher les pistes de ski, une carte hors ligne doit être téléchargée.</string>
     <string name="nautical_maps_missing">Pour afficher les cartes marines, une carte hors ligne doit être téléchargée.</string>
 	<string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
