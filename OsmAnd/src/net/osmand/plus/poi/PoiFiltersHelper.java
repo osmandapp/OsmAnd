@@ -208,7 +208,7 @@ public class PoiFiltersHelper {
 	}
 	
 	public static String getOsmDefinedFilterId(PoiCategory t){
-		return PoiLegacyFilter.STD_PREFIX + t.getKeyName();
+		return PoiLegacyFilter.STD_PREFIX + (t == null ? null : t.getKeyName());
 	}
 	
 	public void updateFilters(boolean onlyAddFilters){
