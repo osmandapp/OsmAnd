@@ -2092,4 +2092,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="days_behind">dní pozadu</string>
 	<string name="rename_failed">Premenovanie zlyhalo.</string>
 	<string name="back_to_map">Späť na mapu</string>
-</resources>
+<string name="selected_tracks">Vybrané</string>
+	</resources>
