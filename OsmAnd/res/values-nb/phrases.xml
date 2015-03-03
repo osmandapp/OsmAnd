@@ -12,7 +12,7 @@
 	<string name="poi_education">Utdannelse</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Turisme</string>
-	<string name="poi_palaeontological_site">Paleontologisk sted</string>
+	<string name="poi_palaeontological_site">Paleontologisk område</string>
 
 	<string name="poi_bakery">Bakeri</string>
 	<string name="poi_supermarket">Supermarked</string>
@@ -69,4 +69,16 @@
 	<string name="poi_dentist">Tannlege</string>
 	<string name="poi_healthcare_alternative">Alternativ medisin</string>
 	<string name="poi_city_wall">Bymur</string>
+	<string name="poi_running_track">Løpebane</string>
+	<string name="poi_bicycle_track">Sykkelbane</string>
+	<string name="poi_cycling">Sykling</string>
+	<string name="poi_soccer">Fotball</string>
+	<string name="poi_archaeological_site">Arkeologisk område</string>
+	<string name="poi_caravan_site">Campingplass</string>
+	<string name="poi_battlefield">Slagmark</string>
+	<string name="poi_castle">Slott</string>
+	<string name="poi_city_gate">Byport</string>
+	<string name="poi_miniature_golf">Minigolf</string>
+	<string name="poi_hairdresser">Frisør</string>
+	<string name="poi_island">Øy</string>
 	</resources>
