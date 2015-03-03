@@ -1,13 +1,32 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -33,9 +52,9 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.audionotes.MediaRemoteControlReceiver;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
@@ -51,33 +70,14 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.AudioManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewStub;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity {
 
@@ -113,8 +113,9 @@ public class MapActivity extends AccessibleActivity {
 	private GpxImportHelper gpxImportHelper;
 	private WakeLockHelper wakeLockHelper ;
 	private boolean intentLocation = false;
-	
-	
+
+	private DashboardOnMap dashboardOnMap;
+
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -224,9 +225,11 @@ public class MapActivity extends AccessibleActivity {
 		mapActions.prepareStartOptionsMenu();
 	
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
-		
+		dashboardOnMap = new DashboardOnMap(this);
+		dashboardOnMap.createDashboardView();
+
+
 	}
-	
 	public void addLockView(FrameLayout lockView) {
 		this.lockView = lockView;
 	}

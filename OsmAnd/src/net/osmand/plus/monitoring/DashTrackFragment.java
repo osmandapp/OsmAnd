@@ -25,6 +25,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -44,6 +45,8 @@ import android.widget.Toast;
  * on 21.01.2015.
  */
 public class DashTrackFragment extends DashBaseFragment {
+
+	public static final String TAG = "DASH_TRACK_FRAGMENT";
 
 	private Drawable gpxOnMap;
 	private Drawable gpxNormal;
@@ -158,6 +161,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					showOnMap(GPXUtilities.loadGPXFile(app, f));
 				}
 			});
+			v.setBackgroundColor(Color.TRANSPARENT);
 			tracks.addView(v);
 		}
 	}

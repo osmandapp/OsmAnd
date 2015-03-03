@@ -700,9 +700,10 @@ public class MapActivityActions implements DialogProvider {
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(newIntent);
+//				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
+//				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				mapActivity.startActivity(newIntent);
+				mapActivity.setDashboardVisibility(true);
 				return true;
 			}
 		}).reg();

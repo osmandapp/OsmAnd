@@ -51,6 +51,10 @@ public class PointDescription {
 		}
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
 	@NonNull
 	public String getName() {
 		return name;
