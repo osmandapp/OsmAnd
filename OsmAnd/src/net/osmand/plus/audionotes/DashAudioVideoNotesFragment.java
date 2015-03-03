@@ -14,6 +14,7 @@ import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +31,9 @@ import android.widget.TextView;
  * on 15.12.2014.
  */
 public class DashAudioVideoNotesFragment extends DashBaseFragment {
+
+	public static final String TAG = "DASH_NOTES_FRAGMENT";
+
 	AudioVideoNotesPlugin plugin;
 
 	@Override
@@ -98,6 +102,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			getNoteView(recording, view, getActivity());
+			view.setBackgroundColor(Color.TRANSPARENT);
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
