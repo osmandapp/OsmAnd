@@ -10,13 +10,14 @@
 
 	<LinearLayout android:orientation="vertical"
 		android:layout_width="wrap_content"
-		android:layout_gravity="center"
+		android:layout_gravity="end"
 		android:layout_height="match_parent">
 
 		<net.osmand.plus.dashboard.NotifyingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 													   android:layout_width="360dp"
 													   android:layout_height="match_parent"
-													   android:id="@+id/main_scroll">
+													   android:id="@+id/main_scroll"
+													   android:fadeScrollbars="true">
 
 			<LinearLayout
 				android:id="@+id/content"

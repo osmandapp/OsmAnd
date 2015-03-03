@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<dimen name="dashboard_map_top_padding">100dp</dimen>
+	<dimen name="dashboard_map_top_padding">0dp</dimen>
 	<dimen name="dashboard_map_bottom_padding">0dp</dimen>
 </resources>
