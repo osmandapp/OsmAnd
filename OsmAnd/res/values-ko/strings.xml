@@ -2178,7 +2178,7 @@
 	<string name="location_on_map">위치:
 \n위도 %1$s\n경도 %2$s</string>
 	<string name="turn_off_all">모두 끄기</string>
-	<string name="showed_on_map">지도에서 보기</string>
+	<string name="showed_on_map">지도에 표시</string>
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
 	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
