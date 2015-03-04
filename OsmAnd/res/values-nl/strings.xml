@@ -870,7 +870,7 @@
   <string name="online_map_settings_descr">Configureer online of bewaarde kaartbronnen</string>
   <string name="map_settings">- Kaartinstellingen</string>
   <string name="map_settings_descr">Configureer de kaartweergave</string>
-  <string name="osmand_rastermaps_plugin_description">Toon instellingen om online-kaarten als basiskaart of als overlay/underlay kaart te gebruiken. De kaarten kunnen ook offline gemaakt worden en worden bewaard in de OsmAnd-map.</string>
+  <string name="osmand_rastermaps_plugin_description">"Met deze plug-in heeft u toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaat kaarten, geologische kaarten, reliëf lagen, enz.\n\nAl deze kaarten kunnen worden gebruikt als de hoofd (basis) kaart op het OsmAnd kaart scherm, of als een extra laag of een achtergrond laag bij een ander basis kaart (zoals gewone offline kaarten van OsmAnd). Om een achtergrond laag meer zichtbaar te maken, kunnen enkele elementen van de OsmAnd kaarten eenvoudig worden verborgen via het menu \'Kaart instellen\'.\n\nTegel kaarten zijn direct via online bronnen verkrijgbaar of voor offline gebruik gereedgemaakt (en handmatig gekopieerd naar de OsmAnd gegevensfolder) als SQLite database door een verscheidenheid aan 3de partij kaart bewerkingsapplicaties. "</string>
   <string name="osmand_background_plugin_description">Toon instellingen om tracking en navigatie tijdens slaapmodus (scherm uit) in te schakelen door periodiek ontwaken van het GPS-toestel.</string>
   <string name="osmand_accessibility_description">Toon speciale toegankelijkheidsopties.</string>
   <string name="extra_settings">Geavanceerde instellingen</string>
@@ -1947,7 +1947,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">Activeert de functie om uw tracks met één tik op de kaart te bewaren. En toont de instellingen voor het opnemen van uw trip naar een lokaal GPX bestand of naar een online web service.</string>
+    <string name="record_plugin_description">"Deze plug-in activeert de functionaliteit om uw route op te nemen en op te slaan via de GPX knop op het kaart scherm, of om al uw routes automatisch op te slaan als GPX-bestanden.\n\nOpgenomen routes kunnen worden gedeeld met vrienden of worden gebruikt als OSM bijdragen. Atleten kunnen opgenomen routes gebruiken om hun trainingen te volgen. Enkele eenvoudige route analyses kunnen direct worden uitgevoerd in OsmAnd, zoals rondetijden, gemiddelde snelheid enz., en routes kunnen natuurlijk ook later worden geanalyseerd met speciale 3de partij analysetools. "</string>
     <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
