@@ -117,7 +117,7 @@
 		\n\t- *Použiteľnosť a grafické rozhranie*
 		\n\t    - Vylepšené v mnohých smeroch		
 	</string>
-  <string name="osm_editing_plugin_description">Zobrazí nastavenia potrebné pre prispievanie do OSM pomocou vytvárania / úpravy OSM objektov záujmu, otvárania / komentovania OSM chýb a prispievanie zaznamenanými GPX súbormi (vyžaduje OSM prihlásenie).</string>
+  <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. Táto funkcia vyžaduje registračné údaje do OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
   <string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
   <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -1020,7 +1020,7 @@
   <string name="osmand_parking_pm">popoludní</string>
   <string name="osmand_parking_am">dopoludnia</string>
   <string name="osmand_parking_position_name">Parkovací bod</string>
-  <string name="osmand_parking_plugin_description">Externý zásuvný modul (samostatne stiahnuteľný), ktorý umožňuje zapamätať umiestnenie vášho zaparkovaného auta.</string>
+  <string name="osmand_parking_plugin_description">Tento zásuvný modul bol vytvorený, aby si mohol OsmAnd zapamätať umiestnenie vášho zaparkovaného auta.</string>
   <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
   <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
@@ -1170,7 +1170,7 @@
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite "Použiť umiestnenie…"</string>
     <string name="monitoring_control_stop">Zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Zobrazí tlačidlo na vytváranie zvukových poznámok počas cestovania</string>
+    <string name="audionotes_plugin_description">Tento modul poskytuje funkcie a tlačidlá na vytváranie obrazových/zvukových/video poznámok počas výletu</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">"Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené na OsmAnd offline mapách. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu.\n\nGlobálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
@@ -1282,7 +1282,7 @@
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
     
 	
-	<string name="osmand_distance_planning_plugin_description">Zapne nástroj umožňujúci vytvorenie cesty kliknutím na mapu (alebo použiť/upraviť existujúce GPX súbory) pre meranie vzdialenosti medzi bodmi. Výsledok je možné uložiť ako GPX, čo možno použiť pre plánovanie GPX trasy.</string>
+	<string name="osmand_distance_planning_plugin_description">Tento modul poskytuje nástroj umožňujúci vytvorenie cesty kliknutím na mapu alebo použiť/upraviť existujúce GPX súbory na naplánovanie cesty a na meranie vzdialenosti medzi bodmi. Výsledok je možné uložiť ako GPX, čo možno použiť neskôr ako pomôcku.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
     <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
     * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
@@ -1693,7 +1693,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">"Zobrazí nastavenia pre použitie pokročilého sledovania naživo cez OsMo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
+    <string name="osmo_plugin_description">"Zobrazí nastavenia pre použitie pokročilého sledovania naživo cez OsMo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo sledovanie</string>
     <string name="osmo_settings">OsMo sledovanie</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
