@@ -149,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">該外掛元件（單獨下載）可記住您的愛車停車地點。</string>
+	<string name="osmand_parking_plugin_description">該外掛元件完善的利用 OsmAnd 來輕鬆的記住您愛車之停車地點。</string>
 	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -200,9 +200,10 @@
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">組態地圖顯示</string>
-	<string name="osmand_rastermaps_plugin_description">顯示設定以使用多種線上或快取地圖圖磚，以作為主要地圖或者覆疊/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
+	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 正常的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
+\n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
-	<string name="osmand_accessibility_description">顯示專用的無障礙功能設定。</string>
+	<string name="osmand_accessibility_description">顯示設定以啟動指定的無障礙功能。</string>
 	<string name="extra_settings">進階設定</string>
 	<string name="osmand_monitoring_description">顯示按鈕和設定，便於記錄您到當地旅程的 GPX 檔案或在線上網站的服務...</string>
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
@@ -211,7 +212,7 @@
 	<string name="select_plugin_to_activate">點觸外掛元件來啟用或停用。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="osm_editing_plugin_description">顯示 OSM 貢獻所需的設定，如建立/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
+	<string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供 GPX 檔案。使用此功能需有 OSM 個人帳號。</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">用目前選擇的語音播放指令</string>
 	<string name="debugging_and_development">OsmAnd 開發</string>
@@ -999,7 +1000,7 @@
     <string name="plugin_distance_point_ele">標高</string>
     <string name="gpx_file_name">GPX 檔案名稱</string>
     <string name="gpx_saved_sucessfully">GPX 檔案已完全成功儲存到{0}</string>
-    <string name="osmand_distance_planning_plugin_description">啟動小工具以允許在地圖上使用點觸建立路徑（或是利用/修改現有的 GPX 檔案）。結果可以存為 GPX，這個可以用來規劃 GPX 路線。</string>
+    <string name="osmand_distance_planning_plugin_description">這個外掛元件提供了地圖螢幕小工具，允許在地圖上透過點觸建立路徑或是使用，又或修改現有的 GPX 檔案，來規劃行程和測量兩點之間的距離。其結果可以存為 GPX 檔案，以後可以用於導航。</string>
     <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
@@ -1120,7 +1121,7 @@
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="map_widget_audionotes">音訊注解</string>
-    <string name="audionotes_plugin_description">顯示按鈕以在旅程中記錄音訊/視訊等注解</string>
+    <string name="audionotes_plugin_description">這個外掛元件提供了按鈕和功能以在旅程中記錄音訊/攝影/視訊等注解</string>
     <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
@@ -1169,9 +1170,9 @@
     <string name="layer_recordings">記錄層</string>
     <string name="downloading_file_new">下載中  …</string>
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
+    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">外掛元件（單獨下載）便於下載離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。這些可以與 OsmAnd 離線地圖結合在一起顯示。</string>
+    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1546,7 +1547,7 @@
     <string name="osmo_plugin_name">OsMo (監視)</string>
     <string name="osmo_settings">OsMo 監控</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
-    <string name="osmo_plugin_description">"OsMo 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_plugin_description">"OsMo 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。\n\n匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1768,7 +1769,7 @@
     <string name="speak_poi">通報附近 POI</string>
     <string name="flat_list_waypoints">全部</string>
     <string name="index_tours">旅遊</string>
-    <string name="record_plugin_description">在地圖螢幕上透過點觸按鈕啟動儲存您的軌跡的功能。並顯示設定，便於記錄您到當地旅程的 GPX 檔案或在線上的網站服務。</string>
+    <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具以啟動去記錄和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n記錄的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用記錄的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具分析。 "</string>
     <string name="record_plugin_name">正在記錄行程</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
