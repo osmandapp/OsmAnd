@@ -9,7 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+	<string name="track_segments">Track segments</string>
+	<string name="track_points">Track points</string>
 	<string name="online_map_settings">Online maps</string>
 	<string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined Openstreetmap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
 		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s regular offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configue map\' menu as desired.

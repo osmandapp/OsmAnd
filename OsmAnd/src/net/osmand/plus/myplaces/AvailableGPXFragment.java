@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 import java.io.File;
 import java.text.Collator;
@@ -16,7 +16,6 @@ import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
@@ -30,14 +29,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.LocalIndexesFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -12,6 +12,9 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.SelectedGPXFragment;
+import net.osmand.plus.myplaces.TrackPointFragment;
+import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -74,7 +77,9 @@ public class TrackActivity extends TabActivity {
 //				items.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 				setResult(result);
 				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-						getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
+						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
+				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
+						getTabIndicator(R.string.track_points, TrackPointFragment.class));
 //				setViewPagerAdapter(mViewPager, items );
 			};
 		}.execute((Void)null);

@@ -9,7 +9,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;

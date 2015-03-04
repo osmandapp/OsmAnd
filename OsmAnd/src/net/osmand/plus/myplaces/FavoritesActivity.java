@@ -1,20 +1,21 @@
 /**
  *
  */
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.activities.FavoritesTreeFragment;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -29,7 +30,6 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  *

@@ -6,11 +6,11 @@ import java.util.List;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.util.Algorithms;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
