@@ -52,7 +52,7 @@
 		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
 	<string name="audionotes_plugin_name">Audio/video notes</string>
-	<string name="audionotes_plugin_description">This plugin provides the fucntionality and buttons to take audio/photography/video notes during a trip</string>
+	<string name="audionotes_plugin_description">This plugin provides the functionality and buttons to take audio/photography/video notes during a trip</string>
 	<string name="osmand_parking_plugin_name">Parking Position</string>
 	<string name="osmand_parking_plugin_description">This plugin was developed to use OsmAnd to easily memorize the location of your parked car.</string>
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
@@ -66,8 +66,8 @@
 
     <string name="recents">RECENTS</string>
     <string name="selected_tracks">Selected</string>
-	<string name="turn_off_all">Turn_off_all</string>
-	<string name="showed_on_map">Showed on map</string>
+	<string name="turn_off_all">Turn off all</string>
+	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
 	<string name="currently_recording_track">Currently recording track</string>
