@@ -38,6 +38,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -317,8 +317,7 @@ public class MapActivity extends AccessibleActivity {
 	public void onBackPressed() {
 		if (dashboardOnMap.isVisible()){
 			dashboardOnMap.setDashboardVisibility(false);
-		}
-		if (!mapActions.onBackPressed()) {
+		} else if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
 		}
 	}

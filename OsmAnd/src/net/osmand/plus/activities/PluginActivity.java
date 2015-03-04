@@ -17,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by Alexey Pelykh on 02.02.2015.
+ * Created by Alexey Pelykh
+ * on 02.02.2015.
  */
 public class PluginActivity extends OsmandActionBarActivity {
 	private static final String TAG = "PluginActivity";

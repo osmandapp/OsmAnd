@@ -68,10 +68,10 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	}
 
 	private void loadIcons() {
-		addressIcon = getResources().getDrawable(R.drawable.ic_type_coordinates);
-		favoriteIcon = getResources().getDrawable(R.drawable.ic_action_fav_dark);
-		locationIcon = getResources().getDrawable(R.drawable.ic_action_marker_dark);
-		poiIcon = getResources().getDrawable(R.drawable.ic_action_gabout_dark);
+		addressIcon = getResources().getDrawable(R.drawable.ic_type_address);
+		favoriteIcon = getResources().getDrawable(R.drawable.ic_type_favorites);
+		locationIcon = getResources().getDrawable(R.drawable.ic_type_coordinates);
+		poiIcon = getResources().getDrawable(R.drawable.ic_type_info);
 		wptIcon = getResources().getDrawable(R.drawable.ic_action_flage_dark);
 		noteIcon = getResources().getDrawable(R.drawable.ic_action_note_dark);
 		if (getMyApplication().getSettings().isLightContent()) {

@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 
 import gnu.trove.list.array.TIntArrayList;
@@ -24,6 +24,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
@@ -33,7 +35,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
 import android.view.ContextMenu;
@@ -44,31 +46,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.SectionIndexer;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class SelectedGPXFragment extends OsmandExpandableListFragment {
-
-	public static final int SEARCH_ID = -1;
-	
+public class SelectedGPXFragment extends ListFragment {
 	public static final String ARG_TO_EXPAND_TRACK_INFO = "ARG_TO_EXPAND_TRACK_INFO";
 	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
 	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
-//	private SearchView searchView;
-	private OsmandApplication app;
-	private SelectedGPXAdapter adapter;
-	private boolean lightContent;
-	private Activity activity;
+	protected OsmandApplication app;
+	protected SelectedGPXAdapter adapter;
+	protected boolean lightContent;
+	protected Activity activity;
 	
 	
 	@Override
@@ -96,8 +92,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		setContent();
-		List<GpxDisplayGroup> displayGrous = getContent();
-		adapter.setDisplayGroups(displayGrous);
 	}
 
 	private List<GpxDisplayGroup> getContent() {
@@ -114,14 +108,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 
 
-
-	public void setContent() {
-		getExpandableListView().setFastScrollEnabled(true);
-		lightContent = app.getSettings().isLightContent();
-		if (adapter == null) {
-			adapter = new SelectedGPXAdapter(getExpandableListView());
-			setAdapter(adapter);
-		}
+	protected List<GpxDisplayGroup> filterGroups() {
 		List<GpxDisplayGroup> groups = getContent();
 		if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
 			groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(groups);
@@ -140,36 +127,47 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 		}
-		adapter.setDisplayGroups(groups);
-		if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)){
-			for(int i = 0; i < groups.size(); i++) {
-				getExpandableListView().expandGroup(i);
+		return groups;
+	}
+
+	public void setContent(){
+		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups();
+		lightContent = app.getSettings().isLightContent();
+
+		List<GpxSelectionHelper.GpxDisplayItem> items = new ArrayList<>();
+		for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
+			for (GpxSelectionHelper.GpxDisplayItem item : group.getModifiableList()) {
+				items.add(item);
 			}
 		}
+		adapter = new SelectedGPXAdapter(items);
+		setListAdapter(adapter);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View vs = super.onCreateView(inflater, container, savedInstanceState);
-		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+		setHasOptionsMenu(true);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
 				int group = ExpandableListView.getPackedPositionGroup(packedPos);
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
-					showContextMenu(adapter.getChild(group, child));
+					showContextMenu(adapter.getItem(child));
 				}
 			}
 		});
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
-		//((ViewGroup)getExpandableListView().getParent()).addView(tv); 
-		getExpandableListView().setEmptyView(tv);
+		listView.setEmptyView(tv);
 		setContent();
 		
-		return vs;
+		return view;
 	}
 	
 	private void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
@@ -256,13 +254,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		((TrackActivity) getActivity()).getClearToolbar(false);
 	}
 
-	public void showProgressBar() {
-		((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
-	}
-
-	public void hideProgressBar() {
-		((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
-	}
 
 	private void selectSplitDistance(final GpxDisplayGroup model) {
 		Builder bld = new AlertDialog.Builder(getMyActivity());
@@ -371,191 +362,20 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		
 	}
 
-	class SelectedGPXAdapter extends OsmandBaseExpandableListAdapter implements SectionIndexer, AbsListView.OnScrollListener {
+	class SelectedGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
-		Filter myFilter;
-		private List<GpxDisplayGroup> displayGroups = new ArrayList<GpxDisplayGroup>();
-		private ExpandableListView expandableListView;
-		private boolean groupScroll = true;
-		private int maxNumberOfSections = 1;
-		private double itemsInSection;
-		
-		public SelectedGPXAdapter(ExpandableListView lv) {
-			this.expandableListView = lv;
-			this.expandableListView.setOnScrollListener(this);
-
+		public SelectedGPXAdapter(List<GpxDisplayItem> items) {
+			super(getActivity(), R.layout.gpx_item_list_item, items);
 		}
 		
 		@Override
-	    public void onScrollStateChanged(AbsListView view, int scrollState) {
-//	        this.manualScroll = scrollState == SCROLL_STATE_TOUCH_SCROLL;
-	    }
-
-	    @Override
-	    public void onScroll(AbsListView view, 
-	                         int firstVisibleItem, 
-	                         int visibleItemCount, 
-	                         int totalItemCount) {}
-
-	    @Override
-	    public int getPositionForSection(int section) {
-	    	if(groupScroll) {
-	    		return expandableListView.getFlatListPosition(
-	                       ExpandableListView.getPackedPositionForGroup(section));
-	    	} else {
-	        	return (int) (section * itemsInSection);
-	        }
-	    }
-
-	    // Gets called when scrolling the list manually
-	    @Override
-		public int getSectionForPosition(int position) {
-			// Get the packed position of the provided flat one and find the corresponding group
-			if (groupScroll) {
-				return ExpandableListView
-						.getPackedPositionGroup(expandableListView.getExpandableListPosition(position));
-			} else {
-				int m = Math.min(maxNumberOfSections - 1, (int) (position / itemsInSection));
-				return m;
-			}
-		}
-	    
-		@Override
-		public Object[] getSections() {
-			String[] ar ;
-			if (groupScroll) {
-				ar = new String[getGroupCount()];
-				for (int i = 0; i < getGroupCount(); i++) {
-					ar[i] = (i + 1) +".";
-				}
-			} else {
-				int total = getGroupCount();
-				for (int i = 0; i < getGroupCount(); i++) {
-					if (expandableListView.isGroupExpanded(i)) {
-						total += getChildrenCount(i);
-					}
-				}
-				maxNumberOfSections = Math.max(1, Math.min(25, total));
-				itemsInSection = ((double) total) / maxNumberOfSections;
-				ar = new String[maxNumberOfSections];
-				for (int i = 0; i < ar.length; i++) {
-					ar[i] = ((i + 1) * 100 / maxNumberOfSections) + "%";
-				}
-			}
-			return ar;
-		}
-		
-		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
-			this.displayGroups = displayGroups;
-			notifyDataSetChanged();
-		}
-		
-	
-
-
-
-		@Override
-		public GpxDisplayItem getChild(int groupPosition, int childPosition) {
-			GpxDisplayGroup group = getGroup(groupPosition);
-			return group.getModifiableList().get(childPosition);
-		}
-
-		@Override
-		public long getChildId(int groupPosition, int childPosition) {
-			return groupPosition * 10000 + childPosition;
-		}
-
-		@Override
-		public int getChildrenCount(int groupPosition) {
-			return getGroup(groupPosition).getModifiableList().size();
-		}
-
-		@Override
-		public GpxDisplayGroup getGroup(int groupPosition) {
-			return displayGroups.get(groupPosition);
-		}
-
-		@Override
-		public int getGroupCount() {
-			return displayGroups.size();
-		}
-
-		@Override
-		public long getGroupId(int groupPosition) {
-			return groupPosition;
-		}
-
-		@Override
-		public boolean hasStableIds() {
-			return false;
-		}
-
-		@Override
-		public boolean isChildSelectable(int groupPosition, int childPosition) {
-			return true;
-		}
-
-		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-			View row = convertView;
-			if (row == null) {
-				LayoutInflater inflater = getMyActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.expandable_list_item_category_btn, parent, false);
-				fixBackgroundRepeat(row);
-			}
-			if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) {
-				row.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
-			} else {
-				adjustIndicator(groupPosition, isExpanded, row, app.getSettings().isLightContent());
-			}
-			TextView label = (TextView) row.findViewById(R.id.category_name);
-			final GpxDisplayGroup model = getGroup(groupPosition);
-			label.setText(model.getGroupName());
-			final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
-			if(isArgumentTrue(ARG_TO_HIDE_CONFIG_BTN)) {
-				ch.setVisibility(View.GONE);
-			} else if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
-						app.getSettings().isLightContent() ? R.drawable.ic_overflow_menu_light
-								: R.drawable.ic_overflow_menu_dark));
-				ch.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						selectSplitDistance(model);
-					}
-
-				});
-			} else if(model.getType() == GpxDisplayItemType.TRACK_POINTS || 
-					model.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
-						app.getSettings().isLightContent() ? R.drawable.ic_overflow_menu_light
-								: R.drawable.ic_overflow_menu_dark));
-				ch.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						saveAsFavorites(model);
-					}
-
-				});
-			} else {
-				ch.setVisibility(View.INVISIBLE);
-			}
-			return row;
-		}
-		
-
-
-		@Override
-		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
-				ViewGroup parent) {
+		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
 			}
-			GpxDisplayItem child = getChild(groupPosition, childPosition);
+			GpxDisplayItem child =  getItem(position);
 			TextView label = (TextView) row.findViewById(R.id.name);
 			TextView description = (TextView) row.findViewById(R.id.description);
 			TextView additional = (TextView) row.findViewById(R.id.additional);
@@ -585,7 +405,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 			row.setTag(child);
-				
+
 			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
 			if ((child.expanded || isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) && !Algorithms.isEmpty(child.description)) {
 				String d = child.description;
@@ -603,10 +423,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	}
 
-
 	@Override
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		GpxDisplayItem child = adapter.getChild(groupPosition, childPosition);
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		GpxDisplayItem child = adapter.getItem(position);
 		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
 				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
@@ -622,8 +441,5 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			child.expanded = !child.expanded;
 			adapter.notifyDataSetInvalidated();
 		}
-		return true;
 	}
-
-	
 }
