@@ -140,7 +140,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncLoader.execute(getActivity());
 		} else {
 			allGpxAdapter.refreshSelected();
-			allGpxAdapter.notifyDataSetChanged();;
+			allGpxAdapter.notifyDataSetChanged();
 		}
 
 		updateCurrentTrack(getView(), getActivity(), app);

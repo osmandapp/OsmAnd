@@ -1245,7 +1245,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_type_video;
+		// TODO
+		return super.getLogoResourceId();
 	}
 
 	@Override
