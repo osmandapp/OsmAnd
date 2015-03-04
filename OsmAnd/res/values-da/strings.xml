@@ -37,7 +37,7 @@
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds offline kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet. ↵\n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems). "</string>
     
     
     
@@ -47,7 +47,7 @@
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
     <string name="monitoring_control_stop">Stop</string>
     <string name="map_widget_audionotes">Audionoter</string>
-    <string name="audionotes_plugin_description">Viser knappen til at optage audio-/videonoter under turen</string>
+    <string name="audionotes_plugin_description">Udvidelsen giver funktionalitet og knapper til at tage audio-/foto-/videonoter under en tur</string>
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
@@ -302,8 +302,8 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Ekstern udvidelse (hentes separat) gør det muligt at huske placeringen af den parkerede bil.</string>
-	<string name="osmand_parking_plugin_name">Parkeringsposition</string>
+	<string name="osmand_parking_plugin_description">Udvidelsen er udviklet til at anvende OsmAnd til nemt huske placeringen af den parkerede bil.</string>
+	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
 	<string name="gpxup_public">Offentligt</string>
@@ -360,17 +360,17 @@
 	<string name="map_settings">Kortindstillinger</string>
 	<string name="map_settings_descr">Konfigurer kortvisning</string>
 	<string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
-	<string name="osmand_accessibility_description">Viser indstillinger for specielle tilgængelighedsfunktioner.</string>
+	<string name="osmand_accessibility_description">"Viser indstillinger til at aktivere særlige  tilgængelighedsfunktioner."</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Viser knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
-	<string name="osmand_rastermaps_plugin_description">Viser indstillinger til at bruge en række online eller cachelagrede delkort som primær kort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
+	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte del eller raster) kort, fra foruddefinerede OpenStreetMap delkort (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejrkort, klimakort, geologiskekort, relief osv ↵\n↵\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket. ↵\n↵\nDelkort kan hentes direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd datamappen) som en SQLite database. Kort kan fremstilles ved hjælp af en række 3. parts kortværktøjer. "</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation.</string>
 	<string name="plugins_screen">Udvidelser</string>
 	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Genstart af OsmAnd kan være nødvendig.)</string>
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
 	<string name="prefs_plugins">Udvidelser</string>
-	<string name="osm_editing_plugin_description">Viser indstillinger, der kræves for OSM bidrag, som f.eks. at oprette / redigere OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
+	<string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM bidrag såsom at oprette eller ændre OSM interessepunkter (IP), åbne eller kommentere OSM fejl, og bidrage med optagede GPX-filer. Brug af funktionen kræver OSM legitimationsoplysninger.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
 	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer med den valgte stemme</string>
 	<string name="debugging_and_development">OsmAnd udvikling</string>
@@ -1298,7 +1298,7 @@
     <string name="distance_measurement_finish_subtrack">Begynd et nyt underspor</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
-    <string name="osmand_distance_planning_plugin_description">Aktiverer et modul, som gør det muligt at oprette spor ved at trykke på kortet (eller bruge / ændre eksisterende GPX-filer) til at måle afstanden mellem punkter. Resultaterne kan gemmes som GPX, der kan bruges til at planlægge GPX-ruter med.</string>
+    <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et kort modul gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-file, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n * Langt tryk på kortet for at slette tidligere punkt.\n * Langt tryk på punkt for at se og vedhæfte beskrivelse.\n * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
@@ -1554,7 +1554,7 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing.\n\nAnonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo overvågning</string>
     <string name="osmo_settings">OsMo overvågning</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -1780,7 +1780,7 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag ture</string>
-    <string name="record_plugin_description">"Aktiverer funktionen for at gemme  dine spor via et tryk på en knap på skærmen og viser indstillinger til optagelse af dine ture til lokale GPX-filer eller til en online webtjeneste."</string>
+    <string name="record_plugin_description">"Udvidelsen aktiverer funktionalitet til at registrere og gemme spor ved at klikke på GPX optagelse modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil. ↵\n↵\nOptagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge indspillede spor at monitere træninger. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer. "</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
