@@ -33,7 +33,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.activities.SelectedGPXFragment;
+import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;

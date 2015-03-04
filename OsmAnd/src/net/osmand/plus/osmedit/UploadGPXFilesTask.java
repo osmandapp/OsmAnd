@@ -4,7 +4,7 @@ import java.io.File;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import android.app.Activity;
 import android.os.AsyncTask;

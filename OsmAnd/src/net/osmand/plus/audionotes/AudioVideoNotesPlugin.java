@@ -30,7 +30,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -1245,7 +1245,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_type_video;
+		// TODO
+		return super.getLogoResourceId();
 	}
 
 	@Override

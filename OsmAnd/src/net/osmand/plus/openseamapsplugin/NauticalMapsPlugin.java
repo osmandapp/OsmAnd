@@ -28,7 +28,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		// TODO
-		return super.getLogoResourceId();
+		return R.drawable.ic_plugin_nautical_map;
 	}
 	
 	@Override
