@@ -47,7 +47,7 @@ public class TrackRoutePointFragment extends SelectedGPXFragment {
 			return;
 		}
 
-		MenuItem item = menu.add(R.string.settings).setIcon(R.drawable.ic_overflow_menu_light).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+		MenuItem item = menu.add(R.string.add_to_favourite).setIcon(R.drawable.ic_action_fav_dark).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				saveAsFavorites(group);

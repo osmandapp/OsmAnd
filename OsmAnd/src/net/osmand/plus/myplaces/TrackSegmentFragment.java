@@ -68,7 +68,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 			return;
 		}
 
-		MenuItem item = menu.add(R.string.settings).setIcon(R.drawable.ic_overflow_menu_light).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+		MenuItem item = menu.add(R.string.showed_on_map).setIcon(R.drawable.ic_show_on_map).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				selectSplitDistance(group);
