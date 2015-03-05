@@ -46,11 +46,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -94,14 +93,7 @@ public class SelectedGPXFragment extends ListFragment {
 		setContent();
 	}
 
-	private List<GpxDisplayGroup> getContent() {
-		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		List<GpxDisplayGroup> displayGrous = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
-		if(getActivity() instanceof TrackActivity) {
-			selectedGpxHelper.collectDisplayGroups(displayGrous, getGpx());
-		}
-		return displayGrous;
-	}
+
 
 	private GPXFile getGpx() {
 		return ((TrackActivity) getActivity()).getResult();
@@ -109,7 +101,7 @@ public class SelectedGPXFragment extends ListFragment {
 
 
 	protected List<GpxDisplayGroup> filterGroups() {
-		List<GpxDisplayGroup> groups = getContent();
+		List<GpxDisplayGroup> groups = ((TrackActivity) getActivity()).getContent();
 		if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
 			groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(groups);
 			Iterator<GpxDisplayGroup> it = groups.iterator();
@@ -150,17 +142,6 @@ public class SelectedGPXFragment extends ListFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
-				int group = ExpandableListView.getPackedPositionGroup(packedPos);
-				int child = ExpandableListView.getPackedPositionChild(packedPos);
-				if (child >= 0 && group >= 0) {
-					showContextMenu(adapter.getItem(child));
-				}
-			}
-		});
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
@@ -170,7 +151,7 @@ public class SelectedGPXFragment extends ListFragment {
 		return view;
 	}
 	
-	private void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
+	protected void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
 		Builder builder = new AlertDialog.Builder(getMyActivity());
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyActivity());
 		basicFileOperation(gpxDisplayItem, adapter);
@@ -255,7 +236,7 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 
 
-	private void selectSplitDistance(final GpxDisplayGroup model) {
+	protected void selectSplitDistance(final GpxDisplayGroup model) {
 		Builder bld = new AlertDialog.Builder(getMyActivity());
 		int[] checkedItem = new int[] {!model.isSplitDistance() && !model.isSplitTime()? 0 : -1};
 		List<String> options = new ArrayList<String>();

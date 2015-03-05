@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -20,7 +19,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -90,7 +88,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 		} else {
 			loc = new LatLon(0f, 0f);
 		}
-		setupFavorites();
+		setupRecents();
 	}
 
 	@Override
@@ -98,7 +96,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 		super.onPause();
 	}
 
-	public void setupFavorites(){
+	public void setupRecents(){
 		View mainView = getView();
 		SearchHistoryHelper helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity().getApplicationContext());
 		points = helper.getHistoryEntries();

@@ -464,7 +464,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				enableSelectionMode(false);
-				runSelection(false);
 				allGpxAdapter.notifyDataSetChanged();
 			}
 

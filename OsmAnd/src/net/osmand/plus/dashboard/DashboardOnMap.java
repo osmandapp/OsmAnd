@@ -136,6 +136,9 @@ public class DashboardOnMap {
 	private void addDashboardFragments(){
 		FragmentManager manager =ma. getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
+//		if (manager.findFragmentByTag(DashMapFragment.TAG) == null) {
+//			fragmentTransaction.add(R.id.content, new DashMapFragment(), DashMapFragment.TAG);
+//		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
 		}

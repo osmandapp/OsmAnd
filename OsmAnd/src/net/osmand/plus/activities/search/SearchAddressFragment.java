@@ -82,7 +82,6 @@ public class SearchAddressFragment extends Fragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
-		boolean light = getApplication().getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
 		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
@@ -93,7 +92,6 @@ public class SearchAddressFragment extends Fragment {
 			} else {
 				((SearchActivity) getActivity()).getClearToolbar(false);
 			}
-			light = false;
 		}
 		if(getActivity() instanceof SearchAddressActivity) {
 			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "");
@@ -353,21 +351,31 @@ public class SearchAddressFragment extends Fragment {
 			return;
 		}
 		AddressInformation ai = new AddressInformation();
+		PointDescription pointDescription = ai.getHistoryName();
 		if (!Algorithms.isEmpty(street2) && !Algorithms.isEmpty(street)) {
 			ai = AddressInformation.build2StreetIntersection(getActivity(), osmandSettings);
+			pointDescription.setName(street2);
+			pointDescription.setTypeName(region + ", " + city);
 		} else if (!Algorithms.isEmpty(building)) {
 			ai = AddressInformation.buildBuilding(getActivity(), osmandSettings);
+			pointDescription.setName(street + ", " + building);
+			pointDescription.setTypeName(region + ", " + city);
 		} else if (!Algorithms.isEmpty(street)) {
 			ai = AddressInformation.buildStreet(getActivity(), osmandSettings);
+			pointDescription.setName(street);
+			pointDescription.setTypeName(region + ", " + city);
 		} else if(!Algorithms.isEmpty(city)) {
 			ai = AddressInformation.buildCity(getActivity(), osmandSettings);
+			pointDescription.setName(city);
+			pointDescription.setTypeName(region);
 		}
+
 		if(mode == ADD_TO_FAVORITE) {
 			Bundle b = new Bundle();
 			Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 			dlg.show();
-			FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), 
-					ai.getHistoryName());
+			FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(),
+					pointDescription);
 		} else if(mode == SELECT_POINT ){
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, ai.objectName);
@@ -377,11 +385,11 @@ public class SearchAddressFragment extends Fragment {
 			getActivity().finish();
 		} else {
 			if (mode == NAVIGATE_TO) {
-				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  ai.getHistoryName());
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  pointDescription);
 			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), ai.getHistoryName());
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), pointDescription);
 			} else if (mode == SHOW_ON_MAP) {
-				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom, ai.getHistoryName());
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom, pointDescription);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 		}

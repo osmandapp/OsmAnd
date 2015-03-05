@@ -14,9 +14,9 @@ import java.util.List;
 
 /**
  * Created by Denis
- * on 04.03.2015.
+ * on 05.03.2015.
  */
-public class TrackPointFragment extends SelectedGPXFragment {
+public class TrackRoutePointFragment extends SelectedGPXFragment {
 	GpxSelectionHelper.GpxDisplayGroup group;
 	@Override
 	public void setContent() {
@@ -26,7 +26,7 @@ public class TrackPointFragment extends SelectedGPXFragment {
 
 		List<GpxSelectionHelper.GpxDisplayItem> items = new ArrayList<>();
 		for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
-			if (group.getType() != GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS){
+			if (group.getType() != GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS){
 				continue;
 			}
 			this.group = group;

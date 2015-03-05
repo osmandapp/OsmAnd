@@ -26,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.Location;
@@ -156,7 +157,18 @@ public class MapActivity extends AccessibleActivity {
 		
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
-		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
+		if (getMyApplication().isApplicationInitializing()) {
+			getMyApplication().checkApplicationIsBeingInitialized(this, (TextView) findViewById(R.id.ProgressMessage),
+					(ProgressBar) findViewById(R.id.ProgressBar), new Runnable() {
+						@Override
+						public void run() {
+							applicationInitialized();
+						}
+					});
+		} else {
+			applicationInitialized();
+		}
+		//app.checkApplicationIsBeingInitialized(this, null);
 		
 		
 		parseLaunchIntentLocation();
@@ -241,7 +253,11 @@ public class MapActivity extends AccessibleActivity {
 	
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
 	}
-	
+
+	private void applicationInitialized() {
+		findViewById(R.id.init_progress).setVisibility(View.GONE);
+	}
+
 	public void addLockView(FrameLayout lockView) {
 		this.lockView = lockView;
 	}
