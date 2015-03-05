@@ -1,16 +1,9 @@
 package net.osmand.plus.myplaces;
 
-import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.R;
@@ -21,25 +14,10 @@ import java.util.List;
 
 /**
  * Created by Denis
- * on 04.03.2015.
+ * on 05.03.2015.
  */
-public class TrackSegmentFragment extends SelectedGPXFragment {
+public class TrackRoutePointFragment extends SelectedGPXFragment {
 	GpxSelectionHelper.GpxDisplayGroup group;
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-				long packedPos = ((AdapterView.AdapterContextMenuInfo) menuInfo).position;
-				showContextMenu(adapter.getItem((int)packedPos));
-			}
-		});
-		return view;
-	}
-
 	@Override
 	public void setContent() {
 		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups();
@@ -48,7 +26,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 
 		List<GpxSelectionHelper.GpxDisplayItem> items = new ArrayList<>();
 		for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
-			if (group.getType() != GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT){
+			if (group.getType() != GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS){
 				continue;
 			}
 			this.group = group;
@@ -56,6 +34,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 				items.add(item);
 			}
 		}
+
 		adapter = new SelectedGPXAdapter(items);
 		setListAdapter(adapter);
 	}
@@ -71,7 +50,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 		MenuItem item = menu.add(R.string.settings).setIcon(R.drawable.ic_overflow_menu_light).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				selectSplitDistance(group);
+				saveAsFavorites(group);
 				return true;
 			}
 		});
