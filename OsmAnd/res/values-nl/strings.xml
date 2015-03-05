@@ -649,7 +649,7 @@
   <string name="searching">Bezig met zoeken…</string>
   <string name="searching_address">Adres wordt gezocht…</string>
   <string name="search_osm_nominatim">Zoek adres met OSM Nominatim</string>
-  <string name="hint_search_online">Huisnummer, straat, stad</string>
+  <string name="hint_search_online">Online zoeken: Huisnummer, straat, stad</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online zoom</string>
@@ -1715,7 +1715,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
     <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo monitoring</string>
-    <string name="osmo_settings">OpenStreetMap Monitoring (OsMo)</string>
+    <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
@@ -2067,8 +2067,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="proxy_host_descr">Stel de hostname van je proxy in (bv. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy-poort</string>
 	<string name="proxy_port_descr">Stel het poortnummer van je proxy in (bv. 8118)</string>
-	<string name="enable_plugin">Aanzetten</string>
-	<string name="disable_plugin">Uitzetten</string>
+	<string name="enable_plugin">Uitgezet</string>
+	<string name="disable_plugin">Aangezet</string>
 <string name="plugin_description_title">Omschrijving</string>
 	<string name="plugin_settings_button_caption">Instellingen</string>
 <string name="edit_group">Bewerk groep</string>
@@ -2078,7 +2078,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
 	<string name="enable_plugin2">Activeren</string>
 	<string name="disable_plugin2">Deactiveren</string>
-	<string name="get_plugin">Verkrijg</string>
+	<string name="get_plugin">Krijgen</string>
 <string name="currently_recording_track">Huidige opname track</string>
 	<string name="watch">Bekijk</string>
 	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
@@ -2107,4 +2107,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="free">"Vrij %1$s "</string>
 	<string name="device_memory">Apparaatgeheugen</string>
     <string name="export">Exporteren</string>
+	<string name="route_points">Route punten</string>
+	<string name="days_behind">Achterstand</string>
 	</resources>
