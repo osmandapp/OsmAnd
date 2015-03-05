@@ -2101,4 +2101,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="share_note">Deel opmerking</string>
 	<string name="rename_recording">hernoem de opname</string>
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>
+	<string name="notes">Opmerkingen</string>
 	</resources>
