@@ -1950,4 +1950,6 @@
 	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
 	<string name="selected_tracks">Valgt</string>
+	<string name="track_segments">Spor segmenter</string>
+	<string name="track_points">Spor punkter</string>
 	</resources>
