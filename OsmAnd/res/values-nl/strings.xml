@@ -1714,7 +1714,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
     <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
-    <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
+    <string name="osmo_plugin_name">OsMo monitoring</string>
     <string name="osmo_settings">OpenStreetMap Monitoring (OsMo)</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
@@ -1943,7 +1943,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_poi">Meld POI in de buurt</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Reizen</string>
-    <string name="record_plugin_name">Reizen opnemen</string>
+    <string name="record_plugin_name">Route opname</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
@@ -2106,4 +2106,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="roads_only">Alleen wegen</string>
     <string name="free">"Vrij %1$s "</string>
 	<string name="device_memory">Apparaatgeheugen</string>
-    </resources>
+    <string name="export">Exporteren</string>
+	</resources>
