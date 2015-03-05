@@ -115,7 +115,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View v) {
 					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-							new PointDescription(PointDescription.POINT_TYPE_NOTE, 
+							new PointDescription(recording.getSearchHistoryType(),
 							recording.getName(getActivity())), true,
 							recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());

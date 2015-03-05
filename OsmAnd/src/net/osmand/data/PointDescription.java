@@ -26,7 +26,9 @@ public class PointDescription {
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
 	public static final String POINT_TYPE_MARKER = "marker";
-	public static final String POINT_TYPE_NOTE = "avnote";
+	public static final String POINT_TYPE_AUDIO_NOTE = "audionote";
+	public static final String POINT_TYPE_VIDEO_NOTE = "videonote";
+	public static final String POINT_TYPE_PHOTO_NOTE = "photonote";
 	public static final String POINT_TYPE_LOCATION = "location";
 	public static final String POINT_TYPE_ALARM = "alarm";
 	public static final String POINT_TYPE_TARGET = "destination";
@@ -111,9 +113,18 @@ public class PointDescription {
 		return POINT_TYPE_FAVORITE.equals(type);
 	}
 
-	public boolean isAvNote() {
-		return POINT_TYPE_NOTE.equals(type);
+	public boolean isAudioNote() {
+		return POINT_TYPE_AUDIO_NOTE.equals(type);
 	}
+
+	public boolean isVideoNote() {
+		return POINT_TYPE_VIDEO_NOTE.equals(type);
+	}
+
+	public boolean isPhotoNote() {
+		return POINT_TYPE_PHOTO_NOTE.equals(type);
+	}
+
 
 	@Override
 	public int hashCode() {

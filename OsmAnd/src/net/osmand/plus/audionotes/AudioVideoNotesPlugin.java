@@ -21,6 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -211,6 +212,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				return ctx.getResources().getString(R.string.photo);
 			}
 			return "";
+		}
+
+		public String getSearchHistoryType(){
+			if (isPhoto()){
+				return PointDescription.POINT_TYPE_PHOTO_NOTE;
+			} else if (isVideo()) {
+				return PointDescription.POINT_TYPE_VIDEO_NOTE;
+			} else {
+				return PointDescription.POINT_TYPE_PHOTO_NOTE;
+			}
 		}
 
 		public boolean isPhoto() {

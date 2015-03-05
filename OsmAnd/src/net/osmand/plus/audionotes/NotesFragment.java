@@ -113,7 +113,7 @@ public class NotesFragment extends ListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName(getActivity())), true,
+				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}

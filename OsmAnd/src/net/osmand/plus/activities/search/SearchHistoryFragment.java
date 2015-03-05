@@ -48,7 +48,9 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	private Drawable locationIcon;
 	private Drawable poiIcon;
 	private Drawable wptIcon;
-	private Drawable noteIcon;
+	private Drawable audioNoteIcon;
+	private Drawable videoNoteIcon;
+	private Drawable photoNoteIcon;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,8 +74,10 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		favoriteIcon = getResources().getDrawable(R.drawable.ic_type_favorites);
 		locationIcon = getResources().getDrawable(R.drawable.ic_type_coordinates);
 		poiIcon = getResources().getDrawable(R.drawable.ic_type_info);
-		wptIcon = getResources().getDrawable(R.drawable.ic_action_flage_dark);
-		noteIcon = getResources().getDrawable(R.drawable.ic_action_note_dark);
+		wptIcon = getResources().getDrawable(R.drawable.ic_type_waypoint);
+		audioNoteIcon = getResources().getDrawable(R.drawable.ic_type_audio);
+		videoNoteIcon = getResources().getDrawable(R.drawable.ic_type_video);
+		photoNoteIcon = getResources().getDrawable(R.drawable.ic_type_img);
 		if (getMyApplication().getSettings().isLightContent()) {
 			addressIcon = addressIcon.mutate();
 			addressIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
@@ -85,8 +89,12 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			poiIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 			wptIcon = wptIcon.mutate();
 			wptIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			noteIcon = noteIcon.mutate();
-			noteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			audioNoteIcon = audioNoteIcon.mutate();
+			audioNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			videoNoteIcon = videoNoteIcon.mutate();
+			videoNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			photoNoteIcon = photoNoteIcon.mutate();
+			photoNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 		}
 	}
 
@@ -224,9 +232,13 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				icon.setImageDrawable(poiIcon);
 			} else if (historyEntry.getName().isWpt()) {
 				icon.setImageDrawable(wptIcon);
-			} else if (historyEntry.getName().isAvNote()) {
-				icon.setImageDrawable(noteIcon);
-			} else {
+			} else if (historyEntry.getName().isAudioNote()) {
+				icon.setImageDrawable(audioNoteIcon);
+			} else if (historyEntry.getName().isVideoNote()) {
+				icon.setImageDrawable(videoNoteIcon);
+			}else if (historyEntry.getName().isPhotoNote()) {
+				icon.setImageDrawable(photoNoteIcon);
+			}  else {
 				icon.setImageDrawable(addressIcon);
 			}
 
