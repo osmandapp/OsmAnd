@@ -10,10 +10,12 @@ import java.util.List;
 
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
+import net.osmand.plus.myplaces.TrackRoutePointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -36,6 +39,7 @@ public class TrackActivity extends TabActivity {
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private File file = null;
 	private GPXFile result;
+	ViewPager mViewPager;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -55,17 +59,17 @@ public class TrackActivity extends TabActivity {
 		setContentView(R.layout.tab_content);
 
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-		
-		final ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+
+		mViewPager = (ViewPager) findViewById(R.id.pager);
 
 		setViewPagerAdapter(mViewPager, new ArrayList<TabActivity.TabItem>());
 		mSlidingTabLayout.setViewPager(mViewPager);
-		
+
 		new AsyncTask<Void, Void, GPXFile>() {
 
 			protected void onPreExecute() {
 				setSupportProgressBarIndeterminateVisibility(true);
-				
+
 			};
 			@Override
 			protected GPXFile doInBackground(Void... params) {
@@ -73,23 +77,28 @@ public class TrackActivity extends TabActivity {
 			}
 			protected void onPostExecute(GPXFile result) {
 				setSupportProgressBarIndeterminateVisibility(false);
-//				List<TabItem> items = new ArrayList<TabActivity.TabItem>();
-//				items.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
+
 				setResult(result);
 				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
-				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-						getTabIndicator(R.string.track_points, TrackPointFragment.class));
-//				setViewPagerAdapter(mViewPager, items );
+				if (isHavingTrackPoints()){
+					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
+							getTabIndicator(R.string.track_points, TrackPointFragment.class));
+				}
+				if (isHavingRoutePoints()){
+					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
+							getTabIndicator(R.string.route_points, TrackRoutePointFragment.class));
+				}
+
 			};
 		}.execute((Void)null);
-		
+
 	}
 
 	protected void setResult(GPXFile result) {
 		this.result = result;
 	}
-	
+
 	public GPXFile getResult() {
 		return result;
 	}
@@ -122,10 +131,6 @@ public class TrackActivity extends TabActivity {
 		return tb;
 	}
 
-	public void setToolbarVisibility(boolean visible){
-		findViewById(R.id.bottomControls).setVisibility(visible? View.VISIBLE : View.GONE);
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
@@ -135,6 +140,39 @@ public class TrackActivity extends TabActivity {
 			return true;
 
 		}
+		return false;
+	}
+
+	public List<GpxSelectionHelper.GpxDisplayGroup> getContent() {
+		GpxSelectionHelper selectedGpxHelper = getMyApplication().getSelectedGpxHelper();
+		List<GpxSelectionHelper.GpxDisplayGroup> displayGrous = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		selectedGpxHelper.collectDisplayGroups(displayGrous, getResult());
+		return displayGrous;
+	}
+
+	boolean isHavingTrackPoints(){
+		List<GpxSelectionHelper.GpxDisplayGroup> groups = getContent();
+		for (GpxSelectionHelper.GpxDisplayGroup group : groups){
+			GpxSelectionHelper.GpxDisplayItemType type = group.getType();
+			if (type == GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS &&
+					!group.getModifiableList().isEmpty()){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	boolean isHavingRoutePoints(){
+		List<GpxSelectionHelper.GpxDisplayGroup> groups = getContent();
+		for (GpxSelectionHelper.GpxDisplayGroup group : groups){
+			GpxSelectionHelper.GpxDisplayItemType type = group.getType();
+			if (type == GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS &&
+					!group.getModifiableList().isEmpty()){
+				return true;
+			}
+		}
+
 		return false;
 	}
 
