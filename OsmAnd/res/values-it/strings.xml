@@ -774,7 +774,7 @@
   <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
   <string name="map_settings">Impostazioni mappa</string>
   <string name="map_settings_descr">Configura la visualizzazione della mappa</string>
-  <string name="osmand_rastermaps_plugin_description">Visualizza le impostazioni per configurare una varietà di mappe online o a tasselli in cache come mappa di base per le mappe sovrapposte/di sottofondo. Queste mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"Visualizza le impostazioni per configurare una varietà di mappe online o a tasselli in cache come mappa di base per le mappe sovrapposte/di sottofondo. Queste mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd. "</string>
   <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS.</string>
   <string name="osmand_accessibility_description">Visualizza impostazioni per funzionalità speciali per l\'accessibilità.</string>
   <string name="extra_settings">Impostazioni avanzate</string>
