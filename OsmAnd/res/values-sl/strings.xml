@@ -1994,9 +1994,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="enable_plugin">Onemogočeno</string>
 	<string name="disable_plugin">Omogočeno</string>
 <string name="plugin_ski_name">Smučarske karte</string>
-    <string name="plugin_nautical_name">Navtične karte</string>
+    <string name="plugin_nautical_name">Pomorska karta</string>
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
-    <string name="nautical_maps_missing">Če želite prikazati navtične karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
+    <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
 	<string name="edit_group">Urejanje skupine</string>
     <string name="enable_plugin2">Omogoči</string>
 	<string name="disable_plugin2">Onemogoči</string>
@@ -2008,4 +2008,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="free">"Prosto %1$s "</string>
 	<string name="device_memory">Pomnilnik naprave</string>
     <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>
-    </resources>
+    <string name="track_segments">Segmenti sledi</string>
+	<string name="track_points">Točke sledi</string>
+	</resources>
