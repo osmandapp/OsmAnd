@@ -53,6 +53,14 @@ public class PointDescription {
 		}
 	}
 
+	public void setTypeName(String typeName){
+		this.typeName = typeName;
+	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+
 	public String getTypeName() {
 		return typeName;
 	}
