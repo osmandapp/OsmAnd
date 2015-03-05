@@ -1055,7 +1055,8 @@
 	<string name="close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
 	<string name="advanced_settings">Avansert</string>
-	<string name="srtm_plugin_description"></string>
+	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+\n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
 \n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
 \n\nEtter at den globale regionlisten er hentet fra internett, trykk på en oppføring for å laste ned eller oppdatere en fil. Vær oppmerksom på filtypevelgeren nær toppen av skjermen for å velge den typen nedlasting du ønsker (vanlige kart, relieff-overlegg etc.).
@@ -1204,4 +1205,21 @@
     <string name="free">"Ledig %1$s "</string>
 	<string name="device_memory">Enhetsminne</string>
     <string name="back_to_map">Tilbake til kart</string>
-	</resources>
+	<string name="pref_overlay">Overlegg/Underlag</string>
+	<string name="layer_underlay">Underlagskart…</string>
+	<string name="map_underlay">Underlagskart</string>
+	<string name="map_underlay_descr">Velg underlagskart</string>
+	<string name="layer_overlay">Overleggskart…</string>
+	<string name="map_overlay">Overleggskart</string>
+	<string name="map_overlay_descr">Velg overleggskart</string>
+	<string name="audionotes_plugin_name">Audio/video-merknader</string>
+	<string name="osm_settings">OSM-redigering</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+\n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
+	<string name="plugin_ski_name">Skikartsvisning</string>
+	<string name="osmand_accessibility_description">Viser innstillingene til å aktivere spesielle tilgjengelighetsfunksjoner.</string>
+	<string name="rename_failed">Navneendring feilet.</string>
+	<string name="photo">Foto</string>
+	<string name="rename_recording">Endre navn på opptak</string>
+    <string name="anonymous_user">Anonym bruker</string>
+    </resources>

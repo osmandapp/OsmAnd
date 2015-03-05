@@ -1886,4 +1886,6 @@
 	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
 <string name="selected_tracks">Ischertadu</string>
+	<string name="track_segments">Segmentos de sa rasta</string>
+	<string name="track_points">Puntos de sa rasta</string>
 	</resources>

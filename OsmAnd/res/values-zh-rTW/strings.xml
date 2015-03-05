@@ -1121,7 +1121,7 @@
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="map_widget_audionotes">音訊注解</string>
-    <string name="audionotes_plugin_description">這個外掛元件提供了按鈕和功能以在旅程中記錄音訊/攝影/視訊等注解</string>
+    <string name="audionotes_plugin_description">這個外掛元件提供的功能和按鈕以在旅程中記錄音訊/攝影/視訊等注解</string>
     <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
@@ -1942,4 +1942,6 @@
 	<string name="turn_off_all">全部關閉</string>
 	<string name="showed_on_map">在地圖上顯示</string>
 	<string name="selected_tracks">已選取</string>
+	<string name="track_segments">航跡區段</string>
+	<string name="track_points">航跡標點</string>
 	</resources>
