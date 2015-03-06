@@ -836,7 +836,7 @@
   <string name="map_settings_descr">Nastavení mapového zobrazení</string>
   <string name="osmand_rastermaps_plugin_description">Pokročilá nastavení pro použití mnoha rastrových map jako základní mapu, překryv nebo podkres. Rastrové mapy lze získat online nebo připravit offline a nakopírovat do datového adresáře OsmAnd.</string>
   <string name="osmand_background_plugin_description">Pokročilá nastavení pro záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
-  <string name="osmand_accessibility_description">Pokročilá nastavení zpřístupnění pro osoby s omezením zraku.</string>
+  <string name="osmand_accessibility_description">Zobrazí nastavení pro speciální funkce ulehčení přístupu.</string>
   <string name="extra_settings">Pokročilá nastavení</string>
   <string name="osmand_monitoring_description">Pokročilá nastavení pro záznam vaší trasy do souboru GPX nebo pro odesílání v reálném čase na webový server.</string>
   <string name="osmand_extra_settings_description">Rozšířená nastavení mapy a další nastavení specifická pro konkrétní zařízení.</string>
@@ -1871,4 +1871,5 @@ s často kladenými otázkami.</string>
 	<string name="disable_plugin2">Vypnout</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
 	<string name="get_plugin">Získat</string>
-</resources>
+<string name="route_points">Body cesty</string>
+	</resources>

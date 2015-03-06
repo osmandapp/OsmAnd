@@ -568,4 +568,41 @@
 	<string name="poi_halt">Station</string>
 	<string name="poi_railway_buffer_stop">Spoor stootblok</string>
 	<string name="poi_orienteering">Oriëntatieloop</string>
+	<string name="poi_paragliding">Parapenten</string>
+	<string name="poi_pelota">Pelota vasca</string>
+	<string name="poi_racquet">Squash</string>
+	<string name="poi_military_naval_base">Militaire marinebasis</string>
+	<string name="poi_man_made">Kunstmatig</string>
+	<string name="poi_service">Dienst</string>
+	<string name="poi_rugby_union">Rugby unie</string>
+	<string name="poi_rugby_league">Rugby competitie</string>
+	<string name="poi_team_handball">Handbal</string>
+	<string name="poi_toboggan">Rodelen</string>
+	<string name="poi_artwork">Kunst</string>
+	<string name="poi_boundary_stone">Grenspaal</string>
+	<string name="poi_rune_stone">Rune steen</string>
+	<string name="poi_lodging">Accommodatie</string>
+	<string name="poi_apartment">Appartement</string>
+
+	<string name="poi_internet_access_wlan">Internet toegang: wlan of wifi</string>
+	<string name="poi_internet_access_terminal">Internet toegang: internet computer</string>
+	<string name="poi_internet_access_wired">Internet toegang: bedraad</string>
+	<string name="poi_internet_access_public">Internet toegang: openbaar</string>
+	<string name="poi_internet_access_service">Internet toegang: dienst</string>
+	
+	<string name="poi_wayside_cross">Wegkruis</string>
+	<string name="poi_wayside_shrine">Odsey schrijn</string>
+	<string name="poi_tourism_information">VVV</string>
+	<string name="poi_viewpoint">Uitzicht</string>
+	<string name="poi_camp_site">Kampeerplaats</string>
+	<string name="poi_caravan_site">Caravanterrein</string>
+	<string name="poi_picnic_site">Picknickplaats</string>
+	<string name="poi_food_court">Eetplein</string>
+	<string name="poi_drinking_water">Drinkwater</string>
+	<string name="poi_agricultural_engines_craft">Landbouwmachines</string>
+	<string name="poi_carpet_layer">Stoffeerder</string>
+	<string name="poi_caterer">Traiteur</string>
+	<string name="poi_clockmaker">Horlogemaker</string>
+	<string name="poi_dressmaker">Kleermaker</string>
+	<string name="poi_glaziery_craft">Glasblazer</string>
 	</resources>

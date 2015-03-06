@@ -2079,7 +2079,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="enable_plugin2">Activeren</string>
 	<string name="disable_plugin2">Deactiveren</string>
 	<string name="get_plugin">Krijgen</string>
-<string name="currently_recording_track">Huidige opname track</string>
+<string name="currently_recording_track">Huidige route opname</string>
 	<string name="watch">Bekijk</string>
 	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
