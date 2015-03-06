@@ -24,6 +24,8 @@ import net.osmand.util.MapUtils;
  * 26.01.2015.
  */
 public class DashParkingFragment extends DashLocationFragment {
+
+	public static final String TAG = "DASH_PARKING_FRAGMENT";
 	ParkingPositionPlugin plugin;
 
 	@Override
@@ -51,17 +53,7 @@ public class DashParkingFragment extends DashLocationFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-
-
-
-		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-			loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		} else {
-			loc = new LatLon(0f, 0f);
-		}
-
-		updateParkingPosition();
+		refreshCard();
 	}
 
 	private void updateParkingPosition() {
@@ -108,6 +100,24 @@ public class DashParkingFragment extends DashLocationFragment {
 		if (plugin == null){
 			return;
 		}
+		updateParkingPosition();
+	}
+
+	@Override
+	public void refreshCard() {
+		plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+
+		if (plugin == null) {
+			return;
+		}
+
+
+		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		} else {
+			loc = new LatLon(0f, 0f);
+		}
+
 		updateParkingPosition();
 	}
 }

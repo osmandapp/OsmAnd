@@ -84,7 +84,12 @@ public class DashTrackFragment extends DashBaseFragment {
 		updateEnable = true;
 		setupGpxFiles();
 	}
-	
+
+	@Override
+	public void refreshCard() {
+		setupGpxFiles();
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();

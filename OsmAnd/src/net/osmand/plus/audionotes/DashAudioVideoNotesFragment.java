@@ -65,6 +65,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		refreshCard();
+	}
+
+	@Override
+	public void refreshCard() {
 		if (plugin == null) {
 			plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		}
@@ -140,9 +145,9 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		if (recording.isAudio()) {
 			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
 		} else if (recording.isVideo()) {
-			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
+			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_video);
 		} else {
-			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
+			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_img);
 		}
 		icon.setImageDrawable(iconDrawable);
 		return iconDrawable;
