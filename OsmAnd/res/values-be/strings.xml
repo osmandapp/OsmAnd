@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -2043,4 +2043,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	</string>
 
 	<string name="back_to_map">Вярнуцца да мапы</string>
+	<string name="track_segments">Адрэзкі сьледу</string>
+	<string name="track_points">Пункты сьледу</string>
+	<string name="location_on_map">Каардынаты:\n Шырата %1$s\n Даўгата %2$s</string>
+	<string name="currently_recording_track">Сьлед, што запісваецца</string>
 	</resources>
