@@ -108,6 +108,11 @@ public class DashPluginsFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		refreshCard();
+	}
+
+	@Override
+	public void refreshCard() {
 
 		View contentView = getView();
 		if (contentView == null) {
