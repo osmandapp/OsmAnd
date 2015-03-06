@@ -26,8 +26,8 @@
 	<string name="poi_antiques_shop">Antiekwinkel</string>
 	<string name="poi_art_shop">Galerie</string>
 	<string name="poi_baby_goods">Babywinkel</string>
-	<string name="poi_bag_shop">Tassenwinkel</string>
-	<string name="poi_bathroom_furnishing_shop">Badkamermeubelwinkel</string>
+	<string name="poi_bag_shop">Lederwaren</string>
+	<string name="poi_bathroom_furnishing_shop">Sanitairwinkel</string>
 	<string name="poi_bed_shop">Beddenwinkel</string>
 	<string name="poi_boutique">Modezaak</string>
 	<string name="poi_carpet_shop">Tapijtwinkel</string>
@@ -56,19 +56,19 @@
 	<string name="poi_general_shop">Winkel in diverse goederen</string>
 	<string name="poi_herbalist">Kruidenierszaak</string>
 	<string name="poi_hifi_shop">Hi-Fi-winkel</string>
-	<string name="poi_houseware_shop">Huishoudelijke winkel</string>
+	<string name="poi_houseware_shop">Huishoudzaak</string>
 	<string name="poi_hunting_shop">Jachtwinkel</string>
 	<string name="poi_interior_decoration_shop">Interieurdecoratiewinkel</string>
 	<string name="poi_jewelry_shop">Juwelier</string>
 	<string name="poi_kiosk">Kiosk</string>
-	<string name="poi_kitchen_shop">Keukengereiwinkel</string>
+	<string name="poi_kitchen_shop">Kookwinkel</string>
 	<string name="poi_mobile_phone_shop">Mobiele telefoon-winkel</string>
 	<string name="poi_motorcycle_shop">Motorwinkel</string>
 	<string name="poi_musical_instrument_shop">Muziekinstrumentenwinkel</string>
 	<string name="poi_newsagent_shop">Persagentschap</string>
 	<string name="poi_optician_shop">Opticien</string>
 	<string name="poi_organic_shop">Biologische voedingswinkel</string>
-	<string name="poi_outdoor_shop">Outdoor-winkel</string>
+	<string name="poi_outdoor_shop">Buitensportwinkel</string>
 	<string name="poi_paint_shop">Verfwinkel</string>
 	<string name="poi_pet_shop">Dierenwinkel</string>
 	<string name="poi_radiotechnics_shop">Radiotechnics-winkel</string>
@@ -557,7 +557,7 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">door de gebruiker gedefinieerd</string>
 	
-	<string name="poi_farm">boerderijwinkel</string>
+	<string name="poi_farm">Boerderijwinkel</string>
 	<string name="poi_wine">Wijnhandel</string>
 
 	<string name="poi_child_clothes_shop">Kinderkleding</string>
