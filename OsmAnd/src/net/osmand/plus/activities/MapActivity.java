@@ -62,6 +62,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -130,6 +131,7 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
@@ -145,7 +147,7 @@ public class MapActivity extends AccessibleActivity {
 		dashboardOnMap.createDashboardView();
 		if (app.isApplicationInitializing()) {
 			dashboardOnMap.setDashboardVisibility(true);
-			findViewById(R.id.init_progress).setVisibility(View.GONE);
+			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
@@ -153,15 +155,18 @@ public class MapActivity extends AccessibleActivity {
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
+					if(event == InitEvents.MAPS_INITIALIZED) {
+						mapView.refreshMap(true);
+					}
 				}
 
 				@Override
 				public void onFinish(AppInitializer init) {
 					applicationInitialized();
+					mapView.refreshMap();
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
-		} else {
 		}
 		
 		parseLaunchIntentLocation();
@@ -234,12 +239,15 @@ public class MapActivity extends AccessibleActivity {
 		mapActions.prepareStartOptionsMenu();
 
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
+		if(System.currentTimeMillis() - tm > 50) {
+			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		}
 	}
 
 	private void applicationInitialized() {
-		app.getResourceManager().getRenderer().clearCache();
 		mapView.refreshMap(true);
 		findViewById(R.id.init_progress).setVisibility(View.GONE);
+		findViewById(R.id.ParentLayout).invalidate();
 	}
 
 	public void addLockView(FrameLayout lockView) {
@@ -326,6 +334,7 @@ public class MapActivity extends AccessibleActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		long tm = System.currentTimeMillis();
 
 		cancelNotification();
 		// fixing bug with action bar appearing on android 2.3.3
@@ -401,29 +410,7 @@ public class MapActivity extends AccessibleActivity {
 						gpxImportHelper.handleContenImport(data);
 						setIntent(null);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
-						final String schemeSpecificPart = data.getSchemeSpecificPart();
-
-						final Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(
-								schemeSpecificPart);
-						if (matcher.matches()) {
-							try {
-								final double lat = Double.valueOf(matcher.group(1));
-								final double lon = Double.valueOf(matcher.group(2));
-
-								getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
-										-1);
-								getMapActions().enterRoutePlanningMode(null, null, false);
-							} catch (NumberFormatException e) {
-								AccessibleToast.makeText(this,
-										getString(R.string.navigation_intent_invalid, schemeSpecificPart),
-										Toast.LENGTH_LONG).show(); //$NON-NLS-1$
-							}
-						} else {
-							AccessibleToast.makeText(this,
-									getString(R.string.navigation_intent_invalid, schemeSpecificPart),
-									Toast.LENGTH_LONG).show(); //$NON-NLS-1$
-						}
-						setIntent(null);
+						parseNavigationIntent(data);
 					}
 				}
 			}
@@ -440,6 +427,35 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.handleOnResume();
 		}
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
+		if(System.currentTimeMillis() - tm > 50) {
+			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		}
+	}
+
+	private void parseNavigationIntent(final Uri data) {
+		final String schemeSpecificPart = data.getSchemeSpecificPart();
+
+		final Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(
+				schemeSpecificPart);
+		if (matcher.matches()) {
+			try {
+				final double lat = Double.valueOf(matcher.group(1));
+				final double lon = Double.valueOf(matcher.group(2));
+
+				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
+						-1);
+				getMapActions().enterRoutePlanningMode(null, null, false);
+			} catch (NumberFormatException e) {
+				AccessibleToast.makeText(this,
+						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
+						Toast.LENGTH_LONG).show(); //$NON-NLS-1$
+			}
+		} else {
+			AccessibleToast.makeText(this,
+					getString(R.string.navigation_intent_invalid, schemeSpecificPart),
+					Toast.LENGTH_LONG).show(); //$NON-NLS-1$
+		}
+		setIntent(null);
 	}
 
 	public void readLocationToShow() {
@@ -715,18 +731,28 @@ public class MapActivity extends AccessibleActivity {
 
 	public void updateMapSettings() {
 		// update vector renderer
-		RendererRegistry registry = app.getRendererRegistry();
-		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
-		if (newRenderer == null) {
-			newRenderer = registry.defaultRender();
-		}
-		if (mapView.getMapRenderer() != null) {
-			NativeCoreContext.getMapRendererContext().updateMapSettings();
-		}
-		if (registry.getCurrentSelectedRenderer() != newRenderer) {
-			registry.setCurrentSelectedRender(newRenderer);
-			app.getResourceManager().getRenderer().clearCache();
-		}
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				RendererRegistry registry = app.getRendererRegistry();
+				RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
+				if (newRenderer == null) {
+					newRenderer = registry.defaultRender();
+				}
+				if (mapView.getMapRenderer() != null) {
+					NativeCoreContext.getMapRendererContext().updateMapSettings();
+				}
+				if (registry.getCurrentSelectedRenderer() != newRenderer) {
+					registry.setCurrentSelectedRender(newRenderer);
+					app.getResourceManager().getRenderer().clearCache();
+					mapView.refreshMap(true);
+				}
+				return null;
+			}
+			protected void onPostExecute(Void result) {};
+		}.execute((Void) null);
+		
 	}
 
 	@Override

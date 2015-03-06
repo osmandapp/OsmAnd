@@ -373,13 +373,13 @@ public class AppInitializer implements IProgress {
 	private void startApplicationBackground() {
 		try {
 			startBgTime = System.currentTimeMillis();
+			initNativeCore();
+			notifyEvent(InitEvents.NATIVE_INITIALIZED);
+			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
-			initNativeCore();
-			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			indexRegionsBoundaries(false);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
@@ -499,8 +499,11 @@ public class AppInitializer implements IProgress {
 		});
 	}
 	public void notifyEvent(final InitEvents event) {
-		long time = System.currentTimeMillis();
-		System.out.println("Initialized " + event  + " in " + (time - startBgTime) + " ms");
+		if (event != InitEvents.TASK_CHANGED) {
+			long time = System.currentTimeMillis();
+			System.out.println("Initialized " + event + " in " + (time - startBgTime) + " ms");
+			startBgTime = time;
+		}
 		app.uiHandler.post(new Runnable() {
 			
 			@Override
@@ -510,13 +513,14 @@ public class AppInitializer implements IProgress {
 				}
 			}
 		});
-		startBgTime = time;
+
 	}
 
 
 	@Override
 	public void startTask(String taskName, int work) {
 		this.taskName = taskName;
+		notifyEvent(InitEvents.TASK_CHANGED);
 	}
 
 
@@ -575,7 +579,7 @@ public class AppInitializer implements IProgress {
 							applicationBgInitializing = false;
 						}
 					}
-				}, "Initializing app").run();
+				}, "Initializing app").start();
 		;
 
 	}

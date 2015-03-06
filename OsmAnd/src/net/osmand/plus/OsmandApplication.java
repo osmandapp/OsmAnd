@@ -139,15 +139,11 @@ public class OsmandApplication extends Application {
 //		}
 		checkPreferredLocale();
 		startApplication();
-		if (LOG.isInfoEnabled()) {
-			LOG.info("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
-		}
+		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
 		appInitializer.initPlugins();
 
-		if (LOG.isInfoEnabled()) {
-			LOG.info("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
-		}
+		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 	}
 	
 	public AppInitializer getAppInitializer() {
@@ -287,6 +283,7 @@ public class OsmandApplication extends Application {
 
 	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
 		// start application if it was previously closed
+		startApplication();
 		if(listener != null) {
 			appInitializer.addListener(listener);
 		}
@@ -437,7 +434,7 @@ public class OsmandApplication extends Application {
 		}
 	}
 
-	public synchronized void startApplication() {
+	public void startApplication() {
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 		appInitializer.startApplication();
 	}

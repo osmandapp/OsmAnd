@@ -10,7 +10,7 @@
 
 	<RelativeLayout android:orientation="vertical"
 		android:layout_width="wrap_content"
-		android:layout_gravity="end"
+		android:layout_gravity="start"
 		android:layout_height="match_parent">
 
 		<include android:layout_height="@dimen/dashMapHeight"
