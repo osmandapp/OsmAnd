@@ -1965,4 +1965,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="turn_off_all">Tout éteindre</string>
 	<string name="showed_on_map">Affiché sur la carte</string>
 	<string name="selected_tracks">Sélectionné</string>
+	<string name="track_points">Points de trace</string>
+	<string name="route_points">Points d\'itinéraire</string>
+	<string name="track_segments">Segments de trace</string>
 	</resources>
