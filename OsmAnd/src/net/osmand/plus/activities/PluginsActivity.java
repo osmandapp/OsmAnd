@@ -24,6 +24,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plugins);
 		getSupportActionBar().setTitle(R.string.plugins_screen);

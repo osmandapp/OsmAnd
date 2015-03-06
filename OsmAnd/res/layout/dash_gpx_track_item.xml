@@ -5,6 +5,7 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/dashListItemHeight"
+			  android:focusable="yes"
 			  android:orientation="vertical">
 
 	<View
@@ -17,7 +18,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
-
 
 		<CheckBox
 			android:id="@+id/check_local_index"

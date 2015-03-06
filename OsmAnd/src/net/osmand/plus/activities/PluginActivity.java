@@ -28,6 +28,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 
 		Intent intent = getIntent();

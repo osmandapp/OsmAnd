@@ -162,13 +162,11 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		CompoundButton enableDisableButton =
 				(CompoundButton)view.findViewById(R.id.plugin_enable_disable);
-		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
-
 		Button getButton = (Button)view.findViewById(R.id.get_plugin);
 		getButton.setOnClickListener(getListener);
-
+		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view);
-
+		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
 		container.addView(view);
 	}
 }

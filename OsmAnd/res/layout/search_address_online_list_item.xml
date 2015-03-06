@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
     android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:orientation="horizontal">
+    android:paddingRight="@dimen/list_content_padding">
 
     <TextView
         android:id="@+id/distance_label"

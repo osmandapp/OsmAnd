@@ -79,7 +79,10 @@ public class AppInitializer implements IProgress {
 	private List<AppInitializeListener> listeners = new ArrayList<AppInitializer.AppInitializeListener>();
 	
 	public enum InitEvents {
-		FAVORITES_INITIALIZED, NATIVE_INITIALIZED, TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS, RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS;
+		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
+		NATIVE_OPEN_GLINITIALIZED,
+		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
+		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS;
 	}
 	
 	public interface AppInitializeListener {
@@ -143,9 +146,9 @@ public class AppInitializer implements IProgress {
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
+				activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 				return true;
 			}
-			activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 		} else {
 			if (size > 0) {
 				activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
@@ -373,13 +376,18 @@ public class AppInitializer implements IProgress {
 	private void startApplicationBackground() {
 		try {
 			startBgTime = System.currentTimeMillis();
-			initNativeCore();
-			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-			app.resourceManager.reloadIndexesOnStart(this, warnings);
-			initPoiTypes();
-			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			app.resourceManager.reloadIndexesOnStart(this, warnings);
+			
+			app.resourceManager.initRenderers(this);
+			notifyEvent(InitEvents.INIT_RENDERERS);
+			// native depends on renderers
+			initNativeCore();
+			notifyEvent(InitEvents.NATIVE_INITIALIZED);
+			
+			initPoiTypes();
+			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);			
 			indexRegionsBoundaries(false);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);

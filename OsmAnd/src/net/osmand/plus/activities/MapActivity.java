@@ -149,11 +149,16 @@ public class MapActivity extends AccessibleActivity {
 			dashboardOnMap.setDashboardVisibility(true);
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
+				boolean openGlSetup = false;
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 					String tn = init.getCurrentInitTaskName();
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
+					}
+					if(event == InitEvents.NATIVE_INITIALIZED) {
+						setupOpenGLView();
+						openGlSetup = true;
 					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
 						mapView.refreshMap(true);
@@ -163,29 +168,22 @@ public class MapActivity extends AccessibleActivity {
 				@Override
 				public void onFinish(AppInitializer init) {
 					applicationInitialized();
+					if(!openGlSetup) {
+						setupOpenGLView();
+					}
 					mapView.refreshMap();
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
+		} else {
+			setupOpenGLView();
 		}
 		
 		parseLaunchIntentLocation();
 
-		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
-			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
-			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
-			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
-			ml.setVisibility(View.VISIBLE);
-			atlasMapRendererView.setAzimuth(0);
-			atlasMapRendererView.setElevationAngle(90);
-			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
-			mapView = ml.getMapView();
-			mapView.setMapRender(atlasMapRendererView);
-		} else {
-			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
-			surf.setVisibility(View.VISIBLE);
-			mapView = surf.getMapView();
-		}
+		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
+		surf.setVisibility(View.VISIBLE);
+		mapView = surf.getMapView();
 
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
@@ -248,6 +246,22 @@ public class MapActivity extends AccessibleActivity {
 		mapView.refreshMap(true);
 		findViewById(R.id.init_progress).setVisibility(View.GONE);
 		findViewById(R.id.ParentLayout).invalidate();
+	}
+	
+	private void setupOpenGLView() {
+		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
+			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
+			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
+			ml.setVisibility(View.VISIBLE);
+			atlasMapRendererView.setAzimuth(0);
+			atlasMapRendererView.setElevationAngle(90);
+			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
+			mapView = ml.getMapView();
+			mapView.setMapRender(atlasMapRendererView);
+			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
+			surf.setVisibility(View.GONE);
+		}
 	}
 
 	public void addLockView(FrameLayout lockView) {
@@ -730,6 +744,9 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void updateMapSettings() {
+		if(app.isApplicationInitializing()) {
+			return;
+		}
 		// update vector renderer
 		new AsyncTask<Void, Void, Void>() {
 

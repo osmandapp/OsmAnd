@@ -15,6 +15,8 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 /**
  * Created by Denis on 01.10.2014.
@@ -50,7 +52,7 @@ public class NativeCoreContext {
 				
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(
-						directory.getAbsolutePath() + "osmandcore.log"));
+						directory.getAbsolutePath() + "/osmandcore.log"));
 				
 				WindowManager mgr = (WindowManager)app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
@@ -58,6 +60,9 @@ public class NativeCoreContext {
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
+				if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
+				}
 
                 mapRendererContext = new MapRendererContext(app, dm.density);
 				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);

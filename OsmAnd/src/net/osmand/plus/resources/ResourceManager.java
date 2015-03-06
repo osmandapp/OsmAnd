@@ -410,8 +410,6 @@ public class ResourceManager {
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress));
 		progress.notifyEvent(InitEvents.ASSETS_COPIED);
-		initRenderers(progress);
-		progress.notifyEvent(InitEvents.INIT_RENDERERS);
 		reloadIndexes(progress, warnings);
 		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
 		return warnings;
@@ -549,7 +547,7 @@ public class ResourceManager {
 		Algorithms.closeStream(is);
 	}
 
-	private void initRenderers(IProgress progress) {
+	public void initRenderers(IProgress progress) {
 		File file = context.getAppPath(IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
@@ -604,10 +602,7 @@ public class ResourceManager {
 		if (indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
-				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-				if (nativeLib != null) {
-					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
-				}
+				
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
@@ -688,7 +683,18 @@ public class ResourceManager {
 				log.error("Index file could not be written", e);
 			}
 		}
+		initMapBoundariesCacheNative();
 		return warnings;
+	}
+
+	public void initMapBoundariesCacheNative() {
+		File indCache = context.getAppPath(INDEXES_CACHE);
+		if (indCache.exists()) {
+			NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+			if (nativeLib != null) {
+				nativeLib.initCacheMapFile(indCache.getAbsolutePath());
+			}
+		}
 	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////

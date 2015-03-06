@@ -75,6 +75,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public boolean init(final OsmandApplication app, Activity activity) {
+		if(true) {
+			throw new IllegalStateException("Don't enable !!!");
+		}
 		if (service == null) {
 			service = new OsMoService(app, this);
 			tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,

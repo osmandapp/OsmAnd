@@ -38,7 +38,7 @@
 				android:layout_gravity="center_vertical|start"
 				android:layout_marginBottom="9dp"
 				android:layout_marginTop="9dp"
-				android:background="@null"
+				android:background="?attr/expandable_list_item_background"
 				android:drawableLeft="?attr/ic_action_settings"
 				android:drawablePadding="10dp"
 				android:drawableStart="?attr/ic_action_settings"
