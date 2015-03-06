@@ -1914,9 +1914,9 @@
 	<string name="track_segments">Segments de traça</string>
 	<string name="track_points">Punts de traça</string>
 	<string name="plugin_touringview_name">Vista turística del mapa</string>
-	<string name="plugin_touringview_descr">Activant aquests canvis en l'estil de la vista del mapa  de OsmAnd a &lt;&lt;Vista turística del mapa&gt;&gt;,  aquesta és una vista especial  de gran detall per viatgers i conductors professionals. 
+	<string name="plugin_touringview_descr">Activant aquests canvis en l\'estil de la vista del mapa  de OsmAnd a &lt;&lt;Vista turística del mapa&gt;&gt;,  aquesta és una vista especial  de gran detall per viatgers i conductors professionals. 
 
-Aquesta vista proporciona,sigui el que sigui el nivell de zoom al mapa, la quantitat màxima  de detalls de viatge disponible a les dades del mapa (particularment carreteres, pistes, camins i senyals d'orientació). També es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats. 
+Aquesta vista proporciona,sigui el que sigui el nivell de zoom al mapa, la quantitat màxima  de detalls de viatge disponible a les dades del mapa (particularment carreteres, pistes, camins i senyals d\'orientació). També es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats. 
 
 No cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards. 
 
