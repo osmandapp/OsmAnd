@@ -1262,7 +1262,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
 	<string name="rendering_attr_hmRendered_name">Show more map detail</string>
 	<string name="local_index_routing_data">Routing data</string>
-	<string name="navigate_point_format">Format:</string>
+	<string name="navigate_point_format">Format</string>
 	<string name="poi_search_desc">POI (Point of interest) search</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>

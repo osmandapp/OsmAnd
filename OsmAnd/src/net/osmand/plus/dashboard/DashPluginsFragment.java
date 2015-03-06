@@ -32,20 +32,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
 
-	private final CompoundButton.OnCheckedChangeListener enableDisableListener =
-			new CompoundButton.OnCheckedChangeListener() {
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			View pluginView = AndroidUtils.findParentViewById(buttonView, R.id.dash_plugin_item);
-			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-			if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
-				return;
-			}
-			if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
-				updatePluginState(pluginView);
-			}
-		}
-	};
 
 
 	private final View.OnClickListener getListener = new View.OnClickListener() {
@@ -148,7 +134,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	}
 
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container,
-								   OsmandPlugin plugin) {
+								   final OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setTag(plugin);
 
@@ -166,7 +152,19 @@ public class DashPluginsFragment extends DashBaseFragment {
 		getButton.setOnClickListener(getListener);
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view);
-		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
+		final View pluginView = view;
+		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
+					return;
+				}
+				if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
+					
+					updatePluginState(pluginView);
+				}
+			}
+		});
 		container.addView(view);
 	}
 }
