@@ -1944,4 +1944,5 @@
 	<string name="selected_tracks">已選取</string>
 	<string name="track_segments">航跡區段</string>
 	<string name="track_points">航跡標點</string>
+	<string name="route_points">路線標點</string>
 	</resources>
