@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -92,7 +93,8 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity());
+			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity());
+			icon.setColorFilter(getResources().getColor(R.color.color_distance), Mode.MULTIPLY);
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +115,7 @@ public class NotesFragment extends ListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName(getActivity())), true,
+				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}

@@ -140,6 +140,9 @@ public class DashboardOnMap {
 			DashErrorFragment errorFragment = new DashErrorFragment();
 			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG);
 		}
+//		if (manager.findFragmentByTag(DashMapFragment.TAG) == null) {
+//			fragmentTransaction.add(R.id.content, new DashMapFragment(), DashMapFragment.TAG);
+//		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
 		}

@@ -539,4 +539,33 @@
 	<string name="poi_tennis">Tennis</string>
 	<string name="poi_volleyball">Volleybal</string>
 
+	<string name="poi_shop">Winkel</string>
+	<string name="poi_emergency">Nooddiensten</string>
+	<string name="poi_transportation">Vervoer</string>
+	<string name="poi_education">Onderwijs</string>
+	<string name="poi_administrative">Administratie</string>
+	<string name="poi_healthcare">Gezondheidzorg</string>
+	<string name="poi_office">Kantoor</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Toerisme</string>
+	<string name="poi_entertainment">Ontspanning</string>
+	<string name="poi_sustenance">Eten</string>
+	<string name="poi_finance">Financieel</string>
+	<string name="poi_natural">Natuurlijk</string>
+	<string name="poi_seamark">Watersport</string>
+	<string name="poi_military">Militair</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">door de gebruiker gedefinieerd</string>
+	
+	<string name="poi_farm">boerderijwinkel</string>
+	<string name="poi_wine">Wijnhandel</string>
+
+	<string name="poi_child_clothes_shop">Kinderkleding</string>
+	<string name="poi_general">Supermarkt</string>
+	<string name="poi_car">Auto dealer</string>
+	<string name="poi_car_parts">Auto onderdelen</string>
+	<string name="poi_public_transport_stop_position">Halte openbaar vervoer</string>
+	<string name="poi_halt">Station</string>
+	<string name="poi_railway_buffer_stop">Spoor stootblok</string>
+	<string name="poi_orienteering">Oriëntatieloop</string>
 	</resources>

@@ -15,7 +15,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -101,7 +103,8 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
-			getNoteView(recording, view, getActivity());
+			Drawable icon =getNoteView(recording, view, getActivity());
+			icon.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 			view.setBackgroundColor(Color.TRANSPARENT);
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -115,7 +118,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View v) {
 					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-							new PointDescription(PointDescription.POINT_TYPE_NOTE, 
+							new PointDescription(recording.getSearchHistoryType(),
 							recording.getName(getActivity())), true,
 							recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -125,7 +128,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		}
 	}
 
-	public static void getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
+	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
 								   final Context ctx) {
 		String name = recording.getName(ctx);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
@@ -133,14 +136,16 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(ctx));
 
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
+		Drawable iconDrawable;
 		if (recording.isAudio()) {
-			icon.setImageResource(R.drawable.ic_type_audio);
+			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
 		} else if (recording.isVideo()) {
-			icon.setImageResource(R.drawable.ic_type_video);
+			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
 		} else {
-			icon.setImageResource(R.drawable.ic_type_img);
+			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
 		}
-
+		icon.setImageDrawable(iconDrawable);
+		return iconDrawable;
 	}
 
 }

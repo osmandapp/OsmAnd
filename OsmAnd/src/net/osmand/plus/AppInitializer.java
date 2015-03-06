@@ -589,7 +589,7 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public void removeListener(AppInitializer listener) {
+	public void removeListener(AppInitializeListener listener) {
 		this.listeners.remove(listener);
 	}
 }

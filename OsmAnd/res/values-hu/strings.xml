@@ -834,11 +834,11 @@
   <string name="map_settings_descr">Térképmegjelenítés beállításai</string>
   <string name="osmand_rastermaps_plugin_description">Internetes és letöltött raszteres térképek alap, vagy rátét / alátét térképként használatához tartozó beállítások megjelenítése. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába.</string>
   <string name="osmand_background_plugin_description">Megjeleníti az útvonal követéséhez és a navigációhoz engedélyezett beállításokat alvó üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt.</string>
-  <string name="osmand_accessibility_description">Megjeleníti a speciális akadálymentesítési lehetőségek beállításait.</string>
+  <string name="osmand_accessibility_description">Megjeleníti a beállításokat a speciális akadálymentesítési lehetőségek aktiválásához.</string>
   <string name="extra_settings">Haladó beállítások</string>
-  <string name="osmand_monitoring_description">Az útvonal GPX fájlba való felvételét vagy webes alkalmazással való követést lehetővé tevő beállítások megjelenítése.</string>
+  <string name="osmand_monitoring_description">Megjeleníti a gombot és a beállításokat az útvonal rögzítésének megkönnyítéséhez helyi GPX fájlba vagy egy online webszolgáltatásba.</string>
   <string name="osmand_extra_settings_description">Kibővített térképbeállítások és pár eszközre jellemző beállítás megjelenítése.</string>
-  <string name="osmand_development_plugin_description">Fejlesztői és hibakeresési eszközök, mint szimulált navigáció vagy teljesítmény kijelzés, beállításainak megjelenítése.</string>
+  <string name="osmand_development_plugin_description">Megjeleníti a beállításokat a fejlesztéshez és szolgáltatások hibakereséséhez, mint például útvonal szimuláció vagy megjelenítési teljesítmény kijelzés.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
   <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A bővítmények további funkciókkal és beállításokkal bővítik az alkalmazást</string>
@@ -896,8 +896,8 @@
   <string name="osmand_parking_pm">du.</string>
   <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
-  <string name="osmand_parking_plugin_description">Külső bővítmény (különálló letöltés), amely lehetővé teszi annak megjegyzését, hogy hol parkoltad le az autódat.</string>
-  <string name="osmand_parking_plugin_name">Parkolási hely (külső bővítmény)</string>
+  <string name="osmand_parking_plugin_description">Ezt a bővítményt azért fejlesztették, hogy az OsmAnd használatával könnyedén megjegyezhesse, hogy hol parkolta le az autóját.</string>
+  <string name="osmand_parking_plugin_name">Parkolási hely</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">A kezdőpont közelében nem található út.</string>
@@ -1080,7 +1080,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak elrejtése</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
 	<string name="download_srtm_maps">Szintvonal térképek</string>
-    <string name="srtm_plugin_name">Szintvonalak (külső bővítmény)</string>
+    <string name="srtm_plugin_name">Szintvonalak</string>
     <string name="index_srtm_ele">Szintvonalak</string>
     <string name="index_srtm_parts">darab</string>
     <string name="download_select_map_types">Egyéb térképek</string>
@@ -1117,7 +1117,7 @@
     
     
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
-    <string name="audionotes_plugin_description">Megjelenít egy gombot az utazás közben történő hang- és videojegyzetek készítéséhez</string>
+    <string name="audionotes_plugin_description">Ez a bővítmény biztosítja a funkcionalitást és a gombokat az utazás közben történő hang-, fénykép- és videojegyzetek készítéséhez</string>
     <string name="av_def_action_video">Videofelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
     <string name="av_video_format_descr">Válassz videó kimeneti formátumot</string>
@@ -1864,4 +1864,13 @@
 	<string name="export">Exportálás</string>
 	<string name="plugin_touringview_name">Túratérkép nézet</string>
 
+	<string name="track_segments">Nyomvonal szakaszok</string>
+	<string name="track_points">Nyomvonal pontok</string>
+	<string name="selected_tracks">Kijelölve</string>
+	<string name="turn_off_all">Összes kikapcsolása</string>
+	<string name="showed_on_map">Megjelenítve a térképen</string>
+	<string name="rename_failed">Az átnevezés nem sikerült.</string>
+	<string name="currently_recording_track">Jelenleg rögzített nyomvonal</string>
+	<string name="back_to_map">Vissza a térképhez</string>
+	<string name="location_on_map">Helyzet:\n Szélesség %1$s\n Hosszúság %2$s</string>
 	</resources>

@@ -292,7 +292,7 @@ public class OsmandApplication extends Application {
 		}
 	}
 	
-	public void unsubscribeInitListener(AppInitializer listener) {
+	public void unsubscribeInitListener(AppInitializeListener listener) {
 		if(listener != null) {
 			appInitializer.removeListener(listener);
 		}		

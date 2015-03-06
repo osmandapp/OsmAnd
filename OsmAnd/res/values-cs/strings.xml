@@ -907,7 +907,7 @@
   <string name="osmand_parking_am">dopoledne</string>
   <string name="osmand_parking_position_name">Místo parkování</string>
   <string name="osmand_parking_plugin_description">Tento modul umožňuje zapamatovat si místo, kde jste zaparkovali auto.</string>
-  <string name="osmand_parking_plugin_name">Místo parkování</string>
+  <string name="osmand_parking_plugin_name">Parkovací místo</string>
   <string name="context_menu_item_add_parking_point">Označit jako místo parkování</string>
   <string name="context_menu_item_delete_parking_point">Smazat místo parkování</string>
   <string name="starting_point_too_far">Počáteční bod je příliš daleko nejbližší silnici.</string>
@@ -1097,7 +1097,7 @@
 
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Nastavení → Správce mapových souborů → Vyberte požadovaný typ map).</string>
-    <string name="srtm_plugin_name">Modul vrstevnice</string>
+    <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
     <string name="monitoring_control_stop">Zastavit</string>
@@ -1230,7 +1230,7 @@
     <string name="plugin_distance_point">bod</string>
     <string name="gpx_file_name">Jméno GPX souboru</string>
     <string name="gpx_saved_sucessfully">Soubor GPX úspěšně uložen do {0}</string>
-    <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánování</string>
+    <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánovač</string>
     <string name="use_distance_measurement_help">* Klikněte pro označení bodu.\n * Stiskněte dlouze na mapě pro smazání předchozího bodu.\n * Stiskněte dlouze bod pro zobrazení a přidání popisky.\n * Klikněte na modul měření pro další možnosti.</string>
     <string name="default_buttons_do_not_show_again">Již nezobrazovat</string>
     <string name="distance_measurement_start_editing">Začít editaci</string>
@@ -1472,7 +1472,7 @@ s často kladenými otázkami.</string>
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    <string name="osmo_plugin_name">OsMo (Pokročilé online monitorování)</string>
+    <string name="osmo_plugin_name">OsMo monitorování</string>
    	<string name="osmo_settings">OpenStreetMap sledování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
@@ -1703,7 +1703,7 @@ s často kladenými otázkami.</string>
     <string name="save_track_interval_globally">Interval ukládání trasy</string>
 	<string name="rendering_attr_publicTransportMode_name">Autobusy, trolejbusy a kyvadlová doprava</string>
 	<string name="record_plugin_description">Uložte vaše trasy stlačením jediného tlačítka na mapě. Zobrazte nastavení pro zaznamenávání cest do lokálního GPX souboru nebo online pomocí webových služeb.</string>
-    <string name="record_plugin_name">Zaznamenávat vaše cesty</string>
+    <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
     <string name="duration">Trvání</string>
     <string name="distance">Vzdálenost</string>
@@ -1856,10 +1856,19 @@ s často kladenými otázkami.</string>
 	<string name="photo">Fotografie</string>
 	<string name="watch">Zobrazit</string>
 	<string name="selected_tracks">Vybrané</string>
-	<string name="showed_on_map">Zobrazeno na mapě</string>
+	<string name="showed_on_map">Zobrazené na mapě</string>
 	<string name="rename_failed">Přejmenování selhalo.</string>
 	<string name="currently_recording_track">Právě zaznamenávaná trasa</string>
 	<string name="back_to_map">Zpět na mapu</string>
 	<string name="plugin_touringview_name">Cestovní mapový pohled (Touring view)</string>
 	<string name="rendering_attr_pisteGrooming_name">Úprava sjezdovky</string>
-    </resources>
+    <string name="track_segments">Úseky trasy</string>
+	<string name="track_points">Body trasy</string>
+	<string name="turn_off_all">Vypnout všechny</string>
+	<string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
+	<string name="export">Exportovat</string>
+	<string name="enable_plugin2">Zapnout</string>
+	<string name="disable_plugin2">Vypnout</string>
+	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
+	<string name="get_plugin">Získat</string>
+</resources>

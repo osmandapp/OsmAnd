@@ -2093,4 +2093,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="rename_failed">Premenovanie zlyhalo.</string>
 	<string name="back_to_map">Späť na mapu</string>
 <string name="selected_tracks">Vybrané</string>
+	<string name="track_segments">Úseky stopy</string>
+	<string name="track_points">Body stopy</string>
+	<string name="turn_off_all">Vypnúť všetky</string>
+	<string name="showed_on_map">Zobrazené na mape</string>
+	<string name="currently_recording_track">Nahráva sa stopa</string>
 	</resources>

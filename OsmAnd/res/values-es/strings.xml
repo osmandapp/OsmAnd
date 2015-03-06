@@ -769,9 +769,11 @@
   <string name="online_map_settings_descr">Configurar fuentes de mapas en línea o teselas guardadas</string>
   <string name="map_settings">Configuraciones del mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
-  <string name="osmand_rastermaps_plugin_description">Muestra las opciones para usar diversos mapas con conexión o de teselas guardadas, tanto como mapa base como mapas superpuestos / subyacentes. Estos mapas también se pueden preparar sin conexión y copiarlos en la carpeta de datos de OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"Con este plugin puedes acceder a muchos tipos de mapas en línea (llamados de teselas o raster), desde teselas de Openstreetmap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial  como mapas climáticos, mapas atmosféricos, mapas geológicos, capas de sombreado, etc..
+\n\nCualquiera de estos mapas puede ser utilizado bien como el mapa principal (base) que se mostrará en la pantalla del mapa de OsmAnd, o como una capa superior o inferior a otro mapa base (como mapas en línea regulares de OsmAnd). Para hacer los mapas subyacentes más visibles, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' como se desee.
+\n\nLos mapas de teselas pueden obtenerse directamente a través de fuentes en línea, o pueden ser preparados para su uso fuera de línea (y copiarse manualmente en la carpeta de datos de OsmAnd) como una base de datos sqlite que puede producirse por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra las configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Muestra las configuraciones para características especiales de accesibilidad.</string>
+  <string name="osmand_accessibility_description">Muestra las opciones para activar las características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Muestra el botón y las opciones que facilitan el registro de sus excursiones en un fichero GPX o usando un servicio web.</string>
   <string name="osmand_extra_settings_description">Muestra opciones para configuraciones avanzadas de mapa (como aumentar detalles del mapa) y algunas especificas de dispositivos.</string>
@@ -784,7 +786,7 @@
 \n*Funcionalidad de extras*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas / deshabilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n*Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (los datos antiguos no están soportados)\n*Navegación sin conexión*
 \n\t - La navegación sin conexión es más robusta\n*Usabilidad e interfaz de usuario*
 \n\t - Mejoras en muchas áreas "</string>
-  <string name="osm_editing_plugin_description">Muestra las opciones necesarias para la colaboración con OSM como crear / modificar objetos PDI de OSM, abrir / comentar fallos de OSM, y contribuir con trazas GPX (requiere credenciales OSM).</string>
+  <string name="osm_editing_plugin_description">Mediante este extra, OsmAnd puede utilizarse para hacer contribuciones OSM como crear o modificar objetos PDI de OSM, abrir o comentar fallos de OSM, y contribuir con archivos de trazas GPX. El uso de esta funcionalidad requiere credenciales personales de OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
   
   <string name="play_commands_of_currently_selected_voice">Reproduce algunas indicaciones de la voz seleccionada actualmente</string>
@@ -911,7 +913,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto de aparcamiento</string>
-  <string name="osmand_parking_plugin_description">Extra adicional (descarga aparte) que permite guardar la ubicación de tu automóvil aparcado.</string>
+  <string name="osmand_parking_plugin_description">Este extra se desarrolló para usar OsmAnd para memorizar fácilmente la ubicación de tu automóvil aparcado.</string>
   <string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
   <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
   <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
@@ -1073,16 +1075,16 @@
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Extra adicional (descarga aparte) que permite descargar curvas de nivel y relieve sombreado (\'Opciones\' → \'Gestionar mapas\' → \'Descargar\' → Seleccionar el tipo de mapa deseado). Estos se pueden mostrar en combinación con los mapas sin conexión OsmAnd.</string>
-    <string name="srtm_plugin_name">Contornos de nivel</string>
+    <string name="srtm_plugin_description">"Este extra proporciona una superposición de curvas de nivel y una capa de sombreado (relieve) que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
+    <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     
 	
-<string name="audionotes_plugin_description">Muestra los botones para tomar notas de audio/video durante un viaje</string>
+<string name="audionotes_plugin_description">Este extra proporciona la funcionalidad y los botones para tomar notas de audio/fotografía/video durante un viaje</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra OsmAnd para curvas de nivel sin conexión</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Este extra proporciona una superposición de curvas de nivel que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
@@ -1117,7 +1119,7 @@
     <string name="recording_error">"Error durante la grabación" </string>
     <string name="recording_camera_not_available">La cámara no está disponible</string>
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
-    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de turismo\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
+    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista turística\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del extra de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra curvas de nivel</string>
@@ -1169,7 +1171,7 @@
 \n- Muestra PDIs (puntos de interés) a su alrededor
 \n- Puede mostrar mapas especializados con conexión
 \n- Puede mostrar imágenes de satélite (de Bing)
-\n- Puede mostrar superposiciones diferentes como trazas de navegación GPX y mapas adicionales con transparencia personalizable
+\n- Puede mostrar superposiciones diferentes como trazas de navegación/turismo GPX y mapas adicionales con transparencia personalizable
 \n- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
 \n\nUso de datos de OpenStreetMap y Wikipedia:
 \n\n- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
@@ -1269,7 +1271,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Activa un control que permite crear caminos pulsando en el mapa (o usar / modificar archivos GPX existentes) para medir la distancia entre los puntos. Los resultados pueden guardarse como GPX, y utilizarse para planificar rutas GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Este extra proporciona un control en la pantalla del mapa que permite crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como GPX, y utilizarse después como indicaciones..</string>
     <string name="osmand_distance_planning_plugin_name">Cálculador de distancia y herramienta de planificación</string>
     <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para suprimir el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
     <string name="default_buttons_do_not_show_again">No mostrar de nuevo</string>
@@ -1346,7 +1348,7 @@
     <string name="tip_map_styles">Estilos de Mapa</string>
 	<string name="tip_map_styles_t">"OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
 \n\nAparte del estilo de mapa \'predeterminado\', es posible en el \'Menú\' → \'Configurar mapa\' →  \'Estilo de mapa\' seleccionar por ejemplo
-\n\t* El estilo \'Vista de turismo\', contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para senderismo Alpino (escala SAC), rutas de ciclismo, soporte para símbolos de senderismo, etc.
+\n\t* El estilo \'Vista Turística\', contiene información detallada y adecuada para viajes y turismo, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para senderismo Alpino (escala SAC), rutas de ciclismo, soporte para símbolos de senderismo, etc.
 \n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiente\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (cobertura nevada), y muestra pistas y remontes (en relación con la descarga del mapa \'Mundo de esquí\') "</string>
     <string name="tip_recent_changes_1_6_t">"Cambios en 1.6:
 \n\t* Soporte de dispositivos Full HD
@@ -1380,7 +1382,7 @@
 \n- Muestra PDIs (puntos de interés) a su alrededor
 \n- Puede mostrar mapas especializados con conexión
 \n- Puede mostrar imágenes de satélite (de Bing)
-\n- Puede mostrar superposiciones diferentes como trazas de navegación GPX y mapas adicionales con transparencia personalizable
+\n- Puede mostrar superposiciones diferentes como trazas de navegación/turismo GPX y mapas adicionales con transparencia personalizable
 \n- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
 \n\nUso de datos de OpenStreetMap y Wikipedia:
 \n\n- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
@@ -1559,7 +1561,8 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
-    <string name="osmo_plugin_description">"Muestra las opciones para usar OsMo - Monitorización avanzada en directo, mira http://osmo.mobi. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crear grupos anónimos, compartir las localizaciones de cada uno y comunicarse. Tiene varias opciones para seguimiento por sesión o permanente. Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
+    <string name="osmo_plugin_description">"Muestra las opciones para usar OsMo - Monitorización avanzada en directo, mira http://osmo.mobi. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comunica. Tiene varias opciones para seguimiento por sesión o permanente.
+\n\nLos grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">Monitorización OsMo</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1788,7 +1791,7 @@
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabación de viaje</string>
-    <string name="record_plugin_description">Activa la funcionalidad para guardar tus trazas tocando un botón en la pantalla del mapa y muestra las opciones para grabar tus viajes a archivos GPX locales o usando un servicio web en línea.</string>
+    <string name="record_plugin_description">"Este extra activa la funcionalidad para registrar y guardar tus trazas o bien manualmente tocando el control de registro GPX en la pantalla del mapa o bien automáticamente registrando todas tus rutas seguidas en un archivo GPX.\n\nLas trazas registradas puedes compartirlas con tus amigos o usarlas como contibuciones a OSM. Los atletas pueden utilizarlas para monitorizar sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente con OsmAnd como tiempos, velocidad media, etc., y por supuesto pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
@@ -1942,17 +1945,16 @@
 		\n\nUn mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.
 		\n\nEsta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.
 	</string>
-	<string name="plugin_touringview_descr">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
-		\n\nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
-		\n\nNo es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.
-		\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'.
-	</string>
+	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo de mapa a la \'Vista Turística\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
+\n\nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
+\n\nNo es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.
+\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'. "</string>
 	<string name="days_behind">días atrás</string>
 	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
-	<string name="plugin_touringview_name">Vista de mapa Touring</string>
+	<string name="plugin_touringview_name">Vista del mapa turístico</string>
 
-	<string name="turn_off_all">Apagar_todo</string>
+	<string name="turn_off_all">Apagar todo</string>
 	<string name="showed_on_map">Mostrado en el mapa</string>
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>

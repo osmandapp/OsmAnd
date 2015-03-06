@@ -8,19 +8,16 @@
 	android:background="#70000000"
 	android:visibility="gone">
 
-	<RelativeLayout android:orientation="vertical"
-		android:layout_width="wrap_content"
-		android:layout_gravity="end"
-		android:layout_height="match_parent">
+	<LinearLayout android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_gravity="end"
+					android:layout_height="match_parent">
 
-		<include android:layout_height="@dimen/dashMapHeight"
-				 android:layout_width="@dimen/dashboard_map_width"
-				 android:id="@+id/init_progress"
-				 android:visibility="gone"
+		<include android:id="@+id/init_progress"
 				 layout="@layout/application_loading"/>
 
 		<net.osmand.plus.dashboard.NotifyingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-													   android:layout_width="@dimen/dashboard_map_width"
+													   android:layout_width="360dp"
 													   android:layout_height="match_parent"
 													   android:id="@+id/main_scroll"
 													   android:fadeScrollbars="true">
@@ -35,6 +32,6 @@
 
 		</net.osmand.plus.dashboard.NotifyingScrollView>
 
-	</RelativeLayout>
+	</LinearLayout>
 
 </FrameLayout>
