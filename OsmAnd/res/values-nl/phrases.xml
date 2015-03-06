@@ -568,4 +568,8 @@
 	<string name="poi_halt">Station</string>
 	<string name="poi_railway_buffer_stop">Spoor stootblok</string>
 	<string name="poi_orienteering">Oriëntatieloop</string>
+	<string name="poi_paragliding">Parapenten</string>
+	<string name="poi_pelota">Pelota vasca</string>
+	<string name="poi_racquet">Squash</string>
+	<string name="poi_military_naval_base">Militaire marinebasis</string>
 	</resources>
