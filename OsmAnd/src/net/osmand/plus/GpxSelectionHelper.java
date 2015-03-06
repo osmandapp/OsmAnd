@@ -33,9 +33,9 @@ public class GpxSelectionHelper {
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<SelectedGpxFile>();
 	private SavingTrackHelper savingTrackHelper;
 
-	public GpxSelectionHelper(OsmandApplication osmandApplication) {
+	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
 		this.app = osmandApplication;
-		savingTrackHelper = this.app.getSavingTrackHelper();
+		savingTrackHelper = trackHelper;
 	}
 	
 	public void clearAllGpxFileToShow() {

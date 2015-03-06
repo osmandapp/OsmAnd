@@ -17,10 +17,13 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -43,15 +46,22 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	private ProgressDialog progressDlg;
 	private LatLon location;
-	private ProgressDialog startProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
 		getSupportActionBar().setTitle(R.string.search_osm_offline);
-		startProgressDialog = new ProgressDialog(this);
-		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
+		
+		getMyApplication().checkApplicationIsBeingInitialized(this, new AppInitializeListener() {
+			@Override
+			public void onProgress(AppInitializer init, InitEvents event) {
+			}
+			
+			@Override
+			public void onFinish(AppInitializer init) {
+			}
+		});
 		location = getMyApplication().getSettings().getLastKnownMapLocation();
 
 		final Intent intent = getIntent();
@@ -133,14 +143,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 			}
 		}
 
-	}
-
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		if (id == OsmandApplication.PROGRESS_DIALOG) {
-			return startProgressDialog;
-		}
-		return super.onCreateDialog(id);
 	}
 
 	private class MapObjectAdapter extends ArrayAdapter<MapObject> {

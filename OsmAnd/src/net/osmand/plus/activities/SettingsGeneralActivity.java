@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -600,7 +601,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, 
+						new ArrayList<String>());
 			}
 			
 			protected void onPostExecute(List<String> result) {

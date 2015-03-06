@@ -60,12 +60,6 @@ import android.widget.TextView;
  */
 public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
 
-	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
-	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
-	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
-	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
-
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
@@ -176,10 +170,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			actionBarBackground.setCallback(mDrawableCallback);
 		}
 
-		AppInitializer initializer = new AppInitializer();
-		boolean firstTime = initializer.initApp(this, getMyApplication());
-		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
-			initializer.checkPreviousRunsForExceptions(this, firstTime);
+		if (getMyApplication().getSettings().FOLLOW_THE_ROUTE.get() && !getMyApplication().getRoutingHelper().isRouteCalculated()) {
+			startMapActivity();
 		}
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {

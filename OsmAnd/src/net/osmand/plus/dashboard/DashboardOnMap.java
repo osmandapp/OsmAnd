@@ -133,9 +133,13 @@ public class DashboardOnMap {
 	}
 	
 
-	private void addDashboardFragments(){
-		FragmentManager manager =ma. getSupportFragmentManager();
+	private void addDashboardFragments() {
+		FragmentManager manager = ma.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null && ma.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(ma)) {
+			DashErrorFragment errorFragment = new DashErrorFragment();
+			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG);
+		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
 		}
@@ -151,23 +155,13 @@ public class DashboardOnMap {
 		if (manager.findFragmentByTag(DashTrackFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashTrackFragment(), DashTrackFragment.TAG);
 		}
-		//fragmentTransaction.add(R.id.content, new DashUpdatesFragment(), DashUpdatesFragment.TAG);
+		// fragmentTransaction.add(R.id.content, new DashUpdatesFragment(), DashUpdatesFragment.TAG);
 		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashPluginsFragment(), DashPluginsFragment.TAG);
 		}
-
 		fragmentTransaction.commit();
-
 	}
 
-	public void addErrorFragment() {
-		FragmentManager manager = ma.getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null) {
-			DashErrorFragment errorFragment = new DashErrorFragment();
-			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG).commit();
-		}
-	}
 
 
 

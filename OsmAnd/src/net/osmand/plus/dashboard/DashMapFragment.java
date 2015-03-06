@@ -1,26 +1,32 @@
 package net.osmand.plus.dashboard;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.util.DisplayMetrics;
-import android.view.*;
-import android.widget.ImageView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.ProgressBar;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -119,17 +125,22 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		view.findViewById(R.id.map_image).setVisibility(View.GONE);
-		if (getMyApplication().isApplicationInitializing()) {
-			getMyApplication().checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
-					(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
-						@Override
-						public void run() {
-							applicationInitialized(view);
-						}
-					});
-		} else {
-			applicationInitialized(view);
-		}
+		
+		getMyApplication().checkApplicationIsBeingInitialized(getActivity(), new AppInitializeListener() {
+			
+			@Override
+			public void onProgress(AppInitializer init, InitEvents event) {
+				String tn = init.getCurrentInitTaskName();
+				if(tn != null) {
+					((TextView) view.findViewById(R.id.ProgressMessage)).setText(tn);
+				}
+			}
+			
+			@Override
+			public void onFinish(AppInitializer init) {
+				applicationInitialized(view);				
+			}
+		});
 	}
 
 	private void applicationInitialized(View view) {

@@ -322,7 +322,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 						if (result) {
 							settings.setExternalStorageDirectory(newLoc);
 							getMyApplication().getResourceManager().resetStoreDirectory();
-							getMyApplication().getResourceManager().reloadIndexes(progress);
+							getMyApplication().getResourceManager().reloadIndexes(progress, new ArrayList<String>());
 						}
 						return result;
 					}

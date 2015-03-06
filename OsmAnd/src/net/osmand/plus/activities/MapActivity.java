@@ -143,14 +143,7 @@ public class MapActivity extends AccessibleActivity {
 		
 		dashboardOnMap = new DashboardOnMap(this);
 		dashboardOnMap.createDashboardView();
-		if (getMyApplication().isApplicationInitializing()) {
-			AppInitializer initializer = new AppInitializer();
-			boolean firstTime = initializer.initApp(this, getMyApplication());
-			if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
-				if (initializer.checkPreviousRunsForExceptions(this, firstTime)) {
-					dashboardOnMap.addErrorFragment();
-				}
-			}
+		if (app.isApplicationInitializing()) {
 			dashboardOnMap.setDashboardVisibility(true);
 		}
 		

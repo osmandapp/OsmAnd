@@ -751,7 +751,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+						new ArrayList<String>()
+						);
 			}
 			
 		};
