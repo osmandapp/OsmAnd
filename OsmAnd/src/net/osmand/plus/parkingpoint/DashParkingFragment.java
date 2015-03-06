@@ -4,6 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.util.TimeUtils;
+import android.text.format.DateFormat;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.MapUtils;
+
+import java.util.Calendar;
 
 /**
  * Created by Denis on
@@ -72,13 +78,24 @@ public class DashParkingFragment extends DashLocationFragment {
 		String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication());
 		((TextView) mainView.findViewById(R.id.distance)).setText(distance);
 		//TODO add parking time
-		String parking_name = plugin.getParkingType() ?
-				getString(R.string.parking_place) : getString(R.string.parking_place);
+		boolean limited =  plugin.getParkingType();
+		String parking_name = limited ?
+				getString(R.string.parking_place_limited) : getString(R.string.parking_place);
+		if (limited) {
+			long endtime = plugin.getParkingTime();
+			long currTime = Calendar.getInstance().getTimeInMillis();
+			String time = getFormattedTime(endtime - currTime);
+			((TextView)mainView.findViewById(R.id.time_left)).setText(time);
+			mainView.findViewById(R.id.left_lbl).setVisibility(View.VISIBLE);
+		} else {
+			((TextView)mainView.findViewById(R.id.time_left)).setText("");
+			mainView.findViewById(R.id.left_lbl).setVisibility(View.GONE);
+		}
 		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null){
-			direction.setVisibility(View.VISIBLE);
-			updateArrow(getActivity(), loc, position, direction, 10, R.drawable.ic_destination_arrow, heading);
+			updateArrow(getActivity(), loc, position, direction,
+					(int)getResources().getDimension(R.dimen.dashboard_parking_icon_size), R.drawable.ic_parking_postion_arrow, heading);
 		}
 	}
 
@@ -119,5 +136,24 @@ public class DashParkingFragment extends DashLocationFragment {
 		}
 
 		updateParkingPosition();
+	}
+
+	String getFormattedTime(long timeInMillis) {
+		if (timeInMillis < 0){
+			timeInMillis *= -1;
+		}
+		StringBuilder timeStringBuilder = new StringBuilder();
+		int hours = (int)timeInMillis / (1000*60*60);
+		int miutes = (int)timeInMillis / (1000*60*60*60);
+		if (hours > 0){
+			timeStringBuilder.append(hours);
+			timeStringBuilder.append(" ");
+			timeStringBuilder.append(getResources().getString(R.string.osmand_parking_hour));
+		}
+		timeStringBuilder.append(" ");
+		timeStringBuilder.append(miutes);
+		timeStringBuilder.append(" ");
+		timeStringBuilder.append(getResources().getString(R.string.osmand_parking_minute));
+		return timeStringBuilder.toString();
 	}
 }
