@@ -38,6 +38,7 @@
 			style="@style/ListText.Small"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
 			tools:text="@string/app_version"/>
 
 
@@ -51,6 +52,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="7dp"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/download_descr_text_size"
+				
 				tools:text="@string/app_version"/>
 
 			<TextView
@@ -58,7 +62,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical"
-				android:maxLines="25"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/download_descr_text_size"
 				tools:text="@string/app_mode_aircraft"/>
 		</LinearLayout>
 

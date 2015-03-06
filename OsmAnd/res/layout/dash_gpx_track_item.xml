@@ -5,7 +5,7 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/dashListItemHeight"
-			  android:focusable="yes"
+			  android:focusable="true"
 			  android:orientation="vertical">
 
 	<View

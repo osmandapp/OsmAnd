@@ -443,11 +443,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		LocalIndexInfo child = listAdapter.getChild(groupPosition, childPosition);
 		if (!selectionMode){
+			openPopUpMenu(v, child);
 			return true;
 		}
-		LocalIndexInfo item = listAdapter.getChild(groupPosition, childPosition);
-		selectedItems.add(item);
+		selectedItems.add(child);
 		listAdapter.notifyDataSetInvalidated();
 		return true;
 	}
@@ -1000,46 +1001,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return v;
 		}
 
-		private void openPopUpMenu(View v, final LocalIndexInfo info) {
-			boolean light = getMyApplication().getSettings().isLightContent();
-			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-			final boolean restore = info.isBackupedData();
-			MenuItem item;
-			if (info.getType() == LocalIndexType.MAP_DATA) {
-				item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
-						.setIcon(backup);
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
-						return true;
-					}
-				});
-			}
-
-			item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
-					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(R.string.local_index_mi_rename, info);
-					return true;
-				}
-			});
-
-			item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
-					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(R.string.local_index_mi_delete, info);
-					return true;
-				}
-			});
-			optionsMenu.show();
-		}
-
+		
 		private String getNameToDisplay(LocalIndexInfo child) {
 			String mapDescr = getMapDescription(child.getFileName());
 			String mapName = FileNameTranslationHelper.getFileName(ctx,
@@ -1148,6 +1110,47 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return "";
 		}
 	}
+	
+	private void openPopUpMenu(View v, final LocalIndexInfo info) {
+		boolean light = getMyApplication().getSettings().isLightContent();
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+		final boolean restore = info.isBackupedData();
+		MenuItem item;
+		if (info.getType() == LocalIndexType.MAP_DATA) {
+			item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
+					.setIcon(backup);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
+					return true;
+				}
+			});
+		}
+
+		item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
+				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				performBasicOperation(R.string.local_index_mi_rename, info);
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
+				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				performBasicOperation(R.string.local_index_mi_delete, info);
+				return true;
+			}
+		});
+		optionsMenu.show();
+	}
+
 
 	private DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
 }

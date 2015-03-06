@@ -173,6 +173,16 @@ public class PoiFiltersHelper {
 		return types;
 	}
 	
+	public void reloadAllPoiFilters() {
+		cacheOsmDefinedFilters = null;
+		cacheTopStandardFilters = null;
+		cacheUserDefinedFilters = null;
+		getUserDefinedPoiFilters();
+		getTopStandardFilters();
+		getOsmDefinedPoiFilters();
+		
+	}
+	
 	
 	public List<PoiLegacyFilter> getUserDefinedPoiFilters(){
 		if(cacheUserDefinedFilters == null){
