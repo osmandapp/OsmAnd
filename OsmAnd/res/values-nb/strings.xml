@@ -822,7 +822,7 @@
     <string name="lang_he">Hebraisk</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
     <string name="visible_element">Vis på kart</string>
-    <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for online-kart for dette).</string>
+    <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for nettbaserte kart for dette).</string>
 	<string name="rendering_category_others">Andre kartattributter</string>
     <string name="av_control_start">Start</string>
     <string name="save_route_as_gpx">Lagre rute som GPX-fil</string>
@@ -1222,4 +1222,34 @@
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Endre navn på opptak</string>
     <string name="anonymous_user">Anonym bruker</string>
-    </resources>
+    <string name="user_name_descr">Trengs for bidrag til openstreetmap.org</string>
+	<string name="user_password_descr">Trengs for bidrag til openstreetmap.org</string>
+	<string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
+	<string name="download_files_question_space">Ledig plass nå {2} MB! Laste ned {0} fil(er) ({1} MB)?</string>
+	<string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
+	<string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
+	<string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
+	<string name="pref_vector_rendering">Spesifikke alternativer for vektoropptegning</string>
+	<string name="local_index_mi_upload_gpx">Send til OSM</string>
+	<string name="default_none">Ingen</string>
+	<string name="tile_source_already_installed">Kart er allerede installert, innstillinger blir oppdatert</string>
+	<string name="select_tile_source_to_install">Velg (flis)kart å installere eller oppdatere</string>
+	<string name="internet_not_available">En internettforbindelse kreves for denne operasjonen, men er ikke tilgjengelig</string>
+	<string name="reading_cached_tiles">Leser hurtigbufrede fliser…</string>
+	<string name="maps_could_not_be_downloaded">Dette kartet kan ikke lastes ned</string>
+	<string name="use_high_res_maps">Høyoppløselig visning</string>
+	<string name="layer_gpx_layer">GPX-spor…</string>
+	<string name="sd_unmounted">SD-kort er ikke tilgjengelig.\nDu vil ikke kunne se kart eller finne ting.</string>
+	<string name="sd_mounted_ro">SD-kort er skrivebeskyttet.\nDu kan bare se det forhåndslastede kartet og kan ikke laste ned fra internett.</string>
+	<string name="transport_finish_search">Avslutt søk</string>
+	<string name="transport_stop_to_go_out">Velg stoppested for avstigning</string>
+	<string name="failed_op">feilet</string>
+	<string name="osm_settings_descr">Spesifiser innstillinger for Openstreetmap.org (OSM) som er nødvendige for bidrag til OSM</string>
+	<string name="enable_plugin">Deaktivert</string>
+	<string name="disable_plugin">Aktivert</string>
+	<string name="enable_plugin2">Aktiver</string>
+	<string name="disable_plugin2">Deaktiver</string>
+	<string name="plugin_description_title">Beskrivelse</string>
+	<string name="plugin_settings_button_caption">Innstillinger</string>
+	<string name="plugin_install_needs_network">Du trenger en internettforbindelse for å installere dette programtillegget.</string>
+	</resources>
