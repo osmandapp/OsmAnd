@@ -1840,4 +1840,5 @@
 	<string name="selected_tracks">Markerade</string>
 	<string name="track_segments">Spårsegment</string>
 	<string name="track_points">Spårpunkter</string>
+	<string name="route_points">Ruttpunkter</string>
 	</resources>
