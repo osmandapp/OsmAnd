@@ -1955,4 +1955,5 @@
 	<string name="selected_tracks">Valgt</string>
 	<string name="track_segments">Sporsegmenter</string>
 	<string name="track_points">Sporpunkter</string>
+	<string name="route_points">Rutepunkter</string>
 	</resources>
