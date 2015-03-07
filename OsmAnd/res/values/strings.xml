@@ -202,7 +202,6 @@
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Downloading not possible, please check your Internet connection.</string>
-    <string name="dismiss">Dismiss</string>
     <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
     <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may not work on some devices)</string>
