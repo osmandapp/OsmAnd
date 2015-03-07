@@ -220,7 +220,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} else if (isVideo()) {
 				return PointDescription.POINT_TYPE_VIDEO_NOTE;
 			} else {
-				return PointDescription.POINT_TYPE_PHOTO_NOTE;
+				return PointDescription.POINT_TYPE_AUDIO_NOTE;
 			}
 		}
 
@@ -1256,8 +1256,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		// TODO
-		return super.getLogoResourceId();
+		return R.drawable.ic_type_video;
 	}
 
 	@Override

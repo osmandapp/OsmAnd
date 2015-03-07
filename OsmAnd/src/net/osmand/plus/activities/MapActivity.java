@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -56,6 +57,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
@@ -74,6 +76,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -117,6 +120,8 @@ public class MapActivity extends AccessibleActivity {
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap;
+	private List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
+
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -153,6 +158,7 @@ public class MapActivity extends AccessibleActivity {
 				}
 			}
 			dashboardOnMap.setDashboardVisibility(true);
+			refreshFragments();
 		}
 		
 		startProgressDialog = new ProgressDialog(this);
@@ -262,6 +268,11 @@ public class MapActivity extends AccessibleActivity {
 		this.lockView = lockView;
 	}
 
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<Fragment>(fragment));
+	}
+
 	private void createProgressBarForRouting() {
 		FrameLayout parent = (FrameLayout) mapView.getParent();
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
@@ -335,6 +346,15 @@ public class MapActivity extends AccessibleActivity {
 			dashboardOnMap.setDashboardVisibility(false);
 		} else if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
+		}
+	}
+
+	public void refreshFragments(){
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof DashBaseFragment && !f.isDetached()) {
+				((DashBaseFragment) f).refreshCard();
+			}
 		}
 	}
 

@@ -82,6 +82,11 @@ public class DashRecentsFragment extends DashLocationFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		refreshCard();
+	}
+
+	@Override
+	public void refreshCard() {
 		//This is used as origin for both Fav-list and direction arrows
 		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();

@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis
+ * on 24.11.2014.
  */
 public class DashBaseFragment extends Fragment {
 
@@ -13,6 +14,10 @@ public class DashBaseFragment extends Fragment {
 			return null;
 		}
 		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	public void refreshCard(){
+
 	}
 
 }

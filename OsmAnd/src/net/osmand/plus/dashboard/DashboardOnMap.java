@@ -5,10 +5,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.views.controls.FloatingActionButton;
+
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.TypedValue;
@@ -20,6 +23,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by Denis
@@ -77,6 +82,8 @@ public class DashboardOnMap {
 	}
 
 
+
+
 	public void setDashboardVisibility(boolean visible) {
 		this.visible = visible;
 		if (visible) {
@@ -99,8 +106,8 @@ public class DashboardOnMap {
 	}
 
 	// To animate view slide out from right to left
-	public void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(0,0,ma.findViewById(R.id.ParentLayout).getHeight(),0);
+	public void open(View view) {
+		TranslateAnimation animate = new TranslateAnimation(0, 0, ma.findViewById(R.id.ParentLayout).getHeight(), 0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
@@ -112,17 +119,17 @@ public class DashboardOnMap {
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {
-			
+
 			@Override
 			public void onAnimationStart(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationRepeat(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				dashboardView.setVisibility(View.GONE);
@@ -131,14 +138,14 @@ public class DashboardOnMap {
 		view.startAnimation(animate);
 		view.setVisibility(View.GONE);
 	}
-	
 
-	private void addDashboardFragments(){
-		FragmentManager manager =ma. getSupportFragmentManager();
+
+	private void addDashboardFragments() {
+		FragmentManager manager = ma.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
-//		if (manager.findFragmentByTag(DashMapFragment.TAG) == null) {
-//			fragmentTransaction.add(R.id.content, new DashMapFragment(), DashMapFragment.TAG);
-//		}
+		if (manager.findFragmentByTag(DashParkingFragment.TAG) == null) {
+			fragmentTransaction.add(R.id.content, new DashParkingFragment(), DashParkingFragment.TAG);
+		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
 		}
@@ -173,21 +180,20 @@ public class DashboardOnMap {
 	}
 
 
-
 	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
 		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
 			//making background of actionbar transparent with scroll
 			final int imageHeight = 200;
 			final int headerHeight = 200;
 			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
-			int margintop = -(int)(ratio * 60);
+			int margintop = -(int) (ratio * 60);
 			Resources r = ma.getResources();
 			int px = (int) TypedValue.applyDimension(
 					TypedValue.COMPLEX_UNIT_DIP,
 					margintop,
 					r.getDisplayMetrics());
-			int margin = px + (int)ma.getResources().getDimension(R.dimen.dashboard_map_bottom_padding);
-			if (headerHeight < t - margin){
+			int margin = px + (int) ma.getResources().getDimension(R.dimen.dashboard_map_bottom_padding);
+			if (headerHeight < t - margin) {
 				//hiding action bar - showing floating button
 				//getSupportActionBar().hide();
 				if (fabButton != null) {

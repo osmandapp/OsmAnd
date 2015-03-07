@@ -705,6 +705,7 @@ public class MapActivityActions implements DialogProvider {
 //				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //				mapActivity.startActivity(newIntent);
 				mapActivity.getDashboard().setDashboardVisibility(true);
+				mapActivity.refreshFragments();
 				return true;
 			}
 		}).reg();
