@@ -444,7 +444,7 @@
 	
 	
 	
-	<string name="local_index_installed">版本</string>
+	<string name="local_index_installed">本機版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
@@ -621,7 +621,7 @@
 	<string name="loading_builds">正在載入 OsmAnd 編譯…</string>
 	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
-	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
+	<string name="gps_status_app_not_found">沒安裝 GPS 狀態應用程式，到 Play 商場找嗎？</string>
 	<string name="voice_is_not_available_msg">語音導航無法使用時。請到\'設定\'→ \'一般設定\' → \'語音導航\'，選取或下載提示語音包。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
@@ -1945,4 +1945,5 @@
 	<string name="track_segments">航跡區段</string>
 	<string name="track_points">航跡標點</string>
 	<string name="route_points">路線標點</string>
+	<string name="shared_string_release">已發行</string>
 	</resources>
