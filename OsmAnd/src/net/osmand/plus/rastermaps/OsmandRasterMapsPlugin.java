@@ -288,7 +288,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						}
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.setTitle(R.string.select_tile_source_to_install);
 				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 					@Override
@@ -393,7 +393,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();
 	}
 

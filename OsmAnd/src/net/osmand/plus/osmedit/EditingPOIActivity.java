@@ -181,7 +181,7 @@ public class EditingPOIActivity implements DialogProvider {
 		closeChangeset.setText(R.string.close_changeset);
 		ll.addView(closeChangeset);
 		builder.setView(ll);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -575,7 +575,7 @@ public class EditingPOIActivity implements DialogProvider {
 				ctx.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});
-		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(ctx.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ctx.removeDialog(DIALOG_OPENING_HOURS);

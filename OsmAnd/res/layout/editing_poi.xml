@@ -233,7 +233,7 @@
                 android:id="@+id/Cancel"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="@string/default_buttons_cancel" >
+                android:text="@string/shared_string_cancel" >
             </Button>
 
             <Button

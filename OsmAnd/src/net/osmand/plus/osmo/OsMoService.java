@@ -410,7 +410,7 @@ public class OsMoService implements OsMoReactor {
 				registerAsync();
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		
 	}
 

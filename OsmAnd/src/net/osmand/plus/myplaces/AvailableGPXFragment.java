@@ -516,7 +516,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}
@@ -561,7 +561,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -1049,7 +1049,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						operationTask.execute(gpxInfo);
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}

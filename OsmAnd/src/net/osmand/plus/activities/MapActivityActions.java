@@ -136,7 +136,7 @@ public class MapActivityActions implements DialogProvider {
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.add_gpx_point_dialog, null);
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		builder.setView(view);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -490,7 +490,7 @@ public class MapActivityActions implements DialogProvider {
 	private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AccessibleAlertBuilder(mapActivity);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
-    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
+    	builder.setNegativeButton(R.string.shared_string_cancel, null);
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override

@@ -418,7 +418,7 @@ public class OsmandApplication extends Application {
 				ll.addView(cb);
 				
 				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener() {
+				builder.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if(cb.isChecked()) {

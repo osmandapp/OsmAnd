@@ -2104,7 +2104,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="search_shown_on_map">Show on map</string>
-	<string name="navigate_point_cancel">Cancel</string>
 	<string name="search_address_top_text">Select address</string>
 	<string name="search_address_region">Region</string>
 	<string name="search_address_city">City</string>
@@ -2118,7 +2117,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
 	<string name="default_buttons_yes">Yes</string>
-	<string name="default_buttons_cancel">Cancel</string>
 	<string name="default_buttons_apply">Apply</string>
 	<string name="default_buttons_add">Add</string>
 	<string name="default_buttons_no">No</string>

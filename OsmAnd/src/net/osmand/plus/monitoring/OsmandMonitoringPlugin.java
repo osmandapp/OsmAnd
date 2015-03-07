@@ -375,7 +375,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				choice, v, dm);
 		dlg.setView(ll);
 		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
-		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+		dlg.setNegativeButton(R.string.shared_string_cancel, null);
 		dlg.show();
 	}
 

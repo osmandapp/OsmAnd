@@ -341,7 +341,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.osb_add_dialog_title);
 		builder.setView(openBug);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		((EditText)openBug.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		((EditText)openBug.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.BugMessage));
@@ -417,7 +417,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		AndroidUtils.softKeyboardDelayed((EditText)view.findViewById(R.id.BugMessage));
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -452,7 +452,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Dialog createCloseBugDialog(final Bundle args) {
 		Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.osb_close_dialog_title);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.osb_close_dialog_close_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

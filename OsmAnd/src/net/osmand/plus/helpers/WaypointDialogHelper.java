@@ -589,7 +589,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						}
 					}
 				}).setTitle(app.getString(R.string.search_radius_proximity))
-				.setNegativeButton(R.string.default_buttons_cancel, null)
+				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
 	}
 
@@ -777,7 +777,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				}
 			});
 			if (edit) {
-				builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+				builder.setNegativeButton(ctx.getString(R.string.shared_string_cancel), null);
 			}
 			AlertDialog dlg = builder.create();
 			srcDialog[0] = dlg;
@@ -820,7 +820,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				}
 			});
 			if (edit) {
-				builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+				builder.setNegativeButton(ctx.getString(R.string.shared_string_cancel), null);
 			}
 			AlertDialog dlg = builder.create();
 			srcDialog[0] = dlg;

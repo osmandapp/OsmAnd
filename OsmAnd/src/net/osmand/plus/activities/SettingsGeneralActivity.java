@@ -332,7 +332,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 					input.setLayoutParams(lp);
 					settings.getExternalStorageDirectory().getAbsolutePath();
 					editalert.setView(input);
-					editalert.setNegativeButton(R.string.default_buttons_cancel, null);
+					editalert.setNegativeButton(R.string.shared_string_cancel, null);
 					editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					    public void onClick(DialogInterface dialog, int whichButton) {
 					    	warnAboutChangingStorage(input.getText().toString());
@@ -579,7 +579,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				updateSettingsToNewDir(newDir);								
 			}
 		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
 	
