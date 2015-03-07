@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -801,7 +801,6 @@
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
   <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
-  <string name="shared_string_yes">Ja</string>
   <string name="default_buttons_cancel">Annuleer</string>
   <string name="default_buttons_apply">Toepassen</string>
   <string name="default_buttons_add">Voeg toe</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -705,7 +705,6 @@
   <string name="context_menu_item_update_map">Aggiorna la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
   <string name="context_menu_item_create_poi">Crea PDI</string>
-  <string name="shared_string_yes">Si</string>
   <string name="default_buttons_cancel">Annulla</string>
   <string name="default_buttons_apply">Applica</string>
   <string name="default_buttons_add">Aggiungi</string>

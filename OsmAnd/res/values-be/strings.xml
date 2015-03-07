@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -2051,7 +2051,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Скасаваць</string>
 	<string name="shared_string_dismiss">Скасаваць</string>
-	<string name="shared_string_yes">Так</string>
 	<string name="shared_string_no">Не</string>
 	<string name="shared_string_on">Уключыць</string>
 	<string name="shared_string_off">Выключыць</string>

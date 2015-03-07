@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1025,7 +1025,6 @@
 	<string name="transport_route_distance">Rutelængde</string>
 	<string name="transport">Transport</string>
 	<string name="default_buttons_no">Nej</string>
-	<string name="shared_string_yes">Ja</string>
 	<string name="poi_remove_confirm_template">Slet {0} (indtast kommentar)?</string>
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
