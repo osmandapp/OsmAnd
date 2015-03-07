@@ -16,7 +16,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/list_content_padding" >
 
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/favorites_icon_right_margin"
-            android:layout_marginTop="@dimen/favorites_icon_top_margin"
+            android:layout_gravity="center_vertical"
             android:focusable="false"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -98,7 +99,7 @@
             android:layout_width="@dimen/dashListItemHeight"
             android:layout_height="@dimen/dashListItemHeight"
             android:layout_gravity="center_vertical"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_gdirections_light" />
