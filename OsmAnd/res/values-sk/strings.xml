@@ -2098,4 +2098,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="turn_off_all">Vypnúť všetky</string>
 	<string name="showed_on_map">Zobrazené na mape</string>
 	<string name="currently_recording_track">Nahráva sa stopa</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">OK</string>
+	<string name="shared_string_cancel">Zrušiť</string>
+	<string name="shared_string_dismiss">Zamietnuť</string>
+	<string name="shared_string_yes">Áno</string>
+	<string name="shared_string_no">Nie</string>
 	</resources>
