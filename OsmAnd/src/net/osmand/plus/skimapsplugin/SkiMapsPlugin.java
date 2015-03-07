@@ -40,6 +40,9 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	
 	@Override
 	public boolean init(final OsmandApplication app, final Activity activity) {
+		if(true) {
+			throw new IllegalStateException("Don't enable plugin!");
+		}
 		if(activity != null) {
 			// called from UI 
 			previousRenderer = app.getSettings().RENDERER.get(); 

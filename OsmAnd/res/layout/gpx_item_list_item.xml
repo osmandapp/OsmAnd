@@ -7,6 +7,7 @@
     android:minHeight="@dimen/list_item_height"
     android:orientation="vertical"
     android:paddingLeft="@dimen/list_content_padding"
+    android:layout_marginTop="5dp"
     android:paddingRight="@dimen/list_content_padding" >
 
     <LinearLayout
@@ -53,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/dashFavDescTextSize" />
 

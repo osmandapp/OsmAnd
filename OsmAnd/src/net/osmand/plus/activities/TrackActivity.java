@@ -35,6 +35,7 @@ import android.view.View;
 public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
+	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private File file = null;
@@ -46,15 +47,20 @@ public class TrackActivity extends TabActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
 		Intent intent = getIntent();
-		if (intent == null || !intent.hasExtra(TRACK_FILE_NAME)) {
+		if (intent == null || (!intent.hasExtra(TRACK_FILE_NAME) &&
+				!intent.hasExtra(CURRENT_RECORDING))) {
 			Log.e("TrackActivity", "Required extra '" + TRACK_FILE_NAME + "' is missing");
 			finish();
 			return;
 		}
-
-		file = new File(intent.getStringExtra(TRACK_FILE_NAME));
-		String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
-		getSupportActionBar().setTitle(fn);
+		file = null;
+		if (intent.hasExtra(TRACK_FILE_NAME)) {
+			file = new File(intent.getStringExtra(TRACK_FILE_NAME));
+			String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+			getSupportActionBar().setTitle(fn);
+		} else {
+			getSupportActionBar().setTitle(getString(R.string.currently_recording_track));
+		}
 		getSupportActionBar().setElevation(0);
 		setContentView(R.layout.tab_content);
 
@@ -73,6 +79,9 @@ public class TrackActivity extends TabActivity {
 			};
 			@Override
 			protected GPXFile doInBackground(Void... params) {
+				if(file == null) {
+					return getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
 				return GPXUtilities.loadGPXFile(TrackActivity.this, file);
 			}
 			protected void onPostExecute(GPXFile result) {

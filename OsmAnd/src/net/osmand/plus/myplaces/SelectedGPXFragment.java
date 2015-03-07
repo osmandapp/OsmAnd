@@ -143,7 +143,7 @@ public class SelectedGPXFragment extends ListFragment {
 		for(GpxDisplayGroup g : groups) {
 			list.addAll(g.getModifiableList());
 		}
-		return null;
+		return list;
 	}
 
 	@Override
@@ -314,6 +314,7 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			protected void onPostExecute(Void result) {
 				updateContent();
+				adapter.notifyDataSetChanged();
 				(getActivity()).setProgressBarIndeterminateVisibility(false);
 			}
 			
