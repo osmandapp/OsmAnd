@@ -293,7 +293,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, OK_ID, R.string.default_buttons_ok, 
+		createMenuItem(menu, OK_ID, R.string.shared_string_ok, 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark ,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, NAVIGATE_DIALOG_ID, R.string.navigate_dialog,

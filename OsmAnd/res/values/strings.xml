@@ -1965,7 +1965,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Itinerary distance</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Show public transport stops on map</string>
 	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>

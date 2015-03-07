@@ -899,7 +899,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void showPOIDetails(final Amenity amenity, boolean en) {
 		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
 		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), en));
-		b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();

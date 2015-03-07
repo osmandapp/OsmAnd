@@ -215,7 +215,7 @@ public class FavoriteDialogs {
 				point.setCategory(categoryStr);
 				Builder bld = FavouritesDbHelper.checkDublicates(point, helper, activity);
 				if(bld != null) {
-					bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							addFavorite(activity, point, helper);							

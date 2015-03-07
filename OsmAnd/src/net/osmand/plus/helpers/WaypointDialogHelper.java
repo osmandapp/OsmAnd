@@ -769,7 +769,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			});
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setView(listView);
-			builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -812,7 +812,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			});
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setView(listView);
-			builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

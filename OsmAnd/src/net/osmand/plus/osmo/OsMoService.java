@@ -403,7 +403,7 @@ public class OsMoService implements OsMoReactor {
 	protected void showRegisterAgain(OsMoGroupsActivity ga, String msg) {
 		Builder bld = new AlertDialog.Builder(ga);
 		bld.setMessage(msg);
-		bld.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
