@@ -95,7 +95,7 @@
   <string name="online_map_settings_descr">Konfigurácia online mapových zdrojov</string>
   <string name="map_settings">- Nastavenia mapy</string>
   <string name="map_settings_descr">Konfigurácia mapového zobrazenia</string>
-  <string name="osmand_rastermaps_plugin_description">Zobrazí nastavenia pre použitie rozličných online alebo ukladaných máp ako hlavnú mapu alebo ako prekrývaciu / podkladovú mapu. Tieto mapy môžu byť tiež pripravené offline a skopírované do dátového priečinka OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"S týmto modulom môžete použiť rozličné online (tiež nazývané dlaždicové alebo rastrové) mapy, od preddefinovaných OSM dlaždíc (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.\n\nVšetky tieto mapy môžu byť použité ako hlavná (základná) mapa na obrazovke OsmAnd alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. bežné offline mapy z OsmAnd). Pre lepšie zviditeľnenie podkladových máp je možné vypnúť niektoré objekty z vektorových máp OsmAnd, cez menu \"Nastaviť mapu\".\n\nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako sqlite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp. "</string>
   <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
   <string name="osmand_accessibility_description">Zobrazí nastavenia pre špeciálne funkcie uľahčenia prístupu.</string>
   <string name="extra_settings">Pokročilé nastavenia</string>
@@ -1923,7 +1923,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speak_poi">Oznamovať blízke body záujmu</string>
     <string name="flat_list_waypoints">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">Zapne možnosť uloženia vašich stôp jedným stlačením tlačidla na mape. Taktiež zobrazí nastavenia pre zaznamenanie výletov do lokálneho GPX súboru alebo na online webovú službu.</string>
+    <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla nahrávania GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
