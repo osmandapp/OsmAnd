@@ -370,7 +370,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		bld.setNegativeButton(R.string.default_buttons_cancel, null);
 		
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int whichButton) {
 				for (int i = 0; i < prefs.length; i++) {
 					prefs[i].set(tempPrefs[i]);

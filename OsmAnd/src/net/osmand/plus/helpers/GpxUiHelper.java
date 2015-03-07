@@ -305,7 +305,7 @@ public class GpxUiHelper {
 		};
 		b.setAdapter(listAdapter, onClickListener);
 		if (multipleChoice) {
-			b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

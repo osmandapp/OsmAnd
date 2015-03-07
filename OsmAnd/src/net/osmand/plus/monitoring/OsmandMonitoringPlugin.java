@@ -374,7 +374,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		LinearLayout ll = createIntervalChooseLayout(uiCtx, patternMsg, seconds, minutes,
 				choice, v, dm);
 		dlg.setView(ll);
-		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
+		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
 		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
 		dlg.show();
 	}

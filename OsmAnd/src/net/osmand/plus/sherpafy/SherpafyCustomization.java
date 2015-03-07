@@ -354,7 +354,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				bld.setMessage(R.string.stage_is_completed);
 			}
 			bld.setTitle(getString(R.string.stage_is_completed_short))
-					.setPositiveButton(R.string.default_buttons_ok, null);
+					.setPositiveButton(R.string.shared_string_ok, null);
 			if (args != null && args.getBoolean(START_OVER)) {
 				String id = args.getString(TOUR_PARAM);
 				TourInformation tours = null;
@@ -522,7 +522,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			ssf.onAttach(getActivity());
             AlertDialog dlg = new AlertDialog.Builder(getActivity())
             		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-                    .setPositiveButton(R.string.default_buttons_ok, null)
+                    .setPositiveButton(R.string.shared_string_ok, null)
                     .create();
             return dlg;
         }

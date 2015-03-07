@@ -384,7 +384,7 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 		}
 		
 		b.setMessage(txt.toString());
-		b.setPositiveButton(getString(R.string.default_buttons_ok), null);
+		b.setPositiveButton(getString(R.string.shared_string_ok), null);
 		b.setNeutralButton(getString(R.string.transport_search_before), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

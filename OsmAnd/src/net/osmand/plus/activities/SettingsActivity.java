@@ -190,7 +190,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		ll.addView(sv);
 		dialog.setContentView(ll);
 		dialog.show();
-//		bld.setPositiveButton(R.string.default_buttons_ok, null);
+//		bld.setPositiveButton(R.string.shared_string_ok, null);
 	}
 
 	

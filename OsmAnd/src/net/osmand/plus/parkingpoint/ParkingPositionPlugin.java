@@ -348,7 +348,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		timePicker.setCurrentHour(0);
 		timePicker.setCurrentMinute(0);
 		
-		setTime.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		setTime.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				choose.dismiss();
@@ -394,7 +394,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			Builder deleteEventWarning = new AlertDialog.Builder(activity);
 			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
 			deleteEventWarning.setMessage(activity.getString(R.string.osmand_parking_warning_text));
-			deleteEventWarning.setNeutralButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {						
+			deleteEventWarning.setNeutralButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {						
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 				}

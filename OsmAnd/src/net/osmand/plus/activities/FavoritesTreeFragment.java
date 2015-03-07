@@ -498,7 +498,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		bld.setTitle(R.string.edit_group);
 		bld.setView(favEdit);
 		bld.setNegativeButton(R.string.default_buttons_cancel, null);
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

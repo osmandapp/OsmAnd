@@ -89,7 +89,7 @@ public class IntermediatePointsDialog {
 		builder.setView(contentView);
 		builder.setInverseBackgroundForced(true);
 		lv.setBackgroundColor(Color.WHITE);
-		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(changeOrder) {

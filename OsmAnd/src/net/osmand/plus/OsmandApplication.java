@@ -426,7 +426,7 @@ public class OsmandApplication extends Application {
 						}
 					}
 				});
-				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(uiContext, SettingsActivity.class);

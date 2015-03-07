@@ -177,7 +177,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 				AlertDialog.Builder msg = new AlertDialog.Builder(this);
 				msg.setTitle(R.string.free_version_title);
 				msg.setMessage(msgTx);
-				msg.setPositiveButton(R.string.default_buttons_ok, null);
+				msg.setPositiveButton(R.string.shared_string_ok, null);
 				msg.show();
 			} else {
 				downloadFilesCheckInternet();
@@ -307,7 +307,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 					}
 				});
 			}
-			msg.setPositiveButton(R.string.default_buttons_ok, null);
+			msg.setPositiveButton(R.string.shared_string_ok, null);
 			msg.show();
 		}
 	}

@@ -56,7 +56,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 					 IndexConstants.BINARY_MAP_INDEX_EXT)){
 				Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
-				dlg.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+				dlg.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
