@@ -506,7 +506,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					bld.setTitle(getString(
 							selectedObject instanceof OsMoDevice ? R.string.delete_confirmation_msg :
 									R.string.osmo_leave_confirmation_msg, name));
-					bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -1369,7 +1369,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         final TIntArrayList list = new TIntArrayList();
         ColorDialogs.setupColorSpinner(this, devColor, colorSpinner, list);
 		
-		bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string .shared_string_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

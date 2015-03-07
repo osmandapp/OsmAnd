@@ -556,7 +556,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(getString(R.string.application_dir_change_warning2));
-		builder.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =

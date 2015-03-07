@@ -496,7 +496,7 @@
 	<string name="context_menu_item_add_favorite">Favorilere ekle</string>
 	<string name="context_menu_item_update_map">Haritayı güncelle</string>
 	<string name="context_menu_item_create_poi">POI oluştur</string>
-	<string name="default_buttons_yes">Evet</string>
+	<string name="shared_string_yes">Evet</string>
 	<string name="default_buttons_cancel">İptal et</string>
 	<string name="default_buttons_apply">Uygula</string>
 	<string name="default_buttons_add">Ekle</string>

@@ -147,7 +147,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private void deleteRecording(final Recording r) {
 		AccessibleAlertBuilder bld = new AccessibleAlertBuilder(activity);
 		bld.setMessage(R.string.recording_delete_confirm);
-		bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

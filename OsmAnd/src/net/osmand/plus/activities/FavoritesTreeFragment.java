@@ -243,7 +243,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
 		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean deleted = helper.deleteFavourite(point);
@@ -601,7 +601,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			if (tosave.exists()) {
 				Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						exportTask.execute();

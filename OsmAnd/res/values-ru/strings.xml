@@ -826,7 +826,7 @@
   <string name="context_menu_item_update_map">Обновить карту</string>
   <string name="context_menu_item_open_bug">Сообщить об ошибке на карте</string>
   <string name="context_menu_item_create_poi">Добавить POI</string>
-  <string name="default_buttons_yes">Да</string>
+  <string name="shared_string_yes">Да</string>
   <string name="default_buttons_cancel">Отмена</string>
   <string name="default_buttons_apply">Применить</string>
   <string name="default_buttons_add">Добавить</string>

@@ -133,7 +133,7 @@
 	<string name="base_world_map">Mapa mundiale de base</string>
 	<string name="tip_map_styles">Istiles de sa mapa</string>
 	<string name="default_buttons_no">Nono</string>
-	<string name="default_buttons_yes">Eja</string>
+	<string name="shared_string_yes">Eja</string>
 	<string name="tip_map_styles_t">"OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s’adatare a sas esigentzias tuas:
 \n\nDiferentes dae sos istiles balansados preimpostados de sa mapa, los agatas suta \'Menu\' -&gt; \'Cunfigura sa mapa\' -&gt; \'Istile Mapa\' issèbera pro esempru
 \n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.

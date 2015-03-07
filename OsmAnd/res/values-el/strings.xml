@@ -994,7 +994,7 @@
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
 	<string name="context_menu_item_open_bug">Άνοιγμα σφάλματος OSM</string>
 	<string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
-	<string name="default_buttons_yes">Ναι</string>
+	<string name="shared_string_yes">Ναι</string>
 	<string name="default_buttons_cancel">Ακύρωση</string>
 	<string name="default_buttons_apply">Εφαρμογή</string>
 	<string name="default_buttons_add">Προσθήκη</string>

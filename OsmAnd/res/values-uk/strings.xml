@@ -826,7 +826,7 @@
   <string name="context_menu_item_update_map">Оновити мапу</string>
   <string name="context_menu_item_open_bug">Повідомити про помилку на мапі</string>
   <string name="context_menu_item_create_poi">Додати POI</string>
-  <string name="default_buttons_yes">Так</string>
+  <string name="shared_string_yes">Так</string>
   <string name="default_buttons_cancel">Скасувати</string>
   <string name="default_buttons_apply">Застосувати</string>
   <string name="default_buttons_add">Додати</string>

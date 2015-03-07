@@ -281,7 +281,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		confirm.setTitle(activity.getString(R.string.osmand_parking_delete));
 		confirm.setMessage(activity.getString(R.string.osmand_parking_delete_confirm));
 		confirm.setCancelable(true);
-		confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				showDeleteEventWarning(activity);

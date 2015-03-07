@@ -147,7 +147,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz, asz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					downloadListIndexThread.runDownloadFiles();
@@ -192,7 +192,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setMessage(getString(R.string.download_using_mobile_internet));
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						downloadFilesPreCheckSpace();
@@ -217,7 +217,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
-		bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -274,7 +274,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
 						ab.setMessage(getString(R.string.android_19_location_disabled,
 								settings.getExternalStorageDirectory()));
-						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						ab.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								copyFilesForAndroid19(newLoc);

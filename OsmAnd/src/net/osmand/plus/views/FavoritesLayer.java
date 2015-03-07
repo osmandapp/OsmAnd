@@ -209,7 +209,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 						Builder builder = new AlertDialog.Builder(view.getContext());
 						builder.setMessage(resources.getString(R.string.favourites_remove_dialog_msg, a.getName()));
 						builder.setNegativeButton(R.string.default_buttons_no, null);
-						builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								favorites.deleteFavourite(a);

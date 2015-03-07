@@ -213,7 +213,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag,
 				AndroidUtils.formatDateTime(getMyApplication(), item.date.getTime()), item.size));
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

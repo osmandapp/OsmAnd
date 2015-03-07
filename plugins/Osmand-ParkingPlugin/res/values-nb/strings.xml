@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="default_buttons_yes">Ja</string>
+<resources><string name="shared_string_yes">Ja</string>
     <string name="default_buttons_no">Nei</string>
     <string name="osmand_app_not_found">OsmAnd er ikke installert</string>
     <string name="app_name">OsmAnd-Parkering</string>

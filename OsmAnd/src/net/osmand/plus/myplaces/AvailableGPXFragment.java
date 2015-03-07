@@ -1042,7 +1042,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.recording_delete_confirm);
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						operationTask = new DeleteGpxTask();

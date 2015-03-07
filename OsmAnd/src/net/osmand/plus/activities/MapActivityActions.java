@@ -407,7 +407,7 @@ public class MapActivityActions implements DialogProvider {
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			if (gpxFiles.size() == 1){
 				bld.setMessage(R.string.use_displayed_track_for_navigation);
-				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						enterRoutePlanningModeImpl(gpxFiles.get(0), from, fromName);
@@ -990,7 +990,7 @@ public class MapActivityActions implements DialogProvider {
 			// Stop the navigation
 			builder.setTitle(getString(R.string.cancel_route));
 			builder.setMessage(getString(R.string.stop_routing_confirm));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					stopNavigationWithoutConfirm();
@@ -1002,7 +1002,7 @@ public class MapActivityActions implements DialogProvider {
 			// Clear the destination point
 			builder.setTitle(getString(R.string.cancel_navigation));
 			builder.setMessage(getString(R.string.clear_dest_confirm));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					getTargets().clearPointToNavigate(true);

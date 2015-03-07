@@ -188,7 +188,7 @@ public class ShareDialog {
 			if (Version.isMarketEnabled((OsmandApplication) activity.getApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
-				builder.setPositiveButton(activity.getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix((OsmandApplication) activity.getApplication()) 

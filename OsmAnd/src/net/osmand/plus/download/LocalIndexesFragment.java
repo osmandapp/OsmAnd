@@ -218,7 +218,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 		} else if (resId == R.string.local_index_mi_delete) {
 			Builder confirm = new Builder(getActivity());
-			confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					new LocalIndexOperationTask(DELETE_OPERATION).execute(info);

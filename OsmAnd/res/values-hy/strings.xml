@@ -148,5 +148,5 @@
 	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
     <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
     <string name="default_buttons_no">Ոչ</string>
-	<string name="default_buttons_yes">Այո</string>
+	<string name="shared_string_yes">Այո</string>
 	</resources>

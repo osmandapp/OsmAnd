@@ -308,7 +308,7 @@
   <string name="context_menu_item_add_favorite">आवडत्या ठिकणात नोंद करा</string>
   <string name="context_menu_item_update_map">नकाशा अपडेट करा</string>
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>
-  <string name="default_buttons_yes">हो</string>
+  <string name="shared_string_yes">हो</string>
   <string name="default_buttons_cancel">रद्द करा</string>
   <string name="default_buttons_no">नाही</string>
   <string name="favourites_context_menu_edit">आवडते ठिकण बदला</string>

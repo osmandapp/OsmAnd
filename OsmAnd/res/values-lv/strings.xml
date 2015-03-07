@@ -763,7 +763,7 @@
   <string name="context_menu_item_update_map">Atjaunot karti</string>
   <string name="context_menu_item_open_bug">Atvērt OSM bug</string>
   <string name="context_menu_item_create_poi">Izveidot POI</string>
-  <string name="default_buttons_yes">Jā</string>
+  <string name="shared_string_yes">Jā</string>
   <string name="default_buttons_cancel">Atcelt</string>
   <string name="default_buttons_apply">Pielietot</string>
   <string name="default_buttons_add">Pievienot</string>

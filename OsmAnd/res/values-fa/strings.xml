@@ -258,7 +258,7 @@
 	<string name="context_menu_item_update_map">به روز رسانی نقشه</string>
 	<string name="context_menu_item_open_bug">بازکردن اشکال OSM</string>
 	<string name="context_menu_item_create_poi">ایجاد POI</string>
-	<string name="default_buttons_yes">بله</string>
+	<string name="shared_string_yes">بله</string>
 	<string name="default_buttons_cancel">لغو</string>
 	<string name="default_buttons_apply">بکارگیری</string>
 	<string name="default_buttons_add">افزودن</string>

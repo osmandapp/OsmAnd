@@ -72,7 +72,7 @@
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="default_buttons_no">Nej</string>
-<string name="default_buttons_yes">Ja</string>
+<string name="shared_string_yes">Ja</string>
 <string name="default_buttons_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
 <string name="default_buttons_add">Lägg till</string>

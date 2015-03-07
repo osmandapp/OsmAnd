@@ -902,7 +902,7 @@
   <string name="context_menu_item_update_map">Atnaujinti žemėlapį</string>
   <string name="context_menu_item_open_bug">Atidaryti OSM klaidą</string>
   <string name="context_menu_item_create_poi">Sukurti LV</string>
-  <string name="default_buttons_yes">Taip</string>
+  <string name="shared_string_yes">Taip</string>
   <string name="default_buttons_cancel">Atšaukti</string>
   <string name="default_buttons_apply">Taikyti</string>
   <string name="default_buttons_add">Pridėti</string>

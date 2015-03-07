@@ -164,7 +164,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		builder.setView(ll);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
@@ -187,7 +187,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(R.string.edit_filter_delete_dialog_title);
 		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (helper.removePoiFilter(filter)) {

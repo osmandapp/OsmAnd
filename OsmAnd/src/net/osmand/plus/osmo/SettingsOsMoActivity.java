@@ -162,7 +162,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			public void run() {
 				Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
 				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
-				bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

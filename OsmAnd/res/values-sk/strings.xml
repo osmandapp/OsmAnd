@@ -903,7 +903,7 @@
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
   <string name="context_menu_item_create_poi">Vytvoriť POI</string>
-  <string name="default_buttons_yes">Áno</string>
+  <string name="shared_string_yes">Áno</string>
   <string name="default_buttons_cancel">Zrušiť</string>
   <string name="default_buttons_apply">Použiť</string>
   <string name="default_buttons_add">Pridať</string>

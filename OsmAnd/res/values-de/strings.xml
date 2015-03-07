@@ -1108,7 +1108,7 @@
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
 	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 	<string name="context_menu_item_create_poi">POI einsenden</string>
-	<string name="default_buttons_yes">Ja</string>
+	<string name="shared_string_yes">Ja</string>
 	<string name="default_buttons_cancel">Abbrechen</string>
 	<string name="default_buttons_apply">Übernehmen</string>
 	<string name="default_buttons_add">Hinzufügen</string>

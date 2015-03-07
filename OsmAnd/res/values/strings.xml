@@ -2115,7 +2115,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
-	<string name="default_buttons_yes">Yes</string>
 	<string name="default_buttons_apply">Apply</string>
 	<string name="default_buttons_add">Add</string>
 	<string name="default_buttons_no">No</string>

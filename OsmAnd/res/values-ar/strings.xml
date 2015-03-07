@@ -272,7 +272,7 @@
 	<string name="default_buttons_apply">تطبق</string>
 	<string name="default_buttons_add">إضافة</string>
 	<string name="default_buttons_no">ليس</string>
-	<string name="default_buttons_yes">نعم</string>
+	<string name="shared_string_yes">نعم</string>
 	<string name="default_buttons_cancel">إلغاء</string>
 	<string name="context_menu_item_update_map">تحديث الخريطة</string>
 	<string name="navigate_point_cancel">إلغاء</string>

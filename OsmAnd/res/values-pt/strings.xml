@@ -384,7 +384,7 @@
   <string name="context_menu_item_update_map">Atualizar mapa</string>
   <string name="context_menu_item_open_bug">Reportar problema OSM</string>
   <string name="context_menu_item_create_poi">Criar ponto de interesse</string>
-  <string name="default_buttons_yes">Sim</string>
+  <string name="shared_string_yes">Sim</string>
   <string name="default_buttons_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
   <string name="default_buttons_add">Adicionar</string>

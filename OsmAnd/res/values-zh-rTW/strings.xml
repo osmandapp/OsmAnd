@@ -938,7 +938,7 @@
 	<string name="context_menu_item_update_map">更新地圖</string>
 	<string name="context_menu_item_open_bug">開啟 OSM 錯誤</string>
 	<string name="context_menu_item_create_poi">建立興趣點</string>
-	<string name="default_buttons_yes">是</string>
+	<string name="shared_string_yes">是</string>
 	<string name="default_buttons_cancel">取消</string>
 	<string name="default_buttons_apply">套用</string>
 	<string name="default_buttons_add">加入</string>

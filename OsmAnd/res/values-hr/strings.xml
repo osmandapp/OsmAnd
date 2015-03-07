@@ -305,7 +305,7 @@
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="default_buttons_no">Ne</string>
 	<string name="add_favorite_dialog_top_text">Unesite naziv favorita</string>
-	<string name="default_buttons_yes">Da</string>
+	<string name="shared_string_yes">Da</string>
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>
 	<string name="context_menu_item_create_poi">Stvori POI</string>
 	<string name="context_menu_item_update_map">Ažuriraj karte</string>

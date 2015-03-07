@@ -126,5 +126,5 @@
     
 	<string name="map_widget_gps_info">GPS status</string>
     <string name="default_buttons_no">Ne</string>
-	<string name="default_buttons_yes">Da</string>
+	<string name="shared_string_yes">Da</string>
 	</resources>

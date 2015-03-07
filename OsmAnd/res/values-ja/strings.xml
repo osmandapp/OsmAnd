@@ -594,7 +594,7 @@ POIの更新は利用できません</string>
 <string name="context_menu_item_open_bug">OSM バグをオープン</string>
 <string name="context_menu_item_create_poi">POIを作成</string>
 
-<string name="default_buttons_yes">はい</string>
+<string name="shared_string_yes">はい</string>
 <string name="default_buttons_cancel">キャンセル</string>
 <string name="default_buttons_apply">適用</string>
 <string name="default_buttons_add">追加</string>

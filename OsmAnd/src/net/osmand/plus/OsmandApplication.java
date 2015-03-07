@@ -497,7 +497,7 @@ public class OsmandApplication extends Application {
 		if (getNavigationService() != null) {
 			Builder bld = new AlertDialog.Builder(activity);
 			bld.setMessage(R.string.background_service_is_enabled_question);
-			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					closeApplicationAnyway(activity, true);

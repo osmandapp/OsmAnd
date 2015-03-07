@@ -1386,7 +1386,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
-	<string name="default_buttons_yes">Так</string>
+	<string name="shared_string_yes">Так</string>
 	<string name="default_buttons_cancel">Скасаваць</string>
 	<string name="default_buttons_apply">Застасаваць</string>
 	<string name="default_buttons_add">Дадаць</string>

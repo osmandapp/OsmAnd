@@ -705,7 +705,7 @@
   <string name="context_menu_item_update_map">Aggiorna la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
   <string name="context_menu_item_create_poi">Crea PDI</string>
-  <string name="default_buttons_yes">Si</string>
+  <string name="shared_string_yes">Si</string>
   <string name="default_buttons_cancel">Annulla</string>
   <string name="default_buttons_apply">Applica</string>
   <string name="default_buttons_add">Aggiungi</string>

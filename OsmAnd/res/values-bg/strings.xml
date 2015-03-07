@@ -1468,7 +1468,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="context_menu_item_update_map">Обнови картата</string>
 	<string name="context_menu_item_open_bug">Докладвай за неточност в OSM</string>
 	<string name="context_menu_item_create_poi">Създай POI</string>
-	<string name="default_buttons_yes">Да</string>
+	<string name="shared_string_yes">Да</string>
 	<string name="default_buttons_cancel">Откажи</string>
 	<string name="default_buttons_apply">Приложи</string>
 	<string name="default_buttons_add">Добави</string>

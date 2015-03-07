@@ -828,7 +828,7 @@
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>
 <string name="context_menu_item_create_poi">POI 생성</string>
 
-<string name="default_buttons_yes">예</string>
+<string name="shared_string_yes">예</string>
 <string name="default_buttons_cancel">취소</string>
 <string name="default_buttons_apply">적용</string>
 <string name="default_buttons_add">추가</string>
