@@ -121,10 +121,11 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 		}
 		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_favorites_item, null, false);
-			TextView name = (TextView) view.findViewById(R.id.name);
+			View view = inflater.inflate(R.layout.favorites_list_item, null, false);
+			TextView name = (TextView) view.findViewById(R.id.favourite_label);
 			TextView label = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			if (point.getCategory().length() > 0) {
 				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
 			} else {
@@ -132,7 +133,7 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 			}
 
 
-			((ImageView) view.findViewById(R.id.icon)).
+			((ImageView) view.findViewById(R.id.favourite_icon)).
 					setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
 
 			if(loc != null){
@@ -147,6 +148,7 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					loc.getLatitude(), loc.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

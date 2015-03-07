@@ -82,6 +82,7 @@ public class OsmandApplication extends Application {
 	OsmAndAppCustomization appCustomization;
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
+	private final IconsCache iconsCache = new IconsCache(this);
 	Handler uiHandler;
 
 	NavigationService navigationService;
@@ -105,6 +106,7 @@ public class OsmandApplication extends Application {
 	AvoidSpecificRoads avoidSpecificRoads;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
+	
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	
@@ -165,6 +167,10 @@ public class OsmandApplication extends Application {
 			protected void onPostExecute(Void result) {
 			}
 		}.execute();
+	}
+	
+	public IconsCache getIconsCache() {
+		return iconsCache;
 	}
 
 	@Override

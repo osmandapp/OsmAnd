@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -99,14 +96,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			}
 		}
 
-		AudioVideoIcons icons = new AudioVideoIcons(getActivity());
 		for (final AudioVideoNotesPlugin.Recording recording : notes) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
-			Drawable icon = getNoteView(recording, view, getActivity(), icons);
-			icon.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-			view.setBackgroundColor(Color.TRANSPARENT);
+			getNoteView(recording, view, getMyApplication());
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -129,27 +123,8 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		}
 	}
 	
-	public static class AudioVideoIcons {
-		Drawable audio;
-		Drawable video;
-		Drawable image;
-
-		public AudioVideoIcons(Context a) {
-			audio = getDrawable(a, R.drawable.ic_type_audio, R.color.distance_color);
-			video = getDrawable(a, R.drawable.ic_type_video, R.color.distance_color);
-			image = getDrawable(a, R.drawable.ic_type_img, R.color.distance_color);
-		}
-
-		private Drawable getDrawable(Context a, int icId, int clrId) {
-			Drawable drawable = a.getResources().getDrawable(icId).mutate();
-			drawable.setColorFilter(a.getResources().getColor(clrId), Mode.MULTIPLY);
-			return drawable;
-		}
-
-	}
-
 	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
-								   final Context ctx, AudioVideoIcons icons) {
+								   final OsmandApplication ctx) {
 		String name = recording.getName(ctx);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
 		nameText.setText(name);
@@ -159,11 +134,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		Drawable iconDrawable;
 		
 		if (recording.isAudio()) {
-			iconDrawable = icons.audio;
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_audio, R.color.distance_color);
 		} else if (recording.isVideo()) {
-			iconDrawable = icons.video;
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_video, R.color.distance_color);
 		} else {
-			iconDrawable = icons.image;
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_img, R.color.distance_color);
 		}
 		icon.setImageDrawable(iconDrawable);
 		return iconDrawable;

@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.activities.search.SearchHistoryFragment.RecentIcons;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -73,10 +72,6 @@ public class DashRecentsFragment extends DashLocationFragment {
 		return view;
 	}
 	
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-	}
 
 	@Override
 	public void onResume() {
@@ -112,12 +107,11 @@ public class DashRecentsFragment extends DashLocationFragment {
 		if (points.size() > 3){
 			points = points.subList(0, 3);
 		}
-		RecentIcons ri = new RecentIcons(getActivity());
 		for (final HistoryEntry historyEntry : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.search_history_list_item, null, false);
 			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, 
-					loc, getActivity(), ri);
+					loc, getActivity(), getMyApplication());
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override

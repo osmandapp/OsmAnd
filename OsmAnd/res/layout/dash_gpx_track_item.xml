@@ -5,7 +5,6 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/dashListItemHeight"
-			  android:focusable="true"
 			  android:orientation="vertical">
 
 	<View
@@ -139,15 +138,6 @@
 				android:visibility="gone"/>
 		</LinearLayout>
 
-		<ImageButton
-			android:id="@+id/stop"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
-			android:layout_gravity="center_vertical"
-			android:background="?attr/options_button_background"
-			android:src="@drawable/ic_action_rec_stop"
-			android:visibility="gone"
-			tools:visibility="visible"/>
 
 		<ImageButton
 			android:id="@+id/show_on_map"
@@ -157,6 +147,16 @@
 			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:background="?attr/options_button_background"
 			android:src="@drawable/ic_action_gsave_dark"
+			android:visibility="gone"
+			tools:visibility="visible"/>
+		
+		<ImageButton
+			android:id="@+id/stop"
+			android:layout_width="@dimen/dashListItemHeight"
+			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_gravity="center_vertical"
+			android:background="?attr/options_button_background"
+			android:src="@drawable/ic_action_rec_stop"
 			android:visibility="gone"
 			tools:visibility="visible"/>
 

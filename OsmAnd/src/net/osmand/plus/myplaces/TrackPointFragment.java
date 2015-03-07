@@ -4,9 +4,9 @@ import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.activities.TrackActivity;
 
 import java.util.ArrayList;
@@ -17,26 +17,10 @@ import java.util.List;
  * on 04.03.2015.
  */
 public class TrackPointFragment extends SelectedGPXFragment {
-	GpxSelectionHelper.GpxDisplayGroup group;
+	
 	@Override
-	public void setContent() {
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups();
-		lightContent = app.getSettings().isLightContent();
-
-
-		List<GpxSelectionHelper.GpxDisplayItem> items = new ArrayList<>();
-		for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
-			if (group.getType() != GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS){
-				continue;
-			}
-			this.group = group;
-			for (GpxSelectionHelper.GpxDisplayItem item : group.getModifiableList()) {
-				items.add(item);
-			}
-		}
-
-		adapter = new SelectedGPXAdapter(items);
-		setListAdapter(adapter);
+	protected GpxDisplayItemType filterType() {
+		return GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
 	}
 
 	@Override
@@ -50,7 +34,7 @@ public class TrackPointFragment extends SelectedGPXFragment {
 		MenuItem item = menu.add(R.string.add_to_favourite).setIcon(R.drawable.ic_action_fav_dark).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				saveAsFavorites(group);
+				saveAsFavorites(filterType());
 				return true;
 			}
 		});

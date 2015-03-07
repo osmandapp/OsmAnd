@@ -1,64 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
-			  android:layout_width="fill_parent"
-			  android:layout_height="wrap_content"
-			  android:minHeight="@dimen/list_item_height"
-			  android:orientation="vertical"
-			  android:background="?attr/expandable_list_item_background"
-			  android:paddingLeft="8dp"
-			  android:paddingRight="8dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding" >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-		<FrameLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="3dp">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin" >
 
-			<ImageView
-				android:id="@+id/icon"
-				android:layout_width="25dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:layout_marginTop="2dp"/>
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/favorite_icon_size"
+                android:layout_height="@dimen/favorite_icon_size"
+                android:layout_gravity="center_vertical" />
 
-			<TextView
-				android:id="@+id/additional"
-				style="@style/ListText.Small"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				tools:text="@string/lorem_ipsum"
-				android:maxLines="2"
-				android:layout_marginLeft="2dp"
-				android:layout_marginRight="3dp"
-				android:textSize="@dimen/dashFavNameTextSize"/>
-		</FrameLayout>
+            <TextView
+                android:id="@+id/additional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLines="2"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/dashFavDescTextSize"
+                tools:text="@string/lorem_ipsum" />
+        </FrameLayout>
 
-		<TextView
-			android:id="@+id/name"
-			style="@style/ListText.Small"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			tools:text="@string/lorem_ipsum"
-			android:layout_marginLeft="5dp"
-			android:textSize="@dimen/dashFavNameTextSize"
-			android:layout_weight="1"
-			android:paddingTop="2dp"/>
-	</LinearLayout>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingTop="2dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/dashFavNameTextSize"
+            tools:text="@string/lorem_ipsum" />
+    </LinearLayout>
 
-	<TextView
-		android:id="@+id/description"
-		style="@style/ListText.Small"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
-		android:textSize="@dimen/dashFavNameTextSize"
-		android:maxLines="25"/>
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/dashFavDescTextSize" />
 
 </LinearLayout>

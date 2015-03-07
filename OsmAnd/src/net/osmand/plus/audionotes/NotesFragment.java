@@ -9,7 +9,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment.AudioVideoIcons;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.AlertDialog;
@@ -80,11 +79,9 @@ public class NotesFragment extends ListFragment {
 	}
 
 	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
-		private AudioVideoIcons icons;
 
 		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
 			super(getActivity(), R.layout.note, recordingList);
-			icons = new AudioVideoIcons(getActivity());
 		}
 
 		@Override
@@ -96,7 +93,7 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity(), icons);
+			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			icon.setColorFilter(getResources().getColor(R.color.color_distance), Mode.MULTIPLY);
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);

@@ -99,8 +99,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private GpxSelectionHelper selectedGpxHelper;
 	private SavingTrackHelper savingTrackHelper;
 	private OsmandApplication app;
-	private Drawable gpxNormal;
-	private Drawable gpxOnMap;
 	private boolean updateEnable;
 
 
@@ -160,23 +158,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	public static void updateCurrentTrack(View v,final Activity ctx, OsmandApplication app) {
+	public static void updateCurrentTrack(View v, final Activity ctx, OsmandApplication app) {
 		if (v == null) {
 			return;
 		}
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
-		Drawable icon = app.getResources().getDrawable(isRecording ? R.drawable.ic_action_rec_stop : R.drawable.ic_play_dark).mutate();
-		if (app.getSettings().isLightContent()) {
-			icon.setColorFilter(app.getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
-
-		if (isRecording) {
-			v.findViewById(R.id.show_on_map).setVisibility(View.VISIBLE);
-		} else {
-			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
-		}
 		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
-		stop.setImageDrawable(icon);
+		stop.setImageDrawable(app.getIconsCache().getContentIcon(isRecording?R.drawable.ic_action_rec_stop:
+			R.drawable.ic_play_dark));
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -188,22 +177,36 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 		});
+		SavingTrackHelper sth = app.getSavingTrackHelper();
+		ImageButton save = ((ImageButton) v.findViewById(R.id.show_on_map));
+		save.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Runnable run = new Runnable() {
+					@Override
+					public void run() {
+						final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+						plugin.saveCurrentTrack();
+					}
+				};
+				run.run();
+			}
+		});
+		if (sth.getPoints() > 0 || sth.getDistance() > 0) {
+			save.setVisibility(View.VISIBLE);
+		} else {
+			save.setVisibility(View.GONE);
+		}
+		save.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gsave_dark));
+		
 
-//		if (isRecording) {
-			SavingTrackHelper sth = app.getSavingTrackHelper();
-			((TextView) v.findViewById(R.id.points_count)).setText(sth.getPoints()+"");
-			((TextView) v.findViewById(R.id.distance)).setText(OsmAndFormatter.getFormattedDistance(
-					sth.getDistance(), app));
-			v.findViewById(R.id.points_count).setVisibility(View.VISIBLE);
-			v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
-			v.findViewById(R.id.distance).setVisibility(View.VISIBLE);
-			v.findViewById(R.id.distance_icon).setVisibility(View.VISIBLE);
-//		} else {
-//			v.findViewById(R.id.points_count).setVisibility(View.GONE);
-//			v.findViewById(R.id.points_icon).setVisibility(View.GONE);
-//			v.findViewById(R.id.distance).setVisibility(View.GONE);
-//			v.findViewById(R.id.distance_icon).setVisibility(View.GONE);
-//		}
+		((TextView) v.findViewById(R.id.points_count)).setText(sth.getPoints() + "");
+		((TextView) v.findViewById(R.id.distance))
+				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
+		v.findViewById(R.id.points_count).setVisibility(View.VISIBLE);
+		v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
+		v.findViewById(R.id.distance).setVisibility(View.VISIBLE);
+		v.findViewById(R.id.distance_icon).setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -229,12 +232,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				}
 			});
 		}
-		gpxNormal = getResources().getDrawable(R.drawable.ic_gpx_track).mutate();
-		gpxOnMap = getResources().getDrawable(R.drawable.ic_gpx_track).mutate();
-		gpxOnMap.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		if (getMyApplication().getSettings().isLightContent()) {
-			gpxNormal.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
+
 
 		return v;
 	}
@@ -242,38 +240,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public static void createCurrentTrackView(View v, final OsmandApplication app) {
 		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
-		boolean light = app.getSettings().isLightContent();
-
-		Drawable icon = app.getResources().getDrawable(R.drawable.ic_action_gsave_dark).mutate();
-		if (light) {
-			icon.setColorFilter(app.getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
-		ImageButton save = ((ImageButton) v.findViewById(R.id.show_on_map));
-		save.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-		save.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Runnable run = new Runnable() {
-					@Override
-					public void run() {
-						final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-						plugin.saveCurrentTrack();
-					}
-				};
-				run.run();
-			}
-		});
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
-
 		v.findViewById(R.id.options).setVisibility(View.GONE);
 		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
-		save.setImageDrawable(icon);
 	}
 
 	@Override
@@ -791,7 +761,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
 			}
-			udpateGpxInfoView(v, child, app, gpxNormal, gpxOnMap, false);
+			udpateGpxInfoView(v, child, app, false);
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
@@ -841,10 +811,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				@Override
 				public void onClick(View v) {
 					if (child.gpx != null) {
-						selectedGpxHelper.selectGpxFile(child.gpx, checkItem.isChecked(), false);
+						selectedGpxHelper.selectGpxFile(child.gpx, checkItem.isChecked(), true);
 					} else {
 						selectedGpxHelper.getSelectedGPXFiles().remove(selectedGpxFile);
 					}
+					notifyDataSetChanged();
 				}
 			});
 
@@ -1425,7 +1396,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void udpateGpxInfoView(View v, GpxInfo child, OsmandApplication app,
-										 Drawable gpxNormal, Drawable gpxOnMap,
 										 boolean isDashItem) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		if (!isDashItem) {
@@ -1441,7 +1411,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		//ImageView icon = (ImageView) v.findViewById(!isDashItem? R.id.icon : R.id.show_on_map);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		icon.setImageDrawable(gpxNormal);
+		icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_gpx_track));
 		if (child.isCorrupted()) {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		} else {
@@ -1450,7 +1420,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		SelectedGpxFile sgpx = selectedGpxHelper.getSelectedFileByName(child.getFileName());
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			icon.setImageDrawable(gpxOnMap);
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_gpx_track, R.color.distance_color));
 			analysis = sgpx.getTrackAnalysis();
 
 		}

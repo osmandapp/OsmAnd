@@ -49,8 +49,6 @@
 				android:textColor="?android:textColorPrimary"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:maxLines="1"
-				android:ellipsize="end"
 				tools:text="@string/app_version"/>
 
 

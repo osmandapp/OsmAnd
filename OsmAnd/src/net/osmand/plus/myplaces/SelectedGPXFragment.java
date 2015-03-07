@@ -38,15 +38,12 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -90,7 +87,7 @@ public class SelectedGPXFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		setContent();
+		updateContent();
 	}
 
 
@@ -100,13 +97,11 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 
 
-	protected List<GpxDisplayGroup> filterGroups() {
-		List<GpxDisplayGroup> groups = ((TrackActivity) getActivity()).getContent();
-		if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-			groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(groups);
-			Iterator<GpxDisplayGroup> it = groups.iterator();
-			while (it.hasNext()) {
-				GpxDisplayGroup group = it.next();
+	protected List<GpxDisplayGroup> filterGroups(GpxDisplayItemType type) {
+		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+			for(GpxDisplayGroup group : ((TrackActivity) getActivity()).getContent()) {
+			boolean add = group.getType() == type || type == null;
+				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
 				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
 				while (item.hasNext()) {
 					GpxDisplayItem it2 = item.next();
@@ -115,25 +110,40 @@ public class SelectedGPXFragment extends ListFragment {
 					}
 				}
 				if (group.getModifiableList().isEmpty()) {
-					it.remove();
+					add = false;
 				}
-			}
+				}
+				if(add) {
+					groups.add(group);
+				}
+				
 		}
 		return groups;
 	}
 
-	public void setContent(){
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups();
+	public void setContent() {
 		lightContent = app.getSettings().isLightContent();
-
-		List<GpxSelectionHelper.GpxDisplayItem> items = new ArrayList<>();
-		for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
-			for (GpxSelectionHelper.GpxDisplayItem item : group.getModifiableList()) {
-				items.add(item);
-			}
-		}
-		adapter = new SelectedGPXAdapter(items);
+		adapter = new SelectedGPXAdapter(new ArrayList<GpxSelectionHelper.GpxDisplayItem>());
+		updateContent();
 		setListAdapter(adapter);
+	}
+
+	protected void updateContent() {
+		adapter.clear();
+		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterType());
+		adapter.addAll(flatten(groups));
+	}
+
+	protected GpxDisplayItemType filterType() {
+		return null;
+	}
+
+	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
+		ArrayList<GpxDisplayItem> list = new ArrayList<GpxDisplayItem>();
+		for(GpxDisplayGroup g : groups) {
+			list.addAll(g.getModifiableList());
+		}
+		return null;
 	}
 
 	@Override
@@ -195,10 +205,14 @@ public class SelectedGPXFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	protected void saveAsFavorites(final GpxDisplayGroup model) {
+	protected void saveAsFavorites(final GpxDisplayItemType gpxDisplayItemType) {
 		Builder b = new AlertDialog.Builder(getMyActivity());
 		final EditText editText = new EditText(getMyActivity());
-		String name = model.getName();
+		final List<GpxDisplayGroup> gs = filterGroups(gpxDisplayItemType);
+		if (gs.size() == 0) {
+			return;
+		}
+		String name = gs.get(0).getName();
 		if(name.indexOf('\n') > 0) {
 			name = name.substring(0, name.indexOf('\n'));
 		}
@@ -210,7 +224,7 @@ public class SelectedGPXFragment extends ListFragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				saveFavoritesImpl(model.getModifiableList(), editText.getText().toString());
+				saveFavoritesImpl(flatten(gs), editText.getText().toString());
 
 			}
 		});
@@ -236,9 +250,14 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 
 
-	protected void selectSplitDistance(final GpxDisplayGroup model) {
+	protected void selectSplitDistance() {
+		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT);
+		if(groups.size() == 0) {
+			return;
+		}
+		
 		Builder bld = new AlertDialog.Builder(getMyActivity());
-		int[] checkedItem = new int[] {!model.isSplitDistance() && !model.isSplitTime()? 0 : -1};
+		int[] checkedItem = new int[] {!groups.get(0).isSplitDistance() && !groups.get(0).isSplitTime()? 0 : -1};
 		List<String> options = new ArrayList<String>();
 		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
@@ -247,23 +266,23 @@ public class SelectedGPXFragment extends ListFragment {
 		options.add(app.getString(R.string.none));
 		distanceSplit.add(-1d);
 		timeSplit.add(-1);
-		addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, model); // 100 feet, 50 yards, 50 m 
-		addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, model); // 200 feet, 100 yards, 100 m
-		addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, model); // 500 feet, 200 yards, 200 m
-		addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, model); // 1000 feet, 500 yards, 500 m
-		addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, model); // 2000 feet, 1000 yards, 1km
-		addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, model); // 1mi, 2km
-		addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, model); // 2mi, 5km
-		addOptionSplit(8000, true, options, distanceSplit, timeSplit, checkedItem, model); // 5mi, 10km
+		addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 100 feet, 50 yards, 50 m 
+		addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, groups); // 200 feet, 100 yards, 100 m
+		addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, groups); // 500 feet, 200 yards, 200 m
+		addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards, 500 m
+		addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards, 1km
+		addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1mi, 2km
+		addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2mi, 5km
+		addOptionSplit(8000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 5mi, 10km
 		
-		addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, groups);
+		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, groups);
 		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
 		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
@@ -280,8 +299,8 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				app.getSelectedGpxHelper().selectGpxFile(model.getGpx(), vis.isChecked(), true);
-				updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
+				app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
+				updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
 			}
 		});
 		
@@ -289,12 +308,12 @@ public class SelectedGPXFragment extends ListFragment {
 		
 	}
 	
-	private void updateSplit(final GpxDisplayGroup model, final List<Double> distanceSplit,
+	private void updateSplit(final List<GpxDisplayGroup> groups, final List<Double> distanceSplit,
 			final TIntArrayList timeSplit, final int which) {
 		new AsyncTask<Void, Void, Void>() {
 			
 			protected void onPostExecute(Void result) {
-				adapter.notifyDataSetChanged();
+				updateContent();
 				(getActivity()).setProgressBarIndeterminateVisibility(false);
 			}
 			
@@ -304,12 +323,14 @@ public class SelectedGPXFragment extends ListFragment {
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				if(which == 0) {
-					model.noSplit(app);
-				} else if(distanceSplit.get(which) > 0) {
-					model.splitByDistance(app, distanceSplit.get(which));
-				} else if(timeSplit.get(which) > 0) {
-					model.splitByTime(app, timeSplit.get(which));
+				for (GpxDisplayGroup model : groups) {
+					if (which == 0) {
+						model.noSplit(app);
+					} else if (distanceSplit.get(which) > 0) {
+						model.splitByDistance(app, distanceSplit.get(which));
+					} else if (timeSplit.get(which) > 0) {
+						model.splitByTime(app, timeSplit.get(which));
+					}
 				}
 				return null;
 			}
@@ -317,13 +338,13 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<String> options, List<Double> distanceSplit,
-			TIntArrayList timeSplit, int[] checkedItem, GpxDisplayGroup model) {
+			TIntArrayList timeSplit, int[] checkedItem, List<GpxDisplayGroup> model) {
 		if (distance) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
 			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
 			distanceSplit.add(dvalue);
 			timeSplit.add(-1);
-			if (Math.abs(model.getSplitDistance() - dvalue) < 1) {
+			if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
 				checkedItem[0] = distanceSplit.size() - 1;
 			}
 		} else {
@@ -336,7 +357,7 @@ public class SelectedGPXFragment extends ListFragment {
 			}
 			distanceSplit.add(-1d);
 			timeSplit.add(value);
-			if (model.getSplitTime() == value) {
+			if (model.get(0).getSplitTime() == value) {
 				checkedItem[0] = distanceSplit.size() - 1;
 			}
 		}
@@ -388,11 +409,9 @@ public class SelectedGPXFragment extends ListFragment {
 			row.setTag(child);
 
 			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
-			if ((child.expanded || isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) && !Algorithms.isEmpty(child.description)) {
+			boolean expand = true; //child.expanded || isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)
+			if (expand && !Algorithms.isEmpty(child.description)) {
 				String d = child.description;
-				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					d += "<br/>" + app.getString(R.string.local_index_gpx_info_show);
-				}
 				description.setText(Html.fromHtml(d));
 				description.setVisibility(View.VISIBLE);
 			} else {
@@ -407,8 +426,8 @@ public class SelectedGPXFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		GpxDisplayItem child = adapter.getItem(position);
-		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
-				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+//		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
+//				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
 			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, child.name);
@@ -418,9 +437,9 @@ public class SelectedGPXFragment extends ListFragment {
 			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, child.locationStart, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 			optionsMenu.show();
-		} else {
-			child.expanded = !child.expanded;
-			adapter.notifyDataSetInvalidated();
-		}
+//		} else {
+//			child.expanded = !child.expanded;
+//			adapter.notifyDataSetInvalidated();
+//		}
 	}
 }

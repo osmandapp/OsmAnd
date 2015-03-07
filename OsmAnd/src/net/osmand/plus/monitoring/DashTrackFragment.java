@@ -43,8 +43,6 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_TRACK_FRAGMENT";
 
-	private Drawable gpxOnMap;
-	private Drawable gpxNormal;
 	private boolean updateEnable;
 
 	@Override
@@ -54,13 +52,6 @@ public class DashTrackFragment extends DashBaseFragment {
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
 		header.setTypeface(typeface);
 		header.setText(R.string.tracks);
-		gpxNormal = getResources().getDrawable(R.drawable.ic_gpx_track).mutate();
-		gpxOnMap = getResources().getDrawable(R.drawable.ic_gpx_track).mutate();
-		gpxOnMap.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		if (getMyApplication().getSettings().isLightContent()) {
-			gpxNormal.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
-
 
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
@@ -143,20 +134,18 @@ public class DashTrackFragment extends DashBaseFragment {
 		startHandler(view);
 
 		for (String filename : list) {
-			System.out.println(" >> " + filename);
 			final File f = new File(filename);
 			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 			info.subfolder = "";
 			info.file = f;
 			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.udpateGpxInfoView(v, info, app, gpxNormal, gpxOnMap, true);
+			AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showOnMap(GPXUtilities.loadGPXFile(app, f));
 				}
 			});
-			v.setBackgroundColor(Color.TRANSPARENT);
 			tracks.addView(v);
 		}
 	}

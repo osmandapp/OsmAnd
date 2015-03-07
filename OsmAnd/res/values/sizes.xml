@@ -51,6 +51,7 @@
 	<dimen name="download_descr_text_size">12sp</dimen>
     <dimen name="subHeaderTextSize">14sp</dimen>
     <dimen name="dashFavNameTextSize">16sp</dimen>
+    <dimen name="dashFavDescTextSize">14sp</dimen>
     <dimen name="dashProgressTextSize">14sp</dimen>
     <dimen name="dashParkingTextSize">24sp</dimen>
 </resources>
