@@ -276,7 +276,7 @@
   
   
   
-<string name="local_index_installed">Editie</string>
+<string name="local_index_installed">Lokale versie</string>
   <string name="local_index_items_backuped">%1$d van %2$d bestanden succesvol gedeactiveerd.</string>
   <string name="local_index_items_deleted">%1$d van %2$d bestanden succesvol verwijderd.</string>
   <string name="local_index_items_restored">%1$d van %2$d bestanden succesvol geactiveerd.</string>
@@ -474,7 +474,7 @@
   <string name="loading_builds">OsmAnd-versies worden geladen…</string>
   <string name="select_build_to_install">Kies een OsmAnd-versie om te installeren</string>
   <string name="contribution_activity">Installeer versie</string>
-  <string name="gps_status_app_not_found">GPS Status is niet geïnstalleerd. Zoeken op Market?</string>
+  <string name="gps_status_app_not_found">GPS-status applicatie is niet geïnstalleerd. Zoeken op Market?</string>
   <string name="voice_is_not_available_msg">Stembegeleiding is niet aanwezig. Ga naar instellingen, kies een pakket stem-gegevens, en download het.</string>
   <string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
   <string name="daynight_mode_day">Dag</string>
@@ -2109,4 +2109,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="export">Exporteren</string>
 	<string name="route_points">Route punten</string>
 	<string name="days_behind">Achterstand</string>
+	<string name="shared_string_release">Vrijgegeven</string>
 	</resources>
