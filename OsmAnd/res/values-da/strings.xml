@@ -836,7 +836,7 @@
 	<string name="loading_builds">Indlæser OsmAnd versioner…</string>
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer version</string>
-	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Play butik?</string>
+	<string name="gps_status_app_not_found">GPS-status applikation er ikke installeret. Søg på Play butik?</string>
 	<string name="voice_is_not_available_title">Ingen stemmevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
