@@ -1586,7 +1586,7 @@
 \n\t* 많은 UX 개선 및 사용성 고정.
 \n\t* 음성 속도 설정 추가. "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
-	<string name="local_index_installed">편집</string>
+	<string name="local_index_installed">로컬 버전</string>
 	<string name="voice_not_specified">지정없음</string>
 	<string name="incomplete_locale">불완성</string>
 	<string name="downloading_file_new">다운로드 중…</string>
@@ -2186,4 +2186,5 @@
 	<string name="track_segments">트랙 세그먼트</string>
 	<string name="track_points">트랙 포인트</string>
 	<string name="route_points">루트 포인트</string>
+	<string name="shared_string_release">릴리스</string>
 	</resources>
