@@ -23,12 +23,7 @@ public class TrackRoutePointFragment extends SelectedGPXFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu.clear();
-		((TrackActivity) getActivity()).getClearToolbar(false);
-		if (isArgumentTrue(ARG_TO_HIDE_CONFIG_BTN)) {
-			return;
-		}
-
+		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.add(R.string.add_to_favourite).setIcon(R.drawable.ic_action_fav_dark)
 				.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override

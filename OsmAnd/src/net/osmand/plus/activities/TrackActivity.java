@@ -13,7 +13,6 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackRoutePointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
@@ -21,11 +20,11 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -131,6 +130,8 @@ public class TrackActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 	}
+	
+	
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);

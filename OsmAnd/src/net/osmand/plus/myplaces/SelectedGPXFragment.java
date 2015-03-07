@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,9 +34,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -61,6 +66,7 @@ public class SelectedGPXFragment extends ListFragment {
 	protected SelectedGPXAdapter adapter;
 	protected boolean lightContent;
 	protected Activity activity;
+	private boolean updateEnable;
 	
 	
 	@Override
@@ -78,6 +84,19 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 	
 	
+	private void startHandler() {
+		Handler updateCurrentRecordingTrack = new Handler();
+		updateCurrentRecordingTrack.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (updateEnable) {
+					adapter.notifyDataSetInvalidated();
+					startHandler();
+				}
+			}
+		}, 2000);
+	}
+	
 	public boolean isArgumentTrue(String arg) {
 		Bundle args = getArguments();
 		return args != null && args.getBoolean(arg);
@@ -88,6 +107,16 @@ public class SelectedGPXFragment extends ListFragment {
 	public void onResume() {
 		super.onResume();
 		updateContent();
+		updateEnable = true;
+		if(getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
+			startHandler();
+		}
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		updateEnable = false;
 	}
 
 
@@ -247,6 +276,21 @@ public class SelectedGPXFragment extends ListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		((TrackActivity) getActivity()).getClearToolbar(false);
+		if (getGpx().path != null) {
+			MenuItem item = menu.add(R.string.share_fav).setIcon(R.drawable.ic_action_gshare_dark)
+					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							final Uri fileUri = Uri.fromFile(new File(getGpx().path));
+							final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+							sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+							sendIntent.setType("application/gpx+xml");
+							startActivity(sendIntent);
+							return true;
+						}
+					});
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
 	}
 
 

@@ -10,12 +10,14 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -31,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +84,8 @@ public class DashTrackFragment extends DashBaseFragment {
 		super.onPause();
 		updateEnable = false;
 	}
+	
+	
 
 	private void setupGpxFiles() {
 		View mainView = getView();
@@ -139,12 +144,28 @@ public class DashTrackFragment extends DashBaseFragment {
 			info.file = f;
 			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 			AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
+			
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showOnMap(GPXUtilities.loadGPXFile(app, f));
+					AvailableGPXFragment.openTrack(getActivity(), f);
 				}
 			});
+			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
+			showOnMap.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Runnable run = new Runnable() {
+						@Override
+						public void run() {
+							showOnMap(GPXUtilities.loadGPXFile(app, f));
+						}
+					};
+					run.run();
+				}
+			});
+			showOnMap.setVisibility(View.VISIBLE);
+			showOnMap.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
 			tracks.addView(v);
 		}
 	}

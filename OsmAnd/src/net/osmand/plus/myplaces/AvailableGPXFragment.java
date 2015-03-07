@@ -119,6 +119,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void run() {
 				if (getView() != null && updateEnable) {
 					updateCurrentTrack(getView(), getActivity(), app);
+					if(selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
+						allGpxAdapter.notifyDataSetInvalidated();
+					}
 					startHandler();
 				}
 			}
@@ -223,12 +226,25 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			currentTrackView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					openTrack(getActivity(), null);
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
 		}
 
 		return v;
+	}
+	
+	public static void openTrack(Activity a, final File f) {
+		Intent newIntent = new Intent(a, ((OsmandApplication) a.getApplication()).getAppCustomization().getTrackActivity());
+		// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		if(f == null) {
+			newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+		} else {
+			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
+		}
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		a.startActivity(newIntent);
 	}
 
 	public static void createCurrentTrackView(View v, final OsmandApplication app) {

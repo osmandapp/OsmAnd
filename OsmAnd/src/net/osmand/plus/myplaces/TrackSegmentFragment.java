@@ -3,7 +3,6 @@ package net.osmand.plus.myplaces;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.TrackActivity;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +21,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu.clear();
-		((TrackActivity) getActivity()).getClearToolbar(false);
+		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.add(R.string.showed_on_map).setIcon(R.drawable.ic_show_on_map).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
