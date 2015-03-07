@@ -486,7 +486,7 @@
 	<string name="select_build_to_install">설치할 OsmAnd 빌드 선택</string>
 	<string name="contribution_activity">버전 설치</string>
 
-	<string name="gps_status_app_not_found">GPS Status 앱이 설치되지 않았습니다. 구글마켓에서 찾을까요?</string>
+	<string name="gps_status_app_not_found">GPS status 앱이 설치되지 않았습니다. 구글마켓에서 찾을까요?</string>
 
 	<string name="voice_is_not_available_msg">"음성 안내를 사용할 수 없습니다. \'설정 - 일반 - 음성안내\' 로 가서, 선호하는 음성 안내  패키지를 선택하고 다운로드하세요."</string>
 	<string name="voice_is_not_available_title">선택된 음성 안내 없음</string>
@@ -2130,7 +2130,7 @@
     <string name="tracks">경로</string>
     <string name="my_location">내 위치</string>
     <string name="osm_editing_manage">관리</string>
-    <string name="gps_status">GPS 상태</string>
+    <string name="gps_status">GPS status</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
     <string name="enable_plugin">비활성화됨</string>
