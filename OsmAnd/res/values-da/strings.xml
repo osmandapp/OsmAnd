@@ -681,7 +681,7 @@
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 	
 	
-	<string name="local_index_installed">Lokale version</string>
+	<string name="local_index_installed">Lokal version</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>
 	<string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
 	<string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
