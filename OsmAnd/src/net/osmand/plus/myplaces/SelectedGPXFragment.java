@@ -13,7 +13,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
@@ -23,10 +22,8 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -190,44 +187,7 @@ public class SelectedGPXFragment extends ListFragment {
 		return view;
 	}
 	
-	protected void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
-		Builder builder = new AlertDialog.Builder(getMyActivity());
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyActivity());
-		basicFileOperation(gpxDisplayItem, adapter);
-
-		String[] values = adapter.getItemNames();
-		builder.setItems(values, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				OnContextMenuClick clk = adapter.getClickAdapter(which);
-				if (clk != null) {
-					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
-				}
-			}
-
-		});
-		builder.show();
-	}
 	
-	private void basicFileOperation(final GpxDisplayItem gpxDisplayItem, ContextMenuAdapter adapter) {
-		OnContextMenuClick listener = new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
-				if (resId == R.string.show_gpx_route) {
-					OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
-							settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_WPT, Html.fromHtml(gpxDisplayItem.name).toString()));
-					MapActivity.launchMapActivityMoveToTop(getMyActivity());
-				}
-				return true;
-			}
-		};
-		if (gpxDisplayItem.locationStart != null) {
-			adapter.item(R.string.show_gpx_route).listen(listener).reg();
-		}
-		OsmandPlugin.onContextMenuActivity(getActivity(), this, gpxDisplayItem, adapter);
-	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -483,7 +443,7 @@ public class SelectedGPXFragment extends ListFragment {
 //				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
-			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, child.name);
+			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, Html.fromHtml(child.name).toString());
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = app.getSettings();
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);

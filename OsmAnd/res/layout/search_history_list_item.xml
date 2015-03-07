@@ -5,6 +5,7 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
+			  android:descendantFocusability="blocksDescendants"
 			  android:orientation="horizontal"
 			  android:paddingLeft="@dimen/list_content_padding">
 
@@ -79,6 +80,7 @@
 		android:layout_height="@dimen/list_item_height"
 		android:layout_gravity="center_vertical"
 		android:visibility="gone"
+		android:focusable="false"
 		android:background="?attr/options_button_background"
 		android:src="?attr/list_settings_icon"/>
 	

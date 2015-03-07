@@ -449,7 +449,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				runSelection(false);
-				updateCurrentTrack();
 				actionMode.finish();
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
@@ -464,9 +463,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				updateCurrentTrack();
 				showOnMapMode = false;
 				enableSelectionMode(false);
+				updateCurrentTrack();
 				allGpxAdapter.notifyDataSetChanged();
 			}
 
