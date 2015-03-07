@@ -2119,4 +2119,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="selected_tracks">Selezionato</string>
 	<string name="track_segments">Spezzoni di traccia</string>
 	<string name="track_points">Punti della traccia</string>
+	<string name="route_points">Punti del percorso</string>
 	</resources>
