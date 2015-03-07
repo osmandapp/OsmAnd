@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+
 	<string name="route_points">Route points</string>
 	<string name="track_segments">Track segments</string>
 	<string name="track_points">Track points</string>
@@ -1588,7 +1589,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="vector_map_not_needed">No, thanks</string>
 	<string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
-	<string name="local_index_installed">Edition</string>
+	<string name="shared_string_release">Released</string>
+	<string name="local_index_installed">Local version</string>
 	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
 	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
 	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully activated.</string>

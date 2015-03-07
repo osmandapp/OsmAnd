@@ -169,7 +169,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		String vt = this.getString(R.string.about_version) + "\t";
 		String edition = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
-			edition = this.getString(R.string.local_index_installed) + " : \t" + this.getString(R.string.app_edition);
+			edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
 		}
 		tv.setText(vt + version + "\n" +
 				edition + "\n\n" +
