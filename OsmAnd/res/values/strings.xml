@@ -90,7 +90,7 @@
 	</string>
 	<string name="record_plugin_name">Trip recording</string>
 	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX recording widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
-		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitior their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be anaylized in special 3rd party analysis tools.
+		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
 	<string name="osmo_plugin_name">OsMo monitoring</string>
 	<string name="osmo_plugin_description">Shows the settings to use OsMo advanced live monitoring, see http://osmo.mobi. Track other devices and be tracked. 
