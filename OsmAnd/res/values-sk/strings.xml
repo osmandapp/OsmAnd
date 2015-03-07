@@ -361,7 +361,7 @@
   
   
   
-  <string name="local_index_installed">Vydanie</string>
+  <string name="local_index_installed">Lokálna verzia</string>
   <string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
   <string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>
   <string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
@@ -564,7 +564,7 @@
   <string name="loading_builds">Načítavajú sa zostavy OsmAndu…</string>
   <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
   <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
-  <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju na Markete?</string>
+  <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju v Obchode?</string>
   <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do Nastavenia → \'Všeobecné\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
   <string name="daynight_mode_day">Denný režim</string>
@@ -2163,4 +2163,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_places">Moje miesta</string>
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>
+	<string name="shared_string_currently_recording_track">Nahráva sa stopa</string>
+	<string name="shared_string_audio">Zvuk</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+
+	<string name="route_points">Body trasy</string>
+	<string name="shared_string_release">Vydaná</string>
 	</resources>
