@@ -590,7 +590,6 @@
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
     <string name="remember_choice">Remember my choice</string>
-    <string name="gps_status_eclipsim">GPS status</string>
     <string name="default_and">and</string>
     <string name="default_or">or</string>
 	<string name="route_is_too_long">OsmAnd offline routing may take very long (or sometimes not work) for points more than 200km apart. You may want to add intermediate waypoints for better performance.</string>
