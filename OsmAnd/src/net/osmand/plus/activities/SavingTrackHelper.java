@@ -12,6 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -311,7 +312,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastTimeUpdated = 0;
 		lastPoint = null;
 		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis()});
-		addTrackPoint( null, true);
+		addTrackPoint( null, true, System.currentTimeMillis());
 	}
 	
 	public void updateLocation(net.osmand.Location location) {
@@ -369,10 +370,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		lastTimeUpdated = time;
 		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
-		addTrackPoint(pt, newSegment);
+		addTrackPoint(pt, newSegment, time);
 	}
 	
-	private void addTrackPoint(WptPt pt, boolean newSegment) {
+	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
 		List<List<WptPt>> points = currentTrack.getModifiablePointsToDisplay();
 		Track track = currentTrack.getGpxFile().tracks.get(0);
 		assert track.segments.size() == points.size(); 
@@ -389,12 +390,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			TrkSegment lt = track.segments.get(track.segments.size() - 1);
 			lt.points.add(pt);
 		}
+		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
 	
 	public void insertPointData(double lat, double lon, long time, String description) {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = description;
 		currentTrack.getModifiableGpxFile().points.add(pt);
+		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		points++;
 		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
 	}
@@ -419,6 +422,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
 		}
 		currentTrack.processPoints();
+		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
+		distance = analysis.totalDistance;
+		points = analysis.wptPoints;
 	}
 
 	public boolean getIsRecording() {

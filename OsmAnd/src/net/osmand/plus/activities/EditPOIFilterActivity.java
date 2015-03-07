@@ -269,7 +269,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
 				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
-				la.notifyDataSetInvalidated();
+				la.notifyDataSetChanged();
 				lv.setSelectionFromTop(index, top);
 			}
 		});

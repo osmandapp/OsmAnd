@@ -427,7 +427,7 @@ public class AppInitializer implements IProgress {
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
 			long timeUpdated = app.savingTrackHelper.getLastTrackPointTime();
-			if (System.currentTimeMillis() - timeUpdated >= 45000) {
+			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
 				startTask(app.getString(R.string.saving_gpx_tracks), -1);
 				try {
 					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()));

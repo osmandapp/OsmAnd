@@ -20,6 +20,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -90,7 +91,8 @@ public class SelectedGPXFragment extends ListFragment {
 			@Override
 			public void run() {
 				if (updateEnable) {
-					adapter.notifyDataSetInvalidated();
+					updateContent();
+					adapter.notifyDataSetChanged();
 					startHandler();
 				}
 			}
@@ -121,16 +123,13 @@ public class SelectedGPXFragment extends ListFragment {
 
 
 
-	private GPXFile getGpx() {
-		return ((TrackActivity) getActivity()).getResult();
-	}
-
 
 	protected List<GpxDisplayGroup> filterGroups(GpxDisplayItemType type) {
-		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
-			for(GpxDisplayGroup group : ((TrackActivity) getActivity()).getContent()) {
+		List<GpxDisplayGroup> result = ((TrackActivity)getActivity()).getResult();
+		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(); 
+		for (GpxDisplayGroup group : result) {
 			boolean add = group.getType() == type || type == null;
-				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
 				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
 				while (item.hasNext()) {
 					GpxDisplayItem it2 = item.next();
@@ -141,11 +140,11 @@ public class SelectedGPXFragment extends ListFragment {
 				if (group.getModifiableList().isEmpty()) {
 					add = false;
 				}
-				}
-				if(add) {
-					groups.add(group);
-				}
-				
+			}
+			if (add) {
+				groups.add(group);
+			}
+
 		}
 		return groups;
 	}
@@ -161,6 +160,7 @@ public class SelectedGPXFragment extends ListFragment {
 		adapter.clear();
 		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterType());
 		adapter.addAll(flatten(groups));
+		adapter.notifyDataSetChanged();
 	}
 
 	protected GpxDisplayItemType filterType() {
@@ -276,7 +276,7 @@ public class SelectedGPXFragment extends ListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		((TrackActivity) getActivity()).getClearToolbar(false);
-		if (getGpx().path != null) {
+		if (getGpx().path != null && !getGpx().showCurrentTrack) {
 			MenuItem item = menu.add(R.string.share_fav).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
@@ -293,6 +293,10 @@ public class SelectedGPXFragment extends ListFragment {
 		}
 	}
 
+
+	protected GPXFile getGpx() {
+		return ((TrackActivity)getActivity()).getGpx();
+	}
 
 	protected void selectSplitDistance() {
 		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT);
@@ -343,8 +347,9 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
-				updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
+				updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(),
+						vis.isChecked() ? sf : null);
 			}
 		});
 		
@@ -353,12 +358,14 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 	
 	private void updateSplit(final List<GpxDisplayGroup> groups, final List<Double> distanceSplit,
-			final TIntArrayList timeSplit, final int which) {
+			final TIntArrayList timeSplit, final int which, final SelectedGpxFile sf) {
 		new AsyncTask<Void, Void, Void>() {
 			
 			protected void onPostExecute(Void result) {
+				if(sf != null) {
+					sf.setDisplayGroups(filterGroups(null));
+				}
 				updateContent();
-				adapter.notifyDataSetChanged();
 				(getActivity()).setProgressBarIndeterminateVisibility(false);
 			}
 			
@@ -377,6 +384,7 @@ public class SelectedGPXFragment extends ListFragment {
 						model.splitByTime(app, timeSplit.get(which));
 					}
 				}
+				
 				return null;
 			}
 		}.execute((Void)null);

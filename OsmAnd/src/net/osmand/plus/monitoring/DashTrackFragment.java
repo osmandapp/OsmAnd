@@ -133,6 +133,12 @@ public class DashTrackFragment extends DashBaseFragment {
 		AvailableGPXFragment.createCurrentTrackView(view, app);
 		((TextView) view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
 		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AvailableGPXFragment.openTrack(getActivity(), null);
+			}
+		});
 		view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 		tracks.addView(view);
 		startHandler(view);

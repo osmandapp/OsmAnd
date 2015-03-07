@@ -7,7 +7,7 @@
     android:minHeight="@dimen/list_item_height"
     android:orientation="vertical"
     android:paddingLeft="@dimen/list_content_padding"
-    android:layout_marginTop="5dp"
+    android:paddingTop="10dp"
     android:paddingRight="@dimen/list_content_padding" >
 
     <LinearLayout
@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:paddingTop="2dp"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/dashFavNameTextSize"
             tools:text="@string/lorem_ipsum" />

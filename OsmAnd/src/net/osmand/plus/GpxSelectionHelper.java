@@ -11,6 +11,7 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -54,22 +55,9 @@ public class GpxSelectionHelper {
 	public final String getString(int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
 	}
-	
-	public List<GpxDisplayGroup> getDisplayGroups() {
-		List<GpxDisplayGroup> dg = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
-		for(SelectedGpxFile s : selectedGPXFiles) {
-			if(s.displayGroups == null) {
-				s.displayGroups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
-				GPXFile g = s.getGpxFile();
-				collectDisplayGroups(s.displayGroups, g);
-			}
-			dg.addAll(s.displayGroups);
-			
-		}
-		return dg;
-	}
 
-	public void collectDisplayGroups(List<GpxDisplayGroup> dg, GPXFile g) {
+	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
+		List<GpxDisplayGroup> dg = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		String name = g.path;
 		if(g.showCurrentTrack){
 			name =  getString(R.string.gpx_available_current_track);
@@ -160,6 +148,7 @@ public class GpxSelectionHelper {
 				list.add(item);
 			}
 		}
+		return dg;
 	}
 	
 	private static void processGroupTrack(OsmandApplication app, GpxDisplayGroup group) {
@@ -357,7 +346,7 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private void selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
+	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
 		boolean displayed = false;
 		SelectedGpxFile sf ;
 		if(gpx != null && gpx.showCurrentTrack) {
@@ -380,11 +369,13 @@ public class GpxSelectionHelper {
 				selectedGPXFiles.remove(sf);
 			}
 		}
+		return sf;
 	}
 	
-	public void selectGpxFile(GPXFile gpx, boolean show, boolean showNavigationDialog) {
-		selectGpxFileImpl(gpx, show, showNavigationDialog);
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean showNavigationDialog) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, showNavigationDialog);
 		saveCurrentSelections();
+		return sf;
 	}
 	
 	
@@ -395,24 +386,37 @@ public class GpxSelectionHelper {
 		private GPXFile gpxFile;
 		private int color;
 		private GPXTrackAnalysis trackAnalysis;
+		private long modifiedTime = -1;
 		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
-		private List<GpxDisplayGroup> displayGroups = null;
 		private boolean routePoints;
+
+		private List<GpxDisplayGroup> displayGroups;
 		
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
 			if(gpxFile.tracks.size() > 0) {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
-			trackAnalysis = gpxFile.getAnalysis(new File(gpxFile.path).lastModified());
 			processPoints();
 		}
 
 		public GPXTrackAnalysis getTrackAnalysis() {
+			if(modifiedTime != gpxFile.modifiedTime) {
+				update();
+			}
 			return trackAnalysis;
 		}
 
+		private void update() {
+			modifiedTime = gpxFile.modifiedTime;
+			trackAnalysis = gpxFile.getAnalysis(
+					Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() :
+					new File(gpxFile.path).lastModified());
+			displayGroups = null;
+		}
+
 		public void processPoints() {
+			update();
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
 			if(this.processedPointsToDisplay.isEmpty()) {
 				this.processedPointsToDisplay = gpxFile.processRoutePoints();
@@ -430,10 +434,6 @@ public class GpxSelectionHelper {
 		
 		public List<List<WptPt>> getModifiablePointsToDisplay() {
 			return processedPointsToDisplay;
-		}
-		
-		public List<GpxDisplayGroup> getDisplayGroups() {
-			return displayGroups;
 		}
 		
 		public GPXFile getGpxFile() {
@@ -456,6 +456,21 @@ public class GpxSelectionHelper {
 		public int getColor() {
 			return color;
 		}
+
+		public List<GpxDisplayGroup> getDisplayGroups() {
+			if(modifiedTime != gpxFile.modifiedTime) {
+				update();
+			}
+			return displayGroups;
+		}
+		
+		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
+			if(modifiedTime != gpxFile.modifiedTime) {
+				update();
+			}
+			this.displayGroups = displayGroups;
+		}
+
 
 	}
 	
