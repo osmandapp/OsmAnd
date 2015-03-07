@@ -85,7 +85,7 @@
 	<string name="track_points">Track points</string>
 	<string name="online_map_settings">Online maps</string>
 	<string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined Openstreetmap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
-		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s regular offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configue map\' menu as desired.
+		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s regular offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configure map\' menu as desired.
 		\n\nTile maps can be obtained directly via online sources, or can be prepared for offline use (and manually copied to OsmAnd\'s data folder) as an sqlite database which can be produced by a variety of 3rd party map preparation tools.
 	</string>
 	<string name="record_plugin_name">Trip recording</string>
