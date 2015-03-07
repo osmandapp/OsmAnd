@@ -185,7 +185,7 @@
  
   
   
-  <string name="local_index_installed">Version du</string>
+  <string name="local_index_installed">Version locale</string>
   <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
   <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
   <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
