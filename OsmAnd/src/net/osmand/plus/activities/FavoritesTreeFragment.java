@@ -146,6 +146,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		favouritesAdapter.synchronizeGroups();
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
+		setHasOptionsMenu(true);
 		return view;
 	}
 
@@ -370,10 +371,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-		if (portrait) {
+		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);

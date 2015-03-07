@@ -70,17 +70,17 @@ public class PointDescription {
 		return name;
 	}
 
+	@NonNull
+	public String getSimpleName(Context ctx, double lat, double lon) {
+		if (isLocation()) {
+			return getLocationName(ctx, lat, lon, true).replace('\n', ' ');
+		}
+		return name;
+	}
+	
 	public String getFullPlainName(Context ctx, double lat, double lon) {
 		if (isLocation()) {
-			OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-			int f = st.COORDINATES_FORMAT.get();
-			if (f == PointDescription.UTM_FORMAT) {
-				UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-				return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
-						+ ((long) pnt.easting);
-			} else {
-				return ctx.getString(R.string.location_on_map, convert(lat, f), convert(lon, f));
-			}
+			return getLocationName(ctx, lat, lon, false);
 		} else {
 			String typeName = this.typeName;
 			if (isFavorite()) {
@@ -98,6 +98,18 @@ public class PointDescription {
 				}
 			}
 			return name;
+		}
+	}
+
+	private String getLocationName(Context ctx, double lat, double lon, boolean sh) {
+		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		int f = st.COORDINATES_FORMAT.get();
+		if (f == PointDescription.UTM_FORMAT) {
+			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
+			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
+					+ ((long) pnt.easting);
+		} else {
+			return ctx.getString( sh? R.string.short_location_on_map : R.string.location_on_map, convert(lat, f), convert(lon, f));
 		}
 	}
 

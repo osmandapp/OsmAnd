@@ -20,7 +20,6 @@
 			android:maxLines="1"
 			android:visibility="gone"
 			android:layout_gravity="center_vertical"
-			android:textColor="@color/dashboard_divider_light"
 			android:text="@string/loading_data"
 			android:layout_marginRight="5dp"
 			android:textSize="@dimen/dashProgressTextSize"/>

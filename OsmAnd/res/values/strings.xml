@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Frequently asked questions, recent changes and others</string>
+    <string name="routing_settings_2">Navigation settings</string>
+    <string name="general_settings_2">General settings</string>
 	<string name="route_points">Route points</string>
 	<string name="track_segments">Track segments</string>
 	<string name="track_points">Track points</string>

@@ -49,6 +49,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference routing;
 	private Preference about;
 	private Preference version;
+	private Preference help;
 
 
 	@Override
@@ -65,7 +66,10 @@ public class SettingsActivity extends SettingsBaseActivity {
 		general.setOnPreferenceClickListener(this);
 		routing = (Preference) screen.findPreference("routing_settings");
 		routing .setOnPreferenceClickListener(this);
-		OsmandPlugin.onSettingsActivityCreate(this, screen);
+		help = (Preference) screen.findPreference("help");
+		help.setOnPreferenceClickListener(this);
+		
+		getToolbar().setTitle(Version.getFullVersion(getMyApplication()));
 		
 		Intent intent = getIntent();
 		if(intent != null && intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0) != 0){
@@ -122,6 +126,9 @@ public class SettingsActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
+			return true;
+		} else if (preference == help) {
+			startActivity(new Intent(this, HelpActivity.class));
 			return true;
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));

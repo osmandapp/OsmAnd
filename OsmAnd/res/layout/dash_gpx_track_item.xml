@@ -34,7 +34,6 @@
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/list_content_padding"
 			android:layout_marginTop="@dimen/favorites_icon_top_margin"
-			android:focusable="false"
 			android:src="@drawable/ic_gpx_track"
 			android:visibility="gone"/>
 

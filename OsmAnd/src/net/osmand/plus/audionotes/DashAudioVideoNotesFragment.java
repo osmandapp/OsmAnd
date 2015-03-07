@@ -10,13 +10,13 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -99,11 +99,12 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			}
 		}
 
-		for (final AudioVideoNotesPlugin.Recording recording : notes){
+		AudioVideoIcons icons = new AudioVideoIcons(getActivity());
+		for (final AudioVideoNotesPlugin.Recording recording : notes) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
-			Drawable icon =getNoteView(recording, view, getActivity());
+			Drawable icon = getNoteView(recording, view, getActivity(), icons);
 			icon.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 			view.setBackgroundColor(Color.TRANSPARENT);
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
@@ -117,32 +118,52 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-							new PointDescription(recording.getSearchHistoryType(),
-							recording.getName(getActivity())), true,
-							recording); //$NON-NLS-1$
+					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(),
+							recording.getLongitude(), 15,
+							new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())),
+							true, recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
 			notesLayout.addView(view);
 		}
 	}
+	
+	public static class AudioVideoIcons {
+		Drawable audio;
+		Drawable video;
+		Drawable image;
+
+		public AudioVideoIcons(Context a) {
+			audio = getDrawable(a, R.drawable.ic_type_audio, R.color.distance_color);
+			video = getDrawable(a, R.drawable.ic_type_video, R.color.distance_color);
+			image = getDrawable(a, R.drawable.ic_type_img, R.color.distance_color);
+		}
+
+		private Drawable getDrawable(Context a, int icId, int clrId) {
+			Drawable drawable = a.getResources().getDrawable(icId).mutate();
+			drawable.setColorFilter(a.getResources().getColor(clrId), Mode.MULTIPLY);
+			return drawable;
+		}
+
+	}
 
 	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
-								   final Context ctx) {
+								   final Context ctx, AudioVideoIcons icons) {
 		String name = recording.getName(ctx);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
 		nameText.setText(name);
-		((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(ctx));
+		((TextView) view.findViewById(R.id.descr)).setText(recording.getSmallDescription(ctx));
 
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
 		Drawable iconDrawable;
+		
 		if (recording.isAudio()) {
-			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
+			iconDrawable = icons.audio;
 		} else if (recording.isVideo()) {
-			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
+			iconDrawable = icons.video;
 		} else {
-			iconDrawable = ctx.getResources().getDrawable(R.drawable.ic_type_audio);
+			iconDrawable = icons.image;
 		}
 		icon.setImageDrawable(iconDrawable);
 		return iconDrawable;

@@ -331,14 +331,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
 					.trim();
 		}
-
+		
 		public String getSmallDescription(Context ctx) {
-
 			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, "", time).trim();
+				return time;
 			}
-			return ctx.getString(R.string.recording_description, "", "", time).trim();
+			updateInternalDescription();
+			return time + " " + getDuration(ctx);
+			
 		}
 
 		private String getDuration(Context ctx) {
@@ -353,9 +354,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return additional;
 		}
 
-		public void setDescription() {
-			//TODO implement setting description
-		}
 	}
 
 	private static void initializeRemoteControlRegistrationMethods() {

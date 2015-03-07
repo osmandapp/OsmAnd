@@ -12,6 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:visibility="gone"
+		android:focusable="false"
 		android:background="?attr/dashboard_divider"/>
 
 	<LinearLayout
@@ -33,7 +34,6 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginRight="@dimen/favorites_icon_right_margin"
-			android:focusable="false"
 			android:src="@drawable/ic_sdcard"/>
 
 		<LinearLayout

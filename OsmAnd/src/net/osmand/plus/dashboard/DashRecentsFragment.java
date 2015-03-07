@@ -6,17 +6,17 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.activities.search.SearchHistoryFragment.RecentIcons;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -38,7 +38,6 @@ import android.widget.TextView;
  */
 public class DashRecentsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_RECENTS_FRAGMENT";
-	private net.osmand.Location location = null;
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
@@ -108,39 +107,18 @@ public class DashRecentsFragment extends DashLocationFragment {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
 
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
-		favorites.removeAllViews();
+		LinearLayout recents = (LinearLayout) mainView.findViewById(R.id.items);
+		recents.removeAllViews();
 		if (points.size() > 3){
 			points = points.subList(0, 3);
 		}
+		RecentIcons ri = new RecentIcons(getActivity());
 		for (final HistoryEntry historyEntry : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_favorites_item, null, false);
-			TextView name = (TextView) view.findViewById(R.id.name);
-			TextView label = (TextView) view.findViewById(R.id.distance);
-			ImageView direction = (ImageView) view.findViewById(R.id.direction);
-//			if (point.getCategory().length() > 0) {
-//				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
-//			} else {
-				view.findViewById(R.id.group_image).setVisibility(View.GONE);
-//			}
-
-
-			((ImageView) view.findViewById(R.id.icon)).
-					setImageDrawable(icon);
-
-			if(loc != null){
-				direction.setVisibility(View.VISIBLE);
-				updateArrow(getActivity(), loc, new LatLon(historyEntry.getLat(), historyEntry.getLon()), direction,
-						10, R.drawable.ic_destination_arrow, heading);
-			}
-			arrows.add(direction);
-			name.setText(historyEntry.getName().getName());
-
-			//LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(historyEntry.getLat(), historyEntry.getLon(),
-					loc.getLatitude(), loc.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			View view = inflater.inflate(R.layout.search_history_list_item, null, false);
+			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, 
+					loc, getActivity(), ri);
+			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -148,7 +126,6 @@ public class DashRecentsFragment extends DashLocationFragment {
 							historyEntry.getName());
 				}
 			});
-			label.setText(distance, TextView.BufferType.SPANNABLE);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -158,18 +135,8 @@ public class DashRecentsFragment extends DashLocationFragment {
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
-
-			String typeName = historyEntry.getName().getTypeName();
-			if (typeName !=null && !typeName.isEmpty()){
-				view.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
-				((TextView) view.findViewById(R.id.group_name)).setText(typeName);
-			} else {
-				view.findViewById(R.id.group_image).setVisibility(View.GONE);
-				((TextView) view.findViewById(R.id.group_name)).setText("");
-			}
-			favorites.addView(view);
+			recents.addView(view);
 		}
-		updateLocation(location);
 	}
 
 	private void updateArrows() {
