@@ -107,7 +107,7 @@ public class DownloadTilesDialog {
 				run(zoom, seekBar.getProgress(), rb.getLatLonBounds(), mapSource);
 			}
 		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setView(view);
 		builder.show();
 	}

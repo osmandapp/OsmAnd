@@ -264,7 +264,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -629,7 +629,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				Builder builder = new AlertDialog.Builder(getDownloadActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}

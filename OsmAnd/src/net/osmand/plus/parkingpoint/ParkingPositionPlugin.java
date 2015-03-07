@@ -294,7 +294,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+		confirm.setNegativeButton(R.string.shared_string_cancel, null);
 		return confirm.show();
 	}
 	
@@ -310,7 +310,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));
-		setTime.setNegativeButton(R.string.default_buttons_cancel, null);
+		setTime.setNegativeButton(R.string.shared_string_cancel, null);
 		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
 

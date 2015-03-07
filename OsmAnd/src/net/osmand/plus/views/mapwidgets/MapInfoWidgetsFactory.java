@@ -165,7 +165,7 @@ public class MapInfoWidgetsFactory {
 							app.startNavigationService(NavigationService.USED_BY_GPX);
 						}
 					});
-					dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+					dlg.setNegativeButton(R.string.shared_string_cancel, null);
 					dlgshow[0] = dlg.show();
 
 				}

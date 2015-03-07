@@ -215,7 +215,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	public void makeSureUserCancelDownload() {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		bld.setTitle(getString(R.string.default_buttons_cancel));
+		bld.setTitle(getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
 		bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
@@ -280,7 +280,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 								copyFilesForAndroid19(newLoc);
 							}
 						});
-						ab.setNegativeButton(R.string.default_buttons_cancel, null);
+						ab.setNegativeButton(R.string.shared_string_cancel, null);
 						ab.show();
 					}
 				}

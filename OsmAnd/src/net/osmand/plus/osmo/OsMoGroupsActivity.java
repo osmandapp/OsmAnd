@@ -672,7 +672,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();
 	}
 	
@@ -864,7 +864,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		warnCreateDesc.setOnClickListener(click);
 		
 		builder.setView(v);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -920,7 +920,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		
 		builder.setView(v);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 
 			@Override
