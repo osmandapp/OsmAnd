@@ -205,6 +205,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		distance = 0;
 		points = 0;
+		currentTrack.getModifiableGpxFile().points.clear();
+		currentTrack.getModifiableGpxFile().tracks.clear();
+		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
+		currentTrack.getModifiablePointsToDisplay().clear();
 		return warnings;
 	}
 

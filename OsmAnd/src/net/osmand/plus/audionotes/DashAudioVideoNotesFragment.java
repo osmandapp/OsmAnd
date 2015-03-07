@@ -134,11 +134,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		Drawable iconDrawable;
 		
 		if (recording.isAudio()) {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_audio, R.color.distance_color);
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_audio, R.color.color_distance);
 		} else if (recording.isVideo()) {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_video, R.color.distance_color);
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_video, R.color.color_distance);
 		} else {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_img, R.color.distance_color);
+			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_img, R.color.color_distance);
 		}
 		icon.setImageDrawable(iconDrawable);
 		return iconDrawable;

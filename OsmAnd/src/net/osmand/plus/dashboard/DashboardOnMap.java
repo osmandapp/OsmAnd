@@ -30,7 +30,7 @@ public class DashboardOnMap {
 
 	private MapActivity ma;
 	FloatingActionButton fabButton;
-	boolean floatingButtonVisible = false;
+	boolean floatingButtonVisible = true;
 	private FrameLayout dashboardView;
 	private boolean visible = false;
 
@@ -57,13 +57,12 @@ public class DashboardOnMap {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(ma)
 					.withDrawable(ma.getResources().getDrawable(R.drawable.ic_action_map))
-					.withButtonColor(Color.parseColor("#ff8f00")).withGravity(Gravity.BOTTOM | Gravity.RIGHT)
-					.withMargins(0, 0, 16, 16).create();
+					.withButtonColor(ma.getResources().getColor(R.color.color_myloc_distance)).withGravity(Gravity.TOP | Gravity.RIGHT)
+					.withMargins(0, 160, 16, 0).create();
 			fabButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					setDashboardVisibility(false);
-					fabButton.hideFloatingActionButton();
 				}
 			});
 			fabButton.hideFloatingActionButton();
@@ -82,9 +81,7 @@ public class DashboardOnMap {
 		if (visible) {
 			addDashboardFragments();
 			dashboardView.setVisibility(View.VISIBLE);
-			if (floatingButtonVisible) {
-				fabButton.showFloatingActionButton();
-			}
+			fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.content));
 			ma.getMapActions().disableDrawer();
 			ma.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
@@ -99,16 +96,16 @@ public class DashboardOnMap {
 	}
 
 	// To animate view slide out from right to left
-	public void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(0,0,ma.findViewById(R.id.ParentLayout).getHeight(),0);
+	private void open(View view){
+		TranslateAnimation animate = new TranslateAnimation(-ma.findViewById(R.id.ParentLayout).getWidth(),0,0,0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
 		view.setVisibility(View.VISIBLE);
 	}
 
-	public void hide(View view) {
-		TranslateAnimation animate = new TranslateAnimation(0, 0, 0, ma.findViewById(R.id.ParentLayout).getHeight());
+	private void hide(View view) {
+		TranslateAnimation animate = new TranslateAnimation(0, -ma.findViewById(R.id.ParentLayout).getWidth(), 0, 0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {
@@ -141,9 +138,6 @@ public class DashboardOnMap {
 			DashErrorFragment errorFragment = new DashErrorFragment();
 			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG);
 		}
-//		if (manager.findFragmentByTag(DashMapFragment.TAG) == null) {
-//			fragmentTransaction.add(R.id.content, new DashMapFragment(), DashMapFragment.TAG);
-//		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
 			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
 		}
@@ -172,30 +166,7 @@ public class DashboardOnMap {
 	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
 		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
 			//making background of actionbar transparent with scroll
-			final int imageHeight = 200;
-			final int headerHeight = 200;
-			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
-			int margintop = -(int)(ratio * 60);
-			Resources r = ma.getResources();
-			int px = (int) TypedValue.applyDimension(
-					TypedValue.COMPLEX_UNIT_DIP,
-					margintop,
-					r.getDisplayMetrics());
-			int margin = px + (int)ma.getResources().getDimension(R.dimen.dashboard_map_bottom_padding);
-			if (headerHeight < t - margin){
-				//hiding action bar - showing floating button
-				//getSupportActionBar().hide();
-				if (fabButton != null) {
-					fabButton.showFloatingActionButton();
-					floatingButtonVisible = true;
-				}
-			} else {
-				//getSupportActionBar().show();
-				if (fabButton != null) {
-					fabButton.hideFloatingActionButton();
-					floatingButtonVisible = false;
-				}
-			}
+			// TODO
 		}
 	};
 

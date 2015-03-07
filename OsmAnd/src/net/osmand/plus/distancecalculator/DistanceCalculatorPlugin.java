@@ -426,7 +426,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			bitmapPaint.setFilterBitmap(true);
 			path = new Path();
 			
-			int distanceColor = view.getResources().getColor(R.color.distance_color);
+			int distanceColor = view.getResources().getColor(R.color.color_distance);
 			paint = new Paint();
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(7 * view.getDensity());

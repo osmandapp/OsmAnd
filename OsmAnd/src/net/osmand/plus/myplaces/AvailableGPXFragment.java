@@ -1334,7 +1334,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				selectedGpxHelper.getSelectedFileByName(child.getFileName());
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_gpx_track, R.color.distance_color));
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_gpx_track, R.color.color_distance));
 			analysis = sgpx.getTrackAnalysis();
 
 		}
