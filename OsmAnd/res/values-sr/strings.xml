@@ -357,7 +357,7 @@
     <string name="navigate_point_easting">Географска дужина</string>
     <string name="error_avoid_specific_road">Нисам пронашао заобилазнице</string>
     <string name="rename_failed">Преименовање није успело.</string>
-	<string name="currently_recording_track">Стаза која се тренутно снима</string>
+	<string name="shared_string_currently_recording_track">Стаза која се тренутно снима</string>
 	<string name="back_to_map">Назад на карту</string>
 	<string name="plugin_nautical_descr">Прелазак прегледа карте приказује поморски изглед, чиме се приказују све поморске ознаке навођења и графички знаци.
 		\n\nДатотека карте која садржи све опште поморске знаке је доступна у виду  једног преузимања и назива се „Светске поморске карте“.

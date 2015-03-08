@@ -1985,7 +1985,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="track_segments">Адрэзкі сьледу</string>
 	<string name="track_points">Пункты сьледу</string>
 	<string name="location_on_map">Каардынаты:\n Шырата %1$s\n Даўгата %2$s</string>
-	<string name="currently_recording_track">Сьлед, што запісваецца</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Скасаваць</string>
@@ -2049,7 +2048,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_shared_string_my_location">Маё месцазнаходжаньне</string>
 	<string name="shared_string_my_places">Мае мясьціны</string>
 	<string name="shared_string_shared_string_my_tracks">Мае сьляды</string>
-	<string name="shared_string_currently_recording_track">Сьлед, што запісваецца</string>
+	<string name="shared_string_shared_string_currently_recording_track">Сьлед, што запісваецца</string>
 	<string name="shared_string_audio">Аўдыё</string>
 	<string name="shared_string_video">Відэа</string>
 	<string name="shared_string_photo">Фота</string>

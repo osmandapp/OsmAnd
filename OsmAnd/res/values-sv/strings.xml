@@ -1833,7 +1833,7 @@
 	<string name="days_behind">dagar efter</string>
 	<string name="watch">Visa</string>
 	<string name="rename_failed">Namnbytet misslyckades.</string>
-	<string name="currently_recording_track">Spelar för tillfället in spår</string>
+	<string name="shared_string_currently_recording_track">Spelar för tillfället in spår</string>
 	<string name="back_to_map">Tillbaka till kartan</string>
 	<string name="turn_off_all">Stäng av alla</string>
 	<string name="showed_on_map">Visade på kartan</string>

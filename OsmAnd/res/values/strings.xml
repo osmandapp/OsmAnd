@@ -79,7 +79,7 @@
 	<string name="shared_string_my_places">My Places</string>
 	<string name="shared_string_shared_string_my_favorites">My Favorites</string>
 	<string name="shared_string_shared_string_my_tracks">My Tracks</string>
-	<string name="shared_string_currently_recording_track">Currently recording track</string>
+	<string name="shared_string_shared_string_currently_recording_track">Currently recording track</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Photo</string>
@@ -143,7 +143,6 @@
 	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
-	<string name="currently_recording_track">Currently recording track</string>
 	<string name="back_to_map">Back to map</string>
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>

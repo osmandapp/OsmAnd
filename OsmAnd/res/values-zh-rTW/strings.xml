@@ -1937,7 +1937,7 @@
 	<string name="days_behind">之後的日子</string>
 	<string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
 	<string name="rename_failed">重新命名失敗。</string>
-	<string name="currently_recording_track">現在正在錄製軌跡</string>
+	<string name="shared_string_currently_recording_track">現在正在錄製軌跡</string>
 	<string name="back_to_map">返回地圖</string>
 	<string name="turn_off_all">全部關閉</string>
 	<string name="showed_on_map">在地圖上顯示</string>

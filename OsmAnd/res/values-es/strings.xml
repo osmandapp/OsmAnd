@@ -1957,7 +1957,7 @@
 	<string name="turn_off_all">Apagar todo</string>
 	<string name="showed_on_map">Mostrado en el mapa</string>
 	<string name="rename_failed">Falló el renombrado.</string>
-	<string name="currently_recording_track">Actualmente registrando traza</string>
+	<string name="shared_string_currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
 	<string name="shared_string_selected">Seleccionada(s)</string>
 	<string name="track_segments">Segmentos de traza</string>

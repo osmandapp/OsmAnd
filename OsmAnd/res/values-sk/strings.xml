@@ -2035,7 +2035,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="track_points">Body stopy</string>
 	<string name="turn_off_all">Vypnúť všetky</string>
 	<string name="showed_on_map">Zobrazené na mape</string>
-	<string name="currently_recording_track">Nahráva sa stopa</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Zrušiť</string>
@@ -2101,7 +2100,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_places">Moje miesta</string>
 	<string name="shared_string_shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_shared_string_my_tracks">Moje stopy</string>
-	<string name="shared_string_currently_recording_track">Nahráva sa stopa</string>
+	<string name="shared_string_shared_string_currently_recording_track">Nahráva sa stopa</string>
 	<string name="shared_string_audio">Zvuk</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

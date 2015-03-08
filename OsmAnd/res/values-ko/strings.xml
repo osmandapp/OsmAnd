@@ -2114,7 +2114,6 @@
 	<string name="turn_off_all">모두 끄기</string>
 	<string name="showed_on_map">지도에 표시</string>
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
-	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
 	<string name="track_segments">트랙 세그먼트</string>
 	<string name="track_points">트랙 포인트</string>
@@ -2185,7 +2184,7 @@
 	<string name="shared_string_my_places">저장소</string>
 	<string name="shared_string_shared_string_my_favorites">모든 즐겨찾기</string>
 	<string name="shared_string_shared_string_my_tracks">경로</string>
-	<string name="shared_string_currently_recording_track">현재 기록중인 트랙</string>
+	<string name="shared_string_shared_string_currently_recording_track">현재 기록중인 트랙</string>
 	<string name="shared_string_audio">소리</string>
 	<string name="shared_string_video">영상</string>
 	<string name="shared_string_photo">사진</string>

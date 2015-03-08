@@ -2019,7 +2019,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
 	<string name="get_plugin">Krijgen</string>
-<string name="currently_recording_track">Huidige route opname</string>
 	<string name="watch">Bekijk</string>
 	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
@@ -2113,7 +2112,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_my_places">Mijn plaatsen</string>
 	<string name="shared_string_shared_string_my_favorites">Mijn favorieten</string>
 	<string name="shared_string_shared_string_my_tracks">Mijn routes</string>
-	<string name="shared_string_currently_recording_track">Huidige route wordt opgenomen</string>
+	<string name="shared_string_shared_string_currently_recording_track">Huidige route wordt opgenomen</string>
 	<string name="shared_string_audio">Geluid</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

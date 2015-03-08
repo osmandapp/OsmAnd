@@ -1884,7 +1884,6 @@
 	<string name="days_behind">dage gammel</string>
 	<string name="rename_failed">Fejl ved omdøbning.</string>
 	<string name="back_to_map">Tilbage til kortet</string>
-	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
 	<string name="track_segments">Sporsegmenter</string>
@@ -1956,7 +1955,7 @@
 	<string name="shared_string_my_places">Mine steder</string>
 	<string name="shared_string_shared_string_my_favorites">Mine favoritter</string>
 	<string name="shared_string_shared_string_my_tracks">Mine spor</string>
-	<string name="shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
+	<string name="shared_string_shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

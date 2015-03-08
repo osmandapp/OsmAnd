@@ -2054,7 +2054,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="turn_off_all">Spegni tutti</string>
 	<string name="showed_on_map">Visualizzato sulla mappa</string>
 	<string name="days_behind">giorni fa</string>
-	<string name="currently_recording_track">Traccia attualmente in registrazione</string>
 	<string name="track_segments">Spezzoni di traccia</string>
 	<string name="track_points">Punti della traccia</string>
 	<string name="route_points">Punti del percorso</string>
@@ -2124,7 +2123,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_my_places">I miei luoghi</string>
 	<string name="shared_string_shared_string_my_favorites">I miei preferiti</string>
 	<string name="shared_string_shared_string_my_tracks">Le mie tracce</string>
-	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
+	<string name="shared_string_shared_string_currently_recording_track">Traccia in corso di registrazione</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

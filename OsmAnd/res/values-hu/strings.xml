@@ -1870,7 +1870,7 @@
 	<string name="turn_off_all">Összes kikapcsolása</string>
 	<string name="showed_on_map">Megjelenítve a térképen</string>
 	<string name="rename_failed">Az átnevezés nem sikerült.</string>
-	<string name="currently_recording_track">Jelenleg rögzített nyomvonal</string>
+	<string name="shared_string_currently_recording_track">Jelenleg rögzített nyomvonal</string>
 	<string name="back_to_map">Vissza a térképhez</string>
 	<string name="location_on_map">Helyzet:\n Szélesség %1$s\n Hosszúság %2$s</string>
 	<string name="route_points">Útvonal pontok</string>
