@@ -32,24 +32,26 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
 	private List<OsmandPlugin> plugins;
 
-	private final View.OnClickListener getListener = new View.OnClickListener() {
+	private View.OnClickListener getListener(final OsmandPlugin plugin) {
+		return new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
 			View pluginView = AndroidUtils.findParentViewById(view, R.id.dash_plugin_item);
-			OsmandPlugin plugin = (OsmandPlugin) pluginView.getTag();
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 		}
 	};
+	}
 
-	private final View.OnClickListener pluginDetailsListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			OsmandPlugin plugin = (OsmandPlugin) view.getTag();
-			Intent intent = new Intent(getActivity(), PluginActivity.class);
-			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-			startActivity(intent);
-		}
-	};
+	private final View.OnClickListener pluginDetailsListener(final OsmandPlugin plugin) {
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getActivity(), PluginActivity.class);
+				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
+				startActivity(intent);
+			}
+		};
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -127,7 +129,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, final OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
-		view.setOnClickListener(pluginDetailsListener);
+		view.setOnClickListener(pluginDetailsListener(plugin));
 
 		TextView nameView = (TextView) view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());
@@ -137,7 +139,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		CompoundButton enableDisableButton = (CompoundButton) view.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) view.findViewById(R.id.get_plugin);
-		getButton.setOnClickListener(getListener);
+		getButton.setOnClickListener(getListener(plugin));
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view, plugin);
 		final View pluginView = view;
