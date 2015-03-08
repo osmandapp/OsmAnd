@@ -96,7 +96,7 @@ public class DirectionsDialogs {
 			}
 		});
 		item = optionsMenu.getMenu().add(
-				R.string.show_poi_on_map).setIcon(light ?
+				R.string.shared_string_show_on_map).setIcon(light ?
 				R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

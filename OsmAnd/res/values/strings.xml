@@ -1951,7 +1951,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="address">Address</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
-	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">No favorite points exist</string>
 	<string name="update_existing">Replace</string>
