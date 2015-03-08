@@ -160,7 +160,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				if(isSaving){
-					setText(map.getString(R.string.import_save), "");
+					setText(map.getString(R.string.shared_string_save), "");
 					setImageDrawable(monitoringBig);
 					return true;
 				}
