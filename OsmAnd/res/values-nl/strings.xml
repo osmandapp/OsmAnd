@@ -2106,7 +2106,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_remember_my_choice">Onthoud mijn keuze</string>
 	<string name="shared_string_refresh">Vernieuwen</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">Aan het downloaden</string>
+	<string name="shared_string_downloading">Aan het downloaden…</string>
 	<string name="shared_string_download_successful">Download succesvol</string>
 	<string name="shared_string_io_error">I/O-fout opgetreden</string>
 	<string name="shared_string_unexpected_error">Onverwachte fout opgetreden</string>

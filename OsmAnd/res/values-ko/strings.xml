@@ -2178,7 +2178,7 @@
 	<string name="shared_string_remember_my_choice">내 선택을 기억하기</string>
 	<string name="shared_string_refresh">새로고침</string>
 	<string name="shared_string_download">다운로드</string>
-	<string name="shared_string_downloading">다운로드 중</string>
+	<string name="shared_string_downloading">다운로드 중…</string>
 	<string name="shared_string_download_successful">성공적인 다운로드</string>
 	<string name="shared_string_io_error">입출력 오류가 발생하였습니다</string>
 	<string name="shared_string_unexpected_error">예기치 않은 오류가 발생 했습니다</string>

@@ -60,7 +60,7 @@
 	<string name="shared_string_remember_my_choice">Remember my choice</string>
 	<string name="shared_string_refresh">Refresh</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">Downloading</string>
+	<string name="shared_string_downloading">Downloading…</string>
 	<string name="shared_string_download_successful">Download successful</string>
 	<string name="shared_string_io_error">I/O error occurred</string>
 	<string name="shared_string_unexpected_error">Unexpected error occurred</string>
@@ -1952,7 +1952,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="downloading">Downloading…</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
 	<string name="show_poi_on_map">Show on map</string>
