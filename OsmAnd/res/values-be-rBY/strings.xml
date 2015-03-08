@@ -1665,7 +1665,7 @@
 	<string name="map_preferences_descr">Nastrojka krynіcy і paramietraŭ mapy, kaardynat markiera, aryjentacyі ekrana</string>
 	<string name="osm_settings">Redahavańnie OSM</string>
 	<string name="additional_settings">Dadatkovyja nalady</string>
-	<string name="settings">Nalady</string>
+	<string name="shared_string_settings">Nalady</string>
 	<string name="update_tile">Abnavіć mapu</string>
 	<string name="reload_tile">Abnavіć častku mapy</string>
 	<string name="mark_point">Ceĺ</string>

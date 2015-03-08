@@ -822,7 +822,7 @@
   <string name="auto_zoom_map_descr">Automatiškai priderinti žemėlapio mastelį pagal jūsų greitį</string>
   <string name="auto_zoom_map">Automatiškai keisti mastelį</string>
   <string name="additional_settings">Papildomi nustatymai</string>
-  <string name="settings">Nustatymai</string>
+  <string name="shared_string_settings">Nustatymai</string>
   <string name="save_current_track_descr">Dabar išsaugoti judėjimo istoriją į SD kortelę</string>
   <string name="save_current_track">Išsaugoti dabartinę judėjimo istoriją</string>
   <string name="save_track_interval">Informacijos išsaugojimo intervalas naviguojant</string>

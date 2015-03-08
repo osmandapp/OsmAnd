@@ -441,7 +441,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
@@ -966,7 +966,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
 				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, SETTINGS_ID, R.string.settings, 
+		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
 				R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);

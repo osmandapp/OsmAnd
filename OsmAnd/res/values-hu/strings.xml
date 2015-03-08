@@ -683,7 +683,7 @@
   <string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében</string>
   <string name="auto_zoom_map">Automatikus nagyítás</string>
   <string name="additional_settings">További beállítások</string>
-  <string name="settings">Beállítások</string>
+  <string name="shared_string_settings">Beállítások</string>
   <string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
   <string name="save_current_track">Jelenlegi útvonal mentése</string>
   <string name="save_track_interval_descr">Válassz naplózási időközt a navigáció alatti útvonalrögzítéshez</string>

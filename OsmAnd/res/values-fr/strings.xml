@@ -630,7 +630,7 @@
   <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
   <string name="auto_zoom_map">Zoom automatique de la carte</string>
   <string name="additional_settings">Paramètres supplémentaires</string>
-  <string name="settings">Paramètres</string>
+  <string name="shared_string_settings">Paramètres</string>
   <string name="save_current_track_descr">Enregistrer la trace actuelle sur la carte SD</string>
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>

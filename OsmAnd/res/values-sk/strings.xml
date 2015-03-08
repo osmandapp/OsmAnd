@@ -815,7 +815,6 @@
   <string name="additional_settings">Ďalšie nastavenia</string>
   <string name="settings_preset_descr">Výber profilu užívateľa s prispôsobenými nastaveniami mapy a navigácie.</string>
   <string name="settings_preset">Užívateľský profil</string>
-  <string name="settings">Nastavenia</string>
   <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
   <string name="save_current_track">Uložiť aktuálnu stopu</string>
   <string name="save_track_interval_descr">Zvoť interval zaznamenávania stopy počas navigácie</string>

@@ -522,7 +522,7 @@
 	<string name="opening_hours">Åpningstider</string>
 	<string name="poi">Interessepunkt</string>
 	<string name="additional_settings">Tilleggsinnstillinger</string>
-	<string name="settings">Innstillinger</string>
+	<string name="shared_string_settings">Innstillinger</string>
 	<string name="save_current_track_descr">Lagre gjeldende spor til SD nå</string>
 	<string name="save_current_track">Lagre gjeldende GPX-spor</string>
 	<string name="save_track_interval">Loggeintervall under navigering</string>

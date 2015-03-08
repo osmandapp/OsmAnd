@@ -620,7 +620,7 @@
   <string name="auto_zoom_map_descr">Acercamiento automático del mapa según su velocidad (mientras el mapa se sincroniza con la posición actual)</string>
   <string name="auto_zoom_map">Acercamiento automático del mapa</string>
   <string name="additional_settings">Opciones adicionales</string>
-  <string name="settings">Opciones</string>
+  <string name="shared_string_settings">Opciones</string>
   <string name="save_current_track_descr">Guarda la traza actual en la SD ahora</string>
   <string name="save_current_track">Guardar traza actual</string>
   <string name="save_track_interval">Intervalo de guardado durante navegación</string>

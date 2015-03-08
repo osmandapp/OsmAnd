@@ -861,7 +861,7 @@
 	<string name="map_preferences_descr">設定地圖：地圖來源、旋轉方式、標示位置、畫面方向</string>
 	<string name="osm_settings">OSM 編輯</string>
 	<string name="additional_settings">額外設定</string>
-	<string name="settings">設定</string>
+	<string name="shared_string_settings">設定</string>
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">在導航期間的記錄間隔</string>

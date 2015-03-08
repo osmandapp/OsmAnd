@@ -153,7 +153,7 @@ public class PluginsActivity extends OsmandListActivity {
 		}
 
 		if (settingsActivity != null) {
-			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.settings);
+			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

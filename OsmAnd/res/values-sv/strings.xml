@@ -1041,7 +1041,7 @@
 	<string name="map_preferences_descr">Ange kartinställningar: kartkälla, rotation, markörposition, skärmorientering</string>
 	<string name="osm_settings">Redigera OSM</string>
 	<string name="additional_settings">Ytterligare inställningar</string>
-	<string name="settings">Inställningar</string>
+	<string name="shared_string_settings">Inställningar</string>
 	<string name="save_current_track_descr">Spara aktuellt spår till SD-kortet nu</string>
 	<string name="save_current_track">Spara aktuellt GPX-spår</string>
 	<string name="save_track_interval">Loggningsintervall under navigering</string>

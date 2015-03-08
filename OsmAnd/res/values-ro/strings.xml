@@ -961,7 +961,7 @@
 	<string name="map_preferences_descr">Specificarea setărilor despre hartă: sursa, rotație, poziție, orientare ecran</string>
 	<string name="osm_settings">Editare OSM</string>
 	<string name="additional_settings">Setări adiționale</string>
-	<string name="settings">Setări</string>
+	<string name="shared_string_settings">Setări</string>
 	<string name="save_current_track_descr">Se salvează traseul curent pe cardul SD</string>
 	<string name="save_current_track">Salvează traseul GPX curent</string>
 	<string name="save_track_interval">Interval de salvare a poziției in timpul navigării</string>

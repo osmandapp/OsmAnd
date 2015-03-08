@@ -1158,7 +1158,6 @@
 	<string name="map_preferences_descr">Indstil kortindstillinger: kortkilde, rotation, markørposition og skærmorientering</string>
 	<string name="osm_settings">OSM redigering</string>
 	<string name="additional_settings">Yderligere indstillinger</string>
-	<string name="settings">Indstillinger</string>
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval under navigation</string>

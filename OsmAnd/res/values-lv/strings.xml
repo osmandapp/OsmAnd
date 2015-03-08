@@ -683,7 +683,7 @@
   <string name="auto_zoom_map_descr">Automātiski mērogot karti atkarībā no pārvietošanās ātruma</string>
   <string name="auto_zoom_map">Automātiski mērogot karti</string>
   <string name="additional_settings">Papildus uzstādījumi</string>
-  <string name="settings">Uzstādījumi</string>
+  <string name="shared_string_settings">Uzstādījumi</string>
   <string name="save_current_track_descr">Saglabāt pašreizējo ceļu SD kartē</string>
   <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
   <string name="save_track_interval">Pierakstīšanas intervāls</string>

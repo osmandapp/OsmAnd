@@ -522,7 +522,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="additional_settings">Thiết lập thêm</string>
     <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
     <string name="settings_preset">Chế độ Ứng dụng</string>
-    <string name="settings">Thiết lập</string>
+    <string name="shared_string_settings">Thiết lập</string>
     <string name="save_current_track_descr">Lưu track hiện tại vào thẻ nhớ SD</string>
     <string name="save_current_track">Lưu track hiện tại</string>
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>

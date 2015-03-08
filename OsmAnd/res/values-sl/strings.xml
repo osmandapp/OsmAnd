@@ -829,7 +829,7 @@
 \n\nZa prikaz vseh priljubljenih točk direktno na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' → \'Nastavitve zemljevida\'. "</string>
 	<string name="transport">Prevoz</string>
 	<string name="additional_settings">Dodatne nastavitve</string>
-	<string name="settings">Nastavitve</string>
+	<string name="shared_string_settings">Nastavitve</string>
 	<string name="save_current_track">Shrani trenutno sled GPX</string>
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
 	<string name="save_track_interval">Interval beleženja med navigacijo</string>

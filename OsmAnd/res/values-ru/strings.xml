@@ -743,7 +743,6 @@
   <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
   <string name="auto_zoom_map">Масштаб</string>
   <string name="additional_settings">Дополнительные настройки</string>
-  <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас</string>
   <string name="save_current_track">Сохранить текущий трек GPX</string>
   <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации</string>

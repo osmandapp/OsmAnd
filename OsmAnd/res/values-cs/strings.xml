@@ -688,7 +688,7 @@
   <string name="auto_zoom_map_descr">Automaticky měnit zvětšení podle rychlosti pohybu</string>
   <string name="auto_zoom_map">Automatické zvětšení mapy</string>
   <string name="additional_settings">Další volby</string>
-  <string name="settings">Nastavení</string>
+  <string name="shared_string_settings">Nastavení</string>
   <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu</string>
   <string name="save_current_track">Uložit aktuální trasu GPX</string>
   <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace</string>

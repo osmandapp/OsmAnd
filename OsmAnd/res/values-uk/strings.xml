@@ -746,7 +746,7 @@
   <string name="auto_zoom_map_descr">Автомасштабування мапи відповідно до вашої швидкості (доки мапу синхронізовано із поточним місцезнаходженням)</string>
   <string name="auto_zoom_map">Автомасштабування</string>
   <string name="additional_settings">Додаткові налаштування</string>
-  <string name="settings">Налаштування</string>
+  <string name="shared_string_settings">Налаштування</string>
   <string name="save_current_track_descr">Зберегти активний трек на SD</string>
   <string name="save_current_track">Зберегти активний GPX трек</string>
   <string name="save_track_interval">Інтервал збереження під час навіґації</string>

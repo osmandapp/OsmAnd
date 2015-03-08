@@ -867,7 +867,7 @@
 	<string name="data_settings_descr">指定语言，下载/重新载入数据</string>
 	<string name="map_preferences_descr">指定地图设置：地图来源，旋转，标记位置，屏幕朝向</string>
 	<string name="additional_settings">附加设置</string>
-	<string name="settings">设置</string>
+	<string name="shared_string_settings">设置</string>
 	<string name="save_current_track_descr">立即保存当前轨迹到SD卡</string>
 	<string name="save_track_interval">日志记录时间间隔</string>
 	<string name="save_track_interval_descr">选择轨迹记录的位置间隔</string>

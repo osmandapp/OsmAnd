@@ -712,7 +712,6 @@
   <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
-  <string name="settings">Instellingen</string>
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval bij navigatie</string>

@@ -463,7 +463,7 @@
 <string name="exit_Button">Surt</string>
 <string name="settings_activity">Configuració</string>
 <string name="search_address">Cerca adreça</string>
-<string name="settings">Configuració</string>
+<string name="shared_string_settings">Configuració</string>
 <string name="data_settings">Dades</string>
 <string name="close">Tanca</string>
 <string name="update_existing">Reemplaça</string>

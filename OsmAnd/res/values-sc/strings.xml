@@ -1530,7 +1530,7 @@
 	<string name="map_preferences_descr">Dislinda impostaduras mapa: mitza, rotatzione, sinnadore de positzione, orientatzione ischermu</string>
 	<string name="osm_settings">Modìficas OSM</string>
 	<string name="additional_settings">Impostaduras annativas</string>
-	<string name="settings">Impostaduras</string>
+	<string name="shared_string_settings">Impostaduras</string>
 	<string name="save_current_track_descr">Sarba como sa rasta currente in s’ischeda SD</string>
 	<string name="save_current_track">Sarba sa rasta currente</string>
 	<string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>

@@ -679,7 +679,7 @@
   <string name="auto_zoom_map_descr">სიჩქარეზე რუკის ავტომატური გადიდება</string>
   <string name="auto_zoom_map">რუკის ავტომატური გადიდება</string>
   <string name="additional_settings">დამატებითი პარამეტრები</string>
-  <string name="settings">პარამეტრები</string>
+  <string name="shared_string_settings">პარამეტრები</string>
   <string name="save_current_track_descr">მიმდინარე ძებნის SDCard-ზე ჩაწერა</string>
   <string name="save_current_track">მიმდინარე დევნის დამახსოვრება</string>
   <string name="save_track_interval">ჟურნალირების ინტერვალი</string>

@@ -747,7 +747,7 @@
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
-  <string name="settings">Stellings</string>
+  <string name="shared_string_settings">Stellings</string>
   <string name="save_current_track_descr">Berg huidige spoor nou op SD</string>
   <string name="save_current_track">Berg huidige spoor</string>
   <string name="save_track_interval">Log tussenpose</string>

@@ -304,7 +304,7 @@
   <string name="additional_settings">Outras definições</string>
   <string name="settings_preset_descr">A vista de mapa e as definições de navegação são guardadas por perfil. Defina aqui o seu.</string>
   <string name="settings_preset">Perfil pré-definido</string>
-  <string name="settings">Configurações</string>
+  <string name="shared_string_settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
   <string name="save_current_track">Salvar a trilha atual</string>
   <string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>

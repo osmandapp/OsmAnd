@@ -735,7 +735,6 @@
     <string name="auto_zoom_map_descr">속도에 따라 자동으로 지도 줌(zoom)을 합니다</string>
     <string name="auto_zoom_map">자동 맵 줌</string>
     <string name="additional_settings">추가 설정</string>
-    <string name="settings">설정</string>
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 위한 로깅 간격을 선택합니다</string>

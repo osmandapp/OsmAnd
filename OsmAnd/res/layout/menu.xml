@@ -232,7 +232,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|top"
-                            android:text="@string/settings_Button"
+                            android:text="@string/shared_string_settings"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:typeface="serif" />

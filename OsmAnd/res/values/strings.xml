@@ -2026,7 +2026,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="data_settings">Data</string>
 	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
 	<string name="additional_settings">Additional settings</string>
-	<string name="settings">Settings</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
@@ -2053,13 +2052,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_internet">Use Internet</string>
 	<string name="show_location">Show location</string>
 	<string name="map_preferences">Map</string>
-	<string name="settings_activity">Settings</string>
 	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
 	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
 	<string name="app_description">Navigation application</string>
 	<string name="exit_Button">Exit</string>
 	<string name="map_Button">Map</string>
-	<string name="settings_Button">Settings</string>
 	<string name="favorites_Button">My Places</string>
 	<string name="search_button">Search</string>
 	<string name="search_activity">Search</string>
@@ -2162,7 +2159,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="hide_all_waypoints">Remove all</string>
 	<string name="plugin_description_title">Description</string>
-	<string name="plugin_settings_button_caption">Settings</string>
 	<string name="plugin_install_needs_network">You need an Internet connection to install this plugin.</string>
 	<string name="get_plugin">Get</string>
 </resources>

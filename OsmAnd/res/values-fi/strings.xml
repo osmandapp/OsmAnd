@@ -357,7 +357,7 @@
 	<string name="use_online_routing_descr">Käytä internettiä reitin laskentaan</string>
 	<string name="use_online_routing">Käytä online navigointia</string>
 	<string name="additional_settings">Lisäasetukset</string>
-	<string name="settings">Asetukset</string>
+	<string name="shared_string_settings">Asetukset</string>
 	<string name="save_current_track_descr">Tallenna nykyinen reitti muistikortille nyt</string>
 	<string name="save_current_track">Tallenna nykyinen GPX reitti</string>
 	<string name="save_track_interval">Kirjausväli</string>

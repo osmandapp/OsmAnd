@@ -623,7 +623,7 @@
 	<string name="show_poi_over_map_description">نشان دادن POI بر روی نقشه (استفاده از فیلترهای انتخاب شده قبلی)</string>
 	<string name="favourites_activity">علاقمندی ها</string>
 	<string name="data_settings">داده‌ها</string>
-	<string name="settings">تنظیمات</string>
+	<string name="shared_string_settings">تنظیمات</string>
 	<string name="additional_settings">تنظیمات اضافی</string>
 	<string name="update_tile">بروز رسانی نقشه</string>
 	<string name="download_indexes">بارگذاری داده بصورت آفلاین</string>

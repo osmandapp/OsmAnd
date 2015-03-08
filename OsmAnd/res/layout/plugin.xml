@@ -44,7 +44,7 @@
 				android:drawableStart="?attr/ic_action_settings"
 				android:paddingLeft="0dp"
 				android:paddingRight="16dp"
-				android:text="@string/plugin_settings_button_caption"
+				android:text="@string/shared_string_settings"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="12sp"
 				android:lines="1"

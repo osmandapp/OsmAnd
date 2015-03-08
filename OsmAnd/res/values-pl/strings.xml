@@ -539,7 +539,7 @@
   <string name="additional_settings">Dodatkowe ustawienia</string>
   <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil.</string>
   <string name="settings_preset">Domyślny profil</string>
-  <string name="settings">Ustawienia</string>
+  <string name="shared_string_settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>

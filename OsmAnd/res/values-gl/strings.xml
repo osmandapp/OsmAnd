@@ -1559,7 +1559,7 @@
 	<string name="map_preferences_descr">Indique a configuración do mapa: fonte do mapa, rotación, posición do marcador, orientación da pantalla</string>
 	<string name="osm_settings">Edición de OSM</string>
 	<string name="additional_settings">Opcións adicionais</string>
-	<string name="settings">Configuración</string>
+	<string name="shared_string_settings">Configuración</string>
 	<string name="update_tile">Actualizar o mapa</string>
 	<string name="reload_tile">Recargar a tesela</string>
 	<string name="mark_point">Destino</string>

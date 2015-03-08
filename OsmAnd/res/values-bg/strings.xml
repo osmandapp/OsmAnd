@@ -1393,7 +1393,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_preferences_descr">Настройки на картата: източник, завъртане, позиция на маркера, ориентация на екрана</string>
 	<string name="osm_settings">Редактиране на OSM</string>
 	<string name="additional_settings">Допълнителни настройки</string>
-	<string name="settings">Настройки</string>
+	<string name="shared_string_settings">Настройки</string>
 	<string name="save_current_track_descr">Запиши текущата следа в SD картата</string>
 	<string name="save_current_track">Запиши текущата GPX следа</string>
 	<string name="save_track_interval">Интервал за запис по време на навигация</string>

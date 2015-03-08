@@ -934,7 +934,7 @@
 	<string name="map_preferences_descr">נא לציין הגדרות מפה: מקור המפה, אופן סיבוב, מיקום הסמן, כיוון המסך</string>
 	<string name="osm_settings">עריכה ב־OSM</string>
 	<string name="additional_settings">הגדרות נוספות</string>
-	<string name="settings">הגדרות</string>
+	<string name="shared_string_settings">הגדרות</string>
 	<string name="save_current_track_descr">שמירת הדרך הנוכחית לכרטיס ה־SD כעת</string>
 	<string name="save_current_track">שמירת דרך ה־GPX הנוכחית</string>
 	<string name="save_track_interval">מרווח בין השמירות ליומן</string>

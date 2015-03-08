@@ -1303,7 +1303,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_preferences_descr">Настройка крыніцы і параметраў мапы, каардынат маркера, арыентацыі экрана</string>
 	<string name="osm_settings">Рэдагаваньне OSM</string>
 	<string name="additional_settings">Дадатковыя налады</string>
-	<string name="settings">Налады</string>
 	<string name="save_current_track_descr">Захаваць бягучы сьлед на SD зараз</string>
 	<string name="save_current_track">Захаваць бягучы GPX сьлед</string>
 	<string name="save_track_interval">Інтэрвал захоўваньня падчас навігацыі</string>

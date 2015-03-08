@@ -917,7 +917,7 @@
 	<string name="map_preferences_descr">Καθορισμός ρυθμίσεων χάρτη: πηγή χάρτη, περιστροφή, θέση δείκτη, προσανατολισμός οθόνης</string>
 	<string name="osm_settings">Επεξεργασία OSM</string>
 	<string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
-	<string name="settings">Ρυθμίσεις</string>
+	<string name="shared_string_settings">Ρυθμίσεις</string>
 	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους στην SD τώρα</string>
 	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους GPX</string>
 	<string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>

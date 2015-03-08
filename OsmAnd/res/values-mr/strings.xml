@@ -263,7 +263,7 @@
   <string name="use_online_routing">ऑनलाइन दिशादर्शन वापरा</string>
   <string name="data_settings">डेटा</string>
   <string name="additional_settings">आधिक सेटिंग्स</string>
-  <string name="settings">सेटिंग्स</string>
+  <string name="shared_string_settings">सेटिंग्स</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
   <string name="favourites_activity">आवडती ठिकाणे</string>
   <string name="add_to_favourite">आवडत्या ठिकणात नोंद करा</string>

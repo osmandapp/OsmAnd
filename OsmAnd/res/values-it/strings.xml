@@ -620,7 +620,6 @@
   <string name="auto_zoom_map_descr">Zoom mappa automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente)</string>
   <string name="auto_zoom_map">Zoom automatico mappa</string>
   <string name="additional_settings">Impostazioni aggiuntive</string>
-  <string name="settings">Impostazioni</string>
   <string name="save_current_track_descr">Salva adesso la traccia corrente nella scheda SD</string>
   <string name="save_current_track">Salva la traccia corrente</string>
   <string name="save_track_interval_descr">Scegli l\'intervallo di registrazione per la traccia durante la navigazione</string>

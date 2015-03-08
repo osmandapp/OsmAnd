@@ -358,7 +358,7 @@
 	<string name="save_current_track">Spremi trenutni GPX</string>
 	<string name="additional_settings">Dodatne postavke</string>
 	<string name="save_current_track_descr">Spremi trenutnu stazu na memorijsku karticu</string>
-	<string name="settings">Postavke</string>
+	<string name="shared_string_settings">Postavke</string>
 	<string name="data_settings">Podaci</string>
 	<string name="use_online_routing_descr">Koristi internet za izračun rute</string>
 	<string name="use_online_routing">Koristi online navigaciju</string>

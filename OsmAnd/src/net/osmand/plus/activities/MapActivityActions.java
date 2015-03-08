@@ -884,7 +884,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 
-		optionsMenuHelper.item(R.string.settings_activity)
+		optionsMenuHelper.item(R.string.shared_string_settings)
 		.icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
 		.listen(new OnContextMenuClick() {
 			@Override

@@ -504,7 +504,7 @@ POIの更新は利用できません</string>
  <string name="additional_settings">追加設定</string>
  <string name="settings_preset_descr">地図の表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
  <string name="settings_preset">デフォルトプロファイル</string>
- <string name="settings">設定</string>
+ <string name="shared_string_settings">設定</string>
  <string name="save_current_track_descr">現在の経路を今すぐSDに保存</string>
  <string name="save_current_track">現在の経路を保存</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>

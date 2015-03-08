@@ -1037,7 +1037,7 @@
 	<string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
 	<string name="osm_settings">OSM-Bearbeitung</string>
 	<string name="additional_settings">Weitere Einstellungen</string>
-	<string name="settings">Einstellungen</string>
+	<string name="shared_string_settings">Einstellungen</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
 	<string name="mark_point">Ziel</string>

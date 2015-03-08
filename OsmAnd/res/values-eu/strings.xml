@@ -1033,7 +1033,7 @@
   <string name="map_preferences_descr">Ezarri maparen ezarpenak: mapa iturburua, biraketa, markatzailearen kokapena, pantaila orientazioa</string>
   <string name="osm_settings">OSM edizioa</string>
   <string name="additional_settings">Gainerako ezarpenak</string>
-  <string name="settings">Ezarpenak</string>
+  <string name="shared_string_settings">Ezarpenak</string>
   <string name="save_current_track_descr">Uneko bidea SDan gorde orain</string>
   <string name="save_current_track">Uneko GPX bidea gorde</string>
   <string name="save_track_interval">Jarraipen tartea</string>
