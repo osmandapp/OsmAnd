@@ -134,7 +134,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
 			tv.setMovementMethod(LinkMovementMethod.getInstance());
 			bld.setView(sv);
-			bld.setPositiveButton(R.string.default_buttons_ok, null);
+			bld.setPositiveButton(R.string.shared_string_ok, null);
 			bld.show();
 			return true;
 		} else if(preference == trackerId) {
@@ -162,7 +162,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			public void run() {
 				Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
 				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
-				bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -170,7 +170,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 						plugin.getService().pushCommand(OsMoService.REGENERATE_CMD);
 					}
 				});
-				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.show();
 			}
 		};

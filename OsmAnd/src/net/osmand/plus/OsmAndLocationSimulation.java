@@ -73,7 +73,7 @@ public class OsmAndLocationSimulation {
 			final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
 			speedup.setMax(3);
 			builder.setView(view);
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -100,7 +100,7 @@ public class OsmAndLocationSimulation {
 
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
 			stop();

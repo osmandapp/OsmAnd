@@ -140,8 +140,8 @@ public class PluginsActivity extends OsmandListActivity {
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
 		if (plugin.isActive() || !plugin.needsInstallation()) {
 			MenuItem enableDisableItem = optionsMenu.getMenu().add(
-					plugin.isActive() ? R.string.disable_plugin2
-							: R.string.enable_plugin2);
+					plugin.isActive() ? R.string.shared_string_disable
+							: R.string.shared_string_enable);
 			enableDisableItem
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
@@ -154,7 +154,7 @@ public class PluginsActivity extends OsmandListActivity {
 		}
 
 		if (settingsActivity != null) {
-			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.settings);
+			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

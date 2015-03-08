@@ -218,7 +218,7 @@ public class FavouritesDbHelper {
 			} else {
 				builder.setMessage(uiContext.getString(R.string.fav_point_dublicate_message, name));
 			}
-			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			builder.setPositiveButton(R.string.shared_string_ok, null);
 			p.setName(name);
 			return builder;
 		}

@@ -126,8 +126,8 @@
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
     <string name="select_gpx">Ընտրել GPX …</string>
     <string name="route_descr_select_destination">Ընտրել Նպատակակետը</string>
-    <string name="route_descr_select_on_map">Ընտրել քարտեզի վրա …</string>
-    <string name="route_descr_favorite">Նախընտրելի …</string>
+    <string name="shared_string_select_on_map">Ընտրել քարտեզի վրա …</string>
+    <string name="shared_string_favorite">Նախընտրելի …</string>
     <string name="routing_attr_short_way_name">Կարճ ճանապարհ</string>
 	<string name="routing_attr_short_way_description">Օգտագործել կարճ ճանապարհը</string>
 	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհները</string>
@@ -147,6 +147,6 @@
 	<string name="routing_attr_weight_name">Կշիռ</string>
 	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
     <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
-    <string name="default_buttons_no">Ոչ</string>
-	<string name="default_buttons_yes">Այո</string>
+    <string name="shared_string_no">Ոչ</string>
+	<string name="shared_string_yes">Այո</string>
 	</resources>

@@ -60,8 +60,8 @@
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
-    <string name="route_descr_select_on_map">Ischerta in sa mapa…</string>
-    <string name="route_descr_favorite">Prefèrridu…</string>
+    <string name="shared_string_select_on_map">Ischerta in sa mapa…</string>
+    <string name="shared_string_favorite">Prefèrridu…</string>
     <string name="route_preferences">Preferèntzias pro s’àndala</string>
     <string name="route_info">Informatziones pro s’àndala</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
@@ -122,8 +122,8 @@
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
     <string name="remember_choice">Ammenta s’issèberu meu</string>
     <string name="gps_status_eclipsim">Istadu GPS</string>
-    <string name="default_and">e</string>
-    <string name="default_or">o</string>
+    <string name="shared_string_and">e</string>
+    <string name="shared_string_or">o</string>
 	<string name="route_is_too_long">Su càlculu de s’àndala de OsmAnd sena impreare internet diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km. Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas prestatziones.</string>
 	<string name="auto_zoom_none">No zoom automàticu</string>
 	<string name="auto_zoom_close">Zoom automàticu mannu</string>
@@ -132,8 +132,8 @@
 	<string name="map_magnifier">Ismanniamentu mapa</string>
 	<string name="base_world_map">Mapa mundiale de base</string>
 	<string name="tip_map_styles">Istiles de sa mapa</string>
-	<string name="default_buttons_no">Nono</string>
-	<string name="default_buttons_yes">Eja</string>
+	<string name="shared_string_no">Nono</string>
+	<string name="shared_string_yes">Eja</string>
 	<string name="tip_map_styles_t">"OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s’adatare a sas esigentzias tuas:
 \n\nDiferentes dae sos istiles balansados preimpostados de sa mapa, los agatas suta \'Menu\' -&gt; \'Cunfigura sa mapa\' -&gt; \'Istile Mapa\' issèbera pro esempru
 \n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.
@@ -573,7 +573,7 @@
     <string name="gpx_wpt">Tapa</string>
     <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
     <string name="delay_navigation_start">Inghitza su nàvigu passu pro passu automaticamente</string>
-    <string name="selected">ischertau</string>
+    <string name="shared_string_selected_lowercase">ischertau</string>
     <string name="local_index_gpx_info_show">\n\ntene carcau pro sas optziones</string>
 	<string name="gpx_info_subtracks">"Suta-rastas: %1$s "</string>
 	<string name="gpx_info_waypoints">"Tapas de s’àndala: %1$s "</string>
@@ -843,11 +843,11 @@
 	<string name="show_ruler_level">Ammustra s’iscala gràfica</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Torra a sa positzione</string>
-	<string name="help">Agiudu</string>
+	<string name="shared_string_help">Agiudu</string>
 	<string name="accessibility_mode">Modalidade atzessìbile</string>
 	<string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade</string>
-	<string name="accessibility_on">Ativau</string>
-	<string name="accessibility_off">Deativau</string>
+	<string name="shared_string_on">Ativau</string>
+	<string name="shared_string_off">Deativau</string>
 	<string name="backToMenu">Torra a su Menù</string>
 	<string name="zoomIs">Su zoom est</string>
 	<string name="north">nord</string>
@@ -1206,7 +1206,7 @@
 	<string name="map_underlay">Mapa de isfundu</string>
 	<string name="map_underlay_descr">Issèbera sa mapa de isfundu</string>
 	<string name="layer_overlay">Mapa supraposta…</string>
-	<string name="default_none">Perunu</string>
+	<string name="shared_string_none">Perunu</string>
 	<string name="map_overlay">Mapa subraposta</string>
 	<string name="map_overlay_descr">Issèbera mapa de subrapositzione</string>
 	<string name="tile_source_already_installed">Sa mapa est giai installata, sas impostaduras ant a èssere agiornadas</string>
@@ -1230,8 +1230,8 @@
 	<string name="tip_search">Chirca</string>
 	<string name="tip_map_context_menu">Menù \'Imprea positzione\'</string>
 	<string name="tip_initial">Impòsitos</string>
-	<string name="next_button">Sighi</string>
-	<string name="previous_button">Pretzedente</string>
+	<string name="shared_string_next">Sighi</string>
+	<string name="shared_string_previous">Pretzedente</string>
 	<string name="unit_of_length_descr">Muda sas unidades de medida pro longària e lestresa</string>
 	<string name="unit_of_length">Unidade de medida</string>
 	<string name="si_mi_foots">Mìglios/pedes</string>
@@ -1274,7 +1274,7 @@
 	<string name="indexing_map">Inditzizatzione mapa…</string>
 	<string name="indexing_poi">Inditzizatzione PDI…</string>
 	<string name="indexing_transport">Inditzizatzione trasportos…</string>
-	<string name="input_output_error">Errore de I/O</string>
+	<string name="shared_string_io_error">Errore de I/O</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -1446,7 +1446,7 @@
 	<string name="transport_stops_to_pass">firmadas da colare</string>
 	<string name="transport_route_distance">Distàntzia àndala</string>
 	<string name="transport">Trasportu pùblicu</string>
-	<string name="default_buttons_ok">Atzeta</string>
+	<string name="shared_string_ok">Atzeta</string>
 	<string name="show_transport_over_map_description">Ammustra sas firmadas de su trasportu pùblicu in sa mapa</string>
 	<string name="show_transport_over_map">Ammustra sas firmadas de su trasportu pùblicu</string>
 	<string name="hello">Aplicu de nàvigu OsmAnd</string>
@@ -1461,7 +1461,7 @@
 	<string name="search_history_building">Edifìtzios: {0}, {1}, {2}</string>
 	<string name="favorite">Prefèrridu</string>
 	<string name="clear_all">Burra totu</string>
-	<string name="history">Istòria</string>
+	<string name="shared_string_history">Istòria</string>
 	<string name="uploading_data">Imbiu datos…</string>
 	<string name="uploading">Imbiu…</string>
 	<string name="search_nothing_found">Nudda agatau</string>
@@ -1530,7 +1530,7 @@
 	<string name="map_preferences_descr">Dislinda impostaduras mapa: mitza, rotatzione, sinnadore de positzione, orientatzione ischermu</string>
 	<string name="osm_settings">Modìficas OSM</string>
 	<string name="additional_settings">Impostaduras annativas</string>
-	<string name="settings">Impostaduras</string>
+	<string name="shared_string_settings">Impostaduras</string>
 	<string name="save_current_track_descr">Sarba como sa rasta currente in s’ischeda SD</string>
 	<string name="save_current_track">Sarba sa rasta currente</string>
 	<string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>
@@ -1604,7 +1604,7 @@
 	<string name="context_menu_item_update_map">Agiorna sa mapa</string>
 	<string name="context_menu_item_open_bug">Sinnala un\'errore OSM</string>
 	<string name="context_menu_item_create_poi">Crea PDI</string>
-	<string name="default_buttons_cancel">Burra</string>
+	<string name="shared_string_cancel">Burra</string>
 	<string name="default_buttons_apply">Aplica</string>
 	<string name="default_buttons_add">Annanghe</string>
 	<string name="add_favorite_dialog_top_text">Inserta su nùmene de su prefèrridu</string>
@@ -1770,7 +1770,7 @@
     <string name="select_impassable_road">Ischerta in sa mapa…</string>
     <string name="impassable_road">Istransi istradas…</string>
     <string name="rendering_category_hide">Cua</string>
-    <string name="wake_on_voice_never">Mai</string>
+    <string name="shared_string_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s tenet bisòngiu de custa autorizatzione pro istudare s’ischermu pro sa funtzionalidade de rispàrmiu energèticu.</string>
     <string name="advanced_settings">Avantzadas</string>
 	<string name="osmo_use_https_descr">Imprea una cunnessione segura cun su server</string>
@@ -1785,7 +1785,7 @@
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
     <string name="use_opengl_render_descr">Imprea sa renderizatzione OpengL tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
-    <string name="dismiss">Abbandona</string>
+    <string name="shared_string_dismiss">Abbandona</string>
     <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere còmpida sa cunnessione tua pro sighire.</string>
     <string name="download_tab_downloads">Iscarrigàbiles</string>
     <string name="download_tab_updates">Agiornamentos</string>
@@ -1836,13 +1836,13 @@
     <string name="gps_status">Istadu GPS</string>
     <string name="parking_place">Parchègiu</string>
     <string name="remove_the_tag">BOGA SU TAG</string>
-    <string name="enable_plugin">Disabilitadu</string>
-	<string name="disable_plugin">Abilitadu</string>
+    <string name="shared_string_disabled">Disabilitadu</string>
+	<string name="shared_string_enabled">Abilitadu</string>
 <string name="plugin_description_title">Descritzione</string>
 	<string name="plugin_settings_button_caption">Impostaduras</string>
 <string name="edit_group">Modìfica su grupu</string>
-    <string name="enable_plugin2">Abìlita</string>
-	<string name="disable_plugin2">Disabìlita</string>
+    <string name="shared_string_enable">Abìlita</string>
+	<string name="shared_string_disable">Disabìlita</string>
 	<string name="plugin_install_needs_network">Est netzessària sa cunnessione a ìnternet pro installare custu cumponente annuntilu (plugin).</string>
 	<string name="get_plugin">Iscàrriga</string>
 <string name="plugin_nautical_name">Vista mapa nàutica</string>
@@ -1885,7 +1885,7 @@
 
 	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
-<string name="selected_tracks">Ischertadu</string>
+<string name="shared_string_selected">Ischertadu</string>
 	<string name="track_segments">Segmentos de sa rasta</string>
 	<string name="track_points">Puntos de sa rasta</string>
 	</resources>

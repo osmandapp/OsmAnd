@@ -212,7 +212,7 @@ public class AppInitializer implements IProgress {
 		if (netOsmandWasInstalled) {
 //			Builder builder = new AccessibleAlertBuilder(this);
 //			builder.setMessage(R.string.osmand_net_previously_installed);
-//			builder.setPositiveButton(R.string.default_buttons_ok, null);
+//			builder.setPositiveButton(R.string.shared_string_ok, null);
 //			builder.show();
 		} else {
 			AlertDialog.Builder builder = new AccessibleAlertBuilder(ctx);

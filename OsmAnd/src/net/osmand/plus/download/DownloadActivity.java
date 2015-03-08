@@ -383,13 +383,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 		if(count > 0){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					downloadFilesCheckInternet();
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

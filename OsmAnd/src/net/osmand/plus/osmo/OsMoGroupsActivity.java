@@ -429,7 +429,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				group = (OsMoGroup) (o instanceof OsMoGroup ? o : null);
 				MenuItem mi = null;
 				if (device != null) {
-					mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
+					mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.shared_string_ok, 0, 0,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
@@ -441,7 +441,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
@@ -506,7 +506,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					bld.setTitle(getString(
 							selectedObject instanceof OsMoDevice ? R.string.delete_confirmation_msg :
 									R.string.osmo_leave_confirmation_msg, name));
-					bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -515,7 +515,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							deleteObject(obj);
 						}
 					});
-					bld.setNegativeButton(R.string.default_buttons_no, null);
+					bld.setNegativeButton(R.string.shared_string_no, null);
 					bld.show();
 				} else if (item.getItemId() == GROUP_INFO) {
 					showGroupInfo(group);
@@ -600,7 +600,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		tv.setMovementMethod(LinkMovementMethod.getInstance());
 		tv.setText(sb.toString());
 		bld.setView(sv);
-		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		bld.setPositiveButton(R.string.shared_string_ok, null);
 		bld.setNegativeButton(R.string.osmo_invite, new OnClickListener() {
 			
 			@Override
@@ -672,7 +672,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();
 	}
 	
@@ -834,7 +834,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 		
-		//builder.setNegativeButton(R.string.default_buttons_no, null);
+		//builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();
 	}
 
@@ -864,8 +864,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		warnCreateDesc.setOnClickListener(click);
 		
 		builder.setView(v);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(!checkOperationIsNotRunning()) {
@@ -920,7 +920,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		
 		builder.setView(v);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 
 			@Override
@@ -966,7 +966,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
 				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, SETTINGS_ID, R.string.settings, 
+		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
 				R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
@@ -1369,7 +1369,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         final TIntArrayList list = new TIntArrayList();
         ColorDialogs.setupColorSpinner(this, devColor, colorSpinner, list);
 		
-		bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string .shared_string_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -1377,7 +1377,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						name.getText().toString(), list.get(colorSpinner.getSelectedItemPosition()));
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
 

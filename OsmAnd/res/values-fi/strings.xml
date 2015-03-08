@@ -88,8 +88,8 @@
 	<string name="gpxup_private">Yksityinen</string>
 	<string name="route_kl">Pysy vasemmalla ja aja suoraan</string>
 	<string name="route_kr">Pysy oikealla ja jatka suoraan</string>
-	<string name="default_buttons_no">Ei</string>
-	<string name="default_buttons_yes">Kyllä</string>
+	<string name="shared_string_no">Ei</string>
+	<string name="shared_string_yes">Kyllä</string>
 	<string name="email">sähköposti</string>
 <string name="extra_settings">Kehittyneet asetukset</string>
 	<string name="gpx_tags_txt">Avainsanat</string>
@@ -100,10 +100,10 @@
 	<string name="show_ruler_level">Näytä viivain</string>	
 	<string name="info_button">Tietoja</string>
 	<string name="back_to_location">Takaisin sijaintiin</string>
-	<string name="help">Ohje</string>
+	<string name="shared_string_help">Ohje</string>
 	<string name="show_details">Näytä tiedot</string>
-	<string name="accessibility_on">Päällä</string>
-	<string name="accessibility_off">Pois päältä</string>
+	<string name="shared_string_on">Päällä</string>
+	<string name="shared_string_off">Pois päältä</string>
 	<string name="backToMenu">Takaisin valikkoon</string>
 	<string name="north">pohjoinen</string>
 	<string name="north_north_east">pohjoiskoillinen</string>
@@ -291,7 +291,7 @@
 	<string name="transport_to_go_before">seuraava etäisyys</string>
 	<string name="transport_stops_to_pass">pysäkkejä ohitettavana</string>
 	<string name="transport_route_distance">Reitin matka</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Näytä julkisen liikenteen pysäkit kartalla</string>
 	<string name="show_transport_over_map">Näytä liikennepysäkit</string>
 	<string name="hello">Navigointisovellus OsmAnd</string>
@@ -306,7 +306,7 @@
 	<string name="search_history_building">Rakennus: {0}, {1}, {2}</string>
 	<string name="favorite">Suosikki</string>
 	<string name="clear_all">Tyhjennä kaikki</string>
-	<string name="history">Historia</string>
+	<string name="shared_string_history">Historia</string>
 	<string name="uploading_data">Lähetetään dataa…</string>
 	<string name="uploading">Lähetetään…</string>
 	<string name="search_nothing_found">Mitään ei löytynyt</string>
@@ -357,7 +357,7 @@
 	<string name="use_online_routing_descr">Käytä internettiä reitin laskentaan</string>
 	<string name="use_online_routing">Käytä online navigointia</string>
 	<string name="additional_settings">Lisäasetukset</string>
-	<string name="settings">Asetukset</string>
+	<string name="shared_string_settings">Asetukset</string>
 	<string name="save_current_track_descr">Tallenna nykyinen reitti muistikortille nyt</string>
 	<string name="save_current_track">Tallenna nykyinen GPX reitti</string>
 	<string name="save_track_interval">Kirjausväli</string>
@@ -409,7 +409,7 @@
 	<string name="search_tabs_location">Sijainti</string>
 	<string name="context_menu_item_add_favorite">Lisää suosikkeihin</string>
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
-	<string name="default_buttons_cancel">Peruuta</string>
+	<string name="shared_string_cancel">Peruuta</string>
 	<string name="default_buttons_apply">Käytä</string>
 	<string name="default_buttons_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>
@@ -638,7 +638,7 @@
 	<string name="si_mi_foots">Mailia/jalkaa</string>
 	<string name="si_mi_yard">Mailia/jaardia</string>
 	<string name="si_km_m">Kilometrejä/metrejä</string>
-	<string name="previous_button">Edellinen</string>
+	<string name="shared_string_previous">Edellinen</string>
 	<string name="dist_control_start">Aloita</string>
     <string name="stop_routing_confirm">Oletko varma että haluat lopettaa navigoinnin?</string>
     <string name="clear_dest_confirm">Haluatko varmasti poistaa päätepisteen?</string>

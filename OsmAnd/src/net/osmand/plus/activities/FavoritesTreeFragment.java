@@ -165,7 +165,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	
 	private void updateSelectionMode(ActionMode m) {
 		if(favoritesSelected.size() > 0) {
-			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.selected));
+			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
 		} else{
 			m.setTitle("");
 		}
@@ -242,7 +242,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			list[i] =gs.get(i).name;
 		}
 		cat.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_textview, list));
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -263,8 +263,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		final Resources resources = this.getResources();
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean deleted = helper.deleteFavourite(point);
@@ -515,8 +515,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		checkBox.setChecked(group.visible);
 		bld.setTitle(R.string.edit_group);
 		bld.setView(favEdit);
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -546,7 +546,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					deleteFavorites();
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -619,13 +619,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			if (tosave.exists()) {
 				Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						exportTask.execute();
 					}
 				});
-				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.setMessage(R.string.fav_export_confirmation);
 				bld.show();
 			} else {

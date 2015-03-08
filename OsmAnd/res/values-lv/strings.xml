@@ -35,14 +35,14 @@
   <string name="show_ruler_level">Rādīt lineālu</string>
   <string name="info_button">Informācija</string>
   <string name="back_to_location">Atgriezties atrašanās vietā</string>
-  <string name="help">Palīdzība</string>
+  <string name="shared_string_help">Palīdzība</string>
   <string name="show_details">Rādīt detaļas</string>
   <string name="accessibility_extensions_descr">Pieejamības paplašinājumi vecākām Android versijām</string>
   <string name="accessibility_extensions">Pieejamības paplašinājumi</string>
   <string name="accessibility_mode">Pieejamības režīms</string>
   <string name="accessibility_mode_descr">Ieslēdz pieejamības iespējas</string>
-  <string name="accessibility_on">Ieslēgts</string>
-  <string name="accessibility_off">Izslēgts</string>
+  <string name="shared_string_on">Ieslēgts</string>
+  <string name="shared_string_off">Izslēgts</string>
   <string name="accessibility_default">Atbilstoši sistēmas uzstādījumiem</string>
   <string name="backToMenu">Atpakaļ uz izvēlni</string>
   <string name="zoomOut">Samazināt</string>
@@ -312,7 +312,7 @@
   <string name="map_underlay">Paklāja karte</string>
   <string name="map_underlay_descr">Izvēlēties paklāja karti</string>
   <string name="layer_overlay">Pārklāja karte…</string>
-  <string name="default_none">Nekas</string>
+  <string name="shared_string_none">Nekas</string>
   <string name="map_overlay">Pārklāja karte</string>
   <string name="map_overlay_descr">Izvēlēties pārklāja karti</string>
   <string name="tile_source_already_installed">Karte jau ir instalēta, uzstādījumi tiks atjaunoti</string>
@@ -364,8 +364,8 @@
 ……	……	……\n\nVairāki noderīgi padomi ir pievienoti galvenā ekrāna izvēlnē \'Padomi\'
 ……	……
 	</string>
-  <string name="next_button">Tālāk</string>
-  <string name="previous_button">Atpakaļ</string>
+  <string name="shared_string_next">Tālāk</string>
+  <string name="shared_string_previous">Atpakaļ</string>
   <string name="unit_of_length_descr">Attāluma un braukšanas ātruma mērvienības</string>
   <string name="unit_of_length">Mērvienības</string>
   <string name="si_mi_foots">Jūdzes/pēdas</string>
@@ -408,7 +408,7 @@
   <string name="indexing_map">Karšu indeksācija…</string>
   <string name="indexing_poi">Indeksē POI…</string>
   <string name="indexing_transport">Indeksē transportu…</string>
-  <string name="input_output_error">I/O kļūda</string>
+  <string name="shared_string_io_error">I/O kļūda</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -588,7 +588,7 @@
   <string name="transport_stops_to_pass">Pieturvietu skaits</string>
   <string name="transport_route_distance">Ceļa garums</string>
   <string name="transport">Transports</string>
-  <string name="default_buttons_ok">Labi</string>
+  <string name="shared_string_ok">Labi</string>
   <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta pieturas</string>
   <string name="show_transport_over_map">Rādīt pieturas</string>
   <string name="hello">OsmAnd navigācija</string>
@@ -605,7 +605,7 @@
   <string name="search_history_building">Ēka: {0}, {1}, {2}</string>
   <string name="favorite">Izlase</string>
   <string name="clear_all">Noņemt visu</string>
-  <string name="history">Vēsture</string>
+  <string name="shared_string_history">Vēsture</string>
   <string name="uploading_data">Augšupielādē datus…</string>
   <string name="uploading">Augšupielādē…</string>
   <string name="search_nothing_found">Nekas netika atrasts</string>
@@ -683,7 +683,7 @@
   <string name="auto_zoom_map_descr">Automātiski mērogot karti atkarībā no pārvietošanās ātruma</string>
   <string name="auto_zoom_map">Automātiski mērogot karti</string>
   <string name="additional_settings">Papildus uzstādījumi</string>
-  <string name="settings">Uzstādījumi</string>
+  <string name="shared_string_settings">Uzstādījumi</string>
   <string name="save_current_track_descr">Saglabāt pašreizējo ceļu SD kartē</string>
   <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
   <string name="save_track_interval">Pierakstīšanas intervāls</string>
@@ -763,11 +763,11 @@
   <string name="context_menu_item_update_map">Atjaunot karti</string>
   <string name="context_menu_item_open_bug">Atvērt OSM bug</string>
   <string name="context_menu_item_create_poi">Izveidot POI</string>
-  <string name="default_buttons_yes">Jā</string>
-  <string name="default_buttons_cancel">Atcelt</string>
+  <string name="shared_string_yes">Jā</string>
+  <string name="shared_string_cancel">Atcelt</string>
   <string name="default_buttons_apply">Pielietot</string>
   <string name="default_buttons_add">Pievienot</string>
-  <string name="default_buttons_no">Nē</string>
+  <string name="shared_string_no">Nē</string>
   <string name="add_favorite_dialog_top_text">Ievadiet vietas nosaukumu</string>
   <string name="add_favorite_dialog_default_favourite_name">Izlase</string>
   <string name="add_favorite_dialog_favourite_added_template">Izlases punkts \'\'{0}\'\' veiksmīgi pievienots.</string>
@@ -1057,8 +1057,8 @@
     <string name="animate_routing_gpx">GPX trases simulācija</string>
     <string name="remember_choice">Atcerēties manu izvēli</string>
     <string name="gps_status_eclipsim">GPS statuss</string>
-    <string name="default_and">un</string>
-    <string name="default_or">vai</string>
+    <string name="shared_string_and">un</string>
+    <string name="shared_string_or">vai</string>
 	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai pat neizdoties), ja ceļa punkti atrodas vairāk nekā 200km attālumā. Pievienojiet papildus pieturas vietas, lai optimizētu aprēķināšanu.</string>
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
@@ -1487,11 +1487,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_weight_description">Norādīt transportlīdzekļa maksimālā svara ierobežojumus</string>
     <string name="select_gpx">Atzīmēt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
-    <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
+    <string name="shared_string_select_on_map">Atzīmēt no kartes…</string>
     <string name="route_preferences">Maršruta uzstādījumi</string>
     <string name="route_info">Maršruta informācija</string>
     <string name="keep_and_add_destination_point">Pievienot kā galamērķi</string>
-    <string name="route_descr_favorite">Izlase…</string>
+    <string name="shared_string_favorite">Izlase…</string>
     <string name="calculate_osmand_route_without_internet">Aprēķināt OsmAnd maršruta segmentu, neizmantojot internetu</string>
     <string name="gpx_option_calculate_first_last_segment">Aprēķināt OsmAnd maršrutu pirmajam un pēdējam segmentam</string>
     <string name="use_displayed_track_for_navigation">Vai lietot norādīto ceļu navigācijai?</string>
@@ -1741,7 +1741,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="gpx_wpt">Ceļapunkts</string>
     <string name="selected_gpx_info_show">\n\nTuriet nospiestu, lai rādītu uz kartes</string>
     <string name="delay_navigation_start">Sākt navigāciju ar aizturi</string>
-    <string name="selected">Izvēlēts</string>
+    <string name="shared_string_selected_lowercase">Izvēlēts</string>
     <string name="gpx_split_interval">Sadalījuma intervāls</string>
     <string name="gpx_info_subtracks">Apakšposmi: %1$s </string>
 	<string name="gpx_info_waypoints">Ceļapunkti: %1$s </string>
@@ -1865,7 +1865,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="download_tab_updates">Atjauninājumi</string>
     <string name="download_tab_local">Vietējie</string>
 	<string name="no_internet_connection">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
-    <string name="dismiss">Atcelt</string>
+    <string name="shared_string_dismiss">Atcelt</string>
     <string name="everything_up_to_date">Visi faili ir atjaunoti</string>
     <string name="use_opengl_render">Lietot OpenGL renderēšanu</string>
     <string name="use_opengl_render_descr">Lietot iebūvēto paātrināto OpenGL renderēšanu (jābūt saderīgai ierīcei)</string>
@@ -1884,7 +1884,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lock_screen_request_explanation">%1$s ir nepieciešama šī atļauja, lai izslēgtu ekrānu enerģijas taupīšanai.</string>
     <string name="wake_on_voice">Ieslēgt ekrānu</string>
     <string name="wake_on_voice_descr">Ieslēgt ekrānu, kad tuvojas pagrieziens</string>
-    <string name="wake_on_voice_never">Nekad</string>
+    <string name="shared_string_never">Nekad</string>
     <string name="select_impassable_road">Arzīmēt kartē</string>
     <string name="impassable_road">Izvairīties no ceļiem…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vilciena maršruti</string>

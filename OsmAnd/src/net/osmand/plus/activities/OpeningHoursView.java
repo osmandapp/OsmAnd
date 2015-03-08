@@ -199,7 +199,7 @@ public class OpeningHoursView {
 
 				});
 
-		b.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+		b.setNegativeButton(ctx.getString(R.string.shared_string_cancel), null);
 
 		b.show();
 

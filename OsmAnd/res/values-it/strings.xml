@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -180,7 +180,7 @@
   
   
   
-  <string name="local_index_installed">Edizione</string>
+  <string name="local_index_installed">Versione locale</string>
   <string name="local_index_items_backuped">%1$d su %2$d oggetto/i disattivati correttamente.</string>
   <string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i correttamente.</string>
   <string name="local_index_items_restored">%1$d su %2$d oggetto/i ripristinato/i.</string>
@@ -247,7 +247,6 @@
   <string name="map_underlay">Mappa di sfondo</string>
   <string name="map_underlay_descr">Scegli la mappa di sfondo</string>
   <string name="layer_overlay">Mappa sovrapposta…</string>
-  <string name="default_none">Nessuno</string>
   <string name="map_overlay">Mappa sovrapposta</string>
   <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
   <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>
@@ -303,8 +302,6 @@
 	</string>
   <string name="tip_initial">Aiuto</string>
   <string name="tip_initial_t">"OsmAnd è un\'applicazione di navigazione con molte funzioni.\n\nUn\'introduzione basilare, alcuni suggerimenti per l\'uso sono raggiungibili attraverso \'Menù\' → \'Suggerimenti\' a partire dalla schermata della mappa. "</string>
-  <string name="next_button">Avanti</string>
-  <string name="previous_button">Indietro</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
   <string name="unit_of_length">Unità di misura</string>
   <string name="si_mi_foots">Miglia/piede</string>
@@ -347,7 +344,6 @@
   <string name="indexing_map">Indicizzazione mappa…</string>
   <string name="indexing_poi">Indicizzazione PDI…</string>
   <string name="indexing_transport">Indicizzazione trasporti pubblici…</string>
-  <string name="input_output_error">Errore di I/O</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -530,7 +526,6 @@
   <string name="transport_stops_to_pass">fermate da passare</string>
   <string name="transport_route_distance">Distanza itinerario</string>
   <string name="transport">Trasporto pubblico</string>
-  <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Visualizza le fermate di trasporto pubblico sulla mappa</string>
   <string name="show_transport_over_map">Visualizza le fermate del trasporto pubblico</string>
   <string name="hello">Applicazione di navigazione OsmAnd</string>
@@ -547,7 +542,6 @@
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
   <string name="clear_all">Azzera tutto</string>
-  <string name="history">Cronologia</string>
   <string name="uploading_data">Invio dati…</string>
   <string name="uploading">Invio…</string>
   <string name="search_nothing_found">Trovato nulla</string>
@@ -625,7 +619,6 @@
   <string name="auto_zoom_map_descr">Zoom mappa automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente)</string>
   <string name="auto_zoom_map">Zoom automatico mappa</string>
   <string name="additional_settings">Impostazioni aggiuntive</string>
-  <string name="settings">Impostazioni</string>
   <string name="save_current_track_descr">Salva adesso la traccia corrente nella scheda SD</string>
   <string name="save_current_track">Salva la traccia corrente</string>
   <string name="save_track_interval_descr">Scegli l\'intervallo di registrazione per la traccia durante la navigazione</string>
@@ -705,11 +698,8 @@
   <string name="context_menu_item_update_map">Aggiorna la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
   <string name="context_menu_item_create_poi">Crea PDI</string>
-  <string name="default_buttons_yes">Si</string>
-  <string name="default_buttons_cancel">Annulla</string>
   <string name="default_buttons_apply">Applica</string>
   <string name="default_buttons_add">Aggiungi</string>
-  <string name="default_buttons_no">No</string>
   <string name="add_favorite_dialog_top_text">Inserisci il nome del preferito</string>
   <string name="add_favorite_dialog_default_favourite_name">Preferito</string>
   <string name="add_favorite_dialog_favourite_added_template">Il punto preferito \'\'{0}\'\' è stato aggiunto.</string>
@@ -821,14 +811,11 @@
   <string name="show_ruler_level">Visualizza la scala grafica</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Torna alla posizione</string>
-  <string name="help">Aiuto</string>
   <string name="show_details">Visualizza dettagli</string>
   <string name="accessibility_extensions_descr">Estensioni per l\'accessibilità per vecchie versioni di Android</string>
   <string name="accessibility_extensions">Estensioni per l\'accessibilità</string>
   <string name="accessibility_mode">Modalità accessibile</string>
   <string name="accessibility_mode_descr">Abilita le funzioni relative all\'accessibilità</string>
-  <string name="accessibility_on">Attivato</string>
-  <string name="accessibility_off">Disattivato</string>
   <string name="accessibility_default">Basata sulle impostazioni globali di sistema</string>
   <string name="backToMenu">Torna al menu</string>
   <string name="zoomOut">Zoom indietro</string>
@@ -1174,7 +1161,7 @@
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
     <string name="monitoring_control_stop">Ferma</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le linee di livello che lo strado ombreggiamento dei rilievi che possono essere visualizzate nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
@@ -1583,8 +1570,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="auto_zoom_close">A corto raggio</string>
     <string name="auto_zoom_far">A medio raggio</string>
     <string name="auto_zoom_farthest">A lungo raggio</string>
-    <string name="default_and">e</string>
-    <string name="default_or">o</string>
 	<string name="remember_choice">Ricorda la scelta</string>
     <string name="gps_status_eclipsim">Stato GPS</string>
     <string name="animate_routing_route_not_calculated">Per favore, calcolare il percorso prima</string>
@@ -1638,8 +1623,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_weight_description">Specifica il peso del veicolo consentito sulle strade</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
-    <string name="route_descr_select_on_map">Scegli sulla mappa…</string>
-    <string name="route_descr_favorite">Preferito…</string>
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
     <string name="keep_and_add_destination_point">Aggiungi come destinazione</string>
@@ -1840,7 +1823,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_selection_points">%1$s \nPunti</string>
     <string name="gpx_selection_track">%1$s \nTraccia %2$s</string>
     <string name="gpx_available_current_track">Traccia attualmente in registrazione</string>
-    <string name="selected">selezionato</string>
     <string name="gpx_split_interval">Intervallo suddivisione</string>
     <string name="loading_smth">Caricamento di %1$s…</string>
     <string name="gpx_wpt">Tappa</string>
@@ -1943,7 +1925,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
-    <string name="record_plugin_description">Attiva la funzionalità di registrazione delle tue tracce con il pulsante dedicato nello schermo della mappa e visualizza le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
+    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrazione delle tue tracce o manualmente attraverso il pulsante dedicato nello schermo della mappa oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli alteti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcuni analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -2001,7 +1983,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
-    <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
 	<string name="osmo_use_https">Usa HTTPS</string>
@@ -2016,7 +1997,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
-    <string name="dismiss">Tralascia</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, verifica la connessione a internet.</string>
     <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornabili</string>
@@ -2067,14 +2047,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio</string>
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
-    <string name="enable_plugin">Disattivato</string>
-	<string name="disable_plugin">Attivato</string>
 <string name="plugin_description_title">Descrizione</string>
 	<string name="plugin_settings_button_caption">Impostazioni</string>
 <string name="edit_group">Modifica il gruppo</string>
     <string name="plugin_install_needs_network">Per installare questo componente aggiuntivo è necessaria la connessione a internet.</string>
-<string name="enable_plugin2">Attiva</string>
-	<string name="disable_plugin2">Disattiva</string>
 	<string name="get_plugin">Ottieni</string>
 <string name="plugin_ski_name">Viuslizzazione mappa sci</string>
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
@@ -2116,7 +2092,78 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="showed_on_map">Visualizzato sulla mappa</string>
 	<string name="days_behind">giorni fa</string>
 	<string name="currently_recording_track">Traccia attualmente in registrazione</string>
-<string name="selected_tracks">Selezionato</string>
 	<string name="track_segments">Spezzoni di traccia</string>
 	<string name="track_points">Punti della traccia</string>
+	<string name="route_points">Punti del percorso</string>
+	<string name="shared_string_release">Rilasciato</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">OK</string>
+	<string name="shared_string_cancel">Cancella</string>
+	<string name="shared_string_dismiss">Abbandona</string>
+	<string name="shared_string_yes">Si</string>
+	<string name="shared_string_no">No</string>
+	<string name="shared_string_on">Acceso</string>
+	<string name="shared_string_off">Spento</string>
+	<string name="shared_string_previous">Precedente</string>
+	<string name="shared_string_next">Successivo</string>
+	<string name="shared_string_enable">Abilita</string>
+	<string name="shared_string_disable">Disabilita</string>
+	<string name="shared_string_enabled">Abilitato</string>
+	<string name="shared_string_disabled">Disabilitato</string>
+	<string name="shared_string_selected">Selezionato</string>
+	<string name="shared_string_selected_lowercase">selezionato</string>
+	<string name="shared_string_never">Mai</string>
+	<string name="shared_string_none">Nessuno</string>
+	<string name="shared_string_and">e</string>
+	<string name="shared_string_or">o</string>
+	<string name="shared_string_help">Aiuto</string>
+	<string name="shared_string_settings">Impostazioni</string>
+	<string name="shared_string_history">Cronologia</string>
+	<string name="shared_string_select_on_map">Seleziona sulla mappa</string>
+	<string name="shared_string_select_all">Seleziona tutto</string>
+	<string name="shared_string_deselect">Deseleziona</string>
+	<string name="shared_string_deselect_all">Deseleziona tutto</string>
+	<string name="shared_string_clear">Pulisci</string>
+	<string name="shared_string_clear_all">Pulisci tutto</string>
+	<string name="shared_string_save">Salva</string>
+	<string name="shared_string_save_as_gpx">Salva coma traccia GPX</string>
+	<string name="shared_string_rename">Rinomina</string>
+	<string name="shared_string_delete">Elimina</string>
+	<string name="shared_string_delete_all">Elimina tutto</string>
+	<string name="shared_string_share">Condividi</string>
+	<string name="shared_string_add">Aggiungi</string>
+	<string name="shared_string_apply">Aplica</string>
+	<string name="shared_string_control_start">Avvia</string>
+	<string name="shared_string_control_stop">Ferma</string>
+	<string name="shared_string_import">Importa</string>
+	<string name="shared_string_export">Esporta</string>
+	<string name="shared_string_more">Di più</string>
+	<string name="shared_string_more_actions">Più azioni</string>
+	<string name="shared_string_do_not_show_again">Non mostrare nuovamente</string>
+	<string name="shared_string_remember_my_choice">Ricorda la scelta</string>
+	<string name="shared_string_refresh">Ricarica</string>
+	<string name="shared_string_download">Download</string>
+	<string name="shared_string_downloading">In download</string>
+	<string name="shared_string_download_successful">Download eseguito</string>
+	<string name="shared_string_io_error">Errore di I/O</string>
+	<string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
+	<string name="shared_string_action_template">"Azione {0}"</string>
+	<string name="shared_string_close">Chiudi</string>
+	<string name="shared_string_exit">Esci</string>
+	<string name="shared_string_show">Mostra</string>
+	<string name="shared_string_show_all">Mostra tutto</string>
+	<string name="shared_string_show_on_map">Mostra sulla mappa</string>
+	<string name="shared_string_map">Mappa</string>
+	<string name="shared_string_favorite">Preferito</string>
+	<string name="shared_string_favorites">Preferiti</string>
+	<string name="shared_string_add_to_favorites">Aggiungi ai preferiti</string>
+	<string name="shared_string_my_location">La mia posizione</string>
+	<string name="shared_string_my_places">I miei luoghi</string>
+	<string name="shared_string_my_favorites">I miei preferiti</string>
+	<string name="shared_string_my_tracks">Le mie tracce</string>
+	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
+	<string name="shared_string_audio">Audio</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+
 	</resources>

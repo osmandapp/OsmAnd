@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -378,7 +378,7 @@
   <string name="map_underlay">Карта подложки</string>
   <string name="map_underlay_descr">Выберите слой подложки для основной карты</string>
   <string name="layer_overlay">Карта покрытия…</string>
-  <string name="default_none">Нет</string>
+  <string name="shared_string_none">Нет</string>
   <string name="map_overlay">Карта покрытия</string>
   <string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
   <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
@@ -415,8 +415,8 @@
   <string name="tip_initial">Справка</string>
   <string name="tip_initial_t">"OsmAnd - навигационное приложение с большим количеством функций.
 \n\nНекоторые базовые сведения, советы по использованию и дополнительную справку можно посмотреть вызвав меню \"Справка\" на экране карты. "</string>
-  <string name="next_button">След.</string>
-  <string name="previous_button">Пред.</string>
+  <string name="shared_string_next">След.</string>
+  <string name="shared_string_previous">Предыдущий</string>
   <string name="unit_of_length_descr">Единицы измерения длины и скорости</string>
   <string name="unit_of_length">Единицы измерения</string>
   <string name="si_mi_foots">Мили/футы</string>
@@ -459,7 +459,6 @@
   <string name="indexing_map">Индексируются карты…</string>
   <string name="indexing_poi">Индексируются POI…</string>
   <string name="indexing_transport">Индексируется транспорт…</string>
-  <string name="input_output_error">Произошла ошибка ввода/вывода</string>
   <string name="km">км</string>
   <string name="km_h">км/ч</string>
   <string name="m">м</string>
@@ -646,7 +645,7 @@
   <string name="transport_stops_to_pass">остановок в пути</string>
   <string name="transport_route_distance">Длина пути</string>
   <string name="transport">Транспорт</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Показывать остановки общественного транспорта на карте</string>
   <string name="show_transport_over_map">Показать остановки транспорта</string>
   <string name="hello">Навигационное приложение OsmAnd</string>
@@ -663,7 +662,6 @@
   <string name="search_history_building">Здание: {0}, {1}, {2}</string>
   <string name="favorite">Избранное</string>
   <string name="clear_all">Очистить все</string>
-  <string name="history">История</string>
   <string name="uploading_data">Загрузка данных…</string>
   <string name="uploading">Загрузка…</string>
   <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
@@ -744,7 +742,6 @@
   <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
   <string name="auto_zoom_map">Масштаб</string>
   <string name="additional_settings">Дополнительные настройки</string>
-  <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас</string>
   <string name="save_current_track">Сохранить текущий трек GPX</string>
   <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации</string>
@@ -826,11 +823,11 @@
   <string name="context_menu_item_update_map">Обновить карту</string>
   <string name="context_menu_item_open_bug">Сообщить об ошибке на карте</string>
   <string name="context_menu_item_create_poi">Добавить POI</string>
-  <string name="default_buttons_yes">Да</string>
-  <string name="default_buttons_cancel">Отмена</string>
+  <string name="shared_string_yes">Да</string>
+  <string name="shared_string_cancel">Отмена</string>
   <string name="default_buttons_apply">Применить</string>
   <string name="default_buttons_add">Добавить</string>
-  <string name="default_buttons_no">Нет</string>
+  <string name="shared_string_no">Нет</string>
   <string name="add_favorite_dialog_top_text">Введите имя точки</string>
   <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
   <string name="add_favorite_dialog_favourite_added_template">Точка \"\"{0}\"\" была успешно добавлена к Избранным.</string>
@@ -882,15 +879,14 @@
   <string name="default_buttons_selectall">Выделить все</string>
   <string name="accessibility_mode">Режим специальных возможностей</string>
   <string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа</string>
-  <string name="accessibility_on">Включён</string>
-  <string name="accessibility_off">Выключен</string>
+  <string name="shared_string_on">Включён</string>
+  <string name="shared_string_off">Выключен</string>
   <string name="accessibility_default">Использовать системную настройку</string>
   <string name="backToMenu">Главное меню</string>
   <string name="zoomOut">Уменьшить</string>
   <string name="zoomIn">Увеличить</string>
   <string name="zoomIs">Масштаб</string>
   <string name="show_details">Подробности</string>
-  <string name="help">Справка</string>
   <string name="back_to_location">Вернуться</string>
   <string name="north">север</string>
   <string name="north_north_east">северо-северо-восток</string>
@@ -1372,8 +1368,6 @@
     <string name="base_world_map">Обзорная карта мира</string>
 	<string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
     <string name="gps_status_eclipsim">Статус GPS</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
 	<string name="remember_choice">Запомнить мой выбор</string>
     <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
 	<string name="app_mode_aircraft">Самолёт</string>
@@ -1443,8 +1437,6 @@
     <string name="map_magnifier">Масштаб</string>
 	<string name="select_gpx">Выберите GPX…</string>
     <string name="route_descr_select_destination">Выберите пункт назначения</string>
-    <string name="route_descr_select_on_map">Выберите на карте…</string>
-    <string name="route_descr_favorite">Избранные…</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Маршрутная информация</string>
     <string name="keep_and_add_destination_point">Добавить как пункт назначения</string>
@@ -1648,7 +1640,7 @@
     <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
-    <string name="selected">выбранные</string>
+    <string name="shared_string_selected_lowercase">выбранные</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
 	<string name="gpx_selection_number_of_points"> %1$s точек</string>
     <string name="gpx_selection_point">Точка %1$s</string>
@@ -1807,7 +1799,6 @@
     <string name="rendering_category_hide">Скрыть</string>
     <string name="select_impassable_road">Выбрать на карте…</string>
     <string name="impassable_road">Избегать дороги…</string>
-    <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Авто-включение экрана перед поворотом</string>
     <string name="wake_on_voice_descr">Включать экран устройства (если отключён) при приближении к повороту</string>
@@ -1827,7 +1818,7 @@
     <string name="download_tab_local">Локальные</string>
 	<string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
-    <string name="dismiss">Не отправлять</string>
+    <string name="shared_string_dismiss">Не отправлять</string>
     <string name="dash_download_msg_none">Вы хотите загрузить оффлайн карты?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
@@ -1872,15 +1863,13 @@
     <string name="points">Точки</string>
     <string name="parking_place">Место для парковки</string>
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
-    <string name="enable_plugin">Выключено</string>
-	<string name="disable_plugin">Включено</string>
 <string name="osm_editing_manage">Управление</string>
     <string name="plugin_description_title">Описание</string>
 	<string name="plugin_settings_button_caption">Настройки</string>
 <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо интернет соединение для установки этого плагина.</string>
-<string name="enable_plugin2">Включить</string>
-	<string name="disable_plugin2">Выключить</string>
+<string name="shared_string_enable">Включить</string>
+	<string name="shared_string_disable">Выключить</string>
 	<string name="get_plugin">Получить</string>
 <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
@@ -1899,4 +1888,44 @@
 	<string name="back_to_map">Вернуться на карту</string>
 	<string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
 	<string name="currently_recording_track">Текущий пишущийся трек</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_enabled">Включено</string>
+	<string name="shared_string_disabled">Отключено</string>
+	<string name="shared_string_never">Никогда</string>
+	<string name="shared_string_and">и</string>
+	<string name="shared_string_or">или</string>
+	<string name="shared_string_help">Справка</string>
+	<string name="shared_string_settings">Настройки</string>
+	<string name="shared_string_history">История</string>
+	<string name="shared_string_select_on_map">Выбрать на карте</string>
+	<string name="shared_string_select_all">Выбрать все</string>
+	<string name="shared_string_clear">Очистить</string>
+	<string name="shared_string_clear_all">Очистить все</string>
+	<string name="shared_string_save">Сохранить</string>
+	<string name="shared_string_save_as_gpx">Сохранить как GPX трек</string>
+	<string name="shared_string_rename">Переименовать</string>
+	<string name="shared_string_delete">Удалить</string>
+	<string name="shared_string_delete_all">Удалить все</string>
+	<string name="shared_string_add">Добавить</string>
+	<string name="shared_string_apply">Применить</string>
+	<string name="shared_string_control_start">Старт</string>
+	<string name="shared_string_control_stop">Стоп</string>
+	<string name="shared_string_import">Импорт</string>
+	<string name="shared_string_export">Экспорт</string>
+	<string name="shared_string_more">Дополнительно</string>
+	<string name="shared_string_more_actions">Дополнительные действия</string>
+	<string name="shared_string_do_not_show_again">Больше не показывать</string>
+	<string name="shared_string_remember_my_choice">Запомнить мой выбор</string>
+	<string name="shared_string_refresh">Обновить</string>
+	<string name="shared_string_io_error">Произошла ошибка ввода/вывода</string>
+	<string name="shared_string_unexpected_error">Произошла непредвиденная ошибка</string>
+	<string name="shared_string_action_template">"Действие {0}"</string>
+	<string name="shared_string_close">Закрыть</string>
+	<string name="shared_string_exit">Выход</string>
+	<string name="shared_string_show">Показать</string>
+	<string name="shared_string_show_all">Показать всё</string>
+	<string name="shared_string_show_on_map">Показать на карте</string>
+	<string name="shared_string_map">Карта</string>
+	<string name="shared_string_favorite">Избранное</string>
+	<string name="shared_string_favorites">Избранные</string>
 	</resources>

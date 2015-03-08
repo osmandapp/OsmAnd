@@ -204,14 +204,14 @@
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Zurück zum Standort</string>
-	<string name="help">Hilfe</string>
+	<string name="shared_string_help">Hilfe</string>
 	<string name="show_details">Zeige Details</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
 	<string name="accessibility_extensions">Barrierefreiheit-Erweiterungen</string>
 	<string name="accessibility_mode">Barrierefreiheit-Modus</string>
 	<string name="accessibility_mode_descr">Schaltet die Eingabehilfen-Funktionen ein</string>
-	<string name="accessibility_on">An</string>
-	<string name="accessibility_off">Aus</string>
+	<string name="shared_string_on">An</string>
+	<string name="shared_string_off">Aus</string>
 	<string name="accessibility_default">Wie globale Systemeinstellung</string>
 	<string name="backToMenu">Zurück zum Menü</string>
 	<string name="zoomOut">Herauszoomen</string>
@@ -673,7 +673,7 @@
 	<string name="map_underlay">Underlay-Karte</string>
 	<string name="map_underlay_descr">Wähle Underlay-Karte</string>
 	<string name="layer_overlay">Overlay-Karte…</string>
-	<string name="default_none">Keine</string>
+	<string name="shared_string_none">Keine</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
@@ -722,8 +722,8 @@
 		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Antippen des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
-	<string name="next_button">Weiter</string>
-	<string name="previous_button">Zurück</string>
+	<string name="shared_string_next">Weiter</string>
+	<string name="shared_string_previous">Zurück</string>
 	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>
@@ -766,7 +766,7 @@
 	<string name="indexing_map">Indiziere Karte…</string>
 	<string name="indexing_poi">Indiziere POI…</string>
 	<string name="indexing_transport">Indiziere ÖPNV…</string>
-	<string name="input_output_error">I/O Fehler aufgetreten</string>
+	<string name="shared_string_io_error">I/O Fehler aufgetreten</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -944,7 +944,7 @@
 	<string name="transport_stops_to_pass">zu passierende Haltestellen</string>
 	<string name="transport_route_distance">Streckenlänge</string>
 	<string name="transport">ÖPNV</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">ÖPNV-Haltestellen auf der Karte anzeigen</string>
 	<string name="show_transport_over_map">Haltestellen anzeigen</string>
 	<string name="hello">Navigationsanwendung OsmAnd</string>
@@ -961,7 +961,7 @@
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Alles löschen</string>
-	<string name="history">Verlauf</string>
+	<string name="shared_string_history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen…</string>
 	<string name="uploading">Hochladen…</string>
 	<string name="search_nothing_found">Kein Treffer</string>
@@ -1037,7 +1037,7 @@
 	<string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
 	<string name="osm_settings">OSM-Bearbeitung</string>
 	<string name="additional_settings">Weitere Einstellungen</string>
-	<string name="settings">Einstellungen</string>
+	<string name="shared_string_settings">Einstellungen</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
 	<string name="mark_point">Ziel</string>
@@ -1108,11 +1108,11 @@
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
 	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 	<string name="context_menu_item_create_poi">POI einsenden</string>
-	<string name="default_buttons_yes">Ja</string>
-	<string name="default_buttons_cancel">Abbrechen</string>
+	<string name="shared_string_yes">Ja</string>
+	<string name="shared_string_cancel">Abbrechen</string>
 	<string name="default_buttons_apply">Übernehmen</string>
 	<string name="default_buttons_add">Hinzufügen</string>
-	<string name="default_buttons_no">Nein</string>
+	<string name="shared_string_no">Nein</string>
 	<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
@@ -1479,8 +1479,8 @@
 	<string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
 	<string name="edit_tilesource_name">Name</string>
 	<string name="maps_define_edit">Definieren/Bearbeiten…</string>
-	<string name="default_and">und</string>
-	<string name="default_or">oder</string>
+	<string name="shared_string_and">und</string>
+	<string name="shared_string_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
 	<string name="remember_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
@@ -1527,8 +1527,8 @@
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
 	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
 	<string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
-	<string name="route_descr_select_on_map">Auf Karte auswählen…</string>
-	<string name="route_descr_favorite">Favorit…</string>
+	<string name="shared_string_select_on_map">Auf Karte auswählen…</string>
+	<string name="shared_string_favorite">Favorit…</string>
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
@@ -1566,7 +1566,7 @@
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
-	<string name="selected">ausgewählte</string>
+	<string name="shared_string_selected_lowercase">ausgewählte</string>
 	<string name="save_as_favorites_points">als Favoriten-Gruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Wegpunkte auswählen</string>
 	<string name="sort_by_distance">Sortieren nach Entfernung</string>
@@ -1975,7 +1975,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
-    <string name="wake_on_voice_never">Niemals</string>
+    <string name="shared_string_never">Niemals</string>
     <string name="select_impassable_road">Auf Karte auswählen…</string>
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
@@ -1995,7 +1995,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
-    <string name="dismiss">Ablehnen</string>
+    <string name="shared_string_dismiss">Ablehnen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
@@ -2047,10 +2047,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="proxy_host_descr">Einen Proxy\'s Hostname einrichten (Bsp. 127.0.0.1)</string>
     <string name="proxy_port_title">Proxy-Port</string>
     <string name="proxy_port_descr">Einen Proxy\'s Port einrichten (Bsp. 8118)</string>
-    <string name="enable_plugin">Deaktiviert</string>
-    <string name="disable_plugin">Aktiviert</string>
-    <string name="enable_plugin2">Aktivieren</string>
-    <string name="disable_plugin2">Deaktivieren</string>
+    <string name="shared_string_disabled">Deaktiviert</string>
+    <string name="shared_string_enabled">Aktiviert</string>
+    <string name="shared_string_enable">Aktivieren</string>
+    <string name="shared_string_disable">Deaktivieren</string>
     <string name="plugin_description_title">Beschreibung</string>
     <string name="plugin_settings_button_caption">Einstellungen</string>
     <string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internet-Verbindung.</string>
@@ -2090,8 +2090,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_pisteRoutes_name">Pisten</string>
 	<string name="export">Export</string>
 	<string name="watch">Ansehen</string>
-	<string name="selected_tracks">Ausgewählt</string>
+	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="turn_off_all">alles_abschalten</string>
 	<string name="showed_on_map">Auf Karte angezeigt</string>
 	<string name="share_note">Notiz mitteilen</string>
+	<string name="days_behind">Tage alt</string>
 	</resources>

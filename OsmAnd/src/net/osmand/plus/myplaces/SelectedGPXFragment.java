@@ -217,7 +217,7 @@ public class SelectedGPXFragment extends ListFragment {
 
 			}
 		});
-		b.setNegativeButton(R.string.default_buttons_cancel, null);
+		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 
@@ -302,8 +302,8 @@ public class SelectedGPXFragment extends ListFragment {
 		}
 		
 		bld.setView(view);
-		bld.setNegativeButton(R.string.default_buttons_cancel, null); 
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

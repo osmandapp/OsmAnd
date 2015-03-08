@@ -133,14 +133,14 @@
 	<string name="support_new_features">支持新功能</string>
 	<string name="support_new_features_descr">捐赠实现的新功能中的应用</string>
 	<string name="info_button">信息</string>
-	<string name="help">帮助</string>
+	<string name="shared_string_help">帮助</string>
 	<string name="show_details">显示细节</string>
 	<string name="accessibility_extensions_descr">无障碍扩展旧的Android版本</string>
 	<string name="accessibility_extensions">无障碍扩展</string>
 	<string name="accessibility_mode">无障碍模式</string>
 	<string name="accessibility_mode_descr">打开辅助功能</string>
-	<string name="accessibility_on">上</string>
-	<string name="accessibility_off">离</string>
+	<string name="shared_string_on">上</string>
+	<string name="shared_string_off">离</string>
 	<string name="accessibility_default">根据全球系统设置</string>
 	<string name="backToMenu">返回目录</string>
 	<string name="zoomOut">缩小</string>
@@ -239,8 +239,8 @@
 	<string name="internet_not_available">操作所需的互联网连接不可用</string>
 	<string name="tip_navigation">导航</string>
 	<string name="tip_initial">技巧和诀窍</string>
-	<string name="next_button">下</string>
-	<string name="previous_button">前</string>
+	<string name="shared_string_next">下</string>
+	<string name="shared_string_previous">前</string>
 	<string name="unit_of_length_descr">变更单位的长度和速度</string>
 	<string name="unit_of_length">度量单位</string>
 	<string name="si_mi_foots">万里/英尺</string>
@@ -275,7 +275,7 @@
 	<string name="amenity_type_sustenance">营养</string>
 	<string name="amenity_type_tourism">旅游</string>
 	<string name="amenity_type_transportation">运输</string>
-	<string name="input_output_error">I / O错误发生</string>
+	<string name="shared_string_io_error">I / O错误发生</string>
 	<string name="km">千米</string>
 	<string name="km_h">公里/小时</string>
 	<string name="m">米</string>
@@ -329,7 +329,7 @@
 	<string name="transport_search_after">后续路由</string>	
 	<string name="transport_search_before">此前路线</string>
 	<string name="transport_finish_search">完成搜索</string>
-	<string name="default_buttons_ok">行</string>
+	<string name="shared_string_ok">行</string>
 	<string name="favorite">最喜爱</string>
 	<string name="clear_all">清除所有</string>
 	<string name="download_index_success">下载成功</string>
@@ -386,11 +386,11 @@
 	<string name="search_address_building_option">大厦</string>
 	<string name="search_address_street_option">相交的街道</string>
 	<string name="search_tabs_location">位置</string>
-	<string name="default_buttons_yes">是</string>
-	<string name="default_buttons_cancel">取消</string>
+	<string name="shared_string_yes">是</string>
+	<string name="shared_string_cancel">取消</string>
 	<string name="default_buttons_apply">申请</string>
 	<string name="default_buttons_add">加</string>
-	<string name="default_buttons_no">没有</string>
+	<string name="shared_string_no">没有</string>
 	<string name="default_buttons_delete">删除</string>
 	
 	<string name="layer_hillshade">山体阴影层</string>
@@ -726,7 +726,7 @@
 	<string name="map_underlay">背景层地图</string>
 	<string name="map_underlay_descr">选择背景层地图</string>
 	<string name="layer_overlay">叠加层地图…</string>
-	<string name="default_none">无</string>
+	<string name="shared_string_none">无</string>
 	<string name="map_overlay">叠加层地图</string>
 	<string name="map_overlay_descr">选择叠加层地图</string>
 	<string name="tile_source_already_installed">地图已经安装，设置将被更新</string>
@@ -818,7 +818,7 @@
 	<string name="search_history_street">街道：{0}，{1}</string>
 	<string name="search_history_int_streets">交叉路口：{0} x {1} 在 {2}</string>
 	<string name="search_history_building">建筑物：{0}, {1}, {2}</string>
-	<string name="history">历史</string>
+	<string name="shared_string_history">历史</string>
 	<string name="uploading_data">正在上传数据…</string>
 	<string name="uploading">正在上传…</string>
 	<string name="search_nothing_found">什么也没找到</string>
@@ -867,7 +867,7 @@
 	<string name="data_settings_descr">指定语言，下载/重新载入数据</string>
 	<string name="map_preferences_descr">指定地图设置：地图来源，旋转，标记位置，屏幕朝向</string>
 	<string name="additional_settings">附加设置</string>
-	<string name="settings">设置</string>
+	<string name="shared_string_settings">设置</string>
 	<string name="save_current_track_descr">立即保存当前轨迹到SD卡</string>
 	<string name="save_track_interval">日志记录时间间隔</string>
 	<string name="save_track_interval_descr">选择轨迹记录的位置间隔</string>

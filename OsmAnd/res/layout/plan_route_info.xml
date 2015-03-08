@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
             android:background="@drawable/map_btn_plain"
-            android:contentDescription="@string/previous_button"
+            android:contentDescription="@string/shared_string_previous"
             android:src="@drawable/ax_1_navigation_previous_item_light" />
 
         <ImageButton
@@ -133,7 +133,7 @@
             android:layout_marginLeft="10dp"
             android:scaleType="centerInside"
             android:background="@drawable/map_btn_plain"
-            android:contentDescription="@string/next_button"
+            android:contentDescription="@string/shared_string_next"
             android:src="@drawable/ax_1_navigation_next_item_light" />
 
     </LinearLayout>

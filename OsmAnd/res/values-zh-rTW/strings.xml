@@ -229,14 +229,14 @@
 	<string name="show_ruler_level">顯示比例尺</string>	
 	<string name="info_button">資訊</string>
 	<string name="back_to_location">回到目前位置</string>
-	<string name="help">幫助</string>
+	<string name="shared_string_help">幫助</string>
 	<string name="show_details">顯示細節</string>
 	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>
 	<string name="accessibility_mode">無障礙模式</string>
 	<string name="accessibility_mode_descr">開啟無障礙功能</string>
-	<string name="accessibility_on">開啟</string>
-	<string name="accessibility_off">關閉</string>
+	<string name="shared_string_on">開啟</string>
+	<string name="shared_string_off">關閉</string>
 	<string name="accessibility_default">配合全系統設定</string>
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
@@ -444,7 +444,7 @@
 	
 	
 	
-	<string name="local_index_installed">版本</string>
+	<string name="local_index_installed">本機版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
@@ -498,7 +498,7 @@
 	<string name="map_underlay">下層地圖</string>
 	<string name="map_underlay_descr">選擇下層地圖</string>
 	<string name="layer_overlay">上層地圖…</string>
-	<string name="default_none">無</string>
+	<string name="shared_string_none">無</string>
 	<string name="map_overlay">上層地圖</string>
 	<string name="map_overlay_descr">選擇上層地圖</string>
 	<string name="tile_source_already_installed">地圖已安裝，設定將被更新</string>
@@ -552,8 +552,8 @@
 	<string name="tip_initial">幫助</string>
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
 \n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
-	<string name="next_button">下一頁</string>
-	<string name="previous_button">上一頁</string>
+	<string name="shared_string_next">下一頁</string>
+	<string name="shared_string_previous">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
 	<string name="unit_of_length">量測單位</string>
 	<string name="si_mi_foots">英哩/英呎</string>
@@ -596,7 +596,7 @@
 	<string name="indexing_map">地圖索引…</string>
 	<string name="indexing_poi">興趣點索引…</string>
 	<string name="indexing_transport">交通索引…</string>
-	<string name="input_output_error">存取發生錯誤</string>
+	<string name="shared_string_io_error">存取發生錯誤</string>
 	<string name="km">公里</string>
 	<string name="km_h">公里/小時</string>
 	<string name="m">公尺</string>
@@ -621,7 +621,7 @@
 	<string name="loading_builds">正在載入 OsmAnd 編譯…</string>
 	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
-	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
+	<string name="gps_status_app_not_found">沒安裝 GPS 狀態應用程式，到 Play 商場找嗎？</string>
 	<string name="voice_is_not_available_msg">語音導航無法使用時。請到\'設定\'→ \'一般設定\' → \'語音導航\'，選取或下載提示語音包。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
@@ -770,7 +770,7 @@
 	<string name="transport_stops_to_pass">中途站</string>
 	<string name="transport_route_distance">路線距離</string>
 	<string name="transport">交通工具</string>
-	<string name="default_buttons_ok">確定</string>
+	<string name="shared_string_ok">確定</string>
 	<string name="show_transport_over_map_description">在地圖上顯示公車站牌</string>
 	<string name="show_transport_over_map">顯示公車站牌</string>
 	<string name="hello">OsmAnd 導航軟體</string>
@@ -787,7 +787,7 @@
 	<string name="search_history_building">建物：{0}, {1}, {2}</string>
 	<string name="favorite">我的最愛</string>
 	<string name="clear_all">全部清除</string>
-	<string name="history">歷史記錄</string>
+	<string name="shared_string_history">歷史記錄</string>
 	<string name="uploading_data">上傳資料中…</string>
 	<string name="uploading">上傳中…</string>
 	<string name="search_nothing_found">找不到</string>
@@ -861,7 +861,7 @@
 	<string name="map_preferences_descr">設定地圖：地圖來源、旋轉方式、標示位置、畫面方向</string>
 	<string name="osm_settings">OSM 編輯</string>
 	<string name="additional_settings">額外設定</string>
-	<string name="settings">設定</string>
+	<string name="shared_string_settings">設定</string>
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">在導航期間的記錄間隔</string>
@@ -938,11 +938,11 @@
 	<string name="context_menu_item_update_map">更新地圖</string>
 	<string name="context_menu_item_open_bug">開啟 OSM 錯誤</string>
 	<string name="context_menu_item_create_poi">建立興趣點</string>
-	<string name="default_buttons_yes">是</string>
-	<string name="default_buttons_cancel">取消</string>
+	<string name="shared_string_yes">是</string>
+	<string name="shared_string_cancel">取消</string>
 	<string name="default_buttons_apply">套用</string>
 	<string name="default_buttons_add">加入</string>
-	<string name="default_buttons_no">否</string>
+	<string name="shared_string_no">否</string>
 	<string name="add_favorite_dialog_top_text">輸入我的最愛名稱</string>
 	<string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
 	<string name="add_favorite_dialog_favourite_added_template">我的最愛標點 \'\'{0}\'\' 新增成功。</string>
@@ -1411,8 +1411,8 @@
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
-    <string name="default_and">和</string>
-    <string name="default_or">或</string>
+    <string name="shared_string_and">和</string>
+    <string name="shared_string_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
@@ -1466,8 +1466,8 @@
 	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
-    <string name="route_descr_select_on_map">在地圖上選取 …</string>
-    <string name="route_descr_favorite">我的最愛 …</string>
+    <string name="shared_string_select_on_map">在地圖上選取 …</string>
+    <string name="shared_string_favorite">我的最愛 …</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>
@@ -1663,7 +1663,7 @@
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
     <string name="delay_navigation_start">自動啟動轉向建議指引</string>
-    <string name="selected">已選擇</string>
+    <string name="shared_string_selected_lowercase">已選擇</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
 	<string name="gpx_info_maximum_speed">"最高速度：%1$s "</string>
@@ -1828,7 +1828,7 @@
     <string name="wake_on_voice">將螢幕開啟</string>
     <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
-    <string name="wake_on_voice_never">永不</string>
+    <string name="shared_string_never">永不</string>
     <string name="advanced_settings">進階</string>
 	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
@@ -1842,7 +1842,7 @@
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
-    <string name="dismiss">排除</string>
+    <string name="shared_string_dismiss">排除</string>
     <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
@@ -1893,13 +1893,13 @@
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>
     <string name="remove_the_tag">移除標記</string>
-    <string name="enable_plugin">已停用</string>
-	<string name="disable_plugin">已啟用</string>
+    <string name="shared_string_disabled">已停用</string>
+	<string name="shared_string_enabled">已啟用</string>
 <string name="plugin_description_title">描述</string>
 	<string name="plugin_settings_button_caption">設定</string>
 <string name="edit_group">編輯群組</string>
-    <string name="enable_plugin2">啟用</string>
-	<string name="disable_plugin2">停用</string>
+    <string name="shared_string_enable">啟用</string>
+	<string name="shared_string_disable">停用</string>
 	<string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
 	<string name="get_plugin">接收</string>
 <string name="plugin_ski_name">檢視滑雪地圖</string>
@@ -1941,7 +1941,9 @@
 	<string name="back_to_map">返回地圖</string>
 	<string name="turn_off_all">全部關閉</string>
 	<string name="showed_on_map">在地圖上顯示</string>
-	<string name="selected_tracks">已選取</string>
+	<string name="shared_string_selected">已選取</string>
 	<string name="track_segments">航跡區段</string>
 	<string name="track_points">航跡標點</string>
+	<string name="route_points">路線標點</string>
+	<string name="shared_string_release">已發行</string>
 	</resources>

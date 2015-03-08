@@ -56,14 +56,14 @@
   <string name="show_ruler_level">სახაზავის ჩვენება</string>
   <string name="info_button">ინფორმაცია</string>
   <string name="back_to_location">ადგილზე დაბრუნება</string>
-  <string name="help">დახმარება</string>
+  <string name="shared_string_help">დახმარება</string>
   <string name="show_details">დეტალების ჩვენება</string>
   <string name="accessibility_extensions_descr">წვდომადობის გაფართოებები ანდროიდის ძველი ვერსიებისათვის</string>
   <string name="accessibility_extensions">წვდომადობის გაფართოებები</string>
   <string name="accessibility_mode">წვდომადობის რეჟიმი</string>
   <string name="accessibility_mode_descr">რთავს წვდომადობის თვისებებს</string>
-  <string name="accessibility_on">ჩართული</string>
-  <string name="accessibility_off">გამორთული</string>
+  <string name="shared_string_on">ჩართული</string>
+  <string name="shared_string_off">გამორთული</string>
   <string name="accessibility_default">გლობალურ სისტემურ პარამეტრებზე დაყრდნობით</string>
   <string name="backToMenu">მენიუში დაბრუნება</string>
   <string name="zoomOut">დაპატარავება</string>
@@ -326,7 +326,7 @@
   <string name="map_underlay">ქვედა რუკა</string>
   <string name="map_underlay_descr">ქვედა რუკის არჩევა</string>
   <string name="layer_overlay">ზედა რუკა…</string>
-  <string name="default_none">არა</string>
+  <string name="shared_string_none">არა</string>
   <string name="map_overlay">ზედა რუკა</string>
   <string name="map_overlay_descr">ზედა რუკის არჩევა</string>
   <string name="tile_source_already_installed">რუკა უკვე დაყენებულია. მიმდინარეობს პარამეტრების განახლება</string>
@@ -363,8 +363,8 @@
   <string name="tip_map_context_menu_t">"\tრუკის კონტექსტური მენიუ წვდომადია რუკაზე დაჭერით ან ტრეკბოლის ღილაკზე დაჭერით.\n\tშედეგია ფანჯარა წერტილის კოორდინატებით. რუკის კონტექსტური მენიუს გამოსატანად დაარტყით მას თითი, ან დააჭირეთ მენიუს ღილაკს\n\tრუკის კონტექსტური მენიუ შეიცავს ყველა მოქმედებას მდებარეობასთან დაკავშირებით. "</string>
   <string name="tip_initial">მცირედი დახმარება</string>
   <string name="tip_initial_t">"\tOsmAnd არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება. "</string>
-  <string name="next_button">შემდეგი</string>
-  <string name="previous_button">წინა</string>
+  <string name="shared_string_next">შემდეგი</string>
+  <string name="shared_string_previous">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
   <string name="unit_of_length">გაზომვის ერთეული</string>
   <string name="si_mi_foots">მილი/ფუტი</string>
@@ -407,7 +407,7 @@
   <string name="indexing_map">რუკების ინდექსირება…</string>
   <string name="indexing_poi">POI-ის ინდექსირება…</string>
   <string name="indexing_transport">ტრანსპორტის ინდექსირება…</string>
-  <string name="input_output_error">მოხდა I/O შეცდომა</string>
+  <string name="shared_string_io_error">მოხდა I/O შეცდომა</string>
   <string name="km">კმ</string>
   <string name="km_h">კმ/ს</string>
   <string name="m">მ</string>
@@ -585,7 +585,7 @@
   <string name="transport_stops_to_pass">დარჩენილი გაჩერებები</string>
   <string name="transport_route_distance">გზის სიგრძე</string>
   <string name="transport">ტრანსპორტი</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">რუკაზე საზოგადოებრივი ტრანსპორტის გაჩერებების ჩვენება</string>
   <string name="show_transport_over_map">გაჩერებების ჩვენება</string>
   <string name="hello">OsmAnd - სანავიგაციო აპლიკაცია</string>
@@ -602,7 +602,7 @@
   <string name="search_history_building">შენობა: {0}, {1}, {2}</string>
   <string name="favorite">რჩეული</string>
   <string name="clear_all">გასუფთავება</string>
-  <string name="history">ისტორია</string>
+  <string name="shared_string_history">ისტორია</string>
   <string name="uploading_data">მონაცემების ატვირთვა…</string>
   <string name="uploading">ატვირთვა…</string>
   <string name="search_nothing_found">არაფერი არ იქნა ნაპოვნი</string>
@@ -679,7 +679,7 @@
   <string name="auto_zoom_map_descr">სიჩქარეზე რუკის ავტომატური გადიდება</string>
   <string name="auto_zoom_map">რუკის ავტომატური გადიდება</string>
   <string name="additional_settings">დამატებითი პარამეტრები</string>
-  <string name="settings">პარამეტრები</string>
+  <string name="shared_string_settings">პარამეტრები</string>
   <string name="save_current_track_descr">მიმდინარე ძებნის SDCard-ზე ჩაწერა</string>
   <string name="save_current_track">მიმდინარე დევნის დამახსოვრება</string>
   <string name="save_track_interval">ჟურნალირების ინტერვალი</string>
@@ -759,11 +759,11 @@
   <string name="context_menu_item_update_map">რუკის განახლება</string>
   <string name="context_menu_item_open_bug">OSM-ის შეცდომის რეპორტი</string>
   <string name="context_menu_item_create_poi">POI-ის შექმნა</string>
-  <string name="default_buttons_yes">დიახ</string>
-  <string name="default_buttons_cancel">გაუქმება</string>
+  <string name="shared_string_yes">დიახ</string>
+  <string name="shared_string_cancel">გაუქმება</string>
   <string name="default_buttons_apply">გამოყენება</string>
   <string name="default_buttons_add">ჩამატება</string>
-  <string name="default_buttons_no">არა</string>
+  <string name="shared_string_no">არა</string>
   <string name="add_favorite_dialog_top_text">რჩეულის სახელი</string>
   <string name="add_favorite_dialog_default_favourite_name">რჩეული</string>
   <string name="add_favorite_dialog_favourite_added_template">რჩეული წერტილი \'\'{0}\'\' წარმატებით დაემატა.</string>
@@ -1087,8 +1087,8 @@
     <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>
     <string name="remember_choice">ჩემი არჩევნის დამახსოვრება</string>
     <string name="gps_status_eclipsim">GPS-ის სტატუსი</string>
-    <string name="default_and">და</string>
-    <string name="default_or">ან</string>
+    <string name="shared_string_and">და</string>
+    <string name="shared_string_or">ან</string>
 	<string name="route_is_too_long">შესაძლებელია გზა მეტისმეტად გრძელია OsmAnd გათიშული მთვლელისათვის.
 	გათიშული გზის შესაძლო მაქსიმალური სიგრძეა 200კმ. გთხოვთ ჩაამატოთ შუალედური წერტილები.</string>
 	<string name="auto_zoom_none">ავტომატური გადიდების გათიშვა</string>

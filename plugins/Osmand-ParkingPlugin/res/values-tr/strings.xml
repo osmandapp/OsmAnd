@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="default_buttons_yes">Evet</string>
-    <string name="default_buttons_no">Hayır</string>
+<string name="shared_string_yes">Evet</string>
+    <string name="shared_string_no">Hayır</string>
     </resources>

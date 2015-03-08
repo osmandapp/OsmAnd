@@ -202,14 +202,14 @@ public class NotesFragment extends ListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.recording_delete_confirm);
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						plugin.deleteRecording(recording);
 						listAdapter.remove(recording);
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}
@@ -227,7 +227,7 @@ public class NotesFragment extends ListFragment {
 		editText.setText(recording.getName(getActivity()));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

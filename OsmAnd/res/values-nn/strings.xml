@@ -45,7 +45,7 @@
     <string name="map_widget_plain_time">Gjeldande klokkeslett</string>
     <string name="gpx_wpt">Vegpunkt</string>
     <string name="selected_gpx_info_show">\n\nHald inne for å sjå på kartet</string>
-    <string name="selected">valt</string>
+    <string name="shared_string_selected_lowercase">valt</string>
     <string name="local_index_gpx_info_show">\n\nHald inne for å sjå val</string>
 	<string name="gpx_info_subtracks">Delspor: %1$s</string>
 	<string name="gpx_info_waypoints">Vegpunkt: %1$s</string>
@@ -139,8 +139,8 @@
     <string name="index_name_gb">Europa – Storbritannia</string>
     <string name="select_gpx">Vel GPX-fil …</string>
     <string name="route_descr_select_destination">Vel mål</string>
-    <string name="route_descr_select_on_map">Vel på kartet …</string>
-    <string name="route_descr_favorite">Favoritt …</string>
+    <string name="shared_string_select_on_map">Vel på kartet …</string>
+    <string name="shared_string_favorite">Favoritt …</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="routing_attr_short_way_name">Kortaste veg</string>
 	<string name="routing_attr_short_way_description">Bruk kortaste veg</string>
@@ -159,8 +159,8 @@
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq">Ofte spurde spørsmål</string>
     <string name="local_osm_changes_delete_all">Slett alt</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
+    <string name="shared_string_and">og</string>
+    <string name="shared_string_or">eller</string>
 	<string name="gps_status_eclipsim">GPS-status</string>
     <string name="base_world_map">Globalt grunnkart</string>
 	<string name="tip_map_styles">Kartstilar</string>

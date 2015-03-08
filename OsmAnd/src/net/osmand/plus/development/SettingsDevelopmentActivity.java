@@ -137,7 +137,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 					}
 				});
 		b.setTitle(R.string.profile_settings);
-		b.setPositiveButton(R.string.default_buttons_ok, null);
+		b.setPositiveButton(R.string.shared_string_ok, null);
 		b.setView(v);
 		b.show();
 	}

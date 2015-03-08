@@ -407,7 +407,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void updateSelectionMode(ActionMode m) {
 		if (selectedItems.size() > 0) {
-			m.setTitle(selectedItems.size() + " " + app.getString(R.string.selected));
+			m.setTitle(selectedItems.size() + " " + app.getString(R.string.shared_string_selected_lowercase));
 		} else {
 			m.setTitle("");
 		}
@@ -522,7 +522,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(),
 						selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}
@@ -570,7 +570,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -919,8 +919,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public String getGroup(int groupPosition) {
-			if (isSelectedGroup(groupPosition)) {
-				return app.getString(R.string.selected_tracks);
+			if(isSelectedGroup(groupPosition)) {
+				return app.getString(R.string.shared_string_selected);
 			}
 			return category.get(getGroupPosition(groupPosition));
 		}
@@ -1048,14 +1048,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.recording_delete_confirm);
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						operationTask = new DeleteGpxTask();
 						operationTask.execute(gpxInfo);
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}

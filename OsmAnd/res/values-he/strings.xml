@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-	<string name="default_buttons_no">לא</string>
-	<string name="default_buttons_yes">כן</string>
+	<string name="shared_string_no">לא</string>
+	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
 	<string name="zxing_barcode_scanner_not_found">יישום סריקת הברקודים ZXing אינו מותקן. לחפש בחנות?</string>
 	<string name="rendering_attr_roadColors_description">בחירת ערכת צבעי דרך:</string>
@@ -262,14 +262,14 @@
 	<string name="show_ruler_level">הצגת סרגל</string>	
 	<string name="info_button">פרטים</string>
 	<string name="back_to_location">חזרה למיקום</string>
-	<string name="help">עזרה</string>
+	<string name="shared_string_help">עזרה</string>
 	<string name="show_details">הצגת פרטים</string>
 	<string name="accessibility_extensions_descr">הרחבות נגישות לגרסאות ישנות של אנדרויד</string>
 	<string name="accessibility_extensions">הרחבות נגישות</string>
 	<string name="accessibility_mode">מצב נגישות</string>
 	<string name="accessibility_mode_descr">הפעלת תכונות הנגישות</string>
-	<string name="accessibility_on">פעיל</string>
-	<string name="accessibility_off">כבוי</string>
+	<string name="shared_string_on">פעיל</string>
+	<string name="shared_string_off">כבוי</string>
 	<string name="accessibility_default">בהתאם להגדרות המערכת הכלליות</string>
 	<string name="backToMenu">חזרה לתפריט</string>
 	<string name="zoomOut">התרחקות</string>
@@ -568,7 +568,7 @@
 	<string name="map_underlay">מפה תחתונה</string>
 	<string name="map_underlay_descr">נא לבחור במפה תחתונה</string>
 	<string name="layer_overlay">מפה עליונה…</string>
-	<string name="default_none">ללא</string>
+	<string name="shared_string_none">ללא</string>
 	<string name="map_overlay">מפה עליונה</string>
 	<string name="map_overlay_descr">נא לבחור במפה עליונה</string>
 	<string name="tile_source_already_installed">המפה כבר מותקנת, ההגדרות יעודכנו</string>
@@ -612,8 +612,8 @@
 	<string name="tip_initial">עצות ותכסיסים</string>
 	<string name="tip_initial_t">"\tOsmAnd הנו יישום ניווט עם תכונות רבות.
 \n\tכצעד היכרות בסיסי, חלק מהעצות והתכסיסים לשימוש מקושרים למסך הראשי (לפריט לחצן ה־\'?\'). "</string>
-	<string name="next_button">הבא</string>
-	<string name="previous_button">הקודם</string>
+	<string name="shared_string_next">הבא</string>
+	<string name="shared_string_previous">הקודם</string>
 	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
 	<string name="unit_of_length">יחידת המידה</string>
 	<string name="si_mi_foots">מיילים/רגל</string>
@@ -656,7 +656,7 @@
 	<string name="indexing_map">המפה נשמרת באינדקס…</string>
 	<string name="indexing_poi">נ״ע נשמרת באינדקס…</string>
 	<string name="indexing_transport">התחבורה נשמרת באינדקס…</string>
-	<string name="input_output_error">התרחשה שגיאת קלט/פלט</string>
+	<string name="shared_string_io_error">התרחשה שגיאת קלט/פלט</string>
 	<string name="km">ק״מ</string>
 	<string name="km_h">קמ״ש</string>
 	<string name="m">מ׳</string>
@@ -788,7 +788,7 @@
 	<string name="transport_stops_to_pass">תחנות לעבור</string>
 	<string name="transport_route_distance">מרחק המסלול</string>
 	<string name="transport">תחבורה</string>
-	<string name="default_buttons_ok">אישור</string>
+	<string name="shared_string_ok">אישור</string>
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
 	<string name="hello">יישום הניווט OsmAnd</string>
@@ -857,7 +857,7 @@
 	<string name="search_history_building">בניין: {0}, {1}, {2}</string>
 	<string name="favorite">מועדף</string>
 	<string name="clear_all">לנקות הכול</string>
-	<string name="history">היסטוריה</string>
+	<string name="shared_string_history">היסטוריה</string>
 	<string name="uploading_data">הנתונים נשלחים…</string>
 	<string name="uploading">מתבצעת העלאה…</string>
 	<string name="search_nothing_found">לא נמצא דבר</string>
@@ -934,7 +934,7 @@
 	<string name="map_preferences_descr">נא לציין הגדרות מפה: מקור המפה, אופן סיבוב, מיקום הסמן, כיוון המסך</string>
 	<string name="osm_settings">עריכה ב־OSM</string>
 	<string name="additional_settings">הגדרות נוספות</string>
-	<string name="settings">הגדרות</string>
+	<string name="shared_string_settings">הגדרות</string>
 	<string name="save_current_track_descr">שמירת הדרך הנוכחית לכרטיס ה־SD כעת</string>
 	<string name="save_current_track">שמירת דרך ה־GPX הנוכחית</string>
 	<string name="save_track_interval">מרווח בין השמירות ליומן</string>
@@ -1011,7 +1011,7 @@
 	<string name="context_menu_item_update_map">עדכון המפה</string>
 	<string name="context_menu_item_open_bug">פתיחת תקלה ב־OSM</string>
 	<string name="context_menu_item_create_poi">יצירת נ״ע</string>
-	<string name="default_buttons_cancel">ביטול</string>
+	<string name="shared_string_cancel">ביטול</string>
 	<string name="default_buttons_apply">החלה</string>
 	<string name="default_buttons_add">הוספה</string>
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>

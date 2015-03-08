@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -388,7 +388,6 @@
 	<string name="support_new_features_descr">Doner for at få nye funktioner i programmet</string>
 	<string name="show_ruler_level">Vis målestok</string>	
 	<string name="back_to_location">Tilbage til placering</string>
-	<string name="help">Hjælp</string>
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgængelighedsudvidelser for gamle Android versioner</string>
 	<string name="accessibility_extensions">Tilgængelighedsudvidelser</string>
@@ -399,8 +398,6 @@
 	<string name="map_widget_gps_info">GPS-information</string>
     <string name="gpx_tags_txt">Mærker</string>
 	<string name="accessibility_mode_descr">Slå tilgængeligheds funktionerne til</string>
-	<string name="accessibility_on">Til</string>
-	<string name="accessibility_off">Fra</string>
 	<string name="accessibility_default">Ifølge de globale systemindstillinger</string>
 	<string name="backToMenu">Tilbage til menuen</string>
 	<string name="zoomOut">Zoom ud</string>
@@ -681,7 +678,7 @@
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 	
 	
-	<string name="local_index_installed">Udgave</string>
+	<string name="local_index_installed">Lokal version</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>
 	<string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
 	<string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
@@ -743,7 +740,6 @@
 	<string name="map_underlay">Underlejringskort</string>
 	<string name="map_underlay_descr">Vælg kort til underlejring</string>
 	<string name="layer_overlay">Overlejringskort…</string>
-	<string name="default_none">Ingen</string>
 	<string name="map_overlay">Overlejringskort</string>
 	<string name="map_overlay_descr">Vælg kort til overlejring</string>
 	<string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>
@@ -773,8 +769,6 @@
 	<string name="tip_search">Søgning</string>
 	<string name="tip_map_context_menu">\'Brug placering\' menu</string>
 	<string name="tip_initial">Hjælp</string>
-	<string name="next_button">Næste</string>
-	<string name="previous_button">Forrige</string>
 	<string name="unit_of_length_descr">Ændre enheder for afstand og hastighed</string>
 	<string name="unit_of_length">Måleenhed</string>
 	<string name="si_mi_foots">Mil/fod</string>
@@ -814,7 +808,6 @@
 	<string name="indexing_map">Indekserer kort…</string>
 	<string name="indexing_poi">Indekserer interessepunkt…</string>
 	<string name="indexing_transport">Indekserer transport…</string>
-	<string name="input_output_error">I/O fejl</string>
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
@@ -836,7 +829,7 @@
 	<string name="loading_builds">Indlæser OsmAnd versioner…</string>
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer version</string>
-	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Play butik?</string>
+	<string name="gps_status_app_not_found">GPS-status applikation er ikke installeret. Søg på Play butik?</string>
 	<string name="voice_is_not_available_title">Ingen stemmevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
@@ -1024,8 +1017,6 @@
 	<string name="transport_to_go_before">efterfølgende afstand</string>
 	<string name="transport_route_distance">Rutelængde</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_no">Nej</string>
-	<string name="default_buttons_yes">Ja</string>
 	<string name="poi_remove_confirm_template">Slet {0} (indtast kommentar)?</string>
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
@@ -1034,7 +1025,6 @@
 	<string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
 	<string name="default_buttons_add">Tilføj</string>
 	<string name="default_buttons_apply">Udfør</string>
-	<string name="default_buttons_cancel">Annuller</string>
 	<string name="context_menu_item_create_poi">Opret interessepunkt</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
 	<string name="context_menu_item_add_favorite">Tilføj som favorit</string>
@@ -1076,7 +1066,6 @@
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ryd alt</string>
-	<string name="history">Historik</string>
 	<string name="uploading_data">Overfører data…</string>
 	<string name="uploading">Overfører…</string>
 	<string name="search_nothing_found">Fandt ikke noget</string>
@@ -1106,7 +1095,6 @@
 	</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
-	<string name="default_buttons_ok">OK</string>
 	<string name="search_offline_address">Offline søgning</string>
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
@@ -1169,7 +1157,6 @@
 	<string name="map_preferences_descr">Indstil kortindstillinger: kortkilde, rotation, markørposition og skærmorientering</string>
 	<string name="osm_settings">OSM redigering</string>
 	<string name="additional_settings">Yderligere indstillinger</string>
-	<string name="settings">Indstillinger</string>
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval under navigation</string>
@@ -1301,7 +1288,7 @@
     <string name="distance_measurement_finish_subtrack">Begynd et nyt underspor</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
-    <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et kort modul gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-file, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
+    <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et modul som gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-file, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n * Langt tryk på kortet for at slette tidligere punkt.\n * Langt tryk på punkt for at se og vedhæfte beskrivelse.\n * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
@@ -1420,8 +1407,6 @@
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
 	<string name="auto_zoom_close">Tæt på</string>
 	<string name="remember_choice">Husk valg</string>
     <string name="gps_status_eclipsim">GPS status</string>
@@ -1478,8 +1463,6 @@
     <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
-    <string name="route_descr_select_on_map">Vælg på kort…</string>
-    <string name="route_descr_favorite">Favorit…</string>
     <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
     <string name="tip_recent_changes_1_7_1_t">…Ændringer i 1.7:
 	\n\t* VIGTIGT kort skal være nyere end februar 2014.
@@ -1680,7 +1663,6 @@
     <string name="gpx_wpt">Rutepunkt</string>
     <string name="selected_gpx_info_show">\n\nLangt tryk for at se på kort</string>
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
-    <string name="selected">valgt</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
@@ -1838,7 +1820,6 @@
     <string name="wake_on_voice">Tænd for skærmen</string>
     <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
-    <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
 	<string name="osmo_use_https_descr">Brug sikker forbindelse til server</string>
     <string name="osmo_use_https">Brug HTTPS</string>
@@ -1852,7 +1833,6 @@
     <string name="use_opengl_render">Brug OpenGL optegning</string>
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
     <string name="everything_up_to_date">Alt er opdateret</string>
-    <string name="dismiss">Afvis</string>
     <string name="no_internet_connection">Ikke muligt at hente, kontroller internetforbindelsen.</string>
     <string name="download_tab_downloads">Hent</string>
     <string name="download_tab_updates">Opdater</string>
@@ -1903,14 +1883,10 @@
     <string name="gps_status">GPS status</string>
     <string name="parking_place">Parkeringsplads</string>
     <string name="remove_the_tag">FJERN MÆRKET</string>
-    <string name="enable_plugin">Deaktiveret</string>
-	<string name="disable_plugin">Aktiveret</string>
 <string name="plugin_description_title">Beskrivelse</string>
 	<string name="plugin_settings_button_caption">Indstillinger</string>
 <string name="edit_group">Rediger gruppe</string>
     <string name="plugin_install_needs_network">Internetforbindelse behøves for at installere udvidelsen.</string>
-<string name="enable_plugin2">Aktiver</string>
-	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
 <string name="plugin_ski_name">Skikort</string>
     <string name="plugin_nautical_name">Søkort</string>
@@ -1946,13 +1922,84 @@
 		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
 	</string>
 	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
-	<string name="days_behind">dage bagefter</string>
+	<string name="days_behind">dage gammel</string>
 	<string name="rename_failed">Fejl ved omdøbning.</string>
 	<string name="back_to_map">Tilbage til kortet</string>
 	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
-	<string name="selected_tracks">Valgt</string>
 	<string name="track_segments">Sporsegmenter</string>
 	<string name="track_points">Sporpunkter</string>
+	<string name="route_points">Rutepunkter</string>
+	<string name="shared_string_release">Udgivet</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">OK</string>
+	<string name="shared_string_cancel">Annuller</string>
+	<string name="shared_string_dismiss">Afvis</string>
+	<string name="shared_string_yes">Ja</string>
+	<string name="shared_string_no">Nej</string>
+	<string name="shared_string_on">På</string>
+	<string name="shared_string_off">Fra</string>
+	<string name="shared_string_previous">Forrige</string>
+	<string name="shared_string_next">Næste</string>
+	<string name="shared_string_enable">Aktiver</string>
+	<string name="shared_string_disable">Deaktiver</string>
+	<string name="shared_string_enabled">Aktiveret</string>
+	<string name="shared_string_disabled">Deaktiveret</string>
+	<string name="shared_string_selected">Valgt</string>
+	<string name="shared_string_selected_lowercase">valgt</string>
+	<string name="shared_string_never">Aldrig</string>
+	<string name="shared_string_none">Ingen</string>
+	<string name="shared_string_and">og</string>
+	<string name="shared_string_or">eller</string>
+	<string name="shared_string_help">Hjælp</string>
+	<string name="shared_string_settings">Indstillinger</string>
+	<string name="shared_string_history">Historik</string>
+	<string name="shared_string_select_on_map">Vælg på kort</string>
+	<string name="shared_string_select_all">Vælg alt</string>
+	<string name="shared_string_deselect">Fravælg</string>
+	<string name="shared_string_deselect_all">Fravælg alt</string>
+	<string name="shared_string_clear">Ryd</string>
+	<string name="shared_string_clear_all">Ryd alt</string>
+	<string name="shared_string_save">Gem</string>
+	<string name="shared_string_save_as_gpx">Gem som GPX-spor</string>
+	<string name="shared_string_rename">Omdøb</string>
+	<string name="shared_string_delete">Slet</string>
+	<string name="shared_string_delete_all">Slet alt</string>
+	<string name="shared_string_share">Del</string>
+	<string name="shared_string_add">Tilføj</string>
+	<string name="shared_string_apply">Anvend</string>
+	<string name="shared_string_control_start">Start</string>
+	<string name="shared_string_control_stop">Stop</string>
+	<string name="shared_string_import">Importer</string>
+	<string name="shared_string_export">Eksporter</string>
+	<string name="shared_string_more">Mere</string>
+	<string name="shared_string_more_actions">Flere handlinger</string>
+	<string name="shared_string_do_not_show_again">Vis ikke igen</string>
+	<string name="shared_string_remember_my_choice">Husk valg</string>
+	<string name="shared_string_refresh">Opdater</string>
+	<string name="shared_string_download">Hent</string>
+	<string name="shared_string_downloading">Henter</string>
+	<string name="shared_string_download_successful">Hentet</string>
+	<string name="shared_string_io_error">I/O fejl</string>
+	<string name="shared_string_unexpected_error">Der opstod uventet fejl</string>
+	<string name="shared_string_action_template">"Handling {0}"</string>
+	<string name="shared_string_close">Luk</string>
+	<string name="shared_string_exit">Afslut</string>
+	<string name="shared_string_show">Vis</string>
+	<string name="shared_string_show_all">Vis alt</string>
+	<string name="shared_string_show_on_map">Vis på kort</string>
+	<string name="shared_string_map">Kort</string>
+	<string name="shared_string_favorite">Favorit</string>
+	<string name="shared_string_favorites">Favoritter</string>
+	<string name="shared_string_add_to_favorites">Føj til Favoritter</string>
+	<string name="shared_string_my_location">Min placering</string>
+	<string name="shared_string_my_places">Mine steder</string>
+	<string name="shared_string_my_favorites">Mine favoritter</string>
+	<string name="shared_string_my_tracks">Mine spor</string>
+	<string name="shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
+	<string name="shared_string_audio">Audio</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+
 	</resources>

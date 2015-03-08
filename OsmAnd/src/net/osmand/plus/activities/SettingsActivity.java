@@ -176,7 +176,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		String vt = this.getString(R.string.about_version) + "\t";
 		String edition = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
-			edition = this.getString(R.string.local_index_installed) + " : \t" + this.getString(R.string.app_edition);
+			edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
 		}
 		tv.setText(vt + version + "\n" +
 				edition + "\n\n" +
@@ -197,7 +197,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		ll.addView(sv);
 		dialog.setContentView(ll);
 		dialog.show();
-//		bld.setPositiveButton(R.string.default_buttons_ok, null);
+//		bld.setPositiveButton(R.string.shared_string_ok, null);
 	}
 
 	

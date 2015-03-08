@@ -111,7 +111,7 @@ public class AvoidSpecificRoads {
 			});
 		}
 
-		bld.setPositiveButton(R.string.select_impassable_road, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
 				selectFromMap(mapActivity);

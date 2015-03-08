@@ -165,14 +165,14 @@
 	<string name="show_ruler_level">عرض المسطرة</string>	
 	<string name="info_button">معلومات</string>
 	<string name="back_to_location">عودة إلى الموقع</string>
-	<string name="help">مساعدة</string>
+	<string name="shared_string_help">مساعدة</string>
 	<string name="show_details">مشاهدة التفاصيل</string>
 	<string name="accessibility_extensions_descr">ملحقات الوصول لإصدارات أندرويد القديمة</string>
 	<string name="accessibility_extensions">ملحقات لإتاحة الوصول</string>
 	<string name="accessibility_mode">وضع إتاحة الوصول</string>
 	<string name="accessibility_mode_descr">تفعيل مميزات إتاحة الوصول</string>
-	<string name="accessibility_on">تفعيل</string>
-	<string name="accessibility_off">إيقاف</string>
+	<string name="shared_string_on">تفعيل</string>
+	<string name="shared_string_off">إيقاف</string>
 	<string name="accessibility_default">وفقا لإعداد النظام العالمي</string>
 	<string name="backToMenu">الرجوع إلى القائمة</string>
 	<string name="zoomOut">تصغير</string>
@@ -271,9 +271,9 @@
 	<string name="add_favorite_dialog_default_favourite_name">مفضل</string>
 	<string name="default_buttons_apply">تطبق</string>
 	<string name="default_buttons_add">إضافة</string>
-	<string name="default_buttons_no">ليس</string>
-	<string name="default_buttons_yes">نعم</string>
-	<string name="default_buttons_cancel">إلغاء</string>
+	<string name="shared_string_no">ليس</string>
+	<string name="shared_string_yes">نعم</string>
+	<string name="shared_string_cancel">إلغاء</string>
 	<string name="context_menu_item_update_map">تحديث الخريطة</string>
 	<string name="navigate_point_cancel">إلغاء</string>
 	<string name="search_address_top_text">حدد عنوان</string>
@@ -315,7 +315,7 @@
 	<string name="use_english_names">استخدام الاسماء الانجليزية في الخرائط</string>
 	<string name="app_settings">إعدادات التطبيق</string>
 	<string name="save_current_track">حفظ المسار الحالي GPX</string>
-	<string name="settings">إعدادات</string>
+	<string name="shared_string_settings">إعدادات</string>
 	
     
     
@@ -559,8 +559,8 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل الأوامر من الصوت المحدد الحالي</string>
 	<string name="switch_to_raster_map_to_see">لا توجد خرائط متجهة محلية لهذا المكان. يمكنك تنزيل أحدها من الإعدادات (إدارة البيانات)، أو الانتقال خرائط الانترنت.</string>
-	<string name="default_and">و</string>
-    <string name="default_or">أو</string>
+	<string name="shared_string_and">و</string>
+    <string name="shared_string_or">أو</string>
 	<string name="av_camera_focus_continuous">التركيز المستمر</string>
 	<string name="free_version_title">الإصدار المجاني</string>
 	<string name="index_name_north_america">أمريكا الشمالية</string>
@@ -1235,7 +1235,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="map_underlay">خريطة الاساس الذي تقوم عليها</string>
 	<string name="map_underlay_descr">اختيار خريطة الاساس الذي تقوم عليه</string>
 	<string name="layer_overlay">خريطة تراكب</string>
-	<string name="default_none">لا شيء</string>
+	<string name="shared_string_none">لا شيء</string>
 	<string name="map_overlay">خريطة تراكب</string>
 	<string name="map_overlay_descr">اختيار خريطة التراكب</string>
 	<string name="poi_dialog_other_tags_message">يتم الاحتفاظ بكافة العلامات الاخري</string>
@@ -1301,8 +1301,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 → → \ ن \ غر مقدمة أساسية، ترتبط بعض النصائح والحيل عبر استخدام \'القائمة \' → \'نصائح \' من شاشة الخريطة. ↵
 →
 	</string>
-	<string name="next_button">التالي</string>
-	<string name="previous_button">السابق</string>
+	<string name="shared_string_next">التالي</string>
+	<string name="shared_string_previous">السابق</string>
 	<string name="unit_of_length_descr">تغيير وحدات الطول والسرعة</string>
 	<string name="unit_of_length">وحدة القياس</string>
 	<string name="si_mi_foots">ميل/قدم</string>
@@ -1343,7 +1343,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="indexing_map">يفهرس الخريطة…</string>
 	<string name="indexing_poi">يفهرس POI…</string>
 	<string name="indexing_transport">النقل الفهرسة…</string>
-	<string name="input_output_error">حدث خطا</string>
+	<string name="shared_string_io_error">حدث خطا</string>
 	<string name="km">كيلومتر</string>
 	<string name="km_h">كيلومتر/ساعة</string>
 	<string name="m">متر</string>

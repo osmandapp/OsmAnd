@@ -229,8 +229,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			IntentStarter intentStarter, final Activity ctx) {
 		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setCancelable(true);
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, intentStarter);
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, intentStarter);
 		builder.setTitle(titleResID);
 		builder.setMessage(messageResID);
 		return builder;

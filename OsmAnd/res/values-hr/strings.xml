@@ -193,11 +193,11 @@
 	<string name="plugins_screen">Dodaci</string>
 	<string name="prefs_plugins">Dodaci</string>
 	<string name="send_files_to_osm">Poslati GPX datoteke na OSM?</string>
-	<string name="help">Pomoć</string>
+	<string name="shared_string_help">Pomoć</string>
 	<string name="back_to_location">Natrag na poziciju</string>
 	<string name="show_details">Prikaži detalje</string>
-	<string name="accessibility_on">Uključeno</string>
-	<string name="accessibility_off">Isključeno</string>
+	<string name="shared_string_on">Uključeno</string>
+	<string name="shared_string_off">Isključeno</string>
 	<string name="backToMenu">Povratak na izbornik</string>
 	<string name="zoomOut">Udalji</string>
 	<string name="zoomIn">Približi</string>
@@ -300,12 +300,12 @@
 	<string name="osb_comment_menu_item">Dodaj komentar</string>
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
-	<string name="default_buttons_cancel">Zatvori</string>
+	<string name="shared_string_cancel">Zatvori</string>
 	<string name="default_buttons_apply">Primijeni</string>
 	<string name="default_buttons_add">Dodaj</string>
-	<string name="default_buttons_no">Ne</string>
+	<string name="shared_string_no">Ne</string>
 	<string name="add_favorite_dialog_top_text">Unesite naziv favorita</string>
-	<string name="default_buttons_yes">Da</string>
+	<string name="shared_string_yes">Da</string>
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>
 	<string name="context_menu_item_create_poi">Stvori POI</string>
 	<string name="context_menu_item_update_map">Ažuriraj karte</string>
@@ -358,7 +358,7 @@
 	<string name="save_current_track">Spremi trenutni GPX</string>
 	<string name="additional_settings">Dodatne postavke</string>
 	<string name="save_current_track_descr">Spremi trenutnu stazu na memorijsku karticu</string>
-	<string name="settings">Postavke</string>
+	<string name="shared_string_settings">Postavke</string>
 	<string name="data_settings">Podaci</string>
 	<string name="use_online_routing_descr">Koristi internet za izračun rute</string>
 	<string name="use_online_routing">Koristi online navigaciju</string>
@@ -413,7 +413,7 @@
 	<string name="searching_address">Tražim adresu…</string>
 	<string name="hint_search_online">Kućni broj, ulica, grad</string>
 	<string name="clear_all">Izbriši sve</string>
-	<string name="history">Povijest</string>
+	<string name="shared_string_history">Povijest</string>
 	<string name="favorite">Favoriti</string>
 	<string name="search_history_city">Grad: {0}</string>
 	<string name="search_history_street">Ulica: {0}, {1}</string>
@@ -520,7 +520,7 @@
 	<string name="indexing_map">Indeksiranje karte…</string>
 	<string name="indexing_poi">Indeksiranje POI…</string>
 	<string name="indexing_transport">Indeksiranje prijevoza…</string>
-	<string name="input_output_error">I/O pogreška</string>
+	<string name="shared_string_io_error">I/O pogreška</string>
 	<string name="indexing_address">Indeksiranje adresa…</string>
 	<string name="amenity_type_barrier">Barijera</string>
 	<string name="amenity_type_education">Obrazovanje</string>
@@ -547,8 +547,8 @@
 	<string name="si_mi_yard">Milje/jardi</string>
 	<string name="si_km_m">Kilometri/metri</string>
 	<string name="unit_of_length_descr">Promjenite jedinice duljine i brzine</string>
-	<string name="next_button">Sljedeće</string>
-	<string name="previous_button">Prethodno</string>
+	<string name="shared_string_next">Sljedeće</string>
+	<string name="shared_string_previous">Prethodno</string>
 	<string name="tip_map_switch">Izaberite izvor karte</string>
 	<string name="preferred_locale_descr">Odaberite jezik prikaza</string>
 	<string name="preferred_locale">Prikaz jezika</string>
@@ -627,7 +627,7 @@
 	<string name="transport_stops_to_pass">stanice do izlaza</string>
 	<string name="transport_route_distance">Udaljenost rute</string>
 	<string name="transport">Prijevoz</string>
-	<string name="default_buttons_ok">U redu</string>
+	<string name="shared_string_ok">U redu</string>
 	<string name="hello">Navigacijska aplikacija OsmAnd</string>
 	<string name="update_poi_success">POI podaci su uspješno ažurirani ({0} su učitani)</string>
 	<string name="update_poi_error_local">Pogreška pri ažuriranju lokalnog POI popisa</string>
@@ -731,7 +731,7 @@
 	<string name="select_tile_source_to_install">Odaberite karte za instalirati ili ažurirati</string>
 	<string name="map_overlay_descr">Odaberite slojnu kartu</string>
 	<string name="map_overlay">Karta sloja</string>
-	<string name="default_none">Bez</string>
+	<string name="shared_string_none">Bez</string>
 	<string name="layer_overlay">Karta sloja…</string>
 	<string name="layer_underlay">Temeljna karta…</string>
 	<string name="map_underlay">Temeljna karta</string>
@@ -954,8 +954,8 @@
     <string name="animate_routing_gpx">Simulacija pomoću GPX zapisa</string>
     <string name="remember_choice">Zapamti moj izbor</string>
     <string name="gps_status_eclipsim">Status GPS signala</string>
-    <string name="default_and">i</string>
-    <string name="default_or">ili</string>
+    <string name="shared_string_and">i</string>
+    <string name="shared_string_or">ili</string>
 	<string name="base_world_map">Osnovna karta svijeta</string>
 	<string name="about_version">Inačica :</string>
     <string name="about_settings_descr">Podaci o inačici, licence, članovi projekta</string>
@@ -1172,7 +1172,7 @@
     <string name="keep_and_add_destination_point">Dodaj kao odredišnu točku</string>
     <string name="select_gpx">Odaberite GPX …</string>
     <string name="route_descr_select_destination">Odaberite Odredište</string>
-    <string name="route_descr_select_on_map">Odaberite na karti …</string>
+    <string name="shared_string_select_on_map">Odaberite na karti …</string>
     <string name="more">Više…</string>
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Bicikl</string>
@@ -1228,7 +1228,7 @@
     <string name="map_widget_plain_time">Trenutno vrijeme</string>
     <string name="selected_gpx_info_show">\n\nPritisnite i držite za prikaz na karti</string>
     <string name="delay_navigation_start">Započni turn-by-turn navođenje automatski</string>
-    <string name="selected">odabrano</string>
+    <string name="shared_string_selected_lowercase">odabrano</string>
     <string name="gpx_info_distance">"Udaljenost: %1$s (%2$s points) "</string>
 	<string name="gpx_info_start_time">"Vrijeme Početka: %1$tF, %1$tT "</string>
 	<string name="gpx_info_average_speed">"Prosječna brzina: %1$s "</string>
@@ -1297,7 +1297,7 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvajske i željezničke rute</string>
 	<string name="wake_on_voice">Uključi ekran</string>
     <string name="wake_on_voice_descr">Uključiti zaslon telefona kada se približavate skretanju</string>
-    <string name="wake_on_voice_never">Nikad</string>
+    <string name="shared_string_never">Nikad</string>
     <string name="select_impassable_road">Označi na karti</string>
     <string name="impassable_road">Izbjegavaj ceste…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Željezničke rute</string>

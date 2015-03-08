@@ -175,7 +175,7 @@ public class StartGPSStatus extends OsmAndAction {
 			if (Version.isMarketEnabled(getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(mapActivity. getString(R.string.gps_status_app_not_found));
-				builder.setPositiveButton(mapActivity.getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(mapActivity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + g.appName));
@@ -185,7 +185,7 @@ public class StartGPSStatus extends OsmAndAction {
 						}
 					}
 				});
-				builder.setNegativeButton(mapActivity.getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(mapActivity.getString(R.string.shared_string_no), null);
 				builder.show();
 			} else {
 				Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();

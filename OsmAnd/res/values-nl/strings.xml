@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -43,14 +43,11 @@
   <string name="show_ruler_level">Schaalaanduiding weergeven</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Terug naar locatie</string>
-  <string name="help">Help</string>
   <string name="show_details">Toon details</string>
   <string name="accessibility_extensions_descr">Toegankelijkheidsmodules voor oude Android versies</string>
   <string name="accessibility_extensions">Toegankelijkheidsmodules</string>
   <string name="accessibility_mode">Toegankelijkheidsmodus</string>
   <string name="accessibility_mode_descr">Zet toegankelijkheidsmodus aan</string>
-  <string name="accessibility_on">Aan</string>
-  <string name="accessibility_off">Uit</string>
   <string name="accessibility_default">Gelijk aan systeeminstelling</string>
   <string name="backToMenu">Terug naar menu</string>
   <string name="zoomOut">Zoom uit</string>
@@ -276,7 +273,7 @@
   
   
   
-<string name="local_index_installed">Editie</string>
+<string name="local_index_installed">Lokale versie</string>
   <string name="local_index_items_backuped">%1$d van %2$d bestanden succesvol gedeactiveerd.</string>
   <string name="local_index_items_deleted">%1$d van %2$d bestanden succesvol verwijderd.</string>
   <string name="local_index_items_restored">%1$d van %2$d bestanden succesvol geactiveerd.</string>
@@ -344,7 +341,6 @@
   <string name="map_underlay">Underlay kaart</string>
   <string name="map_underlay_descr">Kies underlay-kaart</string>
   <string name="layer_overlay">Overlay-kaart…</string>
-  <string name="default_none">Geen</string>
   <string name="map_overlay">Overlay kaart</string>
   <string name="map_overlay_descr">Kies overlay-kaart</string>
   <string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd</string>
@@ -401,8 +397,6 @@
 	</string>
   <string name="tip_initial">Help</string>
   <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.\n\nEen inleiding, tips en hulp zijn te vinden onder \'Menu\' → \'Help\', in het kaartscherm. "</string>
-  <string name="next_button">Volgende</string>
-  <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
   <string name="unit_of_length">Eenheid van afstand</string>
   <string name="si_mi_foots">Mijlen/voeten</string>
@@ -445,7 +439,6 @@
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
   <string name="indexing_transport">OV wordt geïndexeerd…</string>
-  <string name="input_output_error">Datatransportfout opgetreden</string>
   <string name="km">km</string>
   <string name="km_h">km/u</string>
   <string name="m">m</string>
@@ -474,7 +467,7 @@
   <string name="loading_builds">OsmAnd-versies worden geladen…</string>
   <string name="select_build_to_install">Kies een OsmAnd-versie om te installeren</string>
   <string name="contribution_activity">Installeer versie</string>
-  <string name="gps_status_app_not_found">GPS Status is niet geïnstalleerd. Zoeken op Market?</string>
+  <string name="gps_status_app_not_found">GPS-status applicatie is niet geïnstalleerd. Zoeken op Market?</string>
   <string name="voice_is_not_available_msg">Stembegeleiding is niet aanwezig. Ga naar instellingen, kies een pakket stem-gegevens, en download het.</string>
   <string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
   <string name="daynight_mode_day">Dag</string>
@@ -625,7 +618,6 @@
   <string name="transport_stops_to_pass">Aantal haltes te gaan</string>
   <string name="transport_route_distance">Lengte van route</string>
   <string name="transport">Openbaar vervoer</string>
-  <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Toon haltes openbaar vervoer op kaart</string>
   <string name="show_transport_over_map">Toon haltes openbaar vervoer</string>
   <string name="hello">Navigatieprogamma OsmAnd</string>
@@ -642,7 +634,6 @@
   <string name="search_history_building">Gebouw: {0}, {1}, {2}</string>
   <string name="favorite">Favoriet</string>
   <string name="clear_all">Wis alles</string>
-  <string name="history">Geschiedenis</string>
   <string name="uploading_data">Gegevens uploaden…</string>
   <string name="uploading">Uploaden…</string>
   <string name="search_nothing_found">Niets gevonden</string>
@@ -720,7 +711,6 @@
   <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
-  <string name="settings">Instellingen</string>
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval bij navigatie</string>
@@ -801,11 +791,8 @@
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
   <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
-  <string name="default_buttons_yes">Ja</string>
-  <string name="default_buttons_cancel">Annuleer</string>
   <string name="default_buttons_apply">Toepassen</string>
   <string name="default_buttons_add">Voeg toe</string>
-  <string name="default_buttons_no">Nee</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
@@ -1579,8 +1566,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
     <string name="auto_zoom_farthest">Zoom naar grote afstand</string>
-    <string name="default_and">en</string>
-    <string name="default_or">of</string>
 	<string name="remember_choice">Onthoud mijn keuze</string>
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="animate_routing_route_not_calculated">Eerst de route laten berekenen alsjeblieft</string>
@@ -1632,8 +1617,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="routing_attr_weight_name">Gewicht voertuig</string>
 	<string name="select_gpx">GPX-bestand kiezen…</string>
     <string name="route_descr_select_destination">Bestemming kiezen</string>
-    <string name="route_descr_select_on_map">Kies op de kaart…</string>
-    <string name="route_descr_favorite">Favoriet…</string>
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
     <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>
@@ -1847,7 +1830,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
-    <string name="selected">gekozen</string>
     <string name="gpx_split_interval">Splits om de</string>
     <string name="gpx_info_waypoints">Routepunten: %1$s </string>
 	<string name="show_zoom_buttons_navigation_descr">Zoomknoppen tonen tijdens navigeren</string>
@@ -2001,7 +1983,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="select_impassable_road">Selecteer op kaart…</string>
     <string name="impassable_road">Vermijd wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
-    <string name="wake_on_voice_never">Nooit</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     <string name="advanced_settings">Geavanceerd</string>
 	<string name="osmo_use_https_descr">Gebruik beveiligde verbinding met server</string>
@@ -2016,7 +1997,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_opengl_render">Gebruik OpenGL</string>
     <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
-    <string name="dismiss">Sluiten</string>
     <string name="no_internet_connection">Kan niet downloaden, gelieve uw internetverbinding na te kijken.</string>
     <string name="download_tab_downloads">Alle downloads</string>
     <string name="download_tab_updates">Updates</string>
@@ -2067,8 +2047,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="proxy_host_descr">Stel de hostname van je proxy in (bv. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy-poort</string>
 	<string name="proxy_port_descr">Stel het poortnummer van je proxy in (bv. 8118)</string>
-	<string name="enable_plugin">Uitgezet</string>
-	<string name="disable_plugin">Aangezet</string>
 <string name="plugin_description_title">Omschrijving</string>
 	<string name="plugin_settings_button_caption">Instellingen</string>
 <string name="edit_group">Bewerk groep</string>
@@ -2076,10 +2054,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="plugin_nautical_name">Nautische kaartweergave</string>
     <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
-	<string name="enable_plugin2">Activeren</string>
-	<string name="disable_plugin2">Deactiveren</string>
 	<string name="get_plugin">Krijgen</string>
-<string name="currently_recording_track">Huidige opname track</string>
+<string name="currently_recording_track">Huidige route opname</string>
 	<string name="watch">Bekijk</string>
 	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
@@ -2090,7 +2066,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="plugin_nautical_descr">"Deze plug-in verrijkt de OsmAnd App met gegevens voor maken van nautische kaarten voor varen, zeilen, en andere vormen van watersport.\n\nDe speciale kaart add-on voor OsmAnd bied alle nautische navigatie kenmerken en kaartsymbolen, voor de binnenvaart en voor dicht voor de kust navigatie. De beschrijving van elke navigatie kenmerk levert de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.\n\nOm terug te keren naar een van OsmAnd conventionele kaart stijlen, gewoon deze plug-in de-activeren, of verander de \'Kaart stijl\' onder \'Kaart instellen\'. "</string>
 	<string name="plugin_ski_name">Ski kaartweergave</string>
 	<string name="plugin_ski_descr">"Deze plug-in voor OsmAnd plaatst onder handbereik de details over skipistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter\' kaart stijl die een met sneeuw bedekt winterlandschap voorstelt.\n\nEen globale overzicht van alle skipistes en cross country ski routes voor deze weergave is beschikbaar onder Downloads als \'World ski-map\'.\n\nHet activeren van deze weergave verandert de kaart in stijl \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door ofwel het de-activeren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
-	<string name="selected_tracks">Geselecteerd</string>
 	<string name="turn_off_all">Zet alles uit</string>
 	<string name="showed_on_map">Weergegeven op de kaart</string>
 	<string name="rename_failed">Hernoemen mislukt.</string>
@@ -2109,4 +2084,75 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="export">Exporteren</string>
 	<string name="route_points">Route punten</string>
 	<string name="days_behind">Achterstand</string>
+	<string name="shared_string_release">Vrijgegeven</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">OK</string>
+	<string name="shared_string_cancel">Annuleren</string>
+	<string name="shared_string_dismiss">Afwijzen</string>
+	<string name="shared_string_yes">Ja</string>
+	<string name="shared_string_no">Nee</string>
+	<string name="shared_string_on">Aan</string>
+	<string name="shared_string_off">Uit</string>
+	<string name="shared_string_previous">Vorige</string>
+	<string name="shared_string_next">Volgende</string>
+	<string name="shared_string_enable">Inschakelen</string>
+	<string name="shared_string_disable">Uitschakelen</string>
+	<string name="shared_string_enabled">Ingeschakeld</string>
+	<string name="shared_string_disabled">Uitgeschakeld</string>
+	<string name="shared_string_selected">Geselecteerd</string>
+	<string name="shared_string_selected_lowercase">geselecteerd</string>
+	<string name="shared_string_never">Nooit</string>
+	<string name="shared_string_none">Geen</string>
+	<string name="shared_string_and">en</string>
+	<string name="shared_string_or">of</string>
+	<string name="shared_string_help">Hulp</string>
+	<string name="shared_string_settings">Instellingen</string>
+	<string name="shared_string_history">Geschiedenis</string>
+	<string name="shared_string_select_on_map">Selecteer op de kaart</string>
+	<string name="shared_string_select_all">Selecteer alles</string>
+	<string name="shared_string_deselect">Deselecteren</string>
+	<string name="shared_string_deselect_all">Deselecteer alles</string>
+	<string name="shared_string_clear">Wis</string>
+	<string name="shared_string_clear_all">Wis alles</string>
+	<string name="shared_string_save">Opslaan</string>
+	<string name="shared_string_save_as_gpx">Opslaan als GPX-route</string>
+	<string name="shared_string_rename">Hernoem</string>
+	<string name="shared_string_delete">Verwijder</string>
+	<string name="shared_string_delete_all">Verwijder alles</string>
+	<string name="shared_string_share">Deel</string>
+	<string name="shared_string_add">Toevoegen</string>
+	<string name="shared_string_apply">Toepassen</string>
+	<string name="shared_string_control_start">Start</string>
+	<string name="shared_string_control_stop">Stop</string>
+	<string name="shared_string_import">Importeer</string>
+	<string name="shared_string_export">Exporteer</string>
+	<string name="shared_string_more">Meer</string>
+	<string name="shared_string_more_actions">Meer acties</string>
+	<string name="shared_string_do_not_show_again">Toon niet meer</string>
+	<string name="shared_string_remember_my_choice">Onthoud mijn keuze</string>
+	<string name="shared_string_refresh">Vernieuwen</string>
+	<string name="shared_string_download">Download</string>
+	<string name="shared_string_downloading">Aan het downloaden</string>
+	<string name="shared_string_download_successful">Download succesvol</string>
+	<string name="shared_string_io_error">I/O-fout opgetreden</string>
+	<string name="shared_string_unexpected_error">Onverwachte fout opgetreden</string>
+	<string name="shared_string_action_template">"Actie {0}"</string>
+	<string name="shared_string_close">Sluit</string>
+	<string name="shared_string_exit">Afsluiten</string>
+	<string name="shared_string_show">Toon</string>
+	<string name="shared_string_show_all">Toon alles</string>
+	<string name="shared_string_show_on_map">Toon op de kaart</string>
+	<string name="shared_string_map">Kaart</string>
+	<string name="shared_string_favorite">Favoriet</string>
+	<string name="shared_string_favorites">Favorieten</string>
+	<string name="shared_string_add_to_favorites">Voeg toe aan Favorieten</string>
+	<string name="shared_string_my_location">Mijn locatie</string>
+	<string name="shared_string_my_places">Mijn plaatsen</string>
+	<string name="shared_string_my_favorites">Mijn favorieten</string>
+	<string name="shared_string_my_tracks">Mijn routes</string>
+	<string name="shared_string_currently_recording_track">Huidige route wordt opgenomen</string>
+	<string name="shared_string_audio">Geluid</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+
 	</resources>

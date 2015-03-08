@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -27,15 +27,12 @@
 	
 	<string name="info_button">정보</string>
 	<string name="back_to_location">위치로 돌아감</string>
-	<string name="help">도움말</string>
 	<string name="show_details">세부정보 표시</string>
 	
 	<string name="accessibility_extensions_descr">이전 안드로이드 버전에 대한 접근성(내게 필요한 옵션) 확장</string>
 	<string name="accessibility_extensions">접근성 확장</string>
 	<string name="accessibility_mode">접근성 모드</string>
 	<string name="accessibility_mode_descr">접근성(내게 필요한 옵션) 기능을 켭니다</string>
-	<string name="accessibility_on">접근성 켜기</string>
-	<string name="accessibility_off">접근성 끄기</string>
 	<string name="accessibility_default">글로벌 시스템 설정에 따름</string>
 	
 	<string name="backToMenu">메뉴로 돌아감</string>
@@ -349,7 +346,6 @@
 	<string name="map_underlay">언더레이 맵</string>
 	<string name="map_underlay_descr">언더레이 맵을 선택합니다</string>
 	<string name="layer_overlay">오버레이 맵…</string>
-	<string name="default_none">없음</string>
 	<string name="map_overlay">오버레이 맵</string>
 	<string name="map_overlay_descr">오버레이 맵을 선택합니다</string>
 	<string name="tile_source_already_installed">맵이 이미 설치되어, 설정이 업데이트될 것입니다</string>
@@ -410,9 +406,6 @@
 
 	<string name="tip_initial">도움말</string>
 	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 내비게이션 앱입니다.\n기본적인 소개로서, 몇 가지 유용한 도움말을 지도화면에서  [메뉴-도움말]에서 찾을 수 있습니다. "</string>
-	<string name="next_button">다음</string>
-	<string name="previous_button">이전</string>
-
 	<string name="unit_of_length_descr">거리와 속도 단위를 변경합니다</string>
 	<string name="unit_of_length">측정 단위</string>
 	<string name="si_mi_foots">마일/피트</string>
@@ -454,7 +447,6 @@
 	<string name="indexing_map">맵 인덱싱…</string>
 	<string name="indexing_poi">POI 인덱싱…</string>
 	<string name="indexing_transport">대중교통 인덱싱…</string>
-	<string name="input_output_error">입출력 오류가 발생하였습니다</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -486,7 +478,7 @@
 	<string name="select_build_to_install">설치할 OsmAnd 빌드 선택</string>
 	<string name="contribution_activity">버전 설치</string>
 
-	<string name="gps_status_app_not_found">GPS Status 앱이 설치되지 않았습니다. 구글마켓에서 찾을까요?</string>
+	<string name="gps_status_app_not_found">GPS status 앱이 설치되지 않았습니다. 구글마켓에서 찾을까요?</string>
 
 	<string name="voice_is_not_available_msg">"음성 안내를 사용할 수 없습니다. \'설정 - 일반 - 음성안내\' 로 가서, 선호하는 음성 안내  패키지를 선택하고 다운로드하세요."</string>
 	<string name="voice_is_not_available_title">선택된 음성 안내 없음</string>
@@ -649,7 +641,6 @@
 	<string name="transport_stops_to_pass">경유할 정류소들</string>
 	<string name="transport_route_distance">교처로까지 거리</string>
 	<string name="transport">대중교통</string>
-	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">대중교통 정류소를 지도에 표시</string>
 	<string name="show_transport_over_map">대중교통 정류소 표시</string>
 	<string name="hello">내비게이션 앱 OsmAnd</string>
@@ -666,7 +657,6 @@
 	<string name="search_history_building">빌딩: {0}, {1}, {2}</string>
 	<string name="favorite">즐겨찾기</string>
 	<string name="clear_all">모두 지우기</string>
-	<string name="history">기록</string>
 	<string name="uploading_data">데이터를 업로드하는 중…</string>
 	<string name="uploading">업로드하는 중…</string>
 	<string name="search_nothing_found">아무것도 찾지 못했습니다</string>
@@ -744,7 +734,6 @@
     <string name="auto_zoom_map_descr">속도에 따라 자동으로 지도 줌(zoom)을 합니다</string>
     <string name="auto_zoom_map">자동 맵 줌</string>
     <string name="additional_settings">추가 설정</string>
-    <string name="settings">설정</string>
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 위한 로깅 간격을 선택합니다</string>
@@ -828,11 +817,8 @@
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>
 <string name="context_menu_item_create_poi">POI 생성</string>
 
-<string name="default_buttons_yes">예</string>
-<string name="default_buttons_cancel">취소</string>
 <string name="default_buttons_apply">적용</string>
 <string name="default_buttons_add">추가</string>
-<string name="default_buttons_no">아니오</string>
 <string name="add_favorite_dialog_top_text">즐겨찾기 이름 입력</string>
 <string name="add_favorite_dialog_default_favourite_name">즐겨찾기</string>
 <string name="add_favorite_dialog_favourite_added_template">즐겨찾기 포인트 \'\'{0}\'\' 이 성공적으로 추가되었습니다.</string>
@@ -937,8 +923,6 @@
     <string name="keep_and_add_destination_point">도착지로 추가</string>
     <string name="select_gpx">GPX 선택…</string>
     <string name="route_descr_select_destination">도착지 선택</string>
-    <string name="route_descr_select_on_map">지도에서 선택…</string>
-    <string name="route_descr_favorite">즐겨찾기…</string>
     <string name="route_info">경로 정보</string>
     <string name="routing_attr_prefer_motorway_name">전용도로 선호</string>
 	<string name="routing_attr_prefer_motorway_description">전용도로 선호</string>
@@ -983,8 +967,6 @@
     <string name="animate_routing_gpx">GPX경로를 이용하여 모의주행하기</string>
     <string name="remember_choice">내 선택을 기억하기</string>
     <string name="gps_status_eclipsim">GPS status</string>
-    <string name="default_and">그리고</string>
-    <string name="default_or">또는</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
 	<string name="map_magnifier">지도 확대경</string>
 	<string name="base_world_map">세계 기본지도</string>
@@ -1586,7 +1568,7 @@
 \n\t* 많은 UX 개선 및 사용성 고정.
 \n\t* 음성 속도 설정 추가. "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
-	<string name="local_index_installed">편집</string>
+	<string name="local_index_installed">로컬 버전</string>
 	<string name="voice_not_specified">지정없음</string>
 	<string name="incomplete_locale">불완성</string>
 	<string name="downloading_file_new">다운로드 중…</string>
@@ -1899,7 +1881,6 @@
     <string name="gpx_wpt">경유지</string>
     <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
     <string name="delay_navigation_start">순차적인 안내를 시작합니다</string>
-    <string name="selected">선택됨</string>
     <string name="gpx_split_interval">분할 간격</string>
     <string name="gpx_info_waypoints">"경유지: %1$s "</string>
 	<string name="gpx_info_asc_altitude">하강/상승: %1$s</string>
@@ -2068,7 +2049,6 @@
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
     <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
-    <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버에 보안 연결 이용</string>
@@ -2081,7 +2061,6 @@
 	<string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
     <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
-    <string name="dismiss">해제</string>
     <string name="everything_up_to_date">모든 파일 업데이트</string>
     <string name="no_internet_connection">다운로드가 불가능 합니다. 인터넷 연결을 체크해 주세요.</string>
     <string name="navigate_point_zone">존(지역)</string>
@@ -2130,17 +2109,13 @@
     <string name="tracks">경로</string>
     <string name="my_location">내 위치</string>
     <string name="osm_editing_manage">관리</string>
-    <string name="gps_status">GPS 상태</string>
+    <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
-    <string name="enable_plugin">비활성화됨</string>
-	<string name="disable_plugin">활성화됨</string>
 <string name="plugin_description_title">설명</string>
 	<string name="plugin_settings_button_caption">설정</string>
 <string name="edit_group">그룹 편집</string>
     <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
-<string name="enable_plugin2">활성화</string>
-	<string name="disable_plugin2">비활성화</string>
 	<string name="get_plugin">가져오기</string>
 <string name="plugin_ski_name">스키 지도 보기</string>
     <string name="plugin_nautical_name">항해 지도 보기</string>
@@ -2182,7 +2157,78 @@
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
 	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
-	<string name="selected_tracks">선택된 트랙</string>
 	<string name="track_segments">트랙 세그먼트</string>
 	<string name="track_points">트랙 포인트</string>
+	<string name="route_points">루트 포인트</string>
+	<string name="shared_string_release">릴리스</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">확인</string>
+	<string name="shared_string_cancel">취소</string>
+	<string name="shared_string_dismiss">기각</string>
+	<string name="shared_string_yes">예</string>
+	<string name="shared_string_no">아니오</string>
+	<string name="shared_string_on">켜기</string>
+	<string name="shared_string_off">끄기</string>
+	<string name="shared_string_previous">이전</string>
+	<string name="shared_string_next">다음</string>
+	<string name="shared_string_enable">활성화</string>
+	<string name="shared_string_disable">비활성화</string>
+	<string name="shared_string_enabled">활성화됨</string>
+	<string name="shared_string_disabled">비활성화됨</string>
+	<string name="shared_string_selected">선택한 것</string>
+	<string name="shared_string_selected_lowercase">선택한 것</string>
+	<string name="shared_string_never">결코</string>
+	<string name="shared_string_none">없음</string>
+	<string name="shared_string_and">그리고</string>
+	<string name="shared_string_or">또는</string>
+	<string name="shared_string_help">도움말</string>
+	<string name="shared_string_settings">설명</string>
+	<string name="shared_string_history">최근 기록</string>
+	<string name="shared_string_select_on_map">지도에서 선택</string>
+	<string name="shared_string_select_all">모두 선택</string>
+	<string name="shared_string_deselect">선택 취소</string>
+	<string name="shared_string_deselect_all">모두 선택 취소</string>
+	<string name="shared_string_clear">지우기</string>
+	<string name="shared_string_clear_all">모두 지우기</string>
+	<string name="shared_string_save">저장</string>
+	<string name="shared_string_save_as_gpx">현재 트랙을 GPX 파일로 저장</string>
+	<string name="shared_string_rename">이름 바꾸기</string>
+	<string name="shared_string_delete">삭제</string>
+	<string name="shared_string_delete_all">모두 삭제</string>
+	<string name="shared_string_share">공유</string>
+	<string name="shared_string_add">추가</string>
+	<string name="shared_string_apply">적용</string>
+	<string name="shared_string_control_start">시작</string>
+	<string name="shared_string_control_stop">정지</string>
+	<string name="shared_string_import">가져오기</string>
+	<string name="shared_string_export">내보내기</string>
+	<string name="shared_string_more">더보기</string>
+	<string name="shared_string_more_actions">더 많은 작업</string>
+	<string name="shared_string_do_not_show_again">다시 표시하지 않음</string>
+	<string name="shared_string_remember_my_choice">내 선택을 기억하기</string>
+	<string name="shared_string_refresh">새로고침</string>
+	<string name="shared_string_download">다운로드</string>
+	<string name="shared_string_downloading">다운로드 중</string>
+	<string name="shared_string_download_successful">성공적인 다운로드</string>
+	<string name="shared_string_io_error">입출력 오류가 발생하였습니다</string>
+	<string name="shared_string_unexpected_error">예기치 않은 오류가 발생 했습니다</string>
+	<string name="shared_string_action_template">"작업 {0}"</string>
+	<string name="shared_string_close">닫기</string>
+	<string name="shared_string_exit">종료</string>
+	<string name="shared_string_show">보기</string>
+	<string name="shared_string_show_all">모두 표시</string>
+	<string name="shared_string_show_on_map">지도에 표시</string>
+	<string name="shared_string_map">지도</string>
+	<string name="shared_string_favorite">즐겨찾기</string>
+	<string name="shared_string_favorites">즐겨찾기</string>
+	<string name="shared_string_add_to_favorites">즐겨찾기에 추가</string>
+	<string name="shared_string_my_location">내 위치</string>
+	<string name="shared_string_my_places">저장소</string>
+	<string name="shared_string_my_favorites">모든 즐겨찾기</string>
+	<string name="shared_string_my_tracks">경로</string>
+	<string name="shared_string_currently_recording_track">현재 기록중인 트랙</string>
+	<string name="shared_string_audio">소리</string>
+	<string name="shared_string_video">영상</string>
+	<string name="shared_string_photo">사진</string>
+
 	</resources>

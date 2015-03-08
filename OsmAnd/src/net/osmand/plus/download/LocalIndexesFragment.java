@@ -218,13 +218,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 		} else if (resId == R.string.local_index_mi_delete) {
 			Builder confirm = new Builder(getActivity());
-			confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
 				}
 			});
-			confirm.setNegativeButton(R.string.default_buttons_no, null);
+			confirm.setNegativeButton(R.string.shared_string_no, null);
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
@@ -264,7 +264,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -630,7 +630,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				Builder builder = new AlertDialog.Builder(getDownloadActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}

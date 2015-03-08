@@ -136,7 +136,7 @@ public class MapActivityActions implements DialogProvider {
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.add_gpx_point_dialog, null);
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		builder.setView(view);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -407,7 +407,7 @@ public class MapActivityActions implements DialogProvider {
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			if (gpxFiles.size() == 1){
 				bld.setMessage(R.string.use_displayed_track_for_navigation);
-				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						enterRoutePlanningModeImpl(gpxFiles.get(0), from, fromName);
@@ -437,7 +437,7 @@ public class MapActivityActions implements DialogProvider {
 				});
 			}
 
-			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					enterRoutePlanningModeImpl(null, from, fromName);
@@ -490,7 +490,7 @@ public class MapActivityActions implements DialogProvider {
 	private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AccessibleAlertBuilder(mapActivity);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
-    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
+    	builder.setNegativeButton(R.string.shared_string_cancel, null);
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override
@@ -882,7 +882,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 
-		optionsMenuHelper.item(R.string.settings_activity)
+		optionsMenuHelper.item(R.string.shared_string_settings)
 		.icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
 		.listen(new OnContextMenuClick() {
 			@Override
@@ -988,7 +988,7 @@ public class MapActivityActions implements DialogProvider {
 			// Stop the navigation
 			builder.setTitle(getString(R.string.cancel_route));
 			builder.setMessage(getString(R.string.stop_routing_confirm));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					stopNavigationWithoutConfirm();
@@ -1000,7 +1000,7 @@ public class MapActivityActions implements DialogProvider {
 			// Clear the destination point
 			builder.setTitle(getString(R.string.cancel_navigation));
 			builder.setMessage(getString(R.string.clear_dest_confirm));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					getTargets().clearPointToNavigate(true);
@@ -1009,7 +1009,7 @@ public class MapActivityActions implements DialogProvider {
 			});
 		}
 
-		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();
 	}
 	

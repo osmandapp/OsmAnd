@@ -1158,7 +1158,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		dlg.setNegativeButton(R.string.default_buttons_cancel, new OnClickListener() {
+		dlg.setNegativeButton(R.string.shared_string_cancel, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

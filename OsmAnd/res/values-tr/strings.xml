@@ -307,10 +307,10 @@
 	<string name="map_settings">Harita Ayarları</string>
 	<string name="extra_settings">Gelişmiş Ayarlar</string>
 	<string name="default_buttons_support">Destek</string>
-	<string name="help">Yardım</string>
+	<string name="shared_string_help">Yardım</string>
 	<string name="show_details">Ayrıntıları göster</string>
-	<string name="accessibility_on">Açık</string>
-	<string name="accessibility_off">Kapalı</string>
+	<string name="shared_string_on">Açık</string>
+	<string name="shared_string_off">Kapalı</string>
 	<string name="backToMenu">Menüye Geri Dön</string>
 	<string name="zoomOut">Uzaklaştır</string>
 	<string name="zoomIn">Yaklaştır</string>
@@ -375,8 +375,8 @@
 	<string name="tip_navigation">Gezinti</string>
 	<string name="tip_search">Aranıyor</string>
 	<string name="tip_initial">İpuçları ve püf noktaları</string>
-	<string name="next_button">Sonraki</string>
-	<string name="previous_button">Önceki</string>
+	<string name="shared_string_next">Sonraki</string>
+	<string name="shared_string_previous">Önceki</string>
 	<string name="unit_of_length_descr">Uzunluk ve hız birimlerini değiştir</string>
 	<string name="si_km_m">Kilometre/metre</string>
 	<string name="amenity_type_education">Eğitim</string>
@@ -432,7 +432,7 @@
 	<string name="first_time_continue">Sonra</string>
 	<string name="search_poi_location">Sinyal aranıyor…</string>
 	<string name="transport_Routes">Rotalar</string>
-	<string name="default_buttons_ok">Tamam</string>
+	<string name="shared_string_ok">Tamam</string>
 	<string name="clear_all">Hepsini temizle</string>
 	<string name="searching">Aranıyor…</string>
 	<string name="searching_address">Adres aranıyor…</string>
@@ -463,7 +463,7 @@
 	<string name="use_online_routing">İnternete bağlı navigasyonu kullanın</string>
 	<string name="data_settings">Veriler</string>
 	<string name="additional_settings">İlave ayarlar</string>
-	<string name="settings">Ayarlar</string>
+	<string name="shared_string_settings">Ayarlar</string>
 	<string name="update_tile">Haritayı güncelle</string>
 	<string name="mark_point">"Hedef "</string>
 	<string name="favourites_activity">Favoriler</string>
@@ -496,11 +496,11 @@
 	<string name="context_menu_item_add_favorite">Favorilere ekle</string>
 	<string name="context_menu_item_update_map">Haritayı güncelle</string>
 	<string name="context_menu_item_create_poi">POI oluştur</string>
-	<string name="default_buttons_yes">Evet</string>
-	<string name="default_buttons_cancel">İptal et</string>
+	<string name="shared_string_yes">Evet</string>
+	<string name="shared_string_cancel">İptal et</string>
 	<string name="default_buttons_apply">Uygula</string>
 	<string name="default_buttons_add">Ekle</string>
-	<string name="default_buttons_no">Hayır</string>
+	<string name="shared_string_no">Hayır</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favori</string>
 	<string name="favourites_context_menu_delete">Favoriyi sil</string>
 	<string name="osb_add_dialog_error">İstisnai durum oluştu: Hata oluşturulamadı</string>
@@ -968,7 +968,7 @@
 	<string name="context_menu_item_share_location">Konum paylaş</string>
 	<string name="amenity_type_landuse">Arazi</string>
 	<string name="amenity_type_transportation">Taşıma</string>
-	<string name="input_output_error">G/Ç hatası oluştu</string>
+	<string name="shared_string_io_error">G/Ç hatası oluştu</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -1060,7 +1060,7 @@
 	<string name="search_history_city">Şehir: {0}</string>
 	<string name="search_history_street">Sokak: {0}, {1}</string>
 	<string name="search_history_building">Bina: {0}, {1}, {2}</string>
-	<string name="history">Geçmiş</string>
+	<string name="shared_string_history">Geçmiş</string>
 	<string name="uploading_data">Veri yükleniyor…</string>
 	<string name="uploading">Yükleniyor…</string>
 	<string name="search_nothing_found">Sonuç bulunamadı</string>
@@ -1131,7 +1131,7 @@
 	<string name="voice_stream_voice_call">Sesli çağrı sesi</string>
 	<string name="map_transparency_descr">Temel harita saydamlığını değiştirin</string>
 	<string name="map_transparency">Temel harita saydamlığı</string>
-	<string name="default_none">Hiçbiri</string>
+	<string name="shared_string_none">Hiçbiri</string>
 	<string name="map_underlay">Alt katman harita</string>
 	<string name="map_underlay_descr">Alt katman harita seç</string>
 	<string name="layer_overlay">Üst katman harita…</string>
@@ -1187,8 +1187,8 @@
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
     <string name="remember_choice">Seçmeyi unutmayın</string>
     <string name="gps_status_eclipsim">GPS Durumu</string>
-    <string name="default_and">ve</string>
-    <string name="default_or">veya</string>
+    <string name="shared_string_and">ve</string>
+    <string name="shared_string_or">veya</string>
 	<string name="route_is_too_long">OsmAnd isimli yönlendirme fazla 200km ayrı noktalarda için çok uzun ( ya da bazen çalışmıyor ) alabilir .Daha iyi performans için ara rota noktası eklemek isteyebilirsiniz .</string>
 	<string name="auto_zoom_none">Otomatik odaklama Kapalı</string>
 	<string name="auto_zoom_close">yakın</string>

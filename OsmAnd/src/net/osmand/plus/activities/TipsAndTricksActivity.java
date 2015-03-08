@@ -124,7 +124,7 @@ public class TipsAndTricksActivity {
 		final TIntArrayList toShow = new TIntArrayList();
 		final int[] historyInd = new int[1];
 		if(showFirst){
-			dlg.setTitle(R.string.tip_initial);
+			dlg.setTitle(R.string.shared_string_help);
 			tipDescription.setText(R.string.tip_initial_t);
 			historyInd[0] = -1;
 		} else if(!random){

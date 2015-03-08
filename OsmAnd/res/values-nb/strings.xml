@@ -126,14 +126,14 @@
 	<string name="show_ruler_level">Vis målestokk</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Tilbake til posisjon</string>
-	<string name="help">Hjelp</string>
+	<string name="shared_string_help">Hjelp</string>
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgjengelighetsmoduler for gamle Android-versjoner</string>
 	<string name="accessibility_extensions">Tilgjengelighetsmoduler</string>
 	<string name="accessibility_mode">Tilgjengelighetsmodus</string>
 	<string name="accessibility_mode_descr">Slår på tilgjengelighetsfunksjonene</string>
-	<string name="accessibility_on">På</string>
-	<string name="accessibility_off">Av</string>
+	<string name="shared_string_on">På</string>
+	<string name="shared_string_off">Av</string>
 	<string name="accessibility_default">Ifølge den globale systeminnstillingen</string>
 	<string name="backToMenu">Tilbake til meny</string>
 	<string name="zoomOut">Zoom ut</string>
@@ -355,8 +355,8 @@
 	<string name="tip_initial">Hjelp</string>
 	<string name="tip_initial_t">"OsmAnd er et navigeringsprogram med mange funksjoner.
 \n\nSom en grunnleggende innføring er noen brukertips og triks lenket til via \'Meny\' → \'Hjelp\' fra kartskjermen. "</string>
-	<string name="next_button">Neste</string>
-	<string name="previous_button">Forrige</string>
+	<string name="shared_string_next">Neste</string>
+	<string name="shared_string_previous">Forrige</string>
 	<string name="unit_of_length_descr">Endre lengde- og hastighetsenhet</string>
 	<string name="unit_of_length">Måleenhet</string>
 	<string name="si_km_m">Kilometer/meter</string>
@@ -386,7 +386,7 @@
 	<string name="indexing_map">Indekserer kart…</string>
 	<string name="indexing_poi">Indekserer interessepunkt…</string>
 	<string name="indexing_transport">Indekserer transport…</string>
-	<string name="input_output_error">I/O feil oppstod</string>
+	<string name="shared_string_io_error">I/O feil oppstod</string>
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
@@ -474,7 +474,7 @@
 	<string name="transport_Routes">Ruter</string>
 	<string name="transport_route_distance">Reiserutedistanse</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Vis stoppesteder for offentlig transport på kart</string>
 	<string name="show_transport_over_map">Vis stoppesteder</string>
 	<string name="hello">Navigeringsprogrammet OsmAnd</string>
@@ -486,7 +486,7 @@
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favoritt</string>
 	<string name="clear_all">Slett alle</string>
-	<string name="history">Historikk</string>
+	<string name="shared_string_history">Historikk</string>
 	<string name="uploading_data">Laster opp data…</string>
 	<string name="uploading">Laster opp…</string>
 	<string name="search_nothing_found">Ingenting funnet</string>
@@ -522,7 +522,7 @@
 	<string name="opening_hours">Åpningstider</string>
 	<string name="poi">Interessepunkt</string>
 	<string name="additional_settings">Tilleggsinnstillinger</string>
-	<string name="settings">Innstillinger</string>
+	<string name="shared_string_settings">Innstillinger</string>
 	<string name="save_current_track_descr">Lagre gjeldende spor til SD nå</string>
 	<string name="save_current_track">Lagre gjeldende GPX-spor</string>
 	<string name="save_track_interval">Loggeintervall under navigering</string>
@@ -599,11 +599,11 @@
 	<string name="context_menu_item_update_map">Oppdater kart</string>
 	<string name="context_menu_item_open_bug">Åpne OSM-feil</string>
 	<string name="context_menu_item_create_poi">Opprett interessepunkt</string>
-	<string name="default_buttons_yes">Ja</string>
-	<string name="default_buttons_cancel">Avbryt</string>
+	<string name="shared_string_yes">Ja</string>
+	<string name="shared_string_cancel">Avbryt</string>
 	<string name="default_buttons_apply">Bruk</string>
 	<string name="default_buttons_add">Legg til</string>
-	<string name="default_buttons_no">Nei</string>
+	<string name="shared_string_no">Nei</string>
 	<string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favoritt</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' ble vellykket lagt til.</string>
@@ -715,8 +715,8 @@
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
     <string name="remember_choice">Husk mitt valg</string>
     <string name="gps_status_eclipsim">GPS-status</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
+    <string name="shared_string_and">og</string>
+    <string name="shared_string_or">eller</string>
 	<string name="lang_en">Engelsk</string>
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armensk</string>
@@ -822,7 +822,7 @@
     <string name="lang_he">Hebraisk</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
     <string name="visible_element">Vis på kart</string>
-    <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for online-kart for dette).</string>
+    <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for nettbaserte kart for dette).</string>
 	<string name="rendering_category_others">Andre kartattributter</string>
     <string name="av_control_start">Start</string>
     <string name="save_route_as_gpx">Lagre rute som GPX-fil</string>
@@ -845,7 +845,7 @@
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
 	<string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving</string>
-    <string name="wake_on_voice_never">Aldri</string>
+    <string name="shared_string_never">Aldri</string>
     <string name="search_radius_proximity">I nærhet av</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
 	<string name="fav_point_dublicate">Duplisering av favorittpunktnavn</string>
@@ -984,8 +984,8 @@
 	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
 	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
-    <string name="route_descr_select_on_map">Velg på kart…</string>
-    <string name="route_descr_favorite">Favoritt…</string>
+    <string name="shared_string_select_on_map">Velg på kart…</string>
+    <string name="shared_string_favorite">Favoritt…</string>
     <string name="route_preferences">Ruteinnstillinger</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline-rute</string>
@@ -1078,7 +1078,7 @@
 	<string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
     <string name="no_internet_connection">Ikke mulig å laste ned, kontroller internettforbindelsen.</string>
-    <string name="dismiss">Avvis</string>
+    <string name="shared_string_dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
     <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter)</string>
@@ -1222,4 +1222,34 @@
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Endre navn på opptak</string>
     <string name="anonymous_user">Anonym bruker</string>
-    </resources>
+    <string name="user_name_descr">Trengs for bidrag til openstreetmap.org</string>
+	<string name="user_password_descr">Trengs for bidrag til openstreetmap.org</string>
+	<string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
+	<string name="download_files_question_space">Ledig plass nå {2} MB! Laste ned {0} fil(er) ({1} MB)?</string>
+	<string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
+	<string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
+	<string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
+	<string name="pref_vector_rendering">Spesifikke alternativer for vektoropptegning</string>
+	<string name="local_index_mi_upload_gpx">Send til OSM</string>
+	<string name="shared_string_none">Ingen</string>
+	<string name="tile_source_already_installed">Kart er allerede installert, innstillinger blir oppdatert</string>
+	<string name="select_tile_source_to_install">Velg (flis)kart å installere eller oppdatere</string>
+	<string name="internet_not_available">En internettforbindelse kreves for denne operasjonen, men er ikke tilgjengelig</string>
+	<string name="reading_cached_tiles">Leser hurtigbufrede fliser…</string>
+	<string name="maps_could_not_be_downloaded">Dette kartet kan ikke lastes ned</string>
+	<string name="use_high_res_maps">Høyoppløselig visning</string>
+	<string name="layer_gpx_layer">GPX-spor…</string>
+	<string name="sd_unmounted">SD-kort er ikke tilgjengelig.\nDu vil ikke kunne se kart eller finne ting.</string>
+	<string name="sd_mounted_ro">SD-kort er skrivebeskyttet.\nDu kan bare se det forhåndslastede kartet og kan ikke laste ned fra internett.</string>
+	<string name="transport_finish_search">Avslutt søk</string>
+	<string name="transport_stop_to_go_out">Velg stoppested for avstigning</string>
+	<string name="failed_op">feilet</string>
+	<string name="osm_settings_descr">Spesifiser innstillinger for Openstreetmap.org (OSM) som er nødvendige for bidrag til OSM</string>
+	<string name="shared_string_disabled">Deaktivert</string>
+	<string name="shared_string_enabled">Aktivert</string>
+	<string name="shared_string_enable">Aktiver</string>
+	<string name="shared_string_disable">Deaktiver</string>
+	<string name="plugin_description_title">Beskrivelse</string>
+	<string name="plugin_settings_button_caption">Innstillinger</string>
+	<string name="plugin_install_needs_network">Du trenger en internettforbindelse for å installere dette programtillegget.</string>
+	</resources>

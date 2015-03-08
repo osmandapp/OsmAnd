@@ -13,8 +13,8 @@
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
     <string name="remember_choice">Запамти мој избор</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
+    <string name="shared_string_and">и</string>
+    <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>
 	<string name="base_world_map">Основна карта света</string>
 	<string name="tip_map_styles">Стилови мапа</string>
@@ -238,7 +238,7 @@
     <string name="download_tab_updates">Надоградње</string>
     <string name="download_tab_local">Месно</string>
 	<string name="no_internet_connection">Преузимање је немогуће, проверите везу са Интернетом.</string>
-    <string name="dismiss">Откажи</string>
+    <string name="shared_string_dismiss">Откажи</string>
     <string name="everything_up_to_date">Све датотеке су свеже</string>
     <string name="use_opengl_render">Користи ОпенГЛ за приказ</string>
     <string name="use_opengl_render_descr">Користи хардверско убрзање ОпенГЛ-а за приказ (можда не ради на неким уређајима)</string>
@@ -250,7 +250,7 @@
 	<string name="show_map">ПРИКАЖИ КАРТУ</string>
 	<string name="show_all">ПРИКАЖИ СВЕ</string>
 	<string name="coordinates">Координате</string>
-	<string name="wake_on_voice_never">Никад</string>
+	<string name="shared_string_never">Никад</string>
     <string name="select_impassable_road">Означи на карти…</string>
     <string name="rendering_category_hide">Сакриј</string>
     <string name="rendering_category_details">Појединости</string>

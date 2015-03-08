@@ -185,7 +185,7 @@
  
   
   
-  <string name="local_index_installed">Version du</string>
+  <string name="local_index_installed">Version locale</string>
   <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
   <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
   <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
@@ -252,7 +252,7 @@
   <string name="map_underlay">Fond de carte</string>
   <string name="map_underlay_descr">Choisir un fond de carte</string>
   <string name="layer_overlay">Sur-couche de carte…</string>
-  <string name="default_none">Aucun</string>
+  <string name="shared_string_none">Aucun</string>
   <string name="map_overlay">Sur-couche de la carte</string>
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
@@ -308,8 +308,8 @@
   <string name="tip_initial">Aide</string>
   <string name="tip_initial_t">"OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
 \n\nUne introduction générale, les astuces et l\'aide avancée sont disponibles via \'Menu\'→\'Aide\' sur l\'écran principal. "</string>
-  <string name="next_button">Suivant</string>
-  <string name="previous_button">Précédent</string>
+  <string name="shared_string_next">Suivant</string>
+  <string name="shared_string_previous">Précédent</string>
   <string name="unit_of_length_descr">Sélectionnez les unités de longueur et de vitesse</string>
   <string name="unit_of_length">Unités de mesure</string>
   <string name="si_mi_foots">Miles/pieds</string>
@@ -352,7 +352,7 @@
   <string name="indexing_map">Indexation de la carte…</string>
   <string name="indexing_poi">Indexation du PI…</string>
   <string name="indexing_transport">Indexation des transports…</string>
-  <string name="input_output_error">Erreur d\'entrée/sortie</string>
+  <string name="shared_string_io_error">Erreur d\'entrée/sortie</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -535,7 +535,7 @@
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
   <string name="transport_route_distance">Distance de l\'itinéraire :</string>
   <string name="transport">Transport</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
   <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
   <string name="hello">Application de navigation OsmAnd</string>
@@ -552,7 +552,7 @@
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
   <string name="clear_all">Supprimer tout</string>
-  <string name="history">Historique</string>
+  <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
   <string name="uploading">Envoi…</string>
   <string name="search_nothing_found">Rien n\'a été trouvé</string>
@@ -630,7 +630,7 @@
   <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
   <string name="auto_zoom_map">Zoom automatique de la carte</string>
   <string name="additional_settings">Paramètres supplémentaires</string>
-  <string name="settings">Paramètres</string>
+  <string name="shared_string_settings">Paramètres</string>
   <string name="save_current_track_descr">Enregistrer la trace actuelle sur la carte SD</string>
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
@@ -704,11 +704,11 @@
   <string name="context_menu_item_update_map">Mettre à jour la carte</string>
   <string name="context_menu_item_open_bug">Ouvrir un bogue OSM</string>
   <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
-  <string name="default_buttons_yes">Oui</string>
-  <string name="default_buttons_cancel">Annuler</string>
+  <string name="shared_string_yes">Oui</string>
+  <string name="shared_string_cancel">Annuler</string>
   <string name="default_buttons_apply">Appliquer</string>
   <string name="default_buttons_add">Enregistrer</string>
-  <string name="default_buttons_no">Non</string>
+  <string name="shared_string_no">Non</string>
   <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
   <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' a été ajouté aux favoris.</string>
@@ -807,14 +807,14 @@
   <string name="show_ruler_level">Afficher l\'échelle</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Retourner à la position</string>
-  <string name="help">Aide</string>
+  <string name="shared_string_help">Aide</string>
   <string name="show_details">Afficher les détails</string>
   <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
   <string name="accessibility_extensions">Extensions d\'accessibilité</string>
   <string name="accessibility_mode">Mode accessibilité</string>
   <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité</string>
-  <string name="accessibility_on">Oui</string>
-  <string name="accessibility_off">Non</string>
+  <string name="shared_string_on">Oui</string>
+  <string name="shared_string_off">Non</string>
   <string name="accessibility_default">Selon les paramètres globaux</string>
   <string name="backToMenu">Retour menu</string>
   <string name="zoomOut">Zoom -</string>
@@ -1421,8 +1421,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	\n\t* Des tas de modifications dans l\'interface utilisateur
 	\n\t* Résolution de bogues dans l\'affichage des distances, analyseur GPX, traitement des points de passage, widget de planning, chargement vers OSM, protocole https
     </string>
-    <string name="default_and">et</string>
-    <string name="default_or">ou</string>
+    <string name="shared_string_and">et</string>
+    <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">Le calcul d’itinéraire par OsmAnd peut prendre beaucoup de temps (et peut même parfois ne pas aboutir) pour des points séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour une meilleure performance.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
 	<string name="auto_zoom_close">Pour agrandir</string>
@@ -1487,8 +1487,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
-    <string name="route_descr_select_on_map">Sélectionner sur la carte…</string>
-    <string name="route_descr_favorite">Favori…</string>
+    <string name="shared_string_select_on_map">Sélectionner sur la carte…</string>
+    <string name="shared_string_favorite">Favori…</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
@@ -1668,7 +1668,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_data_activity">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
-    <string name="selected">sélectionné(s)</string>
+    <string name="shared_string_selected_lowercase">sélectionné(s)</string>
     <string name="gpx_split_interval">Intervalle de division</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
 <string name="gpx_info_subtracks">Sections : %1$s </string>
@@ -1851,7 +1851,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="wake_on_voice">Allumer l\'écran</string>
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation</string>
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
-    <string name="wake_on_voice_never">Jamais</string>
+    <string name="shared_string_never">Jamais</string>
     <string name="advanced_settings">Avancé</string>
 	<string name="osmo_use_https_descr">Utiliser une connexion sécurisée avec le serveur</string>
     <string name="osmo_use_https">Utiliser HTTPS</string>
@@ -1865,7 +1865,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inopérante sur certains appareils)</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
-    <string name="dismiss">Ignorer</string>
+    <string name="shared_string_dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible. Veuillez vous connecter à Internet (Wifi ou données mobiles) pour poursuivre.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
@@ -1916,14 +1916,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gps_status">État du GPS</string>
     <string name="parking_place">Place de stationnement</string>
     <string name="remove_the_tag">Retirer l\'étiquette</string>
-    <string name="enable_plugin">Désactivé</string>
-	<string name="disable_plugin">Activé</string>
+    <string name="shared_string_disabled">Désactivé</string>
+	<string name="shared_string_enabled">Activé</string>
 <string name="plugin_description_title">Description</string>
 	<string name="plugin_settings_button_caption">Paramètres</string>
 <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
-<string name="enable_plugin2">Activer</string>
-	<string name="disable_plugin2">Désactiver</string>
+<string name="shared_string_enable">Activer</string>
+	<string name="shared_string_disable">Désactiver</string>
 	<string name="get_plugin">Obtenir</string>
 <string name="plugin_ski_name">Pistes de ski</string>
     <string name="plugin_nautical_name">Carte marine</string>
@@ -1964,5 +1964,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="back_to_map">Retour à la carte</string>
 	<string name="turn_off_all">Tout éteindre</string>
 	<string name="showed_on_map">Affiché sur la carte</string>
-	<string name="selected_tracks">Sélectionné</string>
+	<string name="shared_string_selected">Sélectionné</string>
+	<string name="track_points">Points de trace</string>
+	<string name="route_points">Points d\'itinéraire</string>
+	<string name="track_segments">Segments de trace</string>
 	</resources>

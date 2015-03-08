@@ -333,8 +333,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 					input.setLayoutParams(lp);
 					settings.getExternalStorageDirectory().getAbsolutePath();
 					editalert.setView(input);
-					editalert.setNegativeButton(R.string.default_buttons_cancel, null);
-					editalert.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					editalert.setNegativeButton(R.string.shared_string_cancel, null);
+					editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					    public void onClick(DialogInterface dialog, int whichButton) {
 					    	warnAboutChangingStorage(input.getText().toString());
 					    }
@@ -485,7 +485,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				if (result.booleanValue() && runOnSuccess != null) {
 					runOnSuccess.run();
 				} else if (!result.booleanValue()) {
-					Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show();
 				}
 			}
 			if(progress.getDialog().isShowing()) {
@@ -557,7 +557,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(getString(R.string.application_dir_change_warning2));
-		builder.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =
@@ -573,14 +573,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				task.execute();
 			}
 		});
-		builder.setNeutralButton(R.string.default_buttons_no, new OnClickListener() {
+		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				updateSettingsToNewDir(newDir);								
 			}
 		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
 	
@@ -673,7 +673,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
-		// entries[k++] = getString(R.string.voice_not_specified);
+		// entries[k++] = getString(R.string.shared_string_none);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {

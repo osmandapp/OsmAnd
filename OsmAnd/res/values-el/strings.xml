@@ -238,14 +238,14 @@
 	<string name="show_ruler_level">﻿Εμφάνιση χάρακα</string>	
 	<string name="info_button">Πληροφορίες</string>
 	<string name="back_to_location">﻿Επιστροφή στη θέση</string>
-	<string name="help">Βοήθεια</string>
+	<string name="shared_string_help">Βοήθεια</string>
 	<string name="show_details">Εμφάνιση λεπτομερειών</string>
 	<string name="accessibility_extensions_descr">Επεκτάσεις προσβασιμότητας για παλιές εκδόσεις Android</string>
 	<string name="accessibility_extensions">Επεκτάσεις προσβασιμότητας</string>
 	<string name="accessibility_mode">﻿Λειτουργία προσβασιμότητας</string>
 	<string name="accessibility_mode_descr">﻿Ενεργοποιεί τις δυνατότητες προσβασιμότητας</string>
-	<string name="accessibility_on">Ενεργό</string>
-	<string name="accessibility_off">Ανενεργό</string>
+	<string name="shared_string_on">Ενεργό</string>
+	<string name="shared_string_off">Ανενεργό</string>
 	<string name="accessibility_default">Σύμφωνα με την καθολική ρύθμιση του συστήματος</string>
 	<string name="backToMenu">﻿Πίσω Στο Μενού</string>
 	<string name="zoomOut">Σμίκρυνση</string>
@@ -556,7 +556,7 @@
 	<string name="map_underlay">Χάρτης υποστρώματος</string>
 	<string name="map_underlay_descr">Επιλογή χάρτη υποστρώματος</string>
 	<string name="layer_overlay">Χάρτης επικάλυψης…</string>
-	<string name="default_none">Κανένα</string>
+	<string name="shared_string_none">Κανένα</string>
 	<string name="map_overlay">Χάρτης επικάλυψης</string>
 	<string name="map_overlay_descr">Επιλογή χάρτη επικάλυψης</string>
 	<string name="tile_source_already_installed">Ο χάρτης είναι ήδη εγκατεστημένος, οι ρυθμίσεις θα ενημερωθούν</string>
@@ -608,8 +608,8 @@
 	</string>
 	<string name="tip_initial">Βοήθεια</string>
 	<string name="tip_initial_t">"Ο OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.\n\nΩς μια βασική εισαγωγή, μερικές συμβουλές χρήσης και κόλπα είναι συνδεδεμένα μέσω του \'Μενού\'→\'Βοήθεια\' στην οθόνη χάρτη. "</string>
-	<string name="next_button">Επόμενο</string>
-	<string name="previous_button">Προηγούμενο</string>
+	<string name="shared_string_next">Επόμενο</string>
+	<string name="shared_string_previous">Προηγούμενο</string>
 	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους και ταχύτητας</string>
 	<string name="unit_of_length">Μονάδα μέτρησης</string>
 	<string name="si_mi_foots">Μίλια/πόδια</string>
@@ -652,7 +652,7 @@
 	<string name="indexing_map">Ευρετηρίαση χάρτη…</string>
 	<string name="indexing_poi">Ευρετηρίαση Σημ. Ενδ…</string>
 	<string name="indexing_transport">Ευρετηρίαση μεταφορών…</string>
-	<string name="input_output_error">Σφάλμα Εισ/Εξ</string>
+	<string name="shared_string_io_error">Σφάλμα Εισ/Εξ</string>
 	<string name="km">χλμ</string>
 	<string name="km_h">χλμ/ω</string>
 	<string name="m">μ</string>
@@ -826,7 +826,7 @@
 	<string name="transport_stops_to_pass">στάσεις προς προσπέραση</string>
 	<string name="transport_route_distance">Απόσταση δρομολογίου</string>
 	<string name="transport">Μεταφορές</string>
-	<string name="default_buttons_ok">Εντάξει</string>
+	<string name="shared_string_ok">Εντάξει</string>
 	<string name="show_transport_over_map_description">Εμφάνιση στάσεων ΜΜΜ στο χάρτη</string>
 	<string name="show_transport_over_map">Εμφάνιση στάσεων ΜΜΜ</string>
 	<string name="hello">Εφαρμογή πλοήγησης OsmAnd</string>
@@ -843,7 +843,7 @@
 	<string name="search_history_building">Κτήριο: {0}, {1}, {2}</string>
 	<string name="favorite">Αγαπημένο</string>
 	<string name="clear_all">Καθαρισμός όλων</string>
-	<string name="history">Ιστορικό</string>
+	<string name="shared_string_history">Ιστορικό</string>
 	<string name="uploading_data">Αποστολή δεδομένων…</string>
 	<string name="uploading">Αποστολή…</string>
 	<string name="search_nothing_found">Δε βρέθηκε τίποτα</string>
@@ -917,7 +917,7 @@
 	<string name="map_preferences_descr">Καθορισμός ρυθμίσεων χάρτη: πηγή χάρτη, περιστροφή, θέση δείκτη, προσανατολισμός οθόνης</string>
 	<string name="osm_settings">Επεξεργασία OSM</string>
 	<string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
-	<string name="settings">Ρυθμίσεις</string>
+	<string name="shared_string_settings">Ρυθμίσεις</string>
 	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους στην SD τώρα</string>
 	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους GPX</string>
 	<string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
@@ -994,11 +994,11 @@
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
 	<string name="context_menu_item_open_bug">Άνοιγμα σφάλματος OSM</string>
 	<string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
-	<string name="default_buttons_yes">Ναι</string>
-	<string name="default_buttons_cancel">Ακύρωση</string>
+	<string name="shared_string_yes">Ναι</string>
+	<string name="shared_string_cancel">Ακύρωση</string>
 	<string name="default_buttons_apply">Εφαρμογή</string>
 	<string name="default_buttons_add">Προσθήκη</string>
-	<string name="default_buttons_no">Όχι</string>
+	<string name="shared_string_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
 	<string name="add_favorite_dialog_default_favourite_name">Αγαπημένο</string>
 	<string name="add_favorite_dialog_favourite_added_template">Το αγαπημένο σημείο \'\'{0}\'\' προστέθηκε με επιτυχία.</string>
@@ -1345,8 +1345,8 @@
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
     <string name="remember_choice">Να θυμάσαι την επιλογή μου</string>
     <string name="gps_status_eclipsim">Κατάσταση GPS</string>
-    <string name="default_and">και</string>
-    <string name="default_or">ή</string>
+    <string name="shared_string_and">και</string>
+    <string name="shared_string_or">ή</string>
 	<string name="auto_zoom_none">Χωρίς αυτόματη εστίαση</string>
 	<string name="auto_zoom_far">Μεσαία εμφάνιση</string>
 	<string name="map_magnifier">Μεγεθυντής χάρτη</string>
@@ -1363,7 +1363,7 @@
     <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
     <string name="loading_smth">Φόρτωση %1$s …</string>
     <string name="delay_navigation_start">Έναρξη πλοήγησης στροφή-στροφή αυτόματα</string>
-    <string name="selected">επιλεγμένο</string>
+    <string name="shared_string_selected_lowercase">επιλεγμένο</string>
     <string name="gpx_info_distance">Απόσταση: %1$s (%2$s σημεία) </string>
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
@@ -1510,8 +1510,8 @@
     <string name="keep_and_add_destination_point">Προσθήκη ως σημείο προορισμού</string>
     <string name="select_gpx">Επιλέξτε GPX…</string>
     <string name="route_descr_select_destination">Επιλέξτε Προορισμό</string>
-    <string name="route_descr_select_on_map">Επιλέξτε στο χάρτη…</string>
-    <string name="route_descr_favorite">Αγαπημένο…</string>
+    <string name="shared_string_select_on_map">Επιλέξτε στο χάρτη…</string>
+    <string name="shared_string_favorite">Αγαπημένο…</string>
     <string name="route_preferences">Προτιμήσεις δρομολογίου</string>
     <string name="route_info">Πληροφορίες δρομολογίου</string>
     <string name="routing_attr_prefer_motorway_name">Προτίμηση αυτοκινητοδρόμων</string>
@@ -1630,7 +1630,7 @@
     <string name="osmo_device_not_found">Η συσκευή δεν βρέθηκε</string>
     <string name="anonymous_user">Ανώνυμος χρήστης</string>
     <string name="logged_as">Συνδεδεμένος ως %1$s</string>
-	<string name="wake_on_voice_never">Ποτέ</string>
+	<string name="shared_string_never">Ποτέ</string>
     <string name="select_impassable_road">Επιλογή στον χάρτη…</string>
     <string name="impassable_road">Αποφυγή δρόμων…</string>
     <string name="rendering_category_hide">Απόκρυψη</string>
@@ -1668,7 +1668,7 @@
 	<string name="show_railway_warnings">Εμφάνιση διασταυρώσεων σιδηροτροχιάς</string>
 	<string name="show_pedestrian_warnings">Εμφάνιση διαβάσεων πεζών</string>
     <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
-    <string name="dismiss">Απόρριψη</string>
+    <string name="shared_string_dismiss">Απόρριψη</string>
     <string name="show_map">ΕΜΦ ΧΑΡΤΗ</string>
 	<string name="show_all">ΕΜΦ ΌΛΩΝ</string>
 	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>

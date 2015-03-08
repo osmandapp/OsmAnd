@@ -71,9 +71,9 @@
 <string name="default_buttons_reset">Töm</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-<string name="default_buttons_no">Nej</string>
-<string name="default_buttons_yes">Ja</string>
-<string name="default_buttons_cancel">Avbryt</string>
+<string name="shared_string_no">Nej</string>
+<string name="shared_string_yes">Ja</string>
+<string name="shared_string_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
 <string name="default_buttons_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
@@ -160,14 +160,14 @@
 <string name="gpx_tags_txt">Taggar</string>
 <string name="gpx_description_txt">Beskrivning</string>
 <string name="validate_gpx_upload_name_pwd">Vänligen ange OSM användarnamn och lösenord för att ladda upp GPX-filer.</string>
-<string name="help">Hjälp</string>
+<string name="shared_string_help">Hjälp</string>
 <string name="show_details">Visa detaljer</string>
 <string name="accessibility_extensions_descr">Tillgänglighetstillägg för gamla Android-versioner</string>
 <string name="accessibility_extensions">Tillgänglighetstillägg</string>
 <string name="accessibility_mode">Tillgänglighetsläge</string>
 <string name="accessibility_mode_descr">Sätter på tillgänglighetsfunktioner</string>
-<string name="accessibility_on">På</string>
-<string name="accessibility_off">Av</string>
+<string name="shared_string_on">På</string>
+<string name="shared_string_off">Av</string>
 <string name="accessibility_default">Enligt de globala systeminställningarna</string>
 <string name="backToMenu">Tillbaka till menyn</string>
 <string name="zoomOut">Zooma ut</string>
@@ -515,7 +515,7 @@
 <string name="map_underlay">Underläggskarta</string>
 <string name="map_underlay_descr">Välj underläggskarta</string>
 <string name="layer_overlay">Överläggskarta …</string>
-<string name="default_none">Inga</string>
+<string name="shared_string_none">Inga</string>
 <string name="map_overlay">Överläggskarta</string>
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
@@ -551,8 +551,8 @@
 \n\nFör alla träffar erbjuds alternativ som \'Vägvisning\' eller \'Visa på kartan\' etc. "</string>
 <string name="tip_map_context_menu">Snabbmeny för karta</string>
 <string name="tip_initial">Hjälp</string>
-<string name="next_button">Nästa</string>
-<string name="previous_button">Föregående</string>
+<string name="shared_string_next">Nästa</string>
+<string name="shared_string_previous">Föregående</string>
 <string name="unit_of_length_descr">Ändra enheter för avstånd och hastighet</string>
 <string name="unit_of_length">Måttenhet</string>
 <string name="si_mi_foots">Eng. mil/fot</string>
@@ -592,7 +592,7 @@
 <string name="indexing_map">Indexerar kartan …</string>
 <string name="indexing_poi">Indexerar Intressepunkter …</string>
 <string name="indexing_transport">Indexerar transport …</string>
-<string name="input_output_error">Ett I/O-fel har inträffat</string>
+<string name="shared_string_io_error">Ett I/O-fel har inträffat</string>
 <string name="km">km</string>
 <string name="km_h">km/h</string>
 <string name="m">m</string>
@@ -808,7 +808,7 @@
 	<string name="transport_stops_to_pass">hållplatser att passera</string>
 	<string name="transport_route_distance">Resvägssträcka</string>
 	<string name="transport">Transporter</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
 	<string name="show_transport_over_map">Visa hållplatser</string>
 	<string name="hello">Navigationsappen OsmAnd</string>
@@ -824,7 +824,7 @@
 	<string name="search_history_building">Byggnad: {0},{1},{2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ta bort alla</string>
-	<string name="history">Historik</string>
+	<string name="shared_string_history">Historik</string>
 	<string name="uploading_data">Laddar upp data …</string>
 	<string name="uploading">Laddar upp …</string>
 	<string name="search_nothing_found">Hittar ingenting</string>
@@ -1041,7 +1041,7 @@
 	<string name="map_preferences_descr">Ange kartinställningar: kartkälla, rotation, markörposition, skärmorientering</string>
 	<string name="osm_settings">Redigera OSM</string>
 	<string name="additional_settings">Ytterligare inställningar</string>
-	<string name="settings">Inställningar</string>
+	<string name="shared_string_settings">Inställningar</string>
 	<string name="save_current_track_descr">Spara aktuellt spår till SD-kortet nu</string>
 	<string name="save_current_track">Spara aktuellt GPX-spår</string>
 	<string name="save_track_interval">Loggningsintervall under navigering</string>
@@ -1302,8 +1302,8 @@
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
-	<string name="default_and">och</string>
-    <string name="default_or">eller</string>
+	<string name="shared_string_and">och</string>
+    <string name="shared_string_or">eller</string>
 	<string name="remember_choice">Kom ihåg mitt val</string>
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
@@ -1356,8 +1356,8 @@
 	<string name="routing_attr_short_way_description">Använd kortaste väg</string>
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
-    <string name="route_descr_select_on_map">Välj på karta …</string>
-    <string name="route_descr_favorite">Favorit …</string>
+    <string name="shared_string_select_on_map">Välj på karta …</string>
+    <string name="shared_string_favorite">Favorit …</string>
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
     <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>
@@ -1533,7 +1533,7 @@
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
     <string name="delay_navigation_start">Starta steg-för-steg-navigering automatiskt</string>
-    <string name="selected">valda</string>
+    <string name="shared_string_selected_lowercase">valda</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>
@@ -1723,7 +1723,7 @@
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
-    <string name="wake_on_voice_never">Aldrig</string>
+    <string name="shared_string_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
 	<string name="osmo_use_https">Använd HTTPS</string>
 	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
@@ -1734,7 +1734,7 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
-    <string name="dismiss">Avböj</string>
+    <string name="shared_string_dismiss">Avböj</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
@@ -1789,14 +1789,14 @@
     <string name="tracks">Spår</string>
     <string name="my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
-    <string name="enable_plugin">Inaktiverad</string>
-	<string name="disable_plugin">Aktiverad</string>
+    <string name="shared_string_disabled">Inaktiverad</string>
+	<string name="shared_string_enabled">Aktiverad</string>
 <string name="plugin_settings_button_caption">Inställningar</string>
 <string name="plugin_description_title">Beskrivning</string>
 	<string name="edit_group">Redigera grupp</string>
     <string name="plugin_install_needs_network">En Internetuppkoppling krävs för att installera denna modul.</string>
-<string name="enable_plugin2">Aktivera</string>
-	<string name="disable_plugin2">Inaktivera</string>
+<string name="shared_string_enable">Aktivera</string>
+	<string name="shared_string_disable">Inaktivera</string>
 	<string name="get_plugin">Hämta</string>
 <string name="plugin_ski_name">Skidkartsvy</string>
     <string name="plugin_nautical_name">Sjökortsvy</string>
@@ -1837,7 +1837,8 @@
 	<string name="back_to_map">Tillbaka till kartan</string>
 	<string name="turn_off_all">Stäng av alla</string>
 	<string name="showed_on_map">Visade på kartan</string>
-	<string name="selected_tracks">Markerade</string>
+	<string name="shared_string_selected">Markerade</string>
 	<string name="track_segments">Spårsegment</string>
 	<string name="track_points">Spårpunkter</string>
+	<string name="route_points">Ruttpunkter</string>
 	</resources>

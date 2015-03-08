@@ -127,14 +127,14 @@
   <string name="show_ruler_level">Rodyti liniuotę</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Atgal į vietą</string>
-  <string name="help">Pagalba</string>
+  <string name="shared_string_help">Pagalba</string>
   <string name="show_details">Rodyti detales</string>
   <string name="accessibility_extensions_descr">Prieigos plėtiniai skirti senesnėms Android versijoms</string>
   <string name="accessibility_extensions">Prieigos plėtiniai</string>
   <string name="accessibility_mode">Prieigos režimas</string>
   <string name="accessibility_mode_descr">Įjungia prieigos savybes</string>
-  <string name="accessibility_on">Įjungta</string>
-  <string name="accessibility_off">Išjungta</string>
+  <string name="shared_string_on">Įjungta</string>
+  <string name="shared_string_off">Išjungta</string>
   <string name="accessibility_default">Pagal globalius sistemos nustatymus</string>
   <string name="backToMenu">Atgal į meniu</string>
   <string name="zoomOut">Sumažinti</string>
@@ -446,7 +446,7 @@
   <string name="map_underlay">Apatinis žemėlapio sluoksnis</string>
   <string name="map_underlay_descr">Pasirinkti apatinį žemėlapio sluoksnį</string>
   <string name="layer_overlay">Viršutinis žemėlapio sluoksnis…</string>
-  <string name="default_none">Nėra</string>
+  <string name="shared_string_none">Nėra</string>
   <string name="map_overlay">Viršutinis žemėlapio sluoksnis</string>
   <string name="map_overlay_descr">Pasirinkti viršutinį žemėlapio sluoksnį</string>
   <string name="tile_source_already_installed">Žemėlapis jau įdiegtas, nustatymai bus atnaujinti</string>
@@ -506,8 +506,8 @@
   <string name="tip_initial">Pagalba</string>
   <string name="tip_initial_t">"OsmAnd yra daug funkcijų turinti navigacijos programa.
 \n\nInformacija pradiniam supažindinimui, patarimai ir detalesnė pagalba pasiekiami žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
-  <string name="next_button">Kitas</string>
-  <string name="previous_button">Ankstesnis</string>
+  <string name="shared_string_next">Kitas</string>
+  <string name="shared_string_previous">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
   <string name="unit_of_length">Matavimo vienetai</string>
   <string name="si_mi_foots">Mylios/pėdos</string>
@@ -550,7 +550,7 @@
   <string name="indexing_map">Indeksuojamas žemėlapis…</string>
   <string name="indexing_poi">Indeksuojamos LV…</string>
   <string name="indexing_transport">Indeksuojamas transportas…</string>
-  <string name="input_output_error">Įvyko I/O klaida</string>
+  <string name="shared_string_io_error">Įvyko I/O klaida</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -728,7 +728,7 @@
   <string name="transport_stops_to_pass">pravažiuoti stotelių</string>
   <string name="transport_route_distance">Maršruto ilgis</string>
   <string name="transport">Transportas</string>
-  <string name="default_buttons_ok">Gerai</string>
+  <string name="shared_string_ok">Gerai</string>
   <string name="show_transport_over_map_description">Rodyti viešojo transporto stoteles žemėlapyje</string>
   <string name="show_transport_over_map">Rodyti viešojo transporto stoteles</string>
   <string name="hello">Navigacijos programa OsmAnd</string>
@@ -745,7 +745,7 @@
   <string name="search_history_building">Pastatas: {0}, {1}, {2}</string>
   <string name="favorite">Įsimintos vietos</string>
   <string name="clear_all">Išvalyti viską</string>
-  <string name="history">Istorija</string>
+  <string name="shared_string_history">Istorija</string>
   <string name="uploading_data">Siunčiami duomenys…</string>
   <string name="uploading">Siunčiama…</string>
   <string name="search_nothing_found">Nieko nerasta</string>
@@ -822,7 +822,7 @@
   <string name="auto_zoom_map_descr">Automatiškai priderinti žemėlapio mastelį pagal jūsų greitį</string>
   <string name="auto_zoom_map">Automatiškai keisti mastelį</string>
   <string name="additional_settings">Papildomi nustatymai</string>
-  <string name="settings">Nustatymai</string>
+  <string name="shared_string_settings">Nustatymai</string>
   <string name="save_current_track_descr">Dabar išsaugoti judėjimo istoriją į SD kortelę</string>
   <string name="save_current_track">Išsaugoti dabartinę judėjimo istoriją</string>
   <string name="save_track_interval">Informacijos išsaugojimo intervalas naviguojant</string>
@@ -902,11 +902,11 @@
   <string name="context_menu_item_update_map">Atnaujinti žemėlapį</string>
   <string name="context_menu_item_open_bug">Atidaryti OSM klaidą</string>
   <string name="context_menu_item_create_poi">Sukurti LV</string>
-  <string name="default_buttons_yes">Taip</string>
-  <string name="default_buttons_cancel">Atšaukti</string>
+  <string name="shared_string_yes">Taip</string>
+  <string name="shared_string_cancel">Atšaukti</string>
   <string name="default_buttons_apply">Taikyti</string>
   <string name="default_buttons_add">Pridėti</string>
-  <string name="default_buttons_no">Ne</string>
+  <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Įveskite įsimintos vietos pavadinimą</string>
   <string name="add_favorite_dialog_default_favourite_name">Įsiminta vieta</string>
   <string name="add_favorite_dialog_favourite_added_template">Įsiminta vieta \'\'{0}\'\' buvo sėkmingai įrašyta.</string>
@@ -1419,8 +1419,8 @@
     
     <string name="remember_choice">Atsiminti mano pasirinkimą</string>
     <string name="gps_status_eclipsim">GPS statusas</string>
-    <string name="default_and">ir</string>
-    <string name="default_or">arba</string>
+    <string name="shared_string_and">ir</string>
+    <string name="shared_string_or">arba</string>
 	<string name="animate_routing_route_not_calculated">Pirmiausia apskaičiuokite maršrutą</string>
     <string name="animate_routing_route">Simuliuoti naudojant apskaičiuotą maršrutą </string>
     <string name="animate_routing_gpx">Simuliuoti naudojant GPX maršrutą</string>
@@ -1478,8 +1478,8 @@
     <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
     <string name="select_gpx">Pasirinkti GPX…</string>
     <string name="route_descr_select_destination">Pasirinkti kelionės tikslą</string>
-    <string name="route_descr_select_on_map">Pasirinkti žemėlapyje…</string>
-    <string name="route_descr_favorite">Įsiminta vieta…</string>
+    <string name="shared_string_select_on_map">Pasirinkti žemėlapyje…</string>
+    <string name="shared_string_favorite">Įsiminta vieta…</string>
     <string name="route_preferences">Maršruto parinktys</string>
     <string name="route_info">Maršruto informacija</string>
     <string name="use_displayed_track_for_navigation">Ar rodomą maršrutą norite naudoti navigacijai?</string>
@@ -1664,7 +1664,7 @@
     <string name="gpx_wpt">Kelionės taškas</string>
     <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte žemėlapyje</string>
     <string name="delay_navigation_start">Pradėti navigaciją automatiškai</string>
-    <string name="selected">pasirinkti</string>
+    <string name="shared_string_selected_lowercase">pasirinkti</string>
     <string name="gpx_split_interval">Padalinimo intervalas</string>
     <string name="sort_by_distance">Rūšiuoti pagal atstumą</string>
     <string name="sort_by_name">Rūšiuoti pagal pavadinimą</string>
@@ -1840,7 +1840,7 @@
     <string name="wake_on_voice">Įjungti ekraną</string>
     <string name="wake_on_voice_descr">Įjungti ekraną (jei išjungtas) artėjant prie posūkio</string>
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
-    <string name="wake_on_voice_never">Niekada</string>
+    <string name="shared_string_never">Niekada</string>
     <string name="osmo_use_https">Naudoti HTTPS</string>
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     <string name="advanced_settings">Plačiau</string>
@@ -1875,7 +1875,7 @@
     <string name="routing_attr_no_new_routing_name">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
-    <string name="dismiss">Nesiųsti</string>
+    <string name="shared_string_dismiss">Nesiųsti</string>
     <string name="traffic_warning_railways">Geležinkelio pervaža</string>
 	<string name="traffic_waring_pedestrian">Pėstieji</string>
 	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
@@ -1906,14 +1906,14 @@
 	<string name="proxy_port_title">Proksi serverio portas</string>
 	<string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118)</string>
 	<string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms"</string>
-	<string name="enable_plugin">Išjungta</string>
-	<string name="disable_plugin">Įjungta</string>
+	<string name="shared_string_disabled">Išjungta</string>
+	<string name="shared_string_enabled">Įjungta</string>
 <string name="plugin_description_title">Aprašymas</string>
 	<string name="plugin_settings_button_caption">Nustatymai</string>
 <string name="edit_group">Redaguoti grupę</string>
     <string name="plugin_install_needs_network">Prisijunkite prie interneto, jei norite įdiegti šį priedą.</string>
-<string name="enable_plugin2">Įjungti</string>
-	<string name="disable_plugin2">Išjungti</string>
+<string name="shared_string_enable">Įjungti</string>
+	<string name="shared_string_disable">Išjungti</string>
 	<string name="get_plugin">Gauti</string>
 <string name="plugin_ski_name">Slidinėjimo žemėlapiai</string>
     <string name="world_ski_missing">Tam, kad būtų atvaizduojami slidinėjimo žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
@@ -1935,7 +1935,7 @@
 	<string name="plugin_nautical_descr">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
 	<string name="rename_failed">Nepavyko pervardinti.</string>
 	<string name="back_to_map">Grįžti į žemėlapį</string>
-	<string name="selected_tracks">Pasirinkta</string>
+	<string name="shared_string_selected">Pasirinkta</string>
 	<string name="showed_on_map">Rodoma žemėlapyje</string>
 	<string name="share_note">Pasidalinti pastaba</string>
 	</resources>

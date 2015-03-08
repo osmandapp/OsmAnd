@@ -385,7 +385,7 @@ public class MapRoutePreferencesControl extends MapControls {
 
 	private void updateSpinnerItems(Spinner gpxSpinner) {
 		ArrayList<String> gpxActions = new ArrayList<String>();
-		gpxActions.add(mapActivity.getString(R.string.default_none));
+		gpxActions.add(mapActivity.getString(R.string.shared_string_none));
 		gpxActions.add(mapActivity.getString(R.string.select_gpx));
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		if(rp != null) {

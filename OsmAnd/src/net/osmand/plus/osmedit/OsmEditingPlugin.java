@@ -240,8 +240,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		visibility.setSelection(0);
 		
 		bldr.setView(view);
-		bldr.setNegativeButton(R.string.default_buttons_no, null);
-		bldr.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		bldr.setNegativeButton(R.string.shared_string_no, null);
+		bldr.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

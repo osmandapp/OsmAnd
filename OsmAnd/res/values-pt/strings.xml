@@ -24,7 +24,7 @@
   <string name="indexing_map">Indexando mapa…</string>
   <string name="indexing_poi">Indexando POI…</string>
   <string name="indexing_transport">Indexando transporte…</string>
-  <string name="input_output_error">Erro de entrada/saída</string>
+  <string name="shared_string_io_error">Erro de entrada/saída</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -203,7 +203,7 @@
   <string name="transport_stops_to_pass">paradas a passar</string>
   <string name="transport_route_distance">Distância da viagem</string>
   <string name="transport">Transportes</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Ver as paradas de transportes públicos no mapa</string>
   <string name="show_transport_over_map">Mostrar paradas de transportes</string>
   <string name="hello">Aplicação de navegação OsmAnd</string>
@@ -220,7 +220,7 @@
   <string name="search_history_building">Edifício : {0}, {1}, {2}</string>
   <string name="favorite">Favoritos</string>
   <string name="clear_all">Apagar tudo</string>
-  <string name="history">Histórico</string>
+  <string name="shared_string_history">Histórico</string>
   <string name="uploading_data">Enviando dados…</string>
   <string name="uploading">Enviando…</string>
   <string name="search_nothing_found">Não foi encontrado nada</string>
@@ -304,7 +304,7 @@
   <string name="additional_settings">Outras definições</string>
   <string name="settings_preset_descr">A vista de mapa e as definições de navegação são guardadas por perfil. Defina aqui o seu.</string>
   <string name="settings_preset">Perfil pré-definido</string>
-  <string name="settings">Configurações</string>
+  <string name="shared_string_settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
   <string name="save_current_track">Salvar a trilha atual</string>
   <string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
@@ -384,11 +384,11 @@
   <string name="context_menu_item_update_map">Atualizar mapa</string>
   <string name="context_menu_item_open_bug">Reportar problema OSM</string>
   <string name="context_menu_item_create_poi">Criar ponto de interesse</string>
-  <string name="default_buttons_yes">Sim</string>
-  <string name="default_buttons_cancel">Cancelar</string>
+  <string name="shared_string_yes">Sim</string>
+  <string name="shared_string_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
   <string name="default_buttons_add">Adicionar</string>
-  <string name="default_buttons_no">Não</string>
+  <string name="shared_string_no">Não</string>
   <string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
   <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
   <string name="add_favorite_dialog_favourite_added_template">O ponto \'\'{0}\'\' foi adicionado aos favoritos.</string>
@@ -508,14 +508,14 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Back to location</string>
-  <string name="help">Ajuda</string>
+  <string name="shared_string_help">Ajuda</string>
   <string name="show_details">Mostrar detalhes</string>
   <string name="accessibility_extensions_descr">Extensões de acessibilidade para versões Android antigas</string>
   <string name="accessibility_extensions">Extensões de acessibilidade</string>
   <string name="accessibility_mode">Modo de acessibilidade</string>
   <string name="accessibility_mode_descr">Activa as opções de acessibilidade</string>
-  <string name="accessibility_on">Ligado</string>
-  <string name="accessibility_off">Desligado</string>
+  <string name="shared_string_on">Ligado</string>
+  <string name="shared_string_off">Desligado</string>
   <string name="accessibility_default">De acordo com a definição do sistema</string>
   <string name="backToMenu">Voltar ao menu</string>
   <string name="zoomOut">Afastar</string>
@@ -758,7 +758,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="map_underlay">Mapa de camada inferior</string>
   <string name="map_underlay_descr">Escolha mapa da camada inferior</string>
   <string name="layer_overlay">Mapa da camada superior…</string>
-  <string name="default_none">Nenhum</string>
+  <string name="shared_string_none">Nenhum</string>
   <string name="map_overlay">Mapa da camada superior</string>
   <string name="map_overlay_descr">Escolha o mapa da camada superior</string>
   <string name="tile_source_already_installed">Mapa previamente instalado, as definições serão actualizadas</string>
@@ -823,8 +823,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="tip_initial_t">OsmAnd é uma aplicação de navegação com muitos recursos.
  \n\n  Nas uma introdução básica , algumas dicas de uso e truques estão ligados via \'Menu \' → \' Dicas \' a partir da tela do mapa.
 	</string>
-  <string name="next_button">Próximo</string>
-  <string name="previous_button">Anterior</string>
+  <string name="shared_string_next">Próximo</string>
+  <string name="shared_string_previous">Anterior</string>
   <string name="unit_of_length_descr">Alterar unidades de medida de distância e velocidade</string>
   <string name="unit_of_length">Unidade de medida</string>
   <string name="si_mi_foots">Milhas/Pés</string>
@@ -1526,8 +1526,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="animate_routing_gpx">Simular usando caminho GPX</string>
     <string name="remember_choice">Memorizar escolha</string>
     <string name="gps_status_eclipsim">Estado do GPS</string>
-    <string name="default_and">e</string>
-    <string name="default_or">ou</string>
+    <string name="shared_string_and">e</string>
+    <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo router offline OsmAnd.
          → Em média, a rota off-line apenas é possível para distâncias até 200 km. Por favor adicione um ou mais pontos intermédios para calcular a rota.</string>
 	<string name="osmodroid_refresh">Atualizar canais</string>
@@ -1670,8 +1670,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
     <string name="select_gpx">Selecione GPX …</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
-    <string name="route_descr_select_on_map">Seleccione no mapa…</string>
-    <string name="route_descr_favorite">Favorito …</string>
+    <string name="shared_string_select_on_map">Seleccione no mapa…</string>
+    <string name="shared_string_favorite">Favorito …</string>
     <string name="route_preferences">Preferências de rota</string>
     <string name="route_info">Informações de rota</string>
     <string name="routing_attr_prefer_motorway_name">Prefere auto-estradas</string>
@@ -1785,7 +1785,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gpx_wpt">Ponto</string>
     <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar navegação com atraso</string>
-    <string name="selected">seleccionado</string>
+    <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Selecione intervalo de divisão</string>
     <string name="gpx_info_waypoints">Os pontos de passagem : %1$s </string>
 	<string name="gpx_info_distance">Distância: %1$s (%2$s pontos ) </string>
@@ -1866,7 +1866,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_subwayMode_name">Rodas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
-    <string name="wake_on_voice_never">Nunca</string>
+    <string name="shared_string_never">Nunca</string>
     <string name="select_impassable_road">Selecione o mapa…</string>
     <string name="impassable_road">Evitar estradas…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rota de trem</string>

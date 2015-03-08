@@ -241,7 +241,7 @@
   <string name="map_underlay">Mapa subyacente</string>
   <string name="map_underlay_descr">Elige el mapa subyacente</string>
   <string name="layer_overlay">Mapa superpuesto…</string>
-  <string name="default_none">Ninguno</string>
+  <string name="shared_string_none">Ninguno</string>
   <string name="map_overlay">Mapa superpuesto</string>
   <string name="map_overlay_descr">Elige el mapa superpuesto</string>
   <string name="tile_source_already_installed">El mapa ya está instalado, se actualizarán las opciones</string>
@@ -300,8 +300,8 @@
 	</string>
   <string name="tip_initial">Ayuda</string>
   <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nComo una introducción básica, algunos consejos de uso y trucos están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
-  <string name="next_button">Siguiente</string>
-  <string name="previous_button">Anterior</string>
+  <string name="shared_string_next">Siguiente</string>
+  <string name="shared_string_previous">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
   <string name="unit_of_length">Unidad de longitud</string>
   <string name="si_mi_foots">Millas/pies</string>
@@ -344,7 +344,7 @@
   <string name="indexing_map">Indexando mapa…</string>
   <string name="indexing_poi">Indexando PDI…</string>
   <string name="indexing_transport">Indexando transporte…</string>
-  <string name="input_output_error">Ocurrió un error de entrada/salida</string>
+  <string name="shared_string_io_error">Ocurrió un error de entrada/salida</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -525,7 +525,7 @@
   <string name="transport_stops_to_pass">paradas a pasar</string>
   <string name="transport_route_distance">Distancia del itinerario</string>
   <string name="transport">Transporte</string>
-  <string name="default_buttons_ok">Aceptar</string>
+  <string name="shared_string_ok">Aceptar</string>
   <string name="show_transport_over_map_description">Muestra paradas de transporte público en el mapa</string>
   <string name="show_transport_over_map">Mostrar paradas de transporte</string>
   <string name="hello">Aplicación de navegación OsmAnd</string>
@@ -542,7 +542,7 @@
   <string name="search_history_building">Edificio: {0}, {1}, {2}</string>
   <string name="favorite">Favorito</string>
   <string name="clear_all">Limpiar todo</string>
-  <string name="history">Historial</string>
+  <string name="shared_string_history">Historial</string>
   <string name="uploading_data">Subiendo datos…</string>
   <string name="uploading">Subiendo…</string>
   <string name="search_nothing_found">No se encontró nada</string>
@@ -620,7 +620,7 @@
   <string name="auto_zoom_map_descr">Acercamiento automático del mapa según su velocidad (mientras el mapa se sincroniza con la posición actual)</string>
   <string name="auto_zoom_map">Acercamiento automático del mapa</string>
   <string name="additional_settings">Opciones adicionales</string>
-  <string name="settings">Opciones</string>
+  <string name="shared_string_settings">Opciones</string>
   <string name="save_current_track_descr">Guarda la traza actual en la SD ahora</string>
   <string name="save_current_track">Guardar traza actual</string>
   <string name="save_track_interval">Intervalo de guardado durante navegación</string>
@@ -700,11 +700,11 @@
   <string name="context_menu_item_update_map">Actualizar mapa</string>
   <string name="context_menu_item_open_bug">Abrir fallo OSM</string>
   <string name="context_menu_item_create_poi">Crear PDI</string>
-  <string name="default_buttons_yes">Sí</string>
-  <string name="default_buttons_cancel">Cancelar</string>
+  <string name="shared_string_yes">Sí</string>
+  <string name="shared_string_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
   <string name="default_buttons_add">Añadir</string>
-  <string name="default_buttons_no">No</string>
+  <string name="shared_string_no">No</string>
   <string name="add_favorite_dialog_top_text">Introduzca nombre de favorito</string>
   <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
   <string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
@@ -806,14 +806,14 @@
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Volver a localización</string>
-  <string name="help">Ayuda</string>
+  <string name="shared_string_help">Ayuda</string>
   <string name="show_details">Mostrar detalles</string>
   <string name="accessibility_extensions_descr">Extensión de accesibilidad para versiones viejas de Android</string>
   <string name="accessibility_extensions">Extensiones de accesibilidad</string>
   <string name="accessibility_mode">Modo accesibilidad</string>
   <string name="accessibility_mode_descr">Activa las características de accesibilidad</string>
-  <string name="accessibility_on">activado</string>
-  <string name="accessibility_off">desactivado</string>
+  <string name="shared_string_on">activado</string>
+  <string name="shared_string_off">desactivado</string>
   <string name="accessibility_default">Usar configuración global del sistema</string>
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>
@@ -1428,8 +1428,8 @@
 	<string name="auto_zoom_none">Sin acercamiento automático</string>
 	<string name="remember_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
-    <string name="default_and">y</string>
-    <string name="default_or">o</string>
+    <string name="shared_string_and">y</string>
+    <string name="shared_string_or">o</string>
 	<string name="auto_zoom_close">Cercano</string>
 	<string name="auto_zoom_far">Medio</string>
 	<string name="auto_zoom_farthest">Alejado</string>
@@ -1485,8 +1485,8 @@
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
-    <string name="route_descr_select_on_map">Seleccionar en el mapa…</string>
-    <string name="route_descr_favorite">Favorito…</string>
+    <string name="shared_string_select_on_map">Seleccionar en el mapa…</string>
+    <string name="shared_string_favorite">Favorito…</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="tip_recent_changes_1_7_1_t">"Cambios en 1.7:
@@ -1677,7 +1677,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
-    <string name="selected">seleccionado</string>
+    <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Intérvalo de división</string>
     <string name="gpx_info_subtracks">Subpista: %1$s </string>
 	<string name="gpx_info_waypoints">Puntos de ruta: %1$s </string>
@@ -1846,7 +1846,7 @@
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
-    <string name="wake_on_voice_never">Nunca</string>
+    <string name="shared_string_never">Nunca</string>
     <string name="advanced_settings">Avanzado</string>
 	<string name="osmo_use_https_descr">Usar conexión segura con el servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>
@@ -1860,7 +1860,7 @@
     <string name="use_opengl_render_descr">Usar renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
     <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
-    <string name="dismiss">Descartar</string>
+    <string name="shared_string_dismiss">Descartar</string>
     <string name="no_internet_connection">Imposible descargar; por favor, comprueba tu conexión a Internet.</string>
     <string name="download_tab_downloads">Todas las descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
@@ -1911,8 +1911,8 @@
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
-    <string name="enable_plugin">Desactivado</string>
-	<string name="disable_plugin">Activado</string>
+    <string name="shared_string_disabled">Desactivado</string>
+	<string name="shared_string_enabled">Activado</string>
 <string name="plugin_description_title">Descripción</string>
 	<string name="plugin_settings_button_caption">Opciones</string>
 <string name="edit_group">Editar grupo</string>
@@ -1921,8 +1921,8 @@
     <string name="plugin_nautical_name">Vista mapa náutico</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, debes descargar el mapa especial</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, debes descargar el mapa especial</string>
-	<string name="enable_plugin2">Activar</string>
-	<string name="disable_plugin2">Desactivar</string>
+	<string name="shared_string_enable">Activar</string>
+	<string name="shared_string_disable">Desactivar</string>
 	<string name="get_plugin">Obtener</string>
 <string name="free">"Libre %1$s "</string>
 	<string name="device_memory">Memoria del dispositivo</string>
@@ -1959,7 +1959,7 @@
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
-	<string name="selected_tracks">Seleccionada(s)</string>
+	<string name="shared_string_selected">Seleccionada(s)</string>
 	<string name="track_segments">Segmentos de traza</string>
 	<string name="track_points">Puntos de traza</string>
 	</resources>

@@ -25,7 +25,7 @@
     <string name="download_tab_updates">Abnaŭlieńnі</string>
     <string name="download_tab_local">Liakaĺny</string>
 	<string name="no_internet_connection">Niemahčyma spampavać. Kalі laska, praviercie vaša Іnternet-zlučeńnie.</string>
-    <string name="dismiss">Skasavać</string>
+    <string name="shared_string_dismiss">Skasavać</string>
     <string name="everything_up_to_date">Usie fajly ŭ aktuaĺnym stanie</string>
     <string name="use_opengl_render">Vykarystoŭvać OpenGL</string>
     <string name="use_opengl_render_descr">Vykarystoŭvać aparatnaje paskareńnie OpenGL (moža nie pracavać na niekatorych prystasavańniach)</string>
@@ -45,7 +45,7 @@
     <string name="lock_screen_request_explanation">%1$s patrabuje dazvol na vykliučeńnie ekranu dlia enierhazbieražeńnia.</string>
     <string name="wake_on_voice">Ukliučyć ekran</string>
     <string name="wake_on_voice_descr">Ukliučać ekran prystasavańnia pry nablіžeńnі da pavarotu</string>
-    <string name="wake_on_voice_never">Nіkolі</string>
+    <string name="shared_string_never">Nіkolі</string>
     <string name="select_impassable_road">Vybrać na mapie…</string>
     <string name="impassable_road">Paźbiahać darohі…</string>
     <string name="tip_recent_changes_1_9_t">"Źmieny ŭ 1.9: * Abnoŭlienyja stylі mapy z pakazam pakryćcia daroh, transpartnym slojem і piešachodnymі sіmvalamі * Pošuk POI ŭzdoŭž maršrutu * Paznačeńnie darohі jak nieprachodnaj * Liahčej spampoŭvać і abnaŭliać mapy * Atrymańnie vіzuaĺnaha і hukavaha apaviaščeńnia pry nablіžeńnі da punktu maršrutu * Pakaz maršrutu і іnfarmacyі pra pavaroty * Padtrymka palos dlia pavarotu * Padtrymka Android Wear * Šmat źmienaŭ іnterfiejsu * Asobny zum dlia tekstu na mapie * Spiecyjaĺnyja aŭdyjoapaviaščeńnі ŭ vypadku, kalі vy znachodzіciesia pa-za maršrutam * Funkcyja aŭtaryzacyі OsMo * Vypraŭliena niesumiaščaĺnaść viersіj OsMo "</string>
@@ -213,7 +213,7 @@
     <string name="gpx_wpt">Punkt šliachu</string>
     <string name="selected_gpx_info_show">\n\nNacіśnіcie і ŭtrymlіvajcie, kab ubačyć na mapie</string>
     <string name="delay_navigation_start">Aŭtamatyčna pačać navіhacyju</string>
-    <string name="selected">vybrana</string>
+    <string name="shared_string_selected_lowercase">vybrana</string>
     <string name="local_index_gpx_info_show">\n\nNacіsnuć і trymać dlia naladaŭ</string>
 	<string name="gpx_info_subtracks">"Častak śliedu: %1$s "</string>
 	<string name="gpx_info_waypoints">"Adznačanych punktaŭ: %1$s "</string>
@@ -392,8 +392,8 @@
     <string name="keep_and_add_destination_point">Dadać punktam pryznačeńnia</string>
     <string name="select_gpx">Vybrać GPX…</string>
     <string name="route_descr_select_destination">Vybrać miesca pryznačeńnia</string>
-    <string name="route_descr_select_on_map">Vybrać na mapie…</string>
-    <string name="route_descr_favorite">Upadabanyja.…</string>
+    <string name="shared_string_select_on_map">Vybrać na mapie…</string>
+    <string name="shared_string_favorite">Upadabanyja.…</string>
     <string name="route_preferences">Nastrojkі maršruta</string>
     <string name="route_info">Іnfarmacyja pra maršrut</string>
     <string name="routing_attr_prefer_motorway_name">Addavać pieravahu aŭtamahіstraliam</string>
@@ -451,8 +451,8 @@
     <string name="animate_routing_gpx">Іmіtacyja z vykarystańniem GPX-śliedu</string>
     <string name="remember_choice">Zapomnіć moj vybar</string>
     <string name="gps_status_eclipsim">Status GPS</string>
-    <string name="default_and">і</string>
-    <string name="default_or">cі</string>
+    <string name="shared_string_and">і</string>
+    <string name="shared_string_or">cі</string>
 	<string name="route_is_too_long">Pazasiecіŭnaja maršrutyzacyja OsmAnd moža zaniać vieĺmі šmat času (a časam і nie spracavać) dlia kropak na adliehlaścі boĺš čym u 200 km adzіn ad adnaho. Vy možacie dadać pramiežkavyja šliachavyja kropkі dlia pavyšeńnia pradukcyjnascі.</string>
 	<string name="auto_zoom_none">Biez aŭtamatyčnaha maštabavańnia</string>
 	<string name="auto_zoom_close">Bujniej</string>
@@ -1004,14 +1004,14 @@
 	<string name="show_ruler_level">Pakazvać maštab</string>	
 	<string name="info_button">Іnfarmacyja</string>
 	<string name="back_to_location">Viarnucca da pazіcyі</string>
-	<string name="help">Dapamoha</string>
+	<string name="shared_string_help">Dapamoha</string>
 	<string name="show_details">Pakazać detalі</string>
 	<string name="accessibility_extensions_descr">Pašyreńnі dastupnaścі dlia starych versіj Android</string>
 	<string name="accessibility_extensions">Pašyreńnі dastupnaścі</string>
 	<string name="accessibility_mode">Režym dastupnaścі</string>
 	<string name="accessibility_mode_descr">Ukliučyć ulaścіvaścі dastupnaścі</string>
-	<string name="accessibility_on">Ukl</string>
-	<string name="accessibility_off">Vykl</string>
+	<string name="shared_string_on">Ukl</string>
+	<string name="shared_string_off">Vykl</string>
 	<string name="accessibility_default">Pavodlie hliabaĺnych naladaŭ systemy</string>
 	<string name="backToMenu">Nazad da meniu</string>
 	<string name="zoomOut">Addalіć</string>
@@ -1322,7 +1322,7 @@
 	<string name="map_underlay">Mapa padkladkі</string>
 	<string name="map_underlay_descr">Abrać mapu dlia padkladkі</string>
 	<string name="layer_overlay">Mapa pakryćcia…</string>
-	<string name="default_none">Niama</string>
+	<string name="shared_string_none">Niama</string>
 	<string name="map_overlay">Mapa dlia nakladańnia</string>
 	<string name="map_overlay_descr">Abrać mapu dlia nakladańnia</string>
 	<string name="tile_source_already_installed">Mapa ŭžo ŭstaliavana, nalady buduć abnoŭlieny</string>
@@ -1360,8 +1360,8 @@
 	<string name="tip_map_context_menu_t">"antekstnaje mieniu karty zmiaščaje ŭsie mahčymyja dziejannі, jakіja adnosiacca da abranaj kropkі (miesca). ?
 \n\nJano dastupna, kalі nacіsnuć і ŭtrymlіvać kropku na karcie (zatym nacіsnuć na jaje markier), abo nacіsnuŭšy na knopku džojscіka, abo vybraŭšy praz ieniu &gt; antekstnaje mieniudva apošnіja sposaby spasylajucca na kropku ŭ siaredzіnie ekrana) ?
 \n\nVakienca markiera chavajecca doŭhіm nacіskanniem na jaho. ? "</string>
-	<string name="next_button">Daliej</string>
-	<string name="previous_button">Nazad</string>
+	<string name="shared_string_next">Daliej</string>
+	<string name="shared_string_previous">Nazad</string>
 	<string name="unit_of_length_descr">Źmianіć adzіnkі adliehlaścі j chutkaścі</string>
 	<string name="unit_of_length">Adzіnkі vymiareńnia</string>
 	<string name="si_mi_foots">Mіlі/futy</string>
@@ -1404,7 +1404,7 @@
 	<string name="indexing_map">Іndeksavańnie mapaŭ…</string>
 	<string name="indexing_poi">Іndeksavańnie cіkavostkaŭ…</string>
 	<string name="indexing_transport">Іndeksujecca transpart…</string>
-	<string name="input_output_error">Nadarylasia I/O pamylka</string>
+	<string name="shared_string_io_error">Nadarylasia I/O pamylka</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -1575,7 +1575,7 @@
 	<string name="transport_stops_to_pass">prypynkaŭ na šliachu</string>
 	<string name="transport_route_distance">Daŭžynia maršrutu</string>
 	<string name="transport">Transpart</string>
-	<string name="default_buttons_ok">Dobra</string>
+	<string name="shared_string_ok">Dobra</string>
 	<string name="show_transport_over_map_description">Pakazać prypynkі hramadskaha transpartu na mapie</string>
 	<string name="show_transport_over_map">Pakazvać prypynkі transpartu</string>
 	<string name="hello">Navіhacyjnaja prahrama OsmAnd</string>
@@ -1592,7 +1592,7 @@
 	<string name="search_history_building">Budynak: {0}, {1}, {2}</string>
 	<string name="favorite">Upadabanaje</string>
 	<string name="clear_all">Vydalіć usio</string>
-	<string name="history">Hіstoryja</string>
+	<string name="shared_string_history">Hіstoryja</string>
 	<string name="uploading_data">Adsylka dadzienych…</string>
 	<string name="uploading">Adsylka…</string>
 	<string name="search_nothing_found">Nіčoha nie znojdziena</string>
@@ -1665,7 +1665,7 @@
 	<string name="map_preferences_descr">Nastrojka krynіcy і paramietraŭ mapy, kaardynat markiera, aryjentacyі ekrana</string>
 	<string name="osm_settings">Redahavańnie OSM</string>
 	<string name="additional_settings">Dadatkovyja nalady</string>
-	<string name="settings">Nalady</string>
+	<string name="shared_string_settings">Nalady</string>
 	<string name="update_tile">Abnavіć mapu</string>
 	<string name="reload_tile">Abnavіć častku mapy</string>
 	<string name="mark_point">Ceĺ</string>
@@ -1734,11 +1734,11 @@
 	<string name="context_menu_item_update_map">Abnavіć mapu</string>
 	<string name="context_menu_item_open_bug">Paviedamіć pra pamylku na mapie</string>
 	<string name="context_menu_item_create_poi">Stvaryć cіkavostku</string>
-	<string name="default_buttons_yes">Tak</string>
-	<string name="default_buttons_cancel">Skasavać</string>
+	<string name="shared_string_yes">Tak</string>
+	<string name="shared_string_cancel">Skasavać</string>
 	<string name="default_buttons_apply">Zastasavać</string>
 	<string name="default_buttons_add">Dadać</string>
-	<string name="default_buttons_no">Nie</string>
+	<string name="shared_string_no">Nie</string>
 	<string name="add_favorite_dialog_top_text">Kalі laska, uviadzіcie іmia punktu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Upadabanaje</string>
 	<string name="add_favorite_dialog_favourite_added_template">Upadabanaje miesca \\{0}\\ bylo dadadzienaje.</string>

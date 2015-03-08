@@ -144,7 +144,7 @@
   <string name="map_underlay">Mapa podstawowa</string>
   <string name="map_underlay_descr">Wybierz warstwę podstawową (underlay)</string>
   <string name="layer_overlay">Nakładka…</string>
-  <string name="default_none">Brak</string>
+  <string name="shared_string_none">Brak</string>
   <string name="map_overlay">Nakładka</string>
   <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
   <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>
@@ -206,8 +206,8 @@
   <string name="tip_initial">Pomoc</string>
   <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
 \n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
-  <string name="next_button">Następny</string>
-  <string name="previous_button">Wstecz</string>
+  <string name="shared_string_next">Następny</string>
+  <string name="shared_string_previous">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki długości</string>
   <string name="si_mi_foots">Mile/stopy</string>
@@ -250,7 +250,7 @@
   <string name="indexing_map">Indeksowanie map…</string>
   <string name="indexing_poi">Indeksowanie POI…</string>
   <string name="indexing_transport">Indeksowanie transportu…</string>
-  <string name="input_output_error">Wystąpił błąd wejścia/wyjścia</string>
+  <string name="shared_string_io_error">Wystąpił błąd wejścia/wyjścia</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -439,7 +439,7 @@
   <string name="transport_stops_to_pass">przystanków do przejechania</string>
   <string name="transport_route_distance">Długość trasy</string>
   <string name="transport">Transport publiczny</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
   <string name="show_transport_over_map">Pokaż przystanki</string>
   <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
@@ -456,7 +456,7 @@
   <string name="search_history_building">Budynek: {0}, {1}, {2}</string>
   <string name="favorite">Ulubione</string>
   <string name="clear_all">Wyczyść wszystko</string>
-  <string name="history">Historia</string>
+  <string name="shared_string_history">Historia</string>
   <string name="uploading_data">Wysyłanie danych…</string>
   <string name="uploading">Wysyłanie…</string>
   <string name="search_nothing_found">Nic nie znaleziono</string>
@@ -539,7 +539,7 @@
   <string name="additional_settings">Dodatkowe ustawienia</string>
   <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil.</string>
   <string name="settings_preset">Domyślny profil</string>
-  <string name="settings">Ustawienia</string>
+  <string name="shared_string_settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>
@@ -622,11 +622,11 @@
   <string name="context_menu_item_update_map">Uaktualnij mapę</string>
   <string name="context_menu_item_open_bug">Zgłoś błąd do OSM</string>
   <string name="context_menu_item_create_poi">Utwórz POI</string>
-  <string name="default_buttons_yes">Tak</string>
-  <string name="default_buttons_cancel">Anuluj</string>
+  <string name="shared_string_yes">Tak</string>
+  <string name="shared_string_cancel">Anuluj</string>
   <string name="default_buttons_apply">Zastosuj</string>
   <string name="default_buttons_add">Dodaj</string>
-  <string name="default_buttons_no">Nie</string>
+  <string name="shared_string_no">Nie</string>
   <string name="add_favorite_dialog_top_text">Wprowadź nazwę</string>
   <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
   <string name="add_favorite_dialog_favourite_added_template">Punkt ulubiony \"{0}\" został pomyślnie dodany.</string>
@@ -729,14 +729,14 @@
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
   <string name="back_to_location">Powróć do pozycji</string>
-  <string name="help">Pomoc</string>
+  <string name="shared_string_help">Pomoc</string>
   <string name="show_details">Pokaż szczegóły</string>
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
   <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>
   <string name="accessibility_mode">Tryb ułatwień dostępu</string>
   <string name="accessibility_mode_descr">Włącz funkcje ułatwień dostępu</string>
-  <string name="accessibility_on">Włączone</string>
-  <string name="accessibility_off">Wyłączone</string>
+  <string name="shared_string_on">Włączone</string>
+  <string name="shared_string_off">Wyłączone</string>
   <string name="accessibility_default">Zgodnie z ustawieniami systemowymi urządzenia</string>
   <string name="backToMenu">Powrót do menu</string>
   <string name="zoomOut">Oddal</string>
@@ -1522,8 +1522,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_close">Zbliżenie</string>
 	<string name="auto_zoom_far">Widok pośredni</string>
 	<string name="auto_zoom_farthest">Widok szeroki</string>
-	<string name="default_and">i</string>
-    <string name="default_or">lub</string>
+	<string name="shared_string_and">i</string>
+    <string name="shared_string_or">lub</string>
 	<string name="remember_choice">Zapamiętaj mój wybór</string>
     <string name="gps_status_eclipsim">GPS Status</string>
     <string name="animate_routing_route_not_calculated">Najpierw dokonaj przeliczenia trasy</string>
@@ -1576,8 +1576,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_weight_description">Określ ograniczenie masy pojazdu dozwolone na drodze</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Wybierz cel podróży</string>
-    <string name="route_descr_select_on_map">Wybierz na mapie…</string>
-    <string name="route_descr_favorite">Ulubione…</string>
+    <string name="shared_string_select_on_map">Wybierz na mapie…</string>
+    <string name="shared_string_favorite">Ulubione…</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Przelicz trasę offline w OsmAnd</string>
@@ -1787,7 +1787,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_available_current_track">Zapisywanie bieżącej trasy</string>
     <string name="selected_gpx_info_show">\n\nNaciśnij i przytrzymaj, aby zobaczyć na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
-    <string name="selected">wybrano</string>
+    <string name="shared_string_selected_lowercase">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
@@ -1945,7 +1945,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
     <string name="rendering_category_hide">Ukryj</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
-    <string name="wake_on_voice_never">Nigdy</string>
+    <string name="shared_string_never">Nigdy</string>
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj HTTPS</string>
 	<string name="advanced_settings">Zaawansowane</string>
@@ -1955,7 +1955,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_map">POKAŻ MAPĘ</string>
 	<string name="show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
-	<string name="dismiss">Odrzuć</string>
+	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
     <string name="use_opengl_render">Użyj renderowania OpenGL</string>
     <string name="use_opengl_render_descr">Użyj sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
@@ -1995,6 +1995,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="settings_privacy">Prywatność</string>
     <string name="my_location">Moja lokalizacja</string>
     <string name="osm_editing_manage">Zarządzaj</string>
-    <string name="enable_plugin">Włącz</string>
-	<string name="disable_plugin">Wyłącz</string>
+    <string name="shared_string_disabled">Włącz</string>
+	<string name="shared_string_enabled">Wyłącz</string>
 </resources>

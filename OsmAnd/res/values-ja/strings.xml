@@ -38,7 +38,7 @@
      <string name="map_underlay">アンダーレイマップ</string>
      <string name="map_underlay_descr">アンダーレイマップを選択</string>
      <string name="layer_overlay">オーバーレイマップ…</string>
-     <string name="default_none">無し</string>
+     <string name="shared_string_none">無し</string>
      <string name="map_overlay">オーバーレイマップ</string>
      <string name="map_overlay_descr">オーバーレイマップを選択</string>
      <string name="tile_source_already_installed">マップは既に
@@ -117,8 +117,8 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
      <string name="tip_initial">ヘルプ</string>
      <string name="tip_initial_t">"OsmAndは多くの機能を持つナビゲーションアプリです。
 \n基礎的な使い方のヒントやテクニックをマップ画面の\'メニュー\'→\'ヘルプ\'から参照することが出来ます。 "</string>
-     <string name="next_button">次へ</string>
-     <string name="previous_button">前へ</string>
+     <string name="shared_string_next">次へ</string>
+     <string name="shared_string_previous">前へ</string>
 
      <string name="unit_of_length_descr">長さと速度の単位を変更</string>
      <string name="unit_of_length">長さの単位</string>
@@ -164,7 +164,7 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
      <string name="indexing_map">マップを索引化</string>
      <string name="indexing_poi">POIを索引化</string>
      <string name="indexing_transport">交通機関を索引化</string>
-     <string name="input_output_error">I/O エラー発生</string>
+     <string name="shared_string_io_error">I/O エラー発生</string>
      <string name="km">km</string>
      <string name="km_h">km/h</string>
      <string name="m">m</string>
@@ -392,7 +392,7 @@ MB)をダウンロードしますか?</string>
      <string name="transport_stops_to_pass">通過する乗り場</string>
      <string name="transport_route_distance">ルートの距離</string>
      <string name="transport">交通機関</string>
-     <string name="default_buttons_ok">OK</string>
+     <string name="shared_string_ok">OK</string>
      <string name="show_transport_over_map_description">マップ上に公共交通機関乗り場を表示</string>
      <string name="show_transport_over_map">交通機関乗り場を表示</string>
      <string name="hello">ナビゲーションアプリケーション OsmAnd</string>
@@ -414,7 +414,7 @@ POIの更新は利用できません</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>
      <string name="favorite">お気に入り</string>
      <string name="clear_all">全てクリア</string>
-     <string name="history">履歴</string>
+     <string name="shared_string_history">履歴</string>
      <string name="uploading_data">データをアップロード中…</string>
      <string name="uploading">アップロード中</string>
      <string name="search_nothing_found">何も見つかりません</string>
@@ -504,7 +504,7 @@ POIの更新は利用できません</string>
  <string name="additional_settings">追加設定</string>
  <string name="settings_preset_descr">地図の表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
  <string name="settings_preset">デフォルトプロファイル</string>
- <string name="settings">設定</string>
+ <string name="shared_string_settings">設定</string>
  <string name="save_current_track_descr">現在の経路を今すぐSDに保存</string>
  <string name="save_current_track">現在の経路を保存</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>
@@ -594,11 +594,11 @@ POIの更新は利用できません</string>
 <string name="context_menu_item_open_bug">OSM バグをオープン</string>
 <string name="context_menu_item_create_poi">POIを作成</string>
 
-<string name="default_buttons_yes">はい</string>
-<string name="default_buttons_cancel">キャンセル</string>
+<string name="shared_string_yes">はい</string>
+<string name="shared_string_cancel">キャンセル</string>
 <string name="default_buttons_apply">適用</string>
 <string name="default_buttons_add">追加</string>
-<string name="default_buttons_no">いいえ</string>
+<string name="shared_string_no">いいえ</string>
 <string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
 <string name="add_favorite_dialog_default_favourite_name">お気に入り</string>
 <string name="add_favorite_dialog_favourite_added_template">お気に入り地点
@@ -1076,14 +1076,14 @@ POIの更新は利用できません</string>
 	<string name="show_ruler_level">尺度を表示</string>	
 	<string name="info_button">インフォメーション</string>
 	<string name="back_to_location">現在位置に戻す</string>
-	<string name="help">ヘルプ</string>
+	<string name="shared_string_help">ヘルプ</string>
 	<string name="show_details">詳細を表示</string>
 	<string name="accessibility_extensions_descr">古いバージョンのAndroid用アクセシビリティ拡張</string>
 	<string name="accessibility_extensions">アクセシビリティ拡張</string>
 	<string name="accessibility_mode">アクセシビリティモード</string>
 	<string name="accessibility_mode_descr">アクセシビリティ機能の切り替え</string>
-	<string name="accessibility_on">オン</string>
-	<string name="accessibility_off">オフ</string>
+	<string name="shared_string_on">オン</string>
+	<string name="shared_string_off">オフ</string>
 	<string name="accessibility_default">グローバルシステム設定に従う</string>
 	<string name="backToMenu">メニューに戻る</string>
 	<string name="zoomOut">縮小</string>
@@ -1151,8 +1151,8 @@ POIの更新は利用できません</string>
     <string name="animate_routing_gpx">GPXトラックを利用してシミュレーション</string>
     <string name="remember_choice">選択を記憶</string>
     <string name="gps_status_eclipsim">GPSステータス</string>
-    <string name="default_and">と</string>
-    <string name="default_or">または</string>
+    <string name="shared_string_and">と</string>
+    <string name="shared_string_or">または</string>
 	<string name="route_is_too_long">OsmAndオフラインルート計算は、指定地点間の距離が200km以上有ると非常に時間がかかります(場合によっては動作しません)。 中間経由点を作成することでルート計算に掛かる時間を短くすることが出来ます。</string>
 	<string name="auto_zoom_none">自動ズームしない</string>
 	<string name="auto_zoom_close">ズーム 大</string>
@@ -1709,8 +1709,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="keep_and_add_destination_point">目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
-    <string name="route_descr_select_on_map">地図から選択…</string>
-    <string name="route_descr_favorite">お気に入り…</string>
+    <string name="shared_string_select_on_map">地図から選択…</string>
+    <string name="shared_string_favorite">お気に入り…</string>
     <string name="route_preferences">ルート設定</string>
     <string name="route_info">ルート情報</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
@@ -1817,7 +1817,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="gpx_wpt">経由点</string>
     <string name="selected_gpx_info_show">\n\nマップ上に表示するには長押ししてください</string>
     <string name="delay_navigation_start">ターン・バイ・ターン形式誘導を自動起動</string>
-    <string name="selected">選択済み</string>
+    <string name="shared_string_selected_lowercase">選択済み</string>
     <string name="gpx_info_subtracks">"サブトラック: %1$s "</string>
 	<string name="gpx_info_waypoints">"経由点: %1$s "</string>
 	<string name="gpx_info_distance">"距離: %1$s (%2$s 地点) "</string>
@@ -2075,7 +2075,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
     <string name="wake_on_voice">画面をオフ</string>
     <string name="wake_on_voice_descr">方向転換地点に近づくと携帯電話の画面をオンにする</string>
-    <string name="wake_on_voice_never">しない</string>
+    <string name="shared_string_never">しない</string>
     <string name="select_impassable_road">地図上で選択</string>
     <string name="impassable_road">無視する道路…</string>
     <string name="tip_recent_changes_1_9_t">"1.9での変更点： 路面レンダリング、移送用レイヤとハイキングシンボル等の追加に伴うマップ形式の更新 * ルート沿いのPOI検索 * セッションごとの通行止め道路の記録 * より簡単なマップのダウンロードと更新 * 経由点に近づいたときに、ビジュアルと音声で通知 * 旅程と移動指示情報を印刷可能に * 複数車線で進行可能情報の表示 * Androidウェアをサポート * インターフェイスの大幅変更 * 地図上の文字サイズごとに個別のズーム追加 * 経路から外れた場合の特別な音声通知を追加 * OsMoへのログイン機能追加 * OsMo バージョンの不一致部分を修正 "</string>
@@ -2149,7 +2149,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">ローカル</string>
 	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
-    <string name="dismiss">退ける</string>
+    <string name="shared_string_dismiss">退ける</string>
     <string name="everything_up_to_date">すべてのファイルを最新状態に</string>
     <string name="use_opengl_render">OpenGLレンダリングを使用</string>
     <string name="use_opengl_render_descr">ハードウェアのOpenGLレンダリングを使用(デバイスによっては動作しません)</string>
@@ -2162,6 +2162,6 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="proxy_port_title">プロキシポート</string>
 	<string name="proxy_port_descr">プロキシのポート番号設定(例：8118)</string>
 	<string name="voices">音声プロンプト</string>
-	<string name="enable_plugin">有効</string>
-	<string name="disable_plugin">無効</string>
+	<string name="shared_string_disabled">有効</string>
+	<string name="shared_string_enabled">無効</string>
 </resources>

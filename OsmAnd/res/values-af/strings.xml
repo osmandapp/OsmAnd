@@ -121,14 +121,14 @@
   <string name="show_ruler_level">Wys liniaal</string>
   <string name="info_button">Inligting</string>
   <string name="back_to_location">Terug na ligging</string>
-  <string name="help">Help</string>
+  <string name="shared_string_help">Help</string>
   <string name="show_details">Vertoon besonderhede</string>
   <string name="accessibility_extensions_descr">Toeganklikheid uitbreidings vir ou Android-weergawes</string>
   <string name="accessibility_extensions">Toeganklikheid uitbreidings</string>
   <string name="accessibility_mode">Toeganklikheid gebruikswyse</string>
   <string name="accessibility_mode_descr">Skakel die toeganklikheid funksies aan</string>
-  <string name="accessibility_on">Aan</string>
-  <string name="accessibility_off">Af</string>
+  <string name="shared_string_on">Aan</string>
+  <string name="shared_string_off">Af</string>
   <string name="accessibility_default">Volgens die oorhoofse stelsel instellings</string>
   <string name="backToMenu">Terug na keuselys</string>
   <string name="zoomOut">Verklein</string>
@@ -391,7 +391,7 @@
   <string name="map_underlay">Onderliggende kaart</string>
   <string name="map_underlay_descr">Kies onderliggende kaart</string>
   <string name="layer_overlay">Oorliggende kaart…</string>
-  <string name="default_none">Geen</string>
+  <string name="shared_string_none">Geen</string>
   <string name="map_overlay">Oorleg kaart</string>
   <string name="map_overlay_descr">Kies oorleg kaart</string>
   <string name="tile_source_already_installed">Kaart is reeds geïnstalleer, instellings sal opdateer word</string>
@@ -431,8 +431,8 @@
   <string name="tip_initial">Wenke en wyses</string>
   <string name="tip_initial_t">\tOsmAnd is \'n navigasietoepassing met baie funksies.\n\tAs \'n basiese inleiding, is sommige gebruikswenke en wyses beskikbaar in skakels vanaf die hoof kieslys skerm.
 	</string>
-  <string name="next_button">Volgende</string>
-  <string name="previous_button">Vorige</string>
+  <string name="shared_string_next">Volgende</string>
+  <string name="shared_string_previous">Vorige</string>
   <string name="unit_of_length_descr">Verander eenhede van lengte en spoed</string>
   <string name="unit_of_length">Meeteenheid</string>
   <string name="si_mi_foots">Myle / voete</string>
@@ -475,7 +475,7 @@
   <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
   <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
   <string name="indexing_transport">Skep vervoer indeks…</string>
-  <string name="input_output_error">Lees/skryf fout het voorgekom</string>
+  <string name="shared_string_io_error">Lees/skryf fout het voorgekom</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -653,7 +653,7 @@
   <string name="transport_stops_to_pass">haltes om verby te gaan</string>
   <string name="transport_route_distance">Roete afstand</string>
   <string name="transport">Vervoer</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Wys openbare vervoer haltes op die kaart</string>
   <string name="show_transport_over_map">Wys vervoer haltes</string>
   <string name="hello">navigasie toepassing OsmAnd</string>
@@ -670,7 +670,7 @@
   <string name="search_history_building">Gebou: {0}, {1}, {2}</string>
   <string name="favorite">Gunsteling</string>
   <string name="clear_all">Vee alles uit</string>
-  <string name="history">Geskiedenis</string>
+  <string name="shared_string_history">Geskiedenis</string>
   <string name="uploading_data">Besig om inligting op te laai…</string>
   <string name="uploading">Besig met oplaai…</string>
   <string name="search_nothing_found">Niks gevind nie</string>
@@ -747,7 +747,7 @@
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
-  <string name="settings">Stellings</string>
+  <string name="shared_string_settings">Stellings</string>
   <string name="save_current_track_descr">Berg huidige spoor nou op SD</string>
   <string name="save_current_track">Berg huidige spoor</string>
   <string name="save_track_interval">Log tussenpose</string>
@@ -827,11 +827,11 @@
   <string name="context_menu_item_update_map">opgradeer kaart</string>
   <string name="context_menu_item_open_bug">Open OSM fout</string>
   <string name="context_menu_item_create_poi">skep interessante plek</string>
-  <string name="default_buttons_yes">Ja</string>
-  <string name="default_buttons_cancel">Kanseleer</string>
+  <string name="shared_string_yes">Ja</string>
+  <string name="shared_string_cancel">Kanseleer</string>
   <string name="default_buttons_apply">toepas</string>
   <string name="default_buttons_add">Voeg by</string>
-  <string name="default_buttons_no">Nee</string>
+  <string name="shared_string_no">Nee</string>
   <string name="add_favorite_dialog_top_text">Tik gunsteling naam in</string>
   <string name="add_favorite_dialog_default_favourite_name">Gunsteling</string>
   <string name="add_favorite_dialog_favourite_added_template">Gunsteling punt \'{0}\' is bygevoeg.</string>
@@ -1321,8 +1321,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="keep_and_add_destination_point">Voeg by as bestemmingspunt</string>
     <string name="select_gpx">Kies GPX …</string>
     <string name="route_descr_select_destination">Kies bestemming</string>
-    <string name="route_descr_select_on_map">Kies op kaart …</string>
-    <string name="route_descr_favorite">Gunsteling …</string>
+    <string name="shared_string_select_on_map">Kies op kaart …</string>
+    <string name="shared_string_favorite">Gunsteling …</string>
     <string name="route_preferences">Roete voorkeure</string>
     <string name="route_info">Roete inligting</string>
     <string name="routing_attr_prefer_motorway_name">Verkies snelweg</string>
@@ -1359,8 +1359,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="tip_faq">Gereëlde Vrae</string>
     <string name="remember_choice">Onthou my keuse</string>
     <string name="gps_status_eclipsim">GPS status</string>
-    <string name="default_and">en</string>
-    <string name="default_or">of</string>
+    <string name="shared_string_and">en</string>
+    <string name="shared_string_or">of</string>
 	<string name="osmodroid_refresh">Verfris kanale</string>
     <string name="osmodroid_seek">Soek objek</string>
     <string name="osmo_settings_uuid">Unieke toestel ID</string>

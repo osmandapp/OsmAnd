@@ -342,7 +342,7 @@ public class OsmandApplication extends Application {
 				ll.addView(cb);
 				
 				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener() {
+				builder.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if(cb.isChecked()) {
@@ -350,7 +350,7 @@ public class OsmandApplication extends Application {
 						}
 					}
 				});
-				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(uiContext, SettingsActivity.class);
@@ -393,13 +393,13 @@ public class OsmandApplication extends Application {
 		if (getNavigationService() != null) {
 			Builder bld = new AlertDialog.Builder(activity);
 			bld.setMessage(R.string.background_service_is_enabled_question);
-			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					closeApplicationAnyway(activity, true);
 				}
 			});
-			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					closeApplicationAnyway(activity, false);

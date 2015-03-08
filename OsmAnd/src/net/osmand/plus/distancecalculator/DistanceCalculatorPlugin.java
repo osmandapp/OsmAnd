@@ -280,7 +280,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				saveGpx(activity, newName);
 			}
 		});
-		b.setNegativeButton(R.string.default_buttons_cancel, null);
+		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 	
@@ -364,7 +364,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					pref.set(false);
 				}
 			});
-			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			builder.setPositiveButton(R.string.shared_string_ok, null);
 			
 			builder.show();
 		}

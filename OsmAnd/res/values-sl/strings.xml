@@ -34,9 +34,9 @@
 	<string name="search_address_building_option">Hiša</string>
 	<string name="search_address_street_option">Sekajoča cesta</string>
 	<string name="context_menu_item_add_favorite">Dodaj med priljubljene</string>
-	<string name="default_buttons_yes">Da</string>
-	<string name="default_buttons_no">Ne</string>
-	<string name="default_buttons_cancel">Prekliči</string>
+	<string name="shared_string_yes">Da</string>
+	<string name="shared_string_no">Ne</string>
+	<string name="shared_string_cancel">Prekliči</string>
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="default_buttons_apply">Uporabi</string>
 	<string name="context_menu_item_create_poi">Ustvari POI</string>
@@ -264,7 +264,7 @@
 	<string name="indexing_map">Indeksiranje karte …</string>
 	<string name="indexing_poi">Indeksiranje POI …</string>
 	<string name="indexing_transport">Indeksiranje javnih prevozov …</string>
-	<string name="input_output_error">I/O napaka</string>
+	<string name="shared_string_io_error">I/O napaka</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -570,8 +570,8 @@
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
 	<string name="tip_initial_t">"OsmAnd je navigacijska aplikacija s številnimi funkcijami.
 \n\nOsnovni uvod, nekaj uporabnih namigov in trikov je na voljo na povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
-	<string name="next_button">Naprej</string>
-	<string name="previous_button">Nazaj</string>
+	<string name="shared_string_next">Naprej</string>
+	<string name="shared_string_previous">Nazaj</string>
 	<string name="tip_initial">Pomoč</string>
 	<string name="tip_search">Iskanje</string>
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
@@ -626,14 +626,14 @@
 	<string name="show_ruler_level">Prikaži ravnilo</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Nazaj na mesto</string>
-	<string name="help">Pomoč</string>
+	<string name="shared_string_help">Pomoč</string>
 	<string name="show_details">Pokaži podrobnosti</string>
 	<string name="accessibility_extensions_descr">Razširitve dostopnosti za stare različice Android</string>
 	<string name="accessibility_extensions">Razširitve dostopnosti</string>
 	<string name="accessibility_mode">Način dostopnosti</string>
 	<string name="accessibility_mode_descr">Vklopi zmožnosti dostopnosti</string>
-	<string name="accessibility_on">Vklopljeno</string>
-	<string name="accessibility_off">Izklopljeno</string>
+	<string name="shared_string_on">Vklopljeno</string>
+	<string name="shared_string_off">Izklopljeno</string>
 	<string name="accessibility_default">Glede na splošne sistemske nastavitve</string>
 	<string name="backToMenu">Nazaj v meni</string>
 	<string name="auto_announce_on">Začni s samodejnimi najavami</string>
@@ -803,7 +803,7 @@
 	<string name="map_underlay">Spodaj ležeči zemljevid</string>
 	<string name="map_underlay_descr">Izberi spodaj ležeči zemljevid</string>
 	<string name="layer_overlay">Prekrivni zemljevid …</string>
-	<string name="default_none">Brez</string>
+	<string name="shared_string_none">Brez</string>
 	<string name="map_overlay">Prekrivni zemljevid</string>
 	<string name="map_overlay_descr">Izberi prekrivni zemljevid</string>
 	<string name="tile_source_already_installed">Zemljevid je že nameščen, nastavitve bodo posodobljene</string>
@@ -829,7 +829,7 @@
 \n\nZa prikaz vseh priljubljenih točk direktno na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' → \'Nastavitve zemljevida\'. "</string>
 	<string name="transport">Prevoz</string>
 	<string name="additional_settings">Dodatne nastavitve</string>
-	<string name="settings">Nastavitve</string>
+	<string name="shared_string_settings">Nastavitve</string>
 	<string name="save_current_track">Shrani trenutno sled GPX</string>
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
 	<string name="save_track_interval">Interval beleženja med navigacijo</string>
@@ -961,7 +961,7 @@
 	<string name="transport_to_go_before">naslednja razdalja</string>
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
 	<string name="transport_route_distance">Razdalja poti</string>
-	<string name="default_buttons_ok">V redu</string>
+	<string name="shared_string_ok">V redu</string>
 	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
 	<string name="show_transport_over_map">Prikaz postaj prevoza</string>
 	<string name="update_poi_success">POI podatki so bili uspešno posodobljeni ({0} naloženih)</string>
@@ -976,7 +976,7 @@
 	<string name="search_history_int_streets">Križišče: {0} z {1} v {2}</string>
 	<string name="search_history_building">Zgradba: {0}, {1}, {2}</string>
 	<string name="clear_all">Počisti vse</string>
-	<string name="history">Zgodovina</string>
+	<string name="shared_string_history">Zgodovina</string>
 	<string name="uploading_data">Nalaganje podatkov …</string>
 	<string name="uploading">Nalaganje …</string>
 	<string name="search_nothing_found">Ničesar najdeno</string>
@@ -1505,8 +1505,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 \n\nRazen \'privzetega\' sloga zemljevida, lahko v \'Meni\' → \'Nastavitve zemljevida\' → \'Slog zemljevida\' zberete npr.:
 \n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc. ↵\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations ↵\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "</string>
     <string name="base_world_map">Osnovni zemljevid sveta</string>
-	<string name="default_and">in</string>
-    <string name="default_or">ali</string>
+	<string name="shared_string_and">in</string>
+    <string name="shared_string_or">ali</string>
 	<string name="route_is_too_long">OsmAnd usmerjanje brez povezave lahko traja zelo dolgo (ali včasih ne deluje) za točke, ki so med sabo oddaljene več kot 200 km. Za boljše delovanje boste morda želeli dodati kakšno vmesno točko na poti.</string>
 	<string name="auto_zoom_none">Ne samodejna povečava</string>
 	<string name="auto_zoom_farthest">Na dolge razdalje</string>
@@ -1611,8 +1611,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="keep_and_add_destination_point">Dodaj kot ciljno točko</string>
     <string name="select_gpx">Izberite GPX …</string>
     <string name="route_descr_select_destination">Izberite cilj</string>
-    <string name="route_descr_select_on_map">Izberite na zemljevidu …</string>
-    <string name="route_descr_favorite">Priljubljene …</string>
+    <string name="shared_string_select_on_map">Izberite na zemljevidu …</string>
+    <string name="shared_string_favorite">Priljubljene …</string>
     <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
 \n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
 \n Opomba 2: v novem mestu shrambe si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti podatkov.</string>
@@ -1715,7 +1715,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="gpx_info_avg_altitude">Povprečna višina: %1$s</string>
 	<string name="loading_smth">Nalaganje %1$s …</string>
     <string name="map_widget_plain_time">Trenutni čas</string>
-    <string name="selected">izbrano</string>
+    <string name="shared_string_selected_lowercase">izbrano</string>
     <string name="gpx_timespan">Časovni razpon: %1$s</string>
 	<string name="gpx_selection_number_of_points"> %1$s točk</string>
     <string name="gpx_selection_point">Točka %1$s</string>
@@ -1902,7 +1902,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopiti zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če izklopljen), ko se približujete obratu</string>
-    <string name="wake_on_voice_never">Nikoli</string>
+    <string name="shared_string_never">Nikoli</string>
     <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_others">Druge lastnosti zemljevida</string>
     <string name="map_widget_appearance_rem">Preostali elementi</string>
@@ -1947,7 +1947,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="download_tab_updates">Posodobitve</string>
     <string name="download_tab_local">Krajevno</string>
 	<string name="no_internet_connection">Prenos ni mogoč. Prosim, preverite vašo internetno povezavo.</string>
-    <string name="dismiss">Zapri</string>
+    <string name="shared_string_dismiss">Zapri</string>
     <string name="everything_up_to_date">Vse datoteke posodobljene</string>
     <string name="osmo_use_https">Uporabi HTTPS</string>
 	<string name="advanced_settings">Napredno</string>
@@ -1991,15 +1991,15 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="proxy_host_descr">Nastavitev imena gostitelja vašega proxy-ja (npr. 127.0.0.1)</string>
 	<string name="proxy_port_title">Vrata proxy-ja</string>
 	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
-	<string name="enable_plugin">Onemogočeno</string>
-	<string name="disable_plugin">Omogočeno</string>
+	<string name="shared_string_disabled">Onemogočeno</string>
+	<string name="shared_string_enabled">Omogočeno</string>
 <string name="plugin_ski_name">Smučarske karte</string>
     <string name="plugin_nautical_name">Pomorska karta</string>
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
     <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
 	<string name="edit_group">Urejanje skupine</string>
-    <string name="enable_plugin2">Omogoči</string>
-	<string name="disable_plugin2">Onemogoči</string>
+    <string name="shared_string_enable">Omogoči</string>
+	<string name="shared_string_disable">Onemogoči</string>
 	<string name="plugin_description_title">Opis</string>
 	<string name="plugin_settings_button_caption">Nastavitve</string>
 	<string name="plugin_install_needs_network">Za namestitev tega vtičnika potrebujete internetno povezavo.</string>

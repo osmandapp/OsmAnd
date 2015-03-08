@@ -258,11 +258,11 @@
 	<string name="context_menu_item_update_map">به روز رسانی نقشه</string>
 	<string name="context_menu_item_open_bug">بازکردن اشکال OSM</string>
 	<string name="context_menu_item_create_poi">ایجاد POI</string>
-	<string name="default_buttons_yes">بله</string>
-	<string name="default_buttons_cancel">لغو</string>
+	<string name="shared_string_yes">بله</string>
+	<string name="shared_string_cancel">لغو</string>
 	<string name="default_buttons_apply">بکارگیری</string>
 	<string name="default_buttons_add">افزودن</string>
-	<string name="default_buttons_no">خیر</string>
+	<string name="shared_string_no">خیر</string>
 	<string name="add_favorite_dialog_top_text">نام علاقمندی را وارد کنید</string>
 	<string name="add_favorite_dialog_default_favourite_name">علاقمندی</string>
 	<string name="add_favorite_dialog_favourite_added_template">نقطه علاقمندی \'{0}\' اضافه شد.</string>
@@ -345,7 +345,7 @@
 	<string name="get_directions">مسیرها</string>
 	<string name="show_gps_status">نشان دادن /\'وضعیت GPS/\'</string>
 	<string name="opening_hours">ساعات باز بودن</string>
-	<string name="history">تاریخچه</string>
+	<string name="shared_string_history">تاریخچه</string>
 	<string name="search_nothing_found">چیزی پیدا نشد</string>
 	<string name="searching">درحال جستجو…</string>
 	<string name="searching_address">درحال جستجوی آدرس…</string>
@@ -354,8 +354,8 @@
 	<string name="max_level_download_tile">حداکثر زوم آنلاین</string>
 	<string name="download_question">{0} - {1} دانلود شود؟</string>
 	<string name="route_general_information">مسافت کل %1$s، مدت سفر %2$d ساعت و %3$d دقیقه.</string>
-	<string name="next_button">بعدی</string>
-	<string name="previous_button">قبلی</string>
+	<string name="shared_string_next">بعدی</string>
+	<string name="shared_string_previous">قبلی</string>
 	<string name="unit_of_length_descr">تغییر واحد طول و سرعت</string>
 	<string name="unit_of_length">واحد اندازه گیری</string>
 	<string name="local_index_descr_title">مدیریت نقشه ها</string>
@@ -480,10 +480,10 @@
 	<string name="show_ruler_level">نمایش خط کش</string>	
 	<string name="info_button">اطلاعات</string>
 	<string name="back_to_location">برگشتن به موقعیت</string>
-	<string name="help">کمک</string>
+	<string name="shared_string_help">کمک</string>
 	<string name="show_details">نمایش جزئیات</string>
-	<string name="accessibility_on">روشن</string>
-	<string name="accessibility_off">خاموش</string>
+	<string name="shared_string_on">روشن</string>
+	<string name="shared_string_off">خاموش</string>
 	<string name="accessibility_default">طبق تنظیمات کلی سیستم</string>
 	<string name="backToMenu">برگشت به منو</string>
 	<string name="zoomOut">ریزتر</string>
@@ -623,7 +623,7 @@
 	<string name="show_poi_over_map_description">نشان دادن POI بر روی نقشه (استفاده از فیلترهای انتخاب شده قبلی)</string>
 	<string name="favourites_activity">علاقمندی ها</string>
 	<string name="data_settings">داده‌ها</string>
-	<string name="settings">تنظیمات</string>
+	<string name="shared_string_settings">تنظیمات</string>
 	<string name="additional_settings">تنظیمات اضافی</string>
 	<string name="update_tile">بروز رسانی نقشه</string>
 	<string name="download_indexes">بارگذاری داده بصورت آفلاین</string>
@@ -825,7 +825,7 @@
 	<string name="map_underlay">نقشه زیری</string>
 	<string name="map_underlay_descr">انتخاب نقشه زیرین</string>
 	<string name="layer_overlay">نقشه رویی…</string>
-	<string name="default_none">هیچیک</string>
+	<string name="shared_string_none">هیچیک</string>
 	<string name="map_overlay">نقشه رویی</string>
 	<string name="map_overlay_descr">انتخاب نقشه رویی</string>
 	<string name="tile_source_already_installed">نقشه قبلاً نصب شده است، تنظیمات به روز خواهد شد</string>
@@ -861,7 +861,7 @@
 	<string name="indexing_map">درحال ایندکس نقشه…</string>
 	<string name="indexing_poi">درحال ایندکس POI…</string>
 	<string name="indexing_transport">درحال ایندکس حمل و نقل عمومی…</string>
-	<string name="input_output_error">خطای ورودی/خروجی رخ داد</string>
+	<string name="shared_string_io_error">خطای ورودی/خروجی رخ داد</string>
 	<string name="km">کیلومتر</string>
 	<string name="m">متر</string>
 	<string name="map_tile_source">منبع نقشه تصویری</string>
@@ -964,7 +964,7 @@
 	<string name="hello">برنامه مسیریابی OsmAnd</string>
 	<string name="update_poi_success">داده های POI با موفقیت آپلود شد ({0} مورد بارگزاری شد)</string>
 	<string name="update_poi_error_local">خطا در هنگام به روز رسانی لیست POI محلی</string>
-	<string name="default_buttons_ok">خُب</string>
+	<string name="shared_string_ok">خُب</string>
 	<string name="transport">حمل و نقل</string>
 	<string name="transport_route_distance">مسافت مسیر</string>
 	<string name="transport_Stop">توقف</string>
@@ -1589,8 +1589,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     
     <string name="map_magnifier">ذره بین نقشه</string>
     <string name="base_world_map">نقشه کل جهان</string>
-	<string name="default_and">و</string>
-    <string name="default_or">یا</string>
+	<string name="shared_string_and">و</string>
+    <string name="shared_string_or">یا</string>
 	<string name="animate_routing_route_not_calculated">لطفاً ابتدا مسیر را محاسبه کن</string>
     <string name="animate_routing_route">شبیه سازی با استفاده از مسیر محاسبه شده </string>
     <string name="animate_routing_gpx">شبیه سازی با استفاده از مسیر GPX</string>
@@ -1649,8 +1649,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="routing_attr_weight_description">تعیین محدودیت وزن خودرو</string>
     <string name="select_gpx">انتخاب فایل جی پی ایکس …</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
-    <string name="route_descr_select_on_map">انتخاب روی نقشه …</string>
-    <string name="route_descr_favorite">علاقه مندی ها …</string>
+    <string name="shared_string_select_on_map">انتخاب روی نقشه …</string>
+    <string name="shared_string_favorite">علاقه مندی ها …</string>
     <string name="route_preferences">تنظیمات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا می‌خواهید از مسیر نمایش داده شده برای مسیریابی استفاده کنید؟</string>
@@ -1840,7 +1840,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_wpt">نقطه بین راهی</string>
     <string name="selected_gpx_info_show">\n\n برای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید</string>
     <string name="delay_navigation_start">شروع راهنمای به صورت گام به گام و خودکار</string>
-    <string name="selected">انتخاب</string>
+    <string name="shared_string_selected_lowercase">انتخاب</string>
     <string name="gpx_split_interval">بازه زمانی</string>
     <string name="gpx_info_subtracks">مسیر فرعی: %1$s </string>
 	<string name="gpx_info_waypoints">ایستگاههای بین راه: %1$s </string>
@@ -2085,12 +2085,12 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="navigate_point_easting">به طرف شرق</string>
     <string name="download_tab_downloads">همه دانلودها</string>
     <string name="download_tab_updates">به‌روز‌رسانی‌ها</string>
-    <string name="dismiss">نپذیرفتن</string>
+    <string name="shared_string_dismiss">نپذیرفتن</string>
     <string name="use_opengl_render">استفاده از دندرینگ OpenGL</string>
     <string name="use_opengl_render_descr">استفاده از رندریگ تسریع‌یافته OpenGL (بر روی برخی دستگاه‌ها کار نمیکند)</string>
     <string name="lock_screen_request_explanation">%1$s این مجوز را نیاز دارد تا خصوصیت صرفه‌جویی انرژی صقجه نمایش را خاموش کند.</string>
     <string name="wake_on_voice_descr">صفحه نمایش قبل از رسیدن به پیچ، روشن شود (اگر خاموش است)</string>
-    <string name="wake_on_voice_never">هیچگاه</string>
+    <string name="shared_string_never">هیچگاه</string>
     <string name="rendering_attr_trolleybusRoutes_name">مسیرهای اتوبوس برقی</string>
     <string name="rendering_attr_busRoutes_name">مسیرهای اتوبوس</string>
     <string name="rendering_category_routes">مسیرها</string>
@@ -2100,10 +2100,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="plugin_install_needs_network">برای نصب این افزونه به اتصال اینترنت نیاز دارید.</string>
 	<string name="plugin_settings_button_caption">تنظیمات</string>
 	<string name="plugin_description_title">توضیح</string>
-	<string name="disable_plugin2">غیرفعال کردن</string>
-	<string name="enable_plugin2">فعال کردن</string>
-	<string name="disable_plugin">فعال</string>
-	<string name="enable_plugin">غیرفعال</string>
+	<string name="shared_string_disable">غیرفعال کردن</string>
+	<string name="shared_string_enable">فعال کردن</string>
+	<string name="shared_string_enabled">فعال</string>
+	<string name="shared_string_disabled">غیرفعال</string>
 	<string name="export">صادرکردن</string>
 	<string name="voices">اعلان‌های صوتی</string>
 	<string name="local_index_description">بر روی هر مورد کلیک کنید تا توضیحات بیشتری ببینید، بزنید و نگه دارید تا غیرفعال یا پاک کنید. داده فعلی بر روی دستگاه (%1$s آزاد):</string>

@@ -142,7 +142,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="map_underlay">Bản đồ nền</string>
 	<string name="map_underlay_descr">Chọn bản đồ nền</string>
 	<string name="layer_overlay">Chồng phủ bản đồ…</string>
-	<string name="default_none">Không</string>
+	<string name="shared_string_none">Không</string>
 	<string name="map_overlay">Chồng phủ bản đồ</string>
 	<string name="map_overlay_descr">Chọn bản đồ cần chồng phủ</string>
 	<string name="tile_source_already_installed">Bản đồ đã được cài, các thiết lập sẽ được cập nhật</string>
@@ -196,8 +196,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
 \n\tĐMột số thủ thuật và mẹo sử dụng được liên kết với màn hình menu chính.</string>
-	<string name="next_button">Tiếp</string>
-	<string name="previous_button">Quay lại</string>
+	<string name="shared_string_next">Tiếp</string>
+	<string name="shared_string_previous">Quay lại</string>
 
 	<string name="unit_of_length_descr">Đổi đơn vị độ dài và tốc độ</string>
 	<string name="unit_of_length">Đơn vị độ dài</string>
@@ -234,7 +234,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="indexing_map">Đang tạo chỉ mục bản đồ…</string>
 	<string name="indexing_poi">Đang tạo chỉ mục POI…</string>
 	<string name="indexing_transport">Đang tạo chỉ mục giao thông…</string>
-	<string name="input_output_error">Có lỗi xảy ra với I/O</string>
+	<string name="shared_string_io_error">Có lỗi xảy ra với I/O</string>
 	<string name="old_map_index_is_not_supported">Định dạng dữ liệu \'\'{0}\'\' không được hỗ trợ</string>
 	<string name="poi_filter_car_aid">Sửa Xe</string>
 	<string name="poi_filter_closest_poi">POI gần nhất</string>
@@ -424,7 +424,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Khoảng cách đường đi</string>
 	<string name="transport">Giao thông</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Hiện các điểm dừng giao thông công cộng trên bản đồ</string>
 	<string name="show_transport_over_map">Hiện các điểm dừng giao thông</string>
 	<string name="hello">Ứng dụng tìm đường OsmAnd</string>
@@ -441,7 +441,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="search_history_building">Tòa nhà: {0}, {1}, {2}</string>
 	<string name="favorite">Ưa thích</string>
 	<string name="clear_all">Xóa hết</string>
-	<string name="history">Lịch sử</string>
+	<string name="shared_string_history">Lịch sử</string>
 	<string name="uploading_data">Đang tải dữ liệu lên…</string>
 	<string name="uploading">Đang tải lên…</string>
 	<string name="search_nothing_found">Không tìm thấy</string>
@@ -522,7 +522,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="additional_settings">Thiết lập thêm</string>
     <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
     <string name="settings_preset">Chế độ Ứng dụng</string>
-    <string name="settings">Thiết lập</string>
+    <string name="shared_string_settings">Thiết lập</string>
     <string name="save_current_track_descr">Lưu track hiện tại vào thẻ nhớ SD</string>
     <string name="save_current_track">Lưu track hiện tại</string>
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
@@ -607,11 +607,11 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="context_menu_item_open_bug">Mở OSM bug</string>
 <string name="context_menu_item_create_poi">Tạo POI</string>
 
-<string name="default_buttons_yes">OK</string>
-<string name="default_buttons_cancel">Hủy</string>
+<string name="shared_string_yes">OK</string>
+<string name="shared_string_cancel">Hủy</string>
 <string name="default_buttons_apply">Áp dụng</string>
 <string name="default_buttons_add">Thêm</string>
-<string name="default_buttons_no">Không</string>
+<string name="shared_string_no">Không</string>
 <string name="add_favorite_dialog_top_text">Nhập tên Ưa thích</string>
 <string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
 <string name="add_favorite_dialog_favourite_added_template">Điểm ưa thích \'\'{0}\'\' đã được thêm thành công.</string>

@@ -21,10 +21,10 @@
   
   <string name="show_ruler_level">पट्टी दाखवा</string>
   <string name="info_button">माहिती</string>
-  <string name="help">मदत</string>
+  <string name="shared_string_help">मदत</string>
   <string name="show_details">तपशील दाखवा</string>
-  <string name="accessibility_on">चालू</string>
-  <string name="accessibility_off">बंद</string>
+  <string name="shared_string_on">चालू</string>
+  <string name="shared_string_off">बंद</string>
   <string name="backToMenu">पुन्हा मेनूकडे</string>
   <string name="zoomOut">झूम कमी करा</string>
   <string name="zoomIn">झूम वाढवा</string>
@@ -136,8 +136,8 @@
   <string name="map_text_size">अक्षरांचा आकार</string>
   <string name="voice_not_use">वापरू नका</string>
   <string name="voice_not_specified">कुठलाच नाही</string>
-  <string name="next_button">पुढे</string>
-  <string name="previous_button">मागे</string>
+  <string name="shared_string_next">पुढे</string>
+  <string name="shared_string_previous">मागे</string>
   <string name="si_mi_foots">मैल/फूट</string>
   <string name="si_mi_yard">मैल/यार्ड</string>
   <string name="si_km_m">किमी/मी</string>
@@ -222,7 +222,7 @@
   <string name="transport_stop_to_go_out">उतरण्याचा थांबा निवडा</string>
   <string name="transport_route_distance">मार्गाचे अंतर</string>
   <string name="transport">परिवहन</string>
-  <string name="default_buttons_ok">ठिक आहे</string>
+  <string name="shared_string_ok">ठिक आहे</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
   <string name="show_transport_over_map">परिवहन थांबे दाखवा</string>
   <string name="search_history_city">शहर: {0}</string>
@@ -263,7 +263,7 @@
   <string name="use_online_routing">ऑनलाइन दिशादर्शन वापरा</string>
   <string name="data_settings">डेटा</string>
   <string name="additional_settings">आधिक सेटिंग्स</string>
-  <string name="settings">सेटिंग्स</string>
+  <string name="shared_string_settings">सेटिंग्स</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
   <string name="favourites_activity">आवडती ठिकाणे</string>
   <string name="add_to_favourite">आवडत्या ठिकणात नोंद करा</string>
@@ -308,9 +308,9 @@
   <string name="context_menu_item_add_favorite">आवडत्या ठिकणात नोंद करा</string>
   <string name="context_menu_item_update_map">नकाशा अपडेट करा</string>
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>
-  <string name="default_buttons_yes">हो</string>
-  <string name="default_buttons_cancel">रद्द करा</string>
-  <string name="default_buttons_no">नाही</string>
+  <string name="shared_string_yes">हो</string>
+  <string name="shared_string_cancel">रद्द करा</string>
+  <string name="shared_string_no">नाही</string>
   <string name="favourites_context_menu_edit">आवडते ठिकण बदला</string>
   <string name="favourites_context_menu_delete">आवडते ठिकाण काढून टाका</string>
   <string name="poi_edit_title">पिओआय बदला</string>

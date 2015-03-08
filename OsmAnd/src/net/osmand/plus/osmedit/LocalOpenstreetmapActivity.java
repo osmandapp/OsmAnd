@@ -126,7 +126,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 					listAdapter.notifyDataSetChanged();
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 			return true;
 		}
