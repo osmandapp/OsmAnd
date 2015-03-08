@@ -2095,4 +2095,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="showed_on_map">Auf Karte angezeigt</string>
 	<string name="share_note">Notiz mitteilen</string>
 	<string name="days_behind">Tage alt</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_selected">Ausgewählt</string>
+	<string name="shared_string_selected_lowercase">ausgewählt</string>
 	</resources>
