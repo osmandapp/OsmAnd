@@ -1872,7 +1872,7 @@
     <string name="points">Точки</string>
     <string name="parking_place">Место для парковки</string>
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
-    <string name="enable_plugin">Выключено</string>
+    <string name="shared_string_disabled">Выключено</string>
 	<string name="disable_plugin">Включено</string>
 <string name="osm_editing_manage">Управление</string>
     <string name="plugin_description_title">Описание</string>

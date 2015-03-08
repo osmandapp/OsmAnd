@@ -2103,7 +2103,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="shared_string_disable">غیرفعال کردن</string>
 	<string name="shared_string_enable">فعال کردن</string>
 	<string name="disable_plugin">فعال</string>
-	<string name="enable_plugin">غیرفعال</string>
+	<string name="shared_string_disabled">غیرفعال</string>
 	<string name="export">صادرکردن</string>
 	<string name="voices">اعلان‌های صوتی</string>
 	<string name="local_index_description">بر روی هر مورد کلیک کنید تا توضیحات بیشتری ببینید، بزنید و نگه دارید تا غیرفعال یا پاک کنید. داده فعلی بر روی دستگاه (%1$s آزاد):</string>

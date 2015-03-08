@@ -1832,7 +1832,7 @@
 	<string name="proxy_host_descr">Állítsd be a proxy szervered hosztnevét (pl. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy port</string>
 	<string name="proxy_port_descr">Állítsd be a proxy szervered portszámát (pl. 8118)</string>
-	<string name="enable_plugin">Letiltva</string>
+	<string name="shared_string_disabled">Letiltva</string>
 	<string name="disable_plugin">Engedélyezve</string>
 	<string name="plugin_description_title">Leírás</string>
 	<string name="plugin_settings_button_caption">Beállítások</string>

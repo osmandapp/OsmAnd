@@ -1906,7 +1906,7 @@
 	<string name="proxy_port_title">Proksi serverio portas</string>
 	<string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118)</string>
 	<string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms"</string>
-	<string name="enable_plugin">Išjungta</string>
+	<string name="shared_string_disabled">Išjungta</string>
 	<string name="disable_plugin">Įjungta</string>
 <string name="plugin_description_title">Aprašymas</string>
 	<string name="plugin_settings_button_caption">Nustatymai</string>

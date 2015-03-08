@@ -2051,7 +2051,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="proxy_port_descr">Налаштуйте номер порту вашого проксі-сервера (наприклад, 8118)</string>
 	<string name="voices">Голосові повідомлення</string>
 	<string name="export">Експорт</string>
-	<string name="enable_plugin">Вимкнено</string>
+	<string name="shared_string_disabled">Вимкнено</string>
 	<string name="disable_plugin">Увікненно</string>
 	<string name="shared_string_enable">Ввімкнути</string>
 	<string name="shared_string_disable">Вимкнути</string>

@@ -2047,7 +2047,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="proxy_host_descr">Einen Proxy\'s Hostname einrichten (Bsp. 127.0.0.1)</string>
     <string name="proxy_port_title">Proxy-Port</string>
     <string name="proxy_port_descr">Einen Proxy\'s Port einrichten (Bsp. 8118)</string>
-    <string name="enable_plugin">Deaktiviert</string>
+    <string name="shared_string_disabled">Deaktiviert</string>
     <string name="disable_plugin">Aktiviert</string>
     <string name="shared_string_enable">Aktivieren</string>
     <string name="shared_string_disable">Deaktivieren</string>

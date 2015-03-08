@@ -1245,7 +1245,7 @@
 	<string name="transport_stop_to_go_out">Velg stoppested for avstigning</string>
 	<string name="failed_op">feilet</string>
 	<string name="osm_settings_descr">Spesifiser innstillinger for Openstreetmap.org (OSM) som er nødvendige for bidrag til OSM</string>
-	<string name="enable_plugin">Deaktivert</string>
+	<string name="shared_string_disabled">Deaktivert</string>
 	<string name="disable_plugin">Aktivert</string>
 	<string name="shared_string_enable">Aktiver</string>
 	<string name="shared_string_disable">Deaktiver</string>

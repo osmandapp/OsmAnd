@@ -1884,7 +1884,7 @@
     <string name="gps_status">Estat del GPS</string>
     <string name="parking_place">Lloc d\'aparcament</string>
     <string name="remove_the_tag">Treure l\'etiqueta</string>
-    <string name="enable_plugin">Desactivat</string>
+    <string name="shared_string_disabled">Desactivat</string>
 	<string name="disable_plugin">Activat</string>
 <string name="plugin_description_title">Descripció</string>
 	<string name="plugin_settings_button_caption">Configuració</string>

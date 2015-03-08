@@ -2122,7 +2122,6 @@
     <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
-    <string name="enable_plugin">비활성화됨</string>
 	<string name="disable_plugin">활성화됨</string>
 <string name="plugin_description_title">설명</string>
 	<string name="plugin_settings_button_caption">설정</string>

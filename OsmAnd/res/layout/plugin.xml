@@ -70,7 +70,7 @@
 					android:paddingRight="9.5dp"
 					android:paddingTop="8dp"
 					android:textColor="?attr/switch_ex_text_color"
-					android:textOff="@string/enable_plugin"
+					android:textOff="@string/shared_string_disabled"
 					android:textOn="@string/disable_plugin"
 					android:textSize="12sp"
 					android:lines="1"

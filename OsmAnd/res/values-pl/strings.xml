@@ -1995,6 +1995,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="settings_privacy">Prywatność</string>
     <string name="my_location">Moja lokalizacja</string>
     <string name="osm_editing_manage">Zarządzaj</string>
-    <string name="enable_plugin">Włącz</string>
+    <string name="shared_string_disabled">Włącz</string>
 	<string name="disable_plugin">Wyłącz</string>
 </resources>
