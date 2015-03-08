@@ -723,7 +723,7 @@
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
 	<string name="next_button">Weiter</string>
-	<string name="previous_button">Zurück</string>
+	<string name="shared_string_previous">Zurück</string>
 	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>

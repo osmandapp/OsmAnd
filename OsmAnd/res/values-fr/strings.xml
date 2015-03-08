@@ -309,7 +309,7 @@
   <string name="tip_initial_t">"OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
 \n\nUne introduction générale, les astuces et l\'aide avancée sont disponibles via \'Menu\'→\'Aide\' sur l\'écran principal. "</string>
   <string name="next_button">Suivant</string>
-  <string name="previous_button">Précédent</string>
+  <string name="shared_string_previous">Précédent</string>
   <string name="unit_of_length_descr">Sélectionnez les unités de longueur et de vitesse</string>
   <string name="unit_of_length">Unités de mesure</string>
   <string name="si_mi_foots">Miles/pieds</string>

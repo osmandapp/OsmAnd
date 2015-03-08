@@ -355,7 +355,7 @@
 	<string name="download_question">{0} - {1} دانلود شود؟</string>
 	<string name="route_general_information">مسافت کل %1$s، مدت سفر %2$d ساعت و %3$d دقیقه.</string>
 	<string name="next_button">بعدی</string>
-	<string name="previous_button">قبلی</string>
+	<string name="shared_string_previous">قبلی</string>
 	<string name="unit_of_length_descr">تغییر واحد طول و سرعت</string>
 	<string name="unit_of_length">واحد اندازه گیری</string>
 	<string name="local_index_descr_title">مدیریت نقشه ها</string>

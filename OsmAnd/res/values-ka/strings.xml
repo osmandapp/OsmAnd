@@ -364,7 +364,7 @@
   <string name="tip_initial">მცირედი დახმარება</string>
   <string name="tip_initial_t">"\tOsmAnd არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება. "</string>
   <string name="next_button">შემდეგი</string>
-  <string name="previous_button">წინა</string>
+  <string name="shared_string_previous">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
   <string name="unit_of_length">გაზომვის ერთეული</string>
   <string name="si_mi_foots">მილი/ფუტი</string>

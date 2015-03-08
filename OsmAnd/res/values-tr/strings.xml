@@ -376,7 +376,7 @@
 	<string name="tip_search">Aranıyor</string>
 	<string name="tip_initial">İpuçları ve püf noktaları</string>
 	<string name="next_button">Sonraki</string>
-	<string name="previous_button">Önceki</string>
+	<string name="shared_string_previous">Önceki</string>
 	<string name="unit_of_length_descr">Uzunluk ve hız birimlerini değiştir</string>
 	<string name="si_km_m">Kilometre/metre</string>
 	<string name="amenity_type_education">Eğitim</string>

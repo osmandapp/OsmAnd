@@ -772,7 +772,6 @@
 	<string name="tip_map_context_menu">\'Brug placering\' menu</string>
 	<string name="tip_initial">Hjælp</string>
 	<string name="next_button">Næste</string>
-	<string name="previous_button">Forrige</string>
 	<string name="unit_of_length_descr">Ændre enheder for afstand og hastighed</string>
 	<string name="unit_of_length">Måleenhed</string>
 	<string name="si_mi_foots">Mil/fod</string>

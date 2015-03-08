@@ -730,7 +730,7 @@
   <string name="tip_initial">Aholku eta trikimailuak</string>
   <string name="tip_initial_t">⇥OsmAnd ezaugarri asko dituen nabigazio aplikazio bat da. ⏎\n⇥⇥⏎\n⇥Oinarrizko sarrera moduan, aholku eta trikimailu batzuen estekak dituzu pantaila nagusian (begiratu \'?\' ikonoa).⏎\n⇥</string>
   <string name="next_button">Ondorengoa</string>
-  <string name="previous_button">Aurrekoa</string>
+  <string name="shared_string_previous">Aurrekoa</string>
   <string name="unit_of_length_descr">Luzeera eta abiaduraren unitateak aldatu</string>
   <string name="unit_of_length">Neurtze unitatea</string>
   <string name="si_mi_foots">Milak/oinak</string>

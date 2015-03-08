@@ -571,7 +571,7 @@
 	<string name="tip_initial_t">"OsmAnd je navigacijska aplikacija s številnimi funkcijami.
 \n\nOsnovni uvod, nekaj uporabnih namigov in trikov je na voljo na povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
 	<string name="next_button">Naprej</string>
-	<string name="previous_button">Nazaj</string>
+	<string name="shared_string_previous">Nazaj</string>
 	<string name="tip_initial">Pomoč</string>
 	<string name="tip_search">Iskanje</string>
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>

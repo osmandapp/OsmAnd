@@ -507,7 +507,7 @@
   <string name="tip_initial_t">"OsmAnd yra daug funkcijų turinti navigacijos programa.
 \n\nInformacija pradiniam supažindinimui, patarimai ir detalesnė pagalba pasiekiami žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
   <string name="next_button">Kitas</string>
-  <string name="previous_button">Ankstesnis</string>
+  <string name="shared_string_previous">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
   <string name="unit_of_length">Matavimo vienetai</string>
   <string name="si_mi_foots">Mylios/pėdos</string>

@@ -416,7 +416,7 @@
   <string name="tip_initial_t">"OsmAnd - навигационное приложение с большим количеством функций.
 \n\nНекоторые базовые сведения, советы по использованию и дополнительную справку можно посмотреть вызвав меню \"Справка\" на экране карты. "</string>
   <string name="next_button">След.</string>
-  <string name="previous_button">Пред.</string>
+  <string name="shared_string_previous">Пред.</string>
   <string name="unit_of_length_descr">Единицы измерения длины и скорости</string>
   <string name="unit_of_length">Единицы измерения</string>
   <string name="si_mi_foots">Мили/футы</string>

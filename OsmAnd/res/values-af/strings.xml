@@ -432,7 +432,7 @@
   <string name="tip_initial_t">\tOsmAnd is \'n navigasietoepassing met baie funksies.\n\tAs \'n basiese inleiding, is sommige gebruikswenke en wyses beskikbaar in skakels vanaf die hoof kieslys skerm.
 	</string>
   <string name="next_button">Volgende</string>
-  <string name="previous_button">Vorige</string>
+  <string name="shared_string_previous">Vorige</string>
   <string name="unit_of_length_descr">Verander eenhede van lengte en spoed</string>
   <string name="unit_of_length">Meeteenheid</string>
   <string name="si_mi_foots">Myle / voete</string>

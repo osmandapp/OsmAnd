@@ -552,7 +552,7 @@
 <string name="tip_map_context_menu">Snabbmeny för karta</string>
 <string name="tip_initial">Hjälp</string>
 <string name="next_button">Nästa</string>
-<string name="previous_button">Föregående</string>
+<string name="shared_string_previous">Föregående</string>
 <string name="unit_of_length_descr">Ändra enheter för avstånd och hastighet</string>
 <string name="unit_of_length">Måttenhet</string>
 <string name="si_mi_foots">Eng. mil/fot</string>

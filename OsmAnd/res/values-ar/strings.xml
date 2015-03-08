@@ -1302,7 +1302,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 →
 	</string>
 	<string name="next_button">التالي</string>
-	<string name="previous_button">السابق</string>
+	<string name="shared_string_previous">السابق</string>
 	<string name="unit_of_length_descr">تغيير وحدات الطول والسرعة</string>
 	<string name="unit_of_length">وحدة القياس</string>
 	<string name="si_mi_foots">ميل/قدم</string>

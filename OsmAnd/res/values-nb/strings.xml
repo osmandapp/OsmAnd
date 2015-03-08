@@ -356,7 +356,7 @@
 	<string name="tip_initial_t">"OsmAnd er et navigeringsprogram med mange funksjoner.
 \n\nSom en grunnleggende innføring er noen brukertips og triks lenket til via \'Meny\' → \'Hjelp\' fra kartskjermen. "</string>
 	<string name="next_button">Neste</string>
-	<string name="previous_button">Forrige</string>
+	<string name="shared_string_previous">Forrige</string>
 	<string name="unit_of_length_descr">Endre lengde- og hastighetsenhet</string>
 	<string name="unit_of_length">Måleenhet</string>
 	<string name="si_km_m">Kilometer/meter</string>

@@ -609,7 +609,7 @@
 	<string name="tip_initial">Βοήθεια</string>
 	<string name="tip_initial_t">"Ο OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.\n\nΩς μια βασική εισαγωγή, μερικές συμβουλές χρήσης και κόλπα είναι συνδεδεμένα μέσω του \'Μενού\'→\'Βοήθεια\' στην οθόνη χάρτη. "</string>
 	<string name="next_button">Επόμενο</string>
-	<string name="previous_button">Προηγούμενο</string>
+	<string name="shared_string_previous">Προηγούμενο</string>
 	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους και ταχύτητας</string>
 	<string name="unit_of_length">Μονάδα μέτρησης</string>
 	<string name="si_mi_foots">Μίλια/πόδια</string>

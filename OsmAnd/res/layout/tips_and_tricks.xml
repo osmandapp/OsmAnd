@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="70dp"
-            android:text="@string/previous_button" />
+            android:text="@string/shared_string_previous" />
 
         <Button
             android:id="@+id/NextButton"

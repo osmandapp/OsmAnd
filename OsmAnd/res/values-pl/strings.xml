@@ -207,7 +207,7 @@
   <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
 \n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="next_button">Następny</string>
-  <string name="previous_button">Wstecz</string>
+  <string name="shared_string_previous">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki długości</string>
   <string name="si_mi_foots">Mile/stopy</string>

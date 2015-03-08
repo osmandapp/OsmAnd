@@ -113,7 +113,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		createMenuItem(menu, HOME, R.string.home, 
 				R.drawable.ic_action_home_dark, R.drawable.ic_action_home_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, BACK, R.string.previous_button,
+		createMenuItem(menu, BACK, R.string.shared_string_previous,
 				R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, FORWARD, R.string.next_button,

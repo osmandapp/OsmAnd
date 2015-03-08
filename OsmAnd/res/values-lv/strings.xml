@@ -365,7 +365,7 @@
 ……	……
 	</string>
   <string name="next_button">Tālāk</string>
-  <string name="previous_button">Atpakaļ</string>
+  <string name="shared_string_previous">Atpakaļ</string>
   <string name="unit_of_length_descr">Attāluma un braukšanas ātruma mērvienības</string>
   <string name="unit_of_length">Mērvienības</string>
   <string name="si_mi_foots">Jūdzes/pēdas</string>

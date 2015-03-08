@@ -240,7 +240,7 @@
 	<string name="tip_navigation">导航</string>
 	<string name="tip_initial">技巧和诀窍</string>
 	<string name="next_button">下</string>
-	<string name="previous_button">前</string>
+	<string name="shared_string_previous">前</string>
 	<string name="unit_of_length_descr">变更单位的长度和速度</string>
 	<string name="unit_of_length">度量单位</string>
 	<string name="si_mi_foots">万里/英尺</string>

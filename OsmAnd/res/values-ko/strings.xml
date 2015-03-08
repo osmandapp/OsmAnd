@@ -409,8 +409,6 @@
 	<string name="tip_initial">도움말</string>
 	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 내비게이션 앱입니다.\n기본적인 소개로서, 몇 가지 유용한 도움말을 지도화면에서  [메뉴-도움말]에서 찾을 수 있습니다. "</string>
 	<string name="next_button">다음</string>
-	<string name="previous_button">이전</string>
-
 	<string name="unit_of_length_descr">거리와 속도 단위를 변경합니다</string>
 	<string name="unit_of_length">측정 단위</string>
 	<string name="si_mi_foots">마일/피트</string>

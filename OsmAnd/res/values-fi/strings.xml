@@ -638,7 +638,7 @@
 	<string name="si_mi_foots">Mailia/jalkaa</string>
 	<string name="si_mi_yard">Mailia/jaardia</string>
 	<string name="si_km_m">Kilometrejä/metrejä</string>
-	<string name="previous_button">Edellinen</string>
+	<string name="shared_string_previous">Edellinen</string>
 	<string name="dist_control_start">Aloita</string>
     <string name="stop_routing_confirm">Oletko varma että haluat lopettaa navigoinnin?</string>
     <string name="clear_dest_confirm">Haluatko varmasti poistaa päätepisteen?</string>
