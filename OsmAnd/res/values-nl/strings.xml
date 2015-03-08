@@ -476,7 +476,6 @@
   <string name="download_files_question">Download {0} bestand(en) ({1} MB)?</string>
   <string name="items_were_selected">{0} item(s) geselecteerd</string>
   <string name="filter_existing_indexes">Toon gedownloade</string>
-  <string name="reload">Ververs</string>
   <string name="fast_route_mode">Snelste route</string>
   <string name="fast_route_mode_descr">Activeer voor de snelste route of deactiveer voor de kortste route </string>
   <string name="tiles_to_download_estimated_size">Op zoom {0} omvat de download {1} kaartsegmenten ({2} MB)</string>

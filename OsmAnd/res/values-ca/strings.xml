@@ -581,7 +581,7 @@
 <string name="update_poi_file_not_found">El fitxer local per mantenir el canvis en els PDI no s\'ha trobat i podria no haver-se creat.</string>
 <string name="map_widget_monitoring">Seguiment</string>
 <string name="use_fluorescent_overlays">Capes superposades fluorescents</string>
-<string name="reload">Refresca</string>
+<string name="shared_string_refresh">Refresca</string>
 <string name="download_files">Baixa</string>
 <string name="layer_gpx_layer">Traça GPX…</string>
 <string name="vector_data">Mapes de vectors fora de línia</string>

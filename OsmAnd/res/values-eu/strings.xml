@@ -811,7 +811,7 @@
   <string name="filter_existing_indexes">Deskargatuta</string>
   <string name="shared_strings_deselect_all">Hautapena garbitu</string>
   <string name="shared_string_select_all">Guztia hautatu</string>
-  <string name="reload">Birkargatu</string>
+  <string name="shared_string_refresh">Birkargatu</string>
   <string name="fast_route_mode">Biderik azkarrena</string>
   <string name="fast_route_mode_descr">Gaitu biderik azkarrenarentzat edo ezgaitu biderik motzenarentzat</string>
   <string name="tiles_to_download_estimated_size">{0} zoomean deskargatu {1} tesela ({2} MB)</string>

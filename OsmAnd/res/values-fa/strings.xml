@@ -1022,7 +1022,7 @@
 	<string name="layer_favorites">نقاط مورد علاقه</string>
 	<string name="layer_osm_bugs">اشکالات OSM (آنلاین)</string>
 	<string name="shared_strings_deselect_all">انتخاب هیچیک</string>
-	<string name="reload">بازسازی</string>
+	<string name="shared_string_refresh">بازسازی</string>
 	<string name="items_were_selected">{0} مورد انتخاب شد</string>
 	<string name="daynight_descr">انتخاب زمان تغییر حالت در حالت روز/شب</string>
 	<string name="install_selected_build">OsmAnd را نصب میکنید-{0} از {1} {2} مگابایت؟</string>

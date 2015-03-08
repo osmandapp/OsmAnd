@@ -284,7 +284,7 @@
 	<string name="daynight_mode_auto">日出/日落</string>
 	<string name="daynight_mode_sensor">光传感器</string>
 	<string name="daynight">日/夜模式</string>
-	<string name="reload">刷新</string>
+	<string name="shared_string_refresh">刷新</string>
 	<string name="website">网站</string>
 	<string name="phone">电话</string>
 	<string name="download_files">下载</string>

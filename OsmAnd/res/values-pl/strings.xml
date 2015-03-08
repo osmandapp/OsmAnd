@@ -293,7 +293,7 @@
   <string name="filter_existing_indexes">Pobrane</string>
   <string name="shared_strings_deselect_all">Odznacz wszystko</string>
   <string name="shared_string_select_all">Zaznacz wszystko</string>
-  <string name="reload">Odśwież</string>
+  <string name="shared_string_refresh">Odśwież</string>
   <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia dotyczące aplikacji</string>
   <string name="general_settings">Główne</string>
   <string name="index_settings_descr">Pobieraj i zarządzaj plikami map przechowywanymi na urządzeniu</string>

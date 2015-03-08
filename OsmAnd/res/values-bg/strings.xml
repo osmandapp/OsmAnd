@@ -1170,7 +1170,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="filter_existing_indexes">Свалени</string>
 	<string name="shared_strings_deselect_all">Нищо не е избрано</string>
 	<string name="shared_string_select_all">Избери всичко</string>
-	<string name="reload">Обнови</string>
+	<string name="shared_string_refresh">Обнови</string>
 	<string name="fast_route_mode">Най-бърз маршрут</string>
 	<string name="fast_route_mode_descr">Отметнете за изчисляване на най-бърз маршрут. Ако няма отметка се изчислява най-къс маршрут. </string>
 	<string name="tiles_to_download_estimated_size">При мащаб {0} свалете {1} плочки ({2} MB)</string>

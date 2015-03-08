@@ -662,7 +662,7 @@
 	<string name="filter_existing_indexes">Visa nerladdat</string>
 	<string name="shared_strings_deselect_all">Avmarkera alla</string>
 	<string name="shared_string_select_all">Markera alla</string>
-	<string name="reload">Uppdatera</string>
+	<string name="shared_string_refresh">Uppdatera</string>
 	<string name="fast_route_mode">Snabbaste vägen</string>
 	<string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen </string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>

@@ -451,7 +451,7 @@
   <string name="filter_existing_indexes">Filtrs lejupielādēts</string>
   <string name="shared_strings_deselect_all">Noņemt visu</string>
   <string name="shared_string_select_all">Atlasīt visu</string>
-  <string name="reload">Atsvaidzināt</string>
+  <string name="shared_string_refresh">Atsvaidzināt</string>
   <string name="fast_route_mode">Ātrākais maršruts</string>
   <string name="fast_route_mode_descr">Iespējot, lai rēķinātu ātrāko maršrutu vai atspējot, lai rēķinātu īsāko maršrutu </string>
   <string name="tiles_to_download_estimated_size">Palielinājumam {0} lejupielādēt {1} attēlus ({2} MB)</string>

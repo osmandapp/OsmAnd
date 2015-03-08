@@ -518,7 +518,7 @@
   <string name="filter_existing_indexes">Filter afgelaai</string>
   <string name="shared_strings_deselect_all">Kanseleer alle keuses</string>
   <string name="shared_string_select_all">Kies alles</string>
-  <string name="reload">Verfris</string>
+  <string name="shared_string_refresh">Verfris</string>
   <string name="fast_route_mode">Vinnigste roete</string>
   <string name="fast_route_mode_descr">"Skakel aan om vinnigste roete te bereken of skakel af vir kortste roete " </string>
   <string name="tiles_to_download_estimated_size">Teen vergroting {0} laai {1} teëls af ({2} MB)</string>

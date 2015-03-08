@@ -593,7 +593,7 @@
   <string name="filter_existing_indexes">Filtruoti parsiųstus</string>
   <string name="shared_strings_deselect_all">Nepasirinkti nieko</string>
   <string name="shared_string_select_all">Pasirinkti viską</string>
-  <string name="reload">Atnaujinti</string>
+  <string name="shared_string_refresh">Atnaujinti</string>
   <string name="fast_route_mode">Greičiausias maršrutas</string>
   <string name="fast_route_mode_descr">Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas. Priešingu atveju bus skaičiuojamas trumpiausias maršrutas </string>
   <string name="tiles_to_download_estimated_size">Esant {0} dydžiui parsiųsti {1} žemėlapio lakštus ({2} MB)</string>

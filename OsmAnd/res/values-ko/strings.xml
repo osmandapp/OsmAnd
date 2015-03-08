@@ -489,8 +489,6 @@
 	<string name="download_files_question">{0} 개의 파일 ({1} MB) 를 다운로드?</string>
 	<string name="items_were_selected">{0} 아이템목이 선택되었습니다</string>
 	<string name="filter_existing_indexes">다운로드된 것들로 필터링</string>
-	<string name="reload">새로고침</string>
-	
 	<string name="fast_route_mode">가장 빠른 경로</string>
 	<string name="fast_route_mode_descr">"가장 빠른 경로를 활성화하거나 or 가장 짧은 경로를 비활성화합니다 "</string>
 	<string name="tiles_to_download_estimated_size">줌에서 {0} 다운로드 {1} 타일 ({2} MB)</string>

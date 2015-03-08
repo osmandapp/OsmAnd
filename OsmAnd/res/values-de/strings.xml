@@ -809,7 +809,7 @@
 	<string name="filter_existing_indexes">Filter gespeicherte</string>
 	<string name="shared_strings_deselect_all">Keine markieren</string>
 	<string name="shared_string_select_all">Alle markieren</string>
-	<string name="reload">Aktualisieren</string>
+	<string name="shared_string_refresh">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>

@@ -451,7 +451,7 @@
   <string name="filter_existing_indexes">Letöltöttek</string>
   <string name="shared_strings_deselect_all">Kijelölés megszüntetése</string>
   <string name="shared_string_select_all">Mindet kijelöl</string>
-  <string name="reload">Újratölt</string>
+  <string name="shared_string_refresh">Újratölt</string>
   <string name="fast_route_mode">Leggyorsabb útvonal</string>
   <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása a legrövidebb útért </string>
   <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>

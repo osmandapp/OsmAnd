@@ -455,7 +455,7 @@
   <string name="filter_existing_indexes">Zobrazit jen aktualizace</string>
   <string name="shared_strings_deselect_all">Odznačit vše</string>
   <string name="shared_string_select_all">Vybrat vše</string>
-  <string name="reload">Načíst znovu</string>
+  <string name="shared_string_refresh">Načíst znovu</string>
   <string name="fast_route_mode">Nejrychlejší trasa</string>
   <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší </string>
   <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>

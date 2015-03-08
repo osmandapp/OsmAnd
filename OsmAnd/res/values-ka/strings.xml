@@ -450,7 +450,7 @@
   <string name="filter_existing_indexes">ფილტრები გადმოწერილია</string>
   <string name="shared_strings_deselect_all">მონიშვნის მოხსნა</string>
   <string name="shared_string_select_all">ყველაფრის არჩევა</string>
-  <string name="reload">განახლება</string>
+  <string name="shared_string_refresh">განახლება</string>
   <string name="fast_route_mode">უსწრაფესი გზა</string>
   <string name="fast_route_mode_descr">"ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ უმოკლესისათვის "</string>
   <string name="tiles_to_download_estimated_size">გადიდებისას {0} გადმოსაწერია {1} ნაწილი ({2} MB)</string>

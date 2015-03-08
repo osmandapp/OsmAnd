@@ -566,7 +566,6 @@
   <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
   <string name="items_were_selected">Bolo vybraných {0} položiek</string>
   <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
-  <string name="reload">Znovu načítať</string>
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>

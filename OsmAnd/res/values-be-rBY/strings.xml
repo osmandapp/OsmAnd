@@ -1442,7 +1442,7 @@
 	<string name="filter_existing_indexes">Zladavanaje</string>
 	<string name="shared_strings_deselect_all">Prybrać vylučeńnie ŭsіch</string>
 	<string name="shared_string_select_all">Vylučyć usie</string>
-	<string name="reload">Abnavіć</string>
+	<string name="shared_string_refresh">Abnavіć</string>
 	<string name="fast_route_mode">Najchutčejšy šliach</string>
 	<string name="fast_route_mode_descr">"Paznačyć kab raźlіčvać najchutčejšy šliach, cі źniać paznaku dlia najkaraciejšaha šliachu "</string>
 	<string name="tiles_to_download_estimated_size">Na maštabie {0} zahruzіć {1} frahmientaŭ ({2} MB)</string>

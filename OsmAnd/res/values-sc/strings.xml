@@ -1388,7 +1388,7 @@
 	<string name="voice_is_not_available_msg">Boghe de ghia non disponìbile. Intra in \'Impostaduras\' → \'Impostaduras generales\' → \'Ghia vocale\', issèbera su pachete prefèrridu e/o iscàrrigalu.</string>
 	<string name="daynight_descr">Issèbera sas règulas pro sa muda de sa modalidade die/note</string>
 	<string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
-	<string name="reload">Torra a carrigare</string>
+	<string name="shared_string_refresh">Torra a carrigare</string>
 	<string name="fast_route_mode_descr">"Abìlita pro calculare s’àndala prus lestra o disabìlita pro s’àndala prus curtza "</string>
 	<string name="select_max_zoom_preload_area">Ischerta su zoom màssimu da precarrigare</string>
 	<string name="continuous_rendering">Disinnu sighidu</string>

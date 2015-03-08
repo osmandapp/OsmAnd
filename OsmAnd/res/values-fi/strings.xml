@@ -232,7 +232,7 @@
 	<string name="filter_existing_indexes">Suodata ladatut</string>
 	<string name="shared_strings_deselect_all">Poista valinta kaikista</string>
 	<string name="shared_string_select_all">Valitse kaikki</string>
-	<string name="reload">Päivitä</string>
+	<string name="shared_string_refresh">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>
 	<string name="context_menu_item_download_map">Lataa kartta</string>
 	<string name="download_files">Lataa</string>

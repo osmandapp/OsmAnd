@@ -387,7 +387,7 @@
   <string name="filter_existing_indexes">Filtrar descargados</string>
   <string name="shared_strings_deselect_all">Anular selección</string>
   <string name="shared_string_select_all">Seleccionar todo</string>
-  <string name="reload">Recargar</string>
+  <string name="shared_string_refresh">Recargar</string>
   <string name="fast_route_mode">Ruta más rápida</string>
   <string name="fast_route_mode_descr">Marca para calcular la ruta más rápida o desmarca para la más corta </string>
   <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>

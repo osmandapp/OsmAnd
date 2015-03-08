@@ -381,7 +381,6 @@
   <string name="download_files_question">Scarico {0} file(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} oggetto(i) selezionati</string>
   <string name="filter_existing_indexes">Filtro download</string>
-  <string name="reload">Ricarica</string>
   <string name="fast_route_mode">Percorso più veloce</string>
   <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
   <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>

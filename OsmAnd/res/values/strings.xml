@@ -1795,7 +1795,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
 	<string name="filter_existing_indexes">Downloaded</string>
-	<string name="reload">Refresh</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>

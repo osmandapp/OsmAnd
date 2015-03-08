@@ -847,7 +847,6 @@
 	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
-	<string name="reload">Genindlæs</string>
 	<string name="fast_route_mode">Hurtigste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} delkort ({2} MB)</string>

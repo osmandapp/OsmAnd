@@ -1072,7 +1072,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="download_files_question">Сьцягнуць {0} файл(ы) ({1} МБ)?</string>
 	<string name="items_were_selected">{0} абрана</string>
 	<string name="filter_existing_indexes">Сьцягнутае</string>
-	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
 	<string name="tiles_to_download_estimated_size">На маштабе {0} сьцягнуць {1} фрагмэнтаў ({2} МБ)</string>

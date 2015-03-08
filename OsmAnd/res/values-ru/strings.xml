@@ -495,7 +495,6 @@
   <string name="items_were_selected">Было выбрано {0}</string>
   <string name="filter_existing_indexes">Загруженные</string>
   <string name="shared_strings_deselect_all">Снять выбор</string>
-  <string name="reload">Перезагрузить</string>
   <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>
   <string name="index_settings">Управление файлами карт</string>

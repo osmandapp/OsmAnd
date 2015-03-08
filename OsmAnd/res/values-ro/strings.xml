@@ -735,7 +735,7 @@
 	<string name="filter_existing_indexes">Filtru descărcat</string>
 	<string name="shared_strings_deselect_all">Deselectează tot</string>
 	<string name="shared_string_select_all">Selectează tot</string>
-	<string name="reload">Reîmprospătează</string>
+	<string name="shared_string_refresh">Reîmprospătează</string>
 	<string name="fast_route_mode">Cea mai rapidă rută</string>
 	<string name="fast_route_mode_descr">Activați pentru a calcula ruta cea mai rapidă sau dezactivați pentru ruta cea mai scurtă </string>
 	<string name="tiles_to_download_estimated_size">La nivelul de zoom {0} se descarcă {1} porțiuni ({2} MB)</string>
