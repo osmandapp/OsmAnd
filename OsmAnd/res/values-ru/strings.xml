@@ -1916,4 +1916,8 @@
 	<string name="shared_string_rename">Переименовать</string>
 	<string name="shared_string_delete">Удалить</string>
 	<string name="shared_string_delete_all">Удалить все</string>
+	<string name="shared_string_add">Добавить</string>
+	<string name="shared_string_apply">Применить</string>
+	<string name="shared_string_control_start">Старт</string>
+	<string name="shared_string_control_stop">Cтоп</string>
 	</resources>
