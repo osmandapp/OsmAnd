@@ -691,7 +691,6 @@
   <string name="arrived_at_destination">Je bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
-  <string name="close">Sluiten</string>
   <string name="loading_data">Gegevens worden geladen…</string>
   <string name="reading_indexes">Indexen worden geladen…</string>
   <string name="previous_run_crashed">OsmAnd is de vorige keer gecrashed. Logbestand staat op {0}. Gelieve het probleem te rapporteren en het logbestand mee te sturen.</string>

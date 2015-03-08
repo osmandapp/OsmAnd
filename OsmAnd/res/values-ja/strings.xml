@@ -477,7 +477,7 @@ POIの更新は利用できません</string>
      <string name="arrived_at_destination">目的地に到着しました</string>
      <string name="invalid_locations">位置が不適切です！</string>
      <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
-     <string name="close">閉じる</string>
+     <string name="shared_string_close">閉じる</string>
      <string name="loading_data">データをロード中…</string>
      <string name="reading_indexes">索引を読み込み中…</string>
      <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。

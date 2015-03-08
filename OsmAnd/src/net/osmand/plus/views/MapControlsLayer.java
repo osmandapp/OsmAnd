@@ -303,7 +303,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideTransparencyBar(settingsToTransparency);
 			}
 		});
-		imageButton.setContentDescription(view.getContext().getString(R.string.close));
+		imageButton.setContentDescription(view.getContext().getString(R.string.shared_string_close));
 		imageButton.setBackgroundResource(R.drawable.headliner_close);
 		transparencyBarLayout.addView(imageButton, prms);
 	}

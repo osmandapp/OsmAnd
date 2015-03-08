@@ -1541,7 +1541,7 @@
 	<string name="arrived_at_destination">Chegou ao seu destino</string>
 	<string name="invalid_locations">As coordenadas non son correctas!</string>
 	<string name="go_back_to_osmand">Retornar ao mapa de OsmAnd</string>
-	<string name="close">Fechar</string>
+	<string name="shared_string_close">Fechar</string>
 	<string name="loading_data">A cargar os datos…</string>
 	<string name="reading_indexes">A ler os datos locais…</string>
 	<string name="previous_run_crashed">O OsmAnd fallou catastroficamente na última execución. O ficheiro de rexistro está en {0}. Informe, se pode, deste problema e achegue o ficheiro de rexistro.</string>

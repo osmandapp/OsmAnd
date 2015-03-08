@@ -663,7 +663,7 @@
   <string name="arrived_at_destination">Jūs esat ieradies galapunktā</string>
   <string name="invalid_locations">Koordinātas nav derīgas!</string>
   <string name="go_back_to_osmand">Atpakaļ uz OsmAnd kartes</string>
-  <string name="close">Aizvērt</string>
+  <string name="shared_string_close">Aizvērt</string>
   <string name="loading_data">Ielādē datus…</string>
   <string name="reading_indexes">Nolasa vietējos datus…</string>
   <string name="previous_run_crashed">Pēdējā OsmAnd palaišana beidzās ar avāriju. Žurnāla fails atrodas {0}. Lūdzu nosūtiet ziņojumu par kļūdu un klāt pievienojiet žurnāla failu.</string>

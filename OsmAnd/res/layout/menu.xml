@@ -76,7 +76,7 @@
                     android:layout_marginRight="2dp"
                     android:layout_marginTop="7dp"
                     android:clickable="true"
-                    android:contentDescription="@string/close"
+                    android:contentDescription="@string/shared_string_close"
                     android:focusable="true"
                     android:src="@drawable/headliner_close" />
             </LinearLayout>

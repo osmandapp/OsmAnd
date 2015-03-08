@@ -514,7 +514,7 @@
   <string name="arrived_at_destination">Dotarłeś do celu</string>
   <string name="invalid_locations">Pozycje są niepoprawne!</string>
   <string name="go_back_to_osmand">Wróć do mapy OsmAnd</string>
-  <string name="close">Zamknij</string>
+  <string name="shared_string_close">Zamknij</string>
   <string name="loading_data">Wczytywanie danych…</string>
   <string name="reading_indexes">Wczytywanie danych lokalnych…</string>
   <string name="previous_run_crashed">Program poprzednio uległ awarii. Log z informacjami jest w {0}. Wyślij zgłoszenie i załącz ten plik.</string>

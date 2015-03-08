@@ -659,7 +659,7 @@
   <string name="arrived_at_destination">თქვენ მიხვედით თქვენს დანიშნულების ადგილას</string>
   <string name="invalid_locations">კოორდინატები არასწორია!</string>
   <string name="go_back_to_osmand">OsmAnd-ის რუკაზე დაბრუნება</string>
-  <string name="close">დახურვა</string>
+  <string name="shared_string_close">დახურვა</string>
   <string name="loading_data">მონაცემების კითხვა…</string>
   <string name="reading_indexes">ლოკალური მონაცემების კითხვა…</string>
   <string name="previous_run_crashed">ბოლოს გაშვებული OsmAnd მოკვდა. ჟურნალის ფაილია {0}. გთხოვთ მოგვწეროთ ჟურნალის ფაილი და როგორ მოხდა ეს.</string>

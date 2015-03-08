@@ -465,7 +465,7 @@
 <string name="search_address">Cerca adreça</string>
 <string name="shared_string_settings">Configuració</string>
 <string name="data_settings">Dades</string>
-<string name="close">Tanca</string>
+<string name="shared_string_close">Tanca</string>
 <string name="update_existing">Reemplaça</string>
 <string name="follow">Inicia la navegació</string>
 <string name="address">Adreça</string>

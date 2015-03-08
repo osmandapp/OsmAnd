@@ -663,7 +663,7 @@
   <string name="arrived_at_destination">Megérkeztél a célponthoz</string>
   <string name="invalid_locations">Érvénytelen koordináták!</string>
   <string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
-  <string name="close">Bezár</string>
+  <string name="shared_string_close">Bezár</string>
   <string name="loading_data">Adatok betöltése…</string>
   <string name="reading_indexes">Helyi adatok olvasása…</string>
   <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatolja hozzá a naplófájlt.</string>

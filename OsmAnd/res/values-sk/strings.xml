@@ -789,7 +789,6 @@
   <string name="arrived_at_destination">Dorazili ste do cieľa</string>
   <string name="invalid_locations">Súradnice sú neplatné!</string>
   <string name="go_back_to_osmand">Ísť späť na OsmAnd mapu</string>
-  <string name="close">Zavrieť</string>
   <string name="loading_data">Načítavajú sa údaje…</string>
   <string name="reading_indexes">Načítavajú sa miestne údaje…</string>
   <string name="previous_run_crashed">Predošlé spustenie aplikácie malo kritickú chybu. Záznamový súbor je v {0}. Prosím, nahláste problém a priložte záznamový súbor.</string>

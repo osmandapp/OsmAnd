@@ -610,7 +610,7 @@
   <string name="arrived_at_destination">Vous êtes arrivés à destination</string>
   <string name="invalid_locations">Coordonnées invalides !</string>
   <string name="go_back_to_osmand">Retourner à la carte OsmAnd</string>
-  <string name="close">Fermer</string>
+  <string name="shared_string_close">Fermer</string>
   <string name="loading_data">Chargement des données…</string>
   <string name="reading_indexes">Lecture des index…</string>
   <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>

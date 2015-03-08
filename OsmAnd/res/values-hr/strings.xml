@@ -371,7 +371,7 @@
 	<string name="data_settings_descr">Odredite jezik, preuzmite ili ponovno učitajte podatke</string>
 	<string name="loading_data">Učitavanje podataka…</string>
 	<string name="go_back_to_osmand">Vrati se na OsmAnd kartu</string>
-	<string name="close">Zatvori</string>
+	<string name="shared_string_close">Zatvori</string>
 	<string name="invalid_locations">Koordinate su nevažeće!</string>
 	<string name="previous_run_crashed">Prilikom prošlog pokretanja OsmAnd se srušio. Datoteka dnevnika se nalazi na {0}. Molimo prijavite problem i priložite datoteku dnevnika.</string>
 	<string name="error_calculating_route_occured">Došlo je do pogreške pri izračunavanju rute</string>

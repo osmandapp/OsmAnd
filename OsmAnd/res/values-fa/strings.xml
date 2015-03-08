@@ -322,7 +322,7 @@
 	<string name="arrived_at_destination">به مقصد خود رسیدید</string>
 	<string name="invalid_locations">مختصات معتبر نیست!</string>
 	<string name="go_back_to_osmand">به نقشه OsmAnd برگرد</string>
-	<string name="close">بستن</string>
+	<string name="shared_string_close">بستن</string>
 	<string name="loading_data">درحال بارگیری اطلاعات…</string>
 	<string name="reading_indexes">درحال خواندن اطلاعات…</string>
 	<string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش در {0} است. لطفاً مورد را گزارش کرده و این فایل را به پیوست ارسال کنید.</string>

@@ -869,7 +869,7 @@
 	<string name="loading_cities">Laddar städer …</string>
 	<string name="poi">Intressepunkter</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
-	<string name="close">Stäng</string>
+	<string name="shared_string_close">Stäng</string>
 	<string name="loading_data">Laddar data …</string>
 	<string name="reading_indexes">Läser lokala data …</string>
 	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Play Butik?</string>

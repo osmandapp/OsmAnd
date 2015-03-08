@@ -843,7 +843,7 @@
 	<string name="arrived_at_destination">您已經抵達目的地</string>
 	<string name="invalid_locations">座標無效！</string>
 	<string name="go_back_to_osmand">返回 OsmAnd 地圖</string>
-	<string name="close">關閉</string>
+	<string name="shared_string_close">關閉</string>
 	<string name="loading_data">正在載入資料…</string>
 	<string name="reading_indexes">讀取裝置端資料中…</string>
 	<string name="previous_run_crashed">上次執行 OsmAnd 失敗！記錄檔為{0}。請回報這問題且附上該記錄檔。</string>

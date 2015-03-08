@@ -249,7 +249,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		scroll.addView(listView);
 		builder.setView(scroll);
-		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.close), new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

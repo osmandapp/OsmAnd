@@ -599,7 +599,6 @@
   <string name="arrived_at_destination">Siete arrivati alla vostra destinazione</string>
   <string name="invalid_locations">Le coordinate non sono valide!</string>
   <string name="go_back_to_osmand">Ritornare alla mappa OsmAnd</string>
-  <string name="close">Chiudi</string>
   <string name="loading_data">Caricamento dati…</string>
   <string name="reading_indexes">Lettura dei dati locali…</string>
   <string name="previous_run_crashed">Il precedente avvio dell\'applicazione si è interrotto. Il file del registro è disponibile in {0}. Invia una segnalazione allegando il file del registro.</string>

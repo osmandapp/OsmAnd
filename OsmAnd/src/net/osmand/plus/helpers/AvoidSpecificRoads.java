@@ -117,7 +117,7 @@ public class AvoidSpecificRoads {
 				selectFromMap(mapActivity);
 			}
 		});
-		bld.setNegativeButton(R.string.close, null);
+		bld.setNegativeButton(R.string.shared_string_close, null);
 		bld.show();
 	}
 	

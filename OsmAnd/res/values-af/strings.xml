@@ -727,7 +727,7 @@
   <string name="arrived_at_destination">Jy het jou bestemming bereik</string>
   <string name="invalid_locations">Die koördinate is ongeldig!</string>
   <string name="go_back_to_osmand">Gaan terug na die OsmAnd kaart</string>
-  <string name="close">Sluit</string>
+  <string name="shared_string_close">Sluit</string>
   <string name="loading_data">Besig om inligting te laai…</string>
   <string name="reading_indexes">Besig om plaaslike inligting te lees…</string>
   <string name="previous_run_crashed">Die vorige gebruik van OsmAnd het gefaal. Die Log lêer is by {0}. Raporteer asseblief die probleem en heg die log lêer daarby aan.</string>

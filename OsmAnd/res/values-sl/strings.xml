@@ -457,7 +457,7 @@
 	<string name="osmand_extra_settings_description">Prikaz nastavitev za napredne nastavitve izrisa (količina podrobnosti na zemljevidu) in nekatere posebnosti naprav.</string>
 	<string name="osmand_accessibility_description">Prikaz nastavitve za posebne funkcije dostopnosti.</string>
 	<string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v načinu spanja (ugasnjen ekran in občasna uporaba GPS-a).</string>
-	<string name="close">Zapri</string>
+	<string name="shared_string_close">Zapri</string>
 	<string name="opening_hours">Delovni čas</string>
 	<string name="send_location_way_choose_title">Za deljenje mesta uporabi</string>
 	<string name="context_menu_item_share_location">Deli mesto</string>

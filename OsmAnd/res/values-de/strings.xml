@@ -1019,7 +1019,7 @@
 	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
 	<string name="invalid_locations">Koordinaten sind ungültig!</string>
 	<string name="go_back_to_osmand">Zurück zu OsmAnd</string>
-	<string name="close">Schließen</string>
+	<string name="shared_string_close">Schließen</string>
 	<string name="loading_data">Daten werden geladen…</string>
 	<string name="reading_indexes">Lese lokale Daten…</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>

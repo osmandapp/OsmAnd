@@ -1647,7 +1647,7 @@
 	<string name="arrived_at_destination">Vy prybylі ŭ punkt pryznačeńnia</string>
 	<string name="invalid_locations">Kaardynaty niesapraŭdnyja!</string>
 	<string name="go_back_to_osmand">Viarnucca da mapy OsmAnd</string>
-	<string name="close">Začynіć</string>
+	<string name="shared_string_close">Začynіć</string>
 	<string name="loading_data">Dadzienyja zahružajucca…</string>
 	<string name="reading_indexes">Čytańnie liakaĺnych źviestak…</string>
 	<string name="previous_run_crashed">Papiarednі start OsmAnd skončyŭsia avaryjna. Chronіka zapіsanaja ŭ fajl {0}. Kalі laska, paviedamіcie pra prabliemu j pryčapіcie fajl chronіkі.</string>

@@ -20,7 +20,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="7dp" 
 				android:focusable="true" android:clickable="true" android:src="@drawable/help_icon"/>
 				<ImageView android:src="@drawable/headliner_close" android:layout_marginRight="4dp" android:id="@+id/CloseButton"
-				android:contentDescription="@string/close"
+				android:contentDescription="@string/shared_string_close"
 				android:layout_marginTop="9dp" android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="0dp"/>
 			</LinearLayout>

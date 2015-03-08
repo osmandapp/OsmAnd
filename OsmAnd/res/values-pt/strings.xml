@@ -279,7 +279,7 @@
   <string name="arrived_at_destination">Você alcançou o seu destino</string>
   <string name="invalid_locations">Locais inválidos!</string>
   <string name="go_back_to_osmand">Voltar ao mapa do OsmAnd</string>
-  <string name="close">Fechar</string>
+  <string name="shared_string_close">Fechar</string>
   <string name="loading_data">Carregando dados…</string>
   <string name="reading_indexes">Lendo dados locais…</string>
   <string name="previous_run_crashed">Uma execução anterior da aplicação foi interrompida inesperadamente. O arquivo de log encontra-se em {0}. Por favor, informe o problema e inclua o arquivo de log.</string>

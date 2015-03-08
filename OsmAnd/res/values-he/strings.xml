@@ -916,7 +916,7 @@
 	<string name="arrived_at_destination">הגעת ליעדך</string>
 	<string name="invalid_locations">הקואורדינטות שגויות!</string>
 	<string name="go_back_to_osmand">חזרה למפה של OsmAnd</string>
-	<string name="close">סגירה</string>
+	<string name="shared_string_close">סגירה</string>
 	<string name="loading_data">הנתונים נטענים…</string>
 	<string name="reading_indexes">המידע המקומי נקרא…</string>
 	<string name="previous_run_crashed">ההפעלה האחרונה של OsmAnd קרסה. קובץ היומן נמצא תחת {0}. נא לדווח על התקלה ולצרף את קובץ היומן.</string>

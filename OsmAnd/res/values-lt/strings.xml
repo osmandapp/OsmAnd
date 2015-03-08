@@ -802,7 +802,7 @@
   <string name="arrived_at_destination">Jūs pasiekėte savo kelionės tikslą</string>
   <string name="invalid_locations">Koordinatės yra neteisingos!</string>
   <string name="go_back_to_osmand">Grįžti į OsmAnd žemėlapį</string>
-  <string name="close">Uždaryti</string>
+  <string name="shared_string_close">Uždaryti</string>
   <string name="loading_data">Įkeliami duomenys…</string>
   <string name="reading_indexes">Skaitomi vietiniai duomenys…</string>
   <string name="previous_run_crashed">Praėjusį kartą OsmAnd programa nulūžo. Žurnalas yra {0}. Praneškite apie įvykusią problemą ir atsiųskite žurnalą.</string>

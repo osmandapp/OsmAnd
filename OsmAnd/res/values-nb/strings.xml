@@ -1052,7 +1052,7 @@
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="downloading_file_new">Laster ned…</string>
 	<string name="loading_postcodes">Laster postnummer…</string>
-	<string name="close">Lukk</string>
+	<string name="shared_string_close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
 	<string name="advanced_settings">Avansert</string>
 	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.

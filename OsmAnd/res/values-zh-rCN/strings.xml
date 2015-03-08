@@ -344,7 +344,7 @@
 	<string name="arrived_at_destination">您已到达目的地</string>
 	<string name="invalid_locations">坐标是无效的！</string>
 	<string name="go_back_to_osmand">回到OsmAnd地图</string>
-	<string name="close">关闭</string>
+	<string name="shared_string_close">关闭</string>
 	<string name="saving_gpx_tracks">将GPX轨迹保存到SD卡…</string>
 	<string name="finished_task">成品</string>
 	<string name="download_indexes_descr">从互联网下载或更新数据供离线使用</string>

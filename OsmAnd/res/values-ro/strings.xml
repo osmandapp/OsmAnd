@@ -943,7 +943,7 @@
 	<string name="arrived_at_destination">Ați ajuns la destinație</string>
 	<string name="invalid_locations">Coordonatele nu sunt valide!</string>
 	<string name="go_back_to_osmand">Înapoi la harta OsmAnd</string>
-	<string name="close">Închide</string>
+	<string name="shared_string_close">Închide</string>
 	<string name="loading_data">Se încarcă date…</string>
 	<string name="reading_indexes">Se citesc date locale…</string>
 	<string name="previous_run_crashed">Ultima rulare OsmAnd s-a terminat anormal. Fișierul log este în {0}. Vă rog să raportați acest lucru și să atașați fișierul log.</string>

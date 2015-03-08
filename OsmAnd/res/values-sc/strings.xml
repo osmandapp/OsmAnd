@@ -1512,7 +1512,7 @@
 	<string name="arrived_at_destination">Seis arribaos a sa destinatzione bostra</string>
 	<string name="invalid_locations">Sas coordinatas non sunt bàlidas!</string>
 	<string name="go_back_to_osmand">Torra a sa mapa OsmAnd</string>
-	<string name="close">Serra</string>
+	<string name="shared_string_close">Serra</string>
 	<string name="loading_data">Carrigamentu datos…</string>
 	<string name="reading_indexes">Leghidura de sos datos locales…</string>
 	<string name="previous_run_crashed">S’aviu antepostu de s’aplicu s’est interrùmpidu. Su documentu de su registru est disponìbile in {0}. Imbia una sinnalatzione alliongiande du documentu de su registru.</string>

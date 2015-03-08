@@ -600,7 +600,7 @@
   <string name="arrived_at_destination">Ha llegado a su destino</string>
   <string name="invalid_locations">¡Las coordenadas son inválidas!</string>
   <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
-  <string name="close">Cerrar</string>
+  <string name="shared_string_close">Cerrar</string>
   <string name="loading_data">Cargando datos…</string>
   <string name="reading_indexes">Leyendo datos locales…</string>
   <string name="previous_run_crashed">La vez anterior la aplicación falló. El archivo de registro está en {0}. Por favor, envíenos el informe adjuntando el archivo.</string>

@@ -1375,7 +1375,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="arrived_at_destination">Пристигнахте в крайната цел</string>
 	<string name="invalid_locations">Невалидни координати!</string>
 	<string name="go_back_to_osmand">Върни се на картата OsmAnd</string>
-	<string name="close">Затвори</string>
+	<string name="shared_string_close">Затвори</string>
 	<string name="loading_data">Зареждане на данни…</string>
 	<string name="reading_indexes">Четене на локални данни…</string>
 	<string name="previous_run_crashed">Последният път OsmAnd се срина. Записан е лог-файл в {0}. Моля, докладвайте за срива и приложете лог-файла.</string>
