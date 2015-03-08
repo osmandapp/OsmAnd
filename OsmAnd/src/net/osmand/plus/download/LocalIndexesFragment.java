@@ -202,7 +202,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
 		}
 		adapter.item(R.string.shared_string_rename).listen(listener).position(3).reg();
-		adapter.item(R.string.local_index_mi_delete).listen(listener).position(4).reg();
+		adapter.item(R.string.shared_string_delete).listen(listener).position(4).reg();
 	}
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
@@ -216,7 +216,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			});
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
-		} else if (resId == R.string.local_index_mi_delete) {
+		} else if (resId == R.string.shared_string_delete) {
 			Builder confirm = new Builder(getActivity());
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -506,7 +506,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 				.icon(R.drawable.ic_action_refresh_dark)
 				.listen(listener).position(1).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_delete)
+		optionsMenuAdapter.item(R.string.shared_string_delete)
 				.icon(R.drawable.ic_action_delete_dark)
 				.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
@@ -560,7 +560,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void doAction(int actionResId){
 		if(actionResId == R.string.local_index_mi_backup){
 			operationTask = new LocalIndexOperationTask(BACKUP_OPERATION);
-		} else if(actionResId == R.string.local_index_mi_delete){
+		} else if(actionResId == R.string.shared_string_delete){
 			operationTask = new LocalIndexOperationTask(DELETE_OPERATION);
 		} else if(actionResId == R.string.local_index_mi_restore){
 			operationTask = new LocalIndexOperationTask(RESTORE_OPERATION);
@@ -673,7 +673,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
-		} else if (itemId == R.string.local_index_mi_delete) {
+		} else if (itemId == R.string.shared_string_delete) {
 			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,
 					new DialogInterface.OnClickListener() {
 
@@ -1144,7 +1144,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				performBasicOperation(R.string.local_index_mi_delete, info);
+				performBasicOperation(R.string.shared_string_delete, info);
 				return true;
 			}
 		});

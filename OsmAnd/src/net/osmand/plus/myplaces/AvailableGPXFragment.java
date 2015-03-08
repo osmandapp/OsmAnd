@@ -331,7 +331,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					asyncLoader.execute(getActivity());
 				} else if (itemId == R.string.show_gpx_route) {
 					openShowOnMapMode();
-				} else if (itemId == R.string.local_index_mi_delete) {
+				} else if (itemId == R.string.shared_string_delete) {
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 							new DialogInterface.OnClickListener() {
 
@@ -346,7 +346,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		};
 		optionsMenuAdapter.item(R.string.show_gpx_route).icons(R.drawable.ic_show_on_map, R.drawable.ic_show_on_map)
 				.listen(listener).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_delete)
+		optionsMenuAdapter.item(R.string.shared_string_delete)
 				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 				.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_dark).listen(listener).reg();
@@ -372,7 +372,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void doAction(int actionResId) {
-		if (actionResId == R.string.local_index_mi_delete) {
+		if (actionResId == R.string.shared_string_delete) {
 			operationTask = new DeleteGpxTask();
 			operationTask.execute(selectedItems.toArray(new GpxInfo[selectedItems.size()]));
 		} else {
