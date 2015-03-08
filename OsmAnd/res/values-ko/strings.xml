@@ -2179,7 +2179,7 @@
 	<string name="shared_string_select_on_map">지도에서 선택</string>
 	<string name="shared_string_select_all">모두 선택</string>
 	<string name="shared_string_deselect">선택 취소</string>
-	<string name="shared_string_shared_strings_deselect_all">모두 선택 취소</string>
+	<string name="shared_string_deselect_all">모두 선택 취소</string>
 	<string name="shared_string_clear">지우기</string>
 	<string name="shared_string_shared_string_clear_all">모두 지우기</string>
 	<string name="shared_string_save">저장</string>

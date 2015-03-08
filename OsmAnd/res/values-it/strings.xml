@@ -2116,7 +2116,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_select_on_map">Seleziona sulla mappa</string>
 	<string name="shared_string_select_all">Seleziona tutto</string>
 	<string name="shared_string_deselect">Deseleziona</string>
-	<string name="shared_string_shared_strings_deselect_all">Deseleziona tutto</string>
+	<string name="shared_string_deselect_all">Deseleziona tutto</string>
 	<string name="shared_string_clear">Pulisci</string>
 	<string name="shared_string_shared_string_clear_all">Pulisci tutto</string>
 	<string name="shared_string_save">Salva</string>

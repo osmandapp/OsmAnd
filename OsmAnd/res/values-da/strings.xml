@@ -1952,7 +1952,7 @@
 	<string name="shared_string_select_on_map">Vælg på kort</string>
 	<string name="shared_string_select_all">Vælg alt</string>
 	<string name="shared_string_deselect">Fravælg</string>
-	<string name="shared_string_shared_strings_deselect_all">Fravælg alt</string>
+	<string name="shared_string_deselect_all">Fravælg alt</string>
 	<string name="shared_string_clear">Ryd</string>
 	<string name="shared_string_shared_string_clear_all">Ryd alt</string>
 	<string name="shared_string_save">Gem</string>

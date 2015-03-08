@@ -2093,7 +2093,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_select_on_map">Vybrať na mape</string>
 	<string name="shared_string_select_all">Vybrať všetko</string>
 	<string name="shared_string_deselect">Zrušiť výber</string>
-	<string name="shared_string_shared_strings_deselect_all">Zrušiť výber všetkých</string>
+	<string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
 	<string name="shared_string_clear">Vymazať</string>
 	<string name="shared_string_shared_string_clear_all">Vymazať všetko</string>
 	<string name="shared_string_save">Uložiť</string>
