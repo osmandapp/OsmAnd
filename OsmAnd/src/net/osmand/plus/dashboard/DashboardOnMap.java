@@ -74,7 +74,7 @@ public class DashboardOnMap {
 				setDashboardVisibility(false);
 			}
 		};
-		dashboardView.findViewById(R.id.content).setOnClickListener(listener);
+		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
 		((FrameLayout) mapActivity.findViewById(R.id.ParentLayout)).addView(dashboardView);
 		
