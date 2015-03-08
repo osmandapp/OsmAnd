@@ -271,7 +271,7 @@
 	<string name="edit_filter_delete_message">Filter {0} je izbrisan</string>
 	<string name="edit_filter_create_message">Filter {0} je stvoren</string>
 	<string name="edit_filter_delete_menu_item">Izbriši</string>
-	<string name="default_buttons_reset">Resetiraj</string>
+	<string name="shared_string_clear">Resetiraj</string>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="poi_dialog_name">Ime</string>
 	<string name="poi_dialog_opening_hours">Otvori</string>

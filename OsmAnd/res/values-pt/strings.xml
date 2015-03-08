@@ -430,7 +430,7 @@
   <string name="poi_dialog_comment_default">Alterar POI</string>
   <string name="poi_dialog_other_tags_message">Todos os outros valores serão preservados</string>
   <string name="default_buttons_commit">Enviar</string>
-  <string name="default_buttons_reset">Limpar</string>
+  <string name="shared_string_clear">Limpar</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Apagar</string>
   <string name="edit_filter_save_as_menu_item">Salvar como</string>

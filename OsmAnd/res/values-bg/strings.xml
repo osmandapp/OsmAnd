@@ -1514,7 +1514,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="poi_dialog_comment_default">Промяна на POI</string>
 	<string name="poi_dialog_other_tags_message">Всички други тагове се запазват</string>
 	<string name="default_buttons_commit">Изпрати</string>
-	<string name="default_buttons_reset">Нулиране</string>
+	<string name="shared_string_clear">Нулиране</string>
 	<string name="filter_current_poiButton">Филтър</string>
 	<string name="edit_filter_delete_menu_item">Изтрий</string>
 	<string name="edit_filter_save_as_menu_item">Запиши като</string>

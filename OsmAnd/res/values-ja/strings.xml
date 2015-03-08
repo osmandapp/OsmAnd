@@ -651,7 +651,7 @@ POIの更新は利用できません</string>
 <string name="poi_dialog_comment_default">POI 変更</string>
 <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
 <string name="default_buttons_commit">コミット</string>
-<string name="default_buttons_reset">リセット</string>
+<string name="shared_string_clear">リセット</string>
 <string name="filter_current_poiButton">フィルタ</string>
 <string name="edit_filter_delete_menu_item">削除</string>
 <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>

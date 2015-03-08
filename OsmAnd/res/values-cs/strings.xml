@@ -811,7 +811,7 @@
   <string name="poi_dialog_comment_default">Změna POI</string>
   <string name="poi_dialog_other_tags_message">Všechny ostatní tagy zůstanou zachovány</string>
   <string name="default_buttons_commit">Uložit</string>
-  <string name="default_buttons_reset">Vyčistit</string>
+  <string name="shared_string_clear">Vyčistit</string>
   <string name="filter_current_poiButton">Filtr</string>
   <string name="edit_filter_delete_menu_item">Vymazat</string>
   <string name="edit_filter_save_as_menu_item">Uložit jako</string>

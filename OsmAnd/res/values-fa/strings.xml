@@ -216,7 +216,7 @@
 	<string name="edit_filter_delete_message">فیلتر {0} حذف شد</string>
 	<string name="edit_filter_create_message">فیلتر {0} ایجاد شد</string>
 	<string name="default_buttons_selectall">انتخاب همه</string>
-	<string name="default_buttons_reset">تنظیم مجدد</string>
+	<string name="shared_string_clear">تنظیم مجدد</string>
 	<string name="filter_current_poiButton">فیلتر</string>
 	<string name="edit_filter_delete_menu_item">حذف</string>
 	<string name="poi_dialog_other_tags_message">همه تگ ها حفظ شد</string>

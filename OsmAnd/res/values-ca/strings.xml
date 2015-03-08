@@ -942,7 +942,7 @@
 	<string name="osb_comment_menu_item">Afegeix un comentari</string>
 	<string name="osb_comment_dialog_success">El comentari s\'ha afegit correctament</string>
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
-	<string name="default_buttons_reset">Neteja</string>
+	<string name="shared_string_clear">Neteja</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
 	<string name="tip_day_night_mode_t_v2">"L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
 \n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configuració del mapa» -&gt;«Mapa dia/nit».

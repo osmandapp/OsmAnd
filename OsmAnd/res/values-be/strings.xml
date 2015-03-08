@@ -1416,7 +1416,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_dialog_comment_default">Зьмена POI</string>
 	<string name="poi_dialog_other_tags_message">Усе астатнія тэгі захоўваюцца</string>
 	<string name="default_buttons_commit">Зьберагчы</string>
-	<string name="default_buttons_reset">Ачысьціць</string>
 	<string name="filter_current_poiButton">Фільтраваць</string>
 	<string name="edit_filter_delete_menu_item">Выдаліць</string>
 	<string name="edit_filter_save_as_menu_item">Захаваць як</string>

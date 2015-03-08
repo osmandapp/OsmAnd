@@ -1107,7 +1107,7 @@
 	<string name="osb_author_dialog_password">OSM şifresi (isteğe bağlı)</string>
 	<string name="poi_action_succeded_template">{0} olayı başarıyla tamamlandı.</string>
 	<string name="poi_dialog_name">İsim</string>
-	<string name="default_buttons_reset">Sıfırla</string>
+	<string name="shared_string_clear">Sıfırla</string>
 	<string name="filter_current_poiButton">Süzgeç</string>
 	<string name="edit_filter_delete_dialog_title">Seçilen süzgeç silinsin mi?</string>
 	<string name="edit_filter_delete_message">{0} süzgeci silindi</string>

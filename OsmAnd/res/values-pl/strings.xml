@@ -668,7 +668,7 @@
   <string name="poi_dialog_comment_default">Zmiana POI</string>
   <string name="poi_dialog_other_tags_message">Wszystkie pozostałe tagi pozostają bez zmian</string>
   <string name="default_buttons_commit">Wyślij</string>
-  <string name="default_buttons_reset">Wyczyść</string>
+  <string name="shared_string_clear">Wyczyść</string>
   <string name="filter_current_poiButton">Filtr</string>
   <string name="edit_filter_delete_menu_item">Usuń</string>
   <string name="edit_filter_save_as_menu_item">Zapisz jako</string>

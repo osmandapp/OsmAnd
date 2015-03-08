@@ -1675,7 +1675,7 @@
 	<string name="poi_dialog_comment_default">Cambio de PDI</string>
 	<string name="poi_dialog_other_tags_message">O resto das etiquetas consérvase</string>
 	<string name="default_buttons_commit">Enviar</string>
-	<string name="default_buttons_reset">Restaurar</string>
+	<string name="shared_string_clear">Restaurar</string>
 	<string name="filter_current_poiButton">Filtrar</string>
 	<string name="edit_filter_delete_menu_item">Eliminar</string>
 	<string name="edit_filter_save_as_menu_item">Gardar como</string>

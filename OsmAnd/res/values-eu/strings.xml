@@ -1155,7 +1155,7 @@
   <string name="poi_dialog_comment_default">POIa aldatzea</string>
   <string name="poi_dialog_other_tags_message">Beste etiketa guztiak kontserbatu dira</string>
   <string name="default_buttons_commit">Bidali</string>
-  <string name="default_buttons_reset">Garbitu</string>
+  <string name="shared_string_clear">Garbitu</string>
   <string name="filter_current_poiButton">Filtratu</string>
   <string name="edit_filter_delete_menu_item">Ezabatu</string>
   <string name="edit_filter_save_as_menu_item">Gorde Honela</string>

@@ -954,7 +954,6 @@
 	<string name="edit_filter_save_as_menu_item">Gem som</string>
 	<string name="edit_filter_delete_menu_item">Slet</string>
 	<string name="filter_current_poiButton">Filter</string>
-	<string name="default_buttons_reset">Ryd</string>
 	<string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_opening_hours">Åben</string>

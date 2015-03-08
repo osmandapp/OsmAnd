@@ -862,7 +862,6 @@
 <string name="poi_dialog_comment_default">POI 변경</string>
 <string name="poi_dialog_other_tags_message">모든 다른 태그는 보존된다</string>
 <string name="default_buttons_commit">반영</string>
-<string name="default_buttons_reset">지우기</string>
 <string name="filter_current_poiButton">필터</string>
 <string name="edit_filter_delete_menu_item">삭제</string>
 <string name="edit_filter_save_as_menu_item">다른이름으로 저장</string>

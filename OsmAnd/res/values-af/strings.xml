@@ -873,7 +873,7 @@
   <string name="poi_dialog_comment_default">interessante plek verander</string>
   <string name="poi_dialog_other_tags_message">Alle ander naamplaatjies word bewaar</string>
   <string name="default_buttons_commit">Handig in</string>
-  <string name="default_buttons_reset">Herstel</string>
+  <string name="shared_string_clear">Herstel</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Verwyder</string>
   <string name="edit_filter_save_as_menu_item">Berg As</string>

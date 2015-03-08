@@ -809,7 +809,7 @@
   <string name="poi_dialog_comment_default">POI módosítás</string>
   <string name="poi_dialog_other_tags_message">Minden más paraméter megmarad</string>
   <string name="default_buttons_commit">Alkalmaz</string>
-  <string name="default_buttons_reset">Törlés</string>
+  <string name="shared_string_clear">Törlés</string>
   <string name="filter_current_poiButton">Szűrő</string>
   <string name="edit_filter_delete_menu_item">Töröl</string>
   <string name="edit_filter_save_as_menu_item">Mentés más néven</string>

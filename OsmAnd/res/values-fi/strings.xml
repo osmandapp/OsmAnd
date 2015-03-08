@@ -594,7 +594,7 @@
 	<string name="osmand_parking_plugin_description">Tällä lisäosalla voit tallentaa pysäköidyn auton sijainnin.</string>
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
-	<string name="default_buttons_reset">Nollaa</string>
+	<string name="shared_string_clear">Nollaa</string>
 	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
 	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
 	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>

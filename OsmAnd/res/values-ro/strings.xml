@@ -1084,7 +1084,7 @@
 	<string name="poi_dialog_comment_default">Editare POI</string>
 	<string name="poi_dialog_other_tags_message">Toate celelalte etichete sunt păstrate</string>
 	<string name="default_buttons_commit">Aplică</string>
-	<string name="default_buttons_reset">Șterge</string>
+	<string name="shared_string_clear">Șterge</string>
 	<string name="filter_current_poiButton">Filtrează</string>
 	<string name="edit_filter_delete_menu_item">Șterge</string>
 	<string name="edit_filter_save_as_menu_item">Salvează ca</string>

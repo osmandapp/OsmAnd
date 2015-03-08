@@ -5,7 +5,7 @@
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
 	<string name="default_buttons_commit">承諾</string>
-	<string name="default_buttons_reset">復位</string>
+	<string name="shared_string_clear">復位</string>
 	<string name="filter_current_poiButton">過濾器</string>
 	<string name="edit_filter_delete_menu_item">刪除</string>
 	<string name="edit_filter_save_as_menu_item">“另存為”</string>

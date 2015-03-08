@@ -1055,7 +1055,7 @@
 	<string name="poi_dialog_comment_default">שינוי נ״ע</string>
 	<string name="poi_dialog_other_tags_message">כל שאר התגיות שמורות</string>
 	<string name="default_buttons_commit">שליחה</string>
-	<string name="default_buttons_reset">איפוס</string>
+	<string name="shared_string_clear">איפוס</string>
 	<string name="filter_current_poiButton">מסנן</string>
 	<string name="edit_filter_delete_menu_item">מחיקה</string>
 	<string name="edit_filter_save_as_menu_item">שמירה בשם</string>

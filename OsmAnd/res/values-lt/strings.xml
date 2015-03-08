@@ -948,7 +948,7 @@
   <string name="poi_dialog_comment_default">LV keičiasi</string>
   <string name="poi_dialog_other_tags_message">Visos kitos žymės yra išsaugotos</string>
   <string name="default_buttons_commit">Užfiksuoti</string>
-  <string name="default_buttons_reset">Išvalyti</string>
+  <string name="shared_string_clear">Išvalyti</string>
   <string name="filter_current_poiButton">Filtras</string>
   <string name="edit_filter_delete_menu_item">Ištrinti</string>
   <string name="edit_filter_save_as_menu_item">Išsaugoti kaip</string>

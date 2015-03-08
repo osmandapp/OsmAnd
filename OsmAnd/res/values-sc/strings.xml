@@ -1639,7 +1639,7 @@
 	<string name="poi_remove_success">PDI burradu curretamente</string>
 	<string name="poi_error_unexpected_template">Errore ispessadu durante s’esecutzione de s’atzione {0}.</string>
 	<string name="default_buttons_commit">Esegui</string>
-	<string name="default_buttons_reset">Burra</string>
+	<string name="shared_string_clear">Burra</string>
 	<string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
 	<string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
 	<string name="edit_filter_create_message">Su filtru {0} est istadu burradu</string>
