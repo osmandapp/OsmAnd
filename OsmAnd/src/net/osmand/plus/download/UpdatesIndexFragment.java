@@ -332,7 +332,7 @@ public class UpdatesIndexFragment extends ListFragment {
 	private String getTypeName(int resId){
 		Activity activity = getActivity();
 		if (resId == R.string.download_regular_maps){
-			return activity.getString(R.shared_string_map);
+			return activity.getString(R.string.shared_string_map);
 		} else if (resId == R.string.voices){
 			return activity.getString(R.string.ttsvoice);
 		} else if (resId == R.string.download_roads_only_maps){
