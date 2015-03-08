@@ -1545,7 +1545,7 @@
 	<string name="localization_pref_title">Ländereinstellungen</string>
 	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
-	<string name="share_fav">Teilen</string>
+	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
 	<string name="keep_informing_never">Nur manuell (Auf Pfeil tippen)</string>

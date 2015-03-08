@@ -1854,7 +1854,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="no_fav_to_save">No favorite points to save</string>
 	<string name="import_fav">Import</string>
 	<string name="export">Export</string>
-	<string name="share_fav">Share</string>
 	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>

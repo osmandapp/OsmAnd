@@ -1870,7 +1870,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="create_poi_link_to_osm_doc"><u>Онлайнова OSM</u> класифікація мапи із зображеннями</string>
 	<string name="import_file_favourites">Зберегти як файл GPX або імпортувати в закладки?</string>
 	<string name="import_save">Зберегти</string>
-	<string name="share_fav">Поділитись</string>
+	<string name="shared_string_share">Поділитись</string>
 	<string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
 	<string name="navigation_intent_invalid">Невірний формат: %s</string>
 <string name="rendering_attr_coloredBuildings_name">Кольорове маркування будівель за типом</string>

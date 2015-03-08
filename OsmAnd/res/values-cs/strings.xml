@@ -1556,7 +1556,7 @@ s často kladenými otázkami.</string>
 	<string name="local_index_mi_export">Exportovat</string>
 	<string name="import_file_favourites">Uložit jako GPX soubor nebo importovat do oblíbených?</string>
 	<string name="import_save">Uložit</string>
-	<string name="share_fav">Sdílet</string>
+	<string name="shared_string_share">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
 	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="osmo_follow">Sledovat</string>

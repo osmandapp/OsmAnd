@@ -1704,7 +1704,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_mode_on">Interrompi la sessione OsMo</string>    
     <string name="osmo_mode_off">Avvia sessione OSMo</string>
     
-    <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
     <string name="tip_recent_changes_1_8_alpha">"Novità nella versione 1.8: * Calcola il percorso tra i punti di un tracciato GPX * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali) * Supporta l\'importazione di file GPX/KML (converte da KLM a GPX) * Le tracce GPX sono state spostate in \'I miei luoghi\' * Puoi dividere le tracce GPX in base alla distanza o al tempo e controllare la diferenza di altitudine o della velocità per ogni spezzone * Avvio automatico della navigazione dopo una breve attesa "</string>

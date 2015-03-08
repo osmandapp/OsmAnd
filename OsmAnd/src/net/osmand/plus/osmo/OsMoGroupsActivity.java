@@ -436,7 +436,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
-				createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 						// there is a bug in Android 4.2 layout
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///

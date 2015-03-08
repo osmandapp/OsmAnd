@@ -1742,7 +1742,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_mode_on">توقف OSMo</string>    
     <string name="osmo_mode_off">َشروع OSMo</string>
     <string name="arrival_distance_descr">مي خواهيد اعلان رسيدن به مقصد را چقدر زودتر دريافت كنيد؟</string>
-    <string name="share_fav">اشتراک گذاری</string>
+    <string name="shared_string_share">اشتراک گذاری</string>
 	<string name="share_fav_subject">علاقه‌مندیها از راه OsmAnd به اشتراک گذاشته شد</string>
 	<string name="hours_ago">چند ساعت قبل</string>
     <string name="minutes_ago">چند دقیقه قبل</string>

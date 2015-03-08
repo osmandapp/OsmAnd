@@ -1590,7 +1590,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
-<string name="share_fav">Partager</string>
+<string name="shared_string_share">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
 <string name="tip_recent_changes_1_8_alpha">"Nouveautés de la version 1.8 : * Calcul d\'itinéraire entre les points d\'une trace GPX * Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux) * Prise en charge de l\'importation des fichiers GPX/KML et conversion KML en GPX * Migration des traces GPX dans \'Mes favoris\' * Possibilité de scinder une trace GPX en sections de distance définie, et de consulter la vitesse et les variations d\'altitude * Lancement automatique de la navigation après un certain temps "</string>

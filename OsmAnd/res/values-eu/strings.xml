@@ -1249,7 +1249,7 @@
 	<string name="av_camera_pic_size_descr">Aukeratu kameraren irudiaren barneko tamaina</string>
     <string name="navigation_intent_invalid">Baliogabeko formatuak: %s</string>
     <string name="hide_all_waypoints">Ezabatu guztiak</string>
-    <string name="share_fav">Banatu</string>
+    <string name="shared_string_share">Banatu</string>
 	<string name="share_fav_subject">Banatutako gogokoenak OsmAnd bidez</string>
 	<string name="import_save">Gorde</string>
 	<string name="import_file_favourites">Gorde GPX fitxategi bezala edo inportatu gogokoenetan?</string>

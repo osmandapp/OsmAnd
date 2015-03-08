@@ -2017,7 +2017,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>画像とマップの分類</string>
 	<string name="import_file_favourites">GPXファイルを保存またはお気に入りにインポートしますか？</string>
 	<string name="import_save">保存</string>
-	<string name="share_fav">共有</string>
+	<string name="shared_string_share">共有</string>
 	<string name="share_fav_subject">OsmAndを介してお気に入りを共有</string>
 	<string name="av_camera_pic_size">カメラの解像度</string>
 	<string name="av_camera_pic_size_descr">内部カメラ解像度を選択</string>

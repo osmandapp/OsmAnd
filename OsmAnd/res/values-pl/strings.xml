@@ -1670,7 +1670,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
     
-    <string name="share_fav">Udostępnij</string>
+    <string name="shared_string_share">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
 	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
     <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:↵

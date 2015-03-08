@@ -237,7 +237,7 @@ public class SelectedGPXFragment extends ListFragment {
 		menu.clear();
 		((TrackActivity) getActivity()).getClearToolbar(false);
 		if (getGpx().path != null && !getGpx().showCurrentTrack) {
-			MenuItem item = menu.add(R.string.share_fav).setIcon(R.drawable.ic_action_gshare_dark)
+			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {

@@ -1636,7 +1636,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_mode_on">Спыніць сэсыю OsMo</string>    
     <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
     
-    <string name="share_fav">Падзяліцца</string>
 	<string name="share_fav_subject">Выбранае адаслана праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
     <string name="tip_recent_changes_1_8_alpha">Зьмены ў 1.8:

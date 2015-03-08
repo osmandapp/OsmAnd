@@ -1751,7 +1751,6 @@
     <string name="osmo_io_error">"OsMo 연결 문제 : "</string>
     <string name="osmo_mode_on">OsMo 세션 중지</string>    
     <string name="osmo_mode_off">OsMo 세션 시작</string>
-    <string name="share_fav">공유</string>
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
 	<string name="hours_ago">시간 전</string>
     <string name="minutes_ago">분 전</string>

@@ -1605,7 +1605,7 @@
     <string name="local_index_mi_export">Exportálás</string>
 	<string name="import_file_favourites">Mentés GPX fájlként, vagy importálás a kedvencekbe?</string>
 	<string name="import_save">Mentés</string>
-	<string name="share_fav">Megosztás</string>
+	<string name="shared_string_share">Megosztás</string>
 	<string name="share_fav_subject">OsmAndból megosztott kedvencek</string>
 	<string name="no_index_file_to_download">Nem találhatók letöltések, ellenőrizd az internetkapcsolatot.</string>
     <string name="none_selected_gpx">Nincs GPX fájl kiválasztva. A kiválasztáshoz nyomj hosszan egy nyomvonalra.</string>

@@ -1697,7 +1697,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_mode_on">Stop OsMo sessie</string>    
     <string name="osmo_mode_off">Start OsMo</string>
     
-    <string name="share_fav">Delen</string>
 	<string name="share_fav_subject">Via AsmAnd gedeelde favorieten</string>
 	<string name="hours_ago">uur geleden</string>
     <string name="minutes_ago">minuten geleden</string>

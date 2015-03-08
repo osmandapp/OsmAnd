@@ -1496,7 +1496,7 @@
 	<string name="no_fav_to_save">Niama liubіmych miescaŭ dlia zachoŭvańnia</string>
 	<string name="import_fav">Іmpartavać</string>
 	<string name="export_fav">Ekspartavać</string>
-	<string name="share_fav">Padzialіcca</string>
+	<string name="shared_string_share">Padzialіcca</string>
 	<string name="share_fav_subject">Vybranaje adaslana praz OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Pamylka pry zahruzcy GPX</string>
 	<string name="send_report">Daslać spravazdaču</string>

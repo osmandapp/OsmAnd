@@ -1546,7 +1546,7 @@
 	<string name="local_index_mi_export">Εξαγωγή</string>
 	<string name="import_file_favourites">Αποθήκευση ως αρχείο GPX ή εισαγωγή στα αγαπημένα;</string>
 	<string name="import_save">Αποθήκευση</string>
-	<string name="share_fav">Διαμοιρασμός</string>
+	<string name="shared_string_share">Διαμοιρασμός</string>
 	<string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
 <string name="stop_navigation_service">Διακοπή</string>
 	<string name="sleep_mode_stop_dialog">Διακοπή κατάστασης νάρκης του GPS;</string>

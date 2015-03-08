@@ -1774,7 +1774,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="local_index_mi_export">Exportar</string>
 	<string name="import_file_favourites">Salvar como arquivo GPX ou importar nos favoritos ?</string>
 	<string name="import_save">Guardar</string>
-	<string name="share_fav">Partilhar</string>
+	<string name="shared_string_share">Partilhar</string>
 	<string name="share_fav_subject">Favoritos partilhados via OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
 <string name="save_as_favorites_points">Salvar como grupo de favoritos</string>

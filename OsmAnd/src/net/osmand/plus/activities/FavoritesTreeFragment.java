@@ -380,7 +380,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
-			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_dark,
+			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);

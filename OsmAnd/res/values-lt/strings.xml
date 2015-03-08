@@ -1570,7 +1570,7 @@
     <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>    
     <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
     
-    <string name="share_fav">Bendrinti</string>
+    <string name="shared_string_share">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
 	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
     <string name="osmo_connect_to_device_name">Vartotojo vardas</string>

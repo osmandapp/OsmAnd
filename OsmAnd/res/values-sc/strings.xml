@@ -1346,7 +1346,7 @@
 	<string name="no_fav_to_save">Perunu prefèrridu da sarbare</string>
 	<string name="import_fav">Importa</string>
 	<string name="export_fav">Esporta</string>
-	<string name="share_fav">Cumpartzi</string>
+	<string name="shared_string_share">Cumpartzi</string>
 	<string name="share_fav_subject">Prefèrridos cumpartzidos tramite OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Errore durante su carrigamentu de su documentu GPX</string>
 	<string name="send_report">Imbia resumu</string>

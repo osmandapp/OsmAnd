@@ -1577,7 +1577,7 @@
     <string name="osmo_mode_on">Parar sesión de OsMo</string>    
     <string name="osmo_mode_off">Iniciar sesión de OsMo</string>
     
-    <string name="share_fav">Compartir</string>
+    <string name="shared_string_share">Compartir</string>
 	<string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
     <string name="tip_recent_changes_1_8_alpha">"Cambios en 1.8: * Calcular ruta entre puntos de ruta de una traza GPX * Cambiado el diseño de los países para descargar (soporta búsquedas de nombres locales) * Soporta importación GPX/KML (conversión de KML a GPX) * Las trazas GPX se han movido a \'Mis datos\' * Puede dividir las trazas GPX por distancia y comprobar la diferencia de altitud / velocidad * Auto iniciar la navegación tras un retraso "</string>

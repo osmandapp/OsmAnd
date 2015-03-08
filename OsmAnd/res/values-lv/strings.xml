@@ -1631,7 +1631,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_mode_on">Apturēt OSMo sesiju</string>    
     <string name="osmo_mode_off">Sākt OSMo sesiju</string>
     
-    <string name="share_fav">Kopīgot</string>
+    <string name="shared_string_share">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
     <string name="tip_recent_changes_1_8_alpha">Izmaiņas uz 1.8:

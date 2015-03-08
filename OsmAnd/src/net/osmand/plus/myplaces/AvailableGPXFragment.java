@@ -1009,7 +1009,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
-		item = optionsMenu.getMenu().add(R.string.share_fav)
+		item = optionsMenu.getMenu().add(R.string.shared_string_share)
 				.setIcon(light ? R.drawable.ic_action_gshare_light : R.drawable.ic_action_gshare_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

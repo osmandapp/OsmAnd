@@ -1677,7 +1677,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
     <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
     
-    <string name="share_fav">Zdieľať</string>
 	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
 	<string name="tip_recent_changes_1_8_alpha">Zmeny v 1.8:
         * Počítanie trasy medzi bodmi v GPX stope
