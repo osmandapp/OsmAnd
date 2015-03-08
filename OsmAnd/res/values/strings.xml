@@ -1442,7 +1442,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_openstreetmap_uploading">Uploading …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all</string>
-	<string name="local_openstreetmap_show">Show on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete modification</string>
 	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
