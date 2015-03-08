@@ -185,7 +185,7 @@ public class StartGPSStatus extends OsmAndAction {
 						}
 					}
 				});
-				builder.setNegativeButton(mapActivity.getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(mapActivity.getString(R.string.shared_string_no), null);
 				builder.show();
 			} else {
 				Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();

@@ -63,6 +63,6 @@
     <string name="about_settings_descr">Info versi, lisensi, anggota</string>
     <string name="tips_and_tricks">Tip</string>
     <string name="local_index_tile_data_downloadable">Dapat di download: %1$s</string>
-    <string name="default_buttons_no">No</string>
+    <string name="shared_string_no">No</string>
 	<string name="shared_string_yes">Yes</string>
 	</resources>

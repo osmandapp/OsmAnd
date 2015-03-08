@@ -224,7 +224,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
 				}
 			});
-			confirm.setNegativeButton(R.string.default_buttons_no, null);
+			confirm.setNegativeButton(R.string.shared_string_no, null);
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {

@@ -906,7 +906,7 @@
   <string name="default_buttons_cancel">Atšaukti</string>
   <string name="default_buttons_apply">Taikyti</string>
   <string name="default_buttons_add">Pridėti</string>
-  <string name="default_buttons_no">Ne</string>
+  <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Įveskite įsimintos vietos pavadinimą</string>
   <string name="add_favorite_dialog_default_favourite_name">Įsiminta vieta</string>
   <string name="add_favorite_dialog_favourite_added_template">Įsiminta vieta \'\'{0}\'\' buvo sėkmingai įrašyta.</string>

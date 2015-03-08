@@ -572,7 +572,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				task.execute();
 			}
 		});
-		builder.setNeutralButton(R.string.default_buttons_no, new OnClickListener() {
+		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

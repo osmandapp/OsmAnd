@@ -906,7 +906,6 @@
   <string name="default_buttons_cancel">Zrušiť</string>
   <string name="default_buttons_apply">Použiť</string>
   <string name="default_buttons_add">Pridať</string>
-  <string name="default_buttons_no">Nie</string>
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
   <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod "{0}" bol úspešne pridaný.</string>

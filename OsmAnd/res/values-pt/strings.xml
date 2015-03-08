@@ -388,7 +388,7 @@
   <string name="default_buttons_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
   <string name="default_buttons_add">Adicionar</string>
-  <string name="default_buttons_no">Não</string>
+  <string name="shared_string_no">Não</string>
   <string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
   <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
   <string name="add_favorite_dialog_favourite_added_template">O ponto \'\'{0}\'\' foi adicionado aos favoritos.</string>

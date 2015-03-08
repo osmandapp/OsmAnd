@@ -100,7 +100,7 @@ public class OsmAndLocationSimulation {
 
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
 			stop();

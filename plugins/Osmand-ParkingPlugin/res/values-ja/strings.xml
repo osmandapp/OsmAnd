@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="default_buttons_no">いいえ</string>
+<resources><string name="shared_string_no">いいえ</string>
     <string name="shared_string_yes">はい</string>
     <string name="osmand_app_not_found">OsmAndがインストールされていません</string>
     <string name="app_name">OsmAnd駐車場</string>

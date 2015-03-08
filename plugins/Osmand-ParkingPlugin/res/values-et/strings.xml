@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="default_buttons_no">Ei</string>
+<resources><string name="shared_string_no">Ei</string>
     <string name="shared_string_yes">Jah</string>
     <string name="osmand_app_not_found">OsmAnd ei ole paigaldatud</string>
     <string name="app_name">OsmAnd Parkimine</string>

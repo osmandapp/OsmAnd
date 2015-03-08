@@ -447,7 +447,7 @@
 <string name="osb_comment_dialog_author">Nom de l\'autor</string>
 <string name="osb_add_dialog_success">L\'error s\'ha creat amb èxit</string>
 <string name="shared_string_yes">Sí</string>
-<string name="default_buttons_no">No</string>
+<string name="shared_string_no">No</string>
 <string name="default_buttons_add">Afegeix</string>
 <string name="default_buttons_apply">Aplica</string>
 <string name="context_menu_item_update_map">Actualitza el mapa</string>

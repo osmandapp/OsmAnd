@@ -767,7 +767,7 @@
   <string name="default_buttons_cancel">Atcelt</string>
   <string name="default_buttons_apply">Pielietot</string>
   <string name="default_buttons_add">Pievienot</string>
-  <string name="default_buttons_no">Nē</string>
+  <string name="shared_string_no">Nē</string>
   <string name="add_favorite_dialog_top_text">Ievadiet vietas nosaukumu</string>
   <string name="add_favorite_dialog_default_favourite_name">Izlase</string>
   <string name="add_favorite_dialog_favourite_added_template">Izlases punkts \'\'{0}\'\' veiksmīgi pievienots.</string>

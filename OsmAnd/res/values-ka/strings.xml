@@ -763,7 +763,7 @@
   <string name="default_buttons_cancel">გაუქმება</string>
   <string name="default_buttons_apply">გამოყენება</string>
   <string name="default_buttons_add">ჩამატება</string>
-  <string name="default_buttons_no">არა</string>
+  <string name="shared_string_no">არა</string>
   <string name="add_favorite_dialog_top_text">რჩეულის სახელი</string>
   <string name="add_favorite_dialog_default_favourite_name">რჩეული</string>
   <string name="add_favorite_dialog_favourite_added_template">რჩეული წერტილი \'\'{0}\'\' წარმატებით დაემატა.</string>

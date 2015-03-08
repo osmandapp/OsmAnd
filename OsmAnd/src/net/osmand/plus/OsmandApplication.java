@@ -503,7 +503,7 @@ public class OsmandApplication extends Application {
 					closeApplicationAnyway(activity, true);
 				}
 			});
-			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					closeApplicationAnyway(activity, false);

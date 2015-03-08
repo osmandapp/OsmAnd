@@ -303,7 +303,7 @@
 	<string name="default_buttons_cancel">Zatvori</string>
 	<string name="default_buttons_apply">Primijeni</string>
 	<string name="default_buttons_add">Dodaj</string>
-	<string name="default_buttons_no">Ne</string>
+	<string name="shared_string_no">Ne</string>
 	<string name="add_favorite_dialog_top_text">Unesite naziv favorita</string>
 	<string name="shared_string_yes">Da</string>
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>

@@ -170,7 +170,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 						plugin.getService().pushCommand(OsMoService.REGENERATE_CMD);
 					}
 				});
-				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.show();
 			}
 		};

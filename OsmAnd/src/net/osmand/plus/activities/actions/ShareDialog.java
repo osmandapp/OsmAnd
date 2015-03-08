@@ -199,7 +199,7 @@ public class ShareDialog {
 						}
 					}
 				});
-				builder.setNegativeButton(activity.getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(activity.getString(R.string.shared_string_no), null);
 				builder.show();
 			} else {
 				Toast.makeText(activity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();

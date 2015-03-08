@@ -611,7 +611,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="default_buttons_cancel">Hủy</string>
 <string name="default_buttons_apply">Áp dụng</string>
 <string name="default_buttons_add">Thêm</string>
-<string name="default_buttons_no">Không</string>
+<string name="shared_string_no">Không</string>
 <string name="add_favorite_dialog_top_text">Nhập tên Ưa thích</string>
 <string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
 <string name="add_favorite_dialog_favourite_added_template">Điểm ưa thích \'\'{0}\'\' đã được thêm thành công.</string>

@@ -942,7 +942,7 @@
 	<string name="default_buttons_cancel">取消</string>
 	<string name="default_buttons_apply">套用</string>
 	<string name="default_buttons_add">加入</string>
-	<string name="default_buttons_no">否</string>
+	<string name="shared_string_no">否</string>
 	<string name="add_favorite_dialog_top_text">輸入我的最愛名稱</string>
 	<string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
 	<string name="add_favorite_dialog_favourite_added_template">我的最愛標點 \'\'{0}\'\' 新增成功。</string>

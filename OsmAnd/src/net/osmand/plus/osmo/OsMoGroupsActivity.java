@@ -515,7 +515,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							deleteObject(obj);
 						}
 					});
-					bld.setNegativeButton(R.string.default_buttons_no, null);
+					bld.setNegativeButton(R.string.shared_string_no, null);
 					bld.show();
 				} else if (item.getItemId() == GROUP_INFO) {
 					showGroupInfo(group);
@@ -834,7 +834,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 		
-		//builder.setNegativeButton(R.string.default_buttons_no, null);
+		//builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();
 	}
 
@@ -1377,7 +1377,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						name.getText().toString(), list.get(colorSpinner.getSelectedItemPosition()));
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
 

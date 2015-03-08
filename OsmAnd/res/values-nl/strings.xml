@@ -804,7 +804,6 @@
   <string name="default_buttons_cancel">Annuleer</string>
   <string name="default_buttons_apply">Toepassen</string>
   <string name="default_buttons_add">Voeg toe</string>
-  <string name="default_buttons_no">Nee</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>

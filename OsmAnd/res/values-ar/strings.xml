@@ -271,7 +271,7 @@
 	<string name="add_favorite_dialog_default_favourite_name">مفضل</string>
 	<string name="default_buttons_apply">تطبق</string>
 	<string name="default_buttons_add">إضافة</string>
-	<string name="default_buttons_no">ليس</string>
+	<string name="shared_string_no">ليس</string>
 	<string name="shared_string_yes">نعم</string>
 	<string name="default_buttons_cancel">إلغاء</string>
 	<string name="context_menu_item_update_map">تحديث الخريطة</string>

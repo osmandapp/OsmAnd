@@ -54,7 +54,7 @@ public class SherpafyPluginActivity extends Activity {
 						}
 					}
 				});
-				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(getString(R.string.shared_string_no), null);
 				builder.show();
 			}
 		}

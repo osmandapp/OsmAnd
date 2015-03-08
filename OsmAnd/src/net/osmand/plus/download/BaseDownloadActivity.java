@@ -153,7 +153,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 					downloadListIndexThread.runDownloadFiles();
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
 			downloadListIndexThread.runDownloadFiles();
@@ -198,7 +198,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 						downloadFilesPreCheckSpace();
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_no, null);
+				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
 			} else {
 				AccessibleToast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
@@ -224,7 +224,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 				cancelDownload();
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
 

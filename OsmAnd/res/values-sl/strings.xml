@@ -35,7 +35,7 @@
 	<string name="search_address_street_option">Sekajoča cesta</string>
 	<string name="context_menu_item_add_favorite">Dodaj med priljubljene</string>
 	<string name="shared_string_yes">Da</string>
-	<string name="default_buttons_no">Ne</string>
+	<string name="shared_string_no">Ne</string>
 	<string name="default_buttons_cancel">Prekliči</string>
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="default_buttons_apply">Uporabi</string>

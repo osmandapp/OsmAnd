@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_buttons_no">Nē</string>
+    <string name="shared_string_no">Nē</string>
     <string name="shared_string_yes">Jā</string>
     <string name="osmand_app_not_found">OsmAnd nav instalēts</string>
     <string name="app_name">OsmAnd Parkošanās</string>

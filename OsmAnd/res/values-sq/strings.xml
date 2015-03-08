@@ -14,7 +14,7 @@
     <string name="default_and">dhe</string>
     <string name="default_or">ose</string>
 	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
-	<string name="default_buttons_no">Jo</string>
+	<string name="shared_string_no">Jo</string>
 	<string name="shared_string_yes">Po</string>
 	<string name="tip_map_styles">Stili Hartës</string>
 	<string name="about_version">Versioni:</string>

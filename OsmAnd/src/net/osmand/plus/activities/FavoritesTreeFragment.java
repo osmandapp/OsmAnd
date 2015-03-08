@@ -242,7 +242,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		final Resources resources = this.getResources();
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
-		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -607,7 +607,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						exportTask.execute();
 					}
 				});
-				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.setMessage(R.string.fav_export_confirmation);
 				bld.show();
 			} else {

@@ -1024,7 +1024,6 @@
 	<string name="transport_to_go_before">efterfølgende afstand</string>
 	<string name="transport_route_distance">Rutelængde</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_no">Nej</string>
 	<string name="poi_remove_confirm_template">Slet {0} (indtast kommentar)?</string>
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>

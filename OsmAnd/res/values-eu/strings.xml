@@ -1112,7 +1112,7 @@
   <string name="default_buttons_cancel">Ezeztatu</string>
   <string name="default_buttons_apply">Aplikatu</string>
   <string name="default_buttons_add">Gehitu</string>
-  <string name="default_buttons_no">Ez</string>
+  <string name="shared_string_no">Ez</string>
   <string name="add_favorite_dialog_top_text">Gogokoaren izena sartu</string>
   <string name="add_favorite_dialog_default_favourite_name">Gogokoena</string>
   <string name="add_favorite_dialog_favourite_added_template">Gogokoen \"{0}\" puntua arrakastaz gehitu da.</string>

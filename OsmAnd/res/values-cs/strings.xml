@@ -769,7 +769,7 @@
   <string name="default_buttons_cancel">Zrušit</string>
   <string name="default_buttons_apply">Použít</string>
   <string name="default_buttons_add">Přidat</string>
-  <string name="default_buttons_no">Ne</string>
+  <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Zadejte jméno pro oblíbené</string>
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>
   <string name="add_favorite_dialog_favourite_added_template">Oblíbené místo \'\'{0}\'\' bylo přidáno.</string>

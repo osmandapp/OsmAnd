@@ -998,7 +998,7 @@
 	<string name="default_buttons_cancel">Ακύρωση</string>
 	<string name="default_buttons_apply">Εφαρμογή</string>
 	<string name="default_buttons_add">Προσθήκη</string>
-	<string name="default_buttons_no">Όχι</string>
+	<string name="shared_string_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
 	<string name="add_favorite_dialog_default_favourite_name">Αγαπημένο</string>
 	<string name="add_favorite_dialog_favourite_added_template">Το αγαπημένο σημείο \'\'{0}\'\' προστέθηκε με επιτυχία.</string>

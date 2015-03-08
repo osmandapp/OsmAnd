@@ -154,7 +154,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 				plugin.deleteRecording(r);				
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 		
 	}

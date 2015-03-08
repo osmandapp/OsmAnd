@@ -603,7 +603,7 @@
 	<string name="default_buttons_cancel">Avbryt</string>
 	<string name="default_buttons_apply">Bruk</string>
 	<string name="default_buttons_add">Legg til</string>
-	<string name="default_buttons_no">Nei</string>
+	<string name="shared_string_no">Nei</string>
 	<string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favoritt</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' ble vellykket lagt til.</string>

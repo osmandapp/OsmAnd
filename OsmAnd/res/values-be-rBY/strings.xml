@@ -1738,7 +1738,7 @@
 	<string name="default_buttons_cancel">Skasavać</string>
 	<string name="default_buttons_apply">Zastasavać</string>
 	<string name="default_buttons_add">Dadać</string>
-	<string name="default_buttons_no">Nie</string>
+	<string name="shared_string_no">Nie</string>
 	<string name="add_favorite_dialog_top_text">Kalі laska, uviadzіcie іmia punktu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Upadabanaje</string>
 	<string name="add_favorite_dialog_favourite_added_template">Upadabanaje miesca \\{0}\\ bylo dadadzienaje.</string>

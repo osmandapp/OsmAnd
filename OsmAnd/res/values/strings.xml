@@ -2113,7 +2113,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_create_poi">Create POI</string>
 	<string name="default_buttons_apply">Apply</string>
 	<string name="default_buttons_add">Add</string>
-	<string name="default_buttons_no">No</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>

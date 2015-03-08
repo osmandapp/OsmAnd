@@ -389,7 +389,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 					downloadFilesCheckInternet();
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

@@ -830,7 +830,7 @@
   <string name="default_buttons_cancel">Отмена</string>
   <string name="default_buttons_apply">Применить</string>
   <string name="default_buttons_add">Добавить</string>
-  <string name="default_buttons_no">Нет</string>
+  <string name="shared_string_no">Нет</string>
   <string name="add_favorite_dialog_top_text">Введите имя точки</string>
   <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
   <string name="add_favorite_dialog_favourite_added_template">Точка \"\"{0}\"\" была успешно добавлена к Избранным.</string>

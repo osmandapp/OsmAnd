@@ -310,7 +310,7 @@
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>
   <string name="shared_string_yes">हो</string>
   <string name="default_buttons_cancel">रद्द करा</string>
-  <string name="default_buttons_no">नाही</string>
+  <string name="shared_string_no">नाही</string>
   <string name="favourites_context_menu_edit">आवडते ठिकण बदला</string>
   <string name="favourites_context_menu_delete">आवडते ठिकाण काढून टाका</string>
   <string name="poi_edit_title">पिओआय बदला</string>

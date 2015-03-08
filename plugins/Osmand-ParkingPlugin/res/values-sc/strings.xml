@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="default_buttons_no">Nono</string>
+<resources><string name="shared_string_no">Nono</string>
     <string name="shared_string_yes">Eja</string>
     <string name="osmand_app_not_found">OsmAnd no est installau</string>
     <string name="app_name">OsmAnd Parchezu</string>
