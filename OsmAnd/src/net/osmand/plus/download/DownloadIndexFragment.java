@@ -149,12 +149,12 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			if (SHOW_ONLY_RELOAD) {
-				MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
+				MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 				item.setIcon(R.drawable.ic_action_refresh_dark);
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			} else {
 				SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.shared_string_more_actions);
-				s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
+				s.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 				s.add(0, SELECT_ALL_ID, 0, R.string.shared_string_select_all);
 				s.add(0, DESELECT_ALL_ID, 0, R.string.shared_string_deselect_all);
 

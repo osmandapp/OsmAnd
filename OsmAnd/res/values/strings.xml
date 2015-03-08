@@ -1265,7 +1265,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Total native memory</string>
-	<string name="update_downlod_list">Reload list</string>
 	<string name="starting_point_too_far">Starting point too far from nearest road.</string>
 	<string name="shared_location">Shared location</string>
 	<string name="osmand_parking_event">Pick up the car from parking</string>
