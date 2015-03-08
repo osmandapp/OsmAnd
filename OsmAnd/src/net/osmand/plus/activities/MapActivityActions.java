@@ -840,7 +840,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.favorites_Button)
+		optionsMenuHelper.item(R.string.shared_string_my_places)
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

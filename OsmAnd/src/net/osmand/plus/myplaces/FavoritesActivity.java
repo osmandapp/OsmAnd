@@ -51,7 +51,7 @@ public class FavoritesActivity extends TabActivity {
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		getSupportActionBar().setTitle(R.string.favorites_Button);
+		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();

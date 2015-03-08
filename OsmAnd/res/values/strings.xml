@@ -2007,7 +2007,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
 	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
 	<string name="app_description">Navigation application</string>
-	<string name="favorites_Button">My Places</string>
 	<string name="search_button">Search</string>
 	<string name="search_activity">Search</string>
 	<string name="searchpoi_activity">Choose POI</string>
