@@ -1511,7 +1511,7 @@
     <string name="select_gpx">Επιλέξτε GPX…</string>
     <string name="route_descr_select_destination">Επιλέξτε Προορισμό</string>
     <string name="route_descr_select_on_map">Επιλέξτε στο χάρτη…</string>
-    <string name="shared_string_favorite">Αγαπημένο…</string>
+    <string name="shared_string_favorite">Αγαπημένο</string>
     <string name="route_preferences">Προτιμήσεις δρομολογίου</string>
     <string name="route_info">Πληροφορίες δρομολογίου</string>
     <string name="routing_attr_prefer_motorway_name">Προτίμηση αυτοκινητοδρόμων</string>
@@ -1737,4 +1737,21 @@
 	<string name="shared_string_more">Περισσότερα</string>
 	<string name="shared_string_download">Λήψη</string>
 	<string name="shared_string_download_successful">Επιτυχής λήψη</string>
+	<string name="shared_string_action_template">"Ενέργεια {0}: "</string>
+	<string name="shared_string_close">Κλείσιμο</string>
+	<string name="shared_string_exit">Έξοδος</string>
+	<string name="shared_string_show">Εμφάνιση</string>
+	<string name="shared_string_show_all">Εμφάνιση όλων</string>
+	<string name="shared_string_show_on_map">Εμφάνιση στον χάρτη</string>
+	<string name="shared_string_map">Χάρτης</string>
+	<string name="shared_string_favorites">Αγαπημένα</string>
+	<string name="shared_string_add_to_favorites">Προσθήκη στα Αγαπημένα</string>
+	<string name="shared_string_my_location">Η Τοποθεσία μου</string>
+	<string name="shared_string_my_places">Τα μέρη μου</string>
+	<string name="shared_string_my_favorites">Τα Αγαπημένα μου</string>
+	<string name="shared_string_my_tracks">Τα Ίχνη μου</string>
+	<string name="shared_string_audio">Ήχος</string>
+	<string name="shared_string_video">Εικόνα</string>
+	<string name="shared_string_photo">Φωτογραφία</string>
+
 	</resources>
