@@ -885,7 +885,6 @@
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
   <string name="context_menu_item_create_poi">Vytvoriť POI</string>
-  <string name="default_buttons_apply">Použiť</string>
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
   <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod "{0}" bol úspešne pridaný.</string>

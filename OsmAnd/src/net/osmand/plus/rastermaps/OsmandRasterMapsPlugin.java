@@ -290,7 +290,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				});
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.setTitle(R.string.select_tile_source_to_install);
-				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();

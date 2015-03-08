@@ -1736,7 +1736,7 @@
 	<string name="context_menu_item_create_poi">Stvaryć cіkavostku</string>
 	<string name="shared_string_yes">Tak</string>
 	<string name="shared_string_cancel">Skasavać</string>
-	<string name="default_buttons_apply">Zastasavać</string>
+	<string name="shared_string_apply">Zastasavać</string>
 	<string name="shared_string_add">Dadać</string>
 	<string name="shared_string_no">Nie</string>
 	<string name="add_favorite_dialog_top_text">Kalі laska, uviadzіcie іmia punktu</string>

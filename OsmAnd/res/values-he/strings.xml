@@ -1012,7 +1012,7 @@
 	<string name="context_menu_item_open_bug">פתיחת תקלה ב־OSM</string>
 	<string name="context_menu_item_create_poi">יצירת נ״ע</string>
 	<string name="shared_string_cancel">ביטול</string>
-	<string name="default_buttons_apply">החלה</string>
+	<string name="shared_string_apply">החלה</string>
 	<string name="shared_string_add">הוספה</string>
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>
 	<string name="add_favorite_dialog_default_favourite_name">מועדף</string>

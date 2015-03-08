@@ -260,7 +260,7 @@
 	<string name="context_menu_item_create_poi">ایجاد POI</string>
 	<string name="shared_string_yes">بله</string>
 	<string name="shared_string_cancel">لغو</string>
-	<string name="default_buttons_apply">بکارگیری</string>
+	<string name="shared_string_apply">بکارگیری</string>
 	<string name="shared_string_add">افزودن</string>
 	<string name="shared_string_no">خیر</string>
 	<string name="add_favorite_dialog_top_text">نام علاقمندی را وارد کنید</string>

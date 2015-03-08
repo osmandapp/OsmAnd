@@ -609,7 +609,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 <string name="shared_string_yes">OK</string>
 <string name="shared_string_cancel">Hủy</string>
-<string name="default_buttons_apply">Áp dụng</string>
+<string name="shared_string_apply">Áp dụng</string>
 <string name="shared_string_add">Thêm</string>
 <string name="shared_string_no">Không</string>
 <string name="add_favorite_dialog_top_text">Nhập tên Ưa thích</string>

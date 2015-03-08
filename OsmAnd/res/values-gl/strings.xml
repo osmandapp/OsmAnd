@@ -1630,7 +1630,7 @@
 	<string name="context_menu_item_create_poi">Crear un PDI</string>
 	<string name="shared_string_yes">Si</string>
 	<string name="shared_string_cancel">Cancelar</string>
-	<string name="default_buttons_apply">Aplicar</string>
+	<string name="shared_string_apply">Aplicar</string>
 	<string name="shared_string_add">Engadir</string>
 	<string name="shared_string_no">Non</string>
 	<string name="add_favorite_dialog_top_text">Introduza o nome do favorito</string>

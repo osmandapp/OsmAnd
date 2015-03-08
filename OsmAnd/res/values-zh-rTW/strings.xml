@@ -940,7 +940,7 @@
 	<string name="context_menu_item_create_poi">建立興趣點</string>
 	<string name="shared_string_yes">是</string>
 	<string name="shared_string_cancel">取消</string>
-	<string name="default_buttons_apply">套用</string>
+	<string name="shared_string_apply">套用</string>
 	<string name="shared_string_add">加入</string>
 	<string name="shared_string_no">否</string>
 	<string name="add_favorite_dialog_top_text">輸入我的最愛名稱</string>

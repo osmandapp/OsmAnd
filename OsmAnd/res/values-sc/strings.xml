@@ -1605,7 +1605,7 @@
 	<string name="context_menu_item_open_bug">Sinnala un\'errore OSM</string>
 	<string name="context_menu_item_create_poi">Crea PDI</string>
 	<string name="shared_string_cancel">Burra</string>
-	<string name="default_buttons_apply">Aplica</string>
+	<string name="shared_string_apply">Aplica</string>
 	<string name="shared_string_add">Annanghe</string>
 	<string name="add_favorite_dialog_top_text">Inserta su nùmene de su prefèrridu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Prefèrridu</string>

@@ -765,7 +765,7 @@
   <string name="context_menu_item_create_poi">Izveidot POI</string>
   <string name="shared_string_yes">Jā</string>
   <string name="shared_string_cancel">Atcelt</string>
-  <string name="default_buttons_apply">Pielietot</string>
+  <string name="shared_string_apply">Pielietot</string>
   <string name="shared_string_add">Pievienot</string>
   <string name="shared_string_no">Nē</string>
   <string name="add_favorite_dialog_top_text">Ievadiet vietas nosaukumu</string>

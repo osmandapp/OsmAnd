@@ -1040,7 +1040,7 @@
 	<string name="context_menu_item_create_poi">Creează POI</string>
 	<string name="shared_string_yes">Da</string>
 	<string name="shared_string_cancel">Anulează</string>
-	<string name="default_buttons_apply">Aplică</string>
+	<string name="shared_string_apply">Aplică</string>
 	<string name="shared_string_add">Adaugă</string>
 	<string name="shared_string_no">Nu</string>
 	<string name="add_favorite_dialog_top_text">Introduceți numele punctului favorit</string>

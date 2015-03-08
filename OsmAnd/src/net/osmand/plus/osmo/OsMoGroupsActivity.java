@@ -921,7 +921,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		
 		builder.setView(v);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

@@ -996,7 +996,7 @@
 	<string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
 	<string name="shared_string_yes">Ναι</string>
 	<string name="shared_string_cancel">Ακύρωση</string>
-	<string name="default_buttons_apply">Εφαρμογή</string>
+	<string name="shared_string_apply">Εφαρμογή</string>
 	<string name="shared_string_add">Προσθήκη</string>
 	<string name="shared_string_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>

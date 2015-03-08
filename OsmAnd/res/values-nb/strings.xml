@@ -601,7 +601,7 @@
 	<string name="context_menu_item_create_poi">Opprett interessepunkt</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_cancel">Avbryt</string>
-	<string name="default_buttons_apply">Bruk</string>
+	<string name="shared_string_apply">Bruk</string>
 	<string name="shared_string_add">Legg til</string>
 	<string name="shared_string_no">Nei</string>
 	<string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>

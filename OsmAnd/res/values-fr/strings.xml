@@ -706,7 +706,7 @@
   <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
   <string name="shared_string_yes">Oui</string>
   <string name="shared_string_cancel">Annuler</string>
-  <string name="default_buttons_apply">Appliquer</string>
+  <string name="shared_string_apply">Appliquer</string>
   <string name="shared_string_add">Enregistrer</string>
   <string name="shared_string_no">Non</string>
   <string name="add_favorite_dialog_top_text">Nom du favori</string>

@@ -243,7 +243,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 		cat.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_textview, list));
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()

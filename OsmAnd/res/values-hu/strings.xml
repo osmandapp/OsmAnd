@@ -765,7 +765,7 @@
   <string name="context_menu_item_create_poi">POI készítés</string>
   <string name="shared_string_yes">Igen</string>
   <string name="shared_string_cancel">Mégse</string>
-  <string name="default_buttons_apply">Alkalmaz</string>
+  <string name="shared_string_apply">Alkalmaz</string>
   <string name="shared_string_add">Hozzáad</string>
   <string name="shared_string_no">Nem</string>
   <string name="add_favorite_dialog_top_text">Kedvenc neve</string>

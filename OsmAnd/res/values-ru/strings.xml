@@ -818,7 +818,6 @@
   <string name="context_menu_item_create_poi">Добавить POI</string>
   <string name="shared_string_yes">Да</string>
   <string name="shared_string_cancel">Отмена</string>
-  <string name="default_buttons_apply">Применить</string>
   <string name="shared_string_no">Нет</string>
   <string name="add_favorite_dialog_top_text">Введите имя точки</string>
   <string name="add_favorite_dialog_default_favourite_name">Избранная</string>

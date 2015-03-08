@@ -449,7 +449,7 @@
 <string name="shared_string_yes">Sí</string>
 <string name="shared_string_no">No</string>
 <string name="shared_string_add">Afegeix</string>
-<string name="default_buttons_apply">Aplica</string>
+<string name="shared_string_apply">Aplica</string>
 <string name="context_menu_item_update_map">Actualitza el mapa</string>
 <string name="search_address_city">Ciutat</string>
 <string name="navigate_point_cancel">Cancel·la</string>
