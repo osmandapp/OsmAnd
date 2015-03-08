@@ -92,7 +92,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, DELETE_ID, R.string.local_osm_changes_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
+		createMenuItem(menu, DELETE_ID, R.string.shared_string_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
