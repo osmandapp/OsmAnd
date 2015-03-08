@@ -828,7 +828,7 @@
   <string name="context_menu_item_open_bug">Open OSM fout</string>
   <string name="context_menu_item_create_poi">skep interessante plek</string>
   <string name="shared_string_yes">Ja</string>
-  <string name="default_buttons_cancel">Kanseleer</string>
+  <string name="shared_string_cancel">Kanseleer</string>
   <string name="default_buttons_apply">toepas</string>
   <string name="default_buttons_add">Voeg by</string>
   <string name="shared_string_no">Nee</string>

@@ -571,7 +571,7 @@
 <string name="navigate_point_latitude">Latitud</string>
 <string name="navigate_point_longitude">Longitud</string>
 <string name="search_address_region">Regió</string>
-<string name="default_buttons_cancel">Cancel·la</string>
+<string name="shared_string_cancel">Cancel·la</string>
 <string name="context_menu_item_create_poi">Crea un PDI</string>
 <string name="poi_query_by_name_matches_categories">S\'han trobat unes quantes categories coincidents amb la consulta:</string>
 <string name="choose_audio_stream">Sortida de guiat per veu</string>

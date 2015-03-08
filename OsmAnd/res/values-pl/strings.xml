@@ -623,7 +623,7 @@
   <string name="context_menu_item_open_bug">Zgłoś błąd do OSM</string>
   <string name="context_menu_item_create_poi">Utwórz POI</string>
   <string name="shared_string_yes">Tak</string>
-  <string name="default_buttons_cancel">Anuluj</string>
+  <string name="shared_string_cancel">Anuluj</string>
   <string name="default_buttons_apply">Zastosuj</string>
   <string name="default_buttons_add">Dodaj</string>
   <string name="shared_string_no">Nie</string>

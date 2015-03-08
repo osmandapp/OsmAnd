@@ -1032,7 +1032,6 @@
 	<string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
 	<string name="default_buttons_add">Tilføj</string>
 	<string name="default_buttons_apply">Udfør</string>
-	<string name="default_buttons_cancel">Annuller</string>
 	<string name="context_menu_item_create_poi">Opret interessepunkt</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
 	<string name="context_menu_item_add_favorite">Tilføj som favorit</string>

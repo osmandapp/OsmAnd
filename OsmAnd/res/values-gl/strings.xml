@@ -1629,7 +1629,7 @@
 	<string name="context_menu_item_open_bug">Abrir un informe de fallos de OSM</string>
 	<string name="context_menu_item_create_poi">Crear un PDI</string>
 	<string name="shared_string_yes">Si</string>
-	<string name="default_buttons_cancel">Cancelar</string>
+	<string name="shared_string_cancel">Cancelar</string>
 	<string name="default_buttons_apply">Aplicar</string>
 	<string name="default_buttons_add">Engadir</string>
 	<string name="shared_string_no">Non</string>

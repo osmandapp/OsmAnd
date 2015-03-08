@@ -73,7 +73,7 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="shared_string_no">Nej</string>
 <string name="shared_string_yes">Ja</string>
-<string name="default_buttons_cancel">Avbryt</string>
+<string name="shared_string_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
 <string name="default_buttons_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>

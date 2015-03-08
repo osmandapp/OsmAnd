@@ -827,8 +827,6 @@
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>
 <string name="context_menu_item_create_poi">POI 생성</string>
 
-<string name="shared_string_yes">예</string>
-<string name="default_buttons_cancel">취소</string>
 <string name="default_buttons_apply">적용</string>
 <string name="default_buttons_add">추가</string>
 <string name="add_favorite_dialog_top_text">즐겨찾기 이름 입력</string>
@@ -2188,6 +2186,7 @@
 	<string name="shared_string_ok">확인</string>
 	<string name="shared_string_cancel">취소</string>
 	<string name="shared_string_dismiss">기각</string>
+	<string name="shared_string_yes">예</string>
 	<string name="shared_string_no">아니오</string>
 	<string name="shared_string_on">켜기</string>
 	<string name="shared_string_off">끄기</string>

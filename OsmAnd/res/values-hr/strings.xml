@@ -300,7 +300,7 @@
 	<string name="osb_comment_menu_item">Dodaj komentar</string>
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
-	<string name="default_buttons_cancel">Zatvori</string>
+	<string name="shared_string_cancel">Zatvori</string>
 	<string name="default_buttons_apply">Primijeni</string>
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="shared_string_no">Ne</string>

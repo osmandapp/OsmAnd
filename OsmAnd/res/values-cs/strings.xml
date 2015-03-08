@@ -766,7 +766,7 @@
   <string name="context_menu_item_open_bug">Otevřít chybu OSM</string>
   <string name="context_menu_item_create_poi">Vytvořit POI</string>
   <string name="shared_string_yes">Ano</string>
-  <string name="default_buttons_cancel">Zrušit</string>
+  <string name="shared_string_cancel">Zrušit</string>
   <string name="default_buttons_apply">Použít</string>
   <string name="default_buttons_add">Přidat</string>
   <string name="shared_string_no">Ne</string>

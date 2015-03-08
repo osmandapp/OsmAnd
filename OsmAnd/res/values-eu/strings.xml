@@ -1109,7 +1109,7 @@
   <string name="context_menu_item_open_bug">Ireki OSM akats jakinarazpena</string>
   <string name="context_menu_item_create_poi">POIa sortu</string>
   <string name="shared_string_yes">Bai</string>
-  <string name="default_buttons_cancel">Ezeztatu</string>
+  <string name="shared_string_cancel">Ezeztatu</string>
   <string name="default_buttons_apply">Aplikatu</string>
   <string name="default_buttons_add">Gehitu</string>
   <string name="shared_string_no">Ez</string>

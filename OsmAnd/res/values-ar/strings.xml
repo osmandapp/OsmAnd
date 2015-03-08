@@ -273,7 +273,7 @@
 	<string name="default_buttons_add">إضافة</string>
 	<string name="shared_string_no">ليس</string>
 	<string name="shared_string_yes">نعم</string>
-	<string name="default_buttons_cancel">إلغاء</string>
+	<string name="shared_string_cancel">إلغاء</string>
 	<string name="context_menu_item_update_map">تحديث الخريطة</string>
 	<string name="navigate_point_cancel">إلغاء</string>
 	<string name="search_address_top_text">حدد عنوان</string>

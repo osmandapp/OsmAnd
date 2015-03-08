@@ -701,7 +701,7 @@
   <string name="context_menu_item_open_bug">Abrir fallo OSM</string>
   <string name="context_menu_item_create_poi">Crear PDI</string>
   <string name="shared_string_yes">Sí</string>
-  <string name="default_buttons_cancel">Cancelar</string>
+  <string name="shared_string_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
   <string name="default_buttons_add">Añadir</string>
   <string name="shared_string_no">No</string>

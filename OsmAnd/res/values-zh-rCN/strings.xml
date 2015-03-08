@@ -387,7 +387,7 @@
 	<string name="search_address_street_option">相交的街道</string>
 	<string name="search_tabs_location">位置</string>
 	<string name="shared_string_yes">是</string>
-	<string name="default_buttons_cancel">取消</string>
+	<string name="shared_string_cancel">取消</string>
 	<string name="default_buttons_apply">申请</string>
 	<string name="default_buttons_add">加</string>
 	<string name="shared_string_no">没有</string>

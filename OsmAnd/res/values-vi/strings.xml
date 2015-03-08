@@ -608,7 +608,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="context_menu_item_create_poi">Tạo POI</string>
 
 <string name="shared_string_yes">OK</string>
-<string name="default_buttons_cancel">Hủy</string>
+<string name="shared_string_cancel">Hủy</string>
 <string name="default_buttons_apply">Áp dụng</string>
 <string name="default_buttons_add">Thêm</string>
 <string name="shared_string_no">Không</string>

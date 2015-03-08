@@ -409,7 +409,7 @@
 	<string name="search_tabs_location">Sijainti</string>
 	<string name="context_menu_item_add_favorite">Lisää suosikkeihin</string>
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
-	<string name="default_buttons_cancel">Peruuta</string>
+	<string name="shared_string_cancel">Peruuta</string>
 	<string name="default_buttons_apply">Käytä</string>
 	<string name="default_buttons_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>

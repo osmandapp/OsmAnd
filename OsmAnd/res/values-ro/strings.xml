@@ -1039,7 +1039,7 @@
 	<string name="context_menu_item_open_bug">Deschide un Bug OSM</string>
 	<string name="context_menu_item_create_poi">Creează POI</string>
 	<string name="shared_string_yes">Da</string>
-	<string name="default_buttons_cancel">Anulează</string>
+	<string name="shared_string_cancel">Anulează</string>
 	<string name="default_buttons_apply">Aplică</string>
 	<string name="default_buttons_add">Adaugă</string>
 	<string name="shared_string_no">Nu</string>
