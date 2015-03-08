@@ -423,7 +423,6 @@
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    <string name="gpx_available_current_track">Current recording track</string>
     <string name="gpx_file_is_empty">Gpx track is empty</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
