@@ -16,15 +16,28 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main_scroll"
         android:layout_width="360dp"
-        android:layout_gravity="start"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:fadeScrollbars="true" >
 
         <LinearLayout
-            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:id="@+id/animateContent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <net.osmand.plus.activities.search.toolbar.SplitToolbar
+                android:id="@+id/bottomControls"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/bottomToolBarColor" />
+        </LinearLayout>
     </net.osmand.plus.dashboard.NotifyingScrollView>
 
 </FrameLayout>

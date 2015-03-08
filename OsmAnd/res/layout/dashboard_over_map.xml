@@ -20,12 +20,24 @@
         android:fadeScrollbars="true" >
 
         <LinearLayout
-            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/dashboard_map_bottom_padding"
-            android:paddingTop="@dimen/dashboard_map_top_padding" />
+            android:id="@+id/animateContent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dashboard_map_top_padding" />
+
+            <net.osmand.plus.activities.search.toolbar.SplitToolbar
+                android:id="@+id/bottomControls"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/bottomToolBarColor" />
+        </LinearLayout>
     </net.osmand.plus.dashboard.NotifyingScrollView>
 
 </FrameLayout>

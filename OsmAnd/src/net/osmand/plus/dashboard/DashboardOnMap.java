@@ -6,13 +6,14 @@ import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
 import net.osmand.plus.views.controls.FloatingActionButton;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.TypedValue;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -28,6 +29,10 @@ import android.widget.ScrollView;
 public class DashboardOnMap {
 
 
+	private static final int LIST_ID = 1;
+	private static final int WAYPOINTS_ID = 2;
+	private static final int CONFIGURE_SCREEN_ID = 3;
+	private static final int SETTINGS_ID = 4;
 	private MapActivity ma;
 	FloatingActionButton fabButton;
 	boolean floatingButtonVisible = true;
@@ -80,20 +85,58 @@ public class DashboardOnMap {
 		this.visible = visible;
 		if (visible) {
 			addDashboardFragments();
+			setupActionBar();
 			dashboardView.setVisibility(View.VISIBLE);
 			fabButton.showFloatingActionButton();
-			open(dashboardView.findViewById(R.id.content));
+			open(dashboardView.findViewById(R.id.animateContent));
 			ma.getMapActions().disableDrawer();
 			ma.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
 			ma.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 		} else {
 			ma.getMapActions().enableDrawer();
-			hide(dashboardView.findViewById(R.id.content));
+			hide(dashboardView.findViewById(R.id.animateContent));
 			ma.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
 			ma.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
 			fabButton.hideFloatingActionButton();
 		}
 	}
+
+	private void setupActionBar() {
+		final Toolbar tb = (Toolbar) ma.findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		Menu menu = tb.getMenu();
+		createMenuItem(menu, LIST_ID, R.string.drawer, 
+				R.drawable.ic_flat_list_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, WAYPOINTS_ID, R.string.waypoints, 
+				R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, CONFIGURE_SCREEN_ID, R.string.layer_map_appearance,
+				R.drawable.ic_configure_screen_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, SETTINGS_ID, R.string.settings_activity, 
+				R.drawable.ic_action_settings_enabled_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+	}
+	
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int icon, int menuItemType) {
+		int r = icon;
+		MenuItem menuItem = m.add(0, id, 0, titleRes);
+		if (r != 0) {
+			menuItem.setIcon(r);
+		}
+		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				return onOptionsItemSelected(item);
+			}
+		});
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		return menuItem;
+	}
+
+
+	protected boolean onOptionsItemSelected(MenuItem item) {
+		return false;
+	}
+
 
 	// To animate view slide out from right to left
 	private void open(View view){
@@ -165,7 +208,11 @@ public class DashboardOnMap {
 
 	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
 		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-			//making background of actionbar transparent with scroll
+			int sy = who.getScrollY();
+			double scale = who.getContext().getResources().getDisplayMetrics().density;
+			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) fabButton.getLayoutParams();
+			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
+			((FrameLayout) fabButton.getParent()).updateViewLayout(fabButton, lp);
 			// TODO
 		}
 	};
