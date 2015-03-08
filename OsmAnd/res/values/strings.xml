@@ -149,7 +149,6 @@
 	<string name="video">Video</string>
 	<string name="photo">Photo</string>
 	<string name="share_note">Share note</string>
-	<string name="rename_recording">Rename recording</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Watch</string>
 	<string name="notes">Notes</string>

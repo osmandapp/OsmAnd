@@ -219,7 +219,7 @@ public class NotesFragment extends ListFragment {
 
 	private void editNote(final Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.rename_recording);
+		builder.setTitle(R.string.shared_string_rename);
 		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog,
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
