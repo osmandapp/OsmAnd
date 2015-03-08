@@ -1915,5 +1915,5 @@
 	<string name="shared_string_save_as_gpx">Сохранить как GPX трек</string>
 	<string name="shared_string_rename">Переименовать</string>
 	<string name="shared_string_delete">Удалить</string>
-	<string name="shared_string_delete_all">Удалить всё</string>
+	<string name="shared_string_delete_all">Удалить все</string>
 	</resources>
