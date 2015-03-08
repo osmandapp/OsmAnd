@@ -1584,7 +1584,7 @@
     <string name="selected_track">Выбранные треки</string>
     <string name="my_tracks">Все треки</string>
     <string name="my_favorites">Избранные</string>
-    <string name="my_data_Button">Мои места</string>
+    <string name="shared_string_my_places">Мои места</string>
     <string name="my_data_activity">Мои места</string>
     <string name="osmo_user_joined">Пользователь %1$s присоединился к группе %2$s</string>
     <string name="osmo_user_left">Пользователь %1$s покинул группу %2$s</string>

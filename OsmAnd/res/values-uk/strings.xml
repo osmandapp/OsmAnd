@@ -1571,7 +1571,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="selected_track">Трек</string>
     <string name="my_tracks">Всі треки</string>
     <string name="my_favorites">Мої Закладки</string>
-    <string name="my_data_Button">Мої Дані</string>
+    <string name="shared_string_my_places">Мої Дані</string>
     <string name="my_data_activity">Мої Дані</string>
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
     <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>

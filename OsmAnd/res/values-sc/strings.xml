@@ -602,7 +602,7 @@
     <string name="selected_track">Rastas ischertadas</string>
     <string name="my_tracks">Totu sas rastas</string>
     <string name="my_favorites">Prefèrridos meos</string>
-    <string name="my_data_Button">Logos meos</string>
+    <string name="shared_string_my_places">Logos meos</string>
     <string name="my_data_activity">Logos meos</string>
     <string name="osmo_user_joined">S’impitadore %1$s est intradu in su grupu %2$s</string>
     <string name="osmo_user_left">S’impitadore %1$s at lassadu su grupu %2$s</string>

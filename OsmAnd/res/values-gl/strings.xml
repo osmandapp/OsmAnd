@@ -158,7 +158,7 @@
     <string name="selected_track">Pistas seleccionadas</string>
     <string name="my_tracks">Todas as pistas</string>
     <string name="my_favorites">Os meus favoritos</string>
-    <string name="my_data_Button">Os meus lugares</string>
+    <string name="shared_string_my_places">Os meus lugares</string>
     <string name="my_data_activity">Os meus lugares</string>
     <string name="osmo_user_joined">O usuario %1$s uniuse ao grupo %2$s</string>
     <string name="osmo_user_left">O usuario %1$s deixou o grupo %2$s</string>

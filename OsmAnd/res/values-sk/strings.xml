@@ -1723,7 +1723,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="selected_track">Zvolená stopa</string>
     <string name="my_tracks">Všetky stopy</string>
     <string name="my_favorites">Moje obľúbené</string>
-    <string name="my_data_Button">Moje miesta</string>
     <string name="my_data_activity">Moje miesta</string>
     <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
     <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>

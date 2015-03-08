@@ -1770,7 +1770,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="selected_track">Tracciati selezionati</string>
     <string name="my_tracks">Tutte le tracce</string>
     <string name="my_favorites">I miei preferiti</string>
-    <string name="my_data_Button">I miei luoghi</string>
     <string name="my_data_activity">I miei luoghi</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>

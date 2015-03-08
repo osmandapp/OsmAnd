@@ -1724,7 +1724,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="gpx_file_is_empty">Sled GPX je prazna</string>
     <string name="selected_track">Izbrane sledi</string>
     <string name="my_tracks">Vse sledi</string>
-    <string name="my_data_Button">Moji kraji</string>
+    <string name="shared_string_my_places">Moji kraji</string>
     <string name="my_data_activity">Moji kraji</string>
     <string name="osmo_user_joined">Uporabnik %1$s se je pridružil skupini %2$s</string>
     <string name="osmo_user_left">Uporabnik %1$s je zapustil skupino %2$s</string>

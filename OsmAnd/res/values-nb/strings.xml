@@ -783,7 +783,7 @@
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
     <string name="map_widget_plain_time">Gjeldende tid</string>
-    <string name="my_data_Button">Mine steder</string>
+    <string name="shared_string_my_places">Mine steder</string>
     <string name="my_data_activity">Mine steder</string>
     <string name="osmo_edit_color">Visningsfarge</string>
     <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>

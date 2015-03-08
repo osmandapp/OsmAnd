@@ -60,7 +60,7 @@
     <string name="gpx_file_is_empty">GPS-sporet er tomt</string>
     <string name="my_tracks">Alle spor</string>
     <string name="my_favorites">Mine favorittar</string>
-    <string name="my_data_Button">Mine stadar</string>
+    <string name="shared_string_my_places">Mine stadar</string>
     <string name="my_data_activity">Mine stadar</string>
     <string name="osmo_follow">Følg</string>
     <string name="osmo_sign_in">Logg inn</string>

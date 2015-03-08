@@ -1525,7 +1525,7 @@
     <string name="selected_track">Valda spår</string>
     <string name="my_tracks">Alla spår</string>
     <string name="my_favorites">Mina favoriter</string>
-    <string name="my_data_Button">Mina platser</string>
+    <string name="shared_string_my_places">Mina platser</string>
     <string name="my_data_activity">Mina platser</string>
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>

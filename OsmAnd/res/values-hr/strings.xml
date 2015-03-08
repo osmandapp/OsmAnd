@@ -1324,7 +1324,7 @@
 	<string name="speed_limit_exceed">Tolerancija ograničenja brzine</string>
 	<string name="gpx_info_diff_altitude">Raspon nadmorske visine: %1$s</string>
 	<string name="my_favorites">Moji favoriti</string>
-    <string name="my_data_Button">Moja mjesta</string>
+    <string name="shared_string_my_places">Moja mjesta</string>
     <string name="my_data_activity">Moja mjesta</string>
     <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
     <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>

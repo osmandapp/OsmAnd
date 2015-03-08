@@ -1603,7 +1603,6 @@
     <string name="selected_track">Valgte spor</string>
     <string name="my_tracks">Alle spor</string>
     <string name="my_favorites">Mine favoritter</string>
-    <string name="my_data_Button">Mine steder</string>
     <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>

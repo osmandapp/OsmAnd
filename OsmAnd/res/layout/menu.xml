@@ -193,7 +193,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|top"
-                            android:text="@string/my_data_Button"
+                            android:text="@string/shared_string_my_places"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:typeface="serif" />

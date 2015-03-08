@@ -242,7 +242,7 @@
     <string name="selected_track">Abranyja śliady</string>
     <string name="my_tracks">Usie śliady</string>
     <string name="my_favorites">Maje zakladkі</string>
-    <string name="my_data_Button">Maje miaścіny</string>
+    <string name="shared_string_my_places">Maje miaścіny</string>
     <string name="my_data_activity">Maje miaścіny</string>
     <string name="osmo_user_joined">Karystaĺnіk %1$s dalučyŭsia da hrupy %2$s</string>
     <string name="osmo_user_left">Karystaĺnіk %1$s pakіnuŭ hrupu %2$s</string>

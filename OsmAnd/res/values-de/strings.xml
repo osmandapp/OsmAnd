@@ -1560,7 +1560,7 @@
 	<string name="selected_track">Ausgewählte Tracks</string>
 	<string name="my_tracks">Alle Tracks</string>
 	<string name="my_favorites">Meine Favoriten</string>
-	<string name="my_data_Button">Meine Orte</string>
+	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="my_data_activity">Meine Orte</string>
 	<string name="loading_smth">Lade %1$s …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>

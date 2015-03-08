@@ -1709,7 +1709,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="selected_track">Абраныя сьляды</string>
     <string name="my_tracks">Усе сьляды</string>
     <string name="my_favorites">Мае закладкі</string>
-    <string name="my_data_Button">Мае мясьціны</string>
     <string name="my_data_activity">Мае мясьціны</string>
     <string name="gpx_file_is_empty">GPX-сьлед пусты</string>
     <string name="gpx_available_current_track">Сьлед, які запісваецца зараз</string>

@@ -1688,7 +1688,7 @@
     <string name="selected_track">Pasirinkti maršrutai</string>
     <string name="my_tracks">Visi maršrutai</string>
     <string name="my_favorites">Mano mėgiami</string>
-    <string name="my_data_Button">Mano vietos</string>
+    <string name="shared_string_my_places">Mano vietos</string>
     <string name="my_data_activity">Mano vietos</string>
     <string name="osmo_user_joined">Vartotojas %1$s prisijungė prie %2$s grupės</string>
     <string name="osmo_user_left">Vartotojas %1$s atsijungė nuo %2$s grupės</string>

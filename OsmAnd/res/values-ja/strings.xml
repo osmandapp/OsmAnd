@@ -1842,7 +1842,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="selected_track">選択された経路</string>
     <string name="my_tracks">全ての経路</string>
     <string name="my_favorites">お気に入り</string>
-    <string name="my_data_Button">お気に入り</string>
+    <string name="shared_string_my_places">お気に入り</string>
     <string name="my_data_activity">お気に入り</string>
     <string name="osmo_user_joined">ユーザー %1$sはグループ %2$sに参加しました</string>
     <string name="osmo_user_left">ユーザー %1$sはグループ %2$sから離れました</string>

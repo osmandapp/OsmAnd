@@ -1763,7 +1763,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="selected_track">Wybrane trasy</string>
     <string name="my_tracks">Wszystkie trasy</string>
     <string name="my_favorites">Moje Ulubione</string>
-    <string name="my_data_Button">Moje Miejsca</string>
+    <string name="shared_string_my_places">Moje Miejsca</string>
     <string name="my_data_activity">Moje Miejsca</string>
     <string name="gpx_info_subtracks">Podścieżki: %1$s </string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>

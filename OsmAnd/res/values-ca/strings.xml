@@ -1630,7 +1630,7 @@
     <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les traces</string>
     <string name="my_favorites">Preferits</string>
-    <string name="my_data_Button">Preferits</string>
+    <string name="shared_string_my_places">Preferits</string>
     <string name="my_data_activity">Llocs personals</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
