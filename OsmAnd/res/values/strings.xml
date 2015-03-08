@@ -840,7 +840,6 @@
 		\n\t* Hillshade packages for Contour lines plugin
 		\n\t* Bug fixes (suboptimal routing)
     </string>
-    <string name="dist_control_start">Start</string>
     
     <string name="local_indexes_cat_srtm">Contour lines data</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
