@@ -2093,7 +2093,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="map_widget_top">ステータスバー</string>
 	<string name="map_widget_right">右パネル</string>
 	<string name="map_widget_left">左パネル</string>
-    <string name="layers_category_show">表示</string>
+    <string name="shared_string_show">表示</string>
 	<string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">付近に</string>
     <string name="osmo_device_not_found">デバイスが見つかりません</string>

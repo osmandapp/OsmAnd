@@ -1993,7 +1993,6 @@
     <string name="map_widget_top">상태 표시줄</string>
 	<string name="map_widget_right">오른쪽 패널</string>
 	<string name="map_widget_left">왼쪽 패널</string>
-    <string name="layers_category_show">표시</string>
 	<string name="configure_map">맵 구성</string>
     <string name="search_radius_proximity">근접에서</string>
     <string name="tip_recent_changes_1_9_t">"버전 1.9 변경사항 : 

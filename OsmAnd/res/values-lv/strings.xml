@@ -1901,7 +1901,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_widget_top">Statusa josla</string>
 	<string name="map_widget_right">Labais panelis</string>
 	<string name="map_widget_left">Kreisais panelis</string>
-    <string name="layers_category_show">Rādīt</string>
+    <string name="shared_string_show">Rādīt</string>
 	<string name="configure_map">Konfigurēt karti</string>
     <string name="osmo_device_not_found">Ierīce nav atrasta</string>
     <string name="anonymous_user">Anonīms lietotājs</string>

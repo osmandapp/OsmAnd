@@ -1909,7 +1909,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="map_widget_top">Statusna vrstica</string>
 	<string name="map_widget_right">Desna plošča</string>
 	<string name="map_widget_left">Leva plošča</string>
-    <string name="layers_category_show">Pokaži</string>
+    <string name="shared_string_show">Pokaži</string>
 	<string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">V bližini</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>

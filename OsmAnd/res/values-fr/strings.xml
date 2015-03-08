@@ -1834,7 +1834,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_widget_top">Barre d\'état</string>
 	<string name="map_widget_right">Panneau de droite</string>
 	<string name="map_widget_left">Panneau de gauche</string>
-    <string name="layers_category_show">Afficher</string>
+    <string name="shared_string_show">Afficher</string>
 	<string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">A proximité de</string>
     <string name="rendering_category_routes">Routes</string>

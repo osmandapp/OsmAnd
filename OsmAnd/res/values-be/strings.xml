@@ -1880,7 +1880,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="search_radius_proximity">Паблізу ад</string>
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
-    <string name="layers_category_show">Паказаць</string>
 	<string name="map_widget_top">Радок стану</string>
 	<string name="map_widget_right">Правая панэль</string>
 	<string name="map_widget_left">Левая панэль</string>

@@ -324,7 +324,7 @@
     <string name="map_widget_top">Трака стања</string>
 	<string name="map_widget_right">Десна површ</string>
 	<string name="map_widget_left">Лева површ</string>
-    <string name="layers_category_show">Прикажи</string>
+    <string name="shared_string_show">Прикажи</string>
 	<string name="configure_map">Подесите мапу</string>
     <string name="osmo_device_not_found">Није пронађен уређај</string>
     <string name="anonymous_user_hint">Безимени корисник не може\n- да прави скупове;\n- да усклађује скупове и уређаје са сервером;\n- да управља скуповима и уређајима у личном уреду.</string>

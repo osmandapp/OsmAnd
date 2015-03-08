@@ -250,7 +250,6 @@
     <string name="map_widget_top">Status bar</string>
 	<string name="map_widget_right">Right panel</string>
 	<string name="map_widget_left">Left panel</string>
-    <string name="layers_category_show">Show</string>
 	<string name="configure_map">Configure map</string>
     <string name="search_radius_proximity">In proximity of</string>
     <string name="osmo_device_not_found">Device not found</string>

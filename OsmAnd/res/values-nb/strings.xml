@@ -807,7 +807,7 @@
     <string name="rendering_category_transport">Transport</string>
     <string name="map_widget_right">Høyre panel</string>
 	<string name="map_widget_left">Venstre panel</string>
-    <string name="layers_category_show">Vis</string>
+    <string name="shared_string_show">Vis</string>
 	<string name="configure_map">Still inn kart</string>
     <string name="osmo_device_not_found">Enhet ikke funnet</string>
     <string name="speed_limit_exceed">Toleranse for fartsgrense</string>

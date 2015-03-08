@@ -1313,7 +1313,7 @@
     <string name="map_widget_top">Statusna traka</string>
 	<string name="map_widget_right">Desni panel</string>
 	<string name="map_widget_left">Lijevi panel</string>
-    <string name="layers_category_show">Prikaži</string>
+    <string name="shared_string_show">Prikaži</string>
 	<string name="configure_map">Konfiguracija karte</string>
     <string name="search_radius_proximity">U blizini</string>
     <string name="osmo_device_not_found">Uređaj nije pronađen</string>

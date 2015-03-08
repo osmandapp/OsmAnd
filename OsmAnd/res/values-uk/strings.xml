@@ -1949,7 +1949,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="map_widget_top">Рядок стану</string>
 	<string name="map_widget_right">Панель праворуч</string>
 	<string name="map_widget_left">Панель ліворуч</string>
-    <string name="layers_category_show">Показати</string>
+    <string name="shared_string_show">Показати</string>
 	<string name="configure_map">Налаштування Мапи</string>
     <string name="search_radius_proximity">Поруч з</string>
     <string name="osmo_device_not_found">Пристрій не знайдено</string>

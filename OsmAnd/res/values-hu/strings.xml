@@ -1753,7 +1753,7 @@
     <string name="map_widget_top">Státuszsor</string>
 	<string name="map_widget_right">Jobb panel</string>
 	<string name="map_widget_left">Bal panel</string>
-    <string name="layers_category_show">Mutat</string>
+    <string name="shared_string_show">Mutat</string>
 	<string name="configure_map">Térképi tartalom</string>
     <string name="search_radius_proximity">ennek a közelében</string>
     <string name="select_impassable_road">Kiválasztás a térképen…</string>

@@ -1775,7 +1775,6 @@
     <string name="map_widget_top">Statuslinjen</string>
 	<string name="map_widget_right">Højre panel</string>
 	<string name="map_widget_left">Venstre panel</string>
-    <string name="layers_category_show">Vis</string>
 	<string name="tip_recent_changes_1_9_t">"Ændringer i 1.9:\n * Opdaterede kort stilarter med vejbelægning rendering, transport lag og vandreture symbolerne\n * Søg efter interessepunkter (IP) langs ruten\n * Marker vej som ufremkommelige pr. session\n * Nemmere at hentning og opdatering af kort\n * Få visuel og audio meddelelse ved at nærme til rutepunkt\n * Udskriv rejseplan og svinginformation\n * Understøttelse af vognbaner\n * Understøtter Android Wear\n * Masser UI ændringer\n * Separat zoom af tekststørrelsen på kortet\n * Specielt lydsignal i tilfælde af afvigelse fra ruten\n * OsMo login-funktionalitet\n * Fix Osmo version uforenelighed "</string>
     <string name="rendering_category_routes">Ruter</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Togruter</string>

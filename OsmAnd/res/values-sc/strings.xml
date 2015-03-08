@@ -1757,7 +1757,7 @@
     <string name="rendering_category_others">Àteros atributos de sa mapa</string>
     <string name="map_widget_appearance_rem">Elementos chi abarrant</string>
     <string name="map_widget_top">Barra de istadu</string>
-	<string name="layers_category_show">Ammustra</string>
+	<string name="shared_string_show">Ammustra</string>
 	<string name="tip_recent_changes_1_9_t">"Mudas in sa 1.9: * Istiles de sa mapa agiornados cun su disinnu de sa superfìtzie, de s’istratu \"trasportu pùblicu\" e sos sìmbulos escursionìsticos * Chirca PDI a curtzu de s’àndala * Sinnala s’istrada comente impercurrìbile pro sa sessione * Iscarrigamentu e agiornamentos de sas mapas prus fàtziles * Notìficas visivas e sonoras a s’accurtziare de sos puntos mesanos * Imprenta s’àndala e sas indicatziones * Suportu a sas corsias de bortada * Suportu pro Android Wear * Unu muntone de mudas de s’IU * Zoom mapa e mannària testu iscrobados * Notìficas àudio ispetziales si ses essinde dae s’àndala * Funtzionalidade autenticatzione (login) OsMo * Curretzione incumpatibilidades versione OsMo "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Àndalas in trenu</string>
     <string name="rendering_attr_tramRoutes_name">Àndalas in tram</string>

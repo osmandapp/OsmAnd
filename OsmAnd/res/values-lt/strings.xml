@@ -1820,7 +1820,7 @@
     <string name="rendering_category_transport">Transportas</string>
     <string name="rendering_category_others">Kiti žemėlapio atributai</string>
     <string name="map_widget_appearance_rem">Likę elementai</string>
-    <string name="layers_category_show">Rodyti</string>
+    <string name="shared_string_show">Rodyti</string>
 	<string name="configure_map">Konfigūruoti žemėlapį</string>
     <string name="map_widget_top">Statuso juosta</string>
 	<string name="rendering_category_routes">Maršrutai</string>

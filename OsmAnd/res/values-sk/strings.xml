@@ -1921,7 +1921,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="map_widget_top">Stavový riadok</string>
 	<string name="map_widget_right">Pravý panel</string>
 	<string name="map_widget_left">Ľavý panel</string>
-    <string name="layers_category_show">Zobraziť</string>
 	<string name="configure_map">Nastaviť mapu</string>
     <string name="search_radius_proximity">Blízko k</string>
     <string name="tip_recent_changes_1_9_t">"Zmeny v 1.9: * Aktulizované mapové štýly s vykresľovaním povrchu ciest, dopravou a turistickými symbolmi * Hľadanie bodov záujmu pozdĺž trasy * Označovanie nepriechodných ciest v rámci relácie * Jednoduchšie sťahovanie a aktualizovanie máp * Vizuálne a zvukové upozornenie na blížiaci sa prechodný bod * Tlač itinerára a pokynov k zabočeniu * Podpora odbočovacích jazdných pruhov * Podpora Android Wear * Mnohé zmeny rozhrania * Oddelená veľkosť písma pre text na mape * Nové zvukové upozornenia pri odchýlení od trasy * Prihlasovanie do OsMo * Oprava nekompatibilít s verziami OsMo "</string>

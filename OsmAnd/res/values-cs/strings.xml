@@ -1748,7 +1748,7 @@ s často kladenými otázkami.</string>
     <string name="map_widget_top">Stavová lišta</string>
 	<string name="map_widget_right">Pravý panel</string>
 	<string name="map_widget_left">Levý panel</string>
-    <string name="layers_category_show">Ukázat</string>
+    <string name="shared_string_show">Ukázat</string>
 	<string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>

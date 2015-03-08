@@ -1756,7 +1756,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="map_widget_top">Статус лента</string>
 	<string name="map_widget_right">Десен панел</string>
 	<string name="map_widget_left">Ляв панел</string>
-    <string name="layers_category_show">Покажи</string>
+    <string name="shared_string_show">Покажи</string>
 	<string name="configure_map">Настройка на картата</string>
     <string name="rendering_attr_tramTrainRoutes_name">Трамвайни и влакови маршрути</string>
 	<string name="lock_screen_request_explanation">%1$s изисква това разрешение за да изключи екрана с цел пестене на енергия.</string>

@@ -1748,7 +1748,7 @@
     <string name="map_widget_top">Barra de estado</string>
 	<string name="map_widget_right">Panel dereito</string>
 	<string name="map_widget_left">Panel esquerdo</string>
-    <string name="layers_category_show">Mostrar</string>
+    <string name="shared_string_show">Mostrar</string>
 	<string name="configure_map">Configurar o mapa</string>
     <string name="search_radius_proximity">Perto de</string>
     <string name="osmo_device_not_found">Dispositivo non atopado</string>

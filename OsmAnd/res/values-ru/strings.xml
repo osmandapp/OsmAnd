@@ -1762,7 +1762,6 @@
     <string name="rendering_category_details">Подробности</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другие атрибуты карты</string>
-    <string name="layers_category_show">Отображать</string>
     <string name="configure_map">Настройка карты</string>
     <string name="map_widget_appearance_rem">Остальное</string>
 	<string name="map_widget_right">Правая панель</string>

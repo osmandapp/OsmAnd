@@ -1935,7 +1935,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="map_widget_top">Statusbalk</string>
 	<string name="map_widget_right">Rechter kolom</string>
 	<string name="map_widget_left">Linker kolom</string>
-    <string name="layers_category_show">Tonen</string>
 	<string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">In de buurt van</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>

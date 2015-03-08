@@ -2049,7 +2049,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="map_widget_top">نوار وضعیت</string>
 	<string name="map_widget_right">پانل راست</string>
 	<string name="map_widget_left">پانل چپ</string>
-    <string name="layers_category_show">نمایش</string>
+    <string name="shared_string_show">نمایش</string>
 	<string name="configure_map">پیکربندی نقشه</string>
     <string name="search_radius_proximity">در نزدیکی</string>
     <string name="osmo_device_not_found">دستگاه پیدا نشد</string>

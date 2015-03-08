@@ -1552,7 +1552,7 @@
     <string name="map_widget_top">Bara de stare</string>
 	<string name="map_widget_right">Panoul dreapta</string>
 	<string name="map_widget_left">Panou stânga</string>
-    <string name="layers_category_show">Arată</string>
+    <string name="shared_string_show">Arată</string>
 	<string name="configure_map">Configuraţi harta</string>
     <string name="search_radius_proximity">În imediata apropiere a</string>
     <string name="osmo_device_not_found">Dispozitivul nu a fost găsit</string>

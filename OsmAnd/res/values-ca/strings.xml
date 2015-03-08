@@ -1802,7 +1802,7 @@
     <string name="map_widget_top">Barra d\'estat</string>
 	<string name="map_widget_right">Tauler dret</string>
 	<string name="map_widget_left">Tauler esquerre</string>
-    <string name="layers_category_show">Mostra</string>
+    <string name="shared_string_show">Mostra</string>
 	<string name="configure_map">Configura el mapa</string>
     <string name="search_radius_proximity">A prop de</string>
     <string name="tip_recent_changes_1_9_t">"Canvis a la 1.9: * S\'han actualitzat els estils dels mapes amb la representació de la superfície de les vies, les capes de transport i els símbols de senderisme* Cerca de PDI durant la ruta * Marcar la via com no disponible per sessió * Més facilitat per baixar i enviar mapes * Notificacions visuals i sonores en aproximar-nos  a una fita * Imprimir un itinerari i la relació de girs * Suport de carrils de gir * Suport a Android Wear * Molts canvis a la IU * Zoom independent pel text en el mapa * Notificacions d\'àudio específiques quan sigueu fora de la ruta * Funcionalitat d\'ingrés OsMo  * S\'ha corregit les incompatibilitats de versió OsMo "</string>

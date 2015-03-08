@@ -64,7 +64,7 @@
     <string name="map_widget_top">Statusny radok</string>
 	<string name="map_widget_right">Pravaja paneĺ</string>
 	<string name="map_widget_left">Lievaja paneĺ</string>
-    <string name="layers_category_show">Pakazać</string>
+    <string name="shared_string_show">Pakazać</string>
 	<string name="configure_map">Nastrojka mapy</string>
     <string name="search_radius_proximity">Pablіzu ad</string>
     <string name="osmo_device_not_found">Prystasavańnie nia znojdziena</string>

@@ -1639,7 +1639,7 @@
     <string name="rendering_category_others">Άλλα χαρακτηριστικά χάρτη</string>
     <string name="map_widget_right">Δεξιός πίνακας</string>
 	<string name="map_widget_left">Αριστερός πίνακας</string>
-    <string name="layers_category_show">Εμφάνιση</string>
+    <string name="shared_string_show">Εμφάνιση</string>
 	<string name="configure_map">Διαμόρφωση χάρτη</string>
     <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
 	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
