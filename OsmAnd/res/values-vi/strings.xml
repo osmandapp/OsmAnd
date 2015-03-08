@@ -234,7 +234,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="indexing_map">Đang tạo chỉ mục bản đồ…</string>
 	<string name="indexing_poi">Đang tạo chỉ mục POI…</string>
 	<string name="indexing_transport">Đang tạo chỉ mục giao thông…</string>
-	<string name="input_output_error">Có lỗi xảy ra với I/O</string>
+	<string name="shared_string_io_error">Có lỗi xảy ra với I/O</string>
 	<string name="old_map_index_is_not_supported">Định dạng dữ liệu \'\'{0}\'\' không được hỗ trợ</string>
 	<string name="poi_filter_car_aid">Sửa Xe</string>
 	<string name="poi_filter_closest_poi">POI gần nhất</string>

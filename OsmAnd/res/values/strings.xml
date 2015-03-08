@@ -1786,7 +1786,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="indexing_map">Indexing map…</string>
 	<string name="indexing_poi">Indexing POI…</string>
 	<string name="indexing_transport">Indexing transport…</string>
-	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
@@ -1992,7 +1991,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="error_io_error">I/O error occurred</string>
 	<string name="downloading_file_new">Downloading …</string>
 	<string name="downloading">Downloading…</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>

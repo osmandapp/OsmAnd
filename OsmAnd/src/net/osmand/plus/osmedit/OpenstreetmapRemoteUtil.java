@@ -329,10 +329,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}
@@ -365,7 +365,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				
 				@Override
 				public void run() {
-					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();					
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();					
 				}
 			});
 		}

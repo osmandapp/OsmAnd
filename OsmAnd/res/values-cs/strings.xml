@@ -311,7 +311,7 @@
   <string name="indexing_map">Indexuji mapu…</string>
   <string name="indexing_poi">Indexuji POI…</string>
   <string name="indexing_transport">Indexuji dopravu…</string>
-  <string name="input_output_error">Došlo k chybě vstupu/výstupu</string>
+  <string name="shared_string_io_error">Došlo k chybě vstupu/výstupu</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

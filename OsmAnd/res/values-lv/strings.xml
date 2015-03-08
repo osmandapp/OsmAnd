@@ -408,7 +408,7 @@
   <string name="indexing_map">Karšu indeksācija…</string>
   <string name="indexing_poi">Indeksē POI…</string>
   <string name="indexing_transport">Indeksē transportu…</string>
-  <string name="input_output_error">I/O kļūda</string>
+  <string name="shared_string_io_error">I/O kļūda</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

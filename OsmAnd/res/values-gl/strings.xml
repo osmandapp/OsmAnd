@@ -1299,7 +1299,7 @@
 	<string name="indexing_map">A indexar o mapa…</string>
 	<string name="indexing_poi">A indexar os PDI…</string>
 	<string name="indexing_transport">A indexar os transportes…</string>
-	<string name="input_output_error">Produciuse un erro de E/S</string>
+	<string name="shared_string_io_error">Produciuse un erro de E/S</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

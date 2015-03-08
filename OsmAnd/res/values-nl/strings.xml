@@ -441,7 +441,6 @@
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
   <string name="indexing_transport">OV wordt geïndexeerd…</string>
-  <string name="input_output_error">Datatransportfout opgetreden</string>
   <string name="km">km</string>
   <string name="km_h">km/u</string>
   <string name="m">m</string>

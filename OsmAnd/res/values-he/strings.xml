@@ -656,7 +656,7 @@
 	<string name="indexing_map">המפה נשמרת באינדקס…</string>
 	<string name="indexing_poi">נ״ע נשמרת באינדקס…</string>
 	<string name="indexing_transport">התחבורה נשמרת באינדקס…</string>
-	<string name="input_output_error">התרחשה שגיאת קלט/פלט</string>
+	<string name="shared_string_io_error">התרחשה שגיאת קלט/פלט</string>
 	<string name="km">ק״מ</string>
 	<string name="km_h">קמ״ש</string>
 	<string name="m">מ׳</string>

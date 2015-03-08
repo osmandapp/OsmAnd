@@ -264,7 +264,7 @@
 	<string name="indexing_map">Indeksiranje karte …</string>
 	<string name="indexing_poi">Indeksiranje POI …</string>
 	<string name="indexing_transport">Indeksiranje javnih prevozov …</string>
-	<string name="input_output_error">I/O napaka</string>
+	<string name="shared_string_io_error">I/O napaka</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

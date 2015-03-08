@@ -407,7 +407,7 @@
   <string name="indexing_map">რუკების ინდექსირება…</string>
   <string name="indexing_poi">POI-ის ინდექსირება…</string>
   <string name="indexing_transport">ტრანსპორტის ინდექსირება…</string>
-  <string name="input_output_error">მოხდა I/O შეცდომა</string>
+  <string name="shared_string_io_error">მოხდა I/O შეცდომა</string>
   <string name="km">კმ</string>
   <string name="km_h">კმ/ს</string>
   <string name="m">მ</string>

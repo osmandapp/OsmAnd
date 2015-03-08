@@ -596,7 +596,7 @@
 	<string name="indexing_map">地圖索引…</string>
 	<string name="indexing_poi">興趣點索引…</string>
 	<string name="indexing_transport">交通索引…</string>
-	<string name="input_output_error">存取發生錯誤</string>
+	<string name="shared_string_io_error">存取發生錯誤</string>
 	<string name="km">公里</string>
 	<string name="km_h">公里/小時</string>
 	<string name="m">公尺</string>

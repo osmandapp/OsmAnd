@@ -475,7 +475,7 @@
   <string name="indexing_map">Індексуються мапи…</string>
   <string name="indexing_poi">Індексуються POI…</string>
   <string name="indexing_transport">Індексується транспорт…</string>
-  <string name="input_output_error">Помилка вводу/виводу</string>
+  <string name="shared_string_io_error">Помилка вводу/виводу</string>
   <string name="km">км</string>
   <string name="km_h">км/г</string>
   <string name="m">м</string>

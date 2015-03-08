@@ -211,7 +211,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 					}
 				} catch(Exception e){
 					log.error("Error searching address", e); //$NON-NLS-1$
-					warning = getString(R.string.error_io_error) + " : " + e.getMessage();
+					warning = getString(R.string.shared_string_io_error) + " : " + e.getMessage();
 				}
 				return null;
 			}

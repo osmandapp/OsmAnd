@@ -550,7 +550,7 @@
   <string name="indexing_map">Indeksuojamas žemėlapis…</string>
   <string name="indexing_poi">Indeksuojamos LV…</string>
   <string name="indexing_transport">Indeksuojamas transportas…</string>
-  <string name="input_output_error">Įvyko I/O klaida</string>
+  <string name="shared_string_io_error">Įvyko I/O klaida</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

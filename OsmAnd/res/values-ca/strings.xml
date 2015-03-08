@@ -1079,7 +1079,7 @@
 	<string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
 	<string name="osmodroid_plugin_description">El connector OsMoDroid és un connector per a l\'aplicació OsmAnd per a creació de traces i funcions relacionades en temps real. La informació sobre el servei es troba disponible a http://esya.ru.</string>
     <string name="auto_announce_off">Atura els anuncis automàtics</string>
-	<string name="input_output_error">S\'ha produït un error d\'E/S</string>
+	<string name="shared_string_io_error">S\'ha produït un error d\'E/S</string>
 	<string name="poi_namefinder_query_empty">Introduïu una consulta de cerca per trobar el PDI</string>
 	<string name="show_transport_over_map">Mostra les parades del transport</string>
 	<string name="error_io_error">S\'ha produït un error E/S</string>
