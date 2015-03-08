@@ -274,7 +274,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			}
 		});
 	
-		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.default_buttons_selectall), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				filter.selectSubTypesToAccept(poiCategory, null);
