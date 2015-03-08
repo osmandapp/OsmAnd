@@ -1908,4 +1908,12 @@
 	<string name="shared_string_settings">Настройки</string>
 	<string name="shared_string_history">История</string>
 	<string name="shared_string_select_on_map">Выбрать на карте</string>
+	<string name="shared_string_select_all">Выбрать все</string>
+	<string name="shared_string_clear">Очистить</string>
+	<string name="shared_string_clear_all">Очистить все</string>
+	<string name="shared_string_save">Сохранить</string>
+	<string name="shared_string_save_as_gpx">Сохранить как GPX трек</string>
+	<string name="shared_string_rename">Переименовать</string>
+	<string name="shared_string_delete">Удалить</string>
+	<string name="shared_string_delete_all">Удалить всё</string>
 	</resources>
