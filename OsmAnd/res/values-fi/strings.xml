@@ -103,7 +103,7 @@
 	<string name="help">Ohje</string>
 	<string name="show_details">Näytä tiedot</string>
 	<string name="shared_string_on">Päällä</string>
-	<string name="accessibility_off">Pois päältä</string>
+	<string name="shared_string_off">Pois päältä</string>
 	<string name="backToMenu">Takaisin valikkoon</string>
 	<string name="north">pohjoinen</string>
 	<string name="north_north_east">pohjoiskoillinen</string>

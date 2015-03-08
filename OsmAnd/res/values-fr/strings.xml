@@ -814,7 +814,7 @@
   <string name="accessibility_mode">Mode accessibilité</string>
   <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité</string>
   <string name="shared_string_on">Oui</string>
-  <string name="accessibility_off">Non</string>
+  <string name="shared_string_off">Non</string>
   <string name="accessibility_default">Selon les paramètres globaux</string>
   <string name="backToMenu">Retour menu</string>
   <string name="zoomOut">Zoom -</string>

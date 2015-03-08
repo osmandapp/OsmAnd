@@ -133,7 +133,7 @@
 	<string name="accessibility_mode">Tilgjengelighetsmodus</string>
 	<string name="accessibility_mode_descr">Slår på tilgjengelighetsfunksjonene</string>
 	<string name="shared_string_on">På</string>
-	<string name="accessibility_off">Av</string>
+	<string name="shared_string_off">Av</string>
 	<string name="accessibility_default">Ifølge den globale systeminnstillingen</string>
 	<string name="backToMenu">Tilbake til meny</string>
 	<string name="zoomOut">Zoom ut</string>

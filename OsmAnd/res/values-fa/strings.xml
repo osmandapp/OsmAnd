@@ -483,7 +483,7 @@
 	<string name="help">کمک</string>
 	<string name="show_details">نمایش جزئیات</string>
 	<string name="shared_string_on">روشن</string>
-	<string name="accessibility_off">خاموش</string>
+	<string name="shared_string_off">خاموش</string>
 	<string name="accessibility_default">طبق تنظیمات کلی سیستم</string>
 	<string name="backToMenu">برگشت به منو</string>
 	<string name="zoomOut">ریزتر</string>

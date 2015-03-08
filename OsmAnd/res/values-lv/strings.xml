@@ -42,7 +42,7 @@
   <string name="accessibility_mode">Pieejamības režīms</string>
   <string name="accessibility_mode_descr">Ieslēdz pieejamības iespējas</string>
   <string name="shared_string_on">Ieslēgts</string>
-  <string name="accessibility_off">Izslēgts</string>
+  <string name="shared_string_off">Izslēgts</string>
   <string name="accessibility_default">Atbilstoši sistēmas uzstādījumiem</string>
   <string name="backToMenu">Atpakaļ uz izvēlni</string>
   <string name="zoomOut">Samazināt</string>

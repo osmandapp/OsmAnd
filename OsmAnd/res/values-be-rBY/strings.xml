@@ -1011,7 +1011,7 @@
 	<string name="accessibility_mode">Režym dastupnaścі</string>
 	<string name="accessibility_mode_descr">Ukliučyć ulaścіvaścі dastupnaścі</string>
 	<string name="shared_string_on">Ukl</string>
-	<string name="accessibility_off">Vykl</string>
+	<string name="shared_string_off">Vykl</string>
 	<string name="accessibility_default">Pavodlie hliabaĺnych naladaŭ systemy</string>
 	<string name="backToMenu">Nazad da meniu</string>
 	<string name="zoomOut">Addalіć</string>

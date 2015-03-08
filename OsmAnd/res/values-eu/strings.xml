@@ -447,7 +447,7 @@
   <string name="accessibility_mode">Erabilerraztasun modua</string>
   <string name="accessibility_mode_descr">Erabilerraztasun ezaugarriak gaitu</string>
   <string name="shared_string_on">On</string>
-  <string name="accessibility_off">Off</string>
+  <string name="shared_string_off">Off</string>
   <string name="accessibility_default">Sistemako ezarpen orokorraren arabera</string>
   <string name="backToMenu">Menura Itzuli</string>
   <string name="zoomOut">Urrundu</string>

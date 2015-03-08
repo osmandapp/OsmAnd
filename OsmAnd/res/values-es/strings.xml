@@ -813,7 +813,7 @@
   <string name="accessibility_mode">Modo accesibilidad</string>
   <string name="accessibility_mode_descr">Activa las características de accesibilidad</string>
   <string name="shared_string_on">activado</string>
-  <string name="accessibility_off">desactivado</string>
+  <string name="shared_string_off">desactivado</string>
   <string name="accessibility_default">Usar configuración global del sistema</string>
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>

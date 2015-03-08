@@ -923,7 +923,7 @@
 	<string name="accessibility_mode">Modo de accesibilidade</string>
 	<string name="accessibility_mode_descr">Activa as funcionalidades de accesibibidade</string>
 	<string name="shared_string_on">Activar</string>
-	<string name="accessibility_off">Desactivar</string>
+	<string name="shared_string_off">Desactivar</string>
 	<string name="accessibility_default">Segundo a opción global do sistema</string>
 	<string name="backToMenu">Regresar ao menú</string>
 	<string name="zoomOut">Afastar</string>

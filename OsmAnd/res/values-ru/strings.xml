@@ -883,7 +883,7 @@
   <string name="accessibility_mode">Режим специальных возможностей</string>
   <string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа</string>
   <string name="shared_string_on">Включён</string>
-  <string name="accessibility_off">Выключен</string>
+  <string name="shared_string_off">Выключен</string>
   <string name="accessibility_default">Использовать системную настройку</string>
   <string name="backToMenu">Главное меню</string>
   <string name="zoomOut">Уменьшить</string>

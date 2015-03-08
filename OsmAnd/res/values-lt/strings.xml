@@ -134,7 +134,7 @@
   <string name="accessibility_mode">Prieigos režimas</string>
   <string name="accessibility_mode_descr">Įjungia prieigos savybes</string>
   <string name="shared_string_on">Įjungta</string>
-  <string name="accessibility_off">Išjungta</string>
+  <string name="shared_string_off">Išjungta</string>
   <string name="accessibility_default">Pagal globalius sistemos nustatymus</string>
   <string name="backToMenu">Atgal į meniu</string>
   <string name="zoomOut">Sumažinti</string>

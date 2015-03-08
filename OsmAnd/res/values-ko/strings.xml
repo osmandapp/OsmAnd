@@ -34,7 +34,6 @@
 	<string name="accessibility_extensions">접근성 확장</string>
 	<string name="accessibility_mode">접근성 모드</string>
 	<string name="accessibility_mode_descr">접근성(내게 필요한 옵션) 기능을 켭니다</string>
-	<string name="accessibility_off">접근성 끄기</string>
 	<string name="accessibility_default">글로벌 시스템 설정에 따름</string>
 	
 	<string name="backToMenu">메뉴로 돌아감</string>

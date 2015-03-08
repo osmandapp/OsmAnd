@@ -515,7 +515,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="accessibility_mode">Modo de acessibilidade</string>
   <string name="accessibility_mode_descr">Activa as opções de acessibilidade</string>
   <string name="shared_string_on">Ligado</string>
-  <string name="accessibility_off">Desligado</string>
+  <string name="shared_string_off">Desligado</string>
   <string name="accessibility_default">De acordo com a definição do sistema</string>
   <string name="backToMenu">Voltar ao menu</string>
   <string name="zoomOut">Afastar</string>

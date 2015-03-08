@@ -236,7 +236,7 @@
 	<string name="accessibility_mode">無障礙模式</string>
 	<string name="accessibility_mode_descr">開啟無障礙功能</string>
 	<string name="shared_string_on">開啟</string>
-	<string name="accessibility_off">關閉</string>
+	<string name="shared_string_off">關閉</string>
 	<string name="accessibility_default">配合全系統設定</string>
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>

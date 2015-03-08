@@ -197,7 +197,7 @@
 	<string name="back_to_location">Natrag na poziciju</string>
 	<string name="show_details">Prikaži detalje</string>
 	<string name="shared_string_on">Uključeno</string>
-	<string name="accessibility_off">Isključeno</string>
+	<string name="shared_string_off">Isključeno</string>
 	<string name="backToMenu">Povratak na izbornik</string>
 	<string name="zoomOut">Udalji</string>
 	<string name="zoomIn">Približi</string>

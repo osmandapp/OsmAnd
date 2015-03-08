@@ -63,7 +63,7 @@
   <string name="accessibility_mode">წვდომადობის რეჟიმი</string>
   <string name="accessibility_mode_descr">რთავს წვდომადობის თვისებებს</string>
   <string name="shared_string_on">ჩართული</string>
-  <string name="accessibility_off">გამორთული</string>
+  <string name="shared_string_off">გამორთული</string>
   <string name="accessibility_default">გლობალურ სისტემურ პარამეტრებზე დაყრდნობით</string>
   <string name="backToMenu">მენიუში დაბრუნება</string>
   <string name="zoomOut">დაპატარავება</string>

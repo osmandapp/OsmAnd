@@ -310,7 +310,7 @@
 	<string name="help">Yardım</string>
 	<string name="show_details">Ayrıntıları göster</string>
 	<string name="shared_string_on">Açık</string>
-	<string name="accessibility_off">Kapalı</string>
+	<string name="shared_string_off">Kapalı</string>
 	<string name="backToMenu">Menüye Geri Dön</string>
 	<string name="zoomOut">Uzaklaştır</string>
 	<string name="zoomIn">Yaklaştır</string>

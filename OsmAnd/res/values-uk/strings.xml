@@ -107,7 +107,7 @@
   <string name="accessibility_mode">Режим допоміжних можливостей</string>
   <string name="accessibility_mode_descr">Вмикає допоміжні можливості</string>
   <string name="shared_string_on">Увімкнено</string>
-  <string name="accessibility_off">Вимкнено</string>
+  <string name="shared_string_off">Вимкнено</string>
   <string name="accessibility_default">Використовувати системні налаштування</string>
   <string name="backToMenu">Головне меню</string>
   <string name="zoomOut">Зменшити</string>

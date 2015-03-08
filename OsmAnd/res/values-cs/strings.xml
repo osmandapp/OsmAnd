@@ -23,7 +23,7 @@
   <string name="accessibility_mode">Režim usnadnění</string>
   <string name="accessibility_mode_descr">Aktivuje funkce usnadnění</string>
   <string name="shared_string_on">Zapnuto</string>
-  <string name="accessibility_off">Vypnuto</string>
+  <string name="shared_string_off">Vypnuto</string>
   <string name="accessibility_default">Podle systémového nastavení</string>
   <string name="backToMenu">Zpět do menu</string>
   <string name="zoomOut">Zmenšit</string>
