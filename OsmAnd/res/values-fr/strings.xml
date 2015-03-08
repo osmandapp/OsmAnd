@@ -1923,7 +1923,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
 <string name="shared_string_enable">Activer</string>
-	<string name="disable_plugin2">Désactiver</string>
+	<string name="shared_string_disable">Désactiver</string>
 	<string name="get_plugin">Obtenir</string>
 <string name="plugin_ski_name">Pistes de ski</string>
     <string name="plugin_nautical_name">Carte marine</string>

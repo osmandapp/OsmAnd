@@ -2006,7 +2006,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 <string name="edit_group">Правіць групу</string>
     <string name="osmo">OsMo</string>
 	<string name="plugin_install_needs_network">Неабходна падключэньне да Інтэрнэту, каб усталяваць гэты модуль.</string>
-	<string name="disable_plugin2">Адключыць</string>
 	<string name="get_plugin">Атрымаць</string>
 <string name="plugin_ski_name">Лыжныя мапы</string>
     <string name="plugin_nautical_name">Марскія мапы</string>

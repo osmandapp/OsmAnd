@@ -1895,7 +1895,7 @@
     <string name="world_ski_missing">Per veure les pistes d\'esquí cal que baixeu un mapa específic</string>
     <string name="nautical_maps_missing">Per accedir a cartes marines cal que baixeu un mapa específic</string>
 	<string name="shared_string_enable">Activa</string>
-	<string name="disable_plugin2">Desactiva</string>
+	<string name="shared_string_disable">Desactiva</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
     <string name="get_plugin">Obtén</string>
 <string name="free">"%1$s disponible "</string>

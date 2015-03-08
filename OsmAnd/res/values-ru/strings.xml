@@ -1880,7 +1880,7 @@
 <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо интернет соединение для установки этого плагина.</string>
 <string name="shared_string_enable">Включить</string>
-	<string name="disable_plugin2">Выключить</string>
+	<string name="shared_string_disable">Выключить</string>
 	<string name="get_plugin">Получить</string>
 <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>

@@ -1248,7 +1248,7 @@
 	<string name="enable_plugin">Deaktivert</string>
 	<string name="disable_plugin">Aktivert</string>
 	<string name="shared_string_enable">Aktiver</string>
-	<string name="disable_plugin2">Deaktiver</string>
+	<string name="shared_string_disable">Deaktiver</string>
 	<string name="plugin_description_title">Beskrivelse</string>
 	<string name="plugin_settings_button_caption">Innstillinger</string>
 	<string name="plugin_install_needs_network">Du trenger en internettforbindelse for å installere dette programtillegget.</string>

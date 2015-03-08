@@ -1840,7 +1840,7 @@
     <string name="remove_the_tag">CÍMKE ELTÁVOLÍTÁSA</string>
     <string name="version_settings_descr">Napi összeállítások letöltése</string>
     <string name="shared_string_enable">Engedélyezés</string>
-	<string name="disable_plugin2">Letiltás</string>
+	<string name="shared_string_disable">Letiltás</string>
 	<string name="plugin_install_needs_network">Internetkapcsolat szükséges a bővítmény telepítéséhez.</string>
 	<string name="get_plugin">Beszerzés</string>
 <string name="version_settings">Összeállítások</string>

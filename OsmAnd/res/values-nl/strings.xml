@@ -2066,7 +2066,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="plugin_nautical_name">Nautische kaartweergave</string>
     <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
-	<string name="disable_plugin2">Deactiveren</string>
 	<string name="get_plugin">Krijgen</string>
 <string name="currently_recording_track">Huidige route opname</string>
 	<string name="watch">Bekijk</string>

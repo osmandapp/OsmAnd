@@ -2100,7 +2100,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="plugin_install_needs_network">برای نصب این افزونه به اتصال اینترنت نیاز دارید.</string>
 	<string name="plugin_settings_button_caption">تنظیمات</string>
 	<string name="plugin_description_title">توضیح</string>
-	<string name="disable_plugin2">غیرفعال کردن</string>
+	<string name="shared_string_disable">غیرفعال کردن</string>
 	<string name="shared_string_enable">فعال کردن</string>
 	<string name="disable_plugin">فعال</string>
 	<string name="enable_plugin">غیرفعال</string>

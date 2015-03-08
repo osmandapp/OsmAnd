@@ -1899,7 +1899,7 @@
 	<string name="plugin_settings_button_caption">設定</string>
 <string name="edit_group">編輯群組</string>
     <string name="shared_string_enable">啟用</string>
-	<string name="disable_plugin2">停用</string>
+	<string name="shared_string_disable">停用</string>
 	<string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
 	<string name="get_plugin">接收</string>
 <string name="plugin_ski_name">檢視滑雪地圖</string>

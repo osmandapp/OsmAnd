@@ -1868,7 +1868,7 @@ s často kladenými otázkami.</string>
 	<string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
 	<string name="export">Exportovat</string>
 	<string name="shared_string_enable">Zapnout</string>
-	<string name="disable_plugin2">Vypnout</string>
+	<string name="shared_string_disable">Vypnout</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
 	<string name="get_plugin">Získat</string>
 <string name="route_points">Body cesty</string>

@@ -2063,7 +2063,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="plugin_settings_button_caption">Impostazioni</string>
 <string name="edit_group">Modifica il gruppo</string>
     <string name="plugin_install_needs_network">Per installare questo componente aggiuntivo è necessaria la connessione a internet.</string>
-	<string name="disable_plugin2">Disattiva</string>
 	<string name="get_plugin">Ottieni</string>
 <string name="plugin_ski_name">Viuslizzazione mappa sci</string>
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>

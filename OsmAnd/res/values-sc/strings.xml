@@ -1842,7 +1842,7 @@
 	<string name="plugin_settings_button_caption">Impostaduras</string>
 <string name="edit_group">Modìfica su grupu</string>
     <string name="shared_string_enable">Abìlita</string>
-	<string name="disable_plugin2">Disabìlita</string>
+	<string name="shared_string_disable">Disabìlita</string>
 	<string name="plugin_install_needs_network">Est netzessària sa cunnessione a ìnternet pro installare custu cumponente annuntilu (plugin).</string>
 	<string name="get_plugin">Iscàrriga</string>
 <string name="plugin_nautical_name">Vista mapa nàutica</string>
