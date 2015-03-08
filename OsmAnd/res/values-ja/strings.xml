@@ -1259,7 +1259,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
 	<string name="filename_input">ファイル名: </string>
 	<string name="file_with_name_already_exist">同じ名前のファイルが既に存在します。</string>
-	<string name="default_buttons_save">保存</string>
+	<string name="shared_string_save">保存</string>
 	<string name="menu_save_directions">案内を保存</string>
 	<string name="local_index_upload_gpx_description">OSMコミュニティにGPXファイルをアップロードします。これらはマップを改善するために使用されます。</string>
 	<string name="local_index_items_uploaded">%1$d %2$d のアイテムがアップロードに成功しました。</string>

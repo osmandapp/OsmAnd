@@ -251,7 +251,6 @@
   <string name="route_successfully_saved_at">Route succesvol opgeslagen als \'%1$s\'.</string>
   <string name="filename_input">Bestandsnaam: </string>
   <string name="file_with_name_already_exist">Er bestaat al een bestand met dezelfde naam.</string>
-  <string name="default_buttons_save">Bewaar</string>
   <string name="menu_save_directions">Bewaar navigatie-aanwijzingen</string>
   <string name="local_index_upload_gpx_description">Upload GPX-bestanden naar Openstreetmap. Ze worden gebruikt om de kaarten te verbeteren.</string>
   <string name="local_index_items_uploaded">%1$d of %2$d bestanden succesvol ge-upload.</string>

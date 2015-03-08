@@ -778,7 +778,7 @@
 	<string name="show_more_map_detail_descr">Pokaži neke pojedinosti vektorske karte (ceste i sl.) na manjem zoom-u</string>
 	<string name="favourites_delete_multiple_succesful">Točke favorita su uspješno izbrisane.</string>
 	<string name="favorite_delete_multiple">Izbrisati čete %1$d lokacije u %2$d grupi. Jeste li sigurni?</string>
-	<string name="default_buttons_save">Spremi</string>
+	<string name="shared_string_save">Spremi</string>
 	<string name="menu_save_directions">Spremi upute</string>
 	<string name="local_index_upload_gpx_description">Uploadaj GPX datoteke na OSM. Koristiti će se za poboljšanje karata.</string>
 	<string name="local_index_items_uploaded">%1$d od %2$d stavke uspješno su upload-ane.</string>

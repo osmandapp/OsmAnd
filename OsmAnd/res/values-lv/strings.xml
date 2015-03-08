@@ -230,7 +230,7 @@
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
-  <string name="default_buttons_save">Saglabāt</string>
+  <string name="shared_string_save">Saglabāt</string>
   <string name="menu_save_directions">Saglabāt norādījumus</string>
   <string name="local_index_upload_gpx_description">Augšupielādēt GPX failus OSM kopienai. Tie tiks izmantoti, lai uzlabotu kartes.</string>
   <string name="local_index_items_uploaded">%1$d no %2$d vienība(s) veiksmīgi augšupielādētas.</string>

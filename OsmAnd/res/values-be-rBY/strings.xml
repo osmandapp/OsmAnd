@@ -1242,7 +1242,7 @@
 	<string name="route_successfully_saved_at">Maršrut paśpiachova zachavany jak \'%1$s\'.</string>
 	<string name="filename_input">"Іmia fajla: "</string>
 	<string name="file_with_name_already_exist">Fajl z takoj nazvaj užo іsnuje.</string>
-	<string name="default_buttons_save">Zachavać</string>
+	<string name="shared_string_save">Zachavać</string>
 	<string name="menu_save_directions">Zachavać maršrut</string>
 	<string name="local_index_upload_gpx_description">Adaslać fajly GPX na siervier OSM. Jany buduć vykarystanyja dlia paliapšeńnia mapy.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d abektaŭ paśpiachova adaslanyja.</string>

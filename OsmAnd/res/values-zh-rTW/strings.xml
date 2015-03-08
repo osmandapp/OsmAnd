@@ -422,7 +422,7 @@
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>
-	<string name="default_buttons_save">儲存</string>
+	<string name="shared_string_save">儲存</string>
 	<string name="menu_save_directions">儲存導引</string>
 	<string name="local_index_upload_gpx_description">上傳 GPX 到 OSM 社群，這些將有助於改善地圖。</string>
 	<string name="local_index_items_uploaded">%2$d 項中的 %1$d 項已上傳成功。</string>

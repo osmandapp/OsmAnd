@@ -53,7 +53,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
 	<string name="filename_input">Tên tập tin : </string>
 	<string name="file_with_name_already_exist">Tên tập tin đã có.</string>
-	<string name="default_buttons_save">Lưu</string>
+	<string name="shared_string_save">Lưu</string>
 	<string name="menu_save_directions">Lưu hướng</string>
 	
 	<string name="local_index_upload_gpx_description">Tải tập tin GPX lên cộng đồng OSM. Nó sẽ hữu ích để cải thiện chất lượng bản đồ.</string>

@@ -684,7 +684,7 @@
 	<string name="route_successfully_saved_at">路线已成功保存为 \'%1$s\'。</string>
 	<string name="filename_input">文件名： </string>
 	<string name="file_with_name_already_exist">同名文件已存在。</string>
-	<string name="default_buttons_save">保存</string>
+	<string name="shared_string_save">保存</string>
 	<string name="local_index_items_uploaded">%2$d 个项目中的 %1$d 个已成功上传。</string>
 	<string name="show_more_map_detail">显示更多地图细节</string>
 	<string name="favourites_delete_multiple_succesful">收藏点已成功删除。</string>

@@ -683,7 +683,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="route_successfully_saved_at">Rota guardada como \'%1$s\'.</string>
   <string name="filename_input">O nome do arquivo : </string>
   <string name="file_with_name_already_exist">Já existe um arquivo com o mesmo nome.</string>
-  <string name="default_buttons_save">Guardar</string>
+  <string name="shared_string_save">Guardar</string>
   <string name="menu_save_directions">Guardar direcções</string>
   <string name="local_index_upload_gpx_description">Fazer upload de arquivos GPX para a comunidade OSM, para ajudar a melhorar os mapas.</string>
   <string name="local_index_items_uploaded">%1$d de %2$d items enviados com sucesso.</string>

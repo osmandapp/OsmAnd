@@ -166,7 +166,7 @@
   <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
   <string name="filename_input">Nom du fichier : </string>
   <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
-  <string name="default_buttons_save">Enregistrer</string>
+  <string name="shared_string_save">Enregistrer</string>
   <string name="menu_save_directions">Enregistrer l\'itinéraire</string>
   <string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
   <string name="local_index_items_uploaded">%1$d sur %2$d élement(s) envoyés avec succès.</string>

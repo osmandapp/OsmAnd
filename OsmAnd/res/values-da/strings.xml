@@ -560,7 +560,6 @@
 	<string name="route_successfully_saved_at">Rute gemt som \'%1$s\'.</string>
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
-	<string name="default_buttons_save">Gem</string>
 	<string name="menu_save_directions">Gem kørselsvejledning</string>
 	<string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kort.</string>
 	<string name="local_index_items_uploaded">%1$d af %2$d poster overført.</string>

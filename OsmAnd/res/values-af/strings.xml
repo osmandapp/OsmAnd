@@ -312,7 +312,7 @@
   <string name="filename_input">"Dokument naam:
 " </string>
   <string name="file_with_name_already_exist">Lêer met dieselfde naam bestaan reeds.</string>
-  <string name="default_buttons_save">Berg</string>
+  <string name="shared_string_save">Berg</string>
   <string name="menu_save_directions">Berg aanwysings</string>
   <string name="local_index_upload_gpx_description">Laai GPX lêers op na OSM gemeenskap. Dit sal gebruik word om kaarte te verbeter.</string>
   <string name="local_index_items_uploaded">%1$d van %2$d item (s) opgelaai.</string>

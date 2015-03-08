@@ -221,7 +221,7 @@
   <string name="route_successfully_saved_at">Az útvonal sikeresen mentve: \'%1$s\'.</string>
   <string name="filename_input">Fájl neve : </string>
   <string name="file_with_name_already_exist">Már létezik fájl ilyen névvel.</string>
-  <string name="default_buttons_save">Mentés</string>
+  <string name="shared_string_save">Mentés</string>
   <string name="menu_save_directions">Irányok mentése</string>
   <string name="local_index_upload_gpx_description">GPX fájl feltöltése OSM-be. A térkép kibővítésére használják majd.</string>
   <string name="local_index_items_uploaded">%2$d darabból %1$d sikeresen feltöltve.</string>

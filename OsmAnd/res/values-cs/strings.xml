@@ -241,7 +241,7 @@
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">Jméno souboru : </string>
   <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
-  <string name="default_buttons_save">Uložit</string>
+  <string name="shared_string_save">Uložit</string>
   <string name="menu_save_directions">Uložit pokyny</string>
   <string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
   <string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>

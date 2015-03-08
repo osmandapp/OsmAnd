@@ -117,7 +117,7 @@
   <string name="context_menu_item_search">इथे जवळ शोधा</string>
   <string name="filename_input">फाइलचे नाव : </string>
   <string name="file_with_name_already_exist">ह्या नावाने फाइल आधीच अस्तित्वात आहे.</string>
-  <string name="default_buttons_save">साठवा</string>
+  <string name="shared_string_save">साठवा</string>
   <string name="menu_save_directions">दिशा साठवा</string>
   <string name="local_index_mi_upload_gpx">ओएसएम ला पाठवा</string>
   <string name="show_more_map_detail">नकाशा सविस्तरपणे दाखवा</string>

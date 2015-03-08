@@ -515,7 +515,7 @@
 	<string name="route_successfully_saved_at">Rută salvată cu succes ca \'%1$s\'.</string>
 	<string name="filename_input">Numele fișierului: </string>
 	<string name="file_with_name_already_exist">Există un fișier cu același nume.</string>
-	<string name="default_buttons_save">Salvează</string>
+	<string name="shared_string_save">Salvează</string>
 	<string name="menu_save_directions">Salvează indicații</string>
 	<string name="local_index_upload_gpx_description">Încărcare fișier GPX la comunitatea OSM. Acestea vor fi folosite pentru îmbunătățirea hărților.</string>
 	<string name="local_index_items_uploaded">%1$d din %2$d element(e) încărcate cu succes.</string>

@@ -1614,7 +1614,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
 	<string name="filename_input">File name: </string>
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
-	<string name="default_buttons_save">Save</string>
 	<string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
 	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
 	<string name="local_index_mi_upload_gpx">Send to OSM</string>

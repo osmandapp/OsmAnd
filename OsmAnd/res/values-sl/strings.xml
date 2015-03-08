@@ -769,7 +769,7 @@
 	<string name="route_successfully_saved_at">Pot je bila uspešno shranjena kot \'%1$s\'.</string>
 	<string name="filename_input">Ime datoteke: </string>
 	<string name="file_with_name_already_exist">Datoteka z enakim imenom že obstaja.</string>
-	<string name="default_buttons_save">Shrani</string>
+	<string name="shared_string_save">Shrani</string>
 	<string name="menu_save_directions">Shrani navodila</string>
 	<string name="local_index_upload_gpx_description">Pošlji datoteke GPX za skupnost OSM. Uporabljene bodo za izboljšavo zemljevidov.</string>
 	<string name="local_index_items_uploaded">%1$d od %2$d predmet(ov) je bilo uspešno poslanih.</string>

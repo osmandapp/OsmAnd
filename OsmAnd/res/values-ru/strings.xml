@@ -295,7 +295,6 @@
   <string name="route_successfully_saved_at">Маршрут успешно сохранён в \"%1$s\".</string>
   <string name="filename_input">Имя файла: </string>
   <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
-  <string name="default_buttons_save">Сохранить</string>
   <string name="menu_save_directions">Сохранить маршрут</string>
   <string name="local_index_upload_gpx_description">Поделиться файлами GPX с сообществом OSM. Они будут использованы для улучшения карты и загружены в osm.org.</string>
   <string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>

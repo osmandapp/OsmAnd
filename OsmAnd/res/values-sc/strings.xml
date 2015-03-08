@@ -939,7 +939,7 @@
 	<string name="route_successfully_saved_at">Àndala sarbada comente \'%1$s\'.</string>
 	<string name="filename_input">"Nùmene documentu: "</string>
 	<string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
-	<string name="default_buttons_save">Sarba</string>
+	<string name="shared_string_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
 	<string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="osmo_invite">Invita…</string>

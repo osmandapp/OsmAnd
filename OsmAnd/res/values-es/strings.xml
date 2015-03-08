@@ -159,7 +159,7 @@
   <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
   <string name="filename_input">Nombre de archivo: </string>
   <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
-  <string name="default_buttons_save">Guardar</string>
+  <string name="shared_string_save">Guardar</string>
   <string name="menu_save_directions">Guardar direcciones</string>
   <string name="local_index_upload_gpx_description">Envía archivos GPX a la comunidad OSM. Serán utilizados para mejorar los mapas.</string>
   <string name="local_index_items_uploaded">%1$d de %2$d elemento(s) correctamente enviado(s).</string>

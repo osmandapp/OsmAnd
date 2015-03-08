@@ -344,7 +344,7 @@
 	<string name="search_position_favorites">Favoriler…</string>
 	<string name="search_position_current_location">Geçerli konum…</string>
 	<string name="file_with_name_already_exist">Aynı isimli dosya zaten var.</string>
-	<string name="default_buttons_save">Kaydet</string>
+	<string name="shared_string_save">Kaydet</string>
 	<string name="favorite_home_category">Ev</string>
 	<string name="favorite_friends_category">Arkadaşlar</string>
 	<string name="favorite_places_category">Yerler</string>

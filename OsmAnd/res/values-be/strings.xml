@@ -886,7 +886,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_successfully_saved_at">Маршрут пасьпяхова захаваны як \'%1$s\'.</string>
 	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой назвай ужо існуе.</string>
-	<string name="default_buttons_save">Захаваць</string>
 	<string name="menu_save_directions">Захаваць маршрут</string>
 	<string name="local_index_upload_gpx_description">Адаслаць файлы GPX на сервер OSM. Яны будуць выкарыстаныя для паляпшэньня мапы.</string>
 	<string name="local_index_items_uploaded">%1$d з %2$d аб\'ектаў пасьпяхова адасланыя.</string>

@@ -246,7 +246,7 @@
   <string name="route_successfully_saved_at">გზა შეინახა წარმატებით. სახელი \'%1$s\'.</string>
   <string name="filename_input">"ფაილის სახელი: "</string>
   <string name="file_with_name_already_exist">ფაილი მოცემული სახელით უკვე არსებობს.</string>
-  <string name="default_buttons_save">შენახვა</string>
+  <string name="shared_string_save">შენახვა</string>
   <string name="menu_save_directions">მიმართულებების შენახვა</string>
   <string name="local_index_upload_gpx_description">GPX ფაილების OSM-ში ატვირთვა. ისინი გამოიყენება რუკების გასაუმჯობესებლად.</string>
   <string name="local_index_items_uploaded">%1$d %2$d -დან წარმატებით აიტვირთა.</string>

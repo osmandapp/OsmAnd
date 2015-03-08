@@ -160,7 +160,6 @@
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
   <string name="filename_input">Nome file: </string>
   <string name="file_with_name_already_exist">Esiste già un file con lo stesso nome.</string>
-  <string name="default_buttons_save">Salva</string>
   <string name="menu_save_directions">Salva direzioni</string>
   <string name="local_index_upload_gpx_description">Invio dei file GPX alla comunità OSM. Verranno utilizzati per migliorare le mappe.</string>
   <string name="local_index_items_uploaded">Oggetto(i) %1$d di %2$d caricato(i) correttamente.</string>

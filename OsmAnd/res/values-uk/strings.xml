@@ -302,7 +302,7 @@
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
   <string name="filename_input">Ім’я файлу: </string>
   <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
-  <string name="default_buttons_save">Зберегти</string>
+  <string name="shared_string_save">Зберегти</string>
   <string name="menu_save_directions">Зберегти маршрут</string>
   <string name="local_index_upload_gpx_description">Відіслати GPX файли на OSM сервер. Вони будуть використані для покращення мап і завантажені на osm.org.</string>
   <string name="local_index_items_uploaded">%1$d з %2$d об’єктів успішно завантажено.</string>

@@ -489,7 +489,7 @@
 	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
 	<string name="filename_input">"שם הקובץ : "</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
-	<string name="default_buttons_save">שמירה</string>
+	<string name="shared_string_save">שמירה</string>
 	<string name="menu_save_directions">שמירת ההכוונה</string>
 	<string name="local_index_upload_gpx_description">שליחת קובצי GPX לקהילת OSM. אלו ישמשו לשיפור המפות.</string>
 	<string name="local_index_items_uploaded">%1$d מתוך %2$d פריטים נשלחו בהצלחה.</string>

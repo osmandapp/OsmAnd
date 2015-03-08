@@ -1147,7 +1147,7 @@
 	<string name="route_successfully_saved_at">A ruta foi gardada correctamente como «%1$s».</string>
 	<string name="filename_input">"Nome do ficheiro: "</string>
 	<string name="file_with_name_already_exist">Xa existe un ficheiro co mesmo nome.</string>
-	<string name="default_buttons_save">Gardar</string>
+	<string name="shared_string_save">Gardar</string>
 	<string name="menu_save_directions">Gardar as indicacións</string>
 	<string name="local_index_upload_gpx_description">Actualizar os ficheiros de GPX á comunidade de OSM. Serán empregados para mellorar os mapas.</string>
 	<string name="local_index_items_uploaded">Foron enviados correctamente %1$d de %2$d elemento(s).</string>

@@ -379,7 +379,7 @@
 	<string name="map_text_size">اندازه فونت نقشه</string>
 	<string name="filename_input">نام فایل: </string>
 	<string name="file_with_name_already_exist">فایلی با نام مشابه از قبل وجود دارد.</string>
-	<string name="default_buttons_save">ذخیره</string>
+	<string name="shared_string_save">ذخیره</string>
 	<string name="menu_save_directions">ذخیره مسیرها</string>
 	<string name="show_more_map_detail">جزئیات بیشتری از نقشه نشان بده</string>
 	<string name="favorite_home_category">خانه</string>

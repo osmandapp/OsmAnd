@@ -274,7 +274,7 @@
 	<string name="route_successfully_saved_at">Rute vellykket lagret som \'%1$s\'.</string>
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Fil med samme navn finnes allerede.</string>
-	<string name="default_buttons_save">Lagre</string>
+	<string name="shared_string_save">Lagre</string>
 	<string name="menu_save_directions">Lagre anvisninger</string>
 	<string name="show_more_map_detail">Vis flere kartdetaljer</string>
 	<string name="favourites_delete_multiple_succesful">Favorittpunkt(er) vellykket slettet.</string>

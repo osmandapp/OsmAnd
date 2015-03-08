@@ -264,7 +264,7 @@
 	<string name="context_menu_item_search">Тражи оближње</string>
 	<string name="filename_input">"Име датотеке: "</string>
 	<string name="file_with_name_already_exist">Датотека са истим именом већ постоји.</string>
-	<string name="default_buttons_save">Сачувај</string>
+	<string name="shared_string_save">Сачувај</string>
 	<string name="menu_save_directions">Сачувај правце</string>
 	<string name="local_index_upload_gpx_description">Отпремите ГПИкс датотеке заједници ОСМ. Употребиће се за побољшање мапа.</string>
 	<string name="local_index_items_uploaded">%1$d од %2$d ставки је успешно отпремљено.</string>

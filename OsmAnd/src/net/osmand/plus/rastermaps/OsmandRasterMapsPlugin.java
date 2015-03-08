@@ -367,7 +367,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		});
 		
 		bld.setView(view);
-		bld.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

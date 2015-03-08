@@ -209,7 +209,7 @@ public class SelectedGPXFragment extends ListFragment {
 		editText.setPadding(7, 3, 7, 3);
 		b.setTitle(R.string.save_as_favorites_points);
 		b.setView(editText);
-		b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+		b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

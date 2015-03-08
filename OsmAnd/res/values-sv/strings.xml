@@ -440,7 +440,7 @@
 <string name="route_successfully_saved_at">Rutten sparades som \'%1$s\'.</string>
 <string name="filename_input">Filnamn: </string>
 <string name="file_with_name_already_exist">En fil med samma namn finns redan.</string>
-<string name="default_buttons_save">Spara</string>
+<string name="shared_string_save">Spara</string>
 <string name="menu_save_directions">Spara vägbeskrivningar</string>
 <string name="local_index_upload_gpx_description">Skicka GPX-filer till OSM-gemenskapen. De kommer att användas för att förbättra kartorna.</string>
 <string name="local_index_items_uploaded">%1$d av %2$d post(er) har överförts utan problem.</string>

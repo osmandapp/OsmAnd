@@ -241,7 +241,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final EditText editText = new EditText(a);
 			editText.setText(f.getName().subSequence(0, xt));
 			b.setView(editText);
-			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

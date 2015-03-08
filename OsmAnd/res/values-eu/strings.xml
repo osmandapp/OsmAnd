@@ -620,7 +620,7 @@
   <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala arrakastatsu gorde da.</string>
   <string name="filename_input">"Fitxategi izena: "</string>
   <string name="file_with_name_already_exist">Izen berdineko beste fitxategi bat dago dagoeneko.</string>
-  <string name="default_buttons_save">Gorde</string>
+  <string name="shared_string_save">Gorde</string>
   <string name="menu_save_directions">Gorde norabideak</string>
   <string name="local_index_upload_gpx_description">GPX fitxategiak OSMra igo. Mapak hobetzeko erabiliko dira.</string>
   <string name="local_index_items_uploaded">%2$d-tik %1$d elementu ongi igotak.</string>

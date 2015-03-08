@@ -60,7 +60,7 @@
   <string name="route_successfully_saved_at">Trasa została zapisana jako \'%1$s\'.</string>
   <string name="filename_input">Nazwa pliku: </string>
   <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
-  <string name="default_buttons_save">Zapisz</string>
+  <string name="shared_string_save">Zapisz</string>
   <string name="menu_save_directions">Zapisz kierunki</string>
   <string name="local_index_upload_gpx_description">Wyślij ślady GPX do społeczności OSM. Pomoże to ulepszyć mapę.</string>
   <string name="local_index_items_uploaded">%1$d z %2$d został wysłany.</string>

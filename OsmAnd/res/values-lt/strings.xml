@@ -359,7 +359,7 @@
   <string name="route_successfully_saved_at">Maršrutas sėkmingai išsaugotas faile \'%1$s\'.</string>
   <string name="filename_input">Failo pavadinimas : </string>
   <string name="file_with_name_already_exist">Failas tokiu pavadinimu jau egzistuoja.</string>
-  <string name="default_buttons_save">Išsaugoti</string>
+  <string name="shared_string_save">Išsaugoti</string>
   <string name="menu_save_directions">Išsaugoti maršrutą</string>
   <string name="local_index_upload_gpx_description">Įkelti GPX failus į OSM bendruomenės puslapį. Jie bus naudojami žemėlapių tobulinimui.</string>
   <string name="local_index_items_uploaded">Sėkmingai įkelti(-as) %1$d failai(-as) iš %2$d.</string>

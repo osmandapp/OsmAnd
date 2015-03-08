@@ -258,7 +258,7 @@
 <string name="save_route_dialog_title">Desa la ruta com una traça GPX</string>
 <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
 <string name="filename_input">Nom del fitxer: </string>
-<string name="default_buttons_save">Desa</string>
+<string name="shared_string_save">Desa</string>
 <string name="show_more_map_detail">Mostra més detalls al mapa</string>
 <string name="edit_filter_delete_menu_item">Suprimeix</string>
 <string name="tip_update_index">Actualitza els mapes fora de línia</string>
