@@ -773,7 +773,7 @@
   <string name="indexing_map">Mapa indexatzen…</string>
   <string name="indexing_poi">POI indexatzen…</string>
   <string name="indexing_transport">Garraioa indexatzen…</string>
-  <string name="input_output_error">I/O errorea gertatu da</string>
+  <string name="shared_string_io_error">I/O errorea gertatu da</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

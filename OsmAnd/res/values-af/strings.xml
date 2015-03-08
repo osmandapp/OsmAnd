@@ -475,7 +475,7 @@
   <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
   <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
   <string name="indexing_transport">Skep vervoer indeks…</string>
-  <string name="input_output_error">Lees/skryf fout het voorgekom</string>
+  <string name="shared_string_io_error">Lees/skryf fout het voorgekom</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

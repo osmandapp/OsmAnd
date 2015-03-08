@@ -484,7 +484,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				if (result.booleanValue() && runOnSuccess != null) {
 					runOnSuccess.run();
 				} else if (!result.booleanValue()) {
-					Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show();
 				}
 			}
 			if(progress.getDialog().isShowing()) {

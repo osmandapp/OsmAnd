@@ -164,7 +164,7 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
      <string name="indexing_map">マップを索引化</string>
      <string name="indexing_poi">POIを索引化</string>
      <string name="indexing_transport">交通機関を索引化</string>
-     <string name="input_output_error">I/O エラー発生</string>
+     <string name="shared_string_io_error">I/O エラー発生</string>
      <string name="km">km</string>
      <string name="km_h">km/h</string>
      <string name="m">m</string>

@@ -144,7 +144,7 @@ public class ShareDialog {
 				try {
 					type.execute(a, title);
 				} catch (RuntimeException e) {
-					Toast.makeText(a, R.string.input_output_error, Toast.LENGTH_SHORT).show();
+					Toast.makeText(a, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 				}				
 			}
 		});

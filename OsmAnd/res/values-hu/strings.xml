@@ -408,7 +408,7 @@
   <string name="indexing_map">Térkép indexelése…</string>
   <string name="indexing_poi">POI-k indexelése…</string>
   <string name="indexing_transport">Közlekedési eszközök indexelése…</string>
-  <string name="input_output_error">Be-kimeneti hiba történt</string>
+  <string name="shared_string_io_error">Be-kimeneti hiba történt</string>
   <string name="km">km</string>
   <string name="km_h">km/ó</string>
   <string name="m">m</string>

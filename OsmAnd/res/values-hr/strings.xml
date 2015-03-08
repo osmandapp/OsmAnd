@@ -520,7 +520,7 @@
 	<string name="indexing_map">Indeksiranje karte…</string>
 	<string name="indexing_poi">Indeksiranje POI…</string>
 	<string name="indexing_transport">Indeksiranje prijevoza…</string>
-	<string name="input_output_error">I/O pogreška</string>
+	<string name="shared_string_io_error">I/O pogreška</string>
 	<string name="indexing_address">Indeksiranje adresa…</string>
 	<string name="amenity_type_barrier">Barijera</string>
 	<string name="amenity_type_education">Obrazovanje</string>

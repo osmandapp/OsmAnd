@@ -344,7 +344,7 @@
   <string name="indexing_map">Indexando mapa…</string>
   <string name="indexing_poi">Indexando PDI…</string>
   <string name="indexing_transport">Indexando transporte…</string>
-  <string name="input_output_error">Ocurrió un error de entrada/salida</string>
+  <string name="shared_string_io_error">Ocurrió un error de entrada/salida</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>

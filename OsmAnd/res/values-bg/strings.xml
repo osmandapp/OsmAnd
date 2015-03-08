@@ -1132,7 +1132,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="indexing_map">Индексиране на картата…</string>
 	<string name="indexing_poi">Индексиране на POI…</string>
 	<string name="indexing_transport">Индексиране на транспорт…</string>
-	<string name="input_output_error">Възникна входно/изходна грешка</string>
+	<string name="shared_string_io_error">Възникна входно/изходна грешка</string>
 	<string name="km">км</string>
 	<string name="km_h">км/ч</string>
 	<string name="m">м</string>

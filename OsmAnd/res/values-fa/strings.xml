@@ -861,7 +861,7 @@
 	<string name="indexing_map">درحال ایندکس نقشه…</string>
 	<string name="indexing_poi">درحال ایندکس POI…</string>
 	<string name="indexing_transport">درحال ایندکس حمل و نقل عمومی…</string>
-	<string name="input_output_error">خطای ورودی/خروجی رخ داد</string>
+	<string name="shared_string_io_error">خطای ورودی/خروجی رخ داد</string>
 	<string name="km">کیلومتر</string>
 	<string name="m">متر</string>
 	<string name="map_tile_source">منبع نقشه تصویری</string>

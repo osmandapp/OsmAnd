@@ -449,7 +449,6 @@
 	<string name="indexing_map">맵 인덱싱…</string>
 	<string name="indexing_poi">POI 인덱싱…</string>
 	<string name="indexing_transport">대중교통 인덱싱…</string>
-	<string name="input_output_error">입출력 오류가 발생하였습니다</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

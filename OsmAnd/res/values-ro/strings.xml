@@ -696,7 +696,7 @@
 	<string name="indexing_map">Indexare hărți…</string>
 	<string name="indexing_poi">Indexare POI…</string>
 	<string name="indexing_transport">Indexare transport…</string>
-	<string name="input_output_error">A survenit o eroare de citire/scriere</string>
+	<string name="shared_string_io_error">A survenit o eroare de citire/scriere</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

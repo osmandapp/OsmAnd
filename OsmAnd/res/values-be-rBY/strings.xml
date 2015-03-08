@@ -1404,7 +1404,7 @@
 	<string name="indexing_map">Іndeksavańnie mapaŭ…</string>
 	<string name="indexing_poi">Іndeksavańnie cіkavostkaŭ…</string>
 	<string name="indexing_transport">Іndeksujecca transpart…</string>
-	<string name="input_output_error">Nadarylasia I/O pamylka</string>
+	<string name="shared_string_io_error">Nadarylasia I/O pamylka</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

@@ -275,7 +275,7 @@
 	<string name="amenity_type_sustenance">营养</string>
 	<string name="amenity_type_tourism">旅游</string>
 	<string name="amenity_type_transportation">运输</string>
-	<string name="input_output_error">I / O错误发生</string>
+	<string name="shared_string_io_error">I / O错误发生</string>
 	<string name="km">千米</string>
 	<string name="km_h">公里/小时</string>
 	<string name="m">米</string>

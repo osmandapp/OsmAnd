@@ -59,7 +59,7 @@ public class ShareLocation extends OsmAndAction {
 						sendQRCode(latitude, longitude);
 					}
 				} catch (RuntimeException e) {
-					Toast.makeText(mapActivity, R.string.input_output_error, Toast.LENGTH_SHORT).show();
+					Toast.makeText(mapActivity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 				}				
 			}
 

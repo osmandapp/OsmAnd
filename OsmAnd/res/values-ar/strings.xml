@@ -1343,7 +1343,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="indexing_map">يفهرس الخريطة…</string>
 	<string name="indexing_poi">يفهرس POI…</string>
 	<string name="indexing_transport">النقل الفهرسة…</string>
-	<string name="input_output_error">حدث خطا</string>
+	<string name="shared_string_io_error">حدث خطا</string>
 	<string name="km">كيلومتر</string>
 	<string name="km_h">كيلومتر/ساعة</string>
 	<string name="m">متر</string>

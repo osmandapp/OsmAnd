@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -459,7 +459,6 @@
   <string name="indexing_map">Индексируются карты…</string>
   <string name="indexing_poi">Индексируются POI…</string>
   <string name="indexing_transport">Индексируется транспорт…</string>
-  <string name="input_output_error">Произошла ошибка ввода/вывода</string>
   <string name="km">км</string>
   <string name="km_h">км/ч</string>
   <string name="m">м</string>

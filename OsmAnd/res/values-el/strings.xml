@@ -652,7 +652,7 @@
 	<string name="indexing_map">Ευρετηρίαση χάρτη…</string>
 	<string name="indexing_poi">Ευρετηρίαση Σημ. Ενδ…</string>
 	<string name="indexing_transport">Ευρετηρίαση μεταφορών…</string>
-	<string name="input_output_error">Σφάλμα Εισ/Εξ</string>
+	<string name="shared_string_io_error">Σφάλμα Εισ/Εξ</string>
 	<string name="km">χλμ</string>
 	<string name="km_h">χλμ/ω</string>
 	<string name="m">μ</string>

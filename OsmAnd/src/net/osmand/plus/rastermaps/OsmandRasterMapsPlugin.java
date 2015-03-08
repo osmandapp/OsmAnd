@@ -269,7 +269,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
 				if (downloaded == null || downloaded.isEmpty()) {
-					AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				Builder builder = new AlertDialog.Builder(activity);

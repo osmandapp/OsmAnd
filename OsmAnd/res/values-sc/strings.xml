@@ -1274,7 +1274,7 @@
 	<string name="indexing_map">Inditzizatzione mapa…</string>
 	<string name="indexing_poi">Inditzizatzione PDI…</string>
 	<string name="indexing_transport">Inditzizatzione trasportos…</string>
-	<string name="input_output_error">Errore de I/O</string>
+	<string name="shared_string_io_error">Errore de I/O</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>

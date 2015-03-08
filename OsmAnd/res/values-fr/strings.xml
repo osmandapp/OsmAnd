@@ -352,7 +352,7 @@
   <string name="indexing_map">Indexation de la carte…</string>
   <string name="indexing_poi">Indexation du PI…</string>
   <string name="indexing_transport">Indexation des transports…</string>
-  <string name="input_output_error">Erreur d\'entrée/sortie</string>
+  <string name="shared_string_io_error">Erreur d\'entrée/sortie</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
