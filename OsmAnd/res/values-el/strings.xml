@@ -1510,7 +1510,7 @@
     <string name="keep_and_add_destination_point">Προσθήκη ως σημείο προορισμού</string>
     <string name="select_gpx">Επιλέξτε GPX…</string>
     <string name="route_descr_select_destination">Επιλέξτε Προορισμό</string>
-    <string name="route_descr_select_on_map">Επιλέξτε στο χάρτη…</string>
+    <string name="shared_string_select_on_map">Επιλέξτε στο χάρτη…</string>
     <string name="shared_string_favorite">Αγαπημένο…</string>
     <string name="route_preferences">Προτιμήσεις δρομολογίου</string>
     <string name="route_info">Πληροφορίες δρομολογίου</string>

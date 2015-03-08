@@ -1172,7 +1172,7 @@
     <string name="keep_and_add_destination_point">Dodaj kao odredišnu točku</string>
     <string name="select_gpx">Odaberite GPX …</string>
     <string name="route_descr_select_destination">Odaberite Odredište</string>
-    <string name="route_descr_select_on_map">Odaberite na karti …</string>
+    <string name="shared_string_select_on_map">Odaberite na karti …</string>
     <string name="more">Više…</string>
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Bicikl</string>

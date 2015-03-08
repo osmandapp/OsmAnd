@@ -1670,7 +1670,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
     <string name="select_gpx">Selecione GPX …</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
-    <string name="route_descr_select_on_map">Seleccione no mapa…</string>
+    <string name="shared_string_select_on_map">Seleccione no mapa…</string>
     <string name="shared_string_favorite">Favorito …</string>
     <string name="route_preferences">Preferências de rota</string>
     <string name="route_info">Informações de rota</string>

@@ -1487,7 +1487,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_weight_description">Norādīt transportlīdzekļa maksimālā svara ierobežojumus</string>
     <string name="select_gpx">Atzīmēt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
-    <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
+    <string name="shared_string_select_on_map">Atzīmēt no kartes…</string>
     <string name="route_preferences">Maršruta uzstādījumi</string>
     <string name="route_info">Maršruta informācija</string>
     <string name="keep_and_add_destination_point">Pievienot kā galamērķi</string>

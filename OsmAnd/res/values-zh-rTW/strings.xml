@@ -1466,7 +1466,7 @@
 	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
-    <string name="route_descr_select_on_map">在地圖上選取 …</string>
+    <string name="shared_string_select_on_map">在地圖上選取 …</string>
     <string name="shared_string_favorite">我的最愛 …</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>

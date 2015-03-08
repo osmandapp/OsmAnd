@@ -1576,7 +1576,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_weight_description">Określ ograniczenie masy pojazdu dozwolone na drodze</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Wybierz cel podróży</string>
-    <string name="route_descr_select_on_map">Wybierz na mapie…</string>
+    <string name="shared_string_select_on_map">Wybierz na mapie…</string>
     <string name="shared_string_favorite">Ulubione…</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>

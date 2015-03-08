@@ -308,7 +308,7 @@
     <string name="keep_and_add_destination_point">Engadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
-    <string name="route_descr_select_on_map">Seleccionar no mapa…</string>
+    <string name="shared_string_select_on_map">Seleccionar no mapa…</string>
     <string name="shared_string_favorite">Favorito…</string>
     <string name="route_preferences">Preferencias da ruta</string>
     <string name="route_info">Información sobre a ruta</string>

@@ -1463,7 +1463,6 @@
     <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
-    <string name="route_descr_select_on_map">Vælg på kort…</string>
     <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
     <string name="tip_recent_changes_1_7_1_t">…Ændringer i 1.7:
 	\n\t* VIGTIGT kort skal være nyere end februar 2014.

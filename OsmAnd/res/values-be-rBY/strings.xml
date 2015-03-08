@@ -392,7 +392,7 @@
     <string name="keep_and_add_destination_point">Dadać punktam pryznačeńnia</string>
     <string name="select_gpx">Vybrać GPX…</string>
     <string name="route_descr_select_destination">Vybrać miesca pryznačeńnia</string>
-    <string name="route_descr_select_on_map">Vybrać na mapie…</string>
+    <string name="shared_string_select_on_map">Vybrać na mapie…</string>
     <string name="shared_string_favorite">Upadabanyja.…</string>
     <string name="route_preferences">Nastrojkі maršruta</string>
     <string name="route_info">Іnfarmacyja pra maršrut</string>

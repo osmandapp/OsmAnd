@@ -590,7 +590,6 @@
     <string name="keep_and_add_destination_point">Add as destination point</string>
     <string name="select_gpx">Select GPX…</string>
     <string name="route_descr_select_destination">Select Destination</string>
-    <string name="route_descr_select_on_map">Select on map…</string>
     <string name="route_preferences">Route preferences</string>
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>

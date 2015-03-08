@@ -1356,7 +1356,7 @@
 	<string name="routing_attr_short_way_description">Använd kortaste väg</string>
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
-    <string name="route_descr_select_on_map">Välj på karta …</string>
+    <string name="shared_string_select_on_map">Välj på karta …</string>
     <string name="shared_string_favorite">Favorit …</string>
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>

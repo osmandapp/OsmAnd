@@ -1437,8 +1437,6 @@
     <string name="map_magnifier">Масштаб</string>
 	<string name="select_gpx">Выберите GPX…</string>
     <string name="route_descr_select_destination">Выберите пункт назначения</string>
-    <string name="route_descr_select_on_map">Выберите на карте…</string>
-    <string name="shared_string_favorite">Избранное</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Маршрутная информация</string>
     <string name="keep_and_add_destination_point">Добавить как пункт назначения</string>
@@ -1928,5 +1926,6 @@
 	<string name="shared_string_show_all">Показать всё</string>
 	<string name="shared_string_show_on_map">Показать на карте</string>
 	<string name="shared_string_map">Карта</string>
+	<string name="shared_string_favorite">Избранное</string>
 	<string name="shared_string_favorites">Избранные</string>
 	</resources>

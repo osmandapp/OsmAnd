@@ -60,7 +60,7 @@
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
-    <string name="route_descr_select_on_map">Ischerta in sa mapa…</string>
+    <string name="shared_string_select_on_map">Ischerta in sa mapa…</string>
     <string name="shared_string_favorite">Prefèrridu…</string>
     <string name="route_preferences">Preferèntzias pro s’àndala</string>
     <string name="route_info">Informatziones pro s’àndala</string>

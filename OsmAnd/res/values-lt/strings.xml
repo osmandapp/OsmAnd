@@ -1478,7 +1478,7 @@
     <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
     <string name="select_gpx">Pasirinkti GPX…</string>
     <string name="route_descr_select_destination">Pasirinkti kelionės tikslą</string>
-    <string name="route_descr_select_on_map">Pasirinkti žemėlapyje…</string>
+    <string name="shared_string_select_on_map">Pasirinkti žemėlapyje…</string>
     <string name="shared_string_favorite">Įsiminta vieta…</string>
     <string name="route_preferences">Maršruto parinktys</string>
     <string name="route_info">Maršruto informacija</string>

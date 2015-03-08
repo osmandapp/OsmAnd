@@ -1617,7 +1617,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="routing_attr_weight_name">Gewicht voertuig</string>
 	<string name="select_gpx">GPX-bestand kiezen…</string>
     <string name="route_descr_select_destination">Bestemming kiezen</string>
-    <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
     <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>

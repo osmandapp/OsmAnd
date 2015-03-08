@@ -984,7 +984,7 @@
 	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
 	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
-    <string name="route_descr_select_on_map">Velg på kart…</string>
+    <string name="shared_string_select_on_map">Velg på kart…</string>
     <string name="shared_string_favorite">Favoritt…</string>
     <string name="route_preferences">Ruteinnstillinger</string>
     <string name="route_info">Ruteinformasjon</string>

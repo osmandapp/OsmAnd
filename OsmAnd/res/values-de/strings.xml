@@ -1527,7 +1527,7 @@
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
 	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
 	<string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
-	<string name="route_descr_select_on_map">Auf Karte auswählen…</string>
+	<string name="shared_string_select_on_map">Auf Karte auswählen…</string>
 	<string name="shared_string_favorite">Favorit…</string>
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>

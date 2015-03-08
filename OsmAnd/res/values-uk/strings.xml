@@ -1785,7 +1785,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="keep_and_add_destination_point">Додати як пункт призначення</string>
     <string name="select_gpx">Обрати GPX…</string>
     <string name="route_descr_select_destination">Обрати місце призначення</string>
-    <string name="route_descr_select_on_map">Вибрати на мапі…</string>
+    <string name="shared_string_select_on_map">Вибрати на мапі…</string>
     <string name="shared_string_favorite">Закладки…</string>
     <string name="route_preferences">Уподобання маршруту</string>
     <string name="route_info">Інформація про маршрут</string>

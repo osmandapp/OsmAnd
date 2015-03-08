@@ -1492,7 +1492,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="calculate_osmand_route_without_internet">Вылічыць адрэзак маршруту OsmAnd без Інтэрнэту</string>
     <string name="gpx_option_calculate_first_last_segment">Вылічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
     <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
-    <string name="route_descr_select_on_map">Выбраць на мапе…</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
 	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>

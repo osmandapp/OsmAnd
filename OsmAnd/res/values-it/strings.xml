@@ -1623,7 +1623,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_weight_description">Specifica il peso del veicolo consentito sulle strade</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
-    <string name="route_descr_select_on_map">Scegli sulla mappa…</string>
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
     <string name="keep_and_add_destination_point">Aggiungi come destinazione</string>
