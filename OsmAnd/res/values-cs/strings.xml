@@ -610,7 +610,7 @@
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Oblíbené</string>
   <string name="clear_all">Vymazat vše</string>
-  <string name="history">Minulé</string>
+  <string name="shared_string_history">Minulé</string>
   <string name="uploading_data">Odesílám data…</string>
   <string name="uploading">Odesílám…</string>
   <string name="search_nothing_found">Nic nebylo nalezeno</string>

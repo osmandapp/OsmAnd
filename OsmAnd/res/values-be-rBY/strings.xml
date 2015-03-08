@@ -1592,7 +1592,7 @@
 	<string name="search_history_building">Budynak: {0}, {1}, {2}</string>
 	<string name="favorite">Upadabanaje</string>
 	<string name="clear_all">Vydalіć usio</string>
-	<string name="history">Hіstoryja</string>
+	<string name="shared_string_history">Hіstoryja</string>
 	<string name="uploading_data">Adsylka dadzienych…</string>
 	<string name="uploading">Adsylka…</string>
 	<string name="search_nothing_found">Nіčoha nie znojdziena</string>

@@ -542,7 +542,7 @@
   <string name="search_history_building">Edificio: {0}, {1}, {2}</string>
   <string name="favorite">Favorito</string>
   <string name="clear_all">Limpiar todo</string>
-  <string name="history">Historial</string>
+  <string name="shared_string_history">Historial</string>
   <string name="uploading_data">Subiendo datos…</string>
   <string name="uploading">Subiendo…</string>
   <string name="search_nothing_found">No se encontró nada</string>

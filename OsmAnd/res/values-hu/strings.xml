@@ -605,7 +605,7 @@
   <string name="search_history_building">Épület: {0}, {1}, {2}</string>
   <string name="favorite">Kedvenc</string>
   <string name="clear_all">Mindent töröl</string>
-  <string name="history">Előzmények</string>
+  <string name="shared_string_history">Előzmények</string>
   <string name="uploading_data">Adat feltöltése…</string>
   <string name="uploading">Feltöltés…</string>
   <string name="search_nothing_found">Semmi sem található</string>

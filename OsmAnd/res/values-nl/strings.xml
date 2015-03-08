@@ -634,7 +634,6 @@
   <string name="search_history_building">Gebouw: {0}, {1}, {2}</string>
   <string name="favorite">Favoriet</string>
   <string name="clear_all">Wis alles</string>
-  <string name="history">Geschiedenis</string>
   <string name="uploading_data">Gegevens uploaden…</string>
   <string name="uploading">Uploaden…</string>
   <string name="search_nothing_found">Niets gevonden</string>

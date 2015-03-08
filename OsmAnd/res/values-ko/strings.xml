@@ -657,7 +657,6 @@
 	<string name="search_history_building">빌딩: {0}, {1}, {2}</string>
 	<string name="favorite">즐겨찾기</string>
 	<string name="clear_all">모두 지우기</string>
-	<string name="history">기록</string>
 	<string name="uploading_data">데이터를 업로드하는 중…</string>
 	<string name="uploading">업로드하는 중…</string>
 	<string name="search_nothing_found">아무것도 찾지 못했습니다</string>

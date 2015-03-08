@@ -894,7 +894,7 @@
 	<string name="show_transport_over_map_description">Mostra les parades del transport públic al mapa</string>
 	<string name="search_history_int_streets">Intersecció: {0} x {1} a {2}</string>
 	<string name="favorite">Preferit</string>
-	<string name="history">Historial</string>
+	<string name="shared_string_history">Historial</string>
 	<string name="uploading">Enviant…</string>
 	<string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
 	<string name="hint_search_online">Cerca en línia: Núm. de la casa, carrer, ciutat</string>

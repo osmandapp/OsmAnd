@@ -1461,7 +1461,7 @@
 	<string name="search_history_building">Edifìtzios: {0}, {1}, {2}</string>
 	<string name="favorite">Prefèrridu</string>
 	<string name="clear_all">Burra totu</string>
-	<string name="history">Istòria</string>
+	<string name="shared_string_history">Istòria</string>
 	<string name="uploading_data">Imbiu datos…</string>
 	<string name="uploading">Imbiu…</string>
 	<string name="search_nothing_found">Nudda agatau</string>

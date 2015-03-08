@@ -456,7 +456,7 @@
   <string name="search_history_building">Budynek: {0}, {1}, {2}</string>
   <string name="favorite">Ulubione</string>
   <string name="clear_all">Wyczyść wszystko</string>
-  <string name="history">Historia</string>
+  <string name="shared_string_history">Historia</string>
   <string name="uploading_data">Wysyłanie danych…</string>
   <string name="uploading">Wysyłanie…</string>
   <string name="search_nothing_found">Nic nie znaleziono</string>

@@ -857,7 +857,7 @@
 	<string name="search_history_building">בניין: {0}, {1}, {2}</string>
 	<string name="favorite">מועדף</string>
 	<string name="clear_all">לנקות הכול</string>
-	<string name="history">היסטוריה</string>
+	<string name="shared_string_history">היסטוריה</string>
 	<string name="uploading_data">הנתונים נשלחים…</string>
 	<string name="uploading">מתבצעת העלאה…</string>
 	<string name="search_nothing_found">לא נמצא דבר</string>

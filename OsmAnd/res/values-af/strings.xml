@@ -670,7 +670,7 @@
   <string name="search_history_building">Gebou: {0}, {1}, {2}</string>
   <string name="favorite">Gunsteling</string>
   <string name="clear_all">Vee alles uit</string>
-  <string name="history">Geskiedenis</string>
+  <string name="shared_string_history">Geskiedenis</string>
   <string name="uploading_data">Besig om inligting op te laai…</string>
   <string name="uploading">Besig met oplaai…</string>
   <string name="search_nothing_found">Niks gevind nie</string>

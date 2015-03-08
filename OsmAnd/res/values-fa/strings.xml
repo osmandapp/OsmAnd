@@ -345,7 +345,7 @@
 	<string name="get_directions">مسیرها</string>
 	<string name="show_gps_status">نشان دادن /\'وضعیت GPS/\'</string>
 	<string name="opening_hours">ساعات باز بودن</string>
-	<string name="history">تاریخچه</string>
+	<string name="shared_string_history">تاریخچه</string>
 	<string name="search_nothing_found">چیزی پیدا نشد</string>
 	<string name="searching">درحال جستجو…</string>
 	<string name="searching_address">درحال جستجوی آدرس…</string>

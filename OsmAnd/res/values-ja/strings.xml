@@ -414,7 +414,7 @@ POIの更新は利用できません</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>
      <string name="favorite">お気に入り</string>
      <string name="clear_all">全てクリア</string>
-     <string name="history">履歴</string>
+     <string name="shared_string_history">履歴</string>
      <string name="uploading_data">データをアップロード中…</string>
      <string name="uploading">アップロード中</string>
      <string name="search_nothing_found">何も見つかりません</string>

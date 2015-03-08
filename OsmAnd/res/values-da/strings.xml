@@ -1066,7 +1066,6 @@
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ryd alt</string>
-	<string name="history">Historik</string>
 	<string name="uploading_data">Overfører data…</string>
 	<string name="uploading">Overfører…</string>
 	<string name="search_nothing_found">Fandt ikke noget</string>

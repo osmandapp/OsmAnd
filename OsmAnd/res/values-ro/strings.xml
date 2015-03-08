@@ -887,7 +887,7 @@
 	<string name="search_history_building">Număr: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Șterge tot</string>
-	<string name="history">Istoric</string>
+	<string name="shared_string_history">Istoric</string>
 	<string name="uploading_data">Se încarcă date…</string>
 	<string name="uploading">Se încarcă…</string>
 	<string name="search_nothing_found">Nu s-a găsit nimic</string>

@@ -605,7 +605,7 @@
   <string name="search_history_building">Ēka: {0}, {1}, {2}</string>
   <string name="favorite">Izlase</string>
   <string name="clear_all">Noņemt visu</string>
-  <string name="history">Vēsture</string>
+  <string name="shared_string_history">Vēsture</string>
   <string name="uploading_data">Augšupielādē datus…</string>
   <string name="uploading">Augšupielādē…</string>
   <string name="search_nothing_found">Nekas netika atrasts</string>

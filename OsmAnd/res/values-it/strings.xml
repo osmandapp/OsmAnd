@@ -542,7 +542,6 @@
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
   <string name="clear_all">Azzera tutto</string>
-  <string name="history">Cronologia</string>
   <string name="uploading_data">Invio dati…</string>
   <string name="uploading">Invio…</string>
   <string name="search_nothing_found">Trovato nulla</string>

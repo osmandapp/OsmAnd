@@ -220,7 +220,7 @@
   <string name="search_history_building">Edifício : {0}, {1}, {2}</string>
   <string name="favorite">Favoritos</string>
   <string name="clear_all">Apagar tudo</string>
-  <string name="history">Histórico</string>
+  <string name="shared_string_history">Histórico</string>
   <string name="uploading_data">Enviando dados…</string>
   <string name="uploading">Enviando…</string>
   <string name="search_nothing_found">Não foi encontrado nada</string>

@@ -745,7 +745,7 @@
   <string name="search_history_building">Pastatas: {0}, {1}, {2}</string>
   <string name="favorite">Įsimintos vietos</string>
   <string name="clear_all">Išvalyti viską</string>
-  <string name="history">Istorija</string>
+  <string name="shared_string_history">Istorija</string>
   <string name="uploading_data">Siunčiami duomenys…</string>
   <string name="uploading">Siunčiama…</string>
   <string name="search_nothing_found">Nieko nerasta</string>

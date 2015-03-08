@@ -552,7 +552,7 @@
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
   <string name="clear_all">Supprimer tout</string>
-  <string name="history">Historique</string>
+  <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
   <string name="uploading">Envoi…</string>
   <string name="search_nothing_found">Rien n\'a été trouvé</string>

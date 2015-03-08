@@ -824,7 +824,7 @@
 	<string name="search_history_building">Byggnad: {0},{1},{2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ta bort alla</string>
-	<string name="history">Historik</string>
+	<string name="shared_string_history">Historik</string>
 	<string name="uploading_data">Laddar upp data …</string>
 	<string name="uploading">Laddar upp …</string>
 	<string name="search_nothing_found">Hittar ingenting</string>

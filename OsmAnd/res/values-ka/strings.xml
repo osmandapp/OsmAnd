@@ -602,7 +602,7 @@
   <string name="search_history_building">შენობა: {0}, {1}, {2}</string>
   <string name="favorite">რჩეული</string>
   <string name="clear_all">გასუფთავება</string>
-  <string name="history">ისტორია</string>
+  <string name="shared_string_history">ისტორია</string>
   <string name="uploading_data">მონაცემების ატვირთვა…</string>
   <string name="uploading">ატვირთვა…</string>
   <string name="search_nothing_found">არაფერი არ იქნა ნაპოვნი</string>

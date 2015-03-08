@@ -669,7 +669,7 @@
   <string name="search_history_building">Будівля: {0}, {1}, {2}</string>
   <string name="favorite">Закладки</string>
   <string name="clear_all">Очистити все</string>
-  <string name="history">Історія</string>
+  <string name="shared_string_history">Історія</string>
   <string name="uploading_data">Завантаження даних…</string>
   <string name="uploading">Завантаження…</string>
   <string name="search_nothing_found">Нічого не знайдено</string>

@@ -818,7 +818,7 @@
 	<string name="search_history_street">街道：{0}，{1}</string>
 	<string name="search_history_int_streets">交叉路口：{0} x {1} 在 {2}</string>
 	<string name="search_history_building">建筑物：{0}, {1}, {2}</string>
-	<string name="history">历史</string>
+	<string name="shared_string_history">历史</string>
 	<string name="uploading_data">正在上传数据…</string>
 	<string name="uploading">正在上传…</string>
 	<string name="search_nothing_found">什么也没找到</string>

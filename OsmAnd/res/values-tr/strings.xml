@@ -1060,7 +1060,7 @@
 	<string name="search_history_city">Şehir: {0}</string>
 	<string name="search_history_street">Sokak: {0}, {1}</string>
 	<string name="search_history_building">Bina: {0}, {1}, {2}</string>
-	<string name="history">Geçmiş</string>
+	<string name="shared_string_history">Geçmiş</string>
 	<string name="uploading_data">Veri yükleniyor…</string>
 	<string name="uploading">Yükleniyor…</string>
 	<string name="search_nothing_found">Sonuç bulunamadı</string>

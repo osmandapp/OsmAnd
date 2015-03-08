@@ -1229,7 +1229,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_history_building">Будынак: {0}, {1}, {2}</string>
 	<string name="favorite">Упадабанае</string>
 	<string name="clear_all">Выдаліць усё</string>
-	<string name="history">Гісторыя</string>
 	<string name="uploading_data">Адсылка дадзеных…</string>
 	<string name="uploading">Адсылка…</string>
 	<string name="search_nothing_found">Нічога не знойдзена</string>

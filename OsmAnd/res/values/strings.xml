@@ -1960,7 +1960,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
-	<string name="history">History</string>
 	<string name="uploading_data">Uploading data…</string>
 	<string name="uploading">Uploading…</string>
 	<string name="search_nothing_found">Nothing found</string>

@@ -306,7 +306,7 @@
 	<string name="search_history_building">Rakennus: {0}, {1}, {2}</string>
 	<string name="favorite">Suosikki</string>
 	<string name="clear_all">Tyhjennä kaikki</string>
-	<string name="history">Historia</string>
+	<string name="shared_string_history">Historia</string>
 	<string name="uploading_data">Lähetetään dataa…</string>
 	<string name="uploading">Lähetetään…</string>
 	<string name="search_nothing_found">Mitään ei löytynyt</string>

@@ -959,7 +959,7 @@
   <string name="search_history_building">Eraikina: {0}, {1}, {2}</string>
   <string name="favorite">Gogokoena</string>
   <string name="clear_all">Guztia garbitu</string>
-  <string name="history">Historiala</string>
+  <string name="shared_string_history">Historiala</string>
   <string name="uploading_data">Datuak igotzen…</string>
   <string name="uploading">Igotzen…</string>
   <string name="search_nothing_found">Ez da ezer aurkitu</string>
