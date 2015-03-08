@@ -2053,7 +2053,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="export">Експорт</string>
 	<string name="enable_plugin">Вимкнено</string>
 	<string name="disable_plugin">Увікненно</string>
-	<string name="enable_plugin2">Ввімкнути</string>
+	<string name="shared_string_enable">Ввімкнути</string>
 	<string name="disable_plugin2">Вимкнути</string>
 	<string name="plugin_description_title">Опис</string>
 	<string name="plugin_settings_button_caption">Налаштування</string>

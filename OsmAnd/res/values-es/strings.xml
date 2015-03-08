@@ -1921,7 +1921,7 @@
     <string name="plugin_nautical_name">Vista mapa náutico</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, debes descargar el mapa especial</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, debes descargar el mapa especial</string>
-	<string name="enable_plugin2">Activar</string>
+	<string name="shared_string_enable">Activar</string>
 	<string name="disable_plugin2">Desactivar</string>
 	<string name="get_plugin">Obtener</string>
 <string name="free">"Libre %1$s "</string>

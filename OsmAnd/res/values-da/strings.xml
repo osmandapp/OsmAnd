@@ -1899,7 +1899,6 @@
 	<string name="plugin_settings_button_caption">Indstillinger</string>
 <string name="edit_group">Rediger gruppe</string>
     <string name="plugin_install_needs_network">Internetforbindelse behøves for at installere udvidelsen.</string>
-<string name="enable_plugin2">Aktiver</string>
 	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
 <string name="plugin_ski_name">Skikort</string>

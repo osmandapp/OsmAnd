@@ -1795,7 +1795,7 @@
 <string name="plugin_description_title">Beskrivning</string>
 	<string name="edit_group">Redigera grupp</string>
     <string name="plugin_install_needs_network">En Internetuppkoppling krävs för att installera denna modul.</string>
-<string name="enable_plugin2">Aktivera</string>
+<string name="shared_string_enable">Aktivera</string>
 	<string name="disable_plugin2">Inaktivera</string>
 	<string name="get_plugin">Hämta</string>
 <string name="plugin_ski_name">Skidkartsvy</string>

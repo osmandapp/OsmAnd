@@ -2043,7 +2043,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="plugin_description_title">Popis</string>
 	<string name="plugin_settings_button_caption">Nastavenia</string>
 <string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu potrebujete pripojenie na Internet.</string>
-<string name="enable_plugin2">Zapnúť</string>
 	<string name="disable_plugin2">Vypnúť</string>
 	<string name="get_plugin">Získať</string>
 <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>

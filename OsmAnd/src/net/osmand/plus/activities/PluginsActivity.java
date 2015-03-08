@@ -140,7 +140,7 @@ public class PluginsActivity extends OsmandListActivity {
 		if (plugin.isActive() || !plugin.needsInstallation()) {
 			MenuItem enableDisableItem = optionsMenu.getMenu().add(
 					plugin.isActive() ? R.string.disable_plugin2
-							: R.string.enable_plugin2);
+							: R.string.shared_string_enable);
 			enableDisableItem
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override

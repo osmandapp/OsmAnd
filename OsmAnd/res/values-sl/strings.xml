@@ -1998,7 +1998,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
     <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
 	<string name="edit_group">Urejanje skupine</string>
-    <string name="enable_plugin2">Omogoči</string>
+    <string name="shared_string_enable">Omogoči</string>
 	<string name="disable_plugin2">Onemogoči</string>
 	<string name="plugin_description_title">Opis</string>
 	<string name="plugin_settings_button_caption">Nastavitve</string>
