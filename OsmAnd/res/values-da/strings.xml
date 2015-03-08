@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1993,7 +1993,7 @@
 	<string name="shared_string_downloading">Henter</string>
 	<string name="shared_string_download_successful">Hentet</string>
 	<string name="shared_string_io_error">I/O fejl</string>
-	<string name="shared_string_unexpected_error">Der opstod uventet fejl</string>
+	<string name="shared_string_unexpected_error">Der opstod en uventet fejl</string>
 	<string name="shared_string_action_template">"Handling {0}: "</string>
 	<string name="shared_string_close">Luk</string>
 	<string name="shared_string_exit">Afslut</string>
