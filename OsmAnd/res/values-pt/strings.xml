@@ -1167,7 +1167,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="select_address_activity">Selecione o endereço</string>
     <string name="favourites_list_activity">Selecione favorito</string>
     <string name="local_openstreetmap_act_title">Modificaçoes OSM</string>
-    <string name="default_buttons_other_actions">Outras acções</string>
+    <string name="shared_string_more_actions">Outras acções</string>
     <string name="layer_hillshade">Camada de Sombras de relevo</string>
     <string name="map_widget_gps_info">Informação de GPS</string>
     <string name="download_using_mobile_internet">A Wifi está desligada. Quer continuar o download com a ligação internet?</string>

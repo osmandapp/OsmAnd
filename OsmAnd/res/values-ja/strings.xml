@@ -795,7 +795,7 @@ POIの更新は利用できません</string>
     <string name="select_address_activity">住所を選択</string>
     <string name="favourites_list_activity">お気に入りを選択</string>
     <string name="local_openstreetmap_act_title">OSMの修正</string>
-    <string name="default_buttons_other_actions">その他のアクション</string>
+    <string name="shared_string_more_actions">その他のアクション</string>
     
 	<string name="layer_hillshade">陰影起伏層</string>
     <string name="map_widget_gps_info">GPS情報</string>

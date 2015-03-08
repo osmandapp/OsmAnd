@@ -1275,7 +1275,7 @@
     <string name="select_address_activity">Pasirinkti adresą</string>
     <string name="favourites_list_activity">Pasirinkti įsimintą vietą</string>
     <string name="local_openstreetmap_act_title">OSM pakeitimai</string>
-    <string name="default_buttons_other_actions">Kiti veiksmai</string>
+    <string name="shared_string_more_actions">Kiti veiksmai</string>
     <string name="other_location">Kita</string>
     <string name="files_limit">liko %1$d failų(-ai)</string>
     <string name="available_downloads_left">Galima parsiųsti %1$d failus(-ų)</string>

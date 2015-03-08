@@ -1188,7 +1188,7 @@
     <string name="select_address_activity">Seleccioneu l\'adreça</string>
     <string name="favourites_list_activity">Seleccioneu el preferit</string>
     <string name="local_openstreetmap_act_title">Modificacions de l\'OSM</string>
-    <string name="default_buttons_other_actions">Altres accions</string>
+    <string name="shared_string_more_actions">Altres accions</string>
     
 	<string name="layer_hillshade">Capa d\'ombrejat</string>
     <string name="map_widget_gps_info">Informació GPS</string>

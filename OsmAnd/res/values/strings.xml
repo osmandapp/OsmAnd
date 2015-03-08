@@ -802,7 +802,6 @@
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select favorite</string>
     <string name="local_openstreetmap_act_title">OSM modifications</string>
-    <string name="default_buttons_other_actions">Other actions</string>
 	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
 	    \n\t*Fix screen tremble during navigation

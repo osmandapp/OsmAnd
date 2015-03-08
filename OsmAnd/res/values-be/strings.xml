@@ -145,9 +145,7 @@
     <string name="accessibility_options">Налады даступнасьці</string>
     <string name="select_address_activity">Абраць адрас</string>
     <string name="favourites_list_activity">Абярыце з упадабаных</string>
-    <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>
-    <string name="default_buttons_other_actions">Iншыя дзеяньні</string>
-    
+    <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>    
 	<string name="tip_recent_changes_1_2_t">"Зьмены ў 1.2.1
 \n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo)
 \n\t*Выпраўлена дрыжаньне выявы падчас навігацыі

@@ -219,7 +219,7 @@
     <string name="select_address_activity">Vel adresse</string>
     <string name="favourites_list_activity">Vel favoritt</string>
     <string name="local_openstreetmap_act_title">OSM-endringar</string>
-    <string name="default_buttons_other_actions">Andre handlingar</string>
+    <string name="shared_string_more_actions">Andre handlingar</string>
 	<string name="layer_hillshade">Fjellskugge-lag</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="map_view">Kart</string>

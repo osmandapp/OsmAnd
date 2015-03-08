@@ -1288,7 +1288,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="choose_osmand_theme">Тема</string>
     <string name="select_address_activity">Виберіть адресу</string>
     <string name="favourites_list_activity">Виберіть закладку</string>
-    <string name="default_buttons_other_actions">Інші дії</string>
+    <string name="shared_string_more_actions">Інші дії</string>
     <string name="use_kalman_filter_compass_descr">Зменьшує «шум» компасу, але додає инерцию</string>
     <string name="use_kalman_filter_compass">Використовувати фільтр Калмана</string>
     <string name="other_location">Інше</string>

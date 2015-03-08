@@ -51,7 +51,7 @@
     <string name="select_address_activity">Ընտրել հասցեն</string>
     <string name="favourites_list_activity">Ընտրել նախնտրածներից</string>
     <string name="local_openstreetmap_act_title">OSM փոփոխություններ</string>
-    <string name="default_buttons_other_actions">Այլ գործողություններ</string>
+    <string name="shared_string_more_actions">Այլ գործողություններ</string>
     
 	<string name="default_buttons_selectall">Ընտրել բոլորը</string>
 	<string name="cancel_route">Դադարեցնել երթուղին</string>

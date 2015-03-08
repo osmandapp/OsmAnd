@@ -101,7 +101,7 @@
     <string name="select_address_activity">Изберете адрес</string>
     <string name="favourites_list_activity">Изберете любим</string>
     <string name="local_openstreetmap_act_title">Изменения в OSM</string>
-    <string name="default_buttons_other_actions">Други действия</string>
+    <string name="shared_string_more_actions">Други действия</string>
     
 	<string name="tip_recent_changes_1_2_t">Промени в 1.2.1:
 	    \n\t*Поправка Geo Intent (Foursquare, c:geo)

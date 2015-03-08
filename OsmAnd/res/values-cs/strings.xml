@@ -1204,7 +1204,7 @@
     <string name="select_address_activity">Vybrat adresu</string>
     <string name="favourites_list_activity">Vybrat oblíbené</string>
     <string name="local_openstreetmap_act_title">Editace OSM</string>
-    <string name="default_buttons_other_actions">Další akce</string>
+    <string name="shared_string_more_actions">Další akce</string>
     <string name="monitoring_settings_descr">Konfigurace záznamů vašich cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>

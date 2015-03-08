@@ -31,7 +31,7 @@
     <string name="select_address_activity">Pilih alamat</string>
     <string name="favourites_list_activity">Pilih favorit</string>
     <string name="local_openstreetmap_act_title">Modifikasi OSM</string>
-    <string name="default_buttons_other_actions">Perintah lain</string>
+    <string name="shared_string_more_actions">Perintah lain</string>
     
 	<string name="tip_recent_changes_1_2_t">"Perbaikan pada 1.2.1:
 \n\t*Perbaikan Geo Intent (Foursquare, c:geo)

@@ -1405,7 +1405,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="select_address_activity">Kies adres</string>
     <string name="favourites_list_activity">Kies favoriet</string>
     <string name="local_openstreetmap_act_title">OSM-wijzigingen</string>
-    <string name="default_buttons_other_actions">Andere acties</string>
     <string name="download_using_mobile_internet">Er is geen WiFi-verbinding. Wil je de huidige internetverbinding gebruiken voor het downloaden?</string>
     <string name="other_location">Andere</string>
     <string name="files_limit">%1$d bestanden over</string>

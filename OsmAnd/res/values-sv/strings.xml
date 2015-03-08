@@ -1172,7 +1172,7 @@
     <string name="select_address_activity">Välj adress</string>
     <string name="favourites_list_activity">Välj favorit</string>
     <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
-    <string name="default_buttons_other_actions">Andra åtgärder</string>
+    <string name="shared_string_more_actions">Andra åtgärder</string>
     
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4:\n\t\n\t* Nytt gränssnitt\n\t* Buggfixar "</string>
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>

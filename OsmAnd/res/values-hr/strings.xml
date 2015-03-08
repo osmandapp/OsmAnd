@@ -921,7 +921,7 @@
     <string name="install_paid">Puna inačica</string>
     <string name="choose_osmand_theme_descr">Odaberite temu aplikacije</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
-    <string name="default_buttons_other_actions">Ostale aktivnosti</string>
+    <string name="shared_string_more_actions">Ostale aktivnosti</string>
     <string name="other_location">Ostalo</string>
     <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
     <string name="use_magnetic_sensor">Koristi magnetski senzor</string>

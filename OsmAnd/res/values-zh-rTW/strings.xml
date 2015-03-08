@@ -1039,7 +1039,7 @@
     <string name="select_address_activity">選取地址</string>
     <string name="favourites_list_activity">選取我的最愛</string>
     <string name="local_openstreetmap_act_title">OSM 修改</string>
-    <string name="default_buttons_other_actions">其它的作用</string>
+    <string name="shared_string_more_actions">其它的作用</string>
     
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>

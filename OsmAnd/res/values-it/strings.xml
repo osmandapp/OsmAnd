@@ -1404,7 +1404,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="select_address_activity">Seleziona l\'indirizzo</string>
     <string name="favourites_list_activity">Seleziona preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
-    <string name="default_buttons_other_actions">Altre azioni</string>
     <string name="download_using_mobile_internet">La connessione WiFi non è attualmente attiva. Vuoi continuare a scaricare con la connessione internet attuale?</string>
     <string name="cancel_route">Cancella il percorso</string>
     <string name="cancel_navigation">Ferma la navigazione</string>

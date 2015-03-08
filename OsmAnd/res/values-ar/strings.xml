@@ -255,7 +255,7 @@
     <string name="contribution_activity">تثبيت الإصدار</string>
     <string name="accessibility_options">خيارات الإتاحة</string>
     <string name="select_address_activity">حدد عنوان</string>
-    <string name="default_buttons_other_actions">إجراءات أخرى</string>
+    <string name="shared_string_more_actions">إجراءات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
 	<string name="default_buttons_commit">ارتكب</string>
 	<string name="poi_dialog_comment">تعليق</string>

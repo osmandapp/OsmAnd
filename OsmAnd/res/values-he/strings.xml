@@ -1216,7 +1216,7 @@
     <string name="select_address_activity">נא לבחור בכתובת</string>
     <string name="favourites_list_activity">נא לבחור במועדף</string>
     <string name="local_openstreetmap_act_title">שינויים ב־OSM</string>
-    <string name="default_buttons_other_actions">פעולות אחרות</string>
+    <string name="shared_string_more_actions">פעולות אחרות</string>
     <string name="download_using_mobile_internet">הרשת האלחוטית אינה מחוברת כרגע. האם להמשיך ולהוריד עם חיבור האינטרנט הנוכחי?</string>
     <string name="cancel_route">התעלמות מהמסלול</string>
     <string name="cancel_navigation">הפסקת הניווט</string>

@@ -1223,7 +1223,7 @@
     </string>
     <string name="select_address_activity">Wybierz adres</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
-    <string name="default_buttons_other_actions">Inne działania</string>
+    <string name="shared_string_more_actions">Inne działania</string>
     <string name="favourites_list_activity">Wybierz ulubione</string>
     <string name="download_using_mobile_internet">Urządzenie nie jest połączone przez Wi-Fi. Czy chcesz kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń punkt docelowy</string>

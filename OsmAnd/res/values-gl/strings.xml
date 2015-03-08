@@ -516,7 +516,7 @@
     <string name="select_address_activity">Seleccionar o enderezo</string>
     <string name="favourites_list_activity">Seleccionar un favorito</string>
     <string name="local_openstreetmap_act_title">Modificacións de OSM</string>
-    <string name="default_buttons_other_actions">Outras accións</string>
+    <string name="shared_string_more_actions">Outras accións</string>
 	<string name="tip_recent_changes_1_2_t">"Arranxos en 1.2.1:
 \n\t*Fix Geo Intent (Foursquare, c:geo)
 \n\t*Fix screen tremble during navigation

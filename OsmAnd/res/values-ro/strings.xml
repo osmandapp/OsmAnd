@@ -1298,7 +1298,7 @@
     <string name="accessibility_options">Opțiuni accesibilitate</string>
     <string name="select_address_activity">Selectează adresa</string>
     <string name="local_openstreetmap_act_title">Modificări OSM</string>
-    <string name="default_buttons_other_actions">Alte acțiuni</string>
+    <string name="shared_string_more_actions">Alte acțiuni</string>
     <string name="map_widget_gps_info">Informații GPS</string>
     <string name="access_arrival_time">Timp sosire</string>
     <string name="item_checked">bifat</string>

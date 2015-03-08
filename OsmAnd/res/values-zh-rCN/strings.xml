@@ -507,7 +507,7 @@
     <string name="select_address_activity">选择地址</string>
     <string name="favourites_list_activity">选择收藏</string>
     <string name="local_openstreetmap_act_title">OSM 改动</string>
-    <string name="default_buttons_other_actions">其他动作</string>
+    <string name="shared_string_more_actions">其他动作</string>
     <string name="local_index_tile_data_zooms">已下载的显示级别：%1$s</string>
     <string name="speak_street_names">播报街道名称(TTS)</string>
     <string name="osmand_distance_planning_plugin_name">距离计算器与规划工具</string>

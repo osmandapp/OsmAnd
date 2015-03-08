@@ -1237,7 +1237,6 @@
     <string name="monitoring_settings_descr">Indstil hvordan dine ture optages</string>
     <string name="osmand_monitoring_plugin_name">Logningstjenester</string>
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
-    <string name="default_buttons_other_actions">Flere handlinger</string>
     <string name="osmand_monitoring_plugin_description">Aktiver sporing og navigation i dvaletilstand (skærm slukket), ved periodisk at tænde GPS-enheden. Vis indstillinger der letter optagelse til lokale GPX filer af dine ture eller online ved hjælp af en webtjeneste.</string>
     <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende internet-forbindelse?</string>
     <string name="cancel_navigation">Stop navigation</string>

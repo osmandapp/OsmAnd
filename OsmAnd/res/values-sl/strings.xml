@@ -1231,7 +1231,7 @@
     <string name="select_address_activity">Izberite naslov</string>
     <string name="favourites_list_activity">Izberite priljubljeno</string>
     <string name="local_openstreetmap_act_title">Spremembe OSM</string>
-    <string name="default_buttons_other_actions">Druge aktivnosti</string>
+    <string name="shared_string_more_actions">Druge aktivnosti</string>
     <string name="use_magnetic_sensor">Uporabi magnetno tipalo</string>
     <string name="other_location">Ostalo</string>
     <string name="files_limit">Preostalo še %1$d datotek</string>

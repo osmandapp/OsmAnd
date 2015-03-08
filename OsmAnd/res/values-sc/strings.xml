@@ -292,7 +292,7 @@
     <string name="select_address_activity">Issèbera s’indiritzu</string>
     <string name="favourites_list_activity">Issèbera preferridu</string>
     <string name="local_openstreetmap_act_title">Modìficas OSM</string>
-    <string name="default_buttons_other_actions">Àteras atziones</string>
+    <string name="shared_string_more_actions">Àteras atziones</string>
     
 	<string name="tip_recent_changes_1_2_t">"Curretziones in sa 1.2.1:
 \n\t*Currettu Geo Intent (Foursquare, c:geo)

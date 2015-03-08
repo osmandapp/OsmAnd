@@ -1225,7 +1225,6 @@
     <string name="select_address_activity">Выбор адреса</string>
     <string name="favourites_list_activity">Выбор избранного</string>
     <string name="local_openstreetmap_act_title">Модификации OSM</string>
-    <string name="default_buttons_other_actions">Другие действия</string>
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>

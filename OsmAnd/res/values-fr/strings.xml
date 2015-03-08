@@ -1217,7 +1217,7 @@
     <string name="select_address_activity">Sélectionnez l\'adresse</string>
     <string name="favourites_list_activity">Sélectionnez un favori</string>
     <string name="local_openstreetmap_act_title">Modifications OSM</string>
-    <string name="default_buttons_other_actions">Autres actions</string>
+    <string name="shared_string_more_actions">Autres actions</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) est une application de cartographie et de navigation avec accès aux données libres d\'OpenStreetMap (OSM), à la couverture mondiale de haute qualité. Toutes les données cartographiques peuvent être stockées sur la carte mémoire de votre appareil pour une utilisation hors-ligne. OsmAnd propose une navigation par GPS, avec guidage visuel et vocal, pour la voiture, le vélo ou le piéton. Les fonctions principales peuvent être assurées aussi bien en ligne qu\'hors-ligne (sans connexion Internet).
 

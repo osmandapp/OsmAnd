@@ -893,7 +893,7 @@
     <string name="select_address_activity">Adres seç</string>
     <string name="favourites_list_activity">Favoriyi seç</string>
     <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
-    <string name="default_buttons_other_actions">Diğer komutlar</string>
+    <string name="shared_string_more_actions">Diğer komutlar</string>
     <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
     <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
     <string name="about_version">Sürüm :</string>

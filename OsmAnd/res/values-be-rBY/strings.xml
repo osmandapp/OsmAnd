@@ -604,7 +604,7 @@
     <string name="select_address_activity">Abrać adras</string>
     <string name="favourites_list_activity">Abiarycie z upadabanych</string>
     <string name="local_openstreetmap_act_title">Madyfіkacyі OSM</string>
-    <string name="default_buttons_other_actions">Inšyja dziejańnі</string>
+    <string name="shared_string_more_actions">Inšyja dziejańnі</string>
 	<string name="tip_recent_changes_1_2_t">"Źmieny ŭ 1.2.1
 \n\t*Vypraŭlieny Hiea servіsy (Foursquare, c:geo)
 \n\t*Vypraŭliena dryžańnie vyjavy padčas navіhacyі

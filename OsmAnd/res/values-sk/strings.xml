@@ -1205,7 +1205,6 @@
     <string name="select_address_activity">Vybrať adresu</string>
     <string name="favourites_list_activity">Vybrať obľúbený bod</string>
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
-    <string name="default_buttons_other_actions">Ostatné akcie</string>
     <string name="download_using_mobile_internet">Momentálne nie ste pripojený na WiFi. Chcete použiť aktuálne internetové pripojenie na sťahovanie?</string>
     <string name="tip_recent_changes_1_3_t">Zmeny vo verzii 1.3:
     \n\t* Prepracovaná podpora tabletov a veľkých obrazoviek

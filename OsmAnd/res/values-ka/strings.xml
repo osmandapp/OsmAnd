@@ -1198,7 +1198,7 @@
     <string name="select_address_activity">მისამართის არჩევა</string>
     <string name="favourites_list_activity">რჩეულის არჩევა</string>
     <string name="local_openstreetmap_act_title">OSM ცვლილებები</string>
-    <string name="default_buttons_other_actions">სხვა საქმიანობები</string>
+    <string name="shared_string_more_actions">სხვა საქმიანობები</string>
     
 	<string name="map_widget_gps_info">GPS ინფორმაცია</string>
     <string name="tip_recent_changes_1_1_4_t">ცვლილებები 1.1.4-ში

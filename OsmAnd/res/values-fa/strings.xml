@@ -600,7 +600,7 @@
     <string name="monitoring_settings">ضبط مسیر</string>
     <string name="monitoring_settings_descr">تنظیم چگونگی ضبط سفر و فعالسازی حالت خواب</string>
     <string name="osmand_monitoring_plugin_name">سرویسهای ثبت و حالت خواب</string>
-    <string name="default_buttons_other_actions">کارهای دیگر</string>
+    <string name="shared_string_more_actions">کارهای دیگر</string>
     
 	<string name="prefer_motorways">ترجیح دادن اتوبانها</string>
 	<string name="prefer_in_routing_descr">ترجیح دادن اتوبانها</string>
