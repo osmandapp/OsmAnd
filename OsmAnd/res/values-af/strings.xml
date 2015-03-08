@@ -830,7 +830,7 @@
   <string name="shared_string_yes">Ja</string>
   <string name="shared_string_cancel">Kanseleer</string>
   <string name="default_buttons_apply">toepas</string>
-  <string name="default_buttons_add">Voeg by</string>
+  <string name="shared_string_add">Voeg by</string>
   <string name="shared_string_no">Nee</string>
   <string name="add_favorite_dialog_top_text">Tik gunsteling naam in</string>
   <string name="add_favorite_dialog_default_favourite_name">Gunsteling</string>

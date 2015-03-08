@@ -1013,7 +1013,7 @@
 	<string name="context_menu_item_create_poi">יצירת נ״ע</string>
 	<string name="shared_string_cancel">ביטול</string>
 	<string name="default_buttons_apply">החלה</string>
-	<string name="default_buttons_add">הוספה</string>
+	<string name="shared_string_add">הוספה</string>
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>
 	<string name="add_favorite_dialog_default_favourite_name">מועדף</string>
 	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה בהצלחה.</string>

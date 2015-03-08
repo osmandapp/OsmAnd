@@ -37,7 +37,7 @@
 	<string name="shared_string_yes">Da</string>
 	<string name="shared_string_no">Ne</string>
 	<string name="shared_string_cancel">Prekliči</string>
-	<string name="default_buttons_add">Dodaj</string>
+	<string name="shared_string_add">Dodaj</string>
 	<string name="default_buttons_apply">Uporabi</string>
 	<string name="context_menu_item_create_poi">Ustvari POI</string>
 	<string name="context_menu_item_open_bug">Prijavi OSM napako</string>

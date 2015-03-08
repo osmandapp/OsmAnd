@@ -1111,7 +1111,7 @@
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_cancel">Abbrechen</string>
 	<string name="default_buttons_apply">Übernehmen</string>
-	<string name="default_buttons_add">Hinzufügen</string>
+	<string name="shared_string_add">Hinzufügen</string>
 	<string name="shared_string_no">Nein</string>
 	<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>

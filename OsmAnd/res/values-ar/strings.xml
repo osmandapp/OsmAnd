@@ -270,7 +270,7 @@
 	<string name="osb_author_dialog_password">OSM كلمة المرور (اختياري)</string>
 	<string name="add_favorite_dialog_default_favourite_name">مفضل</string>
 	<string name="default_buttons_apply">تطبق</string>
-	<string name="default_buttons_add">إضافة</string>
+	<string name="shared_string_add">إضافة</string>
 	<string name="shared_string_no">ليس</string>
 	<string name="shared_string_yes">نعم</string>
 	<string name="shared_string_cancel">إلغاء</string>

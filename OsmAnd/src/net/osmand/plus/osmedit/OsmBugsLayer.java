@@ -345,7 +345,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		((EditText)openBug.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		((EditText)openBug.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.BugMessage));
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final double latitude = args.getDouble(KEY_LATITUDE);

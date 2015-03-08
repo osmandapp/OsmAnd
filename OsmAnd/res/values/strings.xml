@@ -49,7 +49,6 @@
 	<string name="shared_string_delete">Delete</string>
 	<string name="shared_string_delete_all">Delete all</string>
 	<string name="shared_string_share">Share</string>
-	<string name="shared_string_add">Add</string>
 	<string name="shared_string_apply">Apply</string>
 	<string name="shared_string_control_start">Start</string>
 	<string name="shared_string_control_stop">Stop</string>
@@ -2076,7 +2075,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
 	<string name="default_buttons_apply">Apply</string>
-	<string name="default_buttons_add">Add</string>
+	<string name="shared_string_add">Add</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>

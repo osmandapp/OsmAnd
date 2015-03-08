@@ -597,7 +597,7 @@ POIの更新は利用できません</string>
 <string name="shared_string_yes">はい</string>
 <string name="shared_string_cancel">キャンセル</string>
 <string name="default_buttons_apply">適用</string>
-<string name="default_buttons_add">追加</string>
+<string name="shared_string_add">追加</string>
 <string name="shared_string_no">いいえ</string>
 <string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
 <string name="add_favorite_dialog_default_favourite_name">お気に入り</string>

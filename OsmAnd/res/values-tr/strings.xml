@@ -499,7 +499,7 @@
 	<string name="shared_string_yes">Evet</string>
 	<string name="shared_string_cancel">İptal et</string>
 	<string name="default_buttons_apply">Uygula</string>
-	<string name="default_buttons_add">Ekle</string>
+	<string name="shared_string_add">Ekle</string>
 	<string name="shared_string_no">Hayır</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favori</string>
 	<string name="favourites_context_menu_delete">Favoriyi sil</string>

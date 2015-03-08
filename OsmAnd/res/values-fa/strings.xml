@@ -261,7 +261,7 @@
 	<string name="shared_string_yes">بله</string>
 	<string name="shared_string_cancel">لغو</string>
 	<string name="default_buttons_apply">بکارگیری</string>
-	<string name="default_buttons_add">افزودن</string>
+	<string name="shared_string_add">افزودن</string>
 	<string name="shared_string_no">خیر</string>
 	<string name="add_favorite_dialog_top_text">نام علاقمندی را وارد کنید</string>
 	<string name="add_favorite_dialog_default_favourite_name">علاقمندی</string>

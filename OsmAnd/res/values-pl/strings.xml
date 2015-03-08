@@ -625,7 +625,7 @@
   <string name="shared_string_yes">Tak</string>
   <string name="shared_string_cancel">Anuluj</string>
   <string name="default_buttons_apply">Zastosuj</string>
-  <string name="default_buttons_add">Dodaj</string>
+  <string name="shared_string_add">Dodaj</string>
   <string name="shared_string_no">Nie</string>
   <string name="add_favorite_dialog_top_text">Wprowadź nazwę</string>
   <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>

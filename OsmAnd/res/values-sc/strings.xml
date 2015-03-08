@@ -1606,7 +1606,7 @@
 	<string name="context_menu_item_create_poi">Crea PDI</string>
 	<string name="shared_string_cancel">Burra</string>
 	<string name="default_buttons_apply">Aplica</string>
-	<string name="default_buttons_add">Annanghe</string>
+	<string name="shared_string_add">Annanghe</string>
 	<string name="add_favorite_dialog_top_text">Inserta su nùmene de su prefèrridu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Prefèrridu</string>
 	<string name="add_favorite_dialog_favourite_added_template">Su puntu prefèrridu \'\'{0}\'\' est istadu annantu.</string>

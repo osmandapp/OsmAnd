@@ -411,7 +411,7 @@
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
 	<string name="shared_string_cancel">Peruuta</string>
 	<string name="default_buttons_apply">Käytä</string>
-	<string name="default_buttons_add">Lisää</string>
+	<string name="shared_string_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>
 	<string name="add_favorite_dialog_default_favourite_name">Suosikki</string>
 	<string name="favourites_context_menu_edit">Muokkaa suosikkia</string>

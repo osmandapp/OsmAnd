@@ -137,7 +137,7 @@ public class MapActivityActions implements DialogProvider {
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				double latitude = args.getDouble(KEY_LATITUDE);

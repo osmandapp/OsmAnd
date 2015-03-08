@@ -1369,7 +1369,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
 	<string name="default_buttons_apply">Застасаваць</string>
-	<string name="default_buttons_add">Дадаць</string>
 	<string name="add_favorite_dialog_top_text">Калі ласка, увядзіце імя пункту</string>
 	<string name="add_favorite_dialog_default_favourite_name">Упадабанае</string>
 	<string name="add_favorite_dialog_favourite_added_template">Упадабанае месца \'\'{0}\'\' было дададзенае.</string>

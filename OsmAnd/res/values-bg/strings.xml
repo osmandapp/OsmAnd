@@ -1471,7 +1471,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="shared_string_yes">Да</string>
 	<string name="shared_string_cancel">Откажи</string>
 	<string name="default_buttons_apply">Приложи</string>
-	<string name="default_buttons_add">Добави</string>
+	<string name="shared_string_add">Добави</string>
 	<string name="shared_string_no">Не</string>
 	<string name="add_favorite_dialog_top_text">Добави любимо име</string>
 	<string name="add_favorite_dialog_default_favourite_name">Любим</string>

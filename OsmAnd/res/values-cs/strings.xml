@@ -768,7 +768,7 @@
   <string name="shared_string_yes">Ano</string>
   <string name="shared_string_cancel">Zrušit</string>
   <string name="default_buttons_apply">Použít</string>
-  <string name="default_buttons_add">Přidat</string>
+  <string name="shared_string_add">Přidat</string>
   <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Zadejte jméno pro oblíbené</string>
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>

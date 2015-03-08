@@ -766,7 +766,7 @@
   <string name="shared_string_yes">Igen</string>
   <string name="shared_string_cancel">Mégse</string>
   <string name="default_buttons_apply">Alkalmaz</string>
-  <string name="default_buttons_add">Hozzáad</string>
+  <string name="shared_string_add">Hozzáad</string>
   <string name="shared_string_no">Nem</string>
   <string name="add_favorite_dialog_top_text">Kedvenc neve</string>
   <string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>

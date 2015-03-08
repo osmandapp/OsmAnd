@@ -905,7 +905,7 @@
   <string name="shared_string_yes">Taip</string>
   <string name="shared_string_cancel">Atšaukti</string>
   <string name="default_buttons_apply">Taikyti</string>
-  <string name="default_buttons_add">Pridėti</string>
+  <string name="shared_string_add">Pridėti</string>
   <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Įveskite įsimintos vietos pavadinimą</string>
   <string name="add_favorite_dialog_default_favourite_name">Įsiminta vieta</string>

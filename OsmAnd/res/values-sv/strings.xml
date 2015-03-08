@@ -75,7 +75,7 @@
 <string name="shared_string_yes">Ja</string>
 <string name="shared_string_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
-<string name="default_buttons_add">Lägg till</string>
+<string name="shared_string_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
 <string name="search_shown_on_map">Visa på karta</string>
 <string name="navigate_point_cancel">Avbryt</string>

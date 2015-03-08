@@ -703,7 +703,7 @@
   <string name="shared_string_yes">Sí</string>
   <string name="shared_string_cancel">Cancelar</string>
   <string name="default_buttons_apply">Aplicar</string>
-  <string name="default_buttons_add">Añadir</string>
+  <string name="shared_string_add">Añadir</string>
   <string name="shared_string_no">No</string>
   <string name="add_favorite_dialog_top_text">Introduzca nombre de favorito</string>
   <string name="add_favorite_dialog_default_favourite_name">Favorito</string>

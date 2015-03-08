@@ -808,7 +808,6 @@
 <string name="context_menu_item_create_poi">POI 생성</string>
 
 <string name="default_buttons_apply">적용</string>
-<string name="default_buttons_add">추가</string>
 <string name="add_favorite_dialog_top_text">즐겨찾기 이름 입력</string>
 <string name="add_favorite_dialog_default_favourite_name">즐겨찾기</string>
 <string name="add_favorite_dialog_favourite_added_template">즐겨찾기 포인트 \'\'{0}\'\' 이 성공적으로 추가되었습니다.</string>

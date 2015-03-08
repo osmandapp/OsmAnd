@@ -762,7 +762,7 @@
   <string name="shared_string_yes">დიახ</string>
   <string name="shared_string_cancel">გაუქმება</string>
   <string name="default_buttons_apply">გამოყენება</string>
-  <string name="default_buttons_add">ჩამატება</string>
+  <string name="shared_string_add">ჩამატება</string>
   <string name="shared_string_no">არა</string>
   <string name="add_favorite_dialog_top_text">რჩეულის სახელი</string>
   <string name="add_favorite_dialog_default_favourite_name">რჩეული</string>
