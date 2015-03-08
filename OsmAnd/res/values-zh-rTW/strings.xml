@@ -806,7 +806,7 @@
 	<string name="download_question">下載 {0} - {1}？</string>
 	<string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
 	<string name="address">地址</string>
-	<string name="download_index_success">下載成功</string>
+	<string name="shared_string_download_successful">下載成功</string>
 	<string name="error_io_error">存取發生錯誤</string>
 	
 	<string name="downloading">下載中…</string>

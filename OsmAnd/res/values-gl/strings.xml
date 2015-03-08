@@ -1505,7 +1505,7 @@
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Xa existen datos sen conexión para {0} ({1}). Desexa actualizalos ({2}) ?</string>
 	<string name="address">Address</string>
-	<string name="download_index_success">A descarga foi correcta</string>
+	<string name="shared_string_download_successful">A descarga foi correcta</string>
 	<string name="error_io_error">Produciuse un erro de E/S</string>
 	<string name="shared_string_downloading">A descargar …</string>
 	<string name="downloading">A descargar…</string>

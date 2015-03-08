@@ -624,7 +624,7 @@
   <string name="download_question">Lejupielādēt {0} - {1} ?</string>
   <string name="download_question_exist">{0} bezsaistes dati jau eksistē ({1}). Vai vēlaties atjaunināt? ({2}) ?</string>
   <string name="address">Adrese</string>
-  <string name="download_index_success">Lejupielāde ir veiksmīga</string>
+  <string name="shared_string_download_successful">Lejupielāde ir veiksmīga</string>
   <string name="error_io_error">Notika I/O kļūda</string>
   
   <string name="downloading">Lejupielādē…</string>

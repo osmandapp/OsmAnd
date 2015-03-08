@@ -642,7 +642,6 @@
   <string name="download_question">Download {0} - {1} ?</string>
   <string name="download_question_exist">Offline gegevens voor {0} bestaan al ({1}). Wil je deze bijwerken ({2})?</string>
   <string name="address">Adres</string>
-  <string name="download_index_success">Download succesvol</string>
   <string name="error_io_error">Lees/schrijffout opgetreden</string>
   
   <string name="downloading">Downloaden…</string>

@@ -906,7 +906,7 @@
 	<string name="download_question">Descărcați {0} - {1} ?</string>
 	<string name="download_question_exist">Harta offline pentru {0} există deja ({1}). Doriți să o actualizați ({2}) ?</string>
 	<string name="address">Adresă</string>
-	<string name="download_index_success">Descărcare efectuată cu succes</string>
+	<string name="shared_string_download_successful">Descărcare efectuată cu succes</string>
 	<string name="error_io_error">Eroare la citire/scriere</string>
 	
 	<string name="downloading">Se descarcă…</string>

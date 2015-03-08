@@ -439,7 +439,7 @@
 	<string name="search_online_address">İnternet</string>
 	<string name="router_service">Navigasyon servisi</string>
 	<string name="address">Adres</string>
-	<string name="download_index_success">İndirme başarılı</string>
+	<string name="shared_string_download_successful">İndirme başarılı</string>
 	<string name="error_io_error">G/Ç hatası oluştu</string>
 	
 	<string name="downloading">İndiriliyor…</string>

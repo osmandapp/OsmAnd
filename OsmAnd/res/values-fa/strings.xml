@@ -331,7 +331,7 @@
 	<string name="reload_indexes_descr">بازخوانی نقشه های برداری و اطلاعات از کارت حافظه</string>
 	<string name="reload_indexes">بازخوانی اطلاعات آفلاین</string>
 	<string name="address">آدرس</string>
-	<string name="download_index_success">دانلود موفقیت آمیز بود</string>
+	<string name="shared_string_download_successful">دانلود موفقیت آمیز بود</string>
 	<string name="error_io_error">خطای I/O رخ داد</string>
 	<string name="shared_string_downloading">درحال دانلود…</string>
 	<string name="downloading">درحال دانلود…</string>

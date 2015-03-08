@@ -689,7 +689,7 @@
   <string name="download_question">Laai {0} - {1} af?</string>
   <string name="download_question_exist">Aflyn inligting vir {0} bestaan alreeds ({1}). Wiljy dit opgradeer ({2}) ?</string>
   <string name="address">Adres</string>
-  <string name="download_index_success">Aflaai suksesvol</string>
+  <string name="shared_string_download_successful">Aflaai suksesvol</string>
   <string name="error_io_error">I/O fout het voorgekom</string>
   
   <string name="downloading">Besig om af te laai…</string>

@@ -1233,7 +1233,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="download_question">Сьцягнуць {0} - {1} ?</string>
 	<string name="download_question_exist">Лакальная мапа для {0} ужо існуе ({1}). Хочаце яе абнавіць ({2})?</string>
 	<string name="address">Адрас</string>
-	<string name="download_index_success">Пасьпяхова сьцягнута</string>
 	<string name="error_io_error">Адбылася памылка ўводу/вываду</string>
 	<string name="downloading">Сьцягваньне…</string>
 	<string name="downloading_list_indexes">Сьцягваецца сьпіс даступных рэгіёнаў…</string>

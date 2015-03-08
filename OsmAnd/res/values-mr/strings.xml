@@ -240,7 +240,7 @@
   <string name="route_general_information">एकुण अंतर %1$s, प्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
-  <string name="download_index_success">डाउनलोड यशस्वी</string>
+  <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
   
   <string name="downloading">डाउनलोड करत आहे…</string>
   <string name="downloading_list_indexes">उपलब्ध प्रदेशांची यादी डाउनलोड करत आहे…</string>

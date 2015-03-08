@@ -862,7 +862,7 @@
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
-	<string name="download_index_success">Επιτυχής λήψη</string>
+	<string name="shared_string_download_successful">Επιτυχής λήψη</string>
 	<string name="error_io_error">Προέκυψε σφάλμα Εισ/Εξ</string>
 	
 	<string name="downloading">Λήψη…</string>

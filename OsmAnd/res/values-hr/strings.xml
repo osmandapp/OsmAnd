@@ -403,7 +403,7 @@
 	<string name="list_index_files_was_not_loaded">Popis regija nije preuzet sa osmand.net.</string>
 	<string name="error_io_error">Došlo je do I/O pogreške</string>
 	<string name="address">Adresa</string>
-	<string name="download_index_success">Preuzimanje uspješno završeno</string>
+	<string name="shared_string_download_successful">Preuzimanje uspješno završeno</string>
 	<string name="download_question">Preuzmi {0} - {1} ?</string>
 	<string name="download_question_exist">Offline podaci za {0} već postoje ({1}). Želite li ih ažurirali ({2})?</string>
 	<string name="search_offline_address">Traži offline</string>

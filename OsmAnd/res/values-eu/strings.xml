@@ -978,7 +978,7 @@
   <string name="download_question">Deskargatu {0} - {1} ?</string>
   <string name="download_question_exist">{0}rentzat lineaz kanpoko datuak daude iada ({1}). Eguneratu nahi al dituzu ({2}) ?</string>
   <string name="address">Helbidea</string>
-  <string name="download_index_success">Deskarga arrakastatsua</string>
+  <string name="shared_string_download_successful">Deskarga arrakastatsua</string>
   <string name="error_io_error">I/O errorea gertatu da</string>
   <string name="shared_string_downloading">Deskargatzen…</string>
   <string name="downloading">Deskargatzen…</string>

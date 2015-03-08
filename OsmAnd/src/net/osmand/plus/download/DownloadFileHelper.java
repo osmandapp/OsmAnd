@@ -222,7 +222,7 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
+			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$

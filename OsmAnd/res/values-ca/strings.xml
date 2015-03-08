@@ -551,7 +551,7 @@
 <string name="context_menu_item_update_poi">Actualitzar PDI</string>
 <string name="searching_address">Cercant l\'adreça…</string>
 <string name="search_offline_address">Fora de línia</string>
-<string name="download_index_success">Baixada amb èxit</string>
+<string name="shared_string_download_successful">Baixada amb èxit</string>
 
 <string name="show_poi_on_map">Mostra al mapa</string>
 <string name="show_gps_status">Mostra l\'estat del GPS</string>

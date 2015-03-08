@@ -475,7 +475,7 @@
   <string name="download_question">Pobrać {0} - {1} ?</string>
   <string name="download_question_exist">Dane offline {0} już istnieją ({1}). Czy chcesz je uaktualnić ({2}) ?</string>
   <string name="address">Adres</string>
-  <string name="download_index_success">Pobieranie zakończone</string>
+  <string name="shared_string_download_successful">Pobieranie zakończone</string>
   <string name="error_io_error">Wystąpił błąd wejścia/wyjścia</string>
   
   <string name="downloading">Pobieranie…</string>

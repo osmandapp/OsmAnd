@@ -764,7 +764,7 @@
   <string name="download_question">Parsiųsti {0} - {1} ?</string>
   <string name="download_question_exist">Parsiųsti duomenys {0} jau egzistuoja ({1}). Ar norite juos atnaujinti ({2}) ?</string>
   <string name="address">Adresas</string>
-  <string name="download_index_success">Parsiuntimas buvo sėkmingas</string>
+  <string name="shared_string_download_successful">Parsiuntimas buvo sėkmingas</string>
   <string name="error_io_error">Įvyko I/O klaida</string>
   
   <string name="downloading">Parsiunčiama…</string>

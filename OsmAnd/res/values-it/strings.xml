@@ -550,7 +550,6 @@
   <string name="download_question">Scaricare {0} - {1} ?</string>
   <string name="download_question_exist">I dati offline per {0} sono già presenti ({1}). Aggiornarli ({2}) ?</string>
   <string name="address">Indirizzo</string>
-  <string name="download_index_success">Download completato</string>
   <string name="error_io_error">Errore di I/O</string>
   
   <string name="downloading">In ricezione…</string>

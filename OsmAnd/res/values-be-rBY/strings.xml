@@ -1611,7 +1611,7 @@
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Lakaĺnaja mapa dlia {0} užo іsnuje ({1}). Chočacie jaje abnavіć ({2})?</string>
 	<string name="address">Adras</string>
-	<string name="download_index_success">Zahruzka paśpiachovaja</string>
+	<string name="shared_string_download_successful">Zahruzka paśpiachovaja</string>
 	<string name="error_io_error">Adbylasia pamylka ŭvodu/vyvadu</string>
 	<string name="shared_string_downloading">Ladavańnie…</string>
 	<string name="downloading">Ladavańnie…</string>

@@ -876,7 +876,7 @@
 	<string name="download_question">האם להוריד {0} - {1} ?</string>
 	<string name="download_question_exist">הנתונים הבלתי מקוונים עבור {0} כבר קיימים ({1}). האם לעדכן אותם ({2}) ?</string>
 	<string name="address">כתובת</string>
-	<string name="download_index_success">ההורדה הצליחה</string>
+	<string name="shared_string_download_successful">ההורדה הצליחה</string>
 	<string name="error_io_error">אירעה שגיאת קלט/פלט</string>
 	
 	<string name="downloading">בהורדה…</string>

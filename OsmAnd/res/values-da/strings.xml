@@ -1083,7 +1083,6 @@
 	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
 	<string name="download_question">Hent {0} - {1}?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Hentet</string>
 	<string name="error_io_error">Der skete en I/O fejl</string>
 	
 	<string name="downloading">Henter…</string>

@@ -320,7 +320,7 @@
 	<string name="sd_dir_not_accessible">Tallennuspolku muistikortilta ei ole käytettävissä</string>
 	<string name="download_question">Lataa {0} - {1} ?</string>
 	<string name="address">Osoite</string>
-	<string name="download_index_success">Lataus onnistui</string>
+	<string name="shared_string_download_successful">Lataus onnistui</string>
 	<string name="error_io_error">Tapahtui I/O virhe</string>
 	
 	<string name="downloading">Ladataan…</string>

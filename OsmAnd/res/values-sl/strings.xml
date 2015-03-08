@@ -994,7 +994,7 @@
 	<string name="download_question">Prenesti {0} - {1}?</string>
 	<string name="download_question_exist">Krajevni podatki za {0} že obstajajo ({1}). Ali jih želite posodobiti ({2})?</string>
 	<string name="address">Naslov</string>
-	<string name="download_index_success">Prenos uspešen</string>
+	<string name="shared_string_download_successful">Prenos uspešen</string>
 	<string name="error_io_error">Prišlo je do I/O napake</string>
 	<string name="downloading_list_indexes">Prenašanje seznama razpoložljivih območij …</string>
 	<string name="list_index_files_was_not_loaded">Seznam območij ni bil pridobljen iz osmand.net.</string>

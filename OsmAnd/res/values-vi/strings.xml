@@ -460,7 +460,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="download_question">Tải về {0} - {1} ?</string>
 	<string name="download_question_exist">Dữ liệu Offline cho {0} đã có ({1}). Bạn muốn cập nhật nó ({2}) ?</string>
 	<string name="address">Địa chỉ</string>
-	<string name="download_index_success">Tải về thành công</string>
+	<string name="shared_string_download_successful">Tải về thành công</string>
 	<string name="error_io_error">Có lỗi xảy ra với I/O</string>
 	
 	<string name="downloading">Đang tải…</string>

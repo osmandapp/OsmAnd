@@ -740,7 +740,6 @@
   <string name="download_question">Stiahnuť {0} - {1} ?</string>
   <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="download_index_success">Sťahovanie úspešne dokončené</string>
   <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
   
   <string name="downloading">Sťahovanie…</string>

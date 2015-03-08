@@ -571,7 +571,7 @@
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
-  <string name="download_index_success">Téléchargement de l\'index réussi</string>
+  <string name="shared_string_download_successful">Téléchargement de l\'index réussi</string>
   <string name="error_io_error">Une erreur d\'entrée/sortie s\'est produite</string>
   
   <string name="downloading">Téléchargement en cours…</string>

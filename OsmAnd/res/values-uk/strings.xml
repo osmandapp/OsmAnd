@@ -688,7 +688,7 @@
   <string name="download_question">Завантажити {0} - {1} ?</string>
   <string name="download_question_exist">Оффлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
   <string name="address">Адрес</string>
-  <string name="download_index_success">Успішно завантажена</string>
+  <string name="shared_string_download_successful">Успішно завантажена</string>
   <string name="error_io_error">Помилка вводу/виводу</string>
   
   <string name="downloading">Завантаження…</string>

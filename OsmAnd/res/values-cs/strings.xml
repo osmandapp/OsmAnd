@@ -629,7 +629,7 @@
   <string name="download_question">Stáhnout {0} - {1} ?</string>
   <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="download_index_success">Index úspěšně stažen</string>
+  <string name="shared_string_download_successful">Index úspěšně stažen</string>
   <string name="error_io_error">Došlo k chybě vstupu/výstupu</string>
   
   <string name="downloading">Stahuji…</string>

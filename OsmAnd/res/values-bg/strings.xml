@@ -1338,7 +1338,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="download_question">Сваляне {0} - {1} ?</string>
 	<string name="download_question_exist">Офлайн данни за {0} вече съществуват ({1}). Искате ли да ги обновите ({2}) ?</string>
 	<string name="address">Адрес</string>
-	<string name="download_index_success">Успешно сваляне</string>
+	<string name="shared_string_download_successful">Успешно сваляне</string>
 	<string name="error_io_error">Входно/изходна грешка</string>
 	<string name="shared_string_downloading">Сваляне…</string>
 	<string name="downloading">Сваляне…</string>

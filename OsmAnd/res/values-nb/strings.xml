@@ -504,7 +504,7 @@
 	<string name="download_question">Laste ned {0} - {1} ?</string>
 	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere ({2}) ?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Nedlasting vellykket</string>
+	<string name="shared_string_download_successful">Nedlasting vellykket</string>
 	<string name="error_io_error">I/O feil oppstod</string>
 	
 	<string name="downloading">Laster ned…</string>

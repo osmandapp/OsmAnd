@@ -980,7 +980,7 @@
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
+	<string name="shared_string_download_successful">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten</string>
 	
 	<string name="downloading">Herunterladen…</string>

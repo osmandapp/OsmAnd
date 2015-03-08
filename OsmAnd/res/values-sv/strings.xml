@@ -840,7 +840,7 @@
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adresser</string>
-	<string name="download_index_success">Nedladdningen slutfördes utan problem</string>
+	<string name="shared_string_download_successful">Nedladdningen slutfördes utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	
 	<string name="downloading">Laddar ner …</string>

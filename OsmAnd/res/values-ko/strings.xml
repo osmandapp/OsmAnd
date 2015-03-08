@@ -664,7 +664,6 @@
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
 	<string name="address">주소</string>
-	<string name="download_index_success">성공적으로 다운로드되었습니다</string>
 	<string name="error_io_error">입출력 오류가 발생하였습니다</string>
 	
 	<string name="downloading">다운로드 중…</string>

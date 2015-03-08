@@ -624,7 +624,7 @@
   <string name="download_question">Letöltés {0} - {1} ?</string>
   <string name="download_question_exist">&amp;gt;Már létezik indexadat {0} régióhoz ({1}). Szeretné frissíteni ({2})?</string>
   <string name="address">Cím</string>
-  <string name="download_index_success">Sikeres a térképadatok letöltése</string>
+  <string name="shared_string_download_successful">Sikeres a térképadatok letöltése</string>
   <string name="error_io_error">IO hiba történt</string>
   
   <string name="downloading">Letöltés…</string>

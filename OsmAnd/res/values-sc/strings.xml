@@ -1480,7 +1480,7 @@
 	<string name="download_question">Iscarrigare {0} - {1} ?</string>
 	<string name="download_question_exist">Sos datos non in lìnia pro {0} esistint giai ({1}). Los boles agiornare ({2}) ?</string>
 	<string name="address">Indiritzu</string>
-	<string name="download_index_success">Iscarrigamentu cumpridu</string>
+	<string name="shared_string_download_successful">Iscarrigamentu cumpridu</string>
 	<string name="error_io_error">Errore de I/O</string>
 	<string name="shared_string_downloading">Iscarrigande …</string>
 	<string name="downloading">Iscarrigande…</string>

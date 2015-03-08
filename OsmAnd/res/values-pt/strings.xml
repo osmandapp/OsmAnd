@@ -239,7 +239,7 @@
   <string name="download_question">Quer fazer o download {0} - {1} ?</string>
   <string name="download_question_exist">Dados para {0} já existem ({1}). Você quer fazer atualizá-los ({2}) ?</string>
   <string name="address">Endereço</string>
-  <string name="download_index_success">Download do índice com sucesso</string>
+  <string name="shared_string_download_successful">Download do índice com sucesso</string>
   <string name="error_io_error">Um erro de entrada/saída ocorreu</string>
   
   <string name="downloading">Baixando…</string>

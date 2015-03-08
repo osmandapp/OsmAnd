@@ -436,7 +436,7 @@ POIの更新は利用できません</string>
      <string name="download_question_exist">{0}用のオフラインデータは
 既にあります({1})。更新しますか({2}) ?</string>
      <string name="address">住所</string>
-     <string name="download_index_success">ダウンロード完了</string>
+     <string name="shared_string_download_successful">ダウンロード完了</string>
      <string name="error_io_error">I/O エラー発生</string>
      
      <string name="downloading">ダウンロード中…</string>

@@ -621,7 +621,7 @@
   <string name="download_question">ჩამოვტვირთო {0} - {1} ?</string>
   <string name="download_question_exist">გათიშული მონაცემები {0}-სათვის უკვე არსებობს ({1}). გნებავთ მისი განახლება ({2}) ?</string>
   <string name="address">მისამართი</string>
-  <string name="download_index_success">ჩამოტვირთვა წარმატებულად დამთავრდა</string>
+  <string name="shared_string_download_successful">ჩამოტვირთვა წარმატებულად დამთავრდა</string>
   <string name="error_io_error">მოხდა I/O შეცდომა</string>
   
   <string name="downloading">ჩამოტვირთვა…</string>
