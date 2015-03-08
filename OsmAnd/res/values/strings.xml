@@ -140,7 +140,6 @@
 	<string name="debugging_and_development">OsmAnd development</string>
 
     <string name="recents">RECENTS</string>
-	<string name="turn_off_all">Turn off all</string>
 	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
