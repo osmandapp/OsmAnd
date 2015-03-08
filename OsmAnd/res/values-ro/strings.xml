@@ -1523,7 +1523,7 @@
     <string name="download_tab_updates">Actualizări</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Descărcarea nu este posibilă, vă rugăm să verificaţi conexiunea la Internet.</string>
-    <string name="dismiss">Respinge</string>
+    <string name="shared_string_dismiss">Respinge</string>
     <string name="everything_up_to_date">Toate fişierele actualizate</string>
     <string name="use_opengl_render">Utilizaţi redare OpenGL</string>
     <string name="osmo_use_https_descr">Utilizează o conexiune securizată la server</string>

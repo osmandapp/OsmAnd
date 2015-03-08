@@ -238,7 +238,7 @@
     <string name="download_tab_updates">Надоградње</string>
     <string name="download_tab_local">Месно</string>
 	<string name="no_internet_connection">Преузимање је немогуће, проверите везу са Интернетом.</string>
-    <string name="dismiss">Откажи</string>
+    <string name="shared_string_dismiss">Откажи</string>
     <string name="everything_up_to_date">Све датотеке су свеже</string>
     <string name="use_opengl_render">Користи ОпенГЛ за приказ</string>
     <string name="use_opengl_render_descr">Користи хардверско убрзање ОпенГЛ-а за приказ (можда не ради на неким уређајима)</string>

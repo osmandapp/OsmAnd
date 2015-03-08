@@ -2011,7 +2011,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_opengl_render">Gebruik OpenGL</string>
     <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
-    <string name="dismiss">Sluiten</string>
     <string name="no_internet_connection">Kan niet downloaden, gelieve uw internetverbinding na te kijken.</string>
     <string name="download_tab_downloads">Alle downloads</string>
     <string name="download_tab_updates">Updates</string>

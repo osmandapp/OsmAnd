@@ -25,7 +25,7 @@
     <string name="download_tab_updates">Abnaŭlieńnі</string>
     <string name="download_tab_local">Liakaĺny</string>
 	<string name="no_internet_connection">Niemahčyma spampavać. Kalі laska, praviercie vaša Іnternet-zlučeńnie.</string>
-    <string name="dismiss">Skasavać</string>
+    <string name="shared_string_dismiss">Skasavać</string>
     <string name="everything_up_to_date">Usie fajly ŭ aktuaĺnym stanie</string>
     <string name="use_opengl_render">Vykarystoŭvać OpenGL</string>
     <string name="use_opengl_render_descr">Vykarystoŭvać aparatnaje paskareńnie OpenGL (moža nie pracavać na niekatorych prystasavańniach)</string>

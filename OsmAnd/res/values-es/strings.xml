@@ -1860,7 +1860,7 @@
     <string name="use_opengl_render_descr">Usar renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
     <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
-    <string name="dismiss">Descartar</string>
+    <string name="shared_string_dismiss">Descartar</string>
     <string name="no_internet_connection">Imposible descargar; por favor, comprueba tu conexión a Internet.</string>
     <string name="download_tab_downloads">Todas las descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>

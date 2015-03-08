@@ -1785,7 +1785,7 @@
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
     <string name="use_opengl_render_descr">Imprea sa renderizatzione OpengL tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
-    <string name="dismiss">Abbandona</string>
+    <string name="shared_string_dismiss">Abbandona</string>
     <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere còmpida sa cunnessione tua pro sighire.</string>
     <string name="download_tab_downloads">Iscarrigàbiles</string>
     <string name="download_tab_updates">Agiornamentos</string>

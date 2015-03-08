@@ -1875,7 +1875,7 @@
     <string name="routing_attr_no_new_routing_name">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
-    <string name="dismiss">Nesiųsti</string>
+    <string name="shared_string_dismiss">Nesiųsti</string>
     <string name="traffic_warning_railways">Geležinkelio pervaža</string>
 	<string name="traffic_waring_pedestrian">Pėstieji</string>
 	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>

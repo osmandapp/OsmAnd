@@ -1078,7 +1078,7 @@
 	<string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
     <string name="no_internet_connection">Ikke mulig å laste ned, kontroller internettforbindelsen.</string>
-    <string name="dismiss">Avvis</string>
+    <string name="shared_string_dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
     <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter)</string>

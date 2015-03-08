@@ -1779,7 +1779,7 @@ s často kladenými otázkami.</string>
 	<string name="search_for">Hledat</string>
 	<string name="show_all">ZOBRAZIT VŠE</string>
 	<string name="coordinates">Souřadnice</string>
-	<string name="dismiss">Zavřít</string>
+	<string name="shared_string_dismiss">Zavřít</string>
     <string name="everything_up_to_date">Všechny soubory jsou aktuální</string>
     <string name="use_opengl_render">Použít OpenGL</string>
     <string name="use_opengl_render_descr">Použít hardwarově akcelerované renderování pomocí OpenGL (nemusí fungovat na všech zařízeních)</string>

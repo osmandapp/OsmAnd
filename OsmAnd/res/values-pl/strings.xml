@@ -1955,7 +1955,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_map">POKAŻ MAPĘ</string>
 	<string name="show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
-	<string name="dismiss">Odrzuć</string>
+	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
     <string name="use_opengl_render">Użyj renderowania OpenGL</string>
     <string name="use_opengl_render_descr">Użyj sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>

@@ -1842,7 +1842,7 @@
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
-    <string name="dismiss">排除</string>
+    <string name="shared_string_dismiss">排除</string>
     <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>

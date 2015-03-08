@@ -1947,7 +1947,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="download_tab_updates">Posodobitve</string>
     <string name="download_tab_local">Krajevno</string>
 	<string name="no_internet_connection">Prenos ni mogoč. Prosim, preverite vašo internetno povezavo.</string>
-    <string name="dismiss">Zapri</string>
+    <string name="shared_string_dismiss">Zapri</string>
     <string name="everything_up_to_date">Vse datoteke posodobljene</string>
     <string name="osmo_use_https">Uporabi HTTPS</string>
 	<string name="advanced_settings">Napredno</string>

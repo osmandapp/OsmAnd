@@ -1712,7 +1712,7 @@
     <string name="download_tab_updates">Actualizacións</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Non é posíbel descargar. Conéctese a unha rede con wi-fi para proseguir.</string>
-    <string name="dismiss">Desbotar</string>
+    <string name="shared_string_dismiss">Desbotar</string>
     <string name="everything_up_to_date">Todos os ficheiros están actualizados</string>
     <string name="use_opengl_render">Empregar o renderizado con OpenGL</string>
     <string name="use_opengl_render_descr">Empregar renderizado con OpenGL acelerado co hardware (podería non funcionar nalgúns dispositivos)</string>

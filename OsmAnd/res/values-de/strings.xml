@@ -1995,7 +1995,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
-    <string name="dismiss">Ablehnen</string>
+    <string name="shared_string_dismiss">Ablehnen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>

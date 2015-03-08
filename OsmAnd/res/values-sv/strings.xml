@@ -1734,7 +1734,7 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
-    <string name="dismiss">Avböj</string>
+    <string name="shared_string_dismiss">Avböj</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>

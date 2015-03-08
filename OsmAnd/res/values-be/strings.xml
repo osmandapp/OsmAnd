@@ -1953,7 +1953,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="use_opengl_render">Выкарыстоўваць OpenGL</string>
     <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэньне OpenGL (можа не працаваць на некаторых прыстасаваньнях)</string>
     <string name="everything_up_to_date">Усе файлы ў актуальным стане</string>
-    <string name="dismiss">Скасаваць</string>
     <string name="no_internet_connection">Немагчыма cьцягнуць. Калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
     <string name="download_tab_downloads">Усе cьцягваньні</string>
     <string name="download_tab_updates">Абнаўленьні</string>

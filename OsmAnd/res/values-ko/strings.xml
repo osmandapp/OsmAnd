@@ -2076,7 +2076,6 @@
 	<string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
     <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
-    <string name="dismiss">해제</string>
     <string name="everything_up_to_date">모든 파일 업데이트</string>
     <string name="no_internet_connection">다운로드가 불가능 합니다. 인터넷 연결을 체크해 주세요.</string>
     <string name="navigate_point_zone">존(지역)</string>

@@ -1988,7 +1988,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="coordinates">Súradnice</string>
 	<string name="map_update">Aktualizácie pre %1$s máp</string>
 	<string name="error_avoid_specific_road">Nenašla sa blízka cesta</string>
-    <string name="dismiss">Odmietnuť</string>
     <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>

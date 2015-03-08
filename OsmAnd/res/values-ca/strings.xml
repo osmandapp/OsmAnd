@@ -1833,7 +1833,7 @@
     <string name="use_opengl_render">Utilitza la renderització OpenGL</string>
     <string name="use_opengl_render_descr">Ús de renderització OpenGL per accelerador gràfic (no funciona a tots els dispositius)</string>
     <string name="everything_up_to_date">Tots els fitxers estan al dia</string>
-    <string name="dismiss">Descarta</string>
+    <string name="shared_string_dismiss">Descarta</string>
     <string name="no_internet_connection">No s\'ha pogut baixar, verifiqueu la vostra connexió a Internet.</string>
     <string name="download_tab_downloads">Totes les baixades</string>
     <string name="download_tab_updates">Actualitzacions</string>

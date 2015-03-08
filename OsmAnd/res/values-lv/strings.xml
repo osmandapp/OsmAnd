@@ -1865,7 +1865,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="download_tab_updates">Atjauninājumi</string>
     <string name="download_tab_local">Vietējie</string>
 	<string name="no_internet_connection">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
-    <string name="dismiss">Atcelt</string>
+    <string name="shared_string_dismiss">Atcelt</string>
     <string name="everything_up_to_date">Visi faili ir atjaunoti</string>
     <string name="use_opengl_render">Lietot OpenGL renderēšanu</string>
     <string name="use_opengl_render_descr">Lietot iebūvēto paātrināto OpenGL renderēšanu (jābūt saderīgai ierīcei)</string>

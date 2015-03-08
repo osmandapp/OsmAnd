@@ -2011,7 +2011,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
-    <string name="dismiss">Tralascia</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, verifica la connessione a internet.</string>
     <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornabili</string>

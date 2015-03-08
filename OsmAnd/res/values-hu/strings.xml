@@ -1792,7 +1792,7 @@
     <string name="download_tab_downloads">Minden elérhető</string>
     <string name="download_tab_local">Helyi</string>
 	<string name="no_internet_connection">A letöltés nem lehetséges, ellenőrizze az internet-kapcsolatát.</string>
-    <string name="dismiss">Elutasít</string>
+    <string name="shared_string_dismiss">Elutasít</string>
     <string name="everything_up_to_date">Minden fájl naprakész</string>
     <string name="use_opengl_render">OpenGL renderelő használata</string>
     <string name="use_opengl_render_descr">Hardveresen gyorsított OpenGL renderelő (néhány eszközön nem működik)</string>
