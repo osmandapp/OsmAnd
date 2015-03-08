@@ -783,7 +783,7 @@
 	<string name="local_index_upload_gpx_description">Uploadaj GPX datoteke na OSM. Koristiti će se za poboljšanje karata.</string>
 	<string name="local_index_items_uploaded">%1$d od %2$d stavke uspješno su upload-ane.</string>
 	<string name="file_with_name_already_exist">Datoteka sa istim imenom već postoji.</string>
-	<string name="save_route_dialog_title">Spremi rutu kao GPX trag</string>
+	<string name="shared_string_save_as_gpx">Spremi rutu kao GPX trag</string>
 	<string name="route_successfully_saved_at">Ruta je uspješno spremljena kao \'%1$s\'.</string>
 	<string name="filename_input">Naziv datoteke: </string>
 	<string name="context_menu_item_search">Traži u blizini ovog mjesta</string>

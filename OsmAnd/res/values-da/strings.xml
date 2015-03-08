@@ -556,7 +556,6 @@
 	<string name="search_position_map_view">Nuværende kortcenter</string>
 	<string name="select_search_position">Udgangspunkt:</string>
 	<string name="context_menu_item_search">Søg i nærheden</string>
-	<string name="save_route_dialog_title">Gem rute som GPX-spor</string>
 	<string name="route_successfully_saved_at">Rute gemt som \'%1$s\'.</string>
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>

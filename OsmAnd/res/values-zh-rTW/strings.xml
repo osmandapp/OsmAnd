@@ -418,7 +418,7 @@
 	<string name="search_position_map_view">目前的地圖中心</string>
 	<string name="select_search_position">起點：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
-	<string name="save_route_dialog_title">儲存路線成 GPX 軌跡</string>
+	<string name="shared_string_save_as_gpx">儲存路線成 GPX 軌跡</string>
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>

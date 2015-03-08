@@ -237,7 +237,7 @@
 \n\t- Vylepšený vektorový renderer
 \n\t- Vylepšený TTS engine (přesná vzdálenost, míle)
 \n\t- Oprava chyb "</string>
-  <string name="save_route_dialog_title">Uložit trasu jako GPX</string>
+  <string name="shared_string_save_as_gpx">Uložit trasu jako GPX</string>
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">Jméno souboru : </string>
   <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>

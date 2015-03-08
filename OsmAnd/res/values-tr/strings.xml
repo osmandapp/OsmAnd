@@ -787,7 +787,7 @@
 	<string name="search_position_map_view">Son harita görünümü</string>
 	<string name="select_search_position">Yakınlarda ara:</string>
 	<string name="context_menu_item_search">Buraya yakın ara</string>
-	<string name="save_route_dialog_title">Rotayı GPX olarak kaydet</string>
+	<string name="shared_string_save_as_gpx">Rotayı GPX olarak kaydet</string>
 	<string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
 	<string name="filename_input">"Dosya adı: "</string>
 	<string name="menu_save_directions">Tarifi Kaydet</string>

@@ -56,7 +56,7 @@
   <string name="select_search_position">Szukaj w pobliżu:</string>
   <string name="context_menu_item_search">Szukaj w pobliżu</string>
   <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
-  <string name="save_route_dialog_title">Zapisz trasę jako ślad GPX</string>
+  <string name="shared_string_save_as_gpx">Zapisz trasę jako ślad GPX</string>
   <string name="route_successfully_saved_at">Trasa została zapisana jako \'%1$s\'.</string>
   <string name="filename_input">Nazwa pliku: </string>
   <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>

@@ -355,7 +355,7 @@
 		\n\t- Patobulintas TTS variklis (pranešimai apie tikslų atstumą, pranešimai myliomis) 
 		\n\t- Klaidų ištaisymai
 	</string>
-  <string name="save_route_dialog_title">Išsaugoti maršrutą į GPX failą</string>
+  <string name="shared_string_save_as_gpx">Išsaugoti maršrutą į GPX failą</string>
   <string name="route_successfully_saved_at">Maršrutas sėkmingai išsaugotas faile \'%1$s\'.</string>
   <string name="filename_input">Failo pavadinimas : </string>
   <string name="file_with_name_already_exist">Failas tokiu pavadinimu jau egzistuoja.</string>

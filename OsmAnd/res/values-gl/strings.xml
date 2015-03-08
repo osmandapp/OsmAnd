@@ -1143,7 +1143,7 @@
 \n\t- Improve vector rendering
 \n\t- Improvement of TTS engine (announce exact distance, enable miles)
 \n\t- Bug fixes "</string>
-	<string name="save_route_dialog_title">Gardar a ruta como pista de GPX</string>
+	<string name="shared_string_save_as_gpx">Gardar a ruta como pista de GPX</string>
 	<string name="route_successfully_saved_at">A ruta foi gardada correctamente como «%1$s».</string>
 	<string name="filename_input">"Nome do ficheiro: "</string>
 	<string name="file_with_name_already_exist">Xa existe un ficheiro co mesmo nome.</string>

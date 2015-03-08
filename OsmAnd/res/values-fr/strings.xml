@@ -162,7 +162,7 @@
 \n\t- Améliorations du rendu vectoriel
 \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles)
 \n\t- Corrections de bogues</string>
-  <string name="save_route_dialog_title">Enregistrer l\'itinéraire en GPX</string>
+  <string name="shared_string_save_as_gpx">Enregistrer l\'itinéraire en GPX</string>
   <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
   <string name="filename_input">Nom du fichier : </string>
   <string name="file_with_name_already_exist">Le même nom existe déjà.</string>

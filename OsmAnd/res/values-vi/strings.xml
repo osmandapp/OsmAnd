@@ -49,7 +49,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
-	<string name="save_route_dialog_title">Lưu tuyến đường thành tập tin GPX</string>
+	<string name="shared_string_save_as_gpx">Lưu tuyến đường thành tập tin GPX</string>
 	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
 	<string name="filename_input">Tên tập tin : </string>
 	<string name="file_with_name_already_exist">Tên tập tin đã có.</string>

@@ -882,7 +882,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
-	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
 	<string name="route_successfully_saved_at">Маршрут пасьпяхова захаваны як \'%1$s\'.</string>
 	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой назвай ужо існуе.</string>

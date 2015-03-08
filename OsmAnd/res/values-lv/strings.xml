@@ -226,7 +226,7 @@
   <string name="select_search_position">Meklēt blakus:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
   <string name="tip_recent_changes_0_6_7_t">Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi</string>
-  <string name="save_route_dialog_title">Saglabāt maršrutu GPX trasē</string>
+  <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>

@@ -255,7 +255,7 @@
 <string name="search_position_fixed">Posició fixada</string>
 <string name="search_position_current_location">Posició actual…</string>
 <string name="context_menu_item_search">Cerca prop d\'aquí</string>
-<string name="save_route_dialog_title">Desa la ruta com una traça GPX</string>
+<string name="shared_string_save_as_gpx">Desa la ruta com una traça GPX</string>
 <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
 <string name="filename_input">Nom del fitxer: </string>
 <string name="shared_string_save">Desa</string>

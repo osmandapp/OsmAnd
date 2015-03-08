@@ -679,7 +679,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="select_search_position">Search near :</string>
   <string name="context_menu_item_search">Pesquisar aqui perto</string>
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
-  <string name="save_route_dialog_title">Guardar a rota como trilha GPX</string>
+  <string name="shared_string_save_as_gpx">Guardar a rota como trilha GPX</string>
   <string name="route_successfully_saved_at">Rota guardada como \'%1$s\'.</string>
   <string name="filename_input">O nome do arquivo : </string>
   <string name="file_with_name_already_exist">Já existe um arquivo com o mesmo nome.</string>

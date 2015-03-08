@@ -291,7 +291,6 @@
 		\n\t- Улучшенное использование TTS
 		\n\t- Исправление ошибок
 	</string>
-  <string name="save_route_dialog_title">Сохранить маршрут как трек GPX</string>
   <string name="route_successfully_saved_at">Маршрут успешно сохранён в \"%1$s\".</string>
   <string name="filename_input">Имя файла: </string>
   <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>

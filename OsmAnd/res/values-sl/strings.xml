@@ -765,7 +765,7 @@
 	<string name="poi_filter_nominatim">Spletni Nominatim</string>
 	<string name="search_position_current_location_search">Iskanje položaja …</string>
 	<string name="search_position_current_location_found">Položaj (najden)</string>
-	<string name="save_route_dialog_title">Shrani pot kot sled GPX</string>
+	<string name="shared_string_save_as_gpx">Shrani pot kot sled GPX</string>
 	<string name="route_successfully_saved_at">Pot je bila uspešno shranjena kot \'%1$s\'.</string>
 	<string name="filename_input">Ime datoteke: </string>
 	<string name="file_with_name_already_exist">Datoteka z enakim imenom že obstaja.</string>

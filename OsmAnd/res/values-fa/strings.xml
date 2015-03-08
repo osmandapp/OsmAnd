@@ -797,7 +797,7 @@
 	<string name="old_poi_file_should_be_deleted">فایل داده های POI \'%1$s\' زائد است و میتوان آنرا حذف کرد.</string>
 	<string name="button_upgrade_osmandplus">ارتقاء به +OsmAnd</string>
 	<string name="search_position_fixed">ثابت شد</string>
-	<string name="save_route_dialog_title">ذخیره مسیر به صورت فایل GPX</string>
+	<string name="shared_string_save_as_gpx">ذخیره مسیر به صورت فایل GPX</string>
 	<string name="route_successfully_saved_at">مسیر با موفقیت در \'%1$s\' ذخیره شد.</string>
 	<string name="search_position_map_view">آخرین نمای نقشه</string>
 	<string name="select_search_position">جستجو در اطراف:</string>

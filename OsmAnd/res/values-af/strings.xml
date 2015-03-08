@@ -307,7 +307,7 @@
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
   <string name="tip_recent_changes_0_6_7_t">"Onlangse wysigings 0.6.7:\n\t-aflyn inligting bestuurder (laai, verwyder, aktiveer / deaktiveer aflyn inligting direk in OsmAnd)\n\t-gunsteling punte en groepe (kategoriseer, verwyder, bestuur gunstelinge)\n\t- GPX Explorer in toepassing (wys spoordetail, afstand, gemiddelde spoed, hoogte, ens.)\n\t- GPX navigasie (meer keuses, gaan aan met navigasie na afskakel, ondersteun verkeersirkels)\n\t-funksie om roete te berg as GPX spoor vir aflyn gebruik\n\t-Verbeter GPX monitering (filter n paar onakkurate posisie en berg akkuraatheid/hoogte/spoed)\n\t-oplaai GPX na OSM gemeenskap (http://download.osmand.net/gpx/)\n\t-vektor lewering verbeter\n\t-Verbetering van TTS enjin (kondig presiese afstand aan, stel in staat om myle te gebruik)\n\t-Fout-herstellings "</string>
-  <string name="save_route_dialog_title">Berg roete as GPX spoor</string>
+  <string name="shared_string_save_as_gpx">Berg roete as GPX spoor</string>
   <string name="route_successfully_saved_at">Roete suksesvol geberg as \'%1$s\'.</string>
   <string name="filename_input">"Dokument naam:
 " </string>

@@ -485,7 +485,7 @@
 \n\t- שיפור עיבוד וקטורי
 \n\t- שיפור המנגנון שממיר טקסט לדיבור (הכרזת המרחק במדויק, הוספת מַיילים)
 \n\t- תיקוני תקלות "</string>
-	<string name="save_route_dialog_title">שמירת מסלול כדרך GPX</string>
+	<string name="shared_string_save_as_gpx">שמירת מסלול כדרך GPX</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
 	<string name="filename_input">"שם הקובץ : "</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>

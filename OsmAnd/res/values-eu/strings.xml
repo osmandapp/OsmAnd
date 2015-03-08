@@ -616,7 +616,7 @@
   <string name="select_search_position">Ondoan bilatu:</string>
   <string name="context_menu_item_search">Honen ondoan bilatu</string>
   <string name="tip_recent_changes_0_6_7_t">0.6.7 bertsiorako aldaketak:⏎\n⇥⇥⏎\n⇥- Lineaz kanpoko datuen kudeatzailea (deskargatu, ezabatu, OsmAndetik zuzenean aktibatu/desaktibatu lineaz kanpoko datuak)⏎\n⇥⇥⏎\n⇥- Puntu eta talde gogokoenak (kategoriak, ezabatu, gogokoenak kudeatu)⏎\n⇥⇥⏎\n⇥- Esploratu GPX-a aplikazioan (bidearen xehetasunak ikusi, distantzia, bataz besteko distantzia, altuera, etab.)⏎\n⇥⇥⏎\n⇥- GPX nabigazioa (aukera gehiago, nabigatzen jarraitu huts egin ondoren, biribilguneak jasan)⏎\n⇥⇥⏎\n⇥- Ibilbidea GPX bide bezala gorde lineaz kanpo erabili ahal izateko⏎\n⇥⇥⏎\n⇥- GPXen monitorizazioa hobetu (Kokapen zehaztugabe batzuk filtratu eta zehaztasuna/altuera/abiadura gorde)⏎\n⇥⇥⏎\n⇥- Igo GPXak OSM komunitatera (http://download.osmand.net/gpx/)⏎\n⇥⇥⏎\n⇥- Bektore errenderizazioa hobetu⏎\n⇥⇥⏎\n⇥- TTS motorra (Testua hizketa bihurtze) hobetu (distantzia zehatza iragarri, milak gaitu)⏎\n⇥⇥⏎\n⇥- Akatsak konpondu⏎\n⇥</string>
-  <string name="save_route_dialog_title">GPX bide bezala gorde ibilbidea</string>
+  <string name="shared_string_save_as_gpx">GPX bide bezala gorde ibilbidea</string>
   <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala arrakastatsu gorde da.</string>
   <string name="filename_input">"Fitxategi izena: "</string>
   <string name="file_with_name_already_exist">Izen berdineko beste fitxategi bat dago dagoeneko.</string>
