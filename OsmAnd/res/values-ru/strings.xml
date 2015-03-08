@@ -1806,7 +1806,6 @@
     <string name="rendering_category_hide">Скрыть</string>
     <string name="select_impassable_road">Выбрать на карте…</string>
     <string name="impassable_road">Избегать дороги…</string>
-    <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Авто-включение экрана перед поворотом</string>
     <string name="wake_on_voice_descr">Включать экран устройства (если отключён) при приближении к повороту</string>

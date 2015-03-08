@@ -1730,7 +1730,7 @@
 	<string name="lock_screen_request_explanation">%1$s require este permiso para apagar a pantalla para a funcionalidade de aforro de enerxía.</string>
     <string name="wake_on_voice">Acender a pantalla</string>
     <string name="wake_on_voice_descr">Acender a pantalla do dispositivo ao aproximarse unha manobra</string>
-    <string name="wake_on_voice_never">Nunca</string>
+    <string name="shared_string_never">Nunca</string>
     <string name="select_impassable_road">Seleccionar no mapa…</string>
     <string name="impassable_road">Evitar estradas…</string>
     <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Updated maps styles with road surface rendering, transport layers and hiking symbols * Search POI along the route * Mark road as impassable per session * Easier to download and update maps * Get visual and audio notification by approaching to waypoint * Print itinerary and turn information * Support of turn lanes * Support Android Wear * Lots UI changes * Separate zoom for Text Size on the map * Special audio notifications in case you are off the route * OsMo login functionality * Fix OsMo version incompatibilities "</string>

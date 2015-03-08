@@ -2075,7 +2075,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
     <string name="wake_on_voice">画面をオフ</string>
     <string name="wake_on_voice_descr">方向転換地点に近づくと携帯電話の画面をオンにする</string>
-    <string name="wake_on_voice_never">しない</string>
+    <string name="shared_string_never">しない</string>
     <string name="select_impassable_road">地図上で選択</string>
     <string name="impassable_road">無視する道路…</string>
     <string name="tip_recent_changes_1_9_t">"1.9での変更点： 路面レンダリング、移送用レイヤとハイキングシンボル等の追加に伴うマップ形式の更新 * ルート沿いのPOI検索 * セッションごとの通行止め道路の記録 * より簡単なマップのダウンロードと更新 * 経由点に近づいたときに、ビジュアルと音声で通知 * 旅程と移動指示情報を印刷可能に * 複数車線で進行可能情報の表示 * Androidウェアをサポート * インターフェイスの大幅変更 * 地図上の文字サイズごとに個別のズーム追加 * 経路から外れた場合の特別な音声通知を追加 * OsMoへのログイン機能追加 * OsMo バージョンの不一致部分を修正 "</string>

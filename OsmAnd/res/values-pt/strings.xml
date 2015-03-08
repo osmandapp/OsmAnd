@@ -1866,7 +1866,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_subwayMode_name">Rodas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
-    <string name="wake_on_voice_never">Nunca</string>
+    <string name="shared_string_never">Nunca</string>
     <string name="select_impassable_road">Selecione o mapa…</string>
     <string name="impassable_road">Evitar estradas…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rota de trem</string>

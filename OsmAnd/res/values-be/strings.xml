@@ -1932,7 +1932,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_category_hide">Схаваць</string>
     <string name="wake_on_voice">Уключыць экран</string>
     <string name="wake_on_voice_descr">Уключаць экран прыстасаваньня пры набліжэньні да павароту</string>
-    <string name="wake_on_voice_never">Ніколі</string>
     <string name="lock_screen_request_explanation">%1$s патрабуе дазвол на выключэньне экрану для энергазберажэньня.</string>
     <string name="advanced_settings">Дадатковыя</string>
 	<string name="osmo_use_https_descr">Выкарыстоўваць бясьпечнае злучэньне з серверам</string>

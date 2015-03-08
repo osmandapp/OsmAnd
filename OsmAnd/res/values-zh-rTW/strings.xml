@@ -1828,7 +1828,7 @@
     <string name="wake_on_voice">將螢幕開啟</string>
     <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
-    <string name="wake_on_voice_never">永不</string>
+    <string name="shared_string_never">永不</string>
     <string name="advanced_settings">進階</string>
 	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>

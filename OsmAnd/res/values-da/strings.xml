@@ -1827,7 +1827,6 @@
     <string name="wake_on_voice">Tænd for skærmen</string>
     <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
-    <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
 	<string name="osmo_use_https_descr">Brug sikker forbindelse til server</string>
     <string name="osmo_use_https">Brug HTTPS</string>

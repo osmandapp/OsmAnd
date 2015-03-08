@@ -1902,7 +1902,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopiti zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če izklopljen), ko se približujete obratu</string>
-    <string name="wake_on_voice_never">Nikoli</string>
+    <string name="shared_string_never">Nikoli</string>
     <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_others">Druge lastnosti zemljevida</string>
     <string name="map_widget_appearance_rem">Preostali elementi</string>

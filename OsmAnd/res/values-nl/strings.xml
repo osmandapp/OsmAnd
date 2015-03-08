@@ -1990,7 +1990,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="select_impassable_road">Selecteer op kaart…</string>
     <string name="impassable_road">Vermijd wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
-    <string name="wake_on_voice_never">Nooit</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     <string name="advanced_settings">Geavanceerd</string>
 	<string name="osmo_use_https_descr">Gebruik beveiligde verbinding met server</string>

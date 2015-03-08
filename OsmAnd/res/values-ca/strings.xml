@@ -1819,7 +1819,7 @@
     <string name="wake_on_voice">Activa la pantalla</string>
     <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està) en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
-    <string name="wake_on_voice_never">Mai</string>
+    <string name="shared_string_never">Mai</string>
     <string name="advanced_settings">Avançat</string>
 	<string name="osmo_use_https_descr">Utilitzeu una connexió segura al servidor</string>
     <string name="osmo_use_https">Utilitzeu HTTPS</string>

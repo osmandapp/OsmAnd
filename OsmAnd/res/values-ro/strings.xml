@@ -1536,7 +1536,7 @@
 	<string name="coordinates">Coordonate</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rute de tramvai și tren</string>
 	<string name="wake_on_voice">Pornește ecranul</string>
-    <string name="wake_on_voice_never">Niciodată</string>
+    <string name="shared_string_never">Niciodată</string>
     <string name="select_impassable_road">Selectează pe hartă…</string>
     <string name="impassable_road">Evită drumurile…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rute tren</string>

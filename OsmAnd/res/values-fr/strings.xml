@@ -1851,7 +1851,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="wake_on_voice">Allumer l\'écran</string>
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation</string>
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
-    <string name="wake_on_voice_never">Jamais</string>
+    <string name="shared_string_never">Jamais</string>
     <string name="advanced_settings">Avancé</string>
 	<string name="osmo_use_https_descr">Utiliser une connexion sécurisée avec le serveur</string>
     <string name="osmo_use_https">Utiliser HTTPS</string>

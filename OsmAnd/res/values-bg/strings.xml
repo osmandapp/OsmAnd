@@ -1762,7 +1762,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="lock_screen_request_explanation">%1$s изисква това разрешение за да изключи екрана с цел пестене на енергия.</string>
     <string name="wake_on_voice">Включи екрана</string>
     <string name="wake_on_voice_descr">Включване на екрана на телефона, когато наближава завой</string>
-    <string name="wake_on_voice_never">Никога</string>
+    <string name="shared_string_never">Никога</string>
     <string name="select_impassable_road">Избери на картата</string>
     <string name="impassable_road">Избягване на пътища…</string>
     <string name="rendering_attr_tramRoutes_name">Трамвайни линии</string>

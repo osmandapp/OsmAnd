@@ -1945,7 +1945,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
     <string name="rendering_category_hide">Ukryj</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
-    <string name="wake_on_voice_never">Nigdy</string>
+    <string name="shared_string_never">Nigdy</string>
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj HTTPS</string>
 	<string name="advanced_settings">Zaawansowane</string>

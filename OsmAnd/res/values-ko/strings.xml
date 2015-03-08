@@ -2056,7 +2056,6 @@
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
     <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
-    <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버에 보안 연결 이용</string>

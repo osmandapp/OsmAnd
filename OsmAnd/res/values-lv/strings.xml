@@ -1884,7 +1884,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lock_screen_request_explanation">%1$s ir nepieciešama šī atļauja, lai izslēgtu ekrānu enerģijas taupīšanai.</string>
     <string name="wake_on_voice">Ieslēgt ekrānu</string>
     <string name="wake_on_voice_descr">Ieslēgt ekrānu, kad tuvojas pagrieziens</string>
-    <string name="wake_on_voice_never">Nekad</string>
+    <string name="shared_string_never">Nekad</string>
     <string name="select_impassable_road">Arzīmēt kartē</string>
     <string name="impassable_road">Izvairīties no ceļiem…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vilciena maršruti</string>

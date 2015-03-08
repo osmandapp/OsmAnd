@@ -1990,7 +1990,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
-    <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
 	<string name="osmo_use_https">Usa HTTPS</string>

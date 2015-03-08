@@ -1971,7 +1971,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_tramTrainRoutes_name">Linky električiek a vlakov</string>
     <string name="rendering_category_hide">Skryť</string>
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
-    <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
 	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie na server</string>
     <string name="osmo_use_https">Použiť HTTPS</string>

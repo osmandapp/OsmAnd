@@ -1846,7 +1846,7 @@
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
-    <string name="wake_on_voice_never">Nunca</string>
+    <string name="shared_string_never">Nunca</string>
     <string name="advanced_settings">Avanzado</string>
 	<string name="osmo_use_https_descr">Usar conexión segura con el servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>

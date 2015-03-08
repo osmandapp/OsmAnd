@@ -1297,7 +1297,7 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvajske i željezničke rute</string>
 	<string name="wake_on_voice">Uključi ekran</string>
     <string name="wake_on_voice_descr">Uključiti zaslon telefona kada se približavate skretanju</string>
-    <string name="wake_on_voice_never">Nikad</string>
+    <string name="shared_string_never">Nikad</string>
     <string name="select_impassable_road">Označi na karti</string>
     <string name="impassable_road">Izbjegavaj ceste…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Željezničke rute</string>

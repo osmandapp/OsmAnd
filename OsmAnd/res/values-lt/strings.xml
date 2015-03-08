@@ -1840,7 +1840,7 @@
     <string name="wake_on_voice">Įjungti ekraną</string>
     <string name="wake_on_voice_descr">Įjungti ekraną (jei išjungtas) artėjant prie posūkio</string>
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
-    <string name="wake_on_voice_never">Niekada</string>
+    <string name="shared_string_never">Niekada</string>
     <string name="osmo_use_https">Naudoti HTTPS</string>
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     <string name="advanced_settings">Plačiau</string>

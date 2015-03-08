@@ -133,7 +133,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		// screen power save option:
 		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
 		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
-		screenPowerSaveNames[0] = getString(R.string.wake_on_voice_never);
+		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
 		for (int i = 1; i < screenPowerSaveValues.length; i++) {
 			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
 					+ getString(R.string.int_seconds);
