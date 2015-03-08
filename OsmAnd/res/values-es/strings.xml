@@ -1777,7 +1777,7 @@
     <string name="rendering_value_car_name">Coche</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
-    <string name="more">Más…</string>
+    <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Todos</string>
     <string name="waypoints">Puntos de ruta</string>

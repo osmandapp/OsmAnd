@@ -1759,7 +1759,7 @@
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
-    <string name="more">更多…</string>
+    <string name="shared_string_more">更多…</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>

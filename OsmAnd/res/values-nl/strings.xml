@@ -1898,7 +1898,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Fiets</string>
     <string name="rendering_value_pedestrian_name">Voetganger</string>
-    <string name="more">Meer…</string>
     <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">alle</string>
     <string name="waypoints">Routepunt(en)</string>
@@ -2108,7 +2107,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_control_stop">Stop</string>
 	<string name="shared_string_import">Importeer</string>
 	<string name="shared_string_export">Exporteer</string>
-	<string name="shared_string_more">Meer</string>
+	<string name="shared_string_more">Meer…</string>
 	<string name="shared_string_more_actions">Meer acties</string>
 	<string name="shared_string_do_not_show_again">Toon niet meer</string>
 	<string name="shared_string_remember_my_choice">Onthoud mijn keuze</string>

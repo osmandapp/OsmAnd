@@ -2033,7 +2033,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="speak_favorites">周辺のお気に入りをアナウンスする</string>
     <string name="speak_poi">周辺のPOIをアナウンスする</string>
     <string name="download_additional_maps">不足分のマップ %1$s (%2$d MB)をダウンロードしますか?</string>
-    <string name="more">追加…</string>
+    <string name="shared_string_more">追加…</string>
     <string name="rendering_value_browse_map_name">マップの閲覧</string>  
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>

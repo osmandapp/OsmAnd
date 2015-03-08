@@ -1376,7 +1376,7 @@
 	<string name="menu_mute_off">S’àudio est disativadu</string>
 	<string name="menu_mute_on">Àudio deativadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
-    <string name="more">Àteru…</string>
+    <string name="shared_string_more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
 	<string name="local_index_items_uploaded">Ogetu/os %1$d de %2$d carrigadu curretamente.</string>
 	<string name="tip_location_sharing_t">"Podes cumpartzire sa positzione de sos logos interesantes de sos biagios tuos cun familiares e amigos, tràmite su Menù cuntestuale \'Imprea sa positzione\' → \'Cumpartzi positzione\'.

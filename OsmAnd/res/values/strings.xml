@@ -54,7 +54,7 @@
 	<string name="shared_string_control_stop">Stop</string>
 	<string name="shared_string_import">Import</string>
 	<string name="shared_string_export">Export</string>
-	<string name="shared_string_more">More</string>
+	<string name="shared_string_more">More…</string>
 	<string name="shared_string_more_actions">More actions</string>
 	<string name="shared_string_do_not_show_again">Do not show again</string>
 	<string name="shared_string_remember_my_choice">Remember my choice</string>
@@ -334,7 +334,6 @@
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
-    <string name="more">More…</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>

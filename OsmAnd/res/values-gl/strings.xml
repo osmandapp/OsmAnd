@@ -59,7 +59,7 @@
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Anunciar os puntos de pasaxe do GPX</string>
     <string name="download_additional_maps">Descargar os mapas que faltan, %1$s (%2$d MB)?</string>
-    <string name="more">Máis…</string>
+    <string name="shared_string_more">Máis…</string>
     <string name="rendering_value_browse_map_name">Examinar o mapa</string>  
     <string name="rendering_value_car_name">Coche</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>

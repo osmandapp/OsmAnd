@@ -1898,7 +1898,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
-    <string name="more">Altro…</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
@@ -2119,7 +2118,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_control_stop">Ferma</string>
 	<string name="shared_string_import">Importa</string>
 	<string name="shared_string_export">Esporta</string>
-	<string name="shared_string_more">Di più</string>
+	<string name="shared_string_more">Di più…</string>
 	<string name="shared_string_more_actions">Più azioni</string>
 	<string name="shared_string_do_not_show_again">Non mostrare nuovamente</string>
 	<string name="shared_string_remember_my_choice">Ricorda la scelta</string>

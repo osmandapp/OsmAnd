@@ -1750,7 +1750,7 @@
     <string name="rendering_value_car_name">Cotxe</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Vianant</string>
-    <string name="more">Més…</string>
+    <string name="shared_string_more">Més…</string>
     <string name="download_additional_maps">Voleu baixar els mapes que us manquen %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Totes</string>
     <string name="waypoints">Fites</string>

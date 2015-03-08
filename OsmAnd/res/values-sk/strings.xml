@@ -1879,7 +1879,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="more">Viac…</string>
     <string name="flat_list_waypoitns">Všetky</string>
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
@@ -2096,7 +2095,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_control_stop">Zastaviť</string>
 	<string name="shared_string_import">Import</string>
 	<string name="shared_string_export">Export</string>
-	<string name="shared_string_more">Viac</string>
+	<string name="shared_string_more">Viac…</string>
 	<string name="shared_string_more_actions">Viac činností</string>
 	<string name="shared_string_do_not_show_again">Už viac nezobrazovať</string>
 	<string name="shared_string_remember_my_choice">Zapamätať moju voľbu</string>

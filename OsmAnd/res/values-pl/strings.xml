@@ -1855,7 +1855,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
 	<string name="rendering_attr_subwayMode_name">Trasy metra</string>
  	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
-    <string name="more">Więcej…</string>
+    <string name="shared_string_more">Więcej…</string>
     <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
     <string name="rendering_value_car_name">Samochód</string>
     <string name="rendering_value_bicycle_name">Rower</string>

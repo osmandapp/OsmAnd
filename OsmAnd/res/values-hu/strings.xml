@@ -1732,7 +1732,7 @@
     <string name="use_native_render_descr">C++ renderelő használata Java helyett</string>
     <string name="text_size_descr">Térképfeliratok méretének beállítása.</string>
     <string name="text_size">Felirat méret</string>
-    <string name="more">Bővebben…</string>
+    <string name="shared_string_more">Bővebben…</string>
     <string name="route_descr_destination">Cél</string>
     <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez kattints rá, a deaktiváláshoz és törléshez nyomd meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
 	<string name="speed_limit_exceed">Sebességhatár tolerancia</string>

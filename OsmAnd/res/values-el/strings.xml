@@ -1595,7 +1595,7 @@
     <string name="hide_all_waypoints">Αφαίρεση όλων</string>
     <string name="announce_nearby_favorites">Ανακοίνωση κοντινών αγαπημένων</string>
 <string name="download_additional_maps">Λήψη απόντων χαρτών %1$s (%2$d MB);</string>
-    <string name="more">Περισσότερα…</string>
+    <string name="shared_string_more">Περισσότερα…</string>
     <string name="rendering_value_browse_map_name">Επισκόπηση χάρτη</string>  
     <string name="rendering_value_car_name">Αυτοκίνητο</string>
     <string name="rendering_value_bicycle_name">Ποδήλατο</string>

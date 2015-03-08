@@ -1717,7 +1717,6 @@
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
-    <string name="more">Более…</string>
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
@@ -1896,7 +1895,7 @@
 	<string name="shared_string_control_stop">Стоп</string>
 	<string name="shared_string_import">Импорт</string>
 	<string name="shared_string_export">Экспорт</string>
-	<string name="shared_string_more">Дополнительно</string>
+	<string name="shared_string_more">Дополнительно…</string>
 	<string name="shared_string_more_actions">Дополнительные действия</string>
 	<string name="shared_string_do_not_show_again">Больше не показывать</string>
 	<string name="shared_string_remember_my_choice">Запомнить мой выбор</string>

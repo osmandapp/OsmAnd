@@ -1951,7 +1951,6 @@
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
-    <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
 \n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 기부할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특수 서드파티 분석 도구를 사용하여 분석 할 수 있습니다.\n\n\n지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는온라인  웹 서비스를 사용하여 여행을 기록하기 위한 설정을 보여줍니다. "</string>
@@ -2181,7 +2180,7 @@
 	<string name="shared_string_control_stop">정지</string>
 	<string name="shared_string_import">가져오기</string>
 	<string name="shared_string_export">내보내기</string>
-	<string name="shared_string_more">더보기</string>
+	<string name="shared_string_more">더보기…</string>
 	<string name="shared_string_more_actions">더 많은 작업</string>
 	<string name="shared_string_do_not_show_again">다시 표시하지 않음</string>
 	<string name="shared_string_remember_my_choice">내 선택을 기억하기</string>

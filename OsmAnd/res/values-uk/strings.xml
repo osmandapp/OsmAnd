@@ -1894,7 +1894,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="hide_all_waypoints">Вилучити все</string>
     <string name="announce_nearby_favorites">Оголошувати закладки, що знаходяться поруч</string>
 <string name="download_additional_maps">Завантажити відсутні мапи %1$s (%2$d МБ)?</string>
-    <string name="more">Ще…</string>
+    <string name="shared_string_more">Ще…</string>
     <string name="rendering_value_browse_map_name">Огляд мапи</string>  
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>

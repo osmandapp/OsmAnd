@@ -858,7 +858,7 @@
     <string name="distance">Avstand</string>
     <string name="index_tours">Turer</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="more">Mer…</string>
+    <string name="shared_string_more">Mer…</string>
     <string name="rendering_value_browse_map_name">Se gjennom kart</string>  
     <string name="rendering_attr_coloredBuildings_name">Fargekod bygninger etter type</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>

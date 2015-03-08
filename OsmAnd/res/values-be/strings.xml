@@ -1841,7 +1841,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_bicycle_name">Ровар</string>
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Сьцягнуць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
-    <string name="more">Больш…</string>
     <string name="flat_list_waypoitns">Усе</string>
     <string name="waypoints">Кропкі шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
@@ -2046,7 +2045,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_control_stop">Спыніць</string>
 	<string name="shared_string_import">Імпартаваць</string>
 	<string name="shared_string_export">Экспартаваць</string>
-	<string name="shared_string_more">Больш</string>
+	<string name="shared_string_more">Больш…</string>
 	<string name="shared_string_do_not_show_again">Больш не паказваць</string>
 	<string name="shared_string_remember_my_choice">Запомніць мой выбар</string>
 	<string name="shared_string_refresh">Абнавіць</string>

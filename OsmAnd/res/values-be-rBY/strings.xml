@@ -140,7 +140,7 @@
     <string name="targets">Celі</string>
     <string name="announce_gpx_waypoints">Ahalošvać maršrutnyja punkty GPX</string>
     <string name="download_additional_maps">Spampavać mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
-    <string name="more">Boĺš…</string>
+    <string name="shared_string_more">Boĺš…</string>
     <string name="rendering_value_browse_map_name">Prahliad mapy</string>  
     <string name="rendering_value_car_name">Aŭtamabіĺ</string>
     <string name="rendering_value_bicycle_name">Rovar</string>

@@ -1653,7 +1653,7 @@
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Fotgängare</string>
     <string name="rendering_value_browse_map_name">Titta på kartan</string>  
-    <string name="more">Mer …</string>
+    <string name="shared_string_more">Mer …</string>
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Alla</string>
     <string name="waypoints">Waypoints</string>

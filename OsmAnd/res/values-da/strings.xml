@@ -1730,7 +1730,6 @@
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Fodgænger</string>
     <string name="rendering_value_browse_map_name">Gennemse kort</string>  
-    <string name="more">Mere…</string>
     <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Alle</string>
     <string name="waypoints">Rutepunkter</string>
@@ -1951,7 +1950,7 @@
 	<string name="shared_string_control_stop">Stop</string>
 	<string name="shared_string_import">Importer</string>
 	<string name="shared_string_export">Eksporter</string>
-	<string name="shared_string_more">Mere</string>
+	<string name="shared_string_more">Mere…</string>
 	<string name="shared_string_more_actions">Flere handlinger</string>
 	<string name="shared_string_do_not_show_again">Vis ikke igen</string>
 	<string name="shared_string_remember_my_choice">Husk valg</string>

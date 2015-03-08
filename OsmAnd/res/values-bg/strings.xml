@@ -1664,7 +1664,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="speak_favorites">Обявяване на запазените места, които са наблизо</string>
     <string name="speak_poi">Обявяване на близките POI</string>
     <string name="download_additional_maps">Сваляне на липсващите карти %1$s (%2$d MB)?</string>
-    <string name="more">Още...</string>
+    <string name="shared_string_more">Още...</string>
     <string name="rendering_value_browse_map_name">Карта</string>  
     <string name="rendering_value_car_name">Автомобил</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>

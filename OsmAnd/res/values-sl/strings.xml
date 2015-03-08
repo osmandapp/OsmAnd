@@ -1849,7 +1849,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="av_camera_pic_size_descr">Izberite velikost posnetkov vgrajenega fotoaparata</string>
     <string name="announce_nearby_favorites">Najavi bližino priljubljenih krajev</string>
 <string name="download_additional_maps">Prenos manjkajočih zemljevidov %1$s (%2$d MB)?</string>
-    <string name="more">Več …</string>
+    <string name="shared_string_more">Več …</string>
     <string name="rendering_value_car_name">Avtomobil</string>
     <string name="rendering_value_bicycle_name">Kolo</string>
     <string name="rendering_value_pedestrian_name">Pešec</string>

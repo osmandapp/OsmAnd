@@ -1694,7 +1694,7 @@ s často kladenými otázkami.</string>
 	<string name="av_camera_pic_size_descr">Vyberte velikost obrázku interního fotoaparátu</string>
     <string name="hide_all_waypoints">Odstranit všechny</string>
     <string name="announce_nearby_favorites">Oznamovat oblíbená místa v blízkosti</string>
-<string name="more">Více…</string>
+<string name="shared_string_more">Více…</string>
     <string name="rendering_value_browse_map_name">Standardní</string>  
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Jízdní kolo</string>

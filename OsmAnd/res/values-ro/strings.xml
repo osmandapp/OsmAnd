@@ -1369,7 +1369,7 @@
     <string name="waypoints">Puncte de referință</string>
     <string name="targets">Destinații</string>
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>
-    <string name="more">Mai mult…</string>
+    <string name="shared_string_more">Mai mult…</string>
     <string name="rendering_value_browse_map_name">Derulează hartă</string>  
     <string name="rendering_value_car_name">Mașină</string>
     <string name="rendering_value_bicycle_name">Bicicletă</string>

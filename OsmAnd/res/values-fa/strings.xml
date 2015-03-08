@@ -1914,7 +1914,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="speak_favorites">اعلام علاقمندی‌های در مسیر</string>
     <string name="speak_poi">اعلام POIهای در مسیر</string>
     <string name="download_additional_maps">دانلود نقشه های از دست رفته %1$s (%2$d MB)؟</string>
-    <string name="more">بیشتر…</string>
+    <string name="shared_string_more">بیشتر…</string>
     <string name="rendering_value_browse_map_name">مرور نقشه</string>  
     <string name="rendering_value_car_name">خودرو</string>
     <string name="rendering_value_bicycle_name">دوچرخه</string>
