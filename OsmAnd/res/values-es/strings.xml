@@ -192,7 +192,7 @@
   <string name="local_index_mi_backup">Desactivar</string>
   <string name="local_index_mi_delete">Borrar</string>
   <string name="local_index_mi_reload">Recargar desde la tarjeta SD</string>
-  <string name="local_index_download">Descargar</string>
+  <string name="shared_string_download">Descargar</string>
   
   <string name="local_index_poi_data">Datos de PDI</string>
   <string name="local_index_address_data">Datos de direcciones</string>

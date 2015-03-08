@@ -1167,7 +1167,7 @@
 	<string name="local_index_mi_delete">Burra</string>
 	<string name="local_index_mi_export">Esporta</string>
 	<string name="local_index_mi_reload">Torra a carrigare dae s’ischeda SD</string>
-	<string name="local_index_download">Iscàrriga</string>
+	<string name="shared_string_download">Iscàrriga</string>
 	<string name="local_index_address_data">Datos indiritzos</string>
 	<string name="local_index_transport_data">Datos trasportos pùblicos</string>
 	<string name="local_index_map_data">Datos mapa</string>

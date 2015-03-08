@@ -544,7 +544,7 @@
 	<string name="local_index_no_items_to_do">Ni elementov za %1$s</string>
 	<string name="local_index_action_do">Nameravate %1$s %2$s elementov. Ali nadaljujem?</string>
 	<string name="local_index_mi_reload">Ponovno naloži iz SD kartice</string>
-	<string name="local_index_download">Prenos</string>
+	<string name="shared_string_download">Prenos</string>
 	<string name="local_index_map_data">Podatki zemljevida</string>
 	<string name="local_indexes_cat_backup">Izklopljen</string>
 	<string name="local_index_transport_data">Podatki javnih prevozov</string>

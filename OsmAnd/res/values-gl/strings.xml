@@ -1177,7 +1177,7 @@
 	<string name="local_index_mi_delete">Eliminar</string>
 	<string name="local_index_mi_export">Exportar</string>
 	<string name="local_index_mi_reload">Recargar desde o cartón SD</string>
-	<string name="local_index_download">Descargar</string>
+	<string name="shared_string_download">Descargar</string>
 	<string name="local_index_poi_data">Datos de PDI</string>
 	<string name="local_index_address_data">Datos de enderezos</string>
 	<string name="local_index_transport_data">Datos de transporte público</string>

@@ -522,7 +522,7 @@
 	<string name="local_index_mi_backup">נטרול</string>
 	<string name="local_index_mi_delete">מחיקה</string>
 	<string name="local_index_mi_reload">טעינה מחדש מכרטיס ה־SD</string>
-	<string name="local_index_download">הורדה</string>
+	<string name="shared_string_download">הורדה</string>
 	
 	<string name="local_index_poi_data">נתוני נ״ע</string>
 	<string name="local_index_address_data">נתוני כתובת</string>

@@ -279,7 +279,7 @@
   <string name="local_index_mi_backup">დეაქტივაცია</string>
   <string name="local_index_mi_delete">წაშლა</string>
   <string name="local_index_mi_reload">განახლება SDCard-დან</string>
-  <string name="local_index_download">ჩამოტვირთვა</string>
+  <string name="shared_string_download">ჩამოტვირთვა</string>
   
   <string name="local_index_poi_data">POI მონაცემები</string>
   <string name="local_index_address_data">მისამართის მონაცემები</string>

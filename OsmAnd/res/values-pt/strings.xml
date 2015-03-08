@@ -716,7 +716,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_index_mi_backup">Desactivar</string>
   <string name="local_index_mi_delete">Apagar</string>
   <string name="local_index_mi_reload">Refresh</string>
-  <string name="local_index_download">Download</string>
+  <string name="shared_string_download">Download</string>
   
   <string name="local_index_poi_data">Dados POI</string>
   <string name="local_index_address_data">Dados de Endereço</string>

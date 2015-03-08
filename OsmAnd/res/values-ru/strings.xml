@@ -321,7 +321,7 @@
   <string name="local_index_mi_backup">Архивировать</string>
   <string name="local_index_mi_delete">Удалить</string>
   <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
-  <string name="local_index_download">Загрузить</string>
+  <string name="shared_string_download">Загрузить</string>
   
   <string name="local_index_poi_data">POI</string>
   <string name="local_index_address_data">Адрес</string>

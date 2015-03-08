@@ -911,7 +911,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_mi_backup">Дэактываваць</string>
 	<string name="local_index_mi_delete">Выдаліць</string>
 	<string name="local_index_mi_reload">Перачытаць з карткі SD</string>
-	<string name="local_index_download">Сьцягнуць</string>
 	<string name="local_index_poi_data">Зьвесткі POI</string>
 	<string name="local_index_address_data">Адрас</string>
 	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>

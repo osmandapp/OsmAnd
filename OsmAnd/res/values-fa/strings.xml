@@ -363,7 +363,7 @@
 	<string name="local_index_mi_backup">غیرفعال کردن</string>
 	<string name="local_index_mi_delete">حذف</string>
 	<string name="local_index_mi_reload">بارگیری مجدد از کارت حافظه</string>
-	<string name="local_index_download">دانلود</string>
+	<string name="shared_string_download">دانلود</string>
 	<string name="local_index_poi_data">اطلاعات POI</string>
 	<string name="local_index_address_data">اطلاعات آدرس</string>
 	<string name="local_index_transport_data">اطلاعات حمل و نقل</string>

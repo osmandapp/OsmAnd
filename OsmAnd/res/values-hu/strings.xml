@@ -254,7 +254,7 @@
   <string name="local_index_mi_backup">Deaktiválás</string>
   <string name="local_index_mi_delete">Törlés</string>
   <string name="local_index_mi_reload">Újratöltés SD kártyáról</string>
-  <string name="local_index_download">Letöltés</string>
+  <string name="shared_string_download">Letöltés</string>
   
   <string name="local_index_poi_data">POI adat</string>
   <string name="local_index_address_data">Cím adat</string>

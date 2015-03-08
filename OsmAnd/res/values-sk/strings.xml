@@ -366,8 +366,6 @@
   <string name="local_index_mi_backup">Zálohovať (vypnúť)</string>
   <string name="local_index_mi_delete">Vymazať</string>
   <string name="local_index_mi_reload">Znovu načítať z karty SD</string>
-  <string name="local_index_download">Stiahnuť</string>
-  
   <string name="local_index_poi_data">POI údaje</string>
   <string name="local_index_address_data">Adresné údaje</string>
   <string name="local_index_transport_data">Údaje hromadnej dopravy</string>

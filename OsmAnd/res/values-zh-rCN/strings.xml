@@ -696,7 +696,7 @@
 	<string name="local_index_descr_title">数据管理</string>
 	<string name="local_index_mi_delete">删除</string>
 	<string name="local_index_mi_reload">从SD卡中重新载入</string>
-	<string name="local_index_download">下载</string>
+	<string name="shared_string_download">下载</string>
 	<string name="local_index_poi_data">POI 数据</string>
 	<string name="local_index_address_data">地址数据</string>
 	<string name="local_index_transport_data">交通设施数据</string>

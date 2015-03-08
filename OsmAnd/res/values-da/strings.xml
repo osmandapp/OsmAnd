@@ -679,9 +679,7 @@
 	<string name="local_index_mi_restore">Aktiver</string>
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slet</string>
-	<string name="local_index_mi_reload">Genindlæs fra SD-kort</string>
-	<string name="local_index_download">Hent</string>
-	
+	<string name="local_index_mi_reload">Genindlæs fra SD-kort</string>	
 	<string name="local_index_address_data">Adressedata</string>
 	<string name="local_index_transport_data">Kollektivtrafikdata</string>
 	<string name="local_index_map_data">Kortdata</string>

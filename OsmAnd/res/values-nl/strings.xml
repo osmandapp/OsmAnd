@@ -280,9 +280,7 @@
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
   <string name="local_index_mi_delete">Verwijder</string>
-  <string name="local_index_mi_reload">Verversen van SD-kaart</string>
-  <string name="local_index_download">Download</string>
-  
+  <string name="local_index_mi_reload">Verversen van SD-kaart</string>  
   <string name="local_index_poi_data">Interessepunt-gegevens</string>
   <string name="local_index_address_data">Adresgegevens</string>
   <string name="local_index_transport_data">OV-gegevens</string>

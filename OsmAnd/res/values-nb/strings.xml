@@ -293,7 +293,7 @@
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
 	<string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
-	<string name="local_index_download">Last ned</string>
+	<string name="shared_string_download">Last ned</string>
 	
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>

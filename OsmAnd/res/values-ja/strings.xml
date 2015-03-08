@@ -1292,7 +1292,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="local_index_mi_backup">無効化</string>
 	<string name="local_index_mi_delete">削除</string>
 	<string name="local_index_mi_reload">SDカードから再読み込み</string>
-	<string name="local_index_download">ダウンロード</string>
+	<string name="shared_string_download">ダウンロード</string>
 	<string name="local_index_poi_data">POIデータ</string>
 	<string name="local_index_address_data">住所データ</string>
 	<string name="local_index_transport_data">交通データ</string>

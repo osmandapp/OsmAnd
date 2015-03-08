@@ -286,7 +286,7 @@
 	<string name="local_index_mi_delete">Избриши</string>
 	<string name="local_index_mi_export">Извези</string>
 	<string name="local_index_mi_reload">Учитај поново са СД картице</string>
-	<string name="local_index_download">Преузми</string>
+	<string name="shared_string_download">Преузми</string>
 	<string name="local_index_poi_data">Подаци ПОИ-а</string>
 	<string name="local_index_address_data">Подаци адреса</string>
 	<string name="local_index_transport_data">Подаци јавног превоза</string>

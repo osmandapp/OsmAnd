@@ -760,7 +760,7 @@
 	<string name="local_index_poi_data">POI podaci</string>
 	<string name="local_index_address_data">Podaci o adresama</string>
 	<string name="local_index_transport_data">Podaci javnoga prijevoza</string>
-	<string name="local_index_download">Preuzimanje</string>
+	<string name="shared_string_download">Preuzimanje</string>
 	
 	<string name="local_index_mi_backup">Isključi</string>
 	<string name="local_index_mi_restore">Uključi</string>

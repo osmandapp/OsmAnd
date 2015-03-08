@@ -548,7 +548,7 @@
 	<string name="local_index_mi_backup">Dezactivați</string>
 	<string name="local_index_mi_delete">Ștergeți</string>
 	<string name="local_index_mi_reload">Reîncărcați de pe cardul SD</string>
-	<string name="local_index_download">Descărcați</string>
+	<string name="shared_string_download">Descărcați</string>
 	
 	<string name="local_index_poi_data">Date despre POI</string>
 	<string name="local_index_address_data">Date despre Adrese</string>

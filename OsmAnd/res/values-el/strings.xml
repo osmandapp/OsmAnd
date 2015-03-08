@@ -505,7 +505,7 @@
 	<string name="local_index_mi_backup">Απενεργοποίηση</string>
 	<string name="local_index_mi_delete">Διαγραφή</string>
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
-	<string name="local_index_download">Λήψη</string>
+	<string name="shared_string_download">Λήψη</string>
 	
 	<string name="local_index_poi_data">Δεδομένα ΣΕ</string>
 	<string name="local_index_address_data">Δεδομένα διευθύνσεων</string>

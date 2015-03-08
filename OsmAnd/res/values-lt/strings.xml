@@ -392,7 +392,7 @@
   <string name="local_index_mi_backup">Deaktyvuoti</string>
   <string name="local_index_mi_delete">Ištrinti</string>
   <string name="local_index_mi_reload">Atnaujinti iš SD kortelės</string>
-  <string name="local_index_download">Parsiųst</string>
+  <string name="shared_string_download">Parsiųst</string>
   
   <string name="local_index_poi_data">LV duomenys</string>
   <string name="local_index_address_data">Adresų duomenys</string>

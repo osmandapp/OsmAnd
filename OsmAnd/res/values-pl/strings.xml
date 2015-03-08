@@ -91,7 +91,7 @@
   <string name="local_index_mi_backup">Zarchiwizuj</string>
   <string name="local_index_mi_delete">Skasuj</string>
   <string name="local_index_mi_reload">Odśwież</string>
-  <string name="local_index_download">Pobierz</string>
+  <string name="shared_string_download">Pobierz</string>
   
   <string name="local_index_poi_data">Dane POI</string>
   <string name="local_index_address_data">Dane adresowe</string>

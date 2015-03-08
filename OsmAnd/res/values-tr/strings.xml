@@ -354,7 +354,7 @@
 	<string name="vector_map_not_needed">Hayır, teşekkürler</string>
 	<string name="local_index_mi_delete">Sil</string>
 	<string name="local_index_mi_reload">Sd card\'tan tekrar yükle</string>
-	<string name="local_index_download">İndir</string>
+	<string name="shared_string_download">İndir</string>
 	<string name="search_offline_clear_search">Yeni Arama</string>
 	<string name="map_text_size_descr">Haritadaki yer adları için yazı boyutunu seçin</string>
 	<string name="map_text_size">Harita yazı karakteri boyutu</string>

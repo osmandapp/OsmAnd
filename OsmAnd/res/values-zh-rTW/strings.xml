@@ -454,7 +454,7 @@
 	<string name="local_index_mi_backup">停用</string>
 	<string name="local_index_mi_delete">刪除</string>
 	<string name="local_index_mi_reload">由 SD 卡重新載入</string>
-	<string name="local_index_download">下載</string>
+	<string name="shared_string_download">下載</string>
 	
 	<string name="local_index_poi_data">興趣點資料</string>
 	<string name="local_index_address_data">地址資料</string>

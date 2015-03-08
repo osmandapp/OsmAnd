@@ -335,7 +335,7 @@
   <string name="local_index_mi_backup">Деактивувати</string>
   <string name="local_index_mi_delete">Вилучити</string>
   <string name="local_index_mi_reload">Оновити з SD-картки</string>
-  <string name="local_index_download">Завантажити</string>
+  <string name="shared_string_download">Завантажити</string>
   
   <string name="local_index_poi_data">POI дані</string>
   <string name="local_index_address_data">Адреси</string>

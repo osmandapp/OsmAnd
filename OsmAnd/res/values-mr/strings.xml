@@ -129,7 +129,7 @@
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
   <string name="vector_map_not_needed">नाही, धन्यवाद</string>
   <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
-  <string name="local_index_download">डाउनलोड</string>
+  <string name="shared_string_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>
   <string name="search_offline_clear_search">नविन शोध</string>
   <string name="map_text_size_descr">नकाशावरील नावांसाठी अक्षरांचा आकार ठरवा</string>

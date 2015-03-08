@@ -979,7 +979,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_index_mi_backup">Деактивиране</string>
 	<string name="local_index_mi_delete">Изтриване</string>
 	<string name="local_index_mi_reload">Презареди от SD-картата</string>
-	<string name="local_index_download">Сваляне</string>
+	<string name="shared_string_download">Сваляне</string>
 	
 	<string name="local_index_poi_data">Данни за POI</string>
 	<string name="local_index_address_data">Данни за адреси</string>

@@ -263,7 +263,7 @@
   <string name="local_index_mi_backup">Arhivēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
   <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
-  <string name="local_index_download">Lejupielādēt</string>
+  <string name="shared_string_download">Lejupielādēt</string>
   
   <string name="local_index_poi_data">POI dati</string>
   <string name="local_index_address_data">Adrešu dati</string>

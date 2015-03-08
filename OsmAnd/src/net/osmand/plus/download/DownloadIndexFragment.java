@@ -59,7 +59,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-//		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_download);
+//		getDownloadActivity().getSupportActionBar().setTitle(R.string.shared_string_download);
 		// recreation upon rotation is pgetaprevented in manifest file
 
 		filterText = (EditText) view.findViewById(R.id.search_box);

@@ -271,7 +271,7 @@
   <string name="local_index_mi_backup">Zálohovat</string>
   <string name="local_index_mi_delete">Smazat</string>
   <string name="local_index_mi_reload">Znovu nahrát z SD karty</string>
-  <string name="local_index_download">Stáhnout</string>
+  <string name="shared_string_download">Stáhnout</string>
   
   <string name="local_index_poi_data">Data POI</string>
   <string name="local_index_address_data">Addresy</string>

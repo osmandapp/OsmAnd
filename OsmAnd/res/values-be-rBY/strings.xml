@@ -1272,7 +1272,7 @@
 	<string name="local_index_mi_delete">Vydalіć</string>
 	<string name="local_index_mi_export">Ekspart</string>
 	<string name="local_index_mi_reload">Pieračytać z kartkі SD</string>
-	<string name="local_index_download">Zladavać</string>
+	<string name="shared_string_download">Zladavać</string>
 	<string name="local_index_poi_data">Źviestkі cіkavostkaŭ</string>
 	<string name="local_index_address_data">Adras</string>
 	<string name="local_index_transport_data">Transpartnyja dadzienyja</string>

@@ -284,9 +284,7 @@
 	<string name="local_index_mi_restore">활성화</string>
 	<string name="local_index_mi_backup">비활성화</string>
 	<string name="local_index_mi_delete">삭제</string>
-	<string name="local_index_mi_reload">SD카드에서 다시 불러오기</string>
-	<string name="local_index_download">다운로드</string>
-	
+	<string name="local_index_mi_reload">SD카드에서 다시 불러오기</string>	
 	<string name="local_index_poi_data">POI 데이터</string>
 	<string name="local_index_address_data">주소 데이터</string>
 	<string name="local_index_transport_data">대중 교통 데이터</string>

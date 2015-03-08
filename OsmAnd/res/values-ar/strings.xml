@@ -1183,7 +1183,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="local_index_mi_backup">عطّل</string>
 	<string name="local_index_mi_delete">احذف</string>
 	<string name="local_index_mi_reload">حدّث من sdcard</string>
-	<string name="local_index_download">تنزيل</string>
+	<string name="shared_string_download">تنزيل</string>
 	<string name="local_index_poi_data">بيانات POI</string>
 	<string name="local_index_address_data">بيانات العناوين</string>
 	<string name="local_index_transport_data">بيانات النقل</string>

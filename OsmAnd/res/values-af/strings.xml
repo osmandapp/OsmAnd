@@ -345,7 +345,7 @@
   <string name="local_index_mi_backup">Deaktiveer</string>
   <string name="local_index_mi_delete">Verwyder</string>
   <string name="local_index_mi_reload">Herlaai van sd kaart</string>
-  <string name="local_index_download">Aflaai</string>
+  <string name="shared_string_download">Aflaai</string>
   
   <string name="local_index_poi_data">Interessante plek inligting</string>
   <string name="local_index_address_data">Adres inligting</string>

@@ -628,7 +628,7 @@
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Liste aktualisieren</string>
-	<string name="local_index_download">Herunterladen</string>
+	<string name="shared_string_download">Herunterladen</string>
 	
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>

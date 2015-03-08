@@ -187,9 +187,7 @@
   <string name="local_index_mi_restore">Attiva</string>
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
-  <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
-  <string name="local_index_download">Download</string>
-  
+  <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>  
   <string name="local_index_poi_data">Dati PDI</string>
   <string name="local_index_address_data">Dati indirizzi</string>
   <string name="local_index_transport_data">Dati trasporti pubblici</string>

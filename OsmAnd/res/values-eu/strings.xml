@@ -653,7 +653,7 @@
   <string name="local_index_mi_backup">Ezgaitu</string>
   <string name="local_index_mi_delete">Ezabatu</string>
   <string name="local_index_mi_reload">SD txarteletik birkargatu</string>
-  <string name="local_index_download">Deskargatu</string>
+  <string name="shared_string_download">Deskargatu</string>
   <string name="local_index_poi_data">POI datuak</string>
   <string name="local_index_address_data">Helbide datuak</string>
   <string name="local_index_transport_data">Garraio datuak</string>

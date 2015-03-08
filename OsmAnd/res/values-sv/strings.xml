@@ -470,7 +470,7 @@
 <string name="local_index_mi_backup">Inaktivera</string>
 <string name="local_index_mi_delete">Ta bort</string>
 <string name="local_index_mi_reload">Ladda om från SD-kort</string>
-<string name="local_index_download">Ladda ner</string>
+<string name="shared_string_download">Ladda ner</string>
 
 <string name="local_index_poi_data">Intressepunktsdata</string>
 <string name="local_index_address_data">Adressdata</string>

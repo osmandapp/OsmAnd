@@ -315,7 +315,7 @@
 <string name="local_index_mi_backup">Desactiva</string>
 <string name="local_index_mi_delete">Suprimeix</string>
 <string name="local_index_mi_reload">Torna a carregar des de la targeta SD</string>
-<string name="local_index_download">Baixa</string>
+<string name="shared_string_download">Baixa</string>
 <string name="local_index_poi_data">Dades dels PDI</string>
 <string name="local_index_address_data">Dades d\'adreces</string>
 <string name="local_index_transport_data">Dades de transports públics</string>
