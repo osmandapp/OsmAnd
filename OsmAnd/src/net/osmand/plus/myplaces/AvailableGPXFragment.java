@@ -329,7 +329,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
-				} else if (itemId == R.string.show_gpx_route) {
+				} else if (itemId == R.string.shared_string_show_on_map) {
 					openShowOnMapMode();
 				} else if (itemId == R.string.shared_string_delete) {
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
