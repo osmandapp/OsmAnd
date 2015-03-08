@@ -1092,7 +1092,6 @@
     <string name="access_arrival_time">도착 시간</string>
     <string name="item_checked">확인</string>
     <string name="item_unchecked">체크안됨</string>
-    <string name="map_view">지도</string>
     <string name="prefer_motorways">전용도로 선호</string>
 	<string name="prefer_in_routing_title">선호…</string>
 	<string name="prefer_in_routing_descr">전용도로 선호</string>

@@ -1231,7 +1231,6 @@
 	<string name="av_def_action_choose">Seleziona su richiesta</string>
     <string name="item_checked">segnato</string>
     <string name="item_unchecked">non segnato</string>
-    <string name="map_view">Mappa</string>
     <string name="access_arrival_time">Orario arrivo</string>
     <string name="map_widget_gps_info">Informazioni GPS</string>
     <string name="layer_hillshade">Strato ombreggiatura rilievi</string>

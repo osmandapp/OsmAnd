@@ -637,7 +637,7 @@
 	<string name="email">E-post</string>
 <string name="map_widget_gps_info">GPS-info</string>
     <string name="access_arrival_time">Ankomsttid</string>
-    <string name="map_view">Kart</string>
+    <string name="shared_string_map">Kart</string>
     <string name="prefer_motorways">Foretrekk motorveier</string>
 	<string name="prefer_in_routing_title">Foretrekk…</string>
 	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>

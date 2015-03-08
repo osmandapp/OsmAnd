@@ -1178,7 +1178,7 @@
     </string>
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="osmand_play_title_30_chars">OsmAnd mapa a navigace</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapa a navigace</string>
 	<string name="item_checked">zvoleno</string>

@@ -1152,7 +1152,7 @@
     <string name="av_def_action_choose">Seleccionar a petición</string>
     <string name="item_checked">marcado</string>
     <string name="item_unchecked">desmarcado</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="access_arrival_time">Hora de llegada</string>
     <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatonal. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nueva características y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.

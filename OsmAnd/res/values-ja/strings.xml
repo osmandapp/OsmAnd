@@ -802,7 +802,7 @@ POIの更新は利用できません</string>
     <string name="access_arrival_time">到着時間</string>
     <string name="item_checked">選択済</string>
     <string name="item_unchecked">未選択</string>
-    <string name="map_view">マップ</string>
+    <string name="shared_string_map">マップ</string>
     <string name="prefer_motorways">高速道路を優先</string>
 	<string name="prefer_in_routing_title">ルート検索時の優先道路設定…</string>
 	<string name="prefer_in_routing_descr">高速道路を優先</string>

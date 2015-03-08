@@ -1207,7 +1207,7 @@
     <string name="av_def_action_choose">Izberite na zahtevo</string>
     <string name="item_checked">izbrano</string>
     <string name="item_unchecked">ni izbrano</string>
-    <string name="map_view">Zemljevid</string>
+    <string name="shared_string_map">Zemljevid</string>
     <string name="access_arrival_time">Čas prihoda</string>
     <string name="layer_hillshade">Plast senčen teren</string>
     <string name="map_widget_gps_info">GPS informacije</string>

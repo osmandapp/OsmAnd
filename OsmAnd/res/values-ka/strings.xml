@@ -1208,7 +1208,7 @@
     <string name="access_arrival_time">ჩასვლის დრო</string>
     <string name="item_checked">შემოწმებულია</string>
     <string name="item_unchecked">შეუმოწმებელია</string>
-    <string name="map_view">რუკა</string>
+    <string name="shared_string_map">რუკა</string>
     <string name="prefer_motorways">მოტოციკლების გზების არჩევა</string>
 	<string name="prefer_in_routing_title">არჩევნის გაკეთება…</string>
 	<string name="prefer_in_routing_descr">მოტოციკლების გზებისათვის უპირატესობის მინიჭება</string>

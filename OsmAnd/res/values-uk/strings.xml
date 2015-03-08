@@ -963,7 +963,7 @@
   <string name="bg_service_sleep_mode_on">Вимкнути\nфоновий режим</string>
 <string name="access_arrival_time">Час прибуття</string>
     <string name="item_unchecked">не відмічено</string>
-    <string name="map_view">Мапа</string>
+    <string name="shared_string_map">Мапа</string>
     <string name="prefer_motorways">Надавати перевагу автомагістралям</string>
 	<string name="item_checked">відмічено</string>
     <string name="prefer_in_routing_title">Надавати перевагу …</string>

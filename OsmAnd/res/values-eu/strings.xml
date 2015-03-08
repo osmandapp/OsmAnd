@@ -119,7 +119,7 @@
   <string name="access_arrival_time">Iritsiera denbora</string>
   <string name="item_checked">aukeratua</string>
   <string name="item_unchecked">ez aukeratua</string>
-  <string name="map_view">Mapa</string>
+  <string name="shared_string_map">Mapa</string>
   <string name="prefer_motorways">Autobideak nahiago</string>
   <string name="prefer_in_routing_title">Nahiago…</string>
   <string name="prefer_in_routing_descr">Autobideak nahiago</string>

@@ -50,7 +50,7 @@
 \n\t* redesain UI
 \n\t* Perbaikan bug "</string>
     <string name="access_arrival_time">Waktu tiba</string>
-    <string name="map_view">Peta</string>
+    <string name="shared_string_map">Peta</string>
     <string name="prefer_motorways">Utamakan jalan raya</string>
 	<string name="prefer_in_routing_title">Utamakan…</string>
 	<string name="prefer_in_routing_descr">Utamakan jalan raya</string>

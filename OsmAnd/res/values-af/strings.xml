@@ -1017,7 +1017,7 @@
 	<string name="access_arrival_time">Aankomstyd</string>
     <string name="item_checked">Gemerk</string>
     <string name="item_unchecked">Ongemerk</string>
-    <string name="map_view">Kaart</string>
+    <string name="shared_string_map">Kaart</string>
     <string name="prefer_motorways">Verkies snelweë</string>
 	<string name="prefer_in_routing_title">Verkies…</string>
 	<string name="prefer_in_routing_descr">Verkies snelweë</string>

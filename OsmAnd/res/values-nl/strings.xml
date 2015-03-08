@@ -1235,7 +1235,6 @@
     <string name="av_def_action_choose">Altijd vragen</string>
     <string name="item_checked">aangevinkt</string>
     <string name="item_unchecked">niet aangevinkt</string>
-    <string name="map_view">Kaart</string>
     <string name="access_arrival_time">Aankomsttijd</string>
     <string name="map_widget_gps_info">GPS info</string>
     <string name="layer_hillshade">Reliëfweergave</string>

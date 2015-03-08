@@ -164,7 +164,6 @@
     <string name="access_arrival_time">Час прыбыцьця</string>
     <string name="item_checked">адзначана</string>
     <string name="item_unchecked">не адзначана</string>
-    <string name="map_view">Мапа</string>
     <string name="prefer_motorways">Надаваць перавагу аўтамагістралям</string>
 	<string name="prefer_in_routing_title">Надаваць перавагу…</string>
 	<string name="prefer_in_routing_descr">Надаваць перавагу аўтамагістралям</string>

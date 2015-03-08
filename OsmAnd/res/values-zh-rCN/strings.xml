@@ -398,7 +398,7 @@
         \n\t* UI 重新设计
 		\n\t* Bug 修复
     </string>
-    <string name="map_view">地图</string>
+    <string name="shared_string_map">地图</string>
     <string name="prefer_motorways">首选高速公路</string>
 	<string name="prefer_in_routing_title">首选…</string>
 	<string name="index_name_openmaps">开放地图属性索引</string>

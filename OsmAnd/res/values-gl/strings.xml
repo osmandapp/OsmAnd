@@ -537,7 +537,7 @@
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">escollido</string>
     <string name="item_unchecked">non escollido</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Preferir as autoestradas</string>
 	<string name="prefer_in_routing_title">Preferir…</string>
 	<string name="prefer_in_routing_descr">Preferir as autoestradas</string>

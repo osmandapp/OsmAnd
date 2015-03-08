@@ -1078,7 +1078,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="recording_context_menu_play">Tocar</string>
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">marcado</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Preferir auto-estradas</string>
 	<string name="prefer_in_routing_title">Preferir-…</string>
 	<string name="prefer_in_routing_descr">Preferir Auto-Estradas</string>

@@ -1115,7 +1115,7 @@
 	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
-    <string name="map_view">Karta</string>
+    <string name="shared_string_map">Karta</string>
     <string name="av_def_action_choose">Välj vid användning</string>
     <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>

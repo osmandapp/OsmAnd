@@ -34,7 +34,7 @@
     <string name="local_openstreetmap_act_title">تغییرات OsmAnd</string>
     <string name="map_widget_gps_info">اطلاعات جی پی اس</string>
     <string name="access_arrival_time">زمان رسیدن به مقصد</string>
-    <string name="map_view">نقشه</string>
+    <string name="shared_string_map">نقشه</string>
     <string name="dist_control_start">شروع</string>
     
     <string name="stop_routing_confirm">مطمئنید که میخواهید مسیریابی را متوقف کنید؟</string>

@@ -1171,7 +1171,6 @@
 	<string name="prefer_in_routing_descr">Uprednostnenie diaľnic</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
-    <string name="map_view">Mapa</string>
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Umožní výpočet presnej trasy bez závad. Výpočet je však zatiaľ obmedzený na menšiu vzdialenosť a je pomalší.</string>

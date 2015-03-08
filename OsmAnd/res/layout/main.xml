@@ -24,14 +24,14 @@
 			android:id="@+id/MapView"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:contentDescription="@string/map_view"
+			android:contentDescription="@string/shared_string_map"
 			android:visibility="gone"/>
 
 		<net.osmand.plus.views.OsmAndMapLayersView
 			android:id="@+id/MapLayersView"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:contentDescription="@string/map_view"
+			android:contentDescription="@string/shared_string_map"
 			android:visibility="gone"/>
 
 		<FrameLayout android:id="@+id/MapInfoControls"

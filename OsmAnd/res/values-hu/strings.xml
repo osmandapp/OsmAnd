@@ -1165,7 +1165,7 @@
     <string name="access_arrival_time">Érkezési idő</string>
     <string name="item_checked">kijelölt</string>
     <string name="item_unchecked">kijelöletlen</string>
-    <string name="map_view">Térkép</string>
+    <string name="shared_string_map">Térkép</string>
     <string name="av_def_action_choose">Mindig rákérdez</string>
     <string name="tip_recent_changes_1_1_4_t">"Változások az 1.1.4 verzióban:
 \n\t* Hibajavítások (javított útvonaltervezés, keresés, hang és videofelvétel, hangutasítások, néhány megjelenítési hiba)\n\t* Egyszerűbben bekapcsolható domborzatárnyékolás (Szintvonalak (Contour Lines) bővítmény szükséges hozzá)

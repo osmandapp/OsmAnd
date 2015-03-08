@@ -765,7 +765,7 @@
     <string name="access_arrival_time">Varış Zamanı</string>
     <string name="item_checked">işaretli</string>
     <string name="item_unchecked">işaretsiz</string>
-    <string name="map_view">Harita</string>
+    <string name="shared_string_map">Harita</string>
     <string name="prefer_motorways">Otoyol tercih et</string>
 	<string name="prefer_in_routing_title">Tercih et…</string>
 	<string name="prefer_in_routing_descr">Otoyol tercih et</string>

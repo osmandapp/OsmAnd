@@ -92,7 +92,7 @@
     <string name="map_widget_gps_info">GPS ինֆորմացիա</string>
     <string name="item_checked">Ընտրած է</string>
     <string name="item_unchecked">Ընտրած չէ</string>
-    <string name="map_view">Քարտեզ</string>
+    <string name="shared_string_map">Քարտեզ</string>
     <string name="prefer_motorways">Նախնտրել մայրուղիներ</string>
 	<string name="prefer_in_routing_title">Նախնտրել…</string>
 	<string name="prefer_in_routing_descr">Նախնտրել մայրուղիներ</string>

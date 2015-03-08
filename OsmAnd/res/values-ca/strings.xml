@@ -1195,7 +1195,7 @@
     <string name="access_arrival_time">Hora d\'arribada</string>
     <string name="item_checked">marcat</string>
     <string name="item_unchecked">desmarcat</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Millor per autopistes</string>
 	<string name="prefer_in_routing_title">Preferències…</string>
 	<string name="prefer_in_routing_descr">Millor autopistes</string>

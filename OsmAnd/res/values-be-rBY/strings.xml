@@ -625,7 +625,7 @@
     <string name="access_arrival_time">Čas prybyćcia</string>
     <string name="item_checked">adznačana</string>
     <string name="item_unchecked">nie adznačana</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Nadavać pieravahu aŭtamahіstraliam</string>
 	<string name="prefer_in_routing_title">Nadavać pieravahu…</string>
 	<string name="prefer_in_routing_descr">Nadavać pieravahu aŭtamahіstraliam</string>

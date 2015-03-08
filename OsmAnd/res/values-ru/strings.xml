@@ -1194,7 +1194,6 @@
 	</string>
     <string name="item_checked">отмечено</string>
     <string name="item_unchecked">не отмечено</string>
-    <string name="map_view">Карта</string>
     <string name="access_arrival_time">Время прибытия</string>
 	<string name="map_widget_gps_info">Информация GPS</string>
     <string name="max_speed_none">нет</string>

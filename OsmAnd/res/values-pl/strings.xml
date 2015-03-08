@@ -1192,7 +1192,7 @@
     <string name="prefer_in_routing_descr">Preferuj autostrady</string>
     <string name="prefer_motorways">Preferuj autostrady</string>
 	<string name="prefer_in_routing_title">Preferuj…</string>
-	<string name="map_view">Mapa</string>
+	<string name="shared_string_map">Mapa</string>
     <string name="item_checked">zaznaczone</string>
     <string name="item_unchecked">niezaznaczone</string>
     <string name="av_def_action_choose">Wybierz na żądanie</string>

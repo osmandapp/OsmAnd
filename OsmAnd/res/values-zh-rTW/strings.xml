@@ -1050,7 +1050,7 @@
     </string>
     <string name="item_checked">勾選</string>
     <string name="item_unchecked">取消勾選</string>
-    <string name="map_view">地圖</string>
+    <string name="shared_string_map">地圖</string>
     <string name="max_speed_none">無</string>
     <string name="prefer_in_routing_descr">高速公路優先權</string>
     <string name="prefer_in_routing_title">優先權…</string>

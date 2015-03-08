@@ -222,7 +222,7 @@
     <string name="shared_string_more_actions">Andre handlingar</string>
 	<string name="layer_hillshade">Fjellskugge-lag</string>
     <string name="map_widget_gps_info">GPS-info</string>
-    <string name="map_view">Kart</string>
+    <string name="shared_string_map">Kart</string>
     <string name="prefer_motorways">Føretrekker motorvegar</string>
 	<string name="prefer_in_routing_title">Føretrekk …</string>
 	<string name="prefer_in_routing_descr">Føretrekk motorvegar</string>

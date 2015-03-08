@@ -357,7 +357,7 @@
 	<string name="hno">घर क्रमांक</string>
     <string name="select_address_activity">पत्ता निवडा</string>
     <string name="map_widget_gps_info">जिपिएस माहिती</string>
-    <string name="map_view">नकाशा</string>
+    <string name="shared_string_map">नकाशा</string>
     <string name="prefer_in_routing_title">प्राधान्य…</string>
 	<string name="max_speed_none">काही नाही</string>
     <string name="recording_context_menu_show">दाखवा</string>

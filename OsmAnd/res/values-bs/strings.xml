@@ -79,7 +79,7 @@
 <string name="show_warnings_title">Prikazi alarme…</string>
 <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
-    <string name="map_view">Karta</string>
+    <string name="shared_string_map">Karta</string>
     <string name="dist_control_start">početak</string>
     <string name="stop_routing_confirm">Jeste li sigurni da želite zaustaviti navigaciju?</string>
     <string name="clear_dest_confirm">Jeste li sigurni da želite ukloniti tačku odredišta?</string>

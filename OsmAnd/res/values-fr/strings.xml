@@ -1190,7 +1190,7 @@
     <string name="av_def_action_choose">Sélectionner sur demande</string>
     <string name="item_checked">coché</string>
     <string name="item_unchecked">non vérifié</string>
-    <string name="map_view">Carte</string>
+    <string name="shared_string_map">Carte</string>
     <string name="access_arrival_time">Heure d\'arrivée</string>
     <string name="map_widget_gps_info">Informations GPS</string>
     <string name="layer_hillshade">Ombrage du relief</string>

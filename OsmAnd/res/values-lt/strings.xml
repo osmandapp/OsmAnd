@@ -1243,7 +1243,7 @@
 	</string>
     <string name="item_checked">patikrinta</string>
     <string name="item_unchecked">nepatikrinta</string>
-    <string name="map_view">Žemėlapis</string>
+    <string name="shared_string_map">Žemėlapis</string>
     <string name="av_def_action_choose">Pasirinkti paprašius</string>
     <string name="access_arrival_time">Atvykimo laikas</string>
     <string name="map_widget_gps_info">GPS informacija</string>
