@@ -1935,7 +1935,7 @@
 	<string name="plugin_nautical_descr">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
 	<string name="rename_failed">Nepavyko pervardinti.</string>
 	<string name="back_to_map">Grįžti į žemėlapį</string>
-	<string name="selected_tracks">Pasirinkta</string>
+	<string name="shared_string_selected">Pasirinkta</string>
 	<string name="showed_on_map">Rodoma žemėlapyje</string>
 	<string name="share_note">Pasidalinti pastaba</string>
 	</resources>

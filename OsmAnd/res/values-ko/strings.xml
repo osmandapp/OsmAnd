@@ -2165,7 +2165,6 @@
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
 	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
-	<string name="selected_tracks">선택된 트랙</string>
 	<string name="track_segments">트랙 세그먼트</string>
 	<string name="track_points">트랙 포인트</string>
 	<string name="route_points">루트 포인트</string>

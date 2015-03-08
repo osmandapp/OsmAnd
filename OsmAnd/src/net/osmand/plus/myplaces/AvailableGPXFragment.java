@@ -913,7 +913,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		public String getGroup(int groupPosition) {
 			if(isSelectedGroup(groupPosition)) {
-				return app.getString(R.string.selected_tracks);
+				return app.getString(R.string.shared_string_selected);
 			}
 			return category.get(getGroupPosition(groupPosition));
 		}

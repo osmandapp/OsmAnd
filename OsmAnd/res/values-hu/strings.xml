@@ -1866,7 +1866,7 @@
 
 	<string name="track_segments">Nyomvonal szakaszok</string>
 	<string name="track_points">Nyomvonal pontok</string>
-	<string name="selected_tracks">Kijelölve</string>
+	<string name="shared_string_selected">Kijelölve</string>
 	<string name="turn_off_all">Összes kikapcsolása</string>
 	<string name="showed_on_map">Megjelenítve a térképen</string>
 	<string name="rename_failed">Az átnevezés nem sikerült.</string>

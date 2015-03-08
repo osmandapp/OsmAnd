@@ -1936,7 +1936,6 @@
 	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
-	<string name="selected_tracks">Valgt</string>
 	<string name="track_segments">Sporsegmenter</string>
 	<string name="track_points">Sporpunkter</string>
 	<string name="route_points">Rutepunkter</string>

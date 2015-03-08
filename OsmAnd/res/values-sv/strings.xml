@@ -1837,7 +1837,7 @@
 	<string name="back_to_map">Tillbaka till kartan</string>
 	<string name="turn_off_all">Stäng av alla</string>
 	<string name="showed_on_map">Visade på kartan</string>
-	<string name="selected_tracks">Markerade</string>
+	<string name="shared_string_selected">Markerade</string>
 	<string name="track_segments">Spårsegment</string>
 	<string name="track_points">Spårpunkter</string>
 	<string name="route_points">Ruttpunkter</string>

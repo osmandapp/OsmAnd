@@ -1941,7 +1941,7 @@
 	<string name="back_to_map">返回地圖</string>
 	<string name="turn_off_all">全部關閉</string>
 	<string name="showed_on_map">在地圖上顯示</string>
-	<string name="selected_tracks">已選取</string>
+	<string name="shared_string_selected">已選取</string>
 	<string name="track_segments">航跡區段</string>
 	<string name="track_points">航跡標點</string>
 	<string name="route_points">路線標點</string>

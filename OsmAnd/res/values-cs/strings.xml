@@ -1855,7 +1855,7 @@ s často kladenými otázkami.</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografie</string>
 	<string name="watch">Zobrazit</string>
-	<string name="selected_tracks">Vybrané</string>
+	<string name="shared_string_selected">Vybrané</string>
 	<string name="showed_on_map">Zobrazené na mapě</string>
 	<string name="rename_failed">Přejmenování selhalo.</string>
 	<string name="currently_recording_track">Právě zaznamenávaná trasa</string>

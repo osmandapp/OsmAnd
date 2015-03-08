@@ -1959,7 +1959,7 @@
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
-	<string name="selected_tracks">Seleccionada(s)</string>
+	<string name="shared_string_selected">Seleccionada(s)</string>
 	<string name="track_segments">Segmentos de traza</string>
 	<string name="track_points">Puntos de traza</string>
 	</resources>
