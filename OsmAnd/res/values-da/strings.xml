@@ -1993,7 +1993,7 @@
 	<string name="shared_string_download_successful">Hentet</string>
 	<string name="shared_string_io_error">I/O fejl</string>
 	<string name="shared_string_unexpected_error">Der opstod uventet fejl</string>
-	<string name="shared_string_action_template">"Handling {0}: "</string>
+	<string name="shared_string_action_template">"Handling {0}"</string>
 	<string name="shared_string_close">Luk</string>
 	<string name="shared_string_exit">Afslut</string>
 	<string name="shared_string_show">Vis</string>

@@ -2082,7 +2082,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_download_successful">Пасьпяхова сьцягнута</string>
 	<string name="shared_string_io_error">Адбылася памылка ўводу/вываду</string>
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>
-	<string name="shared_string_action_template">"Дзеяньне {0}: "</string>
+	<string name="shared_string_action_template">"Дзеяньне {0}"</string>
 	<string name="shared_string_close">Зачыніць</string>
 	<string name="shared_string_exit">Выхад</string>
 	<string name="shared_string_show">Паказаць</string>

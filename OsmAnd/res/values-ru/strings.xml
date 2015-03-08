@@ -1927,7 +1927,7 @@
 	<string name="shared_string_refresh">Обновить</string>
 	<string name="shared_string_io_error">Произошла ошибка ввода/вывода</string>
 	<string name="shared_string_unexpected_error">Произошла непредвиденная ошибка</string>
-	<string name="shared_string_action_template">"Действие {0}: "</string>
+	<string name="shared_string_action_template">"Действие {0}"</string>
 	<string name="shared_string_close">Закрыть</string>
 	<string name="shared_string_exit">Выход</string>
 	<string name="shared_string_show">Показать</string>

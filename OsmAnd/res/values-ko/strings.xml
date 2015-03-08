@@ -2222,7 +2222,7 @@
 	<string name="shared_string_download_successful">성공적인 다운로드</string>
 	<string name="shared_string_io_error">입출력 오류가 발생하였습니다</string>
 	<string name="shared_string_unexpected_error">예기치 않은 오류가 발생 했습니다</string>
-	<string name="shared_string_action_template">"작업 {0}: "</string>
+	<string name="shared_string_action_template">"작업 {0}"</string>
 	<string name="shared_string_close">닫기</string>
 	<string name="shared_string_exit">종료</string>
 	<string name="shared_string_show">보기</string>

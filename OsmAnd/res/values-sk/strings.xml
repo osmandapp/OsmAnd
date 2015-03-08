@@ -2134,7 +2134,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_download_successful">Sťahovanie úspešné</string>
 	<string name="shared_string_io_error">Nastala chyba čítania/zápisu</string>
 	<string name="shared_string_unexpected_error">Nastala neočakávaná chyba</string>
-	<string name="shared_string_action_template">"Činnosť {0}: "</string>
+	<string name="shared_string_action_template">"Činnosť {0}"</string>
 	<string name="shared_string_close">Zavrieť</string>
 	<string name="shared_string_exit">Ukončiť</string>
 	<string name="shared_string_show">Zobraziť</string>

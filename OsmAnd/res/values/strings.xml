@@ -61,7 +61,7 @@
 	<string name="shared_string_download_successful">Download successful</string>
 	<string name="shared_string_io_error">I/O error occurred</string>
 	<string name="shared_string_unexpected_error">Unexpected error occurred</string>
-	<string name="shared_string_action_template">Action {0}: </string>
+	<string name="shared_string_action_template">Action {0}</string>
 	<string name="shared_string_close">Close</string>
 	<string name="shared_string_exit">Exit</string>
 	<string name="shared_string_show">Show</string>

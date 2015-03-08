@@ -2157,7 +2157,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_download_successful">Download eseguito</string>
 	<string name="shared_string_io_error">Errore di I/O</string>
 	<string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
-	<string name="shared_string_action_template">"Azione {0}: "</string>
+	<string name="shared_string_action_template">"Azione {0}"</string>
 	<string name="shared_string_close">Chiudi</string>
 	<string name="shared_string_exit">Esci</string>
 	<string name="shared_string_show">Mostra</string>

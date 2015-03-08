@@ -2146,7 +2146,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_download_successful">Download succesvol</string>
 	<string name="shared_string_io_error">I/O-fout opgetreden</string>
 	<string name="shared_string_unexpected_error">Onverwachte fout opgetreden</string>
-	<string name="shared_string_action_template">"Actie {0}: "</string>
+	<string name="shared_string_action_template">"Actie {0}"</string>
 	<string name="shared_string_close">Sluit</string>
 	<string name="shared_string_exit">Afsluiten</string>
 	<string name="shared_string_show">Toon</string>
