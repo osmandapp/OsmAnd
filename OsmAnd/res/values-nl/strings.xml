@@ -1179,7 +1179,6 @@
     <string name="recording_context_menu_play">Afspelen</string>
     <string name="recording_description">Opname %1$s %3$s %2$s</string>
     <string name="recording_default_name">Opname</string>
-    <string name="av_control_stop">Stop</string>
     <string name="map_widget_av_notes">Audio/video-notities</string>
     <string name="av_def_action_video">Video opnemen</string>
     <string name="av_def_action_audio">Audio opnemen</string>

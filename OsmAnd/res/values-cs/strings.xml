@@ -1142,7 +1142,7 @@
     <string name="intermediate_points_change_order">Změnit pořadí</string>
     <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu Vrstevnice v Market pro podporu dalšího vývoje.</string>
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
-    <string name="av_control_stop">Zastavit</string>
+    <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento modul umožňuje zobrazení vrstevnice v offline mapách OsmAnd. Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířk) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>

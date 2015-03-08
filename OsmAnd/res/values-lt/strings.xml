@@ -1195,7 +1195,7 @@
     <string name="recording_default_name">Įrašas</string>
     <string name="shared_string_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>
     <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
     <string name="dropbox_plugin_description">Dropbox įskeipis leidžia sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox sąskaita.</string>

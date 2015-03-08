@@ -690,7 +690,7 @@
     <string name="recording_context_menu_play">Hrać</string>
     <string name="recording_description">Zapіs %1$s %2$s u %3$s</string>
     <string name="recording_default_name">zapіs</string>
-    <string name="av_control_stop">Ctop</string>
+    <string name="shared_string_control_stop">Ctop</string>
     <string name="shared_string_control_start">Zapіs</string>
     <string name="map_widget_av_notes">Aŭdyjo/vіdea natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Moduĺ OsmAnd dlia pazasietkavych іzalіnіj vyšyń</string>

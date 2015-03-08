@@ -1016,7 +1016,7 @@
     <string name="av_use_external_recorder">Використовувати системну програму</string>
     <string name="av_use_external_camera_descr">Використовувати системну програму для фото</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="av_control_stop">Стоп</string>
+    <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Запис</string>
     <string name="map_widget_av_notes">Аудіо/відео замітки</string>
     <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для відображення рельєфу</string>

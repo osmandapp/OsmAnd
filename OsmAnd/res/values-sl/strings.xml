@@ -1118,7 +1118,7 @@
     <string name="recording_context_menu_play">Predvajaj</string>
     <string name="recording_description">Snemanje %1$s %3$s %2$s</string>
     <string name="recording_default_name">Snemanje</string>
-    <string name="av_control_stop">Ustavi</string>
+    <string name="shared_string_control_stop">Ustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
     

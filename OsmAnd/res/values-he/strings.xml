@@ -1135,7 +1135,7 @@
     <string name="recording_context_menu_play">נגינה</string>
     <string name="recording_description">%1$s %2$s מוקלטים ב־%3$s</string>
     <string name="recording_default_name">בהקלטה</string>
-    <string name="av_control_stop">עצירה</string>
+    <string name="shared_string_control_stop">עצירה</string>
     <string name="shared_string_control_start">הקלטה</string>
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>

@@ -165,7 +165,7 @@
     <string name="recording_context_menu_delete">Kayıt sil</string>
     <string name="recording_description">Kayıt %3$\'nın %1$s %2$s</string>
     <string name="recording_default_name">kayıt</string>
-    <string name="av_control_stop">durdur</string>
+    <string name="shared_string_control_stop">durdur</string>
     <string name="shared_string_control_start">başlat</string>
     <string name="map_widget_av_notes">Ses/video notları</string>
     <string name="osmand_srtm_short_description_80_chars">Çevrimdışı çevreleme çizgileri için OsmAnd eklentisi</string>

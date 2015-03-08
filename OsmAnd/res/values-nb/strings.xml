@@ -1010,7 +1010,7 @@
     <string name="srtm_paid_version_title">Programtillegg for koter</string>
     <string name="av_settings_descr">Still inn lyd og video</string>
     <string name="av_settings">"Lyd/video-innstillinger "</string>
-    <string name="av_control_stop">Stopp</string>
+    <string name="shared_string_control_stop">Stopp</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for offline koter</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="monitoring_control_stop">Stopp</string>

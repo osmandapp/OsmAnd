@@ -1128,7 +1128,7 @@
     <string name="av_settings">Hang/videóbeállítások </string>
     <string name="recording_error">A felvétel közben hiba történt </string>
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény szintvonalakat szolgáltat, amik az OsmAndban offline térképként megjeleníthetőek. A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, ami a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági Minisztérium, a Trade and Industry (METI) és a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Válaszd ki a vezérlőgomb alapértelmezett működési módját</string>
     <string name="av_widget_action">Alapértelmezett mód</string>

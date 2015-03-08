@@ -1060,7 +1060,7 @@
     <string name="osmodroid_plugin_description">OsMoDroid დამატება წარმოადგენს OsmAnd-ის გაფართოებას OsModroid აპლიკაციისათვის. მოცემულ სერვისზე ინფორმაციის მისაღებად ეწვიეთ http://esya.ru -ს.</string>
     <string name="osmodroid_plugin_name">დამატება OsMoDroid</string>
 	<string name="tip_altitude_offset">სიმაღლის ჩვენება - ოფსეტის შესწორება</string>
-	<string name="av_control_stop">შეწყვეტა</string>
+	<string name="shared_string_control_stop">შეწყვეტა</string>
     <string name="shared_string_control_start">დაწყება</string>
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
     <string name="monitoring_control_start">GPX დევნა</string>

@@ -1156,7 +1156,7 @@
     <string name="av_settings">Ρυθμίσεις ήχου/video </string>
     <string name="recording_error">Προέκυψε σφάλμα κατά την εγγραφή </string>
     <string name="recording_camera_not_available">Κάμερα μη διαθέσιμη</string>
-    <string name="av_control_stop">Σταμάτημα</string>
+    <string name="shared_string_control_stop">Σταμάτημα</string>
     <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου video</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για video</string>

@@ -1181,7 +1181,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="favourites_list_activity">Kies gunsteling</string>
     <string name="local_openstreetmap_act_title">OSM veranderings</string>
     <string name="default_buttons_other_actions">Ander aksies</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="monitoring_control_stop">Stop</string>
     <string name="cancel_route">Verwerp roete</string>
     <string name="cancel_navigation">Staak navigasie</string>

@@ -250,7 +250,7 @@
     <string name="recording_context_menu_play">Spel av</string>
     <string name="recording_description">Opptak %1$s %2$s av %3$s</string>
     <string name="recording_default_name">opptak</string>
-    <string name="av_control_stop">Stopp</string>
+    <string name="shared_string_control_stop">Stopp</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>

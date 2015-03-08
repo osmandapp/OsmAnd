@@ -1105,7 +1105,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="recording_unavailable">Indisponível</string>
     <string name="recording_description">Gravar %1$s %2$s de %3$s</string>
     <string name="recording_default_name">Gravação</string>
-    <string name="av_control_stop">Parar</string>
+    <string name="shared_string_control_stop">Parar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de Áudio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd para curvas de nível off-line</string>

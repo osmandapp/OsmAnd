@@ -855,7 +855,7 @@ POIの更新は利用できません</string>
     <string name="recording_context_menu_play">再生</string>
     <string name="recording_description">記録中 %1$s %3$s の %2$s</string>
     <string name="recording_default_name">記録中</string>
-    <string name="av_control_stop">停止</string>
+    <string name="shared_string_control_stop">停止</string>
     <string name="shared_string_control_start">記録</string>
     <string name="map_widget_av_notes">音声/ビデオメモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>

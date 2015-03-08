@@ -1142,7 +1142,7 @@
     <string name="recording_context_menu_play">Lire</string>
     <string name="recording_description">Enregistrement %1$s %3$s %2$s</string>
     <string name="recording_default_name">Enregistrement en cours</string>
-    <string name="av_control_stop">Arrêter</string>
+    <string name="shared_string_control_stop">Arrêter</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="tip_recent_changes_1_1_0_t">"Changements pour 1.1.0 :
 \n\t* Greffon de calcul de distance

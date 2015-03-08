@@ -58,7 +58,7 @@
     <string name="recording_context_menu_delete">حذف فایل ضبط شده</string>
     <string name="recording_context_menu_play">پخش</string>
     <string name="recording_default_name">ضبط</string>
-    <string name="av_control_stop">توقف</string>
+    <string name="shared_string_control_stop">توقف</string>
     <string name="shared_string_control_start">شروع</string>
     <string name="map_widget_av_notes">یاداشتهای صوتی/تصویری</string>
     <string name="monitoring_control_stop">توقف</string>

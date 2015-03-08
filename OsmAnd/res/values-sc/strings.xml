@@ -380,7 +380,7 @@
     <string name="recording_context_menu_play">Reprodui</string>
     <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrande</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAndfor pro sas lìnias de livellu sena lìnia</string>

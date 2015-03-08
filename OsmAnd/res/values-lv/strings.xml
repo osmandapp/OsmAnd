@@ -1219,7 +1219,7 @@
     <string name="recording_context_menu_play">Atskaņot</string>
     <string name="recording_description">Ierakstīšana %1$s %2$s of %3$s</string>
     <string name="recording_default_name">Ierakstīšana</string>
-    <string name="av_control_stop">Apturēt</string>
+    <string name="shared_string_control_stop">Apturēt</string>
     <string name="shared_string_control_start">Sākt</string>
     <string name="map_widget_av_notes">Audio/video piezīmes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd spraudnis bezsaistes kontūrlīnijām</string>

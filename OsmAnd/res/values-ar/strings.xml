@@ -49,7 +49,7 @@
     <string name="recording_context_menu_delete">حذف تسجيل</string>
     <string name="recording_context_menu_play">شغّل</string>
     <string name="recording_default_name">تسجيل</string>
-    <string name="av_control_stop">توقف</string>
+    <string name="shared_string_control_stop">توقف</string>
     <string name="shared_string_control_start">بداية</string>
     <string name="osmand_srtm_short_description_80_chars">ملحق OsmAnd للخطوط المحيطية بدون اتصال</string>
     

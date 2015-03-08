@@ -174,7 +174,7 @@
   <string name="recording_context_menu_play">Erreproduzitu</string>
   <string name="recording_description">%3$s-ko %1$s %2$s grabatzen</string>
   <string name="recording_default_name">grabatzen</string>
-  <string name="av_control_stop">Gelditu</string>
+  <string name="shared_string_control_stop">Gelditu</string>
   <string name="shared_string_control_start">Hasi</string>
   <string name="map_widget_av_notes">Audio/bideo oharrak</string>
   <string name="osmand_srtm_short_description_80_chars">OsmAnden lineaz kanpoko sestra-kurben plugina</string>

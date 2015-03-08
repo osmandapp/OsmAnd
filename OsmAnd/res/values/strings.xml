@@ -891,7 +891,6 @@
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
     <string name="recording_default_name">Recording</string>
-    <string name="av_control_stop">Stop</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>

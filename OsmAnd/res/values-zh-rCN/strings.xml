@@ -13,7 +13,7 @@
 	<string name="recording_unavailable">无法使用</string>
     <string name="recording_context_menu_play">玩</string>
     <string name="recording_default_name">記錄</string>
-    <string name="av_control_stop">停止</string>
+    <string name="shared_string_control_stop">停止</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="index_srtm_parts">部分</string>
     <string name="download_select_map_types">其他地圖</string>
