@@ -5,7 +5,7 @@
 	    />
 	<Preference android:key="general_settings" android:title="@string/general_settings_2" android:summary="@string/general_settings_descr"/>
 	<Preference android:key="routing_settings" android:title="@string/routing_settings_2" android:summary="@string/routing_settings_descr"/>
-	<Preference android:title="@string/tips_and_tricks" android:summary="@string/tips_and_tricks_descr" android:key="help"
+	<Preference android:title="@string/shared_string_help" android:summary="@string/tips_and_tricks_descr" android:key="help"
 	    />
 	
 	<!-- <Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/>  -->

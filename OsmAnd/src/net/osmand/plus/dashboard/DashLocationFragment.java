@@ -1,23 +1,21 @@
 package net.osmand.plus.dashboard;
 
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.R;
-import net.osmand.plus.views.DirectionDrawable;
-import net.osmand.util.MapUtils;
 
 /**
  * Created by Denis
  * on 26.01.2015.
  */
-public class DashLocationFragment extends DashBaseFragment {
+public abstract class DashLocationFragment extends DashBaseFragment {
 
 	private static final int ORIENTATION_0 = 0;
 	private static final int ORIENTATION_90 = 3;
@@ -74,7 +72,7 @@ public class DashLocationFragment extends DashBaseFragment {
 
 		direction.setImageDrawable(draw);
 	}
-
+	
 	public boolean updateCompassValue(float value) {
 		//heading = value;
 		//updateArrows();

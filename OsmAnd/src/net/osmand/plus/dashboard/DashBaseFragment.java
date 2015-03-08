@@ -29,9 +29,7 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 	
-	public void onOpenUpdate() {
-		// TODO
-	}
+	public void onOpenUpdate() {}
 	
 	
 	public void onLocationCompassChanged(Location l, double compassValue) {
