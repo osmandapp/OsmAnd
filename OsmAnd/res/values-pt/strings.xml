@@ -508,7 +508,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Back to location</string>
-  <string name="help">Ajuda</string>
+  <string name="shared_string_help">Ajuda</string>
   <string name="show_details">Mostrar detalhes</string>
   <string name="accessibility_extensions_descr">Extensões de acessibilidade para versões Android antigas</string>
   <string name="accessibility_extensions">Extensões de acessibilidade</string>

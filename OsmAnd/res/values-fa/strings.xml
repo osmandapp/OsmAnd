@@ -480,7 +480,7 @@
 	<string name="show_ruler_level">نمایش خط کش</string>	
 	<string name="info_button">اطلاعات</string>
 	<string name="back_to_location">برگشتن به موقعیت</string>
-	<string name="help">کمک</string>
+	<string name="shared_string_help">کمک</string>
 	<string name="show_details">نمایش جزئیات</string>
 	<string name="shared_string_on">روشن</string>
 	<string name="shared_string_off">خاموش</string>

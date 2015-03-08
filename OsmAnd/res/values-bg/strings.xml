@@ -707,7 +707,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="show_ruler_level">Покажи линийка</string>	
 	<string name="info_button">Инфо</string>
 	<string name="back_to_location">Назад към позицията</string>
-	<string name="help">Помощ</string>
+	<string name="shared_string_help">Помощ</string>
 	<string name="show_details">Показване на детайли</string>
 	<string name="accessibility_extensions_descr">Достъпност за по-стари версии на Android</string>
 	<string name="accessibility_extensions">Разширения за достъпност</string>

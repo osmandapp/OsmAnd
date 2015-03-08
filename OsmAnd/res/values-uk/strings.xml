@@ -100,7 +100,7 @@
   <string name="show_ruler_level">Відображати масштаб</string>
   <string name="info_button">Інформація</string>
   <string name="back_to_location">Повернутись</string>
-  <string name="help">Допомога</string>
+  <string name="shared_string_help">Допомога</string>
   <string name="show_details">Показати деталі</string>
   <string name="accessibility_extensions_descr">Допоміжні можливості для старих версій Android</string>
   <string name="accessibility_extensions">Розширення допоміжних можливостей</string>

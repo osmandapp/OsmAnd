@@ -626,7 +626,7 @@
 	<string name="show_ruler_level">Prikaži ravnilo</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Nazaj na mesto</string>
-	<string name="help">Pomoč</string>
+	<string name="shared_string_help">Pomoč</string>
 	<string name="show_details">Pokaži podrobnosti</string>
 	<string name="accessibility_extensions_descr">Razširitve dostopnosti za stare različice Android</string>
 	<string name="accessibility_extensions">Razširitve dostopnosti</string>

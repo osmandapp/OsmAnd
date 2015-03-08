@@ -114,7 +114,7 @@
 <string name="show_ruler_level">Mostra el regle</string>
 <string name="info_button">Informació</string>
 <string name="back_to_location">Torna a la ubicació</string>
-<string name="help">Ajuda</string>
+<string name="shared_string_help">Ajuda</string>
 <string name="show_details">Mostra els detalls</string>
 <string name="accessibility_extensions_descr">Extensions d\'accessibilitat per versions d\'Android antigues</string>
 <string name="accessibility_extensions">Extensions d\'accessibilitat</string>

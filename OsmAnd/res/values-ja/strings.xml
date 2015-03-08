@@ -1076,7 +1076,7 @@ POIの更新は利用できません</string>
 	<string name="show_ruler_level">尺度を表示</string>	
 	<string name="info_button">インフォメーション</string>
 	<string name="back_to_location">現在位置に戻す</string>
-	<string name="help">ヘルプ</string>
+	<string name="shared_string_help">ヘルプ</string>
 	<string name="show_details">詳細を表示</string>
 	<string name="accessibility_extensions_descr">古いバージョンのAndroid用アクセシビリティ拡張</string>
 	<string name="accessibility_extensions">アクセシビリティ拡張</string>

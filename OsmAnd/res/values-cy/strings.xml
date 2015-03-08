@@ -203,7 +203,7 @@ Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, 
 <string name="show_ruler_level">Dangos pren mesur</string>
 <string name="info_button">Gwybodaeth</string>
 <string name="back_to_location">Gefn i leoliad</string>
-<string name="help">Cymorth</string>
+<string name="shared_string_help">Cymorth</string>
 <string name="accessibility_extensions_descr">Estyniadau Hygyrchedd ar gyfer fersiynau Android hen</string>
 <string name="accessibility_extensions">Estyniadau Hygyrchedd</string>
 <string name="accessibility_mode">Modd Hygyrchedd</string>

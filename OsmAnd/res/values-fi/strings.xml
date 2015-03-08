@@ -100,7 +100,7 @@
 	<string name="show_ruler_level">Näytä viivain</string>	
 	<string name="info_button">Tietoja</string>
 	<string name="back_to_location">Takaisin sijaintiin</string>
-	<string name="help">Ohje</string>
+	<string name="shared_string_help">Ohje</string>
 	<string name="show_details">Näytä tiedot</string>
 	<string name="shared_string_on">Päällä</string>
 	<string name="shared_string_off">Pois päältä</string>

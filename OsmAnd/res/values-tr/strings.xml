@@ -307,7 +307,7 @@
 	<string name="map_settings">Harita Ayarları</string>
 	<string name="extra_settings">Gelişmiş Ayarlar</string>
 	<string name="default_buttons_support">Destek</string>
-	<string name="help">Yardım</string>
+	<string name="shared_string_help">Yardım</string>
 	<string name="show_details">Ayrıntıları göster</string>
 	<string name="shared_string_on">Açık</string>
 	<string name="shared_string_off">Kapalı</string>

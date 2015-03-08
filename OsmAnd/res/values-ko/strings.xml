@@ -27,7 +27,6 @@
 	
 	<string name="info_button">정보</string>
 	<string name="back_to_location">위치로 돌아감</string>
-	<string name="help">도움말</string>
 	<string name="show_details">세부정보 표시</string>
 	
 	<string name="accessibility_extensions_descr">이전 안드로이드 버전에 대한 접근성(내게 필요한 옵션) 확장</string>

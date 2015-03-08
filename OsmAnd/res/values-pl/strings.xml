@@ -729,7 +729,7 @@
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
   <string name="back_to_location">Powróć do pozycji</string>
-  <string name="help">Pomoc</string>
+  <string name="shared_string_help">Pomoc</string>
   <string name="show_details">Pokaż szczegóły</string>
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
   <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>

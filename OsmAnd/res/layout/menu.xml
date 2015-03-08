@@ -64,7 +64,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="7dp"
                     android:clickable="true"
-                    android:contentDescription="@string/help"
+                    android:contentDescription="@string/shared_string_help"
                     android:focusable="true"
                     android:src="@drawable/help_icon" />
 

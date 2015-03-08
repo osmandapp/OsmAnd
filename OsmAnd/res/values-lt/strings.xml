@@ -127,7 +127,7 @@
   <string name="show_ruler_level">Rodyti liniuotę</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Atgal į vietą</string>
-  <string name="help">Pagalba</string>
+  <string name="shared_string_help">Pagalba</string>
   <string name="show_details">Rodyti detales</string>
   <string name="accessibility_extensions_descr">Prieigos plėtiniai skirti senesnėms Android versijoms</string>
   <string name="accessibility_extensions">Prieigos plėtiniai</string>

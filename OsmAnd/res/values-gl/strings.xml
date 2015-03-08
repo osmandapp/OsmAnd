@@ -916,7 +916,7 @@
 	<string name="show_ruler_level">Mostrar a regra</string>	
 	<string name="info_button">Información</string>
 	<string name="back_to_location">Regresar á posición</string>
-	<string name="help">Axuda</string>
+	<string name="shared_string_help">Axuda</string>
 	<string name="show_details">Mostrar os detalles</string>
 	<string name="accessibility_extensions_descr">Extensións de accesibibidade para versións antigas de Android</string>
 	<string name="accessibility_extensions">Extensións de accesibilidade</string>

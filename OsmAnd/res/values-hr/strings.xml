@@ -193,7 +193,7 @@
 	<string name="plugins_screen">Dodaci</string>
 	<string name="prefs_plugins">Dodaci</string>
 	<string name="send_files_to_osm">Poslati GPX datoteke na OSM?</string>
-	<string name="help">Pomoć</string>
+	<string name="shared_string_help">Pomoć</string>
 	<string name="back_to_location">Natrag na poziciju</string>
 	<string name="show_details">Prikaži detalje</string>
 	<string name="shared_string_on">Uključeno</string>

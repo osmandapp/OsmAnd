@@ -279,7 +279,7 @@
 	<string name="show_ruler_level">Afișează scara hărții</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Înapoi la poziție</string>
-	<string name="help">Ajutor</string>
+	<string name="shared_string_help">Ajutor</string>
 	<string name="show_details">Arată detaliile</string>
 	<string name="accessibility_extensions_descr">Extensii de accesibilitate pentru versiuni mai vechi de de Android</string>
 	<string name="accessibility_extensions">Extensii de accesibilitate</string>

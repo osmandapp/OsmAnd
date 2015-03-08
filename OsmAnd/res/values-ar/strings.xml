@@ -165,7 +165,7 @@
 	<string name="show_ruler_level">عرض المسطرة</string>	
 	<string name="info_button">معلومات</string>
 	<string name="back_to_location">عودة إلى الموقع</string>
-	<string name="help">مساعدة</string>
+	<string name="shared_string_help">مساعدة</string>
 	<string name="show_details">مشاهدة التفاصيل</string>
 	<string name="accessibility_extensions_descr">ملحقات الوصول لإصدارات أندرويد القديمة</string>
 	<string name="accessibility_extensions">ملحقات لإتاحة الوصول</string>

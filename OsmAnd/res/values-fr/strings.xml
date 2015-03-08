@@ -807,7 +807,7 @@
   <string name="show_ruler_level">Afficher l\'échelle</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Retourner à la position</string>
-  <string name="help">Aide</string>
+  <string name="shared_string_help">Aide</string>
   <string name="show_details">Afficher les détails</string>
   <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
   <string name="accessibility_extensions">Extensions d\'accessibilité</string>

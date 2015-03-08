@@ -843,7 +843,7 @@
 	<string name="show_ruler_level">Ammustra s’iscala gràfica</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Torra a sa positzione</string>
-	<string name="help">Agiudu</string>
+	<string name="shared_string_help">Agiudu</string>
 	<string name="accessibility_mode">Modalidade atzessìbile</string>
 	<string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade</string>
 	<string name="shared_string_on">Ativau</string>

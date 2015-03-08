@@ -238,7 +238,7 @@
 	<string name="show_ruler_level">﻿Εμφάνιση χάρακα</string>	
 	<string name="info_button">Πληροφορίες</string>
 	<string name="back_to_location">﻿Επιστροφή στη θέση</string>
-	<string name="help">Βοήθεια</string>
+	<string name="shared_string_help">Βοήθεια</string>
 	<string name="show_details">Εμφάνιση λεπτομερειών</string>
 	<string name="accessibility_extensions_descr">Επεκτάσεις προσβασιμότητας για παλιές εκδόσεις Android</string>
 	<string name="accessibility_extensions">Επεκτάσεις προσβασιμότητας</string>

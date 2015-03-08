@@ -126,7 +126,7 @@
 	<string name="show_ruler_level">Vis målestokk</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Tilbake til posisjon</string>
-	<string name="help">Hjelp</string>
+	<string name="shared_string_help">Hjelp</string>
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgjengelighetsmoduler for gamle Android-versjoner</string>
 	<string name="accessibility_extensions">Tilgjengelighetsmoduler</string>

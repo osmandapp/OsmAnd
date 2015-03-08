@@ -262,7 +262,7 @@
 	<string name="show_ruler_level">הצגת סרגל</string>	
 	<string name="info_button">פרטים</string>
 	<string name="back_to_location">חזרה למיקום</string>
-	<string name="help">עזרה</string>
+	<string name="shared_string_help">עזרה</string>
 	<string name="show_details">הצגת פרטים</string>
 	<string name="accessibility_extensions_descr">הרחבות נגישות לגרסאות ישנות של אנדרויד</string>
 	<string name="accessibility_extensions">הרחבות נגישות</string>

@@ -204,7 +204,7 @@
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Zurück zum Standort</string>
-	<string name="help">Hilfe</string>
+	<string name="shared_string_help">Hilfe</string>
 	<string name="show_details">Zeige Details</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
 	<string name="accessibility_extensions">Barrierefreiheit-Erweiterungen</string>

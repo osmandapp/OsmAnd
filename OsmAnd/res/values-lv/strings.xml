@@ -35,7 +35,7 @@
   <string name="show_ruler_level">Rādīt lineālu</string>
   <string name="info_button">Informācija</string>
   <string name="back_to_location">Atgriezties atrašanās vietā</string>
-  <string name="help">Palīdzība</string>
+  <string name="shared_string_help">Palīdzība</string>
   <string name="show_details">Rādīt detaļas</string>
   <string name="accessibility_extensions_descr">Pieejamības paplašinājumi vecākām Android versijām</string>
   <string name="accessibility_extensions">Pieejamības paplašinājumi</string>

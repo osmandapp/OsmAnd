@@ -229,7 +229,7 @@
 	<string name="show_ruler_level">顯示比例尺</string>	
 	<string name="info_button">資訊</string>
 	<string name="back_to_location">回到目前位置</string>
-	<string name="help">幫助</string>
+	<string name="shared_string_help">幫助</string>
 	<string name="show_details">顯示細節</string>
 	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>

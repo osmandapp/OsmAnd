@@ -133,7 +133,7 @@
 	<string name="support_new_features">支持新功能</string>
 	<string name="support_new_features_descr">捐赠实现的新功能中的应用</string>
 	<string name="info_button">信息</string>
-	<string name="help">帮助</string>
+	<string name="shared_string_help">帮助</string>
 	<string name="show_details">显示细节</string>
 	<string name="accessibility_extensions_descr">无障碍扩展旧的Android版本</string>
 	<string name="accessibility_extensions">无障碍扩展</string>

@@ -39,7 +39,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		}
 		super.onCreate(savedInstanceState);
 
-		String title = getString(R.string.help);
+		String title = getString(R.string.shared_string_help);
 		String url = "index.html";
 		if(getIntent() != null) {
 			String tl = getIntent().getStringExtra(TITLE);
