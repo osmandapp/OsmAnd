@@ -1920,4 +1920,13 @@
 	<string name="shared_string_apply">Применить</string>
 	<string name="shared_string_control_start">Старт</string>
 	<string name="shared_string_control_stop">Стоп</string>
+	<string name="shared_string_import">Импорт</string>
+	<string name="shared_string_export">Экспорт</string>
+	<string name="shared_string_more">Дополнительно</string>
+	<string name="shared_string_more_actions">Дополнительные действия</string>
+	<string name="shared_string_do_not_show_again">Больше не показывать</string>
+	<string name="shared_string_remember_my_choice">Запомнить мой выбор</string>
+	<string name="shared_string_refresh">Обновить</string>
+	<string name="shared_string_io_error">Произошла ошибка ввода/вывода</string>
+	<string name="shared_string_unexpected_error">Произошла непредвиденная ошибка</string>
 	</resources>
