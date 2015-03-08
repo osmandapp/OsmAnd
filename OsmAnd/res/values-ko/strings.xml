@@ -786,7 +786,6 @@
 <string name="navigate_point_format_D">DDD.DD</string>
 <string name="navigate_point_format_DM">DDD MM.MMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-<string name="search_shown_on_map">지도에 보이기</string>
 <string name="navigate_point_cancel">취소</string>
 <string name="search_address_top_text">주소를 선택하세요</string>
 <string name="search_address_region">지역</string>

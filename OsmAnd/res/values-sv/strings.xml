@@ -77,7 +77,7 @@
 <string name="shared_string_apply">Verkställ</string>
 <string name="shared_string_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
-<string name="search_shown_on_map">Visa på karta</string>
+<string name="shared_string_show_on_map">Visa på karta</string>
 <string name="navigate_point_cancel">Avbryt</string>
 <string name="search_address_top_text">Välj adress</string>
 <string name="search_address_region">Region</string>

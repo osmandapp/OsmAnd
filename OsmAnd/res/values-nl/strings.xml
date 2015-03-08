@@ -763,7 +763,6 @@
   <string name="navigate_point_format_D">GGG.GG</string>
   <string name="navigate_point_format_DM">GGG MM.MM</string>
   <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
-  <string name="search_shown_on_map">Toon op kaart</string>
   <string name="navigate_point_cancel">Annuleer</string>
   <string name="search_address_top_text">Adres kiezen</string>
   <string name="search_address_region">Regio</string>

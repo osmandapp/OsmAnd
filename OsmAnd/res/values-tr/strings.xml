@@ -489,7 +489,7 @@
 	<string name="app_mode_bicycle">Bisiklet</string>
 	<string name="app_mode_pedestrian">Yaya</string>
 	<string name="position_on_map_center">Merkez</string>
-	<string name="search_shown_on_map">Haritada göster</string>
+	<string name="shared_string_show_on_map">Haritada göster</string>
 	<string name="navigate_point_cancel">İptal et</string>
 	<string name="search_address_top_text">Adres seç</string>
 	<string name="search_tabs_location">Konum</string>

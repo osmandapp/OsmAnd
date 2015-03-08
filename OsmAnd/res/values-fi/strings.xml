@@ -397,7 +397,7 @@
 	<string name="position_on_map_center">Keskitä</string>
 	<string name="navigate_point_latitude">Leveysaste</string>
 	<string name="navigate_point_longitude">Pituusaste</string>
-	<string name="search_shown_on_map">Näytä kartalla</string>
+	<string name="shared_string_show_on_map">Näytä kartalla</string>
 	<string name="navigate_point_cancel">Peruuta</string>
 	<string name="search_address_top_text">Valitse osoite</string>
 	<string name="search_address_region">Alue</string>

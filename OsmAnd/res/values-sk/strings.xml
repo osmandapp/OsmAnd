@@ -866,7 +866,6 @@
   <string name="navigate_point_top_text">Zemepisná šírka a dĺžka vo vybranom formáte (D - stupne, M - minúty, S - sekundy)</string>
   <string name="navigate_point_latitude">Zem. šírka</string>
   <string name="navigate_point_longitude">Zem. dĺžka</string>
-  <string name="search_shown_on_map">Zobraziť na mape</string>
   <string name="navigate_point_cancel">Zrušiť</string>
   <string name="search_address_top_text">Zvoľte adresu</string>
   <string name="search_address_region">Oblasť</string>

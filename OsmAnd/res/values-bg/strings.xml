@@ -1454,7 +1454,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="navigate_point_format_D">ГГГ.ГГ</string>
 	<string name="navigate_point_format_DM">ГГГ ММ.ММ</string>
 	<string name="navigate_point_format_DMS">ГГГ ММ СС.СС</string>
-	<string name="search_shown_on_map">Покажи на картата</string>
+	<string name="shared_string_show_on_map">Покажи на картата</string>
 	<string name="navigate_point_cancel">Откажи</string>
 	<string name="search_address_top_text">Изберете адрес</string>
 	<string name="search_address_region">Област/регион</string>

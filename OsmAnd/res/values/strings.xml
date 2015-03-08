@@ -2043,7 +2043,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Show on map</string>
 	<string name="search_address_top_text">Select address</string>
 	<string name="search_address_region">Region</string>
 	<string name="search_address_city">City</string>

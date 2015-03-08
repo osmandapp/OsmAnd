@@ -690,7 +690,7 @@
   <string name="navigate_point_top_text">Entrez la latitude et la longitude (D - degrés, M - minutes, S - secondes)</string>
   <string name="navigate_point_latitude">Latitude</string>
   <string name="navigate_point_longitude">Longitude</string>
-  <string name="search_shown_on_map">Afficher sur la carte</string>
+  <string name="shared_string_show_on_map">Afficher sur la carte</string>
   <string name="navigate_point_cancel">Annuler</string>
   <string name="search_address_top_text">Choisir l\'adresse</string>
   <string name="search_address_region">Région</string>

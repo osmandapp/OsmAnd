@@ -154,7 +154,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				}
 			});
 		//}
-		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
+		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 

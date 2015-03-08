@@ -287,7 +287,7 @@
 	<string name="context_menu_item_add_favorite">أضف إلى المفضلة</string>
 	<string name="context_menu_item_open_bug">فتح OSM علة</string>
 	<string name="context_menu_item_create_poi">إنشاء POI</string>
-	<string name="search_shown_on_map">عرض على الخريطة</string>
+	<string name="shared_string_show_on_map">عرض على الخريطة</string>
 	<string name="navigate_point_latitude">خط العرض</string>
 	<string name="navigate_point_longitude">خط الطول</string>
 	<string name="position_on_map_center">مركز</string>

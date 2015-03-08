@@ -749,7 +749,7 @@
   <string name="navigate_point_format_D">FFF.FFFFF</string>
   <string name="navigate_point_format_DM">FFF PP.PPPPP</string>
   <string name="navigate_point_format_DMS">FFF PP MM.MM</string>
-  <string name="search_shown_on_map">Mutasd a térképen</string>
+  <string name="shared_string_show_on_map">Mutasd a térképen</string>
   <string name="navigate_point_cancel">Mégse</string>
   <string name="search_address_top_text">Cím kiválasztása</string>
   <string name="search_address_region">Régió</string>

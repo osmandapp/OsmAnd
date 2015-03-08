@@ -585,7 +585,7 @@
 	<string name="navigate_point_format_D">GGG.GG</string>
 	<string name="navigate_point_format_DM">GGG MM.MM</string>
 	<string name="navigate_point_format_DMS">GGG MM SS.SS</string>
-	<string name="search_shown_on_map">Vis på kart</string>
+	<string name="shared_string_show_on_map">Vis på kart</string>
 	<string name="navigate_point_cancel">Avbryt</string>
 	<string name="search_address_top_text">Velg adresse</string>
 	<string name="search_address_region">Region</string>

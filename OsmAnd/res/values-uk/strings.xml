@@ -812,7 +812,7 @@
   <string name="navigate_point_format_D">ГГГ.ГГГГ</string>
   <string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
-  <string name="search_shown_on_map">Показати</string>
+  <string name="shared_string_show_on_map">Показати</string>
   <string name="navigate_point_cancel">Скасувати</string>
   <string name="search_address_top_text">Виберіть адрес</string>
   <string name="search_address_region">Регіон</string>

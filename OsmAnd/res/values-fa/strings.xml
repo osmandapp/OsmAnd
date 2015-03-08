@@ -244,7 +244,7 @@
 	<string name="osb_close_dialog_close_button">بستن اشکال</string>
 	<string name="osb_close_dialog_success">اشکال بسته شد</string>
 	<string name="poi_edit_title">ویرایش POI</string>
-	<string name="search_shown_on_map">روی نقشه نشان بده</string>
+	<string name="shared_string_show_on_map">روی نقشه نشان بده</string>
 	<string name="navigate_point_cancel">لغو</string>
 	<string name="search_address_top_text">انتخاب آدرس</string>
 	<string name="search_address_region">ناحیه</string>

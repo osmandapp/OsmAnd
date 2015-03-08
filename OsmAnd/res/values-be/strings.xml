@@ -1344,7 +1344,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Паказаць на мапе</string>
 	<string name="navigate_point_cancel">Скасаваць</string>
 	<string name="search_address_top_text">Абраць адрас</string>
 	<string name="search_address_region">Рэгіён</string>

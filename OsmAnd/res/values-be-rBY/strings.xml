@@ -1720,7 +1720,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Pakazać na mapie</string>
+	<string name="shared_string_show_on_map">Pakazać na mapie</string>
 	<string name="navigate_point_cancel">Skasavać</string>
 	<string name="search_address_top_text">Abrać adras</string>
 	<string name="search_address_region">Rehіjon</string>

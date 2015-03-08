@@ -297,7 +297,7 @@
   <string name="position_on_map_bottom">खाली</string>
   <string name="navigate_point_latitude">अक्षांश</string>
   <string name="navigate_point_longitude">रेखांश</string>
-  <string name="search_shown_on_map">नकाशावर दाखवा</string>
+  <string name="shared_string_show_on_map">नकाशावर दाखवा</string>
   <string name="search_address_top_text">पत्ता निवडा</string>
   <string name="search_address_region">प्रदेश</string>
   <string name="search_address_city">शहर</string>

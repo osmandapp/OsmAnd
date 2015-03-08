@@ -370,7 +370,7 @@
   <string name="navigate_point_top_text">Insira a latitude e longitude no formato selecionado (D - graus, M - minutos, S - segundos)</string>
   <string name="navigate_point_latitude">Latitude</string>
   <string name="navigate_point_longitude">Longitude</string>
-  <string name="search_shown_on_map">Mostrar no mapa</string>
+  <string name="shared_string_show_on_map">Mostrar no mapa</string>
   <string name="navigate_point_cancel">Cancelar</string>
   <string name="search_address_top_text">Escolher endereço</string>
   <string name="search_address_region">Região</string>

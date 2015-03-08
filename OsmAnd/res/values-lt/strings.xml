@@ -888,7 +888,7 @@
   <string name="navigate_point_format_D">LLL.LL</string>
   <string name="navigate_point_format_DM">LLL MM.MM</string>
   <string name="navigate_point_format_DMS">LLL MM SS.SS</string>
-  <string name="search_shown_on_map">Rodyti žemėlapyje</string>
+  <string name="shared_string_show_on_map">Rodyti žemėlapyje</string>
   <string name="navigate_point_cancel">Atšaukti</string>
   <string name="search_address_top_text">Pasirinkti adresą</string>
   <string name="search_address_region">Regionas</string>

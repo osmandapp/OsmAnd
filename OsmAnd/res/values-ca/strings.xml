@@ -933,7 +933,7 @@
 	<string name="map_tile_source">Font del mapa de tessel·les</string>
 	<string name="use_internet_to_download_tile">Utilitza Internet per baixar les tessel·les que faltin</string>
 	<string name="app_description">Aplicació de navegació</string>
-	<string name="search_shown_on_map">Mostra al mapa</string>
+	<string name="shared_string_show_on_map">Mostra al mapa</string>
 	<string name="search_address_street_option">Intersecció de carrers</string>
 	<string name="search_tabs_location">Localització</string>
 	<string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>

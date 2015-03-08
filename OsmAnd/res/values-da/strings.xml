@@ -1190,7 +1190,6 @@
 	<string name="navigate_point_longitude">Længdegrad</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
-	<string name="search_shown_on_map">Vis på kort</string>
 	<string name="navigate_point_cancel">Annuller</string>
 	<string name="search_address_region">Region</string>
 	<string name="context_menu_item_open_bug">Åben OSM fejlregistrering</string>

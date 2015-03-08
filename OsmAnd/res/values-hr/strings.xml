@@ -309,7 +309,7 @@
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>
 	<string name="context_menu_item_create_poi">Stvori POI</string>
 	<string name="context_menu_item_update_map">Ažuriraj karte</string>
-	<string name="search_shown_on_map">Prikaži na karti</string>
+	<string name="shared_string_show_on_map">Prikaži na karti</string>
 	<string name="navigate_point_cancel">Otkaži</string>
 	<string name="search_address_top_text">Odaberite adresu</string>
 	<string name="search_address_region">Regija</string>

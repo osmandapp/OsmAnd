@@ -751,7 +751,7 @@
   <string name="navigate_point_top_text">Zadejte zem. šířku a délku ve vybraném formátu (D - stupně, M - minuty, S - vteřiny)</string>
   <string name="navigate_point_latitude">Šířka</string>
   <string name="navigate_point_longitude">Délka</string>
-  <string name="search_shown_on_map">Zobrazit na mapě</string>
+  <string name="shared_string_show_on_map">Zobrazit na mapě</string>
   <string name="navigate_point_cancel">Zrušit</string>
   <string name="search_address_top_text">Zvolit addresu</string>
   <string name="search_address_region">Oblast</string>
