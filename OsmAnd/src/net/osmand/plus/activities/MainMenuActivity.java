@@ -1,40 +1,26 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Random;
 
 import net.osmand.Location;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.dashboard.DashDownloadMapsFragment;
 import net.osmand.plus.dashboard.DashErrorFragment;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.dashboard.NotifyingScrollView;
 import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import net.osmand.plus.views.controls.FloatingActionButton;
-import android.app.Activity;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -44,7 +30,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
-import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -53,7 +38,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 
 /**
@@ -302,22 +286,19 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public void updateCompassValue(float value) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof DashLocationFragment && !f.isDetached()) {
-				((DashLocationFragment) f).updateCompassValue(value);
-			}
-		}
+		// 
+//		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void updateLocation(Location location) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof DashLocationFragment && !f.isDetached()) {
-				((DashLocationFragment) f).updateLocation(location);
-			}
-		}
+//		for (WeakReference<Fragment> ref : fragList) {
+//			Fragment f = ref.get();
+//			if (f instanceof DashLocationFragment && !f.isDetached()) {
+//				((DashLocationFragment) f).updateLocation(location);
+//			}
+//		}
+//		throw new UnsupportedOperationException();
 	}
 
 	private OsmAndLocationProvider getLocationProvider() {

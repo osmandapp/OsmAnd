@@ -12,32 +12,48 @@
         layout="@layout/application_loading"
         android:visibility="gone" />
 
-    <net.osmand.plus.dashboard.NotifyingScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_scroll"
-        android:layout_width="360dp"
+    <LinearLayout
+        android:id="@+id/animateContent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fadeScrollbars="true" >
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/animateContent"
-            android:orientation="vertical" >
+        <net.osmand.plus.dashboard.NotifyingScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/main_scroll"
+            android:layout_width="360dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fadeScrollbars="true" >
 
             <LinearLayout
-                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical" >
 
-            <net.osmand.plus.activities.search.toolbar.SplitToolbar
-                android:id="@+id/bottomControls"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/bottomToolBarColor" />
-        </LinearLayout>
-    </net.osmand.plus.dashboard.NotifyingScrollView>
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <net.osmand.plus.activities.search.toolbar.SplitToolbar
+                    android:id="@+id/bottomControls"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/bottomToolBarColor" />
+            </LinearLayout>
+        </net.osmand.plus.dashboard.NotifyingScrollView>
+
+        <ImageButton
+            android:id="@+id/map_layers_button"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginTop="@dimen/map_button_margin"
+            android:background="@drawable/roundedbutton"
+            android:src="@drawable/ic_action_layers_light" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -11,7 +11,7 @@ import net.osmand.plus.activities.MapActivity;
  */
 public abstract class DashBaseFragment extends Fragment {
 
-	private DashboardOnMap dashboard;
+	protected DashboardOnMap dashboard;
 
 	public OsmandApplication getMyApplication(){
 		if (getActivity() == null){

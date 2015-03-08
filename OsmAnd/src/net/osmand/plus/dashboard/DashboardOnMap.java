@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,6 +51,11 @@ public class DashboardOnMap {
 	private boolean visible = false;
 	private boolean landscape;
 	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<WeakReference<DashBaseFragment>>();
+	private net.osmand.Location myLocation;
+	private LatLon mapViewLocation;
+	private float heading;
+	private boolean mapLinkedToLocation;
+	private float mapRotation;
 
 
 	public DashboardOnMap(MapActivity ma) {
@@ -71,6 +77,16 @@ public class DashboardOnMap {
 		dashboardView.findViewById(R.id.content).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
 		((FrameLayout) mapActivity.findViewById(R.id.ParentLayout)).addView(dashboardView);
+		
+		dashboardView.findViewById(R.id.map_layers_button).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setDashboardVisibility(false);
+				mapActivity.getMapActions().prepareConfigureMap();
+				mapActivity.getMapActions().toggleDrawer();				
+			}
+		}); 
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(mapActivity)
@@ -98,17 +114,40 @@ public class DashboardOnMap {
 		}
 
 	}
-
-
+	
+	public net.osmand.Location getMyLocation() {
+		return myLocation;
+	}
+	
+	public LatLon getMapViewLocation() {
+		return mapViewLocation;
+	}
+	
+	public float getHeading() {
+		return heading;
+	}
+	
+	public float getMapRotation() {
+		return mapRotation;
+	}
+	
+	public boolean isMapLinkedToLocation() {
+		return mapLinkedToLocation;
+	}
+	
 	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
-
 
 	public void setDashboardVisibility(boolean visible) {
 		this.visible = visible;
 		DashboardOnMap.staticVisible = visible;
 		if (visible) {
+			mapViewLocation = mapActivity.getMapLocation();
+			mapRotation = mapActivity.getMapRotate();
+			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+			myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			addOrUpdateDashboardFragments();
 			setupActionBar();
 			dashboardView.setVisibility(View.VISIBLE);
@@ -117,8 +156,10 @@ public class DashboardOnMap {
 			mapActivity.getMapActions().disableDrawer();
 			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
 			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.GONE);
+			updateLocation(true, true, false);
 		} else {
 			mapActivity.getMapActions().enableDrawer();
+			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent));
 			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
 			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
@@ -284,6 +325,7 @@ public class DashboardOnMap {
 			((FrameLayout) fabButton.getParent()).updateViewLayout(fabButton, lp);
 		}
 	};
+	
 
 	public boolean isVisible() {
 		return visible;
@@ -298,8 +340,41 @@ public class DashboardOnMap {
 			}
 		}
 	}
+	
+	private boolean inLocationUpdate = false;
+	public void updateLocation(final boolean centerChanged, final boolean locationChanged, final boolean compassChanged){
+		if(inLocationUpdate) {
+			return ;
+		}
+		inLocationUpdate = true;
+		mapActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				inLocationUpdate = false;
+				for (WeakReference<DashBaseFragment> df : fragList) {
+					if (df.get() instanceof DashLocationFragment) {
+						((DashLocationFragment)df.get()).updateLocation(centerChanged, locationChanged, compassChanged);
+					}
+				}				
+			}
+		});
+		
+	}
+	
+	public void updateMyLocation(net.osmand.Location location) {
+		myLocation = location;
+		updateLocation(false, true, false);
+	}
+	
+	public void updateCompassValue(double heading) {
+		this.heading = (float) heading;
+		updateLocation(false, false, true);
+	}
 
 	public void onAttach(DashBaseFragment dashBaseFragment) {
 		fragList.add(new WeakReference<DashBaseFragment>(dashBaseFragment));
 	}
+
+
+	
 }

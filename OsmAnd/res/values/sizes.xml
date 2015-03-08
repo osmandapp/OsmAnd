@@ -44,6 +44,9 @@
 	<dimen name="gpx_text_top_margin">6dp</dimen>
 	<dimen name="dashboard_map_top_padding">240dp</dimen>
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
+	
+	<dimen name="map_button_size">40dp</dimen>
+	<dimen name="map_button_margin">8dp</dimen>
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

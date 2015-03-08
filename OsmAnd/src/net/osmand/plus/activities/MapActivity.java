@@ -142,6 +142,9 @@ public class MapActivity extends AccessibleActivity {
 		setContentView(R.layout.main);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
+		if (mapViewTrackingUtilities == null) {
+			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
+		}
 
 		dashboardOnMap.createDashboardView();
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
@@ -168,11 +171,12 @@ public class MapActivity extends AccessibleActivity {
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					applicationInitialized();
 					if(!openGlSetup) {
 						setupOpenGLView();
 					}
-					mapView.refreshMap();
+					mapView.refreshMap(true);
+					findViewById(R.id.init_progress).setVisibility(View.GONE);
+					findViewById(R.id.ParentLayout).invalidate();
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
@@ -194,9 +198,6 @@ public class MapActivity extends AccessibleActivity {
 			}
 		});
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
-		if (mapViewTrackingUtilities == null) {
-			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
-		}
 		mapViewTrackingUtilities.setMapView(mapView);
 
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback() {
@@ -243,11 +244,6 @@ public class MapActivity extends AccessibleActivity {
 		}
 	}
 
-	private void applicationInitialized() {
-		mapView.refreshMap(true);
-		findViewById(R.id.init_progress).setVisibility(View.GONE);
-		findViewById(R.id.ParentLayout).invalidate();
-	}
 	
 	private void setupOpenGLView() {
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
@@ -259,6 +255,7 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.setElevationAngle(90);
 			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			mapView = ml.getMapView();
+			mapViewTrackingUtilities.setMapView(mapView);
 			mapView.setMapRender(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
@@ -693,7 +690,17 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public LatLon getMapLocation() {
+		if(mapView == null) {
+			return settings.getLastKnownMapLocation();
+		}
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+	}
+	
+	public float getMapRotate() {
+		if(mapView == null) {
+			return 0;
+		}
+		return mapView.getRotate();
 	}
 
 	// Duplicate methods to OsmAndApplication

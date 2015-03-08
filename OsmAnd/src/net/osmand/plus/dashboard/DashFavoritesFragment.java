@@ -5,13 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -35,11 +33,8 @@ import android.widget.TextView;
 /**
  * Created by Denis on 24.11.2014.
  */
-public class DashFavoritesFragment extends DashLocationFragment implements FavouritesDbHelper.FavoritesUpdatedListener {
+public class DashFavoritesFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
-	private net.osmand.Location location = null;
-
-	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
 	@Override
@@ -64,18 +59,7 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-	}
-
-	@Override
 	public void onOpenDash() {
-		// This is used as origin for both Fav-list and direction arrows
-		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-			loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		} else {
-			loc = new LatLon(0f, 0f);
-		}
 		setupFavorites();
 	}
 
@@ -83,25 +67,26 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 		View mainView = getView();
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		arrows.clear();
 		if (points.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
-
-		Collections.sort(points, new Comparator<FavouritePoint>() {
-			@Override
-			public int compare(FavouritePoint point, FavouritePoint point2) {
-				// LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-				int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), loc.getLatitude(),
-						loc.getLongitude()));
-				int dist2 = (int) (MapUtils.getDistance(point2.getLatitude(), point2.getLongitude(), loc.getLatitude(),
-						loc.getLongitude()));
-				return (dist - dist2);
-			}
-		});
+		final LatLon loc = getDefaultLocation();
+		if (loc != null) {
+			Collections.sort(points, new Comparator<FavouritePoint>() {
+				@Override
+				public int compare(FavouritePoint point, FavouritePoint point2) {
+					// LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
+							loc.getLatitude(), loc.getLongitude()));
+					int dist2 = (int) (MapUtils.getDistance(point2.getLatitude(), point2.getLongitude(),
+							loc.getLatitude(), loc.getLongitude()));
+					return (dist - dist2);
+				}
+			});
+		}
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
 		if (points.size() > 3) {
@@ -109,12 +94,15 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 				points.remove(3);
 			}
 		}
+		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.favorites_list_item, null, false);
 			TextView name = (TextView) view.findViewById(R.id.favourite_label);
 			TextView label = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			direction.setVisibility(View.VISIBLE);
+			label.setVisibility(View.VISIBLE);
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			if (point.getCategory().length() > 0) {
 				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
@@ -124,19 +112,11 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
 					getActivity(), point.getColor()));
+			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
+					point.getLongitude()));
+			distances.add(dv);
 
-			if (loc != null) {
-				direction.setVisibility(View.VISIBLE);
-				updateArrow(getActivity(), loc, new LatLon(point.getLatitude(), point.getLongitude()), direction, 10,
-						R.drawable.ic_destination_arrow, heading);
-			}
-			arrows.add(direction);
 			name.setText(point.getName());
-
-			// LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), loc.getLatitude(),
-					loc.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -146,7 +126,6 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()));
 				}
 			});
-			label.setText(distance, TextView.BufferType.SPANNABLE);
 			label.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -159,42 +138,8 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 			});
 			favorites.addView(view);
 		}
-		updateLocation(location);
+		this.distances = distances;
 	}
 
-	private void updateArrows() {
-		if (loc == null) {
-			return;
-		}
 
-		for (int i = 0; i < arrows.size(); i++) {
-			arrows.get(i).setVisibility(View.VISIBLE);
-			updateArrow(getActivity(), loc, new LatLon(points.get(i).getLatitude(), points.get(i).getLongitude()),
-					arrows.get(i), 10, R.drawable.ic_destination_arrow, heading);
-		}
-	}
-
-	@Override
-	public boolean updateCompassValue(float value) {
-		if (super.updateCompassValue(value)) {
-			updateArrows();
-		}
-		return true;
-	}
-
-	@Override
-	public void updateLocation(Location location) {
-		super.updateLocation(location);
-		updateArrows();
-	}
-
-	@Override
-	public void updateFavourites() {
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				setupFavorites();
-			}
-		});
-	}
 }

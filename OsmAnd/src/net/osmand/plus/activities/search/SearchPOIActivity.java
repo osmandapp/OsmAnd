@@ -785,7 +785,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, R.drawable.ic_destination_arrow_white);
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, 
+						R.drawable.ic_destination_arrow_white, R.color.color_distance);
 				Float h = heading;
 				float a = h != null ? h : 0;
 
