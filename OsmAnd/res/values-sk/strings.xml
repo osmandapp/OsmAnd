@@ -1990,7 +1990,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="version_settings">Verzie</string>
     <string name="points">Body</string>
     <string name="tracks">Stopy</string>
-    <string name="my_location">Moja poloha</string>
     <string name="osm_editing_manage">Spravovať</string>
     <string name="parking_place">Parkovacie miesto</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
@@ -2101,7 +2100,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_favorite">Obľúbené</string>
 	<string name="shared_string_favorites">Obľúbené</string>
 	<string name="shared_string_add_to_favorites">Pridať k obľúbeným</string>
-	<string name="shared_string_my_location">Moja poloha</string>
+	<string name="shared_string_shared_string_my_location">Moja poloha</string>
 	<string name="shared_string_my_places">Moje miesta</string>
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>

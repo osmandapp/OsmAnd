@@ -2071,7 +2071,6 @@
     <string name="version_settings">빌드</string>
     <string name="points">장소</string>
     <string name="tracks">경로</string>
-    <string name="my_location">내 위치</string>
     <string name="osm_editing_manage">관리</string>
     <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
@@ -2185,7 +2184,7 @@
 	<string name="shared_string_favorite">즐겨찾기</string>
 	<string name="shared_string_favorites">즐겨찾기</string>
 	<string name="shared_string_add_to_favorites">즐겨찾기에 추가</string>
-	<string name="shared_string_my_location">내 위치</string>
+	<string name="shared_string_shared_string_my_location">내 위치</string>
 	<string name="shared_string_my_places">저장소</string>
 	<string name="shared_string_my_favorites">모든 즐겨찾기</string>
 	<string name="shared_string_my_tracks">경로</string>

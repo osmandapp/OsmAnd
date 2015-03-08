@@ -1821,7 +1821,7 @@
     <string name="settings_privacy">Adatvédelem</string>
     <string name="points">Pontok</string>
     <string name="tracks">Nyomvonalak</string>
-    <string name="my_location">Pozícióm</string>
+    <string name="shared_string_my_location">Pozícióm</string>
     <string name="osm_editing_manage">Kezelés</string>
     <string name="recents">LEGUTÓBBI</string>
 	<string name="navigation_over_track">Indítasz navigációt a nyomvonal mentén?</string>

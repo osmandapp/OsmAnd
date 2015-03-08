@@ -1700,7 +1700,7 @@
     <string name="gps_status">Κατάσταση GPS</string>
     <string name="points">Σημεία</string>
     <string name="tracks">Ίχνη</string>
-    <string name="my_location">Η τοποθεσία μου</string>
+    <string name="shared_string_my_location">Η τοποθεσία μου</string>
     <string name="recents">ΠΡΟΣΦΑΤΑ</string>
 	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
 	<string name="edit_group">Επεξεργασία ομάδας</string>

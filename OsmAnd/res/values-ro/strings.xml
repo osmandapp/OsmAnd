@@ -1493,7 +1493,7 @@
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="points">Puncte</string>
-    <string name="my_location">Locația mea</string>
+    <string name="shared_string_my_location">Locația mea</string>
     <string name="rendering_value__name">Implicit</string>
 	<string name="home_button">Acasă</string>
     <string name="show_map">ARATĂ HARTA</string>

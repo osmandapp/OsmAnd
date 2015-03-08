@@ -1888,7 +1888,7 @@
     <string name="version_settings">建構</string>
     <string name="points">點</string>
     <string name="tracks">軌跡</string>
-    <string name="my_location">我的位置</string>
+    <string name="shared_string_my_location">我的位置</string>
     <string name="osm_editing_manage">管理</string>
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>

@@ -22,7 +22,7 @@
 		<LinearLayout android:orientation="horizontal"
 					  android:layout_width="fill_parent"
 					  android:layout_height="@dimen/dashHeaderHeight">
-			<TextView android:text="@string/my_location"
+			<TextView android:text="@string/shared_string_my_location"
 					  style="?attr/dashboardSubHeaderStyle"
 					  android:layout_weight="1"/>
 			<Button android:id="@+id/share"

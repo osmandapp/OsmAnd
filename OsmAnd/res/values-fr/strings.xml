@@ -1911,7 +1911,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
     <string name="tracks">Traces</string>
-    <string name="my_location">Ma position</string>
+    <string name="shared_string_my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">État du GPS</string>
     <string name="parking_place">Place de stationnement</string>

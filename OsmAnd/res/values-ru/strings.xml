@@ -1833,7 +1833,7 @@
     <string name="version_settings_descr">Скачать ночные сборки</string>
     <string name="version_settings">Сборки</string>
     <string name="tracks">Треки</string>
-    <string name="my_location">Мое местоположение</string>
+    <string name="shared_string_my_location">Мое местоположение</string>
     <string name="gps_status">Статус GPS</string>
     <string name="points">Точки</string>
     <string name="parking_place">Место для парковки</string>

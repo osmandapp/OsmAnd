@@ -2004,7 +2004,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="proxy_pref_descr">تنظیم ارتباط پروکسی اینترنت</string>
     <string name="points">نقاط</string>
     <string name="tracks">مسیرها</string>
-    <string name="my_location">موقعیت من</string>
+    <string name="shared_string_my_location">موقعیت من</string>
     <string name="osm_editing_manage">مدیریت</string>
     <string name="recents">اخیر</string>
 	<string name="rendering_value__name">پبش‌فرض</string>

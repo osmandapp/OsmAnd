@@ -1828,7 +1828,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
-    <string name="my_location">Meus locais</string>
+    <string name="shared_string_my_location">Meus locais</string>
     <string name="recents">RECENTES</string>
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
     <string name="rendering_value__name">Padrão</string>

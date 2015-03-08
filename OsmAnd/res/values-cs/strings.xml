@@ -1820,7 +1820,7 @@ s často kladenými otázkami.</string>
     <string name="settings_privacy">Soukromí</string>
     <string name="points">Body</string>
     <string name="tracks">Trasy</string>
-    <string name="my_location">Moje poloha</string>
+    <string name="shared_string_my_location">Moje poloha</string>
     <string name="osm_editing_manage">Spravovat</string>
     <string name="recents">NEDÁVNÉ</string>
 	<string name="navigation_over_track">Spustit navigaci po trase?</string>

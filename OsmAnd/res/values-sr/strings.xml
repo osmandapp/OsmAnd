@@ -389,7 +389,7 @@
     <string name="version_settings">Изградње</string>
     <string name="points">Тачке</string>
     <string name="tracks">Стазе</string>
-    <string name="my_location">Мој положај</string>
+    <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
     <string name="home_button">Матица</string>
     </resources>

@@ -1876,7 +1876,7 @@
 	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
 	<string name="points">Punts</string>
     <string name="tracks">Traces</string>
-    <string name="my_location">La vostra posició</string>
+    <string name="shared_string_my_location">La vostra posició</string>
     <string name="osm_editing_manage">Gestió</string>
     <string name="version_settings_descr">Baixada de les darreres versions</string>
     <string name="version_settings">Versions</string>

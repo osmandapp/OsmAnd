@@ -2003,7 +2003,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="settings_privacy">Privacy</string>
     <string name="points">Punten</string>
     <string name="tracks">Sporen</string>
-    <string name="my_location">Mijn locatie</string>
     <string name="osm_editing_manage">Beheer</string>
     <string name="recents">RECENT</string>
 	<string name="navigation_over_track">Navigatie over spoor starten?</string>
@@ -2113,7 +2112,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_favorite">Favoriet</string>
 	<string name="shared_string_favorites">Favorieten</string>
 	<string name="shared_string_add_to_favorites">Voeg toe aan Favorieten</string>
-	<string name="shared_string_my_location">Mijn locatie</string>
+	<string name="shared_string_shared_string_my_location">Mijn locatie</string>
 	<string name="shared_string_my_places">Mijn plaatsen</string>
 	<string name="shared_string_my_favorites">Mijn favorieten</string>
 	<string name="shared_string_my_tracks">Mijn routes</string>

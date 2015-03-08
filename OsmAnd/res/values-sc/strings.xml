@@ -1831,7 +1831,7 @@
     <string name="version_settings">Versiones</string>
     <string name="points">Puntos</string>
     <string name="tracks">Rastas</string>
-    <string name="my_location">Positzione mea</string>
+    <string name="shared_string_my_location">Positzione mea</string>
     <string name="osm_editing_manage">Amministra</string>
     <string name="gps_status">Istadu GPS</string>
     <string name="parking_place">Parchègiu</string>

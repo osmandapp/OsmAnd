@@ -2009,7 +2009,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="settings_privacy">Приватність</string>
     <string name="points">Точки</string>
     <string name="tracks">Треки</string>
-    <string name="my_location">Моє місцезнаходження</string>
+    <string name="shared_string_my_location">Моє місцезнаходження</string>
     <string name="osm_editing_manage">Керування</string>
     <string name="recents">ОСТАННІ</string>
 	<string name="navigation_over_track">Почати навігацію по треку?</string>

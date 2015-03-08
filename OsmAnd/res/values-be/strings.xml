@@ -1952,7 +1952,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="version_settings">Зборкі</string>
     <string name="points">Кропкі</string>
     <string name="tracks">Сьляды</string>
-    <string name="my_location">Маё месцазнаходжаньне</string>
     <string name="osm_editing_manage">Кіраваць</string>
     <string name="gps_status">Стан GPS</string>
     <string name="parking_place">Парковачнае месца</string>
@@ -2050,7 +2049,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_favorite">Упадабанае</string>
 	<string name="shared_string_favorites">Упадабаныя</string>
 	<string name="shared_string_add_to_favorites">Дадаць да ўпадабаных</string>
-	<string name="shared_string_my_location">Маё месцазнаходжаньне</string>
+	<string name="shared_string_shared_string_my_location">Маё месцазнаходжаньне</string>
 	<string name="shared_string_my_places">Мае мясьціны</string>
 	<string name="shared_string_my_tracks">Мае сьляды</string>
 	<string name="shared_string_currently_recording_track">Сьлед, што запісваецца</string>

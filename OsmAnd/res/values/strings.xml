@@ -75,7 +75,7 @@
 	<string name="shared_string_favorites">Favorites</string>
 	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
-	<string name="shared_string_my_location">My Location</string>
+	<string name="shared_string_shared_string_my_location">My Location</string>
 	<string name="shared_string_my_places">My Places</string>
 	<string name="shared_string_my_favorites">My Favorites</string>
 	<string name="shared_string_my_tracks">My Tracks</string>
@@ -172,7 +172,6 @@
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
     <string name="tracks">Tracks</string>
-    <string name="my_location">My location</string>
     <string name="osm_editing_manage">Manage</string>
 	<string name="navigation_over_track">Start navigation over track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>

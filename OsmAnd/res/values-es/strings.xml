@@ -1907,7 +1907,7 @@
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="points">Puntos</string>
     <string name="tracks">Trazas</string>
-    <string name="my_location">Mi ubicación</string>
+    <string name="shared_string_my_location">Mi ubicación</string>
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>

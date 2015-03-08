@@ -2036,7 +2036,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
     <string name="tracks">Tracks</string>
-    <string name="my_location">Mein Ort</string>
+    <string name="shared_string_my_location">Mein Ort</string>
     <string name="osm_editing_manage">Verwalten</string>
     <string name="recents">VERLAUF</string>
     <string name="navigation_over_track">Navigation über Strecke starten?</string>

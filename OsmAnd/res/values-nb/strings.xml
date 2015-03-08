@@ -1197,7 +1197,7 @@
     <string name="parking_place">Parkeringsplass</string>
     <string name="points">Punkter</string>
     <string name="tracks">Spor</string>
-    <string name="my_location">Min posisjon</string>
+    <string name="shared_string_my_location">Min posisjon</string>
     <string name="gps_status">GPS-status</string>
     <string name="location_on_map">Posisjon:\n Br %1$s\n Le %2$s</string>
 	<string name="online_map">Nettbasert kart</string>

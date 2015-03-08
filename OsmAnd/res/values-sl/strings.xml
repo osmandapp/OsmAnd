@@ -1983,7 +1983,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="settings_privacy">Zasebnost</string>
     <string name="points">Točke</string>
     <string name="tracks">Sledi</string>
-    <string name="my_location">Moja lokacija</string>
+    <string name="shared_string_my_location">Moja lokacija</string>
     <string name="osm_editing_manage">Upravljaj</string>
     <string name="enable_proxy_title">Omogoči HTTP Proxy</string>
 	<string name="enable_proxy_descr">Konfiguriranje HTTP Proxy-ja za vse omrežne zahteve</string>

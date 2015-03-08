@@ -1894,7 +1894,7 @@
     <string name="settings_privacy">Privatumas</string>
     <string name="points">Taškai</string>
     <string name="tracks">Keliai</string>
-    <string name="my_location">Mano dabatinė vieta</string>
+    <string name="shared_string_my_location">Mano dabatinė vieta</string>
     <string name="osm_editing_manage">Valdyti</string>
     <string name="recents">PASTARIEJI</string>
 	<string name="navigation_over_track">Pradėti navigaciją keliu?</string>

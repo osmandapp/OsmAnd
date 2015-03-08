@@ -2010,7 +2010,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="version_settings">Versioni</string>
     <string name="points">Punti</string>
     <string name="tracks">Tracce</string>
-    <string name="my_location">La mia posizione</string>
     <string name="osm_editing_manage">Gestisci</string>
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio</string>
@@ -2124,7 +2123,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_favorite">Preferito</string>
 	<string name="shared_string_favorites">Preferiti</string>
 	<string name="shared_string_add_to_favorites">Aggiungi ai preferiti</string>
-	<string name="shared_string_my_location">La mia posizione</string>
+	<string name="shared_string_shared_string_my_location">La mia posizione</string>
 	<string name="shared_string_my_places">I miei luoghi</string>
 	<string name="shared_string_my_favorites">I miei preferiti</string>
 	<string name="shared_string_my_tracks">Le mie tracce</string>

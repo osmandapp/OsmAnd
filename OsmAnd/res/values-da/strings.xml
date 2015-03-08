@@ -1839,7 +1839,6 @@
 	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
 	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
     <string name="tracks">Spor</string>
-    <string name="my_location">Min placering</string>
     <string name="osm_editing_manage">Administrer</string>
     <string name="version_settings_descr">"Hent aktuelle  udviklingsversioner"</string>
     <string name="version_settings">Versioner</string>
@@ -1956,7 +1955,7 @@
 	<string name="shared_string_favorite">Favorit</string>
 	<string name="shared_string_favorites">Favoritter</string>
 	<string name="shared_string_add_to_favorites">Føj til Favoritter</string>
-	<string name="shared_string_my_location">Min placering</string>
+	<string name="shared_string_shared_string_my_location">Min placering</string>
 	<string name="shared_string_my_places">Mine steder</string>
 	<string name="shared_string_my_favorites">Mine favoritter</string>
 	<string name="shared_string_my_tracks">Mine spor</string>
