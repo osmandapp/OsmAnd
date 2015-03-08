@@ -701,9 +701,7 @@ public class MapActivityActions implements DialogProvider {
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-//				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
-//				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				mapActivity.startActivity(newIntent);
+				getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(true);
 				mapActivity.getDashboard().setDashboardVisibility(true);
 				return true;
 			}
@@ -754,7 +752,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							enterRoutePlanningMode(null, null, false);
-						return true;
+							return true;
 						}
 				}).reg();
 		} else if(routingHelper.isRouteCalculated()) {
@@ -934,7 +932,7 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	private void prepareConfigureScreen() {
+	public void prepareConfigureScreen() {
 		currentDrawer = DrawerType.CONFIGURE_SCREEN;
 		ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
 		prepareOptionsMenu(cm);
@@ -1017,7 +1015,7 @@ public class MapActivityActions implements DialogProvider {
 	
 
 	
-	private void whereAmIDialog() {
+	public void whereAmIDialog() {
 		final List<String> items = new ArrayList<String>();
 		items.add(getString(R.string.show_location));
 		items.add(getString(R.string.show_details));

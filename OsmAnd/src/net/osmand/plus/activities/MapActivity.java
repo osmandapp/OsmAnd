@@ -115,7 +115,7 @@ public class MapActivity extends AccessibleActivity {
 	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
 
-	private DashboardOnMap dashboardOnMap;
+	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
 
 	private Notification getNotification() {
@@ -143,7 +143,6 @@ public class MapActivity extends AccessibleActivity {
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 
-		dashboardOnMap = new DashboardOnMap(this);
 		dashboardOnMap.createDashboardView();
 		if (app.isApplicationInitializing()) {
 			dashboardOnMap.setDashboardVisibility(true);
@@ -484,17 +483,23 @@ public class MapActivity extends AccessibleActivity {
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
 			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
-		}
-		if (mapLabelToShow != null && latLonToShow != null) {
-			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-			mapLayers.getContextMenuLayer().setLocation(latLonToShow,
-					mapLabelToShow.getFullPlainName(this, latLonToShow.getLatitude(), latLonToShow.getLongitude()));
-		}
-		if (latLonToShow != null && !latLonToShow.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(),
-					settings.getMapZoomToShow(), true);
+			if(dashboardOnMap.isVisible()) {
+				dashboardOnMap.setDashboardVisibility(false);
+			}
 		}
 		if (latLonToShow != null) {
+			if(dashboardOnMap.isVisible()) {
+				dashboardOnMap.setDashboardVisibility(false);
+			}
+			if (mapLabelToShow != null) {
+				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+				mapLayers.getContextMenuLayer().setLocation(latLonToShow,
+						mapLabelToShow.getFullPlainName(this, latLonToShow.getLatitude(), latLonToShow.getLongitude()));
+			}
+			if (!latLonToShow.equals(cur)) {
+				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
+						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
+			}
 			// remember if map should come back to isMapLinkedToLocation=true
 			mapViewTrackingUtilities.setMapLinkedToLocation(false);
 		}

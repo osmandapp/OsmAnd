@@ -1,12 +1,22 @@
 package net.osmand.plus.dashboard;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.FloatingActionButton;
+import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
@@ -30,23 +40,26 @@ public class DashboardOnMap {
 
 
 	private static final int LIST_ID = 1;
-	private static final int WAYPOINTS_ID = 2;
+	private static final int DIRECTIONS_ID = 2;
 	private static final int CONFIGURE_SCREEN_ID = 3;
 	private static final int SETTINGS_ID = 4;
-	private MapActivity ma;
+	private MapActivity mapActivity;
 	FloatingActionButton fabButton;
 	boolean floatingButtonVisible = true;
 	private FrameLayout dashboardView;
 	private boolean visible = false;
+	private boolean landscape;
+	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<WeakReference<DashBaseFragment>>();
 
 
 	public DashboardOnMap(MapActivity ma) {
-		this.ma = ma;
+		this.mapActivity = ma;
 	}
 
 
 	public void createDashboardView() {
-		dashboardView = (FrameLayout) ma.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
+		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
+		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
 		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT));
 		View.OnClickListener listener = new View.OnClickListener() {
@@ -57,23 +70,29 @@ public class DashboardOnMap {
 		};
 		dashboardView.findViewById(R.id.content).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
-		((FrameLayout) ma.findViewById(R.id.ParentLayout)).addView(dashboardView);
+		((FrameLayout) mapActivity.findViewById(R.id.ParentLayout)).addView(dashboardView);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			fabButton = new FloatingActionButton.Builder(ma)
-					.withDrawable(ma.getResources().getDrawable(R.drawable.ic_action_map))
-					.withButtonColor(ma.getResources().getColor(R.color.color_myloc_distance)).withGravity(Gravity.TOP | Gravity.RIGHT)
-					.withMargins(0, 160, 16, 0).create();
+			fabButton = new FloatingActionButton.Builder(mapActivity)
+					.withDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_map))
+					.withButtonColor(mapActivity.getResources().getColor(R.color.color_myloc_distance))
+					.withGravity(landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT)
+					.withMargins(0, landscape ? 0 : 160, 16, landscape ? 16 : 0).create();
 			fabButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
+					if (getMyApplication().accessibilityEnabled()) {
+						mapActivity.getMapActions().whereAmIDialog();
+					} else {
+						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+					}
 					setDashboardVisibility(false);
 				}
 			});
 			fabButton.hideFloatingActionButton();
 		}
 
-		if (ScreenOrientationHelper.isOrientationPortrait(ma)) {
+		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
 			((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll))
 					.setOnScrollChangedListener(onScrollChangedListener);
 		}
@@ -81,35 +100,40 @@ public class DashboardOnMap {
 	}
 
 
+	protected OsmandApplication getMyApplication() {
+		return mapActivity.getMyApplication();
+	}
+
+
 	public void setDashboardVisibility(boolean visible) {
 		this.visible = visible;
 		if (visible) {
-			addDashboardFragments();
+			addOrUpdateDashboardFragments();
 			setupActionBar();
 			dashboardView.setVisibility(View.VISIBLE);
 			fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
-			ma.getMapActions().disableDrawer();
-			ma.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
-			ma.findViewById(R.id.MapButtons).setVisibility(View.GONE);
+			mapActivity.getMapActions().disableDrawer();
+			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
+			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 		} else {
-			ma.getMapActions().enableDrawer();
+			mapActivity.getMapActions().enableDrawer();
 			hide(dashboardView.findViewById(R.id.animateContent));
-			ma.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
-			ma.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
+			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
+			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
 			fabButton.hideFloatingActionButton();
 		}
 	}
 
 	private void setupActionBar() {
-		final Toolbar tb = (Toolbar) ma.findViewById(R.id.bottomControls);
+		final Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.bottomControls);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		Menu menu = tb.getMenu();
 		createMenuItem(menu, LIST_ID, R.string.drawer, 
-				R.drawable.ic_flat_list_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, WAYPOINTS_ID, R.string.waypoints, 
-				R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+				R.drawable.ic_dashboard_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, DIRECTIONS_ID, R.string.get_directions, 
+				R.drawable.ic_action_gdirections_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, CONFIGURE_SCREEN_ID, R.string.layer_map_appearance,
 				R.drawable.ic_configure_screen_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SETTINGS_ID, R.string.settings_activity, 
@@ -134,13 +158,35 @@ public class DashboardOnMap {
 
 
 	protected boolean onOptionsItemSelected(MenuItem item) {
-		return false;
+		setDashboardVisibility(false);
+		if(item.getItemId() == LIST_ID) {
+			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
+			mapActivity.getMapActions().toggleDrawer();
+		} else if(item.getItemId() == DIRECTIONS_ID) {
+			RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+			if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+				mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+			} else {
+				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.refreshMap();
+			}
+		} else if(item.getItemId() == CONFIGURE_SCREEN_ID) {
+			mapActivity.getMapActions().prepareConfigureScreen();
+			mapActivity.getMapActions().toggleDrawer();
+			return false;	
+		} else if(item.getItemId() == SETTINGS_ID) {
+			final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization().getSettingsActivity());
+			mapActivity.startActivity(settings);
+		} else {
+			return false;
+		}
+		return true;
 	}
 
 
 	// To animate view slide out from right to left
 	private void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(-ma.findViewById(R.id.ParentLayout).getWidth(),0,0,0);
+		TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.ParentLayout).getWidth(),0,0,0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
@@ -148,7 +194,7 @@ public class DashboardOnMap {
 	}
 
 	private void hide(View view) {
-		TranslateAnimation animate = new TranslateAnimation(0, -ma.findViewById(R.id.ParentLayout).getWidth(), 0, 0);
+		TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.ParentLayout).getWidth(), 0, 0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {
@@ -173,34 +219,39 @@ public class DashboardOnMap {
 	}
 	
 
-	private void addDashboardFragments() {
-		FragmentManager manager = ma.getSupportFragmentManager();
+	private void addOrUpdateDashboardFragments() {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null && 
-				ma.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(ma)) {
-			DashErrorFragment errorFragment = new DashErrorFragment();
-			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashSearchFragment(), DashSearchFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashRecentsFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashRecentsFragment(), DashRecentsFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashFavoritesFragment(), DashFavoritesFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashAudioVideoNotesFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashAudioVideoNotesFragment(), DashAudioVideoNotesFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashTrackFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashTrackFragment(), DashTrackFragment.TAG);
-		}
-		// fragmentTransaction.add(R.id.content, new DashUpdatesFragment(), DashUpdatesFragment.TAG);
-		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null) {
-			fragmentTransaction.add(R.id.content, new DashPluginsFragment(), DashPluginsFragment.TAG);
-		}
+		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
+				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity));
+		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class);
+		showFragment(manager, fragmentTransaction, DashRecentsFragment.TAG, DashRecentsFragment.class);
+		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);
+		showFragment(manager, fragmentTransaction, DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class);
+		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class);
+//		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class);
+		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class);
 		fragmentTransaction.commit();
+	}
+
+
+
+	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
+			String tag, Class<T> cl) {
+		showFragment(manager, fragmentTransaction, tag, cl, true);
+	}
+
+	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
+			String tag, Class<T> cl, boolean cond) {
+		try {
+			if (manager.findFragmentByTag(tag) == null && cond) {
+				T ni = cl.newInstance();
+				fragmentTransaction.add(R.id.content, ni, tag);
+			}
+		} catch (Exception e) {
+			getMyApplication().showToastMessage("Error showing dashboard");
+			e.printStackTrace();
+		}
 	}
 
 
@@ -213,11 +264,26 @@ public class DashboardOnMap {
 			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) fabButton.getLayoutParams();
 			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
 			((FrameLayout) fabButton.getParent()).updateViewLayout(fabButton, lp);
-			// TODO
 		}
 	};
 
 	public boolean isVisible() {
 		return visible;
+	}
+
+
+	public void onDetach(DashBaseFragment dashBaseFragment) {
+		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
+		while(it.hasNext()) {
+			WeakReference<DashBaseFragment> wr = it.next();
+			if(wr.get() == dashBaseFragment) {
+				it.remove();
+			}
+		}
+	}
+
+
+	public void onAttach(DashBaseFragment dashBaseFragment) {
+		fragList.add(new WeakReference<DashBaseFragment>(dashBaseFragment));
 	}
 }

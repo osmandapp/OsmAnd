@@ -105,6 +105,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private void updatePluginState(View pluginView, OsmandPlugin plugin) {
 		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);
+		enableDisableButton.setOnCheckedChangeListener(null);
 		if (plugin.needsInstallation()) {
 			getButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setVisibility(View.GONE);
@@ -113,6 +114,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			enableDisableButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setChecked(plugin.isActive());
 		}
+		setListener(plugin, enableDisableButton, pluginView);
 
 		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
 		if (plugin.isActive()) {
@@ -141,6 +143,11 @@ public class DashPluginsFragment extends DashBaseFragment {
 		enableDisableButton.setOnCheckedChangeListener(null);
 		updatePluginState(view, plugin);
 		final View pluginView = view;
+		setListener(plugin, enableDisableButton, pluginView);
+		container.addView(view);
+	}
+
+	private void setListener(final OsmandPlugin plugin, CompoundButton enableDisableButton, final View pluginView) {
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -152,6 +159,5 @@ public class DashPluginsFragment extends DashBaseFragment {
 				}
 			}
 		});
-		container.addView(view);
 	}
 }
