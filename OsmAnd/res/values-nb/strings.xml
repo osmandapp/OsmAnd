@@ -474,7 +474,7 @@
 	<string name="transport_Routes">Ruter</string>
 	<string name="transport_route_distance">Reiserutedistanse</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Vis stoppesteder for offentlig transport på kart</string>
 	<string name="show_transport_over_map">Vis stoppesteder</string>
 	<string name="hello">Navigeringsprogrammet OsmAnd</string>

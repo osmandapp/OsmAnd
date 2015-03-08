@@ -530,7 +530,6 @@
   <string name="transport_stops_to_pass">fermate da passare</string>
   <string name="transport_route_distance">Distanza itinerario</string>
   <string name="transport">Trasporto pubblico</string>
-  <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Visualizza le fermate di trasporto pubblico sulla mappa</string>
   <string name="show_transport_over_map">Visualizza le fermate del trasporto pubblico</string>
   <string name="hello">Applicazione di navigazione OsmAnd</string>

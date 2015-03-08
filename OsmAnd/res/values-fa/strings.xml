@@ -964,7 +964,7 @@
 	<string name="hello">برنامه مسیریابی OsmAnd</string>
 	<string name="update_poi_success">داده های POI با موفقیت آپلود شد ({0} مورد بارگزاری شد)</string>
 	<string name="update_poi_error_local">خطا در هنگام به روز رسانی لیست POI محلی</string>
-	<string name="default_buttons_ok">خُب</string>
+	<string name="shared_string_ok">خُب</string>
 	<string name="transport">حمل و نقل</string>
 	<string name="transport_route_distance">مسافت مسیر</string>
 	<string name="transport_Stop">توقف</string>

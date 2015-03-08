@@ -961,7 +961,7 @@
 	<string name="transport_to_go_before">naslednja razdalja</string>
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
 	<string name="transport_route_distance">Razdalja poti</string>
-	<string name="default_buttons_ok">V redu</string>
+	<string name="shared_string_ok">V redu</string>
 	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
 	<string name="show_transport_over_map">Prikaz postaj prevoza</string>
 	<string name="update_poi_success">POI podatki so bili uspešno posodobljeni ({0} naloženih)</string>

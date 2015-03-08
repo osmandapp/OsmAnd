@@ -625,7 +625,6 @@
   <string name="transport_stops_to_pass">Aantal haltes te gaan</string>
   <string name="transport_route_distance">Lengte van route</string>
   <string name="transport">Openbaar vervoer</string>
-  <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Toon haltes openbaar vervoer op kaart</string>
   <string name="show_transport_over_map">Toon haltes openbaar vervoer</string>
   <string name="hello">Navigatieprogamma OsmAnd</string>

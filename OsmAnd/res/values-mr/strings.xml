@@ -222,7 +222,7 @@
   <string name="transport_stop_to_go_out">उतरण्याचा थांबा निवडा</string>
   <string name="transport_route_distance">मार्गाचे अंतर</string>
   <string name="transport">परिवहन</string>
-  <string name="default_buttons_ok">ठिक आहे</string>
+  <string name="shared_string_ok">ठिक आहे</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
   <string name="show_transport_over_map">परिवहन थांबे दाखवा</string>
   <string name="search_history_city">शहर: {0}</string>

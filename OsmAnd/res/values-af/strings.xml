@@ -653,7 +653,7 @@
   <string name="transport_stops_to_pass">haltes om verby te gaan</string>
   <string name="transport_route_distance">Roete afstand</string>
   <string name="transport">Vervoer</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Wys openbare vervoer haltes op die kaart</string>
   <string name="show_transport_over_map">Wys vervoer haltes</string>
   <string name="hello">navigasie toepassing OsmAnd</string>

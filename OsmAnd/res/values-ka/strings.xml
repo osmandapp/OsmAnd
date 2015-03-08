@@ -585,7 +585,7 @@
   <string name="transport_stops_to_pass">დარჩენილი გაჩერებები</string>
   <string name="transport_route_distance">გზის სიგრძე</string>
   <string name="transport">ტრანსპორტი</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">რუკაზე საზოგადოებრივი ტრანსპორტის გაჩერებების ჩვენება</string>
   <string name="show_transport_over_map">გაჩერებების ჩვენება</string>
   <string name="hello">OsmAnd - სანავიგაციო აპლიკაცია</string>

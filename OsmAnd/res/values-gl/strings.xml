@@ -1469,7 +1469,7 @@
 	<string name="transport_stops_to_pass">paraxes que pasar</string>
 	<string name="transport_route_distance">Distancia do itinerario</string>
 	<string name="transport">Transporte</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Mostrar as paraxes de transporte público no mapa</string>
 	<string name="show_transport_over_map">Mostrar as paraxes de transporte</string>
 	<string name="hello">Aplicativo de transporte OsmAnd</string>

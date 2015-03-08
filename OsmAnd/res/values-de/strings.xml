@@ -944,7 +944,7 @@
 	<string name="transport_stops_to_pass">zu passierende Haltestellen</string>
 	<string name="transport_route_distance">Streckenlänge</string>
 	<string name="transport">ÖPNV</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">ÖPNV-Haltestellen auf der Karte anzeigen</string>
 	<string name="show_transport_over_map">Haltestellen anzeigen</string>
 	<string name="hello">Navigationsanwendung OsmAnd</string>

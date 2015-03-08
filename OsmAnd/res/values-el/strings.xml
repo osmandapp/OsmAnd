@@ -826,7 +826,7 @@
 	<string name="transport_stops_to_pass">στάσεις προς προσπέραση</string>
 	<string name="transport_route_distance">Απόσταση δρομολογίου</string>
 	<string name="transport">Μεταφορές</string>
-	<string name="default_buttons_ok">Εντάξει</string>
+	<string name="shared_string_ok">Εντάξει</string>
 	<string name="show_transport_over_map_description">Εμφάνιση στάσεων ΜΜΜ στο χάρτη</string>
 	<string name="show_transport_over_map">Εμφάνιση στάσεων ΜΜΜ</string>
 	<string name="hello">Εφαρμογή πλοήγησης OsmAnd</string>

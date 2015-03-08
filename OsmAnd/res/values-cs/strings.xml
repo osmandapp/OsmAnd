@@ -593,7 +593,7 @@
   <string name="transport_stops_to_pass">počet zastávek</string>
   <string name="transport_route_distance">Vzdálenost trasy</string>
   <string name="transport">Doprava</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Zobrazit v mapě zastávky veřejné dopravy</string>
   <string name="show_transport_over_map">Zobrazit zastávky</string>
   <string name="hello">Navigační aplikace OsmAnd</string>

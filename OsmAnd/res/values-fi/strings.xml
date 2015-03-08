@@ -291,7 +291,7 @@
 	<string name="transport_to_go_before">seuraava etäisyys</string>
 	<string name="transport_stops_to_pass">pysäkkejä ohitettavana</string>
 	<string name="transport_route_distance">Reitin matka</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Näytä julkisen liikenteen pysäkit kartalla</string>
 	<string name="show_transport_over_map">Näytä liikennepysäkit</string>
 	<string name="hello">Navigointisovellus OsmAnd</string>

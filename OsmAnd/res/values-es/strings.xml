@@ -525,7 +525,7 @@
   <string name="transport_stops_to_pass">paradas a pasar</string>
   <string name="transport_route_distance">Distancia del itinerario</string>
   <string name="transport">Transporte</string>
-  <string name="default_buttons_ok">Aceptar</string>
+  <string name="shared_string_ok">Aceptar</string>
   <string name="show_transport_over_map_description">Muestra paradas de transporte público en el mapa</string>
   <string name="show_transport_over_map">Mostrar paradas de transporte</string>
   <string name="hello">Aplicación de navegación OsmAnd</string>

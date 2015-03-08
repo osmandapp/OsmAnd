@@ -392,7 +392,7 @@ MB)をダウンロードしますか?</string>
      <string name="transport_stops_to_pass">通過する乗り場</string>
      <string name="transport_route_distance">ルートの距離</string>
      <string name="transport">交通機関</string>
-     <string name="default_buttons_ok">OK</string>
+     <string name="shared_string_ok">OK</string>
      <string name="show_transport_over_map_description">マップ上に公共交通機関乗り場を表示</string>
      <string name="show_transport_over_map">交通機関乗り場を表示</string>
      <string name="hello">ナビゲーションアプリケーション OsmAnd</string>

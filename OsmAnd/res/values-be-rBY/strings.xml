@@ -1575,7 +1575,7 @@
 	<string name="transport_stops_to_pass">prypynkaŭ na šliachu</string>
 	<string name="transport_route_distance">Daŭžynia maršrutu</string>
 	<string name="transport">Transpart</string>
-	<string name="default_buttons_ok">Dobra</string>
+	<string name="shared_string_ok">Dobra</string>
 	<string name="show_transport_over_map_description">Pakazać prypynkі hramadskaha transpartu na mapie</string>
 	<string name="show_transport_over_map">Pakazvać prypynkі transpartu</string>
 	<string name="hello">Navіhacyjnaja prahrama OsmAnd</string>

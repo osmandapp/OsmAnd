@@ -424,7 +424,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Khoảng cách đường đi</string>
 	<string name="transport">Giao thông</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Hiện các điểm dừng giao thông công cộng trên bản đồ</string>
 	<string name="show_transport_over_map">Hiện các điểm dừng giao thông</string>
 	<string name="hello">Ứng dụng tìm đường OsmAnd</string>

@@ -1446,7 +1446,7 @@
 	<string name="transport_stops_to_pass">firmadas da colare</string>
 	<string name="transport_route_distance">Distàntzia àndala</string>
 	<string name="transport">Trasportu pùblicu</string>
-	<string name="default_buttons_ok">Atzeta</string>
+	<string name="shared_string_ok">Atzeta</string>
 	<string name="show_transport_over_map_description">Ammustra sas firmadas de su trasportu pùblicu in sa mapa</string>
 	<string name="show_transport_over_map">Ammustra sas firmadas de su trasportu pùblicu</string>
 	<string name="hello">Aplicu de nàvigu OsmAnd</string>

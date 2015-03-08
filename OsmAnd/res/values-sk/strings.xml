@@ -723,7 +723,6 @@
   <string name="transport_stops_to_pass">zastávky na prejdenie</string>
   <string name="transport_route_distance">Vzdialenosť trasy</string>
   <string name="transport">Hromadná doprava</string>
-  <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Zobrazenie zastávok hromadnej dopravy na mape</string>
   <string name="show_transport_over_map">Zobraziť zastávky hrom.dopravy</string>
   <string name="hello">Navigačná aplikácia OsmAnd</string>

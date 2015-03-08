@@ -652,7 +652,7 @@
   <string name="transport_stops_to_pass">зупинок в дорозі</string>
   <string name="transport_route_distance">Довжина маршруту</string>
   <string name="transport">Транспорт</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Показувати зупинки громадського транспорту</string>
   <string name="show_transport_over_map">Показувати зупинки траспорта</string>
   <string name="hello">Навігаційна програма OsmAnd</string>

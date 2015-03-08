@@ -870,7 +870,7 @@
 	<string name="transport_stops_to_pass">stații de parcurs</string>
 	<string name="transport_route_distance">Lungime itinerariu</string>
 	<string name="transport">Transport</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Arată pe hartă stațiile mijloacelor de transport public</string>
 	<string name="show_transport_over_map">Arată stații transport public</string>
 	<string name="hello">Aplicația pentru navigare OsmAnd</string>

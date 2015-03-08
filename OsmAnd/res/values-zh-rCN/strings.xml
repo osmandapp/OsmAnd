@@ -329,7 +329,7 @@
 	<string name="transport_search_after">后续路由</string>	
 	<string name="transport_search_before">此前路线</string>
 	<string name="transport_finish_search">完成搜索</string>
-	<string name="default_buttons_ok">行</string>
+	<string name="shared_string_ok">行</string>
 	<string name="favorite">最喜爱</string>
 	<string name="clear_all">清除所有</string>
 	<string name="download_index_success">下载成功</string>

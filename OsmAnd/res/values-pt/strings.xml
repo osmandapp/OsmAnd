@@ -203,7 +203,7 @@
   <string name="transport_stops_to_pass">paradas a passar</string>
   <string name="transport_route_distance">Distância da viagem</string>
   <string name="transport">Transportes</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Ver as paradas de transportes públicos no mapa</string>
   <string name="show_transport_over_map">Mostrar paradas de transportes</string>
   <string name="hello">Aplicação de navegação OsmAnd</string>

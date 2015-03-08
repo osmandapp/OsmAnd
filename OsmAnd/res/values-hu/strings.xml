@@ -588,7 +588,7 @@
   <string name="transport_stops_to_pass">ennyi megálló:</string>
   <string name="transport_route_distance">Útvonal távolsága</string>
   <string name="transport">Közlekedés</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Tömegközlekedési megállok megjelenítése a térképen</string>
   <string name="show_transport_over_map">Tömegközlekedési megállok megjelenítése</string>
   <string name="hello">OsmAnd navigációs alkalmazás</string>

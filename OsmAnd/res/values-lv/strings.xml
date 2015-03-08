@@ -588,7 +588,7 @@
   <string name="transport_stops_to_pass">Pieturvietu skaits</string>
   <string name="transport_route_distance">Ceļa garums</string>
   <string name="transport">Transports</string>
-  <string name="default_buttons_ok">Labi</string>
+  <string name="shared_string_ok">Labi</string>
   <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta pieturas</string>
   <string name="show_transport_over_map">Rādīt pieturas</string>
   <string name="hello">OsmAnd navigācija</string>

@@ -1302,7 +1302,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="transport_stops_to_pass">спирки да се пропуснат</string>
 	<string name="transport_route_distance">Дистанция на маршрут</string>
 	<string name="transport">Обществен транспорт</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Показване на спирките на обществения транспорт на картата</string>
 	<string name="show_transport_over_map">Спирки на общ. транспорт</string>
 	<string name="hello">Приложение за навигация OsmAnd</string>

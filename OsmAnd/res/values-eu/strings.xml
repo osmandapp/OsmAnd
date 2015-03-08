@@ -942,7 +942,7 @@
   <string name="transport_stops_to_pass">pasatu beharreko geldialdiak</string>
   <string name="transport_route_distance">Ibilbidearen distantzia</string>
   <string name="transport">Garraioa</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Erakutsi garraio publikoko geldialdiak mapan</string>
   <string name="show_transport_over_map">Erakutsi garraioko geldialdiak</string>
   <string name="hello">OsmAnd nabigatzaile aplikazioa</string>

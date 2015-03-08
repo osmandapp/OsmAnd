@@ -627,7 +627,7 @@
 	<string name="transport_stops_to_pass">stanice do izlaza</string>
 	<string name="transport_route_distance">Udaljenost rute</string>
 	<string name="transport">Prijevoz</string>
-	<string name="default_buttons_ok">U redu</string>
+	<string name="shared_string_ok">U redu</string>
 	<string name="hello">Navigacijska aplikacija OsmAnd</string>
 	<string name="update_poi_success">POI podaci su uspješno ažurirani ({0} su učitani)</string>
 	<string name="update_poi_error_local">Pogreška pri ažuriranju lokalnog POI popisa</string>

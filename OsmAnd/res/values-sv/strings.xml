@@ -808,7 +808,7 @@
 	<string name="transport_stops_to_pass">hållplatser att passera</string>
 	<string name="transport_route_distance">Resvägssträcka</string>
 	<string name="transport">Transporter</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
 	<string name="show_transport_over_map">Visa hållplatser</string>
 	<string name="hello">Navigationsappen OsmAnd</string>

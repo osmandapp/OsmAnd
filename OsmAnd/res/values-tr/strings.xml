@@ -432,7 +432,7 @@
 	<string name="first_time_continue">Sonra</string>
 	<string name="search_poi_location">Sinyal aranıyor…</string>
 	<string name="transport_Routes">Rotalar</string>
-	<string name="default_buttons_ok">Tamam</string>
+	<string name="shared_string_ok">Tamam</string>
 	<string name="clear_all">Hepsini temizle</string>
 	<string name="searching">Aranıyor…</string>
 	<string name="searching_address">Adres aranıyor…</string>

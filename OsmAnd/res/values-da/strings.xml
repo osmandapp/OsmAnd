@@ -1104,7 +1104,6 @@
 	</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
-	<string name="default_buttons_ok">OK</string>
 	<string name="search_offline_address">Offline søgning</string>
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>

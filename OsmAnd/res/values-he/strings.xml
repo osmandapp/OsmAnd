@@ -788,7 +788,7 @@
 	<string name="transport_stops_to_pass">תחנות לעבור</string>
 	<string name="transport_route_distance">מרחק המסלול</string>
 	<string name="transport">תחבורה</string>
-	<string name="default_buttons_ok">אישור</string>
+	<string name="shared_string_ok">אישור</string>
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה</string>
 	<string name="show_transport_over_map">הצגת תחנות תחבורה</string>
 	<string name="hello">יישום הניווט OsmAnd</string>

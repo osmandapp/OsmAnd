@@ -1220,7 +1220,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_stops_to_pass">прыпынкаў на шляху</string>
 	<string name="transport_route_distance">Даўжыня маршруту</string>
 	<string name="transport">Транспарт</string>
-	<string name="default_buttons_ok">Добра</string>
 	<string name="show_transport_over_map_description">Паказаць прыпынкі грамадзкага транспарту на мапе</string>
 	<string name="show_transport_over_map">Паказваць прыпынкі транспарту</string>
 	<string name="hello">Навігацыйная праграма OsmAnd</string>

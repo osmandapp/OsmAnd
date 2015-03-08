@@ -646,7 +646,7 @@
   <string name="transport_stops_to_pass">остановок в пути</string>
   <string name="transport_route_distance">Длина пути</string>
   <string name="transport">Транспорт</string>
-  <string name="default_buttons_ok">OK</string>
+  <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Показывать остановки общественного транспорта на карте</string>
   <string name="show_transport_over_map">Показать остановки транспорта</string>
   <string name="hello">Навигационное приложение OsmAnd</string>

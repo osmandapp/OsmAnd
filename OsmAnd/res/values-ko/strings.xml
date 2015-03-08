@@ -649,7 +649,6 @@
 	<string name="transport_stops_to_pass">경유할 정류소들</string>
 	<string name="transport_route_distance">교처로까지 거리</string>
 	<string name="transport">대중교통</string>
-	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">대중교통 정류소를 지도에 표시</string>
 	<string name="show_transport_over_map">대중교통 정류소 표시</string>
 	<string name="hello">내비게이션 앱 OsmAnd</string>

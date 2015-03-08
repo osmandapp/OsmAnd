@@ -770,7 +770,7 @@
 	<string name="transport_stops_to_pass">中途站</string>
 	<string name="transport_route_distance">路線距離</string>
 	<string name="transport">交通工具</string>
-	<string name="default_buttons_ok">確定</string>
+	<string name="shared_string_ok">確定</string>
 	<string name="show_transport_over_map_description">在地圖上顯示公車站牌</string>
 	<string name="show_transport_over_map">顯示公車站牌</string>
 	<string name="hello">OsmAnd 導航軟體</string>

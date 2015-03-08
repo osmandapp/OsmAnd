@@ -728,7 +728,7 @@
   <string name="transport_stops_to_pass">pravažiuoti stotelių</string>
   <string name="transport_route_distance">Maršruto ilgis</string>
   <string name="transport">Transportas</string>
-  <string name="default_buttons_ok">Gerai</string>
+  <string name="shared_string_ok">Gerai</string>
   <string name="show_transport_over_map_description">Rodyti viešojo transporto stoteles žemėlapyje</string>
   <string name="show_transport_over_map">Rodyti viešojo transporto stoteles</string>
   <string name="hello">Navigacijos programa OsmAnd</string>
