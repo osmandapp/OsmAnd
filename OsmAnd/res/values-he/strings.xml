@@ -708,7 +708,7 @@
 	<string name="items_were_selected">נבחרו {0} פריטים</string>
 	<string name="filter_existing_indexes">המסנן התקבל</string>
 	<string name="deselect_all">ביטול בחירת הכול</string>
-	<string name="select_all">בחירת הכול</string>
+	<string name="shared_string_select_all">בחירת הכול</string>
 	<string name="reload">רענון</string>
 	<string name="fast_route_mode">המסלול המהיר ביותר</string>
 	<string name="fast_route_mode_descr">"יש להפעיל כדי לחשב את המסלול המהיר ביותר או לנטרל כדי לקבל את המסלול הקצר ביותר "</string>

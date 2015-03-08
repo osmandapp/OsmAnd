@@ -231,7 +231,7 @@
 	<string name="items_were_selected">{0} kohde(tta) valittu</string>
 	<string name="filter_existing_indexes">Suodata ladatut</string>
 	<string name="deselect_all">Poista valinta kaikista</string>
-	<string name="select_all">Valitse kaikki</string>
+	<string name="shared_string_select_all">Valitse kaikki</string>
 	<string name="reload">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>
 	<string name="context_menu_item_download_map">Lataa kartta</string>

@@ -449,7 +449,7 @@
   <string name="items_were_selected">არჩეულია {0}</string>
   <string name="filter_existing_indexes">ფილტრები გადმოწერილია</string>
   <string name="deselect_all">მონიშვნის მოხსნა</string>
-  <string name="select_all">ყველაფრის არჩევა</string>
+  <string name="shared_string_select_all">ყველაფრის არჩევა</string>
   <string name="reload">განახლება</string>
   <string name="fast_route_mode">უსწრაფესი გზა</string>
   <string name="fast_route_mode_descr">"ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ უმოკლესისათვის "</string>

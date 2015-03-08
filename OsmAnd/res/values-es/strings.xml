@@ -386,7 +386,7 @@
   <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
   <string name="filter_existing_indexes">Filtrar descargados</string>
   <string name="deselect_all">Anular selección</string>
-  <string name="select_all">Seleccionar todo</string>
+  <string name="shared_string_select_all">Seleccionar todo</string>
   <string name="reload">Recargar</string>
   <string name="fast_route_mode">Ruta más rápida</string>
   <string name="fast_route_mode_descr">Marca para calcular la ruta más rápida o desmarca para la más corta </string>

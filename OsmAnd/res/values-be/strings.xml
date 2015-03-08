@@ -1081,7 +1081,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="items_were_selected">{0} абрана</string>
 	<string name="filter_existing_indexes">Сьцягнутае</string>
 	<string name="deselect_all">Прыбраць вылучэньне ўсіх</string>
-	<string name="select_all">Вылучыць усе</string>
 	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>

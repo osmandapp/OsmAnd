@@ -155,7 +155,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			} else {
 				SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
 				s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-				s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+				s.add(0, SELECT_ALL_ID, 0, R.string.shared_string_select_all);
 				s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 
 //				s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light

@@ -1441,7 +1441,7 @@
 	<string name="items_were_selected">{0} abrana</string>
 	<string name="filter_existing_indexes">Zladavanaje</string>
 	<string name="deselect_all">Prybrać vylučeńnie ŭsіch</string>
-	<string name="select_all">Vylučyć usie</string>
+	<string name="shared_string_select_all">Vylučyć usie</string>
 	<string name="reload">Abnavіć</string>
 	<string name="fast_route_mode">Najchutčejšy šliach</string>
 	<string name="fast_route_mode_descr">"Paznačyć kab raźlіčvać najchutčejšy šliach, cі źniać paznaku dlia najkaraciejšaha šliachu "</string>

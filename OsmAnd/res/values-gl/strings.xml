@@ -1336,7 +1336,7 @@
 	<string name="items_were_selected">{0} elemento(s) seleccionados</string>
 	<string name="filter_existing_indexes">Descargado</string>
 	<string name="deselect_all">Anular toda a selección</string>
-	<string name="select_all">Seleccionar todo</string>
+	<string name="shared_string_select_all">Seleccionar todo</string>
 	<string name="reload">Anovar</string>
 	<string name="fast_route_mode">Itinerario máis rápido</string>
 	<string name="fast_route_mode_descr">"Active isto para calcular a ruta máis rápida ou desactíveo para a máis curta "</string>

@@ -500,7 +500,6 @@
   <string name="items_were_selected">Было выбрано {0}</string>
   <string name="filter_existing_indexes">Загруженные</string>
   <string name="deselect_all">Снять выбор</string>
-  <string name="select_all">Выбрать все</string>
   <string name="reload">Перезагрузить</string>
   <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>

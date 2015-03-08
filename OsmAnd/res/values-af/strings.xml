@@ -517,7 +517,7 @@
   <string name="items_were_selected">{0} item(s) gekies</string>
   <string name="filter_existing_indexes">Filter afgelaai</string>
   <string name="deselect_all">Kanseleer alle keuses</string>
-  <string name="select_all">Kies alles</string>
+  <string name="shared_string_select_all">Kies alles</string>
   <string name="reload">Verfris</string>
   <string name="fast_route_mode">Vinnigste roete</string>
   <string name="fast_route_mode_descr">"Skakel aan om vinnigste roete te bereken of skakel af vir kortste roete " </string>

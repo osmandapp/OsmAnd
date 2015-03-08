@@ -592,7 +592,7 @@
   <string name="items_were_selected">Pasitrinkti {0} elementai(-as)</string>
   <string name="filter_existing_indexes">Filtruoti parsiųstus</string>
   <string name="deselect_all">Nepasirinkti nieko</string>
-  <string name="select_all">Pasirinkti viską</string>
+  <string name="shared_string_select_all">Pasirinkti viską</string>
   <string name="reload">Atnaujinti</string>
   <string name="fast_route_mode">Greičiausias maršrutas</string>
   <string name="fast_route_mode_descr">Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas. Priešingu atveju bus skaičiuojamas trumpiausias maršrutas </string>

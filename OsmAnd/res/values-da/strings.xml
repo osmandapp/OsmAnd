@@ -857,7 +857,6 @@
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
-	<string name="select_all">Vælg alle</string>
 	<string name="reload">Genindlæs</string>
 	<string name="fast_route_mode">Hurtigste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>

@@ -390,7 +390,7 @@
 	<string name="daynight_mode_night">Gece</string>
 	<string name="daynight_mode_auto">Gündoğumu/günbatımı</string>
 	<string name="daynight">Gündüz/gece modu</string>
-	<string name="select_all">Hepsini seç</string>
+	<string name="shared_string_select_all">Hepsini seç</string>
 	<string name="reload">Yenile</string>
 	<string name="fast_route_mode">En hızlı rota</string>
 	<string name="context_menu_item_download_map">Haritayı indir</string>

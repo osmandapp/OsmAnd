@@ -654,7 +654,7 @@
 	<string name="daynight_mode_auto">طلوع/غروب</string>
 	<string name="daynight_mode_sensor">حسگر نوری</string>
 	<string name="daynight">حالت روز/شب</string>
-	<string name="select_all">انتخاب همه</string>
+	<string name="shared_string_select_all">انتخاب همه</string>
 	<string name="fast_route_mode">سریعترین مسیر</string>
 	<string name="fast_route_mode_descr">فعال کنید تا مسیر سریعتر محاسبه شود یا غیرفعال کنید تا مسیر کوتاهتر محاسبه شود </string>
 	<string name="context_menu_item_download_map">دانلود نقشه</string>

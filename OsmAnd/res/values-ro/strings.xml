@@ -734,7 +734,7 @@
 	<string name="items_were_selected">{0} element(e) selectate</string>
 	<string name="filter_existing_indexes">Filtru descărcat</string>
 	<string name="deselect_all">Deselectează tot</string>
-	<string name="select_all">Selectează tot</string>
+	<string name="shared_string_select_all">Selectează tot</string>
 	<string name="reload">Reîmprospătează</string>
 	<string name="fast_route_mode">Cea mai rapidă rută</string>
 	<string name="fast_route_mode_descr">Activați pentru a calcula ruta cea mai rapidă sau dezactivați pentru ruta cea mai scurtă </string>

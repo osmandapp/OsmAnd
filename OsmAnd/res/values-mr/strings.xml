@@ -169,7 +169,7 @@
   <string name="daynight_mode_day">दिवस</string>
   <string name="daynight_mode_night">रात्र</string>
   <string name="daynight_mode_auto">सुर्योदय/सूर्यास्त</string>
-  <string name="select_all">सर्व निवडा</string>
+  <string name="shared_string_select_all">सर्व निवडा</string>
   <string name="fast_route_mode">वेगवान रस्ता</string>
   <string name="fast_route_mode_descr">निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी </string>
   <string name="context_menu_item_download_map">नकाशा डाउनलोड करा</string>

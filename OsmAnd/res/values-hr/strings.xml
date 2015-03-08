@@ -484,7 +484,7 @@
 	<string name="fast_route_mode">Najbrži put</string>
 	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili od značite za najkraću rutu </string>
 	<string name="reload">Osvježi</string>
-	<string name="select_all">Označi sve</string>
+	<string name="shared_string_select_all">Označi sve</string>
 	<string name="deselect_all">Odznači sve</string>
 	<string name="daynight_mode_sensor">Senzor svijetla</string>
 	<string name="daynight_mode_day">Dan</string>

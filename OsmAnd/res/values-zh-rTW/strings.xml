@@ -634,7 +634,7 @@
 	<string name="items_were_selected">已選{0}項</string>
 	<string name="filter_existing_indexes">已下載的</string>
 	<string name="deselect_all">取消全選</string>
-	<string name="select_all">全部選取</string>
+	<string name="shared_string_select_all">全部選取</string>
 	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>

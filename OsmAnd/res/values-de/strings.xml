@@ -808,7 +808,7 @@
 	<string name="items_were_selected">{0} Positionen ausgewählt</string>
 	<string name="filter_existing_indexes">Filter gespeicherte</string>
 	<string name="deselect_all">Keine markieren</string>
-	<string name="select_all">Alle markieren</string>
+	<string name="shared_string_select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste oder deaktivieren für kürzeste Route</string>

@@ -405,7 +405,7 @@
 	<string name="items_were_selected">{0} element(er) valgt</string>
 	<string name="filter_existing_indexes">Nedlastet</string>
 	<string name="deselect_all">Fravelg alle</string>
-	<string name="select_all">Velg alle</string>
+	<string name="shared_string_select_all">Velg alle</string>
 	<string name="reload">Gjenoppfrisk</string>
 	<string name="fast_route_mode">Raskeste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for å beregne raskeste rute eller deaktiver for korteste rute </string>

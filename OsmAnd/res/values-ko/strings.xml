@@ -493,7 +493,6 @@
 	<string name="items_were_selected">{0} 아이템목이 선택되었습니다</string>
 	<string name="filter_existing_indexes">다운로드된 것들로 필터링</string>
 	<string name="deselect_all">모든 선택 해제</string>
-	<string name="select_all">모두 선택</string>
 	<string name="reload">새로고침</string>
 	
 	<string name="fast_route_mode">가장 빠른 경로</string>
