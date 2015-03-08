@@ -101,7 +101,7 @@
         android:layout_height="@dimen/bottom_tool_bar_size"
         android:background="?attr/downloadButtonBackground"
         android:gravity="center"
-        android:text="@string/download_files"
+        android:text="@string/shared_string_download"
         android:textColor="?attr/pstsTextColor"
         android:visibility="gone" />
 

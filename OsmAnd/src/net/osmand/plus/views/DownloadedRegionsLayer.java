@@ -256,11 +256,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				filter.setLength(0);
 				filter.append("basemap");
 				downloadBtn.setVisibility(View.VISIBLE);
-				downloadBtn.setText(view.getResources().getString(R.string.download_files) + " "
+				downloadBtn.setText(view.getResources().getString(R.string.shared_string_download) + " "
 						+ view.getResources().getString(R.string.base_world_map));
 			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&
 					currentObjects != null){
-				StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
+				StringBuilder s = new StringBuilder(view.getResources().getString(R.string.shared_string_download));
 				filter.setLength(0);
 				Set<String> set = new TreeSet<String>();
 				if ((currentObjects != null && currentObjects.size() > 0)) {

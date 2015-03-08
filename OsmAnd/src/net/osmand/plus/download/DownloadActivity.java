@@ -310,7 +310,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			String text;
 			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
 			if (!running) {
-				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
+				text = getString(R.string.shared_string_download) + "  (" + downloads + ")"; //$NON-NLS-1$
 			} else {
 				text = getString(R.string.downloading_file_new) + "  (" + downloads + ")"; //$NON-NLS-1$
 			}

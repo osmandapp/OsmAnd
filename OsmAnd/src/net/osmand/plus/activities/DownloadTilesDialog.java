@@ -100,7 +100,7 @@ public class DownloadTilesDialog {
 			
 		});
 		
-		builder.setPositiveButton(R.string.download_files, new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();

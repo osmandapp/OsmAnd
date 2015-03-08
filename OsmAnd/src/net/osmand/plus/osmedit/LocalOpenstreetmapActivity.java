@@ -65,7 +65,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_openstreetmap);
-		getSupportActionBar().setTitle(R.string.download_files);
+		getSupportActionBar().setTitle(R.string.shared_string_download);
 		setSupportProgressBarIndeterminateVisibility(false);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
