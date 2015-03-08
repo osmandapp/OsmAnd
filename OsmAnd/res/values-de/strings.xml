@@ -1566,7 +1566,7 @@
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
-	<string name="selected">ausgewählte</string>
+	<string name="shared_string_selected">ausgewählte</string>
 	<string name="save_as_favorites_points">als Favoriten-Gruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Wegpunkte auswählen</string>
 	<string name="sort_by_distance">Sortieren nach Entfernung</string>

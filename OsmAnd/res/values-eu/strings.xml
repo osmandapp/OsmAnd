@@ -1304,7 +1304,7 @@
     <string name="loading_smth">Kargatzen %1$s …</string>
     <string name="map_widget_plain_time">Oraingo ordua</string>
     <string name="selected_gpx_info_show">\n\nZanpatuta mantendu mapan ikusteko</string>
-    <string name="selected">hautatua</string>
+    <string name="shared_string_selected">hautatua</string>
     <string name="gpx_info_distance">"Distantzia: %1$s (%2$s puntu) "</string>
 	<string name="gpx_info_start_time">"Hasierako ordua: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">"Bukaerako ordua: %1$tF, %1$tT "</string>

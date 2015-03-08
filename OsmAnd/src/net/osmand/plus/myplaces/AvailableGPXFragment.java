@@ -410,7 +410,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void updateSelectionMode(ActionMode m) {
 		if (selectedItems.size() > 0) {
-			m.setTitle(selectedItems.size() + " " + app.getString(R.string.selected));
+			m.setTitle(selectedItems.size() + " " + app.getString(R.string.shared_string_selected));
 		} else {
 			m.setTitle("");
 		}

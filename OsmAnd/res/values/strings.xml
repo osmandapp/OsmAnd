@@ -414,7 +414,6 @@
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
     <string name="delay_navigation_start">Start turn-by-turn guidance automatically</string>
-    <string name="selected">selected</string>
     <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="gpx_info_subtracks">Subtracks: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>

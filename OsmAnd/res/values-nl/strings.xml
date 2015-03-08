@@ -1837,7 +1837,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
-    <string name="selected">gekozen</string>
     <string name="gpx_split_interval">Splits om de</string>
     <string name="gpx_info_waypoints">Routepunten: %1$s </string>
 	<string name="show_zoom_buttons_navigation_descr">Zoomknoppen tonen tijdens navigeren</string>

@@ -1888,7 +1888,6 @@
     <string name="gpx_wpt">경유지</string>
     <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
     <string name="delay_navigation_start">순차적인 안내를 시작합니다</string>
-    <string name="selected">선택됨</string>
     <string name="gpx_split_interval">분할 간격</string>
     <string name="gpx_info_waypoints">"경유지: %1$s "</string>
 	<string name="gpx_info_asc_altitude">하강/상승: %1$s</string>

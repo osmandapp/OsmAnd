@@ -1649,7 +1649,7 @@
     <string name="gpx_wpt">Fita</string>
     <string name="selected_gpx_info_show">\n\nPremeu i manteniu per veure al mapa</string>
     <string name="delay_navigation_start">Inicia automàticament el guiatge turn-by-turn</string>
-    <string name="selected">seleccionat</string>
+    <string name="shared_string_selected">seleccionat</string>
     <string name="gpx_split_interval">Divideix l\'interval</string>
     <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
 	<string name="gpx_info_asc_altitude">Baixat/pujat: %1$s</string>

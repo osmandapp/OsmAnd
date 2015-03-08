@@ -1795,7 +1795,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="gpx_wpt">Prechodný bod</string>
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
     <string name="delay_navigation_start">Spustiť navigačné povely automaticky</string>
-    <string name="selected">vybrané</string>
     <string name="gpx_split_interval">Interval rozdelenia</string>
     <string name="gpx_info_subtracks">Podstopy: %1$s </string>
 	<string name="gpx_info_waypoints">Prechodné body: %1$s </string>

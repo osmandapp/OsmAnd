@@ -1520,7 +1520,7 @@
     <string name="gpx_wpt">Útpont</string>
     <string name="selected_gpx_info_show">\n\nTérképen megtekintéshez nyomd meg hosszan</string>
     <string name="delay_navigation_start">Navigáció indítása automatikusan</string>
-    <string name="selected">kiválasztott</string>
+    <string name="shared_string_selected">kiválasztott</string>
     <string name="gpx_split_interval">Felosztási intervallum</string>
     <string name="gpx_info_subtracks">Résznyomvonalak: %1$s </string>
 	<string name="gpx_info_waypoints">Útpontok: %1$s </string>

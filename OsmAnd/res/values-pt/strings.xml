@@ -1785,7 +1785,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gpx_wpt">Ponto</string>
     <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar navegação com atraso</string>
-    <string name="selected">seleccionado</string>
+    <string name="shared_string_selected">seleccionado</string>
     <string name="gpx_split_interval">Selecione intervalo de divisão</string>
     <string name="gpx_info_waypoints">Os pontos de passagem : %1$s </string>
 	<string name="gpx_info_distance">Distância: %1$s (%2$s pontos ) </string>

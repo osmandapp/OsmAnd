@@ -1228,7 +1228,7 @@
     <string name="map_widget_plain_time">Trenutno vrijeme</string>
     <string name="selected_gpx_info_show">\n\nPritisnite i držite za prikaz na karti</string>
     <string name="delay_navigation_start">Započni turn-by-turn navođenje automatski</string>
-    <string name="selected">odabrano</string>
+    <string name="shared_string_selected">odabrano</string>
     <string name="gpx_info_distance">"Udaljenost: %1$s (%2$s points) "</string>
 	<string name="gpx_info_start_time">"Vrijeme Početka: %1$tF, %1$tT "</string>
 	<string name="gpx_info_average_speed">"Prosječna brzina: %1$s "</string>

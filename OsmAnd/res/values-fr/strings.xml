@@ -1668,7 +1668,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_data_activity">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
-    <string name="selected">sélectionné(s)</string>
+    <string name="shared_string_selected">sélectionné(s)</string>
     <string name="gpx_split_interval">Intervalle de division</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
 <string name="gpx_info_subtracks">Sections : %1$s </string>

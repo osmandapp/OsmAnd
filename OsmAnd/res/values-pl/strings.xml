@@ -1787,7 +1787,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_available_current_track">Zapisywanie bieżącej trasy</string>
     <string name="selected_gpx_info_show">\n\nNaciśnij i przytrzymaj, aby zobaczyć na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
-    <string name="selected">wybrano</string>
+    <string name="shared_string_selected">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>

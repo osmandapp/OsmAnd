@@ -1663,7 +1663,7 @@
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
     <string name="delay_navigation_start">自動啟動轉向建議指引</string>
-    <string name="selected">已選擇</string>
+    <string name="shared_string_selected">已選擇</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
 	<string name="gpx_info_maximum_speed">"最高速度：%1$s "</string>

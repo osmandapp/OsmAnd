@@ -1715,7 +1715,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="gpx_info_avg_altitude">Povprečna višina: %1$s</string>
 	<string name="loading_smth">Nalaganje %1$s …</string>
     <string name="map_widget_plain_time">Trenutni čas</string>
-    <string name="selected">izbrano</string>
+    <string name="shared_string_selected">izbrano</string>
     <string name="gpx_timespan">Časovni razpon: %1$s</string>
 	<string name="gpx_selection_number_of_points"> %1$s točk</string>
     <string name="gpx_selection_point">Točka %1$s</string>

@@ -45,7 +45,7 @@
     <string name="map_widget_plain_time">Gjeldande klokkeslett</string>
     <string name="gpx_wpt">Vegpunkt</string>
     <string name="selected_gpx_info_show">\n\nHald inne for å sjå på kartet</string>
-    <string name="selected">valt</string>
+    <string name="shared_string_selected">valt</string>
     <string name="local_index_gpx_info_show">\n\nHald inne for å sjå val</string>
 	<string name="gpx_info_subtracks">Delspor: %1$s</string>
 	<string name="gpx_info_waypoints">Vegpunkt: %1$s</string>

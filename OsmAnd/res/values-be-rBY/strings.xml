@@ -213,7 +213,7 @@
     <string name="gpx_wpt">Punkt šliachu</string>
     <string name="selected_gpx_info_show">\n\nNacіśnіcie і ŭtrymlіvajcie, kab ubačyć na mapie</string>
     <string name="delay_navigation_start">Aŭtamatyčna pačać navіhacyju</string>
-    <string name="selected">vybrana</string>
+    <string name="shared_string_selected">vybrana</string>
     <string name="local_index_gpx_info_show">\n\nNacіsnuć і trymać dlia naladaŭ</string>
 	<string name="gpx_info_subtracks">"Častak śliedu: %1$s "</string>
 	<string name="gpx_info_waypoints">"Adznačanych punktaŭ: %1$s "</string>
