@@ -335,7 +335,7 @@ public class OsmandApplication extends Application {
 				ll.addView(tv);
 				
 				final CheckBox cb = new CheckBox(uiContext);
-				cb.setText(R.string.remember_choice);
+				cb.setText(R.string.shared_string_remember_my_choice);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				lp.setMargins(7, 10, 7, 0);
 				cb.setLayoutParams(lp);

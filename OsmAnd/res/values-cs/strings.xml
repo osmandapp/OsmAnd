@@ -1338,7 +1338,7 @@
     <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
     <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspešně uložen</string>
-    <string name="remember_choice">Zapamatovat mou volbu</string>
+    <string name="shared_string_remember_my_choice">Zapamatovat mou volbu</string>
     <string name="gps_status_eclipsim">Stav GPS</string>
     <string name="shared_string_and">a</string>
     <string name="shared_string_or">nebo</string>

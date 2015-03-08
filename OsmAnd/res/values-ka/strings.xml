@@ -1085,7 +1085,7 @@
     <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
     <string name="animate_routing_route">სიმულაცია გამოთვლილი გზის გამოყენებით </string>
     <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>
-    <string name="remember_choice">ჩემი არჩევნის დამახსოვრება</string>
+    <string name="shared_string_remember_my_choice">ჩემი არჩევნის დამახსოვრება</string>
     <string name="gps_status_eclipsim">GPS-ის სტატუსი</string>
     <string name="shared_string_and">და</string>
     <string name="shared_string_or">ან</string>

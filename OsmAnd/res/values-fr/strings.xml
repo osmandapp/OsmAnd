@@ -1435,7 +1435,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 \n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
 \n\t* \'Hiver et Ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
 \n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée. "</string>
-    <string name="remember_choice">Mémoriser mon choix</string>
+    <string name="shared_string_remember_my_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">État du GPS</string>
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>

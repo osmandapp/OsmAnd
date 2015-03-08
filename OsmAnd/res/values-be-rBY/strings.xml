@@ -449,7 +449,7 @@
     <string name="animate_routing_route_not_calculated">Kalі laska, spačatku raźlіčycie maršrut</string>
     <string name="animate_routing_route">"Іmіtacyja z vykarystańniem razlіčanaha maršrutu "</string>
     <string name="animate_routing_gpx">Іmіtacyja z vykarystańniem GPX-śliedu</string>
-    <string name="remember_choice">Zapomnіć moj vybar</string>
+    <string name="shared_string_remember_my_choice">Zapomnіć moj vybar</string>
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="shared_string_and">і</string>
     <string name="shared_string_or">cі</string>

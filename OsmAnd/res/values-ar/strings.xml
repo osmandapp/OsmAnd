@@ -675,7 +675,7 @@
 	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
-    <string name="remember_choice">تذكر اختياري</string>
+    <string name="shared_string_remember_my_choice">تذكر اختياري</string>
     <string name="gps_status_eclipsim">حالة GPS</string>
     <string name="tip_map_styles_t">"يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلائم احتياجاتك:
 \n\nفيما عدا نمط الخرائط \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال

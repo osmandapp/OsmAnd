@@ -1417,7 +1417,7 @@
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
     
     
-    <string name="remember_choice">Atsiminti mano pasirinkimą</string>
+    <string name="shared_string_remember_my_choice">Atsiminti mano pasirinkimą</string>
     <string name="gps_status_eclipsim">GPS statusas</string>
     <string name="shared_string_and">ir</string>
     <string name="shared_string_or">arba</string>

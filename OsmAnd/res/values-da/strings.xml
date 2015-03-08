@@ -1387,7 +1387,6 @@
     <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
 	<string name="auto_zoom_close">Tæt på</string>
-	<string name="remember_choice">Husk valg</string>
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med en beregnet rute </string>

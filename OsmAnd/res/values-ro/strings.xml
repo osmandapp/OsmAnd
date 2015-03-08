@@ -1216,7 +1216,7 @@
     <string name="animate_routing_route_not_calculated">Vă rog, mai întâi calculați ruta</string>
     <string name="animate_routing_route">Simulează folosind ruta calculată </string>
     <string name="animate_routing_gpx">Simulează folosind traseul GPX</string>
-    <string name="remember_choice">Reține alegerea mea</string>
+    <string name="shared_string_remember_my_choice">Reține alegerea mea</string>
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="shared_string_and">și</string>
     <string name="shared_string_or">sau</string>

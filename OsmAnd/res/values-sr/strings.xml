@@ -12,7 +12,7 @@
     <string name="animate_routing_route_not_calculated">Прво израчунајте путању</string>
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
-    <string name="remember_choice">Запамти мој избор</string>
+    <string name="shared_string_remember_my_choice">Запамти мој избор</string>
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>

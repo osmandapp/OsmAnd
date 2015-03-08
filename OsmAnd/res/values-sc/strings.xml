@@ -120,7 +120,7 @@
     <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s’andala in antis</string>
     <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
-    <string name="remember_choice">Ammenta s’issèberu meu</string>
+    <string name="shared_string_remember_my_choice">Ammenta s’issèberu meu</string>
     <string name="gps_status_eclipsim">Istadu GPS</string>
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">o</string>

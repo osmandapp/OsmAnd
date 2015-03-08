@@ -1361,7 +1361,6 @@
 	<string name="auto_zoom_close">Veľké priblíženie</string>
 	<string name="auto_zoom_far">Stredné priblíženie</string>
 	<string name="auto_zoom_farthest">Malé priblíženie</string>
-	<string name="remember_choice">Zapamätať moju voľbu</string>
     <string name="gps_status_eclipsim">Stav GPS</string>
     <string name="tip_map_styles_t">OsmAnd umožňuje zobrazenie vektorových máp v rôznych štýloch podľa vašich potrieb:
 		\n\nOkrem vyváženého štýlu "default" môžete v "Menu" → "Konfigurovať obrazovku" → "Štýl vykresľovania" vybrať napríklad:

@@ -1357,7 +1357,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="animate_routing_route_not_calculated">Bereken asseblief eers die roete</string>
     <string name="animate_routing_route">Simuleer die berekende roete </string>
     <string name="tip_faq">Gereëlde Vrae</string>
-    <string name="remember_choice">Onthou my keuse</string>
+    <string name="shared_string_remember_my_choice">Onthou my keuse</string>
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="shared_string_and">en</string>
     <string name="shared_string_or">of</string>

@@ -1347,7 +1347,7 @@
     <string name="animate_routing_route_not_calculated">Előbb tervezz útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
-    <string name="remember_choice">Emlékezz a választásomra</string>
+    <string name="shared_string_remember_my_choice">Emlékezz a választásomra</string>
     <string name="gps_status_eclipsim">GPS Státusz</string>
     <string name="shared_string_and">és</string>
     <string name="shared_string_or">vagy</string>

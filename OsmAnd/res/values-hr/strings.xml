@@ -952,7 +952,7 @@
     <string name="animate_routing_route_not_calculated">Molimo vas, prvo izračunajte rutu</string>
     <string name="animate_routing_route">Simulacija pomoću izračunate rute </string>
     <string name="animate_routing_gpx">Simulacija pomoću GPX zapisa</string>
-    <string name="remember_choice">Zapamti moj izbor</string>
+    <string name="shared_string_remember_my_choice">Zapamti moj izbor</string>
     <string name="gps_status_eclipsim">Status GPS signala</string>
     <string name="shared_string_and">i</string>
     <string name="shared_string_or">ili</string>

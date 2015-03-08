@@ -1584,7 +1584,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="animate_routing_route_not_calculated">Моля, изчислете първо маршрута</string>
     <string name="animate_routing_route">Симулация по намерения маршрут </string>
     <string name="animate_routing_gpx">Симулация по GPX следа</string>
-    <string name="remember_choice">Запомни моя избор</string>
+    <string name="shared_string_remember_my_choice">Запомни моя избор</string>
     <string name="gps_status_eclipsim">Статус на GPS</string>
     <string name="auto_zoom_none">Без автоматичен зуум</string>
 	<string name="auto_zoom_close">Приближаване</string>

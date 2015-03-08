@@ -366,7 +366,7 @@
     <string name="animate_routing_route_not_calculated">Calcule a ruta primeiro</string>
     <string name="animate_routing_route">"Simular empregando a ruta calculada "</string>
     <string name="animate_routing_gpx">Simular empregando pista GPX</string>
-    <string name="remember_choice">Lembrar a miña escolla</string>
+    <string name="shared_string_remember_my_choice">Lembrar a miña escolla</string>
     <string name="gps_status_eclipsim">Estado do GPS</string>
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">ou</string>

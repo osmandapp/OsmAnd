@@ -1304,7 +1304,7 @@
 	<string name="auto_zoom_farthest">Långt avstånd</string>
 	<string name="shared_string_and">och</string>
     <string name="shared_string_or">eller</string>
-	<string name="remember_choice">Kom ihåg mitt val</string>
+	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
     <string name="animate_routing_route">Simulera med en beräknad rutt </string>

@@ -1553,7 +1553,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="auto_zoom_close">A corto raggio</string>
     <string name="auto_zoom_far">A medio raggio</string>
     <string name="auto_zoom_farthest">A lungo raggio</string>
-	<string name="remember_choice">Ricorda la scelta</string>
     <string name="gps_status_eclipsim">Stato GPS</string>
     <string name="animate_routing_route_not_calculated">Per favore, calcolare il percorso prima</string>
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>

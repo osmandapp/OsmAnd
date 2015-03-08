@@ -1343,7 +1343,7 @@
     <string name="animate_routing_route_not_calculated">Παρακαλώ, υπολογίστε την διαδρομή πρώτα</string>
     <string name="animate_routing_route">Προσομοίωση με χρήση της υπολογισμένης διαδρομής </string>
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
-    <string name="remember_choice">Να θυμάσαι την επιλογή μου</string>
+    <string name="shared_string_remember_my_choice">Να θυμάσαι την επιλογή μου</string>
     <string name="gps_status_eclipsim">Κατάσταση GPS</string>
     <string name="shared_string_and">και</string>
     <string name="shared_string_or">ή</string>

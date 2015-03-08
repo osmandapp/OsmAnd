@@ -1285,7 +1285,7 @@
 	<string name="gps_status_eclipsim">GPSaren egoera</string>
     <string name="shared_string_and">eta</string>
     <string name="shared_string_delete_all">Dena ezabatu</string>
-    <string name="remember_choice">Nire aukera gogoratu</string>
+    <string name="shared_string_remember_my_choice">Nire aukera gogoratu</string>
     <string name="animate_routing_route_not_calculated">Kalkulatu ibilbidea lehenengo, mesedez</string>
     <string name="animate_routing_route">"Simulatu kalkulatutako ibilbidea erabiliz "</string>
     <string name="animate_routing_gpx">Simulatu GPX ibilbidea erabiliz</string>

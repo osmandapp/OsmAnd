@@ -1844,7 +1844,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="animate_routing_route_not_calculated">Будь ласка, спочатку розрахуйте маршрут</string>
     <string name="animate_routing_route">"Симуляція використання розрахованого маршрута "</string>
     <string name="animate_routing_gpx">Симуляуція використання треку GPX</string>
-    <string name="remember_choice">Запам’ятати мій вибір</string>
+    <string name="shared_string_remember_my_choice">Запам’ятати мій вибір</string>
     <string name="gps_status_eclipsim">Стан GPS</string>
     <string name="shared_string_and">і</string>
     <string name="shared_string_or">або</string>

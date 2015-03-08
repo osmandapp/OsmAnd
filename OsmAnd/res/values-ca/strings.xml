@@ -1292,7 +1292,7 @@
     <string name="animate_routing_route_not_calculated">Calcula primer la ruta</string>
     <string name="animate_routing_route">Simulació amb la ruta calculada </string>
     <string name="animate_routing_gpx">Simulació amb la traça GPX</string>
-    <string name="remember_choice">Recorda l\'elecció</string>
+    <string name="shared_string_remember_my_choice">Recorda l\'elecció</string>
     <string name="gps_status_eclipsim">Estat del GPS</string>
     <string name="shared_string_and">i</string>
     <string name="shared_string_or">o</string>

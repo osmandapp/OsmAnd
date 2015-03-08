@@ -1055,7 +1055,7 @@
     <string name="animate_routing_route_not_calculated">Vispirms lūdzu aprēķiniet maršrutu</string>
     <string name="animate_routing_route">Aprēķinātā maršruta simulācija </string>
     <string name="animate_routing_gpx">GPX trases simulācija</string>
-    <string name="remember_choice">Atcerēties manu izvēli</string>
+    <string name="shared_string_remember_my_choice">Atcerēties manu izvēli</string>
     <string name="gps_status_eclipsim">GPS statuss</string>
     <string name="shared_string_and">un</string>
     <string name="shared_string_or">vai</string>

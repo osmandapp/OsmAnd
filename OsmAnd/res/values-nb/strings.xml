@@ -713,7 +713,7 @@
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med den beregnede ruten </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
-    <string name="remember_choice">Husk mitt valg</string>
+    <string name="shared_string_remember_my_choice">Husk mitt valg</string>
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>

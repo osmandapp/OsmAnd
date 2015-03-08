@@ -108,7 +108,7 @@ public class StartGPSStatus extends OsmAndAction {
 		final ListView lv = new ListView(view.getContext());
 		lv.setPadding(7, 3, 7, 0);
 		final CheckBox cb = new CheckBox(view.getContext());
-		cb.setText(R.string.remember_choice);
+		cb.setText(R.string.shared_string_remember_my_choice);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		lp.setMargins(7, 10, 7, 0);
 		cb.setLayoutParams(lp);

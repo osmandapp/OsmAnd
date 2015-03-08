@@ -1482,7 +1482,7 @@
 	<string name="shared_string_and">und</string>
 	<string name="shared_string_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
-	<string name="remember_choice">Auswahl merken</string>
+	<string name="shared_string_remember_my_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
 	<string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
 	<string name="animate_routing_route">Simulation anhand berechneter Route</string>

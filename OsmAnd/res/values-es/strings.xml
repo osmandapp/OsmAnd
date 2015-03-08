@@ -1426,7 +1426,7 @@
 	<string name="map_magnifier">Lupa</string>
     <string name="route_is_too_long">El cálculo de la ruta de OsmAnd sin conexión puede tardar mucho tiempo (o a veces no funcionar) para puntos separados a más de 200km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
 	<string name="auto_zoom_none">Sin acercamiento automático</string>
-	<string name="remember_choice">Recordar mi elección</string>
+	<string name="shared_string_remember_my_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
     <string name="shared_string_and">y</string>
     <string name="shared_string_or">o</string>

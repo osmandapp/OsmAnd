@@ -1513,7 +1513,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="map_magnifier">Povečava zemljevida</string>
 	<string name="auto_zoom_far">Na srednje razdalje</string>
 	<string name="auto_zoom_close">Na kratke razdalje</string>
-	<string name="remember_choice">Zapomni si mojo izbiro</string>
+	<string name="shared_string_remember_my_choice">Zapomni si mojo izbiro</string>
     <string name="gps_status_eclipsim">GPS Status</string>
     <string name="animate_routing_route_not_calculated">Najprej je treba preračunati pot</string>
     <string name="animate_routing_route">Preizkusi s podatki izračunane poti </string>

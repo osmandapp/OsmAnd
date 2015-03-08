@@ -1504,7 +1504,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmodroid_seek">Адсочваць аб\'ект</string>
     <string name="osmodroid_refresh">Абнавіць каналы</string>
     <string name="gps_status_eclipsim">Стан GPS</string>
-    <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
     <string name="select_gpx">Абраць GPX …</string>

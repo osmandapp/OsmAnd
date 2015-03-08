@@ -1524,7 +1524,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_farthest">Widok szeroki</string>
 	<string name="shared_string_and">i</string>
     <string name="shared_string_or">lub</string>
-	<string name="remember_choice">Zapamiętaj mój wybór</string>
+	<string name="shared_string_remember_my_choice">Zapamiętaj mój wybór</string>
     <string name="gps_status_eclipsim">GPS Status</string>
     <string name="animate_routing_route_not_calculated">Najpierw dokonaj przeliczenia trasy</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>

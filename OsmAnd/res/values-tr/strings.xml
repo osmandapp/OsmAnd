@@ -1185,7 +1185,7 @@
     <string name="animate_routing_route_not_calculated">Şimdi rotayı hesaplamak Lütfen</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
-    <string name="remember_choice">Seçmeyi unutmayın</string>
+    <string name="shared_string_remember_my_choice">Seçmeyi unutmayın</string>
     <string name="gps_status_eclipsim">GPS Durumu</string>
     <string name="shared_string_and">ve</string>
     <string name="shared_string_or">veya</string>

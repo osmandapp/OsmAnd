@@ -948,7 +948,6 @@
     <string name="animate_routing_route_not_calculated">먼저 경로를 계산하세요</string>
     <string name="animate_routing_route">"탐색한 경로를 이용하여 모의주행 "</string>
     <string name="animate_routing_gpx">GPX경로를 이용하여 모의주행하기</string>
-    <string name="remember_choice">내 선택을 기억하기</string>
     <string name="gps_status_eclipsim">GPS status</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
 	<string name="map_magnifier">지도 확대경</string>
