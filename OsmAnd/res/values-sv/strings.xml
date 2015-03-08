@@ -730,7 +730,7 @@
 	<string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rutt</string>
-	<string name="layer_favorites">Favoriter</string>
+	<string name="shared_string_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
 	<string name="layer_poi">Intressepunkt …</string>

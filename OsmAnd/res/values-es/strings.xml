@@ -451,7 +451,7 @@
   <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
   <string name="layer_yandex_traffic">Tráfico Yandex</string>
   <string name="layer_route">Ruta</string>
-  <string name="layer_favorites">Favoritos</string>
+  <string name="shared_string_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Fallos OSM</string>
   <string name="layer_transport">Paradas de transporte</string>
   <string name="layer_poi">PDI…</string>

@@ -350,7 +350,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="none_region_found">Không có dữ liệu Offline cho khu vực này trong thẻ nhớ. Hãy tải về từ Internet.</string>
 	<string name="poi_namefinder_query_empty">Nhập thông tin cần tìm</string>
 	<string name="any_poi">Bất kỳ</string>
-	<string name="layer_favorites">Ưa thích</string>
+	<string name="shared_string_favorites">Ưa thích</string>
 	<string name="layer_transport">Điểm dừng giao thông</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Nguồn bản đồ…</string>

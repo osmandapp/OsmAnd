@@ -441,7 +441,6 @@
   <string name="thanks_yandex_traffic">Grazie a Yandex per le informazioni sul traffico.</string>
   <string name="layer_yandex_traffic">Yandex (traffico)</string>
   <string name="layer_route">Percorso</string>
-  <string name="layer_favorites">Preferiti</string>
   <string name="layer_osm_bugs">Errori OSM</string>
   <string name="layer_transport">Fermate trasporto pubblico</string>
   <string name="layer_poi">PDI…</string>

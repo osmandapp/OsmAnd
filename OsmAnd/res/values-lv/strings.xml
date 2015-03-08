@@ -514,7 +514,7 @@
   <string name="thanks_yandex_traffic">Paldies Yandex par satiksmes informāciju.</string>
   <string name="layer_yandex_traffic">Yandex satiksme</string>
   <string name="layer_route">Maršruts</string>
-  <string name="layer_favorites">Izlase</string>
+  <string name="shared_string_favorites">Izlase</string>
   <string name="layer_osm_bugs">OSM kļūdas</string>
   <string name="layer_transport">Transporta pieturas</string>
   <string name="layer_poi">POI…</string>

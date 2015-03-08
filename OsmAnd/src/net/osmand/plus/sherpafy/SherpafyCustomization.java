@@ -475,7 +475,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareLayerContextMenu(MapActivity activity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label/*, R.string.layer_favorites*/);
+		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label/*, R.string.shared_string_favorites*/);
 	}
 	
 	@Override

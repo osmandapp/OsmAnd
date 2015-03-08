@@ -579,7 +579,7 @@
   <string name="thanks_yandex_traffic">Дорожня інформація надається завдяки Яндексу.</string>
   <string name="layer_yandex_traffic">Яндекс Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_favorites">Закладки</string>
+  <string name="shared_string_favorites">Закладки</string>
   <string name="layer_osm_bugs">OSM помилки</string>
   <string name="layer_transport">Зупинки транспорту</string>
   <string name="layer_poi">POI…</string>

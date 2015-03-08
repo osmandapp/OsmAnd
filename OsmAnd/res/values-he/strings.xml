@@ -771,7 +771,7 @@
 	<string name="thanks_yandex_traffic">תודות ל־Yandex על דיווחי התנועה.</string>
 	<string name="layer_yandex_traffic">תנועה מ־Yandex</string>
 	<string name="layer_route">מסלול</string>
-	<string name="layer_favorites">מועדפים</string>
+	<string name="shared_string_favorites">מועדפים</string>
 	<string name="layer_osm_bugs">תקלות ב־OSM</string>
 	<string name="layer_transport">תחנות תחבורה</string>
 	

@@ -631,7 +631,6 @@
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
   <string name="layer_yandex_traffic">Doprava Yandex</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_favorites">Obľúbené miesta</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Dopravné zastávky</string>
   <string name="layer_poi">Body záujmu (POI)…</string>

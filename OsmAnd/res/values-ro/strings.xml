@@ -797,7 +797,7 @@
 	<string name="thanks_yandex_traffic">Mulțumim Yandex pentru info trafic.</string>
 	<string name="layer_yandex_traffic">Trafic info Yandex</string>
 	<string name="layer_route">Rută</string>
-	<string name="layer_favorites">Favorite</string>
+	<string name="shared_string_favorites">Favorite</string>
 	<string name="layer_osm_bugs">Bug hartă OSM</string>
 	<string name="layer_transport">Stații transport</string>
 	<string name="layer_poi">POI…</string>

@@ -871,7 +871,7 @@
   <string name="thanks_yandex_traffic">Eskerrak Yandexi trafikoari buruzko informazioagatik.</string>
   <string name="layer_yandex_traffic">Yandex trafikoa</string>
   <string name="layer_route">Ibilbidea</string>
-  <string name="layer_favorites">Gogokoenak</string>
+  <string name="shared_string_favorites">Gogokoenak</string>
   <string name="layer_osm_bugs">OSM akatsak (sarean)</string>
   <string name="layer_transport">Garraioaren geldialdiak</string>
   <string name="layer_poi">POI…</string>

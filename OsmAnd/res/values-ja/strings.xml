@@ -310,7 +310,7 @@ MB)をダウンロードしますか?</string>
      <string name="thanks_yandex_traffic">Yandexの交通情報に感謝します。</string>
      <string name="layer_yandex_traffic">Yandex交通情報</string>
      <string name="layer_route">ルート</string>
-     <string name="layer_favorites">お気に入り</string>
+     <string name="shared_string_favorites">お気に入り</string>
      <string name="layer_osm_bugs">OSM bugs</string>
      <string name="layer_transport">交通機関乗り場</string>
      <string name="layer_poi">POI…</string>

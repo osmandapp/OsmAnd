@@ -363,7 +363,7 @@
   <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
   <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
   <string name="layer_route">Trasa</string>
-  <string name="layer_favorites">Ulubione</string>
+  <string name="shared_string_favorites">Ulubione</string>
   <string name="layer_osm_bugs">Błędy OSM (online)</string>
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>

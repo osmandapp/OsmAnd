@@ -655,7 +655,7 @@
   <string name="thanks_yandex_traffic">Ačiū Yandex už kelių informaciją.</string>
   <string name="layer_yandex_traffic">Yandex kelių informacija</string>
   <string name="layer_route">Maršrutas</string>
-  <string name="layer_favorites">Įsimintos vietos</string>
+  <string name="shared_string_favorites">Įsimintos vietos</string>
   <string name="layer_osm_bugs">OSM klaidos</string>
   <string name="layer_transport">Transporto stotelės</string>
   <string name="layer_poi">LV…</string>

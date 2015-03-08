@@ -554,7 +554,6 @@
 	<string name="thanks_yandex_traffic">교통 정보를 위해 Yandex 를 이용합니다.</string>
 	<string name="layer_yandex_traffic">Yandex 트래픽</string>
 	<string name="layer_route">경로</string>
-	<string name="layer_favorites">즐겨찾기</string>
 	<string name="layer_osm_bugs">OSM 버그들(온라인)</string>
 	<string name="layer_transport">대중교통 정류소</string>
 	<string name="layer_poi">POI…</string>

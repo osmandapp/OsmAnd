@@ -580,7 +580,7 @@
   <string name="thanks_yandex_traffic">Dankie aan Yandex vir verkeersinligting.</string>
   <string name="layer_yandex_traffic">Yandex verkeer</string>
   <string name="layer_route">Roete</string>
-  <string name="layer_favorites">Gunstelinge</string>
+  <string name="shared_string_favorites">Gunstelinge</string>
   <string name="layer_osm_bugs">OSM foute</string>
   <string name="layer_transport">Vervoer stilhouplekke</string>
   <string name="layer_poi">Interessante plek…</string>

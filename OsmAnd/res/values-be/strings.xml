@@ -1128,7 +1128,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
-	<string name="layer_favorites">Упадабаныя</string>
 	<string name="layer_osm_bugs">OSM памылкі (онлайн)</string>
 	<string name="layer_transport">Прыпынкі транспарту</string>
 	<string name="layer_poi">POI…</string>

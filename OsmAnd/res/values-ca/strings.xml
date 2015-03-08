@@ -601,7 +601,7 @@
 <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta SD. Cal que us baixeu les regions des d\'Internet.</string>
 <string name="layer_yandex_traffic">Tràfic Yandex</string>
 <string name="layer_route">Ruta</string>
-<string name="layer_favorites">Preferits</string>
+<string name="shared_string_favorites">Preferits</string>
 <string name="menu_layers">Defineix la visualització</string>
 
 <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa</string>

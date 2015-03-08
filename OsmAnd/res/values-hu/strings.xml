@@ -514,7 +514,7 @@
   <string name="thanks_yandex_traffic">Köszönet a Yandexnek a forgalmi információkért.</string>
   <string name="layer_yandex_traffic">Yandex forgalmi információ</string>
   <string name="layer_route">Útvonal</string>
-  <string name="layer_favorites">Kedvencek</string>
+  <string name="shared_string_favorites">Kedvencek</string>
   <string name="layer_osm_bugs">OSM hibák</string>
   <string name="layer_transport">Közlekedési megállók</string>
   <string name="layer_poi">POI…</string>

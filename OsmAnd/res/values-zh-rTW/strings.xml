@@ -697,7 +697,7 @@
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
-	<string name="layer_favorites">我的最愛</string>
+	<string name="shared_string_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
 	<string name="layer_transport">公車站牌</string>
 	<string name="layer_poi">興趣點…</string>

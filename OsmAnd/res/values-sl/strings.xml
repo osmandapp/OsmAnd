@@ -910,7 +910,7 @@
 	<string name="layer_yandex_traffic">Yandex promet</string>
 	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
 	<string name="layer_route">Pot</string>
-	<string name="layer_favorites">Priljubljeni</string>
+	<string name="shared_string_favorites">Priljubljeni</string>
 	<string name="layer_osm_bugs">OSM hrošči</string>
 	<string name="layer_transport">Postaje prevoza</string>
 	<string name="layer_poi">POI …</string>

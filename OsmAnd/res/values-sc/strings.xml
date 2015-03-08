@@ -1355,7 +1355,7 @@
 	<string name="thanks_yandex_traffic">Gràtzias a Yandex pro sas informatziones pro su tràficu.</string>
 	<string name="layer_yandex_traffic">Yandex (tràficu)</string>
 	<string name="layer_route">Àndala</string>
-	<string name="layer_favorites">Prefèrridos</string>
+	<string name="shared_string_favorites">Prefèrridos</string>
 	<string name="layer_osm_bugs">Errores OSM</string>
 	<string name="layer_transport">Firmadas trasportu pùblicu</string>
 	<string name="layer_map">Mitza mapa…</string>

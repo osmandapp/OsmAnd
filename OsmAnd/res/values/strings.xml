@@ -1843,7 +1843,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
-	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
 	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI…</string>

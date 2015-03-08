@@ -1019,7 +1019,7 @@
 	<string name="thanks_yandex_traffic">با تشکر از Yandex برای فراهم آوردن اطلاعات ترافیک.</string>
 	<string name="layer_yandex_traffic">ترافیک Yandex</string>
 	<string name="layer_route">مسیر</string>
-	<string name="layer_favorites">نقاط مورد علاقه</string>
+	<string name="shared_string_favorites">نقاط مورد علاقه</string>
 	<string name="layer_osm_bugs">اشکالات OSM (آنلاین)</string>
 	<string name="shared_strings_deselect_all">انتخاب هیچیک</string>
 	<string name="shared_string_refresh">بازسازی</string>

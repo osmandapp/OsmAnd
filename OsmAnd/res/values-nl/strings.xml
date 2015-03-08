@@ -535,7 +535,6 @@
   <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
   <string name="layer_yandex_traffic">Yandex Traffic</string>
   <string name="layer_route">Route</string>
-  <string name="layer_favorites">Favorieten</string>
   <string name="layer_osm_bugs">OSM bugs</string>
   <string name="layer_transport">OV-haltes</string>
   <string name="layer_poi">Interessepunt…</string>

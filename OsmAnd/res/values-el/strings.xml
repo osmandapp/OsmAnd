@@ -753,7 +753,7 @@
 	<string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
 	<string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
 	<string name="layer_route">Διαδρομή</string>
-	<string name="layer_favorites">Αγαπημένα</string>
+	<string name="shared_string_favorites">Αγαπημένα</string>
 	<string name="layer_osm_bugs">Σφάλματα OSM</string>
 	<string name="layer_transport">Στάσεις ΜΜΜ</string>
 	<string name="layer_poi">Σημ Ενδ…</string>

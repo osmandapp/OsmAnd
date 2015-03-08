@@ -560,7 +560,6 @@
   <string name="thanks_yandex_traffic">Спасибо Яндексу за предоставление информации о пробках. Установите Яндекс как домашнюю страницу.</string>
   <string name="layer_yandex_traffic">Яндекс.Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_favorites">Избранные</string>
   <string name="layer_osm_bugs">OSM Bugs (онлайн)</string>
   <string name="layer_transport">Остановки транспорта</string>
   <string name="layer_poi">POI…</string>

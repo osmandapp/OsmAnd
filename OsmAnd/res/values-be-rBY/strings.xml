@@ -1507,7 +1507,7 @@
 	<string name="thanks_yandex_traffic">Dziakuj Jandeksu za darožnuju іnfarmacyju.</string>
 	<string name="layer_yandex_traffic">Jandeks zatory</string>
 	<string name="layer_route">Maršrut</string>
-	<string name="layer_favorites">Upadabanyja</string>
+	<string name="shared_string_favorites">Upadabanyja</string>
 	<string name="layer_osm_bugs">OSM pamylkі (onlajn)</string>
 	<string name="layer_transport">Prypynkі transpartu</string>
 	<string name="layer_poi">Cіkavostkі…</string>

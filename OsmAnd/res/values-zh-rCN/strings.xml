@@ -304,7 +304,7 @@
 	<string name="thanks_yandex_traffic">由于Yandex的交通信息。</string>
 	<string name="layer_yandex_traffic">Yandex的流量</string>
 	<string name="layer_route">路线</string>
-	<string name="layer_favorites">我的最爱</string>
+	<string name="shared_string_favorites">我的最爱</string>
 	<string name="layer_osm_bugs">OSM错误</string>
 	<string name="network_provider">网络</string>
 	<string name="int_seconds">秒</string>

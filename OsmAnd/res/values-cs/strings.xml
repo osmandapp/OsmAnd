@@ -519,7 +519,7 @@
   <string name="thanks_yandex_traffic">Děkujeme Yandexu za dopravní informace.</string>
   <string name="layer_yandex_traffic">Yandex doprava</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_favorites">Oblíbené</string>
+  <string name="shared_string_favorites">Oblíbené</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Zastávky</string>
   <string name="layer_poi">POI…</string>

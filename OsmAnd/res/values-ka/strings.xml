@@ -512,7 +512,7 @@
   <string name="thanks_yandex_traffic">მადლობა Yandex-ს ტრაფიკის ინფორმაციისათვის.</string>
   <string name="layer_yandex_traffic">Yandex ტრაფიკი</string>
   <string name="layer_route">გზა</string>
-  <string name="layer_favorites">რჩეულები</string>
+  <string name="shared_string_favorites">რჩეულები</string>
   <string name="layer_osm_bugs">OSM-ის ხოჭოები</string>
   <string name="layer_transport">ტრანსპორტის გაჩერება</string>
   <string name="layer_poi">POI…</string>

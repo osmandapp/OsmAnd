@@ -445,7 +445,7 @@
 	<string name="send_report">Send rapport</string>
 	<string name="none_region_found">Ingen offline-data for regioner funnet på SD-kortet. Last ned regioner fra internett.</string>
 	<string name="layer_route">Rute</string>
-	<string name="layer_favorites">Favoritter</string>
+	<string name="shared_string_favorites">Favoritter</string>
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_poi">Interessepunkt…</string>
 	<string name="layer_map">Kartkilde…</string>

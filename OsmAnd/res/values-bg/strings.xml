@@ -1230,7 +1230,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="thanks_yandex_traffic">Информацията за трафика е любезно предоставена от Яндекс.</string>
 	<string name="layer_yandex_traffic">Яндекс трафик</string>
 	<string name="layer_route">Маршрут</string>
-	<string name="layer_favorites">Любими места</string>
+	<string name="shared_string_favorites">Любими места</string>
 	<string name="layer_osm_bugs">OSM неточности (bugs)</string>
 	<string name="layer_transport">Спирки на общ. транспорт</string>
 	<string name="layer_poi">POI…</string>

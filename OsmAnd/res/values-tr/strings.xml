@@ -411,7 +411,7 @@
 	<string name="any_poi">Herhangi</string>
 	<string name="layer_yandex_traffic">Yandex Trafik</string>
 	<string name="layer_route">Rota</string>
-	<string name="layer_favorites">Favoriler</string>
+	<string name="shared_string_favorites">Favoriler</string>
 	<string name="layer_map">Harita kaynağı…</string>
 	<string name="context_menu_item_search_poi">POI Ara</string>
 	<string name="where_am_i">Neredeyim?</string>

@@ -906,7 +906,6 @@
 	<string name="thanks_yandex_traffic">Tak til Yandex for trafikinformation.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rute</string>
-	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_osm_bugs">OSM-fejlbeskrivelse (online)</string>
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_map">Vælg kortkilde…</string>

@@ -872,7 +872,7 @@
 	<string name="thanks_yandex_traffic">Danke an Yandex für die Überlassung von Verkehrsinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
-	<string name="layer_favorites">Favoriten</string>
+	<string name="shared_string_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>

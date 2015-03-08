@@ -461,7 +461,7 @@
 	
 	<string name="layer_transport_route">Putovi javnoga prijevoza</string>
 	<string name="layer_route">Ruta</string>
-	<string name="layer_favorites">Favoriti</string>
+	<string name="shared_string_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">OSM bugovi</string>
 	<string name="shared_string_import">Uvezi</string>
 	<string name="export_fav">Izvezi</string>
