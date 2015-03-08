@@ -1984,7 +1984,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
 	<string name="data_settings_descr">Specify language, download/reload data</string>
 	<string name="data_settings">Data</string>
-	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
 	<string name="additional_settings">Additional settings</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
@@ -2011,7 +2010,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_source">Map source</string>
 	<string name="use_internet">Use Internet</string>
 	<string name="show_location">Show location</string>
-	<string name="map_preferences">Map</string>
 	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
 	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
 	<string name="app_description">Navigation application</string>
