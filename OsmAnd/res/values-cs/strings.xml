@@ -1835,7 +1835,7 @@ s často kladenými otázkami.</string>
 	<string name="parking_place">Parkovací místo</string>
     <string name="remove_the_tag">ODSTRANIT TAG</string>
     <string name="shared_string_disabled">Zapnout</string>
-	<string name="disable_plugin">Vypnout</string>
+	<string name="shared_string_enabled">Vypnout</string>
 	<string name="plugin_description_title">Popisek</string>
 	<string name="plugin_settings_button_caption">Nastavení</string>
 <string name="edit_group">Upravit skupinu</string>

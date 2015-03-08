@@ -2057,7 +2057,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio</string>
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
-	<string name="disable_plugin">Attivato</string>
 <string name="plugin_description_title">Descrizione</string>
 	<string name="plugin_settings_button_caption">Impostazioni</string>
 <string name="edit_group">Modifica il gruppo</string>

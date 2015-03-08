@@ -1917,7 +1917,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="parking_place">Place de stationnement</string>
     <string name="remove_the_tag">Retirer l\'étiquette</string>
     <string name="shared_string_disabled">Désactivé</string>
-	<string name="disable_plugin">Activé</string>
+	<string name="shared_string_enabled">Activé</string>
 <string name="plugin_description_title">Description</string>
 	<string name="plugin_settings_button_caption">Paramètres</string>
 <string name="edit_group">Modifier le groupe</string>

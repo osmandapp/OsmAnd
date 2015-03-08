@@ -1837,7 +1837,7 @@
     <string name="parking_place">Parchègiu</string>
     <string name="remove_the_tag">BOGA SU TAG</string>
     <string name="shared_string_disabled">Disabilitadu</string>
-	<string name="disable_plugin">Abilitadu</string>
+	<string name="shared_string_enabled">Abilitadu</string>
 <string name="plugin_description_title">Descritzione</string>
 	<string name="plugin_settings_button_caption">Impostaduras</string>
 <string name="edit_group">Modìfica su grupu</string>

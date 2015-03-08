@@ -2052,7 +2052,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="voices">Голосові повідомлення</string>
 	<string name="export">Експорт</string>
 	<string name="shared_string_disabled">Вимкнено</string>
-	<string name="disable_plugin">Увікненно</string>
+	<string name="shared_string_enabled">Увікненно</string>
 	<string name="shared_string_enable">Ввімкнути</string>
 	<string name="shared_string_disable">Вимкнути</string>
 	<string name="plugin_description_title">Опис</string>
