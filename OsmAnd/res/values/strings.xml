@@ -1675,7 +1675,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- UI update and large bug fixing
 	</string>
 	<string name="voice_not_use">Do not use</string>
-	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data…</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no Internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
@@ -1843,7 +1842,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_search_transport">Search public transport</string>
 	<string name="transport_searching_transport">Transport results (no destination):</string>
 	<string name="transport_searching_route">Transport results ({0} to destination):</string>
-	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Reset transport search</string>
 	<string name="map_index">Map</string>
 	<string name="voice">Recorded voice</string>
