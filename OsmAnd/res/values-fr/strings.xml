@@ -1488,7 +1488,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
     <string name="route_descr_select_on_map">Sélectionner sur la carte…</string>
-    <string name="route_descr_favorite">Favori…</string>
+    <string name="shared_string_favorite">Favori…</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>

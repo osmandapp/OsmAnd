@@ -1650,7 +1650,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="select_gpx">انتخاب فایل جی پی ایکس …</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="route_descr_select_on_map">انتخاب روی نقشه …</string>
-    <string name="route_descr_favorite">علاقه مندی ها …</string>
+    <string name="shared_string_favorite">علاقه مندی ها …</string>
     <string name="route_preferences">تنظیمات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا می‌خواهید از مسیر نمایش داده شده برای مسیریابی استفاده کنید؟</string>

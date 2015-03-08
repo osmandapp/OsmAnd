@@ -1632,7 +1632,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="select_gpx">Изберете GPX…</string>
     <string name="route_descr_select_destination">Изберете крайна цел</string>
     <string name="route_descr_select_on_map">Изберете на картата…</string>
-    <string name="route_descr_favorite">Любими…</string>
+    <string name="shared_string_favorite">Любими…</string>
     <string name="route_preferences">Предпочитания за маршрут</string>
     <string name="route_info">Информация за маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитане на магистрали</string>

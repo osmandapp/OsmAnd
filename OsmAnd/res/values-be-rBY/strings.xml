@@ -393,7 +393,7 @@
     <string name="select_gpx">Vybrać GPX…</string>
     <string name="route_descr_select_destination">Vybrać miesca pryznačeńnia</string>
     <string name="route_descr_select_on_map">Vybrać na mapie…</string>
-    <string name="route_descr_favorite">Upadabanyja.…</string>
+    <string name="shared_string_favorite">Upadabanyja.…</string>
     <string name="route_preferences">Nastrojkі maršruta</string>
     <string name="route_info">Іnfarmacyja pra maršrut</string>
     <string name="routing_attr_prefer_motorway_name">Addavać pieravahu aŭtamahіstraliam</string>

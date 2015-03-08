@@ -140,7 +140,7 @@
     <string name="select_gpx">Vel GPX-fil …</string>
     <string name="route_descr_select_destination">Vel mål</string>
     <string name="route_descr_select_on_map">Vel på kartet …</string>
-    <string name="route_descr_favorite">Favoritt …</string>
+    <string name="shared_string_favorite">Favoritt …</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="routing_attr_short_way_name">Kortaste veg</string>
 	<string name="routing_attr_short_way_description">Bruk kortaste veg</string>

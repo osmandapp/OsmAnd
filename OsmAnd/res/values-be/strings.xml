@@ -1551,7 +1551,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="index_item_world_bitcoin_payments">Bitcoin плацяжы ўсяго сьвету</string>
 	<string name="keep_and_add_destination_point">Дадаць пунктам прызначэньня</string>
     <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
-    <string name="route_descr_favorite">Упадабаныя…</string>
     <string name="route_preferences">Настройкі маршрута</string>
     <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
     <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>

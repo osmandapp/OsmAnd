@@ -1322,7 +1322,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="select_gpx">Kies GPX …</string>
     <string name="route_descr_select_destination">Kies bestemming</string>
     <string name="route_descr_select_on_map">Kies op kaart …</string>
-    <string name="route_descr_favorite">Gunsteling …</string>
+    <string name="shared_string_favorite">Gunsteling …</string>
     <string name="route_preferences">Roete voorkeure</string>
     <string name="route_info">Roete inligting</string>
     <string name="routing_attr_prefer_motorway_name">Verkies snelweg</string>

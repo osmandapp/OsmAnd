@@ -1321,7 +1321,7 @@
     <string name="use_displayed_track_for_navigation">Doriți să utilizați traseul afișat pentru navigare?</string>
     <string name="keep_and_add_destination_point">Adaugă ca și punct destinație</string>
     <string name="route_descr_select_on_map">Selectează pe hartă…</string>
-    <string name="route_descr_favorite">Favorite…</string>
+    <string name="shared_string_favorite">Favorite…</string>
     <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
 	<string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
 	<string name="routing_attr_short_way_name">Drum scurt</string>

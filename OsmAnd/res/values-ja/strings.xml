@@ -1710,7 +1710,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
     <string name="route_descr_select_on_map">地図から選択…</string>
-    <string name="route_descr_favorite">お気に入り…</string>
+    <string name="shared_string_favorite">お気に入り…</string>
     <string name="route_preferences">ルート設定</string>
     <string name="route_info">ルート情報</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>

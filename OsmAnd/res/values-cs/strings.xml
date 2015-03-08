@@ -1364,7 +1364,7 @@ s často kladenými otázkami.</string>
     <string name="use_displayed_track_for_navigation">Chcete použít zobrazenou trasu pro navigaci?</string>
     <string name="route_descr_select_destination">Vybrat cíl</string>
     <string name="route_descr_select_on_map">Vybrat na mapě…</string>
-    <string name="route_descr_favorite">Oblíbené…</string>
+    <string name="shared_string_favorite">Oblíbené…</string>
     <string name="route_preferences">Předvolby trasy</string>
     <string name="route_info">Informace o trase</string>
     <string name="routing_attr_prefer_motorway_name">Upřednostňovat dálnice</string>

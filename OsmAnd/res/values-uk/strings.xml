@@ -1786,7 +1786,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="select_gpx">Обрати GPX…</string>
     <string name="route_descr_select_destination">Обрати місце призначення</string>
     <string name="route_descr_select_on_map">Вибрати на мапі…</string>
-    <string name="route_descr_favorite">Закладки…</string>
+    <string name="shared_string_favorite">Закладки…</string>
     <string name="route_preferences">Уподобання маршруту</string>
     <string name="route_info">Інформація про маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Надавати перевагу автомагістралям</string>

@@ -1486,7 +1486,7 @@
     <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
     <string name="route_descr_select_on_map">Seleccionar en el mapa…</string>
-    <string name="route_descr_favorite">Favorito…</string>
+    <string name="shared_string_favorite">Favorito…</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="tip_recent_changes_1_7_1_t">"Cambios en 1.7:

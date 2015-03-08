@@ -309,7 +309,7 @@
     <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
     <string name="route_descr_select_on_map">Seleccionar no mapa…</string>
-    <string name="route_descr_favorite">Favorito…</string>
+    <string name="shared_string_favorite">Favorito…</string>
     <string name="route_preferences">Preferencias da ruta</string>
     <string name="route_info">Información sobre a ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir as autoestradas</string>

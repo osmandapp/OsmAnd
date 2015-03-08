@@ -1179,7 +1179,7 @@
     <string name="select_gpx">Aukeratu GPX …</string>
     <string name="route_descr_select_destination">Aukeratu Helmuga</string>
     <string name="route_descr_select_on_map">Aukeratu mapan …</string>
-    <string name="route_descr_favorite">Gogokoena …</string>
+    <string name="shared_string_favorite">Gogokoena …</string>
     <string name="route_preferences">Ibilbide lehentasunak</string>
     <string name="route_info">Ibilbide informazioa</string>
     <string name="routing_attr_prefer_motorway_name">Autopistak nahiago</string>

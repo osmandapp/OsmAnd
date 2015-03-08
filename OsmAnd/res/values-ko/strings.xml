@@ -937,7 +937,6 @@
     <string name="select_gpx">GPX 선택…</string>
     <string name="route_descr_select_destination">도착지 선택</string>
     <string name="route_descr_select_on_map">지도에서 선택…</string>
-    <string name="route_descr_favorite">즐겨찾기…</string>
     <string name="route_info">경로 정보</string>
     <string name="routing_attr_prefer_motorway_name">전용도로 선호</string>
 	<string name="routing_attr_prefer_motorway_description">전용도로 선호</string>

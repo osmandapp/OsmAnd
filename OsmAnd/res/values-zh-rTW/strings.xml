@@ -1467,7 +1467,7 @@
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
     <string name="route_descr_select_on_map">在地圖上選取 …</string>
-    <string name="route_descr_favorite">我的最愛 …</string>
+    <string name="shared_string_favorite">我的最愛 …</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>

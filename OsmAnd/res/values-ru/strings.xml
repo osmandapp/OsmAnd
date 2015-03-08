@@ -1444,7 +1444,7 @@
 	<string name="select_gpx">Выберите GPX…</string>
     <string name="route_descr_select_destination">Выберите пункт назначения</string>
     <string name="route_descr_select_on_map">Выберите на карте…</string>
-    <string name="route_descr_favorite">Избранные…</string>
+    <string name="shared_string_favorite">Избранные…</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Маршрутная информация</string>
     <string name="keep_and_add_destination_point">Добавить как пункт назначения</string>

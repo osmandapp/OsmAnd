@@ -127,7 +127,7 @@
     <string name="select_gpx">Ընտրել GPX …</string>
     <string name="route_descr_select_destination">Ընտրել Նպատակակետը</string>
     <string name="route_descr_select_on_map">Ընտրել քարտեզի վրա …</string>
-    <string name="route_descr_favorite">Նախընտրելի …</string>
+    <string name="shared_string_favorite">Նախընտրելի …</string>
     <string name="routing_attr_short_way_name">Կարճ ճանապարհ</string>
 	<string name="routing_attr_short_way_description">Օգտագործել կարճ ճանապարհը</string>
 	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհները</string>

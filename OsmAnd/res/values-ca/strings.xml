@@ -1405,7 +1405,7 @@
     <string name="select_gpx">Selecciona una traça GPX…</string>
     <string name="route_descr_select_destination">Selecciona un destí</string>
     <string name="route_descr_select_on_map">Selecciona al mapa…</string>
-    <string name="route_descr_favorite">Preferida…</string>
+    <string name="shared_string_favorite">Preferida…</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="tip_recent_changes_1_3_t">Canvis a la 1.3:

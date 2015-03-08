@@ -1375,7 +1375,7 @@
     <string name="select_gpx">GPX kiválasztása…</string>
     <string name="route_descr_select_destination">Válassz célpontot!</string>
     <string name="route_descr_select_on_map">Kiválasztás a térképen…</string>
-    <string name="route_descr_favorite">Kedvenc…</string>
+    <string name="shared_string_favorite">Kedvenc…</string>
     <string name="route_preferences">Útvonal beállítások</string>
     <string name="route_info">Útvonal információ</string>
     <string name="routing_attr_prefer_motorway_name">Autópályák preferálása</string>

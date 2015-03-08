@@ -1357,7 +1357,7 @@
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
     <string name="route_descr_select_on_map">Välj på karta …</string>
-    <string name="route_descr_favorite">Favorit …</string>
+    <string name="shared_string_favorite">Favorit …</string>
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
     <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>

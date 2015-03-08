@@ -61,7 +61,7 @@
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
     <string name="route_descr_select_on_map">Ischerta in sa mapa…</string>
-    <string name="route_descr_favorite">Prefèrridu…</string>
+    <string name="shared_string_favorite">Prefèrridu…</string>
     <string name="route_preferences">Preferèntzias pro s’àndala</string>
     <string name="route_info">Informatziones pro s’àndala</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
