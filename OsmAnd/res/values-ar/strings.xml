@@ -1301,7 +1301,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 → → \ ن \ غر مقدمة أساسية، ترتبط بعض النصائح والحيل عبر استخدام \'القائمة \' → \'نصائح \' من شاشة الخريطة. ↵
 →
 	</string>
-	<string name="next_button">التالي</string>
+	<string name="shared_string_next">التالي</string>
 	<string name="shared_string_previous">السابق</string>
 	<string name="unit_of_length_descr">تغيير وحدات الطول والسرعة</string>
 	<string name="unit_of_length">وحدة القياس</string>

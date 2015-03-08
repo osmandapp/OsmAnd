@@ -196,7 +196,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
 \n\tĐMột số thủ thuật và mẹo sử dụng được liên kết với màn hình menu chính.</string>
-	<string name="next_button">Tiếp</string>
+	<string name="shared_string_next">Tiếp</string>
 	<string name="shared_string_previous">Quay lại</string>
 
 	<string name="unit_of_length_descr">Đổi đơn vị độ dài và tốc độ</string>

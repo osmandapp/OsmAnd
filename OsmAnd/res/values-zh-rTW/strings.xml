@@ -552,7 +552,7 @@
 	<string name="tip_initial">幫助</string>
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
 \n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
-	<string name="next_button">下一頁</string>
+	<string name="shared_string_next">下一頁</string>
 	<string name="shared_string_previous">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
 	<string name="unit_of_length">量測單位</string>

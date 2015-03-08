@@ -823,7 +823,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="tip_initial_t">OsmAnd é uma aplicação de navegação com muitos recursos.
  \n\n  Nas uma introdução básica , algumas dicas de uso e truques estão ligados via \'Menu \' → \' Dicas \' a partir da tela do mapa.
 	</string>
-  <string name="next_button">Próximo</string>
+  <string name="shared_string_next">Próximo</string>
   <string name="shared_string_previous">Anterior</string>
   <string name="unit_of_length_descr">Alterar unidades de medida de distância e velocidade</string>
   <string name="unit_of_length">Unidade de medida</string>

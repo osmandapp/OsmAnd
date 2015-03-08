@@ -364,7 +364,7 @@
 ……	……	……\n\nVairāki noderīgi padomi ir pievienoti galvenā ekrāna izvēlnē \'Padomi\'
 ……	……
 	</string>
-  <string name="next_button">Tālāk</string>
+  <string name="shared_string_next">Tālāk</string>
   <string name="shared_string_previous">Atpakaļ</string>
   <string name="unit_of_length_descr">Attāluma un braukšanas ātruma mērvienības</string>
   <string name="unit_of_length">Mērvienības</string>

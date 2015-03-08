@@ -1744,7 +1744,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 		\n\nA marker box can be hidden again by long-clicking on it.
 	</string>
-	<string name="next_button">Next</string>
 	<string name="unit_of_length_descr">Change units of length and speed</string>
 	<string name="unit_of_length">Unit of measure</string>
 	<string name="si_mi_foots">Miles/feet</string>

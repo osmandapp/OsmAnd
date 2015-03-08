@@ -652,7 +652,7 @@
 	<string name="tip_initial">Ajutor</string>
 	<string name="tip_initial_t">"OsmAnd este o aplicație pentru navigare cu multe funcții.
 \n\nPentru început, găsiți câteva recomandări și instrucțiuni în pagina principala (vedeți icoana \'?\'). "</string>
-	<string name="next_button">Următorul</string>
+	<string name="shared_string_next">Următorul</string>
 	<string name="shared_string_previous">Precedentul</string>
 	<string name="unit_of_length_descr">Schimbă unitățile de măsură ale distanței și vitezei</string>
 	<string name="unit_of_length">Unități de măsură</string>

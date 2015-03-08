@@ -722,7 +722,7 @@
 		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Antippen des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
-	<string name="next_button">Weiter</string>
+	<string name="shared_string_next">Weiter</string>
 	<string name="shared_string_previous">Zurück</string>
 	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>

@@ -364,7 +364,7 @@
   <string name="tip_initial">Súgó</string>
   <string name="tip_initial_t">"Az OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
 \n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Súgó\' gombjára kattintva. "</string>
-  <string name="next_button">Következő</string>
+  <string name="shared_string_next">Következő</string>
   <string name="shared_string_previous">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
   <string name="unit_of_length">Hosszmértékegység</string>

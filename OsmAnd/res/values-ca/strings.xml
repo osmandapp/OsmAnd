@@ -338,7 +338,7 @@
 <string name="system_locale">Sistema</string>
 <string name="tip_navigation">Navegació</string>
 <string name="tip_initial">Ajuda</string>
-<string name="next_button">Endavant</string>
+<string name="shared_string_next">Endavant</string>
 <string name="shared_string_previous">Enrere</string>
 <string name="unit_of_length_descr">Canvieu les unitats de longitud i velocitat</string>
 <string name="unit_of_length">Unitat de mesura</string>

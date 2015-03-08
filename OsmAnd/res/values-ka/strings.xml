@@ -363,7 +363,7 @@
   <string name="tip_map_context_menu_t">"\tრუკის კონტექსტური მენიუ წვდომადია რუკაზე დაჭერით ან ტრეკბოლის ღილაკზე დაჭერით.\n\tშედეგია ფანჯარა წერტილის კოორდინატებით. რუკის კონტექსტური მენიუს გამოსატანად დაარტყით მას თითი, ან დააჭირეთ მენიუს ღილაკს\n\tრუკის კონტექსტური მენიუ შეიცავს ყველა მოქმედებას მდებარეობასთან დაკავშირებით. "</string>
   <string name="tip_initial">მცირედი დახმარება</string>
   <string name="tip_initial_t">"\tOsmAnd არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება. "</string>
-  <string name="next_button">შემდეგი</string>
+  <string name="shared_string_next">შემდეგი</string>
   <string name="shared_string_previous">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
   <string name="unit_of_length">გაზომვის ერთეული</string>

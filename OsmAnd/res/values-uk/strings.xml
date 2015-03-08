@@ -431,7 +431,7 @@
   <string name="tip_initial">Допомога</string>
   <string name="tip_initial_t">"OsmAnd — навігаційна програма з великими можливостями.
 \n\nПочаткові відомості, як і деякі поради щодо використання знаходяться в \'Меню\'→\'Допомога\' на екрані з мапою. "</string>
-  <string name="next_button">Наступний</string>
+  <string name="shared_string_next">Наступний</string>
   <string name="shared_string_previous">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини і швидкості</string>
   <string name="unit_of_length">Одиниці вимірювання</string>

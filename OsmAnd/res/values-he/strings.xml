@@ -612,7 +612,7 @@
 	<string name="tip_initial">עצות ותכסיסים</string>
 	<string name="tip_initial_t">"\tOsmAnd הנו יישום ניווט עם תכונות רבות.
 \n\tכצעד היכרות בסיסי, חלק מהעצות והתכסיסים לשימוש מקושרים למסך הראשי (לפריט לחצן ה־\'?\'). "</string>
-	<string name="next_button">הבא</string>
+	<string name="shared_string_next">הבא</string>
 	<string name="shared_string_previous">הקודם</string>
 	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
 	<string name="unit_of_length">יחידת המידה</string>

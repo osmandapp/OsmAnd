@@ -1255,7 +1255,7 @@
 	<string name="tip_app_mode_t_v2">"OsmAnd admite diferentes perfís (personalizábeis) do aplicativo para diferentes casos de uso.\n\nÉ posíbel cambiar os perfís co botón de perfís do recuncho inferior esquerdo da pantalla do mapa (icona do coche, a bicicleta ou o peón) ou ao crear un itinerario («modo de transporte»). "</string>
 	<string name="tip_map_context_menu">Menú «Empregar a situación»</string>
 	<string name="tip_map_context_menu_t">"O menú de contexto «Empregar a situación» contén todas as accións referidas a un punto (situación).\n\nEstá dispoñíbel mantendo premido calquera punto do mapa (e tocando a seguir o seu marcador) ou premendo no botón da trackball ou seleccionando «Menú» → «Empregar a situación» (estes dous últimos xeitos toman o centro do mapa como referencia).\n\nPódese agochar unha caixa de marcador de novo manténdoo premido. "</string>
-	<string name="next_button">Seguinte</string>
+	<string name="shared_string_next">Seguinte</string>
 	<string name="shared_string_previous">Anterior</string>
 	<string name="unit_of_length_descr">Cambiar as unidades de distancia e de velocidade</string>
 	<string name="unit_of_length">Unidade de medida</string>

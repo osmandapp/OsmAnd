@@ -300,7 +300,7 @@
 	</string>
   <string name="tip_initial">Ayuda</string>
   <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nComo una introducción básica, algunos consejos de uso y trucos están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
-  <string name="next_button">Siguiente</string>
+  <string name="shared_string_next">Siguiente</string>
   <string name="shared_string_previous">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
   <string name="unit_of_length">Unidad de longitud</string>

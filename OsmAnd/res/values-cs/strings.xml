@@ -414,7 +414,7 @@
 \n\t Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj se otevře kontextové menu, po dlouhém stisknutí obdélník naopak zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'. "</string>
   <string name="tip_initial">Pomoc</string>
   <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nZákladní pokyny, užitečné tipy a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
-  <string name="next_button">Další</string>
+  <string name="shared_string_next">Další</string>
   <string name="shared_string_previous">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
   <string name="unit_of_length">Jednotky vzdálenosti</string>

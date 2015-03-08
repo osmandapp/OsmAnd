@@ -117,7 +117,7 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
      <string name="tip_initial">ヘルプ</string>
      <string name="tip_initial_t">"OsmAndは多くの機能を持つナビゲーションアプリです。
 \n基礎的な使い方のヒントやテクニックをマップ画面の\'メニュー\'→\'ヘルプ\'から参照することが出来ます。 "</string>
-     <string name="next_button">次へ</string>
+     <string name="shared_string_next">次へ</string>
      <string name="shared_string_previous">前へ</string>
 
      <string name="unit_of_length_descr">長さと速度の単位を変更</string>

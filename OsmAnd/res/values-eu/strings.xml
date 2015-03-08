@@ -729,7 +729,7 @@
   <string name="tip_map_context_menu_t">⇥Maparen menua mapan edo trackball-ean sakatuta mantenduz ireki dezakezu.⏎\n⇥⇥⏎\n⇥Honek koordinatuak dituen kaxa bat sortzen du. Maparen menuaren dialogoa irekitzeko, sakatu bertan. (Edo sakatuta mantendu kaxa berriro ezkutatzeko.)⏎\n⇥⇥⏎\n⇥Maparen menua puntu (kokapen) batekin erlazionaturiko ekintza guztiak dakartza.⏎\n⇥</string>
   <string name="tip_initial">Aholku eta trikimailuak</string>
   <string name="tip_initial_t">⇥OsmAnd ezaugarri asko dituen nabigazio aplikazio bat da. ⏎\n⇥⇥⏎\n⇥Oinarrizko sarrera moduan, aholku eta trikimailu batzuen estekak dituzu pantaila nagusian (begiratu \'?\' ikonoa).⏎\n⇥</string>
-  <string name="next_button">Ondorengoa</string>
+  <string name="shared_string_next">Ondorengoa</string>
   <string name="shared_string_previous">Aurrekoa</string>
   <string name="unit_of_length_descr">Luzeera eta abiaduraren unitateak aldatu</string>
   <string name="unit_of_length">Neurtze unitatea</string>

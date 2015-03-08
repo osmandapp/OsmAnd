@@ -239,7 +239,7 @@
 	<string name="internet_not_available">操作所需的互联网连接不可用</string>
 	<string name="tip_navigation">导航</string>
 	<string name="tip_initial">技巧和诀窍</string>
-	<string name="next_button">下</string>
+	<string name="shared_string_next">下</string>
 	<string name="shared_string_previous">前</string>
 	<string name="unit_of_length_descr">变更单位的长度和速度</string>
 	<string name="unit_of_length">度量单位</string>

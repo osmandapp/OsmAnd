@@ -399,7 +399,6 @@
 	</string>
   <string name="tip_initial">Help</string>
   <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.\n\nEen inleiding, tips en hulp zijn te vinden onder \'Menu\' → \'Help\', in het kaartscherm. "</string>
-  <string name="next_button">Volgende</string>
   <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
   <string name="unit_of_length">Eenheid van afstand</string>
   <string name="si_mi_foots">Mijlen/voeten</string>
