@@ -1582,7 +1582,7 @@
     <string name="osmo_edit_device">Изменить пользовательские настройки</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
     <string name="selected_track">Выбранные треки</string>
-    <string name="my_tracks">Все треки</string>
+    <string name="shared_string_my_tracks">Все треки</string>
     <string name="shared_string_my_favorites">Избранные</string>
     <string name="shared_string_my_places">Мои места</string>
     <string name="my_data_activity">Мои места</string>

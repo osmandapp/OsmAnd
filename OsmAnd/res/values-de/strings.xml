@@ -1558,7 +1558,7 @@
 	<string name="import_file_favourites">GPX-Datei speichern oder zu den Favoriten importieren?</string>
 	<string name="import_save">Speichern</string>
 	<string name="selected_track">Ausgewählte Tracks</string>
-	<string name="my_tracks">Alle Tracks</string>
+	<string name="shared_string_my_tracks">Alle Tracks</string>
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="my_data_activity">Meine Orte</string>

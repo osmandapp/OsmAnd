@@ -1628,7 +1628,7 @@
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
     <string name="selected_track">Traces seleccionades</string>
-    <string name="my_tracks">Totes les traces</string>
+    <string name="shared_string_my_tracks">Totes les traces</string>
     <string name="shared_string_my_favorites">Preferits</string>
     <string name="shared_string_my_places">Preferits</string>
     <string name="my_data_activity">Llocs personals</string>

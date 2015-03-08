@@ -1761,7 +1761,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Pokazuj powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     <string name="selected_track">Wybrane trasy</string>
-    <string name="my_tracks">Wszystkie trasy</string>
+    <string name="shared_string_my_tracks">Wszystkie trasy</string>
     <string name="shared_string_my_favorites">Moje Ulubione</string>
     <string name="shared_string_my_places">Moje Miejsca</string>
     <string name="my_data_activity">Moje Miejsca</string>

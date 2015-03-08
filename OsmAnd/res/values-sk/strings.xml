@@ -1721,7 +1721,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	
     <string name="osmo_connect_to_group_id">ID skupiny</string>
     <string name="selected_track">Zvolená stopa</string>
-    <string name="my_tracks">Všetky stopy</string>
     <string name="my_data_activity">Moje miesta</string>
     <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
     <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
@@ -2101,7 +2100,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_shared_string_my_location">Moja poloha</string>
 	<string name="shared_string_my_places">Moje miesta</string>
 	<string name="shared_string_shared_string_my_favorites">Moje obľúbené</string>
-	<string name="shared_string_my_tracks">Moje stopy</string>
+	<string name="shared_string_shared_string_my_tracks">Moje stopy</string>
 	<string name="shared_string_currently_recording_track">Nahráva sa stopa</string>
 	<string name="shared_string_audio">Zvuk</string>
 	<string name="shared_string_video">Video</string>

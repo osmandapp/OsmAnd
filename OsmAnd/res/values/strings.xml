@@ -78,7 +78,7 @@
 	<string name="shared_string_shared_string_my_location">My Location</string>
 	<string name="shared_string_my_places">My Places</string>
 	<string name="shared_string_shared_string_my_favorites">My Favorites</string>
-	<string name="shared_string_my_tracks">My Tracks</string>
+	<string name="shared_string_shared_string_my_tracks">My Tracks</string>
 	<string name="shared_string_currently_recording_track">Currently recording track</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
@@ -426,7 +426,6 @@
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_available_current_track">Current recording track</string>
     <string name="gpx_file_is_empty">Gpx track is empty</string>
-    <string name="my_tracks">All tracks</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>

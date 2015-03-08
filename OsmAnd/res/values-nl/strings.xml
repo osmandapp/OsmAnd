@@ -1770,7 +1770,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_show_group_notifications_descr">Toon meldingen als een gebruiker bij een groep komt of deze verlaat</string>
     <string name="my_data_activity">Mijn plaatsen</string>
     <string name="selected_track">Gekozen track</string>
-    <string name="my_tracks">Alle tracks</string>
     <string name="gpx_file_is_empty">Gpx track is leeg</string>
     <string name="gpx_info_subtracks">"Deel tracks: %1$s "</string>
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s punten) </string>
@@ -2113,7 +2112,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_shared_string_my_location">Mijn locatie</string>
 	<string name="shared_string_my_places">Mijn plaatsen</string>
 	<string name="shared_string_shared_string_my_favorites">Mijn favorieten</string>
-	<string name="shared_string_my_tracks">Mijn routes</string>
+	<string name="shared_string_shared_string_my_tracks">Mijn routes</string>
 	<string name="shared_string_currently_recording_track">Huidige route wordt opgenomen</string>
 	<string name="shared_string_audio">Geluid</string>
 	<string name="shared_string_video">Video</string>

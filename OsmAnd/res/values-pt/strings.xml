@@ -1716,7 +1716,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gpx_available_current_track">Trilho de gravação actual</string>
     <string name="gpx_file_is_empty">O trilho Gpx está vazio</string>
     <string name="selected_track">Trilho seleccionado</string>
-    <string name="my_tracks">todas os trilhos</string>
+    <string name="shared_string_my_tracks">todas os trilhos</string>
     <string name="shared_string_my_favorites">Meus Favoritos</string>
     <string name="shared_string_my_places">Meus Dados</string>
     <string name="my_data_activity">Meus Dados</string>

@@ -1544,7 +1544,7 @@
     <string name="gpx_available_current_track">Aktív nyomvonal rögzítés</string>
     <string name="gpx_file_is_empty">A gpx nyomvonal üres</string>
     <string name="selected_track">Kiválasztott nyomvonalak</string>
-    <string name="my_tracks">Összes nyomvonal</string>
+    <string name="shared_string_my_tracks">Összes nyomvonal</string>
     <string name="shared_string_my_favorites">Kedvenceim</string>
     <string name="shared_string_my_places">Saját helyek</string>
     <string name="my_data_activity">Saját helyek</string>

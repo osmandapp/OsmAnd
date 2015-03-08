@@ -1662,7 +1662,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
     <string name="selected_track">Traces sélectionnées</string>
-    <string name="my_tracks">Toutes les\ntraces</string>
+    <string name="shared_string_my_tracks">Toutes les\ntraces</string>
     <string name="shared_string_my_favorites">Mes favoris</string>
     <string name="shared_string_my_places">Favoris</string>
     <string name="my_data_activity">Favoris</string>

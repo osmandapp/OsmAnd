@@ -1601,7 +1601,6 @@
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
     <string name="selected_track">Valgte spor</string>
-    <string name="my_tracks">Alle spor</string>
     <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
@@ -1956,7 +1955,7 @@
 	<string name="shared_string_shared_string_my_location">Min placering</string>
 	<string name="shared_string_my_places">Mine steder</string>
 	<string name="shared_string_shared_string_my_favorites">Mine favoritter</string>
-	<string name="shared_string_my_tracks">Mine spor</string>
+	<string name="shared_string_shared_string_my_tracks">Mine spor</string>
 	<string name="shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>

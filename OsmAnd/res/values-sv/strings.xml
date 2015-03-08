@@ -1523,7 +1523,7 @@
     <string name="osmo_show_group_notifications">Visa gruppaviseringar</string>
     <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
     <string name="selected_track">Valda spår</string>
-    <string name="my_tracks">Alla spår</string>
+    <string name="shared_string_my_tracks">Alla spår</string>
     <string name="shared_string_my_favorites">Mina favoriter</string>
     <string name="shared_string_my_places">Mina platser</string>
     <string name="my_data_activity">Mina platser</string>

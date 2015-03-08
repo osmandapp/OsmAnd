@@ -156,7 +156,7 @@
     <string name="gpx_available_current_track">Pista de gravación actual</string>
     <string name="gpx_file_is_empty">A pista Gpx está baleira</string>
     <string name="selected_track">Pistas seleccionadas</string>
-    <string name="my_tracks">Todas as pistas</string>
+    <string name="shared_string_my_tracks">Todas as pistas</string>
     <string name="shared_string_my_favorites">Os meus favoritos</string>
     <string name="shared_string_my_places">Os meus lugares</string>
     <string name="my_data_activity">Os meus lugares</string>

@@ -1569,7 +1569,7 @@
     <string name="gpx_timemoving">Timpul în mişcare: %1$s</string>
     <string name="gpx_file_is_empty">Traseul Gpx este gol</string>
     <string name="selected_track">Traseele selectate</string>
-    <string name="my_tracks">Toate traseele</string>
+    <string name="shared_string_my_tracks">Toate traseele</string>
     <string name="osmo_user_joined">Utilizatorul %1$s s-a alăturat grupului %2$s</string>
     <string name="osmo_user_left">Utilizatorul %1$s a părăsit grupul %2$s</string>
     <string name="osmo_show_group_notifications">Arată notificări ale grupului</string>

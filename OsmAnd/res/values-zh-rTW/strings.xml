@@ -1642,7 +1642,7 @@
     <string name="shared_string_my_places">我的地點</string>
     <string name="my_data_activity">我的地點</string>
     <string name="selected_track">已選取軌跡</string>
-    <string name="my_tracks">全部追蹤</string>
+    <string name="shared_string_my_tracks">全部追蹤</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
 	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>

@@ -1686,7 +1686,7 @@
     <string name="gpx_available_current_track">Dabartinis įrašomas maršrutas</string>
     <string name="gpx_file_is_empty">GPX maršrutas yra tuščias</string>
     <string name="selected_track">Pasirinkti maršrutai</string>
-    <string name="my_tracks">Visi maršrutai</string>
+    <string name="shared_string_my_tracks">Visi maršrutai</string>
     <string name="shared_string_my_favorites">Mano mėgiami</string>
     <string name="shared_string_my_places">Mano vietos</string>
     <string name="my_data_activity">Mano vietos</string>

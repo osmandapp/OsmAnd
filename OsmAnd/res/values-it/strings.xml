@@ -1768,7 +1768,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_user_left">L\'utente %1$s ha lasciato il gruppo %2$s</string>
     <string name="osmo_show_group_notifications">Mostra le notifiche del gruppo</string>
     <string name="selected_track">Tracciati selezionati</string>
-    <string name="my_tracks">Tutte le tracce</string>
     <string name="my_data_activity">I miei luoghi</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
@@ -2124,7 +2123,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_shared_string_my_location">La mia posizione</string>
 	<string name="shared_string_my_places">I miei luoghi</string>
 	<string name="shared_string_shared_string_my_favorites">I miei preferiti</string>
-	<string name="shared_string_my_tracks">Le mie tracce</string>
+	<string name="shared_string_shared_string_my_tracks">Le mie tracce</string>
 	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>

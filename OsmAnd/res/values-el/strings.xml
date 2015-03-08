@@ -1369,7 +1369,7 @@
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
 	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
 	<string name="selected_track">Επιλεγμένα ίχνη</string>
-    <string name="my_tracks">Όλα τα ίχνη</string>
+    <string name="shared_string_my_tracks">Όλα τα ίχνη</string>
     <string name="shared_string_my_favorites">Τα Αγαπημένα μου</string>
     <string name="shared_string_my_places">Τα Μέρη μου</string>
     <string name="my_data_activity">Τα Μέρη μου</string>

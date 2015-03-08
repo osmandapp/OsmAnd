@@ -58,7 +58,7 @@
     <string name="gpx_selection_number_of_points">%1$s punkt</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_file_is_empty">GPS-sporet er tomt</string>
-    <string name="my_tracks">Alle spor</string>
+    <string name="shared_string_my_tracks">Alle spor</string>
     <string name="shared_string_my_favorites">Mine favorittar</string>
     <string name="shared_string_my_places">Mine stadar</string>
     <string name="my_data_activity">Mine stadar</string>

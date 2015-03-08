@@ -1731,7 +1731,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_show_group_notifications">Rādīt grupas ziņojumus</string>
     <string name="osmo_show_group_notifications_descr">Rādīt paziņojumu, kad lietotājs pievienojas vai pamet grupu</string>
     <string name="selected_track">Izvēlētais treks</string>
-    <string name="my_tracks">Visi treki</string>
+    <string name="shared_string_my_tracks">Visi treki</string>
     <string name="shared_string_my_favorites">Mana izlase</string>
     <string name="shared_string_my_places">Manas vietas</string>
     <string name="my_data_activity">Manas vietas</string>

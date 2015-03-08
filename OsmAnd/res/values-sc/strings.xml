@@ -600,7 +600,7 @@
     <string name="gpx_available_current_track">Rasta currentemente in registratzione</string>
     <string name="gpx_file_is_empty">Sa rasta Gpx est boida</string>
     <string name="selected_track">Rastas ischertadas</string>
-    <string name="my_tracks">Totu sas rastas</string>
+    <string name="shared_string_my_tracks">Totu sas rastas</string>
     <string name="shared_string_my_favorites">Prefèrridos meos</string>
     <string name="shared_string_my_places">Logos meos</string>
     <string name="my_data_activity">Logos meos</string>

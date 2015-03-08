@@ -1820,7 +1820,6 @@
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
     <string name="selected_track">선택된 트랙</string>
-    <string name="my_tracks">모든 트랙</string>
     <string name="my_data_activity">저장소</string>
     <string name="gpx_info_subtracks">"하위 트랙 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
@@ -2185,7 +2184,7 @@
 	<string name="shared_string_shared_string_my_location">내 위치</string>
 	<string name="shared_string_my_places">저장소</string>
 	<string name="shared_string_shared_string_my_favorites">모든 즐겨찾기</string>
-	<string name="shared_string_my_tracks">경로</string>
+	<string name="shared_string_shared_string_my_tracks">경로</string>
 	<string name="shared_string_currently_recording_track">현재 기록중인 트랙</string>
 	<string name="shared_string_audio">소리</string>
 	<string name="shared_string_video">영상</string>
