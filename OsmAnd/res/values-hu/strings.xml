@@ -1218,7 +1218,7 @@
     </string>
     <string name="local_indexes_cat_srtm">Szintvonal adat</string>
     <string name="wait_current_task_finished">Kérlek várd meg, amíg a jelenlegi befejeződik</string>
-    <string name="downloading_file_new">Letöltés …</string>
+    <string name="shared_string_downloading">Letöltés …</string>
 	<string name="plugin_distance_point_time">idő</string>
     <string name="plugin_distance_point_hdop">pontosság</string>
     <string name="plugin_distance_point_speed">sebesség</string>

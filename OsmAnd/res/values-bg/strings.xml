@@ -1340,7 +1340,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="address">Адрес</string>
 	<string name="download_index_success">Успешно сваляне</string>
 	<string name="error_io_error">Входно/изходна грешка</string>
-	<string name="downloading_file_new">Сваляне…</string>
+	<string name="shared_string_downloading">Сваляне…</string>
 	<string name="downloading">Сваляне…</string>
 	<string name="downloading_list_indexes">Сваляне на списък с достъпните райони…</string>
 	<string name="list_index_files_was_not_loaded">Списъкът с районите не беше свален от osmand.net.</string>

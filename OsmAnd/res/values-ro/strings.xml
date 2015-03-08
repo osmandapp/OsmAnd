@@ -1583,7 +1583,7 @@
     <string name="hide_all_waypoints">Elimină toate</string>
 <string name="navigation_intent_invalid">Format invalid: %s</string>
     <string name="osb_author_dialog_password">"Parolă OSM  (opţional)"</string>
-	<string name="downloading_file_new">Se descarcă…</string>
+	<string name="shared_string_downloading">Se descarcă…</string>
 	<string name="rendering_value_germanRoadAtlas_name">Atlas rutier german</string>
 	<string name="version_settings">Versiuni</string>
     <string name="rendering_attr_tramRoutes_name">Rute tramvai</string>

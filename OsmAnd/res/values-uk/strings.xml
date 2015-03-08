@@ -1306,7 +1306,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="use_magnetic_sensor">Використовувати магнітометр</string>
     <string name="monitoring_settings_descr">Налаштування запису треків</string>
     <string name="osmand_monitoring_plugin_description">Активація запису трека і навігації в сплячому режимі (екран вимкнений) з допомогою періодичного \"пробудження\" GPS. Налаштування запису треку в локальні файли або в Інтернет з допомогою веб-служби.</string>
-    <string name="downloading_file_new">Завантаження …</string>
+    <string name="shared_string_downloading">Завантаження …</string>
 	<string name="delete_point">Вилучити точку</string>
     <string name="plugin_distance_point_time">час</string>
     <string name="plugin_distance_point_hdop">точність</string>

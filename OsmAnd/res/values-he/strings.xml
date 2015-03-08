@@ -1232,7 +1232,7 @@
     <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
     <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
-    <string name="downloading_file_new">"בהורדה "</string>
+    <string name="shared_string_downloading">"בהורדה "</string>
 	<string name="delete_point">מחיקת נקודה</string>
     <string name="plugin_distance_point_time">זמן</string>
     <string name="plugin_distance_point_hdop">דיוק</string>

@@ -1235,7 +1235,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="address">Адрас</string>
 	<string name="download_index_success">Пасьпяхова сьцягнута</string>
 	<string name="error_io_error">Адбылася памылка ўводу/вываду</string>
-	<string name="downloading_file_new">Сьцягваньне…</string>
 	<string name="downloading">Сьцягваньне…</string>
 	<string name="downloading_list_indexes">Сьцягваецца сьпіс даступных рэгіёнаў…</string>
 	<string name="list_index_files_was_not_loaded">Сьпіс даступных рэгіёнаў ня быў зладаваны з osmand.net.</string>

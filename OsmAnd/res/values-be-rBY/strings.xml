@@ -1613,7 +1613,7 @@
 	<string name="address">Adras</string>
 	<string name="download_index_success">Zahruzka paśpiachovaja</string>
 	<string name="error_io_error">Adbylasia pamylka ŭvodu/vyvadu</string>
-	<string name="downloading_file_new">Ladavańnie…</string>
+	<string name="shared_string_downloading">Ladavańnie…</string>
 	<string name="downloading">Ladavańnie…</string>
 	<string name="downloading_list_indexes">Zladoŭvajem śpіs dastupnych rehіjonaŭ…</string>
 	<string name="list_index_files_was_not_loaded">Śpіs dastupnych rehіjonaŭ nia byŭ zladavany z osmand.net.</string>

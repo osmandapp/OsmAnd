@@ -1203,7 +1203,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="use_magnetic_sensor_descr">Gebruik die magnetiese sensor om die kompas waarde te bepaal in plaas van die oriëntasie sensor</string>
     <string name="use_magnetic_sensor">Gebruik magnetiese sensor</string>
     <string name="local_indexes_cat_srtm">Kontoer lyne inligting</string>
-    <string name="downloading_file_new">Aflaai besig …</string>
+    <string name="shared_string_downloading">Aflaai besig …</string>
 	<string name="delete_point">Vee punt uit</string>
     <string name="plugin_distance_point_time">Tyd</string>
     <string name="plugin_distance_point_speed">spoed</string>

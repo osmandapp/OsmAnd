@@ -1416,7 +1416,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_kalman_filter_compass">Gebruik Kalman-filter</string>
     <string name="access_mark_final_location_first">Toegankelijkheidsmodus: kies eerst een bestemming</string> 
     <string name="local_indexes_cat_srtm">Gegevens voor hoogtelijnen</string>
-    <string name="downloading_file_new">Downloaden…</string>
 	<string name="wait_current_task_finished">Wacht alsjeblieft tot de huidige taak klaar is</string>
     <string name="delete_point">Verwijder punt</string>
     <string name="plugin_distance_point_time">tijd</string>

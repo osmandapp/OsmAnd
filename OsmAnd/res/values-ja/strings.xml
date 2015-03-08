@@ -1312,7 +1312,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="tip_app_mode_t_v2">OsmAndは移動手段ごとに異なるプロファイル(カスタマイズ可能)を使用できます。
 検索		\n\nプロファイルの切替には、地図画面の左下隅にあるプロファイルボタン(車、自転車、歩行者のアイコン)をタッチするか、ルート作成時に(トランスポートモード)選択できます。
 	</string>
-	<string name="downloading_file_new">ダウンロード中…</string>
+	<string name="shared_string_downloading">ダウンロード中…</string>
 	<string name="osb_author_dialog_password">OSMパスワード(オプション)</string>
 	<string name="email">Eメール</string>
 	<string name="av_camera_focus">カメラフォーカスタイプ</string>

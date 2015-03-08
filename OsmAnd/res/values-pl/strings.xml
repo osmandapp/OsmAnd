@@ -1240,7 +1240,7 @@
     <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
-    <string name="downloading_file_new">Pobieranie…</string>
+    <string name="shared_string_downloading">Pobieranie…</string>
 	<string name="plugin_distance_point_time">czas</string>
     <string name="plugin_distance_point_hdop">precyzja</string>
     <string name="plugin_distance_point_speed">prędkość</string>

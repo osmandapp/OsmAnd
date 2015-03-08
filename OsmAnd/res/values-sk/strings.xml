@@ -1265,7 +1265,6 @@
     <string name="osmand_monitoring_plugin_description">Povoliť sledovanie a navigáciu na pozadí (obrazovka vypnutá) cez periodické používanie GPS zariadenia.
     Zobraziť nastavenia pre sledovanie vašej cesty do GPX súboru alebo pomocou on-line webovej služby.</string>
     <string name="local_indexes_cat_srtm">Dáta s vrstevnicami</string>
-    <string name="downloading_file_new">Sťahovanie…</string>
 	<string name="keep_intermediate_points">Zachovať prechodné body</string>
     <string name="new_directions_point_dialog">Už máte určené prechodné body.</string>
     <string name="context_menu_item_directions_to">Pokyny sem</string>

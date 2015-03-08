@@ -1545,7 +1545,6 @@
 	<string name="local_index_installed">로컬 버전</string>
 	<string name="voice_not_specified">지정없음</string>
 	<string name="incomplete_locale">불완성</string>
-	<string name="downloading_file_new">다운로드 중…</string>
 	<string name="favourites_remove_dialog_msg">즐겨찾기 포인트를 삭제 하시겠습니까 \'%s\'?</string>
 	<string name="av_camera_focus_hiperfocal">지나친 초점 포커스</string>
 	<string name="use_distance_measurement_help">* 포인트를 탭하여 표시하기.\n* 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기

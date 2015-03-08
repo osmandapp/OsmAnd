@@ -1251,7 +1251,7 @@
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Desea usar la conexión actual a Internet para descargar?</string>
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
-    <string name="downloading_file_new">Descargando…</string>
+    <string name="shared_string_downloading">Descargando…</string>
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Selecciona ciudad o calle primero</string>

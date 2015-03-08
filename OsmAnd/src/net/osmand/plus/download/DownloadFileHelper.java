@@ -257,7 +257,7 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName /*+ " " + mb + " MB"*/;
+		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + de.baseName /*+ " " + mb + " MB"*/;
 		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {

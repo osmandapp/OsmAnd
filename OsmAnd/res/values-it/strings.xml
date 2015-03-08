@@ -1416,7 +1416,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
-    <string name="downloading_file_new">In download …</string>
 	<string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">precisione</string>
     <string name="plugin_distance_point_speed">velocità</string>

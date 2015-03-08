@@ -1283,7 +1283,7 @@
     <string name="choose_osmand_theme">Tema aplikacije</string>
     <string name="accessibility_options">Možnosti dostopnosti</string>
     <string name="local_indexes_cat_srtm">Podatki izohips</string>
-    <string name="downloading_file_new">Prenašanje …</string>
+    <string name="shared_string_downloading">Prenašanje …</string>
 	<string name="use_distance_measurement_help">* Pritisnite za označitev točke.\n * Pritisnite in držite na zemljevidu za brisanje prejšnje točke.\n * Pritisnite in držite na točki za ogled ali dodajanje opisa.\n * Kliknite na vtičnik za meritve za prikaz več dejanj.</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions - Avtomatsko usmerjanje), je zemljevid in program za navigacijo z dostopom do svetovnih brezplačnih, zelo kakovostnih OpenStreetMap (OSM) podatkov. Vse podatke map je mogoče shraniti na pomnilniško kartico vašega telefona za uporabo brez povezave. OsmAnd ponuja usmerjanje preko GPS-a vaše naprave, s prikazom na ekranu in glasovno, za avto, kolo in pešce. Vse glavne funkcije delujejo tako v povezavi kot brez nje (internet ni potreben).

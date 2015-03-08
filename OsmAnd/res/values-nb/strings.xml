@@ -1050,7 +1050,7 @@
 	<string name="unzipping_file">Pakker ut fil…</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
-	<string name="downloading_file_new">Laster ned…</string>
+	<string name="shared_string_downloading">Laster ned…</string>
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="shared_string_close">Lukk</string>
 	<string name="loading_data">Laster data…</string>

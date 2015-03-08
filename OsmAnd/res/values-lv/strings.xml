@@ -1268,7 +1268,7 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
 	<string name="support_new_features_descr">Lūdzu atbalstiet programmu ar ziedojumiem, lai palīdzētu to uzlabot un attīstīt</string>
 	<string name="incomplete_locale">Nepabeigts</string>
-	<string name="downloading_file_new">Lejupielādē …</string>
+	<string name="shared_string_downloading">Lejupielādē …</string>
 	<string name="av_camera_focus">Fokusa režīms kamerai</string>
 	<string name="av_camera_focus_descr">Fokusa režīms iekšējai kamerai</string>
 	<string name="av_camera_focus_auto">Auto fokuss</string>

@@ -837,7 +837,7 @@
 	<string name="download_question_exist">{0} 的离线数据已经存在({1})。是否要更新它({2})？</string>
 	<string name="address">地址</string>
 	<string name="error_io_error">发生 I/O 错误</string>
-	<string name="downloading_file_new">正在下载 …</string>
+	<string name="shared_string_downloading">正在下载 …</string>
 	<string name="downloading">正在下载…</string>
 	<string name="downloading_list_indexes">正在下载可用区域的列表…</string>
 	<string name="list_index_files_was_not_loaded">区域列表未能从 osmand.net 获取。</string>

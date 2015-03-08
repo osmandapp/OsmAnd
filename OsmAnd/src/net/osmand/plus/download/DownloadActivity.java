@@ -312,7 +312,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (!running) {
 				text = getString(R.string.shared_string_download) + "  (" + downloads + ")"; //$NON-NLS-1$
 			} else {
-				text = getString(R.string.downloading_file_new) + "  (" + downloads + ")"; //$NON-NLS-1$
+				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
 			}
 			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {

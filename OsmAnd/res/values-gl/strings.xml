@@ -1507,7 +1507,7 @@
 	<string name="address">Address</string>
 	<string name="download_index_success">A descarga foi correcta</string>
 	<string name="error_io_error">Produciuse un erro de E/S</string>
-	<string name="downloading_file_new">A descargar …</string>
+	<string name="shared_string_downloading">A descargar …</string>
 	<string name="downloading">A descargar…</string>
 	<string name="downloading_list_indexes">A descargar a lista de rexións dispoñíbeis…</string>
 	<string name="list_index_files_was_not_loaded">A lista de rexións non foi obtida de osmand.net.</string>

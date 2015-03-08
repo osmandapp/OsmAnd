@@ -1361,7 +1361,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_app_mode_t_v2">tOsmAnd suporta diferentes (personalizáveis) perfis de aplicação para diferentes usos.
 \n\n Você pode mudar os perfis via botão perfil no canto inferior esquerdo da tela do mapa (ícone do carro, bicicleta ou pedestre) ou quando criando uma rota.
 	</string>
-	<string name="downloading_file_new">Fazendo o download…</string>
+	<string name="shared_string_downloading">Fazendo o download…</string>
 	<string name="osb_author_dialog_password">Password do OSM (opcional)</string>
 	<string name="av_camera_focus">Tipo de foco da câmera</string>
 	<string name="av_camera_focus_descr">Selecione o tipo de foco da câmera interna</string>

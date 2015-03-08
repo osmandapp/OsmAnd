@@ -980,7 +980,7 @@
   <string name="address">Helbidea</string>
   <string name="download_index_success">Deskarga arrakastatsua</string>
   <string name="error_io_error">I/O errorea gertatu da</string>
-  <string name="downloading_file_new">Deskargatzen…</string>
+  <string name="shared_string_downloading">Deskargatzen…</string>
   <string name="downloading">Deskargatzen…</string>
   <string name="downloading_list_indexes">Eskugarri dauden eskualdeen zerrenda deskargatzen…</string>
   <string name="list_index_files_was_not_loaded">Eskualdeen zerrenda ez da osmand.net-en aurkitu.</string>

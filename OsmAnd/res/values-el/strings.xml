@@ -1238,7 +1238,7 @@
     <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
     <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
     <string name="local_indexes_cat_srtm">Δεδομένα ισοϋψών γραμμών</string>
-    <string name="downloading_file_new">Λήψη …</string>
+    <string name="shared_string_downloading">Λήψη …</string>
 	<string name="delete_point">Διαγραφή σημείου</string>
     <string name="plugin_distance_point_time">χρόνος</string>
     <string name="plugin_distance_point_hdop">ακρίβεια</string>

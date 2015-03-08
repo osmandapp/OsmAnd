@@ -1221,7 +1221,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ რუკები &amp; ნავიგაცია</string>
 	<string name="support_new_features_descr">შემომწირეთ აპლიკაციაში ახალი მახასიათებლების სანახავად</string>
-	<string name="downloading_file_new">ჩამოტვირთვა…</string>
+	<string name="shared_string_downloading">ჩამოტვირთვა…</string>
 	<string name="osb_author_dialog_password">OSM პაროლი(არასავალდებულო)</string>
 	<string name="av_camera_focus">კამერის ფოკუსის ტიპი</string>
 	<string name="av_camera_focus_descr">აირჩიეთ შიდა კამერის ფოკუსის ტიპი</string>

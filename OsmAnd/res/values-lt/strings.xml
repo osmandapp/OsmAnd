@@ -1291,7 +1291,7 @@
     <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
     <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
-    <string name="downloading_file_new">Parsiunčiama …</string>
+    <string name="shared_string_downloading">Parsiunčiama …</string>
 	<string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM pakeitimų atsarginės kopijos išsaugoti nepavyko</string>
     <string name="local_osm_changes_backup">Išsaugoti vietinę OSM pakeitimų kopiją</string>

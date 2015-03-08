@@ -1071,7 +1071,7 @@
 	<string name="sd_dir_not_accessible">SD karttaki kayıt dizini ulaşılabilir değil</string>
 	<string name="download_question">{0} - {1} indir ?</string>
 	<string name="download_question_exist">{0} için çevrimdışı veri zaten mevcut ({1}). Güncellemek ister misiniz ({2}) ?</string>
-	<string name="downloading_file_new">İndiriliyor…</string>
+	<string name="shared_string_downloading">İndiriliyor…</string>
 	<string name="downloading_list_indexes">Mevcut bölgelerin listesi indiriliyor…</string>
 	<string name="list_index_files_was_not_loaded">osmand.net\'ten bölgelerin listesi alınamadı.</string>
 	<string name="update_existing">Değiştir</string>

@@ -1178,7 +1178,7 @@
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
-    <string name="downloading_file_new">Laddar ner …</string>
+    <string name="shared_string_downloading">Laddar ner …</string>
 	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
 \n\t* Sortera waypoints på bästa möjliga sätt för att besöka alla (handelsresande, dörr-till-dörr)
 \n\t* Sök efter gatnamn (i närheten)

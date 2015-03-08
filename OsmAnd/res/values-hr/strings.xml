@@ -1066,7 +1066,7 @@
 	<string name="unzipping_file">Otpakiranje datoteke…</string>
 	<string name="search_offline_geo_error">Nije moguće analizirati geo namjeru \'%s\'</string>
 	<string name="search_online_address">Traži online</string>
-	<string name="downloading_file_new">Preuzimanje …</string>
+	<string name="shared_string_downloading">Preuzimanje …</string>
 	<string name="osm_settings_descr">Navedite Openstreetmap.org (OSM) postavke potrebne za OSM prijavu</string>
 	<string name="osb_author_dialog_password">OSM zaporka (opcija)</string>
 	<string name="av_camera_focus">Tip fokusa fotoaparat</string>

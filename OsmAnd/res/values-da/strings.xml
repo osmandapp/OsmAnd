@@ -1250,7 +1250,6 @@
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="access_mark_final_location_first">Tilgængelighedstilstand: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
-    <string name="downloading_file_new">Henter …</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
     <string name="plugin_distance_point_speed">hastighed</string>
     <string name="plugin_distance_point">Punkt</string>

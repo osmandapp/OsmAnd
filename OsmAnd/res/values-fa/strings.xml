@@ -333,7 +333,7 @@
 	<string name="address">آدرس</string>
 	<string name="download_index_success">دانلود موفقیت آمیز بود</string>
 	<string name="error_io_error">خطای I/O رخ داد</string>
-	<string name="downloading_file_new">درحال دانلود…</string>
+	<string name="shared_string_downloading">درحال دانلود…</string>
 	<string name="downloading">درحال دانلود…</string>
 	<string name="show_poi_on_map">روی نقشه نشان بده</string>
 	<string name="fav_points_edited">نقطه مورد علاقه ویرایش شد</string>
