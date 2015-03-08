@@ -2033,9 +2033,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="showed_on_map">Weergegeven op de kaart</string>
 	<string name="rename_failed">Hernoemen mislukt.</string>
 	<string name="back_to_map">Terug naar kaart</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Foto</string>
 	<string name="share_note">Deel opmerking</string>
 	<string name="rename_recording">hernoem de opname</string>
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>

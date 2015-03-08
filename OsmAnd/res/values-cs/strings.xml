@@ -1851,7 +1851,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžařské tratě</string>
 	<string name="free">"%1$s volných "</string>
 	<string name="device_memory">Paměť zařízení</string>
-    <string name="audio">Audio</string>
+    <string name="shared_string_audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografie</string>
 	<string name="watch">Zobrazit</string>

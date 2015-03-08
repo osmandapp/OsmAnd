@@ -1978,7 +1978,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="shared_string_currently_recording_track">مسیر درحال ضبط</string>
 	<string name="back_to_map">برگشت به نقشه</string>
 	<string name="plugin_touringview_name">نمای نقشه درحال تور</string>
-	<string name="audio">صدا</string>
+	<string name="shared_string_audio">صدا</string>
 	<string name="video">ویدئو</string>
 	<string name="photo">تصویر</string>
 	<string name="share_note">به اشتراک گزاری یادداشت</string>

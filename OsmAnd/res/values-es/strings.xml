@@ -1934,7 +1934,7 @@
 	<string name="notes">Notas</string>
 	<string name="online_map">Mapa en línea</string>
 	<string name="shared_string_export">Exportar</string>
-	<string name="audio">Audio</string>
+	<string name="shared_string_audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
 	<string name="plugin_nautical_descr">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.

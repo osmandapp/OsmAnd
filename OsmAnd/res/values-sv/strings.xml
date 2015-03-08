@@ -1812,7 +1812,7 @@
 	<string name="share_note">Dela anteckning</string>
 	<string name="rename_recording">Byt namn på inspelning</string>
 	<string name="shared_string_export">Exportera</string>
-	<string name="audio">Ljud</string>
+	<string name="shared_string_audio">Ljud</string>
 	<string name="video">Video</string>
 	<string name="photo">Foton</string>
 	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.

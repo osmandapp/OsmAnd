@@ -366,7 +366,7 @@
 	<string name="plugin_ski_descr">Покретање ове измене мења преглед карте на „Зима и скијање“, које приказује у положеном погледу особине предела и зимске услове.
 		\n\nСветска карта приказује сва скијалишта и скијашке стазе у овом прегледу је доступна преузимањем  „Светске скијашке карте“.
 	</string>
-	<string name="audio">Звук</string>
+	<string name="shared_string_audio">Звук</string>
 	<string name="video">Видео</string>
 	<string name="photo">Слика</string>
 	<string name="share_note">Дели белешку</string>

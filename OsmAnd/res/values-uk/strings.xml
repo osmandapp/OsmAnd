@@ -1983,7 +1983,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="routing_attr_no_new_routing_name">Не використовувати маршрутизацію версії 1.9</string>
     <string name="navigate_point_northing">Північної широти</string>
     <string name="shared_string_dismiss">Не надсилати</string>
-    <string name="audio">Аудіо</string>
+    <string name="shared_string_audio">Аудіо</string>
 	<string name="video">Відео</string>
 	<string name="photo">Фото</string>
 	<string name="share_note">Поділитись нотаткою</string>

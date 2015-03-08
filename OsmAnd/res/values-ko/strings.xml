@@ -2091,9 +2091,6 @@
 	<string name="online_map">온라인 지도</string>
 	<string name="share_note">노트 공유</string>
 	<string name="rename_recording">레코딩 재명명</string>
-	<string name="audio">소리</string>
-	<string name="video">영상</string>
-	<string name="photo">사진</string>
 	<string name="plugin_nautical_descr">지도 스타일을 항해 지도로 변경하려면 보기(View)를 활성화 합니다, 그러면 모든 해상 운행 마크와 차트 심볼을 볼 수 있습니다.
 		\n\n세계적으로 모든 항해 기호를 포함 하는 지도 파일은  \'세계 seamarks\' 라는 하나의 파일을 다운로드하여 이용할 수 있습니다.
 		\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.

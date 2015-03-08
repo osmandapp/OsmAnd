@@ -1917,7 +1917,7 @@
 	<string name="share_note">分享筆記</string>
 	<string name="rename_recording">重新命名記錄</string>
 	<string name="shared_string_export">匯出</string>
-	<string name="audio">音訊</string>
+	<string name="shared_string_audio">音訊</string>
 	<string name="video">視訊</string>
 	<string name="photo">照片</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>

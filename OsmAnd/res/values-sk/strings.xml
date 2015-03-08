@@ -2004,9 +2004,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="free">"%1$s voľných "</string>
 	<string name="device_memory">Pamäť zariadenia</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžiarske trate</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Fotografie</string>
 	<string name="share_note">Zdieľať poznámku</string>
 	<string name="rename_recording">Premenovať nahrávku</string>
 	<string name="notes">Poznámky</string>

@@ -1862,11 +1862,7 @@
 	<string name="watch">Vis</string>
 	<string name="share_note">Del note</string>
 	<string name="rename_recording">Omdøb optagelse</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Foto</string>
 	<string name="plugin_touringview_name">Touring</string>
-
 	<string name="plugin_nautical_descr">Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.
 		\n\nEt kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.
 		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.

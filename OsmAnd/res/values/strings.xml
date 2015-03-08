@@ -144,9 +144,6 @@
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
 	<string name="back_to_map">Back to map</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Photo</string>
 	<string name="share_note">Share note</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Watch</string>

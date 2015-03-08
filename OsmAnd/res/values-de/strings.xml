@@ -2079,7 +2079,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 		\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
 		\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="audio">Audio</string>
+	<string name="shared_string_audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Aufnahme umbenennen</string>
