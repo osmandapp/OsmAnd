@@ -396,7 +396,6 @@
     <string name="no_index_file_to_download">No downloads found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="none_selected_gpx">No GPX files selected. In order to select press and hold on available track.</string>
-    <string name="local_index_unselect_gpx_file">Unselect</string>
     <string name="local_index_select_gpx_file">Select to show</string>
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
