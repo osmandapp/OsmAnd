@@ -118,7 +118,7 @@
     <string name="recording_description">Ձայնագրություն %1$s %2$s - %3$s</string>
     <string name="recording_default_name">ձայնագրություն</string>
     <string name="av_control_stop">Կանգնել</string>
-    <string name="av_control_start">ձայնագրել</string>
+    <string name="shared_string_control_start">ձայնագրել</string>
     <string name="map_widget_av_notes">Աուդիո/Վիդեո նշումներ</string>
     <string name="tip_map_styles">Քարտեզի Տեսակը</string>
 	<string name="about_version">Տարբերակ :</string>

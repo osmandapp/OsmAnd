@@ -1189,7 +1189,6 @@
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
     <string name="av_control_stop">Ferma</string>
-    <string name="av_control_start">Avvia</string>
     <string name="map_widget_av_notes">Note audio/video</string>
     <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isocline per sostenere lo sviluppo futuro.</string>
     <string name="srtm_paid_version_title">Plugin linee isocline</string>

@@ -1115,7 +1115,7 @@
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
     <string name="av_control_stop">停止</string>
-    <string name="av_control_start">開始</string>
+    <string name="shared_string_control_start">開始</string>
     <string name="map_widget_av_notes">音訊/視訊注解</string>
     <string name="osmand_srtm_short_description_80_chars">用於離線等高線的 OsmAnd 外掛元件</string>
     <string name="map_widget_distancemeasurement">測量距離</string>

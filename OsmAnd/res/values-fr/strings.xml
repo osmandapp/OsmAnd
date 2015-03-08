@@ -1152,7 +1152,7 @@
 \n\t* Option \'Touring view\' avec plus de détails, nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS"
     </string>
-    <string name="av_control_start">Enreg.</string>
+    <string name="shared_string_control_start">Enreg.</string>
     <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     

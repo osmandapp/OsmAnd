@@ -824,7 +824,7 @@
     <string name="visible_element">Vis på kart</string>
     <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for nettbaserte kart for dette).</string>
 	<string name="rendering_category_others">Andre kartattributter</string>
-    <string name="av_control_start">Start</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="save_route_as_gpx">Lagre rute som GPX-fil</string>
 	<string name="rendering_attr_publicTransportMode_name">Buss-, trolleybuss-, skyttelbussruter</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Trikk- og togruter</string>

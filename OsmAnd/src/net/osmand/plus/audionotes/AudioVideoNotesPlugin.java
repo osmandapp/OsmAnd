@@ -528,7 +528,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void setRecordListener(final TextInfoWidget recordPlaceControl, final MapActivity mapActivity) {
-		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
+		recordPlaceControl.setText(app.getString(R.string.shared_string_control_start), "");
 		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 

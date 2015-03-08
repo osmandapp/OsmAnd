@@ -691,7 +691,7 @@
     <string name="recording_description">Zapіs %1$s %2$s u %3$s</string>
     <string name="recording_default_name">zapіs</string>
     <string name="av_control_stop">Ctop</string>
-    <string name="av_control_start">Zapіs</string>
+    <string name="shared_string_control_start">Zapіs</string>
     <string name="map_widget_av_notes">Aŭdyjo/vіdea natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Moduĺ OsmAnd dlia pazasietkavych іzalіnіj vyšyń</string>
     <string name="osmand_srtm_long_description_1000_chars">Hety moduĺ pakazvaje іzalіnіі vyšyń na kartach OsmAnd. Hlabaĺnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumienta vіzualіzacyі Terra, flahmanskaha spadarožnіka sіstemy nazіrannia Ziamlі ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handliu і pramyslovascі Japonіі (METI), ahienctva kasmіčnych sіstem Japonіі (J-spacesystems).</string>

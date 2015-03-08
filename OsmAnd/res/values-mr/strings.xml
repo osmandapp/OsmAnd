@@ -379,7 +379,7 @@
     <string name="prefer_motorways">महामार्गांना प्राधान्य द्या</string>
 	<string name="prefer_in_routing_descr">महामार्गांना प्राधान्य द्या</string>
     <string name="intermediate_points_change_order">क्रम बदला</string>
-    <string name="av_control_start">सुरू करा</string>
+    <string name="shared_string_control_start">सुरू करा</string>
     <string name="av_control_stop">बंद करा</string>
     <string name="monitoring_control_stop">बंद करा</string>
     <string name="download_select_map_types">इतर नकाशे</string>

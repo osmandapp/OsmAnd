@@ -1104,7 +1104,7 @@
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_default_name">Grabación</string>
     <string name="av_control_stop">Parar</string>
-    <string name="av_control_start">Iniciar</string>
+    <string name="shared_string_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de audio</string>
     <string name="av_def_action_video">Grabar vídeo</string>
     <string name="av_def_action_audio">Grabar audio</string>

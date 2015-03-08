@@ -94,7 +94,7 @@
     <string name="recording_context_menu_delete">Обриши запис</string>
     <string name="recording_context_menu_play">Репродукуј</string>
     <string name="recording_default_name">снимање</string>
-    <string name="av_control_start">Почни</string>
+    <string name="shared_string_control_start">Почни</string>
     <string name="map_widget_av_notes">Аудио/видео белешке</string>
     <string name="map_widget_distancemeasurement">Мерење удаљености</string>
     <string name="monitoring_control_stop">стани</string>

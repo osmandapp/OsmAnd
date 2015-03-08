@@ -194,7 +194,7 @@
     <string name="recording_description">Запис %1$s %2$s от %3$s</string>
     <string name="recording_default_name">запис</string>
     <string name="av_control_stop">Стоп</string>
-    <string name="av_control_start">Старт</string>
+    <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудио/видео бележки</string>
     <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за контурни линии (офлайн)</string>
     <string name="osmand_srtm_long_description_1000_chars">Тази добавка изчертава контурни линии в офлайн картите на OsmAnd. Глобалната карта (между 70 градуса северна ширина и 70 градуса южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителсто и японската компания Japan Space Systems (J-spacesystems).</string>

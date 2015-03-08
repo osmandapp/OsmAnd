@@ -96,7 +96,7 @@
     <string name="recording_context_menu_delete">Izbriši snimku</string>
     <string name="recording_default_name">Snimanje</string>
     <string name="av_control_stop">stani</string>
-    <string name="av_control_start">pokreni</string>
+    <string name="shared_string_control_start">pokreni</string>
     
     <string name="monitoring_control_stop">zaustavi</string>
     <string name="index_srtm_parts">dijelovi</string>

@@ -1193,7 +1193,7 @@
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">"Įrašas %1$s  %3$s %2$s"</string>
     <string name="recording_default_name">Įrašas</string>
-    <string name="av_control_start">Įrašyti</string>
+    <string name="shared_string_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
     <string name="av_control_stop">Stop</string>
     <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>

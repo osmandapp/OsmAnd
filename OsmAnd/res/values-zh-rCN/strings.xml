@@ -63,7 +63,7 @@
     
     <string name="intermediate_points_change_order">变更顺序</string>
     <string name="av_use_external_camera">使用相机的应用程序</string>
-    <string name="av_control_start">开始</string>
+    <string name="shared_string_control_start">开始</string>
     
     <string name="download_roads_only_item">道路只</string>
     <string name="download_srtm_maps">等高线</string>

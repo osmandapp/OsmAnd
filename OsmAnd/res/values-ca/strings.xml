@@ -1033,7 +1033,7 @@
 		\n\t* Opció \'Vista turística\'amb més detalls al mapa, nous estils de carretera, més contrast, i l\'opció per senderisme indicant el grau de dificultat SAC
 		\n\t* Correcció d\'altitud GPS basada en EGM96
     </string>
-    <string name="av_control_start">Comença</string>
+    <string name="shared_string_control_start">Comença</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
     
     

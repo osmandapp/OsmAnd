@@ -1180,7 +1180,7 @@
     <string name="dist_control_start">Έναρξη</string>
     <string name="precise_routing_mode_descr">Ενεργοποίηση για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Ακόμη περιορισμένο σε σχέση με την απόσταση και αργό.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
-    <string name="av_control_start">Έναρξη</string>
+    <string name="shared_string_control_start">Έναρξη</string>
     <string name="av_use_external_camera_descr">Χρήση εφαρμογής συστήματος για φωτογραφία</string>
     <string name="av_use_external_camera">Χρήση εφαρμογής κάμερας</string>
     <string name="tip_recent_changes_1_1_2_t">Αλλαγές στην 1.1.2:

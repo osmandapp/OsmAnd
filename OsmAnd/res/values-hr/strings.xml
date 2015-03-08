@@ -39,7 +39,7 @@
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
     <string name="av_control_stop">stani</string>
-    <string name="av_control_start">započni</string>
+    <string name="shared_string_control_start">započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     
     

@@ -1148,7 +1148,7 @@
     <string name="recording_context_menu_delete">Zbriši posnetek</string>
     <string name="recording_is_recorded">Zvok/video se snema. Za ustavitev pritisnite gumb ustavi na pripomočku.</string>
     <string name="layer_recordings">Plast posnetkov</string>
-    <string name="av_control_start">Posnetek</string>
+    <string name="shared_string_control_start">Posnetek</string>
     
     
     <string name="av_def_action_video">Snemanje videa</string>
