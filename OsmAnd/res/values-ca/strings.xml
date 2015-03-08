@@ -119,7 +119,7 @@
 <string name="accessibility_extensions_descr">Extensions d\'accessibilitat per versions d\'Android antigues</string>
 <string name="accessibility_extensions">Extensions d\'accessibilitat</string>
 <string name="accessibility_mode">Mode d\'accessibilitat</string>
-<string name="accessibility_on">Activa</string>
+<string name="shared_string_on">Activa</string>
 <string name="accessibility_off">Inactiva</string>
 <string name="backToMenu">Torna al menú</string>
 <string name="zoomOut">Allunya</string>

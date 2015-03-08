@@ -1082,7 +1082,7 @@ POIの更新は利用できません</string>
 	<string name="accessibility_extensions">アクセシビリティ拡張</string>
 	<string name="accessibility_mode">アクセシビリティモード</string>
 	<string name="accessibility_mode_descr">アクセシビリティ機能の切り替え</string>
-	<string name="accessibility_on">オン</string>
+	<string name="shared_string_on">オン</string>
 	<string name="accessibility_off">オフ</string>
 	<string name="accessibility_default">グローバルシステム設定に従う</string>
 	<string name="backToMenu">メニューに戻る</string>

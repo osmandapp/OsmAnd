@@ -846,7 +846,7 @@
 	<string name="help">Agiudu</string>
 	<string name="accessibility_mode">Modalidade atzessìbile</string>
 	<string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade</string>
-	<string name="accessibility_on">Ativau</string>
+	<string name="shared_string_on">Ativau</string>
 	<string name="accessibility_off">Deativau</string>
 	<string name="backToMenu">Torra a su Menù</string>
 	<string name="zoomIs">Su zoom est</string>

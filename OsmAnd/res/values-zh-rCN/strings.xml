@@ -139,7 +139,7 @@
 	<string name="accessibility_extensions">无障碍扩展</string>
 	<string name="accessibility_mode">无障碍模式</string>
 	<string name="accessibility_mode_descr">打开辅助功能</string>
-	<string name="accessibility_on">上</string>
+	<string name="shared_string_on">上</string>
 	<string name="accessibility_off">离</string>
 	<string name="accessibility_default">根据全球系统设置</string>
 	<string name="backToMenu">返回目录</string>

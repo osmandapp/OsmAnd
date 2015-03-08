@@ -166,7 +166,7 @@
 <string name="accessibility_extensions">Tillgänglighetstillägg</string>
 <string name="accessibility_mode">Tillgänglighetsläge</string>
 <string name="accessibility_mode_descr">Sätter på tillgänglighetsfunktioner</string>
-<string name="accessibility_on">På</string>
+<string name="shared_string_on">På</string>
 <string name="accessibility_off">Av</string>
 <string name="accessibility_default">Enligt de globala systeminställningarna</string>
 <string name="backToMenu">Tillbaka till menyn</string>

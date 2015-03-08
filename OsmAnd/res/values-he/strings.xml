@@ -268,7 +268,7 @@
 	<string name="accessibility_extensions">הרחבות נגישות</string>
 	<string name="accessibility_mode">מצב נגישות</string>
 	<string name="accessibility_mode_descr">הפעלת תכונות הנגישות</string>
-	<string name="accessibility_on">פעיל</string>
+	<string name="shared_string_on">פעיל</string>
 	<string name="accessibility_off">כבוי</string>
 	<string name="accessibility_default">בהתאם להגדרות המערכת הכלליות</string>
 	<string name="backToMenu">חזרה לתפריט</string>

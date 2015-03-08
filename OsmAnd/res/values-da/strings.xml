@@ -399,7 +399,6 @@
 	<string name="map_widget_gps_info">GPS-information</string>
     <string name="gpx_tags_txt">Mærker</string>
 	<string name="accessibility_mode_descr">Slå tilgængeligheds funktionerne til</string>
-	<string name="accessibility_on">Til</string>
 	<string name="accessibility_off">Fra</string>
 	<string name="accessibility_default">Ifølge de globale systemindstillinger</string>
 	<string name="backToMenu">Tilbage til menuen</string>

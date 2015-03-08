@@ -5,7 +5,7 @@ import android.content.Context;
 
 public enum AccessibilityMode {
 
-    ON(R.string.accessibility_on),
+    ON(R.string.shared_string_on),
     OFF(R.string.accessibility_off),
     DEFAULT(R.string.accessibility_default);
 

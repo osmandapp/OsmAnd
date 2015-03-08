@@ -735,7 +735,7 @@
   <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>
   <string name="accessibility_mode">Tryb ułatwień dostępu</string>
   <string name="accessibility_mode_descr">Włącz funkcje ułatwień dostępu</string>
-  <string name="accessibility_on">Włączone</string>
+  <string name="shared_string_on">Włączone</string>
   <string name="accessibility_off">Wyłączone</string>
   <string name="accessibility_default">Zgodnie z ustawieniami systemowymi urządzenia</string>
   <string name="backToMenu">Powrót do menu</string>

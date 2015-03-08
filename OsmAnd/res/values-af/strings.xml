@@ -127,7 +127,7 @@
   <string name="accessibility_extensions">Toeganklikheid uitbreidings</string>
   <string name="accessibility_mode">Toeganklikheid gebruikswyse</string>
   <string name="accessibility_mode_descr">Skakel die toeganklikheid funksies aan</string>
-  <string name="accessibility_on">Aan</string>
+  <string name="shared_string_on">Aan</string>
   <string name="accessibility_off">Af</string>
   <string name="accessibility_default">Volgens die oorhoofse stelsel instellings</string>
   <string name="backToMenu">Terug na keuselys</string>

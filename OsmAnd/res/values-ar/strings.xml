@@ -171,7 +171,7 @@
 	<string name="accessibility_extensions">ملحقات لإتاحة الوصول</string>
 	<string name="accessibility_mode">وضع إتاحة الوصول</string>
 	<string name="accessibility_mode_descr">تفعيل مميزات إتاحة الوصول</string>
-	<string name="accessibility_on">تفعيل</string>
+	<string name="shared_string_on">تفعيل</string>
 	<string name="accessibility_off">إيقاف</string>
 	<string name="accessibility_default">وفقا لإعداد النظام العالمي</string>
 	<string name="backToMenu">الرجوع إلى القائمة</string>

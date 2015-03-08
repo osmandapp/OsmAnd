@@ -632,7 +632,7 @@
 	<string name="accessibility_extensions">Razširitve dostopnosti</string>
 	<string name="accessibility_mode">Način dostopnosti</string>
 	<string name="accessibility_mode_descr">Vklopi zmožnosti dostopnosti</string>
-	<string name="accessibility_on">Vklopljeno</string>
+	<string name="shared_string_on">Vklopljeno</string>
 	<string name="accessibility_off">Izklopljeno</string>
 	<string name="accessibility_default">Glede na splošne sistemske nastavitve</string>
 	<string name="backToMenu">Nazaj v meni</string>

@@ -713,7 +713,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="accessibility_extensions">Разширения за достъпност</string>
 	<string name="accessibility_mode">режим на достъпност</string>
 	<string name="accessibility_mode_descr">Включване на функции за достъпност и улесняване</string>
-	<string name="accessibility_on">Вкл.</string>
+	<string name="shared_string_on">Вкл.</string>
 	<string name="accessibility_off">Изключено</string>
 	<string name="accessibility_default">Съгласно глобалните настройки на устройството</string>
 	<string name="backToMenu">Назад към менюто</string>

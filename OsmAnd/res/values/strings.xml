@@ -1392,7 +1392,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="accessibility_extensions">Accessibility extensions</string>
 	<string name="accessibility_mode">Accessibility mode</string>
 	<string name="accessibility_mode_descr">Turns on the accessibility features</string>
-	<string name="accessibility_on">On</string>
 	<string name="accessibility_off">Off</string>
 	<string name="accessibility_default">According to the global system setting</string>
 	<string name="backToMenu">Back To Menu</string>

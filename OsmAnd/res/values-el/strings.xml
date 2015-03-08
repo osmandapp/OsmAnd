@@ -244,7 +244,7 @@
 	<string name="accessibility_extensions">Επεκτάσεις προσβασιμότητας</string>
 	<string name="accessibility_mode">﻿Λειτουργία προσβασιμότητας</string>
 	<string name="accessibility_mode_descr">﻿Ενεργοποιεί τις δυνατότητες προσβασιμότητας</string>
-	<string name="accessibility_on">Ενεργό</string>
+	<string name="shared_string_on">Ενεργό</string>
 	<string name="accessibility_off">Ανενεργό</string>
 	<string name="accessibility_default">Σύμφωνα με την καθολική ρύθμιση του συστήματος</string>
 	<string name="backToMenu">﻿Πίσω Στο Μενού</string>

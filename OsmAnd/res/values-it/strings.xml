@@ -823,7 +823,6 @@
   <string name="accessibility_extensions">Estensioni per l\'accessibilità</string>
   <string name="accessibility_mode">Modalità accessibile</string>
   <string name="accessibility_mode_descr">Abilita le funzioni relative all\'accessibilità</string>
-  <string name="accessibility_on">Attivato</string>
   <string name="accessibility_off">Disattivato</string>
   <string name="accessibility_default">Basata sulle impostazioni globali di sistema</string>
   <string name="backToMenu">Torna al menu</string>

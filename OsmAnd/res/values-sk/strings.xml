@@ -146,7 +146,6 @@
   <string name="accessibility_extensions">Rozšírenia uľahčenia prístupu</string>
   <string name="accessibility_mode">Režim uľahčenia prístupu</string>
   <string name="accessibility_mode_descr">Zapnutie funkcií uľahčenia prístupu</string>
-  <string name="accessibility_on">Zapnutý</string>
   <string name="accessibility_off">Vypnutý</string>
   <string name="accessibility_default">Podľa globálnych nastavení systému</string>
   <string name="backToMenu">Späť na ponuku</string>

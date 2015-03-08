@@ -49,7 +49,6 @@
   <string name="accessibility_extensions">Toegankelijkheidsmodules</string>
   <string name="accessibility_mode">Toegankelijkheidsmodus</string>
   <string name="accessibility_mode_descr">Zet toegankelijkheidsmodus aan</string>
-  <string name="accessibility_on">Aan</string>
   <string name="accessibility_off">Uit</string>
   <string name="accessibility_default">Gelijk aan systeeminstelling</string>
   <string name="backToMenu">Terug naar menu</string>

@@ -285,7 +285,7 @@
 	<string name="accessibility_extensions">Extensii de accesibilitate</string>
 	<string name="accessibility_mode">Modul de accesibilitate</string>
 	<string name="accessibility_mode_descr">Activează funcțiile de accesibilitate</string>
-	<string name="accessibility_on">Pornit</string>
+	<string name="shared_string_on">Pornit</string>
 	<string name="accessibility_off">Oprit</string>
 	<string name="accessibility_default">În concordanță cu setările dispozitivului</string>
 	<string name="backToMenu">Înapoi la meniu</string>

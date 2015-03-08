@@ -208,7 +208,7 @@ Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, 
 <string name="accessibility_extensions">Estyniadau Hygyrchedd</string>
 <string name="accessibility_mode">Modd Hygyrchedd</string>
 <string name="accessibility_mode_descr">Troi ar y nodweddion hygyrchedd</string>
-<string name="accessibility_on">Ar</string>
+<string name="shared_string_on">Ar</string>
 <string name="accessibility_off">Oddi</string>
 <string name="accessibility_default">Yn ôl y lleoliad system fyd-eang</string>
 <string name="backToMenu">Yn ôl At Ddewislen</string>
