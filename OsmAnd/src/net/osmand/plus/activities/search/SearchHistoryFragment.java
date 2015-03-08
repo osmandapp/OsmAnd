@@ -143,7 +143,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(model.getLat(), model.getLon()),
 				model, name, settings.getLastKnownMapZoom(), getActivity(), true);
 		MenuItem item = optionsMenu.getMenu().add(
-				R.string.edit_filter_delete_menu_item).setIcon(light ?
+				R.string.shared_string_delete).setIcon(light ?
 				R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

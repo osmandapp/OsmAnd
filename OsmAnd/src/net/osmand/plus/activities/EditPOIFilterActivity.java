@@ -112,7 +112,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
 				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
-			createMenuItem(menu, DELETE_FILTER, R.string.edit_filter_delete_menu_item, 
+			createMenuItem(menu, DELETE_FILTER, R.string.shared_string_delete, 
 					R.drawable.ic_action_gdiscard_dark, R.drawable.ic_action_gdiscard_dark,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
