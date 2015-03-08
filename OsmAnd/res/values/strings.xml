@@ -40,7 +40,7 @@
 	<string name="shared_string_select_on_map">Select on map</string>
 	<string name="shared_string_select_all">Select all</string>
 	<string name="shared_string_deselect">Deselect</string>
-	<string name="shared_string_deselect_all">Deselect all</string>
+	<string name="shared_string_shared_strings_deselect_all">Deselect all</string>
 	<string name="shared_string_clear">Clear</string>
 	<string name="shared_string_clear_all">Clear all</string>
 	<string name="shared_string_save">Save</string>
@@ -1811,7 +1811,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
 	<string name="filter_existing_indexes">Downloaded</string>
-	<string name="deselect_all">Deselect all</string>
 	<string name="reload">Refresh</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>

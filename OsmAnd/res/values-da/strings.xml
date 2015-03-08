@@ -856,7 +856,6 @@
 	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
-	<string name="deselect_all">Fravælg alle</string>
 	<string name="reload">Genindlæs</string>
 	<string name="fast_route_mode">Hurtigste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
@@ -1955,7 +1954,7 @@
 	<string name="shared_string_select_on_map">Vælg på kort</string>
 	<string name="shared_string_select_all">Vælg alt</string>
 	<string name="shared_string_deselect">Fravælg</string>
-	<string name="shared_string_deselect_all">Fravælg alt</string>
+	<string name="shared_string_shared_strings_deselect_all">Fravælg alt</string>
 	<string name="shared_string_clear">Ryd</string>
 	<string name="shared_string_clear_all">Ryd alt</string>
 	<string name="shared_string_save">Gem</string>

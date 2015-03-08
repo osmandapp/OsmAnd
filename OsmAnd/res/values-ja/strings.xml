@@ -227,7 +227,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
 MB)をダウンロードしますか?</string>
      <string name="items_were_selected">{0} 件のアイテムを選択</string>
      <string name="filter_existing_indexes">ダウンロードされたフィルタ</string>
-     <string name="deselect_all">全て選択解除</string>
+     <string name="shared_strings_deselect_all">全て選択解除</string>
      <string name="shared_string_select_all">全て選択</string>
      <string name="reload">リロード</string>
 

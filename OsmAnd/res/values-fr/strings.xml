@@ -393,7 +393,7 @@
   <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
   <string name="filter_existing_indexes">Cartes téléchargées</string>
-  <string name="deselect_all">Désélectionner tout</string>
+  <string name="shared_strings_deselect_all">Désélectionner tout</string>
   <string name="shared_string_select_all">Sélectionner tout</string>
   <string name="reload">Recharger</string>
   <string name="fast_route_mode">Itinéraire le plus rapide</string>

@@ -1305,7 +1305,7 @@
 	<string name="daynight">Modalidade die/note</string>
 	<string name="items_were_selected">{0} ogetu/os ischertados</string>
 	<string name="filter_existing_indexes">Iscarrigados</string>
-	<string name="deselect_all">Deischerta totu</string>
+	<string name="shared_strings_deselect_all">Deischerta totu</string>
 	<string name="shared_string_select_all">Ischerta totu</string>
 	<string name="fast_route_mode">Àndala prus lestra</string>
 	<string name="tiles_to_download_estimated_size">Pro su zoom {0} iscàrriga {1} tasseddos ({2} MB)</string>

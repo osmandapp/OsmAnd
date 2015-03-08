@@ -1335,7 +1335,7 @@
 	<string name="download_files_question">Descargar {0} ficheiro(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} elemento(s) seleccionados</string>
 	<string name="filter_existing_indexes">Descargado</string>
-	<string name="deselect_all">Anular toda a selección</string>
+	<string name="shared_strings_deselect_all">Anular toda a selección</string>
 	<string name="shared_string_select_all">Seleccionar todo</string>
 	<string name="reload">Anovar</string>
 	<string name="fast_route_mode">Itinerario máis rápido</string>

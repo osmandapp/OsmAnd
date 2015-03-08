@@ -516,7 +516,7 @@
   <string name="download_files_question">Laai {0} lêer(s) af ({1} MB)?</string>
   <string name="items_were_selected">{0} item(s) gekies</string>
   <string name="filter_existing_indexes">Filter afgelaai</string>
-  <string name="deselect_all">Kanseleer alle keuses</string>
+  <string name="shared_strings_deselect_all">Kanseleer alle keuses</string>
   <string name="shared_string_select_all">Kies alles</string>
   <string name="reload">Verfris</string>
   <string name="fast_route_mode">Vinnigste roete</string>

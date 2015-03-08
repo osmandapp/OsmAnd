@@ -569,7 +569,6 @@
   <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
   <string name="items_were_selected">Bolo vybraných {0} položiek</string>
   <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
-  <string name="deselect_all">Zrušiť výber</string>
   <string name="reload">Znovu načítať</string>
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
@@ -2096,7 +2095,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_select_on_map">Vybrať na mape</string>
 	<string name="shared_string_select_all">Vybrať všetko</string>
 	<string name="shared_string_deselect">Zrušiť výber</string>
-	<string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
+	<string name="shared_string_shared_strings_deselect_all">Zrušiť výber všetkých</string>
 	<string name="shared_string_clear">Vymazať</string>
 	<string name="shared_string_clear_all">Vymazať všetko</string>
 	<string name="shared_string_save">Uložiť</string>

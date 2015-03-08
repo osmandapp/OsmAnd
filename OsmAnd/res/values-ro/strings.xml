@@ -733,7 +733,7 @@
 	<string name="download_files_question">Descărcați {0} fișier(e) ({1} MB)?</string>
 	<string name="items_were_selected">{0} element(e) selectate</string>
 	<string name="filter_existing_indexes">Filtru descărcat</string>
-	<string name="deselect_all">Deselectează tot</string>
+	<string name="shared_strings_deselect_all">Deselectează tot</string>
 	<string name="shared_string_select_all">Selectează tot</string>
 	<string name="reload">Reîmprospătează</string>
 	<string name="fast_route_mode">Cea mai rapidă rută</string>

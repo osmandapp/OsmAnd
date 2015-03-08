@@ -987,7 +987,7 @@
 	<string name="download_files_question">{0} dosya indirilecek ({1} MB)?</string>
 	<string name="items_were_selected">{0} öğe seçildi</string>
 	<string name="filter_existing_indexes">İndirilen</string>
-	<string name="deselect_all">Tüm seçimi kaldır</string>
+	<string name="shared_strings_deselect_all">Tüm seçimi kaldır</string>
 	<string name="fast_route_mode_descr">Hızlı güzergah hesaplamayı etkinleştirin ya da kısa güzergah için devre dışı bırakın. </string>
 	<string name="continuous_rendering">Devamlı işleme</string>
 	<string name="rendering_exception">Seçilen alanın işlemesi yapılırken hata oluştu</string>

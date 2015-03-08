@@ -689,7 +689,7 @@
 	<string name="download_files_question">Λήψη {0} αρχείου(ων) ({1} MB)?</string>
 	<string name="items_were_selected">{0} αντικείμενο(α) επιλέχτηκαν</string>
 	<string name="filter_existing_indexes">Κατεβασμένα</string>
-	<string name="deselect_all">Αποεπιλογή όλων</string>
+	<string name="shared_strings_deselect_all">Αποεπιλογή όλων</string>
 	<string name="shared_string_select_all">Επιλογή όλων</string>
 	<string name="reload">Ανανέωση</string>
 	<string name="fast_route_mode">Ταχύτερη διαδρομή</string>

@@ -765,7 +765,7 @@
 	<string name="download_files_question">是否下载 {0} 个文件({1} MB)？</string>
 	<string name="items_were_selected">已选择 {0} 个项目</string>
 	<string name="filter_existing_indexes">已下载</string>
-	<string name="deselect_all">全部不选</string>
+	<string name="shared_strings_deselect_all">全部不选</string>
 	<string name="shared_string_select_all">全部选中</string>
 	<string name="fast_route_mode">最快路线</string>
 	<string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线 </string>

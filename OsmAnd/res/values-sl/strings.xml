@@ -861,7 +861,7 @@
 	<string name="contribution_activity">Namesti različico</string>
 	<string name="items_were_selected">{0} predmet(ov) je izbran(ih)</string>
 	<string name="filter_existing_indexes">Filtriraj prejeto</string>
-	<string name="deselect_all">Odstrani izbiro vsega</string>
+	<string name="shared_strings_deselect_all">Odstrani izbiro vsega</string>
 	<string name="shared_string_select_all">Izberi vse</string>
 	<string name="reload">Osveži</string>
 	<string name="tiles_to_download_estimated_size">Pri povečavi {0} prejmi {1} ploščic ({2} MB)</string>

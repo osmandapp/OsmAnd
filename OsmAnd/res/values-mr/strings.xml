@@ -443,7 +443,7 @@
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
 	<string name="transport_search_none">काहीच नाही</string>
 	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
-	<string name="deselect_all">काहीच निवडू नका</string>
+	<string name="shared_strings_deselect_all">काहीच निवडू नका</string>
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
 	<string name="amenity_type_man_made">मानव निर्मित</string>
 	<string name="amenity_type_administrative">प्रशासकीय</string>

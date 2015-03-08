@@ -591,7 +591,7 @@
   <string name="download_files_question">Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="items_were_selected">Pasitrinkti {0} elementai(-as)</string>
   <string name="filter_existing_indexes">Filtruoti parsiųstus</string>
-  <string name="deselect_all">Nepasirinkti nieko</string>
+  <string name="shared_strings_deselect_all">Nepasirinkti nieko</string>
   <string name="shared_string_select_all">Pasirinkti viską</string>
   <string name="reload">Atnaujinti</string>
   <string name="fast_route_mode">Greičiausias maršrutas</string>

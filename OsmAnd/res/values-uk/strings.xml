@@ -515,7 +515,7 @@
   <string name="download_files_question">Завантажити {0} файл(ів) ({1} MB)?</string>
   <string name="items_were_selected">Було вибрано {0}</string>
   <string name="filter_existing_indexes">Завантажені</string>
-  <string name="deselect_all">Зняти все</string>
+  <string name="shared_strings_deselect_all">Зняти все</string>
   <string name="shared_string_select_all">Вибрати все</string>
   <string name="reload">Перезавантажити</string>
   <string name="fast_route_mode">Найшвидший маршрут</string>

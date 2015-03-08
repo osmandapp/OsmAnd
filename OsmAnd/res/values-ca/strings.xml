@@ -512,7 +512,7 @@
 <string name="daynight">Mode dia/nit</string>
 <string name="download_files_question">Voleu baixar {0} fitxer(s) ({1} MB)?</string>
 <string name="items_were_selected">{0} ítem(s) seleccionat(s)</string>
-<string name="deselect_all">No seleccionis res</string>
+<string name="shared_strings_deselect_all">No seleccionis res</string>
 <string name="shared_string_select_all">Selecciona-ho tot</string>
 <string name="fast_route_mode">La ruta més ràpida</string>
 <string name="fast_route_mode_descr">Activeu per calcular la ruta més ràpida o desactiveu per calcular la més curta </string>

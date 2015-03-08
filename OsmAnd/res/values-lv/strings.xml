@@ -449,7 +449,7 @@
   <string name="download_files_question">Lejupielādēt {0} failu(s) ({1} MB)?</string>
   <string name="items_were_selected">izvēlēta {0} vienība(s)</string>
   <string name="filter_existing_indexes">Filtrs lejupielādēts</string>
-  <string name="deselect_all">Noņemt visu</string>
+  <string name="shared_strings_deselect_all">Noņemt visu</string>
   <string name="shared_string_select_all">Atlasīt visu</string>
   <string name="reload">Atsvaidzināt</string>
   <string name="fast_route_mode">Ātrākais maršruts</string>

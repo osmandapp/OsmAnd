@@ -230,7 +230,7 @@
 	<string name="download_files_question">Lataa {0} tiedosto(a) ({1} MB)?</string>
 	<string name="items_were_selected">{0} kohde(tta) valittu</string>
 	<string name="filter_existing_indexes">Suodata ladatut</string>
-	<string name="deselect_all">Poista valinta kaikista</string>
+	<string name="shared_strings_deselect_all">Poista valinta kaikista</string>
 	<string name="shared_string_select_all">Valitse kaikki</string>
 	<string name="reload">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>

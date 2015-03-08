@@ -276,7 +276,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="download_files_question">Tải xuống {0} tập tin ({1} MB)?</string>
 	<string name="items_were_selected">{0} đối tượng được chọn</string>
 	<string name="filter_existing_indexes">Bộ lọc đã được tải</string>
-	<string name="deselect_all">Bỏ chọn tất cả</string>
+	<string name="shared_strings_deselect_all">Bỏ chọn tất cả</string>
 	<string name="shared_string_select_all">Lựa chọn tất cả</string>
 	<string name="reload">Làm tươi</string>
 

@@ -809,7 +809,7 @@
   <string name="download_files_question">Deskargatu {0} fitxategi ({1} MB)?</string>
   <string name="items_were_selected">{0} elementu aukeratuta</string>
   <string name="filter_existing_indexes">Deskargatuta</string>
-  <string name="deselect_all">Hautapena garbitu</string>
+  <string name="shared_strings_deselect_all">Hautapena garbitu</string>
   <string name="shared_string_select_all">Guztia hautatu</string>
   <string name="reload">Birkargatu</string>
   <string name="fast_route_mode">Biderik azkarrena</string>

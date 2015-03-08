@@ -479,7 +479,6 @@
   <string name="download_files_question">Download {0} bestand(en) ({1} MB)?</string>
   <string name="items_were_selected">{0} item(s) geselecteerd</string>
   <string name="filter_existing_indexes">Toon gedownloade</string>
-  <string name="deselect_all">Deselecteer alles</string>
   <string name="reload">Ververs</string>
   <string name="fast_route_mode">Snelste route</string>
   <string name="fast_route_mode_descr">Activeer voor de snelste route of deactiveer voor de kortste route </string>
@@ -2108,7 +2107,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_select_on_map">Selecteer op de kaart</string>
 	<string name="shared_string_select_all">Selecteer alles</string>
 	<string name="shared_string_deselect">Deselecteren</string>
-	<string name="shared_string_deselect_all">Deselecteer alles</string>
+	<string name="shared_string_shared_strings_deselect_all">Deselecteer alles</string>
 	<string name="shared_string_clear">Wis</string>
 	<string name="shared_string_clear_all">Wis alles</string>
 	<string name="shared_string_save">Opslaan</string>

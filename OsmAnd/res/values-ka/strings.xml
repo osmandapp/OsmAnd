@@ -448,7 +448,7 @@
   <string name="download_files_question">გადმოვიწერო {0} ფაილი(ები) ზომით ({1} მბ)?</string>
   <string name="items_were_selected">არჩეულია {0}</string>
   <string name="filter_existing_indexes">ფილტრები გადმოწერილია</string>
-  <string name="deselect_all">მონიშვნის მოხსნა</string>
+  <string name="shared_strings_deselect_all">მონიშვნის მოხსნა</string>
   <string name="shared_string_select_all">ყველაფრის არჩევა</string>
   <string name="reload">განახლება</string>
   <string name="fast_route_mode">უსწრაფესი გზა</string>

@@ -1080,7 +1080,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="download_files_question">Сьцягнуць {0} файл(ы) ({1} МБ)?</string>
 	<string name="items_were_selected">{0} абрана</string>
 	<string name="filter_existing_indexes">Сьцягнутае</string>
-	<string name="deselect_all">Прыбраць вылучэньне ўсіх</string>
 	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
@@ -2046,7 +2045,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_select_on_map">Выбраць на мапе</string>
 	<string name="shared_string_select_all">Выбраць усё</string>
 	<string name="shared_string_deselect">Прыбраць вылучэньне</string>
-	<string name="shared_string_deselect_all">Прыбраць вылучэньне ўсіх</string>
+	<string name="shared_string_shared_strings_deselect_all">Прыбраць вылучэньне ўсіх</string>
 	<string name="shared_string_clear">Ачысьціць</string>
 	<string name="shared_string_clear_all">Ачысьціць усё</string>
 	<string name="shared_string_save">Захаваць</string>
