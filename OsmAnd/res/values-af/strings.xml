@@ -1359,8 +1359,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="tip_faq">Gereëlde Vrae</string>
     <string name="remember_choice">Onthou my keuse</string>
     <string name="gps_status_eclipsim">GPS status</string>
-    <string name="default_and">en</string>
-    <string name="default_or">of</string>
+    <string name="shared_string_and">en</string>
+    <string name="shared_string_or">of</string>
 	<string name="osmodroid_refresh">Verfris kanale</string>
     <string name="osmodroid_seek">Soek objek</string>
     <string name="osmo_settings_uuid">Unieke toestel ID</string>

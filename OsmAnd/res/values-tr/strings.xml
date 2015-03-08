@@ -1187,8 +1187,8 @@
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
     <string name="remember_choice">Seçmeyi unutmayın</string>
     <string name="gps_status_eclipsim">GPS Durumu</string>
-    <string name="default_and">ve</string>
-    <string name="default_or">veya</string>
+    <string name="shared_string_and">ve</string>
+    <string name="shared_string_or">veya</string>
 	<string name="route_is_too_long">OsmAnd isimli yönlendirme fazla 200km ayrı noktalarda için çok uzun ( ya da bazen çalışmıyor ) alabilir .Daha iyi performans için ara rota noktası eklemek isteyebilirsiniz .</string>
 	<string name="auto_zoom_none">Otomatik odaklama Kapalı</string>
 	<string name="auto_zoom_close">yakın</string>

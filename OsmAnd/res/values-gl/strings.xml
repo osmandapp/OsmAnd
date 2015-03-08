@@ -368,8 +368,8 @@
     <string name="animate_routing_gpx">Simular empregando pista GPX</string>
     <string name="remember_choice">Lembrar a miña escolla</string>
     <string name="gps_status_eclipsim">Estado do GPS</string>
-    <string name="default_and">e</string>
-    <string name="default_or">ou</string>
+    <string name="shared_string_and">e</string>
+    <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">O cálculo de rutas sen conexión de OsmAnd pode levar moito tempo (e ás veces non funcionar) para puntos que fiquen a máis de 200 km entre si. Habitualmente axuda engadir puntos de pasaxe intermedios.</string>
 	<string name="auto_zoom_none">Sen ampliación automática</string>
 	<string name="auto_zoom_close">A primeiro plano</string>

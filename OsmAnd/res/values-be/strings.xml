@@ -1526,8 +1526,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
 	<string name="osmodroid_seek">Адсочваць аб\'ект</string>
     <string name="osmodroid_refresh">Абнавіць каналы</string>
-    <string name="default_or">ці</string>
-	<string name="default_and">і</string>
     <string name="gps_status_eclipsim">Стан GPS</string>
     <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>

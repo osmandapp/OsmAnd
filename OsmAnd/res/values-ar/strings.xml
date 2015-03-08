@@ -559,8 +559,8 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل الأوامر من الصوت المحدد الحالي</string>
 	<string name="switch_to_raster_map_to_see">لا توجد خرائط متجهة محلية لهذا المكان. يمكنك تنزيل أحدها من الإعدادات (إدارة البيانات)، أو الانتقال خرائط الانترنت.</string>
-	<string name="default_and">و</string>
-    <string name="default_or">أو</string>
+	<string name="shared_string_and">و</string>
+    <string name="shared_string_or">أو</string>
 	<string name="av_camera_focus_continuous">التركيز المستمر</string>
 	<string name="free_version_title">الإصدار المجاني</string>
 	<string name="index_name_north_america">أمريكا الشمالية</string>

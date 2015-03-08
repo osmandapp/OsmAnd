@@ -1411,8 +1411,8 @@
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
-    <string name="default_and">和</string>
-    <string name="default_or">或</string>
+    <string name="shared_string_and">和</string>
+    <string name="shared_string_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>

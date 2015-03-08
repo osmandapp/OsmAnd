@@ -1218,8 +1218,8 @@
     <string name="animate_routing_gpx">Simulează folosind traseul GPX</string>
     <string name="remember_choice">Reține alegerea mea</string>
     <string name="gps_status_eclipsim">Status GPS</string>
-    <string name="default_and">și</string>
-    <string name="default_or">sau</string>
+    <string name="shared_string_and">și</string>
+    <string name="shared_string_or">sau</string>
 	<string name="auto_zoom_close">Prea apropiat</string>
 	<string name="map_magnifier">Lupă hartă</string>
 	<string name="base_world_map">Harta de bază a lumii</string>

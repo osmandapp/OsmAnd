@@ -1846,8 +1846,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="animate_routing_gpx">Симуляуція використання треку GPX</string>
     <string name="remember_choice">Запам’ятати мій вибір</string>
     <string name="gps_status_eclipsim">Стан GPS</string>
-    <string name="default_and">і</string>
-    <string name="default_or">або</string>
+    <string name="shared_string_and">і</string>
+    <string name="shared_string_or">або</string>
 	<string name="route_is_too_long">Можливо, буде потрібно дуже багато часу для локального (оффлайн) розрахунку маршруту понад 200 км. Для розрахунку, будь ласка, додайте одну або більше проміжних точок на маршруті.</string>
 	<string name="auto_zoom_none">Без автомасштабування</string>
 	<string name="auto_zoom_close">До крупного плану</string>

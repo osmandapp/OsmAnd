@@ -1479,8 +1479,8 @@
 	<string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
 	<string name="edit_tilesource_name">Name</string>
 	<string name="maps_define_edit">Definieren/Bearbeiten…</string>
-	<string name="default_and">und</string>
-	<string name="default_or">oder</string>
+	<string name="shared_string_and">und</string>
+	<string name="shared_string_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
 	<string name="remember_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>

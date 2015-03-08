@@ -1421,8 +1421,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	\n\t* Des tas de modifications dans l\'interface utilisateur
 	\n\t* Résolution de bogues dans l\'affichage des distances, analyseur GPX, traitement des points de passage, widget de planning, chargement vers OSM, protocole https
     </string>
-    <string name="default_and">et</string>
-    <string name="default_or">ou</string>
+    <string name="shared_string_and">et</string>
+    <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">Le calcul d’itinéraire par OsmAnd peut prendre beaucoup de temps (et peut même parfois ne pas aboutir) pour des points séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour une meilleure performance.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
 	<string name="auto_zoom_close">Pour agrandir</string>

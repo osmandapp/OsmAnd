@@ -1281,9 +1281,9 @@
     <string name="about_settings">Buruz</string>
     <string name="about_settings_descr">Bertsioaren informazioa ,lizantziak ,proiektu kideak</string>
     <string name="tip_map_styles">Maparen estiloa</string>
-	<string name="default_or">edo</string>
+	<string name="shared_string_or">edo</string>
 	<string name="gps_status_eclipsim">GPSaren egoera</string>
-    <string name="default_and">eta</string>
+    <string name="shared_string_and">eta</string>
     <string name="local_osm_changes_delete_all">Dena ezabatu</string>
     <string name="remember_choice">Nire aukera gogoratu</string>
     <string name="animate_routing_route_not_calculated">Kalkulatu ibilbidea lehenengo, mesedez</string>

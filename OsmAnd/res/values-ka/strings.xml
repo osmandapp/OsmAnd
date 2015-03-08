@@ -1087,8 +1087,8 @@
     <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>
     <string name="remember_choice">ჩემი არჩევნის დამახსოვრება</string>
     <string name="gps_status_eclipsim">GPS-ის სტატუსი</string>
-    <string name="default_and">და</string>
-    <string name="default_or">ან</string>
+    <string name="shared_string_and">და</string>
+    <string name="shared_string_or">ან</string>
 	<string name="route_is_too_long">შესაძლებელია გზა მეტისმეტად გრძელია OsmAnd გათიშული მთვლელისათვის.
 	გათიშული გზის შესაძლო მაქსიმალური სიგრძეა 200კმ. გთხოვთ ჩაამატოთ შუალედური წერტილები.</string>
 	<string name="auto_zoom_none">ავტომატური გადიდების გათიშვა</string>

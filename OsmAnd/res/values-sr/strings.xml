@@ -13,8 +13,8 @@
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
     <string name="remember_choice">Запамти мој избор</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
+    <string name="shared_string_and">и</string>
+    <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>
 	<string name="base_world_map">Основна карта света</string>
 	<string name="tip_map_styles">Стилови мапа</string>

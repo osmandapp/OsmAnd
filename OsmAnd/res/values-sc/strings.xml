@@ -122,8 +122,8 @@
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
     <string name="remember_choice">Ammenta s’issèberu meu</string>
     <string name="gps_status_eclipsim">Istadu GPS</string>
-    <string name="default_and">e</string>
-    <string name="default_or">o</string>
+    <string name="shared_string_and">e</string>
+    <string name="shared_string_or">o</string>
 	<string name="route_is_too_long">Su càlculu de s’àndala de OsmAnd sena impreare internet diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km. Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas prestatziones.</string>
 	<string name="auto_zoom_none">No zoom automàticu</string>
 	<string name="auto_zoom_close">Zoom automàticu mannu</string>

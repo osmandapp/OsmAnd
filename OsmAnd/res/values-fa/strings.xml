@@ -1589,8 +1589,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     
     <string name="map_magnifier">ذره بین نقشه</string>
     <string name="base_world_map">نقشه کل جهان</string>
-	<string name="default_and">و</string>
-    <string name="default_or">یا</string>
+	<string name="shared_string_and">و</string>
+    <string name="shared_string_or">یا</string>
 	<string name="animate_routing_route_not_calculated">لطفاً ابتدا مسیر را محاسبه کن</string>
     <string name="animate_routing_route">شبیه سازی با استفاده از مسیر محاسبه شده </string>
     <string name="animate_routing_gpx">شبیه سازی با استفاده از مسیر GPX</string>

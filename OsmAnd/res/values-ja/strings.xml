@@ -1151,8 +1151,8 @@ POIの更新は利用できません</string>
     <string name="animate_routing_gpx">GPXトラックを利用してシミュレーション</string>
     <string name="remember_choice">選択を記憶</string>
     <string name="gps_status_eclipsim">GPSステータス</string>
-    <string name="default_and">と</string>
-    <string name="default_or">または</string>
+    <string name="shared_string_and">と</string>
+    <string name="shared_string_or">または</string>
 	<string name="route_is_too_long">OsmAndオフラインルート計算は、指定地点間の距離が200km以上有ると非常に時間がかかります(場合によっては動作しません)。 中間経由点を作成することでルート計算に掛かる時間を短くすることが出来ます。</string>
 	<string name="auto_zoom_none">自動ズームしない</string>
 	<string name="auto_zoom_close">ズーム 大</string>

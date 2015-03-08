@@ -1302,8 +1302,8 @@
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
-	<string name="default_and">och</string>
-    <string name="default_or">eller</string>
+	<string name="shared_string_and">och</string>
+    <string name="shared_string_or">eller</string>
 	<string name="remember_choice">Kom ihåg mitt val</string>
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>

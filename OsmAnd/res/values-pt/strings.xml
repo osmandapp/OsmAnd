@@ -1526,8 +1526,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="animate_routing_gpx">Simular usando caminho GPX</string>
     <string name="remember_choice">Memorizar escolha</string>
     <string name="gps_status_eclipsim">Estado do GPS</string>
-    <string name="default_and">e</string>
-    <string name="default_or">ou</string>
+    <string name="shared_string_and">e</string>
+    <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo router offline OsmAnd.
          → Em média, a rota off-line apenas é possível para distâncias até 200 km. Por favor adicione um ou mais pontos intermédios para calcular a rota.</string>
 	<string name="osmodroid_refresh">Atualizar canais</string>

@@ -271,7 +271,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 							continue;
 						}
 						if (set.size() > 1) {
-							s.append(" ").append(view.getResources().getString(R.string.default_or)).append(" ");
+							s.append(" ").append(view.getResources().getString(R.string.shared_string_or)).append(" ");
 							filter.append(", ");
 						} else {
 							s.append(" ");

@@ -715,8 +715,8 @@
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
     <string name="remember_choice">Husk mitt valg</string>
     <string name="gps_status_eclipsim">GPS-status</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
+    <string name="shared_string_and">og</string>
+    <string name="shared_string_or">eller</string>
 	<string name="lang_en">Engelsk</string>
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armensk</string>

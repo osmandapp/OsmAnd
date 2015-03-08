@@ -1559,8 +1559,8 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="app_mode_aircraft">Самолет</string>
     <string name="tip_faq_t">Посетете https://code.google.com/p/osmand/wiki/FAQ за ЧЗВ.</string>
     <string name="tip_faq">Често Задавани Въпроси</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
+    <string name="shared_string_and">и</string>
+    <string name="shared_string_or">или</string>
 	<string name="route_is_too_long">Маршрутът е доста дълъг за изчисляване.
 	За сега е възможно добро изчисляване на маршрут между точки, отдалечени на не повече от 200 км. Добавете междинни точки при по-дълги дистанции.</string>
 	<string name="base_world_map">Базова карта на света</string>

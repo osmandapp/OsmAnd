@@ -1419,8 +1419,8 @@
     
     <string name="remember_choice">Atsiminti mano pasirinkimą</string>
     <string name="gps_status_eclipsim">GPS statusas</string>
-    <string name="default_and">ir</string>
-    <string name="default_or">arba</string>
+    <string name="shared_string_and">ir</string>
+    <string name="shared_string_or">arba</string>
 	<string name="animate_routing_route_not_calculated">Pirmiausia apskaičiuokite maršrutą</string>
     <string name="animate_routing_route">Simuliuoti naudojant apskaičiuotą maršrutą </string>
     <string name="animate_routing_gpx">Simuliuoti naudojant GPX maršrutą</string>

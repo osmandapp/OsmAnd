@@ -1349,8 +1349,8 @@
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
     <string name="remember_choice">Emlékezz a választásomra</string>
     <string name="gps_status_eclipsim">GPS Státusz</string>
-    <string name="default_and">és</string>
-    <string name="default_or">vagy</string>
+    <string name="shared_string_and">és</string>
+    <string name="shared_string_or">vagy</string>
 	<string name="amenity_type_seamark">Hajózási jelzés</string>
     <string name="app_modes_choose_descr">Milyen felhasználási módok jelenjenek meg az alkalmazásban</string>
     <string name="app_modes_choose">Felhasználási módok</string>

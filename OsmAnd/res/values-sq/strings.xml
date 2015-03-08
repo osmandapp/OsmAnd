@@ -11,8 +11,8 @@
     <string name="animate_routing_route_not_calculated">Ju lutem, fillimisht llogaritni rrugen</string>
     <string name="remember_choice">Mos harroni zgjedhjen time</string>
     <string name="gps_status_eclipsim">Statusi i GPS-it</string>
-    <string name="default_and">dhe</string>
-    <string name="default_or">ose</string>
+    <string name="shared_string_and">dhe</string>
+    <string name="shared_string_or">ose</string>
 	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
 	<string name="shared_string_no">Jo</string>
 	<string name="shared_string_yes">Po</string>

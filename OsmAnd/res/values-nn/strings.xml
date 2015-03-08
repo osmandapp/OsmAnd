@@ -159,8 +159,8 @@
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq">Ofte spurde spørsmål</string>
     <string name="local_osm_changes_delete_all">Slett alt</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
+    <string name="shared_string_and">og</string>
+    <string name="shared_string_or">eller</string>
 	<string name="gps_status_eclipsim">GPS-status</string>
     <string name="base_world_map">Globalt grunnkart</string>
 	<string name="tip_map_styles">Kartstilar</string>

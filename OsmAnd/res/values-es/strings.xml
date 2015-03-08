@@ -1428,8 +1428,8 @@
 	<string name="auto_zoom_none">Sin acercamiento automático</string>
 	<string name="remember_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
-    <string name="default_and">y</string>
-    <string name="default_or">o</string>
+    <string name="shared_string_and">y</string>
+    <string name="shared_string_or">o</string>
 	<string name="auto_zoom_close">Cercano</string>
 	<string name="auto_zoom_far">Medio</string>
 	<string name="auto_zoom_farthest">Alejado</string>

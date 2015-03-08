@@ -1505,8 +1505,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 \n\nRazen \'privzetega\' sloga zemljevida, lahko v \'Meni\' → \'Nastavitve zemljevida\' → \'Slog zemljevida\' zberete npr.:
 \n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc. ↵\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations ↵\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "</string>
     <string name="base_world_map">Osnovni zemljevid sveta</string>
-	<string name="default_and">in</string>
-    <string name="default_or">ali</string>
+	<string name="shared_string_and">in</string>
+    <string name="shared_string_or">ali</string>
 	<string name="route_is_too_long">OsmAnd usmerjanje brez povezave lahko traja zelo dolgo (ali včasih ne deluje) za točke, ki so med sabo oddaljene več kot 200 km. Za boljše delovanje boste morda želeli dodati kakšno vmesno točko na poti.</string>
 	<string name="auto_zoom_none">Ne samodejna povečava</string>
 	<string name="auto_zoom_farthest">Na dolge razdalje</string>

@@ -1345,8 +1345,8 @@
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
     <string name="remember_choice">Να θυμάσαι την επιλογή μου</string>
     <string name="gps_status_eclipsim">Κατάσταση GPS</string>
-    <string name="default_and">και</string>
-    <string name="default_or">ή</string>
+    <string name="shared_string_and">και</string>
+    <string name="shared_string_or">ή</string>
 	<string name="auto_zoom_none">Χωρίς αυτόματη εστίαση</string>
 	<string name="auto_zoom_far">Μεσαία εμφάνιση</string>
 	<string name="map_magnifier">Μεγεθυντής χάρτη</string>

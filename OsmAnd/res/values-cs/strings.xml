@@ -1340,8 +1340,8 @@
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspešně uložen</string>
     <string name="remember_choice">Zapamatovat mou volbu</string>
     <string name="gps_status_eclipsim">Stav GPS</string>
-    <string name="default_and">a</string>
-    <string name="default_or">nebo</string>
+    <string name="shared_string_and">a</string>
+    <string name="shared_string_or">nebo</string>
 	<string name="animate_routing_route_not_calculated">Nejprve prosím vypočítejte trasu</string>
     <string name="animate_routing_route">Simulovat pomocí vypočítané trasy </string>
     <string name="animate_routing_gpx">Simulovat pomocí GPX trasy</string>

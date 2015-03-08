@@ -1371,8 +1371,6 @@
     <string name="base_world_map">Обзорная карта мира</string>
 	<string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
     <string name="gps_status_eclipsim">Статус GPS</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
 	<string name="remember_choice">Запомнить мой выбор</string>
     <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
 	<string name="app_mode_aircraft">Самолёт</string>

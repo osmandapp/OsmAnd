@@ -954,8 +954,8 @@
     <string name="animate_routing_gpx">Simulacija pomoću GPX zapisa</string>
     <string name="remember_choice">Zapamti moj izbor</string>
     <string name="gps_status_eclipsim">Status GPS signala</string>
-    <string name="default_and">i</string>
-    <string name="default_or">ili</string>
+    <string name="shared_string_and">i</string>
+    <string name="shared_string_or">ili</string>
 	<string name="base_world_map">Osnovna karta svijeta</string>
 	<string name="about_version">Inačica :</string>
     <string name="about_settings_descr">Podaci o inačici, licence, članovi projekta</string>

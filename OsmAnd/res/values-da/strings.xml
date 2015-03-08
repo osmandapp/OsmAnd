@@ -1410,8 +1410,6 @@
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
 	<string name="auto_zoom_close">Tæt på</string>
 	<string name="remember_choice">Husk valg</string>
     <string name="gps_status_eclipsim">GPS status</string>

@@ -1569,8 +1569,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
     <string name="auto_zoom_farthest">Zoom naar grote afstand</string>
-    <string name="default_and">en</string>
-    <string name="default_or">of</string>
 	<string name="remember_choice">Onthoud mijn keuze</string>
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="animate_routing_route_not_calculated">Eerst de route laten berekenen alsjeblieft</string>

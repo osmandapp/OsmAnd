@@ -1057,8 +1057,8 @@
     <string name="animate_routing_gpx">GPX trases simulācija</string>
     <string name="remember_choice">Atcerēties manu izvēli</string>
     <string name="gps_status_eclipsim">GPS statuss</string>
-    <string name="default_and">un</string>
-    <string name="default_or">vai</string>
+    <string name="shared_string_and">un</string>
+    <string name="shared_string_or">vai</string>
 	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai pat neizdoties), ja ceļa punkti atrodas vairāk nekā 200km attālumā. Pievienojiet papildus pieturas vietas, lai optimizētu aprēķināšanu.</string>
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
