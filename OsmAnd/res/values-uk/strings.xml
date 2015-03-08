@@ -380,7 +380,7 @@
   <string name="map_underlay">Фонова мапа</string>
   <string name="map_underlay_descr">Виберіть фоновий шар для основної мапи</string>
   <string name="layer_overlay">Верхній шар…</string>
-  <string name="default_none">Нема</string>
+  <string name="shared_string_none">Нема</string>
   <string name="map_overlay">Верхній шар</string>
   <string name="map_overlay_descr">Виберіть верхній шар для основної мапи</string>
   <string name="tile_source_already_installed">Мапа вже встановлена, налаштування будуть оновлені</string>

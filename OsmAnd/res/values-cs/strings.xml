@@ -386,7 +386,7 @@
   <string name="map_underlay">Podkresová mapa</string>
   <string name="map_underlay_descr">Vyberte podkladovou mapu</string>
   <string name="layer_overlay">Překryvná mapa…</string>
-  <string name="default_none">Žádná</string>
+  <string name="shared_string_none">Žádná</string>
   <string name="map_overlay">Překryvná mapa</string>
   <string name="map_overlay_descr">Vyberte překryvnou mapu</string>
   <string name="tile_source_already_installed">Mapa je již nainstalovaná, aktualizuji nastavení</string>

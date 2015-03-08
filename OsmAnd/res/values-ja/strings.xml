@@ -38,7 +38,7 @@
      <string name="map_underlay">アンダーレイマップ</string>
      <string name="map_underlay_descr">アンダーレイマップを選択</string>
      <string name="layer_overlay">オーバーレイマップ…</string>
-     <string name="default_none">無し</string>
+     <string name="shared_string_none">無し</string>
      <string name="map_overlay">オーバーレイマップ</string>
      <string name="map_overlay_descr">オーバーレイマップを選択</string>
      <string name="tile_source_already_installed">マップは既に

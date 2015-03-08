@@ -515,7 +515,7 @@
 <string name="map_underlay">Underläggskarta</string>
 <string name="map_underlay_descr">Välj underläggskarta</string>
 <string name="layer_overlay">Överläggskarta …</string>
-<string name="default_none">Inga</string>
+<string name="shared_string_none">Inga</string>
 <string name="map_overlay">Överläggskarta</string>
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>

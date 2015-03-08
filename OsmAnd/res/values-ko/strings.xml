@@ -347,7 +347,6 @@
 	<string name="map_underlay">언더레이 맵</string>
 	<string name="map_underlay_descr">언더레이 맵을 선택합니다</string>
 	<string name="layer_overlay">오버레이 맵…</string>
-	<string name="default_none">없음</string>
 	<string name="map_overlay">오버레이 맵</string>
 	<string name="map_overlay_descr">오버레이 맵을 선택합니다</string>
 	<string name="tile_source_already_installed">맵이 이미 설치되어, 설정이 업데이트될 것입니다</string>

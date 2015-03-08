@@ -758,7 +758,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="map_underlay">Mapa de camada inferior</string>
   <string name="map_underlay_descr">Escolha mapa da camada inferior</string>
   <string name="layer_overlay">Mapa da camada superior…</string>
-  <string name="default_none">Nenhum</string>
+  <string name="shared_string_none">Nenhum</string>
   <string name="map_overlay">Mapa da camada superior</string>
   <string name="map_overlay_descr">Escolha o mapa da camada superior</string>
   <string name="tile_source_already_installed">Mapa previamente instalado, as definições serão actualizadas</string>

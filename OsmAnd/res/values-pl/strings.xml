@@ -144,7 +144,7 @@
   <string name="map_underlay">Mapa podstawowa</string>
   <string name="map_underlay_descr">Wybierz warstwę podstawową (underlay)</string>
   <string name="layer_overlay">Nakładka…</string>
-  <string name="default_none">Brak</string>
+  <string name="shared_string_none">Brak</string>
   <string name="map_overlay">Nakładka</string>
   <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
   <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>

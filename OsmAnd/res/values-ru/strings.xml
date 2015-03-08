@@ -378,7 +378,7 @@
   <string name="map_underlay">Карта подложки</string>
   <string name="map_underlay_descr">Выберите слой подложки для основной карты</string>
   <string name="layer_overlay">Карта покрытия…</string>
-  <string name="default_none">Нет</string>
+  <string name="shared_string_none">Нет</string>
   <string name="map_overlay">Карта покрытия</string>
   <string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
   <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>

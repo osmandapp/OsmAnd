@@ -326,7 +326,7 @@
   <string name="map_underlay">ქვედა რუკა</string>
   <string name="map_underlay_descr">ქვედა რუკის არჩევა</string>
   <string name="layer_overlay">ზედა რუკა…</string>
-  <string name="default_none">არა</string>
+  <string name="shared_string_none">არა</string>
   <string name="map_overlay">ზედა რუკა</string>
   <string name="map_overlay_descr">ზედა რუკის არჩევა</string>
   <string name="tile_source_already_installed">რუკა უკვე დაყენებულია. მიმდინარეობს პარამეტრების განახლება</string>

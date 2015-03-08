@@ -803,7 +803,7 @@
 	<string name="map_underlay">Spodaj ležeči zemljevid</string>
 	<string name="map_underlay_descr">Izberi spodaj ležeči zemljevid</string>
 	<string name="layer_overlay">Prekrivni zemljevid …</string>
-	<string name="default_none">Brez</string>
+	<string name="shared_string_none">Brez</string>
 	<string name="map_overlay">Prekrivni zemljevid</string>
 	<string name="map_overlay_descr">Izberi prekrivni zemljevid</string>
 	<string name="tile_source_already_installed">Zemljevid je že nameščen, nastavitve bodo posodobljene</string>

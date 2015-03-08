@@ -697,7 +697,7 @@
   <string name="map_underlay">Azpiazal mapa</string>
   <string name="map_underlay_descr">Aukeratu azpiazal mapa</string>
   <string name="layer_overlay">Gainazal mapa…</string>
-  <string name="default_none">Bat ere ez</string>
+  <string name="shared_string_none">Bat ere ez</string>
   <string name="map_overlay">Gainazal mapa</string>
   <string name="map_overlay_descr">Aukeratu gainazal mapa</string>
   <string name="tile_source_already_installed">Mapa iadanik instalatuta dago, ezarpenak eguneratuak izango dira</string>

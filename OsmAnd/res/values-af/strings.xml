@@ -391,7 +391,7 @@
   <string name="map_underlay">Onderliggende kaart</string>
   <string name="map_underlay_descr">Kies onderliggende kaart</string>
   <string name="layer_overlay">Oorliggende kaart…</string>
-  <string name="default_none">Geen</string>
+  <string name="shared_string_none">Geen</string>
   <string name="map_overlay">Oorleg kaart</string>
   <string name="map_overlay_descr">Kies oorleg kaart</string>
   <string name="tile_source_already_installed">Kaart is reeds geïnstalleer, instellings sal opdateer word</string>

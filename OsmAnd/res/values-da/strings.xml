@@ -741,7 +741,6 @@
 	<string name="map_underlay">Underlejringskort</string>
 	<string name="map_underlay_descr">Vælg kort til underlejring</string>
 	<string name="layer_overlay">Overlejringskort…</string>
-	<string name="default_none">Ingen</string>
 	<string name="map_overlay">Overlejringskort</string>
 	<string name="map_overlay_descr">Vælg kort til overlejring</string>
 	<string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>

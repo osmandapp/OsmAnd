@@ -247,7 +247,6 @@
   <string name="map_underlay">Mappa di sfondo</string>
   <string name="map_underlay_descr">Scegli la mappa di sfondo</string>
   <string name="layer_overlay">Mappa sovrapposta…</string>
-  <string name="default_none">Nessuno</string>
   <string name="map_overlay">Mappa sovrapposta</string>
   <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
   <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>

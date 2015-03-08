@@ -1227,7 +1227,7 @@
 	<string name="map_underlay">Mapa sometido</string>
 	<string name="map_underlay_descr">Escoller o mapa sometido</string>
 	<string name="layer_overlay">Mapa sobreposto…</string>
-	<string name="default_none">Ningún</string>
+	<string name="shared_string_none">Ningún</string>
 	<string name="map_overlay">Mapa sobreposto</string>
 	<string name="map_overlay_descr">Escoller o mapa sobreposto</string>
 	<string name="tile_source_already_installed">O mapa xa está instalado; vaise actualizar a configuración</string>

@@ -1131,7 +1131,7 @@
 	<string name="voice_stream_voice_call">Sesli çağrı sesi</string>
 	<string name="map_transparency_descr">Temel harita saydamlığını değiştirin</string>
 	<string name="map_transparency">Temel harita saydamlığı</string>
-	<string name="default_none">Hiçbiri</string>
+	<string name="shared_string_none">Hiçbiri</string>
 	<string name="map_underlay">Alt katman harita</string>
 	<string name="map_underlay_descr">Alt katman harita seç</string>
 	<string name="layer_overlay">Üst katman harita…</string>

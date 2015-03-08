@@ -312,7 +312,7 @@
   <string name="map_underlay">Paklāja karte</string>
   <string name="map_underlay_descr">Izvēlēties paklāja karti</string>
   <string name="layer_overlay">Pārklāja karte…</string>
-  <string name="default_none">Nekas</string>
+  <string name="shared_string_none">Nekas</string>
   <string name="map_overlay">Pārklāja karte</string>
   <string name="map_overlay_descr">Izvēlēties pārklāja karti</string>
   <string name="tile_source_already_installed">Karte jau ir instalēta, uzstādījumi tiks atjaunoti</string>

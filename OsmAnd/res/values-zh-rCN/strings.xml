@@ -726,7 +726,7 @@
 	<string name="map_underlay">背景层地图</string>
 	<string name="map_underlay_descr">选择背景层地图</string>
 	<string name="layer_overlay">叠加层地图…</string>
-	<string name="default_none">无</string>
+	<string name="shared_string_none">无</string>
 	<string name="map_overlay">叠加层地图</string>
 	<string name="map_overlay_descr">选择叠加层地图</string>
 	<string name="tile_source_already_installed">地图已经安装，设置将被更新</string>

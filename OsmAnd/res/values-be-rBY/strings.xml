@@ -1322,7 +1322,7 @@
 	<string name="map_underlay">Mapa padkladkі</string>
 	<string name="map_underlay_descr">Abrać mapu dlia padkladkі</string>
 	<string name="layer_overlay">Mapa pakryćcia…</string>
-	<string name="default_none">Niama</string>
+	<string name="shared_string_none">Niama</string>
 	<string name="map_overlay">Mapa dlia nakladańnia</string>
 	<string name="map_overlay_descr">Abrać mapu dlia nakladańnia</string>
 	<string name="tile_source_already_installed">Mapa ŭžo ŭstaliavana, nalady buduć abnoŭlieny</string>

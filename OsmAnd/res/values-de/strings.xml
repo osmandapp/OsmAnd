@@ -673,7 +673,7 @@
 	<string name="map_underlay">Underlay-Karte</string>
 	<string name="map_underlay_descr">Wähle Underlay-Karte</string>
 	<string name="layer_overlay">Overlay-Karte…</string>
-	<string name="default_none">Keine</string>
+	<string name="shared_string_none">Keine</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>

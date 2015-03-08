@@ -601,7 +601,7 @@
 	<string name="map_underlay">Harta de dedesubt</string>
 	<string name="map_underlay_descr">Alegerea hărții pentru stratul inferior</string>
 	<string name="layer_overlay">Harta de deasupra…</string>
-	<string name="default_none">Niciuna</string>
+	<string name="shared_string_none">Niciuna</string>
 	<string name="map_overlay">Harta de deasupra</string>
 	<string name="map_overlay_descr">Alege harta de deasupra</string>
 	<string name="tile_source_already_installed">Harta este deja instalată, setările vor fi actualizate</string>

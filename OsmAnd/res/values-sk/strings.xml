@@ -430,7 +430,6 @@
   <string name="map_underlay">Podkladová mapa</string>
   <string name="map_underlay_descr">Výber podkladovej mapy</string>
   <string name="layer_overlay">Prekrývacia mapa…</string>
-  <string name="default_none">Žiadna</string>
   <string name="map_overlay">Prekrývacia mapa</string>
   <string name="map_overlay_descr">Výber mapy na prekrytie</string>
   <string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>

@@ -500,7 +500,7 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 			if (locationToGo != null) {
 				labelW.append(OsmAndFormatter.getFormattedDistance(stop.getDistToLocation(), getApplication()));
 			} else {
-				labelW.append(getString(R.string.transport_search_none));
+				labelW.append(getString(R.string.shared_string_none));
 			}
 			labelW.append("]\n").append(route.getName(settings.usingEnglishNames())); //$NON-NLS-1$
 			if (locationToGo != null && stop.getDistToLocation() < 400) {

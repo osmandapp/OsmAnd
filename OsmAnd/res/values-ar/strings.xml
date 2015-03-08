@@ -1235,7 +1235,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="map_underlay">خريطة الاساس الذي تقوم عليها</string>
 	<string name="map_underlay_descr">اختيار خريطة الاساس الذي تقوم عليه</string>
 	<string name="layer_overlay">خريطة تراكب</string>
-	<string name="default_none">لا شيء</string>
+	<string name="shared_string_none">لا شيء</string>
 	<string name="map_overlay">خريطة تراكب</string>
 	<string name="map_overlay_descr">اختيار خريطة التراكب</string>
 	<string name="poi_dialog_other_tags_message">يتم الاحتفاظ بكافة العلامات الاخري</string>

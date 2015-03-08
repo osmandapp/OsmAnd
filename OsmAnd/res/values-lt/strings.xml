@@ -446,7 +446,7 @@
   <string name="map_underlay">Apatinis žemėlapio sluoksnis</string>
   <string name="map_underlay_descr">Pasirinkti apatinį žemėlapio sluoksnį</string>
   <string name="layer_overlay">Viršutinis žemėlapio sluoksnis…</string>
-  <string name="default_none">Nėra</string>
+  <string name="shared_string_none">Nėra</string>
   <string name="map_overlay">Viršutinis žemėlapio sluoksnis</string>
   <string name="map_overlay_descr">Pasirinkti viršutinį žemėlapio sluoksnį</string>
   <string name="tile_source_already_installed">Žemėlapis jau įdiegtas, nustatymai bus atnaujinti</string>

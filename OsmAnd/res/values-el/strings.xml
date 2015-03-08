@@ -556,7 +556,7 @@
 	<string name="map_underlay">Χάρτης υποστρώματος</string>
 	<string name="map_underlay_descr">Επιλογή χάρτη υποστρώματος</string>
 	<string name="layer_overlay">Χάρτης επικάλυψης…</string>
-	<string name="default_none">Κανένα</string>
+	<string name="shared_string_none">Κανένα</string>
 	<string name="map_overlay">Χάρτης επικάλυψης</string>
 	<string name="map_overlay_descr">Επιλογή χάρτη επικάλυψης</string>
 	<string name="tile_source_already_installed">Ο χάρτης είναι ήδη εγκατεστημένος, οι ρυθμίσεις θα ενημερωθούν</string>

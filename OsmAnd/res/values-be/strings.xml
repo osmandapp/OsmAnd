@@ -971,7 +971,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_underlay">Мапа падкладкі</string>
 	<string name="map_underlay_descr">Абраць мапу для падкладкі</string>
 	<string name="layer_overlay">Мапа пакрыцьця…</string>
-	<string name="default_none">Няма</string>
 	<string name="map_overlay">Мапа для накладаньня</string>
 	<string name="map_overlay_descr">Абраць мапу для накладаньня</string>
 	<string name="tile_source_already_installed">Мапа ўжо ўсталявана, налады будуць абноўлены</string>

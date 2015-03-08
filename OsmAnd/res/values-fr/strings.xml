@@ -252,7 +252,7 @@
   <string name="map_underlay">Fond de carte</string>
   <string name="map_underlay_descr">Choisir un fond de carte</string>
   <string name="layer_overlay">Sur-couche de carte…</string>
-  <string name="default_none">Aucun</string>
+  <string name="shared_string_none">Aucun</string>
   <string name="map_overlay">Sur-couche de la carte</string>
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>

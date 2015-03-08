@@ -1032,7 +1032,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_underlay">Карта подложка</string>
 	<string name="map_underlay_descr">Изберете карта за подложка</string>
 	<string name="layer_overlay">Допълнителна карта отгоре…</string>
-	<string name="default_none">Нищо</string>
+	<string name="shared_string_none">Нищо</string>
 	<string name="map_overlay">Карта отгоре</string>
 	<string name="map_overlay_descr">Избор на карта за горния слой</string>
 	<string name="tile_source_already_installed">Картата вече е инсталирана, настройките ще бъдат обновени</string>

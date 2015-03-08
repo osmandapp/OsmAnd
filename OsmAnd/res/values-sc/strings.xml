@@ -1206,7 +1206,7 @@
 	<string name="map_underlay">Mapa de isfundu</string>
 	<string name="map_underlay_descr">Issèbera sa mapa de isfundu</string>
 	<string name="layer_overlay">Mapa supraposta…</string>
-	<string name="default_none">Perunu</string>
+	<string name="shared_string_none">Perunu</string>
 	<string name="map_overlay">Mapa subraposta</string>
 	<string name="map_overlay_descr">Issèbera mapa de subrapositzione</string>
 	<string name="tile_source_already_installed">Sa mapa est giai installata, sas impostaduras ant a èssere agiornadas</string>

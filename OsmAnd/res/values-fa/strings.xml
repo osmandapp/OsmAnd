@@ -825,7 +825,7 @@
 	<string name="map_underlay">نقشه زیری</string>
 	<string name="map_underlay_descr">انتخاب نقشه زیرین</string>
 	<string name="layer_overlay">نقشه رویی…</string>
-	<string name="default_none">هیچیک</string>
+	<string name="shared_string_none">هیچیک</string>
 	<string name="map_overlay">نقشه رویی</string>
 	<string name="map_overlay_descr">انتخاب نقشه رویی</string>
 	<string name="tile_source_already_installed">نقشه قبلاً نصب شده است، تنظیمات به روز خواهد شد</string>

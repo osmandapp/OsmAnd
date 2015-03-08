@@ -342,7 +342,6 @@
   <string name="map_underlay">Underlay kaart</string>
   <string name="map_underlay_descr">Kies underlay-kaart</string>
   <string name="layer_overlay">Overlay-kaart…</string>
-  <string name="default_none">Geen</string>
   <string name="map_overlay">Overlay kaart</string>
   <string name="map_overlay_descr">Kies overlay-kaart</string>
   <string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd</string>

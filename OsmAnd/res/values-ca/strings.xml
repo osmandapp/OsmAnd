@@ -393,7 +393,7 @@
 <string name="tts_missing_language_data_title">Falten dades</string>
 <string name="voice_stream_notification">Àudio d\'avís</string>
 <string name="voice_stream_music">Àudio de multimèdia/música</string>
-<string name="default_none">Cap</string>
+<string name="shared_string_none">Cap</string>
 <string name="tile_source_already_installed">El mapa ja està instal·lat, s\'actualitzarà la configuració</string>
 <string name="select_tile_source_to_install">Seleccioneu els mapes (de tessel·les) per instal·lar o actualitzar</string>
 <string name="internet_not_available">Per realitzar l\'operació cal una connexió a Internet que ara no està disponible</string>

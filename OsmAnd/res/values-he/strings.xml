@@ -568,7 +568,7 @@
 	<string name="map_underlay">מפה תחתונה</string>
 	<string name="map_underlay_descr">נא לבחור במפה תחתונה</string>
 	<string name="layer_overlay">מפה עליונה…</string>
-	<string name="default_none">ללא</string>
+	<string name="shared_string_none">ללא</string>
 	<string name="map_overlay">מפה עליונה</string>
 	<string name="map_overlay_descr">נא לבחור במפה עליונה</string>
 	<string name="tile_source_already_installed">המפה כבר מותקנת, ההגדרות יעודכנו</string>

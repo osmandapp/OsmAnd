@@ -241,7 +241,7 @@
   <string name="map_underlay">Mapa subyacente</string>
   <string name="map_underlay_descr">Elige el mapa subyacente</string>
   <string name="layer_overlay">Mapa superpuesto…</string>
-  <string name="default_none">Ninguno</string>
+  <string name="shared_string_none">Ninguno</string>
   <string name="map_overlay">Mapa superpuesto</string>
   <string name="map_overlay_descr">Elige el mapa superpuesto</string>
   <string name="tile_source_already_installed">El mapa ya está instalado, se actualizarán las opciones</string>

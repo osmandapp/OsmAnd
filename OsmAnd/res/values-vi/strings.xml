@@ -142,7 +142,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="map_underlay">Bản đồ nền</string>
 	<string name="map_underlay_descr">Chọn bản đồ nền</string>
 	<string name="layer_overlay">Chồng phủ bản đồ…</string>
-	<string name="default_none">Không</string>
+	<string name="shared_string_none">Không</string>
 	<string name="map_overlay">Chồng phủ bản đồ</string>
 	<string name="map_overlay_descr">Chọn bản đồ cần chồng phủ</string>
 	<string name="tile_source_already_installed">Bản đồ đã được cài, các thiết lập sẽ được cập nhật</string>

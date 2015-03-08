@@ -671,7 +671,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
-		// entries[k++] = getString(R.string.voice_not_specified);
+		// entries[k++] = getString(R.string.shared_string_none);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {

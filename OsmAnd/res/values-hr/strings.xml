@@ -731,7 +731,7 @@
 	<string name="select_tile_source_to_install">Odaberite karte za instalirati ili ažurirati</string>
 	<string name="map_overlay_descr">Odaberite slojnu kartu</string>
 	<string name="map_overlay">Karta sloja</string>
-	<string name="default_none">Bez</string>
+	<string name="shared_string_none">Bez</string>
 	<string name="layer_overlay">Karta sloja…</string>
 	<string name="layer_underlay">Temeljna karta…</string>
 	<string name="map_underlay">Temeljna karta</string>
