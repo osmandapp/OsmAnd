@@ -54,7 +54,7 @@
         android:id="@+id/info_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/close"
+        android:contentDescription="@string/shared_string_close"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="4dp"
         style="@style/Widget.AppCompat.ActionButton"

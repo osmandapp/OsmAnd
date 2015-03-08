@@ -668,7 +668,7 @@
   <string name="arrived_at_destination">Dorazili jste do cíle</string>
   <string name="invalid_locations">Neplatné souřadnice!</string>
   <string name="go_back_to_osmand">Vrátit se k mapě OsmAnd</string>
-  <string name="close">Zavřít</string>
+  <string name="shared_string_close">Zavřít</string>
   <string name="loading_data">Načítám data…</string>
   <string name="reading_indexes">Načítám indexy…</string>
   <string name="previous_run_crashed">Aplikace při minulém běhu spadla. Soubor s hlášením je v {0}. Prosím ohlaste problém vývojářům a přiložte hlášení o chybě.</string>
@@ -728,7 +728,7 @@
   <string name="show_gps_coordinates_text">Zobrazit GPS souřadnice na mapě</string>
   <string name="use_internet_to_download_tile">Stahovat chybějící části mapy z internetu</string>
   <string name="app_description">Navigační aplikace</string>
-  <string name="exit_Button">Konec</string>
+  <string name="shared_string_exit">Konec</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavení</string>
   <string name="favorites_Button">Moje místa</string>

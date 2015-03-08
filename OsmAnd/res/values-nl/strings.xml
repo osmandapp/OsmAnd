@@ -691,7 +691,6 @@
   <string name="arrived_at_destination">Je bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
-  <string name="close">Sluiten</string>
   <string name="loading_data">Gegevens worden geladen…</string>
   <string name="reading_indexes">Indexen worden geladen…</string>
   <string name="previous_run_crashed">OsmAnd is de vorige keer gecrashed. Logbestand staat op {0}. Gelieve het probleem te rapporteren en het logbestand mee te sturen.</string>
@@ -750,7 +749,6 @@
   <string name="show_gps_coordinates_text">Toon GPS-coördinaten op kaart</string>
   <string name="use_internet_to_download_tile">Ontbrekende kaartsegmenten van internet downloaden</string>
   <string name="app_description">Navigatieprogramma</string>
-  <string name="exit_Button">Afsluiten</string>
   <string name="map_Button">Kaart</string>
   <string name="settings_Button">Instellingen</string>
   <string name="favorites_Button">Mijn plaatsen</string>

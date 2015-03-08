@@ -304,7 +304,7 @@
 	<string name="use_internet">استخدام الإنترنت</string>
 	<string name="show_location">عرض الموقع</string>
 	<string name="map_preferences">خريطة</string>
-	<string name="exit_Button">خروج</string>
+	<string name="shared_string_exit">خروج</string>
 	<string name="map_Button">خريطة</string>
 	<string name="search_address">عنوان البحث</string>
 	<string name="choose_building">اختيار مبنى</string>

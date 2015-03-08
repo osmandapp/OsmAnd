@@ -452,7 +452,7 @@
 	<string name="arrived_at_destination">Hedefinize ulaştınız</string>
 	<string name="invalid_locations">Koordinatlar geçersiz!</string>
 	<string name="go_back_to_osmand">OsmAnd haritalara geri dön</string>
-	<string name="close">Kapat</string>
+	<string name="shared_string_close">Kapat</string>
 	<string name="loading_data">Veri yükleniyor…</string>
 	<string name="finished_task">Tamamlandı</string>
 	<string name="reload_indexes_descr">Çevrimdışı vektör haritaları ve veri SD karttan tekrar okunuyor</string>
@@ -476,7 +476,7 @@
 	<string name="show_location">Konumu göster</string>
 	<string name="map_preferences">Harita</string>
 	<string name="settings_activity">Ayarlar</string>
-	<string name="exit_Button">Çıkış</string>
+	<string name="shared_string_exit">Çıkış</string>
 	<string name="map_Button">Harita</string>
 	<string name="settings_Button">Ayarlar</string>
 	<string name="favorites_Button">Favoriler</string>

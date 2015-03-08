@@ -460,12 +460,12 @@
 <string name="search_button">Cerca</string>
 <string name="search_activity">Cerca</string>
 <string name="settings_Button">Configuració</string>
-<string name="exit_Button">Surt</string>
+<string name="shared_string_exit">Surt</string>
 <string name="settings_activity">Configuració</string>
 <string name="search_address">Cerca adreça</string>
 <string name="shared_string_settings">Configuració</string>
 <string name="data_settings">Dades</string>
-<string name="close">Tanca</string>
+<string name="shared_string_close">Tanca</string>
 <string name="update_existing">Reemplaça</string>
 <string name="follow">Inicia la navegació</string>
 <string name="address">Adreça</string>

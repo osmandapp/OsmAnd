@@ -943,7 +943,7 @@
 	<string name="arrived_at_destination">Ați ajuns la destinație</string>
 	<string name="invalid_locations">Coordonatele nu sunt valide!</string>
 	<string name="go_back_to_osmand">Înapoi la harta OsmAnd</string>
-	<string name="close">Închide</string>
+	<string name="shared_string_close">Închide</string>
 	<string name="loading_data">Se încarcă date…</string>
 	<string name="reading_indexes">Se citesc date locale…</string>
 	<string name="previous_run_crashed">Ultima rulare OsmAnd s-a terminat anormal. Fișierul log este în {0}. Vă rog să raportați acest lucru și să atașați fișierul log.</string>
@@ -998,7 +998,7 @@
 	<string name="show_gps_coordinates_text">Arată coordonatele GPS pe hartă</string>
 	<string name="use_internet_to_download_tile">Folosește accesul la internet pentru a descărca porțiunile lipsă ale hărții raster</string>
 	<string name="app_description">Aplicație pentru navigare</string>
-	<string name="exit_Button">Ieșire</string>
+	<string name="shared_string_exit">Ieșire</string>
 	<string name="map_Button">Hartă</string>
 	<string name="settings_Button">Setări</string>
 	<string name="favorites_Button">Locurile mele</string>

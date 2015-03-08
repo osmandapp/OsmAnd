@@ -279,7 +279,7 @@
   <string name="arrived_at_destination">Você alcançou o seu destino</string>
   <string name="invalid_locations">Locais inválidos!</string>
   <string name="go_back_to_osmand">Voltar ao mapa do OsmAnd</string>
-  <string name="close">Fechar</string>
+  <string name="shared_string_close">Fechar</string>
   <string name="loading_data">Carregando dados…</string>
   <string name="reading_indexes">Lendo dados locais…</string>
   <string name="previous_run_crashed">Uma execução anterior da aplicação foi interrompida inesperadamente. O arquivo de log encontra-se em {0}. Por favor, informe o problema e inclua o arquivo de log.</string>
@@ -347,7 +347,7 @@
   <string name="show_gps_coordinates_text">Mostrar as coordenadas GPS no mapa</string>
   <string name="use_internet_to_download_tile">Use a Internet para baixar as imagens que faltam</string>
   <string name="app_description">Aplicação de navegação</string>
-  <string name="exit_Button">Sair</string>
+  <string name="shared_string_exit">Sair</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Configuração</string>
   <string name="favorites_Button">Favoritos</string>

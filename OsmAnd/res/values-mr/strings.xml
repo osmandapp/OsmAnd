@@ -255,7 +255,7 @@
   
   <string name="new_route_calculated_dist">नविन मार्ग निवडला, अंतर</string>
   <string name="arrived_at_destination">आपण इच्छित स्थळी पोहोचला आहात</string>
-  <string name="close">बंद करा</string>
+  <string name="shared_string_close">बंद करा</string>
   <string name="loading_data">डेटा लोड करत आहे…</string>
   <string name="finished_task">समाप्त</string>
   <string name="download_indexes">ऑफलाइन डेटा डाउनलोड करत आहे</string>
@@ -282,7 +282,7 @@
   <string name="settings_activity">सेटिंग्स</string>
   <string name="use_internet_to_download_tile">नसलेल्या टाइल्स डाउनलोड करण्यासाठी इंटरनेटचा वापर करा</string>
   <string name="app_description">दिशादर्शन ऍप्लिकेशन</string>
-  <string name="exit_Button">बाहेर पडा</string>
+  <string name="shared_string_exit">बाहेर पडा</string>
   <string name="map_Button">नकाशा</string>
   <string name="settings_Button">सेटिंग्स</string>
   <string name="favorites_Button">आवडती ठिकाणे</string>

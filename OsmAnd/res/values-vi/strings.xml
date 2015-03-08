@@ -498,7 +498,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="arrived_at_destination">Bạn đã đến điểm đích</string>
 	<string name="invalid_locations">Khu vực không xác định!</string>
 	<string name="go_back_to_osmand">Quay lại bản đồ OsmAnd</string>
-	<string name="close">Đóng</string>
+	<string name="shared_string_close">Đóng</string>
 	<string name="loading_data">Đang đọc dữ liệu…</string>
 	<string name="reading_indexes">Đang đọc dữ liệu…</string>
 	<string name="saving_gpx_tracks">Đang lưu tracks GPX vào thẻ nhớ SD…</string>
@@ -566,7 +566,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     
     <string name="app_description">Ứng dụng dẫn đường cá nhân</string>
 
-<string name="exit_Button">Thoát</string>
+<string name="shared_string_exit">Thoát</string>
 <string name="map_Button">Bản đồ</string>
 <string name="settings_Button">Thiết lập</string>
 <string name="favorites_Button">Ưa thích</string>

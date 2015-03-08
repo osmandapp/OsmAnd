@@ -347,7 +347,7 @@
 	<string name="new_route_calculated_dist">Uusi reitti laskettu, etäisyys</string>
 	<string name="arrived_at_destination">Olet saapunut päämäärään</string>
 	<string name="invalid_locations">Koordinaatit ovat virheelliset!</string>
-	<string name="close">Sulje</string>
+	<string name="shared_string_close">Sulje</string>
 	<string name="loading_data">Ladataan tietoja…</string>
 	<string name="reading_indexes">Luetaan paikallista dataa…</string>
 	<string name="previous_run_crashed">Viime kerralla OsmAnd kaatui. Logitiedosto sijaitsee {0}. Ole hyvä ja raportoi ongelma ja liitä logitiedosto.</string>
@@ -379,7 +379,7 @@
 	<string name="settings_activity">Asetukset</string>
 	<string name="show_gps_coordinates_text">Näytä GPS-koordinaatit kartalla</string>
 	<string name="use_internet_to_download_tile">Käytä internettiä puuttuvien karttapalojen lataamiseen</string>
-	<string name="exit_Button">Poistu</string>
+	<string name="shared_string_exit">Poistu</string>
 	<string name="map_Button">Kartta</string>
 	<string name="settings_Button">Asetukset</string>
 	<string name="favorites_Button">Suosikit</string>

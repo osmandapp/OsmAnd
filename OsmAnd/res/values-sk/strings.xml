@@ -789,7 +789,6 @@
   <string name="arrived_at_destination">Dorazili ste do cieľa</string>
   <string name="invalid_locations">Súradnice sú neplatné!</string>
   <string name="go_back_to_osmand">Ísť späť na OsmAnd mapu</string>
-  <string name="close">Zavrieť</string>
   <string name="loading_data">Načítavajú sa údaje…</string>
   <string name="reading_indexes">Načítavajú sa miestne údaje…</string>
   <string name="previous_run_crashed">Predošlé spustenie aplikácie malo kritickú chybu. Záznamový súbor je v {0}. Prosím, nahláste problém a priložte záznamový súbor.</string>
@@ -856,7 +855,6 @@
   <string name="show_gps_coordinates_text">Zobraziť GPS súradnice na mape</string>
   <string name="use_internet_to_download_tile">Použiť internet na stiahnutie chýbajúcich mapových dlaždíc</string>
   <string name="app_description">Navigačná aplikácia</string>
-  <string name="exit_Button">Skončiť</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavenia</string>
   <string name="favorites_Button">Moje miesta</string>

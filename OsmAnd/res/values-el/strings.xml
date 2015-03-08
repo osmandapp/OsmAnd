@@ -899,7 +899,7 @@
 	<string name="arrived_at_destination">Φτάσατε στον προορισμό σας</string>
 	<string name="invalid_locations">Οι συντεταγμένες δεν είναι έγκυρες!</string>
 	<string name="go_back_to_osmand">Επιστροφή στον χάρτη OsmAnd</string>
-	<string name="close">Κλείσιμο</string>
+	<string name="shared_string_close">Κλείσιμο</string>
 	<string name="loading_data">Φόρτωση δεδομένων…</string>
 	<string name="reading_indexes">Ανάγνωση τοπικών δεδομένων…</string>
 	<string name="previous_run_crashed">Η τελευταία εκτέλεση του OsmAnd κατέρρευσε. Το αρχείο καταγραφής είναι στο {0}. Παρακαλώ αναφέρετε το συμβάν και επισυνάψτε το αρχείο καταγραφής.</string>
@@ -954,7 +954,7 @@
 	<string name="show_gps_coordinates_text">Εμφάνιση συντεταγμένων GPS στο χάρτη</string>
 	<string name="use_internet_to_download_tile">Χρήση Διαδικτύου για λήψη πλακιδίων χάρτη που λείπουν</string>
 	<string name="app_description">Εφαρμογή πλοήγησης</string>
-	<string name="exit_Button">Έξοδος</string>
+	<string name="shared_string_exit">Έξοδος</string>
 	<string name="map_Button">Χάρτης</string>
 	<string name="settings_Button">Ρυθμίσεις</string>
 	<string name="favorites_Button">Τα Μέρη μου</string>

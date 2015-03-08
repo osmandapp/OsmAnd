@@ -1139,7 +1139,6 @@
 	<string name="arrived_at_destination">Ankommet til destinationen</string>
 	<string name="invalid_locations">Koordinaterne er ugyldige!</string>
 	<string name="go_back_to_osmand">Tilbage til OsmAnd-kortet</string>
-	<string name="close">Luk</string>
 	<string name="loading_data">Indlæser data…</string>
 	<string name="reading_indexes">Læser lokale data…</string>
 	<string name="previous_run_crashed">Sidste OsmAnd kørsel fejlede. Logfilen er i {0}. Rapporter hændelsen og vedhæft logfilen.</string>
@@ -1193,7 +1192,6 @@
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kortet</string>
 	<string name="use_internet_to_download_tile">Brug internettet til at hente manglende delkort</string>
 	<string name="app_description">Navigationsprogram</string>
-	<string name="exit_Button">Afslut</string>
 	<string name="map_Button">Kort</string>
 	<string name="settings_Button">Indstillinger</string>
 	<string name="favorites_Button">Mine steder</string>

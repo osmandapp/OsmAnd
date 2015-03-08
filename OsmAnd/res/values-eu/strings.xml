@@ -1015,7 +1015,7 @@
   <string name="arrived_at_destination">Zure helmugara iritsi zara</string>
   <string name="invalid_locations">Kordenadak ez dira bidezkoak!</string>
   <string name="go_back_to_osmand">OsmAndeko mapara itzuli</string>
-  <string name="close">Itxi</string>
+  <string name="shared_string_close">Itxi</string>
   <string name="loading_data">Datuak kargatzen…</string>
   <string name="reading_indexes">Datu lokalak irakurtzen…</string>
   <string name="previous_run_crashed">Azkeneko OsmAnden exekuzioak huts egin du. Log fitxategia {0} da. Mesedez gertatutakoa jakinarazi eta log fitxategia erantsi.</string>
@@ -1070,7 +1070,7 @@
   <string name="show_gps_coordinates_text">Erakutsi GPS kordenadak mapa</string>
   <string name="use_internet_to_download_tile">Erabili internet falta diren tesela mapak deskargatzeko</string>
   <string name="app_description">Nabigazio aplikazioa</string>
-  <string name="exit_Button">Atera</string>
+  <string name="shared_string_exit">Atera</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Ezarpenak</string>
   <string name="favorites_Button">Nire lekuak</string>

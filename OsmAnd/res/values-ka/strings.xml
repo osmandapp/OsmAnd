@@ -659,7 +659,7 @@
   <string name="arrived_at_destination">თქვენ მიხვედით თქვენს დანიშნულების ადგილას</string>
   <string name="invalid_locations">კოორდინატები არასწორია!</string>
   <string name="go_back_to_osmand">OsmAnd-ის რუკაზე დაბრუნება</string>
-  <string name="close">დახურვა</string>
+  <string name="shared_string_close">დახურვა</string>
   <string name="loading_data">მონაცემების კითხვა…</string>
   <string name="reading_indexes">ლოკალური მონაცემების კითხვა…</string>
   <string name="previous_run_crashed">ბოლოს გაშვებული OsmAnd მოკვდა. ჟურნალის ფაილია {0}. გთხოვთ მოგვწეროთ ჟურნალის ფაილი და როგორ მოხდა ეს.</string>
@@ -719,7 +719,7 @@
   <string name="show_gps_coordinates_text">GPS კოორდინატების რუკაზე ჩვენება</string>
   <string name="use_internet_to_download_tile">ინტერნეტის გამოყენება ნაკლული რუკის წარწერების ჩამოსატვირთად</string>
   <string name="app_description">ნავიგაციის აპლიკაცია</string>
-  <string name="exit_Button">გასვლა</string>
+  <string name="shared_string_exit">გასვლა</string>
   <string name="map_Button">რუკა</string>
   <string name="settings_Button">პარამეტრები</string>
   <string name="favorites_Button">რჩეულები</string>

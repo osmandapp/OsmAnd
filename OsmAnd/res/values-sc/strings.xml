@@ -1512,7 +1512,7 @@
 	<string name="arrived_at_destination">Seis arribaos a sa destinatzione bostra</string>
 	<string name="invalid_locations">Sas coordinatas non sunt bàlidas!</string>
 	<string name="go_back_to_osmand">Torra a sa mapa OsmAnd</string>
-	<string name="close">Serra</string>
+	<string name="shared_string_close">Serra</string>
 	<string name="loading_data">Carrigamentu datos…</string>
 	<string name="reading_indexes">Leghidura de sos datos locales…</string>
 	<string name="previous_run_crashed">S’aviu antepostu de s’aplicu s’est interrùmpidu. Su documentu de su registru est disponìbile in {0}. Imbia una sinnalatzione alliongiande du documentu de su registru.</string>
@@ -1566,7 +1566,7 @@
 	<string name="show_gps_coordinates_text">Ammustra coordinatas GPS in sa mapa</string>
 	<string name="use_internet_to_download_tile">Imprea ìnternet pro iscarrigare tasseddos fartantes de sa mapa</string>
 	<string name="app_description">Aplicu de nàvigu</string>
-	<string name="exit_Button">Essida</string>
+	<string name="shared_string_exit">Essida</string>
 	<string name="map_Button">Mapa</string>
 	<string name="settings_Button">Impostaduras</string>
 	<string name="favorites_Button">Logos meos</string>
