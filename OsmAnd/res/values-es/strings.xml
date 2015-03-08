@@ -1677,7 +1677,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
-    <string name="shared_string_selected">seleccionado</string>
+    <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Intérvalo de división</string>
     <string name="gpx_info_subtracks">Subpista: %1$s </string>
 	<string name="gpx_info_waypoints">Puntos de ruta: %1$s </string>

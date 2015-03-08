@@ -573,7 +573,7 @@
     <string name="gpx_wpt">Tapa</string>
     <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
     <string name="delay_navigation_start">Inghitza su nàvigu passu pro passu automaticamente</string>
-    <string name="shared_string_selected">ischertau</string>
+    <string name="shared_string_selected_lowercase">ischertau</string>
     <string name="local_index_gpx_info_show">\n\ntene carcau pro sas optziones</string>
 	<string name="gpx_info_subtracks">"Suta-rastas: %1$s "</string>
 	<string name="gpx_info_waypoints">"Tapas de s’àndala: %1$s "</string>

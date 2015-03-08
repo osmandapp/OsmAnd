@@ -144,7 +144,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	
 	private void updateSelectionMode(ActionMode m) {
 		if(favoritesSelected.size() > 0) {
-			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected));
+			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
 		} else{
 			m.setTitle("");
 		}

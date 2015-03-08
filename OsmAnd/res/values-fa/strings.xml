@@ -1840,7 +1840,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_wpt">نقطه بین راهی</string>
     <string name="selected_gpx_info_show">\n\n برای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید</string>
     <string name="delay_navigation_start">شروع راهنمای به صورت گام به گام و خودکار</string>
-    <string name="shared_string_selected">انتخاب</string>
+    <string name="shared_string_selected_lowercase">انتخاب</string>
     <string name="gpx_split_interval">بازه زمانی</string>
     <string name="gpx_info_subtracks">مسیر فرعی: %1$s </string>
 	<string name="gpx_info_waypoints">ایستگاههای بین راه: %1$s </string>

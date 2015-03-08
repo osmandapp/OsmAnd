@@ -1664,7 +1664,7 @@
     <string name="gpx_wpt">Kelionės taškas</string>
     <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte žemėlapyje</string>
     <string name="delay_navigation_start">Pradėti navigaciją automatiškai</string>
-    <string name="shared_string_selected">pasirinkti</string>
+    <string name="shared_string_selected_lowercase">pasirinkti</string>
     <string name="gpx_split_interval">Padalinimo intervalas</string>
     <string name="sort_by_distance">Rūšiuoti pagal atstumą</string>
     <string name="sort_by_name">Rūšiuoti pagal pavadinimą</string>

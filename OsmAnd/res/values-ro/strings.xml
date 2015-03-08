@@ -1433,7 +1433,7 @@
     <string name="gpx_wpt">Punct de reper</string>
     <string name="none_selected_gpx">Niciun fișier GPX selectat. Pentru a selecta țineți apăsat pe un track disponibil.</string>
     <string name="selected_gpx_info_show">\n\nȚineți apăsat pentru a vedea pe hartă</string>
-    <string name="shared_string_selected">Selectat</string>
+    <string name="shared_string_selected_lowercase">Selectat</string>
     <string name="osmo_auth_error">Eroare de autorizare OsMo aparută : %1$s.\nPoate fi o cadere temporară a serviciului sau înregistrarea dumneavoastră a expirat.\nDoriți sa începeți o nouă înregistrare?</string>
     <string name="osmo_group_by_invite">Intră pe baza invitației</string>
     <string name="delay_navigation_start">Porniți ghidarea asistată automat</string>

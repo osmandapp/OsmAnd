@@ -1363,7 +1363,7 @@
     <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
     <string name="loading_smth">Φόρτωση %1$s …</string>
     <string name="delay_navigation_start">Έναρξη πλοήγησης στροφή-στροφή αυτόματα</string>
-    <string name="shared_string_selected">επιλεγμένο</string>
+    <string name="shared_string_selected_lowercase">επιλεγμένο</string>
     <string name="gpx_info_distance">Απόσταση: %1$s (%2$s σημεία) </string>
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>

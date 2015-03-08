@@ -1741,7 +1741,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="gpx_wpt">Ceļapunkts</string>
     <string name="selected_gpx_info_show">\n\nTuriet nospiestu, lai rādītu uz kartes</string>
     <string name="delay_navigation_start">Sākt navigāciju ar aizturi</string>
-    <string name="shared_string_selected">Izvēlēts</string>
+    <string name="shared_string_selected_lowercase">Izvēlēts</string>
     <string name="gpx_split_interval">Sadalījuma intervāls</string>
     <string name="gpx_info_subtracks">Apakšposmi: %1$s </string>
 	<string name="gpx_info_waypoints">Ceļapunkti: %1$s </string>

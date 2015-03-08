@@ -1661,7 +1661,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="gpx_wpt">Маршрутна точка</string>
     <string name="selected_gpx_info_show">\n\nНатиснути і утримувати для перегляду на мапі</string>
     <string name="delay_navigation_start">Запускати навігацію автоматично</string>
-    <string name="shared_string_selected">виділені</string>
+    <string name="shared_string_selected_lowercase">виділені</string>
     <string name="gpx_info_subtracks">"Субтреки: %1$s "</string>
 	<string name="gpx_info_waypoints">"Шляхові точки: %1$s "</string>
 	<string name="gpx_info_distance">"Відстань: %1$s (%2$s точок) "</string>

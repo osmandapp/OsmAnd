@@ -1533,7 +1533,7 @@
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
     <string name="delay_navigation_start">Starta steg-för-steg-navigering automatiskt</string>
-    <string name="shared_string_selected">valda</string>
+    <string name="shared_string_selected_lowercase">valda</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>

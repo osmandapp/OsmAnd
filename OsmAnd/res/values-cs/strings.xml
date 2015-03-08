@@ -1586,7 +1586,7 @@ s často kladenými otázkami.</string>
     <string name="loading_smth">Načítá se %1$s…</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
     <string name="delay_navigation_start">Spustit navigaci automaticky</string>
-    <string name="shared_string_selected">vybrané</string>
+    <string name="shared_string_selected_lowercase">vybrané</string>
     <string name="gpx_split_interval">Rozdělit interval</string>
     <string name="gpx_info_subtracks">Podtrasy: %1$s </string>
 	<string name="gpx_info_waypoints">Bodů na trase: %1$s </string>

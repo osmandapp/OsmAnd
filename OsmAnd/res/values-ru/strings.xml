@@ -1647,7 +1647,7 @@
     <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
-    <string name="shared_string_selected">выбранные</string>
+    <string name="shared_string_selected_lowercase">выбранные</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
 	<string name="gpx_selection_number_of_points"> %1$s точек</string>
     <string name="gpx_selection_point">Точка %1$s</string>
