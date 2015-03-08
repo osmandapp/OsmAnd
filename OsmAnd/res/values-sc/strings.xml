@@ -1778,7 +1778,7 @@
 	<string name="home_button">Domo</string>
     <string name="search_for">Chirca pro</string>
 	<string name="show_map">AMMUSTRA SA MAPA</string>
-	<string name="show_all">AMMUSTRA TOTU</string>
+	<string name="shared_string_show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
 	<string name="map_update">Podes agiornare %1$s mapas</string>
 	<string name="error_avoid_specific_road">No est istada agatada peruna tangentziale</string>

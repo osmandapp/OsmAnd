@@ -1954,7 +1954,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="map_update">Na voljo je %1$s posodobitev zemljevidov</string>
 	<string name="search_for">Išči</string>
 	<string name="show_map">PRIKAŽI ZEMLJEVID</string>
-	<string name="show_all">PRIKAŽI VSE</string>
+	<string name="shared_string_show_all">PRIKAŽI VSE</string>
 	<string name="coordinates">Koordinate</string>
 	<string name="rendering_attr_transportStops_name">Postajališča</string>
     <string name="use_opengl_render">Za izris uporabi OpenGL</string>

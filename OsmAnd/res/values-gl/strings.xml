@@ -1724,7 +1724,7 @@
 	<string name="map_update">Hai actualizacións dispoñíbeis para %1$s mapas</string>
 	<string name="search_for">Buscar</string>
 	<string name="show_map">MOSTRAR O MAPA</string>
-	<string name="show_all">MOSTRAR TODO</string>
+	<string name="shared_string_show_all">MOSTRAR TODO</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía e de tren</string>
 	<string name="lock_screen_request_explanation">%1$s require este permiso para apagar a pantalla para a funcionalidade de aforro de enerxía.</string>

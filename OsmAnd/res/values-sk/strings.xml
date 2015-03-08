@@ -1943,7 +1943,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
-	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
 	<string name="map_update">Aktualizácie pre %1$s máp</string>
 	<string name="error_avoid_specific_road">Nenašla sa blízka cesta</string>

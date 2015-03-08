@@ -1730,7 +1730,7 @@
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
 	<string name="show_map">VISA KARTAN</string>
-	<string name="show_all">VISA ALLA</string>
+	<string name="shared_string_show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>

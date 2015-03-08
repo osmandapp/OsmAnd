@@ -1795,7 +1795,6 @@
 	<string name="home_button">Start</string>
     <string name="search_for">Søg efter</string>
 	<string name="show_map">VIS KORT</string>
-	<string name="show_all">VIS ALLE</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Der er %1$s opdateringer</string>
 	<string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>

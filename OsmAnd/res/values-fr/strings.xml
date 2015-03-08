@@ -1858,7 +1858,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="home_button">Accueil</string>
     <string name="search_for">Rechercher</string>
 	<string name="show_map">AFFICHER LA CARTE</string>
-	<string name="show_all">AFFICHER TOUT</string>
+	<string name="shared_string_show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
 	<string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
 	<string name="error_avoid_specific_road">Aucun raccourci n\'a été trouvé</string>

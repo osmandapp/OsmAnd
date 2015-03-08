@@ -1906,7 +1906,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="map_update">Ёсьць абнаўленьні для %1$s мапаў</string>
 	<string name="search_for">Шукаць</string>
 	<string name="show_map">ПАКАЗАЦЬ МАПУ</string>
-	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
 	<string name="coordinates">Каардынаты</string>
 	<string name="error_avoid_specific_road">Аб\'езд не знойдзены</string>
     <string name="use_opengl_render">Выкарыстоўваць OpenGL</string>

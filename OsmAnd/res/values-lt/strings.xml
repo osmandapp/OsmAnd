@@ -1848,7 +1848,7 @@
     <string name="map_update">Liko atnaujinti %1$s žemėlapių</string>
 	<string name="search_for">Ieškoti (ko)</string>
 	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
-	<string name="show_all">RODYTI VISKĄ</string>
+	<string name="shared_string_show_all">RODYTI VISKĄ</string>
 	<string name="coordinates">Koordinatės</string>
 	<string name="error_avoid_specific_road">Nerastas trumpiausias kelias</string>
     <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>

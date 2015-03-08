@@ -1779,7 +1779,7 @@
 	<string name="map_update">Frissítés érhető el %1$s térképhez</string>
 	<string name="search_for">Keresés</string>
 	<string name="show_map">MUTASD A TÉRKÉPET</string>
-	<string name="show_all">MUTASD MIND</string>
+	<string name="shared_string_show_all">MUTASD MIND</string>
 	<string name="coordinates">Koordináták</string>
 	<string name="dash_download_msg_none">Szeretnél offline térképeket letölteni?</string>
     <string name="dash_download_msg">%1$s térképet töltöttél le</string>

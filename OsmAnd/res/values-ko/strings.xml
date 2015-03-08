@@ -2025,7 +2025,6 @@
     <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
 	<string name="search_for">검색</string>
 	<string name="show_map">지도 표시</string>
-	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
 	<string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>

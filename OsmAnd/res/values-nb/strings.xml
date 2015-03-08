@@ -1189,7 +1189,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
-    <string name="show_all">VIS ALLE</string>
+    <string name="shared_string_show_all">VIS ALLE</string>
 	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
     <string name="rendering_value__name">Standard</string>
 	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>

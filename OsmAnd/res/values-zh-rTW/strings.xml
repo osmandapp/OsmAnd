@@ -1835,7 +1835,7 @@
 	<string name="map_update">有 %1$ 個地圖可更新</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
-	<string name="show_all">全部顯示</string>
+	<string name="shared_string_show_all">全部顯示</string>
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
     <string name="error_avoid_specific_road">沒發現支道</string>

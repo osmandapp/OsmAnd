@@ -211,7 +211,6 @@
     <string name="osmo_use_https">Use HTTPS</string>
 	<string name="map_update">Updates available for %1$s maps</string>
 	<string name="search_for">Search for</string>
-	<string name="show_all">SHOW ALL</string>
 	<string name="coordinates">Coordinates</string>
 	<string name="rendering_attr_publicTransportMode_name">Bus, trolleybus, shuttle routes</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>

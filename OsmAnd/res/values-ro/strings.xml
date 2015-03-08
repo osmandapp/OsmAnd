@@ -1532,7 +1532,7 @@
 	<string name="advanced_settings">Avansat</string>
 	<string name="map_update">Actualizări disponibile pentru %1$s hărţi</string>
 	<string name="search_for">Căutare pentru</string>
-	<string name="show_all">ARATĂ TOATE</string>
+	<string name="shared_string_show_all">ARATĂ TOATE</string>
 	<string name="coordinates">Coordonate</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rute de tramvai și tren</string>
 	<string name="wake_on_voice">Pornește ecranul</string>

@@ -1862,7 +1862,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="map_update">Atualizações disponives para %1$s mapas</string>
 	<string name="search_for">Procurar por</string>
 	<string name="show_map">EXIBIR MAPA</string>
-	<string name="show_all">EXIBIR TODOS</string>
+	<string name="shared_string_show_all">EXIBIR TODOS</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_subwayMode_name">Rodas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>

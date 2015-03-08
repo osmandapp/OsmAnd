@@ -1877,7 +1877,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>
 	<string name="search_for">Ko meklēt</string>
 	<string name="show_map">Rādīt karti</string>
-	<string name="show_all">Rādīt visu</string>
+	<string name="shared_string_show_all">Rādīt visu</string>
 	<string name="coordinates">Koordinātas</string>
 	<string name="rendering_attr_publicTransportMode_name">Autobusu, mikroautobusu un trolejbusu maršruti</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvaju un vilcienu maršruti</string>

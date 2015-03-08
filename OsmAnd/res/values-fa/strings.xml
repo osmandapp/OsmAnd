@@ -2026,7 +2026,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="map_update">به روز زسانی برای %1$s نقشه وجود دارد</string>
 	<string name="search_for">جستجوی</string>
 	<string name="show_map">نمایش نقشه</string>
-	<string name="show_all">نمایش همه</string>
+	<string name="shared_string_show_all">نمایش همه</string>
 	<string name="coordinates">مختصات</string>
 	<string name="rendering_attr_tramTrainRoutes_name">مسیر تراموا و قطار</string>
 	<string name="wake_on_voice">روشن کردن صفحه</string>

@@ -1963,7 +1963,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="home_button">Beginscherm</string>
     <string name="search_for">Zoek naar</string>
 	<string name="show_map">TOON KAART</string>
-	<string name="show_all">TOON ALLES</string>
 	<string name="coordinates">Coördinaten</string>
 	<string name="map_update">Updates beschikbaar voor %1$s kaart(en)</string>
 	<string name="everything_up_to_date">Alle bestanden zijn up-to-date</string>

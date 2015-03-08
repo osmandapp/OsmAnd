@@ -1777,7 +1777,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_use_https">Použít HTTPS</string>
 	<string name="map_update">K dispozici aktualizace pro %1$s map</string>
 	<string name="search_for">Hledat</string>
-	<string name="show_all">ZOBRAZIT VŠE</string>
+	<string name="shared_string_show_all">ZOBRAZIT VŠE</string>
 	<string name="coordinates">Souřadnice</string>
 	<string name="shared_string_dismiss">Zavřít</string>
     <string name="everything_up_to_date">Všechny soubory jsou aktuální</string>

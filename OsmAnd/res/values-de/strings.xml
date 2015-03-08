@@ -1992,7 +1992,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="show_map">KARTE ZEIGEN</string>
-    <string name="show_all">ALLES ZEIGEN</string>
+    <string name="shared_string_show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="shared_string_dismiss">Ablehnen</string>

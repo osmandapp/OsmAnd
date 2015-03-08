@@ -1960,7 +1960,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="advanced_settings">Avanzato</string>
 	<string name="osmo_use_https">Usa HTTPS</string>
 	<string name="osmo_use_https_descr">Usa la connessione sicura al server</string>
-    <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
     <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>

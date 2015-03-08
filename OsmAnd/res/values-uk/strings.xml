@@ -1925,7 +1925,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="advanced_settings">Додатково</string>
 	<string name="map_update">Наявні оновлення для %1$s мап</string>
 	<string name="search_for">Шукати</string>
-	<string name="show_all">Показати все</string>
+	<string name="shared_string_show_all">Показати все</string>
 	<string name="coordinates">Координати</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Маршрути трамваїв та поїздів</string>
 	<string name="lock_screen_request_explanation">%1$s потрібен цей дозвіл, щоб вимкнути екран для економії енергії.</string>

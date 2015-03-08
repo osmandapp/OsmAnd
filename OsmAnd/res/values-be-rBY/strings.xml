@@ -37,7 +37,7 @@
 	<string name="map_update">Jość abnaŭlieńnі dlia %1$s mapaŭ</string>
 	<string name="search_for">Šukać</string>
 	<string name="show_map">PAKAZAĆ MAPU</string>
-	<string name="show_all">PAKAZAĆ USIo</string>
+	<string name="shared_string_show_all">PAKAZAĆ USIo</string>
 	<string name="coordinates">Kaardynaty</string>
 	<string name="rendering_attr_publicTransportMode_name">Maršruty aŭtobusaŭ, traliejbusaŭ і taksі</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Maršruty tramvajaŭ і ciahnіkoŭ</string>

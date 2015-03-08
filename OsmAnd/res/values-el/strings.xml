@@ -1670,7 +1670,7 @@
     <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
     <string name="shared_string_dismiss">Απόρριψη</string>
     <string name="show_map">ΕΜΦ ΧΑΡΤΗ</string>
-	<string name="show_all">ΕΜΦ ΌΛΩΝ</string>
+	<string name="shared_string_show_all">ΕΜΦ ΌΛΩΝ</string>
 	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>
     <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
 	<string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>

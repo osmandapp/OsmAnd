@@ -1826,7 +1826,7 @@
 	<string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
 	<string name="show_map">MOSTRA EL MAPA</string>
-	<string name="show_all">MOSTRA\'LS TOTS</string>
+	<string name="shared_string_show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
 	<string name="map_update">Actualitzacions disponibles de %1$s mapes</string>
 	<string name="error_avoid_specific_road">No s\'ha trobat cap circumval·lació</string>

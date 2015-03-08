@@ -1790,7 +1790,6 @@
     <string name="use_opengl_render">Использовать OpenGL для рендеринга</string>
     <string name="use_opengl_render_descr">Использовать аппаратное ускорение OpenGL для рендеринга (может не работать на некоторых устройствах)</string>
     <string name="show_map">ПОКАЗАТЬ КАРТУ</string>
-	<string name="show_all">ПОКАЗАТЬ ВСЕ</string>
 	<string name="no_internet_connection">Загрузка невозможна. Проверьте подключение к Интернет.</string>
     <string name="download_tab_downloads">Загрузки</string>
     <string name="download_tab_updates">Обновления</string>

@@ -2105,7 +2105,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="map_update">マップ</string>
 	<string name="search_for">検索</string>
 	<string name="show_map">マップ表示</string>
-	<string name="show_all">全て表示</string>
+	<string name="shared_string_show_all">全て表示</string>
 	<string name="coordinates">座標</string>
 	<string name="parking_place">駐車場</string>
     <string name="remove_the_tag">タグを削除</string>

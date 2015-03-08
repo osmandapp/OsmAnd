@@ -248,7 +248,7 @@
 	<string name="map_update">Доступне су надоградње %1$s карата</string>
 	<string name="search_for">Потражи</string>
 	<string name="show_map">ПРИКАЖИ КАРТУ</string>
-	<string name="show_all">ПРИКАЖИ СВЕ</string>
+	<string name="shared_string_show_all">ПРИКАЖИ СВЕ</string>
 	<string name="coordinates">Координате</string>
 	<string name="shared_string_never">Никад</string>
     <string name="select_impassable_road">Означи на карти…</string>
