@@ -218,7 +218,6 @@
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="wake_on_voice">Turn screen on</string>
     <string name="wake_on_voice_descr">Turn on device screen (if off) when approaching a turn</string>
-    <string name="select_impassable_road">Select on map…</string>
     <string name="impassable_road">Avoid roads…</string>
     <string name="tip_recent_changes_1_9_t">Changes in 1.9:
         * Updated maps styles with road surface rendering, transport layers and hiking symbols
