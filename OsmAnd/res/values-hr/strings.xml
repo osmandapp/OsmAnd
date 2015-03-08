@@ -948,7 +948,7 @@
     <string name="app_mode_aircraft">Zrakoplov</string>
     <string name="tip_faq">Često postavljena pitanja</string>
     <string name="tip_faq_t">Posjetite https://code.google.com/p/osmand/wiki/FAQ za vidjeti često postavljena pitanja.</string>
-    <string name="local_osm_changes_delete_all">Izbrisati sve</string>
+    <string name="shared_string_delete_all">Izbrisati sve</string>
     <string name="animate_routing_route_not_calculated">Molimo vas, prvo izračunajte rutu</string>
     <string name="animate_routing_route">Simulacija pomoću izračunate rute </string>
     <string name="animate_routing_gpx">Simulacija pomoću GPX zapisa</string>

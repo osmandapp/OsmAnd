@@ -1493,7 +1493,7 @@
 	<string name="tip_faq_t">Auf http://code.google.com/p/osmand/wiki/FAQ finden sich häufige Fragen und Antworten.</string>
 	<string name="tip_faq">Häufige Fragen (FAQ)</string>
 	<string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
-	<string name="local_osm_changes_delete_all">Alles löschen</string>
+	<string name="shared_string_delete_all">Alles löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
 	<string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
 	<string name="app_modes_choose">Anwendungsprofile</string>

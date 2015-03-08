@@ -1508,7 +1508,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="app_mode_motorcycle">матацыкл</string>
     <string name="app_mode_aircraft">Самалёт</string>
     <string name="tip_faq">Частыя пытаньні</string>
-    <string name="local_osm_changes_delete_all">Выдаліць усё</string>
     <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
 	<string name="osmodroid_seek">Адсочваць аб\'ект</string>
     <string name="osmodroid_refresh">Абнавіць каналы</string>

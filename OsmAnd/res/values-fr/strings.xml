@@ -1443,7 +1443,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tip_faq_t">Rendez-vous sur https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
-    <string name="local_osm_changes_delete_all">Supprimer tout</string>
+    <string name="shared_string_delete_all">Supprimer tout</string>
     <string name="osmodroid_refresh">Rafraîchir les canaux</string>
     <string name="app_mode_hiking">Rando</string>
     <string name="app_mode_motorcycle">Moto</string>

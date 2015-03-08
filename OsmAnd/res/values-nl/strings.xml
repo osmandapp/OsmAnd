@@ -1563,7 +1563,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="animate_routing_gpx">Simuleer met een GPX spoor</string>
     <string name="osmodroid_refresh">Ververs channels</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM-wijzigingen worden verwijderd. Doorgaan?</string>
-    <string name="local_osm_changes_delete_all">Verwijder alle</string>
     <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
     <string name="tip_faq">Vaak gestelde vragen</string>
     <string name="app_mode_hiking">Wandelsport</string>

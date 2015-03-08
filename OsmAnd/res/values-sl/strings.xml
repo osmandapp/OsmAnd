@@ -1526,7 +1526,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="tip_faq_t">Obiščite https://code.google.com/p/osmand/wiki/FAQ za ogled pogosto zastavljenih vprašanj.</string>
     <string name="tip_faq">Pogosto zastavljena vprašanja</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisali boste %1$d osm sprememb. Ali ste prepričani?</string>
-    <string name="local_osm_changes_delete_all">Izbriši vse</string>
+    <string name="shared_string_delete_all">Izbriši vse</string>
     <string name="map_widget_map_rendering">Upodabljanje zemljevida</string>
     <string name="amenity_type_seamark">Pomorski znak</string>
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>

@@ -1310,7 +1310,7 @@
     <string name="animate_routing_route">Simulera med en beräknad rutt </string>
     <string name="animate_routing_gpx">Simulera med GPX-spår</string>
     <string name="local_osm_changes_delete_all_confirm">Du håller på att ta bort %1$d OSM-ändringar. Är du säker?</string>
-    <string name="local_osm_changes_delete_all">Ta bort alla</string>
+    <string name="shared_string_delete_all">Ta bort alla</string>
     <string name="tip_faq_t">Besök gärna https://code.google.com/p/osmand/wiki/FAQ för att se Frågor och svar.</string>
     <string name="tip_faq">Frågor och svar</string>
     <string name="app_mode_hiking">Vandring</string>

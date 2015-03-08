@@ -1531,7 +1531,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
     <string name="osmodroid_refresh">Odśwież kanały</string>
     <string name="local_osm_changes_delete_all_confirm">Zamierzasz usunąć %1$d zmian osm. Jesteś pewien?</string>
-    <string name="local_osm_changes_delete_all">Usuń wszystko</string>
+    <string name="shared_string_delete_all">Usuń wszystko</string>
     <string name="tip_faq_t">Wejdź na stronę https://code.google.com/p/osmand/wiki/FAQ i przejrzyj listę najczęściej zadawanych pytań.</string>
     <string name="tip_faq">Najczęściej zadawane pytania</string>
     <string name="app_mode_hiking">Wędrówki</string>

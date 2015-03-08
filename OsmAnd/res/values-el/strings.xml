@@ -1339,7 +1339,7 @@
     <string name="tip_faq_t">Παρακαλώ επισκεφθείτε το https://code.google.com/p/osmand/wiki/FAQ για να δείτε τις συχνές ερωτήσεις.</string>
     <string name="tip_faq">Συχνές ερωτήσεις</string>
     <string name="local_osm_changes_delete_all_confirm">Πρόκειται να διαγράψετε το %1$d των αλλαγών του osm. Είστε σίγουρος;</string>
-    <string name="local_osm_changes_delete_all">Διαγραφή όλων</string>
+    <string name="shared_string_delete_all">Διαγραφή όλων</string>
     <string name="animate_routing_route_not_calculated">Παρακαλώ, υπολογίστε την διαδρομή πρώτα</string>
     <string name="animate_routing_route">Προσομοίωση με χρήση της υπολογισμένης διαδρομής </string>
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>

@@ -1367,7 +1367,6 @@
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="tip_faq_t">Пожалуйста, посетите https://code.google.com/p/osmand/wiki/FAQ для ознакомления с часто задаваемыми вопросами.</string>
     <string name="local_osm_changes_delete_all_confirm">Вы собираетесь удалить %1$d изменений osm. Вы уверены?</string>
-    <string name="local_osm_changes_delete_all">Удалить всё</string>
     <string name="animate_routing_route_not_calculated">Пожалуйста, сначала рассчитайте маршрут</string>
     <string name="tip_faq">Часто задаваемые вопросы</string>
     <string name="animate_routing_route">Симуляция использования рассчитанного маршрута </string>

@@ -1840,7 +1840,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="tip_faq_t">Будь ласка, відвідайте https://code.google.com/p/osmand/wiki/FAQ для ознайомлення із частими запитаннями та відповідями на них.</string>
     <string name="tip_faq">Часті питання</string>
     <string name="local_osm_changes_delete_all_confirm">Ви збираєтесь вилучити %1$d змін osm. Ви впевнені?</string>
-    <string name="local_osm_changes_delete_all">Вилучити все</string>
+    <string name="shared_string_delete_all">Вилучити все</string>
     <string name="animate_routing_route_not_calculated">Будь ласка, спочатку розрахуйте маршрут</string>
     <string name="animate_routing_route">"Симуляція використання розрахованого маршрута "</string>
     <string name="animate_routing_gpx">Симуляуція використання треку GPX</string>

@@ -1288,7 +1288,7 @@
     <string name="tip_faq_t">Visiteu https://code.google.com/p/osmand/wiki/FAQ per llegir les preguntes més freqüents.</string>
     <string name="tip_faq">Preguntes més freqüents</string>
     <string name="local_osm_changes_delete_all_confirm">Ara suprimireu %1$d canvis de l\'OSM. N\'esteu segur?</string>
-    <string name="local_osm_changes_delete_all">Suprimeix-ho tot</string>
+    <string name="shared_string_delete_all">Suprimeix-ho tot</string>
     <string name="animate_routing_route_not_calculated">Calcula primer la ruta</string>
     <string name="animate_routing_route">Simulació amb la ruta calculada </string>
     <string name="animate_routing_gpx">Simulació amb la traça GPX</string>

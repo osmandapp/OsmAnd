@@ -747,7 +747,7 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
     <string name="local_osm_changes_delete_all_confirm">ستحذف %1$d من التغيرات .هل انت متأكد ؟</string>
-    <string name="local_osm_changes_delete_all">احذف الكل</string>
+    <string name="shared_string_delete_all">احذف الكل</string>
     <string name="osmodroid_refresh">تحديث القنوات</string>
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا البرنامج المساعد الخطوط الكنتورية التي يمكن عرضها في OsmAnd \'ق حاليا الخرائط. ويستند البيانات العالمية (بين 70 درجة شمالا و 70 درجة جنوبا) على القياسات التي كتبها SRTM (المكوك بعثة الطوبوغرافيا الرادار) وASTER (المتقدم المحمول في الفضاء الانبعاث الحراري وانعكاس الإشعاع)، أداة التصوير على متن تيرا، القمر الصناعي الرئيسي من وكالة ناسا \'ق نظام مراقبة الأرض. ASTER هو جهد تعاوني بين وكالة ناسا واليابان \'ق وزارة الاقتصاد والتجارة والصناعة (METI)، وأنظمة الفضاء اليابانية (J-spacesystems)</string>
     <string name="srtm_plugin_description">يسهل تحميله خطوط الكنتورية وحاليا hillshades (\'إعدادات \' \ → \'إدارة البيانات \' → \'تحميل \' → حدد المطلوب نوع الخريطة).</string>

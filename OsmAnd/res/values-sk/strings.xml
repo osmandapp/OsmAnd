@@ -1541,7 +1541,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 \n\nPre zobrazenie trasy k cieľu z iného bodu ako vašej súčasnej polohy, zvoľte východzí bod na mape a kliknite Pokyny odtiaľto.
 \n\nAk použijete Pokyny odtiaľto spolu s Navigovať OsmAnd sa prepne na vašu aktuálnu polohu hneď ako bude zistená (takže táto funkcia môže byť použitá pre rýchle spustenie navigácie než je známa poloha). Na druhú stranu, Pokyny odtiaľto v kombinácii so Zobraziť trasu len zobrazí trasu z ľubovoľného zvoleného bodu bez následných zmien. "</string>
 	<string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d osm zmien. Ste si istý?</string>
-    <string name="local_osm_changes_delete_all">Odstrániť všetky</string>
     <string name="osmodroid_refresh">Obnoviť kanály</string>
     <string name="tip_faq_t">Pozrite si https://code.google.com/p/osmand/wiki/FAQ s často kladenými otázkami.</string>
     <string name="tip_faq">Často kladené otázky</string>

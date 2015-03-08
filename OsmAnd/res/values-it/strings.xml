@@ -1567,7 +1567,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
     <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
     <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche. Sicuro?</string>
-    <string name="local_osm_changes_delete_all">Cancella tutto</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
     <string name="tip_faq">Domande più frequenti</string>
     <string name="osmodroid_refresh">Aggiorna i canali</string>

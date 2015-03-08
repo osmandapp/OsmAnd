@@ -1353,7 +1353,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="disable_complex_routing_descr">Skakel 2-fase roetebepaling vir motor navigasie af</string>
     <string name="disable_complex_routing">Skakel komplekse roete-bep[aling af</string>
     <string name="local_osm_changes_delete_all_confirm">Jy gaan %1$d osm veranderings uitwis. Is jy seker?</string>
-    <string name="local_osm_changes_delete_all">Wis alles uit</string>
+    <string name="shared_string_delete_all">Wis alles uit</string>
     <string name="animate_routing_route_not_calculated">Bereken asseblief eers die roete</string>
     <string name="animate_routing_route">Simuleer die berekende roete </string>
     <string name="tip_faq">Gereëlde Vrae</string>

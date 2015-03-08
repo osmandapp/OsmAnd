@@ -1443,7 +1443,7 @@
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios osm. ¿Quieres continuar?</string>
-    <string name="local_osm_changes_delete_all">Borrar todo</string>
+    <string name="shared_string_delete_all">Borrar todo</string>
     <string name="osmodroid_refresh">Renueva los canales</string>
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>

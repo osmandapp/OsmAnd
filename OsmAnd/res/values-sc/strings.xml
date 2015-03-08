@@ -116,7 +116,7 @@
     <string name="tip_faq_t">Vìsita https://code.google.com/p/osmand/wiki/FAQ pro bìdere sas preguntas prus fitianas.</string>
     <string name="tip_faq">Preguntas fitianas</string>
     <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d mudaduras. Ses seguru?</string>
-    <string name="local_osm_changes_delete_all">Burra totu</string>
+    <string name="shared_string_delete_all">Burra totu</string>
     <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s’andala in antis</string>
     <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>

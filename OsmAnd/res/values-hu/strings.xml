@@ -1362,7 +1362,7 @@
     <string name="tip_faq_t">Kérlek nézd meg a gyakran feltett kérdéseket: https://code.google.com/p/osmand/wiki/FAQ</string>
     <string name="tip_faq">Gyakran Ismétlődő Kérdések (FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d osm változtatás törlésére készülsz. Biztos vagy benne?</string>
-    <string name="local_osm_changes_delete_all">Összes törlése</string>
+    <string name="shared_string_delete_all">Összes törlése</string>
     <string name="route_is_too_long">Az OsmAnd offline tervezője számára rendkívül sokáig tarthat (vagy néha nem is működik) 200 km-nél távolabb lévő pontok között útvonalat tervezni. Kérlek adj hozzá köztes útpontokat.</string>
 	<string name="auto_zoom_none">Nincs auto zoom</string>
 	<string name="auto_zoom_close">Közelre</string>

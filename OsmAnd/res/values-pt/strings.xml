@@ -1539,7 +1539,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="tip_faq_t">Por favor aceda a https://code.google.com/p/osmand/wiki/FAQ e veja as perguntas mais frequentes.</string>
     <string name="tip_faq">Perguntas frequentes</string>
     <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d osm mudanças .  Você tem certeza ?</string>
-    <string name="local_osm_changes_delete_all">Eliminar tudo</string>
+    <string name="shared_string_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
 	<string name="amenity_type_seamark">Marca Marítima</string>
     <string name="app_modes_choose_descr">Escolha os perfis disponíveis na aplicação</string>

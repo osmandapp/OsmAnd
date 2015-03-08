@@ -8,7 +8,7 @@
 <string name="av_camera_focus_infinity">Фокус је подешен на бесконачно</string>
 	<string name="av_camera_focus_macro">Макро режим фокуса</string>
 	<string name="av_camera_focus_auto">Ауто фокус</string>
-	<string name="local_osm_changes_delete_all">Обриши све</string>
+	<string name="shared_string_delete_all">Обриши све</string>
     <string name="animate_routing_route_not_calculated">Прво израчунајте путању</string>
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>

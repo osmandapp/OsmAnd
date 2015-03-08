@@ -1212,7 +1212,7 @@
     <string name="tip_faq_t">Vă rog vizitați https://code.google.com/p/osmand/wiki/FAQ pentru a vedea întrebări frecvente.</string>
     <string name="tip_faq">Întrebări frecvente</string>
     <string name="local_osm_changes_delete_all_confirm">O să ștergeți modificarea osm %1$d. Sunteți sigur?</string>
-    <string name="local_osm_changes_delete_all">Ștergeți tot</string>
+    <string name="shared_string_delete_all">Ștergeți tot</string>
     <string name="animate_routing_route_not_calculated">Vă rog, mai întâi calculați ruta</string>
     <string name="animate_routing_route">Simulează folosind ruta calculată </string>
     <string name="animate_routing_gpx">Simulează folosind traseul GPX</string>

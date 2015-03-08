@@ -1345,7 +1345,7 @@
 	<string name="animate_routing_route_not_calculated">Nejprve prosím vypočítejte trasu</string>
     <string name="animate_routing_route">Simulovat pomocí vypočítané trasy </string>
     <string name="animate_routing_gpx">Simulovat pomocí GPX trasy</string>
-    <string name="local_osm_changes_delete_all">Odstranit vše</string>
+    <string name="shared_string_delete_all">Odstranit vše</string>
     <string name="local_osm_changes_delete_all_confirm">Chystáte se odstranit %1$d změn OSM. Jste si jistý?</string>
     <string name="tip_faq">Často kladené otázky</string>
     <string name="tip_faq_t">Prosím navštivte

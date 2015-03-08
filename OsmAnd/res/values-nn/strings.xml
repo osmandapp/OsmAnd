@@ -158,7 +158,7 @@
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq">Ofte spurde spørsmål</string>
-    <string name="local_osm_changes_delete_all">Slett alt</string>
+    <string name="shared_string_delete_all">Slett alt</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
 	<string name="gps_status_eclipsim">GPS-status</string>

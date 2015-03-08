@@ -1332,7 +1332,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ のよくある質問をご覧ください。</string>
     <string name="tip_faq">よくある質問(FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d個のOSMの変更を削除しようとしています。よろしいですか？</string>
-    <string name="local_osm_changes_delete_all">すべて削除</string>
+    <string name="shared_string_delete_all">すべて削除</string>
     <string name="osmodroid_refresh">チャンネルを更新</string>
     <string name="tip_recent_changes_1_5_t">"1.5での変更点:
 \n\t* 制限速度とスピードカメラを音声で警告

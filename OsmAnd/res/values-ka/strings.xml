@@ -1081,7 +1081,7 @@
     <string name="tip_faq_t">ხშირად დასმული კითხვების სანახავად გთხოვთ მოინახულოთ https://code.google.com/p/osmand/wiki/FAQ .</string>
     <string name="tip_faq">ხშირად დასმული კითხვები</string>
     <string name="local_osm_changes_delete_all_confirm">თქვენ შლით osm ცვლილებას %1$d. დარწმუნებული ბრძანდებით?</string>
-    <string name="local_osm_changes_delete_all">ყველას წაშლა</string>
+    <string name="shared_string_delete_all">ყველას წაშლა</string>
     <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
     <string name="animate_routing_route">სიმულაცია გამოთვლილი გზის გამოყენებით </string>
     <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>

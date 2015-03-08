@@ -1051,7 +1051,7 @@
     <string name="app_mode_motorcycle">Motocikls</string>
     <string name="tip_faq_t">Lūdzu apmeklējiet https://code.google.com/p/osmand/wiki/FAQ lai izlasītu biežāk uzdotos jautājumus.</string>
     <string name="tip_faq">Biežāk uzdotie jautājumi</string>
-    <string name="local_osm_changes_delete_all">Dzēst visu</string>
+    <string name="shared_string_delete_all">Dzēst visu</string>
     <string name="animate_routing_route_not_calculated">Vispirms lūdzu aprēķiniet maršrutu</string>
     <string name="animate_routing_route">Aprēķinātā maršruta simulācija </string>
     <string name="animate_routing_gpx">GPX trases simulācija</string>

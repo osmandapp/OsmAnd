@@ -445,7 +445,7 @@
     <string name="tip_faq_t">Kalі laska, naviedajcie https://code.google.com/p/osmand/wiki/FAQ kab pabačyć časta zadavanyja pytańnі.</string>
     <string name="tip_faq">Častyja pytańnі</string>
     <string name="local_osm_changes_delete_all_confirm">Vy źbіrajeciesia vydalіć %1$d zmieny OSM. Vy ŭpeŭnienyja?</string>
-    <string name="local_osm_changes_delete_all">Vydalіć usio</string>
+    <string name="shared_string_delete_all">Vydalіć usio</string>
     <string name="animate_routing_route_not_calculated">Kalі laska, spačatku raźlіčycie maršrut</string>
     <string name="animate_routing_route">"Іmіtacyja z vykarystańniem razlіčanaha maršrutu "</string>
     <string name="animate_routing_gpx">Іmіtacyja z vykarystańniem GPX-śliedu</string>

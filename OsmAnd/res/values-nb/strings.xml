@@ -709,7 +709,7 @@
     <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ.</string>
     <string name="tip_faq">Ofte stilte spørsmål</string>
     <string name="local_osm_changes_delete_all_confirm">Er du sikker på at du vil slette %1$d OSM endringer?</string>
-    <string name="local_osm_changes_delete_all">Slett alle</string>
+    <string name="shared_string_delete_all">Slett alle</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med den beregnede ruten </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>

@@ -362,7 +362,7 @@
     <string name="tip_faq_t">Visite https://code.google.com/p/osmand/wiki/FAQ para ver as preguntas máis frecuentes.</string>
     <string name="tip_faq">Preguntas máis frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Está a piques de eliminar %1$d cambios en osm. Confírmao?</string>
-    <string name="local_osm_changes_delete_all">Eliminar todo</string>
+    <string name="shared_string_delete_all">Eliminar todo</string>
     <string name="animate_routing_route_not_calculated">Calcule a ruta primeiro</string>
     <string name="animate_routing_route">"Simular empregando a ruta calculada "</string>
     <string name="animate_routing_gpx">Simular empregando pista GPX</string>

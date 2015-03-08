@@ -1438,7 +1438,7 @@
     <string name="tip_faq_t">Apsilankę https://code.google.com/p/osmand/wiki/FAQ rasite atsakymus į dažnai užduodamus klausimus.</string>
     <string name="tip_faq">Dažnai užduodami klausimai</string>
     <string name="local_osm_changes_delete_all_confirm">Jūs ištrinsite %1$d osm pakeitimus. Ar tikrai norite?</string>
-    <string name="local_osm_changes_delete_all">Viską ištrinti</string>
+    <string name="shared_string_delete_all">Viską ištrinti</string>
     <string name="amenity_type_seamark">Jūros navigacijos ženklas</string>
     <string name="app_modes_choose_descr">Pasirinkite programos veikimo profilius, kurie bus naudojami programoje</string>
     <string name="app_modes_choose">Programos profiliai</string>

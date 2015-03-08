@@ -1420,7 +1420,7 @@
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     <string name="osmodroid_refresh">更新頻道</string>
     <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d osm 的更改。您是否確定？</string>
-    <string name="local_osm_changes_delete_all">全部刪除</string>
+    <string name="shared_string_delete_all">全部刪除</string>
     <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
     <string name="tip_faq">常見問題</string>
     <string name="app_mode_hiking">徒步</string>

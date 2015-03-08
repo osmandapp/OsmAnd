@@ -1404,7 +1404,6 @@
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
     <string name="osmodroid_refresh">Opdater kanaler</string>
-    <string name="local_osm_changes_delete_all">Slet alle</string>
     <string name="local_osm_changes_delete_all_confirm">Vil du slette %1$d OSM ændringer. Bekræft?</string>
     <string name="tip_faq_t">Besøg https://code.google.com/p/osmand/wiki/FAQ for at se ofte stillede spørgsmål.</string>
     <string name="tip_faq">Ofte stillede spørgsmål</string>

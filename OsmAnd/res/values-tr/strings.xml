@@ -1181,7 +1181,7 @@
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ Sık sorulan soruları görmek için , karşılaşabileceğinizURL\'ye bakın .</string>
     <string name="tip_faq">SSS</string>
     <string name="local_osm_changes_delete_all_confirm">Siz %1$d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
-    <string name="local_osm_changes_delete_all">Tümünü kaldır</string>
+    <string name="shared_string_delete_all">Tümünü kaldır</string>
     <string name="animate_routing_route_not_calculated">Şimdi rotayı hesaplamak Lütfen</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
