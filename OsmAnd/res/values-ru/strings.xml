@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -1935,4 +1935,5 @@
 	<string name="shared_string_show_all">Показать всё</string>
 	<string name="shared_string_show_on_map">Показать на карте</string>
 	<string name="shared_string_map">Карта</string>
+	<string name="shared_string_favorites">Избранные</string>
 	</resources>
