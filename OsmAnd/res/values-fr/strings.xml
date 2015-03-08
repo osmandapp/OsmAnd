@@ -1942,7 +1942,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="photo">Photo</string>
 	<string name="share_note">Partager la note</string>
 	<string name="rename_recording">Renommer l\'enregistrement</string>
-	<string name="export">Exporter</string>
+	<string name="shared_string_export">Exporter</string>
 	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
 		\n\nUne carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Monde - Ski\".
 		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".

@@ -2104,7 +2104,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="shared_string_enable">فعال کردن</string>
 	<string name="shared_string_enabled">فعال</string>
 	<string name="shared_string_disabled">غیرفعال</string>
-	<string name="export">صادرکردن</string>
+	<string name="shared_string_export">صادرکردن</string>
 	<string name="voices">اعلان‌های صوتی</string>
 	<string name="local_index_description">بر روی هر مورد کلیک کنید تا توضیحات بیشتری ببینید، بزنید و نگه دارید تا غیرفعال یا پاک کنید. داده فعلی بر روی دستگاه (%1$s آزاد):</string>
 	<string name="speed_limit_exceed_message">محدوده حداکثر سرعت را انتخاب کنید، در سرعت بالاتر از این مقدار هشدار صوتی خواهید شنید.</string>

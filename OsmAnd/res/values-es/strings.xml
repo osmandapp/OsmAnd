@@ -1933,7 +1933,7 @@
 	<string name="rename_recording">Renombrar grabación</string>
 	<string name="notes">Notas</string>
 	<string name="online_map">Mapa en línea</string>
-	<string name="export">Exportar</string>
+	<string name="shared_string_export">Exportar</string>
 	<string name="audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>

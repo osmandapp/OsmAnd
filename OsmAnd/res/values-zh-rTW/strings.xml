@@ -1916,7 +1916,7 @@
 	<string name="online_map">線上地圖</string>
 	<string name="share_note">分享筆記</string>
 	<string name="rename_recording">重新命名記錄</string>
-	<string name="export">匯出</string>
+	<string name="shared_string_export">匯出</string>
 	<string name="audio">音訊</string>
 	<string name="video">視訊</string>
 	<string name="photo">照片</string>

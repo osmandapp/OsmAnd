@@ -1930,7 +1930,7 @@
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Pervardinti įrašą</string>
     <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
-	<string name="export">Eksportuoti</string>
+	<string name="shared_string_export">Eksportuoti</string>
 	<string name="days_behind">dienas atsilikęs</string>
 	<string name="plugin_nautical_descr">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
 	<string name="rename_failed">Nepavyko pervardinti.</string>

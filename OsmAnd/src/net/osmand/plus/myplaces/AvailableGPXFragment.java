@@ -1030,7 +1030,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				exportIcon = exportIcon.mutate();
 				exportIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 			}
-			item = optionsMenu.getMenu().add(R.string.export).setIcon(exportIcon);
+			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(exportIcon);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

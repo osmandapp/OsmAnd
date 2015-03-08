@@ -2064,8 +2064,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="roads_only">Alleen wegen</string>
     <string name="free">"Vrij %1$s "</string>
 	<string name="device_memory">Apparaatgeheugen</string>
-    <string name="export">Exporteren</string>
-	<string name="route_points">Route punten</string>
+ 	<string name="route_points">Route punten</string>
 	<string name="days_behind">Achterstand</string>
 	<string name="shared_string_release">Vrijgegeven</string>
 	<string name="shared_string_ellipsis">…</string>

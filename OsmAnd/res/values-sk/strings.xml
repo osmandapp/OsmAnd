@@ -2031,7 +2031,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="notes">Poznámky</string>
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Iba cesty</string>
-    <string name="export">Exportovať</string>
 	<string name="plugin_nautical_descr">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.
 		\n\nMapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".
 		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".

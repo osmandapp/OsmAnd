@@ -1861,7 +1861,7 @@
 	<string name="photo">Fénykép</string>
 	<string name="share_note">Jegyzet megosztása</string>
 	<string name="rename_recording">Felvétel átnevezése</string>
-	<string name="export">Exportálás</string>
+	<string name="shared_string_export">Exportálás</string>
 	<string name="plugin_touringview_name">Túratérkép nézet</string>
 
 	<string name="track_segments">Nyomvonal szakaszok</string>

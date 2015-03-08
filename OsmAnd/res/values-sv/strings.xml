@@ -1811,7 +1811,7 @@
 	<string name="online_map">Online-karta</string>
 	<string name="share_note">Dela anteckning</string>
 	<string name="rename_recording">Byt namn på inspelning</string>
-	<string name="export">Exportera</string>
+	<string name="shared_string_export">Exportera</string>
 	<string name="audio">Ljud</string>
 	<string name="video">Video</string>
 	<string name="photo">Foton</string>
