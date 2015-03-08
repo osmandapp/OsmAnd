@@ -167,7 +167,7 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
-		adapter.item(R.string.layers_category_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		adapter.item(R.string.shared_string_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
