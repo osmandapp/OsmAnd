@@ -1318,7 +1318,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_history_int_streets">Пресичане: {0} x {1} in {2}</string>
 	<string name="search_history_building">Сграда: {0}, {1}, {2}</string>
 	<string name="favorite">Любими</string>
-	<string name="clear_all">Изтрий всичко</string>
+	<string name="shared_string_clear_all">Изтрий всичко</string>
 	<string name="shared_string_history">История</string>
 	<string name="uploading_data">Качване на данни…</string>
 	<string name="uploading">Качване…</string>

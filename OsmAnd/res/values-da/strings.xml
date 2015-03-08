@@ -1062,7 +1062,6 @@
 	<string name="search_history_int_streets">Kryds: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
-	<string name="clear_all">Ryd alt</string>
 	<string name="uploading_data">Overfører data…</string>
 	<string name="uploading">Overfører…</string>
 	<string name="search_nothing_found">Fandt ikke noget</string>
@@ -1955,7 +1954,7 @@
 	<string name="shared_string_deselect">Fravælg</string>
 	<string name="shared_string_shared_strings_deselect_all">Fravælg alt</string>
 	<string name="shared_string_clear">Ryd</string>
-	<string name="shared_string_clear_all">Ryd alt</string>
+	<string name="shared_string_shared_string_clear_all">Ryd alt</string>
 	<string name="shared_string_save">Gem</string>
 	<string name="shared_string_save_as_gpx">Gem som GPX-spor</string>
 	<string name="shared_string_rename">Omdøb</string>

@@ -42,7 +42,7 @@
 	<string name="shared_string_deselect">Deselect</string>
 	<string name="shared_string_shared_strings_deselect_all">Deselect all</string>
 	<string name="shared_string_clear">Clear</string>
-	<string name="shared_string_clear_all">Clear all</string>
+	<string name="shared_string_shared_string_clear_all">Clear all</string>
 	<string name="shared_string_save">Save</string>
 	<string name="shared_string_save_as_gpx">Save as GPX track</string>
 	<string name="shared_string_rename">Rename</string>
@@ -1956,7 +1956,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
-	<string name="clear_all">Clear all</string>
 	<string name="uploading_data">Uploading data…</string>
 	<string name="uploading">Uploading…</string>
 	<string name="search_nothing_found">Nothing found</string>

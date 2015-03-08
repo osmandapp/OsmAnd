@@ -229,7 +229,7 @@
   <string name="search_history_street">रस्ता: {0}, {1}</string>
   <string name="search_history_int_streets">चौक: {0} x {1} in {2}</string>
   <string name="search_history_building">इमारत: {0}, {1}, {2}</string>
-  <string name="clear_all">"सगळे काढून टाका"</string>
+  <string name="shared_string_clear_all">"सगळे काढून टाका"</string>
   <string name="uploading_data">डेटा अपलोड करत आहे…</string>
   <string name="uploading">अपलोड करत आहे…</string>
   <string name="search_nothing_found">काही सापडले नाही</string>

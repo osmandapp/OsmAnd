@@ -1591,7 +1591,7 @@
 	<string name="search_history_int_streets">Skryžavannie: {0} ch {1} praz {2}</string>
 	<string name="search_history_building">Budynak: {0}, {1}, {2}</string>
 	<string name="favorite">Upadabanaje</string>
-	<string name="clear_all">Vydalіć usio</string>
+	<string name="shared_string_clear_all">Vydalіć usio</string>
 	<string name="shared_string_history">Hіstoryja</string>
 	<string name="uploading_data">Adsylka dadzienych…</string>
 	<string name="uploading">Adsylka…</string>

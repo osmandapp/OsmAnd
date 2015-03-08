@@ -654,7 +654,6 @@
 	<string name="search_history_int_streets">교차로: {0} x {1} in {2}</string>
 	<string name="search_history_building">빌딩: {0}, {1}, {2}</string>
 	<string name="favorite">즐겨찾기</string>
-	<string name="clear_all">모두 지우기</string>
 	<string name="uploading_data">데이터를 업로드하는 중…</string>
 	<string name="uploading">업로드하는 중…</string>
 	<string name="search_nothing_found">아무것도 찾지 못했습니다</string>
@@ -2182,7 +2181,7 @@
 	<string name="shared_string_deselect">선택 취소</string>
 	<string name="shared_string_shared_strings_deselect_all">모두 선택 취소</string>
 	<string name="shared_string_clear">지우기</string>
-	<string name="shared_string_clear_all">모두 지우기</string>
+	<string name="shared_string_shared_string_clear_all">모두 지우기</string>
 	<string name="shared_string_save">저장</string>
 	<string name="shared_string_save_as_gpx">현재 트랙을 GPX 파일로 저장</string>
 	<string name="shared_string_rename">이름 바꾸기</string>

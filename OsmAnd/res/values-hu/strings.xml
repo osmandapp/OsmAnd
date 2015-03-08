@@ -604,7 +604,7 @@
   <string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
   <string name="search_history_building">Épület: {0}, {1}, {2}</string>
   <string name="favorite">Kedvenc</string>
-  <string name="clear_all">Mindent töröl</string>
+  <string name="shared_string_clear_all">Mindent töröl</string>
   <string name="shared_string_history">Előzmények</string>
   <string name="uploading_data">Adat feltöltése…</string>
   <string name="uploading">Feltöltés…</string>

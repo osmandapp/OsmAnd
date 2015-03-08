@@ -485,7 +485,7 @@
 	<string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favoritt</string>
-	<string name="clear_all">Slett alle</string>
+	<string name="shared_string_clear_all">Slett alle</string>
 	<string name="shared_string_history">Historikk</string>
 	<string name="uploading_data">Laster opp data…</string>
 	<string name="uploading">Laster opp…</string>

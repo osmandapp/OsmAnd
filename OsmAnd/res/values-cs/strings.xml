@@ -609,7 +609,7 @@
   <string name="search_history_int_streets">Křižovatka ulic: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Oblíbené</string>
-  <string name="clear_all">Vymazat vše</string>
+  <string name="shared_string_clear_all">Vymazat vše</string>
   <string name="shared_string_history">Minulé</string>
   <string name="uploading_data">Odesílám data…</string>
   <string name="uploading">Odesílám…</string>

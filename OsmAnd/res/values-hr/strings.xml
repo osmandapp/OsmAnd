@@ -412,7 +412,7 @@
 	<string name="searching">Tražim…</string>
 	<string name="searching_address">Tražim adresu…</string>
 	<string name="hint_search_online">Kućni broj, ulica, grad</string>
-	<string name="clear_all">Izbriši sve</string>
+	<string name="shared_string_clear_all">Izbriši sve</string>
 	<string name="shared_string_history">Povijest</string>
 	<string name="favorite">Favoriti</string>
 	<string name="search_history_city">Grad: {0}</string>

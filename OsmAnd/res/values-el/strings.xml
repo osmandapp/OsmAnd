@@ -842,7 +842,7 @@
 	<string name="search_history_int_streets">Διασταύρωση: {0} x {1} στη(ο) {2}</string>
 	<string name="search_history_building">Κτήριο: {0}, {1}, {2}</string>
 	<string name="favorite">Αγαπημένο</string>
-	<string name="clear_all">Καθαρισμός όλων</string>
+	<string name="shared_string_clear_all">Καθαρισμός όλων</string>
 	<string name="shared_string_history">Ιστορικό</string>
 	<string name="uploading_data">Αποστολή δεδομένων…</string>
 	<string name="uploading">Αποστολή…</string>

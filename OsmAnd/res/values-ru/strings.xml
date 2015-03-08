@@ -660,7 +660,6 @@
   <string name="search_history_int_streets">Пересечение улиц: {0} x {1} в {2}</string>
   <string name="search_history_building">Здание: {0}, {1}, {2}</string>
   <string name="favorite">Избранное</string>
-  <string name="clear_all">Очистить все</string>
   <string name="uploading_data">Загрузка данных…</string>
   <string name="uploading">Загрузка…</string>
   <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
@@ -1896,7 +1895,7 @@
 	<string name="shared_string_select_on_map">Выбрать на карте</string>
 	<string name="shared_string_select_all">Выбрать все</string>
 	<string name="shared_string_clear">Очистить</string>
-	<string name="shared_string_clear_all">Очистить все</string>
+	<string name="shared_string_shared_string_clear_all">Очистить все</string>
 	<string name="shared_string_save">Сохранить</string>
 	<string name="shared_string_save_as_gpx">Сохранить как GPX трек</string>
 	<string name="shared_string_rename">Переименовать</string>

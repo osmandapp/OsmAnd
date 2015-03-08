@@ -219,7 +219,7 @@
   <string name="search_history_int_streets">Interseção : {0} x {1} dans {2}</string>
   <string name="search_history_building">Edifício : {0}, {1}, {2}</string>
   <string name="favorite">Favoritos</string>
-  <string name="clear_all">Apagar tudo</string>
+  <string name="shared_string_clear_all">Apagar tudo</string>
   <string name="shared_string_history">Histórico</string>
   <string name="uploading_data">Enviando dados…</string>
   <string name="uploading">Enviando…</string>

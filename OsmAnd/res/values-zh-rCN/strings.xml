@@ -331,7 +331,7 @@
 	<string name="transport_finish_search">完成搜索</string>
 	<string name="shared_string_ok">行</string>
 	<string name="favorite">最喜爱</string>
-	<string name="clear_all">清除所有</string>
+	<string name="shared_string_clear_all">清除所有</string>
 	<string name="download_index_success">下载成功</string>
 	<string name="update_existing">更换</string>
 	<string name="only_show">显示路线</string>

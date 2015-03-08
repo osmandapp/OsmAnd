@@ -669,7 +669,7 @@
   <string name="search_history_int_streets">Kruising: {0} x {1} in {2}</string>
   <string name="search_history_building">Gebou: {0}, {1}, {2}</string>
   <string name="favorite">Gunsteling</string>
-  <string name="clear_all">Vee alles uit</string>
+  <string name="shared_string_clear_all">Vee alles uit</string>
   <string name="shared_string_history">Geskiedenis</string>
   <string name="uploading_data">Besig om inligting op te laai…</string>
   <string name="uploading">Besig met oplaai…</string>

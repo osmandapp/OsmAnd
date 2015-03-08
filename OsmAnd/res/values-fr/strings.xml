@@ -551,7 +551,7 @@
   <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
-  <string name="clear_all">Supprimer tout</string>
+  <string name="shared_string_clear_all">Supprimer tout</string>
   <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
   <string name="uploading">Envoi…</string>

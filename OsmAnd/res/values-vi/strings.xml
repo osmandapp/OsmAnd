@@ -440,7 +440,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="search_history_int_streets">Điểm giao cắt: {0} x {1} in {2}</string>
 	<string name="search_history_building">Tòa nhà: {0}, {1}, {2}</string>
 	<string name="favorite">Ưa thích</string>
-	<string name="clear_all">Xóa hết</string>
+	<string name="shared_string_clear_all">Xóa hết</string>
 	<string name="shared_string_history">Lịch sử</string>
 	<string name="uploading_data">Đang tải dữ liệu lên…</string>
 	<string name="uploading">Đang tải lên…</string>

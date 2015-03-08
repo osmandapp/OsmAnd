@@ -975,7 +975,7 @@
 	<string name="search_history_street">Ulica: {0}, {1}</string>
 	<string name="search_history_int_streets">Križišče: {0} z {1} v {2}</string>
 	<string name="search_history_building">Zgradba: {0}, {1}, {2}</string>
-	<string name="clear_all">Počisti vse</string>
+	<string name="shared_string_clear_all">Počisti vse</string>
 	<string name="shared_string_history">Zgodovina</string>
 	<string name="uploading_data">Nalaganje podatkov …</string>
 	<string name="uploading">Nalaganje …</string>

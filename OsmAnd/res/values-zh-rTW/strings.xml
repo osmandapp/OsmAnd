@@ -786,7 +786,7 @@
 	<string name="search_history_int_streets">交叉路口：{0} x {1} 在{2}</string>
 	<string name="search_history_building">建物：{0}, {1}, {2}</string>
 	<string name="favorite">我的最愛</string>
-	<string name="clear_all">全部清除</string>
+	<string name="shared_string_clear_all">全部清除</string>
 	<string name="shared_string_history">歷史記錄</string>
 	<string name="uploading_data">上傳資料中…</string>
 	<string name="uploading">上傳中…</string>

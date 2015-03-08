@@ -729,7 +729,6 @@
   <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Obľúbené miesto</string>
-  <string name="clear_all">Zmazať všetko</string>
   <string name="uploading_data">Odosielajú sa údaje…</string>
   <string name="uploading">Odosielanie…</string>
   <string name="search_nothing_found">Nič sa nenašlo</string>
@@ -2096,7 +2095,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_deselect">Zrušiť výber</string>
 	<string name="shared_string_shared_strings_deselect_all">Zrušiť výber všetkých</string>
 	<string name="shared_string_clear">Vymazať</string>
-	<string name="shared_string_clear_all">Vymazať všetko</string>
+	<string name="shared_string_shared_string_clear_all">Vymazať všetko</string>
 	<string name="shared_string_save">Uložiť</string>
 	<string name="shared_string_save_as_gpx">Uložiť ako GPX stopu</string>
 	<string name="shared_string_rename">Premenovať</string>

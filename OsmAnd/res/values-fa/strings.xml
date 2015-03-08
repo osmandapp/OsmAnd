@@ -952,7 +952,7 @@
 	<string name="search_osm_nominatim">جستجوی آنلاین با استفاده از OSM Nominatim</string>
 	<string name="uploading">درحال آپلود…</string>
 	<string name="uploading_data">درحال آپلود داده‌ها…</string>
-	<string name="clear_all">پاک کردن همه</string>
+	<string name="shared_string_clear_all">پاک کردن همه</string>
 	<string name="favorite">مورد علاقه</string>
 	<string name="search_history_building">ساختمان:{0}, {1}, {2}</string>
 	<string name="search_history_street">خیابان: {0}, {1}</string>

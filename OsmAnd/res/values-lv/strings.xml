@@ -604,7 +604,7 @@
   <string name="search_history_int_streets">Krustojums: {0} x {1} in {2}</string>
   <string name="search_history_building">Ēka: {0}, {1}, {2}</string>
   <string name="favorite">Izlase</string>
-  <string name="clear_all">Noņemt visu</string>
+  <string name="shared_string_clear_all">Noņemt visu</string>
   <string name="shared_string_history">Vēsture</string>
   <string name="uploading_data">Augšupielādē datus…</string>
   <string name="uploading">Augšupielādē…</string>

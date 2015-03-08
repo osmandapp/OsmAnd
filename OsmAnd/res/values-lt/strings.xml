@@ -744,7 +744,7 @@
   <string name="search_history_int_streets">Sankryža: {0} x {1} iš {2}</string>
   <string name="search_history_building">Pastatas: {0}, {1}, {2}</string>
   <string name="favorite">Įsimintos vietos</string>
-  <string name="clear_all">Išvalyti viską</string>
+  <string name="shared_string_clear_all">Išvalyti viską</string>
   <string name="shared_string_history">Istorija</string>
   <string name="uploading_data">Siunčiami duomenys…</string>
   <string name="uploading">Siunčiama…</string>

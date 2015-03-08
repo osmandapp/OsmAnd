@@ -539,7 +539,6 @@
   <string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
-  <string name="clear_all">Azzera tutto</string>
   <string name="uploading_data">Invio dati…</string>
   <string name="uploading">Invio…</string>
   <string name="search_nothing_found">Trovato nulla</string>
@@ -2119,7 +2118,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_deselect">Deseleziona</string>
 	<string name="shared_string_shared_strings_deselect_all">Deseleziona tutto</string>
 	<string name="shared_string_clear">Pulisci</string>
-	<string name="shared_string_clear_all">Pulisci tutto</string>
+	<string name="shared_string_shared_string_clear_all">Pulisci tutto</string>
 	<string name="shared_string_save">Salva</string>
 	<string name="shared_string_save_as_gpx">Salva coma traccia GPX</string>
 	<string name="shared_string_rename">Rinomina</string>

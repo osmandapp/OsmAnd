@@ -886,7 +886,7 @@
 	<string name="search_history_int_streets">Intersecție: {0} x {1} în {2}</string>
 	<string name="search_history_building">Număr: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
-	<string name="clear_all">Șterge tot</string>
+	<string name="shared_string_clear_all">Șterge tot</string>
 	<string name="shared_string_history">Istoric</string>
 	<string name="uploading_data">Se încarcă date…</string>
 	<string name="uploading">Se încarcă…</string>

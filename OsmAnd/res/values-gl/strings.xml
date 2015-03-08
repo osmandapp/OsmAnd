@@ -1485,7 +1485,7 @@
 	<string name="search_history_int_streets">Intersección: {0} x {1} in {2}</string>
 	<string name="search_history_building">Edificio: {0}, {1}, {2}</string>
 	<string name="favorite">Favorito</string>
-	<string name="clear_all">Limpar todo</string>
+	<string name="shared_string_clear_all">Limpar todo</string>
 	<string name="shared_string_history">Historial</string>
 	<string name="uploading_data">A actualizar os datos…</string>
 	<string name="uploading">A actualizar…</string>
