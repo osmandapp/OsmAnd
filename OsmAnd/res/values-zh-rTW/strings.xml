@@ -1996,4 +1996,9 @@
 	<string name="shared_string_my_places">我的地點</string>
 	<string name="shared_string_my_favorites">我的最愛</string>
 	<string name="shared_string_my_tracks">我的軌跡</string>
+	<string name="shared_string_currently_recording_track">現在正在錄製軌跡</string>
+	<string name="shared_string_audio">音訊</string>
+	<string name="shared_string_video">視訊</string>
+	<string name="shared_string_photo">照片</string>
+
 	</resources>
