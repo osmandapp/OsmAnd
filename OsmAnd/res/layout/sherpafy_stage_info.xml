@@ -7,7 +7,7 @@
         android:id="@+id/MapView"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
-        android:contentDescription="@string/map_view"
+        android:contentDescription="@string/shared_string_map"
         android:visibility="gone" />
 
     <ScrollView

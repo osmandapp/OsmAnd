@@ -631,7 +631,6 @@
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
   <string name="layer_yandex_traffic">Doprava Yandex</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_favorites">Obľúbené miesta</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Dopravné zastávky</string>
   <string name="layer_poi">Body záujmu (POI)…</string>
@@ -740,7 +739,6 @@
   <string name="download_question">Stiahnuť {0} - {1} ?</string>
   <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="download_index_success">Sťahovanie úspešne dokončené</string>
   <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
   
   <string name="downloading">Sťahovanie…</string>
@@ -818,7 +816,6 @@
   <string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
   <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
   <string name="favourites_activity">Obľúbené miesta</string>
-  <string name="add_to_favourite">Pridať do Obľúbených</string>
   <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
   <string name="use_english_names">Použiť anglické názvy v mapách</string>
   <string name="app_settings">Nastavenia aplikácie</string>
@@ -867,7 +864,6 @@
   <string name="navigate_point_top_text">Zemepisná šírka a dĺžka vo vybranom formáte (D - stupne, M - minúty, S - sekundy)</string>
   <string name="navigate_point_latitude">Zem. šírka</string>
   <string name="navigate_point_longitude">Zem. dĺžka</string>
-  <string name="search_shown_on_map">Zobraziť na mape</string>
   <string name="navigate_point_cancel">Zrušiť</string>
   <string name="search_address_top_text">Zvoľte adresu</string>
   <string name="search_address_region">Oblasť</string>
@@ -1173,7 +1169,6 @@
 	<string name="prefer_in_routing_descr">Uprednostnenie diaľnic</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
-    <string name="map_view">Mapa</string>
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Umožní výpočet presnej trasy bez závad. Výpočet je však zatiaľ obmedzený na menšiu vzdialenosť a je pomalší.</string>
@@ -1726,9 +1721,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	
     <string name="osmo_connect_to_group_id">ID skupiny</string>
     <string name="selected_track">Zvolená stopa</string>
-    <string name="my_tracks">Všetky stopy</string>
-    <string name="my_favorites">Moje obľúbené</string>
-    <string name="my_data_Button">Moje miesta</string>
     <string name="my_data_activity">Moje miesta</string>
     <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
     <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
@@ -1922,7 +1914,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="map_widget_top">Stavový riadok</string>
 	<string name="map_widget_right">Pravý panel</string>
 	<string name="map_widget_left">Ľavý panel</string>
-    <string name="layers_category_show">Zobraziť</string>
 	<string name="configure_map">Nastaviť mapu</string>
     <string name="search_radius_proximity">Blízko k</string>
     <string name="tip_recent_changes_1_9_t">"Zmeny v 1.9: * Aktulizované mapové štýly s vykresľovaním povrchu ciest, dopravou a turistickými symbolmi * Hľadanie bodov záujmu pozdĺž trasy * Označovanie nepriechodných ciest v rámci relácie * Jednoduchšie sťahovanie a aktualizovanie máp * Vizuálne a zvukové upozornenie na blížiaci sa prechodný bod * Tlač itinerára a pokynov k zabočeniu * Podpora odbočovacích jazdných pruhov * Podpora Android Wear * Mnohé zmeny rozhrania * Oddelená veľkosť písma pre text na mape * Nové zvukové upozornenia pri odchýlení od trasy * Prihlasovanie do OsMo * Oprava nekompatibilít s verziami OsMo "</string>
@@ -1945,7 +1936,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
-	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
 	<string name="map_update">Aktualizácie pre %1$s máp</string>
 	<string name="error_avoid_specific_road">Nenašla sa blízka cesta</string>
@@ -1997,7 +1987,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="version_settings">Verzie</string>
     <string name="points">Body</string>
     <string name="tracks">Stopy</string>
-    <string name="my_location">Moja poloha</string>
     <string name="osm_editing_manage">Spravovať</string>
     <string name="parking_place">Parkovacie miesto</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
@@ -2015,9 +2004,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="free">"%1$s voľných "</string>
 	<string name="device_memory">Pamäť zariadenia</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžiarske trate</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Fotografie</string>
 	<string name="share_note">Zdieľať poznámku</string>
 	<string name="rename_recording">Premenovať nahrávku</string>
 	<string name="notes">Poznámky</string>
@@ -2046,7 +2032,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="track_points">Body stopy</string>
 	<string name="turn_off_all">Vypnúť všetky</string>
 	<string name="showed_on_map">Zobrazené na mape</string>
-	<string name="currently_recording_track">Nahráva sa stopa</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Zrušiť</string>
@@ -2108,11 +2093,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_favorite">Obľúbené</string>
 	<string name="shared_string_favorites">Obľúbené</string>
 	<string name="shared_string_add_to_favorites">Pridať k obľúbeným</string>
-	<string name="shared_string_my_location">Moja poloha</string>
+	<string name="shared_string_shared_string_my_location">Moja poloha</string>
 	<string name="shared_string_my_places">Moje miesta</string>
-	<string name="shared_string_my_favorites">Moje obľúbené</string>
-	<string name="shared_string_my_tracks">Moje stopy</string>
-	<string name="shared_string_currently_recording_track">Nahráva sa stopa</string>
+	<string name="shared_string_shared_string_my_favorites">Moje obľúbené</string>
+	<string name="shared_string_shared_string_my_tracks">Moje stopy</string>
+	<string name="shared_string_shared_string_currently_recording_track">Nahráva sa stopa</string>
 	<string name="shared_string_audio">Zvuk</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

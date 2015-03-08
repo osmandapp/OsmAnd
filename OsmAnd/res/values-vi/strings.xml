@@ -350,7 +350,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="none_region_found">Không có dữ liệu Offline cho khu vực này trong thẻ nhớ. Hãy tải về từ Internet.</string>
 	<string name="poi_namefinder_query_empty">Nhập thông tin cần tìm</string>
 	<string name="any_poi">Bất kỳ</string>
-	<string name="layer_favorites">Ưa thích</string>
+	<string name="shared_string_favorites">Ưa thích</string>
 	<string name="layer_transport">Điểm dừng giao thông</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Nguồn bản đồ…</string>
@@ -460,7 +460,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="download_question">Tải về {0} - {1} ?</string>
 	<string name="download_question_exist">Dữ liệu Offline cho {0} đã có ({1}). Bạn muốn cập nhật nó ({2}) ?</string>
 	<string name="address">Địa chỉ</string>
-	<string name="download_index_success">Tải về thành công</string>
+	<string name="shared_string_download_successful">Tải về thành công</string>
 	<string name="error_io_error">Có lỗi xảy ra với I/O</string>
 	
 	<string name="downloading">Đang tải…</string>
@@ -536,7 +536,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="show_osm_bugs_descr">Hiện OpenStreetBugs trên bản đồ</string>
     <string name="show_osm_bugs">Hiện OpenStreetBugs</string>
     <string name="favourites_activity">Danh sách điểm Ưa thích</string>
-    <string name="add_to_favourite">Thêm vào mục Ưa thích</string>
+    <string name="shared_string_add_to_favorites">Thêm vào mục Ưa thích</string>
     <string name="use_english_names_descr">Chọn giữa tên tiếng Anh và tên gốc</string>
     <string name="use_english_names">Dùng tên tiếng Anh</string>
     <string name="app_settings">Thiết lập</string>
@@ -592,7 +592,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="navigate_point_format_D">DDD.DDDDD</string>
 <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="search_shown_on_map">Hiện trên bản đồ</string>
+<string name="shared_string_show_on_map">Hiện trên bản đồ</string>
 <string name="navigate_point_cancel">Hủy</string>
 <string name="search_address_top_text">Chọn địa chỉ</string>
 <string name="search_address_region">Khu vực</string>

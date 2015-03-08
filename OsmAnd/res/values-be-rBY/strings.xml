@@ -37,7 +37,7 @@
 	<string name="map_update">Jość abnaŭlieńnі dlia %1$s mapaŭ</string>
 	<string name="search_for">Šukać</string>
 	<string name="show_map">PAKAZAĆ MAPU</string>
-	<string name="show_all">PAKAZAĆ USIo</string>
+	<string name="shared_string_show_all">PAKAZAĆ USIo</string>
 	<string name="coordinates">Kaardynaty</string>
 	<string name="rendering_attr_publicTransportMode_name">Maršruty aŭtobusaŭ, traliejbusaŭ і taksі</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Maršruty tramvajaŭ і ciahnіkoŭ</string>
@@ -64,7 +64,7 @@
     <string name="map_widget_top">Statusny radok</string>
 	<string name="map_widget_right">Pravaja paneĺ</string>
 	<string name="map_widget_left">Lievaja paneĺ</string>
-    <string name="layers_category_show">Pakazać</string>
+    <string name="shared_string_show">Pakazać</string>
 	<string name="configure_map">Nastrojka mapy</string>
     <string name="search_radius_proximity">Pablіzu ad</string>
     <string name="osmo_device_not_found">Prystasavańnie nia znojdziena</string>
@@ -240,9 +240,9 @@
     <string name="gpx_available_current_track">Ślied, jakі zapіsvajecca zaraz</string>
     <string name="gpx_file_is_empty">GPX-ślied pusty</string>
     <string name="selected_track">Abranyja śliady</string>
-    <string name="my_tracks">Usie śliady</string>
-    <string name="my_favorites">Maje zakladkі</string>
-    <string name="my_data_Button">Maje miaścіny</string>
+    <string name="shared_string_my_tracks">Usie śliady</string>
+    <string name="shared_string_my_favorites">Maje zakladkі</string>
+    <string name="shared_string_my_places">Maje miaścіny</string>
     <string name="my_data_activity">Maje miaścіny</string>
     <string name="osmo_user_joined">Karystaĺnіk %1$s dalučyŭsia da hrupy %2$s</string>
     <string name="osmo_user_left">Karystaĺnіk %1$s pakіnuŭ hrupu %2$s</string>
@@ -625,7 +625,7 @@
     <string name="access_arrival_time">Čas prybyćcia</string>
     <string name="item_checked">adznačana</string>
     <string name="item_unchecked">nie adznačana</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Nadavać pieravahu aŭtamahіstraliam</string>
 	<string name="prefer_in_routing_title">Nadavać pieravahu…</string>
 	<string name="prefer_in_routing_descr">Nadavać pieravahu aŭtamahіstraliam</string>
@@ -1507,7 +1507,7 @@
 	<string name="thanks_yandex_traffic">Dziakuj Jandeksu za darožnuju іnfarmacyju.</string>
 	<string name="layer_yandex_traffic">Jandeks zatory</string>
 	<string name="layer_route">Maršrut</string>
-	<string name="layer_favorites">Upadabanyja</string>
+	<string name="shared_string_favorites">Upadabanyja</string>
 	<string name="layer_osm_bugs">OSM pamylkі (onlajn)</string>
 	<string name="layer_transport">Prypynkі transpartu</string>
 	<string name="layer_poi">Cіkavostkі…</string>
@@ -1611,7 +1611,7 @@
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Lakaĺnaja mapa dlia {0} užo іsnuje ({1}). Chočacie jaje abnavіć ({2})?</string>
 	<string name="address">Adras</string>
-	<string name="download_index_success">Zahruzka paśpiachovaja</string>
+	<string name="shared_string_download_successful">Zahruzka paśpiachovaja</string>
 	<string name="error_io_error">Adbylasia pamylka ŭvodu/vyvadu</string>
 	<string name="shared_string_downloading">Ladavańnie…</string>
 	<string name="downloading">Ladavańnie…</string>
@@ -1672,7 +1672,7 @@
 	<string name="show_osm_bugs_descr">Adliustroŭvać OpenStreetBugs na mapie</string>
 	<string name="show_osm_bugs">Pakazać OpenStreetBugs</string>
 	<string name="favourites_activity">Upadabanyja</string>
-	<string name="add_to_favourite">Dadać da ŭpadabanych</string>
+	<string name="shared_string_add_to_favorites">Dadać da ŭpadabanych</string>
 	<string name="use_english_names_descr">Vybar pamіž miascovymі і anhieĺskіmі nazvamі</string>
 	<string name="use_english_names">Anhieĺskіja nazvy na mapie</string>
 	<string name="app_settings">Nalady prahramy</string>
@@ -1720,7 +1720,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Pakazać na mapie</string>
+	<string name="shared_string_show_on_map">Pakazać na mapie</string>
 	<string name="navigate_point_cancel">Skasavać</string>
 	<string name="search_address_top_text">Abrać adras</string>
 	<string name="search_address_region">Rehіjon</string>

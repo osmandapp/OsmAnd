@@ -77,7 +77,7 @@
 <string name="shared_string_apply">Verkställ</string>
 <string name="shared_string_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
-<string name="search_shown_on_map">Visa på karta</string>
+<string name="shared_string_show_on_map">Visa på karta</string>
 <string name="navigate_point_cancel">Avbryt</string>
 <string name="search_address_top_text">Välj adress</string>
 <string name="search_address_region">Region</string>
@@ -730,7 +730,7 @@
 	<string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rutt</string>
-	<string name="layer_favorites">Favoriter</string>
+	<string name="shared_string_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
 	<string name="layer_poi">Intressepunkt …</string>
@@ -840,7 +840,7 @@
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adresser</string>
-	<string name="download_index_success">Nedladdningen slutfördes utan problem</string>
+	<string name="shared_string_download_successful">Nedladdningen slutfördes utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	
 	<string name="downloading">Laddar ner …</string>
@@ -1054,7 +1054,7 @@
 	<string name="show_osm_bugs_descr">Visa OpenStreetBuggar på kartan</string>
 	<string name="show_osm_bugs">Visa OpenStreetBuggar</string>
 	<string name="favourites_activity">Favoriter</string>
-	<string name="add_to_favourite">Lägg till i favoriter</string>
+	<string name="shared_string_add_to_favorites">Lägg till i favoriter</string>
 	<string name="use_english_names_descr">Välj mellan inhemska och engelska namn på kartorna</string>
 	<string name="use_english_names">Namn på engelska</string>
 	<string name="app_settings">Appinställningar</string>
@@ -1115,7 +1115,7 @@
 	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
-    <string name="map_view">Karta</string>
+    <string name="shared_string_map">Karta</string>
     <string name="av_def_action_choose">Välj vid användning</string>
     <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
@@ -1523,9 +1523,9 @@
     <string name="osmo_show_group_notifications">Visa gruppaviseringar</string>
     <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
     <string name="selected_track">Valda spår</string>
-    <string name="my_tracks">Alla spår</string>
-    <string name="my_favorites">Mina favoriter</string>
-    <string name="my_data_Button">Mina platser</string>
+    <string name="shared_string_my_tracks">Alla spår</string>
+    <string name="shared_string_my_favorites">Mina favoriter</string>
+    <string name="shared_string_my_places">Mina platser</string>
     <string name="my_data_activity">Mina platser</string>
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
@@ -1708,7 +1708,7 @@
     <string name="map_widget_top">Statusfält</string>
 	<string name="map_widget_right">Höger panel</string>
 	<string name="map_widget_left">Vänster panel</string>
-    <string name="layers_category_show">Visa</string>
+    <string name="shared_string_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
     <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, kollektivtrafikslager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell notifiering och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
@@ -1730,7 +1730,7 @@
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
 	<string name="show_map">VISA KARTAN</string>
-	<string name="show_all">VISA ALLA</string>
+	<string name="shared_string_show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
@@ -1787,7 +1787,7 @@
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
     <string name="tracks">Spår</string>
-    <string name="my_location">Min plats</string>
+    <string name="shared_string_my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
     <string name="shared_string_disabled">Inaktiverad</string>
 	<string name="shared_string_enabled">Aktiverad</string>
@@ -1812,7 +1812,7 @@
 	<string name="share_note">Dela anteckning</string>
 	<string name="rename_recording">Byt namn på inspelning</string>
 	<string name="shared_string_export">Exportera</string>
-	<string name="audio">Ljud</string>
+	<string name="shared_string_audio">Ljud</string>
 	<string name="video">Video</string>
 	<string name="photo">Foton</string>
 	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.
@@ -1833,7 +1833,7 @@
 	<string name="days_behind">dagar efter</string>
 	<string name="watch">Visa</string>
 	<string name="rename_failed">Namnbytet misslyckades.</string>
-	<string name="currently_recording_track">Spelar för tillfället in spår</string>
+	<string name="shared_string_currently_recording_track">Spelar för tillfället in spår</string>
 	<string name="back_to_map">Tillbaka till kartan</string>
 	<string name="turn_off_all">Stäng av alla</string>
 	<string name="showed_on_map">Visade på kartan</string>

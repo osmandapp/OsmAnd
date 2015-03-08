@@ -697,7 +697,7 @@
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
-	<string name="layer_favorites">我的最愛</string>
+	<string name="shared_string_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
 	<string name="layer_transport">公車站牌</string>
 	<string name="layer_poi">興趣點…</string>
@@ -806,7 +806,7 @@
 	<string name="download_question">下載 {0} - {1}？</string>
 	<string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
 	<string name="address">地址</string>
-	<string name="download_index_success">下載成功</string>
+	<string name="shared_string_download_successful">下載成功</string>
 	<string name="error_io_error">存取發生錯誤</string>
 	
 	<string name="downloading">下載中…</string>
@@ -874,7 +874,7 @@
 	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 的錯誤</string>
 	<string name="show_osm_bugs">顯示 OpenStreet 的錯誤</string>
 	<string name="favourites_activity">我的最愛</string>
-	<string name="add_to_favourite">加到我的最愛</string>
+	<string name="shared_string_add_to_favorites">加到我的最愛</string>
 	<string name="use_english_names_descr">在本地語言或英語名稱之間選擇</string>
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>
@@ -924,7 +924,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">顯示在地圖上</string>
+	<string name="shared_string_show_on_map">顯示在地圖上</string>
 	<string name="navigate_point_cancel">取消</string>
 	<string name="search_address_top_text">選擇地址</string>
 	<string name="search_address_region">地區</string>
@@ -1050,7 +1050,7 @@
     </string>
     <string name="item_checked">勾選</string>
     <string name="item_unchecked">取消勾選</string>
-    <string name="map_view">地圖</string>
+    <string name="shared_string_map">地圖</string>
     <string name="max_speed_none">無</string>
     <string name="prefer_in_routing_descr">高速公路優先權</string>
     <string name="prefer_in_routing_title">優先權…</string>
@@ -1638,11 +1638,11 @@
     <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
     <string name="osmo_show_group_notifications">顯示群組通知</string>
     <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
-    <string name="my_favorites">我的最愛</string>
-    <string name="my_data_Button">我的地點</string>
+    <string name="shared_string_my_favorites">我的最愛</string>
+    <string name="shared_string_my_places">我的地點</string>
     <string name="my_data_activity">我的地點</string>
     <string name="selected_track">已選取軌跡</string>
-    <string name="my_tracks">全部追蹤</string>
+    <string name="shared_string_my_tracks">全部追蹤</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
 	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
@@ -1811,7 +1811,7 @@
     <string name="map_widget_top">狀態列</string>
 	<string name="map_widget_right">右面板</string>
 	<string name="map_widget_left">左面板</string>
-    <string name="layers_category_show">顯示</string>
+    <string name="shared_string_show">顯示</string>
 	<string name="configure_map">組態地圖</string>
     <string name="search_radius_proximity">在接近度上</string>
     <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近中途點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
@@ -1835,7 +1835,7 @@
 	<string name="map_update">有 %1$ 個地圖可更新</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
-	<string name="show_all">全部顯示</string>
+	<string name="shared_string_show_all">全部顯示</string>
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
     <string name="error_avoid_specific_road">沒發現支道</string>
@@ -1888,7 +1888,7 @@
     <string name="version_settings">建構</string>
     <string name="points">點</string>
     <string name="tracks">軌跡</string>
-    <string name="my_location">我的位置</string>
+    <string name="shared_string_my_location">我的位置</string>
     <string name="osm_editing_manage">管理</string>
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>
@@ -1917,7 +1917,7 @@
 	<string name="share_note">分享筆記</string>
 	<string name="rename_recording">重新命名記錄</string>
 	<string name="shared_string_export">匯出</string>
-	<string name="audio">音訊</string>
+	<string name="shared_string_audio">音訊</string>
 	<string name="video">視訊</string>
 	<string name="photo">照片</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
@@ -1937,7 +1937,7 @@
 	<string name="days_behind">之後的日子</string>
 	<string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
 	<string name="rename_failed">重新命名失敗。</string>
-	<string name="currently_recording_track">現在正在錄製軌跡</string>
+	<string name="shared_string_currently_recording_track">現在正在錄製軌跡</string>
 	<string name="back_to_map">返回地圖</string>
 	<string name="turn_off_all">全部關閉</string>
 	<string name="showed_on_map">在地圖上顯示</string>

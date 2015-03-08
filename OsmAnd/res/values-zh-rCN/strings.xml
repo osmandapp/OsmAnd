@@ -304,7 +304,7 @@
 	<string name="thanks_yandex_traffic">由于Yandex的交通信息。</string>
 	<string name="layer_yandex_traffic">Yandex的流量</string>
 	<string name="layer_route">路线</string>
-	<string name="layer_favorites">我的最爱</string>
+	<string name="shared_string_favorites">我的最爱</string>
 	<string name="layer_osm_bugs">OSM错误</string>
 	<string name="network_provider">网络</string>
 	<string name="int_seconds">秒</string>
@@ -332,7 +332,7 @@
 	<string name="shared_string_ok">行</string>
 	<string name="favorite">最喜爱</string>
 	<string name="shared_string_clear_all">清除所有</string>
-	<string name="download_index_success">下载成功</string>
+	<string name="shared_string_download_successful">下载成功</string>
 	<string name="update_existing">更换</string>
 	<string name="only_show">显示路线</string>
 	<string name="follow">开始导航</string>
@@ -398,7 +398,7 @@
         \n\t* UI 重新设计
 		\n\t* Bug 修复
     </string>
-    <string name="map_view">地图</string>
+    <string name="shared_string_map">地图</string>
     <string name="prefer_motorways">首选高速公路</string>
 	<string name="prefer_in_routing_title">首选…</string>
 	<string name="index_name_openmaps">开放地图属性索引</string>
@@ -874,7 +874,7 @@
 	<string name="update_tile">更新地图</string>
 	<string name="reload_tile">重新载入地图瓦片</string>
 	<string name="mark_point">目标</string>
-	<string name="add_to_favourite">加入收藏夹</string>
+	<string name="shared_string_add_to_favorites">加入收藏夹</string>
 	<string name="use_english_names_descr">选择显示当地名称或英文名称</string>
 	<string name="use_english_names">在地图中使用英文名称</string>
 	<string name="app_settings">应用程序设置</string>
@@ -900,7 +900,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">在地图上显示</string>
+	<string name="shared_string_show_on_map">在地图上显示</string>
 	<string name="context_menu_item_add_favorite">加入收藏夹</string>
 	<string name="context_menu_item_update_map">更新地图</string>
 	<string name="context_menu_item_open_bug">打开 OSM bug</string>

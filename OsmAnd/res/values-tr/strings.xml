@@ -411,7 +411,7 @@
 	<string name="any_poi">Herhangi</string>
 	<string name="layer_yandex_traffic">Yandex Trafik</string>
 	<string name="layer_route">Rota</string>
-	<string name="layer_favorites">Favoriler</string>
+	<string name="shared_string_favorites">Favoriler</string>
 	<string name="layer_map">Harita kaynağı…</string>
 	<string name="context_menu_item_search_poi">POI Ara</string>
 	<string name="where_am_i">Neredeyim?</string>
@@ -439,7 +439,7 @@
 	<string name="search_online_address">İnternet</string>
 	<string name="router_service">Navigasyon servisi</string>
 	<string name="address">Adres</string>
-	<string name="download_index_success">İndirme başarılı</string>
+	<string name="shared_string_download_successful">İndirme başarılı</string>
 	<string name="error_io_error">G/Ç hatası oluştu</string>
 	
 	<string name="downloading">İndiriliyor…</string>
@@ -467,7 +467,7 @@
 	<string name="update_tile">Haritayı güncelle</string>
 	<string name="mark_point">"Hedef "</string>
 	<string name="favourites_activity">Favoriler</string>
-	<string name="add_to_favourite">Favorilere ekle</string>
+	<string name="shared_string_add_to_favorites">Favorilere ekle</string>
 	<string name="use_english_names">Haritalarda ingilizce yer adlarını kullan</string>
 	<string name="map_view_3d_descr">3D harita görünümünü etkinleştir</string>
 	<string name="show_poi_over_map">POI göster</string>
@@ -489,7 +489,7 @@
 	<string name="app_mode_bicycle">Bisiklet</string>
 	<string name="app_mode_pedestrian">Yaya</string>
 	<string name="position_on_map_center">Merkez</string>
-	<string name="search_shown_on_map">Haritada göster</string>
+	<string name="shared_string_show_on_map">Haritada göster</string>
 	<string name="navigate_point_cancel">İptal et</string>
 	<string name="search_address_top_text">Adres seç</string>
 	<string name="search_tabs_location">Konum</string>
@@ -765,7 +765,7 @@
     <string name="access_arrival_time">Varış Zamanı</string>
     <string name="item_checked">işaretli</string>
     <string name="item_unchecked">işaretsiz</string>
-    <string name="map_view">Harita</string>
+    <string name="shared_string_map">Harita</string>
     <string name="prefer_motorways">Otoyol tercih et</string>
 	<string name="prefer_in_routing_title">Tercih et…</string>
 	<string name="prefer_in_routing_descr">Otoyol tercih et</string>

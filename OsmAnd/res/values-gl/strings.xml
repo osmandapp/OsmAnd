@@ -156,9 +156,9 @@
     <string name="gpx_available_current_track">Pista de gravación actual</string>
     <string name="gpx_file_is_empty">A pista Gpx está baleira</string>
     <string name="selected_track">Pistas seleccionadas</string>
-    <string name="my_tracks">Todas as pistas</string>
-    <string name="my_favorites">Os meus favoritos</string>
-    <string name="my_data_Button">Os meus lugares</string>
+    <string name="shared_string_my_tracks">Todas as pistas</string>
+    <string name="shared_string_my_favorites">Os meus favoritos</string>
+    <string name="shared_string_my_places">Os meus lugares</string>
     <string name="my_data_activity">Os meus lugares</string>
     <string name="osmo_user_joined">O usuario %1$s uniuse ao grupo %2$s</string>
     <string name="osmo_user_left">O usuario %1$s deixou o grupo %2$s</string>
@@ -537,7 +537,7 @@
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">escollido</string>
     <string name="item_unchecked">non escollido</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Preferir as autoestradas</string>
 	<string name="prefer_in_routing_title">Preferir…</string>
 	<string name="prefer_in_routing_descr">Preferir as autoestradas</string>
@@ -1401,7 +1401,7 @@
 	<string name="thanks_yandex_traffic">Grazas a Yandex pola información sobre o tráfico.</string>
 	<string name="layer_yandex_traffic">Tráfico de Yandex</string>
 	<string name="layer_route">Itinerario</string>
-	<string name="layer_favorites">Favoritos</string>
+	<string name="shared_string_favorites">Favoritos</string>
 	<string name="layer_osm_bugs">Fallos de OSM (con conexión)</string>
 	<string name="layer_transport">Paraxes de transporte</string>
 	<string name="layer_poi">POI…</string>
@@ -1505,7 +1505,7 @@
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Xa existen datos sen conexión para {0} ({1}). Desexa actualizalos ({2}) ?</string>
 	<string name="address">Address</string>
-	<string name="download_index_success">A descarga foi correcta</string>
+	<string name="shared_string_download_successful">A descarga foi correcta</string>
 	<string name="error_io_error">Produciuse un erro de E/S</string>
 	<string name="shared_string_downloading">A descargar …</string>
 	<string name="downloading">A descargar…</string>
@@ -1566,7 +1566,7 @@
 	<string name="show_osm_bugs_descr">Mostrar OpenStreetBugs no mapa</string>
 	<string name="show_osm_bugs">Mostrar OpenStreetBugs</string>
 	<string name="favourites_activity">Favoritos</string>
-	<string name="add_to_favourite">Engadir aos favoritos</string>
+	<string name="shared_string_add_to_favorites">Engadir aos favoritos</string>
 	<string name="use_english_names_descr">Escoller entre os nomes no idioma local e en inglés</string>
 	<string name="use_english_names">Empregar os nomes en inglés no mapa</string>
 	<string name="app_settings">Configuración do aplicativo</string>
@@ -1614,7 +1614,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Mostrar no mapa</string>
+	<string name="shared_string_show_on_map">Mostrar no mapa</string>
 	<string name="navigate_point_cancel">Cancelar</string>
 	<string name="search_address_top_text">Seleccionar o enderezo</string>
 	<string name="search_address_region">Region</string>
@@ -1724,7 +1724,7 @@
 	<string name="map_update">Hai actualizacións dispoñíbeis para %1$s mapas</string>
 	<string name="search_for">Buscar</string>
 	<string name="show_map">MOSTRAR O MAPA</string>
-	<string name="show_all">MOSTRAR TODO</string>
+	<string name="shared_string_show_all">MOSTRAR TODO</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía e de tren</string>
 	<string name="lock_screen_request_explanation">%1$s require este permiso para apagar a pantalla para a funcionalidade de aforro de enerxía.</string>
@@ -1748,7 +1748,7 @@
     <string name="map_widget_top">Barra de estado</string>
 	<string name="map_widget_right">Panel dereito</string>
 	<string name="map_widget_left">Panel esquerdo</string>
-    <string name="layers_category_show">Mostrar</string>
+    <string name="shared_string_show">Mostrar</string>
 	<string name="configure_map">Configurar o mapa</string>
     <string name="search_radius_proximity">Perto de</string>
     <string name="osmo_device_not_found">Dispositivo non atopado</string>

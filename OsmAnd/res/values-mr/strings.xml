@@ -187,7 +187,7 @@
   <string name="rotate_map_none_opt">फिरवू नका</string>
   <string name="show_route">मार्ग तपशील</string>
   <string name="any_poi">कुठलाही</string>
-  <string name="layer_favorites">आवडती ठिकाणे</string>
+  <string name="shared_string_favorites">आवडती ठिकाणे</string>
   <string name="layer_map">नकाशाचा स्त्रोत…</string>
   <string name="context_menu_item_search_poi">पिओआय शोधा</string>
   
@@ -240,7 +240,7 @@
   <string name="route_general_information">एकुण अंतर %1$s, प्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
-  <string name="download_index_success">डाउनलोड यशस्वी</string>
+  <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
   
   <string name="downloading">डाउनलोड करत आहे…</string>
   <string name="downloading_list_indexes">उपलब्ध प्रदेशांची यादी डाउनलोड करत आहे…</string>
@@ -266,7 +266,7 @@
   <string name="shared_string_settings">सेटिंग्स</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
   <string name="favourites_activity">आवडती ठिकाणे</string>
-  <string name="add_to_favourite">आवडत्या ठिकणात नोंद करा</string>
+  <string name="shared_string_add_to_favorites">आवडत्या ठिकणात नोंद करा</string>
   <string name="use_english_names_descr">इंग्लिश आणि बोली नावांची निवड</string>
   <string name="use_english_names">नकाशामधे इंग्लिश नावे वापरा</string>
   <string name="app_settings">ऍप्लिकेशन सेटिंग्स</string>
@@ -297,7 +297,7 @@
   <string name="position_on_map_bottom">खाली</string>
   <string name="navigate_point_latitude">अक्षांश</string>
   <string name="navigate_point_longitude">रेखांश</string>
-  <string name="search_shown_on_map">नकाशावर दाखवा</string>
+  <string name="shared_string_show_on_map">नकाशावर दाखवा</string>
   <string name="search_address_top_text">पत्ता निवडा</string>
   <string name="search_address_region">प्रदेश</string>
   <string name="search_address_city">शहर</string>
@@ -357,7 +357,7 @@
 	<string name="hno">घर क्रमांक</string>
     <string name="select_address_activity">पत्ता निवडा</string>
     <string name="map_widget_gps_info">जिपिएस माहिती</string>
-    <string name="map_view">नकाशा</string>
+    <string name="shared_string_map">नकाशा</string>
     <string name="prefer_in_routing_title">प्राधान्य…</string>
 	<string name="max_speed_none">काही नाही</string>
     <string name="recording_context_menu_show">दाखवा</string>

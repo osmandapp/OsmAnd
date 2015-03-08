@@ -126,7 +126,7 @@
   <string name="thanks_yandex_traffic">Obrigado à Yandex por fornecer informações de trânsito.</string>
   <string name="layer_yandex_traffic">Tráfego Yandex</string>
   <string name="layer_route">Rota</string>
-  <string name="layer_favorites">Favoritos</string>
+  <string name="shared_string_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Bugs OSM</string>
   <string name="layer_transport">Paradas de transportes</string>
   <string name="layer_poi">POI(Ponto de Interesse)…</string>
@@ -239,7 +239,7 @@
   <string name="download_question">Quer fazer o download {0} - {1} ?</string>
   <string name="download_question_exist">Dados para {0} já existem ({1}). Você quer fazer atualizá-los ({2}) ?</string>
   <string name="address">Endereço</string>
-  <string name="download_index_success">Download do índice com sucesso</string>
+  <string name="shared_string_download_successful">Download do índice com sucesso</string>
   <string name="error_io_error">Um erro de entrada/saída ocorreu</string>
   
   <string name="downloading">Baixando…</string>
@@ -320,7 +320,7 @@
   <string name="show_osm_bugs_descr">Ver bugs OpenStreet no mapa</string>
   <string name="show_osm_bugs">Ver bugs OpenStreet</string>
   <string name="favourites_activity">Lista dos pontos favoritos</string>
-  <string name="add_to_favourite">Adicionar aos Favoritos</string>
+  <string name="shared_string_add_to_favorites">Adicionar aos Favoritos</string>
   <string name="use_english_names_descr">Escolher entre os nomes nativos e inglês</string>
   <string name="use_english_names">Utilizar nomes em inglês</string>
   <string name="app_settings">Configurações da aplicação</string>
@@ -370,7 +370,7 @@
   <string name="navigate_point_top_text">Insira a latitude e longitude no formato selecionado (D - graus, M - minutos, S - segundos)</string>
   <string name="navigate_point_latitude">Latitude</string>
   <string name="navigate_point_longitude">Longitude</string>
-  <string name="search_shown_on_map">Mostrar no mapa</string>
+  <string name="shared_string_show_on_map">Mostrar no mapa</string>
   <string name="navigate_point_cancel">Cancelar</string>
   <string name="search_address_top_text">Escolher endereço</string>
   <string name="search_address_region">Região</string>
@@ -1078,7 +1078,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="recording_context_menu_play">Tocar</string>
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">marcado</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Preferir auto-estradas</string>
 	<string name="prefer_in_routing_title">Preferir-…</string>
 	<string name="prefer_in_routing_descr">Preferir Auto-Estradas</string>
@@ -1716,9 +1716,9 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gpx_available_current_track">Trilho de gravação actual</string>
     <string name="gpx_file_is_empty">O trilho Gpx está vazio</string>
     <string name="selected_track">Trilho seleccionado</string>
-    <string name="my_tracks">todas os trilhos</string>
-    <string name="my_favorites">Meus Favoritos</string>
-    <string name="my_data_Button">Meus Dados</string>
+    <string name="shared_string_my_tracks">todas os trilhos</string>
+    <string name="shared_string_my_favorites">Meus Favoritos</string>
+    <string name="shared_string_my_places">Meus Dados</string>
     <string name="my_data_activity">Meus Dados</string>
     <string name="osmo_user_joined">Usuário %1$s juntou-se ao grupo %2$s</string>
     <string name="osmo_user_left">O usuário %1$s deixou o grupo %2$s</string>
@@ -1828,7 +1828,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
-    <string name="my_location">Meus locais</string>
+    <string name="shared_string_my_location">Meus locais</string>
     <string name="recents">RECENTES</string>
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
     <string name="rendering_value__name">Padrão</string>
@@ -1862,7 +1862,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="map_update">Atualizações disponives para %1$s mapas</string>
 	<string name="search_for">Procurar por</string>
 	<string name="show_map">EXIBIR MAPA</string>
-	<string name="show_all">EXIBIR TODOS</string>
+	<string name="shared_string_show_all">EXIBIR TODOS</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_subwayMode_name">Rodas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>

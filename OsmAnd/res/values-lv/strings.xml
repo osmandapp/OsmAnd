@@ -514,7 +514,7 @@
   <string name="thanks_yandex_traffic">Paldies Yandex par satiksmes informāciju.</string>
   <string name="layer_yandex_traffic">Yandex satiksme</string>
   <string name="layer_route">Maršruts</string>
-  <string name="layer_favorites">Izlase</string>
+  <string name="shared_string_favorites">Izlase</string>
   <string name="layer_osm_bugs">OSM kļūdas</string>
   <string name="layer_transport">Transporta pieturas</string>
   <string name="layer_poi">POI…</string>
@@ -624,7 +624,7 @@
   <string name="download_question">Lejupielādēt {0} - {1} ?</string>
   <string name="download_question_exist">{0} bezsaistes dati jau eksistē ({1}). Vai vēlaties atjaunināt? ({2}) ?</string>
   <string name="address">Adrese</string>
-  <string name="download_index_success">Lejupielāde ir veiksmīga</string>
+  <string name="shared_string_download_successful">Lejupielāde ir veiksmīga</string>
   <string name="error_io_error">Notika I/O kļūda</string>
   
   <string name="downloading">Lejupielādē…</string>
@@ -696,7 +696,7 @@
   <string name="show_osm_bugs_descr">Rādīt kartē OpenStreetBugs</string>
   <string name="show_osm_bugs">Rādīt OpenStreetBugs</string>
   <string name="favourites_activity">Izlase</string>
-  <string name="add_to_favourite">Pievienot izlasei</string>
+  <string name="shared_string_add_to_favorites">Pievienot izlasei</string>
   <string name="use_english_names_descr">Izvēlieties nosaukumos lietot angļu burtus, lai vietējās valodas nosaukumi ar specifiskiem burtiem būtu vieglāk atrodami un izlasāmi</string>
   <string name="use_english_names">Lietot angļu nosaukumus</string>
   <string name="app_settings">Aplikācijas uzstādījumi</string>
@@ -749,7 +749,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="search_shown_on_map">Rādīt kartē</string>
+  <string name="shared_string_show_on_map">Rādīt kartē</string>
   <string name="navigate_point_cancel">Atcelt</string>
   <string name="search_address_top_text">Izvēlēties adresi</string>
   <string name="search_address_region">Reģions</string>
@@ -1167,7 +1167,7 @@
     <string name="access_arrival_time">Ierašanās laiks</string>
     <string name="item_checked">Iespējots</string>
     <string name="item_unchecked">Atspējots</string>
-    <string name="map_view">Karte</string>
+    <string name="shared_string_map">Karte</string>
     <string name="prefer_motorways">Priekšroka automaģistrālēm</string>
 	<string name="prefer_in_routing_title">Dot priekšroku…</string>
 	<string name="prefer_in_routing_descr">Priekšroka automaģistrālēm</string>
@@ -1731,9 +1731,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_show_group_notifications">Rādīt grupas ziņojumus</string>
     <string name="osmo_show_group_notifications_descr">Rādīt paziņojumu, kad lietotājs pievienojas vai pamet grupu</string>
     <string name="selected_track">Izvēlētais treks</string>
-    <string name="my_tracks">Visi treki</string>
-    <string name="my_favorites">Mana izlase</string>
-    <string name="my_data_Button">Manas vietas</string>
+    <string name="shared_string_my_tracks">Visi treki</string>
+    <string name="shared_string_my_favorites">Mana izlase</string>
+    <string name="shared_string_my_places">Manas vietas</string>
     <string name="my_data_activity">Manas vietas</string>
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     <string name="loading_smth">Ielādē %1$s…</string>
@@ -1877,7 +1877,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>
 	<string name="search_for">Ko meklēt</string>
 	<string name="show_map">Rādīt karti</string>
-	<string name="show_all">Rādīt visu</string>
+	<string name="shared_string_show_all">Rādīt visu</string>
 	<string name="coordinates">Koordinātas</string>
 	<string name="rendering_attr_publicTransportMode_name">Autobusu, mikroautobusu un trolejbusu maršruti</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvaju un vilcienu maršruti</string>
@@ -1901,7 +1901,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_widget_top">Statusa josla</string>
 	<string name="map_widget_right">Labais panelis</string>
 	<string name="map_widget_left">Kreisais panelis</string>
-    <string name="layers_category_show">Rādīt</string>
+    <string name="shared_string_show">Rādīt</string>
 	<string name="configure_map">Konfigurēt karti</string>
     <string name="osmo_device_not_found">Ierīce nav atrasta</string>
     <string name="anonymous_user">Anonīms lietotājs</string>

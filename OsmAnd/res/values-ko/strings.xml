@@ -554,7 +554,6 @@
 	<string name="thanks_yandex_traffic">교통 정보를 위해 Yandex 를 이용합니다.</string>
 	<string name="layer_yandex_traffic">Yandex 트래픽</string>
 	<string name="layer_route">경로</string>
-	<string name="layer_favorites">즐겨찾기</string>
 	<string name="layer_osm_bugs">OSM 버그들(온라인)</string>
 	<string name="layer_transport">대중교통 정류소</string>
 	<string name="layer_poi">POI…</string>
@@ -664,7 +663,6 @@
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
 	<string name="address">주소</string>
-	<string name="download_index_success">성공적으로 다운로드되었습니다</string>
 	<string name="error_io_error">입출력 오류가 발생하였습니다</string>
 	
 	<string name="downloading">다운로드 중…</string>
@@ -734,7 +732,6 @@
     <string name="show_osm_bugs_descr">"OpenStreetBugs를 지도에  표시"</string>
     <string name="show_osm_bugs">OpenStreetBugs 표시</string>
     <string name="favourites_activity">즐겨찾기</string>
-    <string name="add_to_favourite">즐겨찾기에 추가</string>
     <string name="use_english_names_descr">지역이름 또는 영어이름을 선택합니다</string>
     <string name="use_english_names">지도에 영어 이름 사용</string>
     <string name="app_settings">앱 설정</string>
@@ -787,7 +784,6 @@
 <string name="navigate_point_format_D">DDD.DD</string>
 <string name="navigate_point_format_DM">DDD MM.MMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-<string name="search_shown_on_map">지도에 보이기</string>
 <string name="navigate_point_cancel">취소</string>
 <string name="search_address_top_text">주소를 선택하세요</string>
 <string name="search_address_region">지역</string>
@@ -1094,7 +1090,6 @@
     <string name="access_arrival_time">도착 시간</string>
     <string name="item_checked">확인</string>
     <string name="item_unchecked">체크안됨</string>
-    <string name="map_view">지도</string>
     <string name="prefer_motorways">전용도로 선호</string>
 	<string name="prefer_in_routing_title">선호…</string>
 	<string name="prefer_in_routing_descr">전용도로 선호</string>
@@ -1825,9 +1820,6 @@
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
     <string name="selected_track">선택된 트랙</string>
-    <string name="my_tracks">모든 트랙</string>
-    <string name="my_favorites">모든 즐겨찾기</string>
-    <string name="my_data_Button">저장소</string>
     <string name="my_data_activity">저장소</string>
     <string name="gpx_info_subtracks">"하위 트랙 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
@@ -1994,7 +1986,6 @@
     <string name="map_widget_top">상태 표시줄</string>
 	<string name="map_widget_right">오른쪽 패널</string>
 	<string name="map_widget_left">왼쪽 패널</string>
-    <string name="layers_category_show">표시</string>
 	<string name="configure_map">맵 구성</string>
     <string name="search_radius_proximity">근접에서</string>
     <string name="tip_recent_changes_1_9_t">"버전 1.9 변경사항 : 
@@ -2027,7 +2018,6 @@
     <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
 	<string name="search_for">검색</string>
 	<string name="show_map">지도 표시</string>
-	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
 	<string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
@@ -2078,7 +2068,6 @@
     <string name="version_settings">빌드</string>
     <string name="points">장소</string>
     <string name="tracks">경로</string>
-    <string name="my_location">내 위치</string>
     <string name="osm_editing_manage">관리</string>
     <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
@@ -2102,9 +2091,6 @@
 	<string name="online_map">온라인 지도</string>
 	<string name="share_note">노트 공유</string>
 	<string name="rename_recording">레코딩 재명명</string>
-	<string name="audio">소리</string>
-	<string name="video">영상</string>
-	<string name="photo">사진</string>
 	<string name="plugin_nautical_descr">지도 스타일을 항해 지도로 변경하려면 보기(View)를 활성화 합니다, 그러면 모든 해상 운행 마크와 차트 심볼을 볼 수 있습니다.
 		\n\n세계적으로 모든 항해 기호를 포함 하는 지도 파일은  \'세계 seamarks\' 라는 하나의 파일을 다운로드하여 이용할 수 있습니다.
 		\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.
@@ -2125,7 +2111,6 @@
 	<string name="turn_off_all">모두 끄기</string>
 	<string name="showed_on_map">지도에 표시</string>
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
-	<string name="currently_recording_track">현재 기록중인 트랙</string>
 	<string name="back_to_map">지도로 돌아가기</string>
 	<string name="track_segments">트랙 세그먼트</string>
 	<string name="track_points">트랙 포인트</string>
@@ -2192,11 +2177,11 @@
 	<string name="shared_string_favorite">즐겨찾기</string>
 	<string name="shared_string_favorites">즐겨찾기</string>
 	<string name="shared_string_add_to_favorites">즐겨찾기에 추가</string>
-	<string name="shared_string_my_location">내 위치</string>
+	<string name="shared_string_shared_string_my_location">내 위치</string>
 	<string name="shared_string_my_places">저장소</string>
-	<string name="shared_string_my_favorites">모든 즐겨찾기</string>
-	<string name="shared_string_my_tracks">경로</string>
-	<string name="shared_string_currently_recording_track">현재 기록중인 트랙</string>
+	<string name="shared_string_shared_string_my_favorites">모든 즐겨찾기</string>
+	<string name="shared_string_shared_string_my_tracks">경로</string>
+	<string name="shared_string_shared_string_currently_recording_track">현재 기록중인 트랙</string>
 	<string name="shared_string_audio">소리</string>
 	<string name="shared_string_video">영상</string>
 	<string name="shared_string_photo">사진</string>

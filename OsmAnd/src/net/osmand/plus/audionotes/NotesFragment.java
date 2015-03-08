@@ -151,7 +151,7 @@ public class NotesFragment extends ListFragment {
 			showOnMap = showOnMap.mutate();
 			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
 		}
-		item = optionsMenu.getMenu().add(R.string.search_shown_on_map)
+		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map)
 				.setIcon(showOnMap);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

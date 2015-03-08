@@ -560,7 +560,6 @@
   <string name="thanks_yandex_traffic">Спасибо Яндексу за предоставление информации о пробках. Установите Яндекс как домашнюю страницу.</string>
   <string name="layer_yandex_traffic">Яндекс.Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_favorites">Избранные</string>
   <string name="layer_osm_bugs">OSM Bugs (онлайн)</string>
   <string name="layer_transport">Остановки транспорта</string>
   <string name="layer_poi">POI…</string>
@@ -671,7 +670,7 @@
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
-  <string name="download_index_success">Локальная карта успешно загружена</string>
+  <string name="shared_string_download_successful">Локальная карта успешно загружена</string>
   <string name="error_io_error">Произошла ошибка ввода/вывода</string>
   
   <string name="downloading">Загрузка…</string>
@@ -747,7 +746,7 @@
   <string name="show_osm_bugs_descr">Показывать слой OSM Bugs на карте</string>
   <string name="show_osm_bugs">Показывать OSM Bugs</string>
   <string name="favourites_activity">Список избранных точек</string>
-  <string name="add_to_favourite">Добавить в Избранное</string>
+  <string name="shared_string_add_to_favorites">Добавить в Избранное</string>
   <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
   <string name="use_english_names">Использовать английские названия</string>
   <string name="app_settings">Настройки приложения</string>
@@ -798,7 +797,6 @@
   <string name="navigate_point_format_D">ГГГ.ГГГГ</string>
   <string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
-  <string name="search_shown_on_map">Показать на карте</string>
   <string name="navigate_point_cancel">Отмена</string>
   <string name="search_address_top_text">Выберите адрес</string>
   <string name="search_address_region">Регион</string>
@@ -1195,7 +1193,6 @@
 	</string>
     <string name="item_checked">отмечено</string>
     <string name="item_unchecked">не отмечено</string>
-    <string name="map_view">Карта</string>
     <string name="access_arrival_time">Время прибытия</string>
 	<string name="map_widget_gps_info">Информация GPS</string>
     <string name="max_speed_none">нет</string>
@@ -1585,9 +1582,9 @@
     <string name="osmo_edit_device">Изменить пользовательские настройки</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
     <string name="selected_track">Выбранные треки</string>
-    <string name="my_tracks">Все треки</string>
-    <string name="my_favorites">Избранные</string>
-    <string name="my_data_Button">Мои места</string>
+    <string name="shared_string_my_tracks">Все треки</string>
+    <string name="shared_string_my_favorites">Избранные</string>
+    <string name="shared_string_my_places">Мои места</string>
     <string name="my_data_activity">Мои места</string>
     <string name="osmo_user_joined">Пользователь %1$s присоединился к группе %2$s</string>
     <string name="osmo_user_left">Пользователь %1$s покинул группу %2$s</string>
@@ -1762,7 +1759,6 @@
     <string name="rendering_category_details">Подробности</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другие атрибуты карты</string>
-    <string name="layers_category_show">Отображать</string>
     <string name="configure_map">Настройка карты</string>
     <string name="map_widget_appearance_rem">Остальное</string>
 	<string name="map_widget_right">Правая панель</string>
@@ -1791,7 +1787,6 @@
     <string name="use_opengl_render">Использовать OpenGL для рендеринга</string>
     <string name="use_opengl_render_descr">Использовать аппаратное ускорение OpenGL для рендеринга (может не работать на некоторых устройствах)</string>
     <string name="show_map">ПОКАЗАТЬ КАРТУ</string>
-	<string name="show_all">ПОКАЗАТЬ ВСЕ</string>
 	<string name="no_internet_connection">Загрузка невозможна. Проверьте подключение к Интернет.</string>
     <string name="download_tab_downloads">Загрузки</string>
     <string name="download_tab_updates">Обновления</string>
@@ -1838,7 +1833,7 @@
     <string name="version_settings_descr">Скачать ночные сборки</string>
     <string name="version_settings">Сборки</string>
     <string name="tracks">Треки</string>
-    <string name="my_location">Мое местоположение</string>
+    <string name="shared_string_my_location">Мое местоположение</string>
     <string name="gps_status">Статус GPS</string>
     <string name="points">Точки</string>
     <string name="parking_place">Место для парковки</string>
@@ -1860,13 +1855,13 @@
 	<string name="roads_only">Только дороги</string>
     <string name="online_map">Онлайн карта</string>
 	<string name="rename_recording">Переименовать запись</string>
-	<string name="audio">Аудио</string>
+	<string name="shared_string_audio">Аудио</string>
 	<string name="video">Видео</string>
 	<string name="photo">Фото</string>
 	<string name="rename_failed">Не удалось переименовать.</string>
 	<string name="back_to_map">Вернуться на карту</string>
 	<string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
-	<string name="currently_recording_track">Текущий пишущийся трек</string>
+	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_enabled">Включено</string>
 	<string name="shared_string_disabled">Отключено</string>

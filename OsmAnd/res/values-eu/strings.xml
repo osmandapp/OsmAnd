@@ -119,7 +119,7 @@
   <string name="access_arrival_time">Iritsiera denbora</string>
   <string name="item_checked">aukeratua</string>
   <string name="item_unchecked">ez aukeratua</string>
-  <string name="map_view">Mapa</string>
+  <string name="shared_string_map">Mapa</string>
   <string name="prefer_motorways">Autobideak nahiago</string>
   <string name="prefer_in_routing_title">Nahiago…</string>
   <string name="prefer_in_routing_descr">Autobideak nahiago</string>
@@ -871,7 +871,7 @@
   <string name="thanks_yandex_traffic">Eskerrak Yandexi trafikoari buruzko informazioagatik.</string>
   <string name="layer_yandex_traffic">Yandex trafikoa</string>
   <string name="layer_route">Ibilbidea</string>
-  <string name="layer_favorites">Gogokoenak</string>
+  <string name="shared_string_favorites">Gogokoenak</string>
   <string name="layer_osm_bugs">OSM akatsak (sarean)</string>
   <string name="layer_transport">Garraioaren geldialdiak</string>
   <string name="layer_poi">POI…</string>
@@ -978,7 +978,7 @@
   <string name="download_question">Deskargatu {0} - {1} ?</string>
   <string name="download_question_exist">{0}rentzat lineaz kanpoko datuak daude iada ({1}). Eguneratu nahi al dituzu ({2}) ?</string>
   <string name="address">Helbidea</string>
-  <string name="download_index_success">Deskarga arrakastatsua</string>
+  <string name="shared_string_download_successful">Deskarga arrakastatsua</string>
   <string name="error_io_error">I/O errorea gertatu da</string>
   <string name="shared_string_downloading">Deskargatzen…</string>
   <string name="downloading">Deskargatzen…</string>
@@ -1046,7 +1046,7 @@
   <string name="show_osm_bugs_descr">Erakutsi OpenStreetBugs mapan</string>
   <string name="show_osm_bugs">Erakutsi OpenStreetBugs</string>
   <string name="favourites_activity">Gogokoenak</string>
-  <string name="add_to_favourite">Gogokoenetara gehitu</string>
+  <string name="shared_string_add_to_favorites">Gogokoenetara gehitu</string>
   <string name="use_english_names_descr">Aukeratu izen ingeles eta autoktonoen hartean</string>
   <string name="use_english_names">Erabili izen Ingelesak mapetan</string>
   <string name="app_settings">Aplikazioaren ezarpenak</string>
@@ -1094,7 +1094,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="search_shown_on_map">Mapan erakutsi</string>
+  <string name="shared_string_show_on_map">Mapan erakutsi</string>
   <string name="navigate_point_cancel">Ezeztatu</string>
   <string name="search_address_top_text">Helbidea aukeratu</string>
   <string name="search_address_region">Eskualdea</string>
@@ -1325,8 +1325,8 @@
 \nPuntu</string>
     <string name="gpx_selection_track">%1$s
 \nBidea %2$s</string>
-    <string name="my_favorites">Nire Gogokoenak</string>
-    <string name="my_data_Button">Nire Lekuak</string>
+    <string name="shared_string_my_favorites">Nire Gogokoenak</string>
+    <string name="shared_string_my_places">Nire Lekuak</string>
     <string name="my_data_activity">Nire Lekuak</string>
     <string name="osmo_follow">Jarraitu</string>
     <string name="osmo_user_name">Erabiltzailea</string>

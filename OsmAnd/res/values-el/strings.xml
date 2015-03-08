@@ -753,7 +753,7 @@
 	<string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
 	<string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
 	<string name="layer_route">Διαδρομή</string>
-	<string name="layer_favorites">Αγαπημένα</string>
+	<string name="shared_string_favorites">Αγαπημένα</string>
 	<string name="layer_osm_bugs">Σφάλματα OSM</string>
 	<string name="layer_transport">Στάσεις ΜΜΜ</string>
 	<string name="layer_poi">Σημ Ενδ…</string>
@@ -862,7 +862,7 @@
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
-	<string name="download_index_success">Επιτυχής λήψη</string>
+	<string name="shared_string_download_successful">Επιτυχής λήψη</string>
 	<string name="error_io_error">Προέκυψε σφάλμα Εισ/Εξ</string>
 	
 	<string name="downloading">Λήψη…</string>
@@ -930,7 +930,7 @@
 	<string name="show_osm_bugs_descr">Εμφάνιση OpenStreetBugs στο χάρτη</string>
 	<string name="show_osm_bugs">Εμφάνιση OpenStreetBugs</string>
 	<string name="favourites_activity">Αγαπημένα</string>
-	<string name="add_to_favourite">Προσθήκη στα Αγαπημένα</string>
+	<string name="shared_string_add_to_favorites">Προσθήκη στα Αγαπημένα</string>
 	<string name="use_english_names_descr">Επέλεξε μεταξύ ντόπιων και Αγγλικών ονομάτων</string>
 	<string name="use_english_names">Χρήση Αγγλικών ονομάτων στους χάρτες</string>
 	<string name="app_settings">Ρυθμίσεις εφαρμογής</string>
@@ -980,7 +980,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Εμφάνιση στο χάρτη</string>
+	<string name="shared_string_show_on_map">Εμφάνιση στο χάρτη</string>
 	<string name="navigate_point_cancel">Ακύρωση</string>
 	<string name="search_address_top_text">Επιλογή διεύθυνσης</string>
 	<string name="search_address_region">Περιοχή</string>
@@ -1195,7 +1195,7 @@
 	<string name="prefer_in_routing_title">Προτίμηση…</string>
 	<string name="prefer_in_routing_descr">Προτίμηση αυτοκινητοδρόμων</string>
     <string name="max_speed_none">καμία</string>
-    <string name="map_view">Χάρτης</string>
+    <string name="shared_string_map">Χάρτης</string>
     <string name="access_arrival_time">Ώρα άφιξης</string>
     <string name="item_checked">επιλεγμένο</string>
     <string name="item_unchecked">μη επιλεγμένο</string>
@@ -1369,9 +1369,9 @@
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
 	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
 	<string name="selected_track">Επιλεγμένα ίχνη</string>
-    <string name="my_tracks">Όλα τα ίχνη</string>
-    <string name="my_favorites">Τα Αγαπημένα μου</string>
-    <string name="my_data_Button">Τα Μέρη μου</string>
+    <string name="shared_string_my_tracks">Όλα τα ίχνη</string>
+    <string name="shared_string_my_favorites">Τα Αγαπημένα μου</string>
+    <string name="shared_string_my_places">Τα Μέρη μου</string>
     <string name="my_data_activity">Τα Μέρη μου</string>
     <string name="color_red">κόκκινο</string>
 	<string name="color_pink">ροζ</string>
@@ -1639,7 +1639,7 @@
     <string name="rendering_category_others">Άλλα χαρακτηριστικά χάρτη</string>
     <string name="map_widget_right">Δεξιός πίνακας</string>
 	<string name="map_widget_left">Αριστερός πίνακας</string>
-    <string name="layers_category_show">Εμφάνιση</string>
+    <string name="shared_string_show">Εμφάνιση</string>
 	<string name="configure_map">Διαμόρφωση χάρτη</string>
     <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
 	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
@@ -1670,7 +1670,7 @@
     <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
     <string name="shared_string_dismiss">Απόρριψη</string>
     <string name="show_map">ΕΜΦ ΧΑΡΤΗ</string>
-	<string name="show_all">ΕΜΦ ΌΛΩΝ</string>
+	<string name="shared_string_show_all">ΕΜΦ ΌΛΩΝ</string>
 	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>
     <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
 	<string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>
@@ -1700,7 +1700,7 @@
     <string name="gps_status">Κατάσταση GPS</string>
     <string name="points">Σημεία</string>
     <string name="tracks">Ίχνη</string>
-    <string name="my_location">Η τοποθεσία μου</string>
+    <string name="shared_string_my_location">Η τοποθεσία μου</string>
     <string name="recents">ΠΡΟΣΦΑΤΑ</string>
 	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
 	<string name="edit_group">Επεξεργασία ομάδας</string>

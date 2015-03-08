@@ -441,7 +441,6 @@
   <string name="thanks_yandex_traffic">Grazie a Yandex per le informazioni sul traffico.</string>
   <string name="layer_yandex_traffic">Yandex (traffico)</string>
   <string name="layer_route">Percorso</string>
-  <string name="layer_favorites">Preferiti</string>
   <string name="layer_osm_bugs">Errori OSM</string>
   <string name="layer_transport">Fermate trasporto pubblico</string>
   <string name="layer_poi">PDI…</string>
@@ -550,7 +549,6 @@
   <string name="download_question">Scaricare {0} - {1} ?</string>
   <string name="download_question_exist">I dati offline per {0} sono già presenti ({1}). Aggiornarli ({2}) ?</string>
   <string name="address">Indirizzo</string>
-  <string name="download_index_success">Download completato</string>
   <string name="error_io_error">Errore di I/O</string>
   
   <string name="downloading">In ricezione…</string>
@@ -620,7 +618,6 @@
   <string name="show_osm_bugs_descr">Visualizza OpenStreetBugs sulla mappa</string>
   <string name="show_osm_bugs">Visualizza OpenStreetBugs</string>
   <string name="favourites_activity">Preferiti</string>
-  <string name="add_to_favourite">Aggiungi ai Preferiti</string>
   <string name="use_english_names_descr">Seleziona l\'uso dei nomi locali o inglesi</string>
   <string name="use_english_names">Utilizza nomi inglesi nelle mappe</string>
   <string name="app_settings">Impostazioni applicazione</string>
@@ -672,7 +669,6 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="search_shown_on_map">Visualizza sulla mappa</string>
   <string name="navigate_point_cancel">Annulla</string>
   <string name="search_address_top_text">Seleziona l\'indirizzo</string>
   <string name="search_address_region">Paese</string>
@@ -1233,7 +1229,6 @@
 	<string name="av_def_action_choose">Seleziona su richiesta</string>
     <string name="item_checked">segnato</string>
     <string name="item_unchecked">non segnato</string>
-    <string name="map_view">Mappa</string>
     <string name="access_arrival_time">Orario arrivo</string>
     <string name="map_widget_gps_info">Informazioni GPS</string>
     <string name="layer_hillshade">Strato ombreggiatura rilievi</string>
@@ -1773,9 +1768,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_user_left">L\'utente %1$s ha lasciato il gruppo %2$s</string>
     <string name="osmo_show_group_notifications">Mostra le notifiche del gruppo</string>
     <string name="selected_track">Tracciati selezionati</string>
-    <string name="my_tracks">Tutte le tracce</string>
-    <string name="my_favorites">I miei preferiti</string>
-    <string name="my_data_Button">I miei luoghi</string>
     <string name="my_data_activity">I miei luoghi</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
@@ -1944,7 +1936,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="configure_map">Configura la mappa</string>
     <string name="map_widget_appearance_rem">Elementi rimanenti</string>
     <string name="map_widget_top">Barra di stato</string>
-	<string name="layers_category_show">Mostra</string>
 	<string name="search_radius_proximity">Nei pressi di</string>
     <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornati gli stili delle mappe con il disegno del tipo di superficie, dei livelli del trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facili * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporto ad Android Wear * Molte modifiche della IU * Zoom per la dimensione del testo sulla mappa * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno</string>
@@ -1962,7 +1953,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="advanced_settings">Avanzato</string>
 	<string name="osmo_use_https">Usa HTTPS</string>
 	<string name="osmo_use_https_descr">Usa la connessione sicura al server</string>
-    <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
     <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>
@@ -2017,7 +2007,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="version_settings">Versioni</string>
     <string name="points">Punti</string>
     <string name="tracks">Tracce</string>
-    <string name="my_location">La mia posizione</string>
     <string name="osm_editing_manage">Gestisci</string>
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio</string>
@@ -2041,9 +2030,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="online_map">Mappa online</string>
 	<string name="share_note">Condividi l\'appunto</string>
 	<string name="rename_recording">Rinomina la registrazione</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Foto</string>
 	<string name="plugin_nautical_descr">Attivando questa visualizzazione lo stile della mappa diventerà Nautico, quindi mostrerà tutta la simbologia per la navigazione.
 		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
@@ -2065,7 +2051,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="turn_off_all">Spegni tutti</string>
 	<string name="showed_on_map">Visualizzato sulla mappa</string>
 	<string name="days_behind">giorni fa</string>
-	<string name="currently_recording_track">Traccia attualmente in registrazione</string>
 	<string name="track_segments">Spezzoni di traccia</string>
 	<string name="track_points">Punti della traccia</string>
 	<string name="route_points">Punti del percorso</string>
@@ -2131,11 +2116,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_favorite">Preferito</string>
 	<string name="shared_string_favorites">Preferiti</string>
 	<string name="shared_string_add_to_favorites">Aggiungi ai preferiti</string>
-	<string name="shared_string_my_location">La mia posizione</string>
+	<string name="shared_string_shared_string_my_location">La mia posizione</string>
 	<string name="shared_string_my_places">I miei luoghi</string>
-	<string name="shared_string_my_favorites">I miei preferiti</string>
-	<string name="shared_string_my_tracks">Le mie tracce</string>
-	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
+	<string name="shared_string_shared_string_my_favorites">I miei preferiti</string>
+	<string name="shared_string_shared_string_my_tracks">Le mie tracce</string>
+	<string name="shared_string_shared_string_currently_recording_track">Traccia in corso di registrazione</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

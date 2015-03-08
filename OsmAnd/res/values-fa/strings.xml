@@ -34,7 +34,7 @@
     <string name="local_openstreetmap_act_title">تغییرات OsmAnd</string>
     <string name="map_widget_gps_info">اطلاعات جی پی اس</string>
     <string name="access_arrival_time">زمان رسیدن به مقصد</string>
-    <string name="map_view">نقشه</string>
+    <string name="shared_string_map">نقشه</string>
     <string name="dist_control_start">شروع</string>
     
     <string name="stop_routing_confirm">مطمئنید که میخواهید مسیریابی را متوقف کنید؟</string>
@@ -244,7 +244,7 @@
 	<string name="osb_close_dialog_close_button">بستن اشکال</string>
 	<string name="osb_close_dialog_success">اشکال بسته شد</string>
 	<string name="poi_edit_title">ویرایش POI</string>
-	<string name="search_shown_on_map">روی نقشه نشان بده</string>
+	<string name="shared_string_show_on_map">روی نقشه نشان بده</string>
 	<string name="navigate_point_cancel">لغو</string>
 	<string name="search_address_top_text">انتخاب آدرس</string>
 	<string name="search_address_region">ناحیه</string>
@@ -274,7 +274,7 @@
 	<string name="osb_add_dialog_success">اشکال با موفقیت ایجاد شد</string>
 	<string name="osb_add_dialog_error">خطایی روی داد: اشکال ایجاد نشد</string>
 	<string name="search_address">جستجوی آدرس</string>
-	<string name="add_to_favourite">افزودن به علاقمندیها</string>
+	<string name="shared_string_add_to_favorites">افزودن به علاقمندیها</string>
 	<string name="use_english_names_descr">انتخاب بین نامهای بومی یا انگلیسی</string>
 	<string name="use_english_names">استفاده از نامهای انگلیسی در نقشه</string>
 	<string name="app_settings">تنظیمات برنامه</string>
@@ -331,7 +331,7 @@
 	<string name="reload_indexes_descr">بازخوانی نقشه های برداری و اطلاعات از کارت حافظه</string>
 	<string name="reload_indexes">بازخوانی اطلاعات آفلاین</string>
 	<string name="address">آدرس</string>
-	<string name="download_index_success">دانلود موفقیت آمیز بود</string>
+	<string name="shared_string_download_successful">دانلود موفقیت آمیز بود</string>
 	<string name="error_io_error">خطای I/O رخ داد</string>
 	<string name="shared_string_downloading">درحال دانلود…</string>
 	<string name="downloading">درحال دانلود…</string>
@@ -1019,7 +1019,7 @@
 	<string name="thanks_yandex_traffic">با تشکر از Yandex برای فراهم آوردن اطلاعات ترافیک.</string>
 	<string name="layer_yandex_traffic">ترافیک Yandex</string>
 	<string name="layer_route">مسیر</string>
-	<string name="layer_favorites">نقاط مورد علاقه</string>
+	<string name="shared_string_favorites">نقاط مورد علاقه</string>
 	<string name="layer_osm_bugs">اشکالات OSM (آنلاین)</string>
 	<string name="shared_strings_deselect_all">انتخاب هیچیک</string>
 	<string name="shared_string_refresh">بازسازی</string>
@@ -1827,9 +1827,9 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="import_save">ذخیره</string>
 	<string name="gpx_file_is_empty">GPX مسیر خالی است</string>
     <string name="selected_track">مسیرهای انتخاب شده</string>
-    <string name="my_tracks">همه مسیرها</string>
-    <string name="my_favorites">علاقه مندی های من</string>
-    <string name="my_data_Button">مکان های من</string>
+    <string name="shared_string_my_tracks">همه مسیرها</string>
+    <string name="shared_string_my_favorites">علاقه مندی های من</string>
+    <string name="shared_string_my_places">مکان های من</string>
     <string name="my_data_activity">مکان های من</string>
     <string name="osmo_user_joined">کاربر %1$s تاریخ عضویت %2$s</string>
     <string name="osmo_user_left">کاربر %1$s گروه چپ %2$s</string>
@@ -1975,10 +1975,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="showed_on_map">نمایش داده شده روی نقشه</string>
 	<string name="rename_failed">تغییر نام انجام نشد.</string>
 	<string name="days_behind">روزهای قبل</string>
-	<string name="currently_recording_track">مسیر درحال ضبط</string>
+	<string name="shared_string_currently_recording_track">مسیر درحال ضبط</string>
 	<string name="back_to_map">برگشت به نقشه</string>
 	<string name="plugin_touringview_name">نمای نقشه درحال تور</string>
-	<string name="audio">صدا</string>
+	<string name="shared_string_audio">صدا</string>
 	<string name="video">ویدئو</string>
 	<string name="photo">تصویر</string>
 	<string name="share_note">به اشتراک گزاری یادداشت</string>
@@ -2004,7 +2004,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="proxy_pref_descr">تنظیم ارتباط پروکسی اینترنت</string>
     <string name="points">نقاط</string>
     <string name="tracks">مسیرها</string>
-    <string name="my_location">موقعیت من</string>
+    <string name="shared_string_my_location">موقعیت من</string>
     <string name="osm_editing_manage">مدیریت</string>
     <string name="recents">اخیر</string>
 	<string name="rendering_value__name">پبش‌فرض</string>
@@ -2026,7 +2026,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="map_update">به روز زسانی برای %1$s نقشه وجود دارد</string>
 	<string name="search_for">جستجوی</string>
 	<string name="show_map">نمایش نقشه</string>
-	<string name="show_all">نمایش همه</string>
+	<string name="shared_string_show_all">نمایش همه</string>
 	<string name="coordinates">مختصات</string>
 	<string name="rendering_attr_tramTrainRoutes_name">مسیر تراموا و قطار</string>
 	<string name="wake_on_voice">روشن کردن صفحه</string>
@@ -2049,7 +2049,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="map_widget_top">نوار وضعیت</string>
 	<string name="map_widget_right">پانل راست</string>
 	<string name="map_widget_left">پانل چپ</string>
-    <string name="layers_category_show">نمایش</string>
+    <string name="shared_string_show">نمایش</string>
 	<string name="configure_map">پیکربندی نقشه</string>
     <string name="search_radius_proximity">در نزدیکی</string>
     <string name="osmo_device_not_found">دستگاه پیدا نشد</string>

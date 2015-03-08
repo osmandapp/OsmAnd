@@ -320,7 +320,7 @@
 	<string name="sd_dir_not_accessible">Tallennuspolku muistikortilta ei ole käytettävissä</string>
 	<string name="download_question">Lataa {0} - {1} ?</string>
 	<string name="address">Osoite</string>
-	<string name="download_index_success">Lataus onnistui</string>
+	<string name="shared_string_download_successful">Lataus onnistui</string>
 	<string name="error_io_error">Tapahtui I/O virhe</string>
 	
 	<string name="downloading">Ladataan…</string>
@@ -366,7 +366,7 @@
 	<string name="update_tile">Päivitä kartta</string>
 	<string name="mark_point">Kohde</string>
 	<string name="favourites_activity">Suosikit</string>
-	<string name="add_to_favourite">Lisää suosikkeihin</string>
+	<string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>
 	<string name="use_english_names">Käytä englanninkielisiä nimiä kartoissa</string>
 	<string name="app_settings">Sovelluksen asetukset</string>
 	<string name="choose_building">Valitse rakennus</string>
@@ -397,7 +397,7 @@
 	<string name="position_on_map_center">Keskitä</string>
 	<string name="navigate_point_latitude">Leveysaste</string>
 	<string name="navigate_point_longitude">Pituusaste</string>
-	<string name="search_shown_on_map">Näytä kartalla</string>
+	<string name="shared_string_show_on_map">Näytä kartalla</string>
 	<string name="navigate_point_cancel">Peruuta</string>
 	<string name="search_address_top_text">Valitse osoite</string>
 	<string name="search_address_region">Alue</string>
@@ -652,7 +652,7 @@
 	<string name="access_arrival_time">Saapumisaika</string>
     <string name="item_checked">valittu</string>
     <string name="item_unchecked">ei valittu</string>
-    <string name="map_view">Kartta</string>
+    <string name="shared_string_map">Kartta</string>
     <string name="prefer_motorways">Suosi moottoriteitä</string>
 	<string name="prefer_in_routing_title">Suosi…</string>
 	<string name="prefer_in_routing_descr">Suosi moottoriteitä</string>

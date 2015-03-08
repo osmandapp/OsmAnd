@@ -35,7 +35,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center">
 						<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 						android:layout_gravity="center_horizontal|top" android:textSize="27sp" 
-						android:text="@string/map_Button" android:typeface="serif" android:textColor="#000000"/>
+						android:text="@string/shared_string_map" android:typeface="serif" android:textColor="#000000"/>
 					</LinearLayout>	
 	 			</LinearLayout>
 				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
@@ -62,7 +62,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 						<TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
 						 android:id="@+id/FavoritesButtonText" 
 						android:layout_gravity="center_horizontal|top" android:textSize="27sp" 
-				 		android:text="@string/my_data_Button" android:typeface="serif" android:textColor="#000000"/>
+				 		android:text="@string/shared_string_my_places" android:typeface="serif" android:textColor="#000000"/>
 					</LinearLayout>
 	 			</LinearLayout>
 				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>

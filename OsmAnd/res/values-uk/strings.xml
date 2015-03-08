@@ -579,7 +579,7 @@
   <string name="thanks_yandex_traffic">Дорожня інформація надається завдяки Яндексу.</string>
   <string name="layer_yandex_traffic">Яндекс Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_favorites">Закладки</string>
+  <string name="shared_string_favorites">Закладки</string>
   <string name="layer_osm_bugs">OSM помилки</string>
   <string name="layer_transport">Зупинки транспорту</string>
   <string name="layer_poi">POI…</string>
@@ -688,7 +688,7 @@
   <string name="download_question">Завантажити {0} - {1} ?</string>
   <string name="download_question_exist">Оффлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
   <string name="address">Адрес</string>
-  <string name="download_index_success">Успішно завантажена</string>
+  <string name="shared_string_download_successful">Успішно завантажена</string>
   <string name="error_io_error">Помилка вводу/виводу</string>
   
   <string name="downloading">Завантаження…</string>
@@ -759,7 +759,7 @@
   <string name="show_osm_bugs_descr">Відображати OpenStreetBugs</string>
   <string name="show_osm_bugs">Відображати OpenStreetBugs</string>
   <string name="favourites_activity">Закладки</string>
-  <string name="add_to_favourite">Додати в закладки</string>
+  <string name="shared_string_add_to_favorites">Додати в закладки</string>
   <string name="use_english_names_descr">Показувати назви об’єктів латиницею</string>
   <string name="use_english_names">Назви латиницею</string>
   <string name="app_settings">Налаштування</string>
@@ -812,7 +812,7 @@
   <string name="navigate_point_format_D">ГГГ.ГГГГ</string>
   <string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
-  <string name="search_shown_on_map">Показати</string>
+  <string name="shared_string_show_on_map">Показати</string>
   <string name="navigate_point_cancel">Скасувати</string>
   <string name="search_address_top_text">Виберіть адрес</string>
   <string name="search_address_region">Регіон</string>
@@ -963,7 +963,7 @@
   <string name="bg_service_sleep_mode_on">Вимкнути\nфоновий режим</string>
 <string name="access_arrival_time">Час прибуття</string>
     <string name="item_unchecked">не відмічено</string>
-    <string name="map_view">Мапа</string>
+    <string name="shared_string_map">Мапа</string>
     <string name="prefer_motorways">Надавати перевагу автомагістралям</string>
 	<string name="item_checked">відмічено</string>
     <string name="prefer_in_routing_title">Надавати перевагу …</string>
@@ -1569,9 +1569,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_control">OsMo швидкий доступ</string>
     <string name="gpx_file_is_empty">Трек Gpx порожній</string>
     <string name="selected_track">Трек</string>
-    <string name="my_tracks">Всі треки</string>
-    <string name="my_favorites">Мої Закладки</string>
-    <string name="my_data_Button">Мої Дані</string>
+    <string name="shared_string_my_tracks">Всі треки</string>
+    <string name="shared_string_my_favorites">Мої Закладки</string>
+    <string name="shared_string_my_places">Мої Дані</string>
     <string name="my_data_activity">Мої Дані</string>
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
     <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
@@ -1925,7 +1925,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="advanced_settings">Додатково</string>
 	<string name="map_update">Наявні оновлення для %1$s мап</string>
 	<string name="search_for">Шукати</string>
-	<string name="show_all">Показати все</string>
+	<string name="shared_string_show_all">Показати все</string>
 	<string name="coordinates">Координати</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Маршрути трамваїв та поїздів</string>
 	<string name="lock_screen_request_explanation">%1$s потрібен цей дозвіл, щоб вимкнути екран для економії енергії.</string>
@@ -1949,7 +1949,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="map_widget_top">Рядок стану</string>
 	<string name="map_widget_right">Панель праворуч</string>
 	<string name="map_widget_left">Панель ліворуч</string>
-    <string name="layers_category_show">Показати</string>
+    <string name="shared_string_show">Показати</string>
 	<string name="configure_map">Налаштування Мапи</string>
     <string name="search_radius_proximity">Поруч з</string>
     <string name="osmo_device_not_found">Пристрій не знайдено</string>
@@ -1983,7 +1983,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="routing_attr_no_new_routing_name">Не використовувати маршрутизацію версії 1.9</string>
     <string name="navigate_point_northing">Північної широти</string>
     <string name="shared_string_dismiss">Не надсилати</string>
-    <string name="audio">Аудіо</string>
+    <string name="shared_string_audio">Аудіо</string>
 	<string name="video">Відео</string>
 	<string name="photo">Фото</string>
 	<string name="share_note">Поділитись нотаткою</string>
@@ -2009,7 +2009,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="settings_privacy">Приватність</string>
     <string name="points">Точки</string>
     <string name="tracks">Треки</string>
-    <string name="my_location">Моє місцезнаходження</string>
+    <string name="shared_string_my_location">Моє місцезнаходження</string>
     <string name="osm_editing_manage">Керування</string>
     <string name="recents">ОСТАННІ</string>
 	<string name="navigation_over_track">Почати навігацію по треку?</string>

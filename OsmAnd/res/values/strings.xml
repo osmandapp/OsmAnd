@@ -75,11 +75,11 @@
 	<string name="shared_string_favorites">Favorites</string>
 	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
-	<string name="shared_string_my_location">My Location</string>
+	<string name="shared_string_shared_string_my_location">My Location</string>
 	<string name="shared_string_my_places">My Places</string>
-	<string name="shared_string_my_favorites">My Favorites</string>
-	<string name="shared_string_my_tracks">My Tracks</string>
-	<string name="shared_string_currently_recording_track">Currently recording track</string>
+	<string name="shared_string_shared_string_my_favorites">My Favorites</string>
+	<string name="shared_string_shared_string_my_tracks">My Tracks</string>
+	<string name="shared_string_shared_string_currently_recording_track">Currently recording track</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Photo</string>
@@ -143,11 +143,7 @@
 	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
-	<string name="currently_recording_track">Currently recording track</string>
 	<string name="back_to_map">Back to map</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Photo</string>
 	<string name="share_note">Share note</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Watch</string>
@@ -172,7 +168,6 @@
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
     <string name="tracks">Tracks</string>
-    <string name="my_location">My location</string>
     <string name="osm_editing_manage">Manage</string>
 	<string name="navigation_over_track">Start navigation over track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
@@ -211,7 +206,6 @@
     <string name="osmo_use_https">Use HTTPS</string>
 	<string name="map_update">Updates available for %1$s maps</string>
 	<string name="search_for">Search for</string>
-	<string name="show_all">SHOW ALL</string>
 	<string name="coordinates">Coordinates</string>
 	<string name="rendering_attr_publicTransportMode_name">Bus, trolleybus, shuttle routes</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
@@ -250,7 +244,6 @@
     <string name="map_widget_top">Status bar</string>
 	<string name="map_widget_right">Right panel</string>
 	<string name="map_widget_left">Left panel</string>
-    <string name="layers_category_show">Show</string>
 	<string name="configure_map">Configure map</string>
     <string name="search_radius_proximity">In proximity of</string>
     <string name="osmo_device_not_found">Device not found</string>
@@ -397,7 +390,6 @@
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
-    <string name="visible_element">Show on map</string>
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation</string>
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
@@ -428,12 +420,7 @@
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    <string name="gpx_available_current_track">Current recording track</string>
     <string name="gpx_file_is_empty">Gpx track is empty</string>
-    <string name="my_tracks">All tracks</string>
-    <string name="my_favorites">My Favorites</string>
-    <string name="my_data_Button">My Places</string>
-    <string name="my_data_activity">My Places</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>
@@ -822,7 +809,6 @@
     <string name="access_arrival_time">Arrival time</string>
     <string name="item_checked">checked</string>
     <string name="item_unchecked">unchecked</string>
-    <string name="map_view">Map</string>
     <string name="prefer_motorways">Prefer motorways</string>
 	<string name="prefer_in_routing_title">Prefer…</string>
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
@@ -1444,7 +1430,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_openstreetmap_uploading">Uploading …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all</string>
-	<string name="local_openstreetmap_show">Show on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete modification</string>
 	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
@@ -1574,7 +1559,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
 	<string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
 	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
-	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Searching position…</string>
 	<string name="search_position_current_location_found">Position (found)</string>
@@ -1816,7 +1800,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_searching_transport">Transport results (no destination):</string>
 	<string name="transport_searching_route">Transport results ({0} to destination):</string>
 	<string name="transport_search_again">Reset transport search</string>
-	<string name="map_index">Map</string>
 	<string name="voice">Recorded voice</string>
 	<string name="voices">Voice prompts</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
@@ -1850,7 +1833,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
-	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
 	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI…</string>
@@ -1951,10 +1933,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
-	<string name="download_index_success">Download successful</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
-	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">No favorite points exist</string>
 	<string name="update_existing">Replace</string>
@@ -1993,15 +1973,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
 	<string name="data_settings_descr">Specify language, download/reload data</string>
 	<string name="data_settings">Data</string>
-	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
 	<string name="additional_settings">Additional settings</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
 	<string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
 	<string name="show_osm_bugs">Show OpenStreetBugs</string>
-	<string name="favourites_activity">Favorites</string>
-	<string name="add_to_favourite">Add to Favorites</string>
 	<string name="use_english_names_descr">Select between native and English names</string>
 	<string name="use_english_names">Use English names in maps</string>
 	<string name="app_settings">Application settings</string>
@@ -2020,12 +1997,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_source">Map source</string>
 	<string name="use_internet">Use Internet</string>
 	<string name="show_location">Show location</string>
-	<string name="map_preferences">Map</string>
 	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
 	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
 	<string name="app_description">Navigation application</string>
-	<string name="map_Button">Map</string>
-	<string name="favorites_Button">My Places</string>
 	<string name="search_button">Search</string>
 	<string name="search_activity">Search</string>
 	<string name="searchpoi_activity">Choose POI</string>
@@ -2046,7 +2020,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Show on map</string>
 	<string name="search_address_top_text">Select address</string>
 	<string name="search_address_region">Region</string>
 	<string name="search_address_city">City</string>
@@ -2055,7 +2028,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_address_building_option">Building</string>
 	<string name="search_address_street_option">Intersecting street</string>
 	<string name="search_tabs_location">Location</string>
-	<string name="context_menu_item_add_favorite">Add to favorites</string>
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>

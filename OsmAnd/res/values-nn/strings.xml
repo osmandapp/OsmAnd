@@ -58,9 +58,9 @@
     <string name="gpx_selection_number_of_points">%1$s punkt</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_file_is_empty">GPS-sporet er tomt</string>
-    <string name="my_tracks">Alle spor</string>
-    <string name="my_favorites">Mine favorittar</string>
-    <string name="my_data_Button">Mine stadar</string>
+    <string name="shared_string_my_tracks">Alle spor</string>
+    <string name="shared_string_my_favorites">Mine favorittar</string>
+    <string name="shared_string_my_places">Mine stadar</string>
     <string name="my_data_activity">Mine stadar</string>
     <string name="osmo_follow">Følg</string>
     <string name="osmo_sign_in">Logg inn</string>
@@ -222,7 +222,7 @@
     <string name="shared_string_more_actions">Andre handlingar</string>
 	<string name="layer_hillshade">Fjellskugge-lag</string>
     <string name="map_widget_gps_info">GPS-info</string>
-    <string name="map_view">Kart</string>
+    <string name="shared_string_map">Kart</string>
     <string name="prefer_motorways">Føretrekker motorvegar</string>
 	<string name="prefer_in_routing_title">Føretrekk …</string>
 	<string name="prefer_in_routing_descr">Føretrekk motorvegar</string>

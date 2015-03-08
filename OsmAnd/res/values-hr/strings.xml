@@ -3,7 +3,7 @@
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
-    <string name="map_view">Karta</string>
+    <string name="shared_string_map">Karta</string>
     <string name="prefer_motorways">Preferiram autocestu</string>
 	<string name="prefer_in_routing_title">Preferiram…</string>
 	<string name="prefer_in_routing_descr">Preferiram autocestu</string>
@@ -309,7 +309,7 @@
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>
 	<string name="context_menu_item_create_poi">Stvori POI</string>
 	<string name="context_menu_item_update_map">Ažuriraj karte</string>
-	<string name="search_shown_on_map">Prikaži na karti</string>
+	<string name="shared_string_show_on_map">Prikaži na karti</string>
 	<string name="navigate_point_cancel">Otkaži</string>
 	<string name="search_address_top_text">Odaberite adresu</string>
 	<string name="search_address_region">Regija</string>
@@ -351,7 +351,7 @@
 	<string name="update_tile">Ažuriraj kartu</string>
 	<string name="mark_point">Cilj</string>
 	<string name="favourites_activity">Favoriti</string>
-	<string name="add_to_favourite">Dodaj u Favorite</string>
+	<string name="shared_string_add_to_favorites">Dodaj u Favorite</string>
 	<string name="reload_tile">Ponovno učitaj</string>
 	<string name="show_osm_bugs_descr">Prikaži OpenStreetBugs na karti</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
@@ -403,7 +403,7 @@
 	<string name="list_index_files_was_not_loaded">Popis regija nije preuzet sa osmand.net.</string>
 	<string name="error_io_error">Došlo je do I/O pogreške</string>
 	<string name="address">Adresa</string>
-	<string name="download_index_success">Preuzimanje uspješno završeno</string>
+	<string name="shared_string_download_successful">Preuzimanje uspješno završeno</string>
 	<string name="download_question">Preuzmi {0} - {1} ?</string>
 	<string name="download_question_exist">Offline podaci za {0} već postoje ({1}). Želite li ih ažurirali ({2})?</string>
 	<string name="search_offline_address">Traži offline</string>
@@ -461,7 +461,7 @@
 	
 	<string name="layer_transport_route">Putovi javnoga prijevoza</string>
 	<string name="layer_route">Ruta</string>
-	<string name="layer_favorites">Favoriti</string>
+	<string name="shared_string_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">OSM bugovi</string>
 	<string name="shared_string_import">Uvezi</string>
 	<string name="export_fav">Izvezi</string>
@@ -1313,7 +1313,7 @@
     <string name="map_widget_top">Statusna traka</string>
 	<string name="map_widget_right">Desni panel</string>
 	<string name="map_widget_left">Lijevi panel</string>
-    <string name="layers_category_show">Prikaži</string>
+    <string name="shared_string_show">Prikaži</string>
 	<string name="configure_map">Konfiguracija karte</string>
     <string name="search_radius_proximity">U blizini</string>
     <string name="osmo_device_not_found">Uređaj nije pronađen</string>
@@ -1323,8 +1323,8 @@
     <string name="confirm_every_run">Uvijek pitaj</string>
 	<string name="speed_limit_exceed">Tolerancija ograničenja brzine</string>
 	<string name="gpx_info_diff_altitude">Raspon nadmorske visine: %1$s</string>
-	<string name="my_favorites">Moji favoriti</string>
-    <string name="my_data_Button">Moja mjesta</string>
+	<string name="shared_string_my_favorites">Moji favoriti</string>
+    <string name="shared_string_my_places">Moja mjesta</string>
     <string name="my_data_activity">Moja mjesta</string>
     <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
     <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>

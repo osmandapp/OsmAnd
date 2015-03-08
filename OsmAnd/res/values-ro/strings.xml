@@ -797,7 +797,7 @@
 	<string name="thanks_yandex_traffic">Mulțumim Yandex pentru info trafic.</string>
 	<string name="layer_yandex_traffic">Trafic info Yandex</string>
 	<string name="layer_route">Rută</string>
-	<string name="layer_favorites">Favorite</string>
+	<string name="shared_string_favorites">Favorite</string>
 	<string name="layer_osm_bugs">Bug hartă OSM</string>
 	<string name="layer_transport">Stații transport</string>
 	<string name="layer_poi">POI…</string>
@@ -906,7 +906,7 @@
 	<string name="download_question">Descărcați {0} - {1} ?</string>
 	<string name="download_question_exist">Harta offline pentru {0} există deja ({1}). Doriți să o actualizați ({2}) ?</string>
 	<string name="address">Adresă</string>
-	<string name="download_index_success">Descărcare efectuată cu succes</string>
+	<string name="shared_string_download_successful">Descărcare efectuată cu succes</string>
 	<string name="error_io_error">Eroare la citire/scriere</string>
 	
 	<string name="downloading">Se descarcă…</string>
@@ -974,7 +974,7 @@
 	<string name="show_osm_bugs_descr">Arată erorile OpenStreetBugs pe hartă</string>
 	<string name="show_osm_bugs">Arată OpenStreetBugs</string>
 	<string name="favourites_activity">Favorite</string>
-	<string name="add_to_favourite">Adaugă la Favorite</string>
+	<string name="shared_string_add_to_favorites">Adaugă la Favorite</string>
 	<string name="use_english_names_descr">Alege între folosirea pe hartă a denumirilor în limba nativă sau în engleză</string>
 	<string name="use_english_names">Denumiri pe hartă în engleză</string>
 	<string name="app_settings">Setări aplicație</string>
@@ -1024,7 +1024,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Arată pe hartă</string>
+	<string name="shared_string_show_on_map">Arată pe hartă</string>
 	<string name="navigate_point_cancel">Anulează</string>
 	<string name="search_address_top_text">Selecție adresa</string>
 	<string name="search_address_region">Regiune</string>
@@ -1303,7 +1303,7 @@
     <string name="access_arrival_time">Timp sosire</string>
     <string name="item_checked">bifat</string>
     <string name="item_unchecked">debifat</string>
-    <string name="map_view">Hartă</string>
+    <string name="shared_string_map">Hartă</string>
     <string name="prefer_motorways">Preferă autostrăzi</string>
 	<string name="prefer_in_routing_title">Preferă…</string>
 	<string name="prefer_in_routing_descr">Preferă autostrăzi</string>
@@ -1466,8 +1466,8 @@
     <string name="gpx_selection_route_points">%1$s ↵\nPuncte rută %2$s</string>
     <string name="gpx_selection_points">%1$s ↵\nPuncte</string>
     <string name="gpx_selection_track">%1$s ↵\nTrack %2$s</string>
-    <string name="my_favorites">Favoritele mele</string>
-    <string name="my_data_Button">Locurile mele</string>
+    <string name="shared_string_my_favorites">Favoritele mele</string>
+    <string name="shared_string_my_places">Locurile mele</string>
     <string name="my_data_activity">Locurile mele</string>
     <string name="osmo_center_location">Centrul ecranului</string>
     <string name="osmo_set_moving_target">Setare ca țintă în mișcare</string>
@@ -1493,7 +1493,7 @@
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="points">Puncte</string>
-    <string name="my_location">Locația mea</string>
+    <string name="shared_string_my_location">Locația mea</string>
     <string name="rendering_value__name">Implicit</string>
 	<string name="home_button">Acasă</string>
     <string name="show_map">ARATĂ HARTA</string>
@@ -1532,7 +1532,7 @@
 	<string name="advanced_settings">Avansat</string>
 	<string name="map_update">Actualizări disponibile pentru %1$s hărţi</string>
 	<string name="search_for">Căutare pentru</string>
-	<string name="show_all">ARATĂ TOATE</string>
+	<string name="shared_string_show_all">ARATĂ TOATE</string>
 	<string name="coordinates">Coordonate</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Rute de tramvai și tren</string>
 	<string name="wake_on_voice">Pornește ecranul</string>
@@ -1552,7 +1552,7 @@
     <string name="map_widget_top">Bara de stare</string>
 	<string name="map_widget_right">Panoul dreapta</string>
 	<string name="map_widget_left">Panou stânga</string>
-    <string name="layers_category_show">Arată</string>
+    <string name="shared_string_show">Arată</string>
 	<string name="configure_map">Configuraţi harta</string>
     <string name="search_radius_proximity">În imediata apropiere a</string>
     <string name="osmo_device_not_found">Dispozitivul nu a fost găsit</string>
@@ -1569,7 +1569,7 @@
     <string name="gpx_timemoving">Timpul în mişcare: %1$s</string>
     <string name="gpx_file_is_empty">Traseul Gpx este gol</string>
     <string name="selected_track">Traseele selectate</string>
-    <string name="my_tracks">Toate traseele</string>
+    <string name="shared_string_my_tracks">Toate traseele</string>
     <string name="osmo_user_joined">Utilizatorul %1$s s-a alăturat grupului %2$s</string>
     <string name="osmo_user_left">Utilizatorul %1$s a părăsit grupul %2$s</string>
     <string name="osmo_show_group_notifications">Arată notificări ale grupului</string>

@@ -61,7 +61,7 @@ public class TrackActivity extends TabActivity {
 			String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
 			getSupportActionBar().setTitle(fn);
 		} else {
-			getSupportActionBar().setTitle(getString(R.string.currently_recording_track));
+			getSupportActionBar().setTitle(getString(R.string.shared_string_currently_recording_track));
 		}
 		getSupportActionBar().setElevation(0);
 		setContentView(R.layout.tab_content);

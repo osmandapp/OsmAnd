@@ -580,7 +580,7 @@
   <string name="thanks_yandex_traffic">Dankie aan Yandex vir verkeersinligting.</string>
   <string name="layer_yandex_traffic">Yandex verkeer</string>
   <string name="layer_route">Roete</string>
-  <string name="layer_favorites">Gunstelinge</string>
+  <string name="shared_string_favorites">Gunstelinge</string>
   <string name="layer_osm_bugs">OSM foute</string>
   <string name="layer_transport">Vervoer stilhouplekke</string>
   <string name="layer_poi">Interessante plek…</string>
@@ -689,7 +689,7 @@
   <string name="download_question">Laai {0} - {1} af?</string>
   <string name="download_question_exist">Aflyn inligting vir {0} bestaan alreeds ({1}). Wiljy dit opgradeer ({2}) ?</string>
   <string name="address">Adres</string>
-  <string name="download_index_success">Aflaai suksesvol</string>
+  <string name="shared_string_download_successful">Aflaai suksesvol</string>
   <string name="error_io_error">I/O fout het voorgekom</string>
   
   <string name="downloading">Besig om af te laai…</string>
@@ -760,7 +760,7 @@
   <string name="show_osm_bugs_descr">Wys OpenStreetBugs op die kaart</string>
   <string name="show_osm_bugs">Wys OpenStreetBugs</string>
   <string name="favourites_activity">Gunstelinge</string>
-  <string name="add_to_favourite">Voeg by gunstelinge</string>
+  <string name="shared_string_add_to_favorites">Voeg by gunstelinge</string>
   <string name="use_english_names_descr">Kies tussen plaaslike en engelse name</string>
   <string name="use_english_names">Gebruik Engelse name in die kaart</string>
   <string name="app_settings">Toepassing stellings</string>
@@ -813,7 +813,7 @@
   <string name="navigate_point_format_D">GGG.GG</string>
   <string name="navigate_point_format_DM">GGG MM.MM</string>
   <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
-  <string name="search_shown_on_map">Wys op kaart</string>
+  <string name="shared_string_show_on_map">Wys op kaart</string>
   <string name="navigate_point_cancel">Kanseleer</string>
   <string name="search_address_top_text">Kies adres</string>
   <string name="search_address_region">Streek</string>
@@ -1017,7 +1017,7 @@
 	<string name="access_arrival_time">Aankomstyd</string>
     <string name="item_checked">Gemerk</string>
     <string name="item_unchecked">Ongemerk</string>
-    <string name="map_view">Kaart</string>
+    <string name="shared_string_map">Kaart</string>
     <string name="prefer_motorways">Verkies snelweë</string>
 	<string name="prefer_in_routing_title">Verkies…</string>
 	<string name="prefer_in_routing_descr">Verkies snelweë</string>

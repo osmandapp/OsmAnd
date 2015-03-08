@@ -125,7 +125,7 @@
     <string name="access_arrival_time">Време на пристигане</string>
     <string name="item_checked">отметнато</string>
     <string name="item_unchecked">не е отметнато</string>
-    <string name="map_view">Карта</string>
+    <string name="shared_string_map">Карта</string>
     <string name="prefer_motorways">Предпочитания към магистрали</string>
 	<string name="prefer_in_routing_title">Предпочитания…</string>
 	<string name="prefer_in_routing_descr">Предпочитания към магистрали</string>
@@ -1230,7 +1230,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="thanks_yandex_traffic">Информацията за трафика е любезно предоставена от Яндекс.</string>
 	<string name="layer_yandex_traffic">Яндекс трафик</string>
 	<string name="layer_route">Маршрут</string>
-	<string name="layer_favorites">Любими места</string>
+	<string name="shared_string_favorites">Любими места</string>
 	<string name="layer_osm_bugs">OSM неточности (bugs)</string>
 	<string name="layer_transport">Спирки на общ. транспорт</string>
 	<string name="layer_poi">POI…</string>
@@ -1338,7 +1338,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="download_question">Сваляне {0} - {1} ?</string>
 	<string name="download_question_exist">Офлайн данни за {0} вече съществуват ({1}). Искате ли да ги обновите ({2}) ?</string>
 	<string name="address">Адрес</string>
-	<string name="download_index_success">Успешно сваляне</string>
+	<string name="shared_string_download_successful">Успешно сваляне</string>
 	<string name="error_io_error">Входно/изходна грешка</string>
 	<string name="shared_string_downloading">Сваляне…</string>
 	<string name="downloading">Сваляне…</string>
@@ -1406,7 +1406,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="show_osm_bugs_descr">Покажи на картата OpenStreetBugs</string>
 	<string name="show_osm_bugs">Покажи OpenStreetBugs</string>
 	<string name="favourites_activity">Любими</string>
-	<string name="add_to_favourite">Добави в любими</string>
+	<string name="shared_string_add_to_favorites">Добави в любими</string>
 	<string name="use_english_names_descr">Изберете между местни имена и имена на английски език</string>
 	<string name="use_english_names">Имена на англ. език</string>
 	<string name="app_settings">Настройки на приложението</string>
@@ -1454,7 +1454,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="navigate_point_format_D">ГГГ.ГГ</string>
 	<string name="navigate_point_format_DM">ГГГ ММ.ММ</string>
 	<string name="navigate_point_format_DMS">ГГГ ММ СС.СС</string>
-	<string name="search_shown_on_map">Покажи на картата</string>
+	<string name="shared_string_show_on_map">Покажи на картата</string>
 	<string name="navigate_point_cancel">Откажи</string>
 	<string name="search_address_top_text">Изберете адрес</string>
 	<string name="search_address_region">Област/регион</string>
@@ -1702,7 +1702,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_preferred_locale_descr">Предпочитан език за наименованията по картата (ако този език не е наличен, ще се имената ще се изписват на английски или на местния език)</string>
     <string name="map_preferred_locale">Предпочитан език за картата</string>
     <string name="live_monitoring_m">Онлайн следа (изисква се GPX)</string>
-    <string name="my_data_Button">Моите места</string>
+    <string name="shared_string_my_places">Моите места</string>
     <string name="my_data_activity">Моите места</string>
     <string name="live_monitoring_m_descr">Изпращане на следата онлайн до определен уеб адрес, при условие, че записът в GPX е включен.</string>
 	<string name="live_monitoring_start">Старт на онлайн следата</string>
@@ -1756,7 +1756,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="map_widget_top">Статус лента</string>
 	<string name="map_widget_right">Десен панел</string>
 	<string name="map_widget_left">Ляв панел</string>
-    <string name="layers_category_show">Покажи</string>
+    <string name="shared_string_show">Покажи</string>
 	<string name="configure_map">Настройка на картата</string>
     <string name="rendering_attr_tramTrainRoutes_name">Трамвайни и влакови маршрути</string>
 	<string name="lock_screen_request_explanation">%1$s изисква това разрешение за да изключи екрана с цел пестене на енергия.</string>

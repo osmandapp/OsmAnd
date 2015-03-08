@@ -127,7 +127,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 		AvailableGPXFragment.createCurrentTrackView(view, app);
-		((TextView) view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
 		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override

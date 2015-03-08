@@ -193,7 +193,7 @@ public class DownloadIndexesThread {
 				if (mainView != null) {
 					mainView.setKeepScreenOn(true);
 				}
-				startTask(ctx.getString(R.string.downloading), -1);
+				startTask(ctx.getString(R.string.shared_string_downloading), -1);
 			}
 		}
 

@@ -445,7 +445,7 @@
 	<string name="send_report">Send rapport</string>
 	<string name="none_region_found">Ingen offline-data for regioner funnet på SD-kortet. Last ned regioner fra internett.</string>
 	<string name="layer_route">Rute</string>
-	<string name="layer_favorites">Favoritter</string>
+	<string name="shared_string_favorites">Favoritter</string>
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_poi">Interessepunkt…</string>
 	<string name="layer_map">Kartkilde…</string>
@@ -504,7 +504,7 @@
 	<string name="download_question">Laste ned {0} - {1} ?</string>
 	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere ({2}) ?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Nedlasting vellykket</string>
+	<string name="shared_string_download_successful">Nedlasting vellykket</string>
 	<string name="error_io_error">I/O feil oppstod</string>
 	
 	<string name="downloading">Laster ned…</string>
@@ -535,7 +535,7 @@
 	<string name="show_osm_bugs_descr">Vis OpenStreet-feil på kart</string>
 	<string name="show_osm_bugs">Vis OpenStreet-feil</string>
 	<string name="favourites_activity">Favoritter</string>
-	<string name="add_to_favourite">Legg til i favoritter</string>
+	<string name="shared_string_add_to_favorites">Legg til i favoritter</string>
 	<string name="use_english_names_descr">Velg mellom lokale og engelske navn</string>
 	<string name="use_english_names">Bruk engelske navn i kartene</string>
 	<string name="app_settings">Programinnstillinger</string>
@@ -585,7 +585,7 @@
 	<string name="navigate_point_format_D">GGG.GG</string>
 	<string name="navigate_point_format_DM">GGG MM.MM</string>
 	<string name="navigate_point_format_DMS">GGG MM SS.SS</string>
-	<string name="search_shown_on_map">Vis på kart</string>
+	<string name="shared_string_show_on_map">Vis på kart</string>
 	<string name="navigate_point_cancel">Avbryt</string>
 	<string name="search_address_top_text">Velg adresse</string>
 	<string name="search_address_region">Region</string>
@@ -637,7 +637,7 @@
 	<string name="email">E-post</string>
 <string name="map_widget_gps_info">GPS-info</string>
     <string name="access_arrival_time">Ankomsttid</string>
-    <string name="map_view">Kart</string>
+    <string name="shared_string_map">Kart</string>
     <string name="prefer_motorways">Foretrekk motorveier</string>
 	<string name="prefer_in_routing_title">Foretrekk…</string>
 	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>
@@ -783,7 +783,7 @@
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
     <string name="map_widget_plain_time">Gjeldende tid</string>
-    <string name="my_data_Button">Mine steder</string>
+    <string name="shared_string_my_places">Mine steder</string>
     <string name="my_data_activity">Mine steder</string>
     <string name="osmo_edit_color">Visningsfarge</string>
     <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
@@ -807,7 +807,7 @@
     <string name="rendering_category_transport">Transport</string>
     <string name="map_widget_right">Høyre panel</string>
 	<string name="map_widget_left">Venstre panel</string>
-    <string name="layers_category_show">Vis</string>
+    <string name="shared_string_show">Vis</string>
 	<string name="configure_map">Still inn kart</string>
     <string name="osmo_device_not_found">Enhet ikke funnet</string>
     <string name="speed_limit_exceed">Toleranse for fartsgrense</string>
@@ -964,7 +964,7 @@
 	<string name="osmo_activity">OpenStreetMap-overvåking</string>
     <string name="fav_point_dublicate_message">Favorittpunktnavn er endret til %1$s for å unngå dupliserte navn.</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="my_favorites">Mine favoritter</string>
+    <string name="shared_string_my_favorites">Mine favoritter</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
     <string name="color_red">rød</string>
 	<string name="color_pink">rosa</string>
@@ -1189,7 +1189,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
-    <string name="show_all">VIS ALLE</string>
+    <string name="shared_string_show_all">VIS ALLE</string>
 	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
     <string name="rendering_value__name">Standard</string>
 	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>
@@ -1197,7 +1197,7 @@
     <string name="parking_place">Parkeringsplass</string>
     <string name="points">Punkter</string>
     <string name="tracks">Spor</string>
-    <string name="my_location">Min posisjon</string>
+    <string name="shared_string_my_location">Min posisjon</string>
     <string name="gps_status">GPS-status</string>
     <string name="location_on_map">Posisjon:\n Br %1$s\n Le %2$s</string>
 	<string name="online_map">Nettbasert kart</string>

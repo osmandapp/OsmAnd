@@ -60,7 +60,7 @@ public class GpxSelectionHelper {
 		List<GpxDisplayGroup> dg = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		String name = g.path;
 		if(g.showCurrentTrack){
-			name =  getString(R.string.gpx_available_current_track);
+			name =  getString(R.string.shared_string_currently_recording_track);
 		} else {
 			int i = name.lastIndexOf('/');
 			if(i >= 0) {

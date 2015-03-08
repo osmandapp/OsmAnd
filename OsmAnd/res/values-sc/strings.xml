@@ -314,7 +314,7 @@
     <string name="access_arrival_time">Oràriu de lòmpida</string>
     <string name="item_checked">sinnau</string>
     <string name="item_unchecked">non sinnau</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Preferre sas autostradas</string>
 	<string name="prefer_in_routing_title">Preferre…</string>
 	<string name="prefer_in_routing_descr">Preferre sas autostradas</string>
@@ -600,9 +600,9 @@
     <string name="gpx_available_current_track">Rasta currentemente in registratzione</string>
     <string name="gpx_file_is_empty">Sa rasta Gpx est boida</string>
     <string name="selected_track">Rastas ischertadas</string>
-    <string name="my_tracks">Totu sas rastas</string>
-    <string name="my_favorites">Prefèrridos meos</string>
-    <string name="my_data_Button">Logos meos</string>
+    <string name="shared_string_my_tracks">Totu sas rastas</string>
+    <string name="shared_string_my_favorites">Prefèrridos meos</string>
+    <string name="shared_string_my_places">Logos meos</string>
     <string name="my_data_activity">Logos meos</string>
     <string name="osmo_user_joined">S’impitadore %1$s est intradu in su grupu %2$s</string>
     <string name="osmo_user_left">S’impitadore %1$s at lassadu su grupu %2$s</string>
@@ -1355,7 +1355,7 @@
 	<string name="thanks_yandex_traffic">Gràtzias a Yandex pro sas informatziones pro su tràficu.</string>
 	<string name="layer_yandex_traffic">Yandex (tràficu)</string>
 	<string name="layer_route">Àndala</string>
-	<string name="layer_favorites">Prefèrridos</string>
+	<string name="shared_string_favorites">Prefèrridos</string>
 	<string name="layer_osm_bugs">Errores OSM</string>
 	<string name="layer_transport">Firmadas trasportu pùblicu</string>
 	<string name="layer_map">Mitza mapa…</string>
@@ -1480,7 +1480,7 @@
 	<string name="download_question">Iscarrigare {0} - {1} ?</string>
 	<string name="download_question_exist">Sos datos non in lìnia pro {0} esistint giai ({1}). Los boles agiornare ({2}) ?</string>
 	<string name="address">Indiritzu</string>
-	<string name="download_index_success">Iscarrigamentu cumpridu</string>
+	<string name="shared_string_download_successful">Iscarrigamentu cumpridu</string>
 	<string name="error_io_error">Errore de I/O</string>
 	<string name="shared_string_downloading">Iscarrigande …</string>
 	<string name="downloading">Iscarrigande…</string>
@@ -1543,7 +1543,7 @@
 	<string name="show_osm_bugs_descr">Ammustra OpenStreetBugs in sa mapa</string>
 	<string name="show_osm_bugs">Ammustra OpenStreetBugs</string>
 	<string name="favourites_activity">Prefèrridos</string>
-	<string name="add_to_favourite">Annanghe a sos Prefèrridos</string>
+	<string name="shared_string_add_to_favorites">Annanghe a sos Prefèrridos</string>
 	<string name="use_english_names_descr">Ischerta s’impreu de nùmenes locales o inglesos</string>
 	<string name="use_english_names">Imprea nùmenes inglesos in sas mapas</string>
 	<string name="app_settings">Impostaduras aplicu</string>
@@ -1590,7 +1590,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Ammustra in sa mapa</string>
+	<string name="shared_string_show_on_map">Ammustra in sa mapa</string>
 	<string name="navigate_point_cancel">Burra</string>
 	<string name="search_address_top_text">Ischerta s’indiritzu</string>
 	<string name="search_address_region">Regione</string>
@@ -1757,7 +1757,7 @@
     <string name="rendering_category_others">Àteros atributos de sa mapa</string>
     <string name="map_widget_appearance_rem">Elementos chi abarrant</string>
     <string name="map_widget_top">Barra de istadu</string>
-	<string name="layers_category_show">Ammustra</string>
+	<string name="shared_string_show">Ammustra</string>
 	<string name="tip_recent_changes_1_9_t">"Mudas in sa 1.9: * Istiles de sa mapa agiornados cun su disinnu de sa superfìtzie, de s’istratu \"trasportu pùblicu\" e sos sìmbulos escursionìsticos * Chirca PDI a curtzu de s’àndala * Sinnala s’istrada comente impercurrìbile pro sa sessione * Iscarrigamentu e agiornamentos de sas mapas prus fàtziles * Notìficas visivas e sonoras a s’accurtziare de sos puntos mesanos * Imprenta s’àndala e sas indicatziones * Suportu a sas corsias de bortada * Suportu pro Android Wear * Unu muntone de mudas de s’IU * Zoom mapa e mannària testu iscrobados * Notìficas àudio ispetziales si ses essinde dae s’àndala * Funtzionalidade autenticatzione (login) OsMo * Curretzione incumpatibilidades versione OsMo "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Àndalas in trenu</string>
     <string name="rendering_attr_tramRoutes_name">Àndalas in tram</string>
@@ -1778,7 +1778,7 @@
 	<string name="home_button">Domo</string>
     <string name="search_for">Chirca pro</string>
 	<string name="show_map">AMMUSTRA SA MAPA</string>
-	<string name="show_all">AMMUSTRA TOTU</string>
+	<string name="shared_string_show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
 	<string name="map_update">Podes agiornare %1$s mapas</string>
 	<string name="error_avoid_specific_road">No est istada agatada peruna tangentziale</string>
@@ -1831,7 +1831,7 @@
     <string name="version_settings">Versiones</string>
     <string name="points">Puntos</string>
     <string name="tracks">Rastas</string>
-    <string name="my_location">Positzione mea</string>
+    <string name="shared_string_my_location">Positzione mea</string>
     <string name="osm_editing_manage">Amministra</string>
     <string name="gps_status">Istadu GPS</string>
     <string name="parking_place">Parchègiu</string>
@@ -1860,7 +1860,7 @@
 	<string name="share_note">Cumpartzi sa nota</string>
 	<string name="rename_recording">Torra a numenare sa registratzione</string>
 	<string name="shared_string_export">Esporta</string>
-	<string name="audio">Àudio</string>
+	<string name="shared_string_audio">Àudio</string>
 	<string name="video">Vìdeo</string>
 	<string name="photo">Foto</string>
 	<string name="plugin_nautical_descr">Ativande custa funtzionalidade s’istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro su nàvigu.
@@ -1879,7 +1879,7 @@
 	<string name="turn_off_all">Istuda totu</string>
 	<string name="showed_on_map">Ammustradu in sa mapa</string>
 	<string name="days_behind">dies faghet</string>
-	<string name="currently_recording_track">Rasta in registratzione como</string>
+	<string name="shared_string_currently_recording_track">Rasta in registratzione como</string>
 	<string name="back_to_map">Torra a sa mapa</string>
 	<string name="plugin_touringview_name">Vista mapa turìstica</string>
 

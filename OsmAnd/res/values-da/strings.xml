@@ -140,7 +140,6 @@
 	<string name="access_arrival_time">Ankomsttid</string>
     <string name="item_checked">Valgt</string>
     <string name="item_unchecked">Fravalgt</string>
-    <string name="map_view">Kort</string>
     <string name="prefer_motorways">Foretræk motorveje</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
@@ -907,7 +906,6 @@
 	<string name="thanks_yandex_traffic">Tak til Yandex for trafikinformation.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rute</string>
-	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_osm_bugs">OSM-fejlbeskrivelse (online)</string>
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_map">Vælg kortkilde…</string>
@@ -1083,7 +1081,6 @@
 	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
 	<string name="download_question">Hent {0} - {1}?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Hentet</string>
 	<string name="error_io_error">Der skete en I/O fejl</string>
 	
 	<string name="downloading">Henter…</string>
@@ -1148,7 +1145,6 @@
 	<string name="show_osm_bugs_descr">Vis OSM-fejl på kort</string>
 	<string name="show_osm_bugs">Vis OSM-fejl</string>
 	<string name="favourites_activity">Favoritter</string>
-	<string name="add_to_favourite">Tilføj som favorit</string>
 	<string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne</string>
 	<string name="use_english_names">Engelske navne</string>
 	<string name="app_settings">Programindstillinger</string>
@@ -1191,7 +1187,6 @@
 	<string name="navigate_point_longitude">Længdegrad</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
-	<string name="search_shown_on_map">Vis på kort</string>
 	<string name="navigate_point_cancel">Annuller</string>
 	<string name="search_address_region">Region</string>
 	<string name="context_menu_item_open_bug">Åben OSM fejlregistrering</string>
@@ -1606,9 +1601,6 @@
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
     <string name="selected_track">Valgte spor</string>
-    <string name="my_tracks">Alle spor</string>
-    <string name="my_favorites">Mine favoritter</string>
-    <string name="my_data_Button">Mine steder</string>
     <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
@@ -1776,7 +1768,6 @@
     <string name="map_widget_top">Statuslinjen</string>
 	<string name="map_widget_right">Højre panel</string>
 	<string name="map_widget_left">Venstre panel</string>
-    <string name="layers_category_show">Vis</string>
 	<string name="tip_recent_changes_1_9_t">"Ændringer i 1.9:\n * Opdaterede kort stilarter med vejbelægning rendering, transport lag og vandreture symbolerne\n * Søg efter interessepunkter (IP) langs ruten\n * Marker vej som ufremkommelige pr. session\n * Nemmere at hentning og opdatering af kort\n * Få visuel og audio meddelelse ved at nærme til rutepunkt\n * Udskriv rejseplan og svinginformation\n * Understøttelse af vognbaner\n * Understøtter Android Wear\n * Masser UI ændringer\n * Separat zoom af tekststørrelsen på kortet\n * Specielt lydsignal i tilfælde af afvigelse fra ruten\n * OsMo login-funktionalitet\n * Fix Osmo version uforenelighed "</string>
     <string name="rendering_category_routes">Ruter</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Togruter</string>
@@ -1797,7 +1788,6 @@
 	<string name="home_button">Start</string>
     <string name="search_for">Søg efter</string>
 	<string name="show_map">VIS KORT</string>
-	<string name="show_all">VIS ALLE</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Der er %1$s opdateringer</string>
 	<string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
@@ -1846,7 +1836,6 @@
 	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
 	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
     <string name="tracks">Spor</string>
-    <string name="my_location">Min placering</string>
     <string name="osm_editing_manage">Administrer</string>
     <string name="version_settings_descr">"Hent aktuelle  udviklingsversioner"</string>
     <string name="version_settings">Versioner</string>
@@ -1873,11 +1862,7 @@
 	<string name="watch">Vis</string>
 	<string name="share_note">Del note</string>
 	<string name="rename_recording">Omdøb optagelse</string>
-	<string name="audio">Audio</string>
-	<string name="video">Video</string>
-	<string name="photo">Foto</string>
 	<string name="plugin_touringview_name">Touring</string>
-
 	<string name="plugin_nautical_descr">Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.
 		\n\nEt kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.
 		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
@@ -1895,7 +1880,6 @@
 	<string name="days_behind">dage gammel</string>
 	<string name="rename_failed">Fejl ved omdøbning.</string>
 	<string name="back_to_map">Tilbage til kortet</string>
-	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
 	<string name="track_segments">Sporsegmenter</string>
@@ -1963,11 +1947,11 @@
 	<string name="shared_string_favorite">Favorit</string>
 	<string name="shared_string_favorites">Favoritter</string>
 	<string name="shared_string_add_to_favorites">Føj til Favoritter</string>
-	<string name="shared_string_my_location">Min placering</string>
+	<string name="shared_string_shared_string_my_location">Min placering</string>
 	<string name="shared_string_my_places">Mine steder</string>
-	<string name="shared_string_my_favorites">Mine favoritter</string>
-	<string name="shared_string_my_tracks">Mine spor</string>
-	<string name="shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
+	<string name="shared_string_shared_string_my_favorites">Mine favoritter</string>
+	<string name="shared_string_shared_string_my_tracks">Mine spor</string>
+	<string name="shared_string_shared_string_currently_recording_track">Aktuelt optagelsesspor</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>

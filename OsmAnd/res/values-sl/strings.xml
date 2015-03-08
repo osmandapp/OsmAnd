@@ -24,7 +24,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Prikaži na karti</string>
+	<string name="shared_string_show_on_map">Prikaži na karti</string>
 	<string name="navigate_point_cancel">Prekliči</string>
 	<string name="search_address_top_text">Izberi naslov</string>
 	<string name="search_address_region">Regija</string>
@@ -126,7 +126,7 @@
 	<string name="ChooseCountry">Izberi državo</string>
 	<string name="show_view_angle">Prikaži smer</string>
 	<string name="favourites_activity">Priljubljene</string>
-	<string name="add_to_favourite">Dodaj med priljubljene</string>
+	<string name="shared_string_add_to_favorites">Dodaj med priljubljene</string>
 	<string name="use_english_names_descr">Izberi prikaz avtohtonih oz. angleških imen</string>
 	<string name="use_english_names">Uporabi angleška imena na karti</string>
 	<string name="app_settings">Nastavitve programa</string>
@@ -910,7 +910,7 @@
 	<string name="layer_yandex_traffic">Yandex promet</string>
 	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
 	<string name="layer_route">Pot</string>
-	<string name="layer_favorites">Priljubljeni</string>
+	<string name="shared_string_favorites">Priljubljeni</string>
 	<string name="layer_osm_bugs">OSM hrošči</string>
 	<string name="layer_transport">Postaje prevoza</string>
 	<string name="layer_poi">POI …</string>
@@ -994,7 +994,7 @@
 	<string name="download_question">Prenesti {0} - {1}?</string>
 	<string name="download_question_exist">Krajevni podatki za {0} že obstajajo ({1}). Ali jih želite posodobiti ({2})?</string>
 	<string name="address">Naslov</string>
-	<string name="download_index_success">Prenos uspešen</string>
+	<string name="shared_string_download_successful">Prenos uspešen</string>
 	<string name="error_io_error">Prišlo je do I/O napake</string>
 	<string name="downloading_list_indexes">Prenašanje seznama razpoložljivih območij …</string>
 	<string name="list_index_files_was_not_loaded">Seznam območij ni bil pridobljen iz osmand.net.</string>
@@ -1207,7 +1207,7 @@
     <string name="av_def_action_choose">Izberite na zahtevo</string>
     <string name="item_checked">izbrano</string>
     <string name="item_unchecked">ni izbrano</string>
-    <string name="map_view">Zemljevid</string>
+    <string name="shared_string_map">Zemljevid</string>
     <string name="access_arrival_time">Čas prihoda</string>
     <string name="layer_hillshade">Plast senčen teren</string>
     <string name="map_widget_gps_info">GPS informacije</string>
@@ -1723,8 +1723,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="gpx_selection_points">%1$s \nTočk</string>
     <string name="gpx_file_is_empty">Sled GPX je prazna</string>
     <string name="selected_track">Izbrane sledi</string>
-    <string name="my_tracks">Vse sledi</string>
-    <string name="my_data_Button">Moji kraji</string>
+    <string name="shared_string_my_tracks">Vse sledi</string>
+    <string name="shared_string_my_places">Moji kraji</string>
     <string name="my_data_activity">Moji kraji</string>
     <string name="osmo_user_joined">Uporabnik %1$s se je pridružil skupini %2$s</string>
     <string name="osmo_user_left">Uporabnik %1$s je zapustil skupino %2$s</string>
@@ -1757,7 +1757,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="gpx_selection_track">%1$s
 \nSled %2$s</string>
     <string name="gpx_available_current_track">Trenutna shranjena sled</string>
-    <string name="my_favorites">Moji priljubljeni</string>
+    <string name="shared_string_my_favorites">Moji priljubljeni</string>
     <string name="share_fav_subject">Priljubljeni deljeni preko OsmAnd-a</string>
 	<string name="shared_string_share">Deli</string>
 	<string name="import_file_favourites">Shraniti kot GPX datoteko ali uvoziti med priljubljene?</string>
@@ -1909,7 +1909,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="map_widget_top">Statusna vrstica</string>
 	<string name="map_widget_right">Desna plošča</string>
 	<string name="map_widget_left">Leva plošča</string>
-    <string name="layers_category_show">Pokaži</string>
+    <string name="shared_string_show">Pokaži</string>
 	<string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">V bližini</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
@@ -1954,7 +1954,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="map_update">Na voljo je %1$s posodobitev zemljevidov</string>
 	<string name="search_for">Išči</string>
 	<string name="show_map">PRIKAŽI ZEMLJEVID</string>
-	<string name="show_all">PRIKAŽI VSE</string>
+	<string name="shared_string_show_all">PRIKAŽI VSE</string>
 	<string name="coordinates">Koordinate</string>
 	<string name="rendering_attr_transportStops_name">Postajališča</string>
     <string name="use_opengl_render">Za izris uporabi OpenGL</string>
@@ -1983,7 +1983,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="settings_privacy">Zasebnost</string>
     <string name="points">Točke</string>
     <string name="tracks">Sledi</string>
-    <string name="my_location">Moja lokacija</string>
+    <string name="shared_string_my_location">Moja lokacija</string>
     <string name="osm_editing_manage">Upravljaj</string>
     <string name="enable_proxy_title">Omogoči HTTP Proxy</string>
 	<string name="enable_proxy_descr">Konfiguriranje HTTP Proxy-ja za vse omrežne zahteve</string>

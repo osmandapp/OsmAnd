@@ -519,7 +519,7 @@
   <string name="thanks_yandex_traffic">Děkujeme Yandexu za dopravní informace.</string>
   <string name="layer_yandex_traffic">Yandex doprava</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_favorites">Oblíbené</string>
+  <string name="shared_string_favorites">Oblíbené</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Zastávky</string>
   <string name="layer_poi">POI…</string>
@@ -629,7 +629,7 @@
   <string name="download_question">Stáhnout {0} - {1} ?</string>
   <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="download_index_success">Index úspěšně stažen</string>
+  <string name="shared_string_download_successful">Index úspěšně stažen</string>
   <string name="error_io_error">Došlo k chybě vstupu/výstupu</string>
   
   <string name="downloading">Stahuji…</string>
@@ -701,7 +701,7 @@
   <string name="show_osm_bugs_descr">Zobrazit na mapě OpenStreetBugs</string>
   <string name="show_osm_bugs">Zobrazit OpenStreetBugs</string>
   <string name="favourites_activity">Seznam oblíbených míst</string>
-  <string name="add_to_favourite">Přidat mezi oblíbené</string>
+  <string name="shared_string_add_to_favorites">Přidat mezi oblíbené</string>
   <string name="use_english_names_descr">Přepíná mezi místními a anglickými názvy</string>
   <string name="use_english_names">Používat anglická jména v mapách</string>
   <string name="app_settings">Nastavení aplikace</string>
@@ -751,7 +751,7 @@
   <string name="navigate_point_top_text">Zadejte zem. šířku a délku ve vybraném formátu (D - stupně, M - minuty, S - vteřiny)</string>
   <string name="navigate_point_latitude">Šířka</string>
   <string name="navigate_point_longitude">Délka</string>
-  <string name="search_shown_on_map">Zobrazit na mapě</string>
+  <string name="shared_string_show_on_map">Zobrazit na mapě</string>
   <string name="navigate_point_cancel">Zrušit</string>
   <string name="search_address_top_text">Zvolit addresu</string>
   <string name="search_address_region">Oblast</string>
@@ -1178,7 +1178,7 @@
     </string>
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="osmand_play_title_30_chars">OsmAnd mapa a navigace</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapa a navigace</string>
 	<string name="item_checked">zvoleno</string>
@@ -1574,9 +1574,9 @@ s často kladenými otázkami.</string>
 	
     <string name="gpx_file_is_empty">GPX trasa je prázdná</string>
     <string name="selected_track">Zvolená trasa</string>
-    <string name="my_tracks">Všechny trasy</string>
-    <string name="my_favorites">Moje oblíbené</string>
-    <string name="my_data_Button">Moje místa</string>
+    <string name="shared_string_my_tracks">Všechny trasy</string>
+    <string name="shared_string_my_favorites">Moje oblíbené</string>
+    <string name="shared_string_my_places">Moje místa</string>
     <string name="my_data_activity">Moje místa</string>
     <string name="osmo_show_group_notifications">Zobrazovat upozornění skupin</string>
     <string name="osmo_show_group_notifications_descr">Zobrazovat informační zprávu o připojení nebo odpojení uživatele ke skupině</string>
@@ -1748,7 +1748,7 @@ s často kladenými otázkami.</string>
     <string name="map_widget_top">Stavová lišta</string>
 	<string name="map_widget_right">Pravý panel</string>
 	<string name="map_widget_left">Levý panel</string>
-    <string name="layers_category_show">Ukázat</string>
+    <string name="shared_string_show">Ukázat</string>
 	<string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
@@ -1777,7 +1777,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_use_https">Použít HTTPS</string>
 	<string name="map_update">K dispozici aktualizace pro %1$s map</string>
 	<string name="search_for">Hledat</string>
-	<string name="show_all">ZOBRAZIT VŠE</string>
+	<string name="shared_string_show_all">ZOBRAZIT VŠE</string>
 	<string name="coordinates">Souřadnice</string>
 	<string name="shared_string_dismiss">Zavřít</string>
     <string name="everything_up_to_date">Všechny soubory jsou aktuální</string>
@@ -1820,7 +1820,7 @@ s často kladenými otázkami.</string>
     <string name="settings_privacy">Soukromí</string>
     <string name="points">Body</string>
     <string name="tracks">Trasy</string>
-    <string name="my_location">Moje poloha</string>
+    <string name="shared_string_my_location">Moje poloha</string>
     <string name="osm_editing_manage">Spravovat</string>
     <string name="recents">NEDÁVNÉ</string>
 	<string name="navigation_over_track">Spustit navigaci po trase?</string>
@@ -1851,14 +1851,14 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžařské tratě</string>
 	<string name="free">"%1$s volných "</string>
 	<string name="device_memory">Paměť zařízení</string>
-    <string name="audio">Audio</string>
+    <string name="shared_string_audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografie</string>
 	<string name="watch">Zobrazit</string>
 	<string name="shared_string_selected">Vybrané</string>
 	<string name="showed_on_map">Zobrazené na mapě</string>
 	<string name="rename_failed">Přejmenování selhalo.</string>
-	<string name="currently_recording_track">Právě zaznamenávaná trasa</string>
+	<string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
 	<string name="back_to_map">Zpět na mapu</string>
 	<string name="plugin_touringview_name">Cestovní mapový pohled (Touring view)</string>
 	<string name="rendering_attr_pisteGrooming_name">Úprava sjezdovky</string>

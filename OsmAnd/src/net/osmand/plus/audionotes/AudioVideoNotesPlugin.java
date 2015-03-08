@@ -205,11 +205,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (hashInd != -1) {
 				return fileName.substring(0, hashInd);
 			} else if (this.isAudio()) {
-				return ctx.getResources().getString(R.string.audio);
+				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
-				return ctx.getResources().getString(R.string.video);
+				return ctx.getResources().getString(R.string.shared_string_video);
 			} else if (this.isPhoto()) {
-				return ctx.getResources().getString(R.string.photo);
+				return ctx.getResources().getString(R.string.shared_string_photo);
 			}
 			return "";
 		}

@@ -872,7 +872,7 @@
 	<string name="thanks_yandex_traffic">Danke an Yandex für die Überlassung von Verkehrsinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
-	<string name="layer_favorites">Favoriten</string>
+	<string name="shared_string_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
@@ -980,7 +980,7 @@
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
-	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
+	<string name="shared_string_download_successful">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten</string>
 	
 	<string name="downloading">Herunterladen…</string>
@@ -1044,7 +1044,7 @@
 	<string name="show_osm_bugs_descr">OSM-Fehlerberichte anzeigen</string>
 	<string name="show_osm_bugs">OSM-Fehler</string>
 	<string name="favourites_activity">Markierte Orte</string>
-	<string name="add_to_favourite">Als Favorit speichern</string>
+	<string name="shared_string_add_to_favorites">Als Favorit speichern</string>
 	<string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden</string>
 	<string name="use_english_names">Englische Namen</string>
 	<string name="app_settings">Anwendungseinstellungen</string>
@@ -1094,7 +1094,7 @@
 	<string name="navigate_point_format_D">DDD.DDDDD</string>
 	<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-	<string name="search_shown_on_map">Auf Karte anzeigen</string>
+	<string name="shared_string_show_on_map">Auf Karte anzeigen</string>
 	<string name="navigate_point_cancel">Abbrechen</string>
 	<string name="search_address_top_text">Adresseingabe</string>
 	<string name="search_address_region">Region</string>
@@ -1369,7 +1369,7 @@
 	<string name="max_speed_none">keine</string>
 	<string name="item_checked">ausgewählt</string>
 	<string name="item_unchecked">nicht ausgewählt</string>
-	<string name="map_view">Karte</string>
+	<string name="shared_string_map">Karte</string>
 	<string name="access_arrival_time">Ankunftszeit</string>
 	<string name="map_widget_gps_info">GPS-Info</string>
 
@@ -1558,9 +1558,9 @@
 	<string name="import_file_favourites">GPX-Datei speichern oder zu den Favoriten importieren?</string>
 	<string name="import_save">Speichern</string>
 	<string name="selected_track">Ausgewählte Tracks</string>
-	<string name="my_tracks">Alle Tracks</string>
-	<string name="my_favorites">Meine Favoriten</string>
-	<string name="my_data_Button">Meine Orte</string>
+	<string name="shared_string_my_tracks">Alle Tracks</string>
+	<string name="shared_string_my_favorites">Meine Favoriten</string>
+	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="my_data_activity">Meine Orte</string>
 	<string name="loading_smth">Lade %1$s …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
@@ -1967,7 +1967,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_widget_top">Statuszeile</string>
 	<string name="map_widget_right">Rechtes Panel</string>
 	<string name="map_widget_left">Linkes Panel</string>
-    <string name="layers_category_show">Anzeigen</string>
+    <string name="shared_string_show">Anzeigen</string>
 	<string name="configure_map">Karte konfigurieren</string>
     <string name="search_radius_proximity">Im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
@@ -1992,7 +1992,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="show_map">KARTE ZEIGEN</string>
-    <string name="show_all">ALLES ZEIGEN</string>
+    <string name="shared_string_show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="shared_string_dismiss">Ablehnen</string>
@@ -2036,7 +2036,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
     <string name="tracks">Tracks</string>
-    <string name="my_location">Mein Ort</string>
+    <string name="shared_string_my_location">Mein Ort</string>
     <string name="osm_editing_manage">Verwalten</string>
     <string name="recents">VERLAUF</string>
     <string name="navigation_over_track">Navigation über Strecke starten?</string>
@@ -2064,7 +2064,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="get_plugin">Erhalten</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
-	<string name="currently_recording_track">Derzeit aufnehmender Track</string>
+	<string name="shared_string_currently_recording_track">Derzeit aufnehmender Track</string>
 	<string name="back_to_map">Zurück zur Karte</string>
 	<string name="plugin_nautical_descr">Das Aktivieren dieser Ansicht ändert die Kartendartellung auf See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbolde angezeigt.
 		\n\nEine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
@@ -2079,7 +2079,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 		\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
 		\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="audio">Audio</string>
+	<string name="shared_string_audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Aufnahme umbenennen</string>

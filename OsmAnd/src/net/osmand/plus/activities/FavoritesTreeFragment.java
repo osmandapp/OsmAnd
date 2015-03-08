@@ -735,7 +735,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			adjustIndicator(groupPosition, isExpanded, row, getMyApplication().getSettings().isLightContent());
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final FavoriteGroup model = getGroup(groupPosition);
-			label.setText(model.name.length() == 0? getString(R.string.favourites_activity) : model.name);
+			label.setText(model.name.length() == 0? getString(R.string.shared_string_favorites) : model.name);
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);

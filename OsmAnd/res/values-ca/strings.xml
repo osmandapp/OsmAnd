@@ -551,7 +551,7 @@
 <string name="context_menu_item_update_poi">Actualitzar PDI</string>
 <string name="searching_address">Cercant l\'adreça…</string>
 <string name="search_offline_address">Fora de línia</string>
-<string name="download_index_success">Baixada amb èxit</string>
+<string name="shared_string_download_successful">Baixada amb èxit</string>
 
 <string name="show_poi_on_map">Mostra al mapa</string>
 <string name="show_gps_status">Mostra l\'estat del GPS</string>
@@ -601,7 +601,7 @@
 <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta SD. Cal que us baixeu les regions des d\'Internet.</string>
 <string name="layer_yandex_traffic">Tràfic Yandex</string>
 <string name="layer_route">Ruta</string>
-<string name="layer_favorites">Preferits</string>
+<string name="shared_string_favorites">Preferits</string>
 <string name="menu_layers">Defineix la visualització</string>
 
 <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa</string>
@@ -679,7 +679,7 @@
 <string name="data_settings_descr">Especifiqueu la llengua, baixeu / torneu a carregar les dades</string>
 <string name="use_online_routing">Utilitza la navegació en línia</string>
 <string name="save_current_track_descr">Deseu la traça actual a la SD en aquest moment</string>
-<string name="add_to_favourite">Afegeix a Preferits</string>
+<string name="shared_string_add_to_favorites">Afegeix a Preferits</string>
 <string name="ChooseCountry">Trieu el país</string>
 <string name="choose_street">Trieu el carrer</string>
 <string name="choose_city">Trieu la ciutat</string>
@@ -933,7 +933,7 @@
 	<string name="map_tile_source">Font del mapa de tessel·les</string>
 	<string name="use_internet_to_download_tile">Utilitza Internet per baixar les tessel·les que faltin</string>
 	<string name="app_description">Aplicació de navegació</string>
-	<string name="search_shown_on_map">Mostra al mapa</string>
+	<string name="shared_string_show_on_map">Mostra al mapa</string>
 	<string name="search_address_street_option">Intersecció de carrers</string>
 	<string name="search_tabs_location">Localització</string>
 	<string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
@@ -1195,7 +1195,7 @@
     <string name="access_arrival_time">Hora d\'arribada</string>
     <string name="item_checked">marcat</string>
     <string name="item_unchecked">desmarcat</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="prefer_motorways">Millor per autopistes</string>
 	<string name="prefer_in_routing_title">Preferències…</string>
 	<string name="prefer_in_routing_descr">Millor autopistes</string>
@@ -1628,9 +1628,9 @@
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
     <string name="selected_track">Traces seleccionades</string>
-    <string name="my_tracks">Totes les traces</string>
-    <string name="my_favorites">Preferits</string>
-    <string name="my_data_Button">Preferits</string>
+    <string name="shared_string_my_tracks">Totes les traces</string>
+    <string name="shared_string_my_favorites">Preferits</string>
+    <string name="shared_string_my_places">Preferits</string>
     <string name="my_data_activity">Llocs personals</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
@@ -1802,7 +1802,7 @@
     <string name="map_widget_top">Barra d\'estat</string>
 	<string name="map_widget_right">Tauler dret</string>
 	<string name="map_widget_left">Tauler esquerre</string>
-    <string name="layers_category_show">Mostra</string>
+    <string name="shared_string_show">Mostra</string>
 	<string name="configure_map">Configura el mapa</string>
     <string name="search_radius_proximity">A prop de</string>
     <string name="tip_recent_changes_1_9_t">"Canvis a la 1.9: * S\'han actualitzat els estils dels mapes amb la representació de la superfície de les vies, les capes de transport i els símbols de senderisme* Cerca de PDI durant la ruta * Marcar la via com no disponible per sessió * Més facilitat per baixar i enviar mapes * Notificacions visuals i sonores en aproximar-nos  a una fita * Imprimir un itinerari i la relació de girs * Suport de carrils de gir * Suport a Android Wear * Molts canvis a la IU * Zoom independent pel text en el mapa * Notificacions d\'àudio específiques quan sigueu fora de la ruta * Funcionalitat d\'ingrés OsMo  * S\'ha corregit les incompatibilitats de versió OsMo "</string>
@@ -1826,7 +1826,7 @@
 	<string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
 	<string name="show_map">MOSTRA EL MAPA</string>
-	<string name="show_all">MOSTRA\'LS TOTS</string>
+	<string name="shared_string_show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
 	<string name="map_update">Actualitzacions disponibles de %1$s mapes</string>
 	<string name="error_avoid_specific_road">No s\'ha trobat cap circumval·lació</string>
@@ -1876,7 +1876,7 @@
 	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
 	<string name="points">Punts</string>
     <string name="tracks">Traces</string>
-    <string name="my_location">La vostra posició</string>
+    <string name="shared_string_my_location">La vostra posició</string>
     <string name="osm_editing_manage">Gestió</string>
     <string name="version_settings_descr">Baixada de les darreres versions</string>
     <string name="version_settings">Versions</string>
@@ -1900,7 +1900,7 @@
     <string name="get_plugin">Obtén</string>
 <string name="free">"%1$s disponible "</string>
 	<string name="device_memory">Memòria del dispositiu</string>
-    <string name="audio">Àudio</string>
+    <string name="shared_string_audio">Àudio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Fotografia</string>
 	<string name="share_note">Comparteix nota</string>

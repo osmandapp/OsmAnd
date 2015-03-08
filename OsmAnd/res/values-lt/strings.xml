@@ -655,7 +655,7 @@
   <string name="thanks_yandex_traffic">Ačiū Yandex už kelių informaciją.</string>
   <string name="layer_yandex_traffic">Yandex kelių informacija</string>
   <string name="layer_route">Maršrutas</string>
-  <string name="layer_favorites">Įsimintos vietos</string>
+  <string name="shared_string_favorites">Įsimintos vietos</string>
   <string name="layer_osm_bugs">OSM klaidos</string>
   <string name="layer_transport">Transporto stotelės</string>
   <string name="layer_poi">LV…</string>
@@ -764,7 +764,7 @@
   <string name="download_question">Parsiųsti {0} - {1} ?</string>
   <string name="download_question_exist">Parsiųsti duomenys {0} jau egzistuoja ({1}). Ar norite juos atnaujinti ({2}) ?</string>
   <string name="address">Adresas</string>
-  <string name="download_index_success">Parsiuntimas buvo sėkmingas</string>
+  <string name="shared_string_download_successful">Parsiuntimas buvo sėkmingas</string>
   <string name="error_io_error">Įvyko I/O klaida</string>
   
   <string name="downloading">Parsiunčiama…</string>
@@ -835,7 +835,7 @@
   <string name="show_osm_bugs_descr">Rodyti OpenStreetBugs žemėlapyje</string>
   <string name="show_osm_bugs">Rodyti OpenStreetBugs</string>
   <string name="favourites_activity">Įsimintos vietos</string>
-  <string name="add_to_favourite">Pridėti prie įsimintų vietų</string>
+  <string name="shared_string_add_to_favorites">Pridėti prie įsimintų vietų</string>
   <string name="use_english_names_descr">Pasirinkti žemėlapyje rodomus pavadinimus: originalius arba angliškus</string>
   <string name="use_english_names">Žemėlapyje naudoti angliškus pavadinimus</string>
   <string name="app_settings">Programos nustatymai</string>
@@ -888,7 +888,7 @@
   <string name="navigate_point_format_D">LLL.LL</string>
   <string name="navigate_point_format_DM">LLL MM.MM</string>
   <string name="navigate_point_format_DMS">LLL MM SS.SS</string>
-  <string name="search_shown_on_map">Rodyti žemėlapyje</string>
+  <string name="shared_string_show_on_map">Rodyti žemėlapyje</string>
   <string name="navigate_point_cancel">Atšaukti</string>
   <string name="search_address_top_text">Pasirinkti adresą</string>
   <string name="search_address_region">Regionas</string>
@@ -1243,7 +1243,7 @@
 	</string>
     <string name="item_checked">patikrinta</string>
     <string name="item_unchecked">nepatikrinta</string>
-    <string name="map_view">Žemėlapis</string>
+    <string name="shared_string_map">Žemėlapis</string>
     <string name="av_def_action_choose">Pasirinkti paprašius</string>
     <string name="access_arrival_time">Atvykimo laikas</string>
     <string name="map_widget_gps_info">GPS informacija</string>
@@ -1686,9 +1686,9 @@
     <string name="gpx_available_current_track">Dabartinis įrašomas maršrutas</string>
     <string name="gpx_file_is_empty">GPX maršrutas yra tuščias</string>
     <string name="selected_track">Pasirinkti maršrutai</string>
-    <string name="my_tracks">Visi maršrutai</string>
-    <string name="my_favorites">Mano mėgiami</string>
-    <string name="my_data_Button">Mano vietos</string>
+    <string name="shared_string_my_tracks">Visi maršrutai</string>
+    <string name="shared_string_my_favorites">Mano mėgiami</string>
+    <string name="shared_string_my_places">Mano vietos</string>
     <string name="my_data_activity">Mano vietos</string>
     <string name="osmo_user_joined">Vartotojas %1$s prisijungė prie %2$s grupės</string>
     <string name="osmo_user_left">Vartotojas %1$s atsijungė nuo %2$s grupės</string>
@@ -1820,7 +1820,7 @@
     <string name="rendering_category_transport">Transportas</string>
     <string name="rendering_category_others">Kiti žemėlapio atributai</string>
     <string name="map_widget_appearance_rem">Likę elementai</string>
-    <string name="layers_category_show">Rodyti</string>
+    <string name="shared_string_show">Rodyti</string>
 	<string name="configure_map">Konfigūruoti žemėlapį</string>
     <string name="map_widget_top">Statuso juosta</string>
 	<string name="rendering_category_routes">Maršrutai</string>
@@ -1848,7 +1848,7 @@
     <string name="map_update">Liko atnaujinti %1$s žemėlapių</string>
 	<string name="search_for">Ieškoti (ko)</string>
 	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
-	<string name="show_all">RODYTI VISKĄ</string>
+	<string name="shared_string_show_all">RODYTI VISKĄ</string>
 	<string name="coordinates">Koordinatės</string>
 	<string name="error_avoid_specific_road">Nerastas trumpiausias kelias</string>
     <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
@@ -1894,7 +1894,7 @@
     <string name="settings_privacy">Privatumas</string>
     <string name="points">Taškai</string>
     <string name="tracks">Keliai</string>
-    <string name="my_location">Mano dabatinė vieta</string>
+    <string name="shared_string_my_location">Mano dabatinė vieta</string>
     <string name="osm_editing_manage">Valdyti</string>
     <string name="recents">PASTARIEJI</string>
 	<string name="navigation_over_track">Pradėti navigaciją keliu?</string>
@@ -1925,7 +1925,7 @@
     <string name="watch">Stebėti</string>
 	<string name="notes">Pastabos</string>
 	<string name="online_map">Žemėlapis online</string>
-	<string name="audio">Garsas</string>
+	<string name="shared_string_audio">Garsas</string>
 	<string name="video">Vaizdas</string>
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Pervardinti įrašą</string>

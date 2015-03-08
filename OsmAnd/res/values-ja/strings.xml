@@ -310,7 +310,7 @@ MB)をダウンロードしますか?</string>
      <string name="thanks_yandex_traffic">Yandexの交通情報に感謝します。</string>
      <string name="layer_yandex_traffic">Yandex交通情報</string>
      <string name="layer_route">ルート</string>
-     <string name="layer_favorites">お気に入り</string>
+     <string name="shared_string_favorites">お気に入り</string>
      <string name="layer_osm_bugs">OSM bugs</string>
      <string name="layer_transport">交通機関乗り場</string>
      <string name="layer_poi">POI…</string>
@@ -436,7 +436,7 @@ POIの更新は利用できません</string>
      <string name="download_question_exist">{0}用のオフラインデータは
 既にあります({1})。更新しますか({2}) ?</string>
      <string name="address">住所</string>
-     <string name="download_index_success">ダウンロード完了</string>
+     <string name="shared_string_download_successful">ダウンロード完了</string>
      <string name="error_io_error">I/O エラー発生</string>
      
      <string name="downloading">ダウンロード中…</string>
@@ -520,7 +520,7 @@ POIの更新は利用できません</string>
  <string name="show_osm_bugs_descr">OpenStreetBugs をマップに表示</string>
  <string name="show_osm_bugs">OpenStreetBugsを表示</string>
  <string name="favourites_activity">お気に入り地点のリスト</string>
- <string name="add_to_favourite">お気に入りに追加</string>
+ <string name="shared_string_add_to_favorites">お気に入りに追加</string>
  <string name="use_english_names_descr">現地名または英語名を選択</string>
  <string name="use_english_names">英語名を使用</string>
  <string name="app_settings">アプリケーション設定</string>
@@ -579,7 +579,7 @@ POIの更新は利用できません</string>
 <string name="navigate_point_format_D">DDD.DDDDD</string>
 <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="search_shown_on_map">マップ上に表示</string>
+<string name="shared_string_show_on_map">マップ上に表示</string>
 <string name="navigate_point_cancel">キャンセル</string>
 <string name="search_address_top_text">住所を選択</string>
 <string name="search_address_region">地域</string>
@@ -802,7 +802,7 @@ POIの更新は利用できません</string>
     <string name="access_arrival_time">到着時間</string>
     <string name="item_checked">選択済</string>
     <string name="item_unchecked">未選択</string>
-    <string name="map_view">マップ</string>
+    <string name="shared_string_map">マップ</string>
     <string name="prefer_motorways">高速道路を優先</string>
 	<string name="prefer_in_routing_title">ルート検索時の優先道路設定…</string>
 	<string name="prefer_in_routing_descr">高速道路を優先</string>
@@ -1840,9 +1840,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="gpx_available_current_track">現在記録中トラック</string>
     <string name="gpx_file_is_empty">GPSトラックは空です</string>
     <string name="selected_track">選択された経路</string>
-    <string name="my_tracks">全ての経路</string>
-    <string name="my_favorites">お気に入り</string>
-    <string name="my_data_Button">お気に入り</string>
+    <string name="shared_string_my_tracks">全ての経路</string>
+    <string name="shared_string_my_favorites">お気に入り</string>
+    <string name="shared_string_my_places">お気に入り</string>
     <string name="my_data_activity">お気に入り</string>
     <string name="osmo_user_joined">ユーザー %1$sはグループ %2$sに参加しました</string>
     <string name="osmo_user_left">ユーザー %1$sはグループ %2$sから離れました</string>
@@ -2093,7 +2093,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="map_widget_top">ステータスバー</string>
 	<string name="map_widget_right">右パネル</string>
 	<string name="map_widget_left">左パネル</string>
-    <string name="layers_category_show">表示</string>
+    <string name="shared_string_show">表示</string>
 	<string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">付近に</string>
     <string name="osmo_device_not_found">デバイスが見つかりません</string>
@@ -2105,7 +2105,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="map_update">マップ</string>
 	<string name="search_for">検索</string>
 	<string name="show_map">マップ表示</string>
-	<string name="show_all">全て表示</string>
+	<string name="shared_string_show_all">全て表示</string>
 	<string name="coordinates">座標</string>
 	<string name="parking_place">駐車場</string>
     <string name="remove_the_tag">タグを削除</string>
@@ -2118,7 +2118,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="settings_privacy">プライバシー</string>
     <string name="points">地点</string>
     <string name="tracks">経路</string>
-    <string name="my_location">現在地点</string>
+    <string name="shared_string_my_location">現在地点</string>
     <string name="osm_editing_manage">管理</string>
     <string name="recents">履歴</string>
 	<string name="navigation_over_track">経路を超えてナビゲーションを開始しますか？</string>

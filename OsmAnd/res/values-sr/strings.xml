@@ -248,7 +248,7 @@
 	<string name="map_update">Доступне су надоградње %1$s карата</string>
 	<string name="search_for">Потражи</string>
 	<string name="show_map">ПРИКАЖИ КАРТУ</string>
-	<string name="show_all">ПРИКАЖИ СВЕ</string>
+	<string name="shared_string_show_all">ПРИКАЖИ СВЕ</string>
 	<string name="coordinates">Координате</string>
 	<string name="shared_string_never">Никад</string>
     <string name="select_impassable_road">Означи на карти…</string>
@@ -324,7 +324,7 @@
     <string name="map_widget_top">Трака стања</string>
 	<string name="map_widget_right">Десна површ</string>
 	<string name="map_widget_left">Лева површ</string>
-    <string name="layers_category_show">Прикажи</string>
+    <string name="shared_string_show">Прикажи</string>
 	<string name="configure_map">Подесите мапу</string>
     <string name="osmo_device_not_found">Није пронађен уређај</string>
     <string name="anonymous_user_hint">Безимени корисник не може\n- да прави скупове;\n- да усклађује скупове и уређаје са сервером;\n- да управља скуповима и уређајима у личном уреду.</string>
@@ -357,7 +357,7 @@
     <string name="navigate_point_easting">Географска дужина</string>
     <string name="error_avoid_specific_road">Нисам пронашао заобилазнице</string>
     <string name="rename_failed">Преименовање није успело.</string>
-	<string name="currently_recording_track">Стаза која се тренутно снима</string>
+	<string name="shared_string_currently_recording_track">Стаза која се тренутно снима</string>
 	<string name="back_to_map">Назад на карту</string>
 	<string name="plugin_nautical_descr">Прелазак прегледа карте приказује поморски изглед, чиме се приказују све поморске ознаке навођења и графички знаци.
 		\n\nДатотека карте која садржи све опште поморске знаке је доступна у виду  једног преузимања и назива се „Светске поморске карте“.
@@ -366,7 +366,7 @@
 	<string name="plugin_ski_descr">Покретање ове измене мења преглед карте на „Зима и скијање“, које приказује у положеном погледу особине предела и зимске услове.
 		\n\nСветска карта приказује сва скијалишта и скијашке стазе у овом прегледу је доступна преузимањем  „Светске скијашке карте“.
 	</string>
-	<string name="audio">Звук</string>
+	<string name="shared_string_audio">Звук</string>
 	<string name="video">Видео</string>
 	<string name="photo">Слика</string>
 	<string name="share_note">Дели белешку</string>
@@ -389,7 +389,7 @@
     <string name="version_settings">Изградње</string>
     <string name="points">Тачке</string>
     <string name="tracks">Стазе</string>
-    <string name="my_location">Мој положај</string>
+    <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
     <string name="home_button">Матица</string>
     </resources>

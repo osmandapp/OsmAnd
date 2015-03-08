@@ -32,7 +32,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 	 			android:layout_weight="1" android:layout_height="165dp">
 	 				<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_gravity="center_vertical|left" 
-					android:layout_marginLeft="15dp" android:text="@string/map_Button" android:textColor="#000000"
+					android:layout_marginLeft="15dp" android:text="@string/shared_string_map" android:textColor="#000000"
 					android:typeface="serif" android:layout_weight="1" android:textSize="24sp"/>
 	 				<ImageView
 					android:src="@drawable/button_icon_map"
@@ -64,7 +64,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:id="@+id/FavoritesButtonText"
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
-					android:text="@string/my_data_Button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/shared_string_my_places" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1" android:textSize="24sp"/>
 	 				<ImageView
 	 				android:id="@+id/FavoritesButtonImage"

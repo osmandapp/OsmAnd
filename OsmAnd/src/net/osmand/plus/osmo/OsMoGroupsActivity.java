@@ -433,7 +433,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
+					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,

@@ -512,7 +512,7 @@
   <string name="thanks_yandex_traffic">მადლობა Yandex-ს ტრაფიკის ინფორმაციისათვის.</string>
   <string name="layer_yandex_traffic">Yandex ტრაფიკი</string>
   <string name="layer_route">გზა</string>
-  <string name="layer_favorites">რჩეულები</string>
+  <string name="shared_string_favorites">რჩეულები</string>
   <string name="layer_osm_bugs">OSM-ის ხოჭოები</string>
   <string name="layer_transport">ტრანსპორტის გაჩერება</string>
   <string name="layer_poi">POI…</string>
@@ -621,7 +621,7 @@
   <string name="download_question">ჩამოვტვირთო {0} - {1} ?</string>
   <string name="download_question_exist">გათიშული მონაცემები {0}-სათვის უკვე არსებობს ({1}). გნებავთ მისი განახლება ({2}) ?</string>
   <string name="address">მისამართი</string>
-  <string name="download_index_success">ჩამოტვირთვა წარმატებულად დამთავრდა</string>
+  <string name="shared_string_download_successful">ჩამოტვირთვა წარმატებულად დამთავრდა</string>
   <string name="error_io_error">მოხდა I/O შეცდომა</string>
   
   <string name="downloading">ჩამოტვირთვა…</string>
@@ -692,7 +692,7 @@
   <string name="show_osm_bugs_descr">OpenStreetBugs-ის რუკაზე ჩვენება</string>
   <string name="show_osm_bugs">OpenStreetBugs-ის ჩვენება</string>
   <string name="favourites_activity">რჩეულები</string>
-  <string name="add_to_favourite">რჩეულებში დამატება</string>
+  <string name="shared_string_add_to_favorites">რჩეულებში დამატება</string>
   <string name="use_english_names_descr">აირჩიეთ ადგილობრივ და ინგლისურ სახელებს შორის</string>
   <string name="use_english_names">ინგლისური სახელების გამოყენება</string>
   <string name="app_settings">აპლიკაციის პარამეტრები</string>
@@ -745,7 +745,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="search_shown_on_map">რუკაზე ჩვენება</string>
+  <string name="shared_string_show_on_map">რუკაზე ჩვენება</string>
   <string name="navigate_point_cancel">გაუქმება</string>
   <string name="search_address_top_text">აირჩიეთ მისამართი</string>
   <string name="search_address_region">რაიონი</string>
@@ -1208,7 +1208,7 @@
     <string name="access_arrival_time">ჩასვლის დრო</string>
     <string name="item_checked">შემოწმებულია</string>
     <string name="item_unchecked">შეუმოწმებელია</string>
-    <string name="map_view">რუკა</string>
+    <string name="shared_string_map">რუკა</string>
     <string name="prefer_motorways">მოტოციკლების გზების არჩევა</string>
 	<string name="prefer_in_routing_title">არჩევნის გაკეთება…</string>
 	<string name="prefer_in_routing_descr">მოტოციკლების გზებისათვის უპირატესობის მინიჭება</string>

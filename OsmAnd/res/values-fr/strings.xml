@@ -459,7 +459,7 @@
   <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
   <string name="layer_yandex_traffic">Trafic Yandex</string>
   <string name="layer_route">Route</string>
-  <string name="layer_favorites">Favoris</string>
+  <string name="shared_string_favorites">Favoris</string>
   <string name="layer_osm_bugs">Bogues OSM</string>
   <string name="layer_transport">Arrêts de transports publics</string>
   <string name="layer_poi">Points d\'intérêt…</string>
@@ -571,7 +571,7 @@
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
-  <string name="download_index_success">Téléchargement de l\'index réussi</string>
+  <string name="shared_string_download_successful">Téléchargement de l\'index réussi</string>
   <string name="error_io_error">Une erreur d\'entrée/sortie s\'est produite</string>
   
   <string name="downloading">Téléchargement en cours…</string>
@@ -643,7 +643,7 @@
   <string name="show_osm_bugs_descr">Afficher bogues OpenStreet sur carte</string>
   <string name="show_osm_bugs">Afficher les bogues OpenStreet</string>
   <string name="favourites_activity">Liste des favoris</string>
-  <string name="add_to_favourite">Ajouter aux Favoris</string>
+  <string name="shared_string_add_to_favorites">Ajouter aux Favoris</string>
   <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais</string>
   <string name="use_english_names">Utiliser les noms anglais</string>
   <string name="app_settings">Paramètres de l\'application</string>
@@ -690,7 +690,7 @@
   <string name="navigate_point_top_text">Entrez la latitude et la longitude (D - degrés, M - minutes, S - secondes)</string>
   <string name="navigate_point_latitude">Latitude</string>
   <string name="navigate_point_longitude">Longitude</string>
-  <string name="search_shown_on_map">Afficher sur la carte</string>
+  <string name="shared_string_show_on_map">Afficher sur la carte</string>
   <string name="navigate_point_cancel">Annuler</string>
   <string name="search_address_top_text">Choisir l\'adresse</string>
   <string name="search_address_region">Région</string>
@@ -1190,7 +1190,7 @@
     <string name="av_def_action_choose">Sélectionner sur demande</string>
     <string name="item_checked">coché</string>
     <string name="item_unchecked">non vérifié</string>
-    <string name="map_view">Carte</string>
+    <string name="shared_string_map">Carte</string>
     <string name="access_arrival_time">Heure d\'arrivée</string>
     <string name="map_widget_gps_info">Informations GPS</string>
     <string name="layer_hillshade">Ombrage du relief</string>
@@ -1662,9 +1662,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
     <string name="selected_track">Traces sélectionnées</string>
-    <string name="my_tracks">Toutes les\ntraces</string>
-    <string name="my_favorites">Mes favoris</string>
-    <string name="my_data_Button">Favoris</string>
+    <string name="shared_string_my_tracks">Toutes les\ntraces</string>
+    <string name="shared_string_my_favorites">Mes favoris</string>
+    <string name="shared_string_my_places">Favoris</string>
     <string name="my_data_activity">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
@@ -1834,7 +1834,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_widget_top">Barre d\'état</string>
 	<string name="map_widget_right">Panneau de droite</string>
 	<string name="map_widget_left">Panneau de gauche</string>
-    <string name="layers_category_show">Afficher</string>
+    <string name="shared_string_show">Afficher</string>
 	<string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">A proximité de</string>
     <string name="rendering_category_routes">Routes</string>
@@ -1858,7 +1858,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="home_button">Accueil</string>
     <string name="search_for">Rechercher</string>
 	<string name="show_map">AFFICHER LA CARTE</string>
-	<string name="show_all">AFFICHER TOUT</string>
+	<string name="shared_string_show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
 	<string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
 	<string name="error_avoid_specific_road">Aucun raccourci n\'a été trouvé</string>
@@ -1911,7 +1911,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
     <string name="tracks">Traces</string>
-    <string name="my_location">Ma position</string>
+    <string name="shared_string_my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">État du GPS</string>
     <string name="parking_place">Place de stationnement</string>
@@ -1937,7 +1937,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="roads_only">Routes uniquement</string>
     <string name="rendering_attr_pisteRoutes_name">Pistes</string>
 	<string name="watch">Surveiller</string>
-	<string name="audio">Audio</string>
+	<string name="shared_string_audio">Audio</string>
 	<string name="video">Vidéo</string>
 	<string name="photo">Photo</string>
 	<string name="share_note">Partager la note</string>
@@ -1960,7 +1960,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
 	<string name="days_behind">jours écoulés</string>
 	<string name="rename_failed">Échec du renommage.</string>
-	<string name="currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
+	<string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
 	<string name="back_to_map">Retour à la carte</string>
 	<string name="turn_off_all">Tout éteindre</string>
 	<string name="showed_on_map">Affiché sur la carte</string>

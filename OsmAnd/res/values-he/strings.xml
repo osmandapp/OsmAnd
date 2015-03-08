@@ -771,7 +771,7 @@
 	<string name="thanks_yandex_traffic">תודות ל־Yandex על דיווחי התנועה.</string>
 	<string name="layer_yandex_traffic">תנועה מ־Yandex</string>
 	<string name="layer_route">מסלול</string>
-	<string name="layer_favorites">מועדפים</string>
+	<string name="shared_string_favorites">מועדפים</string>
 	<string name="layer_osm_bugs">תקלות ב־OSM</string>
 	<string name="layer_transport">תחנות תחבורה</string>
 	
@@ -876,7 +876,7 @@
 	<string name="download_question">האם להוריד {0} - {1} ?</string>
 	<string name="download_question_exist">הנתונים הבלתי מקוונים עבור {0} כבר קיימים ({1}). האם לעדכן אותם ({2}) ?</string>
 	<string name="address">כתובת</string>
-	<string name="download_index_success">ההורדה הצליחה</string>
+	<string name="shared_string_download_successful">ההורדה הצליחה</string>
 	<string name="error_io_error">אירעה שגיאת קלט/פלט</string>
 	
 	<string name="downloading">בהורדה…</string>
@@ -947,7 +947,7 @@
 	<string name="show_osm_bugs_descr">הצגת OpenStreetBugs במפה</string>
 	<string name="show_osm_bugs">הצגת OpenStreetBugs</string>
 	<string name="favourites_activity">מועדפים</string>
-	<string name="add_to_favourite">הוספה למועדפים</string>
+	<string name="shared_string_add_to_favorites">הוספה למועדפים</string>
 	<string name="use_english_names_descr">נא לבחור בין שמות מקומיים לאנגליים</string>
 	<string name="use_english_names">שימוש בשמות באנגלית במפה</string>
 	<string name="app_settings">הגדרות היישום</string>
@@ -997,7 +997,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">הצגה במפה</string>
+	<string name="shared_string_show_on_map">הצגה במפה</string>
 	<string name="navigate_point_cancel">ביטול</string>
 	<string name="search_address_top_text">נא לבחור בכתובת</string>
 	<string name="search_address_region">אזור</string>
@@ -1193,7 +1193,7 @@
     <string name="av_def_action_choose">נא לבחור בקשה</string>
     <string name="item_checked">לאחר בדיקה</string>
     <string name="item_unchecked">ללא בדיקה</string>
-    <string name="map_view">מפה</string>
+    <string name="shared_string_map">מפה</string>
     <string name="access_arrival_time">זמן ההגעה</string>
     <string name="map_widget_gps_info">פרטי איכון</string>
     <string name="layer_hillshade">שכבת הצללת תבליט</string>

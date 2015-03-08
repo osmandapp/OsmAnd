@@ -102,7 +102,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		this.app = (OsmandApplication) getActivity().getApplication();
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
-		currentRecording = new GpxInfo(getMyApplication().getSavingTrackHelper().getCurrentGpx(), getString(R.string.currently_recording_track));
+		currentRecording = new GpxInfo(getMyApplication().getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
 		selectedGpxHelper = ((OsmandApplication) activity.getApplication()).getSelectedGpxHelper();
@@ -267,7 +267,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void createCurrentTrackView(View v, final OsmandApplication app) {
-		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		((TextView) v.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
 		v.findViewById(R.id.options).setVisibility(View.GONE);
@@ -329,7 +329,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
-				} else if (itemId == R.string.show_gpx_route) {
+				} else if (itemId == R.string.shared_string_show_on_map) {
 					openShowOnMapMode();
 				} else if (itemId == R.string.shared_string_delete) {
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,

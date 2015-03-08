@@ -451,7 +451,7 @@
   <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
   <string name="layer_yandex_traffic">Tráfico Yandex</string>
   <string name="layer_route">Ruta</string>
-  <string name="layer_favorites">Favoritos</string>
+  <string name="shared_string_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Fallos OSM</string>
   <string name="layer_transport">Paradas de transporte</string>
   <string name="layer_poi">PDI…</string>
@@ -561,7 +561,7 @@
   <string name="download_question">¿Descargar {0} - {1} ?</string>
   <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Desea actualizarlos ({2}) ?</string>
   <string name="address">Dirección</string>
-  <string name="download_index_success">Descarga correcta</string>
+  <string name="shared_string_download_successful">Descarga correcta</string>
   <string name="error_io_error">Ocurrió un error de entrada/salida</string>
   
   <string name="downloading">Descargando…</string>
@@ -633,7 +633,7 @@
   <string name="show_osm_bugs_descr">Mostrar OpenStreetBugs en el mapa</string>
   <string name="show_osm_bugs">Mostrar OpenStreetBugs</string>
   <string name="favourites_activity">Favoritos</string>
-  <string name="add_to_favourite">Añadir a Favoritos</string>
+  <string name="shared_string_add_to_favorites">Añadir a Favoritos</string>
   <string name="use_english_names_descr">Selecciona entre nombres nativos o en inglés</string>
   <string name="use_english_names">Usar nombres en inglés en los mapas</string>
   <string name="app_settings">Opciones de aplicación</string>
@@ -686,7 +686,7 @@
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-  <string name="search_shown_on_map">Mostrar en el mapa</string>
+  <string name="shared_string_show_on_map">Mostrar en el mapa</string>
   <string name="navigate_point_cancel">Cancelar</string>
   <string name="search_address_top_text">Elige dirección</string>
   <string name="search_address_region">Región</string>
@@ -1152,7 +1152,7 @@
     <string name="av_def_action_choose">Seleccionar a petición</string>
     <string name="item_checked">marcado</string>
     <string name="item_unchecked">desmarcado</string>
-    <string name="map_view">Mapa</string>
+    <string name="shared_string_map">Mapa</string>
     <string name="access_arrival_time">Hora de llegada</string>
     <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatonal. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nueva características y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
@@ -1658,8 +1658,8 @@
     <string name="osmo_user_left">El usuario %1$s ha abandonado el grupo %2$s</string>
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>
     <string name="osmo_show_group_notifications_descr">Mostrar mensajes emergentes cuando usuarios se unen o abandonan el grupo</string>
-    <string name="my_favorites">Mis Favoritos</string>
-    <string name="my_data_Button">Mis sitios</string>
+    <string name="shared_string_my_favorites">Mis Favoritos</string>
+    <string name="shared_string_my_places">Mis sitios</string>
     <string name="my_data_activity">Mis sitios</string>
     <string name="gpx_selection_number_of_points"> %1$s puntos</string>
     <string name="gpx_selection_point">Punto %1$s</string>
@@ -1673,7 +1673,7 @@
     <string name="gpx_available_current_track">Pista actual en grabación</string>
     <string name="gpx_file_is_empty">La traza GPX está vacía</string>
     <string name="selected_track">Pista seleccionada</string>
-    <string name="my_tracks">Todas las pistas</string>
+    <string name="shared_string_my_tracks">Todas las pistas</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
@@ -1829,7 +1829,7 @@
     <string name="map_widget_top">Barra de estado</string>
 	<string name="map_widget_right">Panel derecho</string>
 	<string name="map_widget_left">Panel izquierdo</string>
-    <string name="layers_category_show">Mostrar</string>
+    <string name="shared_string_show">Mostrar</string>
 	<string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">En las proximidades de</string>
     <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar carretera como intransitable por sesión * Más sencillo la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a  Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de que esté fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
@@ -1854,7 +1854,7 @@
     <string name="map_update">Hay actualizaciones disponibles para %1$s mapa(s)</string>
 	<string name="search_for">Buscar</string>
 	<string name="show_map">MOSTRAR MAPA</string>
-	<string name="show_all">MOSTRAR TODO</string>
+	<string name="shared_string_show_all">MOSTRAR TODO</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="use_opengl_render">Usar renderizado OpenGL</string>
     <string name="use_opengl_render_descr">Usar renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
@@ -1907,7 +1907,7 @@
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="points">Puntos</string>
     <string name="tracks">Trazas</string>
-    <string name="my_location">Mi ubicación</string>
+    <string name="shared_string_my_location">Mi ubicación</string>
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
@@ -1934,7 +1934,7 @@
 	<string name="notes">Notas</string>
 	<string name="online_map">Mapa en línea</string>
 	<string name="shared_string_export">Exportar</string>
-	<string name="audio">Audio</string>
+	<string name="shared_string_audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
 	<string name="plugin_nautical_descr">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.
@@ -1957,7 +1957,7 @@
 	<string name="turn_off_all">Apagar todo</string>
 	<string name="showed_on_map">Mostrado en el mapa</string>
 	<string name="rename_failed">Falló el renombrado.</string>
-	<string name="currently_recording_track">Actualmente registrando traza</string>
+	<string name="shared_string_currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
 	<string name="shared_string_selected">Seleccionada(s)</string>
 	<string name="track_segments">Segmentos de traza</string>

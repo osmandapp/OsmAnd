@@ -363,7 +363,7 @@
   <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
   <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
   <string name="layer_route">Trasa</string>
-  <string name="layer_favorites">Ulubione</string>
+  <string name="shared_string_favorites">Ulubione</string>
   <string name="layer_osm_bugs">Błędy OSM (online)</string>
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>
@@ -475,7 +475,7 @@
   <string name="download_question">Pobrać {0} - {1} ?</string>
   <string name="download_question_exist">Dane offline {0} już istnieją ({1}). Czy chcesz je uaktualnić ({2}) ?</string>
   <string name="address">Adres</string>
-  <string name="download_index_success">Pobieranie zakończone</string>
+  <string name="shared_string_download_successful">Pobieranie zakończone</string>
   <string name="error_io_error">Wystąpił błąd wejścia/wyjścia</string>
   
   <string name="downloading">Pobieranie…</string>
@@ -555,7 +555,7 @@
   <string name="show_osm_bugs_descr">Pokaż OpenStreetBugs na mapie</string>
   <string name="show_osm_bugs">Pokaż OpenStreetBugs</string>
   <string name="favourites_activity">Lista ulubionych punktów</string>
-  <string name="add_to_favourite">Dodaj do ulubionych</string>
+  <string name="shared_string_add_to_favorites">Dodaj do ulubionych</string>
   <string name="use_english_names_descr">Zaznacz, jeśli chcesz używać angielskich nazw zamiast natywnych</string>
   <string name="use_english_names">Używaj angielskich nazw na mapie</string>
   <string name="app_settings">Ustawienia programu</string>
@@ -608,7 +608,7 @@
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-  <string name="search_shown_on_map">Pokaż na mapie</string>
+  <string name="shared_string_show_on_map">Pokaż na mapie</string>
   <string name="navigate_point_cancel">Anuluj</string>
   <string name="search_address_top_text">Wybierz adres</string>
   <string name="search_address_region">Region</string>
@@ -1192,7 +1192,7 @@
     <string name="prefer_in_routing_descr">Preferuj autostrady</string>
     <string name="prefer_motorways">Preferuj autostrady</string>
 	<string name="prefer_in_routing_title">Preferuj…</string>
-	<string name="map_view">Mapa</string>
+	<string name="shared_string_map">Mapa</string>
     <string name="item_checked">zaznaczone</string>
     <string name="item_unchecked">niezaznaczone</string>
     <string name="av_def_action_choose">Wybierz na żądanie</string>
@@ -1761,9 +1761,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Pokazuj powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     <string name="selected_track">Wybrane trasy</string>
-    <string name="my_tracks">Wszystkie trasy</string>
-    <string name="my_favorites">Moje Ulubione</string>
-    <string name="my_data_Button">Moje Miejsca</string>
+    <string name="shared_string_my_tracks">Wszystkie trasy</string>
+    <string name="shared_string_my_favorites">Moje Ulubione</string>
+    <string name="shared_string_my_places">Moje Miejsca</string>
     <string name="my_data_activity">Moje Miejsca</string>
     <string name="gpx_info_subtracks">Podścieżki: %1$s </string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
@@ -1929,7 +1929,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_widget_top">Pasek statusu</string>
 	<string name="map_widget_right">Prawy panel</string>
 	<string name="map_widget_left">Lewy panel</string>
-    <string name="layers_category_show">Pokaż</string>
+    <string name="shared_string_show">Pokaż</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włącz ekran</string>
@@ -1953,7 +1953,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
 	<string name="search_for">Wyszukaj</string>
 	<string name="show_map">POKAŻ MAPĘ</string>
-	<string name="show_all">POKAŻ WSZYSTKIE</string>
+	<string name="shared_string_show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
 	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
@@ -1993,7 +1993,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Skonfiguruj ustawienia proxy</string>
     <string name="settings_privacy">Prywatność</string>
-    <string name="my_location">Moja lokalizacja</string>
+    <string name="shared_string_my_location">Moja lokalizacja</string>
     <string name="osm_editing_manage">Zarządzaj</string>
     <string name="shared_string_disabled">Włącz</string>
 	<string name="shared_string_enabled">Wyłącz</string>
