@@ -924,7 +924,7 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">顯示在地圖上</string>
+	<string name="search_shown_on_map">在地圖上顯示</string>
 	<string name="navigate_point_cancel">取消</string>
 	<string name="search_address_top_text">選擇地址</string>
 	<string name="search_address_region">地區</string>
@@ -1467,7 +1467,7 @@
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
     <string name="route_descr_select_on_map">在地圖上選取 …</string>
-    <string name="shared_string_favorite">我的最愛 …</string>
+    <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>
@@ -1972,4 +1972,28 @@
 	<string name="shared_string_apply">套用</string>
 	<string name="shared_string_control_start">開始</string>
 	<string name="shared_string_control_stop">停止</string>
+	<string name="shared_string_import">匯入</string>
+	<string name="shared_string_export">匯出</string>
+	<string name="shared_string_more">更多</string>
+	<string name="shared_string_do_not_show_again">不要再顯示</string>
+	<string name="shared_string_remember_my_choice">記住我的選擇</string>
+	<string name="shared_string_refresh">重整</string>
+	<string name="shared_string_download">下載</string>
+	<string name="shared_string_downloading">下載中</string>
+	<string name="shared_string_download_successful">下載成功</string>
+	<string name="shared_string_unexpected_error">發生意外錯誤</string>
+	<string name="shared_string_action_template">"動作 {0}： "</string>
+	<string name="shared_string_close">關閉</string>
+	<string name="shared_string_exit">離開</string>
+	<string name="shared_string_show">顯示</string>
+	<string name="shared_string_show_all">全部顯示</string>
+	<string name="shared_string_show_on_map">在地圖上顯示</string>
+	<string name="shared_string_more_actions">更多的動作</string>
+	<string name="shared_string_map">地圖</string>
+	<string name="shared_string_favorites">我的最愛</string>
+	<string name="shared_string_add_to_favorites">加到我的最愛</string>
+	<string name="shared_string_my_location">我的位置</string>
+	<string name="shared_string_my_places">我的地點</string>
+	<string name="shared_string_my_favorites">我的最愛</string>
+	<string name="shared_string_my_tracks">我的軌跡</string>
 	</resources>
