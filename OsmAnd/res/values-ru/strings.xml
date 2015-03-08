@@ -1929,4 +1929,10 @@
 	<string name="shared_string_refresh">Обновить</string>
 	<string name="shared_string_io_error">Произошла ошибка ввода/вывода</string>
 	<string name="shared_string_unexpected_error">Произошла непредвиденная ошибка</string>
+	<string name="shared_string_action_template">"Действие {0}: "</string>
+	<string name="shared_string_close">Закрыть</string>
+	<string name="shared_string_exit">Выход</string>
+	<string name="shared_string_show">Показать</string>
+	<string name="shared_string_show_all">Показать всё</string>
+	<string name="shared_string_show_on_map">Показать на карте</string>
 	</resources>
