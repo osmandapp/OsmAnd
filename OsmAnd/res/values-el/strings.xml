@@ -742,7 +742,7 @@
 	<string name="fav_file_to_load_not_found">Δεν βρέθηκε GPX αρχείο που περιέχει αγαπημένα στο {0}</string>
 	<string name="fav_saved_sucessfully">Τα αγαπημένα αποθηκεύτηκαν επιτυχώς στο {0}</string>
 	<string name="no_fav_to_save">Δεν υπάρχουν αγαπημένα σημεία προς αποθήκευση</string>
-	<string name="import_fav">Εισαγωγή</string>
+	<string name="shared_string_import">Εισαγωγή</string>
 	<string name="export_fav">Εξαγωγή</string>
 	<string name="error_occurred_loading_gpx">Σφάλμα κατά τη φόρτωση GPX</string>
 	<string name="send_report">Αποστολή αναφοράς</string>

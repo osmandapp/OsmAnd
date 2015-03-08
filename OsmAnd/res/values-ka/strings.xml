@@ -501,7 +501,7 @@
   <string name="fav_file_to_load_not_found">რჩეულების შემცველი GPX ფაილი ვერ მოიძებნა {0}</string>
   <string name="fav_saved_sucessfully">რჩეულები წარმატებით იქნა შენახული {0} -ში</string>
   <string name="no_fav_to_save">არ მოიძებნა შესანახავად მზა რჩეულები</string>
-  <string name="import_fav">იმპორტი</string>
+  <string name="shared_string_import">იმპორტი</string>
   <string name="export_fav">ექსპორტი</string>
   <string name="error_occurred_loading_gpx">შეცდომა GPX-ის ჩატვირთვისას</string>
   <string name="send_report">რეპორტის გაგზავნა</string>

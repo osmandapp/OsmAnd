@@ -508,7 +508,7 @@
   <string name="fav_file_to_load_not_found">Soubor GPX s oblíbenými místy se v {0} nenachází</string>
   <string name="fav_saved_sucessfully">Oblíbená místa úspěšně uložena do {0}</string>
   <string name="no_fav_to_save">Žádná oblíbená místa k uložení</string>
-  <string name="import_fav">Importovat</string>
+  <string name="shared_string_import">Importovat</string>
   <string name="export_fav">Exportovat</string>
   <string name="error_occurred_loading_gpx">Chyba při načítání GPX</string>
   <string name="send_report">Odeslat hlášení</string>

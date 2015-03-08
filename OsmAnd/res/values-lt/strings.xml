@@ -644,7 +644,7 @@
   <string name="fav_file_to_load_not_found">GPX failas su išsaugotomis vietomis nerastas {0}</string>
   <string name="fav_saved_sucessfully">Įsimintos vietos sėkmingais įrašytos į {0}</string>
   <string name="no_fav_to_save">Nėra jokių išsaugotų vietų</string>
-  <string name="import_fav">Importuoti</string>
+  <string name="shared_string_import">Importuoti</string>
   <string name="export_fav">Eksportuoti</string>
   <string name="error_occurred_loading_gpx">Įvyko klaida įkeliant GPX</string>
   <string name="send_report">Siųsti pranešimą</string>

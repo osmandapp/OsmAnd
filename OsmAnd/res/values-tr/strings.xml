@@ -1010,7 +1010,7 @@
 	<string name="rotate_map_none_opt">Döndürme (kuzey)</string>
 	<string name="rotate_map_to_bearing_descr">Harita ekran hizalamasını seçin</string>
 	<string name="show_route">Güzergah ayrıntıları</string>
-	<string name="import_fav">İçe Aktar</string>
+	<string name="shared_string_import">İçe Aktar</string>
 	<string name="export_fav">Dışa Aktar</string>
 	<string name="error_occurred_loading_gpx">GPX yüklenirken hata oluştu</string>
 	<string name="none_region_found">Bölge için SD kart üzerinde çevrimdışı veri bulunamadı. Genel ağdan (internetten) bölgeleri indirin.</string>

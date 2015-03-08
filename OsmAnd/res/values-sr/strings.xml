@@ -179,7 +179,7 @@
 	<string name="avoid_in_routing_descr">Избегавај наплатне рампе, не асфалтиране путеве, трајекте</string>
 	<string name="map_widget_show_ruler">Лењир</string>
 	<string name="map_widget_appearance">Остало:</string>
-	<string name="import_fav">Увези</string>
+	<string name="shared_string_import">Увези</string>
 	<string name="export_fav">Извези</string>
 	<string name="error_occurred_loading_gpx">Дошло је до грешке приликом учитавања GPX</string>
 	<string name="send_report">Пошаљи извештај</string>

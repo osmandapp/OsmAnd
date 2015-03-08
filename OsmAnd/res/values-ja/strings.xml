@@ -297,7 +297,7 @@ MB)をダウンロードしますか?</string>
      <string name="fav_file_to_load_not_found">{0}にはお気に入りを含むGPXファイルはありません</string>
      <string name="fav_saved_sucessfully">お気に入りは{0}に保存されました</string>
      <string name="no_fav_to_save">保存するお気に入りの地点がありません</string>
-     <string name="import_fav">インポート</string>
+     <string name="shared_string_import">インポート</string>
      <string name="export_fav">エクスポート</string>
      <string name="error_occurred_loading_gpx">GPXロード中にエラー発生</string>
      <string name="send_report">レポートを送信</string>

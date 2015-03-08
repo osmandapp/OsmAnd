@@ -786,7 +786,7 @@
 	<string name="fav_file_to_load_not_found">Fișierul GPX ce conține punctele favorite nu a fost găsit la {0}</string>
 	<string name="fav_saved_sucessfully">Punctele favorite au fost salvate la {0}</string>
 	<string name="no_fav_to_save">No există puncte de favorite de salvat</string>
-	<string name="import_fav">Importă</string>
+	<string name="shared_string_import">Importă</string>
 	<string name="export_fav">Exportă</string>
 	<string name="error_occurred_loading_gpx">Eroare la încărcarea fișierului GPX</string>
 	<string name="send_report">Trimite raport de eroare</string>

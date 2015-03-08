@@ -528,7 +528,6 @@
   <string name="fav_file_to_load_not_found">GPX-bestand met favorieten niet gevonden op {0}</string>
   <string name="fav_saved_sucessfully">Favorieten succesvol opgeslagen in {0}</string>
   <string name="no_fav_to_save">Geen favorieten om op te slaan</string>
-  <string name="import_fav">Importeer</string>
   <string name="export_fav">Exporteer</string>
   <string name="error_occurred_loading_gpx">Fout tijdens laden van GPX</string>
   <string name="send_report">Stuur rapport</string>

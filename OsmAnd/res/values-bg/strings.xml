@@ -1219,7 +1219,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="fav_file_to_load_not_found">GPX файлът съдържащ любимите ви места не е намерен в {0}</string>
 	<string name="fav_saved_sucessfully">Местата от Любими бяха успешно записани в {0}</string>
 	<string name="no_fav_to_save">Няма любими места за запис</string>
-	<string name="import_fav">Импортиране</string>
+	<string name="shared_string_import">Импортиране</string>
 	<string name="export_fav">Експортиране</string>
 	<string name="error_occurred_loading_gpx">Възникна грешка при зареждане на GPX</string>
 	<string name="send_report">Изпращане на доклад</string>

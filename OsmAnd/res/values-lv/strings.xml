@@ -503,7 +503,7 @@
   <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>
   <string name="fav_saved_sucessfully">Izlase veiksmīgi saglabāta uz {0}</string>
   <string name="no_fav_to_save">Nav izlases punktu ko saglabāt</string>
-  <string name="import_fav">Importēt</string>
+  <string name="shared_string_import">Importēt</string>
   <string name="export_fav">Eksportēt</string>
   <string name="error_occurred_loading_gpx">Kļūda ielādējot GPX</string>
   <string name="send_report">Sūtīt atskaiti</string>

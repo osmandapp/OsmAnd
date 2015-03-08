@@ -760,7 +760,7 @@
 	<string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל את המועדפים לא נמצא תחת {0}</string>
 	<string name="fav_saved_sucessfully">המועדפים נשמרו בהצלחה אל {0}</string>
 	<string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
-	<string name="import_fav">יבוא</string>
+	<string name="shared_string_import">יבוא</string>
 	<string name="export_fav">יצוא</string>
 	<string name="error_occurred_loading_gpx">אירעה שגיאה במהלך טעינת ה־GPX</string>
 	<string name="send_report">שליחת דיווח</string>

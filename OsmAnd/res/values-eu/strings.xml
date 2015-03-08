@@ -860,7 +860,7 @@
   <string name="fav_file_to_load_not_found">Gogokoenak dituen GPX fitxategia ez da {0}-n aurkitua izan</string>
   <string name="fav_saved_sucessfully">Gogokoenak arrakastaz gordeak {0} fitxategira</string>
   <string name="no_fav_to_save">Ez dago gogokoenik gordetzeko</string>
-  <string name="import_fav">Inportatu</string>
+  <string name="shared_string_import">Inportatu</string>
   <string name="export_fav">Esportatu</string>
   <string name="error_occurred_loading_gpx">GPX kargatzean errore bat gertatu da</string>
   <string name="send_report">Bidali informea</string>

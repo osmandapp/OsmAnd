@@ -900,7 +900,6 @@
 	<string name="fav_file_to_load_not_found">GPX-fil med favoritter er ikke fundet i {0}</string>
 	<string name="fav_saved_sucessfully">Favoritter gemt i {0}</string>
 	<string name="no_fav_to_save">Ingen favoritter at gemme</string>
-	<string name="import_fav">Importer</string>
 	<string name="export_fav">Eksporter</string>
 	<string name="error_occurred_loading_gpx">Der skete en fejl under indlæsning af GPX</string>
 	<string name="send_report">Send rapport</string>

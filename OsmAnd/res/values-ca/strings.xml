@@ -532,7 +532,7 @@
 <string name="map_index">Mapa</string>
 <string name="osb_bug_name">Error</string>
 <string name="rotate_map_to_bearing">Orientació del mapa</string>
-<string name="import_fav">Importa</string>
+<string name="shared_string_import">Importa</string>
 <string name="any_poi">Algun</string>
 <string name="layer_osm_bugs">Errors d\'OSM (en línia)</string>
 <string name="layer_map">Origen del mapa…</string>

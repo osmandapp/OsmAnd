@@ -686,7 +686,7 @@
 	<string name="fav_file_to_load_not_found">在 {0} 裡未找到含有我的最愛的 GPX 檔案</string>
 	<string name="fav_saved_sucessfully">我的最愛存到{0}</string>
 	<string name="no_fav_to_save">沒有我的最愛標點要儲存</string>
-	<string name="import_fav">匯入</string>
+	<string name="shared_string_import">匯入</string>
 	<string name="export_fav">匯出</string>
 	<string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
 	<string name="send_report">傳送報告</string>

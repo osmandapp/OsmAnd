@@ -244,7 +244,7 @@
 	<string name="show_route">Reitin tiedot</string>
 	<string name="fav_imported_sucessfully">Suosikit tuotu onnistuneesti</string>
 	<string name="fav_saved_sucessfully">Suosikit tallennettu onnistuneesti sijaintiin {0}</string>
-	<string name="import_fav">Tuo</string>
+	<string name="shared_string_import">Tuo</string>
 	<string name="export_fav">Vie</string>
 	<string name="error_occurred_loading_gpx">Tapahtui virhe ladattaessa GPX tietoja</string>
 	<string name="send_report">Lähetä raportti</string>

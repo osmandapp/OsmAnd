@@ -719,7 +719,7 @@
 	<string name="fav_file_to_load_not_found">GPX-fil med favoriter finns inte på {0}</string>
 	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem till {0}</string>
 	<string name="no_fav_to_save">Inga favoritpunkter att spara</string>
-	<string name="import_fav">Importera</string>
+	<string name="shared_string_import">Importera</string>
 	<string name="export_fav">Exportera</string>
 	<string name="error_occurred_loading_gpx">Ett fel uppstod vid inläsning av GPX</string>
 	<string name="send_report">Skicka rapport</string>

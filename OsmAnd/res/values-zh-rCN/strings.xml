@@ -297,7 +297,7 @@
 	<string name="error_reading_gpx">GPX数据读取错误</string>
 	<string name="osb_bug_name">问题</string>
 	<string name="error_occurred_loading_gpx">时发生错误加载GPX</string>
-	<string name="import_fav">导入</string>
+	<string name="shared_string_import">导入</string>
 	<string name="export_fav">导出</string>
 	<string name="send_report">发送报告</string>
 	<string name="any_poi">任何</string>

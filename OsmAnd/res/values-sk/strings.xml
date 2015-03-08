@@ -624,7 +624,6 @@
   <string name="fav_file_to_load_not_found">GPX súbor obsahujúci obľúbené miesta sa nenachádza v {0}</string>
   <string name="fav_saved_sucessfully">Obľúbené miesta boli úspešne uložené do {0}</string>
   <string name="no_fav_to_save">Žiadne obľúbené miesta na uloženie</string>
-  <string name="import_fav">Importovať</string>
   <string name="export_fav">Exportovať</string>
   <string name="error_occurred_loading_gpx">Chyba pri načítavaní GPX</string>
   <string name="send_report">Odoslať hlásenie</string>

@@ -440,7 +440,7 @@
   <string name="fav_file_to_load_not_found">El archivo GPX de favoritos no se encontró en {0}</string>
   <string name="fav_saved_sucessfully">Los puntos favoritos se guardaron correctamente en {0}</string>
   <string name="no_fav_to_save">No hay puntos favoritos que guardar</string>
-  <string name="import_fav">Importar</string>
+  <string name="shared_string_import">Importar</string>
   <string name="export_fav">Exportar</string>
   <string name="error_occurred_loading_gpx">Ocurrió un error al cargar el GPX</string>
   <string name="send_report">Enviar informe</string>

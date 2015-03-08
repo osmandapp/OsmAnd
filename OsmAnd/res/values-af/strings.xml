@@ -569,7 +569,7 @@
   <string name="fav_file_to_load_not_found">GPX lêer wat gunstelinge bevat is nie gevind by {0} nie</string>
   <string name="fav_saved_sucessfully">Gunstelinge suksesvol geberg na {0}</string>
   <string name="no_fav_to_save">Geen gunsteling punte om te berg nie</string>
-  <string name="import_fav">Inbring</string>
+  <string name="shared_string_import">Inbring</string>
   <string name="export_fav">uitstuur</string>
   <string name="error_occurred_loading_gpx">Fout het voorgekom tydens die laai van GPX</string>
   <string name="send_report">Stuur verslag</string>

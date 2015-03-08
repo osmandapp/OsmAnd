@@ -568,7 +568,7 @@
   <string name="fav_file_to_load_not_found">GPX файл, що містить точки не знайдено в {0}</string>
   <string name="fav_saved_sucessfully">Закладки збережено в {0}</string>
   <string name="no_fav_to_save">Нема точок для збереження</string>
-  <string name="import_fav">Імпортувати</string>
+  <string name="shared_string_import">Імпортувати</string>
   <string name="export_fav">Експортувати</string>
   <string name="error_occurred_loading_gpx">Помилка при завантаженні GPX</string>
   <string name="send_report">Відпавити звіт</string>

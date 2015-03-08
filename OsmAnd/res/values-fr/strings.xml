@@ -448,7 +448,7 @@
   <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
   <string name="fav_saved_sucessfully">Enregistrement des favoris réussi vers {0}</string>
   <string name="no_fav_to_save">Aucun point favori à enregistrer</string>
-  <string name="import_fav">Importer</string>
+  <string name="shared_string_import">Importer</string>
   <string name="export_fav">Exporter</string>
   <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
   <string name="send_report">Envoyer rapport</string>

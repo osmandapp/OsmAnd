@@ -463,7 +463,7 @@
 	<string name="layer_route">Ruta</string>
 	<string name="layer_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">OSM bugovi</string>
-	<string name="import_fav">Uvezi</string>
+	<string name="shared_string_import">Uvezi</string>
 	<string name="export_fav">Izvezi</string>
 	<string name="error_occurred_loading_gpx">Došlo je do pogreške prilikom učitavanja GPX datoteke</string>
 	<string name="send_report">Pošalji izvještaj</string>

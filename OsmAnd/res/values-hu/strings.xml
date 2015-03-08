@@ -503,7 +503,7 @@
   <string name="fav_file_to_load_not_found">Nem található kedvenceket tartalmazó GPX fájl az alábbi helyen: {0}</string>
   <string name="fav_saved_sucessfully">Kedvencek mentése sikeres: {0}</string>
   <string name="no_fav_to_save">Nincs mentendő kedvenc pont</string>
-  <string name="import_fav">Betölt</string>
+  <string name="shared_string_import">Betölt</string>
   <string name="export_fav">Ment</string>
   <string name="error_occurred_loading_gpx">Hiba történt a GPX fájl betöltésekor</string>
   <string name="send_report">Jelentés küldése</string>

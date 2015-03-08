@@ -272,7 +272,7 @@
 	<string name="point_on_map">Mesto:\n šir. %1$.5f\n dol. %2$.5f</string>
 	<string name="poi_context_menu_modify">Popravi POI</string>
 	<string name="poi_context_menu_delete">Izbriši POI</string>
-	<string name="import_fav">Uvozi</string>
+	<string name="shared_string_import">Uvozi</string>
 	<string name="export_fav">Izvozi</string>
 	<string name="show_current_gpx_title">Prikaži trenutno sled</string>
 	<string name="free_version_message">Brezplačna različica programa OsmAnd je omejena na %1$s prenosov in podpira offline wikipedia člankov.</string>
