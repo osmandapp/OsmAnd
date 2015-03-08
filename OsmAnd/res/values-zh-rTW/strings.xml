@@ -898,7 +898,7 @@
 	<string name="show_gps_coordinates_text">在地圖上顯示 GPS 狀態</string>
 	<string name="use_internet_to_download_tile">使用網路下載缺失的地圖圖磚</string>
 	<string name="app_description">導航應用程式</string>
-	<string name="exit_Button">離開</string>
+	<string name="shared_string_exit">離開</string>
 	<string name="map_Button">地圖</string>
 	<string name="settings_Button">設定</string>
 	<string name="favorites_Button">我的地點</string>

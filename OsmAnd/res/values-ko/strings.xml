@@ -754,9 +754,7 @@
     <string name="choose_street">거리를 선택하세요</string>
     <string name="choose_city">도시를 선택하세요</string>
     <string name="ChooseCountry">국가를 선택하세요</string>
-    
-    
-    
+
     <string name="show_view_angle">시야각 표시</string>
     <string name="map_view_3d_descr">맵의 3D 뷰 활성화</string>
     <string name="map_view_3d">맵 3D 뷰</string>
@@ -774,7 +772,6 @@
     <string name="use_internet_to_download_tile">누락된 맵 타일을 다운로드하기 위해 인터넷을 사용합니다</string>
     <string name="app_description">운행 앱</string>
 
-<string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
 <string name="settings_Button">설정</string>
 <string name="favorites_Button">저장소</string>

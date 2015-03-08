@@ -657,7 +657,6 @@
   <string name="show_gps_coordinates_text">Visualizza coordinate GPS sulla mappa</string>
   <string name="use_internet_to_download_tile">Utilizza internet per scaricare i tasselli della mappa mancanti</string>
   <string name="app_description">Applicazione di navigazione</string>
-  <string name="exit_Button">Esci</string>
   <string name="map_Button">Mappa</string>
   <string name="settings_Button">Impostazioni</string>
   <string name="favorites_Button">I miei luoghi</string>

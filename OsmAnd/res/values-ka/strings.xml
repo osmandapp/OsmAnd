@@ -719,7 +719,7 @@
   <string name="show_gps_coordinates_text">GPS კოორდინატების რუკაზე ჩვენება</string>
   <string name="use_internet_to_download_tile">ინტერნეტის გამოყენება ნაკლული რუკის წარწერების ჩამოსატვირთად</string>
   <string name="app_description">ნავიგაციის აპლიკაცია</string>
-  <string name="exit_Button">გასვლა</string>
+  <string name="shared_string_exit">გასვლა</string>
   <string name="map_Button">რუკა</string>
   <string name="settings_Button">პარამეტრები</string>
   <string name="favorites_Button">რჩეულები</string>

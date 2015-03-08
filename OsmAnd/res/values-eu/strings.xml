@@ -1070,7 +1070,7 @@
   <string name="show_gps_coordinates_text">Erakutsi GPS kordenadak mapa</string>
   <string name="use_internet_to_download_tile">Erabili internet falta diren tesela mapak deskargatzeko</string>
   <string name="app_description">Nabigazio aplikazioa</string>
-  <string name="exit_Button">Atera</string>
+  <string name="shared_string_exit">Atera</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Ezarpenak</string>
   <string name="favorites_Button">Nire lekuak</string>

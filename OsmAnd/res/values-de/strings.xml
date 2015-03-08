@@ -1069,7 +1069,7 @@
 	<string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
 	<string name="use_internet_to_download_tile">Fehlende Kartenteile aus dem Internet nachladen</string>
 	<string name="app_description">Navigationsanwendung OsmAnd</string>
-	<string name="exit_Button">Beenden</string>
+	<string name="shared_string_exit">Beenden</string>
 	<string name="map_Button">Karte</string>
 	<string name="settings_Button">Einstellungen</string>
 	<string name="favorites_Button">Meine Orte</string>

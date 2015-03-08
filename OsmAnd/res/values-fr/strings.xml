@@ -667,7 +667,7 @@
   <string name="show_gps_coordinates_text">Afficher les coordonnées GPS sur la carte</string>
   <string name="use_internet_to_download_tile">Utiliser internet pour télécharger les tuiles de carte manquantes</string>
   <string name="app_description">Application de navigation</string>
-  <string name="exit_Button">Quitter</string>
+  <string name="shared_string_exit">Quitter</string>
   <string name="map_Button">Carte</string>
   <string name="settings_Button">Paramètres</string>
   <string name="favorites_Button">Favoris</string>

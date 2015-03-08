@@ -332,7 +332,7 @@
 	<string name="search_activity">Traži</string>
 	<string name="map_Button">Karta</string>
 	<string name="show_gps_coordinates_text">Prikaži GPS koordinate na karti</string>
-	<string name="exit_Button">Izlaz</string>
+	<string name="shared_string_exit">Izlaz</string>
 	<string name="settings_activity">Postavke</string>
 	<string name="use_internet">Koristi Internet</string>
 	<string name="show_location">Prikaži lokaciju</string>

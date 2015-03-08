@@ -855,7 +855,6 @@
   <string name="show_gps_coordinates_text">Zobraziť GPS súradnice na mape</string>
   <string name="use_internet_to_download_tile">Použiť internet na stiahnutie chýbajúcich mapových dlaždíc</string>
   <string name="app_description">Navigačná aplikácia</string>
-  <string name="exit_Button">Skončiť</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavenia</string>
   <string name="favorites_Button">Moje miesta</string>

@@ -787,7 +787,7 @@
   <string name="show_gps_coordinates_text">Wys die GPS koordinate op die kaart</string>
   <string name="use_internet_to_download_tile">Gebruik die internet om ontbrekende teëls af te laai</string>
   <string name="app_description">Navigasie toepassing</string>
-  <string name="exit_Button">Verlaat</string>
+  <string name="shared_string_exit">Verlaat</string>
   <string name="map_Button">Kaart</string>
   <string name="settings_Button">Stellings</string>
   <string name="favorites_Button">Gunstelinge</string>

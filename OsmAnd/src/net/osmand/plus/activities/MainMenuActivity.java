@@ -239,7 +239,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.shared_string_settings).setIcon(R.drawable.ic_ac_settings);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close);
+		menuItem = menu.add(0, EXIT_ID, 0, R.string.shared_string_exit).setIcon(R.drawable.ic_ac_close);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}

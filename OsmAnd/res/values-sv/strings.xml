@@ -1072,7 +1072,7 @@
 	<string name="show_gps_coordinates_text">Visa GPS-koordinater på kartan</string>
 	<string name="use_internet_to_download_tile">Använd Internet för att hämta kartrutor som saknas</string>
 	<string name="app_description">Navigationsapp</string>
-	<string name="exit_Button">Avsluta</string>
+	<string name="shared_string_exit">Avsluta</string>
 	<string name="map_Button">Karta</string>
 	<string name="settings_Button">Inställningar</string>
 	<string name="favorites_Button">Mina platser</string>

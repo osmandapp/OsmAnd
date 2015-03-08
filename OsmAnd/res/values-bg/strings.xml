@@ -1430,7 +1430,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="show_gps_coordinates_text">Покажи GPS координатите на картата</string>
 	<string name="use_internet_to_download_tile">Използвай интернет за сваляне на липсващите части от картата</string>
 	<string name="app_description">Приложение за навигация</string>
-	<string name="exit_Button">Изход</string>
+	<string name="shared_string_exit">Изход</string>
 	<string name="map_Button">Карта</string>
 	<string name="settings_Button">Настройки</string>
 	<string name="favorites_Button">Моите места</string>

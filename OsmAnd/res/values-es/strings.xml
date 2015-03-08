@@ -660,7 +660,7 @@
   <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
   <string name="use_internet_to_download_tile">Usar Internet para descargar las teselas que falten</string>
   <string name="app_description">Aplicación de navegación</string>
-  <string name="exit_Button">Salir</string>
+  <string name="shared_string_exit">Salir</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Opciones</string>
   <string name="favorites_Button">Mis sitios</string>

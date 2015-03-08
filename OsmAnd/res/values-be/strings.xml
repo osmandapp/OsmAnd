@@ -1337,7 +1337,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="show_gps_coordinates_text">Паказаць GPS каардынаты на мапе</string>
 	<string name="use_internet_to_download_tile">Выкарыстоўваць Інтэрнэт, каб сьцягваць фрагмэнты мапы, што адсутнічаюць</string>
 	<string name="app_description">Навігацыйная праграма</string>
-	<string name="exit_Button">Выхад</string>
 	<string name="map_Button">Мапа</string>
 	<string name="settings_Button">Налады</string>
 	<string name="favorites_Button">Мае мясьціны</string>

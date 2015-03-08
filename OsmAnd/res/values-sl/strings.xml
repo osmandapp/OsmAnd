@@ -111,7 +111,7 @@
 	<string name="use_compass_navigation_descr">Uporabi kompas, ko ni mogoče določiti smeri</string>
 	<string name="use_compass_navigation">Uporabi kompas</string>
 	<string name="avoid_motorway">Izogibanje avtocest</string>
-	<string name="exit_Button">Izhod</string>
+	<string name="shared_string_exit">Izhod</string>
 	<string name="settings_activity">Nastavitve</string>
 	<string name="map_preferences">Zemljevid</string>
 	<string name="show_gps_coordinates_text">Prikaži GPS koordinate na karti</string>

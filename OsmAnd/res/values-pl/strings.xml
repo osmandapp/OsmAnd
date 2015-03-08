@@ -582,7 +582,7 @@
   <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
   <string name="use_internet_to_download_tile">Użyj połączenia internetowego do pobrania brakujących kawałków map</string>
   <string name="app_description">Program do nawigacji satelitarnej</string>
-  <string name="exit_Button">Wyjście</string>
+  <string name="shared_string_exit">Wyjście</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Ustawienia</string>
   <string name="favorites_Button">Moje Miejsca</string>

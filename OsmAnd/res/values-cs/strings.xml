@@ -728,7 +728,7 @@
   <string name="show_gps_coordinates_text">Zobrazit GPS souřadnice na mapě</string>
   <string name="use_internet_to_download_tile">Stahovat chybějící části mapy z internetu</string>
   <string name="app_description">Navigační aplikace</string>
-  <string name="exit_Button">Konec</string>
+  <string name="shared_string_exit">Konec</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavení</string>
   <string name="favorites_Button">Moje místa</string>

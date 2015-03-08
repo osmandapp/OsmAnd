@@ -551,7 +551,7 @@ POIの更新は利用できません</string>
  
  <string name="app_description">ナビゲーションアプリケーション</string>
 
-<string name="exit_Button">戻る</string>
+<string name="shared_string_exit">戻る</string>
 <string name="map_Button">マップ</string>
 <string name="settings_Button">設定</string>
 <string name="favorites_Button">お気に入り</string>

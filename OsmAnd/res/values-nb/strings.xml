@@ -559,7 +559,7 @@
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
 	<string name="use_internet_to_download_tile">Last ned manglende kartdeler fra internett</string>
 	<string name="app_description">Navigeringsprogram</string>
-	<string name="exit_Button">Avslutt</string>
+	<string name="shared_string_exit">Avslutt</string>
 	<string name="map_Button">Kart</string>
 	<string name="settings_Button">Innstillinger</string>
 	<string name="favorites_Button">Mine steder</string>

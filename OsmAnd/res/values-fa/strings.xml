@@ -293,7 +293,7 @@
 	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نمایش بده</string>
 	<string name="use_internet_to_download_tile">برای دانلود مربعهای گم شده نقشه از اینترنت استفاده کن</string>
 	<string name="app_description">برنامه مسیریابی</string>
-	<string name="exit_Button">خروج</string>
+	<string name="shared_string_exit">خروج</string>
 	<string name="map_Button">نقشه</string>
 	<string name="settings_Button">تنظیمات</string>
 	<string name="favorites_Button">مکانهای من</string>

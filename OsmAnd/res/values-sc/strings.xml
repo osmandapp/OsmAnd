@@ -1566,7 +1566,7 @@
 	<string name="show_gps_coordinates_text">Ammustra coordinatas GPS in sa mapa</string>
 	<string name="use_internet_to_download_tile">Imprea ìnternet pro iscarrigare tasseddos fartantes de sa mapa</string>
 	<string name="app_description">Aplicu de nàvigu</string>
-	<string name="exit_Button">Essida</string>
+	<string name="shared_string_exit">Essida</string>
 	<string name="map_Button">Mapa</string>
 	<string name="settings_Button">Impostaduras</string>
 	<string name="favorites_Button">Logos meos</string>

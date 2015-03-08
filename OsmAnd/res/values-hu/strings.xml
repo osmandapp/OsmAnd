@@ -723,7 +723,7 @@
   <string name="show_gps_coordinates_text">GPS koordináták megjelenítése a térképen</string>
   <string name="use_internet_to_download_tile">Internet használata a hiányzó térképszeletek letöltésére</string>
   <string name="app_description">Navigációs alkalmazás</string>
-  <string name="exit_Button">Kilép</string>
+  <string name="shared_string_exit">Kilép</string>
   <string name="map_Button">Térkép</string>
   <string name="settings_Button">Beállítások</string>
   <string name="favorites_Button">Saját helyek</string>

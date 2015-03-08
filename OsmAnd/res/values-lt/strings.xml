@@ -862,7 +862,7 @@
   <string name="show_gps_coordinates_text">Rodyti GPS koordinates žemėlapyje</string>
   <string name="use_internet_to_download_tile">Parsisiųskite trūkstamus žemėlapio lakštus iš interneto</string>
   <string name="app_description">Navigacijos programa</string>
-  <string name="exit_Button">Išeiti</string>
+  <string name="shared_string_exit">Išeiti</string>
   <string name="map_Button">Žemėlapis</string>
   <string name="settings_Button">Nustatymai</string>
   <string name="favorites_Button">Mano vietos</string>

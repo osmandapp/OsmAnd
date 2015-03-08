@@ -566,7 +566,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     
     <string name="app_description">Ứng dụng dẫn đường cá nhân</string>
 
-<string name="exit_Button">Thoát</string>
+<string name="shared_string_exit">Thoát</string>
 <string name="map_Button">Bản đồ</string>
 <string name="settings_Button">Thiết lập</string>
 <string name="favorites_Button">Ưa thích</string>

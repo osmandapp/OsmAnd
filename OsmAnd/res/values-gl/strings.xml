@@ -1590,7 +1590,7 @@
 	<string name="show_gps_coordinates_text">Mostrar as coordenadas de GPS no mapa</string>
 	<string name="use_internet_to_download_tile">Empregar a Internet para descargar as teselas do mapa que falten</string>
 	<string name="app_description">Aplicativo de navegación</string>
-	<string name="exit_Button">Saír</string>
+	<string name="shared_string_exit">Saír</string>
 	<string name="map_Button">Mapa</string>
 	<string name="settings_Button">Configuración</string>
 	<string name="favorites_Button">Os meus lugares</string>

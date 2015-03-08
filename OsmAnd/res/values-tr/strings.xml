@@ -476,7 +476,7 @@
 	<string name="show_location">Konumu göster</string>
 	<string name="map_preferences">Harita</string>
 	<string name="settings_activity">Ayarlar</string>
-	<string name="exit_Button">Çıkış</string>
+	<string name="shared_string_exit">Çıkış</string>
 	<string name="map_Button">Harita</string>
 	<string name="settings_Button">Ayarlar</string>
 	<string name="favorites_Button">Favoriler</string>

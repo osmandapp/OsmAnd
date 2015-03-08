@@ -954,7 +954,7 @@
 	<string name="show_gps_coordinates_text">Εμφάνιση συντεταγμένων GPS στο χάρτη</string>
 	<string name="use_internet_to_download_tile">Χρήση Διαδικτύου για λήψη πλακιδίων χάρτη που λείπουν</string>
 	<string name="app_description">Εφαρμογή πλοήγησης</string>
-	<string name="exit_Button">Έξοδος</string>
+	<string name="shared_string_exit">Έξοδος</string>
 	<string name="map_Button">Χάρτης</string>
 	<string name="settings_Button">Ρυθμίσεις</string>
 	<string name="favorites_Button">Τα Μέρη μου</string>

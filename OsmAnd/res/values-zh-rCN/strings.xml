@@ -363,7 +363,7 @@
 	<string name="map_view_3d">查看3D地图</string>
 	<string name="use_internet">使用互联网</string>
 	<string name="show_gps_coordinates_text">在地图上显示GPS坐标</string>
-	<string name="exit_Button">出口</string>
+	<string name="shared_string_exit">出口</string>
 	<string name="map_Button">地图</string>
 	<string name="settings_Button">设置</string>
 	<string name="favorites_Button">我的最爱</string>

@@ -786,7 +786,7 @@
   <string name="show_gps_coordinates_text">Показати GPS координати на мапі</string>
   <string name="use_internet_to_download_tile">Використовувати інтернет для завантаження відсутніх частин мапи</string>
   <string name="app_description">Навікаційна програма</string>
-  <string name="exit_Button">Вихід</string>
+  <string name="shared_string_exit">Вихід</string>
   <string name="map_Button">Мапа</string>
   <string name="settings_Button">Налаштування</string>
   <string name="favorites_Button">Мої місця</string>

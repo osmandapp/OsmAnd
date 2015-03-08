@@ -749,7 +749,6 @@
   <string name="show_gps_coordinates_text">Toon GPS-coördinaten op kaart</string>
   <string name="use_internet_to_download_tile">Ontbrekende kaartsegmenten van internet downloaden</string>
   <string name="app_description">Navigatieprogramma</string>
-  <string name="exit_Button">Afsluiten</string>
   <string name="map_Button">Kaart</string>
   <string name="settings_Button">Instellingen</string>
   <string name="favorites_Button">Mijn plaatsen</string>
