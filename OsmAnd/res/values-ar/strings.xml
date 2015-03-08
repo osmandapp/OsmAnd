@@ -1120,7 +1120,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="update_poi_file_not_found">ملف المحلية للحفاظ على التغييرات POI لم يتم العثور على وتعذر إنشاء.</string>
 	<string name="button_upgrade_osmandplus">ترقية الى OsmAnd+</string>
 	<string name="map_version_changed_info">يحتوي الخادوم على ملفات خرائط غير متوافقة مع الإصدار الحالي من التطبيق. لتحميلها واستخدامها، نرجو ترقية التطبيق إلى أحدث إصدار.</string>
-	<string name="local_index_mi_rename">تغيير الإسم</string>
+	<string name="shared_string_rename">تغيير الإسم</string>
 	<string name="show_gpx_route">اظهار على الخريطة</string>
 	<string name="poi_filter_nominatim">تشعبات على الانترنت</string>
 	<string name="search_position_current_location_search">يبحث عن الموضع…</string>

@@ -35,7 +35,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="button_upgrade_osmandplus">Nâng cấp OsmAnd+</string>
 	<string name="map_version_changed_info">Máy chủ lưu trữ tập tin bản đồ không tương thích với phiên bản hiện tại. Để tải về và dùng được các tập tin này, vui lòng nâng cấp ứng dụng lên phiên bản mới hơn.</string>
 	
-	<string name="local_index_mi_rename">Đổi tên</string>
+	<string name="shared_string_rename">Đổi tên</string>
 	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí…</string>

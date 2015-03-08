@@ -130,7 +130,7 @@
 	<string name="update_poi_file_not_found">Месна датотека за одржавање промене ПОИ-а није пронађена и не може да се направи .</string>
 	<string name="button_upgrade_osmandplus">Надоградите Османд+</string>
 	<string name="map_version_changed_info">Сервер садржи мапе датотеке које нису у складу са тренутним издањем апликације. Да бисте их преузели и користили, молимо Вас да, надоградите апликацију на новије издање.</string>
-	<string name="local_index_mi_rename">Преименовање</string>
+	<string name="shared_string_rename">Преименовање</string>
 	<string name="show_gpx_route">Прикажи на мапи</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_address">Адреса …</string>

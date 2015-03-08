@@ -424,7 +424,7 @@
 <string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
 <string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
 <string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till en nyare version.</string>
-<string name="local_index_mi_rename">Byt namn</string>
+<string name="shared_string_rename">Byt namn</string>
 <string name="show_gpx_route">Visa på karta</string>
 <string name="search_position_current_location_search">Söker plats …</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>

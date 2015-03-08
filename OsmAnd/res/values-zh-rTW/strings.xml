@@ -405,7 +405,7 @@
 	<string name="update_poi_file_not_found">在裝置端檔案，找不到要維護的興趣點資料，且無法建立該檔。</string>
 	<string name="button_upgrade_osmandplus">升級為 OsmAnd+</string>
 	<string name="map_version_changed_info">伺服器現有的地圖與您目前的程式版本不相容，請先更新成最新的版本再下載使用它們。</string>
-	<string name="local_index_mi_rename">更名</string>
+	<string name="shared_string_rename">更名</string>
 	<string name="show_gpx_route">在地圖上顯示</string>
 	<string name="poi_filter_nominatim">線上 Nominatim</string>
 	<string name="search_position_current_location_search">位置查尋中…</string>

@@ -219,7 +219,7 @@
 	<string name="city_type_city">城市</string>
 	<string name="gpx_navigation">GPX的航班</string>
 	<string name="button_upgrade_osmandplus">升级OsmAnd+</string>
-	<string name="local_index_mi_rename">重命名</string>
+	<string name="shared_string_rename">重命名</string>
 	<string name="search_position_fixed">修正</string>
 	<string name="shared_string_save_as_gpx">GPX轨迹储存路线</string>
 	<string name="local_index_upload_gpx_description">上传GPX文件OSM社区。它们将被用于改善地图。</string>

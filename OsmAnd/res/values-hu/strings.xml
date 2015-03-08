@@ -202,7 +202,7 @@
   <string name="update_poi_file_not_found">A POI változások tárolásához nem található és nem hozható létre helyi fájl.</string>
   <string name="button_upgrade_osmandplus">OsmAnd+ frissítése</string>
   <string name="map_version_changed_info">A szerveren található térképek nem kompatibilisek az OsmAnd ezen verziójával. Letöltésükhöz és használatukhoz frissíteni kell az alkalmazást.</string>
-  <string name="local_index_mi_rename">Átnevezés</string>
+  <string name="shared_string_rename">Átnevezés</string>
   <string name="show_gpx_route">Mutasd a térképen</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
   <string name="search_position_current_location_search">Pozíció keresése…</string>

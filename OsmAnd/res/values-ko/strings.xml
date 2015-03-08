@@ -221,7 +221,6 @@
 	<string name="button_upgrade_osmandplus">OsmAnd+ 로 업그레이드</string>
 	<string name="map_version_changed_info">서버가 현재 앱 버전과 호환되지 않는 지도 파일을 가지고 있습니다. 그것들을 다운로드하고 사용하기 위해, 앱을 새로운 버전으로 업그레이드 하세요.</string>
 	
-	<string name="local_index_mi_rename">이름 바꾸기</string>
 	<string name="show_gpx_route">지도에 표시</string>
 	<string name="poi_filter_nominatim">온라인 지명</string>
 	<string name="search_position_current_location_search">위치 검색중…</string>

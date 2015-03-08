@@ -602,7 +602,7 @@
   <string name="update_poi_file_not_found">POI aldaketak mantentzeko fitxategi lokala ez da aurkitu eta ezin izan da sortu.</string>
   <string name="button_upgrade_osmandplus">OsmAnd+ berritu</string>
   <string name="map_version_changed_info">Zerbitzariak zure aplikazioaren uneko bertsioarekin bateragarriak ez diren mapa fitxategiak ditu. Hauek deskargatu eta erabiltzeko, aplikazioa bertsio berriago batera eguneratu mesedez.</string>
-  <string name="local_index_mi_rename">Izenez aldatu</string>
+  <string name="shared_string_rename">Izenez aldatu</string>
   <string name="show_gpx_route">Mapan erakutsi</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
   <string name="search_position_current_location_search">Kokapena bilatzen…</string>

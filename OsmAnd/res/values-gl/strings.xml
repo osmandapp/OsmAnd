@@ -1119,7 +1119,7 @@
 	<string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para manter os cambios nos PDI e tampouco foi posíbel crealo.</string>
 	<string name="button_upgrade_osmandplus">Actualizar OsmAnd+</string>
 	<string name="map_version_changed_info">O servidor contén ficheiros de mapas que non son compatíbeis coa versión actual do aplicativo. Para descargalos e empregalos actualice o aplicativo a unha versión máis recente.</string>
-	<string name="local_index_mi_rename">Mudar o nome</string>
+	<string name="shared_string_rename">Mudar o nome</string>
 	<string name="show_gpx_route">Mostrar no mapa</string>
 	<string name="poi_filter_nominatim">Nominatim con conexión</string>
 	<string name="search_position_current_location_search">A buscar a posición…</string>

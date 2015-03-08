@@ -1214,7 +1214,7 @@
 	<string name="update_poi_file_not_found">Liakaĺny fajl dlia padtrymkі źmienaŭ u POI nia znojdzieny і nia moža być stvorany.</string>
 	<string name="button_upgrade_osmandplus">Abnavіć da OsmAnd+</string>
 	<string name="map_version_changed_info">Servier utrymlіvaje fajly mapaŭ, jakіja nie sumiaščaĺnyja z vašaj versіjaj prahramy. Kab zladavać і karystacca іmі treba abnavіć prahramu da novaj versіі.</string>
-	<string name="local_index_mi_rename">Pieranazvać</string>
+	<string name="shared_string_rename">Pieranazvać</string>
 	<string name="show_gpx_route">Pakazać na mapie</string>
 	<string name="poi_filter_nominatim">Sietkavy Nominatim</string>
 	<string name="search_position_current_location_search">Vyznačeńnie miescaznachodžańnia…</string>

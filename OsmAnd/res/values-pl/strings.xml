@@ -42,7 +42,7 @@
   <string name="update_poi_does_not_change_indexes">Zmiana POI w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
   <string name="button_upgrade_osmandplus">Uaktualnij OsmAnd+</string>
   <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
-  <string name="local_index_mi_rename">Zmień nazwę</string>
+  <string name="shared_string_rename">Zmień nazwę</string>
   <string name="show_gpx_route">Pokaż na mapie</string>
   <string name="poi_filter_nominatim">Nominatim Online</string>
   <string name="search_position_current_location_search">Ustalanie pozycji…</string>

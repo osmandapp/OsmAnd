@@ -212,7 +212,7 @@
   <string name="update_poi_file_not_found">Nevar atrast un izveidot failu, kurā uzturēt POI izmaiņas.</string>
   <string name="button_upgrade_osmandplus">Atjaunināt OsmAnd+</string>
   <string name="map_version_changed_info">Serveris satur kartes failus, kuri nav savietojami ar pašreizējo aplikācijas versiju. Lai varētu lejupielādēt un lietot šos failus, lūdzu atjauniniet aplikāciju uz jaunāku versiju.</string>
-  <string name="local_index_mi_rename">Pārsaukt</string>
+  <string name="shared_string_rename">Pārsaukt</string>
   <string name="show_gpx_route">Parādīt kartē</string>
   <string name="poi_filter_nominatim">Tiešaistes POI - Nominatim</string>
   <string name="search_position_current_location_search">Nosaka atrašanās vietu…</string>

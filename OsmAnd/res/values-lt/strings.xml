@@ -330,7 +330,7 @@
   <string name="update_poi_file_not_found">Vietinis failas, kuriame laikomi LV pakeitimai, nerastas ir jo nepavyko sukurti.</string>
   <string name="button_upgrade_osmandplus">Atnaujinti OsmAnd+</string>
   <string name="map_version_changed_info">Serveryje patalpinti žemėlapių failai netinka jūsų turimos programos versijai. Norėdami parsisiųsti žemėlapius pirmiausia atnaujinkite programą.</string>
-  <string name="local_index_mi_rename">Pakeisti pavadinimą</string>
+  <string name="shared_string_rename">Pakeisti pavadinimą</string>
   <string name="show_gpx_route">Rodyti žemėlapyje</string>
   <string name="poi_filter_nominatim">Nominatim įrankis internete</string>
   <string name="search_position_current_location_search">Ieškoma vietos…</string>

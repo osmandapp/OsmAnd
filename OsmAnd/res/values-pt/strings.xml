@@ -665,7 +665,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="update_poi_file_not_found">Não foi encontrado (e não pôde ser criado) o arquivo local para guardar as mudanças de POI.</string>
   <string name="button_upgrade_osmandplus">Upgrade para OsmAnd+</string>
   <string name="map_version_changed_info">O servidor contém mapas incompatíveis com a sua versão actual do Osmand. Precisa de actualizar o Osmand para uma versão mais recente.</string>
-  <string name="local_index_mi_rename">Mudar o nome</string>
+  <string name="shared_string_rename">Mudar o nome</string>
   <string name="show_gpx_route">Mostrar no mapa</string>
   <string name="poi_filter_nominatim">Online Nomeação</string>
   <string name="search_position_current_location_search">Procurando posição…</string>

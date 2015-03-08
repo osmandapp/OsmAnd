@@ -917,7 +917,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="update_poi_file_not_found">Не е открит местният файл за обновяване на POI.</string>
 	<string name="button_upgrade_osmandplus">Обновяване на OsmAnd+</string>
 	<string name="map_version_changed_info">Сървърът съдържа карти несъвместими с Вашата версия на приложението. За да ги използвате, моля обновете приложението до по-нова версия.</string>
-	<string name="local_index_mi_rename">Преименуване</string>
+	<string name="shared_string_rename">Преименуване</string>
 	<string name="show_gpx_route">Покажи на картата</string>
 	<string name="poi_filter_nominatim">Онлайн Nominatim</string>
 	<string name="search_position_current_location_search">Търсене на място…</string>

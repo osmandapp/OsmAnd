@@ -581,7 +581,7 @@
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
 	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
-	<string name="local_index_mi_rename">Umbenennen</string>
+	<string name="shared_string_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
 	<string name="search_position_current_location_search">Standort wird ermittelt…</string>

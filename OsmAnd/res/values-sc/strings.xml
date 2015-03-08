@@ -1138,7 +1138,7 @@
 	<string name="old_poi_file_should_be_deleted">Su documentu de datos PDI \'%1$s\' est bundajolu e podet èssere burrau.</string>
 	<string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
 	<string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s’aplicu a s\'ùritma versione.</string>
-	<string name="local_index_mi_rename">Torra a numenare</string>
+	<string name="shared_string_rename">Torra a numenare</string>
 	<string name="search_position_undefined">Non dessinidu</string>
 	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Positzione currente…</string>

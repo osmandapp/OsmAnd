@@ -293,7 +293,7 @@
   <string name="update_poi_file_not_found">Plaaslike lêer om interessante plek veranderinge in stand te hou nie gevind nie en kon nie geskep word nie.</string>
   <string name="button_upgrade_osmandplus">Opgradeer OsmAnd +</string>
   <string name="map_version_changed_info">Die internet-bediener bevat kaart lêers wat nie versoenbaar is met jou huidige weergawe van die toepassing nie. Om dit af te laai en te gebruik opgradeer asseblief die toepassing na `n nuwer weergawe.</string>
-  <string name="local_index_mi_rename">Herbenoem</string>
+  <string name="shared_string_rename">Herbenoem</string>
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
   <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>

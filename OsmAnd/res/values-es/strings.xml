@@ -141,7 +141,7 @@
   <string name="update_poi_file_not_found">El archivo local para guardar cambios de PDIs no se ha encontrado ni puede crearse.</string>
   <string name="button_upgrade_osmandplus">Actualizar a OsmAnd+</string>
   <string name="map_version_changed_info">El servidor contiene archivos de mapas incompatibles con la versión actual de la aplicación. Para descargarlos y usarlos, actualice la aplicación a una versión más reciente.</string>
-  <string name="local_index_mi_rename">Renombrar</string>
+  <string name="shared_string_rename">Renombrar</string>
   <string name="show_gpx_route">Mostrar en el mapa</string>
   <string name="poi_filter_nominatim">Nominatim en línea</string>
   <string name="search_position_current_location_search">Buscando posición…</string>

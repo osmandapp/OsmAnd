@@ -390,7 +390,7 @@
 	<string name="favourites_edit_dialog_category">دسته بندی</string>
 	<string name="vector_map_not_needed">نه، متشکرم</string>
 	<string name="search_position_current_location">موقعیت فعلی…</string>
-	<string name="local_index_mi_rename">تغییر نام</string>
+	<string name="shared_string_rename">تغییر نام</string>
 	<string name="show_gpx_route">روی نقشه نشان بده</string>
 	<string name="search_position_current_location_search">درحال جستجوی موقعیت…</string>
 	<string name="search_position_current_location_found">موقعیت (پیدا شده)</string>

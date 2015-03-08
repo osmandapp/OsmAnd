@@ -494,7 +494,7 @@
 <string name="auto_follow_route_navigation_descr">Visualització del mapa centrada automàticament només quan es navega.</string>
 <string name="auto_follow_location_enabled">S\'està utilitzant la visualització del mapa centrada automàticament.</string>
 <string name="file_can_not_be_renamed">No s\'ha pogut canviar el nom al fitxer.</string>
-<string name="local_index_mi_rename">Canvia el nom</string>
+<string name="shared_string_rename">Canvia el nom</string>
 <string name="file_with_name_already_exist">Ja existeix un fitxer amb el mateix nom.</string>
 <string name="show_more_map_detail_descr">Mostra més detalls als mapes de vectors (carreteres,etc.) des dels nivells inferiors de zoom</string>
 <string name="gpx_option_destination_point">Utilitza la destinació actual</string>

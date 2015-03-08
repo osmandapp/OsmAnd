@@ -266,7 +266,6 @@
   <string name="update_poi_file_not_found">Файл с обновляемыми POI не найден и не может быть создан.</string>
   <string name="button_upgrade_osmandplus">Обновить до OsmAnd+</string>
   <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Для их использования, пожалуйста, обновите приложение.</string>
-  <string name="local_index_mi_rename">Переименовать</string>
   <string name="show_gpx_route">Показать на карте</string>
   <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
   <string name="search_position_current_location_search">Поиск позиции…</string>

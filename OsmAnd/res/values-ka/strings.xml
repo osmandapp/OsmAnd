@@ -228,7 +228,7 @@
   <string name="update_poi_file_not_found">ლოკალური ფაილი POI-ის ცვლილებების შესანახად ნაპოვნი არ იქნა და მისი შექმნა შეუძლებელია.</string>
   <string name="button_upgrade_osmandplus">განახლება OsmAnd+-მდე</string>
   <string name="map_version_changed_info">სერვერი შეიცავს რუკის ფაილებს რომლებიც არაა შესაბამისი აპლიკაციის მიმდინარე ვერსიასთან. გთხოვთ განაახლოთ აპლიკაცია მათ ჩამოსაწერად და გამოსაყენებლად.</string>
-  <string name="local_index_mi_rename">სახელის გადარქმევა</string>
+  <string name="shared_string_rename">სახელის გადარქმევა</string>
   <string name="show_gpx_route">რუკაზე ჩვენება</string>
   <string name="poi_filter_nominatim">მიმდინარე POI-ს ძებნა სახელით</string>
   <string name="search_position_current_location_search">მდებარეობის ძებნა…</string>

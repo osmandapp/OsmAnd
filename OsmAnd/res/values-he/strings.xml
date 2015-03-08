@@ -462,7 +462,7 @@
 	<string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
 	<string name="button_upgrade_osmandplus">שדרוג OsmAnd+‎</string>
 	<string name="map_version_changed_info">השרת מכיל קובצי מפה שאינם תואמים לגרסה הנוכחית של היישום שלך. כדי להוריד ולהשתמש בהם עליך לשדרג את היישום לגרסה עדכנית יותר.</string>
-	<string name="local_index_mi_rename">שינוי שם</string>
+	<string name="shared_string_rename">שינוי שם</string>
 	<string name="show_gpx_route">הצגה על המפה</string>
 	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
 	<string name="search_position_current_location_search">מתבצע חיפוש אחר מיקום…</string>

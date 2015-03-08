@@ -285,7 +285,7 @@
   <string name="update_poi_file_not_found">Файл з POI точками не знайдено і не може бути створено.</string>
   <string name="button_upgrade_osmandplus">Оновити до OsmAnd+</string>
   <string name="map_version_changed_info">На сервері даних знайдено файли несумісні з даною версією програми. Для їх використання, будь ласка, оновіть програму.</string>
-  <string name="local_index_mi_rename">Перейменувати</string>
+  <string name="shared_string_rename">Перейменувати</string>
   <string name="show_gpx_route">Показати на мапі</string>
   <string name="poi_filter_nominatim">Nominatim (Інтернет)</string>
   <string name="search_position_current_location_search">Пошук позиції…</string>

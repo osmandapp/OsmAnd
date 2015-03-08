@@ -131,7 +131,6 @@
   <string name="update_poi_file_not_found">Il file per registrare i cambiamenti dei PDI non è stato trovato nè creato.</string>
   <string name="button_upgrade_osmandplus">Aggiorna OsmAnd+</string>
   <string name="map_version_changed_info">Nel server ci sono file di mappe incompatibili con l\'attuale versione del programma utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione all\'ultima versione.</string>
-  <string name="local_index_mi_rename">Rinomina</string>
   <string name="show_gpx_route">Visualizza sulla mappa</string>
   <string name="poi_filter_nominatim">Nominatim online</string>
   <string name="search_position_current_location_search">Ricerca posizione…</string>

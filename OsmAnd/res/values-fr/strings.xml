@@ -138,7 +138,7 @@
   <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
   <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application.</string>
-  <string name="local_index_mi_rename">Renommer</string>
+  <string name="shared_string_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
   <string name="poi_filter_nominatim">Nominatim en ligne</string>
   <string name="search_position_current_location_search">Recherche de la position…</string>

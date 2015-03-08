@@ -213,7 +213,7 @@
   <string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
   <string name="button_upgrade_osmandplus">Upgradovat OsmAnd+</string>
   <string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
-  <string name="local_index_mi_rename">Přejmenovat</string>
+  <string name="shared_string_rename">Přejmenovat</string>
   <string name="show_gpx_route">Zobrazit na mapě</string>
   <string name="poi_filter_nominatim">Online POI filtr \'Nominatim\'</string>
   <string name="search_position_current_location_search">Hledané polohy…</string>

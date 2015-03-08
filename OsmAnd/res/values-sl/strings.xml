@@ -760,7 +760,7 @@
 	<string name="update_poi_file_not_found">Krajevne datoteke za vzdrževanje sprememb POI ni bilo mogoče najti in ustvariti.</string>
 	<string name="button_upgrade_osmandplus">Nadgradi OsmAnd+</string>
 	<string name="map_version_changed_info">Strežnik vsebuje datoteke zemljevida, ki niso združljive z vašo različico programa. Za njihov prejem in uporabo nadgradite program na novo različico.</string>
-	<string name="local_index_mi_rename">Preimenuj</string>
+	<string name="shared_string_rename">Preimenuj</string>
 	<string name="show_gpx_route">Pokaži na zemljevidu</string>
 	<string name="poi_filter_nominatim">Spletni Nominatim</string>
 	<string name="search_position_current_location_search">Iskanje položaja …</string>

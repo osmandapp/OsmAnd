@@ -486,7 +486,7 @@
 	<string name="update_poi_file_not_found">Fișierul local pentru salvarea modificărilor POI nu există și nu a putut fi creat.</string>
 	<string name="button_upgrade_osmandplus">Upgrade la OsmAnd+</string>
 	<string name="map_version_changed_info">Serverul conține hărți ce nu sunt compatibile cu versiunea curentă a OsmAnd. Pentru a le descărca și folosi, vă rugăm să actualizați aplicația la o versiune mai nouă.</string>
-	<string name="local_index_mi_rename">Redenumire</string>
+	<string name="shared_string_rename">Redenumire</string>
 	<string name="show_gpx_route">Afișare pe hartă</string>
 	<string name="poi_filter_nominatim">Căutare online după nume</string>
 	<string name="search_position_current_location_search">Se caută poziția…</string>

@@ -258,7 +258,7 @@
 	<string name="update_poi_file_not_found">Lokal fil for å opprettholde interessepunktendringer ikke funnet og kunne ikke opprettes.</string>
 	<string name="button_upgrade_osmandplus">Oppgrader OsmAnd+</string>
 	<string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din gjeldende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
-	<string name="local_index_mi_rename">Endre navn</string>
+	<string name="shared_string_rename">Endre navn</string>
 	<string name="show_gpx_route">Vis på kart</string>
 	<string name="search_position_current_location_search">Søker posisjon…</string>
 	<string name="search_position_current_location_found">Posisjon (funnet)</string>

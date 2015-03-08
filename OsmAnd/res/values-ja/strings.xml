@@ -1242,7 +1242,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="update_poi_file_not_found">ローカルファイルは、POIの変更が確認できなかったので作成できませんでした。</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+をアップグレード</string>
 	<string name="map_version_changed_info">サーバー上のマップファイルは現在のバージョンと互換性がありません。それらをダウンロードして使用するには、新しいバージョンにアプリケーションをアップグレードしてください。</string>
-	<string name="local_index_mi_rename">リネーム</string>
+	<string name="shared_string_rename">リネーム</string>
 	<string name="show_gpx_route">地図上に表示</string>
 	<string name="poi_filter_nominatim">オンラインNominatimを使用</string>
 	<string name="search_position_current_location_search">位置を検索しています…</string>

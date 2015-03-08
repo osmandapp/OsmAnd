@@ -544,7 +544,6 @@
 	<string name="old_poi_file_should_be_deleted">Interessepunkt-datafilen \'%1$\' er overflødig og kan slettes.</string>
 	<string name="update_poi_file_not_found">Lokal fil til at vedligeholde interessepunkt ændringer blev ikke fundet og kunne ikke oprettes.</string>
 	<string name="button_upgrade_osmandplus">Opgrader OsmAnd+</string>
-	<string name="local_index_mi_rename">Omdøb</string>
 	<string name="show_gpx_route">Vis på kort</string>
 	<string name="search_position_current_location_search">Søger position…</string>
 	<string name="search_position_current_location_found">Position (fundet)</string>

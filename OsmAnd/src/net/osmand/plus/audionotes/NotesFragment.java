@@ -185,7 +185,7 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
+		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
 				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

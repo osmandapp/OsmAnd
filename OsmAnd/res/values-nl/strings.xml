@@ -228,7 +228,6 @@
   <string name="update_poi_file_not_found">Lokaal bestand voor het bijhouden van wijzigingen van interessepunten niet gevonden en kan ook niet worden aangemaakt.</string>
   <string name="button_upgrade_osmandplus">Upgraden naar OsmAnd+</string>
   <string name="map_version_changed_info">Op de server staan kaartbestanden die niet compatibel zijn met de huidige programmaversie. Je moet eerst OsmAnd updaten voordat je kaarten kan downloaden en gebruiken.</string>
-  <string name="local_index_mi_rename">Hernoem</string>
   <string name="show_gpx_route">Toon op kaart</string>
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
   <string name="search_position_current_location">Huidige positie…</string>

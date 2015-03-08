@@ -338,7 +338,7 @@
 	<string name="file_can_not_be_renamed">Dosya yeniden adlandırılamaz.</string>
 	<string name="file_with_name_already_exists">Bu isimli dosya zaten var.</string>
 	<string name="poi_filter_by_name">İsme göre ara</string>
-	<string name="local_index_mi_rename">Yeniden adlandır</string>
+	<string name="shared_string_rename">Yeniden adlandır</string>
 	<string name="show_gpx_route">Haritada göster</string>
 	<string name="search_position_address">Adres…</string>
 	<string name="search_position_favorites">Favoriler…</string>

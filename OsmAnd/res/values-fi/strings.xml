@@ -200,7 +200,7 @@
 	<string name="animate_route">Aloita animaatio</string>
 	<string name="file_can_not_be_renamed">Tiedostoa ei voitu uudelleennimetä.</string>
 	<string name="poi_filter_by_name">Etsi nimen mukaan</string>
-	<string name="local_index_mi_rename">Nimeä uudelleen</string>
+	<string name="shared_string_rename">Nimeä uudelleen</string>
 	<string name="show_gpx_route">Näytä kartalla</string>
 	<string name="search_position_current_location_search">Etsitään sijaintia…</string>
 	<string name="search_position_current_location_found">Sijainti(Löydetty)</string>
