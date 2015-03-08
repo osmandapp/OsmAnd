@@ -1936,4 +1936,15 @@
 	<string name="shared_string_show_on_map">Показать на карте</string>
 	<string name="shared_string_map">Карта</string>
 	<string name="shared_string_favorites">Избранные</string>
+	<string name="shared_string_add_to_favorites">Добавить к избранным</string>
+	<string name="shared_string_audio">Аудио</string>
+	<string name="shared_string_video">Видео</string>
+	<string name="shared_string_photo">Фото</string>
+
+	<string name="route_points">Точки маршрута</string>
+	<string name="track_segments">Сегменты трека</string>
+	<string name="track_points">Точки трека</string>
+	<string name="turn_off_all">Выключить все</string>
+	<string name="days_behind"/>
+	<string name="notes">Заметки</string>
 	</resources>
