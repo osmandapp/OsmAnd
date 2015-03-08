@@ -1935,4 +1935,5 @@
 	<string name="shared_string_show">Показать</string>
 	<string name="shared_string_show_all">Показать всё</string>
 	<string name="shared_string_show_on_map">Показать на карте</string>
+	<string name="shared_string_map">Карта</string>
 	</resources>
