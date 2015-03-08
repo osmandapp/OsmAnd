@@ -964,7 +964,7 @@
 	<string name="osmo_activity">OpenStreetMap-overvåking</string>
     <string name="fav_point_dublicate_message">Favorittpunktnavn er endret til %1$s for å unngå dupliserte navn.</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="my_favorites">Mine favoritter</string>
+    <string name="shared_string_my_favorites">Mine favoritter</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
     <string name="color_red">rød</string>
 	<string name="color_pink">rosa</string>

@@ -1757,7 +1757,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="gpx_selection_track">%1$s
 \nSled %2$s</string>
     <string name="gpx_available_current_track">Trenutna shranjena sled</string>
-    <string name="my_favorites">Moji priljubljeni</string>
+    <string name="shared_string_my_favorites">Moji priljubljeni</string>
     <string name="share_fav_subject">Priljubljeni deljeni preko OsmAnd-a</string>
 	<string name="shared_string_share">Deli</string>
 	<string name="import_file_favourites">Shraniti kot GPX datoteko ali uvoziti med priljubljene?</string>

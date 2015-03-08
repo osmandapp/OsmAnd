@@ -623,7 +623,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				str = ctx.getString(R.string.way_alarms);
 				break;
 			case WaypointHelper.FAVORITES:
-				str = ctx.getString(R.string.my_favorites);
+				str = ctx.getString(R.string.shared_string_my_favorites);
 				break;
 			case WaypointHelper.WAYPOINTS:
 				str = ctx.getString(R.string.waypoints);

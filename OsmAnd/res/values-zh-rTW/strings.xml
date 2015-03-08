@@ -1638,7 +1638,7 @@
     <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
     <string name="osmo_show_group_notifications">顯示群組通知</string>
     <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
-    <string name="my_favorites">我的最愛</string>
+    <string name="shared_string_my_favorites">我的最愛</string>
     <string name="shared_string_my_places">我的地點</string>
     <string name="my_data_activity">我的地點</string>
     <string name="selected_track">已選取軌跡</string>

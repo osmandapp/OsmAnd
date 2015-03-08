@@ -1828,7 +1828,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="gpx_file_is_empty">GPX مسیر خالی است</string>
     <string name="selected_track">مسیرهای انتخاب شده</string>
     <string name="my_tracks">همه مسیرها</string>
-    <string name="my_favorites">علاقه مندی های من</string>
+    <string name="shared_string_my_favorites">علاقه مندی های من</string>
     <string name="shared_string_my_places">مکان های من</string>
     <string name="my_data_activity">مکان های من</string>
     <string name="osmo_user_joined">کاربر %1$s تاریخ عضویت %2$s</string>

@@ -1466,7 +1466,7 @@
     <string name="gpx_selection_route_points">%1$s ↵\nPuncte rută %2$s</string>
     <string name="gpx_selection_points">%1$s ↵\nPuncte</string>
     <string name="gpx_selection_track">%1$s ↵\nTrack %2$s</string>
-    <string name="my_favorites">Favoritele mele</string>
+    <string name="shared_string_my_favorites">Favoritele mele</string>
     <string name="shared_string_my_places">Locurile mele</string>
     <string name="my_data_activity">Locurile mele</string>
     <string name="osmo_center_location">Centrul ecranului</string>

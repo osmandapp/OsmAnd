@@ -1545,7 +1545,7 @@
     <string name="gpx_file_is_empty">A gpx nyomvonal üres</string>
     <string name="selected_track">Kiválasztott nyomvonalak</string>
     <string name="my_tracks">Összes nyomvonal</string>
-    <string name="my_favorites">Kedvenceim</string>
+    <string name="shared_string_my_favorites">Kedvenceim</string>
     <string name="shared_string_my_places">Saját helyek</string>
     <string name="my_data_activity">Saját helyek</string>
     <string name="osmo_user_joined">%1$s felhasználó csatlakozott a(z) %2$s csoporthoz</string>

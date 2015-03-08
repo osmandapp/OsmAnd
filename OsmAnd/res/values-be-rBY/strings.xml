@@ -241,7 +241,7 @@
     <string name="gpx_file_is_empty">GPX-ślied pusty</string>
     <string name="selected_track">Abranyja śliady</string>
     <string name="my_tracks">Usie śliady</string>
-    <string name="my_favorites">Maje zakladkі</string>
+    <string name="shared_string_my_favorites">Maje zakladkі</string>
     <string name="shared_string_my_places">Maje miaścіny</string>
     <string name="my_data_activity">Maje miaścіny</string>
     <string name="osmo_user_joined">Karystaĺnіk %1$s dalučyŭsia da hrupy %2$s</string>

@@ -1768,7 +1768,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_user_left">Gebruiker %1$s heeft groep %2$s verlaten</string>
     <string name="osmo_show_group_notifications">Toon groepsmeldingen</string>
     <string name="osmo_show_group_notifications_descr">Toon meldingen als een gebruiker bij een groep komt of deze verlaat</string>
-    <string name="my_favorites">Mijn favorieten</string>
     <string name="my_data_activity">Mijn plaatsen</string>
     <string name="selected_track">Gekozen track</string>
     <string name="my_tracks">Alle tracks</string>
@@ -2113,7 +2112,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_add_to_favorites">Voeg toe aan Favorieten</string>
 	<string name="shared_string_shared_string_my_location">Mijn locatie</string>
 	<string name="shared_string_my_places">Mijn plaatsen</string>
-	<string name="shared_string_my_favorites">Mijn favorieten</string>
+	<string name="shared_string_shared_string_my_favorites">Mijn favorieten</string>
 	<string name="shared_string_my_tracks">Mijn routes</string>
 	<string name="shared_string_currently_recording_track">Huidige route wordt opgenomen</string>
 	<string name="shared_string_audio">Geluid</string>

@@ -1663,7 +1663,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
     <string name="selected_track">Traces sélectionnées</string>
     <string name="my_tracks">Toutes les\ntraces</string>
-    <string name="my_favorites">Mes favoris</string>
+    <string name="shared_string_my_favorites">Mes favoris</string>
     <string name="shared_string_my_places">Favoris</string>
     <string name="my_data_activity">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>

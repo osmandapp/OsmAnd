@@ -1658,7 +1658,7 @@
     <string name="osmo_user_left">El usuario %1$s ha abandonado el grupo %2$s</string>
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>
     <string name="osmo_show_group_notifications_descr">Mostrar mensajes emergentes cuando usuarios se unen o abandonan el grupo</string>
-    <string name="my_favorites">Mis Favoritos</string>
+    <string name="shared_string_my_favorites">Mis Favoritos</string>
     <string name="shared_string_my_places">Mis sitios</string>
     <string name="my_data_activity">Mis sitios</string>
     <string name="gpx_selection_number_of_points"> %1$s puntos</string>

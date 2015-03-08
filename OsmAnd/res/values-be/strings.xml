@@ -1708,7 +1708,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_show_group_notifications_descr">Паказваць паведамленьні, калі карыстальнік далучаецца або пакідае групу</string>
     <string name="selected_track">Абраныя сьляды</string>
     <string name="my_tracks">Усе сьляды</string>
-    <string name="my_favorites">Мае закладкі</string>
     <string name="my_data_activity">Мае мясьціны</string>
     <string name="gpx_file_is_empty">GPX-сьлед пусты</string>
     <string name="gpx_available_current_track">Сьлед, які запісваецца зараз</string>
@@ -2058,5 +2057,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 
 	<string name="route_points">Пункты маршруту</string>
 	<string name="shared_string_more_actions">Больш дзеяньняў</string>
-	<string name="shared_string_my_favorites">Мае ўпадабаныя</string>
+	<string name="shared_string_shared_string_my_favorites">Мае ўпадабаныя</string>
 	</resources>

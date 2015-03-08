@@ -1325,7 +1325,7 @@
 \nPuntu</string>
     <string name="gpx_selection_track">%1$s
 \nBidea %2$s</string>
-    <string name="my_favorites">Nire Gogokoenak</string>
+    <string name="shared_string_my_favorites">Nire Gogokoenak</string>
     <string name="shared_string_my_places">Nire Lekuak</string>
     <string name="my_data_activity">Nire Lekuak</string>
     <string name="osmo_follow">Jarraitu</string>

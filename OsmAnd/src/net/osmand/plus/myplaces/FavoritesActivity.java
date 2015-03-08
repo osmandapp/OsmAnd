@@ -74,7 +74,7 @@ public class FavoritesActivity extends TabActivity {
 
 		List<TabItem> mTabs = new ArrayList<TabItem>();
 //		mTabs.add(new TabItem("\t\t\t", FavoritesTreeFragment.class));
-		mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
+		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 		}

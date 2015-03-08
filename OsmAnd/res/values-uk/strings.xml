@@ -1570,7 +1570,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="gpx_file_is_empty">Трек Gpx порожній</string>
     <string name="selected_track">Трек</string>
     <string name="my_tracks">Всі треки</string>
-    <string name="my_favorites">Мої Закладки</string>
+    <string name="shared_string_my_favorites">Мої Закладки</string>
     <string name="shared_string_my_places">Мої Дані</string>
     <string name="my_data_activity">Мої Дані</string>
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>

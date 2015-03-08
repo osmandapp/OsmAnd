@@ -1575,7 +1575,7 @@ s často kladenými otázkami.</string>
     <string name="gpx_file_is_empty">GPX trasa je prázdná</string>
     <string name="selected_track">Zvolená trasa</string>
     <string name="my_tracks">Všechny trasy</string>
-    <string name="my_favorites">Moje oblíbené</string>
+    <string name="shared_string_my_favorites">Moje oblíbené</string>
     <string name="shared_string_my_places">Moje místa</string>
     <string name="my_data_activity">Moje místa</string>
     <string name="osmo_show_group_notifications">Zobrazovat upozornění skupin</string>
