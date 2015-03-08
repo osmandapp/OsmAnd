@@ -1302,7 +1302,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpxup_trackable">Trackable</string>
 	<string name="gpxup_private">Private</string>
 	<string name="asap">ASAP</string>
-	<string name="save_route_as_gpx">Save route as GPX file</string>
 	<string name="share_route_as_gpx">Share route as GPX file</string>
 	<string name="share_route_subject">Route shared via OsmAnd</string>
 	<string name="route_roundabout">Roundabout: take %1$d exit and go</string>
