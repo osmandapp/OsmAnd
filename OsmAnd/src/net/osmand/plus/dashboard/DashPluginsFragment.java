@@ -44,7 +44,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 		@Override
 		public void onClick(View view) {
 			OsmandPlugin plugin = (OsmandPlugin) view.getTag();
-
 			Intent intent = new Intent(getActivity(), PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 			startActivity(intent);
@@ -60,8 +59,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
 			}
 		});
+		initPlugins();
+		return contentView;
+	}
 
-		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
+
+	private void initPlugins() {
 		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledPlugins();
 		Collections.shuffle(notActivePlugins);
 		plugins = new ArrayList<OsmandPlugin>();
@@ -81,24 +84,18 @@ public class DashPluginsFragment extends DashBaseFragment {
 			}
 			plugins.add(plugin);
 		}
-		for (OsmandPlugin p : plugins) {
-			inflatePluginView(inflater, pluginsContainer, p);
-		}
-		return contentView;
 	}
 
 
 	@Override
 	public void onOpenDash() {
 		View contentView = getView();
-		if (contentView == null) {
-			return;
-		}
+		LayoutInflater inflater = getActivity().getLayoutInflater();
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
-		for (int pluginIndex = 0; pluginIndex < plugins.size(); pluginIndex++) {
-			View pluginView = pluginsContainer.getChildAt(pluginIndex);
-			updatePluginState(pluginView, plugins.get(pluginIndex));
-		}		
+		pluginsContainer.removeAllViews();
+		for (OsmandPlugin p : plugins) {
+			inflatePluginView(inflater, pluginsContainer, p);
+		}
 	}
 	
 	private void updatePluginState(View pluginView, OsmandPlugin plugin) {

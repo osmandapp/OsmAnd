@@ -45,7 +45,7 @@ public abstract class DashBaseFragment extends Fragment {
 	public final void onResume() {
 		// use on open update
 		super.onResume();
-		if(dashboard != null && dashboard.isVisible()) {
+		if(dashboard != null && dashboard.isVisible() && getView() != null) {
 			onOpenDash();
 		}
 	}

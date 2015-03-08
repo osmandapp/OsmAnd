@@ -231,7 +231,9 @@ public class DashboardOnMap {
 		while(it.hasNext()) {
 			WeakReference<DashBaseFragment> df = it.next();
 			if(df.get() != null) {
-				df.get().onOpenDash();
+				if(df.get().getView() != null) {
+					df.get().onOpenDash();
+				}
 			} else {
 				it.remove();
 			}
