@@ -1,7 +1,6 @@
 package net.osmand.plus.dashboard;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +37,7 @@ import android.widget.ScrollView;
  */
 public class DashboardOnMap {
 
-
+	public static boolean staticVisible = false;
 	private static final int LIST_ID = 1;
 	private static final int DIRECTIONS_ID = 2;
 	private static final int CONFIGURE_SCREEN_ID = 3;
@@ -47,6 +46,7 @@ public class DashboardOnMap {
 	FloatingActionButton fabButton;
 	boolean floatingButtonVisible = true;
 	private FrameLayout dashboardView;
+	
 	private boolean visible = false;
 	private boolean landscape;
 	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<WeakReference<DashBaseFragment>>();
@@ -107,6 +107,7 @@ public class DashboardOnMap {
 
 	public void setDashboardVisibility(boolean visible) {
 		this.visible = visible;
+		DashboardOnMap.staticVisible = visible;
 		if (visible) {
 			addOrUpdateDashboardFragments();
 			setupActionBar();
@@ -136,7 +137,7 @@ public class DashboardOnMap {
 				R.drawable.ic_action_gdirections_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, CONFIGURE_SCREEN_ID, R.string.layer_map_appearance,
 				R.drawable.ic_configure_screen_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, SETTINGS_ID, R.string.settings_activity, 
+		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
 				R.drawable.ic_action_settings_enabled_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 	}
 	
@@ -271,7 +272,6 @@ public class DashboardOnMap {
 		return visible;
 	}
 
-
 	public void onDetach(DashBaseFragment dashBaseFragment) {
 		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
 		while(it.hasNext()) {
@@ -281,7 +281,6 @@ public class DashboardOnMap {
 			}
 		}
 	}
-
 
 	public void onAttach(DashBaseFragment dashBaseFragment) {
 		fragList.add(new WeakReference<DashBaseFragment>(dashBaseFragment));

@@ -144,8 +144,10 @@ public class MapActivity extends AccessibleActivity {
 		mapLayers = new MapActivityLayers(this);
 
 		dashboardOnMap.createDashboardView();
-		if (app.isApplicationInitializing()) {
+		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
 			dashboardOnMap.setDashboardVisibility(true);
+		}
+		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 				boolean openGlSetup = false;

@@ -58,6 +58,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		});
 		return view;
 	}
+	
 
 	@Override
 	public void onResume() {
