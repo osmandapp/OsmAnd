@@ -759,7 +759,7 @@
   <string name="show_osm_bugs_descr">Відображати OpenStreetBugs</string>
   <string name="show_osm_bugs">Відображати OpenStreetBugs</string>
   <string name="favourites_activity">Закладки</string>
-  <string name="add_to_favourite">Додати в закладки</string>
+  <string name="shared_string_add_to_favorites">Додати в закладки</string>
   <string name="use_english_names_descr">Показувати назви об’єктів латиницею</string>
   <string name="use_english_names">Назви латиницею</string>
   <string name="app_settings">Налаштування</string>

@@ -696,7 +696,7 @@
   <string name="show_osm_bugs_descr">Rādīt kartē OpenStreetBugs</string>
   <string name="show_osm_bugs">Rādīt OpenStreetBugs</string>
   <string name="favourites_activity">Izlase</string>
-  <string name="add_to_favourite">Pievienot izlasei</string>
+  <string name="shared_string_add_to_favorites">Pievienot izlasei</string>
   <string name="use_english_names_descr">Izvēlieties nosaukumos lietot angļu burtus, lai vietējās valodas nosaukumi ar specifiskiem burtiem būtu vieglāk atrodami un izlasāmi</string>
   <string name="use_english_names">Lietot angļu nosaukumus</string>
   <string name="app_settings">Aplikācijas uzstādījumi</string>

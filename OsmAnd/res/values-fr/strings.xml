@@ -643,7 +643,7 @@
   <string name="show_osm_bugs_descr">Afficher bogues OpenStreet sur carte</string>
   <string name="show_osm_bugs">Afficher les bogues OpenStreet</string>
   <string name="favourites_activity">Liste des favoris</string>
-  <string name="add_to_favourite">Ajouter aux Favoris</string>
+  <string name="shared_string_add_to_favorites">Ajouter aux Favoris</string>
   <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais</string>
   <string name="use_english_names">Utiliser les noms anglais</string>
   <string name="app_settings">Paramètres de l\'application</string>

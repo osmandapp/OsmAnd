@@ -1295,7 +1295,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="show_osm_bugs_descr">Адлюстроўваць OpenStreetBugs на мапе</string>
 	<string name="show_osm_bugs">Паказаць OpenStreetBugs</string>
 	<string name="favourites_activity">Упадабаныя</string>
-	<string name="add_to_favourite">Дадаць да ўпадабаных</string>
 	<string name="use_english_names_descr">Выбар паміж мясцовымі і ангельскімі назвамі</string>
 	<string name="use_english_names">Ангельскія назвы на мапе</string>
 	<string name="app_settings">Налады праграмы</string>

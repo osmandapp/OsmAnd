@@ -274,7 +274,7 @@
 	<string name="osb_add_dialog_success">اشکال با موفقیت ایجاد شد</string>
 	<string name="osb_add_dialog_error">خطایی روی داد: اشکال ایجاد نشد</string>
 	<string name="search_address">جستجوی آدرس</string>
-	<string name="add_to_favourite">افزودن به علاقمندیها</string>
+	<string name="shared_string_add_to_favorites">افزودن به علاقمندیها</string>
 	<string name="use_english_names_descr">انتخاب بین نامهای بومی یا انگلیسی</string>
 	<string name="use_english_names">استفاده از نامهای انگلیسی در نقشه</string>
 	<string name="app_settings">تنظیمات برنامه</string>

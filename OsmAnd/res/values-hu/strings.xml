@@ -696,7 +696,7 @@
   <string name="show_osm_bugs_descr">OpenStreetBugs megjelenítése a térképen</string>
   <string name="show_osm_bugs">OpenStreetBugs megjelenítése</string>
   <string name="favourites_activity">Kedvencek</string>
-  <string name="add_to_favourite">Hozzáadás a kedvencekhez</string>
+  <string name="shared_string_add_to_favorites">Hozzáadás a kedvencekhez</string>
   <string name="use_english_names_descr">Választás az eredeti és angol név között</string>
   <string name="use_english_names">Angol nevek használata</string>
   <string name="app_settings">Alkalmazás beállítása</string>

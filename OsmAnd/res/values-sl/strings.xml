@@ -126,7 +126,7 @@
 	<string name="ChooseCountry">Izberi državo</string>
 	<string name="show_view_angle">Prikaži smer</string>
 	<string name="favourites_activity">Priljubljene</string>
-	<string name="add_to_favourite">Dodaj med priljubljene</string>
+	<string name="shared_string_add_to_favorites">Dodaj med priljubljene</string>
 	<string name="use_english_names_descr">Izberi prikaz avtohtonih oz. angleških imen</string>
 	<string name="use_english_names">Uporabi angleška imena na karti</string>
 	<string name="app_settings">Nastavitve programa</string>

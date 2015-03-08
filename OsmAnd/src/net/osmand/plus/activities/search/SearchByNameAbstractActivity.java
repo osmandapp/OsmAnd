@@ -557,7 +557,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 			});
 
-			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite);
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites");
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);

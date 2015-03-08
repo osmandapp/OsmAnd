@@ -109,7 +109,7 @@ public class DirectionsDialogs {
 		});
 		if (favorite) {
 			item = optionsMenu.getMenu().add(
-					R.string.add_to_favourite).setIcon(light ?
+					R.string.shared_string_add_to_favorites).setIcon(light ?
 					R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

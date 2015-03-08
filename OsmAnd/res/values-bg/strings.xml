@@ -1406,7 +1406,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="show_osm_bugs_descr">Покажи на картата OpenStreetBugs</string>
 	<string name="show_osm_bugs">Покажи OpenStreetBugs</string>
 	<string name="favourites_activity">Любими</string>
-	<string name="add_to_favourite">Добави в любими</string>
+	<string name="shared_string_add_to_favorites">Добави в любими</string>
 	<string name="use_english_names_descr">Изберете между местни имена и имена на английски език</string>
 	<string name="use_english_names">Имена на англ. език</string>
 	<string name="app_settings">Настройки на приложението</string>

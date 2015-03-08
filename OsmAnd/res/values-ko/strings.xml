@@ -732,7 +732,6 @@
     <string name="show_osm_bugs_descr">"OpenStreetBugs를 지도에  표시"</string>
     <string name="show_osm_bugs">OpenStreetBugs 표시</string>
     <string name="favourites_activity">즐겨찾기</string>
-    <string name="add_to_favourite">즐겨찾기에 추가</string>
     <string name="use_english_names_descr">지역이름 또는 영어이름을 선택합니다</string>
     <string name="use_english_names">지도에 영어 이름 사용</string>
     <string name="app_settings">앱 설정</string>

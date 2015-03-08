@@ -1672,7 +1672,7 @@
 	<string name="show_osm_bugs_descr">Adliustroŭvać OpenStreetBugs na mapie</string>
 	<string name="show_osm_bugs">Pakazać OpenStreetBugs</string>
 	<string name="favourites_activity">Upadabanyja</string>
-	<string name="add_to_favourite">Dadać da ŭpadabanych</string>
+	<string name="shared_string_add_to_favorites">Dadać da ŭpadabanych</string>
 	<string name="use_english_names_descr">Vybar pamіž miascovymі і anhieĺskіmі nazvamі</string>
 	<string name="use_english_names">Anhieĺskіja nazvy na mapie</string>
 	<string name="app_settings">Nalady prahramy</string>

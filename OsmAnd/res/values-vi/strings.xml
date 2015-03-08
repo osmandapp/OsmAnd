@@ -536,7 +536,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="show_osm_bugs_descr">Hiện OpenStreetBugs trên bản đồ</string>
     <string name="show_osm_bugs">Hiện OpenStreetBugs</string>
     <string name="favourites_activity">Danh sách điểm Ưa thích</string>
-    <string name="add_to_favourite">Thêm vào mục Ưa thích</string>
+    <string name="shared_string_add_to_favorites">Thêm vào mục Ưa thích</string>
     <string name="use_english_names_descr">Chọn giữa tên tiếng Anh và tên gốc</string>
     <string name="use_english_names">Dùng tên tiếng Anh</string>
     <string name="app_settings">Thiết lập</string>

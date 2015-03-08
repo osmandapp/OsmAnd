@@ -366,7 +366,7 @@
 	<string name="update_tile">Päivitä kartta</string>
 	<string name="mark_point">Kohde</string>
 	<string name="favourites_activity">Suosikit</string>
-	<string name="add_to_favourite">Lisää suosikkeihin</string>
+	<string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>
 	<string name="use_english_names">Käytä englanninkielisiä nimiä kartoissa</string>
 	<string name="app_settings">Sovelluksen asetukset</string>
 	<string name="choose_building">Valitse rakennus</string>

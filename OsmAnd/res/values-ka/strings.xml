@@ -692,7 +692,7 @@
   <string name="show_osm_bugs_descr">OpenStreetBugs-ის რუკაზე ჩვენება</string>
   <string name="show_osm_bugs">OpenStreetBugs-ის ჩვენება</string>
   <string name="favourites_activity">რჩეულები</string>
-  <string name="add_to_favourite">რჩეულებში დამატება</string>
+  <string name="shared_string_add_to_favorites">რჩეულებში დამატება</string>
   <string name="use_english_names_descr">აირჩიეთ ადგილობრივ და ინგლისურ სახელებს შორის</string>
   <string name="use_english_names">ინგლისური სახელების გამოყენება</string>
   <string name="app_settings">აპლიკაციის პარამეტრები</string>

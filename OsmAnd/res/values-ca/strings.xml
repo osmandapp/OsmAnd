@@ -679,7 +679,7 @@
 <string name="data_settings_descr">Especifiqueu la llengua, baixeu / torneu a carregar les dades</string>
 <string name="use_online_routing">Utilitza la navegació en línia</string>
 <string name="save_current_track_descr">Deseu la traça actual a la SD en aquest moment</string>
-<string name="add_to_favourite">Afegeix a Preferits</string>
+<string name="shared_string_add_to_favorites">Afegeix a Preferits</string>
 <string name="ChooseCountry">Trieu el país</string>
 <string name="choose_street">Trieu el carrer</string>
 <string name="choose_city">Trieu la ciutat</string>

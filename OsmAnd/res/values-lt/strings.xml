@@ -835,7 +835,7 @@
   <string name="show_osm_bugs_descr">Rodyti OpenStreetBugs žemėlapyje</string>
   <string name="show_osm_bugs">Rodyti OpenStreetBugs</string>
   <string name="favourites_activity">Įsimintos vietos</string>
-  <string name="add_to_favourite">Pridėti prie įsimintų vietų</string>
+  <string name="shared_string_add_to_favorites">Pridėti prie įsimintų vietų</string>
   <string name="use_english_names_descr">Pasirinkti žemėlapyje rodomus pavadinimus: originalius arba angliškus</string>
   <string name="use_english_names">Žemėlapyje naudoti angliškus pavadinimus</string>
   <string name="app_settings">Programos nustatymai</string>

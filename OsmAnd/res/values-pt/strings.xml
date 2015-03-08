@@ -320,7 +320,7 @@
   <string name="show_osm_bugs_descr">Ver bugs OpenStreet no mapa</string>
   <string name="show_osm_bugs">Ver bugs OpenStreet</string>
   <string name="favourites_activity">Lista dos pontos favoritos</string>
-  <string name="add_to_favourite">Adicionar aos Favoritos</string>
+  <string name="shared_string_add_to_favorites">Adicionar aos Favoritos</string>
   <string name="use_english_names_descr">Escolher entre os nomes nativos e inglês</string>
   <string name="use_english_names">Utilizar nomes em inglês</string>
   <string name="app_settings">Configurações da aplicação</string>

@@ -1044,7 +1044,7 @@
 	<string name="show_osm_bugs_descr">OSM-Fehlerberichte anzeigen</string>
 	<string name="show_osm_bugs">OSM-Fehler</string>
 	<string name="favourites_activity">Markierte Orte</string>
-	<string name="add_to_favourite">Als Favorit speichern</string>
+	<string name="shared_string_add_to_favorites">Als Favorit speichern</string>
 	<string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden</string>
 	<string name="use_english_names">Englische Namen</string>
 	<string name="app_settings">Anwendungseinstellungen</string>

@@ -1543,7 +1543,7 @@
 	<string name="show_osm_bugs_descr">Ammustra OpenStreetBugs in sa mapa</string>
 	<string name="show_osm_bugs">Ammustra OpenStreetBugs</string>
 	<string name="favourites_activity">Prefèrridos</string>
-	<string name="add_to_favourite">Annanghe a sos Prefèrridos</string>
+	<string name="shared_string_add_to_favorites">Annanghe a sos Prefèrridos</string>
 	<string name="use_english_names_descr">Ischerta s’impreu de nùmenes locales o inglesos</string>
 	<string name="use_english_names">Imprea nùmenes inglesos in sas mapas</string>
 	<string name="app_settings">Impostaduras aplicu</string>

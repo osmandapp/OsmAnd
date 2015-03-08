@@ -930,7 +930,7 @@
 	<string name="show_osm_bugs_descr">Εμφάνιση OpenStreetBugs στο χάρτη</string>
 	<string name="show_osm_bugs">Εμφάνιση OpenStreetBugs</string>
 	<string name="favourites_activity">Αγαπημένα</string>
-	<string name="add_to_favourite">Προσθήκη στα Αγαπημένα</string>
+	<string name="shared_string_add_to_favorites">Προσθήκη στα Αγαπημένα</string>
 	<string name="use_english_names_descr">Επέλεξε μεταξύ ντόπιων και Αγγλικών ονομάτων</string>
 	<string name="use_english_names">Χρήση Αγγλικών ονομάτων στους χάρτες</string>
 	<string name="app_settings">Ρυθμίσεις εφαρμογής</string>

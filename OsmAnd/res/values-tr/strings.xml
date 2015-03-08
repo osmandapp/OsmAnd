@@ -467,7 +467,7 @@
 	<string name="update_tile">Haritayı güncelle</string>
 	<string name="mark_point">"Hedef "</string>
 	<string name="favourites_activity">Favoriler</string>
-	<string name="add_to_favourite">Favorilere ekle</string>
+	<string name="shared_string_add_to_favorites">Favorilere ekle</string>
 	<string name="use_english_names">Haritalarda ingilizce yer adlarını kullan</string>
 	<string name="map_view_3d_descr">3D harita görünümünü etkinleştir</string>
 	<string name="show_poi_over_map">POI göster</string>

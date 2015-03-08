@@ -1046,7 +1046,7 @@
   <string name="show_osm_bugs_descr">Erakutsi OpenStreetBugs mapan</string>
   <string name="show_osm_bugs">Erakutsi OpenStreetBugs</string>
   <string name="favourites_activity">Gogokoenak</string>
-  <string name="add_to_favourite">Gogokoenetara gehitu</string>
+  <string name="shared_string_add_to_favorites">Gogokoenetara gehitu</string>
   <string name="use_english_names_descr">Aukeratu izen ingeles eta autoktonoen hartean</string>
   <string name="use_english_names">Erabili izen Ingelesak mapetan</string>
   <string name="app_settings">Aplikazioaren ezarpenak</string>

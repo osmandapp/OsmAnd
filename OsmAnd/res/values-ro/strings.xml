@@ -974,7 +974,7 @@
 	<string name="show_osm_bugs_descr">Arată erorile OpenStreetBugs pe hartă</string>
 	<string name="show_osm_bugs">Arată OpenStreetBugs</string>
 	<string name="favourites_activity">Favorite</string>
-	<string name="add_to_favourite">Adaugă la Favorite</string>
+	<string name="shared_string_add_to_favorites">Adaugă la Favorite</string>
 	<string name="use_english_names_descr">Alege între folosirea pe hartă a denumirilor în limba nativă sau în engleză</string>
 	<string name="use_english_names">Denumiri pe hartă în engleză</string>
 	<string name="app_settings">Setări aplicație</string>

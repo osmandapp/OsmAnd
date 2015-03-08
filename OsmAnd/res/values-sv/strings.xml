@@ -1054,7 +1054,7 @@
 	<string name="show_osm_bugs_descr">Visa OpenStreetBuggar på kartan</string>
 	<string name="show_osm_bugs">Visa OpenStreetBuggar</string>
 	<string name="favourites_activity">Favoriter</string>
-	<string name="add_to_favourite">Lägg till i favoriter</string>
+	<string name="shared_string_add_to_favorites">Lägg till i favoriter</string>
 	<string name="use_english_names_descr">Välj mellan inhemska och engelska namn på kartorna</string>
 	<string name="use_english_names">Namn på engelska</string>
 	<string name="app_settings">Appinställningar</string>

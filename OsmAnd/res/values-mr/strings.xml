@@ -266,7 +266,7 @@
   <string name="shared_string_settings">सेटिंग्स</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
   <string name="favourites_activity">आवडती ठिकाणे</string>
-  <string name="add_to_favourite">आवडत्या ठिकणात नोंद करा</string>
+  <string name="shared_string_add_to_favorites">आवडत्या ठिकणात नोंद करा</string>
   <string name="use_english_names_descr">इंग्लिश आणि बोली नावांची निवड</string>
   <string name="use_english_names">नकाशामधे इंग्लिश नावे वापरा</string>
   <string name="app_settings">ऍप्लिकेशन सेटिंग्स</string>

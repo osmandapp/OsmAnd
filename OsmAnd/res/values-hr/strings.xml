@@ -351,7 +351,7 @@
 	<string name="update_tile">Ažuriraj kartu</string>
 	<string name="mark_point">Cilj</string>
 	<string name="favourites_activity">Favoriti</string>
-	<string name="add_to_favourite">Dodaj u Favorite</string>
+	<string name="shared_string_add_to_favorites">Dodaj u Favorite</string>
 	<string name="reload_tile">Ponovno učitaj</string>
 	<string name="show_osm_bugs_descr">Prikaži OpenStreetBugs na karti</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>

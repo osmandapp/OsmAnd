@@ -947,7 +947,7 @@
 	<string name="show_osm_bugs_descr">הצגת OpenStreetBugs במפה</string>
 	<string name="show_osm_bugs">הצגת OpenStreetBugs</string>
 	<string name="favourites_activity">מועדפים</string>
-	<string name="add_to_favourite">הוספה למועדפים</string>
+	<string name="shared_string_add_to_favorites">הוספה למועדפים</string>
 	<string name="use_english_names_descr">נא לבחור בין שמות מקומיים לאנגליים</string>
 	<string name="use_english_names">שימוש בשמות באנגלית במפה</string>
 	<string name="app_settings">הגדרות היישום</string>

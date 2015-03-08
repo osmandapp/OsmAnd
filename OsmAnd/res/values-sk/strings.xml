@@ -816,7 +816,6 @@
   <string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
   <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
   <string name="favourites_activity">Obľúbené miesta</string>
-  <string name="add_to_favourite">Pridať do Obľúbených</string>
   <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
   <string name="use_english_names">Použiť anglické názvy v mapách</string>
   <string name="app_settings">Nastavenia aplikácie</string>

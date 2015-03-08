@@ -874,7 +874,7 @@
 	<string name="update_tile">更新地图</string>
 	<string name="reload_tile">重新载入地图瓦片</string>
 	<string name="mark_point">目标</string>
-	<string name="add_to_favourite">加入收藏夹</string>
+	<string name="shared_string_add_to_favorites">加入收藏夹</string>
 	<string name="use_english_names_descr">选择显示当地名称或英文名称</string>
 	<string name="use_english_names">在地图中使用英文名称</string>
 	<string name="app_settings">应用程序设置</string>

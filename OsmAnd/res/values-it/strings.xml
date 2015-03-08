@@ -618,7 +618,6 @@
   <string name="show_osm_bugs_descr">Visualizza OpenStreetBugs sulla mappa</string>
   <string name="show_osm_bugs">Visualizza OpenStreetBugs</string>
   <string name="favourites_activity">Preferiti</string>
-  <string name="add_to_favourite">Aggiungi ai Preferiti</string>
   <string name="use_english_names_descr">Seleziona l\'uso dei nomi locali o inglesi</string>
   <string name="use_english_names">Utilizza nomi inglesi nelle mappe</string>
   <string name="app_settings">Impostazioni applicazione</string>

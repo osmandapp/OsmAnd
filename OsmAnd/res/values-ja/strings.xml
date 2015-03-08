@@ -520,7 +520,7 @@ POIの更新は利用できません</string>
  <string name="show_osm_bugs_descr">OpenStreetBugs をマップに表示</string>
  <string name="show_osm_bugs">OpenStreetBugsを表示</string>
  <string name="favourites_activity">お気に入り地点のリスト</string>
- <string name="add_to_favourite">お気に入りに追加</string>
+ <string name="shared_string_add_to_favorites">お気に入りに追加</string>
  <string name="use_english_names_descr">現地名または英語名を選択</string>
  <string name="use_english_names">英語名を使用</string>
  <string name="app_settings">アプリケーション設定</string>

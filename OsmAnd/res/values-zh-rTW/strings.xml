@@ -874,7 +874,7 @@
 	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 的錯誤</string>
 	<string name="show_osm_bugs">顯示 OpenStreet 的錯誤</string>
 	<string name="favourites_activity">我的最愛</string>
-	<string name="add_to_favourite">加到我的最愛</string>
+	<string name="shared_string_add_to_favorites">加到我的最愛</string>
 	<string name="use_english_names_descr">在本地語言或英語名稱之間選擇</string>
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>

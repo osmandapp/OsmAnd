@@ -760,7 +760,7 @@
   <string name="show_osm_bugs_descr">Wys OpenStreetBugs op die kaart</string>
   <string name="show_osm_bugs">Wys OpenStreetBugs</string>
   <string name="favourites_activity">Gunstelinge</string>
-  <string name="add_to_favourite">Voeg by gunstelinge</string>
+  <string name="shared_string_add_to_favorites">Voeg by gunstelinge</string>
   <string name="use_english_names_descr">Kies tussen plaaslike en engelse name</string>
   <string name="use_english_names">Gebruik Engelse name in die kaart</string>
   <string name="app_settings">Toepassing stellings</string>

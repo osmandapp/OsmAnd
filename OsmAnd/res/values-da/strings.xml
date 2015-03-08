@@ -1145,7 +1145,6 @@
 	<string name="show_osm_bugs_descr">Vis OSM-fejl på kort</string>
 	<string name="show_osm_bugs">Vis OSM-fejl</string>
 	<string name="favourites_activity">Favoritter</string>
-	<string name="add_to_favourite">Tilføj som favorit</string>
 	<string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne</string>
 	<string name="use_english_names">Engelske navne</string>
 	<string name="app_settings">Programindstillinger</string>

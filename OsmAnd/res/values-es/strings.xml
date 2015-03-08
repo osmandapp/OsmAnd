@@ -633,7 +633,7 @@
   <string name="show_osm_bugs_descr">Mostrar OpenStreetBugs en el mapa</string>
   <string name="show_osm_bugs">Mostrar OpenStreetBugs</string>
   <string name="favourites_activity">Favoritos</string>
-  <string name="add_to_favourite">Añadir a Favoritos</string>
+  <string name="shared_string_add_to_favorites">Añadir a Favoritos</string>
   <string name="use_english_names_descr">Selecciona entre nombres nativos o en inglés</string>
   <string name="use_english_names">Usar nombres en inglés en los mapas</string>
   <string name="app_settings">Opciones de aplicación</string>

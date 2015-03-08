@@ -746,7 +746,7 @@
   <string name="show_osm_bugs_descr">Показывать слой OSM Bugs на карте</string>
   <string name="show_osm_bugs">Показывать OSM Bugs</string>
   <string name="favourites_activity">Список избранных точек</string>
-  <string name="add_to_favourite">Добавить в Избранное</string>
+  <string name="shared_string_add_to_favorites">Добавить в Избранное</string>
   <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
   <string name="use_english_names">Использовать английские названия</string>
   <string name="app_settings">Настройки приложения</string>
