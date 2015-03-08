@@ -258,7 +258,7 @@
 	<string name="update_poi_file_not_found">Lokal fil for å opprettholde interessepunktendringer ikke funnet og kunne ikke opprettes.</string>
 	<string name="button_upgrade_osmandplus">Oppgrader OsmAnd+</string>
 	<string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din gjeldende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
-	<string name="local_index_mi_rename">Endre navn</string>
+	<string name="shared_string_rename">Endre navn</string>
 	<string name="show_gpx_route">Vis på kart</string>
 	<string name="search_position_current_location_search">Søker posisjon…</string>
 	<string name="search_position_current_location_found">Posisjon (funnet)</string>
@@ -270,11 +270,11 @@
 	<string name="search_position_map_view">Gjeldende kartsenter</string>
 	<string name="select_search_position">Utgangspunkt:</string>
 	<string name="context_menu_item_search">Søk nær her</string>
-	<string name="save_route_dialog_title">Lagre rute som GPX-spor</string>
+	<string name="shared_string_save_as_gpx">Lagre rute som GPX-spor</string>
 	<string name="route_successfully_saved_at">Rute vellykket lagret som \'%1$s\'.</string>
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Fil med samme navn finnes allerede.</string>
-	<string name="default_buttons_save">Lagre</string>
+	<string name="shared_string_save">Lagre</string>
 	<string name="menu_save_directions">Lagre anvisninger</string>
 	<string name="show_more_map_detail">Vis flere kartdetaljer</string>
 	<string name="favourites_delete_multiple_succesful">Favorittpunkt(er) vellykket slettet.</string>
@@ -293,7 +293,7 @@
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
 	<string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
-	<string name="local_index_download">Last ned</string>
+	<string name="shared_string_download">Last ned</string>
 	
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>
@@ -404,9 +404,9 @@
 	<string name="download_files_question">Laste ned {0} fil(er) ({1} MB)?</string>
 	<string name="items_were_selected">{0} element(er) valgt</string>
 	<string name="filter_existing_indexes">Nedlastet</string>
-	<string name="deselect_all">Fravelg alle</string>
+	<string name="shared_strings_deselect_all">Fravelg alle</string>
 	<string name="shared_string_select_all">Velg alle</string>
-	<string name="reload">Gjenoppfrisk</string>
+	<string name="shared_string_refresh">Gjenoppfrisk</string>
 	<string name="fast_route_mode">Raskeste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for å beregne raskeste rute eller deaktiver for korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} last ned {1} fliser ({2} MB)</string>
@@ -439,7 +439,7 @@
 	<string name="fav_file_to_load_not_found">GPX-fil som inneholder favoritter er ikke funnet på {0}</string>
 	<string name="fav_saved_sucessfully">Favoritter vellykket lagret til {0}</string>
 	<string name="no_fav_to_save">Ingen favorittpunkter å lagre</string>
-	<string name="import_fav">Importer</string>
+	<string name="shared_string_import">Importer</string>
 	<string name="export_fav">Eksporter</string>
 	<string name="error_occurred_loading_gpx">Feil oppstod under lasting av GPX</string>
 	<string name="send_report">Send rapport</string>
@@ -485,7 +485,7 @@
 	<string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favoritt</string>
-	<string name="clear_all">Slett alle</string>
+	<string name="shared_string_clear_all">Slett alle</string>
 	<string name="shared_string_history">Historikk</string>
 	<string name="uploading_data">Laster opp data…</string>
 	<string name="uploading">Laster opp…</string>
@@ -601,8 +601,8 @@
 	<string name="context_menu_item_create_poi">Opprett interessepunkt</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_cancel">Avbryt</string>
-	<string name="default_buttons_apply">Bruk</string>
-	<string name="default_buttons_add">Legg til</string>
+	<string name="shared_string_apply">Bruk</string>
+	<string name="shared_string_add">Legg til</string>
 	<string name="shared_string_no">Nei</string>
 	<string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favoritt</string>
@@ -617,7 +617,7 @@
 	<string name="poi_create_title">Opprett interessepunkt</string>
 	<string name="poi_remove_confirm_template">Slette {0} (skriv kommentar)?</string>
 	<string name="poi_remove_title">Slett interessepunkt</string>
-	<string name="default_buttons_delete">Slett</string>
+	<string name="shared_string_delete">Slett</string>
 	<string name="poi_remove_success">Interessepunkt ble vellykket slettet</string>
 	<string name="poi_action_add">legg til</string>
 	<string name="poi_action_change">endre</string>
@@ -626,7 +626,7 @@
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_comment_default">Interessepunkt endres</string>
 	<string name="default_buttons_commit">Send</string>
-	<string name="default_buttons_reset">Slett</string>
+	<string name="shared_string_clear">Slett</string>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="edit_filter_delete_menu_item">Slett</string>
 	<string name="edit_filter_save_as_menu_item">Lagre som</string>
@@ -709,11 +709,11 @@
     <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ.</string>
     <string name="tip_faq">Ofte stilte spørsmål</string>
     <string name="local_osm_changes_delete_all_confirm">Er du sikker på at du vil slette %1$d OSM endringer?</string>
-    <string name="local_osm_changes_delete_all">Slett alle</string>
+    <string name="shared_string_delete_all">Slett alle</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med den beregnede ruten </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
-    <string name="remember_choice">Husk mitt valg</string>
+    <string name="shared_string_remember_my_choice">Husk mitt valg</string>
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
@@ -824,7 +824,7 @@
     <string name="visible_element">Vis på kart</string>
     <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for nettbaserte kart for dette).</string>
 	<string name="rendering_category_others">Andre kartattributter</string>
-    <string name="av_control_start">Start</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="save_route_as_gpx">Lagre rute som GPX-fil</string>
 	<string name="rendering_attr_publicTransportMode_name">Buss-, trolleybuss-, skyttelbussruter</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Trikk- og togruter</string>
@@ -858,7 +858,7 @@
     <string name="distance">Avstand</string>
     <string name="index_tours">Turer</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="more">Mer…</string>
+    <string name="shared_string_more">Mer…</string>
     <string name="rendering_value_browse_map_name">Se gjennom kart</string>  
     <string name="rendering_attr_coloredBuildings_name">Fargekod bygninger etter type</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>
@@ -998,7 +998,7 @@
     <string name="plugin_distance_point_speed">fart</string>
     <string name="plugin_distance_point_ele">høyde</string>
     <string name="plugin_distance_point">Punkt</string>
-    <string name="default_buttons_do_not_show_again">Ikke vis igjen</string>
+    <string name="shared_string_do_not_show_again">Ikke vis igjen</string>
     <string name="use_magnetic_sensor">Bruk magnetisk sensor</string>
     <string name="files_limit">%1$d filer igjen</string>
     <string name="cancel_navigation">Stopp navigering</string>
@@ -1010,7 +1010,7 @@
     <string name="srtm_paid_version_title">Programtillegg for koter</string>
     <string name="av_settings_descr">Still inn lyd og video</string>
     <string name="av_settings">"Lyd/video-innstillinger "</string>
-    <string name="av_control_stop">Stopp</string>
+    <string name="shared_string_control_stop">Stopp</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for offline koter</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="monitoring_control_stop">Stopp</string>
@@ -1050,7 +1050,7 @@
 	<string name="unzipping_file">Pakker ut fil…</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
-	<string name="downloading_file_new">Laster ned…</string>
+	<string name="shared_string_downloading">Laster ned…</string>
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="shared_string_close">Lukk</string>
 	<string name="loading_data">Laster data…</string>

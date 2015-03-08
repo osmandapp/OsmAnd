@@ -221,7 +221,6 @@
 	<string name="button_upgrade_osmandplus">OsmAnd+ 로 업그레이드</string>
 	<string name="map_version_changed_info">서버가 현재 앱 버전과 호환되지 않는 지도 파일을 가지고 있습니다. 그것들을 다운로드하고 사용하기 위해, 앱을 새로운 버전으로 업그레이드 하세요.</string>
 	
-	<string name="local_index_mi_rename">이름 바꾸기</string>
 	<string name="show_gpx_route">지도에 표시</string>
 	<string name="poi_filter_nominatim">온라인 지명</string>
 	<string name="search_position_current_location_search">위치 검색중…</string>
@@ -246,11 +245,9 @@
 \n\t- 벡터 렌더링 개선
 \n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 활성화)
 \n\t- 버그 수정 "</string>
-	<string name="save_route_dialog_title">경로를 GPX파일로 저장</string>
 	<string name="route_successfully_saved_at">경로가 \'%1$s\'로 성공적으로 저장되었습니다.</string>
 	<string name="filename_input">파일 이름 : </string>
 	<string name="file_with_name_already_exist">같은 이름의 파일이 이미 존재합니다.</string>
-	<string name="default_buttons_save">저장</string>
 	<string name="menu_save_directions">길안내를 저장합니다</string>
 	
 	<string name="local_index_upload_gpx_description">GPX 파일을 OSM으로 업로드합니다. 이는 지도를 개선하기 위해 사용되어집니다.</string>
@@ -287,9 +284,7 @@
 	<string name="local_index_mi_restore">활성화</string>
 	<string name="local_index_mi_backup">비활성화</string>
 	<string name="local_index_mi_delete">삭제</string>
-	<string name="local_index_mi_reload">SD카드에서 다시 불러오기</string>
-	<string name="local_index_download">다운로드</string>
-	
+	<string name="local_index_mi_reload">SD카드에서 다시 불러오기</string>	
 	<string name="local_index_poi_data">POI 데이터</string>
 	<string name="local_index_address_data">주소 데이터</string>
 	<string name="local_index_transport_data">대중 교통 데이터</string>
@@ -492,9 +487,6 @@
 	<string name="download_files_question">{0} 개의 파일 ({1} MB) 를 다운로드?</string>
 	<string name="items_were_selected">{0} 아이템목이 선택되었습니다</string>
 	<string name="filter_existing_indexes">다운로드된 것들로 필터링</string>
-	<string name="deselect_all">모든 선택 해제</string>
-	<string name="reload">새로고침</string>
-	
 	<string name="fast_route_mode">가장 빠른 경로</string>
 	<string name="fast_route_mode_descr">"가장 빠른 경로를 활성화하거나 or 가장 짧은 경로를 비활성화합니다 "</string>
 	<string name="tiles_to_download_estimated_size">줌에서 {0} 다운로드 {1} 타일 ({2} MB)</string>
@@ -551,7 +543,6 @@
 	<string name="fav_file_to_load_not_found">즐겨찾기를 포함한 GPX 파일을 {0}에서 찾을 수 없습니다</string>
 	<string name="fav_saved_sucessfully">즐겨찾기가 성공적으로 {0} 에 저장되었습니다</string>
 	<string name="no_fav_to_save">저장할 즐겨찾기 포인트가 없습니다</string>
-	<string name="import_fav">가져오기(임포트)</string>
 	<string name="export_fav">내보내기(익스포트)</string>
 	<string name="error_occurred_loading_gpx">GPX를 로딩하는 도중에 오류가 발생하였습니다</string>
 	<string name="send_report">리포트 전송하기</string>
@@ -655,7 +646,6 @@
 	<string name="search_history_int_streets">교차로: {0} x {1} in {2}</string>
 	<string name="search_history_building">빌딩: {0}, {1}, {2}</string>
 	<string name="favorite">즐겨찾기</string>
-	<string name="clear_all">모두 지우기</string>
 	<string name="uploading_data">데이터를 업로드하는 중…</string>
 	<string name="uploading">업로드하는 중…</string>
 	<string name="search_nothing_found">아무것도 찾지 못했습니다</string>
@@ -811,9 +801,6 @@
 <string name="context_menu_item_update_map">지도 업데이트</string>
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>
 <string name="context_menu_item_create_poi">POI 생성</string>
-
-<string name="default_buttons_apply">적용</string>
-<string name="default_buttons_add">추가</string>
 <string name="add_favorite_dialog_top_text">즐겨찾기 이름 입력</string>
 <string name="add_favorite_dialog_default_favourite_name">즐겨찾기</string>
 <string name="add_favorite_dialog_favourite_added_template">즐겨찾기 포인트 \'\'{0}\'\' 이 성공적으로 추가되었습니다.</string>
@@ -847,7 +834,6 @@
 <string name="poi_error_poi_not_found">노드를 찾을 수 없거나 시설이 단일 노드가 아닙니다</string>
 <string name="poi_remove_confirm_template">{0}를 삭제할까요(정보를 입력하세요)?</string>
 <string name="poi_remove_title">POI 삭제</string>
-<string name="default_buttons_delete">삭제</string>
 <string name="poi_remove_success">POI 가 성공적으로 삭제되었습니다</string>
 <string name="poi_action_add">추가</string>
 <string name="poi_action_change">바꾸기</string>
@@ -863,7 +849,6 @@
 <string name="poi_dialog_comment_default">POI 변경</string>
 <string name="poi_dialog_other_tags_message">모든 다른 태그는 보존된다</string>
 <string name="default_buttons_commit">반영</string>
-<string name="default_buttons_reset">지우기</string>
 <string name="filter_current_poiButton">필터</string>
 <string name="edit_filter_delete_menu_item">삭제</string>
 <string name="edit_filter_save_as_menu_item">다른이름으로 저장</string>
@@ -956,11 +941,9 @@
     <string name="app_mode_aircraft">비행기</string>
     <string name="tip_faq_t">자주 묻는 질문을 보려면 https://code.google.com/p/osmand/wiki/FAQ 를 방문하세요.</string>
     <string name="tip_faq">자주 묻는 질문 (FAQ)</string>
-    <string name="local_osm_changes_delete_all">모두 삭제하기</string>
     <string name="animate_routing_route_not_calculated">먼저 경로를 계산하세요</string>
     <string name="animate_routing_route">"탐색한 경로를 이용하여 모의주행 "</string>
     <string name="animate_routing_gpx">GPX경로를 이용하여 모의주행하기</string>
-    <string name="remember_choice">내 선택을 기억하기</string>
     <string name="gps_status_eclipsim">GPS status</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
 	<string name="map_magnifier">지도 확대경</string>
@@ -1066,7 +1049,6 @@
     <string name="gpx_saved_sucessfully">GPX 파일이 성공적으로 {0} 에 저장</string>
     <string name="osmand_distance_planning_plugin_description">"이 플러그인은 지도 화면 위젯을 제공하며, 지도를 클릭하여 경로를 만들 수 있으며 . 또는 여행을 계획하고 지점 사이의 거리를 측정할 수 있으며, 기존 GPX 파일을  사용하거나 수정할 수 있습니다. 나중에 길안내에 사용할 수 있도록  결과물을 GPX 파일로 저장 할 수있습니다."</string>
     <string name="osmand_distance_planning_plugin_name">거리 계산 및 플래닝 도구</string>
-    <string name="default_buttons_do_not_show_again">다시 표시하지 않음</string>
     <string name="distance_measurement_start_editing">편집 시작</string>
     <string name="distance_measurement_finish_editing">편집 끝내기</string>
     <string name="distance_measurement_finish_subtrack">새로운 subtrack(세그먼트) 시작</string>
@@ -1105,7 +1087,6 @@
     <string name="select_address_activity">주소 선택</string>
     <string name="favourites_list_activity">즐겨찾기 선택</string>
     <string name="local_openstreetmap_act_title">OSM 대량수정</string>
-    <string name="default_buttons_other_actions">다른 액션</string>
     <string name="available_downloads_left">"다운로드 할 파일  %1$d 가능"</string>
     
 	<string name="layer_hillshade">음영기복 레이어</string>
@@ -1164,8 +1145,6 @@
     <string name="recording_context_menu_play">재생</string>
     <string name="recording_description">레코딩 %1$s %3$s %2$s</string>
     <string name="recording_default_name">레코딩</string>
-    <string name="av_control_stop">정지</string>
-    <string name="av_control_start">A/V 찍기</string>
     <string name="map_widget_av_notes">소리/영상 노트</string>
     <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
     <string name="map_widget_distancemeasurement">거리 측정</string>
@@ -1566,7 +1545,6 @@
 	<string name="local_index_installed">로컬 버전</string>
 	<string name="voice_not_specified">지정없음</string>
 	<string name="incomplete_locale">불완성</string>
-	<string name="downloading_file_new">다운로드 중…</string>
 	<string name="favourites_remove_dialog_msg">즐겨찾기 포인트를 삭제 하시겠습니까 \'%s\'?</string>
 	<string name="av_camera_focus_hiperfocal">지나친 초점 포커스</string>
 	<string name="use_distance_measurement_help">* 포인트를 탭하여 표시하기.\n* 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기
@@ -1759,7 +1737,6 @@
     <string name="osmo_io_error">"OsMo 연결 문제 : "</string>
     <string name="osmo_mode_on">OsMo 세션 중지</string>    
     <string name="osmo_mode_off">OsMo 세션 시작</string>
-    <string name="share_fav">공유</string>
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
 	<string name="hours_ago">시간 전</string>
     <string name="minutes_ago">분 전</string>
@@ -1966,7 +1943,6 @@
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
-    <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
 \n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 기부할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특수 서드파티 분석 도구를 사용하여 분석 할 수 있습니다.\n\n\n지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는온라인  웹 서비스를 사용하여 여행을 기록하기 위한 설정을 보여줍니다. "</string>
@@ -2126,7 +2102,6 @@
 	<string name="online_map">온라인 지도</string>
 	<string name="share_note">노트 공유</string>
 	<string name="rename_recording">레코딩 재명명</string>
-	<string name="export">내보내기</string>
 	<string name="audio">소리</string>
 	<string name="video">영상</string>
 	<string name="photo">사진</string>
@@ -2184,7 +2159,7 @@
 	<string name="shared_string_deselect">선택 취소</string>
 	<string name="shared_string_deselect_all">모두 선택 취소</string>
 	<string name="shared_string_clear">지우기</string>
-	<string name="shared_string_clear_all">모두 지우기</string>
+	<string name="shared_string_shared_string_clear_all">모두 지우기</string>
 	<string name="shared_string_save">저장</string>
 	<string name="shared_string_save_as_gpx">현재 트랙을 GPX 파일로 저장</string>
 	<string name="shared_string_rename">이름 바꾸기</string>
@@ -2197,13 +2172,13 @@
 	<string name="shared_string_control_stop">정지</string>
 	<string name="shared_string_import">가져오기</string>
 	<string name="shared_string_export">내보내기</string>
-	<string name="shared_string_more">더보기</string>
+	<string name="shared_string_more">더보기…</string>
 	<string name="shared_string_more_actions">더 많은 작업</string>
 	<string name="shared_string_do_not_show_again">다시 표시하지 않음</string>
 	<string name="shared_string_remember_my_choice">내 선택을 기억하기</string>
 	<string name="shared_string_refresh">새로고침</string>
 	<string name="shared_string_download">다운로드</string>
-	<string name="shared_string_downloading">다운로드 중</string>
+	<string name="shared_string_downloading">다운로드 중…</string>
 	<string name="shared_string_download_successful">성공적인 다운로드</string>
 	<string name="shared_string_io_error">입출력 오류가 발생하였습니다</string>
 	<string name="shared_string_unexpected_error">예기치 않은 오류가 발생 했습니다</string>

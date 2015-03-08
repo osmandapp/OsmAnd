@@ -14,12 +14,12 @@
 <string name="email">بريد إلكتروني</string>
 	<string name="edit_filter_delete_menu_item">حذف</string>
 	<string name="filter_current_poiButton">تصفية</string>
-	<string name="default_buttons_reset">إعادة تعيين</string>
+	<string name="shared_string_clear">إعادة تعيين</string>
 	<string name="poi_dialog_opening_hours">فتح</string>
 	<string name="poi_dialog_name">الاسم</string>
 	<string name="poi_action_add">إضافة</string>
 	<string name="poi_remove_success">تم حذف بنجاح POI</string>
-	<string name="default_buttons_delete">حذف</string>
+	<string name="shared_string_delete">حذف</string>
 	<string name="poi_remove_title">حذف POI</string>
 	<string name="poi_create_title">إنشاء POI</string>
 	<string name="osb_close_dialog_success">تم إغلاق بنجاح الشوائب</string>
@@ -49,8 +49,8 @@
     <string name="recording_context_menu_delete">حذف تسجيل</string>
     <string name="recording_context_menu_play">شغّل</string>
     <string name="recording_default_name">تسجيل</string>
-    <string name="av_control_stop">توقف</string>
-    <string name="av_control_start">بداية</string>
+    <string name="shared_string_control_stop">توقف</string>
+    <string name="shared_string_control_start">بداية</string>
     <string name="osmand_srtm_short_description_80_chars">ملحق OsmAnd للخطوط المحيطية بدون اتصال</string>
     
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
@@ -236,7 +236,7 @@
     <string name="gpx_saved_sucessfully">ملف GPX حفظها بنجاح {0}</string>
     <string name="osmand_distance_planning_plugin_description">إنشاء مسارات (أو استخدام / تعديل الملفات الموجودة GPX) لقياس المسافة بين نقاط. حفظ ك GPX، ويمكن استخدامها لتخطيط المسارات GPX.</string>
     <string name="osmand_distance_planning_plugin_name">حاسبة مسافة وأداة التخطيط</string>
-    <string name="default_buttons_do_not_show_again">لا تظهر مرة أخرى</string>
+    <string name="shared_string_do_not_show_again">لا تظهر مرة أخرى</string>
     <string name="distance_measurement_start_editing">بدء تحرير</string>
     <string name="distance_measurement_finish_editing">الانتهاء من تحرير</string>
     <string name="distance_measurement_finish_subtrack">بدء subtrack جديدة</string>
@@ -255,7 +255,7 @@
     <string name="contribution_activity">تثبيت الإصدار</string>
     <string name="accessibility_options">خيارات الإتاحة</string>
     <string name="select_address_activity">حدد عنوان</string>
-    <string name="default_buttons_other_actions">إجراءات أخرى</string>
+    <string name="shared_string_more_actions">إجراءات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
 	<string name="default_buttons_commit">ارتكب</string>
 	<string name="poi_dialog_comment">تعليق</string>
@@ -269,8 +269,8 @@
 	<string name="osb_add_dialog_error">حدث استثناء: لم يتم إنشاء خطأ</string>
 	<string name="osb_author_dialog_password">OSM كلمة المرور (اختياري)</string>
 	<string name="add_favorite_dialog_default_favourite_name">مفضل</string>
-	<string name="default_buttons_apply">تطبق</string>
-	<string name="default_buttons_add">إضافة</string>
+	<string name="shared_string_apply">تطبق</string>
+	<string name="shared_string_add">إضافة</string>
 	<string name="shared_string_no">ليس</string>
 	<string name="shared_string_yes">نعم</string>
 	<string name="shared_string_cancel">إلغاء</string>
@@ -675,7 +675,7 @@
 	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
-    <string name="remember_choice">تذكر اختياري</string>
+    <string name="shared_string_remember_my_choice">تذكر اختياري</string>
     <string name="gps_status_eclipsim">حالة GPS</string>
     <string name="tip_map_styles_t">"يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلائم احتياجاتك:
 \n\nفيما عدا نمط الخرائط \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال
@@ -747,7 +747,7 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
     <string name="local_osm_changes_delete_all_confirm">ستحذف %1$d من التغيرات .هل انت متأكد ؟</string>
-    <string name="local_osm_changes_delete_all">احذف الكل</string>
+    <string name="shared_string_delete_all">احذف الكل</string>
     <string name="osmodroid_refresh">تحديث القنوات</string>
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا البرنامج المساعد الخطوط الكنتورية التي يمكن عرضها في OsmAnd \'ق حاليا الخرائط. ويستند البيانات العالمية (بين 70 درجة شمالا و 70 درجة جنوبا) على القياسات التي كتبها SRTM (المكوك بعثة الطوبوغرافيا الرادار) وASTER (المتقدم المحمول في الفضاء الانبعاث الحراري وانعكاس الإشعاع)، أداة التصوير على متن تيرا، القمر الصناعي الرئيسي من وكالة ناسا \'ق نظام مراقبة الأرض. ASTER هو جهد تعاوني بين وكالة ناسا واليابان \'ق وزارة الاقتصاد والتجارة والصناعة (METI)، وأنظمة الفضاء اليابانية (J-spacesystems)</string>
     <string name="srtm_plugin_description">يسهل تحميله خطوط الكنتورية وحاليا hillshades (\'إعدادات \' \ → \'إدارة البيانات \' → \'تحميل \' → حدد المطلوب نوع الخريطة).</string>
@@ -1120,7 +1120,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="update_poi_file_not_found">ملف المحلية للحفاظ على التغييرات POI لم يتم العثور على وتعذر إنشاء.</string>
 	<string name="button_upgrade_osmandplus">ترقية الى OsmAnd+</string>
 	<string name="map_version_changed_info">يحتوي الخادوم على ملفات خرائط غير متوافقة مع الإصدار الحالي من التطبيق. لتحميلها واستخدامها، نرجو ترقية التطبيق إلى أحدث إصدار.</string>
-	<string name="local_index_mi_rename">تغيير الإسم</string>
+	<string name="shared_string_rename">تغيير الإسم</string>
 	<string name="show_gpx_route">اظهار على الخريطة</string>
 	<string name="poi_filter_nominatim">تشعبات على الانترنت</string>
 	<string name="search_position_current_location_search">يبحث عن الموضع…</string>
@@ -1146,11 +1146,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 → → \ ن \ ر الشوائب إصلاحات ↵
 →
 	</string>
-	<string name="save_route_dialog_title">حفظ الطريق كمسار GPX</string>
+	<string name="shared_string_save_as_gpx">حفظ الطريق كمسار GPX</string>
 	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح</string>
 	<string name="filename_input">اسم الملف </string>
 	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا</string>
-	<string name="default_buttons_save">حفظ</string>
+	<string name="shared_string_save">حفظ</string>
 	<string name="menu_save_directions">حفظ الاتجاهات</string>
 	<string name="local_index_upload_gpx_description">رفع ملفات GPX إلى مجتمع OSM. ستستخدم لتحسين الخرائط.</string>
 	<string name="local_index_items_uploaded">رُفع %1$d عنصرًا من %2$d عنصر بنجاح.</string>
@@ -1183,7 +1183,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="local_index_mi_backup">عطّل</string>
 	<string name="local_index_mi_delete">احذف</string>
 	<string name="local_index_mi_reload">حدّث من sdcard</string>
-	<string name="local_index_download">تنزيل</string>
+	<string name="shared_string_download">تنزيل</string>
 	<string name="local_index_poi_data">بيانات POI</string>
 	<string name="local_index_address_data">بيانات العناوين</string>
 	<string name="local_index_transport_data">بيانات النقل</string>

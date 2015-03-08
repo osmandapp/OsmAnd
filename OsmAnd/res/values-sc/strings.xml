@@ -116,11 +116,11 @@
     <string name="tip_faq_t">Vìsita https://code.google.com/p/osmand/wiki/FAQ pro bìdere sas preguntas prus fitianas.</string>
     <string name="tip_faq">Preguntas fitianas</string>
     <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d mudaduras. Ses seguru?</string>
-    <string name="local_osm_changes_delete_all">Burra totu</string>
+    <string name="shared_string_delete_all">Burra totu</string>
     <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s’andala in antis</string>
     <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
-    <string name="remember_choice">Ammenta s’issèberu meu</string>
+    <string name="shared_string_remember_my_choice">Ammenta s’issèberu meu</string>
     <string name="gps_status_eclipsim">Istadu GPS</string>
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">o</string>
@@ -244,7 +244,7 @@
         * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
         * Carca e tene carcau supra de unu puntu pro bìdere e alliongiare una descrizione.\n
         * Carca supra su widget de medidura pro bìdere àteras atziones possibiles.</string>
-    <string name="default_buttons_do_not_show_again">Non ammustrare dae nou</string>
+    <string name="shared_string_do_not_show_again">Non ammustrare dae nou</string>
     <string name="distance_measurement_start_editing">Incumintza a mudare</string>
     <string name="distance_measurement_finish_editing">Fini de mudare</string>
     <string name="distance_measurement_finish_subtrack">Incumintza una sutacaminera noa</string>
@@ -292,7 +292,7 @@
     <string name="select_address_activity">Issèbera s’indiritzu</string>
     <string name="favourites_list_activity">Issèbera preferridu</string>
     <string name="local_openstreetmap_act_title">Modìficas OSM</string>
-    <string name="default_buttons_other_actions">Àteras atziones</string>
+    <string name="shared_string_more_actions">Àteras atziones</string>
     
 	<string name="tip_recent_changes_1_2_t">"Curretziones in sa 1.2.1:
 \n\t*Currettu Geo Intent (Foursquare, c:geo)
@@ -380,8 +380,8 @@
     <string name="recording_context_menu_play">Reprodui</string>
     <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrande</string>
-    <string name="av_control_stop">Stop</string>
-    <string name="av_control_start">Avia/Inghitza</string>
+    <string name="shared_string_control_stop">Stop</string>
+    <string name="shared_string_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAndfor pro sas lìnias de livellu sena lìnia</string>
     <string name="osmand_srtm_long_description_1000_chars">Custu plugin frunidi sas lìnias de livellu chi podent èssere bisualizatas in sas mapas sena lìnia de OsmAnd. Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems).</string>
@@ -935,11 +935,11 @@
 	<string name="search_position_favorites">Prefèrridos…</string>
 	<string name="select_search_position">Chirca a curtzu de:</string>
 	<string name="context_menu_item_search">Chirca a curtzu de inoghe</string>
-	<string name="save_route_dialog_title">Sarba s’àndala comente rasta GPX</string>
+	<string name="shared_string_save_as_gpx">Sarba s’àndala comente rasta GPX</string>
 	<string name="route_successfully_saved_at">Àndala sarbada comente \'%1$s\'.</string>
 	<string name="filename_input">"Nùmene documentu: "</string>
 	<string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
-	<string name="default_buttons_save">Sarba</string>
+	<string name="shared_string_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
 	<string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="osmo_invite">Invita…</string>
@@ -1138,7 +1138,7 @@
 	<string name="old_poi_file_should_be_deleted">Su documentu de datos PDI \'%1$s\' est bundajolu e podet èssere burrau.</string>
 	<string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
 	<string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s’aplicu a s\'ùritma versione.</string>
-	<string name="local_index_mi_rename">Torra a numenare</string>
+	<string name="shared_string_rename">Torra a numenare</string>
 	<string name="search_position_undefined">Non dessinidu</string>
 	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Positzione currente…</string>
@@ -1167,7 +1167,7 @@
 	<string name="local_index_mi_delete">Burra</string>
 	<string name="local_index_mi_export">Esporta</string>
 	<string name="local_index_mi_reload">Torra a carrigare dae s’ischeda SD</string>
-	<string name="local_index_download">Iscàrriga</string>
+	<string name="shared_string_download">Iscàrriga</string>
 	<string name="local_index_address_data">Datos indiritzos</string>
 	<string name="local_index_transport_data">Datos trasportos pùblicos</string>
 	<string name="local_index_map_data">Datos mapa</string>
@@ -1305,7 +1305,7 @@
 	<string name="daynight">Modalidade die/note</string>
 	<string name="items_were_selected">{0} ogetu/os ischertados</string>
 	<string name="filter_existing_indexes">Iscarrigados</string>
-	<string name="deselect_all">Deischerta totu</string>
+	<string name="shared_strings_deselect_all">Deischerta totu</string>
 	<string name="shared_string_select_all">Ischerta totu</string>
 	<string name="fast_route_mode">Àndala prus lestra</string>
 	<string name="tiles_to_download_estimated_size">Pro su zoom {0} iscàrriga {1} tasseddos ({2} MB)</string>
@@ -1344,9 +1344,9 @@
 	<string name="fav_file_to_load_not_found">Su documentu GPX chi càbit sos prefèrridos no est istadu agatadu in {0}</string>
 	<string name="fav_saved_sucessfully">Prefèrridos sarbados in {0}</string>
 	<string name="no_fav_to_save">Perunu prefèrridu da sarbare</string>
-	<string name="import_fav">Importa</string>
+	<string name="shared_string_import">Importa</string>
 	<string name="export_fav">Esporta</string>
-	<string name="share_fav">Cumpartzi</string>
+	<string name="shared_string_share">Cumpartzi</string>
 	<string name="share_fav_subject">Prefèrridos cumpartzidos tramite OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Errore durante su carrigamentu de su documentu GPX</string>
 	<string name="send_report">Imbia resumu</string>
@@ -1376,7 +1376,7 @@
 	<string name="menu_mute_off">S’àudio est disativadu</string>
 	<string name="menu_mute_on">Àudio deativadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
-    <string name="more">Àteru…</string>
+    <string name="shared_string_more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
 	<string name="local_index_items_uploaded">Ogetu/os %1$d de %2$d carrigadu curretamente.</string>
 	<string name="tip_location_sharing_t">"Podes cumpartzire sa positzione de sos logos interesantes de sos biagios tuos cun familiares e amigos, tràmite su Menù cuntestuale \'Imprea sa positzione\' → \'Cumpartzi positzione\'.
@@ -1388,7 +1388,7 @@
 	<string name="voice_is_not_available_msg">Boghe de ghia non disponìbile. Intra in \'Impostaduras\' → \'Impostaduras generales\' → \'Ghia vocale\', issèbera su pachete prefèrridu e/o iscàrrigalu.</string>
 	<string name="daynight_descr">Issèbera sas règulas pro sa muda de sa modalidade die/note</string>
 	<string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
-	<string name="reload">Torra a carrigare</string>
+	<string name="shared_string_refresh">Torra a carrigare</string>
 	<string name="fast_route_mode_descr">"Abìlita pro calculare s’àndala prus lestra o disabìlita pro s’àndala prus curtza "</string>
 	<string name="select_max_zoom_preload_area">Ischerta su zoom màssimu da precarrigare</string>
 	<string name="continuous_rendering">Disinnu sighidu</string>
@@ -1460,7 +1460,7 @@
 	<string name="search_history_int_streets">Rugrada: {0} x {1} in {2}</string>
 	<string name="search_history_building">Edifìtzios: {0}, {1}, {2}</string>
 	<string name="favorite">Prefèrridu</string>
-	<string name="clear_all">Burra totu</string>
+	<string name="shared_string_clear_all">Burra totu</string>
 	<string name="shared_string_history">Istòria</string>
 	<string name="uploading_data">Imbiu datos…</string>
 	<string name="uploading">Imbiu…</string>
@@ -1482,7 +1482,7 @@
 	<string name="address">Indiritzu</string>
 	<string name="download_index_success">Iscarrigamentu cumpridu</string>
 	<string name="error_io_error">Errore de I/O</string>
-	<string name="downloading_file_new">Iscarrigande …</string>
+	<string name="shared_string_downloading">Iscarrigande …</string>
 	<string name="downloading">Iscarrigande…</string>
 	<string name="downloading_list_indexes">Iscarrigamentu lista regiones disponìbiles…</string>
 	<string name="list_index_files_was_not_loaded">Sos documentos inditze non sunt istados agatados in osmand.net.</string>
@@ -1605,8 +1605,8 @@
 	<string name="context_menu_item_open_bug">Sinnala un\'errore OSM</string>
 	<string name="context_menu_item_create_poi">Crea PDI</string>
 	<string name="shared_string_cancel">Burra</string>
-	<string name="default_buttons_apply">Aplica</string>
-	<string name="default_buttons_add">Annanghe</string>
+	<string name="shared_string_apply">Aplica</string>
+	<string name="shared_string_add">Annanghe</string>
 	<string name="add_favorite_dialog_top_text">Inserta su nùmene de su prefèrridu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Prefèrridu</string>
 	<string name="add_favorite_dialog_favourite_added_template">Su puntu prefèrridu \'\'{0}\'\' est istadu annantu.</string>
@@ -1635,11 +1635,11 @@
 	<string name="poi_error_poi_not_found">Su nodu no est istadu agatadu o s’amenidade no est unu nodu sìngulu</string>
 	<string name="poi_remove_confirm_template">Burrare {0} (insertare unu cummentu)?</string>
 	<string name="poi_remove_title">Burradura PDI</string>
-	<string name="default_buttons_delete">Burra</string>
+	<string name="shared_string_delete">Burra</string>
 	<string name="poi_remove_success">PDI burradu curretamente</string>
 	<string name="poi_error_unexpected_template">Errore ispessadu durante s’esecutzione de s’atzione {0}.</string>
 	<string name="default_buttons_commit">Esegui</string>
-	<string name="default_buttons_reset">Burra</string>
+	<string name="shared_string_clear">Burra</string>
 	<string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
 	<string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
 	<string name="edit_filter_create_message">Su filtru {0} est istadu burradu</string>
@@ -1859,7 +1859,7 @@
 	<string name="online_map">Mapa in lìnia</string>
 	<string name="share_note">Cumpartzi sa nota</string>
 	<string name="rename_recording">Torra a numenare sa registratzione</string>
-	<string name="export">Esporta</string>
+	<string name="shared_string_export">Esporta</string>
 	<string name="audio">Àudio</string>
 	<string name="video">Vìdeo</string>
 	<string name="photo">Foto</string>

@@ -212,7 +212,7 @@
   <string name="update_poi_file_not_found">Nevar atrast un izveidot failu, kurā uzturēt POI izmaiņas.</string>
   <string name="button_upgrade_osmandplus">Atjaunināt OsmAnd+</string>
   <string name="map_version_changed_info">Serveris satur kartes failus, kuri nav savietojami ar pašreizējo aplikācijas versiju. Lai varētu lejupielādēt un lietot šos failus, lūdzu atjauniniet aplikāciju uz jaunāku versiju.</string>
-  <string name="local_index_mi_rename">Pārsaukt</string>
+  <string name="shared_string_rename">Pārsaukt</string>
   <string name="show_gpx_route">Parādīt kartē</string>
   <string name="poi_filter_nominatim">Tiešaistes POI - Nominatim</string>
   <string name="search_position_current_location_search">Nosaka atrašanās vietu…</string>
@@ -226,11 +226,11 @@
   <string name="select_search_position">Meklēt blakus:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
   <string name="tip_recent_changes_0_6_7_t">Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi</string>
-  <string name="save_route_dialog_title">Saglabāt maršrutu GPX trasē</string>
+  <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
-  <string name="default_buttons_save">Saglabāt</string>
+  <string name="shared_string_save">Saglabāt</string>
   <string name="menu_save_directions">Saglabāt norādījumus</string>
   <string name="local_index_upload_gpx_description">Augšupielādēt GPX failus OSM kopienai. Tie tiks izmantoti, lai uzlabotu kartes.</string>
   <string name="local_index_items_uploaded">%1$d no %2$d vienība(s) veiksmīgi augšupielādētas.</string>
@@ -263,7 +263,7 @@
   <string name="local_index_mi_backup">Arhivēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
   <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
-  <string name="local_index_download">Lejupielādēt</string>
+  <string name="shared_string_download">Lejupielādēt</string>
   
   <string name="local_index_poi_data">POI dati</string>
   <string name="local_index_address_data">Adrešu dati</string>
@@ -449,9 +449,9 @@
   <string name="download_files_question">Lejupielādēt {0} failu(s) ({1} MB)?</string>
   <string name="items_were_selected">izvēlēta {0} vienība(s)</string>
   <string name="filter_existing_indexes">Filtrs lejupielādēts</string>
-  <string name="deselect_all">Noņemt visu</string>
+  <string name="shared_strings_deselect_all">Noņemt visu</string>
   <string name="shared_string_select_all">Atlasīt visu</string>
-  <string name="reload">Atsvaidzināt</string>
+  <string name="shared_string_refresh">Atsvaidzināt</string>
   <string name="fast_route_mode">Ātrākais maršruts</string>
   <string name="fast_route_mode_descr">Iespējot, lai rēķinātu ātrāko maršrutu vai atspējot, lai rēķinātu īsāko maršrutu </string>
   <string name="tiles_to_download_estimated_size">Palielinājumam {0} lejupielādēt {1} attēlus ({2} MB)</string>
@@ -503,7 +503,7 @@
   <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>
   <string name="fav_saved_sucessfully">Izlase veiksmīgi saglabāta uz {0}</string>
   <string name="no_fav_to_save">Nav izlases punktu ko saglabāt</string>
-  <string name="import_fav">Importēt</string>
+  <string name="shared_string_import">Importēt</string>
   <string name="export_fav">Eksportēt</string>
   <string name="error_occurred_loading_gpx">Kļūda ielādējot GPX</string>
   <string name="send_report">Sūtīt atskaiti</string>
@@ -604,7 +604,7 @@
   <string name="search_history_int_streets">Krustojums: {0} x {1} in {2}</string>
   <string name="search_history_building">Ēka: {0}, {1}, {2}</string>
   <string name="favorite">Izlase</string>
-  <string name="clear_all">Noņemt visu</string>
+  <string name="shared_string_clear_all">Noņemt visu</string>
   <string name="shared_string_history">Vēsture</string>
   <string name="uploading_data">Augšupielādē datus…</string>
   <string name="uploading">Augšupielādē…</string>
@@ -765,8 +765,8 @@
   <string name="context_menu_item_create_poi">Izveidot POI</string>
   <string name="shared_string_yes">Jā</string>
   <string name="shared_string_cancel">Atcelt</string>
-  <string name="default_buttons_apply">Pielietot</string>
-  <string name="default_buttons_add">Pievienot</string>
+  <string name="shared_string_apply">Pielietot</string>
+  <string name="shared_string_add">Pievienot</string>
   <string name="shared_string_no">Nē</string>
   <string name="add_favorite_dialog_top_text">Ievadiet vietas nosaukumu</string>
   <string name="add_favorite_dialog_default_favourite_name">Izlase</string>
@@ -795,7 +795,7 @@
   <string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serviss nav atzīmēts kā viena node</string>
   <string name="poi_remove_confirm_template">Dzēst {0} (ievadiet komentāru)?</string>
   <string name="poi_remove_title">Dzēst POI</string>
-  <string name="default_buttons_delete">Dzēst</string>
+  <string name="shared_string_delete">Dzēst</string>
   <string name="poi_remove_success">POI tika veiksmīgi izdzēsts</string>
   <string name="poi_action_add">pievienot</string>
   <string name="poi_action_change">mainīt</string>
@@ -809,7 +809,7 @@
   <string name="poi_dialog_comment_default">POI izmaiņas</string>
   <string name="poi_dialog_other_tags_message">Visi pārējie marķieri ir rezervēti</string>
   <string name="default_buttons_commit">Apvienot</string>
-  <string name="default_buttons_reset">Atiestatīt</string>
+  <string name="shared_string_clear">Atiestatīt</string>
   <string name="filter_current_poiButton">Filtrēt</string>
   <string name="edit_filter_delete_menu_item">Dzēst</string>
   <string name="edit_filter_save_as_menu_item">Saglabāt kā</string>
@@ -1051,11 +1051,11 @@
     <string name="app_mode_motorcycle">Motocikls</string>
     <string name="tip_faq_t">Lūdzu apmeklējiet https://code.google.com/p/osmand/wiki/FAQ lai izlasītu biežāk uzdotos jautājumus.</string>
     <string name="tip_faq">Biežāk uzdotie jautājumi</string>
-    <string name="local_osm_changes_delete_all">Dzēst visu</string>
+    <string name="shared_string_delete_all">Dzēst visu</string>
     <string name="animate_routing_route_not_calculated">Vispirms lūdzu aprēķiniet maršrutu</string>
     <string name="animate_routing_route">Aprēķinātā maršruta simulācija </string>
     <string name="animate_routing_gpx">GPX trases simulācija</string>
-    <string name="remember_choice">Atcerēties manu izvēli</string>
+    <string name="shared_string_remember_my_choice">Atcerēties manu izvēli</string>
     <string name="gps_status_eclipsim">GPS statuss</string>
     <string name="shared_string_and">un</string>
     <string name="shared_string_or">vai</string>
@@ -1127,7 +1127,7 @@
     <string name="gpx_saved_sucessfully">GPX fails tika saglabāts {0}</string>
     <string name="osmand_distance_planning_plugin_description">Izveidot ceļa posmus (vai izmantot/labot esošos GPX failus), lai mērītu attālumu starp tiem. Var tik saglabāti kā GPX faili, lai plānotu GPX maršrutus.</string>
     <string name="osmand_distance_planning_plugin_name">Distances kalkulators &amp; plānotājs</string>
-    <string name="default_buttons_do_not_show_again">Vairs nerādīt</string>
+    <string name="shared_string_do_not_show_again">Vairs nerādīt</string>
     <string name="distance_measurement_start_editing">Sākt labot</string>
     <string name="distance_measurement_finish_editing">Beigt labot</string>
     <string name="distance_measurement_finish_subtrack">Jauns apakšposms</string>
@@ -1160,7 +1160,7 @@
     <string name="select_address_activity">Atlasīt adresi</string>
     <string name="favourites_list_activity">Atlasīt favorītu</string>
     <string name="local_openstreetmap_act_title">OSM modifikācijas</string>
-    <string name="default_buttons_other_actions">Citas darbības</string>
+    <string name="shared_string_more_actions">Citas darbības</string>
     
 	<string name="layer_hillshade">Kalnu reljefa slānis</string>
     <string name="map_widget_gps_info">GPS informācija</string>
@@ -1219,8 +1219,8 @@
     <string name="recording_context_menu_play">Atskaņot</string>
     <string name="recording_description">Ierakstīšana %1$s %2$s of %3$s</string>
     <string name="recording_default_name">Ierakstīšana</string>
-    <string name="av_control_stop">Apturēt</string>
-    <string name="av_control_start">Sākt</string>
+    <string name="shared_string_control_stop">Apturēt</string>
+    <string name="shared_string_control_start">Sākt</string>
     <string name="map_widget_av_notes">Audio/video piezīmes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd spraudnis bezsaistes kontūrlīnijām</string>
     <string name="map_widget_distancemeasurement">Distances mērīšana</string>
@@ -1268,7 +1268,7 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
 	<string name="support_new_features_descr">Lūdzu atbalstiet programmu ar ziedojumiem, lai palīdzētu to uzlabot un attīstīt</string>
 	<string name="incomplete_locale">Nepabeigts</string>
-	<string name="downloading_file_new">Lejupielādē …</string>
+	<string name="shared_string_downloading">Lejupielādē …</string>
 	<string name="av_camera_focus">Fokusa režīms kamerai</string>
 	<string name="av_camera_focus_descr">Fokusa režīms iekšējai kamerai</string>
 	<string name="av_camera_focus_auto">Auto fokuss</string>
@@ -1631,7 +1631,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_mode_on">Apturēt OSMo sesiju</string>    
     <string name="osmo_mode_off">Sākt OSMo sesiju</string>
     
-    <string name="share_fav">Kopīgot</string>
+    <string name="shared_string_share">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
     <string name="tip_recent_changes_1_8_alpha">Izmaiņas uz 1.8:
@@ -1774,7 +1774,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="show_zoom_buttons_navigation_descr">Navigācijas laikā rādīt tālummaiņas pogas</string>
     <string name="confirm_every_run">Vienmēr jautāt</string>
 	<string name="download_additional_maps">Lejupielādēt trūkstošās kartes %1$s (%2$d MB)?</string>
-    <string name="more">Vēl...</string>
+    <string name="shared_string_more">Vēl...</string>
     <string name="lang_he">Ebreju</string>
     <string name="osmo_auth_error_short">Autorizācija neizdevās</string>
     <string name="sort_by_distance">Kārtot pēc attāluma</string>

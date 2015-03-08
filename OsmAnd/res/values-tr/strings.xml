@@ -165,8 +165,8 @@
     <string name="recording_context_menu_delete">Kayıt sil</string>
     <string name="recording_description">Kayıt %3$\'nın %1$s %2$s</string>
     <string name="recording_default_name">kayıt</string>
-    <string name="av_control_stop">durdur</string>
-    <string name="av_control_start">başlat</string>
+    <string name="shared_string_control_stop">durdur</string>
+    <string name="shared_string_control_start">başlat</string>
     <string name="map_widget_av_notes">Ses/video notları</string>
     <string name="osmand_srtm_short_description_80_chars">Çevrimdışı çevreleme çizgileri için OsmAnd eklentisi</string>
     <string name="osmand_srtm_long_description_1000_chars">Bu eklenti OsmAnd adlı çevrimdışı haritalar gösterilebilir kontür çizgileri sağlar. Global veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı.</string>
@@ -338,13 +338,13 @@
 	<string name="file_can_not_be_renamed">Dosya yeniden adlandırılamaz.</string>
 	<string name="file_with_name_already_exists">Bu isimli dosya zaten var.</string>
 	<string name="poi_filter_by_name">İsme göre ara</string>
-	<string name="local_index_mi_rename">Yeniden adlandır</string>
+	<string name="shared_string_rename">Yeniden adlandır</string>
 	<string name="show_gpx_route">Haritada göster</string>
 	<string name="search_position_address">Adres…</string>
 	<string name="search_position_favorites">Favoriler…</string>
 	<string name="search_position_current_location">Geçerli konum…</string>
 	<string name="file_with_name_already_exist">Aynı isimli dosya zaten var.</string>
-	<string name="default_buttons_save">Kaydet</string>
+	<string name="shared_string_save">Kaydet</string>
 	<string name="favorite_home_category">Ev</string>
 	<string name="favorite_friends_category">Arkadaşlar</string>
 	<string name="favorite_places_category">Yerler</string>
@@ -354,7 +354,7 @@
 	<string name="vector_map_not_needed">Hayır, teşekkürler</string>
 	<string name="local_index_mi_delete">Sil</string>
 	<string name="local_index_mi_reload">Sd card\'tan tekrar yükle</string>
-	<string name="local_index_download">İndir</string>
+	<string name="shared_string_download">İndir</string>
 	<string name="search_offline_clear_search">Yeni Arama</string>
 	<string name="map_text_size_descr">Haritadaki yer adları için yazı boyutunu seçin</string>
 	<string name="map_text_size">Harita yazı karakteri boyutu</string>
@@ -391,7 +391,7 @@
 	<string name="daynight_mode_auto">Gündoğumu/günbatımı</string>
 	<string name="daynight">Gündüz/gece modu</string>
 	<string name="shared_string_select_all">Hepsini seç</string>
-	<string name="reload">Yenile</string>
+	<string name="shared_string_refresh">Yenile</string>
 	<string name="fast_route_mode">En hızlı rota</string>
 	<string name="context_menu_item_download_map">Haritayı indir</string>
 	<string name="maps_could_not_be_downloaded">Bu harita indirilemedi</string>
@@ -433,7 +433,7 @@
 	<string name="search_poi_location">Sinyal aranıyor…</string>
 	<string name="transport_Routes">Rotalar</string>
 	<string name="shared_string_ok">Tamam</string>
-	<string name="clear_all">Hepsini temizle</string>
+	<string name="shared_string_clear_all">Hepsini temizle</string>
 	<string name="searching">Aranıyor…</string>
 	<string name="searching_address">Adres aranıyor…</string>
 	<string name="search_online_address">İnternet</string>
@@ -498,8 +498,8 @@
 	<string name="context_menu_item_create_poi">POI oluştur</string>
 	<string name="shared_string_yes">Evet</string>
 	<string name="shared_string_cancel">İptal et</string>
-	<string name="default_buttons_apply">Uygula</string>
-	<string name="default_buttons_add">Ekle</string>
+	<string name="shared_string_apply">Uygula</string>
+	<string name="shared_string_add">Ekle</string>
 	<string name="shared_string_no">Hayır</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favori</string>
 	<string name="favourites_context_menu_delete">Favoriyi sil</string>
@@ -514,7 +514,7 @@
 	<string name="poi_edit_title">POI düzenle</string>
 	<string name="poi_create_title">POI oluştur</string>
 	<string name="poi_remove_title">POI sil</string>
-	<string name="default_buttons_delete">Sil</string>
+	<string name="shared_string_delete">Sil</string>
 	<string name="poi_remove_success">POI başarıyla silindi</string>
 	<string name="poi_action_add">ekle</string>
 	<string name="poi_action_change">değiştir</string>
@@ -787,7 +787,7 @@
 	<string name="search_position_map_view">Son harita görünümü</string>
 	<string name="select_search_position">Yakınlarda ara:</string>
 	<string name="context_menu_item_search">Buraya yakın ara</string>
-	<string name="save_route_dialog_title">Rotayı GPX olarak kaydet</string>
+	<string name="shared_string_save_as_gpx">Rotayı GPX olarak kaydet</string>
 	<string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
 	<string name="filename_input">"Dosya adı: "</string>
 	<string name="menu_save_directions">Tarifi Kaydet</string>
@@ -861,7 +861,7 @@
     <string name="plugin_distance_point">Mevki</string>
     <string name="gpx_file_name">GPX dosya adı</string>
     <string name="osmand_distance_planning_plugin_name">Mesafe hesaplayıcı ve Planlama aracı</string>
-    <string name="default_buttons_do_not_show_again">Tekrar gösterme</string>
+    <string name="shared_string_do_not_show_again">Tekrar gösterme</string>
     <string name="distance_measurement_start_editing">Düzenlemeye başla</string>
     <string name="distance_measurement_finish_editing">Düzenlemeyi bitir</string>
     <string name="distance_measurement_finish_subtrack">Yeni bir alt yola başla</string>
@@ -893,7 +893,7 @@
     <string name="select_address_activity">Adres seç</string>
     <string name="favourites_list_activity">Favoriyi seç</string>
     <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
-    <string name="default_buttons_other_actions">Diğer komutlar</string>
+    <string name="shared_string_more_actions">Diğer komutlar</string>
     <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
     <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
     <string name="about_version">Sürüm :</string>
@@ -987,7 +987,7 @@
 	<string name="download_files_question">{0} dosya indirilecek ({1} MB)?</string>
 	<string name="items_were_selected">{0} öğe seçildi</string>
 	<string name="filter_existing_indexes">İndirilen</string>
-	<string name="deselect_all">Tüm seçimi kaldır</string>
+	<string name="shared_strings_deselect_all">Tüm seçimi kaldır</string>
 	<string name="fast_route_mode_descr">Hızlı güzergah hesaplamayı etkinleştirin ya da kısa güzergah için devre dışı bırakın. </string>
 	<string name="continuous_rendering">Devamlı işleme</string>
 	<string name="rendering_exception">Seçilen alanın işlemesi yapılırken hata oluştu</string>
@@ -1010,7 +1010,7 @@
 	<string name="rotate_map_none_opt">Döndürme (kuzey)</string>
 	<string name="rotate_map_to_bearing_descr">Harita ekran hizalamasını seçin</string>
 	<string name="show_route">Güzergah ayrıntıları</string>
-	<string name="import_fav">İçe Aktar</string>
+	<string name="shared_string_import">İçe Aktar</string>
 	<string name="export_fav">Dışa Aktar</string>
 	<string name="error_occurred_loading_gpx">GPX yüklenirken hata oluştu</string>
 	<string name="none_region_found">Bölge için SD kart üzerinde çevrimdışı veri bulunamadı. Genel ağdan (internetten) bölgeleri indirin.</string>
@@ -1071,7 +1071,7 @@
 	<string name="sd_dir_not_accessible">SD karttaki kayıt dizini ulaşılabilir değil</string>
 	<string name="download_question">{0} - {1} indir ?</string>
 	<string name="download_question_exist">{0} için çevrimdışı veri zaten mevcut ({1}). Güncellemek ister misiniz ({2}) ?</string>
-	<string name="downloading_file_new">İndiriliyor…</string>
+	<string name="shared_string_downloading">İndiriliyor…</string>
 	<string name="downloading_list_indexes">Mevcut bölgelerin listesi indiriliyor…</string>
 	<string name="list_index_files_was_not_loaded">osmand.net\'ten bölgelerin listesi alınamadı.</string>
 	<string name="update_existing">Değiştir</string>
@@ -1107,7 +1107,7 @@
 	<string name="osb_author_dialog_password">OSM şifresi (isteğe bağlı)</string>
 	<string name="poi_action_succeded_template">{0} olayı başarıyla tamamlandı.</string>
 	<string name="poi_dialog_name">İsim</string>
-	<string name="default_buttons_reset">Sıfırla</string>
+	<string name="shared_string_clear">Sıfırla</string>
 	<string name="filter_current_poiButton">Süzgeç</string>
 	<string name="edit_filter_delete_dialog_title">Seçilen süzgeç silinsin mi?</string>
 	<string name="edit_filter_delete_message">{0} süzgeci silindi</string>
@@ -1181,11 +1181,11 @@
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ Sık sorulan soruları görmek için , karşılaşabileceğinizURL\'ye bakın .</string>
     <string name="tip_faq">SSS</string>
     <string name="local_osm_changes_delete_all_confirm">Siz %1$d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
-    <string name="local_osm_changes_delete_all">Tümünü kaldır</string>
+    <string name="shared_string_delete_all">Tümünü kaldır</string>
     <string name="animate_routing_route_not_calculated">Şimdi rotayı hesaplamak Lütfen</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
     <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
-    <string name="remember_choice">Seçmeyi unutmayın</string>
+    <string name="shared_string_remember_my_choice">Seçmeyi unutmayın</string>
     <string name="gps_status_eclipsim">GPS Durumu</string>
     <string name="shared_string_and">ve</string>
     <string name="shared_string_or">veya</string>

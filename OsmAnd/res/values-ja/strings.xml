@@ -227,9 +227,9 @@ OsmAnd バージョンがインストールされています。全てのオフ�
 MB)をダウンロードしますか?</string>
      <string name="items_were_selected">{0} 件のアイテムを選択</string>
      <string name="filter_existing_indexes">ダウンロードされたフィルタ</string>
-     <string name="deselect_all">全て選択解除</string>
+     <string name="shared_strings_deselect_all">全て選択解除</string>
      <string name="shared_string_select_all">全て選択</string>
-     <string name="reload">リロード</string>
+     <string name="shared_string_refresh">リロード</string>
 
      <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
  <string name="general_settings">全般設定</string>
@@ -297,7 +297,7 @@ MB)をダウンロードしますか?</string>
      <string name="fav_file_to_load_not_found">{0}にはお気に入りを含むGPXファイルはありません</string>
      <string name="fav_saved_sucessfully">お気に入りは{0}に保存されました</string>
      <string name="no_fav_to_save">保存するお気に入りの地点がありません</string>
-     <string name="import_fav">インポート</string>
+     <string name="shared_string_import">インポート</string>
      <string name="export_fav">エクスポート</string>
      <string name="error_occurred_loading_gpx">GPXロード中にエラー発生</string>
      <string name="send_report">レポートを送信</string>
@@ -413,7 +413,7 @@ POIの更新は利用できません</string>
 {1} in {2}</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>
      <string name="favorite">お気に入り</string>
-     <string name="clear_all">全てクリア</string>
+     <string name="shared_string_clear_all">全てクリア</string>
      <string name="shared_string_history">履歴</string>
      <string name="uploading_data">データをアップロード中…</string>
      <string name="uploading">アップロード中</string>
@@ -596,8 +596,8 @@ POIの更新は利用できません</string>
 
 <string name="shared_string_yes">はい</string>
 <string name="shared_string_cancel">キャンセル</string>
-<string name="default_buttons_apply">適用</string>
-<string name="default_buttons_add">追加</string>
+<string name="shared_string_apply">適用</string>
+<string name="shared_string_add">追加</string>
 <string name="shared_string_no">いいえ</string>
 <string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
 <string name="add_favorite_dialog_default_favourite_name">お気に入り</string>
@@ -635,7 +635,7 @@ POIの更新は利用できません</string>
 単独ノードではありません</string>
 <string name="poi_remove_confirm_template">{0} を削除しますか(コメントを入力) ?</string>
 <string name="poi_remove_title">POIを削除</string>
-<string name="default_buttons_delete">削除</string>
+<string name="shared_string_delete">削除</string>
 <string name="poi_remove_success">POIは削除されました</string>
 <string name="poi_action_add">追加</string>
 <string name="poi_action_change">変更</string>
@@ -651,7 +651,7 @@ POIの更新は利用できません</string>
 <string name="poi_dialog_comment_default">POI 変更</string>
 <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
 <string name="default_buttons_commit">コミット</string>
-<string name="default_buttons_reset">リセット</string>
+<string name="shared_string_clear">リセット</string>
 <string name="filter_current_poiButton">フィルタ</string>
 <string name="edit_filter_delete_menu_item">削除</string>
 <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>
@@ -760,7 +760,7 @@ POIの更新は利用できません</string>
         * マップ上で長タップすると以前の地点を削除できます。\n
         * 地点を長タップすると詳細を見ることができます。\n
         * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
-    <string name="default_buttons_do_not_show_again">これ以降表示しない</string>
+    <string name="shared_string_do_not_show_again">これ以降表示しない</string>
     <string name="distance_measurement_start_editing">編集を開始</string>
     <string name="distance_measurement_finish_editing">編集を終了</string>
     <string name="distance_measurement_finish_subtrack">新しいサブトラックを開始</string>
@@ -795,7 +795,7 @@ POIの更新は利用できません</string>
     <string name="select_address_activity">住所を選択</string>
     <string name="favourites_list_activity">お気に入りを選択</string>
     <string name="local_openstreetmap_act_title">OSMの修正</string>
-    <string name="default_buttons_other_actions">その他のアクション</string>
+    <string name="shared_string_more_actions">その他のアクション</string>
     
 	<string name="layer_hillshade">陰影起伏層</string>
     <string name="map_widget_gps_info">GPS情報</string>
@@ -855,8 +855,8 @@ POIの更新は利用できません</string>
     <string name="recording_context_menu_play">再生</string>
     <string name="recording_description">記録中 %1$s %3$s の %2$s</string>
     <string name="recording_default_name">記録中</string>
-    <string name="av_control_stop">停止</string>
-    <string name="av_control_start">記録</string>
+    <string name="shared_string_control_stop">停止</string>
+    <string name="shared_string_control_start">記録</string>
     <string name="map_widget_av_notes">音声/ビデオメモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -1149,7 +1149,7 @@ POIの更新は利用できません</string>
 	<string name="animate_routing_route_not_calculated">まず、ルートを検索して下さい</string>
     <string name="animate_routing_route">検索されたルートを利用してシミュレーション </string>
     <string name="animate_routing_gpx">GPXトラックを利用してシミュレーション</string>
-    <string name="remember_choice">選択を記憶</string>
+    <string name="shared_string_remember_my_choice">選択を記憶</string>
     <string name="gps_status_eclipsim">GPSステータス</string>
     <string name="shared_string_and">と</string>
     <string name="shared_string_or">または</string>
@@ -1242,7 +1242,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="update_poi_file_not_found">ローカルファイルは、POIの変更が確認できなかったので作成できませんでした。</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+をアップグレード</string>
 	<string name="map_version_changed_info">サーバー上のマップファイルは現在のバージョンと互換性がありません。それらをダウンロードして使用するには、新しいバージョンにアプリケーションをアップグレードしてください。</string>
-	<string name="local_index_mi_rename">リネーム</string>
+	<string name="shared_string_rename">リネーム</string>
 	<string name="show_gpx_route">地図上に表示</string>
 	<string name="poi_filter_nominatim">オンラインNominatimを使用</string>
 	<string name="search_position_current_location_search">位置を検索しています…</string>
@@ -1255,11 +1255,11 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="search_position_map_view">最後のマップを表示</string>
 	<string name="select_search_position">近くで検索:</string>
 	<string name="context_menu_item_search">ここの近くで検索</string>
-	<string name="save_route_dialog_title">GPXトラックとしてルートを保存</string>
+	<string name="shared_string_save_as_gpx">GPXトラックとしてルートを保存</string>
 	<string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
 	<string name="filename_input">ファイル名: </string>
 	<string name="file_with_name_already_exist">同じ名前のファイルが既に存在します。</string>
-	<string name="default_buttons_save">保存</string>
+	<string name="shared_string_save">保存</string>
 	<string name="menu_save_directions">案内を保存</string>
 	<string name="local_index_upload_gpx_description">OSMコミュニティにGPXファイルをアップロードします。これらはマップを改善するために使用されます。</string>
 	<string name="local_index_items_uploaded">%1$d %2$d のアイテムがアップロードに成功しました。</string>
@@ -1292,7 +1292,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="local_index_mi_backup">無効化</string>
 	<string name="local_index_mi_delete">削除</string>
 	<string name="local_index_mi_reload">SDカードから再読み込み</string>
-	<string name="local_index_download">ダウンロード</string>
+	<string name="shared_string_download">ダウンロード</string>
 	<string name="local_index_poi_data">POIデータ</string>
 	<string name="local_index_address_data">住所データ</string>
 	<string name="local_index_transport_data">交通データ</string>
@@ -1312,7 +1312,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="tip_app_mode_t_v2">OsmAndは移動手段ごとに異なるプロファイル(カスタマイズ可能)を使用できます。
 検索		\n\nプロファイルの切替には、地図画面の左下隅にあるプロファイルボタン(車、自転車、歩行者のアイコン)をタッチするか、ルート作成時に(トランスポートモード)選択できます。
 	</string>
-	<string name="downloading_file_new">ダウンロード中…</string>
+	<string name="shared_string_downloading">ダウンロード中…</string>
 	<string name="osb_author_dialog_password">OSMパスワード(オプション)</string>
 	<string name="email">Eメール</string>
 	<string name="av_camera_focus">カメラフォーカスタイプ</string>
@@ -1332,7 +1332,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ のよくある質問をご覧ください。</string>
     <string name="tip_faq">よくある質問(FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d個のOSMの変更を削除しようとしています。よろしいですか？</string>
-    <string name="local_osm_changes_delete_all">すべて削除</string>
+    <string name="shared_string_delete_all">すべて削除</string>
     <string name="osmodroid_refresh">チャンネルを更新</string>
     <string name="tip_recent_changes_1_5_t">"1.5での変更点:
 \n\t* 制限速度とスピードカメラを音声で警告
@@ -2017,7 +2017,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>画像とマップの分類</string>
 	<string name="import_file_favourites">GPXファイルを保存またはお気に入りにインポートしますか？</string>
 	<string name="import_save">保存</string>
-	<string name="share_fav">共有</string>
+	<string name="shared_string_share">共有</string>
 	<string name="share_fav_subject">OsmAndを介してお気に入りを共有</string>
 	<string name="av_camera_pic_size">カメラの解像度</string>
 	<string name="av_camera_pic_size_descr">内部カメラ解像度を選択</string>
@@ -2033,7 +2033,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="speak_favorites">周辺のお気に入りをアナウンスする</string>
     <string name="speak_poi">周辺のPOIをアナウンスする</string>
     <string name="download_additional_maps">不足分のマップ %1$s (%2$d MB)をダウンロードしますか?</string>
-    <string name="more">追加…</string>
+    <string name="shared_string_more">追加…</string>
     <string name="rendering_value_browse_map_name">マップの閲覧</string>  
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>

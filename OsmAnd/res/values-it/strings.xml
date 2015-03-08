@@ -131,7 +131,6 @@
   <string name="update_poi_file_not_found">Il file per registrare i cambiamenti dei PDI non è stato trovato nè creato.</string>
   <string name="button_upgrade_osmandplus">Aggiorna OsmAnd+</string>
   <string name="map_version_changed_info">Nel server ci sono file di mappe incompatibili con l\'attuale versione del programma utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione all\'ultima versione.</string>
-  <string name="local_index_mi_rename">Rinomina</string>
   <string name="show_gpx_route">Visualizza sulla mappa</string>
   <string name="poi_filter_nominatim">Nominatim online</string>
   <string name="search_position_current_location_search">Ricerca posizione…</string>
@@ -156,11 +155,9 @@
 		\n\t- Migliorie al motore di sintesi vocale (distanza esatta, miglia abilitate)
 		\n\t- Correzione di errori vari
 	</string>
-  <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
   <string name="filename_input">Nome file: </string>
   <string name="file_with_name_already_exist">Esiste già un file con lo stesso nome.</string>
-  <string name="default_buttons_save">Salva</string>
   <string name="menu_save_directions">Salva direzioni</string>
   <string name="local_index_upload_gpx_description">Invio dei file GPX alla comunità OSM. Verranno utilizzati per migliorare le mappe.</string>
   <string name="local_index_items_uploaded">Oggetto(i) %1$d di %2$d caricato(i) correttamente.</string>
@@ -190,9 +187,7 @@
   <string name="local_index_mi_restore">Attiva</string>
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
-  <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
-  <string name="local_index_download">Download</string>
-  
+  <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>  
   <string name="local_index_poi_data">Dati PDI</string>
   <string name="local_index_address_data">Dati indirizzi</string>
   <string name="local_index_transport_data">Dati trasporti pubblici</string>
@@ -384,8 +379,6 @@
   <string name="download_files_question">Scarico {0} file(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} oggetto(i) selezionati</string>
   <string name="filter_existing_indexes">Filtro download</string>
-  <string name="deselect_all">Deseleziona tutto</string>
-  <string name="reload">Ricarica</string>
   <string name="fast_route_mode">Percorso più veloce</string>
   <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
   <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
@@ -438,7 +431,6 @@
   <string name="fav_file_to_load_not_found">Il file GPX contenente i preferiti non è stato trovato in {0}</string>
   <string name="fav_saved_sucessfully">Preferiti salvati correttamente in {0}</string>
   <string name="no_fav_to_save">Nessun preferito da salvare</string>
-  <string name="import_fav">Importa</string>
   <string name="export_fav">Esporta</string>
   <string name="error_occurred_loading_gpx">Errore durante il caricamento del file GPX</string>
   <string name="send_report">Invia rapporto</string>
@@ -540,7 +532,6 @@
   <string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
-  <string name="clear_all">Azzera tutto</string>
   <string name="uploading_data">Invio dati…</string>
   <string name="uploading">Invio…</string>
   <string name="search_nothing_found">Trovato nulla</string>
@@ -695,8 +686,6 @@
   <string name="context_menu_item_update_map">Aggiorna la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
   <string name="context_menu_item_create_poi">Crea PDI</string>
-  <string name="default_buttons_apply">Applica</string>
-  <string name="default_buttons_add">Aggiungi</string>
   <string name="add_favorite_dialog_top_text">Inserisci il nome del preferito</string>
   <string name="add_favorite_dialog_default_favourite_name">Preferito</string>
   <string name="add_favorite_dialog_favourite_added_template">Il punto preferito \'\'{0}\'\' è stato aggiunto.</string>
@@ -724,7 +713,6 @@
   <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
   <string name="poi_remove_confirm_template">Eliminare {0} (inserire un commento)?</string>
   <string name="poi_remove_title">Eliminazione PDI</string>
-  <string name="default_buttons_delete">Elimina</string>
   <string name="poi_remove_success">PDI eliminato correttamente</string>
   <string name="poi_action_add">aggiungi</string>
   <string name="poi_action_change">cambia</string>
@@ -738,7 +726,6 @@
   <string name="poi_dialog_comment_default">Cambio PDI</string>
   <string name="poi_dialog_other_tags_message">Tutte le altre etichette sono conservate</string>
   <string name="default_buttons_commit">Esegui</string>
-  <string name="default_buttons_reset">Cancella</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Elimina</string>
   <string name="edit_filter_save_as_menu_item">Salva come</string>
@@ -1197,8 +1184,6 @@
     <string name="recording_context_menu_play">Riproduci</string>
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
-    <string name="av_control_stop">Ferma</string>
-    <string name="av_control_start">Avvia</string>
     <string name="map_widget_av_notes">Note audio/video</string>
     <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isocline per sostenere lo sviluppo futuro.</string>
     <string name="srtm_paid_version_title">Plugin linee isocline</string>
@@ -1416,7 +1401,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="select_address_activity">Seleziona l\'indirizzo</string>
     <string name="favourites_list_activity">Seleziona preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
-    <string name="default_buttons_other_actions">Altre azioni</string>
     <string name="download_using_mobile_internet">La connessione WiFi non è attualmente attiva. Vuoi continuare a scaricare con la connessione internet attuale?</string>
     <string name="cancel_route">Cancella il percorso</string>
     <string name="cancel_navigation">Ferma la navigazione</string>
@@ -1432,7 +1416,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
-    <string name="downloading_file_new">In download …</string>
 	<string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">precisione</string>
     <string name="plugin_distance_point_speed">velocità</string>
@@ -1443,7 +1426,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmand_distance_planning_plugin_description">Attivatre un widget che permette di creare percorsi tappando sullo schermo (o usare/modificare file GPX esistenti) per misurare la distanza tra punti. I risultati possono essere salvati come GPX, potrebbe essere utilizzato per pianificare un itinerario GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
-    <string name="default_buttons_do_not_show_again">Non mostrare nuovamente</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>
     <string name="distance_measurement_finish_editing">Finisci di modificare</string>
     <string name="distance_measurement_finish_subtrack">Inizia una nuova sottotraccia</string>
@@ -1567,14 +1549,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="auto_zoom_close">A corto raggio</string>
     <string name="auto_zoom_far">A medio raggio</string>
     <string name="auto_zoom_farthest">A lungo raggio</string>
-	<string name="remember_choice">Ricorda la scelta</string>
     <string name="gps_status_eclipsim">Stato GPS</string>
     <string name="animate_routing_route_not_calculated">Per favore, calcolare il percorso prima</string>
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
     <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
     <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche. Sicuro?</string>
-    <string name="local_osm_changes_delete_all">Cancella tutto</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
     <string name="tip_faq">Domande più frequenti</string>
     <string name="osmodroid_refresh">Aggiorna i canali</string>
@@ -1712,7 +1692,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_mode_on">Interrompi la sessione OsMo</string>    
     <string name="osmo_mode_off">Avvia sessione OSMo</string>
     
-    <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
     <string name="tip_recent_changes_1_8_alpha">"Novità nella versione 1.8: * Calcola il percorso tra i punti di un tracciato GPX * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali) * Supporta l\'importazione di file GPX/KML (converte da KLM a GPX) * Le tracce GPX sono state spostate in \'I miei luoghi\' * Puoi dividere le tracce GPX in base alla distanza o al tempo e controllare la diferenza di altitudine o della velocità per ogni spezzone * Avvio automatico della navigazione dopo una breve attesa "</string>
@@ -1912,7 +1891,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
-    <string name="more">Altro…</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
@@ -2061,7 +2039,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="watch">Guarda</string>
 	<string name="notes">Note</string>
 	<string name="online_map">Mappa online</string>
-	<string name="export">Esporta</string>
 	<string name="share_note">Condividi l\'appunto</string>
 	<string name="rename_recording">Rinomina la registrazione</string>
 	<string name="audio">Audio</string>
@@ -2121,7 +2098,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_deselect">Deseleziona</string>
 	<string name="shared_string_deselect_all">Deseleziona tutto</string>
 	<string name="shared_string_clear">Pulisci</string>
-	<string name="shared_string_clear_all">Pulisci tutto</string>
+	<string name="shared_string_shared_string_clear_all">Pulisci tutto</string>
 	<string name="shared_string_save">Salva</string>
 	<string name="shared_string_save_as_gpx">Salva coma traccia GPX</string>
 	<string name="shared_string_rename">Rinomina</string>
@@ -2134,13 +2111,13 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_control_stop">Ferma</string>
 	<string name="shared_string_import">Importa</string>
 	<string name="shared_string_export">Esporta</string>
-	<string name="shared_string_more">Di più</string>
+	<string name="shared_string_more">Di più…</string>
 	<string name="shared_string_more_actions">Più azioni</string>
 	<string name="shared_string_do_not_show_again">Non mostrare nuovamente</string>
 	<string name="shared_string_remember_my_choice">Ricorda la scelta</string>
 	<string name="shared_string_refresh">Ricarica</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">In download</string>
+	<string name="shared_string_downloading">In download…</string>
 	<string name="shared_string_download_successful">Download eseguito</string>
 	<string name="shared_string_io_error">Errore di I/O</string>
 	<string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>

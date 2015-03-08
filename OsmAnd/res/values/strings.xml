@@ -42,26 +42,25 @@
 	<string name="shared_string_deselect">Deselect</string>
 	<string name="shared_string_deselect_all">Deselect all</string>
 	<string name="shared_string_clear">Clear</string>
-	<string name="shared_string_clear_all">Clear all</string>
+	<string name="shared_string_shared_string_clear_all">Clear all</string>
 	<string name="shared_string_save">Save</string>
 	<string name="shared_string_save_as_gpx">Save as GPX track</string>
 	<string name="shared_string_rename">Rename</string>
 	<string name="shared_string_delete">Delete</string>
 	<string name="shared_string_delete_all">Delete all</string>
 	<string name="shared_string_share">Share</string>
-	<string name="shared_string_add">Add</string>
 	<string name="shared_string_apply">Apply</string>
 	<string name="shared_string_control_start">Start</string>
 	<string name="shared_string_control_stop">Stop</string>
 	<string name="shared_string_import">Import</string>
 	<string name="shared_string_export">Export</string>
-	<string name="shared_string_more">More</string>
+	<string name="shared_string_more">More…</string>
 	<string name="shared_string_more_actions">More actions</string>
 	<string name="shared_string_do_not_show_again">Do not show again</string>
 	<string name="shared_string_remember_my_choice">Remember my choice</string>
 	<string name="shared_string_refresh">Refresh</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">Downloading</string>
+	<string name="shared_string_downloading">Downloading…</string>
 	<string name="shared_string_download_successful">Download successful</string>
 	<string name="shared_string_io_error">I/O error occurred</string>
 	<string name="shared_string_unexpected_error">Unexpected error occurred</string>
@@ -74,6 +73,7 @@
 	<string name="shared_string_map">Map</string>
 	<string name="shared_string_favorite">Favorite</string>
 	<string name="shared_string_favorites">Favorites</string>
+	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
 	<string name="shared_string_my_location">My Location</string>
 	<string name="shared_string_my_places">My Places</string>
@@ -140,7 +140,6 @@
 	<string name="debugging_and_development">OsmAnd development</string>
 
     <string name="recents">RECENTS</string>
-	<string name="turn_off_all">Turn off all</string>
 	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
@@ -150,7 +149,6 @@
 	<string name="video">Video</string>
 	<string name="photo">Photo</string>
 	<string name="share_note">Share note</string>
-	<string name="rename_recording">Rename recording</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Watch</string>
 	<string name="notes">Notes</string>
@@ -336,7 +334,6 @@
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
-    <string name="more">More…</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
@@ -396,7 +393,6 @@
     <string name="no_index_file_to_download">No downloads found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="none_selected_gpx">No GPX files selected. In order to select press and hold on available track.</string>
-    <string name="local_index_unselect_gpx_file">Unselect</string>
     <string name="local_index_select_gpx_file">Select to show</string>
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
@@ -645,11 +641,9 @@
     <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
     <string name="tip_faq">Frequently Asked Questions</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d osm changes. Are you sure?</string>
-    <string name="local_osm_changes_delete_all">Delete All</string>
     <string name="animate_routing_route_not_calculated">Please, calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="remember_choice">Remember my choice</string>
 	<string name="route_is_too_long">OsmAnd offline routing may take very long (or sometimes not work) for points more than 200km apart. You may want to add intermediate waypoints for better performance.</string>
 	<string name="auto_zoom_none">No auto zoom</string>
 	<string name="auto_zoom_close">To close-up</string>
@@ -768,7 +762,6 @@
         * Press and hold on the map to delete previous point.\n
         * Press and hold on point to view and attach description.\n
         * Click on measurement widget to see more actions.</string>
-    <string name="default_buttons_do_not_show_again">Do not show again</string>
     <string name="distance_measurement_start_editing">Start editing</string>
     <string name="distance_measurement_finish_editing">Finish editing</string>
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
@@ -807,7 +800,6 @@
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select favorite</string>
     <string name="local_openstreetmap_act_title">OSM modifications</string>
-    <string name="default_buttons_other_actions">Other actions</string>
 	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
 	    \n\t*Fix screen tremble during navigation
@@ -844,7 +836,6 @@
 		\n\t* Hillshade packages for Contour lines plugin
 		\n\t* Bug fixes (suboptimal routing)
     </string>
-    <string name="dist_control_start">Start</string>
     
     <string name="local_indexes_cat_srtm">Contour lines data</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
@@ -896,12 +887,9 @@
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
     <string name="recording_default_name">Recording</string>
-    <string name="av_control_stop">Stop</string>
-    <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
-    <string name="monitoring_control_stop">Stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
@@ -1277,7 +1265,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Total native memory</string>
-	<string name="update_downlod_list">Reload list</string>
 	<string name="starting_point_too_far">Starting point too far from nearest road.</string>
 	<string name="shared_location">Shared location</string>
 	<string name="osmand_parking_event">Pick up the car from parking</string>
@@ -1304,7 +1291,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpxup_trackable">Trackable</string>
 	<string name="gpxup_private">Private</string>
 	<string name="asap">ASAP</string>
-	<string name="save_route_as_gpx">Save route as GPX file</string>
 	<string name="share_route_as_gpx">Share route as GPX file</string>
 	<string name="share_route_subject">Route shared via OsmAnd</string>
 	<string name="route_roundabout">Roundabout: take %1$d exit and go</string>
@@ -1588,7 +1574,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
 	<string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
 	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
-	<string name="local_index_mi_rename">Rename</string>
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Searching position…</string>
@@ -1612,11 +1597,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
 		\n\t- Bug fixes
 	</string>
-	<string name="save_route_dialog_title">Save route as GPX track</string>
 	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
 	<string name="filename_input">File name: </string>
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
-	<string name="default_buttons_save">Save</string>
 	<string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
 	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
 	<string name="local_index_mi_upload_gpx">Send to OSM</string>
@@ -1643,9 +1626,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_descr_title">Manage map files</string>
 	<string name="local_index_mi_restore">Activate</string>
 	<string name="local_index_mi_backup">Deactivate</string>
-	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload from sdcard</string>
-	<string name="local_index_download">Download</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Public transport data</string>
@@ -1812,8 +1793,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
 	<string name="filter_existing_indexes">Downloaded</string>
-	<string name="deselect_all">Deselect all</string>
-	<string name="reload">Refresh</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
@@ -1833,7 +1812,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
-	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search public transport</string>
 	<string name="transport_searching_transport">Transport results (no destination):</string>
 	<string name="transport_searching_route">Transport results ({0} to destination):</string>
@@ -1859,13 +1837,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="show_route">Route details</string>
 	<string name="fav_imported_sucessfully">Favorites successfully imported</string>
 	<string name="import_file_favourites">Save as GPX file or import into favourites?</string>
-	<string name="import_save">Save</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
-	<string name="import_fav">Import</string>
-	<string name="export">Export</string>
-	<string name="share_fav">Share</string>
 	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
@@ -1959,7 +1933,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
-	<string name="clear_all">Clear all</string>
 	<string name="uploading_data">Uploading data…</string>
 	<string name="uploading">Uploading…</string>
 	<string name="search_nothing_found">Nothing found</string>
@@ -1979,8 +1952,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="downloading_file_new">Downloading …</string>
-	<string name="downloading">Downloading…</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
 	<string name="show_poi_on_map">Show on map</string>
@@ -2088,8 +2059,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
-	<string name="default_buttons_apply">Apply</string>
-	<string name="default_buttons_add">Add</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
@@ -2118,7 +2087,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
 	<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
 	<string name="poi_remove_title">Delete POI</string>
-	<string name="default_buttons_delete">Delete</string>
 	<string name="poi_remove_success">POI was successfully deleted</string>
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>
@@ -2132,14 +2100,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Clear</string>
 	<string name="filter_current_poiButton">Filter</string>
-	<string name="edit_filter_delete_menu_item">Delete</string>
 	<string name="edit_filter_save_as_menu_item">Save As</string>
 	<string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
 	<string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 	<string name="edit_filter_create_message">Filter {0} has been created</string>
-	<string name="default_buttons_selectall">Select All</string>
 	<string name="email">email</string>
 	<string name="av_camera_focus">Camera focus type</string>
 	<string name="av_camera_focus_descr">Select internal camera focus type</string>
@@ -2154,7 +2119,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_pic_size">Camera Picture Size</string>
 	<string name="av_camera_pic_size_descr">Select internal camera Picture Size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
-    <string name="hide_all_waypoints">Remove all</string>
 	<string name="plugin_description_title">Description</string>
 	<string name="plugin_install_needs_network">You need an Internet connection to install this plugin.</string>
 	<string name="get_plugin">Get</string>

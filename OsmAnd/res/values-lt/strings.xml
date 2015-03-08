@@ -330,7 +330,7 @@
   <string name="update_poi_file_not_found">Vietinis failas, kuriame laikomi LV pakeitimai, nerastas ir jo nepavyko sukurti.</string>
   <string name="button_upgrade_osmandplus">Atnaujinti OsmAnd+</string>
   <string name="map_version_changed_info">Serveryje patalpinti žemėlapių failai netinka jūsų turimos programos versijai. Norėdami parsisiųsti žemėlapius pirmiausia atnaujinkite programą.</string>
-  <string name="local_index_mi_rename">Pakeisti pavadinimą</string>
+  <string name="shared_string_rename">Pakeisti pavadinimą</string>
   <string name="show_gpx_route">Rodyti žemėlapyje</string>
   <string name="poi_filter_nominatim">Nominatim įrankis internete</string>
   <string name="search_position_current_location_search">Ieškoma vietos…</string>
@@ -355,11 +355,11 @@
 		\n\t- Patobulintas TTS variklis (pranešimai apie tikslų atstumą, pranešimai myliomis) 
 		\n\t- Klaidų ištaisymai
 	</string>
-  <string name="save_route_dialog_title">Išsaugoti maršrutą į GPX failą</string>
+  <string name="shared_string_save_as_gpx">Išsaugoti maršrutą į GPX failą</string>
   <string name="route_successfully_saved_at">Maršrutas sėkmingai išsaugotas faile \'%1$s\'.</string>
   <string name="filename_input">Failo pavadinimas : </string>
   <string name="file_with_name_already_exist">Failas tokiu pavadinimu jau egzistuoja.</string>
-  <string name="default_buttons_save">Išsaugoti</string>
+  <string name="shared_string_save">Išsaugoti</string>
   <string name="menu_save_directions">Išsaugoti maršrutą</string>
   <string name="local_index_upload_gpx_description">Įkelti GPX failus į OSM bendruomenės puslapį. Jie bus naudojami žemėlapių tobulinimui.</string>
   <string name="local_index_items_uploaded">Sėkmingai įkelti(-as) %1$d failai(-as) iš %2$d.</string>
@@ -392,7 +392,7 @@
   <string name="local_index_mi_backup">Deaktyvuoti</string>
   <string name="local_index_mi_delete">Ištrinti</string>
   <string name="local_index_mi_reload">Atnaujinti iš SD kortelės</string>
-  <string name="local_index_download">Parsiųst</string>
+  <string name="shared_string_download">Parsiųst</string>
   
   <string name="local_index_poi_data">LV duomenys</string>
   <string name="local_index_address_data">Adresų duomenys</string>
@@ -591,9 +591,9 @@
   <string name="download_files_question">Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="items_were_selected">Pasitrinkti {0} elementai(-as)</string>
   <string name="filter_existing_indexes">Filtruoti parsiųstus</string>
-  <string name="deselect_all">Nepasirinkti nieko</string>
+  <string name="shared_strings_deselect_all">Nepasirinkti nieko</string>
   <string name="shared_string_select_all">Pasirinkti viską</string>
-  <string name="reload">Atnaujinti</string>
+  <string name="shared_string_refresh">Atnaujinti</string>
   <string name="fast_route_mode">Greičiausias maršrutas</string>
   <string name="fast_route_mode_descr">Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas. Priešingu atveju bus skaičiuojamas trumpiausias maršrutas </string>
   <string name="tiles_to_download_estimated_size">Esant {0} dydžiui parsiųsti {1} žemėlapio lakštus ({2} MB)</string>
@@ -644,7 +644,7 @@
   <string name="fav_file_to_load_not_found">GPX failas su išsaugotomis vietomis nerastas {0}</string>
   <string name="fav_saved_sucessfully">Įsimintos vietos sėkmingais įrašytos į {0}</string>
   <string name="no_fav_to_save">Nėra jokių išsaugotų vietų</string>
-  <string name="import_fav">Importuoti</string>
+  <string name="shared_string_import">Importuoti</string>
   <string name="export_fav">Eksportuoti</string>
   <string name="error_occurred_loading_gpx">Įvyko klaida įkeliant GPX</string>
   <string name="send_report">Siųsti pranešimą</string>
@@ -744,7 +744,7 @@
   <string name="search_history_int_streets">Sankryža: {0} x {1} iš {2}</string>
   <string name="search_history_building">Pastatas: {0}, {1}, {2}</string>
   <string name="favorite">Įsimintos vietos</string>
-  <string name="clear_all">Išvalyti viską</string>
+  <string name="shared_string_clear_all">Išvalyti viską</string>
   <string name="shared_string_history">Istorija</string>
   <string name="uploading_data">Siunčiami duomenys…</string>
   <string name="uploading">Siunčiama…</string>
@@ -904,8 +904,8 @@
   <string name="context_menu_item_create_poi">Sukurti LV</string>
   <string name="shared_string_yes">Taip</string>
   <string name="shared_string_cancel">Atšaukti</string>
-  <string name="default_buttons_apply">Taikyti</string>
-  <string name="default_buttons_add">Pridėti</string>
+  <string name="shared_string_apply">Taikyti</string>
+  <string name="shared_string_add">Pridėti</string>
   <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Įveskite įsimintos vietos pavadinimą</string>
   <string name="add_favorite_dialog_default_favourite_name">Įsiminta vieta</string>
@@ -934,7 +934,7 @@
   <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų</string>
   <string name="poi_remove_confirm_template">Ištrinti {0} (įveskite komentarą)?</string>
   <string name="poi_remove_title">Ištrinti LV</string>
-  <string name="default_buttons_delete">Ištrinti</string>
+  <string name="shared_string_delete">Ištrinti</string>
   <string name="poi_remove_success">LV buvo sėkmingai ištrinta</string>
   <string name="poi_action_add">pridėti</string>
   <string name="poi_action_change">pakeisti</string>
@@ -948,7 +948,7 @@
   <string name="poi_dialog_comment_default">LV keičiasi</string>
   <string name="poi_dialog_other_tags_message">Visos kitos žymės yra išsaugotos</string>
   <string name="default_buttons_commit">Užfiksuoti</string>
-  <string name="default_buttons_reset">Išvalyti</string>
+  <string name="shared_string_clear">Išvalyti</string>
   <string name="filter_current_poiButton">Filtras</string>
   <string name="edit_filter_delete_menu_item">Ištrinti</string>
   <string name="edit_filter_save_as_menu_item">Išsaugoti kaip</string>
@@ -1193,9 +1193,9 @@
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">"Įrašas %1$s  %3$s %2$s"</string>
     <string name="recording_default_name">Įrašas</string>
-    <string name="av_control_start">Įrašyti</string>
+    <string name="shared_string_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>
     <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
     <string name="dropbox_plugin_description">Dropbox įskeipis leidžia sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox sąskaita.</string>
@@ -1275,7 +1275,7 @@
     <string name="select_address_activity">Pasirinkti adresą</string>
     <string name="favourites_list_activity">Pasirinkti įsimintą vietą</string>
     <string name="local_openstreetmap_act_title">OSM pakeitimai</string>
-    <string name="default_buttons_other_actions">Kiti veiksmai</string>
+    <string name="shared_string_more_actions">Kiti veiksmai</string>
     <string name="other_location">Kita</string>
     <string name="files_limit">liko %1$d failų(-ai)</string>
     <string name="available_downloads_left">Galima parsiųsti %1$d failus(-ų)</string>
@@ -1291,7 +1291,7 @@
     <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
     <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
-    <string name="downloading_file_new">Parsiunčiama …</string>
+    <string name="shared_string_downloading">Parsiunčiama …</string>
 	<string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM pakeitimų atsarginės kopijos išsaugoti nepavyko</string>
     <string name="local_osm_changes_backup">Išsaugoti vietinę OSM pakeitimų kopiją</string>
@@ -1306,7 +1306,7 @@
     <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti/keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
     <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
-    <string name="default_buttons_do_not_show_again">Daugiau neberodyti</string>
+    <string name="shared_string_do_not_show_again">Daugiau neberodyti</string>
     <string name="distance_measurement_start_editing">Pradėti redagavimą</string>
     <string name="distance_measurement_finish_editing">Baigti redagavimą</string>
     <string name="distance_measurement_finish_subtrack">Pradėti naują segmentą</string>
@@ -1417,7 +1417,7 @@
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
     
     
-    <string name="remember_choice">Atsiminti mano pasirinkimą</string>
+    <string name="shared_string_remember_my_choice">Atsiminti mano pasirinkimą</string>
     <string name="gps_status_eclipsim">GPS statusas</string>
     <string name="shared_string_and">ir</string>
     <string name="shared_string_or">arba</string>
@@ -1438,7 +1438,7 @@
     <string name="tip_faq_t">Apsilankę https://code.google.com/p/osmand/wiki/FAQ rasite atsakymus į dažnai užduodamus klausimus.</string>
     <string name="tip_faq">Dažnai užduodami klausimai</string>
     <string name="local_osm_changes_delete_all_confirm">Jūs ištrinsite %1$d osm pakeitimus. Ar tikrai norite?</string>
-    <string name="local_osm_changes_delete_all">Viską ištrinti</string>
+    <string name="shared_string_delete_all">Viską ištrinti</string>
     <string name="amenity_type_seamark">Jūros navigacijos ženklas</string>
     <string name="app_modes_choose_descr">Pasirinkite programos veikimo profilius, kurie bus naudojami programoje</string>
     <string name="app_modes_choose">Programos profiliai</string>
@@ -1570,7 +1570,7 @@
     <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>    
     <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
     
-    <string name="share_fav">Bendrinti</string>
+    <string name="shared_string_share">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
 	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
     <string name="osmo_connect_to_device_name">Vartotojo vardas</string>
@@ -1772,7 +1772,7 @@
     <string name="rendering_value_car_name">Automobilis</string>
     <string name="rendering_value_bicycle_name">Dviratis</string>
     <string name="rendering_value_pedestrian_name">Pėstysis</string>
-    <string name="more">Dar…</string>
+    <string name="shared_string_more">Dar…</string>
     <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
     <string name="index_tours">Turai</string>
     <string name="flat_list_waypoints">Visi</string>
@@ -1930,7 +1930,7 @@
 	<string name="photo">Foto</string>
 	<string name="rename_recording">Pervardinti įrašą</string>
     <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
-	<string name="export">Eksportuoti</string>
+	<string name="shared_string_export">Eksportuoti</string>
 	<string name="days_behind">dienas atsilikęs</string>
 	<string name="plugin_nautical_descr">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
 	<string name="rename_failed">Nepavyko pervardinti.</string>

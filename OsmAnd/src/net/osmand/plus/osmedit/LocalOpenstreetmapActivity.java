@@ -65,7 +65,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_openstreetmap);
-		getSupportActionBar().setTitle(R.string.download_files);
+		getSupportActionBar().setTitle(R.string.shared_string_download);
 		setSupportProgressBarIndeterminateVisibility(false);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
@@ -92,7 +92,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, DELETE_ID, R.string.local_osm_changes_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
+		createMenuItem(menu, DELETE_ID, R.string.shared_string_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -109,7 +109,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		} else if (item.getItemId() == DELETE_ID) {
 			Builder b = new AlertDialog.Builder(this);
 			b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, dataPoints.size()));
-			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Iterator<OsmPoint> it = dataPoints.iterator();

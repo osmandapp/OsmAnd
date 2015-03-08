@@ -7,7 +7,7 @@
     <string name="plugin_distance_point">نقطه</string>
     <string name="gpx_file_name">نام فایل جی پی ایکس</string>
     <string name="gpx_saved_sucessfully">فایل جی پی ایکس در {0} ذخیره شد</string>
-    <string name="default_buttons_do_not_show_again">دوباره نشان نده</string>
+    <string name="shared_string_do_not_show_again">دوباره نشان نده</string>
     <string name="distance_measurement_start_editing">شروع ویرایش</string>
     <string name="distance_measurement_finish_editing">اتمام ویرایش</string>
     <string name="distance_measurement_clear_route">حذف تمامی نقاط</string>
@@ -58,8 +58,8 @@
     <string name="recording_context_menu_delete">حذف فایل ضبط شده</string>
     <string name="recording_context_menu_play">پخش</string>
     <string name="recording_default_name">ضبط</string>
-    <string name="av_control_stop">توقف</string>
-    <string name="av_control_start">شروع</string>
+    <string name="shared_string_control_stop">توقف</string>
+    <string name="shared_string_control_start">شروع</string>
     <string name="map_widget_av_notes">یاداشتهای صوتی/تصویری</string>
     <string name="monitoring_control_stop">توقف</string>
     <string name="map_widget_audionotes">یادداشتهای صوتی</string>
@@ -216,7 +216,7 @@
 	<string name="edit_filter_delete_message">فیلتر {0} حذف شد</string>
 	<string name="edit_filter_create_message">فیلتر {0} ایجاد شد</string>
 	<string name="default_buttons_selectall">انتخاب همه</string>
-	<string name="default_buttons_reset">تنظیم مجدد</string>
+	<string name="shared_string_clear">تنظیم مجدد</string>
 	<string name="filter_current_poiButton">فیلتر</string>
 	<string name="edit_filter_delete_menu_item">حذف</string>
 	<string name="poi_dialog_other_tags_message">همه تگ ها حفظ شد</string>
@@ -225,7 +225,7 @@
 	<string name="poi_dialog_comment">توضیح</string>
 	<string name="poi_create_title">ایجاد POI</string>
 	<string name="poi_remove_title">حذف POI</string>
-	<string name="default_buttons_delete">حذف</string>
+	<string name="shared_string_delete">حذف</string>
 	<string name="poi_remove_success">POI حذف شد</string>
 	<string name="poi_action_add">افزودن</string>
 	<string name="poi_action_change">تغییردادن</string>
@@ -260,8 +260,8 @@
 	<string name="context_menu_item_create_poi">ایجاد POI</string>
 	<string name="shared_string_yes">بله</string>
 	<string name="shared_string_cancel">لغو</string>
-	<string name="default_buttons_apply">بکارگیری</string>
-	<string name="default_buttons_add">افزودن</string>
+	<string name="shared_string_apply">بکارگیری</string>
+	<string name="shared_string_add">افزودن</string>
 	<string name="shared_string_no">خیر</string>
 	<string name="add_favorite_dialog_top_text">نام علاقمندی را وارد کنید</string>
 	<string name="add_favorite_dialog_default_favourite_name">علاقمندی</string>
@@ -333,7 +333,7 @@
 	<string name="address">آدرس</string>
 	<string name="download_index_success">دانلود موفقیت آمیز بود</string>
 	<string name="error_io_error">خطای I/O رخ داد</string>
-	<string name="downloading_file_new">درحال دانلود…</string>
+	<string name="shared_string_downloading">درحال دانلود…</string>
 	<string name="downloading">درحال دانلود…</string>
 	<string name="show_poi_on_map">روی نقشه نشان بده</string>
 	<string name="fav_points_edited">نقطه مورد علاقه ویرایش شد</string>
@@ -363,7 +363,7 @@
 	<string name="local_index_mi_backup">غیرفعال کردن</string>
 	<string name="local_index_mi_delete">حذف</string>
 	<string name="local_index_mi_reload">بارگیری مجدد از کارت حافظه</string>
-	<string name="local_index_download">دانلود</string>
+	<string name="shared_string_download">دانلود</string>
 	<string name="local_index_poi_data">اطلاعات POI</string>
 	<string name="local_index_address_data">اطلاعات آدرس</string>
 	<string name="local_index_transport_data">اطلاعات حمل و نقل</string>
@@ -379,7 +379,7 @@
 	<string name="map_text_size">اندازه فونت نقشه</string>
 	<string name="filename_input">نام فایل: </string>
 	<string name="file_with_name_already_exist">فایلی با نام مشابه از قبل وجود دارد.</string>
-	<string name="default_buttons_save">ذخیره</string>
+	<string name="shared_string_save">ذخیره</string>
 	<string name="menu_save_directions">ذخیره مسیرها</string>
 	<string name="show_more_map_detail">جزئیات بیشتری از نقشه نشان بده</string>
 	<string name="favorite_home_category">خانه</string>
@@ -390,7 +390,7 @@
 	<string name="favourites_edit_dialog_category">دسته بندی</string>
 	<string name="vector_map_not_needed">نه، متشکرم</string>
 	<string name="search_position_current_location">موقعیت فعلی…</string>
-	<string name="local_index_mi_rename">تغییر نام</string>
+	<string name="shared_string_rename">تغییر نام</string>
 	<string name="show_gpx_route">روی نقشه نشان بده</string>
 	<string name="search_position_current_location_search">درحال جستجوی موقعیت…</string>
 	<string name="search_position_current_location_found">موقعیت (پیدا شده)</string>
@@ -600,7 +600,7 @@
     <string name="monitoring_settings">ضبط مسیر</string>
     <string name="monitoring_settings_descr">تنظیم چگونگی ضبط سفر و فعالسازی حالت خواب</string>
     <string name="osmand_monitoring_plugin_name">سرویسهای ثبت و حالت خواب</string>
-    <string name="default_buttons_other_actions">کارهای دیگر</string>
+    <string name="shared_string_more_actions">کارهای دیگر</string>
     
 	<string name="prefer_motorways">ترجیح دادن اتوبانها</string>
 	<string name="prefer_in_routing_descr">ترجیح دادن اتوبانها</string>
@@ -797,7 +797,7 @@
 	<string name="old_poi_file_should_be_deleted">فایل داده های POI \'%1$s\' زائد است و میتوان آنرا حذف کرد.</string>
 	<string name="button_upgrade_osmandplus">ارتقاء به +OsmAnd</string>
 	<string name="search_position_fixed">ثابت شد</string>
-	<string name="save_route_dialog_title">ذخیره مسیر به صورت فایل GPX</string>
+	<string name="shared_string_save_as_gpx">ذخیره مسیر به صورت فایل GPX</string>
 	<string name="route_successfully_saved_at">مسیر با موفقیت در \'%1$s\' ذخیره شد.</string>
 	<string name="search_position_map_view">آخرین نمای نقشه</string>
 	<string name="select_search_position">جستجو در اطراف:</string>
@@ -952,7 +952,7 @@
 	<string name="search_osm_nominatim">جستجوی آنلاین با استفاده از OSM Nominatim</string>
 	<string name="uploading">درحال آپلود…</string>
 	<string name="uploading_data">درحال آپلود داده‌ها…</string>
-	<string name="clear_all">پاک کردن همه</string>
+	<string name="shared_string_clear_all">پاک کردن همه</string>
 	<string name="favorite">مورد علاقه</string>
 	<string name="search_history_building">ساختمان:{0}, {1}, {2}</string>
 	<string name="search_history_street">خیابان: {0}, {1}</string>
@@ -1008,7 +1008,7 @@
 	<string name="fav_file_to_load_not_found">فایل GPX دارای نقاط مورد علاقه در {0} پیدا نشد</string>
 	<string name="fav_saved_sucessfully">علاقمندی ها با موفقیت در {0} ذخیره شد</string>
 	<string name="no_fav_to_save">هیچ نقطه مورد علاقه ای برای ذخیره شدن وجود ندارد</string>
-	<string name="import_fav">بارگیری</string>
+	<string name="shared_string_import">بارگیری</string>
 	<string name="export_fav">ذخیره</string>
 	<string name="error_occurred_loading_gpx">هنگام بارگیری GPX خطایی رخ داد</string>
 	<string name="send_report">ارسال گزارش</string>
@@ -1021,8 +1021,8 @@
 	<string name="layer_route">مسیر</string>
 	<string name="layer_favorites">نقاط مورد علاقه</string>
 	<string name="layer_osm_bugs">اشکالات OSM (آنلاین)</string>
-	<string name="deselect_all">انتخاب هیچیک</string>
-	<string name="reload">بازسازی</string>
+	<string name="shared_strings_deselect_all">انتخاب هیچیک</string>
+	<string name="shared_string_refresh">بازسازی</string>
 	<string name="items_were_selected">{0} مورد انتخاب شد</string>
 	<string name="daynight_descr">انتخاب زمان تغییر حالت در حالت روز/شب</string>
 	<string name="install_selected_build">OsmAnd را نصب میکنید-{0} از {1} {2} مگابایت؟</string>
@@ -1594,7 +1594,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="animate_routing_route_not_calculated">لطفاً ابتدا مسیر را محاسبه کن</string>
     <string name="animate_routing_route">شبیه سازی با استفاده از مسیر محاسبه شده </string>
     <string name="animate_routing_gpx">شبیه سازی با استفاده از مسیر GPX</string>
-    <string name="remember_choice">به یاد داشتن انتخاب</string>
+    <string name="shared_string_remember_my_choice">به یاد داشتن انتخاب</string>
     <string name="gps_status_eclipsim">وضعیت GPS</string>
     <string name="route_is_too_long">احتمالاً مسیر برای محاسبه توسط مسیریاب آفلاین OsmAnd بسیار طولانی است (یا بعضی ها کار نمیکنند)	محاسبه آفلاین بین دو نقطه با حداکثر ۲۰۰ کیلومتر قابل محاسبه است. لطفاً یک یا چند نقطه بین راهی انتخاب کنید تا مسیر محاسبه شود.</string>
 	<string name="auto_zoom_none">زوم خودکار غیرفعال</string>
@@ -1602,7 +1602,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="auto_zoom_far">برد متوسط</string>
 	<string name="auto_zoom_farthest">برد زیاد</string>
 	<string name="osmodroid_refresh">کانالها را بروز کن</string>
-    <string name="local_osm_changes_delete_all">حذف همه</string>
+    <string name="shared_string_delete_all">حذف همه</string>
     <string name="local_osm_changes_delete_all_confirm">شما در حال حذف %1$d osm تغییرات. مطمئن هستید?</string>
     <string name="tip_faq">پرسش های متداول</string>
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ برای مشاهده پرسش های متداول لطفا به آدرس اینترنتی روبرو مراجعه نمایید.</string>
@@ -1742,7 +1742,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_mode_on">توقف OSMo</string>    
     <string name="osmo_mode_off">َشروع OSMo</string>
     <string name="arrival_distance_descr">مي خواهيد اعلان رسيدن به مقصد را چقدر زودتر دريافت كنيد؟</string>
-    <string name="share_fav">اشتراک گذاری</string>
+    <string name="shared_string_share">اشتراک گذاری</string>
 	<string name="share_fav_subject">علاقه‌مندیها از راه OsmAnd به اشتراک گذاشته شد</string>
 	<string name="hours_ago">چند ساعت قبل</string>
     <string name="minutes_ago">چند دقیقه قبل</string>
@@ -1914,7 +1914,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="speak_favorites">اعلام علاقمندی‌های در مسیر</string>
     <string name="speak_poi">اعلام POIهای در مسیر</string>
     <string name="download_additional_maps">دانلود نقشه های از دست رفته %1$s (%2$d MB)؟</string>
-    <string name="more">بیشتر…</string>
+    <string name="shared_string_more">بیشتر…</string>
     <string name="rendering_value_browse_map_name">مرور نقشه</string>  
     <string name="rendering_value_car_name">خودرو</string>
     <string name="rendering_value_bicycle_name">دوچرخه</string>
@@ -2104,7 +2104,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="shared_string_enable">فعال کردن</string>
 	<string name="shared_string_enabled">فعال</string>
 	<string name="shared_string_disabled">غیرفعال</string>
-	<string name="export">صادرکردن</string>
+	<string name="shared_string_export">صادرکردن</string>
 	<string name="voices">اعلان‌های صوتی</string>
 	<string name="local_index_description">بر روی هر مورد کلیک کنید تا توضیحات بیشتری ببینید، بزنید و نگه دارید تا غیرفعال یا پاک کنید. داده فعلی بر روی دستگاه (%1$s آزاد):</string>
 	<string name="speed_limit_exceed_message">محدوده حداکثر سرعت را انتخاب کنید، در سرعت بالاتر از این مقدار هشدار صوتی خواهید شنید.</string>

@@ -35,7 +35,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="button_upgrade_osmandplus">Nâng cấp OsmAnd+</string>
 	<string name="map_version_changed_info">Máy chủ lưu trữ tập tin bản đồ không tương thích với phiên bản hiện tại. Để tải về và dùng được các tập tin này, vui lòng nâng cấp ứng dụng lên phiên bản mới hơn.</string>
 	
-	<string name="local_index_mi_rename">Đổi tên</string>
+	<string name="shared_string_rename">Đổi tên</string>
 	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí…</string>
@@ -49,11 +49,11 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
-	<string name="save_route_dialog_title">Lưu tuyến đường thành tập tin GPX</string>
+	<string name="shared_string_save_as_gpx">Lưu tuyến đường thành tập tin GPX</string>
 	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
 	<string name="filename_input">Tên tập tin : </string>
 	<string name="file_with_name_already_exist">Tên tập tin đã có.</string>
-	<string name="default_buttons_save">Lưu</string>
+	<string name="shared_string_save">Lưu</string>
 	<string name="menu_save_directions">Lưu hướng</string>
 	
 	<string name="local_index_upload_gpx_description">Tải tập tin GPX lên cộng đồng OSM. Nó sẽ hữu ích để cải thiện chất lượng bản đồ.</string>
@@ -89,7 +89,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_mi_backup">Sao lưu</string>
 	<string name="local_index_mi_delete">Xóa</string>
 	<string name="local_index_mi_reload">Làm tươi</string>
-	<string name="local_index_download">Tải xuống</string>
+	<string name="shared_string_download">Tải xuống</string>
 	
 	<string name="local_index_poi_data">dữ liệu POI</string>
 	<string name="local_index_address_data">dữ liệu Địa chỉ</string>
@@ -276,9 +276,9 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="download_files_question">Tải xuống {0} tập tin ({1} MB)?</string>
 	<string name="items_were_selected">{0} đối tượng được chọn</string>
 	<string name="filter_existing_indexes">Bộ lọc đã được tải</string>
-	<string name="deselect_all">Bỏ chọn tất cả</string>
+	<string name="shared_strings_deselect_all">Bỏ chọn tất cả</string>
 	<string name="shared_string_select_all">Lựa chọn tất cả</string>
-	<string name="reload">Làm tươi</string>
+	<string name="shared_string_refresh">Làm tươi</string>
 
 	<string name="general_settings_descr">Các thiết lập chung cho ứng dụng</string>
     <string name="general_settings">Thiết lập chung</string>
@@ -343,7 +343,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="fav_file_to_load_not_found">Tập tin GPX chưa các điểm ưa thích không thấy tại {0}</string>
 	<string name="fav_saved_sucessfully">Các điểm ưa thích được lưu tới {0}</string>
 	<string name="no_fav_to_save">Không có điểm ưa thích được lưu</string>
-	<string name="import_fav">Import</string>
+	<string name="shared_string_import">Import</string>
 	<string name="export_fav">Export</string>
 	<string name="error_occurred_loading_gpx">Có lỗi khi đọc tập tin GPX</string>
 	<string name="send_report">Gửi báo cáo</string>
@@ -440,7 +440,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="search_history_int_streets">Điểm giao cắt: {0} x {1} in {2}</string>
 	<string name="search_history_building">Tòa nhà: {0}, {1}, {2}</string>
 	<string name="favorite">Ưa thích</string>
-	<string name="clear_all">Xóa hết</string>
+	<string name="shared_string_clear_all">Xóa hết</string>
 	<string name="shared_string_history">Lịch sử</string>
 	<string name="uploading_data">Đang tải dữ liệu lên…</string>
 	<string name="uploading">Đang tải lên…</string>
@@ -609,8 +609,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 <string name="shared_string_yes">OK</string>
 <string name="shared_string_cancel">Hủy</string>
-<string name="default_buttons_apply">Áp dụng</string>
-<string name="default_buttons_add">Thêm</string>
+<string name="shared_string_apply">Áp dụng</string>
+<string name="shared_string_add">Thêm</string>
 <string name="shared_string_no">Không</string>
 <string name="add_favorite_dialog_top_text">Nhập tên Ưa thích</string>
 <string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
@@ -645,7 +645,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="poi_error_poi_not_found">Không tìm thấy Node hoặc amenity không phải là node đơn</string>
 <string name="poi_remove_confirm_template">Xóa {0} (bình luận)?</string>
 <string name="poi_remove_title">Xóa POI</string>
-<string name="default_buttons_delete">Xóa</string>
+<string name="shared_string_delete">Xóa</string>
 <string name="poi_remove_success">Đã xóa POI thành công</string>
 <string name="poi_action_add">thêm</string>
 <string name="poi_action_change">thay đổi</string>
@@ -659,7 +659,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="poi_dialog_comment_default">Thay đổi POI</string>
 <string name="poi_dialog_other_tags_message">Các thẻ khác được giữa lại</string>
 <string name="default_buttons_commit">Commit</string>
-<string name="default_buttons_reset">Làm lại</string>
+<string name="shared_string_clear">Làm lại</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="edit_filter_delete_menu_item">Xóa</string>
 <string name="edit_filter_save_as_menu_item">Lưu thành</string>

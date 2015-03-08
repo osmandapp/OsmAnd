@@ -38,8 +38,8 @@
     <string name="recording_context_menu_play">Pokreni</string>
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
-    <string name="av_control_stop">stani</string>
-    <string name="av_control_start">započni</string>
+    <string name="shared_string_control_stop">stani</string>
+    <string name="shared_string_control_start">započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     
     
@@ -271,7 +271,7 @@
 	<string name="edit_filter_delete_message">Filter {0} je izbrisan</string>
 	<string name="edit_filter_create_message">Filter {0} je stvoren</string>
 	<string name="edit_filter_delete_menu_item">Izbriši</string>
-	<string name="default_buttons_reset">Resetiraj</string>
+	<string name="shared_string_clear">Resetiraj</string>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="poi_dialog_name">Ime</string>
 	<string name="poi_dialog_opening_hours">Otvori</string>
@@ -280,7 +280,7 @@
 	<string name="poi_dialog_other_tags_message">Sve druge oznake su sačuvane</string>
 	<string name="default_buttons_commit">Izvršiti</string>
 	<string name="poi_remove_title">Obriši POI</string>
-	<string name="default_buttons_delete">Izbriši</string>
+	<string name="shared_string_delete">Izbriši</string>
 	<string name="poi_remove_success">POI je uspješno izbrisan</string>
 	<string name="poi_action_add">dodaj</string>
 	<string name="poi_action_change">izmjeni</string>
@@ -301,8 +301,8 @@
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
 	<string name="shared_string_cancel">Zatvori</string>
-	<string name="default_buttons_apply">Primijeni</string>
-	<string name="default_buttons_add">Dodaj</string>
+	<string name="shared_string_apply">Primijeni</string>
+	<string name="shared_string_add">Dodaj</string>
 	<string name="shared_string_no">Ne</string>
 	<string name="add_favorite_dialog_top_text">Unesite naziv favorita</string>
 	<string name="shared_string_yes">Da</string>
@@ -412,7 +412,7 @@
 	<string name="searching">Tražim…</string>
 	<string name="searching_address">Tražim adresu…</string>
 	<string name="hint_search_online">Kućni broj, ulica, grad</string>
-	<string name="clear_all">Izbriši sve</string>
+	<string name="shared_string_clear_all">Izbriši sve</string>
 	<string name="shared_string_history">Povijest</string>
 	<string name="favorite">Favoriti</string>
 	<string name="search_history_city">Grad: {0}</string>
@@ -463,7 +463,7 @@
 	<string name="layer_route">Ruta</string>
 	<string name="layer_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">OSM bugovi</string>
-	<string name="import_fav">Uvezi</string>
+	<string name="shared_string_import">Uvezi</string>
 	<string name="export_fav">Izvezi</string>
 	<string name="error_occurred_loading_gpx">Došlo je do pogreške prilikom učitavanja GPX datoteke</string>
 	<string name="send_report">Pošalji izvještaj</string>
@@ -483,9 +483,9 @@
 	<string name="show_point_options">Koristite lokaciju …</string>
 	<string name="fast_route_mode">Najbrži put</string>
 	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili od značite za najkraću rutu </string>
-	<string name="reload">Osvježi</string>
+	<string name="shared_string_refresh">Osvježi</string>
 	<string name="shared_string_select_all">Označi sve</string>
-	<string name="deselect_all">Odznači sve</string>
+	<string name="shared_strings_deselect_all">Odznači sve</string>
 	<string name="daynight_mode_sensor">Senzor svijetla</string>
 	<string name="daynight_mode_day">Dan</string>
 	<string name="daynight_mode_night">Noć</string>
@@ -760,7 +760,7 @@
 	<string name="local_index_poi_data">POI podaci</string>
 	<string name="local_index_address_data">Podaci o adresama</string>
 	<string name="local_index_transport_data">Podaci javnoga prijevoza</string>
-	<string name="local_index_download">Preuzimanje</string>
+	<string name="shared_string_download">Preuzimanje</string>
 	
 	<string name="local_index_mi_backup">Isključi</string>
 	<string name="local_index_mi_restore">Uključi</string>
@@ -778,12 +778,12 @@
 	<string name="show_more_map_detail_descr">Pokaži neke pojedinosti vektorske karte (ceste i sl.) na manjem zoom-u</string>
 	<string name="favourites_delete_multiple_succesful">Točke favorita su uspješno izbrisane.</string>
 	<string name="favorite_delete_multiple">Izbrisati čete %1$d lokacije u %2$d grupi. Jeste li sigurni?</string>
-	<string name="default_buttons_save">Spremi</string>
+	<string name="shared_string_save">Spremi</string>
 	<string name="menu_save_directions">Spremi upute</string>
 	<string name="local_index_upload_gpx_description">Uploadaj GPX datoteke na OSM. Koristiti će se za poboljšanje karata.</string>
 	<string name="local_index_items_uploaded">%1$d od %2$d stavke uspješno su upload-ane.</string>
 	<string name="file_with_name_already_exist">Datoteka sa istim imenom već postoji.</string>
-	<string name="save_route_dialog_title">Spremi rutu kao GPX trag</string>
+	<string name="shared_string_save_as_gpx">Spremi rutu kao GPX trag</string>
 	<string name="route_successfully_saved_at">Ruta je uspješno spremljena kao \'%1$s\'.</string>
 	<string name="filename_input">Naziv datoteke: </string>
 	<string name="context_menu_item_search">Traži u blizini ovog mjesta</string>
@@ -797,7 +797,7 @@
 	<string name="search_position_address">Adresa-…</string>
 	<string name="search_position_favorites">Favoriti-…</string>
 	<string name="button_upgrade_osmandplus">Nadogradi na OsmAnd+</string>
-	<string name="local_index_mi_rename">Preimenuj</string>
+	<string name="shared_string_rename">Preimenuj</string>
 	<string name="show_gpx_route">Prikaži na karti</string>
 	<string name="map_version_changed_info">Server sadrži datoteke karata koje nisu kompatibilne s trenutnom verzijom aplikacije. Za preuzimanje i korištenje, molimo vas da nadogradite aplikaciju na noviju verziju.</string>
 	<string name="poi_filter_by_name">Traži po imenu</string>
@@ -921,7 +921,7 @@
     <string name="install_paid">Puna inačica</string>
     <string name="choose_osmand_theme_descr">Odaberite temu aplikacije</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
-    <string name="default_buttons_other_actions">Ostale aktivnosti</string>
+    <string name="shared_string_more_actions">Ostale aktivnosti</string>
     <string name="other_location">Ostalo</string>
     <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
     <string name="use_magnetic_sensor">Koristi magnetski senzor</string>
@@ -934,7 +934,7 @@
     <string name="plugin_distance_point_speed">brzina</string>
     <string name="distance_measurement_save_gpx">Spremi kao GPX</string>
     <string name="distance_measurement_load_gpx">Otvori postojeći GPX</string>
-    <string name="default_buttons_do_not_show_again">Ne prikazuj ponovo</string>
+    <string name="shared_string_do_not_show_again">Ne prikazuj ponovo</string>
     <string name="plugin_distance_point">Točka</string>
     <string name="gpx_saved_sucessfully">GPX datoteka je uspješno spremljena na {0}</string>
     <string name="destination_point">Odredište %1$s</string>
@@ -948,11 +948,11 @@
     <string name="app_mode_aircraft">Zrakoplov</string>
     <string name="tip_faq">Često postavljena pitanja</string>
     <string name="tip_faq_t">Posjetite https://code.google.com/p/osmand/wiki/FAQ za vidjeti često postavljena pitanja.</string>
-    <string name="local_osm_changes_delete_all">Izbrisati sve</string>
+    <string name="shared_string_delete_all">Izbrisati sve</string>
     <string name="animate_routing_route_not_calculated">Molimo vas, prvo izračunajte rutu</string>
     <string name="animate_routing_route">Simulacija pomoću izračunate rute </string>
     <string name="animate_routing_gpx">Simulacija pomoću GPX zapisa</string>
-    <string name="remember_choice">Zapamti moj izbor</string>
+    <string name="shared_string_remember_my_choice">Zapamti moj izbor</string>
     <string name="gps_status_eclipsim">Status GPS signala</string>
     <string name="shared_string_and">i</string>
     <string name="shared_string_or">ili</string>
@@ -1066,7 +1066,7 @@
 	<string name="unzipping_file">Otpakiranje datoteke…</string>
 	<string name="search_offline_geo_error">Nije moguće analizirati geo namjeru \'%s\'</string>
 	<string name="search_online_address">Traži online</string>
-	<string name="downloading_file_new">Preuzimanje …</string>
+	<string name="shared_string_downloading">Preuzimanje …</string>
 	<string name="osm_settings_descr">Navedite Openstreetmap.org (OSM) postavke potrebne za OSM prijavu</string>
 	<string name="osb_author_dialog_password">OSM zaporka (opcija)</string>
 	<string name="av_camera_focus">Tip fokusa fotoaparat</string>
@@ -1173,7 +1173,7 @@
     <string name="select_gpx">Odaberite GPX …</string>
     <string name="route_descr_select_destination">Odaberite Odredište</string>
     <string name="shared_string_select_on_map">Odaberite na karti …</string>
-    <string name="more">Više…</string>
+    <string name="shared_string_more">Više…</string>
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Bicikl</string>
     <string name="rendering_value_pedestrian_name">Pješak</string>

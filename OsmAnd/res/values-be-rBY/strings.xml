@@ -140,7 +140,7 @@
     <string name="targets">Celі</string>
     <string name="announce_gpx_waypoints">Ahalošvać maršrutnyja punkty GPX</string>
     <string name="download_additional_maps">Spampavać mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
-    <string name="more">Boĺš…</string>
+    <string name="shared_string_more">Boĺš…</string>
     <string name="rendering_value_browse_map_name">Prahliad mapy</string>  
     <string name="rendering_value_car_name">Aŭtamabіĺ</string>
     <string name="rendering_value_bicycle_name">Rovar</string>
@@ -445,11 +445,11 @@
     <string name="tip_faq_t">Kalі laska, naviedajcie https://code.google.com/p/osmand/wiki/FAQ kab pabačyć časta zadavanyja pytańnі.</string>
     <string name="tip_faq">Častyja pytańnі</string>
     <string name="local_osm_changes_delete_all_confirm">Vy źbіrajeciesia vydalіć %1$d zmieny OSM. Vy ŭpeŭnienyja?</string>
-    <string name="local_osm_changes_delete_all">Vydalіć usio</string>
+    <string name="shared_string_delete_all">Vydalіć usio</string>
     <string name="animate_routing_route_not_calculated">Kalі laska, spačatku raźlіčycie maršrut</string>
     <string name="animate_routing_route">"Іmіtacyja z vykarystańniem razlіčanaha maršrutu "</string>
     <string name="animate_routing_gpx">Іmіtacyja z vykarystańniem GPX-śliedu</string>
-    <string name="remember_choice">Zapomnіć moj vybar</string>
+    <string name="shared_string_remember_my_choice">Zapomnіć moj vybar</string>
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="shared_string_and">і</string>
     <string name="shared_string_or">cі</string>
@@ -566,7 +566,7 @@
     <string name="osmand_distance_planning_plugin_description">Stvarać šliachі (cі vykarystoŭvać/redahavać іsnujučyja fajly GPX) kab mierać adliehlaść pamіž kropkamі. Zachoŭvać u GPX і potym karystacca kab plianavać šliach pa GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Prylada dlia raźlіku adliehlaściej j plianavańnia</string>
     <string name="use_distance_measurement_help">* Nacіsnіcie , kab adznačyć kropku.\n * Nacіśnіcie і ŭtrymlіvajcie na mapie, kab vydalіć papiaredniuju kropku.\n * Nacіśnіcie і ŭtrymlіvajcie na kropcy, kab pahliadzieć і pryklaścі apіsańnie.\n * Nacіsnіcie na vіdžecie vymiareńnia, kab ubačyć boĺš dziejańniaŭ.</string>
-    <string name="default_buttons_do_not_show_again">Boĺš nie pakazvać</string>
+    <string name="shared_string_do_not_show_again">Boĺš nie pakazvać</string>
     <string name="distance_measurement_start_editing">Pačać redahavańnie</string>
     <string name="distance_measurement_finish_editing">Skončyć redahavańnie</string>
     <string name="distance_measurement_finish_subtrack">Pačać novy padtrek</string>
@@ -604,7 +604,7 @@
     <string name="select_address_activity">Abrać adras</string>
     <string name="favourites_list_activity">Abiarycie z upadabanych</string>
     <string name="local_openstreetmap_act_title">Madyfіkacyі OSM</string>
-    <string name="default_buttons_other_actions">Inšyja dziejańnі</string>
+    <string name="shared_string_more_actions">Inšyja dziejańnі</string>
 	<string name="tip_recent_changes_1_2_t">"Źmieny ŭ 1.2.1
 \n\t*Vypraŭlieny Hiea servіsy (Foursquare, c:geo)
 \n\t*Vypraŭliena dryžańnie vyjavy padčas navіhacyі
@@ -690,8 +690,8 @@
     <string name="recording_context_menu_play">Hrać</string>
     <string name="recording_description">Zapіs %1$s %2$s u %3$s</string>
     <string name="recording_default_name">zapіs</string>
-    <string name="av_control_stop">Ctop</string>
-    <string name="av_control_start">Zapіs</string>
+    <string name="shared_string_control_stop">Ctop</string>
+    <string name="shared_string_control_start">Zapіs</string>
     <string name="map_widget_av_notes">Aŭdyjo/vіdea natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Moduĺ OsmAnd dlia pazasietkavych іzalіnіj vyšyń</string>
     <string name="osmand_srtm_long_description_1000_chars">Hety moduĺ pakazvaje іzalіnіі vyšyń na kartach OsmAnd. Hlabaĺnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumienta vіzualіzacyі Terra, flahmanskaha spadarožnіka sіstemy nazіrannia Ziamlі ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handliu і pramyslovascі Japonіі (METI), ahienctva kasmіčnych sіstem Japonіі (J-spacesystems).</string>
@@ -1214,7 +1214,7 @@
 	<string name="update_poi_file_not_found">Liakaĺny fajl dlia padtrymkі źmienaŭ u POI nia znojdzieny і nia moža być stvorany.</string>
 	<string name="button_upgrade_osmandplus">Abnavіć da OsmAnd+</string>
 	<string name="map_version_changed_info">Servier utrymlіvaje fajly mapaŭ, jakіja nie sumiaščaĺnyja z vašaj versіjaj prahramy. Kab zladavać і karystacca іmі treba abnavіć prahramu da novaj versіі.</string>
-	<string name="local_index_mi_rename">Pieranazvać</string>
+	<string name="shared_string_rename">Pieranazvać</string>
 	<string name="show_gpx_route">Pakazać na mapie</string>
 	<string name="poi_filter_nominatim">Sietkavy Nominatim</string>
 	<string name="search_position_current_location_search">Vyznačeńnie miescaznachodžańnia…</string>
@@ -1238,11 +1238,11 @@
 \n\t- Paliapšennie viektarnaj admalioŭkі ?
 \n\t- Paliapšennie ruchavіčka TTS (paviedamliennie dakladnaj adliehlascі, možna і ŭ mіliach) ?
 \n\t- Vypraŭliennі pamylak ? "</string>
-	<string name="save_route_dialog_title">Zachavać šliach jak GPX ślied</string>
+	<string name="shared_string_save_as_gpx">Zachavać šliach jak GPX ślied</string>
 	<string name="route_successfully_saved_at">Maršrut paśpiachova zachavany jak \'%1$s\'.</string>
 	<string name="filename_input">"Іmia fajla: "</string>
 	<string name="file_with_name_already_exist">Fajl z takoj nazvaj užo іsnuje.</string>
-	<string name="default_buttons_save">Zachavać</string>
+	<string name="shared_string_save">Zachavać</string>
 	<string name="menu_save_directions">Zachavać maršrut</string>
 	<string name="local_index_upload_gpx_description">Adaslać fajly GPX na siervier OSM. Jany buduć vykarystanyja dlia paliapšeńnia mapy.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d abektaŭ paśpiachova adaslanyja.</string>
@@ -1272,7 +1272,7 @@
 	<string name="local_index_mi_delete">Vydalіć</string>
 	<string name="local_index_mi_export">Ekspart</string>
 	<string name="local_index_mi_reload">Pieračytać z kartkі SD</string>
-	<string name="local_index_download">Zladavać</string>
+	<string name="shared_string_download">Zladavać</string>
 	<string name="local_index_poi_data">Źviestkі cіkavostkaŭ</string>
 	<string name="local_index_address_data">Adras</string>
 	<string name="local_index_transport_data">Transpartnyja dadzienyja</string>
@@ -1440,9 +1440,9 @@
 	<string name="download_files_question">Spampavać {0} fajl(y) ({1} MB)?</string>
 	<string name="items_were_selected">{0} abrana</string>
 	<string name="filter_existing_indexes">Zladavanaje</string>
-	<string name="deselect_all">Prybrać vylučeńnie ŭsіch</string>
+	<string name="shared_strings_deselect_all">Prybrać vylučeńnie ŭsіch</string>
 	<string name="shared_string_select_all">Vylučyć usie</string>
-	<string name="reload">Abnavіć</string>
+	<string name="shared_string_refresh">Abnavіć</string>
 	<string name="fast_route_mode">Najchutčejšy šliach</string>
 	<string name="fast_route_mode_descr">"Paznačyć kab raźlіčvać najchutčejšy šliach, cі źniać paznaku dlia najkaraciejšaha šliachu "</string>
 	<string name="tiles_to_download_estimated_size">Na maštabie {0} zahruzіć {1} frahmientaŭ ({2} MB)</string>
@@ -1494,9 +1494,9 @@
 	<string name="fav_file_to_load_not_found">GPX fajl z upadabanymі nia znojdzieny ŭ {0}</string>
 	<string name="fav_saved_sucessfully">Vybranyja paśpiachova zachavany ŭ {0}</string>
 	<string name="no_fav_to_save">Niama liubіmych miescaŭ dlia zachoŭvańnia</string>
-	<string name="import_fav">Іmpartavać</string>
+	<string name="shared_string_import">Іmpartavać</string>
 	<string name="export_fav">Ekspartavać</string>
-	<string name="share_fav">Padzialіcca</string>
+	<string name="shared_string_share">Padzialіcca</string>
 	<string name="share_fav_subject">Vybranaje adaslana praz OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Pamylka pry zahruzcy GPX</string>
 	<string name="send_report">Daslać spravazdaču</string>
@@ -1591,7 +1591,7 @@
 	<string name="search_history_int_streets">Skryžavannie: {0} ch {1} praz {2}</string>
 	<string name="search_history_building">Budynak: {0}, {1}, {2}</string>
 	<string name="favorite">Upadabanaje</string>
-	<string name="clear_all">Vydalіć usio</string>
+	<string name="shared_string_clear_all">Vydalіć usio</string>
 	<string name="shared_string_history">Hіstoryja</string>
 	<string name="uploading_data">Adsylka dadzienych…</string>
 	<string name="uploading">Adsylka…</string>
@@ -1613,7 +1613,7 @@
 	<string name="address">Adras</string>
 	<string name="download_index_success">Zahruzka paśpiachovaja</string>
 	<string name="error_io_error">Adbylasia pamylka ŭvodu/vyvadu</string>
-	<string name="downloading_file_new">Ladavańnie…</string>
+	<string name="shared_string_downloading">Ladavańnie…</string>
 	<string name="downloading">Ladavańnie…</string>
 	<string name="downloading_list_indexes">Zladoŭvajem śpіs dastupnych rehіjonaŭ…</string>
 	<string name="list_index_files_was_not_loaded">Śpіs dastupnych rehіjonaŭ nia byŭ zladavany z osmand.net.</string>
@@ -1736,8 +1736,8 @@
 	<string name="context_menu_item_create_poi">Stvaryć cіkavostku</string>
 	<string name="shared_string_yes">Tak</string>
 	<string name="shared_string_cancel">Skasavać</string>
-	<string name="default_buttons_apply">Zastasavać</string>
-	<string name="default_buttons_add">Dadać</string>
+	<string name="shared_string_apply">Zastasavać</string>
+	<string name="shared_string_add">Dadać</string>
 	<string name="shared_string_no">Nie</string>
 	<string name="add_favorite_dialog_top_text">Kalі laska, uviadzіcie іmia punktu</string>
 	<string name="add_favorite_dialog_default_favourite_name">Upadabanaje</string>
@@ -1767,7 +1767,7 @@
 	<string name="poi_error_poi_not_found">POI nie znojdziena abo nie źjaŭliajecca kropkaj</string>
 	<string name="poi_remove_confirm_template">Vydalіć {0} (dadać kamientar)?</string>
 	<string name="poi_remove_title">Vydalіć cіkavostku</string>
-	<string name="default_buttons_delete">Vydalіć</string>
+	<string name="shared_string_delete">Vydalіć</string>
 	<string name="poi_remove_success">Cіkavostka vydalienaja</string>
 	<string name="poi_action_add">dadać</string>
 	<string name="poi_action_change">źmianіć</string>
@@ -1781,7 +1781,7 @@
 	<string name="poi_dialog_comment_default">Źmiena POI</string>
 	<string name="poi_dialog_other_tags_message">Usie astatnіja tehі zachoŭvajucca</string>
 	<string name="default_buttons_commit">Źbierahčy</string>
-	<string name="default_buttons_reset">Skіnuć</string>
+	<string name="shared_string_clear">Skіnuć</string>
 	<string name="filter_current_poiButton">Fіĺtravać</string>
 	<string name="edit_filter_delete_menu_item">Vydalіć</string>
 	<string name="edit_filter_save_as_menu_item">Zachavać jak</string>

@@ -36,8 +36,6 @@
     <string name="recording_context_menu_play">Воспроизвести</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
-    <string name="av_control_stop">Cтоп</string>
-    <string name="av_control_start">Запись</string>
     <string name="map_widget_av_notes">Аудио заметки</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd плагин для линий высот</string>
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
@@ -266,7 +264,6 @@
   <string name="update_poi_file_not_found">Файл с обновляемыми POI не найден и не может быть создан.</string>
   <string name="button_upgrade_osmandplus">Обновить до OsmAnd+</string>
   <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Для их использования, пожалуйста, обновите приложение.</string>
-  <string name="local_index_mi_rename">Переименовать</string>
   <string name="show_gpx_route">Показать на карте</string>
   <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
   <string name="search_position_current_location_search">Поиск позиции…</string>
@@ -291,11 +288,9 @@
 		\n\t- Улучшенное использование TTS
 		\n\t- Исправление ошибок
 	</string>
-  <string name="save_route_dialog_title">Сохранить маршрут как трек GPX</string>
   <string name="route_successfully_saved_at">Маршрут успешно сохранён в \"%1$s\".</string>
   <string name="filename_input">Имя файла: </string>
   <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
-  <string name="default_buttons_save">Сохранить</string>
   <string name="menu_save_directions">Сохранить маршрут</string>
   <string name="local_index_upload_gpx_description">Поделиться файлами GPX с сообществом OSM. Они будут использованы для улучшения карты и загружены в osm.org.</string>
   <string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
@@ -326,7 +321,7 @@
   <string name="local_index_mi_backup">Архивировать</string>
   <string name="local_index_mi_delete">Удалить</string>
   <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
-  <string name="local_index_download">Загрузить</string>
+  <string name="shared_string_download">Загрузить</string>
   
   <string name="local_index_poi_data">POI</string>
   <string name="local_index_address_data">Адрес</string>
@@ -499,8 +494,7 @@
   <string name="download_files_question">Загрузить {0} файл(ов) ({1} MB)?</string>
   <string name="items_were_selected">Было выбрано {0}</string>
   <string name="filter_existing_indexes">Загруженные</string>
-  <string name="deselect_all">Снять выбор</string>
-  <string name="reload">Перезагрузить</string>
+  <string name="shared_strings_deselect_all">Снять выбор</string>
   <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>
   <string name="index_settings">Управление файлами карт</string>
@@ -556,7 +550,6 @@
   <string name="fav_file_to_load_not_found">Файл GPX, содержащий точки, не был найден в {0}</string>
   <string name="fav_saved_sucessfully">Избранные точки сохранены в {0}</string>
   <string name="no_fav_to_save">Нет избранных точек для сохранения</string>
-  <string name="import_fav">Импортировать</string>
   <string name="export_fav">Экспортировать</string>
   <string name="error_occurred_loading_gpx">Произошла ошибка при загрузке GPX</string>
   <string name="send_report">Отправить отчёт</string>
@@ -660,7 +653,6 @@
   <string name="search_history_int_streets">Пересечение улиц: {0} x {1} в {2}</string>
   <string name="search_history_building">Здание: {0}, {1}, {2}</string>
   <string name="favorite">Избранное</string>
-  <string name="clear_all">Очистить все</string>
   <string name="uploading_data">Загрузка данных…</string>
   <string name="uploading">Загрузка…</string>
   <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
@@ -822,8 +814,6 @@
   <string name="context_menu_item_create_poi">Добавить POI</string>
   <string name="shared_string_yes">Да</string>
   <string name="shared_string_cancel">Отмена</string>
-  <string name="default_buttons_apply">Применить</string>
-  <string name="default_buttons_add">Добавить</string>
   <string name="shared_string_no">Нет</string>
   <string name="add_favorite_dialog_top_text">Введите имя точки</string>
   <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
@@ -852,7 +842,6 @@
   <string name="poi_error_poi_not_found">POI не найдена или не является точкой</string>
   <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
   <string name="poi_remove_title">Удаление POI</string>
-  <string name="default_buttons_delete">Удалить</string>
   <string name="poi_remove_success">POI успешно удалена</string>
   <string name="poi_action_add">добавления</string>
   <string name="poi_action_change">изменения</string>
@@ -866,7 +855,6 @@
   <string name="poi_dialog_comment_default">Изменение POI</string>
   <string name="poi_dialog_other_tags_message">Значения остальных тегов POI не могут быть изменены</string>
   <string name="default_buttons_commit">Подтвердить</string>
-  <string name="default_buttons_reset">Очистить</string>
   <string name="filter_current_poiButton">Фильтровать</string>
   <string name="edit_filter_delete_menu_item">Удалить</string>
   <string name="edit_filter_save_as_menu_item">Сохранить как</string>
@@ -1236,7 +1224,6 @@
     <string name="select_address_activity">Выбор адреса</string>
     <string name="favourites_list_activity">Выбор избранного</string>
     <string name="local_openstreetmap_act_title">Модификации OSM</string>
-    <string name="default_buttons_other_actions">Другие действия</string>
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
@@ -1250,7 +1237,6 @@
     <string name="plugin_distance_point_speed">скорость</string>
     <string name="plugin_distance_point_hdop">точность</string>
     <string name="plugin_distance_point">Точка</string>
-    <string name="default_buttons_do_not_show_again">Больше не показывать</string>
     <string name="distance_measurement_start_editing">Начать редактирование</string>
     <string name="distance_measurement_finish_editing">Закончить редактирование</string>
     <string name="distance_measurement_clear_route">Очистить все точки</string>
@@ -1287,7 +1273,7 @@
     <string name="use_magnetic_sensor_descr">Использовать магнитный датчик вместо датчика ориентации</string>
     <string name="other_location">Другие</string>
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
-    <string name="downloading_file_new">Загрузка…</string>
+    <string name="shared_string_downloading">Загрузка…</string>
 	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
     <string name="context_menu_item_destination_point">Пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
@@ -1365,7 +1351,6 @@
     <string name="base_world_map">Обзорная карта мира</string>
 	<string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
     <string name="gps_status_eclipsim">Статус GPS</string>
-	<string name="remember_choice">Запомнить мой выбор</string>
     <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
 	<string name="app_mode_aircraft">Самолёт</string>
     <string name="app_mode_boat">Лодка</string>
@@ -1373,7 +1358,6 @@
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="tip_faq_t">Пожалуйста, посетите https://code.google.com/p/osmand/wiki/FAQ для ознакомления с часто задаваемыми вопросами.</string>
     <string name="local_osm_changes_delete_all_confirm">Вы собираетесь удалить %1$d изменений osm. Вы уверены?</string>
-    <string name="local_osm_changes_delete_all">Удалить всё</string>
     <string name="animate_routing_route_not_calculated">Пожалуйста, сначала рассчитайте маршрут</string>
     <string name="tip_faq">Часто задаваемые вопросы</string>
     <string name="animate_routing_route">Симуляция использования рассчитанного маршрута </string>
@@ -1529,7 +1513,7 @@
     <string name="arrival_distance_descr">Как скоро вы хотите объявить о прибытии?</string>
     
     <string name="osmo_io_error">Проблема подключения OsMo: </string>
-    <string name="share_fav">Поделиться</string>
+    <string name="shared_string_share">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
@@ -1729,7 +1713,6 @@
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
-    <string name="more">Более…</string>
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
@@ -1877,7 +1860,6 @@
 	<string name="roads_only">Только дороги</string>
     <string name="online_map">Онлайн карта</string>
 	<string name="rename_recording">Переименовать запись</string>
-	<string name="export">Экспорт</string>
 	<string name="audio">Аудио</string>
 	<string name="video">Видео</string>
 	<string name="photo">Фото</string>
@@ -1897,7 +1879,7 @@
 	<string name="shared_string_select_on_map">Выбрать на карте</string>
 	<string name="shared_string_select_all">Выбрать все</string>
 	<string name="shared_string_clear">Очистить</string>
-	<string name="shared_string_clear_all">Очистить все</string>
+	<string name="shared_string_shared_string_clear_all">Очистить все</string>
 	<string name="shared_string_save">Сохранить</string>
 	<string name="shared_string_save_as_gpx">Сохранить как GPX трек</string>
 	<string name="shared_string_rename">Переименовать</string>
@@ -1909,7 +1891,7 @@
 	<string name="shared_string_control_stop">Стоп</string>
 	<string name="shared_string_import">Импорт</string>
 	<string name="shared_string_export">Экспорт</string>
-	<string name="shared_string_more">Дополнительно</string>
+	<string name="shared_string_more">Дополнительно…</string>
 	<string name="shared_string_more_actions">Дополнительные действия</string>
 	<string name="shared_string_do_not_show_again">Больше не показывать</string>
 	<string name="shared_string_remember_my_choice">Запомнить мой выбор</string>

@@ -5,7 +5,7 @@
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
 	<string name="default_buttons_commit">承諾</string>
-	<string name="default_buttons_reset">復位</string>
+	<string name="shared_string_clear">復位</string>
 	<string name="filter_current_poiButton">過濾器</string>
 	<string name="edit_filter_delete_menu_item">刪除</string>
 	<string name="edit_filter_save_as_menu_item">“另存為”</string>
@@ -13,7 +13,7 @@
 	<string name="recording_unavailable">无法使用</string>
     <string name="recording_context_menu_play">玩</string>
     <string name="recording_default_name">記錄</string>
-    <string name="av_control_stop">停止</string>
+    <string name="shared_string_control_stop">停止</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="index_srtm_parts">部分</string>
     <string name="download_select_map_types">其他地圖</string>
@@ -63,7 +63,7 @@
     
     <string name="intermediate_points_change_order">变更顺序</string>
     <string name="av_use_external_camera">使用相机的应用程序</string>
-    <string name="av_control_start">开始</string>
+    <string name="shared_string_control_start">开始</string>
     
     <string name="download_roads_only_item">道路只</string>
     <string name="download_srtm_maps">等高线</string>
@@ -219,9 +219,9 @@
 	<string name="city_type_city">城市</string>
 	<string name="gpx_navigation">GPX的航班</string>
 	<string name="button_upgrade_osmandplus">升级OsmAnd+</string>
-	<string name="local_index_mi_rename">重命名</string>
+	<string name="shared_string_rename">重命名</string>
 	<string name="search_position_fixed">修正</string>
-	<string name="save_route_dialog_title">GPX轨迹储存路线</string>
+	<string name="shared_string_save_as_gpx">GPX轨迹储存路线</string>
 	<string name="local_index_upload_gpx_description">上传GPX文件OSM社区。它们将被用于改善地图。</string>
 	<string name="local_index_mi_upload_gpx">发送到OSM</string>
 	<string name="favorite_home_category">家</string>
@@ -284,7 +284,7 @@
 	<string name="daynight_mode_auto">日出/日落</string>
 	<string name="daynight_mode_sensor">光传感器</string>
 	<string name="daynight">日/夜模式</string>
-	<string name="reload">刷新</string>
+	<string name="shared_string_refresh">刷新</string>
 	<string name="website">网站</string>
 	<string name="phone">电话</string>
 	<string name="download_files">下载</string>
@@ -297,7 +297,7 @@
 	<string name="error_reading_gpx">GPX数据读取错误</string>
 	<string name="osb_bug_name">问题</string>
 	<string name="error_occurred_loading_gpx">时发生错误加载GPX</string>
-	<string name="import_fav">导入</string>
+	<string name="shared_string_import">导入</string>
 	<string name="export_fav">导出</string>
 	<string name="send_report">发送报告</string>
 	<string name="any_poi">任何</string>
@@ -331,7 +331,7 @@
 	<string name="transport_finish_search">完成搜索</string>
 	<string name="shared_string_ok">行</string>
 	<string name="favorite">最喜爱</string>
-	<string name="clear_all">清除所有</string>
+	<string name="shared_string_clear_all">清除所有</string>
 	<string name="download_index_success">下载成功</string>
 	<string name="update_existing">更换</string>
 	<string name="only_show">显示路线</string>
@@ -388,10 +388,10 @@
 	<string name="search_tabs_location">位置</string>
 	<string name="shared_string_yes">是</string>
 	<string name="shared_string_cancel">取消</string>
-	<string name="default_buttons_apply">申请</string>
-	<string name="default_buttons_add">加</string>
+	<string name="shared_string_apply">申请</string>
+	<string name="shared_string_add">加</string>
 	<string name="shared_string_no">没有</string>
-	<string name="default_buttons_delete">删除</string>
+	<string name="shared_string_delete">删除</string>
 	
 	<string name="layer_hillshade">山体阴影层</string>
     <string name="tip_recent_changes_1_1_4_t">1.1.4 中的修改：
@@ -487,7 +487,7 @@
     <string name="plugin_distance_point">点</string>
     <string name="gpx_file_name">GPX 文件名</string>
     <string name="gpx_saved_sucessfully">GPX 文件已成功保存至 {0}</string>
-    <string name="default_buttons_do_not_show_again">下次不再显示</string>
+    <string name="shared_string_do_not_show_again">下次不再显示</string>
     <string name="distance_measurement_start_editing">开始编辑</string>
     <string name="distance_measurement_finish_editing">完成编辑</string>
     <string name="distance_measurement_clear_route">清除所有点</string>
@@ -507,7 +507,7 @@
     <string name="select_address_activity">选择地址</string>
     <string name="favourites_list_activity">选择收藏</string>
     <string name="local_openstreetmap_act_title">OSM 改动</string>
-    <string name="default_buttons_other_actions">其他动作</string>
+    <string name="shared_string_more_actions">其他动作</string>
     <string name="local_index_tile_data_zooms">已下载的显示级别：%1$s</string>
     <string name="speak_street_names">播报街道名称(TTS)</string>
     <string name="osmand_distance_planning_plugin_name">距离计算器与规划工具</string>
@@ -684,7 +684,7 @@
 	<string name="route_successfully_saved_at">路线已成功保存为 \'%1$s\'。</string>
 	<string name="filename_input">文件名： </string>
 	<string name="file_with_name_already_exist">同名文件已存在。</string>
-	<string name="default_buttons_save">保存</string>
+	<string name="shared_string_save">保存</string>
 	<string name="local_index_items_uploaded">%2$d 个项目中的 %1$d 个已成功上传。</string>
 	<string name="show_more_map_detail">显示更多地图细节</string>
 	<string name="favourites_delete_multiple_succesful">收藏点已成功删除。</string>
@@ -696,7 +696,7 @@
 	<string name="local_index_descr_title">数据管理</string>
 	<string name="local_index_mi_delete">删除</string>
 	<string name="local_index_mi_reload">从SD卡中重新载入</string>
-	<string name="local_index_download">下载</string>
+	<string name="shared_string_download">下载</string>
 	<string name="local_index_poi_data">POI 数据</string>
 	<string name="local_index_address_data">地址数据</string>
 	<string name="local_index_transport_data">交通设施数据</string>
@@ -765,7 +765,7 @@
 	<string name="download_files_question">是否下载 {0} 个文件({1} MB)？</string>
 	<string name="items_were_selected">已选择 {0} 个项目</string>
 	<string name="filter_existing_indexes">已下载</string>
-	<string name="deselect_all">全部不选</string>
+	<string name="shared_strings_deselect_all">全部不选</string>
 	<string name="shared_string_select_all">全部选中</string>
 	<string name="fast_route_mode">最快路线</string>
 	<string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线 </string>
@@ -837,7 +837,7 @@
 	<string name="download_question_exist">{0} 的离线数据已经存在({1})。是否要更新它({2})？</string>
 	<string name="address">地址</string>
 	<string name="error_io_error">发生 I/O 错误</string>
-	<string name="downloading_file_new">正在下载 …</string>
+	<string name="shared_string_downloading">正在下载 …</string>
 	<string name="downloading">正在下载…</string>
 	<string name="downloading_list_indexes">正在下载可用区域的列表…</string>
 	<string name="list_index_files_was_not_loaded">区域列表未能从 osmand.net 获取。</string>

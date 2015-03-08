@@ -202,7 +202,7 @@ public class FavoriteDialogs {
 			}
 			
 		});
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);

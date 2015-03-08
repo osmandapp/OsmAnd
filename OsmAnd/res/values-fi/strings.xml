@@ -200,7 +200,7 @@
 	<string name="animate_route">Aloita animaatio</string>
 	<string name="file_can_not_be_renamed">Tiedostoa ei voitu uudelleennimetä.</string>
 	<string name="poi_filter_by_name">Etsi nimen mukaan</string>
-	<string name="local_index_mi_rename">Nimeä uudelleen</string>
+	<string name="shared_string_rename">Nimeä uudelleen</string>
 	<string name="show_gpx_route">Näytä kartalla</string>
 	<string name="search_position_current_location_search">Etsitään sijaintia…</string>
 	<string name="search_position_current_location_found">Sijainti(Löydetty)</string>
@@ -209,7 +209,7 @@
 	<string name="search_position_undefined">Määrittelemätön</string>
 	<string name="search_position_current_location">Nykyinen sijainti…</string>
 	<string name="select_search_position">Etsi läheltä:</string>
-	<string name="default_buttons_save">Tallenna</string>
+	<string name="shared_string_save">Tallenna</string>
 	<string name="menu_save_directions">Tallenna ohjeet</string>
 	<string name="local_index_upload_gpx_description">Lähetä GPX tiedostot OSM yhteisölle. Niitä käytetään karttojen parantamiseen.</string>
 	<string name="local_index_items_uploaded">%1$d / %2$d osio(ta) onnistuneesti lähetetty.</string>
@@ -230,9 +230,9 @@
 	<string name="download_files_question">Lataa {0} tiedosto(a) ({1} MB)?</string>
 	<string name="items_were_selected">{0} kohde(tta) valittu</string>
 	<string name="filter_existing_indexes">Suodata ladatut</string>
-	<string name="deselect_all">Poista valinta kaikista</string>
+	<string name="shared_strings_deselect_all">Poista valinta kaikista</string>
 	<string name="shared_string_select_all">Valitse kaikki</string>
-	<string name="reload">Päivitä</string>
+	<string name="shared_string_refresh">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>
 	<string name="context_menu_item_download_map">Lataa kartta</string>
 	<string name="download_files">Lataa</string>
@@ -244,7 +244,7 @@
 	<string name="show_route">Reitin tiedot</string>
 	<string name="fav_imported_sucessfully">Suosikit tuotu onnistuneesti</string>
 	<string name="fav_saved_sucessfully">Suosikit tallennettu onnistuneesti sijaintiin {0}</string>
-	<string name="import_fav">Tuo</string>
+	<string name="shared_string_import">Tuo</string>
 	<string name="export_fav">Vie</string>
 	<string name="error_occurred_loading_gpx">Tapahtui virhe ladattaessa GPX tietoja</string>
 	<string name="send_report">Lähetä raportti</string>
@@ -305,7 +305,7 @@
 	<string name="search_history_int_streets">Risteys: {0} x {1} in {2}</string>
 	<string name="search_history_building">Rakennus: {0}, {1}, {2}</string>
 	<string name="favorite">Suosikki</string>
-	<string name="clear_all">Tyhjennä kaikki</string>
+	<string name="shared_string_clear_all">Tyhjennä kaikki</string>
 	<string name="shared_string_history">Historia</string>
 	<string name="uploading_data">Lähetetään dataa…</string>
 	<string name="uploading">Lähetetään…</string>
@@ -410,8 +410,8 @@
 	<string name="context_menu_item_add_favorite">Lisää suosikkeihin</string>
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
 	<string name="shared_string_cancel">Peruuta</string>
-	<string name="default_buttons_apply">Käytä</string>
-	<string name="default_buttons_add">Lisää</string>
+	<string name="shared_string_apply">Käytä</string>
+	<string name="shared_string_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>
 	<string name="add_favorite_dialog_default_favourite_name">Suosikki</string>
 	<string name="favourites_context_menu_edit">Muokkaa suosikkia</string>
@@ -425,7 +425,7 @@
 	<string name="poi_edit_title">Muokkaa KP:ta</string>
 	<string name="poi_create_title">Luo KP</string>
 	<string name="poi_remove_title">Poista KP</string>
-	<string name="default_buttons_delete">Poista</string>
+	<string name="shared_string_delete">Poista</string>
 	<string name="poi_remove_success">KP poistettiin onnistuneesti</string>
 	<string name="poi_action_add">lisää</string>
 	<string name="poi_action_change">muuta</string>
@@ -594,7 +594,7 @@
 	<string name="osmand_parking_plugin_description">Tällä lisäosalla voit tallentaa pysäköidyn auton sijainnin.</string>
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
-	<string name="default_buttons_reset">Nollaa</string>
+	<string name="shared_string_clear">Nollaa</string>
 	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
 	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
 	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>
@@ -677,7 +677,7 @@
     <string name="plugin_distance_point">Piste</string>
     <string name="gpx_file_name">GPX tiedoston nimi</string>
     <string name="gpx_saved_sucessfully">GPX tiedosto tallennettin onnistuneesti: {0}</string>
-    <string name="default_buttons_do_not_show_again">Älä näytä enää uudestaan</string>
+    <string name="shared_string_do_not_show_again">Älä näytä enää uudestaan</string>
     <string name="distance_measurement_start_editing">Aloita muokkaus</string>
     <string name="tip_map_styles">Karttatyylit</string>
 	<string name="about_version">Versio:</string>

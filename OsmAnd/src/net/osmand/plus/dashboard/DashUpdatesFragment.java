@@ -187,7 +187,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			return;
 		}
 		for (int i = 0; i < baseNames.size(); i++) {
-			if (message.equals(getActivity().getString(R.string.downloading_file_new) + " " + baseNames.get(i))) {
+			if (message.equals(getActivity().getString(R.string.shared_string_downloading) + " " + baseNames.get(i))) {
 				currentProgress = progressBars.get(i);
 				cancelButton = downloadButtons.get(i);
 				currentProgress.setVisibility(View.VISIBLE);

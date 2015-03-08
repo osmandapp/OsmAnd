@@ -8,11 +8,11 @@
 <string name="av_camera_focus_infinity">Фокус је подешен на бесконачно</string>
 	<string name="av_camera_focus_macro">Макро режим фокуса</string>
 	<string name="av_camera_focus_auto">Ауто фокус</string>
-	<string name="local_osm_changes_delete_all">Обриши све</string>
+	<string name="shared_string_delete_all">Обриши све</string>
     <string name="animate_routing_route_not_calculated">Прво израчунајте путању</string>
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
-    <string name="remember_choice">Запамти мој избор</string>
+    <string name="shared_string_remember_my_choice">Запамти мој избор</string>
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>
@@ -69,7 +69,7 @@
     <string name="gpx_file_name">назив GPX фајла</string>
     <string name="gpx_saved_sucessfully">GPX датотека успешно сачувана на {0}</string>
     <string name="osmand_distance_planning_plugin_name">Калкулатор растојања и Алат за планирање</string>
-    <string name="default_buttons_do_not_show_again">Не приказуј поново</string>
+    <string name="shared_string_do_not_show_again">Не приказуј поново</string>
     <string name="distance_measurement_start_editing">Почните уређивање</string>
     <string name="distance_measurement_finish_editing">Заврши уређивање</string>
     <string name="distance_measurement_clear_route">Обришите све тачке</string>
@@ -94,7 +94,7 @@
     <string name="recording_context_menu_delete">Обриши запис</string>
     <string name="recording_context_menu_play">Репродукуј</string>
     <string name="recording_default_name">снимање</string>
-    <string name="av_control_start">Почни</string>
+    <string name="shared_string_control_start">Почни</string>
     <string name="map_widget_av_notes">Аудио/видео белешке</string>
     <string name="map_widget_distancemeasurement">Мерење удаљености</string>
     <string name="monitoring_control_stop">стани</string>
@@ -130,7 +130,7 @@
 	<string name="update_poi_file_not_found">Месна датотека за одржавање промене ПОИ-а није пронађена и не може да се направи .</string>
 	<string name="button_upgrade_osmandplus">Надоградите Османд+</string>
 	<string name="map_version_changed_info">Сервер садржи мапе датотеке које нису у складу са тренутним издањем апликације. Да бисте их преузели и користили, молимо Вас да, надоградите апликацију на новије издање.</string>
-	<string name="local_index_mi_rename">Преименовање</string>
+	<string name="shared_string_rename">Преименовање</string>
 	<string name="show_gpx_route">Прикажи на мапи</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_address">Адреса …</string>
@@ -179,7 +179,7 @@
 	<string name="avoid_in_routing_descr">Избегавај наплатне рампе, не асфалтиране путеве, трајекте</string>
 	<string name="map_widget_show_ruler">Лењир</string>
 	<string name="map_widget_appearance">Остало:</string>
-	<string name="import_fav">Увези</string>
+	<string name="shared_string_import">Увези</string>
 	<string name="export_fav">Извези</string>
 	<string name="error_occurred_loading_gpx">Дошло је до грешке приликом учитавања GPX</string>
 	<string name="send_report">Пошаљи извештај</string>
@@ -264,7 +264,7 @@
 	<string name="context_menu_item_search">Тражи оближње</string>
 	<string name="filename_input">"Име датотеке: "</string>
 	<string name="file_with_name_already_exist">Датотека са истим именом већ постоји.</string>
-	<string name="default_buttons_save">Сачувај</string>
+	<string name="shared_string_save">Сачувај</string>
 	<string name="menu_save_directions">Сачувај правце</string>
 	<string name="local_index_upload_gpx_description">Отпремите ГПИкс датотеке заједници ОСМ. Употребиће се за побољшање мапа.</string>
 	<string name="local_index_items_uploaded">%1$d од %2$d ставки је успешно отпремљено.</string>
@@ -286,7 +286,7 @@
 	<string name="local_index_mi_delete">Избриши</string>
 	<string name="local_index_mi_export">Извези</string>
 	<string name="local_index_mi_reload">Учитај поново са СД картице</string>
-	<string name="local_index_download">Преузми</string>
+	<string name="shared_string_download">Преузми</string>
 	<string name="local_index_poi_data">Подаци ПОИ-а</string>
 	<string name="local_index_address_data">Подаци адреса</string>
 	<string name="local_index_transport_data">Подаци јавног превоза</string>

@@ -228,7 +228,7 @@
   <string name="update_poi_file_not_found">ლოკალური ფაილი POI-ის ცვლილებების შესანახად ნაპოვნი არ იქნა და მისი შექმნა შეუძლებელია.</string>
   <string name="button_upgrade_osmandplus">განახლება OsmAnd+-მდე</string>
   <string name="map_version_changed_info">სერვერი შეიცავს რუკის ფაილებს რომლებიც არაა შესაბამისი აპლიკაციის მიმდინარე ვერსიასთან. გთხოვთ განაახლოთ აპლიკაცია მათ ჩამოსაწერად და გამოსაყენებლად.</string>
-  <string name="local_index_mi_rename">სახელის გადარქმევა</string>
+  <string name="shared_string_rename">სახელის გადარქმევა</string>
   <string name="show_gpx_route">რუკაზე ჩვენება</string>
   <string name="poi_filter_nominatim">მიმდინარე POI-ს ძებნა სახელით</string>
   <string name="search_position_current_location_search">მდებარეობის ძებნა…</string>
@@ -242,11 +242,11 @@
   <string name="select_search_position">ძებნა ახლოს :</string>
   <string name="context_menu_item_search">ახლოს ძებნა</string>
   <string name="tip_recent_changes_0_6_7_t">"ცვლილებები 0.6.7-ში : \n\t- გათიშული მონაცემების გამმართველი (ჩამოტვირთეთ, წაშალეთ, გაააქტიურეთ / გაუკეთეთ დეაქტივაცია გათიშულ მონაცემებს პირდაპირ OsmAnd-ში) \n\t- რჩეული წერტილები და მათი ჯგუფები (დაალაგეთ, წაშალეთ და მართეთ ისინი) \n\t- GPX გამართველი პირდაპირ აპლიკაციაში(იხილეთ ბილიკის დეტალები, სიგრძე, საშუალო სიჩქარე და ა.შ.) \n\t- GPX ნავიგაცია (მეტი პარამეტრები, ნავიგაციის გაგრძელება, გზის პარამეტრების ჩვენება) \n\t- პარამეტრი გზის შესანახავად მისი გათიშულ რეჟიმში გამოყენებისათვის\n\t- გაუმჯობესდაGPX მონიტორინგი (გაიფილტრა ზოგიერთი არაზუსტი პოზიცია და გაიზარდა სიზუსტე)\n\t- GPX-ის ატვირთვა OSM-ში (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
-  <string name="save_route_dialog_title">გზის GPX ბილიკად შენახვა</string>
+  <string name="shared_string_save_as_gpx">გზის GPX ბილიკად შენახვა</string>
   <string name="route_successfully_saved_at">გზა შეინახა წარმატებით. სახელი \'%1$s\'.</string>
   <string name="filename_input">"ფაილის სახელი: "</string>
   <string name="file_with_name_already_exist">ფაილი მოცემული სახელით უკვე არსებობს.</string>
-  <string name="default_buttons_save">შენახვა</string>
+  <string name="shared_string_save">შენახვა</string>
   <string name="menu_save_directions">მიმართულებების შენახვა</string>
   <string name="local_index_upload_gpx_description">GPX ფაილების OSM-ში ატვირთვა. ისინი გამოიყენება რუკების გასაუმჯობესებლად.</string>
   <string name="local_index_items_uploaded">%1$d %2$d -დან წარმატებით აიტვირთა.</string>
@@ -279,7 +279,7 @@
   <string name="local_index_mi_backup">დეაქტივაცია</string>
   <string name="local_index_mi_delete">წაშლა</string>
   <string name="local_index_mi_reload">განახლება SDCard-დან</string>
-  <string name="local_index_download">ჩამოტვირთვა</string>
+  <string name="shared_string_download">ჩამოტვირთვა</string>
   
   <string name="local_index_poi_data">POI მონაცემები</string>
   <string name="local_index_address_data">მისამართის მონაცემები</string>
@@ -448,9 +448,9 @@
   <string name="download_files_question">გადმოვიწერო {0} ფაილი(ები) ზომით ({1} მბ)?</string>
   <string name="items_were_selected">არჩეულია {0}</string>
   <string name="filter_existing_indexes">ფილტრები გადმოწერილია</string>
-  <string name="deselect_all">მონიშვნის მოხსნა</string>
+  <string name="shared_strings_deselect_all">მონიშვნის მოხსნა</string>
   <string name="shared_string_select_all">ყველაფრის არჩევა</string>
-  <string name="reload">განახლება</string>
+  <string name="shared_string_refresh">განახლება</string>
   <string name="fast_route_mode">უსწრაფესი გზა</string>
   <string name="fast_route_mode_descr">"ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ უმოკლესისათვის "</string>
   <string name="tiles_to_download_estimated_size">გადიდებისას {0} გადმოსაწერია {1} ნაწილი ({2} MB)</string>
@@ -501,7 +501,7 @@
   <string name="fav_file_to_load_not_found">რჩეულების შემცველი GPX ფაილი ვერ მოიძებნა {0}</string>
   <string name="fav_saved_sucessfully">რჩეულები წარმატებით იქნა შენახული {0} -ში</string>
   <string name="no_fav_to_save">არ მოიძებნა შესანახავად მზა რჩეულები</string>
-  <string name="import_fav">იმპორტი</string>
+  <string name="shared_string_import">იმპორტი</string>
   <string name="export_fav">ექსპორტი</string>
   <string name="error_occurred_loading_gpx">შეცდომა GPX-ის ჩატვირთვისას</string>
   <string name="send_report">რეპორტის გაგზავნა</string>
@@ -601,7 +601,7 @@
   <string name="search_history_int_streets">გადაკვეთა: {0} x {1} in {2}</string>
   <string name="search_history_building">შენობა: {0}, {1}, {2}</string>
   <string name="favorite">რჩეული</string>
-  <string name="clear_all">გასუფთავება</string>
+  <string name="shared_string_clear_all">გასუფთავება</string>
   <string name="shared_string_history">ისტორია</string>
   <string name="uploading_data">მონაცემების ატვირთვა…</string>
   <string name="uploading">ატვირთვა…</string>
@@ -761,8 +761,8 @@
   <string name="context_menu_item_create_poi">POI-ის შექმნა</string>
   <string name="shared_string_yes">დიახ</string>
   <string name="shared_string_cancel">გაუქმება</string>
-  <string name="default_buttons_apply">გამოყენება</string>
-  <string name="default_buttons_add">ჩამატება</string>
+  <string name="shared_string_apply">გამოყენება</string>
+  <string name="shared_string_add">ჩამატება</string>
   <string name="shared_string_no">არა</string>
   <string name="add_favorite_dialog_top_text">რჩეულის სახელი</string>
   <string name="add_favorite_dialog_default_favourite_name">რჩეული</string>
@@ -791,7 +791,7 @@
   <string name="poi_error_poi_not_found">POI ვერ მოიძებნა</string>
   <string name="poi_remove_confirm_template">წავშალო {0} (კომენტარი)?</string>
   <string name="poi_remove_title">POI-ს წაშლა</string>
-  <string name="default_buttons_delete">წაშლა</string>
+  <string name="shared_string_delete">წაშლა</string>
   <string name="poi_remove_success">POI წარმატებით წაიშალა</string>
   <string name="poi_action_add">ჩამატება</string>
   <string name="poi_action_change">შეცვლა</string>
@@ -805,7 +805,7 @@
   <string name="poi_dialog_comment_default">POI-ს შეცვლა</string>
   <string name="poi_dialog_other_tags_message">ყველა დანარჩენი ჭდე ჩანიშულია</string>
   <string name="default_buttons_commit">დამატება</string>
-  <string name="default_buttons_reset">საწყისი მდგომარეობა</string>
+  <string name="shared_string_clear">საწყისი მდგომარეობა</string>
   <string name="filter_current_poiButton">ფილტრი</string>
   <string name="edit_filter_delete_menu_item">წაშლა</string>
   <string name="edit_filter_save_as_menu_item">ჩაწერა როგორც</string>
@@ -1060,8 +1060,8 @@
     <string name="osmodroid_plugin_description">OsMoDroid დამატება წარმოადგენს OsmAnd-ის გაფართოებას OsModroid აპლიკაციისათვის. მოცემულ სერვისზე ინფორმაციის მისაღებად ეწვიეთ http://esya.ru -ს.</string>
     <string name="osmodroid_plugin_name">დამატება OsMoDroid</string>
 	<string name="tip_altitude_offset">სიმაღლის ჩვენება - ოფსეტის შესწორება</string>
-	<string name="av_control_stop">შეწყვეტა</string>
-    <string name="av_control_start">დაწყება</string>
+	<string name="shared_string_control_stop">შეწყვეტა</string>
+    <string name="shared_string_control_start">დაწყება</string>
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
     <string name="monitoring_control_start">GPX დევნა</string>
     <string name="route_descr_lat_lon">გან %1$.3f, გრძ %2$.3f</string>
@@ -1081,11 +1081,11 @@
     <string name="tip_faq_t">ხშირად დასმული კითხვების სანახავად გთხოვთ მოინახულოთ https://code.google.com/p/osmand/wiki/FAQ .</string>
     <string name="tip_faq">ხშირად დასმული კითხვები</string>
     <string name="local_osm_changes_delete_all_confirm">თქვენ შლით osm ცვლილებას %1$d. დარწმუნებული ბრძანდებით?</string>
-    <string name="local_osm_changes_delete_all">ყველას წაშლა</string>
+    <string name="shared_string_delete_all">ყველას წაშლა</string>
     <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
     <string name="animate_routing_route">სიმულაცია გამოთვლილი გზის გამოყენებით </string>
     <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>
-    <string name="remember_choice">ჩემი არჩევნის დამახსოვრება</string>
+    <string name="shared_string_remember_my_choice">ჩემი არჩევნის დამახსოვრება</string>
     <string name="gps_status_eclipsim">GPS-ის სტატუსი</string>
     <string name="shared_string_and">და</string>
     <string name="shared_string_or">ან</string>
@@ -1166,7 +1166,7 @@
     <string name="gpx_saved_sucessfully">GPX ფაილი წარმატებით იქნა შენახული {0}</string>
     <string name="osmand_distance_planning_plugin_description">გზების შექმნა (ან არსებული GPX ფაილების გამოყენება/შეცვლა) წერტილებს შორის მანძილის დასათვლელად. GPX შენახვა შეიძლება გამოყენებულ იქნას GPS გზების დასათვლელად.</string>
     <string name="osmand_distance_planning_plugin_name">მანძილის დასათვლელი &amp; დასაგეგმი ხელსაწყო</string>
-    <string name="default_buttons_do_not_show_again">აღარ მაჩვენო</string>
+    <string name="shared_string_do_not_show_again">აღარ მაჩვენო</string>
     <string name="distance_measurement_start_editing">ჩასწორების დაწყება</string>
     <string name="distance_measurement_finish_editing">ჩასწორების დამთავრება</string>
     <string name="distance_measurement_finish_subtrack">ახალი ქვეგზის დაწყება</string>
@@ -1198,7 +1198,7 @@
     <string name="select_address_activity">მისამართის არჩევა</string>
     <string name="favourites_list_activity">რჩეულის არჩევა</string>
     <string name="local_openstreetmap_act_title">OSM ცვლილებები</string>
-    <string name="default_buttons_other_actions">სხვა საქმიანობები</string>
+    <string name="shared_string_more_actions">სხვა საქმიანობები</string>
     
 	<string name="map_widget_gps_info">GPS ინფორმაცია</string>
     <string name="tip_recent_changes_1_1_4_t">ცვლილებები 1.1.4-ში
@@ -1221,7 +1221,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ რუკები &amp; ნავიგაცია</string>
 	<string name="support_new_features_descr">შემომწირეთ აპლიკაციაში ახალი მახასიათებლების სანახავად</string>
-	<string name="downloading_file_new">ჩამოტვირთვა…</string>
+	<string name="shared_string_downloading">ჩამოტვირთვა…</string>
 	<string name="osb_author_dialog_password">OSM პაროლი(არასავალდებულო)</string>
 	<string name="av_camera_focus">კამერის ფოკუსის ტიპი</string>
 	<string name="av_camera_focus_descr">აირჩიეთ შიდა კამერის ფოკუსის ტიპი</string>

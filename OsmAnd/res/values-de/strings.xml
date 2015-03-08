@@ -581,7 +581,7 @@
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
 	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
-	<string name="local_index_mi_rename">Umbenennen</string>
+	<string name="shared_string_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
 	<string name="search_position_current_location_search">Standort wird ermittelt…</string>
@@ -593,11 +593,11 @@
 	<string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
-	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
+	<string name="shared_string_save_as_gpx">Route als GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">"Dateiname: "</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
-	<string name="default_buttons_save">Speichern</string>
+	<string name="shared_string_save">Speichern</string>
 	<string name="menu_save_directions">Route speichern</string>
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
@@ -628,7 +628,7 @@
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Liste aktualisieren</string>
-	<string name="local_index_download">Herunterladen</string>
+	<string name="shared_string_download">Herunterladen</string>
 	
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>
@@ -807,9 +807,9 @@
 	<string name="download_files_question">Lade {0} Datei(en) ({1} MB)?</string>
 	<string name="items_were_selected">{0} Positionen ausgewählt</string>
 	<string name="filter_existing_indexes">Filter gespeicherte</string>
-	<string name="deselect_all">Keine markieren</string>
+	<string name="shared_strings_deselect_all">Keine markieren</string>
 	<string name="shared_string_select_all">Alle markieren</string>
-	<string name="reload">Aktualisieren</string>
+	<string name="shared_string_refresh">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
@@ -861,7 +861,7 @@
 	<string name="fav_file_to_load_not_found">GPX-Datei mit den Favoriten nicht gefunden unter {0}</string>
 	<string name="fav_saved_sucessfully">Favoriten erfolgreich unter {0} gespeichert</string>
 	<string name="no_fav_to_save">Keine Favoriten zu speichern</string>
-	<string name="import_fav">Import</string>
+	<string name="shared_string_import">Import</string>
 	<string name="export_fav">Export</string>
 	<string name="error_occurred_loading_gpx">Fehler beim GPX-Laden</string>
 	<string name="send_report">Bericht senden</string>
@@ -960,7 +960,7 @@
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
-	<string name="clear_all">Alles löschen</string>
+	<string name="shared_string_clear_all">Alles löschen</string>
 	<string name="shared_string_history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen…</string>
 	<string name="uploading">Hochladen…</string>
@@ -1110,8 +1110,8 @@
 	<string name="context_menu_item_create_poi">POI einsenden</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_cancel">Abbrechen</string>
-	<string name="default_buttons_apply">Übernehmen</string>
-	<string name="default_buttons_add">Hinzufügen</string>
+	<string name="shared_string_apply">Übernehmen</string>
+	<string name="shared_string_add">Hinzufügen</string>
 	<string name="shared_string_no">Nein</string>
 	<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
@@ -1140,7 +1140,7 @@
 	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
 	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 	<string name="poi_remove_title">POI löschen</string>
-	<string name="default_buttons_delete">Löschen</string>
+	<string name="shared_string_delete">Löschen</string>
 	<string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
@@ -1154,7 +1154,7 @@
 	<string name="poi_dialog_comment_default">POI Änderung</string>
 	<string name="poi_dialog_other_tags_message">Alle anderen Tags werden beibehalten</string>
 	<string name="default_buttons_commit">Ändern</string>
-	<string name="default_buttons_reset">Löschen</string>
+	<string name="shared_string_clear">Löschen</string>
 	<string name="filter_current_poiButton">Filtern</string>
 	<string name="edit_filter_delete_menu_item">Löschen</string>
 	<string name="edit_filter_save_as_menu_item">Speichern als</string>
@@ -1316,9 +1316,9 @@
 	<string name="av_use_external_recorder_descr">Externen System-Recorder für Video-Aufnahmen verwenden</string>
 	<string name="av_use_external_recorder">System-Recorder</string>
 	<string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
-	<string name="av_control_stop">Stopp</string>
+	<string name="shared_string_control_stop">Stopp</string>
 	<string name="av_settings">Audio/Video-Einstellungen</string>
-	<string name="av_control_start">Start</string>
+	<string name="shared_string_control_start">Start</string>
 	<string name="av_def_action_picture">Foto aufnehmen</string>
 	<string name="av_use_external_camera_descr">Externe System-Kamera für Foto-Aufnahmen verwenden</string>
 	<string name="av_use_external_camera">System-Kamera</string>
@@ -1382,7 +1382,7 @@
 	<string name="select_address_activity">Adresse auswählen</string>
 	<string name="favourites_list_activity">Favorit auswählen</string>
 	<string name="local_openstreetmap_act_title">OSM-Bearbeitungen</string>
-	<string name="default_buttons_other_actions">Andere Aktionen</string>
+	<string name="shared_string_more_actions">Andere Aktionen</string>
 	<string name="choose_osmand_theme">Theme der Anwendung</string>
 	<string name="download_using_mobile_internet">Derzeit besteht keine WLAN-Verbindung. Soll das Herunterladen mit der aktuellen Datenverbindung erfolgen?</string>
 	<string name="clear_destination">Ziel löschen</string>
@@ -1399,7 +1399,7 @@
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
-	<string name="downloading_file_new">Herunterladen…</string>
+	<string name="shared_string_downloading">Herunterladen…</string>
 	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
 	<string name="local_osm_changes_backup_failed">Fehler beim Zwischenspeichern der bearbeiteten OSM-Daten</string>
 	<string name="local_osm_changes_backup">Als OSM-Daten-Änderung zwischenspeichern</string>
@@ -1413,7 +1413,7 @@
 	<string name="plugin_distance_point">Punkt</string>
 	<string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen. Stationen daraus können gespeichert und für eine Routenplanung verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
-	<string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
+	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	<string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
 	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
@@ -1482,7 +1482,7 @@
 	<string name="shared_string_and">und</string>
 	<string name="shared_string_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
-	<string name="remember_choice">Auswahl merken</string>
+	<string name="shared_string_remember_my_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
 	<string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
 	<string name="animate_routing_route">Simulation anhand berechneter Route</string>
@@ -1493,7 +1493,7 @@
 	<string name="tip_faq_t">Auf http://code.google.com/p/osmand/wiki/FAQ finden sich häufige Fragen und Antworten.</string>
 	<string name="tip_faq">Häufige Fragen (FAQ)</string>
 	<string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
-	<string name="local_osm_changes_delete_all">Alles löschen</string>
+	<string name="shared_string_delete_all">Alles löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
 	<string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
 	<string name="app_modes_choose">Anwendungsprofile</string>
@@ -1545,7 +1545,7 @@
 	<string name="localization_pref_title">Ländereinstellungen</string>
 	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
-	<string name="share_fav">Teilen</string>
+	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
 	<string name="keep_informing_never">Nur manuell (Auf Pfeil tippen)</string>
@@ -1931,7 +1931,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
-    <string name="more">Mehr…</string>
+    <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
@@ -2088,7 +2088,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="online_map">Online-Karte</string>
 	<string name="roads_only">Nur Straßen</string>
     <string name="rendering_attr_pisteRoutes_name">Pisten</string>
-	<string name="export">Export</string>
+	<string name="shared_string_export">Export</string>
 	<string name="watch">Ansehen</string>
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="turn_off_all">alles_abschalten</string>

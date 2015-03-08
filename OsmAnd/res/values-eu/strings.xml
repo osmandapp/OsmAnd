@@ -71,7 +71,7 @@
   <string name="osmand_distance_planning_plugin_description">Bideak sortu (edo erabili / eraldatu iadanik sortutako GPX fitxategiak) puntuen harteko distantzia neurtzeko. GPX bezala gorde, GPX bideak planifikatzeko erabili daiteke.</string>
   <string name="osmand_distance_planning_plugin_name">Distantzia kalkulagailua &amp; Planifikatzailea</string>
   <string name="use_distance_measurement_help">* Pantailan sakatu puntu bat markatzeko.\n * Mapan sakatuta mantendu iadanik dagoen puntu bat ezabatzeko.\n * Puntu batean sakatuta mantendu deskribapena ikusi eta atxikitzeko.\n * Neurgailuan klik egin ekintza gehiago ikusteko.</string>
-  <string name="default_buttons_do_not_show_again">Ez erakutsi berriro</string>
+  <string name="shared_string_do_not_show_again">Ez erakutsi berriro</string>
   <string name="distance_measurement_start_editing">Editatzen hasi</string>
   <string name="distance_measurement_finish_editing">Editatzen bukatu</string>
   <string name="distance_measurement_finish_subtrack">Azpibide berri bat hasi</string>
@@ -109,7 +109,7 @@
   <string name="select_address_activity">Helbidea aukeratu</string>
   <string name="favourites_list_activity">Aukeratu gogokoena</string>
   <string name="local_openstreetmap_act_title">OSM aldaketak</string>
-  <string name="default_buttons_other_actions">Bestelako ekintzak</string>
+  <string name="shared_string_more_actions">Bestelako ekintzak</string>
   
   <string name="tip_recent_changes_1_2_t">"1.2.1 bertsioan konponketak:\n\t*Geo Intent konpondu (Foursquare, c:geo)\n\t*Konpondu nabigazioko pantailaren dardara\n\t*Bestelako aldaketa txikiak\n\t
 \n1.2 bertsioan aldaketak:\n\t* Konponketak (bideraketa hobea, bilaketa, AV grabaketa, ahots bidezko laguntza, erakusketan hobekuntzak)\n\t* Erliebe kaparen konfigurazio errazagoa (Sestra-kurben plugina beharrezkoa du)\n\t* Orain maps.google.com-eko kokaleku estekak onartzen ditu\n\t* Widget berria (GPS info)\n\t* Samsung gailu berrietan bizpahiru leiho onartu\n\t* Konpaserako Kalman filtroa\n\t* Pebble erlojuarentzako soportea "</string>
@@ -174,8 +174,8 @@
   <string name="recording_context_menu_play">Erreproduzitu</string>
   <string name="recording_description">%3$s-ko %1$s %2$s grabatzen</string>
   <string name="recording_default_name">grabatzen</string>
-  <string name="av_control_stop">Gelditu</string>
-  <string name="av_control_start">Hasi</string>
+  <string name="shared_string_control_stop">Gelditu</string>
+  <string name="shared_string_control_start">Hasi</string>
   <string name="map_widget_av_notes">Audio/bideo oharrak</string>
   <string name="osmand_srtm_short_description_80_chars">OsmAnden lineaz kanpoko sestra-kurben plugina</string>
   <string name="osmand_srtm_long_description_1000_chars">Plugin honek OsmAnd-eko lineaz kanpoko mapetan agertu daitezkeen sestra-kurbak eskaintzen ditu. Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle Radar Topography Mission) eta ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) neurrietan oinarrituak daude, espazioko Terra irudi tresna, NASAren Lurra Behatzeko Sistemaren satelite emblematikoa. ASTER NASAren, Japoniako Ekonomi, Merkataritza eta Industria Ministerioaren (EMIM), eta Japoneko Espazio Sistemaren (J-espaziosistema)  elkarlanaren ondorioz sortua izan da.</string>
@@ -602,7 +602,7 @@
   <string name="update_poi_file_not_found">POI aldaketak mantentzeko fitxategi lokala ez da aurkitu eta ezin izan da sortu.</string>
   <string name="button_upgrade_osmandplus">OsmAnd+ berritu</string>
   <string name="map_version_changed_info">Zerbitzariak zure aplikazioaren uneko bertsioarekin bateragarriak ez diren mapa fitxategiak ditu. Hauek deskargatu eta erabiltzeko, aplikazioa bertsio berriago batera eguneratu mesedez.</string>
-  <string name="local_index_mi_rename">Izenez aldatu</string>
+  <string name="shared_string_rename">Izenez aldatu</string>
   <string name="show_gpx_route">Mapan erakutsi</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
   <string name="search_position_current_location_search">Kokapena bilatzen…</string>
@@ -616,11 +616,11 @@
   <string name="select_search_position">Ondoan bilatu:</string>
   <string name="context_menu_item_search">Honen ondoan bilatu</string>
   <string name="tip_recent_changes_0_6_7_t">0.6.7 bertsiorako aldaketak:⏎\n⇥⇥⏎\n⇥- Lineaz kanpoko datuen kudeatzailea (deskargatu, ezabatu, OsmAndetik zuzenean aktibatu/desaktibatu lineaz kanpoko datuak)⏎\n⇥⇥⏎\n⇥- Puntu eta talde gogokoenak (kategoriak, ezabatu, gogokoenak kudeatu)⏎\n⇥⇥⏎\n⇥- Esploratu GPX-a aplikazioan (bidearen xehetasunak ikusi, distantzia, bataz besteko distantzia, altuera, etab.)⏎\n⇥⇥⏎\n⇥- GPX nabigazioa (aukera gehiago, nabigatzen jarraitu huts egin ondoren, biribilguneak jasan)⏎\n⇥⇥⏎\n⇥- Ibilbidea GPX bide bezala gorde lineaz kanpo erabili ahal izateko⏎\n⇥⇥⏎\n⇥- GPXen monitorizazioa hobetu (Kokapen zehaztugabe batzuk filtratu eta zehaztasuna/altuera/abiadura gorde)⏎\n⇥⇥⏎\n⇥- Igo GPXak OSM komunitatera (http://download.osmand.net/gpx/)⏎\n⇥⇥⏎\n⇥- Bektore errenderizazioa hobetu⏎\n⇥⇥⏎\n⇥- TTS motorra (Testua hizketa bihurtze) hobetu (distantzia zehatza iragarri, milak gaitu)⏎\n⇥⇥⏎\n⇥- Akatsak konpondu⏎\n⇥</string>
-  <string name="save_route_dialog_title">GPX bide bezala gorde ibilbidea</string>
+  <string name="shared_string_save_as_gpx">GPX bide bezala gorde ibilbidea</string>
   <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala arrakastatsu gorde da.</string>
   <string name="filename_input">"Fitxategi izena: "</string>
   <string name="file_with_name_already_exist">Izen berdineko beste fitxategi bat dago dagoeneko.</string>
-  <string name="default_buttons_save">Gorde</string>
+  <string name="shared_string_save">Gorde</string>
   <string name="menu_save_directions">Gorde norabideak</string>
   <string name="local_index_upload_gpx_description">GPX fitxategiak OSMra igo. Mapak hobetzeko erabiliko dira.</string>
   <string name="local_index_items_uploaded">%2$d-tik %1$d elementu ongi igotak.</string>
@@ -653,7 +653,7 @@
   <string name="local_index_mi_backup">Ezgaitu</string>
   <string name="local_index_mi_delete">Ezabatu</string>
   <string name="local_index_mi_reload">SD txarteletik birkargatu</string>
-  <string name="local_index_download">Deskargatu</string>
+  <string name="shared_string_download">Deskargatu</string>
   <string name="local_index_poi_data">POI datuak</string>
   <string name="local_index_address_data">Helbide datuak</string>
   <string name="local_index_transport_data">Garraio datuak</string>
@@ -809,9 +809,9 @@
   <string name="download_files_question">Deskargatu {0} fitxategi ({1} MB)?</string>
   <string name="items_were_selected">{0} elementu aukeratuta</string>
   <string name="filter_existing_indexes">Deskargatuta</string>
-  <string name="deselect_all">Hautapena garbitu</string>
+  <string name="shared_strings_deselect_all">Hautapena garbitu</string>
   <string name="shared_string_select_all">Guztia hautatu</string>
-  <string name="reload">Birkargatu</string>
+  <string name="shared_string_refresh">Birkargatu</string>
   <string name="fast_route_mode">Biderik azkarrena</string>
   <string name="fast_route_mode_descr">Gaitu biderik azkarrenarentzat edo ezgaitu biderik motzenarentzat</string>
   <string name="tiles_to_download_estimated_size">{0} zoomean deskargatu {1} tesela ({2} MB)</string>
@@ -860,7 +860,7 @@
   <string name="fav_file_to_load_not_found">Gogokoenak dituen GPX fitxategia ez da {0}-n aurkitua izan</string>
   <string name="fav_saved_sucessfully">Gogokoenak arrakastaz gordeak {0} fitxategira</string>
   <string name="no_fav_to_save">Ez dago gogokoenik gordetzeko</string>
-  <string name="import_fav">Inportatu</string>
+  <string name="shared_string_import">Inportatu</string>
   <string name="export_fav">Esportatu</string>
   <string name="error_occurred_loading_gpx">GPX kargatzean errore bat gertatu da</string>
   <string name="send_report">Bidali informea</string>
@@ -958,7 +958,7 @@
   <string name="search_history_int_streets">Bidegurutzea: {0} x {1} {2}en</string>
   <string name="search_history_building">Eraikina: {0}, {1}, {2}</string>
   <string name="favorite">Gogokoena</string>
-  <string name="clear_all">Guztia garbitu</string>
+  <string name="shared_string_clear_all">Guztia garbitu</string>
   <string name="shared_string_history">Historiala</string>
   <string name="uploading_data">Datuak igotzen…</string>
   <string name="uploading">Igotzen…</string>
@@ -980,7 +980,7 @@
   <string name="address">Helbidea</string>
   <string name="download_index_success">Deskarga arrakastatsua</string>
   <string name="error_io_error">I/O errorea gertatu da</string>
-  <string name="downloading_file_new">Deskargatzen…</string>
+  <string name="shared_string_downloading">Deskargatzen…</string>
   <string name="downloading">Deskargatzen…</string>
   <string name="downloading_list_indexes">Eskugarri dauden eskualdeen zerrenda deskargatzen…</string>
   <string name="list_index_files_was_not_loaded">Eskualdeen zerrenda ez da osmand.net-en aurkitu.</string>
@@ -1110,8 +1110,8 @@
   <string name="context_menu_item_create_poi">POIa sortu</string>
   <string name="shared_string_yes">Bai</string>
   <string name="shared_string_cancel">Ezeztatu</string>
-  <string name="default_buttons_apply">Aplikatu</string>
-  <string name="default_buttons_add">Gehitu</string>
+  <string name="shared_string_apply">Aplikatu</string>
+  <string name="shared_string_add">Gehitu</string>
   <string name="shared_string_no">Ez</string>
   <string name="add_favorite_dialog_top_text">Gogokoaren izena sartu</string>
   <string name="add_favorite_dialog_default_favourite_name">Gogokoena</string>
@@ -1141,7 +1141,7 @@
   <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu edo erosotasuna ez da puntu bakar bat</string>
   <string name="poi_remove_confirm_template">{0} ezabatu (sartu iruzkina)?</string>
   <string name="poi_remove_title">POIa ezabatu</string>
-  <string name="default_buttons_delete">Ezabatu</string>
+  <string name="shared_string_delete">Ezabatu</string>
   <string name="poi_remove_success">POIa arrakastaz ezabatu da</string>
   <string name="poi_action_add">gehitu</string>
   <string name="poi_action_change">aldatu</string>
@@ -1155,7 +1155,7 @@
   <string name="poi_dialog_comment_default">POIa aldatzea</string>
   <string name="poi_dialog_other_tags_message">Beste etiketa guztiak kontserbatu dira</string>
   <string name="default_buttons_commit">Bidali</string>
-  <string name="default_buttons_reset">Garbitu</string>
+  <string name="shared_string_clear">Garbitu</string>
   <string name="filter_current_poiButton">Filtratu</string>
   <string name="edit_filter_delete_menu_item">Ezabatu</string>
   <string name="edit_filter_save_as_menu_item">Gorde Honela</string>
@@ -1249,7 +1249,7 @@
 	<string name="av_camera_pic_size_descr">Aukeratu kameraren irudiaren barneko tamaina</string>
     <string name="navigation_intent_invalid">Baliogabeko formatuak: %s</string>
     <string name="hide_all_waypoints">Ezabatu guztiak</string>
-    <string name="share_fav">Banatu</string>
+    <string name="shared_string_share">Banatu</string>
 	<string name="share_fav_subject">Banatutako gogokoenak OsmAnd bidez</string>
 	<string name="import_save">Gorde</string>
 	<string name="import_file_favourites">Gorde GPX fitxategi bezala edo inportatu gogokoenetan?</string>
@@ -1284,8 +1284,8 @@
 	<string name="shared_string_or">edo</string>
 	<string name="gps_status_eclipsim">GPSaren egoera</string>
     <string name="shared_string_and">eta</string>
-    <string name="local_osm_changes_delete_all">Dena ezabatu</string>
-    <string name="remember_choice">Nire aukera gogoratu</string>
+    <string name="shared_string_delete_all">Dena ezabatu</string>
+    <string name="shared_string_remember_my_choice">Nire aukera gogoratu</string>
     <string name="animate_routing_route_not_calculated">Kalkulatu ibilbidea lehenengo, mesedez</string>
     <string name="animate_routing_route">"Simulatu kalkulatutako ibilbidea erabiliz "</string>
     <string name="animate_routing_gpx">Simulatu GPX ibilbidea erabiliz</string>

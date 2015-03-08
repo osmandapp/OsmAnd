@@ -138,7 +138,7 @@
   <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
   <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application.</string>
-  <string name="local_index_mi_rename">Renommer</string>
+  <string name="shared_string_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
   <string name="poi_filter_nominatim">Nominatim en ligne</string>
   <string name="search_position_current_location_search">Recherche de la position…</string>
@@ -162,11 +162,11 @@
 \n\t- Améliorations du rendu vectoriel
 \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles)
 \n\t- Corrections de bogues</string>
-  <string name="save_route_dialog_title">Enregistrer l\'itinéraire en GPX</string>
+  <string name="shared_string_save_as_gpx">Enregistrer l\'itinéraire en GPX</string>
   <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
   <string name="filename_input">Nom du fichier : </string>
   <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
-  <string name="default_buttons_save">Enregistrer</string>
+  <string name="shared_string_save">Enregistrer</string>
   <string name="menu_save_directions">Enregistrer l\'itinéraire</string>
   <string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
   <string name="local_index_items_uploaded">%1$d sur %2$d élement(s) envoyés avec succès.</string>
@@ -196,7 +196,7 @@
   <string name="local_index_mi_backup">Désactiver</string>
   <string name="local_index_mi_delete">Supprimer</string>
   <string name="local_index_mi_reload">Recharger depuis la carte SD</string>
-  <string name="local_index_download">Télécharger</string>
+  <string name="shared_string_download">Télécharger</string>
   
   <string name="local_index_poi_data">Données PI</string>
   <string name="local_index_address_data">Données adresses</string>
@@ -393,9 +393,9 @@
   <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
   <string name="filter_existing_indexes">Cartes téléchargées</string>
-  <string name="deselect_all">Désélectionner tout</string>
+  <string name="shared_strings_deselect_all">Désélectionner tout</string>
   <string name="shared_string_select_all">Sélectionner tout</string>
-  <string name="reload">Recharger</string>
+  <string name="shared_string_refresh">Recharger</string>
   <string name="fast_route_mode">Itinéraire le plus rapide</string>
   <string name="fast_route_mode_descr">"Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus court "</string>
   <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
@@ -448,7 +448,7 @@
   <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
   <string name="fav_saved_sucessfully">Enregistrement des favoris réussi vers {0}</string>
   <string name="no_fav_to_save">Aucun point favori à enregistrer</string>
-  <string name="import_fav">Importer</string>
+  <string name="shared_string_import">Importer</string>
   <string name="export_fav">Exporter</string>
   <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
   <string name="send_report">Envoyer rapport</string>
@@ -551,7 +551,7 @@
   <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
-  <string name="clear_all">Supprimer tout</string>
+  <string name="shared_string_clear_all">Supprimer tout</string>
   <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
   <string name="uploading">Envoi…</string>
@@ -706,8 +706,8 @@
   <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
   <string name="shared_string_yes">Oui</string>
   <string name="shared_string_cancel">Annuler</string>
-  <string name="default_buttons_apply">Appliquer</string>
-  <string name="default_buttons_add">Enregistrer</string>
+  <string name="shared_string_apply">Appliquer</string>
+  <string name="shared_string_add">Enregistrer</string>
   <string name="shared_string_no">Non</string>
   <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
@@ -736,7 +736,7 @@
   <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
   <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
   <string name="poi_remove_title">Supprimer le PI</string>
-  <string name="default_buttons_delete">Supprimer</string>
+  <string name="shared_string_delete">Supprimer</string>
   <string name="poi_remove_success">PI supprimé avec succès</string>
   <string name="poi_action_add">ajouter</string>
   <string name="poi_action_change">modifier</string>
@@ -750,7 +750,7 @@
   <string name="poi_dialog_comment_default">Modification PI</string>
   <string name="poi_dialog_other_tags_message">Tous les autres attributs sont conservés</string>
   <string name="default_buttons_commit">Envoyer</string>
-  <string name="default_buttons_reset">Effacer</string>
+  <string name="shared_string_clear">Effacer</string>
   <string name="filter_current_poiButton">Filtre</string>
   <string name="edit_filter_delete_menu_item">Supprimer</string>
   <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
@@ -1142,7 +1142,7 @@
     <string name="recording_context_menu_play">Lire</string>
     <string name="recording_description">Enregistrement %1$s %3$s %2$s</string>
     <string name="recording_default_name">Enregistrement en cours</string>
-    <string name="av_control_stop">Arrêter</string>
+    <string name="shared_string_control_stop">Arrêter</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="tip_recent_changes_1_1_0_t">"Changements pour 1.1.0 :
 \n\t* Greffon de calcul de distance
@@ -1152,7 +1152,7 @@
 \n\t* Option \'Touring view\' avec plus de détails, nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS"
     </string>
-    <string name="av_control_start">Enreg.</string>
+    <string name="shared_string_control_start">Enreg.</string>
     <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     
@@ -1217,7 +1217,7 @@
     <string name="select_address_activity">Sélectionnez l\'adresse</string>
     <string name="favourites_list_activity">Sélectionnez un favori</string>
     <string name="local_openstreetmap_act_title">Modifications OSM</string>
-    <string name="default_buttons_other_actions">Autres actions</string>
+    <string name="shared_string_more_actions">Autres actions</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) est une application de cartographie et de navigation avec accès aux données libres d\'OpenStreetMap (OSM), à la couverture mondiale de haute qualité. Toutes les données cartographiques peuvent être stockées sur la carte mémoire de votre appareil pour une utilisation hors-ligne. OsmAnd propose une navigation par GPS, avec guidage visuel et vocal, pour la voiture, le vélo ou le piéton. Les fonctions principales peuvent être assurées aussi bien en ligne qu\'hors-ligne (sans connexion Internet).
 
@@ -1318,7 +1318,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de l\'enregistrer au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
-    <string name="default_buttons_do_not_show_again">Ne plus afficher</string>
+    <string name="shared_string_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
     <string name="local_osm_changes_backup_failed">Échec de la sauvegarde des modifications OSM</string>
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
@@ -1327,7 +1327,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
-    <string name="downloading_file_new">Téléchargement en cours…</string>
+    <string name="shared_string_downloading">Téléchargement en cours…</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  
 " 
     </string>
@@ -1435,7 +1435,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 \n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
 \n\t* \'Hiver et Ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
 \n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée. "</string>
-    <string name="remember_choice">Mémoriser mon choix</string>
+    <string name="shared_string_remember_my_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">État du GPS</string>
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
@@ -1443,7 +1443,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tip_faq_t">Rendez-vous sur https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
-    <string name="local_osm_changes_delete_all">Supprimer tout</string>
+    <string name="shared_string_delete_all">Supprimer tout</string>
     <string name="osmodroid_refresh">Rafraîchir les canaux</string>
     <string name="app_mode_hiking">Rando</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1590,7 +1590,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
-<string name="share_fav">Partager</string>
+<string name="shared_string_share">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
 <string name="tip_recent_changes_1_8_alpha">"Nouveautés de la version 1.8 : * Calcul d\'itinéraire entre les points d\'une trace GPX * Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux) * Prise en charge de l\'importation des fichiers GPX/KML et conversion KML en GPX * Migration des traces GPX dans \'Mes favoris\' * Possibilité de scinder une trace GPX en sections de distance définie, et de consulter la vitesse et les variations d\'altitude * Lancement automatique de la navigation après un certain temps "</string>
@@ -1782,7 +1782,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_car_name">Voiture</string>
     <string name="rendering_value_bicycle_name">Vélo</string>
     <string name="rendering_value_pedestrian_name">Piéton</string>
-    <string name="more">Plus…</string>
+    <string name="shared_string_more">Plus…</string>
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
     <string name="flat_list_waypoitns">Tous</string>
     <string name="waypoints">Points de passage</string>
@@ -1942,7 +1942,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="photo">Photo</string>
 	<string name="share_note">Partager la note</string>
 	<string name="rename_recording">Renommer l\'enregistrement</string>
-	<string name="export">Exporter</string>
+	<string name="shared_string_export">Exporter</string>
 	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
 		\n\nUne carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Monde - Ski\".
 		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".

@@ -106,7 +106,6 @@
     <string name="osmand_distance_planning_plugin_description">Актывуе віджэт для стварэньня маршрутаў націсканьнямі на мапе (ці выкарыстоўваць/рэдагаваць існуючыя файлы GPX) каб мераць адлегласьць паміж кропкамі. Вынік можа быць захаваны як GPX для далейшага выкарыстаньня.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце , каб адзначыць кропку.\n * Націсьніце і ўтрымлівайце на мапе, каб выдаліць папярэднюю кропку.\n * Націсьніце і ўтрымлівайце на кропцы, каб паглядзець і прыкласьці апісаньне.\n * Націсніце на віджэце вымярэньня, каб убачыць больш дзеяньняў.</string>
-    <string name="default_buttons_do_not_show_again">Больш не паказваць</string>
     <string name="distance_measurement_start_editing">Пачаць рэдагаваньне</string>
     <string name="distance_measurement_finish_editing">Скончыць рэдагаваньне</string>
     <string name="distance_measurement_finish_subtrack">Пачаць новы падтрэк</string>
@@ -145,9 +144,7 @@
     <string name="accessibility_options">Налады даступнасьці</string>
     <string name="select_address_activity">Абраць адрас</string>
     <string name="favourites_list_activity">Абярыце з упадабаных</string>
-    <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>
-    <string name="default_buttons_other_actions">Iншыя дзеяньні</string>
-    
+    <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>    
 	<string name="tip_recent_changes_1_2_t">"Зьмены ў 1.2.1
 \n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo)
 \n\t*Выпраўлена дрыжаньне выявы падчас навігацыі
@@ -227,8 +224,6 @@
     <string name="recording_context_menu_play">Граць</string>
     <string name="recording_description">Запіс %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запіс</string>
-    <string name="av_control_stop">Cтоп</string>
-    <string name="av_control_start">Запіс</string>
     <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
     <string name="osmand_srtm_short_description_80_chars">Модуль OsmAnd для пазасеткавых ізаліній вышынь</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
@@ -869,7 +864,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="update_poi_file_not_found">Лякальны файл для падтрымкі зьменаў у POI ня знойдзены і ня можа быць створаны.</string>
 	<string name="button_upgrade_osmandplus">Абнавіць да OsmAnd+</string>
 	<string name="map_version_changed_info">Сэрвер утрымлівае файлы мапаў, якія не сумяшчальныя з вашай вэрсіяй праграмы. Каб сьцягнуць і карыстацца імі трэба абнавіць праграму да новай вэрсіі.</string>
-	<string name="local_index_mi_rename">Пераназваць</string>
 	<string name="show_gpx_route">Паказаць на мапе</string>
 	<string name="poi_filter_nominatim">Сеткавы Nominatim</string>
 	<string name="search_position_current_location_search">Вызначэньне месцазнаходжаньня…</string>
@@ -882,11 +876,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
-	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
 	<string name="route_successfully_saved_at">Маршрут пасьпяхова захаваны як \'%1$s\'.</string>
 	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой назвай ужо існуе.</string>
-	<string name="default_buttons_save">Захаваць</string>
 	<string name="menu_save_directions">Захаваць маршрут</string>
 	<string name="local_index_upload_gpx_description">Адаслаць файлы GPX на сервер OSM. Яны будуць выкарыстаныя для паляпшэньня мапы.</string>
 	<string name="local_index_items_uploaded">%1$d з %2$d аб\'ектаў пасьпяхова адасланыя.</string>
@@ -919,7 +911,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_mi_backup">Дэактываваць</string>
 	<string name="local_index_mi_delete">Выдаліць</string>
 	<string name="local_index_mi_reload">Перачытаць з карткі SD</string>
-	<string name="local_index_download">Сьцягнуць</string>
 	<string name="local_index_poi_data">Зьвесткі POI</string>
 	<string name="local_index_address_data">Адрас</string>
 	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>
@@ -1080,8 +1071,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="download_files_question">Сьцягнуць {0} файл(ы) ({1} МБ)?</string>
 	<string name="items_were_selected">{0} абрана</string>
 	<string name="filter_existing_indexes">Сьцягнутае</string>
-	<string name="deselect_all">Прыбраць вылучэньне ўсіх</string>
-	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
 	<string name="tiles_to_download_estimated_size">На маштабе {0} сьцягнуць {1} фрагмэнтаў ({2} МБ)</string>
@@ -1130,7 +1119,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="fav_file_to_load_not_found">GPX файл з упадабанымі ня знойдзены ў {0}</string>
 	<string name="fav_saved_sucessfully">Выбраныя пасьпяхова захаваны ў {0}</string>
 	<string name="no_fav_to_save">Няма любімых месцаў для захоўваньня</string>
-	<string name="import_fav">Імпартаваць</string>
 	<string name="export_fav">Экспартаваць</string>
 	<string name="error_occurred_loading_gpx">Памылка пры загрузцы GPX</string>
 	<string name="send_report">Даслаць справаздачу</string>
@@ -1227,7 +1215,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_history_int_streets">Скрыжаванне: {0} х {1} праз {2}</string>
 	<string name="search_history_building">Будынак: {0}, {1}, {2}</string>
 	<string name="favorite">Упадабанае</string>
-	<string name="clear_all">Выдаліць усё</string>
 	<string name="uploading_data">Адсылка дадзеных…</string>
 	<string name="uploading">Адсылка…</string>
 	<string name="search_nothing_found">Нічога не знойдзена</string>
@@ -1248,7 +1235,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="address">Адрас</string>
 	<string name="download_index_success">Пасьпяхова сьцягнута</string>
 	<string name="error_io_error">Адбылася памылка ўводу/вываду</string>
-	<string name="downloading_file_new">Сьцягваньне…</string>
 	<string name="downloading">Сьцягваньне…</string>
 	<string name="downloading_list_indexes">Сьцягваецца сьпіс даступных рэгіёнаў…</string>
 	<string name="list_index_files_was_not_loaded">Сьпіс даступных рэгіёнаў ня быў зладаваны з osmand.net.</string>
@@ -1373,8 +1359,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
-	<string name="default_buttons_apply">Застасаваць</string>
-	<string name="default_buttons_add">Дадаць</string>
 	<string name="add_favorite_dialog_top_text">Калі ласка, увядзіце імя пункту</string>
 	<string name="add_favorite_dialog_default_favourite_name">Упадабанае</string>
 	<string name="add_favorite_dialog_favourite_added_template">Упадабанае месца \'\'{0}\'\' было дададзенае.</string>
@@ -1403,7 +1387,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
 	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
 	<string name="poi_remove_title">Выдаліць POI</string>
-	<string name="default_buttons_delete">Выдаліць</string>
 	<string name="poi_remove_success">POI выдаленая</string>
 	<string name="poi_action_add">дадаць</string>
 	<string name="poi_action_change">зьмяніць</string>
@@ -1417,7 +1400,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_dialog_comment_default">Зьмена POI</string>
 	<string name="poi_dialog_other_tags_message">Усе астатнія тэгі захоўваюцца</string>
 	<string name="default_buttons_commit">Зьберагчы</string>
-	<string name="default_buttons_reset">Ачысьціць</string>
 	<string name="filter_current_poiButton">Фільтраваць</string>
 	<string name="edit_filter_delete_menu_item">Выдаліць</string>
 	<string name="edit_filter_save_as_menu_item">Захаваць як</string>
@@ -1515,12 +1497,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="app_mode_motorcycle">матацыкл</string>
     <string name="app_mode_aircraft">Самалёт</string>
     <string name="tip_faq">Частыя пытаньні</string>
-    <string name="local_osm_changes_delete_all">Выдаліць усё</string>
     <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
 	<string name="osmodroid_seek">Адсочваць аб\'ект</string>
     <string name="osmodroid_refresh">Абнавіць каналы</string>
     <string name="gps_status_eclipsim">Стан GPS</string>
-    <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
     <string name="select_gpx">Абраць GPX …</string>
@@ -1644,7 +1624,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_mode_on">Спыніць сэсыю OsMo</string>    
     <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
     
-    <string name="share_fav">Падзяліцца</string>
 	<string name="share_fav_subject">Выбранае адаслана праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
     <string name="tip_recent_changes_1_8_alpha">Зьмены ў 1.8:
@@ -1855,7 +1834,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_bicycle_name">Ровар</string>
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Сьцягнуць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
-    <string name="more">Больш…</string>
     <string name="flat_list_waypoitns">Усе</string>
     <string name="waypoints">Кропкі шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
@@ -2006,7 +1984,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="online_map">Інтэрнэт мапа</string>
 	<string name="share_note">Падзяліцца нататкаю</string>
 	<string name="rename_recording">Пераназваць запіс</string>
-	<string name="export">Экспарт</string>
 	<string name="audio">Аўдыё</string>
 	<string name="video">Відэа</string>
 	<string name="photo">Фота</string>
@@ -2048,7 +2025,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_deselect">Прыбраць вылучэньне</string>
 	<string name="shared_string_deselect_all">Прыбраць вылучэньне ўсіх</string>
 	<string name="shared_string_clear">Ачысьціць</string>
-	<string name="shared_string_clear_all">Ачысьціць усё</string>
+	<string name="shared_string_shared_string_clear_all">Ачысьціць усё</string>
 	<string name="shared_string_save">Захаваць</string>
 	<string name="shared_string_save_as_gpx">Захаваць як GPX сьлед</string>
 	<string name="shared_string_rename">Пераназваць</string>
@@ -2061,12 +2038,12 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_control_stop">Спыніць</string>
 	<string name="shared_string_import">Імпартаваць</string>
 	<string name="shared_string_export">Экспартаваць</string>
-	<string name="shared_string_more">Больш</string>
+	<string name="shared_string_more">Больш…</string>
 	<string name="shared_string_do_not_show_again">Больш не паказваць</string>
 	<string name="shared_string_remember_my_choice">Запомніць мой выбар</string>
 	<string name="shared_string_refresh">Абнавіць</string>
 	<string name="shared_string_download">Сцягнуць</string>
-	<string name="shared_string_downloading">Сьцягваньне</string>
+	<string name="shared_string_downloading">Сьцягваньне…</string>
 	<string name="shared_string_download_successful">Пасьпяхова сьцягнута</string>
 	<string name="shared_string_io_error">Адбылася памылка ўводу/вываду</string>
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>

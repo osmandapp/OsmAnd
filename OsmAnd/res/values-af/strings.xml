@@ -293,7 +293,7 @@
   <string name="update_poi_file_not_found">Plaaslike lêer om interessante plek veranderinge in stand te hou nie gevind nie en kon nie geskep word nie.</string>
   <string name="button_upgrade_osmandplus">Opgradeer OsmAnd +</string>
   <string name="map_version_changed_info">Die internet-bediener bevat kaart lêers wat nie versoenbaar is met jou huidige weergawe van die toepassing nie. Om dit af te laai en te gebruik opgradeer asseblief die toepassing na `n nuwer weergawe.</string>
-  <string name="local_index_mi_rename">Herbenoem</string>
+  <string name="shared_string_rename">Herbenoem</string>
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
   <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
@@ -307,12 +307,12 @@
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
   <string name="tip_recent_changes_0_6_7_t">"Onlangse wysigings 0.6.7:\n\t-aflyn inligting bestuurder (laai, verwyder, aktiveer / deaktiveer aflyn inligting direk in OsmAnd)\n\t-gunsteling punte en groepe (kategoriseer, verwyder, bestuur gunstelinge)\n\t- GPX Explorer in toepassing (wys spoordetail, afstand, gemiddelde spoed, hoogte, ens.)\n\t- GPX navigasie (meer keuses, gaan aan met navigasie na afskakel, ondersteun verkeersirkels)\n\t-funksie om roete te berg as GPX spoor vir aflyn gebruik\n\t-Verbeter GPX monitering (filter n paar onakkurate posisie en berg akkuraatheid/hoogte/spoed)\n\t-oplaai GPX na OSM gemeenskap (http://download.osmand.net/gpx/)\n\t-vektor lewering verbeter\n\t-Verbetering van TTS enjin (kondig presiese afstand aan, stel in staat om myle te gebruik)\n\t-Fout-herstellings "</string>
-  <string name="save_route_dialog_title">Berg roete as GPX spoor</string>
+  <string name="shared_string_save_as_gpx">Berg roete as GPX spoor</string>
   <string name="route_successfully_saved_at">Roete suksesvol geberg as \'%1$s\'.</string>
   <string name="filename_input">"Dokument naam:
 " </string>
   <string name="file_with_name_already_exist">Lêer met dieselfde naam bestaan reeds.</string>
-  <string name="default_buttons_save">Berg</string>
+  <string name="shared_string_save">Berg</string>
   <string name="menu_save_directions">Berg aanwysings</string>
   <string name="local_index_upload_gpx_description">Laai GPX lêers op na OSM gemeenskap. Dit sal gebruik word om kaarte te verbeter.</string>
   <string name="local_index_items_uploaded">%1$d van %2$d item (s) opgelaai.</string>
@@ -345,7 +345,7 @@
   <string name="local_index_mi_backup">Deaktiveer</string>
   <string name="local_index_mi_delete">Verwyder</string>
   <string name="local_index_mi_reload">Herlaai van sd kaart</string>
-  <string name="local_index_download">Aflaai</string>
+  <string name="shared_string_download">Aflaai</string>
   
   <string name="local_index_poi_data">Interessante plek inligting</string>
   <string name="local_index_address_data">Adres inligting</string>
@@ -516,9 +516,9 @@
   <string name="download_files_question">Laai {0} lêer(s) af ({1} MB)?</string>
   <string name="items_were_selected">{0} item(s) gekies</string>
   <string name="filter_existing_indexes">Filter afgelaai</string>
-  <string name="deselect_all">Kanseleer alle keuses</string>
+  <string name="shared_strings_deselect_all">Kanseleer alle keuses</string>
   <string name="shared_string_select_all">Kies alles</string>
-  <string name="reload">Verfris</string>
+  <string name="shared_string_refresh">Verfris</string>
   <string name="fast_route_mode">Vinnigste roete</string>
   <string name="fast_route_mode_descr">"Skakel aan om vinnigste roete te bereken of skakel af vir kortste roete " </string>
   <string name="tiles_to_download_estimated_size">Teen vergroting {0} laai {1} teëls af ({2} MB)</string>
@@ -569,7 +569,7 @@
   <string name="fav_file_to_load_not_found">GPX lêer wat gunstelinge bevat is nie gevind by {0} nie</string>
   <string name="fav_saved_sucessfully">Gunstelinge suksesvol geberg na {0}</string>
   <string name="no_fav_to_save">Geen gunsteling punte om te berg nie</string>
-  <string name="import_fav">Inbring</string>
+  <string name="shared_string_import">Inbring</string>
   <string name="export_fav">uitstuur</string>
   <string name="error_occurred_loading_gpx">Fout het voorgekom tydens die laai van GPX</string>
   <string name="send_report">Stuur verslag</string>
@@ -669,7 +669,7 @@
   <string name="search_history_int_streets">Kruising: {0} x {1} in {2}</string>
   <string name="search_history_building">Gebou: {0}, {1}, {2}</string>
   <string name="favorite">Gunsteling</string>
-  <string name="clear_all">Vee alles uit</string>
+  <string name="shared_string_clear_all">Vee alles uit</string>
   <string name="shared_string_history">Geskiedenis</string>
   <string name="uploading_data">Besig om inligting op te laai…</string>
   <string name="uploading">Besig met oplaai…</string>
@@ -829,8 +829,8 @@
   <string name="context_menu_item_create_poi">skep interessante plek</string>
   <string name="shared_string_yes">Ja</string>
   <string name="shared_string_cancel">Kanseleer</string>
-  <string name="default_buttons_apply">toepas</string>
-  <string name="default_buttons_add">Voeg by</string>
+  <string name="shared_string_apply">toepas</string>
+  <string name="shared_string_add">Voeg by</string>
   <string name="shared_string_no">Nee</string>
   <string name="add_favorite_dialog_top_text">Tik gunsteling naam in</string>
   <string name="add_favorite_dialog_default_favourite_name">Gunsteling</string>
@@ -859,7 +859,7 @@
   <string name="poi_error_poi_not_found">Node kan nie gevind word nie of gerief is nie \'n enkele node</string>
   <string name="poi_remove_confirm_template">Verwyder {0} (Lewer kommentaar)?</string>
   <string name="poi_remove_title">verwyder Interessante plek</string>
-  <string name="default_buttons_delete">verwyder</string>
+  <string name="shared_string_delete">verwyder</string>
   <string name="poi_remove_success">die interessante plek is suksesvol verwyder</string>
   <string name="poi_action_add">byvoeg</string>
   <string name="poi_action_change">verander</string>
@@ -873,7 +873,7 @@
   <string name="poi_dialog_comment_default">interessante plek verander</string>
   <string name="poi_dialog_other_tags_message">Alle ander naamplaatjies word bewaar</string>
   <string name="default_buttons_commit">Handig in</string>
-  <string name="default_buttons_reset">Herstel</string>
+  <string name="shared_string_clear">Herstel</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Verwyder</string>
   <string name="edit_filter_save_as_menu_item">Berg As</string>
@@ -1098,7 +1098,7 @@
     <string name="recording_context_menu_play">Speel</string>
     <string name="recording_description">Opname %1$s %2$s van %3$s</string>
     <string name="recording_default_name">besig met opname</string>
-    <string name="av_control_start">begin</string>
+    <string name="shared_string_control_start">begin</string>
     <string name="map_widget_av_notes">Oudio/video notas</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd inlasmodule vir aflyn kontoerlyne</string>
     <string name="osmand_srtm_long_description_1000_chars">Hierdie inlasmodule verskaf kontoerlyne wat in OsmAnd aflyn kaarte getoon kan word.Die wêreld inligting (van 70 grade noord tot 70 grade suid) is gebaseer op metings deur SRTM (Shuttle Radar Topography Mission)en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer),`n beeld-instrument aanboord Terra, die vlagskip sateliet van NASA se Aarde Observasie Stelsel. ASTER is `n samewerkingsprojek tussen NASA, Japan se Ministerie van Ekonomie, Handel en Industrie (MEHI), en Japan Ruimte Stelsels (J-spacesystems).</string>
@@ -1180,8 +1180,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="select_address_activity">Kies adres</string>
     <string name="favourites_list_activity">Kies gunsteling</string>
     <string name="local_openstreetmap_act_title">OSM veranderings</string>
-    <string name="default_buttons_other_actions">Ander aksies</string>
-    <string name="av_control_stop">Stop</string>
+    <string name="shared_string_more_actions">Ander aksies</string>
+    <string name="shared_string_control_stop">Stop</string>
     <string name="monitoring_control_stop">Stop</string>
     <string name="cancel_route">Verwerp roete</string>
     <string name="cancel_navigation">Staak navigasie</string>
@@ -1203,7 +1203,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="use_magnetic_sensor_descr">Gebruik die magnetiese sensor om die kompas waarde te bepaal in plaas van die oriëntasie sensor</string>
     <string name="use_magnetic_sensor">Gebruik magnetiese sensor</string>
     <string name="local_indexes_cat_srtm">Kontoer lyne inligting</string>
-    <string name="downloading_file_new">Aflaai besig …</string>
+    <string name="shared_string_downloading">Aflaai besig …</string>
 	<string name="delete_point">Vee punt uit</string>
     <string name="plugin_distance_point_time">Tyd</string>
     <string name="plugin_distance_point_speed">spoed</string>
@@ -1224,7 +1224,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="local_osm_changes_backup_failed">Berg van OSM veranderings het gefaal</string>
     <string name="local_osm_changes_backup">Berg as OSM verandering</string>
     <string name="use_distance_measurement_help">* Tik om punt te merk.\n * Tik en hou op die kaart om vorige punt te verwyder.\n * Tik en hou op punt om beskrywing te sien of verander.\n * Tik op meting widget om meer aksies te sien.</string>
-    <string name="default_buttons_do_not_show_again">Moet nie weer wys nie</string>
+    <string name="shared_string_do_not_show_again">Moet nie weer wys nie</string>
     <string name="distance_measurement_start_editing">Begin verandering</string>
     <string name="distance_measurement_finish_editing">Eindig verandering</string>
     <string name="distance_measurement_finish_subtrack">Begin `n nuwe sub-spoor</string>
@@ -1353,11 +1353,11 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="disable_complex_routing_descr">Skakel 2-fase roetebepaling vir motor navigasie af</string>
     <string name="disable_complex_routing">Skakel komplekse roete-bep[aling af</string>
     <string name="local_osm_changes_delete_all_confirm">Jy gaan %1$d osm veranderings uitwis. Is jy seker?</string>
-    <string name="local_osm_changes_delete_all">Wis alles uit</string>
+    <string name="shared_string_delete_all">Wis alles uit</string>
     <string name="animate_routing_route_not_calculated">Bereken asseblief eers die roete</string>
     <string name="animate_routing_route">Simuleer die berekende roete </string>
     <string name="tip_faq">Gereëlde Vrae</string>
-    <string name="remember_choice">Onthou my keuse</string>
+    <string name="shared_string_remember_my_choice">Onthou my keuse</string>
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="shared_string_and">en</string>
     <string name="shared_string_or">of</string>

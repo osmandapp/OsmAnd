@@ -213,7 +213,7 @@
   <string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
   <string name="button_upgrade_osmandplus">Upgradovat OsmAnd+</string>
   <string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
-  <string name="local_index_mi_rename">Přejmenovat</string>
+  <string name="shared_string_rename">Přejmenovat</string>
   <string name="show_gpx_route">Zobrazit na mapě</string>
   <string name="poi_filter_nominatim">Online POI filtr \'Nominatim\'</string>
   <string name="search_position_current_location_search">Hledané polohy…</string>
@@ -237,11 +237,11 @@
 \n\t- Vylepšený vektorový renderer
 \n\t- Vylepšený TTS engine (přesná vzdálenost, míle)
 \n\t- Oprava chyb "</string>
-  <string name="save_route_dialog_title">Uložit trasu jako GPX</string>
+  <string name="shared_string_save_as_gpx">Uložit trasu jako GPX</string>
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">Jméno souboru : </string>
   <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
-  <string name="default_buttons_save">Uložit</string>
+  <string name="shared_string_save">Uložit</string>
   <string name="menu_save_directions">Uložit pokyny</string>
   <string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
   <string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>
@@ -271,7 +271,7 @@
   <string name="local_index_mi_backup">Zálohovat</string>
   <string name="local_index_mi_delete">Smazat</string>
   <string name="local_index_mi_reload">Znovu nahrát z SD karty</string>
-  <string name="local_index_download">Stáhnout</string>
+  <string name="shared_string_download">Stáhnout</string>
   
   <string name="local_index_poi_data">Data POI</string>
   <string name="local_index_address_data">Addresy</string>
@@ -453,9 +453,9 @@
   <string name="download_files_question">Stáhnout {0} souborů ({1} MB)?</string>
   <string name="items_were_selected">vybráno {0} položek</string>
   <string name="filter_existing_indexes">Zobrazit jen aktualizace</string>
-  <string name="deselect_all">Odznačit vše</string>
+  <string name="shared_strings_deselect_all">Odznačit vše</string>
   <string name="shared_string_select_all">Vybrat vše</string>
-  <string name="reload">Načíst znovu</string>
+  <string name="shared_string_refresh">Načíst znovu</string>
   <string name="fast_route_mode">Nejrychlejší trasa</string>
   <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší </string>
   <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>
@@ -508,7 +508,7 @@
   <string name="fav_file_to_load_not_found">Soubor GPX s oblíbenými místy se v {0} nenachází</string>
   <string name="fav_saved_sucessfully">Oblíbená místa úspěšně uložena do {0}</string>
   <string name="no_fav_to_save">Žádná oblíbená místa k uložení</string>
-  <string name="import_fav">Importovat</string>
+  <string name="shared_string_import">Importovat</string>
   <string name="export_fav">Exportovat</string>
   <string name="error_occurred_loading_gpx">Chyba při načítání GPX</string>
   <string name="send_report">Odeslat hlášení</string>
@@ -609,7 +609,7 @@
   <string name="search_history_int_streets">Křižovatka ulic: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Oblíbené</string>
-  <string name="clear_all">Vymazat vše</string>
+  <string name="shared_string_clear_all">Vymazat vše</string>
   <string name="shared_string_history">Minulé</string>
   <string name="uploading_data">Odesílám data…</string>
   <string name="uploading">Odesílám…</string>
@@ -767,8 +767,8 @@
   <string name="context_menu_item_create_poi">Vytvořit POI</string>
   <string name="shared_string_yes">Ano</string>
   <string name="shared_string_cancel">Zrušit</string>
-  <string name="default_buttons_apply">Použít</string>
-  <string name="default_buttons_add">Přidat</string>
+  <string name="shared_string_apply">Použít</string>
+  <string name="shared_string_add">Přidat</string>
   <string name="shared_string_no">Ne</string>
   <string name="add_favorite_dialog_top_text">Zadejte jméno pro oblíbené</string>
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>
@@ -797,7 +797,7 @@
   <string name="poi_error_poi_not_found">Bod nelze najít nebo hledaný objekt není samostatným bodem</string>
   <string name="poi_remove_confirm_template">Vymazat {0} (vložte komentář) ?</string>
   <string name="poi_remove_title">Vymazat POI</string>
-  <string name="default_buttons_delete">Vymazat</string>
+  <string name="shared_string_delete">Vymazat</string>
   <string name="poi_remove_success">POI byl úspěšně vymazán</string>
   <string name="poi_action_add">Přidání</string>
   <string name="poi_action_change">Změna</string>
@@ -811,7 +811,7 @@
   <string name="poi_dialog_comment_default">Změna POI</string>
   <string name="poi_dialog_other_tags_message">Všechny ostatní tagy zůstanou zachovány</string>
   <string name="default_buttons_commit">Uložit</string>
-  <string name="default_buttons_reset">Vyčistit</string>
+  <string name="shared_string_clear">Vyčistit</string>
   <string name="filter_current_poiButton">Filtr</string>
   <string name="edit_filter_delete_menu_item">Vymazat</string>
   <string name="edit_filter_save_as_menu_item">Uložit jako</string>
@@ -1136,13 +1136,13 @@
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pro offline zobrazování vrstevnic</string>
     
     
-    <string name="av_control_start">Start</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
     
     <string name="intermediate_points_change_order">Změnit pořadí</string>
     <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu Vrstevnice v Market pro podporu dalšího vývoje.</string>
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
-    <string name="av_control_stop">Zastavit</string>
+    <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento modul umožňuje zobrazení vrstevnice v offline mapách OsmAnd. Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířk) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
@@ -1204,7 +1204,7 @@
     <string name="select_address_activity">Vybrat adresu</string>
     <string name="favourites_list_activity">Vybrat oblíbené</string>
     <string name="local_openstreetmap_act_title">Editace OSM</string>
-    <string name="default_buttons_other_actions">Další akce</string>
+    <string name="shared_string_more_actions">Další akce</string>
     <string name="monitoring_settings_descr">Konfigurace záznamů vašich cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>
@@ -1217,7 +1217,7 @@
     <string name="cancel_route">Zrušit trasu</string>
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
-    <string name="downloading_file_new">Stahuji …</string>
+    <string name="shared_string_downloading">Stahuji …</string>
 	<string name="other_location">Ostatní</string>
     <string name="local_osm_changes_backup_successful">Soubor se změnami mapy OSM úspěšně vytvořen %1$s</string>
     <string name="local_osm_changes_backup_failed">Nezdařilo se zálohovat změny mapy OSM</string>
@@ -1232,7 +1232,7 @@
     <string name="gpx_saved_sucessfully">Soubor GPX úspěšně uložen do {0}</string>
     <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánovač</string>
     <string name="use_distance_measurement_help">* Klikněte pro označení bodu.\n * Stiskněte dlouze na mapě pro smazání předchozího bodu.\n * Stiskněte dlouze bod pro zobrazení a přidání popisky.\n * Klikněte na modul měření pro další možnosti.</string>
-    <string name="default_buttons_do_not_show_again">Již nezobrazovat</string>
+    <string name="shared_string_do_not_show_again">Již nezobrazovat</string>
     <string name="distance_measurement_start_editing">Začít editaci</string>
     <string name="distance_measurement_finish_editing">Ukončit editaci</string>
     <string name="distance_measurement_finish_subtrack">Začít novou podtrasu</string>
@@ -1338,14 +1338,14 @@
     <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
     <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspešně uložen</string>
-    <string name="remember_choice">Zapamatovat mou volbu</string>
+    <string name="shared_string_remember_my_choice">Zapamatovat mou volbu</string>
     <string name="gps_status_eclipsim">Stav GPS</string>
     <string name="shared_string_and">a</string>
     <string name="shared_string_or">nebo</string>
 	<string name="animate_routing_route_not_calculated">Nejprve prosím vypočítejte trasu</string>
     <string name="animate_routing_route">Simulovat pomocí vypočítané trasy </string>
     <string name="animate_routing_gpx">Simulovat pomocí GPX trasy</string>
-    <string name="local_osm_changes_delete_all">Odstranit vše</string>
+    <string name="shared_string_delete_all">Odstranit vše</string>
     <string name="local_osm_changes_delete_all_confirm">Chystáte se odstranit %1$d změn OSM. Jste si jistý?</string>
     <string name="tip_faq">Často kladené otázky</string>
     <string name="tip_faq_t">Prosím navštivte
@@ -1556,7 +1556,7 @@ s často kladenými otázkami.</string>
 	<string name="local_index_mi_export">Exportovat</string>
 	<string name="import_file_favourites">Uložit jako GPX soubor nebo importovat do oblíbených?</string>
 	<string name="import_save">Uložit</string>
-	<string name="share_fav">Sdílet</string>
+	<string name="shared_string_share">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
 	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="osmo_follow">Sledovat</string>
@@ -1694,7 +1694,7 @@ s často kladenými otázkami.</string>
 	<string name="av_camera_pic_size_descr">Vyberte velikost obrázku interního fotoaparátu</string>
     <string name="hide_all_waypoints">Odstranit všechny</string>
     <string name="announce_nearby_favorites">Oznamovat oblíbená místa v blízkosti</string>
-<string name="more">Více…</string>
+<string name="shared_string_more">Více…</string>
     <string name="rendering_value_browse_map_name">Standardní</string>  
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Jízdní kolo</string>
@@ -1866,7 +1866,7 @@ s často kladenými otázkami.</string>
 	<string name="track_points">Body trasy</string>
 	<string name="turn_off_all">Vypnout všechny</string>
 	<string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
-	<string name="export">Exportovat</string>
+	<string name="shared_string_export">Exportovat</string>
 	<string name="shared_string_enable">Zapnout</string>
 	<string name="shared_string_disable">Vypnout</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>

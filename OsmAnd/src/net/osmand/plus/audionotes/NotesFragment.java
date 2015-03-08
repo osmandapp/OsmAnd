@@ -161,7 +161,7 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.share_fav)
+		item = optionsMenu.getMenu().add(R.string.shared_string_share)
 				.setIcon(light ? R.drawable.ic_action_gshare_light : R.drawable.ic_action_gshare_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -185,7 +185,7 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
+		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
 				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -219,7 +219,7 @@ public class NotesFragment extends ListFragment {
 
 	private void editNote(final Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.rename_recording);
+		builder.setTitle(R.string.shared_string_rename);
 		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog,
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
@@ -228,7 +228,7 @@ public class NotesFragment extends ListFragment {
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(!recording.setName(editText.getText().toString())) {

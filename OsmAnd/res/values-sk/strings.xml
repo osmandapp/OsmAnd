@@ -310,7 +310,6 @@
   <string name="update_poi_file_not_found">Miestny súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
   <string name="button_upgrade_osmandplus">Aktualizovať OsmAnd+</string>
   <string name="map_version_changed_info">Na serveri sú mapové súbory nekompatibilné s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
-  <string name="local_index_mi_rename">Premenovať</string>
   <string name="show_gpx_route">Zobraziť na mape</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
   <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
@@ -334,11 +333,9 @@
 \n\t- Vylepšenie vektorového vykresľovania
 \n\t- Vylepšenie TTS jadra (oznamovanie presnej vzdialenosti, povolenie míľ)
 \n\t- Oprava chýb "</string>
-  <string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
   <string name="route_successfully_saved_at">Cesta je úspešne uložená v "%1$s".</string>
   <string name="filename_input">Názov súboru : </string>
   <string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
-  <string name="default_buttons_save">Uložiť</string>
   <string name="menu_save_directions">Uložiť pokyny</string>
   <string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
   <string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
@@ -369,8 +366,6 @@
   <string name="local_index_mi_backup">Zálohovať (vypnúť)</string>
   <string name="local_index_mi_delete">Vymazať</string>
   <string name="local_index_mi_reload">Znovu načítať z karty SD</string>
-  <string name="local_index_download">Stiahnuť</string>
-  
   <string name="local_index_poi_data">POI údaje</string>
   <string name="local_index_address_data">Adresné údaje</string>
   <string name="local_index_transport_data">Údaje hromadnej dopravy</string>
@@ -569,8 +564,6 @@
   <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
   <string name="items_were_selected">Bolo vybraných {0} položiek</string>
   <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
-  <string name="deselect_all">Zrušiť výber</string>
-  <string name="reload">Znovu načítať</string>
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
@@ -628,7 +621,6 @@
   <string name="fav_file_to_load_not_found">GPX súbor obsahujúci obľúbené miesta sa nenachádza v {0}</string>
   <string name="fav_saved_sucessfully">Obľúbené miesta boli úspešne uložené do {0}</string>
   <string name="no_fav_to_save">Žiadne obľúbené miesta na uloženie</string>
-  <string name="import_fav">Importovať</string>
   <string name="export_fav">Exportovať</string>
   <string name="error_occurred_loading_gpx">Chyba pri načítavaní GPX</string>
   <string name="send_report">Odoslať hlásenie</string>
@@ -730,7 +722,6 @@
   <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Obľúbené miesto</string>
-  <string name="clear_all">Zmazať všetko</string>
   <string name="uploading_data">Odosielajú sa údaje…</string>
   <string name="uploading">Odosielanie…</string>
   <string name="search_nothing_found">Nič sa nenašlo</string>
@@ -890,8 +881,6 @@
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
   <string name="context_menu_item_create_poi">Vytvoriť POI</string>
-  <string name="default_buttons_apply">Použiť</string>
-  <string name="default_buttons_add">Pridať</string>
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
   <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod "{0}" bol úspešne pridaný.</string>
@@ -919,7 +908,6 @@
   <string name="poi_error_poi_not_found">Uzol sa nedá nájsť alebo bod záujmu nie je samostatný uzol</string>
   <string name="poi_remove_confirm_template">Vymazať {0} (zadajte komentár) ?</string>
   <string name="poi_remove_title">Vymazať POI</string>
-  <string name="default_buttons_delete">Vymazať</string>
   <string name="poi_remove_success">POI bol úspešne vymazaný</string>
   <string name="poi_action_add">Pridať</string>
   <string name="poi_action_change">Zmeniť</string>
@@ -933,7 +921,6 @@
   <string name="poi_dialog_comment_default">Zmena POI</string>
   <string name="poi_dialog_other_tags_message">Všetky ostatné tagy ponechané</string>
   <string name="default_buttons_commit">Uložiť</string>
-  <string name="default_buttons_reset">Vymazať</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Vymazať</string>
   <string name="edit_filter_save_as_menu_item">Uložiť ako</string>
@@ -1141,8 +1128,6 @@
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s %3$s</string>
     <string name="recording_default_name">Nahrávka</string>
-    <string name="av_control_stop">Zastaviť</string>
-    <string name="av_control_start">Nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre offline vrstevnice</string>
     <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené na OsmAnd offline mapách. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu.\n\nGlobálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems). "</string>
@@ -1217,7 +1202,6 @@
     <string name="select_address_activity">Vybrať adresu</string>
     <string name="favourites_list_activity">Vybrať obľúbený bod</string>
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
-    <string name="default_buttons_other_actions">Ostatné akcie</string>
     <string name="download_using_mobile_internet">Momentálne nie ste pripojený na WiFi. Chcete použiť aktuálne internetové pripojenie na sťahovanie?</string>
     <string name="tip_recent_changes_1_3_t">Zmeny vo verzii 1.3:
     \n\t* Prepracovaná podpora tabletov a veľkých obrazoviek
@@ -1272,7 +1256,6 @@
     * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
     * Stlačte a podržte na bode pre zobrazenie alebo pridanie popisu.\n
     * Kliknite na iconu merania pre ďaľšie možnosti.</string>
-    <string name="default_buttons_do_not_show_again">Znovu nezobrazovať</string>
     <string name="distance_measurement_start_editing">Začni úpravy</string>
     <string name="distance_measurement_finish_editing">Ukonči úpravy</string>
     <string name="distance_measurement_finish_subtrack">Začnite novú podtrasu</string>
@@ -1282,7 +1265,6 @@
     <string name="osmand_monitoring_plugin_description">Povoliť sledovanie a navigáciu na pozadí (obrazovka vypnutá) cez periodické používanie GPS zariadenia.
     Zobraziť nastavenia pre sledovanie vašej cesty do GPX súboru alebo pomocou on-line webovej služby.</string>
     <string name="local_indexes_cat_srtm">Dáta s vrstevnicami</string>
-    <string name="downloading_file_new">Sťahovanie…</string>
 	<string name="keep_intermediate_points">Zachovať prechodné body</string>
     <string name="new_directions_point_dialog">Už máte určené prechodné body.</string>
     <string name="context_menu_item_directions_to">Pokyny sem</string>
@@ -1375,7 +1357,6 @@
 	<string name="auto_zoom_close">Veľké priblíženie</string>
 	<string name="auto_zoom_far">Stredné priblíženie</string>
 	<string name="auto_zoom_farthest">Malé priblíženie</string>
-	<string name="remember_choice">Zapamätať moju voľbu</string>
     <string name="gps_status_eclipsim">Stav GPS</string>
     <string name="tip_map_styles_t">OsmAnd umožňuje zobrazenie vektorových máp v rôznych štýloch podľa vašich potrieb:
 		\n\nOkrem vyváženého štýlu "default" môžete v "Menu" → "Konfigurovať obrazovku" → "Štýl vykresľovania" vybrať napríklad:
@@ -1548,7 +1529,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 \n\nPre zobrazenie trasy k cieľu z iného bodu ako vašej súčasnej polohy, zvoľte východzí bod na mape a kliknite Pokyny odtiaľto.
 \n\nAk použijete Pokyny odtiaľto spolu s Navigovať OsmAnd sa prepne na vašu aktuálnu polohu hneď ako bude zistená (takže táto funkcia môže byť použitá pre rýchle spustenie navigácie než je známa poloha). Na druhú stranu, Pokyny odtiaľto v kombinácii so Zobraziť trasu len zobrazí trasu z ľubovoľného zvoleného bodu bez následných zmien. "</string>
 	<string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d osm zmien. Ste si istý?</string>
-    <string name="local_osm_changes_delete_all">Odstrániť všetky</string>
     <string name="osmodroid_refresh">Obnoviť kanály</string>
     <string name="tip_faq_t">Pozrite si https://code.google.com/p/osmand/wiki/FAQ s často kladenými otázkami.</string>
     <string name="tip_faq">Často kladené otázky</string>
@@ -1685,7 +1665,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
     <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
     
-    <string name="share_fav">Zdieľať</string>
 	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
 	<string name="tip_recent_changes_1_8_alpha">Zmeny v 1.8:
         * Počítanie trasy medzi bodmi v GPX stope
@@ -1893,7 +1872,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="more">Viac…</string>
     <string name="flat_list_waypoitns">Všetky</string>
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
@@ -2045,7 +2023,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="notes">Poznámky</string>
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Iba cesty</string>
-    <string name="export">Exportovať</string>
 	<string name="plugin_nautical_descr">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.
 		\n\nMapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".
 		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
@@ -2098,7 +2075,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_deselect">Zrušiť výber</string>
 	<string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
 	<string name="shared_string_clear">Vymazať</string>
-	<string name="shared_string_clear_all">Vymazať všetko</string>
+	<string name="shared_string_shared_string_clear_all">Vymazať všetko</string>
 	<string name="shared_string_save">Uložiť</string>
 	<string name="shared_string_save_as_gpx">Uložiť ako GPX stopu</string>
 	<string name="shared_string_rename">Premenovať</string>
@@ -2111,13 +2088,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_control_stop">Zastaviť</string>
 	<string name="shared_string_import">Import</string>
 	<string name="shared_string_export">Export</string>
-	<string name="shared_string_more">Viac</string>
+	<string name="shared_string_more">Viac…</string>
 	<string name="shared_string_more_actions">Viac činností</string>
 	<string name="shared_string_do_not_show_again">Už viac nezobrazovať</string>
 	<string name="shared_string_remember_my_choice">Zapamätať moju voľbu</string>
 	<string name="shared_string_refresh">Obnoviť</string>
 	<string name="shared_string_download">Stiahnuť</string>
-	<string name="shared_string_downloading">Sťahovanie</string>
+	<string name="shared_string_downloading">Sťahovanie…</string>
 	<string name="shared_string_download_successful">Sťahovanie úspešné</string>
 	<string name="shared_string_io_error">Nastala chyba čítania/zápisu</string>
 	<string name="shared_string_unexpected_error">Nastala neočakávaná chyba</string>

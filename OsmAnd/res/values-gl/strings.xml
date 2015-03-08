@@ -59,7 +59,7 @@
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Anunciar os puntos de pasaxe do GPX</string>
     <string name="download_additional_maps">Descargar os mapas que faltan, %1$s (%2$d MB)?</string>
-    <string name="more">Máis…</string>
+    <string name="shared_string_more">Máis…</string>
     <string name="rendering_value_browse_map_name">Examinar o mapa</string>  
     <string name="rendering_value_car_name">Coche</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
@@ -362,11 +362,11 @@
     <string name="tip_faq_t">Visite https://code.google.com/p/osmand/wiki/FAQ para ver as preguntas máis frecuentes.</string>
     <string name="tip_faq">Preguntas máis frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Está a piques de eliminar %1$d cambios en osm. Confírmao?</string>
-    <string name="local_osm_changes_delete_all">Eliminar todo</string>
+    <string name="shared_string_delete_all">Eliminar todo</string>
     <string name="animate_routing_route_not_calculated">Calcule a ruta primeiro</string>
     <string name="animate_routing_route">"Simular empregando a ruta calculada "</string>
     <string name="animate_routing_gpx">Simular empregando pista GPX</string>
-    <string name="remember_choice">Lembrar a miña escolla</string>
+    <string name="shared_string_remember_my_choice">Lembrar a miña escolla</string>
     <string name="gps_status_eclipsim">Estado do GPS</string>
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">ou</string>
@@ -478,7 +478,7 @@
     <string name="osmand_distance_planning_plugin_description">Cree camiños (ou empregue ou modifique ficheiros GPX existentes) para medir a distancia entre puntos. Gárdeos como GPX, pois poden ser empregados para planificar rutas en GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distancias e ferramenta de planificación</string>
     <string name="use_distance_measurement_help">* Toque para marcar un punto.\n * Manteña premido o mapa para eliminar un punto anterior.\n * Manteña premido un punto para ver e anexar unha descrición.\n * Prema no trebello de medición para ver máis accións.</string>
-    <string name="default_buttons_do_not_show_again">Non mostrar de novo</string>
+    <string name="shared_string_do_not_show_again">Non mostrar de novo</string>
     <string name="distance_measurement_start_editing">Comezar a editar</string>
     <string name="distance_measurement_finish_editing">Rematar coa edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar unha subpista nova</string>
@@ -516,7 +516,7 @@
     <string name="select_address_activity">Seleccionar o enderezo</string>
     <string name="favourites_list_activity">Seleccionar un favorito</string>
     <string name="local_openstreetmap_act_title">Modificacións de OSM</string>
-    <string name="default_buttons_other_actions">Outras accións</string>
+    <string name="shared_string_more_actions">Outras accións</string>
 	<string name="tip_recent_changes_1_2_t">"Arranxos en 1.2.1:
 \n\t*Fix Geo Intent (Foursquare, c:geo)
 \n\t*Fix screen tremble during navigation
@@ -602,8 +602,8 @@
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_description">Gravación %1$s %2$s de %3$s</string>
     <string name="recording_default_name">gravación</string>
-    <string name="av_control_stop">Parar</string>
-    <string name="av_control_start">Comezar</string>
+    <string name="shared_string_control_stop">Parar</string>
+    <string name="shared_string_control_start">Comezar</string>
     <string name="map_widget_av_notes">Notas de son/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Engadido de OsmAnd para curvas de nivel sen conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este engadido fornece curvas de nivel que poden ser mostradas nos mapas sen conexión de OsmAnd. Os datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións de SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
@@ -1119,7 +1119,7 @@
 	<string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para manter os cambios nos PDI e tampouco foi posíbel crealo.</string>
 	<string name="button_upgrade_osmandplus">Actualizar OsmAnd+</string>
 	<string name="map_version_changed_info">O servidor contén ficheiros de mapas que non son compatíbeis coa versión actual do aplicativo. Para descargalos e empregalos actualice o aplicativo a unha versión máis recente.</string>
-	<string name="local_index_mi_rename">Mudar o nome</string>
+	<string name="shared_string_rename">Mudar o nome</string>
 	<string name="show_gpx_route">Mostrar no mapa</string>
 	<string name="poi_filter_nominatim">Nominatim con conexión</string>
 	<string name="search_position_current_location_search">A buscar a posición…</string>
@@ -1143,11 +1143,11 @@
 \n\t- Improve vector rendering
 \n\t- Improvement of TTS engine (announce exact distance, enable miles)
 \n\t- Bug fixes "</string>
-	<string name="save_route_dialog_title">Gardar a ruta como pista de GPX</string>
+	<string name="shared_string_save_as_gpx">Gardar a ruta como pista de GPX</string>
 	<string name="route_successfully_saved_at">A ruta foi gardada correctamente como «%1$s».</string>
 	<string name="filename_input">"Nome do ficheiro: "</string>
 	<string name="file_with_name_already_exist">Xa existe un ficheiro co mesmo nome.</string>
-	<string name="default_buttons_save">Gardar</string>
+	<string name="shared_string_save">Gardar</string>
 	<string name="menu_save_directions">Gardar as indicacións</string>
 	<string name="local_index_upload_gpx_description">Actualizar os ficheiros de GPX á comunidade de OSM. Serán empregados para mellorar os mapas.</string>
 	<string name="local_index_items_uploaded">Foron enviados correctamente %1$d de %2$d elemento(s).</string>
@@ -1177,7 +1177,7 @@
 	<string name="local_index_mi_delete">Eliminar</string>
 	<string name="local_index_mi_export">Exportar</string>
 	<string name="local_index_mi_reload">Recargar desde o cartón SD</string>
-	<string name="local_index_download">Descargar</string>
+	<string name="shared_string_download">Descargar</string>
 	<string name="local_index_poi_data">Datos de PDI</string>
 	<string name="local_index_address_data">Datos de enderezos</string>
 	<string name="local_index_transport_data">Datos de transporte público</string>
@@ -1335,9 +1335,9 @@
 	<string name="download_files_question">Descargar {0} ficheiro(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} elemento(s) seleccionados</string>
 	<string name="filter_existing_indexes">Descargado</string>
-	<string name="deselect_all">Anular toda a selección</string>
+	<string name="shared_strings_deselect_all">Anular toda a selección</string>
 	<string name="shared_string_select_all">Seleccionar todo</string>
-	<string name="reload">Anovar</string>
+	<string name="shared_string_refresh">Anovar</string>
 	<string name="fast_route_mode">Itinerario máis rápido</string>
 	<string name="fast_route_mode_descr">"Active isto para calcular a ruta máis rápida ou desactíveo para a máis curta "</string>
 	<string name="tiles_to_download_estimated_size">Na ampliación {0} descargar {1} teselas ({2} MB)</string>
@@ -1388,9 +1388,9 @@
 	<string name="fav_file_to_load_not_found">O ficheiro GPX que contén os favoritos non se atopa en {0}</string>
 	<string name="fav_saved_sucessfully">Os favoritos foron gardados correctamente en {0}</string>
 	<string name="no_fav_to_save">Non hai puntos favoritos que gardar</string>
-	<string name="import_fav">Import</string>
+	<string name="shared_string_import">Import</string>
 	<string name="export_fav">Export</string>
-	<string name="share_fav">Compartir</string>
+	<string name="shared_string_share">Compartir</string>
 	<string name="share_fav_subject">Favoritos compartidos mediante OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Produciuse un erro ao cargar o GPX</string>
 	<string name="send_report">Send report</string>
@@ -1485,7 +1485,7 @@
 	<string name="search_history_int_streets">Intersección: {0} x {1} in {2}</string>
 	<string name="search_history_building">Edificio: {0}, {1}, {2}</string>
 	<string name="favorite">Favorito</string>
-	<string name="clear_all">Limpar todo</string>
+	<string name="shared_string_clear_all">Limpar todo</string>
 	<string name="shared_string_history">Historial</string>
 	<string name="uploading_data">A actualizar os datos…</string>
 	<string name="uploading">A actualizar…</string>
@@ -1507,7 +1507,7 @@
 	<string name="address">Address</string>
 	<string name="download_index_success">A descarga foi correcta</string>
 	<string name="error_io_error">Produciuse un erro de E/S</string>
-	<string name="downloading_file_new">A descargar …</string>
+	<string name="shared_string_downloading">A descargar …</string>
 	<string name="downloading">A descargar…</string>
 	<string name="downloading_list_indexes">A descargar a lista de rexións dispoñíbeis…</string>
 	<string name="list_index_files_was_not_loaded">A lista de rexións non foi obtida de osmand.net.</string>
@@ -1630,8 +1630,8 @@
 	<string name="context_menu_item_create_poi">Crear un PDI</string>
 	<string name="shared_string_yes">Si</string>
 	<string name="shared_string_cancel">Cancelar</string>
-	<string name="default_buttons_apply">Aplicar</string>
-	<string name="default_buttons_add">Engadir</string>
+	<string name="shared_string_apply">Aplicar</string>
+	<string name="shared_string_add">Engadir</string>
 	<string name="shared_string_no">Non</string>
 	<string name="add_favorite_dialog_top_text">Introduza o nome do favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
@@ -1661,7 +1661,7 @@
 	<string name="poi_error_poi_not_found">Non é posíbel atopar o nodo ou esta instalación non é un nodo único</string>
 	<string name="poi_remove_confirm_template">Eliminar {0} (introducir un comentario)?</string>
 	<string name="poi_remove_title">Eliminar este POI</string>
-	<string name="default_buttons_delete">Eliminar</string>
+	<string name="shared_string_delete">Eliminar</string>
 	<string name="poi_remove_success">O PDI foi eliminado correctamente</string>
 	<string name="poi_action_add">engadir</string>
 	<string name="poi_action_change">cambiar</string>
@@ -1675,7 +1675,7 @@
 	<string name="poi_dialog_comment_default">Cambio de PDI</string>
 	<string name="poi_dialog_other_tags_message">O resto das etiquetas consérvase</string>
 	<string name="default_buttons_commit">Enviar</string>
-	<string name="default_buttons_reset">Restaurar</string>
+	<string name="shared_string_clear">Restaurar</string>
 	<string name="filter_current_poiButton">Filtrar</string>
 	<string name="edit_filter_delete_menu_item">Eliminar</string>
 	<string name="edit_filter_save_as_menu_item">Gardar como</string>

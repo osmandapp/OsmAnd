@@ -106,7 +106,7 @@
   <string name="file_with_name_already_exists">ह्या नावाची फाइल आधीच अस्तित्वात आहे.</string>
   <string name="gpx_navigation">जिपिएक्स राऊट</string>
   <string name="poi_filter_by_name">नावाने शोधा</string>
-  <string name="local_index_mi_rename">नाव बदला</string>
+  <string name="shared_string_rename">नाव बदला</string>
   <string name="show_gpx_route">नकाशावर दाखवा</string>
   <string name="search_position_current_location_search">स्थान शोधत आहे …</string>
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
@@ -117,7 +117,7 @@
   <string name="context_menu_item_search">इथे जवळ शोधा</string>
   <string name="filename_input">फाइलचे नाव : </string>
   <string name="file_with_name_already_exist">ह्या नावाने फाइल आधीच अस्तित्वात आहे.</string>
-  <string name="default_buttons_save">साठवा</string>
+  <string name="shared_string_save">साठवा</string>
   <string name="menu_save_directions">दिशा साठवा</string>
   <string name="local_index_mi_upload_gpx">ओएसएम ला पाठवा</string>
   <string name="show_more_map_detail">नकाशा सविस्तरपणे दाखवा</string>
@@ -129,7 +129,7 @@
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
   <string name="vector_map_not_needed">नाही, धन्यवाद</string>
   <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
-  <string name="local_index_download">डाउनलोड</string>
+  <string name="shared_string_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>
   <string name="search_offline_clear_search">नविन शोध</string>
   <string name="map_text_size_descr">नकाशावरील नावांसाठी अक्षरांचा आकार ठरवा</string>
@@ -229,7 +229,7 @@
   <string name="search_history_street">रस्ता: {0}, {1}</string>
   <string name="search_history_int_streets">चौक: {0} x {1} in {2}</string>
   <string name="search_history_building">इमारत: {0}, {1}, {2}</string>
-  <string name="clear_all">"सगळे काढून टाका"</string>
+  <string name="shared_string_clear_all">"सगळे काढून टाका"</string>
   <string name="uploading_data">डेटा अपलोड करत आहे…</string>
   <string name="uploading">अपलोड करत आहे…</string>
   <string name="search_nothing_found">काही सापडले नाही</string>
@@ -316,7 +316,7 @@
   <string name="poi_edit_title">पिओआय बदला</string>
   <string name="poi_create_title">पिओआय तयार करा</string>
   <string name="poi_remove_title">पिओआय काढून टाका</string>
-  <string name="default_buttons_delete">काढून टाका</string>
+  <string name="shared_string_delete">काढून टाका</string>
   <string name="poi_dialog_name">नाव</string>
   <string name="poi_dialog_opening_hours">"उघडे असण्याची वेळ"</string>
   <string name="poi_dialog_comment">टिप्पणी</string>
@@ -371,7 +371,7 @@
     <string name="search_street_in_neighborhood_cities">रस्ता जवळपास्च्या शहरात शोधा</string>
     <string name="plugin_distance_point_speed">वेग</string>
     <string name="plugin_distance_point_ele">उंची</string>
-    <string name="default_buttons_do_not_show_again">पुन्हा दाखवू नका</string>
+    <string name="shared_string_do_not_show_again">पुन्हा दाखवू नका</string>
     <string name="other_location">इतर</string>
     <string name="cancel_navigation">दिशादर्शन थांबवा</string>
     <string name="clear_destination">इच्छित स्थळ काढून टाका</string>
@@ -379,8 +379,8 @@
     <string name="prefer_motorways">महामार्गांना प्राधान्य द्या</string>
 	<string name="prefer_in_routing_descr">महामार्गांना प्राधान्य द्या</string>
     <string name="intermediate_points_change_order">क्रम बदला</string>
-    <string name="av_control_start">सुरू करा</string>
-    <string name="av_control_stop">बंद करा</string>
+    <string name="shared_string_control_start">सुरू करा</string>
+    <string name="shared_string_control_stop">बंद करा</string>
     <string name="monitoring_control_stop">बंद करा</string>
     <string name="download_select_map_types">इतर नकाशे</string>
     <string name="download_roads_only_item">फक्त रस्ते</string>
@@ -443,7 +443,7 @@
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
 	<string name="transport_search_none">काहीच नाही</string>
 	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
-	<string name="deselect_all">काहीच निवडू नका</string>
+	<string name="shared_strings_deselect_all">काहीच निवडू नका</string>
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
 	<string name="amenity_type_man_made">मानव निर्मित</string>
 	<string name="amenity_type_administrative">प्रशासकीय</string>

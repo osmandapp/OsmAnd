@@ -158,7 +158,7 @@
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq">Ofte spurde spørsmål</string>
-    <string name="local_osm_changes_delete_all">Slett alt</string>
+    <string name="shared_string_delete_all">Slett alt</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
 	<string name="gps_status_eclipsim">GPS-status</string>
@@ -195,7 +195,7 @@
     <string name="plugin_distance_point_ele">høgd og havet</string>
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">GPS-filnamn</string>
-    <string name="default_buttons_do_not_show_again">Ikkje vis på nytt</string>
+    <string name="shared_string_do_not_show_again">Ikkje vis på nytt</string>
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Fullfør redigering</string>
     <string name="distance_measurement_clear_route">Fjern alle punkta</string>
@@ -219,7 +219,7 @@
     <string name="select_address_activity">Vel adresse</string>
     <string name="favourites_list_activity">Vel favoritt</string>
     <string name="local_openstreetmap_act_title">OSM-endringar</string>
-    <string name="default_buttons_other_actions">Andre handlingar</string>
+    <string name="shared_string_more_actions">Andre handlingar</string>
 	<string name="layer_hillshade">Fjellskugge-lag</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="map_view">Kart</string>
@@ -250,8 +250,8 @@
     <string name="recording_context_menu_play">Spel av</string>
     <string name="recording_description">Opptak %1$s %2$s av %3$s</string>
     <string name="recording_default_name">opptak</string>
-    <string name="av_control_stop">Stopp</string>
-    <string name="av_control_start">Start</string>
+    <string name="shared_string_control_stop">Stopp</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="monitoring_control_stop">Stopp</string>

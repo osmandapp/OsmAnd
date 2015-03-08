@@ -137,7 +137,7 @@ public class MapActivityActions implements DialogProvider {
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				double latitude = args.getDouble(KEY_LATITUDE);
@@ -212,7 +212,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final Dialog dlg = new Dialog(activity);
-		dlg.setTitle(R.string.save_route_dialog_title);
+		dlg.setTitle(R.string.shared_string_save_as_gpx);
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
 		

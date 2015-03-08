@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -462,7 +462,7 @@
 	<string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
 	<string name="button_upgrade_osmandplus">שדרוג OsmAnd+‎</string>
 	<string name="map_version_changed_info">השרת מכיל קובצי מפה שאינם תואמים לגרסה הנוכחית של היישום שלך. כדי להוריד ולהשתמש בהם עליך לשדרג את היישום לגרסה עדכנית יותר.</string>
-	<string name="local_index_mi_rename">שינוי שם</string>
+	<string name="shared_string_rename">שינוי שם</string>
 	<string name="show_gpx_route">הצגה על המפה</string>
 	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
 	<string name="search_position_current_location_search">מתבצע חיפוש אחר מיקום…</string>
@@ -485,11 +485,11 @@
 \n\t- שיפור עיבוד וקטורי
 \n\t- שיפור המנגנון שממיר טקסט לדיבור (הכרזת המרחק במדויק, הוספת מַיילים)
 \n\t- תיקוני תקלות "</string>
-	<string name="save_route_dialog_title">שמירת מסלול כדרך GPX</string>
+	<string name="shared_string_save_as_gpx">שמירת מסלול כדרך GPX</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
 	<string name="filename_input">"שם הקובץ : "</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
-	<string name="default_buttons_save">שמירה</string>
+	<string name="shared_string_save">שמירה</string>
 	<string name="menu_save_directions">שמירת ההכוונה</string>
 	<string name="local_index_upload_gpx_description">שליחת קובצי GPX לקהילת OSM. אלו ישמשו לשיפור המפות.</string>
 	<string name="local_index_items_uploaded">%1$d מתוך %2$d פריטים נשלחו בהצלחה.</string>
@@ -522,7 +522,7 @@
 	<string name="local_index_mi_backup">נטרול</string>
 	<string name="local_index_mi_delete">מחיקה</string>
 	<string name="local_index_mi_reload">טעינה מחדש מכרטיס ה־SD</string>
-	<string name="local_index_download">הורדה</string>
+	<string name="shared_string_download">הורדה</string>
 	
 	<string name="local_index_poi_data">נתוני נ״ע</string>
 	<string name="local_index_address_data">נתוני כתובת</string>
@@ -707,9 +707,9 @@
 	<string name="download_files_question">האם להוריד {0} קבצים ({1} מ״ב)?</string>
 	<string name="items_were_selected">נבחרו {0} פריטים</string>
 	<string name="filter_existing_indexes">המסנן התקבל</string>
-	<string name="deselect_all">ביטול בחירת הכול</string>
+	<string name="shared_strings_deselect_all">ביטול בחירת הכול</string>
 	<string name="shared_string_select_all">בחירת הכול</string>
-	<string name="reload">רענון</string>
+	<string name="shared_string_refresh">רענון</string>
 	<string name="fast_route_mode">המסלול המהיר ביותר</string>
 	<string name="fast_route_mode_descr">"יש להפעיל כדי לחשב את המסלול המהיר ביותר או לנטרל כדי לקבל את המסלול הקצר ביותר "</string>
 	<string name="tiles_to_download_estimated_size">ברמת תקריב {0} יש להוריד {1} אריחים ({2} מ״ב)</string>
@@ -760,7 +760,7 @@
 	<string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל את המועדפים לא נמצא תחת {0}</string>
 	<string name="fav_saved_sucessfully">המועדפים נשמרו בהצלחה אל {0}</string>
 	<string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
-	<string name="import_fav">יבוא</string>
+	<string name="shared_string_import">יבוא</string>
 	<string name="export_fav">יצוא</string>
 	<string name="error_occurred_loading_gpx">אירעה שגיאה במהלך טעינת ה־GPX</string>
 	<string name="send_report">שליחת דיווח</string>
@@ -856,7 +856,7 @@
 	<string name="search_history_int_streets">צומת: {0} x {1} ב־{2}</string>
 	<string name="search_history_building">בניין: {0}, {1}, {2}</string>
 	<string name="favorite">מועדף</string>
-	<string name="clear_all">לנקות הכול</string>
+	<string name="shared_string_clear_all">לנקות הכול</string>
 	<string name="shared_string_history">היסטוריה</string>
 	<string name="uploading_data">הנתונים נשלחים…</string>
 	<string name="uploading">מתבצעת העלאה…</string>
@@ -1012,8 +1012,8 @@
 	<string name="context_menu_item_open_bug">פתיחת תקלה ב־OSM</string>
 	<string name="context_menu_item_create_poi">יצירת נ״ע</string>
 	<string name="shared_string_cancel">ביטול</string>
-	<string name="default_buttons_apply">החלה</string>
-	<string name="default_buttons_add">הוספה</string>
+	<string name="shared_string_apply">החלה</string>
+	<string name="shared_string_add">הוספה</string>
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>
 	<string name="add_favorite_dialog_default_favourite_name">מועדף</string>
 	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה בהצלחה.</string>
@@ -1041,7 +1041,7 @@
 	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שנותן השירות מפוזר על פני מספר מפרקים</string>
 	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
-	<string name="default_buttons_delete">מחיקה</string>
+	<string name="shared_string_delete">מחיקה</string>
 	<string name="poi_remove_success">נ״ע נמחקה בהצלחה</string>
 	<string name="poi_action_add">הוספה</string>
 	<string name="poi_action_change">שינוי</string>
@@ -1055,7 +1055,7 @@
 	<string name="poi_dialog_comment_default">שינוי נ״ע</string>
 	<string name="poi_dialog_other_tags_message">כל שאר התגיות שמורות</string>
 	<string name="default_buttons_commit">שליחה</string>
-	<string name="default_buttons_reset">איפוס</string>
+	<string name="shared_string_clear">איפוס</string>
 	<string name="filter_current_poiButton">מסנן</string>
 	<string name="edit_filter_delete_menu_item">מחיקה</string>
 	<string name="edit_filter_save_as_menu_item">שמירה בשם</string>
@@ -1135,8 +1135,8 @@
     <string name="recording_context_menu_play">נגינה</string>
     <string name="recording_description">%1$s %2$s מוקלטים ב־%3$s</string>
     <string name="recording_default_name">בהקלטה</string>
-    <string name="av_control_stop">עצירה</string>
-    <string name="av_control_start">הקלטה</string>
+    <string name="shared_string_control_stop">עצירה</string>
+    <string name="shared_string_control_start">הקלטה</string>
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>
     <string name="av_def_action_audio">הקלטת שמע</string>
@@ -1216,7 +1216,7 @@
     <string name="select_address_activity">נא לבחור בכתובת</string>
     <string name="favourites_list_activity">נא לבחור במועדף</string>
     <string name="local_openstreetmap_act_title">שינויים ב־OSM</string>
-    <string name="default_buttons_other_actions">פעולות אחרות</string>
+    <string name="shared_string_more_actions">פעולות אחרות</string>
     <string name="download_using_mobile_internet">הרשת האלחוטית אינה מחוברת כרגע. האם להמשיך ולהוריד עם חיבור האינטרנט הנוכחי?</string>
     <string name="cancel_route">התעלמות מהמסלול</string>
     <string name="cancel_navigation">הפסקת הניווט</string>
@@ -1232,7 +1232,7 @@
     <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
     <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
-    <string name="downloading_file_new">"בהורדה "</string>
+    <string name="shared_string_downloading">"בהורדה …"</string>
 	<string name="delete_point">מחיקת נקודה</string>
     <string name="plugin_distance_point_time">זמן</string>
     <string name="plugin_distance_point_hdop">דיוק</string>
@@ -1243,7 +1243,7 @@
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר בהצלחה אל {0}</string>
     <string name="osmand_distance_planning_plugin_description">יש ליצור נתיב (או להשתמש / לשנות קובצי GPX קיימים) כדי למדוד את המרחק בין נקודות. לשמור כ־GPX, ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
-    <string name="default_buttons_do_not_show_again">לא להציג שוב</string>
+    <string name="shared_string_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
     <string name="distance_measurement_finish_editing">סיום העריכה</string>
     <string name="distance_measurement_finish_subtrack">תת מסלול/נקודה הבאים</string>

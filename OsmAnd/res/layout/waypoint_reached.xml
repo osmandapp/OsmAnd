@@ -43,7 +43,7 @@
         android:id="@+id/all_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/more"
+        android:contentDescription="@string/shared_string_more"
         android:layout_gravity="center_vertical"
         android:visibility="gone"
         android:focusable="false"

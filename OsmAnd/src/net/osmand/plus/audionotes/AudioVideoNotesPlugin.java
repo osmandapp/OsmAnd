@@ -528,7 +528,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void setRecordListener(final TextInfoWidget recordPlaceControl, final MapActivity mapActivity) {
-		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
+		recordPlaceControl.setText(app.getString(R.string.shared_string_control_start), "");
 		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 
@@ -945,7 +945,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.prepare();
 		mr.start();
 		mediaRec = mr;
-		recordControl.setText(app.getString(R.string.av_control_stop), "");
+		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final StackWidgetView par = mil.getRightStack();

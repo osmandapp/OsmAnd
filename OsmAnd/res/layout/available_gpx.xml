@@ -42,7 +42,7 @@
 				android:layout_height="wrap_content"
 				style="?attr/dashboardGeneralButtonStyle"
 				android:textColor="@color/color_distance"
-				android:text="@string/turn_off_all"/>
+				android:text="@string/shared_string_deselect_all"/>
 
 		</LinearLayout>
 

@@ -444,7 +444,7 @@
 	<string name="update_poi_file_not_found">Δεν βρέθηκε τοπικό αρχείο για τη διατήρηση των αλλαγών στα ΣΕ και δεν μπορεί να δημιουργηθεί.</string>
 	<string name="button_upgrade_osmandplus">Αναβάθμιση OsmAnd+</string>
 	<string name="map_version_changed_info">Ο διακομιστής περιέχει αρχεία χαρτών που δεν είναι συμβατά με αυτή την έκδοση της εφαρμογής. Για να τα κατεβάσετε και να τα χρησιμοποιήσετε, αναβαθμίστε την εφαρμογή σε νεότερη έκδοση.</string>
-	<string name="local_index_mi_rename">Μετονομασία</string>
+	<string name="shared_string_rename">Μετονομασία</string>
 	<string name="show_gpx_route">Εμφάνιση στο χάρτη</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Αναζήτηση θέσης…</string>
@@ -468,11 +468,11 @@
 \n\t- Improve vector rendering
 \n\t- Improvement of TTS engine (announce exact distance, enable miles)
 \n\t- Bug fixes "</string>
-	<string name="save_route_dialog_title">Αποθήκευση διαδρομής ως ίχνος GPX</string>
+	<string name="shared_string_save_as_gpx">Αποθήκευση διαδρομής ως ίχνος GPX</string>
 	<string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε με επιτυχία ως \'%1$s\'.</string>
 	<string name="filename_input">Όνομα αρχείου: </string>
 	<string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
-	<string name="default_buttons_save">Αποθήκευση</string>
+	<string name="shared_string_save">Αποθήκευση</string>
 	<string name="menu_save_directions">Αποθήκευση οδηγιών</string>
 	<string name="local_index_upload_gpx_description">Ανεβάστε τα αρχεία GPX στη κοινότητα του OSM. Θα χρησιμοποιηθούν για τη βελτίωση του χάρτη.</string>
 	<string name="local_index_items_uploaded">%1$d από %2$d αντικείμενο(α) απεστάλησαν επιτυχώς.</string>
@@ -505,7 +505,7 @@
 	<string name="local_index_mi_backup">Απενεργοποίηση</string>
 	<string name="local_index_mi_delete">Διαγραφή</string>
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
-	<string name="local_index_download">Λήψη</string>
+	<string name="shared_string_download">Λήψη</string>
 	
 	<string name="local_index_poi_data">Δεδομένα ΣΕ</string>
 	<string name="local_index_address_data">Δεδομένα διευθύνσεων</string>
@@ -689,9 +689,9 @@
 	<string name="download_files_question">Λήψη {0} αρχείου(ων) ({1} MB)?</string>
 	<string name="items_were_selected">{0} αντικείμενο(α) επιλέχτηκαν</string>
 	<string name="filter_existing_indexes">Κατεβασμένα</string>
-	<string name="deselect_all">Αποεπιλογή όλων</string>
+	<string name="shared_strings_deselect_all">Αποεπιλογή όλων</string>
 	<string name="shared_string_select_all">Επιλογή όλων</string>
-	<string name="reload">Ανανέωση</string>
+	<string name="shared_string_refresh">Ανανέωση</string>
 	<string name="fast_route_mode">Ταχύτερη διαδρομή</string>
 	<string name="fast_route_mode_descr">Ενεργοποίηση για υπολογισμό ταχύτερης διαδρομής ή για απενεργοποίηση συντομότερης διαδρομής </string>
 	<string name="tiles_to_download_estimated_size">Στη κλίμακα {0} λήψη {1} πλακίδια ({2} MB)</string>
@@ -742,7 +742,7 @@
 	<string name="fav_file_to_load_not_found">Δεν βρέθηκε GPX αρχείο που περιέχει αγαπημένα στο {0}</string>
 	<string name="fav_saved_sucessfully">Τα αγαπημένα αποθηκεύτηκαν επιτυχώς στο {0}</string>
 	<string name="no_fav_to_save">Δεν υπάρχουν αγαπημένα σημεία προς αποθήκευση</string>
-	<string name="import_fav">Εισαγωγή</string>
+	<string name="shared_string_import">Εισαγωγή</string>
 	<string name="export_fav">Εξαγωγή</string>
 	<string name="error_occurred_loading_gpx">Σφάλμα κατά τη φόρτωση GPX</string>
 	<string name="send_report">Αποστολή αναφοράς</string>
@@ -842,7 +842,7 @@
 	<string name="search_history_int_streets">Διασταύρωση: {0} x {1} στη(ο) {2}</string>
 	<string name="search_history_building">Κτήριο: {0}, {1}, {2}</string>
 	<string name="favorite">Αγαπημένο</string>
-	<string name="clear_all">Καθαρισμός όλων</string>
+	<string name="shared_string_clear_all">Καθαρισμός όλων</string>
 	<string name="shared_string_history">Ιστορικό</string>
 	<string name="uploading_data">Αποστολή δεδομένων…</string>
 	<string name="uploading">Αποστολή…</string>
@@ -996,8 +996,8 @@
 	<string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
 	<string name="shared_string_yes">Ναι</string>
 	<string name="shared_string_cancel">Ακύρωση</string>
-	<string name="default_buttons_apply">Εφαρμογή</string>
-	<string name="default_buttons_add">Προσθήκη</string>
+	<string name="shared_string_apply">Εφαρμογή</string>
+	<string name="shared_string_add">Προσθήκη</string>
 	<string name="shared_string_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
 	<string name="add_favorite_dialog_default_favourite_name">Αγαπημένο</string>
@@ -1026,7 +1026,7 @@
 	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή δεν είναι απλός κόμβος</string>
 	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
 	<string name="poi_remove_title">Διαγραφή ΣΕ</string>
-	<string name="default_buttons_delete">Διαγραφή</string>
+	<string name="shared_string_delete">Διαγραφή</string>
 	<string name="poi_remove_success">Το ΣΕ έχει διαγραφεί επιτυχώς</string>
 	<string name="poi_action_add">προσθήκη</string>
 	<string name="poi_action_change">αλλαγή</string>
@@ -1040,7 +1040,7 @@
 	<string name="poi_dialog_comment_default">Αλλαγή ΣΕ</string>
 	<string name="poi_dialog_other_tags_message">Όλες οι άλλες ετικέτες διατηρούνται</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Καθαρισμός</string>
+	<string name="shared_string_clear">Καθαρισμός</string>
 	<string name="filter_current_poiButton">Φιλτράρισμα</string>
 	<string name="edit_filter_delete_menu_item">Διαγραφή</string>
 	<string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
@@ -1156,7 +1156,7 @@
     <string name="av_settings">Ρυθμίσεις ήχου/video </string>
     <string name="recording_error">Προέκυψε σφάλμα κατά την εγγραφή </string>
     <string name="recording_camera_not_available">Κάμερα μη διαθέσιμη</string>
-    <string name="av_control_stop">Σταμάτημα</string>
+    <string name="shared_string_control_stop">Σταμάτημα</string>
     <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου video</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για video</string>
@@ -1180,7 +1180,7 @@
     <string name="dist_control_start">Έναρξη</string>
     <string name="precise_routing_mode_descr">Ενεργοποίηση για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Ακόμη περιορισμένο σε σχέση με την απόσταση και αργό.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
-    <string name="av_control_start">Έναρξη</string>
+    <string name="shared_string_control_start">Έναρξη</string>
     <string name="av_use_external_camera_descr">Χρήση εφαρμογής συστήματος για φωτογραφία</string>
     <string name="av_use_external_camera">Χρήση εφαρμογής κάμερας</string>
     <string name="tip_recent_changes_1_1_2_t">Αλλαγές στην 1.1.2:
@@ -1220,7 +1220,7 @@
     <string name="select_address_activity">Επιλογή διεύθυνσης</string>
     <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
     <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
-    <string name="default_buttons_other_actions">Άλλες ενέργειες</string>
+    <string name="shared_string_more_actions">Άλλες ενέργειες</string>
     <string name="av_def_action_choose">Επιλογή κατά την ζήτηση</string>
     <string name="osmand_monitoring_plugin_description">Ενεργοποίηση ιχνηλάτησης και δρομολόγησης σε κατάσταση νάρκης (οθόνη κλειστή) μέσω περιοδικής αφύπνισης της συσκευής GPS. Εμφάνιση ρυθμίσεων που διευκολύνουν την εγγραφή των ταξιδιών σας σε τοπικά αρχεία GPX ή online χρησιμοποιώντας κάποια web υπηρεσία.</string>
     <string name="download_using_mobile_internet">Προς το παρόν το WiFi δεν είναι συνδεδεμένο. Θέλετε να συνεχίσετε τη λήψη με την τρέχουσα σύνδεση internet;</string>
@@ -1238,7 +1238,7 @@
     <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
     <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
     <string name="local_indexes_cat_srtm">Δεδομένα ισοϋψών γραμμών</string>
-    <string name="downloading_file_new">Λήψη …</string>
+    <string name="shared_string_downloading">Λήψη …</string>
 	<string name="delete_point">Διαγραφή σημείου</string>
     <string name="plugin_distance_point_time">χρόνος</string>
     <string name="plugin_distance_point_hdop">ακρίβεια</string>
@@ -1247,7 +1247,7 @@
     <string name="plugin_distance_point">Σημείο</string>
     <string name="gpx_file_name">Όνομα αρχείου GPX</string>
     <string name="gpx_saved_sucessfully">Το αρχείο GPX αποθηκεύτηκε επιτυχώς στο {0}</string>
-    <string name="default_buttons_do_not_show_again">Να μην εμφανιστεί ξανά</string>
+    <string name="shared_string_do_not_show_again">Να μην εμφανιστεί ξανά</string>
     <string name="distance_measurement_start_editing">Έναρξη επεξεργασίας</string>
     <string name="distance_measurement_finish_editing">Τέλος επεξεργασίας</string>
     <string name="distance_measurement_clear_route">Καθαρισμός όλων των σημείων</string>
@@ -1339,11 +1339,11 @@
     <string name="tip_faq_t">Παρακαλώ επισκεφθείτε το https://code.google.com/p/osmand/wiki/FAQ για να δείτε τις συχνές ερωτήσεις.</string>
     <string name="tip_faq">Συχνές ερωτήσεις</string>
     <string name="local_osm_changes_delete_all_confirm">Πρόκειται να διαγράψετε το %1$d των αλλαγών του osm. Είστε σίγουρος;</string>
-    <string name="local_osm_changes_delete_all">Διαγραφή όλων</string>
+    <string name="shared_string_delete_all">Διαγραφή όλων</string>
     <string name="animate_routing_route_not_calculated">Παρακαλώ, υπολογίστε την διαδρομή πρώτα</string>
     <string name="animate_routing_route">Προσομοίωση με χρήση της υπολογισμένης διαδρομής </string>
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
-    <string name="remember_choice">Να θυμάσαι την επιλογή μου</string>
+    <string name="shared_string_remember_my_choice">Να θυμάσαι την επιλογή μου</string>
     <string name="gps_status_eclipsim">Κατάσταση GPS</string>
     <string name="shared_string_and">και</string>
     <string name="shared_string_or">ή</string>
@@ -1546,7 +1546,7 @@
 	<string name="local_index_mi_export">Εξαγωγή</string>
 	<string name="import_file_favourites">Αποθήκευση ως αρχείο GPX ή εισαγωγή στα αγαπημένα;</string>
 	<string name="import_save">Αποθήκευση</string>
-	<string name="share_fav">Διαμοιρασμός</string>
+	<string name="shared_string_share">Διαμοιρασμός</string>
 	<string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
 <string name="stop_navigation_service">Διακοπή</string>
 	<string name="sleep_mode_stop_dialog">Διακοπή κατάστασης νάρκης του GPS;</string>
@@ -1595,7 +1595,7 @@
     <string name="hide_all_waypoints">Αφαίρεση όλων</string>
     <string name="announce_nearby_favorites">Ανακοίνωση κοντινών αγαπημένων</string>
 <string name="download_additional_maps">Λήψη απόντων χαρτών %1$s (%2$d MB);</string>
-    <string name="more">Περισσότερα…</string>
+    <string name="shared_string_more">Περισσότερα…</string>
     <string name="rendering_value_browse_map_name">Επισκόπηση χάρτη</string>  
     <string name="rendering_value_car_name">Αυτοκίνητο</string>
     <string name="rendering_value_bicycle_name">Ποδήλατο</string>
