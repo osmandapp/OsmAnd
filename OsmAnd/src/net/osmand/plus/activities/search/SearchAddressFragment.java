@@ -144,7 +144,7 @@ public class SearchAddressFragment extends Fragment {
 				}
 			});
 			
-			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites");
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem.setIcon(R.drawable.ic_action_fav_dark);
 
