@@ -848,7 +848,6 @@
   <string name="poi_error_poi_not_found">POI не найдена или не является точкой</string>
   <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
   <string name="poi_remove_title">Удаление POI</string>
-  <string name="default_buttons_delete">Удалить</string>
   <string name="poi_remove_success">POI успешно удалена</string>
   <string name="poi_action_add">добавления</string>
   <string name="poi_action_change">изменения</string>

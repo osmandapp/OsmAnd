@@ -55,7 +55,7 @@
 	<string name="poi_error_poi_not_found">Točke ni mogoče najti ali pa usluga ni samostojna točka</string>
 	<string name="poi_remove_confirm_template">Brisanje {0} (vpišite komentar)?</string>
 	<string name="poi_remove_title">Briši POI</string>
-	<string name="default_buttons_delete">Briši</string>
+	<string name="shared_string_delete">Briši</string>
 	<string name="poi_remove_success">POI je bila uspešno izbrisana</string>
 	<string name="poi_action_add">Dodajanje</string>
 	<string name="poi_action_change">Popravljanje</string>

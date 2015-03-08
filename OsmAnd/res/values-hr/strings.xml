@@ -280,7 +280,7 @@
 	<string name="poi_dialog_other_tags_message">Sve druge oznake su sačuvane</string>
 	<string name="default_buttons_commit">Izvršiti</string>
 	<string name="poi_remove_title">Obriši POI</string>
-	<string name="default_buttons_delete">Izbriši</string>
+	<string name="shared_string_delete">Izbriši</string>
 	<string name="poi_remove_success">POI je uspješno izbrisan</string>
 	<string name="poi_action_add">dodaj</string>
 	<string name="poi_action_change">izmjeni</string>

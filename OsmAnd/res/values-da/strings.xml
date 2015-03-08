@@ -961,7 +961,6 @@
 	<string name="poi_action_change">ændre</string>
 	<string name="poi_action_add">tilføj</string>
 	<string name="poi_remove_success">Interessepunkt blev slettet</string>
-	<string name="default_buttons_delete">Slet</string>
 	<string name="poi_remove_title">Slet interessepunkt</string>
 	<string name="poi_create_title">Opret interessepunkt</string>
 	<string name="poi_edit_title">Rediger interessepunkt</string>

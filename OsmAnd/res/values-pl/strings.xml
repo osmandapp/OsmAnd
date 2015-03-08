@@ -654,7 +654,7 @@
   <string name="poi_error_poi_not_found">Nie mogę znaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
   <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
   <string name="poi_remove_title">Usuń POI</string>
-  <string name="default_buttons_delete">Usuń</string>
+  <string name="shared_string_delete">Usuń</string>
   <string name="poi_remove_success">POI został pomyślnie usunięty</string>
   <string name="poi_action_add">dodaj</string>
   <string name="poi_action_change">zmień</string>

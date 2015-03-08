@@ -1070,7 +1070,7 @@
 	<string name="poi_error_poi_not_found">POI-ul nu poate fi găsit sau punctul de interes nu este singular</string>
 	<string name="poi_remove_confirm_template">Ștergeți {0} (introduceți comentariu)?</string>
 	<string name="poi_remove_title">Șterge POI</string>
-	<string name="default_buttons_delete">Șterge</string>
+	<string name="shared_string_delete">Șterge</string>
 	<string name="poi_remove_success">POI-ul a fost șters</string>
 	<string name="poi_action_add">Adaugă</string>
 	<string name="poi_action_change">Schimbă</string>

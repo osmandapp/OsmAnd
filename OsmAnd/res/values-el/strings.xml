@@ -1026,7 +1026,7 @@
 	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή δεν είναι απλός κόμβος</string>
 	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
 	<string name="poi_remove_title">Διαγραφή ΣΕ</string>
-	<string name="default_buttons_delete">Διαγραφή</string>
+	<string name="shared_string_delete">Διαγραφή</string>
 	<string name="poi_remove_success">Το ΣΕ έχει διαγραφεί επιτυχώς</string>
 	<string name="poi_action_add">προσθήκη</string>
 	<string name="poi_action_change">αλλαγή</string>

@@ -425,7 +425,7 @@
 	<string name="poi_edit_title">Muokkaa KP:ta</string>
 	<string name="poi_create_title">Luo KP</string>
 	<string name="poi_remove_title">Poista KP</string>
-	<string name="default_buttons_delete">Poista</string>
+	<string name="shared_string_delete">Poista</string>
 	<string name="poi_remove_success">KP poistettiin onnistuneesti</string>
 	<string name="poi_action_add">lisää</string>
 	<string name="poi_action_change">muuta</string>

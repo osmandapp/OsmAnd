@@ -645,7 +645,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="poi_error_poi_not_found">Không tìm thấy Node hoặc amenity không phải là node đơn</string>
 <string name="poi_remove_confirm_template">Xóa {0} (bình luận)?</string>
 <string name="poi_remove_title">Xóa POI</string>
-<string name="default_buttons_delete">Xóa</string>
+<string name="shared_string_delete">Xóa</string>
 <string name="poi_remove_success">Đã xóa POI thành công</string>
 <string name="poi_action_add">thêm</string>
 <string name="poi_action_change">thay đổi</string>

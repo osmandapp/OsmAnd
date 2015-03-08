@@ -1398,7 +1398,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
 	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
 	<string name="poi_remove_title">Выдаліць POI</string>
-	<string name="default_buttons_delete">Выдаліць</string>
 	<string name="poi_remove_success">POI выдаленая</string>
 	<string name="poi_action_add">дадаць</string>
 	<string name="poi_action_change">зьмяніць</string>

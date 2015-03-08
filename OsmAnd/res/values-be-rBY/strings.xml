@@ -1767,7 +1767,7 @@
 	<string name="poi_error_poi_not_found">POI nie znojdziena abo nie źjaŭliajecca kropkaj</string>
 	<string name="poi_remove_confirm_template">Vydalіć {0} (dadać kamientar)?</string>
 	<string name="poi_remove_title">Vydalіć cіkavostku</string>
-	<string name="default_buttons_delete">Vydalіć</string>
+	<string name="shared_string_delete">Vydalіć</string>
 	<string name="poi_remove_success">Cіkavostka vydalienaja</string>
 	<string name="poi_action_add">dadać</string>
 	<string name="poi_action_change">źmianіć</string>

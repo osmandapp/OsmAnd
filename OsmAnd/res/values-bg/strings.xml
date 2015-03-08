@@ -1500,7 +1500,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="poi_error_poi_not_found">Точката не може да бъде намерена или избраното съдържа повече от една точка</string>
 	<string name="poi_remove_confirm_template">Изтриване на {0} (enter comment)?</string>
 	<string name="poi_remove_title">Изтриване на POI</string>
-	<string name="default_buttons_delete">Изтрий</string>
+	<string name="shared_string_delete">Изтрий</string>
 	<string name="poi_remove_success">POI беше успешно изтрита</string>
 	<string name="poi_action_add">добавяне</string>
 	<string name="poi_action_change">промяна</string>

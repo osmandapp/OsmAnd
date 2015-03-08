@@ -391,7 +391,7 @@
 	<string name="default_buttons_apply">申请</string>
 	<string name="default_buttons_add">加</string>
 	<string name="shared_string_no">没有</string>
-	<string name="default_buttons_delete">删除</string>
+	<string name="shared_string_delete">删除</string>
 	
 	<string name="layer_hillshade">山体阴影层</string>
     <string name="tip_recent_changes_1_1_4_t">1.1.4 中的修改：

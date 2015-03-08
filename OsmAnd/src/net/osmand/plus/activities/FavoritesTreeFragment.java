@@ -384,7 +384,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_dark,
+			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 //			createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
 //					R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -464,7 +464,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
-				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
+				createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 						R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
@@ -537,7 +537,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			Builder b = new AlertDialog.Builder(getActivity());
 			b.setMessage(getString(R.string.favorite_delete_multiple, favoritesSelected.size(), groupsToDelete.size()));
-			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (actionMode != null) {

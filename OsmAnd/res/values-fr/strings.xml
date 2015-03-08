@@ -736,7 +736,7 @@
   <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
   <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
   <string name="poi_remove_title">Supprimer le PI</string>
-  <string name="default_buttons_delete">Supprimer</string>
+  <string name="shared_string_delete">Supprimer</string>
   <string name="poi_remove_success">PI supprimé avec succès</string>
   <string name="poi_action_add">ajouter</string>
   <string name="poi_action_change">modifier</string>

@@ -1041,7 +1041,7 @@
 	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שנותן השירות מפוזר על פני מספר מפרקים</string>
 	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
-	<string name="default_buttons_delete">מחיקה</string>
+	<string name="shared_string_delete">מחיקה</string>
 	<string name="poi_remove_success">נ״ע נמחקה בהצלחה</string>
 	<string name="poi_action_add">הוספה</string>
 	<string name="poi_action_change">שינוי</string>

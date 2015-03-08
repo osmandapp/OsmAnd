@@ -732,7 +732,7 @@
   <string name="poi_error_poi_not_found">No se encontró el nodo o la instalación se compone de varios nodos</string>
   <string name="poi_remove_confirm_template">¿Borrar {0} (añadir comentario)?</string>
   <string name="poi_remove_title">Borrar PDI</string>
-  <string name="default_buttons_delete">Borrar</string>
+  <string name="shared_string_delete">Borrar</string>
   <string name="poi_remove_success">El PDI fue borrado correctamente</string>
   <string name="poi_action_add">añadir</string>
   <string name="poi_action_change">cambiar</string>

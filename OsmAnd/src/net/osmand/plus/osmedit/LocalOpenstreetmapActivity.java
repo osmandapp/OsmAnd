@@ -109,7 +109,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		} else if (item.getItemId() == DELETE_ID) {
 			Builder b = new AlertDialog.Builder(this);
 			b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, dataPoints.size()));
-			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Iterator<OsmPoint> it = dataPoints.iterator();

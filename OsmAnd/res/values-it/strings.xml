@@ -719,7 +719,6 @@
   <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
   <string name="poi_remove_confirm_template">Eliminare {0} (inserire un commento)?</string>
   <string name="poi_remove_title">Eliminazione PDI</string>
-  <string name="default_buttons_delete">Elimina</string>
   <string name="poi_remove_success">PDI eliminato correttamente</string>
   <string name="poi_action_add">aggiungi</string>
   <string name="poi_action_change">cambia</string>

@@ -795,7 +795,7 @@
   <string name="poi_error_poi_not_found">A csomópont nem található, vagy a szórakozás nem egy csomópont</string>
   <string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele)?</string>
   <string name="poi_remove_title">POI törlése</string>
-  <string name="default_buttons_delete">Törlés</string>
+  <string name="shared_string_delete">Törlés</string>
   <string name="poi_remove_success">POI törlése sikeres</string>
   <string name="poi_action_add">hozzáad</string>
   <string name="poi_action_change">módosít</string>

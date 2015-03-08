@@ -934,7 +934,7 @@
   <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų</string>
   <string name="poi_remove_confirm_template">Ištrinti {0} (įveskite komentarą)?</string>
   <string name="poi_remove_title">Ištrinti LV</string>
-  <string name="default_buttons_delete">Ištrinti</string>
+  <string name="shared_string_delete">Ištrinti</string>
   <string name="poi_remove_success">LV buvo sėkmingai ištrinta</string>
   <string name="poi_action_add">pridėti</string>
   <string name="poi_action_change">pakeisti</string>

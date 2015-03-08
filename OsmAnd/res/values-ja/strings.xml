@@ -635,7 +635,7 @@ POIの更新は利用できません</string>
 単独ノードではありません</string>
 <string name="poi_remove_confirm_template">{0} を削除しますか(コメントを入力) ?</string>
 <string name="poi_remove_title">POIを削除</string>
-<string name="default_buttons_delete">削除</string>
+<string name="shared_string_delete">削除</string>
 <string name="poi_remove_success">POIは削除されました</string>
 <string name="poi_action_add">追加</string>
 <string name="poi_action_change">変更</string>

@@ -970,7 +970,7 @@
 	<string name="poi_error_poi_not_found">找不到節點或設施不是單一的節點</string>
 	<string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
 	<string name="poi_remove_title">刪除興趣點</string>
-	<string name="default_buttons_delete">刪除</string>
+	<string name="shared_string_delete">刪除</string>
 	<string name="poi_remove_success">興趣點刪除成功</string>
 	<string name="poi_action_add">新增</string>
 	<string name="poi_action_change">修改</string>

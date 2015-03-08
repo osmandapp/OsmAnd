@@ -859,7 +859,7 @@
   <string name="poi_error_poi_not_found">Node kan nie gevind word nie of gerief is nie \'n enkele node</string>
   <string name="poi_remove_confirm_template">Verwyder {0} (Lewer kommentaar)?</string>
   <string name="poi_remove_title">verwyder Interessante plek</string>
-  <string name="default_buttons_delete">verwyder</string>
+  <string name="shared_string_delete">verwyder</string>
   <string name="poi_remove_success">die interessante plek is suksesvol verwyder</string>
   <string name="poi_action_add">byvoeg</string>
   <string name="poi_action_change">verander</string>

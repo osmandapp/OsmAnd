@@ -858,7 +858,7 @@
   <string name="poi_error_poi_not_found">POI не знайдена або не є точкою</string>
   <string name="poi_remove_confirm_template">Ви дійсно хочете вилучити {0}?</string>
   <string name="poi_remove_title">Вилучення POI</string>
-  <string name="default_buttons_delete">Вилучити</string>
+  <string name="shared_string_delete">Вилучити</string>
   <string name="poi_remove_success">POI успішно вилучено</string>
   <string name="poi_action_add">додати</string>
   <string name="poi_action_change">змінити</string>

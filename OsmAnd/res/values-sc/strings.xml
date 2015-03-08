@@ -1635,7 +1635,7 @@
 	<string name="poi_error_poi_not_found">Su nodu no est istadu agatadu o s’amenidade no est unu nodu sìngulu</string>
 	<string name="poi_remove_confirm_template">Burrare {0} (insertare unu cummentu)?</string>
 	<string name="poi_remove_title">Burradura PDI</string>
-	<string name="default_buttons_delete">Burra</string>
+	<string name="shared_string_delete">Burra</string>
 	<string name="poi_remove_success">PDI burradu curretamente</string>
 	<string name="poi_error_unexpected_template">Errore ispessadu durante s’esecutzione de s’atzione {0}.</string>
 	<string name="default_buttons_commit">Esegui</string>

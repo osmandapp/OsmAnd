@@ -842,7 +842,6 @@
 <string name="poi_error_poi_not_found">노드를 찾을 수 없거나 시설이 단일 노드가 아닙니다</string>
 <string name="poi_remove_confirm_template">{0}를 삭제할까요(정보를 입력하세요)?</string>
 <string name="poi_remove_title">POI 삭제</string>
-<string name="default_buttons_delete">삭제</string>
 <string name="poi_remove_success">POI 가 성공적으로 삭제되었습니다</string>
 <string name="poi_action_add">추가</string>
 <string name="poi_action_change">바꾸기</string>

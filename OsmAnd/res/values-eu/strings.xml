@@ -1141,7 +1141,7 @@
   <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu edo erosotasuna ez da puntu bakar bat</string>
   <string name="poi_remove_confirm_template">{0} ezabatu (sartu iruzkina)?</string>
   <string name="poi_remove_title">POIa ezabatu</string>
-  <string name="default_buttons_delete">Ezabatu</string>
+  <string name="shared_string_delete">Ezabatu</string>
   <string name="poi_remove_success">POIa arrakastaz ezabatu da</string>
   <string name="poi_action_add">gehitu</string>
   <string name="poi_action_change">aldatu</string>

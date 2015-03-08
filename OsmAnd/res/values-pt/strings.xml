@@ -416,7 +416,7 @@
   <string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
   <string name="poi_remove_confirm_template">Você quer mesmo apagar {0} (comentário)?</string>
   <string name="poi_remove_title">Apagar o POI</string>
-  <string name="default_buttons_delete">Apagar</string>
+  <string name="shared_string_delete">Apagar</string>
   <string name="poi_remove_success">POI apagado com sucesso</string>
   <string name="poi_action_add">Adicionar</string>
   <string name="poi_action_change">Modificar</string>

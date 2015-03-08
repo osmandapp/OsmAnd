@@ -617,7 +617,7 @@
 	<string name="poi_create_title">Opprett interessepunkt</string>
 	<string name="poi_remove_confirm_template">Slette {0} (skriv kommentar)?</string>
 	<string name="poi_remove_title">Slett interessepunkt</string>
-	<string name="default_buttons_delete">Slett</string>
+	<string name="shared_string_delete">Slett</string>
 	<string name="poi_remove_success">Interessepunkt ble vellykket slettet</string>
 	<string name="poi_action_add">legg til</string>
 	<string name="poi_action_change">endre</string>

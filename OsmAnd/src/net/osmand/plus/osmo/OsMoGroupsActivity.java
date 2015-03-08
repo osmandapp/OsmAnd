@@ -456,7 +456,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
-					createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
+					createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 							R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}

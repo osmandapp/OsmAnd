@@ -2108,7 +2108,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
 	<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
 	<string name="poi_remove_title">Delete POI</string>
-	<string name="default_buttons_delete">Delete</string>
 	<string name="poi_remove_success">POI was successfully deleted</string>
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>

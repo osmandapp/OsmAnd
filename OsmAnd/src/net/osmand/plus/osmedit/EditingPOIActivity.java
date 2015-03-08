@@ -182,7 +182,7 @@ public class EditingPOIActivity implements DialogProvider {
 		ll.addView(closeChangeset);
 		builder.setView(ll);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
