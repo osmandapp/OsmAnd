@@ -1259,7 +1259,6 @@
     * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
     * Stlačte a podržte na bode pre zobrazenie alebo pridanie popisu.\n
     * Kliknite na iconu merania pre ďaľšie možnosti.</string>
-    <string name="default_buttons_do_not_show_again">Znovu nezobrazovať</string>
     <string name="distance_measurement_start_editing">Začni úpravy</string>
     <string name="distance_measurement_finish_editing">Ukonči úpravy</string>
     <string name="distance_measurement_finish_subtrack">Začnite novú podtrasu</string>

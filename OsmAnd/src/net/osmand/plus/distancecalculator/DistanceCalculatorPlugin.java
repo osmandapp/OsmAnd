@@ -357,7 +357,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if(pref.get()) {
 			Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.use_distance_measurement_help);
-			builder.setNegativeButton(R.string.default_buttons_do_not_show_again, new OnClickListener() {
+			builder.setNegativeButton(R.string.shared_string_do_not_show_again, new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

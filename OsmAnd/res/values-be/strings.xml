@@ -106,7 +106,6 @@
     <string name="osmand_distance_planning_plugin_description">Актывуе віджэт для стварэньня маршрутаў націсканьнямі на мапе (ці выкарыстоўваць/рэдагаваць існуючыя файлы GPX) каб мераць адлегласьць паміж кропкамі. Вынік можа быць захаваны як GPX для далейшага выкарыстаньня.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце , каб адзначыць кропку.\n * Націсьніце і ўтрымлівайце на мапе, каб выдаліць папярэднюю кропку.\n * Націсьніце і ўтрымлівайце на кропцы, каб паглядзець і прыкласьці апісаньне.\n * Націсніце на віджэце вымярэньня, каб убачыць больш дзеяньняў.</string>
-    <string name="default_buttons_do_not_show_again">Больш не паказваць</string>
     <string name="distance_measurement_start_editing">Пачаць рэдагаваньне</string>
     <string name="distance_measurement_finish_editing">Скончыць рэдагаваньне</string>
     <string name="distance_measurement_finish_subtrack">Пачаць новы падтрэк</string>

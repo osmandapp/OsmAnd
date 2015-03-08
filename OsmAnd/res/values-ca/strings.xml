@@ -1158,7 +1158,7 @@
     <string name="gpx_file_name">Nom del fitxer GPX</string>
     <string name="gpx_saved_sucessfully">El fitxer GPX s\'ha desat correctament a {0}</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distàncies i eina de planificació</string>
-    <string name="default_buttons_do_not_show_again">No ho mostris més</string>
+    <string name="shared_string_do_not_show_again">No ho mostris més</string>
     <string name="distance_measurement_start_editing">Comença a editar</string>
     <string name="distance_measurement_finish_editing">Finalitza l\\\'edició</string>
     <string name="distance_measurement_finish_subtrack">Comença una subtraça nova</string>

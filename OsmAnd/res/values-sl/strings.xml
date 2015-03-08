@@ -1248,7 +1248,7 @@
     <string name="plugin_distance_point">Točka</string>
     <string name="gpx_file_name">Ime datoteke GPX</string>
     <string name="gpx_saved_sucessfully">Datoteka GPX uspešno shranjena v {0}</string>
-    <string name="default_buttons_do_not_show_again">Ne prikaži več</string>
+    <string name="shared_string_do_not_show_again">Ne prikaži več</string>
     <string name="distance_measurement_start_editing">Začni urejati</string>
     <string name="distance_measurement_finish_editing">Končaj urejanje</string>
     <string name="distance_measurement_clear_route">Počisti vse točke</string>

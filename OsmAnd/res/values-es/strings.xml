@@ -1274,7 +1274,7 @@
     <string name="osmand_distance_planning_plugin_description">Este extra proporciona un control en la pantalla del mapa que permite crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como GPX, y utilizarse después como indicaciones..</string>
     <string name="osmand_distance_planning_plugin_name">Cálculador de distancia y herramienta de planificación</string>
     <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para suprimir el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
-    <string name="default_buttons_do_not_show_again">No mostrar de nuevo</string>
+    <string name="shared_string_do_not_show_again">No mostrar de nuevo</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Acabar edición</string>
     <string name="distance_measurement_finish_subtrack">Comenzar una nueva subpista</string>

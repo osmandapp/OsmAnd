@@ -1432,7 +1432,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmand_distance_planning_plugin_description">Deze plug-in biedt een kaart scherm hulpmiddel om een route te maken door routepunten op de kaart aan te tikken, of om een bestaand GPX-bestand te gebruik of te wijzigen, en om de afstand tussen de routepunten te berekenen. De resultaten kunnen worden opgeslagen als een GPX-bestand, om later te gebruiken als route navigatie.</string>
     <string name="osmand_distance_planning_plugin_name">Afstand berekenings- en plannings-hulpmiddel</string>
     <string name="use_distance_measurement_help">* Klik om een punt te markeren.\n * Klik lang op de kaart om het vorige punt te verwijderen.\n * Klik lang op een punt om de beschrijving te zien en toe te voegen.\n * Klik op de meet-widget om meer acties te zien.</string>
-    <string name="default_buttons_do_not_show_again">Niet meer tonen</string>
     <string name="distance_measurement_start_editing">Begin met bewerken</string>
     <string name="distance_measurement_finish_editing">Bewerken beëindigen</string>
     <string name="distance_measurement_finish_subtrack">Begin een nieuwe subtrack</string>

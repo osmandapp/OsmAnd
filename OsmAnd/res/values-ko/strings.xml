@@ -1054,7 +1054,6 @@
     <string name="gpx_saved_sucessfully">GPX 파일이 성공적으로 {0} 에 저장</string>
     <string name="osmand_distance_planning_plugin_description">"이 플러그인은 지도 화면 위젯을 제공하며, 지도를 클릭하여 경로를 만들 수 있으며 . 또는 여행을 계획하고 지점 사이의 거리를 측정할 수 있으며, 기존 GPX 파일을  사용하거나 수정할 수 있습니다. 나중에 길안내에 사용할 수 있도록  결과물을 GPX 파일로 저장 할 수있습니다."</string>
     <string name="osmand_distance_planning_plugin_name">거리 계산 및 플래닝 도구</string>
-    <string name="default_buttons_do_not_show_again">다시 표시하지 않음</string>
     <string name="distance_measurement_start_editing">편집 시작</string>
     <string name="distance_measurement_finish_editing">편집 끝내기</string>
     <string name="distance_measurement_finish_subtrack">새로운 subtrack(세그먼트) 시작</string>

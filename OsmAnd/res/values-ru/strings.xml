@@ -1238,7 +1238,6 @@
     <string name="plugin_distance_point_speed">скорость</string>
     <string name="plugin_distance_point_hdop">точность</string>
     <string name="plugin_distance_point">Точка</string>
-    <string name="default_buttons_do_not_show_again">Больше не показывать</string>
     <string name="distance_measurement_start_editing">Начать редактирование</string>
     <string name="distance_measurement_finish_editing">Закончить редактирование</string>
     <string name="distance_measurement_clear_route">Очистить все точки</string>

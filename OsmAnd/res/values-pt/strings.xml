@@ -1260,7 +1260,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 Pressione e segure no mapa para apagar pontos anteriores.\n
 Pressione e segure no ponto para ver e anexar descrição.\n
 Clique no widget de medição para ver mais ações.</string>
-    <string name="default_buttons_do_not_show_again">Não mostrar novamente</string>
+    <string name="shared_string_do_not_show_again">Não mostrar novamente</string>
     <string name="distance_measurement_start_editing">Comece edição</string>
     <string name="distance_measurement_finish_editing">Finalize edição</string>
     <string name="distance_measurement_finish_subtrack">Comece uma nova subrota</string>

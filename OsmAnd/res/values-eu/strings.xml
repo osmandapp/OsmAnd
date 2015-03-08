@@ -71,7 +71,7 @@
   <string name="osmand_distance_planning_plugin_description">Bideak sortu (edo erabili / eraldatu iadanik sortutako GPX fitxategiak) puntuen harteko distantzia neurtzeko. GPX bezala gorde, GPX bideak planifikatzeko erabili daiteke.</string>
   <string name="osmand_distance_planning_plugin_name">Distantzia kalkulagailua &amp; Planifikatzailea</string>
   <string name="use_distance_measurement_help">* Pantailan sakatu puntu bat markatzeko.\n * Mapan sakatuta mantendu iadanik dagoen puntu bat ezabatzeko.\n * Puntu batean sakatuta mantendu deskribapena ikusi eta atxikitzeko.\n * Neurgailuan klik egin ekintza gehiago ikusteko.</string>
-  <string name="default_buttons_do_not_show_again">Ez erakutsi berriro</string>
+  <string name="shared_string_do_not_show_again">Ez erakutsi berriro</string>
   <string name="distance_measurement_start_editing">Editatzen hasi</string>
   <string name="distance_measurement_finish_editing">Editatzen bukatu</string>
   <string name="distance_measurement_finish_subtrack">Azpibide berri bat hasi</string>

@@ -1254,7 +1254,7 @@
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
 \n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis.
 \n * Kliknij na widgecie obliczania odległości, aby zobaczyć więcej czynności.</string>
-    <string name="default_buttons_do_not_show_again">Nie pokazuj więcej</string>
+    <string name="shared_string_do_not_show_again">Nie pokazuj więcej</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
     <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>

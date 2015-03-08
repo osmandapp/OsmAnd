@@ -1166,7 +1166,7 @@
     <string name="gpx_saved_sucessfully">GPX ფაილი წარმატებით იქნა შენახული {0}</string>
     <string name="osmand_distance_planning_plugin_description">გზების შექმნა (ან არსებული GPX ფაილების გამოყენება/შეცვლა) წერტილებს შორის მანძილის დასათვლელად. GPX შენახვა შეიძლება გამოყენებულ იქნას GPS გზების დასათვლელად.</string>
     <string name="osmand_distance_planning_plugin_name">მანძილის დასათვლელი &amp; დასაგეგმი ხელსაწყო</string>
-    <string name="default_buttons_do_not_show_again">აღარ მაჩვენო</string>
+    <string name="shared_string_do_not_show_again">აღარ მაჩვენო</string>
     <string name="distance_measurement_start_editing">ჩასწორების დაწყება</string>
     <string name="distance_measurement_finish_editing">ჩასწორების დამთავრება</string>
     <string name="distance_measurement_finish_subtrack">ახალი ქვეგზის დაწყება</string>

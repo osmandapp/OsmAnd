@@ -58,7 +58,7 @@
         * Натиснете и задръжте върху картата за изтриване на предна точка.\n
         * Натиснете и задръжте върху точка за разглеждане и добавяне на описание.\n
         * Докоснете върху добавката за повече опции.</string>
-    <string name="default_buttons_do_not_show_again">Не показвай отново</string>
+    <string name="shared_string_do_not_show_again">Не показвай отново</string>
     <string name="distance_measurement_start_editing">Започни редактиране</string>
     <string name="distance_measurement_finish_editing">Край на редактирането</string>
     <string name="distance_measurement_finish_subtrack">Започни нов частичен трак</string>

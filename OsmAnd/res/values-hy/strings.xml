@@ -64,7 +64,7 @@
     <string name="plugin_distance_point">Կետ</string>
     <string name="gpx_file_name">GPX ֆայլի անունը</string>
     <string name="gpx_saved_sucessfully">{0} GPX ֆայլը հաջողությամբ պահվել է</string>
-    <string name="default_buttons_do_not_show_again">Կրկին ցույց չտալ</string>
+    <string name="shared_string_do_not_show_again">Կրկին ցույց չտալ</string>
     <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
     <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
     <string name="distance_measurement_clear_route">Մաքրել բոլոր կետերը</string>

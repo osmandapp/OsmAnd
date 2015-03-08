@@ -934,7 +934,7 @@
     <string name="plugin_distance_point_speed">brzina</string>
     <string name="distance_measurement_save_gpx">Spremi kao GPX</string>
     <string name="distance_measurement_load_gpx">Otvori postojeći GPX</string>
-    <string name="default_buttons_do_not_show_again">Ne prikazuj ponovo</string>
+    <string name="shared_string_do_not_show_again">Ne prikazuj ponovo</string>
     <string name="plugin_distance_point">Točka</string>
     <string name="gpx_saved_sucessfully">GPX datoteka je uspješno spremljena na {0}</string>
     <string name="destination_point">Odredište %1$s</string>

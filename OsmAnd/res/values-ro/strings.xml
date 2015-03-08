@@ -1277,7 +1277,7 @@
     <string name="gpx_file_name">Nume fișier GPX</string>
     <string name="gpx_saved_sucessfully">Fișier GPX salvat cu succes în {0}</string>
     <string name="osmand_distance_planning_plugin_name">Unealtă de calcularea distanței și planificare</string>
-    <string name="default_buttons_do_not_show_again">Nu mai afișa</string>
+    <string name="shared_string_do_not_show_again">Nu mai afișa</string>
     <string name="distance_measurement_save_gpx">Salvează ca și GPX</string>
     <string name="distance_measurement_load_gpx">Deschide GPX existent</string>
     <string name="wait_current_task_finished">Vă rog așteptați până când se termină sarcina curentă</string>

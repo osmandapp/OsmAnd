@@ -1232,7 +1232,7 @@
     <string name="gpx_saved_sucessfully">Soubor GPX úspěšně uložen do {0}</string>
     <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánovač</string>
     <string name="use_distance_measurement_help">* Klikněte pro označení bodu.\n * Stiskněte dlouze na mapě pro smazání předchozího bodu.\n * Stiskněte dlouze bod pro zobrazení a přidání popisky.\n * Klikněte na modul měření pro další možnosti.</string>
-    <string name="default_buttons_do_not_show_again">Již nezobrazovat</string>
+    <string name="shared_string_do_not_show_again">Již nezobrazovat</string>
     <string name="distance_measurement_start_editing">Začít editaci</string>
     <string name="distance_measurement_finish_editing">Ukončit editaci</string>
     <string name="distance_measurement_finish_subtrack">Začít novou podtrasu</string>

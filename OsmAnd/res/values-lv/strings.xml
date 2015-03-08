@@ -1127,7 +1127,7 @@
     <string name="gpx_saved_sucessfully">GPX fails tika saglabāts {0}</string>
     <string name="osmand_distance_planning_plugin_description">Izveidot ceļa posmus (vai izmantot/labot esošos GPX failus), lai mērītu attālumu starp tiem. Var tik saglabāti kā GPX faili, lai plānotu GPX maršrutus.</string>
     <string name="osmand_distance_planning_plugin_name">Distances kalkulators &amp; plānotājs</string>
-    <string name="default_buttons_do_not_show_again">Vairs nerādīt</string>
+    <string name="shared_string_do_not_show_again">Vairs nerādīt</string>
     <string name="distance_measurement_start_editing">Sākt labot</string>
     <string name="distance_measurement_finish_editing">Beigt labot</string>
     <string name="distance_measurement_finish_subtrack">Jauns apakšposms</string>

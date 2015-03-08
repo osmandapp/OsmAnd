@@ -487,7 +487,7 @@
     <string name="plugin_distance_point">点</string>
     <string name="gpx_file_name">GPX 文件名</string>
     <string name="gpx_saved_sucessfully">GPX 文件已成功保存至 {0}</string>
-    <string name="default_buttons_do_not_show_again">下次不再显示</string>
+    <string name="shared_string_do_not_show_again">下次不再显示</string>
     <string name="distance_measurement_start_editing">开始编辑</string>
     <string name="distance_measurement_finish_editing">完成编辑</string>
     <string name="distance_measurement_clear_route">清除所有点</string>

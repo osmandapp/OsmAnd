@@ -677,7 +677,7 @@
     <string name="plugin_distance_point">Piste</string>
     <string name="gpx_file_name">GPX tiedoston nimi</string>
     <string name="gpx_saved_sucessfully">GPX tiedosto tallennettin onnistuneesti: {0}</string>
-    <string name="default_buttons_do_not_show_again">Älä näytä enää uudestaan</string>
+    <string name="shared_string_do_not_show_again">Älä näytä enää uudestaan</string>
     <string name="distance_measurement_start_editing">Aloita muokkaus</string>
     <string name="tip_map_styles">Karttatyylit</string>
 	<string name="about_version">Versio:</string>

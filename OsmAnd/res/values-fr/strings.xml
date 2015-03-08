@@ -1318,7 +1318,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de l\'enregistrer au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
-    <string name="default_buttons_do_not_show_again">Ne plus afficher</string>
+    <string name="shared_string_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
     <string name="local_osm_changes_backup_failed">Échec de la sauvegarde des modifications OSM</string>
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>

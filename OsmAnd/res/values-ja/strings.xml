@@ -760,7 +760,7 @@ POIの更新は利用できません</string>
         * マップ上で長タップすると以前の地点を削除できます。\n
         * 地点を長タップすると詳細を見ることができます。\n
         * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
-    <string name="default_buttons_do_not_show_again">これ以降表示しない</string>
+    <string name="shared_string_do_not_show_again">これ以降表示しない</string>
     <string name="distance_measurement_start_editing">編集を開始</string>
     <string name="distance_measurement_finish_editing">編集を終了</string>
     <string name="distance_measurement_finish_subtrack">新しいサブトラックを開始</string>

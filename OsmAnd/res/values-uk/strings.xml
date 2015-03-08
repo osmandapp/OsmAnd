@@ -1315,7 +1315,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="plugin_distance_point">Точка</string>
     <string name="gpx_file_name">Назва GPX файлу</string>
     <string name="gpx_saved_sucessfully">GPX файл збережено в {0}</string>
-    <string name="default_buttons_do_not_show_again">Не показувати знову</string>
+    <string name="shared_string_do_not_show_again">Не показувати знову</string>
     <string name="distance_measurement_start_editing">Розпочати редагування</string>
     <string name="distance_measurement_finish_editing">Завершити редагування</string>
     <string name="distance_measurement_clear_route">Очистити всі точки</string>

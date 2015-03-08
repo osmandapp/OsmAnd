@@ -478,7 +478,7 @@
     <string name="osmand_distance_planning_plugin_description">Cree camiños (ou empregue ou modifique ficheiros GPX existentes) para medir a distancia entre puntos. Gárdeos como GPX, pois poden ser empregados para planificar rutas en GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distancias e ferramenta de planificación</string>
     <string name="use_distance_measurement_help">* Toque para marcar un punto.\n * Manteña premido o mapa para eliminar un punto anterior.\n * Manteña premido un punto para ver e anexar unha descrición.\n * Prema no trebello de medición para ver máis accións.</string>
-    <string name="default_buttons_do_not_show_again">Non mostrar de novo</string>
+    <string name="shared_string_do_not_show_again">Non mostrar de novo</string>
     <string name="distance_measurement_start_editing">Comezar a editar</string>
     <string name="distance_measurement_finish_editing">Rematar coa edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar unha subpista nova</string>

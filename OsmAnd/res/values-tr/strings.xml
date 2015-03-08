@@ -861,7 +861,7 @@
     <string name="plugin_distance_point">Mevki</string>
     <string name="gpx_file_name">GPX dosya adı</string>
     <string name="osmand_distance_planning_plugin_name">Mesafe hesaplayıcı ve Planlama aracı</string>
-    <string name="default_buttons_do_not_show_again">Tekrar gösterme</string>
+    <string name="shared_string_do_not_show_again">Tekrar gösterme</string>
     <string name="distance_measurement_start_editing">Düzenlemeye başla</string>
     <string name="distance_measurement_finish_editing">Düzenlemeyi bitir</string>
     <string name="distance_measurement_finish_subtrack">Yeni bir alt yola başla</string>

@@ -1306,7 +1306,7 @@
     <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti/keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
     <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
-    <string name="default_buttons_do_not_show_again">Daugiau neberodyti</string>
+    <string name="shared_string_do_not_show_again">Daugiau neberodyti</string>
     <string name="distance_measurement_start_editing">Pradėti redagavimą</string>
     <string name="distance_measurement_finish_editing">Baigti redagavimą</string>
     <string name="distance_measurement_finish_subtrack">Pradėti naują segmentą</string>

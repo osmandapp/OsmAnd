@@ -1224,7 +1224,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="local_osm_changes_backup_failed">Berg van OSM veranderings het gefaal</string>
     <string name="local_osm_changes_backup">Berg as OSM verandering</string>
     <string name="use_distance_measurement_help">* Tik om punt te merk.\n * Tik en hou op die kaart om vorige punt te verwyder.\n * Tik en hou op punt om beskrywing te sien of verander.\n * Tik op meting widget om meer aksies te sien.</string>
-    <string name="default_buttons_do_not_show_again">Moet nie weer wys nie</string>
+    <string name="shared_string_do_not_show_again">Moet nie weer wys nie</string>
     <string name="distance_measurement_start_editing">Begin verandering</string>
     <string name="distance_measurement_finish_editing">Eindig verandering</string>
     <string name="distance_measurement_finish_subtrack">Begin `n nuwe sub-spoor</string>

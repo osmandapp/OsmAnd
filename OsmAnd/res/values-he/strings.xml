@@ -1243,7 +1243,7 @@
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר בהצלחה אל {0}</string>
     <string name="osmand_distance_planning_plugin_description">יש ליצור נתיב (או להשתמש / לשנות קובצי GPX קיימים) כדי למדוד את המרחק בין נקודות. לשמור כ־GPX, ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
-    <string name="default_buttons_do_not_show_again">לא להציג שוב</string>
+    <string name="shared_string_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
     <string name="distance_measurement_finish_editing">סיום העריכה</string>
     <string name="distance_measurement_finish_subtrack">תת מסלול/נקודה הבאים</string>

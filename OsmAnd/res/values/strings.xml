@@ -763,7 +763,6 @@
         * Press and hold on the map to delete previous point.\n
         * Press and hold on point to view and attach description.\n
         * Click on measurement widget to see more actions.</string>
-    <string name="default_buttons_do_not_show_again">Do not show again</string>
     <string name="distance_measurement_start_editing">Start editing</string>
     <string name="distance_measurement_finish_editing">Finish editing</string>
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>

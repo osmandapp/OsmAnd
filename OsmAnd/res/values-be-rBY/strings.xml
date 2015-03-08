@@ -566,7 +566,7 @@
     <string name="osmand_distance_planning_plugin_description">Stvarać šliachі (cі vykarystoŭvać/redahavać іsnujučyja fajly GPX) kab mierać adliehlaść pamіž kropkamі. Zachoŭvać u GPX і potym karystacca kab plianavać šliach pa GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Prylada dlia raźlіku adliehlaściej j plianavańnia</string>
     <string name="use_distance_measurement_help">* Nacіsnіcie , kab adznačyć kropku.\n * Nacіśnіcie і ŭtrymlіvajcie na mapie, kab vydalіć papiaredniuju kropku.\n * Nacіśnіcie і ŭtrymlіvajcie na kropcy, kab pahliadzieć і pryklaścі apіsańnie.\n * Nacіsnіcie na vіdžecie vymiareńnia, kab ubačyć boĺš dziejańniaŭ.</string>
-    <string name="default_buttons_do_not_show_again">Boĺš nie pakazvać</string>
+    <string name="shared_string_do_not_show_again">Boĺš nie pakazvać</string>
     <string name="distance_measurement_start_editing">Pačać redahavańnie</string>
     <string name="distance_measurement_finish_editing">Skončyć redahavańnie</string>
     <string name="distance_measurement_finish_subtrack">Pačać novy padtrek</string>

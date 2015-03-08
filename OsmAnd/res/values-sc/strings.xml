@@ -244,7 +244,7 @@
         * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
         * Carca e tene carcau supra de unu puntu pro bìdere e alliongiare una descrizione.\n
         * Carca supra su widget de medidura pro bìdere àteras atziones possibiles.</string>
-    <string name="default_buttons_do_not_show_again">Non ammustrare dae nou</string>
+    <string name="shared_string_do_not_show_again">Non ammustrare dae nou</string>
     <string name="distance_measurement_start_editing">Incumintza a mudare</string>
     <string name="distance_measurement_finish_editing">Fini de mudare</string>
     <string name="distance_measurement_finish_subtrack">Incumintza una sutacaminera noa</string>

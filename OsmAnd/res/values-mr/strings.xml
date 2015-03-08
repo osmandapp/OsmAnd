@@ -371,7 +371,7 @@
     <string name="search_street_in_neighborhood_cities">रस्ता जवळपास्च्या शहरात शोधा</string>
     <string name="plugin_distance_point_speed">वेग</string>
     <string name="plugin_distance_point_ele">उंची</string>
-    <string name="default_buttons_do_not_show_again">पुन्हा दाखवू नका</string>
+    <string name="shared_string_do_not_show_again">पुन्हा दाखवू नका</string>
     <string name="other_location">इतर</string>
     <string name="cancel_navigation">दिशादर्शन थांबवा</string>
     <string name="clear_destination">इच्छित स्थळ काढून टाका</string>

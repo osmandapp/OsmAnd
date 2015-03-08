@@ -1009,7 +1009,7 @@
         * 在地圖上按住去刪除先前的標點。\n
         * 在標點上按住以檢視並附加敘述。\n
         * 在測量小工具上點擊可看到更多作用。</string>
-    <string name="default_buttons_do_not_show_again">不要再顯示</string>
+    <string name="shared_string_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
