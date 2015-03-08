@@ -1246,7 +1246,7 @@
 	<string name="failed_op">feilet</string>
 	<string name="osm_settings_descr">Spesifiser innstillinger for Openstreetmap.org (OSM) som er nødvendige for bidrag til OSM</string>
 	<string name="shared_string_disabled">Deaktivert</string>
-	<string name="disable_plugin">Aktivert</string>
+	<string name="shared_string_enabled">Aktivert</string>
 	<string name="shared_string_enable">Aktiver</string>
 	<string name="shared_string_disable">Deaktiver</string>
 	<string name="plugin_description_title">Beskrivelse</string>

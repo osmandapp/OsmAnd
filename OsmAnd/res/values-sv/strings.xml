@@ -1790,7 +1790,7 @@
     <string name="my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
     <string name="shared_string_disabled">Inaktiverad</string>
-	<string name="disable_plugin">Aktiverad</string>
+	<string name="shared_string_enabled">Aktiverad</string>
 <string name="plugin_settings_button_caption">Inställningar</string>
 <string name="plugin_description_title">Beskrivning</string>
 	<string name="edit_group">Redigera grupp</string>

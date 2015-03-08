@@ -1894,7 +1894,7 @@
     <string name="parking_place">停車地點</string>
     <string name="remove_the_tag">移除標記</string>
     <string name="shared_string_disabled">已停用</string>
-	<string name="disable_plugin">已啟用</string>
+	<string name="shared_string_enabled">已啟用</string>
 <string name="plugin_description_title">描述</string>
 	<string name="plugin_settings_button_caption">設定</string>
 <string name="edit_group">編輯群組</string>

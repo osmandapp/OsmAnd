@@ -1885,7 +1885,7 @@
     <string name="parking_place">Lloc d\'aparcament</string>
     <string name="remove_the_tag">Treure l\'etiqueta</string>
     <string name="shared_string_disabled">Desactivat</string>
-	<string name="disable_plugin">Activat</string>
+	<string name="shared_string_enabled">Activat</string>
 <string name="plugin_description_title">Descripció</string>
 	<string name="plugin_settings_button_caption">Configuració</string>
 <string name="edit_group">Edició del grup</string>

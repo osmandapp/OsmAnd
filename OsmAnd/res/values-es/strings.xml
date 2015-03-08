@@ -1912,7 +1912,7 @@
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
     <string name="shared_string_disabled">Desactivado</string>
-	<string name="disable_plugin">Activado</string>
+	<string name="shared_string_enabled">Activado</string>
 <string name="plugin_description_title">Descripción</string>
 	<string name="plugin_settings_button_caption">Opciones</string>
 <string name="edit_group">Editar grupo</string>

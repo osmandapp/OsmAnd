@@ -1992,7 +1992,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="proxy_port_title">Vrata proxy-ja</string>
 	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
 	<string name="shared_string_disabled">Onemogočeno</string>
-	<string name="disable_plugin">Omogočeno</string>
+	<string name="shared_string_enabled">Omogočeno</string>
 <string name="plugin_ski_name">Smučarske karte</string>
     <string name="plugin_nautical_name">Pomorska karta</string>
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>

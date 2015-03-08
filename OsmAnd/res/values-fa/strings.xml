@@ -2102,7 +2102,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="plugin_description_title">توضیح</string>
 	<string name="shared_string_disable">غیرفعال کردن</string>
 	<string name="shared_string_enable">فعال کردن</string>
-	<string name="disable_plugin">فعال</string>
+	<string name="shared_string_enabled">فعال</string>
 	<string name="shared_string_disabled">غیرفعال</string>
 	<string name="export">صادرکردن</string>
 	<string name="voices">اعلان‌های صوتی</string>
