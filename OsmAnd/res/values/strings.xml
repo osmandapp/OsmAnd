@@ -1349,10 +1349,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_online_data">Online and tile maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-	<string name="map_settings">Map Settings</string>
-	<string name="map_settings_descr">Configure the map display</string>
-	<string name="osmand_monitoring_description">Shows the button and settings facilitating to record your trips to a local GPX file or to an online web service.</string>
-	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
 	<string name="prefs_plugins">Plugins</string>
