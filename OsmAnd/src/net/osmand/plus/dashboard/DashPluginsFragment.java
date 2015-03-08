@@ -2,6 +2,7 @@ package net.osmand.plus.dashboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.AndroidUtils;
@@ -68,17 +69,17 @@ public class DashPluginsFragment extends DashBaseFragment {
 		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledPlugins();
 		Collections.shuffle(notActivePlugins);
 		plugins = new ArrayList<OsmandPlugin>();
-		for (OsmandPlugin plugin : notActivePlugins) {
-			if (plugin instanceof OsmandDevelopmentPlugin) {
-				continue;
-			}
-			plugins.add(plugin);
-			break;
-		}
-		for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
-			if (plugins.size() >= 5) {
-				break;
-			}
+		Iterator<OsmandPlugin> nit = notActivePlugins.iterator();
+		Iterator<OsmandPlugin> it = OsmandPlugin.getEnabledPlugins().iterator();
+		addPluginsToLimit(nit, 1);
+		addPluginsToLimit(it, 5);
+		addPluginsToLimit(nit, 5);
+	}
+
+
+	private void addPluginsToLimit(Iterator<OsmandPlugin> it, int l) {
+		while(plugins.size() < l && it.hasNext()) {
+			OsmandPlugin plugin = it.next();
 			if (plugin instanceof OsmandDevelopmentPlugin) {
 				continue;
 			}
@@ -91,6 +92,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public void onOpenDash() {
 		View contentView = getView();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
+		initPlugins();
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
 		pluginsContainer.removeAllViews();
 		for (OsmandPlugin p : plugins) {
