@@ -64,7 +64,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 	}
 
 	@Override
-	public void onOpenUpdate() {
+	public void onOpenDash() {
 		refreshData();
 	}
 

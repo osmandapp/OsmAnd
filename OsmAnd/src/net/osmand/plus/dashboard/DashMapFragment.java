@@ -60,6 +60,13 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	protected void startMapActivity() {
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
+	
+	@Override
+	public void onOpenDash() {
+		if (!getMyApplication().isApplicationInitializing()) {
+			updateMapImage();
+		}		
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -111,15 +118,6 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		}
 	}
 
-
-	@Override
-	public void onResume() {
-		super.onResume();
-        if (!getMyApplication().isApplicationInitializing()) {
-			updateMapImage();
-		}
-
-    }
 
 	@Override
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {

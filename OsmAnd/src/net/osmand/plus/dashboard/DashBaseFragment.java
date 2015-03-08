@@ -29,7 +29,26 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 	
-	public void onOpenUpdate() {}
+	public abstract void onOpenDash() ;
+	
+	public void onCloseDash() {
+	}
+	
+	@Override
+	public final void onPause() {
+		// use on close 
+		super.onPause();
+		onCloseDash();
+	}
+	
+	@Override
+	public final void onResume() {
+		// use on open update
+		super.onResume();
+		if(dashboard != null && dashboard.isVisible()) {
+			onOpenDash();
+		}
+	}
 	
 	
 	public void onLocationCompassChanged(Location l, double compassValue) {

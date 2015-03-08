@@ -123,6 +123,12 @@ public class DashboardOnMap {
 			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
 			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
 			fabButton.hideFloatingActionButton();
+			for (WeakReference<DashBaseFragment> df : fragList) {
+				if (df.get() != null) {
+					df.get().onCloseDash();
+				}
+			}
+			
 		}
 	}
 
@@ -221,6 +227,15 @@ public class DashboardOnMap {
 	
 
 	private void addOrUpdateDashboardFragments() {
+		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
+		while(it.hasNext()) {
+			WeakReference<DashBaseFragment> df = it.next();
+			if(df.get() != null) {
+				df.get().onOpenDash();
+			} else {
+				it.remove();
+			}
+		}
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,

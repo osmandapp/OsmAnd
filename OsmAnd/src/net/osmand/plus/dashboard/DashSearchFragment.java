@@ -32,11 +32,6 @@ public class DashSearchFragment extends DashBaseFragment {
 		return view;
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-
-	}
 
 	protected void searchActivity(final Activity activity, final OsmAndAppCustomization appCustomization, int tab) {
 		final Intent search = new Intent(activity, appCustomization.getSearchActivity());
@@ -77,5 +72,10 @@ public class DashSearchFragment extends DashBaseFragment {
 				searchActivity(activity, appCustomization, SearchActivity.HISTORY_TAB_INDEX);
 			}
 		});
+	}
+	
+	@Override
+	public void onOpenDash() {
+		
 	}
 }

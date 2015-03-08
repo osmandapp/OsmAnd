@@ -87,10 +87,9 @@ public class DashPluginsFragment extends DashBaseFragment {
 		return contentView;
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
 
+	@Override
+	public void onOpenDash() {
 		View contentView = getView();
 		if (contentView == null) {
 			return;
@@ -99,9 +98,9 @@ public class DashPluginsFragment extends DashBaseFragment {
 		for (int pluginIndex = 0; pluginIndex < plugins.size(); pluginIndex++) {
 			View pluginView = pluginsContainer.getChildAt(pluginIndex);
 			updatePluginState(pluginView, plugins.get(pluginIndex));
-		}
+		}		
 	}
-
+	
 	private void updatePluginState(View pluginView, OsmandPlugin plugin) {
 		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);

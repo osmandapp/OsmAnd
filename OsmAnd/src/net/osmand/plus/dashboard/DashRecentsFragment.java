@@ -32,8 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis
- * on 24.11.2014.
+ * Created by Denis on 24.11.2014.
  */
 public class DashRecentsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_RECENTS_FRAGMENT";
@@ -47,8 +46,8 @@ public class DashRecentsFragment extends DashLocationFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.fav_text)).setTypeface(typeface);
-		((TextView) view.findViewById(R.id.fav_text)).setText(
-				Algorithms.capitalizeFirstLetterAndLowercase(getString(R.string.recents)));
+		((TextView) view.findViewById(R.id.fav_text)).setText(Algorithms
+				.capitalizeFirstLetterAndLowercase(getString(R.string.recents)));
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
@@ -56,9 +55,9 @@ public class DashRecentsFragment extends DashLocationFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				
+
 				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				//search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
+				// search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
 				activity.startActivity(search);
@@ -71,12 +70,10 @@ public class DashRecentsFragment extends DashLocationFragment {
 		}
 		return view;
 	}
-	
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		//This is used as origin for both Fav-list and direction arrows
+	public void onOpenDash() {
+		// This is used as origin for both Fav-list and direction arrows
 		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();
 		} else {
@@ -85,17 +82,13 @@ public class DashRecentsFragment extends DashLocationFragment {
 		setupRecents();
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	public void setupRecents(){
+	public void setupRecents() {
 		View mainView = getView();
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity().getApplicationContext());
+		SearchHistoryHelper helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity()
+				.getApplicationContext());
 		points = helper.getHistoryEntries();
 		arrows.clear();
-		if (points.size() == 0){
+		if (points.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
@@ -104,28 +97,26 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 		LinearLayout recents = (LinearLayout) mainView.findViewById(R.id.items);
 		recents.removeAllViews();
-		if (points.size() > 3){
+		if (points.size() > 3) {
 			points = points.subList(0, 3);
 		}
 		for (final HistoryEntry historyEntry : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.search_history_list_item, null, false);
-			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, 
-					loc, getActivity(), getMyApplication());
+			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, loc, getActivity(), getMyApplication());
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), historyEntry.getLat(), historyEntry.getLon(),
-							historyEntry.getName());
+					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), historyEntry.getLat(),
+							historyEntry.getLon(), historyEntry.getName());
 				}
 			});
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getMyApplication().getSettings().setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(), 15,
-							historyEntry.getName(), true,
-							historyEntry); //$NON-NLS-1$
+					getMyApplication().getSettings().setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(),
+							15, historyEntry.getName(), true, historyEntry); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
@@ -140,14 +131,14 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 		for (int i = 0; i < arrows.size(); i++) {
 			arrows.get(i).setVisibility(View.VISIBLE);
-			updateArrow(getActivity(), loc, new LatLon(points.get(i).getLat(), points.get(i).getLon()),
-					arrows.get(i), 10, R.drawable.ic_destination_arrow, heading);
+			updateArrow(getActivity(), loc, new LatLon(points.get(i).getLat(), points.get(i).getLon()), arrows.get(i),
+					10, R.drawable.ic_destination_arrow, heading);
 		}
 	}
 
 	@Override
 	public boolean updateCompassValue(float value) {
-		if (super.updateCompassValue(value)){
+		if (super.updateCompassValue(value)) {
 			updateArrows();
 		}
 		return true;

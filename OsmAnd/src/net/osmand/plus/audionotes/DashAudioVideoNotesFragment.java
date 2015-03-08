@@ -58,19 +58,13 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	}
 	
 	@Override
-	public void onOpenUpdate() {
+	public void onOpenDash() {
 		if (plugin == null) {
 			plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		}
 		setupNotes();		
 	}
 	
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
 	public void setupNotes() {
 		View mainView = getView();
 		if (plugin == null){

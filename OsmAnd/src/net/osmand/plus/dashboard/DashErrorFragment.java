@@ -84,6 +84,6 @@ public class DashErrorFragment extends DashBaseFragment {
 	}
 
 	@Override
-	public void onOpenUpdate() {
+	public void onOpenDash() {
 	}
 }

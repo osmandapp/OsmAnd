@@ -8,25 +8,20 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -71,19 +66,20 @@ public class DashTrackFragment extends DashBaseFragment {
 		});
 		return view;
 	}
-
+	
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		updateEnable = true;
 		setupGpxFiles();
 	}
 	
+	
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onCloseDash() {
 		updateEnable = false;
 	}
+
+	
 	
 	
 

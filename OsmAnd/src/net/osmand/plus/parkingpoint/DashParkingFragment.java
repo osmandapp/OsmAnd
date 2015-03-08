@@ -20,8 +20,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.MapUtils;
 
 /**
- * Created by Denis on
- * 26.01.2015.
+ * Created by Denis on 26.01.2015.
  */
 public class DashParkingFragment extends DashLocationFragment {
 	ParkingPositionPlugin plugin;
@@ -49,24 +48,19 @@ public class DashParkingFragment extends DashLocationFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-
-
-
 		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();
 		} else {
 			loc = new LatLon(0f, 0f);
 		}
-
 		updateParkingPosition();
 	}
 
 	private void updateParkingPosition() {
 		View mainView = getView();
-		if (plugin == null || plugin.getParkingPosition() == null){
+		if (plugin == null || plugin.getParkingPosition() == null) {
 			mainView.setVisibility(View.GONE);
 			return;
 		} else {
@@ -75,16 +69,16 @@ public class DashParkingFragment extends DashLocationFragment {
 
 		LatLon position = plugin.getParkingPosition();
 
-		int dist = (int) (MapUtils.getDistance(position.getLatitude(), position.getLongitude(),
-				loc.getLatitude(), loc.getLongitude()));
+		int dist = (int) (MapUtils.getDistance(position.getLatitude(), position.getLongitude(), loc.getLatitude(),
+				loc.getLongitude()));
 		String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication());
 		((TextView) mainView.findViewById(R.id.distance)).setText(distance);
-		//TODO add parking time
-		String parking_name = plugin.getParkingType() ?
-				getString(R.string.parking_place) : getString(R.string.parking_place);
+		// TODO add parking time
+		String parking_name = plugin.getParkingType() ? getString(R.string.parking_place)
+				: getString(R.string.parking_place);
 		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
-		if (loc != null){
+		if (loc != null) {
 			direction.setVisibility(View.VISIBLE);
 			updateArrow(getActivity(), loc, position, direction, 10, R.drawable.ic_destination_arrow, heading);
 		}
@@ -92,10 +86,10 @@ public class DashParkingFragment extends DashLocationFragment {
 
 	@Override
 	public boolean updateCompassValue(float value) {
-		if (plugin == null){
+		if (plugin == null) {
 			return true;
 		}
-		if (super.updateCompassValue(value)){
+		if (super.updateCompassValue(value)) {
 			updateParkingPosition();
 		}
 		return true;
@@ -104,8 +98,7 @@ public class DashParkingFragment extends DashLocationFragment {
 	@Override
 	public void updateLocation(Location location) {
 		super.updateLocation(location);
-
-		if (plugin == null){
+		if (plugin == null) {
 			return;
 		}
 		updateParkingPosition();
