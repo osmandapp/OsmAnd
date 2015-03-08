@@ -395,7 +395,6 @@
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
-    <string name="visible_element">Show on map</string>
     <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation</string>
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
