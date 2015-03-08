@@ -309,7 +309,7 @@ public class MapActivityActions implements DialogProvider {
 				R.drawable.ic_action_search_light).reg();
 		adapter.item(R.string.context_menu_item_share_location).icons(
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).reg();
-		adapter.item(R.string.context_menu_item_add_favorite).icons(
+		adapter.item(R.string.shared_string_add_to_favorites).icons(
 				R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light ).reg();
 		
 		
@@ -353,7 +353,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
 					new ShareLocation(mapActivity).run();
-				} else if (standardId == R.string.context_menu_item_add_favorite) {
+				} else if (standardId == R.string.shared_string_add_to_favorites) {
 					addFavouritePoint(latitude, longitude);
 				}
 			}

@@ -482,7 +482,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public void prepareLocationMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
 		filter(adapter, R.string.context_menu_item_directions_to,
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
-				R.string.context_menu_item_share_location/*, R.string.context_menu_item_add_favorite*/);
+				R.string.context_menu_item_share_location/*, R.string.shared_string_add_to_favorites*/);
 		MapActivityLayers layers = mapActivity.getMapLayers();
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof StageFavorite) {
 			final StageFavorite sf = ((StageFavorite)layers.getContextMenuLayer().getFirstSelectedObject());
