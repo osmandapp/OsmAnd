@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.view.ViewGroup;
-import android.widget.*;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
@@ -58,7 +56,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
 	
@@ -592,17 +599,16 @@ public class MapActivityActions implements DialogProvider {
 			mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
 				@Override
 				public void onDrawerSlide(View view, float v) {
-
 				}
 
 				@Override
 				public void onDrawerOpened(View view) {
-					//need to refresh drawer if it
-					//was opened with slide, not button
-					if (mDrawerList != null && refreshDrawer){
-						if (currentDrawer == DrawerType.WAYPOINTS){
+					// need to refresh drawer if it
+					// was opened with slide, not button
+					if (mDrawerList != null && refreshDrawer) {
+						if (currentDrawer == DrawerType.WAYPOINTS) {
 							showWaypointsInDrawer(false);
-						} else if (currentDrawer == DrawerType.MAIN_MENU){
+						} else if (currentDrawer == DrawerType.MAIN_MENU) {
 							final ContextMenuAdapter cm = createMainOptionsMenu();
 							prepareOptionsMenu(cm);
 						} else {
@@ -950,14 +956,14 @@ public class MapActivityActions implements DialogProvider {
 
 	public void disableDrawer(){
 		if(mDrawerLayout == null) {
-			return;
+			prepareStartOptionsMenu();
 		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
 	public void enableDrawer(){
 		if(mDrawerLayout == null) {
-			return;
+			prepareStartOptionsMenu();
 		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 	}

@@ -336,7 +336,9 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (dashboardOnMap.isVisible()) {
+		if(dashboardOnMap.clearBackAction()) {
+			dashboardOnMap.setDashboardVisibility(true);
+		} else if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.setDashboardVisibility(false);
 		} else if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
@@ -892,7 +894,10 @@ public class MapActivity extends AccessibleActivity {
 
 	public static void launchMapActivityMoveToTop(Context activity) {
 		if (activity instanceof MapActivity) {
-			((MapActivity) activity).getDashboard().setDashboardVisibility(false);
+			if (((MapActivity) activity).getDashboard().isVisible()) {
+				((MapActivity) activity).getDashboard().saveBackAction();
+				((MapActivity) activity).getDashboard().setDashboardVisibility(false);
+			}
 			((MapActivity) activity).readLocationToShow();
 		} else {
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())

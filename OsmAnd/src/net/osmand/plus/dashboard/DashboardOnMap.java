@@ -10,9 +10,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.FloatingActionButton;
 import android.content.Intent;
 import android.os.Build;
@@ -29,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
@@ -56,6 +60,8 @@ public class DashboardOnMap {
 	private float heading;
 	private boolean mapLinkedToLocation;
 	private float mapRotation;
+	private boolean inLocationUpdate = false;
+	private boolean saveBackAction;
 
 
 	public DashboardOnMap(MapActivity ma) {
@@ -86,7 +92,10 @@ public class DashboardOnMap {
 				mapActivity.getMapActions().prepareConfigureMap();
 				mapActivity.getMapActions().toggleDrawer();				
 			}
-		}); 
+		});
+		
+		
+		
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(mapActivity)
@@ -150,13 +159,16 @@ public class DashboardOnMap {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			addOrUpdateDashboardFragments();
 			setupActionBar();
+			updateDownloadBtn();
 			dashboardView.setVisibility(View.VISIBLE);
 			fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
+			
 			mapActivity.getMapActions().disableDrawer();
 			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
 			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.GONE);
 			updateLocation(true, true, false);
+			
 		} else {
 			mapActivity.getMapActions().enableDrawer();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
@@ -172,6 +184,44 @@ public class DashboardOnMap {
 			
 		}
 	}
+
+	private void updateDownloadBtn() {
+		Button btn = (Button) dashboardView.findViewById(R.id.map_download_button);
+		String filter = null;
+		String txt = "";
+		OsmandMapTileView mv = mapActivity.getMapView();
+		if (mv != null && !mapActivity.getMyApplication().isApplicationInitializing()) {
+			if (mv.getZoom() < 11 && !mapActivity.getMyApplication().getResourceManager().containsBasemap()) {
+				filter = "basemap";
+				txt = mapActivity.getString(R.string.shared_string_download) + " "
+						+ mapActivity.getString(R.string.base_world_map);
+			} else {
+				DownloadedRegionsLayer dl = mv.getLayerByClass(DownloadedRegionsLayer.class);
+				if (dl != null) {
+					StringBuilder btnName = new StringBuilder();
+					filter = dl.getFilter(btnName);
+					txt = btnName.toString();
+				}
+			}
+		}
+
+		btn.setText(txt);
+		btn.setVisibility(filter == null ? View.GONE : View.VISIBLE);
+		final String f = filter;
+		btn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				setDashboardVisibility(false);
+				final Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getDownloadIndexActivity());
+				intent.putExtra(DownloadActivity.FILTER_KEY, f.toString());
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+				mapActivity.startActivity(intent);
+			}
+		});
+	}
+
 
 	private void setupActionBar() {
 		final Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.bottomControls);
@@ -341,7 +391,7 @@ public class DashboardOnMap {
 		}
 	}
 	
-	private boolean inLocationUpdate = false;
+	
 	public void updateLocation(final boolean centerChanged, final boolean locationChanged, final boolean compassChanged){
 		if(inLocationUpdate) {
 			return ;
@@ -375,6 +425,18 @@ public class DashboardOnMap {
 		fragList.add(new WeakReference<DashBaseFragment>(dashBaseFragment));
 	}
 
+
+	public void saveBackAction() {
+		saveBackAction = true;
+	}
+	
+	public boolean clearBackAction() {
+		if(saveBackAction) {
+			saveBackAction = false;
+			return true;
+		}
+		return false;
+	}
 
 	
 }

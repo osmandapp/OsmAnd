@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:id="@+id/animateContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal" >
 
@@ -45,15 +45,11 @@
             </LinearLayout>
         </net.osmand.plus.dashboard.NotifyingScrollView>
 
-        <ImageButton
-            android:id="@+id/map_layers_button"
-            android:layout_width="@dimen/map_button_size"
-            android:layout_height="@dimen/map_button_size"
-            android:layout_gravity="top"
-            android:layout_marginLeft="@dimen/map_button_margin"
-            android:layout_marginTop="@dimen/map_button_margin"
-            android:background="@drawable/roundedbutton"
-            android:src="@drawable/ic_action_layers_light" />
+        <include
+            android:id="@+id/map_part_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dashboard_map_top_padding"
+            layout="@layout/map_view_on_dashboard" />
     </LinearLayout>
 
 </FrameLayout>
