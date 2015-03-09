@@ -2000,4 +2000,5 @@
 	<string name="shared_string_photo">照片</string>
 
 	<string name="simulate_your_location">模擬您的位置</string>
+    <string name="short_location_on_map">緯度 %1$s\n 經度 %2$s</string>
     </resources>
