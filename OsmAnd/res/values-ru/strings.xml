@@ -1958,4 +1958,5 @@
 	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
 	<string name="selected_tracks">Выбранные</string>
 	<string name="share_note">Поделиться заметкой</string>
+	<string name="shared_string_release">Дата выпуска</string>
 	</resources>
