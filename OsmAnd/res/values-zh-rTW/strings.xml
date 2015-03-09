@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -871,8 +871,6 @@
 	<string name="mark_point">目的地</string>
 	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 的錯誤</string>
 	<string name="show_osm_bugs">顯示 OpenStreet 的錯誤</string>
-	
-	<string name="shared_string_add_to_favorites">加到我的最愛</string>
 	<string name="use_english_names_descr">在本地語言或英語名稱之間選擇</string>
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>

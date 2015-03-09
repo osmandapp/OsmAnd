@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -1050,8 +1050,6 @@
 	<string name="mark_point">Mål</string>
 	<string name="show_osm_bugs_descr">Visa OpenStreetBuggar på kartan</string>
 	<string name="show_osm_bugs">Visa OpenStreetBuggar</string>
-	
-	<string name="shared_string_add_to_favorites">Lägg till i favoriter</string>
 	<string name="use_english_names_descr">Välj mellan inhemska och engelska namn på kartorna</string>
 	<string name="use_english_names">Namn på engelska</string>
 	<string name="app_settings">Appinställningar</string>
@@ -1064,15 +1062,10 @@
 	<string name="map_tile_source">Källa för kartbitar</string>
 	<string name="map_source">Kartkälla</string>
 	<string name="show_location">Visa plats</string>
-	
-	
 	<string name="show_gps_coordinates_text">Visa GPS-koordinater på kartan</string>
 	<string name="use_internet_to_download_tile">Använd Internet för att hämta kartrutor som saknas</string>
 	<string name="app_description">Navigationsapp</string>
 	<string name="shared_string_exit">Avsluta</string>
-	
-	
-	
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
 	<string name="searchpoi_activity">Välj intressepunkt</string>

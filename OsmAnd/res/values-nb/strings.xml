@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -532,8 +532,6 @@
 	<string name="mark_point">Mål</string>
 	<string name="show_osm_bugs_descr">Vis OpenStreet-feil på kart</string>
 	<string name="show_osm_bugs">Vis OpenStreet-feil</string>
-	
-	<string name="shared_string_add_to_favorites">Legg til i favoritter</string>
 	<string name="use_english_names_descr">Velg mellom lokale og engelske navn</string>
 	<string name="use_english_names">Bruk engelske navn i kartene</string>
 	<string name="app_settings">Programinnstillinger</string>
