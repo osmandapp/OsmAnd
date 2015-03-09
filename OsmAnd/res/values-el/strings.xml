@@ -238,7 +238,6 @@
 	<string name="show_ruler_level">﻿Εμφάνιση χάρακα</string>	
 	<string name="info_button">Πληροφορίες</string>
 	<string name="back_to_location">﻿Επιστροφή στη θέση</string>
-	<string name="shared_string_help">Βοήθεια</string>
 	<string name="show_details">Εμφάνιση λεπτομερειών</string>
 	<string name="accessibility_extensions_descr">Επεκτάσεις προσβασιμότητας για παλιές εκδόσεις Android</string>
 	<string name="accessibility_extensions">Επεκτάσεις προσβασιμότητας</string>
@@ -443,8 +442,6 @@
 	<string name="update_poi_file_not_found">Δεν βρέθηκε τοπικό αρχείο για τη διατήρηση των αλλαγών στα ΣΕ και δεν μπορεί να δημιουργηθεί.</string>
 	<string name="button_upgrade_osmandplus">Αναβάθμιση OsmAnd+</string>
 	<string name="map_version_changed_info">Ο διακομιστής περιέχει αρχεία χαρτών που δεν είναι συμβατά με αυτή την έκδοση της εφαρμογής. Για να τα κατεβάσετε και να τα χρησιμοποιήσετε, αναβαθμίστε την εφαρμογή σε νεότερη έκδοση.</string>
-	<string name="shared_string_rename">Μετονομασία</string>
-	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_current_location_search">Αναζήτηση θέσης…</string>
 	<string name="search_position_current_location_found">Θέση (βρέθηκε)</string>
@@ -471,8 +468,6 @@
 	<string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε με επιτυχία ως \'%1$s\'.</string>
 	<string name="filename_input">Όνομα αρχείου: </string>
 	<string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
-	<string name="shared_string_save">Αποθήκευση</string>
-	
 	<string name="local_index_upload_gpx_description">Ανεβάστε τα αρχεία GPX στη κοινότητα του OSM. Θα χρησιμοποιηθούν για τη βελτίωση του χάρτη.</string>
 	<string name="local_index_items_uploaded">%1$d από %2$d αντικείμενο(α) απεστάλησαν επιτυχώς.</string>
 	<string name="local_index_mi_upload_gpx">Αποστολή στο OSM</string>
@@ -504,7 +499,6 @@
 	<string name="local_index_mi_backup">Απενεργοποίηση</string>
 	
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
-	<string name="shared_string_download">Λήψη</string>
 	
 	<string name="local_index_poi_data">Δεδομένα ΣΕ</string>
 	<string name="local_index_address_data">Δεδομένα διευθύνσεων</string>
@@ -688,7 +682,6 @@
 	<string name="items_were_selected">{0} αντικείμενο(α) επιλέχτηκαν</string>
 	<string name="filter_existing_indexes">Κατεβασμένα</string>
 	
-	<string name="shared_string_select_all">Επιλογή όλων</string>
 	<string name="shared_string_refresh">Ανανέωση</string>
 	<string name="fast_route_mode">Ταχύτερη διαδρομή</string>
 	<string name="fast_route_mode_descr">Ενεργοποίηση για υπολογισμό ταχύτερης διαδρομής ή για απενεργοποίηση συντομότερης διαδρομής </string>
@@ -740,8 +733,6 @@
 	<string name="fav_file_to_load_not_found">Δεν βρέθηκε GPX αρχείο που περιέχει αγαπημένα στο {0}</string>
 	<string name="fav_saved_sucessfully">Τα αγαπημένα αποθηκεύτηκαν επιτυχώς στο {0}</string>
 	<string name="no_fav_to_save">Δεν υπάρχουν αγαπημένα σημεία προς αποθήκευση</string>
-	<string name="shared_string_import">Εισαγωγή</string>
-	
 	<string name="error_occurred_loading_gpx">Σφάλμα κατά τη φόρτωση GPX</string>
 	<string name="send_report">Αποστολή αναφοράς</string>
 	<string name="none_region_found">Δεν υπάρχουν offline δεδομένα περιοχών στην κάρτα SD. Λήψη περιοχών από το Διαδίκτυο.</string>
@@ -751,7 +742,6 @@
 	<string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
 	<string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
 	<string name="layer_route">Διαδρομή</string>
-	<string name="shared_string_favorites">Αγαπημένα</string>
 	<string name="layer_osm_bugs">Σφάλματα OSM</string>
 	<string name="layer_transport">Στάσεις ΜΜΜ</string>
 	<string name="layer_poi">Σημ Ενδ…</string>
@@ -840,8 +830,6 @@
 	<string name="search_history_int_streets">Διασταύρωση: {0} x {1} στη(ο) {2}</string>
 	<string name="search_history_building">Κτήριο: {0}, {1}, {2}</string>
 	<string name="favorite">Αγαπημένο</string>
-	<string name="shared_string_clear_all">Καθαρισμός όλων</string>
-	<string name="shared_string_history">Ιστορικό</string>
 	<string name="uploading_data">Αποστολή δεδομένων…</string>
 	<string name="uploading">Αποστολή…</string>
 	<string name="search_nothing_found">Δε βρέθηκε τίποτα</string>
@@ -860,10 +848,6 @@
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
-	<string name="shared_string_download_successful">Επιτυχής λήψη</string>
-	
-	
-	
 	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών…</string>
 	<string name="list_index_files_was_not_loaded">Η λίστα των περιοχών δεν έχει ανακτηθεί από το osmand.net.</string>
 	
@@ -897,7 +881,6 @@
 	<string name="arrived_at_destination">Φτάσατε στον προορισμό σας</string>
 	<string name="invalid_locations">Οι συντεταγμένες δεν είναι έγκυρες!</string>
 	<string name="go_back_to_osmand">Επιστροφή στον χάρτη OsmAnd</string>
-	<string name="shared_string_close">Κλείσιμο</string>
 	<string name="loading_data">Φόρτωση δεδομένων…</string>
 	<string name="reading_indexes">Ανάγνωση τοπικών δεδομένων…</string>
 	<string name="previous_run_crashed">Η τελευταία εκτέλεση του OsmAnd κατέρρευσε. Το αρχείο καταγραφής είναι στο {0}. Παρακαλώ αναφέρετε το συμβάν και επισυνάψτε το αρχείο καταγραφής.</string>
@@ -915,7 +898,6 @@
 	
 	<string name="osm_settings">Επεξεργασία OSM</string>
 	<string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
-	<string name="shared_string_settings">Ρυθμίσεις</string>
 	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους στην SD τώρα</string>
 	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους GPX</string>
 	<string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
@@ -950,10 +932,6 @@
 	<string name="show_gps_coordinates_text">Εμφάνιση συντεταγμένων GPS στο χάρτη</string>
 	<string name="use_internet_to_download_tile">Χρήση Διαδικτύου για λήψη πλακιδίων χάρτη που λείπουν</string>
 	<string name="app_description">Εφαρμογή πλοήγησης</string>
-	<string name="shared_string_exit">Έξοδος</string>
-	
-	
-	
 	<string name="search_button">Αναζήτηση</string>
 	<string name="search_activity">Αναζήτηση</string>
 	<string name="searchpoi_activity">Επιλέξτε ΣΕ</string>
@@ -976,8 +954,6 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="shared_string_show_on_map">Εμφάνιση στο χάρτη</string>
-	
 	<string name="search_address_top_text">Επιλογή διεύθυνσης</string>
 	<string name="search_address_region">Περιοχή</string>
 	<string name="search_address_city">Πόλη</string>
@@ -993,7 +969,6 @@
 	<string name="shared_string_yes">Ναι</string>
 	<string name="shared_string_cancel">Ακύρωση</string>
 	<string name="shared_string_apply">Εφαρμογή</string>
-	<string name="shared_string_add">Προσθήκη</string>
 	<string name="shared_string_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Εισαγωγή ονόματος αγαπημένου</string>
 	<string name="add_favorite_dialog_default_favourite_name">Αγαπημένο</string>
@@ -1022,7 +997,6 @@
 	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή δεν είναι απλός κόμβος</string>
 	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
 	<string name="poi_remove_title">Διαγραφή ΣΕ</string>
-	<string name="shared_string_delete">Διαγραφή</string>
 	<string name="poi_remove_success">Το ΣΕ έχει διαγραφεί επιτυχώς</string>
 	<string name="poi_action_add">προσθήκη</string>
 	<string name="poi_action_change">αλλαγή</string>
@@ -1036,7 +1010,6 @@
 	<string name="poi_dialog_comment_default">Αλλαγή ΣΕ</string>
 	<string name="poi_dialog_other_tags_message">Όλες οι άλλες ετικέτες διατηρούνται</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="shared_string_clear">Καθαρισμός</string>
 	<string name="filter_current_poiButton">Φιλτράρισμα</string>
 	
 	<string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
@@ -1191,7 +1164,6 @@
 	<string name="prefer_in_routing_title">Προτίμηση…</string>
 	<string name="prefer_in_routing_descr">Προτίμηση αυτοκινητοδρόμων</string>
     <string name="max_speed_none">καμία</string>
-    <string name="shared_string_map">Χάρτης</string>
     <string name="access_arrival_time">Ώρα άφιξης</string>
     <string name="item_checked">επιλεγμένο</string>
     <string name="item_unchecked">μη επιλεγμένο</string>
@@ -1335,14 +1307,10 @@
     <string name="tip_faq_t">Παρακαλώ επισκεφθείτε το https://code.google.com/p/osmand/wiki/FAQ για να δείτε τις συχνές ερωτήσεις.</string>
     <string name="tip_faq">Συχνές ερωτήσεις</string>
     <string name="local_osm_changes_delete_all_confirm">Πρόκειται να διαγράψετε το %1$d των αλλαγών του osm. Είστε σίγουρος;</string>
-    <string name="shared_string_delete_all">Διαγραφή όλων</string>
     <string name="animate_routing_route_not_calculated">Παρακαλώ, υπολογίστε την διαδρομή πρώτα</string>
     <string name="animate_routing_route">Προσομοίωση με χρήση της υπολογισμένης διαδρομής </string>
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
     <string name="shared_string_remember_my_choice">Να θυμάσαι την επιλογή μου</string>
-    
-    <string name="shared_string_and">και</string>
-    <string name="shared_string_or">ή</string>
 	<string name="auto_zoom_none">Χωρίς αυτόματη εστίαση</string>
 	<string name="auto_zoom_far">Μεσαία εμφάνιση</string>
 	<string name="map_magnifier">Μεγεθυντής χάρτη</string>
@@ -1585,7 +1553,6 @@
     
     
 <string name="download_additional_maps">Λήψη απόντων χαρτών %1$s (%2$d MB);</string>
-    <string name="shared_string_more">Περισσότερα…</string>
     <string name="rendering_value_browse_map_name">Επισκόπηση χάρτη</string>  
     <string name="rendering_value_car_name">Αυτοκίνητο</string>
     <string name="rendering_value_bicycle_name">Ποδήλατο</string>
@@ -1627,7 +1594,6 @@
     <string name="rendering_category_others">Άλλα χαρακτηριστικά χάρτη</string>
     <string name="map_widget_right">Δεξιός πίνακας</string>
 	<string name="map_widget_left">Αριστερός πίνακας</string>
-    <string name="shared_string_show">Εμφάνιση</string>
 	<string name="configure_map">Διαμόρφωση χάρτη</string>
     <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
 	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
@@ -1658,7 +1624,6 @@
     <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
     <string name="shared_string_dismiss">Απόρριψη</string>
     
-	<string name="shared_string_show_all">ΕΜΦ ΌΛΩΝ</string>
 	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>
     <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
 	<string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>
@@ -1688,7 +1653,6 @@
     <string name="gps_status">Κατάσταση GPS</string>
     <string name="points">Σημεία</string>
     <string name="tracks">Ίχνη</string>
-    <string name="shared_string_my_location">Η τοποθεσία μου</string>
     <string name="recents">ΠΡΟΣΦΑΤΑ</string>
 	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
 	<string name="edit_group">Επεξεργασία ομάδας</string>
