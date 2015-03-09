@@ -264,13 +264,7 @@ public class DashboardOnMap {
 			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 			mapActivity.getMapActions().toggleDrawer();
 		} else if(item.getItemId() == DIRECTIONS_ID) {
-			RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-			if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
-			} else {
-				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				mapActivity.refreshMap();
-			}
+			navigationAction();
 		} else if(item.getItemId() == CONFIGURE_SCREEN_ID) {
 			mapActivity.getMapActions().prepareConfigureScreen();
 			mapActivity.getMapActions().toggleDrawer();
@@ -282,6 +276,17 @@ public class DashboardOnMap {
 			return false;
 		}
 		return true;
+	}
+
+
+	public void navigationAction() {
+		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+		} else {
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.refreshMap();
+		}
 	}
 
 
