@@ -738,7 +738,7 @@
 	<string name="tip_location_sharing_t">Del placeringen af interessante steder på rejsen med familie og venner via \'Menu\' → \'Brug placeringer\' → \'Del placering\'.
 \n\n Derefter vælges en måde at dele placering på. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
 	</string>
-	<string name="tip_favorites">Favoritsteder</string>
+	<string name="tip_favorites">Favoritpunkter</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	
@@ -1222,7 +1222,7 @@
 	\n* Nederste venstre knap på kortskærmen erstatter menuknappen
     </string>
     <string name="monitoring_settings">Optag ture</string>
-    <string name="monitoring_settings_descr">Indstil hvordan dine ture optages</string>
+    <string name="monitoring_settings_descr">Indstil hvordan ture optages</string>
     
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
     
@@ -1580,7 +1580,7 @@
     <string name="osmo_edit_color">Visningsfarve</string>
     <string name="osmo_sign_in">Log på</string>
     <string name="osmo_create_groups_confirm">For at oprette grupper, skal man være registreret som bruger af OsMo.</string>
-    <string name="osmo_credentials_not_valid">Dine OsMo legitimationsoplysninger er ikke gyldige.</string>
+    <string name="osmo_credentials_not_valid">OsMo legitimationsoplysninger er ikke gyldige.</string>
     <string name="osmo_regenerate_login_ids_confirm">Er det sikkert at du vil forny det personlige id? Alle enheder, der er tilsluttet vil ikke være i stand til at spore dig mere.</string>
     <string name="osmo_regenerate_login_ids">Forny bruger-id</string>
     <string name="osmo_cancel_moving_target">Annuller bevægeligt mål</string>
@@ -1906,16 +1906,16 @@
 	<string name="shared_string_settings">Indstillinger</string>
 	<string name="shared_string_history">Historik</string>
 	<string name="shared_string_select_on_map">Vælg på kort</string>
-	<string name="shared_string_select_all">Vælg alt</string>
+	<string name="shared_string_select_all">Vælg alle</string>
 	<string name="shared_string_deselect">Fravælg</string>
-	<string name="shared_string_deselect_all">Fravælg alt</string>
+	<string name="shared_string_deselect_all">Fravælg alle</string>
 	<string name="shared_string_clear">Ryd</string>
 	
 	<string name="shared_string_save">Gem</string>
 	<string name="shared_string_save_as_gpx">Gem som GPX-spor</string>
 	<string name="shared_string_rename">Omdøb</string>
 	<string name="shared_string_delete">Slet</string>
-	<string name="shared_string_delete_all">Slet alt</string>
+	<string name="shared_string_delete_all">Slet alle</string>
 	<string name="shared_string_share">Del</string>
 	<string name="shared_string_add">Tilføj</string>
 	<string name="shared_string_apply">Anvend</string>
@@ -1937,14 +1937,14 @@
 	<string name="shared_string_close">Luk</string>
 	<string name="shared_string_exit">Afslut</string>
 	<string name="shared_string_show">Vis</string>
-	<string name="shared_string_show_all">Vis alt</string>
+	<string name="shared_string_show_all">Vis alle</string>
 	<string name="shared_string_show_on_map">Vis på kort</string>
 	<string name="shared_string_map">Kort</string>
 	<string name="shared_string_favorite">Favorit</string>
 	<string name="shared_string_favorites">Favoritter</string>
 	<string name="shared_string_add_to_favorites">Føj til Favoritter</string>
 	
-	<string name="shared_string_my_places">Mine steder</string>
+	<string name="shared_string_my_places">Steder</string>
 	
 	
 	
