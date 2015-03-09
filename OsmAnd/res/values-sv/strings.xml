@@ -158,7 +158,6 @@
 <string name="gpx_tags_txt">Taggar</string>
 <string name="gpx_description_txt">Beskrivning</string>
 <string name="validate_gpx_upload_name_pwd">Vänligen ange OSM användarnamn och lösenord för att ladda upp GPX-filer.</string>
-<string name="shared_string_help">Hjälp</string>
 <string name="show_details">Visa detaljer</string>
 <string name="accessibility_extensions_descr">Tillgänglighetstillägg för gamla Android-versioner</string>
 <string name="accessibility_extensions">Tillgänglighetstillägg</string>
