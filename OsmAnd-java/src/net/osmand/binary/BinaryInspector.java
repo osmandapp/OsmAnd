@@ -70,7 +70,7 @@ public class BinaryInspector {
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
-//				"-zoom=16",
+				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16",
 				"-vstats",
 				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"

@@ -1197,6 +1197,7 @@ public class BinaryMapIndexReader {
 				id = codedIS.readSInt64();
 				if(READ_STATS) {
 					req.stat.addTagHeader(OsmandOdb.MapData.ID_FIELD_NUMBER, 0);
+					req.stat.lastObjectHeaderInfo -= 1;
 					req.stat.lastObjectIdSize += CodedOutputStream.computeSInt64SizeNoTag(id);
 				}
 				break;

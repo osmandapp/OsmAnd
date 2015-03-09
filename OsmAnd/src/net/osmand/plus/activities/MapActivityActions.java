@@ -689,6 +689,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void prepareConfigureMap() {
+		currentDrawer = DrawerType.CONFIGURE_MAP;
 		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
 	}
 
@@ -873,7 +874,6 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						currentDrawer = DrawerType.CONFIGURE_MAP;
 						prepareConfigureMap();
 						return false;
 					}

@@ -70,6 +70,7 @@
 	<string name="shared_string_exit">Exit</string>
 	<string name="shared_string_show">Show</string>
 	<string name="shared_string_show_all">Show all</string>
+	<string name="shared_string_collapse">Collapse</string>
 	<string name="shared_string_show_on_map">Show on map</string>
 	<string name="shared_string_map">Map</string>
 	<string name="shared_string_favorite">Favorite</string>

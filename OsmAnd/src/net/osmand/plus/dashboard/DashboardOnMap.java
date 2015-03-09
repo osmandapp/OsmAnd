@@ -336,6 +336,7 @@ public class DashboardOnMap {
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
 				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity));
+		showFragment(manager, fragmentTransaction, DashWaypointsFragment.TAG, DashWaypointsFragment.class);
 		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class);
 		showFragment(manager, fragmentTransaction, DashRecentsFragment.TAG, DashRecentsFragment.class);
 		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);
