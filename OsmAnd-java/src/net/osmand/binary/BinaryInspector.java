@@ -73,7 +73,8 @@ public class BinaryInspector {
 //				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16",
 				"-vstats",
-				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
+				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"
+//				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -699,6 +700,9 @@ public class BinaryInspector {
 			for (int i = 0; i < obj.getTypes().length; i++) {
 				int tp = obj.getTypes()[i];
 				TagValuePair pair = obj.mapIndex.decodeType(tp);
+				if(pair == null) {
+					continue;
+				}
 				processKey(pair.toSimpleString(), st, obj.getObjectNames(), cnt, names);
 			}
 			st.clearObjectStats();
