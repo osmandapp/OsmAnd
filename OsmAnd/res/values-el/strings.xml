@@ -1620,8 +1620,6 @@
     <string name="osmo_device_not_found">Η συσκευή δεν βρέθηκε</string>
     <string name="anonymous_user">Ανώνυμος χρήστης</string>
     <string name="logged_as">Συνδεδεμένος ως %1$s</string>
-	<string name="shared_string_never">Ποτέ</string>
-    
     <string name="impassable_road">Αποφυγή δρόμων…</string>
     <string name="rendering_category_hide">Απόκρυψη</string>
     <string name="rendering_category_routes">Δρομολόγια</string>

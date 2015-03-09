@@ -1703,8 +1703,6 @@
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
-    <string name="shared_string_never">Aldrig</string>
-    
 	<string name="osmo_use_https">Använd HTTPS</string>
 	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
     <string name="home_button">Hem</string>
