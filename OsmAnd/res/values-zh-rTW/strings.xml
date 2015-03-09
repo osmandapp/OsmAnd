@@ -978,7 +978,6 @@
         * 在地圖上按住去刪除先前的標點。\n
         * 在標點上按住以檢視並附加敘述。\n
         * 在測量小工具上點擊可看到更多作用。</string>
-    <string name="shared_string_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
@@ -1007,7 +1006,6 @@
     <string name="select_address_activity">選取地址</string>
     <string name="favourites_list_activity">選取我的最愛</string>
     <string name="local_openstreetmap_act_title">OSM 修改</string>
-    <string name="shared_string_more_actions">其它的作用</string>
     
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
@@ -1018,7 +1016,6 @@
     </string>
     <string name="item_checked">勾選</string>
     <string name="item_unchecked">取消勾選</string>
-    <string name="shared_string_map">地圖</string>
     <string name="max_speed_none">無</string>
     <string name="prefer_in_routing_descr">高速公路優先權</string>
     <string name="prefer_in_routing_title">優先權…</string>
@@ -1082,8 +1079,6 @@
     <string name="recording_context_menu_play">播放</string>
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
-    <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">開始</string>
     <string name="map_widget_av_notes">音訊/視訊注解</string>
     <string name="osmand_srtm_short_description_80_chars">用於離線等高線的 OsmAnd 外掛元件</string>
     <string name="map_widget_distancemeasurement">測量距離</string>
@@ -1136,7 +1131,6 @@
     <string name="distance_measurement_clear_route">清除所有的標點</string>
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
-    <string name="shared_string_downloading">下載中  …</string>
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
@@ -1379,14 +1373,11 @@
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
-    <string name="shared_string_and">和</string>
-    <string name="shared_string_or">或</string>
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     <string name="osmodroid_refresh">更新頻道</string>
     <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d osm 的更改。您是否確定？</string>
-    <string name="shared_string_delete_all">全部刪除</string>
     <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
     <string name="tip_faq">常見問題</string>
     <string name="app_mode_hiking">徒步</string>
@@ -1717,7 +1708,6 @@
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
-    <string name="shared_string_more">更多…</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     
     <string name="waypoints">中途點</string>
@@ -1769,7 +1759,6 @@
     <string name="map_widget_top">狀態列</string>
 	<string name="map_widget_right">右面板</string>
 	<string name="map_widget_left">左面板</string>
-    <string name="shared_string_show">顯示</string>
 	<string name="configure_map">組態地圖</string>
     <string name="search_radius_proximity">在接近度上</string>
     <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近中途點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
@@ -1797,7 +1786,6 @@
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
-    <string name="shared_string_dismiss">排除</string>
     <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
