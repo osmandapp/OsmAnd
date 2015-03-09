@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -1439,7 +1440,7 @@
 	<string name="rendering_attr_hmRendered_description">지도 세부사항 표시 증가</string>
 	<string name="rendering_attr_hmRendered_name">지도 세부사항 표시</string>
 	<string name="local_index_routing_data">데이터로 길찾기</string>
-	<string name="navigate_point_format">형식 :</string>
+	<string name="navigate_point_format">형식</string>
 	<string name="poi_search_desc">POI(관심지점) 검색</string>
 	<string name="address_search_desc">주소 검색</string>
 	<string name="navpoint_search_desc">좌표</string>
@@ -2185,4 +2186,15 @@
 	<string name="shared_string_video">영상</string>
 	<string name="shared_string_photo">사진</string>
 
+	<string name="simulate_your_location">모의 주행</string>
+    <string name="drawer">플랫 목록</string>
+    <string name="short_location_on_map">위도 %1$s\n경도 %2$s</string>
+    <string name="tips_and_tricks_descr">자주 묻는 질문, 최근 변경 사항 등</string>
+    <string name="routing_settings_2">운행 설정</string>
+    <string name="general_settings_2">일반 설정</string>
+	<string name="shared_string_clear_all">모두 지우기</string>
+	<string name="shared_string_my_location">내 위치</string>
+	<string name="shared_string_my_favorites">내 즐겨찾기</string>
+	<string name="shared_string_my_tracks">경로</string>
+	<string name="shared_string_currently_recording_track">현재 기록중인 경로</string>
 	</resources>
