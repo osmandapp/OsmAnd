@@ -1505,7 +1505,6 @@
     <string name="arrival_distance_descr">Как скоро вы хотите объявить о прибытии?</string>
     
     <string name="osmo_io_error">Проблема подключения OsMo: </string>
-    <string name="shared_string_share">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
