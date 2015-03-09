@@ -950,6 +950,9 @@ public class BinaryMapIndexReader {
 				BinaryMapDataObject mapObject = readMapDataObject(tree, req, root);
 				if (mapObject != null) {
 					mapObject.setId(mapObject.getId() + baseId);
+					if (READ_STATS) {
+						req.publish(mapObject);
+					} 
 					if (tempResults == null) {
 						tempResults = new ArrayList<BinaryMapDataObject>();
 					}

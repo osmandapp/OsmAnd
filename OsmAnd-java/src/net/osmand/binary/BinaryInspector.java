@@ -630,6 +630,7 @@ public class BinaryInspector {
 	private static class MapStatKey {
 		String key = "";
 		long statCoordinates;
+		long statCoordinatesCount;
 		long statObjectSize;
 		int count;
 		int namesLength;
@@ -644,10 +645,13 @@ public class BinaryInspector {
 		public int lastObjectCoordinates;
 		public int lastObjectCoordinatesCount;
 		
+		public int lastObjectSize;
+		
 		private Map<String, MapStatKey> types = new LinkedHashMap<String, BinaryInspector.MapStatKey>();
 		private SearchRequest<BinaryMapDataObject> req;
 		
-		public void processKey(String simpleString, MapObjectStat st, TIntObjectHashMap<String> objectNames) {
+		public void processKey(String simpleString, MapObjectStat st, TIntObjectHashMap<String> objectNames,
+				int coordinates, boolean names ) {
 			TIntObjectIterator<String> it = objectNames.iterator();
 			int nameLen = 0;
 			while(it.hasNext()) {
@@ -661,33 +665,44 @@ public class BinaryInspector {
 				types.put(simpleString, stt);
 			}
 			MapStatKey key = types.get(simpleString);
-			key.statCoordinates += st.lastObjectCoordinates;
-			key.statObjectSize += st.lastObjectSize;
-			key.count++;
-			key.namesLength += nameLen;
+			if (names) {
+				key.namesLength += nameLen;
+			} else {
+				key.statCoordinates += st.lastObjectCoordinates;
+				key.statCoordinatesCount += coordinates;
+				key.statObjectSize += st.lastObjectSize;
+				key.count++;
+			}
 		}
 
 
 		public void process(BinaryMapDataObject obj) {
 			MapObjectStat st = req.stat;
-			this.lastStringNamesSize +=  st.lastStringNamesSize;
+			int cnt = 0;
+			boolean names = st.lastObjectCoordinates == 0;
+			this.lastStringNamesSize += st.lastStringNamesSize;
 			this.lastObjectIdSize += st.lastObjectIdSize;
 			this.lastObjectHeaderInfo += st.lastObjectHeaderInfo;
 			this.lastObjectAdditionalTypes += st.lastObjectAdditionalTypes;
 			this.lastObjectTypes += st.lastObjectTypes;
 			this.lastObjectCoordinates += st.lastObjectCoordinates;
-			this.lastObjectCoordinatesCount += obj.getPointsLength();
-			if(obj.getPolygonInnerCoordinates() != null) {
-				for(int[] i : obj.getPolygonInnerCoordinates()) {
-					this.lastObjectCoordinatesCount += i.length;
+			if (!names) {
+				cnt = obj.getPointsLength();
+				this.lastObjectIdSize += st.lastObjectSize;
+				if (obj.getPolygonInnerCoordinates() != null) {
+					for (int[] i : obj.getPolygonInnerCoordinates()) {
+						cnt += i.length;
+					}
 				}
+				this.lastObjectCoordinatesCount += cnt;
 			}
-			for(int i = 0; i < obj.getTypes().length; i++) {
+			for (int i = 0; i < obj.getTypes().length; i++) {
 				int tp = obj.getTypes()[i];
 				TagValuePair pair = obj.mapIndex.decodeType(tp);
-				processKey(pair.toSimpleString(), st, obj.getObjectNames());	
+				processKey(pair.toSimpleString(), st, obj.getObjectNames(), cnt, names);
 			}
 			st.clearObjectStats();
+			st.lastObjectSize = 0;
 
 		}
 
@@ -703,7 +718,7 @@ public class BinaryInspector {
 			b = 0;
 			b += out("Header", lastObjectHeaderInfo);
 			b += out("Coordinates", lastObjectCoordinates);
-			b += out("Coordinates Count", lastObjectCoordinatesCount);
+			b += out("Coordinates Count(pair)", lastObjectCoordinatesCount);
 			b += out("Types", lastObjectTypes);
 			b += out("Additonal Types", lastObjectAdditionalTypes);
 			b += out("Ids", lastObjectIdSize);
@@ -721,14 +736,16 @@ public class BinaryInspector {
 			});
 			
 			for(MapStatKey s : stats) {
-				println(s.key + " cnt=" +  s.count + " size=" + s.statObjectSize + " coordsize="+s.statCoordinates+ 
-						" namelen="+s.namesLength);
+				println(s.key + " (" +  s.count + ") \t " + s.statObjectSize + " bytes \t coord="+
+						s.statCoordinatesCount+
+						" (" +s.statCoordinates +" bytes) " +
+						" names "+s.namesLength + " bytes");
 			}
 			
 		}
 
 		private long out(String s, long i) {
-			while (s.length() < 20) {
+			while (s.length() < 25) {
 				s += " ";
 			}
 			DecimalFormat df = new DecimalFormat("0,000,000,000");
