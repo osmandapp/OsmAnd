@@ -67,14 +67,14 @@
 <string name="poi_dialog_comment_default">Ändring av POI</string>
 <string name="poi_dialog_other_tags_message">Alla andra taggar sparas</string>
 <string name="default_buttons_commit">Skicka in</string>
-<string name="shared_string_clear">Töm</string>
+
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="shared_string_no">Nej</string>
 <string name="shared_string_yes">Ja</string>
 <string name="shared_string_cancel">Avbryt</string>
-<string name="shared_string_apply">Verkställ</string>
-<string name="shared_string_add">Lägg till</string>
+
+
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
 <string name="shared_string_show_on_map">Visa på karta</string>
 
@@ -931,7 +931,7 @@
 	<string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten är inte en enda nod</string>
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
-	<string name="shared_string_delete">Ta bort</string>
+	
 	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på AV-knappen på widgeten.</string>
     <string name="recording_playing">Ljud från den angivna inspelningen spelas upp.↵\n%1$s</string>
     <string name="recording_open_external_player">Öppna extern spelare</string>
@@ -1290,14 +1290,14 @@
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
-    <string name="shared_string_or">eller</string>
-	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
+	
     
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
     <string name="animate_routing_route">Simulera med en beräknad rutt </string>
     <string name="animate_routing_gpx">Simulera med GPX-spår</string>
     <string name="local_osm_changes_delete_all_confirm">Du håller på att ta bort %1$d OSM-ändringar. Är du säker?</string>
-    <string name="shared_string_delete_all">Ta bort alla</string>
+    
+    
     <string name="tip_faq_t">Besök gärna https://code.google.com/p/osmand/wiki/FAQ för att se Frågor och svar.</string>
     <string name="tip_faq">Frågor och svar</string>
     <string name="app_mode_hiking">Vandring</string>
