@@ -60,7 +60,7 @@
 	<string name="shared_string_remember_my_choice">Remember my choice</string>
 	<string name="shared_string_refresh">Refresh</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">Downloading…</string>
+	<string name="shared_string_downloading">Downloading</string>
 	<string name="shared_string_download_successful">Download successful</string>
 	<string name="shared_string_io_error">I/O error occurred</string>
 	<string name="shared_string_unexpected_error">Unexpected error occurred</string>

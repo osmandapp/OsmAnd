@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -27,9 +26,8 @@ import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -43,6 +41,7 @@ import android.os.StatFs;
 import android.view.View;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class DownloadIndexesThread {
 	private BaseDownloadActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
@@ -193,7 +192,7 @@ public class DownloadIndexesThread {
 				if (mainView != null) {
 					mainView.setKeepScreenOn(true);
 				}
-				startTask(ctx.getString(R.string.shared_string_downloading), -1);
+				startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
 			}
 		}
 
@@ -483,7 +482,6 @@ public class DownloadIndexesThread {
 	
 	private <P>void execute(BasicProgressAsyncTask<P, ?, ?> task, P... indexItems) {
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
-			// TODO check
 		    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 		} else {
 			task.execute(indexItems);
