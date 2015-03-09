@@ -1510,11 +1510,6 @@
     <string name="osmo_user_left">Användare %1$s lämnade grupp %2$s</string>
     <string name="osmo_show_group_notifications">Visa gruppaviseringar</string>
     <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
-    
-    <string name="shared_string_my_tracks">Alla spår</string>
-    <string name="shared_string_my_favorites">Mina favoriter</string>
-    <string name="shared_string_my_places">Mina platser</string>
-    
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
