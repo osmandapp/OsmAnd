@@ -500,7 +500,7 @@
 	<string name="tip_rotation_switching">Kortretning</string>
 	
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
-	<string name="navigate_point_format">Format:</string>
+	<string name="navigate_point_format">Format</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="routing_settings">Navigation</string>
 	<string name="tip_osm_improve">Forbedre OSM data</string>
@@ -1933,7 +1933,7 @@
 	<string name="shared_string_download_successful">Hentet</string>
 	<string name="shared_string_io_error">I/O fejl</string>
 	<string name="shared_string_unexpected_error">En uventet fejl opstod</string>
-	<string name="shared_string_action_template">"Handling {0}: "</string>
+	<string name="shared_string_action_template">Handling {0}</string>
 	<string name="shared_string_close">Luk</string>
 	<string name="shared_string_exit">Afslut</string>
 	<string name="shared_string_show">Vis</string>
@@ -1952,4 +1952,5 @@
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
-	</resources>
+	<string name="simulate_your_location">Simulere din placering</string>
+    </resources>
