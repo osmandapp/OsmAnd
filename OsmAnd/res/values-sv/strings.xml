@@ -1290,7 +1290,6 @@
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
-	<string name="shared_string_and">och</string>
     <string name="shared_string_or">eller</string>
 	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
     
