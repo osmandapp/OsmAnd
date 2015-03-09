@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -926,8 +928,6 @@
 	<string name="mark_point">Στόχος</string>
 	<string name="show_osm_bugs_descr">Εμφάνιση OpenStreetBugs στο χάρτη</string>
 	<string name="show_osm_bugs">Εμφάνιση OpenStreetBugs</string>
-	
-	<string name="shared_string_add_to_favorites">Προσθήκη στα Αγαπημένα</string>
 	<string name="use_english_names_descr">Επέλεξε μεταξύ ντόπιων και Αγγλικών ονομάτων</string>
 	<string name="use_english_names">Χρήση Αγγλικών ονομάτων στους χάρτες</string>
 	<string name="app_settings">Ρυθμίσεις εφαρμογής</string>
