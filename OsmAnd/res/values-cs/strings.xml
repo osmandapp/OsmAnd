@@ -629,7 +629,7 @@
   <string name="download_question">Stáhnout {0} - {1} ?</string>
   <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="shared_string_download_successful">Index úspěšně stažen</string>
+  <string name="shared_string_download_successful">Stahování úspěšné</string>
   
   
   
@@ -1777,7 +1777,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_use_https">Použít HTTPS</string>
 	<string name="map_update">K dispozici aktualizace pro %1$s map</string>
 	<string name="search_for">Hledat</string>
-	<string name="shared_string_show_all">ZOBRAZIT VŠE</string>
+	<string name="shared_string_show_all">Zobrazit vše</string>
 	<string name="coordinates">Souřadnice</string>
 	<string name="shared_string_dismiss">Zavřít</string>
     <string name="everything_up_to_date">Všechny soubory jsou aktuální</string>
@@ -1872,4 +1872,15 @@ s často kladenými otázkami.</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
 	<string name="get_plugin">Získat</string>
 <string name="route_points">Body cesty</string>
+	<string name="simulate_your_location">Simulovat polohu</string>
+    <string name="short_location_on_map">Šířka %1$s\n Délka %2$s</string>
+    <string name="routing_settings_2">Nastavení navigace</string>
+    <string name="general_settings_2">Všeobecná nastavení</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">Zrušit výběr</string>
+	<string name="shared_string_deselect_all">Zrušit výběr všech</string>
+	<string name="shared_string_unexpected_error">Nastala neočekávaná chyba</string>
+	<string name="shared_string_action_template">Činnost {0}</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
 	</resources>
