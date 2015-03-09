@@ -1970,4 +1970,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="track_segments">Segments de trace</string>
 	<string name="simulate_your_location">Simulez votre position</string>
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
-    </resources>
+    <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations</string>
+    <string name="routing_settings_2">Paramètres de navigation</string>
+    <string name="general_settings_2">Paramètres généraux</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">Désélectionner</string>
+	<string name="shared_string_deselect_all">Désélectionner tout</string>
+	<string name="shared_string_unexpected_error">Une erreur inconnue s\'est produite</string>
+	<string name="shared_string_action_template">Action {0}</string>
+	<string name="shared_string_video">Vidéo</string>
+	<string name="shared_string_photo">Photo</string>
+	</resources>
