@@ -93,7 +93,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.group_image).setVisibility(View.GONE);
 
-			int id = helper.getPointToNavigate() == point ? R.drawable.list_destination : R.drawable.list_intermediate;
+			boolean target = helper.getPointToNavigate() == point;
+			int id = target ? R.drawable.list_destination : R.drawable.list_intermediate;
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getIconsCache()
 					.getContentIcon(id));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
@@ -115,6 +116,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			ImageButton navigate =  ((ImageButton)view.findViewById(R.id.navigate_to));
 			navigate.setImageDrawable(getMyApplication().getIconsCache().
 					getContentIcon(R.drawable.ic_action_gdirections_dark));
+			navigate.setVisibility(target? View.VISIBLE : View.GONE);
 			navigate.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -138,6 +140,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	private void selectModel(final TargetPoint model, View v) {
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightContent();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem 
 		item = optionsMenu.getMenu().add(
 				R.string.shared_string_add_to_favorites).setIcon(light ?
