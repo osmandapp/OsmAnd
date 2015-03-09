@@ -27,7 +27,7 @@
   <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
-  <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le gadget GPX ou avec le paramètre d\' \"Enregistrement de traces\".</string>
+  <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrement de Voyage\".</string>
   <string name="show_current_gpx_title">Afficher la trace en cours</string>
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données Wikipedia hors-ligne avec articles
@@ -433,7 +433,7 @@
   <string name="layer_gpx_layer">Trace GPX…</string>
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
-  <string name="transport_context_menu">Rechercher un transport à l\'arrivée</string>
+  <string name="transport_context_menu">Transport en commun</string>
   
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
@@ -774,7 +774,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier de données d\'OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
+  <string name="osmand_background_plugin_description">Afficher les préferences , afin activer le suivis et la navigation durant la mise en veille (réveille périodiquement du GPS).</string>
   <string name="osmand_accessibility_description">Afficher la configuration pour activer les options d\'accessibilité.</string>
   
   
