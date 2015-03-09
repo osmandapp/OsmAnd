@@ -1944,7 +1944,7 @@
 	<string name="track_segments">Сегменты трека</string>
 	<string name="track_points">Точки трека</string>
 	<string name="turn_off_all">Выключить все</string>
-	<string name="days_behind"/>
+	<string name="days_behind">дней назад</string>
 	<string name="notes">Заметки</string>
 	<string name="shared_string_selected">Выбранные</string>
 	<string name="shared_string_selected_lowercase">выбранные</string>
@@ -1957,4 +1957,5 @@
 	<string name="shared_string_my_tracks">Мои треки</string>
 	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
 	<string name="selected_tracks">Выбранные</string>
+	<string name="share_note">Поделиться заметкой</string>
 	</resources>
