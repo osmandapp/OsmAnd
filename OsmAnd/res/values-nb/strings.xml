@@ -839,7 +839,6 @@
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
 	<string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving</string>
-    <string name="shared_string_never">Aldri</string>
     <string name="search_radius_proximity">I nærhet av</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
 	<string name="fav_point_dublicate">Duplisering av favorittpunktnavn</string>
