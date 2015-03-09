@@ -1955,4 +1955,6 @@
 	<string name="simulate_your_location">Simulere din placering</string>
     <string name="drawer">Flad liste</string>
     <string name="short_location_on_map">Lat %1$s\nLong %2$s</string>
+    <string name="tips_and_tricks_descr">Ofte stillede spørgsmål og de seneste ændringer</string>
+    <string name="routing_settings_2">Navigationsindstillinger</string>
     </resources>
