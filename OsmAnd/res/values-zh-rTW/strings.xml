@@ -497,7 +497,6 @@
 	<string name="map_underlay">下層地圖</string>
 	<string name="map_underlay_descr">選擇下層地圖</string>
 	<string name="layer_overlay">上層地圖…</string>
-	<string name="shared_string_none">無</string>
 	<string name="map_overlay">上層地圖</string>
 	<string name="map_overlay_descr">選擇上層地圖</string>
 	<string name="tile_source_already_installed">地圖已安裝，設定將被更新</string>

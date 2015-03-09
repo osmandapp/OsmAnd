@@ -1227,7 +1227,6 @@
 	<string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
 	<string name="pref_vector_rendering">Spesifikke alternativer for vektoropptegning</string>
 	<string name="local_index_mi_upload_gpx">Send til OSM</string>
-	<string name="shared_string_none">Ingen</string>
 	<string name="tile_source_already_installed">Kart er allerede installert, innstillinger blir oppdatert</string>
 	<string name="select_tile_source_to_install">Velg (flis)kart å installere eller oppdatere</string>
 	<string name="internet_not_available">En internettforbindelse kreves for denne operasjonen, men er ikke tilgjengelig</string>
