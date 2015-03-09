@@ -1953,4 +1953,5 @@
 	<string name="shared_string_photo">Foto</string>
 
 	<string name="simulate_your_location">Simulere din placering</string>
+    <string name="drawer">Flad liste</string>
     </resources>
