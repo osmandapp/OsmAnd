@@ -9,7 +9,9 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -41,14 +43,17 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
 
-public class SearchHistoryFragment extends ListFragment implements SearchActivityChild {
+public class SearchHistoryFragment extends ListFragment implements SearchActivityChild, OsmAndCompassListener  {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
-	
+	private Float heading;
+	private boolean searchAroundLocation;
+	private boolean compassRegistered;
+	private int screenOrientation;	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -117,14 +122,34 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		}
 		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
-
+		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
 	}
 
 	@Override
 	public void locationUpdate(LatLon l) {
 		//location = l;
+		if (getActivity() instanceof SearchActivity) {
+			if (((SearchActivity) getActivity()).isSearchAroundCurrentLocation() && l != null) {
+				if (!compassRegistered) {
+					((OsmandApplication) getActivity().getApplication()).getLocationProvider().addCompassListener(this);
+					compassRegistered = true;
+				}
+				searchAroundLocation = true;
+			} else {
+				searchAroundLocation = false;
+			}
+		}
 		if (historyAdapter != null) {
 			historyAdapter.updateLocation(l);
+		}
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		if(getActivity() instanceof SearchActivity) {
+			((OsmandApplication) getActivity().getApplication()).getLocationProvider().removeCompassListener(this);
+			compassRegistered = false;
 		}
 	}
 
@@ -178,6 +203,10 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			}
 			final HistoryEntry historyEntry = getItem(position);
 			udpateHistoryItem(historyEntry, row, location, getActivity(), getMyApplication());
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
+			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText, 
+					historyEntry.getLat(), historyEntry.getLon(), screenOrientation, getMyApplication(), getActivity()); 
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setVisibility(View.VISIBLE);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -247,5 +276,18 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
+	}
+	
+	@Override
+	public void updateCompassValue(float value) {
+		// 99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass
+		// devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			 historyAdapter.notifyDataSetChanged();
+		} else {
+			heading = lastHeading;
+		}
 	}
 }

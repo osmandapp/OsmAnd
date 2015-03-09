@@ -208,7 +208,7 @@ public class MapRoutePreferencesControl extends MapControls {
 		if (gpxParam.id == R.string.fast_route_mode) {
 			settings.FAST_ROUTE_MODE.set(selected);
 		}
-		if (gpxParam.id	== R.string.announce_nearby_favorites){
+		if (gpxParam.id	== R.string.speak_favorites){
 			settings.ANNOUNCE_NEARBY_FAVORITES.set(selected);
 		}
 	}
