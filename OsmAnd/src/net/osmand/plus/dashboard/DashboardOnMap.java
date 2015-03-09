@@ -264,13 +264,7 @@ public class DashboardOnMap {
 			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 			mapActivity.getMapActions().toggleDrawer();
 		} else if(item.getItemId() == DIRECTIONS_ID) {
-			RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-			if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
-			} else {
-				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				mapActivity.refreshMap();
-			}
+			navigationAction();
 		} else if(item.getItemId() == CONFIGURE_SCREEN_ID) {
 			mapActivity.getMapActions().prepareConfigureScreen();
 			mapActivity.getMapActions().toggleDrawer();
@@ -282,6 +276,17 @@ public class DashboardOnMap {
 			return false;
 		}
 		return true;
+	}
+
+
+	public void navigationAction() {
+		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+		} else {
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.refreshMap();
+		}
 	}
 
 
@@ -336,6 +341,7 @@ public class DashboardOnMap {
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
 				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity));
+		showFragment(manager, fragmentTransaction, DashWaypointsFragment.TAG, DashWaypointsFragment.class);
 		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class);
 		showFragment(manager, fragmentTransaction, DashRecentsFragment.TAG, DashRecentsFragment.class);
 		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);

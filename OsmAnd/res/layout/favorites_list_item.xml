@@ -103,6 +103,14 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_gdirections_light" />
+        <ImageButton
+            android:id="@+id/options"
+            android:layout_width="@dimen/dashListItemHeight"
+            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:background="?attr/options_button_background"
+            android:src="?attr/list_settings_icon" />
     </LinearLayout>
 
 </LinearLayout>

@@ -25,7 +25,8 @@ import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
-	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final PointDescription name) {
+	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, 
+			final PointDescription name) {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {

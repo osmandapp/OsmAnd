@@ -117,6 +117,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			distances.add(dv);
 
 			name.setText(point.getName());
+			name.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -126,7 +127,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()));
 				}
 			});
-			label.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

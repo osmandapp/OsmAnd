@@ -188,6 +188,13 @@ public class TargetPointsHelper {
 		} else {
 			settings.deleteIntermediatePoint(index);
 			intermediatePoints.remove(index);
+			int ind = 0;
+			for(TargetPoint tp : intermediatePoints) {
+				tp.index = ind++;
+			}
+			if(pointToNavigate != null) {
+				pointToNavigate.index = ind++;
+			}
 		}
 		updateRouteAndReferesh(updateRoute);
 	}

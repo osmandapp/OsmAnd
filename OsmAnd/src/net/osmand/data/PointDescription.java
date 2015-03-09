@@ -94,7 +94,7 @@ public class PointDescription {
 				if (Algorithms.isEmpty(name)) {
 					return typeName;
 				} else {
-					return typeName + ": " + name;
+					return typeName.trim() + ": " + name;
 				}
 			}
 			return name;
