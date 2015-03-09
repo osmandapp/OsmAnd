@@ -1980,7 +1980,7 @@
 	<string name="shared_string_downloading">下載中</string>
 	<string name="shared_string_download_successful">下載成功</string>
 	<string name="shared_string_unexpected_error">發生意外錯誤</string>
-	<string name="shared_string_action_template">"動作 {0}： "</string>
+	<string name="shared_string_action_template">動作 {0}</string>
 	<string name="shared_string_close">關閉</string>
 	<string name="shared_string_exit">離開</string>
 	<string name="shared_string_show">顯示</string>
