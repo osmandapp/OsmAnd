@@ -736,14 +736,15 @@
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
   
-  <string name="map_online_plugin_is_not_installed">Abilita il plugin per le mappe online per visualizzare altre sorgenti</string>
+  <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe online per scegliere altre sorgenti di mappe</string>
   <string name="map_online_data">Mappe online e a tasselli</string>
   <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD)</string>
   <string name="online_map_settings">Mappe online</string>
   <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Visualizza le impostazioni per configurare una varietà di mappe online o a tasselli in cache come mappa di base per le mappe sovrapposte/di sottofondo. Queste mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Con questo plugin puoi accedere a molti tipi di mappe online (chiamate a mattonelle o raster), a partire dalle mattonelle delle predefinite Openstreetmap (come Mapnik) alle immagini satellitari e strati per scopi speciali come le mappe meteorologiche, climatiche, geologiche, di ombreggiamento dei rilievi ecc.\n\nTutte queste mappe possono essere usate sia come mappa principale (di base) da visualizzare nella schermata mappa di OsmAnd sia Come uno strato di sovrapposizione o di fondo su un\'altra mappa di base (come le mappe offline OsmAnd standard). Per permettere una maggiore visibilità delle mappe di sfondo, certi elementi delle mappe vettoriali possono essere facilmente nascosti come desiderato attraverso il menu \'Configura mappa\'.
+\n\nLe mappe a mattonelle possono essere ricevuto direttamente dalle risorse online oppure preparate in precedenza per l\'uso offline (e copiate manualmente nella cartella dati di OsmAnd) come un database sqlite che può essere prodotto da molteplici strumenti per la costruzione di mappe di terze parti. "</string>
   <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS.</string>
   <string name="osmand_accessibility_description">Visualizza le impostazioni per attivare funzionalità speciali per l\'accessibilità.</string>
   <string name="extra_settings">Impostazioni avanzate</string>
@@ -862,7 +863,7 @@
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="local_index_routing_data">Dati percorso</string>
-  <string name="navigate_point_format">Formato:</string>
+  <string name="navigate_point_format">Formato</string>
   <string name="poi_search_desc">Ricerca PDI (punti di interesse)</string>
   <string name="address_search_desc">Ricerca degli indirizzi</string>
   <string name="navpoint_search_desc">Coordinate</string>
@@ -1892,7 +1893,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
-    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrazione delle tue tracce o manualmente attraverso il pulsante dedicato nello schermo della mappa oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli alteti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcuni analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
+    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrazione delle tue tracce o manualmente attraverso il pulsante dedicato nello schermo della mappa oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcuni analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
