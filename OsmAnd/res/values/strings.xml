@@ -42,7 +42,7 @@
 	<string name="shared_string_deselect">Deselect</string>
 	<string name="shared_string_deselect_all">Deselect all</string>
 	<string name="shared_string_clear">Clear</string>
-	<string name="shared_string_shared_string_clear_all">Clear all</string>
+	<string name="shared_string_clear_all">Clear all</string>
 	<string name="shared_string_save">Save</string>
 	<string name="shared_string_save_as_gpx">Save as GPX track</string>
 	<string name="shared_string_rename">Rename</string>
