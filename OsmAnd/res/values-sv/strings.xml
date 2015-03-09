@@ -1799,11 +1799,7 @@
     <string name="notes">Anteckningar</string>
 	<string name="online_map">Online-karta</string>
 	<string name="share_note">Dela anteckning</string>
-	
 	<string name="shared_string_export">Exportera</string>
-	<string name="shared_string_audio">Ljud</string>
-	
-	
 	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.
 		\n\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.
 		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.

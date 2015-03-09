@@ -1850,10 +1850,6 @@
     <string name="free">"Свободно %1$s "</string>
 	<string name="roads_only">Только дороги</string>
     <string name="online_map">Онлайн карта</string>
-	
-	<string name="shared_string_audio">Аудио</string>
-	
-	
 	<string name="rename_failed">Не удалось переименовать.</string>
 	<string name="back_to_map">Вернуться на карту</string>
 	<string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>

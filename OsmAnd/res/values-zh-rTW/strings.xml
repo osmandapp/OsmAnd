@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1911,11 +1911,7 @@
 	<string name="notes">備註</string>
 	<string name="online_map">線上地圖</string>
 	<string name="share_note">分享筆記</string>
-	
 	<string name="shared_string_export">匯出</string>
-	<string name="shared_string_audio">音訊</string>
-	
-	
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
 	<string name="plugin_nautical_descr">啟動此檢視更改地圖到航海顯示樣式，從而顯示所有航海航行的標記和航線標誌。
 		\n\n包含了全部可利用的全球航海標誌的一個單一下載的地圖檔案，被稱為 \'全球航線標識\'。
