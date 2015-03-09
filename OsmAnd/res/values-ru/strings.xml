@@ -1956,4 +1956,5 @@
 	<string name="shared_string_my_favorites">Мои избранные</string>
 	<string name="shared_string_my_tracks">Мои треки</string>
 	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
+	<string name="selected_tracks">Выбранные</string>
 	</resources>
