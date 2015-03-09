@@ -7,9 +7,6 @@
 <string name="map_widget_back_to_loc">Var är jag</string>
 <string name="map_widget_lock_screen">Skärmlås</string>
 <string name="map_widget_compass">Kompass</string>
-
-
-
 <string name="map_widget_parking">Parkering</string>
 <string name="map_widget_monitoring">GPX-inspelning</string>
 <string name="map_widget_speed">Hastighet</string>
@@ -67,17 +64,11 @@
 <string name="poi_dialog_comment_default">Ändring av POI</string>
 <string name="poi_dialog_other_tags_message">Alla andra taggar sparas</string>
 <string name="default_buttons_commit">Skicka in</string>
-<string name="shared_string_clear">Töm</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-<string name="shared_string_no">Nej</string>
 <string name="shared_string_yes">Ja</string>
 <string name="shared_string_cancel">Avbryt</string>
-<string name="shared_string_apply">Verkställ</string>
-<string name="shared_string_add">Lägg till</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
-<string name="shared_string_show_on_map">Visa på karta</string>
-
 <string name="search_address_top_text">Välj adress</string>
 <string name="search_address_region">Region</string>
 <string name="search_address_city">Stad</string>
@@ -158,7 +149,6 @@
 <string name="gpx_tags_txt">Taggar</string>
 <string name="gpx_description_txt">Beskrivning</string>
 <string name="validate_gpx_upload_name_pwd">Vänligen ange OSM användarnamn och lösenord för att ladda upp GPX-filer.</string>
-<string name="shared_string_help">Hjälp</string>
 <string name="show_details">Visa detaljer</string>
 <string name="accessibility_extensions_descr">Tillgänglighetstillägg för gamla Android-versioner</string>
 <string name="accessibility_extensions">Tillgänglighetstillägg</string>
@@ -421,8 +411,6 @@
 <string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
 <string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
 <string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till en nyare version.</string>
-<string name="shared_string_rename">Byt namn</string>
-
 <string name="search_position_current_location_search">Söker plats …</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>
 <string name="search_position_address">Adresser …</string>
@@ -433,12 +421,9 @@
 <string name="search_position_map_view">Aktuell kartmitt</string>
 <string name="select_search_position">Ursprung:</string>
 <string name="context_menu_item_search">Sök i närheten</string>
-<string name="shared_string_save_as_gpx">Spara rutt som GPX-spår</string>
 <string name="route_successfully_saved_at">Rutten sparades som \'%1$s\'.</string>
 <string name="filename_input">Filnamn: </string>
 <string name="file_with_name_already_exist">En fil med samma namn finns redan.</string>
-<string name="shared_string_save">Spara</string>
-
 <string name="local_index_upload_gpx_description">Skicka GPX-filer till OSM-gemenskapen. De kommer att användas för att förbättra kartorna.</string>
 <string name="local_index_items_uploaded">%1$d av %2$d post(er) har överförts utan problem.</string>
 <string name="local_index_mi_upload_gpx">Skicka till OSM</string>
@@ -467,8 +452,6 @@
 <string name="local_index_mi_backup">Inaktivera</string>
 
 <string name="local_index_mi_reload">Ladda om från SD-kort</string>
-<string name="shared_string_download">Ladda ner</string>
-
 <string name="local_index_poi_data">Intressepunktsdata</string>
 <string name="local_index_address_data">Adressdata</string>
 <string name="local_index_transport_data">Kollektivtrafikdata</string>
@@ -512,7 +495,6 @@
 <string name="map_underlay">Underläggskarta</string>
 <string name="map_underlay_descr">Välj underläggskarta</string>
 <string name="layer_overlay">Överläggskarta …</string>
-<string name="shared_string_none">Inga</string>
 <string name="map_overlay">Överläggskarta</string>
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
@@ -658,8 +640,6 @@
 	<string name="items_were_selected">{0} post(er) markerad(e)</string>
 	<string name="filter_existing_indexes">Visa nerladdat</string>
 	
-	<string name="shared_string_select_all">Markera alla</string>
-	<string name="shared_string_refresh">Uppdatera</string>
 	<string name="fast_route_mode">Snabbaste vägen</string>
 	<string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen </string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
@@ -716,8 +696,6 @@
 	<string name="fav_file_to_load_not_found">GPX-fil med favoriter finns inte på {0}</string>
 	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem till {0}</string>
 	<string name="no_fav_to_save">Inga favoritpunkter att spara</string>
-	<string name="shared_string_import">Importera</string>
-	
 	<string name="error_occurred_loading_gpx">Ett fel uppstod vid inläsning av GPX</string>
 	<string name="send_report">Skicka rapport</string>
 	<string name="none_region_found">Hittar inga offline-data för regioner på SD-kortet. Ladda ner regioner från Internet.</string>
@@ -727,7 +705,6 @@
 	<string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rutt</string>
-	<string name="shared_string_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
 	<string name="layer_poi">Intressepunkt …</string>
@@ -820,8 +797,6 @@
 	<string name="search_history_street">Gata: {0},{1}</string>
 	<string name="search_history_building">Byggnad: {0},{1},{2}</string>
 	<string name="favorite">Favorit</string>
-	<string name="shared_string_clear_all">Ta bort alla</string>
-	<string name="shared_string_history">Historik</string>
 	<string name="uploading_data">Laddar upp data …</string>
 	<string name="uploading">Laddar upp …</string>
 	<string name="search_nothing_found">Hittar ingenting</string>
@@ -837,10 +812,6 @@
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adresser</string>
-	<string name="shared_string_download_successful">Nedladdningen slutfördes utan problem</string>
-	
-	
-	
 	<string name="downloading_list_indexes">Hämtar lista med tillgängliga regioner …</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
 	
@@ -866,7 +837,6 @@
 	<string name="loading_cities">Laddar städer …</string>
 	<string name="poi">Intressepunkter</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
-	<string name="shared_string_close">Stäng</string>
 	<string name="loading_data">Laddar data …</string>
 	<string name="reading_indexes">Läser lokala data …</string>
 	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Play Butik?</string>
@@ -932,7 +902,6 @@
 	<string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten är inte en enda nod</string>
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
-	<string name="shared_string_delete">Ta bort</string>
 	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på AV-knappen på widgeten.</string>
     <string name="recording_playing">Ljud från den angivna inspelningen spelas upp.↵\n%1$s</string>
     <string name="recording_open_external_player">Öppna extern spelare</string>
@@ -946,7 +915,6 @@
     <string name="recording_context_menu_play">Spela upp</string>
     <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
     <string name="recording_default_name">Spelar in</string>
-    <string name="shared_string_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
     
@@ -1038,7 +1006,6 @@
 	
 	<string name="osm_settings">Redigera OSM</string>
 	<string name="additional_settings">Ytterligare inställningar</string>
-	<string name="shared_string_settings">Inställningar</string>
 	<string name="save_current_track_descr">Spara aktuellt spår till SD-kortet nu</string>
 	<string name="save_current_track">Spara aktuellt GPX-spår</string>
 	<string name="save_track_interval">Loggningsintervall under navigering</string>
@@ -1065,7 +1032,6 @@
 	<string name="show_gps_coordinates_text">Visa GPS-koordinater på kartan</string>
 	<string name="use_internet_to_download_tile">Använd Internet för att hämta kartrutor som saknas</string>
 	<string name="app_description">Navigationsapp</string>
-	<string name="shared_string_exit">Avsluta</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
 	<string name="searchpoi_activity">Välj intressepunkt</string>
@@ -1098,14 +1064,12 @@
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2:\n\t\t\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t\t\n\t* Fixat till höjdkurvsmodulen\n\t\t\n\t* Skuggad relief-paket för höjdkurvsmodulen\n\t\t\n\t* Buggfixar (suboptimal ruttning) "</string>
     <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
-    <string name="shared_string_control_start">Starta</string>
     <string name="max_speed_none">Ingen</string>
     <string name="prefer_motorways">Föredra motorvägar</string>
 	<string name="prefer_in_routing_title">Föredra …</string>
 	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
-    <string name="shared_string_map">Karta</string>
     <string name="av_def_action_choose">Välj vid användning</string>
     <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
@@ -1162,13 +1126,10 @@
     <string name="select_address_activity">Välj adress</string>
     <string name="favourites_list_activity">Välj favorit</string>
     <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
-    <string name="shared_string_more_actions">Andra åtgärder</string>
-    
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4:\n\t\n\t* Nytt gränssnitt\n\t* Buggfixar "</string>
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
-    <string name="shared_string_downloading">Laddar ner …</string>
 	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
 \n\t* Sortera waypoints på bästa möjliga sätt för att besöka alla (handelsresande, dörr-till-dörr)
 \n\t* Sök efter gatnamn (i närheten)
@@ -1192,7 +1153,6 @@
     <string name="osmand_distance_planning_plugin_description">Denna modul erbjuder en widget på kartskärmen för att skapa spår genom att peta på kartan (eller använda/modifiera befintliga GPX-filer) för att planera en resa samt att mäta avståndet mellan punkter. Resultatet kan sparas i GPX-format som kan användas för att planera GPX-rutter.</string>
     <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
     <string name="use_distance_measurement_help">* Peta för att markera en punkt\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
-    <string name="shared_string_do_not_show_again">Visa inte nästa gång</string>
     <string name="distance_measurement_start_editing">Börja redigera</string>
     <string name="distance_measurement_finish_editing">Avsluta redigeringen</string>
     <string name="distance_measurement_finish_subtrack">Starta ett nytt underspår</string>
@@ -1291,15 +1251,10 @@
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
-	<string name="shared_string_and">och</string>
-    <string name="shared_string_or">eller</string>
-	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
-    
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
     <string name="animate_routing_route">Simulera med en beräknad rutt </string>
     <string name="animate_routing_gpx">Simulera med GPX-spår</string>
     <string name="local_osm_changes_delete_all_confirm">Du håller på att ta bort %1$d OSM-ändringar. Är du säker?</string>
-    <string name="shared_string_delete_all">Ta bort alla</string>
     <string name="tip_faq_t">Besök gärna https://code.google.com/p/osmand/wiki/FAQ för att se Frågor och svar.</string>
     <string name="tip_faq">Frågor och svar</string>
     <string name="app_mode_hiking">Vandring</string>
@@ -1346,7 +1301,6 @@
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
     <string name="route_descr_select_on_map">Välj på karta …</string>
-    <string name="shared_string_favorite">Favorit</string>
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
     <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>
@@ -1511,18 +1465,12 @@
     <string name="osmo_user_left">Användare %1$s lämnade grupp %2$s</string>
     <string name="osmo_show_group_notifications">Visa gruppaviseringar</string>
     <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
-    
-    <string name="shared_string_my_tracks">Alla spår</string>
-    <string name="shared_string_my_favorites">Mina favoriter</string>
-    <string name="shared_string_my_places">Mina platser</string>
-    
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
     <string name="delay_navigation_start">Starta steg-för-steg-navigering automatiskt</string>
-    <string name="shared_string_selected_lowercase">valda</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>
@@ -1560,8 +1508,6 @@
     
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
 	<string name="import_file_favourites">Spara som GPX-fil eller importera till favoriter?</string>
-	
-	<string name="shared_string_share">Dela ut</string>
 	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
 	<string name="commiting_node">Skickar nod…</string>
 	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
@@ -1642,7 +1588,6 @@
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Fotgängare</string>
     <string name="rendering_value_browse_map_name">Titta på kartan</string>  
-    <string name="shared_string_more">Mer …</string>
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
     
     <string name="waypoints">Waypoints</string>
@@ -1697,7 +1642,6 @@
     <string name="map_widget_top">Statusfält</string>
 	<string name="map_widget_right">Höger panel</string>
 	<string name="map_widget_left">Vänster panel</string>
-    <string name="shared_string_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
     <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, kollektivtrafikslager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell notifiering och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
@@ -1712,14 +1656,11 @@
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
-    <string name="shared_string_never">Aldrig</string>
-    
 	<string name="osmo_use_https">Använd HTTPS</string>
 	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
 	
-	<string name="shared_string_show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
@@ -1776,7 +1717,6 @@
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
     <string name="tracks">Spår</string>
-    <string name="shared_string_my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
     <string name="shared_string_disabled">Inaktiverad</string>
 	<string name="shared_string_enabled">Aktiverad</string>
@@ -1799,11 +1739,6 @@
     <string name="notes">Anteckningar</string>
 	<string name="online_map">Online-karta</string>
 	<string name="share_note">Dela anteckning</string>
-	
-	<string name="shared_string_export">Exportera</string>
-	<string name="shared_string_audio">Ljud</string>
-	
-	
 	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.
 		\n\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.
 		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
@@ -1822,11 +1757,9 @@
 	<string name="days_behind">dagar efter</string>
 	<string name="watch">Visa</string>
 	<string name="rename_failed">Namnbytet misslyckades.</string>
-	<string name="shared_string_currently_recording_track">Spelar för tillfället in spår</string>
 	<string name="back_to_map">Tillbaka till kartan</string>
 	
 	<string name="showed_on_map">Visade på kartan</string>
-	<string name="shared_string_selected">Markerade</string>
 	<string name="track_segments">Spårsegment</string>
 	<string name="track_points">Spårpunkter</string>
 	<string name="route_points">Ruttpunkter</string>
@@ -1864,7 +1797,7 @@
 	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
 	<string name="shared_string_refresh">Uppdatera</string>
 	<string name="shared_string_download">Hämta</string>
-	<string name="shared_string_downloading">Hämtar</string>
+	<string name="shared_string_downloading">Laddar ner …</string>
 	<string name="shared_string_download_successful">Hämtningen lyckades</string>
 	<string name="shared_string_unexpected_error">Ett oväntat fel uppstod</string>
 	<string name="shared_string_action_template">"Åtgärd {0}: "</string>
@@ -1874,6 +1807,7 @@
 	<string name="shared_string_show_all">Visa alla</string>
 	<string name="shared_string_show_on_map">Visa på kartan</string>
 	<string name="shared_string_map">Karta</string>
+	<string name="shared_string_favorite">Favorit</string>
 	<string name="shared_string_favorites">Favoriter</string>
 	<string name="shared_string_add_to_favorites">Lägg till i Favoriter</string>
 	<string name="shared_string_my_location">Min plats</string>

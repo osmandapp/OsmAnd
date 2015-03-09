@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -26,7 +27,7 @@
   <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
-  <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le gadget GPX ou avec le paramètre d\' \"Enregistrement de traces\".</string>
+  <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrement de Voyage\".</string>
   <string name="show_current_gpx_title">Afficher la trace en cours</string>
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données Wikipedia hors-ligne avec articles
@@ -432,7 +433,7 @@
   <string name="layer_gpx_layer">Trace GPX…</string>
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
-  <string name="transport_context_menu">Rechercher un transport à l\'arrivée</string>
+  <string name="transport_context_menu">Transport en commun</string>
   
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
@@ -773,8 +774,8 @@
   
   
   <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier de données d\'OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
-  <string name="osmand_accessibility_description">Ce greffon permet de configurer les fonctionnalités d\'accessibilité.</string>
+  <string name="osmand_background_plugin_description">Afficher les préférences afin d\'activer le suivi et la navigation durant la mise en veille (réveille périodique du GPS).</string>
+  <string name="osmand_accessibility_description">Afficher la configuration pour activer les options d\'accessibilité.</string>
   
   
   
@@ -1108,7 +1109,7 @@
 <string name="audionotes_location_not_defined">La position à associer à la note n\'est pas encore défini. Utilisez le menu \'Utiliser ce point\' pour spécifier la position à associer à la note.</string>
     
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Affiche le bouton permettant de prendre des notes photo/audio/vidéo durant le voyage</string>
+    <string name="audionotes_plugin_description">Ce greffon permet, grâce des boutons, de prendre des photos / de l\'audio / des vidéos durant un voyage</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
@@ -1151,7 +1152,7 @@
 \n\t* Option \'Touring view\' avec plus de détails, nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS"
     </string>
-    <string name="shared_string_control_start">Enreg.</string>
+    <string name="shared_string_control_start">Démarrer</string>
     <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     
@@ -1326,7 +1327,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
-    <string name="shared_string_downloading">Téléchargement en cours…</string>
+    <string name="shared_string_downloading">Téléchargement en cours</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  
 " 
     </string>
@@ -1486,8 +1487,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
-    <string name="shared_string_select_on_map">Sélectionner sur la carte…</string>
-    <string name="shared_string_favorite">Favori…</string>
+    <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
+    <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
@@ -1566,8 +1567,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
 	<string name="osmo_plugin_description">"Suivi avancé OpenStreetMap en temps réel, voir http://osmo.mobi. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent. Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
-	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
-	<string name="osmo_settings">Suivi OpenStreetMap</string>
+	<string name="osmo_plugin_name">OsMo surveillance</string>
+	<string name="osmo_settings">OsMo surveillance</string>
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
@@ -1934,8 +1935,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistes</string>
-	<string name="watch">Surveiller</string>
+    <string name="rendering_attr_pisteRoutes_name">Parcours de pistes</string>
+	<string name="watch">Montre</string>
 	<string name="shared_string_audio">Audio</string>
 	
 	
@@ -1964,7 +1965,21 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	
 	<string name="showed_on_map">Affiché sur la carte</string>
 	<string name="shared_string_selected">Sélectionné</string>
-	<string name="track_points">Points de trace</string>
-	<string name="route_points">Points d\'itinéraire</string>
-	<string name="track_segments">Segments de trace</string>
-	</resources>
+	<string name="track_points">Points de piste</string>
+	<string name="route_points">Points de passage</string>
+	<string name="track_segments">Segments de la voie</string>
+	<string name="simulate_your_location">Simulez votre position</string>
+    <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
+    <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations</string>
+    <string name="routing_settings_2">Paramètres de navigation</string>
+    <string name="general_settings_2">Paramètres généraux</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">Désélectionner</string>
+	<string name="shared_string_deselect_all">Désélectionner tout</string>
+	<string name="shared_string_unexpected_error">Une erreur inconnue s\'est produite</string>
+	<string name="shared_string_action_template">Action {0}</string>
+	<string name="shared_string_video">Vidéo</string>
+	<string name="shared_string_photo">Photo</string>
+	<string name="shared_string_release">Publié</string>
+	<string name="drawer">Liste simple</string>
+    </resources>

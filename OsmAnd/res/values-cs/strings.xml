@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -628,7 +629,7 @@
   <string name="download_question">Stáhnout {0} - {1} ?</string>
   <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
   <string name="address">Adresa</string>
-  <string name="shared_string_download_successful">Index úspěšně stažen</string>
+  <string name="shared_string_download_successful">Stahování úspěšné</string>
   
   
   
@@ -1216,7 +1217,7 @@
     <string name="cancel_route">Zrušit trasu</string>
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
-    <string name="shared_string_downloading">Stahuji …</string>
+    <string name="shared_string_downloading">Stahuji</string>
 	<string name="other_location">Ostatní</string>
     <string name="local_osm_changes_backup_successful">Soubor se změnami mapy OSM úspěšně vytvořen %1$s</string>
     <string name="local_osm_changes_backup_failed">Nezdařilo se zálohovat změny mapy OSM</string>
@@ -1362,8 +1363,8 @@ s často kladenými otázkami.</string>
     <string name="select_gpx">Vybrat GPX…</string>
     <string name="use_displayed_track_for_navigation">Chcete použít zobrazenou trasu pro navigaci?</string>
     <string name="route_descr_select_destination">Vybrat cíl</string>
-    <string name="shared_string_select_on_map">Vybrat na mapě…</string>
-    <string name="shared_string_favorite">Oblíbené…</string>
+    <string name="shared_string_select_on_map">Vybrat na mapě</string>
+    <string name="shared_string_favorite">Oblíbené</string>
     <string name="route_preferences">Předvolby trasy</string>
     <string name="route_info">Informace o trase</string>
     <string name="routing_attr_prefer_motorway_name">Upřednostňovat dálnice</string>
@@ -1776,7 +1777,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_use_https">Použít HTTPS</string>
 	<string name="map_update">K dispozici aktualizace pro %1$s map</string>
 	<string name="search_for">Hledat</string>
-	<string name="shared_string_show_all">ZOBRAZIT VŠE</string>
+	<string name="shared_string_show_all">Zobrazit vše</string>
 	<string name="coordinates">Souřadnice</string>
 	<string name="shared_string_dismiss">Zavřít</string>
     <string name="everything_up_to_date">Všechny soubory jsou aktuální</string>
@@ -1871,4 +1872,15 @@ s často kladenými otázkami.</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
 	<string name="get_plugin">Získat</string>
 <string name="route_points">Body cesty</string>
+	<string name="simulate_your_location">Simulovat polohu</string>
+    <string name="short_location_on_map">Šířka %1$s\n Délka %2$s</string>
+    <string name="routing_settings_2">Nastavení navigace</string>
+    <string name="general_settings_2">Všeobecná nastavení</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">Zrušit výběr</string>
+	<string name="shared_string_deselect_all">Zrušit výběr všech</string>
+	<string name="shared_string_unexpected_error">Nastala neočekávaná chyba</string>
+	<string name="shared_string_action_template">Činnost {0}</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
 	</resources>

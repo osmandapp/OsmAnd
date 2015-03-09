@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -42,7 +42,7 @@
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке</string>
     
     <string name="map_widget_audionotes">Аудио заметки</string>
-    <string name="audionotes_plugin_description">Предоставляет возможность делать аудио-видео заметки во время путешествия</string>
+    <string name="audionotes_plugin_description">Этот плагин предоставляет возможность делать аудио-видео заметки во время путешествия</string>
     <string name="audionotes_plugin_name">Аудио-видео заметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
@@ -309,7 +309,7 @@
   
   
   
-  <string name="local_index_installed">Издание</string>
+  <string name="local_index_installed">Локальная версия</string>
   <string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
   <string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
   <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
@@ -371,7 +371,6 @@
   <string name="map_underlay">Карта подложки</string>
   <string name="map_underlay_descr">Выберите слой подложки для основной карты</string>
   <string name="layer_overlay">Карта покрытия…</string>
-  <string name="shared_string_none">Нет</string>
   <string name="map_overlay">Карта покрытия</string>
   <string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
   <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
@@ -952,7 +951,7 @@
   <string name="left_side_navigation">Левосторонняя навигация</string>
   <string name="left_side_navigation_descr">Включите, если пользуетесь навигацией в странах с левосторонним движением</string>
   <string name="local_index_routing_data">Данные роутинга</string>
-  <string name="navigate_point_format">Формат:</string>
+  <string name="navigate_point_format">Формат</string>
   <string name="poi_search_desc">Поиск POI</string>
   <string name="address_search_desc">Поиск по адресу</string>
   <string name="navpoint_search_desc">Координаты</string>
@@ -993,7 +992,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Точка парковки</string>
-  <string name="osmand_parking_plugin_description">Внешний плагин (отдельная загрузка) позволяет запоминать место парковки вашего автомобиля.</string>
+  <string name="osmand_parking_plugin_description">Этот плагин был разработан для использования OsmAnd и позволяет легко запоминать место парковки вашего автомобиля.</string>
   <string name="osmand_parking_plugin_name">Парковочное место</string>
   <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
   <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
@@ -1506,7 +1505,6 @@
     <string name="arrival_distance_descr">Как скоро вы хотите объявить о прибытии?</string>
     
     <string name="osmo_io_error">Проблема подключения OsMo: </string>
-    <string name="shared_string_share">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
@@ -1577,11 +1575,6 @@
     <string name="osmo_follow">Следить</string>
     <string name="osmo_edit_device">Изменить пользовательские настройки</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
-    
-    <string name="shared_string_my_tracks">Все треки</string>
-    <string name="shared_string_my_favorites">Избранные</string>
-    <string name="shared_string_my_places">Мои места</string>
-    
     <string name="osmo_user_joined">Пользователь %1$s присоединился к группе %2$s</string>
     <string name="osmo_user_left">Пользователь %1$s покинул группу %2$s</string>
     <string name="osmo_show_group_notifications">Показывать извещения группы</string>
@@ -1614,7 +1607,6 @@
     <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
-    <string name="shared_string_selected_lowercase">выбранные</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
 	<string name="gpx_selection_number_of_points"> %1$s точек</string>
     <string name="gpx_selection_point">Точка %1$s</string>
@@ -1850,14 +1842,9 @@
     <string name="free">"Свободно %1$s "</string>
 	<string name="roads_only">Только дороги</string>
     <string name="online_map">Онлайн карта</string>
-	
-	<string name="shared_string_audio">Аудио</string>
-	
-	
 	<string name="rename_failed">Не удалось переименовать.</string>
 	<string name="back_to_map">Вернуться на карту</string>
 	<string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
-	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_enabled">Включено</string>
 	<string name="shared_string_disabled">Отключено</string>
@@ -1922,4 +1909,7 @@
 	<string name="selected_tracks">Выбранные</string>
 	<string name="share_note">Поделиться заметкой</string>
 	<string name="shared_string_release">Дата выпуска</string>
+	<string name="routing_settings_2">Настройки навигации</string>
+    <string name="general_settings_2">Основные настройки</string>
+	<string name="shared_string_clear_all">Очистить всё</string>
 	</resources>

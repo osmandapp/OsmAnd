@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -935,7 +936,7 @@
   <string name="left_side_navigation">Navigácia po ľavej strane</string>
   <string name="left_side_navigation_descr">Zapnite ak chcete navigovať v krajinách s ľavostrannou premávkou</string>
   <string name="local_index_routing_data">Navigačné údaje</string>
-  <string name="navigate_point_format">Formát :</string>
+  <string name="navigate_point_format">Formát</string>
   <string name="poi_search_desc">Hľadanie POI (Bodu záujmu)</string>
   <string name="address_search_desc">Hľadanie adresy</string>
   <string name="navpoint_search_desc">Súradnice</string>
@@ -2075,7 +2076,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_remember_my_choice">Zapamätať moju voľbu</string>
 	<string name="shared_string_refresh">Obnoviť</string>
 	<string name="shared_string_download">Stiahnuť</string>
-	<string name="shared_string_downloading">Sťahovanie…</string>
+	<string name="shared_string_downloading">Sťahovanie</string>
 	<string name="shared_string_download_successful">Sťahovanie úspešné</string>
 	<string name="shared_string_io_error">Nastala chyba čítania/zápisu</string>
 	<string name="shared_string_unexpected_error">Nastala neočakávaná chyba</string>
@@ -2100,4 +2101,15 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 
 	<string name="route_points">Body trasy</string>
 	<string name="shared_string_release">Vydaná</string>
+	<string name="simulate_your_location">Simulovať pozíciu</string>
+    <string name="drawer">Zoznam</string>
+    <string name="short_location_on_map">Šírka %1$s\n Dĺžka %2$s</string>
+    <string name="tips_and_tricks_descr">Často kladené otázky, nedávne zmeny a iné</string>
+    <string name="routing_settings_2">Navigačné nastavenia</string>
+    <string name="general_settings_2">Všeobecné nastavenia</string>
+	<string name="shared_string_clear_all">Vymazať všetko</string>
+	<string name="shared_string_my_location">Moja poloha</string>
+	<string name="shared_string_my_favorites">Moje obľúbené</string>
+	<string name="shared_string_my_tracks">Moje stopy</string>
+	<string name="shared_string_currently_recording_track">Stopa sa nahráva</string>
 	</resources>

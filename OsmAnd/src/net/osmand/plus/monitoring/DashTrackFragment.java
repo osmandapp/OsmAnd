@@ -49,7 +49,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
 		header.setTypeface(typeface);
-		header.setText(R.string.tracks);
+		header.setText(R.string.shared_string_my_tracks);
 
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
