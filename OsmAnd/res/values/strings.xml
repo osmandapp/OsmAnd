@@ -167,7 +167,6 @@
     <string name="proxy_pref_descr">Setup a proxy internet communication</string>
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
-    <string name="tracks">Tracks</string>
     <string name="osm_editing_manage">Manage</string>
 	<string name="navigation_over_track">Start navigation over track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
