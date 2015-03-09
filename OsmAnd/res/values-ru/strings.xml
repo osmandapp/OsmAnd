@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -1946,4 +1946,10 @@
 	<string name="turn_off_all">Выключить все</string>
 	<string name="days_behind"/>
 	<string name="notes">Заметки</string>
+	<string name="shared_string_selected">Выбранные</string>
+	<string name="shared_string_selected_lowercase">выбранные</string>
+	<string name="shared_string_none">Нет</string>
+	<string name="shared_string_deselect">Отменить выбор</string>
+	<string name="shared_string_deselect_all">Отменить выбор всех</string>
+	<string name="shared_string_share">Поделиться</string>
 	</resources>
