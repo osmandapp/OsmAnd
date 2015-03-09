@@ -43,7 +43,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.fav_text)).setTypeface(typeface);
 		((TextView) view.findViewById(R.id.fav_text)).setText(Algorithms
-				.capitalizeFirstLetterAndLowercase(getString(R.shared_string_history)));
+				.capitalizeFirstLetterAndLowercase(getString(R.string.shared_string_history)));
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
