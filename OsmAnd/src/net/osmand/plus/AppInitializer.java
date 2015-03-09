@@ -378,6 +378,9 @@ public class AppInitializer implements IProgress {
 			startBgTime = System.currentTimeMillis();
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			// init poi types before indexes and before POI
+			initPoiTypes();
+			
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			
 			app.resourceManager.initRenderers(this);
@@ -386,7 +389,7 @@ public class AppInitializer implements IProgress {
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 			
-			initPoiTypes();
+			
 			app.poiFilters.reloadAllPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);			
 			indexRegionsBoundaries(false);

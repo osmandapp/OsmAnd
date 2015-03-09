@@ -75,11 +75,11 @@
 	<string name="shared_string_favorites">Favorites</string>
 	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
-	<string name="shared_string_shared_string_my_location">My Location</string>
+	<string name="shared_string_my_location">My Location</string>
 	<string name="shared_string_my_places">My Places</string>
-	<string name="shared_string_shared_string_my_favorites">My Favorites</string>
-	<string name="shared_string_shared_string_my_tracks">My Tracks</string>
-	<string name="shared_string_shared_string_currently_recording_track">Currently recording track</string>
+	<string name="shared_string_my_favorites">My Favorites</string>
+	<string name="shared_string_my_tracks">My Tracks</string>
+	<string name="shared_string_currently_recording_track">Currently recording track</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Photo</string>

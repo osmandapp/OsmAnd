@@ -622,7 +622,7 @@ public class OsmandSettings {
 		return p;
 	}
 	
-	public final CommonPreference<Boolean> USE_DASHBOARD_INSTEAD_OF_DRAWER = new BooleanPreference("use_dashboard_instead_of_drawer", false).makeGlobal().cache();
+	public final CommonPreference<Boolean> USE_DASHBOARD_INSTEAD_OF_DRAWER = new BooleanPreference("use_dashboard_instead_of_drawer", true).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
