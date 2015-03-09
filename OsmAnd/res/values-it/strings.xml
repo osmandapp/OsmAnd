@@ -2125,4 +2125,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
+	<string name="simulate_your_location">Posizione fittizia</string>
+    <string name="drawer">Solo lista</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">"Domande frequenti, ultimi cambiamenti  e altro"</string>
+    <string name="routing_settings_2">Impostazioni di navigazione</string>
+    <string name="general_settings_2">Impostazioni generali</string>
+	<string name="shared_string_clear_all">Cancella tutto</string>
+	<string name="shared_string_my_location">Mia posizione</string>
+	<string name="shared_string_my_favorites">Miei preferiti</string>
+	<string name="shared_string_my_tracks">Mie tracce</string>
 	</resources>
