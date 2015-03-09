@@ -2058,7 +2058,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_release">Rilasciato</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
-	<string name="shared_string_cancel">Cancella</string>
+	<string name="shared_string_cancel">Abbandona</string>
 	<string name="shared_string_dismiss">Abbandona</string>
 	<string name="shared_string_yes">Si</string>
 	<string name="shared_string_no">No</string>
