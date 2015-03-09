@@ -7,9 +7,6 @@
 <string name="map_widget_back_to_loc">Var är jag</string>
 <string name="map_widget_lock_screen">Skärmlås</string>
 <string name="map_widget_compass">Kompass</string>
-
-
-
 <string name="map_widget_parking">Parkering</string>
 <string name="map_widget_monitoring">GPX-inspelning</string>
 <string name="map_widget_speed">Hastighet</string>
@@ -69,7 +66,6 @@
 <string name="default_buttons_commit">Skicka in</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-<string name="shared_string_no">Nej</string>
 <string name="shared_string_yes">Ja</string>
 <string name="shared_string_cancel">Avbryt</string>
 <string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
@@ -919,7 +915,6 @@
     <string name="recording_context_menu_play">Spela upp</string>
     <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
     <string name="recording_default_name">Spelar in</string>
-    <string name="shared_string_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
     
@@ -1037,7 +1032,6 @@
 	<string name="show_gps_coordinates_text">Visa GPS-koordinater på kartan</string>
 	<string name="use_internet_to_download_tile">Använd Internet för att hämta kartrutor som saknas</string>
 	<string name="app_description">Navigationsapp</string>
-	<string name="shared_string_exit">Avsluta</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
 	<string name="searchpoi_activity">Välj intressepunkt</string>
@@ -1648,7 +1642,6 @@
     <string name="map_widget_top">Statusfält</string>
 	<string name="map_widget_right">Höger panel</string>
 	<string name="map_widget_left">Vänster panel</string>
-    <string name="shared_string_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
     <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, kollektivtrafikslager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell notifiering och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
