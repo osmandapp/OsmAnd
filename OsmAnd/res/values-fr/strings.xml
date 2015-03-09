@@ -1980,4 +1980,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_action_template">Action {0}</string>
 	<string name="shared_string_video">Vidéo</string>
 	<string name="shared_string_photo">Photo</string>
+	<string name="shared_string_release">Sortit le</string>
 	</resources>
