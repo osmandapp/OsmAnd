@@ -261,7 +261,7 @@
   
   
   
-  <string name="local_index_installed">Vydání</string>
+  <string name="local_index_installed">Místní verze</string>
   <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
   <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
   <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
@@ -439,7 +439,7 @@
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
   <string name="application_dir">Úložiště pro data</string>
   
-  <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS naní instalovaná. Hledat na Marketu?</string>
+  <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS není nainstalovaná. Hledat v Obchodě?</string>
   <string name="voice_is_not_available_msg">Hlasové navádění není dostupné, jděte prosím do \'Nastavení\' → \'Obecné\' → \'Hlasové pokyny\' a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
   <string name="voice_is_not_available_title">Žádná hlasová data nejsou zvolena</string>
   <string name="trace_rendering_descr">Zaškrtněte pro zobrazení statistik o vykreslování mapy</string>
@@ -827,7 +827,7 @@
   <string name="confirm_interrupt_download">Chcete přerušit stahování souboru?</string>
   <string name="basemap_was_selected_to_download">Pro správnou funkci aplikace je třeba základní mapa. Proto byla automaticky vybrána ke stažení.</string>
   
-  <string name="map_online_plugin_is_not_installed">Zapněte modul \'Online mapy\' pro výběr různých mapových zdrojů</string>
+  <string name="map_online_plugin_is_not_installed">Povolit modul \'Online mapy\' pro výběr různých mapových zdrojů</string>
   <string name="map_online_data">Online mapy (rastrové)</string>
   <string name="map_online_data_descr">Používat online mapy (stáhnout je a uložit na SD kartě)</string>
   <string name="online_map_settings">Online mapy</string>
@@ -863,7 +863,7 @@
   <string name="navigate_point_format_DM">SSS MM.MMMMM</string>
   <string name="navigate_point_format_DMS">SSS MM ss.sssss</string>
   <string name="local_index_routing_data">Navigační data</string>
-  <string name="navigate_point_format">Formát :</string>
+  <string name="navigate_point_format">Formát</string>
   <string name="poi_search_desc">Hledat body zájmu (POI)</string>
   <string name="address_search_desc">Hledat adresu</string>
   <string name="navpoint_search_desc">Souřadnice</string>
@@ -906,7 +906,7 @@
   <string name="osmand_parking_pm">odpoledne</string>
   <string name="osmand_parking_am">dopoledne</string>
   <string name="osmand_parking_position_name">Místo parkování</string>
-  <string name="osmand_parking_plugin_description">Tento modul umožňuje zapamatovat si místo, kde jste zaparkovali auto.</string>
+  <string name="osmand_parking_plugin_description">Tento modul byl vyvinut, aby OsmAnd mohl lehce zaznamenat pozici vašeho zaparkovaného auta.</string>
   <string name="osmand_parking_plugin_name">Parkovací místo</string>
   <string name="context_menu_item_add_parking_point">Označit jako místo parkování</string>
   <string name="context_menu_item_delete_parking_point">Smazat místo parkování</string>
@@ -1112,7 +1112,7 @@
     <string name="recording_context_menu_play">Přehrát</string>
     <string name="map_widget_av_notes">Zvukové/video poznámky</string>
     <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
-    <string name="audionotes_plugin_description">Záznam zvukových/video poznámek během cesty</string>
+    <string name="audionotes_plugin_description">Tento zásuvný modul umožňuje zaznamenávat zvukové/fotografické/video poznámky během cesty</string>
     <string name="index_srtm_parts">části</string>
     <string name="av_def_action_video">Nahrát video</string>
     <string name="av_def_action_audio">Nahrát zvuk</string>
@@ -1473,7 +1473,7 @@ s často kladenými otázkami.</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
     <string name="osmo_plugin_name">OsMo monitorování</string>
-   	<string name="osmo_settings">OpenStreetMap sledování</string>
+   	<string name="osmo_settings">OsMo sledování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
     <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
@@ -1883,4 +1883,8 @@ s často kladenými otázkami.</string>
 	<string name="shared_string_action_template">Činnost {0}</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
+	<string name="drawer">Plochý seznam</string>
+    <string name="tips_and_tricks_descr">Často pokládané dotazy, nedávné změny a další</string>
+    <string name="days_behind">dnů po</string>
+	<string name="shared_string_release">Vydáno</string>
 	</resources>

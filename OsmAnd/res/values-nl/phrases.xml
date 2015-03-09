@@ -642,7 +642,7 @@
 	<string name="poi_seamark_anchorage">Ankerplaats</string>
 	<string name="poi_seamark_anchor_berth">Aanlegplaats</string>
 	<string name="poi_seamark_beacon">Baken</string>
-	<string name="poi_seamark_beacon_cardinal">Kardinale markering</string>
+	<string name="poi_seamark_beacon_cardinal">Kardinale betonning</string>
 	<string name="poi_seamark_beacon_lateral">Laterale betonning</string>
 	<string name="poi_seamark_beacon_safe_water">Betonning voor veilig vaarwater</string>
 	<string name="poi_seamark_beacon_special_purpose">Speciale betonning</string>

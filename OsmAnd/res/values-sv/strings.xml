@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -207,7 +208,7 @@
 <string name="rendering_attr_hmRendered_description">Öka antalet kartdetaljer som visas</string>
 <string name="rendering_attr_hmRendered_name">Visa mer kartdetaljer</string>
 <string name="local_index_routing_data">Ruttdata</string>
-<string name="navigate_point_format">Format:</string>
+<string name="navigate_point_format">Format</string>
 <string name="poi_search_desc">Sökning efter POI (Intressepunkter)</string>
 <string name="favourites_search_desc">Favoritsökning</string>
 
@@ -1550,7 +1551,7 @@
     <string name="rendering_attr_buildings15zoom_name">Byggnader vid zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Dölj tillfarts- inskränkningar</string>
+    <string name="rendering_attr_hideAccess_name">Dölj tillfartsinskränkningar</string>
     <string name="rendering_attr_showAccess_name">Visa tillfarts- inskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
@@ -1791,16 +1792,16 @@
 	<string name="shared_string_control_stop">Stoppa</string>
 	<string name="shared_string_import">Importera</string>
 	<string name="shared_string_export">Exportera</string>
-	<string name="shared_string_more">Mer</string>
+	<string name="shared_string_more">Mer…</string>
 	<string name="shared_string_more_actions">Fler åtgärder</string>
 	<string name="shared_string_do_not_show_again">Visa inte nästa gång</string>
 	<string name="shared_string_remember_my_choice">Kom ihåg mitt val</string>
 	<string name="shared_string_refresh">Uppdatera</string>
 	<string name="shared_string_download">Hämta</string>
-	<string name="shared_string_downloading">Laddar ner …</string>
+	<string name="shared_string_downloading">Laddar ner</string>
 	<string name="shared_string_download_successful">Hämtningen lyckades</string>
 	<string name="shared_string_unexpected_error">Ett oväntat fel uppstod</string>
-	<string name="shared_string_action_template">"Åtgärd {0}: "</string>
+	<string name="shared_string_action_template">Åtgärd {0}</string>
 	<string name="shared_string_close">Stäng</string>
 	<string name="shared_string_exit">Avsluta</string>
 	<string name="shared_string_show">Visa</string>
@@ -1820,4 +1821,11 @@
 	<string name="shared_string_photo">Foto</string>
 
 	<string name="shared_string_release">Utgiven</string>
+	<string name="simulate_your_location">Simulera din plats</string>
+    <string name="drawer">Platt lista</string>
+    <string name="short_location_on_map">Lat %1$s\n Long %2$s</string>
+    <string name="tips_and_tricks_descr">Frågor och svar, nyliga förändringar och annat</string>
+    <string name="routing_settings_2">Navigeringsinställningar</string>
+    <string name="general_settings_2">Allmänna inställningar</string>
+	<string name="shared_string_no">Nej</string>
 	</resources>
