@@ -1981,4 +1981,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_video">Vidéo</string>
 	<string name="shared_string_photo">Photo</string>
 	<string name="shared_string_release">Sortit le</string>
-	</resources>
+	<string name="drawer">Liste à plat</string>
+    </resources>
