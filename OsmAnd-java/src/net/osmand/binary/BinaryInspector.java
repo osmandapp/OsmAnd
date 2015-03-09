@@ -680,15 +680,15 @@ public class BinaryInspector {
 			MapObjectStat st = req.stat;
 			int cnt = 0;
 			boolean names = st.lastObjectCoordinates == 0;
-			this.lastStringNamesSize += st.lastStringNamesSize;
-			this.lastObjectIdSize += st.lastObjectIdSize;
-			this.lastObjectHeaderInfo += st.lastObjectHeaderInfo;
-			this.lastObjectAdditionalTypes += st.lastObjectAdditionalTypes;
-			this.lastObjectTypes += st.lastObjectTypes;
-			this.lastObjectCoordinates += st.lastObjectCoordinates;
 			if (!names) {
+				this.lastStringNamesSize += st.lastStringNamesSize;
+				this.lastObjectIdSize += st.lastObjectIdSize;
+				this.lastObjectHeaderInfo += st.lastObjectHeaderInfo;
+				this.lastObjectAdditionalTypes += st.lastObjectAdditionalTypes;
+				this.lastObjectTypes += st.lastObjectTypes;
+				this.lastObjectCoordinates += st.lastObjectCoordinates;
 				cnt = obj.getPointsLength();
-				this.lastObjectIdSize += st.lastObjectSize;
+				this.lastObjectSize += st.lastObjectSize;
 				if (obj.getPolygonInnerCoordinates() != null) {
 					for (int[] i : obj.getPolygonInnerCoordinates()) {
 						cnt += i.length;
@@ -712,13 +712,13 @@ public class BinaryInspector {
 			long b = 0;
 			b += out("Header", st.lastBlockHeaderInfo);
 			b += out("String table", st.lastBlockStringTableSize);
-			b += out("Map Objects", st.lastObjectSize);
+			b += out("Map Objects", lastObjectSize);
 			out("TOTAL", b);
 			println("\nMAP OBJECTS INFO:");
 			b = 0;
 			b += out("Header", lastObjectHeaderInfo);
 			b += out("Coordinates", lastObjectCoordinates);
-			b += out("Coordinates Count(pair)", lastObjectCoordinatesCount);
+			out("Coordinates Count(pair)", lastObjectCoordinatesCount);
 			b += out("Types", lastObjectTypes);
 			b += out("Additonal Types", lastObjectAdditionalTypes);
 			b += out("Ids", lastObjectIdSize);
