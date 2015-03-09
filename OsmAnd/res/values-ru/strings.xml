@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -42,7 +42,7 @@
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке</string>
     
     <string name="map_widget_audionotes">Аудио заметки</string>
-    <string name="audionotes_plugin_description">Предоставляет возможность делать аудио-видео заметки во время путешествия</string>
+    <string name="audionotes_plugin_description">Этот плагин предоставляет возможность делать аудио-видео заметки во время путешествия</string>
     <string name="audionotes_plugin_name">Аудио-видео заметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
@@ -309,7 +309,7 @@
   
   
   
-  <string name="local_index_installed">Издание</string>
+  <string name="local_index_installed">Локальная версия</string>
   <string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
   <string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
   <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
@@ -951,7 +951,7 @@
   <string name="left_side_navigation">Левосторонняя навигация</string>
   <string name="left_side_navigation_descr">Включите, если пользуетесь навигацией в странах с левосторонним движением</string>
   <string name="local_index_routing_data">Данные роутинга</string>
-  <string name="navigate_point_format">Формат:</string>
+  <string name="navigate_point_format">Формат</string>
   <string name="poi_search_desc">Поиск POI</string>
   <string name="address_search_desc">Поиск по адресу</string>
   <string name="navpoint_search_desc">Координаты</string>
@@ -992,7 +992,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Точка парковки</string>
-  <string name="osmand_parking_plugin_description">Внешний плагин (отдельная загрузка) позволяет запоминать место парковки вашего автомобиля.</string>
+  <string name="osmand_parking_plugin_description">Этот плагин был разработан для использования OsmAnd и позволяет легко запоминать место парковки вашего автомобиля.</string>
   <string name="osmand_parking_plugin_name">Парковочное место</string>
   <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
   <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
@@ -1909,4 +1909,7 @@
 	<string name="selected_tracks">Выбранные</string>
 	<string name="share_note">Поделиться заметкой</string>
 	<string name="shared_string_release">Дата выпуска</string>
+	<string name="routing_settings_2">Настройки навигации</string>
+    <string name="general_settings_2">Основные настройки</string>
+	<string name="shared_string_clear_all">Очистить всё</string>
 	</resources>
