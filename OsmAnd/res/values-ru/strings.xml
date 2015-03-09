@@ -1952,4 +1952,8 @@
 	<string name="shared_string_deselect">Отменить выбор</string>
 	<string name="shared_string_deselect_all">Отменить выбор всех</string>
 	<string name="shared_string_share">Поделиться</string>
+	<string name="shared_string_my_places">Мои места</string>
+	<string name="shared_string_my_favorites">Мои избранные</string>
+	<string name="shared_string_my_tracks">Мои треки</string>
+	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
 	</resources>
