@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1967,4 +1968,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="track_points">Points de trace</string>
 	<string name="route_points">Points d\'itinéraire</string>
 	<string name="track_segments">Segments de trace</string>
-	</resources>
+	<string name="simulate_your_location">Simulez votre position</string>
+    <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
+    </resources>
