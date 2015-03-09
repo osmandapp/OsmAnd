@@ -42,6 +42,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
+import net.osmand.plus.WDebug;
 import net.osmand.plus.poi.NameFinderPoiFilter;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.poi.SearchByNameFilter;
@@ -235,6 +236,7 @@ public class ResourceManager {
 			boolean ex = false;
 			if(map instanceof SQLiteTileSource){
 				if(((SQLiteTileSource) map).isLocked()){
+					WDebug.log("db locked "+tileId);
 					return false;
 				}
 				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
