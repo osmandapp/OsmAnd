@@ -144,7 +144,7 @@ public class ShareDialog {
 				try {
 					type.execute(a, title);
 				} catch (RuntimeException e) {
-					Toast.makeText(a, R.string.input_output_error, Toast.LENGTH_SHORT).show();
+					Toast.makeText(a, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 				}				
 			}
 		});
@@ -188,7 +188,7 @@ public class ShareDialog {
 			if (Version.isMarketEnabled((OsmandApplication) activity.getApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
-				builder.setPositiveButton(activity.getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix((OsmandApplication) activity.getApplication()) 
@@ -199,7 +199,7 @@ public class ShareDialog {
 						}
 					}
 				});
-				builder.setNegativeButton(activity.getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(activity.getString(R.string.shared_string_no), null);
 				builder.show();
 			} else {
 				Toast.makeText(activity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();

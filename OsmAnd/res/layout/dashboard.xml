@@ -46,6 +46,14 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
+			
+			<fragment
+					android:id="@+id/RecentsFragment"
+					android:name="net.osmand.plus.dashboard.DashRecentsFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+			
 			<fragment
 					android:id="@+id/FavoritesFragment"
 					android:name="net.osmand.plus.dashboard.DashFavoritesFragment"

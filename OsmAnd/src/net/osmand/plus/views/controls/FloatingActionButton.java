@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import android.widget.FrameLayout;
 * https://gist.github.com/Jogan/9def6110edf3247825c9
  */
 
+@SuppressLint("NewApi")
 public class FloatingActionButton extends View {
 
 	final static OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
@@ -90,6 +92,7 @@ public class FloatingActionButton extends View {
 			animSetXY.setDuration(100);
 			animSetXY.start();
 			mHidden = true;
+			setVisibility(View.GONE);
 		}
 	}
 
@@ -103,6 +106,7 @@ public class FloatingActionButton extends View {
 			animSetXY.setDuration(200);
 			animSetXY.start();
 			mHidden = false;
+			setVisibility(View.VISIBLE);
 		}
 	}
 

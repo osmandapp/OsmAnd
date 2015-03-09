@@ -544,7 +544,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 					return true;
 				}
 			});
-			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
+			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
@@ -557,7 +557,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 			});
 
-			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite);
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
@@ -570,7 +570,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 			});
 		} else {
-			createMenuItem(menu, 1, R.string.default_buttons_ok, R.drawable.ic_action_ok_light,
+			createMenuItem(menu, 1, R.string.shared_string_ok, R.drawable.ic_action_ok_light,
 					R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 		return super.onCreateOptionsMenu(menu);

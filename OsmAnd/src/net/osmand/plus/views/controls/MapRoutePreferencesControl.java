@@ -208,7 +208,7 @@ public class MapRoutePreferencesControl extends MapControls {
 		if (gpxParam.id == R.string.fast_route_mode) {
 			settings.FAST_ROUTE_MODE.set(selected);
 		}
-		if (gpxParam.id	== R.string.announce_nearby_favorites){
+		if (gpxParam.id	== R.string.speak_favorites){
 			settings.ANNOUNCE_NEARBY_FAVORITES.set(selected);
 		}
 	}
@@ -385,7 +385,7 @@ public class MapRoutePreferencesControl extends MapControls {
 
 	private void updateSpinnerItems(Spinner gpxSpinner) {
 		ArrayList<String> gpxActions = new ArrayList<String>();
-		gpxActions.add(mapActivity.getString(R.string.default_none));
+		gpxActions.add(mapActivity.getString(R.string.shared_string_none));
 		gpxActions.add(mapActivity.getString(R.string.select_gpx));
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		if(rp != null) {

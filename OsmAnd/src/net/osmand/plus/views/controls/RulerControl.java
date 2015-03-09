@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.view.View;
 import android.widget.FrameLayout;
 
 public class RulerControl extends MapControls {
@@ -58,6 +59,9 @@ public class RulerControl extends MapControls {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		if( (zoomControls.isVisible() && zoomControls.isShowZoomLevel()) || !mapActivity.getMyApplication().getSettings().SHOW_RULER.get()){
+			return;
+		}
+		if(mapActivity.findViewById(R.id.MapButtons).getVisibility() == View.GONE) {
 			return;
 		}
 		OsmandMapTileView view = mapActivity.getMapView();

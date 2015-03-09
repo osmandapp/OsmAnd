@@ -21,7 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
-import net.osmand.data.Street;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -31,7 +31,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -68,7 +68,6 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -178,12 +177,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public boolean setName(String name) {
-			int index = file.getAbsolutePath().lastIndexOf("/") + 1;
-			if (index < 0) {
-				return false;
+			File directory = file.getParentFile();			
+			String fileName = getFileName();
+			final String hashAndExtension;
+			int hashInd = fileName.lastIndexOf('_');
+			if (hashInd == -1) {
+				hashAndExtension = "_" + fileName;
+			} else {
+				hashAndExtension = fileName.substring(hashInd, fileName.length());
 			}
-			File directory = new File(file.getAbsolutePath().substring(0, index));
-			File to = new File(directory, name.trim());
+			File to = new File(directory, name+hashAndExtension);
 			if (file.renameTo(to)) {
 				file = to;
 				return true;
@@ -198,17 +201,27 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getName(Context ctx) {
 			String fileName = file.getName();
 
-			int hashInd = fileName.lastIndexOf("_");
+			int hashInd = fileName.lastIndexOf('_');
 			if (hashInd != -1) {
-				return fileName.substring(0, hashInd - 1);
+				return fileName.substring(0, hashInd);
 			} else if (this.isAudio()) {
-				return ctx.getResources().getString(R.string.audio);
+				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
-				return ctx.getResources().getString(R.string.video);
+				return ctx.getResources().getString(R.string.shared_string_video);
 			} else if (this.isPhoto()) {
-				return ctx.getResources().getString(R.string.photo);
+				return ctx.getResources().getString(R.string.shared_string_photo);
 			}
 			return "";
+		}
+
+		public String getSearchHistoryType(){
+			if (isPhoto()){
+				return PointDescription.POINT_TYPE_PHOTO_NOTE;
+			} else if (isVideo()) {
+				return PointDescription.POINT_TYPE_VIDEO_NOTE;
+			} else {
+				return PointDescription.POINT_TYPE_PHOTO_NOTE;
+			}
 		}
 
 		public boolean isPhoto() {
@@ -318,14 +331,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
 					.trim();
 		}
-
+		
 		public String getSmallDescription(Context ctx) {
-
 			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, "", time).trim();
+				return time;
 			}
-			return ctx.getString(R.string.recording_description, "", "", time).trim();
+			updateInternalDescription();
+			return time + " " + getDuration(ctx);
+			
 		}
 
 		private String getDuration(Context ctx) {
@@ -340,9 +354,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return additional;
 		}
 
-		public void setDescription() {
-			//TODO implement setting description
-		}
 	}
 
 	private static void initializeRemoteControlRegistrationMethods() {
@@ -517,7 +528,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void setRecordListener(final TextInfoWidget recordPlaceControl, final MapActivity mapActivity) {
-		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
+		recordPlaceControl.setText(app.getString(R.string.shared_string_control_start), "");
 		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 
@@ -934,7 +945,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.prepare();
 		mr.start();
 		mediaRec = mr;
-		recordControl.setText(app.getString(R.string.av_control_stop), "");
+		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final StackWidgetView par = mil.getRightStack();
@@ -1147,7 +1158,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		dlg.setNegativeButton(R.string.default_buttons_cancel, new OnClickListener() {
+		dlg.setNegativeButton(R.string.shared_string_cancel, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -1239,7 +1250,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				camera.release();
 			}
 		}
-
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
 	}
 
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.audio_video_notes;
+	}
 }

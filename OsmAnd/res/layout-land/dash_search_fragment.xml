@@ -19,7 +19,7 @@
         <Button
             android:id="@+id/recents"
             style="?attr/dashboardGeneralButtonStyle"
-            android:text="@string/recents" />
+            android:text="@string/shared_string_history" />
     </LinearLayout>
         <View
         android:layout_width="match_parent"

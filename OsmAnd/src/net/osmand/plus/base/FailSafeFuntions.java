@@ -54,7 +54,7 @@ public class FailSafeFuntions {
 					tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
 					tv.setPadding(7, 5, 7, 5);
 					builder.setView(tv);
-					builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							quitRouteRestoreDialog = true;
@@ -62,7 +62,7 @@ public class FailSafeFuntions {
 
 						}
 					});
-					builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+					builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							quitRouteRestoreDialog = true;

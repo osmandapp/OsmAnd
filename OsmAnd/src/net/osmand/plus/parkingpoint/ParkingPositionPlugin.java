@@ -281,7 +281,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		confirm.setTitle(activity.getString(R.string.osmand_parking_delete));
 		confirm.setMessage(activity.getString(R.string.osmand_parking_delete_confirm));
 		confirm.setCancelable(true);
-		confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				showDeleteEventWarning(activity);
@@ -294,7 +294,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+		confirm.setNegativeButton(R.string.shared_string_cancel, null);
 		return confirm.show();
 	}
 	
@@ -310,7 +310,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));
-		setTime.setNegativeButton(R.string.default_buttons_cancel, null);
+		setTime.setNegativeButton(R.string.shared_string_cancel, null);
 		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
 
@@ -348,7 +348,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		timePicker.setCurrentHour(0);
 		timePicker.setCurrentMinute(0);
 		
-		setTime.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		setTime.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				choose.dismiss();
@@ -394,7 +394,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			Builder deleteEventWarning = new AlertDialog.Builder(activity);
 			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
 			deleteEventWarning.setMessage(activity.getString(R.string.osmand_parking_warning_text));
-			deleteEventWarning.setNeutralButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {						
+			deleteEventWarning.setNeutralButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {						
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 				}
@@ -513,5 +513,15 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return null;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.parking_position;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_parking_dark;
 	}
 }

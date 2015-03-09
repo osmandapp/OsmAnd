@@ -49,6 +49,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference routing;
 	private Preference about;
 	private Preference version;
+	private Preference help;
 
 
 	@Override
@@ -65,7 +66,10 @@ public class SettingsActivity extends SettingsBaseActivity {
 		general.setOnPreferenceClickListener(this);
 		routing = (Preference) screen.findPreference("routing_settings");
 		routing .setOnPreferenceClickListener(this);
-		OsmandPlugin.onSettingsActivityCreate(this, screen);
+		help = (Preference) screen.findPreference("help");
+		help.setOnPreferenceClickListener(this);
+		
+		getToolbar().setTitle(Version.getFullVersion(getMyApplication()));
 		
 		Intent intent = getIntent();
 		if(intent != null && intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0) != 0){
@@ -123,6 +127,9 @@ public class SettingsActivity extends SettingsBaseActivity {
 		} else if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
 			return true;
+		} else if (preference == help) {
+			startActivity(new Intent(this, HelpActivity.class));
+			return true;
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
 			return true;
@@ -151,7 +158,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		Toolbar tb = new Toolbar(this);
 		tb.setClickable(true);
 		Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-		back.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
+		back.setColorFilter(app.getResources().getColor(R.color.color_white), PorterDuff.Mode.MULTIPLY);
 		tb.setNavigationIcon(back);
 		tb.setTitle(R.string.about_settings);
 		tb.setBackgroundColor(getResources().getColor( getResIdFromAttribute(this, R.attr.pstsTabBackground)));
@@ -169,7 +176,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		String vt = this.getString(R.string.about_version) + "\t";
 		String edition = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
-			edition = this.getString(R.string.local_index_installed) + " : \t" + this.getString(R.string.app_edition);
+			edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
 		}
 		tv.setText(vt + version + "\n" +
 				edition + "\n\n" +
@@ -190,7 +197,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		ll.addView(sv);
 		dialog.setContentView(ll);
 		dialog.show();
-//		bld.setPositiveButton(R.string.default_buttons_ok, null);
+//		bld.setPositiveButton(R.string.shared_string_ok, null);
 	}
 
 	

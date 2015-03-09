@@ -69,5 +69,11 @@ public class TabActivity extends ActionBarProgressActivity {
 		public CharSequence getPageTitle(int position) {
 			return mTabs.get(position).mTitle;
 		}
+
+		public void addTab(TabItem tabIndicator) {
+			mTabs.add(tabIndicator);
+			notifyDataSetChanged();
+			
+		}
 	}
 }

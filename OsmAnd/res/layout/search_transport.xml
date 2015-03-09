@@ -40,15 +40,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/listView"
-            style="@style/OsmandListView" />
+            android:layout_below="@+id/listView"/>
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            style="@style/OsmandListView" />
+            android:layout_alignParentTop="true"/>
     </RelativeLayout>
 
 </LinearLayout>

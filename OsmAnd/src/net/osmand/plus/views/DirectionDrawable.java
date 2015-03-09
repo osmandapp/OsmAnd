@@ -5,7 +5,7 @@ import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -20,10 +20,17 @@ public class DirectionDrawable extends Drawable {
 	Context ctx;
 	private float angle;
 	int resourceId = -1;
+	Drawable arrowImage ;
 
-	public DirectionDrawable(Context ctx, float width, float height, int resourceId) {
+	public DirectionDrawable(Context ctx, float width, float height, int resourceId, int clrId) {
 		this(ctx, width, height);
-		this.resourceId = resourceId;
+		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		arrowImage = iconsCache.getIcon(resourceId, clrId);
+	}
+	
+	public void setImage(int resourceId, int clrId) {
+		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		arrowImage = iconsCache.getIcon(resourceId, clrId);		
 	}
 
 
@@ -54,15 +61,16 @@ public class DirectionDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (resourceId != -1) {
+		if (arrowImage != null) {
 			canvas.rotate(angle, canvas.getHeight() / 2, canvas.getWidth() / 2);
-
-			Drawable arrowImage = ctx.getResources().getDrawable(resourceId);
-			Bitmap arrow = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
-			Canvas canv = new Canvas(arrow);
 			arrowImage.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-			arrowImage.draw(canv);
-			canvas.drawBitmap(arrow, null, new Rect(0, 0, arrow.getHeight(), arrow.getWidth()), null);
+			arrowImage.draw(canvas);
+			// TODO delete?
+//			Bitmap arrow = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+//			Canvas canv = new Canvas(arrow);
+//			arrowImage.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+//			arrowImage.draw(canv);
+//			canvas.drawBitmap(arrow, null, new Rect(0, 0, arrow.getHeight(), arrow.getWidth()), null);
 		} else {
 			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth() / 2);
 			Path directionPath = createDirectionPath();

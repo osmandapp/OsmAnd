@@ -6,31 +6,12 @@
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content">
 
-		<LinearLayout android:id="@+id/loading"
-					  android:layout_width="fill_parent"
-					  android:layout_height="@dimen/dashMapHeight"
-					  android:gravity="center_vertical|center_horizontal"
-					  android:orientation="horizontal">
-
-			<ProgressBar
-					android:id="@+id/ProgressBar"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
-
-			<TextView
-					android:id="@+id/ProgressMessage"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:maxLines="3"
-					android:textColor="@color/icon_color_light"
-					android:text="@string/loading_data"
-					android:textSize="@dimen/dashProgressTextSize"/>
-		</LinearLayout>
+		<include layout="@layout/application_loading"/>
 
 		<ImageView android:id="@+id/map_image"
 				   android:scaleType="centerCrop"
 				   android:src="@drawable/background"
 				   android:layout_width="match_parent"
-				   android:layout_height="@dimen/dashMapHeight"
+				   android:layout_height="260dp"
 				   android:visibility="gone"/>
 </RelativeLayout>

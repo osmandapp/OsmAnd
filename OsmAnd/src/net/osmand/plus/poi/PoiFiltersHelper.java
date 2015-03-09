@@ -39,11 +39,9 @@ public class PoiFiltersHelper {
 	private static final String UDF_PARKING = "parking";
 	
 	private static final String[] DEL = new String[] {};
-	private MapPoiTypes poiTypes;
 	
 	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
-		poiTypes = application.getPoiTypes();
 	}
 	public NameFinderPoiFilter getNameFinderPOIFilter() {
 		if(nameFinderPOIFilter == null){
@@ -75,14 +73,19 @@ public class PoiFiltersHelper {
 		return findPoiFilter(filterId, getUserDefinedPoiFilters(), getTopStandardFilters(), getOsmDefinedPoiFilters());
 	}
 	
+	
+	public MapPoiTypes getPoiTypes() {
+		return application.getPoiTypes();
+	}
+	
 	private void putAll(Map<PoiCategory, LinkedHashSet<String>> types, String tp) {
-		types.put(poiTypes.getPoiCategoryByName(tp), null);
+		types.put(getPoiTypes().getPoiCategoryByName(tp), null);
 	}
 
 	private void putValues(Map<PoiCategory, LinkedHashSet<String>> types, String p, String... vls) {
 		LinkedHashSet<String> list = new LinkedHashSet<String>();
 		Collections.addAll(list, vls);
-		types.put(poiTypes.getPoiCategoryByName(p), list);
+		types.put(getPoiTypes().getPoiCategoryByName(p), list);
 	}
 	
 	private List<PoiLegacyFilter> getUserDefinedDefaultFilters() {
@@ -170,6 +173,16 @@ public class PoiFiltersHelper {
 		return types;
 	}
 	
+	public void reloadAllPoiFilters() {
+		cacheOsmDefinedFilters = null;
+		cacheTopStandardFilters = null;
+		cacheUserDefinedFilters = null;
+		getUserDefinedPoiFilters();
+		getTopStandardFilters();
+		getOsmDefinedPoiFilters();
+		
+	}
+	
 	
 	public List<PoiLegacyFilter> getUserDefinedPoiFilters(){
 		if(cacheUserDefinedFilters == null){
@@ -208,7 +221,7 @@ public class PoiFiltersHelper {
 	}
 	
 	public static String getOsmDefinedFilterId(PoiCategory t){
-		return PoiLegacyFilter.STD_PREFIX + t.getKeyName();
+		return PoiLegacyFilter.STD_PREFIX + (t == null ? null : t.getKeyName());
 	}
 	
 	public void updateFilters(boolean onlyAddFilters){
@@ -221,7 +234,7 @@ public class PoiFiltersHelper {
 	public List<PoiLegacyFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiLegacyFilter>();
-			for(PoiCategory t : poiTypes.getCategories()){
+			for(PoiCategory t : getPoiTypes().getCategories()){
 				cacheOsmDefinedFilters.add(new PoiLegacyFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();
@@ -432,7 +445,7 @@ public class PoiFiltersHelper {
 	    					map.put(filterId, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
 	    				}
 	    				Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
-	    				PoiCategory a = poiTypes.getPoiCategoryByName(query.getString(1));
+	    				PoiCategory a = getPoiTypes().getPoiCategoryByName(query.getString(1));
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);

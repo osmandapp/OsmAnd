@@ -2,7 +2,6 @@ package net.osmand.plus.osmedit;
 
 import java.util.List;
 
-import android.support.v4.app.Fragment;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
@@ -11,8 +10,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.AvailableGPXFragment;
-import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
@@ -24,6 +23,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -178,13 +178,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
-					.icon(R.drawable.ic_action_gup_dark)
+					.icon(R.drawable.ic_action_export)
 					.listen(new OnContextMenuClick() {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_gup_dark,
-									R.drawable.ic_action_gup_dark, new OnClickListener() {
+							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_export,
+									R.drawable.ic_action_export, new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											List<GpxInfo> selectedItems = f.getSelectedItems();
@@ -240,8 +240,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		visibility.setSelection(0);
 		
 		bldr.setView(view);
-		bldr.setNegativeButton(R.string.default_buttons_no, null);
-		bldr.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		bldr.setNegativeButton(R.string.shared_string_no, null);
+		bldr.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -260,4 +260,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return app.getString(R.string.osm_settings);
 	}
 
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_bug_dark;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.osm_editing;
+	}
 }

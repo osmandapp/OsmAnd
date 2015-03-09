@@ -112,7 +112,7 @@ public class SherpafyTourFragment extends ListFragment {
 					current ? R.string.continue_tour : R.string.start_tour , 
 					0, 0,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT, oic);
-			((TourViewActivity) getActivity()).createMenuItem(menu, SHARE_ID, R.string.share_fav,
+			((TourViewActivity) getActivity()).createMenuItem(menu, SHARE_ID, R.string.shared_string_share,
 					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM, oic);
 		}

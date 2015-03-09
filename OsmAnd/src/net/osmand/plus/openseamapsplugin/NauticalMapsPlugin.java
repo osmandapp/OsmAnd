@@ -24,12 +24,21 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public NauticalMapsPlugin(OsmandApplication app) {
 		this.app = app;
 	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return R.drawable.ic_plugin_nautical_map;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.nautical_map;
+	}
 
 	@Override
 	public String getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr1) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr2) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr3);
+		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr);
 	}
 
 	@Override
@@ -47,7 +56,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 					 IndexConstants.BINARY_MAP_INDEX_EXT)){
 				Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
-				dlg.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+				dlg.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -57,7 +66,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 						activity.startActivity(intent);
 					}
 				});
-				dlg.setNegativeButton(R.string.default_buttons_cancel, new OnClickListener() {
+				dlg.setNegativeButton(R.string.shared_string_cancel, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

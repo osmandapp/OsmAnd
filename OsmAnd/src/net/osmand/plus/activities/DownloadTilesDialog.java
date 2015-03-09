@@ -101,14 +101,14 @@ public class DownloadTilesDialog {
 			
 		});
 		
-		builder.setPositiveButton(R.string.download_files, new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				run(zoom, seekBar.getProgress(), rb.getLatLonBounds(), mapSource);
 			}
 		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setView(view);
 		builder.show();
 	}
@@ -132,7 +132,7 @@ public class DownloadTilesDialog {
 		
 		final ProgressDialog progressDlg = new ProgressDialog(ctx);
 		progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progressDlg.setMessage(ctx.getString(R.string.downloading));
+		progressDlg.setMessage(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis));
 		progressDlg.setCancelable(true);
 		progressDlg.setMax(numberTiles);
 		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){

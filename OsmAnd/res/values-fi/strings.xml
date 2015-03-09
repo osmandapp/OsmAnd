@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -51,7 +50,7 @@
 	<string name="avoid_in_routing_descr">Vältä tietulleja, päällystämättömiä, lauttoja</string>
 	<string name="map_widget_fluorescent">Valaistut tiet</string>
 	<string name="map_widget_show_ruler">Viivoitin</string>
-	<string name="map_widget_appearance">Sekalaista:</string>
+	
 	<string name="map_widget_view_direction">Katseen suunta</string>
 	<string name="map_widget_transparent">Läpinäkyvä taustakuva</string>
 	
@@ -79,7 +78,7 @@
 	<string name="osmand_parking_position_description_add_time">Auto pysäköitiin:</string>
 	<string name="global_app_allocated_memory">Varattu muisti</string>
 	<string name="native_app_allocated_memory">Käytettävissä oleva puhelimen muisti</string>
-	<string name="update_downlod_list">Päivitä lista</string>
+	
 	<string name="shared_location">Jaettu sijainti</string>
 	<string name="osmand_parking_warning">Varoitus</string>
 	<string name="gpxup_public">Julkinen</string>
@@ -88,10 +87,10 @@
 	<string name="gpxup_private">Yksityinen</string>
 	<string name="route_kl">Pysy vasemmalla ja aja suoraan</string>
 	<string name="route_kr">Pysy oikealla ja jatka suoraan</string>
-	<string name="default_buttons_no">Ei</string>
-	<string name="default_buttons_yes">Kyllä</string>
+	<string name="shared_string_no">Ei</string>
+	<string name="shared_string_yes">Kyllä</string>
 	<string name="email">sähköposti</string>
-<string name="extra_settings">Kehittyneet asetukset</string>
+
 	<string name="gpx_tags_txt">Avainsanat</string>
 	<string name="gpx_description_txt">Kuvaus</string>
 	<string name="validate_gpx_upload_name_pwd">Anna OSM käyttäjänimi ja salasana lähettääksesi GPX-tiedostoja.</string>
@@ -100,10 +99,10 @@
 	<string name="show_ruler_level">Näytä viivain</string>	
 	<string name="info_button">Tietoja</string>
 	<string name="back_to_location">Takaisin sijaintiin</string>
-	<string name="help">Ohje</string>
+	<string name="shared_string_help">Ohje</string>
 	<string name="show_details">Näytä tiedot</string>
-	<string name="accessibility_on">Päällä</string>
-	<string name="accessibility_off">Pois päältä</string>
+	<string name="shared_string_on">Päällä</string>
+	<string name="shared_string_off">Pois päältä</string>
 	<string name="backToMenu">Takaisin valikkoon</string>
 	<string name="north">pohjoinen</string>
 	<string name="north_north_east">pohjoiskoillinen</string>
@@ -151,7 +150,7 @@
 	<string name="local_index_poi_data">KP data</string>
 	<string name="local_indexes_cat_poi">KP data</string>
 	<string name="local_openstreetmap_uploadall">Lähetä kaikki</string>
-	<string name="local_openstreetmap_show">Näytä kartalla</string>
+	
 	<string name="local_openstreetmap_upload">Lähetä muutos OSM:iin</string>
 	<string name="local_openstreetmap_delete">Poista muutos</string>
 	<string name="local_openstreetmap_settings">Paikallisesti tallennetut OSM KP:t/Bugit</string>
@@ -200,8 +199,8 @@
 	<string name="animate_route">Aloita animaatio</string>
 	<string name="file_can_not_be_renamed">Tiedostoa ei voitu uudelleennimetä.</string>
 	<string name="poi_filter_by_name">Etsi nimen mukaan</string>
-	<string name="local_index_mi_rename">Nimeä uudelleen</string>
-	<string name="show_gpx_route">Näytä kartalla</string>
+	<string name="shared_string_rename">Nimeä uudelleen</string>
+	
 	<string name="search_position_current_location_search">Etsitään sijaintia…</string>
 	<string name="search_position_current_location_found">Sijainti(Löydetty)</string>
 	<string name="search_position_address">Osoite…</string>
@@ -209,8 +208,8 @@
 	<string name="search_position_undefined">Määrittelemätön</string>
 	<string name="search_position_current_location">Nykyinen sijainti…</string>
 	<string name="select_search_position">Etsi läheltä:</string>
-	<string name="default_buttons_save">Tallenna</string>
-	<string name="menu_save_directions">Tallenna ohjeet</string>
+	<string name="shared_string_save">Tallenna</string>
+	
 	<string name="local_index_upload_gpx_description">Lähetä GPX tiedostot OSM yhteisölle. Niitä käytetään karttojen parantamiseen.</string>
 	<string name="local_index_items_uploaded">%1$d / %2$d osio(ta) onnistuneesti lähetetty.</string>
 	<string name="local_index_mi_upload_gpx">Lähetä OSM yhteisöön</string>
@@ -230,22 +229,22 @@
 	<string name="download_files_question">Lataa {0} tiedosto(a) ({1} MB)?</string>
 	<string name="items_were_selected">{0} kohde(tta) valittu</string>
 	<string name="filter_existing_indexes">Suodata ladatut</string>
-	<string name="deselect_all">Poista valinta kaikista</string>
-	<string name="select_all">Valitse kaikki</string>
-	<string name="reload">Päivitä</string>
+	
+	<string name="shared_string_select_all">Valitse kaikki</string>
+	<string name="shared_string_refresh">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>
 	<string name="context_menu_item_download_map">Lataa kartta</string>
-	<string name="download_files">Lataa</string>
+	
 	<string name="context_menu_item_search_transport">Etsi kulkuneuvoa</string>
-	<string name="map_index">Kartta</string>
+	
 	<string name="voice">Ääni</string>
 	<string name="osb_bug_name">Bugi</string>
 	<string name="rotate_map_to_bearing">Kartan orientaatio</string>
 	<string name="show_route">Reitin tiedot</string>
 	<string name="fav_imported_sucessfully">Suosikit tuotu onnistuneesti</string>
 	<string name="fav_saved_sucessfully">Suosikit tallennettu onnistuneesti sijaintiin {0}</string>
-	<string name="import_fav">Tuo</string>
-	<string name="export_fav">Vie</string>
+	<string name="shared_string_import">Tuo</string>
+	
 	<string name="error_occurred_loading_gpx">Tapahtui virhe ladattaessa GPX tietoja</string>
 	<string name="send_report">Lähetä raportti</string>
 	<string name="any_poi">Mikä tahansa</string>
@@ -291,7 +290,7 @@
 	<string name="transport_to_go_before">seuraava etäisyys</string>
 	<string name="transport_stops_to_pass">pysäkkejä ohitettavana</string>
 	<string name="transport_route_distance">Reitin matka</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Näytä julkisen liikenteen pysäkit kartalla</string>
 	<string name="show_transport_over_map">Näytä liikennepysäkit</string>
 	<string name="hello">Navigointisovellus OsmAnd</string>
@@ -305,8 +304,8 @@
 	<string name="search_history_int_streets">Risteys: {0} x {1} in {2}</string>
 	<string name="search_history_building">Rakennus: {0}, {1}, {2}</string>
 	<string name="favorite">Suosikki</string>
-	<string name="clear_all">Tyhjennä kaikki</string>
-	<string name="history">Historia</string>
+	<string name="shared_string_clear_all">Tyhjennä kaikki</string>
+	<string name="shared_string_history">Historia</string>
 	<string name="uploading_data">Lähetetään dataa…</string>
 	<string name="uploading">Lähetetään…</string>
 	<string name="search_nothing_found">Mitään ei löytynyt</string>
@@ -320,13 +319,13 @@
 	<string name="sd_dir_not_accessible">Tallennuspolku muistikortilta ei ole käytettävissä</string>
 	<string name="download_question">Lataa {0} - {1} ?</string>
 	<string name="address">Osoite</string>
-	<string name="download_index_success">Lataus onnistui</string>
-	<string name="error_io_error">Tapahtui I/O virhe</string>
+	<string name="shared_string_download_successful">Lataus onnistui</string>
 	
-	<string name="downloading">Ladataan…</string>
+	
+	
 	<string name="downloading_list_indexes">Ladataan saatavilla olevien alueiden listaa…</string>
 	<string name="list_index_files_was_not_loaded">Listaa alueista ei noudettu osmand.net:stä</string>
-	<string name="show_poi_on_map">Näytä kartalla</string>
+	
 	<string name="fav_points_edited">Suosikkipaikkaa muokattiin</string>
 	<string name="fav_points_not_exist">Suosikkipaikkoja ei ole</string>
 	<string name="update_existing">Korvaa</string>
@@ -334,7 +333,7 @@
 	<string name="follow">Seuraa</string>
 	<string name="mark_final_location_first">Valitse päämäärä ensin</string>
 	<string name="get_directions">Ohjeet</string>
-	<string name="show_gps_status">Näytä GPS:n tila</string>
+	
 	<string name="opening_hours">Avoinna</string>
 	<string name="loading_streets_buildings">Ladataan katuja/rakennuksia…</string>
 	<string name="loading_postcodes">Ladataan postinumeroita…</string>
@@ -347,17 +346,17 @@
 	<string name="new_route_calculated_dist">Uusi reitti laskettu, etäisyys</string>
 	<string name="arrived_at_destination">Olet saapunut päämäärään</string>
 	<string name="invalid_locations">Koordinaatit ovat virheelliset!</string>
-	<string name="close">Sulje</string>
+	<string name="shared_string_close">Sulje</string>
 	<string name="loading_data">Ladataan tietoja…</string>
 	<string name="reading_indexes">Luetaan paikallista dataa…</string>
 	<string name="previous_run_crashed">Viime kerralla OsmAnd kaatui. Logitiedosto sijaitsee {0}. Ole hyvä ja raportoi ongelma ja liitä logitiedosto.</string>
 	<string name="saving_gpx_tracks">Tallennetaan GPX reittejä muistikortille…</string>
 	<string name="finished_task">Valmis</string>
-	<string name="download_indexes_descr">Lataa tai päivitä tiedot offline käyttöä varten internetistä</string>
+	
 	<string name="use_online_routing_descr">Käytä internettiä reitin laskentaan</string>
 	<string name="use_online_routing">Käytä online navigointia</string>
 	<string name="additional_settings">Lisäasetukset</string>
-	<string name="settings">Asetukset</string>
+	<string name="shared_string_settings">Asetukset</string>
 	<string name="save_current_track_descr">Tallenna nykyinen reitti muistikortille nyt</string>
 	<string name="save_current_track">Tallenna nykyinen GPX reitti</string>
 	<string name="save_track_interval">Kirjausväli</string>
@@ -365,8 +364,8 @@
 	<string name="save_track_to_gpx">Kirjaa reitti GPX-tiedostoon</string>
 	<string name="update_tile">Päivitä kartta</string>
 	<string name="mark_point">Kohde</string>
-	<string name="favourites_activity">Suosikit</string>
-	<string name="add_to_favourite">Lisää suosikkeihin</string>
+	
+	<string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>
 	<string name="use_english_names">Käytä englanninkielisiä nimiä kartoissa</string>
 	<string name="app_settings">Sovelluksen asetukset</string>
 	<string name="choose_building">Valitse rakennus</string>
@@ -375,14 +374,14 @@
 	<string name="ChooseCountry">Valitse maa</string>
 	<string name="use_internet">Käytä internettiä</string>
 	<string name="show_location">Näytä sijainti</string>
-	<string name="map_preferences">Kartta</string>
-	<string name="settings_activity">Asetukset</string>
+	
+	
 	<string name="show_gps_coordinates_text">Näytä GPS-koordinaatit kartalla</string>
 	<string name="use_internet_to_download_tile">Käytä internettiä puuttuvien karttapalojen lataamiseen</string>
-	<string name="exit_Button">Poistu</string>
-	<string name="map_Button">Kartta</string>
-	<string name="settings_Button">Asetukset</string>
-	<string name="favorites_Button">Suosikit</string>
+	<string name="shared_string_exit">Poistu</string>
+	
+	
+	
 	<string name="search_button">Hae</string>
 	<string name="search_activity">Haku</string>
 	<string name="searchpoi_activity">Valitse KP</string>
@@ -397,8 +396,8 @@
 	<string name="position_on_map_center">Keskitä</string>
 	<string name="navigate_point_latitude">Leveysaste</string>
 	<string name="navigate_point_longitude">Pituusaste</string>
-	<string name="search_shown_on_map">Näytä kartalla</string>
-	<string name="navigate_point_cancel">Peruuta</string>
+	<string name="shared_string_show_on_map">Näytä kartalla</string>
+	
 	<string name="search_address_top_text">Valitse osoite</string>
 	<string name="search_address_region">Alue</string>
 	<string name="search_address_city">Kaupunki</string>
@@ -407,11 +406,11 @@
 	<string name="search_address_building_option">Rakennus</string>
 	<string name="search_address_street_option">Risteävä katu</string>
 	<string name="search_tabs_location">Sijainti</string>
-	<string name="context_menu_item_add_favorite">Lisää suosikkeihin</string>
+	
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
-	<string name="default_buttons_cancel">Peruuta</string>
-	<string name="default_buttons_apply">Käytä</string>
-	<string name="default_buttons_add">Lisää</string>
+	<string name="shared_string_cancel">Peruuta</string>
+	<string name="shared_string_apply">Käytä</string>
+	<string name="shared_string_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>
 	<string name="add_favorite_dialog_default_favourite_name">Suosikki</string>
 	<string name="favourites_context_menu_edit">Muokkaa suosikkia</string>
@@ -425,7 +424,7 @@
 	<string name="poi_edit_title">Muokkaa KP:ta</string>
 	<string name="poi_create_title">Luo KP</string>
 	<string name="poi_remove_title">Poista KP</string>
-	<string name="default_buttons_delete">Poista</string>
+	<string name="shared_string_delete">Poista</string>
 	<string name="poi_remove_success">KP poistettiin onnistuneesti</string>
 	<string name="poi_action_add">lisää</string>
 	<string name="poi_action_change">muuta</string>
@@ -433,9 +432,9 @@
 	<string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
 	<string name="poi_dialog_name">Nimi</string>
 	<string name="poi_dialog_opening_hours">Avoinna</string>
-	<string name="edit_filter_delete_menu_item">Poista</string>
+	
 	<string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
-	<string name="default_buttons_selectall">Valitse kaikki</string>
+	
 	<string name="rendering_attr_roadColors_description">Valitse tien väriteema:</string>
 	<string name="tip_recent_changes_0_8_4_t">"Muutokset versiossa 0.8.4:\n\t *Joitain bugeja korjattu\n\t *Kartta ei menetä paikkaansa keskeytyksien välillä "</string>
 	<string name="gps_not_available">Salli GPS:n käyttö asetuksista</string>
@@ -450,8 +449,8 @@
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
 	
 	<string name="map_widget_config">Muokkaa näyttöä</string>
-	<string name="map_widget_top_stack">Tilan näyttö:</string>
-	<string name="map_widget_left_stack">Vasen panelli:</string>
+	
+	
 	<string name="map_widget_time">Aikaa jäljellä</string>
 	<string name="bg_service_screen_unlock">Poista näytön lukitus</string>
 	<string name="continue_follow_previous_route_auto">Edellinen navigointi keskeytyi,haluatko jatkaa? (%1$s sekuntia)</string>
@@ -472,21 +471,21 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="asap">U-Käännös</string>
-	<string name="save_route_as_gpx">Tallenna reitti GPX tiedostona</string>
+	
 	<string name="route_roundabout">Liikenneympyrä: aja %1$d ulos ja jatka</string>
 	<string name="rendering_attr_contourLines_name">Näytä korkeuskäyrät</string>
 	<string name="address_search_desc">Osoitehaku</string>
 	<string name="navpoint_search_desc">Koordinaatit</string>
 	<string name="transport_search_desc">Kuljetushaku</string>
 	<string name="favourites_search_desc">Haku suosikeista</string>
-	<string name="history_search_desc">Haku historiasta</string>
+	
 	<string name="offline_navigation_not_available">OsmAnd offline navigointi ei ole saatavilla tilapäisesti.</string>
 	<string name="left_side_navigation">Vasemman kaistan ajo</string>
 	<string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista</string>
-	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Vapaata muistia laitteessa (%1$s vapaata):</string>
+	
 	<string name="unknown_location">Sijaintia ei tiedetä vielä</string>
 	<string name="local_indexes_cat_tile">Online ja muut karttasijainnit</string>
-	<string name="map_settings">Kartan asetukset</string>
+	
 	<string name="amenity_type_finance">Rahoitus</string>
 	<string name="amenity_type_barrier">Este</string>
 	<string name="amenity_type_education">Koulutus</string>
@@ -532,7 +531,7 @@
 	<string name="rotate_map_compass_opt">Kompassi</string>
 	<string name="rotate_map_bearing_opt">Liikkumissuuntaan</string>
 	<string name="rotate_map_none_opt">Älä käännä (pohjoinen on ylhäällä)</string>
-	<string name="transport_search_none">ei mitään</string>
+	
 	<string name="phone">puhelin</string>
 	<string name="website">nettisivusto</string>
 	<string name="show_point_options">Sijainnin valinnat …</string>
@@ -594,7 +593,7 @@
 	<string name="osmand_parking_plugin_description">Tällä lisäosalla voit tallentaa pysäköidyn auton sijainnin.</string>
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
-	<string name="default_buttons_reset">Nollaa</string>
+	<string name="shared_string_clear">Nollaa</string>
 	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
 	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
 	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>
@@ -621,7 +620,7 @@
     
     <string name="map_widget_distancemeasurement">Etäisyyden mittaus</string>
     <string name="download_select_map_types">Muut kartat</string>
-    <string name="map_settings_descr">Karttanäytön asetukset</string>
+    
 	<string name="av_def_action_video">Tallenna videota</string>
     <string name="av_def_action_audio">Tallenna ääntä</string>
     <string name="av_video_format_descr">Valitse videon tallennusformaatti</string>
@@ -638,8 +637,8 @@
 	<string name="si_mi_foots">Mailia/jalkaa</string>
 	<string name="si_mi_yard">Mailia/jaardia</string>
 	<string name="si_km_m">Kilometrejä/metrejä</string>
-	<string name="previous_button">Edellinen</string>
-	<string name="dist_control_start">Aloita</string>
+	<string name="shared_string_previous">Edellinen</string>
+	
     <string name="stop_routing_confirm">Oletko varma että haluat lopettaa navigoinnin?</string>
     <string name="clear_dest_confirm">Haluatko varmasti poistaa päätepisteen?</string>
     <string name="precise_routing_mode">Tarkka reititys (alpha)</string>
@@ -652,7 +651,7 @@
 	<string name="access_arrival_time">Saapumisaika</string>
     <string name="item_checked">valittu</string>
     <string name="item_unchecked">ei valittu</string>
-    <string name="map_view">Kartta</string>
+    <string name="shared_string_map">Kartta</string>
     <string name="prefer_motorways">Suosi moottoriteitä</string>
 	<string name="prefer_in_routing_title">Suosi…</string>
 	<string name="prefer_in_routing_descr">Suosi moottoriteitä</string>
@@ -677,13 +676,13 @@
     <string name="plugin_distance_point">Piste</string>
     <string name="gpx_file_name">GPX tiedoston nimi</string>
     <string name="gpx_saved_sucessfully">GPX tiedosto tallennettin onnistuneesti: {0}</string>
-    <string name="default_buttons_do_not_show_again">Älä näytä enää uudestaan</string>
+    <string name="shared_string_do_not_show_again">Älä näytä enää uudestaan</string>
     <string name="distance_measurement_start_editing">Aloita muokkaus</string>
     <string name="tip_map_styles">Karttatyylit</string>
 	<string name="about_version">Versio:</string>
     <string name="about_settings">Tietoja</string>
     <string name="about_settings_descr">Versio tietoja, lisenssit, projektin jäsenet</string>
-    <string name="tips_and_tricks">Vinkkejä</string>
+    
     <string name="local_index_tile_data_downloadable">Ladattavissa: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimi zoomi: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimi zoomi: %1$s</string>

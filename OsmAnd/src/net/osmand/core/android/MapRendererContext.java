@@ -17,6 +17,7 @@ import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
+import net.osmand.core.jni.MapRendererSetupOptions;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
@@ -70,10 +71,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	 */
 	public void setMapRendererView(MapRendererView mapRendererView) {
 		boolean update = (this.mapRendererView != mapRendererView);
+		this.mapRendererView = mapRendererView;
 		if (!update) {
 			return;
 		}
-		this.mapRendererView = mapRendererView;
 		if (mapRendererView != null) {
 			applyCurrentContextToView();
 		}
@@ -231,6 +232,14 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	}
 	
 	private void applyCurrentContextToView() {
+		mapRendererView.setMapRendererSetupOptionsConfigurator(
+				new MapRendererView.IMapRendererSetupOptionsConfigurator() {
+					@Override
+					public void configureMapRendererSetupOptions(
+							MapRendererSetupOptions mapRendererSetupOptions) {
+						mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+					}
+				});
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
@@ -295,6 +304,9 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
     }
 
     private void loadStyleFromStream(String name, InputStream source) {
+    	if(source == null) {
+    		return;
+    	}
         if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
             if (source != null) {
                 try {
@@ -320,7 +332,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             return;
         } finally {
             try {
-                source.close();
+            	source.close();
             } catch(IOException e) {}
         }
 
@@ -329,4 +341,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             Log.w(TAG, "Failed to add style from byte array");
         }
     }
+
+	
 }

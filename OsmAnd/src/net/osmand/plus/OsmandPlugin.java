@@ -9,7 +9,7 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.plus.activities.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -22,10 +22,8 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.routepointsnavigation.RoutePointsPlugin;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.touringview.TouringViewPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -51,6 +49,8 @@ public abstract class OsmandPlugin {
 	public abstract String getDescription();
 	
 	public abstract String getName();
+	
+	public abstract int getAssetResourceName();
 
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
@@ -93,18 +93,18 @@ public abstract class OsmandPlugin {
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
-		allPlugins.add(rasterMapsPlugin);
+		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		allPlugins.add(new OsMoPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
-		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
+		// ? questionable - definitely not market plugin 
+//		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 
-		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
+//		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new DistanceCalculatorPlugin(app));
@@ -180,7 +180,6 @@ public abstract class OsmandPlugin {
 	
 	public boolean destinationReached() { return true;	}
 	
-	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
 	
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
 	
@@ -289,12 +288,6 @@ public abstract class OsmandPlugin {
 	}
 	
 
-	public static void onSettingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.settingsActivityCreate(activity, screen);
-		}
-	}
-	
 	public static boolean onDestinationReached() {
 		boolean b = true;
 		for (OsmandPlugin plugin : getEnabledPlugins()) {

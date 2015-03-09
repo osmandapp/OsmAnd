@@ -75,5 +75,16 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsDevelopmentActivity.class;
 	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return R.drawable.ic_plugin_developer;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.osmand_development;
+	}
 
 }

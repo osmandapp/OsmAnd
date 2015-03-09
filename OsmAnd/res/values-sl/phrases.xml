@@ -1,4 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_bakery">Pekarna</string>
 	<string name="poi_mall">Veleblagovnica</string>
+	<string name="poi_healthcare">Zdravstvo</string>
+	<string name="poi_office">Pisarna</string>
+	<string name="poi_sport">Šport</string>
+	<string name="poi_tourism">Turizem</string>
+	<string name="poi_entertainment">Prosti čas</string>
+	<string name="poi_sustenance">Hrana</string>
+	<string name="poi_finance">Finance</string>
+	<string name="poi_natural">Narava</string>
+	<string name="poi_seamark">Pomorstvo</string>
+	<string name="poi_military">Vojska</string>
+	<string name="poi_osmwiki">Wikipedija</string>
+	<string name="poi_palaeontological_site">Paleontološko nahajališče</string>
+
+	<string name="poi_chemist_shop">Drogerija</string>
+	<string name="poi_shop">Trgovina</string>
+	<string name="poi_emergency">Nujna pomoč</string>
+	<string name="poi_education">Izobraževanje</string>
+	<string name="poi_butcher">Mesnica</string>
+	<string name="poi_deli">Delikatesa</string>
 	</resources>

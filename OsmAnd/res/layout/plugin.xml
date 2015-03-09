@@ -13,11 +13,13 @@
 		tools:context=".activities.PluginActivity">
 
 		<ImageView
+			android:id="@+id/plugin_image"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:maxHeight="144dp"
+			android:maxHeight="200dp"
 			android:maxWidth="360dp"
-			android:scaleType="centerInside"
+			android:adjustViewBounds= "true"
+			android:scaleType="fitCenter"
 			android:layout_gravity="center_horizontal"
 			android:src="@drawable/extension_stub"/>
 
@@ -36,13 +38,13 @@
 				android:layout_gravity="center_vertical|start"
 				android:layout_marginBottom="9dp"
 				android:layout_marginTop="9dp"
-				android:background="@null"
+				android:background="?attr/expandable_list_item_background"
 				android:drawableLeft="?attr/ic_action_settings"
 				android:drawablePadding="10dp"
 				android:drawableStart="?attr/ic_action_settings"
 				android:paddingLeft="0dp"
 				android:paddingRight="16dp"
-				android:text="@string/plugin_settings_button_caption"
+				android:text="@string/shared_string_settings"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="12sp"
 				android:lines="1"
@@ -68,8 +70,8 @@
 					android:paddingRight="9.5dp"
 					android:paddingTop="8dp"
 					android:textColor="?attr/switch_ex_text_color"
-					android:textOff="@string/enable_plugin"
-					android:textOn="@string/disable_plugin"
+					android:textOff="@string/shared_string_disabled"
+					android:textOn="@string/shared_string_enabled"
 					android:textSize="12sp"
 					android:lines="1"
 					android:maxLines="1"

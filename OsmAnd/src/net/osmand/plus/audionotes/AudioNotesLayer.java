@@ -147,14 +147,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private void deleteRecording(final Recording r) {
 		AccessibleAlertBuilder bld = new AccessibleAlertBuilder(activity);
 		bld.setMessage(R.string.recording_delete_confirm);
-		bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				plugin.deleteRecording(r);				
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 		
 	}
@@ -170,10 +170,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof Recording){
-			if(((Recording)o).getName(activity).isEmpty()) {
-				return new PointDescription(PointDescription.POINT_TYPE_NOTE, view.getResources().getString(R.string.recording_default_name));
+			Recording rec = (Recording) o;
+			if(rec.getName(activity).isEmpty()) {
+				return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
 			}
-			return new PointDescription(PointDescription.POINT_TYPE_NOTE, ((Recording)o).getName(activity));
+			return new PointDescription(rec.getSearchHistoryType(), ((Recording)o).getName(activity));
 		}
 		return null;
 	}

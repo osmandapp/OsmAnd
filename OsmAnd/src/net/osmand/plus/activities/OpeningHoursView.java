@@ -179,7 +179,7 @@ public class OpeningHoursView {
 			}
 
 		});
-		b.setPositiveButton(add ? ctx.getString(R.string.default_buttons_add) : ctx.getString(R.string.default_buttons_apply),
+		b.setPositiveButton(add ? ctx.getString(R.string.shared_string_add) : ctx.getString(R.string.shared_string_apply),
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -199,7 +199,7 @@ public class OpeningHoursView {
 
 				});
 
-		b.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+		b.setNegativeButton(ctx.getString(R.string.shared_string_cancel), null);
 
 		b.show();
 

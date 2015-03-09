@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Butikk</string>
+	<string name="poi_attraction">Turistattraksjon</string>
+	<string name="poi_viewpoint">Utsiktspunkt</string>
+	<string name="poi_museum">Museum</string>
+	<string name="poi_tourism_information">Turistinformasjon</string>
+	<string name="poi_hotel">Hotell</string>
+	<string name="poi_picnic_site">Rasteplass</string>
+	<string name="poi_camp_site">Campingplass</string>
+	<string name="poi_artwork">Kunstverk</string>
+	<string name="poi_transportation">Transport</string>
+	<string name="poi_education">Utdannelse</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Turisme</string>
+	<string name="poi_palaeontological_site">Paleontologisk område</string>
+
+	<string name="poi_bakery">Bakeri</string>
+	<string name="poi_supermarket">Supermarked</string>
+	<string name="poi_bookshop">Bokhandel</string>
+	<string name="poi_bicycle_shop">Sykkelbutikk</string>
+	<string name="poi_art_shop">Kunsthandler</string>
+	<string name="poi_shoes">Skobutikk</string>
+	<string name="poi_musical_instrument_shop">Musikkinstrumenter</string>
+	<string name="poi_organic_shop">Økologisk mat</string>
+	<string name="poi_second_hand">Bruktbutikk</string>
+	<string name="poi_marketplace">Markedsplass</string>
+	<string name="poi_police">Politi</string>
+	<string name="poi_fire_station">Brannstasjon</string>
+	<string name="poi_emergency_phone">Nødtelefon</string>
+	<string name="poi_fire_hydrant">Brannhydrant</string>
+	<string name="poi_fire_extinguisher">Brannslokningsapparat</string>
+	<string name="poi_charging_station">Ladestasjon</string>
+	<string name="poi_parking">Parkering</string>
+	<string name="poi_public_transport_platform_bus">Bussholdeplass</string>
+	<string name="poi_bus_stop">Bussholdeplass</string>
+	<string name="poi_bus_station">Busstasjon</string>
+	<string name="poi_railway_station">Jernbanestasjon</string>
+	<string name="poi_railway_platform">Jernbaneperrong</string>
+	<string name="poi_subway_station">T-banestasjon</string>
+	<string name="poi_taxi">Taxiholdeplass</string>
+
+	<string name="poi_airport">Flyplass</string>
+	<string name="poi_ferry_terminal">Fergeterminal</string>
+	<string name="poi_lighthouse">Fyrtårn</string>
+
+	<string name="poi_bicycle_rental">Sykkelutleie</string>
+	<string name="poi_bicycle_parking">Sykkelparkering</string>
+
+	<string name="poi_aerialway_gondola">Gondol</string>
+	<string name="poi_bridge">Bru</string>
+
+	<string name="poi_post_office">Postkontor</string>
+	<string name="poi_post_box">Postkasse</string>
+	<string name="poi_telephone">Telefon</string>
+	<string name="poi_windmill">Vindmølle</string>
+	<string name="poi_kindergarten">Barnehage</string>
+	<string name="poi_university">Universitet</string>
+
+	<string name="poi_village">Landsby</string>
+	<string name="poi_town">By</string>
+	<string name="poi_city">By</string>
+	<string name="poi_hamlet">Grend</string>
+	<string name="poi_suburb">Forstad</string>
+	<string name="poi_place_farm">Gårdsbruk</string>
+
+	<string name="poi_pharmacy">Apotek</string>
+	<string name="poi_hospital">Sykehus</string>
+	<string name="poi_first_aid">Førstehjelp</string>
+	<string name="poi_dentist">Tannlege</string>
+	<string name="poi_healthcare_alternative">Alternativ medisin</string>
+	<string name="poi_city_wall">Bymur</string>
+	<string name="poi_running_track">Løpebane</string>
+	<string name="poi_bicycle_track">Sykkelbane</string>
+	<string name="poi_cycling">Sykling</string>
+	<string name="poi_soccer">Fotball</string>
+	<string name="poi_archaeological_site">Arkeologisk område</string>
+	<string name="poi_caravan_site">Campingplass</string>
+	<string name="poi_battlefield">Slagmark</string>
+	<string name="poi_castle">Slott</string>
+	<string name="poi_city_gate">Byport</string>
+	<string name="poi_miniature_golf">Minigolf</string>
+	<string name="poi_hairdresser">Frisør</string>
+	<string name="poi_island">Øy</string>
+	</resources>

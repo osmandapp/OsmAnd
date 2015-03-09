@@ -37,22 +37,19 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		if (plugin == null) {
 			plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		}
-
-		setupEditings();
+		setupEditings();		
 	}
-
+	
+	
 	private void setupEditings() {
 		View mainView = getView();
 		if (plugin == null){
 			mainView.setVisibility(View.GONE);
 			return;
 		}
-
-
 	}
 }

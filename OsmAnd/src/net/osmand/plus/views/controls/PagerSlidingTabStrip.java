@@ -22,9 +22,12 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -45,9 +48,9 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
-
 import java.util.Locale;
 
+@SuppressLint("NewApi")
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private static final float OPAQUE = 1.0f;
@@ -67,7 +70,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			android.R.attr.textSize,
 			android.R.attr.textColor,
 			android.R.attr.paddingLeft,
-			android.R.attr.paddingRight,
+			android.R.attr.paddingRight
 	};
 	// @formatter:on
 
@@ -99,10 +102,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private Paint dividerPaint;
 
 	private int indicatorColor;
+	private int indicatorBgColor;
 	private int indicatorHeight = 2;
 
 	private int underlineHeight = 0;
 	private int underlineColor;
+	
 
 	private int dividerWidth = 0;
 	private int dividerPadding = 0;
@@ -171,6 +176,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		//In case we have the padding they must be equal so we take the biggest
 		padding = Math.max(paddingLeft, paddingRight);
+		
 
 		// get custom attrs
 		a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
@@ -184,17 +190,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsDividerPadding, dividerPadding);
 		tabPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight, tabPadding);
 		tabBackgroundResId = a.getResourceId(R.styleable.PagerSlidingTabStrip_pstsTabBackground, tabBackgroundResId);
+		indicatorBgColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsTabBackground, Color.TRANSPARENT);
 		shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsShouldExpand, shouldExpand);
 		scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsScrollOffset, scrollOffset);
 		textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
 		isPaddingMiddle = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsPaddingMiddle, isPaddingMiddle);
-		tabTypefaceStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextStyle, Typeface.BOLD);
-		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.BOLD);
+		tabTypefaceStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextStyle, Typeface.NORMAL);
+		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.NORMAL);
 		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, HALF_TRANSP);
 		tabTextSelectedAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextSelectedAlpha, OPAQUE);
-        if (!isInEditMode()) {
-            tabTypeface = FontCache.getRobotoMedium(context);
-        }
+        tabTypeface = FontCache.getRobotoMedium(context);
 		a.recycle();
 
 		setMarginBottomTabContainer();
@@ -369,12 +374,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		if (isPaddingMiddle || padding > 0) {
+//		if (isPaddingMiddle || padding > 0) {
 			//Make sure tabContainer is bigger than the HorizontalScrollView to be able to scroll
 			tabsContainer.setMinimumWidth(getWidth());
 			//Clipping padding to false to see the tabs while we pass them swiping
 			setClipToPadding(false);
-		}
+//		}
 
 		if (tabsContainer.getChildCount() > 0) {
 			tabsContainer
@@ -387,6 +392,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
 
+		@SuppressLint("NewApi")
 		@Override
 		public void onGlobalLayout() {
 			View view = tabsContainer.getChildAt(0);
@@ -414,13 +420,19 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		}
 
 		final int height = getHeight();
+		// draw underline
+		if (indicatorBgColor != Color.TRANSPARENT) {
+			rectPaint.setColor(indicatorBgColor); // underlineColor
+			canvas.drawRect(padding, height - indicatorHeight, tabsContainer.getWidth() + padding, height, rectPaint);
+		}
 		// draw indicator line
-		rectPaint.setColor(indicatorColor);
 		Pair<Float, Float> lines = getIndicatorCoordinates();
+		rectPaint.setColor(indicatorColor); // indicatorColor
 		canvas.drawRect(lines.first + padding, height - indicatorHeight, lines.second + padding, height, rectPaint);
 		// draw underline
-		rectPaint.setColor(underlineColor);
+		rectPaint.setColor(underlineColor); //underlineColor
 		canvas.drawRect(padding, height - underlineHeight, tabsContainer.getWidth() + padding, height, rectPaint);
+	
 		// draw divider
 		if (dividerWidth != 0) {
 			dividerPaint.setStrokeWidth(dividerWidth);

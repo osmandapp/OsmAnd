@@ -176,7 +176,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		
 
-		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
+		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		showOnMapItem = showOnMapItem.setIcon(R.drawable.ic_action_map_marker_dark);
@@ -785,7 +785,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, R.drawable.ic_destination_arrow_white);
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, 
+						R.drawable.ic_destination_arrow_white, R.color.color_distance);
 				Float h = heading;
 				float a = h != null ? h : 0;
 
@@ -899,7 +900,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void showPOIDetails(final Amenity amenity, boolean en) {
 		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
 		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), en));
-		b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();

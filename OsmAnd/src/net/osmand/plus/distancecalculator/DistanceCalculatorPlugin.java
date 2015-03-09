@@ -131,7 +131,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			String ds = distance;
 			if (ds == null) {
 				if(distanceMeasurementMode == 0) {
-					distanceControl.setText(app.getString(R.string.dist_control_start), "");
+					distanceControl.setText(app.getString(R.string.shared_string_control_start), "");
 				} else {
 					distanceControl.setText("0", ""); //$NON-NLS-1$
 				}
@@ -269,7 +269,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		});
 		ll.addView(editText);
 		b.setView(ll);
-		b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+		b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -280,7 +280,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				saveGpx(activity, newName);
 			}
 		});
-		b.setNegativeButton(R.string.default_buttons_cancel, null);
+		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 	
@@ -357,14 +357,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if(pref.get()) {
 			Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.use_distance_measurement_help);
-			builder.setNegativeButton(R.string.default_buttons_do_not_show_again, new OnClickListener() {
+			builder.setNegativeButton(R.string.shared_string_do_not_show_again, new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					pref.set(false);
 				}
 			});
-			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			builder.setPositiveButton(R.string.shared_string_ok, null);
 			
 			builder.show();
 		}
@@ -426,7 +426,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			bitmapPaint.setFilterBitmap(true);
 			path = new Path();
 			
-			int distanceColor = view.getResources().getColor(R.color.distance_color);
+			int distanceColor = view.getResources().getColor(R.color.color_distance);
 			paint = new Paint();
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(7 * view.getDensity());
@@ -653,4 +653,13 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		return null;
 	}
 	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.distance_calculator;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_marker_dark;
+	}
 }

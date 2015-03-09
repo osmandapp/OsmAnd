@@ -1,19 +1,21 @@
 /**
  *
  */
-package net.osmand.plus.activities;
+package net.osmand.plus.myplaces;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesTreeFragment;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -28,7 +30,6 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  *
@@ -50,7 +51,7 @@ public class FavoritesActivity extends TabActivity {
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		getSupportActionBar().setTitle(R.string.favorites_Button);
+		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
@@ -72,10 +73,10 @@ public class FavoritesActivity extends TabActivity {
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 
 		List<TabItem> mTabs = new ArrayList<TabItem>();
-		mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
+//		mTabs.add(new TabItem("\t\t\t", FavoritesTreeFragment.class));
+		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
-			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
-			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
+			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
 		}
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		
@@ -92,8 +93,7 @@ public class FavoritesActivity extends TabActivity {
 		if (tab > mTabs.size() - 1){
 			tab = 0;
 		}
-		mViewPager.setCurrentItem(tab);
-		updateSelectedTracks();
+		mViewPager.setCurrentItem(tab );
 		// setupHomeButton();
 	}
 
@@ -105,13 +105,6 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class,new Runnable() {
-			
-			@Override
-			public void run() {
-				updateSelectedTracks();
-			}
-		});
 
 	}
 
@@ -126,28 +119,8 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class, null);
 	}
 
-	public void updateSelectedTracks() {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof SelectedGPXFragment && !f.isDetached()) {
-				GpxSelectionHelper gpx = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
-				String vl = getString(R.string.selected_track);
-				if (gpx.isShowingAnyGpxFiles()) {
-					vl += " (" + gpx.getSelectedGPXFiles().size()
-							+ ")";
-				} else {
-					vl += " (0)";
-				}
-				try{
-					((TextView)f.getView().findViewById(android.R.id.title)).setText(vl);
-				} catch (NullPointerException e) {
-				}
-			}
-		}
-	}
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);

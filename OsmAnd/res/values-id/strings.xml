@@ -2,7 +2,7 @@
   <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>
-  <string name="history_search_desc">Mencari sejarah</string>
+  
   <string name="rendering_attr_noPolygons_name">Tidak ada poligon</string>
   <string name="rendering_attr_appMode_name">Modus render</string>
   <string name="rendering_attr_appMode_description">Peta dioptimisasi untuk Profile yang diharapkan</string>
@@ -11,7 +11,7 @@
   <string name="rendering_attr_hmRendered_description">Naikkan jumlah detail peta yang ditampilkan</string>
   <string name="rendering_attr_hmRendered_name">Tampilkan peta lebih lengkap</string>
   <string name="route_kl">Tetap dikiri dan jalan</string>
-  <string name="save_route_as_gpx">Simpan jejak sebagai file GPX</string>
+  
   <string name="asap">ASAP</string>
 <string name="street_name">Jalan</string>
 	<string name="hno">Nomor rumah</string>
@@ -21,8 +21,8 @@
 \n\t* Holo Theme (kustomisasi tema) "</string>
     <string name="monitoring_settings">Layanan pencatatan &amp; Mode Sleep</string>
     <string name="monitoring_settings_descr">Atur bagaimana ingin mencatat perjalanan dan mengaktifkan mode sleep</string>
-    <string name="osmand_monitoring_plugin_description">Mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS. Menampilkan pengaturan yang memfasilitasi pencatatan perjalanan anda ke file GPX lokal atau online lewat web service.</string>
-    <string name="osmand_monitoring_plugin_name">Layanan pencatatan &amp; Mode Sleep</string>
+    
+    
     <string name="osmand_background_plugin_description">Menampilkan pengaturan untuk mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS.</string>
     <string name="contribution_activity">Instal versi</string>
     <string name="choose_osmand_theme_descr">Pilih tema aplikasi</string>
@@ -31,7 +31,7 @@
     <string name="select_address_activity">Pilih alamat</string>
     <string name="favourites_list_activity">Pilih favorit</string>
     <string name="local_openstreetmap_act_title">Modifikasi OSM</string>
-    <string name="default_buttons_other_actions">Perintah lain</string>
+    <string name="shared_string_more_actions">Perintah lain</string>
     
 	<string name="tip_recent_changes_1_2_t">"Perbaikan pada 1.2.1:
 \n\t*Perbaikan Geo Intent (Foursquare, c:geo)
@@ -50,19 +50,19 @@
 \n\t* redesain UI
 \n\t* Perbaikan bug "</string>
     <string name="access_arrival_time">Waktu tiba</string>
-    <string name="map_view">Peta</string>
+    <string name="shared_string_map">Peta</string>
     <string name="prefer_motorways">Utamakan jalan raya</string>
 	<string name="prefer_in_routing_title">Utamakan…</string>
 	<string name="prefer_in_routing_descr">Utamakan jalan raya</string>
     <string name="max_speed_none">tidak ada</string>
     <string name="download_hillshade_maps">Overlay Hillshade</string>
-    <string name="dist_control_start">mulai</string>
+    
     <string name="local_indexes_cat_av">Data Audio/Video</string>
     <string name="about_version">Versi :</string>
     <string name="about_settings">Tentang</string>
     <string name="about_settings_descr">Info versi, lisensi, anggota</string>
-    <string name="tips_and_tricks">Tip</string>
+    
     <string name="local_index_tile_data_downloadable">Dapat di download: %1$s</string>
-    <string name="default_buttons_no">No</string>
-	<string name="default_buttons_yes">Yes</string>
+    <string name="shared_string_no">No</string>
+	<string name="shared_string_yes">Yes</string>
 	</resources>

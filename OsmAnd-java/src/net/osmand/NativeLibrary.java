@@ -28,10 +28,8 @@ import org.apache.commons.logging.Log;
 
 public class NativeLibrary {
 
-    protected final boolean newLibrary;
 
-    public NativeLibrary(boolean newLibrary) {
-        this.newLibrary = newLibrary;
+    public NativeLibrary() {
     }
 
     public static class RenderingGenerationResult {
@@ -112,12 +110,7 @@ public class NativeLibrary {
 	}
 
 	public boolean initMapFile(String filePath) {
-        if(newLibrary) {
-            // TODO
-            return initBinaryMapFile(filePath);
-        } else {
-            return initBinaryMapFile(filePath);
-        }
+        return initBinaryMapFile(filePath);
 	}
 
 	public boolean initCacheMapFile(String filePath) {

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="bidforfix_loading">Laaditakse</string>
+    <string name="bidforfix_supporters">%1$d toetajat</string>
+	<string name="bidforfix_funded">rahastatud: %d%%</string>    
+</resources>

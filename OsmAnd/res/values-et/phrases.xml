@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Pood</string>
+	<string name="poi_emergency">Hädaabi</string>
+	<string name="poi_transportation">Transport</string>
+	<string name="poi_man_made">Käsitsi tehtud</string>
+	<string name="poi_education">Haridus</string>
+	<string name="poi_administrative">Administratiiv</string>
+	<string name="poi_healthcare">Tervishoid</string>
+	<string name="poi_office">Büroo</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Turism</string>
+	<string name="poi_entertainment">Vaba aeg</string>
+	</resources>

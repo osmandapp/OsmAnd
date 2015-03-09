@@ -20,7 +20,6 @@
         style="@style/OsmandListView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-		android:background="?attr/expandable_list_background"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"

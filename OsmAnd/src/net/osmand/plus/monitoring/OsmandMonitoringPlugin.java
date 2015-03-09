@@ -10,7 +10,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -18,7 +17,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -36,11 +34,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -48,8 +42,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
@@ -72,6 +66,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	@Override
 	public void updateLocation(Location location) {
 		liveMonitoringHelper.updateLocation(location);
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.trip_recording;
 	}
 
 	@Override
@@ -155,7 +160,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				if(isSaving){
-					setText(map.getString(R.string.import_save), "");
+					setText(map.getString(R.string.shared_string_save), "");
 					setImageDrawable(monitoringBig);
 					return true;
 				}
@@ -228,7 +233,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		return monitoringControl;
 	}
 
-	private void controlDialog(final MapActivity map) {
+	private void controlDialog(final Activity map) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		
 		Builder bld = new AlertDialog.Builder(map);
@@ -322,7 +327,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}
 	}
 
-	private void startGPXMonitoring(MapActivity map) {
+	public void startGPXMonitoring(Activity map) {
 		app.getSavingTrackHelper().startNewSegment();
 		final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 		final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
@@ -358,7 +363,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}
 		
 	}
-	
+
 	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
 			String title, final int[] seconds, final int[] minutes, final ValueHolder<Boolean> choice, final ValueHolder<Integer> v, OnClickListener onclick){
 		Builder dlg = new AlertDialog.Builder(uiCtx);
@@ -369,8 +374,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		LinearLayout ll = createIntervalChooseLayout(uiCtx, patternMsg, seconds, minutes,
 				choice, v, dm);
 		dlg.setView(ll);
-		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
-		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
+		dlg.setNegativeButton(R.string.shared_string_cancel, null);
 		dlg.show();
 	}
 
@@ -435,7 +440,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		ll.addView(sp);
 		if (choice != null) {
 			final CheckBox cb = new CheckBox(uiCtx);
-			cb.setText(R.string.remember_choice);
+			cb.setText(R.string.shared_string_remember_my_choice);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			lp.setMargins((int)(7* dm.density), (int)(10* dm.density), (int)(7* dm.density), 0);

@@ -158,14 +158,14 @@ public class MapInfoWidgetsFactory {
 						});
 					}
 					dlg.setView(ll);
-					dlg.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
 							app.startNavigationService(NavigationService.USED_BY_GPX);
 						}
 					});
-					dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+					dlg.setNegativeButton(R.string.shared_string_cancel, null);
 					dlgshow[0] = dlg.show();
 
 				}

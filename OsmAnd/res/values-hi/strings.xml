@@ -7,8 +7,8 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     -->
-<string name="default_buttons_no">नही</string>
-	<string name="default_buttons_yes">हा</string>
+<string name="shared_string_no">नही</string>
+	<string name="shared_string_yes">हा</string>
 	<string name="prefer_motorways">बडी सड़को को प्राधान्य दो</string>
 	<string name="prefer_in_routing_title">प्राधान्य…</string>
 	</resources>

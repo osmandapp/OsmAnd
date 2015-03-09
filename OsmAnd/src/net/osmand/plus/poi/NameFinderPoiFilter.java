@@ -135,10 +135,10 @@ public class NameFinderPoiFilter extends PoiLegacyFilter {
 			stream.close();
 		} catch (IOException e) {
 			log.error("Error loading name finder poi", e); //$NON-NLS-1$
-			lastError = getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
+			lastError = getApplication().getString(R.string.shared_string_io_error); //$NON-NLS-1$
 		} catch (XmlPullParserException e) {
 			log.error("Error parsing name finder poi", e); //$NON-NLS-1$
-			lastError = getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
+			lastError = getApplication().getString(R.string.shared_string_io_error); //$NON-NLS-1$
 		}
 		MapUtils.sortListOfMapObject(searchedAmenities, lat, lon);
 		return searchedAmenities;

@@ -207,6 +207,9 @@ public class PoiLegacyFilter {
 	}
 	
 	public boolean acceptTypeSubtype(PoiCategory t, String subtype){
+		if(t == null) {
+			return true;
+		}
 		if(!poiTypes.isRegisteredType(t)) {
 			t = poiTypes.getOtherPoiCategory();
 		}

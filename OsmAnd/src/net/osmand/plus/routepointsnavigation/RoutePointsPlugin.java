@@ -66,6 +66,17 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public SelectedRouteGpxFile getCurrentRoute() {
 		return currentRoute;
 	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.trip_recording;
+	}
 
 	public void setCurrentRoute(GPXFile gpx) {
 		if (gpx == null) {

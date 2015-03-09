@@ -5,19 +5,20 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
-			  android:orientation="vertical"
-			  android:paddingLeft="@dimen/list_content_padding">
+			  android:orientation="vertical">
 
 	<View
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:visibility="gone"
+		android:focusable="false"
 		android:background="?attr/dashboard_divider"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:paddingLeft="@dimen/list_content_padding">
 		<CheckBox
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"
@@ -33,7 +34,6 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginRight="@dimen/favorites_icon_right_margin"
-			android:focusable="false"
 			android:src="@drawable/ic_sdcard"/>
 
 		<LinearLayout
@@ -46,10 +46,9 @@
 			<TextView
 				android:id="@+id/name"
 				style="@style/ListText.Small"
+				android:textColor="?android:textColorPrimary"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:maxLines="1"
-				android:ellipsize="end"
 				tools:text="@string/app_version"/>
 
 
@@ -57,6 +56,7 @@
 				android:id="@+id/descr"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
 				android:gravity="center_vertical"
 				android:textSize="@dimen/download_descr_text_size"
 				android:maxLines="25"

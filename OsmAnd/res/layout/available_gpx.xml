@@ -16,24 +16,13 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"/>
 
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"/>
-
-		<Button
-			android:id="@+id/map_btn"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/expandable_list_item_background"
-			android:text="@string/back_to_map"/>
-
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/on_map_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg"
+		android:visibility="gone"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -53,7 +42,7 @@
 				android:layout_height="wrap_content"
 				style="?attr/dashboardGeneralButtonStyle"
 				android:textColor="@color/color_distance"
-				android:text="@string/turn_off_all"/>
+				android:text="@string/shared_string_deselect_all"/>
 
 		</LinearLayout>
 
@@ -71,14 +60,12 @@
 
 	<ExpandableListView
 		android:id="@android:id/list"
-		style="@style/OsmandListView"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"
 		android:layout_marginLeft="0dp"
 		android:layout_marginRight="0dp"
 		android:layout_marginTop="0dp"
 		android:layout_weight="1"
-		android:background="?attr/expandable_list_background"
 		android:groupIndicator="@android:color/transparent"/>
 
 

@@ -36,19 +36,20 @@ public class MapPoiTypes {
 		public String getTranslation(AbstractPoiType type);
 	}
 	
+	public static MapPoiTypes getDefaultNoInit() {
+		if(DEFAULT_INSTANCE == null){
+			DEFAULT_INSTANCE = new MapPoiTypes(null);
+		}
+		return DEFAULT_INSTANCE;
+	}
+	
+
 	public static MapPoiTypes getDefault() {
 		if(DEFAULT_INSTANCE == null){
 			DEFAULT_INSTANCE = new MapPoiTypes(null);
 			DEFAULT_INSTANCE.init();
 		}
 		return DEFAULT_INSTANCE;
-	}
-	
-
-	public static MapPoiTypes initDefault(PoiTranslator pt) {
-		MapPoiTypes df = getDefault();
-		df.setPoiTranslator(pt);
-		return df;
 	}
 
 	
@@ -120,7 +121,7 @@ public class MapPoiTypes {
 	}
 	
 
-	protected void init(){
+	public void init(){
 		InputStream is;
 		try {
 			if(resourceName == null){

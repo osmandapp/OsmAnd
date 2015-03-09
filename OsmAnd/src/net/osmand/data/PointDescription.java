@@ -26,7 +26,9 @@ public class PointDescription {
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
 	public static final String POINT_TYPE_MARKER = "marker";
-	public static final String POINT_TYPE_NOTE = "avnote";
+	public static final String POINT_TYPE_AUDIO_NOTE = "audionote";
+	public static final String POINT_TYPE_VIDEO_NOTE = "videonote";
+	public static final String POINT_TYPE_PHOTO_NOTE = "photonote";
 	public static final String POINT_TYPE_LOCATION = "location";
 	public static final String POINT_TYPE_ALARM = "alarm";
 	public static final String POINT_TYPE_TARGET = "destination";
@@ -51,22 +53,34 @@ public class PointDescription {
 		}
 	}
 
+	public void setTypeName(String typeName){
+		this.typeName = typeName;
+	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
 	@NonNull
 	public String getName() {
 		return name;
 	}
 
+	@NonNull
+	public String getSimpleName(Context ctx, double lat, double lon) {
+		if (isLocation()) {
+			return getLocationName(ctx, lat, lon, true).replace('\n', ' ');
+		}
+		return name;
+	}
+	
 	public String getFullPlainName(Context ctx, double lat, double lon) {
 		if (isLocation()) {
-			OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-			int f = st.COORDINATES_FORMAT.get();
-			if (f == PointDescription.UTM_FORMAT) {
-				UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-				return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
-						+ ((long) pnt.easting);
-			} else {
-				return ctx.getString(R.string.location_on_map, convert(lat, f), convert(lon, f));
-			}
+			return getLocationName(ctx, lat, lon, false);
 		} else {
 			String typeName = this.typeName;
 			if (isFavorite()) {
@@ -84,6 +98,18 @@ public class PointDescription {
 				}
 			}
 			return name;
+		}
+	}
+
+	private String getLocationName(Context ctx, double lat, double lon, boolean sh) {
+		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		int f = st.COORDINATES_FORMAT.get();
+		if (f == PointDescription.UTM_FORMAT) {
+			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
+			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
+					+ ((long) pnt.easting);
+		} else {
+			return ctx.getString( sh? R.string.short_location_on_map : R.string.location_on_map, convert(lat, f), convert(lon, f));
 		}
 	}
 
@@ -105,6 +131,18 @@ public class PointDescription {
 
 	public boolean isFavorite() {
 		return POINT_TYPE_FAVORITE.equals(type);
+	}
+
+	public boolean isAudioNote() {
+		return POINT_TYPE_AUDIO_NOTE.equals(type);
+	}
+
+	public boolean isVideoNote() {
+		return POINT_TYPE_VIDEO_NOTE.equals(type);
+	}
+
+	public boolean isPhotoNote() {
+		return POINT_TYPE_PHOTO_NOTE.equals(type);
 	}
 
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_appearance">Elementet e mbetura:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="map_widget_map_rendering">Pasqyrim i hartes:</string>
     <string name="app_mode_hiking">Ecje me kemb</string>
     <string name="app_mode_motorcycle">Motoçikletë</string>
@@ -7,15 +7,15 @@
     <string name="tip_faq_t">Ju lutem vizitoni https://code.google.com/p/osmand/wiki/FAQ qe te shihni pyetjet te parashtruar me se teper.</string>
     <string name="tip_faq">Pyetjet e bëra më shpesh</string>
     <string name="local_osm_changes_delete_all_confirm">Ju do të fshini %1$d ndryshime nga OSM. A jeni i sigurt?</string>
-    <string name="local_osm_changes_delete_all">Fshij të gjitha</string>
+    <string name="shared_string_delete_all">Fshij të gjitha</string>
     <string name="animate_routing_route_not_calculated">Ju lutem, fillimisht llogaritni rrugen</string>
-    <string name="remember_choice">Mos harroni zgjedhjen time</string>
-    <string name="gps_status_eclipsim">Statusi i GPS-it</string>
-    <string name="default_and">dhe</string>
-    <string name="default_or">ose</string>
+    <string name="shared_string_remember_my_choice">Mos harroni zgjedhjen time</string>
+    
+    <string name="shared_string_and">dhe</string>
+    <string name="shared_string_or">ose</string>
 	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
-	<string name="default_buttons_no">Jo</string>
-	<string name="default_buttons_yes">Po</string>
+	<string name="shared_string_no">Jo</string>
+	<string name="shared_string_yes">Po</string>
 	<string name="tip_map_styles">Stili Hartës</string>
 	<string name="about_version">Versioni:</string>
     <string name="about_settings">Rreth</string>

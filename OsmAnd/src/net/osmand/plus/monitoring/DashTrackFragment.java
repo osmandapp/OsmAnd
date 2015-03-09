@@ -1,30 +1,29 @@
 package net.osmand.plus.monitoring;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.AvailableGPXFragment;
-import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
-
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +39,18 @@ import android.widget.Toast;
  */
 public class DashTrackFragment extends DashBaseFragment {
 
+	public static final String TAG = "DASH_TRACK_FRAGMENT";
+
+	private boolean updateEnable;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
 		header.setTypeface(typeface);
-		header.setText(R.string.tracks);
+		header.setText(R.string.shared_string_my_tracks);
+
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
@@ -62,19 +66,53 @@ public class DashTrackFragment extends DashBaseFragment {
 		});
 		return view;
 	}
-
+	
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
+		updateEnable = true;
 		setupGpxFiles();
 	}
+	
+	
+	@Override
+	public void onCloseDash() {
+		updateEnable = false;
+	}
+
+	
+	
+	
 
 	private void setupGpxFiles() {
 		View mainView = getView();
 		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<String> list = GpxUiHelper.getSortedGPXFilenames(dir);
-
-
+		final OsmandApplication app = getMyApplication();
+		
+		final List<String> list  = new ArrayList<String>();
+		for(SelectedGpxFile sg :  app.getSelectedGpxHelper().getSelectedGPXFiles() ) {
+			if(!sg.isShowCurrentTrack()) {
+				GPXFile gpxFile = sg.getGpxFile();
+				if(gpxFile != null) {
+					list.add(gpxFile.path);
+				}
+			}
+		}
+		int totalCount = 3 + list.size() / 2;
+		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			totalCount --;
+		}
+		if(list.size() < totalCount) {
+			final List<String> res = GpxUiHelper.getSortedGPXFilenamesByDate(dir, true);
+			for(String r : res) {
+				if(!list.contains(r)) {
+					list.add(r);
+					if(list.size() >= totalCount) {
+						break;
+					}
+				}
+			}
+		}
+		
 		if (list.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
@@ -84,79 +122,53 @@ public class DashTrackFragment extends DashBaseFragment {
 
 		LinearLayout tracks = (LinearLayout) mainView.findViewById(R.id.items);
 		tracks.removeAllViews();
-		if (list.size() > 3) {
-			while (list.size() != 3) {
-				list.remove(3);
+
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+
+		AvailableGPXFragment.createCurrentTrackView(view, app);
+		((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
+		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AvailableGPXFragment.openTrack(getActivity(), null);
 			}
-		}
-
-		OsmandApplication app = getMyApplication();
-		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			list.remove(2);
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-
-			AvailableGPXFragment.createCurrentTrackView(view, app);
-
-			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-			((TextView)view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
-			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
-			int startindex = description.indexOf(">");
-			int endindex = description.indexOf("</font>");
-			String distance = description.substring(startindex + 1, endindex);
-			String points = String.valueOf(currentTrack.getGpxFile().points.size());
-
-			((TextView) view.findViewById(R.id.points_count)).setText(points);
-			((TextView)view.findViewById(R.id.distance)).setText(distance);
-			tracks.addView(view);
-		}
+		});
+		view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+		tracks.addView(view);
+		startHandler(view);
 
 		for (String filename : list) {
-			final File f = new File(dir, filename);
-			final GPXUtilities.GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), f);
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			((TextView) view.findViewById(R.id.name)).setText(filename);
-			((TextView) view.findViewById(R.id.points_count)).
-					setText(res.points.size() + " " + getActivity().getString(R.string.points));
-			String description = GpxUiHelper.getDescription(getMyApplication(), res, f, true);
-			int startindex = description.indexOf(">");
-			int endindex = description.indexOf("</font>");
-			String distnace = description.substring(startindex + 1, endindex);
-			((TextView) view.findViewById(R.id.distance)).
-					setText(distnace);
-			view.findViewById(R.id.time_icon).setVisibility(View.GONE);
-
-			boolean light = getMyApplication().getSettings().isLightContent();
-			Drawable icon = getResources().getDrawable(R.drawable.ic_show_on_map);
-			GpxSelectionHelper gpxSelectionHelper = getMyApplication().getSelectedGpxHelper();
-			boolean isShowingOnMap = gpxSelectionHelper.getSelectedFileByName(filename) != null;
-			//setting proper icon color
-			if (isShowingOnMap) {
-				icon.mutate();
-				if (light) {
-					icon.setColorFilter(getResources().getColor(R.color.dashboard_gpx_on_map), PorterDuff.Mode.MULTIPLY);
-				} else {
-					icon.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-				}
-			} else if (light) {
-				icon.mutate();
-				icon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-
-			}
-			final ImageButton showOnMap = (ImageButton) view.findViewById(R.id.show_on_map);
-			showOnMap.setImageDrawable(icon);
-			showOnMap.setVisibility(View.VISIBLE);
-			//view.findViewById(R.id.distance_icon).setVisibility(View.GONE);
-			view.findViewById(R.id.stop).setVisibility(View.GONE);
-			view.setOnClickListener(new View.OnClickListener() {
+			final File f = new File(filename);
+			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
+			info.subfolder = "";
+			info.file = f;
+			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+			AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
+			
+			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showOnMap(res);
+					AvailableGPXFragment.openTrack(getActivity(), f);
 				}
 			});
-			tracks.addView(view);
+			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
+			showOnMap.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Runnable run = new Runnable() {
+						@Override
+						public void run() {
+							showOnMap(GPXUtilities.loadGPXFile(app, f));
+						}
+					};
+					run.run();
+				}
+			});
+			showOnMap.setVisibility(View.VISIBLE);
+			showOnMap.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
+			tracks.addView(v);
 		}
 	}
 
@@ -170,5 +182,18 @@ public class DashTrackFragment extends DashBaseFragment {
 		settings.setMapLocationToShow(file.getLastPoint().lat, file.getLastPoint().lon, settings.getLastKnownMapZoom());
 		getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(file);
 		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+
+	private void startHandler(final View v) {
+		Handler updateCurrentRecordingTrack = new Handler();
+		updateCurrentRecordingTrack.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (updateEnable) {
+					AvailableGPXFragment.updateCurrentTrack(v, getActivity(), getMyApplication());
+					startHandler(v);
+				}
+			}
+		}, 1500);
 	}
 }

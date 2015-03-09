@@ -81,7 +81,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		scaleCoefficient = view.getScaleCoefficient();
-		FrameLayout parent = (FrameLayout) view.getParent();
+		FrameLayout parent = getParent();
 		Handler showUIHandler = new Handler();
 		int rightGravity = Gravity.RIGHT | Gravity.BOTTOM;
 		int leftGravity = Gravity.LEFT | Gravity.BOTTOM;
@@ -208,19 +208,23 @@ public class MapControlsLayer extends OsmandMapLayer {
 			RotatedTileBox tileBox, DrawSettings nightMode) {
 		if(visibility != controls.isVisible() ){
 			if(visibility) {
-				controls.show((FrameLayout) mapActivity.getMapView().getParent());
+				controls.show(getParent());
 			} else {
-				controls.hide((FrameLayout) mapActivity.getMapView().getParent());
+				controls.hide(getParent());
 			}
 		}
 		if(controls.isVisible()) {
 			controls.onDraw(canvas, tileBox, nightMode);
 		}		
 	}
-	
+
+	private FrameLayout getParent() {
+		return (FrameLayout) mapActivity.findViewById(R.id.MapButtons);
+	}
+
 	private void forceHideView(MapControls controls) {
 		if (controls.isVisible()) {
-			controls.forceHide((FrameLayout) mapActivity.getMapView().getParent());
+			controls.forceHide(getParent());
 		}
 	}
 
@@ -239,10 +243,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		if(!mapActivity.getRoutingHelper().isRoutePlanningMode() && mapActivity.getRoutingHelper().isFollowingMode()) {
 			if(!settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get()) {
-				zoomControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
-				mapMenuControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+				zoomControls.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+				mapMenuControls.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 			}
-			mapRoutePlanControl.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+			mapRoutePlanControl.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 		}
 		for(MapControls m : allControls) {
 			if(m.isVisible() && m.onTouchEvent(event, tileBox)){
@@ -299,7 +303,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideTransparencyBar(settingsToTransparency);
 			}
 		});
-		imageButton.setContentDescription(view.getContext().getString(R.string.close));
+		imageButton.setContentDescription(view.getContext().getString(R.string.shared_string_close));
 		imageButton.setBackgroundResource(R.drawable.headliner_close);
 		transparencyBarLayout.addView(imageButton, prms);
 	}
@@ -318,7 +322,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void shiftLayout(int height) {
-		FrameLayout parent = (FrameLayout) mapActivity.getMapView().getParent();
+		FrameLayout parent = getParent();
 		parent.requestLayout();
 		for(MapControls mc : allControls) {
 			if(mc.isBottom()){

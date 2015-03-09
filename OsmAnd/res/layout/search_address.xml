@@ -3,6 +3,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding"
+    android:background="?attr/expandable_list_item_background"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -45,7 +46,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" />
+                        android:contentDescription="@string/shared_string_clear" />
                 </TableRow>
 
                 <TableRow
@@ -67,7 +68,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" />
+                        android:contentDescription="@string/shared_string_clear" />
                 </TableRow>
 
                 <TableRow
@@ -89,7 +90,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" />
+                        android:contentDescription="@string/shared_string_clear" />
                 </TableRow>
 
                 <TableRow
@@ -112,7 +113,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" />
+                        android:contentDescription="@string/shared_string_clear" />
                 </TableRow>
             </TableLayout>
 

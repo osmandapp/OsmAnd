@@ -157,10 +157,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			showWarning(msg);
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template) + ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (IOException e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation));
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template) + ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
 		}
 
 		return null;
@@ -329,10 +329,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}
@@ -365,7 +365,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				
 				@Override
 				public void run() {
-					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();					
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();					
 				}
 			});
 		}
