@@ -1959,8 +1959,8 @@
     <string name="routing_settings_2">Navigationsindstillinger</string>
     <string name="general_settings_2">Generelleindstillinger</string>
 	<string name="shared_string_clear_all">Ryd alle</string>
-	<string name="shared_string_my_location">Min placering</string>
-	<string name="shared_string_my_favorites">Mine favoritter</string>
-	<string name="shared_string_my_tracks">Mine spor</string>
+	<string name="shared_string_my_location">Placering</string>
+	<string name="shared_string_my_favorites">Favoritter</string>
+	<string name="shared_string_my_tracks">Spor</string>
 	<string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
 	</resources>
