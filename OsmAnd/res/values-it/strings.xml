@@ -214,7 +214,7 @@
 		\n\t- Opzioni navigazione GPX
 		\n\t- Aggiornamento e correzione errori interfaccia utente
 	</string>
-  <string name="voice_not_use">Non usare</string>
+  <string name="voice_not_use">Non usare la guida vocale</string>
   
   <string name="installing_new_resources">Scompattazione nuovi dati…</string>
   <string name="internet_connection_required_for_online_route">È stato selezionato un servizio di navigazione online, ma la connessione a Internet non è disponibile.</string>
