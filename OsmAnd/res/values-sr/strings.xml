@@ -1,20 +1,19 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="gps_status_eclipsim">GPS статус</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="about_settings">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
-    <string name="tips_and_tricks">Савети</string>
+    
     <string name="av_photo_play_sound_descr">Изаберите да ли да се чује звук приликом снимања фотографија</string>
 <string name="av_camera_focus_infinity">Фокус је подешен на бесконачно</string>
 	<string name="av_camera_focus_macro">Макро режим фокуса</string>
 	<string name="av_camera_focus_auto">Ауто фокус</string>
-	<string name="local_osm_changes_delete_all">Обриши све</string>
+	<string name="shared_string_delete_all">Обриши све</string>
     <string name="animate_routing_route_not_calculated">Прво израчунајте путању</string>
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
-    <string name="remember_choice">Запамти мој избор</string>
-    <string name="default_and">и</string>
-    <string name="default_or">или</string>
+    <string name="shared_string_remember_my_choice">Запамти мој избор</string>
+    <string name="shared_string_and">и</string>
+    <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>
 	<string name="base_world_map">Основна карта света</string>
 	<string name="tip_map_styles">Стилови мапа</string>
@@ -69,7 +68,7 @@
     <string name="gpx_file_name">назив GPX фајла</string>
     <string name="gpx_saved_sucessfully">GPX датотека успешно сачувана на {0}</string>
     <string name="osmand_distance_planning_plugin_name">Калкулатор растојања и Алат за планирање</string>
-    <string name="default_buttons_do_not_show_again">Не приказуј поново</string>
+    <string name="shared_string_do_not_show_again">Не приказуј поново</string>
     <string name="distance_measurement_start_editing">Почните уређивање</string>
     <string name="distance_measurement_finish_editing">Заврши уређивање</string>
     <string name="distance_measurement_clear_route">Обришите све тачке</string>
@@ -94,10 +93,10 @@
     <string name="recording_context_menu_delete">Обриши запис</string>
     <string name="recording_context_menu_play">Репродукуј</string>
     <string name="recording_default_name">снимање</string>
-    <string name="av_control_start">Почни</string>
+    <string name="shared_string_control_start">Почни</string>
     <string name="map_widget_av_notes">Аудио/видео белешке</string>
     <string name="map_widget_distancemeasurement">Мерење удаљености</string>
-    <string name="monitoring_control_stop">стани</string>
+    
     <string name="map_widget_audionotes">Аудио белешке</string>
     <string name="download_select_map_types">Остале мапе</string>
     <string name="download_roads_only_item">Само путеви</string>
@@ -130,8 +129,8 @@
 	<string name="update_poi_file_not_found">Месна датотека за одржавање промене ПОИ-а није пронађена и не може да се направи .</string>
 	<string name="button_upgrade_osmandplus">Надоградите Османд+</string>
 	<string name="map_version_changed_info">Сервер садржи мапе датотеке које нису у складу са тренутним издањем апликације. Да бисте их преузели и користили, молимо Вас да, надоградите апликацију на новије издање.</string>
-	<string name="local_index_mi_rename">Преименовање</string>
-	<string name="show_gpx_route">Прикажи на мапи</string>
+	<string name="shared_string_rename">Преименовање</string>
+	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_address">Адреса …</string>
 	<string name="search_position_undefined">Неодређено</string>
@@ -148,10 +147,10 @@
 	<string name="map_widget_back_to_loc">Где сам</string>
 	<string name="map_widget_lock_screen">Закључај екран</string>
 	<string name="map_widget_compass">Компас</string>
-	<string name="map_widget_top_stack">Статусна трака:</string>
+	
 	<string name="map_widget_reset">Врати на подразумевано</string>
-	<string name="map_widget_right_stack">Десни панел:</string>
-	<string name="map_widget_left_stack">Леви панел:</string>
+	
+	
 	<string name="map_widget_speed">Брзина</string>
 	<string name="map_widget_distance">Дестинација</string>
 	<string name="map_widget_altitude">Висина</string>
@@ -163,13 +162,13 @@
 	<string name="bg_service_screen_lock_toast">Екран је закључан</string>
 	<string name="download_type_to_filter">укуцајте за филтрирање</string>
 	<string name="use_high_res_maps">Екран високе резолуције</string>
-	<string name="map_index">мапа</string>
+	
 	<string name="voice">глас</string>
 	<string name="no_vector_map_loaded">Векторске мапе нису учитане</string>
 	<string name="map_route_by_gpx">Навигација помоћу GPX</string>
 	<string name="gpx_files_not_found">GPX датотеке се не налазе у директоријуму</string>
 	<string name="error_reading_gpx">Грешка при читању GPX података</string>
-	<string name="point_on_map">Локација:\n Lat %1$.5f\n Lon %2$.5f</string>
+	
 	<string name="osb_bug_name">Грешка</string>
 	<string name="poi_context_menu_modify">Измена POI</string>
 	<string name="poi_context_menu_delete">Брисање POI</string>
@@ -178,9 +177,9 @@
 	
 	<string name="avoid_in_routing_descr">Избегавај наплатне рампе, не асфалтиране путеве, трајекте</string>
 	<string name="map_widget_show_ruler">Лењир</string>
-	<string name="map_widget_appearance">Остало:</string>
-	<string name="import_fav">Увези</string>
-	<string name="export_fav">Извези</string>
+	
+	<string name="shared_string_import">Увези</string>
+	
 	<string name="error_occurred_loading_gpx">Дошло је до грешке приликом учитавања GPX</string>
 	<string name="send_report">Пошаљи извештај</string>
 	<string name="none_region_found">Нема података за дату област на SD картици.  Преузмите податке са Интернета.</string>
@@ -223,7 +222,7 @@
     <string name="dropbox_plugin_description">Dropbox додатак омогућава да синхронизујете путање и аудио/видео белешке са вашим Dropbox налогом.</string>
     <string name="dropbox_plugin_name">Dropbox додатак</string>
     <string name="intermediate_points_change_order">Промени редослед</string>
-    <string name="rendering_value__name">Подразумевано</string>
+    
 	<string name="rendering_value_default_name">Подразумевано</string>
     <string name="traffic_warning_pedestrian">Пешачки прелаз</string>
 	<string name="show_pedestrian_warnings">Приказуј пешачке прелазе</string>
@@ -244,17 +243,17 @@
     <string name="use_opengl_render_descr">Користи хардверско убрзање ОпенГЛ-а за приказ (можда не ради на неким уређајима)</string>
     <string name="osmo_use_https_descr">Користи безбедну везу са сервером</string>
     <string name="osmo_use_https">Користи ХТТПС</string>
-	<string name="advanced_settings">Напредно</string>
+	
 	<string name="map_update">Доступне су надоградње %1$s карата</string>
 	<string name="search_for">Потражи</string>
-	<string name="show_map">ПРИКАЖИ КАРТУ</string>
-	<string name="show_all">ПРИКАЖИ СВЕ</string>
+	
+	<string name="shared_string_show_all">ПРИКАЖИ СВЕ</string>
 	<string name="coordinates">Координате</string>
-	<string name="wake_on_voice_never">Никад</string>
-    <string name="select_impassable_road">Означи на карти…</string>
+	<string name="shared_string_never">Никад</string>
+    
     <string name="rendering_category_hide">Сакриј</string>
     <string name="rendering_category_details">Појединости</string>
-    <string name="hide_all_waypoints">Уклони све</string>
+    
 <string name="search_position_current_location_search">Претрага положаја…</string>
 	<string name="search_position_current_location_found">Положај (пронађен)</string>
 	<string name="search_position_favorites">Омиљено…</string>
@@ -264,8 +263,8 @@
 	<string name="context_menu_item_search">Тражи оближње</string>
 	<string name="filename_input">"Име датотеке: "</string>
 	<string name="file_with_name_already_exist">Датотека са истим именом већ постоји.</string>
-	<string name="default_buttons_save">Сачувај</string>
-	<string name="menu_save_directions">Сачувај правце</string>
+	<string name="shared_string_save">Сачувај</string>
+	
 	<string name="local_index_upload_gpx_description">Отпремите ГПИкс датотеке заједници ОСМ. Употребиће се за побољшање мапа.</string>
 	<string name="local_index_items_uploaded">%1$d од %2$d ставки је успешно отпремљено.</string>
 	<string name="local_index_mi_upload_gpx">Пошаљи ОСМ-у</string>
@@ -283,10 +282,10 @@
 	<string name="local_index_descr_title">Управљајте датотекама мапа</string>
 	<string name="local_index_mi_restore">Покрени</string>
 	<string name="local_index_mi_backup">Искључи</string>
-	<string name="local_index_mi_delete">Избриши</string>
-	<string name="local_index_mi_export">Извези</string>
+	
+	
 	<string name="local_index_mi_reload">Учитај поново са СД картице</string>
-	<string name="local_index_download">Преузми</string>
+	<string name="shared_string_download">Преузми</string>
 	<string name="local_index_poi_data">Подаци ПОИ-а</string>
 	<string name="local_index_address_data">Подаци адреса</string>
 	<string name="local_index_transport_data">Подаци јавног превоза</string>
@@ -294,7 +293,7 @@
 	<string name="local_indexes_cat_backup">Искључено</string>
 	<string name="local_indexes_cat_tts">Гласовни подаци (ТТС)</string>
 	<string name="local_indexes_cat_voice">Гласовни подаци (снимци)</string>
-	<string name="local_indexes_cat_gpx">Подаци ГПИкс-а</string>
+	
 	<string name="local_indexes_cat_poi">Подаци ПОИ-а</string>
 	<string name="ttsvoice">Глас ТТС-а</string>
 	<string name="search_offline_clear_search">Нова претрага</string>
@@ -304,7 +303,7 @@
 	<string name="trace_rendering_descr">Приказуј учинак приказа</string>
 	<string name="tip_recent_changes">Скорашње измене</string>
 	<string name="voice_not_use">Не користи</string>
-	<string name="voice_not_specified">Ништа</string>
+	
 	<string name="installing_new_resources">Распакујем нове податке…</string>
 	<string name="internet_connection_required_for_online_route">Изабрана је услуга навођења преко мрежне везе, али је мрежна веза недоступна.</string>
 	<string name="tts_language_not_supported_title">Језик није подржан</string>
@@ -324,7 +323,7 @@
     <string name="map_widget_top">Трака стања</string>
 	<string name="map_widget_right">Десна површ</string>
 	<string name="map_widget_left">Лева површ</string>
-    <string name="layers_category_show">Прикажи</string>
+    <string name="shared_string_show">Прикажи</string>
 	<string name="configure_map">Подесите мапу</string>
     <string name="osmo_device_not_found">Није пронађен уређај</string>
     <string name="anonymous_user_hint">Безимени корисник не може\n- да прави скупове;\n- да усклађује скупове и уређаје са сервером;\n- да управља скуповима и уређајима у личном уреду.</string>
@@ -357,7 +356,7 @@
     <string name="navigate_point_easting">Географска дужина</string>
     <string name="error_avoid_specific_road">Нисам пронашао заобилазнице</string>
     <string name="rename_failed">Преименовање није успело.</string>
-	<string name="currently_recording_track">Стаза која се тренутно снима</string>
+	<string name="shared_string_currently_recording_track">Стаза која се тренутно снима</string>
 	<string name="back_to_map">Назад на карту</string>
 	<string name="plugin_nautical_descr">Прелазак прегледа карте приказује поморски изглед, чиме се приказују све поморске ознаке навођења и графички знаци.
 		\n\nДатотека карте која садржи све опште поморске знаке је доступна у виду  једног преузимања и назива се „Светске поморске карте“.
@@ -366,11 +365,11 @@
 	<string name="plugin_ski_descr">Покретање ове измене мења преглед карте на „Зима и скијање“, које приказује у положеном погледу особине предела и зимске услове.
 		\n\nСветска карта приказује сва скијалишта и скијашке стазе у овом прегледу је доступна преузимањем  „Светске скијашке карте“.
 	</string>
-	<string name="audio">Звук</string>
-	<string name="video">Видео</string>
-	<string name="photo">Слика</string>
+	<string name="shared_string_audio">Звук</string>
+	
+	
 	<string name="share_note">Дели белешку</string>
-	<string name="rename_recording">Преименуј снимак</string>
+	
     <string name="location_on_map">Географски положај:\nШирина %1$s↵\nДужина %2$s</string>
 	<string name="watch">Прегледај</string>
 	<string name="notes">Бележница</string>
@@ -389,7 +388,7 @@
     <string name="version_settings">Изградње</string>
     <string name="points">Тачке</string>
     <string name="tracks">Стазе</string>
-    <string name="my_location">Мој положај</string>
+    <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
     <string name="home_button">Матица</string>
     </resources>

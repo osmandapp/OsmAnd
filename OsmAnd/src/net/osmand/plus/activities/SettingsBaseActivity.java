@@ -308,7 +308,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = getMyApplication().getSettings();
-		getToolbar().setTitle(R.string.settings_activity);
+		getToolbar().setTitle(R.string.shared_string_settings);
 
 		
 		if (profileSettings) {

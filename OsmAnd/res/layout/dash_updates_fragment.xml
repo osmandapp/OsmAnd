@@ -20,7 +20,7 @@
 		<Button
 			android:id="@+id/show_all"
 			style="?attr/dashboardGeneralButtonStyle"
-			android:text="@string/show_all"/>
+			android:text="@string/shared_string_show_all"/>
 	</LinearLayout>
 
 	<LinearLayout

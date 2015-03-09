@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/dashListItemHeight"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/check_local_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/local_index_check_right_margin"
+            android:layout_marginTop="@dimen/favorites_icon_top_margin"
+            android:focusable="false"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:layout_marginTop="@dimen/favorites_icon_top_margin"
+            android:src="@drawable/ic_gpx_track"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/name"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/dashFavNameTextSize"
+            android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/subHeaderMarginLeft"
+			android:layout_marginRight="@dimen/showAllButtonMarginRight"
+			android:layout_weight="1"
+            tools:text="@string/validate_gpx_upload_name_pwd" />
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="@dimen/dashListItemHeight"
+            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/options_button_background"
+            android:src="@drawable/ic_action_rec_stop"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -157,10 +157,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			showWarning(msg);
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template) + ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
 		} catch (IOException e) {
 			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation));
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template) + ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
 		}
 
 		return null;

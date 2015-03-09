@@ -182,7 +182,7 @@ public class EditingPOIActivity implements DialogProvider {
 		ll.addView(closeChangeset);
 		builder.setView(ll);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
@@ -567,7 +567,7 @@ public class EditingPOIActivity implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(ctx);
 		final OpeningHoursView v = new OpeningHoursView(ctx);
 		builder.setView(v.createOpeningHoursEditView(simple));
-		builder.setPositiveButton(ctx.getString(R.string.default_buttons_apply), new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(ctx.getString(R.string.shared_string_apply), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpeningHours oh = new OpeningHours((ArrayList<OpeningHoursRule>) v.getTime());

@@ -222,7 +222,7 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
+			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
@@ -257,7 +257,7 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName /*+ " " + mb + " MB"*/;
+		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + de.baseName /*+ " " + mb + " MB"*/;
 		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {

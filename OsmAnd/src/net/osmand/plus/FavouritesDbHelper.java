@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,22 +9,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import android.app.AlertDialog;
+import android.content.Context;
 
 public class FavouritesDbHelper {
 
@@ -34,7 +25,6 @@ public class FavouritesDbHelper {
 		void updateFavourites();
 	}
 
-	private List<FavoritesUpdatedListener> favoritesUpdatedListeners = new ArrayList<FavoritesUpdatedListener>();
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
 	
@@ -93,20 +83,8 @@ public class FavouritesDbHelper {
 	}
 
 	private void favouritesUpdated(){
-		for (FavoritesUpdatedListener listener : favoritesUpdatedListeners){
-			listener.updateFavourites();
-		}
 	}
 
-	public void addFavoritesUpdatedListener(FavoritesUpdatedListener listener){
-		if (!favoritesUpdatedListeners.contains(listener)){
-			favoritesUpdatedListeners.add(listener);
-		}
-	}
-
-	public void removeFavoritesUpdatedListener(FavoritesUpdatedListener listener){
-		favoritesUpdatedListeners.remove(listener);
-	}
 
 	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
 		boolean changed = false;

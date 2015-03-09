@@ -31,4 +31,9 @@ public class DashOsmoFragment extends DashBaseFragment {
 
 		return view;
 	}
+
+	@Override
+	public void onOpenDash() {
+		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);		
+	}
 }

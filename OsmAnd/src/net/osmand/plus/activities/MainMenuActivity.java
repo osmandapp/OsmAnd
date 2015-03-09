@@ -1,40 +1,26 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Random;
 
 import net.osmand.Location;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.dashboard.DashDownloadMapsFragment;
 import net.osmand.plus.dashboard.DashErrorFragment;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.dashboard.NotifyingScrollView;
 import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import net.osmand.plus.views.controls.FloatingActionButton;
-import android.app.Activity;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -44,7 +30,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
-import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -53,18 +38,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 
 /**
  */
 public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
-
-	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
-	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
-	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
-	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
@@ -176,10 +154,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			actionBarBackground.setCallback(mDrawableCallback);
 		}
 
-		AppInitializer initializer = new AppInitializer();
-		boolean firstTime = initializer.initApp(this, getMyApplication());
-		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
-			initializer.checkPreviousRunsForExceptions(this, firstTime);
+		if (getMyApplication().getSettings().FOLLOW_THE_ROUTE.get() && !getMyApplication().getRoutingHelper().isRouteCalculated()) {
+			startMapActivity();
 		}
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -243,11 +219,11 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help);
+		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.shared_string_help).setIcon(R.drawable.ic_ac_help);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings);
+		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.shared_string_settings).setIcon(R.drawable.ic_ac_settings);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close);
+		menuItem = menu.add(0, EXIT_ID, 0, R.string.shared_string_exit).setIcon(R.drawable.ic_ac_close);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
@@ -310,22 +286,19 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public void updateCompassValue(float value) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof DashLocationFragment && !f.isDetached()) {
-				((DashLocationFragment) f).updateCompassValue(value);
-			}
-		}
+		// 
+//		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void updateLocation(Location location) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof DashLocationFragment && !f.isDetached()) {
-				((DashLocationFragment) f).updateLocation(location);
-			}
-		}
+//		for (WeakReference<Fragment> ref : fragList) {
+//			Fragment f = ref.get();
+//			if (f instanceof DashLocationFragment && !f.isDetached()) {
+//				((DashLocationFragment) f).updateLocation(location);
+//			}
+//		}
+//		throw new UnsupportedOperationException();
 	}
 
 	private OsmAndLocationProvider getLocationProvider() {

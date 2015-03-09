@@ -39,9 +39,13 @@ public class MapMenuControls extends MapControls {
 				// double lat = activity.getMapView().getLatitude();
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
-				mapActivity.getMapActions().onDrawerBack();
-				mapActivity.getMapActions().toggleDrawer();
 				notifyClicked();
+				if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+					mapActivity.getDashboard().setDashboardVisibility(true);
+				} else {
+					mapActivity.getMapActions().onDrawerBack();
+					mapActivity.getMapActions().toggleDrawer();
+				}
 			}
 		});
 	}

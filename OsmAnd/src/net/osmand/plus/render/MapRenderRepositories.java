@@ -131,14 +131,6 @@ public class MapRenderRepositories {
 		
 		}
 		files.put(file.getAbsolutePath(), reader);
-		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-		if (nativeLib != null) {
-			if (!nativeLib.initMapFile(file.getAbsolutePath())) {
-				log.error("Initializing native db " + file.getAbsolutePath() + " failed!"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			} else {
-				nativeFiles.add(file.getAbsolutePath());
-			}
-		}
 	}
 
 	public RotatedTileBox getBitmapLocation() {

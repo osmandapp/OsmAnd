@@ -86,7 +86,6 @@
     </style>
     
     <style name="OsmandListView" parent="@android:style/Widget.ListView">
-        <item name="android:divider">@drawable/tab_text_separator</item>
     </style>
     
     <style name="MainMenuActionBar" parent="Theme.AppCompat.Light.DarkActionBar">

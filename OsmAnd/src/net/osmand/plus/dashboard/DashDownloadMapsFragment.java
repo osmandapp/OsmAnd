@@ -23,59 +23,62 @@ import android.widget.TextView;
  */
 public class DashDownloadMapsFragment extends DashBaseFragment {
 
-    public static final String TAG = "DASH_DOWNLOAD_MAPS_FRAGMENT";
-    MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	public static final String TAG = "DASH_DOWNLOAD_MAPS_FRAGMENT";
+	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = getActivity().getLayoutInflater().inflate(R.layout.dash_download_maps_fragment, container, false);
-        Typeface typeface = FontCache.getRobotoMedium(getActivity());
-        final TextView message =((TextView) view.findViewById(R.id.message));
-        message.setTypeface(typeface);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final View view = getActivity().getLayoutInflater().inflate(R.layout.dash_download_maps_fragment, container,
+				false);
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
+		final TextView message = ((TextView) view.findViewById(R.id.message));
+		message.setTypeface(typeface);
 
-        Button local = ((Button) view.findViewById(R.id.local_downloads));
-        local.setTypeface(typeface);
-        local.setOnClickListener(new View.OnClickListener() {
+		Button local = ((Button) view.findViewById(R.id.local_downloads));
+		local.setTypeface(typeface);
+		local.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
+				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization()
+						.getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
-				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
-				getActivity().startActivity(intent);				
-			}
-		});
-
-        Button cancelBtn = ((Button) view.findViewById(R.id.download_new_map));
-        cancelBtn.setTypeface(typeface);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
-				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				// intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
 			}
 		});
-        return view;
-    }
+
+		Button cancelBtn = ((Button) view.findViewById(R.id.download_new_map));
+		cancelBtn.setTypeface(typeface);
+		cancelBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization()
+						.getDownloadIndexActivity());
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+				// intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				getActivity().startActivity(intent);
+			}
+		});
+		return view;
+	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		refreshData();
 	}
 
 	public void refreshData() {
-		if (getView() == null){
+		if (getView() == null) {
 			return;
 		}
 
-		final TextView message =((TextView) getView().findViewById(R.id.message));
+		final TextView message = ((TextView) getView().findViewById(R.id.message));
 		final Button local = ((Button) getView().findViewById(R.id.local_downloads));
 		new AsyncTask<Void, Void, Void>() {
 			int countMaps = 0;
 			long size = 0;
+
 			@Override
 			protected Void doInBackground(Void... params) {
 				updateCount(IndexConstants.MAPS_PATH);
@@ -84,8 +87,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			}
 
 			protected void updateCount(String s) {
-				if (!DashDownloadMapsFragment.this.isAdded() ||
-						getMyApplication() == null){
+				if (!DashDownloadMapsFragment.this.isAdded() || getMyApplication() == null) {
 					return;
 				}
 				File ms = getMyApplication().getAppPath(s);
@@ -105,17 +107,15 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			@Override
 			protected void onPostExecute(Void result) {
 				super.onPostExecute(result);
-				if (!DashDownloadMapsFragment.this.isAdded()
-						|| getMyApplication() == null){
+				if (!DashDownloadMapsFragment.this.isAdded() || getMyApplication() == null) {
 					return;
 				}
-				if(countMaps > 0) {
+				if (countMaps > 0) {
 					long mb = 1 << 20;
 					long gb = 1 << 30;
-					String sz = size > gb ?
-							formatGb.format(new Object[] { (float) size / (gb) }) :
-							formatMb.format(new Object[] { (float) size / mb }) ;
-					message.setText(getString(R.string.dash_download_msg, countMaps+"") + " (" + sz +")");
+					String sz = size > gb ? formatGb.format(new Object[] { (float) size / (gb) }) : formatMb
+							.format(new Object[] { (float) size / mb });
+					message.setText(getString(R.string.dash_download_msg, countMaps + "") + " (" + sz + ")");
 					local.setVisibility(View.VISIBLE);
 				} else {
 					message.setText(getString(R.string.dash_download_msg_none));
@@ -123,6 +123,6 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 				}
 
 			}
-		}.execute((Void)null);
+		}.execute((Void) null);
 	}
 }

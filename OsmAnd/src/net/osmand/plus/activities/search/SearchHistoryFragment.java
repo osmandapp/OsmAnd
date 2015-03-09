@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -13,7 +14,9 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
-
+import android.R.anim;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -27,6 +30,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -43,20 +48,14 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
-	private Drawable addressIcon;
-	private Drawable favoriteIcon;
-	private Drawable locationIcon;
-	private Drawable poiIcon;
-	private Drawable wptIcon;
-	private Drawable audioNoteIcon;
-	private Drawable videoNoteIcon;
-	private Drawable photoNoteIcon;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.search_history, container, false);
 		clearButton = (Button) view.findViewById(R.id.clearAll);
-		clearButton.setText(R.string.clear_all);
+		clearButton.setText(R.string.shared_string_clear_all);
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -65,37 +64,15 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				clearButton.setVisibility(View.GONE);
 			}
 		});
-		loadIcons();
-		return view;
-	}
+		((ListView)view.findViewById(android.R.id.list)).setOnItemClickListener(new OnItemClickListener() {
 
-	private void loadIcons() {
-		addressIcon = getResources().getDrawable(R.drawable.ic_type_address);
-		favoriteIcon = getResources().getDrawable(R.drawable.ic_type_favorites);
-		locationIcon = getResources().getDrawable(R.drawable.ic_type_coordinates);
-		poiIcon = getResources().getDrawable(R.drawable.ic_type_info);
-		wptIcon = getResources().getDrawable(R.drawable.ic_type_waypoint);
-		audioNoteIcon = getResources().getDrawable(R.drawable.ic_type_audio);
-		videoNoteIcon = getResources().getDrawable(R.drawable.ic_type_video);
-		photoNoteIcon = getResources().getDrawable(R.drawable.ic_type_img);
-		if (getMyApplication().getSettings().isLightContent()) {
-			addressIcon = addressIcon.mutate();
-			addressIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			favoriteIcon = favoriteIcon.mutate();
-			favoriteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			locationIcon = locationIcon.mutate();
-			locationIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			poiIcon = poiIcon.mutate();
-			poiIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			wptIcon = wptIcon.mutate();
-			wptIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			audioNoteIcon = audioNoteIcon.mutate();
-			audioNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			videoNoteIcon = videoNoteIcon.mutate();
-			videoNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			photoNoteIcon = photoNoteIcon.mutate();
-			photoNoteIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				onListItemClick((ListView) parent, view, position, id);
+			}
+		});
+		
+		return view;
 	}
 
 	@Override
@@ -166,7 +143,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(model.getLat(), model.getLon()),
 				model, name, settings.getLastKnownMapZoom(), getActivity(), true);
 		MenuItem item = optionsMenu.getMenu().add(
-				R.string.edit_filter_delete_menu_item).setIcon(light ?
+				R.string.shared_string_delete).setIcon(light ?
 				R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -181,7 +158,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 		private LatLon location;
-		Drawable arrowImage;
+		
 
 		public void updateLocation(LatLon l) {
 			location = l;
@@ -190,14 +167,6 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);
-			arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
-			arrowImage.mutate();
-			boolean light = getMyApplication().getSettings().isLightContent();
-			if (light) {
-				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-			} else {
-				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-			}
 		}
 
 		@Override
@@ -207,59 +176,65 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
-			TextView nameText = (TextView) row.findViewById(R.id.name);
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			String distance = "";
-			ImageView arrow = (ImageView) row.findViewById(R.id.direction);
-			arrow.setImageDrawable(arrowImage);
-			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			final HistoryEntry historyEntry = getItem(position);
-			if (location != null) {
-				int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));
-				distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()) + "  ";
-			}
-			distanceText.setText(distance);
-			nameText.setText(historyEntry.getName().getName(), BufferType.SPANNABLE);
-			ImageView icon  =((ImageView) row.findViewById(R.id.icon));
-
-			if (historyEntry.getName().isAddress()) {
-				icon.setImageDrawable(addressIcon);
-			} else if (historyEntry.getName().isFavorite()) {
-				icon.setImageDrawable(favoriteIcon);
-			} else if (historyEntry.getName().isLocation()) {
-				icon.setImageDrawable(locationIcon);
-			} else if (historyEntry.getName().isPoi()) {
-				icon.setImageDrawable(poiIcon);
-			} else if (historyEntry.getName().isWpt()) {
-				icon.setImageDrawable(wptIcon);
-			} else if (historyEntry.getName().isAudioNote()) {
-				icon.setImageDrawable(audioNoteIcon);
-			} else if (historyEntry.getName().isVideoNote()) {
-				icon.setImageDrawable(videoNoteIcon);
-			}else if (historyEntry.getName().isPhotoNote()) {
-				icon.setImageDrawable(photoNoteIcon);
-			}  else {
-				icon.setImageDrawable(addressIcon);
-			}
-
-			String typeName = historyEntry.getName().getTypeName();
-			if (typeName !=null && !typeName.isEmpty()){
-				row.findViewById(R.id.type_name_icon).setVisibility(View.VISIBLE);
-				((TextView) row.findViewById(R.id.type_name)).setText(typeName);
-			} else {
-				row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
-				((TextView) row.findViewById(R.id.type_name)).setText("");
-			}
-
+			udpateHistoryItem(historyEntry, row, location, getActivity(), getMyApplication());
+			ImageButton options = (ImageButton) row.findViewById(R.id.options);
+			options.setVisibility(View.VISIBLE);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					selectModel(historyEntry, v);
 				}
-
 			});
-
 			return row;
+		}
+	}
+	
+				
+	public static void udpateHistoryItem(final HistoryEntry historyEntry, View row,
+			LatLon location, Activity activity, OsmandApplication app) {
+		TextView nameText = (TextView) row.findViewById(R.id.name);
+		TextView distanceText = (TextView) row.findViewById(R.id.distance);
+		ImageView direction = (ImageView) row.findViewById(R.id.direction);
+		IconsCache ic = app.getIconsCache();
+		direction.setImageDrawable(ic.getIcon(R.drawable.ic_destination_arrow_white, R.color.color_distance));
+		String distance = "";
+		if (location != null) {
+			int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));
+			distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) activity.getApplication()) + "  ";
+		}
+		distanceText.setText(distance);
+		PointDescription pd = historyEntry.getName();
+		nameText.setText(pd.getSimpleName(activity, historyEntry.getLat(), historyEntry.getLon()), BufferType.SPANNABLE);
+		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
+
+		if (historyEntry.getName().isAddress()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_address));
+		} else if (historyEntry.getName().isFavorite()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_favorites));
+		} else if (historyEntry.getName().isLocation()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_coordinates));
+		} else if (historyEntry.getName().isPoi()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_info));
+		} else if (historyEntry.getName().isWpt()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_waypoint));
+		} else if (historyEntry.getName().isAudioNote()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_audio));
+		} else if (historyEntry.getName().isVideoNote()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_video));
+		}else if (historyEntry.getName().isPhotoNote()) {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_img));
+		}  else {
+			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_address));
+		}
+
+		String typeName = historyEntry.getName().getTypeName();
+		if (typeName != null && !typeName.isEmpty()) {
+			row.findViewById(R.id.type_name_icon).setVisibility(View.VISIBLE);
+			((TextView) row.findViewById(R.id.type_name)).setText(typeName);
+		} else {
+			row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
+			((TextView) row.findViewById(R.id.type_name)).setText("");
 		}
 	}
 

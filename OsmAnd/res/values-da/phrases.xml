@@ -112,11 +112,11 @@
         <string name="poi_toll_booth">Betalingsanlæg</string>
         <string name="poi_border_control">Grænsekontrol</string>
         <string name="poi_traffic_calming_bump">Trafikdæmpning, bump</string>
-        <string name="poi_traffic_calming_hump">Trafikdæmpning, hump</string>
-        <string name="poi_traffic_calming_cushion">Trafikdæmpning, pude</string>
+        <string name="poi_traffic_calming_hump">Bumb</string>
+        <string name="poi_traffic_calming_cushion">Pude bumb</string>
         <string name="poi_traffic_calming_chicane">Trafikdæmpning, chikane</string>
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
-        <string name="poi_traffic_calming_table">Trafikdæmpning, plateau</string>
+        <string name="poi_traffic_calming_table">Plateau bumb</string>
         <string name="poi_traffic_calming_choker">Indsnævring</string>
         <string name="poi_traffic_signals">Trafiklys</string>
 

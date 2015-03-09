@@ -5,26 +5,29 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import android.graphics.Typeface;
-import android.widget.*;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.DatabaseHelper;
+import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import net.osmand.plus.helpers.DatabaseHelper;
-import net.osmand.plus.helpers.FontCache;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 /**
- * Created by Denis
- * on 21.11.2014.
+ * Created by Denis on 21.11.2014.
  */
 public class DashUpdatesFragment extends DashBaseFragment {
 
@@ -47,9 +50,10 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		showAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
+				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization()
+						.getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
-				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				// intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
 			}
 		});
@@ -57,13 +61,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		downloadQueue.clear();
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
 			currentProgress = null;
@@ -79,19 +77,20 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem t1) {
 				DatabaseHelper helper = BaseDownloadActivity.downloadListIndexThread.getDbHelper();
-				return (int)(helper.getCount(t1.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) -
-						helper.getCount(indexItem.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY));
+				return (int) (helper.getCount(t1.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) - helper.getCount(
+						indexItem.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY));
 			}
 		});
 		View mainView = getView();
-		//it may be null because download index thread is async
+		// it may be null because download index thread is async
 		if (mainView == null) {
 			return;
 		}
 		progressBars.clear();
 		baseNames.clear();
 		downloadButtons.clear();
-		((TextView) mainView.findViewById(R.id.header)).setText(getString(R.string.map_update ,String.valueOf(list.size())));
+		((TextView) mainView.findViewById(R.id.header)).setText(getString(R.string.map_update,
+				String.valueOf(list.size())));
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
 		updates.removeAllViews();
@@ -110,8 +109,10 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			}
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_updates_item, null, false);
-			String name = item.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
-			String d = item.getDate(getMyApplication().getResourceManager().getDateFormat()) + ", " + item.getSizeDescription(getMyApplication());
+			String name = item.getVisibleName(getMyApplication(), getMyApplication().getResourceManager()
+					.getOsmandRegions());
+			String d = item.getDate(getMyApplication().getResourceManager().getDateFormat()) + ", "
+					+ item.getSizeDescription(getMyApplication());
 			String eName = name.replace("\n", " ");
 			((TextView) view.findViewById(R.id.map_name)).setText(eName);
 			((TextView) view.findViewById(R.id.map_descr)).setText(d);
@@ -122,9 +123,9 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				public void onClick(View view) {
 					if (getDownloadActivity().isInQueue(item)) {
 						getDownloadActivity().removeFromQueue(item);
-						((ImageButton)view).setImageResource(R.drawable.download_button);
+						((ImageButton) view).setImageResource(R.drawable.download_button);
 					} else if (!getDownloadActivity().startDownload(item)) {
-						((ImageButton)view).setImageResource(R.drawable.cancel_button);
+						((ImageButton) view).setImageResource(R.drawable.cancel_button);
 					}
 				}
 			});
@@ -144,7 +145,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		if (basicProgressAsyncTask == null) {
 			return;
 		}
-		//needed when rotation is performed and progress can be null
+		// needed when rotation is performed and progress can be null
 		if (!updateOnlyProgress) {
 			getProgressIfPossible(basicProgressAsyncTask.getDescription());
 		}
@@ -163,9 +164,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				return;
 			}
 			cancelButton.setImageResource(R.drawable.cancel_button);
-			View view = (View)cancelButton.getParent();
-			if (view != null &&
-					view.findViewById(R.id.map_descr) != null){
+			View view = (View) cancelButton.getParent();
+			if (view != null && view.findViewById(R.id.map_descr) != null) {
 				view.findViewById(R.id.map_descr).setVisibility(View.GONE);
 			}
 			cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -183,11 +183,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	}
 
 	private void getProgressIfPossible(String message) {
-		if (getActivity() == null){
+		if (getActivity() == null) {
 			return;
 		}
 		for (int i = 0; i < baseNames.size(); i++) {
-			if (message.equals(getActivity().getString(R.string.downloading_file_new) + " " + baseNames.get(i))) {
+			if (message.equals(getActivity().getString(R.string.shared_string_downloading) + " " + baseNames.get(i))) {
 				currentProgress = progressBars.get(i);
 				cancelButton = downloadButtons.get(i);
 				currentProgress.setVisibility(View.VISIBLE);

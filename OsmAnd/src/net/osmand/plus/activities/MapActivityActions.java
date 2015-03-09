@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.view.ViewGroup;
-import android.widget.*;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
@@ -58,7 +56,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
 	
@@ -137,7 +144,7 @@ public class MapActivityActions implements DialogProvider {
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				double latitude = args.getDouble(KEY_LATITUDE);
@@ -212,7 +219,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final Dialog dlg = new Dialog(activity);
-		dlg.setTitle(R.string.save_route_dialog_title);
+		dlg.setTitle(R.string.shared_string_save_as_gpx);
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
 		
@@ -309,7 +316,7 @@ public class MapActivityActions implements DialogProvider {
 				R.drawable.ic_action_search_light).reg();
 		adapter.item(R.string.context_menu_item_share_location).icons(
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).reg();
-		adapter.item(R.string.context_menu_item_add_favorite).icons(
+		adapter.item(R.string.shared_string_add_to_favorites).icons(
 				R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light ).reg();
 		
 		
@@ -353,7 +360,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
 					new ShareLocation(mapActivity).run();
-				} else if (standardId == R.string.context_menu_item_add_favorite) {
+				} else if (standardId == R.string.shared_string_add_to_favorites) {
 					addFavouritePoint(latitude, longitude);
 				}
 			}
@@ -592,17 +599,16 @@ public class MapActivityActions implements DialogProvider {
 			mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
 				@Override
 				public void onDrawerSlide(View view, float v) {
-
 				}
 
 				@Override
 				public void onDrawerOpened(View view) {
-					//need to refresh drawer if it
-					//was opened with slide, not button
-					if (mDrawerList != null && refreshDrawer){
-						if (currentDrawer == DrawerType.WAYPOINTS){
+					// need to refresh drawer if it
+					// was opened with slide, not button
+					if (mDrawerList != null && refreshDrawer) {
+						if (currentDrawer == DrawerType.WAYPOINTS) {
 							showWaypointsInDrawer(false);
-						} else if (currentDrawer == DrawerType.MAIN_MENU){
+						} else if (currentDrawer == DrawerType.MAIN_MENU) {
 							final ContextMenuAdapter cm = createMainOptionsMenu();
 							prepareOptionsMenu(cm);
 						} else {
@@ -701,9 +707,7 @@ public class MapActivityActions implements DialogProvider {
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-//				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
-//				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				mapActivity.startActivity(newIntent);
+				getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(true);
 				mapActivity.getDashboard().setDashboardVisibility(true);
 				return true;
 			}
@@ -754,7 +758,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							enterRoutePlanningMode(null, null, false);
-						return true;
+							return true;
 						}
 				}).reg();
 		} else if(routingHelper.isRouteCalculated()) {
@@ -842,7 +846,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.favorites_Button)
+		optionsMenuHelper.item(R.string.shared_string_my_places)
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -884,7 +888,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 
-		optionsMenuHelper.item(R.string.settings_activity)
+		optionsMenuHelper.item(R.string.shared_string_settings)
 		.icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
 		.listen(new OnContextMenuClick() {
 			@Override
@@ -914,7 +918,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-		optionsMenuHelper.item(R.string.exit_Button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
+		optionsMenuHelper.item(R.string.shared_string_exit).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -934,7 +938,7 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	private void prepareConfigureScreen() {
+	public void prepareConfigureScreen() {
 		currentDrawer = DrawerType.CONFIGURE_SCREEN;
 		ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
 		prepareOptionsMenu(cm);
@@ -952,14 +956,14 @@ public class MapActivityActions implements DialogProvider {
 
 	public void disableDrawer(){
 		if(mDrawerLayout == null) {
-			return;
+			prepareStartOptionsMenu();
 		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
 	public void enableDrawer(){
 		if(mDrawerLayout == null) {
-			return;
+			prepareStartOptionsMenu();
 		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 	}
@@ -1017,7 +1021,7 @@ public class MapActivityActions implements DialogProvider {
 	
 
 	
-	private void whereAmIDialog() {
+	public void whereAmIDialog() {
 		final List<String> items = new ArrayList<String>();
 		items.add(getString(R.string.show_location));
 		items.add(getString(R.string.show_details));

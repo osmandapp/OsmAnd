@@ -17,8 +17,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	private static NativeOsmandLibrary library;
 	private static Boolean isNativeSupported = null;
 
-    public NativeOsmandLibrary(boolean newLibrary) {
-        super(newLibrary);
+    public NativeOsmandLibrary() {
+        super();
     }
 
     public static NativeOsmandLibrary getLoadedLibrary(){
@@ -47,7 +47,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
                         System.loadLibrary("osmand");
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
-						library = new NativeOsmandLibrary(false);
+						library = new NativeOsmandLibrary();
 						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
 						NativeOsmandLibrary.initRenderingRulesStorage(storage);
 						isNativeSupported = true;

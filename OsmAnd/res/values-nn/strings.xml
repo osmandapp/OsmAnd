@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
     <string name="osmo_invite">Inviter …</string>
     <string name="osmo_leave_confirmation_msg">Ønskjer du å forlata gruppa %1$s?</string>
     <string name="osmo_specify_tracker_id">Oppgje ID</string>
@@ -37,7 +36,7 @@
     <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lasta ned.</string>
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter namn</string>
-    <string name="visible_element">Vis på kartet</string>
+    
     <string name="show_zoom_buttons_navigation_descr">Vis forstørringsknappar ved navigering</string>
     <string name="show_zoom_buttons_navigation">Vis forstørringsknappar</string>
     <string name="save_as_favorites_points">Lagra som favorittgruppe</string>
@@ -45,7 +44,7 @@
     <string name="map_widget_plain_time">Gjeldande klokkeslett</string>
     <string name="gpx_wpt">Vegpunkt</string>
     <string name="selected_gpx_info_show">\n\nHald inne for å sjå på kartet</string>
-    <string name="selected">valt</string>
+    <string name="shared_string_selected_lowercase">valt</string>
     <string name="local_index_gpx_info_show">\n\nHald inne for å sjå val</string>
 	<string name="gpx_info_subtracks">Delspor: %1$s</string>
 	<string name="gpx_info_waypoints">Vegpunkt: %1$s</string>
@@ -58,10 +57,10 @@
     <string name="gpx_selection_number_of_points">%1$s punkt</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_file_is_empty">GPS-sporet er tomt</string>
-    <string name="my_tracks">Alle spor</string>
-    <string name="my_favorites">Mine favorittar</string>
-    <string name="my_data_Button">Mine stadar</string>
-    <string name="my_data_activity">Mine stadar</string>
+    <string name="shared_string_my_tracks">Alle spor</string>
+    <string name="shared_string_my_favorites">Mine favorittar</string>
+    <string name="shared_string_my_places">Mine stadar</string>
+    
     <string name="osmo_follow">Følg</string>
     <string name="osmo_sign_in">Logg inn</string>
     <string name="osmo_connect_to_my_nickname">Kallenamnet mitt</string>
@@ -139,7 +138,7 @@
     <string name="index_name_gb">Europa – Storbritannia</string>
     <string name="select_gpx">Vel GPX-fil …</string>
     <string name="route_descr_select_destination">Vel mål</string>
-    <string name="route_descr_select_on_map">Vel på kartet …</string>
+    <string name="shared_string_select_on_map">Vel på kartet …</string>
     <string name="shared_string_favorite">Favoritt …</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="routing_attr_short_way_name">Kortaste veg</string>
@@ -158,15 +157,15 @@
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq">Ofte spurde spørsmål</string>
-    <string name="local_osm_changes_delete_all">Slett alt</string>
-    <string name="default_and">og</string>
-    <string name="default_or">eller</string>
-	<string name="gps_status_eclipsim">GPS-status</string>
+    <string name="shared_string_delete_all">Slett alt</string>
+    <string name="shared_string_and">og</string>
+    <string name="shared_string_or">eller</string>
+	
     <string name="base_world_map">Globalt grunnkart</string>
 	<string name="tip_map_styles">Kartstilar</string>
 	<string name="about_version">Versjon:</string>
     <string name="about_settings">Om</string>
-    <string name="tips_and_tricks">Tips</string>
+    
     <string name="edit_tilesource_maxzoom">Maksforstørring</string>
     <string name="edit_tilesource_minzoom">Minste forstørring</string>
     <string name="edit_tilesource_url_to_load">Adresse</string>
@@ -195,7 +194,7 @@
     <string name="plugin_distance_point_ele">høgd og havet</string>
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">GPS-filnamn</string>
-    <string name="default_buttons_do_not_show_again">Ikkje vis på nytt</string>
+    <string name="shared_string_do_not_show_again">Ikkje vis på nytt</string>
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Fullfør redigering</string>
     <string name="distance_measurement_clear_route">Fjern alle punkta</string>
@@ -219,10 +218,10 @@
     <string name="select_address_activity">Vel adresse</string>
     <string name="favourites_list_activity">Vel favoritt</string>
     <string name="local_openstreetmap_act_title">OSM-endringar</string>
-    <string name="default_buttons_other_actions">Andre handlingar</string>
+    <string name="shared_string_more_actions">Andre handlingar</string>
 	<string name="layer_hillshade">Fjellskugge-lag</string>
     <string name="map_widget_gps_info">GPS-info</string>
-    <string name="map_view">Kart</string>
+    <string name="shared_string_map">Kart</string>
     <string name="prefer_motorways">Føretrekker motorvegar</string>
 	<string name="prefer_in_routing_title">Føretrekk …</string>
 	<string name="prefer_in_routing_descr">Føretrekk motorvegar</string>
@@ -230,7 +229,7 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Fjellskugge</string>
     <string name="download_hillshade_maps">Fjellskugge-lag</string>
-    <string name="dist_control_start">Start</string>
+    
     
     <string name="local_indexes_cat_srtm">Høgdekurvedata</string>
     <string name="recording_context_menu_show">Vis</string>
@@ -250,11 +249,11 @@
     <string name="recording_context_menu_play">Spel av</string>
     <string name="recording_description">Opptak %1$s %2$s av %3$s</string>
     <string name="recording_default_name">opptak</string>
-    <string name="av_control_stop">Stopp</string>
-    <string name="av_control_start">Start</string>
+    <string name="shared_string_control_stop">Stopp</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
-    <string name="monitoring_control_stop">Stopp</string>
+    
     <string name="map_widget_audionotes">Lydnotat</string>
     <string name="audionotes_plugin_description">Ta lyd- eller videonotat under turen</string>
     <string name="audionotes_plugin_name">Lyd-/videonotat</string>

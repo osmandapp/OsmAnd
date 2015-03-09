@@ -12,6 +12,6 @@
 				   android:scaleType="centerCrop"
 				   android:src="@drawable/background"
 				   android:layout_width="match_parent"
-				   android:layout_height="@dimen/dashMapHeight"
+				   android:layout_height="260dp"
 				   android:visibility="gone"/>
 </RelativeLayout>

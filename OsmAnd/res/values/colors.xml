@@ -5,8 +5,10 @@
 	<color name="list_divider_light">@color/color_white</color>
 	<color name="list_background_dark">#292f33</color>
 	<color name="list_sub_menu_background_dark">#475259</color>
-	<color name="expandable_list_item_light">@color/color_white</color>
+	<color name="list_item_light">@color/color_white</color>
+	<color name="list_item_light_pressed">#8cd0d0d0</color>
 	<color name="list_item_background_dark">#333b40</color>
+	<color name="list_item_background_dark_pressed">#be39464d</color>
 
 
 	<color name="actionbar_dark_color">#39464d</color>
@@ -18,7 +20,6 @@
 	<color name="download_pressed_dark">#be39464d</color>
 
     <color name="search_background_dark">#292f33</color>
-
 
 	<color name="icon_color_light">#727272</color>
 
@@ -45,7 +46,9 @@
 
 	<!-- Distance to object suitable for all themes -->
 	<color name="color_distance">#FD9822</color>
-
+	
+	<color name="color_myloc_distance">#0080FF</color>
+	<color name="wpt_distance_color">#dd6CB336</color>
 	<!-- Old dialogs colors -->
 	<color name="color_white">#FFFFFF</color>
 	<color name="color_black">#000000</color>
@@ -103,7 +106,7 @@
 	<color name="osmbug_closed">#C800FF00</color> <!-- standard GREEN -->
 	<color name="osmbug_not_submitted">#C8FFFF00</color> <!-- standard YELLOW -->
 
-	<color name="distance_color">#dd6CB336</color>
+	
 	<color name="shadow_color">#33888888</color>
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>

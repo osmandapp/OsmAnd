@@ -51,7 +51,7 @@ public class FavoritesActivity extends TabActivity {
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		getSupportActionBar().setTitle(R.string.favorites_Button);
+		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
@@ -74,9 +74,9 @@ public class FavoritesActivity extends TabActivity {
 
 		List<TabItem> mTabs = new ArrayList<TabItem>();
 //		mTabs.add(new TabItem("\t\t\t", FavoritesTreeFragment.class));
-		mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
+		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
-			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
+			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
 		}
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		

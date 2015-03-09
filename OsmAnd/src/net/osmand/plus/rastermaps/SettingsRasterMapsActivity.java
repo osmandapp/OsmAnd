@@ -142,7 +142,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 		String[] values = new String[entriesMap.size() + 2 + add];
 		int ki = 0;
 		if (addNone) {
-			entries[ki] = getString(R.string.default_none);
+			entries[ki] = getString(R.string.shared_string_none);
 			values[ki] = "";
 			ki++;
 		}

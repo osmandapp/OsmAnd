@@ -35,6 +35,8 @@ import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -127,8 +129,6 @@ public class ResourceManager {
 	
 	protected final MapRenderRepositories renderer;
 
-	protected final OsmandRegions regions;
-	
 	protected final MapTileDownloader tileDownloader;
 	
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
@@ -156,7 +156,6 @@ public class ResourceManager {
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
 		log.info("Tiles to load in memory : " + tiles);
 		maxImgCacheSize = (int) (tiles) ;
-		regions = new OsmandRegions();
 	}
 	
 	public MapTileDownloader getMapTileDownloader() {
@@ -406,42 +405,29 @@ public class ResourceManager {
 
     ////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
-	public List<String> reloadIndexes(IProgress progress){
+	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings){
 		close();
-		List<String> warnings = new ArrayList<String>();
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress));
-		initRenderers(progress);
+		progress.notifyEvent(InitEvents.ASSETS_COPIED);
+		reloadIndexes(progress, warnings);
+		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
+		return warnings;
+	}
+
+	public List<String> reloadIndexes(IProgress progress, List<String> warnings) {
 		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
-		indexRegionsBoundaries(progress, false);
 		// do it lazy
 		// indexingImageTiles(progress);
-		context.getSelectedGpxHelper().loadGPXTracks(progress);
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexVoiceFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
 		warnings.addAll(indexAdditionalMaps(progress));
-		
 		return warnings;
 	}
 
 	public List<String> indexAdditionalMaps(IProgress progress) {
 		return context.getAppCustomization().onIndexingFiles(progress, indexFileNames);
-	}
-
-	private void indexRegionsBoundaries(IProgress progress, boolean overwrite) {
-		try {
-			File file = context.getAppPath("regions.ocbf");
-			if (file != null) {
-				if (!file.exists() || overwrite) {
-					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
-							new FileOutputStream(file));
-				}
-			}
-			regions.prepareFile(file.getAbsolutePath());
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-		}
 	}
 
 
@@ -476,12 +462,10 @@ public class ResourceManager {
 			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
-					indexRegionsBoundaries(progress, true);
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
-					
 					context.getPoiFilters().updateFilters(false);
 				} catch (SQLiteException e) {
 					log.error(e.getMessage(), e);
@@ -563,7 +547,7 @@ public class ResourceManager {
 		Algorithms.closeStream(is);
 	}
 
-	private void initRenderers(IProgress progress) {
+	public void initRenderers(IProgress progress) {
 		File file = context.getAppPath(IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
@@ -618,10 +602,7 @@ public class ResourceManager {
 		if (indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
-				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-				if (nativeLib != null) {
-					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
-				}
+				
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
@@ -702,7 +683,18 @@ public class ResourceManager {
 				log.error("Index file could not be written", e);
 			}
 		}
+		initMapBoundariesCacheNative();
 		return warnings;
+	}
+
+	public void initMapBoundariesCacheNative() {
+		File indCache = context.getAppPath(INDEXES_CACHE);
+		if (indCache.exists()) {
+			NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+			if (nativeLib != null) {
+				nativeLib.initCacheMapFile(indCache.getAbsolutePath());
+			}
+		}
 	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
@@ -1027,7 +1019,7 @@ public class ResourceManager {
 	}
 
 	public OsmandRegions getOsmandRegions() {
-		return regions;
+		return context.getRegions();
 	}
 	
 	

@@ -205,11 +205,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (hashInd != -1) {
 				return fileName.substring(0, hashInd);
 			} else if (this.isAudio()) {
-				return ctx.getResources().getString(R.string.audio);
+				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
-				return ctx.getResources().getString(R.string.video);
+				return ctx.getResources().getString(R.string.shared_string_video);
 			} else if (this.isPhoto()) {
-				return ctx.getResources().getString(R.string.photo);
+				return ctx.getResources().getString(R.string.shared_string_photo);
 			}
 			return "";
 		}
@@ -331,14 +331,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
 					.trim();
 		}
-
+		
 		public String getSmallDescription(Context ctx) {
-
 			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, "", time).trim();
+				return time;
 			}
-			return ctx.getString(R.string.recording_description, "", "", time).trim();
+			updateInternalDescription();
+			return time + " " + getDuration(ctx);
+			
 		}
 
 		private String getDuration(Context ctx) {
@@ -353,9 +354,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return additional;
 		}
 
-		public void setDescription() {
-			//TODO implement setting description
-		}
 	}
 
 	private static void initializeRemoteControlRegistrationMethods() {
@@ -530,7 +528,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void setRecordListener(final TextInfoWidget recordPlaceControl, final MapActivity mapActivity) {
-		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
+		recordPlaceControl.setText(app.getString(R.string.shared_string_control_start), "");
 		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 
@@ -947,7 +945,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.prepare();
 		mr.start();
 		mediaRec = mr;
-		recordControl.setText(app.getString(R.string.av_control_stop), "");
+		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final StackWidgetView par = mil.getRightStack();

@@ -95,7 +95,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			mTabs.add(getTabIndicator(R.string.address, getFragment(ADDRESS_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.favorite, getFragment(FAVORITES_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.string.history, getFragment(HISTORY_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.shared_string_history, getFragment(HISTORY_TAB_INDEX)));
 
 			
 			setViewPagerAdapter(mViewPager, mTabs);
