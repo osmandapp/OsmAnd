@@ -982,8 +982,8 @@
 	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
 	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
-    <string name="shared_string_select_on_map">Velg på kart…</string>
-    <string name="shared_string_favorite">Favoritt…</string>
+    <string name="route_descr_select_on_map">Velg på kart…</string>
+    <string name="shared_string_favorite">Favoritt</string>
     <string name="route_preferences">Ruteinnstillinger</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline-rute</string>
@@ -1036,8 +1036,8 @@
 	<string name="gpx_description_txt">Beskrivelse</string>
 	<string name="use_transparent_map_theme">Gjennomsiktig tema</string>
 	<string name="keep_informing_never">Bare manuelt (trykk pil)</string>
-    <string name="local_index_installed">Utgave</string>
-	
+    <string name="local_index_installed">Lokal versjon</string>
+	<string name="local_index_mi_export">Eksporter</string>
 	<string name="gpx_option_destination_point">Bruk gjeldende mål</string>
 	<string name="tip_location_sharing">Del en posisjon</string>
 	<string name="error_doing_search">Feil oppstod i offline-søk</string>
@@ -1250,4 +1250,40 @@
 	<string name="plugin_description_title">Beskrivelse</string>
 	
 	<string name="plugin_install_needs_network">Du trenger en internettforbindelse for å installere dette programtillegget.</string>
+	<string name="shared_string_never">Aldri</string>
+	<string name="shared_string_none">Ingen</string>
+	<string name="shared_string_and">og</string>
+	<string name="shared_string_or">eller</string>
+	<string name="shared_string_help">Hjelp</string>
+	<string name="shared_string_settings">Innstillinger</string>
+	<string name="shared_string_history">Historikk</string>
+	<string name="shared_string_select_on_map">Velg på kart</string>
+	<string name="shared_string_save">Lagre</string>
+	<string name="shared_string_save_as_gpx">Lagre som GPX-spor</string>
+	<string name="shared_string_rename">Endre navn</string>
+	<string name="shared_string_delete">Slett</string>
+	<string name="shared_string_share">Del</string>
+	<string name="shared_string_add">Legg til</string>
+	<string name="shared_string_apply">Bruk</string>
+	<string name="shared_string_control_start">Start</string>
+	<string name="shared_string_control_stop">Stopp</string>
+	<string name="shared_string_do_not_show_again">Ikke vis igjen</string>
+	<string name="shared_string_remember_my_choice">Husk mitt valg</string>
+	<string name="shared_string_refresh">Gjenoppfrisk</string>
+	<string name="shared_string_unexpected_error">Uventet feil oppstod</string>
+	<string name="shared_string_close">Lukk</string>
+	<string name="shared_string_exit">Avslutt</string>
+	<string name="shared_string_show">Vis</string>
+	<string name="shared_string_show_on_map">Vis på kart</string>
+	<string name="shared_string_map">Kart</string>
+	<string name="shared_string_favorites">Favoritter</string>
+	<string name="shared_string_add_to_favorites">Legg til i favoritter</string>
+	<string name="shared_string_my_location">Min posisjon</string>
+	<string name="shared_string_my_places">Mine steder</string>
+	<string name="shared_string_my_favorites">Mine favoritter</string>
+	<string name="shared_string_my_tracks">Mine spor</string>
+	<string name="shared_string_photo">Foto</string>
+
+	<string name="route_points">Rutepunkter</string>
+	<string name="shared_string_ellipsis">…</string>
 	</resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -744,11 +745,11 @@
   
   <string name="osmand_rastermaps_plugin_description">"Visualizza le impostazioni per configurare una varietà di mappe online o a tasselli in cache come mappa di base per le mappe sovrapposte/di sottofondo. Queste mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd. "</string>
   <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS.</string>
-  <string name="osmand_accessibility_description">Visualizza impostazioni per funzionalità speciali per l\'accessibilità.</string>
-  
-  
-  
-  <string name="osmand_development_plugin_description">Visualizza impostazioni per funzionalità in sviluppo e debug come la navigazione animata o visualizzare la prestazione del rendering.</string>
+  <string name="osmand_accessibility_description">Visualizza le impostazioni per attivare funzionalità speciali per l\'accessibilità.</string>
+  <string name="extra_settings">Impostazioni avanzate</string>
+  <string name="osmand_monitoring_description">Visualizza impostazioni per facilitare la registrazione dei tuoi spostamenti su un file GPX o il live tracking tramite un servizio web.</string>
+  <string name="osmand_extra_settings_description">Visualizza le impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e alcune di specifici dispositivi.</string>
+  <string name="osmand_development_plugin_description">"Visualizza le impostazioni per le funzionalità di sviluppo e debug come la simulazione di navigazione  o visualizzare l\'indicazione della prestazione del rendering."</string>
   <string name="plugins_screen">Componenti aggiuntivi</string>
   
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
@@ -764,7 +765,7 @@
 		\n\t- *Miglioramento usabilità e UI*
 		\n\t- Miglioramenti in svariate aree		
 	</string>
-  <string name="osm_editing_plugin_description">Visualizza le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
+  <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per dare contributi a OSM quali la creazione  o modifica dei PDI di OSM, aprire o commentare errori di OSM e inviare i file GPX registrati. Usare queste funzionalità richiede le credenziali personali di OSM."</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   
   <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce attualmente selezionata</string>
@@ -911,8 +912,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto di parcheggio</string>
-  <string name="osmand_parking_plugin_description">Questo plugin aiuta a memorizzare il luogo di parcheggio della tua auto.</string>
-  <string name="osmand_parking_plugin_name">Plugin posizione parcheggio</string>
+  <string name="osmand_parking_plugin_description">Questo plugin è stato sviluppato per utilizzare OsmAnd per memorizzare facilmente la posizione di parcheggio dell\'auto.</string>
+  <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
   <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
   <string name="context_menu_item_delete_parking_point">Elimina un marcatore di parcheggio</string>
   <string name="starting_point_too_far">Punto di partenza troppo distante dalla strada più vicina.</string>
@@ -1129,17 +1130,18 @@
 	<string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
-    <string name="srtm_plugin_name">Plugin linee isocline</string>
-    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato).</string>
+    <string name="srtm_plugin_name">Linee isocline</string>
+    <string name="srtm_plugin_description">"Questo plugin fornisce sia le linee di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
+\n\n\nFacilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato). "</string>
     <string name="index_srtm_ele">Linee di livello</string>
-    <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
+    <string name="audionotes_plugin_description">Questo plugin fornisce i pulsanti e le funzionalità per prendere note audio/video/foto durante il viaggio</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     
 	
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
     
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le linee di livello che lo strado ombreggiamento dei rilievi che possono essere visualizzate nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le linee di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
@@ -1416,7 +1418,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Attivatre un widget che permette di creare percorsi tappando sullo schermo (o usare/modificare file GPX esistenti) per misurare la distanza tra punti. I risultati possono essere salvati come GPX, potrebbe essere utilizzato per pianificare un itinerario GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi tappando sulla mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, i quali potrebbe essere utilizzati in seguito come guida.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>

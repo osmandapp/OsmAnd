@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">Плагин позволяет загружать контурные линии и затемнение высот для использования оффлайн (\"Настройки\" → \"Управление файлами карт\" → \"Загрузить\").</string>
@@ -1899,4 +1900,28 @@
 	<string name="shared_string_map">Карта</string>
 	<string name="shared_string_favorite">Избранное</string>
 	<string name="shared_string_favorites">Избранные</string>
+	<string name="shared_string_add_to_favorites">Добавить к избранным</string>
+	<string name="shared_string_audio">Аудио</string>
+	<string name="shared_string_video">Видео</string>
+	<string name="shared_string_photo">Фото</string>
+
+	<string name="route_points">Точки маршрута</string>
+	<string name="track_segments">Сегменты трека</string>
+	<string name="track_points">Точки трека</string>
+	<string name="turn_off_all">Выключить все</string>
+	<string name="days_behind">дней назад</string>
+	<string name="notes">Заметки</string>
+	<string name="shared_string_selected">Выбранные</string>
+	<string name="shared_string_selected_lowercase">выбранные</string>
+	<string name="shared_string_none">Нет</string>
+	<string name="shared_string_deselect">Отменить выбор</string>
+	<string name="shared_string_deselect_all">Отменить выбор всех</string>
+	<string name="shared_string_share">Поделиться</string>
+	<string name="shared_string_my_places">Мои места</string>
+	<string name="shared_string_my_favorites">Мои избранные</string>
+	<string name="shared_string_my_tracks">Мои треки</string>
+	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
+	<string name="selected_tracks">Выбранные</string>
+	<string name="share_note">Поделиться заметкой</string>
+	<string name="shared_string_release">Дата выпуска</string>
 	</resources>

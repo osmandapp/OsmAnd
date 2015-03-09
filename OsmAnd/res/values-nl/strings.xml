@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -836,12 +837,12 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Met deze plug-in heeft u toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaat kaarten, geologische kaarten, reliëf lagen, enz.\n\nAl deze kaarten kunnen worden gebruikt als de hoofd (basis) kaart op het OsmAnd kaart scherm, of als een extra laag of een achtergrond laag bij een ander basis kaart (zoals gewone offline kaarten van OsmAnd). Om een achtergrond laag meer zichtbaar te maken, kunnen enkele elementen van de OsmAnd kaarten eenvoudig worden verborgen via het menu \'Kaart instellen\'.\n\nTegel kaarten zijn direct via online bronnen verkrijgbaar of voor offline gebruik gereedgemaakt (en handmatig gekopieerd naar de OsmAnd gegevensfolder) als SQLite database door een verscheidenheid aan 3de partij kaart bewerkingsapplicaties. "</string>
-  <string name="osmand_background_plugin_description">Toon instellingen om tracking en navigatie tijdens slaapmodus (scherm uit) in te schakelen door periodiek ontwaken van het GPS-toestel.</string>
+  <string name="osmand_background_plugin_description">Toont de instellingen om tracking en navigatie tijdens slaapmodus (scherm uit) in te schakelen door periodiek ontwaken van het GPS-toestel.</string>
   <string name="osmand_accessibility_description">Toont de instellingen om speciale toegankelijkheidsfuncties te activeren.</string>
-  
-  
-  
-  <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
+  <string name="extra_settings">Geavanceerde instellingen</string>
+  <string name="osmand_monitoring_description">Toon instellingen om reizen in GPX bestanden vast te leggen, of live, via een webservice, online te bewaren.</string>
+  <string name="osmand_extra_settings_description">Toon geavanceerde kaartinstellingen (zoals meer details tonen) en enkele apparaatspecifieke instellingen.</string>
+  <string name="osmand_development_plugin_description">Toont de opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
   
   <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen</string>
@@ -857,7 +858,7 @@
 	\n\t- *Gebruiksvriendelijkheid en interface*
 	\n\t	- Op vele punten verbeterd		
 	</string>
-  <string name="osm_editing_plugin_description">Toon instellingen om OpenStreetMap te verbeteren. Verzamel of wijzig OSM-interessepunten, maak of wijzig OSM-bugs, en upload GPX-tracks (vereist OSM-account).</string>
+  <string name="osm_editing_plugin_description">Via deze plugin kan OsmAnd gebruikt worden om bij te dragen aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of wijzigen van OSM-bugs, en opgenomen GPX-tracks bij te dragen. Voor het gebruik van deze functionaliteit zijn OSM-referenties vereist.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
   <string name="search_position_current_location_found">Positie (Gevonden)</string>
@@ -1666,7 +1667,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo monitoring</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>

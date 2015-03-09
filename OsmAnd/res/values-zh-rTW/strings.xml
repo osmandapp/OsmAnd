@@ -631,9 +631,9 @@
 	<string name="download_files_question">下載{0}個檔({1} MB)？</string>
 	<string name="items_were_selected">已選{0}項</string>
 	<string name="filter_existing_indexes">已下載的</string>
-	
-	<string name="shared_string_select_all">全部選取</string>
-	<string name="shared_string_refresh">重整</string>
+	<string name="deselect_all">取消全選</string>
+	<string name="select_all">全選</string>
+	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
 	<string name="tiles_to_download_estimated_size">在縮放第{0}級別，下載{1}張地圖圖磚({2} MB)</string>
@@ -922,8 +922,8 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="shared_string_show_on_map">顯示在地圖上</string>
-	
+	<string name="search_shown_on_map">在地圖上顯示</string>
+	<string name="navigate_point_cancel">取消</string>
 	<string name="search_address_top_text">選擇地址</string>
 	<string name="search_address_region">地區</string>
 	<string name="search_address_city">縣市</string>
@@ -989,7 +989,7 @@
 	<string name="edit_filter_delete_dialog_title">刪除選到的篩選？</string>
 	<string name="edit_filter_delete_message">篩選{0} 已被刪除</string>
 	<string name="edit_filter_create_message">篩選{0}已被建立</string>
-	
+	<string name="default_buttons_selectall">全選</string>
 	<string name="email">電子郵件</string>
 <string name="recording_context_menu_vrecord">拍攝視訊注解</string>
     <string name="intermediate_items_sort_by_distance">排序(送貨到門)</string>
@@ -1463,8 +1463,8 @@
 	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
-    <string name="shared_string_select_on_map">在地圖上選取 …</string>
-    <string name="shared_string_favorite">我的最愛 …</string>
+    <string name="route_descr_select_on_map">在地圖上選取 …</string>
+    <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>
@@ -1943,4 +1943,59 @@
 	<string name="track_points">航跡標點</string>
 	<string name="route_points">路線標點</string>
 	<string name="shared_string_release">已發行</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_selected">已選取</string>
+	<string name="shared_string_selected_lowercase">已選取</string>
+	<string name="shared_string_never">永不</string>
+	<string name="shared_string_none">無</string>
+	<string name="shared_string_and">以及</string>
+	<string name="shared_string_or">或是</string>
+	<string name="shared_string_help">幫助</string>
+	<string name="shared_string_settings">設定</string>
+	<string name="shared_string_history">歷史記錄</string>
+	<string name="shared_string_select_on_map">在地圖上選取</string>
+	<string name="shared_string_select_all">全選</string>
+	<string name="shared_string_deselect">取消選擇</string>
+	<string name="shared_string_deselect_all">取消全選</string>
+	<string name="shared_string_clear">清除</string>
+	<string name="shared_string_clear_all">全部清除</string>
+	<string name="shared_string_save">儲存</string>
+	<string name="shared_string_save_as_gpx">另存為 GPX 軌跡</string>
+	<string name="shared_string_rename">更名</string>
+	<string name="shared_string_delete">删除</string>
+	<string name="shared_string_delete_all">全部刪除</string>
+	<string name="shared_string_share">分享</string>
+	<string name="shared_string_add">新增</string>
+	<string name="shared_string_apply">套用</string>
+	<string name="shared_string_control_start">開始</string>
+	<string name="shared_string_control_stop">停止</string>
+	<string name="shared_string_import">匯入</string>
+	<string name="shared_string_export">匯出</string>
+	<string name="shared_string_more">更多</string>
+	<string name="shared_string_do_not_show_again">不要再顯示</string>
+	<string name="shared_string_remember_my_choice">記住我的選擇</string>
+	<string name="shared_string_refresh">重整</string>
+	<string name="shared_string_download">下載</string>
+	<string name="shared_string_downloading">下載中</string>
+	<string name="shared_string_download_successful">下載成功</string>
+	<string name="shared_string_unexpected_error">發生意外錯誤</string>
+	<string name="shared_string_action_template">"動作 {0}： "</string>
+	<string name="shared_string_close">關閉</string>
+	<string name="shared_string_exit">離開</string>
+	<string name="shared_string_show">顯示</string>
+	<string name="shared_string_show_all">全部顯示</string>
+	<string name="shared_string_show_on_map">在地圖上顯示</string>
+	<string name="shared_string_more_actions">更多的動作</string>
+	<string name="shared_string_map">地圖</string>
+	<string name="shared_string_favorites">我的最愛</string>
+	<string name="shared_string_add_to_favorites">加到我的最愛</string>
+	<string name="shared_string_my_location">我的位置</string>
+	<string name="shared_string_my_places">我的地點</string>
+	<string name="shared_string_my_favorites">我的最愛</string>
+	<string name="shared_string_my_tracks">我的軌跡</string>
+	<string name="shared_string_currently_recording_track">現在正在錄製軌跡</string>
+	<string name="shared_string_audio">音訊</string>
+	<string name="shared_string_video">視訊</string>
+	<string name="shared_string_photo">照片</string>
+
 	</resources>
