@@ -1363,11 +1363,6 @@
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
 	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
-	
-    <string name="shared_string_my_tracks">Όλα τα ίχνη</string>
-    <string name="shared_string_my_favorites">Τα Αγαπημένα μου</string>
-    <string name="shared_string_my_places">Τα Μέρη μου</string>
-    
     <string name="color_red">κόκκινο</string>
 	<string name="color_pink">ροζ</string>
 	<string name="color_orange">πορτοκαλί</string>
