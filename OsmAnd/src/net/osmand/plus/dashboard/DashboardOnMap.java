@@ -7,9 +7,12 @@ import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.development.DashSimulateFragment;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
@@ -340,6 +343,9 @@ public class DashboardOnMap {
 		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class);
 //		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class);
 		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class);
+		
+		showFragment(manager, fragmentTransaction, DashSimulateFragment.TAG, DashSimulateFragment.class,
+				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null);
 		fragmentTransaction.commit();
 	}
 
