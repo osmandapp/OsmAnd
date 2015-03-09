@@ -206,10 +206,10 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 				if (position != 0) {
 					if (position == POSITION_CURRENT_LOCATION) {
 						net.osmand.Location loc = getLocationProvider().getLastKnownLocation();
+						searchAroundCurrentLocation = true;
 						if(loc != null && System.currentTimeMillis() - loc.getTime() < 10000) {
 							updateLocation(loc);
 						} else {
-							searchAroundCurrentLocation = true;
 							startSearchCurrentLocation();
 						}
 					} else {
@@ -281,9 +281,10 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		if (location != null) {
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
 					getString(R.string.select_search_position) + " " + getString(R.string.search_position_current_location_found), false);
-			if (location.getAccuracy() < 20) {
-				endSearchCurrentLocation();
-			}
+			// don't stop in case we want to see updates 
+//			if (location.getAccuracy() < 20) {
+//				endSearchCurrentLocation();
+//			}
 		}
 	}
 	public void startSearchCurrentLocation(){
