@@ -1327,7 +1327,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
-    <string name="shared_string_downloading">Téléchargement en cours…</string>
+    <string name="shared_string_downloading">Téléchargement en cours</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  
 " 
     </string>
@@ -1487,8 +1487,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
-    <string name="shared_string_select_on_map">Sélectionner sur la carte…</string>
-    <string name="shared_string_favorite">Favori…</string>
+    <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
+    <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
