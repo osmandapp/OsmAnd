@@ -1558,8 +1558,6 @@
     
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
 	<string name="import_file_favourites">Spara som GPX-fil eller importera till favoriter?</string>
-	
-	<string name="shared_string_share">Dela ut</string>
 	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
 	<string name="commiting_node">Skickar nod…</string>
 	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
