@@ -1972,7 +1972,7 @@
 	<string name="shared_string_control_stop">停止</string>
 	<string name="shared_string_import">匯入</string>
 	<string name="shared_string_export">匯出</string>
-	<string name="shared_string_more">更多</string>
+	<string name="shared_string_more">更多…</string>
 	<string name="shared_string_do_not_show_again">不要再顯示</string>
 	<string name="shared_string_remember_my_choice">記住我的選擇</string>
 	<string name="shared_string_refresh">重整</string>
@@ -2002,4 +2002,6 @@
 	<string name="simulate_your_location">模擬您的位置</string>
     <string name="short_location_on_map">緯度 %1$s\n 經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其他</string>
-    </resources>
+    <string name="routing_settings_2">導航設定</string>
+    <string name="general_settings_2">一般設定</string>
+	</resources>
