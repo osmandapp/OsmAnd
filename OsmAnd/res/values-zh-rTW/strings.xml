@@ -2001,4 +2001,5 @@
 
 	<string name="simulate_your_location">模擬您的位置</string>
     <string name="short_location_on_map">緯度 %1$s\n 經度 %2$s</string>
+    <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其他</string>
     </resources>
