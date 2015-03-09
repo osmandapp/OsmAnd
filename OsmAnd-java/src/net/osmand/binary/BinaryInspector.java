@@ -12,11 +12,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +31,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.MapObjectStat;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -61,13 +66,14 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-//				"-vmap", "-vmapobjects", 
+				"-vmap",// "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=16",
-//				"-bbox=1.74,51.17,1.75,51.16", 
-//				"/Users/victorshcherb/osmand/osm-gen/World_seamarks_2.obf"
+//				"-bbox=1.74,51.17,1.75,51.16",
+				"-vstats",
+				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -111,6 +117,7 @@ public class BinaryInspector {
 		boolean vmap;
 		boolean vrouting;
 		boolean vmapObjects;
+		boolean vstats;
 		boolean osm;
 		FileOutputStream osmOut = null;
 		double lattop = 85;
@@ -143,6 +150,10 @@ public class BinaryInspector {
 			return vtransport;
 		}
 		
+		public boolean isVStats() {
+			return vstats;
+		}
+		
 		public VerboseInfo(String[] params) throws FileNotFoundException {
 			for(int i=0;i<params.length;i++){
 				if(params[i].equals("-vaddress")){
@@ -159,6 +170,8 @@ public class BinaryInspector {
 					vintersections = true;
 				} else if(params[i].equals("-vmap")){
 					vmap = true;
+				} else if(params[i].equals("-vstats")){
+					vstats = true;
 				} else if(params[i].equals("-vrouting")){
 					vrouting = true;
 				} else if(params[i].equals("-vmapobjects")){
@@ -609,18 +622,139 @@ public class BinaryInspector {
 			}
 		}
 	}
-	private static class DamnCounter
-	{
+
+	private static class DamnCounter {
 		int value;
 	}
+	
+	private static class MapStatKey {
+		String key = "";
+		long statCoordinates;
+		long statObjectSize;
+		int count;
+		int namesLength;
+	}
+	
+	private class MapStats {
+		public int lastStringNamesSize;
+		public int lastObjectIdSize;
+		public int lastObjectHeaderInfo;
+		public int lastObjectAdditionalTypes;
+		public int lastObjectTypes;
+		public int lastObjectCoordinates;
+		public int lastObjectCoordinatesCount;
+		
+		private Map<String, MapStatKey> types = new LinkedHashMap<String, BinaryInspector.MapStatKey>();
+		private SearchRequest<BinaryMapDataObject> req;
+		
+		public void processKey(String simpleString, MapObjectStat st, TIntObjectHashMap<String> objectNames) {
+			TIntObjectIterator<String> it = objectNames.iterator();
+			int nameLen = 0;
+			while(it.hasNext()) {
+				it.advance();
+				nameLen ++;
+				nameLen += it.value().length();
+			}
+			if(!types.containsKey(simpleString)) {
+				MapStatKey stt = new MapStatKey();
+				stt.key = simpleString;
+				types.put(simpleString, stt);
+			}
+			MapStatKey key = types.get(simpleString);
+			key.statCoordinates += st.lastObjectCoordinates;
+			key.statObjectSize += st.lastObjectSize;
+			key.count++;
+			key.namesLength += nameLen;
+		}
+
+
+		public void process(BinaryMapDataObject obj) {
+			MapObjectStat st = req.stat;
+			this.lastStringNamesSize +=  st.lastStringNamesSize;
+			this.lastObjectIdSize += st.lastObjectIdSize;
+			this.lastObjectHeaderInfo += st.lastObjectHeaderInfo;
+			this.lastObjectAdditionalTypes += st.lastObjectAdditionalTypes;
+			this.lastObjectTypes += st.lastObjectTypes;
+			this.lastObjectCoordinates += st.lastObjectCoordinates;
+			this.lastObjectCoordinatesCount += obj.getPointsLength();
+			if(obj.getPolygonInnerCoordinates() != null) {
+				for(int[] i : obj.getPolygonInnerCoordinates()) {
+					this.lastObjectCoordinatesCount += i.length;
+				}
+			}
+			for(int i = 0; i < obj.getTypes().length; i++) {
+				int tp = obj.getTypes()[i];
+				TagValuePair pair = obj.mapIndex.decodeType(tp);
+				processKey(pair.toSimpleString(), st, obj.getObjectNames());	
+			}
+			st.clearObjectStats();
+
+		}
+
+		public void print() {
+			MapObjectStat st = req.stat;
+			println("MAP BLOCK INFO:");
+			long b = 0;
+			b += out("Header", st.lastBlockHeaderInfo);
+			b += out("String table", st.lastBlockStringTableSize);
+			b += out("Map Objects", st.lastObjectSize);
+			out("TOTAL", b);
+			println("\nMAP OBJECTS INFO:");
+			b = 0;
+			b += out("Header", lastObjectHeaderInfo);
+			b += out("Coordinates", lastObjectCoordinates);
+			b += out("Coordinates Count", lastObjectCoordinatesCount);
+			b += out("Types", lastObjectTypes);
+			b += out("Additonal Types", lastObjectAdditionalTypes);
+			b += out("Ids", lastObjectIdSize);
+			b += out("String names", lastStringNamesSize);
+			out("TOTAL", b);
+			
+			println("\n\nOBJECT BY TYPE STATS: ");
+			ArrayList<MapStatKey> stats = new ArrayList<MapStatKey>(types.values());
+			Collections.sort(stats, new Comparator<MapStatKey>() {
+
+				@Override
+				public int compare(MapStatKey o1, MapStatKey o2) {
+					return -Long.compare(o1.statObjectSize, o2.statObjectSize);
+				}
+			});
+			
+			for(MapStatKey s : stats) {
+				println(s.key + " cnt=" +  s.count + " size=" + s.statObjectSize + " coordsize="+s.statCoordinates+ 
+						" namelen="+s.namesLength);
+			}
+			
+		}
+
+		private long out(String s, long i) {
+			while (s.length() < 20) {
+				s += " ";
+			}
+			DecimalFormat df = new DecimalFormat("0,000,000,000");
+			println(s+": " + df.format(i));
+			return i;
+		}
+
+
+		public void setReq(SearchRequest<BinaryMapDataObject> req) {
+			this.req = req;
+		}
+		
+	}
+	
 	private  void printMapDetailInfo(BinaryMapIndexReader index, MapIndex mapIndex) throws IOException {
 		final StringBuilder b = new StringBuilder();
 		final DamnCounter mapObjectsCounter = new DamnCounter();
+		final MapStats mapObjectStats = new MapStats();
 		if(vInfo.osm){
 			printToFile("<?xml version='1.0' encoding='UTF-8'?>\n" +
 					"<osm version='0.5'>\n");
 		}
-		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
+		if(vInfo.isVStats()) {
+			BinaryMapIndexReader.READ_STATS = true;
+		}
+		final SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
 				MapUtils.get31TileNumberX(vInfo.lonleft),
 				MapUtils.get31TileNumberX(vInfo.lonright),
 				MapUtils.get31TileNumberY(vInfo.lattop),
@@ -636,10 +770,11 @@ public class BinaryInspector {
 					@Override
 					public boolean publish(BinaryMapDataObject obj) {
 						mapObjectsCounter.value++;
-						if(vInfo.vmapObjects)
-						{
+						if(vInfo.isVStats()) {
+							mapObjectStats.process(obj);
+						} else if (vInfo.vmapObjects) {
 							b.setLength(0);
-							if(vInfo.osm) {
+							if (vInfo.osm) {
 								printOsmMapDetails(obj, b);
 								try {
 									printToFile(b.toString());
@@ -658,12 +793,20 @@ public class BinaryInspector {
 						return false;
 					}
 				});
+		if(vInfo.vstats) {
+			mapObjectStats.setReq(req);
+		}
 		index.searchMapIndex(req, mapIndex);
 		if(vInfo.osm){
 			printToFile("</osm >\n");
+		} 
+		if(vInfo.vstats) {
+			mapObjectStats.print();
 		}
 		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
+
+	
 
 	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;

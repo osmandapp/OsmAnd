@@ -1,7 +1,6 @@
 package net.osmand.binary;
 
 
-import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -16,7 +15,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,8 +39,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
@@ -73,6 +69,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
 
 public class BinaryMapIndexReader {
@@ -80,6 +77,7 @@ public class BinaryMapIndexReader {
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
+	public static boolean READ_STATS = false;
 	
 	private final RandomAccessFile raf;
 	/*private*/ int version;
@@ -938,10 +936,17 @@ public class BinaryMapIndexReader {
 				return;
 			case MapDataBlock.BASEID_FIELD_NUMBER:
 				baseId = codedIS.readUInt64();
+				if(READ_STATS) {
+					req.stat.addBlockHeader(MapDataBlock.BASEID_FIELD_NUMBER, 0);
+				}
 				break;
 			case MapDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
+				if(READ_STATS) {
+					req.stat.lastObjectSize += length;
+					req.stat.addBlockHeader(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, length);
+				}
 				BinaryMapDataObject mapObject = readMapDataObject(tree, req, root);
 				if (mapObject != null) {
 					mapObject.setId(mapObject.getId() + baseId);
@@ -955,6 +960,10 @@ public class BinaryMapIndexReader {
 			case MapDataBlock.STRINGTABLE_FIELD_NUMBER:
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(length);
+				if(READ_STATS) {
+					req.stat.addBlockHeader(MapDataBlock.STRINGTABLE_FIELD_NUMBER, length);
+					req.stat.lastBlockStringTableSize += length;
+				}
 				if (tempResults != null) {
 					List<String> stringTable = readStringTable();
 					for (int i = 0; i < tempResults.size(); i++) {
@@ -1060,6 +1069,11 @@ public class BinaryMapIndexReader {
 		}
 		req.cacheCoordinates.clear();
 		int size = codedIS.readRawVarint32();
+		if(READ_STATS) {
+			req.stat.lastObjectCoordinates += size;
+			req.stat.addTagHeader(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER,
+					size);
+		}
 		int old = codedIS.pushLimit(size);
 		int px = tree.left & MASK_TO_READ;
 		int py = tree.top & MASK_TO_READ;
@@ -1123,6 +1137,11 @@ public class BinaryMapIndexReader {
 				px = tree.left & MASK_TO_READ;
 				py = tree.top & MASK_TO_READ;
 				size = codedIS.readRawVarint32();
+				if(READ_STATS) {
+					req.stat.lastObjectCoordinates += size;
+					req.stat.addTagHeader(OsmandOdb.MapData.POLYGONINNERCOORDINATES_FIELD_NUMBER,
+							size);
+				}
 				old = codedIS.pushLimit(size);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int x = (codedIS.readSInt32() << SHIFT_COORDINATES) + px;
@@ -1138,15 +1157,25 @@ public class BinaryMapIndexReader {
 				additionalTypes = new TIntArrayList();
 				int sizeL = codedIS.readRawVarint32();
 				old = codedIS.pushLimit(sizeL);
+				if(READ_STATS) {
+					req.stat.lastObjectAdditionalTypes += sizeL;
+					req.stat.addTagHeader(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER,
+							sizeL);
+				}
 				while (codedIS.getBytesUntilLimit() > 0) {
 					additionalTypes.add(codedIS.readRawVarint32());
 				}
 				codedIS.popLimit(old);
+				
 				break;
 			case OsmandOdb.MapData.TYPES_FIELD_NUMBER:
 				req.cacheTypes.clear();
 				sizeL = codedIS.readRawVarint32();
 				old = codedIS.pushLimit(sizeL);
+				if(READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.TYPES_FIELD_NUMBER, sizeL);
+					req.stat.lastObjectTypes += sizeL;
+				}
 				while (codedIS.getBytesUntilLimit() > 0) {
 					req.cacheTypes.add(codedIS.readRawVarint32());
 				}
@@ -1163,6 +1192,10 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.MapData.ID_FIELD_NUMBER:
 				id = codedIS.readSInt64();
+				if(READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.ID_FIELD_NUMBER, 0);
+					req.stat.lastObjectIdSize += CodedOutputStream.computeSInt64SizeNoTag(id);
+				}
 				break;
 			case OsmandOdb.MapData.STRINGNAMES_FIELD_NUMBER:
 				stringNames = new TIntObjectHashMap<String>();
@@ -1176,6 +1209,10 @@ public class BinaryMapIndexReader {
 					stringOrder.add(stag);
 				}
 				codedIS.popLimit(old);
+				if(READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.STRINGNAMES_FIELD_NUMBER, sizeL);
+					req.stat.lastStringNamesSize += sizeL;
+				}
 				break;
 			default:
 				skipUnknownField(t);
@@ -1500,6 +1537,40 @@ public class BinaryMapIndexReader {
 		
 	}
 	
+	public static class MapObjectStat {
+		public int lastStringNamesSize;
+		public int lastObjectIdSize;
+		public int lastObjectHeaderInfo;
+		public int lastObjectAdditionalTypes;
+		public int lastObjectTypes;
+		public int lastObjectCoordinates;
+
+		public int lastObjectSize ;
+		public int lastBlockStringTableSize;
+		public int lastBlockHeaderInfo;
+		
+		public void addBlockHeader(int typesFieldNumber, int sizeL) {
+			lastBlockHeaderInfo +=
+					CodedOutputStream.computeTagSize(typesFieldNumber) +
+					CodedOutputStream.computeRawVarint32Size(sizeL);
+		}
+		
+		public void addTagHeader(int typesFieldNumber, int sizeL) {
+			lastObjectHeaderInfo +=
+					CodedOutputStream.computeTagSize(typesFieldNumber) +
+					CodedOutputStream.computeRawVarint32Size(sizeL);
+		}
+
+		public void clearObjectStats() {
+			lastStringNamesSize = 0;
+			lastObjectIdSize = 0;
+			lastObjectHeaderInfo = 0;
+			lastObjectAdditionalTypes = 0;
+			lastObjectTypes = 0;
+			lastObjectCoordinates = 0;
+		}
+	}
+	
 	public static class SearchRequest<T> {
 		public final static int ZOOM_TO_SEARCH_POI = 16; 
 		private List<T> searchResults = new ArrayList<T>();
@@ -1538,6 +1609,8 @@ public class BinaryMapIndexReader {
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
+		
+		MapObjectStat stat = new MapObjectStat();
 		
 		
 		// TRACE INFO
