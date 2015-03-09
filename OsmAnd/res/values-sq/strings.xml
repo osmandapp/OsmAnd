@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_appearance">Elementet e mbetura:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="map_widget_map_rendering">Pasqyrim i hartes:</string>
     <string name="app_mode_hiking">Ecje me kemb</string>
     <string name="app_mode_motorcycle">Motoçikletë</string>
@@ -10,7 +10,7 @@
     <string name="shared_string_delete_all">Fshij të gjitha</string>
     <string name="animate_routing_route_not_calculated">Ju lutem, fillimisht llogaritni rrugen</string>
     <string name="shared_string_remember_my_choice">Mos harroni zgjedhjen time</string>
-    <string name="gps_status_eclipsim">Statusi i GPS-it</string>
+    
     <string name="shared_string_and">dhe</string>
     <string name="shared_string_or">ose</string>
 	<string name="auto_zoom_none">Nuk ka afrim automatik</string>

@@ -8,7 +8,7 @@
   <string name="map_online_data_descr">ऑनलाइन नकाशे वापरा (डाउनलोड करून एसडी कार्ड वार साठवा)</string>
   <string name="online_map_settings">ऑनलाइन नकाशे</string>
   <string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-  <string name="map_settings">- नकाशाच्या सेटिंग्स</string>
+  
   <string name="plugins_screen">प्लगिन्स</string>
   <string name="prefs_plugins">प्लगिन्स</string>
   <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
@@ -65,7 +65,7 @@
   <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
   <string name="local_openstreetmap_uploading">अपलोड करत आहे …</string>
   <string name="local_openstreetmap_were_uploaded">{0} पीओआय/बग्स अपलोड झाले</string>
-  <string name="local_openstreetmap_show">नकाशावर दाखवा</string>
+  
   <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
   <string name="local_openstreetmap_delete">बदल काढून टाका</string>
   
@@ -107,7 +107,7 @@
   <string name="gpx_navigation">जिपिएक्स राऊट</string>
   <string name="poi_filter_by_name">नावाने शोधा</string>
   <string name="shared_string_rename">नाव बदला</string>
-  <string name="show_gpx_route">नकाशावर दाखवा</string>
+  
   <string name="search_position_current_location_search">स्थान शोधत आहे …</string>
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
   <string name="search_position_address">पत्ता …</string>
@@ -118,7 +118,7 @@
   <string name="filename_input">फाइलचे नाव : </string>
   <string name="file_with_name_already_exist">ह्या नावाने फाइल आधीच अस्तित्वात आहे.</string>
   <string name="shared_string_save">साठवा</string>
-  <string name="menu_save_directions">दिशा साठवा</string>
+  
   <string name="local_index_mi_upload_gpx">ओएसएम ला पाठवा</string>
   <string name="show_more_map_detail">नकाशा सविस्तरपणे दाखवा</string>
   <string name="favorite_home_category">घर</string>
@@ -135,7 +135,7 @@
   <string name="map_text_size_descr">नकाशावरील नावांसाठी अक्षरांचा आकार ठरवा</string>
   <string name="map_text_size">अक्षरांचा आकार</string>
   <string name="voice_not_use">वापरू नका</string>
-  <string name="voice_not_specified">कुठलाच नाही</string>
+  
   <string name="shared_string_next">पुढे</string>
   <string name="shared_string_previous">मागे</string>
   <string name="si_mi_foots">मैल/फूट</string>
@@ -177,8 +177,8 @@
   <string name="poi_context_menu_call">पिओआय फोन दाखवा</string>
   <string name="website">वेबसाइट</string>
   <string name="phone">फोन</string>
-  <string name="download_files">डाउनलोड</string>
-  <string name="map_index">नकाशा</string>
+  
+  
   <string name="voice">आवाज</string>
   <string name="poi_context_menu_modify">पिओआय बदला</string>
   <string name="poi_context_menu_delete">पिओआय काढून टाका</string>
@@ -242,15 +242,15 @@
   <string name="address">पत्ता</string>
   <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
   
-  <string name="downloading">डाउनलोड करत आहे…</string>
+  
   <string name="downloading_list_indexes">उपलब्ध प्रदेशांची यादी डाउनलोड करत आहे…</string>
   <string name="list_index_files_was_not_loaded">प्रदेशांची यादी osmand.net वरून काढू शकलो नाही.</string>
-  <string name="show_poi_on_map">नकाशावर दाखवा</string>
+  
   <string name="only_show">फक्त दाखवा</string>
   <string name="follow">पालन करा</string>
   <string name="recalculate_route_to_your_location">परिवहन माध्यम:</string>
   <string name="mark_final_location_first">क्रुपया आधी इच्छिन स्थळ निवडा</string>
-  <string name="show_gps_status">जीपीएस स्थिति दाखवा</string>
+  
   <string name="failed_op">असफल</string>
   
   <string name="new_route_calculated_dist">नविन मार्ग निवडला, अंतर</string>
@@ -258,14 +258,14 @@
   <string name="shared_string_close">बंद करा</string>
   <string name="loading_data">डेटा लोड करत आहे…</string>
   <string name="finished_task">समाप्त</string>
-  <string name="download_indexes">ऑफलाइन डेटा डाउनलोड करत आहे</string>
+  
   <string name="use_online_routing_descr">मार्ग गणना करण्य़ासाठी इंटरनेटचा वापर करा</string>
   <string name="use_online_routing">ऑनलाइन दिशादर्शन वापरा</string>
   <string name="data_settings">डेटा</string>
   <string name="additional_settings">आधिक सेटिंग्स</string>
   <string name="shared_string_settings">सेटिंग्स</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
-  <string name="favourites_activity">आवडती ठिकाणे</string>
+  
   <string name="shared_string_add_to_favorites">आवडत्या ठिकणात नोंद करा</string>
   <string name="use_english_names_descr">इंग्लिश आणि बोली नावांची निवड</string>
   <string name="use_english_names">नकाशामधे इंग्लिश नावे वापरा</string>
@@ -278,14 +278,14 @@
   <string name="map_source">नकाशाचा स्त्रोत</string>
   <string name="use_internet">इंटरनेट वापरा</string>
   <string name="show_location">स्थान दाखवा</string>
-  <string name="map_preferences">नकाशा</string>
-  <string name="settings_activity">सेटिंग्स</string>
+  
+  
   <string name="use_internet_to_download_tile">नसलेल्या टाइल्स डाउनलोड करण्यासाठी इंटरनेटचा वापर करा</string>
   <string name="app_description">दिशादर्शन ऍप्लिकेशन</string>
   <string name="shared_string_exit">बाहेर पडा</string>
-  <string name="map_Button">नकाशा</string>
-  <string name="settings_Button">सेटिंग्स</string>
-  <string name="favorites_Button">आवडती ठिकाणे</string>
+  
+  
+  
   <string name="search_button">शोधा</string>
   <string name="search_activity">शोधा</string>
   <string name="search_POI_level_btn">अजून शोधा</string>
@@ -305,7 +305,7 @@
   <string name="search_address_building">इमारत</string>
   <string name="search_address_building_option">इमारत</string>
   <string name="search_tabs_location">स्थान</string>
-  <string name="context_menu_item_add_favorite">आवडत्या ठिकणात नोंद करा</string>
+  
   <string name="context_menu_item_update_map">नकाशा अपडेट करा</string>
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>
   <string name="shared_string_yes">हो</string>
@@ -320,13 +320,13 @@
   <string name="poi_dialog_name">नाव</string>
   <string name="poi_dialog_opening_hours">"उघडे असण्याची वेळ"</string>
   <string name="poi_dialog_comment">टिप्पणी</string>
-  <string name="edit_filter_delete_menu_item">काढून टाका</string>
-  <string name="default_buttons_selectall">सर्व निवडा</string>
+  
+  
   <string name="address_search_desc">पत्त्याचा शोध</string>
   <string name="transport_search_desc">परिवहन शोध</string>
   <string name="favourites_search_desc">आवडत्या ठिकणांचा शोध</string>
   <string name="rendering_attr_hmRendered_name">नकाशा आधिक तपशिलवार दाखवा</string>
-  <string name="update_downlod_list">यादी पुन्हा लोड करा</string>
+  
   <string name="osmand_parking_hours">तास</string>
   <string name="osmand_parking_minutes">मिनिटे</string>
   <string name="use_compass_navigation">कंपास वापरा</string>
@@ -349,7 +349,7 @@
     <string name="poi_filter_emergency">आपत्कालीन</string>
     <string name="poi_filter_public_transport">सार्वजनिक परिवहन</string>
     <string name="poi_filter_entertainment">करमणूक</string>
-    <string name="map_widget_appearance">इतर:</string>
+    
 	<string name="please_select_address">प्रथम शहर किंवा रस्ता निवडा</string>
     <string name="plugin_distance_point_time">वेळ</string>
     <string name="plugin_distance_point_hdop">अचूकपणा</string>
@@ -381,7 +381,7 @@
     <string name="intermediate_points_change_order">क्रम बदला</string>
     <string name="shared_string_control_start">सुरू करा</string>
     <string name="shared_string_control_stop">बंद करा</string>
-    <string name="monitoring_control_stop">बंद करा</string>
+    
     <string name="download_select_map_types">इतर नकाशे</string>
     <string name="download_roads_only_item">फक्त रस्ते</string>
     <string name="download_regular_maps">साधारण नकाशे</string>
@@ -421,12 +421,12 @@
 	<string name="favourites_remove_dialog_success">आवडते ठिकाण {0} यशस्वीरित्या काढले.</string>
 	<string name="add_favorite_dialog_top_text">आवडत्या ठिकाणाचे नाव द्या</string>
 	<string name="search_address_street_option">छेदणारा रस्ता</string>
-	<string name="navigate_point_cancel">रद्द करा</string>
+	
 	<string name="choose_intersected_street">छेदणारा रस्ता निवडा</string>
 	<string name="Closest_Amenities">सर्वात जवळच्या सुविधा</string>
 	<string name="searchpoi_activity">पिओआय निवडा</string>
 	<string name="show_view_angle">बघण्याची दिशा दाखवा</string>
-	<string name="download_indexes_descr">ऑफलाइन वापरासाठी डेटा डाउनलोड किंवा अपडेट करा</string>
+	
 	<string name="loading_streets_buildings">रस्ते/इमारती लोड करत आहे…</string>
 	<string name="loading_postcodes">पोस्ट कोड लोड करत आहे…</string>
 	<string name="loading_streets">रस्ते लोड करत आहे…</string>
@@ -441,9 +441,9 @@
 	<string name="layer_transport_route">परिवहन मार्ग</string>
 	<string name="vector_data">ऑफलाएन वेक्टर नकाशे</string>
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
-	<string name="transport_search_none">काहीच नाही</string>
+	
 	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
-	<string name="shared_strings_deselect_all">काहीच निवडू नका</string>
+	
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
 	<string name="amenity_type_man_made">मानव निर्मित</string>
 	<string name="amenity_type_administrative">प्रशासकीय</string>

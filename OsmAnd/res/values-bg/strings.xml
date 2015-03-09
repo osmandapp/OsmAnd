@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
 	\n\t* Гласови предупреждения за пътни ограничения и камери
 	\n\t* Гласово обявяване имената на улиците
 	\n\t* HD икони
@@ -90,9 +89,8 @@
     </string>
     <string name="monitoring_settings">Записване на изминатия път</string>
     <string name="monitoring_settings_descr">Настройване записването на изминатия път</string>
-    <string name="osmand_monitoring_plugin_description">Позволява записването на следа и навигация в спящ режим (изключен екран) чрез периодично събуждане на GPS устройството.
-        Настройки за запис на вашия изминат маршрут (следа) в местен GPX файл или качването му в Интернет.</string>
-    <string name="osmand_monitoring_plugin_name">Записване на следи и спящ режим</string>
+    
+    
     <string name="osmand_background_plugin_description">Настройки за запис на следа и навигация в спящ режим (при изключен екран) чрез периодично събуждане на GPS устройството.</string>
     <string name="contribution_activity">Инсталирана версия</string>
     <string name="choose_osmand_theme_descr">Изберете тема на приложението</string>
@@ -139,7 +137,7 @@
 		\n\t* Пакети с релефи - Contour lines plugin
 		\n\t* Корекции на грешки
     </string>
-    <string name="dist_control_start">Старт</string>
+    
     
     <string name="local_indexes_cat_srtm">Данни за контури</string>
     <string name="local_indexes_cat_av">Аудио/видео данни</string>
@@ -200,7 +198,7 @@
     <string name="osmand_srtm_long_description_1000_chars">Тази добавка изчертава контурни линии в офлайн картите на OsmAnd. Глобалната карта (между 70 градуса северна ширина и 70 градуса южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителсто и японската компания Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
     <string name="audionotes_location_not_defined">Няма определена позиция за тази бележка. Използвайте контекстното меню за да изберете място и да направите бележка</string>
-    <string name="monitoring_control_stop">Стоп</string>
+    
     <string name="map_widget_audionotes">Аудио бележки</string>
     <string name="audionotes_plugin_description">Направете аудио/видео бележки по време на пътуване</string>
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
@@ -532,7 +530,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="avoid_in_routing_descr">Избягване на платени пътища, пътища без настилка, фериботи</string>
 	<string name="map_widget_fluorescent">Светещи маршрути</string>
 	<string name="map_widget_show_ruler">Линийка</string>
-	<string name="map_widget_appearance">Оставащи:</string>
+	
 	<string name="map_widget_view_direction">Посока на изгледа</string>
 	<string name="map_widget_transparent">Прозрачна кожа</string>
 	
@@ -548,10 +546,10 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_widget_back_to_loc">Къде съм</string>
 	<string name="map_widget_lock_screen">Заключи екрана</string>
 	<string name="map_widget_compass">Компас</string>
-	<string name="map_widget_top_stack">Лента за състоянието:</string>
+	
 	<string name="map_widget_reset">Начални настройки</string>
-	<string name="map_widget_right_stack">Десен панел:</string>
-	<string name="map_widget_left_stack">Ляв панел:</string>
+	
+	
 	<string name="map_widget_parking">Паркинг</string>
 	<string name="map_widget_monitoring">GPX запис</string>
 	<string name="map_widget_speed">Скорост</string>
@@ -589,7 +587,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="native_app_allocated_memory_descr">Цялата системна памет за приложението: %1$s MB (Dalvik: %2$s MB, други: %3$s MB).
 		Пропорционална памет: %4$s MB (Ограничение за Android: %5$s MB, Dalvik: %6$s MB).</string>
 	<string name="native_app_allocated_memory">Системна памет</string>
-	<string name="update_downlod_list">Презареждане на списъка</string>
+	
 	<string name="starting_point_too_far">Началната позиция е твърде далеч от път.</string>
 	<string name="shared_location">Споделено място</string>
 	<string name="osmand_parking_event">Вземете колата от паркинга</string>
@@ -618,7 +616,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="gpxup_trackable">Trackable (проследим)</string>
 	<string name="gpxup_private">Private (частен)</string>
 	<string name="asap">Веднага</string>
-	<string name="save_route_as_gpx">Запиши маршрута като GPX файл</string>
+	
 	<string name="route_roundabout">Кръгово: вземете %1$d изход и продължете</string>
 	<string name="route_kl">Продължете по левия път</string>
 	<string name="route_kr">Продължете по десния път</string>
@@ -637,12 +635,11 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="navpoint_search_desc">Координати</string>
 	<string name="transport_search_desc">Търсене в \'транспорт\'</string>
 	<string name="favourites_search_desc">Търсене в \'любими\'</string>
-	<string name="history_search_desc">Търсене в историята</string>
+	
 	<string name="offline_navigation_not_available">OsmAnd офлайн навигацията временно не е достъпна.</string>
 	<string name="left_side_navigation">Обратно движение</string>
 	<string name="left_side_navigation_descr">За държави с движение в лявата лента</string>
-	<string name="download_link_and_local_description">Свалете или обновете Вашите офлайн карти.
-\nДокоснете елемент за да видите подробности, натиснете и задръжте за деактивиране или изтриване. Понастоящем имате (%1$s свободни):</string>
+	
 	<string name="unknown_from_location">Не е зададено начало на навигацията</string>
 	<string name="unknown_location">Все още не е определена позицията</string>
 	<string name="modify_transparency">Промяна на прозрачността (0 - прозрачно, 255 - плътно)</string>
@@ -658,17 +655,17 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_online_data_descr">Използване на онлайн карти (сваляне на карти в SD картата)</string>
 	<string name="online_map_settings">Карти онлайн</string>
 	<string name="online_map_settings_descr">Настройване на източниците за онлайн карти</string>
-	<string name="map_settings">Настройки на картата</string>
-	<string name="map_settings_descr">Настройване изгледа на картата</string>
+	
+	
 	<string name="osmand_rastermaps_plugin_description">Настройки за ползване на онлайн карти като основни или като карти за подложка. Тези карти е възможно да се подготвят за ползване офлайн.</string>
 	
 	<string name="osmand_accessibility_description">Настройки за специалните функции за достъпност.</string>
-	<string name="extra_settings">Разширени настройки</string>
-	<string name="osmand_monitoring_description">Настройки за записа на Вашето пътуване в GPX файл или онлайн в интернет.</string>
-	<string name="osmand_extra_settings_description">Допълнителни настройки за екрана (например увеличаване на детайлите по картата) и други свързани с конкретното устройство.</string>
+	
+	
+	
 	<string name="osmand_development_plugin_description">Допълнителни настройки за разработчици.</string>
 	<string name="plugins_screen">Добавки</string>
-	<string name="select_plugin_to_activate">Докоснете добавката за да я активирате или деактивирате.(Възможно е да се наложи да рестартирате приложението)</string>
+	
 	<string name="prefs_plugins_descr">Добавките внасят допълнителна функционалност на приложението</string>
 	<string name="prefs_plugins">Добавки</string>
 	<string name="tip_recent_changes_0_8_0_t">Промени в 0.8.0:
@@ -784,7 +781,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_openstreetmap_were_uploaded">{0} POI/поправки бяха качени</string>
 	<string name="local_openstreetmap_uploadall">Качи всичко</string>
 	
-	<string name="local_openstreetmap_show">Покажи на картата</string>
+	
 	<string name="local_openstreetmap_upload">Качване на промените в OSM</string>
 	<string name="local_openstreetmap_delete">Изтриване на промените</string>
 	<string name="local_openstreetmap_descr_title">Асинхронно редактиране на OSM:</string>
@@ -845,8 +842,7 @@ OsmAnd е с отворен код и активно да се развива. �
 		\n\t* \'По посоката на движение\' - Картата ще се завърта в зависимост от вашата посока на движение.
 		\n\t* \'По компаса\' - Картата ще бъде ориентирана по вградения компас.
 	</string>
-	<string name="binary_map_download_success">"Успешно сваляне
-\n\t\n\tЗа да използвате активирайте \'Меню\' → \'Настройки карта\' → \'Карта източник…\' → \'Offline векторни карти\'. "</string>
+	
 	<string name="tip_day_night_mode">Дневен/нощен режим</string>
 	<string name="tip_day_night_mode_t_v2">Можете да променяте изгледа на картата от дневен (ярък) към нощен (тъмен). Тъмният изглед е подходящ за безопасно шофиране нощем.
 		\n\nПревключването между дневен и нощен изглед можете да направите в \'Меню\' -&gt; \'Настройки на екрана…\' -&gt;\'Дневен/нощен изглед\'.
@@ -918,14 +914,14 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="button_upgrade_osmandplus">Обновяване на OsmAnd+</string>
 	<string name="map_version_changed_info">Сървърът съдържа карти несъвместими с Вашата версия на приложението. За да ги използвате, моля обновете приложението до по-нова версия.</string>
 	<string name="shared_string_rename">Преименуване</string>
-	<string name="show_gpx_route">Покажи на картата</string>
+	
 	<string name="poi_filter_nominatim">Онлайн Nominatim</string>
 	<string name="search_position_current_location_search">Търсене на място…</string>
 	<string name="search_position_current_location_found">Позиция (намерена)</string>
 	<string name="search_position_address">Адрес…</string>
 	<string name="search_position_favorites">Любими…</string>
 	<string name="search_position_undefined">Неопределена</string>
-	<string name="search_position_fixed">Установена</string>
+	
 	<string name="search_position_current_location">Текуща позиция…</string>
 	<string name="search_position_map_view">Последен изглед на картата</string>
 	<string name="select_search_position">Търси близо до:</string>
@@ -947,7 +943,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="filename_input">Име на файл: </string>
 	<string name="file_with_name_already_exist">Съществува файл със същото име.</string>
 	<string name="shared_string_save">Запиши</string>
-	<string name="menu_save_directions">Запиши упътвания</string>
+	
 	<string name="local_index_upload_gpx_description">Качване на GPX файлове в OSM. Те ще бъдат използвани за подобряване на картите.</string>
 	<string name="local_index_items_uploaded">%1$d от %2$d са успешно качени.</string>
 	<string name="local_index_mi_upload_gpx">Изпрати към OSM</string>
@@ -977,7 +973,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_index_descr_title">Управление на карти</string>
 	<string name="local_index_mi_restore">Активиране</string>
 	<string name="local_index_mi_backup">Деактивиране</string>
-	<string name="local_index_mi_delete">Изтриване</string>
+	
 	<string name="local_index_mi_reload">Презареди от SD-картата</string>
 	<string name="shared_string_download">Сваляне</string>
 	
@@ -989,7 +985,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_indexes_cat_backup">Изключен</string>
 	<string name="local_indexes_cat_tts">Гласова навигация (синтезирана)</string>
 	<string name="local_indexes_cat_voice">Гласова навигация (записана)</string>
-	<string name="local_indexes_cat_gpx">GPX данни</string>
+	
 	<string name="local_indexes_cat_poi">POI данни</string>
 	<string name="ttsvoice">Синтезиран глас</string>
 	<string name="search_offline_clear_search">Ново търсене</string>
@@ -1007,7 +1003,7 @@ OsmAnd е с отворен код и активно да се развива. �
 		\n\t- Подобрение в интерфейса и отстраняване на проблеми
 	</string>
 	<string name="voice_not_use">Не използвай</string>
-	<string name="voice_not_specified">Няма</string>
+	
 	<string name="installing_new_resources">Отваряне на нови данни…</string>
 	<string name="internet_connection_required_for_online_route">Избрана е онлайн навигация, но няма връзка с интернет.</string>
 	<string name="tts_language_not_supported_title">Езикът не се поддържа</string>
@@ -1085,7 +1081,7 @@ OsmAnd е с отворен код и активно да се развива. �
 		\n\nЗа да извикате контекстното меню натиснете и задръжте върху картата. Ще се появи правоъгълник с координатите на мястото. За да отворите контекстното меню, докоснете този маркер. Можете да ползвате и главното меню, като изберете от там \'Ползвай мястото\' (в този случай се ползва центъра на картата).
 		\n\nЗа да затворите маркера - докоснете и задръжте.
 	</string>
-	<string name="tip_initial">Помощ</string>
+	
 	<string name="tip_initial_t">"OsmAnd е приложение за навигация с много възможности.
 \n\nЗа начално запознаване вижте полезните съвети, които са в Меню-&gt;Помощ на основния екран. "</string>
 	<string name="shared_string_next">Следващ</string>
@@ -1168,7 +1164,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="download_files_question">Сваляне на {0} файл(а) ({1} MB)?</string>
 	<string name="items_were_selected">{0} избрани</string>
 	<string name="filter_existing_indexes">Свалени</string>
-	<string name="shared_strings_deselect_all">Нищо не е избрано</string>
+	
 	<string name="shared_string_select_all">Избери всичко</string>
 	<string name="shared_string_refresh">Обнови</string>
 	<string name="fast_route_mode">Най-бърз маршрут</string>
@@ -1190,13 +1186,13 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="download_type_to_filter">въведете за филтриране</string>
 	<string name="use_high_res_maps">Висока резолюция</string>
 	<string name="use_high_res_maps_descr">Да не се разтягат (съответно замъгляват) картите на HD екрани</string>
-	<string name="download_files">Сваляне</string>
+	
 	<string name="context_menu_item_search_transport">Търсене на общ. транспорт</string>
 	<string name="transport_searching_transport">Резултати за общ. транспорт (без крайна цел):</string>
 	<string name="transport_searching_route">Резултати за общ. транспорт ({0} към целта):</string>
-	<string name="transport_search_none">нищо</string>
+	
 	<string name="transport_search_again">Нулиране на търсенето за общ. транспорт</string>
-	<string name="map_index">Карта</string>
+	
 	<string name="voice">Глас</string>
 	<string name="no_vector_map_loaded">Не са заредени векторни карти</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
@@ -1205,7 +1201,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="error_reading_gpx">Грешка при четене на GPX данни</string>
 	<string name="vector_data">Офлайн векторни карти</string>
 	<string name="transport_context_menu">Търсене на общ. транспорт в спирката</string>
-	<string name="point_on_map">Позиция:\n Шир. %1$.5f\n Дълж. %2$.5f</string>
+	
 	<string name="osb_bug_name">Неточност (bug)</string>
 	<string name="poi_context_menu_modify">Промяна на POI</string>
 	<string name="poi_context_menu_delete">Изтриване на POI</string>
@@ -1220,7 +1216,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="fav_saved_sucessfully">Местата от Любими бяха успешно записани в {0}</string>
 	<string name="no_fav_to_save">Няма любими места за запис</string>
 	<string name="shared_string_import">Импортиране</string>
-	<string name="export_fav">Експортиране</string>
+	
 	<string name="error_occurred_loading_gpx">Възникна грешка при зареждане на GPX</string>
 	<string name="send_report">Изпращане на доклад</string>
 	<string name="none_region_found">На SD картата няма данни за този район. Свалете от интернет.</string>
@@ -1339,12 +1335,12 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="download_question_exist">Офлайн данни за {0} вече съществуват ({1}). Искате ли да ги обновите ({2}) ?</string>
 	<string name="address">Адрес</string>
 	<string name="shared_string_download_successful">Успешно сваляне</string>
-	<string name="error_io_error">Входно/изходна грешка</string>
+	
 	<string name="shared_string_downloading">Сваляне…</string>
-	<string name="downloading">Сваляне…</string>
+	
 	<string name="downloading_list_indexes">Сваляне на списък с достъпните райони…</string>
 	<string name="list_index_files_was_not_loaded">Списъкът с районите не беше свален от osmand.net.</string>
-	<string name="show_poi_on_map">Покажи на картата</string>
+	
 	<string name="fav_points_edited">Мястото от любими беше редактирано</string>
 	<string name="fav_points_not_exist">Не съществуват любими точки</string>
 	<string name="update_existing">Заместване</string>
@@ -1352,7 +1348,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="follow">Старт</string>
 	<string name="mark_final_location_first">Моля, изберете първо крайна цел</string>
 	<string name="get_directions">Указания</string>
-	<string name="show_gps_status">Покажи статуса на GPS</string>
+	
 	<string name="opening_hours">Работно време</string>
 	<string name="opening_changeset">Отваряне на списъка с промени…</string>
 	<string name="closing_changeset">Затваряне на списъка с промени…</string>
@@ -1381,16 +1377,16 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="previous_run_crashed">Последният път OsmAnd се срина. Записан е лог-файл в {0}. Моля, докладвайте за срива и приложете лог-файла.</string>
 	<string name="saving_gpx_tracks">Запис на GPX следите в SD…</string>
 	<string name="finished_task">Приключено</string>
-	<string name="reload_indexes_descr">Презареждане на офлайн карти и данни от SD картата</string>
-	<string name="reload_indexes">Презареждане на офлайн данните</string>
-	<string name="download_indexes_descr">Сваляне или обновяване на данните за офлайн ползване от Интернет</string>
-	<string name="download_indexes">Сваляне на офлайн данни</string>
+	
+	
+	
+	
 	<string name="use_online_routing_descr">Използване на Интернет за изчисляване на дистанцията</string>
 	<string name="use_online_routing">Използване на онлайн навигация</string>
 	<string name="osm_settings_descr">Настройки за изпращане на данни в Openstreetmap.org (OSM)</string>
 	<string name="data_settings_descr">Задаване на език, сваляне/повторно зареждане на данни</string>
 	<string name="data_settings">Данни</string>
-	<string name="map_preferences_descr">Настройки на картата: източник, завъртане, позиция на маркера, ориентация на екрана</string>
+	
 	<string name="osm_settings">Редактиране на OSM</string>
 	<string name="additional_settings">Допълнителни настройки</string>
 	<string name="shared_string_settings">Настройки</string>
@@ -1405,7 +1401,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="mark_point">Цел</string>
 	<string name="show_osm_bugs_descr">Покажи на картата OpenStreetBugs</string>
 	<string name="show_osm_bugs">Покажи OpenStreetBugs</string>
-	<string name="favourites_activity">Любими</string>
+	
 	<string name="shared_string_add_to_favorites">Добави в любими</string>
 	<string name="use_english_names_descr">Изберете между местни имена и имена на английски език</string>
 	<string name="use_english_names">Имена на англ. език</string>
@@ -1425,15 +1421,15 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_source">Източник на карти</string>
 	<string name="use_internet">Ползвай интернет</string>
 	<string name="show_location">Покажи мястото</string>
-	<string name="map_preferences">Карта</string>
-	<string name="settings_activity">Настройки</string>
+	
+	
 	<string name="show_gps_coordinates_text">Покажи GPS координатите на картата</string>
 	<string name="use_internet_to_download_tile">Използвай интернет за сваляне на липсващите части от картата</string>
 	<string name="app_description">Приложение за навигация</string>
 	<string name="shared_string_exit">Изход</string>
-	<string name="map_Button">Карта</string>
-	<string name="settings_Button">Настройки</string>
-	<string name="favorites_Button">Моите места</string>
+	
+	
+	
 	<string name="search_button">Търсене</string>
 	<string name="search_activity">Търсене</string>
 	<string name="searchpoi_activity">Избор на POI</string>
@@ -1455,7 +1451,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="navigate_point_format_DM">ГГГ ММ.ММ</string>
 	<string name="navigate_point_format_DMS">ГГГ ММ СС.СС</string>
 	<string name="shared_string_show_on_map">Покажи на картата</string>
-	<string name="navigate_point_cancel">Откажи</string>
+	
 	<string name="search_address_top_text">Изберете адрес</string>
 	<string name="search_address_region">Област/регион</string>
 	<string name="search_address_city">Град</string>
@@ -1464,7 +1460,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_address_building_option">Сграда</string>
 	<string name="search_address_street_option">Пресичаща улица</string>
 	<string name="search_tabs_location">Място</string>
-	<string name="context_menu_item_add_favorite">Добави в любими</string>
+	
 	<string name="context_menu_item_update_map">Обнови картата</string>
 	<string name="context_menu_item_open_bug">Докладвай за неточност в OSM</string>
 	<string name="context_menu_item_create_poi">Създай POI</string>
@@ -1516,12 +1512,12 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="default_buttons_commit">Изпрати</string>
 	<string name="shared_string_clear">Нулиране</string>
 	<string name="filter_current_poiButton">Филтър</string>
-	<string name="edit_filter_delete_menu_item">Изтрий</string>
+	
 	<string name="edit_filter_save_as_menu_item">Запиши като</string>
 	<string name="edit_filter_delete_dialog_title">Изтриване на избрания филтър?</string>
 	<string name="edit_filter_delete_message">Филтърът {0} беше изтрит</string>
 	<string name="edit_filter_create_message">Филтърът {0} беше създаден</string>
-	<string name="default_buttons_selectall">Избери всичко</string>
+	
 	<string name="email">ел.поща</string>
 	<string name="av_camera_focus">Фокус на вградената камера</string>
 	<string name="av_camera_focus_descr">Избор на режим за фокуса на вградената камера</string>
@@ -1567,7 +1563,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="about_version">Версия:</string>
     <string name="about_settings">За програмата</string>
     <string name="about_settings_descr">Версия, лицензи и разработчици</string>
-    <string name="tips_and_tricks">Помощ</string>
+    
     <string name="tip_recent_changes_1_6_t">Промени в 1.6
 	\n\t* Поддръжка на HD екрани
 	\n\t* Поддръжка на прозрачен фон
@@ -1585,7 +1581,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="animate_routing_route">Симулация по намерения маршрут </string>
     <string name="animate_routing_gpx">Симулация по GPX следа</string>
     <string name="shared_string_remember_my_choice">Запомни моя избор</string>
-    <string name="gps_status_eclipsim">Статус на GPS</string>
+    
     <string name="auto_zoom_none">Без автоматичен зуум</string>
 	<string name="auto_zoom_close">Приближаване</string>
 	<string name="auto_zoom_far">Среден мащаб</string>
@@ -1703,7 +1699,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="map_preferred_locale">Предпочитан език за картата</string>
     <string name="live_monitoring_m">Онлайн следа (изисква се GPX)</string>
     <string name="shared_string_my_places">Моите места</string>
-    <string name="my_data_activity">Моите места</string>
+    
     <string name="live_monitoring_m_descr">Изпращане на следата онлайн до определен уеб адрес, при условие, че записът в GPX е включен.</string>
 	<string name="live_monitoring_start">Старт на онлайн следата</string>
 	<string name="live_monitoring_stop">Стоп на онлайн следата</string>
@@ -1721,12 +1717,12 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_auto_connect_descr">Автоматично включване в услугата след стартиране на приложението</string>
     <string name="osmo_auto_connect">Автоматично свързване</string>
     <string name="osmo_start_service">OsMo услуга</string>
-    <string name="local_index_unselect_gpx_file">Отмени избора</string>
+    
     <string name="local_index_select_gpx_file">Избери за показване</string>
     <string name="gpx_split_interval">Интервал</string>
     <string name="sort_by_distance">Сортирай по дистанция</string>
     <string name="sort_by_name">Сортирай по име</string>
-    <string name="visible_element">Покажи на картата</string>
+    
     <string name="show_zoom_buttons_navigation_descr">Показвай бутоните за мащаб по време на навигация</string>
     <string name="show_zoom_buttons_navigation">Показвай бутоните за мащаб</string>
     <string name="select_destination_and_intermediate_points">Избор на междинни точки</string>
@@ -1744,10 +1740,10 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="traffic_warning_calming">Легнал полицай</string>
     <string name="traffic_warning_speed_camera">Камера за скорост</string>
     <string name="traffic_warning">Предупреждение за трафика</string>
-	<string name="hide_all_waypoints">Изтриване на всички</string>
+	
 <string name="fav_point_dublicate">Дублиране името на запазено място</string>
     <string name="fav_point_dublicate_message">Мястото беше запазено под името %1$s за избягване на дублирането в имената.</string>
-    <string name="use_native_render_descr">Използване на C++ вместо Java за изчертаване</string>
+    
     <string name="rendering_category_routes">Маршрути</string>
     <string name="rendering_category_details">Детайли</string>
     <string name="rendering_category_transport">Транспорт</string>
@@ -1763,7 +1759,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="wake_on_voice">Включи екрана</string>
     <string name="wake_on_voice_descr">Включване на екрана на телефона, когато наближава завой</string>
     <string name="shared_string_never">Никога</string>
-    <string name="select_impassable_road">Избери на картата</string>
+    
     <string name="impassable_road">Избягване на пътища…</string>
     <string name="rendering_attr_tramRoutes_name">Трамвайни линии</string>
     <string name="rendering_category_hide">Скрий</string>

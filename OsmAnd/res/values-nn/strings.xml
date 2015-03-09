@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
     <string name="osmo_invite">Inviter …</string>
     <string name="osmo_leave_confirmation_msg">Ønskjer du å forlata gruppa %1$s?</string>
     <string name="osmo_specify_tracker_id">Oppgje ID</string>
@@ -37,7 +36,7 @@
     <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lasta ned.</string>
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter namn</string>
-    <string name="visible_element">Vis på kartet</string>
+    
     <string name="show_zoom_buttons_navigation_descr">Vis forstørringsknappar ved navigering</string>
     <string name="show_zoom_buttons_navigation">Vis forstørringsknappar</string>
     <string name="save_as_favorites_points">Lagra som favorittgruppe</string>
@@ -61,7 +60,7 @@
     <string name="shared_string_my_tracks">Alle spor</string>
     <string name="shared_string_my_favorites">Mine favorittar</string>
     <string name="shared_string_my_places">Mine stadar</string>
-    <string name="my_data_activity">Mine stadar</string>
+    
     <string name="osmo_follow">Følg</string>
     <string name="osmo_sign_in">Logg inn</string>
     <string name="osmo_connect_to_my_nickname">Kallenamnet mitt</string>
@@ -161,12 +160,12 @@
     <string name="shared_string_delete_all">Slett alt</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
-	<string name="gps_status_eclipsim">GPS-status</string>
+	
     <string name="base_world_map">Globalt grunnkart</string>
 	<string name="tip_map_styles">Kartstilar</string>
 	<string name="about_version">Versjon:</string>
     <string name="about_settings">Om</string>
-    <string name="tips_and_tricks">Tips</string>
+    
     <string name="edit_tilesource_maxzoom">Maksforstørring</string>
     <string name="edit_tilesource_minzoom">Minste forstørring</string>
     <string name="edit_tilesource_url_to_load">Adresse</string>
@@ -230,7 +229,7 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Fjellskugge</string>
     <string name="download_hillshade_maps">Fjellskugge-lag</string>
-    <string name="dist_control_start">Start</string>
+    
     
     <string name="local_indexes_cat_srtm">Høgdekurvedata</string>
     <string name="recording_context_menu_show">Vis</string>
@@ -254,7 +253,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Lyd-/video-notat</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
-    <string name="monitoring_control_stop">Stopp</string>
+    
     <string name="map_widget_audionotes">Lydnotat</string>
     <string name="audionotes_plugin_description">Ta lyd- eller videonotat under turen</string>
     <string name="audionotes_plugin_name">Lyd-/videonotat</string>

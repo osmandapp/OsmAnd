@@ -344,7 +344,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		};
-		optionsMenuAdapter.item(R.string.show_gpx_route).icons(R.drawable.ic_show_on_map, R.drawable.ic_show_on_map)
+		optionsMenuAdapter.item(R.string.shared_string_show_on_map).icons(R.drawable.ic_show_on_map, R.drawable.ic_show_on_map)
 				.listen(listener).reg();
 		optionsMenuAdapter.item(R.string.shared_string_delete)
 				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark).listen(listener).reg();
@@ -433,7 +433,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				updateSelectionMode(mode);
-				MenuItem it = menu.add(R.string.show_gpx_route);
+				MenuItem it = menu.add(R.string.shared_string_show_on_map);
 				it.setIcon(R.drawable.ic_action_done);
 				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM
 						| MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
@@ -984,7 +984,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			showIcon = showIcon.mutate();
 			showIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 		}
-		MenuItem item = optionsMenu.getMenu().add(R.string.show_gpx_route).setIcon(showIcon);
+		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(showIcon);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
