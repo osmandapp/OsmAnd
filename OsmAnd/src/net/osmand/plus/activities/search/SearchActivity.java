@@ -209,8 +209,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 						if(loc != null && System.currentTimeMillis() - loc.getTime() < 10000) {
 							updateLocation(loc);
 						} else {
-							startSearchCurrentLocation();
 							searchAroundCurrentLocation = true;
+							startSearchCurrentLocation();
 						}
 					} else {
 						searchAroundCurrentLocation = false;
