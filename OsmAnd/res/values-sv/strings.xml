@@ -1828,4 +1828,7 @@
     <string name="routing_settings_2">Navigeringsinställningar</string>
     <string name="general_settings_2">Allmänna inställningar</string>
 	<string name="shared_string_no">Nej</string>
+	<string name="waypoint_visit_after">Besök efter</string>
+    <string name="waypoint_visit_before">Besök före</string>
+    <string name="shared_string_collapse">Slå ihop</string>
 	</resources>
