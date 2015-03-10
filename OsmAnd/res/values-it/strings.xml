@@ -2137,7 +2137,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_my_favorites">Miei preferiti</string>
 	<string name="shared_string_my_tracks">Mie tracce</string>
 	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
-	<string name="waypoint_visit_after">Visita successivamente</string>
+	<string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
 	</resources>
