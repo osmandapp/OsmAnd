@@ -114,7 +114,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			}
 		}
 		
-		if (list.size() == 0) {
+		if (list.size() == 0 && 
+				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
