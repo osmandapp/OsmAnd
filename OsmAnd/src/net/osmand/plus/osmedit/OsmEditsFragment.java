@@ -10,10 +10,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -69,6 +70,15 @@ public class OsmEditsFragment extends ListFragment {
 		dataPoints.addAll(l2);
 		listAdapter = new OsmEditsAdapter(dataPoints);
 		getListView().setAdapter(listAdapter);
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				OsmPoint it = listAdapter.getItem(position);
+				openPopUpMenu(view, it);
+				
+			}
+		});
 
 	}
 
@@ -130,7 +140,7 @@ public class OsmEditsFragment extends ListFragment {
 		OsmandApplication app = getMyApplication();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		MenuItem item = optionsMenu.getMenu().add(R.string.showed_on_map).
+		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).
 				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -141,7 +151,7 @@ public class OsmEditsFragment extends ListFragment {
 				return true;
 			}
 		});
-		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_delete).
+		item = optionsMenu.getMenu().add(R.string.shared_string_delete).
 				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

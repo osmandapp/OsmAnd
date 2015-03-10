@@ -756,7 +756,7 @@ public class OsmandSettings {
 		new StringPreference("user_password", "").makeGlobal();
 
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
-	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference("offline_edition", false).makeGlobal();
+	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference("offline_edition", true).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 

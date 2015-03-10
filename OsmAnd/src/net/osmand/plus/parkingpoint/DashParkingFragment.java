@@ -75,11 +75,6 @@ public class DashParkingFragment extends DashLocationFragment {
 
 		LatLon loc = getDefaultLocation();
 		LatLon position = plugin.getParkingPosition();
-		int dist = (int) (MapUtils.getDistance(position.getLatitude(), position.getLongitude(),
-				loc.getLatitude(), loc.getLongitude()));
-		String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication());
-		((TextView) mainView.findViewById(R.id.distance)).setText(distance);
-
 		boolean limited =  plugin.getParkingType();
 		String parking_name = limited ?
 				getString(R.string.parking_place_limited) : getString(R.string.parking_place);
@@ -95,10 +90,9 @@ public class DashParkingFragment extends DashLocationFragment {
 		}
 		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
-//		if (loc != null){
-//			updateArrow(getActivity(), loc, position, direction,
-//					(int)getResources().getDimension(R.dimen.dashboard_parking_icon_size), R.drawable.ic_parking_postion_arrow, heading);
-//		}
+		if (loc != null){
+			distances.add(new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position));
+		}
 
 
 

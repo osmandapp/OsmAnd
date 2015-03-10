@@ -181,7 +181,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void updateCurrentTrack(View v, final Activity ctx, OsmandApplication app) {
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			return;
 		}
 		if (v == null) {

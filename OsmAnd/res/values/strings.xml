@@ -154,7 +154,6 @@
 	<string name="osmand_development_plugin_description">Shows the settings for development and debugging features like route simulation or rendering performance indication.</string>
 	<string name="debugging_and_development">OsmAnd development</string>
 
-	<string name="showed_on_map">Shown on map</string>
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
 	<string name="back_to_map">Back to map</string>
