@@ -613,7 +613,7 @@
   <string name="search_online_address">ინტერნეტი</string>
   <string name="max_level_download_tile">მაქს. მიმდინარე გადიდება</string>
   <string name="max_level_download_tile_descr">აირჩიეთ მაქსიმალური გადიდება მიმდინარე რუკების ნაწილის ჩამოტვირთვისას</string>
-  <string name="route_general_information">ჯამური სიშორე %1$s, მოგზაურობის დრო %2$d სთ %3$d წთ.</string>
+  <string name="route_general_information">ჯამური სიშორე %1$s,\n მოგზაურობის დრო %2$d სთ %3$d წთ.</string>
   <string name="router_service_descr">აირჩიეთ მიმდინარე ან გათიშული ნავიგაციის სერვისი</string>
   <string name="router_service">ნავიგაციის სერვისი</string>
   <string name="sd_dir_not_accessible">შენახვის დასტა SDCard-ზე მიუწვდომელია</string>

@@ -125,6 +125,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initTransparencyBar(view, parent);
 	}
 
+	public void startNavigation() {
+		if (mapNavigationControl == null) {
+			return;
+		}
+		mapNavigationControl.startNavigation();
+	}
+
 
 	private <T extends MapControls> T init(final T c, FrameLayout parent, int gravity) {
 		c.setGravity(gravity);

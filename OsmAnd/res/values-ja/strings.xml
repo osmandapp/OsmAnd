@@ -423,7 +423,7 @@ POIの更新は利用できません</string>
      <string name="max_level_download_tile">最大オンラインズーム</string>
      <string name="max_level_download_tile_descr">オンラインマップタイル用にダウンロードする
 最大ズームレベルを選ぶ</string>
-     <string name="route_general_information">総距離 %1$s,
+     <string name="route_general_information">総距離 %1$s,\n
 移動時間 %2$d 時間 %3$d 分。</string>
      <string name="router_service_descr">オンラインまたはオフラインルーティングサービスを選択</string>
      <string name="router_service">経路案内サービス</string>

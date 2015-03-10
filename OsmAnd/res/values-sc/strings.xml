@@ -1469,7 +1469,7 @@
 	<string name="search_online_address">Ìnternet</string>
 	<string name="max_level_download_tile">Max zoom in lìnia</string>
 	<string name="max_level_download_tile_descr">Issèbera su livellu màssimu da iscarrigare pro sa mapas in lìnia a tasseddos</string>
-	<string name="route_general_information">Distàntzia totale %1$s, durada de su biàgiu %2$d h %3$d m.</string>
+	<string name="route_general_information">Distàntzia totale %1$s \n durada de su biàgiu %2$d h %3$d m.</string>
 	<string name="router_service_descr">Issèbera unu servìtziu in lìnia o sena lìnia de nàvigu</string>
 	<string name="router_service">Servìtziu de nàvigu</string>
 	<string name="sd_dir_not_accessible">Sa cartella de sarbamentu in s’ischeda SD no est atzessiva!</string>

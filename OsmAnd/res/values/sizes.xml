@@ -47,9 +47,9 @@
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
-	
 	<dimen name="map_button_size">40dp</dimen>
 	<dimen name="map_button_margin">8dp</dimen>
+
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>
@@ -60,4 +60,5 @@
     <dimen name="dashFavDescTextSize">14sp</dimen>
     <dimen name="dashProgressTextSize">14sp</dimen>
     <dimen name="dashParkingTextSize">24sp</dimen>
+	<dimen name="dash_parking_text_size">22sp</dimen>
 </resources>

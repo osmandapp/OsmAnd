@@ -1496,7 +1496,7 @@
 	<string name="search_online_address">Busca con conexión</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Escoller o nivel de ampliación máximo que descargar para as teselas dos mapas con conexión</string>
-	<string name="route_general_information">Distancia total %1$s, tempo de viaxe %2$d h %3$d m.</string>
+	<string name="route_general_information">Distancia total %1$s,\n tempo de viaxe %2$d h %3$d m.</string>
 	<string name="router_service_descr">Escoller un servizo de navegación con ou sen conexión</string>
 	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">O cartafol de almacenamento de datos do cartón SD non é accesíbel!</string>

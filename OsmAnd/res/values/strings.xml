@@ -1935,7 +1935,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_online_address">Online search</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
+	<string name="route_general_information">Total distance %1$s \n travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">The data storage folder on the SD card is not accessible!</string>

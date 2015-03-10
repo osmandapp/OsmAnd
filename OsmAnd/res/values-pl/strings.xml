@@ -466,7 +466,7 @@
   <string name="search_online_address">Wyszukiwanie online</string>
   <string name="max_level_download_tile">Maks. zoom online</string>
   <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
-  <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d h %3$d m.</string>
+  <string name="route_general_information">Całkowity dystans %1$s,\n czas podróży %2$d h %3$d m.</string>
   <string name="router_service_descr">Wybierz usługę nawigacyjną (online lub offline)</string>
   <string name="router_service">Usługa nawigacyjna</string>
   <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>

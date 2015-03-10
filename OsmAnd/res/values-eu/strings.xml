@@ -970,7 +970,7 @@
   <string name="search_online_address">Sareko bilaketa</string>
   <string name="max_level_download_tile">Sareko zoom maximoa</string>
   <string name="max_level_download_tile_descr">Aukeratu sareko tesela mapentzat deskargatzeko zoom maila maximoa</string>
-  <string name="route_general_information">Guztira distantzia %1$s, bidean denbora  %2$d h %3$d m.</string>
+  <string name="route_general_information">Guztira distantzia %1$s,\n bidean denbora  %2$d h %3$d m.</string>
   <string name="router_service_descr">Aukeratu sareko edo lineaz kanpoko nabigazio zerbitzu bat</string>
   <string name="router_service">Nabigazio zerbitzua</string>
   <string name="sd_dir_not_accessible">Ezin da direktorioa SD txartelan gorde</string>

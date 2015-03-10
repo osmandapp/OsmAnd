@@ -680,7 +680,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maksimum aanlyn vergroting</string>
   <string name="max_level_download_tile_descr">Kies maksimum vergrotingsvlak om af te laai vir aanlyn teëls</string>
-  <string name="route_general_information">Totale afstand %1$s, reistyd %2$d h %3$d m.</string>
+  <string name="route_general_information">Totale afstand %1$s,\n reistyd %2$d h %3$d m.</string>
   <string name="router_service_descr">Kies \'n aanlyn of aflyn navigasie diens</string>
   <string name="router_service">Navigasie diens</string>
   <string name="sd_dir_not_accessible">Berg adres op SD kaart is nie toeganklik nie</string>

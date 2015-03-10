@@ -622,7 +622,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maximální zvětšení</string>
   <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
-  <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
+  <string name="route_general_information">Celková vzdálenost %1$s,\n doba cesty %2$d h %3$d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
   <string name="sd_dir_not_accessible">Úložný datový adresář na SD kartě není dostupný!</string>

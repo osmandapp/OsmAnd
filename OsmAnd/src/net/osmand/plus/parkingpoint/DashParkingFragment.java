@@ -73,8 +73,12 @@ public class DashParkingFragment extends DashLocationFragment {
 			mainView.setVisibility(View.VISIBLE);
 		}
 
+		LatLon loc = getDefaultLocation();
 		LatLon position = plugin.getParkingPosition();
-
+		int dist = (int) (MapUtils.getDistance(position.getLatitude(), position.getLongitude(),
+				loc.getLatitude(), loc.getLongitude()));
+		String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication());
+		((TextView) mainView.findViewById(R.id.distance)).setText(distance);
 
 		boolean limited =  plugin.getParkingType();
 		String parking_name = limited ?

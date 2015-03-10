@@ -486,7 +486,7 @@
 	<string name="search_online_address">Nettbasert søk</string>
 	<string name="max_level_download_tile">Maks. nettbasert zoom</string>
 	<string name="max_level_download_tile_descr">Velg maksimalt zoomnivå å laste ned for nettbaserte kartseksjoner</string>
-	<string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d m.</string>
+	<string name="route_general_information">Total distanse %1$s,\n reisetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Velg en nettbasert eller offline navigeringstjeneste</string>
 	<string name="router_service">Navigeringstjeneste</string>
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgjengelig!</string>

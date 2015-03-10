@@ -1063,7 +1063,7 @@
 	<string name="search_nothing_found">Sonuç bulunamadı</string>
 	<string name="hint_search_online">Ev numarası, sokak, şehir</string>
 	<string name="search_offline_address">Çevrimdışı arama</string>
-	<string name="route_general_information">Toplam mesafe %1$s, seyahat süresi %2$d s %3$d d.</string>
+	<string name="route_general_information">Toplam mesafe %1$s \n seyahat süresi %2$d s %3$d d.</string>
 	<string name="router_service_descr">Çevrimiçi veya çevrimdışı gezinti hizmeti seçin</string>
 	<string name="sd_dir_not_accessible">SD karttaki kayıt dizini ulaşılabilir değil</string>
 	<string name="download_question">{0} - {1} indir ?</string>

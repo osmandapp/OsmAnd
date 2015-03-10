@@ -30,13 +30,19 @@
 
 			<TextView
 				android:id="@+id/distance"
+				android:textSize="@dimen/dash_parking_text_size"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"/>
+				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				tools:text="@string/app_version"/>
 
 			<TextView
 				android:id="@+id/name"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"/>
+				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dashProgressTextSize"
+				tools:text="@string/app_version"/>
 		</LinearLayout>
 
 		<LinearLayout
@@ -50,6 +56,8 @@
 				android:id="@+id/time_left"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dash_parking_text_size"
 				tools:text="@string/app_mode_aircraft"/>
 
 			<TextView
@@ -57,6 +65,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/osmand_parking_time_left"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dashProgressTextSize"
 				tools:text="@string/app_version"/>
 		</LinearLayout>
 

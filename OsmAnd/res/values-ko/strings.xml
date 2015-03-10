@@ -656,7 +656,7 @@
 	<string name="search_online_address">온라인 검색</string>
 	<string name="max_level_download_tile">최대 온라인 줌</string>
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
-	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
+	<string name="route_general_information">전체거리 %1$s,\n 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
 	<string name="router_service">운행 서비스</string>
 	<string name="sd_dir_not_accessible">SD 카드에 있는 데이터 저장 폴더에 접근할 수 없습니다!</string>
