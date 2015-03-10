@@ -2197,4 +2197,7 @@
 	<string name="shared_string_my_favorites">내 즐겨찾기</string>
 	<string name="shared_string_my_tracks">경로</string>
 	<string name="shared_string_currently_recording_track">현재 기록중인 경로</string>
+	<string name="waypoint_visit_after">방문 후</string>
+    <string name="waypoint_visit_before">방문 하기 전</string>
+    <string name="shared_string_collapse">실패</string>
 	</resources>
