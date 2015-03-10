@@ -156,7 +156,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 				return true;
 			}
 		});
-		boolean target = model == getMyApplication().getTargetPointsHelper().getPointToNavigate();
+		final boolean target = model == getMyApplication().getTargetPointsHelper().getPointToNavigate();
 		if(SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 			final List<TargetPoint> allTargets = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
 			if (model.index > 0 || target) {
