@@ -1867,11 +1867,10 @@
 		\n\nEt kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.
 		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
 	</string>
-	<string name="plugin_touringview_descr">Aktivering ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.
-		\n\nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). Det viser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.
-		\n\nEt særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.
-		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
-	</string>
+	<string name="plugin_touringview_descr">"Aktivering ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.
+\n\nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker).\n\nDet viser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.
+\n\nOg det giver særlige touring muligheder som viser cykelruter eller alpine bjergruter.\n\nEt særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.
+\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
 	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
 	<string name="days_behind">dage gammel</string>
 	<string name="rename_failed">Fejl ved omdøbning.</string>
