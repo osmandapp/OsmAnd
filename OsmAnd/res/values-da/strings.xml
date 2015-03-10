@@ -1963,4 +1963,7 @@
 	<string name="shared_string_my_favorites">Favoritter</string>
 	<string name="shared_string_my_tracks">Spor</string>
 	<string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
+	<string name="waypoint_visit_after">Besøg efter</string>
+    <string name="waypoint_visit_before">Besøg før</string>
+    <string name="shared_string_collapse">Fold sammen</string>
 	</resources>
