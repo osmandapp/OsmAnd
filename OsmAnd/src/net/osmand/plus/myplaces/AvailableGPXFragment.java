@@ -156,6 +156,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 	
 	public void updateCurrentTrack() {
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
+			return;
+		}
 		updateCurrentTrack(getView(), getActivity(), app);
 		final CheckBox checkbox = (CheckBox) getView().findViewById(R.id.check_local_index);
 		checkbox.setVisibility(selectionMode  && showOnMapMode? View.VISIBLE : View.GONE);
@@ -178,6 +181,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void updateCurrentTrack(View v, final Activity ctx, OsmandApplication app) {
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			return;
+		}
 		if (v == null) {
 			return;
 		}
@@ -236,7 +242,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			listView.setAdapter(this.adapter);
 		}
 		setHasOptionsMenu(true);
-
 		View currentTrackView = v.findViewById(R.id.current_track);
 		createCurrentTrackView(v, getMyApplication());
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
