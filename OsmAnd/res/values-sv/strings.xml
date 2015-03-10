@@ -1748,11 +1748,10 @@
 		\n\nEn global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Hämtningar som \'World ski map\'.
 		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
 	</string>
-	<string name="plugin_touringview_descr">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
-		\n\nDenna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken). Den visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.
-		\n\nIngen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.
-		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
-	</string>
+	<string name="plugin_touringview_descr">"Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
+\n\nDenna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken).\n\nDen visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.
+\n\nOch den erbjuder också speciella alternativ såsom visning av cykelrutter eller rutter i Alperna.\n\nIngen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.
+\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor. "</string>
 	<string name="location_on_map">Plats:\n Lat %1$s\n Lon %2$s</string>
 	<string name="plugin_touringview_name">Vägkartsvy</string>
 	<string name="days_behind">dagar efter</string>
