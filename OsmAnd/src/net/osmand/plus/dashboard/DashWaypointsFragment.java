@@ -156,9 +156,9 @@ public class DashWaypointsFragment extends DashLocationFragment {
 				return true;
 			}
 		});
+		boolean target = model == getMyApplication().getTargetPointsHelper().getPointToNavigate();
 		if(SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 			final List<TargetPoint> allTargets = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
-			boolean target = model == getMyApplication().getTargetPointsHelper().getPointToNavigate();
 			if (model.index > 0 || target) {
 				final int ind = target ? allTargets.size() - 1 : model.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
@@ -195,7 +195,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				getMyApplication().getTargetPointsHelper().removeWayPoint(true, model.index);
+				getMyApplication().getTargetPointsHelper().removeWayPoint(true, target ? -1 :  model.index);
 				setupTargets();
 				return true;
 			}
