@@ -10,11 +10,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.audionotes.NotesFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -23,6 +26,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -134,6 +138,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		adapter.item(R.string.context_menu_item_open_bug).icons(R.drawable.ic_action_bug_dark, 
 				R.drawable.ic_action_bug_light).listen(listener).reg();
+	}
+
+	@Override
+	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
+		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(favoritesActivity);
+		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(favoritesActivity);
+		if (dbpoi.getOpenstreetmapPoints().size() > 0 || dbbug.getOsmbugsPoints().size() > 0){
+			mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
+			if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
+				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.OSM_EDITS_TAB);
+			}
+		}
 	}
 
 	@Override
