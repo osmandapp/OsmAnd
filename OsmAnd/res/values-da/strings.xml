@@ -1252,7 +1252,7 @@
     <string name="distance_measurement_start_editing">Begynd redigering</string>
     <string name="distance_measurement_finish_editing">Slut redigering</string>
     <string name="distance_measurement_finish_subtrack">Begynd et nyt underspor</string>
-    <string name="distance_measurement_clear_route">Slet punkter</string>
+    <string name="distance_measurement_clear_route">Slet alle punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et modul som gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-fil, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
@@ -1407,7 +1407,8 @@
     <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)…</string>
     <string name="copying_osmand_files">Kopierer OsmAnd datafiler…</string>
     <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Ønsker du at skifte til den tilladte placering og kopiere alle OsmAnd  datafiler dertil?         
-\n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt).        
+\n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt).
+\n
 \n Note 2: I den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
 	<string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
@@ -1859,14 +1860,12 @@
 	<string name="share_note">Del note</string>
 	
 	<string name="plugin_touringview_name">Touring</string>
-	<string name="plugin_nautical_descr">Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.
-		\n\nEt kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.
-		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
-	</string>
-	<string name="plugin_ski_descr">Aktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold.
-		\n\nEt kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.
-		\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.
-	</string>
+	<string name="plugin_nautical_descr">"Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.
+\n\nEt kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.
+\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
+	<string name="plugin_ski_descr">"Aktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold.
+\n\nEt kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.
+\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
 	<string name="plugin_touringview_descr">"Aktivering ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.
 \n\nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker).\n\nViser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.
 \n\nGiver særlige touring muligheder såsom cykelruter eller alpine bjergruter.\n\nEt særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.
