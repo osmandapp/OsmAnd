@@ -424,17 +424,11 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		public LocalOpenstreetmapAdapter() {
 			super(LocalOpenstreetmapActivity.this, net.osmand.plus.R.layout.local_openstreetmap_list_item);
 		}
-		
-
 
 		public void delete(OsmPoint i) {
 			dataPoints.remove(i);
 			remove(i);
 			listAdapter.notifyDataSetChanged();
-		}
-		
-		public void cancelFilter(){
-			notifyDataSetChanged();
 		}
 		
 		@Override

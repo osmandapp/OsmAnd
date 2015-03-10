@@ -77,8 +77,7 @@ public class MapNavigateControl extends MapControls {
 		
 	}
 	
-	
-	private void startNavigation() {
+	public void startNavigation() {
 		stopCounter();
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -86,8 +85,7 @@ public class MapNavigateControl extends MapControls {
 			routingHelper.setRoutePlanningMode(false);
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		} else {
-			OsmandApplication ctx = mapActivity.getMyApplication();
-			if(!ctx.getTargetPointsHelper().checkPointToNavigateShort()) {
+			if(!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				ri.showDialog();
 			} else {
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
@@ -100,7 +98,7 @@ public class MapNavigateControl extends MapControls {
 			}
 		}
 	}
-	
+
 	@Override
 	public void showControls(final FrameLayout parent) {
 		navigateButton = addButton(parent, R.string.get_directions, R.drawable.map_btn_navigate);

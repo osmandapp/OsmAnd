@@ -1602,7 +1602,7 @@
 	<string name="search_online_address">Siecіŭny pošuk</string>
 	<string name="max_level_download_tile">Maksіmaĺnaje pavielіčeńnie onlajn mapaŭ</string>
 	<string name="max_level_download_tile_descr">Vybierycie maksіmaĺny ŭzrovień pavielіčeńnia dlia zahruzkі onlajn rastravych mapaŭ</string>
-	<string name="route_general_information">Ahuĺnaja adliehlaść %1$s, čas u darozie %2$d h. %3$d chv.</string>
+	<string name="route_general_information">Ahuĺnaja adliehlaść %1$s,\n čas u darozie %2$d h. %3$d chv.</string>
 	<string name="router_service_descr">Abrać siecіŭny cі pazasiecіŭny servіs navіhacyі</string>
 	<string name="router_service">Servіs navіhacyі</string>
 	<string name="sd_dir_not_accessible">Katalioh na SD-karcie niedastupny dlia zachoŭvańnia!</string>

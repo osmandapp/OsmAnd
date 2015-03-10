@@ -23,6 +23,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.LocalOpenstreetmapActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
@@ -49,14 +50,25 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	private TextView header;
 	private DisplayMetrics dm;
 
+	public static final String START_NAVIGATION = "START_NAVIGATION";
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.default_list_view);
 		ListView lv = (ListView) findViewById(android.R.id.list);
-		header = new TextView(this);
+		View headerView = getLayoutInflater().inflate(R.layout.route_details_header, null);
+		header = (TextView) headerView.findViewById(R.id.header);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
-		lv.addHeaderView(header);
+		headerView.findViewById(R.id.start_navigation).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ShowRouteInfoActivity.this, MapActivity.class);
+				i.putExtra(START_NAVIGATION, START_NAVIGATION);
+				startActivity(i);
+			}
+		});
+		lv.addHeaderView(headerView);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 

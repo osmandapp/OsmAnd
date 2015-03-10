@@ -613,7 +613,7 @@
   <string name="search_online_address">Internets</string>
   <string name="max_level_download_tile">Maksimālais tiešsaistes palielinājums</string>
   <string name="max_level_download_tile_descr">Izvēlēties maksimālo palielinājuma līmeni, kuru lejupielādēt tiešsaites kartēm</string>
-  <string name="route_general_information">Kopējā distance %1$s, ceļojuma laiks %2$d h %3$d m.</string>
+  <string name="route_general_information">Kopējā distance %1$s,\n ceļojuma laiks %2$d h %3$d m.</string>
   <string name="router_service_descr">Izvēlieties tiešsaites vai netiešsaites maršrutēšanas pakalpojumu</string>
   <string name="router_service">Maršrutēšanas pakalpojums</string>
   <string name="sd_dir_not_accessible">Glabātuves mape SD kartē nav pieejama</string>

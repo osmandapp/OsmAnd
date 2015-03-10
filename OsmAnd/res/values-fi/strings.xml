@@ -521,7 +521,7 @@
 	<string name="use_english_names_descr">Valitse omakieliset tai englanninkieliset nimet</string>
 	<string name="go_back_to_osmand">Palaa OsmAnd karttaan</string>
 	<string name="empty_route_calculated">Virhe: Laskettu reitti on tyhjä</string>					
-	<string name="route_general_information">Välimatka %1$s,matka-aika %2$d h %3$d m.</string>
+	<string name="route_general_information">Välimatka %1$s,\n matka-aika %2$d h %3$d m.</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekuntia</string>
 	<string name="int_min">min.</string>

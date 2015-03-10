@@ -165,6 +165,7 @@
 		<item name="expandable_list_background">@color/color_white</item>
 		<item name="list_settings_icon">@drawable/ic_overflow_menu_light</item>
 		<item name="size_progress_bar">@drawable/size_progressbar_light</item>
+		<item name="dash_parking_bg">@color/dashboard_blue</item>
 	</style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -208,6 +209,7 @@
 		<item name="expandable_list_background">@color/list_background_dark</item>
 		<item name="list_settings_icon">@drawable/ic_overflow_menu_dark</item>
 		<item name="size_progress_bar">@drawable/size_progressbar_dark</item>
+		<item name="dash_parking_bg">@color/dashboard_parking_dark</item>
 	</style>
 
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">

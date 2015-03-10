@@ -897,7 +897,7 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Nivel max. zoom online</string>
 	<string name="max_level_download_tile_descr">Alegeți nivelul maxim de zoom pentru descărcarea de hărți raster online</string>
-	<string name="route_general_information">Distanța totală %1$s, timp %2$d h %3$d m.</string>
+	<string name="route_general_information">Distanța totală %1$s,\n timp %2$d h %3$d m.</string>
 	<string name="router_service_descr">Alegeți un serviciu de rutare online sau offline</string>
 	<string name="router_service">Serviciu de rutare</string>
 	<string name="sd_dir_not_accessible">Directorul de pe cardul SD unde se salvează date nu este accesibil!</string>

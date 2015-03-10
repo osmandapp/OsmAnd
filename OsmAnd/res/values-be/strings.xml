@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -1221,7 +1221,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_online_address">Сеціўны пошук</string>
 	<string name="max_level_download_tile">Максімальнае павелічэньне онлайн мапаў</string>
 	<string name="max_level_download_tile_descr">Выберыце максімальны ўзровень павелічэньня для сьцягваньня фрагмэнтаў мапы з Інтэрнэту</string>
-	<string name="route_general_information">Агульная адлегласьць %1$s, час у дарозе %2$d г. %3$d хв.</string>
+	<string name="route_general_information">Агульная адлегласьць %1$s,\n час у дарозе %2$d г. %3$d хв.</string>
 	<string name="router_service_descr">Абраць сеціўны ці пазасеціўны сэрвіс навігацыі</string>
 	<string name="router_service">Сэрвіс навігацыі</string>
 	<string name="sd_dir_not_accessible">Каталёг на SD-карце недаступны для захоўваньня!</string>

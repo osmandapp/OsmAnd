@@ -237,7 +237,7 @@
   <string name="searching_address">पत्ता शोधत आहे…</string>
   <string name="search_offline_address">ऑफलाएन शोध</string>
   <string name="search_online_address">ऑनलाएन शोध</string>
-  <string name="route_general_information">एकुण अंतर %1$s, प्रवासाचा वेळ %2$d ता %3$d मि.</string>
+  <string name="route_general_information">एकुण अंतर %1$s,\n प्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
   <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>

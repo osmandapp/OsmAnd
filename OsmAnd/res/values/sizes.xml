@@ -9,6 +9,7 @@
     <dimen name="dashFavIconSize">28dp</dimen>
     <dimen name="dashFavIconMargin">12dp</dimen>
     <dimen name="dashFavDirectionSize">10dp</dimen>
+    <dimen name="dashMapHeight">250dp</dimen>
     <dimen name="dashNoteIconSize">28dp</dimen>
     <dimen name="dashPluginPadding">4dp</dimen>
     <dimen name="dashPluginMargin">8dp</dimen>
@@ -20,7 +21,7 @@
     <dimen name="dashCardMargin">4dp</dimen>
 	<dimen name="abp__shadow_height">4dp</dimen>
     <dimen name="dashFABMargin">0dp</dimen>
-    <dimen name="dash_parking_height">100dp</dimen>
+    <dimen name="dash_parking_height">78dp</dimen>
     <dimen name="list_content_padding">16dp</dimen>
     <dimen name="list_header_padding">8dp</dimen>
     <dimen name="tab_height">48dp</dimen>
@@ -44,9 +45,11 @@
 	<dimen name="gpx_text_top_margin">6dp</dimen>
 	<dimen name="dashboard_map_top_padding">240dp</dimen>
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
-	
+	<dimen name="dashboard_parking_left_margin">16dp</dimen>
+	<dimen name="dashboard_parking_icon_size">48dp</dimen>
 	<dimen name="map_button_size">40dp</dimen>
 	<dimen name="map_button_margin">8dp</dimen>
+
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>
@@ -57,4 +60,5 @@
     <dimen name="dashFavDescTextSize">14sp</dimen>
     <dimen name="dashProgressTextSize">14sp</dimen>
     <dimen name="dashParkingTextSize">24sp</dimen>
+	<dimen name="dash_parking_text_size">22sp</dimen>
 </resources>

@@ -1,53 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:background="?attr/card_bg"
+			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:background="?attr/card_bg"
+			  android:orientation="vertical">
 
-	<LinearLayout android:orientation="horizontal"
-				  android:layout_width="match_parent"
-				  android:background="@color/dashboard_blue"
-				  android:layout_height="@dimen/dash_parking_height">
-		<ImageView android:id="@+id/direction_icon"
-				   android:layout_gravity="center_vertical"
-				   android:layout_marginLeft="@dimen/dashFavIconMargin"
-				   android:layout_marginRight="@dimen/dashFavIconMargin"
-				   android:layout_width="wrap_content"
-				   android:layout_height="wrap_content"/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dash_parking_height"
+		android:background="?attr/dash_parking_bg"
+		android:orientation="horizontal">
 
-		<LinearLayout android:orientation="vertical"
-					  android:layout_gravity="center_vertical"
-					  android:layout_width="0dp"
-					  android:layout_weight="1"
-					  android:layout_height="wrap_content">
-			<TextView android:id="@+id/distance"
-					  android:layout_width="match_parent"
-					  android:layout_height="wrap_content"/>
-			<TextView android:id="@+id/name"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"/>
+		<ImageView
+			android:id="@+id/direction_icon"
+			android:layout_width="@dimen/dashboard_parking_icon_size"
+			android:layout_height="@dimen/dashboard_parking_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/dashboard_parking_left_margin"
+			android:layout_marginRight="@dimen/dashFavIconMargin"
+			android:src="@drawable/ic_parking_postion_arrow"/>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/distance"
+				android:textSize="@dimen/dash_parking_text_size"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				tools:text="@string/app_version"/>
+
+			<TextView
+				android:id="@+id/name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dashProgressTextSize"
+				tools:text="@string/app_version"/>
 		</LinearLayout>
 
-		<LinearLayout android:orientation="vertical"
-					  android:layout_width="wrap_content"
-					  android:layout_gravity="center_vertical"
-					  android:layout_marginRight="@dimen/dashFavIconMargin"
-					  android:layout_height="wrap_content">
-			<TextView android:id="@+id/next_turn_distance"
-					  android:layout_width="match_parent"
-					  android:layout_height="wrap_content"/>
-			<TextView android:id="@+id/next_turn"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"/>
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginRight="@dimen/dashFavIconMargin"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/time_left"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dash_parking_text_size"
+				tools:text="@string/app_mode_aircraft"/>
+
+			<TextView
+				android:id="@+id/left_lbl"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/osmand_parking_time_left"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/dashProgressTextSize"
+				tools:text="@string/app_version"/>
 		</LinearLayout>
 
 	</LinearLayout>
 
-	<Button android:id="@+id/remove_tag"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/remove_the_tag"
-			style="?attr/dashboardGeneralButtonStyle"/>
+	<Button
+		android:id="@+id/remove_tag"
+		style="?attr/dashboardGeneralButtonStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/remove_the_tag"/>
 
 </LinearLayout>

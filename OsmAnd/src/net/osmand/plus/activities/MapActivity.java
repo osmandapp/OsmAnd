@@ -428,6 +428,9 @@ public class MapActivity extends AccessibleActivity {
 					}
 				}
 			}
+			if (intent.getStringExtra(ShowRouteInfoActivity.START_NAVIGATION) != null) {
+				mapLayers.getMapControlsLayer().startNavigation();
+			}
 		}
 
 		View progress = mapLayers.getMapInfoLayer().getProgressBar();

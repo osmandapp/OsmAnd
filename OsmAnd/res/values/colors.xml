@@ -33,6 +33,7 @@
 	<color name="dashboard_subheader_text_light">#212121</color>
 	<color name="dashboard_general_button_text_dark">#ff8f00</color>
 	<color name="dashboard_general_button_text_light">#536DFE</color>
+	<color name="dashboard_parking_dark">#54778c</color>
 
 	<color name="color_transparent">#00000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>

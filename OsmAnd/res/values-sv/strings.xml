@@ -806,7 +806,7 @@
 	<string name="hint_search_online">Online-sökning: Husnummer, gata, stad</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="max_level_download_tile_descr">Välj högsta zoomnivå att ladda ner för online-kartbitar</string>
-	<string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
+	<string name="route_general_information">Total sträcka %1$s \n restid %2$d h %3$d m.</string>
 	<string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
 	<string name="router_service">Navigeringstjänst</string>
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>

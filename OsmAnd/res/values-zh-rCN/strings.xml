@@ -826,7 +826,7 @@
 	<string name="search_offline_address">离线搜索</string>
 	<string name="search_online_address">在线搜索</string>
 	<string name="max_level_download_tile">最大在线显示级别</string>
-	<string name="route_general_information">总距离 %1$s，旅行时间 %2$d 小时 %3$d 分钟。</string>
+	<string name="route_general_information">总距离 %1$s \n 旅行时间 %2$d 小时 %3$d 分钟。</string>
 	<string name="router_service_descr">选择一个在线或离线导航服务</string>
 	<string name="router_service">导航服务</string>
 	<string name="sd_dir_not_accessible">SD卡上的保存目录无法访问</string>

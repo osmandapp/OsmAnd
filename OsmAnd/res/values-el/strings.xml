@@ -841,7 +841,7 @@
 	<string name="search_online_address">Διαδίκτυο</string>
 	<string name="max_level_download_tile">Μεγ. online κλίμακα</string>
 	<string name="max_level_download_tile_descr">Επιλέξτε τη μέγιστη κλίμακα προς λήψη για τα πλακίδια του online χάρτη</string>
-	<string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
+	<string name="route_general_information">Συνολική απόσταση %1$s,\n χρόνος ταξιδιού %2$d ω %3$d λ.</string>
 	<string name="router_service_descr">Επιλέξτε μια online ή offline υπηρεσία πλοήγησης</string>
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
 	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης δεδομένων στην SD κάρτα δεν είναι προσβάσιμος!</string>

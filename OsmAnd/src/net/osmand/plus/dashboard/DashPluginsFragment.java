@@ -25,7 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 21.11.2014.
+ * Created by Denis
+ * on 21.11.2014.
  */
 public class DashPluginsFragment extends DashBaseFragment {
 
@@ -88,7 +89,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 			plugins.add(plugin);
 		}
 	}
-
 
 	@Override
 	public void onOpenDash() {

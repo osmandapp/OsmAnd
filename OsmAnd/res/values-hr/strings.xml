@@ -406,7 +406,7 @@
 	<string name="download_question">Preuzmi {0} - {1} ?</string>
 	<string name="download_question_exist">Offline podaci za {0} već postoje ({1}). Želite li ih ažurirali ({2})?</string>
 	<string name="search_offline_address">Traži offline</string>
-	<string name="route_general_information">Ukupna udaljenost %1$s, vrijeme putovanja %2$d i %3$d m.</string>
+	<string name="route_general_information">Ukupna udaljenost %1$s,\n vrijeme putovanja %2$d i %3$d m.</string>
 	<string name="search_nothing_found">Nije pronađeno ništa</string>
 	<string name="searching">Tražim…</string>
 	<string name="searching_address">Tražim adresu…</string>

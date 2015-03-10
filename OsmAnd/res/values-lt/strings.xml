@@ -754,7 +754,7 @@
   <string name="search_online_address">Internete</string>
   <string name="max_level_download_tile">Didžiausias mastelis interneto žemėlapiui</string>
   <string name="max_level_download_tile_descr">Pasirinkti didžiausią internetinio žemėlapio mastelį parsiuntimui</string>
-  <string name="route_general_information">Visas atstumas %1$s, kelionės trukmė %2$d h %3$d m.</string>
+  <string name="route_general_information">Visas atstumas %1$s,\n kelionės trukmė %2$d h %3$d m.</string>
   <string name="router_service_descr">Pasirinkti navigacijos paslaugą internete arba įrenginyje</string>
   <string name="router_service">Navigacijos paslauga</string>
   <string name="sd_dir_not_accessible">Duomenų išsaugojimo segtuvas SD kortelėje nepasiekiamas!</string>

@@ -1327,7 +1327,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_online_address">Търсене онлайн</string>
 	<string name="max_level_download_tile">Максимален мащаб при онлайн</string>
 	<string name="max_level_download_tile_descr">Изберете максимален мащаб за сваляне на онлайн картни фрагменти</string>
-	<string name="route_general_information">Обща дистанция: %1$s, време: %2$d ч. %3$d мин.</string>
+	<string name="route_general_information">Обща дистанция: %1$s,\n време: %2$d ч. %3$d мин.</string>
 	<string name="router_service_descr">Изберете онлайн или офлайн услуга за навигация</string>
 	<string name="router_service">Услуга за навигация</string>
 	<string name="sd_dir_not_accessible">Папката за запис на SD картата не е достъпна</string>

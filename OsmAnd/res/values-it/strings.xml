@@ -541,7 +541,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max zoom online</string>
   <string name="max_level_download_tile_descr">Scegli il livello di zoom massimo da scaricare per le mappe online a mattonelle</string>
-  <string name="route_general_information">Distanza totale = %1$s, durata del viaggio = %2$d h %3$d m.</string>
+  <string name="route_general_information">Distanza totale = %1$s,\n durata del viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
   <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>

@@ -633,7 +633,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online zoom</string>
   <string name="max_level_download_tile_descr">Kies maximum zoomniveau voor het downloaden van online kaartsegmenten</string>
-  <string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d m.</string>
+  <string name="route_general_information">Totale afstand %1$s,\n reistijd %2$d u %3$d m.</string>
   <string name="router_service_descr">Kies een online of offline routeberekening</string>
   <string name="router_service">Routeberekening</string>
   <string name="sd_dir_not_accessible">Opslagmap op SD kaart is niet toegankelijk</string>
