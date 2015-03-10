@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1941,4 +1941,9 @@
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其他</string>
     <string name="routing_settings_2">導航設定</string>
     <string name="general_settings_2">一般設定</string>
-	</resources>
+	<string name="waypoint_visit_after">隨後造訪</string>
+    <string name="waypoint_visit_before">先造訪</string>
+    <string name="shared_string_dismiss">解除</string>
+	<string name="shared_string_collapse">崩潰</string>
+	<string name="drawer">平面清單</string>
+    </resources>
