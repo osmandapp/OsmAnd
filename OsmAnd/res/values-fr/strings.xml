@@ -1982,4 +1982,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_photo">Photo</string>
 	<string name="shared_string_release">Publié</string>
 	<string name="drawer">Liste simple</string>
-    </resources>
+    <string name="waypoint_visit_after">Visiter après</string>
+    <string name="waypoint_visit_before">Visiter avant</string>
+    <string name="shared_string_collapse">Réduire</string>
+	</resources>
