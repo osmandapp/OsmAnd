@@ -36,6 +36,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		public ImageView arrow;
 		public TextView txt;
 		public LatLon loc;
+		public int arrowResId;
 		
 		public DashLocationView(ImageView arrow, TextView txt, LatLon loc) {
 			super();
@@ -102,27 +103,33 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		LatLon loc = (useCenter ? mw : myLoc);
 		float h = useCenter ? -mapRotation : head;
 		for (DashLocationView lv : distances) {
-			updateLocationView(useCenter, loc, h, lv.arrow, lv.txt, lv.loc.getLatitude(), lv.loc.getLongitude(), 
+			updateLocationView(useCenter, loc, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc.getLatitude(), lv.loc.getLongitude(), 
 					screenOrientation, getMyApplication(), getActivity());
 		}
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h, 
-			ImageView arrow, TextView txt, double toLat, double toLon, 
+			ImageView arrow, TextView txt, double toLat, double toLon,
 			int screenOrientation, OsmandApplication app, Context ctx) {
+		updateLocationView(useCenter, fromLoc, h, arrow, 0, txt, toLat, toLon, screenOrientation, app, ctx);
+	}
+	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h, 
+			ImageView arrow, int arrowResId, TextView txt, double toLat, double toLon, 
+ int screenOrientation, OsmandApplication app, Context ctx) {
 		float[] mes = new float[2];
 		if (fromLoc != null) {
-			Location.distanceBetween(toLat, toLon, fromLoc.getLatitude(),
-					fromLoc.getLongitude(), mes);
+			Location.distanceBetween(toLat, toLon, fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
 		}
 		if (arrow != null) {
 			if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
 				DirectionDrawable dd = new DirectionDrawable(ctx, 10, 10);
 				arrow.setImageDrawable(dd);
 			}
+			if (arrowResId == 0) {
+				arrowResId = R.drawable.ic_destination_arrow_white;
+			}
 			DirectionDrawable dd = (DirectionDrawable) arrow.getDrawable();
-			dd.setImage(R.drawable.ic_destination_arrow_white, useCenter ? R.color.color_distance
-					: R.color.color_myloc_distance);
+			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 			if (fromLoc == null || h == null) {
 				dd.setAngle(0);
 			} else {

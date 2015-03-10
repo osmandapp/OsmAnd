@@ -91,7 +91,9 @@ public class DashParkingFragment extends DashLocationFragment {
 		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null){
-			distances.add(new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position));
+			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);
+			dv.arrowResId = R.drawable.ic_parking_postion_arrow;
+			distances.add(dv);
 		}
 
 
