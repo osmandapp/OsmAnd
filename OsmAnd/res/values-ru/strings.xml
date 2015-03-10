@@ -1916,4 +1916,6 @@
     <string name="short_location_on_map">Широта %1$s
 \nДолгота %2$s</string>
     <string name="tips_and_tricks_descr">Часто задаваемые вопросы, последние изменения и другое</string>
-    </resources>
+    <string name="simulate_your_location">Моделировать ваше местоположение</string>
+    <string name="shared_string_collapse">Свернуть</string>
+	</resources>
