@@ -261,7 +261,8 @@ public class DashboardOnMap {
 	protected boolean onOptionsItemSelected(MenuItem item) {
 		setDashboardVisibility(false);
 		if(item.getItemId() == LIST_ID) {
-			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
+			// temporarily disable drawer
+//			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 			mapActivity.getMapActions().toggleDrawer();
 		} else if(item.getItemId() == DIRECTIONS_ID) {
 			navigationAction();
