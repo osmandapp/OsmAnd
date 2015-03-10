@@ -2039,11 +2039,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 		\n\nÈ disponibile una mappa contenente tutte le piste e percorsi da fondo sotto \'Download\'  \"World ski map\".
 		\n\nQuesta visualizzazione può essere ripristinata sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
-	<string name="plugin_touringview_descr">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione particolarmente molto dettagliata per i turisti e autisti professionali.
-		\n\nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento). Rappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.
-		\n\nNon è necessaria una mappa speciale, la visualizzazione è creata dalle mappe standard.
-		\n\nQuesta visualizzazione può essere ripristinata sia disattivandola nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
-	</string>
+	<string name="plugin_touringview_descr">"Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali.
+\n\nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento).
+\n\nRappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.
+\n\nInoltre fornisce opzioni speciali dedicate ai viaggi quali la visualizzazione degli itinerari per bicicletta o quelli per l\'alpinismo.\n\nNon è necessaria una mappa speciale, la visualizzazione è creata dalle mappe standard.
+\n\nQuesta visualizzazione può essere ripristinata sia disattivandola nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato. "</string>
 
 	<string name="plugin_touringview_name">Visualizzazione mappa turistica</string>
 	<string name="location_on_map">Localizzazione:\n Lat %1$s\n Lon %2$s</string>
