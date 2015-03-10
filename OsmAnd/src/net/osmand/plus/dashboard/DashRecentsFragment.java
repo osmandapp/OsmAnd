@@ -91,6 +91,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.search_history_list_item, null, false);
 			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, loc, getActivity(), getMyApplication());
+			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override

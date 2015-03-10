@@ -1,97 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
-			  android:layout_width="fill_parent"
-			  android:layout_height="wrap_content"
-			  android:background="?attr/expandable_list_item_background"
-			  android:minHeight="@dimen/list_item_height"
-			  android:descendantFocusability="blocksDescendants"
-			  android:orientation="horizontal"
-			  android:paddingLeft="@dimen/list_content_padding">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical" >
 
-	<ImageView
-		android:id="@+id/icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		android:layout_marginTop="@dimen/favorites_icon_top_margin"
-		android:src="@drawable/ic_sdcard"/>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:focusable="false"
+        android:visibility="gone" />
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_content_padding" >
 
-	<LinearLayout
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:layout_weight="1"
-		android:orientation="vertical">
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            android:layout_marginTop="@dimen/favorites_icon_top_margin"
+            android:src="@drawable/ic_sdcard" />
 
-		<TextView
-			android:id="@+id/name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/dashFavNameTextSize"
-			tools:text="@string/lorem_ipsum"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/dashFavNameTextSize"
+                tools:text="@string/lorem_ipsum" />
 
-			<ImageView
-				android:id="@+id/direction"
-				android:layout_width="@dimen/dashFavDirectionSize"
-				android:layout_height="@dimen/dashFavDirectionSize"
-				android:layout_gravity="center_vertical"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-			<TextView
-				android:id="@+id/distance"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="2dp"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/showAllButtonTextSize"
-				tools:text="100500 km"/>
+                <ImageView
+                    android:id="@+id/direction"
+                    android:layout_width="@dimen/dashFavDirectionSize"
+                    android:layout_height="@dimen/dashFavDirectionSize"
+                    android:layout_gravity="center_vertical" />
 
-			<ImageView
-				android:id="@+id/type_name_icon"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_small_group"
-				android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/showAllButtonTextSize"
+                    tools:text="100500 km" />
 
-			<TextView
-				android:id="@+id/type_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="2dp"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/showAllButtonTextSize"
-				tools:text="100500 km"/>
+                <ImageView
+                    android:id="@+id/type_name_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_small_group" />
 
-		</LinearLayout>
+                <TextView
+                    android:id="@+id/type_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/showAllButtonTextSize"
+                    tools:text="100500 km" />
+            </LinearLayout>
+        </LinearLayout>
 
-	</LinearLayout>
+        <ImageButton
+            android:id="@+id/options"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/options_button_background"
+            android:focusable="false"
+            android:src="?attr/list_settings_icon"
+            android:visibility="gone" />
 
-
-	<ImageButton
-		android:id="@+id/options"
-		android:layout_width="@dimen/list_item_height"
-		android:layout_height="@dimen/list_item_height"
-		android:layout_gravity="center_vertical"
-		android:visibility="gone"
-		android:focusable="false"
-		android:background="?attr/options_button_background"
-		android:src="?attr/list_settings_icon"/>
-	
-	<ImageButton
-			android:id="@+id/navigate_to"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
-			android:layout_gravity="center_vertical"
-			android:visibility="gone"
-			android:layout_marginLeft="@dimen/dashFavIconMargin"
-			android:background="?attr/dashboard_button"
-			android:src="@drawable/ic_action_gdirections_light"/>
+        <ImageButton
+            android:id="@+id/navigate_to"
+            android:layout_width="@dimen/dashListItemHeight"
+            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:background="?attr/dashboard_button"
+            android:src="@drawable/ic_action_gdirections_light"
+            android:visibility="gone" />
+    </LinearLayout>
 
 </LinearLayout>
