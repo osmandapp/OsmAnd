@@ -112,7 +112,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
 				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
-			createMenuItem(menu, DELETE_FILTER, R.string.edit_filter_delete_menu_item, 
+			createMenuItem(menu, DELETE_FILTER, R.string.shared_string_delete, 
 					R.drawable.ic_action_gdiscard_dark, R.drawable.ic_action_gdiscard_dark,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
@@ -163,8 +163,8 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		builder.setView(ll);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
@@ -186,8 +186,8 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	private void removePoiFilter() {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(R.string.edit_filter_delete_dialog_title);
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (helper.removePoiFilter(filter)) {
@@ -249,7 +249,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		scroll.addView(listView);
 		builder.setView(scroll);
-		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.close), new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -269,12 +269,12 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
 				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
-				la.notifyDataSetInvalidated();
+				la.notifyDataSetChanged();
 				lv.setSelectionFromTop(index, top);
 			}
 		});
 	
-		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.default_buttons_selectall), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				filter.selectSubTypesToAccept(poiCategory, null);

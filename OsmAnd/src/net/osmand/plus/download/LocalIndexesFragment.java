@@ -201,12 +201,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if(info.isBackupedData()){
 			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
 		}
-		adapter.item(R.string.local_index_mi_rename).listen(listener).position(3).reg();
-		adapter.item(R.string.local_index_mi_delete).listen(listener).position(4).reg();
+		adapter.item(R.string.shared_string_rename).listen(listener).position(3).reg();
+		adapter.item(R.string.shared_string_delete).listen(listener).position(4).reg();
 	}
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
-		if (resId == R.string.local_index_mi_rename) {
+		if (resId == R.string.shared_string_rename) {
 			renameFile(getActivity(), new File(info.getPathToData()), new Runnable() {
 				
 				@Override
@@ -216,15 +216,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			});
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
-		} else if (resId == R.string.local_index_mi_delete) {
+		} else if (resId == R.string.shared_string_delete) {
 			Builder confirm = new Builder(getActivity());
-			confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
 				}
 			});
-			confirm.setNegativeButton(R.string.default_buttons_no, null);
+			confirm.setNegativeButton(R.string.shared_string_no, null);
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
@@ -241,7 +241,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final EditText editText = new EditText(a);
 			editText.setText(f.getName().subSequence(0, xt));
 			b.setView(editText);
-			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -264,7 +264,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -443,11 +443,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		LocalIndexInfo child = listAdapter.getChild(groupPosition, childPosition);
 		if (!selectionMode){
+			openPopUpMenu(v, child);
 			return true;
 		}
-		LocalIndexInfo item = listAdapter.getChild(groupPosition, childPosition);
-		selectedItems.add(item);
+		selectedItems.add(child);
 		listAdapter.notifyDataSetInvalidated();
 		return true;
 	}
@@ -505,7 +506,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 				.icon(R.drawable.ic_action_refresh_dark)
 				.listen(listener).position(1).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_delete)
+		optionsMenuAdapter.item(R.string.shared_string_delete)
 				.icon(R.drawable.ic_action_delete_dark)
 				.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
@@ -520,7 +521,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			MenuItem item;
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
-					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
+					split = menu.addSubMenu(0, 1, j + 1, R.string.shared_string_more_actions);
 					split.setIcon(R.drawable.ic_overflow_menu_white);
 					split.getItem();
 					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
@@ -559,7 +560,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void doAction(int actionResId){
 		if(actionResId == R.string.local_index_mi_backup){
 			operationTask = new LocalIndexOperationTask(BACKUP_OPERATION);
-		} else if(actionResId == R.string.local_index_mi_delete){
+		} else if(actionResId == R.string.shared_string_delete){
 			operationTask = new LocalIndexOperationTask(DELETE_OPERATION);
 		} else if(actionResId == R.string.local_index_mi_restore){
 			operationTask = new LocalIndexOperationTask(RESTORE_OPERATION);
@@ -629,7 +630,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				Builder builder = new AlertDialog.Builder(getDownloadActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}
@@ -672,7 +673,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
-		} else if (itemId == R.string.local_index_mi_delete) {
+		} else if (itemId == R.string.shared_string_delete) {
 			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,
 					new DialogInterface.OnClickListener() {
 
@@ -751,7 +752,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+						new ArrayList<String>()
+						);
 			}
 			
 		};
@@ -998,46 +1001,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return v;
 		}
 
-		private void openPopUpMenu(View v, final LocalIndexInfo info) {
-			boolean light = getMyApplication().getSettings().isLightContent();
-			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-			final boolean restore = info.isBackupedData();
-			MenuItem item;
-			if (info.getType() == LocalIndexType.MAP_DATA) {
-				item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
-						.setIcon(backup);
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
-						return true;
-					}
-				});
-			}
-
-			item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
-					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(R.string.local_index_mi_rename, info);
-					return true;
-				}
-			});
-
-			item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
-					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(R.string.local_index_mi_delete, info);
-					return true;
-				}
-			});
-			optionsMenu.show();
-		}
-
+		
 		private String getNameToDisplay(LocalIndexInfo child) {
 			String mapDescr = getMapDescription(child.getFileName());
 			String mapName = FileNameTranslationHelper.getFileName(ctx,
@@ -1146,6 +1110,47 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return "";
 		}
 	}
+	
+	private void openPopUpMenu(View v, final LocalIndexInfo info) {
+		boolean light = getMyApplication().getSettings().isLightContent();
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+		final boolean restore = info.isBackupedData();
+		MenuItem item;
+		if (info.getType() == LocalIndexType.MAP_DATA) {
+			item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
+					.setIcon(backup);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
+					return true;
+				}
+			});
+		}
+
+		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
+				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				performBasicOperation(R.string.shared_string_rename, info);
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
+				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				performBasicOperation(R.string.shared_string_delete, info);
+				return true;
+			}
+		});
+		optionsMenu.show();
+	}
+
 
 	private DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
 }

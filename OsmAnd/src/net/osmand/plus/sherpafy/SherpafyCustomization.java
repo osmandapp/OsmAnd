@@ -354,7 +354,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				bld.setMessage(R.string.stage_is_completed);
 			}
 			bld.setTitle(getString(R.string.stage_is_completed_short))
-					.setPositiveButton(R.string.default_buttons_ok, null);
+					.setPositiveButton(R.string.shared_string_ok, null);
 			if (args != null && args.getBoolean(START_OVER)) {
 				String id = args.getString(TOUR_PARAM);
 				TourInformation tours = null;
@@ -475,14 +475,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareLayerContextMenu(MapActivity activity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label/*, R.string.layer_favorites*/);
+		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label/*, R.string.shared_string_favorites*/);
 	}
 	
 	@Override
 	public void prepareLocationMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
 		filter(adapter, R.string.context_menu_item_directions_to,
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
-				R.string.context_menu_item_share_location/*, R.string.context_menu_item_add_favorite*/);
+				R.string.context_menu_item_share_location/*, R.string.shared_string_add_to_favorites*/);
 		MapActivityLayers layers = mapActivity.getMapLayers();
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof StageFavorite) {
 			final StageFavorite sf = ((StageFavorite)layers.getContextMenuLayer().getFirstSelectedObject());
@@ -522,7 +522,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			ssf.onAttach(getActivity());
             AlertDialog dlg = new AlertDialog.Builder(getActivity())
             		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-                    .setPositiveButton(R.string.default_buttons_ok, null)
+                    .setPositiveButton(R.string.shared_string_ok, null)
                     .create();
             return dlg;
         }

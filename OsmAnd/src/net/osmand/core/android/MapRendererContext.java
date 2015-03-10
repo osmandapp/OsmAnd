@@ -71,10 +71,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	 */
 	public void setMapRendererView(MapRendererView mapRendererView) {
 		boolean update = (this.mapRendererView != mapRendererView);
+		this.mapRendererView = mapRendererView;
 		if (!update) {
 			return;
 		}
-		this.mapRendererView = mapRendererView;
 		if (mapRendererView != null) {
 			applyCurrentContextToView();
 		}
@@ -341,4 +341,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             Log.w(TAG, "Failed to add style from byte array");
         }
     }
+
+	
 }

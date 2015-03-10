@@ -1,15 +1,26 @@
 package net.osmand.plus.audionotes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,19 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import android.support.v4.app.ListFragment;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
@@ -80,6 +79,7 @@ public class NotesFragment extends ListFragment {
 	}
 
 	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
+
 		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
 			super(getActivity(), R.layout.note, recordingList);
 		}
@@ -93,7 +93,7 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity());
+			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			icon.setColorFilter(getResources().getColor(R.color.color_distance), Mode.MULTIPLY);
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
@@ -151,7 +151,7 @@ public class NotesFragment extends ListFragment {
 			showOnMap = showOnMap.mutate();
 			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
 		}
-		item = optionsMenu.getMenu().add(R.string.search_shown_on_map)
+		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map)
 				.setIcon(showOnMap);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -161,7 +161,7 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.share_fav)
+		item = optionsMenu.getMenu().add(R.string.shared_string_share)
 				.setIcon(light ? R.drawable.ic_action_gshare_light : R.drawable.ic_action_gshare_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -185,7 +185,7 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
+		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
 				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -202,14 +202,14 @@ public class NotesFragment extends ListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setMessage(R.string.recording_delete_confirm);
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						plugin.deleteRecording(recording);
 						listAdapter.remove(recording);
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 				return true;
 			}
@@ -219,7 +219,7 @@ public class NotesFragment extends ListFragment {
 
 	private void editNote(final Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.rename_recording);
+		builder.setTitle(R.string.shared_string_rename);
 		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog,
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
@@ -227,14 +227,13 @@ public class NotesFragment extends ListFragment {
 		editText.setText(recording.getName(getActivity()));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(!recording.setName(editText.getText().toString())) {
 					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
 				}
-				recording.setDescription();
 				listAdapter.notifyDataSetInvalidated();
 			}
 		});

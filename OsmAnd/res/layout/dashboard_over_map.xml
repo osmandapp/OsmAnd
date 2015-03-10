@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-	android:id="@+id/dashboard"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:background="#70000000"
-	android:visibility="gone">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dashboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#70000000"
+    android:orientation="vertical"
+    android:visibility="gone" >
 
-	<RelativeLayout android:orientation="vertical"
-		android:layout_width="wrap_content"
-		android:layout_gravity="end"
-		android:layout_height="match_parent">
+    <include
+        android:id="@+id/init_progress"
+        layout="@layout/application_loading"
+        android:visibility="gone" />
 
-		<include android:layout_height="@dimen/dashMapHeight"
-				 android:layout_width="@dimen/dashboard_map_width"
-				 android:id="@+id/init_progress"
-				 layout="@layout/application_loading"/>
+    <net.osmand.plus.dashboard.NotifyingScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="true" >
 
-		<net.osmand.plus.dashboard.NotifyingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-													   android:layout_width="@dimen/dashboard_map_width"
-													   android:layout_height="match_parent"
-													   android:id="@+id/main_scroll"
-													   android:fadeScrollbars="true">
+        <LinearLayout
+            android:id="@+id/animateContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-			<LinearLayout
-				android:id="@+id/content"
-				android:paddingTop="@dimen/dashboard_map_top_padding"
-				android:paddingBottom="@dimen/dashboard_map_bottom_padding"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"/>
+            <include
+                android:id="@+id/map_part_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dashboard_map_top_padding"
+                layout="@layout/map_view_on_dashboard" />
 
-		</net.osmand.plus.dashboard.NotifyingScrollView>
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-	</RelativeLayout>
+            <net.osmand.plus.activities.search.toolbar.SplitToolbar
+                android:id="@+id/bottomControls"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/bottomToolBarColor" />
+        </LinearLayout>
+    </net.osmand.plus.dashboard.NotifyingScrollView>
 
 </FrameLayout>

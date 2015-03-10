@@ -1,8 +1,11 @@
 package net.osmand.plus.sherpafy;
 
 import android.support.v4.app.Fragment;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -27,19 +30,23 @@ public class SherpafyLoadingFragment extends Fragment {
 	@Override
 	public void onViewCreated(final View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if(app.isApplicationInitializing()) {
-		app.checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
-				(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
+		((OsmandApplication) getActivity().getApplication()).checkApplicationIsBeingInitialized(getActivity(),
+				new AppInitializeListener() {
+
 					@Override
-					public void run() {
-						((TextView) view.findViewById(R.id.ProgressMessage)).setVisibility(View.GONE);
-						view.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-						((TourViewActivity)getActivity()).showSelectedItem();
+					public void onProgress(AppInitializer init, InitEvents event) {
+						String tn = init.getCurrentInitTaskName();
+						if (tn != null) {
+							((TextView) view.findViewById(R.id.ProgressMessage)).setText(tn);
+						}
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+						((TourViewActivity) getActivity()).showSelectedItem();
 					}
 				});
-		} else {
-			((TourViewActivity)getActivity()).showSelectedItem();
-		}
+
 	}
 
 }

@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:id="@+id/loading"
-			  android:background="?attr/card_bg"
 			  android:layout_width="fill_parent"
-			  android:layout_height="@dimen/dashMapHeight"
-			  android:gravity="center_vertical|center_horizontal"
+			  android:layout_height="wrap_content"
+			  android:layout_gravity="top|end"
+			  android:gravity="end"
+			  android:paddingTop="5dp"
 			  android:orientation="horizontal">
-
 
 		<ProgressBar
 			android:id="@+id/ProgressBar"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"/>
+			android:layout_height="30dp"/>
 
 		<TextView
 			android:id="@+id/ProgressMessage"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:maxLines="3"
-			android:textColor="@color/icon_color_light"
+			android:maxLines="1"
+			android:visibility="gone"
+			android:layout_gravity="center_vertical"
 			android:text="@string/loading_data"
+			android:layout_marginRight="5dp"
 			android:textSize="@dimen/dashProgressTextSize"/>
 
 </LinearLayout>

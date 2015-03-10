@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageButton
+        android:id="@+id/map_layers_button"
+        android:layout_width="@dimen/map_button_size"
+        android:layout_height="@dimen/map_button_size"
+        android:layout_gravity="top|left"
+        android:layout_marginLeft="@dimen/map_button_margin"
+        android:layout_marginTop="@dimen/map_button_margin"
+        android:background="@drawable/roundedbutton"
+        android:src="@drawable/ic_action_layers_light" />
+
+    <Button
+        android:id="@+id/map_download_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/shared_string_download" />
+
+</FrameLayout>

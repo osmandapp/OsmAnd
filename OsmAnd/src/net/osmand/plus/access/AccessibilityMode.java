@@ -5,8 +5,8 @@ import android.content.Context;
 
 public enum AccessibilityMode {
 
-    ON(R.string.accessibility_on),
-    OFF(R.string.accessibility_off),
+    ON(R.string.shared_string_on),
+    OFF(R.string.shared_string_off),
     DEFAULT(R.string.accessibility_default);
 
     private final int key;

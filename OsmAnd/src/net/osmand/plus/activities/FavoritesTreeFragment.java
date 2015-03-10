@@ -1,14 +1,5 @@
 package net.osmand.plus.activities;
 
-import android.content.pm.ActivityInfo;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.SearchView;
-import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
@@ -36,6 +27,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.DownloadIndexAdapter;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -45,11 +38,28 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -57,6 +67,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -74,7 +85,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public static final int SELECT_DESTINATIONS_ID = 5;
 	public static final int SELECT_DESTINATIONS_ACTION_MODE_ID = 6;
 
-	private FavouritesAdapter favouritesAdapter;
+	private FavouritesAdapter favouritesAdapter = new FavouritesAdapter();;
 	private FavouritesDbHelper helper;
 
 	private boolean selectionMode = false;
@@ -89,7 +100,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		super.onAttach(activity);
 
 		helper = getMyApplication().getFavorites();
-		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.synchronizeGroups();
 		setAdapter(favouritesAdapter);
 
@@ -128,6 +138,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}.execute();
 
 	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.favorites_tree, container, false);
+		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		favouritesAdapter.synchronizeGroups();
+		listView.setAdapter(favouritesAdapter);
+		setListView(listView);
+		setHasOptionsMenu(true);
+		return view;
+	}
 
 	@Override
 	public void onResume() {
@@ -144,7 +165,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	
 	private void updateSelectionMode(ActionMode m) {
 		if(favoritesSelected.size() > 0) {
-			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.selected));
+			m.setTitle(favoritesSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
 		} else{
 			m.setTitle("");
 		}
@@ -221,8 +242,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			list[i] =gs.get(i).name;
 		}
 		cat.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_textview, list));
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()
@@ -242,8 +263,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		final Resources resources = this.getResources();
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean deleted = helper.deleteFavourite(point);
@@ -350,10 +371,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-		if (portrait) {
+		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
@@ -362,13 +380,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
-			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_dark,
+			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_dark,
+			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-//			createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
+//			createMenuItem(menu, EXPORT_ID, R.string.shared_string_export, R.drawable.ic_action_gsave_light,
 //					R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			
 		}
@@ -446,7 +464,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
-				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
+				createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 						R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
@@ -497,8 +515,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		checkBox.setChecked(group.visible);
 		bld.setTitle(R.string.edit_group);
 		bld.setView(favEdit);
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -519,7 +537,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			Builder b = new AlertDialog.Builder(getActivity());
 			b.setMessage(getString(R.string.favorite_delete_multiple, favoritesSelected.size(), groupsToDelete.size()));
-			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (actionMode != null) {
@@ -528,7 +546,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					deleteFavorites();
 				}
 			});
-			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.setNegativeButton(R.string.shared_string_cancel, null);
 			b.show();
 		}
 	}
@@ -601,13 +619,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			if (tosave.exists()) {
 				Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						exportTask.execute();
 					}
 				});
-				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.setMessage(R.string.fav_export_confirmation);
 				bld.show();
 			} else {
@@ -711,15 +729,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			boolean same = (selectionMode && checkBox) || (!selectionMode && !checkBox);
 			if (row == null || !same) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				row = inflater.inflate(
-						selectionMode ? R.layout.expandable_list_item_category :
-							R.layout.expandable_list_item_category_btn, parent, false);
+				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
 				fixBackgroundRepeat(row);
 			}
 			adjustIndicator(groupPosition, isExpanded, row, getMyApplication().getSettings().isLightContent());
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final FavoriteGroup model = getGroup(groupPosition);
-			label.setText(model.name.length() == 0? getString(R.string.favourites_activity) : model.name);
+			label.setText(model.name.length() == 0? getString(R.string.shared_string_favorites) : model.name);
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
@@ -743,7 +759,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					}
 				});
 			} else {
-				final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
+				final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+				ch.setVisibility(View.GONE);
+			}
+			final View ch = row.findViewById(R.id.options);
+			if(!selectionMode) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -752,6 +772,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					}
 
 				});
+			} else {
+				ch.setVisibility(View.GONE);
 			}
 			return row;
 		}

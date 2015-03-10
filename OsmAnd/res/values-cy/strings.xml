@@ -1,11 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="avoid_in_routing_title">Osgoi…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="avoid_in_routing_title">Osgoi…</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau…</string>
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
 <string name="map_widget_fluorescent">Lliwiau fflwroleuol</string>
 <string name="map_widget_show_ruler">Mesurydd</string>
-<string name="map_widget_appearance">Gwedd:</string>
+
 <string name="map_widget_view_direction">Golwg cyfeiriad</string>
 <string name="map_widget_transparent">Golwg tryloyw</string>
 
@@ -21,10 +20,10 @@
 <string name="map_widget_back_to_loc">Lle\'r ydw i</string>
 <string name="map_widget_lock_screen">Cloi\'e sgrin</string>
 <string name="map_widget_compass">Cwmpawd</string>
-<string name="map_widget_top_stack">Bar statws:</string>
+
 <string name="map_widget_reset">Ailosod i\'r rhagosodiad</string>
-<string name="map_widget_right_stack">Ochr dde:</string>
-<string name="map_widget_left_stack">Ochr chwith:</string>
+
+
 <string name="map_widget_parking">Parcio</string>
 <string name="map_widget_monitoring">Tracio</string>
 <string name="map_widget_speed">Cyflymder</string>
@@ -72,7 +71,7 @@
 <string name="avoid_unpaved">Osgoi ffyrdd heb wyneb caled</string>
 <string name="avoid_ferries">Osgoi fferïau</string>
 <string name="native_app_allocated_memory">Cyfanswm cof cynhenid</string>
-<string name="update_downlod_list">Ail lwytho rhestr</string>
+
 <string name="starting_point_too_far">Man cychwyn yn rhy bell o\'r ffordd agosaf</string>
 <string name="shared_location">Lleoliad rhanedig</string>
 <string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
@@ -127,7 +126,7 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="gpxup_trackable">Trackable</string>
 <string name="gpxup_private">Preifat</string>
 <string name="asap">cyn gynted â phosibl</string>
-<string name="save_route_as_gpx">Cadw llwybr fel GPX ffeil</string>
+
 <string name="route_roundabout">Cylchfan: cymryd %1$d allanfa ac yn mynd</string>
 <string name="route_kl">Cadwch i\'r chwith ac ewch</string>
 <string name="route_kr">Cadwch i\'r dde ac ewch</string>
@@ -146,11 +145,11 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="navpoint_search_desc">Cyfesurynnau</string>
 <string name="transport_search_desc">Cludiant chwilio</string>
 <string name="favourites_search_desc">Ffefrynnau chwilio</string>
-<string name="history_search_desc">Hanes Chwilio</string>
+
 <string name="offline_navigation_not_available">OsmAnd llywio all-lein nad yw ar gael dros dro.</string>
 <string name="left_side_navigation">Chwith-law gyrru</string>
 <string name="left_side_navigation_descr">Dewiswch ar gyfer gwledydd gyda chwith traffig</string>
-<string name="download_link_and_local_description">Cliciwch yma i lawrlwytho neu ddiweddaru data all-lein. \nCliciwch unrhyw eitem presennol i weld mwy o fanylion, bwyso a dal i deactivate neu ddileu. Data cyfredol ar y ddyfais (%1$s am ddim):</string>
+
 <string name="unknown_from_location">Nid yw man cychwyn hwn wedi\'i benderfynu eto</string>
 <string name="unknown_location">Sefyllfa nad yw\'n hysbys eto</string>
 <string name="modify_transparency">Addasu tryloywder (0 - tryloyw, 255 - afloyw)</string>
@@ -166,15 +165,15 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_online_data_descr">Defnyddio mapiau ar-lein (teils lawrlwytho a cache ar SD cerdyn)</string>
 <string name="online_map_settings">Mapiau Ar-lein</string>
 <string name="online_map_settings_descr">Ffurfweddu ffynonellau teils ar-lein neu cached map</string>
-<string name="map_settings">Gosodiadau Map</string>
-<string name="map_settings_descr">Ffurfweddu yr arddangosfa map</string>
+
+
 <string name="osmand_accessibility_description">Dangos gosodiadau ar gyfer nodweddion hygyrchedd arbennig.</string>
-<string name="extra_settings">lleoliadau Uwch</string>
-<string name="osmand_monitoring_description">Dangos gosodiadau hwyluso i gofnodi eich teithiau i ffeiliau GPX neu i fyw trac gan ddefnyddio gwasanaeth ar y we.</string>
-<string name="osmand_extra_settings_description">Dangos gosodiadau ar gyfer ffurfweddiad map uwch (fel manylion map cynnydd) a rhywfaint o ddyfais-benodol.</string>
+
+
+
 <string name="osmand_development_plugin_description">Dangos gosodiadau ar gyfer nodweddion datblygu a debugging fel mordwyo hanimeiddio neu arddangos perfformiad rendro.</string>
 <string name="plugins_screen">Rheolwr ategyn</string>
-<string name="select_plugin_to_activate">Cyffwrdd a Plugin at activate neu deactivate iddo. (Efallai y ailddechrau OsmAnd bydd angen.)</string>
+
 <string name="prefs_plugins_descr">Plugins galluogi lleoliadau modd arbenigol ac yn darparu swyddogaeth ychwanegol fel mapiau olrhain teils,, gweithredu dull cwsg, lleoliadau hygyrchedd, ac eraill.</string>
 <string name="prefs_plugins">Rheolwr ategyn</string>
 <string name="tip_recent_changes_0_8_0_t">Newidiadau mewn 0.8.0:
@@ -203,13 +202,13 @@ Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, 
 <string name="show_ruler_level">Dangos pren mesur</string>
 <string name="info_button">Gwybodaeth</string>
 <string name="back_to_location">Gefn i leoliad</string>
-<string name="help">Cymorth</string>
+<string name="shared_string_help">Cymorth</string>
 <string name="accessibility_extensions_descr">Estyniadau Hygyrchedd ar gyfer fersiynau Android hen</string>
 <string name="accessibility_extensions">Estyniadau Hygyrchedd</string>
 <string name="accessibility_mode">Modd Hygyrchedd</string>
 <string name="accessibility_mode_descr">Troi ar y nodweddion hygyrchedd</string>
-<string name="accessibility_on">Ar</string>
-<string name="accessibility_off">Oddi</string>
+<string name="shared_string_on">Ar</string>
+<string name="shared_string_off">Oddi</string>
 <string name="accessibility_default">Yn ôl y lleoliad system fyd-eang</string>
 <string name="backToMenu">Yn ôl At Ddewislen</string>
 <string name="zoomOut">Chwyddo allan</string>

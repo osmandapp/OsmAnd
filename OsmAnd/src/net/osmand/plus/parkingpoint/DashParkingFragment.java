@@ -30,6 +30,7 @@ import java.util.Calendar;
  * 26.01.2015.
  */
 public class DashParkingFragment extends DashLocationFragment {
+	public static final String TAG = "DASH_PARKING_FRAGMENT";
 	ParkingPositionPlugin plugin;
 
 	@Override
@@ -55,24 +56,17 @@ public class DashParkingFragment extends DashLocationFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onOpenDash() {
 		plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-
-
-
-		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-			loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		} else {
-			loc = new LatLon(0f, 0f);
-		}
-
 		updateParkingPosition();
 	}
 
 	private void updateParkingPosition() {
 		View mainView = getView();
-		if (plugin == null || plugin.getParkingPosition() == null){
+		if (mainView == null) {
+			return;
+		}
+		if (plugin == null || plugin.getParkingPosition() == null) {
 			mainView.setVisibility(View.GONE);
 			return;
 		} else {
@@ -81,11 +75,7 @@ public class DashParkingFragment extends DashLocationFragment {
 
 		LatLon position = plugin.getParkingPosition();
 
-		int dist = (int) (MapUtils.getDistance(position.getLatitude(), position.getLongitude(),
-				loc.getLatitude(), loc.getLongitude()));
-		String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication());
-		((TextView) mainView.findViewById(R.id.distance)).setText(distance);
-		//TODO add parking time
+
 		boolean limited =  plugin.getParkingType();
 		String parking_name = limited ?
 				getString(R.string.parking_place_limited) : getString(R.string.parking_place);
@@ -101,42 +91,23 @@ public class DashParkingFragment extends DashLocationFragment {
 		}
 		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
-		if (loc != null){
-			updateArrow(getActivity(), loc, position, direction,
-					(int)getResources().getDimension(R.dimen.dashboard_parking_icon_size), R.drawable.ic_parking_postion_arrow, heading);
-		}
-	}
+//		if (loc != null){
+//			updateArrow(getActivity(), loc, position, direction,
+//					(int)getResources().getDimension(R.dimen.dashboard_parking_icon_size), R.drawable.ic_parking_postion_arrow, heading);
+//		}
 
-	@Override
-	public boolean updateCompassValue(float value) {
-		if (plugin == null){
-			return true;
-		}
-		if (super.updateCompassValue(value)){
-			updateParkingPosition();
-		}
-		return true;
-	}
 
-	@Override
-	public void updateLocation(Location location) {
-		super.updateLocation(location);
 
-		if (plugin == null){
-			return;
-		}
-		updateParkingPosition();
-	}
 	}
 
 	String getFormattedTime(long timeInMillis) {
-		if (timeInMillis < 0){
+		if (timeInMillis < 0) {
 			timeInMillis *= -1;
 		}
 		StringBuilder timeStringBuilder = new StringBuilder();
-		int hours = (int)timeInMillis / (1000*60*60);
-		int miutes = (int)timeInMillis / (1000*60*60*60);
-		if (hours > 0){
+		int hours = (int) timeInMillis / (1000 * 60 * 60);
+		int miutes = (int) timeInMillis / (1000 * 60 * 60 * 60);
+		if (hours > 0) {
 			timeStringBuilder.append(hours);
 			timeStringBuilder.append(" ");
 			timeStringBuilder.append(getResources().getString(R.string.osmand_parking_hour));
@@ -146,4 +117,5 @@ public class DashParkingFragment extends DashLocationFragment {
 		timeStringBuilder.append(" ");
 		timeStringBuilder.append(getResources().getString(R.string.osmand_parking_minute));
 		return timeStringBuilder.toString();
+	}
 }

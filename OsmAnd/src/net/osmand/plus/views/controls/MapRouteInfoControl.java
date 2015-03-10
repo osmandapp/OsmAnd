@@ -384,8 +384,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private Spinner setupFromSpinner( View view) {
 		ArrayList<String> fromActions = new ArrayList<String>();
 		fromActions.add(mapActivity.getString(R.string.route_descr_current_location));
-		fromActions.add(mapActivity.getString(R.string.route_descr_favorite));
-		fromActions.add(mapActivity.getString(R.string.route_descr_select_on_map));
+		fromActions.add(mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis));
+		fromActions.add(mapActivity.getString(R.string.shared_string_select_on_map));
 		
 		TargetPoint start = getTargets().getPointToStart();
 		if (start != null) {
@@ -423,8 +423,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			toSpinner.setPromptId(R.string.route_descr_select_destination);
 			toActions.add(mapActivity.getString(R.string.route_descr_select_destination));			
 		}
-		toActions.add(mapActivity.getString(R.string.route_descr_favorite));
-		toActions.add(mapActivity.getString(R.string.route_descr_select_on_map));
+		toActions.add(mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis));
+		toActions.add(mapActivity.getString(R.string.shared_string_select_on_map));
 		
 		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
 				android.R.layout.simple_spinner_item, 

@@ -25,7 +25,8 @@ import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
-	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final PointDescription name) {
+	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, 
+			final PointDescription name) {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
@@ -96,7 +97,7 @@ public class DirectionsDialogs {
 			}
 		});
 		item = optionsMenu.getMenu().add(
-				R.string.show_poi_on_map).setIcon(light ?
+				R.string.shared_string_show_on_map).setIcon(light ?
 				R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -109,7 +110,7 @@ public class DirectionsDialogs {
 		});
 		if (favorite) {
 			item = optionsMenu.getMenu().add(
-					R.string.add_to_favourite).setIcon(light ?
+					R.string.shared_string_add_to_favorites).setIcon(light ?
 					R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

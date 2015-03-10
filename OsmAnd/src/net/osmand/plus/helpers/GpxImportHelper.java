@@ -340,8 +340,8 @@ public class GpxImportHelper {
 
 		new AlertDialog.Builder(mapActivity)
 				.setMessage(R.string.import_file_favourites)
-				.setPositiveButton(R.string.import_fav, importFavouritesListener)
-				.setNegativeButton(R.string.import_save, importFavouritesListener)
+				.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
+				.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
 				.show();
 	}
 

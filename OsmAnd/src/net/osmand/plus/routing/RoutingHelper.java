@@ -63,7 +63,7 @@ public class RoutingHelper {
 	private ApplicationMode mode;
 	private OsmandSettings settings;
 	
-	private RouteProvider provider = new RouteProvider();
+	private RouteProvider provider;
 	private VoiceRouter voiceRouter;
 
 	private boolean isDeviatedFromRoute = false;
@@ -82,10 +82,11 @@ public class RoutingHelper {
 		return isDeviatedFromRoute;
 	}
 
-	public RoutingHelper(OsmandApplication context, CommandPlayer player){
+	public RoutingHelper(OsmandApplication context){
 		this.app = context;
 		settings = context.getSettings();
-		voiceRouter = new VoiceRouter(this, settings, player);
+		voiceRouter = new VoiceRouter(this, settings);
+		provider = new RouteProvider();
 	}
 	
 

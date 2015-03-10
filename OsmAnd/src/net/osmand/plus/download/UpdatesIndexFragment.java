@@ -167,7 +167,7 @@ public class UpdatesIndexFragment extends ListFragment {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
-			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
+			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.shared_string_refresh);
 			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
@@ -332,7 +332,7 @@ public class UpdatesIndexFragment extends ListFragment {
 	private String getTypeName(int resId){
 		Activity activity = getActivity();
 		if (resId == R.string.download_regular_maps){
-			return activity.getString(R.string.map_view);
+			return activity.getString(R.string.shared_string_map);
 		} else if (resId == R.string.voices){
 			return activity.getString(R.string.ttsvoice);
 		} else if (resId == R.string.download_roads_only_maps){

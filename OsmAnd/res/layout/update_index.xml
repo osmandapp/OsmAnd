@@ -9,12 +9,14 @@
 		android:id="@+id/header_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:minHeight="@dimen/list_header_height"
 		android:orientation="horizontal"
 		android:paddingLeft="@dimen/list_header_padding">
 
 		<CheckBox
 			android:id="@+id/select_all"
 			android:focusable="false"
+			android:layout_gravity="center_vertical"
 			android:layout_marginRight="@dimen/list_header_text_left_margin"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"/>
@@ -23,13 +25,12 @@
 			android:id="@+id/header"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/list_header_padding"
+			android:layout_gravity="center_vertical"
 			android:text="@string/download_tab_updates"/>
 	</LinearLayout>
 
 	<ListView
 		android:id="@android:id/list"
-		style="@style/OsmandListView"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"
 		android:layout_marginLeft="0dp"

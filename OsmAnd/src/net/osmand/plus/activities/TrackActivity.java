@@ -11,9 +11,10 @@ import java.util.List;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackRoutePointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
@@ -25,7 +26,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -35,26 +35,34 @@ import android.view.View;
 public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
+	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private File file = null;
 	private GPXFile result;
 	ViewPager mViewPager;
+	private long modifiedTime = -1;
+	private List<GpxDisplayGroup> displayGroups;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
 		Intent intent = getIntent();
-		if (intent == null || !intent.hasExtra(TRACK_FILE_NAME)) {
+		if (intent == null || (!intent.hasExtra(TRACK_FILE_NAME) &&
+				!intent.hasExtra(CURRENT_RECORDING))) {
 			Log.e("TrackActivity", "Required extra '" + TRACK_FILE_NAME + "' is missing");
 			finish();
 			return;
 		}
-
-		file = new File(intent.getStringExtra(TRACK_FILE_NAME));
-		String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
-		getSupportActionBar().setTitle(fn);
+		file = null;
+		if (intent.hasExtra(TRACK_FILE_NAME)) {
+			file = new File(intent.getStringExtra(TRACK_FILE_NAME));
+			String fn = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+			getSupportActionBar().setTitle(fn);
+		} else {
+			getSupportActionBar().setTitle(getString(R.string.shared_string_currently_recording_track));
+		}
 		getSupportActionBar().setElevation(0);
 		setContentView(R.layout.tab_content);
 
@@ -73,15 +81,18 @@ public class TrackActivity extends TabActivity {
 			};
 			@Override
 			protected GPXFile doInBackground(Void... params) {
+				if(file == null) {
+					return getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
 				return GPXUtilities.loadGPXFile(TrackActivity.this, file);
 			}
 			protected void onPostExecute(GPXFile result) {
 				setSupportProgressBarIndeterminateVisibility(false);
 
-				setResult(result);
+				setGpx(result);
 				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
-				if (isHavingTrackPoints()){
+				if (isHavingWayPoints()){
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 							getTabIndicator(R.string.track_points, TrackPointFragment.class));
 				}
@@ -95,12 +106,26 @@ public class TrackActivity extends TabActivity {
 
 	}
 
-	protected void setResult(GPXFile result) {
+	protected void setGpx(GPXFile result) {
 		this.result = result;
+		if(file == null) {
+			result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+		}
 	}
 
-	public GPXFile getResult() {
-		return result;
+	public List<GpxSelectionHelper.GpxDisplayGroup> getResult() {
+		if (result.modifiedTime != modifiedTime) {
+			modifiedTime = result.modifiedTime;
+			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+			displayGroups = selectedGpxHelper.collectDisplayGroups(result);
+			if (file != null) {
+				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(result.path);
+				if (sf != null && file != null && sf.getDisplayGroups() != null) {
+					displayGroups = sf.getDisplayGroups();
+				}
+			}
+		}
+		return displayGroups;
 	}
 
 	@Override
@@ -122,6 +147,8 @@ public class TrackActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 	}
+	
+	
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
@@ -143,38 +170,16 @@ public class TrackActivity extends TabActivity {
 		return false;
 	}
 
-	public List<GpxSelectionHelper.GpxDisplayGroup> getContent() {
-		GpxSelectionHelper selectedGpxHelper = getMyApplication().getSelectedGpxHelper();
-		List<GpxSelectionHelper.GpxDisplayGroup> displayGrous = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
-		selectedGpxHelper.collectDisplayGroups(displayGrous, getResult());
-		return displayGrous;
-	}
-
-	boolean isHavingTrackPoints(){
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = getContent();
-		for (GpxSelectionHelper.GpxDisplayGroup group : groups){
-			GpxSelectionHelper.GpxDisplayItemType type = group.getType();
-			if (type == GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS &&
-					!group.getModifiableList().isEmpty()){
-				return true;
-			}
-		}
-
-		return false;
+	boolean isHavingWayPoints(){
+		return getGpx().hasWptPt();
 	}
 
 	boolean isHavingRoutePoints(){
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = getContent();
-		for (GpxSelectionHelper.GpxDisplayGroup group : groups){
-			GpxSelectionHelper.GpxDisplayItemType type = group.getType();
-			if (type == GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS &&
-					!group.getModifiableList().isEmpty()){
-				return true;
-			}
-		}
-
-		return false;
+		return getGpx().hasRtePt();
 	}
 
+	public GPXFile getGpx() {
+		return result;
+	}
 }
 

@@ -42,13 +42,13 @@
         <Button
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="@string/default_buttons_cancel"
+            android:text="@string/shared_string_cancel"
             android:id="@+id/Cancel"></Button>
 
         <Button
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="@string/default_buttons_save"
+            android:text="@string/shared_string_save"
             android:id="@+id/Save"></Button>
     </LinearLayout>
 </LinearLayout>

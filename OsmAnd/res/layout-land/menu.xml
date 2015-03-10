@@ -16,11 +16,11 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_marginLeft="12dp" android:layout_marginTop="3dp" android:layout_marginBottom="3dp" android:text="@string/app_version" android:gravity="right"
 				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="13sp"/> 
 				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="7dp"
-				android:contentDescription="@string/help"
+				android:contentDescription="@string/shared_string_help"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="4dp"
 				android:focusable="true" android:clickable="true"/>
 				<ImageView android:src="@drawable/headliner_close" android:layout_marginRight="2dp" android:id="@+id/CloseButton"
-				android:contentDescription="@string/close"
+				android:contentDescription="@string/shared_string_close"
 				android:layout_marginTop="7dp" android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 			</LinearLayout>
@@ -31,7 +31,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 	 			android:layout_weight="1" android:layout_height="112dp" android:focusable="true">
 	 				<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_gravity="center_vertical|left" android:layout_marginLeft="15dp"
-					android:text="@string/map_Button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/shared_string_map" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1"
 					android:textSize="16sp"/>	
 	 				<ImageView
@@ -62,7 +62,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:id="@+id/FavoritesButtonText"
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
-					android:text="@string/my_data_Button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/shared_string_my_places" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1" android:textSize="16sp"/>
 	 				<ImageView
 	 				android:id="@+id/FavoritesButtonImage"
@@ -85,7 +85,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"
-					android:text="@string/settings_Button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/shared_string_settings" android:textColor="#000000" android:typeface="serif"
 					android:textSize="16sp"/>
 				</LinearLayout> 		
 			</TableRow>

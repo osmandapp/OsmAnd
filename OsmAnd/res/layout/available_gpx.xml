@@ -42,7 +42,7 @@
 				android:layout_height="wrap_content"
 				style="?attr/dashboardGeneralButtonStyle"
 				android:textColor="@color/color_distance"
-				android:text="@string/turn_off_all"/>
+				android:text="@string/shared_string_deselect_all"/>
 
 		</LinearLayout>
 
@@ -60,7 +60,6 @@
 
 	<ExpandableListView
 		android:id="@android:id/list"
-		style="@style/OsmandListView"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"
 		android:layout_marginLeft="0dp"

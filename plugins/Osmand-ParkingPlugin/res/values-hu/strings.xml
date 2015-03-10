@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_buttons_no">Nem</string>
-    <string name="default_buttons_yes">Igen</string>
+    <string name="shared_string_no">Nem</string>
+    <string name="shared_string_yes">Igen</string>
     <string name="osmand_app_not_found">Az OsmAnd nincs feltelepítve</string>
     <string name="app_name">OsmAnd Parkolás</string>
     <string name="parking_plugin_installed">OsmAnd Parkolási Bővítmény feltelepítve és engedélyezve az OsmAnd beállításaiban.</string>

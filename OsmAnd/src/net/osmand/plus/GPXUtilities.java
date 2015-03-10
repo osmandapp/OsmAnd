@@ -31,6 +31,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -482,6 +483,7 @@ public class GPXUtilities {
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
+		public long modifiedTime = 0;
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
@@ -504,29 +506,6 @@ public class GPXUtilities {
 			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[splitSegments.size()]));
 			return g ;
 		}
-		
-		
-		public List<GPXTrackAnalysis> splitByDistance(int meters) {
-			return split(getDistanceMetric(), meters);
-		}
-		
-		public List<GPXTrackAnalysis> splitByTime(int seconds) {
-			return split(getTimeSplit(), seconds);
-		}
-
-
-		public List<GPXTrackAnalysis> split(SplitMetric metric, int metricLimit) {
-			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
-			for(int i = 0; i< tracks.size() ; i++){
-				Track subtrack = tracks.get(i);
-				for (int j = 0; j < subtrack.segments.size(); j++) {
-					TrkSegment segment = subtrack.segments.get(j);
-					splitSegment(metric, metricLimit, splitSegments, segment);
-				}
-			}
-			return convert(splitSegments);
-		}
-
 
 		
 		public boolean hasRtePt() {
@@ -536,6 +515,10 @@ public class GPXUtilities {
 				}
 			}
 			return false;
+		}
+		
+		public boolean hasWptPt() {
+			return points.size() > 0;
 		}
 		
 		public boolean hasTrkpt() {
@@ -616,6 +599,7 @@ public class GPXUtilities {
 			}
 			return points.isEmpty() && routes.isEmpty();
 		}
+
 
 	}
 

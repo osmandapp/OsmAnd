@@ -133,7 +133,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		// screen power save option:
 		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
 		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
-		screenPowerSaveNames[0] = getString(R.string.wake_on_voice_never);
+		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
 		for (int i = 1; i < screenPowerSaveValues.length; i++) {
 			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
 					+ getString(R.string.int_seconds);
@@ -368,9 +368,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		bld.setTitle(title);
 		
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		
-		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int whichButton) {
 				for (int i = 0; i < prefs.length; i++) {
 					prefs[i].set(tempPrefs[i]);

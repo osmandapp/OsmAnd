@@ -269,7 +269,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
 				if (downloaded == null || downloaded.isEmpty()) {
-					AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				Builder builder = new AlertDialog.Builder(activity);
@@ -288,9 +288,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						}
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.setTitle(R.string.select_tile_source_to_install);
-				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
@@ -367,7 +367,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		});
 		
 		bld.setView(view);
-		bld.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -393,7 +393,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();
 	}
 

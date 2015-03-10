@@ -10,10 +10,10 @@
 				  android:layout_width="fill_parent"
 				  android:layout_height="@dimen/dashHeaderHeight">
 		<TextView android:id="@+id/fav_text"
-				  android:text="@string/my_data_Button"
+				  android:text="@string/shared_string_my_places"
 				  style="?attr/dashboardSubHeaderStyle"/>
 		<Button android:id="@+id/show_all"
-				android:text="@string/show_all"
+				android:text="@string/shared_string_show_all"
 				style="?attr/dashboardGeneralButtonStyle"/>
 	</LinearLayout>
 	<LinearLayout android:id="@+id/items"

@@ -76,9 +76,8 @@ public class VoiceRouter {
     }
     private ConcurrentHashMap<VoiceMessageListener, Integer> voiceMessageListeners;
     
-	public VoiceRouter(RoutingHelper router, final OsmandSettings settings, CommandPlayer player) {
+	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
-		this.player = player;
         this.settings = settings;
 
 		empty = new Struct("");

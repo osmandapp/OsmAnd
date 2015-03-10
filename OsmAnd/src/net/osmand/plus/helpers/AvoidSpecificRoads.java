@@ -34,16 +34,11 @@ public class AvoidSpecificRoads {
 
 	public AvoidSpecificRoads(OsmandApplication app) {
 		this.app = app;
-		missingRoads = getBuilder().getImpassableRoads();
 	}
-
-
-
+	
 	protected net.osmand.router.RoutingConfiguration.Builder getBuilder() {
 		return RoutingConfiguration.getDefault();
 	}
-	
-	
 	
 	public ArrayAdapter<RouteDataObject> createAdapter(final MapActivity ctx) {
 		final ArrayList<RouteDataObject> points = new ArrayList<RouteDataObject>();
@@ -107,7 +102,7 @@ public class AvoidSpecificRoads {
 			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					RouteDataObject obj = missingRoads.get(which - 1);
+					RouteDataObject obj = getMissingRoads().get(which - 1);
 					double lat = MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
 					double lon = MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 					showOnMap(app, mapActivity, lat, lon, getText(obj), dialog);
@@ -116,13 +111,13 @@ public class AvoidSpecificRoads {
 			});
 		}
 
-		bld.setPositiveButton(R.string.select_impassable_road, new DialogInterface.OnClickListener() {
+		bld.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
 				selectFromMap(mapActivity);
 			}
 		});
-		bld.setNegativeButton(R.string.close, null);
+		bld.setNegativeButton(R.string.shared_string_close, null);
 		bld.show();
 	}
 	
@@ -187,4 +182,11 @@ public class AvoidSpecificRoads {
 		dialog.dismiss();
 	}
 
+	
+	public List<RouteDataObject> getMissingRoads() {
+		if(missingRoads == null) {
+			missingRoads = app.getDefaultRoutingConfig().getImpassableRoads();
+		}
+		return missingRoads;
+	}
 }

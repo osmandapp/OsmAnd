@@ -160,7 +160,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				if(isSaving){
-					setText(map.getString(R.string.import_save), "");
+					setText(map.getString(R.string.shared_string_save), "");
 					setImageDrawable(monitoringBig);
 					return true;
 				}
@@ -374,8 +374,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		LinearLayout ll = createIntervalChooseLayout(uiCtx, patternMsg, seconds, minutes,
 				choice, v, dm);
 		dlg.setView(ll);
-		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
-		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
+		dlg.setNegativeButton(R.string.shared_string_cancel, null);
 		dlg.show();
 	}
 
@@ -440,7 +440,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		ll.addView(sp);
 		if (choice != null) {
 			final CheckBox cb = new CheckBox(uiCtx);
-			cb.setText(R.string.remember_choice);
+			cb.setText(R.string.shared_string_remember_my_choice);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			lp.setMargins((int)(7* dm.density), (int)(10* dm.density), (int)(7* dm.density), 0);

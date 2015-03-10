@@ -63,7 +63,7 @@ public class SuggestExternalDirectoryDialog {
 					}
 				}
 			});
-			bld.setPositiveButton(R.string.default_buttons_ok, null);
+			bld.setPositiveButton(R.string.shared_string_ok, null);
 			bld.show();
 			return true;
 		} 

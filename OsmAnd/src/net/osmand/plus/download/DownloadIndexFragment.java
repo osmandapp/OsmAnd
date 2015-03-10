@@ -59,7 +59,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-//		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_download);
+//		getDownloadActivity().getSupportActionBar().setTitle(R.string.shared_string_download);
 		// recreation upon rotation is pgetaprevented in manifest file
 
 		filterText = (EditText) view.findViewById(R.id.search_box);
@@ -149,14 +149,14 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			if (SHOW_ONLY_RELOAD) {
-				MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
+				MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 				item.setIcon(R.drawable.ic_action_refresh_dark);
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			} else {
-				SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
-				s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-				s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
-				s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+				SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.shared_string_more_actions);
+				s.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
+				s.add(0, SELECT_ALL_ID, 0, R.string.shared_string_select_all);
+				s.add(0, DESELECT_ALL_ID, 0, R.string.shared_string_deselect_all);
 
 //				s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 //						: R.drawable.abs__ic_menu_moreoverflow_holo_dark);

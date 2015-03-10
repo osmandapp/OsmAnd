@@ -26,8 +26,12 @@ public class SmallMapMenuControls extends MapControls {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getMapActions().onDrawerBack();
-				mapActivity.getMapActions().toggleDrawer();
+				if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+					mapActivity.getDashboard().setDashboardVisibility(true);
+				} else {
+					mapActivity.getMapActions().onDrawerBack();
+					mapActivity.getMapActions().toggleDrawer();
+				}
 			}
 		});
 	}

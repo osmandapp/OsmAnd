@@ -95,7 +95,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			mTabs.add(getTabIndicator(R.string.address, getFragment(ADDRESS_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.favorite, getFragment(FAVORITES_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.string.history, getFragment(HISTORY_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.shared_string_history, getFragment(HISTORY_TAB_INDEX)));
 
 			
 			setViewPagerAdapter(mViewPager, mTabs);
@@ -206,12 +206,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 				if (position != 0) {
 					if (position == POSITION_CURRENT_LOCATION) {
 						net.osmand.Location loc = getLocationProvider().getLastKnownLocation();
+						searchAroundCurrentLocation = true;
 						if(loc != null && System.currentTimeMillis() - loc.getTime() < 10000) {
 							updateLocation(loc);
-						} else {
-							startSearchCurrentLocation();
-							searchAroundCurrentLocation = true;
 						}
+						startSearchCurrentLocation();
 					} else {
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
@@ -281,9 +280,10 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		if (location != null) {
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
 					getString(R.string.select_search_position) + " " + getString(R.string.search_position_current_location_found), false);
-			if (location.getAccuracy() < 20) {
-				endSearchCurrentLocation();
-			}
+			// don't stop in case we want to see updates 
+//			if (location.getAccuracy() < 20) {
+//				endSearchCurrentLocation();
+//			}
 		}
 	}
 	public void startSearchCurrentLocation(){

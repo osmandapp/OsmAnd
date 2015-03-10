@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="?attr/expandable_list_item_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -38,7 +39,6 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        style="@style/OsmandListView"/>
+        android:layout_weight="1"/>
 
 </LinearLayout>

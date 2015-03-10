@@ -278,7 +278,7 @@ public class NavigationInfo {
 							dialog.cancel();
 						}
 					});
-		info.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+		info.setNegativeButton(R.string.shared_string_close, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();

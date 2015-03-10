@@ -7,7 +7,6 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        style="@style/OsmandListView"></ListView>
+        android:layout_height="fill_parent"></ListView>
 
 </LinearLayout>

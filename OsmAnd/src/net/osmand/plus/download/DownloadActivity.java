@@ -310,9 +310,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 			String text;
 			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
 			if (!running) {
-				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
+				text = getString(R.string.shared_string_download) + "  (" + downloads + ")"; //$NON-NLS-1$
 			} else {
-				text = getString(R.string.downloading_file_new) + "  (" + downloads + ")"; //$NON-NLS-1$
+				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
 			}
 			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
@@ -383,13 +383,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 		if(count > 0){
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					downloadFilesCheckInternet();
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

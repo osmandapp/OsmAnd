@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="download_hillshade_item">Տարածքի ռելիեֆ</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="download_hillshade_item">Տարածքի ռելիեֆ</string>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ</string>
-    <string name="dist_control_start">Սկիզբ</string>
+    
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
     <string name="clear_dest_confirm">"Վստահ ե՞ք, որ ցանկանում եք մաքրել ձեր նշանակման կետը․ "</string>
     <string name="stop_routing_confirm">Վստահ ե՞ք որ ցանկանում եք դադարեցնել նավիգացիան.</string>
@@ -46,14 +45,14 @@
 	<string name="phone">Հեռախոս</string>
     <string name="tip_recent_changes_1_3_t">Փոխել է 1.3 * Holo Theme (թեման customization)</string>
     <string name="monitoring_settings">Գրանցման ծառայություն և քնած ռեժիմ</string>
-    <string name="osmand_monitoring_plugin_name">Գրանցման ծառայություն և քնած ռեժիմ</string>
+    
     <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի դիզայնի թեման</string>
     <string name="select_address_activity">Ընտրել հասցեն</string>
     <string name="favourites_list_activity">Ընտրել նախնտրածներից</string>
     <string name="local_openstreetmap_act_title">OSM փոփոխություններ</string>
-    <string name="default_buttons_other_actions">Այլ գործողություններ</string>
+    <string name="shared_string_more_actions">Այլ գործողություններ</string>
     
-	<string name="default_buttons_selectall">Ընտրել բոլորը</string>
+	
 	<string name="cancel_route">Դադարեցնել երթուղին</string>
     <string name="local_osm_changes_backup_successful">OSM փոփոխության ֆայլը հաջողությամբ գեներացվել %1$s</string>
     <string name="delete_point">Ջնջել կետը</string>
@@ -64,7 +63,7 @@
     <string name="plugin_distance_point">Կետ</string>
     <string name="gpx_file_name">GPX ֆայլի անունը</string>
     <string name="gpx_saved_sucessfully">{0} GPX ֆայլը հաջողությամբ պահվել է</string>
-    <string name="default_buttons_do_not_show_again">Կրկին ցույց չտալ</string>
+    <string name="shared_string_do_not_show_again">Կրկին ցույց չտալ</string>
     <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
     <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
     <string name="distance_measurement_clear_route">Մաքրել բոլոր կետերը</string>
@@ -77,7 +76,7 @@
 	<string name="edit_filter_delete_message">{0} Ֆիլտրը ջնջված է</string>
 	<string name="edit_filter_delete_dialog_title">Ջնջե՞լ տվյալ ֆիլտրը</string>
 	<string name="edit_filter_save_as_menu_item">Հիշել որպես</string>
-	<string name="edit_filter_delete_menu_item">Ջնջել</string>
+	
 	<string name="poi_action_change">փոփոխություն</string>
 	<string name="poi_action_add">ավելացում</string>
 	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար\n
@@ -92,7 +91,7 @@
     <string name="map_widget_gps_info">GPS ինֆորմացիա</string>
     <string name="item_checked">Ընտրած է</string>
     <string name="item_unchecked">Ընտրած չէ</string>
-    <string name="map_view">Քարտեզ</string>
+    <string name="shared_string_map">Քարտեզ</string>
     <string name="prefer_motorways">Նախնտրել մայրուղիներ</string>
 	<string name="prefer_in_routing_title">Նախնտրել…</string>
 	<string name="prefer_in_routing_descr">Նախնտրել մայրուղիներ</string>
@@ -117,17 +116,17 @@
     <string name="recording_context_menu_play">Նվագել</string>
     <string name="recording_description">Ձայնագրություն %1$s %2$s - %3$s</string>
     <string name="recording_default_name">ձայնագրություն</string>
-    <string name="av_control_stop">Կանգնել</string>
-    <string name="av_control_start">ձայնագրել</string>
+    <string name="shared_string_control_stop">Կանգնել</string>
+    <string name="shared_string_control_start">ձայնագրել</string>
     <string name="map_widget_av_notes">Աուդիո/Վիդեո նշումներ</string>
     <string name="tip_map_styles">Քարտեզի Տեսակը</string>
 	<string name="about_version">Տարբերակ :</string>
-    <string name="tips_and_tricks">Խորհուրդներ</string>
+    
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
     <string name="select_gpx">Ընտրել GPX …</string>
     <string name="route_descr_select_destination">Ընտրել Նպատակակետը</string>
-    <string name="route_descr_select_on_map">Ընտրել քարտեզի վրա …</string>
-    <string name="route_descr_favorite">Նախընտրելի …</string>
+    <string name="shared_string_select_on_map">Ընտրել քարտեզի վրա …</string>
+    <string name="shared_string_favorite">Նախընտրելի …</string>
     <string name="routing_attr_short_way_name">Կարճ ճանապարհ</string>
 	<string name="routing_attr_short_way_description">Օգտագործել կարճ ճանապարհը</string>
 	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհները</string>
@@ -147,6 +146,6 @@
 	<string name="routing_attr_weight_name">Կշիռ</string>
 	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
     <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
-    <string name="default_buttons_no">Ոչ</string>
-	<string name="default_buttons_yes">Այո</string>
+    <string name="shared_string_no">Ոչ</string>
+	<string name="shared_string_yes">Այո</string>
 	</resources>

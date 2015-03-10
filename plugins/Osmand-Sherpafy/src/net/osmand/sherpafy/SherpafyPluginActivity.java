@@ -43,7 +43,7 @@ public class SherpafyPluginActivity extends Activity {
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setMessage(getString(R.string.osmand_app_not_found));
-				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + OSMAND_COMPONENT_PLUS));
@@ -54,7 +54,7 @@ public class SherpafyPluginActivity extends Activity {
 						}
 					}
 				});
-				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(getString(R.string.shared_string_no), null);
 				builder.show();
 			}
 		}

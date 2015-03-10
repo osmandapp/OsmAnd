@@ -2,7 +2,7 @@ package net.osmand.plus.dashboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.AndroidUtils;
@@ -31,107 +31,81 @@ import android.widget.TextView;
 public class DashPluginsFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
+	private List<OsmandPlugin> plugins;
 
-	private final CompoundButton.OnCheckedChangeListener enableDisableListener =
-			new CompoundButton.OnCheckedChangeListener() {
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			View pluginView = AndroidUtils.findParentViewById(buttonView, R.id.dash_plugin_item);
-			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-			if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
-				return;
-			}
-			if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
-				updatePluginState(pluginView);
-			}
-		}
-	};
-
-
-	private final View.OnClickListener getListener = new View.OnClickListener() {
+	private View.OnClickListener getListener(final OsmandPlugin plugin) {
+		return new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
 			View pluginView = AndroidUtils.findParentViewById(view, R.id.dash_plugin_item);
-			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 		}
 	};
+	}
 
-	private final View.OnClickListener pluginDetailsListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			OsmandPlugin plugin = (OsmandPlugin)view.getTag();
-
-			Intent intent = new Intent(getActivity(), PluginActivity.class);
-			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-			startActivity(intent);
-		}
-	};
+	private final View.OnClickListener pluginDetailsListener(final OsmandPlugin plugin) {
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getActivity(), PluginActivity.class);
+				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
+				startActivity(intent);
+			}
+		};
+	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-							 @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View contentView = inflater.inflate(R.layout.dash_plugins_fragment, container, false);
 		contentView.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(getActivity(),
-						getMyApplication().getAppCustomization().getPluginsActivity()));
+				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
 			}
 		});
-
-		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
-		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledPlugins();
-		Collections.shuffle(notActivePlugins);
-		for(OsmandPlugin plugin : notActivePlugins) {
-			if (plugin instanceof OsmandDevelopmentPlugin) {
-				continue;
-			}
-
-			inflatePluginView(inflater, pluginsContainer, plugin);
-			break;
-		}
-		for(OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
-			if (pluginsContainer.getChildCount() >= 5) {
-				break;
-			}
-			if (plugin instanceof OsmandDevelopmentPlugin) {
-				continue;
-			}
-
-			inflatePluginView(inflater, pluginsContainer, plugin);
-		}
-
+		initPlugins();
 		return contentView;
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		refreshCard();
+
+	private void initPlugins() {
+		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledPlugins();
+		Collections.shuffle(notActivePlugins);
+		plugins = new ArrayList<OsmandPlugin>();
+		Iterator<OsmandPlugin> nit = notActivePlugins.iterator();
+		Iterator<OsmandPlugin> it = OsmandPlugin.getEnabledPlugins().iterator();
+		addPluginsToLimit(nit, 1);
+		addPluginsToLimit(it, 5);
+		addPluginsToLimit(nit, 5);
+	}
+
+
+	private void addPluginsToLimit(Iterator<OsmandPlugin> it, int l) {
+		while(plugins.size() < l && it.hasNext()) {
+			OsmandPlugin plugin = it.next();
+			if (plugin instanceof OsmandDevelopmentPlugin) {
+				continue;
+			}
+			plugins.add(plugin);
+		}
 	}
 
 	@Override
-	public void refreshCard() {
-
+	public void onOpenDash() {
 		View contentView = getView();
-		if (contentView == null) {
-			return;
-		}
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		initPlugins();
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
-
-		for (int pluginIndex = 0; pluginIndex < pluginsContainer.getChildCount(); pluginIndex++) {
-			View pluginView = pluginsContainer.getChildAt(pluginIndex);
-
-			updatePluginState(pluginView);
+		pluginsContainer.removeAllViews();
+		for (OsmandPlugin p : plugins) {
+			inflatePluginView(inflater, pluginsContainer, p);
 		}
 	}
-
-	private void updatePluginState(View pluginView) {
-		OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-		CompoundButton enableDisableButton = (CompoundButton)pluginView.findViewById(
-				R.id.plugin_enable_disable);
-		Button getButton = (Button)pluginView.findViewById(R.id.get_plugin);
+	
+	private void updatePluginState(View pluginView, OsmandPlugin plugin) {
+		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
+		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);
+		enableDisableButton.setOnCheckedChangeListener(null);
 		if (plugin.needsInstallation()) {
 			getButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setVisibility(View.GONE);
@@ -140,40 +114,50 @@ public class DashPluginsFragment extends DashBaseFragment {
 			enableDisableButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setChecked(plugin.isActive());
 		}
+		setListener(plugin, enableDisableButton, pluginView);
 
-		ImageButton logoView = (ImageButton)pluginView.findViewById(R.id.plugin_logo);
+		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
 		if (plugin.isActive()) {
 			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
-					new int[] {R.attr.bg_plugin_logo_disabled});
+					new int[] { R.attr.bg_plugin_logo_disabled });
 			logoView.setBackgroundDrawable(attributes.getDrawable(0));
 			attributes.recycle();
 		}
 	}
 
-	private void inflatePluginView(LayoutInflater inflater, ViewGroup container,
-								   OsmandPlugin plugin) {
+	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, final OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
-		view.setTag(plugin);
+		view.setOnClickListener(pluginDetailsListener(plugin));
 
-		view.setOnClickListener(pluginDetailsListener);
-
-		TextView nameView = (TextView)view.findViewById(R.id.plugin_name);
+		TextView nameView = (TextView) view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());
 
-		ImageButton logoView = (ImageButton)view.findViewById(R.id.plugin_logo);
+		ImageButton logoView = (ImageButton) view.findViewById(R.id.plugin_logo);
 		logoView.setImageResource(plugin.getLogoResourceId());
 
-		CompoundButton enableDisableButton =
-				(CompoundButton)view.findViewById(R.id.plugin_enable_disable);
-		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
-
-		Button getButton = (Button)view.findViewById(R.id.get_plugin);
-		getButton.setOnClickListener(getListener);
-
-		updatePluginState(view);
-
+		CompoundButton enableDisableButton = (CompoundButton) view.findViewById(R.id.plugin_enable_disable);
+		Button getButton = (Button) view.findViewById(R.id.get_plugin);
+		getButton.setOnClickListener(getListener(plugin));
+		enableDisableButton.setOnCheckedChangeListener(null);
+		updatePluginState(view, plugin);
+		final View pluginView = view;
+		setListener(plugin, enableDisableButton, pluginView);
 		container.addView(view);
+	}
+
+	private void setListener(final OsmandPlugin plugin, CompoundButton enableDisableButton, final View pluginView) {
+		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
+					return;
+				}
+				if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
+					updatePluginState(pluginView, plugin);
+				}
+			}
+		});
 	}
 }

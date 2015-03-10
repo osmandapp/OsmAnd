@@ -125,7 +125,7 @@
 			</intent-filter>
 		</receiver>
 
-		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/settings_activity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />

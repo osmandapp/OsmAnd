@@ -246,7 +246,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				createMenuItem(menu, AS_VISITED_ID, !rp.isVisited() ? 
 						R.string.mark_as_visited : R.string.mark_as_not_visited, R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-				createMenuItem(menu, POI_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark,
+				createMenuItem(menu, POI_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				return true;
 			}
@@ -293,7 +293,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, OK_ID, R.string.default_buttons_ok, 
+		createMenuItem(menu, OK_ID, R.string.shared_string_ok, 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark ,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, NAVIGATE_DIALOG_ID, R.string.navigate_dialog,

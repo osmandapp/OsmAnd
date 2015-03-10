@@ -214,7 +214,7 @@ public class DownloadFileHelper {
 				Algorithms.removeAllFiles(de.targetFile);
 				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
 				if(!renamed) {
-					showWarningCallback.showWarning(ctx.getString(R.string.error_io_error) + " : old file can't be deleted");
+					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + " : old file can't be deleted");
 					return false;
 				}
 			}
@@ -222,11 +222,11 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
+			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
-			showWarningCallback.showWarning(ctx.getString(R.string.error_io_error) + " : " + e.getMessage());
+			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + " : " + e.getMessage());
 			// Possibly file is corrupted
 			Algorithms.removeAllFiles(de.fileToDownload);
 			return false;
@@ -257,7 +257,7 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName /*+ " " + mb + " MB"*/;
+		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + de.baseName /*+ " " + mb + " MB"*/;
 		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {

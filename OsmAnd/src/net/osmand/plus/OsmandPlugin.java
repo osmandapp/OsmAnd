@@ -180,7 +180,6 @@ public abstract class OsmandPlugin {
 	
 	public boolean destinationReached() { return true;	}
 	
-	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
 	
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
 	
@@ -289,12 +288,6 @@ public abstract class OsmandPlugin {
 	}
 	
 
-	public static void onSettingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.settingsActivityCreate(activity, screen);
-		}
-	}
-	
 	public static boolean onDestinationReached() {
 		boolean b = true;
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
