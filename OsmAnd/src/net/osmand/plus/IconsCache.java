@@ -1,11 +1,8 @@
 package net.osmand.plus;
 
-import android.app.Activity;
-import android.content.Context;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class IconsCache {
 
