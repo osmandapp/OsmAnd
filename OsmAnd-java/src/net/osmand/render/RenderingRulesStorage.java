@@ -372,10 +372,10 @@ public class RenderingRulesStorage {
 					List<RenderingRule> apply = applyRules;
 					if(!renderingRule.getIfChildren().isEmpty()) {
 						apply = new ArrayList<RenderingRule>();
+						apply.addAll(renderingRule.getIfChildren());
 						if(applyRules != null) {
 							apply.addAll(applyRules);
 						}
-						apply.addAll(renderingRule.getIfChildren());
 					}
 					Map<String, String> cattrs = new HashMap<String, String>(attrs);
 					cattrs.putAll(renderingRule.getAttributes());
@@ -460,22 +460,44 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
-		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+//		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+		String file = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
+		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		InputStream is = new FileInputStream(file);
 		if(args != null && args.length > 0) {
 			is = new FileInputStream(args[0]);
 		}
-		RenderingRulesStorage storage = new RenderingRulesStorage("test", null);
+		try {
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			parser.setInput(is, "UTF-8");
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok == XmlPullParser.START_TAG) {
+					String tagName = parser.getName();
+					if (tagName.equals("renderingConstant")) {
+						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
+							renderingConstants.put(parser.getAttributeValue("", "name"), 
+									parser.getAttributeValue("", "value"));
+						}
+					}
+				}
+			}
+		} finally {
+			is.close();
+		}
+		is = new FileInputStream(file);
+		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
-				RenderingRulesStorage depends = new RenderingRulesStorage("test", null);
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
 				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
 				return depends;
 			}
 		};
 		storage.parseRulesFromXmlInputStream(is, resolver);
 		
-//		printAllRules(storage);
+		printAllRules(storage);
 		testSearch(storage);
 	}
 
@@ -485,11 +507,11 @@ public class RenderingRulesStorage {
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
 					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "primary");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "residential");
 //					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 9);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 9);
+					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 13);
+					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 13);
 //						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 //						if (customProp.isBoolean()) {

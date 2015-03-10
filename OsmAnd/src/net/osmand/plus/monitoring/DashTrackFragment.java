@@ -11,6 +11,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -113,7 +114,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			}
 		}
 		
-		if (list.size() == 0) {
+		if (list.size() == 0 && 
+				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
@@ -124,20 +126,22 @@ public class DashTrackFragment extends DashBaseFragment {
 		tracks.removeAllViews();
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
-		AvailableGPXFragment.createCurrentTrackView(view, app);
-		((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
-		AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AvailableGPXFragment.openTrack(getActivity(), null);
-			}
-		});
-		view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
-		tracks.addView(view);
-		startHandler(view);
+			AvailableGPXFragment.createCurrentTrackView(view, app);
+			((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
+			AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AvailableGPXFragment.openTrack(getActivity(), null);
+				}
+			});
+			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+			tracks.addView(view);
+			startHandler(view);
+		}
 
 		for (String filename : list) {
 			final File f = new File(filename);
