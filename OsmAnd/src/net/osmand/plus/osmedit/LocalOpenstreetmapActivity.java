@@ -88,11 +88,11 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.ic_action_gup_light, R.drawable.ic_action_gup_dark,
+		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
+		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_dark, R.drawable.ic_action_gsave_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, DELETE_ID, R.string.shared_string_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
+		createMenuItem(menu, DELETE_ID, R.string.shared_string_delete_all, R.drawable.ic_action_gdiscard_dark, R.drawable.ic_action_gdiscard_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}

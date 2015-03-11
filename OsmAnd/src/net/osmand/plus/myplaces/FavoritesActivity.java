@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -73,7 +74,6 @@ public class FavoritesActivity extends TabActivity {
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 
 		List<TabItem> mTabs = new ArrayList<TabItem>();
-//		mTabs.add(new TabItem("\t\t\t", FavoritesTreeFragment.class));
 		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
 			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
@@ -82,9 +82,14 @@ public class FavoritesActivity extends TabActivity {
 		
 		Integer tab = settings.FAVORITES_TAB.get();
 		if (tab == NOTES_TAB) {
-			tab = mTabs.size() -1;
+			if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null){
+				tab = mTabs.size() - 2;
+			} else {
+				tab = mTabs.size() - 1;
+			}
+
 		} else if (tab == OSM_EDITS_TAB) {
-			//TODO implement method of counting position for other plugins
+			tab = mTabs.size() - 1;
 		}
 		
 		setViewPagerAdapter(mViewPager, mTabs);
@@ -93,7 +98,7 @@ public class FavoritesActivity extends TabActivity {
 		if (tab > mTabs.size() - 1){
 			tab = 0;
 		}
-		mViewPager.setCurrentItem(tab );
+		mViewPager.setCurrentItem(tab);
 		// setupHomeButton();
 	}
 
