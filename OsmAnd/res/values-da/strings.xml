@@ -294,7 +294,7 @@
 	<string name="osmand_parking_time_limit">Tidsbegrænset parkering</string>
 	<string name="osmand_parking_time_no_limit">Tidsubegrænset parkering</string>
 	<string name="osmand_parking_position_description">Den parkerede bils position. %1$s</string>
-	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
+	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Udvidelsen er udviklet til at anvende OsmAnd til nemt huske placeringen af den parkerede bil.</string>
@@ -1964,7 +1964,7 @@
 	<string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
-	<string name="action_create">Med handlingen oprettet</string>
+	<string name="action_create">Handlingen oprettet</string>
 	<string name="action_modify">Handling rediger</string>
 	<string name="action_delete">Handlingen slet</string>
 	<string name="osm_edits">OSM redigeringer</string>
