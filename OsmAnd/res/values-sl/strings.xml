@@ -379,7 +379,7 @@
 	<string name="rendering_attr_contourLines_description">Prikaži pod povečavo (potrebuje datoteko SRTM):</string>
 	<string name="rendering_attr_hmRendered_description">Povečaj število podrobnosti karte</string>
 	<string name="rendering_attr_hmRendered_name">Pokaži podrobnejšo karto</string>
-	<string name="navigate_point_format">Oblika:</string>
+	<string name="navigate_point_format">Oblika</string>
 	<string name="day_night_info">Informacije dan/noč</string>
 	<string name="map_widget_day_night">Zemljevid dan/noč</string>
 	<string name="map_widget_vector_attributes">Lastnosti upodabljanja</string>
@@ -402,7 +402,7 @@
 	<string name="osmand_parking_position_description">Položaj vašega parkiranega avtomobila: %1$s</string>
 	<string name="osmand_parking_position_description_add">Prevzem avtomobila ob:</string>
 	<string name="osmand_parking_position_name">Točka parkiranja</string>
-	<string name="osmand_parking_plugin_description">Ta vtičnik omogoča shranjevanje mesta vašega parkiranega avtomobila.</string>
+	<string name="osmand_parking_plugin_description">Ta vtičnik omogoča enostavno shranjevanje mesta parkiranja vašega avtomobila v OsmAnd.</string>
 	<string name="osmand_parking_plugin_name">Parkirni položaj</string>
 	<string name="context_menu_item_add_parking_point">Označi kot parkirni položaj</string>
 	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
@@ -439,7 +439,7 @@
 	<string name="local_index_gpx_info_show">\n\nDolg pritisk za možnosti</string>
 	<string name="search_offline_clear_search">Novo iskanje</string>
 	<string name="poi_filter_custom_filter">Filter po meri</string>
-	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v Google Play trgovini?</string>
+	<string name="gps_status_app_not_found">Aplikacija GPS status ni nameščena. Ali jo želite poiskati v Google Play trgovini?</string>
 	<string name="show_point_options">Uporabi mesto …</string>
 	<string name="menu_layers">Sloji zemljevida</string>
 	<string name="where_am_i">Kje sem?</string>
@@ -455,7 +455,7 @@
 	<string name="prefs_plugins_descr">Vtičniki omogočajo napredne nastavitve in dodatne funkcionalnosti</string>
 	<string name="osmand_development_plugin_description">Prikaži nastavitve za razvoj in razhroščevanje, kot so animirana navigacija ali prikaz hitrosti izrisa.</string>
 	
-	<string name="osmand_accessibility_description">Prikaz nastavitve za posebne funkcije dostopnosti.</string>
+	<string name="osmand_accessibility_description">Prikaz nastavitev za aktivacijo posebnih funkcij dostopnosti.</string>
 	<string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v načinu spanja (ugasnjen ekran in občasna uporaba GPS-a).</string>
 	<string name="shared_string_close">Zapri</string>
 	<string name="opening_hours">Delovni čas</string>
@@ -778,7 +778,7 @@
 	<string name="vector_map_not_needed">Ne, hvala</string>
 	<string name="basemap_missing">Osnovni zemljevid sveta (ki pokriva cel svet pri majhnih povečavah) manjka. Razmislite o prejemu World_basemap_x.obf za celotno okolje.</string>
 	<string name="vector_data_missing">Nepovezani podatki manjkajo na SD kartici. Razmislite o njihovem prejemu, da boste lahko zemljevide uporabili tudi, ko ste nepovezani.</string>
-	<string name="local_index_installed">Izdaja</string>
+	<string name="local_index_installed">Lokalna izdaja</string>
 	<string name="map_text_size_descr">Izberite velikost besedila za imena na zemljevidu</string>
 	<string name="map_text_size">Velikost pisave zemljevida</string>
 	<string name="trace_rendering">Podatki razhroščevanja upodabljanja</string>
@@ -1125,7 +1125,7 @@
     <string name="map_widget_distancemeasurement">Merjenje razdalj</string>
     
     <string name="map_widget_audionotes">Zvočni zapisi</string>
-    <string name="audionotes_plugin_description">Shrani zvočne zapise med potovanjem</string>
+    <string name="audionotes_plugin_description">Ta vtičnik omogoča snemanje avdio, fotografskih in video opomb med potovanjem</string>
     <string name="audionotes_plugin_name">Vtičnik za zvočne zapise</string>
     <string name="index_srtm_parts">deli</string>
     <string name="download_srtm_maps">Podatki izohips</string>
@@ -1268,7 +1268,7 @@
 \n\t* Podpora OSM opomb "</string>
     <string name="intermediate_items_sort_by_distance">Razvrščanje (od vrat do vrat)</string>
     <string name="osmand_distance_planning_plugin_description">Ustvarite poti (ali uporabite/spremenite obstoječe GPX datoteke) za merjenje razdalj med točkami. Shrani kot GPX se lahko uporabi za načrtovanje GPX poti.</string>
-    <string name="osmand_distance_planning_plugin_name">Računanje razdalj in Orodje za načrtovanje</string>
+    <string name="osmand_distance_planning_plugin_name">Računanje razdalj in orodje za načrtovanje</string>
     <string name="distance_measurement_finish_subtrack">Začni novo pod-sled</string>
     <string name="wait_current_task_finished">Počakajte, da je trenutna naloga končana</string>
     <string name="use_kalman_filter_compass_descr">Zmanjšuje šum pri branju kompasa, vendar dodaja inercijo</string>
@@ -1651,7 +1651,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="keep_informing_never">Samo ročno (tapnite puščico)</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
-	<string name="osmo_settings">OpenStreetMap sledenje</string>
+	<string name="osmo_settings">OsMo sledenje</string>
    	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
     
@@ -1973,7 +1973,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
 	<string name="parking_place">Parkirno mesto</string>
     <string name="remove_the_tag">ODSTRANJEVANJE OZNAKE</string>
-    <string name="gps_status">GPS Status</string>
+    <string name="gps_status">Stanje GPS</string>
     <string name="version_settings_descr">Prenos nočne gradnje</string>
     <string name="version_settings">Gradnje</string>
     <string name="rendering_attr_streetLighting_name">Ulična razsvetljava</string>
@@ -2014,4 +2014,32 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="action_delete">Brisanje dejanja</string>
 	<string name="osm_edits">OSM urejanje</string>
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Ostaja</string> <string name="parking_place_limited">Parkirno mesto časovno omejeno</string>
+	<string name="your_edits">Vaše spremembe</string>
+    <string name="drawer">Seznam</string>
+    <string name="short_location_on_map">Šir %1$s\n Dol %2$s</string>
+    <string name="tips_and_tricks_descr">Pogosto zastavljena vprašanja, nedavne spremembe in ostalo</string>
+    <string name="routing_settings_2">Nastavitve navigacije</string>
+    <string name="general_settings_2">Splošne nastavitve</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_selected">Izbrano</string>
+	<string name="shared_string_deselect">Odstrani iz izbora</string>
+	<string name="shared_string_deselect_all">Počisti izbor</string>
+	<string name="shared_string_export">Izvozi</string>
+	<string name="shared_string_unexpected_error">Prišlo je do nepričakovane napake</string>
+	<string name="shared_string_action_template">Dejanje {0}</string>
+	<string name="shared_string_collapse">Skrči</string>
+	<string name="shared_string_currently_recording_track">Trenutno beležena sled</string>
+	<string name="shared_string_audio">Zvok</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Fotografija</string>
+	<string name="route_points">Točke poti</string>
+	<string name="rename_failed">Preimenovanje ni uspelo.</string>
+	<string name="days_behind">dni star</string>
+	<string name="back_to_map">Nazaj na zemljevid</string>
+	<string name="share_note">Deli opombo</string>
+    <string name="location_on_map">Lokacija:\n Šir %1$s\n Dol %2$s</string>
+	<string name="notes">Osombe</string>
+	<string name="online_map">Spletni zemljevid</string>
+	<string name="roads_only">Le ceste</string>
+    <string name="shared_string_release">Izdano</string>
 	</resources>
