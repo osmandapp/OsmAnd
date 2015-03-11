@@ -1830,4 +1830,7 @@
 	<string name="waypoint_visit_after">Besök efter</string>
     <string name="waypoint_visit_before">Besök före</string>
     <string name="shared_string_collapse">Slå ihop</string>
-	</resources>
+	<string name="osm_edits">OSM-redigeringar</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering</string>
+	<string name="your_edits">Dina redigeringar</string>
+    </resources>
