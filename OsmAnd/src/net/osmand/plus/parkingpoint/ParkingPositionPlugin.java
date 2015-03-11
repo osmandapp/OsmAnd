@@ -27,6 +27,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -523,5 +525,44 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_parking_dark;
+	}
+
+	String getFormattedTime(long timeInMillis, Activity ctx) {
+		StringBuilder timeStringBuilder = new StringBuilder();
+		Time time = new Time();
+		time.set(timeInMillis);
+		timeStringBuilder.append(time.hour);
+		timeStringBuilder.append(":");
+		int minute = time.minute;
+		timeStringBuilder.append(minute < 10 ? "0" + minute : minute);
+		if (!DateFormat.is24HourFormat(ctx)) {
+			timeStringBuilder.append(time.hour >= 12 ? ctx.getString(R.string.osmand_parking_pm) : ctx
+					.getString(R.string.osmand_parking_am));
+		}
+		return timeStringBuilder.toString();
+	}
+
+	public String getParkingDescription(Activity ctx) {
+		StringBuilder timeLimitDesc = new StringBuilder();
+		timeLimitDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time) + " ");
+		timeLimitDesc.append(getFormattedTime(getStartParkingTime(), ctx) + ".");
+		if (getParkingType()) {
+			// long parkingTime = settings.getParkingTime();
+			// long parkingStartTime = settings.getStartParkingTime();
+			// Time time = new Time();
+			// time.set(parkingTime);
+			// timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
+			// timeLimitDesc.append(time.hour);
+			// timeLimitDesc.append(":");
+			// int minute = time.minute;
+			// timeLimitDesc.append(minute<10 ? "0" + minute : minute);
+			// if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
+			// timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) :
+			// map.getString(R.string.osmand_parking_am));
+			// }
+			timeLimitDesc.append(ctx.getString(R.string.osmand_parking_position_description_add) + " ");
+			timeLimitDesc.append(getFormattedTime(getParkingTime(),ctx));
+		}
+		return ctx.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 	}
 }

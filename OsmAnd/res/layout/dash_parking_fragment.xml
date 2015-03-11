@@ -7,6 +7,7 @@
 			  android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/parking_header"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/dash_parking_height"
 		android:background="?attr/dash_parking_bg"
