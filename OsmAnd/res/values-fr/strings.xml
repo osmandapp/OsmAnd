@@ -1989,5 +1989,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="action_modify">Action modifier</string>
 	<string name="action_delete">Action supprimer</string>
 	<string name="osm_edits">Éditions OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Gauche</string> <string name="parking_place_limited">Durée de stationnement limitée</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement à durée limitée</string>
 	</resources>
