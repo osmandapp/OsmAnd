@@ -564,7 +564,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
-  <string name="route_general_information">Distance totale : %1$s,\n durée estimée : %2$d h %3$d m.</string>
+  <string name="route_general_information">Distance totale : %1$s, temps de trajet estimé : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
   <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
@@ -1990,4 +1990,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="action_delete">Action supprimer</string>
 	<string name="osm_edits">Éditions OSM</string>
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement à durée limitée</string>
-	</resources>
+	<string name="your_edits">Vos modifications</string>
+    </resources>
