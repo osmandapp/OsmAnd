@@ -987,7 +987,7 @@
 	<string name="search_online_address">Iskanje v povezavi</string>
 	<string name="max_level_download_tile">Maks. povečava za spletne</string>
 	<string name="max_level_download_tile_descr">Izbira najvišje stopnje povečave za prenos spletnih zemljevidov</string>
-	<string name="route_general_information">Skupna razdalja %1$s \n čas potovanja %2$d u %3$d m.</string>
+	<string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d u %3$d m.</string>
 	<string name="router_service_descr">Izbira spletne ali krajevne navigacijske storitve</string>
 	<string name="sd_dir_not_accessible">Shranjevalnega imenika na SD kartici ni na voljo!</string>
 	<string name="download_question">Prenesti {0} - {1}?</string>
