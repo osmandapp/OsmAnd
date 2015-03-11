@@ -2140,4 +2140,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
-	</resources>
+	<string name="action_create">Azione crea</string>
+	<string name="action_modify">Azione modifica</string>
+	<string name="action_delete">Azione elimina</string>
+	<string name="osm_edits">Modifiche OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato</string>
+	<string name="your_edits">Le tue modifiche</string>
+    </resources>
