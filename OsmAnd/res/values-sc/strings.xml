@@ -60,8 +60,8 @@
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
-    <string name="shared_string_select_on_map">Ischerta in sa mapa…</string>
-    <string name="shared_string_favorite">Prefèrridu…</string>
+    <string name="shared_string_select_on_map">Ischerta in sa mapa</string>
+    <string name="shared_string_favorite">Prefèrridu</string>
     <string name="route_preferences">Preferèntzias pro s’àndala</string>
     <string name="route_info">Informatziones pro s’àndala</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
@@ -1485,7 +1485,7 @@
 	<string name="address">Indiritzu</string>
 	<string name="shared_string_download_successful">Iscarrigamentu cumpridu</string>
 	
-	<string name="shared_string_downloading">Iscarrigande …</string>
+	<string name="shared_string_downloading">Iscarrigande</string>
 	
 	<string name="downloading_list_indexes">Iscarrigamentu lista regiones disponìbiles…</string>
 	<string name="list_index_files_was_not_loaded">Sos documentos inditze non sunt istados agatados in osmand.net.</string>
