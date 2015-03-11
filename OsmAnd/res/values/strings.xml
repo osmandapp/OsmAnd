@@ -109,10 +109,10 @@
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
 	<string name="osmo_plugin_name">OsMo monitoring</string>
-	<string name="osmo_plugin_description">Shows the settings to use OsMo advanced live monitoring, see http://osmo.mobi. Track other devices and be tracked. 
-		Create anonymous groups, share each other\'s location, and communicate. Has various settings for session tracking or permanent tracking.
-		\n\nAnonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
-		Fully functional groups should be created on the website and only registered users have access to them.
+	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
+		\n\nYou can track other devices and be tracked. You can spontaneoulsy  create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
+		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator. 
+		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
 	<string name="srtm_paid_version_title">Contour lines plugin</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
@@ -142,18 +142,17 @@
 		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
 	<string name="audionotes_plugin_name">Audio/video notes</string>
-	<string name="audionotes_plugin_description">This plugin provides the functionality and buttons to take audio/photography/video notes during a trip</string>
+	<string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map screen, or directly the context menu for any position on the map.</string>
 	<string name="osmand_parking_plugin_name">Parking Position</string>
 	<string name="osmand_parking_plugin_description">This plugin was developed to use OsmAnd to easily memorize the location of your parked car.</string>
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
 	<string name="accessibility_preferences">Accessibility</string>
-	<string name="osmand_accessibility_description">Shows the settings to activate special accessibility features.</string>
+	<string name="osmand_accessibility_description">This plugin makes a device\'s acessibility features available directly in OsmAnd, and facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback.</string>
 	<string name="osm_settings">OSM editing</string>
-	<string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM bugs, and contributing recorded GPX files. Using this functionality requires personal OSM credentials.</string>
-	<string name="osmand_development_plugin_description">Shows the settings for development and debugging features like route simulation or rendering performance indication.</string>
+	<string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM bugs, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to http://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
+	<string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the screen rendering performance, or voice prompting. These settings are intended for developers and are not needed for the general user.</string>
 	<string name="debugging_and_development">OsmAnd development</string>
-
 	<string name="rename_failed">Rename failed.</string>
 	<string name="days_behind">days behind</string>
 	<string name="back_to_map">Back to map</string>
@@ -1938,7 +1937,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_online_address">Online search</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-	<string name="route_general_information">Total distance %1$s \n travelling time %2$d h %3$d m.</string>
+	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">The data storage folder on the SD card is not accessible!</string>
