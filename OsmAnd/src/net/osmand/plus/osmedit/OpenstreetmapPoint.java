@@ -2,7 +2,6 @@ package net.osmand.plus.osmedit;
 
 import java.io.Serializable;
 
-import net.osmand.data.AmenityType;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 
