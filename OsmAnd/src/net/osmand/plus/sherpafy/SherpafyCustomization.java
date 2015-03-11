@@ -739,9 +739,5 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		a.startActivityForResult(newIntent, 0);
 	}
 	
-	@Override
-	public boolean showNavigationControls() {
-		return false;
-	}
 
 }
