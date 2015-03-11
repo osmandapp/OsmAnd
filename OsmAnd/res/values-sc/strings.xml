@@ -1889,4 +1889,17 @@
 	<string name="action_modify">Atzione modìfica</string>
 	<string name="action_delete">Atzione burra</string>
 	<string name="osm_edits">Modìficas OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string></resources>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu</string>
+	<string name="your_edits">Modìficas tuas</string>
+    <string name="waypoint_visit_after">Vìsita a pustis</string>
+    <string name="waypoint_visit_before">Vìsita in antis</string>
+    <string name="simulate_your_location">Dispinta/Sìmula sa positzione tua</string>
+    <string name="drawer">Lista ebbia</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Dimandas fitianas, ùrtimas modìficas e àteru</string>
+    <string name="routing_settings_2">Impostaduras de nàvigu</string>
+    <string name="general_settings_2">Impostaduras generales</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">De-ischerta</string>
+	<string name="shared_string_deselect_all">De-ischerta totu</string>
+	</resources>
