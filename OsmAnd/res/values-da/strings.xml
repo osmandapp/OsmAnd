@@ -1964,4 +1964,10 @@
 	<string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
-	</resources>
+	<string name="action_create">Med handlingen oprettet</string>
+	<string name="action_modify">Handling rediger</string>
+	<string name="action_delete">Handlingen slet</string>
+	<string name="osm_edits">OSM redigeringer</string>
+	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
+	<string name="your_edits">Dine redigeringer</string>
+    </resources>
