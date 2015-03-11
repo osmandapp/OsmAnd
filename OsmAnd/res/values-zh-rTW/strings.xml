@@ -1945,4 +1945,10 @@
     <string name="shared_string_dismiss">解除</string>
 	<string name="shared_string_collapse">崩潰</string>
 	<string name="drawer">平面清單</string>
-    </resources>
+    <string name="osm_edits">OSM 編輯</string>
+	<string name="osmand_parking_hour">時</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> <string name="parking_place_limited">停車場時限</string>
+	<string name="your_edits">您的編輯</string>
+    <string name="action_create">行動建立</string>
+	<string name="action_modify">行動修改</string>
+	<string name="action_delete">行動刪除</string>
+	</resources>
