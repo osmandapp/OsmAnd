@@ -441,7 +441,7 @@
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-	<string name="local_index_action_do">您即將 %2$s 個項目 %1$s，要繼續嗎？</string>
+	<string name="local_index_action_do">您即將到 %2$s 的 %1$s 的項目，要繼續嗎？</string>
 	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
 	<string name="local_index_mi_backup">停用</string>
@@ -533,12 +533,11 @@
 \n\t*興趣點（按類型或名稱）
 \n\t*透過您的查尋履歷
 \n\t*或透過您事先定義的我的最愛
-\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'導引\'或\'在地圖上顯示\'等等的選項。 "</string>
+\n\n為所有在快顯功能表中或行動列被點選，都提供有例如\'導引\'或\'在地圖上顯示\'等的選項。 "</string>
 	<string name="tip_map_context_menu">\'使用位置\'選單</string>
-	<string name="tip_map_context_menu_t">地圖快顯功能表(\'使用位置\')，包含了所有操作的參考點（位置）。
-		\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
-		\n\n若長按則可以再次隱藏標記對話框。
-	</string>
+	<string name="tip_map_context_menu_t">"地圖快顯功能表\'使用位置\'，包含了所有作用引到一個點（位置）。
+\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
+\n\n若長按則可以再次隱藏標記對話框。 "</string>
 	
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
 \n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
@@ -943,10 +942,10 @@
 	<string name="poi_remove_title">刪除興趣點</string>
 	<string name="poi_remove_success">興趣點刪除成功</string>
 	<string name="poi_action_add">新增</string>
-	<string name="poi_action_change">修改</string>
-	<string name="poi_action_succeded_template">啟動{0}動作完成。</string>
-	<string name="poi_error_unexpected_template">在進行{0}動作時發生意外錯誤。</string>
-	<string name="poi_error_io_error_template">執行{0}時發生存取錯誤。</string>
+	<string name="poi_action_change">更改</string>
+	<string name="poi_action_succeded_template">運作 {0} 成功完成。</string>
+	<string name="poi_error_unexpected_template">在進行 {0} 運作時發生意外錯誤。</string>
+	<string name="poi_error_io_error_template">當執行 {0} 運作時發生 I/O 錯誤。</string>
 	<string name="poi_error_info_not_loaded">節點的資訊未載入</string>
 	<string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">營業</string>
@@ -974,10 +973,7 @@
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
-    <string name="use_distance_measurement_help">* 點選標記一個標點。\n 
-        * 在地圖上按住去刪除先前的標點。\n
-        * 在標點上按住以檢視並附加敘述。\n
-        * 在測量小工具上點擊可看到更多作用。</string>
+    <string name="use_distance_measurement_help">* 點選標記一個標點。\n * 在地圖上按住去刪除先前的標點。\n * 在標點上按住以檢視並附加敘述。\n * 在測量小工具上點擊可看到更多的作用。</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
@@ -1043,8 +1039,8 @@
     <string name="av_def_action_choose">應需求選取</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音訊</string>
-    <string name="av_widget_action_descr">選擇預設小工具的機能</string>
-    <string name="av_widget_action">預設小工具動作</string>
+    <string name="av_widget_action_descr">選擇預設小工具的作用</string>
+    <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊輸出格式</string>
     <string name="av_video_format">視訊輸出格式</string>
     <string name="tip_recent_changes_1_4_t">在1.4的變更：
@@ -1916,13 +1912,13 @@
 	<string name="shared_string_downloading">下載中</string>
 	<string name="shared_string_download_successful">下載成功</string>
 	<string name="shared_string_unexpected_error">發生意外錯誤</string>
-	<string name="shared_string_action_template">動作 {0}</string>
+	<string name="shared_string_action_template">行動 {0}</string>
 	<string name="shared_string_close">關閉</string>
 	<string name="shared_string_exit">離開</string>
 	<string name="shared_string_show">顯示</string>
 	<string name="shared_string_show_all">全部顯示</string>
 	<string name="shared_string_show_on_map">在地圖上顯示</string>
-	<string name="shared_string_more_actions">更多的動作</string>
+	<string name="shared_string_more_actions">更多的行動</string>
 	<string name="shared_string_map">地圖</string>
 	<string name="shared_string_favorites">我的最愛</string>
 	<string name="shared_string_add_to_favorites">加到我的最愛</string>
@@ -1945,4 +1941,10 @@
     <string name="shared_string_dismiss">解除</string>
 	<string name="shared_string_collapse">崩潰</string>
 	<string name="drawer">平面清單</string>
-    </resources>
+    <string name="osm_edits">OSM 編輯</string>
+	<string name="osmand_parking_hour">時</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> <string name="parking_place_limited">停車場時限</string>
+	<string name="your_edits">您的編輯</string>
+    <string name="action_create">行動建立</string>
+	<string name="action_modify">行動修改</string>
+	<string name="action_delete">行動刪除</string>
+	</resources>

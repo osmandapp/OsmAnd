@@ -1903,8 +1903,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="save_track_interval_globally">Intervallo registrazione</string>
 	<string name="rendering_attr_publicTransportMode_name">Percorsi bus, filubus, servizi navetta</string>
 	<string name="confirm_every_run">Chiedi sempre</string>
-	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo generale per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
-	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
+	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo predefinito per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
+	<string name="save_global_track_interval">Intervallo predefinito di registrazione</string>
 	<string name="traffic_warning_speed_limit">Limite di velocità</string>
     <string name="traffic_warning_payment">Casello</string>
     <string name="traffic_warning_border_control">Controllo doganale</string>
@@ -2140,4 +2140,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
-	</resources>
+	<string name="action_create">Azione crea</string>
+	<string name="action_modify">Azione modifica</string>
+	<string name="action_delete">Azione elimina</string>
+	<string name="osm_edits">Modifiche OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato</string>
+	<string name="your_edits">Le tue modifiche</string>
+    </resources>

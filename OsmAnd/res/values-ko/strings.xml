@@ -2200,4 +2200,10 @@
 	<string name="waypoint_visit_after">방문 후</string>
     <string name="waypoint_visit_before">방문 하기 전</string>
     <string name="shared_string_collapse">실패</string>
-	</resources>
+	<string name="action_create">액션 생성</string>
+	<string name="action_modify">액션 수정</string>
+	<string name="action_delete">액션 삭제</string>
+	<string name="osm_edits">OSM 편집</string>
+	<string name="osmand_parking_hour">시간</string><string name="osmand_parking_minute">분</string><string name="osmand_parking_time_left">남은 시간</string> <string name="parking_place_limited">주차 장소 시간 제한</string>
+	<string name="your_edits">편집</string>
+    </resources>
