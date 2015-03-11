@@ -20,6 +20,7 @@
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_round"
+                android:id="@+id/map_menu_button"
                 android:src="@drawable/ic_action_remove_light" />
 
             <ImageButton
@@ -27,6 +28,7 @@
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginLeft="@dimen/map_button_spacing"
                 android:background="@drawable/btn_round"
+                android:id="@+id/map_route_info_button"
                 android:src="@drawable/ic_action_remove_light" />
         </LinearLayout>
 
@@ -38,6 +40,7 @@
             android:layout_marginRight="@dimen/map_button_margin" >
 
             <ImageButton
+                android:id="@+id/map_my_location_button"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:layout_gravity="bottom"
@@ -52,14 +55,14 @@
                 android:orientation="vertical" >
 
                 <ImageButton
-                    android:id="@+id/"
+                    android:id="@+id/map_zoom_in_button"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:background="@drawable/btn_circle"
-                    
                     android:src="@drawable/ic_action_remove_light" />
 
                 <ImageButton
+					android:id="@+id/map_zoom_out_button"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:layout_marginTop="@dimen/map_button_spacing"
@@ -75,24 +78,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@drawable/btn_flat"
+            android:layout_height="@dimen/map_route_buttons_height"
+            android:id="@+id/map_route_preparation_layout"
             android:layout_gravity="bottom" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="Route preparation" >
-            </TextView>
+            
+             <ImageButton
+                android:layout_width="@dimen/map_route_buttons_width"
+                android:layout_height="match_parent"
+                android:id="@+id/map_cancel_route_button"
+                android:background="@drawable/btn_flat"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_remove_light" />
+             
+             <ImageButton
+                android:layout_width="@dimen/map_route_buttons_width"
+                android:layout_height="match_parent"
+                android:id="@+id/map_waypoints_route_button"
+                android:background="@drawable/btn_flat"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_remove_light" />
+             
+             <ImageButton
+                android:layout_width="@dimen/map_route_buttons_width"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_flat"
+                android:id="@+id/map_options_route_button"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_remove_light" />
+             
+             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_flat"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/map_go_route_button"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:drawableLeft="@drawable/ic_action_remove_light"
+                android:textSize="20sp" 
+                android:drawablePadding="4dp" />
         </LinearLayout>
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/map_context_menu_layout"
+            android:visibility="gone"
             android:background="@drawable/btn_flat" 
             android:layout_gravity="bottom">
 
@@ -101,11 +132,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:gravity="center"
-                android:textColor="@color/color_black"
-                android:textSize="24sp"
-                android:maxLines="1"
-                android:text="Context menu" >
+                android:gravity="center">
             </TextView>
 
             <ImageButton

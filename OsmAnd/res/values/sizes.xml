@@ -48,6 +48,8 @@
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
 	<!--  map buttons -->
+	<dimen name="map_route_buttons_width">60dp</dimen>
+	<dimen name="map_route_buttons_height">54dp</dimen>
 	<dimen name="map_address_height">40dp</dimen>
 	<dimen name="map_button_size">48dp</dimen>
 	<dimen name="map_widget_icon">24dp</dimen>

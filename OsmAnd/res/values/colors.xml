@@ -11,8 +11,11 @@
 	<color name="list_item_background_dark_pressed">#be39464d</color>
 	
 	<color name="map_widget_stroke">#333333</color>
-	<color name="map_widget_light">#eeffffff</color>
+	<color name="map_widget_light">#aaffffff</color>
+	<color name="map_widget_dark">#aa3f3f3f</color>
+	<color name="map_widget_light_trans">#eeffffff</color>
 	<color name="map_widget_light_pressed">#ddcccccc</color>
+	<color name="map_widget_blue">#3030FF</color>
 
 
 	<color name="actionbar_dark_color">#39464d</color>

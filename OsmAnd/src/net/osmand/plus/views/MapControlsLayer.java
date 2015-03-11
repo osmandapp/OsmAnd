@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -30,6 +32,7 @@ import net.osmand.plus.views.controls.SmallMapMenuControls;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -38,12 +41,90 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 5000;
+	private static class MapControl {
+		ImageView iv;
+		int bgDark;
+		int bgLight;
+		int resId;
+		int resLight = R.color.icon_color_light;
+		int resDark = 0;
+				
+		boolean nightMode = false;
+		boolean f = true;
+		
+		
+		public MapControl setRoundTransparent() {
+			setBg(R.drawable.btn_circle_trans);
+			return this;
+		}
+		
+		public MapControl setBg(int dayBg, int nightBg) {
+			bgDark = nightBg;
+			bgLight = dayBg;
+			f = true;
+			return this;
+
+		}
+		
+		public MapControl setBg(int bg) {
+			bgDark = bg;
+			bgLight = bg;
+			f = true;
+			return this;
+		}
+		
+		public static MapControl create(ImageView iv, int resId) {
+			MapControl mc = new MapControl();
+			mc.iv = iv;
+			mc.resId = resId;
+			mc.setBg(R.drawable.btn_circle);
+			return mc;
+		}
+		
+		public boolean setIconResId(int resId) {
+			if(this.resId == resId) {
+				return false;
+			}
+			this.resId = resId;
+			f = true;
+			return true;
+		}
+
+		public boolean setIconColorId(int clr) {
+			if(resLight == clr && resDark == clr) {
+				return false;
+			}
+			resLight = clr;
+			resDark = clr;
+			f = true;
+			return true;
+		}
+		
+		public void update(OsmandApplication ctx, boolean night) {
+			if (nightMode == night && !f) {
+				return;
+			}
+			f = false;
+			nightMode = night;
+			iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+			iv.setImageDrawable(ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight));
+		}
+
+		
+		
+	}
+	
+	
+	private List<MapControl> controls = new ArrayList<MapControlsLayer.MapControl>(); 
+	
+	
 	private final MapActivity mapActivity;
 	private int shadowColor = -1;
 	
@@ -68,12 +149,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 
 
+	private MapControl backToLocationControl;
+
+
+	private MapControl menuControl;
+
+
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
 		settings = activity.getMyApplication().getSettings();
 	}
 	
 	
+	
+
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
@@ -132,13 +222,63 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initNewControls() {
 		initZooms();
+		initControls();
+	}
+
+
+	private void initControls() {
+		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
+		backToLocationControl = MapControl.create((ImageView) backToLocation, R.drawable.ic_action_get_my_location).setBg(R.drawable.btn_circle_blue)
+				;
+		controls.add(backToLocationControl);
 		
+		backToLocation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+			}
+		});		
+		
+		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
+		menuControl = MapControl.create((ImageView) backToMenuButton, R.drawable.ic_navigation_drawer).
+		setBg(R.drawable.btn_round, R.drawable.btn_round_night);
+		controls.add(menuControl);
+		backToMenuButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// double lat = activity.getMapView().getLatitude();
+				// double lon = activity.getMapView().getLongitude();
+				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
+				notifyClicked();
+				if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+					mapActivity.getDashboard().setDashboardVisibility(true);
+				} else {
+					mapActivity.getMapActions().onDrawerBack();
+					mapActivity.getMapActions().toggleDrawer();
+				}
+			}
+		});
+		
+		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
+		controls.add(MapControl.create((ImageView) routePlanButton, R.drawable.ic_action_info_dark).
+				setBg(R.drawable.btn_round, R.drawable.btn_round_night));
+		routePlanButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				notifyClicked();
+				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.refreshMap();
+			}
+		});
 	}
 
 
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
-		mapActivity.findViewById(id)
+		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
+		controls.add(MapControl.create((ImageView) zoomInButton, R.drawable.ic_action_zoom_in).setRoundTransparent()
+				);
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -153,6 +293,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 		final View.OnLongClickListener listener = MapZoomControls.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
+		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
+		controls.add(MapControl.create((ImageView) zoomOutButton, R.drawable.ic_action_zoom_out).setRoundTransparent()
+				);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -198,7 +341,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
-
+		controls.clear();
 	}
 
 	@Override
@@ -246,8 +389,31 @@ public class MapControlsLayer extends OsmandMapLayer {
 				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()) : 0;
 		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
+		
+		
+		///////////////////////////////////////////////
+		// new update
+		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
+		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		if (!enabled) {
+			backToLocationControl.setIconColorId(R.color.icon_color_light);
+		} else if (tracked) {
+			backToLocationControl.setIconColorId(R.color.color_distance);
+		} else {
+			backToLocationControl.setIconColorId(R.color.color_white);
+		}
+		menuControl.setIconResId(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? 
+				R.drawable.ic_dashboard_dark : R.drawable.ic_navigation_drawer);
+		
+		for(MapControl mc : controls) {
+			mc.update(mapActivity.getMyApplication(),
+					nightMode == null ? false : nightMode.isNightMode());
+		}
+		
 	}
 	
+
+
 	private void updatextColor(int textColor, int shadowColor, MapControls... mc) {
 		for(MapControls m : mc) {
 			m.updateTextColor(textColor, shadowColor);
@@ -264,7 +430,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 		if(controls.isVisible()) {
-			controls.onDraw(canvas, tileBox, nightMode);
+			// FIXME
+//			controls.onDraw(canvas, tileBox, nightMode);
 		}		
 	}
 
