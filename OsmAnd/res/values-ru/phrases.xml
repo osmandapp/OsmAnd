@@ -576,7 +576,7 @@
 	<string name="poi_seamark_harbour_basin"/>
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_seamark_landmark">Ориентир</string>
-	<string name="poi_seamark_light"/>
+	<string name="poi_seamark_light">Маяк</string>
 	<string name="poi_seamark_light_major"/>
 	<string name="poi_seamark_light_minor"/>
 	<string name="poi_seamark_light_float"/>
