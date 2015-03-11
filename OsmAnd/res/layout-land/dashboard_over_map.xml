@@ -48,7 +48,7 @@
         <include
             android:id="@+id/map_part_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dashboard_map_top_padding"
+            android:layout_height="match_parent"
             layout="@layout/map_view_on_dashboard" />
     </LinearLayout>
 

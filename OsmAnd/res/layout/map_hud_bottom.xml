@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom" 
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/map_button_margin"
+            android:layout_marginLeft="@dimen/map_button_margin" >
+
+            <ImageButton
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:background="@drawable/btn_round"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <ImageButton
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_marginLeft="@dimen/map_button_spacing"
+                android:background="@drawable/btn_round"
+                android:src="@drawable/ic_action_remove_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/map_button_margin"
+            android:layout_marginRight="@dimen/map_button_margin" >
+
+            <ImageButton
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_gravity="bottom"
+                android:background="@drawable/btn_circle"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/map_button_spacing"
+                android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/"
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:background="@drawable/btn_circle"
+                    
+                    android:src="@drawable/ic_action_remove_light" />
+
+                <ImageButton
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:layout_marginTop="@dimen/map_button_spacing"
+                    android:background="@drawable/btn_circle"
+                    android:src="@drawable/ic_action_remove_light" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_flat"
+            android:layout_gravity="bottom" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="Route preparation" >
+            </TextView>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_flat" 
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textColor="@color/color_black"
+                android:textSize="24sp"
+                android:maxLines="1"
+                android:text="Context menu" >
+            </TextView>
+
+            <ImageButton
+                android:layout_width="@dimen/map_address_height"
+                android:layout_height="@dimen/map_address_height"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_circle_transparent"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <ImageButton
+                android:layout_width="@dimen/map_address_height"
+                android:layout_height="@dimen/map_address_height"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_circle_transparent"
+                android:src="@drawable/ic_action_remove_light" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

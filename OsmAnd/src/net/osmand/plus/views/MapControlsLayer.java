@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.pm.ActivityInfo;
@@ -88,6 +89,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int rightCenterGravity = Gravity.RIGHT | Gravity.CENTER;
 		int leftCenterGravity = Gravity.LEFT | Gravity.CENTER;
 		
+		
+		initNewControls();
 		// default buttons
 		zoomControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);
@@ -117,13 +120,49 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent, 
 				rightGravity);
+		initTransparencyBar(view, parent);
+		
 		mapRoutePlanControl.setMargin(mapMenuControls.getWidth());
 		mapCancelNavigationControl.setMargin(mapSmallMenuControls.getWidth());
 		mapInfoNavigationControl.setMargin(mapSmallMenuControls.getWidth() + mapCancelNavigationControl.getWidth());
 		mapAppModeControl.setMargin(mapNavigationControl.getWidth());
 
-		initTransparencyBar(view, parent);
+		;
 	}
+
+	private void initNewControls() {
+		initZooms();
+		
+	}
+
+
+	private void initZooms() {
+		final OsmandMapTileView view = mapActivity.getMapView();
+		mapActivity.findViewById(id)
+		zoomInButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				notifyClicked();
+				if (view.isZooming()) {
+					mapActivity.changeZoom(2, System.currentTimeMillis());
+				} else {
+					mapActivity.changeZoom(1, System.currentTimeMillis());
+				}
+
+			}
+		});
+		final View.OnLongClickListener listener = MapZoomControls.getOnClickMagnifierListener(view);
+		zoomInButton.setOnLongClickListener(listener);
+		zoomOutButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				notifyClicked();
+				mapActivity.changeZoom(-1, System.currentTimeMillis());
+			}
+		});
+		zoomOutButton.setOnLongClickListener(listener);		
+	}
+
 
 	public void startNavigation() {
 		if (mapNavigationControl == null) {
@@ -148,6 +187,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	protected void notifyClicked(MapControls m) {
+		notifyClicked();
+	}
+	
+	protected void notifyClicked() {
 		if(mapNavigationControl != null) {
 			mapNavigationControl.stopCounter();
 		}

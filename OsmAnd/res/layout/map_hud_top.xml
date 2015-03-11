@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- TOP ROW -->
+
+    <LinearLayout
+        android:id="@+id/WaypointVisit2"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/map_address_height"
+        android:background="@drawable/btn_flat"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/map_address_text"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="TEST Street name"
+            android:textColor="@color/color_black"
+            android:textSize="24sp" >
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/waypoint_more"
+            android:layout_width="@dimen/map_address_height"
+            android:layout_height="@dimen/map_address_height"
+            android:background="@drawable/btn_circle_transparent"
+            android:src="@drawable/ic_action_remove_light" />
+
+        <ImageButton
+            android:id="@+id/waypoint_close"
+            android:layout_width="@dimen/map_address_height"
+            android:layout_height="@dimen/map_address_height"
+            android:background="@drawable/btn_circle_transparent"
+            android:src="@drawable/ic_action_remove_light" />
+    </LinearLayout>
+    <!-- Widgets -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!-- LEFT widgets colon -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_weight="0.4"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/map_hud_widget" />
+                    <include layout="@layout/map_hud_widget" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:layout_marginLeft="@dimen/map_button_margin"
+                    android:layout_marginTop="@dimen/map_button_margin"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:id="@+id/map_layers_button"
+                        android:layout_width="@dimen/map_button_size"
+                        android:layout_height="@dimen/map_button_size"
+                        android:background="@drawable/btn_inset_circle"
+                        android:src="@drawable/ic_action_remove_light" />
+
+                    <ImageButton
+                        android:id="@+id/map_compass_button"
+                        android:layout_width="@dimen/map_button_size"
+                        android:layout_height="@dimen/map_button_size"
+                        android:background="@drawable/btn_inset_circle"
+                        android:src="@drawable/ic_action_remove_light" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- empty block to not let widgets grow more than 40% -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.6" >
+            </LinearLayout>
+        </LinearLayout>
+        <!-- CENTER TODO -->
+        <!-- RIGHT widgets colon -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <!-- empty block to not let widgets grow more than 40% -->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.6" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:layout_weight="0.4"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:orientation="vertical" >
+
+                    <include layout="@layout/map_hud_widget" />
+
+
+                    <include layout="@layout/map_hud_widget" />
+
+                    <include layout="@layout/map_hud_widget" />
+
+                    <include layout="@layout/map_hud_widget" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:layout_marginRight="@dimen/map_button_margin"
+                    android:layout_marginTop="@dimen/map_button_margin"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:layout_width="@dimen/map_button_size"
+                        android:layout_height="@dimen/map_button_size"
+                        android:background="@drawable/btn_inset_circle"
+                        android:src="@drawable/ic_action_remove_light" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

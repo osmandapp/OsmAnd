@@ -176,7 +176,7 @@ public class MapActivity extends AccessibleActivity {
 					}
 					mapView.refreshMap(true);
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
-					findViewById(R.id.ParentLayout).invalidate();
+					findViewById(R.id.drawer_layout).invalidate();
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);

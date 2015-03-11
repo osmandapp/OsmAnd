@@ -75,9 +75,11 @@ public class DashboardOnMap {
 
 	public void createDashboardView() {
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
-		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
-		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));
+//		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
+//		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//				ViewGroup.LayoutParams.MATCH_PARENT));
+//		((FrameLayout) mapActivity.findViewById(R.id.MapHudButtonsOverlay)).addView(dashboardView);
+		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -86,7 +88,7 @@ public class DashboardOnMap {
 		};
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
-		((FrameLayout) mapActivity.findViewById(R.id.ParentLayout)).addView(dashboardView);
+		
 		
 		dashboardView.findViewById(R.id.map_layers_button).setOnClickListener(new View.OnClickListener() {
 			
@@ -103,7 +105,7 @@ public class DashboardOnMap {
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(mapActivity)
-					.withDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_map))
+					.withDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_get_my_location))
 					.withButtonColor(mapActivity.getResources().getColor(R.color.color_myloc_distance))
 					.withGravity(landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT)
 					.withMargins(0, landscape ? 0 : 160, 16, landscape ? 16 : 0).create();
@@ -294,7 +296,7 @@ public class DashboardOnMap {
 
 	// To animate view slide out from right to left
 	private void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.ParentLayout).getWidth(),0,0,0);
+		TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.MapHudButtonsOverlay).getWidth(),0,0,0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
@@ -302,7 +304,7 @@ public class DashboardOnMap {
 	}
 
 	private void hide(View view) {
-		TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.ParentLayout).getWidth(), 0, 0);
+		TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.MapHudButtonsOverlay).getWidth(), 0, 0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {
