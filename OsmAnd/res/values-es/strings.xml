@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1960,4 +1961,18 @@
 	<string name="shared_string_selected">Seleccionada(s)</string>
 	<string name="track_segments">Segmentos de traza</string>
 	<string name="track_points">Puntos de traza</string>
+	<string name="action_create">Acción crear</string>
+	<string name="action_modify">Acción modificar</string>
+	<string name="action_delete">Acción borrar</string>
+	<string name="osm_edits">Ediciones OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Izquierda</string> <string name="parking_place_limited">Aparcamiento de tiempo limitado</string>
+	<string name="your_edits">Tus ediciones</string>
+    <string name="waypoint_visit_after">Visitar después</string>
+    <string name="waypoint_visit_before">Visitar antes</string>
+    <string name="simulate_your_location">Simular tu ubicación</string>
+    <string name="drawer">Lista plana</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
+    <string name="routing_settings_2">Opciones de navegación</string>
+    <string name="general_settings_2">Opciones generales</string>
 	</resources>
