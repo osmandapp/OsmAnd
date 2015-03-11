@@ -403,7 +403,7 @@
 	<string name="osmand_parking_position_description_add">Prevzem avtomobila ob:</string>
 	<string name="osmand_parking_position_name">Točka parkiranja</string>
 	<string name="osmand_parking_plugin_description">Ta vtičnik omogoča shranjevanje mesta vašega parkiranega avtomobila.</string>
-	<string name="osmand_parking_plugin_name">Vtičnik za parkirni položaj</string>
+	<string name="osmand_parking_plugin_name">Parkirni položaj</string>
 	<string name="context_menu_item_add_parking_point">Označi kot parkirni položaj</string>
 	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
@@ -614,7 +614,7 @@
 	<string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in predpomnjenje ploščic na kartici SD)</string>
 	<string name="online_map_settings">Spletni zemljevidi</string>
 	<string name="online_map_settings_descr">Nastavitev virov spletnih zemljevidov ali predpomnjenih ploščic</string>
-	<string name="osmand_rastermaps_plugin_description">Pokaži nastaviteve za nastavitev različnih spletnih ali predpomnjenih ploščic zemljevidov kot osnovni zemljevid ali zgornje / spodnje plasti. Te zemljevide lahko pripravite, tudi ko niste povezani, in jih kopirate v mapo OsmAnd.</string>
+	<string name="osmand_rastermaps_plugin_description">"Pokaži nastavitve za nastavitev različnih spletnih ali predpomnjenih ploščic zemljevidov kot osnovni zemljevid ali zgornje / spodnje plasti. Te zemljevide lahko pripravite, tudi ko niste povezani, in jih kopirate v mapo OsmAnd. "</string>
 	<string name="osm_editing_plugin_description">Pokaži nastavitve, ki so zahtevane za povratne informacije OSM kot so zbiranje/spreminjanje predmetov POI OSM, odpiranje/komentiranje hroščev OSM in prispevanje posnetih sledi GPX (zahteva poverila OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se bodo verjetno prikazali hitreje. Morda na nekaterih napravah ne bodo dobro delovali.</string>
 	<string name="debugging_and_development">Razvoj OsmAnd</string>
@@ -1112,7 +1112,7 @@
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	<string name="index_srtm_ele">Izohipse</string>
     <string name="srtm_plugin_description">Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape).</string>
-    <string name="srtm_plugin_name">Vtičnik Izohipse</string>
+    <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
     <string name="recording_description">Snemanje %1$s %3$s %2$s</string>
@@ -1611,7 +1611,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="select_gpx">Izberite GPX …</string>
     <string name="route_descr_select_destination">Izberite cilj</string>
     <string name="shared_string_select_on_map">Izberite na zemljevidu</string>
-    <string name="shared_string_favorite">Priljubljene …</string>
+    <string name="shared_string_favorite">Priljubljene</string>
     <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
 \n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
 \n Opomba 2: v novem mestu shrambe si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti podatkov.</string>
@@ -1647,7 +1647,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
     <string name="osmo_plugin_description">"OpenStreetMap napredno sledenje v živo, oglejte si http://osmo.mobi. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
-    <string name="osmo_plugin_name">OsMo (Napredno sledenje v živo)</string>
+    <string name="osmo_plugin_name">OsMo spremljanje</string>
     <string name="keep_informing_never">Samo ročno (tapnite puščico)</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
@@ -1865,7 +1865,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
 	<string name="save_track_interval_globally">Interval beleženja</string>
 	<string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
-	<string name="record_plugin_name">Registracija vaših potovanj</string>
+	<string name="record_plugin_name">Registracija potovanj</string>
     <string name="index_tours">Izleti</string>
     <string name="waypoints">Točke</string>
     <string name="speak_poi">Najavi bližnji POI</string>
@@ -1992,7 +1992,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
 	<string name="shared_string_disabled">Onemogočeno</string>
 	<string name="shared_string_enabled">Omogočeno</string>
-<string name="plugin_ski_name">Smučarske karte</string>
+<string name="plugin_ski_name">Pogled smučarska karta</string>
     <string name="plugin_nautical_name">Pomorska karta</string>
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
     <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
@@ -2009,4 +2009,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>
     <string name="track_segments">Segmenti sledi</string>
 	<string name="track_points">Točke sledi</string>
+	<string name="action_create">Ustvarjanje dejanja</string>
+	<string name="action_modify">Sprememba dejanja</string>
+	<string name="action_delete">Brisanje dejanja</string>
+	<string name="osm_edits">OSM urejanje</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Ostaja</string> <string name="parking_place_limited">Parkirno mesto časovno omejeno</string>
 	</resources>
