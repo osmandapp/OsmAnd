@@ -1902,4 +1902,10 @@
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_deselect">De-ischerta</string>
 	<string name="shared_string_deselect_all">De-ischerta totu</string>
+	<string name="shared_string_unexpected_error">B\'est istadu unu errore non prevididu</string>
+	<string name="shared_string_action_template">Atzione {0}</string>
+	<string name="shared_string_collapse">Mìnima</string>
+	<string name="shared_string_video">Vìdeo</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="route_points">Puntos de s\'àndala</string>
 	</resources>
