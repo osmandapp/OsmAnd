@@ -673,6 +673,6 @@
 	<string name="poi_general">Универмаг</string>
 	<string name="poi_lodging">Проживание</string>
 	<string name="poi_man_made">Инфраструктура</string>
-	<string name="poi_administrative">Госучреждения</string>
+	<string name="poi_administrative">Административное</string>
 	<string name="poi_seamark">Морские объекты</string>
 	</resources>
