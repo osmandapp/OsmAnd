@@ -148,10 +148,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			}
 			TextView label = (TextView) row.findViewById(R.id.folder_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
+			OsmandApplication app = getMyApplication();
 			final PoiLegacyFilter model = getItem(position);
 			label.setText(model.getName());
 			if(model.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
-				icon.setImageResource(R.drawable.ic_action_filter_dark);
+				icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_filter_dark));
 			} else if (model.getFilterId().equals(PoiLegacyFilter.BY_NAME_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
@@ -189,6 +190,10 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	@Override
 	public void locationUpdate(LatLon l) {
+	}
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 }

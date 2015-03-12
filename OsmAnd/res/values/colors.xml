@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="osmo_header_dark">#2d383d</color>
+	<color name="osmo_header_light">#b36d12</color>
+
 	<color name="parking_card_selected">#234DDE</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>

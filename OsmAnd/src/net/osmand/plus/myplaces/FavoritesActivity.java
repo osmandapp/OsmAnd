@@ -127,18 +127,6 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 
-	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
-		tb.setTitle(null);
-		tb.getMenu().clear();
-		tb.setVisibility(visible? View.VISIBLE : View.GONE);
-		return tb;
-	}
-
-	public void setToolbarVisibility(boolean visible){
-		findViewById(R.id.bottomControls).setVisibility(visible? View.VISIBLE : View.GONE);
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();

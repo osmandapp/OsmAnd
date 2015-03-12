@@ -37,6 +37,7 @@
 		<attr name="list_settings_icon" format="reference"/>
 		<attr name="size_progress_bar" format="reference"/>
 		<attr name="dash_parking_bg" format="reference"/>
+		<attr name="osmo_header_background" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

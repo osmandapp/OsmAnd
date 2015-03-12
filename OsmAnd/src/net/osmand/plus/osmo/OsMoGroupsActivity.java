@@ -38,6 +38,8 @@ import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
@@ -78,6 +80,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -433,31 +436,31 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
+					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
-				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 						// there is a bug in Android 4.2 layout
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
-							// there is a bug in Android 4.2 layout
+					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
+												// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
 				}
 				if (group != null) {
-					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
+					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
 					createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
-							R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+							R.drawable.ic_action_delete_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 
@@ -850,7 +853,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final EditText description = (EditText) v.findViewById(R.id.Description);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
 		final CheckBox onlyByInvite = (CheckBox) v.findViewById(R.id.OnlyByInvite);
-		final TextView warnCreate = (TextView) v.findViewById(R.id.osmo_group_create_info);
+
 		final TextView warnCreateDesc = (TextView) v.findViewById(R.id.osmo_group_create_dinfo);
 		View.OnClickListener click = new View.OnClickListener() {
 			
@@ -860,7 +863,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				warnCreateDesc.setVisibility(vls == View.VISIBLE? View.GONE : View.VISIBLE);
 			}
 		};
-		warnCreate.setOnClickListener(click);
+		ImageButton info = (ImageButton) v.findViewById(R.id.info);
+		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_info_dark));
+		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
 		
 		builder.setView(v);
@@ -957,18 +962,26 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.clear();
+		Menu oldMenu = menu;
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(this);
+		if (portrait) {
+			menu = getClearToolbar(true).getMenu();
+		} else {
+			getClearToolbar(false);
+		}
 		createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session, 
-				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				R.drawable.ic_action_gshare_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
-				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
-				R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				R.drawable.ic_group_add,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(oldMenu, SETTINGS_ID, R.string.shared_string_settings,
+				R.drawable.ic_action_settings_enabled_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -1152,8 +1165,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			final OsMoGroup model = getGroup(groupPosition);
 			if(selectedObject == model) {
 				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
-			} else {
-				row.setBackgroundColor(Color.TRANSPARENT);
 			}
 			label.setText(model.getVisibleName(OsMoGroupsActivity.this));
 			if(model.isMainGroup() || model.isActive()) {
@@ -1219,8 +1230,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			row.setTag(model);
 			if(selectedObject == model) {
 				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
-			} else {
-				row.setBackgroundColor(Color.TRANSPARENT);
 			}
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);

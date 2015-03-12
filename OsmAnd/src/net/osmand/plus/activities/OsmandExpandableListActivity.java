@@ -6,7 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+
 import net.osmand.plus.OsmandApplication;
+
 import android.app.ActionBar;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,7 +19,7 @@ import android.view.View;
 
 public abstract class OsmandExpandableListActivity extends
 		ActionBarProgressActivity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
@@ -27,22 +29,22 @@ public abstract class OsmandExpandableListActivity extends
 
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getApplication();
+		return (OsmandApplication) getApplication();
 	}
-	
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
-		case android.R.id.home:
-			finish();
-			return true;
+			case android.R.id.home:
+				finish();
+				return true;
 
 		}
 		return false;
 	}
-	
+
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
 		int r = isLightActionBar() ? iconLight : iconDark;
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
@@ -58,7 +60,11 @@ public abstract class OsmandExpandableListActivity extends
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		return menuItem;
 	}
-	
+
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int icon, int menuItemType) {
+		return createMenuItem(m, id, titleRes, icon, icon, menuItemType);
+	}
+
 	public void fixBackgroundRepeat(View view) {
 		Drawable bg = view.getBackground();
 		if (bg != null) {
@@ -69,18 +75,18 @@ public abstract class OsmandExpandableListActivity extends
 			}
 		}
 	}
-	
 
-	public void setListAdapter(OsmandBaseExpandableListAdapter adapter){
-		((ExpandableListView)findViewById(android.R.id.list)).setAdapter(adapter);
+
+	public void setListAdapter(OsmandBaseExpandableListAdapter adapter) {
+		((ExpandableListView) findViewById(android.R.id.list)).setAdapter(adapter);
 	}
 
 	public ExpandableListView getExpandableListView() {
-		return (ExpandableListView)findViewById(android.R.id.list);
+		return (ExpandableListView) findViewById(android.R.id.list);
 	}
 
-	public void setOnChildClickListener(ExpandableListView.OnChildClickListener childClickListener){
-		((ExpandableListView)findViewById(android.R.id.list)).setOnChildClickListener(childClickListener);
+	public void setOnChildClickListener(ExpandableListView.OnChildClickListener childClickListener) {
+		((ExpandableListView) findViewById(android.R.id.list)).setOnChildClickListener(childClickListener);
 	}
 
 	public boolean isLightActionBar() {
