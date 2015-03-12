@@ -61,7 +61,7 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">Connector extern (descàrrega addicional) que permet desar la localització del vostre cotxe aparcat.</string>
+<string name="osmand_parking_plugin_description">Aquest connector s\'ha desenvolupar per utilitzar OsmAnd per desar amb comoditat la localització del vostre cotxe aparcat.</string>
 <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
@@ -829,7 +829,11 @@
 <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
 <string name="transport_to_go_after">prioritza distancia</string>
 <string name="hello">Aplicació de navegació OsmAnd</string>
-<string name="osmand_rastermaps_plugin_description">Us mostra les preferències per configurar diversos mapes en línia o emmagatzemats, com a mapa base o com a mapa sobreposat / de fons. Podeu preparar i copiar aquests mapes a la carpeta de dades OsmAnd.</string>
+<string name="osmand_rastermaps_plugin_description">Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o raster), des els mosaics predefinits d'Openstreetmap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, relleus, etc.
+
+Qualsevol d'aquests mapes es pot utilitzar sigui com principal (base) per veure's a la vista del mapa d'OsmAnd, o com una superposició o sots-posició d'un altre mapa base (com els mapes  d'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials d'OsmAnd via el menú &lt;&lt;Configuració del mapa&gt;&gt; a voluntat.
+
+Els mapes de mosaic es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús en desconnexió (i copiats manualment al directori d'OsmAnd) com una base de dades sqlite construïda per diferents eines de preparació de mapes de tercers. </string>
 	<string name="choose_audio_stream_descr">Escolliu el canal per reproduir el guiat per veu (depenent del sistema)</string>
 	<string name="renderers">Renderització dels vectors</string>
 	<string name="context_menu_item_open_bug">Obre un error d\'OSM</string>
@@ -1038,7 +1042,7 @@
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització...» per assignar una nota a la localitzacio especificada</string>
     
-    <string name="audionotes_plugin_description">"Mostra el botó de registrar notes d\'àudio/vídeo  durant el viatge"</string>
+    <string name="audionotes_plugin_description">El connector de notes d\'àudio/vídeo permet la funció de registrar notes de so/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament pel menú de context de qualsevol punt del mapa.</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
     <string name="index_srtm_ele">Línies de nivell</string>
@@ -1206,7 +1210,7 @@
     <string name="osmand_play_title_30_chars">Mapes i navegació OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">Mapes i navegació OsmAnd+</string>
 	<string name="transport_stops_to_pass">parades que heu de passar</string>
-	<string name="shared_string_downloading">Baixant …</string>
+	<string name="shared_string_downloading">Baixant</string>
 	<string name="commiting_node">S\'està enviant el node…</string>
 	<string name="choose_intersected_street">Seleccioneu la intersecció</string>
 	<string name="poi_remove_confirm_template">Voleu suprimir {0} (escriviu un comentari)?</string>
@@ -1401,8 +1405,8 @@
     </string>
     <string name="select_gpx">Selecciona una traça GPX…</string>
     <string name="route_descr_select_destination">Selecciona un destí</string>
-    <string name="shared_string_select_on_map">Selecciona al mapa…</string>
-    <string name="shared_string_favorite">Preferida…</string>
+    <string name="shared_string_select_on_map">Seleccioneu al mapa</string>
+    <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="tip_recent_changes_1_3_t">Canvis a la 1.3:
