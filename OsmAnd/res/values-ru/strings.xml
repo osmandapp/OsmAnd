@@ -1919,4 +1919,11 @@
     <string name="simulate_your_location">Моделировать ваше местоположение</string>
     <string name="shared_string_collapse">Свернуть</string>
 	<string name="action_delete">Удалить действие</string>
-	</resources>
+	<string name="action_modify">Изменить действие</string>
+	<string name="action_create">Создать действие</string>
+	<string name="osm_edits">OSM правки</string>
+	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">м</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
+	<string name="your_edits">Ваши правки</string>
+    <string name="waypoint_visit_after"/>
+    <string name="waypoint_visit_before">Посетить до</string>
+    </resources>
