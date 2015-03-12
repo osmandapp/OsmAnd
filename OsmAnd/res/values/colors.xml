@@ -14,7 +14,7 @@
 	<color name="map_widget_light">#eeffffff</color>
 	<color name="map_widget_dark">#aa3f3f3f</color>
 	<color name="map_widget_dark_pressed">#ddcccccc</color>
-	<color name="map_widget_light_trans">#88ffffff</color>
+	<color name="map_widget_light_trans">#88bbbbbb</color>
 	<color name="map_widget_light_pressed">#ddcccccc</color>
 	<color name="map_widget_blue">#30A0FF</color>
 	<color name="map_widget_blue_pressed">#dd30D0FF</color>

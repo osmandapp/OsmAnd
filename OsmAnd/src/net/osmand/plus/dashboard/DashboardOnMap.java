@@ -172,7 +172,8 @@ public class DashboardOnMap {
 			dashboardView.setVisibility(View.VISIBLE);
 			fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
-			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_navigation_drawer));
+			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
+					R.color.icon_color_light));
 			
 			mapActivity.getMapActions().disableDrawer();
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.GONE);
