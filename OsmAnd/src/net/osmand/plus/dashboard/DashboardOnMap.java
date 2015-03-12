@@ -38,6 +38,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 
 /**
@@ -66,6 +67,7 @@ public class DashboardOnMap {
 	private float mapRotation;
 	private boolean inLocationUpdate = false;
 	private boolean saveBackAction;
+	private ImageView switchButton;
 
 
 	public DashboardOnMap(MapActivity ma) {
@@ -90,12 +92,13 @@ public class DashboardOnMap {
 		dashboardView.setOnClickListener(listener);
 		
 		
-		dashboardView.findViewById(R.id.map_layers_button).setOnClickListener(new View.OnClickListener() {
+		switchButton =  (ImageView) dashboardView.findViewById(R.id.map_layers_button);
+		switchButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				setDashboardVisibility(false);
-				mapActivity.getMapActions().prepareConfigureMap();
+				mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 				mapActivity.getMapActions().toggleDrawer();				
 			}
 		});
@@ -169,18 +172,17 @@ public class DashboardOnMap {
 			dashboardView.setVisibility(View.VISIBLE);
 			fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
+			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_navigation_drawer));
 			
 			mapActivity.getMapActions().disableDrawer();
-			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
-			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.GONE);
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.GONE);
 			updateLocation(true, true, false);
 			
 		} else {
 			mapActivity.getMapActions().enableDrawer();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent));
-			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
-			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 			fabButton.hideFloatingActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {

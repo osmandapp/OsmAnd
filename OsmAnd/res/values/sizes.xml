@@ -55,7 +55,7 @@
 	<dimen name="map_widget_icon">24dp</dimen>
 	<dimen name="map_widget_height">32dp</dimen>
 	<dimen name="map_widget_image">80dp</dimen>
-	<dimen name="map_button_spacing">18dp</dimen>
+	<dimen name="map_button_spacing">15dp</dimen>
 	<dimen name="map_button_margin">4dp</dimen>
 	<dimen name="map_button_inset">4dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>

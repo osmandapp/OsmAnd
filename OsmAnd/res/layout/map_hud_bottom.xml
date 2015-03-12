@@ -115,7 +115,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
                 android:drawableLeft="@drawable/ic_action_remove_light"
-                android:textSize="20sp" 
+                android:textSize="20sp"
+                android:textStyle="bold" 
                 android:drawablePadding="4dp" />
         </LinearLayout>
         

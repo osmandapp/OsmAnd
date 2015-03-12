@@ -11,7 +11,7 @@
         android:layout_marginLeft="@dimen/map_button_margin"
         android:layout_marginTop="@dimen/map_button_margin"
         android:background="@drawable/btn_inset_circle"
-        android:src="@drawable/ic_action_layers_light" />
+        android:src="@drawable/ic_action_remove_light" />
 
     <Button
         android:id="@+id/map_download_button"
