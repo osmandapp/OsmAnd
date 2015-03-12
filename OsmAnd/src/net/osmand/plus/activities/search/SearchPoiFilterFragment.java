@@ -151,7 +151,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			final PoiLegacyFilter model = getItem(position);
 			label.setText(model.getName());
 			if(model.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
-				icon.setImageResource(android.R.drawable.ic_input_get);
+				icon.setImageResource(R.drawable.ic_action_filter_dark);
 			} else if (model.getFilterId().equals(PoiLegacyFilter.BY_NAME_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {

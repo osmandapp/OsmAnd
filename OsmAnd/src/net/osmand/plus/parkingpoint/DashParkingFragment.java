@@ -97,12 +97,17 @@ public class DashParkingFragment extends DashLocationFragment {
 			long currTime = Calendar.getInstance().getTimeInMillis();
 			long timeDiff = endtime - currTime;
 			String time = getFormattedTime(timeDiff);
-			TextView time_left = ((TextView) mainView.findViewById(R.id.time_left));
-			time_left.setText(time);
+			TextView timeLeft = (TextView) mainView.findViewById(R.id.time_left);
+			TextView leftLabel = (TextView) mainView.findViewById(R.id.left_lbl);
+			timeLeft.setText(time);
 			if (timeDiff < 0) {
-				time_left.setTextColor(Color.RED);
+				timeLeft.setTextColor(Color.RED);
+				leftLabel.setTextColor(Color.RED);
+				leftLabel.setText(R.string.osmand_parking_outdated);
 			} else {
-				time_left.setTextColor(Color.WHITE);
+				timeLeft.setTextColor(Color.WHITE);
+				leftLabel.setTextColor(Color.WHITE);
+				leftLabel.setText(R.string.osmand_parking_time_left);
 			}
 			mainView.findViewById(R.id.left_lbl).setVisibility(View.VISIBLE);
 		} else {
@@ -127,7 +132,8 @@ public class DashParkingFragment extends DashLocationFragment {
 		}
 		StringBuilder timeStringBuilder = new StringBuilder();
 		int hours = (int) timeInMillis / (1000 * 60 * 60);
-		int minutes = (int) timeInMillis / (1000 * 60);
+		int minMills = (int) timeInMillis % (1000 * 60 * 60);
+		int minutes = minMills / (1000 * 60);
 		if (hours > 0) {
 			timeStringBuilder.append(hours);
 			timeStringBuilder.append(" ");
