@@ -573,7 +573,7 @@
 	<string name="poi_seamark_dyke"/>
 	<string name="poi_seamark_floating_dock">Плавучий док</string>
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
-	<string name="poi_seamark_harbour_basin"/>
+	<string name="poi_seamark_harbour_basin">Акватория гавани</string>
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_seamark_landmark">Ориентир</string>
 	<string name="poi_seamark_light">Маяк</string>
@@ -679,6 +679,7 @@
 	<string name="poi_internet_access_terminal">Доступ в Интернет: терминал</string>
 	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
 	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
-	<string name="poi_internet_access_service">Доступ в Интернет: service</string>
+	<string name="poi_internet_access_service">Доступ в Интернет: сервис</string>
 	
+	<string name="poi_farm">Фермерский магазин</string>
 	</resources>
