@@ -1145,7 +1145,7 @@
     <string name="map_widget_distancemeasurement">거리 측정</string>
     
     <string name="map_widget_audionotes">소리 노트</string>
-    <string name="audionotes_plugin_description">이 플러그인은 여행하는 동안 소리/사진/영상을 찍기 위한 기능과 버튼을 제공합니다</string>
+    <string name="audionotes_plugin_description">이 플러그인은 여행하는 동안 소리/사진/영상을 찍기 위한 기능과 버튼을 제공합니다.</string>
     <string name="audionotes_plugin_name">소리/영상 노트</string>
     <string name="index_srtm_parts">부분</string>
     <string name="index_srtm_ele">등고선</string>
