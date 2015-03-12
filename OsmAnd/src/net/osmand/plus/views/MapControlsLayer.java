@@ -142,6 +142,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			// }
 		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0)
 				.setBg(R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
+		compassHud.compass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(new View.OnClickListener() {
 			@Override
