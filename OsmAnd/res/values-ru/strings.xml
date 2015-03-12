@@ -1924,6 +1924,6 @@
 	<string name="osm_edits">OSM правки</string>
 	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">м</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
 	<string name="your_edits">Ваши правки</string>
-    <string name="waypoint_visit_after"/>
+    <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     </resources>
