@@ -167,7 +167,7 @@
   <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (carreteras, etc.) a niveles inferiores de acercamiento</string>
   <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
   <string name="favorite_delete_multiple">Va a borrar %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
-  <string name="favorite_home_category">Casa</string>
+  <string name="favorite_home_category">Inicio</string>
   <string name="favorite_friends_category">Amigos</string>
   <string name="favorite_places_category">Lugares</string>
   <string name="favorite_default_category">Otros</string>
@@ -180,7 +180,7 @@
   
   
   
-  <string name="local_index_installed">Edición</string>
+  <string name="local_index_installed">Versión local</string>
   <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>
   <string name="local_index_items_deleted">%1$d de %2$d elemento(s) correctamente borrado(s).</string>
   <string name="local_index_items_restored">%1$d de %2$d elemento(s) correctamente activado(s).</string>
@@ -372,7 +372,7 @@
   <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
   <string name="select_build_to_install">Seleccione una de las compilaciones OsmAnd a instalar</string>
   <string name="contribution_activity">Actividad especial para versión de donación</string>
-  <string name="gps_status_app_not_found">La aplicación GPS Status no está instalada. ¿Buscar en G. Play?</string>
+  <string name="gps_status_app_not_found">La aplicación GPS status no está instalada. ¿Buscar en la tienda?</string>
   <string name="voice_is_not_available_msg">Las indicaciones de voz no están disponibles, vaya a \'Opciones\' → \'General\' → \'Indicaciones de voz\' y elija o descargue un paquete de mensajes de voz.</string>
   <string name="voice_is_not_available_title">No se han seleccionado indicaciones por voz</string>
   <string name="daynight_mode_day">Día</string>
@@ -501,7 +501,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Entonces podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesita algunos datos regionales que puede descargar a través de \'Opciones\' → \'Gestionar mapas\'. Entonces podrá ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -553,7 +553,7 @@
   <string name="search_online_address">Búsqueda en línea</string>
   <string name="max_level_download_tile">Máx. acercamiento con conexión</string>
   <string name="max_level_download_tile_descr">Elige el nivel de acercamiento máximo para descargar teselas de mapas con conexión</string>
-  <string name="route_general_information">Distancia total %1$s,\n tiempo de viaje %2$d h %3$d m.</string>
+  <string name="route_general_information">Distancia total %1$s,\ntiempo de viaje %2$d h %3$d m.</string>
   <string name="router_service_descr">Elige un servicio de navegación con o sin conexión</string>
   <string name="router_service">Servicio de navegación</string>
   <string name="sd_dir_not_accessible">¡No se puede acceder a la carpeta de almacenamiento en la tarjeta SD!</string>
@@ -768,11 +768,11 @@
   <string name="online_map_settings_descr">Configurar fuentes de mapas en línea o teselas guardadas</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Con este plugin puedes acceder a muchos tipos de mapas en línea (llamados de teselas o raster), desde teselas de Openstreetmap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial  como mapas climáticos, mapas atmosféricos, mapas geológicos, capas de sombreado, etc..
-\n\nCualquiera de estos mapas puede ser utilizado bien como el mapa principal (base) que se mostrará en la pantalla del mapa de OsmAnd, o como una capa superior o inferior a otro mapa base (como mapas en línea regulares de OsmAnd). Para hacer los mapas subyacentes más visibles, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' como se desee.
+  <string name="osmand_rastermaps_plugin_description">"Con este extra puede acceder a muchos tipos de mapas en línea (llamados teselas o raster), desde teselas de Openstreetmap predefinidas (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas climáticos, mapas atmosféricos, mapas geológicos, capas de sombreado, etc.
+\n\nCualquiera de estos mapas puede ser utilizado como el mapa principal (base) que se mostrará en la pantalla del mapa de OsmAnd, o como una capa superior o inferior a otro mapa base (como mapas en línea regulares de OsmAnd). Para hacer los mapas subyacentes más visibles, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' como se desee.
 \n\nLos mapas de teselas pueden obtenerse directamente a través de fuentes en línea, o pueden ser preparados para su uso fuera de línea (y copiarse manualmente en la carpeta de datos de OsmAnd) como una base de datos sqlite que puede producirse por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra las configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Muestra las opciones para activar las características especiales de accesibilidad.</string>
+  <string name="osmand_accessibility_description">Este extra habilita la característica de accesibilidad del dispositivo directamente en OsmAnd, y facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla direccional-pad, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz.</string>
   
   
   
@@ -863,7 +863,7 @@
   <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
   <string name="accessibility_preferences">Accesibilidad</string>
   <string name="local_index_routing_data">Datos de enrutamiento</string>
-  <string name="navigate_point_format">Formato :</string>
+  <string name="navigate_point_format">Formato</string>
   <string name="poi_search_desc">Buscar PDI (Punto De Interes)</string>
   <string name="address_search_desc">Buscar dirección</string>
   <string name="navpoint_search_desc">Coordenadas</string>
@@ -1080,7 +1080,7 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     
 	
-<string name="audionotes_plugin_description">Este extra proporciona la funcionalidad y los botones para tomar notas de audio/fotografía/video durante un viaje</string>
+<string name="audionotes_plugin_description">El extra de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, ya sea utilizando un botón en la pantalla del mapa, o directamente el menú contextual para cualquier posición en el mapa.</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">"Este extra proporciona una superposición de curvas de nivel que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
@@ -1250,7 +1250,7 @@
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Desea usar la conexión actual a Internet para descargar?</string>
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
-    <string name="shared_string_downloading">Descargando…</string>
+    <string name="shared_string_downloading">Descargando</string>
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Selecciona ciudad o calle primero</string>
@@ -1484,8 +1484,8 @@
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
-    <string name="shared_string_select_on_map">Seleccionar en el mapa…</string>
-    <string name="shared_string_favorite">Favorito…</string>
+    <string name="shared_string_select_on_map">Seleccionar en el mapa</string>
+    <string name="shared_string_favorite">Favorito</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="tip_recent_changes_1_7_1_t">"Cambios en 1.7:
@@ -1790,7 +1790,7 @@
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabación de viaje</string>
-    <string name="record_plugin_description">"Este extra activa la funcionalidad para registrar y guardar tus trazas o bien manualmente tocando el control de registro GPX en la pantalla del mapa o bien automáticamente registrando todas tus rutas seguidas en un archivo GPX.\n\nLas trazas registradas puedes compartirlas con tus amigos o usarlas como contibuciones a OSM. Los atletas pueden utilizarlas para monitorizar sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente con OsmAnd como tiempos, velocidad media, etc., y por supuesto pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
+    <string name="record_plugin_description">"Este extra activa la funcionalidad para registrar y guardar sus trazas manualmente tocando el control de registro GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas seguidas en un archivo GPX.\n\nLas trazas registradas puede compartirlas con sus amigos o usarlas como contibuciones a OSM. Los atletas pueden utilizarlas para monitorizar sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente con OsmAnd como tiempos, velocidad media, etc., y por supuesto pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
@@ -1875,7 +1875,7 @@
     <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
     <string name="rendering_value_default_name">Predeterminado</string>
     <string name="rendering_value_orange_name">Naranja</string>
-    <string name="routing_attr_no_new_routing_name">Sin reglas de ruteo de v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Sin reglas de ruteo v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de ruteo introducidas en v.1.9</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
 	<string name="traffic_warning_railways">Cruce de ferrocarril</string>
@@ -1902,7 +1902,7 @@
 	<string name="proxy_host_descr">Configura el hostname de tu proxy (p.e. 127.0.0.1)</string>
 	<string name="version_settings_descr">Descargar versiones de desarrollo (nightly builds)</string>
     <string name="version_settings">Compilaciones</string>
-    <string name="gps_status">Estado GPS</string>
+    <string name="gps_status">GPS status</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="points">Puntos</string>
     <string name="tracks">Trazas</string>
@@ -1925,8 +1925,8 @@
 	<string name="get_plugin">Obtener</string>
 <string name="free">"Libre %1$s "</string>
 	<string name="device_memory">Memoria del dispositivo</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutas de pista</string>
-	<string name="rendering_attr_pisteGrooming_name">Arreglo de pista</string>
+    <string name="rendering_attr_pisteRoutes_name">Pista de rutas</string>
+	<string name="rendering_attr_pisteGrooming_name">Pista de entrenamiento</string>
     <string name="roads_only">Sólo carreteras</string>
     <string name="share_note">Compartir nota</string>
 	
@@ -1971,8 +1971,18 @@
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular tu ubicación</string>
     <string name="drawer">Lista plana</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Opciones de navegación</string>
     <string name="general_settings_2">Opciones generales</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_deselect">Deseleccionar</string>
+	<string name="shared_string_deselect_all">Deseleccionar todo</string>
+	<string name="shared_string_unexpected_error">Ocurrió un error inesperado</string>
+	<string name="shared_string_action_template">Acción {0}</string>
+	<string name="shared_string_collapse">Colapsar</string>
+	<string name="shared_string_video">Vídeo</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="route_points">Puntos de la ruta</string>
+	<string name="shared_string_release">Liberado</string>
 	</resources>
