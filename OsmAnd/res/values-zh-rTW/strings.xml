@@ -207,7 +207,7 @@
 	
 	
 	
-	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製效能表示。</string>
+	<string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、螢幕繪製效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
 	<string name="plugins_screen">外掛元件管理</string>
 	
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
