@@ -203,11 +203,11 @@
 	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 正常的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 \n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
-	<string name="osmand_accessibility_description">顯示設定以啟動指定的無障礙功能。</string>
+	<string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可直接用無障礙功能以及便利，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應。</string>
 	
 	
 	
-	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製效能表示。</string>
+	<string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、螢幕繪製效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
 	<string name="plugins_screen">外掛元件管理</string>
 	
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
@@ -441,7 +441,7 @@
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-	<string name="local_index_action_do">您即將 %2$s 個項目 %1$s，要繼續嗎？</string>
+	<string name="local_index_action_do">您即將到 %2$s 的 %1$s 的項目，要繼續嗎？</string>
 	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
 	<string name="local_index_mi_backup">停用</string>
@@ -533,12 +533,11 @@
 \n\t*興趣點（按類型或名稱）
 \n\t*透過您的查尋履歷
 \n\t*或透過您事先定義的我的最愛
-\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'導引\'或\'在地圖上顯示\'等等的選項。 "</string>
+\n\n為所有在快顯選單中或行動列被點選，都提供有例如\'導引\'或\'在地圖上顯示\'等的選項。 "</string>
 	<string name="tip_map_context_menu">\'使用位置\'選單</string>
-	<string name="tip_map_context_menu_t">地圖快顯功能表(\'使用位置\')，包含了所有操作的參考點（位置）。
-		\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
-		\n\n若長按則可以再次隱藏標記對話框。
-	</string>
+	<string name="tip_map_context_menu_t">"地圖快顯功能表\'使用位置\'，包含了所有作用引到一個點（位置）。
+\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
+\n\n若長按則可以再次隱藏標記對話框。 "</string>
 	
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
 \n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
@@ -784,7 +783,7 @@
 	<string name="search_online_address">線上查尋</string>
 	<string name="max_level_download_tile">線上最大縮放比</string>
 	<string name="max_level_download_tile_descr">選擇線上下載地圖圖磚最大縮放級別</string>
-	<string name="route_general_information">總距離 %1$s \n 行駛時間 %2$d 小時 %3$d 分。</string>
+	<string name="route_general_information">總距離 %1$s，行駛時間 %2$d 小時 %3$d 分。</string>
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
 	<string name="sd_dir_not_accessible">在 SD 卡上的存儲資料夾無法存取！</string>
@@ -943,10 +942,10 @@
 	<string name="poi_remove_title">刪除興趣點</string>
 	<string name="poi_remove_success">興趣點刪除成功</string>
 	<string name="poi_action_add">新增</string>
-	<string name="poi_action_change">修改</string>
-	<string name="poi_action_succeded_template">啟動{0}動作完成。</string>
-	<string name="poi_error_unexpected_template">在進行{0}動作時發生意外錯誤。</string>
-	<string name="poi_error_io_error_template">執行{0}時發生存取錯誤。</string>
+	<string name="poi_action_change">更改</string>
+	<string name="poi_action_succeded_template">運作 {0} 成功完成。</string>
+	<string name="poi_error_unexpected_template">在進行 {0} 運作時發生意外錯誤。</string>
+	<string name="poi_error_io_error_template">當執行 {0} 運作時發生 I/O 錯誤。</string>
 	<string name="poi_error_info_not_loaded">節點的資訊未載入</string>
 	<string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">營業</string>
@@ -974,10 +973,7 @@
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
-    <string name="use_distance_measurement_help">* 點選標記一個標點。\n 
-        * 在地圖上按住去刪除先前的標點。\n
-        * 在標點上按住以檢視並附加敘述。\n
-        * 在測量小工具上點擊可看到更多作用。</string>
+    <string name="use_distance_measurement_help">* 點選標記一個標點。\n * 在地圖上按住去刪除先前的標點。\n * 在標點上按住以檢視並附加敘述。\n * 在測量小工具上點擊可看到更多的作用。</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
@@ -1043,8 +1039,8 @@
     <string name="av_def_action_choose">應需求選取</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音訊</string>
-    <string name="av_widget_action_descr">選擇預設小工具的機能</string>
-    <string name="av_widget_action">預設小工具動作</string>
+    <string name="av_widget_action_descr">選擇預設小工具的作用</string>
+    <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊輸出格式</string>
     <string name="av_video_format">視訊輸出格式</string>
     <string name="tip_recent_changes_1_4_t">在1.4的變更：
@@ -1084,7 +1080,7 @@
     <string name="map_widget_distancemeasurement">測量距離</string>
     
     <string name="map_widget_audionotes">音訊注解</string>
-    <string name="audionotes_plugin_description">這個外掛元件提供的功能和按鈕以在旅程中記錄音訊/攝影/視訊等注解</string>
+    <string name="audionotes_plugin_description">音訊/視訊注解外掛元件提供的功能，在旅程中取得音訊/照相/視訊注解，使用在地圖畫面上的按鈕，或地圖上任何的位置直接叫出快顯選單。</string>
     <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
@@ -1504,7 +1500,7 @@
     <string name="osmo_plugin_name">OsMo (監視)</string>
     <string name="osmo_settings">OsMo 監控</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
-    <string name="osmo_plugin_description">"OsMo 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。\n\n匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_plugin_description">"這個外掛元件同時提供了 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以跟蹤其它裝置並進行追蹤。您可以自發的建立匿名群組，分享彼此的位置和交流。具有各種選項用於連線階段追蹤或持續的追蹤。\n\n為指定的天數建立匿名群組和有限制的預設功能，例如沒有遠端控制和沒有群組管理員。另一方面完整的功能可以在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1916,13 +1912,13 @@
 	<string name="shared_string_downloading">下載中</string>
 	<string name="shared_string_download_successful">下載成功</string>
 	<string name="shared_string_unexpected_error">發生意外錯誤</string>
-	<string name="shared_string_action_template">動作 {0}</string>
+	<string name="shared_string_action_template">行動 {0}</string>
 	<string name="shared_string_close">關閉</string>
 	<string name="shared_string_exit">離開</string>
 	<string name="shared_string_show">顯示</string>
 	<string name="shared_string_show_all">全部顯示</string>
 	<string name="shared_string_show_on_map">在地圖上顯示</string>
-	<string name="shared_string_more_actions">更多的動作</string>
+	<string name="shared_string_more_actions">更多的行動</string>
 	<string name="shared_string_map">地圖</string>
 	<string name="shared_string_favorites">我的最愛</string>
 	<string name="shared_string_add_to_favorites">加到我的最愛</string>

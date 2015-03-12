@@ -491,8 +491,8 @@
 	<string name="poi_occupational_therapist">Terapèuta ocupatzionale</string>
 	<string name="poi_leisure_track">Pista pro isports</string>
 	<string name="poi_raceway">Tzircùitu automobilìsticu</string>
-	<string name="poi_9pin">Nine pin bowling</string>
-	<string name="poi_10pin">Ten pin bowling</string>
+	<string name="poi_9pin">Bowling cun noe birìllos</string>
+	<string name="poi_10pin">Bowling cun deghe birìllos</string>
 	<string name="poi_base">Base jumping</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_climbing">Aperrinzada</string>
@@ -626,4 +626,7 @@
 	<string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
 	<string name="poi_halt">Firmada de sa ferrovia</string>
 	<string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>
+	<string name="poi_baby_hatch">Bàntzigu pro sa bida/Roda de sos espostos</string>
+	<string name="poi_apartment">Apartamentu</string>
+
 	</resources>

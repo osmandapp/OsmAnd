@@ -59,7 +59,7 @@
 	<string name="poi_interior_decoration_shop">Декор и оформление</string>
 	<string name="poi_jewelry_shop">Ювелирный магазин</string>
 	<string name="poi_kiosk">Киоск, ларёк</string>
-	<string name="poi_kitchen_shop">Кухни</string>
+	<string name="poi_kitchen_shop">Кухонные принадлежности</string>
 	<string name="poi_mobile_phone_shop">Салон связи</string>
 	<string name="poi_motorcycle_shop">Мотоциклы</string>
 	<string name="poi_musical_instrument_shop">Музыкальные инструменты</string>
@@ -565,7 +565,7 @@
 	<string name="poi_seamark_buoy_installation">Знак изолированной опасности</string>
 	<string name="poi_seamark_buoy_isolated_danger">Буй (изолированная опасность)</string>
 	<string name="poi_seamark_buoy_lateral">Латеральный буй</string>
-	<string name="poi_seamark_buoy_safe_water"/>
+	<string name="poi_seamark_buoy_safe_water">Буй</string>
 	<string name="poi_seamark_buoy_special_purpose">Специальный буй</string>
 	<string name="poi_seamark_daymark">Дневной маяк</string>
 	<string name="poi_seamark_distance_mark">Отметка расстояния</string>
@@ -573,10 +573,10 @@
 	<string name="poi_seamark_dyke"/>
 	<string name="poi_seamark_floating_dock">Плавучий док</string>
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
-	<string name="poi_seamark_harbour_basin"/>
+	<string name="poi_seamark_harbour_basin">Акватория гавани</string>
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_seamark_landmark">Ориентир</string>
-	<string name="poi_seamark_light"/>
+	<string name="poi_seamark_light">Маяк</string>
 	<string name="poi_seamark_light_major"/>
 	<string name="poi_seamark_light_minor"/>
 	<string name="poi_seamark_light_float"/>
@@ -665,5 +665,21 @@
 
 	<string name="poi_car">Автомобильный магазин</string>
 	<string name="poi_car_parts">Автозапчасти</string>
-	<string name="poi_halt">Железнодорожная остановка (устаревший)</string>
+	<string name="poi_halt">Железнодорожная остановка</string>
+	<string name="poi_emergency">Экстренные службы</string>
+	<string name="poi_transportation">Транспорт</string>
+	<string name="poi_healthcare">Здоровье</string>
+	<string name="poi_sustenance">Еда</string>
+	<string name="poi_general">Универмаг</string>
+	<string name="poi_lodging">Проживание</string>
+	<string name="poi_man_made">Инфраструктура</string>
+	<string name="poi_administrative">Административные объекты</string>
+	<string name="poi_seamark">Морские объекты</string>
+	<string name="poi_internet_access_wlan">Доступ в Интернет: wlan</string>
+	<string name="poi_internet_access_terminal">Доступ в Интернет: терминал</string>
+	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
+	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
+	<string name="poi_internet_access_service">Доступ в Интернет: сервис</string>
+	
+	<string name="poi_farm">Фермерский магазин</string>
 	</resources>

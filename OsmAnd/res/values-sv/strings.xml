@@ -141,7 +141,7 @@
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
-<string name="osmand_accessibility_description">Visar inställningarna för att aktivera speciella tillgänglighetsfunktioner.</string>
+<string name="osmand_accessibility_description">Denna modul låter inställningarna för att aktivera speciella tillgänglighetsfunktioner bli direkt åtkomliga i OsmAnd och underlättar t.ex. justering av talhastigheten för TTS-röster, konfigurering av skärmnavigering med hjälp av en trackball för zoomkontroll eller användande av återkoppling med text-till-tal.</string>
 
 
 <string name="debugging_and_development">Utveckling av OsmAnd</string>
@@ -227,7 +227,7 @@
 \n\nKartbitar (tile maps) kan hämtas direkt online eller förberedas för användning offline (och kopieras manuellt till OsmAnds datamapp) som en sqlite-databas som kan skapas med olika tredjepartsverktyg. "</string>
 <string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 
-<string name="osmand_development_plugin_description">Visar inställningarna för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
+<string name="osmand_development_plugin_description">Denna modul visar inställningarna för utvecklings- och felsökningsfunktioner som rutt-testning och -simulering eller visning av renderingsprestanda eller röststyrning. Dessa inställningar är avsedda för utvecklare och behövs inte för den vanliga användaren.</string>
 <string name="plugins_screen">Hantera insticksmoduler</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 
@@ -250,7 +250,7 @@
 \n\t - Offline-ruttning blir mer robust↵
 \n\t *Användbarhet och UI-erfarenhet*↵
 \n\t - Förbättrats på många områden "</string>
-<string name="osm_editing_plugin_description">Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer. För att använda denna funktion krävs OSM-referenser.</string>
+<string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  http://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
 <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
@@ -806,7 +806,7 @@
 	<string name="hint_search_online">Online-sökning: Husnummer, gata, stad</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="max_level_download_tile_descr">Välj högsta zoomnivå att ladda ner för online-kartbitar</string>
-	<string name="route_general_information">Total sträcka %1$s \n restid %2$d h %3$d m.</string>
+	<string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
 	<string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
 	<string name="router_service">Navigeringstjänst</string>
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>
@@ -922,7 +922,7 @@
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     
     <string name="map_widget_audionotes">Ljudanteckningar</string>
-    <string name="audionotes_plugin_description">Denna modul visar knappar för ljud-/foto-/videoanteckningar under en resa</string>
+    <string name="audionotes_plugin_description">Denna modul för ljud- och videoanteckningar erbjuder möjlighet att skapa ljud-/foto-/videoanteckningar under en resa, antingen med hjälp av en knapp på kartskärmen eller direkt i kontextmenyn för en position på kartan.</string>
     <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Höjdkurvor</string>
@@ -1380,7 +1380,7 @@
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo-spårning</string>
     <string name="osmo_settings">OsMo-spårning</string>
-   	<string name="osmo_plugin_description">"Visar inställningarna för OsMo - avancerad direktspårning. Se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela med er av era positioner och kommunicera med varandra.\n\nDet finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+   	<string name="osmo_plugin_description">"Denna modul erbjuder funktioner för OsMo - avancerad direktspårning. Se http://osmo.mobi.\n\nDu kan spåra andra enheter och bli spårad själv. Du kan skapa anonyma grupper, dela med er av era positioner och kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.\n\nAnonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1830,4 +1830,7 @@
 	<string name="waypoint_visit_after">Besök efter</string>
     <string name="waypoint_visit_before">Besök före</string>
     <string name="shared_string_collapse">Slå ihop</string>
-	</resources>
+	<string name="osm_edits">OSM-redigeringar</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering</string>
+	<string name="your_edits">Dina redigeringar</string>
+    </resources>

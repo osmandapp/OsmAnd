@@ -42,7 +42,7 @@
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
     
     <string name="map_widget_audionotes">Audionoter</string>
-    <string name="audionotes_plugin_description">Udvidelsen giver funktionalitet og knapper til at tage audio-/foto-/videonoter under en tur</string>
+    <string name="audionotes_plugin_description">Audio-/videonoter udvidelse giver funktionalitet til at tage audio-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
@@ -294,7 +294,7 @@
 	<string name="osmand_parking_time_limit">Tidsbegrænset parkering</string>
 	<string name="osmand_parking_time_no_limit">Tidsubegrænset parkering</string>
 	<string name="osmand_parking_position_description">Den parkerede bils position. %1$s</string>
-	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
+	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Udvidelsen er udviklet til at anvende OsmAnd til nemt huske placeringen af den parkerede bil.</string>
@@ -354,18 +354,18 @@
 	
 	
 	<string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
-	<string name="osmand_accessibility_description">"Viser indstillinger til at aktivere særlige  tilgængelighedsfunktioner."</string>
+	<string name="osmand_accessibility_description">"Viser indstillinger til at aktivere særlige  tilgængelighedsfunktioner.\n\nDette plugin gør at en enhed er tilgængelighedsfunktioner til rådighed direkte i OsmAnd, og letter bl.a. justere talen sats for TTSstemmerne, konfiguration retningsbestemt-pad skærm navigation ved hjælp af en trackball til zoomknappen, eller ved hjælp af tekst-til-tale feedback."</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Viser knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte del eller raster) kort, fra foruddefinerede OpenStreetMap delkort (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relief lag osv.\n\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
 \n\nDelkort kan hentes direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd datamappen) som en SQLite database. Kort kan fremstilles ved hjælp af en række 3. parts kortværktøjer. "</string>
 	
-	<string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation.</string>
+	<string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation, eller stemmevejledning.\nIndstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige bruger.</string>
 	<string name="plugins_screen">Udvidelser</string>
 	
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
 	<string name="prefs_plugins">Udvidelser</string>
-	<string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM bidrag såsom at oprette eller ændre OSM interessepunkter (IP), åbne eller kommentere OSM fejl, og bidrage med optagede GPX-filer. Brug af funktionen kræver OSM legitimationsoplysninger.</string>
+	<string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM bidrag såsom at oprette eller ændre OSM interessepunkter (IP), åbne eller kommentere OSM fejl, og bidrage med optagede GPX-filer.\n\nOSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt. For nærmere oplysninger henvises til http://openstreetmap.org. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis du angiver dine personlige OSM legitimationsoplysninger.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
 	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer med den valgte stemme</string>
 	<string name="debugging_and_development">OsmAnd udvikling</string>
@@ -1070,7 +1070,7 @@
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="search_offline_address">Offline søgning</string>
-	<string name="route_general_information">Total afstand %1$s,\n rejsetid %2$d t %3$d m.</string>
+	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
 	<string name="router_service">Navigationstjeneste</string>
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgængelig!</string>
@@ -1505,7 +1505,7 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing.\n\nAnonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi.\n\nSpor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing.\n\nAnonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og ingen gruppeadministrator. Fuldt funktionelle grupper, kan på den anden side oprettes på hjemmesiden, og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo overvågning</string>
     <string name="osmo_settings">OsMo overvågning</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -1860,12 +1860,11 @@
 	<string name="share_note">Del note</string>
 	
 	<string name="plugin_touringview_name">Touring</string>
-	<string name="plugin_nautical_descr">"Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.
-\n\nEt kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.
-\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
-	<string name="plugin_ski_descr">"Aktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold.
-\n\nEt kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.
-\n\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
+	<string name="plugin_nautical_descr">"Udvidelsen beriger OsmAnd kort og navigation app til også producere maritimekort til sejlsport, sejlads og andre former for vandsport.
+\n\nEn særlig kort add-on til OsmAnd vil give alle maritime sømærker og søkortsymboler, for indre såvel som for kystnært navigation. Beskrivelsen af hvert sømærke giver oplysninger, der er nødvendige for at identificere dem og deres betydning (kategori, form, farve, sekvens, reference, etc.).
+\n\nFor at vende tilbage til en af OsmAnd konventionelle kortformat, enten simpelthen deaktivere den igen, eller ved at ændre \'Kortformat\' under \'Konfigurer kort \"som ønsket. "</string>
+	<string name="plugin_ski_descr">"Udvidelsen for OsmAnd sætter lige ved hånden detaljerne om global skiløjper, langrendsruter, alpine skiruter, svævebaner og skilifte. Ruter og pister vises farvekodede efter sværhedsgrad, og vises i et særligt \'Vinter\' kortformat, som et sne-farvet vinterlandskab.\n\nEt kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.\nAktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold.
+\nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket. "</string>
 	<string name="plugin_touringview_descr">"Aktivering ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.
 \n\nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker).\n\nViser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.
 \n\nGiver særlige touring muligheder såsom cykelruter eller alpine bjergruter.\n\nEt særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.
@@ -1964,9 +1963,9 @@
 	<string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
-	<string name="action_create">Med handlingen oprettet</string>
+	<string name="action_create">Handling opretter</string>
 	<string name="action_modify">Handling rediger</string>
-	<string name="action_delete">Handlingen slet</string>
+	<string name="action_delete">Handling slet</string>
 	<string name="osm_edits">OSM redigeringer</string>
 	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
 	<string name="your_edits">Dine redigeringer</string>
