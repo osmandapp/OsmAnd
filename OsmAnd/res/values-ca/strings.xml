@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1899,7 +1900,7 @@
     <string name="shared_string_audio">Àudio</string>
 	
 	
-	<string name="share_note">Comparteix nota</string>
+	<string name="share_note">Comparteix la nota</string>
 	
 	<string name="watch">Mira</string>
 	<string name="notes">Notes</string>
