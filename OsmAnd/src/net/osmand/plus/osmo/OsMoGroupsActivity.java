@@ -14,6 +14,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -1171,6 +1172,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			final OsMoGroup model = getGroup(groupPosition);
 			if(selectedObject == model) {
 				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
+			} else {
+				row.setBackgroundColor(Color.TRANSPARENT);
 			}
 			label.setText(model.getVisibleName(OsMoGroupsActivity.this));
 			if(model.isMainGroup() || model.isActive()) {
@@ -1236,6 +1239,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			row.setTag(model);
 			if(selectedObject == model) {
 				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
+			} else {
+				if (app.getSettings().isLightContent()){
+					row.setBackgroundResource(R.drawable.expandable_list_item_background_light);
+				} else {
+					row.setBackgroundResource(R.drawable.expandable_list_item_background_dark);
+				}
 			}
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);
