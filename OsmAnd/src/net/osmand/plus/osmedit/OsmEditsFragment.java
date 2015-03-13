@@ -88,7 +88,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
 		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
-				setIcon(R.drawable.ic_action_gup_dark);
+				setIcon(R.drawable.ic_action_export);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -110,7 +110,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			}
 		});
 		item = menu.add(R.string.shared_string_delete_all).
-				setIcon(R.drawable.ic_action_gdiscard_dark);
+				setIcon(R.drawable.ic_action_delete_dark);
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -252,7 +252,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_upload).
-				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_gup_dark));
+				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_export));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

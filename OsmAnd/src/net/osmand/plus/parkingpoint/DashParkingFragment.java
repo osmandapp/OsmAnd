@@ -5,10 +5,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.util.TimeUtils;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.util.MapUtils;
 
 import java.util.Calendar;
 

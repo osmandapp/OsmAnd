@@ -1,30 +1,7 @@
 package net.osmand.plus.dashboard;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
-import net.osmand.plus.development.DashSimulateFragment;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.osmedit.DashOsmEditsFragment;
-import net.osmand.plus.parkingpoint.DashParkingFragment;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -44,6 +21,28 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
 import com.software.shell.fab.ActionButton;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.development.DashSimulateFragment;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.osmo.DashOsmoFragment;
+import net.osmand.plus.parkingpoint.DashParkingFragment;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -362,7 +361,8 @@ public class DashboardOnMap {
 		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);
 		showFragment(manager, fragmentTransaction, DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class);
 		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class);
-		showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class);
+		showFragment(manager, fragmentTransaction, DashOsmoFragment.TAG, DashOsmoFragment.class);
+		//showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class);
 //		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class);
 		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class);
 		
