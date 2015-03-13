@@ -831,7 +831,7 @@
 <string name="hello">Aplicació de navegació OsmAnd</string>
 <string name="osmand_rastermaps_plugin_description">Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o raster), des els mosaics predefinits d\'Openstreetmap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, relleus, etc.
 
-Qualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure's a la vista del mapa d\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials d\'OsmAnd via el menú &lt;&lt;Configuració del mapa&gt;&gt; a voluntat.
+Qualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa d\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials d\'OsmAnd via el menú &lt;&lt;Configuració del mapa&gt;&gt; a voluntat.
 
 Els mapes de mosaic es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús en desconnexió (i copiats manualment al directori d\'OsmAnd) com una base de dades sqlite construïda per diferents eines de preparació de mapes de tercers. </string>
 	<string name="choose_audio_stream_descr">Escolliu el canal per reproduir el guiat per veu (depenent del sistema)</string>
