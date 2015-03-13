@@ -358,10 +358,10 @@
 	<string name="poi_religion_jewish">Náboženské miesto: židovské</string>
 	<string name="poi_religion_muslim">Náboženské miesto: moslimské</string>
 	<string name="poi_religion_sikh">Náboženské miesto: sikhovia</string>
-	<string name="poi_place_of_worship_buddhist">Náboženské miesto: budhistické</string>
-	<string name="poi_place_of_worship_hindu">Náboženské miesto: hinduistické</string>
-	<string name="poi_place_of_worship_shinto">Náboženské miesto: šintoistické</string>
-	<string name="poi_place_of_worship_taoist">Náboženské miesto: taoistické</string>
+	<string name="poi_religion_buddhist">Náboženské miesto: budhistické</string>
+	<string name="poi_religion_hindu">Náboženské miesto: hinduistické</string>
+	<string name="poi_religion_shinto">Náboženské miesto: šintoistické</string>
+	<string name="poi_religion_taoist">Náboženské miesto: taoistické</string>
 
 	<string name="poi_internet_access_wlan">Internetové pripojenie: Wifi</string>
 	<string name="poi_internet_access_terminal">Internetové pripojenie: terminál</string>
@@ -373,7 +373,7 @@
 	<string name="poi_historic_monastery">Historický kláštor</string>
 	<string name="poi_wayside_cross">Božie muky</string>
 	<string name="poi_wayside_shrine">Malá kaplnka pri ceste</string>
-	<string name="poi_tourism_information">Turistické informácie</string>
+	<string name="poi_information">Turistické informácie</string>
 	<string name="poi_clock">Hodiny</string>
 	<string name="poi_travel_agent">Cestovná kancelária</string>
 	<string name="poi_viewpoint">Rozhľadňa/vyhliadka</string>
@@ -427,7 +427,7 @@
 	<string name="poi_stripclub">Striptízový klub</string>
 	<string name="poi_beach_resort">Plážový areál</string>
 	<string name="poi_dog_park">Výbeh pre psy</string>
-	<string name="poi_fishing_place">Miesto na rybolov</string>
+	<string name="poi_leisure_fishing">Miesto na rybolov</string>
 	<string name="poi_hunting_stand">Poľovnícky posed</string>
 	<string name="poi_harbour">Prístav</string>
 	<string name="poi_marina">Prístav pre jachty</string>
@@ -448,7 +448,7 @@
 	<string name="poi_barbecue">Grilovacie miesto</string>
 
 	<string name="poi_funeral_directors">Pohrebníctvo</string>
-	<string name="poi_beauty_salon">Salón krásy</string>
+	<string name="poi_beauty">Salón krásy</string>
 	<string name="poi_beauty_salon_nails">Nechtové štúdio</string>
 	<string name="poi_hairdresser">Kaderníctvo/holičstvo</string>
 	<string name="poi_massage">Masážny salón</string>
@@ -472,7 +472,7 @@
 	<string name="poi_pawnbroker">Záložňa</string>
 	<string name="poi_currencyexchange">Zmenáreň</string>
 	<string name="poi_accountant">Účtovník</string>
-	<string name="poi_bitcoin_yes">Platba cez bitcoin</string>
+	<string name="poi_bitcoin">Platba cez bitcoin</string>
 
 	<string name="poi_cave_entrance">Vstup do jaskyne</string>
 	<string name="poi_peak">Vrchol</string>
