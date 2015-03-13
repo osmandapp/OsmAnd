@@ -829,7 +829,7 @@
 <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
 <string name="transport_to_go_after">prioritza distancia</string>
 <string name="hello">Aplicació de navegació OsmAnd</string>
-<string name="osmand_rastermaps_plugin_description">Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o raster), des els mosaics predefinits d'Openstreetmap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, relleus, etc.
+<string name="osmand_rastermaps_plugin_description">Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o raster), des els mosaics predefinits d\'Openstreetmap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, relleus, etc.
 
 Qualsevol d'aquests mapes es pot utilitzar sigui com principal (base) per veure's a la vista del mapa d'OsmAnd, o com una superposició o sots-posició d'un altre mapa base (com els mapes  d'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials d'OsmAnd via el menú &lt;&lt;Configuració del mapa&gt;&gt; a voluntat.
 
