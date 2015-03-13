@@ -669,7 +669,7 @@
 	<string name="poi_apartment">아파트</string>
 
 	<string name="poi_military_landuse">군사 지역</string>
-	<string name="poi_general">일반 상점</string>
+	
 	<string name="poi_car">자동차 가게</string>
 	<string name="poi_car_parts">자동차 부품</string>
 	<string name="poi_public_transport_stop_position">대중 교통 정류장 위치</string>
