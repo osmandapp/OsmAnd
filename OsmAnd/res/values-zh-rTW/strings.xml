@@ -212,7 +212,7 @@
 	
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供 GPX 檔案。OSM是一個社群推動，相關的詳細資訊，請參閱 http://openstreetmap.org。如果您在應用程式中引用 OSM 您個人帳號，積極參與是令人感激的 ，欲貢獻可直接從 OsmAnd 進行。</string>
+	<string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 http://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">用目前選擇的語音播放指令</string>
 	<string name="debugging_and_development">OsmAnd 開發</string>
