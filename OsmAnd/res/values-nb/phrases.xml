@@ -16,12 +16,12 @@
 
 	<string name="poi_bakery">Bakeri</string>
 	<string name="poi_supermarket">Supermarked</string>
-	<string name="poi_bookshop">Bokhandel</string>
-	<string name="poi_bicycle_shop">Sykkelbutikk</string>
-	<string name="poi_art_shop">Kunsthandler</string>
+	<string name="poi_books">Bokhandel</string>
+	<string name="poi_bicycle">Sykkelbutikk</string>
+	<string name="poi_art">Kunsthandler</string>
 	<string name="poi_shoes">Skobutikk</string>
-	<string name="poi_musical_instrument_shop">Musikkinstrumenter</string>
-	<string name="poi_organic_shop">Økologisk mat</string>
+	<string name="poi_musical_instrument">Musikkinstrumenter</string>
+	<string name="poi_organic">Økologisk mat</string>
 	<string name="poi_second_hand">Bruktbutikk</string>
 	<string name="poi_marketplace">Markedsplass</string>
 	<string name="poi_police">Politi</string>
