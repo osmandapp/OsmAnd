@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.plus.*;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.DeviceAdminRecv;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -184,13 +189,22 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		if (!mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			category.removePreference(speedLimitExceed);
 		}
+		
+		Integer[] delayIntervals = new Integer[] { -1, 3, 5, 7, 10, 15, 20 };
+		String[] delayIntervalNames = new String[delayIntervals.length];
+		for (int i = 0; i < delayIntervals.length; i++) {
+			if (i == 0) {
+				delayIntervalNames[i] = getString(R.string.shared_string_not_use);
+			} else {
+				delayIntervalNames[i] = delayIntervals[i] + " " + getString(R.string.int_seconds);
+			}
+		}
+		registerListPreference(settings.DELAY_TO_START_NAVIGATION, screen, delayIntervalNames, delayIntervals);
 
 
 		profileDialog();
 	}
 	
-	
-
 
 	private void prepareRoutingPrefs(PreferenceScreen screen) {
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");

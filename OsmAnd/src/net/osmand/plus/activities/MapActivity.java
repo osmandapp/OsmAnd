@@ -160,10 +160,10 @@ public class MapActivity extends AccessibleActivity {
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
-					if(event == InitEvents.NATIVE_INITIALIZED) {
-						setupOpenGLView();
-						openGlSetup = true;
-					}
+//					if(event == InitEvents.NATIVE_INITIALIZED) {
+//						setupOpenGLView();
+//						openGlSetup = true;
+//					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
 						mapView.refreshMap(true);
 					}

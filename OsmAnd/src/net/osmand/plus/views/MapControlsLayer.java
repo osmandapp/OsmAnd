@@ -19,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,10 +67,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton routeGoControl;
 	private MapHudButton compassHud;
 	private float cachedRotate = 0;
+	private static long startCounter;
+	private Runnable delayStart;
+	private Handler showUIHandler;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
 		settings = activity.getMyApplication().getSettings();
+		
 	}
 
 	@Override
@@ -84,6 +89,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		// TODO
 		// rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent,
 		// rightGravity);
+		showUIHandler = new Handler();
 		initTransparencyBar(view, parent);
 		initZooms();
 		initControls();
@@ -102,10 +108,41 @@ public class MapControlsLayer extends OsmandMapLayer {
 		@Override
 		public void draw(Canvas canvas) {
 			canvas.save();
-			canvas.rotate(cachedRotate, canvas.getWidth() / 2, canvas.getHeight() / 2);
+			canvas.rotate(cachedRotate, getIntrinsicWidth() / 2, getIntrinsicHeight() / 2);
 			original.draw(canvas);
 			canvas.restore();
-
+		}
+		
+		@Override
+		public int getMinimumHeight() {
+			return original.getMinimumHeight();
+		}
+		
+		@Override
+		public int getMinimumWidth() {
+			return original.getMinimumWidth();
+		}
+		
+		@Override
+		public int getIntrinsicHeight() {
+			return original.getIntrinsicHeight();
+		}
+		
+		@Override
+		public int getIntrinsicWidth() {
+			return original.getIntrinsicWidth();
+		}
+		
+		@Override
+		public void setChangingConfigurations(int configs) {
+			super.setChangingConfigurations(configs);
+			original.setChangingConfigurations(configs);
+		}
+		
+		@Override
+		public void setBounds(int left, int top, int right, int bottom) {
+			super.setBounds(left, top, right, bottom);
+			original.setBounds(left, top, right, bottom);
 		}
 
 		@Override
@@ -207,7 +244,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				startNavigation();
+				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+				if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+				} else {
+					startNavigation();
+				}
 			}
 		});
 	}
@@ -318,8 +360,35 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void stopCounter() {
-		// TODO stop counter
+		startCounter = 0;
 
+	}
+	
+	public void startCounter() {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		int del = settings.DELAY_TO_START_NAVIGATION.get();
+		if(del <= 0) {
+			return;
+		}
+		if (startCounter <= 0) {
+			startCounter = System.currentTimeMillis() + del * 1000;
+			delayStart = new Runnable() {
+				@Override
+				public void run() {
+					if (startCounter > 0) {
+						if (System.currentTimeMillis() > startCounter) {
+							startCounter = 0;
+							startNavigation();
+						} else {
+							mapActivity.refreshMap();
+							showUIHandler.postDelayed(delayStart, 1000);
+						}
+					}
+				}
+			};
+			delayStart.run();
+		}
+		
 	}
 
 	protected void notifyClicked(MapControls m) {
@@ -379,16 +448,30 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int vis = showRouteCalculationControls ? View.VISIBLE : View.GONE;
 		if (showRouteCalculationControls) {
 			((TextView) routeGoControl.iv).setTextColor(textColor);
+			final String text ;
+			if (startCounter > 0) {
+				int get = (int) ((startCounter - System.currentTimeMillis()) / 1000l);
+				text = mapActivity.getString(R.string.shared_string_go) + " (" + get + ")";
+			} else {
+				text = mapActivity.getString(R.string.shared_string_go) ;
+			}
+			((TextView) routeGoControl.iv).setText(text);
 		}
 
 		if (routePreparationLayout.getVisibility() != vis) {
 			routePreparationLayout.setVisibility(vis);
 			mapRouteInfoControlDialog.setVisible(showRouteCalculationControls);
+			if(showRouteCalculationControls) {
+				if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isPauseNavigation()) {
+					startCounter();
+				}
+			} else {
+				stopCounter();
+			}
 		}
 
 		float mapRotate = mapActivity.getMapView().getRotate();
 		if (mapRotate != cachedRotate) {
-			float c = cachedRotate - mapRotate;
 			cachedRotate = mapRotate;
 			// Aply animation to image view
 			 compassHud.iv.invalidate();
@@ -411,26 +494,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		// TODO stop counter & show buttons
-		// for(MapControls m : allControls) {
-		// if(m.isVisible() && m.onSingleTap(point, tileBox)){
-		// return true;
-		// }
-		// }
+		if(mapRouteInfoControlDialog.onSingleTap(point, tileBox)) {
+			return true;
+		}
+		stopCounter();
 		return false;
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		// TODO stop counter & show buttons
-		// if(!mapActivity.getRoutingHelper().isRoutePlanningMode() && mapActivity.getRoutingHelper().isFollowingMode())
-		// {
-		// if(!settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get()) {
-		// zoomControls.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
-		// mapMenuControls.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
-		// }
-		// mapRoutePlanControl.showWithDelay(getParent(), TIMEOUT_TO_SHOW_BUTTONS);
-		// }
+		stopCounter();
 		return false;
 	}
 
@@ -570,7 +643,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					((ImageView) iv).setImageDrawable(ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight));
 				}
 			} else if (iv instanceof TextView) {
-				((TextView) iv).setCompoundDrawables(
+				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(
 						ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight), null, null, null);
 			}
 		}

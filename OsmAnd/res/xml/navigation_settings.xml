@@ -32,5 +32,10 @@
                     android:key="wake_on_voice_int"
                     android:title="@string/wake_on_voice"
                     android:summary="@string/wake_on_voice_descr" />
+            
+            <ListPreference
+                    android:key="delay_to_start_navigation"
+                    android:title="@string/delay_to_start_navigation"
+                    android:summary="@string/delay_to_start_navigation_descr" />
         </PreferenceCategory>
 </PreferenceScreen>
