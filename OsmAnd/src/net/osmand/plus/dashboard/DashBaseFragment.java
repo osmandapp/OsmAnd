@@ -1,10 +1,14 @@
 package net.osmand.plus.dashboard;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.Fragment;
+
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 
 /**
  * Created by Denis on 24.11.2014.
@@ -61,6 +65,15 @@ public abstract class DashBaseFragment extends Fragment {
 			dashboard.onDetach(this);
 			dashboard = null;
 		}
+	}
+
+	protected void startFavoritesActivity(int tab) {
+		Activity activity = getActivity();
+		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+		final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		getMyApplication().getSettings().FAVORITES_TAB.set(tab);
+		activity.startActivity(favorites);
 	}
 
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="osmo_header_dark">#2d383d</color>
+	<color name="osmo_header_light">#b36d12</color>
+
+	<color name="parking_card_selected">#234DDE</color>
+	<color name="dashboard_parking_dark_color">#54778c</color>
+	<color name="dashboard_parking_dark_selected">#446072</color>
+
 	<color name="list_divider_dark">#1f2326</color>
 	<color name="list_divider_light">@color/color_white</color>
 	<color name="list_background_dark">#292f33</color>
@@ -33,7 +40,7 @@
 	<color name="dashboard_subheader_text_light">#212121</color>
 	<color name="dashboard_general_button_text_dark">#ff8f00</color>
 	<color name="dashboard_general_button_text_light">#536DFE</color>
-	<color name="dashboard_parking_dark">#54778c</color>
+
 
 	<color name="color_transparent">#00000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>

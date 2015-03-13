@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="5dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="4dp"
-    android:paddingTop="5dp">
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
+			  android:orientation="horizontal"
+			  android:paddingBottom="5dp"
+			  android:paddingLeft="8dp"
+			  android:paddingRight="4dp"
+			  android:paddingTop="5dp">
 
-    <ImageView
-        android:id="@+id/osmo_user_icon"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:paddingRight="2dp"
-        android:paddingTop="2dp" />
+	<ImageView
+		android:id="@+id/osmo_user_icon"
+		android:layout_width="26dp"
+		android:layout_height="26dp"
+		android:paddingRight="2dp"
+		android:paddingTop="2dp"/>
 
-    <TextView
-        android:id="@+id/osmo_label"
-        style="@style/ListText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:maxLines="7"
-        android:layout_weight="1" />
+	<TextView
+		android:id="@+id/osmo_label"
+		style="@style/ListText"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10dp"
+		android:layout_weight="1"
+		android:maxLines="7"
+		tools:text="@string/abc_action_bar_home_description"
+		android:textColor="?android:textColorPrimary"/>
 
-    <TextView
-        android:id="@+id/osmo_label_time"
-        style="@style/ListText.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp" />
+	<TextView
+		android:id="@+id/osmo_label_time"
+		style="@style/ListText.Small"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="3dp"/>
 
-    <!-- <include layout="@layout/check_item" />  -->
+	<!-- <include layout="@layout/check_item" />  -->
 
 </LinearLayout>

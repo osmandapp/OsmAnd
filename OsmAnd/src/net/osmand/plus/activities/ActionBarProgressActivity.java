@@ -1,8 +1,11 @@
 package net.osmand.plus.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
+
+import net.osmand.plus.R;
 
 /**
  * Created by Denis
@@ -29,4 +32,23 @@ public class ActionBarProgressActivity extends OsmandActionBarActivity {
     public void setSupportProgressBarIndeterminateVisibility(boolean visible) {
         getSupportActionBar().getCustomView().setVisibility(visible ? View.VISIBLE : View.GONE);
     }
+
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		if (tb == null) {
+			return null;
+		}
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
+	}
+
+	public void setToolbarVisibility(boolean visible){
+		View toolbar = findViewById(R.id.bottomControls);
+		if (toolbar != null) {
+			toolbar.setVisibility(visible? View.VISIBLE : View.GONE);
+		}
+
+	}
 }
