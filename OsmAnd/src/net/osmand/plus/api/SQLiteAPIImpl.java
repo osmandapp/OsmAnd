@@ -1,6 +1,7 @@
 package net.osmand.plus.api;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -43,6 +44,22 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 			
 		}
 
+		public void beginTransaction(){
+			if(!this.ds.inTransaction()){
+				//this.ds.setLockingEnabled(false);
+				this.ds.beginTransactionNonExclusive();
+				this.ds.setLockingEnabled(false);
+			}
+		}
+		
+		public void endTransaction(){
+			if(this.ds.inTransaction()){
+				this.ds.setTransactionSuccessful();
+				this.ds.setLockingEnabled(true);
+				this.ds.endTransaction();
+			}
+		}
+		
 		@Override
 		public SQLiteCursor rawQuery(String sql, String[] selectionArgs) {
 			final Cursor c = ds.rawQuery(sql, selectionArgs);
@@ -156,6 +173,11 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				@Override
 				public void bindBlob(int i, byte[] val) {
 					st.bindBlob(i, val);
+				}
+				@Override
+				public void clearBindings() {
+					st.clearBindings();
+					
 				}
 			};
 		}

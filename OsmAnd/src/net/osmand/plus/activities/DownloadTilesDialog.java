@@ -13,6 +13,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
 import net.osmand.plus.WDebug;
 import net.osmand.plus.resources.ResourceManager;
@@ -138,7 +139,7 @@ public class DownloadTilesDialog {
 		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
 			@Override
 			public void onCancel(DialogInterface dialog) {
-				if(instance.isSomethingBeingDownloaded()) {
+				if(progressDlg.getProgress()>=progressDlg.getMax()) {
 					cancel = true;
 				}
 				else {
@@ -150,13 +151,17 @@ public class DownloadTilesDialog {
 				}
 //				cancel = true;
 				if(cancel) {
+					if(map instanceof SQLiteTileSource){
+						((SQLiteTileSource) map).endTransaction();
+					}
 					mapView.refreshMap();
 					instance.getDownloaderCallbacks().clear();
 					instance.getDownloaderCallbacks().addAll(previousCallbacks);
 					app.getResourceManager().reloadTilesFromFS();
 					progressDlg.dismiss();
 
-				}			}
+				}			
+			}
 		});
 				
 		instance.getDownloaderCallbacks().clear();
@@ -177,6 +182,11 @@ public class DownloadTilesDialog {
 				//int limitRequests = 50;
 				try {
 					ResourceManager rm = app.getResourceManager();
+					WDebug.log("before open transaction ");
+					if(map instanceof SQLiteTileSource){
+						((SQLiteTileSource) map).beginTransaction();
+					}
+					WDebug.log("opened transaction ");
 					for (int z = zoom; z <= zoom + progress && !cancel; z++) {
 						int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
 						int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);

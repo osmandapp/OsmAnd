@@ -16,6 +16,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -407,34 +408,80 @@ public class SQLiteTileSource implements ITileSource {
 		insertImage(x, y, zoom, buf.array());
 		is.close();
 	}
+	
+	boolean inTransaction = false;
+	public void beginTransaction(){
+		SQLiteConnection db = getDatabase();
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			return;
+		}
+//		db.beginTransaction();
+		inTransaction = true;
+	}
+	
+	public void endTransaction(){
+		SQLiteConnection db = getDatabase();
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			return;
+		}
+		/*if(inTransaction && statementInsert != null){
+			statementInsert.close();
+			statementInsert = null;
+		}*/
+//		db.endTransaction();
+		inTransaction = false;
+	}
+	
+	SQLiteStatement statementInsert = null;
+	SQLiteStatement getStatementInsert(){
+		if(statementInsert == null){
+			WDebug.log("insertImage statementInsert=null");
+			String query = timeSupported ? "INSERT OR REPLACE INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
+					: "INSERT OR REPLACE INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+			statementInsert = db.compileStatement(query); //$NON-NLS-1$
+			WDebug.log("insertImage compiled");
+		}
+		return statementInsert;
+	}
+	
 	/**
 	 * Makes method synchronized to give a little more time for get methods and 
 	 * let all writing attempts to wait outside of this method   
 	 */
 	public /*synchronized*/ void insertImage(int x, int y, int zoom, byte[] dataToSave) throws IOException {
+		WDebug.log("insertImage "+x+" "+y);
 		SQLiteConnection db = getDatabase();
 		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			WDebug.log("ReadOnly");
 			return;
 		}
-		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
-		  if (exists(x, y, zoom)) {
-			return;
-		}*/
-		
-		String query = timeSupported ? "INSERT OR REPLACE INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
-				: "INSERT OR REPLACE INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
-		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
-		statement.bindLong(1, x);
-		statement.bindLong(2, y);
-		statement.bindLong(3, getFileZoom(zoom));
-		statement.bindLong(4, 0);
-		statement.bindBlob(5, dataToSave);
-		if (timeSupported) {
-			statement.bindLong(6, System.currentTimeMillis());
+		try {
+			WDebug.log("insertImage before statement");
+			SQLiteStatement statement = getStatementInsert();
+			WDebug.log("insertImage statement");
+			statement.bindLong(1, x);
+			statement.bindLong(2, y);
+			statement.bindLong(3, getFileZoom(zoom));
+			statement.bindLong(4, 0);
+			statement.bindBlob(5, dataToSave);
+			if (timeSupported) {
+				statement.bindLong(6, System.currentTimeMillis());
+			}
+			statement.execute();
+			WDebug.log("insertImage executed");
+			statement.close();
+			statementInsert = null;
+/*			if(!inTransaction) {
+				statement.close();
+				statementInsert = null;
+			} else {
+				statement.clearBindings();
+			}*/
+				
+		} catch (Exception e) {
+			WDebug.log("insertImage error",e);
+			
 		}
-		statement.execute();
-		statement.close();
-
 	}
 
 	private int getFileZoom(int zoom) {
@@ -443,7 +490,13 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public void closeDB(){
 		bshInterpreter = null;
+		statementInsert = null;
 		if(db != null){
+			//db.endTransaction();
+			if(statementInsert != null){
+				statementInsert.close();
+				statementInsert = null;
+			}
 			db.close();
 			db = null;
 		}
