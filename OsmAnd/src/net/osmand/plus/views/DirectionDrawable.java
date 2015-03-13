@@ -33,6 +33,11 @@ public class DirectionDrawable extends Drawable {
 		arrowImage = iconsCache.getIcon(resourceId, clrId);		
 	}
 
+	public void setImage(int resourceId){
+		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		arrowImage = iconsCache.getIcon(resourceId, 0);
+	}
+
 
 	public DirectionDrawable(Context ctx, float width, float height) {
 		this.ctx = ctx;

@@ -1,101 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:paddingBottom="@dimen/dialog_content_bottom_margin"
+			android:paddingLeft="@dimen/dialog_content_margin"
+			android:paddingRight="@dimen/dialog_content_margin"
+			android:paddingTop="@dimen/dialog_content_bottom_margin">
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="7dp"
-        android:paddingRight="7dp"
-        android:stretchColumns="1">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingLeft="7dp"
+		android:paddingRight="7dp"
+		android:stretchColumns="1">
 
-        <TableRow>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/osmo_group_name"/>
 
-            <TextView
-                android:paddingLeft="3dp"
-                android:layout_span="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/osmo_group_create_info"
-                android:textSize="18sp"
-                android:drawableRight="@drawable/ic_action_info_dark"
-                android:text="@string/osmo_group_information" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:paddingLeft="3dp"
-                android:id="@+id/osmo_group_create_dinfo"
-                android:textSize="16sp"
-                android:layout_span="2"
-                android:minLines="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_group_information_desc"
-                android:animateLayoutChanges="true"
-                android:visibility="gone" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_group_name" />
-
-            <EditText
-                android:id="@+id/Name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_group_description" />
-
-            <EditText
-                android:id="@+id/Description"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:lines="3"
-                android:paddingLeft="3dp" />
-        </TableRow>
+		<EditText
+			android:id="@+id/Name"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
 
 
-        <TableRow>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/osmo_group_description"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_group_by_invite" />
+		<EditText
+			android:id="@+id/Description"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
 
-            <CheckBox
-                android:id="@+id/OnlyByInvite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp" />
-        </TableRow>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/osmo_group_policy"/>
 
-        <TableRow>
+		<EditText
+			android:id="@+id/Policy"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_group_policy" />
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/Policy"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:lines="2"
-                android:paddingLeft="3dp" />
-        </TableRow>
-    </TableLayout>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/osmo_group_by_invite"/>
+
+			<CheckBox
+				android:id="@+id/OnlyByInvite"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/osmo_group_create_info"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:text="@string/osmo_group_information"
+				android:textSize="18sp"/>
+
+			<ImageButton
+				android:id="@+id/info"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="?attr/options_button_background"
+				android:src="@drawable/ic_action_info_dark"/>
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/osmo_group_create_dinfo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/osmo_group_information_desc"
+			android:textSize="16sp"
+			android:visibility="gone"/>
+	</LinearLayout>
 
 </ScrollView>
