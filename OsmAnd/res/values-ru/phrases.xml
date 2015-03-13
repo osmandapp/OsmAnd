@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
+<resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
 	<string name="poi_convenience">Магазин</string>
@@ -670,7 +670,6 @@
 	<string name="poi_transportation">Транспорт</string>
 	<string name="poi_healthcare">Здоровье</string>
 	<string name="poi_sustenance">Еда</string>
-	<string name="poi_general">Универмаг</string>
 	<string name="poi_lodging">Проживание</string>
 	<string name="poi_man_made">Инфраструктура</string>
 	<string name="poi_administrative">Административные объекты</string>
