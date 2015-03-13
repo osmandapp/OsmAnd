@@ -1947,4 +1947,5 @@
     <string name="action_create">行動建立</string>
 	<string name="action_modify">行動修改</string>
 	<string name="action_delete">行動刪除</string>
+	<string name="osmand_parking_outdated">已過時</string>
 	</resources>
