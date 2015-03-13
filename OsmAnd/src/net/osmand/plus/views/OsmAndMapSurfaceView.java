@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -23,29 +25,49 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 		super(context);
 		init();
 	}
+	
+	@Override
+	public void setOnClickListener(OnClickListener l) {
+		super.setOnClickListener(l);
+		this.onClickListener = l;
+	}
+	
 
 	private void init() {
 		getHolder().addCallback(this);	
-		mapView = new OsmandMapTileView();
-		mapView.initView(this);
 	}
+	
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		mapView.refreshMap();
+		if(mapView != null) {
+			mapView.refreshMap();
+		}
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		mapView.refreshMap();
+		if(mapView != null) {
+			mapView.refreshMap();
+		}
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 	}
 	
+	
+
+	public void setMapView(OsmandMapTileView mapView) {
+		this.mapView = mapView;
+		mapView.setView(this);
+	}
+
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
+		if(mapView == null) {
+			return super.onTrackballEvent(event);
+		}
 		Boolean r = mapView.onTrackballEvent(event);
 		if(r == null) {
 			return super.onTrackballEvent(event);
@@ -54,12 +76,10 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	}
 	
 	@Override
-	public void setOnClickListener(OnClickListener l) {
-		super.setOnClickListener(l);
-		this.onClickListener = l;
-	}
-	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(mapView == null) {
+			return super.onKeyDown(keyCode, event);
+		}
 		Boolean r = mapView.onKeyDown(keyCode, event);
 		if(r == null) {
 			return super.onKeyDown(keyCode, event);
@@ -69,10 +89,20 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(onClickListener != null) {
+		if(mapView == null) {
 			return super.onTouchEvent(event);
 		}
 		return mapView.onTouchEvent(event);
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		if(mapView == null) {
+			return;
+		}
+		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
+		DrawSettings drawSettings = new DrawSettings(nightMode, false);
+		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);
 	}
 	
 

@@ -58,7 +58,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -140,12 +139,14 @@ public class MapActivity extends AccessibleActivity {
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		
+		mapView = new OsmandMapTileView();
+		mapView.init(this);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
-
 		dashboardOnMap.createDashboardView();
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
 			dashboardOnMap.setDashboardVisibility(true);
@@ -188,8 +189,7 @@ public class MapActivity extends AccessibleActivity {
 
 		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 		surf.setVisibility(View.VISIBLE);
-		mapView = surf.getMapView();
-
+		surf.setMapView(mapView);
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -254,7 +254,7 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.setAzimuth(0);
 			atlasMapRendererView.setElevationAngle(90);
 			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
-			mapView = ml.getMapView();
+			ml.setMapView(mapView);
 			mapViewTrackingUtilities.setMapView(mapView);
 			mapView.setMapRender(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);

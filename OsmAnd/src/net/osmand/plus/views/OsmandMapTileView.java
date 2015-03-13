@@ -173,9 +173,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void initView(View view) {
-		application = (OsmandApplication) view.getContext().getApplicationContext();
-		this.view = view;
+	public void init(Context ctx) {
+		application = (OsmandApplication) ctx.getApplicationContext();
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
@@ -204,28 +203,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		paintImg.setFilterBitmap(true);
 //		paintImg.setDither(true);
 
-		view.setClickable(true);
-		view.setLongClickable(true);
-		view.setFocusable(true);
-
-
 		handler = new Handler();
-
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
-		
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(view.getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
-		multiTouchSupport = new MultiTouchSupport(view.getContext(), new MapTileViewMultiTouchZoomListener());
+		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
+		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
 		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
-		WindowManager mgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().
-				setLocation(0, 0).setZoom(3).setPixelDimensions(view.getWidth(), view.getHeight()).build();
+				setLocation(0, 0).setZoom(3).setPixelDimensions(100, 100).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
-
+	}
+	
+	public void setView(View view) {
+		this.view = view;
+		view.setClickable(true);
+		view.setLongClickable(true);
+		view.setFocusable(true);
 	}
 
 	public Boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -469,6 +467,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void refreshMapInternal(DrawSettings drawSettings) {
+		if(view == null) {
+			return;
+		}
 		final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.85f : 0.5f;
 		final int cy = (int) (ratioy * view.getHeight());
 		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
@@ -605,7 +606,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		if (view.isShown()) {
+		if (view != null && view.isShown()) {
 			boolean nightMode = application.getDaynightHelper().isNightMode();
 			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
 			sendRefreshMapMsg(drawSettings, 20);
@@ -785,7 +786,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+				AccessibleToast.makeText(application, msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			}
 		});
 	}
@@ -815,7 +816,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(view.getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = initialViewport.getLatLonFromPixel(x1, y1);
 					final LatLon p2 = initialViewport.getLatLonFromPixel(x2, y2);
@@ -977,12 +978,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 
-	public Context getContext() {
-		return view.getContext();
-	}
+	
 
 	public Resources getResources() {
-		return view.getResources();
+		return application.getResources();
+	}
+	
+	public Context getContext() {
+		return view.getContext();
 	}
 
 	public ViewParent getParent() {
