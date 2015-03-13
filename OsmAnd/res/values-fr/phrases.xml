@@ -12,7 +12,7 @@
 	<string name="poi_aerialway_station">Station de transport aérien par câble</string>
 	<string name="poi_aeroway_gate">Porte d\'embarquement</string>
 	<string name="poi_runway">Aérodrome : piste</string>
-	<string name="poi_airport">Aérodrome</string>
+	<string name="poi_airport">Aérodrome</string> 
 	<string name="poi_alcohol">Magasin de boissons alcoolisées</string>
 	<string name="poi_alpine_hut">Refuge</string>
 	<string name="poi_ambulance_station">Station d\'ambulances</string>
@@ -314,7 +314,6 @@
 	<string name="poi_sports_centre">Centre sportif</string>
 	<string name="poi_spring">Source</string>
 	<string name="poi_stadium">Stade</string>
-	<string name="poi_stationery">Papeterie</string>
 	<string name="poi_stone">Rocher isolé</string>
 	<string name="poi_strait">Détroit</string>
 	<string name="poi_stream">Ruisseau</string>
@@ -542,7 +541,6 @@
 	<string name="poi_curtain">Boutique de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
 	<string name="poi_baby_goods">Articles pour bébé</string>
-	<string name="poi_doityourself">Magasin de domotique</string>
 	<string name="poi_gas">Magasin de gaz liquéfié</string>
 	<string name="poi_houseware">Magasin de fournitures ménagères</string>
 	<string name="poi_paint">Magasin de peinture</string>
@@ -658,7 +656,6 @@
 	<string name="poi_wine">Caviste</string>
 
 	<string name="poi_child_clothes">Vêtements pour enfants</string>
-	<string name="poi_general">Magasin général</string>
 	<string name="poi_car">Concessionnaire automobile</string>
 	<string name="poi_car_parts">Pièces automobiles</string>
 	<string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
