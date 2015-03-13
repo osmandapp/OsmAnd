@@ -3,21 +3,61 @@
  */
 package net.osmand.plus.osmo;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
-import android.view.*;
-import gnu.trove.list.array.TIntArrayList;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import android.text.Spannable;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.ScrollView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -38,53 +78,23 @@ import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.MapUtils;
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Spannable;
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.ScrollView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
 
 /**
  *
@@ -433,31 +443,31 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
+					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
-				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 						// there is a bug in Android 4.2 layout
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
-							// there is a bug in Android 4.2 layout
+					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
+												// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
 				}
 				if (group != null) {
-					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
+					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
 					createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
-							R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+							R.drawable.ic_action_delete_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 
@@ -664,7 +674,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
-					shareSessionUrl();
+					shareSessionUrl(osMoPlugin, OsMoGroupsActivity.this);
 				} else {
 					OsMoService service = osMoPlugin.getService();
 					SessionInfo ci = service.getCurrentSessionInfo();
@@ -676,15 +686,15 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		bld.show();
 	}
 	
-	private void shareSessionUrl() {
+	public static void shareSessionUrl(OsMoPlugin osMoPlugin, Activity ctx) {
 		String sessionURL = osMoPlugin.getTracker().getSessionURL();
 		if(sessionURL == null ) {
-			AccessibleToast.makeText(this, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
 		} else {
-			ShareDialog dlg = new ShareDialog(this);
-			dlg.setTitle(getString(R.string.osmo_share_session));
+			ShareDialog dlg = new ShareDialog(ctx);
+			dlg.setTitle(ctx.getString(R.string.osmo_share_session));
 			dlg.viewContent(sessionURL);
-			dlg.shareURLOrText(sessionURL, getString(R.string.osmo_session_id_share, sessionURL), null);
+			dlg.shareURLOrText(sessionURL, ctx.getString(R.string.osmo_session_id_share, sessionURL), null);
 			dlg.showDialog();
 		}
 	}
@@ -850,7 +860,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final EditText description = (EditText) v.findViewById(R.id.Description);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
 		final CheckBox onlyByInvite = (CheckBox) v.findViewById(R.id.OnlyByInvite);
-		final TextView warnCreate = (TextView) v.findViewById(R.id.osmo_group_create_info);
+
 		final TextView warnCreateDesc = (TextView) v.findViewById(R.id.osmo_group_create_dinfo);
 		View.OnClickListener click = new View.OnClickListener() {
 			
@@ -860,7 +870,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				warnCreateDesc.setVisibility(vls == View.VISIBLE? View.GONE : View.VISIBLE);
 			}
 		};
-		warnCreate.setOnClickListener(click);
+		ImageButton info = (ImageButton) v.findViewById(R.id.info);
+		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_info_dark));
+		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
 		
 		builder.setView(v);
@@ -957,18 +969,26 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.clear();
+		Menu oldMenu = menu;
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(this);
+		if (portrait) {
+			menu = getClearToolbar(true).getMenu();
+		} else {
+			getClearToolbar(false);
+		}
 		createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session, 
-				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				R.drawable.ic_action_gshare_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
-				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
-				R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				R.drawable.ic_group_add,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(oldMenu, SETTINGS_ID, R.string.shared_string_settings,
+				R.drawable.ic_action_settings_enabled_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -1220,7 +1240,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(selectedObject == model) {
 				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
 			} else {
-				row.setBackgroundColor(Color.TRANSPARENT);
+				if (app.getSettings().isLightContent()){
+					row.setBackgroundResource(R.drawable.expandable_list_item_background_light);
+				} else {
+					row.setBackgroundResource(R.drawable.expandable_list_item_background_dark);
+				}
 			}
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);

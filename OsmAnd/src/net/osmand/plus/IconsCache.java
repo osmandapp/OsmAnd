@@ -39,7 +39,8 @@ public class IconsCache {
 	public Drawable getIcon(int id, int colorId) {
 		return getDrawable(id, colorId);
 	}
-	
+
+
 	public Drawable getContentIcon(int id) {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color_light : 0);
 	}

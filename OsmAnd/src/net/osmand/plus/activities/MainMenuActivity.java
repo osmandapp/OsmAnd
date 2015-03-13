@@ -18,7 +18,6 @@ import net.osmand.plus.dashboard.NotifyingScrollView;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.sherpafy.TourViewActivity;
-import net.osmand.plus.views.controls.FloatingActionButton;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -53,7 +52,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	int defaultMargin;
 
 	private Drawable actionBarBackground;
-	FloatingActionButton fabButton;
 
 	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
 		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
@@ -69,18 +67,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 					margintop,
 					r.getDisplayMetrics());
 			int margin = px + defaultMargin;
-			if (headerHeight < t - margin){
-				//hiding action bar - showing floating button
-				//getSupportActionBar().hide();
-				if (fabButton != null) {
-					fabButton.showFloatingActionButton();
-				}
-			} else {
-				//getSupportActionBar().show();
-				if (fabButton != null) {
-					fabButton.hideFloatingActionButton();
-				}
-
+			if (headerHeight >= t - margin){
 				//makes other cards to move on top of the map card to make it look like android animations
 				View fragments = findViewById(R.id.fragments);
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -156,22 +143,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 		if (getMyApplication().getSettings().FOLLOW_THE_ROUTE.get() && !getMyApplication().getRoutingHelper().isRouteCalculated()) {
 			startMapActivity();
-		}
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			fabButton = new FloatingActionButton.Builder(this)
-					.withDrawable(getResources().getDrawable(R.drawable.ic_action_map))
-					.withButtonColor(Color.parseColor("#ff8f00"))
-					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
-					.withMargins(0, 0, 16, 16)
-					.create();
-			fabButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					startMapActivity();
-				}
-			});
-			fabButton.hideFloatingActionButton();
 		}
 
 		getLocationProvider().addCompassListener(this);
