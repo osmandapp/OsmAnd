@@ -1267,7 +1267,7 @@
     <string name="other_location">Другие</string>
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="shared_string_downloading">Загрузка…</string>
-	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
+	<string name="osmand_distance_planning_plugin_description">Плагин добавляет виджет на экран карты, позволяющий создавать маршруты, нажав на карте, а также использовать или изменять существующие файлы GPX, планировать поездку и измерять расстояние между точками. Результаты могут быть сохранены в виде файла GPX, который впоследствии может быть использован для навигации.</string>
     <string name="context_menu_item_destination_point">Пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
