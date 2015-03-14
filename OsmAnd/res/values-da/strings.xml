@@ -354,7 +354,7 @@
 	
 	
 	<string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
-	<string name="osmand_accessibility_description">"Viser indstillinger til at aktivere særlige  tilgængelighedsfunktioner.\n\nDette plugin gør at en enhed er tilgængelighedsfunktioner til rådighed direkte i OsmAnd, og letter bl.a. justere talen sats for TTSstemmerne, konfiguration retningsbestemt-pad skærm navigation ved hjælp af en trackball til zoomknappen, eller ved hjælp af tekst-til-tale feedback."</string>
+	<string name="osmand_accessibility_description">"Viser indstillinger til at aktivere særlige  tilgængelighedsfunktioner.\n\nDette plugin gør at en enhed er tilgængelighedsfunktioner til rådighed direkte i OsmAnd, og letter bl.a. justere talen sats for TTSstemmerne, konfiguration retningsbestemt-pad skærm navigation ved hjælp af en trackball til zoomknappen, eller ved hjælp af tekst-til-tale feedback, ligesom for auto annoncere din position."</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Viser knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte del eller raster) kort, fra foruddefinerede OpenStreetMap delkort (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relief lag osv.\n\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
@@ -380,7 +380,7 @@
 	<string name="support_new_features_descr">Doner for at få nye funktioner i programmet</string>
 	<string name="show_ruler_level">Vis målestok</string>	
 	<string name="back_to_location">Tilbage til placering</string>
-	<string name="show_details">Vis detaljer</string>
+	<string name="show_details">Vis positiosdetaljer</string>
 	<string name="accessibility_extensions_descr">Tilgængelighedsudvidelser for gamle Android versioner</string>
 	<string name="accessibility_extensions">Tilgængelighedsudvidelser</string>
 	<string name="accessibility_mode">Tilgængelighedstilstand</string>
@@ -394,7 +394,7 @@
 	<string name="backToMenu">Tilbage til menuen</string>
 	<string name="zoomOut">Zoom ud</string>
 	<string name="zoomIn">Zoom ind</string>
-	<string name="zoomIs">Zoom er</string>
+	<string name="zoomIs">Zoomniveau</string>
 	<string name="north">nord</string>
 	<string name="north_north_east">nord/nordøst</string>
 	<string name="north_east">nordøst</string>
@@ -411,14 +411,14 @@
 	<string name="west_north_west">vest/nordvest</string>
 	<string name="north_west">nordvest</string>
 	<string name="north_north_west">nord/nordvest</string>
-	<string name="front">Front</string>
-	<string name="front_right">Front til højre</string>
-	<string name="right">Højre</string>
-	<string name="back_right">Bagerst til højre</string>
-	<string name="back">Tilbage</string>
-	<string name="back_left">Bagerst til venstre</string>
-	<string name="left">Venstre</string>
-	<string name="front_left">Front til venstre</string>
+	<string name="front">fremad</string>
+	<string name="front_right">fremad til højre</string>
+	<string name="right">til højre</string>
+	<string name="back_right">bagud til højre</string>
+	<string name="back">bagud</string>
+	<string name="back_left">bagud til venstre</string>
+	<string name="left">til venstre</string>
+	<string name="front_left">fremad til venstre</string>
 	<string name="oclock">klokken</string>
 	<string name="towards">mod</string>
 	<string name="accuracy">Nøjagtighed</string>
@@ -1158,7 +1158,7 @@
 	<string name="map_tile_source">Kilde til delkort</string>
 	<string name="map_source">Kortkilde</string>
 	<string name="use_internet">Brug internettet</string>
-	<string name="show_location">Vis placering</string>
+	<string name="show_location">Vis position</string>
 	
 	
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kortet</string>
@@ -1949,7 +1949,7 @@
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
-	<string name="simulate_your_location">Simuler placering</string>
+	<string name="simulate_your_location">Simuler position</string>
     <string name="drawer">Flad liste</string>
     <string name="short_location_on_map">Lat %1$s\nLong %2$s</string>
     <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger</string>
