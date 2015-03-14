@@ -149,7 +149,7 @@
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
 	<string name="accessibility_preferences">Accessibility</string>
-	<string name="osmand_accessibility_description">This plugin makes a device\'s acessibility features available directly in OsmAnd, and facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback.</string>
+	<string name="osmand_accessibility_description">This plugin makes the device\'s acessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback, like for auto announcing your position.</string>
 	<string name="osm_settings">OSM editing</string>
 	<string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM bugs, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to http://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
 	<string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the screen rendering performance, or voice prompting. These settings are intended for developers and are not needed for the general user.</string>
@@ -1407,8 +1407,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
 	<string name="settings_direction_style">Direction style</string>
 	<string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
-	<string name="auto_announce_on">Start autoannouncing</string>
-	<string name="auto_announce_off">Stop autoannouncing</string>
+	<string name="auto_announce_on">Start auto announcing</string>
+	<string name="auto_announce_off">Stop auto announcing</string>
 	<string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
 	<string name="scroll_map_by_gestures">Natural map scrolling</string>
 	<string name="i_am_here">I am here</string>
