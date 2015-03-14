@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -2158,4 +2159,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="voices">音声プロンプト</string>
 	<string name="shared_string_disabled">有効</string>
 	<string name="shared_string_enabled">無効</string>
-</resources>
+<string name="osmand_parking_outdated">期限切れ</string>
+	<string name="action_create">アクションの作成</string>
+	<string name="action_modify">アクションの変更</string>
+	<string name="action_delete">アクションの削除</string>
+	<string name="osm_edits">OSM の編集</string>
+	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> </resources>
