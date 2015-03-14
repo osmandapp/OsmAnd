@@ -27,7 +27,7 @@
 	
 	<string name="info_button">정보</string>
 	<string name="back_to_location">위치로 돌아감</string>
-	<string name="show_details">세부정보 표시</string>
+	<string name="show_details">위치 정보 보기</string>
 	
 	<string name="accessibility_extensions_descr">이전 안드로이드 버전에 대한 접근성(내게 필요한 옵션) 확장</string>
 	<string name="accessibility_extensions">접근성 확장</string>
@@ -38,7 +38,7 @@
 	<string name="backToMenu">메뉴로 돌아감</string>
 	<string name="zoomOut">줌아웃(축소)</string>
 	<string name="zoomIn">줌인(확대)</string>
-	<string name="zoomIs">줌은</string>
+	<string name="zoomIs">줌 레벨은</string>
 
 	<string name="settings_direction_style">방향 스타일</string>
 	<string name="settings_direction_style_descr">이동하면서 상대적인 방향을 표현하는스타일을 선택합니다</string>
@@ -1488,14 +1488,14 @@
 	<string name="west_north_west">서-북-서쪽</string>
 	<string name="north_west">북-서쪽</string>
 	<string name="north_north_west">북-북-서쪽</string>
-	<string name="front">앞쪽</string>
-	<string name="front_right">앞쪽 우측</string>
-	<string name="right">오른쪽</string>
-	<string name="back_right">오른쪽 뒤</string>
-	<string name="back">뒤쪽</string>
-	<string name="back_left">왼쪽 뒤</string>
-	<string name="left">왼쪽</string>
-	<string name="front_left">앞쪽 좌</string>
+	<string name="front">앞으로</string>
+	<string name="front_right">오른쪽 앞으로</string>
+	<string name="right">오른쪽에</string>
+	<string name="back_right">오른쪽 뒤로</string>
+	<string name="back">뒤로</string>
+	<string name="back_left">왼쪽 뒤로</string>
+	<string name="left">왼쪽에</string>
+	<string name="front_left">왼쪽 앞으로</string>
 	<string name="oclock">o\'시</string>
 	<string name="accuracy">정확성</string>
 	<string name="altitude">고도</string>
