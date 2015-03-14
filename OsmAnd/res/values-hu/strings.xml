@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1872,4 +1873,8 @@
 	<string name="back_to_map">Vissza a térképhez</string>
 	<string name="location_on_map">Helyzet:\n Szélesség %1$s\n Hosszúság %2$s</string>
 	<string name="route_points">Útvonal pontok</string>
-	</resources>
+	<string name="action_create">Létrehozás művelet</string>
+	<string name="action_modify">Módosítás művelet</string>
+	<string name="action_delete">Törlés művelet</string>
+	<string name="osm_edits">OSM szerkesztések</string>
+	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">p</string><string name="osmand_parking_time_left">Bal</string> </resources>
