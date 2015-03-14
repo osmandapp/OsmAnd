@@ -31,7 +31,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -56,7 +55,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
-import android.preference.PreferenceScreen;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -118,7 +116,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null ) {
-			distanceControl = createDistanceControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
+			distanceControl = createDistanceControl(activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(distanceControl,
 					R.drawable.widget_distance, R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
 			mapInfoLayer.recreateControls();
@@ -371,8 +369,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		
 	}
 	
-	private TextInfoWidget createDistanceControl(final MapActivity activity, Paint paintText, Paint paintSubText) {
-		final TextInfoWidget distanceControl = new TextInfoWidget(activity, 0, paintText, paintSubText);
+	private TextInfoWidget createDistanceControl(final MapActivity activity) {
+		final TextInfoWidget distanceControl = new TextInfoWidget(activity);
 		distanceControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

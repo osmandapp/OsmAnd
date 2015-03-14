@@ -18,7 +18,6 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,7 +25,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.view.View;
@@ -56,7 +54,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
     private OsmandApplication app;
 
 	private ParkingPositionLayer parkingLayer;
-	private BaseMapWidget parkingPlaceControl;
+	private TextInfoWidget parkingPlaceControl;
 	private final CommonPreference<Float> parkingLat;
 	private final CommonPreference<Float> parkingLon;
 	private CommonPreference<Boolean> parkingType;
@@ -191,7 +189,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			parkingPlaceControl = createParkingPlaceInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
+			parkingPlaceControl = createParkingPlaceInfoControl(activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(parkingPlaceControl,
 					R.drawable.widget_parking, R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
 			mapInfoLayer.recreateControls();
@@ -443,8 +441,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * the current position on the map 
 	 * and the location of the parked car
 	 */
-	private TextInfoWidget createParkingPlaceInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		TextInfoWidget parkingPlaceControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+	private TextInfoWidget createParkingPlaceInfoControl(final MapActivity map) {
+		TextInfoWidget parkingPlaceControl = new TextInfoWidget(map) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			
