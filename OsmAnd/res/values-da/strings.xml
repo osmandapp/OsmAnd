@@ -1969,5 +1969,5 @@
 	<string name="osm_edits">OSM redigeringer</string>
 	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
 	<string name="your_edits">Dine redigeringer</string>
-    <string name="osmand_parking_outdated">Forældet</string>
+    <string name="osmand_parking_outdated">Udløbet</string>
 	</resources>
