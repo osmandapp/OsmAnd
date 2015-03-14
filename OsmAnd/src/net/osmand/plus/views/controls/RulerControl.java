@@ -16,7 +16,7 @@ import android.text.TextPaint;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class RulerControl extends MapControls {
+public class RulerControl  {
 
 	//ruler and ruler label appeareance:
 	//  Day view:   color black, shadowColor white (transpparent skin or not)
@@ -31,30 +31,19 @@ public class RulerControl extends MapControls {
 	TextPaint rulerTextPaint;
 	final static double screenRulerPercent = 0.25;
 	boolean isNightRemembered = false;
+	private MapActivity mapActivity;
+	private float scaleCoefficient;
 
 	public RulerControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
-	super(mapActivity, showUIHandler, scaleCoefficient);
+		this.mapActivity = mapActivity;
+		this.scaleCoefficient = scaleCoefficient;
 		rulerTextPaint = new TextPaint();
 		rulerTextPaint.setTextSize(20 * scaleCoefficient);
 		rulerTextPaint.setAntiAlias(true);
 		rulerDrawable = mapActivity.getResources().getDrawable(R.drawable.ruler);
 	}
 
-	@Override
-	protected void hideControls(FrameLayout layout) {
-	}
 
-	@Override
-	public void updateTextColor(int textColor, int shadowColor) {
-		super.updateTextColor(textColor, shadowColor);
-		rulerTextPaint.setColor(textColor);
-	}
-
-	@Override
-	protected void showControls(FrameLayout layout) {
-	}
-
-	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		if (!mapActivity.getMyApplication().getSettings().SHOW_RULER.get()) {
 			return;
@@ -93,7 +82,7 @@ public class RulerControl extends MapControls {
 
 		if (cacheRulerText != null) {
 			Rect bounds = rulerDrawable.getBounds();
-			int bottom = (int) (view.getHeight() - vmargin);
+			int bottom = (int) (view.getHeight() );
 			if (bounds.bottom != bottom) {
 				bounds.bottom = bottom;
 				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();

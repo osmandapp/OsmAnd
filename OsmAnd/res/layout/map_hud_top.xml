@@ -8,7 +8,6 @@
     <!-- TOP ROW -->
 
     <LinearLayout
-        android:id="@+id/WaypointVisit2"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/map_address_height"
         android:background="@drawable/btn_flat"
@@ -33,10 +32,11 @@
             android:maxLines="1"
             android:shadowColor="@color/color_myloc_distance"
             android:shadowRadius="10"
-            android:text="TEST Street name"
+            android:text="Long Street Name"
             android:textColor="@color/color_black"
             android:textSize="@dimen/map_widget_text_size"
-            android:textStyle="bold" >
+            android:textStyle="bold"
+            android:visibility="gone" >
         </TextView>
 
         <ImageButton
@@ -68,10 +68,10 @@
             android:weightSum="1" >
 
             <LinearLayout
+                android:id="@+id/map_left_widgets_panel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|left"
-                android:id="@+id/map_left_widgets_panel"
                 android:layout_weight="0.4"
                 android:orientation="vertical" >
 
@@ -118,7 +118,25 @@
                 android:layout_weight="0.6" >
             </LinearLayout>
         </LinearLayout>
-        <!-- CENTER TODO -->
+        <!-- CENTER -->
+
+        <LinearLayout
+            android:id="@+id/map_center_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:background="@drawable/btn_round"
+            android:orientation="vertical" 
+            >
+
+            <ProgressBar
+                android:id="@+id/map_horizontal_progress"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" 
+                android:max="100"
+                android:progress="60"
+                android:visibility="gone"/>
+        </LinearLayout>
         <!-- RIGHT widgets colon -->
 
         <LinearLayout
@@ -149,11 +167,12 @@
                     android:layout_gravity="top|right"
                     android:orientation="vertical" >
 
-                    <!-- 
+                    <!--
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
- 					-->
+                    -->
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >

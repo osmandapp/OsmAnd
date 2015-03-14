@@ -226,13 +226,13 @@ public class RouteInfoWidgetsFactory {
 		return nextTurnInfo;
 	}
 	
-	public TextInfoWidget createTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
+	public TextInfoWidget createTimeControl(final MapActivity map){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final Drawable time = map.getResources().getDrawable(R.drawable.widget_time);
 		final Drawable timeToGo = map.getResources().getDrawable(R.drawable.widget_time_to_distance);
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
-		final TextInfoWidget leftTimeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+		final TextInfoWidget leftTimeControl = new TextInfoWidget(map) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -246,7 +246,7 @@ public class RouteInfoWidgetsFactory {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
-								setContentTitle(getContext().getString(R.string.access_arrival_time));
+								setContentTitle(map.getString(R.string.access_arrival_time));
 								if (DateFormat.is24HourFormat(ctx)) {
 									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
@@ -260,7 +260,7 @@ public class RouteInfoWidgetsFactory {
 								cachedLeftTime = time;
 								int hours = time / (60 * 60);
 								int minutes = (time / 60) % 60;
-								setContentTitle(getContext().getString(R.string.map_widget_time));
+								setContentTitle(map.getString(R.string.map_widget_time));
 								setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
 								return true;
 							}
@@ -281,7 +281,6 @@ public class RouteInfoWidgetsFactory {
 			public void onClick(View v) {
 				showArrival.set(!showArrival.get());
 				leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
-				leftTimeControl.requestLayout();
 				map.getMapView().refreshMap();
 			}
 			
@@ -292,10 +291,10 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	
-	public TextInfoWidget createPlainTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
+	public TextInfoWidget createPlainTimeControl(final MapActivity map){
 		final Drawable timeToGo = map.getResources().getDrawable(R.drawable.widget_time_to_distance);
 		final OsmandApplication ctx = map.getMyApplication();
-		final TextInfoWidget plainTimeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+		final TextInfoWidget plainTimeControl = new TextInfoWidget(map) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -319,11 +318,11 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	
-	public TextInfoWidget createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createMaxSpeedControl(final MapActivity map) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
 		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
 		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
-		final TextInfoWidget speedControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
+		final TextInfoWidget speedControl = new TextInfoWidget(map) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -365,9 +364,9 @@ public class RouteInfoWidgetsFactory {
 	
 	
 	
-	public TextInfoWidget createSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createSpeedControl(final MapActivity map) {
 		final OsmandApplication app = map.getMyApplication();
-		final TextInfoWidget speedControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
+		final TextInfoWidget speedControl = new TextInfoWidget(map) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -412,13 +411,12 @@ public class RouteInfoWidgetsFactory {
 		private float[] calculations = new float[1];
 		private int cachedMeters;
 
-		public DistanceToPointInfoControl(Context ctx, int leftMargin, Paint textPaint, Paint subtextPaint, Drawable d,
-				final OsmandMapTileView view) {
-			super(ctx, leftMargin, textPaint, subtextPaint);
-			this.view = view;
+		public DistanceToPointInfoControl(MapActivity ma, Drawable d) {
+			super(ma);
+			this.view = ma.getMapView();
 			setImageDrawable(d);
 			setText(null, null);
-			setOnClickListener(new OnClickListener() {
+			setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -471,10 +469,9 @@ public class RouteInfoWidgetsFactory {
 		}
 	}
 	
-	public TextInfoWidget createDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final OsmandMapTileView view = map.getMapView();
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
-				.getDrawable(R.drawable.widget_target), view) {
+	public TextInfoWidget createDistanceControl(final MapActivity map) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map,map.getResources()
+				.getDrawable(R.drawable.widget_target)) {
 			@Override
 			public LatLon getPointToNavigate() {
 				TargetPoint p = map.getPointToNavigate();
@@ -492,11 +489,10 @@ public class RouteInfoWidgetsFactory {
 		return distanceControl;
 	}
 	
-	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final OsmandMapTileView view = map.getMapView();
+	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map) {
 		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
-				.getDrawable(R.drawable.widget_intermediate), view) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, map.getResources()
+				.getDrawable(R.drawable.widget_intermediate)) {
 
 			@Override
 			protected void click(OsmandMapTileView view) {

@@ -58,7 +58,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -67,16 +66,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -110,7 +105,6 @@ public class MapActivity extends AccessibleActivity {
 
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
-	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
 	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
@@ -147,43 +141,7 @@ public class MapActivity extends AccessibleActivity {
 		}
 
 		dashboardOnMap.createDashboardView();
-		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			dashboardOnMap.setDashboardVisibility(true);
-		}
-		if (app.isApplicationInitializing()) {
-			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
-			initListener = new AppInitializeListener() {
-				boolean openGlSetup = false;
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-					String tn = init.getCurrentInitTaskName();
-					if (tn != null) {
-						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
-					}
-//					if(event == InitEvents.NATIVE_INITIALIZED) {
-//						setupOpenGLView();
-//						openGlSetup = true;
-//					}
-					if(event == InitEvents.MAPS_INITIALIZED) {
-						mapView.refreshMap(true);
-					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					if(!openGlSetup) {
-						setupOpenGLView();
-					}
-					mapView.refreshMap(true);
-					findViewById(R.id.init_progress).setVisibility(View.GONE);
-					findViewById(R.id.drawer_layout).invalidate();
-				}
-			};
-			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
-		} else {
-			setupOpenGLView();
-		}
-		
+		checkAppInitialization();
 		parseLaunchIntentLocation();
 
 		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
@@ -231,16 +189,50 @@ public class MapActivity extends AccessibleActivity {
 		}
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
-		if (lockView != null) {
-			((FrameLayout) mapView.getParent()).addView(lockView);
-		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
-
 		mapActions.prepareStartOptionsMenu();
-
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
 		if(System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		}
+	}
+
+	private void checkAppInitialization() {
+		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
+			dashboardOnMap.setDashboardVisibility(true);
+		}
+		if (app.isApplicationInitializing()) {
+			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
+			initListener = new AppInitializeListener() {
+				boolean openGlSetup = false;
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
+					String tn = init.getCurrentInitTaskName();
+					if (tn != null) {
+						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
+					}
+					if(event == InitEvents.NATIVE_INITIALIZED) {
+						setupOpenGLView();
+						openGlSetup = true;
+					}
+					if(event == InitEvents.MAPS_INITIALIZED) {
+						mapView.refreshMap(true);
+					}
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					if(!openGlSetup) {
+						setupOpenGLView();
+					}
+					mapView.refreshMap(true);
+					findViewById(R.id.init_progress).setVisibility(View.GONE);
+					findViewById(R.id.drawer_layout).invalidate();
+				}
+			};
+			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
+		} else {
+			setupOpenGLView();
 		}
 	}
 
@@ -262,23 +254,8 @@ public class MapActivity extends AccessibleActivity {
 		}
 	}
 
-	public void addLockView(FrameLayout lockView) {
-		this.lockView = lockView;
-	}
-
 	private void createProgressBarForRouting() {
-		FrameLayout parent = (FrameLayout) mapView.getParent();
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP);
-		DisplayMetrics dm = getResources().getDisplayMetrics();
-		params.topMargin = (int) (60 * dm.density);
-		final ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-		pb.setIndeterminate(false);
-		pb.setMax(100);
-		pb.setLayoutParams(params);
-		pb.setVisibility(View.GONE);
-
-		parent.addView(pb);
+		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
 
 			@Override

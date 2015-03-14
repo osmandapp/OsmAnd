@@ -17,7 +17,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.controls.MapControls;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -54,8 +53,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private int shadowColor = -1;
 	// private RulerControl rulerControl;
 	// private List<MapControls> allControls = new ArrayList<MapControls>();
-
-	private float scaleCoefficient;
 
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
@@ -95,7 +92,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
-		scaleCoefficient = view.getScaleCoefficient();
 		// TODO
 		// rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent,
 		// rightGravity);
@@ -415,10 +411,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	}
 
-	protected void notifyClicked(MapControls m) {
-		notifyClicked();
-	}
-
 	protected void notifyClicked() {
 		stopCounter();
 	}
@@ -453,16 +445,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				&& (!routeFollowingMode || settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get());
 		// /////////////////////////////////////////////
 		// new update
-
-		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		if (!enabled) {
-			backToLocationControl.setIconColorId(R.color.icon_color_light);
-		} else if (tracked) {
-			backToLocationControl.setIconColorId(R.color.color_distance);
-		} else {
-			backToLocationControl.setIconColorId(R.color.color_white);
-		}
+		updateMyLocation();
 
 		menuControl.setIconResId(settings.USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? R.drawable.ic_dashboard_dark
 				: R.drawable.ic_navigation_drawer);
@@ -524,6 +507,24 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		for (MapHudButton mc : controls) {
 			mc.update(mapActivity.getMyApplication(), nightMode == null ? false : nightMode.isNightMode());
+		}
+	}
+
+	private void updateMyLocation() {
+//		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
+//		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
+//		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
+//		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
+//		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
+//		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
+		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
+		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		if (!enabled) {
+			backToLocationControl.setIconColorId(R.color.icon_color_light);
+		} else if (tracked) {
+			backToLocationControl.setIconColorId(R.color.color_distance);
+		} else {
+			backToLocationControl.setIconColorId(R.color.color_white);
 		}
 	}
 

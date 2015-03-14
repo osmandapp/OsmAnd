@@ -29,6 +29,7 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -58,7 +59,7 @@ import android.widget.Toast;
 
 public class EditingPOIActivity implements DialogProvider {
 	
-	private final MapActivity ctx;
+	private final Activity activity;
 	private final OpenstreetmapUtil openstreetmapUtil;
 	private final OpenstreetmapUtil openstreetmapUtilToLoad;
 	private AutoCompleteTextView typeText;
@@ -94,20 +95,20 @@ public class EditingPOIActivity implements DialogProvider {
 	
 
 	public EditingPOIActivity(MapActivity uiContext){
-		this.ctx = uiContext;
+		this.activity = uiContext;
 
 		poiTypes = uiContext.getMyApplication().getPoiTypes();
 		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
-			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
+			this.openstreetmapUtil = new OpenstreetmapLocalUtil(activity);
 			if (settings.isInternetConnectionAvailable(true)) {
-				this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView().getView());
+				this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 			} else {
 				this.openstreetmapUtilToLoad = openstreetmapUtil;
 			}
 		} else {
-			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView().getView());
+			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
 			this.openstreetmapUtilToLoad= openstreetmapUtil;
 		}
 	}
@@ -124,7 +125,7 @@ public class EditingPOIActivity implements DialogProvider {
 				if(n != null){
 					showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
 				} else {
-					AccessibleToast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, activity.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 				}
 			};
 			
@@ -141,7 +142,7 @@ public class EditingPOIActivity implements DialogProvider {
 		Amenity a = EntityParser.parseAmenity(n, type, subType, null, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-		ctx.showDialog(dialogID);
+		activity.showDialog(dialogID);
 	}
 	
 	public void showDeleteDialog(final Amenity a){
@@ -152,32 +153,32 @@ public class EditingPOIActivity implements DialogProvider {
 			
 			protected void onPostExecute(Node n) {
 				if(n == null){
-					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 					return;
 				}
 				dialogBundle.putSerializable(KEY_AMENITY, a);
 				dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-				ctx.showDialog(DIALOG_DELETE_POI); //TODO from android 2.0 use showDialog(id,bundle)
+				activity.showDialog(DIALOG_DELETE_POI); //TODO from android 2.0 use showDialog(id,bundle)
 			};
 		}.execute(new Void[0]);
 	}
 	
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-		dlg.setTitle(MessageFormat.format(this.ctx.getMapView().getResources().getString(R.string.poi_remove_confirm_template), 
+		dlg.setTitle(MessageFormat.format(this.activity.getResources().getString(R.string.poi_remove_confirm_template), 
 				OsmAndFormatter.getPoiStringWithoutType(a, settings.usingEnglishNames())));
 	}
 	
 	private Dialog createDeleteDialog(final Bundle args) {
-		Builder builder = new AlertDialog.Builder(ctx);
+		Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.poi_remove_title);
-		LinearLayout ll = new LinearLayout(ctx);
+		LinearLayout ll = new LinearLayout(activity);
 		ll.setPadding(4, 2, 4, 0);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		final EditText comment = new EditText(ctx);
+		final EditText comment = new EditText(activity);
 		comment.setText(R.string.poi_remove_title);
 		ll.addView(comment);
-		final CheckBox closeChangeset = new CheckBox(ctx);
+		final CheckBox closeChangeset = new CheckBox(activity);
 		closeChangeset.setText(R.string.close_changeset);
 		ll.addView(closeChangeset);
 		builder.setView(ll);
@@ -190,9 +191,9 @@ public class EditingPOIActivity implements DialogProvider {
 				commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, closeChangeset.isSelected(),  new Runnable(){
 					@Override
 					public void run() {
-						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
-						if(ctx.getMapView() != null){
-							ctx.getMapView().refreshMap(true);
+						AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
+						if(activity instanceof MapActivity){
+							((MapActivity) activity).getMapView().refreshMap(true);
 						}						
 					}
 				});
@@ -224,15 +225,15 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	private void addTagValueRow(final Node n, final TableLayout layout, String tg, String vl) {
-		final TableRow newTagRow = new TableRow(ctx);				            
+		final TableRow newTagRow = new TableRow(activity);				            
         TableRow.LayoutParams tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);          
         tlp.leftMargin = 5;
         tlp.gravity = Gravity.CENTER;
         newTagRow.setLayoutParams(tlp);
 
-        final AutoCompleteTextView tag = new AutoCompleteTextView(ctx);
-        final AutoCompleteTextView value = new AutoCompleteTextView(ctx);				            
-        final Button delete = new Button(ctx);
+        final AutoCompleteTextView tag = new AutoCompleteTextView(activity);
+        final AutoCompleteTextView value = new AutoCompleteTextView(activity);				            
+        final Button delete = new Button(activity);
         
         tag.setLayoutParams(tlp);
         if(tg != null) {
@@ -248,13 +249,13 @@ public class EditingPOIActivity implements DialogProvider {
 				tagKeys.add(t.getValue());
 			}
 		}
-		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, tagKeys.toArray());
+		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, tagKeys.toArray());
         tag.setAdapter(adapter);
         tag.setThreshold(1);
         tag.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Builder builder = new AlertDialog.Builder(ctx);
+				Builder builder = new AlertDialog.Builder(activity);
 				final String[] tags = tagKeys.toArray(new String[tagKeys.size()]);
 				builder.setItems(tags, new Dialog.OnClickListener() {
 					@Override
@@ -283,7 +284,7 @@ public class EditingPOIActivity implements DialogProvider {
 //				subCategories.add(s);
 //			}
 //		} ;
-        ArrayAdapter<Object> valueAdapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
+        ArrayAdapter<Object> valueAdapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, subCategories.toArray());
         value.setThreshold(1);
         value.setAdapter(valueAdapter);
 		value.addTextChangedListener(new TextWatcher() {
@@ -324,7 +325,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	private Dialog createPOIDialog(final int dialogID, Bundle args) {
-		final Dialog dlg = new Dialog(ctx);
+		final Dialog dlg = new Dialog(activity);
 		dlg.setContentView(R.layout.editing_poi);
 		
 		dlg.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);;
@@ -348,7 +349,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 			@Override
 			public void onClick(View v) {
-				ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
+				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
 			}
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
@@ -378,7 +379,7 @@ public class EditingPOIActivity implements DialogProvider {
 		openHoursButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ctx.showDialog(DIALOG_OPENING_HOURS);
+				activity.showDialog(DIALOG_OPENING_HOURS);
 			}
 		});
 		typeText.addTextChangedListener(new TextWatcher(){
@@ -408,7 +409,7 @@ public class EditingPOIActivity implements DialogProvider {
 		typeButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ctx.showDialog(DIALOG_POI_TYPES);
+				activity.showDialog(DIALOG_POI_TYPES);
 			}
 		});
 		
@@ -451,7 +452,7 @@ public class EditingPOIActivity implements DialogProvider {
 			@Override
 			public void onClick(View v) {
 				//we must do remove, because there are two dialogs EDIT,CREATE using same variables!!
-				ctx.removeDialog(dialogID);
+				activity.removeDialog(dialogID);
 			}
 		});
 		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
@@ -508,12 +509,12 @@ public class EditingPOIActivity implements DialogProvider {
 						new Runnable() {
 					@Override
 					public void run() {
-						AccessibleToast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
+						AccessibleToast.makeText(activity, MessageFormat.format(activity.getResources().getString(R.string.poi_action_succeded_template), msg),
 								Toast.LENGTH_LONG).show();
-						if (ctx.getMapView() != null) {
-							ctx.getMapView().refreshMap(true);
+						if (activity instanceof MapActivity) {
+							((MapActivity) activity).getMapView().refreshMap(true);
 						}
-						ctx.removeDialog(dialogID);
+						activity.removeDialog(dialogID);
 					}
 				});
 			}
@@ -522,7 +523,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private void showSubCategory(Amenity a) {
 		if(typeText.getText().length() == 0 && a.getType() != null){
-			ctx.showDialog(DIALOG_SUB_CATEGORIES);
+			activity.showDialog(DIALOG_SUB_CATEGORIES);
 		}
 	}
 
@@ -533,7 +534,7 @@ public class EditingPOIActivity implements DialogProvider {
 				subCategories.add(s);
 			}
 		}
-		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
+		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, subCategories.toArray());
 		typeText.setAdapter(adapter);
 	}
 	
@@ -547,7 +548,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private Dialog createOpenHoursDlg(){
 		OpeningHours time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
 		if(time == null){
-			AccessibleToast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, activity.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return null;
 		}
 		
@@ -564,21 +565,21 @@ public class EditingPOIActivity implements DialogProvider {
 			}
 		}
 		
-		Builder builder = new AlertDialog.Builder(ctx);
-		final OpeningHoursView v = new OpeningHoursView(ctx);
+		Builder builder = new AlertDialog.Builder(activity);
+		final OpeningHoursView v = new OpeningHoursView(activity);
 		builder.setView(v.createOpeningHoursEditView(simple));
-		builder.setPositiveButton(ctx.getString(R.string.shared_string_apply), new DialogInterface.OnClickListener(){
+		builder.setPositiveButton(activity.getString(R.string.shared_string_apply), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpeningHours oh = new OpeningHours((ArrayList<OpeningHoursRule>) v.getTime());
 				openingHours.setText(oh.toString());
-				ctx.removeDialog(DIALOG_OPENING_HOURS);
+				activity.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});
-		builder.setNegativeButton(ctx.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(activity.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ctx.removeDialog(DIALOG_OPENING_HOURS);
+				activity.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});
 		return builder.create();
@@ -589,14 +590,14 @@ public class EditingPOIActivity implements DialogProvider {
 			final boolean closeChangeSet,
 			final Runnable successAction) {
 		if (info == null && OsmPoint.Action.CREATE != action) {
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
 		new AsyncTask<Void, Void, Node>() {
 			ProgressDialog progress;
 			@Override
 			protected void onPreExecute() {
-				progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));
+				progress = ProgressDialog.show(activity, activity.getString(R.string.uploading), activity.getString(R.string.uploading_data));
 				super.onPreExecute();
 			}
 			@Override
@@ -625,7 +626,7 @@ public class EditingPOIActivity implements DialogProvider {
 		case DIALOG_DELETE_POI:
 			return createDeleteDialog(args);
 		case DIALOG_SUB_CATEGORIES: {
-			Builder builder = new AlertDialog.Builder(ctx);
+			Builder builder = new AlertDialog.Builder(activity);
 			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 			final String[] subCats = poiTypes.getAllTranslatedNames(a.getType()).keySet().toArray(new String[0]);
 			builder.setItems(subCats, new DialogInterface.OnClickListener() {
@@ -633,20 +634,20 @@ public class EditingPOIActivity implements DialogProvider {
 				public void onClick(DialogInterface dialog, int which) {
 					typeText.setText(subCats[which]);
 					a.setSubType(subCats[which]);
-					ctx.removeDialog(DIALOG_SUB_CATEGORIES);
+					activity.removeDialog(DIALOG_SUB_CATEGORIES);
 				}
 			});
 			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					ctx.removeDialog(DIALOG_SUB_CATEGORIES);
+					activity.removeDialog(DIALOG_SUB_CATEGORIES);
 				}
 			});
 			return builder.create();
 		}
 		case DIALOG_POI_TYPES: {
 			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-			Builder builder = new AlertDialog.Builder(ctx);
+			Builder builder = new AlertDialog.Builder(activity);
 			final List<PoiCategory> categories = poiTypes.getCategories();
 			String[] vals = new String[categories.size()];
 			for (int i = 0; i < vals.length; i++) {
@@ -661,13 +662,13 @@ public class EditingPOIActivity implements DialogProvider {
 						a.setSubType(""); //$NON-NLS-1$
 						updateType(a);
 					}
-					ctx.removeDialog(DIALOG_POI_TYPES);
+					activity.removeDialog(DIALOG_POI_TYPES);
 				}
 			});
 			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					ctx.removeDialog(DIALOG_POI_TYPES);
+					activity.removeDialog(DIALOG_POI_TYPES);
 				}
 			});
 			return builder.create();

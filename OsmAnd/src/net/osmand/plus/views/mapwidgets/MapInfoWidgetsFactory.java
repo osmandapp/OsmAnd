@@ -8,7 +8,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -53,8 +52,8 @@ public class MapInfoWidgetsFactory {
 		this.scaleCoefficient = scaleCoefficient;
 	}
 
-	public TextInfoWidget createAltitudeControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final TextInfoWidget altitudeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+	public TextInfoWidget createAltitudeControl(final MapActivity map) {
+		final TextInfoWidget altitudeControl = new TextInfoWidget(map) {
 			private int cachedAlt = 0;
 
 			@Override
@@ -87,10 +86,10 @@ public class MapInfoWidgetsFactory {
 		return altitudeControl;
 	}
 	
-	public TextInfoWidget createGPSInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createGPSInfoControl(final MapActivity map) {
 		final OsmandApplication app = map.getMyApplication();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
-		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
+		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map) {
 			private int u = -1;
 			private int f = -1;
 
@@ -178,46 +177,6 @@ public class MapInfoWidgetsFactory {
 
 
 
-	public ImageViewWidget createBackToLocation(final MapActivity map){
-		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
-		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
-		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
-		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
-		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
-		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
-		ImageViewWidget backToLocation = new ImageViewWidget(map) {
-			Drawable lastDrawable = null;
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				boolean tracked = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
-				Drawable d;
-				if(!enabled) {
-					d = nightMode ? backToLocDisabledWhite : backToLocDisabled; 
-				} else if(tracked) {
-					d = nightMode ? backToLocTrackedWhite : backToLocTracked;
-				} else {
-					d = nightMode ? backToLocWhite : backToLoc;
-				}
-				if(d != lastDrawable) {
-					lastDrawable = d;
-					setImageDrawable(d);
-				}
-				return true;
-			}
-		};
-		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
-		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
-		backToLocation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().backToLocationImpl();
-			}
-		});
-		return backToLocation;
-	}
 	
 	private static boolean isScreenLocked = false;
 	private Drawable lockEnabled;
@@ -279,16 +238,17 @@ public class MapInfoWidgetsFactory {
 
 			private void blinkIcon() {
 				lockView.setBackgroundDrawable(lockDisabled);
-				view.getView().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						lockView.setBackgroundDrawable(lockEnabled);
-					}
-				}, 300);
+				// TODO!
+//				map.postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						lockView.setBackgroundDrawable(lockEnabled);
+//					}
+//				}, 300);
 			}
 
 		});
-		final FrameLayout parent = (FrameLayout) view.getParent();
+		final FrameLayout parent = null; // TODO 
 		lockView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -64,7 +64,8 @@ public class MapWidgetRegistry {
 	
 	
 	
-	public void registerSideWidget(BaseMapWidget m, int drawableDark,int drawableLight, int messageId, String key, boolean left, int priorityOrder) {
+	public void registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
+			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
@@ -91,12 +92,12 @@ public class MapWidgetRegistry {
 				ii.visibleCollapsible.add(ms);
 			}
 		}
-		if (m != null)
-			m.setContentTitle(m.getContext().getString(messageId));
+		if (widget != null)
+			widget.setContentTitle(widget.getContext().getString(messageId));
 		ii.drawableDark = drawableDark;
 		ii.drawableLight = drawableLight;
 		ii.messageId = messageId;
-		ii.m = m;
+		ii.widget = widget;
 		ii.priorityOrder = priorityOrder;
 		if(left) {
 			this.left.add(ii);
@@ -179,9 +180,9 @@ public class MapWidgetRegistry {
 		Set<MapWidgetRegInfo> st = left ? this.left : this.right;
 		for (MapWidgetRegInfo r : st) {
 			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
-				stack.addCollapsedView((BaseMapWidget) r.m);
+				stack.addCollapsedView((BaseMapWidget) r.widget);
 			} else if (r.visibleModes.contains(appMode)) {
-				stack.addStackView((BaseMapWidget) r.m);
+				stack.addStackView((BaseMapWidget) r.widget);
 			}
 		}
 	}
@@ -224,7 +225,7 @@ public class MapWidgetRegistry {
 	
 	
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
-		public View m;
+		public TextInfoWidget widget;
 		public int drawableDark;
 		public int drawableLight;
 		public int messageId;

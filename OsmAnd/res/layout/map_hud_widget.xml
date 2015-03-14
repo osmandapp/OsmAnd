@@ -4,10 +4,10 @@
     android:minWidth="100dp"
     android:layout_height="wrap_content"
     android:background="@drawable/btn_left_round"
-    android:orientation="vertical"
-   >
+    android:orientation="vertical">
 
     <ImageButton
+        android:id="@+id/widget_top_icon"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/map_widget_image"
         android:layout_gravity="center"
@@ -22,13 +22,16 @@
         <ImageView
             android:layout_width="@dimen/map_widget_icon"
             android:layout_height="@dimen/map_widget_icon"
+            android:id="@+id/widget_icon"
             android:gravity="center"
             android:layout_gravity="left|center_vertical"
-            android:src="@drawable/ic_action_remove_light" />
+            android:src="@drawable/ic_action_remove_light" 
+            android:visibility="invisible"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/widget_text"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
             android:layout_weight="1"
@@ -43,6 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/widget_text_small"
             android:layout_marginLeft="4dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"

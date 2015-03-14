@@ -985,14 +985,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return view.getResources();
 	}
 
-	public ViewParent getParent() {
-		return view.getParent();
-	}
-
-	public View getView() {
-		return view;
-	}
-
 	public int getHeight() {
 		return view.getHeight();
 	}

@@ -38,6 +38,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -47,19 +48,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final RouteLayer routeLayer;
 	private OsmandMapTileView view;
 	
-	private Paint paintText;
-	private Paint paintSubText;
-	private Paint paintSmallText;
-	private Paint paintSmallSubText;
-	private Paint paintImg;
-	
-	
-	private TopTextView topText;
-	private View progressBar;
-	
+//	private Paint paintText;
+//	private Paint paintSubText;
+//	private Paint paintSmallText;
+//	private Paint paintSmallSubText;
+//	private Paint paintImg;
+//	private View progressBar;
+//	
 	// groups
-	private StackWidgetView rightStack;
-	private StackWidgetView leftStack;
+	private LinearLayout rightStack;
+	private LinearLayout leftStack;
 	private BaseMapWidget lanesControl;
 	private BaseMapWidget alarmControl;
 	private MapWidgetRegistry mapInfoControls;
@@ -69,23 +67,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
-	}
-	
-	
-	public Paint getPaintSmallSubText() {
-		return paintSmallSubText;
-	}
-	
-	public Paint getPaintText() {
-		return paintText;
-	}
-	
-	public Paint getPaintSmallText() {
-		return paintSmallText;
-	}
-	
-	public Paint getPaintSubText() {
-		return paintSubText;
 	}
 	
 	public MonitoringInfoControl getMonitoringInfoControl() {
@@ -101,33 +82,33 @@ public class MapInfoLayer extends OsmandMapLayer {
 		this.view = view;
 		scaleCoefficient = view.getScaleCoefficient();
 
-		paintText = new Paint();
+		Paint paintText = new Paint();
 		paintText.setStyle(Style.FILL_AND_STROKE);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextSize(23 * scaleCoefficient);
 		paintText.setAntiAlias(true);
 		paintText.setStrokeWidth(4);
 
-		paintSubText = new Paint();
+		Paint paintSubText = new Paint();
 		paintSubText.setStyle(Style.FILL_AND_STROKE);
 		paintSubText.setColor(Color.BLACK);
 		paintSubText.setTextSize(15 * scaleCoefficient);
 		paintSubText.setAntiAlias(true);
 
-		paintSmallText = new Paint();
+		Paint paintSmallText = new Paint();
 		paintSmallText.setStyle(Style.FILL_AND_STROKE);
 		paintSmallText.setColor(Color.BLACK);
 		paintSmallText.setTextSize(19 * scaleCoefficient);
 		paintSmallText.setAntiAlias(true);
 		paintSmallText.setStrokeWidth(4);
 
-		paintSmallSubText = new Paint();
+		Paint paintSmallSubText = new Paint();
 		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
 		paintSmallSubText.setColor(Color.BLACK);
 		paintSmallSubText.setTextSize(13 * scaleCoefficient);
 		paintSmallSubText.setAntiAlias(true);
 
-		paintImg = new Paint();
+		Paint paintImg = new Paint();
 		paintImg.setDither(true);
 		paintImg.setFilterBitmap(true);
 		paintImg.setAntiAlias(true);
@@ -162,24 +143,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
-		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
-		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
-		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
+		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
 		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
-		TextInfoWidget dist = ric.createDistanceControl(map, paintText, paintSubText);
+		TextInfoWidget dist = ric.createDistanceControl(map);
 		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
-		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
+		TextInfoWidget time = ric.createTimeControl(map);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
-		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
+		TextInfoWidget speed = ric.createSpeedControl(map);
 		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
-		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
+		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
 		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
-		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
+		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
 		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
-		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
+		TextInfoWidget alt = mic.createAltitudeControl(map);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
-		TextInfoWidget plainTime = ric.createPlainTimeControl(map, paintText, paintSubText);
+		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
 		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 
 		// Register appearance widgets
@@ -206,7 +185,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// form measurement
 		ImageView iv = new ImageView(map);
 		iv.setImageDrawable(map.getResources().getDrawable(R.drawable.la_backtoloc_disabled));
-		rightStack = new StackWidgetView(view.getContext());
+		rightStack = map;
 		leftStack = new StackWidgetView(view.getContext());
 		
 		// 2. Preparations
@@ -409,7 +388,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			paintSmallText.setColor(textColor);
 			paintSmallSubText.setColor(textColor);
 
-			topText.setShadowColor(textShadowColor);
 			leftStack.setShadowColor(textShadowColor);
 			rightStack.setShadowColor(textShadowColor);
 
@@ -458,21 +436,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private static class UpdateFrameLayout extends FrameLayout implements UpdateableWidget {
-		private ImageViewWidget widget;
-
-		private UpdateFrameLayout(Context c, ImageViewWidget widget) {
-			super(c);
-			this.widget = widget;
-		}
-
-		@Override
-		public boolean updateInfo(DrawSettings drawSettings) {
-			return widget.updateInfo(drawSettings);
-		}
-	}
-	
-	
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
