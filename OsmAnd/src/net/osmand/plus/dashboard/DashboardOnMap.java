@@ -1,33 +1,13 @@
 package net.osmand.plus.dashboard;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
-import net.osmand.plus.development.DashSimulateFragment;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.parkingpoint.DashParkingFragment;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.FloatingActionButton;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +21,30 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
+import com.software.shell.fab.ActionButton;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.development.DashSimulateFragment;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.osmo.DashOsmoFragment;
+import net.osmand.plus.parkingpoint.DashParkingFragment;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Denis
  * on 03.03.15.
@@ -53,8 +57,7 @@ public class DashboardOnMap {
 	private static final int CONFIGURE_SCREEN_ID = 3;
 	private static final int SETTINGS_ID = 4;
 	private MapActivity mapActivity;
-	FloatingActionButton fabButton;
-	boolean floatingButtonVisible = true;
+	private ActionButton actionButton;
 	private FrameLayout dashboardView;
 	
 	private boolean visible = false;
@@ -102,35 +105,40 @@ public class DashboardOnMap {
 				mapActivity.getMapActions().toggleDrawer();				
 			}
 		});
-		
-		
-		
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			fabButton = new FloatingActionButton.Builder(mapActivity)
-					.withDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_get_my_location))
-					.withButtonColor(mapActivity.getResources().getColor(R.color.color_myloc_distance))
-					.withGravity(landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT)
-					.withMargins(0, landscape ? 0 : 160, 16, landscape ? 16 : 0).create();
-			fabButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (getMyApplication().accessibilityEnabled()) {
-						mapActivity.getMapActions().whereAmIDialog();
-					} else {
-						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					}
-					setDashboardVisibility(false);
+		actionButton = new ActionButton(mapActivity);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		int marginRight = convertPixelsToDp(16, mapActivity);
+		params.setMargins(0, landscape ? 0 : convertPixelsToDp(164, mapActivity), marginRight, landscape ? marginRight : 0);
+
+		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
+		actionButton.setLayoutParams(params);
+		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_map));
+		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.color_myloc_distance));
+		actionButton.hide();
+		actionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getMyApplication().accessibilityEnabled()) {
+					mapActivity.getMapActions().whereAmIDialog();
+				} else {
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				}
-			});
-			fabButton.hideFloatingActionButton();
-		}
+				setDashboardVisibility(false);
+			}
+		});
+		dashboardView.addView(actionButton);
 
 		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
 			((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll))
 					.setOnScrollChangedListener(onScrollChangedListener);
 		}
 
+	}
+
+	public static int convertPixelsToDp(float dp, Context context){
+		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+		return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 	}
 	
 	public net.osmand.Location getMyLocation() {
@@ -170,7 +178,8 @@ public class DashboardOnMap {
 			setupActionBar();
 			updateDownloadBtn();
 			dashboardView.setVisibility(View.VISIBLE);
-			fabButton.showFloatingActionButton();
+			actionButton.show();
+			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
 			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
 					R.color.icon_color_light));
@@ -184,7 +193,7 @@ public class DashboardOnMap {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent));
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-			fabButton.hideFloatingActionButton();
+			actionButton.hide();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
 					df.get().onCloseDash();
@@ -356,6 +365,8 @@ public class DashboardOnMap {
 		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);
 		showFragment(manager, fragmentTransaction, DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class);
 		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class);
+		showFragment(manager, fragmentTransaction, DashOsmoFragment.TAG, DashOsmoFragment.class);
+		//showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class);
 //		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class);
 		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class);
 		
@@ -391,9 +402,9 @@ public class DashboardOnMap {
 		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
 			int sy = who.getScrollY();
 			double scale = who.getContext().getResources().getDisplayMetrics().density;
-			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) fabButton.getLayoutParams();
+			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
 			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
-			((FrameLayout) fabButton.getParent()).updateViewLayout(fabButton, lp);
+			((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
 		}
 	};
 	

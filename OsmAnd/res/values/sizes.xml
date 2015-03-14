@@ -47,8 +47,8 @@
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
+	<dimen name="osmo_header_height">56dp</dimen>
 	<!--  map buttons -->
-	
 	<dimen name="map_trans_seek_size">80dp</dimen>
 	<dimen name="map_widget_text_size">20sp</dimen>
 	<dimen name="map_widget_text_size_small">14sp</dimen>
@@ -69,8 +69,6 @@
 	<dimen name="map_button_inset">4dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1px</dimen>
-	
-
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

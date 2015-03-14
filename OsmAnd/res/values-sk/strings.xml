@@ -2014,11 +2014,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 		\n\nMapový súbor obsahujúci všetky lyžiarske svahy a bežecké trate je dostupný na stiahnutie pod názvom \"Svetová lyžiarska mapa\".
 		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
 	</string>
-	<string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.
-		\n\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). Taktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.
-		\n\nNie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.
-		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
-	</string>
+	<string name="plugin_touringview_descr">"Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.
+\n\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky).
+\n\nTaktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.
+\n\nPoskytuje aj špeciálne možnosti pre cestovanie ako cyklotrasy a turistické značkované chodníky.\n\nNie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.
+\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\". "</string>
 	<string name="plugin_touringview_name">Cestovný mapový pohľad (Touring view)</string>
 	<string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
 	<string name="watch">Zobraziť</string>

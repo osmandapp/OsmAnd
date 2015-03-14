@@ -2,7 +2,7 @@
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
-    <string name="srtm_plugin_description">Плагин позволяет загружать контурные линии и затемнение высот для использования оффлайн (\"Настройки\" → \"Управление файлами карт\" → \"Загрузить\").</string>
+    <string name="srtm_plugin_description">"Плагин обеспечивает наложение контурных линий и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -42,7 +42,7 @@
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке</string>
     
     <string name="map_widget_audionotes">Аудио заметки</string>
-    <string name="audionotes_plugin_description">Этот плагин предоставляет возможность делать аудио-видео заметки во время путешествия</string>
+    <string name="audionotes_plugin_description">Плагин аудио/видео заметки предоставляет функциональные возможности по созданию аудио/фото/видео записей во время поездки, либо с помощью кнопки на экране карты, либо непосредственно через контекстное меню для любой позиции на карте.</string>
     <string name="audionotes_plugin_name">Аудио-видео заметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
@@ -122,7 +122,8 @@
   <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">Этот плагин позволяет использовать различные источники онлайн карт, а также подготовленные растровые карты в качестве базовой карты или подложки/покрытия. Карты могут быть подготовлены на компьютере и скопированы в папку данных OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"С помощью этого плагина вы можете получить доступ ко множеству видов интернет карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых изображений и специальных слоев назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т.д.
+\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения/подложки к другой базовой карте (обычной оффлайн карте OsmAnd). Для того чтобы сделать любую подложку более видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню \"Настройка карты\".\nТайловые карты могут быть получены непосредственно с помощью онлайн-источников или могут быть подготовлены для использования в автономном режиме (и вручную скопированы в папку данных OsmAnd) в качестве базы данных SQLite, которая может быть получена с помощью различных инструментов подготовки карт сторонних производителей. "</string>
   <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
   <string name="osmand_accessibility_description">Этот плагин содержит настройки для дополнительных возможностей (accessibility).</string>
   
@@ -1150,7 +1151,7 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Плагин Dropbox позволяет синхронизировать треки и видео/аудио заметки с вашим аккаунтом dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">Этот плагин предоставляет контурные линии, которые могут отображаться в оффлайн картах OsmAnd. Глобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Плагин обеспечивает наложение контурных линии и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Аудио/Видео данные</string>
     <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
@@ -1266,7 +1267,7 @@
     <string name="other_location">Другие</string>
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="shared_string_downloading">Загрузка…</string>
-	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
+	<string name="osmand_distance_planning_plugin_description">Плагин добавляет виджет на экран карты, позволяющий создавать маршруты, нажав на карте, а также использовать или изменять существующие файлы GPX, планировать поездку и измерять расстояние между точками. Результаты могут быть сохранены в виде файла GPX, который впоследствии может быть использован для навигации.</string>
     <string name="context_menu_item_destination_point">Пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
@@ -1491,7 +1492,7 @@
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
 	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
-    <string name="osmo_plugin_description">OpenStreetMap Мониторинг - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
+    <string name="osmo_plugin_description">"Плагин обеспечивает функциональность для расширенного живого мониторинга OsMo, см http://osmo.mobi.\n\nОн позволяет отслеживать другие устройства и отслеживаться самому. Вы можете создавать анонимные группы, делиться друг с другом местоположением и общаться. Возможны различные варианты опций для отслеживания сессии или постоянного слежения.\n\nАнонимные группы создаются для указанного количества дней и ограниченным функционалом, то есть нет дистанционного управления и нет администратора группы. Полностью функциональные группы, с другой стороны, могут быть созданы на веб-сайте и только зарегистрированные пользователи имеют к ним доступ. "</string>
     <string name="osmo_plugin_name">OsMo мониторинг</string>
     <string name="osmo_settings">OsMo мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
@@ -1715,7 +1716,8 @@
     <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
 	<string name="save_track_interval_globally">Интервал записи</string>
 	<string name="save_track_to_gpx_globally_descr">Общие положения записи в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
-	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
+	<string name="record_plugin_description">"Плагин активирует функции для записи и сохранения ваших треков вручную нажатием на виджет записи GPX на экране карты, или также автоматически записывает все ваши маршруты навигации в файл GPX.
+\n\nЗаписанными треками можно поделиться с вашими друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., треки, конечно, позднее также могут быть проанализированы в специальных инструментах анализа  сторонних производителей. "</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> карта с картинками</string>
 	<string name="confirm_every_run">Всегда спрашивать</string>
 	<string name="save_global_track_interval_descr">Выберите интервал для записи трека (включается через виджет записи GPX на карте)</string>
@@ -1918,4 +1920,13 @@
     <string name="tips_and_tricks_descr">Часто задаваемые вопросы, последние изменения и другое</string>
     <string name="simulate_your_location">Моделировать ваше местоположение</string>
     <string name="shared_string_collapse">Свернуть</string>
+	<string name="action_delete">Удалить действие</string>
+	<string name="action_modify">Изменить действие</string>
+	<string name="action_create">Создать действие</string>
+	<string name="osm_edits">OSM правки</string>
+	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">м</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
+	<string name="your_edits">Ваши правки</string>
+    <string name="waypoint_visit_after">Посетить после</string>
+    <string name="waypoint_visit_before">Посетить до</string>
+    <string name="plugin_touringview_name">Туристическая карта</string>
 	</resources>

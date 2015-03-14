@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,8 @@ import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -98,7 +101,7 @@ public class EditingPOIActivity implements DialogProvider {
 		this.activity = uiContext;
 
 		poiTypes = uiContext.getMyApplication().getPoiTypes();
-		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
+		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(false);
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(activity);
@@ -463,7 +466,7 @@ public class EditingPOIActivity implements DialogProvider {
 						.getString(R.string.poi_action_change);
 				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 				String subType = typeText.getText().toString();
-				if(allTranslatedSubTypes.get(subType) != null) {
+				if(allTranslatedSubTypes.get(subType.trim()) != null) {
 					PoiType pt = allTranslatedSubTypes.get(subType);
 					n.putTag(pt.getOsmTag()	, pt.getOsmValue());
 					if(pt.getOsmTag2() != null) {
@@ -528,14 +531,37 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 
 	private void updateSubTypesAdapter(PoiCategory poiCategory) {
-		Set<String> subCategories = new LinkedHashSet<String>(poiTypes.getAllTranslatedNames(poiCategory).keySet());
-		for (String s : poiTypes.getAllTranslatedNames().keySet()) {
-			if (!subCategories.contains(s)) {
-				subCategories.add(s);
+		final Map<String, PoiType> subCategories = getSubCategoriesMap(poiCategory);
+		final ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, subCategories.keySet().toArray());
+		typeText.setAdapter(adapter);
+		typeText.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				Object item = parent.getAdapter().getItem(position);
+				if(subCategories.containsKey(item)) {
+					String kn = subCategories.get(item).getKeyName();
+					typeText.setText(kn);
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+	}
+
+	private Map<String, PoiType> getSubCategoriesMap(PoiCategory poiCategory) {
+		Map<String, PoiType> subCategories = new LinkedHashMap<>(poiTypes.getAllTranslatedNames(poiCategory, false));
+		for (Map.Entry<String, PoiType> s : poiTypes.getAllTranslatedNames(false).entrySet()) {
+			if (!subCategories.containsKey(s.getKey())) {
+				subCategories.put(s.getKey(), s.getValue());
 			}
 		}
-		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, subCategories.toArray());
+		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, 
+				subCategories.keySet().toArray());
 		typeText.setAdapter(adapter);
+		return subCategories;
 	}
 	
 	private void updateType(Amenity a){
@@ -628,11 +654,13 @@ public class EditingPOIActivity implements DialogProvider {
 		case DIALOG_SUB_CATEGORIES: {
 			Builder builder = new AlertDialog.Builder(activity);
 			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-			final String[] subCats = poiTypes.getAllTranslatedNames(a.getType()).keySet().toArray(new String[0]);
+			final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(a.getType(), true);
+			final String[] subCats = allTranslatedNames.keySet().toArray(new String[0]);
 			builder.setItems(subCats, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					typeText.setText(subCats[which]);
+					PoiType poiType = allTranslatedNames.get(subCats[which]);
+					typeText.setText(poiType.getKeyName());
 					a.setSubType(subCats[which]);
 					activity.removeDialog(DIALOG_SUB_CATEGORIES);
 				}

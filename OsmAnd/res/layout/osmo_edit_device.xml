@@ -2,8 +2,10 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="7dp"
-    android:paddingRight="7dp"
+	android:paddingBottom="@dimen/dialog_content_bottom_margin"
+	android:paddingTop="@dimen/dialog_content_bottom_margin"
+    android:paddingLeft="@dimen/dialog_content_margin"
+    android:paddingRight="@dimen/dialog_content_margin"
     android:stretchColumns="1">
 
     <TableRow>

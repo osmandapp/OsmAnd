@@ -31,7 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis
+ * on 24.11.2014.
  */
 public class DashFavoritesFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
@@ -47,12 +48,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Activity activity = getActivity();
-				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAVORITES_TAB);
-				activity.startActivity(favorites);
+				startFavoritesActivity(FavoritesActivity.FAVORITES_TAB);
 			}
 		});
 		return view;

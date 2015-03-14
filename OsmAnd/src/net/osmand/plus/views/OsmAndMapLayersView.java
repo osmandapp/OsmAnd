@@ -14,22 +14,23 @@ public class OsmAndMapLayersView extends View {
 
 	public OsmAndMapLayersView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init();
 
 	}
 
 	public OsmAndMapLayersView(Context context) {
 		super(context);
-		init();
 	}
-
-	private void init() {
-		mapView = new OsmandMapTileView();
-		mapView.initView(this);
+	
+	public void setMapView(OsmandMapTileView mapView) {
+		this.mapView = mapView;
+		mapView.setView(this);
 	}
 
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
+		if(mapView == null) {
+			return super.onTrackballEvent(event);
+		}
 		Boolean r = mapView.onTrackballEvent(event);
 		if(r == null) {
 			return super.onTrackballEvent(event);
@@ -39,6 +40,9 @@ public class OsmAndMapLayersView extends View {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(mapView == null) {
+			return super.onKeyDown(keyCode, event);
+		}
 		Boolean r = mapView.onKeyDown(keyCode, event);
 		if(r == null) {
 			return super.onKeyDown(keyCode, event);
@@ -48,11 +52,17 @@ public class OsmAndMapLayersView extends View {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		if(mapView == null) {
+			return super.onTouchEvent(event);
+		}
 		return mapView.onTouchEvent(event);
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
+		if(mapView == null) {
+			return;
+		}
 		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
 		DrawSettings drawSettings = new DrawSettings(nightMode, false);
 		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);

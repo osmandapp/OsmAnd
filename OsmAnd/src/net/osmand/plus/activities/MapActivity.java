@@ -134,20 +134,17 @@ public class MapActivity extends AccessibleActivity {
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		
+		mapView = new OsmandMapTileView();
+		mapView.init(this);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
-
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();
-
-		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
-		surf.setVisibility(View.VISIBLE);
-		mapView = surf.getMapView();
-
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -212,7 +209,7 @@ public class MapActivity extends AccessibleActivity {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
 					if(event == InitEvents.NATIVE_INITIALIZED) {
-						setupOpenGLView();
+						setupOpenGLView(false);
 						openGlSetup = true;
 					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
@@ -223,7 +220,7 @@ public class MapActivity extends AccessibleActivity {
 				@Override
 				public void onFinish(AppInitializer init) {
 					if(!openGlSetup) {
-						setupOpenGLView();
+						setupOpenGLView(false);
 					}
 					mapView.refreshMap(true);
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
@@ -232,12 +229,12 @@ public class MapActivity extends AccessibleActivity {
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
 		} else {
-			setupOpenGLView();
+			setupOpenGLView(true);
 		}
 	}
 
 	
-	private void setupOpenGLView() {
+	private void setupOpenGLView(boolean init) {
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
 			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
@@ -246,11 +243,15 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.setAzimuth(0);
 			atlasMapRendererView.setElevationAngle(90);
 			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
-			mapView = ml.getMapView();
+			ml.setMapView(mapView);
 			mapViewTrackingUtilities.setMapView(mapView);
 			mapView.setMapRender(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
+		} else if(init) {
+			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
+			surf.setVisibility(View.VISIBLE);
+			surf.setMapView(mapView);
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -45,13 +46,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Activity activity = getActivity();
-				Class<FavoritesActivity> fa = getMyApplication().getAppCustomization().getFavoritesActivity();
-				final Intent favorites = new Intent(activity, fa);
-				favorites.putExtra("TAB", "AUDIO");
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.NOTES_TAB);
-				activity.startActivity(favorites);
+				startFavoritesActivity(FavoritesActivity.NOTES_TAB);
 			}
 		});
 		return view;

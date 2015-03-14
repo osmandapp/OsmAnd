@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
@@ -167,7 +167,7 @@
 	<string name="rendering_attr_hmRendered_description">Αύξηση ποσότητας των λεπτομερειών του χάρτη</string>
 	<string name="rendering_attr_hmRendered_name">﻿Εμφάνιση περισσότερων λεπτομερειών χάρτη</string>
 	<string name="local_index_routing_data">Δεδομένα δρομολόγησης</string>
-	<string name="navigate_point_format">Μορφή:</string>
+	<string name="navigate_point_format">Μορφή</string>
 	<string name="poi_search_desc">﻿Αναζήτηση ΣΕ (σημείο ενδιαφέροντος)</string>
 	<string name="address_search_desc">Αναζήτηση ﻿διεύθυνσης</string>
 	<string name="navpoint_search_desc">Συντεταγμένες</string>
@@ -841,7 +841,7 @@
 	<string name="search_online_address">Διαδίκτυο</string>
 	<string name="max_level_download_tile">Μεγ. online κλίμακα</string>
 	<string name="max_level_download_tile_descr">Επιλέξτε τη μέγιστη κλίμακα προς λήψη για τα πλακίδια του online χάρτη</string>
-	<string name="route_general_information">Συνολική απόσταση %1$s,\n χρόνος ταξιδιού %2$d ω %3$d λ.</string>
+	<string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
 	<string name="router_service_descr">Επιλέξτε μια online ή offline υπηρεσία πλοήγησης</string>
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
 	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης δεδομένων στην SD κάρτα δεν είναι προσβάσιμος!</string>
@@ -1686,10 +1686,10 @@
 	<string name="shared_string_add">Προσθήκη</string>
 	<string name="shared_string_import">Εισαγωγή</string>
 	<string name="shared_string_export">Εξαγωγή</string>
-	<string name="shared_string_more">Περισσότερα</string>
+	<string name="shared_string_more">Περισσότερα…</string>
 	<string name="shared_string_download">Λήψη</string>
 	<string name="shared_string_download_successful">Επιτυχής λήψη</string>
-	<string name="shared_string_action_template">"Ενέργεια {0}: "</string>
+	<string name="shared_string_action_template">Ενέργεια {0}</string>
 	<string name="shared_string_close">Κλείσιμο</string>
 	<string name="shared_string_exit">Έξοδος</string>
 	<string name="shared_string_show">Εμφάνιση</string>
@@ -1706,4 +1706,12 @@
 	<string name="shared_string_video">Εικόνα</string>
 	<string name="shared_string_photo">Φωτογραφία</string>
 
+	<string name="osmand_parking_time_left">Αριστερά</string> <string name="your_edits">Η Επεξεργασίες σου</string>
+    <string name="waypoint_visit_after">Επίσκεψη μετά</string>
+    <string name="waypoint_visit_before">Επίσκεψη πριν</string>
+    <string name="routing_settings_2">Ρυθμίσεις πλοήγησης</string>
+    <string name="general_settings_2">Γενικές ρυθμίσεις</string>
+	<string name="shared_string_deselect_all">Αποεπιλογή όλων</string>
+	<string name="shared_string_collapse">Κατάρρευση</string>
+	<string name="route_points">Σημεία δρομολογίου</string>
 	</resources>

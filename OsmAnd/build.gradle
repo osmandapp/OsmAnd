@@ -310,6 +310,7 @@ dependencies {
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
 	compile "com.android.support:appcompat-v7:21.0.3"
+	compile "com.github.shell-software:fab:1.0.5"
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
