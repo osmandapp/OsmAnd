@@ -28,7 +28,7 @@
 \n\t* \"Универсальный Вид\" опция стиля карты с болльшей детализацией, новыми дорожными стилями, большим контрастом и шкалой SAC
 \n\t* EGM96 коррекция для GPS высот "</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="recording_context_menu_arecord">Сделать аудио заметку</string>
+    <string name="recording_context_menu_arecord">Создать аудио заметку</string>
     <string name="recording_context_menu_vrecord">Создать видео заметку</string>
     <string name="layer_recordings">Слой аудиозаписей</string>
     <string name="recording_can_not_be_played">Запись не может быть воспроизведена</string>
@@ -661,7 +661,7 @@
   <string name="search_online_address">Интернет</string>
   <string name="max_level_download_tile">Уровень детализации</string>
   <string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из Интернета</string>
-  <string name="route_general_information">Общая протяженность = %1$s,\n время в пути = %2$d ч. %3$d мин.</string>
+  <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч %3$d мин.</string>
   <string name="router_service_descr">Выберите онлайн или оффлайн сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
   <string name="sd_dir_not_accessible">Директория хранения данных на SD-карте не доступна!</string>
@@ -763,7 +763,7 @@
   <string name="map_tile_source">Растровые карты</string>
   <string name="map_source">Источник карты</string>
   <string name="use_internet">Использовать Интернет</string>
-  <string name="show_location">Показать место</string>
+  <string name="show_location">Показать ваше местоположение</string>
   
   
   <string name="show_gps_coordinates_text">Показать координаты GPS на карте</string>
@@ -883,14 +883,14 @@
   <string name="west_north_west">запад-северо-запад</string>
   <string name="north_west">северо-запад</string>
   <string name="north_north_west">северо-северо-запад</string>
-  <string name="front">Вперёд</string>
-  <string name="front_right">Направо вперёд</string>
-  <string name="right">Направо</string>
-  <string name="back_right">Направо назад</string>
-  <string name="back">Назад</string>
-  <string name="back_left">Налево назад</string>
-  <string name="left">Налево</string>
-  <string name="front_left">Налево вперёд</string>
+  <string name="front">вперёд</string>
+  <string name="front_right">направо вперёд</string>
+  <string name="right">направо</string>
+  <string name="back_right">направо назад</string>
+  <string name="back">назад</string>
+  <string name="back_left">налево назад</string>
+  <string name="left">налево</string>
+  <string name="front_left">налево вперёд</string>
   <string name="towards">на</string>
   <string name="accuracy">Точность</string>
   <string name="altitude">Высота</string>
@@ -1924,9 +1924,10 @@
 	<string name="action_modify">Изменить действие</string>
 	<string name="action_create">Создать действие</string>
 	<string name="osm_edits">OSM правки</string>
-	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">м</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
+	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">мин</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
 	<string name="your_edits">Ваши правки</string>
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
+	<string name="osmand_parking_outdated">Просрочено</string>
 	</resources>
