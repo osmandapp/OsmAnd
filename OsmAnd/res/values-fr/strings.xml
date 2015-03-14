@@ -661,7 +661,7 @@
   <string name="map_tile_source">Source de la carte</string>
   <string name="map_source">Source cartographique</string>
   <string name="use_internet">Utiliser internet</string>
-  <string name="show_location">Afficher la position</string>
+  <string name="show_location">Afficher votre position</string>
   
   
   <string name="show_gps_coordinates_text">Afficher les coordonnées GPS sur la carte</string>
@@ -808,7 +808,7 @@
   <string name="info_button">Info</string>
   <string name="back_to_location">Retourner à la position</string>
   <string name="shared_string_help">Aide</string>
-  <string name="show_details">Afficher les détails</string>
+  <string name="show_details">Afficher les détails de cette position</string>
   <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
   <string name="accessibility_extensions">Extensions d\'accessibilité</string>
   <string name="accessibility_mode">Mode accessibilité</string>
@@ -819,7 +819,7 @@
   <string name="backToMenu">Retour menu</string>
   <string name="zoomOut">Zoom -</string>
   <string name="zoomIn">Zoom +</string>
-  <string name="zoomIs">Zoom =</string>
+  <string name="zoomIs">Le niveau de zoom est</string>
   <string name="north">nord</string>
   <string name="north_north_east">nord-nord-est</string>
   <string name="north_east">nord-est</string>
@@ -837,13 +837,13 @@
   <string name="north_west">nord-ouest</string>
   <string name="north_north_west">nord-nord-ouest</string>
   <string name="front">devant</string>
-  <string name="front_right">devant droite</string>
-  <string name="right">droite</string>
-  <string name="back_right">arrière droite</string>
-  <string name="back">Précédent</string>
-  <string name="back_left">arrière gauche</string>
-  <string name="left">gauche</string>
-  <string name="front_left">devant gauche</string>
+  <string name="front_right">devant à droite</string>
+  <string name="right">à droite</string>
+  <string name="back_right">derrière à droite</string>
+  <string name="back">derrière</string>
+  <string name="back_left">derrière à gauche</string>
+  <string name="left">à gauche</string>
+  <string name="front_left">devant à gauche</string>
   <string name="oclock">heure</string>
   <string name="towards">vers</string>
   <string name="accuracy">Précision</string>
@@ -853,8 +853,8 @@
   <string name="direction_style_clockwise">Sens horaire (12 secteurs)</string>
   <string name="settings_direction_style">Style de direction</string>
   <string name="settings_direction_style_descr">Sélectionnez un style pour indiquer la direction générale lors du déplacement</string>
-  <string name="auto_announce_on">Démarrer annonces automatiques</string>
-  <string name="auto_announce_off">Arrêter annonces automatiques</string>
+  <string name="auto_announce_on">Démarrer les annonces automatiques</string>
+  <string name="auto_announce_off">Arrêter les annonces automatiques</string>
   <string name="scroll_map_by_gestures_descr">Faire défiler la carte par gestes sur l\'écran</string>
   <string name="scroll_map_by_gestures">Défilement naturel de la carte</string>
   <string name="i_am_here">Je suis ici</string>
@@ -1109,7 +1109,7 @@
 <string name="audionotes_location_not_defined">La position à associer à la note n\'est pas encore défini. Utilisez le menu \'Utiliser ce point\' pour spécifier la position à associer à la note.</string>
     
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Ce greffon permet, grâce des boutons, de prendre des photos / de l\'audio / des vidéos durant un voyage</string>
+    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un trajet, soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
