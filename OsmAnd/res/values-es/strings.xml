@@ -653,7 +653,7 @@
   <string name="map_tile_source">Fuente de teselas de mapa</string>
   <string name="map_source">Fuente de mapa</string>
   <string name="use_internet">Usar Internet</string>
-  <string name="show_location">Mostrar localización</string>
+  <string name="show_location">Mostrar tu posición</string>
   
   
   <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
@@ -772,11 +772,11 @@
 \n\nCualquiera de estos mapas puede ser utilizado como el mapa principal (base) que se mostrará en la pantalla del mapa de OsmAnd, o como una capa superior o inferior a otro mapa base (como mapas en línea regulares de OsmAnd). Para hacer los mapas subyacentes más visibles, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' como se desee.
 \n\nLos mapas de teselas pueden obtenerse directamente a través de fuentes en línea, o pueden ser preparados para su uso fuera de línea (y copiarse manualmente en la carpeta de datos de OsmAnd) como una base de datos sqlite que puede producirse por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra las configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Este extra habilita la característica de accesibilidad del dispositivo directamente en OsmAnd, y facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla direccional-pad, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz.</string>
+  <string name="osmand_accessibility_description">Este extra habilita la característica de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla direccional-pad, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, como tu posición anuncianda automáticamente.</string>
   
   
   
-  <string name="osmand_development_plugin_description">Muestra las opciones de características de desarrollo y depuración como la simulación de rutas o la indicación de rendimiento de la visualización.</string>
+  <string name="osmand_development_plugin_description">Este extra muestra las opciones de características de desarrollo y depuración como la simulación de rutas, el rendimiento del renderizado en pantalla, o la voz. Estas configuraciones son para los desarrolladores y no son necesarias para el usuario general.</string>
   <string name="plugins_screen">Gestor de extras</string>
   
   <string name="prefs_plugins_descr">Los extras activan opciones avanzadas y proporcionan funcionalidades adicionales</string>
@@ -785,7 +785,7 @@
 \n*Funcionalidad de extras*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas / deshabilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n*Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (los datos antiguos no están soportados)\n*Navegación sin conexión*
 \n\t - La navegación sin conexión es más robusta\n*Usabilidad e interfaz de usuario*
 \n\t - Mejoras en muchas áreas "</string>
-  <string name="osm_editing_plugin_description">Mediante este extra, OsmAnd puede utilizarse para hacer contribuciones OSM como crear o modificar objetos PDI de OSM, abrir o comentar fallos de OSM, y contribuir con archivos de trazas GPX. El uso de esta funcionalidad requiere credenciales personales de OSM.</string>
+  <string name="osm_editing_plugin_description">Mediante este extra OsmAnd puede utilizarse para hacer contribuciones en OSM como crear o modificar objetos PDI de OSM, abrir o comentar errores de OSM, y contribuir con archivos grabados de trazas GPX. OSM es un comunidad que impulsa el mapeo de dominio público mundial. Para más detalles consulte http://openstreetmap.org. La participación activa es apreciada, y las contribuciones se puede hacer directamente desde OsmAnd, si especifica las credenciales de OSM personales en la aplicación.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
   
   <string name="play_commands_of_currently_selected_voice">Reproduce algunas indicaciones de la voz seleccionada actualmente</string>
@@ -806,7 +806,7 @@
   <string name="info_button">Info</string>
   <string name="back_to_location">Volver a localización</string>
   <string name="shared_string_help">Ayuda</string>
-  <string name="show_details">Mostrar detalles</string>
+  <string name="show_details">Mostrar detalles de la posición</string>
   <string name="accessibility_extensions_descr">Extensión de accesibilidad para versiones viejas de Android</string>
   <string name="accessibility_extensions">Extensiones de accesibilidad</string>
   <string name="accessibility_mode">Modo accesibilidad</string>
@@ -817,7 +817,7 @@
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>
   <string name="zoomIn">Acercar</string>
-  <string name="zoomIs">Acercamiento es</string>
+  <string name="zoomIs">El nivel de acercamiento es</string>
   <string name="north">norte</string>
   <string name="north_north_east">nornordeste</string>
   <string name="north_east">nordeste</string>
@@ -834,14 +834,14 @@
   <string name="west_north_west">oeste-noroeste</string>
   <string name="north_west">noroeste</string>
   <string name="north_north_west">nornoroeste</string>
-  <string name="front">Enfrente</string>
-  <string name="front_right">Enfrente a la derecha</string>
-  <string name="right">Derecha</string>
-  <string name="back_right">Detrás a la derecha</string>
-  <string name="back">Detrás</string>
-  <string name="back_left">Detrás a la izquierda</string>
-  <string name="left">Izquierda</string>
-  <string name="front_left">Enfrente a la izquierda</string>
+  <string name="front">hacia adelante</string>
+  <string name="front_right">hacia adelante a la derecha</string>
+  <string name="right">a la derecha</string>
+  <string name="back_right">hacia atrás a la derecha</string>
+  <string name="back">hacia atrás</string>
+  <string name="back_left">hacia atrás a la izquierda</string>
+  <string name="left">a la izquierda</string>
+  <string name="front_left">hacia atrás a la izquierda</string>
   <string name="oclock">en punto</string>
   <string name="towards">hacia</string>
   <string name="accuracy">Precisión</string>
@@ -851,8 +851,8 @@
   <string name="direction_style_clockwise">Según el reloj (12 sectores)</string>
   <string name="settings_direction_style">Estilo de direcciones</string>
   <string name="settings_direction_style_descr">Selecciona estilo para expresar direcciones relativas mientras se mueve</string>
-  <string name="auto_announce_on">Comenzar auto-anuncios</string>
-  <string name="auto_announce_off">Parar auto-anuncios</string>
+  <string name="auto_announce_on">Comenzar anuncios automáticos</string>
+  <string name="auto_announce_off">Parar anuncios automáticos</string>
   <string name="scroll_map_by_gestures_descr">Desplaza el mapa por gestos en la pantalla táctil</string>
   <string name="scroll_map_by_gestures">Desplazamiento de mapa natural</string>
   <string name="i_am_here">Estoy aquí</string>
@@ -1560,8 +1560,8 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
-    <string name="osmo_plugin_description">"Muestra las opciones para usar OsMo - Monitorización avanzada en directo, mira http://osmo.mobi. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comunica. Tiene varias opciones para seguimiento por sesión o permanente.
-\n\nLos grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
+    <string name="osmo_plugin_description">"Este extra proporciona la funcionalidad para la monitorización avanzada en línea OsMo, ver http://osmo.mobi.\n\nPuede hacer seguimiento de otros dispositivos y ser seguido. Puede crear expontáneamente grupos anónimos, compartir las ubicaciones de cada uno y comunicar. Viene con varias opciones para hacer seguimiento por sesión o seguimiento permanente.
+\n\nLos grupos anónimos son creados por un número de días específico y con limitadas características, por ejemplo, no hay control remoto ni administrador de grupo. Grupos con funcionalidad completa deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">Monitorización OsMo</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1945,9 +1945,9 @@
 		\n\nEsta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.
 	</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo de mapa a la \'Vista Turística\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
-\n\nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
-\n\nNo es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.
-\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'. "</string>
+\n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación).
+\n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mistrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
+\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\' si lo desea. "</string>
 	<string name="days_behind">días atrás</string>
 	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
@@ -1985,4 +1985,5 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Puntos de la ruta</string>
 	<string name="shared_string_release">Liberado</string>
+	<string name="osmand_parking_outdated">Obsoleto</string>
 	</resources>
