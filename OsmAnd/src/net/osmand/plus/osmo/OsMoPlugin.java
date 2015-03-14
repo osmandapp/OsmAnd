@@ -28,10 +28,7 @@ import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.MonitoringInfoControl;
-import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -46,7 +43,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices, OsMoReactor {
+public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 
 	private OsmandApplication app;
 	public static final String ID = "osmand.osmo";
@@ -123,17 +120,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return R.drawable.ic_osmo_dark;
 	}
 
-	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		// registerLayers(activity);
-		super.updateLayers(mapView, activity);
-		MonitoringInfoControl lock = activity.getMapLayers().getMapInfoLayer().getMonitoringInfoControl();
-		if (lock != null && !lock.getMonitorActions().contains(this)) {
-			lock.addMonitorActions(this);
-		}
-		
-		
-	}
 	
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
@@ -298,21 +284,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 			}
 		});
 		return osmoControl;
-	}
-
-	@Override
-	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
-		qa.item("Test (send)").icons(R.drawable.ic_action_grefresh_dark, R.drawable.ic_action_grefresh_light)
-				.listen(new OnContextMenuClick() {
-
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						final double lat = view.getLatitude();
-						final double lon = view.getLongitude();
-						tracker.sendCoordinate(lat, lon);
-						return true;
-					}
-				}).reg();
 	}
 
 	@Override

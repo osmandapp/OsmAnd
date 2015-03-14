@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/map_address_height"
+        android:id="@+id/map_top_bar"
         android:background="@drawable/btn_flat"
         android:orientation="horizontal" >
 

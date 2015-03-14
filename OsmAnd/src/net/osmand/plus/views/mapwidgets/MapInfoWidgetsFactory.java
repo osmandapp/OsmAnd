@@ -13,9 +13,9 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.monitoring.ValueHolder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
@@ -135,7 +135,7 @@ public class MapInfoWidgetsFactory {
 					dlg.show();
 					
 				} else {
-					final MonitoringInfoControl.ValueHolder<Integer> vs = new MonitoringInfoControl.ValueHolder<Integer>();
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
 					final AlertDialog[] dlgshow = new AlertDialog[1]; 
 					Builder dlg = new AlertDialog.Builder(map);

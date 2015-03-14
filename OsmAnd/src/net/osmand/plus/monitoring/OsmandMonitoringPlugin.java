@@ -18,12 +18,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.MonitoringInfoControl;
-import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
-import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,8 +27,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -47,7 +41,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringInfoControlServices {
+public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -114,10 +108,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(monitoringControl == null) {
 			registerLayers(activity);
-		}
-		MonitoringInfoControl lock = activity.getMapLayers().getMapInfoLayer().getMonitoringInfoControl();
-		if(lock != null && !lock.getMonitorActions().contains(this)) {
-			lock.addMonitorActions(this);
 		}
 	}
 
@@ -456,38 +446,4 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		return ll;
 	}
 	
-	
-	@Override
-	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
-		if (ADD_BG_TO_ACTION) {
-			final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
-			final boolean bgoff = view.getApplication().getNavigationService() == null;
-			int msgId = !bgoff ? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off;
-			int draw = !bgoff ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
-			qa.item(msgId).icon(draw).listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (view.getApplication().getNavigationService() == null) {
-						final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-						final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
-						vs.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
-						showIntervalChooseDialog(view.getContext(), app.getString(R.string.gps_wakeup_interval),
-								app.getString(R.string.background_router_service),
-								SettingsMonitoringActivity.BG_SECONDS, SettingsMonitoringActivity.BG_MINUTES, choice, vs,
-								new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										view.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
-										view.getContext().startService(serviceIntent);
-									}
-								});
-					} else {
-						view.getContext().stopService(serviceIntent);
-					}
-					return true;
-				}
-			}).position(0).reg();
-		}
-	}
-
 }

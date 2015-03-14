@@ -18,11 +18,17 @@ public class TextInfoWidget  {
 	private TextView textView;
 	private TextView smallTextView;
 
+	private boolean explicitlyVisible;
+
 	public TextInfoWidget(Activity activity) {
 		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
 		textView = (TextView) view.findViewById(R.id.widget_text);
 		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
+	}
+	
+	public View getView() {
+		return view;
 	}
 	
 	public void setImageDrawable(Drawable imageDrawable) {
@@ -41,6 +47,10 @@ public class TextInfoWidget  {
 		} else { 
 			view.setContentDescription(text);
 		}
+	}
+	
+	public void setContentTitle(int messageId) {
+		setContentTitle(view.getContext().getString(messageId));
 	}
 
 	public void setContentTitle(String text) {
@@ -88,7 +98,7 @@ public class TextInfoWidget  {
 	}
 	
 	public boolean isVisible() {
-		return view.getVisibility() == View.VISIBLE;
+		return view.getVisibility() == View.VISIBLE && view.getParent() != null;
 	}
 
 	public boolean updateInfo(DrawSettings drawSettings) {
@@ -99,9 +109,14 @@ public class TextInfoWidget  {
 		view.setOnClickListener(onClickListener);
 	}
 
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
+	public void setExplicitlyVisible(boolean explicitlyVisible) {
+		this.explicitlyVisible = explicitlyVisible;
 	}
+	
+	public boolean isExplicitlyVisible() {
+		return explicitlyVisible;
+	}
+
+	
 	
 }

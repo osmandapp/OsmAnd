@@ -949,7 +949,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final boolean contains = recordControl.isVisible();
 		if (!contains) {
-			recordControl.setVisible(true);
+			recordControl.setExplicitlyVisible(true);
+			mil.recreateControls();
 			mapActivity.getMapView().refreshMap(true);
 		}
 		AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
@@ -957,7 +958,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(View v) {
 				if (!contains) {
-					recordControl.setVisible(false);
+					recordControl.setExplicitlyVisible(false);
+					mil.recreateControls();
 				}
 				stopRecording(mapActivity);
 				SHOW_RECORDINGS.set(true);
