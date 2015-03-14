@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -13,6 +14,15 @@
         android:background="@drawable/btn_flat"
         android:orientation="horizontal" >
 
+        <ImageView
+            android:id="@+id/waypoint_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginRight="@dimen/map_button_margin"
+            android:src="@drawable/ic_action_remove_light" />
+
         <TextView
             android:id="@+id/map_address_text"
             android:layout_width="0dp"
@@ -21,9 +31,12 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
+            android:shadowColor="@color/color_myloc_distance"
+            android:shadowRadius="10"
             android:text="TEST Street name"
             android:textColor="@color/color_black"
-            android:textSize="24sp" >
+            android:textSize="@dimen/map_widget_text_size"
+            android:textStyle="bold" >
         </TextView>
 
         <ImageButton
@@ -58,6 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|left"
+                android:id="@+id/map_left_widgets_panel"
                 android:layout_weight="0.4"
                 android:orientation="vertical" >
 
@@ -65,10 +79,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|left"
-                    android:orientation="vertical">
+                    android:orientation="vertical" >
 
+                    <!--
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
+                    -->
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,6 +111,7 @@
                 </LinearLayout>
             </LinearLayout>
             <!-- empty block to not let widgets grow more than 40% -->
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -126,34 +143,29 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/map_right_widgets_panel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|right"
                     android:orientation="vertical" >
 
+                    <!-- 
                     <include layout="@layout/map_hud_widget" />
-
-
                     <include layout="@layout/map_hud_widget" />
-
                     <include layout="@layout/map_hud_widget" />
+ 					-->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
 
-                    <include layout="@layout/map_hud_widget" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|right"
-                    android:layout_marginRight="@dimen/map_button_margin"
-                    android:layout_marginTop="@dimen/map_button_margin"
-                    android:orientation="horizontal" >
-
-                    <ImageButton
-                        android:layout_width="@dimen/map_button_size"
-                        android:layout_height="@dimen/map_button_size"
-                        android:background="@drawable/btn_inset_circle"
-                        android:src="@drawable/ic_action_remove_light" />
+                        <ImageButton
+                            android:id="@+id/map_collapse_button"
+                            android:layout_width="@dimen/map_button_size"
+                            android:layout_height="@dimen/map_button_size"
+                            android:layout_gravity="center"
+                            android:background="@drawable/btn_inset_circle"
+                            android:src="@drawable/ic_action_remove_light" />
+                    </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

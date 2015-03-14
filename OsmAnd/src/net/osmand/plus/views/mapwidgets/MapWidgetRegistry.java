@@ -28,25 +28,6 @@ public class MapWidgetRegistry {
 	private Set<MapWidgetRegInfo> appearanceWidgets = new LinkedHashSet<MapWidgetRegistry.MapWidgetRegInfo>();
 	private Set<MapWidgetRegInfo> left = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
 	private Set<MapWidgetRegInfo> right = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
-	private Set<MapWidgetRegInfo> top = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>(new Comparator<MapWidgetRegInfo>() {
-		@Override
-		public int compare(MapWidgetRegInfo object1, MapWidgetRegInfo object2) {
-			if (object1.position != object2.position) {
-				if(object1.position == LEFT_CONTROL) {
-					return -1;
-				} else if(object1.position == RIGHT_CONTROL) {
-					return 1;
-				} else {
-					return object2.position == LEFT_CONTROL ? 1 : -1;
-				}
-			}
-			int cmp = object1.priorityOrder - object2.priorityOrder;
-			if(object1.position == RIGHT_CONTROL) {
-				cmp = -cmp;
-			}
-			return cmp;
-		}
-	});
 	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<ApplicationMode, Set<String>>();
 	private final OsmandSettings settings;
 			
@@ -78,39 +59,6 @@ public class MapWidgetRegistry {
 		ii.drawableLight = drawableLight;
 		ii.messageId = messageId;
 		this.appearanceWidgets.add(ii);
-		return ii;
-	}
-	
-	
-	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark, int drawableLight, int messageId, String key,
-			int left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.key = key;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>();
-		ii.visibleCollapsible = null;
-		for (ApplicationMode ms : ApplicationMode.values(settings)) {
-			boolean def = ms.isWidgetVisible(key);
-			Set<String> set = visibleElementsFromSettings.get(ms);
-			if (set != null) {
-				if (set.contains(key)) {
-					def = true;
-				} else if (set.contains("-" + key)) {
-					def = false;
-				}
-			}
-			if (def) {
-				ii.visibleModes.add(ms);
-			}
-		}
-		if (m != null)
-			m.setContentDescription(m.getContext().getString(messageId));
-		ii.drawableDark = drawableDark;
-		ii.drawableLight = drawableLight;
-		ii.messageId = messageId;
-		ii.m = m;
-		ii.priorityOrder = priorityOrder;
-		ii.position = left;
-		this.top.add(ii);
 		return ii;
 	}
 	
@@ -182,7 +130,6 @@ public class MapWidgetRegistry {
 				LinkedHashSet<String> set = new LinkedHashSet<String>();
 				restoreModes(set, left, mode);
 				restoreModes(set, right, mode);
-				restoreModes(set, top, mode);
 				this.visibleElementsFromSettings.put(mode, set);
 			}
 			// clear everything
@@ -223,10 +170,6 @@ public class MapWidgetRegistry {
 		return right;
 	}
 	
-	public Set<MapWidgetRegInfo> getTop() {
-		return top;
-	}
-	
 	public Set<MapWidgetRegInfo> getAppearanceWidgets() {
 		return appearanceWidgets;
 	}
@@ -239,20 +182,6 @@ public class MapWidgetRegistry {
 				stack.addCollapsedView((BaseMapWidget) r.m);
 			} else if (r.visibleModes.contains(appMode)) {
 				stack.addStackView((BaseMapWidget) r.m);
-			}
-		}
-	}
-	
-	public void populateStatusBar(ViewGroup statusBar){
-		ApplicationMode appMode = settings.getApplicationMode();
-		for (MapWidgetRegInfo r : top) {
-			boolean main = r.position == MAIN_CONTROL;
-			if (r.visibleModes.contains(appMode)) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, main? 1 : 0);
-				statusBar.addView((View) r.m, params);
-			} else if (main) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
-				statusBar.addView(new TextView(((View) r.m).getContext()), params);
 			}
 		}
 	}
@@ -281,7 +210,6 @@ public class MapWidgetRegistry {
 		ApplicationMode appMode = settings.getApplicationMode();
 		resetDefault(appMode, left);
 		resetDefault(appMode, right);
-		resetDefault(appMode, top);
 		resetDefault(appMode, appearanceWidgets);
 		this.visibleElementsFromSettings.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");

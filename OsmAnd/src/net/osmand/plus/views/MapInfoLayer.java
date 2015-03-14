@@ -35,11 +35,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -55,8 +53,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private Paint paintSmallSubText;
 	private Paint paintImg;
 	
-	// layout pseudo-constants
-	private int STATUS_BAR_MARGIN_X = -4;
 	
 	private TopTextView topText;
 	private View progressBar;
@@ -64,7 +60,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	// groups
 	private StackWidgetView rightStack;
 	private StackWidgetView leftStack;
-	private LinearLayout statusBar;
 	private BaseMapWidget lanesControl;
 	private BaseMapWidget alarmControl;
 	private MapWidgetRegistry mapInfoControls;
@@ -147,8 +142,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	public void registerAllControls(){
-		statusBar = new LinearLayout(view.getContext());
-		statusBar.setOrientation(LinearLayout.HORIZONTAL);
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(scaleCoefficient);
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(scaleCoefficient);
 		OsmandApplication app = view.getApplication();
@@ -189,16 +182,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 
-		// Top widgets
-		ImageViewWidget compassView = mic.createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass_dark, R.drawable.widget_compass_light, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
-		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen_dark, R.drawable.widget_lock_screen_light, R.string.bg_service_screen_lock, "bgService",
-				MapWidgetRegistry.LEFT_CONTROL,  15);
-		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation_dark, R.drawable.widget_backtolocation_light, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
-		topText = mic.createStreetView(app, map, paintText);
-		mapInfoControls.registerTopWidget(topText, R.drawable.street_name_dark, R.drawable.street_name_light, R.string.map_widget_top_text,
-				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
-		
 		// Register appearance widgets
 		AppearanceWidgetsFactory.INSTANCE.registerAppearanceWidgets(map, this, mapInfoControls);
 	}
@@ -214,20 +197,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.requestLayout();
 		rightStack.requestLayout();
 		
-		statusBar.removeAllViews();
-		mapInfoControls.populateStatusBar(statusBar);
 		updateColorShadowsOfText(null);
 	}
 
 	public void createControls() {
 		FrameLayout parent = (FrameLayout) ((FrameLayout) view.getParent()).findViewById(R.id.MapInfoControls);
-		// 1. Create view groups and controls
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
 		// form measurement
 		ImageView iv = new ImageView(map);
 		iv.setImageDrawable(map.getResources().getDrawable(R.drawable.la_backtoloc_disabled));
-		statusBar.addView(iv);
 		rightStack = new StackWidgetView(view.getContext());
 		leftStack = new StackWidgetView(view.getContext());
 		
@@ -235,20 +213,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
-		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-		Rect statusBarPadding = new Rect();
-		statusBar.getBackground().getPadding(statusBarPadding);
 		// 3. put into frame parent layout controls
 
 		// status bar hides own top part 
-		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top - statusBarPadding.bottom ;
 		// we want that status bar lays over map stack controls
-		topMargin -= topRectPadding.top;
+		int topMargin = -topRectPadding.top;
 
 		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
-		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		flp.rightMargin = 0;
 		flp.topMargin = topMargin;
 		rightStack.setLayoutParams(flp);
 		
@@ -261,16 +234,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
-		flp.leftMargin = STATUS_BAR_MARGIN_X;
+		flp.leftMargin = 0;
 		flp.topMargin = topMargin;
 		leftStack.setLayoutParams(flp);
 
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
-		flp.leftMargin = STATUS_BAR_MARGIN_X;
-		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		flp.leftMargin = 0;
+		flp.rightMargin = 0;
 		flp.topMargin = -topRectPadding.top;
-		statusBar.setLayoutParams(flp);
 		
 		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
 				(int)(78 * scaleCoefficient), Gravity.LEFT | Gravity.BOTTOM);
@@ -280,7 +252,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		parent.addView(rightStack);
 		parent.addView(leftStack);
-		parent.addView(statusBar);
 		parent.addView(lanesControl);
 		parent.addView(alarmControl);
 		alarmControl.setVisibility(View.GONE);
@@ -323,8 +294,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 					}
 				}).reg();
 		final ApplicationMode mode = settings.getApplicationMode();
-		cm.item(R.string.map_widget_top).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
-		addControls(cm, mapInfoControls.getTop(), mode);
 		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		addControls(cm, mapInfoControls.getRight(), mode);
 		cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
@@ -434,7 +403,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 			rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
-			statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 
 			paintText.setColor(textColor);
 			paintSubText.setColor(textColor);
@@ -452,7 +420,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			
 			rightStack.invalidate();
 			leftStack.invalidate();
-			statusBar.invalidate();
 		}
 	}
 	
@@ -465,12 +432,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.updateInfo(drawSettings);
 		lanesControl.updateInfo(drawSettings);
 		alarmControl.updateInfo(drawSettings);
-		for (int i = 0; i < statusBar.getChildCount(); i++) {
-			View v = statusBar.getChildAt(i);
-			if (v instanceof UpdateableWidget) {
-				((UpdateableWidget) v).updateInfo(drawSettings);
-			}
-		}
+		
 	}
 	
 	public StackWidgetView getRightStack() {
@@ -539,27 +501,5 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return defValue;
 	}
 
-	private UpdateFrameLayout createBackToLocation(MapInfoWidgetsFactory mic){
-		progressBar = new View(view.getContext());
-		progressBar.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
-		final ImageViewWidget widget = mic.createBackToLocation(map);
-		Drawable backToLoc = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
-		UpdateFrameLayout layout = new UpdateFrameLayout(view.getContext(), widget) ;
-		FrameLayout.LayoutParams fparams;
-		fparams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-		layout.addView(widget, fparams);
-		fparams = new FrameLayout.LayoutParams((int) (backToLoc.getMinimumWidth() ),
-				backToLoc.getMinimumHeight());
-		//this fix needed for android 2.3 because margin doesn't work without gravity
-		fparams.gravity = Gravity.TOP;
-		fparams.setMargins((int) (5 * scaleCoefficient), 0, 0, 0);
-		layout.addView(progressBar, fparams);
-		layout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				widget.performClick();
-			}
-		});
-		return layout;
-	}
+	
 }

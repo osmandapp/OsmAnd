@@ -29,10 +29,31 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
             android:layout_weight="1"
+            android:minWidth="30dp"
+            android:maxLines="1"
+            android:shadowColor="@color/color_myloc_distance"
             android:textColor="@color/color_black"
-            android:text="202 km" />
+            android:shadowRadius="10"
+            android:textStyle="bold"
+            android:textSize="@dimen/map_widget_text_size"
+            android:text="1048" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
+            android:layout_marginRight="4dp"
+            android:maxLines="1"
+            android:shadowColor="@color/color_myloc_distance"
+            android:textColor="@color/color_black"
+            android:shadowRadius="10"
+            android:textStyle="bold"
+            android:textSize="@dimen/map_widget_text_size_small"
+            android:text="km" />
     </LinearLayout>
 
 </LinearLayout>

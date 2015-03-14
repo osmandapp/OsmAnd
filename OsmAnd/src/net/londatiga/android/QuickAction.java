@@ -48,7 +48,7 @@ public class QuickAction extends CustomPopupWindow {
 	private boolean animateTrack;
 	private ViewGroup mTrack;
 	private ArrayList<ActionItem> actionList;
-	private boolean top;
+	private boolean onTop;
 	
 	/**
 	 * Constructor
@@ -88,7 +88,7 @@ public class QuickAction extends CustomPopupWindow {
 	}
 	
 	public void setOnAnchorOnTop(boolean top) {
-		this.top = top;
+		this.onTop = top;
 		
 	}
 
@@ -156,7 +156,7 @@ public class QuickAction extends CustomPopupWindow {
 		boolean onTop		= true;
 		
 		// display on bottom
-		if (rootHeight > anchor.getTop() || onTop) {
+		if (rootHeight > anchor.getTop() && !this.onTop) {
 			yPos 	= anchorRect.bottom;
 			onTop	= false;
 		}
