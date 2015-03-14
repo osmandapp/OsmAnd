@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -125,7 +126,7 @@
 	<string name="show_ruler_level">Vis målestokk</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Tilbake til posisjon</string>
-	<string name="show_details">Vis detaljer</string>
+	<string name="show_details">Vis posisjonsdetaljer</string>
 	<string name="accessibility_extensions_descr">Tilgjengelighetsmoduler for gamle Android-versjoner</string>
 	<string name="accessibility_extensions">Tilgjengelighetsmoduler</string>
 	<string name="accessibility_mode">Tilgjengelighetsmodus</string>
@@ -153,14 +154,14 @@
 	<string name="west_north_west">vest-nord-vest</string>
 	<string name="north_west">nord-vest</string>
 	<string name="north_north_west">nord-nord-vest</string>
-	<string name="front">Front</string>
-	<string name="front_right">Front høyre</string>
-	<string name="right">Høyre</string>
-	<string name="back_right">Bak høyre</string>
-	<string name="back">Bak</string>
+	<string name="front">Forover</string>
+	<string name="front_right">høyre-forover</string>
+	<string name="right">Til høyre</string>
+	<string name="back_right">Bak til høyre</string>
+	<string name="back">bakover</string>
 	<string name="back_left">Bak venstre</string>
-	<string name="left">Venstre</string>
-	<string name="front_left">Front venstre</string>
+	<string name="left">til venstre</string>
+	<string name="front_left">Forover til venstre</string>
 	<string name="oclock">klokken</string>
 	<string name="towards">mot</string>
 	<string name="accuracy">Nøyaktighet</string>
@@ -378,7 +379,7 @@
 	<string name="indexing_map">Indekserer kart…</string>
 	<string name="indexing_poi">Indekserer interessepunkt…</string>
 	<string name="indexing_transport">Indekserer transport…</string>
-	<string name="shared_string_io_error">I/O feil oppstod</string>
+	<string name="shared_string_io_error">I/O-feil oppstod</string>
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
@@ -539,7 +540,7 @@
 	<string name="map_tile_source">Fliskartkilde</string>
 	<string name="map_source">Kartkilde</string>
 	<string name="use_internet">Bruk internett</string>
-	<string name="show_location">Vis sted</string>
+	<string name="show_location">Vis din plassering</string>
 	
 	
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
@@ -1150,7 +1151,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
-    <string name="shared_string_show_all">VIS ALLE</string>
+    <string name="shared_string_show_all">Vis alle</string>
 	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
     
 	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>
@@ -1177,7 +1178,7 @@
 	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
 	<string name="plugin_ski_name">Skikartsvisning</string>
-	<string name="osmand_accessibility_description">Viser innstillingene til å aktivere spesielle tilgjengelighetsfunksjoner.</string>
+	<string name="osmand_accessibility_description">Viser innstillingsmulighetene for å aktivere spesielle tilgjengelighetsfunksjoner.</string>
 	<string name="rename_failed">Navneendring feilet.</string>
 	
 	
@@ -1248,4 +1249,13 @@
 
 	<string name="route_points">Rutepunkter</string>
 	<string name="shared_string_ellipsis">…</string>
-	</resources>
+	<string name="osmand_parking_outdated">Utdatert</string>
+	<string name="osm_edits">OSM-redigeringer</string>
+	<string name="osmand_parking_time_left">Gjenstående</string> <string name="your_edits">Dine redigeringer</string>
+    <string name="waypoint_visit_after">Besøk etter</string>
+    <string name="waypoint_visit_before">Besøk før</string>
+    <string name="tips_and_tricks_descr">Ofte-Stilte-Spørsmål, nylige endringer og annet</string>
+    <string name="routing_settings_2">Navigasjonsinnstillinger</string>
+    <string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="parking_place_limited">Tidsbegrenset parkering</string>
+	<string name="simulate_your_location">Simuler din posisjon</string>
+    </resources>
