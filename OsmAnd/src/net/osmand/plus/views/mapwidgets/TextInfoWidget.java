@@ -32,6 +32,7 @@ public class TextInfoWidget  {
 		} else {
 			imageView.setVisibility(View.INVISIBLE);
 		}
+		imageView.invalidate();
 	}
 	
 	public void setContentDescription(CharSequence text) {
@@ -96,6 +97,11 @@ public class TextInfoWidget  {
 
 	public void setOnClickListener(OnClickListener onClickListener) {
 		view.setOnClickListener(onClickListener);
+	}
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

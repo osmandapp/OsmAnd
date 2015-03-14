@@ -413,11 +413,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 	}
 	
-	public StackWidgetView getRightStack() {
+	public LinearLayout getRightStack() {
 		return rightStack;
 	}
 	
-	public StackWidgetView getLeftStack() {
+	public LinearLayout getLeftStack() {
 		return leftStack;
 	}
 

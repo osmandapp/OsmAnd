@@ -95,7 +95,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			send.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity(), getActivity().getWindow().getDecorView());
+					OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
 					OsmPoint[] toUpload = new OsmPoint[]{point};
 					OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
 					ProgressDialog dialog = ProgressImplementation.createProgressDialog(

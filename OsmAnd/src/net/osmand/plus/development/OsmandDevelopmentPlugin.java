@@ -53,7 +53,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final OsmandMapTileView mv = activity.getMapView();
 		if (mapInfoLayer != null) {
-			fps = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText()) {
+			fps = new TextInfoWidget(activity) {
 				@Override
 				public boolean updateInfo(DrawSettings drawSettings) {
 					if(!mv.isMeasureFPS()) {

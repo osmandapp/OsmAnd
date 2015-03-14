@@ -199,7 +199,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
+			routeStepsControl = createRouteStepsInfoControl(activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
 					R.drawable.widget_signpost, R.drawable.widget_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
@@ -245,8 +245,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
-	private TextInfoWidget createRouteStepsInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		TextInfoWidget routeStepsControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+	private TextInfoWidget createRouteStepsInfoControl(final MapActivity map) {
+		TextInfoWidget routeStepsControl = new TextInfoWidget(map) {
 
 			@Override()
 			public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {

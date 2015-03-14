@@ -266,7 +266,8 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		if(isScreenLocked){
-			map.addLockView(transparentLockView);
+			// TODO
+//			map.addLockView(transparentLockView);
 		}
 		return lockView;
 	}

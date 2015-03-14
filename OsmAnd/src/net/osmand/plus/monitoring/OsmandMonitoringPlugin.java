@@ -51,7 +51,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private BaseMapWidget monitoringControl;
+	private TextInfoWidget monitoringControl;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean ADD_BG_TO_ACTION = true;
 	private boolean isSaving;
@@ -103,7 +103,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	@Override
 	public void registerLayers(MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
+		monitoringControl = createMonitoringControl(activity);
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
 				R.drawable.monitoring_rec_big, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
@@ -151,11 +151,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
-	private BaseMapWidget createMonitoringControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		final Drawable monitoringBig = map.getResources().getDrawable(R.drawable.monitoring_rec_big);
 		final Drawable monitoringSmall = map.getResources().getDrawable(R.drawable.monitoring_rec_small);
 		final Drawable monitoringInactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
-		monitoringControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+		monitoringControl = new TextInfoWidget(map) {
 			long lastUpdateTime;
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -202,8 +202,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					lastUpdateTime = last;
 					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
 					setImageDrawable(monitoringInactive);
-					invalidate();
-					postDelayed(new Runnable() {
+					map.getMyApplication().runInUIThread(new Runnable() {
 						@Override
 						public void run() {
 							if (globalRecord) {
@@ -211,7 +210,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 							} else {
 								setImageDrawable(monitoringSmall);
 							}
-							invalidate();
 						}
 					}, 500);
 				}

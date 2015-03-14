@@ -180,9 +180,9 @@ public class MapWidgetRegistry {
 		Set<MapWidgetRegInfo> st = left ? this.left : this.right;
 		for (MapWidgetRegInfo r : st) {
 			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
-				stack.addCollapsedView((BaseMapWidget) r.widget);
+				stack.addCollapsedView(r.widget);
 			} else if (r.visibleModes.contains(appMode)) {
-				stack.addStackView((BaseMapWidget) r.widget);
+				stack.addStackView(r.widget);
 			}
 		}
 	}
