@@ -141,7 +141,7 @@
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
-<string name="osmand_accessibility_description">Denna modul låter inställningarna för att aktivera speciella tillgänglighetsfunktioner bli direkt åtkomliga i OsmAnd och underlättar t.ex. justering av talhastigheten för TTS-röster, konfigurering av skärmnavigering med hjälp av en trackball för zoomkontroll eller användande av återkoppling med text-till-tal.</string>
+<string name="osmand_accessibility_description">Denna modul gör så att inställningarna för att aktivera speciella tillgänglighetsfunktioner blir direkt åtkomliga i OsmAnd och underlättar t.ex. justering av talhastigheten för TTS-röster, konfigurering av skärmnavigering med hjälp av en styrkula för zoomkontroll eller användande av återkoppling med text-till-tal, t.ex. för att meddela din position automatiskt.</string>
 
 
 <string name="debugging_and_development">Utveckling av OsmAnd</string>
@@ -150,7 +150,7 @@
 <string name="gpx_tags_txt">Taggar</string>
 <string name="gpx_description_txt">Beskrivning</string>
 <string name="validate_gpx_upload_name_pwd">Vänligen ange OSM användarnamn och lösenord för att ladda upp GPX-filer.</string>
-<string name="show_details">Visa detaljer</string>
+<string name="show_details">Visa positionsdetaljer</string>
 <string name="accessibility_extensions_descr">Tillgänglighetstillägg för gamla Android-versioner</string>
 <string name="accessibility_extensions">Tillgänglighetstillägg</string>
 <string name="accessibility_mode">Tillgänglighetsläge</string>
@@ -161,7 +161,7 @@
 <string name="backToMenu">Tillbaka till menyn</string>
 <string name="zoomOut">Zooma ut</string>
 <string name="zoomIn">Zooma in</string>
-<string name="zoomIs">Zoom är</string>
+<string name="zoomIs">Zoomnivån är</string>
 <string name="north">norr</string>
 <string name="north_north_east">nord-nord-ost</string>
 <string name="north_east">nord-ost</string>
@@ -178,14 +178,14 @@
 <string name="west_north_west">väst-nord-väst</string>
 <string name="north_west">nord-väst</string>
 <string name="north_north_west">nord-nord-väst</string>
-<string name="front">Främre</string>
-<string name="front_right">Höger fram</string>
-<string name="right">Höger</string>
-<string name="back_right">Höger bak</string>
-<string name="back">Bak</string>
-<string name="back_left">Vänster bak</string>
-<string name="left">Vänster</string>
-<string name="front_left">Vänster fram</string>
+<string name="front">framåt</string>
+<string name="front_right">framåt till höger</string>
+<string name="right">till höger</string>
+<string name="back_right">bakåt till höger</string>
+<string name="back">bakåt</string>
+<string name="back_left">bakåt till vänster</string>
+<string name="left">till vänster</string>
+<string name="front_left">framåt till vänster</string>
 <string name="towards">mot</string>
 <string name="altitude">Höjd</string>
 <string name="map_widget_renderer">Kartutseende</string>
@@ -275,8 +275,8 @@
 <string name="direction_style_clockwise">Medurs (12 sektorer)</string>
 <string name="settings_direction_style">Riktningsstil</string>
 <string name="settings_direction_style_descr">Välj sätt att uttrycka relativa riktningar under rörelse</string>
-<string name="auto_announce_on">Starta autoannouncing</string>
-<string name="auto_announce_off">Sluta autoannouncing</string>
+<string name="auto_announce_on">Börja meddela automatiskt</string>
+<string name="auto_announce_off">Sluta meddela automatiskt</string>
 <string name="scroll_map_by_gestures_descr">Bläddra i kartan med gester på pekskärmen</string>
 <string name="scroll_map_by_gestures">Naturlig kartrullning</string>
 <string name="i_am_here">Jag är här</string>
@@ -1029,7 +1029,7 @@
 	<string name="map_tile_source_descr">Välj källa för onlinekartor eller cachade kartbitar</string>
 	<string name="map_tile_source">Källa för kartbitar</string>
 	<string name="map_source">Kartkälla</string>
-	<string name="show_location">Visa plats</string>
+	<string name="show_location">Visa din position</string>
 	<string name="show_gps_coordinates_text">Visa GPS-koordinater på kartan</string>
 	<string name="use_internet_to_download_tile">Använd Internet för att hämta kartrutor som saknas</string>
 	<string name="app_description">Navigationsapp</string>
@@ -1833,4 +1833,5 @@
 	<string name="osm_edits">OSM-redigeringar</string>
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering</string>
 	<string name="your_edits">Dina redigeringar</string>
-    </resources>
+    <string name="osmand_parking_outdated">Föråldrad</string>
+	</resources>
