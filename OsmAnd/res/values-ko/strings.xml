@@ -2206,4 +2206,5 @@
 	<string name="osm_edits">OSM 편집</string>
 	<string name="osmand_parking_hour">시간</string><string name="osmand_parking_minute">분</string><string name="osmand_parking_time_left">남은 시간</string> <string name="parking_place_limited">주차 장소 시간 제한</string>
 	<string name="your_edits">편집</string>
-    </resources>
+    <string name="osmand_parking_outdated">시간 초과</string>
+	</resources>
