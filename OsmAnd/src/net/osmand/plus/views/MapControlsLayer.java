@@ -1,10 +1,17 @@
 package net.osmand.plus.views;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -13,19 +20,18 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapControls;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
-import net.osmand.plus.views.controls.MapZoomControls;
+import net.osmand.plus.views.corenative.NativeCoreContext;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,8 +42,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 5000;
 
-	
-	
 	public MapHudButton createHudButton(View iv, int resId) {
 		MapHudButton mc = new MapHudButton();
 		mc.iv = iv;
@@ -70,11 +74,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static long startCounter;
 	private Runnable delayStart;
 	private Handler showUIHandler;
+	private ImageView appModeIcon;
+	private TextView zoomText;
+	private OsmandMapTileView mapView;
+	private OsmandApplication app;
+	private View mapAppModeShadow;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
+		app = activity.getMyApplication();
 		settings = activity.getMyApplication().getSettings();
-		
+		mapView = mapActivity.getMapView();
+
 	}
 
 	@Override
@@ -85,18 +96,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		scaleCoefficient = view.getScaleCoefficient();
-		FrameLayout parent = getParent();
 		// TODO
 		// rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent,
 		// rightGravity);
 		showUIHandler = new Handler();
-		initTransparencyBar(view, parent);
+		initTransparencyBar();
 		initZooms();
 		initControls();
 		initRouteControls();
 		initTopControls();
 	}
-	
+
 	private class CompassDrawable extends Drawable {
 
 		private Drawable original;
@@ -112,33 +122,33 @@ public class MapControlsLayer extends OsmandMapLayer {
 			original.draw(canvas);
 			canvas.restore();
 		}
-		
+
 		@Override
 		public int getMinimumHeight() {
 			return original.getMinimumHeight();
 		}
-		
+
 		@Override
 		public int getMinimumWidth() {
 			return original.getMinimumWidth();
 		}
-		
+
 		@Override
 		public int getIntrinsicHeight() {
 			return original.getIntrinsicHeight();
 		}
-		
+
 		@Override
 		public int getIntrinsicWidth() {
 			return original.getIntrinsicWidth();
 		}
-		
+
 		@Override
 		public void setChangingConfigurations(int configs) {
 			super.setChangingConfigurations(configs);
 			original.setChangingConfigurations(configs);
 		}
-		
+
 		@Override
 		public void setBounds(int left, int top, int right, int bottom) {
 			super.setBounds(left, top, right, bottom);
@@ -175,10 +185,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
-//		protected void onDraw(Canvas canvas) {
-			// }
-		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0)
-				.setBg(R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
+		// protected void onDraw(Canvas canvas) {
+		// }
+		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).setBg(
+				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
 		compassHud.compass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(new View.OnClickListener() {
@@ -245,7 +255,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				notifyClicked();
 				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-				if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
 				} else {
 					startNavigation();
@@ -290,6 +300,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
+		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
+		mapAppModeShadow.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onApplicationModePress(v);
+			}
+		});
+		appModeIcon = (ImageView) mapActivity.findViewById(R.id.map_app_mode_icon);
+		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
 		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
 		controls.add(createHudButton((ImageView) routePlanButton, R.drawable.ic_action_gdirections_dark).setBg(
@@ -298,9 +318,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
-				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				mapActivity.refreshMap();
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+				} else {
+					mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+					mapActivity.refreshMap();
+				}
 			}
 		});
 
@@ -322,11 +347,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			}
 		});
-		final View.OnLongClickListener listener = MapZoomControls.getOnClickMagnifierListener(view);
+		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.ic_action_zoom_out)
-				.setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.ic_action_zoom_out).setRoundTransparent());
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -363,11 +387,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		startCounter = 0;
 
 	}
-	
+
 	public void startCounter() {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		int del = settings.DELAY_TO_START_NAVIGATION.get();
-		if(del <= 0) {
+		if (del <= 0) {
 			return;
 		}
 		if (startCounter <= 0) {
@@ -388,7 +412,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			};
 			delayStart.run();
 		}
-		
+
 	}
 
 	protected void notifyClicked(MapControls m) {
@@ -440,20 +464,33 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.setIconColorId(R.color.color_white);
 		}
 
-		menuControl
-				.setIconResId(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? R.drawable.ic_dashboard_dark
-						: R.drawable.ic_navigation_drawer);
+		menuControl.setIconResId(settings.USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? R.drawable.ic_dashboard_dark
+				: R.drawable.ic_navigation_drawer);
 
+		if(routeFollowingMode || routePlanningMode) {
+			mapAppModeShadow.setVisibility(View.GONE);
+		} else {
+			mapAppModeShadow.setVisibility(View.VISIBLE);
+			if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
+				zoomText.setVisibility(View.GONE);
+				appModeIcon.setVisibility(View.VISIBLE);
+				appModeIcon.setImageResource(settings.getApplicationMode().getSmallIcon(isNight));
+			} else {
+				zoomText.setVisibility(View.VISIBLE);
+				appModeIcon.setVisibility(View.GONE);
+				zoomText.setText(getZoomLevel(tileBox));
+			}
+		}
 		optionsRouteControl.setIconResId(settings.getApplicationMode().getSmallIcon(true));
 		int vis = showRouteCalculationControls ? View.VISIBLE : View.GONE;
 		if (showRouteCalculationControls) {
 			((TextView) routeGoControl.iv).setTextColor(textColor);
-			final String text ;
+			final String text;
 			if (startCounter > 0) {
 				int get = (int) ((startCounter - System.currentTimeMillis()) / 1000l);
 				text = mapActivity.getString(R.string.shared_string_go) + " (" + get + ")";
 			} else {
-				text = mapActivity.getString(R.string.shared_string_go) ;
+				text = mapActivity.getString(R.string.shared_string_go);
 			}
 			((TextView) routeGoControl.iv).setText(text);
 		}
@@ -461,8 +498,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (routePreparationLayout.getVisibility() != vis) {
 			routePreparationLayout.setVisibility(vis);
 			mapRouteInfoControlDialog.setVisible(showRouteCalculationControls);
-			if(showRouteCalculationControls) {
-				if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isPauseNavigation()) {
+			if (showRouteCalculationControls) {
+				if (!mapActivity.getRoutingHelper().isFollowingMode()
+						&& !mapActivity.getRoutingHelper().isPauseNavigation()) {
 					startCounter();
 				}
 			} else {
@@ -474,7 +512,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (mapRotate != cachedRotate) {
 			cachedRotate = mapRotate;
 			// Aply animation to image view
-			 compassHud.iv.invalidate();
+			compassHud.iv.invalidate();
 		}
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_niu_white : R.drawable.map_compass_niu);
@@ -489,12 +527,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private FrameLayout getParent() {
-		return (FrameLayout) mapActivity.findViewById(R.id.MapButtons);
-	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if(mapRouteInfoControlDialog.onSingleTap(point, tileBox)) {
+		if (mapRouteInfoControlDialog.onSingleTap(point, tileBox)) {
 			return true;
 		}
 		stopCounter();
@@ -508,16 +543,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	// /////////////// Transparency bar /////////////////////////
-	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
-		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
-		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER);
-		params.setMargins(0, 0, 0, minimumHeight + 3);
-		transparencyBarLayout = new LinearLayout(view.getContext());
-		transparencyBarLayout.setVisibility(settingsToTransparency != null ? View.VISIBLE : View.GONE);
-		parent.addView(transparencyBarLayout, params);
-
-		transparencyBar = new SeekBar(view.getContext());
+	private void initTransparencyBar() {
+		transparencyBarLayout = (LinearLayout) mapActivity.findViewById(R.id.map_transparency_layout);
+		transparencyBar = (SeekBar) mapActivity.findViewById(R.id.map_transparency_seekbar);
 		transparencyBar.setMax(255);
 		if (settingsToTransparency != null) {
 			transparencyBar.setProgress(settingsToTransparency.get());
@@ -540,12 +568,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		android.widget.LinearLayout.LayoutParams prms = new LinearLayout.LayoutParams((int) (scaleCoefficient * 100),
-				LayoutParams.WRAP_CONTENT);
-		transparencyBarLayout.addView(transparencyBar, prms);
-		ImageButton imageButton = new ImageButton(view.getContext());
-		prms = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		prms.setMargins((int) (2 * scaleCoefficient), (int) (2 * scaleCoefficient), 0, 0);
+		ImageButton imageButton = (ImageButton) mapActivity.findViewById(R.id.map_transparency_hide);
 		imageButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -553,9 +576,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideTransparencyBar(settingsToTransparency);
 			}
 		});
-		imageButton.setContentDescription(view.getContext().getString(R.string.shared_string_close));
-		imageButton.setBackgroundResource(R.drawable.headliner_close);
-		transparencyBarLayout.addView(imageButton, prms);
 	}
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
@@ -575,7 +595,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		// TODO
 	}
 
-	
 	private class MapHudButton {
 		View iv;
 		int bgDark;
@@ -637,10 +656,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
 			}
 			if (iv instanceof ImageView) {
-				if(compass) {
-					((ImageView) iv).setImageDrawable(new CompassDrawable(ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight)));
+				if (compass) {
+					((ImageView) iv).setImageDrawable(new CompassDrawable(ctx.getIconsCache().getIcon(resId,
+							nightMode ? resDark : resLight)));
 				} else {
-					((ImageView) iv).setImageDrawable(ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight));
+					((ImageView) iv).setImageDrawable(ctx.getIconsCache()
+							.getIcon(resId, nightMode ? resDark : resLight));
 				}
 			} else if (iv instanceof TextView) {
 				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(
@@ -648,5 +669,100 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 
+	}
+
+	private void onApplicationModePress(View v) {
+		final QuickAction mQuickAction = new QuickAction(v);
+		mQuickAction.setOnAnchorOnTop(true);
+		List<ApplicationMode> vls = ApplicationMode.values(mapActivity.getMyApplication().getSettings());
+		final ApplicationMode[] modes = vls.toArray(new ApplicationMode[vls.size()]);
+		int[] icons = new int[vls.size()];
+		int[] values = new int[vls.size()];
+		for (int k = 0; k < modes.length; k++) {
+			icons[k] = modes[k].getSmallIcon(false);
+			values[k] = modes[k].getStringResource();
+		}
+		for (int i = 0; i < modes.length; i++) {
+			final ActionItem action = new ActionItem();
+			action.setTitle(mapActivity.getResources().getString(values[i]));
+			action.setIcon(mapActivity.getResources().getDrawable(icons[i]));
+			final int j = i;
+			action.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.getMyApplication().getSettings().APPLICATION_MODE.set(modes[j]);
+					mQuickAction.dismiss();
+				}
+			});
+			mQuickAction.addActionItem(action);
+		}
+		mQuickAction.setAnimStyle(QuickAction.ANIM_AUTO);
+		mQuickAction.show();
+	}
+
+	private String getZoomLevel(RotatedTileBox tb) {
+		String zoomText = tb.getZoom() + "";
+		double frac = tb.getMapDensity();
+		if (frac != 0) {
+			int ifrac = (int) (frac * 10);
+			zoomText += " ";
+			zoomText += Math.abs(ifrac) / 10;
+			if (ifrac % 10 != 0) {
+				zoomText += "." + Math.abs(ifrac) % 10;
+			}
+		}
+		return zoomText;
+	}
+
+	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
+		final View.OnLongClickListener listener = new View.OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View notUseCouldBeNull) {
+				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+				int p = (int) (mapDensity.get() * 100);
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 33, 50, 75, 100, 150, 200, 300, 400 });
+				final List<String> values = new ArrayList<String>();
+				int i = -1;
+				for (int k = 0; k <= tlist.size(); k++) {
+					final boolean end = k == tlist.size();
+					if (i == -1) {
+						if ((end || p < tlist.get(k))) {
+							values.add(p + "%");
+							i = k;
+						} else if (p == tlist.get(k)) {
+							i = k;
+						}
+
+					}
+					if (k < tlist.size()) {
+						values.add(tlist.get(k) + "%");
+					}
+				}
+				if (values.size() != tlist.size()) {
+					tlist.insert(i, p);
+				}
+
+				bld.setTitle(R.string.map_magnifier);
+				bld.setSingleChoiceItems(values.toArray(new String[values.size()]), i,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								int p = tlist.get(which);
+								mapDensity.set(p / 100.0f);
+								view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+								MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+								if (mapContext != null) {
+									mapContext.updateMapSettings();
+								}
+								dialog.dismiss();
+							}
+						});
+				bld.show();
+				return true;
+			}
+		};
+		return listener;
 	}
 }

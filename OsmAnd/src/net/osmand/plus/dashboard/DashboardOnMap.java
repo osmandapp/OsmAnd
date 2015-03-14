@@ -291,6 +291,7 @@ public class DashboardOnMap {
 		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
 		} else {
+			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}

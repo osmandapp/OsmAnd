@@ -2,12 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom" 
-    android:orientation="vertical">
+    android:layout_gravity="bottom"
+    android:orientation="vertical" >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
+        <FrameLayout
+            android:id="@+id/map_app_mode_shadow"
+            android:layout_width="@dimen/map_button_shadow_width"
+            android:layout_height="@dimen/map_button_shadow_height"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/map_button_shadow_margin"
+            android:layout_marginLeft="@dimen/map_button_shadow_margin"
+            android:background="@drawable/btn_round_trans" >
+
+            <ImageView
+                android:id="@+id/map_app_mode_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <TextView
+                android:id="@+id/map_app_mode_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="3dp"
+                android:textSize="@dimen/map_button_text_size" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/map_transparency_layout"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/map_button_size"
+            android:orientation="horizontal" >
+
+            <SeekBar
+                android:id="@+id/map_transparency_seekbar"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/map_trans_seek_size" 
+                android:layout_gravity="center"
+                />
+
+            <ImageButton
+                android:id="@+id/map_transparency_hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_circle_transparent"
+                android:src="@drawable/headliner_close" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -17,18 +68,18 @@
             android:layout_marginLeft="@dimen/map_button_margin" >
 
             <ImageButton
+                android:id="@+id/map_menu_button"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_round"
-                android:id="@+id/map_menu_button"
                 android:src="@drawable/ic_action_remove_light" />
 
             <ImageButton
+                android:id="@+id/map_route_info_button"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginLeft="@dimen/map_button_spacing"
                 android:background="@drawable/btn_round"
-                android:id="@+id/map_route_info_button"
                 android:src="@drawable/ic_action_remove_light" />
         </LinearLayout>
 
@@ -62,7 +113,7 @@
                     android:src="@drawable/ic_action_remove_light" />
 
                 <ImageButton
-					android:id="@+id/map_zoom_out_button"
+                    android:id="@+id/map_zoom_out_button"
                     android:layout_width="@dimen/map_button_size"
                     android:layout_height="@dimen/map_button_size"
                     android:layout_marginTop="@dimen/map_button_spacing"
@@ -77,63 +128,63 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
+            android:id="@+id/map_route_preparation_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/map_route_buttons_height"
-            android:id="@+id/map_route_preparation_layout"
             android:layout_gravity="bottom" >
-            
-             <ImageButton
-                android:layout_width="@dimen/map_route_buttons_width"
-                android:layout_height="match_parent"
+
+            <ImageButton
                 android:id="@+id/map_cancel_route_button"
-                android:background="@drawable/btn_flat"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_remove_light" />
-             
-             <ImageButton
                 android:layout_width="@dimen/map_route_buttons_width"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_flat"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <ImageButton
                 android:id="@+id/map_waypoints_route_button"
-                android:background="@drawable/btn_flat"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_remove_light" />
-             
-             <ImageButton
                 android:layout_width="@dimen/map_route_buttons_width"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_flat"
-                android:id="@+id/map_options_route_button"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_flat"
                 android:src="@drawable/ic_action_remove_light" />
-             
-             <TextView
+
+            <ImageButton
+                android:id="@+id/map_options_route_button"
+                android:layout_width="@dimen/map_route_buttons_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_flat"
+                android:src="@drawable/ic_action_remove_light" />
+
+            <TextView
+                android:id="@+id/map_go_route_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_flat"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/map_go_route_button"
+                android:background="@drawable/btn_flat"
+                android:drawableLeft="@drawable/ic_action_remove_light"
+                android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:drawableLeft="@drawable/ic_action_remove_light"
                 android:textSize="20sp"
-                android:textStyle="bold" 
-                android:drawablePadding="4dp" />
+                android:textStyle="bold" />
         </LinearLayout>
-        
+
         <LinearLayout
+            android:id="@+id/map_context_menu_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/map_context_menu_layout"
-            android:visibility="gone"
-            android:background="@drawable/btn_flat" 
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:background="@drawable/btn_flat"
+            android:visibility="gone" >
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:gravity="center">
+                android:gravity="center" >
             </TextView>
 
             <ImageButton

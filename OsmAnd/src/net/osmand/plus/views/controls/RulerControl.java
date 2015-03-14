@@ -27,15 +27,13 @@ public class RulerControl extends MapControls {
 	double cacheRulerTileX = 0;
 	double cacheRulerTileY = 0;
 	float cacheRulerTextLen = 0;
-	MapZoomControls zoomControls;
 	Drawable rulerDrawable;
 	TextPaint rulerTextPaint;
 	final static double screenRulerPercent = 0.25;
 	boolean isNightRemembered = false;
 
-	public RulerControl(MapZoomControls zoomControls, MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+	public RulerControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 	super(mapActivity, showUIHandler, scaleCoefficient);
-		this.zoomControls = zoomControls;
 		rulerTextPaint = new TextPaint();
 		rulerTextPaint.setTextSize(20 * scaleCoefficient);
 		rulerTextPaint.setAntiAlias(true);
@@ -58,10 +56,10 @@ public class RulerControl extends MapControls {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if( (zoomControls.isVisible() && zoomControls.isShowZoomLevel()) || !mapActivity.getMyApplication().getSettings().SHOW_RULER.get()){
+		if (!mapActivity.getMyApplication().getSettings().SHOW_RULER.get()) {
 			return;
 		}
-		if(mapActivity.findViewById(R.id.MapButtons).getVisibility() == View.GONE) {
+		if (mapActivity.findViewById(R.id.MapButtons).getVisibility() == View.GONE) {
 			return;
 		}
 		OsmandMapTileView view = mapActivity.getMapView();
@@ -69,9 +67,10 @@ public class RulerControl extends MapControls {
 		// update cache
 		if (view.isZooming()) {
 			cacheRulerText = null;
-		} else if (((isNight != isNightRemembered) || (tb.getZoom() != cacheRulerZoom) ||
-				Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1) && 
-				 tb.getPixWidth() > 0){
+		} else if (((isNight != isNightRemembered) || (tb.getZoom() != cacheRulerZoom) || Math.abs(tb.getCenterTileX()
+				- cacheRulerTileX)
+				+ Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1)
+				&& tb.getPixWidth() > 0) {
 			cacheRulerZoom = (tb.getZoom());
 			cacheRulerTileX = tb.getCenterTileX();
 			cacheRulerTileY = tb.getCenterTileY();
@@ -80,9 +79,11 @@ public class RulerControl extends MapControls {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
+			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist,
+					view.getApplication()));
 			cacheRulerTextLen = rulerTextPaint.measureText(cacheRulerText.getText());
-			rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity.getResources().getDrawable(R.drawable.ruler));
+			rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity
+					.getResources().getDrawable(R.drawable.ruler));
 			Rect bounds = rulerDrawable.getBounds();
 			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
 			bounds.left = bounds.right - cacheRulerDistPix;
@@ -93,16 +94,17 @@ public class RulerControl extends MapControls {
 		if (cacheRulerText != null) {
 			Rect bounds = rulerDrawable.getBounds();
 			int bottom = (int) (view.getHeight() - vmargin);
-			if(bounds.bottom != bottom) {
+			if (bounds.bottom != bottom) {
 				bounds.bottom = bottom;
 				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 				rulerDrawable.setBounds(bounds);
 				rulerDrawable.invalidateSelf();
 			}
 			rulerDrawable.draw(canvas);
-			int shadowColor = isNight == true ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
-			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
-					rulerTextPaint, shadowColor);
+			int shadowColor = isNight == true ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night)
+					: Color.WHITE;
+			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8
+					* scaleCoefficient, rulerTextPaint, shadowColor);
 		}
 		isNightRemembered = isNight;
 	}
