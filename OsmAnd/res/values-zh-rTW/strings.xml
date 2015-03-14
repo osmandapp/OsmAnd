@@ -203,7 +203,7 @@
 	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 正常的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 \n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
-	<string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可直接用無障礙功能以及便利，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應。</string>
+	<string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
 	
 	
 	
@@ -229,7 +229,7 @@
 	<string name="show_ruler_level">顯示比例尺</string>	
 	<string name="info_button">資訊</string>
 	<string name="back_to_location">回到目前位置</string>
-	<string name="show_details">顯示細節</string>
+	<string name="show_details">顯示位置詳細資訊</string>
 	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>
 	<string name="accessibility_mode">無障礙模式</string>
@@ -240,7 +240,7 @@
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">放大</string>
-	<string name="zoomIs">縮放比為</string>
+	<string name="zoomIs">縮放程度為</string>
 	<string name="north">北方</string>
 	<string name="north_north_east">北北東</string>
 	<string name="north_east">東北</string>
@@ -257,13 +257,13 @@
 	<string name="west_north_west">西北西</string>
 	<string name="north_west">西北</string>
 	<string name="north_north_west">北北西</string>
-	<string name="front">前方</string>
+	<string name="front">往前</string>
 	<string name="front_right">右前方</string>
-	<string name="right">右方</string>
+	<string name="right">向右方</string>
 	<string name="back_right">右後方</string>
 	<string name="back">往後</string>
 	<string name="back_left">左後方</string>
-	<string name="left">左方</string>
+	<string name="left">向左方</string>
 	<string name="front_left">左前方</string>
 	<string name="oclock">點鐘</string>
 	<string name="towards">將近</string>
@@ -868,7 +868,7 @@
 	<string name="map_tile_source">地圖圖磚來源</string>
 	<string name="map_source">地圖來源</string>
 	<string name="use_internet">使用網路</string>
-	<string name="show_location">顯示位置</string>
+	<string name="show_location">顯示您的位置</string>
 	
 	
 	<string name="show_gps_coordinates_text">在地圖上顯示 GPS 狀態</string>
