@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="1" >
+
+    <!-- LEFT widgets colon -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/map_left_widgets_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:orientation="vertical" >
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/map_hud_widget" />
+
+            <include layout="@layout/map_hud_widget" />
+
+            <include layout="@layout/map_hud_widget" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/map_top_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_round"
+            android:minHeight="@dimen/map_address_height" >
+
+            <TextView
+                android:id="@+id/map_address_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:shadowColor="@color/color_myloc_distance"
+                android:shadowRadius="10"
+                android:text="Long Street Name"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_widget_text_size"
+                android:textStyle="bold" >
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/waypoint_info_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/waypoint_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/map_button_margin"
+                    android:layout_marginRight="@dimen/map_button_margin"
+                    android:src="@drawable/ic_action_remove_light" />
+
+                <TextView
+                    android:id="@+id/waypoint_dist"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:maxLines="2"
+                    android:textColor="@color/wpt_distance_color"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/waypoint_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/waypoint_more"
+                    android:layout_width="@dimen/map_address_height"
+                    android:layout_height="@dimen/map_address_height"
+                    android:background="@drawable/btn_circle_transparent"
+                    android:src="@drawable/ic_overflow_menu_white" />
+
+                <ImageButton
+                    android:id="@+id/waypoint_close"
+                    android:layout_width="@dimen/map_address_height"
+                    android:layout_height="@dimen/map_address_height"
+                    android:background="@drawable/btn_circle_transparent"
+                    android:src="@drawable/ic_action_remove_light" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- CENTER -->
+
+            <LinearLayout
+                android:id="@+id/map_center_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="@dimen/map_button_margin"
+                android:background="@drawable/btn_round"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/map_lanes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/map_lanes_dist_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:text="1048 km"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/map_widget_text_size_small" />
+
+                <ProgressBar
+                    android:id="@+id/map_horizontal_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/map_routing_progress_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/map_button_margin"
+                    android:layout_marginRight="@dimen/map_button_margin"
+                    android:max="100"
+                    android:progress="60"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginTop="@dimen/map_button_margin"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/map_layers_button"
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:background="@drawable/btn_inset_circle"
+                    android:src="@drawable/ic_action_remove_light" />
+
+                <ImageButton
+                    android:id="@+id/map_compass_button"
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:background="@drawable/btn_inset_circle"
+                    android:src="@drawable/ic_action_remove_light" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- RIGHT widgets colon -->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/map_right_widgets_panel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:orientation="vertical" >
+
+                <include layout="@layout/map_hud_widget" />
+
+                <include layout="@layout/map_hud_widget" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/map_collapse_button"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_gravity="top|center_horizontal"
+                android:background="@drawable/btn_inset_circle"
+                android:src="@drawable/ic_action_remove_light" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="end"
-            android:gravity="center"
             android:maxLines="1"
             android:shadowColor="@color/color_myloc_distance"
             android:shadowRadius="10"
