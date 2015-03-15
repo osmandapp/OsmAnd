@@ -190,6 +190,7 @@ public class MapActivity extends AccessibleActivity {
 		if(System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
+		mapView.refreshMap(true);
 	}
 
 	private void checkAppInitialization() {
@@ -246,7 +247,7 @@ public class MapActivity extends AccessibleActivity {
 			mapView.setMapRender(atlasMapRendererView);
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.GONE);
-		} else if(init) {
+		} else {
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.VISIBLE);
 			surf.setMapView(mapView);

@@ -101,7 +101,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initZooms();
 		initControls();
 		initRouteControls();
-		
+		updateControls(view.getCurrentRotatedTileBox(), null);
 	}
 
 	private class CompassDrawable extends Drawable {
@@ -423,6 +423,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		updateControls(tileBox, nightMode);
+	}
+
+	private void updateControls(RotatedTileBox tileBox, DrawSettings nightMode) {
 		boolean isNight = nightMode != null && nightMode.isNightMode();
 		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
 		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;

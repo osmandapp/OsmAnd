@@ -175,6 +175,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(Context ctx) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
+		
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
@@ -213,8 +214,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
+		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().
-				setLocation(0, 0).setZoom(3).setPixelDimensions(100, 100).build();
+				setLocation(ll.getLatitude(), ll.getLongitude()).setZoom(settings.getLastKnownMapZoom()).
+				setPixelDimensions(100, 100).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
 	}

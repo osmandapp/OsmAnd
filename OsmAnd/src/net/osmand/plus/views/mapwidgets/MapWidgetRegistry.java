@@ -48,13 +48,14 @@ public class MapWidgetRegistry {
 			ApplicationMode mode, boolean left, boolean expanded) {
 		Set<MapWidgetRegInfo> s = left ? this.left : this.right;
 		for (MapWidgetRegInfo r : s) {
-			if (r.visible(mode)) {
+			if (r.visible(mode) || r.widget.isExplicitlyVisible()) {
 				stack.addView(r.widget.getView());
 			}
 		}
 		if (expanded) {
 			for (MapWidgetRegInfo r : s) {
-				if (r.visibleCollapsed(mode)) {
+				if (r.visibleCollapsed(mode) && 
+						!r.widget.isExplicitlyVisible()) {
 					stack.addView(r.widget.getView());
 				}
 			}
@@ -88,10 +89,10 @@ public class MapWidgetRegistry {
 			}
 		}
 	}
-	public void registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
+	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableDark, drawableLight, 
-				messageId, priorityOrder);
+				messageId, priorityOrder, left);
 		for (ApplicationMode ms : ApplicationMode.values(settings)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
 			boolean def = ms.isWidgetVisible(key);
@@ -122,6 +123,7 @@ public class MapWidgetRegistry {
 		} else {
 			this.right.add(ii);
 		}
+		return ii;
 	}
 	
 	private void restoreModes(Set<String> set, Set<MapWidgetRegInfo> mi, ApplicationMode mode) {
@@ -266,6 +268,14 @@ public class MapWidgetRegistry {
 		return (r.visibleCollapsed(mode)? " + " : "  ") + ctx.getString(r.messageId);
 	}
 	
+	public Set<MapWidgetRegInfo> getRight() {
+		return right;
+	}
+	
+	public Set<MapWidgetRegInfo> getLeft() {
+		return left;
+	}
+	
 	private void addControls(final MapInfoLayer mil, final ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
 		for(final MapWidgetRegInfo r : top){
 			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
@@ -294,19 +304,22 @@ public class MapWidgetRegistry {
 		public final int drawableDark;
 		public final int drawableLight;
 		public final int messageId;
-		public final  String key;
+		public final String key;
+		public final boolean left;
 		public final int priorityOrder;
 		private final Set<ApplicationMode> visibleCollapsible = new LinkedHashSet<ApplicationMode>();
 		private final Set<ApplicationMode> visibleModes = new LinkedHashSet<ApplicationMode>();
 		private Runnable stateChangeListener = null;
 		
-		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableDark, int drawableLight, int messageId, int priorityOrder) {
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableDark, int drawableLight, int messageId, int priorityOrder,
+				boolean left) {
 			this.key = key;
 			this.widget = widget;
 			this.drawableDark = drawableDark;
 			this.drawableLight = drawableLight;
 			this.messageId = messageId;
 			this.priorityOrder = priorityOrder;
+			this.left = left;
 		}
 		
 		public boolean visibleCollapsed(ApplicationMode mode){

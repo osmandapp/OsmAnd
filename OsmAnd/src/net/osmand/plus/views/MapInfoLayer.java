@@ -17,6 +17,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -46,6 +47,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapWidgetRegistry mapInfoControls;
 
 	private OsmandSettings settings;
+	private DrawSettings drawSettings;
 
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -77,7 +79,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		alarmControl.setVisibility(View.GONE);
 		lanesControl.setVisibility(View.GONE);
 		recreateControls();
-		updateColorShadowsOfText(null);
+	}
+	
+	public void registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
+			int messageId, String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidget(widget, drawableDark, drawableLight, messageId, key, left, priorityOrder);
+		updateReg(calculateTextState(), reg);
 	}
 	
 	public void registerAllControls(){
@@ -102,21 +109,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 //		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
-		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
+		registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map);
-		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
+		registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map);
-		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
+		registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
+		registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
-		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
-		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
-		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 	}
 	
 	
@@ -141,84 +148,100 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 	}
+	
+	private static class TextState {
+		boolean textBold ;
+		int textColor ;
+		int textShadowColor ;
+		int boxTop;
+		int rightRes;
+		int leftRes;
+		int expand;
+		int boxFree;
+	}
 
 
 	private int themeId = -1;
-	public void updateColorShadowsOfText(DrawSettings drawSettings) {
+	public void updateColorShadowsOfText() {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
 		boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
-			boolean textBold = following;
-			int textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night):Color.BLACK;
-			// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent night skin (from box_night_free_simple.9.png)
-			int textShadowColor = nightMode? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
-			if (!transparent && !nightMode) {
-				textShadowColor = Color.TRANSPARENT;
-			}
-			int boxTop;
-			int rightRes;
-			int leftRes;
-			int expand;
-			int boxFree;
-			if (transparent) {
-				boxTop = R.drawable.btn_flat_trans;
-				rightRes = R.drawable.btn_left_round_trans;
-				leftRes = R.drawable.btn_right_round_trans;
-				expand = R.drawable.btn_inset_circle_trans;
-				boxFree = R.drawable.btn_round_trans;
-			} else if (nightMode) {
-				boxTop = R.drawable.btn_flat_night;
-				rightRes = R.drawable.btn_left_round_night;
-				leftRes = R.drawable.btn_right_round_night;
-				expand = R.drawable.btn_inset_circle_night;
-				boxFree = R.drawable.btn_round_night;
-			} else {
-				boxTop = R.drawable.btn_flat;
-				rightRes = R.drawable.btn_left_round;
-				leftRes = R.drawable.btn_right_round;
-				expand = R.drawable.btn_inset_circle;
-				boxFree = R.drawable.btn_round;
-			}
+			TextState ts = calculateTextState();
 //			lanesControl.setBackgroundDrawable(boxFree);
-			for(int i = 0 ; i < rightStack.getChildCount(); i++ ) {
-				View v = rightStack.getChildAt(i).findViewById(R.id.widget_bg);
-				if(v != null) {
-					v.setBackgroundResource(rightRes);
-					updateTextColor(v.findViewById(R.id.widget_text_small), textColor, textShadowColor, textBold);
-					updateTextColor(v.findViewById(R.id.widget_text), textColor, textShadowColor, textBold);
-				}
+			for(MapWidgetRegInfo reg :  mapInfoControls.getLeft()) {
+				updateReg(ts, reg);
 			}
-			for(int i = 0 ; i < leftStack.getChildCount(); i++ ) {
-				View v = leftStack.getChildAt(i).findViewById(R.id.widget_bg);
-				if(v != null) {
-					v.setBackgroundResource(leftRes);
-					updateTextColor(v.findViewById(R.id.widget_text_small), textColor, textShadowColor, textBold);
-					updateTextColor(v.findViewById(R.id.widget_text), textColor, textShadowColor, textBold);
-				}
+			for(MapWidgetRegInfo reg :  mapInfoControls.getRight()) {
+				updateReg(ts, reg);
 			}
-			this.expand.setBackgroundResource(expand);
+			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
 			leftStack.invalidate();
 		}
 	}
+
+	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
+		View v = reg.widget.getView().findViewById(R.id.widget_bg);
+		if(v != null) {
+			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
+			updateTextColor(v.findViewById(R.id.widget_text_small), ts);
+			updateTextColor(v.findViewById(R.id.widget_text), ts);
+		}
+	}
+
+	private TextState calculateTextState() {
+		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+		boolean following = routeLayer.getHelper().isFollowingMode();
+		TextState ts = new TextState();
+		ts.textBold = following;
+		ts.textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
+		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
+		// night skin (from box_night_free_simple.9.png)
+		ts.textShadowColor = nightMode ? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
+		if (!transparent && !nightMode) {
+			ts.textShadowColor = Color.TRANSPARENT;
+		}
+		if (transparent) {
+			ts.boxTop = R.drawable.btn_flat_trans;
+			ts.rightRes = R.drawable.btn_left_round_trans;
+			ts.leftRes = R.drawable.btn_right_round_trans;
+			ts.expand = R.drawable.btn_inset_circle_trans;
+			ts.boxFree = R.drawable.btn_round_trans;
+		} else if (nightMode) {
+			ts.boxTop = R.drawable.btn_flat_night;
+			ts.rightRes = R.drawable.btn_left_round_night;
+			ts.leftRes = R.drawable.btn_right_round_night;
+			ts.expand = R.drawable.btn_inset_circle_night;
+			ts.boxFree = R.drawable.btn_round_night;
+		} else {
+			ts.boxTop = R.drawable.btn_flat;
+			ts.rightRes = R.drawable.btn_left_round;
+			ts.leftRes = R.drawable.btn_right_round;
+			ts.expand = R.drawable.btn_inset_circle;
+			ts.boxFree = R.drawable.btn_round;
+		}
+		return ts;
+	}
 	
 	
-	private void updateTextColor(View v, int textColor, int textShadowColor, boolean textBold) {
+	private void updateTextColor(View v, TextState ts) {
 		if(v instanceof TextView) {
 			TextView tv = (TextView) v;
-			tv.setTextColor(textColor);
-			tv.setShadowLayer(textShadowColor == 0 ? 0 : (8 * view.getScaleCoefficient()), 0, 0, textShadowColor);
-			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
+			tv.setTextColor(ts.textColor);
+			tv.setShadowLayer(ts.textShadowColor == 0 ? 0 : (8 * view.getScaleCoefficient()), 0, 0, ts.textShadowColor);
+			tv.setTypeface(Typeface.DEFAULT, ts.textBold ? Typeface.BOLD : Typeface.NORMAL);
 		}
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		updateColorShadowsOfText(drawSettings);
+		this.drawSettings = drawSettings;
 		// update data on draw
+		updateColorShadowsOfText();
 		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded); 
 		// TODO
 //		lanesControl.updateInfo(drawSettings);
@@ -226,14 +249,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 	}
 	
-	public LinearLayout getRightStack() {
-		return rightStack;
-	}
-	
-	public LinearLayout getLeftStack() {
-		return leftStack;
-	}
-
 	
 	@Override
 	public void destroyLayer() {
@@ -315,5 +330,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.addControls(this, cm, mode);
 		return cm;
 	}
+
+	
 	
 }
