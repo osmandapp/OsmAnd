@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -13,27 +14,26 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.monitoring.ValueHolder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.ShadowText;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.router.TurnType;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Align;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,14 +47,8 @@ import android.widget.Toast;
 
 public class MapInfoWidgetsFactory {
 	
-	private float scaleCoefficient;
-
-	public MapInfoWidgetsFactory(float scaleCoefficient){
-		this.scaleCoefficient = scaleCoefficient;
-	}
-
-	public TextInfoWidget createAltitudeControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final TextInfoWidget altitudeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+	public TextInfoWidget createAltitudeControl(final MapActivity map) {
+		final TextInfoWidget altitudeControl = new TextInfoWidget(map) {
 			private int cachedAlt = 0;
 
 			@Override
@@ -87,10 +81,10 @@ public class MapInfoWidgetsFactory {
 		return altitudeControl;
 	}
 	
-	public TextInfoWidget createGPSInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createGPSInfoControl(final MapActivity map) {
 		final OsmandApplication app = map.getMyApplication();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
-		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
+		final TextInfoWidget gpsInfoControl = new TextInfoWidget(map) {
 			private int u = -1;
 			private int f = -1;
 
@@ -136,7 +130,7 @@ public class MapInfoWidgetsFactory {
 					dlg.show();
 					
 				} else {
-					final MonitoringInfoControl.ValueHolder<Integer> vs = new MonitoringInfoControl.ValueHolder<Integer>();
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
 					final AlertDialog[] dlgshow = new AlertDialog[1]; 
 					Builder dlg = new AlertDialog.Builder(map);
@@ -178,46 +172,6 @@ public class MapInfoWidgetsFactory {
 
 
 
-	public ImageViewWidget createBackToLocation(final MapActivity map){
-		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
-		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
-		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
-		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
-		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
-		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
-		ImageViewWidget backToLocation = new ImageViewWidget(map) {
-			Drawable lastDrawable = null;
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				boolean tracked = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
-				Drawable d;
-				if(!enabled) {
-					d = nightMode ? backToLocDisabledWhite : backToLocDisabled; 
-				} else if(tracked) {
-					d = nightMode ? backToLocTrackedWhite : backToLocTracked;
-				} else {
-					d = nightMode ? backToLocWhite : backToLoc;
-				}
-				if(d != lastDrawable) {
-					lastDrawable = d;
-					setImageDrawable(d);
-				}
-				return true;
-			}
-		};
-		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
-		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
-		backToLocation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().backToLocationImpl();
-			}
-		});
-		return backToLocation;
-	}
 	
 	private static boolean isScreenLocked = false;
 	private Drawable lockEnabled;
@@ -230,21 +184,22 @@ public class MapInfoWidgetsFactory {
 		final Drawable lockDisabledWhite = view.getResources().getDrawable(R.drawable.lock_disabled_white);
 		lockDisabled = lockDisabledNormal;
 		lockEnabled = lockEnabledNormal;
-		final ImageViewWidget lockView = new ImageViewWidget(view.getContext()) {
-			private boolean nightMode;
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				if(nightMode != this.nightMode) {
-					this.nightMode = nightMode;
-					lockDisabled = drawSettings.isNightMode() ? lockDisabledWhite : lockDisabledNormal;
-					lockEnabled = drawSettings.isNightMode() ? lockEnabledWhite : lockEnabledNormal;
-					setImageDrawable(isScreenLocked ? lockEnabled : lockDisabled);
-					return true;
-				}
-				return false;
-			}
-		};
+		final ImageView lockView = null;
+//		final ImageViewWidget lockView = new ImageViewWidget(view.getContext()) {
+//			private boolean nightMode;
+//			@Override
+//			public boolean updateInfo(DrawSettings drawSettings) {
+//				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+//				if(nightMode != this.nightMode) {
+//					this.nightMode = nightMode;
+//					lockDisabled = drawSettings.isNightMode() ? lockDisabledWhite : lockDisabledNormal;
+//					lockEnabled = drawSettings.isNightMode() ? lockEnabledWhite : lockEnabledNormal;
+//					setImageDrawable(isScreenLocked ? lockEnabled : lockDisabled);
+//					return true;
+//				}
+//				return false;
+//			}
+//		};
 		
 		if (isScreenLocked) {
 			map.getMapViewTrackingUtilities().backToLocationImpl();
@@ -279,16 +234,17 @@ public class MapInfoWidgetsFactory {
 
 			private void blinkIcon() {
 				lockView.setBackgroundDrawable(lockDisabled);
-				view.getView().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						lockView.setBackgroundDrawable(lockEnabled);
-					}
-				}, 300);
+				// TODO!
+//				map.postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						lockView.setBackgroundDrawable(lockEnabled);
+//					}
+//				}, 300);
 			}
 
 		});
-		final FrameLayout parent = (FrameLayout) view.getParent();
+		final FrameLayout parent = null; // TODO 
 		lockView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -306,170 +262,166 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		if(isScreenLocked){
-			map.addLockView(transparentLockView);
+			// TODO
+//			map.addLockView(transparentLockView);
 		}
 		return lockView;
 	}
 	
 	
-	public ImageViewWidget createCompassView(final MapActivity map){
-		final OsmandMapTileView view = map.getMapView();
-		final OsmandApplication app = map.getMyApplication();
-		final Drawable compassNiu = map.getResources().getDrawable(R.drawable.map_compass_niu);
-		final Drawable compassNiuWhite = map.getResources().getDrawable(R.drawable.map_compass_niu_white);
-		final Drawable compassBearing = map.getResources().getDrawable(R.drawable.map_compass_bearing);
-		final Drawable compassBearingWhite = map.getResources().getDrawable(R.drawable.map_compass_bearing_white);
-		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass);
-		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.map_compass_white);
-		final int mw = (int) compass.getMinimumWidth() ;
-		final int mh = (int) compass.getMinimumHeight() ;
-		ImageViewWidget compassView = new ImageViewWidget(map) {
-			private float cachedRotate = 0;
-			private int cachedRotateMap = 0;
-			private boolean nm;
-			@Override
-			protected void onDraw(Canvas canvas) {
-				canvas.save();
-				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
-				getDrawable().draw(canvas);
-				canvas.restore();
-			}
-		
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-				if(nightMode != this.nm) {
-					this.nm = nightMode;
-					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-						setImageDrawable(nightMode ? compassNiuWhite : compassNiu);
-					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-						setImageDrawable(nightMode ? compassBearingWhite : compassBearing);
-					} else {
-						setImageDrawable(nightMode ? compassWhite : compass);
-					}
-					return true;
-				}
-				if(view.getRotate() != cachedRotate) {
-					cachedRotate = view.getRotate();
-					invalidate();
-					return true;
-				}
-				if(app.getSettings().ROTATE_MAP.get() != cachedRotateMap) {
-					cachedRotateMap = app.getSettings().ROTATE_MAP.get();
-					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-						setImageDrawable(drawSettings.isNightMode() ? compassNiuWhite : compassNiu);
-					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-						setImageDrawable(drawSettings.isNightMode() ? compassBearingWhite : compassBearing);
-					} else {
-						setImageDrawable(drawSettings.isNightMode() ? compassWhite : compass);
-					}
-					return true;
-				}
-				return false;
-			}
-		};
-		compassView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().switchRotateMapMode();
-			}
-		});
-		if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-			compassView.setImageDrawable(compassNiu);
-		} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-			compassView.setImageDrawable(compassBearing);
-		} else {
-			compassView.setImageDrawable(compass);
-		}
-		return compassView;
-	}
-	
-	public TopTextView createStreetView(OsmandApplication app, MapActivity map, Paint paintText){
-		return new TopTextView(app, map, paintText);
-	}
-	
-	public class TopTextView extends TextView implements UpdateableWidget {
+	public static class TopTextView   {
 		private final RoutingHelper routingHelper;
 		private final MapActivity map;
-		private int shadowColor = Color.WHITE;
+		private View topBar;
+		private TextView addressText;
 		private OsmAndLocationProvider locationProvider;
-		private Paint paintText;
+		private WaypointHelper waypointHelper;
+		private OsmandSettings settings;
+		private View waypointInfoBar;
+		private LocationPointWrapper lastPoint;
+		private TurnDrawable turnDrawable;
 
-		public TopTextView(OsmandApplication app, MapActivity map, Paint paintText) {
-			super(map);
-			this.paintText = paintText;
+		public TopTextView(OsmandApplication app, MapActivity map) {
+			topBar = map.findViewById(R.id.map_top_bar);
+			addressText = (TextView) map.findViewById(R.id.map_address_text);
+			waypointInfoBar = map.findViewById(R.id.waypoint_info_bar);
 			this.routingHelper = app.getRoutingHelper();
 			locationProvider = app.getLocationProvider();
 			this.map = map;
-			getPaint().setTextAlign(Align.CENTER);
-			setTextColor(Color.BLACK);
+			settings = app.getSettings();
+			waypointHelper = app.getWaypointHelper();
+			updateVisibility(false);
+			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map);
+		}
+		
+		public boolean updateVisibility(boolean visible) {
+			return updateVisibility(topBar, visible);
+		}
+		
+		public boolean updateVisibility(View v, boolean visible) {
+			if (visible != (v.getVisibility() == View.VISIBLE)) {
+				if (visible) {
+					v.setVisibility(View.VISIBLE);
+				} else {
+					v.setVisibility(View.GONE);
+				}
+				v.invalidate();
+				return true;
+			}
+			return false;
+		}
+		
+		public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
+			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
+			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
+					textColor, textShadowColor, bold, rad);
+		}
+		
+		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
+			tv.setTextColor(textColor);
+			tv.setShadowLayer(rad, 0, 0, textShadowColor);
+			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 		}
 
-		@Override
-		protected void onDraw(Canvas canvas) {
-			getPaint().setColor(paintText.getColor());
-			getPaint().setFakeBoldText(paintText.isFakeBoldText());
-			ShadowText.draw(getText().toString(), canvas, getWidth() / 2, getHeight() - 4 * scaleCoefficient,
-					getPaint(), shadowColor);
-		}
-		
-		public void setShadowColor(int shadowColor) {
-			this.shadowColor = shadowColor;
-		}
-		
-		@Override
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
+			TurnType[] type = new TurnType[1];
+			boolean showNextTurn = false;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName();
+					text = routingHelper.getCurrentName(type);
 				} else {
 					int di = MapRouteInfoControl.getDirectionInfo();
 					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
+						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = "\u2566 " + RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
+						type[0] = next.getTurnType();
+						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
+//						if(next.distance > 0) {
+//							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
+//						}
+						
 					}
 				}
-			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			} else if(settings.getApplicationMode() != ApplicationMode.DEFAULT &&
+					map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
 				}
 			}
-			if(text == null) {
-				text = "";
-			}
-			if (!text.equals(getText().toString())) {
-				TextPaint pp = new TextPaint(getPaint());
-				if (!text.equals("")) {
-					pp.setTextSize(20 * scaleCoefficient);
-					float ts = pp.measureText(text);
-					int wth = getWidth();
-					while (ts > wth && pp.getTextSize() > (16 * scaleCoefficient)) {
-						pp.setTextSize(pp.getTextSize() - 1);
-						ts = pp.measureText(text);
-					}
-					boolean dots = false;
-					while (ts > wth) {
-						dots = true;
-						ts = pp.measureText(text);
-						text = text.substring(0, text.length() - 2);
-					}
-					if (dots) {
-						text += "..";
-					}
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
-					setContentDescription(text);
-				} else {
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
-					setContentDescription(getResources().getString(R.string.map_widget_top_text));
+			if(!showNextTurn && updateWaypoint()) {
+				updateVisibility(true);
+				updateVisibility(addressText, false);
+			} else if(text == null) {
+				updateVisibility(false);
+			} else {
+				updateVisibility(true);
+				updateVisibility(waypointInfoBar, false);
+				updateVisibility(addressText, true);
+				boolean update = turnDrawable.setTurnType(type[0]);
+				int h = addressText.getHeight() / 4 * 3;
+				if (h != turnDrawable.getBounds().bottom) {
+					turnDrawable.setBounds(0, 0, h, h);
 				}
-				setText(text);
-				invalidate();
-				return true;
+				if (update) {
+					if (type[0] != null) {
+						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+					} else {
+						addressText.setCompoundDrawables(null, null, null, null);
+					}
+				}
+				if (!text.equals(addressText.getText().toString())) {
+					if (!text.equals("")) {
+						topBar.setContentDescription(text);
+					} else {
+						topBar.setContentDescription(map.getResources().getString(R.string.map_widget_top_text));
+					}
+					addressText.setText(text);
+					return true;
+				}
 			}
 			return false;
+		}
+		
+		public boolean updateWaypoint() {
+			lastPoint = waypointHelper.getMostImportantLocationPoint(null);
+			if (lastPoint == null) {
+				topBar.setOnClickListener(null);
+				updateVisibility(waypointInfoBar, false);
+				return false;
+			} else {
+				updateVisibility(addressText, false);
+				boolean updated = updateVisibility(waypointInfoBar, true);
+				// pass top bar to make it clickable
+				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 
+						lastPoint, null);
+				if (updated) {
+					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
+					View btnN = waypointInfoBar.findViewById(R.id.waypoint_close);
+					all.setImageDrawable(map.getMyApplication().getIconsCache().
+							getContentIcon(R.drawable.ic_overflow_menu_light));
+					all.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							map.getMapActions().showWaypointsDialog(false);
+						}
+					});
+					btnN.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							waypointHelper.removeVisibleLocationPoint(lastPoint);
+							map.refreshMap();
+						}
+					});
+				}
+				return true;
+			}
+		}
+
+		public void setBackgroundResource(int boxTop) {
+			topBar.setBackgroundResource(boxTop);
 		}
 
 	}

@@ -20,7 +20,6 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -28,10 +27,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -39,17 +35,14 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MapRouteInfoControl extends MapControls implements IRouteInformationListener {
-	private Button infoButton;
+public class MapRouteInfoControl implements IRouteInformationListener {
 	public static int directionInfo = -1;
 	public static boolean controlVisible = false;
-	
 	private final ContextMenuLayer contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
@@ -59,17 +52,17 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private boolean selectFromMapForTarget;
 
 	private boolean showDialog = false;
+	private MapActivity mapActivity;
 
 	public MapRouteInfoControl(ContextMenuLayer contextMenu,
-			MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
-		super(mapActivity, showUIHandler, scaleCoefficient);
+			MapActivity mapActivity) {
 		this.contextMenu = contextMenu;
+		this.mapActivity = mapActivity;
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
 	}
 	
-	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if(selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -83,30 +76,31 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			showDialog();
 			return true;
 		}
-		return super.onSingleTap(point, tileBox);
+		return false;
 	}
 	
-	@Override
-	public void showControls(FrameLayout parent) {
-		infoButton = addButton(parent, R.string.route_info, R.drawable.map_btn_signpost);
-		if (showDialog){
-			if (getTargets().getPointToNavigate() == null){
-				showDialog();
-			}
-			showDialog = false;
-		}
-		controlVisible = true;
-		infoButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				notifyClicked();
-				if(dialog != null) {
-					hideDialog();
-				} else {
+	public void setVisible(boolean visible) {
+		if(visible) {
+			if (showDialog){
+				if (getTargets().getPointToNavigate() == null){
 					showDialog();
 				}
+				showDialog = false;
 			}
-		});
+			controlVisible = true;
+		} else {
+			hideDialog();
+			controlVisible = false;
+		}
+	}
+	
+	
+	public void showHideDialog() {
+		if(dialog != null) {
+			hideDialog();
+		} else {
+			showDialog();
+		}
 	}
 	
 	private Dialog createDialog() {
@@ -137,7 +131,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
 		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		lp.gravity = Gravity.BOTTOM;
-		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
+		// TODO
+//		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.getWindow().setAttributes(lp);
@@ -252,26 +247,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	public static boolean isControlVisible() {
 		return controlVisible;
 	}
-	
-	@Override
-	public void hideControls(FrameLayout layout) {
-		removeButton(layout, infoButton);
-		hideDialog();
-		controlVisible = false;
-	}
-
-	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-	}
-	
-	public int getWidth() {
-		if (width == 0) {
-			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_info);
-			width = buttonDrawable.getMinimumWidth();
-		}
-		return width ;
-	}
-	
 	
 	private void attachListeners(final View mainView) {
 		final OsmandApplication ctx = mapActivity.getMyApplication();
@@ -449,11 +424,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	public void showDialog() {
 		dialog = createDialog();
 		dialog.show();
-		infoButton.setBackgroundResource(R.drawable.map_btn_signpost_p);
 		dialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dlg) {
-				infoButton.setBackgroundResource(R.drawable.map_btn_signpost);
 				dialog = null;
 			}
 		});
@@ -463,7 +436,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		if (dialog != null) {
 			dialog.hide();
 			dialog = null;
-			infoButton.setBackgroundResource(R.drawable.map_btn_signpost);
 		}
 	}
 

@@ -151,7 +151,6 @@ public class OsmAndAppCustomization {
 		return osmandSettings.getExternalStorageDirectory();
 	}
 
-	public boolean showNavigationControls() { return true;}
 
 	public boolean onlyTourDownload() {
 		return false;

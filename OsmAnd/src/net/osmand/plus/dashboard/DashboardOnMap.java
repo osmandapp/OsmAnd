@@ -18,6 +18,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.software.shell.fab.ActionButton;
@@ -56,7 +57,7 @@ public class DashboardOnMap {
 	private static final int CONFIGURE_SCREEN_ID = 3;
 	private static final int SETTINGS_ID = 4;
 	private MapActivity mapActivity;
-	ActionButton actionButton;
+	private ActionButton actionButton;
 	private FrameLayout dashboardView;
 	
 	private boolean visible = false;
@@ -69,6 +70,7 @@ public class DashboardOnMap {
 	private float mapRotation;
 	private boolean inLocationUpdate = false;
 	private boolean saveBackAction;
+	private ImageView switchButton;
 
 
 	public DashboardOnMap(MapActivity ma) {
@@ -78,9 +80,11 @@ public class DashboardOnMap {
 
 	public void createDashboardView() {
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
-		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
-		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));
+//		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
+//		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//				ViewGroup.LayoutParams.MATCH_PARENT));
+//		((FrameLayout) mapActivity.findViewById(R.id.MapHudButtonsOverlay)).addView(dashboardView);
+		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,18 +93,18 @@ public class DashboardOnMap {
 		};
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
-		((FrameLayout) mapActivity.findViewById(R.id.ParentLayout)).addView(dashboardView);
 		
-		dashboardView.findViewById(R.id.map_layers_button).setOnClickListener(new View.OnClickListener() {
+		
+		switchButton =  (ImageView) dashboardView.findViewById(R.id.map_menu_button);
+		switchButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				setDashboardVisibility(false);
-				mapActivity.getMapActions().prepareConfigureMap();
+				mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 				mapActivity.getMapActions().toggleDrawer();				
 			}
 		});
-
 
 		actionButton = new ActionButton(mapActivity);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -177,20 +181,19 @@ public class DashboardOnMap {
 			actionButton.show();
 			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
+			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
+					R.color.icon_color_light));
 			
 			mapActivity.getMapActions().disableDrawer();
-			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.GONE);
-			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.GONE);
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			updateLocation(true, true, false);
 			
 		} else {
 			mapActivity.getMapActions().enableDrawer();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent));
-			mapActivity.findViewById(R.id.MapInfoControls).setVisibility(View.VISIBLE);
-			mapActivity.findViewById(R.id.MapButtons).setVisibility(View.VISIBLE);
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 			actionButton.hide();
-			//fabButton.hideFloatingActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
 					df.get().onCloseDash();
@@ -297,6 +300,7 @@ public class DashboardOnMap {
 		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
 		} else {
+			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
@@ -305,7 +309,7 @@ public class DashboardOnMap {
 
 	// To animate view slide out from right to left
 	private void open(View view){
-		TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.ParentLayout).getWidth(),0,0,0);
+		TranslateAnimation animate = new TranslateAnimation(-mapActivity.findViewById(R.id.MapHudButtonsOverlay).getWidth(),0,0,0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		view.startAnimation(animate);
@@ -313,7 +317,7 @@ public class DashboardOnMap {
 	}
 
 	private void hide(View view) {
-		TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.ParentLayout).getWidth(), 0, 0);
+		TranslateAnimation animate = new TranslateAnimation(0, -mapActivity.findViewById(R.id.MapHudButtonsOverlay).getWidth(), 0, 0);
 		animate.setDuration(500);
 		animate.setFillAfter(true);
 		animate.setAnimationListener(new AnimationListener() {

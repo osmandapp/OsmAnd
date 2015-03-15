@@ -467,6 +467,7 @@ public class ResourceManager {
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 					context.getPoiFilters().updateFilters(false);
+					copyRegionsBoundaries();
 				} catch (SQLiteException e) {
 					log.error(e.getMessage(), e);
 				} catch (IOException e) {
@@ -477,6 +478,18 @@ public class ResourceManager {
 			}
 		}
 		return Collections.emptyList();
+	}
+	
+	private void copyRegionsBoundaries() {
+		try {
+			File file = context.getAppPath("regions.ocbf");
+			if (file != null) {
+				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), new FileOutputStream(
+						file));
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 	}
 
 	private final static String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";

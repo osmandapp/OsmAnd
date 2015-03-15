@@ -20,9 +20,9 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -660,7 +660,7 @@ public class RoutingHelper {
 		return false;
 	}
 	
-	public synchronized String getCurrentName(){
+	public synchronized String getCurrentName(TurnType[] next){
 		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 		Location l = lastFixedLocation;
 		float speed = 0;
@@ -672,14 +672,17 @@ public class RoutingHelper {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-			return "\u2566 " + formatStreetName(nm, rf, dn);
+			if(next != null) {
+				next[0] = n.directionInfo.getTurnType();
+			}
+			return formatStreetName(nm, rf, dn);
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName();
 			String rf = rs.getObject().getRef();
 			String dn = rs.getObject().getDestinationName();
-			return "\u21E7 " + formatStreetName(nm, rf, dn);
+			return formatStreetName(nm, rf, dn);
 		}
 		return null;
 	}
@@ -822,7 +825,7 @@ public class RoutingHelper {
 			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
-			if (previousRoute == null && params.type == RouteService.OSMAND) {
+			if (params.type == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress(params.calculationProgress);
 			}

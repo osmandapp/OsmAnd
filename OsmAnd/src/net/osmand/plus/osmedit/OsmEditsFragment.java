@@ -72,7 +72,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		dbpoi = new OpenstreetmapsDbHelper(getActivity());
 		dbbug = new OsmBugsDbHelper(getActivity());
 
-		remotepoi = new OpenstreetmapRemoteUtil(getActivity(), getActivity().getWindow().getDecorView());
+		remotepoi = new OpenstreetmapRemoteUtil(getActivity());
 		remotebug = new OsmBugsRemoteUtil(getMyApplication());
 
 		return view;

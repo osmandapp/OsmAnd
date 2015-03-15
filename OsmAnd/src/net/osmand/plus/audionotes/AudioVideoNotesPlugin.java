@@ -31,14 +31,13 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
@@ -518,10 +517,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			recordControl = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
+			recordControl = new TextInfoWidget(activity);
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive, R.drawable.widget_icon_av_inactive,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}
@@ -948,10 +947,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-		final StackWidgetView par = mil.getRightStack();
-		final boolean contains = par.getAllViews().contains(recordControl);
+		final boolean contains = recordControl.isVisible();
 		if (!contains) {
-			par.addStackView(recordControl);
+			recordControl.setExplicitlyVisible(true);
+			mil.recreateControls();
 			mapActivity.getMapView().refreshMap(true);
 		}
 		AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
@@ -959,7 +958,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(View v) {
 				if (!contains) {
-					par.removeView(recordControl);
+					recordControl.setExplicitlyVisible(false);
+					mil.recreateControls();
 				}
 				stopRecording(mapActivity);
 				SHOW_RECORDINGS.set(true);

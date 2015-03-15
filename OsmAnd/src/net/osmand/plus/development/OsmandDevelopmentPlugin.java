@@ -53,7 +53,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final OsmandMapTileView mv = activity.getMapView();
 		if (mapInfoLayer != null) {
-			fps = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText()) {
+			fps = new TextInfoWidget(activity) {
 				@Override
 				public boolean updateInfo(DrawSettings drawSettings) {
 					if(!mv.isMeasureFPS()) {
@@ -65,7 +65,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					return true;
 				}
 			};
-			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, R.drawable.widget_no_icon, R.drawable.widget_no_icon,
+			mapInfoLayer.registerSideWidget(fps, R.drawable.widget_no_icon, R.drawable.widget_no_icon,
 					R.string.map_widget_fps_info, "fps", false, 30);
 			mapInfoLayer.recreateControls();
 		}

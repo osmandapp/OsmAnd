@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -45,7 +46,7 @@ public class DashSimulateFragment extends DashBaseFragment  {
 		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);
 		tracks.addView(item);
 		final OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
-		((ImageButton) item.findViewById(R.id.stop)).setOnClickListener(new View.OnClickListener() {
+		OnClickListener listener = new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -54,7 +55,9 @@ public class DashSimulateFragment extends DashBaseFragment  {
 					dashboard.setDashboardVisibility(false);
 				}
 			}
-		});
+		};
+		item.setOnClickListener(listener);
+		((ImageButton) item.findViewById(R.id.stop)).setOnClickListener(listener);
 		((TextView) item.findViewById(R.id.name)).setText(R.string.animate_route);
 		item.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 

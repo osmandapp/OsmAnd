@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -9,44 +8,23 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.Context;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
 
 public class MapWidgetRegistry {
 	
-	public static final int LEFT_CONTROL = -1;
-	public static final int RIGHT_CONTROL = 1;
-	public static final int MAIN_CONTROL = 0;
-	
-	private Set<MapWidgetRegInfo> appearanceWidgets = new LinkedHashSet<MapWidgetRegistry.MapWidgetRegInfo>();
 	private Set<MapWidgetRegInfo> left = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
 	private Set<MapWidgetRegInfo> right = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
-	private Set<MapWidgetRegInfo> top = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>(new Comparator<MapWidgetRegInfo>() {
-		@Override
-		public int compare(MapWidgetRegInfo object1, MapWidgetRegInfo object2) {
-			if (object1.position != object2.position) {
-				if(object1.position == LEFT_CONTROL) {
-					return -1;
-				} else if(object1.position == RIGHT_CONTROL) {
-					return 1;
-				} else {
-					return object2.position == LEFT_CONTROL ? 1 : -1;
-				}
-			}
-			int cmp = object1.priorityOrder - object2.priorityOrder;
-			if(object1.position == RIGHT_CONTROL) {
-				cmp = -cmp;
-			}
-			return cmp;
-		}
-	});
 	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<ApplicationMode, Set<String>>();
 	private final OsmandSettings settings;
 			
@@ -64,214 +42,157 @@ public class MapWidgetRegistry {
                 Collections.addAll(set, mpf.split(";"));
 			}
 		}
-		
 	}
 	
-	public MapWidgetRegInfo registerAppearanceWidget(int drawableDark,int drawableLight, int messageId, String key,
-			OsmandPreference<?> pref) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.key = key;
-		ii.preference = pref;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
-		ii.visibleCollapsible = null;
-		ii.drawableDark = drawableDark;
-		ii.drawableLight = drawableLight;
-		ii.messageId = messageId;
-		this.appearanceWidgets.add(ii);
-		return ii;
+	public void populateStackControl(LinearLayout stack, 
+			ApplicationMode mode, boolean left, boolean expanded) {
+		Set<MapWidgetRegInfo> s = left ? this.left : this.right;
+		for (MapWidgetRegInfo r : s) {
+			if (r.visible(mode) || r.widget.isExplicitlyVisible()) {
+				stack.addView(r.widget.getView());
+			}
+		}
+		if (expanded) {
+			for (MapWidgetRegInfo r : s) {
+				if (r.visibleCollapsed(mode) && 
+						!r.widget.isExplicitlyVisible()) {
+					stack.addView(r.widget.getView());
+				}
+			}
+		}
+	}
+	
+	public boolean hasCollapsibles(ApplicationMode mode) {
+		for (MapWidgetRegInfo r : left) {
+			if (r.visibleCollapsed(mode)) {
+				return true;
+			}
+		}
+		for (MapWidgetRegInfo r : right) {
+			if (r.visibleCollapsed(mode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
-	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark, int drawableLight, int messageId, String key,
-			int left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.key = key;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>();
-		ii.visibleCollapsible = null;
+	public void updateInfo(ApplicationMode mode, DrawSettings drawSettings, boolean expanded) {
+		update(mode, drawSettings, expanded, left);
+		update(mode, drawSettings, expanded, right);
+	}
+
+	private void update(ApplicationMode mode, DrawSettings drawSettings, boolean expanded, Set<MapWidgetRegInfo> l) {
+		for (MapWidgetRegInfo r : l) {
+			if (r.visible(mode) || (r.visibleCollapsed(mode) && expanded)) {
+				r.widget.updateInfo(drawSettings);
+			}
+		}
+	}
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableDark,int drawableLight, 
+			int messageId, String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableDark, drawableLight, 
+				messageId, priorityOrder, left);
 		for (ApplicationMode ms : ApplicationMode.values(settings)) {
+			boolean collapse = ms.isWidgetCollapsible(key);
 			boolean def = ms.isWidgetVisible(key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
 				if (set.contains(key)) {
 					def = true;
+					collapse = false;
 				} else if (set.contains("-" + key)) {
 					def = false;
+					collapse = false;
+				} else if (set.contains("+" + key)) {
+					def = false;
+					collapse = true;
 				}
 			}
 			if (def) {
 				ii.visibleModes.add(ms);
-			}
-		}
-		if (m != null)
-			m.setContentDescription(m.getContext().getString(messageId));
-		ii.drawableDark = drawableDark;
-		ii.drawableLight = drawableLight;
-		ii.messageId = messageId;
-		ii.m = m;
-		ii.priorityOrder = priorityOrder;
-		ii.position = left;
-		this.top.add(ii);
-		return ii;
-	}
-	
-	
-	
-	public void registerSideWidget(BaseMapWidget m, int drawableDark,int drawableLight, int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.key = key;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
-		ii.visibleCollapsible = new LinkedHashSet<ApplicationMode>();
-		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
-			boolean collapse = ms.isWidgetCollapsible(key);
-			boolean def = ms.isWidgetVisible(key);
-			Set<String> set = visibleElementsFromSettings.get(ms);
-			if(set != null) {
-				if (set.contains(key)) {
-					def = true;
-					collapse = false;
-				} else if (set.contains("-" + key)) {
-					def = false;
-					collapse = false;
-				} else if(set.contains("+"+key)){
-					def = false;
-					collapse = true;	
-				}
-			}
-			if(def){
-				ii.visibleModes.add(ms);
-			} else if(collapse) {
+			} else if (collapse) {
 				ii.visibleCollapsible.add(ms);
 			}
 		}
-		if (m != null)
-			m.setContentTitle(m.getContext().getString(messageId));
-		ii.drawableDark = drawableDark;
-		ii.drawableLight = drawableLight;
-		ii.messageId = messageId;
-		ii.m = m;
-		ii.priorityOrder = priorityOrder;
+		if (widget != null) {
+			widget.setContentTitle(messageId);
+		}
 		if(left) {
 			this.left.add(ii);
 		} else {
 			this.right.add(ii);
 		}
+		return ii;
 	}
 	
 	private void restoreModes(Set<String> set, Set<MapWidgetRegInfo> mi, ApplicationMode mode) {
 		for (MapWidgetRegInfo m : mi) {
-			if (m.preference == null) {
-				if (m.visibleModes.contains(mode)) {
-					set.add(m.key);
-				} else if (m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
-					set.add("+" + m.key);
-				} else {
-					set.add("-" + m.key);
-				}
+			if (m.visibleModes.contains(mode)) {
+				set.add(m.key);
+			} else if (m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
+				set.add("+" + m.key);
+			} else {
+				set.add("-" + m.key);
 			}
 		}
 	}
 	
 	public void changeVisibility(MapWidgetRegInfo m) {
-		boolean selecteable = m.selecteable();
-		if (selecteable) {
-			ApplicationMode mode = settings.APPLICATION_MODE.get();
-			boolean visible = m.visible(mode);
-			boolean collapseEnabled = m.collapseEnabled(mode);
-			boolean collapse = m.visibleCollapsed(mode);
-			if (this.visibleElementsFromSettings.get(mode) == null) {
-				LinkedHashSet<String> set = new LinkedHashSet<String>();
-				restoreModes(set, left, mode);
-				restoreModes(set, right, mode);
-				restoreModes(set, top, mode);
-				this.visibleElementsFromSettings.put(mode, set);
-			}
-			// clear everything
-			this.visibleElementsFromSettings.get(mode).remove(m.key);
-			this.visibleElementsFromSettings.get(mode).remove("+" + m.key);
-			this.visibleElementsFromSettings.get(mode).remove("-" + m.key);
-			m.visibleModes.remove(mode);
-			if (m.visibleCollapsible != null) {
-				m.visibleCollapsible.remove(mode);
-			}
-			if (visible || collapse) {
-				if (collapseEnabled && !collapse) {
-					m.visibleCollapsible.add(mode);
-					this.visibleElementsFromSettings.get(mode).add("+" + m.key);
-				} else {
-					this.visibleElementsFromSettings.get(mode).add("-" + m.key);
-				}
+		ApplicationMode mode = settings.APPLICATION_MODE.get();
+		boolean visible = m.visible(mode);
+		boolean collapse = m.visibleCollapsed(mode);
+		defineDefaultSettingsElement(mode);
+		// clear everything
+		this.visibleElementsFromSettings.get(mode).remove(m.key);
+		this.visibleElementsFromSettings.get(mode).remove("+" + m.key);
+		this.visibleElementsFromSettings.get(mode).remove("-" + m.key);
+		m.visibleModes.remove(mode);
+		m.visibleCollapsible.remove(mode);
+		if (visible || collapse) {
+			if (!collapse) {
+				m.visibleCollapsible.add(mode);
+				this.visibleElementsFromSettings.get(mode).add("+" + m.key);
 			} else {
-				m.visibleModes.add(mode);
-				this.visibleElementsFromSettings.get(mode).add("" + m.key);
+				this.visibleElementsFromSettings.get(mode).add("-" + m.key);
 			}
-			StringBuilder bs = new StringBuilder();
-			for (String ks : this.visibleElementsFromSettings.get(mode)) {
-				bs.append(ks).append(";");
-			}
-			settings.MAP_INFO_CONTROLS.set(bs.toString());
+		} else {
+			m.visibleModes.add(mode);
+			this.visibleElementsFromSettings.get(mode).add("" + m.key);
 		}
-		if(m.stateChangeListener != null) {
+		saveVisibleElementsToSettings(mode);
+		if (m.stateChangeListener != null) {
 			m.stateChangeListener.run();
 		}
 	}
-	
-	public Set<MapWidgetRegInfo> getLeft() {
-		return left;
-	}
-	
-	public Set<MapWidgetRegInfo> getRight() {
-		return right;
-	}
-	
-	public Set<MapWidgetRegInfo> getTop() {
-		return top;
-	}
-	
-	public Set<MapWidgetRegInfo> getAppearanceWidgets() {
-		return appearanceWidgets;
-	}
-	
-	public void populateStackControl(StackWidgetView stack, OsmandMapTileView v, boolean left){
-		ApplicationMode appMode = settings.getApplicationMode();
-		Set<MapWidgetRegInfo> st = left ? this.left : this.right;
-		for (MapWidgetRegInfo r : st) {
-			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
-				stack.addCollapsedView((BaseMapWidget) r.m);
-			} else if (r.visibleModes.contains(appMode)) {
-				stack.addStackView((BaseMapWidget) r.m);
-			}
+
+	private void defineDefaultSettingsElement(ApplicationMode mode) {
+		if (this.visibleElementsFromSettings.get(mode) == null) {
+			LinkedHashSet<String> set = new LinkedHashSet<String>();
+			restoreModes(set, left, mode);
+			restoreModes(set, right, mode);
+			this.visibleElementsFromSettings.put(mode, set);
 		}
 	}
-	
-	public void populateStatusBar(ViewGroup statusBar){
-		ApplicationMode appMode = settings.getApplicationMode();
-		for (MapWidgetRegInfo r : top) {
-			boolean main = r.position == MAIN_CONTROL;
-			if (r.visibleModes.contains(appMode)) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, main? 1 : 0);
-				statusBar.addView((View) r.m, params);
-			} else if (main) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
-				statusBar.addView(new TextView(((View) r.m).getContext()), params);
-			}
+
+	private void saveVisibleElementsToSettings(ApplicationMode mode) {
+		StringBuilder bs = new StringBuilder();
+		for (String ks : this.visibleElementsFromSettings.get(mode)) {
+			bs.append(ks).append(";");
 		}
+		settings.MAP_INFO_CONTROLS.set(bs.toString());
 	}
+	
 	
 	private void resetDefault(ApplicationMode mode, Set<MapWidgetRegInfo> set ){
-		for(MapWidgetRegInfo ri : set) {
-			if(ri.preference != null) {
-				ri.preference.resetToDefault();
-			} else {
-				if (ri.visibleCollapsible != null) {
-					ri.visibleCollapsible.remove(mode);
-				}
-				ri.visibleModes.remove(mode);
-				if (mode.isWidgetVisible(ri.key)) {
-					if (mode.isWidgetCollapsible(ri.key)) {
-						ri.visibleCollapsible.add(mode);
-					} else {
-						ri.visibleModes.add(mode);
-					}
+		for (MapWidgetRegInfo ri : set) {
+			ri.visibleCollapsible.remove(mode);
+			ri.visibleModes.remove(mode);
+			if (mode.isWidgetVisible(ri.key)) {
+				if (mode.isWidgetCollapsible(ri.key)) {
+					ri.visibleCollapsible.add(mode);
+				} else {
+					ri.visibleModes.add(mode);
 				}
 			}
 		}
@@ -281,11 +202,50 @@ public class MapWidgetRegistry {
 		ApplicationMode appMode = settings.getApplicationMode();
 		resetDefault(appMode, left);
 		resetDefault(appMode, right);
-		resetDefault(appMode, top);
-		resetDefault(appMode, appearanceWidgets);
+		resetDefaultAppearance(appMode);
 		this.visibleElementsFromSettings.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");
 	}
+	
+	private void resetDefaultAppearance(ApplicationMode appMode) {
+//		settings.SHOW_RULER.resetToDefault();		
+		settings.SHOW_DESTINATION_ARROW.resetToDefault();
+		settings.TRANSPARENT_MAP_THEME.resetToDefault();
+		settings.CENTER_POSITION_ON_MAP.resetToDefault();
+	}
+	
+	public void addControlsAppearance(final MapInfoLayer mil, ContextMenuAdapter cm, ApplicationMode mode) {
+//		addControlId(mil, cm, R.string.map_widget_show_ruler, settings.SHOW_RULER);
+		addControlId(mil, cm, R.string.map_widget_show_destination_arrow, settings.SHOW_DESTINATION_ARROW);
+		addControlId(mil, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
+		addControlId(mil, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
+	}
+
+	private void addControlId(final MapInfoLayer mil, ContextMenuAdapter cm, int stringId, OsmandPreference<Boolean> pref) {
+		cm.item(stringId).selected( pref.get() ? 1 : 0)
+//			.icons(r.drawableDark, r.drawableLight)
+			.listen(new ApearanceOnContextMenuClick(pref, mil.getMapActivity())).reg();
+	}
+	
+	class ApearanceOnContextMenuClick implements OnContextMenuClick {
+		
+		private MapActivity map;
+		private OsmandPreference<Boolean> pref;
+
+		public ApearanceOnContextMenuClick(OsmandPreference<Boolean> pref, MapActivity map) {
+			this.pref = pref;
+			this.map = map;
+		}
+		
+		@Override
+		public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
+			pref.set(!pref.get());
+			map.updateApplicationModeSettings();
+			a.notifyDataSetInvalidated();
+			return false;
+		}
+	};	
+
 	
 	public static boolean distChanged(int oldDist, int dist){
 		if(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
@@ -294,50 +254,87 @@ public class MapWidgetRegistry {
 		return true;
 	}
 	
+
+	public void addControls(MapInfoLayer mil, ContextMenuAdapter cm, ApplicationMode mode) {
+		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(mil, cm, right, mode);
+		if(mode != ApplicationMode.DEFAULT) {
+			cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+			addControls(mil, cm, left, mode);
+		}
+		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControlsAppearance(mil, cm, mode);		
+	}
+	
+	public String getText(Context ctx, final ApplicationMode mode, final MapWidgetRegInfo r) {
+		return (r.visibleCollapsed(mode)? " + " : "  ") + ctx.getString(r.messageId);
+	}
+	
+	public Set<MapWidgetRegInfo> getRight() {
+		return right;
+	}
+	
+	public Set<MapWidgetRegInfo> getLeft() {
+		return left;
+	}
+	
+	private void addControls(final MapInfoLayer mil, final ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
+		for(final MapWidgetRegInfo r : top){
+			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
+				.icons(r.drawableDark, r.drawableLight).listen(new OnContextMenuClick() {
+				
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
+					changeVisibility(r);
+					mil.recreateControls();
+					adapter.setItemName(pos, getText(mil.getMapActivity(), mode, r));
+					adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0);
+					a.notifyDataSetInvalidated();
+					return false;
+				}
+			}).reg();
+			adapter.setItemName(adapter.length() - 1, getText(mil.getMapActivity(), mode, r));
+		}
+	}
+
+
+
+	
 	
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
-		public View m;
-		public int drawableDark;
-		public int drawableLight;
-		public int messageId;
-		private String key;
-		private int position;
-		private Set<ApplicationMode> visibleModes;
-		private Set<ApplicationMode> visibleCollapsible;
-		private OsmandPreference<?> preference = null;
+		public final TextInfoWidget widget;
+		public final int drawableDark;
+		public final int drawableLight;
+		public final int messageId;
+		public final String key;
+		public final boolean left;
+		public final int priorityOrder;
+		private final Set<ApplicationMode> visibleCollapsible = new LinkedHashSet<ApplicationMode>();
+		private final Set<ApplicationMode> visibleModes = new LinkedHashSet<ApplicationMode>();
 		private Runnable stateChangeListener = null;
-		public int priorityOrder;
+		
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableDark, int drawableLight, int messageId, int priorityOrder,
+				boolean left) {
+			this.key = key;
+			this.widget = widget;
+			this.drawableDark = drawableDark;
+			this.drawableLight = drawableLight;
+			this.messageId = messageId;
+			this.priorityOrder = priorityOrder;
+			this.left = left;
+		}
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
-			return preference == null && visibleCollapsible != null && visibleCollapsible.contains(mode);
-		}
-		
-		public boolean collapseEnabled(ApplicationMode mode){
-			return visibleCollapsible != null && preference == null;
-		}
-		
-		public boolean selecteable(){
-			return preference == null || (preference.get() instanceof Boolean);
+			return visibleCollapsible.contains(mode);
 		}
 		
 		public boolean visible(ApplicationMode mode){
-			if(preference != null) {
-				Object value = preference.getModeValue(mode);
-				if(value instanceof Boolean) {
-					return (Boolean) value;
-				}
-				return true;
-			}
 			return visibleModes.contains(mode);
 		}
 		
 		public MapWidgetRegInfo required(ApplicationMode... modes){
             Collections.addAll(visibleModes, modes);
 			return this;
-		}
-		
-		public void setPreference(CommonPreference<Boolean> blPreference) {
-			this.preference = blPreference;
 		}
 		
 		
@@ -373,4 +370,5 @@ public class MapWidgetRegistry {
 			return priorityOrder - another.priorityOrder;
 		}
 	}
+
 }

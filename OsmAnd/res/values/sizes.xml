@@ -47,10 +47,36 @@
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
-	<dimen name="map_button_size">40dp</dimen>
-	<dimen name="map_button_margin">8dp</dimen>
 	<dimen name="osmo_header_height">56dp</dimen>
-
+	<!--  map buttons -->
+	<dimen name="map_trans_seek_size">80dp</dimen>
+	<dimen name="map_widget_text_size">23sp</dimen>
+	<dimen name="map_widget_text_size_small">15sp</dimen>
+	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
+	<dimen name="map_button_text_size">18sp</dimen>
+	<dimen name="map_route_buttons_width">60dp</dimen>
+	<dimen name="map_route_buttons_height">54dp</dimen>
+	<dimen name="map_address_height">40dp</dimen>
+	<dimen name="map_button_size">48dp</dimen>
+	<dimen name="map_ruler_width">120dp</dimen>
+	<dimen name="map_ruler_bottom_margin">7dp</dimen>
+	<dimen name="map_button_shadow_width">52dp</dimen>
+	<dimen name="map_alarm_size">78dp</dimen>
+	<dimen name="map_alarm_text_size">25sp</dimen>
+	
+	<dimen name="map_alarm_bottom_margin">87dp</dimen>
+	<dimen name="map_button_shadow_height">85dp</dimen>
+	<dimen name="map_widget_icon">24dp</dimen>
+	<dimen name="map_widget_height">32dp</dimen>
+	<dimen name="map_widget_image">80dp</dimen>
+	<dimen name="map_button_spacing">15dp</dimen>
+	<dimen name="map_button_margin">4dp</dimen>
+	<dimen name="map_routing_progress_width">100dp</dimen>
+	
+	<dimen name="map_button_shadow_margin">2dp</dimen>
+	<dimen name="map_button_inset">4dp</dimen>
+	<dimen name="map_button_rect_rad">3dp</dimen>
+	<dimen name="map_button_stroke">1px</dimen>
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/widget_bg"
+    android:minWidth="100dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_left_round"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/widget_top_icon"
+        android:layout_width="@dimen/map_widget_image"
+        android:layout_height="@dimen/map_widget_image"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_action_close_light"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/map_widget_height"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/map_widget_icon"
+            android:layout_height="@dimen/map_widget_icon"
+            android:id="@+id/widget_icon"
+            android:gravity="center"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/ic_action_remove_light"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/widget_text"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
+            android:layout_weight="1"
+            android:minWidth="10dp"
+            android:maxLines="1"
+            android:shadowColor="@color/color_myloc_distance"
+            android:textColor="@color/color_black"
+            android:shadowRadius="10"
+            android:textSize="@dimen/map_widget_text_size"
+            android:text="1048" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/widget_text_small"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
+            android:layout_marginRight="4dp"
+            android:maxLines="1"
+            android:shadowColor="@color/color_myloc_distance"
+            android:textColor="@color/color_black"
+            android:shadowRadius="10"
+            android:textSize="@dimen/map_widget_text_size_small"
+            android:text="km" />
+    </LinearLayout>
+
+</LinearLayout>
