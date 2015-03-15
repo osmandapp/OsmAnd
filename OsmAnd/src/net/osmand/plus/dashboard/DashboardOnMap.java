@@ -95,7 +95,7 @@ public class DashboardOnMap {
 		dashboardView.setOnClickListener(listener);
 		
 		
-		switchButton =  (ImageView) dashboardView.findViewById(R.id.map_layers_button);
+		switchButton =  (ImageView) dashboardView.findViewById(R.id.map_menu_button);
 		switchButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -185,7 +185,7 @@ public class DashboardOnMap {
 					R.color.icon_color_light));
 			
 			mapActivity.getMapActions().disableDrawer();
-			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.GONE);
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			updateLocation(true, true, false);
 			
 		} else {

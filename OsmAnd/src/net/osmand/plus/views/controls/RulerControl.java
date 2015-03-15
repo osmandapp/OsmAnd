@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextPaint;
 import android.view.View;
-import android.widget.FrameLayout;
 
 public class RulerControl  {
 
@@ -74,7 +73,8 @@ public class RulerControl  {
 			rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity
 					.getResources().getDrawable(R.drawable.ruler));
 			Rect bounds = rulerDrawable.getBounds();
-			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
+			// TODO
+//			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
 			bounds.left = bounds.right - cacheRulerDistPix;
 			rulerDrawable.setBounds(bounds);
 			rulerDrawable.invalidateSelf();
@@ -82,13 +82,13 @@ public class RulerControl  {
 
 		if (cacheRulerText != null) {
 			Rect bounds = rulerDrawable.getBounds();
-			int bottom = (int) (view.getHeight() );
-			if (bounds.bottom != bottom) {
-				bounds.bottom = bottom;
-				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
-				rulerDrawable.setBounds(bounds);
-				rulerDrawable.invalidateSelf();
-			}
+//			int bottom = (int) (view.getHeight() );
+//			if (bounds.bottom != bottom) {
+//				bounds.bottom = bottom;
+//				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
+//				rulerDrawable.setBounds(bounds);
+//				rulerDrawable.invalidateSelf();
+//			}
 			rulerDrawable.draw(canvas);
 			int shadowColor = isNight == true ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night)
 					: Color.WHITE;

@@ -4,7 +4,7 @@
     android:layout_height="fill_parent" >
 
     <ImageButton
-        android:id="@+id/map_layers_button"
+        android:id="@+id/map_menu_button"
         android:layout_width="@dimen/map_button_size"
         android:layout_height="@dimen/map_button_size"
         android:layout_gravity="top|left"

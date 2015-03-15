@@ -104,10 +104,10 @@ public class StartGPSStatus extends OsmAndAction {
 		}
 		OsmandMapTileView view = mapActivity.getMapView();
 		AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
-		LinearLayout ll = new LinearLayout(view.getContext());
-		final ListView lv = new ListView(view.getContext());
+		LinearLayout ll = new LinearLayout(activity);
+		final ListView lv = new ListView(activity);
 		lv.setPadding(7, 3, 7, 0);
-		final CheckBox cb = new CheckBox(view.getContext());
+		final CheckBox cb = new CheckBox(activity);
 		cb.setText(R.string.shared_string_remember_my_choice);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		lp.setMargins(7, 10, 7, 0);

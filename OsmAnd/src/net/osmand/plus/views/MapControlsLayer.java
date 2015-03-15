@@ -96,11 +96,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		// rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent,
 		// rightGravity);
 		showUIHandler = new Handler();
+		initTopControls();
 		initTransparencyBar();
 		initZooms();
 		initControls();
 		initRouteControls();
-		initTopControls();
+		
 	}
 
 	private class CompassDrawable extends Drawable {

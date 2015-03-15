@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -8,9 +7,9 @@
     <!-- TOP ROW -->
 
     <LinearLayout
+        android:id="@+id/map_top_bar"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/map_address_height"
-        android:id="@+id/map_top_bar"
         android:background="@drawable/btn_flat"
         android:orientation="horizontal" >
 
@@ -36,8 +35,7 @@
             android:text="Long Street Name"
             android:textColor="@color/color_black"
             android:textSize="@dimen/map_widget_text_size"
-            android:textStyle="bold"
-            android:visibility="gone" >
+            android:textStyle="bold" >
         </TextView>
 
         <ImageButton
@@ -69,7 +67,6 @@
             android:weightSum="1" >
 
             <LinearLayout
-                android:id="@+id/map_left_widgets_panel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|left"
@@ -77,6 +74,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/map_left_widgets_panel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|left"
@@ -127,16 +125,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:background="@drawable/btn_round"
-            android:orientation="vertical" 
-            >
+            android:orientation="vertical" >
 
             <ProgressBar
                 android:id="@+id/map_horizontal_progress"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:max="100"
                 android:progress="60"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
         <!-- RIGHT widgets colon -->
 
@@ -154,40 +151,41 @@
                 android:layout_weight="0.6" >
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
-                android:layout_weight="0.4"
-                android:orientation="vertical" >
+                android:layout_weight="0.4" >
 
                 <LinearLayout
-                    android:id="@+id/map_right_widgets_panel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|right"
                     android:orientation="vertical" >
 
-                    <!--
+                    <LinearLayout
+                        android:id="@+id/map_right_widgets_panel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:orientation="vertical" >
+                        <include layout="@layout/map_hud_widget" />
+                        <!--
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
-                    -->
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        -->
+                    </LinearLayout>
 
                         <ImageButton
                             android:id="@+id/map_collapse_button"
                             android:layout_width="@dimen/map_button_size"
                             android:layout_height="@dimen/map_button_size"
-                            android:layout_gravity="center"
+                            android:layout_gravity="top|center_horizontal"
                             android:background="@drawable/btn_inset_circle"
                             android:src="@drawable/ic_action_remove_light" />
-                    </FrameLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
     </FrameLayout>
 

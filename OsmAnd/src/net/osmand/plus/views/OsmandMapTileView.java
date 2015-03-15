@@ -31,6 +31,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -53,7 +54,6 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -67,6 +67,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private FPSMeasurement main = new FPSMeasurement();
 	private FPSMeasurement additional = new FPSMeasurement();
 	private View view;
+	private Activity activity;
+	private OsmandApplication application;
+	protected OsmandSettings settings = null;
 
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
@@ -146,12 +149,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	Paint paintCenter;
 
 	private DisplayMetrics dm;
-	
 	private MapRendererView mapRenderer;
-
-	private OsmandApplication application;
-
-	protected OsmandSettings settings = null;
 
 	private Bitmap bufferBitmap;
 	private RotatedTileBox bufferImgLoc;
@@ -167,14 +165,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 		}
 	};
-	
 
-
-
+	public OsmandMapTileView(Activity activity) {
+		this.activity = activity;
+		init(activity);
+	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
 	public void init(Context ctx) {
 		application = (OsmandApplication) ctx.getApplicationContext();
+		settings = application.getSettings();
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
@@ -396,9 +396,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public OsmandSettings getSettings() {
-		if (settings == null) {
-			settings = getApplication().getSettings();
-		}
 		return settings;
 	}
 
@@ -977,23 +974,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-
-	
-
 	public Resources getResources() {
 		return application.getResources();
 	}
 	
 	public Context getContext() {
-		return view.getContext();
-	}
-
-	public int getHeight() {
-		return view.getHeight();
-	}
-
-	public float getWidth() {
-		return view.getWidth();
+		return activity;
 	}
 
 }
