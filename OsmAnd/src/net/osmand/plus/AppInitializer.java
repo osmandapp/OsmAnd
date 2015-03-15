@@ -231,17 +231,18 @@ public class AppInitializer implements IProgress {
 	}
 	
 	
-	private void indexRegionsBoundaries(boolean overwrite) {
+	private void indexRegionsBoundaries(List<String> warnings) {
 		try {
 			File file = app.getAppPath("regions.ocbf");
 			if (file != null) {
-				if (!file.exists() || overwrite) {
+				if (!file.exists()) {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
 							new FileOutputStream(file));
 				}
+				app.regions.prepareFile(file.getAbsolutePath());
 			}
-			app.regions.prepareFile(file.getAbsolutePath());
-		} catch (IOException e) {
+		} catch (Exception e) {
+			warnings.add(e.getMessage());
 			LOG.error(e.getMessage(), e);
 		}
 	}
@@ -392,7 +393,7 @@ public class AppInitializer implements IProgress {
 			
 			app.poiFilters.reloadAllPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);			
-			indexRegionsBoundaries(false);
+			indexRegionsBoundaries(warnings);
 			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);

@@ -60,10 +60,6 @@ public class TextInfoWidget  {
 		topImageView.invalidate();
 	}
 	
-	protected void invalidateImageViews() {
-		topImageView.invalidate();
-		imageView.invalidate();
-	}
 	
 	
 	

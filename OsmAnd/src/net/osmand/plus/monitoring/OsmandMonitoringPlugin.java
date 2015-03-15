@@ -99,7 +99,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 		
-		layer.getMapInfoControls().registerSideWidget(monitoringControl,
+		layer.registerSideWidget(monitoringControl,
 				R.drawable.monitoring_rec_big, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
 		layer.recreateControls();
 	}

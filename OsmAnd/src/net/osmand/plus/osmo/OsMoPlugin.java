@@ -174,7 +174,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		super.registerLayers(activity);
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		osmoControl = createOsMoControl(activity);
-		layer.getMapInfoControls().registerSideWidget(osmoControl,
+		layer.registerSideWidget(osmoControl,
 				R.drawable.mon_osmo_signal_inactive, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
 		

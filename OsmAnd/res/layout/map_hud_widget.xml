@@ -35,7 +35,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
             android:layout_weight="1"
-            android:minWidth="30dp"
+            android:minWidth="10dp"
             android:maxLines="1"
             android:shadowColor="@color/color_myloc_distance"
             android:textColor="@color/color_black"

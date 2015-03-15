@@ -262,7 +262,7 @@ public class MapActivity extends AccessibleActivity {
 			public void updateProgress(int progress) {
 				pb.setVisibility(View.VISIBLE);
 				pb.setProgress(progress);
-
+				pb.requestLayout();
 			}
 
 			@Override

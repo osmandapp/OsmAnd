@@ -47,17 +47,15 @@ import android.text.format.DateFormat;
 import android.view.View;
 
 public class RouteInfoWidgetsFactory {
-	private final float scaleCoefficient ;
-	
-	public RouteInfoWidgetsFactory(float scaleCoefficient){
-		this.scaleCoefficient = scaleCoefficient;
-	}
+
+	// TODO
+	private float scaleCoefficient = 1;
 	
 	public NextTurnInfoWidget createNextInfoControl(final Activity activity,
 			final OsmandApplication app, boolean horisontalMini) {
 		final OsmandSettings settings = app.getSettings();
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini, scaleCoefficient) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 
 			@Override
@@ -123,7 +121,7 @@ public class RouteInfoWidgetsFactory {
 	public NextTurnInfoWidget createNextNextInfoControl(final Activity activity,
 			final OsmandApplication app, boolean horisontalMini) {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini, scaleCoefficient) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {

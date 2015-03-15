@@ -200,7 +200,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			routeStepsControl = createRouteStepsInfoControl(activity);
-			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
+			mapInfoLayer.registerSideWidget(routeStepsControl,
 					R.drawable.widget_signpost, R.drawable.widget_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
 		}

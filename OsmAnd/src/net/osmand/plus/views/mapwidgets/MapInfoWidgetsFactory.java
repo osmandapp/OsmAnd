@@ -47,12 +47,6 @@ import android.widget.Toast;
 
 public class MapInfoWidgetsFactory {
 	
-	private float scaleCoefficient;
-
-	public MapInfoWidgetsFactory(float scaleCoefficient){
-		this.scaleCoefficient = scaleCoefficient;
-	}
-
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
 		final TextInfoWidget altitudeControl = new TextInfoWidget(map) {
 			private int cachedAlt = 0;
@@ -332,6 +326,7 @@ public class MapInfoWidgetsFactory {
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
 			TurnType[] type = new TurnType[1];
+			boolean showNextTurn = false;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
 					text = routingHelper.getCurrentName(type);
@@ -339,6 +334,7 @@ public class MapInfoWidgetsFactory {
 					int di = MapRouteInfoControl.getDirectionInfo();
 					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
+						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						type[0] = next.getTurnType();
 						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
@@ -351,14 +347,20 @@ public class MapInfoWidgetsFactory {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
 				}
 			}
-			if(updateWaypoint()) {
+			if(!showNextTurn && updateWaypoint()) {
+				updateVisibility(true);
 				updateVisibility(addressText, false);
 			} else if(text == null) {
 				updateVisibility(false);
 			} else {
 				updateVisibility(true);
+				updateVisibility(waypointInfoBar, false);
 				updateVisibility(addressText, true);
 				boolean update = turnDrawable.setTurnType(type[0]);
+				int h = addressText.getHeight() / 4 * 3;
+				if (h != turnDrawable.getBounds().bottom) {
+					turnDrawable.setBounds(0, 0, h, h);
+				}
 				if (update) {
 					if (type[0] != null) {
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
@@ -382,15 +384,20 @@ public class MapInfoWidgetsFactory {
 		public boolean updateWaypoint() {
 			lastPoint = waypointHelper.getMostImportantLocationPoint(null);
 			if (lastPoint == null) {
+				topBar.setOnClickListener(null);
 				updateVisibility(waypointInfoBar, false);
 				return false;
 			} else {
+				updateVisibility(addressText, false);
 				boolean updated = updateVisibility(waypointInfoBar, true);
-				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, waypointInfoBar, 
+				// pass top bar to make it clickable
+				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 
 						lastPoint, null);
 				if (updated) {
-					View all = waypointInfoBar.findViewById(R.id.waypoint_more);
+					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 					View btnN = waypointInfoBar.findViewById(R.id.waypoint_close);
+					all.setImageDrawable(map.getMyApplication().getIconsCache().
+							getContentIcon(R.drawable.ic_overflow_menu_light));
 					all.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {

@@ -6,7 +6,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -32,8 +31,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	private OsmandApplication app;
 	
 
-	public NextTurnInfoWidget(Activity activity, OsmandApplication app, boolean horisontalMini,
-			float scaleCoefficient) {
+	public NextTurnInfoWidget(Activity activity, OsmandApplication app, boolean horisontalMini) {
 		super(activity);
 		this.app = app;
 		this.horisontalMini = horisontalMini;
@@ -53,9 +51,12 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	}
 	
 	public void setTurnType(TurnType turnType) {
-		if (!Algorithms.objectEquals(getTurnType(), turnType)) {
-			turnDrawable.setTurnType(turnType);
-			invalidateImageViews();
+		if (turnDrawable.setTurnType(turnType)) {
+			if(horisontalMini) {
+				setImageDrawable(turnDrawable, false);
+			} else {
+				setTopImageDrawable(turnDrawable, true);
+			}
 		}
 		updateVisibility(turnType != null);
 	}
@@ -178,8 +179,8 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		}
 
 		public boolean setTurnType(TurnType turnType) {
-			this.turnType = turnType;
 			if(turnType != this.turnType) {
+				this.turnType = turnType;
 				TurnPathHelper.calcTurnPath(pathForTurn, turnType, null);
 				onBoundsChange(getBounds());
 				return true;

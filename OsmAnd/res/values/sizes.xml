@@ -65,6 +65,8 @@
 	<dimen name="map_widget_image">80dp</dimen>
 	<dimen name="map_button_spacing">15dp</dimen>
 	<dimen name="map_button_margin">4dp</dimen>
+	<dimen name="map_routing_progress_width">100dp</dimen>
+	
 	<dimen name="map_button_shadow_margin">2dp</dimen>
 	<dimen name="map_button_inset">4dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>

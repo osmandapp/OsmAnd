@@ -89,7 +89,7 @@ public class MapWidgetRegistry {
 			}
 		}
 	}
-	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableDark,int drawableLight, 
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableDark, drawableLight, 
 				messageId, priorityOrder, left);
