@@ -53,7 +53,7 @@
   
   <string name="search_position_current_location">Obecna pozycja…</string>
   <string name="search_position_map_view">Aktualny środek mapy</string>
-  <string name="select_search_position">Szukaj w pobliżu:</string>
+  <string name="select_search_position">Źródło:</string>
   <string name="context_menu_item_search">Szukaj w pobliżu</string>
   <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
   <string name="shared_string_save_as_gpx">Zapisz trasę jako ślad GPX</string>
@@ -80,7 +80,7 @@
   
   
   
-  <string name="local_index_installed">Wydanie</string>
+  <string name="local_index_installed">Wersja lokalna</string>
   <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
   <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
   <string name="local_index_items_restored">%1$d z %2$d przywrócono.</string>
@@ -278,7 +278,7 @@
   <string name="loading_builds">Wczytywanie listy kompilacji OsmAnd…</string>
   <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
   <string name="contribution_activity">Specialne opcje dla wersji \"contribution\"</string>
-  <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS Status. Wyszukać ją w Market?</string>
+  <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS status. Wyszukać ją w Market?</string>
   <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do \'Ustawienia\'→\'Ogólne\'→\'Nawigacja głosowa\', wybierz ulubiony zestaw i zainstaluj go.</string>
   <string name="voice_is_not_available_title">Nie wybrano głosu nawigatora</string>
   <string name="daynight_mode_day">Dzień</string>
@@ -429,14 +429,14 @@
   <string name="transport_Routes">Trasy</string>
   <string name="transport_Stop">Przystanek</string>
   <string name="transport_stops">przystanki</string>
-  <string name="transport_search_after">Dalsza trasa</string>
-  <string name="transport_search_before">Poprzednia trasa</string>
+  <string name="transport_search_after">Dalszy rozkład jazdy</string>
+  <string name="transport_search_before">Poprzedni rozkład jazdy</string>
   <string name="transport_finish_search">Zakończ wyszukiwanie</string>
   <string name="transport_stop_to_go_out">Wybierz przystanek początkowy</string>
   <string name="transport_to_go_after">poprzedni dystans</string>
   <string name="transport_to_go_before">kolejna odległość</string>
   <string name="transport_stops_to_pass">przystanków do przejechania</string>
-  <string name="transport_route_distance">Długość trasy</string>
+  <string name="transport_route_distance">Długość rozkładu jazdy</string>
   <string name="transport">Transport publiczny</string>
   <string name="shared_string_ok">OK</string>
   <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
@@ -467,7 +467,7 @@
   <string name="search_online_address">Wyszukiwanie online</string>
   <string name="max_level_download_tile">Maks. zoom online</string>
   <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
-  <string name="route_general_information">Całkowity dystans %1$s,\n czas podróży %2$d h %3$d m.</string>
+  <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d godz %3$d min.</string>
   <string name="router_service_descr">Wybierz usługę nawigacyjną (online lub offline)</string>
   <string name="router_service">Usługa nawigacyjna</string>
   <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>
@@ -691,7 +691,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">Wyświetl opcje konfiguracji wielu map online lub kafelków z pamięci podręcznej jako mapy bazowe lub nakładki/podkład. Mapy te można także przygotować offline i skopiować do folderu map OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Wyświetl ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
+  <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
   <string name="osmand_accessibility_description">Pokaż ustawienia specjalnych funkcji ułatwień dostępu.</string>
   
   
@@ -728,7 +728,7 @@
   <string name="info_button">Informacja</string>
   <string name="back_to_location">Powróć do pozycji</string>
   <string name="shared_string_help">Pomoc</string>
-  <string name="show_details">Pokaż szczegóły</string>
+  <string name="show_details">Pokaż szczegóły pozycji</string>
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
   <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>
   <string name="accessibility_mode">Tryb ułatwień dostępu</string>
@@ -756,14 +756,14 @@
   <string name="west_north_west">zachodnio-północny-zachód</string>
   <string name="north_west">północny zachód</string>
   <string name="north_north_west">północno-północny-zachód</string>
-  <string name="front">Przód</string>
-  <string name="front_right">Prawy przód</string>
-  <string name="right">Prawy</string>
-  <string name="back_right">Tylny przód</string>
-  <string name="back">Wstecz</string>
-  <string name="back_left">Lewy tył</string>
-  <string name="left">Lewy</string>
-  <string name="front_left">Lewy przód</string>
+  <string name="front">Do przodu</string>
+  <string name="front_right">Do przodu w prawo</string>
+  <string name="right">W prawo</string>
+  <string name="back_right">W prawo w tył</string>
+  <string name="back">Do tyłu</string>
+  <string name="back_left">W lewo w tył</string>
+  <string name="left">W lewo</string>
+  <string name="front_left">W lewo w przód</string>
   <string name="oclock">punkt</string>
   <string name="towards">wobec</string>
   <string name="accuracy">Dokładność</string>
@@ -773,8 +773,8 @@
   <string name="direction_style_clockwise">Zgodnie z ruchem zegara (12 sektorów)</string>
   <string name="settings_direction_style">Styl celu</string>
   <string name="settings_direction_style_descr">Wybierz styl określania kierunków względnych podczas ruchu</string>
-  <string name="auto_announce_on">Włącz ogłaszanie</string>
-  <string name="auto_announce_off">Wyłącz ogłaszanie</string>
+  <string name="auto_announce_on">Włącz automatyczne ogłaszanie</string>
+  <string name="auto_announce_off">Wyłącz automatyczne ogłaszanie</string>
   <string name="scroll_map_by_gestures_descr">Przesuwaj mapę za pomocą gestów na ekranie dotykowym</string>
   <string name="scroll_map_by_gestures">Naturalne przesuwanie mapy</string>
   <string name="i_am_here">Jestem tutaj</string>
@@ -806,7 +806,7 @@
   <string name="live_monitoring_interval">Interwał wysyłania danych</string>
   <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=szer., {1}=dł., {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, kierunek={6}</string>
   <string name="live_monitoring_url">Adres śledzenia online</string>
-  <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia \'Nagrywanie trasy\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
 \n\t- Dane Wikipedii z artykułami w trybie offline
@@ -2014,4 +2014,52 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="proxy_port_title">Port proxy</string>
 	<string name="plugin_description_title">Opis</string>
 	<string name="plugin_install_needs_network">Do zainstalowania tej wtyczki potrzebujesz połączenia internetowego.</string>
-	</resources>
+	<string name="osmand_parking_outdated">Przestarzały</string>
+	<string name="action_create">Utwórz</string>
+	<string name="action_modify">Zmodyfikuj</string>
+	<string name="action_delete">Usuń</string>
+	<string name="osm_edits">Edycja OSM</string>
+	<string name="osmand_parking_hour">godz</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Pozostało</string> <string name="parking_place_limited">Miejsce parkingowe ograniczone czasowo</string>
+	<string name="your_edits">Twoje punkty edytowane</string>
+    <string name="waypoint_visit_after">Odwiedź później</string>
+    <string name="waypoint_visit_before">Odwiedź wcześniej</string>
+    <string name="simulate_your_location">Symuluj lokalizację</string>
+    <string name="short_location_on_map">Szer %1$s↵\nDług %2$s</string>
+    <string name="tips_and_tricks_descr">FAQ, ostatnie zmiany i inne</string>
+    <string name="routing_settings_2">Ustawienia nawigacji</string>
+    <string name="general_settings_2">Ustawienia ogólne</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_enable">Włącz</string>
+	<string name="shared_string_disable">Wyłącz</string>
+	<string name="shared_string_selected">Wybrany</string>
+	<string name="shared_string_deselect">Odznacz</string>
+	<string name="shared_string_deselect_all">Odznacz wszystkie</string>
+	<string name="shared_string_export">Eksportuj</string>
+	<string name="shared_string_unexpected_error">Napotkano nieoczekiwany błąd</string>
+	<string name="shared_string_action_template">Działanie {0}</string>
+	<string name="shared_string_collapse">Zwiń</string>
+	<string name="shared_string_currently_recording_track">Trwa nagrywanie ścieżki</string>
+	<string name="shared_string_audio">Dźwięk</string>
+	<string name="shared_string_video">Obraz wideo</string>
+	<string name="shared_string_photo">Obraz</string>
+	<string name="route_points">Punkty trasy</string>
+	<string name="track_segments">Segmenty trasy</string>
+	<string name="track_points">Punkty trasy</string>
+	<string name="plugin_touringview_name">Widok mapy turystycznej</string>
+	<string name="plugin_touringview_descr">"Włączenie tego widoku zmienia styl mapy OsmAnd na \'turystyczny\', który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.\n\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).\n\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.\n\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.\n\nNie potrzeba ściągać specjalnej mapy, ten widok jest tworzony z map standardowych.\n\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
+	<string name="watch">Oglądaj</string>
+	<string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
+	<string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
+    <string name="world_ski_missing">Trzeba pobrać specjalną mapę offline, aby wyświetlać mapy narciarskie</string>
+    <string name="nautical_maps_missing">Trzeba pobrać specjalną mapę offline, aby wyświetlać mapy żeglugowe</string>
+	<string name="remove_the_tag">Usuń tag</string>
+    <string name="version_settings">Kompilacja</string>
+    <string name="points">Punkty</string>
+    <string name="navigation_over_track">Rozpocząć nawigację na trasie?</string>
+	<string name="save_track_to_gpx_globally_headline">Zapis trasy na żądanie</string>
+	<string name="enable_proxy_descr">Skonfiguruj proxy HTTP dla wszystkich zapytań sieciowych</string>
+	<string name="proxy_host_descr">Skonfiguruj nazwę hosta proxy (np. 127.0.0.1)</string>
+	<string name="proxy_port_descr">Skonfiguruj numer portu proxy (np. 8118)</string>
+	<string name="shared_string_release">Wypuszczony</string>
+	<string name="get_plugin">Pobierz</string>
+</resources>
