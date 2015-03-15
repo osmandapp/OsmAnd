@@ -19,17 +19,17 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -44,7 +44,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private ImageButton  expand;
 	private static boolean expanded = false;
 	private BaseMapWidget lanesControl;
-	private BaseMapWidget alarmControl;
+	private AlarmWidget alarmControl;
+	private RulerWidget rulerControl;
 	private MapWidgetRegistry mapInfoControls;
 
 	private OsmandSettings settings;
@@ -74,12 +75,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack = (LinearLayout) map.findViewById(R.id.map_left_widgets_panel);
 		rightStack = (LinearLayout) map.findViewById(R.id.map_right_widgets_panel);
 		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
-		
-		
 		// update and create controls
 		registerAllControls();
-		alarmControl.setVisibility(View.GONE);
-		lanesControl.setVisibility(View.GONE);
+		
 		recreateControls();
 	}
 	
@@ -95,11 +93,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+		lanesControl.setVisibility(View.GONE);
 		
 		streetNameView = new MapInfoWidgetsFactory.TopTextView(map.getMyApplication(), map);
 		updateStreetName(calculateTextState());
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
+		alarmControl.setVisibility(false);
+		
+		rulerControl = ric.createRulerControl(app, map);
+		rulerControl.setVisibility(false);
+		
 		// register left stack
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
 		registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
@@ -159,6 +163,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int leftRes;
 		int expand;
 		int boxFree;
+		int textShadowRadius;
 	}
 
 
@@ -179,6 +184,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(ts);
+			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius);
 			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
 			leftStack.invalidate();
@@ -187,14 +193,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void updateStreetName(TextState ts) {
 		streetNameView.setBackgroundResource(ts.boxTop);
-		streetNameView.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold);
+		streetNameView.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
 		View v = reg.widget.getView().findViewById(R.id.widget_bg);
 		if(v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
-			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold);
+			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 		}
 	}
 
@@ -211,6 +217,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (!transparent && !nightMode) {
 			ts.textShadowColor = Color.TRANSPARENT;
 		}
+		ts.textShadowRadius = ts.textShadowColor == 0 ? 0 : 8; 
 		if (transparent) {
 			ts.boxTop = R.drawable.btn_flat_trans;
 			ts.rightRes = R.drawable.btn_left_round_trans;
@@ -243,9 +250,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateColorShadowsOfText();
 		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
 		streetNameView.updateInfo(drawSettings);
+		alarmControl.updateInfo(drawSettings);
+		rulerControl.updateInfo(tileBox, drawSettings);
 		// TODO
 //		lanesControl.updateInfo(drawSettings);
-//		alarmControl.updateInfo(drawSettings);
 		
 	}
 	

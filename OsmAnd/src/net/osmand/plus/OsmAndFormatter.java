@@ -43,12 +43,15 @@ public class OsmAndFormatter {
 		int generator = 1;
 		byte pointer = 1;
 		double point = mainUnitInMeter;
+		double roundDist = 1;
 		while (distInMeters * point > generator) {
+			roundDist = (generator / point);
 			if (pointer++ % 3 == 2) {
 				generator = generator * 5 / 2;
 			} else {
 				generator *= 2;
 			}
+			
 			if (point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator) {
 				point = 1 / metersInSecondUnit;
 				generator = 1;
@@ -56,7 +59,7 @@ public class OsmAndFormatter {
 			}
 		}
 
-		return (generator / point);
+		return roundDist;
 	}
 	
 	public static String getFormattedRoundDistanceKm(float meters, int digits, OsmandApplication ctx) {

@@ -92,9 +92,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
-		// TODO
-		// rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent,
-		// rightGravity);
 		showUIHandler = new Handler();
 		initTopControls();
 		initTransparencyBar();
@@ -182,8 +179,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
-		// protected void onDraw(Canvas canvas) {
-		// }
 		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).setBg(
 				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
 		compassHud.compass = true;
@@ -555,6 +550,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		transparencyBar.setMax(255);
 		if (settingsToTransparency != null) {
 			transparencyBar.setProgress(settingsToTransparency.get());
+			transparencyBarLayout.setVisibility(View.VISIBLE);
+		} else {
+			transparencyBarLayout.setVisibility(View.GONE);
 		}
 		transparencyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 

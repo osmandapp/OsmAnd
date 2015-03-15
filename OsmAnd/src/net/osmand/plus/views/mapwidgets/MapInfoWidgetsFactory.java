@@ -311,15 +311,15 @@ public class MapInfoWidgetsFactory {
 			return false;
 		}
 		
-		public void updateTextColor(int textColor, int textShadowColor, boolean bold) {
-			updateTextColor(addressText, textColor, textShadowColor, bold);
+		public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
+			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
 			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
-					textColor, textShadowColor, bold);
+					textColor, textShadowColor, bold, rad);
 		}
 		
-		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold) {
+		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
 			tv.setTextColor(textColor);
-			tv.setShadowLayer(textShadowColor == 0 ? 0 : 8, 0, 0, textShadowColor);
+			tv.setShadowLayer(rad, 0, 0, textShadowColor);
 			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 		}
 

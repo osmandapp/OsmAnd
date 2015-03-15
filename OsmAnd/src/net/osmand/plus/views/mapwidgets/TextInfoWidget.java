@@ -143,14 +143,14 @@ public class TextInfoWidget  {
 		return explicitlyVisible;
 	}
 
-	public void updateTextColor(int textColor, int textShadowColor, boolean bold) {
-		updateTextColor(smallTextView, textColor, textShadowColor, bold);
-		updateTextColor(textView, textColor, textShadowColor, bold);
+	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
+		updateTextColor(smallTextView, textColor, textShadowColor, bold, rad);
+		updateTextColor(textView, textColor, textShadowColor, bold, rad);
 	}
 	
-	private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold) {
+	private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
 		tv.setTextColor(textColor);
-		tv.setShadowLayer(textShadowColor == 0 ? 0 : 8, 0, 0, textShadowColor);
+		tv.setShadowLayer(rad, 0, 0, textShadowColor);
 		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
 
