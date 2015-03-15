@@ -37,10 +37,10 @@
 	<string name="poi_beach_resort">Station balnéaire</string>
 	<string name="poi_beachvolleyball">Beach-volley</string>
 	<string name="poi_beacon">Signal</string>
-	<string name="poi_seamark_beacon_cardinal">Balise cardinale</string>
-	<string name="poi_seamark_beacon_lateral">Balise latérale</string>
-	<string name="poi_seamark_beacon_safe_water">Marque d\'eaux saines</string>
-	<string name="poi_seamark_beacon_special_purpose">Marque spéciale</string>
+	<string name="poi_beacon_cardinal">Balise cardinale</string>
+	<string name="poi_beacon_lateral">Balise latérale</string>
+	<string name="poi_beacon_safe_water">Marque d\'eaux saines</string>
+	<string name="poi_beacon_special_purpose">Marque spéciale</string>
 	<string name="poi_beauty">Salon de beauté</string>
 	<string name="poi_beverages">Magasin de boissons</string>
 	<string name="poi_bicycle">Magasin de vélos</string>
@@ -60,11 +60,11 @@
 	<string name="poi_brothel">Maison de prostitution</string>
 	<string name="poi_religion_buddhist">Bouddhisme</string>
 	<string name="poi_military_bunker">Casemate</string>
-	<string name="poi_seamark_buoy_cardinal">Bouée cardinale (balise flottante)</string>
-	<string name="poi_seamark_buoy_installation">Bouée de chargement / déchargement</string>
-	<string name="poi_seamark_buoy_isolated_danger">Bouée de danger isolé (balise flottante)</string>
-	<string name="poi_seamark_buoy_lateral">Bouée latérale (balise flottante)</string>
-	<string name="poi_seamark_buoy_safe_water">Bouée d\'eaux saines (balise flottante)</string>
+	<string name="poi_buoy_cardinal">Bouée cardinale (balise flottante)</string>
+	<string name="poi_buoy_installation">Bouée de chargement / déchargement</string>
+	<string name="poi_buoy_isolated_danger">Bouée de danger isolé (balise flottante)</string>
+	<string name="poi_buoy_lateral">Bouée latérale (balise flottante)</string>
+	<string name="poi_buoy_safe_water">Bouée d\'eaux saines (balise flottante)</string>
 	<string name="poi_seamark_uoy_special_purpose">Marque spéciale (balise flottante)</string>
 	<string name="poi_bus_station">Gare routière</string>
 	<string name="poi_bus_stop">Arrêt de bus</string>
@@ -131,7 +131,7 @@
 	<string name="poi_drinking_water">Eau potable</string>
 	<string name="poi_driving_school">École de conduite</string>
 	<string name="poi_dry_cleaning">Pressing</string>
-	<string name="poi_seamark_dyke">Digue</string>
+	<string name="poi_dyke">Digue</string>
 	<string name="poi_craft_electrician">Électricien</string>
 	<string name="poi_electronics">Magasin d\'électronique</string>
 	<string name="poi_embassy">Ambassade</string>
@@ -150,7 +150,7 @@
 	<string name="poi_first_aid">Premiers secours</string>
 	<string name="poi_fishing">Zone de pêche</string>
 	<string name="poi_florist">Fleuriste</string>
-	<string name="poi_seamark_fog_signal">Signal de brume</string>
+	<string name="poi_fog_signal">Signal de brume</string>
 	<string name="poi_food_court">Aire de restauration</string>
 	<string name="poi_ford">Gué</string>
 	<string name="poi_fountain">Fontaine</string>
@@ -173,7 +173,7 @@
 	<string name="poi_hairdresser">Coiffeur</string>
 	<string name="poi_hamlet">Hameau</string>
 	<string name="poi_seamark_harbour">Port</string>
-	<string name="poi_seamark_harbour_basin">Bassin portuaire</string>
+	<string name="poi_harbour_basin">Bassin portuaire</string>
 	<string name="poi_hardware">Quincaillerie</string>
 	<string name="poi_hearing_aids">Audioprothésiste</string>
 	<string name="poi_helipad">Hélisurface</string>
@@ -200,7 +200,7 @@
 	<string name="poi_kiosk">Kiosque</string>
 	<string name="poi_korfbal">Korfball</string>
 	<string name="poi_landfill">Décharge</string>
-	<string name="poi_seamark_landmark">Point de repère</string>
+	<string name="poi_landmark">Point de repère</string>
 	<string name="poi_laundry">Laverie</string>
 	<string name="poi_lawyer">Juriste</string>
 	<string name="poi_level_crossing">Passage à niveau</string>
@@ -239,7 +239,7 @@
 	<string name="poi_newspaper">Presse</string>
 	<string name="poi_ngo">ONG</string>
 	<string name="poi_nightclub">Boîte de nuit</string>
-	<string name="poi_optician_shop">Opticien</string>
+	<string name="poi_optician">Opticien</string>
 	<string name="poi_organic">Magasin bio</string>
 	<string name="poi_orienteering">Course d\'orientation</string>
 	<string name="poi_outdoor">Magasin d\'activités de plein air</string>
@@ -274,7 +274,7 @@
 	<string name="poi_quarry">Carrière</string>
 	<string name="poi_raceway">Circuit</string>
 	<string name="poi_racquet">Sport de raquette</string>
-	<string name="poi_seamark_radar_transponder">Transpondeur radar (amer)</string>
+	<string name="poi_radar_transponder">Transpondeur radar (amer)</string>
 	<string name="poi_railway_halt">Gare ferroviaire (halte)</string>
 	<string name="poi_railway_platform">Quai de gare</string>
 	<string name="poi_railway_station">Gare ferroviaire</string>
@@ -339,7 +339,7 @@
 	<string name="poi_tobacco">Tabac</string>
 	<string name="poi_toboggan">Toboggan</string>
 	<string name="poi_toilets">Toilettes</string>
-	<string name="poi_seamark_topmark">Voyant maritime</string>
+	<string name="poi_topmark">Voyant maritime</string>
 	<string name="poi_town">Ville</string>
 	<string name="poi_toys">Magasin de jouets</string>
 	<string name="poi_leisure_track">Piste de sport</string>
@@ -460,12 +460,12 @@
 	<string name="poi_accountant">Comptable</string>
 	<string name="poi_bay">Baie</string>
 	<string name="poi_fjord">Fjord</string>
-	<string name="poi_seamark_anchorage">Mouillage</string>
-	<string name="poi_seamark_beacon">Balise</string>
+	<string name="poi_anchorage">Mouillage</string>
+	<string name="poi_beacon">Balise</string>
 	<string name="poi_seamark_building">Bâtiment remarquable (amer)</string>
-	<string name="poi_seamark_buoy_special_purpose">Marque spéciale (balise flottante)</string>
-	<string name="poi_seamark_dry_dock">Cale sèche</string>
-	<string name="poi_seamark_mooring">Mouillage</string>
+	<string name="poi_buoy_special_purpose">Marque spéciale (balise flottante)</string>
+	<string name="poi_dry_dock">Cale sèche</string>
+	<string name="poi_mooring">Mouillage</string>
 	<string name="poi_seamark_wreck">Épave</string>
 
 	<string name="poi_bag">Maroquinerie</string>
@@ -492,7 +492,7 @@
 	<string name="poi_prosecutor">Procureur</string>
 	<string name="poi_office_administrative">Centre administratif</string>
 	<string name="poi_seamark_rock">Rocher (amer)</string>
-	<string name="poi_seamark_distance_mark">Borne</string>
+	<string name="poi_distance_mark">Borne</string>
 	<string name="poi_craft_upholsterer">Tapissier</string>
 	<string name="poi_craft_tiler">Carreleur</string>
 	<string name="poi_craft_stonemason">Tailleur de pierre</string>
@@ -575,7 +575,7 @@
 	<string name="poi_club_automobile">Club automobile</string>
 	<string name="poi_club_history">Association du patrimoine</string>
 	<string name="poi_harbour">Port</string>
-	<string name="poi_seamark_floating_dock">Quai flottant</string>
+	<string name="poi_floating_dock">Quai flottant</string>
 	<string name="poi_military_range">Terrain militaire</string>
 	<string name="poi_rune_stone">Pierre runique</string>
 	<string name="poi_city_gate">Porte de ville</string>
@@ -586,12 +586,12 @@
 	<string name="poi_craft_tinsmith">Ferronnier</string>
 	<string name="poi_dock">Quai</string>
 	<string name="poi_mortuary">Funérarium</string>
-	<string name="poi_seamark_pile">Tourelle</string>
-	<string name="poi_seamark_anchor_berth">Zone de mouillage</string>
-	<string name="poi_seamark_berth">Zone</string>
+	<string name="poi_pile">Tourelle</string>
+	<string name="poi_anchor_berth">Zone de mouillage</string>
+	<string name="poi_berth">Zone</string>
 	<string name="poi_seamark_bridge">Pont remarquable (amer)</string>
-	<string name="poi_seamark_radio_station">Station radio (amer)</string>
-	<string name="poi_seamark_signal_station_traffic">Sémaphore</string>
+	<string name="poi_radio_station">Station radio (amer)</string>
+	<string name="poi_signal_station_traffic">Sémaphore</string>
 	<string name="poi_attraction_animal">Parc animalier</string>
 	<string name="poi_big_wheel">Grande roue</string>
 	<string name="poi_carousel">Carrousel</string>
@@ -620,10 +620,10 @@
 	<string name="poi_craft_window_construction">Construction de fenêtres</string>
 
 	<string name="poi_craft_computer">Assembleur d\'ordinateurs</string>
-	<string name="poi_seamark_daymark">Amer</string>
-	<string name="poi_seamark_notice">Signalétique maritime</string>
-	<string name="poi_seamark_signal_station_warning">Station de signaux, avertissements</string>
-	<string name="poi_seamark_small_craft_facility">Facilité pour petites embarcations</string>
+	<string name="poi_daymark">Amer</string>
+	<string name="poi_notice">Signalétique maritime</string>
+	<string name="poi_signal_station_warning">Station de signaux, avertissements</string>
+	<string name="poi_small_craft_facility">Facilité pour petites embarcations</string>
 	<string name="poi_military_nuclear_explosion_site">Site d\'essais nucléaires</string>
 <string name="poi_craft_carpet_layer">Couvreur de moquettes</string>
 	<string name="poi_craft_parquet_layer">Couvreur de parquets</string>

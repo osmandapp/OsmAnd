@@ -95,7 +95,7 @@
 	<string name="poi_mobile_phone">Negozio telefonia mobile</string>
 	<string name="poi_motorcycle">Negozio moto</string>
 	<string name="poi_musical_instrument">Strumenti musicali</string>
-	<string name="poi_optician_shop">Optometrista</string>
+	<string name="poi_optician">Optometrista</string>
 	<string name="poi_organic">Alimenti biologici</string>
 	<string name="poi_outdoor">Negozio articoli per l\'attività all\'aperto</string>
 	<string name="poi_paint">Negozio articoli per pittura</string>
@@ -250,7 +250,7 @@
 	<string name="poi_seamark_wreck">Relitto</string>
 
 	<string name="poi_seamark_rock">Scoglio</string>
-	<string name="poi_seamark_radar_transponder">Transponder radar marittimo</string>
+	<string name="poi_radar_transponder">Transponder radar marittimo</string>
 	<string name="poi_waterfall">Cascata</string>
 	<string name="poi_sinkhole">Dolina</string>
 	<string name="poi_glacier">Ghiacciaio</string>
@@ -551,7 +551,7 @@
 	<string name="poi_craft_basket_maker">Cestaio</string>
 	<string name="poi_cape">Capo</string>
 	<string name="poi_strait">Stretto</string>
-	<string name="poi_seamark_anchorage">Ancoraggio</string>
+	<string name="poi_anchorage">Ancoraggio</string>
 	<string name="poi_seamark_harbour">Porto</string>
 	<string name="poi_shop">Negozio</string>
 	<string name="poi_office">Ufficio</string>

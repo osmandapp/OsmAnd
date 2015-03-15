@@ -62,7 +62,7 @@
 	<string name="poi_motorcycle">Butega de mototzicletas</string>
 	<string name="poi_musical_instrument">Istrumentos musicales</string>
 	<string name="poi_newsagent">Agentzia de imprenta</string>
-	<string name="poi_optician_shop">Optometrista</string>
+	<string name="poi_optician">Optometrista</string>
 	<string name="poi_organic">Alimentos biològicos</string>
 	<string name="poi_outdoor">Artìculos pro s\'atividade a s\'abertu</string>
 	<string name="poi_paint">Butega de artìculos pro sa pintadura</string>
@@ -459,7 +459,7 @@
 	<string name="poi_island">Ìsula</string>
 	<string name="poi_islet">Ìsuledda</string>
 
-	<string name="poi_seamark_radar_transponder">Transponder radar marìtimu</string>
+	<string name="poi_radar_transponder">Transponder radar marìtimu</string>
 	<string name="poi_seamark_rock">Iscòlliu</string>
 	<string name="poi_military">Àrea militare</string>
 	<string name="poi_military_airfield">Aeroportu militare</string>
@@ -527,16 +527,16 @@
 	<string name="poi_accountant">Istùdiu contàbile</string>
 	<string name="poi_cape">Ispuntone/promontòriu</string>
 	<string name="poi_reef">Costera</string>
-	<string name="poi_seamark_anchorage">Ancoràggiu</string>
-	<string name="poi_seamark_beacon">Faru/fogu de sinnalatzione</string>
-	<string name="poi_seamark_berth">Atracu</string>
-	<string name="poi_seamark_dyke">Àrgine</string>
-	<string name="poi_seamark_floating_dock">Pontinu gallegiante</string>
-	<string name="poi_seamark_fog_signal">Nautòfonu</string>
+	<string name="poi_anchorage">Ancoràggiu</string>
+	<string name="poi_beacon">Faru/fogu de sinnalatzione</string>
+	<string name="poi_berth">Atracu</string>
+	<string name="poi_dyke">Àrgine</string>
+	<string name="poi_floating_dock">Pontinu gallegiante</string>
+	<string name="poi_fog_signal">Nautòfonu</string>
 	<string name="poi_seamark_harbour">Portu</string>
-	<string name="poi_seamark_landmark">Puntu de riferimentu</string>
-	<string name="poi_seamark_mooring">Ormègiu</string>
-	<string name="poi_seamark_pile">Palu de ancoràgiu</string>
+	<string name="poi_landmark">Puntu de riferimentu</string>
+	<string name="poi_mooring">Ormègiu</string>
+	<string name="poi_pile">Palu de ancoràgiu</string>
 	<string name="poi_seamark_wreck">Relitu</string>
 
 	<string name="poi_nursing_home">Domo de cura</string>
@@ -557,17 +557,17 @@
 	<string name="poi_craft_metal_construction">Costrutziones metàllicas</string>
 	<string name="poi_craft_parquet_layer">Assentadore de parquet</string>
 	<string name="poi_craft_tiler">Assentadore de regiolas</string>
-	<string name="poi_seamark_radio_station">Istatzione ràdio (in mare)</string>
+	<string name="poi_radio_station">Istatzione ràdio (in mare)</string>
 	<string name="poi_seamark_light">Lughe (in mare)</string>
 	<string name="poi_seamark_light_major">Lughe manna (in mare)</string>
 	<string name="poi_seamark_light_minor">Lughe minore (in mare)</string>
 	<string name="poi_seamark_light_float">Lughe gallegiante (in mare)</string>
 	<string name="poi_seamark_light_vessel">Lughe de nave ancorada</string>
-	<string name="poi_seamark_notice">Cartellu de informatziones (in mare)</string>
-	<string name="poi_seamark_signal_station_traffic">Istatzione de sinnalatzione, tràficu (in mare)</string>
-	<string name="poi_seamark_signal_station_warning">Istatzione de sinnalatzione, avertimentu de perìgulu (in mare)</string>
-	<string name="poi_seamark_small_craft_facility">Servìtzios pro barcas minores</string>
-	<string name="poi_seamark_topmark">Miràgliu</string>
+	<string name="poi_notice">Cartellu de informatziones (in mare)</string>
+	<string name="poi_signal_station_traffic">Istatzione de sinnalatzione, tràficu (in mare)</string>
+	<string name="poi_signal_station_warning">Istatzione de sinnalatzione, avertimentu de perìgulu (in mare)</string>
+	<string name="poi_small_craft_facility">Servìtzios pro barcas minores</string>
+	<string name="poi_topmark">Miràgliu</string>
 	<string name="poi_motor_sport">Isport a motore</string>
 	<string name="poi_craft_carpet_layer">Assentadore de moquette</string>
 	<string name="poi_motorway_junction">Illoidura autostradale</string>

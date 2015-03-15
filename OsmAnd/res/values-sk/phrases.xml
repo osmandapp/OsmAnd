@@ -85,7 +85,7 @@
 	<string name="poi_motorcycle">Motocykle</string>
 	<string name="poi_musical_instrument">Hudobné nástroje</string>
 	<string name="poi_newsagent">Novinový obchod</string>
-	<string name="poi_optician_shop">Očná optika</string>
+	<string name="poi_optician">Očná optika</string>
 	<string name="poi_organic">Zdravá výživa</string>
 	<string name="poi_outdoor">Turistický obchod</string>
 	<string name="poi_paint">Farby-laky</string>
@@ -498,9 +498,9 @@
 	<string name="poi_island">Ostrov</string>
 	<string name="poi_islet">Ostrovček</string>
 
-	<string name="poi_seamark_anchorage">Kotvisko</string>
-	<string name="poi_seamark_anchor_berth">Kotviace miesto</string>
-	<string name="poi_seamark_beacon">Signálny bod</string>
+	<string name="poi_anchorage">Kotvisko</string>
+	<string name="poi_anchor_berth">Kotviace miesto</string>
+	<string name="poi_beacon">Signálny bod</string>
 	<string name="poi_military_landuse">Vojenský priestor</string>
 	<string name="poi_military_airfield">Vojenské letisko</string>
 	<string name="poi_military_bunker">Bunker</string>

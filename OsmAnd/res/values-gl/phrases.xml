@@ -368,10 +368,10 @@
 	<string name="poi_island">Illa</string>
 	<string name="poi_islet">Ínsua</string>
 
-	<string name="poi_seamark_anchorage">Ancoradoiro</string>
-	<string name="poi_seamark_dry_dock">Dique seco</string>
-	<string name="poi_seamark_floating_dock">Dique flotante</string>
-	<string name="poi_seamark_fog_signal">Serea de néboa</string>
+	<string name="poi_anchorage">Ancoradoiro</string>
+	<string name="poi_dry_dock">Dique seco</string>
+	<string name="poi_floating_dock">Dique flotante</string>
+	<string name="poi_fog_signal">Serea de néboa</string>
 	<string name="poi_seamark_harbour">Porto</string>
 	<string name="poi_military">Zona militar</string>
 	<string name="poi_military_airfield">Aeródromo militar</string>

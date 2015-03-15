@@ -35,7 +35,7 @@
 	<string name="poi_kiosk">Kiosek</string>
 	<string name="poi_kitchen">Kuchyňské studio</string>
 	<string name="poi_musical_instrument">Hudební nástroje</string>
-	<string name="poi_optician_shop">Optik</string>
+	<string name="poi_optician">Optik</string>
 	<string name="poi_pet">Zverimex</string>
 	<string name="poi_sports">Sportovní vybavení</string>
 	<string name="poi_toys">Hračkářství</string>
@@ -191,8 +191,8 @@
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_nature_reserve">Přírodní rezervace</string>
 	<string name="poi_island">Ostrov</string>
-	<string name="poi_seamark_anchorage">Kotviště</string>
-	<string name="poi_seamark_dry_dock">Suchý dok</string>
+	<string name="poi_anchorage">Kotviště</string>
+	<string name="poi_dry_dock">Suchý dok</string>
 	<string name="poi_seamark_harbour">Přístav</string>
 	<string name="poi_military_barracks">Kasárna</string>
 	<string name="poi_military_danger_area">Nebezpečná oblast</string>

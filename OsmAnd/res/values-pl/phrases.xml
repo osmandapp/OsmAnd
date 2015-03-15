@@ -64,7 +64,7 @@
 	<string name="poi_motorcycle">Motocykle</string>
 	<string name="poi_musical_instrument">Instrumenty muzyczne</string>
 	<string name="poi_newsagent">Kiosk gazetowy</string>
-	<string name="poi_optician_shop">Optyk</string>
+	<string name="poi_optician">Optyk</string>
 	<string name="poi_organic">Żywność ekologiczna</string>
 	<string name="poi_outdoor">Art. wyposażenia zewnętrznego</string>
 	<string name="poi_paint">Farby</string>
@@ -444,12 +444,12 @@
 	<string name="poi_island">Wyspa</string>
 	<string name="poi_islet">Wysepka</string>
 
-	<string name="poi_seamark_beacon">Latarnia</string>
-	<string name="poi_seamark_berth">Miejsce do cumowania</string>
-	<string name="poi_seamark_dry_dock">Suchy dok</string>
-	<string name="poi_seamark_floating_dock">Dok pływający</string>
+	<string name="poi_beacon">Latarnia</string>
+	<string name="poi_berth">Miejsce do cumowania</string>
+	<string name="poi_dry_dock">Suchy dok</string>
+	<string name="poi_floating_dock">Dok pływający</string>
 	<string name="poi_seamark_harbour">Port</string>
-	<string name="poi_seamark_landmark">Punkt orientacyjny</string>
+	<string name="poi_landmark">Punkt orientacyjny</string>
 	<string name="poi_military">Wojsko</string>
 	<string name="poi_military_airfield">Lotnisko wojskowe</string>
 	<string name="poi_military_bunker">Bunkier wojskowy</string>

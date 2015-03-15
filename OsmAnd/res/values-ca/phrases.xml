@@ -22,7 +22,7 @@
 	<string name="poi_interior_decoration">Botiga d\'interiorisme</string>
 	<string name="poi_jewelry">Joieria</string>
 	<string name="poi_kiosk">Quiosc</string>
-	<string name="poi_optician_shop">Optometria</string>
+	<string name="poi_optician">Optometria</string>
 	<string name="poi_convenience">Botiga de queviures</string>
 	<string name="poi_deli">Delicadeses</string>
 	<string name="poi_shop_farm">Productes de granja</string>
@@ -81,7 +81,7 @@
 	<string name="poi_sports">Material esportiu</string>
 	<string name="poi_ticket">Taquilla</string>
 	<string name="poi_seamark_harbour">Port</string>
-	<string name="poi_seamark_fog_signal">Botzina de boira</string>
+	<string name="poi_fog_signal">Botzina de boira</string>
 	<string name="poi_cosmetics">Cosmètica</string>
 	<string name="poi_marketplace">Mercat</string>
 	<string name="poi_sewing">Merceria</string>
@@ -318,8 +318,8 @@
 	<string name="poi_charging_station">Estació de recàrrega</string>
 	<string name="poi_seamark_wreck">Restes de naufragi, senyal marítim</string>
 
-	<string name="poi_seamark_radio_station">Emissor de ràdio, senyal marítim</string>
-	<string name="poi_seamark_mooring">Amarratge</string>
+	<string name="poi_radio_station">Emissor de ràdio, senyal marítim</string>
+	<string name="poi_mooring">Amarratge</string>
 	<string name="poi_seamark_rock">Roca o corall, senyal marítim</string>
 	<string name="poi_rowing">Rem</string>
 	<string name="poi_rugby_union">Rugbi a 15</string>
@@ -358,7 +358,7 @@
 	<string name="poi_fountain">Font ornamental</string>
 	<string name="poi_historic_ruins">Runes històriques</string>
 	<string name="poi_historic_ship">Vaixell històric</string>
-	<string name="poi_seamark_signal_station_traffic"/>
-	<string name="poi_seamark_dyke">Dic</string>
-	<string name="poi_seamark_floating_dock">Moll flotant</string>
+	<string name="poi_signal_station_traffic"/>
+	<string name="poi_dyke">Dic</string>
+	<string name="poi_floating_dock">Moll flotant</string>
 	</resources>
