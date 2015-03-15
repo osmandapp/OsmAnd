@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -135,6 +136,17 @@ public class TextInfoWidget  {
 	
 	public boolean isExplicitlyVisible() {
 		return explicitlyVisible;
+	}
+
+	public void updateTextColor(int textColor, int textShadowColor, boolean bold) {
+		updateTextColor(smallTextView, textColor, textShadowColor, bold);
+		updateTextColor(textView, textColor, textShadowColor, bold);
+	}
+	
+	private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold) {
+		tv.setTextColor(textColor);
+		tv.setShadowLayer(textShadowColor == 0 ? 0 : 8, 0, 0, textShadowColor);
+		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
 
 	

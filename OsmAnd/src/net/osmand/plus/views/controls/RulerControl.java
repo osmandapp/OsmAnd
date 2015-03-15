@@ -47,9 +47,6 @@ public class RulerControl  {
 		if (!mapActivity.getMyApplication().getSettings().SHOW_RULER.get()) {
 			return;
 		}
-		if (mapActivity.findViewById(R.id.MapButtons).getVisibility() == View.GONE) {
-			return;
-		}
 		OsmandMapTileView view = mapActivity.getMapView();
 		boolean isNight = nightMode == null ? false : nightMode.isNightMode();
 		// update cache

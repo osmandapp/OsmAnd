@@ -32,24 +32,6 @@
             android:contentDescription="@string/shared_string_map"
             android:visibility="gone" />
 
-        <!-- deprecated -->
-
-        <FrameLayout
-            android:id="@+id/MapInfoControls"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:id="@+id/WaypointVisit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal" />
-
-        <FrameLayout
-            android:id="@+id/MapButtons"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </FrameLayout>
 
     <FrameLayout

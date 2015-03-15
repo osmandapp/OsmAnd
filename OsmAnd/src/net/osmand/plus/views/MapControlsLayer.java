@@ -597,10 +597,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void shiftLayout(int height) {
-		// TODO
-	}
-
 	private class MapHudButton {
 		View iv;
 		int bgDark;

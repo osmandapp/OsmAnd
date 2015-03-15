@@ -107,8 +107,8 @@ public class MapActivityActions implements DialogProvider {
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		waypointDialogHelper.init();
 	}
+	
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
 		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
@@ -952,6 +952,14 @@ public class MapActivityActions implements DialogProvider {
 		refreshDrawer = false;
 		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null));
+	}
+	
+	public void showWaypointsDialog(boolean flat) {
+		if(flat) {
+			waypointDialogHelper.showWaypointsDialogFlat(mapActivity, false);
+		} else {
+			waypointDialogHelper.showWaypointsDialog(mapActivity, false);
+		}
 	}
 
 	public void disableDrawer(){

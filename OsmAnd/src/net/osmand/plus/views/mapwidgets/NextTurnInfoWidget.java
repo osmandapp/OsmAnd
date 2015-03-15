@@ -40,9 +40,12 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		turnDrawable = new TurnDrawable(activity);
 		if(horisontalMini) {
 			setImageDrawable(turnDrawable);
+			setTopImageDrawable(null);
 		} else {
 			setTopImageDrawable(turnDrawable);
+			setImageDrawable(null);
 		}
+		updateVisibility(false);
 	}
 	
 	public TurnType getTurnType() {

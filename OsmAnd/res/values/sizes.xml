@@ -52,7 +52,7 @@
 	<dimen name="map_trans_seek_size">80dp</dimen>
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
-	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
+	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_route_buttons_width">60dp</dimen>
 	<dimen name="map_route_buttons_height">54dp</dimen>

@@ -11,7 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-public abstract class BaseMapWidget extends View implements UpdateableWidget {
+public abstract class BaseMapWidget extends View  {
 	int width = 0;
 	int height = 0;
 	Rect padding = new Rect();
@@ -82,7 +82,6 @@ public abstract class BaseMapWidget extends View implements UpdateableWidget {
 		canvas.clipRect(0, 0, getWWidth(),getWHeight());
 	}
 	
-	@Override
 	public boolean updateInfo(DrawSettings drawSettings) { return false; }
 	
 	protected boolean updateVisibility(boolean visible) {

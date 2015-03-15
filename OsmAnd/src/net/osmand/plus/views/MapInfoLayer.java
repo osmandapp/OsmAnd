@@ -14,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
@@ -38,7 +39,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	
 	// groups
-	private View topBar;
 	private LinearLayout rightStack;
 	private LinearLayout leftStack;
 	private ImageButton  expand;
@@ -49,6 +49,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private OsmandSettings settings;
 	private DrawSettings drawSettings;
+	private TopTextView streetNameView;
 
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -69,11 +70,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
 		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
-		topBar = map.findViewById(R.id.map_top_bar);
+		
 		leftStack = (LinearLayout) map.findViewById(R.id.map_left_widgets_panel);
 		rightStack = (LinearLayout) map.findViewById(R.id.map_right_widgets_panel);
 		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
-
+		
 		
 		// update and create controls
 		registerAllControls();
@@ -94,6 +95,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+		
+		streetNameView = new MapInfoWidgetsFactory.TopTextView(map.getMyApplication(), map);
+		updateStreetName(calculateTextState());
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		// register left stack
@@ -168,24 +172,29 @@ public class MapInfoLayer extends OsmandMapLayer {
 			themeId = calcThemeId;
 			TextState ts = calculateTextState();
 //			lanesControl.setBackgroundDrawable(boxFree);
-			for(MapWidgetRegInfo reg :  mapInfoControls.getLeft()) {
+			for (MapWidgetRegInfo reg : mapInfoControls.getLeft()) {
 				updateReg(ts, reg);
 			}
-			for(MapWidgetRegInfo reg :  mapInfoControls.getRight()) {
+			for (MapWidgetRegInfo reg : mapInfoControls.getRight()) {
 				updateReg(ts, reg);
 			}
+			updateStreetName(ts);
 			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
 			leftStack.invalidate();
 		}
 	}
 
+	private void updateStreetName(TextState ts) {
+		streetNameView.setBackgroundResource(ts.boxTop);
+		streetNameView.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold);
+	}
+
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
 		View v = reg.widget.getView().findViewById(R.id.widget_bg);
 		if(v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
-			updateTextColor(v.findViewById(R.id.widget_text_small), ts);
-			updateTextColor(v.findViewById(R.id.widget_text), ts);
+			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold);
 		}
 	}
 
@@ -225,21 +234,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	
-	private void updateTextColor(View v, TextState ts) {
-		if(v instanceof TextView) {
-			TextView tv = (TextView) v;
-			tv.setTextColor(ts.textColor);
-			tv.setShadowLayer(ts.textShadowColor == 0 ? 0 : (8 * view.getScaleCoefficient()), 0, 0, ts.textShadowColor);
-			tv.setTypeface(Typeface.DEFAULT, ts.textBold ? Typeface.BOLD : Typeface.NORMAL);
-		}
-	}
+	
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		this.drawSettings = drawSettings;
 		// update data on draw
 		updateColorShadowsOfText();
-		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded); 
+		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
+		streetNameView.updateInfo(drawSettings);
 		// TODO
 //		lanesControl.updateInfo(drawSettings);
 //		alarmControl.updateInfo(drawSettings);
