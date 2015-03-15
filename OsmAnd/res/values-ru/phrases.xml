@@ -600,14 +600,14 @@
 	<string name="poi_military_range">Военное стрельбище</string>
 	<string name="poi_military_naval_base">Военно-морская база</string>
 	<string name="poi_military_nuclear_explosion_site">Место ядерного взрыва</string>
-<string name="poi_city">Город</string>
+	<string name="poi_city">Город</string>
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
-	<string name="poi_palaeontological_site">Палеонтологический сайт</string>
+	<string name="poi_palaeontological_site">Палеонтологический объект</string>
 
 	<string name="poi_ridge">Горный хребет</string>
 	<string name="poi_glacier">Ледник</string>
