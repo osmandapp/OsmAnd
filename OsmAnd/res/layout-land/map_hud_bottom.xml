@@ -7,8 +7,9 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
+        android:layout_height="wrap_content" 
+        android:layout_gravity="bottom|left"
+        >
         <!-- ALARM -->
 
         <FrameLayout
@@ -69,8 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:layout_marginBottom="@dimen/map_button_margin"
-            android:layout_marginRight="@dimen/map_button_spacing_land"
             android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginRight="@dimen/map_button_spacing_land"
             android:orientation="horizontal" >
 
             <ImageButton
@@ -84,38 +85,10 @@
                 android:id="@+id/map_route_info_button"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
-                android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/map_button_spacing_land"
                 android:background="@drawable/btn_round"
                 android:src="@drawable/ic_action_remove_light" />
         </LinearLayout>
-    </FrameLayout>
-
-    <!-- RULER -->
-
-    <FrameLayout
-        android:id="@+id/map_ruler_layout"
-        android:layout_width="@dimen/map_ruler_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="gone" >
-
-        <TextView
-            android:id="@+id/map_ruler_text"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/map_ruler_bottom_margin"
-            android:gravity="center_horizontal"
-            android:text="100 m"
-            android:textSize="@dimen/map_widget_text_size_small" />
-
-        <ImageView
-            android:id="@+id/map_ruler_image"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/ruler" />
     </FrameLayout>
 
     <FrameLayout
@@ -124,6 +97,32 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/map_button_margin"
         android:layout_weight="1" >
+
+        <!-- RULER -->
+
+        <FrameLayout
+            android:id="@+id/map_ruler_layout"
+            android:layout_width="@dimen/map_ruler_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" >
+
+            <TextView
+                android:id="@+id/map_ruler_text"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/map_ruler_bottom_margin"
+                android:gravity="center_horizontal"
+                android:text="100 m"
+                android:textSize="@dimen/map_widget_text_size_small" />
+
+            <ImageView
+                android:id="@+id/map_ruler_image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ruler" />
+        </FrameLayout>
 
         <!-- TRANSPARENCY -->
 
