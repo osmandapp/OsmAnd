@@ -221,6 +221,7 @@ public class FavoriteDialogs {
 							addFavorite(activity, point, helper);							
 						}
 					});
+					bld.show();
 				} else {
 					addFavorite(activity, point, helper);
 				}
