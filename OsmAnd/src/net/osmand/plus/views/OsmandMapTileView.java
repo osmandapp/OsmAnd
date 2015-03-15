@@ -217,7 +217,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().
 				setLocation(ll.getLatitude(), ll.getLongitude()).setZoom(settings.getLastKnownMapZoom()).
-				setPixelDimensions(100, 100).build();
+				setPixelDimensions(400, 700).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
 	}

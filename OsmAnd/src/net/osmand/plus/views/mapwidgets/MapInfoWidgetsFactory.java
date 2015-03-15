@@ -23,24 +23,18 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.ShadowText;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.router.TurnType;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.Paint.Align;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -291,6 +285,7 @@ public class MapInfoWidgetsFactory {
 		private OsmandSettings settings;
 		private View waypointInfoBar;
 		private LocationPointWrapper lastPoint;
+		private TurnDrawable turnDrawable;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
 			topBar = map.findViewById(R.id.map_top_bar);
@@ -302,6 +297,7 @@ public class MapInfoWidgetsFactory {
 			settings = app.getSettings();
 			waypointHelper = app.getWaypointHelper();
 			updateVisibility(false);
+			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map);
 		}
 		
 		public boolean updateVisibility(boolean visible) {
@@ -335,15 +331,17 @@ public class MapInfoWidgetsFactory {
 
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
+			TurnType[] type = new TurnType[1];
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName();
+					text = routingHelper.getCurrentName(type);
 				} else {
 					int di = MapRouteInfoControl.getDirectionInfo();
 					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = "\u2566 " + RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
+						type[0] = next.getTurnType();
+						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
 					}
 				}
 			} else if(settings.getApplicationMode() != ApplicationMode.DEFAULT &&
@@ -360,6 +358,14 @@ public class MapInfoWidgetsFactory {
 			} else {
 				updateVisibility(true);
 				updateVisibility(addressText, true);
+				boolean update = turnDrawable.setTurnType(type[0]);
+				if (update) {
+					if (type[0] != null) {
+						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+					} else {
+						addressText.setCompoundDrawables(null, null, null, null);
+					}
+				}
 				if (!text.equals(addressText.getText().toString())) {
 					if (!text.equals("")) {
 						topBar.setContentDescription(text);
@@ -388,7 +394,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getMapActions().showWaypointsInDrawer(false);
+							map.getMapActions().showWaypointsDialog(false);
 						}
 					});
 					btnN.setOnClickListener(new View.OnClickListener() {

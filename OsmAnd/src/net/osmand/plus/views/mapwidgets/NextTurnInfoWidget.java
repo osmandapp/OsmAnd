@@ -39,11 +39,11 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		this.horisontalMini = horisontalMini;
 		turnDrawable = new TurnDrawable(activity);
 		if(horisontalMini) {
-			setImageDrawable(turnDrawable);
-			setTopImageDrawable(null);
+			setImageDrawable(turnDrawable, false);
+			setTopImageDrawable(null, true);
 		} else {
-			setTopImageDrawable(turnDrawable);
-			setImageDrawable(null);
+			setImageDrawable(null, false);
+			setTopImageDrawable(turnDrawable, true);
 		}
 		updateVisibility(false);
 	}
@@ -86,9 +86,9 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		String ds = OsmAndFormatter.getFormattedDistance(deviatePath, app);
 		int ls = ds.lastIndexOf(' ');
 		if (ls == -1) {
-			setText(ds, null);
+			setTextNoUpdateVisibility(ds, null);
 		} else {
-			setText(ds.substring(0, ls), ds.substring(ls + 1));
+			setTextNoUpdateVisibility(ds.substring(0, ls), ds.substring(ls + 1));
 		}
 	}
 	
@@ -177,12 +177,14 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			return 0;
 		}
 
-		public void setTurnType(TurnType turnType) {
+		public boolean setTurnType(TurnType turnType) {
 			this.turnType = turnType;
-			if(turnType != null) {
+			if(turnType != this.turnType) {
 				TurnPathHelper.calcTurnPath(pathForTurn, turnType, null);
 				onBoundsChange(getBounds());
+				return true;
 			}
+			return false;
 		}
 		
 	}

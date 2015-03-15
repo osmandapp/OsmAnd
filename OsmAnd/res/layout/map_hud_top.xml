@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
-             
             android:maxLines="1"
             android:shadowColor="@color/color_myloc_distance"
             android:shadowRadius="10"
@@ -74,7 +74,7 @@
                 android:layout_width="@dimen/map_address_height"
                 android:layout_height="@dimen/map_address_height"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_overflow_menu_white" />
 
             <ImageButton
                 android:id="@+id/waypoint_close"

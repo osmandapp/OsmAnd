@@ -36,21 +36,26 @@ public class TextInfoWidget  {
 	}
 	
 	public void setImageDrawable(Drawable imageDrawable) {
+		setImageDrawable(imageDrawable, false);
+	}
+	
+	
+	public void setImageDrawable(Drawable imageDrawable, boolean gone) {
 		if(imageDrawable != null) {
 			imageView.setImageDrawable(imageDrawable);
 			imageView.setVisibility(View.VISIBLE);
 		} else {
-			imageView.setVisibility(View.INVISIBLE);
+			imageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
 		}
 		imageView.invalidate();
 	}
 	
-	public void setTopImageDrawable(Drawable imageDrawable) {
+	public void setTopImageDrawable(Drawable imageDrawable, boolean gone) {
 		if(imageDrawable != null) {
 			topImageView.setImageDrawable(imageDrawable);
 			topImageView.setVisibility(View.VISIBLE);
 		} else {
-			topImageView.setVisibility(View.INVISIBLE);
+			topImageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
 		}
 		topImageView.invalidate();
 	}
@@ -80,6 +85,11 @@ public class TextInfoWidget  {
 	}
 	
 	public void setText(String text, String subtext) {
+		setTextNoUpdateVisibility(text, subtext);
+		updateVisibility(text != null);
+	}
+
+	protected void setTextNoUpdateVisibility(String text, String subtext) {
 		if (text != null) {
 			if (subtext != null) {
 				setContentDescription(text + " " + subtext); //$NON-NLS-1$
@@ -102,7 +112,6 @@ public class TextInfoWidget  {
 		} else {
 			smallTextView.setText(subtext);
 		}
-		updateVisibility(text != null);
 	}
 	
 	protected boolean updateVisibility(boolean visible) {
