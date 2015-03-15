@@ -1609,7 +1609,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 		\n\t* ログウィジェットの有効／無効切替
 	</string>
 	<string name="rendering_attr_noPolygons_description">マップ上の土地の特徴を透明にする</string>
-	<string name="osmand_rastermaps_plugin_description">キャッシュタイルマップをベースマップとしたり、オーバーレイ/アンダーレイ表示を切り替えたり、オンライン地図に切り替えたりなど様々な設定をすることが出来ます。これらのマップはオフラインにて調整することができ、OsmAndフォルダにコピーすることで動作します。</string>
+	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル（Mapnik風）から衛星画像、天気図、気候地図、地質図、陰影起伏層、等々、目的に応じた様々な（タイル又はラスタと呼ばれる）オンラインマップマップにアクセスし、レイヤーに反映することができます。\n\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。\n\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。（手動でOsmAndのデータフォルダにコピーする必要があります） "</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">0.8.0での変更点:
 		\n\t- *プラグイン機能*
@@ -1923,7 +1923,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
     <string name="osmo_plugin_description">"OpenStreetMapにて、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
-    <string name="osmo_plugin_name">OsMo(高度なリアルタイム監視)</string>
+    <string name="osmo_plugin_name">OsMoモニタリング</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
     <string name="misc_pref_title">その他備考</string>
@@ -2033,7 +2033,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
-    <string name="record_plugin_description">マップ画面上のボタンをタップすることで経路等を保存します。ローカルのGPXファイルへの旅行の記録やオンラインWebサービスの利用の設定が出来ます。</string>
+    <string name="record_plugin_description">"このプラグインはマップ画面のGPX記録ウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録されたトラックは、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
     <string name="record_plugin_name">旅程の記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
@@ -2164,4 +2164,31 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="action_modify">アクションの変更</string>
 	<string name="action_delete">アクションの削除</string>
 	<string name="osm_edits">OSM の編集</string>
-	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> </resources>
+	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">残り時間</string> <string name="parking_place_limited">駐車場の制限時間を過ぎました</string>
+	<string name="your_edits">あなたの編集</string>
+    <string name="waypoint_visit_after">後で訪問</string>
+    <string name="waypoint_visit_before">前に訪問</string>
+    <string name="simulate_your_location">自分の位置をシミュレート</string>
+    <string name="drawer">フラットリスト</string>
+    <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
+    <string name="tips_and_tricks_descr">よくある質問(FAQ)</string>
+    <string name="routing_settings_2">ナビゲーションの設定</string>
+    <string name="general_settings_2">全般設定</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_enable">有効</string>
+	<string name="shared_string_disable">無効</string>
+	<string name="shared_string_selected">選択済み</string>
+	<string name="shared_string_deselect">選択解除</string>
+	<string name="shared_string_deselect_all">全て選択解除</string>
+	<string name="shared_string_export">エクスポート</string>
+	<string name="shared_string_unexpected_error">予期しないエラーが発生</string>
+	<string name="shared_string_action_template">アクション {0}</string>
+	<string name="shared_string_collapse">破綻</string>
+	<string name="shared_string_currently_recording_track">現在の経路を記録</string>
+	<string name="shared_string_audio">音声</string>
+	<string name="shared_string_video">ビデオ</string>
+	<string name="shared_string_photo">写真</string>
+	<string name="route_points">ルート地点</string>
+	<string name="track_segments">経路セグメント</string>
+	<string name="track_points">経路地点</string>
+	</resources>
