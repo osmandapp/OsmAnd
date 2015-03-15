@@ -12,7 +12,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -20,6 +19,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.content.Context;
@@ -43,7 +43,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private LinearLayout leftStack;
 	private ImageButton  expand;
 	private static boolean expanded = false;
-	private BaseMapWidget lanesControl;
+	private LanesControl lanesControl;
 	private AlarmWidget alarmControl;
 	private RulerWidget rulerControl;
 	private MapWidgetRegistry mapInfoControls;
@@ -92,8 +92,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
-		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
-		lanesControl.setVisibility(View.GONE);
 		
 		streetNameView = new MapInfoWidgetsFactory.TopTextView(map.getMyApplication(), map);
 		updateStreetName(calculateTextState());
@@ -176,7 +174,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			TextState ts = calculateTextState();
-//			lanesControl.setBackgroundDrawable(boxFree);
+			map.findViewById(R.id.map_center_info).setBackgroundResource(ts.boxFree);
 			for (MapWidgetRegInfo reg : mapInfoControls.getLeft()) {
 				updateReg(ts, reg);
 			}
@@ -184,6 +182,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(ts);
+			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius);
 			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
@@ -252,8 +251,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView.updateInfo(drawSettings);
 		alarmControl.updateInfo(drawSettings);
 		rulerControl.updateInfo(tileBox, drawSettings);
-		// TODO
-//		lanesControl.updateInfo(drawSettings);
+		lanesControl.updateInfo(drawSettings);
 		
 	}
 	

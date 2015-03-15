@@ -12,7 +12,7 @@
         <FrameLayout
             android:id="@+id/map_alarm_warning"
             android:layout_gravity="bottom|left"
-            android:layout_marginBottom="@dimen/map_button_shadow_height"
+            android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
             android:layout_marginLeft="@dimen/map_button_shadow_margin"
             android:layout_width="@dimen/map_alarm_size"
             android:layout_height="@dimen/map_alarm_size">

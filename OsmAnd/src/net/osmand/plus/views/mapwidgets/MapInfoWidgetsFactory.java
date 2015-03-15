@@ -338,9 +338,9 @@ public class MapInfoWidgetsFactory {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						type[0] = next.getTurnType();
 						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
-						if(next.distance > 0) {
-							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
-						}
+//						if(next.distance > 0) {
+//							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
+//						}
 						
 					}
 				}

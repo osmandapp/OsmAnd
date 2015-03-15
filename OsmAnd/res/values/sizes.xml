@@ -58,11 +58,13 @@
 	<dimen name="map_route_buttons_height">54dp</dimen>
 	<dimen name="map_address_height">40dp</dimen>
 	<dimen name="map_button_size">48dp</dimen>
-	<dimen name="map_ruler_width">100dp</dimen>
+	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">7dp</dimen>
 	<dimen name="map_button_shadow_width">52dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
+	
+	<dimen name="map_alarm_bottom_margin">87dp</dimen>
 	<dimen name="map_button_shadow_height">85dp</dimen>
 	<dimen name="map_widget_icon">24dp</dimen>
 	<dimen name="map_widget_height">32dp</dimen>

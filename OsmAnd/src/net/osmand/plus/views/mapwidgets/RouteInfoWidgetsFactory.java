@@ -34,10 +34,13 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -50,9 +53,6 @@ import android.widget.TextView;
 
 public class RouteInfoWidgetsFactory {
 
-	// TODO
-	private float scaleCoefficient = 1;
-	
 	public NextTurnInfoWidget createNextInfoControl(final Activity activity,
 			final OsmandApplication app, boolean horisontalMini) {
 		final OsmandSettings settings = app.getSettings();
@@ -486,9 +486,9 @@ public class RouteInfoWidgetsFactory {
 		return distanceControl;
 	}
 	
-	private static final float miniCoeff = 2f;
 	
-	private Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType) {
+	
+	private static Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType, float coef) {
 		if(laneType == 0) {
 			return defaultType;
 		}
@@ -501,137 +501,206 @@ public class RouteInfoWidgetsFactory {
 		}
 		p = new Path();
 		Matrix pathTransform = new Matrix();
-		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
+		pathTransform.postScale(coef, coef );
 		TurnType tp = TurnType.valueOf(laneType, false);
 		TurnPathHelper.calcTurnPath(p, tp, pathTransform);
 		paths.set(laneType, p);
 		return p;
 	}
 	
-	public BaseMapWidget createLanesControl(final MapActivity map, final OsmandMapTileView view) {
-		final List<Path> paths = new ArrayList<Path>();
-		final Path laneStraight = getPathFromTurnType(paths, TurnType.C, null);
-		 
-		final Paint paintBlack = new Paint();
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setColor(Color.BLACK);
-		paintBlack.setAntiAlias(true);
-		paintBlack.setStrokeWidth(2.5f);
-		
-		final Paint paintRouteDirection = new Paint();
-		paintRouteDirection.setStyle(Style.FILL);
-		paintRouteDirection.setColor(view.getResources().getColor(R.color.nav_arrow));
-		paintRouteDirection.setAntiAlias(true);
-		final float w = 72 * scaleCoefficient / miniCoeff;
-		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
-		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
-		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
-		
-		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
-			int[] lanes = null; 
-			boolean imminent = false;
+	public static class LanesControl {
+		private MapViewTrackingUtilities trackingUtilities;
+		private OsmAndLocationProvider locationProvider;
+		private RoutingHelper rh;
+		private OsmandSettings settings;
+		private ImageView lanesView;
+		private TextView lanesText;
+		private OsmandApplication app;
+		private int dist;
+		private LanesDrawable lanesDrawable;
 
-			
-			@Override
-			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-				int ls = (int) (lanes == null ? 0 : lanes.length * w);
-				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
-			}
-
-			@Override
-			protected void onDraw(Canvas canvas) {
-				super.onDraw(canvas);
-				//to change color immediately when needed
-				if (lanes != null && lanes.length > 0) {
-					canvas.save();
-					// canvas.translate((int) (16 * scaleCoefficient), 0);
-					for (int i = 0; i < lanes.length; i++) {
-						int turnType;
-						if ((lanes[i] & 1) == 1) {
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
-							turnType = TurnType.getPrimaryTurn(lanes[i]);
-						} else {
-							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
-							turnType = TurnType.getPrimaryTurn(lanes[i]); 
-						}
-						Path p = getPathFromTurnType(paths, turnType, laneStraight);
-						canvas.drawPath(p, paintBlack);
-						canvas.drawPath(p, paintRouteDirection);
-						canvas.translate(w, 0);
+		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
+			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
+			lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
+			 
+			lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
+			lanesView.setImageDrawable(lanesDrawable);
+			trackingUtilities = map.getMapViewTrackingUtilities();
+			locationProvider = map.getMyApplication().getLocationProvider();
+			settings = map.getMyApplication().getSettings();
+			rh = map.getMyApplication().getRoutingHelper();
+			app = map.getMyApplication();
+		}
+		
+		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
+			lanesText.setTextColor(textColor);
+			lanesText.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
+			lanesText.setShadowLayer(shadowRadius, 0, 0, textShadowColor);
+		}
+		
+		public boolean updateInfo(DrawSettings drawSettings) {
+			boolean visible = false;
+			int locimminent = -1;
+			int[] loclanes = null;
+			int dist = 0;
+			// TurnType primary = null;
+			if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()
+					&& settings.SHOW_LANES.get()) {
+				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
+				Location lp = locationProvider.getLastKnownLocation();
+				if(ro != null) {
+					float degree = lp == null || !lp.hasBearing() ? 0 : lp.getBearing();
+					loclanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+					if(loclanes == null) {
+						loclanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
 					}
-					canvas.restore();
+				}
+			} else if (rh != null && rh.isRouteCalculated() ) {
+				if (rh.isFollowingMode() && settings.SHOW_LANES.get()) {
+					NextDirectionInfo r = rh.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+					if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
+						loclanes  = r.directionInfo.getTurnType().getLanes();
+						// primary = r.directionInfo.getTurnType();
+						locimminent = r.imminent;
+						// Do not show too far 
+						if ((r.distanceTo > 800 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
+							loclanes = null;
+						}
+						dist = r.distanceTo;
+					}
+				} else {
+					int di = MapRouteInfoControl.getDirectionInfo();
+					if (di >= 0 && MapRouteInfoControl.isControlVisible()
+							&& di < rh.getRouteDirections().size()) {
+						RouteDirectionInfo next = rh.getRouteDirections().get(di);
+						if (next != null) {
+							loclanes = next.getTurnType().getLanes();
+							// primary = next.getTurnType();
+						}
+					}
 				}
 			}
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean visible = false;
-				int locimminent = -1;
-				int[] loclanes = null;
-				// TurnType primary = null;
-				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()
-						&& view.getSettings().SHOW_LANES.get()) {
-					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
-					Location lp = locationProvider.getLastKnownLocation();
-					if(ro != null) {
-						float degree = lp == null || !lp.hasBearing() ? 0 : lp.getBearing();
-						loclanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
-						if(loclanes == null) {
-							loclanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
-						}
-					}
-				} else if (rh != null && rh.isRouteCalculated() ) {
-					if (rh.isFollowingMode() && view.getSettings().SHOW_LANES.get()) {
-						NextDirectionInfo r = rh.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
-							loclanes  = r.directionInfo.getTurnType().getLanes();
-							// primary = r.directionInfo.getTurnType();
-							locimminent = r.imminent;
-							// Do not show too far 
-							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
-								loclanes = null;
-							}
-						}
+			visible = loclanes != null && loclanes.length > 0;
+			if (visible) {
+				if (!Arrays.equals(lanesDrawable.lanes, loclanes) || 
+						(locimminent == 0) != lanesDrawable.imminent) {
+					lanesDrawable.imminent = locimminent == 0;
+					lanesDrawable.lanes = loclanes;
+					lanesDrawable.updateBounds();
+					lanesView.setImageDrawable(null);
+					lanesView.setImageDrawable(lanesDrawable);
+					lanesView.requestLayout();
+					lanesView.invalidate();
+				}
+				if (distChanged(dist, this.dist)) {
+					this.dist = dist;
+					if(dist == 0) {
+						lanesText.setText("");
 					} else {
-						int di = MapRouteInfoControl.getDirectionInfo();
-						if (di >= 0 && MapRouteInfoControl.isControlVisible()
-								&& di < rh.getRouteDirections().size()) {
-							RouteDirectionInfo next = rh.getRouteDirections().get(di);
-							if (next != null) {
-								loclanes = next.getTurnType().getLanes();
-								// primary = next.getTurnType();
-							}
-						}
+						lanesText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 					}
+					lanesText.invalidate();
 				}
-				visible = loclanes != null && loclanes.length > 0;
-				if (visible) {
-					if (!Arrays.equals(lanes, loclanes)) {
-						lanes = loclanes;
-						requestLayout();
-						invalidate();
-					}
-					if ((locimminent == 0) != imminent) {
-						imminent = (locimminent == 0);
-						invalidate();
-					}
-				}
-				updateVisibility(visible);
-				return true;
 			}
-		};
-		
-		return lanesControl;
-	}
-
-	protected Path straight() {
-		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
-		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.straight(), pathTransform);
-		return laneStraight;
+			updateVisibility(lanesText, visible);
+			updateVisibility(lanesView, visible);
+			return true;
+		}
 	}
 	
+	
+	private static class LanesDrawable extends Drawable {
+		int[] lanes = null; 
+		boolean imminent = false;
+		private Context ctx;
+		private ArrayList<Path> paths = new ArrayList<Path>();
+		private Paint paintBlack;
+		private Path laneStraight;
+		private Paint paintRouteDirection;
+		private float scaleCoefficient;
+		private int height;
+		private int width;
+		private static final float miniCoeff = 2f;
+		
+		public LanesDrawable(Context ctx, float scaleCoefficent) {
+			this.ctx = ctx;
+			this.scaleCoefficient = scaleCoefficent;
+			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff);
+			paintBlack = new Paint();
+			paintBlack.setStyle(Style.STROKE);
+			paintBlack.setColor(Color.BLACK);
+			paintBlack.setAntiAlias(true);
+			paintBlack.setStrokeWidth(2.5f);
+			
+			paintRouteDirection = new Paint();
+			paintRouteDirection.setStyle(Style.FILL);
+			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
+			paintRouteDirection.setAntiAlias(true);
+		}
+
+		public void updateBounds() {
+			int w = (int) (72 * scaleCoefficient / miniCoeff);
+			int cnt = lanes != null ? lanes.length : 0 ;
+			width = w * cnt;
+			height = w;
+		}
+		
+		@Override
+		public int getIntrinsicHeight() {
+			return height;
+		}
+		
+		@Override
+		public int getIntrinsicWidth() {
+			return width;
+		}
+
+		@Override
+		public void draw(Canvas canvas) {
+			float w = 72 * scaleCoefficient / miniCoeff;
+			//to change color immediately when needed
+			if (lanes != null && lanes.length > 0) {
+				canvas.save();
+				// canvas.translate((int) (16 * scaleCoefficient), 0);
+				for (int i = 0; i < lanes.length; i++) {
+					int turnType;
+					if ((lanes[i] & 1) == 1) {
+						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) : 
+							ctx.getResources().getColor(R.color.nav_arrow));
+						turnType = TurnType.getPrimaryTurn(lanes[i]);
+					} else {
+						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+						turnType = TurnType.getPrimaryTurn(lanes[i]); 
+					}
+					Path p = getPathFromTurnType(paths, turnType, laneStraight, scaleCoefficient / miniCoeff);
+					canvas.drawPath(p, paintBlack);
+					canvas.drawPath(p, paintRouteDirection);
+					canvas.translate(w, 0);
+				}
+				canvas.restore();
+			}			
+		}
+
+		@Override
+		public void setAlpha(int alpha) {
+		}
+
+		@Override
+		public void setColorFilter(ColorFilter cf) {
+		}
+
+		@Override
+		public int getOpacity() {
+			return 0;
+		}
+		
+	}
+	
+	
+	public LanesControl createLanesControl(final MapActivity map, final OsmandMapTileView view) {
+		return new LanesControl(map, view);
+	}
+
 	public static class RulerWidget  {
 		
 		private View layout;

@@ -11,15 +11,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_flat"
-        android:minHeight="@dimen/map_address_height">
+        android:minHeight="@dimen/map_address_height" >
 
         <!-- android:layout_weight="1" to show properly next turn -->
+
         <TextView
             android:id="@+id/map_address_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:shadowColor="@color/color_myloc_distance"
@@ -34,7 +35,7 @@
             android:id="@+id/waypoint_info_bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/waypoint_icon"
@@ -110,10 +111,9 @@
                     android:layout_gravity="top|left"
                     android:orientation="vertical" >
 
-                    <!--
                     <include layout="@layout/map_hud_widget" />
                     <include layout="@layout/map_hud_widget" />
-                    -->
+                    <include layout="@layout/map_hud_widget" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -158,16 +158,31 @@
             android:background="@drawable/btn_round"
             android:orientation="vertical" >
 
+            <ImageView
+                android:id="@+id/map_lanes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/map_lanes_dist_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="1048 km"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_widget_text_size_small" />
+
             <ProgressBar
                 android:id="@+id/map_horizontal_progress"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="@dimen/map_routing_progress_width"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/map_button_margin"
                 android:layout_marginRight="@dimen/map_button_margin"
-                android:layout_height="wrap_content"
                 android:max="100"
                 android:progress="60"
-                
-                style="?android:attr/progressBarStyleHorizontal" 
                 android:visibility="gone" />
         </LinearLayout>
         <!-- RIGHT widgets colon -->
@@ -206,11 +221,7 @@
                         android:orientation="vertical" >
 
                         <include layout="@layout/map_hud_widget" />
-                        <!--
-                    <include layout="@layout/map_hud_widget" />
-                    <include layout="@layout/map_hud_widget" />
-                    <include layout="@layout/map_hud_widget" />
-                        -->
+                        <include layout="@layout/map_hud_widget" />
                     </LinearLayout>
 
                     <ImageButton
