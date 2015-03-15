@@ -1937,7 +1937,7 @@
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
-\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 기부할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특수 서드파티 분석 도구를 사용하여 분석 할 수 있습니다.\n\n\n지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는온라인  웹 서비스를 사용하여 여행을 기록하기 위한 설정을 보여줍니다. "</string>
+\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
     <string name="record_plugin_name">여행 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
@@ -1950,7 +1950,7 @@
     <string name="speak_favorites">주변의 즐겨찾기 알리기</string>
     <string name="speak_poi">주변의 POI 알리기</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
-	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
+	<string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
 	<string name="confirm_every_run">항상 요청</string>
@@ -2052,7 +2052,7 @@
     
 	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
 	<string name="avoid_roads_msg">원하는 도로를 선택하여 대체 경로를 실행할 수 있습니다</string>
-    <string name="save_track_to_gpx_globally_headline">트랙 로깅 요구</string>
+    <string name="save_track_to_gpx_globally_headline">요구시 트랙을 기록</string>
 	<string name="recents">최근</string>
 	<string name="rendering_attr_streetLighting_name">거리 조명</string>
     <string name="proxy_pref_title">프록시</string>
@@ -2100,11 +2100,7 @@
 		\n\n(모든 스키 슬로프와 크로스 컨트리 스키 경로를 볼 수 있는)  글로벌 지도는 \'세계 스키 지도\'를 다운로드하여  사용할 수 있습니다.
 		\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.
 	</string>
-	<string name="plugin_touringview_descr">"지도 스타일을  \'여행 보기\'로 변경합니다, 이는 여행자와 전문 드라이버을 위한 특별한 상세 보기를 지원합니다.
-		\n\n이 보기는 다음을 제공 합니다, 어떤 주어진 된 지도 줌레벨에서, 여행의 최대 용량으로 지도 데이터 (특히 도로, 트랙, 경로 및 방향 표시)에서 사용할 수 있다. 그것은 또한 명확하게 (예를 들면 대형 차량 운전 하는 경우, 컬러 코딩으로) 모든 유형의 도로를 묘사합니다.
-		\n\n특별한 지도 다운로드는 필요 하지 않습니다, 보기(View)는 표준 지도에서 만들어집니다.
-		\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.
-	</string>
+	<string name="plugin_touringview_descr">"OsmAnd의 지도 스타일을  \'여행 보기\'로 변경합니다, 이는 여행자와 전문 드라이버을 위한 특별한 상세 보기를 지원합니다.\n\t\t\n\n이 보기는 다음을 제공 합니다, 어떤 주어진 된 지도 줌레벨에서, 여행의 최대 용량으로 지도 데이터 (특히 도로, 트랙, 경로 및 방향 표시)에서 사용할 수 있다. 그것은 또한 명확하게 (예를 들면 대형 차량 운전 하는 경우, 컬러 코딩으로) 모든 유형의 도로를 묘사합니다.\n\t\t\n\n특별한 지도 다운로드는 필요 하지 않습니다, 보기(View)는 표준 지도에서 만들어집니다.\n\t\t\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다. "</string>
 	<string name="plugin_touringview_name">여행중인 지도 보기</string>
 	<string name="location_on_map">위치:
 \n위도 %1$s\n경도 %2$s</string>
