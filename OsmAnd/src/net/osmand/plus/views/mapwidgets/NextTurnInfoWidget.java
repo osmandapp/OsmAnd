@@ -43,7 +43,6 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			setImageDrawable(null, false);
 			setTopImageDrawable(turnDrawable, true);
 		}
-		updateVisibility(false);
 	}
 	
 	public TurnType getTurnType() {
@@ -51,6 +50,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	}
 	
 	public void setTurnType(TurnType turnType) {
+		updateVisibility(turnType != null);
 		if (turnDrawable.setTurnType(turnType)) {
 			if(horisontalMini) {
 				setImageDrawable(turnDrawable, false);
@@ -58,7 +58,6 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 				setTopImageDrawable(turnDrawable, true);
 			}
 		}
-		updateVisibility(turnType != null);
 	}
 	
 	public void setTurnImminent(int turnImminent, boolean deviatedFromRoute) {

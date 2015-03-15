@@ -22,6 +22,7 @@
             android:id="@+id/MapView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:background="@drawable/btn_flat"
             android:contentDescription="@string/shared_string_map"
             android:visibility="gone" />
 

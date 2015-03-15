@@ -40,7 +40,6 @@
             android:shadowColor="@color/color_myloc_distance"
             android:textColor="@color/color_black"
             android:shadowRadius="10"
-            android:textStyle="bold"
             android:textSize="@dimen/map_widget_text_size"
             android:text="1048" />
         <TextView
@@ -55,7 +54,6 @@
             android:shadowColor="@color/color_myloc_distance"
             android:textColor="@color/color_black"
             android:shadowRadius="10"
-            android:textStyle="bold"
             android:textSize="@dimen/map_widget_text_size_small"
             android:text="km" />
     </LinearLayout>
