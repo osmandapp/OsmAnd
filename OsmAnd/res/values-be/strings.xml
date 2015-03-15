@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -227,11 +228,11 @@
     <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. \"Выкарыстаць месцазнаходжаньне…\" каб прызначыць нататку ў выбраным месцы</string>
     
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
-    <string name="audionotes_plugin_description">Паказвае кнопку для запісу аўдыё/відэа-нататак падчас падарожжа</string>
+    <string name="audionotes_plugin_description">Модуль для стварэньня аўдыё/відэа нататак падчас падарожжаў, з дапамогай выкарыстаньня кнопкі на экране мапы або праз кантэкстнае мэню на любым месцы на мапе.</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="index_srtm_parts">частак</string>
     <string name="index_srtm_ele">Ізалініі вышынь</string>
-    <string name="srtm_plugin_name">Ізалініі вышынь (зьнешні модуль)</string>
+    <string name="srtm_plugin_name">Ізалініі вышынь</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
     <string name="download_srtm_maps">Ізалініі вышынь</string>
@@ -559,7 +560,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Месца стаянкі</string>
 	<string name="osmand_parking_plugin_description">Зьнешні модуль (сьцягваецца асобна), які дазваляе запомніць месца, дзе прыпаркаваны ваш аўтамабіль.</string>
-	<string name="osmand_parking_plugin_name">Месца стаянкі (зьнешні модуль)</string>
+	<string name="osmand_parking_plugin_name">Месца стаянкі</string>
 	<string name="context_menu_item_add_parking_point">Пазначыць месца стаянкі</string>
 	<string name="context_menu_item_delete_parking_point">Выдаліць пазнаку месца стаянкі</string>
 	<string name="gpxup_public">Агульны</string>
@@ -580,7 +581,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="rendering_attr_hmRendered_description">Адлюстроўваць больш дэталяў на мапе</string>
 	<string name="rendering_attr_hmRendered_name">Паказаць больш дэталей мапы</string>
 	<string name="local_index_routing_data">Дадзеныя маршрутызацыі</string>
-	<string name="navigate_point_format">Фармат:</string>
+	<string name="navigate_point_format">Фармат</string>
 	<string name="poi_search_desc">Пошук POI</string>
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
@@ -681,14 +682,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="west_north_west">поўнач-паўночны захад</string>
 	<string name="north_west">паўночны захад</string>
 	<string name="north_north_west">поўнач-паўночны захад</string>
-	<string name="front">Наперад</string>
-	<string name="front_right">Направа наперад</string>
-	<string name="right">Направа</string>
-	<string name="back_right">Направа назад</string>
-	<string name="back">Назад</string>
-	<string name="back_left">Налева назад</string>
-	<string name="left">Налева</string>
-	<string name="front_left">Налева наперад</string>
+	<string name="front">наперад</string>
+	<string name="front_right">направа наперад</string>
+	<string name="right">направа</string>
+	<string name="back_right">направа назад</string>
+	<string name="back">назад</string>
+	<string name="back_left">налева назад</string>
+	<string name="left">налева</string>
+	<string name="front_left">налева наперад</string>
 	<string name="oclock">гадзін</string>
 	<string name="towards">да</string>
 	<string name="accuracy">Дакладнасьць</string>
@@ -896,7 +897,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	
 	
 	
-	<string name="local_index_installed">Выданьне</string>
+	<string name="local_index_installed">Лякальная вэрсія</string>
 	<string name="local_index_items_backuped">%1$d з %2$d аб\'ектаў пасьпяхова дэактываваныя.</string>
 	<string name="local_index_items_deleted">%1$d з %2$d аб\'ектаў пасьпяхова выдаленыя.</string>
 	<string name="local_index_items_restored">%1$d з %2$d аб\'ектаў пасьпяхова актываваныя.</string>
@@ -1221,7 +1222,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_online_address">Сеціўны пошук</string>
 	<string name="max_level_download_tile">Максімальнае павелічэньне онлайн мапаў</string>
 	<string name="max_level_download_tile_descr">Выберыце максімальны ўзровень павелічэньня для сьцягваньня фрагмэнтаў мапы з Інтэрнэту</string>
-	<string name="route_general_information">Агульная адлегласьць %1$s,\n час у дарозе %2$d г. %3$d хв.</string>
+	<string name="route_general_information">Агульная адлегласьць %1$s, час у дарозе %2$d г. %3$d хв.</string>
 	<string name="router_service_descr">Абраць сеціўны ці пазасеціўны сэрвіс навігацыі</string>
 	<string name="router_service">Сэрвіс навігацыі</string>
 	<string name="sd_dir_not_accessible">Каталёг на SD-карце недаступны для захоўваньня!</string>
@@ -1309,7 +1310,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_tile_source">Крыніца растравых мапаў</string>
 	<string name="map_source">Крыніца мапы</string>
 	<string name="use_internet">Выкарыстоўваць Інтэрнэт</string>
-	<string name="show_location">Паказаць месца</string>
+	<string name="show_location">Паказаць ваша месцазнаходжаньне</string>
 	
 	
 	<string name="show_gps_coordinates_text">Паказаць GPS каардынаты на мапе</string>
@@ -2025,7 +2026,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_remember_my_choice">Запомніць мой выбар</string>
 	<string name="shared_string_refresh">Абнавіць</string>
 	<string name="shared_string_download">Сцягнуць</string>
-	<string name="shared_string_downloading">Сьцягваньне…</string>
+	<string name="shared_string_downloading">Сьцягваньне</string>
 	<string name="shared_string_download_successful">Пасьпяхова сьцягнута</string>
 	<string name="shared_string_io_error">Адбылася памылка ўводу/вываду</string>
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>
@@ -2050,4 +2051,29 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_points">Пункты маршруту</string>
 	<string name="shared_string_more_actions">Больш дзеяньняў</string>
 	
+	<string name="osmand_parking_outdated">Састарэлі</string>
+	<string name="osmand_parking_hour">г</string><string name="osmand_parking_minute">хв</string><string name="osmand_parking_time_left">Засталося</string> <string name="action_create">Стварыць дзеяньне</string>
+	<string name="action_modify">Зьмяніць дзеяньне</string>
+	<string name="action_delete">Выдаліць дзеяньне</string>
+	<string name="osm_edits">праўкі OSM</string>
+	<string name="parking_place_limited">Абмежаванае па часе парковачнае месца</string>
+	<string name="your_edits">Вашы праўкі</string>
+    <string name="waypoint_visit_after">Наведаць пасьля</string>
+    <string name="waypoint_visit_before">Наведаць, перш чым</string>
+    <string name="simulate_your_location">Мадэляваць ваша месцазнаходжаньне</string>
+    <string name="drawer">Плоскі сьпіс</string>
+    <string name="short_location_on_map">Шырата %1$s\nДаўгата %2$s</string>
+    <string name="tips_and_tricks_descr">Пытаньні і адказы, апошнія зьмены і іншае</string>
+    <string name="routing_settings_2">Налады навігацыі</string>
+    <string name="general_settings_2">Агульныя налады</string>
+	<string name="shared_string_clear_all">Ачысьціць ўсё</string>
+	<string name="shared_string_collapse">Згарнуць</string>
+	<string name="shared_string_my_location">Маё месцазнаходжаньне</string>
+	<string name="shared_string_my_tracks">Мае сьляды</string>
+	<string name="shared_string_currently_recording_track">Бягучы сьлед, які запісваецца</string>
+	<string name="plugin_touringview_name">Турыстычная мапа</string>
+	<string name="rename_failed">Не атрымалася перайменаваць.</string>
+	<string name="days_behind">дзён таму</string>
+	<string name="shared_string_release">Выдана</string>
+	<string name="shared_string_my_favorites">Мае ўлюбёныя</string>
 	</resources>
