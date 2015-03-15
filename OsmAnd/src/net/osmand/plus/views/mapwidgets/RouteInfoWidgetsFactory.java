@@ -19,6 +19,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -712,6 +713,7 @@ public class RouteInfoWidgetsFactory {
 		private int cacheRulerZoom;
 		private double cacheRulerTileX;
 		private double cacheRulerTileY;
+		private boolean orientationPortrait;
 
 		public RulerWidget(final OsmandApplication app, MapActivity ma) {
 			this.ma = ma;
@@ -719,6 +721,7 @@ public class RouteInfoWidgetsFactory {
 			icon = (ImageView) ma.findViewById(R.id.map_ruler_image);
 			text = (TextView) ma.findViewById(R.id.map_ruler_text);
 			maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+			orientationPortrait = ScreenOrientationHelper.isOrientationPortrait(ma);
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
@@ -732,6 +735,8 @@ public class RouteInfoWidgetsFactory {
 			OsmandMapTileView view = ma.getMapView();
 			// update cache
 			if (view.isZooming()) {
+				visible = false;
+			} else if (!orientationPortrait && ma.getRoutingHelper().isRoutePlanningMode()) {
 				visible = false;
 			} else if ((tb.getZoom() != cacheRulerZoom || Math.abs(tb.getCenterTileX() - cacheRulerTileX) > 1 || Math
 					.abs(tb.getCenterTileY() - cacheRulerTileY) > 1) && tb.getPixWidth() > 0 && maxWidth > 0) {
