@@ -61,6 +61,20 @@ public class MapWidgetRegistry {
 		}
 	}
 	
+	public boolean hasCollapsibles(ApplicationMode mode) {
+		for (MapWidgetRegInfo r : left) {
+			if (r.visibleCollapsed(mode)) {
+				return true;
+			}
+		}
+		for (MapWidgetRegInfo r : right) {
+			if (r.visibleCollapsed(mode)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	public void updateInfo(ApplicationMode mode, DrawSettings drawSettings, boolean expanded) {
 		update(mode, drawSettings, expanded, left);

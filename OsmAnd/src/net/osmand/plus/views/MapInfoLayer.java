@@ -20,10 +20,9 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -31,7 +30,6 @@ import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
-	public static float scaleCoefficient = 1;
 	
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
@@ -67,40 +65,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-		scaleCoefficient = view.getScaleCoefficient();
-
-		Paint paintText = new Paint();
-		paintText.setStyle(Style.FILL_AND_STROKE);
-		paintText.setColor(Color.BLACK);
-		paintText.setTextSize(23 * scaleCoefficient);
-		paintText.setAntiAlias(true);
-		paintText.setStrokeWidth(4);
-
-		Paint paintSubText = new Paint();
-		paintSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSubText.setColor(Color.BLACK);
-		paintSubText.setTextSize(15 * scaleCoefficient);
-		paintSubText.setAntiAlias(true);
-
-		Paint paintSmallText = new Paint();
-		paintSmallText.setStyle(Style.FILL_AND_STROKE);
-		paintSmallText.setColor(Color.BLACK);
-		paintSmallText.setTextSize(19 * scaleCoefficient);
-		paintSmallText.setAntiAlias(true);
-		paintSmallText.setStrokeWidth(4);
-
-		Paint paintSmallSubText = new Paint();
-		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSmallSubText.setColor(Color.BLACK);
-		paintSmallSubText.setTextSize(13 * scaleCoefficient);
-		paintSmallSubText.setAntiAlias(true);
-
-		Paint paintImg = new Paint();
-		paintImg.setDither(true);
-		paintImg.setFilterBitmap(true);
-		paintImg.setAntiAlias(true);
-
-
 		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
 		topBar = map.findViewById(R.id.map_top_bar);
 		leftStack = (LinearLayout) map.findViewById(R.id.map_left_widgets_panel);
@@ -113,11 +77,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		alarmControl.setVisibility(View.GONE);
 		lanesControl.setVisibility(View.GONE);
 		recreateControls();
+		updateColorShadowsOfText(null);
 	}
 	
 	public void registerAllControls(){
-		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(scaleCoefficient);
-		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(scaleCoefficient);
+		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(view.getScaleCoefficient());
+		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(view.getScaleCoefficient());
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
@@ -158,12 +123,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	public void recreateControls() {
 		rightStack.removeAllViews();
-		mapInfoControls.populateStackControl(rightStack, view.getSettings().getApplicationMode(), false, expanded);
+		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
 		leftStack.removeAllViews();
-		mapInfoControls.populateStackControl(leftStack, view.getSettings().getApplicationMode(), true, expanded);
+		mapInfoControls.populateStackControl(leftStack, settings.getApplicationMode(), true, expanded);
 		leftStack.requestLayout();
 		rightStack.requestLayout();
-		updateColorShadowsOfText(null);
+		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())? 
+				View.VISIBLE : View.GONE);
+		this.expand.setImageResource(expanded ? R.drawable.av_upload :
+			R.drawable.av_download);
+		expand.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				expanded = !expanded;
+				recreateControls();
+			}
+		});
 	}
 
 
@@ -234,8 +210,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if(v instanceof TextView) {
 			TextView tv = (TextView) v;
 			tv.setTextColor(textColor);
-			tv.setShadowLayer(textShadowColor == 0 ? 0 : (5 * scaleCoefficient), 0, 0, textShadowColor);
-			tv.setTypeface(tv.getTypeface(), textBold ? Typeface.BOLD : Typeface.NORMAL);
+			tv.setShadowLayer(textShadowColor == 0 ? 0 : (8 * view.getScaleCoefficient()), 0, 0, textShadowColor);
+			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 		}
 	}
 

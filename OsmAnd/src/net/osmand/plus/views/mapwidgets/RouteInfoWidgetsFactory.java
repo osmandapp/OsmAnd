@@ -32,7 +32,6 @@ import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -48,7 +47,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 
 public class RouteInfoWidgetsFactory {
-	public float scaleCoefficient = 1;
+	private final float scaleCoefficient ;
 	
 	public RouteInfoWidgetsFactory(float scaleCoefficient){
 		this.scaleCoefficient = scaleCoefficient;
@@ -56,7 +55,7 @@ public class RouteInfoWidgetsFactory {
 	
 	public NextTurnInfoWidget createNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini, scaleCoefficient) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			TurnType straight = TurnType.straight();
 
@@ -146,7 +145,7 @@ public class RouteInfoWidgetsFactory {
 	
 	public NextTurnInfoWidget createNextNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini, scaleCoefficient) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {

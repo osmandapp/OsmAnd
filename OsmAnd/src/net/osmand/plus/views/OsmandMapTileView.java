@@ -224,6 +224,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		view.setClickable(true);
 		view.setLongClickable(true);
 		view.setFocusable(true);
+		refreshMap(true);
 	}
 
 	public Boolean onKeyDown(int keyCode, KeyEvent event) {

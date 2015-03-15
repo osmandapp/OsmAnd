@@ -18,7 +18,7 @@ import android.graphics.Path;
 
 public class NextTurnInfoWidget extends BaseMapWidget {
 
-	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
+	private final float scaleCoefficient;
 	private float width;
 	private float height ;
 	private static final float miniCoeff = 2.5f;
@@ -41,10 +41,12 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 	protected int turnImminent;
 	protected boolean horisontalMini;
 
-	public NextTurnInfoWidget(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
+	public NextTurnInfoWidget(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini,
+			float scaleCoefficient) {
 		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
+		this.scaleCoefficient = scaleCoefficient;
 
 
 		paintBlack = new Paint();
