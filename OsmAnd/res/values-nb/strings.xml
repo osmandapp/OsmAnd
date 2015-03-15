@@ -97,7 +97,7 @@
 	<string name="rendering_attr_hmRendered_description">Øk mengden av kartdetaljer vist</string>
 	<string name="rendering_attr_hmRendered_name">Vis flere kartdetaljer</string>
 	<string name="local_index_routing_data">Ruteplanleggingsdata</string>
-	<string name="navigate_point_format">Format:</string>
+	<string name="navigate_point_format">Format</string>
 	<string name="poi_search_desc">Interessepunktsøk</string>
 	<string name="address_search_desc">Adressesøk</string>
 	<string name="navpoint_search_desc">Koordinater</string>
@@ -137,7 +137,7 @@
 	<string name="backToMenu">Tilbake til meny</string>
 	<string name="zoomOut">Zoom ut</string>
 	<string name="zoomIn">Zoom inn</string>
-	<string name="zoomIs">Zoom er</string>
+	<string name="zoomIs">Zoom-nivå er</string>
 	<string name="north">nord</string>
 	<string name="north_north_east">nord-nord-øst</string>
 	<string name="north_east">nord-øst</string>
@@ -154,14 +154,14 @@
 	<string name="west_north_west">vest-nord-vest</string>
 	<string name="north_west">nord-vest</string>
 	<string name="north_north_west">nord-nord-vest</string>
-	<string name="front">Forover</string>
+	<string name="front">forover</string>
 	<string name="front_right">høyre-forover</string>
-	<string name="right">Til høyre</string>
-	<string name="back_right">Bak til høyre</string>
+	<string name="right">til høyre</string>
+	<string name="back_right">høyre-bakover</string>
 	<string name="back">bakover</string>
-	<string name="back_left">Bak venstre</string>
+	<string name="back_left">venstre-bakover</string>
 	<string name="left">til venstre</string>
-	<string name="front_left">Forover til venstre</string>
+	<string name="front_left">venstre-forover</string>
 	<string name="oclock">klokken</string>
 	<string name="towards">mot</string>
 	<string name="accuracy">Nøyaktighet</string>
@@ -487,7 +487,7 @@
 	<string name="search_online_address">Nettbasert søk</string>
 	<string name="max_level_download_tile">Maks. nettbasert zoom</string>
 	<string name="max_level_download_tile_descr">Velg maksimalt zoomnivå å laste ned for nettbaserte kartseksjoner</string>
-	<string name="route_general_information">Total distanse %1$s,\n reisetid %2$d t %3$d m.</string>
+	<string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Velg en nettbasert eller offline navigeringstjeneste</string>
 	<string name="router_service">Navigeringstjeneste</string>
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgjengelig!</string>
@@ -540,7 +540,7 @@
 	<string name="map_tile_source">Fliskartkilde</string>
 	<string name="map_source">Kartkilde</string>
 	<string name="use_internet">Bruk internett</string>
-	<string name="show_location">Vis din plassering</string>
+	<string name="show_location">Vis din posisjon</string>
 	
 	
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
@@ -1013,7 +1013,7 @@
 	<string name="unzipping_file">Pakker ut fil…</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
-	<string name="shared_string_downloading">Laster ned…</string>
+	<string name="shared_string_downloading">Laster ned</string>
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="loading_data">Laster data…</string>
 	
@@ -1251,11 +1251,18 @@
 	<string name="shared_string_ellipsis">…</string>
 	<string name="osmand_parking_outdated">Utdatert</string>
 	<string name="osm_edits">OSM-redigeringer</string>
-	<string name="osmand_parking_time_left">Gjenstående</string> <string name="your_edits">Dine redigeringer</string>
+	<string name="osmand_parking_time_left">Igjen</string> <string name="your_edits">Dine redigeringer</string>
     <string name="waypoint_visit_after">Besøk etter</string>
     <string name="waypoint_visit_before">Besøk før</string>
-    <string name="tips_and_tricks_descr">Ofte-Stilte-Spørsmål, nylige endringer og annet</string>
-    <string name="routing_settings_2">Navigasjonsinnstillinger</string>
+    <string name="tips_and_tricks_descr">Ofte stilte spørsmål, siste endringer og annet</string>
+    <string name="routing_settings_2">Navigeringsinnstillinger</string>
     <string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="parking_place_limited">Tidsbegrenset parkering</string>
 	<string name="simulate_your_location">Simuler din posisjon</string>
-    </resources>
+    <string name="short_location_on_map">Br %1$s\n Le %2$s</string>
+    <string name="general_settings_2">Generelle innstillinger</string>
+	<string name="shared_string_deselect">Fravelg</string>
+	<string name="shared_string_deselect_all">Fravelg alle</string>
+	<string name="shared_string_more_actions">Flere handlinger</string>
+	<string name="shared_string_action_template">Handling {0}</string>
+	<string name="watch">Se</string>
+	</resources>
