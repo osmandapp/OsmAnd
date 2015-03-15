@@ -31,7 +31,7 @@ import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
-import net.osmand.util.Algorithms;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -53,59 +53,40 @@ public class RouteInfoWidgetsFactory {
 		this.scaleCoefficient = scaleCoefficient;
 	}
 	
-	public NextTurnInfoWidget createNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
-			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini, scaleCoefficient) {
+	public NextTurnInfoWidget createNextInfoControl(final Activity activity,
+			final OsmandApplication app, boolean horisontalMini) {
+		final OsmandSettings settings = app.getSettings();
+		final RoutingHelper routingHelper = app.getRoutingHelper();
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini, scaleCoefficient) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
-			TurnType straight = TurnType.straight();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean visible = false;
-				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				boolean followingMode = routingHelper.isFollowingMode() || app.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				TurnType turnType = null;
+				boolean deviatedFromRoute = false;
+				int turnImminent = 0;
+				int nextTurnDistance = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
 					deviatedFromRoute = routingHelper.isDeviatedFromRoute() ;
+					
 					if (deviatedFromRoute) {
-						visible = true;
 						turnImminent = 0;
 						turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
-						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-						deviatedPath = routingHelper.getRouteDeviation();
-						invalidate();
+						setDeviatePath((int) routingHelper.getRouteDeviation());
 					} else {
-						boolean showStraight = false;
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						if (r != null && r.distanceTo > 0) {
-							visible = true;
-							if (r.directionInfo == null) {
-								if (turnType != null) {
-									turnType = null;
-									invalidate();
-								}
-							} else if (!Algorithms.objectEquals(turnType, showStraight ? straight : r.directionInfo.getTurnType())) {
-								turnType = showStraight ? straight : r.directionInfo.getTurnType();
-								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-								if (turnType.getExitOut() > 0) {
-									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
-								} else {
-									exitOut = null;
-								}
-								requestLayout();
-								invalidate();
-							}
-							if (distChanged(r.distanceTo, nextTurnDirection)) {
-								invalidate();
-								requestLayout();
-								nextTurnDirection = r.distanceTo;
-							}
-							if (turnImminent != r.imminent) {
-								turnImminent = r.imminent;
-								invalidate();
-							}
+						if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
+							turnType = r.directionInfo.getTurnType();
+							setExitOut(turnType.getExitOut());
+							nextTurnDistance = r.distanceTo;
+							turnImminent = r.imminent;
 						}
 					}
 				}
-				updateVisibility(visible);
+				setTurnType(turnType);
+				setTurnImminent(turnImminent, deviatedFromRoute);
+				setTurnDistance(nextTurnDistance);
 				return true;
 			}
 		};
@@ -130,31 +111,31 @@ public class RouteInfoWidgetsFactory {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-//				showMiniMap = true;
 				if(routingHelper.isRouteCalculated()) {
 					routingHelper.getVoiceRouter().announceCurrentDirection(null);
 				}
-				nextTurnInfo.requestLayout();
-				nextTurnInfo.invalidate();
 			}
 		});
 		// initial state
-		nextTurnInfo.setVisibility(View.GONE);
 		return nextTurnInfo;
 	}
 	
-	public NextTurnInfoWidget createNextNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
-			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini, scaleCoefficient) {
+	public NextTurnInfoWidget createNextNextInfoControl(final Activity activity,
+			final OsmandApplication app, boolean horisontalMini) {
+		final RoutingHelper routingHelper = app.getRoutingHelper();
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini, scaleCoefficient) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean visible = false;
-				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				boolean followingMode = routingHelper.isFollowingMode() || app.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				TurnType turnType = null;
+				boolean deviatedFromRoute = false;
+				int turnImminent = 0;
+				int nextTurnDistance = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
-					boolean devitedFromRoute = routingHelper.isDeviatedFromRoute() ;
+					deviatedFromRoute = routingHelper.isDeviatedFromRoute() ;
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-					if (!devitedFromRoute) {
+					if (!deviatedFromRoute) {
 						if (r != null) {
 							// next turn is very close (show next next with false to speak)
 //							if (r.imminent >= 0 && r.imminent < 2) {
@@ -167,33 +148,15 @@ public class RouteInfoWidgetsFactory {
 //							}
 						}
 					}
-					if (r != null && r.distanceTo > 0) {
-						visible = true;
-						if (r == null || r.directionInfo == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algorithms.objectEquals(turnType, r.directionInfo.getTurnType())) {
-							turnType = r.directionInfo.getTurnType();
-							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							invalidate();
-							requestLayout();
-						}
-						if (distChanged(r.distanceTo, nextTurnDirection)) {
-							invalidate();
-							requestLayout();
-							nextTurnDirection = r.distanceTo;
-						}
-						int imminent = r.imminent;
-						if (turnImminent != imminent) {
-							turnImminent = imminent;
-							invalidate();
-						}
+					if (r != null && r.distanceTo > 0&& r.directionInfo != null) {
+						turnType = r.directionInfo.getTurnType();
+						turnImminent = r.imminent;
+						nextTurnDistance = r.distanceTo;
 					}
 				}
-				updateVisibility(visible);
-
+				setTurnType(turnType);
+				setTurnImminent(turnImminent, deviatedFromRoute);
+				setTurnDistance(nextTurnDistance);
 				return true;
 			}
 		};
@@ -221,10 +184,14 @@ public class RouteInfoWidgetsFactory {
 			}
 		});
 		// initial state 
-		nextTurnInfo.setVisibility(View.GONE);
 		return nextTurnInfo;
 	}
 	
+	
+
+
+
+
 	public TextInfoWidget createTimeControl(final MapActivity map){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final Drawable time = map.getResources().getDrawable(R.drawable.widget_time);

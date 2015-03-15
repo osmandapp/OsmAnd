@@ -215,7 +215,6 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 			private Drawable blinkImg;
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean visible = true;
 				String txt = "OsMo";
 				String subtxt = "";
 				SessionInfo si = getService().getCurrentSessionInfo();
@@ -258,7 +257,6 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					blink(big, small);
 				}
 				
-				updateVisibility(visible);
 				return true;
 			}
 			

@@ -7,9 +7,9 @@
     android:background="@drawable/btn_left_round"
     android:orientation="vertical">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/widget_top_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/map_widget_image"
         android:layout_height="@dimen/map_widget_image"
         android:layout_gravity="center"
         android:src="@drawable/ic_action_close_light"

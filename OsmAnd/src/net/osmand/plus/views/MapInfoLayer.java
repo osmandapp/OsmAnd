@@ -15,9 +15,10 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -96,17 +97,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		// register left stack
-		// FIXME TODO LEFT STACK
-//		RoutingHelper routingHelper = app.getRoutingHelper();
-//		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), false);
-//		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
-//		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
-//				paintSmallText, paintSmallSubText, true);
-//		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
-//				10);
-//		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
-//				paintSmallText, paintSmallSubText, true);
-//		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
+		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+				10);
+		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
 		registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);

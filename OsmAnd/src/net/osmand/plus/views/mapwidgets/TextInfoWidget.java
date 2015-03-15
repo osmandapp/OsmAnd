@@ -17,11 +17,14 @@ public class TextInfoWidget  {
 	private ImageView imageView;
 	private TextView textView;
 	private TextView smallTextView;
+	private ImageView topImageView;
 
 	private boolean explicitlyVisible;
 
+
 	public TextInfoWidget(Activity activity) {
 		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
+		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
 		textView = (TextView) view.findViewById(R.id.widget_text);
 		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
@@ -40,6 +43,23 @@ public class TextInfoWidget  {
 		}
 		imageView.invalidate();
 	}
+	
+	public void setTopImageDrawable(Drawable imageDrawable) {
+		if(imageDrawable != null) {
+			topImageView.setImageDrawable(imageDrawable);
+			topImageView.setVisibility(View.VISIBLE);
+		} else {
+			topImageView.setVisibility(View.INVISIBLE);
+		}
+		topImageView.invalidate();
+	}
+	
+	protected void invalidateImageViews() {
+		topImageView.invalidate();
+		imageView.invalidate();
+	}
+	
+	
 	
 	public void setContentDescription(CharSequence text) {
 		if (contentTitle != null) {

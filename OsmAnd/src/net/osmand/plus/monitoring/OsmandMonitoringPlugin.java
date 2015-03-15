@@ -154,7 +154,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					setImageDrawable(monitoringBig);
 					return true;
 				}
-				boolean visible = true;
 				String txt = map.getString(R.string.monitoring_control_start);
 				String subtxt = null;
 				Drawable d = monitoringInactive;
@@ -203,7 +202,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						}
 					}, 500);
 				}
-				updateVisibility(visible);
 				return true;
 			}
 		};

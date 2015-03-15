@@ -258,8 +258,10 @@ public class MapWidgetRegistry {
 	public void addControls(MapInfoLayer mil, ContextMenuAdapter cm, ApplicationMode mode) {
 		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		addControls(mil, cm, right, mode);
-		cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
-		addControls(mil, cm, left, mode);
+		if(mode != ApplicationMode.DEFAULT) {
+			cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+			addControls(mil, cm, left, mode);
+		}
 		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		addControlsAppearance(mil, cm, mode);		
 	}
