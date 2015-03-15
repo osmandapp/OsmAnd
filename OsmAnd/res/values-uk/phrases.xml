@@ -112,4 +112,25 @@
 	<string name="poi_lift_gate">Шлагбаум</string>
 	<string name="poi_toll_booth">Збирання плати за проїзд</string>
 	<string name="poi_border_control">Прикордонний контроль</string>
+	<string name="poi_shop">Магазин</string>
+	<string name="poi_emergency">Аварійні служби</string>
+	<string name="poi_transportation">Транспорт</string>
+	<string name="poi_man_made">Споруди</string>
+	<string name="poi_education">Освіта</string>
+	<string name="poi_administrative">Адміністративні об’єкти</string>
+	<string name="poi_healthcare">Охорона здоров’я</string>
+	<string name="poi_office">Офіс</string>
+	<string name="poi_sport">Спорт</string>
+	<string name="poi_tourism">Туризм</string>
+	<string name="poi_entertainment">Дозвілля</string>
+	<string name="poi_sustenance">Їжа</string>
+	<string name="poi_service">Послуги</string>
+	<string name="poi_finance">Фінанси</string>
+	<string name="poi_natural">Природа</string>
+	<string name="poi_military">Військові</string>
+	<string name="poi_osmwiki">Вікіпедія</string>
+	<string name="poi_user_defined_other">Визначено користувачем</string>
+	
+	<string name="poi_child_clothes">Дитячий одяг</string>
+	<string name="poi_car_parts">Автозапчастини</string>
 	</resources>
