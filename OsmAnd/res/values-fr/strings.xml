@@ -1992,4 +1992,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement à durée limitée</string>
 	<string name="your_edits">Vos modifications</string>
     <string name="osmand_parking_outdated">Expiré</string>
+	<string name="delay_to_start_navigation_descr">Démarrer automatiquement la navigation après le temps indiqué</string>
+    <string name="shared_string_go">Aller</string>
+	<string name="shared_string_not_use">Non utilisé</string>
 	</resources>
