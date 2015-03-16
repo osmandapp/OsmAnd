@@ -1919,4 +1919,6 @@
 	<string name="shared_string_release">Essidu</string>
 	<string name="osmand_parking_outdated">Iscadidu</string>
 	<string name="delay_to_start_navigation_descr">Incumentza automaticamente su nàvigu a pustis de s\'intervallu dislindadu</string>
-    </resources>
+    <string name="shared_string_not_use">No impreare</string>
+	<string name="shared_string_go">Bae</string>
+	</resources>
