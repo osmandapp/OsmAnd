@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to osm. Are you sure?</string>
     <string name="delay_to_start_navigation_descr">Automatically start navigation after specified interval</string>
     <string name="delay_to_start_navigation">Skip route planning</string>
     <string name="shared_string_go">Go</string>

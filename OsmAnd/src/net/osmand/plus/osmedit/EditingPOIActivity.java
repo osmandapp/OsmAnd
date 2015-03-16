@@ -1,35 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.EntityInfo;
-import net.osmand.osm.edit.EntityParser;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.DialogProvider;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OpeningHoursView;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
-import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -59,6 +29,37 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.EntityParser;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.DialogProvider;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OpeningHoursView;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
+import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class EditingPOIActivity implements DialogProvider {
 	
