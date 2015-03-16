@@ -47,6 +47,7 @@ import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -751,7 +752,7 @@ public class RouteInfoWidgetsFactory {
 				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
 				cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication());
 				text.setText(cacheRulerText);
-				LinearLayout.LayoutParams lp = (LayoutParams) layout.getLayoutParams();
+				ViewGroup.LayoutParams lp = layout.getLayoutParams();
 				lp.width = cacheRulerDistPix;
 				layout.setLayoutParams(lp);
 				layout.requestLayout();
