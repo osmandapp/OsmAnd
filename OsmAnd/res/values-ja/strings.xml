@@ -1922,7 +1922,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
-    <string name="osmo_plugin_description">"OpenStreetMapにて、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOsMoの高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n他のデバイスとその経路を追跡することが出来ます。匿名のグループを即座に作成でき、互いの位置を共有し、伝え合うことが出来ます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMoモニタリング</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
@@ -2191,4 +2191,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="route_points">ルート地点</string>
 	<string name="track_segments">経路セグメント</string>
 	<string name="track_points">経路地点</string>
+	<string name="delay_to_start_navigation_descr">指定時間経過後、自動的にナビゲーションを開始</string>
+    <string name="delay_to_start_navigation">ルートプラン指定をスキップ</string>
+    <string name="shared_string_go">出発</string>
+	<string name="shared_string_not_use">使用しない</string>
 	</resources>
