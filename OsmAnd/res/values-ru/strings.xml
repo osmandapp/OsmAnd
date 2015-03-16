@@ -1929,5 +1929,5 @@
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
-	<string name="osmand_parking_outdated">Просрочено</string>
+	<string name="osmand_parking_overdue">Просрочено</string>
 	</resources>

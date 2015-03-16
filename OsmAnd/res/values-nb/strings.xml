@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -1249,7 +1249,7 @@
 
 	<string name="route_points">Rutepunkter</string>
 	<string name="shared_string_ellipsis">…</string>
-	<string name="osmand_parking_outdated">Utdatert</string>
+	<string name="osmand_parking_overdue">Utdatert</string>
 	<string name="osm_edits">OSM-redigeringer</string>
 	<string name="osmand_parking_time_left">Igjen</string> <string name="your_edits">Dine redigeringer</string>
     <string name="waypoint_visit_after">Besøk etter</string>

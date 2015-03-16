@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="parking_outdated_color">#f41a34</color>
 	<color name="osmo_header_dark">#2d383d</color>
 	<color name="osmo_header_light">#b36d12</color>
 
