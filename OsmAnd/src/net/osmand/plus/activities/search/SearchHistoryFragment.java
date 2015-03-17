@@ -18,7 +18,10 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
 import android.R.anim;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -64,9 +67,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				helper.removeAll();
-				historyAdapter.clear();
-				clearButton.setVisibility(View.GONE);
+				clearWithConfirmation();
 			}
 		});
 		((ListView)view.findViewById(android.R.id.list)).setOnItemClickListener(new OnItemClickListener() {
@@ -78,6 +79,26 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		});
 		
 		return view;
+	}
+	
+	private void clearWithConfirmation() {
+		Builder bld = new AlertDialog.Builder(getActivity());
+		bld.setMessage(R.string.confirmation_to_clear_history);
+		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				clearWithoutConfirmation();				
+			}
+		});
+		bld.setNegativeButton(R.string.shared_string_no, null);
+		bld.show();
+	}
+
+	private void clearWithoutConfirmation() {
+		helper.removeAll();
+		historyAdapter.clear();
+		clearButton.setVisibility(View.GONE);
 	}
 
 	@Override
