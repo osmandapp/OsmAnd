@@ -1921,4 +1921,5 @@
 	<string name="delay_to_start_navigation_descr">Incumentza automaticamente su nàvigu a pustis de s\'intervallu dislindadu</string>
     <string name="shared_string_not_use">No impreare</string>
 	<string name="shared_string_go">Bae</string>
-	</resources>
+	<string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala</string>
+    </resources>
