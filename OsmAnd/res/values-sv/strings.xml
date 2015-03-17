@@ -1834,4 +1834,7 @@
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering</string>
 	<string name="your_edits">Dina redigeringar</string>
     <string name="osmand_parking_outdated">Föråldrad</string>
+	<string name="delay_to_start_navigation_descr">Starta navigering automatiskt efter bestämd tid</string>
+    <string name="delay_to_start_navigation">Hoppa över ruttplanering</string>
+    <string name="shared_string_go">Kör</string>
 	</resources>

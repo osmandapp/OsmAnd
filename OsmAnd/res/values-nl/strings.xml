@@ -43,7 +43,7 @@
   <string name="show_ruler_level">Schaalaanduiding weergeven</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Terug naar locatie</string>
-  <string name="show_details">Toon details</string>
+  <string name="show_details">Toon positie details</string>
   <string name="accessibility_extensions_descr">Toegankelijkheidsmodules voor oude Android versies</string>
   <string name="accessibility_extensions">Toegankelijkheidsmodules</string>
   <string name="accessibility_mode">Toegankelijkheidsmodus</string>
@@ -52,7 +52,7 @@
   <string name="backToMenu">Terug naar menu</string>
   <string name="zoomOut">Zoom uit</string>
   <string name="zoomIn">Zoom in</string>
-  <string name="zoomIs">Vergroting is</string>
+  <string name="zoomIs">Zoom niveau is</string>
   <string name="north">noord</string>
   <string name="north_north_east">noordnoordoost</string>
   <string name="north_east">noordoost</string>
@@ -68,7 +68,7 @@
   <string name="west">west</string>
   <string name="west_north_west">westnoordwest</string>
   <string name="north_west">noordwest</string>
-  <string name="front">Voorkant</string>
+  <string name="front">Rechtuit</string>
   <string name="front_right">Rechts voor</string>
   <string name="right">Rechts</string>
   <string name="back_right">Rechts achter</string>
@@ -867,7 +867,7 @@
   <string name="search_position_undefined">Ongedefinieerd</string>
   
   <string name="local_index_routing_data">Navigatiedata</string>
-  <string name="navigate_point_format">Formaat:</string>
+  <string name="navigate_point_format">Formaat</string>
   <string name="poi_search_desc">Zoek interessepunt (POI)</string>
   <string name="address_search_desc">Adres zoeken</string>
   <string name="navpoint_search_desc">Coördinaten</string>
@@ -2090,7 +2090,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_remember_my_choice">Onthoud mijn keuze</string>
 	<string name="shared_string_refresh">Vernieuwen</string>
 	<string name="shared_string_download">Download</string>
-	<string name="shared_string_downloading">Aan het downloaden…</string>
+	<string name="shared_string_downloading">Aan het downloaden</string>
 	<string name="shared_string_download_successful">Download succesvol</string>
 	<string name="shared_string_io_error">I/O-fout opgetreden</string>
 	<string name="shared_string_unexpected_error">Onverwachte fout opgetreden</string>
@@ -2113,4 +2113,28 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
+	<string name="delay_to_start_navigation_descr">Start de navigatie automatisch na een aangegeven periode</string>
+    <string name="delay_to_start_navigation">Routeplanning overslaan</string>
+    <string name="shared_string_go">Start</string>
+	<string name="osmand_parking_outdated">Verouderd</string>
+	<string name="action_create">Actie: maak</string>
+	<string name="action_modify">Actie: wijzig</string>
+	<string name="action_delete">Actie: verwijder</string>
+	<string name="osm_edits">OSM wijzigingen</string>
+	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Over</string> <string name="parking_place_limited">Parkeren voor een beperkte tijd</string>
+	<string name="your_edits">Uw wijzigingen</string>
+    <string name="waypoint_visit_after">Bezoek na</string>
+    <string name="waypoint_visit_before">Bezoek voor</string>
+    <string name="simulate_your_location">Simuleer je positie</string>
+    <string name="drawer">Eenvoudige lijst</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen, enz</string>
+    <string name="routing_settings_2">Navigatie instellingen</string>
+    <string name="general_settings_2">Algemene instellingen</string>
+	<string name="shared_string_clear_all">Wis alles</string>
+	<string name="shared_string_collapse">Inklappen</string>
+	<string name="shared_string_my_location">Mijn Locatie</string>
+	<string name="shared_string_my_favorites">Mijn Favorieten</string>
+	<string name="shared_string_my_tracks">Mijn Routes</string>
+	<string name="shared_string_currently_recording_track">Route wordt opgenomen</string>
 	</resources>
