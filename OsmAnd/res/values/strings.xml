@@ -17,9 +17,12 @@
 	<string name="action_modify">Action modify</string>
 	<string name="action_delete">Action delete</string>
 	<string name="osm_edits">OSM edits</string>
-	<string name="osmand_parking_hour">h</string><!-- means first letter of word *hour*-->
-	<string name="osmand_parking_minute">m</string><!-- means first letter of word *minute*-->
-	<string name="osmand_parking_time_left">Left</string> <!-- used to describe time left, not left direction -->
+	<!-- means first letter of word *hour* -->
+	<string name="osmand_parking_hour">h</string>
+	<!-- means first letter of word *minute* -->
+	<string name="osmand_parking_minute">m</string>
+	<!-- used to describe time left, not left direction -->
+	<string name="osmand_parking_time_left">Left</string>
 	<string name="parking_place_limited">Parking place time limited</string>
 	<string name="your_edits">Your Edits</string>
     <string name="waypoint_visit_after">Visit after</string>
@@ -153,7 +156,7 @@
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
 	<string name="accessibility_preferences">Accessibility</string>
-	<string name="osmand_accessibility_description">This plugin makes the device\'s acessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback, like for auto announcing your position.</string>
+	<string name="osmand_accessibility_description">This plugin makes the device\'s accessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback, like for auto announcing your position.</string>
 	<string name="osm_settings">OSM editing</string>
 	<string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM bugs, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to http://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
 	<string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the screen rendering performance, or voice prompting. These settings are intended for developers and are not needed for the general user.</string>
