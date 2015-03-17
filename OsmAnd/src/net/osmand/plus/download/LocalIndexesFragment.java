@@ -201,7 +201,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if(info.isBackupedData()){
 			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
 		}
-		adapter.item(R.string.shared_string_rename).listen(listener).position(3).reg();
+		if(info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA){
+			adapter.item(R.string.shared_string_rename).listen(listener).position(3).reg();
+		}
 		adapter.item(R.string.shared_string_delete).listen(listener).position(4).reg();
 	}
 
@@ -237,9 +239,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		Builder b = new AlertDialog.Builder(a);
 		if(f.exists()){
 			int xt = f.getName().lastIndexOf('.');
-			final String ext = f.getName().substring(xt);
+			final String ext = xt == -1 ? "" : f.getName().substring(xt);
+			final String originalName = xt == -1 ? f.getName() : f.getName().substring(0, xt);
 			final EditText editText = new EditText(a);
-			editText.setText(f.getName().subSequence(0, xt));
+			editText.setText(originalName);
 			b.setView(editText);
 			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 				
