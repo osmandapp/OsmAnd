@@ -175,7 +175,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				notifyClicked();
 				mapActivity.getMapActions().prepareConfigureMap();
-				mapActivity.getMapActions().toggleDrawer();
+				mapActivity.getDashboard().setDashboardVisibility(true);
 			}
 		});
 
@@ -285,12 +285,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
-				if (mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+//				if (mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
 					mapActivity.getDashboard().setDashboardVisibility(true);
-				} else {
-					mapActivity.getMapActions().onDrawerBack();
-					mapActivity.getMapActions().toggleDrawer();
-				}
+//				} else {
+//					mapActivity.getMapActions().onDrawerBack();
+//					mapActivity.getMapActions().toggleDrawer();
+//				}
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
@@ -621,7 +621,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean nightMode = false;
 		boolean f = true;
 		boolean compass;
-
+		
 		public MapHudButton setRoundTransparent() {
 			setBg(R.drawable.btn_circle_trans);
 			return this;

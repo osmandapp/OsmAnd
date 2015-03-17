@@ -243,7 +243,7 @@ public class WaypointDialogHelper {
 					dlg.dismiss();
 				} else if(a instanceof MapActivity){
 					((MapActivity) a).getMapActions().onDrawerBack();
-					((MapActivity) a).getMapActions().toggleDrawer();
+					((MapActivity) a).getMapActions().closeDrawer();
 				}
 			}
 		});
@@ -261,7 +261,7 @@ public class WaypointDialogHelper {
 						dlg.dismiss();
 					} else if(a instanceof MapActivity){
 						((MapActivity) a).getMapActions().onDrawerBack();
-						((MapActivity) a).getMapActions().toggleDrawer();
+						((MapActivity) a).getMapActions().closeDrawer();
 					}
 				}
 			});
