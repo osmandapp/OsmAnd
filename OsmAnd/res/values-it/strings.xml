@@ -541,7 +541,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max zoom online</string>
   <string name="max_level_download_tile_descr">Scegli il livello di zoom massimo da scaricare per le mappe online a mattonelle</string>
-  <string name="route_general_information">Distanza totale = %1$s,\n durata del viaggio = %2$d h %3$d m.</string>
+  <string name="route_general_information">Distanza totale %1$s, durata del viaggio %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
   <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>
@@ -637,7 +637,7 @@
   <string name="map_tile_source">Sorgente dei tasselli della mappa</string>
   <string name="map_source">Sorgente mappa</string>
   <string name="use_internet">Usa internet</string>
-  <string name="show_location">Visualizza posizione</string>
+  <string name="show_location">Visualizza la tua posizione</string>
   
   
   <string name="show_gps_coordinates_text">Visualizza coordinate GPS sulla mappa</string>
@@ -791,7 +791,7 @@
   <string name="show_ruler_level">Visualizza la scala grafica</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Torna alla posizione</string>
-  <string name="show_details">Visualizza dettagli</string>
+  <string name="show_details">Visualizza i dettagli della posizione</string>
   <string name="accessibility_extensions_descr">Estensioni per l\'accessibilità per vecchie versioni di Android</string>
   <string name="accessibility_extensions">Estensioni per l\'accessibilità</string>
   <string name="accessibility_mode">Modalità accessibile</string>
@@ -817,14 +817,14 @@
   <string name="west_north_west">ovest-nord-ovest</string>
   <string name="north_west">nord-ovest</string>
   <string name="north_north_west">nord-nord-ovest</string>
-  <string name="front">Avanti</string>
-  <string name="front_right">Avanti a destra</string>
-  <string name="right">Destra</string>
-  <string name="back_right">Indietro a destra</string>
-  <string name="back">Indietro</string>
-  <string name="back_left">Indietro a sinistra</string>
-  <string name="left">Sinistra</string>
-  <string name="front_left">Avanti a sinistra</string>
+  <string name="front">avanti</string>
+  <string name="front_right">avanti a destra</string>
+  <string name="right">A destra</string>
+  <string name="back_right">indietro a destra</string>
+  <string name="back">indietro</string>
+  <string name="back_left">indietro a sinistra</string>
+  <string name="left">a sinistra</string>
+  <string name="front_left">avanti a sinistra</string>
   <string name="oclock">in punto</string>
   <string name="towards">verso</string>
   <string name="accuracy">Precisione</string>
@@ -834,7 +834,7 @@
   <string name="direction_style_clockwise">Bussola (12 settori)</string>
   <string name="settings_direction_style">Stile della direzione</string>
   <string name="settings_direction_style_descr">Scegli lo stile in cui vengono espresse in movimento le direzioni relative</string>
-  <string name="auto_announce_on">Inizia l\'autosegnalazione</string>
+  <string name="auto_announce_on">Inizia l\'auto-segnalazione</string>
   <string name="auto_announce_off">Ferma l\'autosegnalazione</string>
   <string name="scroll_map_by_gestures_descr">Muovi la mappa con i gesti sullo schermo tattile</string>
   <string name="scroll_map_by_gestures">Scorrimento naturale della mappa</string>
@@ -2147,4 +2147,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato</string>
 	<string name="your_edits">Le tue modifiche</string>
     <string name="osmand_parking_outdated">Obsoleto</string>
+	<string name="delay_to_start_navigation_descr">Avvia automaticamente la novigazione dopo l\'intervallo specificato</string>
+    <string name="delay_to_start_navigation">Salta la pianificazione del percorso</string>
+    <string name="shared_string_go">Vai</string>
+	<string name="shared_string_not_use">Non usare</string>
 	</resources>
