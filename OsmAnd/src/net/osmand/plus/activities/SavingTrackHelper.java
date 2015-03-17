@@ -71,7 +71,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		GPXFile gx = new GPXFile();
 		gx.showCurrentTrack = true;
 		this.currentTrack.setGpxFile(gx);
-		this.currentTrack.getGpxFile().tracks.add(new Track());
+		prepareCurrentTrackForRecording();
 		updateScript = "INSERT INTO " + TRACK_NAME + " (" + TRACK_COL_LAT + ", " + TRACK_COL_LON + ", "
 				+ TRACK_COL_ALTITUDE + ", " + TRACK_COL_SPEED + ", " + TRACK_COL_HDOP + ", " + TRACK_COL_DATE + ")"
 				+ " VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -207,8 +207,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		points = 0;
 		currentTrack.getModifiableGpxFile().points.clear();
 		currentTrack.getModifiableGpxFile().tracks.clear();
-		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
 		currentTrack.getModifiablePointsToDisplay().clear();
+		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
+		prepareCurrentTrackForRecording();
 		return warnings;
 	}
 
@@ -421,14 +422,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public void loadGpxFromDatabase(){
 		Map<String, GPXFile> files = collectRecordedData();
+		currentTrack.getModifiableGpxFile().tracks.clear();
 		for (Map.Entry<String, GPXFile> entry : files.entrySet()){
 			currentTrack.getModifiableGpxFile().points.addAll(entry.getValue().points);
 			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
 		}
 		currentTrack.processPoints();
+		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
 		distance = analysis.totalDistance;
 		points = analysis.wptPoints;
+	}
+
+	private void prepareCurrentTrackForRecording() {
+		if(currentTrack.getModifiableGpxFile().tracks.size() == 0) {
+			currentTrack.getModifiableGpxFile().tracks.add(new Track());
+		}
+		while(currentTrack.getPointsToDisplay().size() < currentTrack.getModifiableGpxFile().tracks.size()) {
+			currentTrack.getModifiablePointsToDisplay().add(new ArrayList<GPXUtilities.WptPt>());
+		}
 	}
 
 	public boolean getIsRecording() {
