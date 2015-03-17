@@ -247,7 +247,7 @@ public class DashboardOnMap {
 				}
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
 						R.color.icon_color_light));
-
+				mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				switchButton = (ImageView) listViewLayout.findViewById(R.id.map_menu_button);
@@ -269,7 +269,7 @@ public class DashboardOnMap {
 			open(dashboardView.findViewById(R.id.animateContent));
 			
 			mapActivity.getMapActions().disableDrawer();
-			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+			
 			updateLocation(true, true, false);
 			
 		} else {
