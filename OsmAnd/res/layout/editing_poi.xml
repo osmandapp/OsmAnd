@@ -222,27 +222,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/poi_dialog_other_tags_message" />
 
-        <LinearLayout
-            android:id="@+id/LinearLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="bottom|center"
-            android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/Cancel"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:text="@string/shared_string_cancel" >
-            </Button>
-
-            <Button
-                android:id="@+id/Commit"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:text="@string/default_buttons_commit" >
-            </Button>
-        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

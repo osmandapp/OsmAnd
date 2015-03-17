@@ -146,7 +146,7 @@ public class EditingPOIActivity implements DialogProvider {
 		Amenity a = EntityParser.parseAmenity(n, type, subType, null, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-		activity.showDialog(dialogID);
+		createPOIDialog(dialogID, dialogBundle).show();
 	}
 	
 	public void showDeleteDialog(final Amenity a){
@@ -206,10 +206,9 @@ public class EditingPOIActivity implements DialogProvider {
 		return builder.create();
 	}
 
-	private void preparePOIDialog(int dialogId, Dialog dlg, Bundle args, int title) {
+	private void preparePOIDialog(View dlg, Bundle args) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 		Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
-		dlg.setTitle(title);
 		EditText nameText = ((EditText)dlg.findViewById(R.id.Name));
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
@@ -225,7 +224,6 @@ public class EditingPOIActivity implements DialogProvider {
 		final TableLayout layout = ((TableLayout)dlg.findViewById(R.id.advancedModeTable));
 		layout.setVisibility(View.GONE);
 		updateType(a);
-		attachListeners(dialogId, dlg, a, n);
 	}
 	
 	private void addTagValueRow(final Node n, final TableLayout layout, String tg, String vl) {
@@ -328,27 +326,37 @@ public class EditingPOIActivity implements DialogProvider {
         layout.invalidate();
 	}
 	
-	private Dialog createPOIDialog(final int dialogID, Bundle args) {
-		final Dialog dlg = new Dialog(activity);
-		dlg.setContentView(R.layout.editing_poi);
+	private Builder createPOIDialog(final int dialogID, Bundle args) {
+		final View view = activity.getLayoutInflater().inflate(R.layout.editing_poi, null);
+		final Builder dlg = new Builder(activity);
+		dlg.setView(view);
+		switch (dialogID) {
+			case DIALOG_CREATE_POI:
+				dlg.setTitle(R.string.poi_create_title);
+				break;
+			case DIALOG_EDIT_POI:
+				dlg.setTitle(R.string.poi_edit_title);
+				break;
+		}
+
+		//dlg.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);;
 		
-		dlg.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);;
-		
-		nameText = ((EditText)dlg.findViewById(R.id.Name));
-		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
-		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
-		typeButton = ((Button)dlg.findViewById(R.id.TypeButton));
-		openHoursButton = ((Button)dlg.findViewById(R.id.OpenHoursButton));
-		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
+		nameText = ((EditText)view.findViewById(R.id.Name));
+		openingHours = ((EditText)view.findViewById(R.id.OpeningHours));
+		typeText = ((AutoCompleteTextView)view.findViewById(R.id.Type));
+		typeButton = ((Button)view.findViewById(R.id.TypeButton));
+		openHoursButton = ((Button)view.findViewById(R.id.OpenHoursButton));
+		typeText = ((AutoCompleteTextView)view.findViewById(R.id.Type));
 		typeText.setThreshold(1);
-		commentText = ((EditText)dlg.findViewById(R.id.Comment));
-		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
-		hnoText = ((EditText)dlg.findViewById(R.id.HouseNumber));
-		streetNameText = ((EditText)dlg.findViewById(R.id.StreetName));
-		websiteText = ((EditText)dlg.findViewById(R.id.Website));
-		closeChange = ((CheckBox) dlg.findViewById(R.id.CloseChangeset));
-		
-		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
+		commentText = ((EditText)view.findViewById(R.id.Comment));
+		phoneText = ((EditText)view.findViewById(R.id.Phone));
+		hnoText = ((EditText)view.findViewById(R.id.HouseNumber));
+		streetNameText = ((EditText)view.findViewById(R.id.StreetName));
+		websiteText = ((EditText)view.findViewById(R.id.Website));
+		closeChange = ((CheckBox) view.findViewById(R.id.CloseChangeset));
+
+
+		TextView linkToOsmDoc = (TextView) view.findViewById(R.id.LinkToOsmDoc);
 		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -358,14 +366,79 @@ public class EditingPOIActivity implements DialogProvider {
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 
-//		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-//		final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
-//		attachListeners(dialogID, dlg, a, n);
-		
+		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
+		dlg.setNegativeButton(R.string.shared_string_cancel, null);
+		dlg.setPositiveButton(R.string.default_buttons_commit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Resources resources = view.getResources();
+				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
+						.getString(R.string.poi_action_change);
+				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+				String subType = typeText.getText().toString();
+				if(allTranslatedSubTypes.get(subType.trim()) != null) {
+					PoiType pt = allTranslatedSubTypes.get(subType);
+					n.putTag(pt.getOsmTag()	, pt.getOsmValue());
+					if(pt.getOsmTag2() != null) {
+						n.putTag(pt.getOsmTag2(), pt.getOsmValue2());
+					}
+				} else {
+					n.putTag(a.getType().getDefaultTag(), subType);
+				}
+				String name = nameText.getText().toString();
+				if(name.length() > 0) {
+					n.putTag(OSMTagKey.NAME.getValue(), name);
+				}
+				if (openingHours.getText().toString().length() == 0) {
+					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
+				} else {
+					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
+				}
+				String website = websiteText.getText().toString();
+				if (website.length() > 0 ){
+					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
+				} else {
+					n.removeTag(OSMTagKey.WEBSITE.getValue());
+				}
+				String phone = phoneText.getText().toString();
+				if (phone.length() > 0 ){
+					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				} else {
+					n.removeTag(OSMTagKey.PHONE.getValue());
+				}
+				String str = streetNameText.getText().toString();
+				if (str .length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_STREET.getValue(),str);
+				} else {
+					n.removeTag(OSMTagKey.ADDR_STREET.getValue());
+				}
+				String hno = hnoText.getText().toString();
+				if (hno .length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),hno);
+				} else {
+					n.removeTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
+				}
+				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(),
+						new Runnable() {
+							@Override
+							public void run() {
+								AccessibleToast.makeText(activity, MessageFormat.format(activity.getResources().getString(R.string.poi_action_succeded_template), msg),
+										Toast.LENGTH_LONG).show();
+								if (activity instanceof MapActivity) {
+									((MapActivity) activity).getMapView().refreshMap(true);
+								}
+								activity.removeDialog(dialogID);
+							}
+						});
+			}
+		});
+		preparePOIDialog(view, args);
+		attachListeners(view, a, n);
 		return dlg;
 	}
 
-	private void attachListeners(final int dialogID, final Dialog dlg, final Amenity a, final Node n) {
+	private void attachListeners(final View dlg, final Amenity a, final Node n) {
 		// DO NOT show on focus with empty text predefined list of subcategories - problems when rotating
 		typeText.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -452,77 +525,6 @@ public class EditingPOIActivity implements DialogProvider {
 			}
 		});
 		
-		((Button)dlg.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				//we must do remove, because there are two dialogs EDIT,CREATE using same variables!!
-				activity.removeDialog(dialogID);
-			}
-		});
-		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				Resources resources = v.getResources();
-				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
-						.getString(R.string.poi_action_change);
-				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
-				String subType = typeText.getText().toString();
-				if(allTranslatedSubTypes.get(subType.trim()) != null) {
-					PoiType pt = allTranslatedSubTypes.get(subType);
-					n.putTag(pt.getOsmTag()	, pt.getOsmValue());
-					if(pt.getOsmTag2() != null) {
-						n.putTag(pt.getOsmTag2(), pt.getOsmValue2());
-					}
-				} else {
-					n.putTag(a.getType().getDefaultTag(), subType);
-				}
-				String name = nameText.getText().toString();
-				if(name.length() > 0) {
-					n.putTag(OSMTagKey.NAME.getValue(), name);
-				}
-				if (openingHours.getText().toString().length() == 0) {
-					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
-				} else {
-					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
-				}
-				String website = websiteText.getText().toString();
-				if (website.length() > 0 ){
-					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
-				} else {
-					n.removeTag(OSMTagKey.WEBSITE.getValue());
-				}
-				String phone = phoneText.getText().toString();
-				if (phone.length() > 0 ){
-					n.putTag(OSMTagKey.PHONE.getValue(),phone);
-				} else {
-					n.removeTag(OSMTagKey.PHONE.getValue());
-				}
-				String str = streetNameText.getText().toString();
-				if (str .length() > 0 ){
-					n.putTag(OSMTagKey.ADDR_STREET.getValue(),str);
-				} else {
-					n.removeTag(OSMTagKey.ADDR_STREET.getValue());
-				}
-				String hno = hnoText.getText().toString();
-				if (hno .length() > 0 ){
-					n.putTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),hno);
-				} else {
-					n.removeTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
-				}
-				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(), 
-						new Runnable() {
-					@Override
-					public void run() {
-						AccessibleToast.makeText(activity, MessageFormat.format(activity.getResources().getString(R.string.poi_action_succeded_template), msg),
-								Toast.LENGTH_LONG).show();
-						if (activity instanceof MapActivity) {
-							((MapActivity) activity).getMapView().refreshMap(true);
-						}
-						activity.removeDialog(dialogID);
-					}
-				});
-			}
-		});
 	}
 
 	private void showSubCategory(Amenity a) {
@@ -647,9 +649,6 @@ public class EditingPOIActivity implements DialogProvider {
 	public Dialog onCreateDialog(int id) {
 		Bundle args = dialogBundle;
 		switch (id) {
-		case DIALOG_CREATE_POI:
-		case DIALOG_EDIT_POI:
-			return createPOIDialog(id, args);
 		case DIALOG_DELETE_POI:
 			return createDeleteDialog(args);
 		case DIALOG_SUB_CATEGORIES: {
@@ -713,12 +712,6 @@ public class EditingPOIActivity implements DialogProvider {
 	public void onPrepareDialog(int id, Dialog dialog) {
 		Bundle args = dialogBundle;
 		switch (id) {
-			case DIALOG_CREATE_POI:
-				preparePOIDialog(id, dialog,args,R.string.poi_create_title);
-				break;
-			case DIALOG_EDIT_POI:
-				preparePOIDialog(id, dialog,args,R.string.poi_edit_title);
-				break;
 			case DIALOG_DELETE_POI:
 				prepareDeleteDialog(dialog,args);
 				break;

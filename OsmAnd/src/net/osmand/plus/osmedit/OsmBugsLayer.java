@@ -67,7 +67,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	protected static final String KEY_LATITUDE = "latitude";
 	protected static final String KEY_LONGITUDE = "longitude";
 	protected static final String KEY_BUG = "bug";
-	private static final int DIALOG_OPEN_BUG = 300;
 	private static final int DIALOG_COMMENT_BUG = 301;
 	private static final int DIALOG_CLOSE_BUG = 302;
 	private static Bundle dialogBundle = new Bundle();
@@ -328,7 +327,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		dialogBundle.putString(KEY_MESSAGE, message);
 		OsmandSettings settings = activity.getMyApplication().getSettings();
 		dialogBundle.putString(KEY_AUTHOR, settings.USER_NAME.get());
-		activity.showDialog(DIALOG_OPEN_BUG);
+		createOpenBugDialog(dialogBundle).show();
 	}
 	
 	private void prepareOpenBugDialog(Dialog dlg, Bundle args) {
@@ -548,8 +547,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public Dialog onCreateDialog(int id) {
 		Bundle args = dialogBundle;
 		switch (id) {
-			case DIALOG_OPEN_BUG:
-				return createOpenBugDialog(args);
 			case DIALOG_COMMENT_BUG:
 				return createCommentBugDialog(args);
 			case DIALOG_CLOSE_BUG:
@@ -560,12 +557,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareDialog(int id, Dialog dialog) {
-		Bundle args = dialogBundle;
 		switch (id) {
-			case DIALOG_OPEN_BUG: 
-				prepareOpenBugDialog(dialog, args);
-				break;
-			case DIALOG_COMMENT_BUG: 
+			case DIALOG_COMMENT_BUG:
 				((EditText)dialog.findViewById(R.id.BugMessage)).setText("");
 				break;
 		}
