@@ -1164,7 +1164,8 @@ POIの更新は利用できません</string>
     <string name="audionotes_plugin_name">音声/ビデオメモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_description">オフライン等高線や陰影起伏のダウンロードは簡単です。(\'設定\' → \'地図データ等管理\' → \'ダウンロード\' → 希望のマップタイプを選択)。</string>
+    <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイと陰影起伏層(補助)の両方がOsmAndのオフラインマップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
+\n\nこのグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。 "</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -2195,4 +2196,5 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="delay_to_start_navigation">ルートプラン指定をスキップ</string>
     <string name="shared_string_go">出発</string>
 	<string name="shared_string_not_use">使用しない</string>
+	<string name="plugin_touringview_name">ツーリングマップ表示</string>
 	</resources>
