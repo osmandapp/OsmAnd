@@ -938,7 +938,7 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		// this is development functionality so it should stay preferrably here
-			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null && USE_OLD_DRAWER_TODELETE) {
 				optionsMenuHelper
 						.item(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route)
 						.icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light)
