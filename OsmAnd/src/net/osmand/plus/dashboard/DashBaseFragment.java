@@ -1,14 +1,12 @@
 package net.osmand.plus.dashboard;
 
+import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.Fragment;
-
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.myplaces.FavoritesActivity;
 
 /**
  * Created by Denis on 24.11.2014.

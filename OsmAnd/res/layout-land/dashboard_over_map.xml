@@ -19,7 +19,6 @@
         android:orientation="horizontal" >
 
         <net.osmand.plus.dashboard.NotifyingScrollView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/main_scroll"
             android:layout_width="360dp"
             android:layout_height="match_parent"
@@ -36,14 +35,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
-
-                <net.osmand.plus.activities.search.toolbar.SplitToolbar
-                    android:id="@+id/bottomControls"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/bottomToolBarColor" />
+                
             </LinearLayout>
         </net.osmand.plus.dashboard.NotifyingScrollView>
+
+        <FrameLayout
+            android:id="@+id/dash_list_view_layout"
+            android:layout_width="360dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:visibility="gone" >
+
+            <ListView
+                android:id="@+id/dash_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/card_bg"
+                android:fadeScrollbars="true" >
+            </ListView>
+        </FrameLayout>
 
         <include
             android:id="@+id/map_part_dashboard"

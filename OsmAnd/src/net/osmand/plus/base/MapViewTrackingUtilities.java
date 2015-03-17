@@ -91,10 +91,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		this.dashboard = dashboard;
 	}
 	
-	public DashboardOnMap getDashboard() {
-		return dashboard;
-	}
-	
 	@Override
 	public void updateLocation(Location location) {
 		showViewAngle = false;

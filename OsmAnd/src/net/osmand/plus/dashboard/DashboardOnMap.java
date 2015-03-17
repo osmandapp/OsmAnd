@@ -1,31 +1,16 @@
 package net.osmand.plus.dashboard;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ScrollView;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
-import com.software.shell.fab.ActionButton;
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
@@ -39,11 +24,31 @@ import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ScrollView;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import com.software.shell.fab.ActionButton;
 
 /**
  * Created by Denis
@@ -52,13 +57,12 @@ import java.util.List;
 public class DashboardOnMap {
 
 	public static boolean staticVisible = false;
-	private static final int LIST_ID = 1;
-	private static final int DIRECTIONS_ID = 2;
-	private static final int CONFIGURE_SCREEN_ID = 3;
-	private static final int SETTINGS_ID = 4;
 	private MapActivity mapActivity;
 	private ActionButton actionButton;
 	private FrameLayout dashboardView;
+	private ArrayAdapter<?> listAdapter;
+	private OnItemClickListener listAdapterOnClickListener;
+
 	
 	private boolean visible = false;
 	private boolean landscape;
@@ -71,7 +75,10 @@ public class DashboardOnMap {
 	private boolean inLocationUpdate = false;
 	private boolean saveBackAction;
 	private ImageView switchButton;
-
+	private NotifyingScrollView scrollView;
+	private View listViewLayout;
+	private ListView listView;
+	
 
 	public DashboardOnMap(MapActivity ma) {
 		this.mapActivity = ma;
@@ -91,20 +98,11 @@ public class DashboardOnMap {
 				setDashboardVisibility(false);
 			}
 		};
+		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
+		listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
+		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.setOnClickListener(listener);
-		
-		
-		switchButton =  (ImageView) dashboardView.findViewById(R.id.map_menu_button);
-		switchButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				setDashboardVisibility(false);
-				mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
-				mapActivity.getMapActions().toggleDrawer();				
-			}
-		});
 
 		actionButton = new ActionButton(mapActivity);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -129,11 +127,49 @@ public class DashboardOnMap {
 		});
 		dashboardView.addView(actionButton);
 
+		
 		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll))
-					.setOnScrollChangedListener(onScrollChangedListener);
+			scrollView.setOnScrollChangedListener(onScrollChangedListener);
+			listView.setOnScrollListener(new OnScrollListener() {
+				
+				private TIntObjectHashMap<Integer> listViewItemHeights = new TIntObjectHashMap<Integer>();
+
+				@Override
+				public void onScrollStateChanged(AbsListView view, int scrollState) {
+				}
+				
+				@Override
+				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//					if(listView.getChildCount() == 0) {
+//						return;
+//					}
+//					View c = listView.getChildAt(0);
+//					int sy = -c.getTop();
+//				    listViewItemHeights.put(listView.getFirstVisiblePosition(), c.getHeight());
+//				    for (int i = 0; i < listView.getFirstVisiblePosition(); ++i) {
+//				        if (listViewItemHeights.get(i) != null) // (this is a sanity check)
+//				            sy += listViewItemHeights.get(i); //add all heights of the views that are gone
+//				    }
+//					double scale = view.getContext().getResources().getDisplayMetrics().density;
+//					MarginLayoutParams lp = (MarginLayoutParams) actionButton.getLayoutParams();
+//					lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
+//					((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
+//					MarginLayoutParams llp = (MarginLayoutParams) listView.getLayoutParams();
+//					llp.topMargin = (int) Math.max(5 * scale, 160 * scale - sy);
+//					listView.setLayoutParams(llp);
+//					listView.getParent().requestLayout();
+				}
+			});
 		}
 
+	}
+	
+	private void switchBtnAction() {
+		setDashboardVisibility(false);
+		CommonPreference<Boolean> st = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER;
+		st.set(!st.get());
+		setDashboardVisibility(true);
+//		mapActivity.getMapActions().toggleDrawer();
 	}
 
 	public static int convertPixelsToDp(float dp, Context context){
@@ -164,8 +200,32 @@ public class DashboardOnMap {
 	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
+	
+	public ArrayAdapter<?> getListAdapter() {
+		return listAdapter;
+	}
+	
+	public OnItemClickListener getListAdapterOnClickListener() {
+		return listAdapterOnClickListener;
+	}
+	
+	public void setListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener optionsMenuOnClickListener) {
+		if(!isVisible()) {
+			mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
+		}
+		this.listAdapter = listAdapter;
+		this.listAdapterOnClickListener = optionsMenuOnClickListener;
+		if(this.listView != null) {
+			listView.setAdapter(listAdapter);
+			listView.setOnItemClickListener(optionsMenuOnClickListener);
+		}
+		setDashboardVisibility(true);
+	}
 
 	public void setDashboardVisibility(boolean visible) {
+		if(visible == this.visible) {
+			return;
+		}
 		this.visible = visible;
 		DashboardOnMap.staticVisible = visible;
 		if (visible) {
@@ -174,15 +234,39 @@ public class DashboardOnMap {
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
-			addOrUpdateDashboardFragments();
-			setupActionBar();
-			updateDownloadBtn();
 			dashboardView.setVisibility(View.VISIBLE);
 			actionButton.show();
+			updateDownloadBtn();
+			if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+				addOrUpdateDashboardFragments();
+				scrollView.setVisibility(View.VISIBLE);
+				listViewLayout.setVisibility(View.GONE);
+				switchButton = (ImageView) scrollView.findViewById(R.id.map_menu_button);
+				if(switchButton == null) {
+					switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
+				}
+				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
+						R.color.icon_color_light));
+
+			} else {
+				scrollView.setVisibility(View.GONE);
+				switchButton = (ImageView) listViewLayout.findViewById(R.id.map_menu_button);
+				if(switchButton == null) {
+					switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
+				}
+				listViewLayout.setVisibility(View.VISIBLE);
+				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_dashboard_dark,
+						R.color.icon_color_light));
+			}
+			switchButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					switchBtnAction();				
+				}
+			});
+
 			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
-			switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
-					R.color.icon_color_light));
 			
 			mapActivity.getMapActions().disableDrawer();
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
@@ -241,58 +325,10 @@ public class DashboardOnMap {
 	}
 
 
-	private void setupActionBar() {
-		final Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.bottomControls);
-		tb.setTitle(null);
-		tb.getMenu().clear();
-		Menu menu = tb.getMenu();
-		createMenuItem(menu, LIST_ID, R.string.drawer, 
-				R.drawable.ic_dashboard_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, DIRECTIONS_ID, R.string.get_directions, 
-				R.drawable.ic_action_gdirections_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, CONFIGURE_SCREEN_ID, R.string.layer_map_appearance,
-				R.drawable.ic_configure_screen_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, SETTINGS_ID, R.string.shared_string_settings, 
-				R.drawable.ic_action_settings_enabled_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-	}
 	
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int icon, int menuItemType) {
-		int r = icon;
-		MenuItem menuItem = m.add(0, id, 0, titleRes);
-		if (r != 0) {
-			menuItem.setIcon(r);
-		}
-		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				return onOptionsItemSelected(item);
-			}
-		});
-		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
-		return menuItem;
-	}
+	
+	
 
-
-	protected boolean onOptionsItemSelected(MenuItem item) {
-		setDashboardVisibility(false);
-		if(item.getItemId() == LIST_ID) {
-			// temporarily disable drawer
-//			getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
-			mapActivity.getMapActions().toggleDrawer();
-		} else if(item.getItemId() == DIRECTIONS_ID) {
-			navigationAction();
-		} else if(item.getItemId() == CONFIGURE_SCREEN_ID) {
-			mapActivity.getMapActions().prepareConfigureScreen();
-			mapActivity.getMapActions().toggleDrawer();
-			return false;	
-		} else if(item.getItemId() == SETTINGS_ID) {
-			final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization().getSettingsActivity());
-			mapActivity.startActivity(settings);
-		} else {
-			return false;
-		}
-		return true;
-	}
 
 
 	public void navigationAction() {
@@ -343,51 +379,50 @@ public class DashboardOnMap {
 	
 
 	private void addOrUpdateDashboardFragments() {
-		Iterator<WeakReference<DashBaseFragment>> it = fragList.iterator();
-		while(it.hasNext()) {
-			WeakReference<DashBaseFragment> df = it.next();
-			if(df.get() != null) {
-				if(df.get().getView() != null) {
-					df.get().onOpenDash();
-				}
-			} else {
-				it.remove();
-			}
-		}
+		
+//		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
+		boolean showCards = true;
+		
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
-				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity));
-		showFragment(manager, fragmentTransaction, DashParkingFragment.TAG, DashParkingFragment.class);
-		showFragment(manager, fragmentTransaction, DashWaypointsFragment.TAG, DashWaypointsFragment.class);
-		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class);
-		showFragment(manager, fragmentTransaction, DashRecentsFragment.TAG, DashRecentsFragment.class);
-		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class);
-		showFragment(manager, fragmentTransaction, DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class);
-		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class);
-		showFragment(manager, fragmentTransaction, DashOsmoFragment.TAG, DashOsmoFragment.class);
-		//showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class);
-//		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class);
-		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class);
 		
+		
+		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
+				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity) && showCards);
+		showFragment(manager, fragmentTransaction, DashParkingFragment.TAG, DashParkingFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashWaypointsFragment.TAG, DashWaypointsFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashRecentsFragment.TAG, DashRecentsFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashFavoritesFragment.TAG, DashFavoritesFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashTrackFragment.TAG, DashTrackFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashOsmoFragment.TAG, DashOsmoFragment.class, showCards);
+		//showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class, showCards);
+//		showFragment(manager, fragmentTransaction, DashUpdatesFragment.TAG, DashUpdatesFragment.class, showCards);
+		showFragment(manager, fragmentTransaction, DashPluginsFragment.TAG, DashPluginsFragment.class, showCards);
 		showFragment(manager, fragmentTransaction, DashSimulateFragment.TAG, DashSimulateFragment.class,
-				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null);
+				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null && showCards);
+		
 		fragmentTransaction.commit();
 	}
 
 
 
 	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
-			String tag, Class<T> cl) {
-		showFragment(manager, fragmentTransaction, tag, cl, true);
-	}
-
-	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
 			String tag, Class<T> cl, boolean cond) {
 		try {
-			if (manager.findFragmentByTag(tag) == null && cond) {
-				T ni = cl.newInstance();
-				fragmentTransaction.add(R.id.content, ni, tag);
+			Fragment frag = manager.findFragmentByTag(tag);
+			if (manager.findFragmentByTag(tag) == null ) {
+				if(cond) {
+					T ni = cl.newInstance();
+					fragmentTransaction.add(R.id.content, ni, tag);
+				}
+			} else {
+				if(!cond) {
+					fragmentTransaction.remove(manager.findFragmentByTag(tag));
+ 				} else if(frag instanceof DashBaseFragment){
+ 					((DashBaseFragment) frag).onOpenDash();
+ 				}
 			}
 		} catch (Exception e) {
 			getMyApplication().showToastMessage("Error showing dashboard");
@@ -456,6 +491,10 @@ public class DashboardOnMap {
 	public void onAttach(DashBaseFragment dashBaseFragment) {
 		fragList.add(new WeakReference<DashBaseFragment>(dashBaseFragment));
 	}
+	
+	public void requestLayout() {
+		dashboardView.requestLayout();
+	}
 
 
 	public void saveBackAction() {
@@ -469,6 +508,25 @@ public class DashboardOnMap {
 		}
 		return false;
 	}
+
+
+	public void onMenuPressed() {
+		if (!isVisible()) {
+			setDashboardVisibility(true);
+		} else {
+			setDashboardVisibility(false);
+		}
+	}
+
+
+	public boolean onBackPressed() {
+		if (isVisible()) {
+			setDashboardVisibility(false);
+			return true;
+		}
+		return false;
+	}
+
 
 	
 }
