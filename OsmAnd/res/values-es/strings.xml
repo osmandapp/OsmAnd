@@ -1986,7 +1986,7 @@
 	<string name="route_points">Puntos de la ruta</string>
 	<string name="shared_string_release">Liberado</string>
 	<string name="osmand_parking_outdated">Obsoleto</string>
-	<string name="delay_to_start_navigation">Salta la planificación de la ruta</string>
+	<string name="delay_to_start_navigation">Salta la planificación de ruta</string>
     <string name="shared_string_go">Ir</string>
 	<string name="delay_to_start_navigation_descr">Comienza la navegación automáticamente después de un intervalo dado</string>
     <string name="shared_string_not_use">No usar</string>
