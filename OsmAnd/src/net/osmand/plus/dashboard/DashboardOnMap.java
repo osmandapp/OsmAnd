@@ -19,6 +19,7 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.osmedit.DashOsmEditsFragment;
 import net.osmand.plus.osmo.DashOsmoFragment;
 import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
@@ -385,6 +386,7 @@ public class DashboardOnMap {
 		
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		//showFragment(manager, fragmentTransaction, DashOsmEditsFragment.TAG, DashOsmEditsFragment.class);
 		
 		
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,

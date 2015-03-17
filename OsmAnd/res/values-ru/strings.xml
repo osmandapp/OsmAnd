@@ -1929,7 +1929,7 @@
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
-	<string name="osmand_parking_outdated">Просрочено</string>
+	<string name="osmand_parking_overdue">Просрочено</string>
 	<string name="delay_to_start_navigation_descr">Автоматический запуск навигации после заданного интервала</string>
     <string name="delay_to_start_navigation">Задержка планирования маршрута</string>
     <string name="shared_string_go">Поехали</string>

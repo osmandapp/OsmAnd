@@ -1,18 +1,6 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.FavoritesActivity;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +10,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.myplaces.FavoritesActivity;
 
 import java.util.ArrayList;
 import java.util.List;

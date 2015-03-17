@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
@@ -2061,7 +2061,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\nФайл з даними містить всі навігаційні символи, у вигляди єдиного файлу з назвою \'World seamarks\'.
 		\n\nЦей стиль може бути скасовано шляхом його деактивації тут або зміною в пункті \'Стиль мапи\' меню \'Налаштування мапи\' на потрібний.
 	</string>
-<string name="osmand_parking_outdated">Застарілі</string>
+<string name="osmand_parking_overdue">Застарілі</string>
 	<string name="action_create">Створити дію</string>
 	<string name="action_modify">Змінити дію</string>
 	<string name="action_delete">Вилучити дію</string>

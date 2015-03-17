@@ -1985,5 +1985,5 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Puntos de la ruta</string>
 	<string name="shared_string_release">Liberado</string>
-	<string name="osmand_parking_outdated">Obsoleto</string>
+	<string name="osmand_parking_overdue">Obsoleto</string>
 	</resources>

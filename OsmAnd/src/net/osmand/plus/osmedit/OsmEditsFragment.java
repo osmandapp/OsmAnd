@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -92,8 +93,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				toUpload = dataPoints.toArray(new OsmPoint[0]);
-				showUploadItemsDialog();
+				uploadItems(dataPoints.toArray(new OsmPoint[0]));
 				return true;
 			}
 		});
@@ -115,30 +115,34 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-				b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, dataPoints.size()));
-				b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Iterator<OsmPoint> it = dataPoints.iterator();
-						while(it.hasNext()) {
-							OsmPoint info = it.next();
-							if (info.getGroup() == OsmPoint.Group.POI) {
-								dbpoi.deletePOI((OpenstreetmapPoint) info);
-							} else if (info.getGroup() == OsmPoint.Group.BUG) {
-								dbbug.deleteAllBugModifications((OsmNotesPoint) info);
-							}
-							it.remove();
-							listAdapter.delete(info);
-						}
-						listAdapter.notifyDataSetChanged();
-					}
-				});
-				b.setNegativeButton(R.string.shared_string_cancel, null);
-				b.show();
+				deleteItems(dataPoints);
 				return true;
 			}
 		});
+	}
+
+	private void deleteItems(final ArrayList<OsmPoint> points) {
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, points.size()));
+		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Iterator<OsmPoint> it = points.iterator();
+				while (it.hasNext()) {
+					OsmPoint info = it.next();
+					if (info.getGroup() == OsmPoint.Group.POI) {
+						dbpoi.deletePOI((OpenstreetmapPoint) info);
+					} else if (info.getGroup() == OsmPoint.Group.BUG) {
+						dbbug.deleteAllBugModifications((OsmNotesPoint) info);
+					}
+					it.remove();
+					listAdapter.delete(info);
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
 	}
 
 	@Override
@@ -163,10 +167,10 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	}
 
-	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app){
+	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
-		String idPrefix = (child.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + child.getId();
+		String idPrefix = getPrefix(child);
 		if (child.getGroup() == OsmPoint.Group.POI) {
 			viewName.setText(idPrefix + " (" + ((OpenstreetmapPoint) child).getSubtype() + ") " + ((OpenstreetmapPoint) child).getName());
 			icon.setImageDrawable(app.getIconsCache().
@@ -217,6 +221,12 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 					openPopUpMenu(v, child);
 				}
 			});
+			v.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showOnMap(child);
+				}
+			});
 			return v;
 		}
 
@@ -242,13 +252,11 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				if (info.getGroup() == OsmPoint.Group.POI) {
-					dbpoi.deletePOI((OpenstreetmapPoint) info);
-				} else if (info.getGroup() == OsmPoint.Group.BUG) {
-					dbbug.deleteAllBugModifications((OsmNotesPoint) info);
-				}
-				listAdapter.delete(info);
+				ArrayList<OsmPoint> points = new ArrayList<OsmPoint>();
+				points.add(info);
+				deleteItems(new ArrayList<OsmPoint>(points));
 				return true;
+
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_upload).
@@ -256,8 +264,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				toUpload = new OsmPoint[]{info};
-				showUploadItemsDialog();
+				uploadItems(new OsmPoint[]{info});
 				return true;
 			}
 		});
@@ -268,7 +275,21 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void showUploadItemsDialog(){
+	private void uploadItems(final OsmPoint[] items){
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, items.length));
+		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				toUpload = items;
+				showUploadItemsProgressDialog();
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
+	}
+
+	private void showUploadItemsProgressDialog() {
 		dialog = ProgressImplementation.createProgressDialog(
 				getActivity(),
 				getString(R.string.uploading),
@@ -320,7 +341,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 				return e.getMessage();
 			} finally {
 				try {
-					if(out!= null) out.close();
+					if (out != null) out.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -356,7 +377,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 						sz.attribute("", "lon", p.getLongitude() + "");
 						sz.attribute("", "id", p.getId() + "");
 						sz.startTag("", "comment");
-						sz.attribute("", "text", p.getText() +"");
+						sz.attribute("", "text", p.getText() + "");
 						sz.endTag("", "comment");
 						sz.endTag("", "note");
 					}
@@ -382,12 +403,12 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	}
 
 	@Override
-	public void uploadUpdated(OsmPoint point){
+	public void uploadUpdated(OsmPoint point) {
 		listAdapter.delete(point);
 	}
 
 	@Override
-	public void uploadEnded(Integer result){
+	public void uploadEnded(Integer result) {
 		listAdapter.notifyDataSetChanged();
 		if (result != null) {
 			AccessibleToast.makeText(getActivity(),
@@ -397,4 +418,16 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		dialog.dismiss();
 	}
 
+	private void showOnMap(OsmPoint osmPoint) {
+		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
+		String type = osmPoint.getGroup() == OsmPoint.Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
+		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
+		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+
+	public static String getPrefix(OsmPoint osmPoint) {
+		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
+	}
 }

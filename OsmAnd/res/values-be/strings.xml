@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -2051,7 +2051,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_points">Пункты маршруту</string>
 	<string name="shared_string_more_actions">Больш дзеяньняў</string>
 	
-	<string name="osmand_parking_outdated">Састарэлі</string>
+	<string name="osmand_parking_overdue">Састарэлі</string>
 	<string name="osmand_parking_hour">г</string><string name="osmand_parking_minute">хв</string><string name="osmand_parking_time_left">Засталося</string> <string name="action_create">Стварыць дзеяньне</string>
 	<string name="action_modify">Зьмяніць дзеяньне</string>
 	<string name="action_delete">Выдаліць дзеяньне</string>

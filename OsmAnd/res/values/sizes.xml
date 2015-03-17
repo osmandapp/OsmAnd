@@ -91,5 +91,6 @@
     <dimen name="dashFavDescTextSize">14sp</dimen>
     <dimen name="dashProgressTextSize">14sp</dimen>
     <dimen name="dashParkingTextSize">24sp</dimen>
-	<dimen name="dash_parking_text_size">22sp</dimen>
+	<dimen name="dash_parking_big_text_size">18sp</dimen>
+	<dimen name="dash_parking_small_text_size">14sp</dimen>
 </resources>
