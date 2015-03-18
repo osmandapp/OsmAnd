@@ -16,7 +16,7 @@
   <string name="info_button">Információ</string>
   <string name="back_to_location">Vissza a pozícióra</string>
   <string name="shared_string_help">Súgó</string>
-  <string name="show_details">Részletek megjelenítése</string>
+  <string name="show_details">Pozíció részleteinek megjelenítése</string>
   <string name="accessibility_extensions_descr">Akadálymentesítési kiegészítés régi Android verzióhoz</string>
   <string name="accessibility_extensions">Akadálymentesítési kiegészítés</string>
   <string name="accessibility_mode">Akadálymentesítési mód</string>
@@ -45,13 +45,13 @@
   <string name="north_west">északnyugat</string>
   <string name="north_north_west">észak-északnyugat</string>
   <string name="front">előre</string>
-  <string name="front_right">jobbra előre</string>
+  <string name="front_right">jobb előre</string>
   <string name="right">jobbra</string>
-  <string name="back_right">Jobbra vissza</string>
-  <string name="back">vissza</string>
-  <string name="back_left">Balra vissza</string>
+  <string name="back_right">jobb hátra</string>
+  <string name="back">hátra</string>
+  <string name="back_left">bal hátra</string>
   <string name="left">balra</string>
-  <string name="front_left">Balra előre</string>
+  <string name="front_left">bal hátra</string>
   <string name="oclock">óra</string>
   <string name="towards">erre:</string>
   <string name="accuracy">Pontosság</string>
@@ -852,7 +852,7 @@
   
   <string name="test_voice_prompts">Hangutasítások tesztelése</string>
   <string name="local_index_routing_data">Útvonaltervezési adatok</string>
-  <string name="navigate_point_format">Formátum :</string>
+  <string name="navigate_point_format">Formátum</string>
   <string name="poi_search_desc">POI - Érdekes helyek</string>
   <string name="address_search_desc">Címkeresés</string>
   <string name="navpoint_search_desc">Koordináták</string>
@@ -1813,7 +1813,7 @@
     
 	<string name="save_track_to_gpx_globally_headline">Nyomvonalrögzítés igény szerint</string>
 	<string name="parking_place">Parkolóhely</string>
-    <string name="gps_status">GSP Státusz</string>
+    <string name="gps_status">GPS-állapot</string>
     <string name="rendering_attr_streetLighting_name">Közvilágítás</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Proxy internetkapcsolat beállítása</string>
@@ -1901,4 +1901,5 @@
 	<string name="shared_string_video">Videó</string>
 	<string name="shared_string_photo">Fénykép</string>
 	<string name="shared_string_release">Megjelent</string>
+	<string name="days_behind">napos</string>
 	</resources>
