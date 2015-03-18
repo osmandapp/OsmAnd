@@ -140,7 +140,7 @@
   <string name="show_ruler_level">Zobraziť pravítko</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Späť na umiestnenie</string>
-  <string name="show_details">Zobraziť podrobnosti</string>
+  <string name="show_details">Zobraziť podrobnosti o polohe</string>
   <string name="accessibility_extensions_descr">Rozšírenia uľahčenia prístupu pre staršie verzie Androidu</string>
   <string name="accessibility_extensions">Rozšírenia uľahčenia prístupu</string>
   <string name="accessibility_mode">Režim uľahčenia prístupu</string>
@@ -166,14 +166,14 @@
   <string name="west_north_west">západo-severo-západne</string>
   <string name="north_west">severo-západne</string>
   <string name="north_north_west">severo-severo-západne</string>
-  <string name="front">Vpredu</string>
-  <string name="front_right">Vpredu vpravo</string>
-  <string name="right">Vpravo</string>
-  <string name="back_right">Vzadu vpravo</string>
-  <string name="back">Vzadu</string>
-  <string name="back_left">Vzadu vľavo</string>
-  <string name="left">Vľavo</string>
-  <string name="front_left">Vpredu vľavo</string>
+  <string name="front">dopredu</string>
+  <string name="front_right">dopredu vpravo</string>
+  <string name="right">doprava</string>
+  <string name="back_right">dozadu vpravo</string>
+  <string name="back">dozadu</string>
+  <string name="back_left">dozadu vľavo</string>
+  <string name="left">doľava</string>
+  <string name="front_left">dopredu vľavo</string>
   <string name="oclock">hodín</string>
   <string name="towards">k</string>
   <string name="accuracy">Presnosť</string>
@@ -1133,7 +1133,7 @@
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite "Použiť umiestnenie…"</string>
     
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Tento modul poskytuje funkcie a tlačidlá na vytváranie obrazových/zvukových/video poznámok počas výletu</string>
+    <string name="audionotes_plugin_description">Modul Audio/video poznámok poskytuje funkcie na vytváranie obrazových/zvukových/video poznámok počas výletu, buď tlačidlom na obrazovke mapy alebo priamo v kontextovom menu bodu na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">"Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené na OsmAnd offline mapách. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu.\n\nGlobálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
@@ -2112,4 +2112,18 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>
 	<string name="shared_string_currently_recording_track">Stopa sa nahráva</string>
+	<string name="delay_to_start_navigation_descr">Automaticky spustiť navigáciu po určenom intervale</string>
+    <string name="delay_to_start_navigation">Preskočiť plánovanie trasy</string>
+    <string name="shared_string_go">Ísť</string>
+	<string name="osmand_parking_outdated">Zastaralé</string>
+	<string name="action_create">Vytvoriť akciu</string>
+	<string name="action_modify">Zmeniť akciu</string>
+	<string name="action_delete">Odstrániť akciu</string>
+	<string name="osm_edits">Zmeny v OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Zostáva</string> <string name="parking_place_limited">Čas parkovacieho miesta obmedzený</string>
+	<string name="your_edits">Vaše zmeny</string>
+    <string name="waypoint_visit_after">Navštíviť po</string>
+    <string name="waypoint_visit_before">Navštíviť pred</string>
+    <string name="shared_string_not_use">Nepoužívať</string>
+	<string name="shared_string_collapse">Skryť</string>
 	</resources>

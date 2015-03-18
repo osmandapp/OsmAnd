@@ -648,7 +648,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (getActivity() != null) {
 				((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
-			if (allGpxAdapter.getGroupCount() > 0) {
+			if (allGpxAdapter.getGroupCount() > 0 && 
+					allGpxAdapter.isShowingSelection()) {
 				getExpandableListView().expandGroup(0);
 			}
 		}
@@ -919,7 +920,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			return isShowingSelection() && groupPosition == 0;
 		}
 
-		private boolean isShowingSelection() {
+		public boolean isShowingSelection() {
 			return selected.size() > 0 && !selectionMode;
 		}
 

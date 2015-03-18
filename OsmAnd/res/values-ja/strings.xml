@@ -1156,16 +1156,17 @@ POIの更新は利用できません</string>
 	<string name="av_photo_play_sound">写真撮影時に撮影音を鳴らします</string>
 	<string name="av_camera_focus_infinity">フォーカスは無限遠にセットされます</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
-	<string name="osmand_srtm_long_description_1000_chars">このプラグインはOsmAndオフラインマップ上に等高線を表示する機能を提供します。このグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。
-ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。</string>
+	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイと陰影起伏層(補助)の両方がOsmAndのオフラインマップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
+\n\nこのグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。 "</string>
     <string name="audionotes_location_not_defined">メモに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用…\"を利用します</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">旅行中に音声/ビデオメモをとる事が出来ます</string>
     <string name="audionotes_plugin_name">音声/ビデオメモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_description">オフライン等高線や陰影起伏のダウンロードは簡単です。(\'設定\' → \'地図データ等管理\' → \'ダウンロード\' → 希望のマップタイプを選択)。</string>
-    <string name="srtm_plugin_name">等高線プラグイン</string>
+    <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイと陰影起伏層(補助)の両方がOsmAndのオフラインマップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
+\n\nこのグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。 "</string>
+    <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
     <string name="download_regular_maps">標準マップ</string>
@@ -1922,7 +1923,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
-    <string name="osmo_plugin_description">"OpenStreetMapにて、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOsMoの高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n他のデバイスとその経路を追跡することが出来ます。匿名のグループを即座に作成でき、互いの位置を共有し、伝え合うことが出来ます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMoモニタリング</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
@@ -2191,4 +2192,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="route_points">ルート地点</string>
 	<string name="track_segments">経路セグメント</string>
 	<string name="track_points">経路地点</string>
+	<string name="delay_to_start_navigation_descr">指定時間経過後、自動的にナビゲーションを開始</string>
+    <string name="delay_to_start_navigation">ルートプラン指定をスキップ</string>
+    <string name="shared_string_go">出発</string>
+	<string name="shared_string_not_use">使用しない</string>
+	<string name="plugin_touringview_name">ツーリングマップ表示</string>
 	</resources>

@@ -179,7 +179,7 @@ public class OsmandRegions {
 		return queryNoInit(tile31x, tile31y);
 	}
 
-	private List<BinaryMapDataObject> queryNoInit(final int tile31x, final int tile31y) throws IOException {
+	private synchronized List<BinaryMapDataObject> queryNoInit(final int tile31x, final int tile31y) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(tile31x, tile31x, tile31y, tile31y,
 				5, new BinaryMapIndexReader.SearchFilter() {
@@ -215,7 +215,7 @@ public class OsmandRegions {
 	}
 
 
-	public List<BinaryMapDataObject> queryBbox(int lx, int rx, int ty, int by) throws IOException {
+	public synchronized List<BinaryMapDataObject> queryBbox(int lx, int rx, int ty, int by) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(lx, rx, ty, by,
 				5, new BinaryMapIndexReader.SearchFilter() {
@@ -368,7 +368,7 @@ public class OsmandRegions {
 		iterateOverAllObjects(resultMatcher);
 	}
 
-	private void iterateOverAllObjects(final ResultMatcher<BinaryMapDataObject> resultMatcher) throws IOException {
+	private synchronized void iterateOverAllObjects(final ResultMatcher<BinaryMapDataObject> resultMatcher) throws IOException {
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 				5, new BinaryMapIndexReader.SearchFilter() {
 					@Override
