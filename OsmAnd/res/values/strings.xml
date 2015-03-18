@@ -9,22 +9,22 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to osm. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the whole history?</string>
     <string name="delay_to_start_navigation_descr">Automatically start navigation after specified interval</string>
     <string name="delay_to_start_navigation">Skip route planning</string>
     <string name="shared_string_go">Go</string>
-	<string name="osmand_parking_outdated">Outdated</string>
+	<string name="osmand_parking_overdue">overdue</string>
 	<string name="action_create">Action create</string>
 	<string name="action_modify">Action modify</string>
 	<string name="action_delete">Action delete</string>
 	<string name="osm_edits">OSM edits</string>
-	<!-- means first letter of word *hour* -->
-	<string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_hour">h</string><!-- means first letter of word *hour* -->
+	<string name="osmand_parking_minute">min</string><!-- means first letter of word *minute*-->
 	<!-- means first letter of word *minute* -->
-	<string name="osmand_parking_minute">m</string>
+	<string name="parking_place_limited">Parking place time limited to</string>
 	<!-- used to describe time left, not left direction -->
 	<string name="osmand_parking_time_left">Left</string>
-	<string name="parking_place_limited">Parking place time limited</string>
 	<string name="your_edits">Your Edits</string>
     <string name="waypoint_visit_after">Visit after</string>
     <string name="waypoint_visit_before">Visit before</string>

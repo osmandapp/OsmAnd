@@ -1969,7 +1969,7 @@
 	<string name="osm_edits">OSM redigeringer</string>
 	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
 	<string name="your_edits">Dine redigeringer</string>
-    <string name="osmand_parking_outdated">Udløbet</string>
+    <string name="osmand_parking_overdue">Udløbet</string>
 	<string name="delay_to_start_navigation_descr">Start navigation automatisk efter angivne interval</string>
     <string name="delay_to_start_navigation">Spring ruteplanlægning over</string>
     <string name="shared_string_go">Udfør</string>

@@ -2014,7 +2014,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="proxy_port_title">Port proxy</string>
 	<string name="plugin_description_title">Opis</string>
 	<string name="plugin_install_needs_network">Do zainstalowania tej wtyczki potrzebujesz połączenia internetowego.</string>
-	<string name="osmand_parking_outdated">Przestarzały</string>
+	<string name="osmand_parking_overdue">Przestarzały</string>
 	<string name="action_create">Utwórz</string>
 	<string name="action_modify">Zmodyfikuj</string>
 	<string name="action_delete">Usuń</string>
