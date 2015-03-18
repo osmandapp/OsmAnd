@@ -33,8 +33,6 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
@@ -101,8 +99,9 @@ public class DashboardOnMap {
 		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
+//		dashboardView.setOnClickListener(listener);
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
-		dashboardView.setOnClickListener(listener);
+		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
 
 		actionButton = new ActionButton(mapActivity);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -322,13 +321,20 @@ public class DashboardOnMap {
 				mapActivity.startActivity(intent);
 			}
 		});
+		scheduleDownloadButtonCheck();
 	}
 
-
-	
-	
-	
-
+	private void scheduleDownloadButtonCheck() {
+		mapActivity.getMyApplication().runInUIThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(isVisible()) {
+					updateDownloadBtn();
+				}
+			}
+		}, 4000);
+	}
 
 
 	public void navigationAction() {
