@@ -23,8 +23,8 @@
 	<color name="map_widget_dark_pressed">#ddcccccc</color>
 	<color name="map_widget_light_trans">#40ffffff</color>
 	<color name="map_widget_light_pressed">#e5e5e5</color>
-	<color name="map_widget_blue">#30A0FF</color>
-	<color name="map_widget_blue_pressed">#dd30D0FF</color>
+	<color name="map_widget_blue">#536dfe</color>
+	<color name="map_widget_blue_pressed">#485dd9</color>
 
 
 	<color name="actionbar_dark_color">#39464d</color>
