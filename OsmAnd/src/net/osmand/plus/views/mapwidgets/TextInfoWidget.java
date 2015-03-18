@@ -1,8 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
+import android.app.Application;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -22,8 +24,11 @@ public class TextInfoWidget  {
 
 	private boolean explicitlyVisible;
 
+	private OsmandApplication app;
+
 
 	public TextInfoWidget(Activity activity) {
+		app = (OsmandApplication) activity.getApplication();
 		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
 		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
@@ -37,6 +42,10 @@ public class TextInfoWidget  {
 	
 	public void setImageDrawable(Drawable imageDrawable) {
 		setImageDrawable(imageDrawable, false);
+	}
+	
+	public void setImageDrawable(int res) {
+		setImageDrawable(app.getIconsCache().getIcon(res, R.color.map_widget_icon_color), false);
 	}
 	
 	

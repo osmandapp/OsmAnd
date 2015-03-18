@@ -77,7 +77,7 @@ public class MapInfoWidgetsFactory {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_altitude));
+		altitudeControl.setImageDrawable(R.drawable.widget_altitude);
 		return altitudeControl;
 	}
 	
@@ -100,7 +100,7 @@ public class MapInfoWidgetsFactory {
 				return false;
 			}
 		};
-		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.widget_gps_info));
+		gpsInfoControl.setImageDrawable(R.drawable.widget_gps_info);
 		gpsInfoControl.setText(null, null);
 		gpsInfoControl.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -270,7 +270,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 		});
 		routeStepsControl.setText(null, null);
-		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_signpost));
+		routeStepsControl.setImageDrawable(R.drawable.widget_signpost);
 		return routeStepsControl;
 	}
 

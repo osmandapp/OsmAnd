@@ -377,7 +377,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				showDialog(activity);
 			}
 		});
-		distanceControl.setImageDrawable(app.getResources().getDrawable(R.drawable.widget_distance));
+		distanceControl.setImageDrawable(R.drawable.widget_distance);
 		return distanceControl;
 	}
 

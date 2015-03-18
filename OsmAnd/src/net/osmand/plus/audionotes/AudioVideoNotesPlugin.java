@@ -541,11 +541,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void updateWidgetIcon(final TextInfoWidget recordPlaceControl) {
 		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_inactive));
 		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
-			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_video));
+			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_video);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_photo));
+			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_photo);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_AUDIO) {
-			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_audio));
+			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_audio);
 		}
 	}
 

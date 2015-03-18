@@ -506,7 +506,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_parking));
+		parkingPlaceControl.setImageDrawable(R.drawable.widget_parking);
 		return parkingPlaceControl;
 	}
 	

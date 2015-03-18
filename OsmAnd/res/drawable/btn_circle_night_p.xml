@@ -14,8 +14,9 @@
             android:insetRight="@dimen/map_button_inset_shadow"
             android:insetTop="@dimen/map_button_inset_shadow" >
             <shape android:shape="oval" >
-                <solid android:color="@color/map_widget_blue_pressed" />
+                <solid android:color="@color/map_widget_dark_pressed" />
             </shape>
         </inset>
     </item>
+
 </layer-list>

@@ -17,6 +17,7 @@
 	<color name="list_item_background_dark">#333b40</color>
 	<color name="list_item_background_dark_pressed">#be39464d</color>
 	
+	<color name="map_widget_icon_color">#ff8f00</color>
 	<color name="map_widget_stroke">#333333</color>
 	<color name="map_widget_light">#ffffff</color>
 	<color name="map_widget_dark">#bb3f3f3f</color>
