@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.util.Xml;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,13 +56,18 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	private ArrayList<OsmPoint> dataPoints;
 	private OsmEditsAdapter listAdapter;
 
+	private boolean selectionMode = false;
+
 	private OpenstreetmapsDbHelper dbpoi;
 	private OsmBugsDbHelper dbbug;
 
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 
+	private ActionMode actionMode;
 	protected OsmPoint[] toUpload = new OsmPoint[0];
+
+	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
 	ProgressDialog dialog;
 
@@ -93,7 +101,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				uploadItems(dataPoints.toArray(new OsmPoint[0]));
+				enterUploadMode();
 				return true;
 			}
 		});
@@ -115,10 +123,113 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				deleteItems(dataPoints);
+				enterDeleteMode();
 				return true;
 			}
 		});
+	}
+
+	private void enterUploadMode() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
+
+			@Override
+			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				enableSelectionMode(true);
+				MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
+						setIcon(R.drawable.ic_action_export);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
+						mode.finish();
+						return true;
+					}
+				});
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				osmEditsSelected.clear();
+				listAdapter.notifyDataSetInvalidated();
+				updateSelectionMode(mode);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				enableSelectionMode(false);
+				listAdapter.notifyDataSetInvalidated();
+			}
+
+		});
+	}
+
+	private void enterDeleteMode() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
+
+			@Override
+			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				enableSelectionMode(true);
+				MenuItem item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						deleteItems(osmEditsSelected);
+						mode.finish();
+						return true;
+					}
+				});
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				osmEditsSelected.clear();
+				listAdapter.notifyDataSetInvalidated();
+				updateSelectionMode(mode);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				enableSelectionMode(false);
+				listAdapter.notifyDataSetInvalidated();
+			}
+
+		});
+	}
+
+	private void updateSelectionMode(ActionMode m) {
+		if(osmEditsSelected.size() > 0) {
+			m.setTitle(osmEditsSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
+		} else{
+			m.setTitle("");
+		}
+	}
+
+	private void enableSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+	}
+
+	public ActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof ActionBarActivity) {
+			return (ActionBarActivity) getActivity();
+		}
+		return null;
 	}
 
 	private void deleteItems(final ArrayList<OsmPoint> points) {
@@ -215,6 +326,25 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 			v.findViewById(R.id.play).setVisibility(View.GONE);
 
+			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_local_index);
+			View options = v.findViewById(R.id.options);
+			if(selectionMode) {
+				options.setVisibility(View.GONE);
+				ch.setVisibility(View.VISIBLE);
+				ch.setChecked(osmEditsSelected.contains(child));
+				v.findViewById(R.id.icon).setVisibility(View.GONE);
+				ch.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onItemSelect(ch, child);
+					}
+				});
+			} else {
+				v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+				options.setVisibility(View.VISIBLE);
+				ch.setVisibility(View.GONE);
+			}
+
 			v.findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -224,10 +354,25 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showOnMap(child);
+					if (selectionMode) {
+						ch.setChecked(!ch.isChecked());
+						onItemSelect(ch, child);
+					} else {
+						showOnMap(child);
+					}
+
 				}
 			});
 			return v;
+		}
+
+		public void onItemSelect(CheckBox ch, OsmPoint child) {
+			if (ch.isChecked()) {
+				osmEditsSelected.add(child);
+			} else {
+				osmEditsSelected.remove(child);
+			}
+			updateSelectionMode(actionMode);
 		}
 
 	}
@@ -278,7 +423,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	private void uploadItems(final OsmPoint[] items){
 		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, items.length));
-		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				toUpload = items;

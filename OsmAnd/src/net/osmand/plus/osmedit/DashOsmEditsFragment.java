@@ -1,6 +1,8 @@
 package net.osmand.plus.osmedit;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -92,18 +94,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			send.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-					OsmPoint[] toUpload = new OsmPoint[]{point};
-					OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
-					ProgressDialog dialog = ProgressImplementation.createProgressDialog(
-							getActivity(),
-							getString(R.string.uploading),
-							getString(R.string.local_openstreetmap_uploading),
-							ProgressDialog.STYLE_HORIZONTAL).getDialog();
-					UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,DashOsmEditsFragment.this, remotepoi,
-							remotebug, toUpload.length);
-					uploadTask.execute(toUpload);
-					dialog.show();
+					uploadItem(point);
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);
@@ -122,6 +113,34 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			});
 			osmLayout.addView(view);
 		}
+	}
+
+	private void uploadItem(final OsmPoint point){
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, 1));
+		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				showProgressDialog(point);
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
+	}
+
+	private void showProgressDialog(OsmPoint point) {
+		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
+		OsmPoint[] toUpload = new OsmPoint[]{point};
+		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
+		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
+				getActivity(),
+				getString(R.string.uploading),
+				getString(R.string.local_openstreetmap_uploading),
+				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,DashOsmEditsFragment.this, remotepoi,
+				remotebug, toUpload.length);
+		uploadTask.execute(toUpload);
+		dialog.show();
 	}
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
