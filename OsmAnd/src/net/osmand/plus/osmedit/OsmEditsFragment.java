@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
@@ -94,9 +95,9 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		menu.clear();
 
 		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
-			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavoritesActivity) getActivity()).getClearToolbar(false);
+			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
 		}
 		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
 				setIcon(R.drawable.ic_action_export);
