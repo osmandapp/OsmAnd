@@ -19,7 +19,7 @@
 	<string name="action_modify">Action modify</string>
 	<string name="action_delete">Action delete</string>
 	<string name="osm_edits">OSM edits</string>
-	<!-- means first letter of word *hour* -->
+	<string name="osmand_parking_hour">h</string><!-- means first letter of word *hour* -->
 	<string name="osmand_parking_minute">min</string><!-- means first letter of word *minute*-->
 	<!-- means first letter of word *minute* -->
 	<string name="parking_place_limited">Parking place time limited to</string>

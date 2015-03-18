@@ -90,7 +90,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
 			ImageButton send =(ImageButton) view.findViewById(R.id.play);
-			send.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_gup_dark));
+			send.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_export));
 			send.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

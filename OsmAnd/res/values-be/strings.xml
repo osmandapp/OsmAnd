@@ -2052,7 +2052,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="shared_string_more_actions">Больш дзеяньняў</string>
 	
 	<string name="osmand_parking_overdue">Састарэлі</string>
-	<string name="osmand_parking_hour">г</string><string name="osmand_parking_minute">хв</string><string name="osmand_parking_time_left">Засталося</string> <string name="action_create">Стварыць дзеяньне</string>
+	<string name="osmand_parking_hour">г</string>
+	<string name="osmand_parking_minute">хв</string>
+	<string name="osmand_parking_time_left">Засталося</string>
+	<string name="action_create">Стварыць дзеяньне</string>
 	<string name="action_modify">Зьмяніць дзеяньне</string>
 	<string name="action_delete">Выдаліць дзеяньне</string>
 	<string name="osm_edits">праўкі OSM</string>

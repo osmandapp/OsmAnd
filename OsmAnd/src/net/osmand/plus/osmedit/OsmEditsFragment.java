@@ -3,6 +3,8 @@ package net.osmand.plus.osmedit;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -108,7 +110,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 
 		item = menu.add(R.string.local_osm_changes_backup).
-				setIcon(R.drawable.ic_action_gsave_dark);
+				setIcon(R.drawable.ic_action_gshare_dark);
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -542,7 +544,12 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			if (result != null) {
 				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
 			} else {
-				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_successful, osmchange.getAbsolutePath()), Toast.LENGTH_LONG).show();
+				final Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+				sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(osmchange));
+				sendIntent.setType("text/plain");
+				startActivity(sendIntent);
 			}
 		}
 	}
