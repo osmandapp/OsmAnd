@@ -527,12 +527,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 //		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
 		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		
 		if (!enabled) {
-			backToLocationControl.setIconColorId(R.color.icon_color_light);
+			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
+			backToLocationControl.setIconColorId(R.color.icon_color_light, 0);
 		} else if (tracked) {
-			backToLocationControl.setIconColorId(R.color.color_distance);
+			backToLocationControl.setIconColorId(0);
+			backToLocationControl.setBg(R.drawable.btn_circle_blue);
 		} else {
-			backToLocationControl.setIconColorId(R.color.color_white);
+			// TODO different icon
+			backToLocationControl.setIconColorId(R.color.map_widget_icon_color);
+			backToLocationControl.setBg(R.drawable.btn_circle_blue);
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
 		backToLocationControl.updateVisibility(visible);
@@ -628,6 +633,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public MapHudButton setBg(int dayBg, int nightBg) {
+			if(bgDark == nightBg && dayBg == bgLight) {
+				return this;
+			}
 			bgDark = nightBg;
 			bgLight = dayBg;
 			f = true;
@@ -648,6 +656,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public MapHudButton setBg(int bg) {
+			if(bgDark == bg && bg == bgLight) {
+				return this;
+			}
 			bgDark = bg;
 			bgLight = bg;
 			f = true;
@@ -669,6 +680,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			resLight = clr;
 			resDark = clr;
+			f = true;
+			return this;
+		}
+		
+		public MapHudButton setIconColorId(int clrLight, int clrDark) {
+			if (resLight == clrLight && resDark == clrDark) {
+				return this;
+			}
+			resLight = clrLight;
+			resDark = clrDark;
 			f = true;
 			return this;
 		}

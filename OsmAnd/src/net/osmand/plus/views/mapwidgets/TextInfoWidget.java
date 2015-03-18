@@ -4,7 +4,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
-import android.app.Application;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;

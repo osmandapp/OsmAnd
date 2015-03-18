@@ -349,6 +349,8 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
+				} else {
+					text = "";
 				}
 			}
 			if(!showNextTurn && updateWaypoint()) {

@@ -62,7 +62,7 @@
 	<dimen name="map_button_size">50dp</dimen>
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">7dp</dimen>
-	<dimen name="map_button_shadow_width">52dp</dimen>
+	<dimen name="map_button_shadow_width">54dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
 	
@@ -78,7 +78,7 @@
 	<dimen name="map_routing_progress_width">100dp</dimen>
 	
 	<dimen name="map_button_shadow_margin">2dp</dimen>
-	<dimen name="map_button_inset_shadow">2dp</dimen>
+	<dimen name="map_button_inset_shadow">1dp</dimen>
 	<dimen name="map_button_inset">4dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1px</dimen>
