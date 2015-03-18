@@ -1995,4 +1995,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="delay_to_start_navigation_descr">Démarrer automatiquement la navigation après le temps indiqué</string>
     <string name="shared_string_go">Aller</string>
 	<string name="shared_string_not_use">Non utilisé</string>
-	</resources>
+	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
+    </resources>
