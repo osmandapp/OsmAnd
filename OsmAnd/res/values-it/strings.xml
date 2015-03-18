@@ -2151,4 +2151,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="delay_to_start_navigation">Salta la pianificazione del percorso</string>
     <string name="shared_string_go">Vai</string>
 	<string name="shared_string_not_use">Non usare</string>
-	</resources>
+	<string name="confirmation_to_clear_history">Vuoi cancellare l\'intera cronologia?</string>
+    </resources>

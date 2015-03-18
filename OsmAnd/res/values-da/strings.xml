@@ -1974,4 +1974,5 @@
     <string name="delay_to_start_navigation">Spring ruteplanlægning over</string>
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
-	</resources>
+	<string name="confirmation_to_clear_history">Skal hele historikken ryddes?</string>
+    </resources>

@@ -1461,7 +1461,7 @@
 	<string name="online_map_settings_descr">온라인 또는 캐시된 타일 지도 소스를 구성합니다</string>
 	
 	
-	<string name="osmand_accessibility_description">"이 플러그인은 기기의 acessibility 기능을 OsmAnd에 직접 제공 합니다. 예: TTS 음성 속도 조절 용이, 방향 패드 화면 운행 구성 용이,  트랙볼을 사용하여 확대/축소 컨트롤 용이,  또는 TTS 음성 피드백을 사용하여 자동으로 현재위치 발표 용이."</string>
+	<string name="osmand_accessibility_description">"이 플러그인은 기기의 accessibility 기능을 OsmAnd에 직접 제공 합니다. 예: TTS 음성 속도 조절 용이, 방향 패드 화면 운행 구성 용이,  트랙볼을 사용하여 확대/축소 컨트롤 용이,  또는 TTS 음성 피드백을 사용하여 자동으로 현재위치 발표 용이."</string>
 	
 	
 	
