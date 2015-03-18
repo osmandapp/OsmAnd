@@ -1952,4 +1952,5 @@
     <string name="delay_to_start_navigation">跳過航路規劃</string>
     <string name="shared_string_go">執行</string>
 	<string name="shared_string_not_use">不使用</string>
-	</resources>
+	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
+    </resources>
