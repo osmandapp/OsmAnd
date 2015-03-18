@@ -3,34 +3,38 @@
  */
 package net.osmand.plus.activities.search;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.*;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.EditPOIFilterActivity;
-import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.poi.NameFinderPoiFilter;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.SearchByNameFilter;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.resources.ResourceManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.EditPOIFilterActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.SearchByNameFilter;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.resources.ResourceManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -151,8 +155,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			OsmandApplication app = getMyApplication();
 			final PoiLegacyFilter model = getItem(position);
 			label.setText(model.getName());
+			IconsCache iconsCache = app.getIconsCache();
 			if(model.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
-				icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_filter_dark));
+				icon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
 			} else if (model.getFilterId().equals(PoiLegacyFilter.BY_NAME_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
@@ -163,6 +168,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				}
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
+			editIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
 			if (model.isStandardFilter()) {
 				editIcon.setVisibility(View.GONE);
 			} else {

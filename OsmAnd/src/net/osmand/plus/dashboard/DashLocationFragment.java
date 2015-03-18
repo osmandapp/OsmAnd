@@ -1,15 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.DirectionDrawable;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +8,16 @@ import android.hardware.SensorManager;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.views.DirectionDrawable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -134,7 +134,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			if (paint) {
 				dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 			} else {
-				dd.setImage(arrowResId);
+				dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_white);
 			}
 			if (fromLoc == null || h == null) {
 				dd.setAngle(0);

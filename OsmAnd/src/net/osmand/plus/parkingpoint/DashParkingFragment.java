@@ -54,7 +54,7 @@ public class DashParkingFragment extends DashLocationFragment {
 			public void onClick(View v) {
 				LatLon point = plugin.getParkingPosition();
 				getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-						15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, plugin.getParkingDescription(getActivity())), true,
+						15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, plugin.getParkingDescription(getActivity())), false,
 						point); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
@@ -83,31 +83,33 @@ public class DashParkingFragment extends DashLocationFragment {
 		LatLon loc = getDefaultLocation();
 		LatLon position = plugin.getParkingPosition();
 		boolean limited = plugin.getParkingType();
-		String parking_name = limited ?
-				getString(R.string.parking_place_limited) : getString(R.string.parking_place);
+		String descr;
+
+		TextView timeLeft = (TextView) mainView.findViewById(R.id.time_left);
 		if (limited) {
+			descr = getString(R.string.parking_place_limited) + " " + plugin.getFormattedTime( plugin.getParkingTime(), getActivity());
 			long endtime = plugin.getParkingTime();
 			long currTime = Calendar.getInstance().getTimeInMillis();
 			long timeDiff = endtime - currTime;
-			String time = getFormattedTime(timeDiff);
-			TextView timeLeft = (TextView) mainView.findViewById(R.id.time_left);
-			TextView leftLabel = (TextView) mainView.findViewById(R.id.left_lbl);
+			String time = getFormattedTime(timeDiff) + " ";
+			TextView leftLbl = (TextView) mainView.findViewById(R.id.left_lbl);
 			timeLeft.setText(time);
 			if (timeDiff < 0) {
-				timeLeft.setTextColor(Color.RED);
-				leftLabel.setTextColor(Color.RED);
-				leftLabel.setText(R.string.osmand_parking_outdated);
+				timeLeft.setText(time);
+				leftLbl.setTextColor(getResources().getColor(R.color.parking_outdated_color));
+				leftLbl.setText(getString(R.string.osmand_parking_overdue));
 			} else {
-				timeLeft.setTextColor(Color.WHITE);
-				leftLabel.setTextColor(Color.WHITE);
-				leftLabel.setText(R.string.osmand_parking_time_left);
+				timeLeft.setText(time);
+				leftLbl.setTextColor(Color.WHITE);
+				leftLbl.setText(getString(R.string.osmand_parking_time_left));
 			}
-			mainView.findViewById(R.id.left_lbl).setVisibility(View.VISIBLE);
+			timeLeft.setVisibility(View.VISIBLE);
 		} else {
-			((TextView) mainView.findViewById(R.id.time_left)).setText("");
-			mainView.findViewById(R.id.left_lbl).setVisibility(View.GONE);
+			descr = getString(R.string.parking_place);
+			timeLeft.setText("");
+			timeLeft.setVisibility(View.GONE);
 		}
-		((TextView) mainView.findViewById(R.id.name)).setText(parking_name);
+		((TextView) mainView.findViewById(R.id.name)).setText(descr);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null) {
 			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);

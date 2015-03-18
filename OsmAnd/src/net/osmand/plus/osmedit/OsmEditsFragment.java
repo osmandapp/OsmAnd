@@ -3,10 +3,14 @@ package net.osmand.plus.osmedit;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.util.Xml;
 import android.view.LayoutInflater;
@@ -18,16 +22,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
@@ -52,13 +59,18 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	private ArrayList<OsmPoint> dataPoints;
 	private OsmEditsAdapter listAdapter;
 
+	private boolean selectionMode = false;
+
 	private OpenstreetmapsDbHelper dbpoi;
 	private OsmBugsDbHelper dbbug;
 
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 
+	private ActionMode actionMode;
 	protected OsmPoint[] toUpload = new OsmPoint[0];
+
+	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
 	ProgressDialog dialog;
 
@@ -83,24 +95,23 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		menu.clear();
 
 		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
-			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavoritesActivity) getActivity()).getClearToolbar(false);
+			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
 		}
 		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
 				setIcon(R.drawable.ic_action_export);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				toUpload = dataPoints.toArray(new OsmPoint[0]);
-				showUploadItemsDialog();
+				enterUploadMode();
 				return true;
 			}
 		});
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 
 		item = menu.add(R.string.local_osm_changes_backup).
-				setIcon(R.drawable.ic_action_gsave_dark);
+				setIcon(R.drawable.ic_action_gshare_dark);
 		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -115,30 +126,137 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-				b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, dataPoints.size()));
-				b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Iterator<OsmPoint> it = dataPoints.iterator();
-						while(it.hasNext()) {
-							OsmPoint info = it.next();
-							if (info.getGroup() == OsmPoint.Group.POI) {
-								dbpoi.deletePOI((OpenstreetmapPoint) info);
-							} else if (info.getGroup() == OsmPoint.Group.BUG) {
-								dbbug.deleteAllBugModifications((OsmNotesPoint) info);
-							}
-							it.remove();
-							listAdapter.delete(info);
-						}
-						listAdapter.notifyDataSetChanged();
-					}
-				});
-				b.setNegativeButton(R.string.shared_string_cancel, null);
-				b.show();
+				enterDeleteMode();
 				return true;
 			}
 		});
+	}
+
+	private void enterUploadMode() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
+
+			@Override
+			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				enableSelectionMode(true);
+				MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
+						setIcon(R.drawable.ic_action_export);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						uploadItems(osmEditsSelected.toArray(new OsmPoint[0]));
+						mode.finish();
+						return true;
+					}
+				});
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				osmEditsSelected.clear();
+				listAdapter.notifyDataSetInvalidated();
+				updateSelectionMode(mode);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				enableSelectionMode(false);
+				listAdapter.notifyDataSetInvalidated();
+			}
+
+		});
+	}
+
+	private void enterDeleteMode() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
+
+			@Override
+			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				enableSelectionMode(true);
+				MenuItem item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						deleteItems(osmEditsSelected);
+						mode.finish();
+						return true;
+					}
+				});
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+				osmEditsSelected.clear();
+				listAdapter.notifyDataSetInvalidated();
+				updateSelectionMode(mode);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				enableSelectionMode(false);
+				listAdapter.notifyDataSetInvalidated();
+			}
+
+		});
+	}
+
+	private void updateSelectionMode(ActionMode m) {
+		if(osmEditsSelected.size() > 0) {
+			m.setTitle(osmEditsSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
+		} else{
+			m.setTitle("");
+		}
+	}
+
+	private void enableSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+	}
+
+	public ActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof ActionBarActivity) {
+			return (ActionBarActivity) getActivity();
+		}
+		return null;
+	}
+
+	private void deleteItems(final ArrayList<OsmPoint> points) {
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, points.size()));
+		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Iterator<OsmPoint> it = points.iterator();
+				while (it.hasNext()) {
+					OsmPoint info = it.next();
+					if (info.getGroup() == OsmPoint.Group.POI) {
+						dbpoi.deletePOI((OpenstreetmapPoint) info);
+					} else if (info.getGroup() == OsmPoint.Group.BUG) {
+						dbbug.deleteAllBugModifications((OsmNotesPoint) info);
+					}
+					it.remove();
+					listAdapter.delete(info);
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
 	}
 
 	@Override
@@ -163,10 +281,10 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	}
 
-	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app){
+	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
-		String idPrefix = (child.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + child.getId();
+		String idPrefix = getPrefix(child);
 		if (child.getGroup() == OsmPoint.Group.POI) {
 			viewName.setText(idPrefix + " (" + ((OpenstreetmapPoint) child).getSubtype() + ") " + ((OpenstreetmapPoint) child).getName());
 			icon.setImageDrawable(app.getIconsCache().
@@ -211,13 +329,53 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 			v.findViewById(R.id.play).setVisibility(View.GONE);
 
+			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_local_index);
+			View options = v.findViewById(R.id.options);
+			if(selectionMode) {
+				options.setVisibility(View.GONE);
+				ch.setVisibility(View.VISIBLE);
+				ch.setChecked(osmEditsSelected.contains(child));
+				v.findViewById(R.id.icon).setVisibility(View.GONE);
+				ch.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onItemSelect(ch, child);
+					}
+				});
+			} else {
+				v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+				options.setVisibility(View.VISIBLE);
+				ch.setVisibility(View.GONE);
+			}
+
 			v.findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					openPopUpMenu(v, child);
 				}
 			});
+			v.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (selectionMode) {
+						ch.setChecked(!ch.isChecked());
+						onItemSelect(ch, child);
+					} else {
+						showOnMap(child);
+					}
+
+				}
+			});
 			return v;
+		}
+
+		public void onItemSelect(CheckBox ch, OsmPoint child) {
+			if (ch.isChecked()) {
+				osmEditsSelected.add(child);
+			} else {
+				osmEditsSelected.remove(child);
+			}
+			updateSelectionMode(actionMode);
 		}
 
 	}
@@ -242,13 +400,11 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				if (info.getGroup() == OsmPoint.Group.POI) {
-					dbpoi.deletePOI((OpenstreetmapPoint) info);
-				} else if (info.getGroup() == OsmPoint.Group.BUG) {
-					dbbug.deleteAllBugModifications((OsmNotesPoint) info);
-				}
-				listAdapter.delete(info);
+				ArrayList<OsmPoint> points = new ArrayList<OsmPoint>();
+				points.add(info);
+				deleteItems(new ArrayList<OsmPoint>(points));
 				return true;
+
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.local_openstreetmap_upload).
@@ -256,8 +412,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				toUpload = new OsmPoint[]{info};
-				showUploadItemsDialog();
+				uploadItems(new OsmPoint[]{info});
 				return true;
 			}
 		});
@@ -268,7 +423,21 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void showUploadItemsDialog(){
+	private void uploadItems(final OsmPoint[] items){
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, items.length));
+		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				toUpload = items;
+				showUploadItemsProgressDialog();
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
+	}
+
+	private void showUploadItemsProgressDialog() {
 		dialog = ProgressImplementation.createProgressDialog(
 				getActivity(),
 				getString(R.string.uploading),
@@ -320,7 +489,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 				return e.getMessage();
 			} finally {
 				try {
-					if(out!= null) out.close();
+					if (out != null) out.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -356,7 +525,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 						sz.attribute("", "lon", p.getLongitude() + "");
 						sz.attribute("", "id", p.getId() + "");
 						sz.startTag("", "comment");
-						sz.attribute("", "text", p.getText() +"");
+						sz.attribute("", "text", p.getText() + "");
 						sz.endTag("", "comment");
 						sz.endTag("", "note");
 					}
@@ -376,18 +545,23 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			if (result != null) {
 				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
 			} else {
-				AccessibleToast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_successful, osmchange.getAbsolutePath()), Toast.LENGTH_LONG).show();
+				final Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+				sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(osmchange));
+				sendIntent.setType("text/plain");
+				startActivity(sendIntent);
 			}
 		}
 	}
 
 	@Override
-	public void uploadUpdated(OsmPoint point){
+	public void uploadUpdated(OsmPoint point) {
 		listAdapter.delete(point);
 	}
 
 	@Override
-	public void uploadEnded(Integer result){
+	public void uploadEnded(Integer result) {
 		listAdapter.notifyDataSetChanged();
 		if (result != null) {
 			AccessibleToast.makeText(getActivity(),
@@ -397,4 +571,16 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		dialog.dismiss();
 	}
 
+	private void showOnMap(OsmPoint osmPoint) {
+		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
+		String type = osmPoint.getGroup() == OsmPoint.Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
+		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
+		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+
+	public static String getPrefix(OsmPoint osmPoint) {
+		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
+	}
 }
