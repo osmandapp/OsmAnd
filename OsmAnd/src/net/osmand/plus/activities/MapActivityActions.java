@@ -52,8 +52,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -64,7 +62,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,9 +87,6 @@ public class MapActivityActions implements DialogProvider {
 	private RoutingHelper routingHelper;
 
 	private boolean refreshDrawer = false;
-	private static boolean USE_OLD_DRAWER_TODELETE = false;
-	DrawerLayout mDrawerLayout;
-	ListView mDrawerList;
 	private WaypointDialogHelper waypointDialogHelper;
 
 	public enum DrawerType{
@@ -576,66 +570,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public boolean onBackPressed(){
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.closeDrawer(mDrawerList);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void onMenuPressed(){
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.closeDrawer(mDrawerList);
-			} else {
-				prepareStartOptionsMenu();
-				toggleDrawer();
-			}
-		}
-	}
-
 	public void prepareStartOptionsMenu(){
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout == null) {
-				mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
-				mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
-				mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-				mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-					@Override
-					public void onDrawerSlide(View view, float v) {
-					}
-
-					@Override
-					public void onDrawerOpened(View view) {
-						// need to refresh drawer if it
-						// was opened with slide, not button
-						if (mDrawerList != null && refreshDrawer) {
-							if (currentDrawer == DrawerType.WAYPOINTS) {
-								showWaypointsInDrawer(false);
-							} else if (currentDrawer == DrawerType.MAIN_MENU) {
-								final ContextMenuAdapter cm = createMainOptionsMenu();
-								prepareOptionsMenu(cm);
-							} else {
-								mDrawerList.invalidateViews();
-							}
-						}
-					}
-
-					@Override
-					public void onDrawerClosed(View view) {
-						refreshDrawer = true;
-					}
-
-					@Override
-					public void onDrawerStateChanged(int i) {
-
-					}
-				});
-			}
-		}
 		refreshDrawer();
 	}
 
@@ -661,10 +596,6 @@ public class MapActivityActions implements DialogProvider {
 		final ArrayAdapter<?> listAdapter =
 				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
-		if(USE_OLD_DRAWER_TODELETE) {
-			mDrawerList.setAdapter(listAdapter);
-			mDrawerList.setOnItemClickListener(getOptionsMenuOnClickListener(cm, listAdapter));
-		}
 		mapActivity.getDashboard().setListAdapter(listAdapter, listener);
 		
 	}
@@ -699,26 +630,9 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void closeDrawer() {
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.closeDrawer(mDrawerList);
-			}
-		}
 		mapActivity.getDashboard().setDashboardVisibility(false);
 	}
 
-	public void toggleDrawer() {
-		// toggle drawer
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (!mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.openDrawer(mDrawerList);
-			} else {
-				mDrawerLayout.closeDrawer(mDrawerList);
-			}
-		}
-		mapActivity.getDashboard().setDashboardVisibility(!mapActivity.getDashboard().isVisible());
-	}
-	
 	public void prepareConfigureMap() {
 		currentDrawer = DrawerType.CONFIGURE_MAP;
 		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
@@ -735,6 +649,7 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		currentDrawer = DrawerType.MAIN_MENU;
 
+		boolean USE_OLD_DRAWER_TODELETE = false;
 		if (USE_OLD_DRAWER_TODELETE) {
 			optionsMenuHelper.item(R.string.home_button)
 					.icons(R.drawable.ic_dashboard_dark, R.drawable.ic_dashboard_light)
@@ -986,10 +901,6 @@ public class MapActivityActions implements DialogProvider {
 		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null);
-		if(USE_OLD_DRAWER_TODELETE) {
-			mDrawerList.setAdapter(listAdapter);
-			mDrawerList.setOnItemClickListener(listener);
-		}
 		refreshDrawer = false;
 		mapActivity.getDashboard().setListAdapter(listAdapter, listener);
 	}
@@ -999,24 +910,6 @@ public class MapActivityActions implements DialogProvider {
 			waypointDialogHelper.showWaypointsDialogFlat(mapActivity, false);
 		} else {
 			waypointDialogHelper.showWaypointsDialog(mapActivity, false);
-		}
-	}
-
-	public void disableDrawer(){
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout == null) {
-				prepareStartOptionsMenu();
-			}
-			mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-		}
-	}
-
-	public void enableDrawer() {
-		if (USE_OLD_DRAWER_TODELETE) {
-			if (mDrawerLayout == null) {
-				prepareStartOptionsMenu();
-			}
-			mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 		}
 	}
 

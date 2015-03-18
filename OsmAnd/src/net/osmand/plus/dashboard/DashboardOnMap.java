@@ -266,13 +266,9 @@ public class DashboardOnMap {
 
 			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
-			
-			mapActivity.getMapActions().disableDrawer();
-			
 			updateLocation(true, true, false);
 			
 		} else {
-			mapActivity.getMapActions().enableDrawer();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent));
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);

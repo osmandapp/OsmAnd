@@ -315,9 +315,8 @@ public class MapActivity extends AccessibleActivity {
 	public void onBackPressed() {
 		if(dashboardOnMap.onBackPressed()) {
 			return;
-		} else if (!mapActions.onBackPressed()) {
-			super.onBackPressed();
 		}
+		super.onBackPressed();
 	}
 
 	@Override
@@ -555,7 +554,6 @@ public class MapActivity extends AccessibleActivity {
 			}
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-			mapActions.onMenuPressed();
 			dashboardOnMap.onMenuPressed();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
