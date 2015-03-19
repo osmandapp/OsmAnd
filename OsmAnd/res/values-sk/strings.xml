@@ -97,11 +97,11 @@
   
   <string name="osmand_rastermaps_plugin_description">"S týmto modulom môžete použiť rozličné online (tiež nazývané dlaždicové alebo rastrové) mapy, od preddefinovaných OSM dlaždíc (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.\n\nVšetky tieto mapy môžu byť použité ako hlavná (základná) mapa na obrazovke OsmAnd alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. bežné offline mapy z OsmAnd). Pre lepšie zviditeľnenie podkladových máp je možné vypnúť niektoré objekty z vektorových máp OsmAnd, cez menu \"Nastaviť mapu\".\n\nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako sqlite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp. "</string>
   <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
-  <string name="osmand_accessibility_description">Zobrazí nastavenia pre špeciálne funkcie uľahčenia prístupu.</string>
+  <string name="osmand_accessibility_description">Tento modul zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť TTS hlasu, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
   
   
   
-  <string name="osmand_development_plugin_description">Zobrazí nastavenia pre funkcie vývoja a ladenia ako simulácia trasy alebo zobrazenie výkonu vykresľovania.</string>
+  <string name="osmand_development_plugin_description">Tento modul zobrazí nastavenia pre funkcie vývoja a ladenia, ako simulácia trasy, zobrazenie výkonu vykresľovania alebo hlasové oznamy. Tieto nastavenia sú určené pre vývojárov a nie sú potrebné pre bežné použitie programu.</string>
   <string name="plugins_screen">Zásuvné moduly</string>
   
   <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
@@ -117,7 +117,7 @@
 		\n\t- *Použiteľnosť a grafické rozhranie*
 		\n\t    - Vylepšené v mnohých smeroch		
 	</string>
-  <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. Táto funkcia vyžaduje registračné údaje do OSM.</string>
+  <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri http://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
   <string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
   <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -1645,7 +1645,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">"Zobrazí nastavenia pre použitie pokročilého sledovania naživo cez OsMo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
+    <string name="osmo_plugin_description">"Tento modul poskytuje funkcie pokročilého sledovania naživo cez OsMo, pozrite na http://osmo.mobi.\n\nMôžete sledovať iné zariadenia a sám byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny sú vytvorené na určený počet dní a funkcie sú obmedzené, napr. nie je diaľkové ovládanie ani administrátor skupiny. Na druhej strane, plne funkčné skupiny je možné vytvoriť na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo sledovanie</string>
     <string name="osmo_settings">OsMo sledovanie</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
@@ -2120,10 +2120,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="action_modify">Zmeniť akciu</string>
 	<string name="action_delete">Odstrániť akciu</string>
 	<string name="osm_edits">Zmeny v OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Zostáva</string> <string name="parking_place_limited">Čas parkovacieho miesta obmedzený</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Zostáva</string> <string name="parking_place_limited">Čas parkovacieho miesta obmedzený na</string>
 	<string name="your_edits">Vaše zmeny</string>
     <string name="waypoint_visit_after">Navštíviť po</string>
     <string name="waypoint_visit_before">Navštíviť pred</string>
     <string name="shared_string_not_use">Nepoužívať</string>
 	<string name="shared_string_collapse">Skryť</string>
+	<string name="local_osm_changes_upload_all_confirm">Idete odoslať %1$d zmien do OSM. Ste si istí?</string>
+    <string name="confirmation_to_clear_history">Chcete vymazať celú históriu?</string>
+    <string name="osmand_parking_overdue">prekročený čas</string>
 	</resources>
