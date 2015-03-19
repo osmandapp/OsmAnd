@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
@@ -37,7 +36,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 		return new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			View pluginView = AndroidUtils.findParentViewById(view, R.id.dash_plugin_item);
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 		}
 	};

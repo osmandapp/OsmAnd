@@ -112,7 +112,8 @@ public class DashboardOnMap {
 		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
 		actionButton.setLayoutParams(params);
 		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_get_my_location));
-		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.color_myloc_distance));
+		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.map_widget_blue));
+		actionButton.setButtonColorPressed(mapActivity.getResources().getColor(R.color.map_widget_blue_pressed));
 		actionButton.hide();
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			@Override

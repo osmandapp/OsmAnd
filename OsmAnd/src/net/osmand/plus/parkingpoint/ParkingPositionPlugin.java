@@ -422,17 +422,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-		if (parkingLayer != null && parkingPosition != null) {
-            helper.item(R.string.osmand_parking_delete)
-                    .icons(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(new OnContextMenuClick() {
-                @Override
-                public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-                    showDeleteDialog(mapActivity);
-					return true;
-                }
-
-            }).reg();
-        }
     }
 	
 	/**

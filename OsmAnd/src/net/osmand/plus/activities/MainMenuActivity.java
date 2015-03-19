@@ -11,7 +11,6 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashDownloadMapsFragment;
 import net.osmand.plus.dashboard.DashErrorFragment;
 import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.dashboard.NotifyingScrollView;
@@ -30,7 +29,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -248,9 +246,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 				}
 				((DashUpdatesFragment) f).updatedDownloadsList(list);
 
-			}
-			if (f instanceof DashDownloadMapsFragment && !f.isDetached()) {
-				((DashDownloadMapsFragment) f).refreshData();
 			}
 		}
 	}

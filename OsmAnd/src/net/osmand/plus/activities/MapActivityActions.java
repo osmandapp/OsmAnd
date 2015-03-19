@@ -649,37 +649,6 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		currentDrawer = DrawerType.MAIN_MENU;
 
-		boolean USE_OLD_DRAWER_TODELETE = false;
-		if (USE_OLD_DRAWER_TODELETE) {
-			optionsMenuHelper.item(R.string.home_button)
-					.icons(R.drawable.ic_dashboard_dark, R.drawable.ic_dashboard_light)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
-								boolean isChecked) {
-							// getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(true);
-							mapActivity.getDashboard().setDashboardVisibility(true);
-							return true;
-						}
-					}).reg();
-
-			// 1. Where am I
-			optionsMenuHelper.item(R.string.where_am_i)
-					.icons(R.drawable.ic_action_gloc_dark, R.drawable.ic_action_gloc_light)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
-								boolean isChecked) {
-							if (getMyApplication().accessibilityEnabled()) {
-								whereAmIDialog();
-							} else {
-								mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-							}
-							return true;
-						}
-					}).reg();
-		}
-
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
 		if (muteVisible) {
@@ -851,23 +820,6 @@ public class MapActivityActions implements DialogProvider {
 		}).reg();
 
 		//////////// Others
-		final OsmAndLocationProvider loc = app.getLocationProvider();
-		// this is development functionality so it should stay preferrably here
-			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null && USE_OLD_DRAWER_TODELETE) {
-				optionsMenuHelper
-						.item(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route)
-						.icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light)
-						.listen(new OnContextMenuClick() {
-
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-								// animate moving on route
-								loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
-								return true;
-							}
-						}).reg();
-			}
-
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 		optionsMenuHelper.item(R.string.shared_string_exit).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
