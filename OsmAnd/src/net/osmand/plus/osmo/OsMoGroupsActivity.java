@@ -113,7 +113,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int SETTINGS_ID = 9;
 	protected static final int SETTINGS_DEV_ID = 10;
 	protected static final int TRACK_DEV_ID = 11;
-	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
+	public static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	public static final long RECENT_THRESHOLD = 60000;
 	private boolean joinGroup;
 
@@ -405,7 +405,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().resumeAllUpdates();
-		osMoPlugin.getGroups().setUiListener(this);
+		osMoPlugin.getGroups().addUiListeners(this);
 		if(osMoPlugin.getService().isConnected()) {
 			adapter.synchronizeGroups();
 		}
@@ -420,7 +420,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			app.getLocationProvider().removeCompassListener(this);
 		}
 		app.getLocationProvider().removeLocationListener(this);
-		osMoPlugin.getGroups().setUiListener(null);
+		osMoPlugin.getGroups().addUiListeners(null);
 		osMoPlugin.setGroupsActivity(null);
 	}
 	

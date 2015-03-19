@@ -187,14 +187,14 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	
 	@Override
 	public void mapActivityPause(MapActivity activity) {
-		groups.setUiListener(null);
+		groups.addUiListeners(null);
 		mapActivity = activity;
 	}
 	
 	@Override
 	public void mapActivityResume(MapActivity activity) {
 		if (olayer != null) {
-			groups.setUiListener(olayer);
+			groups.addUiListeners(olayer);
 		}
 		mapActivity = null;
 	}

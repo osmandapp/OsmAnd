@@ -1,17 +1,11 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.text.TextUtils;
 
 import net.osmand.Location;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
@@ -21,7 +15,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.text.TextUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
@@ -45,7 +45,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private OsMoTracker tracker;
 	private OsMoService service;
 	private OsMoGroupsStorage storage;
-	private OsMoGroupsUIListener uiListener;
+	private ArrayList<OsMoGroupsUIListener> uiListeners = new ArrayList<>();
 	private OsMoPlugin plugin;
 	private OsmandApplication app;
 	
@@ -71,12 +71,14 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		}
 	}
 	
-	public void setUiListener(OsMoGroupsUIListener uiListener) {
-		this.uiListener = uiListener;
+	public void addUiListeners(OsMoGroupsUIListener uiListener) {
+		if (!uiListeners.contains(uiListener)){
+			uiListeners.add(uiListener);
+		}
 	}
-	
-	public OsMoGroupsUIListener getUiListener() {
-		return uiListener;
+
+	public void removeUiListener(OsMoGroupsUIListener uiListener) {
+		uiListeners.remove(uiListener);
 	}
 	
 	private void connectDeviceImpl(OsMoDevice d) {
@@ -161,8 +163,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	public void locationChange(String trackerId, Location location) {
 		for (OsMoGroup g : getGroups()) {
 			OsMoDevice d = g.updateLastLocation(trackerId, location);
-			if (d != null && uiListener != null) {
-				uiListener.deviceLocationChanged(d);
+			if (d != null && uiListeners != null) {
+				for(OsMoGroupsUIListener listener : uiListeners)
+				listener.deviceLocationChanged(d);
 			}
 		}
 	}
@@ -353,8 +356,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			}
 			processed = true;
 		}
-		if(processed && uiListener != null) {
-			uiListener.groupsListChange(operation, group);
+		if(processed && uiListeners != null) {
+			for(OsMoGroupsUIListener listener : uiListeners){
+				listener.groupsListChange(operation, group);
+			}
+
 		}
 		return processed;
 	}

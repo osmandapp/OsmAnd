@@ -3,7 +3,6 @@ package net.osmand.plus.osmedit;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
 import java.util.ArrayList;
