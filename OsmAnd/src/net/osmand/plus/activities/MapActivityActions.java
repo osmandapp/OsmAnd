@@ -50,6 +50,7 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -739,7 +740,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		if(routingHelper.isRouteCalculated()) {
 			optionsMenuHelper.item(R.string.impassable_road)
-			.icons(R.drawable.ic_action_road_works_dark, R.drawable.ic_action_road_works_light)
+			.iconColor(R.drawable.ic_action_road_works_dark)
 			.listen(new OnContextMenuClick() {
 				@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -969,9 +970,9 @@ public class MapActivityActions implements DialogProvider {
 			for (int i = 0; i < qa.length(); i++) {
 
 				ActionItem ai = new ActionItem();
-				int id = qa.getImageId(i, true);
-				if (id != 0) {
-					ai.setIcon(activity.getResources().getDrawable(id));
+				Drawable id = qa.getImage(app, i, true);
+				if (id != null) {
+					ai.setIcon(id);
 				}
 				final int ki = i;
 				ai.setTitle(qa.getItemName(i));

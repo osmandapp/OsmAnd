@@ -177,10 +177,6 @@ public class UpdatesIndexFragment extends ListFragment {
 		return getDownloadActivity().getMyApplication();
 	}
 
-	public boolean isLightActionBar() {
-		return ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == DownloadIndexFragment.RELOAD_ID) {

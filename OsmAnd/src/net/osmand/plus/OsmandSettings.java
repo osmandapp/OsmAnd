@@ -1774,7 +1774,7 @@ public class OsmandSettings {
 			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
 	
 	public boolean isLightActionBar(){
-		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;
+		return true;
 	}
 	
 

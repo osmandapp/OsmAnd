@@ -28,14 +28,6 @@ public class IconsCache {
 		return d;
 	}
 	
-	public Drawable getContentIcon(int id, int lightContentColor, int darkContentColor) {
-		return getDrawable(id, app.getSettings().isLightContent() ? lightContentColor : darkContentColor);
-	}
-	
-	public Drawable getContentIcon(int id, int lightContentColor) {
-		return getDrawable(id, app.getSettings().isLightContent() ? lightContentColor : 0);
-	}
-	
 	public Drawable getIcon(int id, int colorId) {
 		return getDrawable(id, colorId);
 	}
@@ -43,6 +35,15 @@ public class IconsCache {
 
 	public Drawable getContentIcon(int id) {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color_light : 0);
+	}
+
+
+	public Drawable getActionBarIcon(int id) {
+		return getDrawable(id, app.getSettings().isLightActionBar() ? R.color.icon_color_light : 0);
+	}
+	
+	public Drawable getActionBarIcon(int id, boolean light) {
+		return getDrawable(id, light ? R.color.icon_color_light : 0);
 	}
 
 }
