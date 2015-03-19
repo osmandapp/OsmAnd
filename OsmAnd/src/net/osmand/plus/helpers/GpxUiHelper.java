@@ -185,7 +185,7 @@ public class GpxUiHelper {
 			s = s.replace('_', ' ');
 
 			adapter.item(s).selected(multipleChoice ? 0 : -1)
-					.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
+					.iconColor(R.drawable.ic_action_info_dark).reg();
 
 			//if there's some selected files - need to mark them as selected
 			if (selectedGpxList != null) {
@@ -249,7 +249,7 @@ public class GpxUiHelper {
 				// User super class to create the View
 				View v = activity.getLayoutInflater().inflate(layout, null);
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
-				icon.setImageResource(adapter.getImageId(position, light));
+				icon.setImageDrawable(adapter.getImage(app, position, light));
 				final ArrayAdapter<String> arrayAdapter = this;
 				icon.setOnClickListener(new View.OnClickListener() {
 					@Override

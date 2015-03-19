@@ -466,13 +466,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_audio_dark, R.drawable.ic_action_audio_light).listen(listener).position(12).reg();
+				.iconColor(R.drawable.ic_action_audio_dark).listen(listener).position(12).reg();
 	}
 
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
 											  ContextMenuAdapter adapter, Object selectedObj) {
-		adapter.item(R.string.recording_context_menu_arecord).icons(R.drawable.ic_action_micro_dark, R.drawable.ic_action_micro_light)
+		adapter.item(R.string.recording_context_menu_arecord).iconColor(R.drawable.ic_action_micro_dark)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -481,7 +481,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						return true;
 					}
 				}).position(6).reg();
-		adapter.item(R.string.recording_context_menu_vrecord).icons(R.drawable.ic_action_video_dark, R.drawable.ic_action_video_light)
+		adapter.item(R.string.recording_context_menu_vrecord).iconColor(R.drawable.ic_action_video_dark)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -490,7 +490,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						return true;
 					}
 				}).position(7).reg();
-		adapter.item(R.string.recording_context_menu_precord).icons(R.drawable.ic_action_photo_dark, R.drawable.ic_action_photo_light)
+		adapter.item(R.string.recording_context_menu_precord).iconColor(R.drawable.ic_action_photo_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -520,7 +520,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl = new TextInfoWidget(activity);
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_audio_dark, R.drawable.widget_icon_av_inactive,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}

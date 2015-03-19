@@ -118,7 +118,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null ) {
 			distanceControl = createDistanceControl(activity);
 			mapInfoLayer.registerSideWidget(distanceControl,
-					R.drawable.widget_distance, R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
+					R.drawable.ic_action_ruler_dark, R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
 			mapInfoLayer.recreateControls();
 			updateText();
 		}
@@ -602,8 +602,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						return true;
 					}
 				};
-				adapter.item(R.string.delete_point).icons(R.drawable.ic_action_delete_dark, 
-						R.drawable.ic_action_delete_light).listen(listener).reg();
+				adapter.item(R.string.delete_point).iconColor(R.drawable.ic_action_delete_dark).listen(listener).reg();
 			}
 		}
 

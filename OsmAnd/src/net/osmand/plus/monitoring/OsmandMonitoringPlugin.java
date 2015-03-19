@@ -47,7 +47,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	private TextInfoWidget monitoringControl;
 	private LiveMonitoringHelper liveMonitoringHelper;
-	private boolean ADD_BG_TO_ACTION = true;
 	private boolean isSaving;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
@@ -100,7 +99,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		monitoringControl = createMonitoringControl(activity);
 		
 		layer.registerSideWidget(monitoringControl,
-				R.drawable.monitoring_rec_big, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
+				R.drawable.ic_action_play_dark, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
 		layer.recreateControls();
 	}
 
@@ -123,7 +122,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.ic_action_gnew_label_dark, R.drawable.ic_action_gnew_label_light)
+		adapter.item(R.string.context_menu_item_add_waypoint).iconColor(R.drawable.ic_action_gnew_label_dark)
 		.listen(listener).reg();
 	}
 	

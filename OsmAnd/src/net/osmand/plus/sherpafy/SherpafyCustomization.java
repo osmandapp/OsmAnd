@@ -487,7 +487,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof StageFavorite) {
 			final StageFavorite sf = ((StageFavorite)layers.getContextMenuLayer().getFirstSelectedObject());
 			if(selectedStage != null) {
-				adapter.item(R.string.show_waypoint_information).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
+				adapter.item(R.string.show_waypoint_information).iconColor(R.drawable.ic_action_info_dark).position(0)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -538,8 +538,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.where_am_i, R.string.context_menu_item_share_location);
 		//poi
 		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
-			adapter.item(R.string.sherpafy_disable_poi).icons(
-					R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light)
+			adapter.item(R.string.sherpafy_disable_poi).iconColor(
+					R.drawable.ic_action_gremove_dark)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -549,7 +549,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				}
 			}).reg();
 		} else {
-			adapter.item(R.string.poi).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
+			adapter.item(R.string.poi).iconColor(R.drawable.ic_action_layers_dark)
 					.listen(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -561,7 +561,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					}).reg();
 		}
 		//important info
-		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light)
+		adapter.item(R.string.sherpafy_tour_info_txt).iconColor(R.drawable.ic_action_info_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -575,7 +575,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
-					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
+					.iconColor(R.drawable.ic_action_finish_flag_dark)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -586,8 +586,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			}).reg();
 		}
 		//share my location
-		adapter.item(R.string.context_menu_item_share_location).icons(
-				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
+		adapter.item(R.string.context_menu_item_share_location).iconColor(
+				R.drawable.ic_action_gshare_dark).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				if (app.getLocationProvider().getLastKnownLocation() != null) {

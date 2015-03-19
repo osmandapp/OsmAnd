@@ -89,9 +89,9 @@ public class MapWidgetRegistry {
 			}
 		}
 	}
-	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableDark,int drawableLight, 
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableMenu, int drawableMap,
 			int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableDark, drawableLight, 
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,  drawableMap,
 				messageId, priorityOrder, left);
 		for (ApplicationMode ms : ApplicationMode.values(settings)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
@@ -281,7 +281,7 @@ public class MapWidgetRegistry {
 	private void addControls(final MapInfoLayer mil, final ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
 		for(final MapWidgetRegInfo r : top){
 			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
-				.icons(r.drawableDark, r.drawableLight).listen(new OnContextMenuClick() {
+				.iconColor(r.drawableMenu).listen(new OnContextMenuClick() {
 				
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
@@ -303,8 +303,8 @@ public class MapWidgetRegistry {
 	
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
 		public final TextInfoWidget widget;
-		public final int drawableDark;
-		public final int drawableLight;
+		public final int drawableMenu;
+		public final int drawableMap;
 		public final int messageId;
 		public final String key;
 		public final boolean left;
@@ -313,12 +313,13 @@ public class MapWidgetRegistry {
 		private final Set<ApplicationMode> visibleModes = new LinkedHashSet<ApplicationMode>();
 		private Runnable stateChangeListener = null;
 		
-		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableDark, int drawableLight, int messageId, int priorityOrder,
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableMenu, 
+				int drawableMap, int messageId, int priorityOrder,
 				boolean left) {
 			this.key = key;
 			this.widget = widget;
-			this.drawableDark = drawableDark;
-			this.drawableLight = drawableLight;
+			this.drawableMenu = drawableMenu;
+			this.drawableMap = drawableMap;
 			this.messageId = messageId;
 			this.priorityOrder = priorityOrder;
 			this.left = left;

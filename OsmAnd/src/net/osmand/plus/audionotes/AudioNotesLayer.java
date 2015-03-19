@@ -133,14 +133,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			};
 			if(r.isPhoto()) {
-				adapter.item(R.string.recording_context_menu_show).icons(
-						R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).listen(listener).reg();
+				adapter.item(R.string.recording_context_menu_show).iconColor(
+						R.drawable.ic_action_eye_dark).listen(listener).reg();
 			} else {
-				adapter.item(R.string.recording_context_menu_play).icons(
-						R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light).listen(listener).reg();
+				adapter.item(R.string.recording_context_menu_play).iconColor(
+						R.drawable.ic_action_play_dark).listen(listener).reg();
 			}
-			adapter.item(R.string.recording_context_menu_delete).icons(R.drawable.ic_action_delete_dark,
-					R.drawable.ic_action_delete_light).listen(listener).reg();
+			adapter.item(R.string.recording_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark
+					).listen(listener).reg();
 		}
 	}
 	

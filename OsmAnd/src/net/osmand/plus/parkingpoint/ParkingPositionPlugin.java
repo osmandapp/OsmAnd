@@ -191,7 +191,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
 			mapInfoLayer.registerSideWidget(parkingPlaceControl,
-					R.drawable.widget_parking, R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
+					R.drawable.ic_action_parking_dark, R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -212,7 +212,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			};
 			adapter.item(R.string.context_menu_item_delete_parking_point)
-				.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(removeListener).position(0).reg();
+				.iconColor( R.drawable.ic_action_remove_dark).listen(removeListener).position(0).reg();
 		}
 		
 		OnContextMenuClick addListener = new OnContextMenuClick() {
@@ -226,7 +226,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_parking_point)
-		.icons( R.drawable.ic_action_parking_dark, R.drawable.ic_action_parking_light).listen(addListener).reg();
+		.iconColor( R.drawable.ic_action_parking_dark).listen(addListener).reg();
 		
 	}
 
