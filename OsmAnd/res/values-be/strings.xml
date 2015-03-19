@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -559,7 +559,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Месца стаянкі</string>
-	<string name="osmand_parking_plugin_description">Зьнешні модуль (сьцягваецца асобна), які дазваляе запомніць месца, дзе прыпаркаваны ваш аўтамабіль.</string>
+	<string name="osmand_parking_plugin_description">Гэты модуль дазваляе запомніць месца, дзе прыпаркаваны ваш аўтамабіль.</string>
 	<string name="osmand_parking_plugin_name">Месца стаянкі</string>
 	<string name="context_menu_item_add_parking_point">Пазначыць месца стаянкі</string>
 	<string name="context_menu_item_delete_parking_point">Выдаліць пазнаку месца стаянкі</string>
@@ -2079,4 +2079,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="days_behind">дзён таму</string>
 	<string name="shared_string_release">Выдана</string>
 	<string name="shared_string_my_favorites">Мае ўлюбёныя</string>
-	</resources>
+	<string name="confirmation_to_clear_history">Вы хочаце ачысціць усю гісторыю?</string>
+    <string name="delay_to_start_navigation_descr">Аўтаматычны запуск навігацыі пасmля зададзенага інтэрвалу</string>
+    <string name="delay_to_start_navigation">Затрымка планаваньня маршруту</string>
+    <string name="shared_string_go">Паехалі</string>
+	<string name="shared_string_not_use">Не выкарыстоўваць</string>
+	<string name="local_osm_changes_upload_all_confirm">Вы зьбіраецеся адаслаць %1$d зьменаў у OSM. Вы ўпэўненыя?</string>
+    </resources>
