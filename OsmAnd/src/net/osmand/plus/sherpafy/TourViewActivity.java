@@ -1,7 +1,7 @@
 package net.osmand.plus.sherpafy;
 
 import java.util.WeakHashMap;
-
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
@@ -62,6 +62,7 @@ public class TourViewActivity extends OsmandActionBarActivity {
 	private boolean refreshListAfterDownload;
 	private static Object selectedItem;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 //		if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
@@ -190,7 +191,7 @@ public class TourViewActivity extends OsmandActionBarActivity {
 			getSupportActionBar().setTitle(R.string.sherpafy_tours);
 		} else if (state == viewState.STATE_TOUR_VIEW) {
 		}
-		invalidateOptionsMenu();
+//		invalidateOptionsMenu();
 	}
 
 
@@ -224,13 +225,11 @@ public class TourViewActivity extends OsmandActionBarActivity {
 		}
 	}
 
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int r, int menuItemType,
 								   final MenuItem.OnMenuItemClickListener listener) {
-		// int r = getMyApplication().getSettings().isLightActionBar() ? iconLight : iconDark;
-		int r = iconLight;
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (r != 0) {
-			menuItem.setIcon(r);
+			menuItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(r));
 		}
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		menuItem.setOnMenuItemClickListener(listener);

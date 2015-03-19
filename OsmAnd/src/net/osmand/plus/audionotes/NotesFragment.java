@@ -162,7 +162,7 @@ public class NotesFragment extends ListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(light ? R.drawable.ic_action_gshare_light : R.drawable.ic_action_gshare_dark);
+				.setIcon(getMyApplication().getIconsCache().getActionBarIcon(R.drawable.ic_action_gshare_dark, light));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

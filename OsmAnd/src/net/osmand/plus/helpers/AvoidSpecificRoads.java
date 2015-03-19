@@ -65,8 +65,8 @@ public class AvoidSpecificRoads {
 				((TextView) v.findViewById(R.id.waypoint_text)).setText(getText(obj));
 				ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
 				remove.setVisibility(View.VISIBLE);
-				remove.setImageResource(app.getSettings().isLightContent() ?
-						R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
+				remove.setImageDrawable(app.getIconsCache().getContentIcon(
+						R.drawable.ic_action_gremove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
 
 					@Override
