@@ -56,15 +56,17 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View contentView = inflater.inflate(R.layout.dash_plugins_fragment, container, false);
-		contentView.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
+		View view = inflater.inflate(R.layout.dash_common_fragment, container, false);
+		TextView header = ((TextView) view.findViewById(R.id.fav_text));
+		header.setText(R.string.prefs_plugins);
+		view.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
 			}
 		});
 		initPlugins();
-		return contentView;
+		return view;
 	}
 
 
@@ -95,7 +97,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		View contentView = getView();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		initPlugins();
-		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
+		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.items);
 		pluginsContainer.removeAllViews();
 		for (OsmandPlugin p : plugins) {
 			inflatePluginView(inflater, pluginsContainer, p);

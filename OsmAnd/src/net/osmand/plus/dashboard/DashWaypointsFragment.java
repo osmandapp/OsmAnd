@@ -42,11 +42,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.fav_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 		((TextView) view.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
-
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

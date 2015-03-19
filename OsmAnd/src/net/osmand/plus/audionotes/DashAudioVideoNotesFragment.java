@@ -39,10 +39,8 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_audio_video_notes_plugin, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.notes_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
+		((TextView) view.findViewById(R.id.fav_text)).setText(R.string.map_widget_av_notes);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -75,7 +73,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			mainView.setVisibility(View.VISIBLE);
 		}
 
-		LinearLayout notesLayout = (LinearLayout) mainView.findViewById(R.id.notes);
+		LinearLayout notesLayout = (LinearLayout) mainView.findViewById(R.id.items);
 		notesLayout.removeAllViews();
 		if (notes.size() > 3){
 			while (notes.size() != 3){

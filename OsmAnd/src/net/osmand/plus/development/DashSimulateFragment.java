@@ -37,9 +37,7 @@ public class DashSimulateFragment extends DashBaseFragment  {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
-		header.setTypeface(typeface);
 		header.setText(R.string.simulate_your_location);
 		((Button) view.findViewById(R.id.show_all)).setVisibility(View.GONE);
 		LinearLayout tracks = (LinearLayout) view.findViewById(R.id.items);

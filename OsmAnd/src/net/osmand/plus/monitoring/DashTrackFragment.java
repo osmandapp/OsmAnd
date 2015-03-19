@@ -47,12 +47,8 @@ public class DashTrackFragment extends DashBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
-		header.setTypeface(typeface);
 		header.setText(R.string.shared_string_my_tracks);
-
-		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override

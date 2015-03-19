@@ -38,13 +38,10 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_audio_video_notes_plugin, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		TextView header = ((TextView) view.findViewById(R.id.notes_text));
-		header.setTypeface(typeface);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
+		TextView header = ((TextView) view.findViewById(R.id.fav_text));
 		header.setText(R.string.osm_settings);
 		Button manage = ((Button) view.findViewById(R.id.show_all));
-		manage.setTypeface(typeface);
 		manage.setText(R.string.osm_editing_manage);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -81,7 +78,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			mainView.setVisibility(View.VISIBLE);
 		}
 
-		LinearLayout osmLayout = (LinearLayout) mainView.findViewById(R.id.notes);
+		LinearLayout osmLayout = (LinearLayout) mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
 		for (final OsmPoint point : dataPoints){
