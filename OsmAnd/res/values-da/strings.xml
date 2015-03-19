@@ -1967,7 +1967,7 @@
 	<string name="action_modify">Handling rediger</string>
 	<string name="action_delete">Handling slet</string>
 	<string name="osm_edits">OSM redigeringer</string>
-	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
+	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Tidsbegrænset parkering</string>
 	<string name="your_edits">Dine redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
 	<string name="delay_to_start_navigation_descr">Start navigation automatisk efter angivne interval</string>
@@ -1975,4 +1975,5 @@
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
 	<string name="confirmation_to_clear_history">Skal hele historikken ryddes?</string>
+    <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
     </resources>
