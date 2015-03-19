@@ -1897,7 +1897,7 @@
 	<string name="action_modify">Atzione modìfica</string>
 	<string name="action_delete">Atzione burra</string>
 	<string name="osm_edits">Modìficas OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
 	<string name="your_edits">Modìficas tuas</string>
     <string name="waypoint_visit_after">Vìsita a pustis</string>
     <string name="waypoint_visit_before">Vìsita in antis</string>
@@ -1923,4 +1923,5 @@
 	<string name="shared_string_go">Bae</string>
 	<string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala</string>
     <string name="confirmation_to_clear_history">Boles burrare totu s’istòria?</string>
+    <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     </resources>
