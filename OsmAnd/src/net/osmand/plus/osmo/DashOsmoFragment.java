@@ -44,7 +44,7 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 
 	@Override
 	public void onCloseDash() {
-		if (plugin != null && plugin.getGroups() !=null){
+		if (plugin != null && plugin.getGroups() != null) {
 			plugin.getGroups().removeUiListener(this);
 		}
 	}
@@ -70,7 +70,7 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 	@Override
 	public void onOpenDash() {
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-		if (plugin!=null){
+		if (plugin != null) {
 			plugin.getGroups().addUiListeners(this);
 		}
 		setupOsMoView();
@@ -164,14 +164,13 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 		List<OsMoGroupsStorage.OsMoDevice> devices =
 				new ArrayList<>(mainGroup.getVisibleGroupUsers(plugin.getService().getMyGroupTrackerId()));
 
-		while (devices.size() > 3){
+		while (devices.size() > 3) {
 			devices.remove(devices.size() - 1);
 		}
 
-
 		setupDeviceViews(contentList, devices);
 		if (devices.size() < 3 && groups.size() > 0) {
-			setupGroupsViews(3-devices.size(), groups, contentList);
+			setupGroupsViews(3 - devices.size(), groups, contentList);
 		}
 	}
 
@@ -206,15 +205,15 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		for (final OsMoGroupsStorage.OsMoDevice device : devices) {
 			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
-			final ImageButton showOnMap = (ImageButton)v.findViewById(R.id.show_on_map);
+			final ImageButton showOnMap = (ImageButton) v.findViewById(R.id.show_on_map);
 			showOnMap.setImageDrawable(markerIcon);
 			final String name = device.getVisibleName();
 			showOnMap.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					Location loc = device.getLastLocation();
-					if (loc == null){
-						Toast.makeText(getActivity(), R.string.osmo_device_not_found,Toast.LENGTH_SHORT).show();
+					if (loc == null) {
+						Toast.makeText(getActivity(), R.string.osmo_device_not_found, Toast.LENGTH_SHORT).show();
 						return;
 					}
 					getMyApplication().getSettings().setMapLocationToShow(loc.getLatitude(),
@@ -244,7 +243,7 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 						getContentIcon(R.drawable.ic_person));
 			}
 
-			if (device.isActive()){
+			if (device.isActive()) {
 
 			}
 			((TextView) v.findViewById(R.id.name)).setText(name);
@@ -271,18 +270,23 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 		}
 	}
 
-	private void launchOsMoGroupsActivity(){
+	private void launchOsMoGroupsActivity() {
 		Intent intent = new Intent(getActivity(), OsMoGroupsActivity.class);
 		getActivity().startActivity(intent);
 	}
 
 	@Override
 	public void groupsListChange(String operation, OsMoGroupsStorage.OsMoGroup group) {
-		updateConnectedDevices(getView());
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				updateConnectedDevices(getView());
+			}
+		});
 	}
 
 	@Override
 	public void deviceLocationChanged(OsMoGroupsStorage.OsMoDevice device) {
-		updateConnectedDevices(getView());
+		//
 	}
 }
