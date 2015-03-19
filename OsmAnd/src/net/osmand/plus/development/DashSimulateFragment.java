@@ -19,18 +19,19 @@ import android.widget.TextView;
 
 /**
  */
-public class DashSimulateFragment extends DashBaseFragment  {
+public class DashSimulateFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_SIMULATE_FRAGMENT";
-	
+
 	@Override
 	public void onOpenDash() {
 		OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
 		boolean routeAnimating = loc.getLocationSimulation().isRouteAnimating();
 		((TextView) getView().findViewById(R.id.name)).setText(routeAnimating ? R.string.animate_route_off
 				: R.string.animate_route);
-		((ImageButton) getView().findViewById(R.id.stop)).setImageDrawable(getActivity().getResources().getDrawable(
-				!routeAnimating ? R.drawable.ic_action_play_dark : R.drawable.ic_action_rec_stop));
+		((ImageButton) getView().findViewById(R.id.stop)).setImageDrawable(
+				!routeAnimating ? getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_play_dark)
+						: getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
 
 	}
 
@@ -45,10 +46,10 @@ public class DashSimulateFragment extends DashBaseFragment  {
 		tracks.addView(item);
 		final OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
 		OnClickListener listener = new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				if(getActivity() instanceof MapActivity) {
+				if (getActivity() instanceof MapActivity) {
 					loc.getLocationSimulation().startStopRouteAnimation((MapActivity) getActivity());
 					dashboard.setDashboardVisibility(false);
 				}
@@ -61,8 +62,5 @@ public class DashSimulateFragment extends DashBaseFragment  {
 
 		return view;
 	}
-
-
-
 
 }
