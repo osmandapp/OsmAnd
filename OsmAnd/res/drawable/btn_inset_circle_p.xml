@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item>
         
-         <bitmap android:src="@drawable/bt_round_2_shadow" android:gravity="center" />
+         <bitmap android:src="@drawable/map_bt_round_2_shadow" android:gravity="center" />
         
     </item>  
     <item>
