@@ -32,12 +32,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by Denis
- * on 18.02.2015.
+ * Created by Denis on 18.02.2015.
  */
 public class NotesFragment extends ListFragment {
 	AudioVideoNotesPlugin plugin;
@@ -73,7 +73,6 @@ public class NotesFragment extends ListFragment {
 		super.onPause();
 	}
 
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
@@ -95,6 +94,8 @@ public class NotesFragment extends ListFragment {
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
 			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			icon.setColorFilter(getResources().getColor(R.color.color_distance), Mode.MULTIPLY);
+			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
+					.getContentIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +115,7 @@ public class NotesFragment extends ListFragment {
 	}
 
 	private void showOnMap(Recording recording) {
-		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
+		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -128,13 +129,9 @@ public class NotesFragment extends ListFragment {
 		boolean isPhoto = recording.isPhoto();
 		Drawable playIcon;
 		if (isPhoto) {
-			playIcon = getResources().getDrawable(R.drawable.ic_action_view);
-			if(light) {
-				playIcon = playIcon.mutate();
-				playIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
-			}
+			playIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_view);
 		} else {
-			playIcon = getResources().getDrawable(light ? R.drawable.ic_play_light : R.drawable.ic_play_dark);
+			playIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_play_dark);
 		}
 		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
 				.setIcon(playIcon);
@@ -147,12 +144,11 @@ public class NotesFragment extends ListFragment {
 		});
 
 		Drawable showOnMap = getResources().getDrawable(R.drawable.ic_show_on_map);
-		if(light) {
+		if (light) {
 			showOnMap = showOnMap.mutate();
 			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
 		}
-		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map)
-				.setIcon(showOnMap);
+		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(showOnMap);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -220,8 +216,7 @@ public class NotesFragment extends ListFragment {
 	private void editNote(final Recording recording) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.shared_string_rename);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog,
-				getListView(), false);
+		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
 		editText.setText(recording.getName(getActivity()));
@@ -231,8 +226,8 @@ public class NotesFragment extends ListFragment {
 		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!recording.setName(editText.getText().toString())) {
-					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
+				if (!recording.setName(editText.getText().toString())) {
+					Toast.makeText(getActivity(), R.string.rename_failed, Toast.LENGTH_SHORT).show();
 				}
 				listAdapter.notifyDataSetInvalidated();
 			}
@@ -240,6 +235,5 @@ public class NotesFragment extends ListFragment {
 		builder.create().show();
 		editText.requestFocus();
 	}
-
 
 }

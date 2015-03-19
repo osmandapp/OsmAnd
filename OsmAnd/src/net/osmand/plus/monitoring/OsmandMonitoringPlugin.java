@@ -63,8 +63,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		// TODO
-		return super.getLogoResourceId();
+		return R.drawable.ic_action_gps_info;
 	}
 	
 	@Override

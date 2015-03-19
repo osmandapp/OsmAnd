@@ -39,9 +39,7 @@
 				android:layout_marginBottom="9dp"
 				android:layout_marginTop="9dp"
 				android:background="?attr/expandable_list_item_background"
-				android:drawableLeft="?attr/ic_action_settings"
 				android:drawablePadding="10dp"
-				android:drawableStart="?attr/ic_action_settings"
 				android:paddingLeft="0dp"
 				android:paddingRight="16dp"
 				android:text="@string/shared_string_settings"
@@ -115,7 +113,7 @@
 			<ImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:src="?attr/ic_world_globe"/>
+				android:id="@+id/ic_world_globe"/>
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:layout_width="wrap_content"
