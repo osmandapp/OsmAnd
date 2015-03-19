@@ -1,10 +1,10 @@
 package net.osmand.plus.dialogs;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.Item;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -17,11 +17,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
@@ -68,8 +63,7 @@ public class DirectionsDialogs {
 
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		MenuItem item = optionsMenu.getMenu().add(
-				R.string.context_menu_item_directions_to).setIcon(light ?
-				R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+				R.string.context_menu_item_directions_to).setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark, light));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -81,12 +75,12 @@ public class DirectionsDialogs {
 
 		if (targetPointsHelper.getPointToNavigate() != null) {
 			item = optionsMenu.getMenu().add(
-					R.string.context_menu_item_intermediate_point).setIcon(light ?
-					R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+					R.string.context_menu_item_intermediate_point).setIcon(
+							app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark, light));
 		} else {
 			item = optionsMenu.getMenu().add(
-					R.string.context_menu_item_destination_point).setIcon(light ?
-					R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+					R.string.context_menu_item_destination_point).setIcon(
+							app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flag_dark, light));
 		}
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

@@ -100,7 +100,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:src="@drawable/ic_action_gdirections_light"
+            android:src="@drawable/ic_action_remove_light"
             android:visibility="gone" />
     </LinearLayout>
 
