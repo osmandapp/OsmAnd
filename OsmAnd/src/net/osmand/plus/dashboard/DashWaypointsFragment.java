@@ -139,8 +139,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem 
 		item = optionsMenu.getMenu().add(
-				R.string.shared_string_add_to_favorites).setIcon(light ?
-				R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
+						getContentIcon(R.drawable.ic_action_fav_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -158,7 +158,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			if (model.index > 0 || target) {
 				final int ind = target ? allTargets.size() - 1 : model.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
-						.setIcon(light ? R.drawable.ic_action_up_light : R.drawable.ic_action_up_dark);
+						.setIcon(getMyApplication().getIconsCache().
+								getContentIcon(R.drawable.ic_action_up_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -172,7 +173,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 			if (!target) {
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_after)
-						.setIcon(light ? R.drawable.ic_action_down_light : R.drawable.ic_action_down_dark);
+						.setIcon(getMyApplication().getIconsCache().
+								getContentIcon(R.drawable.ic_action_down_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -186,8 +188,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 		}
 		item = optionsMenu.getMenu().add(
-				R.string.shared_string_delete).setIcon(light ?
-				R.drawable.ic_action_gdiscard_light: R.drawable.ic_action_gdiscard_dark);
+				R.string.shared_string_delete).setIcon(getMyApplication().getIconsCache().
+						getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

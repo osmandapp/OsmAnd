@@ -83,9 +83,7 @@ public class SearchAddressFragment extends Fragment {
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		Menu menu = onCreate;
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
 		if(getActivity() instanceof SearchActivity) {
 			if (portrait) {
 				menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
