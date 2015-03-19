@@ -2207,4 +2207,6 @@
     <string name="delay_to_start_navigation">경로 계획 생략</string>
     <string name="shared_string_go">실행</string>
 	<string name="shared_string_not_use">사용 하지 않음</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">OSM에 %1$d 변경 사항을 업로드 하려고 합니다. 확실합니까?</string>
+    <string name="confirmation_to_clear_history">모든 기록을 삭제 하시겠습니까?</string>
+    </resources>
