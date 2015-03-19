@@ -2165,7 +2165,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="action_modify">アクションの変更</string>
 	<string name="action_delete">アクションの削除</string>
 	<string name="osm_edits">OSM の編集</string>
-	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">残り時間</string> <string name="parking_place_limited">駐車場の制限時間を過ぎました</string>
+	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">残り時間</string> <string name="parking_place_limited">駐車場の制限時間</string>
 	<string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で訪問</string>
     <string name="waypoint_visit_before">前に訪問</string>
@@ -2200,4 +2200,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="confirmation_to_clear_history">全体履歴を消去しますか？</string>
     <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します（特に道路、トラック、通路、およびオリエンテーションマーク）。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
+	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
+    <string name="plugin_nautical_descr">"このプラグインはOsmAnd map and navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味（カテゴリ、形状、色、順序、参照など）を識別するために必要な詳細を示されます。
+\n\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。 "</string>
+	<string name="plugin_ski_name">スキーマップ表示</string>
+	<string name="plugin_ski_descr">"このプラグインは、あなたの指先で簡単にダウンヒルスキー場、クロスカントリースキー、アルペンスキールート、ケーブルカーやスキーリフトについての詳細を置けます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。\n\nこの表示内のすべてのスキー場とクロスカントリースキーのルートを表示するグローバルマップは\'World ski map\'をダウンロードすることで利用可能です。\n\nこの表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。 "</string>
 	</resources>
