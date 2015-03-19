@@ -1942,7 +1942,7 @@
 	<string name="shared_string_collapse">崩潰</string>
 	<string name="drawer">平面清單</string>
     <string name="osm_edits">OSM 編輯</string>
-	<string name="osmand_parking_hour">時</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> <string name="parking_place_limited">停車場時限</string>
+	<string name="osmand_parking_hour">時</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">左</string> <string name="parking_place_limited">停車場時限到</string>
 	<string name="your_edits">您的編輯</string>
     <string name="action_create">行動建立</string>
 	<string name="action_modify">行動修改</string>
@@ -1953,4 +1953,5 @@
     <string name="shared_string_go">執行</string>
 	<string name="shared_string_not_use">不使用</string>
 	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
+    <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 osm。您是否確定？</string>
     </resources>
