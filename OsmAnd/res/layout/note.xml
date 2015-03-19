@@ -18,6 +18,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:minHeight="@dimen/list_item_height"
 		android:paddingLeft="@dimen/list_content_padding">
 		<CheckBox
 			android:id="@+id/check_local_index"

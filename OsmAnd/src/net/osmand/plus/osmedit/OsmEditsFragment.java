@@ -67,6 +67,9 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 
+	private final static int MODE_DELETE = 100;
+	private final static int MODE_UPLOAD = 101;
+
 	private ActionMode actionMode;
 	protected OsmPoint[] toUpload = new OsmPoint[0];
 
@@ -79,7 +82,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		view.findViewById(R.id.select_all).setVisibility(View.GONE);
 		((TextView) view.findViewById(R.id.header)).setText(R.string.your_edits);
 		dbpoi = new OpenstreetmapsDbHelper(getActivity());
 		dbbug = new OsmBugsDbHelper(getActivity());
@@ -87,7 +89,35 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		remotepoi = new OpenstreetmapRemoteUtil(getActivity());
 		remotebug = new OsmBugsRemoteUtil(getMyApplication());
 
+		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
+		selectAll.setVisibility(View.GONE);
+		selectAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (selectAll.isChecked()) {
+					selectAll();
+				} else {
+					deselectAll();
+				}
+				updateSelectionTitle(actionMode);
+			}
+		});
 		return view;
+	}
+
+	private void selectAll(){
+		for(int i =0 ;i < listAdapter.getCount(); i++){
+			OsmPoint point = listAdapter.getItem(i);
+			if (!osmEditsSelected.contains(point)){
+				osmEditsSelected.add(point);
+			}
+		}
+		listAdapter.notifyDataSetInvalidated();
+	}
+
+	private void deselectAll(){
+		osmEditsSelected.clear();
+		listAdapter.notifyDataSetInvalidated();
 	}
 
 	@Override
@@ -104,7 +134,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				enterUploadMode();
+				enterSelectionMode(MODE_UPLOAD);
 				return true;
 			}
 		});
@@ -126,7 +156,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				enterDeleteMode();
+				enterSelectionMode(MODE_DELETE);
 				return true;
 			}
 		});
@@ -174,6 +204,17 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		});
 	}
 
+	private void enterSelectionMode(int type){
+		switch (type){
+			case MODE_DELETE:
+				enterDeleteMode();
+				break;
+			case MODE_UPLOAD:
+				enterUploadMode();
+				break;
+		}
+	}
+
 	private void enterDeleteMode() {
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
@@ -216,6 +257,11 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	}
 
 	private void updateSelectionMode(ActionMode m) {
+		updateSelectionTitle(m);
+		refreshSelectAll();
+	}
+
+	private void updateSelectionTitle(ActionMode m){
 		if(osmEditsSelected.size() > 0) {
 			m.setTitle(osmEditsSelected.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
 		} else{
@@ -223,8 +269,25 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		}
 	}
 
+	private void refreshSelectAll() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
+		for (int i =0; i<listAdapter.getCount();i++){
+			OsmPoint point = listAdapter.getItem(i);
+			if (!osmEditsSelected.contains(point)){
+				selectAll.setChecked(false);
+				return;
+			}
+		}
+		selectAll.setChecked(true);
+	}
+
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+		getView().findViewById(R.id.select_all).setVisibility(selectionMode? View.VISIBLE : View.GONE);
 		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 	}
 
