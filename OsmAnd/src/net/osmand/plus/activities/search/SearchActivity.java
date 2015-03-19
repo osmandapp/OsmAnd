@@ -42,7 +42,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	public static final int LOCATION_TAB_INDEX = 2;
 	public static final int FAVORITES_TAB_INDEX = 3;
 	public static final int HISTORY_TAB_INDEX = 4;
-	public static final int TRANSPORT_TAB_INDEX = 5;
 	
 	protected static final int POSITION_CURRENT_LOCATION = 1;
 	protected static final int POSITION_LAST_MAP_VIEW = 2;
@@ -168,8 +167,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			return NavigatePointFragment.class;
 		} else if(tab == HISTORY_TAB_INDEX) {
 			return SearchHistoryFragment.class;
-		} else if(tab == TRANSPORT_TAB_INDEX) {
-			return SearchTransportFragment.class;
 		} else if(tab == FAVORITES_TAB_INDEX) {
 			return FavoritesListFragment.class;
 		}

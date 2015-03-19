@@ -137,9 +137,9 @@ public class PluginActivity extends OsmandActionBarActivity {
 			enableDisableButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
-			((ImageView) installHeader.findViewById(R.id.ic_world_globe)).
-				setBackgroundDrawable(ic.getContentIcon(R.drawable.ic_world_globe_dark));
-			
+			((ImageView) installHeader.findViewById(R.id.ic_world_globe)).setBackgroundDrawable(ic
+					.getContentIcon(R.drawable.ic_world_globe_dark));
+
 		} else {
 			getButton.setVisibility(View.GONE);
 			enableDisableButton.setVisibility(View.VISIBLE);
