@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
@@ -1837,7 +1837,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="app_mode_aircraft">Літак</string>
     <string name="tip_faq_t">Будь ласка, відвідайте https://code.google.com/p/osmand/wiki/FAQ для ознайомлення із частими запитаннями та відповідями на них.</string>
     <string name="tip_faq">Часті питання</string>
-    <string name="local_osm_changes_delete_all_confirm">Ви збираєтесь вилучити %1$d змін osm. Ви впевнені?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ви збираєтесь вилучити %1$d змін OSM. Ви впевнені?</string>
     <string name="shared_string_delete_all">Вилучити все</string>
     <string name="animate_routing_route_not_calculated">Будь ласка, спочатку розрахуйте маршрут</string>
     <string name="animate_routing_route">"Симуляція використання розрахованого маршрута "</string>
@@ -2095,4 +2095,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="back_to_map">Повернутись до мапи</string>
 	<string name="location_on_map">Координати:↵\n Шир %1$s↵\n Дов %2$s</string>
 	<string name="shared_string_release">Дата випуску</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">Ви збираєтесь надіслати %1$d змін до OSM. Ви впевнені?</string>
+    <string name="confirmation_to_clear_history">Бажаєте очистити всю історію?</string>
+    <string name="delay_to_start_navigation_descr">Автоматичний запуск навігації після сплину зазначеного часу</string>
+    </resources>
