@@ -1725,7 +1725,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_show_group_notifications_descr">Zobraziť správu ak sa používateľ pripojí alebo odpojí zo skupiny</string>
     <string name="gpx_file_is_empty">GPX stopa je prázdna</string>
     <string name="osmo_create_groups_confirm">Pre vytváranie skupín musíte byť zaregistrovaným používateľom OsMo.</string>
-    <string name="osmo_credentials_not_valid">Vaše prihlasovacie údaje nie sú správne.</string>
+    <string name="osmo_credentials_not_valid">Vaše prihlasovacie údaje do OsMo nie sú správne.</string>
     <string name="osmo_regenerate_login_ids_confirm">Naozaj chcete znovu generovať osobné ID? Všetky pripojené zariadenia Vás už nebudú môcť sledovať.</string>
     <string name="osmo_regenerate_login_ids">Znovu generovať používateľské ID</string>
     <string name="osmo_cancel_moving_target">Zrušiť pohyblivý cieľ</string>
