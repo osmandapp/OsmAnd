@@ -38,10 +38,10 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		turnDrawable = new TurnDrawable(activity);
 		if(horisontalMini) {
 			setImageDrawable(turnDrawable, false);
-			setTopImageDrawable(null, true);
+			setTopImageDrawable(null, null);
 		} else {
 			setImageDrawable(null, false);
-			setTopImageDrawable(turnDrawable, true);
+			setTopImageDrawable(turnDrawable, "");
 		}
 	}
 	
@@ -55,7 +55,8 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			if(horisontalMini) {
 				setImageDrawable(turnDrawable, false);
 			} else {
-				setTopImageDrawable(turnDrawable, true);
+				setTopImageDrawable(turnDrawable, turnType.getExitOut() == 0 ? "" : 
+					turnType.getExitOut() + "");
 			}
 		}
 	}

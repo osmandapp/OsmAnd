@@ -20,16 +20,19 @@ public class TextInfoWidget  {
 	private TextView textView;
 	private TextView smallTextView;
 	private ImageView topImageView;
+	private TextView topTextView;
 
 	private boolean explicitlyVisible;
 
 	private OsmandApplication app;
 
 
+
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
 		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
 		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
+		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
 		textView = (TextView) view.findViewById(R.id.widget_text);
 		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
@@ -58,13 +61,16 @@ public class TextInfoWidget  {
 		imageView.invalidate();
 	}
 	
-	public void setTopImageDrawable(Drawable imageDrawable, boolean gone) {
+	public void setTopImageDrawable(Drawable imageDrawable, String topText) {
 		if(imageDrawable != null) {
 			topImageView.setImageDrawable(imageDrawable);
 			topImageView.setVisibility(View.VISIBLE);
+			topTextView.setText(topText == null ? "" : topText);
 		} else {
-			topImageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
+			topImageView.setVisibility(View.GONE );
+			topTextView.setVisibility(View.GONE );
 		}
+		topTextView.invalidate();
 		topImageView.invalidate();
 	}
 	
@@ -154,6 +160,7 @@ public class TextInfoWidget  {
 	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
 		updateTextColor(smallTextView, textColor, textShadowColor, bold, rad);
 		updateTextColor(textView, textColor, textShadowColor, bold, rad);
+		updateTextColor(topTextView, textColor, textShadowColor, bold, rad);
 	}
 	
 	private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {

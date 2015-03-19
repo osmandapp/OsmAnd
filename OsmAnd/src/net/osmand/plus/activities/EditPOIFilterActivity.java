@@ -72,7 +72,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		setContentView(R.layout.editing_poi_filter);
 		getSupportActionBar().setTitle(R.string.filterpoi_activity);
-		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
+//		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
 
 		if (filter != null) {
 			getSupportActionBar().setSubtitle(filter.getName());

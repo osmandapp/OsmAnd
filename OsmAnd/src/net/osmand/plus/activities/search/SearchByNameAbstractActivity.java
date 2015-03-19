@@ -80,14 +80,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private static final int ADD_TO_FAVORITE = 6;
 	
 	
-	protected void setActionBarSettings() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			separateMethod();
-		}
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
-	}
-
 	private void separateMethod() {
 		getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 	}
