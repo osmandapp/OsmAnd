@@ -1,16 +1,6 @@
 package net.osmand.plus.osmo;
 
 
-import java.util.List;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
-import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -25,6 +15,16 @@ import android.util.TypedValue;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
 
@@ -75,13 +75,13 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		useHttps.setSummary(R.string.osmo_use_https_descr);
 		grp.addPreference(useHttps);
 		
-		if (OsmandPlugin.isDevelopment()) {
+//		if (OsmandPlugin.isDevelopment()) {
 			debugPref = new Preference(this);
 			debugPref.setTitle(R.string.osmo_settings_debug);
 			debugPref.setOnPreferenceClickListener(this);
 			updateDebugPref();
 			grp.addPreference(debugPref);
-		}
+//		}
     }
 
 	private void updateDebugPref() {
