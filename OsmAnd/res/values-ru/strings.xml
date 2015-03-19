@@ -899,8 +899,7 @@
   <string name="direction_style_clockwise">По циферблату (12 секторов)</string>
   <string name="settings_direction_style">Стиль указания направлений</string>
   <string name="settings_direction_style_descr">Выберите стиль указания относительных направлений во время движения</string>
-  <string name="auto_announce_on">Включить
-\nавтооповещение</string>
+  <string name="auto_announce_on">Включить автооповещение</string>
   <string name="auto_announce_off">Выключить автооповещение</string>
   <string name="scroll_map_by_gestures_descr">Перемещать карту жестами на сенсорном экране</string>
   <string name="scroll_map_by_gestures">Естественное управление картой</string>
@@ -1924,7 +1923,7 @@
 	<string name="action_modify">Изменить действие</string>
 	<string name="action_create">Создать действие</string>
 	<string name="osm_edits">OSM правки</string>
-	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">мин</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Ограниченное по времени парковочное место</string>
+	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">мин</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Парковочное место ограничено временем</string>
 	<string name="your_edits">Ваши правки</string>
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
@@ -1936,4 +1935,6 @@
 	<string name="shared_string_not_use">Не использовать</string>
 	<string name="plugin_nautical_descr">"Плагин обогащает карты и навигацию OsmAnd, а также делает доступными морские карты для катания на лодках, парусного спорта, и других видов спорта.
 \n\nСпециальная карта дополнение для OsmAnd добавляет морские навигационные и условные знаки, для внутренней, так и для прибрежной навигации. Описание каждой навигационной отметки содержит информацию, необходимую для идентификации, а также её значение (категория, форма, цвет, последовательность, ссылка и т.д.).\n\nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый \"Стиль карты\" в разделе \"Настройка карты\". "</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">Вы собираетесь загрузить %1$d изменений osm. Вы уверены?</string>
+    <string name="confirmation_to_clear_history">Вы хотите очистить всю историю?</string>
+    </resources>
