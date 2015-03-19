@@ -119,8 +119,6 @@ public class PluginsActivity extends OsmandListActivity {
 			TextView pluginDescription = (TextView)view.findViewById(R.id.plugin_description);
 			pluginDescription.setText(plugin.getDescription());
 
-			View pluginIsEnabled = view.findViewById(R.id.plugin_is_enabled);
-			pluginIsEnabled.setVisibility(plugin.isActive() ? View.VISIBLE : View.INVISIBLE);
 
 			View pluginOptions = view.findViewById(R.id.plugin_options);
 			pluginOptions.setOnClickListener(new View.OnClickListener() {

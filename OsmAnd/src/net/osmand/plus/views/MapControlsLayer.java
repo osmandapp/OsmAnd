@@ -519,12 +519,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateMyLocation(RoutingHelper rh) {
-//		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
-//		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
-//		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
-//		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
-//		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
-//		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
 		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		
@@ -532,11 +526,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.icon_color_light, 0);
 		} else if (tracked) {
-			backToLocationControl.setIconColorId(0);
-			backToLocationControl.setBg(R.drawable.btn_circle_blue);
-		} else {
 			// TODO different icon
 			backToLocationControl.setIconColorId(R.color.map_widget_icon_color);
+			backToLocationControl.setBg(R.drawable.btn_circle_blue);
+		} else {
+			backToLocationControl.setIconColorId(0);
 			backToLocationControl.setBg(R.drawable.btn_circle_blue);
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
