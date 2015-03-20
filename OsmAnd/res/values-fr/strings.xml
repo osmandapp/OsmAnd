@@ -1996,5 +1996,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_go">Aller</string>
 	<string name="shared_string_not_use">Non utilisé</string>
 	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
-    <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) seront envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
+    <string name="delay_to_start_navigation">Passer le calcul d\'itinéraire</string>
     </resources>
