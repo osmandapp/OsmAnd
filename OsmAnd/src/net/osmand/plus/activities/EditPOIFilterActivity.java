@@ -105,15 +105,15 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			return super.onCreateOptionsMenu(menu);
 		}
 		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, 
-				R.drawable.ic_action_gsave_dark, R.drawable.ic_action_gsave_dark ,
+				R.drawable.ic_action_gsave_dark ,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
-				0, 0,
+				0, 
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
 				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
 			createMenuItem(menu, DELETE_FILTER, R.string.shared_string_delete, 
-					R.drawable.ic_action_gdiscard_dark, R.drawable.ic_action_gdiscard_dark,
+					R.drawable.ic_action_delete_light,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
 		return super.onCreateOptionsMenu(menu);

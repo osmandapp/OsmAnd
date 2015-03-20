@@ -224,7 +224,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 			};
 			adapter.item(R.string.poi_context_menu_showdescription)
-			.icons( R.drawable.ic_action_note_dark, R.drawable.ic_action_note_light).listen(listener).reg();
+			.iconColor( R.drawable.ic_action_note_dark).listen(listener).reg();
 		}
 	}
 

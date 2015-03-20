@@ -507,10 +507,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-				.icon(R.drawable.ic_action_refresh_dark)
+				.iconColor(R.drawable.ic_action_refresh_dark)
 				.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.shared_string_delete)
-				.icon(R.drawable.ic_action_delete_dark)
+				.iconColor(R.drawable.ic_action_delete_dark)
 				.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
 				.listen(listener).position(3).reg();
@@ -535,8 +535,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 			}
-			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
-				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
+			OsmandApplication app = getMyApplication();
+			if (optionsMenuAdapter.getImage(app, j, isLightActionBar()) != null) {
+				item.setIcon(optionsMenuAdapter.getImage(app, j, isLightActionBar()));
 			}
 			
 		}

@@ -81,12 +81,12 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		LinearLayout osmLayout = (LinearLayout) mainView.findViewById(R.id.items);
 		osmLayout.removeAllViews();
 
-		for (final OsmPoint point : dataPoints){
+		for (final OsmPoint point : dataPoints) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			OsmEditsFragment.getOsmEditView(view, point, getMyApplication());
-			ImageButton send =(ImageButton) view.findViewById(R.id.play);
+			ImageButton send = (ImageButton) view.findViewById(R.id.play);
 			send.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_export));
 			send.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -100,11 +100,13 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 				@Override
 				public void onClick(View v) {
 					boolean poi = point.getGroup() == OsmPoint.Group.POI;
-					String name = poi ?
-							((OpenstreetmapPoint) point).getName() : ((OsmNotesPoint) point).getText();
-					getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-							15, new PointDescription(poi ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG, name), true,
-							point); //$NON-NLS-1$
+					String name = poi ? ((OpenstreetmapPoint) point).getName() : ((OsmNotesPoint) point).getText();
+					getMyApplication().getSettings().setMapLocationToShow(
+							point.getLatitude(),
+							point.getLongitude(),
+							15,
+							new PointDescription(poi ? PointDescription.POINT_TYPE_POI
+									: PointDescription.POINT_TYPE_OSM_BUG, name), true, point); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});

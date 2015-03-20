@@ -111,16 +111,16 @@ public class HelpActivity extends OsmandActionBarActivity {
 			getClearToolbar(false);
 		}
 		createMenuItem(menu, HOME, R.string.home, 
-				R.drawable.ic_action_home_dark, R.drawable.ic_action_home_dark,
+				R.drawable.ic_action_home_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, BACK, R.string.shared_string_previous,
-				R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_dark,
+				R.drawable.ic_action_undo_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, FORWARD, R.string.shared_string_next,
-				R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark,
+				R.drawable.ic_action_redo_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, CLOSE, R.string.shared_string_close, 
-				R.drawable.ic_action_close_dark, R.drawable.ic_action_close_dark,
+				R.drawable.ic_action_close_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -152,11 +152,10 @@ public class HelpActivity extends OsmandActionBarActivity {
 		return false;
 	}
 	
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
-		int r = isLightActionBar() ? iconLight : iconDark;
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconDark, int menuItemType) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
-		if (r != 0) {
-			menuItem.setIcon(r);
+		if (iconDark != 0) {
+			menuItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(iconDark));
 		}
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -168,10 +167,6 @@ public class HelpActivity extends OsmandActionBarActivity {
 		return menuItem;
 	}
 	
-	public boolean isLightActionBar() {
-		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
-	}
-
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
 		tb.setTitle(null);

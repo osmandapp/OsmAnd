@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
@@ -8,15 +7,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class ContextMenuAdapter {
 
@@ -124,11 +129,17 @@ public class ContextMenuAdapter {
 		selectedList.set(pos, s);
 	}
 	
-	public int getImageId(int pos, boolean light) {
-		if(!light || iconListLight.get(pos) == 0) {
-			return iconList.get(pos);
+	
+	public Drawable getImage(OsmandApplication ctx, int pos, boolean light) {
+		int lst = iconList.get(pos);
+		if(lst != 0) {
+			return ctx.getResources().getDrawable(lst);
 		}
-		return iconListLight.get(pos);
+		int lstLight = iconListLight.get(pos);
+		if(lstLight != 0) {
+			return ctx.getIconsCache().getActionBarIcon(lstLight, light);
+		}
+		return null;
 	}
 	
 	public int getBackgroundColor(Context ctx, boolean holoLight) {
@@ -178,10 +189,9 @@ public class ContextMenuAdapter {
 			this.icon = icon;
 			return this;
 		}
-
-		public Item icons(int icon, int lightIcon) {
-			this.icon = icon;
-			this.lightIcon = lightIcon;
+		
+		public Item iconColor(int icon) {
+			this.lightIcon = icon;
 			return this;
 		}
 
@@ -236,6 +246,8 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
+		
+
 	}
 	
 	public String[] getItemNames() {
@@ -276,6 +288,7 @@ public class ContextMenuAdapter {
 	
 	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = defaultLayoutId;
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override
@@ -289,7 +302,7 @@ public class ContextMenuAdapter {
 						@Override
 						public void onClick(View view) {
 							if (selected.size() > 0) {
-								((OsmandApplication) activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
+								app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
 								notifyDataSetChanged();
 							}
 							if (changeAppModeListener != null) {
@@ -305,9 +318,9 @@ public class ContextMenuAdapter {
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
 
-				int imageId = getImageId(position, holoLight);
-				if (imageId != 0) {
-					((ImageView) v.findViewById(R.id.icon)).setImageResource(imageId);
+				Drawable imageId = getImage(app, position, holoLight);
+				if (imageId != null) {
+					((ImageView) v.findViewById(R.id.icon)).setImageDrawable(imageId);
 					v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
 				} else if (v.findViewById(R.id.icon) != null){
 					v.findViewById(R.id.icon).setVisibility(View.GONE);

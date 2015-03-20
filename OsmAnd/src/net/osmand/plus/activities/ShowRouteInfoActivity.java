@@ -116,13 +116,13 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, PRINT, R.string.print_route,
-				R.drawable.ic_action_gprint_light, R.drawable.ic_action_gprint_dark,
+				R.drawable.ic_action_gprint_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SAVE, R.string.shared_string_save_as_gpx,
-				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
+				R.drawable.ic_action_gsave_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SHARE, R.string.share_route_as_gpx,
-				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				R.drawable.ic_action_gshare_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}

@@ -97,22 +97,22 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			};
 
 			if (plugin.getCurrentRoute().getPointStatus(point)){
-				adapter.item(R.string.mark_as_not_visited).icons(
-						R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light).listen(listener).reg();
+				adapter.item(R.string.mark_as_not_visited).iconColor(
+						R.drawable.ic_action_gremove_dark).listen(listener).reg();
 			} else {
-				adapter.item(R.string.mark_as_visited).icons(
-						R.drawable.ic_action_ok_dark, R.drawable.ic_action_ok_light).listen(listener).reg();
+				adapter.item(R.string.mark_as_visited).iconColor(
+						R.drawable.ic_action_ok_dark).listen(listener).reg();
 			}
 
 			RoutePointsPlugin.RoutePoint routePoint = plugin.getCurrentRoute().getRoutePointFromWpt(point);
 			if (routePoint != null) {
 				if (routePoint.isNextNavigate) {
 					adapter.item(R.string.navigate_to_next)
-							.icons(R.drawable.ic_action_gnext_dark, R.drawable.ic_action_gnext_light).listen(listener)
+							.iconColor(R.drawable.ic_action_gnext_dark).listen(listener)
 							.reg();
 				} else {
 					adapter.item(R.string.mark_as_current)
-							.icons(R.drawable.ic_action_signpost_dark, R.drawable.ic_action_signpost_light)
+							.iconColor(R.drawable.ic_action_signpost_dark)
 							.listen(listener).reg();
 				}
 			}

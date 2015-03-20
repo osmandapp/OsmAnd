@@ -44,7 +44,7 @@ public class ConfigureMapMenu {
 	public ContextMenuAdapter createListAdapter(final MapActivity ma, final boolean advanced) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
-		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
+		adapter.item(R.string.configure_map).iconColor(R.drawable.ic_back_drawer_dark)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -64,7 +64,7 @@ public class ConfigureMapMenu {
 
 		createLayersItems(adapter, ma);
 		if (!advanced){
-			adapter.item(R.string.btn_advanced_mode).icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
+			adapter.item(R.string.btn_advanced_mode).iconColor(R.drawable.ic_action_settings_enabled_dark)
 					.selected(advanced ? 1 : 0)
 					.listen(new OnContextMenuClick() {
 						@Override
@@ -170,19 +170,18 @@ public class ConfigureMapMenu {
 		adapter.item(R.string.shared_string_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
+				.iconColor(R.drawable.ic_action_info_dark).listen(l).reg();
 		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).reg();
+				.iconColor(R.drawable.ic_action_text_dark).listen(l).reg();
 		adapter.item(R.string.shared_string_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).reg();
+				.iconColor(R.drawable.ic_action_fav_dark).listen(l).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
 				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)
-//				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
-				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
+				.iconColor(R.drawable.ic_action_polygom_dark)
 				.listen(l).reg();
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			adapter.item(R.string.layer_transport_route).selected(1)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
+				.iconColor(R.drawable.ic_action_bus_dark).listen(l).reg();
 		}
 		
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);

@@ -75,6 +75,6 @@
 		android:layout_height="@dimen/list_item_height"
 		android:background="?attr/options_button_background"
 		android:focusable="false"
-		android:src="?attr/list_settings_icon"/>
+		android:src="?attr/ic_action_overflow"/>
 
 </LinearLayout>

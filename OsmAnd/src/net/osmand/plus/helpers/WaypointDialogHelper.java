@@ -190,9 +190,8 @@ public class WaypointDialogHelper {
 						remove.setVisibility(View.GONE);
 					} else {
 						remove.setVisibility(View.VISIBLE);
-						((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
-								app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light
-										: R.drawable.ic_action_gremove_dark));
+						((ImageButton) remove).setImageDrawable(app.getIconsCache().getContentIcon(
+										R.drawable.ic_action_gremove_dark));
 						remove.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -624,9 +623,8 @@ public class WaypointDialogHelper {
 						remove.setVisibility(View.GONE);
 					} else {
 						remove.setVisibility(View.VISIBLE);
-						((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
-								app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light :
-										R.drawable.ic_action_gremove_dark));
+						((ImageButton) remove).setImageDrawable(
+								app.getIconsCache().getContentIcon(R.drawable.ic_action_gremove_dark));
 						remove.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {

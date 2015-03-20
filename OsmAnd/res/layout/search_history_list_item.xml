@@ -90,7 +90,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/options_button_background"
             android:focusable="false"
-            android:src="?attr/list_settings_icon"
+            android:src="?attr/ic_action_overflow"
             android:visibility="gone" />
 
         <ImageButton
@@ -100,7 +100,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:src="@drawable/ic_action_gdirections_light"
+            android:src="@drawable/ic_action_remove_light"
             android:visibility="gone" />
     </LinearLayout>
 

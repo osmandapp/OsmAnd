@@ -238,7 +238,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			
 			
 			adapter.item(R.string.delete_target_point)
-			.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(listener).reg();
+			.iconColor( R.drawable.ic_action_remove_dark).listen(listener).reg();
 			
 		}
 	}

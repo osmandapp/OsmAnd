@@ -60,6 +60,6 @@
         android:layout_height="@dimen/dashListItemHeight"
         android:layout_gravity="center"
         android:background="?attr/options_button_background"
-        android:src="?attr/list_settings_icon" />
+        android:src="?attr/ic_action_overflow" />
 
 </LinearLayout>
