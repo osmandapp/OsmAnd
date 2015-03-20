@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.NavigationService;
@@ -24,7 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import java.util.List;
  * Created by Denis
  * on 20.01.2015.
  */
-public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsMoGroupsUIListener {
+public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups.OsMoGroupsUIListener {
 
 	public static final String TAG = "DASH_OSMO_FRAGMENT";
 
@@ -179,10 +180,14 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		for (final OsMoGroupsStorage.OsMoGroup group : groups) {
 			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
+			v.findViewById(R.id.direction_icon).setVisibility(View.GONE);
+			v.findViewById(R.id.distance).setVisibility(View.GONE);
 			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
 			v.findViewById(R.id.check_item).setVisibility(View.GONE);
 			final String name = group.getVisibleName(getActivity());
-
+			//TODO show group users
+			TextView peopleCount = (TextView) v.findViewById(R.id.people_count);
+			peopleCount.setText(String.valueOf(group.getGroupUsers(null).size()));
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			icon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_group));
 			((TextView) v.findViewById(R.id.name)).setText(name);
@@ -203,15 +208,19 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 	private void setupDeviceViews(LinearLayout contentList, List<OsMoGroupsStorage.OsMoDevice> devices) {
 		Drawable markerIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_marker_dark);
 		LayoutInflater inflater = getActivity().getLayoutInflater();
+		List<DashLocationFragment.DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final OsMoGroupsStorage.OsMoDevice device : devices) {
 			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
+			v.findViewById(R.id.people_icon).setVisibility(View.GONE);
+			v.findViewById(R.id.people_count).setVisibility(View.GONE);
 			final ImageButton showOnMap = (ImageButton) v.findViewById(R.id.show_on_map);
 			showOnMap.setImageDrawable(markerIcon);
 			final String name = device.getVisibleName();
+			final Location loc = device.getLastLocation();
 			showOnMap.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Location loc = device.getLastLocation();
+
 					if (loc == null) {
 						Toast.makeText(getActivity(), R.string.osmo_device_not_found, Toast.LENGTH_SHORT).show();
 						return;
@@ -223,6 +232,14 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
+
+			ImageView direction = (ImageView) v.findViewById(R.id.direction_icon);
+			direction.setVisibility(View.VISIBLE);
+			TextView label = (TextView) v.findViewById(R.id.distance);
+			DashLocationFragment.DashLocationView dv = new DashLocationFragment.DashLocationView(direction, label, loc != null ? new LatLon(loc.getLatitude(),
+					loc.getLongitude()) : null);
+			distances.add(dv);
+
 			final CompoundButton enableDevice = (CompoundButton) v.findViewById(R.id.check_item);
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			if (device.isEnabled()) {
@@ -255,6 +272,7 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 			});
 			contentList.addView(v);
 		}
+		this.distances = distances;
 	}
 
 	private void refreshItems() {
@@ -287,6 +305,12 @@ public class DashOsMoFragment extends DashBaseFragment implements OsMoGroups.OsM
 
 	@Override
 	public void deviceLocationChanged(OsMoGroupsStorage.OsMoDevice device) {
-		//
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				updateConnectedDevices(getView());
+				updateAllWidgets();
+			}
+		});
 	}
 }
