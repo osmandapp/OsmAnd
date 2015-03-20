@@ -1,24 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.util.List;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.EnumAdapter;
-import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -34,12 +15,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
+import net.osmand.data.DataTileManager;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.EnumAdapter;
+import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
+
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	
+	DataTileManager<OsmPoint> localOsmEdits = new DataTileManager<>();
+
 	@Override
 	public String getId() {
 		return ID;
@@ -47,6 +50,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;
+		collectLocalOsmEdits();
 	}
 	
 	@Override
@@ -56,7 +60,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 	
 	private OsmBugsLayer osmBugsLayer;
-	private EditingPOIActivity poiActions;
+	private OsmEditsLayer osmEditsLayer;
+	private EditingPOIDialogProvider poiActions;
 	
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity){
@@ -74,7 +79,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerLayers(MapActivity activity){
-		osmBugsLayer = new OsmBugsLayer(activity);
+		osmBugsLayer = new OsmBugsLayer(activity, this);
+		osmEditsLayer = new OsmEditsLayer(activity, this);
+		activity.getMapView().addLayer(osmEditsLayer, 3.5f);
+	}
+
+	public OsmEditsLayer getOsmEditsLayer(MapActivity activity){
+		if(osmEditsLayer == null) {
+			registerLayers(activity);
+		}
+		return osmEditsLayer;
 	}
 	
 	public OsmBugsLayer getBugsLayer(MapActivity activity) {
@@ -87,7 +101,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityCreate(MapActivity activity) {
 		// Always create new actions !
-		poiActions = new EditingPOIActivity(activity);
+		poiActions = new EditingPOIDialogProvider(activity, this);
 		activity.addDialogProvider(getPoiActions(activity));
 		activity.addDialogProvider(getBugsLayer(activity));
 	}
@@ -98,9 +112,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return SettingsOsmEditingActivity.class;
 	}
 	
-	public EditingPOIActivity getPoiActions(MapActivity activity) {
+	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
 		if(poiActions == null) {
-			poiActions = new EditingPOIActivity(activity);
+			poiActions = new EditingPOIDialogProvider(activity, this);
 		}
 		return poiActions;
 	}
@@ -208,7 +222,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					}).position(5).reg();
 		}
 	}
-	
+
+	public void onLocalItemDeleted(OsmPoint point) {
+		localOsmEdits.unregisterObject(point.getLatitude(), point.getLongitude(), point);
+	}
+
 	public enum UploadVisibility implements IEnumWithResource {
 		Public(R.string.gpxup_public),
 		Identifiable(R.string.gpxup_identifiable),
@@ -264,7 +282,33 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		bldr.show();
 		return true;
 	}
-	
+
+	public void onLocalOsmEditAdded(OsmPoint point){
+		localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+	}
+
+	public void collectLocalOsmEdits(){
+		localOsmEdits.clear();
+		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
+		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
+
+		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
+		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
+		for (OsmPoint point : l1){
+			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+		}
+		for (OsmPoint point : l2){
+			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+		}
+	}
+
+	public DataTileManager<OsmPoint> getLocalOsmEdits(){
+		return localOsmEdits;
+	}
+
+	public List<OsmPoint> getAllEdits(){
+		return localOsmEdits.getAllObjects();
+	}
 
 	@Override
 	public String getName() {

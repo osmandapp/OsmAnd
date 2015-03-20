@@ -306,16 +306,18 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 			public void onClick(DialogInterface dialog, int which) {
 				Iterator<OsmPoint> it = points.iterator();
 				while (it.hasNext()) {
-					OsmPoint info = it.next();
-					if (info.getGroup() == OsmPoint.Group.POI) {
-						dbpoi.deletePOI((OpenstreetmapPoint) info);
-					} else if (info.getGroup() == OsmPoint.Group.BUG) {
-						dbbug.deleteAllBugModifications((OsmNotesPoint) info);
+					OsmPoint omsPoint = it.next();
+					if (omsPoint.getGroup() == OsmPoint.Group.POI) {
+						dbpoi.deletePOI((OpenstreetmapPoint) omsPoint);
+					} else if (omsPoint.getGroup() == OsmPoint.Group.BUG) {
+						dbbug.deleteAllBugModifications((OsmNotesPoint) omsPoint);
 					}
 					it.remove();
-					listAdapter.delete(info);
+					listAdapter.delete(omsPoint);
+					plugin.onLocalItemDeleted(omsPoint);
 				}
 				listAdapter.notifyDataSetChanged();
+
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
@@ -620,6 +622,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	@Override
 	public void uploadUpdated(OsmPoint point) {
+		plugin.onLocalItemDeleted(point);
 		listAdapter.delete(point);
 	}
 
