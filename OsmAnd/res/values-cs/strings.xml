@@ -237,7 +237,7 @@
 \n\t- Vylepšený vektorový renderer
 \n\t- Vylepšený TTS engine (přesná vzdálenost, míle)
 \n\t- Oprava chyb "</string>
-  <string name="shared_string_save_as_gpx">Uložit trasu jako GPX</string>
+  <string name="shared_string_save_as_gpx">Uložit jako GPX trasu</string>
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">Jméno souboru : </string>
   <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
@@ -1833,9 +1833,9 @@ s často kladenými otázkami.</string>
 	<string name="proxy_port_title">Port proxy</string>
 	<string name="proxy_port_descr">Nastavit číslo portu proxy (např. 8118)</string>
 	<string name="parking_place">Parkovací místo</string>
-    <string name="remove_the_tag">ODSTRANIT TAG</string>
-    <string name="shared_string_disabled">Zapnout</string>
-	<string name="shared_string_enabled">Vypnout</string>
+    <string name="remove_the_tag">ODSTRANIT ZNAČKU</string>
+    <string name="shared_string_disabled">Zakázané</string>
+	<string name="shared_string_enabled">Povolené</string>
 	<string name="plugin_description_title">Popisek</string>
 	
 <string name="edit_group">Upravit skupinu</string>
@@ -1867,8 +1867,8 @@ s často kladenými otázkami.</string>
 	
 	<string name="location_on_map">Poloha:\n Šířka %1$s\n Délka %2$s</string>
 	<string name="shared_string_export">Exportovat</string>
-	<string name="shared_string_enable">Zapnout</string>
-	<string name="shared_string_disable">Vypnout</string>
+	<string name="shared_string_enable">Povolit</string>
+	<string name="shared_string_disable">Zakázat</string>
 	<string name="plugin_install_needs_network">Pro instalaci tohoto modulu je potřeba internetové připojení.</string>
 	<string name="get_plugin">Získat</string>
 <string name="route_points">Body cesty</string>
@@ -1887,4 +1887,19 @@ s často kladenými otázkami.</string>
     <string name="tips_and_tricks_descr">Často pokládané dotazy, nedávné změny a další</string>
     <string name="days_behind">dnů po</string>
 	<string name="shared_string_release">Vydáno</string>
-	</resources>
+	<string name="delay_to_start_navigation_descr">Automaticky spustit navigaci po určeném intervalu</string>
+    <string name="delay_to_start_navigation">Přeskočit plánování trasy</string>
+    <string name="shared_string_go">Start</string>
+	<string name="action_create">Vytvořit akci</string>
+	<string name="action_modify">Změnit akci</string>
+	<string name="action_delete">Odstranit akci</string>
+	<string name="osm_edits">Editace OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="parking_place_limited">Čas parkovacího místa vymezen do</string>
+	<string name="osmand_parking_overdue">vypršel</string>
+	<string name="osmand_parking_time_left">Zbývá</string>
+	<string name="your_edits">Vaše změny</string>
+    <string name="waypoint_visit_after">Navštívit po</string>
+    <string name="waypoint_visit_before">Navštívit před</string>
+    <string name="shared_string_not_use">Nepoužívat</string>
+	<string name="confirmation_to_clear_history">Chcete vyčistit celou historii?</string>
+    </resources>

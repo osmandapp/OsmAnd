@@ -4,6 +4,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/bt_round_2_shadow" />
+            android:src="@drawable/map_bt_round_2_shadow" />
     </item>
 </selector>

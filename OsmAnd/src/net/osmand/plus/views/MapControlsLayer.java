@@ -227,7 +227,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		View optionsRouteButton = mapActivity.findViewById(R.id.map_options_route_button);
 		optionsRouteControl = createHudButton((ImageView) optionsRouteButton,
-				settings.getApplicationMode().getSmallIcon(true)).setBg(R.drawable.btn_flat, R.drawable.btn_flat_night);
+				settings.getApplicationMode().getSmallIconDark()).setBg(R.drawable.btn_flat, R.drawable.btn_flat_night);
 		optionsRouteControlDialog = new MapRoutePreferencesControl(mapActivity);
 		controls.add(optionsRouteControl);
 		optionsRouteButton.setOnClickListener(new View.OnClickListener() {
@@ -328,7 +328,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.ic_action_zoom_in).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).setRoundTransparent());
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -344,7 +344,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.ic_action_zoom_out).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).setRoundTransparent());
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -461,14 +461,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
-				appModeIcon.setImageResource(settings.getApplicationMode().getSmallIcon(isNight));
+				appModeIcon.setImageDrawable(app.getIconsCache().getActionBarIcon(settings.getApplicationMode().getSmallIconDark(), 
+						isNight));
 			} else {
 				zoomText.setVisibility(View.VISIBLE);
 				appModeIcon.setVisibility(View.GONE);
 				zoomText.setText(getZoomLevel(tileBox));
 			}
 		}
-		optionsRouteControl.setIconResId(settings.getApplicationMode().getSmallIcon(true));
+		optionsRouteControl.setIconResId(settings.getApplicationMode().getSmallIconDark());
 		int vis = showRouteCalculationControls ? View.VISIBLE : View.GONE;
 		if (showRouteCalculationControls) {
 			((TextView) routeGoControl.iv).setTextColor(textColor);
@@ -718,16 +719,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mQuickAction.setOnAnchorOnTop(true);
 		List<ApplicationMode> vls = ApplicationMode.values(mapActivity.getMyApplication().getSettings());
 		final ApplicationMode[] modes = vls.toArray(new ApplicationMode[vls.size()]);
-		int[] icons = new int[vls.size()];
+		Drawable[] icons = new Drawable[vls.size()];
 		int[] values = new int[vls.size()];
 		for (int k = 0; k < modes.length; k++) {
-			icons[k] = modes[k].getSmallIcon(false);
+			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color_light);
 			values[k] = modes[k].getStringResource();
 		}
 		for (int i = 0; i < modes.length; i++) {
 			final ActionItem action = new ActionItem();
 			action.setTitle(mapActivity.getResources().getString(values[i]));
-			action.setIcon(mapActivity.getResources().getDrawable(icons[i]));
+			action.setIcon(icons[i]);
 			final int j = i;
 			action.setOnClickListener(new OnClickListener() {
 				@Override

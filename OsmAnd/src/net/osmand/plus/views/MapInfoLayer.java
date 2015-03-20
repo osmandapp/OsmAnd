@@ -82,9 +82,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public void registerSideWidget(TextInfoWidget widget, int drawableDark,int drawableLight, 
+	public void registerSideWidget(TextInfoWidget widget, int drawableMenu, int drawableMap, 
 			int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableDark, drawableLight, messageId, key, left, priorityOrder);
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, drawableMap, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
 	}
 	
@@ -105,29 +105,29 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// register left stack
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
-		registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
-		registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
-		registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
+		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
-		registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
+		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map);
-		registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
+		registerSideWidget(dist, R.drawable.ic_action_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map);
-		registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
+		registerSideWidget(time, R.drawable.ic_action_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map);
-		registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
+		registerSideWidget(speed, R.drawable.ic_action_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
-		registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		registerSideWidget(maxspeed, R.drawable.ic_action_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
-		registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		registerSideWidget(alt, R.drawable.ic_action_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
-		registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		registerSideWidget(plainTime, R.drawable.ic_action_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 	}
 	
 	
@@ -220,11 +220,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		ts.textShadowRadius = ts.textShadowColor == 0 ? 0 : 15; 
 		if (transparent) {
-			ts.boxTop = R.drawable.btn_flat_trans;
+			ts.boxTop = R.drawable.btn_flat_transparent;
 			ts.rightRes = R.drawable.btn_left_round_transparent;
 			ts.leftRes = R.drawable.btn_right_round_transparent;
 			ts.expand = R.drawable.btn_inset_circle_transparent;
-			ts.boxFree = R.drawable.btn_round_trans;
+			ts.boxFree = R.drawable.btn_round_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
 			ts.rightRes = R.drawable.btn_left_round_night;
@@ -306,7 +306,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public ContextMenuAdapter getViewConfigureMenuAdapter() {
 		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
 		cm.setDefaultLayoutId(R.layout.drawer_list_item);
-		cm.item(R.string.layer_map_appearance).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
+		cm.item(R.string.layer_map_appearance).iconColor(R.drawable.ic_back_drawer_dark)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -324,7 +324,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		cm.item(R.string.map_widget_reset) 
-				.icons(R.drawable.widget_reset_to_default_dark, R.drawable.widget_reset_to_default_light).listen(new OnContextMenuClick() {
+				.iconColor(R.drawable.widget_reset_to_default_dark).listen(new OnContextMenuClick() {
 					
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

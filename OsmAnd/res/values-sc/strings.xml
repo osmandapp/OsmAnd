@@ -115,7 +115,7 @@
     <string name="app_mode_aircraft">Aèreo</string>
     <string name="tip_faq_t">Vìsita https://code.google.com/p/osmand/wiki/FAQ pro bìdere sas preguntas prus fitianas.</string>
     <string name="tip_faq">Preguntas fitianas</string>
-    <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d mudaduras. Ses seguru?</string>
+    <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d modìficas OSM. Seguru ses?</string>
     <string name="shared_string_delete_all">Burra totu</string>
     <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s’andala in antis</string>
     <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
@@ -1897,7 +1897,7 @@
 	<string name="action_modify">Atzione modìfica</string>
 	<string name="action_delete">Atzione burra</string>
 	<string name="osm_edits">Modìficas OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
 	<string name="your_edits">Modìficas tuas</string>
     <string name="waypoint_visit_after">Vìsita a pustis</string>
     <string name="waypoint_visit_before">Vìsita in antis</string>
@@ -1923,4 +1923,5 @@
 	<string name="shared_string_go">Bae</string>
 	<string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala</string>
     <string name="confirmation_to_clear_history">Boles burrare totu s’istòria?</string>
+    <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     </resources>

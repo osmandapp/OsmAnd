@@ -286,15 +286,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			};
 			if (OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false).length() > 0) {
 				adapter.item(R.string.poi_context_menu_showdescription)
-						.icons(R.drawable.ic_action_note_dark, R.drawable.ic_action_note_light).listen(listener).reg();
+						.iconColor(R.drawable.ic_action_note_dark).listen(listener).reg();
 			}
 			if (a.getPhone() != null) {
 				adapter.item(R.string.poi_context_menu_call)
-						.icons(R.drawable.ic_action_call_dark, R.drawable.ic_action_call_light).listen(listener).reg();
+						.iconColor(R.drawable.ic_action_call_dark).listen(listener).reg();
 			}
 			if (a.getSite() != null) {
 				adapter.item(R.string.poi_context_menu_website)
-						.icons(R.drawable.ic_action_globus_dark, R.drawable.ic_action_globus_light).listen(listener)
+						.iconColor(R.drawable.ic_action_globus_dark).listen(listener)
 						.reg();
 			}
 		}

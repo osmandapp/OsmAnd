@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -127,6 +128,8 @@ public class PluginActivity extends OsmandActionBarActivity {
 				R.id.plugin_enable_disable);
 		Button getButton = (Button)findViewById(R.id.plugin_get);
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
+		IconsCache ic = ((OsmandApplication) getApplication()).getIconsCache();
+		settingsButton.setCompoundDrawablesWithIntrinsicBounds(ic.getContentIcon(R.drawable.ic_action_settings_dark), null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
 		if (plugin.needsInstallation()) {
@@ -134,6 +137,9 @@ public class PluginActivity extends OsmandActionBarActivity {
 			enableDisableButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
+			((ImageView) installHeader.findViewById(R.id.ic_world_globe)).setBackgroundDrawable(ic
+					.getContentIcon(R.drawable.ic_world_globe_dark));
+
 		} else {
 			getButton.setVisibility(View.GONE);
 			enableDisableButton.setVisibility(View.VISIBLE);

@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to osm. Are you sure?</string>
+	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the whole history?</string>
     <string name="delay_to_start_navigation_descr">Automatically start navigation after specified interval</string>
     <string name="delay_to_start_navigation">Skip route planning</string>
@@ -19,9 +19,10 @@
 	<string name="action_modify">Action modify</string>
 	<string name="action_delete">Action delete</string>
 	<string name="osm_edits">OSM edits</string>
-	<string name="osmand_parking_hour">h</string><!-- means first letter of word *hour* -->
-	<string name="osmand_parking_minute">min</string><!-- means first letter of word *minute*-->
-	<!-- means first letter of word *minute* -->
+	<!-- means first letter of word *hour* -->
+	<string name="osmand_parking_hour">h</string>
+	<!-- means first letter of word *minute*-->
+	<string name="osmand_parking_minute">min</string>
 	<string name="parking_place_limited">Parking place time limited to</string>
 	<!-- used to describe time left, not left direction -->
 	<string name="osmand_parking_time_left">Left</string>
@@ -119,7 +120,7 @@
 	</string>
 	<string name="osmo_plugin_name">OsMo monitoring</string>
 	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
-		\n\nYou can track other devices and be tracked. You can spontaneoulsy  create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
+		\n\nYou can track other devices and be tracked. You can spontaneously create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
 		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator. 
 		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
@@ -448,7 +449,7 @@
     <string name="osmo_follow">Follow</string>
     <string name="osmo_sign_in">Sign in</string>
     <string name="osmo_create_groups_confirm">In order to create groups you need to be a registered user of OsMo.</string>
-    <string name="osmo_credentials_not_valid">Your osmo credentials are not valid.</string>
+    <string name="osmo_credentials_not_valid">Your OsMo credentials are not valid.</string>
     <string name="osmo_regenerate_login_ids_confirm">Are you sure about regenerating personal ids? All devices, connected to you, won\'t be able to track you any more.</string>
     <string name="osmo_regenerate_login_ids">Regenerate user id</string>
     <string name="osmo_cancel_moving_target">Cancel moving target</string>
@@ -647,7 +648,7 @@
     <string name="app_mode_aircraft">Aircraft</string>
     <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
     <string name="tip_faq">Frequently Asked Questions</string>
-    <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d osm changes. Are you sure?</string>
+    <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d OSM changes. Are you sure?</string>
     <string name="animate_routing_route_not_calculated">Please, calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>

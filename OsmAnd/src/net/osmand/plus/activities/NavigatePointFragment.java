@@ -14,7 +14,6 @@ import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -110,9 +109,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
 		boolean light = app.getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		if(getActivity() instanceof SearchActivity) {
@@ -125,7 +122,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		}
 		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark, light));
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
@@ -138,13 +135,11 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		if (targets.getPointToNavigate() != null) {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light
-					: R.drawable.ic_action_flage_dark);
+			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark, light));
 		} else {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light
-					: R.drawable.ic_action_flag_dark);
+			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flag_dark, light));
 		}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -156,7 +151,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		//}
 		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_marker_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -168,7 +163,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		
 		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_fav_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override

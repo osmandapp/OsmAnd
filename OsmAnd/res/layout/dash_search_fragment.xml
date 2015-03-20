@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/search"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/card_bg"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashHeaderHeight">
+        android:layout_height="@dimen/dashHeaderHeight" >
 
         <TextView
             android:id="@+id/search_for"
@@ -17,21 +17,23 @@
             android:layout_width="wrap_content"
             android:text="@string/search_for" />
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/recents"
             style="?attr/dashboardGeneralButtonStyle"
-            android:text="@string/shared_string_history" />
+            android:text="@string/shared_string_history"
+            osmand:textAllCapsCompat="true"
+            osmand:typeface="@string/font_roboto_medium" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-		android:background="?attr/dashboard_divider" />
+        android:background="?attr/dashboard_divider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dashSearchBtnHeight"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/poi"
@@ -42,22 +44,22 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-			android:background="?attr/dashboard_divider" />
+            android:background="?attr/dashboard_divider" />
 
         <Button
             android:id="@+id/address"
-			style="?attr/dashboardSearchButtonStyle"
+            style="?attr/dashboardSearchButtonStyle"
             android:drawableTop="?attr/ic_action_home2"
             android:text="@string/address" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-			android:background="?attr/dashboard_divider" />
+            android:background="?attr/dashboard_divider" />
 
         <Button
             android:id="@+id/coord"
-			style="?attr/dashboardSearchButtonStyle"
+            style="?attr/dashboardSearchButtonStyle"
             android:drawableTop="?attr/ic_action_marker2"
             android:text="@string/coordinates" />
     </LinearLayout>

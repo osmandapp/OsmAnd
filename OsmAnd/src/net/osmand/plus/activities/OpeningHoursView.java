@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
@@ -35,9 +36,11 @@ public class OpeningHoursView {
 	
 	private boolean notifyingTime = true;
 	private ListView list;
+	private OsmandApplication app;
 
 	public OpeningHoursView(Context ctx){
 		this.ctx = ctx;
+		app = (OsmandApplication) ctx.getApplicationContext();
 	}
 	
 	public View createOpeningHoursEditView(List<BasicOpeningHourRule> t){
@@ -119,6 +122,7 @@ public class OpeningHoursView {
 			}
 			TextView label = (TextView)row.findViewById(R.id.label);
 			ImageView icon = (ImageView)row.findViewById(R.id.remove);
+			icon.setBackgroundDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 			if(selectedRule == position){
 				label.setTypeface(null, Typeface.BOLD);
 				label.setTextSize(22);

@@ -505,11 +505,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					return true;
 				}
 			};
-			adapter.item(R.string.osb_comment_menu_item).icons(
-					R.drawable.ic_action_note_dark,  R.drawable.ic_action_note_light
+			adapter.item(R.string.osb_comment_menu_item).iconColor(
+					R.drawable.ic_action_note_dark
 					).listen(listener).reg();
-			adapter.item(R.string.osb_close_menu_item).icons(
-					R.drawable.ic_action_remove_dark,R.drawable.ic_action_remove_light
+			adapter.item(R.string.osb_close_menu_item).iconColor(
+					R.drawable.ic_action_remove_dark
 					).listen(listener).reg();
 		}
 	}

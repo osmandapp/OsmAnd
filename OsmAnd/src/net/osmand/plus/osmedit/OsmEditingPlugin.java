@@ -10,13 +10,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.audionotes.NotesFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -128,16 +127,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 		};
 		if(selectedObj instanceof Amenity) {
-			adapter.item(R.string.poi_context_menu_modify).icons(R.drawable.ic_action_edit_dark, 
-					R.drawable.ic_action_edit_light).listen(listener).position(1).reg();
-			adapter.item(R.string.poi_context_menu_delete).icons(R.drawable.ic_action_delete_dark, 
-					R.drawable.ic_action_delete_light).listen(listener).position(2).reg();
+			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
+			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
 		} else {
-			adapter.item(R.string.context_menu_item_create_poi).icons(R.drawable.ic_action_plus_dark, 
-					R.drawable.ic_action_plus_light).listen(listener).position(-1).reg();
+			adapter.item(R.string.context_menu_item_create_poi).iconColor(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
 		}
-		adapter.item(R.string.context_menu_item_open_bug).icons(R.drawable.ic_action_bug_dark, 
-				R.drawable.ic_action_bug_light).listen(listener).reg();
+		adapter.item(R.string.context_menu_item_open_bug).iconColor(R.drawable.ic_action_bug_dark).listen(listener).reg();
 	}
 
 	@Override
@@ -155,7 +150,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		adapter.item(R.string.layer_osm_bugs).selected(settings.SHOW_OSM_BUGS.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_bug_dark, R.drawable.ic_action_bug_light).listen(new OnContextMenuClick() {
+				.iconColor(R.drawable.ic_action_bug_dark).listen(new OnContextMenuClick() {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -177,7 +172,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.item(R.string.local_index_mi_upload_gpx)
-					.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
+					.iconColor(R.drawable.ic_action_gup_dark)
 					.listen(new OnContextMenuClick() {
 
 						@Override
@@ -194,7 +189,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
-					.icon(R.drawable.ic_action_export)
+					.iconColor(R.drawable.ic_action_export)
 					.listen(new OnContextMenuClick() {
 
 						@Override

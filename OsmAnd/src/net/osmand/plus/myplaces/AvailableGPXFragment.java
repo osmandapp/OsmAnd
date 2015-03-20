@@ -1,5 +1,45 @@
 package net.osmand.plus.myplaces;
 
+import java.io.File;
+import java.text.Collator;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.LocalIndexesFragment;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -28,7 +68,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -36,47 +75,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.LocalIndexesFragment;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.text.Collator;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -370,8 +368,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					}
 				});
 			}
-			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
-				item.setIcon(optionsMenuAdapter.getImageId(j, false));
+			OsmandApplication app = getMyApplication();
+			if (optionsMenuAdapter.getImage(app, j, isLightActionBar()) != null) {
+				item.setIcon(optionsMenuAdapter.getImage(app, j, isLightActionBar()));
 			}
 
 		}
@@ -541,44 +540,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		});
 		allGpxAdapter.notifyDataSetChanged();
-	}
-
-	private void renameFile(GpxInfo info) {
-		final File f = info.file;
-		Builder b = new AlertDialog.Builder(getActivity());
-		if (f.exists()) {
-			final EditText editText = new EditText(getActivity());
-			editText.setPadding(7, 3, 7, 3);
-			editText.setText(f.getName());
-			b.setView(editText);
-			b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					String newName = editText.getText().toString();
-					File dest = new File(f.getParentFile(), newName);
-					if (dest.exists()) {
-						AccessibleToast.makeText(getActivity(), R.string.file_with_name_already_exists,
-								Toast.LENGTH_LONG).show();
-					} else {
-						if (!f.getParentFile().exists()) {
-							f.getParentFile().mkdirs();
-						}
-						if (f.renameTo(dest)) {
-							asyncLoader = new LoadGpxTask();
-							asyncLoader.execute(getActivity());
-						} else {
-							AccessibleToast
-									.makeText(getActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG)
-									.show();
-						}
-					}
-
-				}
-			});
-			b.setNegativeButton(R.string.shared_string_cancel, null);
-			b.show();
-		}
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
@@ -1017,7 +978,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(light ? R.drawable.ic_action_gshare_light : R.drawable.ic_action_gshare_dark);
+				.setIcon(
+						getMyApplication().getIconsCache().getActionBarIcon(
+								R.drawable.ic_action_gshare_dark, light));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

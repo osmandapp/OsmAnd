@@ -1,14 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.text.MessageFormat;
-
-import android.content.pm.ActivityInfo;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -25,9 +16,17 @@ import net.osmand.util.Algorithms;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -83,9 +82,7 @@ public class SearchAddressFragment extends Fragment {
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		Menu menu = onCreate;
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
 		if(getActivity() instanceof SearchActivity) {
 			if (portrait) {
 				menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
@@ -223,6 +220,9 @@ public class SearchAddressFragment extends Fragment {
 				}
 			}
 		});
+		OsmandApplication app = getApplication();
+		Drawable icon = getApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark);
+		((ImageView)findViewById(R.id.ResetBuilding)).setBackgroundDrawable(icon);
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -233,6 +233,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
+		((ImageView)findViewById(R.id.ResetStreet)).setBackgroundDrawable(icon);
 		 findViewById(R.id.ResetStreet).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -245,6 +246,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
+		 ((ImageView)findViewById(R.id.ResetCity)).setBackgroundDrawable(icon);
 		 findViewById(R.id.ResetCity).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -259,6 +261,7 @@ public class SearchAddressFragment extends Fragment {
 				updateUI();
 			}
 		 });
+		 ((ImageView)findViewById(R.id.ResetCountry)).setBackgroundDrawable(icon);
 		 findViewById(R.id.ResetCountry).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {

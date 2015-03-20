@@ -125,8 +125,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
 			ContextMenuAdapter adapter, final Object selectedObj) {
 		if(selectedObj instanceof OsMoDevice) {
-			adapter.item(R.string.osmo_center_location).icons(R.drawable.ic_action_gloc_dark, 
-					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
+			adapter.item(R.string.osmo_center_location).iconColor(R.drawable.ic_action_gloc_dark).listen(new OnContextMenuClick() {
 						
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -140,8 +139,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						}
 					}).position(0).reg();
 			if(OsMoPositionLayer.getFollowDestinationId() != null) {
-				adapter.item(R.string.osmo_cancel_moving_target).icons(R.drawable.ic_action_close_dark, 
-						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
+				adapter.item(R.string.osmo_cancel_moving_target).iconColor(R.drawable.ic_action_close_dark).listen(new OnContextMenuClick() {
 
 							@Override
 							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -151,8 +149,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							
 						}).position(0).reg();
 			}
-			adapter.item(R.string.osmo_set_moving_target).icons(R.drawable.ic_action_flag_dark, 
-					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
+			adapter.item(R.string.osmo_set_moving_target).iconColor(R.drawable.ic_action_flag_dark).listen(new OnContextMenuClick() {
 						
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -175,7 +172,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		osmoControl = createOsMoControl(activity);
 		layer.registerSideWidget(osmoControl,
-				R.drawable.mon_osmo_signal_inactive, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
+				R.drawable.ic_osmo_dark, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
 		
 		if(olayer != null) {
@@ -291,7 +288,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-		helper.item(R.string.osmo_groups).icons(R.drawable.ic_osmo_dark, R.drawable.ic_osmo_light).position(6)
+		helper.item(R.string.osmo_groups).iconColor(R.drawable.ic_osmo_dark).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item>
-        <bitmap android:src="@drawable/tab_icon_panel" />
-    </item>
-    <item>
-        <bitmap android:src="@drawable/tab_icon_panel_pushed_line" />
-    </item>
-</layer-list>

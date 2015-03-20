@@ -51,35 +51,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	private Drawable actionBarBackground;
 
-	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
-		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-			//making background of actionbar transparent with scroll
-			final int imageHeight = findViewById(R.id.map_image).getMeasuredHeight();
-			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
-			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
-			final int newAlpha = (int) (ratio * 255);
-			int margintop = -(int)(ratio * 60);
-			Resources r = getResources();
-			int px = (int) TypedValue.applyDimension(
-					TypedValue.COMPLEX_UNIT_DIP,
-					margintop,
-					r.getDisplayMetrics());
-			int margin = px + defaultMargin;
-			if (headerHeight >= t - margin){
-				//makes other cards to move on top of the map card to make it look like android animations
-				View fragments = findViewById(R.id.fragments);
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-				params.setMargins(0, margin, 0, 0);
-				fragments.setLayoutParams(params);
-			}
-			if (newAlpha > START_ALPHA) {
-				actionBarBackground.setAlpha(newAlpha);
-			}
-
-		}
-	};
-
 	private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
 		@Override
 		public void invalidateDrawable(Drawable who) {
@@ -133,7 +104,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		actionBarBackground = new ColorDrawable(Color.argb(180, 0, 0, 0));
 		actionBarBackground.setAlpha(START_ALPHA);
 		actionBar.setBackgroundDrawable(actionBarBackground);
-		((NotifyingScrollView)findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
+//		((NotifyingScrollView)findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
 		//setting up callback for drawable on actionbar for old android
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
 			actionBarBackground.setCallback(mDrawableCallback);
@@ -188,12 +159,12 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.shared_string_help).setIcon(R.drawable.ic_ac_help);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.shared_string_settings).setIcon(R.drawable.ic_ac_settings);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menu.add(0, EXIT_ID, 0, R.string.shared_string_exit).setIcon(R.drawable.ic_ac_close);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.shared_string_help).setIcon(R.drawable.ic_ac_help);
+//		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.shared_string_settings).setIcon(R.drawable.ic_ac_settings);
+//		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//		menuItem = menu.add(0, EXIT_ID, 0, R.string.shared_string_exit).setIcon(R.drawable.ic_ac_close);
+//		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

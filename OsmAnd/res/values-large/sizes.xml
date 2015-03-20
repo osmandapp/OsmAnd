@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dashHeaderHeight">60dp</dimen>
-    <dimen name="subHeaderPadding">3dp</dimen>
-    <dimen name="subHeaderMarginLeft">22dp</dimen>
-    <dimen name="showAllButtonMarginRight">21dp</dimen>
-    <dimen name="showAllButtonHeight">54dp</dimen>
-    <dimen name="dashListItemHeight">75dp</dimen>
-    <dimen name="dashFavIconSize">42dp</dimen>
-    <dimen name="dashFavIconMargin">18dp</dimen>
-    <dimen name="dashFavDirectionSize">15dp</dimen>
-    <dimen name="dashMapMargin">3dp</dimen>
-    <dimen name="dashProgressTextSize">27sp</dimen>
-    <dimen name="dashNoteIconSize">42dp</dimen>
-    <dimen name="dashPluginPadding">6dp</dimen>
-    <dimen name="dashPluginMargin">12dp</dimen>
-    <dimen name="dashSearchBtnHeight">135dp</dimen>
-    <dimen name="dashSearchPaddingTop">25dp</dimen>
-    <dimen name="dashSearchPaddingBot">15dp</dimen>
-    <dimen name="dashPadding">9dp</dimen>
-    <dimen name="dashAboutTextSize">30sp</dimen>
-    <dimen name="dashCardMargin">6dp</dimen>
+    <dimen name="map_trans_seek_size">120dp</dimen>
+	<dimen name="map_widget_text_size">35sp</dimen>
+	<dimen name="map_widget_text_size_small">23sp</dimen>
+	<dimen name="map_button_text_size">27sp</dimen>
+	<dimen name="map_route_buttons_width">90dp</dimen>
+	<dimen name="map_route_buttons_height">81dp</dimen>
+	<dimen name="map_route_buttons_height_land">72dp</dimen>
+	
+	<dimen name="map_address_height">60dp</dimen>
+	<dimen name="map_button_size">75dp</dimen>
+	<dimen name="map_ruler_width">180dp</dimen>
+	<dimen name="map_ruler_bottom_margin">14dp</dimen>
+	<dimen name="map_button_shadow_width">80dp</dimen>
+	<dimen name="map_alarm_size">116dp</dimen>
+	<dimen name="map_alarm_text_size">37sp</dimen>
+	
+	<dimen name="map_alarm_bottom_margin">140dp</dimen>
+	<dimen name="map_alarm_bottom_margin_land">78dp</dimen>
+	<dimen name="map_button_shadow_height">127dp</dimen>
+	<dimen name="map_widget_icon">32dp</dimen>
+	<dimen name="map_widget_height">48dp</dimen>
+	<dimen name="map_widget_image">120dp</dimen>
+	<dimen name="map_button_spacing">20dp</dimen>
+	<dimen name="map_button_spacing_land">12dp</dimen>
+	<dimen name="map_button_margin">6dp</dimen>
+	<dimen name="map_routing_progress_width">150dp</dimen>
+	
+	<dimen name="map_button_shadow_margin">3dp</dimen>
+	<dimen name="map_button_inset_shadow">5dp</dimen>
+	<dimen name="map_button_inset">12dp</dimen>
+	<dimen name="map_button_rect_rad">4dp</dimen>
+	<dimen name="map_button_stroke">1px</dimen>
 
-    <!-- TextSizes -->
-    <dimen name="showAllButtonTextSize">16sp</dimen>
-    <dimen name="subHeaderTextSize">21sp</dimen>
-    <dimen name="dashFavNameTextSize">24sp</dimen>
-    <dimen name="dashParkingTextSize">24sp</dimen>
+    
 </resources>

@@ -62,7 +62,6 @@ public class SelectedGPXFragment extends ListFragment {
 	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
 	protected OsmandApplication app;
 	protected SelectedGPXAdapter adapter;
-	protected boolean lightContent;
 	protected Activity activity;
 	private boolean updateEnable;
 	
@@ -147,7 +146,6 @@ public class SelectedGPXFragment extends ListFragment {
 	}
 
 	public void setContent() {
-		lightContent = app.getSettings().isLightContent();
 		adapter = new SelectedGPXAdapter(new ArrayList<GpxSelectionHelper.GpxDisplayItem>());
 		updateContent();
 		setListAdapter(adapter);
@@ -403,11 +401,9 @@ public class SelectedGPXFragment extends ListFragment {
 				icon.setVisibility(View.VISIBLE);
 				additional.setVisibility(View.INVISIBLE);
 				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					icon.setImageResource(!lightContent ? R.drawable.ic_action_polygom_dark
-							: R.drawable.ic_action_polygom_light);
+					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_polygom_dark));
 				} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-					icon.setImageResource(!lightContent ? R.drawable.ic_action_markers_dark
-							: R.drawable.ic_action_markers_light);
+					icon.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_markers_dark));
 				} else {
 					int groupColor = child.group.getColor();
 					if(child.locationStart != null) {
