@@ -1373,7 +1373,7 @@
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     <string name="osmodroid_refresh">更新頻道</string>
-    <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d osm 的更改。您是否確定？</string>
+    <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d OSM 的更改。您確定嗎？</string>
     <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
     <string name="tip_faq">常見問題</string>
     <string name="app_mode_hiking">徒步</string>
@@ -1574,7 +1574,7 @@
     <string name="osmo_follow">跟隨</string>
     <string name="osmo_sign_in">登入</string>
     <string name="osmo_create_groups_confirm">為了建立群組您需要註冊成為 OsMo 的使用者。</string>
-    <string name="osmo_credentials_not_valid">您的 osmo 憑據不是有效的。</string>
+    <string name="osmo_credentials_not_valid">您的 OsMo 憑證不是有效的。</string>
     <string name="osmo_regenerate_login_ids_confirm">您確定要重新產生個人 id？這會使已連接到您的所有裝置，無法再追蹤您。</string>
     <string name="osmo_regenerate_login_ids">重新產生使用者 ID</string>
     <string name="osmo_cancel_moving_target">取消移動目標</string>
@@ -1953,5 +1953,5 @@
     <string name="shared_string_go">執行</string>
 	<string name="shared_string_not_use">不使用</string>
 	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
-    <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 osm。您是否確定？</string>
+    <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
     </resources>
