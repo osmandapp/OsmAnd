@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -685,7 +685,7 @@
     <string name="app_mode_aircraft">Fly</string>
     <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ.</string>
     <string name="tip_faq">Ofte stilte spørsmål</string>
-    <string name="local_osm_changes_delete_all_confirm">Er du sikker på at du vil slette %1$d OSM endringer?</string>
+    <string name="local_osm_changes_delete_all_confirm">Du kommer til å slette %1$d OSM-endringer. Er du sikker?</string>
     <string name="shared_string_delete_all">Slett alle</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med den beregnede ruten </string>
@@ -1256,7 +1256,7 @@
     <string name="waypoint_visit_before">Besøk før</string>
     <string name="tips_and_tricks_descr">Ofte stilte spørsmål, siste endringer og annet</string>
     <string name="routing_settings_2">Navigeringsinnstillinger</string>
-    <string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">m</string><string name="parking_place_limited">Tidsbegrenset parkering</string>
+    <string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="parking_place_limited">Parkeringstid begrenset til</string>
 	<string name="simulate_your_location">Simuler din posisjon</string>
     <string name="short_location_on_map">Br %1$s\n Le %2$s</string>
     <string name="general_settings_2">Generelle innstillinger</string>
@@ -1265,4 +1265,7 @@
 	<string name="shared_string_more_actions">Flere handlinger</string>
 	<string name="shared_string_action_template">Handling {0}</string>
 	<string name="watch">Se</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">Du kommer til å laste opp %1$d endringer til OSM. Er du sikker?</string>
+    <string name="confirmation_to_clear_history">Vil du slette hele historikken?</string>
+    <string name="delay_to_start_navigation">Hopp over ruteplanlegging</string>
+    </resources>

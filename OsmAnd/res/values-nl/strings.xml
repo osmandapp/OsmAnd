@@ -1138,7 +1138,7 @@
     <string name="download_srtm_maps">Hoogtelijnen</string>
     
 	
-<string name="audionotes_plugin_description">Deze plug-in bied de functie en knoppen om audio-, foto- en videonotities te maken tijdens een reis</string>
+<string name="audionotes_plugin_description">De Audio/video notes plug-in bied de mogelijkheden voor het maken van audio-, foto- en videonotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu voor een zelfgekozen punt op de kaart.</string>
     <string name="audionotes_plugin_name">Audio/video-notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">"Deze plug-in biedt zowel een contourlijn als een reliëf laag die over de OsmAnd\'s offline kaart wordt weergegeven. Deze functionaliteit zal zeer worden gewaardeerd door sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de reliëfstructuur van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
@@ -1667,7 +1667,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plug-in zorgt voor de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo monitoring</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2024,7 +2024,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="track_segments">Route segmenten</string>
 	<string name="track_points">Route punten</string>
 	<string name="plugin_touringview_name">Toer kaartweergave</string>
-	<string name="plugin_touringview_descr">"Het activeren van deze weergave verandert OsmAnd\'s kaart stijl in \'Toer weergave (meer contrast en detail)\', dit is een speciale meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten). Het onderscheid alle soorten wegen van elkaar d.m.v. een eenduidige kleurcodering, wat handig is bij – bijvoorbeeld – het besturen van een groot voertuig.\n\nEen speciale kaart downloaden is niet nodig, de weergave wordt gecreëerd uit de standaard weergave.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Toer weergave (meer contrast en detail)\' in het Vector kaartgenerator overzicht, deze zit onder het menu \'Kaartstijl\' onder hoofdmenu optie \'Kaart instellen\'. "</string>
+	<string name="plugin_touringview_descr">"Het activeren van deze weergave verandert OsmAnd\'s kaart stijl in \'Toer weergave (meer contrast en detail)\', dit is een speciale meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).\n\nHet onderscheid alle soorten wegen van elkaar d.m.v. een eenduidige kleurcodering, wat handig is bij – bijvoorbeeld – het besturen van een groot voertuig.\n\nEn het bied speciale toer opties zoals fietsroutes en bergwandelpaden.\n\nEen speciale kaart downloaden is niet nodig, de weergave wordt gecreëerd uit de standaard weergave.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Toer weergave (meer contrast en detail)\' in het Vector kaartgenerator overzicht, deze zit onder het menu \'Kaartstijl\' onder hoofdmenu optie \'Kaart instellen\'. "</string>
 	<string name="plugin_nautical_descr">"Deze plug-in verrijkt de OsmAnd App met gegevens voor maken van nautische kaarten voor varen, zeilen, en andere vormen van watersport.\n\nDe speciale kaart add-on voor OsmAnd bied alle nautische navigatie kenmerken en kaartsymbolen, voor de binnenvaart en voor dicht voor de kust navigatie. De beschrijving van elke navigatie kenmerk levert de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.\n\nOm terug te keren naar een van OsmAnd conventionele kaart stijlen, gewoon deze plug-in de-activeren, of verander de \'Kaart stijl\' onder \'Kaart instellen\'. "</string>
 	<string name="plugin_ski_name">Ski kaartweergave</string>
 	<string name="plugin_ski_descr">"Deze plug-in voor OsmAnd plaatst onder handbereik de details over skipistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter\' kaart stijl die een met sneeuw bedekt winterlandschap voorstelt.\n\nEen globale overzicht van alle skipistes en cross country ski routes voor deze weergave is beschikbaar onder Downloads als \'World ski-map\'.\n\nHet activeren van deze weergave verandert de kaart in stijl \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door ofwel het de-activeren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
@@ -2121,7 +2121,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="action_modify">Actie: wijzig</string>
 	<string name="action_delete">Actie: verwijder</string>
 	<string name="osm_edits">OSM wijzigingen</string>
-	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Over</string> <string name="parking_place_limited">Parkeren voor een beperkte tijd</string>
+	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Over</string> <string name="parking_place_limited">Parkeertijd beperkt tot</string>
 	<string name="your_edits">Uw wijzigingen</string>
     <string name="waypoint_visit_after">Bezoek na</string>
     <string name="waypoint_visit_before">Bezoek voor</string>
@@ -2137,4 +2137,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_my_favorites">Mijn Favorieten</string>
 	<string name="shared_string_my_tracks">Mijn Routes</string>
 	<string name="shared_string_currently_recording_track">Route wordt opgenomen</string>
+	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
+    <string name="confirmation_to_clear_history">Wil je de hele geschiedenis verwijderen?</string>
+    <string name="osmand_parking_overdue">overschreden</string>
+	<string name="shared_string_not_use">Niet gebruikt</string>
 	</resources>
