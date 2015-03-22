@@ -69,13 +69,13 @@
   <string name="west_north_west">westnoordwest</string>
   <string name="north_west">noordwest</string>
   <string name="front">Rechtuit</string>
-  <string name="front_right">Rechts voor</string>
-  <string name="right">Rechts</string>
-  <string name="back_right">Rechts achter</string>
-  <string name="back">Achter</string>
-  <string name="back_left">Links achter</string>
-  <string name="left">Links</string>
-  <string name="front_left">Links voor</string>
+  <string name="front_right">rechts aanhouden</string>
+  <string name="right">naar rechts</string>
+  <string name="back_right">rechts achteruit</string>
+  <string name="back">achteruit</string>
+  <string name="back_left">links achteruit</string>
+  <string name="left">naar links</string>
+  <string name="front_left">links aanhouden</string>
   <string name="oclock">uur</string>
   <string name="towards">richting</string>
   <string name="accuracy">Nauwkeurigheid</string>
@@ -633,7 +633,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online zoom</string>
   <string name="max_level_download_tile_descr">Kies maximum zoomniveau voor het downloaden van online kaartsegmenten</string>
-  <string name="route_general_information">Totale afstand %1$s,\n reistijd %2$d u %3$d m.</string>
+  <string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d m.</string>
   <string name="router_service_descr">Kies een online of offline routeberekening</string>
   <string name="router_service">Routeberekening</string>
   <string name="sd_dir_not_accessible">Opslagmap op SD kaart is niet toegankelijk</string>
@@ -729,7 +729,7 @@
   <string name="map_tile_source">Kaartsegment bron</string>
   <string name="map_source">Kaartbron</string>
   <string name="use_internet">Gebruik internet</string>
-  <string name="show_location">Toon locatie</string>
+  <string name="show_location">Toon je positie</string>
   
   
   <string name="show_gps_coordinates_text">Toon GPS-coördinaten op kaart</string>
@@ -1751,7 +1751,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_edit_color">Weergavekleur</string>
     <string name="osmo_sign_in">Log in</string>
     <string name="osmo_create_groups_confirm">Om nieuwe groepen te maken, moet je een geregistreerde gebruiker van OsMo zijn.</string>
-    <string name="osmo_credentials_not_valid">Je OsMo inlog-gegevens zijn ongeldig.</string>
+    <string name="osmo_credentials_not_valid">Je OsMo inlog-gegevens zijn onjuist.</string>
     <string name="osmo_regenerate_login_ids_confirm">Weet je zeker, dat je je persoonlijke id\'s wilt vernieuwen? Alle verbonden toestellen kunnen je dan niet meer volgen.</string>
     <string name="osmo_regenerate_login_ids">Vernieuw gebruiker-ID\'s</string>
     <string name="osmo_cancel_moving_target">Stop bewegen van het doel</string>
