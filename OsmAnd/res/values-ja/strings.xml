@@ -55,11 +55,8 @@
      <string name="tip_day_night_mode">日中/夜間 モード</string>
      
      <string name="tip_location_sharing">位置をシェア</string>
-     <string name="tip_location_sharing_t">\t旅行中の興味深い場所の位置を家族や友人とシェアできます。
-     \n\t位置をシェアする場合は:
-     \n\t \'マップコンテキストメニュー\' -&gt; \'位置をシェア\' メニューを使用します。
-     \n\tそしてウェイを選択してあなたの位置をシェアしてください。次の方法があります:
-Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。</string>
+     <string name="tip_location_sharing_t">"\'マップ中心地点を使う\'→\'位置を共有\'という手順で旅行中の興味深い場所の位置を家族や友人と共有できます。
+\n\nそして位置を共有する方法を選んでください。次の方法があります: Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。 "</string>
 
      <string name="tip_favorites">お気に入り地点</string>
      <string name="tip_favorites_t">"次の様なよく使う地点はお気に入りとして保存できます:
@@ -874,7 +871,7 @@ POIの更新は利用できません</string>
 	<string name="rendering_attr_showRoadMaps_name">道路のみの地図</string>
     <string name="safe_mode_description">セーフモード(ネイティブコードの代わりにやや遅いAndroid用コード)でアプリケーションを実行。</string>
     <string name="safe_mode">セーフモード</string>
-    <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)</string>
+    <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)。</string>
     <string name="background_service_is_enabled_question">OsmAndのスリープモードになっています。停止しますか？</string>
     <string name="zxing_barcode_scanner_not_found">ZXingバーコードスキャナアプリケーションがインストールされていません。マーケットで検索しますか？</string>
 	<string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
@@ -906,9 +903,9 @@ POIの更新は利用できません</string>
 	<string name="snap_to_road_descr">ナビゲーション中は道路から外れない</string>
 	<string name="snap_to_road">道路に合わせる</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
-	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_short_description_80_chars">OSMオフライン、オンライン両対応、グローバルモバイルマップ＆ナビゲーション</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
-	<string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_plus_short_description_80_chars">OSMオフライン、オンライン両対応、グローバルモバイルマップ＆ナビゲーション</string>
 	<string name="filterpoi_activity">POIフィルタを作成</string>
 	<string name="select_navigation_mode">トランスポートモードの選択</string>
 	<string name="day_night_info_description">日の出: %1$s \n日の入: %2$s</string>
@@ -922,7 +919,7 @@ POIの更新は利用できません</string>
 	<string name="show_lanes">車線を表示</string>
 	<string name="avoid_unpaved">未舗装の道路を使用しない</string>
 	<string name="avoid_ferries">フェリーを使用しない</string>
-	<string name="avoid_in_routing_title">使用しない道路の指定</string>
+	<string name="avoid_in_routing_title">使用しない道路の指定…</string>
 	<string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリー等指定の手段を使用しないように設定</string>
 	<string name="map_widget_fluorescent">使用ルートを明滅させる</string>
 	<string name="map_widget_show_ruler">縮尺</string>
@@ -1201,8 +1198,8 @@ POIの更新は利用できません</string>
 	<string name="choose_auto_follow_route_descr">地図の位置調整に関する、位置とタイミング設定</string>
 	<string name="auto_follow_route_never">使用しない(手動で案内を開始するには青矢印をタップ)</string>
 	<string name="auto_follow_route_navigation">ナビゲーションのみ</string>
-	<string name="auto_follow_route_navigation_descr">地図の自動中心表示はナビゲーション時のみ</string>
-	<string name="auto_follow_location_enabled">地図の自動中心表示を使用</string>
+	<string name="auto_follow_route_navigation_descr">マップの自動中心表示はナビゲーション中のみ。</string>
+	<string name="auto_follow_location_enabled">マップの自動中心表示を使用。</string>
 	<string name="pref_vector_rendering">ベクターレンダラ固有のオプション</string>
 	<string name="pref_overlay">オーバーレイ/アンダーレイ</string>
 	<string name="pref_raster_map">マップソースの設定</string>
@@ -1294,7 +1291,7 @@ POIの更新は利用できません</string>
 	<string name="tip_app_mode_t_v2">OsmAndは移動手段ごとに異なるプロファイル(カスタマイズ可能)を使用できます。
 検索		\n\nプロファイルの切替には、地図画面の左下隅にあるプロファイルボタン(車、自転車、歩行者のアイコン)をタッチするか、ルート作成時に(トランスポートモード)選択できます。
 	</string>
-	<string name="shared_string_downloading">ダウンロード中…</string>
+	<string name="shared_string_downloading">ダウンロード中</string>
 	<string name="osb_author_dialog_password">OSMパスワード(オプション)</string>
 	<string name="email">Eメール</string>
 	<string name="av_camera_focus">カメラフォーカスタイプ</string>
@@ -1689,8 +1686,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="keep_and_add_destination_point">目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
-    <string name="shared_string_select_on_map">地図から選択…</string>
-    <string name="shared_string_favorite">お気に入り…</string>
+    <string name="shared_string_select_on_map">マップ上を選択</string>
+    <string name="shared_string_favorite">お気に入り</string>
     <string name="route_preferences">ルート設定</string>
     <string name="route_info">ルート情報</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
