@@ -312,7 +312,7 @@
 	<string name="poi_baseball">야구</string>
 	<string name="poi_basketball">농구</string>
 	<string name="poi_beachvolleyball">비치 발리 볼</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">보울스</string>
 	<string name="poi_bowls">그릇</string>
 	<string name="poi_canadian_football">캐나다 축구</string>
@@ -333,8 +333,8 @@
 	<string name="poi_horse_racing">경마</string>
 	<string name="poi_ice_skating">아이스 스케이팅</string>
 	<string name="poi_korfbal">코프발</string>
-	<string name="poi_motor_sport">모터 스포츠</string>
-	<string name="poi_multi_sport">멀티 스포츠</string>
+	<string name="poi_sport_motor">모터 스포츠</string>
+	<string name="poi_sport_multi">멀티 스포츠</string>
 	<string name="poi_orienteering">오리엔티어 링</string>
 	<string name="poi_paddle_tennis">패들 테니스</string>
 	<string name="poi_paragliding">패러글라이딩</string>
@@ -551,9 +551,9 @@
 	<string name="poi_atm">현금 지급기</string>
 	<string name="poi_money_lender">대부업자</string>
 	<string name="poi_pawnbroker">전당포</string>
-	<string name="poi_currencyexchange">변경소</string>
+	<string name="poi_bureau_de_change">변경소</string>
 	<string name="poi_accountant">회계사</string>
-	<string name="poi_bitcoin">Bitcoin 지불</string>
+	<string name="poi_bitcoin_yes">Bitcoin 지불</string>
 
 	<string name="poi_cave_entrance">동굴 입구</string>
 	<string name="poi_peak">봉우리</string>
@@ -629,17 +629,17 @@
 	<string name="poi_military_range">군사 지역</string>
 	<string name="poi_military_naval_base">해군 기지</string>
 	<string name="poi_military_nuclear_explosion_site">핵 폭발 사이트</string>
-<string name="poi_amusement_ride">라이드 즐기기</string>
+<string name="poi_attraction_amusement_ride">라이드 즐기기</string>
 	<string name="poi_attraction_animal">동물 (명소)</string>
-	<string name="poi_big_wheel">페리스 휠</string>
-	<string name="poi_carousel">목마</string>
-	<string name="poi_maze">미로</string>
-	<string name="poi_roller_coaster">롤러 코스터</string>
-	<string name="poi_slide">슬라이드</string>
-	<string name="poi_summer_toboggan">여름 토보간</string>
-	<string name="poi_swing_carousel">회전 목마</string>
+	<string name="poi_attraction_big_wheel">페리스 휠</string>
+	<string name="poi_attraction_carousel">목마</string>
+	<string name="poi_attraction_maze">미로</string>
+	<string name="poi_attraction_roller_coaster">롤러 코스터</string>
+	<string name="poi_attraction_slide">슬라이드</string>
+	<string name="poi_attraction_summer_toboggan">여름 토보간</string>
+	<string name="poi_attraction_swing_carousel">회전 목마</string>
 	<string name="poi_attraction_train">기차 (명소)</string>
-	<string name="poi_water_slide">워터 슬라이드</string>
+	<string name="poi_attraction_water_slide">워터 슬라이드</string>
 
 	<string name="poi_tower">타워</string>
 	<string name="poi_aquarium">아쿠아리움</string>
