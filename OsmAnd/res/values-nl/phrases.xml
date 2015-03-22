@@ -410,14 +410,14 @@
 	<string name="poi_compressed_air">Perslucht</string>
 	<string name="poi_aerialway_cable_car">Kabelbaan</string>
 	<string name="poi_aerialway_chair_lift">Stoeltjeslift</string>
-	<string name="poi_aerialway_t_bar">T-bar-lift</string>
-	<string name="poi_aerialway_j_bar">J-bar-lift</string>
-	<string name="poi_aerialway_platter">Knoplift</string>
+	<string name="poi_aerialway_t_bar">2 persoons- sleeplift</string>
+	<string name="poi_aerialway_j_bar">1 persoons- sleeplift</string>
+	<string name="poi_aerialway_platter">schotel sleeplift</string>
 	<string name="poi_aerialway_mixed_lift">Gemengde lift</string>
 	<string name="poi_aerialway_drag_lift">Sleeplift</string>
 	<string name="poi_aerialway_rope_tow">Sleeplift</string>
 	<string name="poi_aerialway_goods">Goederenlift</string>
-	<string name="poi_aerialway_magic_carpet">Tapijtlift</string>
+	<string name="poi_aerialway_magic_carpet">Transportband lift</string>
 
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_bridge">Brug</string>
@@ -430,9 +430,9 @@
 	<string name="poi_standpipe">Standpijp</string>
 	<string name="poi_water_works">Waterwerken</string>
 	<string name="poi_boatyard">Scheepswerf</string>
-	<string name="poi_wastewater_plant">Afvalwaterstation</string>
+	<string name="poi_wastewater_plant">waterzuiveringsinstallatie</string>
 	<string name="poi_lock_gate">Schutsluis</string>
-	<string name="poi_waterway_turning_point">Draaipunt van vaarweg</string>
+	<string name="poi_waterway_turning_point">Zwaaikom</string>
 	<string name="poi_weir">Stuw</string>
 	<string name="poi_water_mill">Watermolen</string>
 
@@ -480,7 +480,7 @@
 	<string name="poi_waste_basket">Prullenbak</string>
 
 	<string name="poi_adit">Horizontale mijnschacht</string>
-	<string name="poi_survey_point">Landmeetpunt</string>
+	<string name="poi_survey_point">Landmeet punt</string>
 	<string name="poi_quarry">Groeve</string>
 	<string name="poi_cricket_nets">Cricket-netten</string>
 
@@ -684,4 +684,5 @@
 	<string name="poi_military_barracks">Kazerne</string>
 	<string name="poi_military_danger_area">Gevaarlijke gebied</string>
 	<string name="poi_military_range">Militaire schietbaan</string>
+	<string name="poi_shop_food">Supermarkt</string>
 	</resources>
