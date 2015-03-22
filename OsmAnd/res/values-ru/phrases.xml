@@ -321,8 +321,8 @@
 	<string name="poi_ice_skating">Катание на коньках</string>
 	<string name="poi_ice_stock">Айсшток</string>
 	<string name="poi_korfbal">Корфбол</string>
-	<string name="poi_motor_sport">Автомотоспорт</string>
-	<string name="poi_multi_sport">Универсальная спортплощадка</string>
+	<string name="poi_sport_motor">Автомотоспорт</string>
+	<string name="poi_sport_multi">Универсальная спортплощадка</string>
 	<string name="poi_orienteering">Спортивное ориентирование</string>
 	<string name="poi_paddle_tennis">Настольный теннис</string>
 	<string name="poi_paragliding">Парапланеризм</string>
@@ -527,9 +527,9 @@
 	<string name="poi_atm">Банкомат</string>
 	<string name="poi_money_lender">Ростовщик</string>
 	<string name="poi_pawnbroker">Ломбард</string>
-	<string name="poi_currencyexchange">Обмен валют</string>
+	<string name="poi_bureau_de_change">Обмен валют</string>
 	<string name="poi_accountant">Бухгалтерские услуги</string>
-	<string name="poi_bitcoin">Оплата bitcoin</string>
+	<string name="poi_bitcoin_yes">Оплата bitcoin</string>
 
 	<string name="poi_cave_entrance">Вход в пещеру</string>
 	<string name="poi_peak">Горная вершина</string>
@@ -625,17 +625,17 @@
 	<string name="poi_place_allotments">Садоводческое товарищество</string>
 	<string name="poi_american_football">Американский футбол</string>
 	<string name="poi_base">Бейсджампинг</string>
-	<string name="poi_bmx_sport">Веломотокросс</string>
+	<string name="poi_bmx">Веломотокросс</string>
 	<string name="poi_canadian_football">Канадский футбол</string>
 	<string name="poi_surfing">Серфинг</string>
 	<string name="poi_cannon">Исторические пушки</string>
 	<string name="poi_harbour">Гавань</string>
-	<string name="poi_big_wheel">Колесо обозрения</string>
-	<string name="poi_carousel">Карусель</string>
-	<string name="poi_maze">Лабиринт</string>
-	<string name="poi_swing_carousel">Качели-карусели</string>
+	<string name="poi_attraction_big_wheel">Колесо обозрения</string>
+	<string name="poi_attraction_carousel">Карусель</string>
+	<string name="poi_attraction_maze">Лабиринт</string>
+	<string name="poi_attraction_swing_carousel">Качели-карусели</string>
 	<string name="poi_attraction_train">Поезд (аттракцион)</string>
-	<string name="poi_water_slide">Водные горки</string>
+	<string name="poi_attraction_water_slide">Водные горки</string>
 
 	<string name="poi_radar">Радар</string>
 	<string name="poi_aquarium">Аквариум</string>
@@ -644,10 +644,10 @@
 	<string name="poi_tower">Башня</string>
 	<string name="poi_mast">Мачта</string>
 	<string name="poi_attraction_animal">Животное (аттракцион)</string>
-	<string name="poi_slide">Горка</string>
-	<string name="poi_summer_toboggan">Летние санки</string>
+	<string name="poi_attraction_slide">Горка</string>
+	<string name="poi_attraction_summer_toboggan">Летние санки</string>
 	<string name="poi_dock">Док</string>
-	<string name="poi_roller_coaster">Американские горки</string>
+	<string name="poi_attraction_roller_coaster">Американские горки</string>
 	<string name="poi_shop">Магазин</string>
 	<string name="poi_education">Образование</string>
 	<string name="poi_office">Офис</string>
