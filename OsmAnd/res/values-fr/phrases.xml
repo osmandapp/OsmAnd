@@ -600,7 +600,7 @@
 	<string name="poi_attraction_train">Train touristique</string>
 	<string name="poi_attraction_water_slide">Toboggan aquatique</string>
 
-	<string name="poi_rugby_union">Union rugby</string>
+	<string name="poi_rugby_union">Club de rugby</string>
 	<string name="poi_rugby_league">Ligue de rugby</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_attraction_amusement_ride">Attractions mécaniques</string>
@@ -669,4 +669,5 @@
 	<string name="poi_internet_access_service">Accès Internet : service</string>
 	
 	<string name="poi_railway_buffer_stop">Heurtoir ferroviaire</string>
+	<string name="poi_shop_food">Magasin alimentaire</string>
 	</resources>
