@@ -1831,10 +1831,12 @@
     <string name="waypoint_visit_before">Besök före</string>
     <string name="shared_string_collapse">Slå ihop</string>
 	<string name="osm_edits">OSM-redigeringar</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering till</string>
 	<string name="your_edits">Dina redigeringar</string>
     <string name="osmand_parking_overdue">Föråldrad</string>
 	<string name="delay_to_start_navigation_descr">Starta navigering automatiskt efter bestämd tid</string>
     <string name="delay_to_start_navigation">Hoppa över ruttplanering</string>
     <string name="shared_string_go">Kör</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
+    <string name="confirmation_to_clear_history">Vill du ta bort hela historiken?</string>
+    </resources>

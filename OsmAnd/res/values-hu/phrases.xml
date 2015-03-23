@@ -212,7 +212,7 @@
 	<string name="poi_car_rental">Autókölcsönző</string>
 	<string name="poi_bank">Bank</string>
 	<string name="poi_atm">Bankautomata</string>
-	<string name="poi_currencyexchange">Pénzváltó</string>
+	<string name="poi_bureau_de_change">Pénzváltó</string>
 	<string name="poi_accountant">Könyvelő</string>
 	<string name="poi_cave_entrance">Barlangbejárat</string>
 	<string name="poi_peak">Hegycsúcs</string>

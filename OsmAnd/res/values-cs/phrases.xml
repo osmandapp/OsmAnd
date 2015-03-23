@@ -231,4 +231,31 @@
 	<string name="poi_parking_entrance">Vjezd parkoviště</string>
 	<string name="poi_tram_stop">Zastávka tramvaje</string>
 	<string name="poi_historic_mine">Historický důl</string>
+	<string name="poi_education">Vzdělání</string>
+	<string name="poi_office">Úřad</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Turistika</string>
+	<string name="poi_entertainment">Volný čas</string>
+	<string name="poi_sustenance">Občerstvení</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">Uživatelsky definovaný</string>
+	
+	<string name="poi_farm">Farmářský obchod</string>
+	<string name="poi_wine">Vinotéka</string>
+
+	<string name="poi_shop">Obchod</string>
+	<string name="poi_military_range">Vojenský prostor</string>
+	<string name="poi_military_bunker">Bunkr</string>
+	<string name="poi_military_airfield">Vojenské letiště</string>
+	<string name="poi_military_naval_base">Vojenská námořní základna</string>
+	<string name="poi_military_landuse">Vojenský prostor</string>
+	<string name="poi_beacon">Maják</string>
+	<string name="poi_islet">Ostrůvek</string>
+
+	<string name="poi_strait">Úžina</string>
+	<string name="poi_cape">Mys</string>
+	<string name="poi_reef">Útes</string>
+	<string name="poi_stone">Významný kámen</string>
+	<string name="poi_stream">Potok</string>
+	<string name="poi_river">Řeka</string>
 	</resources>

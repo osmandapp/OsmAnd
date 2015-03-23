@@ -35,7 +35,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
-                
             </LinearLayout>
         </net.osmand.plus.dashboard.NotifyingScrollView>
 
@@ -46,13 +45,13 @@
             android:layout_gravity="start"
             android:visibility="gone" >
 
-            <ListView
+            <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/card_bg"
                 android:fadeScrollbars="true" >
-            </ListView>
+            </com.github.ksoichiro.android.observablescrollview.ObservableListView>
         </FrameLayout>
 
         <include

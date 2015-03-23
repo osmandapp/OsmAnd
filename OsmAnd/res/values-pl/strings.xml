@@ -690,13 +690,13 @@
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">Wyświetl opcje konfiguracji wielu map online lub kafelków z pamięci podręcznej jako mapy bazowe lub nakładki/podkład. Mapy te można także przygotować offline i skopiować do folderu map OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"Wtyczka umożliwia korzystanie z wielu typów map online, od predefiniowanych kafelków OpenStreetMap (np. Mapnik) poprzez zdjęcia satelitarne, aż po specjalne mapy pogodowe, klimatyczne, geologiczne, cieniujące wzgórza.\n\nKażda z tych map może zostać użyta jako mapa główna lub jako warstwa dodatkowa nakładana na mapę bazową (np. mapy offline). W celu zwiększenia widoczności nakładki, niektóre elementy map wektorowych mogą zostać ukryte poprzez ustawienia w menu konfiguracji mapy.\n\nMapy kafelkowe można uzyskać bezpośrednio ze źródeł online, jak i przygotować je wcześniej do użycia offline kopiując je ręcznie do folderu danych OsmAnd. "</string>
   <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
   <string name="osmand_accessibility_description">Pokaż ustawienia specjalnych funkcji ułatwień dostępu.</string>
   
   
   
-  <string name="osmand_development_plugin_description">Pokaż ustawienia dotyczące rozwoju i debugowania funkcji, takich jak symulacja nawigacji i wyświetlanie informacji o wydajności renderowania.</string>
+  <string name="osmand_development_plugin_description">Wtyczka wyświetla ustawienia dotyczące rozwoju i debugowania funkcji. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania wskazówek głosowych. Te funkcje oraz ustawienia przeznaczone są dla deweloperów. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania aplikacji.</string>
   <string name="plugins_screen">Wtyczki</string>
   
   <string name="prefs_plugins_descr">Wtyczki aktywują zaawansowane ustawienia i dodatkową funkcjonalność</string>
@@ -1094,12 +1094,12 @@
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (\'Ustawienia\' → \'Zarządzanie plikami map\' -&gt; \'Pobierz\' -&gt; Wskaż określony typ mapy).</string>
+    <string name="srtm_plugin_description">"Ta wtyczka dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
 	
-<string name="audionotes_plugin_description">Twórz notatki dźwiękowe podczas podróży</string>
+<string name="audionotes_plugin_description">Wtyczka dostarcza funkcje tworzenia notatek zdjęciowych/audio/video podczas podróżowania aktywowaną poprzez przycisk na ekranie mapy lub menu kontekstowe dla wybranej lokalizacji.</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
     <string name="audionotes_location_not_defined">Lokalizacja dla notatki głosowej nie jest jeszcze ustalona. \"Użyj lokalizacji…\", aby przypisać notatkę do wybranej lokalizacji</string>
     
@@ -1151,7 +1151,7 @@
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ta wtyczka dostarcza poziomice, które mogą być wyświetlane na mapach offline w OsmAnd. Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ta wtyczka dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="recording_context_menu_show">Pokaż</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
@@ -1246,7 +1246,7 @@
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">Nazwa pliku GPX</string>
     <string name="gpx_saved_sucessfully">Plik GPX został pomyślnie zapisany do {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Twórz ścieżki (lub używaj/modyfikuj istniejące pliki GPX) służące pomiarowi odległości pomiędzy punktami. Zapisuj jako GPX. Może zostać użyte do planowania tras przez GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Wtyczka dodaje widget za pomocą którego można tworzyć ścieżki poprzez klikanie na mapie. Dostarcza również możliwość użycia lub modyfikacji istniejących już plików GPX, co przydaje się do planowania wycieczek lub mierzenia odległości pomiędzy punktami. Wynik może zostać zapisany jako plik GPX i użyty ponownie.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
     <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt.
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
@@ -1528,7 +1528,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
     <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
     <string name="osmodroid_refresh">Odśwież kanały</string>
-    <string name="local_osm_changes_delete_all_confirm">Zamierzasz usunąć %1$d zmian osm. Jesteś pewien?</string>
+    <string name="local_osm_changes_delete_all_confirm">Zamierzasz usunąć %1$d zmian OSM. Jesteś pewien?</string>
     <string name="shared_string_delete_all">Usuń wszystko</string>
     <string name="tip_faq_t">Wejdź na stronę https://code.google.com/p/osmand/wiki/FAQ i przejrzyj listę najczęściej zadawanych pytań.</string>
     <string name="tip_faq">Najczęściej zadawane pytania</string>
@@ -1656,7 +1656,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo, zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
+    <string name="osmo_plugin_description">"Wtyczka zapewnia funkcjonalność usługi OsMo - zaawansowanego monitorowania na żywo. Więcej szczegółów na http://osmo.mobi.
+\n\nZa jej pomocą możesz śledzić inne urządzenia lub samemu być śledzonym. Pozwala na tworzenie anonimowych grup, udostępnianie lokalizacji sobie nawzajem i komunikowanie ze sobą. Dostarcza różne opcje dla śledzenia sesji i śledzenia stałego.\n\nAnonimowe grupy tworzone są na określoną liczbę dni i limitowane są określonymi opcjami, np. brak zdalnego sterowania i brak administratora grupy. Natomiast w pełni funkcjonalne grupy mogą zostać utworzone na stronie, a dostęp do nich będą mieć tylko zarejestrowani użytkownicy. "</string>
     <string name="osmo_plugin_name">Monitoring OsMo</string>
     <string name="osmo_settings">Monitoring OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
@@ -1742,7 +1743,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="osmo_follow">Śledź</string>
     <string name="osmo_sign_in">Zarejestruj</string>
     <string name="osmo_create_groups_confirm">Aby utworzyć grupy, musisz być zarejestrowanym użytkownikiem OsMo.</string>
-    <string name="osmo_credentials_not_valid">Twoje dane logowania są nieprawidłowe.</string>
+    <string name="osmo_credentials_not_valid">Twoje dane logowania do OsMo są nieprawidłowe.</string>
     <string name="osmo_regenerate_login_ids_confirm">Czy jesteś pewny, że chcesz ponownie wygenerować identyfikator? Wszystkie urządzenia, połączone z Tobą nie będą mogły już Ciebie śledzić.</string>
     <string name="osmo_regenerate_login_ids">Ponowne generowanie identyfikatora użytkownika</string>
     <string name="osmo_cancel_moving_target">Anuluj poruszający się cel</string>
@@ -1892,7 +1893,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_track_to_gpx_globally">Zapisz ścieżkę do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
-	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
+	<string name="record_plugin_description">"Wtyczka aktywuje funkcje nagrywania i zapisywania śladów, które dostępne są poprzez widget na ekranie mapy. Udostępnia też możliwość automatycznego zapisywania śladów nawigacji do pliku GPX.\n\nZapisane ślady mogą zostać udostępnione znajomym lub użyte do rozwoju projektu OSM. Sportowcy mogą korzystać ze ścieżek do monitorowania treningów. Podstawowa analiza śladów może zostać wykonana bezpośrednio w OsmAnd (czasy okrążeń, średnia prędkość, itp.). "</string>
     <string name="confirm_every_run">Zawsze pytaj</string>
 	<string name="save_global_track_interval_descr">Wybierz częstotliwość rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólna częstotliwość zapisywania</string>
@@ -2018,9 +2019,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="action_create">Utwórz</string>
 	<string name="action_modify">Zmodyfikuj</string>
 	<string name="action_delete">Usuń</string>
-	<string name="osm_edits">Edycja OSM</string>
-	<string name="osmand_parking_hour">godz</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Pozostało</string> <string name="parking_place_limited">Miejsce parkingowe ograniczone czasowo</string>
-	<string name="your_edits">Twoje punkty edytowane</string>
+	<string name="osm_edits">Edycje OSM</string>
+	<string name="osmand_parking_hour">godz</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Pozostało</string> <string name="parking_place_limited">Miejsce parkingowe ograniczone czasowo do</string>
+	<string name="your_edits">Twoje edycje</string>
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symuluj lokalizację</string>
@@ -2062,4 +2063,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="proxy_port_descr">Skonfiguruj numer portu proxy (np. 8118)</string>
 	<string name="shared_string_release">Wypuszczony</string>
 	<string name="get_plugin">Pobierz</string>
-</resources>
+<string name="local_osm_changes_upload_all_confirm">Zamierzasz wysłać %1$d zmian na OSM. Czy jesteś pewien?</string>
+    <string name="confirmation_to_clear_history">Czy chcesz wyczyścić całą historię?</string>
+    <string name="delay_to_start_navigation_descr">Automatycznie rozpocznij nawigację po upłynięciu określonego czasu</string>
+    <string name="delay_to_start_navigation">Pomiń planowanie trasy</string>
+    <string name="drawer">Płaska lista</string>
+    <string name="days_behind">dni za najnowszą wersją</string>
+	</resources>

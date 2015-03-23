@@ -2,6 +2,7 @@
 <resources>
 <!--  categories -->
 	<string name="poi_shop">Shop</string>
+	<string name="poi_shop_food">Food store</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_transportation">Transportation</string>
 	<string name="poi_man_made">Man made</string>
@@ -346,7 +347,7 @@
 	<string name="poi_baseball">Baseball</string>
 	<string name="poi_basketball">Basketball</string>
 	<string name="poi_beachvolleyball">Beach volleyball</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">Boules</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_canadian_football">Canadian football</string>
@@ -368,8 +369,8 @@
 	<string name="poi_ice_skating">Ice skating</string>
 	<string name="poi_ice_stock">Ice stock</string>
 	<string name="poi_korfbal">Korfbal</string>
-	<string name="poi_motor_sport">Motor sport</string>
-	<string name="poi_multi_sport">Multi sport</string>
+	<string name="poi_sport_motor">Motor sport</string>
+	<string name="poi_sport_multi">Multi sport</string>
 	<string name="poi_orienteering">Orienteering</string>
 	<string name="poi_paddle_tennis">Paddle tennis</string>
 	<string name="poi_paragliding">Paragliding</string>
@@ -414,17 +415,17 @@
 	<string name="poi_theme_park">Theme park</string>
 	
 	<string name="poi_attraction">Tourism attraction</string>
-	<string name="poi_amusement_ride">Amusement ride</string>
+	<string name="poi_attraction_amusement_ride">Amusement ride</string>
 	<string name="poi_attraction_animal">Animal (attraction)</string>
-	<string name="poi_big_wheel">Ferris wheel</string>
-	<string name="poi_carousel">Carousel</string>
-	<string name="poi_maze">Maze</string>
-	<string name="poi_roller_coaster">Roller coaster</string>
-	<string name="poi_slide">Slide</string>
-	<string name="poi_summer_toboggan">Summer toboggan</string>
-	<string name="poi_swing_carousel">Swing carousel</string>
+	<string name="poi_attraction_big_wheel">Ferris wheel</string>
+	<string name="poi_attraction_carousel">Carousel</string>
+	<string name="poi_attraction_maze">Maze</string>
+	<string name="poi_attraction_roller_coaster">Roller coaster</string>
+	<string name="poi_attraction_slide">Slide</string>
+	<string name="poi_attraction_summer_toboggan">Summer toboggan</string>
+	<string name="poi_attraction_swing_carousel">Swing carousel</string>
 	<string name="poi_attraction_train">Train (attraction)</string>
-	<string name="poi_water_slide">Water slide</string>
+	<string name="poi_attraction_water_slide">Water slide</string>
 
 	<string name="poi_lodging">Lodging</string>
 	<string name="poi_hotel">Hotel</string>
@@ -602,9 +603,9 @@
 	<string name="poi_atm">ATM</string>
 	<string name="poi_money_lender">Money lender</string>
 	<string name="poi_pawnbroker">Pawnbroker</string>
-	<string name="poi_currencyexchange">Bureau de change</string>
+	<string name="poi_bureau_de_change">Bureau de change</string>
 	<string name="poi_accountant">Accountant</string>
-	<string name="poi_bitcoin">Bitcoin payment</string>
+	<string name="poi_bitcoin_yes">Bitcoin payment</string>
 
 	<string name="poi_cave_entrance">Cave entrance</string>
 	<string name="poi_peak">Mountain peak</string>

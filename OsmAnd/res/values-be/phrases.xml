@@ -317,7 +317,7 @@
 	<string name="poi_baseball">Бэйзбол</string>
 	<string name="poi_basketball">Баскетбол</string>
 	<string name="poi_beachvolleyball">Пляжны валейбол</string>
-	<string name="poi_bmx_sport">Веламотакрос</string>
+	<string name="poi_bmx">Веламотакрос</string>
 	<string name="poi_boules">Бул</string>
 	<string name="poi_bowls">Боўлз</string>
 	<string name="poi_canadian_football">Канадзкі футбол</string>
@@ -339,8 +339,8 @@
 	<string name="poi_ice_skating">Катаньне на каньках</string>
 	<string name="poi_ice_stock">Айсшток</string>
 	<string name="poi_korfbal">Корфбол</string>
-	<string name="poi_motor_sport">Аўтамотаспорт</string>
-	<string name="poi_multi_sport">Унівэрсальная спортпляцоўка</string>
+	<string name="poi_sport_motor">Аўтамотаспорт</string>
+	<string name="poi_sport_multi">Унівэрсальная спортпляцоўка</string>
 	<string name="poi_orienteering">Спартовае арыентаваньне</string>
 	<string name="poi_paddle_tennis">Настольны тэніс</string>
 	<string name="poi_paragliding">Парапланэрызм</string>
@@ -382,12 +382,12 @@
 	<string name="poi_theme_park">Парк забаў</string>
 	
 	<string name="poi_attraction">Выбітнасьць</string>
-	<string name="poi_big_wheel">Кола агляду</string>
-	<string name="poi_carousel">Карусэль</string>
-	<string name="poi_maze">Лябірынт</string>
-	<string name="poi_swing_carousel">Арэлі-карусэлі</string>
+	<string name="poi_attraction_big_wheel">Кола агляду</string>
+	<string name="poi_attraction_carousel">Карусэль</string>
+	<string name="poi_attraction_maze">Лябірынт</string>
+	<string name="poi_attraction_swing_carousel">Арэлі-карусэлі</string>
 	<string name="poi_attraction_train">Цягнік (атракцыён)</string>
-	<string name="poi_water_slide">Водныя горкі</string>
+	<string name="poi_attraction_water_slide">Водныя горкі</string>
 
 	<string name="poi_hotel">Гатэль</string>
 	<string name="poi_guest_house">Гасьцявы дом</string>
@@ -555,9 +555,9 @@
 	<string name="poi_atm">Банкамат</string>
 	<string name="poi_money_lender">Ліхвяр</string>
 	<string name="poi_pawnbroker">Лямбард</string>
-	<string name="poi_currencyexchange">Абмен валют</string>
+	<string name="poi_bureau_de_change">Абмен валют</string>
 	<string name="poi_accountant">Бухгалтарскія паслугі</string>
-	<string name="poi_bitcoin">Аплата bitcoin</string>
+	<string name="poi_bitcoin_yes">Аплата bitcoin</string>
 
 	<string name="poi_cave_entrance">Уваход у пячору</string>
 	<string name="poi_peak">Горная вяршыня</string>
@@ -609,11 +609,11 @@
 	<string name="poi_dock">Док</string>
 	<string name="poi_motorway_junction">Дарожная разьвязка</string>
 
-	<string name="poi_amusement_ride">Атракцыён</string>
+	<string name="poi_attraction_amusement_ride">Атракцыён</string>
 	<string name="poi_attraction_animal">Жывёла (атракцыён)</string>
-	<string name="poi_roller_coaster">Амэрыканскія горкі</string>
-	<string name="poi_slide">Жолаб</string>
-	<string name="poi_summer_toboggan">Летнія сані</string>
+	<string name="poi_attraction_roller_coaster">Амэрыканскія горкі</string>
+	<string name="poi_attraction_slide">Жолаб</string>
+	<string name="poi_attraction_summer_toboggan">Летнія сані</string>
 	<string name="poi_seamark_rock">Скала (навігацыйны знак)</string>
 	<string name="poi_dry_dock">Сухі док</string>
 	<string name="poi_floating_dock">Плывучы док</string>

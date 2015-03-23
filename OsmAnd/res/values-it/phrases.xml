@@ -260,7 +260,7 @@
 	<string name="poi_saddle">Sella</string>
 	<string name="poi_peak">Picco montuoso</string>
 	<string name="poi_cave_entrance">Entrata grotta/caverna</string>
-	<string name="poi_bitcoin">Pagamento Bitcoin</string>
+	<string name="poi_bitcoin_yes">Pagamento Bitcoin</string>
 
 	<string name="poi_atm">Bancomat</string>
 	<string name="poi_bank">Banca</string>
@@ -500,7 +500,7 @@
 	<string name="poi_social_centre">Centro sociale</string>
 	<string name="poi_money_lender">Prestasoldi</string>
 	<string name="poi_pawnbroker">Monte di pietà</string>
-	<string name="poi_currencyexchange">Cambia valute</string>
+	<string name="poi_bureau_de_change">Cambia valute</string>
 	<string name="poi_accountant">Studio contabile</string>
 	<string name="poi_river">Fiume</string>
 	<string name="poi_stream">Ruscello</string>
@@ -513,7 +513,7 @@
 	<string name="poi_occupational_therapist">Terapista occupazionale</string>
 	<string name="poi_office_telecommunication">Ufficio telecomunicazioni</string>
 	<string name="poi_american_football">Football americano</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_taxi">Posteggio taxi</string>
 
 	<string name="poi_motorway_junction">Svincolo autostradale</string>
@@ -536,11 +536,11 @@
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_artwork">Opera d\'arte</string>
 	<string name="poi_cannon">Cannone storico</string>
-	<string name="poi_big_wheel">Ruota panoramica</string>
-	<string name="poi_carousel">Giostra</string>
-	<string name="poi_maze">Labirinto</string>
-	<string name="poi_roller_coaster">Montagne russe</string>
-	<string name="poi_summer_toboggan">Toboga estivo</string>
+	<string name="poi_attraction_big_wheel">Ruota panoramica</string>
+	<string name="poi_attraction_carousel">Giostra</string>
+	<string name="poi_attraction_maze">Labirinto</string>
+	<string name="poi_attraction_roller_coaster">Montagne russe</string>
+	<string name="poi_attraction_summer_toboggan">Toboga estivo</string>
 	<string name="poi_religion_jewish">Luogo di culto: ebreo</string>
 	<string name="poi_geyser">Geyser</string>
 	<string name="poi_arts_centre">Centro artistico</string>

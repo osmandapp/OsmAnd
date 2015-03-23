@@ -260,7 +260,7 @@
 	<string name="poi_horse_racing">Cursas de sos caddos</string>
 	<string name="poi_ice_skating">Patinàgiu in s\'astra</string>
 	<string name="poi_korfbal">Korfbal</string>
-	<string name="poi_multi_sport">Prus isports</string>
+	<string name="poi_sport_multi">Prus isports</string>
 	<string name="poi_paddle_tennis">Paddle tènnis</string>
 	<string name="poi_pelota">Pelota</string>
 	<string name="poi_racquet">Racquetball</string>
@@ -404,7 +404,7 @@
 	<string name="poi_boatyard">Cantieri navale</string>
 	<string name="poi_office_telecommunication">Ufìtziu de telecomunicatzione</string>
 	<string name="poi_american_football">Football americanu</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_canadian_football">Football canadesu</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_playground">Parcu giogos</string>
@@ -438,7 +438,7 @@
 
 	<string name="poi_bank">Banca</string>
 	<string name="poi_atm">Bancomat</string>
-	<string name="poi_bitcoin">Pagamentu Bitcoin</string>
+	<string name="poi_bitcoin_yes">Pagamentu Bitcoin</string>
 
 	<string name="poi_cave_entrance">Intrada gruta</string>
 	<string name="poi_peak">Cùcuru de unu monte</string>
@@ -523,7 +523,7 @@
 	<string name="poi_craft_window_construction">Fraigadura de bentanas</string>
 
 	<string name="poi_toilets">Bagnu</string>
-	<string name="poi_currencyexchange">Cambiadore de valutas</string>
+	<string name="poi_bureau_de_change">Cambiadore de valutas</string>
 	<string name="poi_accountant">Istùdiu contàbile</string>
 	<string name="poi_cape">Ispuntone/promontòriu</string>
 	<string name="poi_reef">Costera</string>
@@ -568,17 +568,17 @@
 	<string name="poi_signal_station_warning">Istatzione de sinnalatzione, avertimentu de perìgulu (in mare)</string>
 	<string name="poi_small_craft_facility">Servìtzios pro barcas minores</string>
 	<string name="poi_topmark">Miràgliu</string>
-	<string name="poi_motor_sport">Isport a motore</string>
+	<string name="poi_sport_motor">Isport a motore</string>
 	<string name="poi_craft_carpet_layer">Assentadore de moquette</string>
 	<string name="poi_motorway_junction">Illoidura autostradale</string>
 
 	<string name="poi_waterway_turning_point">Furriada de martza pro naviles</string>
 	<string name="poi_customs">Dogana</string>
 	<string name="poi_cannon">Cannone istòricu</string>
-	<string name="poi_big_wheel">Roda panoràmica</string>
-	<string name="poi_carousel">Giostra</string>
-	<string name="poi_maze">Labirintu</string>
-	<string name="poi_summer_toboggan">Toboca istivu</string>
+	<string name="poi_attraction_big_wheel">Roda panoràmica</string>
+	<string name="poi_attraction_carousel">Giostra</string>
+	<string name="poi_attraction_maze">Labirintu</string>
+	<string name="poi_attraction_summer_toboggan">Toboca istivu</string>
 	<string name="poi_attraction_train">Trenu (atràida)</string>
 	<string name="poi_place_allotments">Ortos</string>
 	<string name="poi_ice_stock">Stock sport (birillos in s\'astra)</string>
@@ -629,4 +629,5 @@
 	<string name="poi_baby_hatch">Bàntzigu pro sa bida/Roda de sos espostos</string>
 	<string name="poi_apartment">Apartamentu</string>
 
+	<string name="poi_aquarium">Abbàrgiu</string>
 	</resources>

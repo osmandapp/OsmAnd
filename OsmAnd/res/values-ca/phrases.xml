@@ -277,7 +277,7 @@
 	<string name="poi_baseball">Beisbol</string>
 	<string name="poi_basketball">Basquetbol</string>
 	<string name="poi_beachvolleyball">Voleibol de platja</string>
-	<string name="poi_bmx_sport">Bicicròs</string>
+	<string name="poi_bmx">Bicicròs</string>
 	<string name="poi_boules">Joc de botxes</string>
 	<string name="poi_canadian_football">Futbol canadenc</string>
 	<string name="poi_chess">Escacs</string>
@@ -297,7 +297,7 @@
 	<string name="poi_ice_skating">Patinatge sobre gel</string>
 	<string name="poi_ice_stock">Icestock</string>
 	<string name="poi_korfbal">Corfbol</string>
-	<string name="poi_motor_sport">Esport de motor</string>
+	<string name="poi_sport_motor">Esport de motor</string>
 	<string name="poi_orienteering">Cursa d\'orientació</string>
 	<string name="poi_paddle_tennis">Pàdel</string>
 	<string name="poi_paragliding">Parapent</string>
