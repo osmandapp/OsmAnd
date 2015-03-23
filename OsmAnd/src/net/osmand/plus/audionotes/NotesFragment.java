@@ -1,16 +1,5 @@
 package net.osmand.plus.audionotes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +24,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.myplaces.FavoritesActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Denis on 18.02.2015.
@@ -122,7 +124,7 @@ public class NotesFragment extends ListFragment {
 	}
 
 	private void openPopUpMenu(View v, final AudioVideoNotesPlugin.Recording recording) {
-		boolean light = getMyApplication().getSettings().isLightContent();
+		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item;
@@ -143,12 +145,8 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
-		Drawable showOnMap = getResources().getDrawable(R.drawable.ic_show_on_map);
-		if (light) {
-			showOnMap = showOnMap.mutate();
-			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
-		}
-		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(showOnMap);
+		item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(
+				iconsCache.getContentIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -158,7 +156,7 @@ public class NotesFragment extends ListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(getMyApplication().getIconsCache().getActionBarIcon(R.drawable.ic_action_gshare_dark, light));
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_gshare_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -182,7 +180,7 @@ public class NotesFragment extends ListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -192,7 +190,7 @@ public class NotesFragment extends ListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.recording_context_menu_delete)
-				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

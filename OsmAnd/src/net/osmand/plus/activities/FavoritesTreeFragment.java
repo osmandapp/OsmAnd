@@ -1,49 +1,13 @@
 package net.osmand.plus.activities;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.DownloadIndexAdapter;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -67,11 +31,43 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.util.MapUtils;
+
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
@@ -173,6 +169,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		IconsCache iconsCache = getMyApplication().getIconsCache();
 		if (selectionMode) {
 			CheckBox ch = (CheckBox) v.findViewById(R.id.check_item);
 			FavouritePoint model = favouritesAdapter.getChild(groupPosition, childPosition);
@@ -198,7 +195,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 			boolean light = getMyApplication().getSettings().isLightContent();
 			MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
-					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -208,7 +205,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			});
 
 			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
-					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

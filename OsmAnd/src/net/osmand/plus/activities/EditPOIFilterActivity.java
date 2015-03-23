@@ -4,27 +4,6 @@
 package net.osmand.plus.activities;
 
 
-import java.text.Collator;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPOIActivity;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -47,6 +26,28 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.util.Algorithms;
+
+import java.text.Collator;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -104,7 +105,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		if(filter == null) {
 			return super.onCreateOptionsMenu(menu);
 		}
-		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, 
+		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item,
 				R.drawable.ic_action_gsave_dark ,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
@@ -113,7 +114,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
 			createMenuItem(menu, DELETE_FILTER, R.string.shared_string_delete, 
-					R.drawable.ic_action_delete_light,
+					R.drawable.ic_action_delete_dark,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
 		return super.onCreateOptionsMenu(menu);

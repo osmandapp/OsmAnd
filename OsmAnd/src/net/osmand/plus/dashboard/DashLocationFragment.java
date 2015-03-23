@@ -104,8 +104,11 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		LatLon loc = (useCenter ? mw : myLoc);
 		float h = useCenter ? -mapRotation : head;
 		for (DashLocationView lv : distances) {
-			updateLocationView(useCenter, loc, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc.getLatitude(), lv.loc.getLongitude(),
-					screenOrientation, getMyApplication(), getActivity(), lv.paint);
+			if (lv.loc != null){
+				updateLocationView(useCenter, loc, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc.getLatitude(), lv.loc.getLongitude(),
+						screenOrientation, getMyApplication(), getActivity(), lv.paint);
+			}
+
 		}
 	}
 

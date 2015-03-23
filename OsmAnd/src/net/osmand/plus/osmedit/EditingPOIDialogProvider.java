@@ -16,7 +16,6 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -61,11 +60,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class EditingPOIActivity implements DialogProvider {
+public class EditingPOIDialogProvider implements DialogProvider {
 	
 	private final Activity activity;
 	private final OpenstreetmapUtil openstreetmapUtil;
 	private final OpenstreetmapUtil openstreetmapUtilToLoad;
+	private final OsmEditingPlugin plugin;
 	private AutoCompleteTextView typeText;
 	private EditText nameText;
 	private Button typeButton;
@@ -98,8 +98,9 @@ public class EditingPOIActivity implements DialogProvider {
 	private Map<String, PoiType> allTranslatedSubTypes;
 	
 
-	public EditingPOIActivity(MapActivity uiContext){
+	public EditingPOIDialogProvider(MapActivity uiContext, OsmEditingPlugin plugin){
 		this.activity = uiContext;
+		this.plugin = plugin;
 
 		poiTypes = uiContext.getMyApplication().getPoiTypes();
 		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(false);
@@ -637,6 +638,7 @@ public class EditingPOIActivity implements DialogProvider {
 			@Override
 			protected void onPostExecute(Node result) {
 				progress.dismiss();
+				plugin.collectLocalOsmEdits();
 				if (result != null) {
 					successAction.run();
 				}

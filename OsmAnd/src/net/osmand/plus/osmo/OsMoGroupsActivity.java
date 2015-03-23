@@ -29,8 +29,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
@@ -113,7 +115,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int SETTINGS_ID = 9;
 	protected static final int SETTINGS_DEV_ID = 10;
 	protected static final int TRACK_DEV_ID = 11;
-	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
+	public static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	public static final long RECENT_THRESHOLD = 60000;
 	private boolean joinGroup;
 
@@ -405,7 +407,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().resumeAllUpdates();
-		osMoPlugin.getGroups().setUiListener(this);
+		osMoPlugin.getGroups().addUiListeners(this);
 		if(osMoPlugin.getService().isConnected()) {
 			adapter.synchronizeGroups();
 		}
@@ -420,7 +422,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			app.getLocationProvider().removeCompassListener(this);
 		}
 		app.getLocationProvider().removeLocationListener(this);
-		osMoPlugin.getGroups().setUiListener(null);
+		osMoPlugin.getGroups().addUiListeners(null);
 		osMoPlugin.setGroupsActivity(null);
 	}
 	
@@ -853,12 +855,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			signin();
 			return;
 		}
-		Builder builder = new AlertDialog.Builder(this);
+		final Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_create_group);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_create_group, getExpandableListView(), false);
 		final EditText policy = (EditText) v.findViewById(R.id.Policy);
 		final EditText description = (EditText) v.findViewById(R.id.Description);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
+		final TextView lengthAlert = (TextView) v.findViewById(R.id.textLengthAlert);
 		final CheckBox onlyByInvite = (CheckBox) v.findViewById(R.id.OnlyByInvite);
 
 		final TextView warnCreateDesc = (TextView) v.findViewById(R.id.osmo_group_create_dinfo);
@@ -889,7 +892,32 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				startLongRunningOperation(op);
 			}
 		});
-		builder.create().show();
+		final AlertDialog dialog = builder.create();
+
+		name.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if (s.length() > 2) {
+					lengthAlert.setVisibility(View.GONE);
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+				} else {
+					lengthAlert.setVisibility(View.VISIBLE);
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+		dialog.show();
 		AndroidUtils.softKeyboardDelayed(name);
 		
 	}
@@ -1185,11 +1213,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-				if (light){
-					v.setImageResource(R.drawable.ic_action_settings_enabled_light);
-				} else {
-					v.setImageResource(R.drawable.ic_action_settings_enabled_dark);
-				}
+				v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings_enabled_dark));
+
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {
 					

@@ -1,14 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.MapActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -17,6 +8,17 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.activities.MapActivity;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
@@ -59,11 +61,11 @@ public class DirectionsDialogs {
 															final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
 		setupPopUpMenuIcon(optionsMenu);
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		boolean light = app.getSettings().isLightContent();
+		IconsCache iconsCache = app.getIconsCache();
 
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		MenuItem item = optionsMenu.getMenu().add(
-				R.string.context_menu_item_directions_to).setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark, light));
+				R.string.context_menu_item_directions_to).setIcon(iconsCache.getContentIcon((R.drawable.ic_action_gdirections_dark)));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -76,11 +78,11 @@ public class DirectionsDialogs {
 		if (targetPointsHelper.getPointToNavigate() != null) {
 			item = optionsMenu.getMenu().add(
 					R.string.context_menu_item_intermediate_point).setIcon(
-							app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark, light));
+					iconsCache.getContentIcon(R.drawable.ic_action_flage_dark));
 		} else {
 			item = optionsMenu.getMenu().add(
 					R.string.context_menu_item_destination_point).setIcon(
-							app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flag_dark, light));
+					iconsCache.getContentIcon(R.drawable.ic_action_flag_dark));
 		}
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -91,8 +93,7 @@ public class DirectionsDialogs {
 			}
 		});
 		item = optionsMenu.getMenu().add(
-				R.string.shared_string_show_on_map).setIcon(light ?
-				R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+				R.string.shared_string_show_on_map).setIcon(iconsCache.getContentIcon(R.drawable.ic_action_marker_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -104,8 +105,7 @@ public class DirectionsDialogs {
 		});
 		if (favorite) {
 			item = optionsMenu.getMenu().add(
-					R.string.shared_string_add_to_favorites).setIcon(light ?
-					R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+					R.string.shared_string_add_to_favorites).setIcon(iconsCache.getContentIcon(R.drawable.ic_action_fav_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

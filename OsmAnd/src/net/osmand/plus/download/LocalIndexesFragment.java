@@ -1,34 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.text.Collator;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -65,6 +36,37 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.text.Collator;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment {
@@ -1116,7 +1118,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	}
 	
 	private void openPopUpMenu(View v, final LocalIndexInfo info) {
-		boolean light = getMyApplication().getSettings().isLightContent();
+		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		final boolean restore = info.isBackupedData();
@@ -1134,7 +1136,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -1144,7 +1146,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
-				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
