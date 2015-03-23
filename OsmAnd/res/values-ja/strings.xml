@@ -2132,8 +2132,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="proxy_port_title">プロキシポート</string>
 	<string name="proxy_port_descr">プロキシのポート番号設定(例：8118)</string>
 	<string name="voices">音声プロンプト</string>
-	<string name="shared_string_disabled">有効</string>
-	<string name="shared_string_enabled">無効</string>
+	<string name="shared_string_disabled">無効</string>
+	<string name="shared_string_enabled">有効</string>
 <string name="osmand_parking_overdue">期限切れ</string>
 	<string name="action_create">アクションの作成</string>
 	<string name="action_modify">アクションの変更</string>
