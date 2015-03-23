@@ -2036,7 +2036,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
 	<string name="plugin_ski_descr">Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali.
-		\n\nÈ disponibile una mappa contenente tutte le piste e percorsi da fondo sotto \'Download\'  \"World ski map\".
 		\n\nQuesta visualizzazione può essere ripristinata sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
 	<string name="plugin_touringview_descr">"Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali.
