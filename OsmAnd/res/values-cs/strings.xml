@@ -1902,6 +1902,6 @@ s často kladenými otázkami.</string>
     <string name="waypoint_visit_before">Navštívit před</string>
     <string name="shared_string_not_use">Nepoužívat</string>
 	<string name="confirmation_to_clear_history">Chcete vyčistit celou historii?</string>
-    <string name="local_osm_changes_upload_all_confirm">Chystáte se nahrát %1$d změn do OSM. Jste si jistý?</string>
+    <string name="local_osm_changes_upload_all_confirm">Požadujete nahrát %1$d změn do OSM. Jste si jist?</string>
     <string name="shared_string_collapse">Pád</string>
 	</resources>
