@@ -1903,5 +1903,5 @@ s často kladenými otázkami.</string>
     <string name="shared_string_not_use">Nepoužívat</string>
 	<string name="confirmation_to_clear_history">Chcete vyčistit celou historii?</string>
     <string name="local_osm_changes_upload_all_confirm">Požadujete nahrát %1$d změn do OSM. Jste si jist?</string>
-    <string name="shared_string_collapse">Pád</string>
+    <string name="shared_string_collapse">Sbalit</string>
 	</resources>
