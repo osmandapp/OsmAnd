@@ -91,13 +91,7 @@
      <string name="tip_search_t">"\'マップ中心地点を使用\'→\'ここの近くで検索\'から場所を直接検索することが出来ます、また\'メニュー\'→\'検索\'から検索画面を呼び出すことが出来ます。\n\n場所の検索は以下の項目から選択出来ます。\n\t* 住所\n\t* 座標(緯度と経度)\n\t* POI(建物や施設の種類または名前別)\n\t* 検索履歴\n\t* 作成したお気に入り\n\nどの検索結果からもコンテキストメニュー、またはアクションバーから\'ここへ行く\'や\'マップ上に表示\'等の動作を選択することが出来ます。 "</string>
 
      <string name="tip_map_context_menu">マップコンテキストメニュー</string>
-     <string name="tip_map_context_menu_t">\tマップ上で長押しするか、
-トラックボールボタンを押すとマップコンテキストメニューが使えます。
-\n\tその地点の座標でボックスが作成されます。その上で長押しして
-(あるいはその上でタップするとボックスが再度隠れます)マップコンテキストメニュー
-ダイアログを開いてください。
-\n\tマップコンテキストメニューには地点(位置)に関する
-全ての操作があります。</string>
+     <string name="tip_map_context_menu_t">"\'マップ中心地点を使用\'のコンテキストメニューからは、その地点を参照して出来ること全てが選択可能です\n\nコンテキストメニューを出す方法として、マップ上の任意の地点を長押し(その後出たマーカーをタップ)、トラックボールのボタンを押す、\'メニュー\' → \'マップ中心地点を使用\'という方法があります。(後者二つはマップの中心が参照地点となります)\n\nマーカーボックスは長押しで再度非表示に出来ます。 "</string>
 
      
      <string name="tip_initial_t">"OsmAndは多くの機能を持つナビゲーションアプリです。
@@ -145,9 +139,9 @@
      <string name="amenity_type_sustenance">飲食店(Sustenance)</string>
      <string name="amenity_type_tourism">観光(Tourism)</string>
      <string name="amenity_type_transportation">交通機関(Transport)</string>
-     <string name="indexing_address">住所を索引化</string>
-     <string name="indexing_map">マップを索引化</string>
-     <string name="indexing_poi">POIを索引化</string>
+     <string name="indexing_address">住所を索引中…</string>
+     <string name="indexing_map">マップを索引中…</string>
+     <string name="indexing_poi">POIを索引中…</string>
      <string name="indexing_transport">交通機関を索引化…</string>
      <string name="shared_string_io_error">I/O エラー発生</string>
      <string name="km">km</string>
@@ -333,7 +327,7 @@ MB)をダウンロードしますか?</string>
      <string name="voice_provider">音声案内</string>
      <string name="voice_data_initializing">音声データを初期化中…</string>
      <string name="voice_data_not_supported">サポートしていない音声データのバージョン</string>
-     <string name="voice_data_corrupted">指定した音声データが破損しているか、音声設定ファイルの記述が間違っています。</string>
+     <string name="voice_data_corrupted">指定した音声データが破損しているか、音声設定ファイルの記述が間違っています</string>
      <string name="voice_data_unavailable">選択した音声データは利用できません</string>
      
      <string name="sd_unmounted">SDカードにアクセスできません。\nマップを参照したり何かを探したりすることはできません。</string>
@@ -398,9 +392,9 @@ POIの更新は利用できません</string>
      <string name="shared_string_clear_all">全てクリア</string>
      <string name="shared_string_history">履歴</string>
      <string name="uploading_data">データをアップロード中…</string>
-     <string name="uploading">アップロード中</string>
+     <string name="uploading">アップロード中…</string>
      <string name="search_nothing_found">何も見つかりません</string>
-     <string name="searching">検索中</string>
+     <string name="searching">検索中…</string>
      <string name="searching_address">住所を検索中…</string>
      <string name="search_osm_nominatim">OSM Nominatimを使って住所を検索</string>
      <string name="hint_search_online">オンライン検索:番地、町名、市町村</string>
@@ -421,7 +415,7 @@ POIの更新は利用できません</string>
      
      
      
-     <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
+     <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中…</string>
      <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
 から参照されていません。</string>
  <string name="select_index_file_to_download">何も見つかりませんでした。自分の地域が見つからない場合、
@@ -1189,7 +1183,7 @@ POIの更新は利用できません</string>
 	<string name="profile_settings">使用するプロファイルの選択</string>
 	<string name="global_settings">グローバル設定</string>
 	<string name="global_app_settings">グローバル アプリケーション設定</string>
-	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。(必要容量:%1$sMB／空き容量%2$s)</string>
+	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。%1$sMB(空き容量:%2$s)</string>
 	<string name="download_files_question_space">現在の空き容量{2}MB! ダウンロード {0} file(s) {1}MB)?</string>
 	<string name="use_transparent_map_theme">透明なテーマ</string>
 	<string name="native_library_not_supported">ネイティブライブラリは、このデバイスでサポートされていません。</string>
