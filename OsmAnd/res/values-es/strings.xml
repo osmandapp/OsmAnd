@@ -167,7 +167,7 @@
   <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (carreteras, etc.) a niveles inferiores de acercamiento</string>
   <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
   <string name="favorite_delete_multiple">Va a borrar %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
-  <string name="favorite_home_category">Inicio</string>
+  <string name="favorite_home_category">Casa</string>
   <string name="favorite_friends_category">Amigos</string>
   <string name="favorite_places_category">Lugares</string>
   <string name="favorite_default_category">Otros</string>
