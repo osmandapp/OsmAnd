@@ -1185,11 +1185,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-				if (light){
-					v.setImageResource(R.drawable.ic_action_settings_enabled_light);
-				} else {
-					v.setImageResource(R.drawable.ic_action_settings_enabled_dark);
-				}
+				v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings_enabled_dark));
+
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {
 					

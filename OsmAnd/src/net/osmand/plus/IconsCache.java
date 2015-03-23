@@ -56,7 +56,7 @@ public class IconsCache {
 
 
 	public Drawable getActionBarIcon(int id) {
-		return getDrawable(id, app.getSettings().isLightActionBar() ? R.color.icon_color_light : 0);
+		return getDrawable(id, 0);
 	}
 	
 	public Drawable getActionBarIcon(int id, boolean light) {

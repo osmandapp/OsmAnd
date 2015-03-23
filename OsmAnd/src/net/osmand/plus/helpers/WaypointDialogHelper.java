@@ -1,20 +1,5 @@
 package net.osmand.plus.helpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -36,6 +21,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.IntermediatePointsDialog;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  */
@@ -214,6 +216,7 @@ public class WaypointDialogHelper {
 
 	protected View createDialogHeader(final FragmentActivity a, final boolean editF, final boolean flat, final AlertDialog dlg) {
 		View v;
+		IconsCache iconsCache = app.getIconsCache();
 		v = a.getLayoutInflater().inflate(R.layout.waypoint_title, null);
 		ImageView iBack = (ImageView) v.findViewById(R.id.back);
 		if(dlg != null) {
@@ -227,8 +230,7 @@ public class WaypointDialogHelper {
 		ImageButton edit = (ImageButton) v.findViewById(R.id.edit);
 		ImageButton sort = (ImageButton) v.findViewById(R.id.sort);
 		ImageButton all = (ImageButton) v.findViewById(R.id.all);
-		edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gedit_light
-				: R.drawable.ic_action_gedit_dark);
+		edit.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_gedit_dark));
 		edit.setVisibility(editF ? View.GONE : View.VISIBLE);
 		edit.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -249,8 +251,7 @@ public class WaypointDialogHelper {
 
 		if (app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 			sort.setVisibility(View.VISIBLE);
-			sort.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_sort_waypoint_white
-					: R.drawable.ic_sort_waypoint_dark);
+			sort.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_sort_waypoint_dark));
 			sort.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -272,11 +273,9 @@ public class WaypointDialogHelper {
 		} else {
 			all.setVisibility(View.VISIBLE);
 			if(flat) {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_tree_list_white
-						: R.drawable.ic_tree_list_dark);
+				all.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_tree_list_dark));
 			} else {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_flat_list_white
-						: R.drawable.ic_flat_list_dark);
+				all.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_flat_list_dark));
 			}
 			all.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -300,11 +299,10 @@ public class WaypointDialogHelper {
 	protected View createItemForRadiusProximity(final FragmentActivity ctx, final int type, final int[] running,
 												final int position, final ArrayAdapter<Object> thisAdapter) {
 		View v;
+		IconsCache iconsCache  = app.getIconsCache();
 		v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_radius, null);
 		final TextView radius = (TextView) v.findViewById(R.id.descr);
-		((ImageView) v.findViewById(R.id.waypoint_icon)).setImageResource(
-				app.getSettings().isLightContent() ? R.drawable.ic_poi_radius_white
-						: R.drawable.ic_poi_radius_dark);
+		((ImageView) v.findViewById(R.id.waypoint_icon)).setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_poi_radius_dark));
 		radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 		radius.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -319,16 +317,14 @@ public class WaypointDialogHelper {
 	protected View createItemForCategory(final FragmentActivity ctx, final int type, final int[] running,
 										 final int position, final ArrayAdapter<Object> thisAdapter) {
 		View v;
+		IconsCache iconsCache  = app.getIconsCache();
 		v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
 		ImageView sort = (ImageView) v.findViewById(R.id.sort);
 		//sort button in Destination header
 		if (type == 0 && sort != null && app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 			sort.setVisibility(View.VISIBLE);
-			if (app.getSettings().isLightContent()) {
-				sort.setImageResource(R.drawable.ic_sort_waypoint_white);
-			} else {
-				sort.setImageResource(R.drawable.ic_sort_waypoint_dark);
-			}
+			sort.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_sort_waypoint_dark));
+
 			sort.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
