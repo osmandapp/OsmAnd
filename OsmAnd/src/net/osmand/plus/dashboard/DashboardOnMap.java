@@ -119,8 +119,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			paddingView.setOnClickListener(listener);
 			listView.addHeaderView(paddingView);
 
-			Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.dash_toolbar);
-			tb.setLogo(R.drawable.icon);
+//			Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.dash_toolbar);
+//			tb.setLogo(R.drawable.icon);
 			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
 			final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
 			contentView.post(new Runnable() {
