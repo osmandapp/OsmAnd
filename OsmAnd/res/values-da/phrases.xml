@@ -706,4 +706,21 @@
 	<string name="poi_shop_food">Fødevarebutik</string>
 	<string name="poi_road_obstacle">Vejforhindring</string>
 		<string name="poi_filling_station">Tankstation</string>
-		</resources>
+		<string name="poi_personal_transport">Personlig transport</string>
+		<string name="poi_public_transport">Kollektivtrafik</string>
+		<string name="poi_air_transport">Lufttransport</string>
+		<string name="poi_water_transport">Vandtransport</string>
+		<string name="poi_bicycle_transport">Cykeltransport</string>
+		<string name="poi_aerialway_transport">Lifttransport</string>
+	<string name="poi_transport_construction">Transport konstruktion</string>
+		<string name="poi_water_supply">Vandforsyning</string>
+		<string name="poi_power">Kraft</string>
+		<string name="poi_communication">Kommunikation</string>
+		<string name="poi_trash_disposal">Affaldshåndtering</string>
+	<string name="poi_sightseeing">Seværdigheder</string>
+		<string name="poi_accomodation">Overnatning</string>
+		<string name="poi_internet_access">Internetadgang</string>
+	<string name="poi_club">Klub</string>
+	<string name="poi_cafe_and_restaurant">Cafe og restaurant</string>
+	<string name="poi_craft">Håndværk</string>
+	</resources>
