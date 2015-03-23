@@ -349,13 +349,12 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
-		String idPrefix = getPrefix(child);
+		String name = OsmEditingPlugin.getEditName(child);
+		viewName.setText(name);
 		if (child.getGroup() == OsmPoint.Group.POI) {
-			viewName.setText(idPrefix + " (" + ((OpenstreetmapPoint) child).getSubtype() + ") " + ((OpenstreetmapPoint) child).getName());
 			icon.setImageDrawable(app.getIconsCache().
 					getIcon(R.drawable.ic_type_info, R.color.color_distance));
 		} else if (child.getGroup() == OsmPoint.Group.BUG) {
-			viewName.setText(idPrefix + " (" + ((OsmNotesPoint) child).getAuthor() + ") " + ((OsmNotesPoint) child).getText());
 			icon.setImageDrawable(app.getIconsCache().
 					getIcon(R.drawable.ic_type_bug, R.color.color_distance));
 		}
@@ -646,7 +645,5 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	public static String getPrefix(OsmPoint osmPoint) {
-		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
-	}
+
 }

@@ -324,4 +324,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public int getAssetResourceName() {
 		return R.drawable.osm_editing;
 	}
+
+	public static String getEditName(OsmPoint point){
+		String prefix = getPrefix(point);
+		if (point.getGroup() == OsmPoint.Group.POI) {
+			return prefix + " (" + ((OpenstreetmapPoint) point).getSubtype() + ") " + ((OpenstreetmapPoint) point).getName();
+		} else if (point.getGroup() == OsmPoint.Group.BUG) {
+			return prefix + " (" + ((OsmNotesPoint) point).getAuthor() + ") " + ((OsmNotesPoint) point).getText();
+		} else {
+			return prefix;
+		}
+	}
+
+	private static String getPrefix(OsmPoint osmPoint) {
+		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
+	}
 }
