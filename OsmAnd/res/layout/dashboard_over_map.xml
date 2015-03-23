@@ -12,11 +12,10 @@
         layout="@layout/application_loading"
         android:visibility="gone" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/animateContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
         <net.osmand.plus.dashboard.NotifyingScrollView
             android:id="@+id/main_scroll"
@@ -49,14 +48,24 @@
             android:layout_height="match_parent"
             android:visibility="gone" >
 
-            <ListView
+            <View
+                android:id="@+id/dash_list_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/card_bg"/>
+
+            <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dashboard_map_top_padding"
-                android:background="?attr/card_bg"
                 android:fadeScrollbars="true" >
-            </ListView>
+            </com.github.ksoichiro.android.observablescrollview.ObservableListView>
+            
+            <android.support.v7.widget.Toolbar android:id="@+id/dash_toolbar"
+                android:background="@color/actionbar_light_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></android.support.v7.widget.Toolbar>
 
             <include
                 android:id="@+id/map_part_dashboard"
@@ -64,6 +73,6 @@
                 android:layout_height="@dimen/dashboard_map_top_padding"
                 layout="@layout/map_view_on_dashboard" />
         </FrameLayout>
-    </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

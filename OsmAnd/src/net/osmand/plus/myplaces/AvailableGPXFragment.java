@@ -995,12 +995,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
-			Drawable exportIcon = getResources().getDrawable(R.drawable.ic_action_export);
-			if (light) {
-				exportIcon = exportIcon.mutate();
-				exportIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-			}
-			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(exportIcon);
+			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(getMyApplication().getIconsCache().getActionBarIcon(
+					R.drawable.ic_action_export, light));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
