@@ -1586,7 +1586,7 @@ s často kladenými otázkami.</string>
     <string name="loading_smth">Načítá se %1$s…</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
     <string name="delay_navigation_start">Spustit navigaci automaticky</string>
-    <string name="shared_string_selected_lowercase">vybrané</string>
+    <string name="shared_string_selected_lowercase">vybraný</string>
     <string name="gpx_split_interval">Rozdělit interval</string>
     <string name="gpx_info_subtracks">Podtrasy: %1$s </string>
 	<string name="gpx_info_waypoints">Bodů na trase: %1$s </string>
@@ -1834,8 +1834,8 @@ s často kladenými otázkami.</string>
 	<string name="proxy_port_descr">Nastavit číslo portu proxy (např. 8118)</string>
 	<string name="parking_place">Parkovací místo</string>
     <string name="remove_the_tag">ODSTRANIT ZNAČKU</string>
-    <string name="shared_string_disabled">Zakázané</string>
-	<string name="shared_string_enabled">Povolené</string>
+    <string name="shared_string_disabled">Zakázaný</string>
+	<string name="shared_string_enabled">Povolený</string>
 	<string name="plugin_description_title">Popisek</string>
 	
 <string name="edit_group">Upravit skupinu</string>
@@ -1855,7 +1855,7 @@ s často kladenými otázkami.</string>
 	
 	
 	<string name="watch">Zobrazit</string>
-	<string name="shared_string_selected">Vybrané</string>
+	<string name="shared_string_selected">Vybraný</string>
 	<string name="showed_on_map">Zobrazené na mapě</string>
 	<string name="rename_failed">Přejmenování selhalo.</string>
 	<string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
@@ -1902,6 +1902,6 @@ s často kladenými otázkami.</string>
     <string name="waypoint_visit_before">Navštívit před</string>
     <string name="shared_string_not_use">Nepoužívat</string>
 	<string name="confirmation_to_clear_history">Chcete vyčistit celou historii?</string>
-    <string name="local_osm_changes_upload_all_confirm">Chystáte se nahrát %1$d změn do OSM. Jste si jistý?</string>
-    <string name="shared_string_collapse">Pád</string>
+    <string name="local_osm_changes_upload_all_confirm">Požadujete nahrát %1$d změn do OSM. Jste si jist?</string>
+    <string name="shared_string_collapse">Sbalit</string>
 	</resources>

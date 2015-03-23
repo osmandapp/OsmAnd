@@ -1550,7 +1550,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
     <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
-    <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche. Sicuro?</string>
+    <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche OSM. Sicuro?</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
     <string name="tip_faq">Domande più frequenti</string>
     <string name="osmodroid_refresh">Aggiorna i canali</string>
@@ -1676,7 +1676,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità per  il monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare altri dispositivi e di essere tracciati. Puoi creare gruppo anonimi autonomamente, condividere reciprocamente la posizione e comunicarla. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi sono creati a un numero limitato di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità, d\'altra parte, possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
+    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità per  il monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare altri dispositivi ed essere tracciato. Puoi creare gruppo anonimi autonomamente, condividere reciprocamente la posizione e comunicarla. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi sono creati a un numero limitato di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità, d\'altra parte, possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
     <string name="osmo_plugin_name">Monitoraggio OsMo</string>
     <string name="osmo_settings">Monitoraggio OsMO</string>
    	<string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
@@ -2036,7 +2036,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
 	<string name="plugin_ski_descr">Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali.
-		\n\nÈ disponibile una mappa contenente tutte le piste e percorsi da fondo sotto \'Download\'  \"World ski map\".
 		\n\nQuesta visualizzazione può essere ripristinata sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
 	<string name="plugin_touringview_descr">"Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali.
@@ -2146,10 +2145,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="osm_edits">Modifiche OSM</string>
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
 	<string name="your_edits">Le tue modifiche</string>
-    <string name="osmand_parking_overdue">Obsoleto</string>
-	<string name="delay_to_start_navigation_descr">Avvia automaticamente la novigazione dopo l\'intervallo specificato</string>
+    <string name="osmand_parking_overdue">obsoleto</string>
+	<string name="delay_to_start_navigation_descr">Avvia automaticamente la navigazione dopo l\'intervallo specificato</string>
     <string name="delay_to_start_navigation">Salta la pianificazione del percorso</string>
     <string name="shared_string_go">Vai</string>
 	<string name="shared_string_not_use">Non usare</string>
 	<string name="confirmation_to_clear_history">Vuoi cancellare l\'intera cronologia?</string>
+    <string name="local_osm_changes_upload_all_confirm">Stai per inviare %1$d cambiamenti a OSM. Sei sicuro?</string>
     </resources>
