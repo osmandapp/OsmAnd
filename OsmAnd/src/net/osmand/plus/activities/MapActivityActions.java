@@ -814,7 +814,7 @@ public class MapActivityActions implements DialogProvider {
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-		optionsMenuHelper.item(R.string.shared_string_exit).icon(R.drawable.ic_action_quit_dark )
+		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

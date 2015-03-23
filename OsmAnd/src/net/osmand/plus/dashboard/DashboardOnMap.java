@@ -1,7 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -20,16 +18,18 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.DashTrackFragment;
 import net.osmand.plus.osmedit.DashOsmEditsFragment;
-import net.osmand.plus.osmo.DashOsmoFragment;
 import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -38,7 +38,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,13 +47,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.software.shell.fab.ActionButton;
 
 /**
  * Created by Denis
  * on 03.03.15.
  */
-public class DashboardOnMap {
+public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	public static boolean staticVisible = false;
 	private MapActivity mapActivity;
@@ -77,6 +80,8 @@ public class DashboardOnMap {
 	private NotifyingScrollView scrollView;
 	private View listViewLayout;
 	private ListView listView;
+	private View listBackgroundView;
+	private int mFlexibleSpaceImageHeight;
 	
 
 	public DashboardOnMap(MapActivity ma) {
@@ -100,7 +105,34 @@ public class DashboardOnMap {
 		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
-//		dashboardView.setOnClickListener(listener);
+		if (listView instanceof ObservableListView) {
+			((ObservableListView) listView).setScrollViewCallbacks(this);
+			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
+					R.dimen.dashboard_map_top_padding);
+			// Set padding view for ListView. This is the flexible space.
+			View paddingView = new View(mapActivity);
+			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
+					mFlexibleSpaceImageHeight);
+			paddingView.setLayoutParams(lp);
+			// This is required to disable header's list selector effect
+			paddingView.setClickable(true);
+			paddingView.setOnClickListener(listener);
+			listView.addHeaderView(paddingView);
+
+//			Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.dash_toolbar);
+//			tb.setLogo(R.drawable.icon);
+			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
+			final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+			contentView.post(new Runnable() {
+				@Override
+				public void run() {
+					// mListBackgroundView's should fill its parent vertically
+					// but the height of the content view is 0 on 'onCreate'.
+					// So we should get it with post().
+					listBackgroundView.getLayoutParams().height = contentView.getHeight();
+				}
+			});
+		}
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
 
@@ -127,42 +159,6 @@ public class DashboardOnMap {
 			}
 		});
 		dashboardView.addView(actionButton);
-
-		
-		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			scrollView.setOnScrollChangedListener(onScrollChangedListener);
-			listView.setOnScrollListener(new OnScrollListener() {
-				
-				private TIntObjectHashMap<Integer> listViewItemHeights = new TIntObjectHashMap<Integer>();
-
-				@Override
-				public void onScrollStateChanged(AbsListView view, int scrollState) {
-				}
-				
-				@Override
-				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//					if(listView.getChildCount() == 0) {
-//						return;
-//					}
-//					View c = listView.getChildAt(0);
-//					int sy = -c.getTop();
-//				    listViewItemHeights.put(listView.getFirstVisiblePosition(), c.getHeight());
-//				    for (int i = 0; i < listView.getFirstVisiblePosition(); ++i) {
-//				        if (listViewItemHeights.get(i) != null) // (this is a sanity check)
-//				            sy += listViewItemHeights.get(i); //add all heights of the views that are gone
-//				    }
-//					double scale = view.getContext().getResources().getDisplayMetrics().density;
-//					MarginLayoutParams lp = (MarginLayoutParams) actionButton.getLayoutParams();
-//					lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
-//					((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
-//					MarginLayoutParams llp = (MarginLayoutParams) listView.getLayoutParams();
-//					llp.topMargin = (int) Math.max(5 * scale, 160 * scale - sy);
-//					listView.setLayoutParams(llp);
-//					listView.getParent().requestLayout();
-				}
-			});
-		}
-
 	}
 	
 	private void switchBtnAction() {
@@ -210,7 +206,7 @@ public class DashboardOnMap {
 		return listAdapterOnClickListener;
 	}
 	
-	public void setListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener optionsMenuOnClickListener) {
+	public void setListAdapter(ArrayAdapter<?> listAdapter, final OnItemClickListener optionsMenuOnClickListener) {
 		if(!isVisible()) {
 			mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
 		}
@@ -218,7 +214,19 @@ public class DashboardOnMap {
 		this.listAdapterOnClickListener = optionsMenuOnClickListener;
 		if(this.listView != null) {
 			listView.setAdapter(listAdapter);
-			listView.setOnItemClickListener(optionsMenuOnClickListener);
+			if(listBackgroundView == null) {
+				listView.setOnItemClickListener(optionsMenuOnClickListener);
+			} else if (optionsMenuOnClickListener != null) {
+				listView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						optionsMenuOnClickListener.onItemClick(parent, view, position - 1, id);
+					}
+				});
+			} else {
+				listView.setOnItemClickListener(null);
+			}
 		}
 		setDashboardVisibility(true);
 	}
@@ -530,6 +538,46 @@ public class DashboardOnMap {
 			return true;
 		}
 		return false;
+	}
+
+
+	@Override
+	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+		// Translate list background
+		setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+	}
+
+
+	@SuppressLint("NewApi")
+	private void setTranslationY(View v, int y) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			v.setTranslationY(y);
+		} else {
+	        TranslateAnimation anim = new TranslateAnimation(0, 0, y, y);
+	        anim.setFillAfter(true);
+	        anim.setDuration(0);
+	        v.startAnimation(anim);
+		}
+	}
+
+
+	@Override
+	public void onDownMotionEvent() {
+	}
+
+
+	@Override
+	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+//		 ActionBar ab = getSupportActionBar();
+//	        if (scrollState == ScrollState.UP) {
+//	            if (ab.isShowing()) {
+//	                ab.hide();
+//	            }
+//	        } else if (scrollState == ScrollState.DOWN) {
+//	            if (!ab.isShowing()) {
+//	                ab.show();
+//	            }
+//	        }		
 	}
 
 
