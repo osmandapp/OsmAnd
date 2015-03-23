@@ -335,11 +335,11 @@
 	<string name="poi_theme_park">Park rozrywki</string>
 	
 	<string name="poi_attraction">Atrakcja turystyczna</string>
-	<string name="poi_big_wheel">Diabelski młyn</string>
-	<string name="poi_carousel">Karuzela</string>
-	<string name="poi_maze">Labirynt</string>
-	<string name="poi_roller_coaster">Roller coaster</string>
-	<string name="poi_water_slide">Zjeżdżalnia wodna</string>
+	<string name="poi_attraction_big_wheel">Diabelski młyn</string>
+	<string name="poi_attraction_carousel">Karuzela</string>
+	<string name="poi_attraction_maze">Labirynt</string>
+	<string name="poi_attraction_roller_coaster">Roller coaster</string>
+	<string name="poi_attraction_water_slide">Zjeżdżalnia wodna</string>
 
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_guest_house">Pensjonat</string>
@@ -425,9 +425,9 @@
 
 	<string name="poi_bank">Bank</string>
 	<string name="poi_atm">Bankomat</string>
-	<string name="poi_currencyexchange">Kantor</string>
+	<string name="poi_bureau_de_change">Kantor</string>
 	<string name="poi_accountant">Księgowy</string>
-	<string name="poi_bitcoin">Płatność bitcoinami</string>
+	<string name="poi_bitcoin_yes">Płatność bitcoinami</string>
 
 	<string name="poi_peak">Szczyt</string>
 	<string name="poi_volcano">Wulkan</string>
@@ -483,7 +483,7 @@
 	<string name="poi_office_telecommunication">Urząd telekomunikacji</string>
 	<string name="poi_research">Biuro badań</string>
 	<string name="poi_newspaper">Redakcja gazety</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">Bule</string>
 	<string name="poi_battlefield">Miejsce bitwy</string>
 	</resources>

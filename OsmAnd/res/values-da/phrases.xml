@@ -320,8 +320,8 @@
         <string name="poi_ice_skating">Skøjteløb</string>
         <string name="poi_ice_stock">Isstok</string>
         <string name="poi_korfbal">Korfbal</string>
-        <string name="poi_motor_sport">Motorsport</string>
-        <string name="poi_multi_sport">Multisport</string>
+        <string name="poi_sport_motor">Motorsport</string>
+        <string name="poi_sport_multi">Multisport</string>
         <string name="poi_orienteering">Orienteringsløb</string>
         <string name="poi_paddle_tennis">Padel tennis</string>
         <string name="poi_paragliding">Paragliding</string>
@@ -525,9 +525,9 @@
         <string name="poi_atm">Hæveautomat</string>
         <string name="poi_money_lender">Pengeudlåner</string>
         <string name="poi_pawnbroker">Pantelåner</string>
-        <string name="poi_currencyexchange">Vekselkontor</string>
+        <string name="poi_bureau_de_change">Vekselkontor</string>
         <string name="poi_accountant">Revisor</string>
-        <string name="poi_bitcoin">Bitcoin betaling</string>
+        <string name="poi_bitcoin_yes">Bitcoin betaling</string>
 
         <string name="poi_cave_entrance">Huleindgang</string>
         <string name="poi_peak">Bjergtinde</string>
@@ -640,24 +640,24 @@
 	<string name="poi_place_farm">Gård</string>
 
 	<string name="poi_american_football">Amerikansk fodbold</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_canadian_football">Canadisk fodbold</string>
 	<string name="poi_surfing">Surfing</string>
 	<string name="poi_base">Base jumping</string>
 	<string name="poi_cannon">Historisk kanon</string>
 	<string name="poi_harbour">Havn</string>
 	<string name="poi_dock">Dok</string>
-	<string name="poi_amusement_ride">Forlystelse</string>
+	<string name="poi_attraction_amusement_ride">Forlystelse</string>
 	<string name="poi_attraction_animal">Dyr (attraktion)</string>
-	<string name="poi_big_wheel">Pariserhjul</string>
-	<string name="poi_carousel">Karrusel</string>
-	<string name="poi_maze">Labyrint</string>
-	<string name="poi_roller_coaster">Rutschebane</string>
-	<string name="poi_slide">Rutsjebane, legeplads</string>
-	<string name="poi_summer_toboggan">Sommer kælkning</string>
-	<string name="poi_swing_carousel">Gynge karrusel</string>
+	<string name="poi_attraction_big_wheel">Pariserhjul</string>
+	<string name="poi_attraction_carousel">Karrusel</string>
+	<string name="poi_attraction_maze">Labyrint</string>
+	<string name="poi_attraction_roller_coaster">Rutschebane</string>
+	<string name="poi_attraction_slide">Rutsjebane, legeplads</string>
+	<string name="poi_attraction_summer_toboggan">Sommer kælkning</string>
+	<string name="poi_attraction_swing_carousel">Gynge karrusel</string>
 	<string name="poi_attraction_train">Tog (attraktion)</string>
-	<string name="poi_water_slide">Vandrutsjebane</string>
+	<string name="poi_attraction_water_slide">Vandrutsjebane</string>
 
 	<string name="poi_tower">Tårn</string>
 	<string name="poi_aquarium">Akvarie</string>
@@ -703,4 +703,5 @@
 	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 
+	<string name="poi_shop_food">Fødevarebutik</string>
 	</resources>

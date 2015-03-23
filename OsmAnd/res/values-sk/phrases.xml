@@ -334,15 +334,15 @@
 	<string name="poi_theme_park">Zábavný park</string>
 	
 	<string name="poi_attraction">Turistická atrakcia</string>
-	<string name="poi_amusement_ride">Zábavná jazda</string>
+	<string name="poi_attraction_amusement_ride">Zábavná jazda</string>
 	<string name="poi_attraction_animal">Zviera</string>
-	<string name="poi_big_wheel">Ruské kolo</string>
-	<string name="poi_carousel">Kolotoč</string>
-	<string name="poi_maze">Bludisko</string>
-	<string name="poi_roller_coaster">Horská dráha</string>
-	<string name="poi_slide">Šmykľavka</string>
+	<string name="poi_attraction_big_wheel">Ruské kolo</string>
+	<string name="poi_attraction_carousel">Kolotoč</string>
+	<string name="poi_attraction_maze">Bludisko</string>
+	<string name="poi_attraction_roller_coaster">Horská dráha</string>
+	<string name="poi_attraction_slide">Šmykľavka</string>
 	<string name="poi_attraction_train">Vlak</string>
-	<string name="poi_water_slide">Vodná šmykľavka</string>
+	<string name="poi_attraction_water_slide">Vodná šmykľavka</string>
 
 	<string name="poi_lodging">Ubytovanie</string>
 	<string name="poi_hotel">Hotel</string>
@@ -470,9 +470,9 @@
 	<string name="poi_atm">Bankomat</string>
 	<string name="poi_money_lender">Požičovňa peňazí</string>
 	<string name="poi_pawnbroker">Záložňa</string>
-	<string name="poi_currencyexchange">Zmenáreň</string>
+	<string name="poi_bureau_de_change">Zmenáreň</string>
 	<string name="poi_accountant">Účtovník</string>
-	<string name="poi_bitcoin">Platba cez bitcoin</string>
+	<string name="poi_bitcoin_yes">Platba cez bitcoin</string>
 
 	<string name="poi_cave_entrance">Vstup do jaskyne</string>
 	<string name="poi_peak">Vrchol</string>

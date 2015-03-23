@@ -47,7 +47,7 @@
 	<string name="poi_bicycle_parking">Parking à vélos</string>
 	<string name="poi_bicycle_rental">Location de vélos</string>
 	<string name="poi_biergarten">Brasserie en plein air</string>
-	<string name="poi_bitcoin">Paiement par bitcoins</string>
+	<string name="poi_bitcoin_yes">Paiement par bitcoins</string>
 	<string name="poi_boat_sharing">Partage de voiliers</string>
 	<string name="poi_boatyard">Cale sèche</string>
 	<string name="poi_books">Librairie</string>
@@ -116,7 +116,7 @@
 	<string name="poi_cricket">Cricket</string>
 	<string name="poi_cricket_nets">Cricket (filets d\'entraînement)</string>
 	<string name="poi_croquet">Croquet</string>
-	<string name="poi_currencyexchange">Bureau de change</string>
+	<string name="poi_bureau_de_change">Bureau de change</string>
 	<string name="poi_dam">Barrage</string>
 	<string name="poi_dance_floor">Salle de danse</string>
 	<string name="poi_military_danger_area">Zone dangereuse</string>
@@ -229,7 +229,7 @@
 	<string name="poi_motel">Motel</string>
 	<string name="poi_motorcycle_parking">Parking pour motos</string>
 	<string name="poi_motorway_junction">Jonction d\'autoroutes</string>
-	<string name="poi_multi_sport">Multisports</string>
+	<string name="poi_sport_multi">Multisports</string>
 	<string name="poi_museum">Musée</string>
 	<string name="poi_musical_instrument">Magasin d\'instruments de musique</string>
 	<string name="poi_nature_reserve">Réserve naturelle</string>
@@ -429,7 +429,7 @@
 	<string name="poi_handball">Handball</string>
 	<string name="poi_horse_racing">Course hippique</string>
 	<string name="poi_ice_skating">Patinoire</string>
-	<string name="poi_motor_sport">Sport mécanique</string>
+	<string name="poi_sport_motor">Sport mécanique</string>
 	<string name="poi_paragliding">Parapente</string>
 	<string name="poi_rowing">Aviron</string>
 	<string name="poi_historic_ship">Bateau du patrimoine</string>
@@ -519,7 +519,7 @@
 	<string name="poi_historic_monastery">Monastère historique</string>
 	<string name="poi_fort">Fort</string>
 	<string name="poi_american_football">Football américain</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_canadian_football">Football canadien</string>
 	<string name="poi_cycling">Cyclisme</string>
 	<string name="poi_shooting">Tir</string>
@@ -592,20 +592,20 @@
 	<string name="poi_radio_station">Station radio (amer)</string>
 	<string name="poi_signal_station_traffic">Sémaphore</string>
 	<string name="poi_attraction_animal">Parc animalier</string>
-	<string name="poi_big_wheel">Grande roue</string>
-	<string name="poi_carousel">Carrousel</string>
-	<string name="poi_maze">Labyrinthe</string>
-	<string name="poi_roller_coaster">Montagnes russes</string>
-	<string name="poi_summer_toboggan">Luge d\'été</string>
+	<string name="poi_attraction_big_wheel">Grande roue</string>
+	<string name="poi_attraction_carousel">Carrousel</string>
+	<string name="poi_attraction_maze">Labyrinthe</string>
+	<string name="poi_attraction_roller_coaster">Montagnes russes</string>
+	<string name="poi_attraction_summer_toboggan">Luge d\'été</string>
 	<string name="poi_attraction_train">Train touristique</string>
-	<string name="poi_water_slide">Toboggan aquatique</string>
+	<string name="poi_attraction_water_slide">Toboggan aquatique</string>
 
-	<string name="poi_rugby_union">Union rugby</string>
+	<string name="poi_rugby_union">Club de rugby</string>
 	<string name="poi_rugby_league">Ligue de rugby</string>
 	<string name="poi_surfing">Surf</string>
-	<string name="poi_amusement_ride">Attractions mécaniques</string>
-	<string name="poi_slide">Toboggan</string>
-	<string name="poi_swing_carousel">Carrousel</string>
+	<string name="poi_attraction_amusement_ride">Attractions mécaniques</string>
+	<string name="poi_attraction_slide">Toboggan</string>
+	<string name="poi_attraction_swing_carousel">Carrousel</string>
 	<string name="poi_club_game">Club de jeux</string>
 	<string name="poi_club_fan">Club de fans</string>
 	<string name="poi_club_ethnic">Club ethnique</string>
@@ -669,4 +669,5 @@
 	<string name="poi_internet_access_service">Accès Internet : service</string>
 	
 	<string name="poi_railway_buffer_stop">Heurtoir ferroviaire</string>
+	<string name="poi_shop_food">Magasin alimentaire</string>
 	</resources>

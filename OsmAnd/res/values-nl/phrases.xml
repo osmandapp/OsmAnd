@@ -236,18 +236,18 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_attraction">Toeristische attractie</string>
 	<string name="poi_attraction_animal">Dier (attractie)</string>
-	<string name="poi_big_wheel">Reuzenrad</string>
-	<string name="poi_carousel">Draaimolen</string>
-	<string name="poi_maze">Doolhof</string>
-	<string name="poi_roller_coaster">Achtbaan</string>
-	<string name="poi_amusement_ride">Attractie</string>
+	<string name="poi_attraction_big_wheel">Reuzenrad</string>
+	<string name="poi_attraction_carousel">Draaimolen</string>
+	<string name="poi_attraction_maze">Doolhof</string>
+	<string name="poi_attraction_roller_coaster">Achtbaan</string>
+	<string name="poi_attraction_amusement_ride">Attractie</string>
 	<string name="poi_theme_park">Pretpark</string>
 	
-	<string name="poi_slide">Glijbaan</string>
-	<string name="poi_summer_toboggan">Zomerrodelbaan</string>
-	<string name="poi_swing_carousel">Zweefmolen</string>
+	<string name="poi_attraction_slide">Glijbaan</string>
+	<string name="poi_attraction_summer_toboggan">Zomerrodelbaan</string>
+	<string name="poi_attraction_swing_carousel">Zweefmolen</string>
 	<string name="poi_attraction_train">Trein (attractie)</string>
-	<string name="poi_water_slide">Waterglijbaan</string>
+	<string name="poi_attraction_water_slide">Waterglijbaan</string>
 
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_hostel">Hostel</string>
@@ -410,14 +410,14 @@
 	<string name="poi_compressed_air">Perslucht</string>
 	<string name="poi_aerialway_cable_car">Kabelbaan</string>
 	<string name="poi_aerialway_chair_lift">Stoeltjeslift</string>
-	<string name="poi_aerialway_t_bar">T-bar-lift</string>
-	<string name="poi_aerialway_j_bar">J-bar-lift</string>
-	<string name="poi_aerialway_platter">Knoplift</string>
+	<string name="poi_aerialway_t_bar">2 persoons- sleeplift</string>
+	<string name="poi_aerialway_j_bar">1 persoons- sleeplift</string>
+	<string name="poi_aerialway_platter">schotel sleeplift</string>
 	<string name="poi_aerialway_mixed_lift">Gemengde lift</string>
 	<string name="poi_aerialway_drag_lift">Sleeplift</string>
 	<string name="poi_aerialway_rope_tow">Sleeplift</string>
 	<string name="poi_aerialway_goods">Goederenlift</string>
-	<string name="poi_aerialway_magic_carpet">Tapijtlift</string>
+	<string name="poi_aerialway_magic_carpet">Transportband lift</string>
 
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_bridge">Brug</string>
@@ -430,9 +430,9 @@
 	<string name="poi_standpipe">Standpijp</string>
 	<string name="poi_water_works">Waterwerken</string>
 	<string name="poi_boatyard">Scheepswerf</string>
-	<string name="poi_wastewater_plant">Afvalwaterstation</string>
+	<string name="poi_wastewater_plant">waterzuiveringsinstallatie</string>
 	<string name="poi_lock_gate">Schutsluis</string>
-	<string name="poi_waterway_turning_point">Draaipunt van vaarweg</string>
+	<string name="poi_waterway_turning_point">Zwaaikom</string>
 	<string name="poi_weir">Stuw</string>
 	<string name="poi_water_mill">Watermolen</string>
 
@@ -480,7 +480,7 @@
 	<string name="poi_waste_basket">Prullenbak</string>
 
 	<string name="poi_adit">Horizontale mijnschacht</string>
-	<string name="poi_survey_point">Landmeetpunt</string>
+	<string name="poi_survey_point">Landmeet punt</string>
 	<string name="poi_quarry">Groeve</string>
 	<string name="poi_cricket_nets">Cricket-netten</string>
 
@@ -512,7 +512,7 @@
 	<string name="poi_base">Basejumpen</string>
 	<string name="poi_baseball">Honkbal</string>
 	<string name="poi_beachvolleyball">Beachvolleybal</string>
-	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">Petanque</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_canadian_football">Canadian football</string>
@@ -523,8 +523,8 @@
 	<string name="poi_hockey">Hockey</string>
 	<string name="poi_ice_stock">IJsstokschieten</string>
 	<string name="poi_korfbal">Korfbal</string>
-	<string name="poi_motor_sport">Motorsport</string>
-	<string name="poi_multi_sport">Meerdere sporten</string>
+	<string name="poi_sport_motor">Motorsport</string>
+	<string name="poi_sport_multi">Meerdere sporten</string>
 	<string name="poi_paddle_tennis">Tafeltennis</string>
 	<string name="poi_roller_skating">Rolschaatsen</string>
 	<string name="poi_rowing">Roeien</string>
@@ -632,8 +632,8 @@
 	<string name="poi_boat_sharing">Boot delen</string>
 	<string name="poi_money_lender">Kredietvertrekker</string>
 	<string name="poi_pawnbroker">Pandjesbaas</string>
-	<string name="poi_currencyexchange">Geldwisselkantoor</string>
-	<string name="poi_bitcoin">Bitcoin betaling</string>
+	<string name="poi_bureau_de_change">Geldwisselkantoor</string>
+	<string name="poi_bitcoin_yes">Bitcoin betaling</string>
 
 	<string name="poi_stone">Natuursteen</string>
 	<string name="poi_cape">Kaap</string>
@@ -684,4 +684,5 @@
 	<string name="poi_military_barracks">Kazerne</string>
 	<string name="poi_military_danger_area">Gevaarlijke gebied</string>
 	<string name="poi_military_range">Militaire schietbaan</string>
+	<string name="poi_shop_food">Supermarkt</string>
 	</resources>
