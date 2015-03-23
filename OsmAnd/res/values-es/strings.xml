@@ -772,7 +772,7 @@
 \n\nCualquiera de estos mapas puede ser utilizado como el mapa principal (base) que se mostrará en la pantalla del mapa de OsmAnd, o como una capa superior o inferior a otro mapa base (como mapas en línea regulares de OsmAnd). Para hacer los mapas subyacentes más visibles, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' como se desee.
 \n\nLos mapas de teselas pueden obtenerse directamente a través de fuentes en línea, o pueden ser preparados para su uso fuera de línea (y copiarse manualmente en la carpeta de datos de OsmAnd) como una base de datos sqlite que puede producirse por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra las configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Este extra habilita la característica de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla direccional-pad, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, como tu posición anuncianda automáticamente.</string>
+  <string name="osmand_accessibility_description">Este extra habilita las características de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, por ejemplo para el anuncio automático de tu posición.</string>
   
   
   
@@ -1441,7 +1441,7 @@
     <string name="app_mode_aircraft">Avión</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
-    <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios osm. ¿Quieres continuar?</string>
+    <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios OSM. ¿Quieres continuar?</string>
     <string name="shared_string_delete_all">Borrar todo</string>
     <string name="osmodroid_refresh">Renueva los canales</string>
     <string name="amenity_type_seamark">Náutica</string>
@@ -1560,8 +1560,8 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
-    <string name="osmo_plugin_description">"Este extra proporciona la funcionalidad para la monitorización avanzada en línea OsMo, ver http://osmo.mobi.\n\nPuede hacer seguimiento de otros dispositivos y ser seguido. Puede crear expontáneamente grupos anónimos, compartir las ubicaciones de cada uno y comunicar. Viene con varias opciones para hacer seguimiento por sesión o seguimiento permanente.
-\n\nLos grupos anónimos son creados por un número de días específico y con limitadas características, por ejemplo, no hay control remoto ni administrador de grupo. Grupos con funcionalidad completa deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
+    <string name="osmo_plugin_description">"Este extra proporciona la funcionalidad para la monitorización avanzada en línea OsMo, ver http://osmo.mobi.\n\nPuede hacer seguimiento de otros dispositivos y ser seguido. Puede crear espontáneamente grupos anónimos, compartir las ubicaciones de cada uno y comunicar. Viene con varias opciones para hacer seguimiento por sesión o seguimiento permanente.
+\n\nLos grupos anónimos son creados para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador de grupo. Grupos con funcionalidad completa deben ser creados en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">Monitorización OsMo</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1642,7 +1642,7 @@
 	<string name="osmo_follow">Seguir</string>
     <string name="osmo_sign_in">Ingresar</string>
     <string name="osmo_create_groups_confirm">Con el fin de crear grupos es necesario ser usuario registrado de OsMo.</string>
-    <string name="osmo_credentials_not_valid">Tus credenciales osmo no son válidas.</string>
+    <string name="osmo_credentials_not_valid">Tus credenciales OsMo no son válidas.</string>
     <string name="osmo_regenerate_login_ids_confirm">¿Estás seguro de regenerar los identificadores personales? Todos los dispositivos conectados a ti, no serán capaces de registrarte nunca más.</string>
     <string name="osmo_regenerate_login_ids">Regenerar identificación del usuario</string>
     <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
@@ -1940,10 +1940,8 @@
 		\n\nUn archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.
 		\n\nEsta vista se puede revertir desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .
 	</string>
-	<string name="plugin_ski_descr">Activar esta vista cambia el estilo de mapa a \'invierno y esquí\', mostrando las características de terreno en condiciones invernales.
-		\n\nUn mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.
-		\n\nEsta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.
-	</string>
+	<string name="plugin_ski_descr">"Este extra para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, esquí alpino y teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran con un código de colores en función de su dificultad, y representados con un estilo de mapa especial \'Invierno\' que lo asimila a un paisaje invernal nevado.
+\n\nActivando esta vista cambia el estilo de mapa a \'Invierno y esquí\', mostrando las características de terreno en condiciones invernales. Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado. "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo de mapa a la \'Vista Turística\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
 \n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación).
 \n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mistrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
@@ -1965,7 +1963,7 @@
 	<string name="action_modify">Acción modificar</string>
 	<string name="action_delete">Acción borrar</string>
 	<string name="osm_edits">Ediciones OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Izquierda</string> <string name="parking_place_limited">Aparcamiento de tiempo limitado</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Izquierda</string> <string name="parking_place_limited">Aparcamiento de tiempo limitado a</string>
 	<string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar después</string>
     <string name="waypoint_visit_before">Visitar antes</string>
@@ -1990,4 +1988,6 @@
     <string name="shared_string_go">Ir</string>
 	<string name="delay_to_start_navigation_descr">Comienza la navegación automáticamente después de un intervalo dado</string>
     <string name="shared_string_not_use">No usar</string>
-	</resources>
+	<string name="local_osm_changes_upload_all_confirm">Estás a punto de subir %1$d cambios a OSM. ¿Estás seguro?</string>
+    <string name="confirmation_to_clear_history">¿Quieres borrar toda la historia?</string>
+    </resources>
