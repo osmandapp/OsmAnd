@@ -28,11 +28,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <include
+                <FrameLayout
                     android:id="@+id/map_part_dashboard"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dashboard_map_top_padding"
-                    layout="@layout/map_view_on_dashboard" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dashboard_map_top_padding" >
+
+                    <Button
+                        android:id="@+id/map_download_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/shared_string_download"
+                        android:visibility="gone" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:id="@+id/content"
@@ -52,7 +60,7 @@
                 android:id="@+id/dash_list_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/card_bg"/>
+                android:background="?attr/card_bg" />
 
             <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"
@@ -60,19 +68,24 @@
                 android:layout_height="match_parent"
                 android:fadeScrollbars="true" >
             </com.github.ksoichiro.android.observablescrollview.ObservableListView>
-            <!-- 
+            <!--
             <android.support.v7.widget.Toolbar android:id="@+id/dash_toolbar"
                 android:background="@color/actionbar_light_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 ></android.support.v7.widget.Toolbar>
- 			-->
-            <include
-                android:id="@+id/map_part_dashboard"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dashboard_map_top_padding"
-                layout="@layout/map_view_on_dashboard" />
+            -->
         </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/map_menu_button"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginTop="@dimen/map_button_margin"
+            android:background="@drawable/btn_inset_circle"
+            android:src="@drawable/ic_action_remove_light" />
     </FrameLayout>
 
 </FrameLayout>

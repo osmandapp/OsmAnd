@@ -109,6 +109,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
+		scrollView.setOnScrollChangedListener(new NotifyingScrollView.OnScrollChangedListener() {
+			public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+				int sy = who.getScrollY();
+				updateTopButton(sy);
+			}
+		});
 		if (listView instanceof ObservableListView) {
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
@@ -133,7 +139,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					// mListBackgroundView's should fill its parent vertically
 					// but the height of the content view is 0 on 'onCreate'.
 					// So we should get it with post().
-					listBackgroundView.getLayoutParams().height = contentView.getHeight();
+					if(listBackgroundView != null) {
+						listBackgroundView.getLayoutParams().height = contentView.getHeight();
+					}
 				}
 			});
 		}
@@ -250,23 +258,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			dashboardView.setVisibility(View.VISIBLE);
 			actionButton.show();
 			updateDownloadBtn();
+			switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
 			if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
 				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
-				switchButton = (ImageView) scrollView.findViewById(R.id.map_menu_button);
-				if(switchButton == null) {
-					switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
-				}
+				
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
 						R.color.icon_color_light));
 				mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			} else {
 				scrollView.setVisibility(View.GONE);
-				switchButton = (ImageView) listViewLayout.findViewById(R.id.map_menu_button);
-				if(switchButton == null) {
-					switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
-				}
 				listViewLayout.setVisibility(View.VISIBLE);
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_dashboard_dark,
 						R.color.icon_color_light));
@@ -450,15 +452,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 
-	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
-		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-			int sy = who.getScrollY();
-			double scale = who.getContext().getResources().getDisplayMetrics().density;
-			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
-			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - sy);
-			((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
-		}
-	};
 	
 
 	public boolean isVisible() {
@@ -548,7 +541,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 		// Translate list background
-		setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+		if(listBackgroundView != null) {
+			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+		}
+		updateTopButton(scrollY);
+	}
+
+
+	private void updateTopButton(int scrollY) {
+		if (actionButton != null) {
+			double scale = mapActivity.getResources().getDisplayMetrics().density;
+			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
+			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - scrollY);
+			((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
+		}
 	}
 
 
