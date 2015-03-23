@@ -1,18 +1,12 @@
 package net.osmand.plus.osmedit;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
-import net.osmand.plus.R;
-
-import java.text.MessageFormat;
 
 /**
  * Created by Denis
@@ -41,6 +35,7 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 		this.remotepoi = remotepoi;
 		this.remotebug = remotebug;
 		this.listSize = listSize;
+		this.ctx = ctx;
 		dbpoi = new OpenstreetmapsDbHelper(ctx.getActivity());
 		dbbug = new OsmBugsDbHelper(ctx.getActivity());
 	}

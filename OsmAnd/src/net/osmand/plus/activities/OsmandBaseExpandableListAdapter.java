@@ -1,9 +1,10 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.R;
 import android.view.View;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+
+import net.osmand.plus.R;
 
 public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableListAdapter {
 

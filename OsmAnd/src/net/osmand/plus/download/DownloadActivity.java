@@ -1,22 +1,5 @@
 package net.osmand.plus.download;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import android.graphics.Color;
-
-import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +13,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -113,8 +112,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		progressMessage = (TextView) findViewById(R.id.ProgressMessage);
 		progressPercent = (TextView) findViewById(R.id.ProgressPercent);
 		cancel = (ImageView) findViewById(R.id.Cancel);
-		int d = settings.isLightContent() ? R.drawable.a_1_navigation_cancel_small_light : R.drawable.a_1_navigation_cancel_small_dark;
-		cancel.setImageDrawable(getResources().getDrawable(d));
+		cancel.setImageDrawable(getMyApplication().getIconsCache() .getContentIcon(R.drawable.a_1_navigation_cancel_small_dark));
 		cancel.setOnClickListener(new View.OnClickListener() {
 
 			@Override

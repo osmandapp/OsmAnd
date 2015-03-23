@@ -78,6 +78,7 @@
 		style="?attr/dashboardGeneralButtonStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginRight="0dp"
 		android:text="@string/remove_the_tag"/>
 
 </LinearLayout>

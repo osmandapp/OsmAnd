@@ -1,14 +1,20 @@
 package net.osmand.plus.osmedit;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Xml;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -34,26 +40,20 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Xml;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
-	
+	private final OsmEditingPlugin plugin;
+
 	private OsmandMapTileView view;
 	
 	private Paint pointClosedUI;
@@ -74,8 +74,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private OsmBugsRemoteUtil remote;
 	private MapLayerData<List<OpenStreetNote>> data;
 	
-	public OsmBugsLayer(MapActivity activity){
+	public OsmBugsLayer(MapActivity activity, OsmEditingPlugin plugin){
 		this.activity = activity;
+		this.plugin = plugin;
 		local = new OsmBugsLocalUtil(activity);
 		remote = new OsmBugsRemoteUtil(activity.getMyApplication());
 	}
@@ -218,6 +219,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public void clearCache() {
 		if(data != null) {
 			data.clearCache();
+		}
+		if (plugin != null){
+			plugin.collectLocalOsmEdits();
 		}
 	}
 	

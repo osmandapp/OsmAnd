@@ -1,45 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import java.io.File;
-import java.text.Collator;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.LocalIndexesFragment;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -47,9 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -75,6 +33,48 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.LocalIndexesFragment;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.text.Collator;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -944,15 +944,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
-		boolean light = getMyApplication().getSettings().isLightContent();
+		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		Drawable showIcon = getResources().getDrawable(R.drawable.ic_show_on_map);
-		if (light) {
-			showIcon = showIcon.mutate();
-			showIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
-		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(showIcon);
+
+		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_on_map).setIcon(iconsCache.getContentIcon(R.drawable.ic_show_on_map));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -962,7 +958,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		});
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -978,9 +974,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(
-						getMyApplication().getIconsCache().getActionBarIcon(
-								R.drawable.ic_action_gshare_dark, light));
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_gshare_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -995,8 +989,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(getMyApplication().getIconsCache().getActionBarIcon(
-					R.drawable.ic_action_export, light));
+			item = optionsMenu.getMenu().add(R.string.shared_string_export).setIcon(iconsCache.getContentIcon(R.drawable.ic_action_export));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -1008,7 +1001,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
-				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

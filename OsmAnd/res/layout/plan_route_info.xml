@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:gravity="center"
-                android:textColor="@color/color_invalid"></TextView>
+                android:textColor="@color/color_invalid"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,14 +47,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp"/>
 
                 <Spinner
                     android:id="@+id/FromSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"></Spinner>
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -89,7 +89,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"></Spinner>
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <View

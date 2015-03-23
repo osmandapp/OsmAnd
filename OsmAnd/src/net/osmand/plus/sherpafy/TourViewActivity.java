@@ -1,27 +1,19 @@
 package net.osmand.plus.sherpafy;
 
-import java.util.WeakHashMap;
 import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
-import android.os.Build;
-import android.support.v4.view.MenuItemCompat;
-import android.view.Menu;
-import android.view.MenuItem;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
-import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,6 +22,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
+import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+
+import java.util.WeakHashMap;
 
 /**
  */
