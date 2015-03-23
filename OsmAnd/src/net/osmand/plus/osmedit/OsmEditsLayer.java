@@ -148,7 +148,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public String getObjectDescription(Object o) {
 		if(o instanceof OsmPoint) {
 			OsmPoint point =  (OsmPoint) o;
-			OsmEditingPlugin.getEditName(point);
+			return OsmEditingPlugin.getEditName(point);
 		}
 		return null;
 	}
