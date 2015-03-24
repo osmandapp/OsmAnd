@@ -328,7 +328,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
 			boolean cancelDestinationId = false;
 			if(followTargetLocation != null ) {
-				if(pn == null || pn.point == null || !pn.point.equals(followTargetLocation) ) {
+				if(pn == null || pn.point == null || MapUtils.getDistance(pn.point, followTargetLocation) > 10) {
 					cancelDestinationId = true;
 				}
 			}
@@ -360,7 +360,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				sameObject = false; 
 			}
 			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
-			final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
+			final boolean centered = followMapLocation != null && MapUtils.getDistance(mapLoc, followMapLocation) < 1;
 			if(sameObject || centered) {
 				final LatLon loc;
 				if(centered ) {
