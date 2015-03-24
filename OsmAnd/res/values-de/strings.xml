@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
 	<string name="traffic_warning_payment">Mautstelle</string>
@@ -215,7 +216,7 @@
 	<string name="backToMenu">Zurück zum Menü</string>
 	<string name="zoomOut">Herauszoomen</string>
 	<string name="zoomIn">Hereinzoomen</string>
-	<string name="zoomIs">Zoom ist</string>
+	<string name="zoomIs">Zoom-Level ist</string>
 	<string name="north">Nord</string>
 	<string name="north_north_east">Nord-Nord-Ost</string>
 	<string name="north_east">Nord-Ost</string>
@@ -1169,7 +1170,7 @@
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Anwendungen benötigt und ist für das Herunterladen vorausgewählt.</string>
 	
 	<string name="local_index_routing_data">Routing-Daten</string>
-	<string name="navigate_point_format">Format:</string>
+	<string name="navigate_point_format">Format</string>
 	<string name="poi_search_desc">POI-Suche (Point of Interest)</string>
 	<string name="address_search_desc">Adress-Suche</string>
 	<string name="navpoint_search_desc">Koordinaten</string>
