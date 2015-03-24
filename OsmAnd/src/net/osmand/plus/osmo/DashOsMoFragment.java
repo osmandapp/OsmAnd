@@ -174,17 +174,29 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			return;
 		}
 
+		String trackerId = plugin.getService().getMyGroupTrackerId();
 		List<OsMoGroupsStorage.OsMoDevice> devices =
-				new ArrayList<>(mainGroup.getVisibleGroupUsers(plugin.getService().getMyGroupTrackerId()));
+				new ArrayList<>(mainGroup.getVisibleGroupUsers(trackerId));
 
-		while (devices.size() > 3) {
-			devices.remove(devices.size() - 1);
+		if (devices.size() > 3) {
+			while (devices.size() > 3) {
+				devices.remove(devices.size() - 1);
+			}
+		} else {
+			if (groups.size() > 0){
+				for (OsMoGroupsStorage.OsMoGroup grp : groups) {
+					if (grp.getVisibleGroupUsers(trackerId).size() > 0) {
+						
+					}
+				}
+			}
 		}
+
 
 		setupDeviceViews(contentList, devices);
-		if (devices.size() < 3 && groups.size() > 0) {
-			setupGroupsViews(3 - devices.size(), groups, contentList);
-		}
+//		if (devices.size() < 3 && groups.size() > 0) {
+//			setupGroupsViews(3 - devices.size(), groups, contentList);
+//		}
 	}
 
 	private LinearLayout getClearContentList(View mainView) {
