@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -2127,4 +2128,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="local_osm_changes_upload_all_confirm">Idete odoslať %1$d zmien do OSM. Ste si istí?</string>
     <string name="confirmation_to_clear_history">Chcete vymazať celú históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
+	<string name="osmo_grop_name_length_alert">Názov skupiny by mal mať aspoň 3 písmená!</string>
 	</resources>

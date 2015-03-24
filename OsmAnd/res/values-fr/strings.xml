@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1315,7 +1316,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
     <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
-    <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de l\'enregistrer au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant soit en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
@@ -1996,4 +1997,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
     <string name="delay_to_start_navigation">Passer le calcul d\'itinéraire</string>
-    </resources>
+    <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
+	</resources>

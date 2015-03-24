@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1975,5 +1976,5 @@
 	<string name="shared_string_not_use">Ikke brugt</string>
 	<string name="confirmation_to_clear_history">Skal hele historikken slettes?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
-    <string name="osmo_grop_name_length_alert">Gruppenavn skal være mindst 3 tegn langt!</string>
+    <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
     </resources>

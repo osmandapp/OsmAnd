@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -1838,4 +1839,5 @@
     <string name="shared_string_go">Kör</string>
 	<string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
     <string name="confirmation_to_clear_history">Vill du ta bort hela historiken?</string>
-    </resources>
+    <string name="osmo_grop_name_length_alert">Gruppnamn bör vara minst tre tecken långa!</string>
+	</resources>
