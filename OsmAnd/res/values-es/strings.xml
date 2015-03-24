@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1989,4 +1990,5 @@
     <string name="shared_string_not_use">No usar</string>
 	<string name="local_osm_changes_upload_all_confirm">Estás a punto de subir %1$d cambios a OSM. ¿Estás seguro?</string>
     <string name="confirmation_to_clear_history">¿Quieres borrar toda la historia?</string>
-    </resources>
+    <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos 3 símbolos!</string>
+	</resources>
