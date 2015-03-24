@@ -26,16 +26,19 @@ public class DirectionDrawable extends Drawable {
 		this(ctx, width, height);
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
+		this.resourceId = resourceId;
 	}
 	
 	public void setImage(int resourceId, int clrId) {
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
-		arrowImage = iconsCache.getIcon(resourceId, clrId);		
+		arrowImage = iconsCache.getIcon(resourceId, clrId);
+		this.resourceId = resourceId;
 	}
 
 	public void setImage(int resourceId){
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, 0);
+		this.resourceId = resourceId;
 	}
 
 
