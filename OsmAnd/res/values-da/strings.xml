@@ -1976,4 +1976,5 @@
 	<string name="shared_string_not_use">Ikke brugt</string>
 	<string name="confirmation_to_clear_history">Skal hele historikken slettes?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
-    </resources>
+    <string name="osmo_grop_name_length_alert">Gruppenavn skal være mindst 3 tegn langt!</string>
+	</resources>
