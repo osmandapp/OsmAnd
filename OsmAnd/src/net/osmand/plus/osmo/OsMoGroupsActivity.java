@@ -433,10 +433,18 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		actionMode = startSupportActionMode(new ActionMode.Callback() {
 			private OsMoDevice device;
 			private OsMoGroup group;
+			private Menu menu;
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectedObject = o;
+				boolean portrait = ScreenOrientationHelper.isOrientationPortrait(OsMoGroupsActivity.this);
+				if (portrait) {
+					menu = getClearToolbar(true).getMenu();
+				} else {
+					getClearToolbar(false);
+				}
+				this.menu = menu;
 				device = (OsMoDevice) (o instanceof OsMoDevice ? o : null);
 				group = (OsMoGroup) (o instanceof OsMoGroup ? o : null);
 				MenuItem mi = null;
@@ -446,31 +454,31 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 				if (device != null && device.getLastLocation() != null) {
 					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_dark,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 						// there is a bug in Android 4.2 layout
-						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				///
 				if (device != null) {
 					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
-							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
 					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
 												// there is a bug in Android 4.2 layout
-							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
 				}
 				if (group != null) {
 					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_dark,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
 					createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 							R.drawable.ic_action_delete_dark,
-							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 
 
@@ -500,6 +508,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			public void onDestroyActionMode(ActionMode mode) {
 				selectedObject = null;
 				refreshList();
+				if (ScreenOrientationHelper.isOrientationPortrait(OsMoGroupsActivity.this)){
+					onCreateOptionsMenu(menu);
+				}
 			}
 
 			@Override

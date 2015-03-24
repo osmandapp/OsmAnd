@@ -509,10 +509,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-				.iconColor(R.drawable.ic_action_refresh_dark)
+				.icon(R.drawable.ic_action_refresh_dark)
 				.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.shared_string_delete)
-				.iconColor(R.drawable.ic_action_delete_dark)
+				.icon(R.drawable.ic_action_delete_dark)
 				.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
 				.listen(listener).position(3).reg();
