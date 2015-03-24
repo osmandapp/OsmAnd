@@ -631,6 +631,7 @@ public class MapActivityActions implements DialogProvider {
 
 	public void prepareConfigureMap() {
 		currentDrawer = DrawerType.CONFIGURE_MAP;
+		//mapActivity.getClearToolbar(true);
 		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
 	}
 

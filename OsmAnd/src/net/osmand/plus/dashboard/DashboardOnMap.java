@@ -92,13 +92,33 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		this.mapActivity = ma;
 	}
 
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) dashboardView.findViewById(R.id.toolbar);
+		if (tb == null) {
+			return null;
+		}
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		setToolbarVisibility(visible);
+		return tb;
+	}
+
+	public void setToolbarVisibility(boolean visible){
+		int visibility = visible? View.VISIBLE : View.GONE;
+		View toolbar = dashboardView.findViewById(R.id.toolbar);
+		if (toolbar != null) {
+			toolbar.setVisibility(visibility);
+		}
+		View buttons = dashboardView.findViewById(R.id.map_menu_button);
+		if (buttons != null) {
+			buttons.setVisibility(visibility);
+		}
+
+		actionButton.setVisibility(visibility);
+	}
 
 	public void createDashboardView() {
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
-//		dashboardView = (FrameLayout) mapActivity.getLayoutInflater().inflate(R.layout.dashboard_over_map, null, false);
-//		dashboardView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//				ViewGroup.LayoutParams.MATCH_PARENT));
-//		((FrameLayout) mapActivity.findViewById(R.id.MapHudButtonsOverlay)).addView(dashboardView);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override

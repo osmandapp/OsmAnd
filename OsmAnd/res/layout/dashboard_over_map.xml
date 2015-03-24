@@ -68,13 +68,6 @@
                 android:layout_height="match_parent"
                 android:fadeScrollbars="true" >
             </com.github.ksoichiro.android.observablescrollview.ObservableListView>
-            <!--
-            <android.support.v7.widget.Toolbar android:id="@+id/dash_toolbar"
-                android:background="@color/actionbar_light_color"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></android.support.v7.widget.Toolbar>
-            -->
         </FrameLayout>
 
         <ImageButton
@@ -86,6 +79,13 @@
             android:layout_marginTop="@dimen/map_button_margin"
             android:background="@drawable/btn_inset_circle"
             android:src="@drawable/ic_action_remove_light" />
+
+		<net.osmand.plus.activities.search.toolbar.SplitToolbar
+			android:id="@+id/toolbar"
+			android:background="@drawable/gradient_toolbar"
+			android:layout_width="fill_parent"
+			android:layout_height="65dp"/>
     </FrameLayout>
+
 
 </FrameLayout>

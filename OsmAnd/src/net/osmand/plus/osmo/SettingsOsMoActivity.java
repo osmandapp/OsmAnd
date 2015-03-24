@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -129,12 +130,24 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			ScrollView sv = new ScrollView(this);
 			TextView tv = new TextView(this);
 			sv.addView(tv);
-			tv.setText(bs.toString());
+			final String log = bs.toString();
+			tv.setText(log);
 			tv.setPadding(5, 0, 5, 5);
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
 			tv.setMovementMethod(LinkMovementMethod.getInstance());
 			bld.setView(sv);
-			bld.setPositiveButton(R.string.shared_string_ok, null);
+			bld.setNegativeButton(R.string.shared_string_ok, null);
+			bld.setPositiveButton(R.string.shared_string_share, new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					final Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, log);
+					sendIntent.setType("text/plain");
+					startActivity(sendIntent);
+				}
+			});
 			bld.show();
 			return true;
 		} else if(preference == trackerId) {

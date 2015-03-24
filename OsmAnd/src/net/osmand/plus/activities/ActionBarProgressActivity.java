@@ -49,6 +49,5 @@ public class ActionBarProgressActivity extends OsmandActionBarActivity {
 		if (toolbar != null) {
 			toolbar.setVisibility(visible? View.VISIBLE : View.GONE);
 		}
-
 	}
 }
