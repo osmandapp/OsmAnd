@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -175,11 +174,11 @@
 	<string name="driving_region_canada">Cànada</string>
 	<string name="driving_region_europe_asia">Europa e Àsia</string>
 	<string name="driving_region_uk">UK, Ìndia, Austràlia e Àteros</string>
-	<string name="osmodroid_mode_on">Firma OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Avia/Inghitza OsMoDroid</string>
-    <string name="osmodroid_refresh">Agiorna sos canales</string>
-    <string name="osmodroid_seek">Chirca ogetu</string>
-    <string name="osmodroid_unseek">Ogetu non agatau</string>
+	    
+    
+    
+    
+    
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e Àteras</string>
 	<string name="driving_region_japan">Giappone</string>
 	<string name="announce_gpx_waypoints">Annuntzia sos puntos de coladòrgiu GPX</string>
@@ -406,9 +405,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Cua sas làcanas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Su plugin OsMoDroid est in una versione disusada e depet èssere postu a die.</string>
-    <string name="osmodroid_plugin_description">Su plugin OsMoDroid est un estensione OsmAnd pro s’aplicu pro sas tareas de arrastamentu in tempus reale OsModroid. Sas informatziones sunt disponìbiles in su giassu http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Curretzione artària</string>
 	<string name="tip_altitude_offset_t">"Sa majoria de sos dispositivos GPS marcana sa medida de s’artaria in su sistema de referèntzia WGS84 basadu in supra de un ellissoide. Pro custu una conversione in sos sistemas de referèntzia impreados localmente rechedidi una curretzione dipendente dae sa positzione.
 \n\nUna aprossimassione a custos sistemas de referèntzia locales est su EGM96. OsmAnd como suportada sa bisualizzatzione automàtica de s’artaria in su sistema EGM96.
@@ -1821,7 +1820,7 @@
 	<string name="avoid_roads_msg">Podes cambiare s’àndala ischertande sas istradas de istransire</string>
     <string name="save_track_to_gpx_globally_headline">Registratzione de sa rasta a segus de rechesta</string>
 	<string name="settings_privacy">Privadesa</string>
-    <string name="recents">REGHENTES</string>
+    
 	<string name="enable_proxy_title">Abìlita HTTP Proxy</string>
 	<string name="enable_proxy_descr">Cunfigura HTTP Proxy pro totu sas rechestas de sa retza</string>
 	<string name="proxy_host_title">Proxy Host</string>
@@ -1834,7 +1833,7 @@
     <string name="version_settings_descr">Iscàrriga versiones de isvilupu</string>
     <string name="version_settings">Versiones</string>
     <string name="points">Puntos</string>
-    <string name="tracks">Rastas</string>
+    
     <string name="shared_string_my_location">Positzione mea</string>
     <string name="osm_editing_manage">Amministra</string>
     <string name="gps_status">Istadu GPS</string>
@@ -1882,7 +1881,7 @@
 \n\nNo est netzessàriu iscarrigare una mapa ispetziale, sa vista est creada dae sas mapas istandard.
 \n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles. "</string>
 	
-	<string name="showed_on_map">Ammustradu in sa mapa</string>
+	
 	<string name="days_behind">dies faghet</string>
 	<string name="shared_string_currently_recording_track">Rasta in registratzione como</string>
 	<string name="back_to_map">Torra a sa mapa</string>

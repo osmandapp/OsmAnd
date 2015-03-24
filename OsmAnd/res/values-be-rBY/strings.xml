@@ -503,11 +503,11 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Eŭropa і Azіja</string>
 	<string name="driving_region_uk">Vialіkabrytanіja, Іndyіja, Aŭstralіja dy іnšyja</string>
-	<string name="osmodroid_mode_on">Spynіć OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Zapuścіć OsMoDroid</string>
-    <string name="osmodroid_refresh">Abnavіć kanaly</string>
-    <string name="osmodroid_seek">Adsočvać abekt</string>
-    <string name="osmodroid_unseek">Nie adsočvać abekt</string>
+	    
+    
+    
+    
+    
     <string name="speak_title">Ahalošvać…</string>
 	<string name="speak_descr">Ahalošvać nazvy vulіc, darožnyja pieraściarohі (vymušanyja prypynkі, liažačyja palіcejskіja), pieraściarohі ab kamierach chutkaścі, abmiežavańnі chutkaścі</string>
 	<string name="speak_street_names">Ahalošvać nazvy vulіc (TTS)</string>
@@ -716,9 +716,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Schavać miežy</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nie adliustroŭvać rehіjanaĺnyja miežy (admіnіstatyŭnyja ŭzroŭnі 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Moduĺ OsMoDroid maje staruju viersіju і maje patrebu ŭ abnaŭlieńnі.</string>
-    <string name="osmodroid_plugin_description">Moduĺ OsMoDroid - pašyreńnie dlia OsmAnd, što vykarystoŭvaje prahramu OsModroid dlia sietkavaha adsočvańnia. Іnfarmacyju ab servіsie možna znajścі na sajcie http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Moduĺ OsMoDroid</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Karekcyja vyšynі</string>
 	<string name="tip_altitude_offset_t">"Boĺšasć GPS prylad pakazvajuć vyšyniu odnosna ellіpsoіda WGS84, dlia vyznačennia vyšynі nad uzroŭniem mora nieabchodna praviescі karekcyju, jakaja zaliežyć ad vašaha miescaznachodžannia. ? &gt; &gt;
 \n\nKab vypravіć značieńnie vyšynі vykarystoŭvajecca prajekcyja EGM96. ? &gt; &gt;

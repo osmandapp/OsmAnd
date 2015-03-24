@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1046,7 +1045,7 @@
     <string name="download_roads_only_item">"Carreteres "</string>
     <string name="download_regular_maps">Mapes estàndards</string>
     <string name="rendering_attr_noAdminboundaries_description">No mostra els límits administratius regionals (nivells 5 a 9)</string>
-    <string name="osmodroid_plugin_name">Connector OsMoDroid</string>
+    
 	<string name="tip_altitude_offset">Correcció de l\'altitud</string>
 	<string name="map_widget_max_speed">Límit de velocitat</string>
     <string name="monitoring_control_start">Inicia</string>
@@ -1055,7 +1054,7 @@
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el punt de ruta</string>
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">El connector OsMoDroid és d\'una versió antiga i cal actualitzar-lo.</string>
+    
     <string name="incomplete_locale">incomplet</string>
 	<string name="use_high_res_maps_descr">No ampliïs (ni difuminis) les tessel·les del mapa en pantalles d\'alta densitat</string>
 	<string name="sd_mounted_ro">La targeta SD és només de lectura.\nNomés podeu visualitzar el mapa precarregat i no podeu baixar-ne des d\'Internet.</string>
@@ -1075,7 +1074,7 @@
 	<string name="poi_action_succeded_template">L\'acció {0} s\'ha completat correctament.</string>
 	<string name="poi_error_info_not_loaded">No s\'ha carregat la informació del node</string>
 	<string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
-	<string name="osmodroid_plugin_description">El connector OsMoDroid és un connector per a l\'aplicació OsmAnd per a creació de traces i funcions relacionades en temps real. La informació sobre el servei es troba disponible a http://esya.ru.</string>
+	
     <string name="auto_announce_off">Atura els anuncis automàtics</string>
 	<string name="shared_string_io_error">S\'ha produït un error d\'E/S</string>
 	<string name="poi_namefinder_query_empty">Introduïu una consulta de cerca per trobar el PDI</string>
@@ -1238,8 +1237,8 @@
 	<string name="osb_add_dialog_error">S\'ha produït una excepció: no s\'ha creat l\'error</string>
 	<string name="poi_error_poi_not_found">No s\'ha trobat el node o la instal·lació no és un node únic</string>
 	<string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
-	<string name="osmodroid_mode_on">Atura l\'OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Inicia l\'OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Anuncia fites GPX</string>
     <string name="speak_title">Anuncia…</string>
 	<string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat</string>
@@ -1325,9 +1324,9 @@
 	<string name="driving_region_canada">Canadà</string>
 	<string name="driving_region_europe_asia">Europa i Àsia</string>
 	<string name="driving_region_uk">Regne Unit, Austràlia i altres</string>
-	<string name="osmodroid_refresh">Actualitza els canals</string>
-    <string name="osmodroid_seek">Cerca l\'objecte</string>
-    <string name="osmodroid_unseek">No cerquis més l\'objecte</string>
+	
+    
+    
     <string name="guidance_preferences_descr">Preferències de navegació</string>
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
@@ -1861,7 +1860,7 @@
 	<string name="navigation_over_track">Voleu iniciar la navegació sobre la traça?</string>
 	<string name="avoid_roads_msg">Podeu generar una ruta alternativa amb la selecció de les vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
-	<string name="recents">RECENTS</string>
+	
 	<string name="proxy_pref_title">Servidor intermediari</string>
     <string name="proxy_pref_descr">Configuració d\'un servidor intermediari per accedir a internet</string>
     <string name="settings_privacy">Privacitat</string>
@@ -1872,7 +1871,7 @@
 	<string name="proxy_port_title">Port del servidor intermediari</string>
 	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
 	<string name="points">Punts</string>
-    <string name="tracks">Traces</string>
+    
     <string name="shared_string_my_location">La vostra posició</string>
     <string name="osm_editing_manage">Gestió</string>
     <string name="version_settings_descr">Baixada de les darreres versions</string>

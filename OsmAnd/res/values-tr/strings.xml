@@ -191,9 +191,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Sınırları gizle</string>
 	<string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların gösterimini sakla (admin düzeyleri 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid eklentisi eski bir sürümünü sahip ve güncelleştirilmesi gerekmektedir.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid eklenti canlı izleme özellikleri için OsModroid uygulama için, uzatma OsmAnd edilir. Hizmet hakkında bilgi http://esya.ru mevcuttur.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid eklentisi</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Rakım Düzeltme</string>
 	<string name="tip_altitude_offset_t">\tEn GPS cihazları lokal olarak kullanılan sistemler için bir dönüşüm bir konuma bağımlı düzeltme gerektiren hangi, elipsoid tabanlı WGS84 referans sisteminde yükseklik ölçümleri rapor.
 \n\tBu yerel sistemler için daha iyi bir yaklaşım EGM96 referanstır. OsmAnd şimdi de EGM96 sisteminde yüksekliklerde otomatik olarak görüntülenmesini destekler.
@@ -826,8 +826,8 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Avrupa ve Asya</string>
 	<string name="driving_region_uk">Birleşik Krallık, Hindistan, Avustralya ve Diğerleri</string>
-	<string name="osmodroid_mode_on">OsMoDroid\'i Durdur</string>    
-    <string name="osmodroid_mode_off">OsMoDroid\'i Başlat</string>
+	    
+    
     <string name="speak_title">Duyuru…</string>
 	<string name="speak_descr">Sokak isimleri, trafik uyarıları (mecburi duruşlar, tümsekler), hız kamerası uyarıları, hız sınırları bildirimlerini ayarla</string>
 	<string name="speak_street_names">Sokak isimlerini bildir</string>

@@ -1055,9 +1055,9 @@
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>
     <string name="rendering_attr_noAdminboundaries_name">საზღვრების დამალვა</string>
 	<string name="rendering_attr_noAdminboundaries_description">რეგიონალური საზღვრების ჩვენების შეზღუდვა (ადმინისტრირების დონე 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid დამატება მოძველებულია და საჭიროებს განახლებას.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid დამატება წარმოადგენს OsmAnd-ის გაფართოებას OsModroid აპლიკაციისათვის. მოცემულ სერვისზე ინფორმაციის მისაღებად ეწვიეთ http://esya.ru -ს.</string>
-    <string name="osmodroid_plugin_name">დამატება OsMoDroid</string>
+    
+    
+    
 	<string name="tip_altitude_offset">სიმაღლის ჩვენება - ოფსეტის შესწორება</string>
 	<string name="shared_string_control_stop">შეწყვეტა</string>
     <string name="shared_string_control_start">დაწყება</string>
@@ -1124,9 +1124,9 @@
 	<string name="driving_region_canada">კანადა</string>
 	<string name="driving_region_europe_asia">ევროპა &amp; აზია</string>
 	<string name="driving_region_uk">UK, ინდოეთია, ავსტრალია &amp; სხვანი</string>
-	<string name="osmodroid_mode_on">OsMoDroid-ის გაჩერება</string>    
-    <string name="osmodroid_mode_off">OsMoDroid-ის ჩართვა</string>
-    <string name="osmodroid_refresh">არხების განახლება</string>
+	    
+    
+    
     <string name="announce_gpx_waypoints">GPX წერტილების გაცხადება</string>
     <string name="speak_title">გაცხადება…</string>
 	<string name="speak_descr">გაცხადებებში ქუჩის სახელების, სიჩქარის შეზღუდვის (იძულებითი გაჩერებების, სიჩქარის კონტროლის), ჩქაროსნული კამერების, სიჩქარის ლიმიტების მითითების ჩასწორება</string>

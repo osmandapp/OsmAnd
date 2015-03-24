@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -1065,7 +1064,7 @@
     <string name="download_roads_only_maps">Мапи тільки з дорогами</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Приховати кордони</string>
-	<string name="osmodroid_plugin_name">Втулок OsMoDroid</string>
+	
 	<string name="tip_altitude_offset">Корекція висоти</string>
 	<string name="map_widget_max_speed">Обмеження швидкості</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
@@ -1080,7 +1079,7 @@
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимикається в Налаштуваннях).</string>
     <string name="audionotes_location_not_defined">Поточне місцезнаходження для замітки не визначено. Використовуйте контекстне меню для прив’язки замітки до даної точки</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Втулок OsMoDroid має застарілу версію і потребує оновлення.</string>
+    
     <string name="tip_altitude_offset_t">"Більшість GPS пристроїв показують висоту відповідно до еліпсоїдної картографічної проекції WGS84, для визначення висоти над рівнем моря необхідно провести корекцію, яка залежить від вашого місцезнаходження.
 \n\nДля кращого обчислення висоти використовується проекція EGM96.
 \n\nOsmAnd покаже висоту над рівнем моря в EGM96 після завантаження файлу \'World Altitide Correction\' (WW15MGH.DAC), використовуючи \'Налаштування\'-&gt;\'Управління мапами\' (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
@@ -1118,7 +1117,7 @@
     <string name="poi_filter_sightseeing">Огляд визначних пам’яток</string>
     <string name="show_warnings_title">Показати попередження…</string>
 	<string name="poi_filter_emergency">Аварійні служби</string>
-    <string name="osmodroid_plugin_description">Втулок OsMoDroid — розширення для OsmAnd, що використовує OsModroid програму для онлайн моніторингу. Інформацію про сервіс можна знайти на сайті http://esya.ru.</string>
+    
     <string name="tip_recent_changes_0_8_4_t">"Зміни в 0.8.4:
 \n\tВиправлення деяких помилок
 \n\tМапа не втрачає позиції GPS після переривання роботи
@@ -1484,8 +1483,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t- Інші невеличкі покращення
 	</string>    
 	<string name="osb_author_dialog_password">Пароль OSM (необов’язково)</string>
-	<string name="osmodroid_mode_on">Зупинити OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Запустити OsMoDroid</string>
+	    
+    
     <string name="driving_region_descr">Виберіть регіон: США, Європа, Англія, Азія та інші</string>
 	<string name="driving_region">Регіон</string>
 	<string name="driving_region_japan">Японія</string>
@@ -1851,9 +1850,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="auto_zoom_close">До крупного плану</string>
 	<string name="auto_zoom_far">До середнього плану</string>
 	<string name="auto_zoom_farthest">До дальнього плану</string>
-	<string name="osmodroid_refresh">Оновити канали</string>
-    <string name="osmodroid_seek">Стежити за</string>
-    <string name="osmodroid_unseek">Не стежити</string>
+	
+    
+    
     <string name="route_descr_destination">Місце призначення</string>
     <string name="interrupt_music_descr">Переривати музику під час оголошення</string>
 	<string name="interrupt_music">Переривання музики</string>
@@ -2006,10 +2005,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="proxy_pref_descr">Налаштування інтернет з’єднання через проксі-сервер</string>
     <string name="settings_privacy">Приватність</string>
     <string name="points">Точки</string>
-    <string name="tracks">Треки</string>
+    
     <string name="shared_string_my_location">Моє місцезнаходження</string>
     <string name="osm_editing_manage">Керування</string>
-    <string name="recents">ОСТАННІ</string>
+    
 	<string name="navigation_over_track">Почати навігацію по треку?</string>
 	<string name="avoid_roads_msg">Ви можете вибрати альтернативний маршрут, вибравши дороги, які варто уникати</string>
     

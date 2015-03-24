@@ -1131,13 +1131,13 @@
     <string name="tip_altitude_offset">Aukščio korekcija</string>
 	<string name="rendering_attr_noAdminboundaries_name">Paslėpti ribas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid įskiepio versija yra pasenusi ir turi būti atnaujinta.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid įskiepis</string>
+    
+    
 	<string name="tip_altitude_offset_t">"Daugelis GPS įrenginių apskaičiuoja aukštį virš jūros lygio naudodami WGS84 elipsiodo atskaitos sistemą iš kurios vėlesnis konvertavimui į vietinę sistemą reikia nuo pozicijos priklausančios aukščio pataisos.
 \n\nGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti jūsų buvimo vietos aukštį pagal EGM96 sistemą.
 \n\nJei norite tai įgyvendinti, tiesiog parsisiųskite failą \'Pasaulinė aukščio korekcija\' (WW15MGH.DAC) naudodami Parsiųstų Duomenų Valdymą \'Nustatymai\'→\'Valdyti žemėlapius\'. (Orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
     <string name="monitoring_control_start">pradėti</string>
-    <string name="osmodroid_plugin_description">OsMoDroid įskiepis yra yra skirtas tiesioginiam sekimui. Daugiau informacijos apie paslaugą rasite http://esya.ru.</string>
+    
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
     <string name="srtm_plugin_description">Leidžia parsisiųsti kontūrines linijas ir kalnų šešėlius (\'Nustatymai\' → \'Valdyti žemėlapius\' → \'Parsiųsti\' → Pasirinkite pageidaujamą žemėlapio tipą).</string>
@@ -1332,8 +1332,8 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa ir Azija</string>
 	<string name="driving_region_uk">JK, Indija, Australija ir kitos</string>
-	<string name="osmodroid_mode_on">Išjungti OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Įjungti OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Pranešti apie GPX tarpinius taškus</string>
     <string name="speak_title">Pranešti…</string>
 	<string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinius sustojimus, greičio ribotuvus), greičio radarus, greičio apribojimus</string>
@@ -1426,7 +1426,7 @@
 	<string name="auto_zoom_close">Maksimaliai priartinti</string>
 	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
 	<string name="auto_zoom_farthest">Maksimaliai padidinti</string>
-	<string name="osmodroid_refresh">Atnaujinti kanalus</string>
+	
     <string name="map_widget_map_rendering">Žemėlapio atvaizdavimas</string>
     <string name="app_mode_hiking">Žygiai</string>
     <string name="app_mode_motorcycle">Motociklas</string>
@@ -1439,8 +1439,8 @@
     <string name="amenity_type_seamark">Jūros navigacijos ženklas</string>
     <string name="app_modes_choose_descr">Pasirinkite programos veikimo profilius, kurie bus naudojami programoje</string>
     <string name="app_modes_choose">Programos profiliai</string>
-	<string name="osmodroid_seek">Ieškoti objekto</string>
-    <string name="osmodroid_unseek">Nebeieškoti objekto</string>
+	
+    
     <string name="speech_rate_descr">Nurodyti TTS kalbėjimo greitį</string>
     <string name="speech_rate">Kalbėjimo greitis</string>
     
@@ -1890,10 +1890,10 @@
     <string name="proxy_pref_descr">Prisijungimo prie interneto per proksi serverį nustatymai</string>
     <string name="settings_privacy">Privatumas</string>
     <string name="points">Taškai</string>
-    <string name="tracks">Keliai</string>
+    
     <string name="shared_string_my_location">Mano dabatinė vieta</string>
     <string name="osm_editing_manage">Valdyti</string>
-    <string name="recents">PASTARIEJI</string>
+    
 	<string name="navigation_over_track">Pradėti navigaciją keliu?</string>
 	<string name="avoid_roads_msg">Galite pasirinkti kitą maršrutą, pažymėdami norimus aplenkti kelius</string>
     <string name="save_track_to_gpx_globally_headline">Privalomas kelio log įrašymas</string>
@@ -1933,6 +1933,6 @@
 	<string name="rename_failed">Nepavyko pervardinti.</string>
 	<string name="back_to_map">Grįžti į žemėlapį</string>
 	<string name="shared_string_selected">Pasirinkta</string>
-	<string name="showed_on_map">Rodoma žemėlapyje</string>
+	
 	<string name="share_note">Pasidalinti pastaba</string>
 	</resources>

@@ -1114,9 +1114,9 @@
 \n\tPentru aceasta, descărcați fișierul WW15MGH.DAC din meniul Setări &gt; Date offline (Download). Sursa se găsește la http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC . "</string>
     <string name="rendering_attr_noAdminboundaries_name">Ascunde limitele administrative</string>
 	<string name="rendering_attr_noAdminboundaries_description">Dezactivează afișarea limitelor administrative 5-9</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">Plugin-ul OsMoDroid plugin trebuie adus la zi.</string>
-    <string name="osmodroid_plugin_description">Plugin pentru comunicarea online a poziției curente. Mai multe informații la http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+	
+    
+    
 	<string name="index_srtm_ele">Curbe de nivel</string>
     <string name="index_srtm_parts">părți</string>
     <string name="srtm_plugin_description"/>
@@ -1242,10 +1242,10 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa și Asia</string>
 	<string name="driving_region_uk">Marea Britanie, India, Australia și altele</string>
-	<string name="osmodroid_mode_on">Oprește OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Pornește OsMoDroid</string>
-    <string name="osmodroid_refresh">Actualizează canalele</string>
-    <string name="osmodroid_seek">Caută obiect</string>
+	    
+    
+    
+    
     <string name="announce_gpx_waypoints">Anunță punctele de referință GPX</string>
     <string name="speak_title">Anunță…</string>
 	<string name="speak_street_names">Anunță numele străzilor (TTS)</string>
@@ -1495,9 +1495,9 @@
     
 	<string name="home_button">Acasă</string>
     
-	<string name="tracks">Trasee</string>
+	
     <string name="osm_editing_manage">Gestionează</string>
-    <string name="recents">RECENTE</string>
+    
 	<string name="speak_pedestrian">Anunţă treceri pietonale</string>
     <string name="rendering_attr_roadStyle_name">Stil drum</string>
     <string name="rendering_value_default_name">Implicit</string>

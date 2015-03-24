@@ -175,9 +175,9 @@
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa og Asia</string>
-	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Start OsMoDroid</string>
-    <string name="osmodroid_refresh">Oppdater kanalar</string>
+	    
+    
+    
     <string name="route_descr_map_location">Kart:</string>
     <string name="route_descr_current_location">Gjeldande posisjon</string>
     <string name="route_to">Til:</string>
@@ -267,7 +267,7 @@
     <string name="download_roads_only_maps">Kart med berre vegar</string>
     <string name="rendering_attr_alpineHiking_name">Fjellturkart</string>
     <string name="rendering_attr_noAdminboundaries_name">Gøym grenser</string>
-	<string name="osmodroid_plugin_name">OsMoDroid-tillegg</string>
+	
 	<string name="tip_altitude_offset">Høgdekorrigeringar</string>
 	<string name="map_widget_max_speed">Fartsgrense</string>
     <string name="monitoring_control_start">GPX</string>

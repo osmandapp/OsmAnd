@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -60,8 +59,8 @@
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid udvidelse er en gammel version og skal opdateres.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
+    
+    
     <string name="tip_altitude_offset">Højdekorrektion</string>
 	<string name="tip_altitude_offset_t">"De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
 \n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference.
@@ -163,7 +162,7 @@
     <string name="av_def_action_choose">Vælg ved forespørgsel</string>
     <string name="av_use_external_camera_descr">Brug systemprogram til foto</string>
     <string name="av_use_external_camera">Brug kamera</string>
-    <string name="osmodroid_plugin_name">OsMoDroid udvidelse</string>
+    
 	<string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
     <string name="intermediate_point">Rutepunkt %1$s</string>
@@ -355,8 +354,8 @@
 	
 	<string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">"Udvidelsen gør  tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx. justering af tale for TTS stemmerne, konfiguration af styrekryds (D-pad) skærmnavigation ved hjælp af en styrekugle til zoomknappen, eller ved hjælp af tekst-til-tale tilbagemeldinger, og som at meddele positionen automatisk."</string>
-	<string name="extra_settings">Avancerede indstillinger</string>
-	<string name="osmand_monitoring_description">Viser knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
+	
+	
 	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte del eller raster) kort, fra foruddefinerede OpenStreetMap delkort (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relief lag osv.\n\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
 \n\nDelkort kan hentes direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd datamappen) som en SQLite database. Kort kan fremstilles ved hjælp af en række 3. parts kortværktøjer. "</string>
 	
@@ -1313,8 +1312,8 @@
 	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser</string>
 	<string name="speak_street_names">Gadenavne (TTS)</string>
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
-    <string name="osmodroid_mode_off">Start OsMoDroid</string>
-    <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
+    
+        
     <string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Canada</string>
@@ -1378,7 +1377,7 @@
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
     <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
-    <string name="osmodroid_refresh">Opdater kanaler</string>
+    
     <string name="local_osm_changes_delete_all_confirm">Slet %1$d OSM ændringer?</string>
     <string name="tip_faq_t">Besøg https://code.google.com/p/osmand/wiki/FAQ for at se ofte stillede spørgsmål.</string>
     <string name="tip_faq">Ofte stillede spørgsmål</string>
@@ -1390,8 +1389,8 @@
     <string name="app_modes_choose_descr">Vælg tilgængelige brugerprofiler</string>
     <string name="app_modes_choose">Programprofiler</string>
 	<string name="amenity_type_seamark">Sømærke</string>
-    <string name="osmodroid_seek">Søg objekt</string>
-    <string name="osmodroid_unseek">Stop søgning efter objekt</string>
+    
+    
     <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
     <string name="speech_rate">Talehastighed</string>
     
@@ -1821,7 +1820,7 @@
 	<string name="save_track_to_gpx_globally_headline">Sporingslogning på efterspørgsel</string>
 	<string name="navigation_over_track">Start navigation langs spor?</string>
 	<string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
-    <string name="recents">SENESTE</string>
+    
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Opsæt en proxy til internetkommunikation</string>
     <string name="settings_privacy">Privatliv</string>
@@ -1832,7 +1831,7 @@
 	<string name="proxy_port_title">Proxy port</string>
 	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
 	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
-    <string name="tracks">Spor</string>
+    
     <string name="osm_editing_manage">Administrer</string>
     <string name="version_settings_descr">"Hent aktuelle  udviklingsversioner"</string>
     <string name="version_settings">Versioner</string>
@@ -1873,7 +1872,7 @@
 	<string name="days_behind">dage gammel</string>
 	<string name="rename_failed">Fejl ved omdøbning.</string>
 	<string name="back_to_map">Tilbage til kortet</string>
-	<string name="showed_on_map">Vist på kortet</string>
+	
 	
 	<string name="track_segments">Sporsegmenter</string>
 	<string name="track_points">Sporpunkter</string>

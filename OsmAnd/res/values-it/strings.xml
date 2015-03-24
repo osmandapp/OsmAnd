@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -747,9 +746,9 @@
 \n\nLe mappe a mattonelle possono essere ricevuto direttamente dalle risorse online oppure preparate in precedenza per l\'uso offline (e copiate manualmente nella cartella dati di OsmAnd) come un database sqlite che può essere prodotto da molteplici strumenti per la costruzione di mappe di terze parti. "</string>
   <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS.</string>
   <string name="osmand_accessibility_description">Visualizza le impostazioni per attivare funzionalità speciali per l\'accessibilità.</string>
-  <string name="extra_settings">Impostazioni avanzate</string>
-  <string name="osmand_monitoring_description">Visualizza impostazioni per facilitare la registrazione dei tuoi spostamenti su un file GPX o il live tracking tramite un servizio web.</string>
-  <string name="osmand_extra_settings_description">Visualizza le impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e alcune di specifici dispositivi.</string>
+  
+  
+  
   <string name="osmand_development_plugin_description">"Visualizza le impostazioni per le funzionalità di sviluppo e debug come la simulazione di navigazione  o visualizzare l\'indicazione della prestazione del rendering."</string>
   <string name="plugins_screen">Componenti aggiuntivi</string>
   
@@ -1125,9 +1124,9 @@
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin è in versione obsoleta e deve essere aggiornato.</string>
-    <string name="osmodroid_plugin_description">Il plugin OsMoDroid è un\'estensione OsmAnd per l\'applicazione OsModroid per le funzioni di monitoraggio in tempo reale. Informazioni sul servizio sono disponibili sul http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+	
+    
+    
 	<string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
@@ -1486,8 +1485,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (fermate forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
 	<string name="speak_street_names">Annuncia i nomi delle strade (TTS)</string>
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
-    <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Avvia OsMoDroid</string>
+        
+    
     <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre</string>
 	<string name="driving_region">Regione di guida</string>
 	<string name="driving_region_japan">Giappone</string>
@@ -1553,7 +1552,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche OSM. Sicuro?</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
     <string name="tip_faq">Domande più frequenti</string>
-    <string name="osmodroid_refresh">Aggiorna i canali</string>
+    
     <string name="app_mode_hiking">Escursionismo</string>
     <string name="app_mode_motorcycle">Motocicletta</string>
     <string name="app_mode_boat">Barca</string>
@@ -1562,7 +1561,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
     <string name="app_modes_choose">Profili applicazione</string>
 	<string name="amenity_type_seamark">Mare</string>
-    <string name="osmodroid_seek">Cerca oggetto</string>
+    
     
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile</string>
@@ -1613,7 +1612,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     </string>
     <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
-    <string name="osmodroid_unseek">Oggetto non trovato</string>
+    
     <string name="lang_en">Inglese</string>
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armeno</string>
@@ -1993,7 +1992,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
 	<string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
     <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
-	<string name="recents">RECENTI</string>
+	
 	<string name="enable_proxy_title">Abilita proxy HTTP</string>
 	<string name="enable_proxy_descr">Configura il proxy HTTP per tutte le richieste della rete</string>
 	<string name="proxy_host_title">Host del proxy</string>
@@ -2007,7 +2006,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="version_settings_descr">Download versioni di sviluppo</string>
     <string name="version_settings">Versioni</string>
     <string name="points">Punti</string>
-    <string name="tracks">Tracce</string>
+    
     <string name="osm_editing_manage">Gestisci</string>
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio</string>
@@ -2049,7 +2048,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="back_to_map">Torna alla mappa</string>
 	<string name="rename_failed">Rinominazione fallita.</string>
 	
-	<string name="showed_on_map">Visualizzato sulla mappa</string>
+	
 	<string name="days_behind">giorni fa</string>
 	<string name="track_segments">Spezzoni di traccia</string>
 	<string name="track_points">Punti della traccia</string>

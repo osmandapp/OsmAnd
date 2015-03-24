@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1085,15 +1084,15 @@
     <string name="download_select_map_types">Egyéb térképek</string>
     
 
-	<string name="osmodroid_plugin_old_ver_not_supported">Az OsMoDroid bővítmény verziója elavult és frissítésre szorul.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid bővítmény</string>
+	
+    
 	<string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez. A \"Hely használata…\" gombbal helyezhetsz el jegyzetet az adott helyen</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hangjegyzet bővítmény</string>
     
     <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalak és domborzatárnyékolás letöltését (Beállítások → Térképek kezelése → Letöltés → válaszd a kívánt térképtípust).</string>
     
-    <string name="osmodroid_plugin_description">Az OsMoDroid bővítmény lehetővé teszi az OsMoDroid alkalmazás használatát online útvonalrögzítésre. További információk: http://esya.ru.</string>
+    
     <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg az A/V vezérlő stop gombját.</string>
     <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
@@ -1292,8 +1291,8 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Európa és Ázsia</string>
 	<string name="driving_region_uk">UK, India, Ausztrália &amp; továbbiak</string>
-	<string name="osmodroid_mode_on">OsMoDroid leállítása</string>    
-    <string name="osmodroid_mode_off">OsMoDroid indítása</string>
+	    
+    
     <string name="announce_gpx_waypoints">GPX útpontok</string>
     <string name="speak_title">Bemondás…</string>
 	<string name="speak_descr">Utcanevek, közlekedési figyelmeztetések (megállás, fekvőrendőr), traffipax, sebességhatár bemondásának beállításai</string>
@@ -1367,9 +1366,9 @@
 	<string name="auto_zoom_close">Közelre</string>
 	<string name="auto_zoom_far">Közepes távolságra</string>
 	<string name="auto_zoom_farthest">Nagy távolságra</string>
-	<string name="osmodroid_refresh">Csatornák frissítése</string>
-    <string name="osmodroid_seek">Objektum keresése</string>
-    <string name="osmodroid_unseek">Objektumkeresés befejezése</string>
+	
+    
+    
     <string name="keep_and_add_destination_point">Hozzáadás a célpontokhoz</string>
     <string name="select_gpx">GPX kiválasztása…</string>
     <string name="route_descr_select_destination">Válassz célpontot!</string>
@@ -1819,10 +1818,10 @@
     <string name="proxy_pref_descr">Proxy internetkapcsolat beállítása</string>
     <string name="settings_privacy">Adatvédelem</string>
     <string name="points">Pontok</string>
-    <string name="tracks">Nyomvonalak</string>
+    
     <string name="shared_string_my_location">Pozícióm</string>
     <string name="osm_editing_manage">Kezelés</string>
-    <string name="recents">LEGUTÓBBI</string>
+    
 	<string name="navigation_over_track">Indítasz navigációt a nyomvonal mentén?</string>
 	<string name="avoid_roads_msg">Elkerülendő utcák kiválasztásával megváltoztathatod a tervezett útvonalat</string>
     <string name="enable_proxy_title">HTTP proxy engedélyezése</string>
@@ -1867,7 +1866,7 @@
 	<string name="track_points">Nyomvonal pontok</string>
 	<string name="shared_string_selected">Kijelölve</string>
 	
-	<string name="showed_on_map">Megjelenítve a térképen</string>
+	
 	<string name="rename_failed">Az átnevezés nem sikerült.</string>
 	<string name="shared_string_currently_recording_track">Jelenleg rögzített nyomvonal</string>
 	<string name="back_to_map">Vissza a térképhez</string>
@@ -1881,7 +1880,7 @@
     <string name="delay_to_start_navigation_descr">Navigáció automatikus indítása egy megadott idő után</string>
     <string name="delay_to_start_navigation">Útvonaltervezés kihagyása</string>
     <string name="shared_string_go">Indítás</string>
-	<string name="osmand_parking_outdated">Elavult</string>
+	
 	<string name="parking_place_limited">A parkolóhely időkorlátos</string>
 	<string name="your_edits">Az Ön szerkesztései</string>
     <string name="waypoint_visit_after"/>

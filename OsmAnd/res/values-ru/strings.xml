@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">"Плагин обеспечивает наложение контурных линий и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
@@ -49,9 +48,9 @@
     <string name="srtm_plugin_name">Линии высот</string>
 	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Плагин OsMoDroid устарел и нуждается в обновлении.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Отображение высоты - коррекция смещения</string>
 	<string name="tip_altitude_offset_t">"Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
 \n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
@@ -1304,11 +1303,11 @@
     <string name="speak_title">Озвучивание…</string>
 	<string name="speak_descr">Настройка озвучивания названий улиц, предупреждений (лежачих полицейских, знаков \"Движение без остановки запрещено\"), камер контроля скорости, ограничений скорости</string>
 	<string name="announce_gpx_waypoints">Озвучивание маршрутных точек GPX</string>
-    <string name="osmodroid_mode_on">Остановить OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Запустить OsMoDroid</string>
-    <string name="osmodroid_refresh">Обновить каналы</string>
-    <string name="osmodroid_seek">Следить за</string>
-    <string name="osmodroid_unseek">Не следить</string>
+        
+    
+    
+    
+    
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
@@ -1817,11 +1816,11 @@
 	<string name="proxy_host_descr">Настройте имя хоста вашего прокси-сервера (например, 127.0.0.1)</string>
 	<string name="proxy_port_title">Порт прокси-сервера</string>
 	<string name="proxy_port_descr">Настройте номер порта вашего прокси-сервера (например, 8118)</string>
-	<string name="recents">НЕДАВНИЕ</string>
+	
 	<string name="rendering_attr_streetLighting_name">Уличное освещение</string>
     <string name="version_settings_descr">Скачать ночные сборки</string>
     <string name="version_settings">Сборки</string>
-    <string name="tracks">Треки</string>
+    
     <string name="shared_string_my_location">Мое местоположение</string>
     <string name="gps_status">Статус GPS</string>
     <string name="points">Точки</string>
@@ -1894,7 +1893,7 @@
 	<string name="route_points">Точки маршрута</string>
 	<string name="track_segments">Сегменты трека</string>
 	<string name="track_points">Точки трека</string>
-	<string name="turn_off_all">Выключить все</string>
+	
 	<string name="days_behind">дней назад</string>
 	<string name="notes">Заметки</string>
 	<string name="shared_string_selected">Выбранные</string>
@@ -1907,7 +1906,7 @@
 	<string name="shared_string_my_favorites">Мои избранные</string>
 	<string name="shared_string_my_tracks">Мои треки</string>
 	<string name="shared_string_currently_recording_track">Текущий пишущийся трек</string>
-	<string name="selected_tracks">Выбранные</string>
+	
 	<string name="share_note">Поделиться заметкой</string>
 	<string name="shared_string_release">Дата выпуска</string>
 	<string name="routing_settings_2">Настройки навигации</string>

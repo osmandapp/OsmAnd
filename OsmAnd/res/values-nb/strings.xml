@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -627,8 +626,8 @@
 	<string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia og andre</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region">Region for bilkjøring</string>
-	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Start OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Meld om GPX-rutepunkter</string>
     <string name="speak_title">Meld om…</string>
 	<string name="speak_descr">Still inn for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
@@ -950,7 +949,7 @@
 	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
 	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
     <string name="select_gpx">Velg GPX…</string>
-    <string name="route_descr_select_on_map">Velg på kart…</string>
+    
     <string name="route_preferences">Ruteinnstillinger</string>
     <string name="route_info">Ruteinformasjon</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline-rute</string>
@@ -984,7 +983,7 @@
     <string name="download_srtm_maps">Koter</string>
     <string name="download_regular_maps">Vanlige kart</string>
     <string name="download_roads_only_maps">Rene veikart</string>
-    <string name="osmodroid_plugin_name">OsMoDroid-programtillegg</string>
+    
 	<string name="tip_altitude_offset">Høydekorrigering</string>
 	<string name="search_villages_and_postcodes">Søk landsbyer/postnummer</string>
 	<string name="rendering_attr_showRoadMaps_description">Velg når det skal vises rene veikart:</string>
@@ -1002,7 +1001,7 @@
 	<string name="use_transparent_map_theme">Gjennomsiktig tema</string>
 	<string name="keep_informing_never">Bare manuelt (trykk pil)</string>
     <string name="local_index_installed">Lokal versjon</string>
-	<string name="local_index_mi_export">Eksporter</string>
+	
 	<string name="gpx_option_destination_point">Bruk gjeldende mål</string>
 	<string name="tip_location_sharing">Del en posisjon</string>
 	<string name="error_doing_search">Feil oppstod i offline-søk</string>
@@ -1158,7 +1157,7 @@
     <string name="edit_group">Rediger gruppe</string>
     <string name="parking_place">Parkeringsplass</string>
     <string name="points">Punkter</string>
-    <string name="tracks">Spor</string>
+    
     <string name="gps_status">GPS-status</string>
     <string name="location_on_map">Posisjon:\n Br %1$s\n Le %2$s</string>
 	<string name="online_map">Nettbasert kart</string>

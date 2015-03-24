@@ -416,11 +416,11 @@
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa e Asia</string>
 	<string name="driving_region_uk">Reino Unido, India, Australia e outros</string>
-	<string name="osmodroid_mode_on">Parar OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Iniciar OsMoDroid</string>
-    <string name="osmodroid_refresh">Refrescar as canles</string>
-    <string name="osmodroid_seek">Procurar obxecto</string>
-    <string name="osmodroid_unseek">Deixar de procurar obxecto</string>
+	    
+    
+    
+    
+    
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configurar para anunciar os nomes das rúas, os avisos de tráfico (detencións forzosas, bandas sonoras), os avisos de radar e os límites de velocidade</string>
 	<string name="speak_street_names">Anunciar os nomes das rúas (TTS)</string>
@@ -628,9 +628,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Agochar as fronteiras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suprimir Suppress display of regional boundaries (admin levels 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">O engadido OsMoDroid ten unha versión antiga e haino que actualizar.</string>
-    <string name="osmodroid_plugin_description">O engadido OsMoDroid é unha extensión de OsmAnd para o aplicativo OsMoDroid de funcionalidades de seguimento con conexión. Existe información sobre o servizo en http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Engadido OsMoDroid</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Corrección da altitude</string>
 	<string name="tip_altitude_offset_t">"A maioría dos dispositivos de GPS informan sobre as medicións de altura no sistema de referencia WGS84 de base elíptica, do que a conversión aos sistemas empregados localmente require dunha corrección dependente da posición.
 \n\nUnha aproximación mellor a estes sistemas locais é a referencia EGM96 (xeoide).

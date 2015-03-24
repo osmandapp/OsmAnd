@@ -65,7 +65,7 @@
     
 	<string name="download_srtm_maps">Obrisi linija</string>
     <string name="rendering_attr_noAdminboundaries_description">Prikrivanje prikaza regionalnih granica (admin razine 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid dodatak ima zastarjelu verziju potrebno je ažurirati.</string>
+    
     <string name="map_widget_max_speed">Ograničenje brzine</string>
     <string name="route_descr_lat_lon">Z. širina %1$.3f, z. dužina %2$.3f</string>
     <string name="route_descr_current_location">Trenutna pozicija</string>
@@ -595,7 +595,7 @@
     </string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
     <string name="srtm_plugin_name">Dodatak za Slojnice</string>
-    <string name="osmodroid_plugin_name">OsMoDroid dodatak</string>
+    
 	<string name="tip_recent_changes_1_0_0_t">"Promjene u 1.0.0:
 	\n\t* Poboljšana navigacija: brža i preciznija, do 250 km
 	\n\t* Mogućnost prikaza samo cestovne karte
@@ -969,9 +969,9 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa i Azija</string>
 	<string name="driving_region_uk">Velika Britanija, Indija, Australija i ostalo</string>
-	<string name="osmodroid_mode_on">Zaustavi OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Pokreni OsMoDroid</string>
-    <string name="osmodroid_refresh">Osvježi kanale</string>
+	    
+    
+    
     <string name="announce_gpx_waypoints">Najavi GPX međutočke</string>
     <string name="speak_title">Najaviti…</string>
 	<string name="route_descr_map_location">Karta: </string>
