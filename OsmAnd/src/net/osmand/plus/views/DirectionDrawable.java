@@ -50,6 +50,14 @@ public class DirectionDrawable extends Drawable {
 	}
 
 	public void setOpenedColor(int opened) {
+		if(arrowImage != null) {
+			IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+			if (opened == 0) {
+				arrowImage = iconsCache.getIcon(resourceId, R.color.color_ok);
+			} else if (opened == -1) {
+				arrowImage = iconsCache.getIcon(resourceId, R.color.color_warning);
+			}
+		}
 		if (opened == 0) {
 			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_ok));
 		} else if (opened == -1) {

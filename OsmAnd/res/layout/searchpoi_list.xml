@@ -14,6 +14,7 @@
 		android:id="@+id/poi_icon"
 		android:layout_width="26dp"
 		android:layout_height="26dp"
+		android:layout_gravity="center_vertical"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"
 		tools:visiblity="visible"/>
 
