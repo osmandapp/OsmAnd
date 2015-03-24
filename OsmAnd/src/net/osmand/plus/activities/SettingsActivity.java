@@ -110,19 +110,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == localIndexes) {
-			boolean empty = getMyApplication().getResourceManager().getIndexFileNames().isEmpty();
-			if (empty) {
-				File folder = getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR);
-				if (folder.exists() && folder.isDirectory()) {
-					String[] l = folder.list();
-					empty = l == null || l.length == 0;
-				}
-			}
-			if (empty) {
-				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
-			} else {
-				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadActivity()));
-			}
+			startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
 			return true;
 		} else if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));

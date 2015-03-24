@@ -1,5 +1,28 @@
 package net.osmand.plus.dashboard;
 
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.development.DashSimulateFragment;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.osmedit.DashOsmEditsFragment;
+import net.osmand.plus.osmo.DashOsMoFragment;
+import net.osmand.plus.parkingpoint.DashParkingFragment;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +30,6 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -29,32 +51,6 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.software.shell.fab.ActionButton;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
-import net.osmand.plus.development.DashSimulateFragment;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.osmedit.DashOsmEditsFragment;
-import net.osmand.plus.osmo.DashOsMoFragment;
-import net.osmand.plus.parkingpoint.DashParkingFragment;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Created by Denis
@@ -115,7 +111,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				updateTopButton(sy);
 			}
 		});
-		if (listView instanceof ObservableListView) {
+		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
@@ -266,13 +262,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
 						R.color.icon_color_light));
-				mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_dashboard_dark,
 						R.color.icon_color_light));
 			}
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			switchButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -440,11 +436,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				if(!cond) {
 					fragmentTransaction.remove(manager.findFragmentByTag(tag));
  				} else if(frag instanceof DashBaseFragment){
- 					((DashBaseFragment) frag).onOpenDash();
+ 					if(((DashBaseFragment) frag).getView() != null) {
+ 						((DashBaseFragment) frag).onOpenDash();
+ 					}
  				}
 			}
 		} catch (Exception e) {
-			getMyApplication().showToastMessage("Error showing dashboard");
+			getMyApplication().showToastMessage("Error showing dashboard " + tag);
 			e.printStackTrace();
 		}
 	}

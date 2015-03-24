@@ -103,7 +103,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		this.plugin = plugin;
 
 		poiTypes = uiContext.getMyApplication().getPoiTypes();
-		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(false);
+		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(true);
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(activity);
@@ -557,7 +557,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 
 	private Map<String, PoiType> getSubCategoriesMap(PoiCategory poiCategory) {
 		Map<String, PoiType> subCategories = new LinkedHashMap<>(poiTypes.getAllTranslatedNames(poiCategory, false));
-		for (Map.Entry<String, PoiType> s : poiTypes.getAllTranslatedNames(false).entrySet()) {
+		for (Map.Entry<String, PoiType> s : poiTypes.getAllTranslatedNames(true).entrySet()) {
 			if (!subCategories.containsKey(s.getKey())) {
 				subCategories.put(s.getKey(), s.getValue());
 			}
