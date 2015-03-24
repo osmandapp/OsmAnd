@@ -1854,10 +1854,7 @@
 	<string name="online_map">線上地圖</string>
 	<string name="share_note">分享筆記</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
-	<string name="plugin_nautical_descr">啟動此檢視更改地圖到航海顯示樣式，從而顯示所有航海航行的標記和航線標誌。
-		\n\n包含了全部可利用的全球航海標誌的一個單一下載的地圖檔案，被稱為 \'全球航線標識\'。
-		\n\n此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。
-	</string>
+	<string name="plugin_nautical_descr">"這個外掛元件豐富了 OsmAnd 地圖和導航應用，也為了划船、帆船、與其他類型的水上運動，產生了航海地圖。\n\n一個為 OsmAnd 附加的特有地圖，將提供用於所有內陸近岸航行的航海導航標誌和圖表符號。每個導航標誌描述提供需識別出它們和它們含義的詳細資訊（類別、形狀、顏色、序列、參考等）。\n\n要返回到 OsmAnd 慣用的地圖模式，再次取消這個外掛元件的啟動，或改變 \'組態地圖\' 下的 \'地圖樣式\'，在這兩者中的任何一個都可輕易的返回。 "</string>
 	<string name="plugin_ski_descr">啟動此檢視，更改了地圖樣式到 \'冬天和滑雪 \'。顯示出冬天的條件下，所有的景觀特徵。
 		\n\n全球地圖上顯示所有的滑雪斜坡和越野滑雪路線，在此檢視之下可獲得\'世界滑雪地圖\'下載。
 		\n\n此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。
@@ -1954,4 +1951,5 @@
 	<string name="shared_string_not_use">不使用</string>
 	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
-    </resources>
+    <string name="osmo_grop_name_length_alert">群組名稱至少須要 3 個字符長！</string>
+	</resources>
