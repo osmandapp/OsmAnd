@@ -164,8 +164,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		for (OsMoGroup g : getGroups()) {
 			OsMoDevice d = g.updateLastLocation(trackerId, location);
 			if (d != null && uiListeners != null) {
-				for(OsMoGroupsUIListener listener : uiListeners)
-				listener.deviceLocationChanged(d);
+				for(OsMoGroupsUIListener listener : uiListeners) {
+					listener.deviceLocationChanged(d);
+				}
 			}
 		}
 	}

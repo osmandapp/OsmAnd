@@ -350,7 +350,7 @@ public class OsMoThread {
 						processed = true;
 						break;
 					}
-				} catch (Exception e) {
+				} catch (Exception e) {e.printStackTrace();
 					exc("ERROR REACTOR:", e);
 				}
 			}
