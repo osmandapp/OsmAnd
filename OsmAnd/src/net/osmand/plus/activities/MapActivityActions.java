@@ -647,6 +647,7 @@ public class MapActivityActions implements DialogProvider {
 
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
+		// TODO delete
 		if (muteVisible) {
 			boolean mute = routingHelper.getVoiceRouter().isMute();
 			int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
@@ -665,6 +666,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
+		// TODO delete
 		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			optionsMenuHelper.item(R.string.get_directions)
 				.iconColor(R.drawable.ic_action_gdirections_dark)
@@ -719,17 +721,15 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
-		if (getTargets().getPointToNavigate() != null) {
-			optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
-								boolean isChecked) {
-							showWaypointsInDrawer(false);
-							return false;
-						}
-					}).reg();
-		}
+		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						showWaypointsInDrawer(false);
+						return false;
+					}
+				}).reg();
+		// TODO delete
 		if(routingHelper.isRouteCalculated()) {
 			optionsMenuHelper.item(R.string.impassable_road)
 			.iconColor(R.drawable.ic_action_road_works_dark)
@@ -742,7 +742,7 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 		}
 		
-		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
+		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
 		optionsMenuHelper.item(R.string.search_button)
 				.iconColor(R.drawable.ic_action_search_dark)
 				.listen(new OnContextMenuClick() {
@@ -760,8 +760,8 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.shared_string_my_places)
-				.iconColor(R.drawable.ic_action_fav_dark).listen(new OnContextMenuClick() {
+		optionsMenuHelper.item(R.string.shared_string_my_places).iconColor(R.drawable.ic_action_fav_dark)
+				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
@@ -773,15 +773,14 @@ public class MapActivityActions implements DialogProvider {
 				}).reg();
 		
 
-		optionsMenuHelper.item(R.string.show_point_options)
-		.iconColor(R.drawable.ic_action_marker_dark)
-		.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-				return true;
-			}
-		}).reg();
+		optionsMenuHelper.item(R.string.show_point_options).iconColor(R.drawable.ic_action_marker_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+						return true;
+					}
+				}).reg();
 
 		optionsMenuHelper.item(R.string.configure_map).iconColor(R.drawable.ic_action_layers_dark)
 				.listen(new OnContextMenuClick() {
@@ -793,24 +792,50 @@ public class MapActivityActions implements DialogProvider {
 				}).reg();
 
 		optionsMenuHelper.item(R.string.layer_map_appearance).iconColor(R.drawable.ic_configure_screen_dark)
-			.listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					prepareConfigureScreen();
-					return false;
-				}
-			}).reg();
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						prepareConfigureScreen();
+						return false;
+					}
+				}).reg();
+		
+		optionsMenuHelper.item(R.string.index_settings).iconColor(R.drawable.ic_type_archive)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+								.getDownloadActivity());
+						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(newIntent);
+						return true;
+					}
+				}).reg();
+		
 
-		optionsMenuHelper.item(R.string.shared_string_settings)
-		.iconColor(R.drawable.ic_action_settings_enabled_dark)
-		.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization().getSettingsActivity());
-				mapActivity.startActivity(settings);
-				return true;
-			}
-		}).reg();
+		optionsMenuHelper.item(R.string.prefs_plugins).iconColor(R.drawable.ic_extension_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+								.getDownloadActivity());
+						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(newIntent);
+						return true;
+					}
+				}).reg();
+		
+
+		optionsMenuHelper.item(R.string.shared_string_settings).iconColor(R.drawable.ic_action_settings_enabled_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization()
+								.getSettingsActivity());
+						mapActivity.startActivity(settings);
+						return true;
+					}
+				}).reg();
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);

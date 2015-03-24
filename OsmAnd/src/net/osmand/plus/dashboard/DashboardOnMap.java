@@ -266,13 +266,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
 						R.color.icon_color_light));
-				mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
 				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_dashboard_dark,
 						R.color.icon_color_light));
 			}
+			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			switchButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
