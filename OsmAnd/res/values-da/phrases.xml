@@ -714,7 +714,7 @@
 		<string name="poi_aerialway_transport">Lifttransport</string>
 	<string name="poi_transport_construction">Transport konstruktion</string>
 		<string name="poi_water_supply">Vandforsyning</string>
-		<string name="poi_power">Kraft</string>
+		<string name="poi_power">Strøm</string>
 		<string name="poi_communication">Kommunikation</string>
 		<string name="poi_trash_disposal">Affaldshåndtering</string>
 	<string name="poi_sightseeing">Seværdigheder</string>
