@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osm_changes_added_to_local_edits">OSM changes added to local changes</string>
+   	<string name="mark_to_delete">Mark to delete</string>
 	<string name="osmo_grop_name_length_alert">Group name should be at least 3 symbols long!</string>
 	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the whole history?</string>
@@ -154,7 +156,7 @@
 	<string name="audionotes_plugin_name">Audio/video notes</string>
 	<string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map screen, or directly the context menu for any position on the map.</string>
 	<string name="osmand_parking_plugin_name">Parking Position</string>
-	<string name="osmand_parking_plugin_description">This plugin was developed to use OsmAnd to easily memorize the location of your parked car.</string>
+	<string name="osmand_parking_plugin_description">Parking position plugin let you easily memorize when the car was parked and how much time left if the parking is limited by time. You can find your parking place and time on the card of the dashboard and on the map widget. \n It adds notification to the calendar in case you want to get a reminder about it.</string>
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
 	<string name="accessibility_preferences">Accessibility</string>
@@ -1441,13 +1443,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 	<string name="local_openstreetmap_uploading">Uploading …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Notes were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete modification</string>
 	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
-	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
-	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Notes</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Notes noted in local database</string>
 	<string name="live_monitoring_interval_descr">Specify online tracking interval</string>
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -1846,7 +1848,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
-	<string name="layer_osm_bugs">OSM bugs (online)</string>
+	<string name="layer_osm_bugs">OSM Notes (online)</string>
 	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Map source…</string>
@@ -1990,8 +1992,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
-	<string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
-	<string name="show_osm_bugs">Show OpenStreetBugs</string>
 	<string name="use_english_names_descr">Select between native and English names</string>
 	<string name="use_english_names">Use English names in maps</string>
 	<string name="app_settings">Application settings</string>

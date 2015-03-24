@@ -113,7 +113,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 	
 	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
-		if(poiActions == null) {
+		if (poiActions == null) {
 			poiActions = new EditingPOIDialogProvider(activity, this);
 		}
 		return poiActions;
@@ -287,17 +287,17 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
 	}
 
-	public void collectLocalOsmEdits(){
+	public void collectLocalOsmEdits() {
 		localOsmEdits.clear();
 		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
 		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
 
 		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
-		for (OsmPoint point : l1){
+		for (OsmPoint point : l1) {
 			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
 		}
-		for (OsmPoint point : l2){
+		for (OsmPoint point : l2) {
 			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
 		}
 	}

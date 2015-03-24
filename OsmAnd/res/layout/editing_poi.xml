@@ -23,7 +23,6 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -59,6 +58,16 @@
                     android:layout_marginRight="5dp"
                     android:minWidth="250dp"
                     android:text="" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/OsmTagValue"
+                    android:layout_span="2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp" />
             </TableRow>
 
             <TableRow>
@@ -159,7 +168,6 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -204,6 +212,7 @@
                 android:id="@+id/addTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:minWidth="150dp"
                 android:text="@string/btn_add_tag"
                 android:visibility="gone" />
@@ -212,6 +221,7 @@
                 android:id="@+id/advancedMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:minWidth="150dp"
                 android:text="@string/btn_advanced_mode" />
         </LinearLayout>
@@ -221,8 +231,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/poi_dialog_other_tags_message" />
-
-
     </LinearLayout>
 
 </ScrollView>

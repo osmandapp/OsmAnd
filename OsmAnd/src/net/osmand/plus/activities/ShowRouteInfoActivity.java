@@ -11,9 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import android.support.v4.view.MenuItemCompat;
-import android.view.*;
-import android.widget.*;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
@@ -23,7 +20,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.LocalOpenstreetmapActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
@@ -33,8 +29,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
 /**
