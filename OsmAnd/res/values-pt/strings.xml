@@ -1133,8 +1133,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="recording_context_menu_show">Ver</string>
     
 	<string name="item_unchecked">desmarcado</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Plugin OsMoDroid é antigo e precisa ser atualizado.</string>
-    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+    
+    
 	<string name="map_widget_max_speed">Limite de Velocidade</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
     <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Market?</string>
@@ -1210,8 +1210,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 	<string name="driving_region_us">Estados Unidos</string>
 	<string name="driving_region_europe_asia">Europa e Ásia</string>
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
-	<string name="osmodroid_mode_on">Parar OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Iniciar OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Anunciar pontos intermédios GPX</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paragens obrigatórias, lombas), avisos de radares, limites de velocidade</string>
@@ -1273,7 +1273,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="use_magnetic_sensor">Use sensor magnético</string>
     <string name="other_location">Outro</string>
     <string name="local_indexes_cat_srtm">Dados de linhas de contorno</string>
-    <string name="osmodroid_plugin_description">Plugin  OsMoDroid é uma extensão do OsmAnd para aplicação OsModroid para online tracking. Mais informações sobre o serviço em http://esya.ru.</string>
+    
     <string name="tip_altitude_offset_t">A Maioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
 		\n\nUma melhor aproximação para esses sistmas locais é a referência EGM96. OsmAnd agora também suporta a exibição automática de altitudes no sistema EGM96.
 		\n\nPara obtê-lo, faça o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
@@ -1528,7 +1528,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="shared_string_or">ou</string>
 	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo router offline OsmAnd.
          → Em média, a rota off-line apenas é possível para distâncias até 200 km. Por favor adicione um ou mais pontos intermédios para calcular a rota.</string>
-	<string name="osmodroid_refresh">Atualizar canais</string>
+	
     <string name="map_widget_map_rendering">Renderização do mapa:</string>
     <string name="app_mode_hiking">Caminhada</string>
     <string name="app_mode_motorcycle">Motocicleta</string>
@@ -1542,8 +1542,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="amenity_type_seamark">Marca Marítima</string>
     <string name="app_modes_choose_descr">Escolha os perfis disponíveis na aplicação</string>
     <string name="app_modes_choose">Perfis da aplicação</string>
-	<string name="osmodroid_seek">Procurar objeto</string>
-    <string name="osmodroid_unseek">Não procurar objeto</string>
+	
+    
     <string name="route_descr_destination"> </string>
     <string name="osmo_sign_in">Entrar</string>
     <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo.</string>
@@ -1827,7 +1827,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
     <string name="shared_string_my_location">Meus locais</string>
-    <string name="recents">RECENTES</string>
+    
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
     
 	<string name="speak_pedestrian">Anunciar faixas de pedestre</string>

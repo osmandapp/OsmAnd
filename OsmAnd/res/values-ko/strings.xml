@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -967,11 +966,11 @@
 	<string name="driving_region_canada">캐나다</string>
 	<string name="driving_region_europe_asia">한국 &amp; 유럽</string>
 	<string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
-	<string name="osmodroid_mode_on">OsMoDroid 정지</string>    
-    <string name="osmodroid_mode_off">OsMoDroid 시작</string>
-    <string name="osmodroid_refresh">채널 새로 고침</string>
-    <string name="osmodroid_seek">개체 탐색</string>
-    <string name="osmodroid_unseek">객체 탐색않음</string>
+	    
+    
+    
+    
+    
     <string name="announce_gpx_waypoints">GPX 경유지 알리기</string>
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
@@ -1161,10 +1160,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">경계 숨기기</string>
 	<string name="rendering_attr_noAdminboundaries_description">지역 경계 표시를 억제 (관리자 레벨 5-9 )</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 플러그인은 이전 버전을 가지고 업데이트해야 합니다.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid 플러그인은 온라인 트래킹 기능에 대한 OsModroid 앱에 대한 OsmAnd 확장이다. 
-서비스에 대한 정보는 http://esya.ru 에서 이용할 수 있습니다.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid 플러그인</string>
+    
+    
+    
 	<string name="tip_altitude_offset">고도 보정</string>
 	<string name="map_widget_max_speed">속도 제한</string>
     <string name="no_buildings_found">어떤 빌딩도 찾을 수 없습니다.</string>
@@ -2053,7 +2051,7 @@
 	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
 	<string name="avoid_roads_msg">원하는 도로를 선택하여 대체 경로를 실행할 수 있습니다</string>
     <string name="save_track_to_gpx_globally_headline">요구시 트랙을 기록</string>
-	<string name="recents">최근</string>
+	
 	<string name="rendering_attr_streetLighting_name">거리 조명</string>
     <string name="proxy_pref_title">프록시</string>
     <string name="proxy_pref_descr">프록시 인터넷 통신 설정</string>
@@ -2067,7 +2065,7 @@
 	<string name="version_settings_descr">야간 빌드를 다운로드</string>
     <string name="version_settings">빌드</string>
     <string name="points">장소</string>
-    <string name="tracks">경로</string>
+    
     <string name="osm_editing_manage">관리</string>
     <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
@@ -2105,7 +2103,7 @@
 	<string name="location_on_map">위치:
 \n위도 %1$s\n경도 %2$s</string>
 	
-	<string name="showed_on_map">지도에 표시</string>
+	
 	<string name="rename_failed">이름 바꾸기 실패 했습니다.</string>
 	<string name="back_to_map">지도로 돌아가기</string>
 	<string name="track_segments">트랙 세그먼트</string>

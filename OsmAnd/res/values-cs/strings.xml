@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -1087,12 +1086,12 @@
 	<string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Máte nainstalovanou starou verzi modulu OsMoDroid, která potřebuje být aktualizována.</string>
+    
     <string name="tip_altitude_offset_t">"\tVětšina přijímačů GPS měří výškové souřadnice v systému WGS84. Převod z něj do lokálního systému vyžaduje korekci závislou na pozici.
 \n\tLepší aproximace k těmro lokálním systémům je systém EGM96. OsmAnd nyní podporuje automatické zobrazení nadmořské výšky v tomto systému.\n\tPro zobrazení výšky v systému EGM96 stáhněte soubor WW15MGH.DAC ve Správci offline dat (originál souboru je na http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
 	</string>
-    <string name="osmodroid_plugin_description">Modul OsMoDroid je rozšíření OsmAnd pro použití s aplikací OsModroid pro přímý přenos pozice. Informace o službě OsModroid jsou dostupné na http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Modul OsMoDroid</string>
+    
+    
 	
 
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
@@ -1285,8 +1284,8 @@
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
     
-	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Spustit OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">GPX body</string>
     <string name="speak_title">Hlásit…</string>
 	<string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení</string>
@@ -1407,9 +1406,9 @@ s často kladenými otázkami.</string>
     <string name="complex_route_calculation_failed">Rychlý přepočet trasy selhal (%s), návrat k pomalému výpočtu.</string>
     <string name="disable_complex_routing_descr">Vypnout dvojfázovou navigaci pro profil auta</string>
     <string name="disable_complex_routing">Vypnout komplexní navigaci</string>
-    <string name="osmodroid_refresh">Obnovit kanály</string>
-    <string name="osmodroid_seek">Sledovat objekt</string>
-    <string name="osmodroid_unseek">Nesledovat objekt</string>
+    
+    
+    
     <string name="calculate_osmand_route_without_internet">Vypočítat OsmAnd trasu bez připojení na Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítat OsmAnd trasu pro první a poslední úsek</string>
     <string name="tip_map_styles_t">"OsmAnd umožňuje zobrazení vektorových map v různých stylech podle vašich potřeb:
@@ -1819,10 +1818,10 @@ s často kladenými otázkami.</string>
     <string name="proxy_pref_descr">Nastavit internetové proxy připojení</string>
     <string name="settings_privacy">Soukromí</string>
     <string name="points">Body</string>
-    <string name="tracks">Trasy</string>
+    
     <string name="shared_string_my_location">Moje poloha</string>
     <string name="osm_editing_manage">Spravovat</string>
-    <string name="recents">NEDÁVNÉ</string>
+    
 	<string name="navigation_over_track">Spustit navigaci po trase?</string>
 	<string name="avoid_roads_msg">Můžete vynutit náhradní trasu označením cest, kterým je nutné se vyhnout</string>
     <string name="save_track_to_gpx_globally_headline">Záznam tras na vyžádání</string>
@@ -1856,7 +1855,7 @@ s často kladenými otázkami.</string>
 	
 	<string name="watch">Zobrazit</string>
 	<string name="shared_string_selected">Vybraný</string>
-	<string name="showed_on_map">Zobrazené na mapě</string>
+	
 	<string name="rename_failed">Přejmenování selhalo.</string>
 	<string name="shared_string_currently_recording_track">Právě zaznamenávaná trasa</string>
 	<string name="back_to_map">Zpět na mapu</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1095,9 +1094,9 @@
 	<string name="tip_altitude_offset_t">"La plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction en fonction de la position courante.
 \n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage automatique  de l\'altitude dans ce référentiel.
 \n\tIl suffit pour cela de télécharger le fichier \'Monde - Correction d\'altitude\' depuis le gestionnaire de données hors-ligne (l\'original est à l\'adresse http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Le greffon OsMoDroid est obsolète et doit être mis à jour.</string>
-    <string name="osmodroid_plugin_description">Le greffon OsMoDroid est une extension OsmAnd pour l\'application OsMoDroid qui permet la création de traces. Pour plus d\'information à propos du service, consulter le site http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
+    
+    
+    
 	<string name="index_srtm_ele">Courbes de niveau</string>
     <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux et les reliefs de montagne pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner le type de carte désiré), et de les utiliser avec les cartes hors-ligne.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
@@ -1360,8 +1359,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
-	<string name="osmodroid_mode_on">Arrêter OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Démarrer\nOsMoDroid</string>
+	    
+    
     <string name="speak_title">Annonces vocales…</string>
 	<string name="speak_cameras">Annoncer les radars</string>
 	<string name="speak_traffic_warnings">Annoncer les stops et les ralentisseurs</string>
@@ -1444,7 +1443,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
     <string name="shared_string_delete_all">Supprimer tout</string>
-    <string name="osmodroid_refresh">Rafraîchir les canaux</string>
+    
     <string name="app_mode_hiking">Rando</string>
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
@@ -1453,8 +1452,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="app_modes_choose">Profils d\'application</string>
 	<string name="map_widget_map_rendering">Rendu de carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
-    <string name="osmodroid_seek">Chercher objet</string>
-    <string name="osmodroid_unseek">Ne plus chercher objet</string>
+    
+    
     <string name="speech_rate_descr">Sélectionner la vitesse d\'élocution de la voix de synthèse (TTS)</string>
     <string name="speech_rate">Vitesse d\'élocution</string>
     
@@ -1896,7 +1895,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
     <string name="navigation_over_track">Démarrer la navigation sur cette trace ?</string>
 	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
-	<string name="recents">Récents</string>
+	
 	<string name="proxy_pref_title">Proxy</string>
     <string name="enable_proxy_descr">Configurer le mandataire HTTP (Proxy) pour toutes les requêtes réseau</string>
 	<string name="proxy_host_title">Serveur mandataire (Proxy)</string>
@@ -1910,7 +1909,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="version_settings_descr">Télécharger les versions en cours développement</string>
     <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
-    <string name="tracks">Traces</string>
+    
     <string name="shared_string_my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">État du GPS</string>
@@ -1962,7 +1961,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
 	<string name="back_to_map">Retour à la carte</string>
 	
-	<string name="showed_on_map">Affiché sur la carte</string>
+	
 	<string name="shared_string_selected">Sélectionné</string>
 	<string name="track_points">Points de piste</string>
 	<string name="route_points">Points de passage</string>

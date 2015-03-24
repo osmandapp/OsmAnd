@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -1090,9 +1089,9 @@
 		\n\nNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96.
 		\n\nOsmAnd zobrazí nadmorskú výšku Vašej pozície v systéme EGM96 ak si stiahnete súbor "World altitude correction" (WW15MGH.DAC) cez "Nastavenia" → "Správca mapových súborov". (Pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid modul je starej verzie a je potrebné ho aktualizovať.</string>
     
-    <string name="osmodroid_plugin_name">OsMoDroid zásuvný modul</string>
+    
+    
 	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahrať video</string>
@@ -1170,7 +1169,7 @@
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Umožní výpočet presnej trasy bez závad. Výpočet je však zatiaľ obmedzený na menšiu vzdialenosť a je pomalší.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid zásuvný modul je OsmAnd rozšírenie pre aplikáciu OsModroid, ktorá umožnuje on-line sledovanie. Informácie o tejto aplikácií sú k dispozícii na stránke http://esya.ru.</string>
+    
     <string name="map_widget_gps_info">Informácie o GPS</string>
     <string name="layer_hillshade">Vrstva s tieňovaným reliéfom</string>
     <string name="osmand_play_title_30_chars">OsmAnd mapy a navigácia</string>
@@ -1309,8 +1308,8 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Európa a Ázia</string>
 	<string name="driving_region_uk">UK, India, Austrália a ostatné</string>
-	<string name="osmodroid_mode_on">Zastaviť OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Spustiť OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Ohlasovať GPX waypointy</string>
     <string name="speak_title">Ohlásiť…</string>
 	<string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
@@ -1521,7 +1520,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 \n\nPre zobrazenie trasy k cieľu z iného bodu ako vašej súčasnej polohy, zvoľte východzí bod na mape a kliknite Pokyny odtiaľto.
 \n\nAk použijete Pokyny odtiaľto spolu s Navigovať OsmAnd sa prepne na vašu aktuálnu polohu hneď ako bude zistená (takže táto funkcia môže byť použitá pre rýchle spustenie navigácie než je známa poloha). Na druhú stranu, Pokyny odtiaľto v kombinácii so Zobraziť trasu len zobrazí trasu z ľubovoľného zvoleného bodu bez následných zmien. "</string>
 	<string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d OSM zmien. Ste si istý?</string>
-    <string name="osmodroid_refresh">Obnoviť kanály</string>
+    
     <string name="tip_faq_t">Pozrite si https://code.google.com/p/osmand/wiki/FAQ s často kladenými otázkami.</string>
     <string name="tip_faq">Často kladené otázky</string>
     <string name="app_mode_hiking">Turistika</string>
@@ -1538,8 +1537,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="disable_complex_routing">Vypnúť komplexnú navigáciu</string>
     <string name="speech_rate_descr">Zadajte rýchlosť reči TTS</string>
     <string name="speech_rate">Rýchlosť reči</string>
-    <string name="osmodroid_seek">Sledovať objekt</string>
-    <string name="osmodroid_unseek">Nesledovať objekt</string>
+    
+    
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
     <string name="app_mode_truck">Kamión</string>
@@ -1969,7 +1968,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
 	<string name="navigation_over_track">Spustiť navigáciu po stope?</string>
 	<string name="avoid_roads_msg">Môžete vynútiť inú trasu zvolením ciest, ktorým je nutné sa vyhnúť</string>
-    <string name="recents">NEDÁVNE</string>
+    
 	<string name="rendering_attr_streetLighting_name">Pouličné osvetlenie</string>
     <string name="proxy_pref_title">Proxy server</string>
     <string name="proxy_pref_descr">Nastaviť pripojenie na Internet cez proxy</string>
@@ -1983,7 +1982,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="version_settings_descr">Stiahnuť vývojové verzie</string>
     <string name="version_settings">Verzie</string>
     <string name="points">Body</string>
-    <string name="tracks">Stopy</string>
+    
     <string name="osm_editing_manage">Spravovať</string>
     <string name="parking_place">Parkovacie miesto</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
@@ -2027,7 +2026,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="track_segments">Úseky stopy</string>
 	<string name="track_points">Body stopy</string>
 	
-	<string name="showed_on_map">Zobrazené na mape</string>
+	
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Zrušiť</string>
@@ -2114,7 +2113,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="delay_to_start_navigation_descr">Automaticky spustiť navigáciu po určenom intervale</string>
     <string name="delay_to_start_navigation">Preskočiť plánovanie trasy</string>
     <string name="shared_string_go">Ísť</string>
-	<string name="osmand_parking_outdated">Zastaralé</string>
+	
 	<string name="action_create">Vytvoriť akciu</string>
 	<string name="action_modify">Zmeniť akciu</string>
 	<string name="action_delete">Odstrániť akciu</string>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
 	<string name="traffic_warning_payment">Mautstelle</string>
@@ -1801,14 +1801,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="color_red">Rot</string>
 	<string name="color_yellow">Gelb</string>
 
-	<string name="osmodroid_unseek">Objektsuche beenden</string>
-	<string name="osmodroid_refresh">Kanäle aktualisieren</string>
-	<string name="osmodroid_seek">Objekt suchen</string>
-	<string name="osmodroid_mode_on">Stoppe OsMoDroid</string>
-	<string name="osmodroid_mode_off">Starte OsMoDroid</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">Das OsMoDroid-Plugin liegt in einer alten Version vor und muss aktualisiert werden.</string>
-	<string name="osmodroid_plugin_description">Das OsMoDroid-Plugin ist eine Erweiterung von OsmAnd für die OsMoDroid-Anwendung zum Online-Tracking. Informationen über den Dienst finden Sie auf http://esya.ru.</string>
-	<string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
+	
+	
+	
+	
+	
+	
+	
+	
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
@@ -2032,10 +2032,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="proxy_pref_descr">Proxy-Internetverbindung einrichten</string>
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
-    <string name="tracks">Tracks</string>
+    
     <string name="shared_string_my_location">Mein Ort</string>
     <string name="osm_editing_manage">Verwalten</string>
-    <string name="recents">VERLAUF</string>
+    
     <string name="navigation_over_track">Navigation über Strecke starten?</string>
     <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
@@ -2086,7 +2086,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_pisteRoutes_name">Pisten</string>
 	<string name="shared_string_export">Export</string>
 	<string name="watch">Ansehen</string>
-	<string name="showed_on_map">Auf Karte angezeigt</string>
+	
 	<string name="share_note">Notiz mitteilen</string>
 	<string name="days_behind">Tage alt</string>
 	<string name="shared_string_ellipsis">…</string>

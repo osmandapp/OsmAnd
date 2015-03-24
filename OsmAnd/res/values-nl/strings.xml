@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -839,9 +838,9 @@
   <string name="osmand_rastermaps_plugin_description">"Met deze plug-in heeft u toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaat kaarten, geologische kaarten, reliëf lagen, enz.\n\nAl deze kaarten kunnen worden gebruikt als de hoofd (basis) kaart op het OsmAnd kaart scherm, of als een extra laag of een achtergrond laag bij een ander basis kaart (zoals gewone offline kaarten van OsmAnd). Om een achtergrond laag meer zichtbaar te maken, kunnen enkele elementen van de OsmAnd kaarten eenvoudig worden verborgen via het menu \'Kaart instellen\'.\n\nTegel kaarten zijn direct via online bronnen verkrijgbaar of voor offline gebruik gereedgemaakt (en handmatig gekopieerd naar de OsmAnd gegevensfolder) als SQLite database door een verscheidenheid aan 3de partij kaart bewerkingsapplicaties. "</string>
   <string name="osmand_background_plugin_description">Toont de instellingen om tracking en navigatie tijdens slaapmodus (scherm uit) in te schakelen door periodiek ontwaken van het GPS-toestel.</string>
   <string name="osmand_accessibility_description">Deze plug-in maakt de toegankelijkheid opties van uw toestel beschikbaar in OsmAnd. Het vergemakkelijkt b.v. het aanpassen van de spreeksnelheid voor TTS stemmen, het configureren van D-pad scherm navigatie door gebruik van een trackbal voor zoomregeling of het gebruiken van tekst-naar-spraak opties voor het automatisch aankondigen van uw positie.</string>
-  <string name="extra_settings">Geavanceerde instellingen</string>
-  <string name="osmand_monitoring_description">Toon instellingen om reizen in GPX bestanden vast te leggen, of live, via een webservice, online te bewaren.</string>
-  <string name="osmand_extra_settings_description">Toon geavanceerde kaartinstellingen (zoals meer details tonen) en enkele apparaatspecifieke instellingen.</string>
+  
+  
+  
   <string name="osmand_development_plugin_description">Toont de opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
   
@@ -1127,9 +1126,9 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Verberg grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">De OsMoDroid-plugin is een oude versie en moet bijgewerkt worden.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid-plugin is een OsmAnd-extensie voor de OsModroid-applicatie voor online trackingfuncties. Informatie over de service is beschikbaar op http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid-plugin</string>
+	
+    
+    
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
     <string name="srtm_plugin_description">"Deze plug-in biedt zowel een contourlijn als een reliëf laag die over de OsmAnd\'s offline kaart wordt weergegeven. Deze functionaliteit zal zeer worden gewaardeerd door sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de reliëfstructuur van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
@@ -1485,8 +1484,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_title">Aankondigen…</string>
 	<string name="speak_descr">Aankondigen van straatnamen, verkeerswaarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
 	<string name="speak_street_names">Straatnamen aankondigen (TTS)</string>
-    <string name="osmodroid_mode_on">OsMoDroid stoppen</string>    
-    <string name="osmodroid_mode_off">OsMoDroid starten</string>
+        
+    
     <string name="driving_region_descr">Regio voor autorijden: VS, Europa, GB, Azië en andere</string>
 	<string name="driving_region">Land</string>
 	<string name="driving_region_japan">Japan</string>
@@ -1543,7 +1542,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="animate_routing_route_not_calculated">Eerst de route laten berekenen alsjeblieft</string>
     <string name="animate_routing_route">Simuleer met de berekende route </string>
     <string name="animate_routing_gpx">Simuleer met een GPX spoor</string>
-    <string name="osmodroid_refresh">Ververs channels</string>
+    
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM-wijzigingen worden verwijderd. Doorgaan?</string>
     <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
     <string name="tip_faq">Vaak gestelde vragen</string>
@@ -1555,8 +1554,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="app_modes_choose_descr">Kies de profielen die in Osmand zichtbaar zijn</string>
     <string name="app_modes_choose">Toepassingsprofielen</string>
 	<string name="amenity_type_seamark">boei / baken</string>
-    <string name="osmodroid_seek">Zoek object</string>
-    <string name="osmodroid_unseek">Stop het zoeken naar object</string>
+    
+    
     
     <string name="complex_route_calculation_failed">Snelle routeberekening mislukt (%s), terug naar langzame berekening.</string>
     <string name="disable_complex_routing_descr">2-traps routeberekening voor auto uitschakelen</string>
@@ -1998,9 +1997,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="proxy_pref_descr">Stel een proxy voor internetcommunicatie in</string>
     <string name="settings_privacy">Privacy</string>
     <string name="points">Punten</string>
-    <string name="tracks">Sporen</string>
+    
     <string name="osm_editing_manage">Beheer</string>
-    <string name="recents">RECENT</string>
+    
 	<string name="navigation_over_track">Navigatie over spoor starten?</string>
 	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
     <string name="save_track_to_gpx_globally_headline">Gpx spoor loggen op aanvraag</string>
@@ -2029,7 +2028,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="plugin_ski_name">Ski kaartweergave</string>
 	<string name="plugin_ski_descr">"Deze plug-in voor OsmAnd plaatst onder handbereik de details over skipistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter\' kaart stijl die een met sneeuw bedekt winterlandschap voorstelt.\n\nEen globale overzicht van alle skipistes en cross country ski routes voor deze weergave is beschikbaar onder Downloads als \'World ski-map\'.\n\nHet activeren van deze weergave verandert de kaart in stijl \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door ofwel het de-activeren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
 	
-	<string name="showed_on_map">Weergegeven op de kaart</string>
+	
 	<string name="rename_failed">Hernoemen mislukt.</string>
 	<string name="back_to_map">Terug naar kaart</string>
 	<string name="share_note">Deel opmerking</string>
@@ -2116,7 +2115,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="delay_to_start_navigation_descr">Start de navigatie automatisch na een aangegeven periode</string>
     <string name="delay_to_start_navigation">Routeplanning overslaan</string>
     <string name="shared_string_go">Start</string>
-	<string name="osmand_parking_outdated">Verouderd</string>
+	
 	<string name="action_create">Actie: maak</string>
 	<string name="action_modify">Actie: wijzig</string>
 	<string name="action_delete">Actie: verwijder</string>

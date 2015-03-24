@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Iskanje</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	
 	
@@ -1107,9 +1106,9 @@
     <string name="monitoring_control_start">začni</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
-    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid je OsmAnd razširitev za OsModroid aplikacijo za funkcije živega sledenja. Informacije o storitvi dobite na http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
+	
+    
+    
 	<string name="index_srtm_ele">Izohipse</string>
     <string name="srtm_plugin_description">Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape).</string>
     <string name="srtm_plugin_name">Izohipse</string>
@@ -1453,8 +1452,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="route_via">Prek:</string>
     <string name="route_from">Od:</string>
     <string name="osb_author_dialog_password">OSM geslo (neobvezno)</string>
-    <string name="osmodroid_mode_on">Ustavi OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Zaženi OsMoDroid</string>
+        
+    
     <string name="announce_gpx_waypoints">Najavljanje GPX točk</string>
     <string name="speak_title">Najavi …</string>
 	<string name="speak_descr">Nastavitve za najavljanje imena ulic, prometna opozorila (ležeči policaji ipd.), opozorila merilnikov hitrosti, omejitve hitrosti</string>
@@ -1517,7 +1516,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="animate_routing_route_not_calculated">Najprej je treba preračunati pot</string>
     <string name="animate_routing_route">Preizkusi s podatki izračunane poti </string>
     <string name="animate_routing_gpx">Preizkusi z uporabo sledi GPX</string>
-    <string name="osmodroid_refresh">Osvežitev kanalov</string>
+    
     <string name="app_mode_hiking">Pohodništvo</string>
     <string name="app_mode_motorcycle">Motorno kolo</string>
     <string name="app_mode_boat">Čoln</string>
@@ -1530,7 +1529,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="amenity_type_seamark">Pomorski znak</string>
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
     <string name="app_modes_choose">Profili aplikacije</string>
-	<string name="osmodroid_seek">Poišči predmet</string>
+	
     <string name="guidance_preferences_descr">Nastavitve navigacije</string>
     <string name="disable_complex_routing_descr">Onemogoči 2-fazno usmerjanje za avtomobilsko navigacijo</string>
     <string name="routing_preferences_descr">Nastavitve usmerjanja</string>
@@ -1539,7 +1538,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="speech_rate">Hitrost govora</string>
     <string name="complex_route_calculation_failed">Hitri izračun poti ni uspel (%s), preklopljeno na počasni izračun.</string>
     <string name="disable_complex_routing">Onemogoči zapleteno usmerjanje</string>
-    <string name="osmodroid_unseek">Odzbrati predmet</string>
+    
     <string name="lang_hr">Hrvaščina</string>
     <string name="lang_zh">Kitajščina</string>
     <string name="lang_pt_br">Portugalščina (Brazilija)</string>
@@ -1967,7 +1966,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="navigate_point_northing">y koordinata</string>
     <string name="navigate_point_easting">x koordinata</string>
     
-	<string name="recents">NEDAVNI</string>
+	
 	<string name="navigation_over_track">Začetek navigacije po sledi?</string>
 	<string name="avoid_roads_msg">Alternativno pot lahko spremenite posledično tako, da izberete ceste, katerih se je treba izogibati</string>
     <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
@@ -1981,7 +1980,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="proxy_pref_descr">Nastavitev proxy internetne komunikacije</string>
     <string name="settings_privacy">Zasebnost</string>
     <string name="points">Točke</string>
-    <string name="tracks">Sledi</string>
+    
     <string name="shared_string_my_location">Moja lokacija</string>
     <string name="osm_editing_manage">Upravljaj</string>
     <string name="enable_proxy_title">Omogoči HTTP Proxy</string>

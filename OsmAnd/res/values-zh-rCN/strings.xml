@@ -450,8 +450,8 @@
 	<string name="driving_region_canada">加拿大</string>
 	<string name="driving_region_europe_asia">欧洲与亚洲</string>
 	<string name="driving_region_uk">英国、印度、澳大利亚及其他</string>
-	<string name="osmodroid_mode_on">停止 OsMoDroid</string>    
-    <string name="osmodroid_mode_off">启动 OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">播报 GPX 途经点</string>
     <string name="speak_title">播报…</string>
 	<string name="speak_descr">配置播报街道名称、交通信息(交通管制、拥堵)、测速电子眼警告、限速</string>
@@ -538,8 +538,8 @@
     <string name="download_roads_only_maps">仅包含道路的地图</string>
     
 	<string name="rendering_attr_noAdminboundaries_description">不显示区域(行政区划级别5-9)的边界</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 插件版本过旧，需要更新。</string>
-    <string name="osmodroid_plugin_name">OsMoDroid 插件</string>
+    
+    
 	<string name="tip_altitude_offset">海拔修正</string>
 	<string name="rendering_attr_showRoadMaps_description">选择何时显示仅包含道路的地图：</string>
 	<string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>

@@ -32,8 +32,8 @@
 	<string name="driving_region_europe_asia">Европа и Азија</string>
 	<string name="driving_region_uk">Велика Британија, Индија, Аустралија &amp; Остало</string>
 	<string name="local_index_tile_data_minzoom">Минимални зум: %1$s</string>
-    <string name="osmodroid_mode_off">Стартуј OsMoDroid</string>
-    <string name="osmodroid_refresh">Освежи канале</string>
+    
+    
     <string name="announce_gpx_waypoints">Најави GPX waypoints</string>
     <string name="speak_title">Најави…</string>
 	<string name="speak_descr">Подешавање најаве назива улица, саобраћајних упозорења, ограничења брзине</string>
@@ -313,7 +313,7 @@
 	<string name="choose_audio_stream">Излаз навођења гласом</string>
 	<string name="voice_stream_voice_call">Звук говорног позива</string>
 	<string name="voice_stream_notification">Звучно обавештење</string>
-	<string name="recents">СКОРАШЊЕ</string>
+	
 	<string name="lock_screen_request_explanation">%1$s захтева овлашћења да искључи екран ради уштеде енергије.</string>
     <string name="wake_on_voice">Укључи екран</string>
     <string name="wake_on_voice_descr">Укључи екран уређаја (ако је искључен) када се приближи скретање</string>
@@ -387,7 +387,7 @@
     <string name="version_settings_descr">Преузми ноћне изградње</string>
     <string name="version_settings">Изградње</string>
     <string name="points">Тачке</string>
-    <string name="tracks">Стазе</string>
+    
     <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
     <string name="home_button">Матица</string>

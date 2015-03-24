@@ -1092,9 +1092,9 @@
 	<string name="monitoring_control_start">התחלה</string>
     <string name="rendering_attr_noAdminboundaries_name">הסתרת הגבולות</string>
 	<string name="rendering_attr_noAdminboundaries_description">הסתרת דרגות ניהול 5-9</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">גרסת תוסף ה־OsMoDroid ישנה ויש לעדכן אותה.</string>
-    <string name="osmodroid_plugin_description">התוסף OsMoDroid הוא תוסף OsModroid עבור OsmAnd לתכונות מעקב פעיל. מידע על השירות ניתן למצוא בכתובת http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">תוסף OsMoDroid</string>
+	
+    
+    
 	<string name="tip_altitude_offset_t">"\tרוב התקני האיכון מדווחים על מדידות גובה לפי מערכת הצירים WGS84 אשר מבוססת על אליפסואיד, אשר המרה ממנה למערכות בהן משתמשת המערכת דורשת תיקון בהתאם למיקום.
 \n\tדיוק טוב יותר אפשר לקבל עם מערכת הצירים EGM96. ב־OsmAnd יש כעת גם תמיכה בהצגה אוטומטית של גבהים במערכת EGM96.
 \n\tכדי להגיע למצב כזה, עליך פשוט להוריד את הקובץ WW15MGH.DAC דרך מנהל הנתונים הבלתי מקוונים (המקור בכתובת http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>

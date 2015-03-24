@@ -22,8 +22,8 @@
   <string name="driving_region_canada">Kanada</string>
   <string name="driving_region_europe_asia">Europa &amp; Asia</string>
   <string name="driving_region_uk">EB, India, Australia &amp; Bestelakoak</string>
-  <string name="osmodroid_mode_on">OsMoDroid gelditu</string>
-  <string name="osmodroid_mode_off">OsMoDroid abiarazi</string>
+  
+  
   <string name="announce_gpx_waypoints">GPX bide-puntuen berri eman</string>
   <string name="speak_title">Iragarri…</string>
   <string name="speak_descr">Konfiguratu kaleen izenen, trafiko abixuen (geldialdi behartuak, abiadura mugak) eta radarren berri emateko</string>
@@ -195,9 +195,9 @@
   <string name="download_roads_only_maps">Errepideak-bakarrik mapak</string>
   <string name="rendering_attr_noAdminboundaries_name">Mugak ezkutatu</string>
   <string name="rendering_attr_noAdminboundaries_description">Eskualde mailak ez erakutsi (5-9 admin mailak)</string>
-  <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugina bertsio zaharra da eta eguneraketa behar du.</string>
-  <string name="osmodroid_plugin_description">OsMoDroid plugina OsmAnderako sareko jarraipenetarako luzapen bat da. Zerbitzuaren informazioa: http://esya.ru.</string>
-  <string name="osmodroid_plugin_name">OsMoDrois plugina</string>
+  
+  
+  
   <string name="tip_altitude_offset">Altuera bistaratzea - Desplazamendu zuzentzailea</string>
   <string name="tip_altitude_offset_t">"⇥GPS gailu gehienek elipsoidean oinarritutako WGS84 erreferentzia sistemaren bidez ematen dute altueraren neurria. Lokalean erabiltzen den neurri sisteman emateko, kokapenaren araberako zuzenketa behar du.⏎\n⇥⇥⏎\n⇥Lokalean erabiltzen den neurri sistemari gehien gerturatzen zaiona EGM96 erreferentzia da. OsmAndek orain altuera automatikoki bistaratzeko EGM96 sistema jasaten du.⏎\n⇥⇥⏎\n⇥Hau erabiltzeko, deskargatu \'Munduko Altitude Zuzenketa\'(WW15MGH.DAC) \'Ezarpenak\' →  \'Kudeatu mapen fitxategiak\' bidez. (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
   <string name="map_widget_max_speed">Abiadura muga</string>
@@ -1272,9 +1272,9 @@
     <string name="rendering_attr_osmcTraces_name">Ibilbide simboloen gain-azala</string>
     <string name="rendering_attr_osmcTraces_description">Renderizatu bideak OSMC aztarnen arabera</string>
     
-	<string name="osmodroid_refresh">Kanalak eguneratu</string>
-    <string name="osmodroid_seek">Bilatutako objektua</string>
-    <string name="osmodroid_unseek">Ez bilatutako objektua</string>
+	
+    
+    
     
     <string name="about_version">Bertsioa:</string>
     <string name="about_settings">Buruz</string>

@@ -1129,9 +1129,9 @@
     <string name="safe_mode">Beskermde wyse</string>
     <string name="native_library_not_running">Die toepassing werk in beskermde wyse (skakel dit af in Instellings).</string>
     <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (\'Instellings\'-&gt; \'Inligtingsbestuur\' -&gt; \'Aflaai\' -&gt; Kies verlangde kaart-tipe).</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid inlasmodule is `n ou weergawe en het `n opgradering nodig.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn spoor-natrek funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid inlasmodule</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Hoogte regstelling</string>
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
     <string name="route_descr_current_location">Huidige posisie</string>
@@ -1277,8 +1277,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="speak_title">Aankondig…</string>
 	<string name="speak_descr">Verstel aankondig van straatname, verkeerswaarskuwings(geforseerde stoppe, spoed-hobbels), spoedkamera, spoedbeperkings</string>
 	<string name="speak_street_names">Kondig straatname aan(TTS)</string>
-    <string name="osmodroid_mode_on">Staak OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Begin OsMoDroid</string>
+        
+    
     <string name="driving_region_descr">Kies Bestuur Streek: VSA, Europa, VK, Asië en Ander</string>
 	<string name="driving_region">Bestuur Streek</string>
 	<string name="driving_region_japan">Japan</string>
@@ -1359,8 +1359,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     
     <string name="shared_string_and">en</string>
     <string name="shared_string_or">of</string>
-	<string name="osmodroid_refresh">Verfris kanale</string>
-    <string name="osmodroid_seek">Soek objek</string>
+	
+    
     <string name="osmo_settings_uuid">Unieke toestel ID</string>
     <string name="osmo_settings_descr">Sien unieke toestel registrasie kode en ander monitor spesifieke stellings </string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitering - Gevorderde Lewendige Monitering met baie features vir afstandbeheer http://osmo.mobi</string>

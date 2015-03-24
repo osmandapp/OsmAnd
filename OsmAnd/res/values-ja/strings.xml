@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -686,8 +685,8 @@ POIの更新は利用できません</string>
 	<string name="driving_region_canada">カナダ</string>
 	<string name="driving_region_europe_asia">ヨーロッパ &amp; アジア</string>
 	<string name="driving_region_uk">イギリス, インド, オーストラリア &amp; その他</string>
-	<string name="osmodroid_mode_on">OsMoDroidを停止</string>    
-    <string name="osmodroid_mode_off">OsMoDroidを開始</string>
+	    
+    
     <string name="announce_gpx_waypoints">GPX経由点をアナウンス</string>
     <string name="speak_title">アナウンス…</string>
 	<string name="speak_descr">通りの名称、トラフィックの警告（強制停止、スピードバンプ）、スピードカメラ（オービス）、法定速度のアナウンス設定</string>
@@ -853,9 +852,9 @@ POIの更新は利用できません</string>
     <string name="download_roads_only_maps">道路のみのマップ</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">境界線を隠す</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroidプラグインは古いバージョンなので、更新する必要があります。</string>
-    <string name="osmodroid_plugin_description">OsMoDroidプラグインはオンライン追跡機能のOsModroidアプリケーションのOsmAnd用に拡張したものです。サービスに関する情報はhttp://esya.ruで参照できます。</string>
-    <string name="osmodroid_plugin_name">OsMoDroidプラグイン</string>
+	
+    
+    
 	<string name="map_widget_max_speed">制限速度</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">該当する建物は見つかりませんでした。</string>
@@ -1304,7 +1303,7 @@ POIの更新は利用できません</string>
     <string name="tip_faq">よくある質問(FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d個のOSMの変更を削除しようとしています。よろしいですか？</string>
     <string name="shared_string_delete_all">すべて削除</string>
-    <string name="osmodroid_refresh">チャンネルを更新</string>
+    
     <string name="tip_recent_changes_1_5_t">"1.5での変更点:
 \n\t* 制限速度とスピードカメラを音声で警告
 \n\t* 音声案内機能の追加 (通りの名前をアナウンス)
@@ -1526,8 +1525,8 @@ POIの更新は利用できません</string>
     <string name="complex_route_calculation_failed">高速ルート計算が失敗しました(%s)、低速モードで再計算します。</string>
     <string name="disable_complex_routing_descr">車用ナビゲーションの2段階ルート計算を無効化</string>
     <string name="disable_complex_routing">複雑なルート計算を無効化</string>
-    <string name="osmodroid_seek">オブジェクトを探す</string>
-    <string name="osmodroid_unseek">オブジェクトを探さない</string>
+    
+    
     <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路セグメントを計算する</string>
     <string name="forward">次へ</string>
     <string name="keep_navigation_service">続行</string>
@@ -1889,10 +1888,10 @@ POIの更新は利用できません</string>
     <string name="proxy_pref_descr">インターネット接続のプロキシ設定</string>
     <string name="settings_privacy">プライバシー</string>
     <string name="points">地点</string>
-    <string name="tracks">経路</string>
+    
     <string name="shared_string_my_location">現在地点</string>
     <string name="osm_editing_manage">管理</string>
-    <string name="recents">履歴</string>
+    
 	<string name="navigation_over_track">経路を超えてナビゲーションを開始しますか？</string>
 	<string name="avoid_roads_msg">使用しない道路を選択することで、別の経路を検索することができます</string>
     

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1069,9 +1068,9 @@
     <string name="tip_altitude_offset">Corrección de Altitud</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
-    <string name="osmodroid_plugin_description">El extra de OsMoDroid es una extensión para la aplicación OsModroid para funciones de seguimiento en línea. Información sobre el servicio está disponible en http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
+    
+    
+    
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">"Este extra proporciona una superposición de curvas de nivel y una capa de sombreado (relieve) que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
@@ -1301,8 +1300,8 @@
     <string name="speak_cameras">Anunciar radares</string>
 	<string name="speak_traffic_warnings">Anuncia advertencias de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
-	<string name="osmodroid_mode_on">Para OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Inicia OsMoDroid</string>
+	    
+    
     <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad</string>
@@ -1443,12 +1442,12 @@
     <string name="tip_faq">Preguntas más frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios OSM. ¿Quieres continuar?</string>
     <string name="shared_string_delete_all">Borrar todo</string>
-    <string name="osmodroid_refresh">Renueva los canales</string>
+    
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
 	<string name="map_widget_map_rendering">Renderizado de mapa</string>
     <string name="app_modes_choose_descr">Elige los perfiles de uso que son visibles en la aplicación</string>
-    <string name="osmodroid_seek">Busca objeto</string>
+    
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
     <string name="routing_preferences_descr">Preferencias de ruteo</string>
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
@@ -1500,7 +1499,7 @@
 \n\t* Opción de accesibilidad a la velocidad de voz "</string>
     <string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
-    <string name="osmodroid_unseek">Objetos no buscados</string>
+    
     <string name="lang_en">Inglés</string>
 	<string name="lang_af">Afrikáans</string>
 	<string name="lang_hy">Armenio</string>
@@ -1893,7 +1892,7 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Configurar un proxy de acceso a Internet</string>
     <string name="settings_privacy">Privacidad</string>
-    <string name="recents">RECIENTES</string>
+    
 	<string name="enable_proxy_title">Activar Proxy HTTP</string>
 	<string name="enable_proxy_descr">Configura Proxy HTTP para todas las peticiones de red</string>
 	<string name="proxy_host_title">Host proxy</string>
@@ -1905,7 +1904,7 @@
     <string name="gps_status">GPS status</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="points">Puntos</string>
-    <string name="tracks">Trazas</string>
+    
     <string name="shared_string_my_location">Mi ubicación</string>
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
@@ -1952,7 +1951,7 @@
 	<string name="plugin_touringview_name">Vista del mapa turístico</string>
 
 	
-	<string name="showed_on_map">Mostrado en el mapa</string>
+	
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="shared_string_currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>

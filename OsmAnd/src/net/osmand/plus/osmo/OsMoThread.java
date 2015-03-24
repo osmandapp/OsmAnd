@@ -8,6 +8,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -54,8 +55,6 @@ public class OsMoThread {
 	private boolean reconnect;
 	private Selector selector;
 
-	private List<OsMoReactor> listReactors;
-
 	private int authorized = 0; // 1 - send, 2 - authorized
 	private OsMoService service;
 	private SessionInfo sessionInfo = null;
@@ -75,9 +74,8 @@ public class OsMoThread {
 	
 	
 
-	public OsMoThread(OsMoService service, List<OsMoReactor> listReactors) {
+	public OsMoThread(OsMoService service) {
 		this.service = service;
-		this.listReactors = listReactors;
 		// start thread to receive events from OSMO
 		HandlerThread h = new HandlerThread("OSMo Service");
 		h.start();
@@ -115,12 +113,16 @@ public class OsMoThread {
 		}
 		this.activeChannel = activeChannel;
 		key.attach(new Integer(++activeConnectionId));
-		for(OsMoReactor sender : listReactors) {
+		for(OsMoReactor sender : getReactors()) {
 			sender.onConnected();
 		}
 
 	}
 	
+	private Collection<OsMoReactor> getReactors() {
+		return service.getListReactors();
+	}
+
 	public String format(String cmd, Map<String, Object> params) {
 		JSONObject json;
 		try {
@@ -176,7 +178,7 @@ public class OsMoThread {
 				activeChannel = null;
 			}
 			String msg = e.getMessage();
-			for(OsMoReactor sender : listReactors) {
+			for(OsMoReactor sender : getReactors()) {
 				sender.onDisconnected(msg);
 			}
 			delay = HEARTBEAT_FAILED_DELAY;
@@ -188,7 +190,7 @@ public class OsMoThread {
 		}
 		if (stopThread) {
 			stopChannel();
-			for(OsMoReactor sender : listReactors) {
+			for(OsMoReactor sender : getReactors()) {
 				sender.onDisconnected(null);
 			}
 			serviceThread.getLooper().quit();
@@ -342,13 +344,13 @@ public class OsMoThread {
 				// lastSendCommand = System.currentTimeMillis(); // not needed handled by send
 			}
 			boolean processed = false;
-			for (OsMoReactor o : listReactors) {
+			for (OsMoReactor o : getReactors()) {
 				try {
 					if (o.acceptCommand(header, id, data, obj, this)) {
 						processed = true;
 						break;
 					}
-				} catch (Exception e) {
+				} catch (Exception e) {e.printStackTrace();
 					exc("ERROR REACTOR:", e);
 				}
 			}
@@ -417,7 +419,7 @@ public class OsMoThread {
 		if(authorized == 1) {
 			return null;
 		}
-		for (OsMoReactor s : listReactors) {
+		for (OsMoReactor s : getReactors()) {
 			String l = null;
 			try {
 				l = s.nextSendCommand(this);

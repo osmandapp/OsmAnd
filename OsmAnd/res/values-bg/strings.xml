@@ -214,9 +214,9 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Скриване на границите</string>
 	<string name="rendering_attr_noAdminboundaries_description">Не показвай административни граници (admin нива 5–9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid добавката е стара версия и трябва да бъде обновена.</string>
-    <string name="osmodroid_plugin_description">Добавката OsMoDroid е разширение на OsmAnd за онлайн запис на следа (трак). Информация за услугата ще намерите на http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid добавка</string>
+    
+    
+    
 	<string name="tip_altitude_offset">Корекция на надморската височина</string>
 	<string name="tip_altitude_offset_t">"Повечето GPS устройства показват надморската височина съгласно системата WGS84. Необходимо е тези данни да бъдат преобразувани към местни системи.
 \n\nСистемата EGM96 дава по-близки до реалните стойности. OsmAnd също поддържа EGM96.
@@ -1532,8 +1532,8 @@ OsmAnd е с отворен код и активно да се развива. �
 <string name="announce_gpx_waypoints">Обявяване на точките от GPX файла</string>
     <string name="speak_title">Обявяване…</string>
 	<string name="speak_street_names">Обявяване на имена на улици (синтезиран глас)</string>
-    <string name="osmodroid_mode_on">Спиране на OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Стартиране на OsMoDroid</string>
+        
+    
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
     <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (стопове, легнали полицаи), предупреждения за камери, ограничения на скоростта</string>
 	<string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
@@ -1609,9 +1609,9 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Изберете съществуващ…</string>
     <string name="edit_tilesource_name">Име</string>
-    <string name="osmodroid_refresh">Обновяване на каналите</string>
-    <string name="osmodroid_seek">Следене на обект</string>
-    <string name="osmodroid_unseek">Прекратяване на следенето</string>
+    
+    
+    
     <string name="maps_define_edit">Въвеждане/редактиране…</string>
 	<string name="guidance_preferences_descr">Предпочитания за навигацията</string>
     <string name="routing_preferences_descr">Предпочитания за маршрутите</string>

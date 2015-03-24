@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -853,7 +852,7 @@
 \n\t* Poster i kursiv stil innebär att data är inaktiverade på enheten "</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
+    
     <string name="tip_altitude_offset">Höjdvisning - Offset-korrigering</string>
 	<string name="map_widget_max_speed">Hastighets- begränsning</string>
     <string name="monitoring_control_start">GPX</string>
@@ -869,7 +868,7 @@
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
     <string name="background_service_is_enabled_question">Vilolägestjänsten körs fortfarande. Vill du avbryta den också?</string>
-    <string name="osmodroid_plugin_name">Modul för OsMoDroid</string>
+    
 	<string name="edit_filter_create_message">Filter {0} har skapats</string>
 	<string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
 	<string name="poi_action_change">ändra</string>
@@ -1072,7 +1071,7 @@
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
     <string name="av_def_action_choose">Välj vid användning</string>
-    <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
+    
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
     <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems). "</string>
     <string name="access_arrival_time">Ankomsttid</string>
@@ -1192,8 +1191,8 @@
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
     <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
-    <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Starta OsMoDroid</string>
+        
+    
     <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
 	<string name="driving_region_descr">Välj område: USA, Europa, UK, Asien och andra</string>
 	<string name="driving_region">Område</string>
@@ -1265,8 +1264,8 @@
     <string name="map_widget_map_rendering">Kartrendering</string>
     <string name="amenity_type_seamark">Sjömärke</string>
     <string name="app_modes_choose">Applikationsprofiler</string>
-	<string name="osmodroid_refresh">Läs om kanaler</string>
-    <string name="osmodroid_seek">Sök objekt</string>
+	
+    
     <string name="osb_author_dialog_password">OSM-lösenord (frivilligt)</string>
 	<string name="speech_rate_descr">Ange talhastighet för TTS</string>
     <string name="speech_rate">Talhastighet</string>
@@ -1301,7 +1300,7 @@
 	<string name="routing_attr_short_way_description">Använd kortaste väg</string>
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
-    <string name="route_descr_select_on_map">Välj på karta …</string>
+    
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
     <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>
@@ -1500,7 +1499,7 @@
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
     <string name="color_green">grön</string>
 	
-    <string name="osmodroid_unseek">Sluta söka objekt</string>
+    
     
     <string name="sort_by_distance">Sortera efter avstånd</string>
     <string name="sort_by_name">Sortera efter namn</string>
@@ -1698,7 +1697,7 @@
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
     
 	<string name="avoid_roads_msg">Du kan ändra till en alternativ rutt genom att välja vägar att undvika</string>
-    <string name="recents">TIDIGARE</string>
+    
 	<string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Ställ in en anslutning till Internet via proxy</string>
@@ -1717,7 +1716,7 @@
     <string name="version_settings_descr">Hämta \"nattversioner\"</string>
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
-    <string name="tracks">Spår</string>
+    
     <string name="osm_editing_manage">Hantera</string>
     <string name="shared_string_disabled">Inaktiverad</string>
 	<string name="shared_string_enabled">Aktiverad</string>
@@ -1759,7 +1758,7 @@
 	<string name="rename_failed">Namnbytet misslyckades.</string>
 	<string name="back_to_map">Tillbaka till kartan</string>
 	
-	<string name="showed_on_map">Visade på kartan</string>
+	
 	<string name="track_segments">Spårsegment</string>
 	<string name="track_points">Spårpunkter</string>
 	<string name="route_points">Ruttpunkter</string>

@@ -422,7 +422,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			app.getLocationProvider().removeCompassListener(this);
 		}
 		app.getLocationProvider().removeLocationListener(this);
-		osMoPlugin.getGroups().addUiListeners(null);
+		osMoPlugin.getGroups().removeUiListener(this);
 		osMoPlugin.setGroupsActivity(null);
 	}
 	

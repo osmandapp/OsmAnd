@@ -1,7 +1,19 @@
 package net.osmand.plus.osmo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,21 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.helpers.FontCache;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
@@ -55,8 +52,6 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_osmo_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.osmo_text)).setTypeface(typeface);
 		view.findViewById(R.id.manage).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

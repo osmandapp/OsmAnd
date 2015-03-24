@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
@@ -1081,10 +1080,10 @@
 	<string name="download_regular_maps">Standardowe mapy</string>
     <string name="rendering_attr_noAdminboundaries_name">Ukryj granice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">Wykryto starą wersję pluginu OsMoDroid, która musi zostać zaktualizowana.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do OsmAnd funkcje śledzenia online. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
+    
+    
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="osmodroid_plugin_name">OsMoDroid</string>
+    
 	<string name="tip_altitude_offset">Korekta wysokości</string>
 	<string name="monitoring_control_start">Start</string>
     <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
@@ -1317,8 +1316,8 @@
 	<string name="speak_descr">Konfiguruj zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
 	<string name="speak_street_names">Nazwy ulic (TTS)</string>
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
-    <string name="osmodroid_mode_on">Zatrzymaj OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Uruchom OsMoDroid</string>
+        
+    
     <string name="driving_region_japan">Japonia</string>
 	<string name="driving_region_us">Stany Zjednoczone</string>
 	<string name="driving_region_europe_asia">Europa i Azja</string>
@@ -1527,7 +1526,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="animate_routing_route_not_calculated">Najpierw dokonaj przeliczenia trasy</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
     <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
-    <string name="osmodroid_refresh">Odśwież kanały</string>
+    
     <string name="local_osm_changes_delete_all_confirm">Zamierzasz usunąć %1$d zmian OSM. Jesteś pewien?</string>
     <string name="shared_string_delete_all">Usuń wszystko</string>
     <string name="tip_faq_t">Wejdź na stronę https://code.google.com/p/osmand/wiki/FAQ i przejrzyj listę najczęściej zadawanych pytań.</string>
@@ -1540,8 +1539,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_modes_choose">Profile aplikacji</string>
 	<string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
-    <string name="osmodroid_seek">Szukaj obiektu</string>
-    <string name="osmodroid_unseek">Przestań szukać obiektu</string>
+    
+    
     <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
     

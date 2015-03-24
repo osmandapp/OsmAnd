@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -622,9 +621,9 @@
 	<string name="download_files_question">下載{0}個檔({1} MB)？</string>
 	<string name="items_were_selected">已選{0}項</string>
 	<string name="filter_existing_indexes">已下載的</string>
-	<string name="deselect_all">取消全選</string>
-	<string name="select_all">全選</string>
-	<string name="reload">重整</string>
+	
+	
+	
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
 	<string name="tiles_to_download_estimated_size">在縮放第{0}級別，下載{1}張地圖圖磚({2} MB)</string>
@@ -896,8 +895,8 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">在地圖上顯示</string>
-	<string name="navigate_point_cancel">取消</string>
+	
+	
 	<string name="search_address_top_text">選擇地址</string>
 	<string name="search_address_region">地區</string>
 	<string name="search_address_city">縣市</string>
@@ -959,7 +958,7 @@
 	<string name="edit_filter_delete_dialog_title">刪除選到的篩選？</string>
 	<string name="edit_filter_delete_message">篩選{0} 已被刪除</string>
 	<string name="edit_filter_create_message">篩選{0}已被建立</string>
-	<string name="default_buttons_selectall">全選</string>
+	
 	<string name="email">電子郵件</string>
 <string name="recording_context_menu_vrecord">拍攝視訊注解</string>
     <string name="intermediate_items_sort_by_distance">排序(送貨到門)</string>
@@ -1093,8 +1092,8 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">隱藏界限</string>
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 外掛元件版本過舊並需要進行更新。</string>
-    <string name="osmodroid_plugin_name">OsMoDroid 外掛元件</string>
+    
+    
 	<string name="tip_altitude_offset">海拔高度偏移校正</string>
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
@@ -1191,7 +1190,7 @@
 		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
 		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
-    <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 的延伸，為 OsModroid 線上追蹤功能的應用程式。在 http://esya.ru 上有相關服務的資訊。</string>
+    
     <string name="tip_altitude_offset_t">"大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 \n\n到這些地方系統有一個更好的近似值參考是 EGM96。
 \n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔矯正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
@@ -1309,8 +1308,8 @@
     <string name="speak_title">通報…</string>
 	<string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
 	<string name="speak_street_names">通報街道名稱 (TTS)</string>
-    <string name="osmodroid_mode_on">停止 OsMoDroid</string>    
-    <string name="osmodroid_mode_off">啟動 OsMoDroid</string>
+        
+    
     <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其他</string>
 	<string name="driving_region_japan">日本</string>
 	<string name="driving_region_us">美國</string>
@@ -1372,7 +1371,7 @@
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
-    <string name="osmodroid_refresh">更新頻道</string>
+    
     <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d OSM 的更改。您確定嗎？</string>
     <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
     <string name="tip_faq">常見問題</string>
@@ -1384,8 +1383,8 @@
     <string name="app_modes_choose_descr">在應用程式中選取現有的設定檔</string>
     <string name="app_modes_choose">應用設定檔</string>
 	<string name="amenity_type_seamark">航線標識</string>
-    <string name="osmodroid_seek">探索目標</string>
-    <string name="osmodroid_unseek">取消探索目標</string>
+    
+    
     <string name="speech_rate_descr">為 TTS 語音指定語速</string>
     <string name="speech_rate">語速</string>
     
@@ -1419,7 +1418,7 @@
 	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
-    <string name="route_descr_select_on_map">在地圖上選取 …</string>
+    
     <string name="shared_string_favorite">我的最愛</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
@@ -1812,7 +1811,7 @@
 	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
 	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
     <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
-	<string name="recents">最新的</string>
+	
 	<string name="rendering_attr_streetLighting_name">街道照明設備</string>
     <string name="proxy_pref_title">代理伺服器</string>
     <string name="proxy_pref_descr">設定代理伺服器網路通信</string>
@@ -1826,7 +1825,7 @@
 	<string name="version_settings_descr">下載 nightly builds 版</string>
     <string name="version_settings">建構</string>
     <string name="points">點</string>
-    <string name="tracks">軌跡</string>
+    
     <string name="osm_editing_manage">管理</string>
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>
@@ -1865,7 +1864,7 @@
 	<string name="rename_failed">重新命名失敗。</string>
 	<string name="back_to_map">返回地圖</string>
 	
-	<string name="showed_on_map">在地圖上顯示</string>
+	
 	<string name="track_segments">航跡區段</string>
 	<string name="track_points">航跡標點</string>
 	<string name="route_points">路線標點</string>
@@ -1949,4 +1948,4 @@
 	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
     <string name="osmo_grop_name_length_alert">群組名稱至少須要 3 個字符長！</string>
-	</resources>
+    </resources>

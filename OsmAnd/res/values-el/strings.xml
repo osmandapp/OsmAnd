@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -199,9 +198,9 @@
 	<string name="osmand_rastermaps_plugin_description">Εμφάνιση ρυθμίσεων για να διαμορφώσετε μια ποικιλία από online ή προσωρινά αποθηκευμένων πλακιδίων χάρτη ως βασικό χάρτη ή ως επικάλυψη / υπόστρωμα. Οι χάρτες αυτοί μπορούν να προετοιμαστούν εκτός σύνδεσης και να αντιγραφούν στο φάκελο δεδομένων του OsmAnd.</string>
 	<string name="osmand_background_plugin_description">Εμφάνιση των ρυθμίσεων για ενεργοποίηση ιχνηλάτησης και δρομολόγησης σε κατάσταση νάρκης (οθόνη κλειστή) μέσω περιοδικής αφύπνισης της συσκευής GPS.</string>
 	<string name="osmand_accessibility_description">Εμφάνιση ρυθμίσεων για ενεργοποίηση των ειδικών χαρακτηριστικών προσβασιμότητας.</string>
-	<string name="extra_settings">Προχωρημένες Ρυθμίσεις</string>
-	<string name="osmand_monitoring_description">Εμφάνιση ρυθμίσεων που σας διευκολύνουν στην εγγραφή των ταξιδιών σας σε GPX αρχεία ή  online χρησιμοποιώντας μια διαδικτυακή υπηρεσία.</string>
-	<string name="osmand_extra_settings_description">Εμφάνιση ρυθμίσεων για προχωρημένη διαμόρφωση χάρτη (όπως αύξηση λεπτομερειών χάρτη) και ορισμένες device-specifics.</string>
+	
+	
+	
 	<string name="osmand_development_plugin_description">Εμφάνιση των ρυθμίσεων για τα χαρακτηριστικά ανάπτυξης και αποσφαλμάτωσης όπως προσομοίωση πλοήγησης ή επιδόσεις απεικόνισης.</string>
 	<string name="plugins_screen">Πρόσθετα</string>
 	
@@ -1077,9 +1076,9 @@
     <string name="rendering_attr_noAdminboundaries_name">Απόκρυψη διοικητικών ορίων</string>
 	<string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα 5-9)</string>
 	<string name="tip_altitude_offset">Διόρθωση Υψομέτρου</string>
-	<string name="osmodroid_plugin_name">Πρόσθετο OsMoDroid</string>
-	<string name="osmodroid_plugin_old_ver_not_supported">Το πρόσθετο OsMoDroid είναι παλιά έκδοση και πρέπει να ενημερωθεί.</string>
-    <string name="osmodroid_plugin_description">Το πρόσθετο OsMoDroid είναι μια επέκταση του OsmAnd για την εφαρμογή OsModroid για δυνατότητα online ιχνηλάτησης. Πληροφορίες σχετικά με την υπηρεσία είναι διαθέσιμες στο http://esya.ru.</string>
+	
+	
+    
     <string name="download_select_map_types">Άλλοι χάρτες</string>
     <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
     <string name="srtm_plugin_description">Διευκολύνει τη λήψη offline υψομετρικών γραμμών και ανάγλυφου (\'Ρυθμίσεις\' → \'Διαχείριση αρχείων χαρτών\' → \'Λήψη\' → Επιλογή του επιθυμητού τύπου χάρτη).</string>
@@ -1268,8 +1267,8 @@
     <string name="osmand_distance_planning_plugin_name">Υπολογιστής απόστασης &amp; εργαλείο σχεδιασμού</string>
     <string name="av_camera_focus">Τύπος εστίασης κάμερας</string>
 	<string name="av_camera_focus_descr">Επιλέξτε τον τύπο εστίασης της εσωτερικής κάμερας</string>
-	<string name="osmodroid_mode_on">Παύση OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Έναρξη OsMoDroid</string>
+	    
+    
     <string name="driving_region_japan">Ιαπωνία</string>
 	<string name="driving_region_us">ΗΠΑ</string>
 	<string name="driving_region_canada">Καναδάς</string>
@@ -1315,9 +1314,9 @@
 	<string name="auto_zoom_far">Μεσαία εμφάνιση</string>
 	<string name="map_magnifier">Μεγεθυντής χάρτη</string>
 	<string name="base_world_map">Βασικός παγκόσμιος χάρτης</string>
-	<string name="osmodroid_refresh">Ανανέωση καναλιών</string>
-    <string name="osmodroid_seek">Αναζήτηση αντικειμένου</string>
-    <string name="osmodroid_unseek">Ακύρωση αναζήτησης αντικειμένου</string>
+	
+    
+    
     <string name="distance_measurement_finish_subtrack">Ξεκινήστε ένα νέο υπομονοπάτι</string>
     <string name="av_camera_focus_continuous">Η κάμερα προσπαθεί συνεχώς να εστιάσει</string>
 	<string name="sort_by_distance">Ταξινόμηση κατά απόσταση</string>
@@ -1468,7 +1467,7 @@
     <string name="keep_and_add_destination_point">Προσθήκη ως σημείο προορισμού</string>
     <string name="select_gpx">Επιλέξτε GPX…</string>
     <string name="route_descr_select_destination">Επιλέξτε Προορισμό</string>
-    <string name="route_descr_select_on_map">Επιλέξτε στο χάρτη…</string>
+    
     <string name="shared_string_favorite">Αγαπημένο</string>
     <string name="route_preferences">Προτιμήσεις δρομολογίου</string>
     <string name="route_info">Πληροφορίες δρομολογίου</string>
@@ -1652,14 +1651,14 @@
 	<string name="parking_place">Χώρος στάθμευσης</string>
     <string name="gps_status">Κατάσταση GPS</string>
     <string name="points">Σημεία</string>
-    <string name="tracks">Ίχνη</string>
-    <string name="recents">ΠΡΟΣΦΑΤΑ</string>
+    
+    
 	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
 	<string name="edit_group">Επεξεργασία ομάδας</string>
     <string name="remove_the_tag">ΑΦΑΙΡΕΣΗ ΕΤΙΚΕΤΑΣ</string>
     <string name="proxy_pref_title">Διαμεσολαβητής</string>
     <string name="osm_editing_manage">Διαχείριση</string>
-    <string name="rendering_value__name">Προκαθορισμένο</string>
+    
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_enable">Ενεργοποίηση</string>
 	<string name="shared_string_disable">Απενεργοποίηση</string>
