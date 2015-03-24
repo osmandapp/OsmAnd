@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -60,7 +61,7 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">Aquest connector s\'ha desenvolupar per utilitzar OsmAnd per desar amb comoditat la localització del vostre cotxe aparcat.</string>
+<string name="osmand_parking_plugin_description">Aquest connector s\'ha desenvolupat per facilitar desar a l\'OsmAnd la localització del vostre cotxe aparcat.</string>
 <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
@@ -1037,7 +1038,7 @@
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització...» per assignar una nota a la localitzacio especificada</string>
     
-    <string name="audionotes_plugin_description">El connector de notes d\'àudio/vídeo permet la funció de registrar notes de so/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament pel menú de context de qualsevol punt del mapa.</string>
+    <string name="audionotes_plugin_description">El connector de notes d\'àudio/vídeo permet la funció d\'enregistrar notes d\'àudio/fotografies/vídeo durant un trajecte, mitjançant un botó a la pantalla o directament al menú contextual a qualsevol punt del mapa.</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
     <string name="index_srtm_ele">Línies de nivell</string>
@@ -1400,7 +1401,7 @@
     </string>
     <string name="select_gpx">Selecciona una traça GPX…</string>
     <string name="route_descr_select_destination">Selecciona un destí</string>
-    <string name="shared_string_select_on_map">Seleccioneu al mapa</string>
+    <string name="shared_string_select_on_map">Selecciona al mapa</string>
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
@@ -1910,11 +1911,5 @@
 	<string name="track_segments">Segments de traça</string>
 	<string name="track_points">Punts de traça</string>
 	<string name="plugin_touringview_name">Vista turística del mapa</string>
-	<string name="plugin_touringview_descr">Activant aquests canvis en l\'estil de la vista del mapa  de OsmAnd a &lt;&lt;Vista turística del mapa&gt;&gt;,  aquesta és una vista especial  de gran detall per viatgers i conductors professionals.
-
-Aquesta vista proporciona,sigui el que sigui el nivell de zoom al mapa, la quantitat màxima  de detalls de viatge disponible a les dades del mapa (particularment carreteres, pistes, camins i senyals d\'orientació). També es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats.
-
-No cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards. 
-
-Aquesta vista es pot desfer tornant a fer la mateixa selecció, o canviant &lt;&lt;Estil del mapa&gt;&gt;  de &lt;&lt;Configuració del mapa&gt;&gt; a com es desitgi. </string>
+	<string name="plugin_touringview_descr">"En activar el canvi en l\'estil de la vista del mapa de l\'OsmAnd a «Vista turística del mapa», es mostra una vista especial de gran detall per viatgers i conductors professionals.\n\nAquesta vista proporciona, per a qualsevol nivell de zoom al mapa, la quantitat màxima de detalls de viatge disponibles a les dades del mapa (particularment carreteres, pistes, camins i senyals d\'orientació).\n\nTambé es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats.\n\nNo cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards.\n\nAquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi. "</string>
 	</resources>
