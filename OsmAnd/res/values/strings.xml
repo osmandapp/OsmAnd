@@ -705,11 +705,6 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
-	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Start OsMoDroid</string>
-    <string name="osmodroid_refresh">Refresh channels</string>
-    <string name="osmodroid_seek">Seek object</string>
-    <string name="osmodroid_unseek">Unseek object</string>
     <string name="speak_title">Announce…</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
 	<string name="speak_street_names">Announce street names (TTS)</string>
@@ -912,9 +907,6 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="tip_altitude_offset">Altitude Correction</string>
 	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.

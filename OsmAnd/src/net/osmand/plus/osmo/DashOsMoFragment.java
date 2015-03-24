@@ -55,8 +55,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_osmo_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.osmo_text)).setTypeface(typeface);
+		((TextView) view.findViewById(R.id.osmo_text)).setText("OsMo");
 		view.findViewById(R.id.manage).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
