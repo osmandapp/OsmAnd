@@ -75,7 +75,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
-	ProgressDialog dialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -502,7 +501,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	}
 
 	private void showUploadItemsProgressDialog() {
-		dialog = ProgressImplementation.createProgressDialog(
+		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
 				getActivity(),
 				getString(R.string.uploading),
 				getString(R.string.local_openstreetmap_uploading),
@@ -633,7 +632,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 					MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result), Toast.LENGTH_LONG)
 					.show();
 		}
-		dialog.dismiss();
 	}
 
 	private void showOnMap(OsmPoint osmPoint) {

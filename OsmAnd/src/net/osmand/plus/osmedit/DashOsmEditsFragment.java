@@ -11,7 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.ProgressImplementation;
@@ -20,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,15 +129,13 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 
 	private void showProgressDialog(OsmPoint point) {
 		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		OsmPoint[] toUpload = new OsmPoint[]{point};
+		OsmPoint[] toUpload = new OsmPoint[] { point };
 		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
-		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
-				getActivity(),
-				getString(R.string.uploading),
-				getString(R.string.local_openstreetmap_uploading),
+		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
+				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
-		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,DashOsmEditsFragment.this, remotepoi,
-				remotebug, toUpload.length);
+		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
+				DashOsmEditsFragment.this, remotepoi, remotebug, toUpload.length);
 		uploadTask.execute(toUpload);
 		dialog.show();
 	}
@@ -184,6 +184,11 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 
 	@Override
 	public void uploadEnded(Integer result) {
+		if (result != null) {
+			AccessibleToast.makeText(getActivity(),
+					MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result), Toast.LENGTH_LONG)
+					.show();
+		}
 		if (!this.isDetached()){
 			onOpenDash();
 		}

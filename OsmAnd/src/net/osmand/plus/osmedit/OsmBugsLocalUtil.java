@@ -18,12 +18,13 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String createNewBug(double latitude, double longitude, String text){
+	public String createNewBug(double latitude, double longitude, String text, String author){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(Math.min(-2, db.getMinID() -1));
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
+		p.setAuthor(author);
 		p.setAction(OsmPoint.Action.CREATE);
 		return db.addOsmbugs(p) ? null : "";
 	}
@@ -33,19 +34,21 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String addingComment(long id, String text){
+	public String addingComment(long id, String text, String author){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
 		p.setText(text);
+		p.setAuthor(author);
 		p.setAction(OsmPoint.Action.MODIFY);
 		return db.addOsmbugs(p) ? null : "";
 	}
 
 	@Override
-	public String closingBug(long id, String text){
+	public String closingBug(long id, String text, String author){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
 		p.setText(text);
+		p.setAuthor(author);
 		p.setAction(OsmPoint.Action.DELETE);
 		return db.addOsmbugs(p) ? null : "";
 	}

@@ -64,11 +64,11 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 				OsmNotesPoint p = (OsmNotesPoint) point;
 				boolean success = false;
 				if (p.getAction() == OsmPoint.Action.CREATE) {
-					success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText()) == null;
+					success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor()) == null;
 				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					success = remotebug.addingComment(p.getId(), p.getText()) == null;
+					success = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor()) == null;
 				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					success = remotebug.closingBug(p.getId(), p.getText()) == null;
+					success = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor()) == null;
 				}
 				if (success) {
 					dbbug.deleteAllBugModifications(p);
@@ -99,6 +99,7 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 
 	@Override
 	protected void onPostExecute(Integer result) {
+		progress.dismiss();
 		if (ctx instanceof OsmEditsUploadListener){
 			((OsmEditsUploadListener)ctx).uploadEnded(result);
 		}
