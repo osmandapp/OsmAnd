@@ -47,7 +47,9 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		if (db != null) {
 			db.execSQL(
 					"INSERT INTO " + OSMBUGS_TABLE_NAME + " (" + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + ","
-							+ OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" + " VALUES (?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
+							+ OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" + " VALUES (?, ?, ?, ?, ?, ?)",
+							new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), 
+							OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
 			return true;
 		}
 		return false;

@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
@@ -77,14 +76,11 @@ public class MapPoiTypes {
 		return otherCategory;
 	}
 	
-	public Map<String, PoiType> getAllTranslatedNames(boolean onlyTranslation) {
+	public Map<String, PoiType> getAllTranslatedNames() {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
 				translation.put(pt.getTranslation(), pt);
-				if (!onlyTranslation) {
-					translation.put(Algorithms.capitalizeFirstLetterAndLowercase(pt.getKeyName().replace('_', ' ')), pt);
-				}
 			}
 		}
 		return translation;
@@ -95,7 +91,8 @@ public class MapPoiTypes {
 		for (PoiType pt : pc.getPoiTypes()) {
 			translation.put(pt.getTranslation(), pt);
 			if (!onlyTranslation) {
-				translation.put(pt.getKeyName(), pt);
+//				translation.put(pt.getKeyName(), pt);
+				translation.put(Algorithms.capitalizeFirstLetterAndLowercase(pt.getKeyName().replace('_', ' ')), pt);
 			}
 		}
 		return translation;
