@@ -328,7 +328,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
 			boolean cancelDestinationId = false;
 			if(followTargetLocation != null ) {
-				if(pn == null || pn.point == null || !pn.point.equals(lt) ) {
+				if(pn == null || pn.point == null || !pn.point.equals(followTargetLocation) ) {
 					cancelDestinationId = true;
 				}
 			}
@@ -396,6 +396,14 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				followTrackerId = null;
 			}
 		}		
+		uiHandler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				map.getMapView().refreshMap();
+			}
+
+		}, 350);
 	}
 
 	@Override
