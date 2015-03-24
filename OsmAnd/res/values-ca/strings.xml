@@ -1912,4 +1912,17 @@
 	<string name="track_points">Punts de traça</string>
 	<string name="plugin_touringview_name">Vista turística del mapa</string>
 	<string name="plugin_touringview_descr">"En activar el canvi en l\'estil de la vista del mapa de l\'OsmAnd a «Vista turística del mapa», es mostra una vista especial de gran detall per viatgers i conductors professionals.\n\nAquesta vista proporciona, per a qualsevol nivell de zoom al mapa, la quantitat màxima de detalls de viatge disponibles a les dades del mapa (particularment carreteres, pistes, camins i senyals d\'orientació).\n\nTambé es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats.\n\nNo cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards.\n\nAquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi. "</string>
+	<string name="osmo_grop_name_length_alert">El nom de grup ha de tenir una mida mínima de 3 símbols!</string>
+	<string name="local_osm_changes_upload_all_confirm">Esteu a punt de pujar %1$d modificacions a OSM. N\'esteu segur?</string>
+    <string name="confirmation_to_clear_history">Voleu esborrar completament l\'històric?</string>
+    <string name="delay_to_start_navigation_descr">Inici automàtic de navegació un cop transcorregut l\'interval indicat</string>
+    <string name="delay_to_start_navigation">Sense planificació de ruta</string>
+    <string name="shared_string_go">Anar</string>
+	<string name="osmand_parking_overdue">obsolet</string>
+	<string name="action_create">Acció de crear</string>
+	<string name="action_modify">Acció de modificar</string>
+	<string name="action_delete">Acció d\'esborrar</string>
+	<string name="osm_edits">Edicions OSM</string>
+	<string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_minute">min</string>
 	</resources>
