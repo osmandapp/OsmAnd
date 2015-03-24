@@ -684,8 +684,6 @@ public class WaypointHelper {
 					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 						return uiCtx.getResources().getDrawable(
 								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
-					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-						return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(st.getOsmValue()));
 					}
 				}
 				return null;

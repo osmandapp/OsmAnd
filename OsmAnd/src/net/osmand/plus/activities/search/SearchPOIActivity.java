@@ -86,7 +86,6 @@ import gnu.trove.set.hash.TLongHashSet;
  */
 public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompassListener, OsmAndLocationListener {
 
-	private static final int COMPASS_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 3;
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
@@ -96,10 +95,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
 
-	private static final int ORIENTATION_0 = 0;
-	private static final int ORIENTATION_90 = 3;
-	private static final int ORIENTATION_270 = 1;
-	private static final int ORIENTATION_180 = 2;
 
 	private PoiLegacyFilter filter;
 	private AmenityAdapter amenityAdapter;
@@ -782,7 +777,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height,
-					R.drawable.ic_destination_arrow_white, R.color.color_distance);
+					R.drawable.ic_destination_arrow_white, 
+					
+					R.color.color_distance);
 			int screenOrientation = DashLocationFragment.getScreenOrientation(SearchPOIActivity.this);
 			if (loc != null) {
 				float a = heading != null ? heading : 0;
@@ -799,8 +796,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getKeyName()));
 				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
-				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmValue()));
 				} else {
 					icon.setImageDrawable(null);
 				}
