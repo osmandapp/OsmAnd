@@ -57,7 +57,7 @@ public class DirectionDrawable extends Drawable {
 			IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 			if (opened == 0) {
 				arrowImage = iconsCache.getIcon(resourceId, R.color.color_ok);
-			} else if (opened == -1) {
+			} else if (opened != -1) {
 				arrowImage = iconsCache.getIcon(resourceId, R.color.color_warning);
 			}
 		}
