@@ -1586,12 +1586,12 @@ POIの更新は利用できません</string>
     <string name="layer_amenity_label">地点のラベル</string>
     <string name="loading_smth">ロード中 %1$s …</string>
     <string name="map_widget_plain_time">現在時刻</string>
-    <string name="gpx_wpt">経由点</string>
+    <string name="gpx_wpt">経由地点</string>
     <string name="selected_gpx_info_show">\n\nマップ上に表示するには長押ししてください</string>
     <string name="delay_navigation_start">ターン・バイ・ターン形式誘導を自動起動</string>
     <string name="shared_string_selected_lowercase">選択済み</string>
     <string name="gpx_info_subtracks">"サブトラック: %1$s "</string>
-	<string name="gpx_info_waypoints">"経由点: %1$s "</string>
+	<string name="gpx_info_waypoints">"経由地点: %1$s "</string>
 	<string name="gpx_info_distance">"距離: %1$s (%2$s 地点) "</string>
 	<string name="gpx_info_start_time">"出発時間: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">"到着時間: %1$tF, %1$tT "</string>
