@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
@@ -407,7 +408,7 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getMapActions().showWaypointsDialog(false);
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 						}
 					});
 					btnN.setOnClickListener(new View.OnClickListener() {

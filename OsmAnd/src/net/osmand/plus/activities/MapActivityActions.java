@@ -84,13 +84,10 @@ public class MapActivityActions implements DialogProvider {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
-	private WaypointDialogHelper waypointDialogHelper;
-
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 	}
 	
 
@@ -546,7 +543,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 
-	private ContextMenuAdapter createMainOptionsMenu() {
+	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
@@ -631,7 +628,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						showWaypointsInDrawer(false);
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 						return false;
 					}
 				}).reg();
@@ -692,8 +689,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapActivity.getDashboard().setListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity),
-								DashboardType.CONFIGURE_MAP);
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 						return false;
 					}
 				}).reg();
@@ -702,8 +698,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
-						mapActivity.getDashboard().setListAdapter(cm, DashboardType.CONFIGURE_SCREEN);
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
 						return false;
 					}
 				}).reg();
@@ -767,24 +762,9 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	public void showWaypointsInDrawer(boolean flat) {
-		final int[] running = new int[] { -1 };
-		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
-		OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
-				listAdapter, null);
-		mapActivity.getDashboard().setListAdapter(listAdapter, listener, DashboardType.WAYPOINTS);
-	}
 	
-	public void showWaypointsDialog(boolean flat) {
-		if(flat) {
-			waypointDialogHelper.showWaypointsDialogFlat(mapActivity, false);
-		} else {
-			waypointDialogHelper.showWaypointsDialog(mapActivity, false);
-		}
-	}
-
 	public void openIntermediatePointsDialog(){
-		waypointDialogHelper.showWaypointsDialog(mapActivity, false);
+		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 	}
 	
 	private TargetPointsHelper getTargets() {

@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -307,20 +306,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public ContextMenuAdapter getViewConfigureMenuAdapter() {
 		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
 		cm.setDefaultLayoutId(R.layout.drawer_list_item);
-		cm.item(R.string.layer_map_appearance).iconColor(R.drawable.ic_back_drawer_dark)
-				.listen(new OnContextMenuClick() {
-
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						return true;
-					}
-				}).reg();
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 			
 			@Override
 			public void onClick(boolean allModes) {
-				map.getDashboard().setListAdapter(getViewConfigureMenuAdapter(), DashboardType.CONFIGURE_MAP);
+				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter());
 			}
 		});
 		cm.item(R.string.map_widget_reset) 

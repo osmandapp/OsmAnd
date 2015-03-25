@@ -176,8 +176,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getDashboard().setListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity),
-						DashboardType.CONFIGURE_MAP);
+				mapActivity.getDashboard().setDashboardVisibility(true,	DashboardType.CONFIGURE_MAP);
 			}
 		});
 

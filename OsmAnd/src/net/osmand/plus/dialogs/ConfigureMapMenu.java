@@ -19,7 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
@@ -45,20 +44,12 @@ public class ConfigureMapMenu {
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
-		adapter.item(R.string.configure_map).iconColor(R.drawable.ic_back_drawer_dark)
-				.listen(new OnContextMenuClick() {
-
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						return true;
-					}
-				}).reg();
 		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		adapter.setChangeAppModeListener(new OnClickListener() {
 			@Override
 			public void onClick(boolean result) {
 				allModes = true;
-				ma.getDashboard().setListAdapter(createListAdapter(ma), DashboardType.CONFIGURE_MAP);
+				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});
 		createLayersItems(adapter, ma);
