@@ -1,18 +1,5 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,6 +14,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -140,12 +141,15 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 
 		View cardContent = header.findViewById(R.id.card_content);
 		View enableOsmo = header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
+		View manage = header.findViewById(R.id.manage);
 		if (plugin.getService().isEnabled()) {
 			cardContent.setVisibility(View.VISIBLE);
 			enableOsmo.setVisibility(View.GONE);
+			manage.setVisibility(View.VISIBLE);
 		} else {
 			cardContent.setVisibility(View.GONE);
 			enableOsmo.setVisibility(View.VISIBLE);
+			manage.setVisibility(View.GONE);
 			getClearContentList(header);
 			return;
 		}
@@ -160,8 +164,18 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 
 	private void updateConnectedDevices(View mainView) {
 		OsMoGroups grps = plugin.getGroups();
-		OsMoGroupsStorage.OsMoGroup mainGroup = null;
+
+		LinearLayout contentList = getClearContentList(mainView);
 		ArrayList<OsMoGroupsStorage.OsMoGroup> groups = new ArrayList<>(grps.getGroups());
+
+		List<OsMoGroupsStorage.OsMoDevice> devices = getOsMoDevices(groups);
+
+
+		setupDeviceViews(contentList, devices);
+	}
+
+	private List<OsMoGroupsStorage.OsMoDevice> getOsMoDevices(ArrayList<OsMoGroupsStorage.OsMoGroup> groups) {
+		OsMoGroupsStorage.OsMoGroup mainGroup = null;
 		for (OsMoGroupsStorage.OsMoGroup grp : groups) {
 			if (grp.getGroupId() == null) {
 				mainGroup = grp;
@@ -169,70 +183,51 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				break;
 			}
 		}
-		LinearLayout contentList = getClearContentList(mainView);
-		if (mainGroup == null) {
-			return;
-		}
 
+		if (mainGroup == null) {
+			return new ArrayList<>();
+		}
 		String trackerId = plugin.getService().getMyGroupTrackerId();
 		List<OsMoGroupsStorage.OsMoDevice> devices =
 				new ArrayList<>(mainGroup.getVisibleGroupUsers(trackerId));
+
+		if (groups.size() > 0) {
+			for (OsMoGroupsStorage.OsMoGroup grp : groups) {
+				for (OsMoGroupsStorage.OsMoDevice device : grp.getVisibleGroupUsers(trackerId)) {
+					devices.add(device);
+				}
+			}
+		}
+
+		//remove all inactive devices
+		for (OsMoGroupsStorage.OsMoDevice device : devices) {
+			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
+				devices.remove(device);
+			}
+			if (devices.size() < 4) {
+				break;
+			}
+		}
+
+		sortDevices(devices);
 
 		if (devices.size() > 3) {
 			while (devices.size() > 3) {
 				devices.remove(devices.size() - 1);
 			}
-		} else {
-			if (groups.size() > 0){
-				for (OsMoGroupsStorage.OsMoGroup grp : groups) {
-					if (grp.getVisibleGroupUsers(trackerId).size() > 0) {
-						
-					}
-				}
-			}
 		}
 
+		return devices;
+	}
 
-		setupDeviceViews(contentList, devices);
-//		if (devices.size() < 3 && groups.size() > 0) {
-//			setupGroupsViews(3 - devices.size(), groups, contentList);
-//		}
+	private void sortDevices(List<OsMoGroupsStorage.OsMoDevice> devices) {
+		//TODO implement sorting somehow
 	}
 
 	private LinearLayout getClearContentList(View mainView) {
 		LinearLayout contentList = (LinearLayout) mainView.findViewById(R.id.items);
 		contentList.removeAllViews();
 		return contentList;
-	}
-
-	private void setupGroupsViews(int toAddCount, ArrayList<OsMoGroupsStorage.OsMoGroup> groups, LinearLayout contentList) {
-		int counter = 1;
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		for (final OsMoGroupsStorage.OsMoGroup group : groups) {
-			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
-			v.findViewById(R.id.direction_icon).setVisibility(View.GONE);
-			v.findViewById(R.id.distance).setVisibility(View.GONE);
-			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
-			v.findViewById(R.id.check_item).setVisibility(View.GONE);
-			final String name = group.getVisibleName(getActivity());
-			//TODO show group users
-			TextView peopleCount = (TextView) v.findViewById(R.id.people_count);
-			peopleCount.setText(String.valueOf(group.getGroupUsers(null).size()));
-			ImageView icon = (ImageView) v.findViewById(R.id.icon);
-			icon.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_group));
-			((TextView) v.findViewById(R.id.name)).setText(name);
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					launchOsMoGroupsActivity();
-				}
-			});
-			contentList.addView(v);
-			if (counter == toAddCount) {
-				return;
-			}
-			counter++;
-		}
 	}
 
 	private void setupDeviceViews(LinearLayout contentList, List<OsMoGroupsStorage.OsMoDevice> devices) {
