@@ -165,7 +165,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
         
-    protected void aboutRoute() {
+    public void aboutRoute() {
     	Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mapActivity.startActivity(intent);

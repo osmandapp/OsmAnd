@@ -625,6 +625,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
 				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity) && showCards);
+		showFragment(manager, fragmentTransaction, DashNavigationFragment.TAG, DashNavigationFragment.class, showCards);
 		showFragment(manager, fragmentTransaction, DashParkingFragment.TAG, DashParkingFragment.class, showCards);
 		showFragment(manager, fragmentTransaction, DashWaypointsFragment.TAG, DashWaypointsFragment.class, showCards);
 		showFragment(manager, fragmentTransaction, DashSearchFragment.TAG, DashSearchFragment.class, showCards);
@@ -769,7 +770,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			if (listBackgroundView != null) {
 				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(clr);
 			}
-			if (t < 0.2) {
+			if (t < 1) {
 				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
 			} else {
 				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(clr);

@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changes</string>
    	<string name="mark_to_delete">Mark to delete</string>
 	<string name="osmo_grop_name_length_alert">Group name should be at least 3 symbols long!</string>

@@ -7,17 +7,13 @@ import java.util.List;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import android.app.Dialog;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
@@ -32,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
  */
 public class DashWaypointsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_WAYPOINTS_FRAGMENT";
