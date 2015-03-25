@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -687,7 +688,7 @@ POIの更新は利用できません</string>
 	<string name="driving_region_uk">イギリス, インド, オーストラリア &amp; その他</string>
 	    
     
-    <string name="announce_gpx_waypoints">GPX経由点をアナウンス</string>
+    <string name="announce_gpx_waypoints">GPX経由地点をアナウンス</string>
     <string name="speak_title">アナウンス…</string>
 	<string name="speak_descr">通りの名称、トラフィックの警告（強制停止、スピードバンプ）、スピードカメラ（オービス）、法定速度のアナウンス設定</string>
 	<string name="speak_street_names">通りの名前をアナウンス（TTS）</string>
@@ -1132,7 +1133,7 @@ POIの更新は利用できません</string>
 	<string name="av_camera_focus_infinity">フォーカスは無限遠にセットされます</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
 	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイと陰影起伏層(補助)の両方がOsmAndのオフラインマップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-\n\nこのグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。 "</string>
+\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とASTER(資源探査用将来型センサ)、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
     <string name="audionotes_location_not_defined">メモに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用…\"を利用します</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">音声/ビデオメモプラグインは、旅行中の音声/写真/ビデオに関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
@@ -1140,7 +1141,7 @@ POIの更新は利用できません</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイと陰影起伏層(補助)の両方がOsmAndのオフラインマップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-\n\nこのグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。 "</string>
+\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とASTER(資源探査用将来型センサ)、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1396,7 +1397,7 @@ POIの更新は利用できません</string>
 		\n\t* ログウィジェットの有効／無効切替
 	</string>
 	<string name="rendering_attr_noPolygons_description">マップ上の土地の特徴を透明にする</string>
-	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル（Mapnik風）から衛星画像、天気図、気候マップ、地質図、陰影起伏層、等々、目的に応じた様々な（タイル又はラスタと呼ばれる）オンラインマップマップにアクセスし、レイヤーに反映することができます。\n\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。\n\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。（手動でOsmAndのデータフォルダにコピーする必要があります） "</string>
+	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏層、等々、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップマップにアクセスし、レイヤーに反映することができます。\n\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。\n\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります) "</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"0.8.0での変更点:
 \n\t- *プラグイン機能*
@@ -1581,7 +1582,7 @@ POIの更新は利用できません</string>
     <string name="show_zoom_buttons_navigation_descr">ナビゲーション中にズームボタンを表示</string>
     <string name="show_zoom_buttons_navigation">ズームボタンを表示</string>
     <string name="save_as_favorites_points">お気に入りのグループとして保存</string>
-    <string name="select_destination_and_intermediate_points">経由点を選択</string>
+    <string name="select_destination_and_intermediate_points">経由地点を選択</string>
     <string name="layer_amenity_label">地点のラベル</string>
     <string name="loading_smth">ロード中 %1$s …</string>
     <string name="map_widget_plain_time">現在時刻</string>
@@ -1798,7 +1799,7 @@ POIの更新は利用できません</string>
 <string name="route_descr_destination">目的地</string>
     <string name="index_tours">旅行</string>
     <string name="flat_list_waypoints">全て</string>
-    <string name="waypoints">経由点</string>
+    <string name="waypoints">経由地点</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通警告</string>
     <string name="speak_favorites">周辺のお気に入りをアナウンスする</string>
@@ -1849,7 +1850,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_never">しない</string>
     
     <string name="impassable_road">無視する道路…</string>
-    <string name="tip_recent_changes_1_9_t">"1.9での変更点： 路面レンダリング、移送用レイヤとハイキングシンボル等の追加に伴うマップ形式の更新 * ルート沿いのPOI検索 * セッションごとの通行止め道路の記録 * より簡単なマップのダウンロードと更新 * 経由点に近づいたときに、ビジュアルと音声で通知 * 旅程と移動指示情報を印刷可能に * 複数車線で進行可能情報の表示 * Androidウェアをサポート * インターフェイスの大幅変更 * マップ上の文字サイズごとに個別のズーム追加 * 経路から外れた場合の特別な音声通知を追加 * OsMoへのログイン機能追加 * OsMo バージョンの不一致部分を修正 "</string>
+    <string name="tip_recent_changes_1_9_t">"1.9での変更点： 路面レンダリング、移送用レイヤとハイキングシンボル等の追加に伴うマップ形式の更新 * ルート沿いのPOI検索 * セッションごとの通行止め道路の記録 * より簡単なマップのダウンロードと更新 * 経由地点に近づいたときに、ビジュアルと音声で通知 * 旅程と移動指示情報を印刷可能に * 複数車線で進行可能情報の表示 * Androidウェアをサポート * インターフェイスの大幅変更 * マップ上の文字サイズごとに個別のズーム追加 * 経路から外れた場合の特別な音声通知を追加 * OsMoへのログイン機能追加 * OsMo バージョンの不一致部分を修正 "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">電車でのルート</string>
     <string name="rendering_attr_tramRoutes_name">路面電車でのルート</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
@@ -1948,7 +1949,7 @@ POIの更新は利用できません</string>
     <string name="drawer">フラットリスト</string>
     <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
     <string name="tips_and_tricks_descr">よくある質問(FAQ)</string>
-    <string name="routing_settings_2">ナビゲーションの設定</string>
+    <string name="routing_settings_2">ナビゲーション設定</string>
     <string name="general_settings_2">全般設定</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_enable">有効</string>
@@ -1973,10 +1974,10 @@ POIの更新は利用できません</string>
 	<string name="shared_string_not_use">使用しない</string>
 	<string name="plugin_touringview_name">ツーリングマップ表示</string>
 	<string name="confirmation_to_clear_history">全体履歴を消去しますか？</string>
-    <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します（特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク）。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
+    <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します(特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク)。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
 	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
-    <string name="plugin_nautical_descr">"このプラグインはOsmAnd map and navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味（カテゴリ、形状、色、順序、参照など）を識別するために必要な詳細を示されます。
+    <string name="plugin_nautical_descr">"このプラグインはOsmAnd map and navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
 \n\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。 "</string>
 	<string name="plugin_ski_name">スキーマップ表示</string>
 	<string name="plugin_ski_descr">"このプラグインは、あなたの指先で簡単にダウンヒルスキー場、クロスカントリースキー、アルペンスキールート、ケーブルカーやスキーリフトについての詳細を置けます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。\n\nこの表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。 "</string>
