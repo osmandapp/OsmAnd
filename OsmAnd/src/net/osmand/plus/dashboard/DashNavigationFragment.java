@@ -68,6 +68,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 				);
 		play.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_play_dark) 
 				);
+		favorites.addView(view);
 	}
 
 }

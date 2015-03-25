@@ -156,7 +156,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			paddingView.setOnClickListener(listener);
 			listView.addHeaderView(paddingView);
 			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
-			updateTopButton(0);
 		}
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
@@ -401,9 +400,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
+				updateTopButton(scrollView.getScrollY());
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
+				if(listView instanceof ObservableListView) {
+					updateTopButton(((ObservableListView)listView).getScrollY());
+				}
 				if(refresh) {
 					refreshContent(false);
 				} else {
@@ -766,10 +769,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
 			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
 			int clr = (((int) (t * 255)) << 24) | 0xff8f00;
-			paddingView.setBackgroundColor(clr);
+			if(t == 1) {
+				paddingView.setBackgroundColor(Color.TRANSPARENT);
+			} else {
+				paddingView.setBackgroundColor(clr);
+			}
 			if (listBackgroundView != null) {
 				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(clr);
 			}
+			gradientToolbar.setAlpha((int) ((1 - t) * 255));
 			if (t < 1) {
 				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
 			} else {
