@@ -75,21 +75,26 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private void setupOsMoView() {
 		View mainView = getView();
 
-		boolean show = plugin != null;
-		if (show) {
-			show = plugin.getService().isEnabled();
-		}
-		if (!show) {
+		if (plugin == null) {
 			mainView.setVisibility(View.GONE);
 			return;
 		} else {
 			mainView.setVisibility(View.VISIBLE);
 		}
+
 		updateStatus();
 	}
 
 	private void setupHader(final View header) {
-		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.check_item);
+		CompoundButton enableService = (CompoundButton)header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
+		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.card_content).findViewById(R.id.check_item);
+
+		enableService.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				plugin.getService().connect(true);
+			}
+		});
 
 		final OsmandApplication app = getMyApplication();
 		trackr.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -132,6 +137,19 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		if (getView() == null) {
 			return;
 		}
+
+		View cardContent = header.findViewById(R.id.card_content);
+		View enableOsmo = header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
+		if (plugin.getService().isEnabled()) {
+			cardContent.setVisibility(View.VISIBLE);
+			enableOsmo.setVisibility(View.GONE);
+		} else {
+			cardContent.setVisibility(View.GONE);
+			enableOsmo.setVisibility(View.VISIBLE);
+			getClearContentList(header);
+			return;
+		}
+
 		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.check_item);
 		if (plugin != null && plugin.getTracker() != null) {
 			trackr.setChecked(plugin.getTracker().isEnabledTracker());
@@ -151,23 +169,40 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				break;
 			}
 		}
-		LinearLayout contentList = (LinearLayout) mainView.findViewById(R.id.items);
-		contentList.removeAllViews();
+		LinearLayout contentList = getClearContentList(mainView);
 		if (mainGroup == null) {
 			return;
 		}
 
+		String trackerId = plugin.getService().getMyGroupTrackerId();
 		List<OsMoGroupsStorage.OsMoDevice> devices =
-				new ArrayList<>(mainGroup.getVisibleGroupUsers(plugin.getService().getMyGroupTrackerId()));
+				new ArrayList<>(mainGroup.getVisibleGroupUsers(trackerId));
 
-		while (devices.size() > 3) {
-			devices.remove(devices.size() - 1);
+		if (devices.size() > 3) {
+			while (devices.size() > 3) {
+				devices.remove(devices.size() - 1);
+			}
+		} else {
+			if (groups.size() > 0){
+				for (OsMoGroupsStorage.OsMoGroup grp : groups) {
+					if (grp.getVisibleGroupUsers(trackerId).size() > 0) {
+						
+					}
+				}
+			}
 		}
+
 
 		setupDeviceViews(contentList, devices);
-		if (devices.size() < 3 && groups.size() > 0) {
-			setupGroupsViews(3 - devices.size(), groups, contentList);
-		}
+//		if (devices.size() < 3 && groups.size() > 0) {
+//			setupGroupsViews(3 - devices.size(), groups, contentList);
+//		}
+	}
+
+	private LinearLayout getClearContentList(View mainView) {
+		LinearLayout contentList = (LinearLayout) mainView.findViewById(R.id.items);
+		contentList.removeAllViews();
+		return contentList;
 	}
 
 	private void setupGroupsViews(int toAddCount, ArrayList<OsMoGroupsStorage.OsMoGroup> groups, LinearLayout contentList) {
@@ -293,7 +328,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				updateConnectedDevices(getView());
+				updateStatus();
 			}
 		});
 	}

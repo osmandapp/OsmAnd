@@ -3,6 +3,7 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/dashListItemHeight"
 			  android:orientation="vertical">
 
