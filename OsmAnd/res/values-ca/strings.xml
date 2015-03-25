@@ -1925,4 +1925,9 @@
 	<string name="osm_edits">Edicions OSM</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
-	</resources>
+	<string name="parking_place_limited">Durada d\'aparcament limitada a</string>
+	<string name="osmand_parking_time_left">Pendent</string>
+	<string name="your_edits">Les vostres edicions</string>
+    <string name="waypoint_visit_after">Visiteu després</string>
+    <string name="waypoint_visit_before">Visiteu abans</string>
+    </resources>

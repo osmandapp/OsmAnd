@@ -147,7 +147,7 @@
   <string name="search_position_favorites">Favoris…</string>
   <string name="search_position_undefined">Non défini</string>
   
-  <string name="search_position_current_location">Position actuelle…</string>
+  <string name="search_position_current_location">Position actuelle</string>
   <string name="search_position_map_view">Centre de la carte</string>
   <string name="select_search_position">Origine :</string>
   <string name="context_menu_item_search">Rechercher autour de ce point</string>
@@ -270,7 +270,7 @@
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation des cartes vectorielles au lieu des tuiles de carte</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partager la position</string>
-  <string name="tip_location_sharing_t">"Durant votre trajet, vous notez un point d\'intérêt que vous voulez partager avec des amis ou de la famille ?
+  <string name="tip_location_sharing_t">"Durant votre itinéraire, vous notez un point d\'intérêt que vous voulez partager avec des amis ou de la famille ?
 \n\tGrâce à OsmAnd vous pouvez facilement partager une position.
 \n\tDepuis le point sur la carte, sélectionnez le menu \'Utiliser ce point\'. Sélectionnez ensuite le mode de partage parmi : courriel, SMS ou copie vers le presse-papier. "</string>
   <string name="tip_favorites">Favoris</string>
@@ -325,7 +325,7 @@
   <string name="send_location">Envoyer le point</string>
   <string name="context_menu_item_share_location">Partager ce point</string>
   <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté avec succès</string>
-  <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX enregistrée</string>
+  <string name="add_waypoint_dialog_title">Ajouter une étape à la trace GPX enregistrée</string>
   <string name="context_menu_item_add_waypoint">Ajouter un point GPX</string>
   <string name="amenity_type_administrative">Territoire</string>
   <string name="amenity_type_barrier">Obstacle</string>
@@ -611,7 +611,7 @@
   <string name="invalid_locations">Coordonnées invalides !</string>
   <string name="go_back_to_osmand">Retourner à la carte OsmAnd</string>
   <string name="shared_string_close">Fermer</string>
-  <string name="loading_data">Chargement des données…</string>
+  <string name="loading_data">Chargement des données</string>
   <string name="reading_indexes">Lecture des index…</string>
   <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>
   <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
@@ -635,7 +635,7 @@
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
   <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
-  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le dossier des traces durant le trajet</string>
+  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le dossier des traces durant l\'itinéraire</string>
   <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX pendant la navigation</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
@@ -873,11 +873,11 @@
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
   <string name="local_index_routing_data">Données de navigation</string>
   <string name="navigate_point_format">Format</string>
-  <string name="poi_search_desc">Recherche de points d\'intérêt (PI)</string>
+  <string name="poi_search_desc">Recherche par point d\'intérêt</string>
   <string name="address_search_desc">Recherche par adresse</string>
-  <string name="navpoint_search_desc">Coordonnées</string>
+  <string name="navpoint_search_desc">Recherche par coordonnées</string>
   <string name="transport_search_desc">Recherche de transports publics</string>
-  <string name="favourites_search_desc">Recherche parmi les favoris</string>
+  <string name="favourites_search_desc">Recherche dans les favoris</string>
   
   <string name="route_roundabout">Rond-point : prenez la %1$d sortie puis continuez</string>
   <string name="route_kl">Serrez à gauche et continuez</string>
@@ -933,7 +933,7 @@
   <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera calculé dès votre position connue</string>
-  <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre ? (%1$s secondes)</string>
+  <string name="continue_follow_previous_route_auto">La navigation précédente a été interrompue. Souhaitez-vous reprendre cette navigation ? (%1$s secondes)</string>
   
   
   
@@ -1042,10 +1042,10 @@
     <string name="replace_destination_point">Remplacer le point de destination</string>
     <string name="new_destination_point_dialog">Vous avez déjà indiqué une destination.</string>
     <string name="target_point">Étape %1$s</string>
-    <string name="target_points">Trajet</string>
+    <string name="target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
-    <string name="arrived_at_intermediate_point">Vous êtes arrivés à votre point de passage</string>
-    <string name="context_menu_item_intermediate_point">Ajouter une étape</string>
+    <string name="arrived_at_intermediate_point">Vous avez atteint la fin de l\'étape</string>
+    <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
     <string name="btn_add_tag">Ajouter un attribut</string>
@@ -1059,7 +1059,7 @@
     <string name="poi_filter_accomodation">Hébergement</string>
     <string name="map_widget_monitoring_services">Services de suivi</string>
 	<string name="no_route">Pas de route</string>
-	<string name="delete_target_point">Supprimer le point de passage</string>
+	<string name="delete_target_point">Supprimer l\'étape</string>
 	<string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
@@ -1109,7 +1109,7 @@
 <string name="audionotes_location_not_defined">La position à associer à la note n\'est pas encore défini. Utilisez le menu \'Utiliser ce point\' pour spécifier la position à associer à la note.</string>
     
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un trajet, soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
+    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un itinéraire soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
@@ -1332,8 +1332,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 " 
     </string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
-    <string name="intermediate_items_sort_return">Ordonne automatiquement les étapes pour le trajet le plus court.</string>
-    <string name="intermediate_items_sort_by_distance">Trier</string>
+    <string name="intermediate_items_sort_return">Ordonne automatiquement les étapes pour l\'itinéraire le plus court.</string>
+    <string name="intermediate_items_sort_by_distance">Optimiser</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
     <string name="speak_street_names">Annoncer les noms de rues (TTS)</string>
@@ -1692,7 +1692,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrace %2$s</string>
     
-    <string name="gpx_wpt">Point de passage</string>
+    <string name="gpx_wpt">Itinéraire</string>
     <string name="map_widget_plain_time">Heure actuelle</string>
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
