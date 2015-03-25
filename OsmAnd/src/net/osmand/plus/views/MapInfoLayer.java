@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -311,8 +312,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						map.getMapActions().onDrawerBack();
-						return false;
+						return true;
 					}
 				}).reg();
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
@@ -320,7 +320,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			
 			@Override
 			public void onClick(boolean allModes) {
-				map.getMapActions().prepareOptionsMenu(getViewConfigureMenuAdapter());				
+				map.getDashboard().setListAdapter(getViewConfigureMenuAdapter(), DashboardType.CONFIGURE_MAP);
 			}
 		});
 		cm.item(R.string.map_widget_reset) 

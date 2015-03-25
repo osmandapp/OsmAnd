@@ -51,7 +51,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 			public void onClick(View v) {
 				if (getActivity() instanceof MapActivity) {
 					loc.getLocationSimulation().startStopRouteAnimation((MapActivity) getActivity());
-					dashboard.setDashboardVisibility(false);
+					dashboard.hideDashboard();
 				}
 			}
 		};

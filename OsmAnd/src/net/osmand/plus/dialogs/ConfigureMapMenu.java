@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
@@ -41,7 +42,7 @@ public class ConfigureMapMenu {
 
 	private boolean allModes = false;
 
-	public ContextMenuAdapter createListAdapter(final MapActivity ma, final boolean advanced) {
+	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		adapter.item(R.string.configure_map).iconColor(R.drawable.ic_back_drawer_dark)
@@ -49,8 +50,7 @@ public class ConfigureMapMenu {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						ma.getMapActions().onDrawerBack();
-						return false;
+						return true;
 					}
 				}).reg();
 		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
@@ -58,26 +58,11 @@ public class ConfigureMapMenu {
 			@Override
 			public void onClick(boolean result) {
 				allModes = true;
-				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma, advanced));
+				ma.getDashboard().setListAdapter(createListAdapter(ma), DashboardType.CONFIGURE_MAP);
 			}
 		});
-
 		createLayersItems(adapter, ma);
-		if (!advanced){
-			adapter.item(R.string.btn_advanced_mode).iconColor(R.drawable.ic_action_settings_enabled_dark)
-					.selected(advanced ? 1 : 0)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							ma.getMapActions().prepareOptionsMenu(createListAdapter(ma, isChecked));
-							return false;
-						}
-					}).reg();
-		}
-
-		if (advanced) {
-			createRenderingAttributeItems(adapter, ma);
-		}
+		createRenderingAttributeItems(adapter, ma);
 		return adapter;
 	}
 	
@@ -157,7 +142,6 @@ public class ConfigureMapMenu {
 					if(selected[0] == null) {		
 						settings.SHOW_POI_OVER_MAP.set(selected[0] != null);
 					}
-					ma.getMapActions().refreshDrawer();
 				}
 			});
 		}
@@ -230,7 +214,6 @@ public class ConfigureMapMenu {
 						}
 						adapter.setItemDescription(pos, getRenderDescr(activity));
 						dialog.dismiss();
-						activity.getMapActions().prepareOptionsMenu(createListAdapter(activity, true));
 					}
 
 				});

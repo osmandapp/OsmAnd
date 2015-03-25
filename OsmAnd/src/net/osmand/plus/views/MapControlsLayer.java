@@ -16,6 +16,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
@@ -174,8 +176,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getMapActions().prepareConfigureMap();
-				mapActivity.getDashboard().setDashboardVisibility(true);
+				mapActivity.getDashboard().setListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity),
+						DashboardType.CONFIGURE_MAP);
 			}
 		});
 
@@ -286,7 +288,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
 //				if (mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
-					mapActivity.getDashboard().setDashboardVisibility(true);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 //				} else {
 //					mapActivity.getMapActions().onDrawerBack();
 //					mapActivity.getMapActions().toggleDrawer();

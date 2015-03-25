@@ -243,8 +243,7 @@ public class WaypointDialogHelper {
 				if (dlg != null) {
 					dlg.dismiss();
 				} else if(a instanceof MapActivity){
-					((MapActivity) a).getMapActions().onDrawerBack();
-					((MapActivity) a).getMapActions().closeDrawer();
+					((MapActivity) a).onBackPressed();
 				}
 			}
 		});
@@ -260,8 +259,8 @@ public class WaypointDialogHelper {
 					if (dlg != null) {
 						dlg.dismiss();
 					} else if(a instanceof MapActivity){
-						((MapActivity) a).getMapActions().onDrawerBack();
-						((MapActivity) a).getMapActions().closeDrawer();
+						// to close drawer
+						((MapActivity) a).onBackPressed();
 					}
 				}
 			});
@@ -429,7 +428,8 @@ public class WaypointDialogHelper {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
 				if (item == 0) {
-					mapActivity.getMapActions().onDrawerBack();
+					 // TODO
+					//mapActivity.getMapActions().onDrawerBack();
 				} else if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 					showOnMap(app, ctx, ps.getPoint(), dialog);

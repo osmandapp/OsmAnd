@@ -21,7 +21,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -34,6 +33,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -56,11 +56,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,17 +84,7 @@ public class MapActivityActions implements DialogProvider {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
-	private boolean refreshDrawer = false;
 	private WaypointDialogHelper waypointDialogHelper;
-
-	public enum DrawerType{
-		WAYPOINTS,
-		CONFIGURE_SCREEN,
-		CONFIGURE_MAP,
-		MAIN_MENU
-	}
-
-	private DrawerType currentDrawer = DrawerType.MAIN_MENU;
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
@@ -170,15 +158,6 @@ public class MapActivityActions implements DialogProvider {
     	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
-	public DrawerType getDrawerType(){
-		return currentDrawer;
-	}
-
-	public void setDrawerType(DrawerType type){
-		this.currentDrawer = type;
-		prepareStartOptionsMenu();
-	}
-    
     protected String getString(int res){
     	return mapActivity.getString(res);
     }
@@ -566,85 +545,11 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public void prepareStartOptionsMenu(){
-		refreshDrawer();
-	}
-
-	public void refreshDrawer(){
-		switch (currentDrawer){
-			case MAIN_MENU:
-				prepareOptionsMenu(createMainOptionsMenu());
-				break;
-			case CONFIGURE_MAP:
-				prepareConfigureMap();
-				break;
-			case CONFIGURE_SCREEN:
-				prepareConfigureScreen();
-				break;
-			case WAYPOINTS:
-				showWaypointsInDrawer(false);
-				break;
-		}
-	}
-
-	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
-		refreshDrawer = false;
-		final ArrayAdapter<?> listAdapter =
-				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
-		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
-		mapActivity.getDashboard().setListAdapter(listAdapter, listener);
-		
-	}
-
-
-	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
-			final ArrayAdapter<?> listAdapter) {
-		return new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
-				OnContextMenuClick click = cm.getClickAdapter(which);
-				if(click instanceof OnRowItemClick) {
-					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getElementId(which), which);
-					if(cl) {
-						closeDrawer();
-					}
-				} else if (click != null) {
-					CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
-					if (btn != null && btn.getVisibility() == View.VISIBLE) {
-						btn.setChecked(!btn.isChecked());
-					} else {
-						if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
-							closeDrawer();
-						}
-					}
-				} else {
-					closeDrawer();
-				}
-			}
-		};
-	}
-	
-	public void closeDrawer() {
-		mapActivity.getDashboard().setDashboardVisibility(false);
-	}
-
-	public void prepareConfigureMap() {
-		currentDrawer = DrawerType.CONFIGURE_MAP;
-		//mapActivity.getClearToolbar(true);
-		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
-	}
-
-	public void onDrawerBack() {
-		currentDrawer = DrawerType.MAIN_MENU;
-		prepareStartOptionsMenu();
-	}
 
 	private ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		currentDrawer = DrawerType.MAIN_MENU;
 
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
@@ -787,7 +692,8 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						prepareConfigureMap();
+						mapActivity.getDashboard().setListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity),
+								DashboardType.CONFIGURE_MAP);
 						return false;
 					}
 				}).reg();
@@ -796,7 +702,8 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						prepareConfigureScreen();
+						ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
+						mapActivity.getDashboard().setListAdapter(cm, DashboardType.CONFIGURE_SCREEN);
 						return false;
 					}
 				}).reg();
@@ -860,20 +767,12 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	public void prepareConfigureScreen() {
-		currentDrawer = DrawerType.CONFIGURE_SCREEN;
-		ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
-		prepareOptionsMenu(cm);
-	}
-
 	public void showWaypointsInDrawer(boolean flat) {
-		currentDrawer = DrawerType.WAYPOINTS;
 		final int[] running = new int[] { -1 };
 		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null);
-		refreshDrawer = false;
-		mapActivity.getDashboard().setListAdapter(listAdapter, listener);
+		mapActivity.getDashboard().setListAdapter(listAdapter, listener, DashboardType.WAYPOINTS);
 	}
 	
 	public void showWaypointsDialog(boolean flat) {

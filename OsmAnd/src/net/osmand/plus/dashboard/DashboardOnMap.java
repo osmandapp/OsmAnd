@@ -6,9 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
@@ -24,13 +27,13 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -43,10 +46,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
@@ -60,14 +65,18 @@ import com.software.shell.fab.ActionButton;
 public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	public static boolean staticVisible = false;
+	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
+	
 	private MapActivity mapActivity;
 	private ActionButton actionButton;
 	private FrameLayout dashboardView;
+	
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
 
 	
 	private boolean visible = false;
+	private DashboardType visibleType;
 	private boolean landscape;
 	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<WeakReference<DashBaseFragment>>();
 	private net.osmand.Location myLocation;
@@ -76,43 +85,27 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private boolean mapLinkedToLocation;
 	private float mapRotation;
 	private boolean inLocationUpdate = false;
-	private boolean saveBackAction;
-	private ImageView switchButton;
 	private NotifyingScrollView scrollView;
-	private View listViewLayout;
 	private ListView listView;
 	private View listBackgroundView;
+	private View paddingView;
 	private int mFlexibleSpaceImageHeight;
+	
+	public enum DashboardType {
+		WAYPOINTS,
+		WAYPOINTS_EDIT,
+		WAYPOINTS_SORT,
+		CONFIGURE_SCREEN,
+		CONFIGURE_MAP,
+		LIST_MENU,
+		DASHBOARD
+	}
 	
 
 	public DashboardOnMap(MapActivity ma) {
 		this.mapActivity = ma;
 	}
 
-	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = (Toolbar) dashboardView.findViewById(R.id.toolbar);
-		if (tb == null) {
-			return null;
-		}
-		tb.setTitle(null);
-		tb.getMenu().clear();
-		setToolbarVisibility(visible);
-		return tb;
-	}
-
-	public void setToolbarVisibility(boolean visible){
-		int visibility = visible? View.VISIBLE : View.GONE;
-		View toolbar = dashboardView.findViewById(R.id.toolbar);
-		if (toolbar != null) {
-			toolbar.setVisibility(visibility);
-		}
-		View buttons = dashboardView.findViewById(R.id.map_menu_button);
-		if (buttons != null) {
-			buttons.setVisibility(visibility);
-		}
-
-		actionButton.setVisibility(visibility);
-	}
 
 	public void createDashboardView() {
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
@@ -120,11 +113,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setDashboardVisibility(false);
+				hideDashboard();
 			}
 		};
 		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
-		listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		scrollView.setOnScrollChangedListener(new NotifyingScrollView.OnScrollChangedListener() {
 			public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
@@ -137,7 +129,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
 			// Set padding view for ListView. This is the flexible space.
-			View paddingView = new View(mapActivity);
+			 paddingView = new View(mapActivity);
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
 					mFlexibleSpaceImageHeight);
 			paddingView.setLayoutParams(lp);
@@ -146,8 +138,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			paddingView.setOnClickListener(listener);
 			listView.addHeaderView(paddingView);
 
-//			Toolbar tb = (Toolbar) mapActivity.findViewById(R.id.dash_toolbar);
-//			tb.setLogo(R.drawable.icon);
 			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
 			final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
 			contentView.post(new Runnable() {
@@ -165,6 +155,64 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
 
+		initActionButton();
+		dashboardView.addView(actionButton);
+	}
+
+
+	private void initToolbarActions() {
+		TextView tv = (TextView) dashboardView.findViewById(R.id.toolbar_text);
+		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				hideDashboard();
+			}
+		});
+		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
+		edit.setVisibility(View.GONE);
+		edit.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			}
+		});
+		ImageView settings = (ImageView) dashboardView.findViewById(R.id.toolbar_settings);
+		settings.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Class<? extends Activity> sta = mapActivity.getMyApplication().getAppCustomization().getSettingsActivity();
+				visible = false;
+				mapActivity.startActivity(new Intent(mapActivity, sta));
+			}
+		});
+		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		
+		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
+		lst.setVisibility(View.VISIBLE);
+		if(visibleType == DashboardType.DASHBOARD) {
+			lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_navigation_drawer));
+		} else if(visibleType == DashboardType.LIST_MENU) {
+			lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_dashboard_dark));
+		} else {
+			lst.setVisibility(View.GONE);
+		}
+		lst.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(visibleType == DashboardType.DASHBOARD) {
+					setDashboardVisibility(true, DashboardType.LIST_MENU);
+				} else {
+					setDashboardVisibility(true, DashboardType.DASHBOARD);
+				}
+			}
+		});
+	}
+
+
+	private void initActionButton() {
 		actionButton = new ActionButton(mapActivity);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		int marginRight = convertPixelsToDp(16, mapActivity);
@@ -184,19 +232,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				} else {
 					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				}
-				setDashboardVisibility(false);
+				hideDashboard();
 			}
 		});
-		dashboardView.addView(actionButton);
 	}
 	
-	private void switchBtnAction() {
-		setDashboardVisibility(false);
-		CommonPreference<Boolean> st = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER;
-		st.set(!st.get());
-		setDashboardVisibility(true);
-//		mapActivity.getMapActions().toggleDrawer();
-	}
 
 	public static int convertPixelsToDp(float dp, Context context){
 		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -235,37 +275,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		return listAdapterOnClickListener;
 	}
 	
-	public void setListAdapter(ArrayAdapter<?> listAdapter, final OnItemClickListener optionsMenuOnClickListener) {
-		if(!isVisible()) {
-			mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.set(false);
-		}
-		this.listAdapter = listAdapter;
-		this.listAdapterOnClickListener = optionsMenuOnClickListener;
-		if(this.listView != null) {
-			listView.setAdapter(listAdapter);
-			if(listBackgroundView == null) {
-				listView.setOnItemClickListener(optionsMenuOnClickListener);
-			} else if (optionsMenuOnClickListener != null) {
-				listView.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						optionsMenuOnClickListener.onItemClick(parent, view, position - 1, id);
-					}
-				});
-			} else {
-				listView.setOnItemClickListener(null);
-			}
-		}
-		setDashboardVisibility(true);
+	public void hideDashboard() {
+		setDashboardVisibility(false, DashboardType.DASHBOARD);
 	}
 
-	public void setDashboardVisibility(boolean visible) {
-		if(visible == this.visible) {
+	public void setDashboardVisibility(boolean visible, DashboardType type) {
+		if(visible == this.visible && type == visibleType) {
 			return;
 		}
 		this.visible = visible;
+		this.visibleType = type;
 		DashboardOnMap.staticVisible = visible;
+		DashboardOnMap.staticVisibleType = type;
 		if (visible) {
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
@@ -275,28 +296,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			dashboardView.setVisibility(View.VISIBLE);
 			actionButton.show();
 			updateDownloadBtn();
-			switchButton = (ImageView) dashboardView.findViewById(R.id.map_menu_button);
-			if(mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
+			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
+			if(visibleType == DashboardType.DASHBOARD) {
 				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
-				
-				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_navigation_drawer,
-						R.color.icon_color_light));
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
-				switchButton.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_dashboard_dark,
-						R.color.icon_color_light));
 			}
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
-			switchButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					switchBtnAction();				
-				}
-			});
-
+			
+			initToolbarActions();
 			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent));
 			updateLocation(true, true, false);
@@ -313,6 +324,34 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			}
 			
 		}
+	}
+	
+	private OnItemClickListener getOptionsMenuOnClickListener(final ContextMenuAdapter cm,
+			final ArrayAdapter<?> listAdapter) {
+		return new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
+				OnContextMenuClick click = cm.getClickAdapter(which);
+				if(click instanceof OnRowItemClick) {
+					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getElementId(which), which);
+					if(cl) {
+						hideDashboard();
+					}
+				} else if (click != null) {
+					CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
+					if (btn != null && btn.getVisibility() == View.VISIBLE) {
+						btn.setChecked(!btn.isChecked());
+					} else {
+						if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
+							hideDashboard();
+						}
+					}
+				} else {
+					hideDashboard();
+				}
+			}
+		};
 	}
 
 	private void updateDownloadBtn() {
@@ -342,7 +381,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 			@Override
 			public void onClick(View v) {
-				setDashboardVisibility(false);
+				hideDashboard();
 				final Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 						.getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.FILTER_KEY, f.toString());
@@ -468,11 +507,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		}
 	}
 
-
-
-
-	
-
 	public boolean isVisible() {
 		return visible;
 	}
@@ -526,31 +560,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 
-	public void saveBackAction() {
-		saveBackAction = true;
-	}
-	
-	public boolean clearBackAction() {
-		if(saveBackAction) {
-			saveBackAction = false;
-			return true;
-		}
-		return false;
-	}
-
-
 	public void onMenuPressed() {
 		if (!isVisible()) {
-			setDashboardVisibility(true);
+			setDashboardVisibility(true, DashboardType.DASHBOARD);
 		} else {
-			setDashboardVisibility(false);
+			hideDashboard();
 		}
 	}
 
 
 	public boolean onBackPressed() {
 		if (isVisible()) {
-			setDashboardVisibility(false);
+			hideDashboard();
 			return true;
 		}
 		return false;
@@ -570,10 +591,48 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private void updateTopButton(int scrollY) {
 		if (actionButton != null) {
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
+			int originalPosition = (int) (160 * scale);
+			int minTop = (int) (65 * scale);
 			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
-			lp.topMargin = (int) Math.max(30 * scale, 160 * scale - scrollY);
-			((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
+			if(minTop > originalPosition - scrollY) {
+				actionButton.hide();
+			} else {
+				actionButton.show();
+				lp.topMargin = originalPosition - scrollY;
+				((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
+			}
+			
 		}
+	}
+	
+	public void setListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener, DashboardType type) {
+		this.listAdapter = listAdapter;
+		this.listAdapterOnClickListener = listener;
+		if(this.listView != null) {
+			listView.setAdapter(listAdapter);
+			if(listBackgroundView == null) {
+				listView.setOnItemClickListener(this.listAdapterOnClickListener);
+			} else if (this.listAdapterOnClickListener != null) {
+				listView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						listAdapterOnClickListener.onItemClick(parent, view, position - 1, id);
+					}
+				});
+			} else {
+				listView.setOnItemClickListener(null);
+			}
+		}
+		setDashboardVisibility(true, type);
+
+	}
+
+	public void setListAdapter(ContextMenuAdapter cm, DashboardType type) {
+		final ArrayAdapter<?> listAdapter = cm.createListAdapter(mapActivity, getMyApplication().getSettings()
+				.isLightContent());
+		OnItemClickListener listener = getOptionsMenuOnClickListener(cm, listAdapter);
+		setListAdapter(listAdapter, listener, type);
 	}
 
 
@@ -607,6 +666,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 //	                ab.show();
 //	            }
 //	        }		
+	}
+
+
+	public void refreshContent() {
+		// TODO Auto-generated method stub
+		// ?? This method might not be needed
+		
 	}
 
 
