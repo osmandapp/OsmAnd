@@ -11,7 +11,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiLegacyFilter;
@@ -23,15 +22,12 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -96,12 +92,6 @@ public class WaypointDialogHelper {
 //					0);
 	}
 
-	private FrameLayout.LayoutParams getDialogLayoutParams() {
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-		return params;
-	}
-
 
 	public ArrayAdapter<Object> getWaypointsDrawerAdapter(
 			final boolean edit, final List<LocationPointWrapper> deletedPoints,
@@ -145,7 +135,7 @@ public class WaypointDialogHelper {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
-		updatePointInfoView(app, ctx, v, point, false);
+		updatePointInfoView(app, ctx, v, point, true);
 		View remove = v.findViewById(R.id.info_close);
 		if (!edit) {
 			remove.setVisibility(View.GONE);
@@ -189,23 +179,7 @@ public class WaypointDialogHelper {
 	protected View createItemForCategory(final FragmentActivity ctx, final int type, final int[] running,
 										 final int position, final ArrayAdapter<Object> thisAdapter) {
 		View v;
-		IconsCache iconsCache  = app.getIconsCache();
 		v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
-		ImageView sort = (ImageView) v.findViewById(R.id.sort);
-		//sort button in Destination header
-		if (type == 0 && sort != null && app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
-			sort.setVisibility(View.VISIBLE);
-			sort.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_sort_waypoint_dark));
-
-			sort.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
-				}
-			});
-		} else {
-			sort.setVisibility(View.GONE);
-		}
 		final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
 		btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
 		btn.setOnCheckedChangeListener(null);
@@ -303,8 +277,8 @@ public class WaypointDialogHelper {
 				if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 					showOnMap(app, ctx, ps.getPoint(), false);
-				} else if (new Integer(WaypointHelper.TARGETS).equals(listAdapter.getItem(item))) {
-					IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
+//				} else if (new Integer(WaypointHelper.TARGETS).equals(listAdapter.getItem(item))) {
+//					IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
 				} else if (listAdapter.getItem(item) instanceof RadiusItem) {
 					selectDifferentRadius(((RadiusItem) listAdapter.getItem(item)).type, running, item, listAdapter,
 							ctx);
@@ -393,9 +367,7 @@ public class WaypointDialogHelper {
 			if (!rc && i != WaypointHelper.WAYPOINTS && i != WaypointHelper.TARGETS) {
 				// skip
 			} else if (waypointHelper.isTypeVisible(i)) {
-				if (i != WaypointHelper.TARGETS) {
-					points.add(new Integer(i));
-				}
+				points.add(new Integer(i));
 				if ((i == WaypointHelper.POI || i == WaypointHelper.FAVORITES || i == WaypointHelper.WAYPOINTS)
 						&& rc) {
 					if (waypointHelper.isTypeEnabled(i)) {
@@ -439,11 +411,14 @@ public class WaypointDialogHelper {
 			} else {
 				thread.startMoving(flat, flon, fZoom, true);
 			}
-//				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
-//				ctx.getMapLayers()
-//						.getContextMenuLayer()
-//						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
-//								PointDescription.getSimpleName(locationPoint, ctx));
+			if(ctx.getDashboard().isVisible()) {
+				ctx.getDashboard().hideDashboard();
+				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
+				ctx.getMapLayers()
+						.getContextMenuLayer()
+						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
+								PointDescription.getSimpleName(locationPoint, ctx));
+			}
 		}
 	}
 
