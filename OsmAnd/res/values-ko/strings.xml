@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -72,15 +73,15 @@
 
 	<string name="update_poi_does_not_change_indexes">프로그램 내의 POI 변경은  다운로드된 지도 파일에 영향을 주지 않고, 대신 따로 파일로 저장됩니다.</string>
 	<string name="local_openstreetmap_uploading">업로드 중…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs 가 업로드되었습니다</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Notes 가 업로드 되었습니다</string>
 	<string name="local_openstreetmap_uploadall">모두 업로드하기</string>
 	
 	
 	<string name="local_openstreetmap_upload">대량수정을 OSM에 업로드</string>
 	<string name="local_openstreetmap_delete">대량수정 삭제</string>
 	<string name="local_openstreetmap_descr_title">비동기 OSM 편집 :</string>
-	<string name="local_openstreetmap_settings">로컬로 저장된 OSM POI/버그</string>
-	<string name="local_openstreetmap_settings_descr">로컬 DB에 저장된 OSM POIs/Bugs 표시하고 관리하기</string>
+	<string name="local_openstreetmap_settings">로컬에 저장된 OSM POIs/Notes</string>
+	<string name="local_openstreetmap_settings_descr">로컬 DB에 저장된 OSM POIs/notes 표시하고 관리하기</string>
 
 	
 	
@@ -553,7 +554,7 @@
 	<string name="thanks_yandex_traffic">교통 정보를 위해 Yandex 를 이용합니다.</string>
 	<string name="layer_yandex_traffic">Yandex 트래픽</string>
 	<string name="layer_route">경로</string>
-	<string name="layer_osm_bugs">OSM 버그들(온라인)</string>
+	<string name="layer_osm_bugs">OSM Notes (온라인)</string>
 	<string name="layer_transport">대중교통 정류소</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">맵 소스…</string>
@@ -2207,4 +2208,7 @@
 	<string name="shared_string_not_use">사용 하지 않음</string>
 	<string name="local_osm_changes_upload_all_confirm">OSM에 %1$d 변경 사항을 업로드 하려고 합니다. 확실합니까?</string>
     <string name="confirmation_to_clear_history">모든 기록을 삭제 하시겠습니까?</string>
-    </resources>
+    <string name="osm_changes_added_to_local_edits">OSM 변경 내용이 로컬 변경 내용에 추가</string>
+   	<string name="mark_to_delete">표시하여 삭제</string>
+	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 심볼 이상 이어야 합니다!</string>
+	</resources>
