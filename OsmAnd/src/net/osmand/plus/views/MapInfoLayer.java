@@ -95,7 +95,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl = ric.createLanesControl(map, view);
 		
 		streetNameView = new MapInfoWidgetsFactory.TopTextView(map.getMyApplication(), map);
-		updateStreetName(calculateTextState());
+		updateStreetName(false, calculateTextState());
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
