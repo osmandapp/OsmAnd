@@ -258,46 +258,58 @@ public class SelectedGPXFragment extends ListFragment {
 
 	protected void selectSplitDistance() {
 		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT);
-		if(groups.size() == 0) {
-			return;
-		}
-		
+
+		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
 		Builder bld = new AlertDialog.Builder(getMyActivity());
-		int[] checkedItem = new int[] {!groups.get(0).isSplitDistance() && !groups.get(0).isSplitTime()? 0 : -1};
-		List<String> options = new ArrayList<String>();
 		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
-		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		if(groups.size() == 0) {
+			sp.setVisibility(View.GONE);
+		} else {
+			sp.setVisibility(View.VISIBLE);
+
+			int[] checkedItem = new int[] { !groups.get(0).isSplitDistance() && !groups.get(0).isSplitTime() ? 0 : -1 };
+			List<String> options = new ArrayList<String>();
+			
+
+			options.add(app.getString(R.string.none));
+			distanceSplit.add(-1d);
+			timeSplit.add(-1);
+			addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 100 feet, 50 yards, 50
+																								// m
+			addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, groups); // 200 feet, 100 yards,
+																								// 100 m
+			addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, groups); // 500 feet, 200 yards,
+																								// 200 m
+			addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards,
+																								// 500 m
+			addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards,
+																								// 1km
+			addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1mi, 2km
+			addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2mi, 5km
+			addOptionSplit(8000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 5mi, 10km
+
+			addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, groups);
+			addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, groups);
+
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(),
+					android.R.layout.simple_spinner_item, options);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			sp.setAdapter(adapter);
+			if (checkedItem[0] > 0) {
+				sp.setSelection(checkedItem[0]);
+			}
+		}
 		
-		options.add(app.getString(R.string.none));
-		distanceSplit.add(-1d);
-		timeSplit.add(-1);
-		addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 100 feet, 50 yards, 50 m 
-		addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, groups); // 200 feet, 100 yards, 100 m
-		addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, groups); // 500 feet, 200 yards, 200 m
-		addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards, 500 m
-		addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards, 1km
-		addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1mi, 2km
-		addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2mi, 5km
-		addOptionSplit(8000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 5mi, 10km
-		
-		addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, groups);
-		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, groups);
 		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
 		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
-		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(), android.R.layout.simple_spinner_item, options);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		sp.setAdapter(adapter);
-		if(checkedItem[0] > 0) {
-			sp.setSelection(checkedItem[0]);
-		}
 		
 		bld.setView(view);
 		bld.setNegativeButton(R.string.shared_string_cancel, null);
@@ -306,8 +318,10 @@ public class SelectedGPXFragment extends ListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
-				updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(),
-						vis.isChecked() ? sf : null);
+				if (groups.size() > 0) {
+					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
+							: null);
+				}
 			}
 		});
 		

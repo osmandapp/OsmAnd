@@ -274,7 +274,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			});
 			lst.setVisibility(View.VISIBLE);
 			if (visibleType == DashboardType.DASHBOARD) {
-				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_navigation_drawer_dark));
+				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_navigation_drawer));
 			} else if (visibleType == DashboardType.LIST_MENU) {
 				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_dashboard_dark));
 			}
@@ -363,7 +363,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if(visible == this.visible && type == visibleType) {
 			return;
 		}
-		this.previousVisibleType = this.visible ? null : visibleType;
+		this.previousVisibleType = this.visible ? visibleType : null;
 		this.visible = visible;
 		boolean refresh = this.visibleType == type;
 		this.visibleType = type;
