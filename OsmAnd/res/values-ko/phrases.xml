@@ -686,4 +686,23 @@
 	<string name="poi_wine">와인 삽</string>
 
 	<string name="poi_shop_food">식품점</string>
+	<string name="poi_road_obstacle">도로 장애물</string>
+		<string name="poi_filling_station">주유소</string>
+		<string name="poi_personal_transport">개인 수송</string>
+		<string name="poi_public_transport">대중 교통</string>
+		<string name="poi_air_transport">항공 운송</string>
+		<string name="poi_water_transport">물 수송</string>
+		<string name="poi_bicycle_transport">자전거 운송</string>
+		<string name="poi_aerialway_transport">Aerialway 항공 운송</string>
+	<string name="poi_transport_construction">교통 건설</string>
+		<string name="poi_water_supply">물 공급</string>
+		<string name="poi_power">전원</string>
+		<string name="poi_communication">통신</string>
+		<string name="poi_trash_disposal">쓰레기 처리</string>
+	<string name="poi_sightseeing">관광</string>
+		<string name="poi_accomodation">숙박 시설</string>
+		<string name="poi_internet_access">인터넷 접속</string>
+	<string name="poi_club">클럽</string>
+	<string name="poi_cafe_and_restaurant">카페 및 레스토랑</string>
+	<string name="poi_craft">크래프트</string>
 	</resources>
