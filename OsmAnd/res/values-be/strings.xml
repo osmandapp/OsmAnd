@@ -726,14 +726,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 \n\t - Іншыя змены ↵ "</string>
 	<string name="update_poi_does_not_change_indexes">Зьмены POI у праграме не ўплываюць на cьцягнутыя файлы мапаў, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
 	<string name="local_openstreetmap_uploading">Перадача …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Памылкі былі адасланы</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Заўвагі былі адасланы</string>
 	<string name="local_openstreetmap_uploadall">Адаслаць усё</string>
 	
 	<string name="local_openstreetmap_upload">Адаслаць зьмены ў OSM</string>
 	<string name="local_openstreetmap_delete">Выдаліць зьмены</string>
 	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаваньне OSM:</string>
-	<string name="local_openstreetmap_settings">Лакальна захаваныя OSM POI/Памылкі</string>
-	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць лякальнымі POI/Bugs</string>
+	<string name="local_openstreetmap_settings">Лякальна захаваныя OSM POI/Заўвагі</string>
+	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць лякальнымі POI/Заўвагамі</string>
 	
 	
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэньня</string>
@@ -1126,7 +1126,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
-	<string name="layer_osm_bugs">OSM памылкі (онлайн)</string>
+	<string name="layer_osm_bugs">OSM Заўвагі (онлайн)</string>
 	<string name="layer_transport">Прыпынкі транспарту</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Крыніца мапы…</string>
