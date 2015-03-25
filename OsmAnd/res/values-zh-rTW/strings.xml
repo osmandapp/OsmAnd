@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -148,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">該外掛元件完善的利用 OsmAnd 來輕鬆的記住您愛車之停車地點。</string>
+	<string name="osmand_parking_plugin_description">如果停車有時間限制，停車外掛元件讓您很輕鬆的記住停車地點和剩餘時間。在儀表板和地圖小工具上，您可以找到您的停車地點和時間。\n假使您想要得到它相關的提醒，它會在日曆裡增加通知。</string>
 	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -291,14 +292,14 @@
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
 	<string name="update_poi_does_not_change_indexes">在程式中修改興趣點，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
 	<string name="local_openstreetmap_uploading">上傳中 …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} 興趣點/錯誤已上傳</string>
+	<string name="local_openstreetmap_were_uploaded">{0} 興趣點/註解已上傳</string>
 	<string name="local_openstreetmap_uploadall">全部上傳</string>
 	
 	<string name="local_openstreetmap_upload">上傳修改部份到 OSM</string>
 	<string name="local_openstreetmap_delete">刪除修改部份</string>
 	<string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
-	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/問題</string>
-	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/問題注解</string>
+	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/備註</string>
+	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/備註</string>
 	
 	
 	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
@@ -683,7 +684,7 @@
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
-	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
+	<string name="layer_osm_bugs">OSM 備註(線上)</string>
 	<string name="layer_transport">公車站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
@@ -1948,4 +1949,6 @@
 	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
     <string name="osmo_grop_name_length_alert">群組名稱至少須要 3 個字符長！</string>
-    </resources>
+    <string name="osm_changes_added_to_local_edits">OSM 變更已加到本機更改</string>
+   	<string name="mark_to_delete">刪除標記</string>
+	</resources>
