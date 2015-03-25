@@ -54,7 +54,7 @@
 
      <string name="tip_day_night_mode">日中/夜間 モード</string>
      
-     <string name="tip_location_sharing">位置をシェア</string>
+     <string name="tip_location_sharing">位置を共有</string>
      <string name="tip_location_sharing_t">"\'マップ中心地点を使う\'→\'位置を共有\'という手順で旅行中の興味深い場所の位置を家族や友人と共有できます。
 \n\nそして位置を共有する方法を選んでください。次の方法があります: Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。 "</string>
 
@@ -108,16 +108,15 @@
      <string name="foot">ft</string>
      <string name="mile_per_hour">mph</string>
      <string name="mile">mi</string>
-     <string name="send_location_way_choose_title">次の方法で位置をシェア</string>
+     <string name="send_location_way_choose_title">次の方法で位置を共有</string>
      <string name="send_location_sms_pattern">位置 : %1$s\n%2$s</string>
      <string name="send_location_email_pattern">位置を見るには
 次のWebブラウザ用リンク %1$s、もしくはandroidインテントリンク%2$sを参照</string>
      <string name="send_location">位置を送信</string>
-     <string name="context_menu_item_share_location">位置をシェア</string>
-     <string name="add_waypoint_dialog_added">GPX ウェイポイント \'\'{0}\'\'
-を追加しました</string>
-     <string name="add_waypoint_dialog_title">記録されたGPXトラックにウェイポイントを追加</string>
-     <string name="context_menu_item_add_waypoint">GPX ウェイポイントを追加</string>
+     <string name="context_menu_item_share_location">位置を共有</string>
+     <string name="add_waypoint_dialog_added">GPX経由地点 \'\'{0}\'\' を追加しました</string>
+     <string name="add_waypoint_dialog_title">記録されたGPXトラックに経由地点を追加</string>
+     <string name="context_menu_item_add_waypoint">GPX経由地点を追加</string>
      <string name="amenity_type_administrative">行政区域(Administrative)</string>
      <string name="amenity_type_barrier">バリアー(Barrier)</string>
      <string name="amenity_type_education">教育(Education)</string>
@@ -316,7 +315,7 @@ MB)をダウンロードしますか?</string>
      <string name="off_router_service_no_gps_available">背景ルーティングサービスを動かすには
 位置ソースを動作させる必要があります。</string>
      <string name="routing_settings_descr">ルート計算方法、ナビゲーションに関する設定</string>
-     <string name="routing_settings">ナビゲーション</string>
+     <string name="routing_settings">ナビゲーション設定</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
      <string name="show_poi_filter">フィルタを表示</string>
      <string name="search_poi_filter">フィルタ</string>
@@ -476,7 +475,7 @@ POIの更新は利用できません</string>
  <string name="auto_zoom_map_descr">移動速度に従ってマップを自動ズーム</string>
  <string name="auto_zoom_map">マップを自動ズーム</string>
  <string name="additional_settings">追加設定</string>
- <string name="settings_preset_descr">マップの表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
+ <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
  <string name="settings_preset">デフォルトプロファイル</string>
  <string name="shared_string_settings">設定</string>
  <string name="save_current_track_descr">現在の経路を今すぐSDに保存</string>
@@ -540,7 +539,7 @@ POIの更新は利用できません</string>
 <string name="choose_available_region">リストから地域を選ぶ</string>
 <string name="choose_intersected_street">交差する通りを選ぶ</string>
 <string name="Closest_Amenities">いちばん近い施設</string>
-<string name="app_mode_default">マップを表示</string>
+<string name="app_mode_default">マップ参照</string>
 <string name="app_mode_car">自動車</string>
 <string name="app_mode_bicycle">自転車</string>
 <string name="app_mode_pedestrian">歩行者</string>
@@ -635,7 +634,7 @@ POIの更新は利用できません</string>
 
 
 <string name="av_photo_play_sound_descr">シャッター音を選択します</string>
-<string name="base_world_map">基本世界マップ</string>
+<string name="base_world_map">基本世界地図(ワールドベースマップ)</string>
 	<string name="tip_map_styles">マップ形式</string>
 	
     
@@ -645,9 +644,9 @@ POIの更新は利用できません</string>
     <string name="map_magnifier">マップ拡大鏡</string>
     <string name="tip_map_styles_t">"OsmAndのオフラインベクターマップは必要に応じて異なるマップスタイルを使えるように出来ています:
 \n\nバランスの良い \'デフォルト\' マップスタイルの他に、\'メニュー\' → \'マップ設定\' → \'マップスタイル\' から選択できます。例えば、
-\n\t* \'ツーリングビュー\' スタイルという旅行やツーリング、プロの運転手（より高いコントラストで区別可能な道路）、そしてアルパインハイキングのためのオプション（SACスケール）、自転車ルート、ハイキング用のシンボルマークなどの表示をさせることができます。
+\n\t* \'ツーリングビュー\' スタイルという旅行やツーリング、プロの運転手(より高いコントラストで区別可能な道路)、そしてアルパインハイキングのためのオプション(SACスケール)、自転車ルート、ハイキング用のシンボルマークなどの表示をさせることができます。
 \n\t* \'ハイコントラスト道路\' は周囲を明るくし、それに応じた強調色で道路を表示します。
-\n\t* \'ウィンターアンドスキー\' は（雪で覆われた感じの）冬景色風の表示を行い、世界中のスキー場やそのスロープ・リフトを表示します。(設定と\'ワールドスキー\'マップのダウンロードが必要です) "</string>
+\n\t* \'ウィンターアンドスキー\' は(雪で覆われた感じの)冬景色風の表示を行い、世界中のスキー場やそのスロープ・リフトを表示します。(設定と\'ワールドスキー\'マップのダウンロードが必要です) "</string>
     <string name="about_version">バージョン：</string>
     <string name="about_settings">OsmAnd Maps &amp; Navigationについて</string>
     <string name="about_settings_descr">バージョン情報、ライセンス、プロジェクトメンバー</string>
@@ -657,10 +656,10 @@ POIの更新は利用できません</string>
 \n\t* 完全に透明な背景のサポート
 \n\t* マップビューから地域の直接ダウンロードとその概要を確認可能に
 \n\t* 特定の国のためにSRTMファイルのダウンロードを可能に
-\n\t* 主要道路、線路、森林のような主要エリアを収録した新しい基本世界マップ
-\n\t* マップ拡大鏡（ズームボタン長押し。ラスターマップ利用時に便利）
-\n\t* カスタムオンラインタイルソースの定義/編集（有効期限を指定）
-\n\t* 時間による制限速度変化をサポート（オランダ）
+\n\t* 主要道路、線路、森林のような主要エリアを収録した新しい基本世界地図
+\n\t* マップ拡大鏡(ズームボタン長押し。ラスターマップ利用時に便利)
+\n\t* カスタムオンラインタイルソースの定義/編集(有効期限を指定)
+\n\t* 時間による制限速度変化をサポート(オランダ)
 \n\t* 住所検索の入力高速化
 \n\t* ルーティングとレンダリングのバグの修正 "</string>
     <string name="local_index_tile_data_zooms">ズームダウンロード中: %1$s</string>
@@ -672,7 +671,7 @@ POIの更新は利用できません</string>
     <string name="edit_tilesource_successfully">タイルソース %1$s は正常に保存されました</string>
     <string name="edit_tilesource_elliptic_tile">楕円メルカトル</string>
     <string name="edit_tilesource_maxzoom">最大ズーム</string>
-    <string name="edit_tilesource_expiration_time">有効期限（分）</string>
+    <string name="edit_tilesource_expiration_time">有効期限(分)</string>
     <string name="edit_tilesource_minzoom">最小ズーム</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">既存のデータから選択…</string>
@@ -690,11 +689,11 @@ POIの更新は利用できません</string>
     
     <string name="announce_gpx_waypoints">GPX経由地点をアナウンス</string>
     <string name="speak_title">アナウンス…</string>
-	<string name="speak_descr">通りの名称、トラフィックの警告（強制停止、スピードバンプ）、スピードカメラ（オービス）、法定速度のアナウンス設定</string>
-	<string name="speak_street_names">通りの名前をアナウンス（TTS）</string>
+	<string name="speak_descr">通りの名称、トラフィック警告(通行に関する一般的な指示、強制停止、スピードバンプ等)、スピードカメラ(オービス)、法定速度のアナウンス設定</string>
+	<string name="speak_street_names">通りの名前をアナウンス(TTS)</string>
     <string name="speak_speed_limit">法定速度をアナウンス</string>
-    <string name="speak_cameras">スピードカメラ（オービス）をアナウンス</string>
-	<string name="speak_traffic_warnings">トラフィック警告をアナウンス</string>
+    <string name="speak_cameras">スピードカメラ(オービス)をアナウンス</string>
+	<string name="speak_traffic_warnings">トラフィック警告(通行に関する指示)をアナウンス</string>
     <string name="osb_author_or_password_not_specified">OSMのユーザー名とパスワードを設定して下さい</string>
     <string name="clear_intermediate_points">中間点をクリア</string>
     <string name="keep_intermediate_points">中間点を保持</string>
@@ -713,8 +712,8 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_destination_point">目的地として設定</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
     <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
-    <string name="intermediate_items_sort_return">中間経由点は目的地へのルートの検索時にルートの最適化のためにソートし直されました。</string>
-    <string name="intermediate_items_sort_by_distance">ソート（ドア・ツー・ドア）</string>
+    <string name="intermediate_items_sort_return">中間経由地点は目的地へのルートの検索時にルートの最適化のためにソートし直されました。</string>
+    <string name="intermediate_items_sort_by_distance">ソート(ドア・ツー・ドア)</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
     <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
     <string name="local_osm_changes_backup">OSMの変更としてバックアップ</string>
@@ -759,7 +758,7 @@ POIの更新は利用できません</string>
     <string name="monitoring_settings_descr">移動中の経路記録に関する設定</string>
     
     
-    <string name="osmand_background_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
+    <string name="osmand_background_plugin_description">スリープ(画面消灯)モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
     <string name="choose_osmand_theme_descr">アプリケーションテーマの選択</string>
     <string name="choose_osmand_theme">アプリケーションテーマ</string>
     <string name="accessibility_options">アクセシビリティオプション</string>
@@ -779,15 +778,15 @@ POIの更新は利用できません</string>
 	<string name="prefer_in_routing_descr">高速道路を優先</string>
     <string name="max_speed_none">なし</string>
     <string name="download_hillshade_item">陰影起伏</string>
-    <string name="download_hillshade_maps">陰影起伏オーバーレイ</string>
+    <string name="download_hillshade_maps">陰影起伏層</string>
     
     
     <string name="local_indexes_cat_srtm">等高線データ</string>
     <string name="local_indexes_cat_av">音声/ビデオデータ</string>
     <string name="stop_routing_confirm">本当にナビを終了しますか？</string>
-    <string name="clear_dest_confirm">本当に目的地（とその経由点）を削除しますか？</string>
+    <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
-    <string name="precise_routing_mode">正確なルーティング（アルファ）</string>
+    <string name="precise_routing_mode">正確なルーティング(アルファ)</string>
     <string name="recording_context_menu_show">表示</string>
     <string name="recording_photo_description">写真 %1$s %2$s</string>
     <string name="av_def_action_picture">写真を撮影</string>
@@ -837,17 +836,17 @@ POIの更新は利用できません</string>
 	<string name="animate_route">シミュレーション開始</string>
 	<string name="left_side_navigation">左側通行に設定</string>
 	<string name="left_side_navigation_descr">車が道路を左側通行する国は選択してください</string>
-	<string name="delete_target_point">経由点の削除</string>
-	<string name="target_point">経由点 %1$s</string>
-    <string name="intermediate_point">経由点 %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">最後の経由点として追加</string>
-    <string name="context_menu_item_first_intermediate_point">最初の経由点として追加</string>
-    <string name="add_as_last_destination_point">最後の経由点として追加</string>
-    <string name="add_as_first_destination_point">最初の経由点として追加</string>
-    <string name="intermediate_point_too_far">経由点 %1$s が最寄りの道路から遠すぎます。</string>
-    <string name="arrived_at_intermediate_point">経由点周辺に到着しました</string>
-    <string name="context_menu_item_intermediate_point">経由点を追加</string>
-    <string name="map_widget_intermediate_distance">経由点</string>
+	<string name="delete_target_point">経由地点の削除</string>
+	<string name="target_point">経由地点 %1$s</string>
+    <string name="intermediate_point">経由地点 %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">最後の経由地点として追加</string>
+    <string name="context_menu_item_first_intermediate_point">最初の経由地点として追加</string>
+    <string name="add_as_last_destination_point">最後の経由地点として追加</string>
+    <string name="add_as_first_destination_point">最初の経由地点として追加</string>
+    <string name="intermediate_point_too_far">経由地点 %1$s が最寄りの道路から遠すぎます。</string>
+    <string name="arrived_at_intermediate_point">経由地点周辺に到着しました</string>
+    <string name="context_menu_item_intermediate_point">経由地点として追加</string>
+    <string name="map_widget_intermediate_distance">経由地点</string>
     
     <string name="download_roads_only_item">道路のみ</string>
     <string name="download_roads_only_maps">道路のみのマップ</string>
@@ -877,7 +876,7 @@ POIの更新は利用できません</string>
 	<string name="no_route">ルートがありません</string>
 	<string name="replace_destination_point">目的地の入れ替え</string>
     <string name="new_destination_point_dialog">すでに目的地が設定されています。</string>
-    <string name="target_points">経由点</string>
+    <string name="target_points">経由地点</string>
     <string name="ending_point_too_far">終点が最寄りの道路より遠すぎます。</string>
     <string name="btn_add_tag">タグの追加</string>
     <string name="btn_advanced_mode">拡張モード…</string>
@@ -1027,10 +1026,10 @@ POIの更新は利用できません</string>
 	
 	
 	<string name="osmand_development_plugin_description">このプラグインは開発やデバッグの為のテスト機能、ルーティングシミュレーション、画面のレンダリング性能、音声指示の確認など出来るように設定項目を表示します。これらの設定は開発者向けに用意されており、一般ユーザーには必要ありません。</string>
-	<string name="plugins_screen">プラグイン</string>
+	<string name="plugins_screen">プラグイン設定</string>
 	
 	<string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能</string>
-	<string name="prefs_plugins">プラグイン</string>
+	<string name="prefs_plugins">プラグイン設定</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">ベクター形式のマップはすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
 	<string name="play_commands_of_currently_selected_voice">選択した文字列を設定された言語の音声で再生</string>
 	<string name="debugging_and_development">OsmAnd開発者向けオプション</string>
@@ -1124,7 +1123,7 @@ POIの更新は利用できません</string>
     
     <string name="shared_string_and">と</string>
     <string name="shared_string_or">または</string>
-	<string name="route_is_too_long">OsmAndオフラインルート計算は、指定地点間の距離が200km以上有ると非常に時間がかかります(場合によっては動作しません)。 中間経由点を作成することでルート計算に掛かる時間を短くすることが出来ます。</string>
+	<string name="route_is_too_long">OsmAndオフラインルート計算は、指定地点間の距離が200km以上有ると非常に時間がかかります(場合によっては動作しません)。 中間経由地点を作成することでルート計算に掛かる時間を短くすることが出来ます。</string>
 	<string name="auto_zoom_none">自動ズームしない</string>
 	<string name="auto_zoom_close">ズーム 大</string>
 	<string name="auto_zoom_far">ズーム 中</string>
@@ -1146,7 +1145,7 @@ POIの更新は利用できません</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
     <string name="download_regular_maps">標準マップ</string>
-    <string name="rendering_attr_noAdminboundaries_description">地域の境界線表示（管理者レベル 5-9）を隠す</string>
+    <string name="rendering_attr_noAdminboundaries_description">地域の境界線表示(管理者レベル 5-9)を隠す</string>
     <string name="tip_altitude_offset">高度補正</string>
 	<string name="close_changeset">チェンジセットを閉じる</string>
 	<string name="local_openstreetmap_settings_descr">ローカルストレージに保存されたOpenStreetMapのPOIやバグの閲覧と管理</string>
@@ -1175,13 +1174,13 @@ POIの更新は利用できません</string>
 	<string name="index_name_other">ワールドワイドとトピックマップ</string>
 	<string name="index_name_wiki">ワールドワイドウィキペディアPOI</string>
 	<string name="index_name_voice">音声指示(記録音声、機能限定)</string>
-	<string name="index_name_tts_voice">音声指示(TTS合成音声、推奨）</string>
+	<string name="index_name_tts_voice">音声指示(TTS合成音声、推奨)</string>
 	
 	<string name="amenity_type_user_defined">ユーザー定義</string>
 	<string name="fav_export_confirmation">以前にエクスポートしたお気に入りのファイルが存在します。置き換えますか？</string>
 	<string name="profile_settings">使用するプロファイルの選択</string>
 	<string name="global_settings">グローバル設定</string>
-	<string name="global_app_settings">グローバル アプリケーション設定</string>
+	<string name="global_app_settings">アプリケーション全般の設定</string>
 	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。%1$sMB(空き容量:%2$s)</string>
 	<string name="download_files_question_space">{0}個のダウンロード／必要な容量{1}MB／現在の空き容量{2}MB</string>
 	<string name="use_transparent_map_theme">透明なテーマ</string>
@@ -1310,34 +1309,32 @@ POIの更新は利用できません</string>
 \n\t* 音声案内機能の追加 (通りの名前をアナウンス)
 \n\t* 高密度アイコン
 \n\t* ユーザーインターフェイスの変更
-\n\t* 距離表示、GPXアナライザ、経由点処理、ウィジェット、OSMのアップロード、httpsの取り扱い等のバグ修正 "</string>
-    <string name="tip_recent_changes_1_4_t">1.4での変更点:
-	\n\t* 経由点順にすべての訪問する場合の最適化(トラベリングセールスマンやドア·ツー·ドア手法)
-	\n\t* 通りの名前で検索(近郊)
-	\n\t* 計画モードのプラグイン(ロード/編集/GPXトラックを保存)
-	\n\t* 新しいダウンロード画面(バックグラウンドでダウンロード)
-	\n\t* GPXフォルダのサポート(GPXトラックを整理)
-	\n\t* SRTMのファイルを削除
-	\n\t* OSM Notesのサポート 
-    </string>
+\n\t* 距離表示、GPXアナライザ、経由地点処理、ウィジェット、OSMのアップロード、httpsの取り扱い等のバグ修正 "</string>
+    <string name="tip_recent_changes_1_4_t">"1.4での変更点:
+\n\t* 経由地点順にすべての訪問する場合の最適化(トラベリングセールスマンやドア·ツー·ドア手法)
+\n\t* 通りの名前で検索(近郊)
+\n\t* 計画モードのプラグイン(ロード/編集/GPXトラックを保存)
+\n\t* 新しいダウンロード画面(バックグラウンドでダウンロード)
+\n\t* GPXフォルダのサポート(GPXトラックを整理)
+\n\t* SRTMのファイルを削除
+\n\t* OSM Notesのサポート "</string>
     <string name="tip_recent_changes_1_3_t">"1.3での変更点:
 \n\t* タブレットおよび大型スクリーン用のシステムを再実装
 \n\t* Holoテーマに対応(カスタマイズ)
 \n\t* コンパスを安定化させるための追加設定
 \n\t* マップ画面に最上段に左上のボタンを押すと、メニューボタンに置き換えられます "</string>
-    <string name="tip_recent_changes_1_2_t">1.2.1での修正:
-	\n\t*ジオインテントを修正(Foursquare、c:geo)
-	\n\t*ナビゲーション中の画面揺れを修正
-	\n\t*他、細かな修正
-	\n\n*1.2での変更点:
-		\n\t* バグフィックス(ルート設定調整、検索、AV録画、音声指示、いくつかの表示の改善)
-		\n\t* 簡単に陰影起伏オーバーレイ構成(等高線プラグインが必要)
-		\n\t* maps.google.comのロケーションリンクの受け入れ
-		\n\t* 新しいウィジェット(GPS情報)
-		\n\t* 最近のサムスン製デバイス等のマルチウィンドウをサポート
-		\n\t* コンパス用カルマンフィルタ
-		\n\t* Pebble watchをサポート
-	</string>
+    <string name="tip_recent_changes_1_2_t">"1.2.1での修正:
+\n\t*ジオインテントを修正(Foursquare、c:geo)
+\n\t*ナビゲーション中の画面揺れを修正
+\n\t*他、細かな修正
+\n\n*1.2での変更点:
+\n\t* バグフィックス(ルート設定調整、検索、AV録画、音声指示、いくつかの表示の改善)
+\n\t* 簡単に陰影起伏層構成(等高線プラグインが必要)
+\n\t* maps.google.comのロケーションリンクの受け入れ
+\n\t* 新しいウィジェット(GPS情報)
+\n\t* 最近のサムスン製デバイス等のマルチウィンドウをサポート
+\n\t* コンパス用カルマンフィルタ
+\n\t* Pebble watchをサポート "</string>
     <string name="tip_recent_changes_1_1_4_t">1.1.4での変更点:
 	\n\t* ユーザーインターフェイスの再設計
 		\n\t* バグフィックス
@@ -1367,13 +1364,12 @@ POIの更新は利用できません</string>
 	\n\t* 中断後の位置ロックを失うことの修正
 	\n\t* ナビゲーション中にスリープモードサービスを有効
     </string>
-    <string name="tip_recent_changes_0_8_3_t">0.8.3での変更点:
-	\n\t* 経由点
-	\n\t* 改良された経路案内
-	\n\t* ルートを構築しながら、高速道路を避けることを可能にする設定を追加
-	\n\t* マップに1つ以上の自転車用道路を追加しました(自転車用道路=トラック)
-	\n\t* バグ修正
-	</string>
+    <string name="tip_recent_changes_0_8_3_t">"0.8.3での変更点:
+\n\t* 経由地点
+\n\t* 改良された経路案内
+\n\t* ルートを構築しながら、高速道路を避けることを可能にする設定を追加
+\n\t* マップに1つ以上の自転車用道路を追加しました(自転車用道路=トラック)
+\n\t* バグ修正 "</string>
 	<string name="tip_recent_changes_0_8_2_t">"0.8.2での変更点:
 \n\t* ルート設定の改善
 \n\t* ダイナミックマップウィジェット
@@ -1381,9 +1377,9 @@ POIの更新は利用できません</string>
 \n\t* スクリーンロックボタンとログ記録サービス
 \n\t* アラビア語、カンナダ語のスクリプトとRTL(右から書く)言語の修正 "</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd(OSM Automated Navigation Directionsの略) OsmAndはグローバルOpenStreetMap(OSM)を利用したさまざまなデータへのアクセス可能なオープンソースのナビゲーションアプリです。すべてのマップデータ(ベクター形式またはタイルマップ)がオフラインで使用する場合の携帯電話の内部メモリに保存することができます。 OsmAndもターンバイターンの音声案内など、オフラインとオンライン両方のルート設定機能を有しています。 主要機能の一部: - 完全なオフライン機能(ストアでダウンロードした任意のフォルダ内のベクター形式またはタイルマップ) - 全世界で利用できるコンパクトなベクター形式オフラインマップ - 国または地域マップのダウンロードは、アプリから直接可能 - GPXやナビゲーショントラック、名所、お気に入り、等高線、公共交通機関、カスタマイズ可能な透明性を持つ追加マップ等のオーバーレイマップ(重ね合わせ)表示 - オフラインアドレスや場所(POI)の検索 - 短い距離のオフラインルート設定(実験的) - 車、自転車、歩行者モード: - オプションにて自動化された日中/夜間表示の切り替え - オプションで速度に応じたマップの拡大縮小 - オプションで動きやコンパスや向きに応じてマップの向きを変更 - 任意のレーン案内、制限速度表示、録音およびTTS合成音声の使用 OsmAnd無料版の制限事項: - マップダウンロード数の制限 - ウィキペディアのオフラインのPOIへのアクセス無し OsmAndは積極的に開発されている最中で、我々のプロジェクトとその更なる進展、開発と、新しい機能の試験には財政的貢献を必要としています。 新機能搭載のために資金提供したりOsmAnd+を購入したり、osmand.netに寄付をすることをご検討ください。 "</string>
-	<string name="osmand_extended_description_4000_chars">" ↵ OsmAnd(OSM Automated Navigation Directions)は世界的にかつ高品質のOpenStreetMap(OSM)にアクセスすることの出来るマップ＆ナビゲーションアプリです。すべてのマップデータはオフラインで使用するために、デバイスの内蔵メモリに保存することができます。お使いのデバイスのGPSを経由して、 OsmAndは、車、バイク、歩行者のために、画面表示と音声案内でルートを示してくれます。すべての主要な機能は、オンラインとオフライン(インターネット接続無し)の両方で動作します。↵ ↵ 主な機能のいくつか:↵ ↵ ナビゲーション↵ - オンライン(早い)とオフライン(海外でローミングを使用しない)の両方で動作↵ - ターンバイターンの音声ガイダンス(録音音声又は、音声合成)↵ - オプションのレーン案内、街路名表示、および到着予定時刻↵ - 旅程上の中間経由点(経路)をサポート↵ - ルートから外れた場合は自動ルート再設定↵ - タイプ(例：レストラン、ホテル、ガソリンスタンド、美術館)で、住所または地理的座標で場所を検索↵ ↵ マップ表示↵ - マップ上の位置と方向を表示 - オプションでコンパスや動きの方向に応じてマップを回転↵ - お気に入りとして最も重要な場所を保存↵ - あなたの周りのディスプレイのPOI(関心地点)↵ - 専門のオンラインのタイルマップを表示↵ - 衛星ビューを表示することができます(Bingから)↵ - ツーリング/ナビゲーション、GPXトラックとカスタマイズ可能な透明性を持つ追加マップのオーバーレイ表示が可能↵ - オプションで、英語、ローカル、あるいは発音表記で地名を表示↵ ↵ OpenStreetMapとウィキペディアのデータを使用↵ - 世界最高の共同プロジェクトからの質の高い情報↵ - 国または地域ごとに使用可能なOpenStreetMapのグローバルマップ↵ - 観光に便利なウィキペディアのPOI(※無料版では利用できません)↵ - アプリから直接から無制限の無料ダウンロード(無料版ではダウンロード制限あり16個まで／追記：現在は10個まで)↵ - 常に最新のマップ(少なくとも月に一度程度更新)↵ - コンパクトなオフラインベクター形式マップ↵ - 完全なマップデータか道路網のみとの間で選択(例：日本全体で700MB、または道路網のみの場合200MB)↵ - オンラインまたはキャッシュタイルマップをサポート↵ ↵ 安全機能↵ - オプションにて自動化された日中/夜間表示の切り替え↵ - オプションにて設定した制限速度を超過した場合アラームで案内↵ - オプションにて速度に応じたマップの拡大縮小↵ - あなたの友人があなたを見つけることができるように場所を共有↵ ↵ 自転車と歩行者の機能↵ - マップはアウトドア向けの遊歩道、ハイキング、および自転車用道路を含みます↵ - 自転車と歩行者のための特別なルート設定および表示モード↵ - オプションにて路線名を含む公共交通機関の停留所(バス、路面電車、電車)↵ - オプションにてローカルのGPXファイルまたはオンラインを利用した記録サービス↵ - オプションにて速度と高度を表示↵ - 等高線や丘シェーディングの表示(追加プラグイン経由)↵ ↵ 直接OpenStreetMapのに貢献↵ - レポートマップのバグ↵ - OSMフォルダ内のGPXトラック記録をアプリから直接アップロード↵ - POIを追加し、直接OSMに(オフラインの場合後で)アップロード↵ - オプションにてバックグラウンドモードで任意の旅行記録の作成(デバイスがスリープモードにある間)↵ ↵ OsmAndはオープンソースであり、活発に開発が進められいます。誰もがバグの報告、翻訳の改善、新しい機能のコーディング等でアプリケーションに貢献することができます。プロジェクトはフォーラムにて開発者とユーザーとの対話にて進んでいます。プロジェクトの進捗状況、また新たな機能の開発、コーディング、およびテストの為に皆様の資金的貢献を頼りとしています。 OsmAnd+を購入することにより、アプリケーションがより良くなります！また特定の新機能に資金を供給したり、osmand.netに寄付をすることも可能です。↵ ↵ ↵ おおよそのマップ範囲と品質:↵ - 西ヨーロッパ: **** ↵ - 東ヨーロッパ: *** ↵ - ロシア: *** ↵ - 北米*** ↵ - 南アメリカ:** ↵ - アジア: ** ↵ - 日本と韓国: *** ↵ - 中東: ** ↵ - アフリカ: ** ↵ - 南極: * ↵ ↵ サポートする国のリスト(基本的には全世界対応):↵ アフガニスタン、アルバニア、アルジェリア、アンドラ、アンゴラ、アンギラ、アンティグア·バーブーダ、アルゼンチン、アルメニア、アルバ、オーストラリア、オーストリア、アゼルバイジャン、バハマ、バーレーン、バングラデシュ、バルバドス、ベラルーシ、ベルギー、ベリーズ、ベナン、バミューダ、ブータン、ボリビア、ボネール、ボスニア·ヘルツェゴビナ、ボツワナ、ブラジル、英領バージン諸島、ブルネイ、ブルガリア、ブルキナファソ、ブルンジ、カンボジア、カメルーン、カナダ、カーボベルデ、中央アフリカ共和国、チャド、チリ、中国、コロンビア、コモロ、コンゴ、コスタリカ、コートジボワール、クロアチア、キューバ、キュラソー、キプロス、チェコ共和国、デンマーク、ジブチ、ドミニカ、ドミニカ共和国、エクアドル、エジプト、エルサルバドル、赤道ギニア、エリトリア、エストニア、エチオピア、フィジー、フィンランド、フランス、フランス領ギアナ、フランス領ポリネシア、ガボン、ガンビア、ジョージア、ドイツ、ガーナ、ジブラルタル、ギリシャ、グリーンランド、グレナダ、グアドループ、グアム、グアテマラ、ガーンジー島、ギニア、ギニアビサウ、ガイアナ、ハイチ、バチカン、ホンジュラス、香港、ハンガリー、アイスランド、インド、インドネシア、イラン、イラク、アイルランド、マン島、イスラエル、イタリア、ジャマイカ、日本、ジャージ、ヨルダン、カザフスタン、ケニア、キリバス、北朝鮮と韓国、クウェート、キルギスタン、ラオス、ラトビア、レバノン、レソト、リベリア、リビア、リヒテンシュタイン、リトアニア、ルクセンブルグ、マカオ、マケドニア、マダガスカル、マラウイ、マレーシア、モルディブ、マリ、マルタ、マルティニク、モーリタニア、モーリシャス、マヨット、メキシコ、ミクロネシア、モルドバ、モナコ、モンゴル、モンテネグロ、モントセラト、モロッコ、モザンビーク、ミャンマー、ナミビア、ナウル、ネパール、オランダ、オランダ領アンティル、ニューカレドニア、ニュージーランド、ニカラグア、ニジェール、ナイジェリア、ノルウェー、オマーン、パキスタン、パラオ、パレスチナ、パナマ、パプアニューギニア、パラグアイ、ペルー、フィリピン、ポーランド、ポルトガル、プエルトリコ、カタール、ルーマニア、ロシア、ルワンダ、サン·バルテルミー島、セントヘレナ島、セントクリストファー·ネイビス、セントルシア、サンマルタン、サンピエール島·ミクロン島、セントビンセント·グレナディーン、サモア、サンマリノ、サウジアラビア、セネガル、セルビア、セイシェル、シエラレオネ、シンガポール、スロバキア、スロベニア、ソマリア、南アフリカ共和国、サウスジョージア、南スーダン、スペイン、スリランカ、スーダン、スリナム、スワジランド、スウェーデン、スイス、シリア、台湾、タジキスタン、タンザニア、タイ、東ティモール、トーゴ、トケラウ、トンガ、トリニダード·トバゴ、チュニジア、トルコ、トルクメニスタン、ツバル、ウガンダ、ウクライナ、アラブ首長国連邦、イギリス(UK) 、アメリカ合衆国(USA) 、ウルグアイ、ウズベキスタン、バヌアツ、ベネズエラ、ベトナム、ウォリス·フツナ、西サハラ、イエメン、ザンビア、ジンバブエ "</string>
+	<string name="osmand_extended_description_4000_chars">" ↵ OsmAnd(OSM Automated Navigation Directions)は世界的にかつ高品質のOpenStreetMap(OSM)にアクセスすることの出来るマップ＆ナビゲーションアプリです。すべてのマップデータはオフラインで使用するために、デバイスの内蔵メモリに保存することができます。お使いのデバイスのGPSを経由して、 OsmAndは、車、バイク、歩行者のために、画面表示と音声案内でルートを示してくれます。すべての主要な機能は、オンラインとオフライン(インターネット接続無し)の両方で動作します。↵ ↵ 主な機能のいくつか:↵ ↵ ナビゲーション↵ - オンライン(早い)とオフライン(海外でローミングを使用しない)の両方で動作↵ - ターンバイターンの音声ガイダンス(録音音声又は、音声合成)↵ - オプションのレーン案内、街路名表示、および到着予定時刻↵ - 旅程上の中間経由地点(経路)をサポート↵ - ルートから外れた場合は自動ルート再設定↵ - タイプ(例：レストラン、ホテル、ガソリンスタンド、美術館)で、住所または地理的座標で場所を検索↵ ↵ マップ表示↵ - マップ上の位置と方向を表示 - オプションでコンパスや動きの方向に応じてマップを回転↵ - お気に入りとして最も重要な場所を保存↵ - あなたの周りのディスプレイのPOI(関心地点)↵ - 専門のオンラインのタイルマップを表示↵ - 衛星ビューを表示することができます(Bingから)↵ - ツーリング/ナビゲーション、GPXトラックとカスタマイズ可能な透明性を持つ追加マップのオーバーレイ表示が可能↵ - オプションで、英語、ローカル、あるいは発音表記で地名を表示↵ ↵ OpenStreetMapとウィキペディアのデータを使用↵ - 世界最高の共同プロジェクトからの質の高い情報↵ - 国または地域ごとに使用可能なOpenStreetMapのグローバルマップ↵ - 観光に便利なウィキペディアのPOI(※無料版では利用できません)↵ - アプリから直接から無制限の無料ダウンロード(無料版ではダウンロード制限あり16個まで／追記：現在は10個まで)↵ - 常に最新のマップ(少なくとも月に一度程度更新)↵ - コンパクトなオフラインベクター形式マップ↵ - 完全なマップデータか道路網のみとの間で選択(例：日本全体で700MB、または道路網のみの場合200MB)↵ - オンラインまたはキャッシュタイルマップをサポート↵ ↵ 安全機能↵ - オプションにて自動化された日中/夜間表示の切り替え↵ - オプションにて設定した制限速度を超過した場合アラームで案内↵ - オプションにて速度に応じたマップの拡大縮小↵ - あなたの友人があなたを見つけることができるように場所を共有↵ ↵ 自転車と歩行者の機能↵ - マップはアウトドア向けの遊歩道、ハイキング、および自転車用道路を含みます↵ - 自転車と歩行者のための特別なルート設定および表示モード↵ - オプションにて路線名を含む公共交通機関の停留所(バス、路面電車、電車)↵ - オプションにてローカルのGPXファイルまたはオンラインを利用した記録サービス↵ - オプションにて速度と高度を表示↵ - 等高線や丘シェーディングの表示(追加プラグイン経由)↵ ↵ 直接OpenStreetMapのに貢献↵ - レポートマップのバグ↵ - OSMフォルダ内のGPXトラック記録をアプリから直接アップロード↵ - POIを追加し、直接OSMに(オフラインの場合後で)アップロード↵ - オプションにてバックグラウンドモードで任意の旅行記録の作成(デバイスがスリープモードにある間)↵ ↵ OsmAndはオープンソースであり、活発に開発が進められいます。誰もがバグの報告、翻訳の改善、新しい機能のコーディング等でアプリケーションに貢献することができます。プロジェクトはフォーラムにて開発者とユーザーとの対話にて進んでいます。プロジェクトの進捗状況、また新たな機能の開発、コーディング、およびテストの為に皆様の資金的貢献を頼りとしています。 OsmAnd+を購入することにより、アプリケーションがより良くなります！また特定の新機能に資金を供給したり、osmand.netに寄付をすることも可能です。↵ ↵ ↵ おおよそのマップ範囲と品質:↵ - 西ヨーロッパ: **** ↵ - 東ヨーロッパ: *** ↵ - ロシア: *** ↵ - 北米*** ↵ - 南アメリカ:** ↵ - アジア: ** ↵ - 日本と韓国: *** ↵ - 中東: ** ↵ - アフリカ: ** ↵ - 南極: * ↵ ↵ サポートする国のリスト(基本的には全世界対応):↵ アフガニスタン、アルバニア、アルジェリア、アンドラ、アンゴラ、アンギラ、アンティグア·バーブーダ、アルゼンチン、アルメニア、アルバ、オーストラリア、オーストリア、アゼルバイジャン、バハマ、バーレーン、バングラデシュ、バルバドス、ベラルーシ、ベルギー、ベリーズ、ベナン、バミューダ、ブータン、ボリビア、ボネール、ボスニア·ヘルツェゴビナ、ボツワナ、ブラジル、英領バージン諸島、ブルネイ、ブルガリア、ブルキナファソ、ブルンジ、カンボジア、カメルーン、カナダ、カーボベルデ、中央アフリカ共和国、チャド、チリ、中国、コロンビア、コモロ、コンゴ、コスタリカ、コートジボワール、クロアチア、キューバ、キュラソー、キプロス、チェコ共和国、デンマーク、ジブチ、ドミニカ、ドミニカ共和国、エクアドル、エジプト、エルサルバドル、赤道ギニア、エリトリア、エストニア、エチオピア、フィジー、フィンランド、フランス、フランス領ギアナ、フランス領ポリネシア、ガボン、ガンビア、ジョージア、ドイツ、ガーナ、ジブラルタル、ギリシャ、グリーンランド、グレナダ、グアドループ、グアム、グアテマラ、ガーンジー島、ギニア、ギニアビサウ、ガイアナ、ハイチ、バチカン、ホンジュラス、香港、ハンガリー、アイスランド、インド、インドネシア、イラン、イラク、アイルランド、マン島、イスラエル、イタリア、ジャマイカ、日本、ジャージ、ヨルダン、カザフスタン、ケニア、キリバス、北朝鮮と韓国、クウェート、キルギスタン、ラオス、ラトビア、レバノン、レソト、リベリア、リビア、リヒテンシュタイン、リトアニア、ルクセンブルグ、マカオ、マケドニア、マダガスカル、マラウイ、マレーシア、モルディブ、マリ、マルタ、マルティニク、モーリタニア、モーリシャス、マヨット、メキシコ、ミクロネシア、モルドバ、モナコ、モンゴル、モンテネグロ、モントセラト、モロッコ、モザンビーク、ミャンマー、ナミビア、ナウル、ネパール、オランダ、オランダ領アンティル、ニューカレドニア、ニュージーランド、ニカラグア、ニジェール、ナイジェリア、ノルウェー、オマーン、パキスタン、パラオ、パレスチナ、パナマ、パプアニューギニア、パラグアイ、ペルー、フィリピン、ポーランド、ポルトガル、プエルトリコ、カタール、ルーマニア、ロシア、ルワンダ、サン·バルテルミー島、セントヘレナ島、セントクリストファー·ネイビス、セントルシア、サンマルタン、サンピエール島·ミクロン島、セントビンセント·グレナディーン、サモア、サンマリノ、サウジアラビア、セネガル、セルビア、セイシェル、シエラレオネ、シンガポール、スロバキア、スロベニア、ソマリア、南アフリカ共和国、サウスジョージア、南スーダン、スペイン、スリランカ、スーダン、スリナム、スワジランド、スウェーデン、スイス、シリア、台湾、タジキスタン、タンザニア、タイ、東ティモール、トーゴ、トケラウ、トンガ、トリニダード·トバゴ、チュニジア、トルコ、トルクメニスタン、ツバル、ウガンダ、ウクライナ、アラブ首長国連邦、イギリス(UK) 、アメリカ合衆国(USA) 、ウルグアイ、ウズベキスタン、バヌアツ、ベネズエラ、ベトナム、ウォリス·フツナ、西サハラ、イエメン、ザンビア、ジンバブエ "</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+(OSM Automated Navigation Directionsの略) OsmAnd+はグローバルOpenStreetMap(OSM)を利用したさまざまなデータへのアクセス可能なオープンソースのナビゲーションアプリです。すべてのマップデータ(ベクター形式またはタイルマップ)がオフラインで使用する場合の携帯電話の内部メモリに保存することができます。 OsmAndもターンバイターンの音声案内など、オフラインとオンライン両方のルート設定機能を有しています。 OsmAnd+は最新の更新情報を受けとることが出来る、有料バージョンのアプリケーションです。また購入することでプロジェクトの支援と新機能の開発における資金援助となります。 主要機能の一部: - 完全なオフライン機能(ストアでダウンロードした任意のフォルダ内のベクター形式またはタイルマップ) - 全世界で利用できるコンパクトなベクター形式オフラインマップ - 国または地域マップのダウンロードは、アプリから直接可能 - GPXやナビゲーショントラック、名所、お気に入り、等高線、公共交通機関、カスタマイズ可能な透明性を持つ追加マップ等のオーバーレイマップ(重ね合わせ)表示 - オフラインアドレスや場所(POI)の検索 - 短い距離のオフラインルート設定(実験的) - 車、自転車、歩行者モード: - オプションにて自動化された日中/夜間表示の切り替え - オプションで速度に応じたマップの拡大縮小 - オプションで動きやコンパスや向きに応じてマップの向きを変更 - 任意のレーン案内、制限速度表示、録音およびTTS合成音声の使用 "</string>
-	<string name="osmand_plus_extended_description_4000_chars">" ↵ OsmAnd(OSM Automated Navigation Directions)は世界的にかつ高品質のOpenStreetMap(OSM)にアクセスすることの出来るマップ＆ナビゲーションアプリです。すべてのマップデータはオフラインで使用するために、デバイスの内蔵メモリに保存することができます。お使いのデバイスのGPSを経由して、 OsmAndは、車、バイク、歩行者のために、画面表示と音声案内でルートを示してくれます。すべての主要な機能は、オンラインとオフライン(インターネット接続無し)の両方で動作します。↵ ↵ OsmAnd+は有料バージョンのアプリケーションです。購入することで最新の更新プログラムを受け取ることが出来ます。また、あなたがプロジェクトをサポートし新機能の開発に資金援助をしてくれた証となります。OsmAndと呼ばれる無料版をインストールすることで、購入する前にアプリケーションを試用することができます。 主な機能のいくつか:↵ ↵ ナビゲーション↵ - オンライン(早い)とオフライン(海外でローミングを使用しない)の両方で動作↵ - ターンバイターンの音声ガイダンス(録音音声又は、音声合成)↵ - オプションのレーン案内、街路名表示、および到着予定時刻↵ - 旅程上の中間経由点(経路)をサポート↵ - ルートから外れた場合は自動ルート再設定↵ - タイプ(例：レストラン、ホテル、ガソリンスタンド、美術館)で、住所または地理的座標で場所を検索↵ ↵ マップ表示↵ - マップ上の位置と方向を表示 - オプションでコンパスや動きの方向に応じてマップを回転↵ - お気に入りとして最も重要な場所を保存↵ - あなたの周りのディスプレイのPOI(関心地点)↵ - 専門のオンラインのタイルマップを表示↵ - 衛星ビューを表示することができます(Bingから)↵ - ツーリング/ナビゲーション、GPXトラックとカスタマイズ可能な透明性を持つ追加マップのオーバーレイ表示が可能↵ - オプションで、英語、ローカル、あるいは発音表記で地名を表示↵ ↵ OpenStreetMapとウィキペディアのデータを使用↵ - 世界最高の共同プロジェクトからの質の高い情報↵ - 国または地域ごとに使用可能なOpenStreetMapのグローバルマップ↵ - 観光に便利なウィキペディアのPOI↵ - アプリから直接から無制限の無料ダウンロード↵ - 常に最新のマップ(少なくとも月に一度程度更新)↵ - コンパクトなオフラインベクター形式マップ↵ - 完全なマップデータか道路網のみとの間で選択(例：日本全体で700MB、または道路網のみの場合200MB)↵ - オンラインまたはキャッシュタイルマップをサポート↵ ↵ 安全機能↵ - オプションにて自動化された日中/夜間表示の切り替え↵ - オプションにて設定した制限速度を超過した場合アラームで案内↵ - オプションにて速度に応じたマップの拡大縮小↵ - あなたの友人があなたを見つけることができるように場所を共有↵ ↵ 自転車と歩行者の機能↵ - マップはアウトドア向けの遊歩道、ハイキング、および自転車用道路を含みます↵ - 自転車と歩行者のための特別なルート設定および表示モード↵ - オプションにて路線名を含む公共交通機関の停留所(バス、路面電車、電車)↵ - オプションにてローカルのGPXファイルまたはオンラインを利用した記録サービス↵ - オプションにて速度と高度を表示↵ - 等高線や丘シェーディングの表示(追加プラグイン経由)↵ ↵ 直接OpenStreetMapのに貢献↵ - レポートマップのバグ↵ - OSMフォルダ内のGPXトラック記録をアプリから直接アップロード↵ - POIを追加し、直接OSMに(オフラインの場合後で)アップロード↵ - オプションにてバックグラウンドモードで任意の旅行記録の作成(デバイスがスリープモードにある間)↵ ↵ OsmAndはオープンソースであり、活発に開発が進められいます。誰もがバグの報告、翻訳の改善、新しい機能のコーディング等でアプリケーションに貢献することができます。プロジェクトはフォーラムにて開発者とユーザーとの対話にて進んでいます。プロジェクトの進捗状況、また新たな機能の開発、コーディング、およびテストの為に皆様の資金的貢献を頼りとしています。 OsmAnd+を購入することにより、アプリケーションがより良くなります！また特定の新機能に資金を供給したり、osmand.netに寄付をすることも可能です。↵ ↵ ↵ おおよそのマップ範囲と品質:↵ - 西ヨーロッパ: **** ↵ - 東ヨーロッパ: *** ↵ - ロシア: *** ↵ - 北米*** ↵ - 南アメリカ:** ↵ - アジア: ** ↵ - 日本と韓国: *** ↵ - 中東: ** ↵ - アフリカ: ** ↵ - 南極: * ↵ ↵ サポートする国のリスト(基本的には全世界対応):↵ アフガニスタン、アルバニア、アルジェリア、アンドラ、アンゴラ、アンギラ、アンティグア·バーブーダ、アルゼンチン、アルメニア、アルバ、オーストラリア、オーストリア、アゼルバイジャン、バハマ、バーレーン、バングラデシュ、バルバドス、ベラルーシ、ベルギー、ベリーズ、ベナン、バミューダ、ブータン、ボリビア、ボネール、ボスニア·ヘルツェゴビナ、ボツワナ、ブラジル、英領バージン諸島、ブルネイ、ブルガリア、ブルキナファソ、ブルンジ、カンボジア、カメルーン、カナダ、カーボベルデ、中央アフリカ共和国、チャド、チリ、中国、コロンビア、コモロ、コンゴ、コスタリカ、コートジボワール、クロアチア、キューバ、キュラソー、キプロス、チェコ共和国、デンマーク、ジブチ、ドミニカ、ドミニカ共和国、エクアドル、エジプト、エルサルバドル、赤道ギニア、エリトリア、エストニア、エチオピア、フィジー、フィンランド、フランス、フランス領ギアナ、フランス領ポリネシア、ガボン、ガンビア、ジョージア、ドイツ、ガーナ、ジブラルタル、ギリシャ、グリーンランド、グレナダ、グアドループ、グアム、グアテマラ、ガーンジー島、ギニア、ギニアビサウ、ガイアナ、ハイチ、バチカン、ホンジュラス、香港、ハンガリー、アイスランド、インド、インドネシア、イラン、イラク、アイルランド、マン島、イスラエル、イタリア、ジャマイカ、日本、ジャージ、ヨルダン、カザフスタン、ケニア、キリバス、北朝鮮と韓国、クウェート、キルギスタン、ラオス、ラトビア、レバノン、レソト、リベリア、リビア、リヒテンシュタイン、リトアニア、ルクセンブルグ、マカオ、マケドニア、マダガスカル、マラウイ、マレーシア、モルディブ、マリ、マルタ、マルティニク、モーリタニア、モーリシャス、マヨット、メキシコ、ミクロネシア、モルドバ、モナコ、モンゴル、モンテネグロ、モントセラト、モロッコ、モザンビーク、ミャンマー、ナミビア、ナウル、ネパール、オランダ、オランダ領アンティル、ニューカレドニア、ニュージーランド、ニカラグア、ニジェール、ナイジェリア、ノルウェー、オマーン、パキスタン、パラオ、パレスチナ、パナマ、パプアニューギニア、パラグアイ、ペルー、フィリピン、ポーランド、ポルトガル、プエルトリコ、カタール、ルーマニア、ロシア、ルワンダ、サン·バルテルミー島、セントヘレナ島、セントクリストファー·ネイビス、セントルシア、サンマルタン、サンピエール島·ミクロン島、セントビンセント·グレナディーン、サモア、サンマリノ、サウジアラビア、セネガル、セルビア、セイシェル、シエラレオネ、シンガポール、スロバキア、スロベニア、ソマリア、南アフリカ共和国、サウスジョージア、南スーダン、スペイン、スリランカ、スーダン、スリナム、スワジランド、スウェーデン、スイス、シリア、台湾、タジキスタン、タンザニア、タイ、東ティモール、トーゴ、トケラウ、トンガ、トリニダード·トバゴ、チュニジア、トルコ、トルクメニスタン、ツバル、ウガンダ、ウクライナ、アラブ首長国連邦、イギリス(UK) 、アメリカ合衆国(USA) 、ウルグアイ、ウズベキスタン、バヌアツ、ベネズエラ、ベトナム、ウォリス·フツナ、西サハラ、イエメン、ザンビア、ジンバブエ "</string>
+	<string name="osmand_plus_extended_description_4000_chars">" ↵ OsmAnd(OSM Automated Navigation Directions)は世界的にかつ高品質のOpenStreetMap(OSM)にアクセスすることの出来るマップ＆ナビゲーションアプリです。すべてのマップデータはオフラインで使用するために、デバイスの内蔵メモリに保存することができます。お使いのデバイスのGPSを経由して、 OsmAndは、車、バイク、歩行者のために、画面表示と音声案内でルートを示してくれます。すべての主要な機能は、オンラインとオフライン(インターネット接続無し)の両方で動作します。↵ ↵ OsmAnd+は有料バージョンのアプリケーションです。購入することで最新の更新プログラムを受け取ることが出来ます。また、あなたがプロジェクトをサポートし新機能の開発に資金援助をしてくれた証となります。OsmAndと呼ばれる無料版をインストールすることで、購入する前にアプリケーションを試用することができます。 主な機能のいくつか:↵ ↵ ナビゲーション↵ - オンライン(早い)とオフライン(海外でローミングを使用しない)の両方で動作↵ - ターンバイターンの音声ガイダンス(録音音声又は、音声合成)↵ - オプションのレーン案内、街路名表示、および到着予定時刻↵ - 旅程上の中間経由地点(経路)をサポート↵ - ルートから外れた場合は自動ルート再設定↵ - タイプ(例：レストラン、ホテル、ガソリンスタンド、美術館)で、住所または地理的座標で場所を検索↵ ↵ マップ表示↵ - マップ上の位置と方向を表示 - オプションでコンパスや動きの方向に応じてマップを回転↵ - お気に入りとして最も重要な場所を保存↵ - あなたの周りのディスプレイのPOI(関心地点)↵ - 専門のオンラインのタイルマップを表示↵ - 衛星ビューを表示することができます(Bingから)↵ - ツーリング/ナビゲーション、GPXトラックとカスタマイズ可能な透明性を持つ追加マップのオーバーレイ表示が可能↵ - オプションで、英語、ローカル、あるいは発音表記で地名を表示↵ ↵ OpenStreetMapとウィキペディアのデータを使用↵ - 世界最高の共同プロジェクトからの質の高い情報↵ - 国または地域ごとに使用可能なOpenStreetMapのグローバルマップ↵ - 観光に便利なウィキペディアのPOI↵ - アプリから直接から無制限の無料ダウンロード↵ - 常に最新のマップ(少なくとも月に一度程度更新)↵ - コンパクトなオフラインベクター形式マップ↵ - 完全なマップデータか道路網のみとの間で選択(例：日本全体で700MB、または道路網のみの場合200MB)↵ - オンラインまたはキャッシュタイルマップをサポート↵ ↵ 安全機能↵ - オプションにて自動化された日中/夜間表示の切り替え↵ - オプションにて設定した制限速度を超過した場合アラームで案内↵ - オプションにて速度に応じたマップの拡大縮小↵ - あなたの友人があなたを見つけることができるように場所を共有↵ ↵ 自転車と歩行者の機能↵ - マップはアウトドア向けの遊歩道、ハイキング、および自転車用道路を含みます↵ - 自転車と歩行者のための特別なルート設定および表示モード↵ - オプションにて路線名を含む公共交通機関の停留所(バス、路面電車、電車)↵ - オプションにてローカルのGPXファイルまたはオンラインを利用した記録サービス↵ - オプションにて速度と高度を表示↵ - 等高線や丘シェーディングの表示(追加プラグイン経由)↵ ↵ 直接OpenStreetMapのに貢献↵ - レポートマップのバグ↵ - OSMフォルダ内のGPXトラック記録をアプリから直接アップロード↵ - POIを追加し、直接OSMに(オフラインの場合後で)アップロード↵ - オプションにてバックグラウンドモードで任意の旅行記録の作成(デバイスがスリープモードにある間)↵ ↵ OsmAndはオープンソースであり、活発に開発が進められいます。誰もがバグの報告、翻訳の改善、新しい機能のコーディング等でアプリケーションに貢献することができます。プロジェクトはフォーラムにて開発者とユーザーとの対話にて進んでいます。プロジェクトの進捗状況、また新たな機能の開発、コーディング、およびテストの為に皆様の資金的貢献を頼りとしています。 OsmAnd+を購入することにより、アプリケーションがより良くなります！また特定の新機能に資金を供給したり、osmand.netに寄付をすることも可能です。↵ ↵ ↵ おおよそのマップ範囲と品質:↵ - 西ヨーロッパ: **** ↵ - 東ヨーロッパ: *** ↵ - ロシア: *** ↵ - 北米*** ↵ - 南アメリカ:** ↵ - アジア: ** ↵ - 日本と韓国: *** ↵ - 中東: ** ↵ - アフリカ: ** ↵ - 南極: * ↵ ↵ サポートする国のリスト(基本的には全世界対応):↵ アフガニスタン、アルバニア、アルジェリア、アンドラ、アンゴラ、アンギラ、アンティグア·バーブーダ、アルゼンチン、アルメニア、アルバ、オーストラリア、オーストリア、アゼルバイジャン、バハマ、バーレーン、バングラデシュ、バルバドス、ベラルーシ、ベルギー、ベリーズ、ベナン、バミューダ、ブータン、ボリビア、ボネール、ボスニア·ヘルツェゴビナ、ボツワナ、ブラジル、英領バージン諸島、ブルネイ、ブルガリア、ブルキナファソ、ブルンジ、カンボジア、カメルーン、カナダ、カーボベルデ、中央アフリカ共和国、チャド、チリ、中国、コロンビア、コモロ、コンゴ、コスタリカ、コートジボワール、クロアチア、キューバ、キュラソー、キプロス、チェコ共和国、デンマーク、ジブチ、ドミニカ、ドミニカ共和国、エクアドル、エジプト、エルサルバドル、赤道ギニア、エリトリア、エストニア、エチオピア、フィジー、フィンランド、フランス、フランス領ギアナ、フランス領ポリネシア、ガボン、ガンビア、ジョージア、ドイツ、ガーナ、ジブラルタル、ギリシャ、グリーンランド、グレナダ、グアドループ、グアム、グアテマラ、ガーンジー島、ギニア、ギニアビサウ、ガイアナ、ハイチ、バチカン、ホンジュラス、香港、ハンガリー、アイスランド、インド、インドネシア、イラン、イラク、アイルランド、マン島、イスラエル、イタリア、ジャマイカ、日本、ジャージ、ヨルダン、カザフスタン、ケニア、キリバス、北朝鮮と韓国、クウェート、キルギスタン、ラオス、ラトビア、レバノン、レソト、リベリア、リビア、リヒテンシュタイン、リトアニア、ルクセンブルグ、マカオ、マケドニア、マダガスカル、マラウイ、マレーシア、モルディブ、マリ、マルタ、マルティニク、モーリタニア、モーリシャス、マヨット、メキシコ、ミクロネシア、モルドバ、モナコ、モンゴル、モンテネグロ、モントセラト、モロッコ、モザンビーク、ミャンマー、ナミビア、ナウル、ネパール、オランダ、オランダ領アンティル、ニューカレドニア、ニュージーランド、ニカラグア、ニジェール、ナイジェリア、ノルウェー、オマーン、パキスタン、パラオ、パレスチナ、パナマ、パプアニューギニア、パラグアイ、ペルー、フィリピン、ポーランド、ポルトガル、プエルトリコ、カタール、ルーマニア、ロシア、ルワンダ、サン·バルテルミー島、セントヘレナ島、セントクリストファー·ネイビス、セントルシア、サンマルタン、サンピエール島·ミクロン島、セントビンセント·グレナディーン、サモア、サンマリノ、サウジアラビア、セネガル、セルビア、セイシェル、シエラレオネ、シンガポール、スロバキア、スロベニア、ソマリア、南アフリカ共和国、サウスジョージア、南スーダン、スペイン、スリランカ、スーダン、スリナム、スワジランド、スウェーデン、スイス、シリア、台湾、タジキスタン、タンザニア、タイ、東ティモール、トーゴ、トケラウ、トンガ、トリニダード·トバゴ、チュニジア、トルコ、トルクメニスタン、ツバル、ウガンダ、ウクライナ、アラブ首長国連邦、イギリス(UK) 、アメリカ合衆国(USA) 、ウルグアイ、ウズベキスタン、バヌアツ、ベネズエラ、ベトナム、ウォリス·フツナ、西サハラ、イエメン、ザンビア、ジンバブエ "</string>
 	<string name="tip_altitude_offset_t">"ほとんどのGPSデバイスは、ローカルで使用されているシステムへの変換は位置依存の補正を必要とするため、楕円体ベースのWGS84の参照系で高度の測定値を報告しています。
 \n\nこれらのローカルシステムの近似がEGM96(geoid)基準です。
 \n\nOsmAndでEGM96システムにて現在位置の高度を表示するには「World Altitide Correction(WW15MGH.DAC)」をダウンロード後「設定」→「マップデータ等管理」にて設定をして下さい。 (オリジナルデータは、http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC にあります) "</string>
@@ -1501,7 +1497,7 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
 	<string name="routing_attr_weight_name">重量制限</string>
 	<string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定</string>
-    <string name="android_19_location_disabled">Androidのバージョン4.4(KitKat)以降では以前のストレージフォルダ(%s)にはダウンロードやマップ更新が出来ません。あなたが許可した新しい保存場所にOsmAndのファイル全てをコピーしますか？
+    <string name="android_19_location_disabled">Androidのバージョン4.4(KitKat)以降では以前のデータ格納フォルダ(%s)にはダウンロードやマップ更新が出来ません。あなたが許可した新しい保存場所にOsmAndのファイル全てをコピーしますか？
 \n注1:古いファイルはそのままそこに残ります(手動で削除出来ます)。\n注2:新しい保存場所はOsmAndとOsmAnd+の間でファイルの共有は出来ません。</string>
     <string name="application_dir_change_warning2">OsmAndとそのデータファイルを新しいフォルダにコピーしますか？\'いいえ\'を選択した場合、OsmAnd本体だけを作成した新しいフォルダにコピーします。</string>
     <string name="copying_osmand_one_file_descr">新しい保存先にコピーしています(%s)…</string>
@@ -1669,7 +1665,7 @@ POIの更新は利用できません</string>
     <string name="osmo_connect">接続する</string>
     <string name="osmo_create_group">グループの作成</string>
     <string name="osmo_server_operation_failed">OsMoのサーバー操作に失敗しました</string>
-    <string name="osmo_activity">OpenStreetMapの監視</string>
+    <string name="osmo_activity">OpenStreetMapモニタリング</string>
     <string name="osmo_enable_tracker">自分の場所を送信</string>
     <string name="osmo_control">OsMoクイックアクセス</string>
     <string name="hours_ago">時間前</string>
@@ -1680,7 +1676,7 @@ POIの更新は利用できません</string>
     <string name="osmo_auto_send_locations_descr">アプリケーション起動後に自動的にトラッカーセッションを開始し場所を送信</string>
     <string name="osmo_auto_send_locations">自動的にトラッカーセッションを開始</string>
     <string name="osmo_tracker_id">パーソナルトラッカーID</string>
-    <string name="osmo_tracker_id_descr">クリックでトラッカーIDを表示したり共有したりします。トラッカーIDにて接続されたデバイスを使用すると、このデバイスのすべての動きを監視することができます！解除するには[再作成]オプションを選択してください。</string>
+    <string name="osmo_tracker_id_descr">クリックでトラッカーIDを表示したり共有したりします。トラッカーIDにて接続されたデバイスを使用すると、このデバイスのすべての移動を監視することができます！解除するには[再作成]オプションを選択してください。</string>
     <string name="osmo_session_token">セッショントークン: %1$s</string>
     <string name="osmo_auth_pending">認証を待っています…</string>
     <string name="osmo_locations_sent">"位置の送信 %1$d (バッファ内 %2$d) "</string>
@@ -1693,7 +1689,7 @@ POIの更新は利用できません</string>
     <string name="osmo_mode_on">OsMoセッションの停止</string>    
     <string name="osmo_mode_off">OsMoセッションの開始</string>
     <string name="osmo_settings_debug">デバッグ情報</string>
-    <string name="osmo_settings_descr">監視についての設定と各個の監視チャネルのセットアップ</string>
+    <string name="osmo_settings_descr">モニタリングについての設定と各個のモニタリングチャンネルのセットアップ</string>
     <string name="osmo_settings">OsMoモニタリング</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
@@ -1709,8 +1705,8 @@ POIの更新は利用できません</string>
 	<string name="index_item_world_altitude_correction">世界基準による標高補正</string>
 	<string name="index_item_world_seamarks">全世界の満潮水位線</string>
 	<string name="index_item_world_bitcoin_payments">全世界ビットコインでの支払い</string>
-	<string name="index_item_world_basemap">世界マップ</string>
-    <string name="index_item_world_ski">世界スキーマップ</string>
+	<string name="index_item_world_basemap">世界地図(ワールドベースマップ)</string>
+    <string name="index_item_world_ski">ワールドスキーマップ</string>
     <string name="lang_zh">中国語</string>
     <string name="lang_pt_br">ポルトガル語(ブラジル)</string>
     <string name="lang_en">英語</string>
@@ -2001,4 +1997,7 @@ POIの更新は利用できません</string>
 	<string name="plugin_description_title">説明</string>
 	<string name="plugin_install_needs_network">このプラグインのインストールには、インターネット接続が必要です。</string>
 	<string name="get_plugin">取得</string>
-</resources>
+<string name="osm_changes_added_to_local_edits">OSMにローカルで変更された点を追加します</string>
+   	<string name="mark_to_delete">削除用にマーク</string>
+	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも記号3文字以上にする必要があります！</string>
+	</resources>
