@@ -66,6 +66,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -134,6 +135,7 @@ public class MapActivity extends AccessibleActivity {
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+
 		mapView = new OsmandMapTileView(this);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
@@ -141,6 +143,8 @@ public class MapActivity extends AccessibleActivity {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
 		dashboardOnMap.createDashboardView();
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setVisibility(View.GONE);
 		checkAppInitialization();
 		parseLaunchIntentLocation();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
@@ -232,7 +236,15 @@ public class MapActivity extends AccessibleActivity {
 		}
 	}
 
-	
+	public Toolbar getClearToolbar(boolean visible){
+		return dashboardOnMap.getClearToolbar(visible);
+	}
+
+	public void setToolbarVisibility(boolean visible){
+		dashboardOnMap.setToolbarVisibility(visible);
+	}
+
+
 	private void setupOpenGLView(boolean init) {
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);

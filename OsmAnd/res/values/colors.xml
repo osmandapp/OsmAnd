@@ -5,7 +5,8 @@
 	<color name="osmo_header_dark">#2d383d</color>
 	<color name="osmo_header_light">#b36d12</color>
 
-	<color name="parking_card_selected">#234DDE</color>
+	<color name="dashboard_parking_light_selected">#007888</color>
+	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
 

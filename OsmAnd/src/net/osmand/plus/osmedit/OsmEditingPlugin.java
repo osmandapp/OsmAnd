@@ -203,7 +203,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
-					.iconColor(R.drawable.ic_action_export)
+					.icon(R.drawable.ic_action_export)
 					.listen(new OnContextMenuClick() {
 
 						@Override
