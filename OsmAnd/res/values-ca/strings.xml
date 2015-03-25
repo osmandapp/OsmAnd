@@ -1930,4 +1930,25 @@
 	<string name="your_edits">Les vostres edicions</string>
     <string name="waypoint_visit_after">Visiteu després</string>
     <string name="waypoint_visit_before">Visiteu abans</string>
-    </resources>
+    <string name="osm_changes_added_to_local_edits">Els canvis d\'OSM s\'han afegit als canvis locals</string>
+   	<string name="mark_to_delete">Marqueu per esborrar</string>
+	<string name="simulate_your_location">Simular la vostre posició</string>
+    <string name="drawer">Llista senzilla</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Preguntes més freqüents, canvis recents i altres</string>
+    <string name="routing_settings_2">Paràmetres de navegació</string>
+    <string name="general_settings_2">Paràmetres generals</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_not_use">No utilitzeu</string>
+	<string name="shared_string_selected">Seleccionat</string>
+	<string name="shared_string_deselect">Desseleccionar</string>
+	<string name="shared_string_deselect_all">Desseleccionar tot</string>
+	<string name="shared_string_export">Exporta</string>
+	<string name="shared_string_unexpected_error">S\'ha produït un error inesperat</string>
+	<string name="shared_string_action_template">Acció {0}</string>
+	<string name="shared_string_collapse">Reduir</string>
+	<string name="shared_string_currently_recording_track">Enregistrament de la traça en curs</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="route_points">Fites</string>
+	</resources>
