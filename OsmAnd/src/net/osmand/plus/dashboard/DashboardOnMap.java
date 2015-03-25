@@ -160,11 +160,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	private void updateListBackgroundHeight() {
+		if (listBackgroundView == null || listBackgroundView.getHeight() > 0) {
+			return;
+		}
 		final View contentView = mapActivity.getWindow().getDecorView().findViewById(android.R.id.content);
-		if(contentView.getHeight() > 0) {
-			if(listBackgroundView != null) {
-				listBackgroundView.getLayoutParams().height = contentView.getHeight();
-			}
+		if (contentView.getHeight() > 0) {
+			listBackgroundView.getLayoutParams().height = contentView.getHeight();
 		} else {
 			contentView.post(new Runnable() {
 				@Override
@@ -172,9 +173,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					// mListBackgroundView's should fill its parent vertically
 					// but the height of the content view is 0 on 'onCreate'.
 					// So we should get it with post().
-					if (listBackgroundView != null) {
-						listBackgroundView.getLayoutParams().height = contentView.getHeight();
-					}
+					listBackgroundView.getLayoutParams().height = contentView.getHeight();
 				}
 			});
 		}
@@ -215,7 +214,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			}
 		});
 		
-		if (waypointsVisible) {
+		if (waypointsVisible && getMyApplication().getWaypointHelper().getAllPoints().size() > 0) {
 			edit.setVisibility(View.VISIBLE);
 			edit.setOnClickListener(new View.OnClickListener() {
 
@@ -224,19 +223,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);	
 				}
 			});
-			// TODO conditional
-			flat.setVisibility(View.VISIBLE);
-			final boolean flatNow = visibleType == DashboardType.WAYPOINTS_FLAT; 
-			flat.setImageDrawable(iconsCache.getActionBarIcon(flatNow ? 
-					R.drawable.ic_tree_list_dark : R.drawable.ic_flat_list_dark));
-			flat.setOnClickListener(new View.OnClickListener() {
+			if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
+				flat.setVisibility(View.VISIBLE);
+				final boolean flatNow = visibleType == DashboardType.WAYPOINTS_FLAT;
+				flat.setImageDrawable(iconsCache.getActionBarIcon(flatNow ? R.drawable.ic_tree_list_dark
+						: R.drawable.ic_flat_list_dark));
+				flat.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					setDashboardVisibility(true, flatNow ? DashboardType.WAYPOINTS : 
-						DashboardType.WAYPOINTS_FLAT);	
-				}
-			});
+					@Override
+					public void onClick(View v) {
+						setDashboardVisibility(true, flatNow ? DashboardType.WAYPOINTS : DashboardType.WAYPOINTS_FLAT,
+								previousVisibleType);
+					}
+				});
+			}
 		} 
 		if(waypointsEdit) {
 			ok.setVisibility(View.VISIBLE);
@@ -282,9 +282,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				@Override
 				public void onClick(View v) {
 					if (visibleType == DashboardType.DASHBOARD) {
-						setDashboardVisibility(true, DashboardType.LIST_MENU);
+						setDashboardVisibility(true, DashboardType.LIST_MENU, null);
 					} else {
-						setDashboardVisibility(true, DashboardType.DASHBOARD);
+						setDashboardVisibility(true, DashboardType.DASHBOARD, null);
 					}
 				}
 			});
@@ -360,10 +360,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
+		setDashboardVisibility(visible, type, this.visible ? visibleType : null);
+	}
+	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem) {
 		if(visible == this.visible && type == visibleType) {
 			return;
 		}
-		this.previousVisibleType = this.visible ? visibleType : null;
+		this.previousVisibleType = prevItem;
 		this.visible = visible;
 		boolean refresh = this.visibleType == type;
 		this.visibleType = type;

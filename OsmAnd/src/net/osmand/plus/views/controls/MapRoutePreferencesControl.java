@@ -11,6 +11,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -24,6 +25,7 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -42,6 +44,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -258,6 +261,14 @@ public class MapRoutePreferencesControl {
 		final ListView lv = (ListView) settingsDlg.findViewById(android.R.id.list);
 		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
 		selected.add(am);
+		
+		ImageView muteBtn = (ImageView) settingsDlg.findViewById(R.id.mute);
+		setMuteBtn(muteBtn);
+		
+		ImageView avoidRoads = (ImageView) settingsDlg.findViewById(R.id.avoid_roads);
+		setAvoidRoads(avoidRoads);
+		
+		
 
 		setupSpinner(settingsDlg);
 		final float scaleCoefficient = mapActivity.getMapView().getScaleCoefficient();
@@ -313,6 +324,41 @@ public class MapRoutePreferencesControl {
 				});
 		lv.setAdapter(listAdapter);
 		return settingsDlg;
+	}
+
+	private void setAvoidRoads(ImageView avoidRoads) {
+		avoidRoads.setContentDescription(mapActivity.getString(R.string.impassable_road));
+		avoidRoads.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_road_works_dark
+				, R.color.icon_color_light));
+		avoidRoads.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity);
+			}
+		});		
+	}
+
+	private void setMuteBtn(final ImageView muteBtn) {
+		final RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		boolean mute = routingHelper.getVoiceRouter().isMute();
+		int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
+		int icon;
+		if(mute) {
+			icon = R.drawable.a_10_device_access_volume_muted_dark;
+		} else{
+			icon = R.drawable.a_10_device_access_volume_on_dark;
+		}
+		muteBtn.setContentDescription(mapActivity.getString(t));
+		muteBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(icon, R.color.icon_color_light));
+		muteBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+				setMuteBtn(muteBtn);
+			}
+		});
 	}
 
 	private void updateParameters() {

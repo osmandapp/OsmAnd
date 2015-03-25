@@ -34,10 +34,7 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.osmo.OsMoPositionLayer;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -56,7 +53,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -547,40 +543,23 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-
-		// 2-4. Navigation related (directions, mute, cancel navigation)
-		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
-		// TODO delete
-		if (muteVisible) {
-			boolean mute = routingHelper.getVoiceRouter().isMute();
-			int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
-			int icon;
-			if(mute) {
-				icon = R.drawable.a_10_device_access_volume_muted_dark;
-			} else{
-				icon = R.drawable.a_10_device_access_volume_on_dark;
-			}
-			optionsMenuHelper.item(t).iconColor(icon)
-				.listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
-					return true;
-				}
-			}).reg();
-		}
-		// TODO delete
-		if(!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			optionsMenuHelper.item(R.string.get_directions)
-				.iconColor(R.drawable.ic_action_gdirections_dark)
+		
+		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 							enterRoutePlanningMode(null, null, false);
-							return true;
+						} else {
+							mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+							mapActivity.refreshMap();
 						}
+						return true;
+					}
 				}).reg();
-		} else if(routingHelper.isRouteCalculated()) {
+		
+		// TODO Pause/continue
+		if(routingHelper.isRouteCalculated()) {
 			optionsMenuHelper.item(
 					routingHelper.isRoutePlanningMode() ? R.string.continue_navigation :
 					R.string.pause_navigation)
@@ -602,6 +581,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 			}).reg();
 		}
+		// TODO stop navigation / delete point
 		if (mapActivity.getPointToNavigate() != null) {
 			int nav;
 			if(routingHelper.isFollowingMode()) {
@@ -616,14 +596,12 @@ public class MapActivityActions implements DialogProvider {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					stopNavigationActionConfirm(mapView);
-					OsMoPositionLayer osMoPositionLayer = mapActivity.getMapView().getLayerByClass(OsMoPositionLayer.class);
-					if (osMoPositionLayer != null) {
-						OsMoPositionLayer.setFollowDestination(null);						
-					}
 					return true;
 				}
 			}).reg();
 		}
+		
+		
 		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -632,19 +610,6 @@ public class MapActivityActions implements DialogProvider {
 						return false;
 					}
 				}).reg();
-		// TODO delete
-		if(routingHelper.isRouteCalculated()) {
-			optionsMenuHelper.item(R.string.impassable_road)
-			.iconColor(R.drawable.ic_action_road_works_dark)
-			.listen(new OnContextMenuClick() {
-				@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						app.getAvoidSpecificRoads().showDialog(mapActivity);
-						return true;
-					}
-			}).reg();
-		}
-		
 		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
 		optionsMenuHelper.item(R.string.search_button)
 				.iconColor(R.drawable.ic_action_search_dark)

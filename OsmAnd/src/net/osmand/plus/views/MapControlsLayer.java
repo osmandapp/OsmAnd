@@ -240,7 +240,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		TextView routeGoButton = (TextView) mapActivity.findViewById(R.id.map_go_route_button);
-		routeGoControl = createHudButton(routeGoButton, R.drawable.ic_destination_arrow_white).setBg(
+		
+		routeGoControl = createHudButton(routeGoButton,
+				R.drawable.ic_action_start_navigation).setIconColorId(R.color.color_myloc_distance) .setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night);
 		controls.add(routeGoControl);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go).toUpperCase());

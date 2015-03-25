@@ -67,6 +67,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		View headerView = getLayoutInflater().inflate(R.layout.route_details_header, null);
 		header = (TextView) headerView.findViewById(R.id.header);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
+		((ImageView)
+				headerView.findViewById(R.id.start_navigation)).setImageDrawable(
+						getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance));
 		headerView.findViewById(R.id.start_navigation).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

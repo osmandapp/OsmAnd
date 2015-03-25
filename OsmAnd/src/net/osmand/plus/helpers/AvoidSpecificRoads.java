@@ -36,13 +36,20 @@ public class AvoidSpecificRoads {
 		this.app = app;
 	}
 	
+	public List<RouteDataObject> getMissingRoads() {
+		if(missingRoads == null) {
+			missingRoads = app.getDefaultRoutingConfig().getImpassableRoads();
+		}
+		return missingRoads;
+	}
+	
 	protected net.osmand.router.RoutingConfiguration.Builder getBuilder() {
 		return RoutingConfiguration.getDefault();
 	}
 	
 	public ArrayAdapter<RouteDataObject> createAdapter(final MapActivity ctx) {
 		final ArrayList<RouteDataObject> points = new ArrayList<RouteDataObject>();
-		points.addAll(missingRoads);
+		points.addAll(getMissingRoads());
 		final LatLon mapLocation = ctx.getMapLocation();
 		return new ArrayAdapter<RouteDataObject>(ctx,
 				R.layout.waypoint_reached, R.id.title, points) {
@@ -95,7 +102,7 @@ public class AvoidSpecificRoads {
 	public void showDialog(final MapActivity mapActivity) {
 		Builder bld = new AlertDialog.Builder(mapActivity);
 		bld.setTitle(R.string.impassable_road);
-		if (missingRoads.size() == 0){
+		if (getMissingRoads().size() == 0){
 			bld.setMessage(R.string.avoid_roads_msg);
 		} else {
 			final ArrayAdapter<?>  listAdapter = createAdapter(mapActivity);
@@ -182,11 +189,4 @@ public class AvoidSpecificRoads {
 		dialog.dismiss();
 	}
 
-	
-	public List<RouteDataObject> getMissingRoads() {
-		if(missingRoads == null) {
-			missingRoads = app.getDefaultRoutingConfig().getImpassableRoads();
-		}
-		return missingRoads;
-	}
 }

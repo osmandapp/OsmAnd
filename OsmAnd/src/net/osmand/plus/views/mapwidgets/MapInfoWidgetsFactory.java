@@ -312,10 +312,16 @@ public class MapInfoWidgetsFactory {
 			return false;
 		}
 		
-		public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
+		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
 			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
-			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
-					textColor, textShadowColor, bold, rad);
+			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text), textColor, textShadowColor,
+					bold, rad);
+			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
+			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
+			all.setImageDrawable(map.getMyApplication().getIconsCache()
+					.getActionBarIcon(R.drawable.ic_overflow_menu_dark, !nightMode));
+			remove.setImageDrawable(map.getMyApplication().getIconsCache()
+					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 		
 		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
@@ -402,16 +408,14 @@ public class MapInfoWidgetsFactory {
 						lastPoint, null);
 				if (updated) {
 					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
-					View btnN = waypointInfoBar.findViewById(R.id.waypoint_close);
-					all.setImageDrawable(map.getMyApplication().getIconsCache().
-							getContentIcon(R.drawable.ic_overflow_menu_light));
+					ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 					all.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
 							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 						}
 					});
-					btnN.setOnClickListener(new View.OnClickListener() {
+					remove.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
 							waypointHelper.removeVisibleLocationPoint(lastPoint);
