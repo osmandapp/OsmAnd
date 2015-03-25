@@ -718,7 +718,7 @@
 	<string name="context_menu_item_update_poi">Agiorna PDI</string>
 	<string name="loading_poi_obj">Carrigamentu PDI…</string>
 	<string name="poi">PDI</string>
-	<string name="local_openstreetmap_settings">PDI/Errores sarbados in locale</string>
+	<string name="local_openstreetmap_settings">PDI/Notas sarbados in locale</string>
 	<string name="index_name_wiki">PDI Wikipedia mondiale</string>
 	<string name="update_poi_is_not_available_for_zoom">S’agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
 	<string name="tip_update_index_t">"Mapas agiorndas sunt fundamentales pro sa visione sena lìnia, pro sa chirca tramite PDI/indiritzu, e pro su nàvigu sena lìnia. OsmAnd frunidi unu gestore de sas mapas pro las isgarrigare e pro chircare pro agiornamentos.
@@ -1051,11 +1051,11 @@
 \n\t- Como fintzas sos documentos deativados benint visualizzados in s’ischermada de icarrigamentu, in birde e blu iscuru
 \n\t- Àteras mudas "</string>
 	<string name="update_poi_does_not_change_indexes">Sa modìficas de sos PDI intre s’aplicu non tenent efetos in sas mapas iscarrigadas, sunt imbetzes sarbadas in unu documentu locale.</string>
-	<string name="local_openstreetmap_were_uploaded">{0} PDI/sos errores sunt istados carrigados</string>
+	<string name="local_openstreetmap_were_uploaded">{0} sos PDI/Notas sunt istados carrigados</string>
 	<string name="local_openstreetmap_upload">Càrriga sa modìfica in OSM</string>
 	<string name="local_openstreetmap_delete">Burra sa modìfica</string>
 	<string name="local_openstreetmap_descr_title">Muda asìncrona de OSM:</string>
-	<string name="local_openstreetmap_settings_descr">Ammustra e amministra sos PDI/errores OSM in intro de su database locale</string>
+	<string name="local_openstreetmap_settings_descr">Ammustra e amministra sos PDI/Notas OSM in intro de su database locale</string>
 	<string name="live_monitoring_interval_descr">Dislinda s’intervallu de s’arrastamentu in lìnia</string>
 	<string name="live_monitoring_interval">Intervallu de s’arrastamentu in dereta (in lìnia)</string>
 	<string name="live_monitoring_url_descr">Dislinda s’indiritzu ìnternet cun sa sintassi de sos paràmetros: lat={0}, lon={1}, data/ora={2}, hdop={3}, artària={4}, lestresa={5}, àngulu={6}</string>
@@ -1359,7 +1359,7 @@
 	<string name="layer_yandex_traffic">Yandex (tràficu)</string>
 	<string name="layer_route">Àndala</string>
 	<string name="shared_string_favorites">Prefèrridos</string>
-	<string name="layer_osm_bugs">Errores OSM</string>
+	<string name="layer_osm_bugs">Notas OSM (in lìnia)</string>
 	<string name="layer_transport">Firmadas trasportu pùblicu</string>
 	<string name="layer_map">Mitza mapa…</string>
 	<string name="menu_layers">Istratos mapa</string>
@@ -1923,4 +1923,5 @@
     <string name="confirmation_to_clear_history">Boles burrare totu s’istòria?</string>
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 sìmbulos!</string>
-	</resources>
+	<string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
+   	</resources>
