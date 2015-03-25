@@ -97,6 +97,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private View listBackgroundView;
 	private View paddingView;
 	private int mFlexibleSpaceImageHeight;
+	private int mFlexibleBlurSpaceHeight;
 	
 	
 	private WaypointDialogHelper waypointDialogHelper;
@@ -143,6 +144,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
+			mFlexibleBlurSpaceHeight = mapActivity.getResources().getDimensionPixelSize(
+					R.dimen.dashboard_map_top_blur);
 			// Set padding view for ListView. This is the flexible space.
 			paddingView = new View(mapActivity);
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
@@ -153,6 +156,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			paddingView.setOnClickListener(listener);
 			listView.addHeaderView(paddingView);
 			listBackgroundView = mapActivity.findViewById(R.id.dash_list_background);
+			updateTopButton(0);
 		}
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
@@ -752,26 +756,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
 			
 		}
-		
 		updateTopButton(scrollY);
 	}
 
 
 	private void updateTopButton(int scrollY) {
-		float t = mFlexibleSpaceImageHeight == 0 ? 1 : 1 - Math.max(0, -scrollY + mFlexibleSpaceImageHeight)
-				/ ((float) mFlexibleSpaceImageHeight);
-		if(t > 0.75) {
-			t = 1;
-		}
-		int clr = (((int) (t * 255)) << 24) | 0xff8f00;
-		paddingView.setBackgroundColor(clr);
 		if (listBackgroundView != null) {
-			dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(clr);
-		}
-		if (t != 1) {
-			((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
-		} else {
-			((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(clr);
+			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
+			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
+			int clr = (((int) (t * 255)) << 24) | 0xff8f00;
+			paddingView.setBackgroundColor(clr);
+			if (listBackgroundView != null) {
+				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(clr);
+			}
+			if (t < 0.2) {
+				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
+			} else {
+				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(clr);
+			}
 		}
 		if (actionButton != null) {
 			double scale = mapActivity.getResources().getDisplayMetrics().density;

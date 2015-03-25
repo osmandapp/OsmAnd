@@ -7,7 +7,7 @@
     android:layout_height="65dp"
     app:contentInsetStart="4dp"
     app:contentInsetLeft="4dp"
-    android:background="@drawable/gradient_toolbar" >
+    android:background="@color/actionbar_light_color" >
 
     <ImageView
         android:id="@+id/toolbar_back"
