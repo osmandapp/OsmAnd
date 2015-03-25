@@ -1,20 +1,24 @@
 package net.osmand.plus.activities.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.plus.*;
 import android.app.Activity;
-import android.content.Context;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ToggleButton;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class AppModeDialog {
 
@@ -93,7 +97,7 @@ public class AppModeDialog {
 	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible,final List<ApplicationMode> modes,
 													  final Set<ApplicationMode> selected,
 													  final Activity a, final LinearLayout ll, final ContextMenuAdapter.BooleanResult allModes, final View.OnClickListener onClickListener) {
-		ToggleButton[] buttons = createToggles(visible, ll, a, true);
+		ToggleButton[] buttons = createToggles(visible, ll, (OsmandApplication)a.getApplication(), true);
 		ToggleButton[] newButtons = new ToggleButton[buttons.length + 1];
 		for (int i = 0; i < buttons.length; i++) {
 			newButtons[i] = buttons[i];
@@ -141,7 +145,7 @@ public class AppModeDialog {
 				container.setLayoutParams(params);
 				ll.addView(container);
 			}
-			buttons[i] = createToggle(a, container, allModes.get(i), true);
+			buttons[i] = createToggle((OsmandApplication)a.getApplication(), container, allModes.get(i), true);
 		}
 		for (int i = 0; i < buttons.length; i++) {
 			setButtonListener(allModes, selected, onClickListener, buttons, i, true);
@@ -170,7 +174,7 @@ public class AppModeDialog {
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 			ViewGroup parent, final boolean singleSelection,boolean drawer, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		final ToggleButton[] buttons = createToggles(values, ll, a, drawer);
+		final ToggleButton[] buttons = createToggles(values, ll, (OsmandApplication)a.getApplication(), drawer);
 		for (int i = 0; i < buttons.length; i++) {
 			setButtonListener(values, selected, onClickListener, buttons, i, singleSelection);
 		}
@@ -219,7 +223,7 @@ public class AppModeDialog {
 		}
 	}
 
-	static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx, boolean drawer) {
+	static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, OsmandApplication ctx, boolean drawer) {
 		final ToggleButton[] buttons = new ToggleButton[values.size()];
 		HorizontalScrollView scroll = new HorizontalScrollView(ctx);
 		
@@ -235,7 +239,7 @@ public class AppModeDialog {
 		return buttons;
 	}
 
-	static private ToggleButton createToggle(Context ctx, LinearLayout layout, ApplicationMode mode, boolean drawer){
+	static private ToggleButton createToggle(OsmandApplication ctx, LinearLayout layout, ApplicationMode mode, boolean drawer){
 		int margin = 0;
 		if (drawer) {
 			margin = 2;
@@ -244,11 +248,13 @@ public class AppModeDialog {
 		}
 		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, margin, ctx.getResources().getDisplayMetrics());
 		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
+		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 11, ctx.getResources().getDisplayMetrics());
 		ToggleButton tb = new ToggleButton(ctx);
 		tb.setTextOn("");
 		tb.setTextOff("");
 		tb.setContentDescription(mode.toHumanString(ctx));
-		tb.setButtonDrawable(mode.getIconId());
+		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.dashboard_blue), null, null);
+		tb.setPadding(0, padding, 0, 0);
 		LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
 		lp.setMargins(left, 0, 0, 0);
 		layout.addView(tb, lp);
