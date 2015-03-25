@@ -912,7 +912,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto de aparcamiento</string>
-  <string name="osmand_parking_plugin_description">Este extra se desarrolló para usar OsmAnd para memorizar fácilmente la ubicación de tu automóvil aparcado.</string>
+  <string name="osmand_parking_plugin_description">El extra de Posición de aparcamiento te deja memorizar fácilmente cuándo se aparcó el coche y cuánto tiempo queda si el estacionamiento está limitado por el tiempo. Encontrarás tu lugar de estacionamiento y tiempo en la tarjeta de la consola y en el control del mapa.\n Añade notificación en el calendario en caso de que quieras un recordatorio.</string>
   <string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
   <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
   <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
@@ -1991,4 +1991,6 @@
 	<string name="local_osm_changes_upload_all_confirm">Estás a punto de subir %1$d cambios a OSM. ¿Estás seguro?</string>
     <string name="confirmation_to_clear_history">¿Quieres borrar toda la historia?</string>
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos 3 símbolos!</string>
+	<string name="osm_changes_added_to_local_edits">Cambios OSM añadidos a los cambios locales</string>
+   	<string name="mark_to_delete">Marca para eliminar</string>
 	</resources>
