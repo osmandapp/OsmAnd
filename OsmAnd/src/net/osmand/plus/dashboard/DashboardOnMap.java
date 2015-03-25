@@ -390,7 +390,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
 				if(refresh) {
-					refreshContent();
+					refreshContent(false);
 				} else {
 					updateListAdapter();
 					updateListBackgroundHeight();
@@ -423,14 +423,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(false, deletedPoints, mapActivity, running,
 					DashboardType.WAYPOINTS_FLAT == visibleType);
 			OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
-					listAdapter, null);
+					listAdapter);
 			updateListAdapter(listAdapter, listener);
 		} else if (DashboardType.WAYPOINTS_EDIT == visibleType) {
 			deletedPoints.clear();
 			ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(true, deletedPoints, mapActivity, running,
 					DashboardType.WAYPOINTS_FLAT == visibleType);
 			OnItemClickListener listener = waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
-					listAdapter, null);
+					listAdapter);
 			updateListAdapter(listAdapter, listener);
 
 		} else {
@@ -454,8 +454,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		updateListAdapter(listAdapter, listener);		
 	}
 	
-	public void refreshContent() {
-		listAdapter.notifyDataSetChanged();
+	public void refreshContent(boolean force) {
+		if(visibleType == DashboardType.WAYPOINTS || force) {
+			updateListAdapter();
+		} else {
+			listAdapter.notifyDataSetChanged();
+		}
 	}
 
 

@@ -133,6 +133,7 @@ public class ConfigureMapMenu {
 					if(selected[0] == null) {		
 						settings.SHOW_POI_OVER_MAP.set(selected[0] != null);
 					}
+					ma.getDashboard().refreshContent(true);
 				}
 			});
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -59,14 +60,14 @@ public class WaypointDialogHelper {
 	}
 
 	public static void updatePointInfoView(final OsmandApplication app, final Activity activity,
-											View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
+											View localView, final LocationPointWrapper ps, final boolean mapCenter) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				showOnMap(app, activity, point, dialog);
+				showOnMap(app, activity, point, mapCenter);
 			}
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
@@ -127,7 +128,7 @@ public class WaypointDialogHelper {
 					v = createItemForCategory(ctx, (Integer) getItem(position), running, position, thisAdapter);
 				} else {
 					LocationPointWrapper point = (LocationPointWrapper) getItem(position);
-					v = updateWaypointItemView(edit, deletedPoints, ctx, null, v, point, this);
+					v = updateWaypointItemView(edit, deletedPoints, ctx, v, point, this);
 				}
 				return v;
 			}
@@ -139,12 +140,12 @@ public class WaypointDialogHelper {
 	
 	
 	private View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
-			final Activity ctx, final DialogFragment dialogFragment, View v, final LocationPointWrapper point,
+			final Activity ctx, View v, final LocationPointWrapper point,
 			final ArrayAdapter adapter) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 		}
-		updatePointInfoView(app, ctx, v, point, dialogFragment);
+		updatePointInfoView(app, ctx, v, point, false);
 		View remove = v.findViewById(R.id.info_close);
 		if (!edit) {
 			remove.setVisibility(View.GONE);
@@ -295,16 +296,13 @@ public class WaypointDialogHelper {
 	}
 
 	public AdapterView.OnItemClickListener getDrawerItemClickListener(final FragmentActivity ctx, final int[] running,
-			final ArrayAdapter<Object> listAdapter, final DialogFragment dialog) {
+			final ArrayAdapter<Object> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
-				if (item == 0) {
-					 // TODO
-					//mapActivity.getMapActions().onDrawerBack();
-				} else if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
+				if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
-					showOnMap(app, ctx, ps.getPoint(), dialog);
+					showOnMap(app, ctx, ps.getPoint(), false);
 				} else if (new Integer(WaypointHelper.TARGETS).equals(listAdapter.getItem(item))) {
 					IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
 				} else if (listAdapter.getItem(item) instanceof RadiusItem) {
@@ -412,17 +410,25 @@ public class WaypointDialogHelper {
 		return points;
 	}
 
-	public static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, DialogFragment dialog) {
+	public static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, boolean center) {
 		if (!(a instanceof MapActivity)) {
 			return;
 		}
 		MapActivity ctx = (MapActivity) a;
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
-		boolean di = dialog != null;
+		double flat = locationPoint.getLatitude();
+		double flon = locationPoint.getLongitude();
+		if(!center) {
+			RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
+			cp.setCenterLocation(0.5f, 0.25f);
+			cp.setLatLonCenter(flat, flon);
+			flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+			flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+		}
 		if (thread.isAnimating()) {
 			ctx.getMapView().setIntZoom(fZoom);
-			ctx.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
+			ctx.getMapView().setLatLon(flat, flon);
 			app.getAppCustomization().showLocationPoint(ctx, locationPoint);
 		} else {
 			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
@@ -431,16 +437,13 @@ public class WaypointDialogHelper {
 			if (dist < t) {
 				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
 			} else {
-				thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
+				thread.startMoving(flat, flon, fZoom, true);
 			}
-			if (di) {
-				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
-				ctx.getMapLayers()
-						.getContextMenuLayer()
-						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
-								PointDescription.getSimpleName(locationPoint, ctx));
-				dialog.dismiss();
-			}
+//				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
+//				ctx.getMapLayers()
+//						.getContextMenuLayer()
+//						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
+//								PointDescription.getSimpleName(locationPoint, ctx));
 		}
 	}
 

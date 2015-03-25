@@ -238,7 +238,7 @@ public class MapActivityLayers {
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
-				activity.getDashboard().refreshContent();
+				activity.getDashboard().refreshContent(true);
 				return true;
 			}
 		};

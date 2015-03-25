@@ -319,7 +319,7 @@ public class MapInfoWidgetsFactory {
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 			all.setImageDrawable(map.getMyApplication().getIconsCache()
-					.getActionBarIcon(R.drawable.ic_overflow_menu_dark, !nightMode));
+					.getActionBarIcon(R.drawable.ic_overflow_menu_white, !nightMode));
 			remove.setImageDrawable(map.getMyApplication().getIconsCache()
 					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
@@ -395,8 +395,10 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		public boolean updateWaypoint() {
-			lastPoint = waypointHelper.getMostImportantLocationPoint(null);
-			if (lastPoint == null) {
+			final LocationPointWrapper pnt = waypointHelper.getMostImportantLocationPoint(null);
+			boolean changed = this.lastPoint != pnt;
+			this.lastPoint = pnt;
+			if (pnt == null) {
 				topBar.setOnClickListener(null);
 				updateVisibility(waypointInfoBar, false);
 				return false;
@@ -405,8 +407,8 @@ public class MapInfoWidgetsFactory {
 				boolean updated = updateVisibility(waypointInfoBar, true);
 				// pass top bar to make it clickable
 				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 
-						lastPoint, null);
-				if (updated) {
+						pnt, true);
+				if (updated || changed) {
 					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 					ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 					all.setOnClickListener(new View.OnClickListener() {
@@ -418,7 +420,7 @@ public class MapInfoWidgetsFactory {
 					remove.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							waypointHelper.removeVisibleLocationPoint(lastPoint);
+							waypointHelper.removeVisibleLocationPoint(pnt);
 							map.refreshMap();
 						}
 					});
