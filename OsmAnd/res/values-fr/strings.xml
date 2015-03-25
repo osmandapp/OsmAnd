@@ -12,15 +12,15 @@
 \n\t- Modifications diverses "</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
   <string name="local_openstreetmap_uploading">Transfert…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} PI/bogues ont été envoyés</string>
+  <string name="local_openstreetmap_were_uploaded">{0} PI/Notes ont été envoyés</string>
   <string name="local_openstreetmap_uploadall">Tout envoyer</string>
   
   
   <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
   <string name="local_openstreetmap_delete">Supprimer la modification</string>
   <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM :</string>
-  <string name="local_openstreetmap_settings">Points/bogues OSM enregistrés en local</string>
-  <string name="local_openstreetmap_settings_descr">Afficher et gérer les points/bogues OSM enregistrés dans la base de données locale</string>
+  <string name="local_openstreetmap_settings">PI/Notes OSM enregistrés en local</string>
+  <string name="local_openstreetmap_settings_descr">Afficher et gérer les PI/Notes OSM enregistrés dans la base de données locale</string>
   
   
   <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne</string>
@@ -460,7 +460,7 @@
   <string name="layer_yandex_traffic">Trafic Yandex</string>
   <string name="layer_route">Route</string>
   <string name="shared_string_favorites">Favoris</string>
-  <string name="layer_osm_bugs">Bogues OSM</string>
+  <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
   <string name="layer_transport">Arrêts de transports publics</string>
   <string name="layer_poi">Points d\'intérêt…</string>
   <string name="layer_map">Source de la carte…</string>
@@ -1998,4 +1998,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
     <string name="delay_to_start_navigation">Passer le calcul d\'itinéraire</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
+	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
+   	<string name="mark_to_delete">Marquer pour suppression</string>
 	</resources>
