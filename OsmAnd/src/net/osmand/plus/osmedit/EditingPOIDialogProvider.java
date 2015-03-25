@@ -716,8 +716,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					PoiType poiType = allTranslatedNames.get(subCats[which]);
-					typeText.setText(poiType.getKeyName());
-					a.setSubType(subCats[which]);
+					typeText.setText(subCats[which]);
 					activity.removeDialog(DIALOG_SUB_CATEGORIES);
 				}
 			});

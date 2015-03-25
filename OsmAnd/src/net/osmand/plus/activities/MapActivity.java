@@ -236,15 +236,6 @@ public class MapActivity extends AccessibleActivity {
 		}
 	}
 
-	public Toolbar getClearToolbar(boolean visible){
-		return dashboardOnMap.getClearToolbar(visible);
-	}
-
-	public void setToolbarVisibility(boolean visible){
-		dashboardOnMap.setToolbarVisibility(visible);
-	}
-
-
 	private void setupOpenGLView(boolean init) {
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
