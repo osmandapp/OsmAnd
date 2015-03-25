@@ -297,7 +297,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Udvidelsen er udviklet til at anvende OsmAnd til nemt huske placeringen af den parkerede bil.</string>
+	<string name="osmand_parking_plugin_description">Parkering position plugin kan du nemt huske, når bilen var parkeret, og hvor meget tid tilbage, hvis parkering er tidsbegrænset. Du kan finde din parkering sted og tidspunkt på kortet af kontrolpanelet og på kortet.\n Kan tilføje en meddelelse til kalenderen, hvis man ønsker at få en påmindelse.</string>
 	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
@@ -446,14 +446,14 @@
 	<string name="offline_edition_descr">Brug altid offline redigering</string>
 	<string name="update_poi_does_not_change_indexes">Interessepunkt ændringer lavet i programmet påvirker ikke hentede kort. Ændringer gemmes i lokal fil i stedet.</string>
 	<string name="local_openstreetmap_uploading">Overfører …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} interessepunkt/fejl blev overført</string>
+	<string name="local_openstreetmap_were_uploaded">{0} interessepunkt/noter blev overført</string>
 	<string name="local_openstreetmap_uploadall">Send alt</string>
 	
 	<string name="local_openstreetmap_upload">Send ændringer til OSM</string>
 	<string name="local_openstreetmap_delete">Slet ændringer</string>
 	<string name="local_openstreetmap_descr_title">Asynkron OSM redigering:</string>
-	<string name="local_openstreetmap_settings">Lokalt gemt OSM interessepunkt/fejl</string>
-	<string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkt/fejl registreret i lokal database</string>
+	<string name="local_openstreetmap_settings">Lokalt gemt OSM interessepunkter/noter</string>
+	<string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter registreret i lokal database</string>
 	
 	
 	<string name="live_monitoring_interval_descr">Indstil interval for onlinesporing</string>
@@ -902,7 +902,7 @@
 	<string name="thanks_yandex_traffic">Tak til Yandex for trafikinformation.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rute</string>
-	<string name="layer_osm_bugs">OSM-fejlbeskrivelse (online)</string>
+	<string name="layer_osm_bugs">OSM noter (online)</string>
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_map">Vælg kortkilde…</string>
 	<string name="menu_layers">Kortlag</string>
@@ -1977,4 +1977,6 @@
 	<string name="confirmation_to_clear_history">Skal hele historikken slettes?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
     <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
-    </resources>
+    <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
+   	<string name="mark_to_delete">Marker for at slette</string>
+	</resources>
