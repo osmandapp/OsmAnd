@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
@@ -18,6 +19,7 @@ import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
@@ -139,11 +141,17 @@ public class IntermediatePointsDialog {
 							};
 
 							protected int[] doInBackground(Void[] params) {
+								OsmandApplication app = (OsmandApplication) activity.getApplication();
+								Location cll = app.getLocationProvider().getLastKnownLocation();
 								ArrayList<TargetPoint> lt = new ArrayList<TargetPoint>(intermediates);
 								TargetPoint start ;
-								if(activity instanceof MapActivity) {
-									LatLon ll = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
+								
+								if(cll != null) {
+									LatLon ll = new LatLon(cll.getLatitude(), cll.getLongitude());
 									start = TargetPoint.create(ll, null);
+//								} else if(activity instanceof MapActivity) {
+//									LatLon ll = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
+//									start = TargetPoint.create(ll, null);
 								} else {
 									start = lt.get(0);
 								}
