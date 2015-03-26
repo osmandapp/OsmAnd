@@ -194,7 +194,7 @@
 <string name="osmand_parking_pm">em</string>
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
-<string name="osmand_parking_plugin_description">Denna modul gör det möjligt att i OsmAnd spara platsen där du parkerade din bil.</string>
+<string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och hur mycket parkeringstid det är kvar. Du hittar din parkeringsplats och -tid på kartwidgeten.\nEn notifierings läggs till i kalendern om du vill få en påminnelse.</string>
 <string name="osmand_parking_plugin_name">Parkeringsplats</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
@@ -302,14 +302,14 @@
 \n\t- Andra ändringar "</string>
 <string name="update_poi_does_not_change_indexes">POI-förändringar inom programmet påverkar inte nedladdade kartfiler; förändringar sparas till en lokal fil istället.</string>
 <string name="local_openstreetmap_uploading">Laddar upp …</string>
-<string name="local_openstreetmap_were_uploaded">{0} POI/buggar laddades upp</string>
+<string name="local_openstreetmap_were_uploaded">{0} POI/Anteckningar laddades upp</string>
 <string name="local_openstreetmap_uploadall">Ladda upp alla</string>
 
 <string name="local_openstreetmap_upload">Ladda upp ändringar till OSM</string>
 <string name="local_openstreetmap_delete">Ta bort ändringen</string>
 <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
-<string name="local_openstreetmap_settings">Lokalt sparade OSM-POIs/-buggar</string>
-<string name="local_openstreetmap_settings_descr">Visa och hantera OSM-POIs/-buggar noterade i lokal databas</string>
+<string name="local_openstreetmap_settings">Lokalt sparade OSM-POIs/-Anteckningar</string>
+<string name="local_openstreetmap_settings_descr">Visa och hantera OSM-POIs/-anteckningar noterade i lokal databas</string>
 
 
 <string name="live_monitoring_interval_descr">Ange intervall för direktspårning</string>
@@ -706,7 +706,7 @@
 	<string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rutt</string>
-	<string name="layer_osm_bugs">OSM-buggar</string>
+	<string name="layer_osm_bugs">OSM-anteckningar (online)</string>
 	<string name="layer_transport">Hållplatser</string>
 	<string name="layer_poi">Intressepunkt …</string>
 	<string name="layer_map">Kartkälla …</string>
@@ -1840,4 +1840,7 @@
 	<string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
     <string name="confirmation_to_clear_history">Vill du ta bort hela historiken?</string>
     <string name="osmo_grop_name_length_alert">Gruppnamn bör vara minst tre tecken långa!</string>
+	<string name="current_route">Aktuell rutt</string>
+    <string name="osm_changes_added_to_local_edits">OSM-ändringar lades till i lokala ändringar</string>
+   	<string name="mark_to_delete">Markera för att ta bort</string>
 	</resources>
