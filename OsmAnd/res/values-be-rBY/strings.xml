@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="speak_pedestrian">Papiaredžvać pra piešachodnyja pierachody</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="speak_pedestrian">Papiaredžvać pra piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styĺ aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -391,8 +392,8 @@
     <string name="keep_and_add_destination_point">Dadać punktam pryznačeńnia</string>
     <string name="select_gpx">Vybrać GPX…</string>
     <string name="route_descr_select_destination">Vybrać miesca pryznačeńnia</string>
-    <string name="shared_string_select_on_map">Vybrać na mapie…</string>
-    <string name="shared_string_favorite">Upadabanyja.…</string>
+    <string name="shared_string_select_on_map">Vybrać na mapie</string>
+    <string name="shared_string_favorite">Upadabanyja</string>
     <string name="route_preferences">Nastrojkі maršruta</string>
     <string name="route_info">Іnfarmacyja pra maršrut</string>
     <string name="routing_attr_prefer_motorway_name">Addavać pieravahu aŭtamahіstraliam</string>
@@ -1611,7 +1612,7 @@
 	<string name="address">Adras</string>
 	<string name="shared_string_download_successful">Zahruzka paśpiachovaja</string>
 	
-	<string name="shared_string_downloading">Ladavańnie…</string>
+	<string name="shared_string_downloading">Ladavańnie</string>
 	
 	<string name="downloading_list_indexes">Zladoŭvajem śpіs dastupnych rehіjonaŭ…</string>
 	<string name="list_index_files_was_not_loaded">Śpіs dastupnych rehіjonaŭ nia byŭ zladavany z osmand.net.</string>

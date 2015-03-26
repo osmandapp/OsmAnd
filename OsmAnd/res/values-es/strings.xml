@@ -1993,4 +1993,9 @@
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos 3 símbolos!</string>
 	<string name="osm_changes_added_to_local_edits">Cambios OSM añadidos a los cambios locales</string>
    	<string name="mark_to_delete">Marca para eliminar</string>
+	<string name="welmode_download_maps">Descargar mapas</string>
+	<string name="welcome_select_region">Seleccione su región</string>
+	<string name="welcome_header">Bienvenido</string>
+    <string name="current_route">Ruta actual</string>
+    <string name="welcome_text">¡OsmAnd te permite usar mapas y navegación offline!</string>
 	</resources>
