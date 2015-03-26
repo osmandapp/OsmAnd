@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1359,7 +1360,7 @@
     <string name="app_mode_aircraft">Repülő</string>
     <string name="tip_faq_t">Kérlek nézd meg a gyakran feltett kérdéseket: https://code.google.com/p/osmand/wiki/FAQ</string>
     <string name="tip_faq">Gyakran Ismétlődő Kérdések (FAQ)</string>
-    <string name="local_osm_changes_delete_all_confirm">%1$d osm változtatás törlésére készülsz. Biztos vagy benne?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM módosítást fogsz törölni. Biztos vagy benne?</string>
     <string name="shared_string_delete_all">Összes törlése</string>
     <string name="route_is_too_long">Az OsmAnd offline tervezője számára rendkívül sokáig tarthat (vagy néha nem is működik) 200 km-nél távolabb lévő pontok között útvonalat tervezni. Kérlek adj hozzá köztes útpontokat.</string>
 	<string name="auto_zoom_none">Nincs auto zoom</string>
@@ -1876,14 +1877,14 @@
 	<string name="action_modify">Módosítás művelet</string>
 	<string name="action_delete">Törlés művelet</string>
 	<string name="osm_edits">OSM szerkesztések</string>
-	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">p</string><string name="osmand_parking_time_left">Bal</string> <string name="confirmation_to_clear_history">A teljes előzményt törölni szeretné?</string>
+	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">perc</string><string name="osmand_parking_time_left">Bal</string> <string name="confirmation_to_clear_history">A teljes előzményt törölni szeretné?</string>
     <string name="delay_to_start_navigation_descr">Navigáció automatikus indítása egy megadott idő után</string>
     <string name="delay_to_start_navigation">Útvonaltervezés kihagyása</string>
     <string name="shared_string_go">Indítás</string>
 	
 	<string name="parking_place_limited">A parkolóhely időkorlátos</string>
 	<string name="your_edits">Az Ön szerkesztései</string>
-    <string name="waypoint_visit_after"/>
+    <string name="waypoint_visit_after">Megtekintés ez után:</string>
     <string name="simulate_your_location">Pozíció szimulálása</string>
     <string name="drawer">Lapos lista</string>
     <string name="short_location_on_map">Szélesség: %1$s\n Hosszúság: %2$s</string>
@@ -1901,4 +1902,13 @@
 	<string name="shared_string_photo">Fénykép</string>
 	<string name="shared_string_release">Megjelent</string>
 	<string name="days_behind">napos</string>
-	</resources>
+	<string name="welmode_download_maps">Térképek letöltése</string>
+	<string name="confirm_usage_speed_cameras">"Néhány országban (pl. Németország, Franciaország, Olaszország) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérlek kattints az Igen gombra, ha jogosult vagy a funkció használatára. "</string> 
+	<string name="welcome_select_region">Válaszd ki a régiódat</string>
+	<string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát!</string>
+	<string name="current_route">Jelenlegi útvonal</string>
+    <string name="osmo_grop_name_length_alert">A csoportnév legalább 3 karakter hosszú kell legyen!</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d módosítást fogsz feltölteni OSM-re. Biztos vagy benne?</string>
+    <string name="osmand_parking_overdue">lejár</string>
+	<string name="waypoint_visit_before">Megtekintés ez előtt:</string>
+    </resources>
