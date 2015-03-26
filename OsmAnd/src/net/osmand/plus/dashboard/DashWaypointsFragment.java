@@ -69,6 +69,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}		
+		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
 		((Button) mainView.findViewById(R.id.show_all)).setText(getString(R.string.shared_string_show_all));
 		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			
@@ -130,7 +131,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			boolean target = helper.getPointToNavigate() == point;
 			int id = target ? R.drawable.list_destination : R.drawable.list_intermediate;
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getIconsCache()
-					.getContentIcon(id));
+					.getIcon(id, 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);

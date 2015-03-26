@@ -407,12 +407,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				addOrUpdateDashboardFragments(mapActivity.isFirstTime());
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
-				updateTopButton(scrollView.getScrollY());
+				onScrollChanged(scrollView.getScrollY(), false, false);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
 				if(listView instanceof ObservableListView) {
-					updateTopButton(((ObservableListView)listView).getScrollY());
+					onScrollChanged(((ObservableListView)listView).getScrollY(), false, false);
 				}
 				if(refresh) {
 					refreshContent(false);
