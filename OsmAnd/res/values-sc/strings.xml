@@ -1924,4 +1924,7 @@
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 sìmbulos!</string>
 	<string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
-   	</resources>
+   	<string name="welmode_download_maps">Iscàrriga mapas</string>
+	<string name="welcome_select_region">Ischerta sa regione tua</string>
+	<string name="welcome_text">OsmAnd ti cunsentit de impreare mapas e nàvigu sena lìnia!</string>
+	</resources>
