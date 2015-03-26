@@ -22,7 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 02.12.14.
+ * Created by Denis
+ * on 02.12.14.
  */
 public class DashErrorFragment extends DashBaseFragment {
 
