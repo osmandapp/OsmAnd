@@ -178,15 +178,15 @@
   <string name="tip_recent_changes_0_7_1_t">"Изменения в 0.7.1:\n\n\t- Локальное редактирование POI\n\n\t- Live Tracking функциональность (использование и настройка web service в HowTo en)\n\n\t- Показывать текущий записываемый трек на карте\n\n\t- Другие изменения "</string>
   <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
   <string name="local_openstreetmap_uploading">Выгрузка…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs были выгружены в OpenStreetMap</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/заметки выгружены</string>
   <string name="local_openstreetmap_uploadall">Выгрузить все</string>
   
   
   <string name="local_openstreetmap_upload">Выгрузить изменения в OSM</string>
   <string name="local_openstreetmap_delete">Удалить созданные</string>
   <string name="local_openstreetmap_descr_title">Offline дополнение:</string>
-  <string name="local_openstreetmap_settings">Локальные POI/Bugs</string>
-  <string name="local_openstreetmap_settings_descr">Управление локальными POI/Bugs</string>
+  <string name="local_openstreetmap_settings">Локально сохраненные OSM POI/заметки</string>
+  <string name="local_openstreetmap_settings_descr">Просмотр и управление OSM POI/заметками в локальной базе данных</string>
   
   
   <string name="live_monitoring_interval_descr">Укажите интервал онлайн слежения</string>
@@ -558,7 +558,7 @@
   <string name="thanks_yandex_traffic">Спасибо Яндексу за предоставление информации о пробках. Установите Яндекс как домашнюю страницу.</string>
   <string name="layer_yandex_traffic">Яндекс.Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_osm_bugs">OSM Bugs (онлайн)</string>
+  <string name="layer_osm_bugs">OSM заметки (онлайн)</string>
   <string name="layer_transport">Остановки транспорта</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Источник карты…</string>
@@ -1944,4 +1944,6 @@
 	<string name="welcome_select_region">Выберите свой регион</string>
 	<string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-	</resources>
+	<string name="welcome_text">OsmAnd позволяет использовать карты и автономную навигацию!</string>
+	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальные изменения</string>
+   	</resources>
