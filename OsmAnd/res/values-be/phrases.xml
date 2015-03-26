@@ -381,7 +381,7 @@
 	<string name="poi_zoo">Заапарк</string>
 	<string name="poi_theme_park">Парк забаў</string>
 	
-	<string name="poi_attraction">Выбітнасьць</string>
+	<string name="poi_attraction">Турыстычная выбітнасьць</string>
 	<string name="poi_attraction_big_wheel">Кола агляду</string>
 	<string name="poi_attraction_carousel">Карусэль</string>
 	<string name="poi_attraction_maze">Лябірынт</string>
@@ -691,4 +691,17 @@
 		<string name="poi_sightseeing">Славутасьці</string>
 		<string name="poi_internet_access">Доступ у Інтэрнэт</string>
 	<string name="poi_cafe_and_restaurant">Кафэ і рэстаран</string>
-	</resources>
+	<string name="poi_filling_station">АЗС</string>
+		<string name="poi_water_transport">Водны транспарт</string>
+		<string name="poi_bicycle_transport">Роварны транспарт</string>
+		<string name="poi_water_supply">Водазабесьпячэньне</string>
+		<string name="poi_trash_disposal">Сьметнік</string>
+	<string name="poi_shop_food">Прадуктовая крама</string>
+	<string name="poi_road_obstacle">Дарожная перашкода</string>
+		<string name="poi_air_transport">Авія транспарт</string>
+		<string name="poi_aerialway_transport">Лінная дарога</string>
+	<string name="poi_transport_construction">Транспартнае будаўніцтва</string>
+		<string name="poi_power">Энэргетыка</string>
+		<string name="poi_communication">Сувязь</string>
+		<string name="poi_accomodation">Жыльлё</string>
+		</resources>

@@ -101,6 +101,8 @@ public class MapActivity extends AccessibleActivity {
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
+	boolean firstTime;
+
 	private Dialog progressDlg = null;
 
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
@@ -123,6 +125,16 @@ public class MapActivity extends AccessibleActivity {
 		return notification;
 	}
 
+	public boolean isFirstTime(){
+		return firstTime;
+	}
+
+	public void userClosedWelcomeCard(){
+		firstTime = false;
+		dashboardOnMap.refreshDashboardFragments();
+
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		long tm = System.currentTimeMillis();
@@ -141,6 +153,7 @@ public class MapActivity extends AccessibleActivity {
 		if (mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
+		firstTime = app.getAppInitializer().isFirstTime(this);
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();
@@ -191,6 +204,7 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
+
 	}
 
 	private void checkAppInitialization() {

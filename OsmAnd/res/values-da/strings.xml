@@ -297,7 +297,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Parkering position plugin kan du nemt huske, når bilen var parkeret, og hvor meget tid tilbage, hvis parkering er tidsbegrænset. Du kan finde din parkering sted og tidspunkt på kortet af kontrolpanelet og på kortet.\n Kan tilføje en meddelelse til kalenderen, hvis man ønsker at få en påmindelse.</string>
+	<string name="osmand_parking_plugin_description">Parkering udvidelsen gør det nemt huske, hvor bilen er parkeret, og hvor meget tid der er tilbage, hvis parkeringen er tidsbegrænset. Find parkeringsplads og tidspunkt på startsiden og på kortet.\nEn meddelelse kan tilføjes til kalenderen, hvis man ønsker at få en påmindelse.</string>
 	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
@@ -1979,4 +1979,9 @@
     <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
    	<string name="mark_to_delete">Marker for at slette</string>
+	<string name="current_route">Aktuel rute</string>
+    <string name="welmode_download_maps">Hent kort</string>
+	<string name="welcome_select_region">Vælg region</string>
+	<string name="welcome_header">Velkommen</string>
+    <string name="welcome_text">OsmAnd anvender offline kort og navigation!</string>
 	</resources>

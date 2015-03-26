@@ -253,7 +253,7 @@ public class AppModeDialog {
 		tb.setTextOn("");
 		tb.setTextOff("");
 		tb.setContentDescription(mode.toHumanString(ctx));
-		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.dashboard_blue), null, null);
+		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		tb.setPadding(0, padding, 0, 0);
 		LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
 		lp.setMargins(left, 0, 0, 0);

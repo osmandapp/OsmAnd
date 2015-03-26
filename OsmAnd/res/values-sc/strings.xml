@@ -790,7 +790,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">Custu plugin est istadu isvilupadu pro impreare OsmAnd pro ammentare su logu de parchègiu de sa màchina tua.</string>
+	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare cando sa màchina tua est istada parchegiada, in ue e, si su parchègiu tenet unu tempus limitadu, cantu tempus tenes galu tue. Podes agatare su logu e su tempus de parchègiu in su widget de sa mapa.
+\n Si ti diat dèpere servire un\'avisu pro ti l’ammentaret, podet annànghere notìficas in su calendàriu .</string>
 	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
 	<string name="gpxup_public">Pùblicu</string>
@@ -1924,4 +1925,10 @@
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 sìmbulos!</string>
 	<string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
-   	</resources>
+   	<string name="welmode_download_maps">Iscàrriga mapas</string>
+	<string name="welcome_select_region">Ischerta sa regione tua</string>
+	<string name="welcome_text">OsmAnd ti cunsentit de impreare mapas e nàvigu sena lìnia!</string>
+	<string name="welcome_header">Benènnidu</string>
+    <string name="current_route">Àndala atuale</string>
+    <string name="mark_to_delete">Marca pro burrare</string>
+	</resources>

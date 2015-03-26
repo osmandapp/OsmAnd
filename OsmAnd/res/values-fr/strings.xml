@@ -98,7 +98,7 @@
 \n\t- Améliorations diverses "</string>
   
   <string name="use_transparent_map_theme">Thème de transparence</string>
-  <string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
+  <string name="native_library_not_supported">Rendu natif non supporté sur cet appareil.</string>
   <string name="init_native_library">Chargement …</string>
   <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
   <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
@@ -106,7 +106,7 @@
   <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
   <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
   <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
-  <string name="pref_vector_rendering">Options pour le rendu de la carte vectorielle locale</string>
+  <string name="pref_vector_rendering">Options pour l\'affichage vectoriel</string>
   <string name="pref_overlay">Surcouche / sous-couche</string>
   <string name="pref_raster_map">Options pour la source des cartes</string>
   <string name="pref_vector_map">Options cartographie vectorielle</string>
@@ -172,7 +172,7 @@
   <string name="local_index_items_uploaded">%1$d sur %2$d élement(s) envoyés avec succès.</string>
   <string name="local_index_mi_upload_gpx">Envoyer à OSM</string>
   <string name="show_more_map_detail">Afficher plus de détails</string>
-  <string name="show_more_map_detail_descr">Afficher plus de détails sur les cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
+  <string name="show_more_map_detail_descr">Afficher des détails des cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
   <string name="favourites_delete_multiple_succesful">Favori(s) supprimé(s) avec succès.</string>
   <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes-vous sûr ?</string>
   <string name="favorite_home_category">Domicile</string>
@@ -267,7 +267,7 @@
 \n\n\'Vert\' - pour les cartes à jour avec le serveur
 \n\n\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur
 \n\n\'Italique\' - pour les cartes désactivées sur l\'appareil "</string>
-  <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation des cartes vectorielles au lieu des tuiles de carte</string>
+  <string name="level_to_switch_vector_raster_descr">Niveau de zoom minimum pour l\'utilisation des cartes vectorielles</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partager la position</string>
   <string name="tip_location_sharing_t">"Durant votre itinéraire, vous notez un point d\'intérêt que vous voulez partager avec des amis ou de la famille ?
@@ -402,15 +402,15 @@
   <string name="context_menu_item_download_map">Télécharger la carte</string>
   <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
   <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
-  <string name="continuous_rendering">Rendu continu</string>
-  <string name="continuous_rendering_descr">Choisir d\'afficher le rendu continu ou une image entière</string>
+  <string name="continuous_rendering">Affichage continu</string>
+  <string name="continuous_rendering_descr">Affichage continu plutôt qu\'image par image</string>
   <string name="rendering_exception">Erreur lors de l\'affichage de la zone sélectionnée</string>
   <string name="rendering_out_of_memory">Pas suffisamment de mémoire pour afficher la zone sélectionnée</string>
   <string name="show_point_options">Utiliser ce point</string>
   <string name="renderer_load_sucess">Moteur de rendu chargé avec succès</string>
-  <string name="renderer_load_exception">Erreur: le moteur de rendu n\'est pas chargé</string>
-  <string name="renderers">Rendu vectoriel</string>
-  <string name="renderers_descr">Choisir le style de rendu vectoriel</string>
+  <string name="renderer_load_exception">Erreur : le moteur de rendu n\'est pas chargé</string>
+  <string name="renderers">Affichage vectoriel</string>
+  <string name="renderers_descr">Sélectionnez le style d\'affichage</string>
   <string name="poi_context_menu_website">Afficher le site web du PI</string>
   <string name="poi_context_menu_call">Afficher le numéro téléphone du PI</string>
   <string name="website">Site web</string>
@@ -451,7 +451,7 @@
   <string name="shared_string_import">Importer</string>
   
   <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
-  <string name="send_report">Envoyer rapport</string>
+  <string name="send_report">Envoyer le rapport</string>
   <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
   <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
   <string name="any_poi">Tout</string>
@@ -543,7 +543,7 @@
   <string name="update_poi_error_local">Erreur de mise à jour des index locaux</string>
   <string name="update_poi_error_loading">Erreur lors du chargement des données du serveur</string>
   <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors-ligne pour cette région</string>
-  <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
+  <string name="update_poi_is_not_available_for_zoom">La mise à jour des PI n\'est pas disponible pour un faible niveau de zoom</string>
   <string name="context_menu_item_update_poi">Mettre à jour les points d\'intérêt</string>
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales via Internet ?</string>
   <string name="search_history_city">Ville :\n{0}</string>
@@ -563,7 +563,7 @@
   <string name="search_offline_address">Hors-ligne</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
-  <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
+  <string name="max_level_download_tile_descr">Sélectionnez un niveau de zoom maximum pour le téléchargement des cartes (tuiles) en ligne</string>
   <string name="route_general_information">Distance totale : %1$s, temps de trajet estimé : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
@@ -613,7 +613,7 @@
   <string name="shared_string_close">Fermer</string>
   <string name="loading_data">Chargement des données</string>
   <string name="reading_indexes">Lecture des index…</string>
-  <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>
+  <string name="previous_run_crashed">OsmAnd s\'est arrêté anormalement. Souhaitez-vous nous envoyer le fichier journal {0} ?</string>
   <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
   <string name="finished_task">Terminé</string>
   
@@ -858,7 +858,7 @@
   <string name="scroll_map_by_gestures_descr">Faire défiler la carte par gestes sur l\'écran</string>
   <string name="scroll_map_by_gestures">Défilement naturel de la carte</string>
   <string name="i_am_here">Je suis ici</string>
-  <string name="zoom_by_trackball_descr">Changer le niveau de zoom par mouvements horizontaux du trackball</string>
+  <string name="zoom_by_trackball_descr">Modifier le niveau de zoom par mouvements horizontaux du trackball</string>
   <string name="zoom_by_trackball">Utiliser le trackball pour le contrôle du zoom</string>
   <string name="use_short_object_names_descr">Utiliser les noms d\'objets courts</string>
   <string name="use_short_object_names">Utiliser les noms d\'objets</string>
@@ -884,9 +884,9 @@
   <string name="route_kr">Serrez à droite et continuez</string>
   <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
   <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
-  <string name="rendering_attr_appMode_name">Profil pour le rendu</string>
+  <string name="rendering_attr_appMode_name">Profil pour l\'affichage</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
-  <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (fichier SRTM nécessaire) :</string>
+  <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (données courbes de niveau requises)</string>
   <string name="rendering_attr_contourLines_name">Afficher les courbes de niveau</string>
   <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché</string>
   <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
@@ -998,7 +998,7 @@
 \nCoucher : %2$s</string>
 <string name="day_night_info">Information jour/nuit</string>
 <string name="filterpoi_activity">Créer un filtre des PI</string>
-<string name="map_widget_renderer">Style de rendu</string>
+<string name="map_widget_renderer">Style de carte</string>
 <string name="int_continuosly">En continu</string>
 <string name="tip_rotation_switching_t_v2">"Vous pouvez modifier l\'orientation de la carte par un appui court sur l\'icône de la boussole
 \n\tLes choix sont :
@@ -1022,8 +1022,8 @@
 \n* Parcours cycliste=affichage de la piste
 \n* Amélioration de l\'interface (icônes)
 \n* Nombreuses corrections de bugs "</string>
-<string name="snap_to_road_descr">Coller à la route pendant la navigation</string>
-<string name="snap_to_road">Coller à la route</string>
+<string name="snap_to_road_descr">Déplacer la position sur la route pendant la navigation</string>
+<string name="snap_to_road">Déplacer sur la route</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes es compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors-ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse "</string>
 <string name="tip_map_switch_t_v2">"La source des cartes et des couches affichées est modifiable via \'Menu\' → \'Affichage de la carte\' → \'Source de la carte…\'.
@@ -1065,7 +1065,7 @@
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
     <string name="enable_plugin_monitoring_services">Activez le greffon de suivi pour utiliser les services d\'enregistrement des traces</string>
     <string name="non_optimal_route_calculation">Calcule un itinéraire éventuellement non optimal pour les trajets longues distances</string>
-    <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
+    <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
@@ -1075,11 +1075,11 @@
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif)</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
-    <string name="rendering_attr_showRoadMaps_description">Sélectionner à quel moment afficher les cartes uniquement routières :</string>
-	<string name="rendering_attr_showRoadMaps_name">Cartes uniquement routières</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
+	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Cartes standards</string>
-    <string name="download_roads_only_maps">Cartes uniquement routières</string>
+    <string name="download_roads_only_maps">Cartes routières uniquement</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
     <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
@@ -1153,7 +1153,7 @@
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS"
     </string>
     <string name="shared_string_control_start">Démarrer</string>
-    <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
+    <string name="srtm_paid_version_msg">Merci d\'acheter le greffon \"Courbes de niveau\" pour soutenir les développements futurs.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     
     <string name="intermediate_points_change_order">Modifier l\'ordre</string>
@@ -1296,7 +1296,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="cancel_navigation">Arrêter la navigation</string>
     <string name="clear_destination">Supprimer la destination</string>
     <string name="other_location">Autre</string>
-    <string name="files_limit">Il reste %1$d fichiers</string>
+    <string name="files_limit">Encore %1$d téléchargements possibles</string>
     <string name="available_downloads_left">Vous pouvez encore télécharger %1$d fichier(s).</string>
     <string name="install_paid">Version complète</string>
     <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
@@ -1305,7 +1305,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
-    <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
+    <string name="distance_measurement_start_editing">Démarrer la mesure sur la carte</string>
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
     <string name="distance_measurement_save_gpx">Enregistrer comme GPX...</string>
     <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX existant...</string>
@@ -1324,7 +1324,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
     <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
-    <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
+    <string name="use_distance_measurement_help">* Ajout d\'un point : appui bref sur la carte\n* Suppression d\'un point : appui long sur le point (affiche une bulle d\'information) puis nouvel appui dans la bulle pour Supprimer le point\n* Pour plus d\'actions : appuyez sur le gadget de mesure.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
@@ -1366,8 +1366,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="speak_cameras">Annoncer les radars</string>
 	<string name="speak_traffic_warnings">Annoncer les stops et les ralentisseurs</string>
     <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
-    <string name="clear_intermediate_points">Supprimer les points de passage</string>
-    <string name="keep_intermediate_points">Conserver les points de passage</string>
+    <string name="clear_intermediate_points">Supprimer les étapes intermédiaires</string>
+    <string name="keep_intermediate_points">Conserver les étapes intermédiaires</string>
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
     <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s a été enregistré avec succès.</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
@@ -1375,7 +1375,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="maps_define_edit">Définir/Éditer…</string>
 	<string name="announce_gpx_waypoints">Annoncer les points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
-	<string name="new_directions_point_dialog">Vous avez déjà défini des points de passage.</string>
+	<string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
     <string name="context_menu_item_directions_to">Aller vers ce point</string>
     <string name="context_menu_item_directions_from">Partir de ce point</string>
     <string name="route_descr_map_location">Carte : </string>
@@ -1451,7 +1451,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="app_mode_aircraft">Avion</string>
     <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l\'application</string>
     <string name="app_modes_choose">Profils d\'application</string>
-	<string name="map_widget_map_rendering">Rendu de carte</string>
+	<string name="map_widget_map_rendering">Affichage de la carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
     
     
@@ -1572,8 +1572,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
-	<string name="osmo_mode_off">Démarrer session OsMo</string>
-	<string name="osmo_mode_restart">Redémarrer session OsMo</string>
+	<string name="osmo_mode_off">Démarrer la session OsMo</string>
+	<string name="osmo_mode_restart">Redémarrer la session OsMo</string>
 	<string name="osmo_settings_debug">Informations de débogage</string>
 	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
@@ -1763,7 +1763,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="continue_navigation">Reprendre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
 	<string name="rendering_attr_subwayMode_name">Itinéraires de métropolitain</string>
- 	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées alpines</string>
+ 	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées en montagne</string>
     <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
@@ -1907,7 +1907,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="settings_privacy">Confidentialité</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
-	<string name="version_settings_descr">Télécharger les versions en cours développement</string>
+	<string name="version_settings_descr">Télécharger les versions en cours de développement</string>
     <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
     
@@ -1957,7 +1957,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
 	</string>
 	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
-	<string name="days_behind">jours écoulés</string>
+	<string name="days_behind">jours passés</string>
 	<string name="rename_failed">Échec du renommage.</string>
 	<string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
 	<string name="back_to_map">Retour à la carte</string>
@@ -1965,7 +1965,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	
 	<string name="shared_string_selected">Sélectionné</string>
 	<string name="track_points">Points de piste</string>
-	<string name="route_points">Points de passage</string>
+	<string name="route_points">Itinéraire</string>
 	<string name="track_segments">Segments de la voie</string>
 	<string name="simulate_your_location">Simulez votre position</string>
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
@@ -2000,4 +2000,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
 	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
-	</resources>
+	<string name="current_route">Itinéraire actuel</string>
+    </resources>
