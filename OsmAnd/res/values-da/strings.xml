@@ -1979,4 +1979,5 @@
     <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
    	<string name="mark_to_delete">Marker for at slette</string>
-	</resources>
+	<string name="current_route">Aktuel rute</string>
+    </resources>
