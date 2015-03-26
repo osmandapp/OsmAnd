@@ -9,6 +9,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,7 +79,14 @@ public class DashNavigationFragment extends DashBaseFragment {
 			
 			@Override
 			public void onClick(View v) {
-				map.getMapActions().stopNavigationActionConfirm();
+				AlertDialog dlg = map.getMapActions().stopNavigationActionConfirm();
+				dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						setupNavigation();
+					}
+				});
 			}
 		});
 		int nav;

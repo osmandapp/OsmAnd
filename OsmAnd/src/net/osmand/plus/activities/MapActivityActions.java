@@ -702,7 +702,7 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.updateApplicationModeSettings();
 	}
 	
-	public void stopNavigationActionConfirm() {
+	public AlertDialog stopNavigationActionConfirm() {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		// Stop the navigation
 		builder.setTitle(getString(R.string.cancel_route));
@@ -714,7 +714,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.show();
+		return builder.show();
 	}
 	
 

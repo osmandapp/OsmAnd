@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?attr/dashboard_divider"
-        android:focusable="false"
-        android:visibility="gone" />
+        android:focusable="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +25,9 @@
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:scaleType="center"
-            android:src="@drawable/ic_action_start_navigation" />
+        	android:paddingLeft="@dimen/list_content_padding"
+            android:src="@drawable/ic_action_start_navigation"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"  />
 
         <TextView
             android:id="@+id/name"

@@ -836,12 +836,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	
 	@SuppressLint("NewApi")
 	private void setAlpha(View v, int alpha, int clr) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			v.setAlpha(alpha/255.f);
-		} else {
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//			v.setAlpha(alpha/255.f);
+//		} else {
 			int colr = (((int) alpha ) << 24) | clr;
 			v.setBackgroundColor(colr);
-		}
+//		}
 	}
 	
 	@Override
