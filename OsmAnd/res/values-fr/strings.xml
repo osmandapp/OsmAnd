@@ -1305,7 +1305,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
-    <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
+    <string name="distance_measurement_start_editing">Démarrer la mesure sur la carte</string>
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
     <string name="distance_measurement_save_gpx">Enregistrer comme GPX...</string>
     <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX existant...</string>
@@ -1324,7 +1324,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
     <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
-    <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
+    <string name="use_distance_measurement_help">* Ajout d\'un point : appui bref sur la carte\n* Suppression d\'un point : appui long sur le point (affiche une bulle d\'information) puis nouvel appui dans la bulle pour Supprimer le point\n* Pour plus d\'actions : appuyez sur le gadget de mesure.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
@@ -1572,8 +1572,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
-	<string name="osmo_mode_off">Démarrer session OsMo</string>
-	<string name="osmo_mode_restart">Redémarrer session OsMo</string>
+	<string name="osmo_mode_off">Démarrer la session OsMo</string>
+	<string name="osmo_mode_restart">Redémarrer la session OsMo</string>
 	<string name="osmo_settings_debug">Informations de débogage</string>
 	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
