@@ -81,15 +81,15 @@
 	</string>
   <string name="update_poi_does_not_change_indexes">Az alkalmazáson belüli POI módosítások nincsenek hatással a letöltött térképre, a változások helyi fájlban tárolódnak.</string>
   <string name="local_openstreetmap_uploading">Feltöltés …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Hiba feltöltve</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Jegyzet feltöltve</string>
   <string name="local_openstreetmap_uploadall">Összes feltöltése</string>
   
   
   <string name="local_openstreetmap_upload">Módosítások feltöltése OSM-re</string>
   <string name="local_openstreetmap_delete">Módosítás törlése</string>
   <string name="local_openstreetmap_descr_title">Aszinkron OSM szerkesztés:</string>
-  <string name="local_openstreetmap_settings">Helyileg tárolt OSM pontok/Hibák</string>
-  <string name="local_openstreetmap_settings_descr">Helyi adatbázisban tárolt OSM pontok/Hibák megjelenítése, kezelése</string>
+  <string name="local_openstreetmap_settings">Helyileg tárolt OSM POI-k, Jegyzetek</string>
+  <string name="local_openstreetmap_settings_descr">Helyi adatbázisban tárolt OSM POI-k és Jegyzetek megjelenítése, kezelése</string>
   
   
   <string name="live_monitoring_interval_descr">Online útvonalrögzítés intervalluma</string>
@@ -514,7 +514,7 @@
   <string name="layer_yandex_traffic">Yandex forgalmi információ</string>
   <string name="layer_route">Útvonal</string>
   <string name="shared_string_favorites">Kedvencek</string>
-  <string name="layer_osm_bugs">OSM hibák</string>
+  <string name="layer_osm_bugs">OSM Jegyzetek (online)</string>
   <string name="layer_transport">Közlekedési megállók</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Térképforrás…</string>
@@ -1245,7 +1245,7 @@
 \n\t* Új letöltőképernyő (letöltés a háttérben)
 \n\t* GPX alkönyvtárak támogatása a nyomvonalak rendezéséhez\n\t* SRTM fájlok törlése\n\t* OSM Jegyzetek támogatás " 
     </string>
-    <string name="intermediate_items_sort_return">Célpontok optimális sorrendbe rendezve a térképpozíciótól a célpont felé.</string>
+    <string name="intermediate_items_sort_return">Célpontok optimális sorrendbe rendezése a pillanatnyi pozíciódtól a célpont felé.</string>
     <string name="intermediate_items_sort_by_distance">Rendezés (háztól-házig)</string>
     <string name="tip_recent_changes_1_5_t">Az 1.5 kiadás újdonságai:
 	\n\t* Hangos figyelmeztetések sebességhatárra és traffipaxra
@@ -1851,7 +1851,7 @@
     <string name="free">"Szabad %1$s "</string>
 	<string name="roads_only">Csak utak</string>
     <string name="rendering_attr_pisteRoutes_name">Síútvonalak</string>
-	<string name="rendering_attr_pisteGrooming_name">Síútvonal javítás</string>
+	<string name="rendering_attr_pisteGrooming_name">Sípálya kezeltség</string>
     <string name="watch">Óra</string>
 	<string name="notes">Jegyzetek</string>
 	<string name="online_map">Online térkép</string>
