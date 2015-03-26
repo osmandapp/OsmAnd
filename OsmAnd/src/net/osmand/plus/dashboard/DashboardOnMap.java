@@ -62,6 +62,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.software.shell.fab.ActionButton;
@@ -92,7 +93,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private boolean mapLinkedToLocation;
 	private float mapRotation;
 	private boolean inLocationUpdate = false;
-	private NotifyingScrollView scrollView;
 	private ListView listView;
 	private View listBackgroundView;
 	private View paddingView;
@@ -131,14 +131,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				hideDashboard();
 			}
 		};
-		scrollView = ((NotifyingScrollView) dashboardView.findViewById(R.id.main_scroll));
+		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
-		scrollView.setOnScrollChangedListener(new NotifyingScrollView.OnScrollChangedListener() {
-			public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-				int sy = who.getScrollY();
-				updateTopButton(sy);
-			}
-		});
+		scrollView.setScrollViewCallbacks(this);
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
 		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
 			((ObservableListView) listView).setScrollViewCallbacks(this);
@@ -396,6 +391,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			actionButton.show();
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
+			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
 			if(visibleType == DashboardType.DASHBOARD) {
 				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);

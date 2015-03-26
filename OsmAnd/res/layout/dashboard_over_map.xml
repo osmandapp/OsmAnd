@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <net.osmand.plus.dashboard.NotifyingScrollView
+        <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
             android:id="@+id/main_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </LinearLayout>
-        </net.osmand.plus.dashboard.NotifyingScrollView>
+        </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
         <FrameLayout
             android:id="@+id/dash_list_view_layout"
