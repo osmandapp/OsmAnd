@@ -768,20 +768,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if (listBackgroundView != null) {
 			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
 			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
-			int clr = (((int) (t * 255)) << 24) | 0xff8f00;
-			if(t == 1) {
-				paddingView.setBackgroundColor(Color.TRANSPARENT);
-			} else {
-				paddingView.setBackgroundColor(clr);
-			}
+			int baseColor = 0xff8f00;
+			int alpha = (int) (t * 255);
+			// in order to have proper fast scroll down
+			int malpha = t == 1 ? alpha = 0 : alpha;
+			paddingView.setBackgroundColor(baseColor);
+			setAlpha(paddingView, malpha, baseColor);
 			if (listBackgroundView != null) {
-				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(clr);
+				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(baseColor);
+				setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			}
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
 			if (t < 1) {
 				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
 			} else {
-				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(clr);
+				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(0xff000000 | baseColor);
 			}
 		}
 		if (actionButton != null) {
@@ -832,8 +833,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	        v.startAnimation(anim);
 		}
 	}
-
-
+	
+	@SuppressLint("NewApi")
+	private void setAlpha(View v, int alpha, int clr) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			v.setAlpha(alpha/255.f);
+		} else {
+			int colr = (((int) alpha ) << 24) | clr;
+			v.setBackgroundColor(colr);
+		}
+	}
+	
 	@Override
 	public void onDownMotionEvent() {
 	}

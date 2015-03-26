@@ -43,7 +43,8 @@
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
-	<dimen name="dashboard_map_top_blur">70dp</dimen>
+	<dimen name="dashboard_map_toolbar">60dp</dimen>
+	<dimen name="dashboard_map_top_blur">65dp</dimen>
 	<dimen name="dashboard_map_top_padding">240dp</dimen>
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>

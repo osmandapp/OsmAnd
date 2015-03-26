@@ -4,7 +4,7 @@
     
     android:id="@+id/toolbar"
     android:layout_width="fill_parent"
-    android:layout_height="65dp"
+    android:layout_height="@dimen/dashboard_map_toolbar"
     app:contentInsetStart="4dp"
     app:contentInsetLeft="4dp"
     android:background="@color/actionbar_light_color" >
