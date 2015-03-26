@@ -118,7 +118,7 @@ public class WaypointDialogHelper {
 					v = createItemForCategory(ctx, (Integer) getItem(position), running, position, thisAdapter);
 				} else {
 					LocationPointWrapper point = (LocationPointWrapper) getItem(position);
-					v = updateWaypointItemView(edit, deletedPoints, ctx, v, point, this);
+					v = updateWaypointItemView(edit, deletedPoints, app, ctx, v, point, this);
 				}
 				return v;
 			}
@@ -129,8 +129,8 @@ public class WaypointDialogHelper {
 
 	
 	
-	private View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
-			final Activity ctx, View v, final LocationPointWrapper point,
+	public static View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
+			final OsmandApplication app, final Activity ctx, View v, final LocationPointWrapper point,
 			final ArrayAdapter adapter) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
@@ -146,9 +146,11 @@ public class WaypointDialogHelper {
 			remove.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					adapter.remove(point);
 					deletedPoints.add(point);
-					adapter.notifyDataSetChanged();
+					if(adapter != null) {
+						adapter.remove(point);
+						adapter.notifyDataSetChanged();
+					}
 				}
 			});
 		}

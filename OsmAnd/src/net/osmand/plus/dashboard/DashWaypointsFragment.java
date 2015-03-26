@@ -6,15 +6,16 @@ import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -41,19 +42,51 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				SHOW_ALL = !SHOW_ALL;
-				setupTargets();
-			}
-		});
+		
 		return view;
 	}
 
 	@Override
 	public void onOpenDash() {
-		setupTargets();
+		setupView();
+	}
+	
+	public void setupView() {
+		if(getMyApplication().getWaypointHelper().isRouteCalculated()) {
+			setupWaypoints();
+		} else {
+			setupTargets();
+		}
+	}
+
+	private void setupWaypoints() {
+		View mainView = getView();
+		WaypointHelper wh = getMyApplication().getWaypointHelper();
+		List<LocationPointWrapper> allPoints = wh.getAllPoints();
+		if (allPoints.size() == 0) {
+			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
+			return;
+		} else {
+			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
+		}		
+		((Button) mainView.findViewById(R.id.show_all)).setText(getString(R.string.shared_string_show_all));
+		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS);
+			}
+		});
+		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
+		favorites.removeAllViews();
+		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
+		for(int i = 0; i < 3 && i < allPoints.size(); i++) {
+			LocationPointWrapper ps = allPoints.get(i);
+			View v = WaypointDialogHelper.updateWaypointItemView(false, null, getMyApplication(), getActivity(), null, ps, null);
+			favorites.addView(v);
+
+		}
+		this.distances = distances;
 	}
 
 	public void setupTargets() {
@@ -69,6 +102,13 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			Collections.singletonList(helper.getPointToNavigate());
 		((Button) mainView.findViewById(R.id.show_all)).setText(SHOW_ALL? getString(R.string.shared_string_collapse) : 
 			getString(R.string.shared_string_show_all));
+		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SHOW_ALL = !SHOW_ALL;
+				setupView();
+			}
+		});
 		((Button) mainView.findViewById(R.id.show_all)).setVisibility(
 				helper.getIntermediatePoints().size() == 0 ? View.INVISIBLE : View.VISIBLE);
 		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints) + " (" + 
@@ -149,7 +189,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				getMyApplication().getTargetPointsHelper().removeWayPoint(true, target ? -1 :  point.index);
-				setupTargets();
+				setupView();
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
@@ -188,7 +228,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 						TargetPoint remove = allTargets.remove(ind - 1);
 						allTargets.add(ind, remove);
 						getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
-						setupTargets();
+						setupView();
 						return true;
 					}
 				});
@@ -203,7 +243,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 						TargetPoint remove = allTargets.remove(point.index + 1);
 						allTargets.add(point.index, remove);
 						getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
-						setupTargets();
+						setupView();
 						return true;
 					}
 				});
