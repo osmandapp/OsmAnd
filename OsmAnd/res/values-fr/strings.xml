@@ -451,7 +451,7 @@
   <string name="shared_string_import">Importer</string>
   
   <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
-  <string name="send_report">Envoyer rapport</string>
+  <string name="send_report">Envoyer le rapport</string>
   <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
   <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
   <string name="any_poi">Tout</string>
@@ -613,7 +613,7 @@
   <string name="shared_string_close">Fermer</string>
   <string name="loading_data">Chargement des données</string>
   <string name="reading_indexes">Lecture des index…</string>
-  <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>
+  <string name="previous_run_crashed">OsmAnd s\'est arrêté anormalement. Souhaitez-vous nous envoyer le fichier journal {0} ?</string>
   <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
   <string name="finished_task">Terminé</string>
   
@@ -2000,4 +2000,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
 	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
-	</resources>
+	<string name="current_route">Itinéraire actuel</string>
+    </resources>
