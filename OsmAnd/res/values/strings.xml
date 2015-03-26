@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy and others) it is not allowed to use speed camera announcement! OsmAnd doesn\'t take a responsibility of violating local rules, please click yes if you are eligible to use this feature. </string>
 	<string name="welmode_download_maps">Download maps</string>
 	<string name="welcome_select_region">Select your region</string>
 	<string name="welcome_text">OsmAnd allows you to use maps and offline navigation!</string>

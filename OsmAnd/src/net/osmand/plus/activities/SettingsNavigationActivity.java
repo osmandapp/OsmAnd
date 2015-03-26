@@ -345,7 +345,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					settings.SHOW_PEDESTRIAN, settings.SHOW_CAMERAS, settings.SHOW_LANES }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
-			showBooleanSettings(new String[] { getString(R.string.speak_street_names), getString(R.string.speak_traffic_warnings),
+			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names), getString(R.string.speak_traffic_warnings),
 					getString(R.string.speak_pedestrian), getString(R.string.speak_speed_limit),
 					getString(R.string.speak_cameras),
 					getString(R.string.announce_gpx_waypoints),
@@ -355,12 +355,37 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
 					settings.SPEAK_SPEED_CAMERA,
 					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI}, preference.getTitle());
+			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					if(settings.SPEAK_SPEED_CAMERA.get()) {
+						settings.SPEAK_SPEED_CAMERA.set(false);
+						confirmSpeedCamerasDlg();
+					}
+				}
+				
+			});
 			return true;
 		}
 		return false;
 	}
+	
+	private void confirmSpeedCamerasDlg() {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setMessage(R.string.confirm_usage_speed_cameras);
+		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				settings.SPEAK_SPEED_CAMERA.set(true);				
+			}
+		});
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.show();
+	}
 
-	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
+	public AlertDialog showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
 		Builder bld = new AlertDialog.Builder(this);
 		boolean[] checkedItems = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
@@ -392,7 +417,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		    }
 		});
 		
-		bld.show();
+		return bld.show();
 	}
 
 	
