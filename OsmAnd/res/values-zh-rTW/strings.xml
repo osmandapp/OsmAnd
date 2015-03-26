@@ -1951,4 +1951,5 @@
     <string name="osmo_grop_name_length_alert">群組名稱至少須要 3 個字符長！</string>
     <string name="osm_changes_added_to_local_edits">OSM 變更已加到本機更改</string>
    	<string name="mark_to_delete">刪除標記</string>
-	</resources>
+	<string name="current_route">目前的路線</string>
+    </resources>
