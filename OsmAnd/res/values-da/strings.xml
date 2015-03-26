@@ -1980,4 +1980,8 @@
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
    	<string name="mark_to_delete">Marker for at slette</string>
 	<string name="current_route">Aktuel rute</string>
-    </resources>
+    <string name="welmode_download_maps">Hent kort</string>
+	<string name="welcome_select_region">Vælg region</string>
+	<string name="welcome_header">Velkommen</string>
+    <string name="welcome_text">OsmAnd anvender offline kort og navigation!</string>
+	</resources>
