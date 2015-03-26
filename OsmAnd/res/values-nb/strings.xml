@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -1177,7 +1178,7 @@
 	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
 	<string name="plugin_ski_name">Skikartsvisning</string>
-	<string name="osmand_accessibility_description">Viser innstillingsmulighetene for å aktivere spesielle tilgjengelighetsfunksjoner.</string>
+	<string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
 	<string name="rename_failed">Navneendring feilet.</string>
 	
 	
@@ -1248,7 +1249,7 @@
 
 	<string name="route_points">Rutepunkter</string>
 	<string name="shared_string_ellipsis">…</string>
-	<string name="osmand_parking_overdue">Utdatert</string>
+	<string name="osmand_parking_overdue">utløpt</string>
 	<string name="osm_edits">OSM-redigeringer</string>
 	<string name="osmand_parking_time_left">Igjen</string> <string name="your_edits">Dine redigeringer</string>
     <string name="waypoint_visit_after">Besøk etter</string>
