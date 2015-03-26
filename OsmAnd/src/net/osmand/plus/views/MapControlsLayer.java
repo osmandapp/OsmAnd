@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
@@ -174,8 +175,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getMapActions().prepareConfigureMap();
-				mapActivity.getDashboard().setDashboardVisibility(true);
+				mapActivity.getDashboard().setDashboardVisibility(true,	DashboardType.CONFIGURE_MAP);
 			}
 		});
 
@@ -205,7 +205,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				notifyClicked();
 				if (mapActivity.getRoutingHelper().isFollowingMode()) {
-					mapActivity.getMapActions().stopNavigationActionConfirm(mapActivity.getMapView());
+					mapActivity.getMapActions().stopNavigationActionConfirm();
 				} else {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
@@ -239,7 +239,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		TextView routeGoButton = (TextView) mapActivity.findViewById(R.id.map_go_route_button);
-		routeGoControl = createHudButton(routeGoButton, R.drawable.ic_destination_arrow_white).setBg(
+		
+		routeGoControl = createHudButton(routeGoButton,
+				R.drawable.ic_action_start_navigation).setIconColorId(R.color.color_myloc_distance) .setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night);
 		controls.add(routeGoControl);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go).toUpperCase());
@@ -286,7 +288,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
 //				if (mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
-					mapActivity.getDashboard().setDashboardVisibility(true);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 //				} else {
 //					mapActivity.getMapActions().onDrawerBack();
 //					mapActivity.getMapActions().toggleDrawer();

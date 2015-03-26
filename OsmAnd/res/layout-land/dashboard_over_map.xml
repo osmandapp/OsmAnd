@@ -3,7 +3,6 @@
     android:id="@+id/dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#70000000"
     android:orientation="vertical"
     android:visibility="gone" >
 
@@ -18,56 +17,55 @@
         android:layout_height="match_parent"
         android:orientation="horizontal" >
 
-        <net.osmand.plus.dashboard.NotifyingScrollView
-            android:id="@+id/main_scroll"
+        <LinearLayout
             android:layout_width="360dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fadeScrollbars="true" >
+            android:orientation="vertical"
+            android:background="#70000000">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <include layout="@layout/dashboard_toolbar" />
 
-                <LinearLayout
-                    android:id="@+id/content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </LinearLayout>
-        </net.osmand.plus.dashboard.NotifyingScrollView>
-
-        <FrameLayout
-            android:id="@+id/dash_list_view_layout"
-            android:layout_width="360dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:visibility="gone" >
-
-            <com.github.ksoichiro.android.observablescrollview.ObservableListView
-                android:id="@+id/dash_list_view"
+            <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+                android:id="@+id/main_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/card_bg"
+                android:layout_gravity="start"
                 android:fadeScrollbars="true" >
-            </com.github.ksoichiro.android.observablescrollview.ObservableListView>
-        </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+            <FrameLayout
+                android:id="@+id/dash_list_view_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:visibility="gone" >
+
+                <com.github.ksoichiro.android.observablescrollview.ObservableListView
+                    android:id="@+id/dash_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/card_bg_color"
+                    android:fadeScrollbars="true" >
+                </com.github.ksoichiro.android.observablescrollview.ObservableListView>
+            </FrameLayout>
+        </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/map_part_dashboard"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" 
-            android:id="@+id/map_part_dashboard">
-
-            <ImageButton
-                android:id="@+id/map_menu_button"
-                android:layout_width="@dimen/map_button_size"
-                android:layout_height="@dimen/map_button_size"
-                android:layout_gravity="top|left"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginTop="@dimen/map_button_margin"
-                android:background="@drawable/btn_inset_circle"
-                android:src="@drawable/ic_action_remove_light" />
+            android:layout_height="fill_parent" >
 
             <Button
                 android:id="@+id/map_download_button"

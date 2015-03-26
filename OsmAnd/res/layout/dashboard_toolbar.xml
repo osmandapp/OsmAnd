@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    
+    android:id="@+id/toolbar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/dashboard_map_toolbar"
+    app:contentInsetStart="4dp"
+    app:contentInsetLeft="4dp"
+    android:background="@color/actionbar_light_color" >
+
+    <ImageView
+        android:id="@+id/toolbar_back"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="left"
+        android:scaleType="center"
+        android:background="@drawable/dashboard_button_light"
+        android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+    
+    <TextView
+        android:id="@+id/toolbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:scaleType="center"
+        android:text="Toolbar" />
+
+    
+    <ImageView
+        android:id="@+id/toolbar_list"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:src="@drawable/ic_navigation_drawer" />
+    
+    <ImageView
+        android:id="@+id/toolbar_settings"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_settings_dark" />
+    
+    
+    <ImageView
+        android:id="@+id/toolbar_ok"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_ok_dark" />
+    
+    <ImageView
+        android:id="@+id/toolbar_sort"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:src="@drawable/ic_sort_waypoint_dark" />
+    
+    
+    <ImageView
+        android:id="@+id/toolbar_flat"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:visibility="gone"
+        android:src="@drawable/ic_flat_list_dark" />
+
+    <ImageView
+        android:id="@+id/toolbar_edit"
+        android:layout_width="@dimen/dashListItemHeight"
+        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_gravity="right"
+        android:background="@drawable/dashboard_button_light"
+        android:scaleType="center"
+        android:visibility="gone"
+        android:src="@drawable/ic_action_edit_dark" />
+    
+
+</android.support.v7.widget.Toolbar>

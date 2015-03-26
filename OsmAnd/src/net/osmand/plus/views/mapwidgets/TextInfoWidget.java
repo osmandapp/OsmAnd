@@ -65,6 +65,7 @@ public class TextInfoWidget  {
 		if(imageDrawable != null) {
 			topImageView.setImageDrawable(imageDrawable);
 			topImageView.setVisibility(View.VISIBLE);
+			topTextView.setVisibility(View.VISIBLE);
 			topTextView.setText(topText == null ? "" : topText);
 		} else {
 			topImageView.setVisibility(View.GONE );

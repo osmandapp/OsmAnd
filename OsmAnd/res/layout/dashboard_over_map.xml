@@ -3,7 +3,6 @@
     android:id="@+id/dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#70000000"
     android:orientation="vertical"
     android:visibility="gone" >
 
@@ -17,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <net.osmand.plus.dashboard.NotifyingScrollView
+        <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
             android:id="@+id/main_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </LinearLayout>
-        </net.osmand.plus.dashboard.NotifyingScrollView>
+        </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
         <FrameLayout
             android:id="@+id/dash_list_view_layout"
@@ -60,7 +59,7 @@
                 android:id="@+id/dash_list_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/card_bg" />
+                android:background="?attr/card_bg_color" />
 
             <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"
@@ -70,21 +69,8 @@
             </com.github.ksoichiro.android.observablescrollview.ObservableListView>
         </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/map_menu_button"
-            android:layout_width="@dimen/map_button_size"
-            android:layout_height="@dimen/map_button_size"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="@dimen/map_button_margin"
-            android:layout_marginTop="@dimen/map_button_margin"
-            android:background="@drawable/btn_inset_circle"
-            android:src="@drawable/ic_action_remove_light" />
+        <include layout="@layout/dashboard_toolbar"/>
 
-		<net.osmand.plus.activities.search.toolbar.SplitToolbar
-			android:id="@+id/toolbar"
-			android:background="@drawable/gradient_toolbar"
-			android:layout_width="fill_parent"
-			android:layout_height="65dp"/>
     </FrameLayout>
 
 

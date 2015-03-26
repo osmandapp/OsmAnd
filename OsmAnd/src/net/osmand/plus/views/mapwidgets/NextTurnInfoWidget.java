@@ -55,7 +55,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			if(horisontalMini) {
 				setImageDrawable(turnDrawable, false);
 			} else {
-				setTopImageDrawable(turnDrawable, turnType.getExitOut() == 0 ? "" : 
+				setTopImageDrawable(turnDrawable, turnType == null || turnType.getExitOut() == 0 ? "" : 
 					turnType.getExitOut() + "");
 			}
 		}

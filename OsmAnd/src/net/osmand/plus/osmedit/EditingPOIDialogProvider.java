@@ -259,8 +259,8 @@ public class EditingPOIDialogProvider implements DialogProvider {
         final AutoCompleteTextView value = new AutoCompleteTextView(activity);				            
         final Button delete = new Button(activity);
         
-        tag.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        value.setDropDownWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        tag.setDropDownWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        value.setDropDownWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         tag.setLayoutParams(tlp);
         if(tg != null) {
         	tag.setText(tg);

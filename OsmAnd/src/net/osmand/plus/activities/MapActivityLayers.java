@@ -212,9 +212,6 @@ public class MapActivityLayers {
 	}
 
 	
-	
-	
-
 	public AlertDialog showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -241,7 +238,7 @@ public class MapActivityLayers {
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
-				activity.getMapActions().refreshDrawer();
+				activity.getDashboard().refreshContent(true);
 				return true;
 			}
 		};

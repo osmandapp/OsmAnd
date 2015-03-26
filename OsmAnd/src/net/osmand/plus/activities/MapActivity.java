@@ -66,7 +66,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -143,8 +142,6 @@ public class MapActivity extends AccessibleActivity {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
 		dashboardOnMap.createDashboardView();
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setVisibility(View.GONE);
 		checkAppInitialization();
 		parseLaunchIntentLocation();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
@@ -189,7 +186,6 @@ public class MapActivity extends AccessibleActivity {
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
-		mapActions.prepareStartOptionsMenu();
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
 		if(System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
@@ -199,7 +195,7 @@ public class MapActivity extends AccessibleActivity {
 
 	private void checkAppInitialization() {
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			dashboardOnMap.setDashboardVisibility(true);
+			dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 		}
 		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
@@ -465,12 +461,12 @@ public class MapActivity extends AccessibleActivity {
 			loc.setLongitude(mapView.getLongitude());
 			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
 			if(dashboardOnMap.isVisible()) {
-				dashboardOnMap.setDashboardVisibility(false);
+				dashboardOnMap.hideDashboard();
 			}
 		}
 		if (latLonToShow != null) {
 			if(dashboardOnMap.isVisible()) {
-				dashboardOnMap.setDashboardVisibility(false);
+				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
 				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
@@ -606,22 +602,7 @@ public class MapActivity extends AccessibleActivity {
 		return super.onTrackballEvent(event);
 	}
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		MapActivityActions.DrawerType drawerState = mapActions.getDrawerType();
-		outState.putSerializable("drawer_state", drawerState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		if (savedInstanceState != null) {
-			mapActions
-					.setDrawerType((MapActivityActions.DrawerType) savedInstanceState.getSerializable("drawer_state"));
-		}
-	}
-
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -875,8 +856,7 @@ public class MapActivity extends AccessibleActivity {
 	public static void launchMapActivityMoveToTop(Context activity) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
-				((MapActivity) activity).getDashboard().saveBackAction();
-				((MapActivity) activity).getDashboard().setDashboardVisibility(false);
+				((MapActivity) activity).getDashboard().hideDashboard();
 			}
 			((MapActivity) activity).readLocationToShow();
 		} else {

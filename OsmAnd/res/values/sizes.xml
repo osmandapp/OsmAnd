@@ -39,10 +39,12 @@
 	<dimen name="dialog_content_margin">24dp</dimen>
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
-	<dimen name="favorite_icon_size">24dp</dimen>
+	<dimen name="standard_icon_size">24dp</dimen>
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
+	<dimen name="dashboard_map_toolbar">58dp</dimen>
+	<dimen name="dashboard_map_top_blur">60dp</dimen>
 	<dimen name="dashboard_map_top_padding">240dp</dimen>
 	<dimen name="dashboard_map_bottom_padding">90dp</dimen>
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
@@ -82,6 +84,7 @@
 	<dimen name="map_button_inset">4dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1px</dimen>
+	
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

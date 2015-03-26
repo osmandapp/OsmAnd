@@ -168,7 +168,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showOnMapItem = showOnMapItem.setIcon(R.drawable.ic_action_marker2_dark);
+		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(
+				R.drawable.ic_action_map_marker_dark));
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

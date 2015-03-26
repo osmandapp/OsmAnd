@@ -95,7 +95,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl = ric.createLanesControl(map, view);
 		
 		streetNameView = new MapInfoWidgetsFactory.TopTextView(map.getMyApplication(), map);
-		updateStreetName(calculateTextState());
+		updateStreetName(false, calculateTextState());
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
@@ -182,7 +182,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			for (MapWidgetRegInfo reg : mapInfoControls.getRight()) {
 				updateReg(ts, reg);
 			}
-			updateStreetName(ts);
+			updateStreetName(nightMode, ts);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius);
 			this.expand.setBackgroundResource(ts.expand);
@@ -191,10 +191,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void updateStreetName(TextState ts) {
+	private void updateStreetName(boolean nightMode, TextState ts) {
 		streetNameView.setBackgroundResource(ScreenOrientationHelper.isOrientationPortrait(map) ? ts.boxTop
 				: ts.boxFree);
-		streetNameView.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
+		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -306,21 +306,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public ContextMenuAdapter getViewConfigureMenuAdapter() {
 		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
 		cm.setDefaultLayoutId(R.layout.drawer_list_item);
-		cm.item(R.string.layer_map_appearance).iconColor(R.drawable.ic_back_drawer_dark)
-				.listen(new OnContextMenuClick() {
-
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						map.getMapActions().onDrawerBack();
-						return false;
-					}
-				}).reg();
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 			
 			@Override
 			public void onClick(boolean allModes) {
-				map.getMapActions().prepareOptionsMenu(getViewConfigureMenuAdapter());				
+				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter());
 			}
 		});
 		cm.item(R.string.map_widget_reset) 

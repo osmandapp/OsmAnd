@@ -108,7 +108,7 @@ public class TourViewActivity extends OsmandActionBarActivity {
 			}
 		});
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer,
 				R.string.shared_string_more_actions, R.string.shared_string_close);
 		if (getMyApplication().isApplicationInitializing()) {
 			FragmentManager fragmentManager = getSupportFragmentManager();

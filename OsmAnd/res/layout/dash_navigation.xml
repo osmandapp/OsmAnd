@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:focusable="false"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:scaleType="center"
+        	android:paddingLeft="@dimen/list_content_padding"
+            android:src="@drawable/ic_action_start_navigation"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"  />
+
+        <TextView
+            android:id="@+id/name"
+            android:textSize="14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textColor="?android:textColorPrimary"
+            tools:text="@string/app_version" />
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="@dimen/dashListItemHeight"
+            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:background="?attr/dashboard_button"
+            android:src="@drawable/ic_play_dark" />
+
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/dashboard_button"
+            android:focusable="false"
+            android:src="@drawable/ic_action_remove_dark" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -517,11 +517,14 @@ public class RouteInfoWidgetsFactory {
 		private OsmandApplication app;
 		private int dist;
 		private LanesDrawable lanesDrawable;
+		private View centerInfo;
+		private View progress;
 
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
 			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
 			lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
-			 
+			centerInfo = (View) map.findViewById(R.id.map_center_info);
+			progress = (View) map.findViewById(R.id.map_horizontal_progress);
 			lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
 			lanesView.setImageDrawable(lanesDrawable);
 			trackingUtilities = map.getMapViewTrackingUtilities();
@@ -603,6 +606,7 @@ public class RouteInfoWidgetsFactory {
 			}
 			updateVisibility(lanesText, visible);
 			updateVisibility(lanesView, visible);
+			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);
 			return true;
 		}
 	}

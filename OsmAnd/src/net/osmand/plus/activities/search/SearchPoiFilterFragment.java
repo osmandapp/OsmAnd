@@ -168,7 +168,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				}
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
-			editIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+			editIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 			if (model.isStandardFilter()) {
 				editIcon.setVisibility(View.GONE);
 			} else {

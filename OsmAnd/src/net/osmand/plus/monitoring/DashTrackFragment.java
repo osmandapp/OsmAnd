@@ -179,7 +179,11 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 
 		OsmandSettings settings = getMyApplication().getSettings();
-		settings.setMapLocationToShow(file.getLastPoint().lat, file.getLastPoint().lon, settings.getLastKnownMapZoom());
+		if(file.getLastPoint() != null) {
+			settings.setMapLocationToShow(file.getLastPoint().lat, file.getLastPoint().lon, settings.getLastKnownMapZoom());
+		} else if(file.findPointToShow() != null) {
+			settings.setMapLocationToShow(file.findPointToShow().lat, file.findPointToShow().lon, settings.getLastKnownMapZoom());
+		}
 		getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(file);
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}

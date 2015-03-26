@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
@@ -311,10 +312,16 @@ public class MapInfoWidgetsFactory {
 			return false;
 		}
 		
-		public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
+		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
 			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
-			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
-					textColor, textShadowColor, bold, rad);
+			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text), textColor, textShadowColor,
+					bold, rad);
+			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
+			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
+			all.setImageDrawable(map.getMyApplication().getIconsCache()
+					.getActionBarIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+			remove.setImageDrawable(map.getMyApplication().getIconsCache()
+					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 		
 		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
@@ -388,8 +395,10 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		public boolean updateWaypoint() {
-			lastPoint = waypointHelper.getMostImportantLocationPoint(null);
-			if (lastPoint == null) {
+			final LocationPointWrapper pnt = waypointHelper.getMostImportantLocationPoint(null);
+			boolean changed = this.lastPoint != pnt;
+			this.lastPoint = pnt;
+			if (pnt == null) {
 				topBar.setOnClickListener(null);
 				updateVisibility(waypointInfoBar, false);
 				return false;
@@ -398,22 +407,20 @@ public class MapInfoWidgetsFactory {
 				boolean updated = updateVisibility(waypointInfoBar, true);
 				// pass top bar to make it clickable
 				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 
-						lastPoint, null);
-				if (updated) {
+						pnt, true);
+				if (updated || changed) {
 					ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
-					View btnN = waypointInfoBar.findViewById(R.id.waypoint_close);
-					all.setImageDrawable(map.getMyApplication().getIconsCache().
-							getContentIcon(R.drawable.ic_overflow_menu_light));
+					ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 					all.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							map.getMapActions().showWaypointsDialog(false);
+							map.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 						}
 					});
-					btnN.setOnClickListener(new View.OnClickListener() {
+					remove.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							waypointHelper.removeVisibleLocationPoint(lastPoint);
+							waypointHelper.removeVisibleLocationPoint(pnt);
 							map.refreshMap();
 						}
 					});

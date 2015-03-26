@@ -60,7 +60,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
@@ -69,6 +68,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -516,7 +516,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == TRACK_DEV_ID) {
-					if (device != null) {
+					if (device != null && device.getLastLocation() != null) {
+						TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
+						targets.navigateToPoint(new LatLon(device.getLastLocation().getLatitude(), device
+								.getLastLocation().getLongitude()), true, -1);
 						OsMoPositionLayer.setFollowDestination(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
 					}
