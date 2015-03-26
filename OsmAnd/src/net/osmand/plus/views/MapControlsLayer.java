@@ -205,7 +205,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				notifyClicked();
 				if (mapActivity.getRoutingHelper().isFollowingMode()) {
-					mapActivity.getMapActions().stopNavigationActionConfirm(mapActivity.getMapView());
+					mapActivity.getMapActions().stopNavigationActionConfirm();
 				} else {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}

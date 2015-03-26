@@ -557,51 +557,6 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		
-		// TODO Pause/continue
-		if(routingHelper.isRouteCalculated()) {
-			optionsMenuHelper.item(
-					routingHelper.isRoutePlanningMode() ? R.string.continue_navigation :
-					R.string.pause_navigation)
-			.iconColor(R.drawable.ic_action_gdirections_dark)
-			.listen(new OnContextMenuClick() {
-				@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						if(routingHelper.isRoutePlanningMode()) {
-							routingHelper.setRoutePlanningMode(false);
-							routingHelper.setFollowingMode(true);
-						} else {
-							routingHelper.setRoutePlanningMode(true);
-							routingHelper.setFollowingMode(false);
-							routingHelper.setPauseNaviation(true);
-						}
-						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-						mapActivity.refreshMap();
-						return true;
-					}
-			}).reg();
-		}
-		// TODO stop navigation / delete point
-		if (mapActivity.getPointToNavigate() != null) {
-			int nav;
-			if(routingHelper.isFollowingMode()) {
-				nav = R.string.cancel_navigation;
-			} else if(routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
-				nav = R.string.cancel_route;
-			} else {
-				nav = R.string.clear_destination;
-			}
-			optionsMenuHelper.item(nav).iconColor(R.drawable.ic_action_remove_dark) 
-				.listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					stopNavigationActionConfirm(mapView);
-					return true;
-				}
-			}).reg();
-		}
-		
-		
 		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -747,34 +702,17 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.updateApplicationModeSettings();
 	}
 	
-	public void stopNavigationActionConfirm(final OsmandMapTileView mapView){
+	public void stopNavigationActionConfirm() {
 		Builder builder = new AlertDialog.Builder(mapActivity);
-		
-		if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-			// Stop the navigation
-			builder.setTitle(getString(R.string.cancel_route));
-			builder.setMessage(getString(R.string.stop_routing_confirm));
-			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					stopNavigationWithoutConfirm();
-				}
-
-				
-			});
-		} else {
-			// Clear the destination point
-			builder.setTitle(getString(R.string.cancel_navigation));
-			builder.setMessage(getString(R.string.clear_dest_confirm));
-			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					getTargets().clearPointToNavigate(true);
-					mapView.refreshMap();
-				}
-			});
-		}
-
+		// Stop the navigation
+		builder.setTitle(getString(R.string.cancel_route));
+		builder.setMessage(getString(R.string.stop_routing_confirm));
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				stopNavigationWithoutConfirm();
+			}
+		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();
 	}
