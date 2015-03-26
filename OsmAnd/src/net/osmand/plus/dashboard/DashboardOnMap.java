@@ -95,6 +95,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private boolean inLocationUpdate = false;
 	private ListView listView;
 	private View listBackgroundView;
+	private Toolbar toolbar;
 	private View paddingView;
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
@@ -131,6 +132,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				hideDashboard();
 			}
 		};
+		toolbar = ((Toolbar) dashboardView.findViewById(R.id.toolbar));
 		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		scrollView.setScrollViewCallbacks(this);
@@ -754,8 +756,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		// Translate list background
 		if (listBackgroundView != null) {
 			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
-			
 		}
+		setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
 		updateTopButton(scrollY);
 	}
 
@@ -764,17 +766,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if (listBackgroundView != null) {
 			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
 			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
+			t = Math.max(0, t);
 			int baseColor = 0xff8f00;
 			int alpha = (int) (t * 255);
 			// in order to have proper fast scroll down
 			int malpha = t == 1 ? alpha = 0 : alpha;
-			paddingView.setBackgroundColor(baseColor);
 			setAlpha(paddingView, malpha, baseColor);
 			if (listBackgroundView != null) {
-				dashboardView.findViewById(R.id.map_part_dashboard).setBackgroundColor(baseColor);
 				setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			}
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
+			setAlpha(dashboardView, (int) (t * 128), 0);
 			if (t < 1) {
 				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
 			} else {
