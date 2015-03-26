@@ -2001,4 +2001,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
 	<string name="current_route">Itinéraire actuel</string>
+    <string name="welmode_download_maps">Télécharger les cartes</string>
+	<string name="welcome_select_region">Sélectionnez votre région</string>
+	<string name="welcome_text">OsmAnd utilise des cartes locales et permet la navigation hors ligne !</string>
+	<string name="welcome_header">Bienvenue</string>
     </resources>
