@@ -755,7 +755,7 @@
 	\n\t* Support OSM Notes 
     </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
-    <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way to the destination.</string>
+    <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way from current location to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
     <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
