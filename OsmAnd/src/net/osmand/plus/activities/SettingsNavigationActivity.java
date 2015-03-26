@@ -355,17 +355,19 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
 					settings.SPEAK_SPEED_CAMERA,
 					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI}, preference.getTitle());
-			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-				
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					if(settings.SPEAK_SPEED_CAMERA.get()) {
-						settings.SPEAK_SPEED_CAMERA.set(false);
-						confirmSpeedCamerasDlg();
+			if (!settings.SPEAK_SPEED_CAMERA.get()) {
+				dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						if (settings.SPEAK_SPEED_CAMERA.get()) {
+							settings.SPEAK_SPEED_CAMERA.set(false);
+							confirmSpeedCamerasDlg();
+						}
 					}
-				}
-				
-			});
+
+				});
+			}
 			return true;
 		}
 		return false;

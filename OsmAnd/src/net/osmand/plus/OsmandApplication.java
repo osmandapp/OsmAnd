@@ -109,6 +109,8 @@ public class OsmandApplication extends Application {
 	
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
+	private Locale defaultLocale;
+	
 	
 	// Typeface
 	
@@ -276,10 +278,18 @@ public class OsmandApplication extends Application {
 	public void checkPreferredLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
 		String lang = osmandSettings.PREFERRED_LOCALE.get();
+		if(defaultLocale == null) {
+			defaultLocale = Locale.getDefault();
+		}
 		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
 			preferredLocale = new Locale(lang);
 			Locale.setDefault(preferredLocale);
 			config.locale = preferredLocale;
+			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+		} else if("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+			Locale.setDefault(defaultLocale);
+			config.locale = defaultLocale;
+			preferredLocale = null;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
 		
@@ -601,6 +611,10 @@ public class OsmandApplication extends Application {
 				Locale.setDefault(preferredLocale);
 				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+			} else if("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+				Locale.setDefault(defaultLocale);
+				config.locale = defaultLocale;
+				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 			}
 		}
 	}
