@@ -13,7 +13,10 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
@@ -95,12 +98,19 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			name.setText(PointDescription.getSimpleName(point, getActivity()));
 			ImageButton options =  ((ImageButton)view.findViewById(R.id.options));
 			options.setVisibility(View.VISIBLE);
+			final boolean optionsVisible = (SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0); 
+			
 			options.setImageDrawable(getMyApplication().getIconsCache().
-					getContentIcon(R.drawable.ic_overflow_menu_white));
+					getContentIcon(optionsVisible? R.drawable.ic_overflow_menu_white :
+						R.drawable.ic_action_remove_dark));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					selectModel(point, view);
+					if(optionsVisible) {
+						selectTargetModel(point, view);
+					} else {
+						deletePointConfirm(point, view);
+					}
 				}
 			});
 			
@@ -128,30 +138,47 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		}
 		this.distances = distances;
 	}
-	private void selectModel(final TargetPoint model, View v) {
-		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightContent();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-		MenuItem 
-		item = optionsMenu.getMenu().add(
-				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
-						getContentIcon(R.drawable.ic_action_fav_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+	
+	protected void deletePointConfirm(final TargetPoint point, View view) {
+		final boolean target = point == getMyApplication().getTargetPointsHelper().getPointToNavigate();
+		Builder builder = new AlertDialog.Builder(view.getContext());
+		// Stop the navigation
+		builder.setTitle(getString(R.string.clear_destination));
+		builder.setMessage(getString(R.string.delete_target_point));
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				Bundle args = new Bundle();
-				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), args);
-				dlg.show();
-				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, args, model.getLatitude(), model.getLongitude(),
-						model.getOriginalPointDescription());
-				return true;
+			public void onClick(DialogInterface dialog, int which) {
+				getMyApplication().getTargetPointsHelper().removeWayPoint(true, target ? -1 :  point.index);
+				setupTargets();
 			}
 		});
-		final boolean target = model == getMyApplication().getTargetPointsHelper().getPointToNavigate();
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.show();		
+	}
+
+	private void selectTargetModel(final TargetPoint point, final View view) {
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
+		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+		MenuItem item; 
+//		item = optionsMenu.getMenu().add(
+//				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
+//						getContentIcon(R.drawable.ic_action_fav_dark));
+//		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//			@Override
+//			public boolean onMenuItemClick(MenuItem item) {
+//				Bundle args = new Bundle();
+//				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), args);
+//				dlg.show();
+//				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, args, model.getLatitude(), model.getLongitude(),
+//						model.getOriginalPointDescription());
+//				return true;
+//			}
+//		});
+		final boolean target = point == getMyApplication().getTargetPointsHelper().getPointToNavigate();
 		if(SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 			final List<TargetPoint> allTargets = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
-			if (model.index > 0 || target) {
-				final int ind = target ? allTargets.size() - 1 : model.index;
+			if (point.index > 0 || target) {
+				final int ind = target ? allTargets.size() - 1 : point.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
 						.setIcon(getMyApplication().getIconsCache().
 								getContentIcon(R.drawable.ic_action_up_dark));
@@ -173,8 +200,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						TargetPoint remove = allTargets.remove(model.index + 1);
-						allTargets.add(model.index, remove);
+						TargetPoint remove = allTargets.remove(point.index + 1);
+						allTargets.add(point.index, remove);
 						getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
 						setupTargets();
 						return true;
@@ -184,12 +211,11 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		}
 		item = optionsMenu.getMenu().add(
 				R.string.shared_string_delete).setIcon(getMyApplication().getIconsCache().
-						getContentIcon(R.drawable.ic_action_delete_dark));
+						getContentIcon(R.drawable.ic_action_remove_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				getMyApplication().getTargetPointsHelper().removeWayPoint(true, target ? -1 :  model.index);
-				setupTargets();
+				deletePointConfirm(point, view);
 				return true;
 			}
 		});

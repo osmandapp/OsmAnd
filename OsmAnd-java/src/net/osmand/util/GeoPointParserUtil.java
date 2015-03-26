@@ -60,6 +60,8 @@ public class GeoPointParserUtil {
 
 		String twoQueryParameters[] = {
 			"geo:0,0?z=11&q=Lots+Of+Stuff",
+			"http://osmand.net/go?lat=34.99393&lon=-110.12345",
+			"http://www.osmand.net/go.html?lat=34.99393&lon=-110.12345",
 			"http://download.osmand.net/go?lat=34.99393&lon=-110.12345",
 			"http://download.osmand.net/go?lat=34.99393&lon=-110.12345#this+should+be+ignored",
 		};
@@ -205,6 +207,31 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://osmand.net/go?lat=34&lon=-106&z=11
+		url = "http://www.osmand.net/go.html?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+
+		// http://www.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
+		url = "http://www.osmand.net/go.html?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+		
+		// http://osmand.net/go?lat=34&lon=-106&z=11
+		url = "http://osmand.net/go?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+
+		// http://osmand.net/go?lat=34.99393&lon=-106.61568&z=11
+		url = "http://osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+
 		// http://openstreetmap.org/#map=11/34/-106
 		z = 11;
 		url = "http://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
@@ -326,17 +353,6 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://www.google.com/maps/?q=loc:34,-106&z=11
-		url = "http://www.google.com/maps/?q=loc:" + ilat + "," + ilon + "&z=" + z;
-		System.out.println("url: " + url);
-		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
-
-		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11
-		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + "&z=" + z;
-		System.out.println("url: " + url);
-		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// whatsapp
 		// http://maps.google.com/maps/q=loc:34,-106 (You)
@@ -562,6 +578,21 @@ public class GeoPointParserUtil {
 				throw new RuntimeException(u + " not parsable!");
 			System.out.println("Properly parsed as: " + actual.getGeoUriString());
 		}
+		
+		// http://www.google.com/maps/?q=loc:34,-106&z=11
+		url = "http://www.google.com/maps/?q=loc:" + ilat + "," + ilon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		// FIXME FAIL
+		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+
+		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11
+		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		// FIXME FAIL
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
 
 		// these URLs are not parsable, but should not crash or cause problems
 		String[] unparsableUrls = {
@@ -582,6 +613,8 @@ public class GeoPointParserUtil {
 				throw new RuntimeException(u + " not parsable, but parse did not return null!");
 			System.out.println("Handled URL");
 		}
+		
+		
 	}
 
 	private static boolean areCloseEnough(double a, double b, long howClose) {

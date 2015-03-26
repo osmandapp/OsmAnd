@@ -99,6 +99,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private View paddingView;
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
+	private boolean portrait;
 	
 	
 	private WaypointDialogHelper waypointDialogHelper;
@@ -135,9 +136,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		toolbar = ((Toolbar) dashboardView.findViewById(R.id.toolbar));
 		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
-		scrollView.setScrollViewCallbacks(this);
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
 		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+			this.portrait = true;
+			scrollView.setScrollViewCallbacks(this);
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
@@ -395,7 +397,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			dashboardView.setVisibility(View.VISIBLE);
-			actionButton.show();
+			if(isActionButtonVisible()) {
+				actionButton.show();
+			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
@@ -417,6 +421,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					updateListBackgroundHeight();
 				}
 			}
+			mapActivity.findViewById(R.id.toolbar_back).setVisibility(isBackButtonVisible() ? View.VISIBLE : View.GONE);
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 			
 			updateToolbarActions();
@@ -759,36 +764,27 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 		// Translate list background
-		if (listBackgroundView != null) {
+		if (portrait) {
 			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
 		}
-		setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
+		if (portrait) {
+			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
+		}
+		updateColorOfToolbar(scrollY);
 		updateTopButton(scrollY);
 	}
 
+	private boolean isActionButtonVisible() {
+		return visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU;
+	}
+	
+	private boolean isBackButtonVisible() {
+		return !(visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU);
+	}
 
 	private void updateTopButton(int scrollY) {
-		if (listBackgroundView != null) {
-			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
-			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
-			t = Math.max(0, t);
-			int baseColor = 0xff8f00;
-			int alpha = (int) (t * 255);
-			// in order to have proper fast scroll down
-			int malpha = t == 1 ? alpha = 0 : alpha;
-			setAlpha(paddingView, malpha, baseColor);
-			if (listBackgroundView != null) {
-				setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
-			}
-			gradientToolbar.setAlpha((int) ((1 - t) * 255));
-			setAlpha(dashboardView, (int) (t * 128), 0);
-			if (t < 1) {
-				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
-			} else {
-				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(0xff000000 | baseColor);
-			}
-		}
-		if (actionButton != null) {
+		
+		if (actionButton != null && portrait && isActionButtonVisible()) {
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
 			int originalPosition = (int) (160 * scale);
 			int minTop = (int) (65 * scale);
@@ -803,13 +799,35 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 		}
 	}
+
+
+	private void updateColorOfToolbar(int scrollY) {
+		if (portrait) {
+			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
+			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
+			t = Math.max(0, t);
+			int baseColor = 0xff8f00;
+			int alpha = (int) (t * 255);
+			// in order to have proper fast scroll down
+			int malpha = t == 1 ? alpha = 0 : alpha;
+			setAlpha(paddingView, malpha, baseColor);
+			setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
+			gradientToolbar.setAlpha((int) ((1 - t) * 255));
+			setAlpha(dashboardView, (int) (t * 128), 0);
+			if (t < 1) {
+				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundDrawable(gradientToolbar);
+			} else {
+				((Toolbar) dashboardView.findViewById(R.id.toolbar)).setBackgroundColor(0xff000000 | baseColor);
+			}
+		}
+	}
 	
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
 		this.listAdapterOnClickListener = listener;
 		if(this.listView != null) {
 			listView.setAdapter(listAdapter);
-			if(listBackgroundView == null) {
+			if(!portrait) {
 				listView.setOnItemClickListener(this.listAdapterOnClickListener);
 			} else if (this.listAdapterOnClickListener != null) {
 				listView.setOnItemClickListener(new OnItemClickListener() {
