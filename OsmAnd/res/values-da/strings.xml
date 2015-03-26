@@ -297,7 +297,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Parkering position plugin kan du nemt huske, når bilen var parkeret, og hvor meget tid tilbage, hvis parkering er tidsbegrænset. Du kan finde din parkering sted og tidspunkt på kortet af kontrolpanelet og på kortet.\n Kan tilføje en meddelelse til kalenderen, hvis man ønsker at få en påmindelse.</string>
+	<string name="osmand_parking_plugin_description">Parkering position udvidelse gør det nemt huske, hvor bilen var parkeret, og hvor meget tid tilbage, hvis parkering er tidsbegrænset. Find parkering sted og tidspunkt på kortet af kontrolpanelet og på kortet.\n En meddelelse kan tilføjes\n til kalenderen, hvis man ønsker at få en påmindelse.</string>
 	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
