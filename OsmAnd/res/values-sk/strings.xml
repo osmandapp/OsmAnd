@@ -2129,4 +2129,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="confirmation_to_clear_history">Chcete vymazať celú históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
 	<string name="osmo_grop_name_length_alert">Názov skupiny by mal mať aspoň 3 písmená!</string>
+	<string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom. OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Povoľte funkciu oznamovania len ak ste na to oprávnený.</string>
+	<string name="welmode_download_maps">Stiahnuť mapy</string>
+	<string name="welcome_select_region">Vyberte svoj región</string>
+	<string name="welcome_text">OsmAnd vám umožňuje používať mapy a navigáciu offline!</string>
+	<string name="welcome_header">Vitajte</string>
+    <string name="current_route">Súčasná trasa</string>
+    <string name="osm_changes_added_to_local_edits">Zmeny OSM pridané do lokálnych zmien</string>
+   	<string name="mark_to_delete">Označte pre výmaz</string>
 	</resources>
