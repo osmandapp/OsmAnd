@@ -1997,6 +1997,6 @@
 	<string name="welcome_select_region">Seleccione su región</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
-    <string name="welcome_text">¡OsmAnd te permite usar mapas y navegación offline!</string>
+    <string name="welcome_text">¡OsmAnd te permite usar mapas y navegación desconectado!</string>
 	<string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisadores de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Por favor, haga clic en sí si usted es elegible para utilizar esta función.</string>
 	</resources>
