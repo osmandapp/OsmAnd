@@ -31,14 +31,14 @@
 \n\t- Otros cambios "</string>
   <string name="update_poi_does_not_change_indexes">Los cambios a PDIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
   <string name="local_openstreetmap_uploading">Enviando-…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} PDIs/Fallos enviados</string>
+  <string name="local_openstreetmap_were_uploaded">{0} PDIs/Notas enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
   
   <string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
   <string name="local_openstreetmap_delete">Suprimir modificación</string>
   <string name="local_openstreetmap_descr_title">Edición asíncrona de OSM:</string>
-  <string name="local_openstreetmap_settings">PDIs/Fallos OSM guardados localmente</string>
-  <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/Fallos OSM anotados en la base de datos local</string>
+  <string name="local_openstreetmap_settings">PDIs/Notas OSM guardados localmente</string>
+  <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/Notas OSM anotados en la base de datos local</string>
   
   
   <string name="live_monitoring_interval_descr">Especifica el intervalo de seguimiento en directo</string>
@@ -1257,7 +1257,7 @@
     <string name="tip_recent_changes_1_4_t">"Cambios en 1.4:\n\t* Ordena los puntos de ruta de forma óptima para visitar todos (Recorrido del viajante, puerta a puerta)\n\t* Busca la calle por el nombre (en el barrio)\n\t* Extra de modo de planificación (carga/edita/guarda pistas GPX)\n\t* Nueva pantalla de descarga (descargar en segundo plano)\n\t* Soporta subcarpetas GPX (organiza tus trazas GPX)\n\t* Elimina archivos SRTM\n\t* Soporta Notas OSM" 
     </string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en las ciudades vecinas</string>
-    <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino hacia el destino.</string>
+    <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
@@ -1998,4 +1998,5 @@
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
     <string name="welcome_text">¡OsmAnd te permite usar mapas y navegación offline!</string>
+	<string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisadores de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Por favor, haga clic en sí si usted es elegible para utilizar esta función.</string>
 	</resources>
