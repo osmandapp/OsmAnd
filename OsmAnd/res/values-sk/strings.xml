@@ -211,15 +211,15 @@
 	</string>
   <string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
   <string name="local_openstreetmap_uploading">Nahráva sa …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/chyby boli nahraté</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Poznámky boli nahraté</string>
   <string name="local_openstreetmap_uploadall">Nahrať všetko</string>
   
   
   <string name="local_openstreetmap_upload">Nahrať úpravu na OSM</string>
   <string name="local_openstreetmap_delete">Vymazať úpravu</string>
   <string name="local_openstreetmap_descr_title">Asynchrónne upravovanie OSM:</string>
-  <string name="local_openstreetmap_settings">Lokálne uložené OSM POI/chyby</string>
-  <string name="local_openstreetmap_settings_descr">Zobrazenie a správa OSM bodov záujmov/chýb uložených v lokálnej databáze</string>
+  <string name="local_openstreetmap_settings">Lokálne uložené OSM POI/Poznámky</string>
+  <string name="local_openstreetmap_settings_descr">Zobrazenie a správa OSM bodov záujmu/poznámok uložených v lokálnej databáze</string>
   
   
   <string name="live_monitoring_interval_descr">Určenie intervalu stopovania naživo</string>
@@ -629,7 +629,7 @@
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
   <string name="layer_yandex_traffic">Doprava Yandex</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_osm_bugs">Chyby OSM</string>
+  <string name="layer_osm_bugs">OSM Poznámky (online)</string>
   <string name="layer_transport">Dopravné zastávky</string>
   <string name="layer_poi">Body záujmu (POI)…</string>
   <string name="layer_map">Zdroj mapy…</string>
@@ -985,7 +985,7 @@
   <string name="osmand_parking_pm">popoludní</string>
   <string name="osmand_parking_am">dopoludnia</string>
   <string name="osmand_parking_position_name">Parkovací bod</string>
-  <string name="osmand_parking_plugin_description">Tento zásuvný modul bol vytvorený, aby si mohol OsmAnd zapamätať umiestnenie vášho zaparkovaného auta.</string>
+  <string name="osmand_parking_plugin_description">Modul Parkovacie miesto umožňuje zapamätať si kedy bolo auto zaparkované a koľko zostáva času (ak je parkovanie časovo obmedzené). Miesto a miesto zaparkovania môžete nájsť na nástroji na mape.\n Tiež môže pridať pripomienku do kalendára.</string>
   <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
   <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
@@ -1239,7 +1239,7 @@
 \n\t* Podpora poznámok OSM 
     </string>
     <string name="destination_point">Cieľ %1$s</string>
-    <string name="intermediate_items_sort_return">Cesta bola zoptimalizovaná.</string>
+    <string name="intermediate_items_sort_return">Priechodné body cesty boli usporiadané do optimálneho poradia na ceste z vašej terajšej pozície do cieľa.</string>
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
     
 	
