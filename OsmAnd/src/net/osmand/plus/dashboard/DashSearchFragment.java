@@ -1,9 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.helpers.FontCache;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -15,8 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.helpers.FontCache;
+
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis on
+ * 24.11.2014.
  */
 public class DashSearchFragment extends DashBaseFragment {
 
@@ -29,6 +32,8 @@ public class DashSearchFragment extends DashBaseFragment {
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.recents)).setTypeface(typeface);
+
+
 		return view;
 	}
 
@@ -40,32 +45,43 @@ public class DashSearchFragment extends DashBaseFragment {
 		getMyApplication().getSettings().SEARCH_TAB.set(tab);
 		activity.startActivity(search);
 	}
-	
-	private void setupButtons(View view){
+
+	private void setupButtons(View view) {
 		final Activity activity = getActivity();
 		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-//		EditText searchText = (EditText) view.findViewById(R.id.search_text);
-//		searchText.addTextChangedListener(textWatcher);
-		(view.findViewById(R.id.poi)).setOnClickListener(new View.OnClickListener() {
+
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		boolean light = getMyApplication().getSettings().isLightContent();
+		Button btn = (Button) view.findViewById(R.id.poi);
+		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				searchActivity(activity, appCustomization, SearchActivity.POI_TAB_INDEX);
 			}
 		});
+		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_info2,
+				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
 
-		(view.findViewById(R.id.address)).setOnClickListener(new View.OnClickListener() {
+		btn = (Button)view.findViewById(R.id.address);
+		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				searchActivity(activity, appCustomization, SearchActivity.ADDRESS_TAB_INDEX);
 			}
 		});
+		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_home2,
+				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
 
-		(view.findViewById(R.id.coord)).setOnClickListener(new View.OnClickListener() {
+		btn = (Button) view.findViewById(R.id.coord);
+		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				searchActivity(activity, appCustomization, SearchActivity.LOCATION_TAB_INDEX);
 			}
 		});
+		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_marker2,
+				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
+
 		(view.findViewById(R.id.recents)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -73,9 +89,9 @@ public class DashSearchFragment extends DashBaseFragment {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onOpenDash() {
-		
+
 	}
 }

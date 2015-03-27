@@ -140,9 +140,6 @@
 		<item name="dashboard_divider">@color/dashboard_divider_light</item>
 		<item name="dashboard_button">@drawable/dashboard_button_light</item>
 		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Light</item>
-		<item name="ic_action_info2">@drawable/ic_action_info2_light</item>
-		<item name="ic_action_home2">@drawable/ic_action_home2_light</item>
-		<item name="ic_action_marker2">@drawable/ic_action_marker2_light</item>
         <item name="search_background">@color/search_background_dark</item>
         <item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
         <item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
@@ -185,9 +182,6 @@
 		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
 		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
 		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Dark</item>
-		<item name="ic_action_info2">@drawable/ic_action_info2_dark</item>
-		<item name="ic_action_home2">@drawable/ic_action_home2_dark</item>
-		<item name="ic_action_marker2">@drawable/ic_action_marker2_dark</item>
 		<item name="search_background">@color/color_white</item>
 		<item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
 		<item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>

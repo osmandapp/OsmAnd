@@ -3,6 +3,9 @@
 
 	<color name="app_mode_icon_color">#33B4E4</color>
 
+	<color name="dash_search_icon_light">#536DFE</color>
+	<color name="dash_search_icon_dark">#606E78</color>
+
 	<color name="parking_outdated_color">#f41a34</color>
 	<color name="osmo_header_dark">#2d383d</color>
 	<color name="osmo_header_light">#b36d12</color>
