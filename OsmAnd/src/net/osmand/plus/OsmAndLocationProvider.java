@@ -103,6 +103,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private float[] mRotationM =  new float[9];
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
+	private static final long AGPS_TO_REDOWNLOAD  = 16 * 60 * 60 * 1000; // 16 hours
 
 
 
@@ -221,6 +222,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+		if(app.getSettings().isInternetConnectionAvailable()) {
+			long time = System.currentTimeMillis();
+			if(time - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
+				redownloadAGPS();
+				app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
+			}
+		}
 		service.addGpsStatusListener(getGpsStatusListener(service));
 		try {
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
@@ -242,6 +250,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				Log.d(PlatformUtil.TAG, provider + " location provider not available"); //$NON-NLS-1$
 			}
 		}
+	}
+	
+	public void redownloadAGPS() {
+		try {
+			final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+			service.sendExtraCommand(LocationManager.GPS_PROVIDER,"delete_aiding_data", null);
+			Bundle bundle = new Bundle();
+			service.sendExtraCommand("gps", "force_xtra_injection", bundle);
+			service.sendExtraCommand("gps", "force_time_injection", bundle);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 	private Listener getGpsStatusListener(final LocationManager service) {
@@ -846,5 +866,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		return true;
 	}
+
+	
 
 }

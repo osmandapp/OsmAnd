@@ -157,6 +157,7 @@ public class MapActivity extends AccessibleActivity {
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();
+		getMyApplication().getLocationProvider().redownloadAGPS();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -191,6 +192,7 @@ public class MapActivity extends AccessibleActivity {
 		if (!settings.isLastKnownMapLocation()) {
 			// show first time when application ran
 			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation();
+			mapViewTrackingUtilities.setMapLinkedToLocation(true);
 			if (location != null) {
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 				mapView.setIntZoom(14);
