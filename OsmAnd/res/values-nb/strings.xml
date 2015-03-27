@@ -1268,4 +1268,8 @@
 	<string name="local_osm_changes_upload_all_confirm">Du kommer til å laste opp %1$d endringer til OSM. Er du sikker?</string>
     <string name="confirmation_to_clear_history">Vil du slette hele historikken?</string>
     <string name="delay_to_start_navigation">Hopp over ruteplanlegging</string>
-    </resources>
+    <string name="welmode_download_maps">Last ned kart</string>
+	<string name="welcome_select_region">Velg region</string>
+	<string name="welcome_header">Velkommen</string>
+    <string name="mark_to_delete">Merk for å slette</string>
+	</resources>
