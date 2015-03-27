@@ -1984,4 +1984,5 @@
 	<string name="welcome_select_region">Vælg region</string>
 	<string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd anvender offline kort og navigation!</string>
+	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af hastighed kamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ansvaret, hvis du overtræder loven. Venligst klik på Ja, hvis du er berettiget til at bruge denne funktion.</string>
 	</resources>
