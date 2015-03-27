@@ -992,7 +992,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Точка парковки</string>
-  <string name="osmand_parking_plugin_description">Этот плагин был разработан для использования OsmAnd и позволяет легко запоминать место парковки вашего автомобиля.</string>
+  <string name="osmand_parking_plugin_description">Плагин парковочное место позволит вам легко запомнить, когда автомобиль был припаркован и сколько времени осталось, если парковка ограничена по времени. Вы можете найти место и время парковки на карточке домашней страницы и на карте с помощью виджета.\nТак же он добавляет уведомление в календарь, в случае, если вы хотите получить напоминание о нём.</string>
   <string name="osmand_parking_plugin_name">Парковочное место</string>
   <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
   <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
