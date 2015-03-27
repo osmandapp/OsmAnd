@@ -689,5 +689,5 @@
 		<string name="poi_medical_supply">Fournitures médicales</string>
 	<string name="poi_aerialway_transport">Transport aérien</string>
 	<string name="poi_transport_construction">Construction de moyen de transport</string>
-		<string name="poi_power">Puissance</string>
+		<string name="poi_power">Source d\'énergie</string>
 		</resources>
