@@ -1127,7 +1127,7 @@
     <string name="distance_measurement_clear_route">清除所有的標點</string>
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
-	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
+	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的中途點已採取了最佳化排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
     <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
@@ -1952,4 +1952,9 @@
     <string name="osm_changes_added_to_local_edits">OSM 變更已加到本機更改</string>
    	<string name="mark_to_delete">刪除標記</string>
 	<string name="current_route">目前的路線</string>
-    </resources>
+    <string name="welmode_download_maps">下載地圖</string>
+	<string name="welcome_select_region">選擇您所在的地區</string>
+	<string name="welcome_text">OsmAnd 允許您使用地圖和離線導航！</string>
+	<string name="welcome_header">歡迎</string>
+    <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請您只在有資格時，才按下 \"是\" 使用此一功能。</string>
+	</resources>
