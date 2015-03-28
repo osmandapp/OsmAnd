@@ -155,6 +155,7 @@
             android:layout_gravity="top|center"
             android:layout_marginTop="@dimen/map_button_margin"
             android:background="@drawable/btn_round"
+            android:visibility="gone"
             android:orientation="vertical" >
 
             <ImageView

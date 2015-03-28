@@ -19,7 +19,6 @@ import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
@@ -148,6 +147,10 @@ public class IntermediatePointsDialog {
 								
 								if(cll != null) {
 									LatLon ll = new LatLon(cll.getLatitude(), cll.getLongitude());
+									start = TargetPoint.create(ll, null);
+								} else if(app.getTargetPointsHelper().getPointToStart() != null) {
+									TargetPoint ps = app.getTargetPointsHelper().getPointToStart();
+									LatLon ll = new LatLon(ps.getLatitude(), ps.getLongitude());
 									start = TargetPoint.create(ll, null);
 //								} else if(activity instanceof MapActivity) {
 //									LatLon ll = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
