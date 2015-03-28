@@ -113,15 +113,15 @@
 	</string>
   <string name="update_poi_does_not_change_indexes">Wijzigingen aan interessepunten hebben geen invloed op de gedownloade kaartbestanden, maar worden opgeslagen in een lokaal bestand.</string>
   <string name="local_openstreetmap_uploading">Uploaden…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} interessepunten/Bugs zijn ge-upload</string>
+  <string name="local_openstreetmap_were_uploaded">{0} Interessepunten/Notities zijn ge-upload</string>
   <string name="local_openstreetmap_uploadall">Upload alle</string>
   
   
   <string name="local_openstreetmap_upload">Upload wijziging naar OSM</string>
   <string name="local_openstreetmap_delete">Wis de wijziging</string>
   <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap wijziging:</string>
-  <string name="local_openstreetmap_settings">Bewaarde gegevens voor OSM</string>
-  <string name="local_openstreetmap_settings_descr">Beheer interessepunten en bugs die in OsmAnd zijn bewaard</string>
+  <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM Interessepunten/Notities</string>
+  <string name="local_openstreetmap_settings_descr">Beheer OSM Interessepunten/Notities die lokaal zijn bewaard</string>
   
   
   <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking</string>
@@ -534,7 +534,7 @@
   <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
   <string name="layer_yandex_traffic">Yandex Traffic</string>
   <string name="layer_route">Route</string>
-  <string name="layer_osm_bugs">OSM bugs</string>
+  <string name="layer_osm_bugs">OSM Notities (online)</string>
   <string name="layer_transport">OV-haltes</string>
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Kaartbron…</string>
@@ -1441,7 +1441,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Ondersteuning voor OSM-notities 
     </string>
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
-    <string name="intermediate_items_sort_return">Volgorde van de tussenpunten is aangepast voor de beste route naar de bestemming.</string>
+    <string name="intermediate_items_sort_return">De tussenliggende routepunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw bestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
     <string name="please_select_address">Kies eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
