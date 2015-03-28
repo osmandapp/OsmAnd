@@ -103,7 +103,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setTitle(R.string.agps_info);
 		if (agpsLastDonwloaded != null) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(agpsLastDonwloaded))));
+			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(agpsLastDonwloaded)));
 		} else {
 			pref.setSummary(getString(R.string.agps_data_last_downloaded, "null",
 					"null"));
