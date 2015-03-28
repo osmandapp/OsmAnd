@@ -95,9 +95,11 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 	
 	public void drawBitmapInCenter(Canvas canvas, int x, int y, float density) {
-		canvas.translate(x, y);
+		int dx = x - getIntrinsicWidth() / 2;
+		int dy = y - getIntrinsicHeight() / 2;
+		canvas.translate(dx, dy);
 		draw(canvas);
-		canvas.translate(-x, -y);
+		canvas.translate(-dx, -dy);
 //		float bmpRad = 10 * density;
 //		bmpDest.set(x - bmpRad, y - bmpRad, x + bmpRad, y + bmpRad);
 //		canvas.drawCircle(x, density + y, bmpRad + 3 * density, paintOuter);

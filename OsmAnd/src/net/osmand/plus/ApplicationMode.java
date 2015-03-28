@@ -21,7 +21,7 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
-			icon(R.drawable.ic_browse_map, R.drawable.app_mode_globus_dark).reg();
+			icon(R.drawable.ic_browse_map, R.drawable.ic_world_globe_dark).reg();
 	
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).arrivalDistance(90).carLocation().
 			icon(R.drawable.ic_car, R.drawable.ic_action_car_dark).reg();
@@ -33,7 +33,7 @@ public class ApplicationMode {
 			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_dark).reg();
 	
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.ic_aircraft,R.drawable.ic_action_aircraft_dark).reg();
+			icon(R.drawable.ic_aircraft,R.drawable.ic_action_aircraft).reg();
 	
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
 			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_dark).reg();
@@ -148,7 +148,7 @@ public class ApplicationMode {
 	
 	private ApplicationMode parent;
 	private int iconId = R.drawable.ic_browse_map;
-	private int smallIconDark = R.drawable.app_mode_globus_dark ;
+	private int smallIconDark = R.drawable.ic_world_globe_dark ;
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
