@@ -149,7 +149,7 @@
   
   <string name="search_position_current_location">Position actuelle</string>
   <string name="search_position_map_view">Centre de la carte</string>
-  <string name="select_search_position">Origine :</string>
+  <string name="select_search_position">Autour de :</string>
   <string name="context_menu_item_search">Rechercher autour de ce point</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
 \n\t- Gestionnaire de données hors-ligne (téléchargement, suppression, sauvegarde des données hors-ligne directement dans OsmAnd)
@@ -564,7 +564,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Sélectionnez un niveau de zoom maximum pour le téléchargement des cartes (tuiles) en ligne</string>
-  <string name="route_general_information">Distance totale : %1$s, temps de trajet estimé : %2$d h %3$d m.</string>
+  <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
   <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
@@ -775,11 +775,11 @@
   
   <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier de données d\'OsmAnd.</string>
   <string name="osmand_background_plugin_description">Afficher les préférences afin d\'activer le suivi et la navigation durant la mise en veille (réveille périodique du GPS).</string>
-  <string name="osmand_accessibility_description">Afficher la configuration pour activer les options d\'accessibilité.</string>
+  <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
   
   
   
-  <string name="osmand_development_plugin_description">Ce greffon permet de gérer les paramètres de développement et de débogage tels que la simulation de navigation ou l\'affichage des performances du rendu.</string>
+  <string name="osmand_development_plugin_description">Ce greffon permet de gérer les paramètres de développement et de débogage tels que la simulation de navigation ou l\'affichage des performances du rendu. Ces paramètres sont conçus pour les développeurs et peuvent être ignorés par les autres utilisateurs.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   
   <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des paramètres avancés et des fonctionnalités supplémentaires.</string>
@@ -883,7 +883,7 @@
   <string name="route_kl">Serrez à gauche et continuez</string>
   <string name="route_kr">Serrez à droite et continuez</string>
   <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
-  <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
+  <string name="rendering_attr_noPolygons_name">Masquer les polygones</string>
   <string name="rendering_attr_appMode_name">Profil pour l\'affichage</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
   <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (données courbes de niveau requises)</string>
@@ -915,7 +915,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Emplacement de stationnement</string>
-  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement où est garé votre véhicule.</string>
+  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, le cas échéant, d\'indiquer la durée de stationnement restante.</string>
   <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
   <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
@@ -925,7 +925,7 @@
   <string name="global_app_allocated_memory_descr">Mémoire allouée %1$s MB (limite Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Mémoire allouée</string>
   <string name="native_app_allocated_memory_descr">Total de la mémoire allouée originaire de l\'application %1$s MB (Dalvik %2$s MB, autre %3$s MB). Mémoire proportionnelle %4$s MB (limite Android %5$s MB, Dalvik %6$s MB).</string>
-  <string name="native_app_allocated_memory">Total de la mémoire d\'origine</string>
+  <string name="native_app_allocated_memory">Total de la mémoire interne</string>
   
   <string name="osmand_parking_hours">Heures</string>
   <string name="osmand_parking_minutes">Minutes</string>
@@ -1059,7 +1059,7 @@
     <string name="poi_filter_accomodation">Hébergement</string>
     <string name="map_widget_monitoring_services">Services de suivi</string>
 	<string name="no_route">Pas de route</string>
-	<string name="delete_target_point">Supprimer l\'étape</string>
+	<string name="delete_target_point">Souhaitez-vous supprimer ce point ?</string>
 	<string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
@@ -1090,7 +1090,7 @@
     <string name="map_widget_max_speed">Limite de vitesse</string>
     <string name="tip_altitude_offset">Correction de l\'altitude</string>
 	<string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Cacher les limites administratives</string>
+    <string name="rendering_attr_noAdminboundaries_name">Masquer les limites administratives</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
 	<string name="tip_altitude_offset_t">"La plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction en fonction de la position courante.
 \n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage automatique  de l\'altitude dans ce référentiel.
@@ -1113,7 +1113,7 @@
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors-ligne d\'OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes hors-ligne d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.\n\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1294,7 +1294,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="download_using_mobile_internet">Le WiFi n\'est pas activé. Voulez-vous effectuer le téléchargement avec la connexion Internet actuelle ?</string>
     <string name="cancel_route">Arrêter la navigation</string>
     <string name="cancel_navigation">Arrêter la navigation</string>
-    <string name="clear_destination">Supprimer la destination</string>
+    <string name="clear_destination">Suppression</string>
     <string name="other_location">Autre</string>
     <string name="files_limit">Encore %1$d téléchargements possibles</string>
     <string name="available_downloads_left">Vous pouvez encore télécharger %1$d fichier(s).</string>
@@ -1375,13 +1375,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="maps_define_edit">Définir/Éditer…</string>
 	<string name="announce_gpx_waypoints">Annoncer les points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
-	<string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
+	<string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires</string>
     <string name="context_menu_item_directions_to">Aller vers ce point</string>
     <string name="context_menu_item_directions_from">Partir de ce point</string>
     <string name="route_descr_map_location">Carte : </string>
     <string name="map_widget_fps_info">Informations de débogage du rendu</string>
 	<string name="route_to">À :</string>
-    <string name="route_via">Via :</string>
+    <string name="route_via">Par :</string>
     <string name="route_from">De :</string>
 	
 	
@@ -1563,10 +1563,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
 <string name="interrupt_music">Interrompre la musique</string>
 <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
-<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
+<string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-	<string name="osmo_plugin_description">"Suivi avancé OpenStreetMap en temps réel, voir http://osmo.mobi. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent. Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
+	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Vous pouvez ainsi créer des groupes anonymes, partager vos positions et communiquer ensemble. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
 	<string name="osmo_plugin_name">OsMo surveillance</string>
 	<string name="osmo_settings">OsMo surveillance</string>
 	
@@ -1591,7 +1591,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
 <string name="shared_string_share">Partager</string>
-<string name="share_fav_subject">Favoris partagés via OsmAnd</string>
+<string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
 <string name="tip_recent_changes_1_8_alpha">"Nouveautés de la version 1.8 : * Calcul d\'itinéraire entre les points d\'une trace GPX * Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux) * Prise en charge de l\'importation des fichiers GPX/KML et conversion KML en GPX * Migration des traces GPX dans \'Mes favoris\' * Possibilité de scinder une trace GPX en sections de distance définie, et de consulter la vitesse et les variations d\'altitude * Lancement automatique de la navigation après un certain temps "</string>
     <string name="hours_ago">heures avant</string>
@@ -1682,7 +1682,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="gpx_info_diff_altitude">Amplitude altimétrique : %1$s</string>
 <string name="gpx_info_asc_altitude">Dénivelés : %1$s</string>
     <string name="gpx_timespan">Durée : %1$s</string>
-<string name="gpx_timemoving">Durée de mouvement : %1$s</string>
+<string name="gpx_timemoving">Durée de déplacement : %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s points</string>
     <string name="gpx_selection_point">Point %1$s</string>
@@ -1785,14 +1785,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_more">Plus…</string>
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
     
-    <string name="waypoints">Points de passage</string>
-    <string name="targets">Destinations</string>
+    <string name="waypoints">Itinéraire</string>
+    <string name="targets">Itinéraire</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Annoncer les favoris proches</string>
     <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Enregistrez vos traces grâce au bouton sur la carte. Affichez les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
+    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
     <string name="record_plugin_name">Enregistrez votre itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1946,11 +1946,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
 		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
 	</string>
-	<string name="plugin_touringview_descr">Activer cette vue bascule vers le style \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
-		\n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules.
-		\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
-		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
-	</string>
+	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
+\n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage des pistes cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
+\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_name">Grand tourisme</string>
 	<string name="plugin_nautical_descr">Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
 		\n\nUne carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".
@@ -2006,4 +2004,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="welcome_text">OsmAnd utilise des cartes locales et permet la navigation hors ligne !</string>
 	<string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
-	</resources>
+	<string name="agps_info">Données A-GPS</string>
+	<string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
+    </resources>
