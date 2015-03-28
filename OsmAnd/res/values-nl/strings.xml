@@ -842,7 +842,7 @@
   
   
   
-  <string name="osmand_development_plugin_description">Toont de opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
+  <string name="osmand_development_plugin_description">Deze plug-in toont de instellingen voor ontwikkel- en debug-opties, zoals route test en simulatie, scherm weergave prestaties, en spraaksturing. Deze instellingen zijn bedoeld voor ontwikkelaars en zijn niet nodig voor normaal gebruik.</string>
   <string name="plugins_screen">Plugin-manager</string>
   
   <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen</string>
