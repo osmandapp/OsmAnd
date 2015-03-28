@@ -1947,6 +1947,6 @@
 	<string name="welcome_text">OsmAnd позволяет использовать карты и автономную навигацию!</string>
 	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальные изменения</string>
    	<string name="confirm_usage_speed_cameras">Во многих странах (Германии, Франции, Италии и других) использование предупреждений о камерах контроля скорости не разрешено законом. OsmAnd не несет никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите \"Да\", только если вы имеете право использовать эту функцию.</string>
-	<string name="agps_info">Информация о A-GPS</string>
-	<string name="agps_data_last_downloaded">Последние загруженные данные A-GPS: %1$s</string>
+	<string name="agps_info">Информация A-GPS</string>
+	<string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
     </resources>
