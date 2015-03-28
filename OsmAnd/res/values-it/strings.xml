@@ -913,7 +913,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto di parcheggio</string>
-  <string name="osmand_parking_plugin_description">Questo plugin è stato sviluppato per utilizzare OsmAnd per memorizzare facilmente la posizione di parcheggio dell\'auto.</string>
+  <string name="osmand_parking_plugin_description">"Il plugin posizione di parcheggio ti permette di memorizzare facilmente quando l\'auto è stata stata parcheggiata e quanto tempo rimane, se il parcheggio è a tempo. 
+\nPuoi trovare il luogo di parcheggio e il tempo rimanente nella scheda del plugin e nel widget sulla mappa.\nAggiunge una notifica al calendario se vuoi che te lo ricordi."</string>
   <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
   <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
   <string name="context_menu_item_delete_parking_point">Elimina un marcatore di parcheggio</string>
@@ -2156,4 +2157,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="agps_data_last_downloaded">A-GPS ultimo aggiornamento dati: %1$s</string>
     <string name="welmode_download_maps">Scarica mappe</string>
 	<string name="welcome_select_region">Seleziona la tua regione</string>
+	<string name="confirm_usage_speed_cameras">In molti paesi (Germania, Francia, Italia, e altri) l\'utilizzo degli avvertimenti di presenza di autovelox non è legale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di cliccare si solo in caso di utilizzo autorizzato di questa funzionalità.</string>
+	<string name="welcome_text">OsmAnd ti permette di utilizzzare mappe e navigazione offline!</string>
+	<string name="welcome_header">Benvenuto</string>
+    <string name="current_route">Percorso attuale</string>
+    <string name="osm_changes_added_to_local_edits">Modifiche a OsmAnd aggiunte alle modifiche locali</string>
+   	<string name="mark_to_delete">Marca da eliminare</string>
+	<string name="osmo_grop_name_length_alert">I nomi dei gruppi devono essere almeno di 3 simboli!</string>
 	</resources>
