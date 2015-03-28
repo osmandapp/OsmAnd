@@ -101,11 +101,11 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		long agpsLastDownloaded = settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get();
 		pref = new Preference(this);
 		pref.setTitle(R.string.agps_info);
-		if (agpsLastDownloaded != null) {
+		if (agpsLastDownloaded != 0L) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(agpsLastDownloaded)));
 		} else {
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, "null"));
+			pref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
 		}
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
