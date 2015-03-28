@@ -1911,4 +1911,9 @@
 	<string name="local_osm_changes_upload_all_confirm">%1$d módosítást fogsz feltölteni OSM-re. Biztos vagy benne?</string>
     <string name="osmand_parking_overdue">lejár</string>
 	<string name="waypoint_visit_before">Megtekintés ez előtt:</string>
-    </resources>
+    <string name="agps_info">A-GPS információk</string>
+	<string name="agps_data_last_downloaded">Legutóbb letöltött A-GPS adatok: %1$s</string>
+    <string name="welcome_header">Üdvözöljük</string>
+    <string name="osm_changes_added_to_local_edits">Az OSM változások hozzáadva a helyi változásokhoz</string>
+   	<string name="mark_to_delete">Megjelölés törlésre</string>
+	</resources>
