@@ -130,4 +130,31 @@
 	<string name="poi_organic">自然食品(Organic food)</string>
 	<string name="poi_outdoor">アウトドア用品店(Outdoor store)</string>
 	<string name="poi_paint">ペンキ・塗装屋(Paint shop)</string>
+	<string name="poi_medical_supply">医療器具(Medical supply)</string>
+	<string name="poi_pet">ペットショップ(Pet shop)</string>
+	<string name="poi_second_hand">リサイクルショップ・中古屋(Second hand store)</string>
+	<string name="poi_ship_chandler">船舶雑貨商(Ship chandler)</string>
+	<string name="poi_sports">スポーツ用品(Sporting goods)</string>
+	<string name="poi_stationery">文房具店(Stationery shop)</string>
+	<string name="poi_tableware">食器店(Tableware shop)</string>
+	<string name="poi_ticket">チケットショップ(Ticket shop)</string>
+	<string name="poi_tobacco">煙草屋(Tobacco store)</string>
+	<string name="poi_toys">おもちゃ屋(Toys store)</string>
+	<string name="poi_trade">交易所(Trading post)</string>
+	<string name="poi_vacuum_cleaner">掃除機専門店(Vacuum cleaner store)</string>
+	<string name="poi_variety_store">雑貨店(Variety store)</string>
+	<string name="poi_video">ビデオ屋(Video store)</string>
+	<string name="poi_window_blind">窓＆ブラインド店(Window blind store)</string>
+	<string name="poi_department_store">百貨店(Department store)</string>
+	<string name="poi_electronics">電器屋(Electronics store)</string>
+	<string name="poi_car">車両販売店(Car shop)</string>
+	<string name="poi_car_parts">車用品(Car parts)</string>
+	<string name="poi_cosmetics">化粧品(Cosmetics)</string>
+	<string name="poi_marketplace">市場(Marketplace)</string>
+	<string name="poi_sewing">毛皮・反物・呉服店(Dry goods store)</string>
+
+	<string name="poi_police">警察(Police)</string>
+	<string name="poi_fire_station">消防署(Fire Station)</string>
+	<string name="poi_emergency_phone">非常電話(Emergency phone)</string>
+	<string name="poi_fire_hydrant">消火栓(Fire hydrant)</string>
 	</resources>
