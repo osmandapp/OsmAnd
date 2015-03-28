@@ -858,7 +858,7 @@
 	\n\t- *Gebruiksvriendelijkheid en interface*
 	\n\t	- Op vele punten verbeterd		
 	</string>
-  <string name="osm_editing_plugin_description">Via deze plugin kan OsmAnd gebruikt worden om bij te dragen aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of wijzigen van OSM-bugs, en opgenomen GPX-tracks bij te dragen. Voor het gebruik van deze functionaliteit zijn OSM-referenties vereist.</string>
+  <string name="osm_editing_plugin_description">Via deze plugin kan OsmAnd gebruikt worden om bij te dragen aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-bugs, en opgenomen GPX-tracks bij te dragen. OSM is een wereldwijde communitygedreven, publiek domein karteringsproject. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM aanmeldgegevens zijn ingevuld in de app.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
   <string name="search_position_current_location_found">Positie (Gevonden)</string>
@@ -917,7 +917,7 @@
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">Deze plug-in is ontwikkeld voor OsmAnd om eenvoudig de locatie van uw geparkeerde auto vast te leggen.</string>
+  <string name="osmand_parking_plugin_description">Met de Parkeerplaats plug-in kan eenvoudig de locatie waar de auto geparkeerd staat en de gekozen parkeertijd vastgelegd worden. U kunt uw parkeerplaats en resterende parkeertijd vinden op het kaart scherm en op de kaart widget.\nIndien gewenst kan het een herinnering plaatsen in uw agenda.</string>
   <string name="osmand_parking_plugin_name">Locatie van uw parkeerplaats</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
