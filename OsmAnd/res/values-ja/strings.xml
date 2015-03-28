@@ -25,9 +25,9 @@
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
      <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
-     <string name="overlay_transparency_descr">オーバーレイの透明度を設定</string>
-     <string name="overlay_transparency">オーバーレイの透明度</string>
-     <string name="map_transparency_descr">ベースマップ透明度を設定</string>
+     <string name="overlay_transparency_descr">オーバーレイマップの透明度を設定</string>
+     <string name="overlay_transparency">オーバーレイ透明度</string>
+     <string name="map_transparency_descr">ベースマップの透明度を設定</string>
      <string name="map_transparency">ベースマップ透明度</string>
      <string name="modify_transparency">透明度を変更</string>
      <string name="layer_underlay">アンダーレイマップ…</string>
@@ -178,13 +178,13 @@ OsmAnd バージョンがインストールされています。全てのオフ�
 新しい方にインポートしてください。</string>
      <string name="build_installed">ビルド {0} はインストール
 されました ({1})。</string>
-     <string name="downloading_build">ビルドをダウンロード中…</string>
+     <string name="downloading_build">指定ビルドをダウンロード中…</string>
      <string name="install_selected_build">本当にOsmAndをインストールしますか？ - {0} から {1} {2} MB</string>
      <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
      <string name="loading_builds">OsmAnd ビルドをロード中…</string>
      <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
 選んでください</string>
-     <string name="contribution_activity">貢献バージョン用の特別な画面</string>
+     <string name="contribution_activity">人柱版用スペシャル画面</string>
 
      <string name="gps_status_app_not_found">GPSステータスアプリケーションが インストールされていません。マーケットで探しますか？</string>
 
@@ -712,7 +712,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_destination_point">目的地として設定</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
     <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
-    <string name="intermediate_items_sort_return">中間経由地点は目的地へのルートの検索時にルートの最適化のためにソートし直されました。</string>
+    <string name="intermediate_items_sort_return">中間経由地点は現在地から目的地へのルート最適化のために順序が変更されました。</string>
     <string name="intermediate_items_sort_by_distance">ソート(ドア・ツー・ドア)</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
     <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
@@ -817,8 +817,8 @@ POIの更新は利用できません</string>
     <string name="recording_open_external_player">外部プレイヤーで開く</string>
     <string name="recording_delete_confirm">この記録を削除しますか？</string>
     <string name="recording_unavailable">利用できません</string>
-    <string name="recording_context_menu_arecord">音声メモをとる</string>
-    <string name="recording_context_menu_vrecord">ビデオメモをとる</string>
+    <string name="recording_context_menu_arecord">音声を録音</string>
+    <string name="recording_context_menu_vrecord">ビデオを撮影</string>
     <string name="layer_recordings">記録レイヤー</string>
     <string name="recording_can_not_be_played">記録されたファイルは再生できませんでした</string>
     <string name="recording_context_menu_delete">記録を削除</string>
@@ -1393,7 +1393,7 @@ POIの更新は利用できません</string>
 		\n\t* ログウィジェットの有効／無効切替
 	</string>
 	<string name="rendering_attr_noPolygons_description">マップ上の土地の特徴を透明にする</string>
-	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏層、等々、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップマップにアクセスし、レイヤーに反映することができます。\n\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。\n\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります) "</string>
+	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏層など、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップにアクセスし、レイヤーに反映することができます。\n\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。\n\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります) "</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"0.8.0での変更点:
 \n\t- *プラグイン機能*
@@ -1415,7 +1415,7 @@ POIの更新は利用できません</string>
 	<string name="tip_recent_changes_0_7_1_t">"0.7.1での変更点:
 \n\t- オフラインPOI編集
 \n\t- オンライン追跡オプション - 定期的にWebサービスに座標を送信(セットアップ方法はOSMAndのWebページのHowToをご覧下さい)
-\n\t- マップ上に記録されたトラックを表示する
+\n\t- マップ上に記録された経路を表示する
 \n\t- 方向を検知してターンを間違えた場合や行きすぎた場合に「Uターン」を指示するように追加
 \n\t- 新しい音声指示として「ルートを再計算しました」を追加
 \n\t- 100メートル内に迫ったターンの場合、ターン指示の矢印の色を変更
@@ -1766,7 +1766,7 @@ POIの更新は利用できません</string>
     <string name="index_name_italy">ヨーロッパ - イタリア</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路セグメントでOsmAndルートを計算する</string>
-    <string name="use_displayed_track_for_navigation">あなたはナビゲーションに表示されたトラックを使用しますか？</string>
+    <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
     <string name="rendering_attr_alpineHiking_name">トレッキングビュー</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
     <string name="rendering_attr_osmcTraces_name">ハイキング用シンボルを重ねて表示</string>
@@ -1806,7 +1806,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
-    <string name="record_plugin_description">"このプラグインはマップ画面のGPX記録ウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録されたトラックは、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
+    <string name="record_plugin_description">"このプラグインはマップ画面のGPX記録ウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
     <string name="record_plugin_name">旅程の記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
@@ -1827,7 +1827,7 @@ POIの更新は利用できません</string>
     <string name="traffic_warning">交通警告</string>
 	<string name="local_index_description">選択解除または削除するには長押し、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
 	<string name="speed_limit_exceed">制限速度の許容範囲</string>
-	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択。</string>
+	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名は文字列に絵文字を含んでいるため、ファイルとして正常に保存するため %1$sという名前に変更されました。</string>
     <string name="print_route">経路印刷</string>
     <string name="fav_point_dublicate">お気に入り地点の重複</string>
@@ -1837,11 +1837,11 @@ POIの更新は利用できません</string>
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
     <string name="osmo_use_https_descr">サーバーにセキュリティで保護された接続を使用</string>
-    <string name="osmo_use_https">HTTPSを使用します</string>
+    <string name="osmo_use_https">HTTPSを使用</string>
 	
 	<string name="rendering_attr_tramTrainRoutes_name">路面電車や鉄道での経路</string>
 	<string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
-    <string name="wake_on_voice">画面の電源を入れる</string>
+    <string name="wake_on_voice">画面の電源をオン</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合)オンにする</string>
     <string name="shared_string_never">しない</string>
     
@@ -1878,7 +1878,7 @@ POIの更新は利用できません</string>
 	<string name="parking_place">駐車場</string>
     <string name="remove_the_tag">タグを削除</string>
     <string name="gps_status">GPSステータス</string>
-    <string name="version_settings_descr">nightlyビルドをダウンロード</string>
+    <string name="version_settings_descr">nightlyビルドをダウンロード(nightly、beta版専用機能)</string>
     <string name="version_settings">ビルド</string>
     <string name="rendering_attr_streetLighting_name">道路の明滅</string>
     <string name="proxy_pref_title">プロキシ</string>
@@ -1973,7 +1973,7 @@ POIの更新は利用できません</string>
     <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します(特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク)。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
 	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
-    <string name="plugin_nautical_descr">"このプラグインはOsmAnd map and navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
+    <string name="plugin_nautical_descr">"このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
 \n\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。 "</string>
 	<string name="plugin_ski_name">スキーマップ表示</string>
 	<string name="plugin_ski_descr">"このプラグインは、あなたの指先で簡単にダウンヒルスキー場、クロスカントリースキー、アルペンスキールート、ケーブルカーやスキーリフトについての詳細を置けます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。\n\nこの表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。 "</string>
@@ -2000,4 +2000,12 @@ POIの更新は利用できません</string>
 <string name="osm_changes_added_to_local_edits">OSMにローカルで変更された点を追加します</string>
    	<string name="mark_to_delete">削除用にマーク</string>
 	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも記号3文字以上にする必要があります！</string>
+	<string name="welmode_download_maps">マップダウンロード</string>
+	<string name="welcome_select_region">お住まいの地域を選択</string>
+	<string name="welcome_text">OsmAndは、オフラインで地図の閲覧とナビゲーションを使用することができます！</string>
+	<string name="welcome_header">ようこそ</string>
+    <string name="current_route">現在のルート</string>
+    <string name="agps_info">A-GPS情報</string>
+	<string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
+    <string name="confirm_usage_speed_cameras">国によっては法律によりスピードカメラ警告の使用ができません。(ドイツ、フランス、イタリア、その他の国)。OsmAndは、法律に違反した場合の責任は一切負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
 	</resources>
