@@ -6,7 +6,6 @@ import net.osmand.plus.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -39,8 +38,6 @@ public class FavoriteImageDrawable extends Drawable {
 		mgr.getDefaultDisplay().getMetrics(dm);
 		density = dm.density;
 		drawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_fav_light);
-		bmpDest = new RectF(); 
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
@@ -98,11 +95,14 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 	
 	public void drawBitmapInCenter(Canvas canvas, int x, int y, float density) {
-		float bmpRad = 10 * density;
-		bmpDest.set(x - bmpRad, y - bmpRad, x + bmpRad, y + bmpRad);
-		canvas.drawCircle(x, density + y, bmpRad + 3 * density, paintOuter);
-		canvas.drawCircle(x, density + y, bmpRad + 2 * density, paintInnerCircle);
-		canvas.drawBitmap(bmp, null, bmpDest, paintBmp);
+		canvas.translate(x, y);
+		draw(canvas);
+		canvas.translate(-x, -y);
+//		float bmpRad = 10 * density;
+//		bmpDest.set(x - bmpRad, y - bmpRad, x + bmpRad, y + bmpRad);
+//		canvas.drawCircle(x, density + y, bmpRad + 3 * density, paintOuter);
+//		canvas.drawCircle(x, density + y, bmpRad + 2 * density, paintInnerCircle);
+//		canvas.drawBitmap(bmp, null, bmpDest, paintBmp);
 	}
 
 	@Override
