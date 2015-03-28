@@ -992,7 +992,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Точка парковки</string>
-  <string name="osmand_parking_plugin_description">Этот плагин был разработан для использования OsmAnd и позволяет легко запоминать место парковки вашего автомобиля.</string>
+  <string name="osmand_parking_plugin_description">Плагин парковочное место позволит вам легко запомнить, когда автомобиль был припаркован и сколько времени осталось, если парковка ограничена по времени. Вы можете найти место и время парковки на карточке домашней страницы и на карте с помощью виджета.\nТак же он добавляет уведомление в календарь, в случае, если вы хотите получить напоминание о нём.</string>
   <string name="osmand_parking_plugin_name">Парковочное место</string>
   <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
   <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
@@ -1946,4 +1946,5 @@
     <string name="mark_to_delete">Отметить для удаления</string>
 	<string name="welcome_text">OsmAnd позволяет использовать карты и автономную навигацию!</string>
 	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальные изменения</string>
-   	</resources>
+   	<string name="confirm_usage_speed_cameras">Во многих странах (Германии, Франции, Италии и других) использование предупреждений о камерах контроля скорости не разрешено законом. OsmAnd не несет никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите \"Да\", только если вы имеете право использовать эту функцию.</string>
+	</resources>

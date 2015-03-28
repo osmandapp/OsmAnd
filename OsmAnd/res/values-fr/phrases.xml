@@ -670,4 +670,24 @@
 	
 	<string name="poi_railway_buffer_stop">Heurtoir ferroviaire</string>
 	<string name="poi_shop_food">Magasin alimentaire</string>
-	</resources>
+	<string name="poi_road_obstacle">Route barrée</string>
+		<string name="poi_public_transport">Transport public</string>
+		<string name="poi_air_transport">Transport aérien</string>
+		<string name="poi_water_transport">Transport maritime</string>
+		<string name="poi_bicycle_transport">Transport en vélo</string>
+		<string name="poi_communication">Communication</string>
+		<string name="poi_sightseeing">Point remarquable</string>
+		<string name="poi_internet_access">Accès Internet</string>
+	<string name="poi_club">Club</string>
+	<string name="poi_cafe_and_restaurant">Café et restaurant</string>
+	<string name="poi_craft">Artisanat</string>
+	<string name="poi_filling_station">Station de remplissage</string>
+		<string name="poi_personal_transport">Transport individuel</string>
+		<string name="poi_water_supply">Fournisseur d\'eau</string>
+		<string name="poi_trash_disposal">Traitement des ordures ménagères</string>
+	<string name="poi_accomodation">Hébergement</string>
+		<string name="poi_medical_supply">Fournitures médicales</string>
+	<string name="poi_aerialway_transport">Transport aérien</string>
+	<string name="poi_transport_construction">Construction de moyen de transport</string>
+		<string name="poi_power">Source d\'énergie</string>
+		</resources>

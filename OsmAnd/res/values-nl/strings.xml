@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -2140,4 +2141,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="confirmation_to_clear_history">Wil je de hele geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
 	<string name="shared_string_not_use">Niet gebruikt</string>
+	<string name="confirm_usage_speed_cameras">In sommige landen (Duitsland, Frankrijk, Italië en meer) is het verboden om waarschuwingen voor snelheidscontroles te gebruiken. Osmand neemt geen verantwoording als u de wet overtreedt. Gebruik deze funtie alleen als dat toegestaan is.</string>
+	<string name="welmode_download_maps">Kaarten downloaden</string>
+	<string name="welcome_select_region">Kies uw regio</string>
+	<string name="welcome_text">Met OsmAnd kunt u offline kaarten gebruiken en navigeren.</string>
+	<string name="welcome_header">Welkom</string>
+    <string name="current_route">Huidige route</string>
+    <string name="osm_changes_added_to_local_edits">OSM-wijzigingen toegevoegd aan lokale wijzigingen</string>
+   	<string name="mark_to_delete">Markeren om te wissen</string>
+	<string name="osmo_grop_name_length_alert">De naam van een groep moet uit minstens 3 tekens bestaan!</string>
 	</resources>

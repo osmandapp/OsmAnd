@@ -104,7 +104,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
 	private static final long AGPS_TO_REDOWNLOAD  = 16 * 60 * 60 * 1000; // 16 hours
-
+	private boolean agpsDownloaded = false;
 
 
 
@@ -225,8 +225,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if(app.getSettings().isInternetConnectionAvailable()) {
 			long time = System.currentTimeMillis();
 			if(time - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
+				agpsDownloaded = false;
 				redownloadAGPS();
-				app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
+				if(agpsDownloaded == true) {
+					app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
+				}
 			}
 		}
 		service.addGpsStatusListener(getGpsStatusListener(service));
@@ -259,6 +262,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			Bundle bundle = new Bundle();
 			service.sendExtraCommand("gps", "force_xtra_injection", bundle);
 			service.sendExtraCommand("gps", "force_time_injection", bundle);
+			agpsDownloaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

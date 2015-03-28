@@ -1140,7 +1140,7 @@
 \n\t* Ta bort SRTM-filer
 \n\t* Stöd för OSM-anteckningar "</string>
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
-    <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
+    <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att optimera deras ordning från aktuell position till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
@@ -1843,4 +1843,9 @@
 	<string name="current_route">Aktuell rutt</string>
     <string name="osm_changes_added_to_local_edits">OSM-ändringar lades till i lokala ändringar</string>
    	<string name="mark_to_delete">Markera för att ta bort</string>
-	</resources>
+	<string name="confirm_usage_speed_cameras">I många länder (Tyskland, Frankrike, Italien och andra) är det inte tillåtet att använda varningar om hastighetskameror. OsmAnd tar inget ansvar om du bryter mot lagen. Klicka på Ja endast om du får använda denna funktion.</string>
+	<string name="welmode_download_maps">Hämta kartor</string>
+	<string name="welcome_select_region">Välj område</string>
+	<string name="welcome_text">OsmAnd låter dig använda kartor och navigering offline!</string>
+	<string name="welcome_header">Välkommen</string>
+    </resources>

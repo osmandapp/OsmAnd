@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -88,15 +89,15 @@
 \n\nSledujte také stránky české podpory osmand.cz "</string>
   <string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
   <string name="local_openstreetmap_uploading">Odesílám …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Chyb bylo odesláno</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Poznámek bylo odesláno</string>
   <string name="local_openstreetmap_uploadall">Odeslat všechny</string>
   
   
   <string name="local_openstreetmap_upload">Odeslat změny do OSM</string>
   <string name="local_openstreetmap_delete">Smazat změnu</string>
   <string name="local_openstreetmap_descr_title">Offline editace POI bodů/chyb v Openstreetmap:</string>
-  <string name="local_openstreetmap_settings">Lokálně uložené POI body/chyby Openstreetmap</string>
-  <string name="local_openstreetmap_settings_descr">Zobrazit a spravovat lokální POI body/chyby Openstreetmap uložené v databázi</string>
+  <string name="local_openstreetmap_settings">Lokálně uložené POI body/poznámky Openstreetmap</string>
+  <string name="local_openstreetmap_settings_descr">Zobrazit a spravovat lokální POI body/poznámkyOpenstreetmap uložené v databázi</string>
   
   
   <string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
@@ -519,7 +520,7 @@
   <string name="layer_yandex_traffic">Yandex doprava</string>
   <string name="layer_route">Cesta</string>
   <string name="shared_string_favorites">Oblíbené</string>
-  <string name="layer_osm_bugs">Chyby OSM</string>
+  <string name="layer_osm_bugs">OSM Poznámky (online)</string>
   <string name="layer_transport">Zastávky</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Zdroj map…</string>
@@ -721,7 +722,7 @@
   <string name="map_tile_source">Zdroj rastrových map</string>
   <string name="map_source">Zdroj map</string>
   <string name="use_internet">Používat internet</string>
-  <string name="show_location">Zobrazit polohu</string>
+  <string name="show_location">Zobrazit mou polohu</string>
   
   
   <string name="show_gps_coordinates_text">Zobrazit GPS souřadnice na mapě</string>
@@ -834,7 +835,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">Pokročilá nastavení pro použití mnoha rastrových map jako základní mapu, překryv nebo podkres. Rastrové mapy lze získat online nebo připravit offline a nakopírovat do datového adresáře OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Pokročilá nastavení pro záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
+  <string name="osmand_background_plugin_description">Zobrazí nastavení na povolení záznamu trasy a navigace v úsporném režimu (při vypnuté obrazovce) pravidelným probouzením GPS zařízení.</string>
   <string name="osmand_accessibility_description">Zobrazí nastavení pro speciální funkce ulehčení přístupu.</string>
   
   
@@ -1244,7 +1245,7 @@
     <string name="context_menu_item_destination_point">Nastavit jako cíl</string>
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
-    <string name="intermediate_items_sort_return">Mezicíle byly lépe utříděny pro zrychlení cesty.</string>
+    <string name="intermediate_items_sort_return">Pořadí mezicílů bylo utříděno, aby měly optimální pořadí na cestě z aktuálního místa do místa určení .</string>
     <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
     <string name="tip_recent_changes_1_4_t">Změny ve verzi 1.4:
 \n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek 

@@ -225,7 +225,7 @@
 	\n\t* Suportu a sas notas de OSM 
     </string>
     <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas citades prus a curtzu</string>
-    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s’andala pro sa destinatzione.</string>
+    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
     <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
     <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas modìficas faddida</string>
@@ -1931,4 +1931,5 @@
 	<string name="welcome_header">Benènnidu</string>
     <string name="current_route">Àndala atuale</string>
     <string name="mark_to_delete">Marca pro burrare</string>
+	<string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox no est permitidu dae sa lege. OsmAnd non si pigat responsabilidades s’in casu tue che l’as a violare. Pro piaghere carca eja petzi si podes impreare custa funtzionalidade.</string>
 	</resources>

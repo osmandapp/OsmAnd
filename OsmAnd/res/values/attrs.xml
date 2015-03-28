@@ -17,9 +17,6 @@
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
 		<attr name="dashboardSearchButtonStyle" format="reference" />
-		<attr name="ic_action_info2" format="reference" />
-		<attr name="ic_action_home2" format="reference" />
-		<attr name="ic_action_marker2" format="reference" />
 		<attr name="search_background" format="reference" />
 		<attr name="switch_ex_background" format="reference" />
 		<attr name="switch_ex_text_color" format="color|reference" />
