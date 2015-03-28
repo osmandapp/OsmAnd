@@ -112,7 +112,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		progressMessage = (TextView) findViewById(R.id.ProgressMessage);
 		progressPercent = (TextView) findViewById(R.id.ProgressPercent);
 		cancel = (ImageView) findViewById(R.id.Cancel);
-		cancel.setImageDrawable(getMyApplication().getIconsCache() .getContentIcon(R.drawable.a_1_navigation_cancel_small_dark));
+		cancel.setImageDrawable(getMyApplication().getIconsCache() .getContentIcon(R.drawable.ic_action_remove_dark));
 		cancel.setOnClickListener(new View.OnClickListener() {
 
 			@Override

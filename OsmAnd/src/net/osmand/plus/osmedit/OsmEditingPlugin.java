@@ -186,7 +186,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.item(R.string.local_index_mi_upload_gpx)
-					.iconColor(R.drawable.ic_action_gup_dark)
+					.iconColor(R.drawable.ic_action_export)
 					.listen(new OnContextMenuClick() {
 
 						@Override

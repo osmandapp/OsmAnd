@@ -55,7 +55,7 @@
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
-        android:src="@drawable/ic_action_ok_dark" />
+        android:src="@drawable/ic_action_done" />
     
     <ImageView
         android:id="@+id/toolbar_sort"

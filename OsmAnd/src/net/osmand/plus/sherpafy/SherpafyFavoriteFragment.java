@@ -46,7 +46,7 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		((TourViewActivity) getActivity()).createMenuItem(menu, SHOW_ON_MAP, R.string.shared_string_show_on_map,
-				R.drawable.ic_action_map_marker_dark,
+				R.drawable.ic_show_on_map,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT, new MenuItem.OnMenuItemClickListener() {
 
 					@Override

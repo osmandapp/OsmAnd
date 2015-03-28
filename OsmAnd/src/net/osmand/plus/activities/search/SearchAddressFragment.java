@@ -93,7 +93,7 @@ public class SearchAddressFragment extends Fragment {
 		if(getActivity() instanceof SearchAddressActivity) {
 			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "");
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(R.drawable.ic_action_ok_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_action_done);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
