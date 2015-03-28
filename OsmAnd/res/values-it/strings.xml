@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -2151,4 +2152,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_not_use">Non usare</string>
 	<string name="confirmation_to_clear_history">Vuoi cancellare l\'intera cronologia?</string>
     <string name="local_osm_changes_upload_all_confirm">Stai per inviare %1$d cambiamenti a OSM. Sei sicuro?</string>
-    </resources>
+    <string name="agps_info">Info A-GPS</string>
+	<string name="agps_data_last_downloaded">A-GPS ultimo aggiornamento dati: %1$s</string>
+    <string name="welmode_download_maps">Scarica mappe</string>
+	<string name="welcome_select_region">Seleziona la tua regione</string>
+	</resources>

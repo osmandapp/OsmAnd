@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
@@ -362,7 +363,7 @@
   <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
   <string name="layer_route">Trasa</string>
   <string name="shared_string_favorites">Ulubione</string>
-  <string name="layer_osm_bugs">Błędy OSM (online)</string>
+  <string name="layer_osm_bugs">Notatki OSM (online)</string>
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Źródło mapy…</string>
@@ -414,7 +415,7 @@
   <string name="route_head">Prosto</string>
   <string name="first_time_continue">Kontynuuj</string>
   <string name="first_time_download">Pobierz region</string>
-  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzaniu plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i transport publiczny.</string>
+  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzanie plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i transport publiczny.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu aktualnego środka mapy</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
@@ -691,7 +692,7 @@
   
   <string name="osmand_rastermaps_plugin_description">"Wtyczka umożliwia korzystanie z wielu typów map online, od predefiniowanych kafelków OpenStreetMap (np. Mapnik) poprzez zdjęcia satelitarne, aż po specjalne mapy pogodowe, klimatyczne, geologiczne, cieniujące wzgórza.\n\nKażda z tych map może zostać użyta jako mapa główna lub jako warstwa dodatkowa nakładana na mapę bazową (np. mapy offline). W celu zwiększenia widoczności nakładki, niektóre elementy map wektorowych mogą zostać ukryte poprzez ustawienia w menu konfiguracji mapy.\n\nMapy kafelkowe można uzyskać bezpośrednio ze źródeł online, jak i przygotować je wcześniej do użycia offline kopiując je ręcznie do folderu danych OsmAnd. "</string>
   <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
-  <string name="osmand_accessibility_description">Pokaż ustawienia specjalnych funkcji ułatwień dostępu.</string>
+  <string name="osmand_accessibility_description">Ta wtyczka umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Wykorzystuje np. dostosowanie szybkości mowy głosów TTS, konfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany powiększenia lub wsparcie TTS, jak choćby automatyczne podawanie pozycji.</string>
   
   
   
@@ -702,7 +703,7 @@
   <string name="prefs_plugins">Wtyczki</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0:
 \n\t- *Obsługa wtyczek*\n\t- Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t- Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t- Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Nawigacja offline*\n\t- Nawigacja offline została poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t- Poprawione w wielu kwestiach "</string>
-  <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
+  <string name="osm_editing_plugin_description">Poprzez tę wtyczkę aplikację OsmAnd można użyć do dopisywania/modyfikowania/poprawiania obiektów OSM (POI, zgłaszanie błędów, ścieżki GPX). OSM jest publicznym projektem tworzenia map przez społeczność. Więcej szczegółów pod adresem http://openstreetmap.org. Aktywny udział jest mile widziany, modyfikacji można dokonywać bezpośrednio z poziomu aplikacji po podaniu danych uwierzytelniających OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
@@ -791,14 +792,14 @@
 \n\t- Edycja POI w trybie offline\n\t- Opcja zapisywania ścieżki online - cykliczne wysyłanie informacji o pozycji do usługi sieciowej (przeczytaj jak ustawić własną usługę sieciową w artykułach HowTo)\n\t- Pokazywanie aktualnie nagranego śladu na mapie\n\t- Wykrywanie kierunku poruszania: Nakazanie \'Zawróć\' podczas poruszania w przeciwnym kierunku lub po przeoczeniu zakrętu\n\t- Nowa podpowiedź głosowa - \'Trasa przeliczona\'
 \n\t- Optyczne wskazanie bliskości zakrętu w odległości nie większej niż 100m prze zmianę koloru strzałki\n\t- Zdezaktywowane pliki indeksów są teraz pokazywane w ekranie pobrań w kolorze ciemno zielonym i ciemno niebieskim\n\t- Inne zmiany "</string>
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs zostało wysłanych</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Notatek zostało wysłanych</string>
   <string name="local_openstreetmap_uploadall">Wyślij wszystkie</string>
   
   <string name="local_openstreetmap_upload">Wyślij modyfikacje do OSM</string>
   <string name="local_openstreetmap_delete">Usuń modyfikacje</string>
   <string name="local_openstreetmap_descr_title">Asynchroniczna edycja OSM:</string>
-  <string name="local_openstreetmap_settings">Lokalnie zapisane POI/Bugs OSM</string>
-  <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Bugs OSM zapisanymi w lokalnej bazie danych</string>
+  <string name="local_openstreetmap_settings">Lokalnie zapisane POI/Notatki OSM</string>
+  <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
   
   
   <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
@@ -899,7 +900,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Miejsce parkowania</string>
-  <string name="osmand_parking_plugin_description">Ta wtyczka pomaga łatwo zapamiętać miejsce parkowania samochodu za pomocą OsmAnd.</string>
+  <string name="osmand_parking_plugin_description">Wtyczka parkingowa pozwala łatwo zapamiętać, gdzie został zaparkowany samochód oraz jak dużo czasu pozostało, jeśli jest ograniczony. Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widgecie mapy.\nWtyczka może dodać powiadomienie i przypomnienie do kalendarza.</string>
   <string name="osmand_parking_plugin_name">Miejsce parkowania</string>
   <string name="context_menu_item_add_parking_point">Oznacz jako pozycja parkowania</string>
   <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
@@ -1263,7 +1264,7 @@
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
     <string name="intermediate_items_sort_by_distance">Sortuj (door-to-door)</string>
-    <string name="intermediate_items_sort_return">Optymalizacja kolejności punktów pośrednich w drodze do miejsca docelowego.</string>
+    <string name="intermediate_items_sort_return">Optymalizacja kolejności punktów pośrednich w drodze z bieżącej pozycji do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
     <string name="tip_recent_changes_1_4_t">Zmiany w 1.4:
 \n\t* Optymalne porządkowanie odwiedzanych punktów (door-to-door)
@@ -2068,4 +2069,19 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="delay_to_start_navigation">Pomiń planowanie trasy</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
+	<string name="agps_info">Informacje A-GPS</string>
+	<string name="agps_data_last_downloaded">Dane A-GPS pobrano ostatnio: %1$s</string>
+    <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. OsmAnd nie bierze żadnej odpowiedzialności, jeśli złamiesz prawo. Kliknij \"Tak\", jeśli wolno używać tej funkcji.</string>
+	<string name="welmode_download_maps">Pobierz mapy</string>
+	<string name="welcome_select_region">Wybierz region</string>
+	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline!</string>
+	<string name="welcome_header">Witaj</string>
+    <string name="current_route">Bieżąca trasa</string>
+    <string name="osm_changes_added_to_local_edits">Zmiany OSM dodane do zmian lokalnych</string>
+   	<string name="mark_to_delete">Zaznacz, aby usunąć</string>
+	<string name="osmo_grop_name_length_alert">Nazwa grupy powinna mieć co najmniej 3 znaki długości!</string>
+	<string name="shared_string_go">Idź</string>
+	<string name="shared_string_not_use">Nie używaj</string>
+	<string name="plugin_nautical_descr">"Ta wtyczka wzbogaca aplikację OsmAnd, by tworzyć mapy nawigacyjne dla łodzi, żaglówek oraz innych sportów wodnych.\n\nSpecjalny dodatek do Osm And wstawia znaki nawigacyjne i oznaczenia map morskich dla nawigacji śródlądowej oraz przybrzeżnej. Opis każdego znaku dostarcza szczegółów potrzebnych do ich identyfikacji oraz ich przeznaczenia (kategoria, kształt, kolor, kolejność, odniesienie itd.).\n\nW razie potrzeby wyłącz tę wtyczkę lub zmień styl w opcjach \'Styl mapy\' w menu \'Konfiguracja mapy\', aby powrócić do jednego z typowych stylów map OsmAnd. "</string>
+	<string name="plugin_ski_descr">"Ta wtyczka dodaje do OsmAnd szczegóły dotyczące stoków narciarskich, tras biegowych, tras skitour, kolejek linowych i wyciągów narciarskich na świecie. Trasy i szlaki są pokolorowane według trudności i przedstawione w specjalnym zimowym stylu mapy, imitującym krajobraz pokryty śniegiem.\n\nWłączenie tego widoku zmienia styl mapy na \'Zima i narty\', ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu \'Styl mapy\' w \'Konfiguracji mapy\'. "</string>
 	</resources>
