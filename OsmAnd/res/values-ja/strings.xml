@@ -2005,4 +2005,7 @@ POIの更新は利用できません</string>
 	<string name="welcome_text">OsmAndは、オフラインで地図の閲覧とナビゲーションを使用することができます！</string>
 	<string name="welcome_header">ようこそ</string>
     <string name="current_route">現在のルート</string>
-    </resources>
+    <string name="agps_info">A-GPS情報</string>
+	<string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
+    <string name="confirm_usage_speed_cameras">国によっては法律によりスピードカメラ警告の使用ができません。(ドイツ、フランス、イタリア、その他の国)。OsmAndは、法律に違反した場合の責任は一切負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
+	</resources>
