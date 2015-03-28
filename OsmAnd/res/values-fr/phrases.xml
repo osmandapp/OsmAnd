@@ -683,7 +683,7 @@
 	<string name="poi_craft">Artisanat</string>
 	<string name="poi_filling_station">Station de remplissage</string>
 		<string name="poi_personal_transport">Transport individuel</string>
-		<string name="poi_water_supply">Fournisseur d\'eau</string>
+		<string name="poi_water_supply">Alimentation en eau potable</string>
 		<string name="poi_trash_disposal">Traitement des ordures ménagères</string>
 	<string name="poi_accomodation">Hébergement</string>
 		<string name="poi_medical_supply">Fournitures médicales</string>
