@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/waypoint_icon"
         android:layout_marginLeft="8dp"
-        android:src="@drawable/list_favorite"
+        android:src="@drawable/ic_action_fav_dark"
         android:layout_height="25dp"
         android:layout_width="25dp"
         android:layout_gravity="center_vertical" />

@@ -129,7 +129,8 @@ public class PluginActivity extends OsmandActionBarActivity {
 		Button getButton = (Button)findViewById(R.id.plugin_get);
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
 		IconsCache ic = ((OsmandApplication) getApplication()).getIconsCache();
-		settingsButton.setCompoundDrawablesWithIntrinsicBounds(ic.getContentIcon(R.drawable.ic_action_settings_dark), null, null, null);
+		settingsButton.setCompoundDrawablesWithIntrinsicBounds(ic.getContentIcon(
+				R.drawable.ic_action_settings_enabled_dark), null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
 		if (plugin.needsInstallation()) {
@@ -146,10 +147,9 @@ public class PluginActivity extends OsmandActionBarActivity {
 			enableDisableButton.setChecked(plugin.isActive());
 
 			final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
-			if (settingsActivity == null) {
+			if (settingsActivity == null || !plugin.isActive()) {
 				settingsButton.setVisibility(View.GONE);
 			} else {
-				settingsButton.setEnabled(plugin.isActive());
 				settingsButton.setVisibility(View.VISIBLE);
 			}
 
