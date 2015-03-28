@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
@@ -2068,4 +2069,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="delay_to_start_navigation">Pomiń planowanie trasy</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
+	<string name="agps_info">Informacje A-GPS</string>
+	<string name="agps_data_last_downloaded">Dane A-GPS pobrano ostatnio: %1$s</string>
+    <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. OsmAnd nie bierze żadnej odpowiedzialności, jeśli złamiesz prawo. Kliknij \"Tak\", jeśli wolno używać tej funkcji.</string>
+	<string name="welmode_download_maps">Pobierz mapy</string>
+	<string name="welcome_select_region">Wybierz region</string>
+	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline!</string>
+	<string name="welcome_header">Witaj</string>
+    <string name="current_route">Bieżąca trasa</string>
+    <string name="osm_changes_added_to_local_edits">Zmiany OSM dodane do zmian lokalnych</string>
+   	<string name="mark_to_delete">Zaznacz, aby usunąć</string>
+	<string name="osmo_grop_name_length_alert">Nazwa grupy powinna mieć co najmniej 3 znaki długości!</string>
+	<string name="shared_string_go">Idź</string>
+	<string name="shared_string_not_use">Nie używaj</string>
 	</resources>
