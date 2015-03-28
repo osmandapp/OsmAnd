@@ -276,10 +276,11 @@
 	<string name="poi_salt_pond">Salt pond</string>
 	<string name="poi_cricket_nets">Cricket nets</string>
 
-	<string name="poi_driving_school">Driving school</string>
-	<string name="poi_school">School</string>
-	<string name="poi_kindergarten">Kindergarten</string>
 	<string name="poi_college">College</string>
+	<string name="poi_driving_school">Driving school</string>
+	<string name="poi_kindergarten">Kindergarten</string>
+	<string name="poi_school">School</string>
+	<string name="poi_training">Training facility</string>
 	<string name="poi_university">University</string>
 
 	<string name="poi_social_facility">Social facility</string>
