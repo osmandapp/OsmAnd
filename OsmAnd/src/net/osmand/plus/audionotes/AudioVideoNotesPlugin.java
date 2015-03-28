@@ -466,7 +466,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get() ? 1 : 0)
-				.iconColor(R.drawable.ic_action_audio_dark).listen(listener).position(12).reg();
+				.iconColor(R.drawable.ic_action_micro_dark).listen(listener).position(12).reg();
 	}
 
 	@Override
@@ -520,7 +520,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl = new TextInfoWidget(activity);
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_audio_dark, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark, R.drawable.widget_icon_av_inactive,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}
@@ -1254,7 +1254,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_audio_dark;
+		return R.drawable.ic_action_micro_dark;
 	}
 
 	@Override

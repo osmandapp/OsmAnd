@@ -84,7 +84,7 @@
                 android:id="@+id/Cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/a_1_navigation_cancel_small_dark" />
+                android:src="@drawable/ic_action_remove_dark" />
         </LinearLayout>
     </LinearLayout>
 

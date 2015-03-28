@@ -1,5 +1,6 @@
 package net.osmand.plus.dashboard;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;

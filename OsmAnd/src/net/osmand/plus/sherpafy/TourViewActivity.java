@@ -156,16 +156,16 @@ public class TourViewActivity extends OsmandActionBarActivity {
 					tv.setText(getString(R.string.sherpafy_tours));
 				} else if (it instanceof TourInformation) {
 					if (selectedItem == it) {
-						imView.setImageResource(R.drawable.ic_action_ok_dark);
+						imView.setImageResource(R.drawable.ic_action_done);
 					} else {
-						imView.setImageResource(R.drawable.ic_action_globus_dark);
+						imView.setImageResource(R.drawable.ic_world_globe_dark);
 					}
 					tv.setText(((TourInformation) it).getName());
 				} else if (it instanceof StageInformation) {
 					if (customization.getSelectedStage() == it) {
-						imView.setImageResource(R.drawable.ic_action_gplay_over_dark);
+						imView.setImageResource(R.drawable.ic_action_play_dark);
 					} else if (selectedItem == it) {
-						imView.setImageResource(R.drawable.ic_action_ok_dark);
+						imView.setImageResource(R.drawable.ic_action_done);
 					} else {
 						final StageInformation stageInformation = (StageInformation) it;
 						boolean visited = stageInformation.getTour() == customization.getSelectedTour() &&

@@ -214,7 +214,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.layer_map).iconColor(R.drawable.ic_action_globus_dark)
+		adapter.item(R.string.layer_map).iconColor(R.drawable.ic_world_globe_dark)
 				.listen(listener).position(3).reg();
 		adapter.item(R.string.layer_overlay).selected(overlayLayer.getMap() != null ? 1 : 0).
 				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
@@ -242,7 +242,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			};
 			adapter.item(R.string.context_menu_item_update_map).iconColor(R.drawable.ic_action_refresh_dark)
 					.listen(listener).reg();
-			adapter.item(R.string.context_menu_item_download_map).iconColor(R.drawable.ic_action_gdown_dark)
+			adapter.item(R.string.context_menu_item_download_map).iconColor(R.drawable.ic_action_import)
 					.listen(listener).reg();
 		}
 	}

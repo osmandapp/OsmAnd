@@ -294,7 +294,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 			if (a.getSite() != null) {
 				adapter.item(R.string.poi_context_menu_website)
-						.iconColor(R.drawable.ic_action_globus_dark).listen(listener)
+						.iconColor(R.drawable.ic_world_globe_dark).listen(listener)
 						.reg();
 			}
 		}

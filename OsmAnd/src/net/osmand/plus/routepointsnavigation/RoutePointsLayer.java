@@ -101,7 +101,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						R.drawable.ic_action_gremove_dark).listen(listener).reg();
 			} else {
 				adapter.item(R.string.mark_as_visited).iconColor(
-						R.drawable.ic_action_ok_dark).listen(listener).reg();
+						R.drawable.ic_action_done).listen(listener).reg();
 			}
 
 			RoutePointsPlugin.RoutePoint routePoint = plugin.getCurrentRoute().getRoutePointFromWpt(point);

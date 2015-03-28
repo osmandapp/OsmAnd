@@ -135,7 +135,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			};
 			if(r.isPhoto()) {
 				adapter.item(R.string.recording_context_menu_show).iconColor(
-						R.drawable.ic_action_eye_dark).listen(listener).reg();
+						R.drawable.ic_action_view).listen(listener).reg();
 			} else {
 				adapter.item(R.string.recording_context_menu_play).iconColor(
 						R.drawable.ic_action_play_dark).listen(listener).reg();
