@@ -161,4 +161,17 @@
 	<string name="poi_fire_flapper">火消し棒・消火用具(Fire flapper)</string>
 	<string name="poi_fire_hose">消防用ホース(Fire hose)</string>
 	<string name="poi_fire_water_pond">消火用ため池(Fire water pond)</string>
+	<string name="poi_grit_bin">砂箱／防滑材・融雪剤(Grit bin)</string>
+	<string name="poi_ambulance_station">救急車待機所(Ambulance station)</string>
+	<string name="poi_ses_station">SESレスキュー待機所(SES station)</string>
+	<string name="poi_emergency_access_point">森林内番地札(Emergency access point)</string>
+
+	<string name="poi_ford">道路上水没地点(Ford)</string>
+	<string name="poi_mountain_pass">峠(Mountain pass)</string>
+	<string name="poi_gate">門(Gate)</string>
+	<string name="poi_city_wall">城壁・街壁(City wall)</string>
+	<string name="poi_lift_gate">遮断機(Lift gate)</string>
+	<string name="poi_toll_booth">料金所(Toll booth)</string>
+	<string name="poi_radiotechnics">電器屋(Radiotechnics store)</string>
+	<string name="poi_atv">四輪バイク販売店(Quad store)</string>
 	</resources>
