@@ -139,7 +139,7 @@ public abstract class Entity {
 		if(tags == null){
 			tags = new LinkedHashMap<String, String>();
 		}
-		return tags.put(key, value);
+		return tags.put(key.toLowerCase(), value);
 	}
 	
 	public void replaceTags(Map<String, String> toPut){
