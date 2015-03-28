@@ -575,7 +575,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
-					.iconColor(R.drawable.ic_action_finish_flag_dark)
+					.iconColor(R.drawable.ic_action_flag_dark)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
