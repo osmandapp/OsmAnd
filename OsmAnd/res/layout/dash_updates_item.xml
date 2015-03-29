@@ -59,7 +59,8 @@
 			android:layout_height="@dimen/dashListItemHeight"
 			android:layout_gravity="center_vertical"
 			android:background="?attr/dashboard_button"
-			android:src="@drawable/download_button"/>
+			android:scaleType="center"
+			android:src="@drawable/ic_action_import"/>
 	</LinearLayout>
 
 </LinearLayout>

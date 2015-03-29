@@ -530,9 +530,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.icon_color_light, 0);
 		} else if (tracked) {
-			// TODO different icon
-			backToLocationControl.setIconColorId(R.color.map_widget_icon_color);
-			backToLocationControl.setBg(R.drawable.btn_circle_blue);
+			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
+			backToLocationControl.setIconColorId(R.color.color_myloc_distance);
 		} else {
 			backToLocationControl.setIconColorId(0);
 			backToLocationControl.setBg(R.drawable.btn_circle_blue);
