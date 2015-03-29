@@ -138,6 +138,8 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ICON_ORDER;
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
 	public RenderingRuleProperty R_TEXT_ON_PATH;
+	public RenderingRuleProperty R_ICON_SHIFT_PX;
+	public RenderingRuleProperty R_ICON_SHIFT_PY;
 	public RenderingRuleProperty R_ICON__1;
 	public RenderingRuleProperty R_ICON;
 	public RenderingRuleProperty R_ICON_2;
@@ -232,6 +234,8 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_ON_PATH = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ON_PATH));
 
 		// point
+		R_ICON_SHIFT_PX = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty("icon_shift_px"));
+		R_ICON_SHIFT_PY = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty("icon_shift_py"));
 		R_ICON__1 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon__1"));
 		R_ICON = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ICON));
 		R_ICON_2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_2"));

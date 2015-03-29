@@ -5,12 +5,10 @@ import java.util.TreeMap;
 import net.osmand.plus.R;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -25,9 +23,6 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintOuter;
 	private Drawable drawable;
 	private float density;
-	private Bitmap bmp;
-	private Paint paintBmp;
-	private RectF bmpDest;
 	
 
 	public FavoriteImageDrawable(Context ctx, int color) {
@@ -41,10 +36,6 @@ public class FavoriteImageDrawable extends Drawable {
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
-		paintBmp = new Paint();
-		paintBmp.setAntiAlias(true);
-		paintBmp.setFilterBitmap(true);
-		paintBmp.setDither(true);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
 		paintOuter.setColor(color == 0 || color == Color.BLACK ?   0x88555555 : color );
@@ -95,14 +86,11 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 	
 	public void drawBitmapInCenter(Canvas canvas, int x, int y, float density) {
-		canvas.translate(x, y);
+		int dx = x - getIntrinsicWidth() / 2;
+		int dy = y - getIntrinsicHeight() / 2;
+		canvas.translate(dx, dy);
 		draw(canvas);
-		canvas.translate(-x, -y);
-//		float bmpRad = 10 * density;
-//		bmpDest.set(x - bmpRad, y - bmpRad, x + bmpRad, y + bmpRad);
-//		canvas.drawCircle(x, density + y, bmpRad + 3 * density, paintOuter);
-//		canvas.drawCircle(x, density + y, bmpRad + 2 * density, paintInnerCircle);
-//		canvas.drawBitmap(bmp, null, bmpDest, paintBmp);
+		canvas.translate(-dx, -dy);
 	}
 
 	@Override

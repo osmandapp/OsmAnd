@@ -31,7 +31,7 @@
             android:layout_height="@dimen/dashListItemHeight"
             android:background="@drawable/dashboard_button_light"
             android:scaleType="center"
-            android:src="@drawable/a_10_device_access_volume_muted_dark" />
+            android:src="@drawable/ic_action_volume_off" />
     </LinearLayout>
 
     <LinearLayout

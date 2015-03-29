@@ -43,7 +43,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/map_button_margin"
                 android:layout_marginRight="@dimen/map_button_margin"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <TextView
                 android:id="@+id/waypoint_dist"
@@ -79,7 +79,7 @@
                 android:layout_width="@dimen/map_address_height"
                 android:layout_height="@dimen/map_address_height"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </FrameLayout>
     <!-- Widgets -->
@@ -128,14 +128,14 @@
                         android:layout_width="@dimen/map_button_size"
                         android:layout_height="@dimen/map_button_size"
                         android:background="@drawable/btn_inset_circle"
-                        android:src="@drawable/ic_action_remove_light" />
+                        android:src="@drawable/ic_action_test_light" />
 
                     <ImageButton
                         android:id="@+id/map_compass_button"
                         android:layout_width="@dimen/map_button_size"
                         android:layout_height="@dimen/map_button_size"
                         android:background="@drawable/btn_inset_circle"
-                        android:src="@drawable/ic_action_remove_light" />
+                        android:src="@drawable/ic_action_test_light" />
                 </LinearLayout>
             </LinearLayout>
             <!-- empty block to not let widgets grow more than 40% -->
@@ -230,7 +230,7 @@
                         android:layout_height="@dimen/map_button_size"
                         android:layout_gravity="top|center_horizontal"
                         android:background="@drawable/btn_inset_circle"
-                        android:src="@drawable/ic_action_remove_light" />
+                        android:src="@drawable/ic_action_test_light" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

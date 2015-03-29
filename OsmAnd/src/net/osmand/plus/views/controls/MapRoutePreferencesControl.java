@@ -345,9 +345,9 @@ public class MapRoutePreferencesControl {
 		int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
 		int icon;
 		if(mute) {
-			icon = R.drawable.a_10_device_access_volume_muted_dark;
+			icon = R.drawable.ic_action_volume_off;
 		} else{
-			icon = R.drawable.a_10_device_access_volume_on_dark;
+			icon = R.drawable.ic_action_volume_up;
 		}
 		muteBtn.setContentDescription(mapActivity.getString(t));
 		muteBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(icon, R.color.icon_color_light));
