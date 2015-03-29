@@ -706,4 +706,7 @@
 	<string name="poi_cafe_and_restaurant">카페 및 레스토랑</string>
 	<string name="poi_craft">크래프트</string>
 	<string name="poi_medical_supply">의료 공급</string>
+	<string name="poi_training">훈련 시설</string>
+	<string name="poi_field_hockey">필드 하키</string>
+	<string name="poi_smoking_area">흡연 구역</string>
 	</resources>
