@@ -24,7 +24,7 @@
             android:layout_width="@dimen/map_widget_image"
             android:layout_height="@dimen/map_widget_image"
             android:layout_gravity="center"
-            android:src="@drawable/ic_action_remove_light"
+            android:src="@drawable/ic_action_test_light"
             android:visibility="gone"
             />
     </FrameLayout>
@@ -40,7 +40,7 @@
             android:layout_height="@dimen/map_widget_icon"
             android:layout_gravity="left|center_vertical"
             android:gravity="center"
-            android:src="@drawable/ic_action_remove_light" />
+            android:src="@drawable/ic_action_test_light" />
 
         <TextView
             android:id="@+id/widget_text"

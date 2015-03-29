@@ -53,7 +53,7 @@
 				android:visibility="gone" />
 		</LinearLayout>
 
-		<ImageButton
+		<ImageView
 			android:id="@+id/btn_download"
 			android:layout_width="@dimen/dashListItemHeight"
 			android:layout_height="@dimen/dashListItemHeight"

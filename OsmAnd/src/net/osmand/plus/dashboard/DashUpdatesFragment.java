@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -123,9 +124,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				public void onClick(View view) {
 					if (getDownloadActivity().isInQueue(item)) {
 						getDownloadActivity().removeFromQueue(item);
-						((ImageButton) view).setImageResource(R.drawable.download_button);
+						((ImageView) view).setImageDrawable(
+								getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_import));
 					} else if (!getDownloadActivity().startDownload(item)) {
-						((ImageButton) view).setImageResource(R.drawable.cancel_button);
+						((ImageView) view).setImageDrawable(
+								getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 					}
 				}
 			});
@@ -163,7 +166,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			if (!visible) {
 				return;
 			}
-			cancelButton.setImageResource(R.drawable.cancel_button);
+			cancelButton.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 			View view = (View) cancelButton.getParent();
 			if (view != null && view.findViewById(R.id.map_descr) != null) {
 				view.findViewById(R.id.map_descr).setVisibility(View.GONE);

@@ -102,7 +102,7 @@
             android:visibility="invisible"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:src="@drawable/ic_action_remove_light" />
+            android:src="@drawable/ic_action_test_light" />
         <ImageButton
             android:id="@+id/options"
             android:layout_width="@dimen/dashListItemHeight"

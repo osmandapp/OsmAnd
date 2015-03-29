@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
                 android:layout_marginTop="3dp"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <TextView
                 android:id="@+id/map_app_mode_text"
@@ -79,7 +79,7 @@
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_round"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <ImageButton
                 android:id="@+id/map_route_info_button"
@@ -87,7 +87,7 @@
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginLeft="@dimen/map_button_spacing_land"
                 android:background="@drawable/btn_round"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </FrameLayout>
 
@@ -162,7 +162,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <ImageButton
                 android:id="@+id/map_waypoints_route_button"
@@ -170,7 +170,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <ImageButton
                 android:id="@+id/map_options_route_button"
@@ -178,7 +178,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <TextView
                 android:id="@+id/map_go_route_button"
@@ -186,7 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_flat"
-                android:drawableLeft="@drawable/ic_action_remove_light"
+                android:drawableLeft="@drawable/ic_action_test_light"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
@@ -216,14 +216,14 @@
                 android:layout_height="@dimen/map_address_height"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <ImageButton
                 android:layout_width="@dimen/map_address_height"
                 android:layout_height="@dimen/map_address_height"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_circle_transparent"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </FrameLayout>
 
@@ -243,7 +243,7 @@
             android:layout_height="@dimen/map_button_size"
             android:layout_gravity="bottom"
             android:background="@drawable/btn_circle"
-            android:src="@drawable/ic_action_remove_light" />
+            android:src="@drawable/ic_action_test_light" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -257,7 +257,7 @@
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
                 android:background="@drawable/btn_circle"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
 
             <ImageButton
                 android:id="@+id/map_zoom_out_button"
@@ -265,7 +265,7 @@
                 android:layout_height="@dimen/map_button_size"
                 android:layout_marginTop="@dimen/map_button_spacing_land"
                 android:background="@drawable/btn_circle"
-                android:src="@drawable/ic_action_remove_light" />
+                android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </LinearLayout>
 
