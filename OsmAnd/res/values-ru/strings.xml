@@ -1252,7 +1252,7 @@
     <string name="gpx_file_name">Имя файла GPX</string>
     <string name="gpx_saved_sucessfully">Файл GPX успешно сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
-    <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от точки отправления до точки назначения.</string>
+    <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от текущего местоположения до точки назначения.</string>
     <string name="local_osm_changes_backup_failed">Запись OsmChange-файла не удалась</string>
     <string name="local_osm_changes_backup">Сохранение POI в OsmChange-файл</string>
     <string name="plugin_distance_point_ele">высота</string>
@@ -1944,8 +1944,8 @@
 	<string name="welcome_select_region">Выберите свой регион</string>
 	<string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-	<string name="welcome_text">OsmAnd позволяет использовать карты и автономную навигацию!</string>
-	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальные изменения</string>
+	<string name="welcome_text">OsmAnd дает вам возможность использовать карты и автономную (оффлайн) навигацию!</string>
+	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
    	<string name="confirm_usage_speed_cameras">Во многих странах (Германии, Франции, Италии и других) использование предупреждений о камерах контроля скорости не разрешено законом. OsmAnd не несет никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите \"Да\", только если вы имеете право использовать эту функцию.</string>
 	<string name="agps_info">Информация A-GPS</string>
 	<string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
