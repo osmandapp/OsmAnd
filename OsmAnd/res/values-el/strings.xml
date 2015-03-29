@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1305,7 +1306,7 @@
     <string name="app_mode_aircraft">Αεροσκάφος</string>
     <string name="tip_faq_t">Παρακαλώ επισκεφθείτε το https://code.google.com/p/osmand/wiki/FAQ για να δείτε τις συχνές ερωτήσεις.</string>
     <string name="tip_faq">Συχνές ερωτήσεις</string>
-    <string name="local_osm_changes_delete_all_confirm">Πρόκειται να διαγράψετε το %1$d των αλλαγών του osm. Είστε σίγουρος;</string>
+    <string name="local_osm_changes_delete_all_confirm">Πρόκειται να διαγράψετε %1$d αλλαγές του OSM. Είστε σίγουρος;</string>
     <string name="animate_routing_route_not_calculated">Παρακαλώ, υπολογίστε την διαδρομή πρώτα</string>
     <string name="animate_routing_route">Προσομοίωση με χρήση της υπολογισμένης διαδρομής </string>
     <string name="animate_routing_gpx">Προσομοίωση χρησιμοποιώντας δεδομένα διαδρομής GPX</string>
@@ -1365,7 +1366,7 @@
     <string name="osmo_follow">\"Follow\"</string>
     <string name="osmo_sign_in">Σύνδεση</string>
     <string name="osmo_create_groups_confirm">Για να δημιουργήσετε ομάδες πρέπει να είστε καταχωρημένος χρήστης του OsMo.</string>
-    <string name="osmo_credentials_not_valid">Τα διαπιστευτήρια osmo δεν είναι έγκυρα.</string>
+    <string name="osmo_credentials_not_valid">Τα διαπιστευτήρια OsMo δεν είναι έγκυρα.</string>
     <string name="osmo_regenerate_login_ids_confirm">Είστε σίγουρος ότι θέλετε να επαναδημιουργήσετε τα προσωπικά σας στοιχεία; Όλες οι συνδεδεμένες συσκευές με εσάς δε θα μπορούν να σας εντοπίσουν πλέον.</string>
     <string name="osmo_regenerate_login_ids">Επαναδημιουργία στοιχείων χρήστη</string>
     <string name="osmo_cancel_moving_target">Ακύρωση μετακίνησης στόχου</string>

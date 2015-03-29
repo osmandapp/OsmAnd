@@ -2137,4 +2137,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="current_route">Súčasná trasa</string>
     <string name="osm_changes_added_to_local_edits">Zmeny OSM pridané do lokálnych zmien</string>
    	<string name="mark_to_delete">Označte pre výmaz</string>
-	</resources>
+	<string name="agps_info">Informácie o A-GPS</string>
+	<string name="agps_data_last_downloaded">A-GPS dáta boli naposledy stiahnuté: %1$s</string>
+    </resources>

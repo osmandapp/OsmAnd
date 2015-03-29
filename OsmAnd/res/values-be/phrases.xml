@@ -705,4 +705,7 @@
 		<string name="poi_communication">Сувязь</string>
 		<string name="poi_accomodation">Жыльлё</string>
 		<string name="poi_medical_supply">Медыцынскае забесьпячэньне</string>
+	<string name="poi_field_hockey">Хакей на траве</string>
+	<string name="poi_smoking_area">Зона для паленьня</string>
+	<string name="poi_training">Навучальны цэнтар</string>
 	</resources>
