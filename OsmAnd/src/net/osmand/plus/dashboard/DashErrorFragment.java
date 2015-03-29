@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -34,6 +35,8 @@ public class DashErrorFragment extends DashBaseFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_error_fragment, container, false);
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
+		ImageView iv = ((ImageView) view.findViewById(R.id.error_icon));
+		iv.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_crashlog));
 		TextView message = ((TextView) view.findViewById(R.id.error_header));
 		message.setTypeface(typeface);
 		message.setText(msg);

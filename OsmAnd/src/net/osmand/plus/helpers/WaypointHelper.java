@@ -688,9 +688,9 @@ public class WaypointHelper {
 				}
 				return null;
 			} else if(type == TARGETS) {
-				return uiCtx.getResources().getDrawable(
-						!((TargetPoint)point).intermediate? R.drawable.list_destination:
-					R.drawable.list_intermediate);
+				int i = !((TargetPoint)point).intermediate? R.drawable.list_destination :
+					R.drawable.list_destination;
+				return uiCtx.getResources().getDrawable(i);
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {

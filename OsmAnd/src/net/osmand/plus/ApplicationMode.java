@@ -101,8 +101,8 @@ public class ApplicationMode {
 		}
 		
 		public ApplicationModeBuilder carLocation(){
-			applicationMode.bearingIcon = R.drawable.car_bearing;
-			applicationMode.locationIcon = R.drawable.car_location;
+			applicationMode.bearingIcon = R.drawable.map_car_bearing;
+			applicationMode.locationIcon = R.drawable.map_car_location;
 			return this;
 		}
 		
@@ -112,14 +112,14 @@ public class ApplicationMode {
 		}
 		
 		public ApplicationModeBuilder bicycleLocation(){
-			applicationMode.bearingIcon = R.drawable.bicycle_bearing;
-			applicationMode.locationIcon = R.drawable.bicycle_location;
+			applicationMode.bearingIcon = R.drawable.map_bicycle_bearing;
+			applicationMode.locationIcon = R.drawable.map_bicycle_location;
 			return this;
 		}
 		
 		public ApplicationModeBuilder defLocation(){
-			applicationMode.bearingIcon = R.drawable.pedestrian_bearing;
-			applicationMode.locationIcon = R.drawable.pedestrian_location;
+			applicationMode.bearingIcon = R.drawable.map_pedestrian_bearing;
+			applicationMode.locationIcon = R.drawable.map_pedestrian_location;
 			return this;
 		}
 		
@@ -152,8 +152,8 @@ public class ApplicationMode {
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
-	private int bearingIcon = R.drawable.pedestrian_bearing;
-	private int locationIcon = R.drawable.pedestrian_location;
+	private int bearingIcon = R.drawable.map_pedestrian_bearing;
+	private int locationIcon = R.drawable.map_pedestrian_location;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.key = key;

@@ -18,7 +18,7 @@
 					 android:layout_gravity="center_horizontal"
 					 android:id="@+id/parking_no_lim_button"
 					 android:gravity="center_horizontal"
-					 android:background="@drawable/poi_parking_pos_no_limit_menu"
+					 android:background="@drawable/list_poi_parking_pos_no_limit_menu"
 					 android:contentDescription="@string/osmand_parking_time_no_limit"/>
 
 		<TextView android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 					 android:id="@+id/parking_lim_button"
 					 android:layout_gravity="center_horizontal"
 					 android:gravity="center_horizontal"
-					 android:background="@drawable/poi_parking_pos_limit_menu"
+					 android:background="@drawable/list_poi_parking_pos_limit_menu"
 					 android:contentDescription="@string/osmand_parking_time_limit"/>
 
 		<TextView android:layout_height="wrap_content"

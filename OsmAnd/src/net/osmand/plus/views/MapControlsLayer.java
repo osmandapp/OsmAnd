@@ -169,7 +169,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		controls.add(createHudButton((ImageView) configureMap, R.drawable.ic_action_layers_dark).setBg(
+		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark).setIconColorId(0).setBg(
 				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night));
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override

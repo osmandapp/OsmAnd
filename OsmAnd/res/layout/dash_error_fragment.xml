@@ -17,10 +17,12 @@
 		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="top"
+			android:layout_gravity="center"
+			android:id="@+id/error_icon"
+			android:scaleType="center"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:layout_marginRight="@dimen/dashFavIconMargin"
-			android:src="@drawable/ic_crashlog"/>
+			android:src="@drawable/ic_action_remove_dark"/>
 
 		<TextView
 			android:id="@+id/error_header"

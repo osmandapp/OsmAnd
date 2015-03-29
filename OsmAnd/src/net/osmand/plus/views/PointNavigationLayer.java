@@ -61,9 +61,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		textPaint.setTextSize(sp * 18);
 		textPaint.setTextAlign(Align.CENTER);
 		textPaint.setAntiAlias(true);
-		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.target_point);
-		intermediatePoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.intermediate_point);
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.arrow_to_destination);
+		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_target_point);
+		intermediatePoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_intermediate_point);
+		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
 
 		
 	}

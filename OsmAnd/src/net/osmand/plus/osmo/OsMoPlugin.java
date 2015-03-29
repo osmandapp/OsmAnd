@@ -139,7 +139,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						}
 					}).position(0).reg();
 			if(OsMoPositionLayer.getFollowDestinationId() != null) {
-				adapter.item(R.string.osmo_cancel_moving_target).iconColor(R.drawable.ic_action_close_dark).listen(new OnContextMenuClick() {
+				adapter.item(R.string.osmo_cancel_moving_target).iconColor(R.drawable.ic_action_remove_dark).listen(new OnContextMenuClick() {
 
 							@Override
 							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
