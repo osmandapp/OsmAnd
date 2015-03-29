@@ -141,8 +141,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rightStack.requestLayout();
 		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())? 
 				View.VISIBLE : View.GONE);
-		this.expand.setImageResource(expanded ? R.drawable.av_upload :
-			R.drawable.av_download);
+		this.expand.setImageResource(expanded ? R.drawable.map_up :
+			R.drawable.map_down);
 		expand.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -315,7 +315,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		cm.item(R.string.map_widget_reset) 
-				.iconColor(R.drawable.widget_reset_to_default_dark).listen(new OnContextMenuClick() {
+				.iconColor(R.drawable.ic_action_reset_to_default_dark).listen(new OnContextMenuClick() {
 					
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

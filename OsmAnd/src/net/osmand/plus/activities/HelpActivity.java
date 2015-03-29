@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
@@ -13,7 +13,6 @@ import android.view.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
-
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,6 +29,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	private static final int CLOSE = 4;
 	private WebView wv;
 	
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
@@ -120,7 +120,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 				R.drawable.ic_action_redo_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, CLOSE, R.string.shared_string_close, 
-				R.drawable.ic_action_close_dark,
+				R.drawable.ic_action_remove_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		return super.onCreateOptionsMenu(menu);
 	}

@@ -70,8 +70,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setDither(true);
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
-		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
-		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_limit);
+		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_poi_parking_pos_no_limit);
+		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_poi_parking_pos_limit);
 		timeLimit = plugin.getParkingType();
 	}
 
