@@ -2139,4 +2139,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
    	<string name="mark_to_delete">Označte pre výmaz</string>
 	<string name="agps_info">Informácie o A-GPS</string>
 	<string name="agps_data_last_downloaded">A-GPS dáta boli naposledy stiahnuté: %1$s</string>
-    </resources>
+    <string name="shared_string_message">Správa</string>
+	</resources>
