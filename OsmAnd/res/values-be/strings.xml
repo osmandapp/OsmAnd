@@ -116,7 +116,7 @@
     <string name="use_kalman_filter_compass">Выкарыстоўваць фільтар Калмана</string>
     <string name="access_mark_final_location_first">Рэжым даступнасьці: Калі ласка, спачатку абярыце пункт прызначэньня</string> 
     <string name="use_magnetic_sensor_descr">Выкарыстоўваць для працы компаса магнітны датчык замест датчыка арыентацыі</string>
-    <string name="use_magnetic_sensor">Выкарыстоўваць магнітометр</string>
+    <string name="use_magnetic_sensor">Выкарыстоўваць магнітомэтр</string>
     <string name="other_location">Іншае</string>
     <string name="files_limit">засталося %1$d файлаў</string>
     <string name="available_downloads_left">Даступна %1$d файлаў для сьцягваньня</string>
@@ -203,7 +203,7 @@
     <string name="av_use_external_recorder">Выкарыстоўваць сістэмны рэкордэр</string>
     <string name="av_use_external_camera_descr">Выкарыстоўваць сістэмную праграму для фота</string>
     <string name="av_use_external_camera">Выкарыстоўваць праграму камеры</string>
-    <string name="av_settings_descr">Настроіць параметры аўдыё і відэа</string>
+    <string name="av_settings_descr">Настроіць парамэтры аўдыё і відэа</string>
     <string name="av_settings">Налады аўдыё і відэа </string>
     <string name="recording_error">Адбылася памылка падчас запісу </string>
     <string name="recording_camera_not_available">Камера не даступная</string>
@@ -477,7 +477,7 @@
 	<string name="prefs_plugins">Дадатковыя модулі</string>
 	<string name="tip_recent_changes_0_8_0_t">"Зьмены ў 0.8.0: ↵
 \n\t - * Функыянальнасьць модуляў * ↵
-\n\t - Большая частка функцый згуртаваная па модулях і яны могуць быць уключаны ці выключаны ў меню Налады/Модулі. ↵ Вы можаце ўключыць (онлайн або кэшаваныя) крыніцы растравых мапаў, параметры адсочваньня, а таксама шмат іншых новых функцый. ↵
+\n\t - Большая частка функцый згуртаваная па модулях і яны могуць быць уключаны ці выключаны ў мэню Налады/Модулі. ↵ Вы можаце ўключыць (онлайн або кэшаваныя) крыніцы растравых мапаў, парамэтры адсочваньня, а таксама шмат іншых новых функцый. ↵
 \n\t - * Падтрымка новага фармату лякальных мапаў * ↵
 \n\t - Адмалёўка мапы цяпер адбываецца хутчэй і больш дакладна (праблемы з берагавой лініяй і затопленымі ўчасткамі амаль выпраўленыя). ↵
 \n\t - Вам трэба занава загрузіць дадзеныя для аўтаномнага выкарыстаньня (стары фармат больш не падтрымліваецца) ↵
@@ -568,8 +568,8 @@
 	<string name="offline_edition">Аўтаномнае рэдагаваньне</string>
 	<string name="offline_edition_descr">Заўсёды выкарыстоўваць аўтаномнае рэдагаваньне</string>
 	<string name="tip_recent_changes_0_7_1_t">"Зьмены ў 0.7.1 : ↵
-\n\t - Лакальнае рэдагаваньне POI ↵
-\n\t - Параметры адсочваньня - перыядычная перадача каардынатаў у вэб-сэрвіс (як наладзіць вэб-сэрвіс адсочваньня - чытайце ў HowTo) ↵
+\n\t - Лякальнае рэдагаваньне POI ↵
+\n\t - Парамэтры адсочваньня - пэрыядычная перадача каардынатаў у вэб-сэрвіс (як наладзіць вэб-сэрвіс адсочваньня - чытайце ў HowTo) ↵
 \n\t - Паказ бягучага сьледу на мапе↵
 \n\t - Вызначэньне напрамка руху: паведамленьне \'Зрабіце разварот\' паказваецца і аб\'яўляецца, калі вы рухаецеся ў процілеглым кірунку, або прапусцілі паварот ↵
 \n\t - Новае галасавое паведамленьне \'Маршрут пералічаны\' ↵
@@ -590,7 +590,7 @@
 	
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэньня</string>
 	<string name="live_monitoring_interval">Інтэрвал сеткавага сачэньня</string>
-	<string name="live_monitoring_url_descr">Задайце вэб-адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_url_descr">Задайце вэб-адрас з наступнымі парамэтрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Вэб-адрас для сеткавага сачэньня</string>
 	<string name="gpx_monitoring_disabled_warn">Запісвайце сьлед выкарыстоўваючы GPX-віджэт ці пункт мэню \"Запіс падарожжа\".</string>
 	<string name="show_current_gpx_title">Паказаць бягучы сьлед</string>
@@ -1643,7 +1643,7 @@
 	<string name="lang_zh_CN">кітайская спрошчаная</string>
 	<string name="lang_zh_TW">кітайская традыцыйная</string>
 	<string name="lang_sc">сардынская</string>
-	<string name="rendering_attr_subwayMode_name">Лініі метро</string>
+	<string name="rendering_attr_subwayMode_name">Лініі мэтро</string>
  	<string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
     <string name="osmo_invite">Запрасiць…</string>
     <string name="osmo_leave_confirmation_msg">Хочаце пакінуць групу %1$s?</string>
@@ -1658,7 +1658,7 @@
 	<string name="arrival_distance_factor_early">Раней</string>
     <string name="arrival_distance_factor_normally">Звычайна</string>
     <string name="arrival_distance_factor_late">Пазьней</string>
-    <string name="arrival_distance_factor_at_last">На апошніх метрах</string>
+    <string name="arrival_distance_factor_at_last">На апошніх мэтрах</string>
     <string name="av_camera_pic_size">Памер фота</string>
 	<string name="av_camera_pic_size_descr">Памер фотаздымка з убудаванай камеры</string>
     
