@@ -169,6 +169,14 @@ public class ShareDialog {
 		a.startActivity(Intent.createChooser(intent, a.getString(R.string.send_location)));
 	}
 	
+	public static void sendMessage(Activity a, String msg) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setAction(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, msg);
+		intent.setType("text/plain");
+		a.startActivity(Intent.createChooser(intent, a.getString(R.string.send_location)));
+	}
+	
 	public static void sendQRCode(final Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
 		Intent intent = new Intent();
 		intent.addCategory(Intent.CATEGORY_DEFAULT);

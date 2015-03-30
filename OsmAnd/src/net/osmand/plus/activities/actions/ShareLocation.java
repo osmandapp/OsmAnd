@@ -34,8 +34,9 @@ public class ShareLocation extends OsmAndAction {
 		mapActivity = (MapActivity) activity;
 		AlertDialog.Builder builder = new Builder(mapActivity);
 		builder.setTitle(R.string.send_location_way_choose_title);
+//		"Email", "SMS", 
 		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard", "geo:", "QR-Code"
+				activity.getString(R.string.shared_string_message), "Clipboard", "geo:", "QR-Code"
 		}, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -48,26 +49,29 @@ public class ShareLocation extends OsmAndAction {
 					final String httpUrl = "http://osmand.net/go?lat=" + ((float) latitude) + "&lon=" + ((float) longitude) + "&z=" + zoom;
 					String sms = mapActivity.getString(R.string.send_location_sms_pattern, geoUrl, httpUrl);
 					if (which == 0) {
-						sendEmail(httpUrl, geoUrl);
+						sendMessage(sms);
+//					} else if (which == 1) {
+//						sendEmail(httpUrl, geoUrl);
+//					} else if (which == 2) {
+//						sendSms(sms);
 					} else if (which == 1) {
-						sendSms(sms);
-					} else if (which == 2) {
 						sendToClipboard(sms);
-					} else if (which == 3) {
+					} else if (which == 2) {
 						sendGeoActivity(geoUrl);
-					} else if (which == 4) {
+					} else if (which == 3) {
 						sendQRCode(latitude, longitude);
 					}
 				} catch (RuntimeException e) {
 					Toast.makeText(mapActivity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 				}				
 			}
-
-			
 		});
     	return builder.create();
     }
 	
+	private void sendMessage(String sms) {
+		ShareDialog.sendMessage(mapActivity, sms);		
+	}
 
 
 	private void sendEmail(final String httpUrl, final String geoUrl) {

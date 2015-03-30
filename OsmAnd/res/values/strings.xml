@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 	<string name="agps_info">A-GPS info</string>
+	<string name="shared_string_message">Message</string>
 	<string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
     <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
 	<string name="welmode_download_maps">Download maps</string>
