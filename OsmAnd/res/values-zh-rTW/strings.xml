@@ -1959,4 +1959,5 @@
     <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請您只在有資格時，才按下 \"是\" 使用此一功能。</string>
 	<string name="agps_info">A-GPS 資訊</string>
 	<string name="agps_data_last_downloaded">A-GPS 資料上次下載：%1$s</string>
-    </resources>
+    <string name="shared_string_message">訊息</string>
+	</resources>

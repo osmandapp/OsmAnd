@@ -1030,7 +1030,7 @@
 \n\t* SRTM 파일 삭제
 \n\t* OSM 노트 지원 "</string>
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
-    <string name="intermediate_items_sort_return">경유지는 도착지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬.</string>
+    <string name="intermediate_items_sort_return">경유지는 현재 위치에서 도착지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬됩니다.</string>
     <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
     <string name="local_osm_changes_backup_successful">OSM 변경 파일이 성공적으로 생성되었습니다 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
@@ -2211,4 +2211,13 @@
     <string name="osm_changes_added_to_local_edits">OSM 변경 내용이 로컬 변경 내용에 추가</string>
    	<string name="mark_to_delete">표시하여 삭제</string>
 	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 심볼 이상 이어야 합니다!</string>
-	</resources>
+	<string name="agps_info">A-GPS 정보</string>
+	<string name="shared_string_message">메세지</string>
+	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$ s</string>
+    <string name="confirm_usage_speed_cameras">(독일, 프랑스, 이탈리아, 등) 많은 국가에서 속도 카메라 경고를 사용하는 것은 법률에 의해 허용 되지 않습니다. OsmAnd은 법률을 위반할 경우 어떤 책임도 지지 않습니다. 이 기능을 이해하는 경우에 [예] 를 클릭 하십시오.</string>
+	<string name="welmode_download_maps">지도 다운로드</string>
+	<string name="welcome_select_region">해당 지역 선택</string>
+	<string name="welcome_text">OsmAnd는 지도 및 오프라인 운행을 이용할 수 있습니다!</string>
+	<string name="welcome_header">환영 합니다</string>
+    <string name="current_route">현재 루트</string>
+    </resources>
