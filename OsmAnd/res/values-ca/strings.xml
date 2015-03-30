@@ -1340,7 +1340,7 @@
 	<string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
-	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
+	<string name="intermediate_items_sort_return">S\'han reordenat les fites intermèdies per optimitzar la ruta des de la ubicació actual fins a la destinació.</string>
     <string name="osmand_distance_planning_plugin_description">Aquest connector proporciona un giny de la pantalla del mapa que permet crear itineraris prement sobre el mapa, o usant o modificant fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un arxiu GPX que podreu usar més endavant com una referència.</string>
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
@@ -1511,7 +1511,7 @@
 	</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Per accedir a la configuració de la monitorització avançada en temps real OsMo, consulteu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
+    <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat de monitorització avançada en temps real OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment d\'altres dispositius, així com ser seguit. Podeu crear grups anònims de manera espontània, compartir la ubicació amb els altres membres i comunicar-vos. Hi ha diferents paràmetres de seguiment: puntual i permanent.\n\nEls grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. ex. no tenen control remot ni administració de grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
     <string name="osmo_plugin_name">Monitorització OsMo</string>
     <string name="osmo_settings">Monitorització de l\'OsMo</string>
    	
@@ -1948,7 +1948,7 @@
 	<string name="shared_string_action_template">Acció {0}</string>
 	<string name="shared_string_collapse">Reduir</string>
 	<string name="shared_string_currently_recording_track">Enregistrament de la traça en curs</string>
-	<string name="shared_string_video">Video</string>
+	<string name="shared_string_video">Vídeo</string>
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Fites</string>
 	<string name="welmode_download_maps">Baixada de mapes</string>
@@ -1961,4 +1961,8 @@
 	<string name="location_on_map">Posició:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rendering_attr_pisteRoutes_name">Rutes de pista</string>
 	<string name="shared_string_release">Alliberat</string>
+	<string name="shared_string_message">Missatge</string>
+	<string name="agps_data_last_downloaded">Darreres dades A-GPS baixades: %1$s</string>
+    <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars no és permès per la llei. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Feu clic a «sí» només si se us permet utilitzar aquesta funció.</string>
+	<string name="agps_info">Informació A-GPS</string>
 	</resources>
