@@ -773,7 +773,7 @@
   <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier de données d\'OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc ...\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données sqlite. "</string>
   <string name="osmand_background_plugin_description">Afficher les préférences afin d\'activer le suivi et la navigation durant la mise en veille (réveille périodique du GPS).</string>
   <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
   
@@ -1099,7 +1099,7 @@
     
     
 	<string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux et les reliefs de montagne pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner le type de carte désiré), et de les utiliser avec les cartes hors-ligne.</string>
+    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes hors-ligne d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.↵\n↵\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1935,7 +1935,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Parcours de pistes</string>
+    <string name="rendering_attr_pisteRoutes_name">Piste</string>
 	<string name="watch">Montre</string>
 	<string name="shared_string_audio">Audio</string>
 	
