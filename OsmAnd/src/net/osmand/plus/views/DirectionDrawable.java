@@ -35,13 +35,12 @@ public class DirectionDrawable extends Drawable {
 		this.resourceId = resourceId;
 	}
 
-	public void setImage(int resourceId){
+	public void setImage(int resourceId) {
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, 0);
 		this.resourceId = resourceId;
 	}
-
-
+	
 	public DirectionDrawable(Context ctx, float width, float height) {
 		this.ctx = ctx;
 		this.width = width;
@@ -77,21 +76,23 @@ public class DirectionDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
+		canvas.save();
+		
 		if (arrowImage != null) {
-			canvas.rotate(angle, canvas.getHeight() / 2, canvas.getWidth() / 2);
-			arrowImage.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+			int w = arrowImage.getIntrinsicWidth();
+			int h = arrowImage.getIntrinsicHeight();
+			int dx = canvas.getWidth() - w;
+			int dy = canvas.getHeight() - h;
+			arrowImage.setBounds(0, 0, w, h);
+			canvas.rotate(angle, canvas.getWidth() / 2, canvas.getHeight() / 2);
+			canvas.translate(dx/2, dy/2);
 			arrowImage.draw(canvas);
-			// TODO delete?
-//			Bitmap arrow = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
-//			Canvas canv = new Canvas(arrow);
-//			arrowImage.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-//			arrowImage.draw(canv);
-//			canvas.drawBitmap(arrow, null, new Rect(0, 0, arrow.getHeight(), arrow.getWidth()), null);
 		} else {
-			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth() / 2);
+			canvas.rotate(angle, canvas.getWidth() / 2, canvas.getHeight() / 2);
 			Path directionPath = createDirectionPath();
 			canvas.drawPath(directionPath, paintRouteDirection);
 		}
+		canvas.restore();
 	}
 
 	@Override

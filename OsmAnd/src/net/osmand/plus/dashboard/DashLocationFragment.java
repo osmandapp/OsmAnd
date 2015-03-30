@@ -134,11 +134,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 				arrowResId = R.drawable.ic_destination_arrow_white;
 			}
 			DirectionDrawable dd = (DirectionDrawable) arrow.getDrawable();
-			if (paint) {
-				dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
-			} else {
-				dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_white);
-			}
+			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 			if (fromLoc == null || h == null) {
 				dd.setAngle(0);
 			} else {

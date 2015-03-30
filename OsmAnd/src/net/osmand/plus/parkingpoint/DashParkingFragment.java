@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.Calendar;
 
@@ -113,6 +114,11 @@ public class DashParkingFragment extends DashLocationFragment {
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null) {
 			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);
+//			Drawable dds = getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation,
+//					R.color.color_distance);
+//			DirectionDrawable dd = new DirectionDrawable(mainView.getContext(), 
+//					dds.getIntrinsicWidth(), dds.getIntrinsicHeight());
+//			direction.setImageDrawable(dd);
 			dv.paint = false;
 			dv.arrowResId = R.drawable.ic_action_start_navigation;
 			distances.add(dv);

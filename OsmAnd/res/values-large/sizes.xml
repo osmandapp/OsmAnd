@@ -18,7 +18,7 @@
 	
 	<dimen name="map_alarm_bottom_margin">140dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">78dp</dimen>
-	<dimen name="map_button_shadow_height">127dp</dimen>
+	<dimen name="map_button_shadow_height">112dp</dimen>
 	<dimen name="map_widget_icon">32dp</dimen>
 	<dimen name="map_widget_height">48dp</dimen>
 	<dimen name="map_widget_image">120dp</dimen>
