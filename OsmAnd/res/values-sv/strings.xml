@@ -1848,4 +1848,7 @@
 	<string name="welcome_select_region">Välj område</string>
 	<string name="welcome_text">OsmAnd låter dig använda kartor och navigering offline!</string>
 	<string name="welcome_header">Välkommen</string>
+    <string name="agps_info">A-GPS-info</string>
+	<string name="shared_string_message">Meddelande</string>
+	<string name="agps_data_last_downloaded">A-GPS-data senast nedladdat: %1$s</string>
     </resources>
