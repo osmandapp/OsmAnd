@@ -76,6 +76,9 @@ public class PointLocationLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
+		if(box.getZoom() < 3) {
+			return;
+		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
 		if(nm != this.nm) {
