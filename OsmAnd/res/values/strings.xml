@@ -1544,6 +1544,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
 	<string name="auto_follow_route_never">Never (tap \'Go\' to start guidance manually)</string>
+	<string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="keep_informing_descr">Re-announce navigation instructions at regular intervals</string>
     <string name="keep_informing">Repeat navigation instructions</string>
 	<string name="auto_follow_route_navigation">Auto-center nav only</string>
