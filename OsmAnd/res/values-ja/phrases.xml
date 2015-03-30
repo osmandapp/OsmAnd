@@ -174,4 +174,33 @@
 	<string name="poi_toll_booth">料金所(Toll booth)</string>
 	<string name="poi_radiotechnics">電器屋(Radiotechnics store)</string>
 	<string name="poi_atv">四輪バイク販売店(Quad store)</string>
+	<string name="poi_border_control">出入国管理(Border control)</string>
+	<string name="poi_traffic_calming_bump">減速帯(Bump)</string>
+	<string name="poi_traffic_calming_hump">減速帯(Hump)</string>
+	<string name="poi_traffic_calming_cushion">減速帯(Cushion)</string>
+	<string name="poi_traffic_calming_chicane">減速用障害物・減速帯(Chicane)</string>
+	<string name="poi_traffic_calming_rumble_strip">ランブルストリップス・段差舗装(Rumble strip)</string>
+	<string name="poi_traffic_calming_table">上げ横断歩道・減速帯(Table)</string>
+	<string name="poi_traffic_calming_choker">減速用車線・減速帯(Choker)</string>
+	<string name="poi_traffic_signals">信号機(Stop light)</string>
+
+	<string name="poi_car_repair">車両修理(Car repair)</string>
+	<string name="poi_service_tyres">タイヤ(Tires)</string>
+	<string name="poi_vehicle_inspection">自動車検査(Vehicle inspection)</string>
+	<string name="poi_fuel">ガソリンスタンド(Gas station)</string>
+	<string name="poi_charging_station">充電ステーション(Charging station)</string>
+	<string name="poi_vehicle_ramp">車両用取付け道路(Vehicle ramp)</string>
+	<string name="poi_compressed_air">空気入れ・圧縮空気(Compressed air)</string>
+	<string name="poi_parking">駐車場(Parking)</string>
+	<string name="poi_motorcycle_parking">バイク駐輪場(Motorcycle parking)</string>
+	<string name="poi_parking_entrance">駐車場入口(Parking entrance)</string>
+	<string name="poi_garages">車庫(Garages)</string>
+
+	<string name="poi_public_transport_platform">公共交通機関停留所(Public transport stop)</string>
+	<string name="poi_public_transport_platform_bus">バス停(Bus stop)</string>
+	<string name="poi_public_transport_platform_trolleybus">トロリーバス停(Trolleybus stop)</string>
+	<string name="poi_public_transport_stop_position">公共交通機関の停止位置(Public transport stop position)</string>
+	<string name="poi_public_transport_platform_tram">トラム停留所(Tram stop)</string>
+	<string name="poi_tram_stop">トラム停留所(Tram stop)</string>
+	<string name="poi_public_transport_station">公共交通機関駅(Public transport station)</string>
 	</resources>
