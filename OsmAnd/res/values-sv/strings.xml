@@ -385,7 +385,7 @@
 <string name="init_native_library">Initierar inbyggt bibliotek …</string>
 <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
-<string name="auto_follow_route_never">Aldrig (tryck på den blå pilen för att starta vägledning manuellt)</string>
+<string name="auto_follow_route_never">Aldrig (tryck på Kör för att starta vägledning manuellt)</string>
 <string name="auto_follow_route_navigation">Auto-centrera endast nav</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
@@ -1834,8 +1834,8 @@
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering till</string>
 	<string name="your_edits">Dina redigeringar</string>
     <string name="osmand_parking_overdue">Föråldrad</string>
-	<string name="delay_to_start_navigation_descr">Starta navigering automatiskt efter bestämd tid</string>
-    <string name="delay_to_start_navigation">Hoppa över ruttplanering</string>
+	<string name="delay_to_start_navigation_descr">Ange väntetid att bli kvar på ruttplaneringsskärmen</string>
+    <string name="delay_to_start_navigation">Börja sväng-efter-sväng-navigering efter</string>
     <string name="shared_string_go">Kör</string>
 	<string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
     <string name="confirmation_to_clear_history">Vill du ta bort hela historiken?</string>
@@ -1845,8 +1845,8 @@
    	<string name="mark_to_delete">Markera för att ta bort</string>
 	<string name="confirm_usage_speed_cameras">I många länder (Tyskland, Frankrike, Italien och andra) är det inte tillåtet att använda varningar om hastighetskameror. OsmAnd tar inget ansvar om du bryter mot lagen. Klicka på Ja endast om du får använda denna funktion.</string>
 	<string name="welmode_download_maps">Hämta kartor</string>
-	<string name="welcome_select_region">Välj område</string>
-	<string name="welcome_text">OsmAnd låter dig använda kartor och navigering offline!</string>
+	<string name="welcome_select_region">För att avspegla dina trafiksignaler och lagar på ett korrekt sätt, välj den region du kör i:</string>
+	<string name="welcome_text">OsmAnd erbjuder offline-kartor och fullständig navigering offline!</string>
 	<string name="welcome_header">Välkommen</string>
     <string name="agps_info">A-GPS-info</string>
 	<string name="shared_string_message">Meddelande</string>
