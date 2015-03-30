@@ -992,6 +992,9 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", false).makeProfile();
+	{
+		SHOW_DESTINATION_ARROW.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeGlobal().cache();
@@ -1761,6 +1764,14 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.CAR, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
+	
+	public final CommonPreference<Boolean> SHOW_STREET_NAME = 
+			new BooleanPreference("show_street_name", false).makeProfile();
+	{
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.CAR, true);
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 	
 	public static final int OSMAND_DARK_THEME = 0;

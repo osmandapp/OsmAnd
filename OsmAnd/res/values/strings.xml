@@ -108,6 +108,7 @@
 	<string name="shared_string_map">Map</string>
 	<string name="shared_string_favorite">Favorite</string>
 	<string name="shared_string_favorites">Favorites</string>
+	<string name="shared_string_address">Address</string>
 	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
 	<string name="shared_string_my_location">My Location</string>

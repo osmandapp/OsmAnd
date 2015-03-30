@@ -35,6 +35,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -46,6 +47,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -890,6 +892,10 @@ public class MapActivity extends AccessibleActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
+		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
+		if(mcl != null) {
+			mcl.onActivityResult(requestCode, resultCode, data);
+		}
 	}
 
 	public void refreshMap() {

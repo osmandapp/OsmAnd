@@ -689,7 +689,7 @@ public class WaypointHelper {
 				return null;
 			} else if(type == TARGETS) {
 				int i = !((TargetPoint)point).intermediate? R.drawable.list_destination :
-					R.drawable.list_destination;
+					R.drawable.list_intermediate;
 				return uiCtx.getResources().getDrawable(i);
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());

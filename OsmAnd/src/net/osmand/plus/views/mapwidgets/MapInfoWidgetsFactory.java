@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.Location;
-import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.NavigationService;
@@ -23,7 +22,6 @@ import net.osmand.plus.monitoring.ValueHolder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -33,18 +31,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MapInfoWidgetsFactory {
 	
@@ -237,7 +229,9 @@ public class MapInfoWidgetsFactory {
 			boolean showNextTurn = false;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName(type);
+					if(settings.SHOW_STREET_NAME.get()) {
+						text = routingHelper.getCurrentName(type);
+					}
 				} else {
 					int di = MapRouteInfoControl.getDirectionInfo();
 					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
@@ -253,7 +247,8 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			} else if(settings.getApplicationMode() != ApplicationMode.DEFAULT &&
-					map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
+					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
