@@ -1934,4 +1934,5 @@
 	<string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox no est permitidu dae sa lege. OsmAnd non si pigat responsabilidades s’in casu tue che l’as a violare. Pro piaghere carca eja petzi si podes impreare custa funtzionalidade.</string>
 	<string name="agps_info">Informatziones A-GPS</string>
 	<string name="agps_data_last_downloaded">Ùrtimu agiornamentu datos A-GPS: %1$s</string>
-    </resources>
+    <string name="shared_string_message">Messàgiu</string>
+	</resources>

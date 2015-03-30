@@ -102,7 +102,7 @@
   <string name="init_native_library">Chargement …</string>
   <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
   <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
-  <string name="auto_follow_route_never">Jamais (Appuyez sur la flèche pour démarrer manuellement la navigation)</string>
+  <string name="auto_follow_route_never">Jamais (Utiliser \"Aller\" pour démarrer la navigation)</string>
   <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
   <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
   <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
@@ -1989,12 +1989,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
 	<string name="your_edits">Vos modifications</string>
     <string name="osmand_parking_overdue">Expiré</string>
-	<string name="delay_to_start_navigation_descr">Démarrer automatiquement la navigation après le temps indiqué</string>
+	<string name="delay_to_start_navigation_descr">Temps d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation</string>
     <string name="shared_string_go">Aller</string>
 	<string name="shared_string_not_use">Non utilisé</string>
 	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
-    <string name="delay_to_start_navigation">Passer le calcul d\'itinéraire</string>
+    <string name="delay_to_start_navigation">Démarrer la navigation après</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
 	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
@@ -2007,4 +2007,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="agps_info">Données A-GPS</string>
 	<string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
     <string name="shared_string_message">Message</string>
+	<string name="shared_string_do_not_use">Ne pas utiliser</string>
 	</resources>

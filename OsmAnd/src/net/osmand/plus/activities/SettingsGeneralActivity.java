@@ -675,7 +675,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		int k = 0;
 		// entries[k++] = getString(R.string.shared_string_none);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.voice_not_use);
+		entries[k++] = getString(R.string.shared_string_do_not_use);
 		for (String s : voiceFiles) {
 			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) +" ":"") +
 					FileNameTranslationHelper.getVoiceName(this, s);

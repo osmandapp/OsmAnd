@@ -14,8 +14,8 @@
 	<string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
     <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
 	<string name="welmode_download_maps">Download maps</string>
-	<string name="welcome_select_region">Select your region</string>
-	<string name="welcome_text">OsmAnd allows you to use maps and offline navigation!</string>
+	<string name="welcome_select_region">To correctly reflect your traffic signs and laws, please select your driving region:</string>
+	<string name="welcome_text">OsmAnd provides fully offline map browsing, and fully offline navigation!</string>
 	<string name="welcome_header">Welcome</string>
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changes</string>
@@ -23,8 +23,8 @@
 	<string name="osmo_grop_name_length_alert">Group name should be at least 3 symbols long!</string>
 	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the whole history?</string>
-    <string name="delay_to_start_navigation_descr">Automatically start navigation after specified interval</string>
-    <string name="delay_to_start_navigation">Skip route planning</string>
+    <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen</string>
+    <string name="delay_to_start_navigation">Start turn-by-turn navigation after</string>
     <string name="shared_string_go">Go</string>
 	<string name="osmand_parking_overdue">overdue</string>
 	<string name="action_create">Action create</string>
@@ -52,7 +52,7 @@
 	<string name="shared_string_cancel">Cancel</string>
 	<string name="shared_string_dismiss">Dismiss</string>
 	<string name="shared_string_yes">Yes</string>
-	<string name="shared_string_not_use">Not use</string>
+	<string name="shared_string_do_not_use">Do not use</string>
 	<string name="shared_string_no">No</string>
 	<string name="shared_string_on">On</string>
 	<string name="shared_string_off">Off</string>
@@ -1543,7 +1543,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="init_native_library">Initializing native library…</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
-	<string name="auto_follow_route_never">Never (tap blue arrow to start guidance manually)</string>
+	<string name="auto_follow_route_never">Never (tap \'Go\' to start guidance manually)</string>
 	<string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="keep_informing_descr">Re-announce navigation instructions at regular intervals</string>
     <string name="keep_informing">Repeat navigation instructions</string>
@@ -1659,7 +1659,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- GPX navigation options
 		\n\t- UI update and large bug fixing
 	</string>
-	<string name="voice_not_use">Do not use</string>
 	<string name="installing_new_resources">Unpacking new data…</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no Internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
