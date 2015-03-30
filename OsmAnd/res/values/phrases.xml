@@ -54,7 +54,7 @@
 	<string name="poi_greengrocer">Greengrocery</string>
 	<string name="poi_seafood">Seafood store</string>
 	<string name="poi_confectionery">Confectionery</string>
-	<string name="poi_ice_cream">Ice cream parlor</string>
+	<string name="poi_ice_cream">Ice cream shop</string>
 	<string name="poi_supermarket">Supermarket</string>
 	<string name="poi_shop_tea">Tea shop</string>
 	<string name="poi_dairy">Dairy shop</string>
@@ -73,8 +73,8 @@
 	<string name="poi_boutique">Fashion boutique</string>
 	<string name="poi_carpet">Carpet shop</string>
 	<string name="poi_chemist">Drug store</string>
-	<string name="poi_clothes">Apparel store</string>
-	<string name="poi_child_clothes">Childrens apparel</string>
+	<string name="poi_clothes">Clothes shop</string>
+	<string name="poi_child_clothes">Child clothes shop</string>
 	<string name="poi_shoes">Shoe store</string>
 	<string name="poi_computer">Computer store</string>
 	<string name="poi_copyshop">Copy shop</string>
@@ -82,9 +82,9 @@
 	<string name="poi_fabric">Drapery shop</string>
 	<string name="poi_bedding">Bedding store</string>
 	<string name="poi_dive">Diving equipment</string>
-	<string name="poi_doityourself">Home improvement store</string>
+	<string name="poi_doityourself">Do-It-Yourself store</string>
 	<string name="poi_erotic">Erotic shop</string>
-	<string name="poi_fishing">Fishing tackle</string>
+	<string name="poi_fishing">Fishing store</string>
 	<string name="poi_florist">Flower shop</string>
 	<string name="poi_frame">Picture frame shop</string>
 	<string name="poi_furniture">Furniture store</string>
@@ -100,15 +100,15 @@
 	<string name="poi_houseware">Household supply store</string>
 	<string name="poi_hunting">Hunting equipment</string>
 	<string name="poi_interior_decoration">Interior decoration store</string>
-	<string name="poi_jewelry">Jewelry store</string>
+	<string name="poi_jewelry">Jewelry</string>
 	<string name="poi_kiosk">Kiosk</string>
 	<string name="poi_kitchen">Kitchen furnishings</string>
 	<string name="poi_medical_supply">Medical supply</string>
-	<string name="poi_mobile_phone">Cell phone store</string>
+	<string name="poi_mobile_phone">Mobile phone store</string>
 	<string name="poi_motorcycle">Motorcycle shop</string>
 	<string name="poi_musical_instrument">Musical instruments</string>
-	<string name="poi_newsagent">Newsagency</string>
-	<string name="poi_optician">Optometrist</string>
+	<string name="poi_newsagent">News Agency</string>
+	<string name="poi_optician">Optician</string>
 	<string name="poi_organic">Organic food</string>
 	<string name="poi_outdoor">Outdoor store</string>
 	<string name="poi_paint">Paint shop</string>
@@ -116,7 +116,7 @@
 	<string name="poi_radiotechnics">Radiotechnics store</string>
 	<string name="poi_second_hand">Second hand store</string>
 	<string name="poi_ship_chandler">Ship chandler</string>
-	<string name="poi_sports">Sporting goods</string>
+	<string name="poi_sports">Sports shop</string>
 	<string name="poi_stationery">Stationery shop</string>
 	<string name="poi_tableware">Tableware shop</string>
 	<string name="poi_ticket">Ticket shop</string>
@@ -131,10 +131,10 @@
 	<string name="poi_electronics">Electronics store</string>
 	<string name="poi_car">Car shop</string>
 	<string name="poi_car_parts">Car parts</string>
-	<string name="poi_atv">Quad store</string>
+	<string name="poi_atv">ATV store</string>
 	<string name="poi_cosmetics">Cosmetics</string>
 	<string name="poi_marketplace">Marketplace</string>
-	<string name="poi_sewing">Dry goods store</string>
+	<string name="poi_sewing">Sewing store</string>
 
 	<string name="poi_police">Police</string>
 	<string name="poi_fire_station">Fire station</string>
@@ -169,7 +169,7 @@
 	<string name="poi_service_tyres">Tires</string>
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
-	<string name="poi_fuel">Gas station</string>
+	<string name="poi_fuel">Fuel station</string>
 	<string name="poi_charging_station">Charging station</string>
 	<string name="poi_vehicle_ramp">Vehicle ramp</string>
 	<string name="poi_compressed_air">Compressed air</string>
