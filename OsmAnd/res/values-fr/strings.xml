@@ -2000,8 +2000,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
    	<string name="mark_to_delete">Marquer pour suppression</string>
 	<string name="current_route">Itinéraire actuel</string>
     <string name="welmode_download_maps">Télécharger les cartes</string>
-	<string name="welcome_select_region">Sélectionnez votre région</string>
-	<string name="welcome_text">OsmAnd utilise des cartes locales et permet la navigation hors ligne !</string>
+	<string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, merci de sélectionner votre région :</string>
+	<string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau !</string>
 	<string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
 	<string name="agps_info">Données A-GPS</string>
