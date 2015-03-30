@@ -224,6 +224,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		} else {
 			getTargets().setStartPoint(l, true, pd);
 		}
+		hideDialog();
 		showDialog();
 	}
 
