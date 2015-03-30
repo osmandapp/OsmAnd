@@ -570,26 +570,18 @@
 	<string name="poi_daymark">Дневной маяк</string>
 	<string name="poi_distance_mark">Отметка расстояния</string>
 	<string name="poi_dry_dock">Сухой док</string>
-	<string name="poi_dyke"/>
 	<string name="poi_floating_dock">Плавучий док</string>
 	<string name="poi_fog_signal">Сигнал при тумане</string>
 	<string name="poi_harbour_basin">Акватория гавани</string>
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_landmark">Ориентир</string>
 	<string name="poi_seamark_light">Маяк</string>
-	<string name="poi_seamark_light_major"/>
-	<string name="poi_seamark_light_minor"/>
-	<string name="poi_seamark_light_float"/>
-	<string name="poi_seamark_light_vessel"/>
 	<string name="poi_mooring">Причал</string>
 	<string name="poi_notice">Уведомление</string>
-	<string name="poi_pile"/>
-	<string name="poi_radar_transponder"/>
 	<string name="poi_radio_station">Радиостанция</string>
 	<string name="poi_signal_station_traffic">Сигнальная станция</string>
 	<string name="poi_signal_station_warning">Сигнал опасности</string>
 	<string name="poi_small_craft_facility">Лодочная станция</string>
-	<string name="poi_topmark"/>
 	<string name="poi_seamark_rock">Скала</string>
 	<string name="poi_seamark_wreck">Кораблекрушение</string>
 

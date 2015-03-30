@@ -1698,7 +1698,6 @@
     
 <string name="speed_limit_exceed">Tolerancia no límite de velocidade</string>
 	<string name="speed_limit_exceed_message">Seleccione a marxe de tolerancia do límite de velocidade por riba da cal desexa ser avisado por voz.</string>
-	<string name="route_descr_destination"/>
     <string name="dash_download_msg_none">Desexa descargar mapas para empregar sen conexión?</string>
     <string name="dash_download_msg">Ten descargados %1$s mapas</string>
     <string name="dash_download_new_one">Descargar un mapa novo</string>

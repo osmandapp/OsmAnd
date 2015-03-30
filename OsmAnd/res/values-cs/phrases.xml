@@ -11,22 +11,15 @@
 	<string name="poi_seafood">Obchod mořskými plody</string>
 	<string name="poi_supermarket">Supermarket</string>
 	<string name="poi_books">Knihkupectví</string>
-	<string name="poi_bicycle"/>
-	<string name="poi_anime"/>
 	<string name="poi_antiques">Starožitnosti</string>
 	<string name="poi_art">Obchod uměním</string>
 	<string name="poi_baby_goods">Dětské zboží</string>
-	<string name="poi_bag"/>
 	<string name="poi_bathroom_furnishing">Vybavení koupelen</string>
 	<string name="poi_bed">Vybavení ložnic</string>
 	<string name="poi_boutique">Módní butik</string>
-	<string name="poi_carpet"/>
 	<string name="poi_chemist">Drogerie</string>
-	<string name="poi_clothes"/>
 	<string name="poi_children_clothes">Dětské oblečení</string>
 	<string name="poi_shoes">Obuv</string>
-	<string name="poi_computer"/>
-	<string name="poi_copyshop"/>
 	<string name="poi_hardware">Železářství</string>
 	<string name="poi_tobacco">Tabák</string>
 	<string name="poi_dive">Potapěčské vybavení</string>
@@ -93,12 +86,10 @@
 	<string name="poi_first_aid">První pomoc</string>
 	<string name="poi_dentist">Zubař</string>
 	<string name="poi_veterinary">Veterinář</string>
-	<string name="healthcare_alternative"/>
 	<string name="blood_bank">Krevní banka</string>
 	<string name="optometrist">Optik</string>
 	<string name="physiotherapist">Fyzioterapeut</string>
 	<string name="psychotherapist">Psychoterapeut</string>
-	<string name="healthcare_yes"/>
 
 	<string name="poi_company">Společnost</string>
 	<string name="poi_insurance">Pojištění</string>
@@ -151,7 +142,6 @@
 	<string name="poi_fast_food">Rychlé občerstvení</string>
 	<string name="poi_bar">Bar</string>
 	<string name="poi_drinking_water">Pitná voda</string>
-	<string name="poi_barbecue"/>
 
 	<string name="poi_craft_beekeeper">Včelař</string>
 	<string name="poi_craft_blacksmith">Kovář</string>

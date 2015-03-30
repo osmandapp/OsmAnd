@@ -1119,7 +1119,6 @@
     
 	<string name="index_srtm_ele">Curbe de nivel</string>
     <string name="index_srtm_parts">părți</string>
-    <string name="srtm_plugin_description"/>
     <string name="srtm_plugin_name">Plugin SRTM</string>
     <string name="download_select_map_types">Alte hărți</string>
     <string name="download_srtm_maps">Hărți SRTM</string>
@@ -1279,7 +1278,6 @@
     <string name="distance_measurement_save_gpx">Salvează ca și GPX</string>
     <string name="distance_measurement_load_gpx">Deschide GPX existent</string>
     <string name="wait_current_task_finished">Vă rog așteptați până când se termină sarcina curentă</string>
-    <string name="use_kalman_filter_compass_descr"/>
     <string name="use_kalman_filter_compass">Folosește filtrul Kalman</string>
     <string name="use_magnetic_sensor">Utilizează senzorul magnetic</string>
     <string name="other_location">Altele</string>

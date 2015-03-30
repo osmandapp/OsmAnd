@@ -1955,10 +1955,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="lang_sr">صربی</string>
 	<string name="lang_zh_CN">چینی ساده</string>
 	<string name="lang_zh_TW">چینی سنتی</string>
-	<string name="rendering_attr_alpineHiking_name"/>
-    <string name="rendering_attr_alpineHiking_description"/>
-    <string name="rendering_attr_osmcTraces_name"/>
-    <string name="rendering_attr_osmcTraces_description"/>
     
 	<string name="arrival_distance_factor_early">زود</string>
     <string name="arrival_distance_factor_normally">معمولی</string>

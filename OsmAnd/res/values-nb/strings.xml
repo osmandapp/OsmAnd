@@ -745,7 +745,6 @@
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
-    <string name="osmo_plugin_description"/>
     <string name="osmo_plugin_name">OsMo-overvåking</string>
     <string name="osmo_settings">OsMo-overvåking</string>
    	<string name="map_widget_top">Statuslinje</string>
