@@ -14,8 +14,8 @@
 	<string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
     <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
 	<string name="welmode_download_maps">Download maps</string>
-	<string name="welcome_select_region">Select your region</string>
-	<string name="welcome_text">OsmAnd allows you to use maps and offline navigation!</string>
+	<string name="welcome_select_region">To correctly reflect your traffic signs and laws, please select your driving region:</string>
+	<string name="welcome_text">OsmAnd provides fully offline map browsing, and fully offline navigation!</string>
 	<string name="welcome_header">Welcome</string>
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changes</string>
