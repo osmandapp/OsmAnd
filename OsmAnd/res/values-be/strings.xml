@@ -675,7 +675,7 @@
 	<string name="init_native_library">Ініцыалізацыя свойскіх бібліятэк…</string>
 	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
 	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да бягучага месцазнаходжаньня</string>
-	<string name="auto_follow_route_never">Ніколі (націскаць на сінюю стрэлку для навігацыі)</string>
+	<string name="auto_follow_route_never">Ніколі (націсьніце на \"Паехалі\" для навігацыі)</string>
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
 	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня.</string>
@@ -1923,8 +1923,8 @@
 	<string name="shared_string_release">Выдана</string>
 	<string name="shared_string_my_favorites">Мае ўлюбёныя</string>
 	<string name="confirmation_to_clear_history">Вы хочаце вычысьціць усю гісторыю?</string>
-    <string name="delay_to_start_navigation_descr">Аўтаматычны запуск навігацыі пасьля зададзенага інтэрвалу</string>
-    <string name="delay_to_start_navigation">Затрымка планаваньня маршруту</string>
+    <string name="delay_to_start_navigation_descr">Задайце час чаканьня, каб застацца на экране плянаваньня маршруту</string>
+    <string name="delay_to_start_navigation">Пачаць пакрокавую навігацыю праз</string>
     <string name="shared_string_go">Паехалі</string>
 	<string name="shared_string_not_use">Не выкарыстоўваць</string>
 	<string name="local_osm_changes_upload_all_confirm">Вы зьбіраецеся адаслаць %1$d зьменаў у OSM. Вы ўпэўненыя?</string>
@@ -1942,4 +1942,5 @@
 	<string name="agps_info">Інфармацыя пра A-GPS</string>
 	<string name="agps_data_last_downloaded">Апошнія сьцягнутыя зьвесткі A-GPS: %1$s</string>
     <string name="shared_string_message">Паведамленьне</string>
+	<string name="shared_string_do_not_use">Не выкарыстоўваць</string>
 	</resources>
