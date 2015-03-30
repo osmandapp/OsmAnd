@@ -1763,6 +1763,14 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
+	public final CommonPreference<Boolean> SHOW_STREET_NAME = 
+			new BooleanPreference("show_street_name", false).makeProfile();
+	{
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.CAR, true);
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
+	
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 

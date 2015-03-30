@@ -211,6 +211,7 @@ public class MapWidgetRegistry {
 //		settings.SHOW_RULER.resetToDefault();		
 		settings.SHOW_DESTINATION_ARROW.resetToDefault();
 		settings.TRANSPARENT_MAP_THEME.resetToDefault();
+		settings.SHOW_STREET_NAME.resetToDefault();
 		settings.CENTER_POSITION_ON_MAP.resetToDefault();
 	}
 	
@@ -219,6 +220,8 @@ public class MapWidgetRegistry {
 		addControlId(mil, cm, R.string.map_widget_show_destination_arrow, settings.SHOW_DESTINATION_ARROW);
 		addControlId(mil, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(mil, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
+		addControlId(mil, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
+		
 	}
 
 	private void addControlId(final MapInfoLayer mil, ContextMenuAdapter cm, int stringId, OsmandPreference<Boolean> pref) {

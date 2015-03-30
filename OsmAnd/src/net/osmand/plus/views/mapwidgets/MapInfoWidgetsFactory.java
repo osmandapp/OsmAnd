@@ -237,7 +237,9 @@ public class MapInfoWidgetsFactory {
 			boolean showNextTurn = false;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName(type);
+					if(settings.SHOW_STREET_NAME.get()) {
+						text = routingHelper.getCurrentName(type);
+					}
 				} else {
 					int di = MapRouteInfoControl.getDirectionInfo();
 					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
@@ -253,7 +255,8 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			} else if(settings.getApplicationMode() != ApplicationMode.DEFAULT &&
-					map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
+					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
