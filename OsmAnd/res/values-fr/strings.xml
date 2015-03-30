@@ -2006,4 +2006,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
 	<string name="agps_info">Données A-GPS</string>
 	<string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
-    </resources>
+    <string name="shared_string_message">Message</string>
+	</resources>
