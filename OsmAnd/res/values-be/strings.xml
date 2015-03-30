@@ -1941,4 +1941,5 @@
 	<string name="confirm_usage_speed_cameras">У многіх краінах (Германія, Францыя, Італія ды іншыя) выкарыстаньне дэтэктараў камер кантролю хуткасьці не дазволена законам. OsmAnd не нясе ніякай адказнасьці, калі вы парушыце закон. Калі ласка, націсніце кнопку \"Так\", толькі калі вы маеце права выкарыстоўваць гэтую функцыю.</string>
 	<string name="agps_info">Інфармацыя пра A-GPS</string>
 	<string name="agps_data_last_downloaded">Апошнія сьцягнутыя зьвесткі A-GPS: %1$s</string>
-    </resources>
+    <string name="shared_string_message">Паведамленьне</string>
+	</resources>
