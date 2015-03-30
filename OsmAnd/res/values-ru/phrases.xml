@@ -685,4 +685,9 @@
 		<string name="poi_public_transport">Общественный транспорт</string>
 		<string name="poi_air_transport">Воздушный транспорт</string>
 		<string name="poi_water_transport">Водный транспорт</string>
-		</resources>
+		<string name="poi_bicycle_transport">Велосипедный транспорт</string>
+		<string name="poi_sightseeing">Достопримечательности</string>
+		<string name="poi_internet_access">Доступ в Интернет</string>
+	<string name="poi_club">Клуб</string>
+	<string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
+	</resources>
