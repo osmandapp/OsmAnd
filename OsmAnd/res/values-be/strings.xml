@@ -36,8 +36,8 @@
     <string name="edit_tilesource_name">Назва</string>
     <string name="maps_define_edit">Вызначыць/зьмянiць…</string>
 	<string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
-	<string name="driving_region_descr">Абярыце рэгіён для кіраваньня: ЗША, Эўропа, Вялікабрытанія, Азія і іншыя</string>
-	<string name="driving_region">Рэгіён для кіраваньня</string>
+	<string name="driving_region_descr">Абярыце рэгіён кіраваньня: ЗША, Эўропа, Вялікабрытанія, Азія і іншыя</string>
+	<string name="driving_region">Рэгіён кіраваньня</string>
 	<string name="driving_region_japan">Японія</string>
 	<string name="driving_region_us">ЗША</string>
 	<string name="driving_region_canada">Канада</string>
@@ -1943,4 +1943,5 @@
 	<string name="agps_data_last_downloaded">Апошнія сьцягнутыя зьвесткі A-GPS: %1$s</string>
     <string name="shared_string_message">Паведамленьне</string>
 	<string name="shared_string_do_not_use">Не выкарыстоўваць</string>
+	<string name="shared_string_address">Адрас</string>
 	</resources>
