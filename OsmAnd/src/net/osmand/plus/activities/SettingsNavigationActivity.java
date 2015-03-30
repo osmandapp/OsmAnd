@@ -194,7 +194,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		String[] delayIntervalNames = new String[delayIntervals.length];
 		for (int i = 0; i < delayIntervals.length; i++) {
 			if (i == 0) {
-				delayIntervalNames[i] = getString(R.string.shared_string_not_use);
+				delayIntervalNames[i] = getString(R.string.auto_follow_route_never);
 			} else {
 				delayIntervalNames[i] = delayIntervals[i] + " " + getString(R.string.int_seconds);
 			}
