@@ -243,7 +243,7 @@
   <string name="init_native_library">Инициализация нативной библиотеки…</string>
   <string name="choose_auto_follow_route">Настройки автовозврата карты</string>
   <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернётся к текущей позиции</string>
-  <string name="auto_follow_route_never">Никогда (нажмите синюю стрелочку вручную для навигации)</string>
+  <string name="auto_follow_route_never">Никогда (для начала навигации нажмите \"Поехали\")</string>
   <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
   <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
   <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
@@ -1313,8 +1313,8 @@
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
 	
-	<string name="driving_region_descr">Выберите регион: США, Европа, Англия, Азия и т.д.</string>
-	<string name="driving_region">Регион</string>
+	<string name="driving_region_descr">Выберите регион вождения: США, Европа, Англия, Азия и другие</string>
+	<string name="driving_region">Регион вождения</string>
 	<string name="driving_region_japan">Япония</string>
 	<string name="driving_region_us">США</string>
 	<string name="driving_region_europe_asia">Европа и Азия</string>
@@ -1929,8 +1929,8 @@
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
 	<string name="osmand_parking_overdue">Просрочено</string>
-	<string name="delay_to_start_navigation_descr">Автоматический запуск навигации после заданного интервала</string>
-    <string name="delay_to_start_navigation">Задержка планирования маршрута</string>
+	<string name="delay_to_start_navigation_descr">Автоматический запуск навигации после заданного интервала\n\nУкажите время задержки на экране планирования маршрута</string>
+    <string name="delay_to_start_navigation">Старт навигации после</string>
     <string name="shared_string_go">Поехали</string>
 	<string name="shared_string_not_use">Не использовать</string>
 	<string name="plugin_nautical_descr">"Плагин обогащает карты и навигацию OsmAnd, а также делает доступными морские карты для катания на лодках, парусного спорта, и других видов спорта.
@@ -1944,10 +1944,11 @@
 	<string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
 	<string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-	<string name="welcome_text">OsmAnd дает вам возможность использовать карты и автономную (оффлайн) навигацию!</string>
+	<string name="welcome_text">OsmAnd обеспечивает полностью автономный (оффлайн) просмотр карт и автономную навигацию!</string>
 	<string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
    	<string name="confirm_usage_speed_cameras">Во многих странах (Германии, Франции, Италии и других) использование предупреждений о камерах контроля скорости не разрешено законом. OsmAnd не несет никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите \"Да\", только если вы имеете право использовать эту функцию.</string>
 	<string name="agps_info">Информация A-GPS</string>
 	<string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
     <string name="shared_string_message">Сообщение</string>
+	<string name="shared_string_do_not_use">Не использовать</string>
 	</resources>

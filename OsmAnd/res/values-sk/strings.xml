@@ -273,7 +273,7 @@
   <string name="init_native_library">Inicializácia natívnej knižnice…</string>
   <string name="choose_auto_follow_route">Automatické centrovanie</string>
   <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
-  <string name="auto_follow_route_never">Nikdy (použite modrú šípku pre spustenie pokynov)</string>
+  <string name="auto_follow_route_never">Nikdy (použite \'Ísť\' pre spustenie pokynov)</string>
   <string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
   <string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
   <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
@@ -1302,7 +1302,7 @@
     <string name="edit_tilesource_name">Názov</string>
     <string name="maps_define_edit">Určiť/Upraviť…</string>
 	<string name="map_widget_fps_info">Ladiace info o FPS</string>
-	<string name="driving_region_descr">Výber jazdnej oblasti: US, Európa, UK, Ázia a ostatné</string>
+	<string name="driving_region_descr">Výber jazdnej oblasti: USA, Európa, Spojené kráľovstvo, Ázia a ostatné</string>
 	<string name="driving_region">Jazdná oblasť</string>
 	<string name="driving_region_japan">Japonsko</string>
 	<string name="driving_region_us">Spojené štáty</string>
@@ -2111,8 +2111,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>
 	<string name="shared_string_currently_recording_track">Stopa sa nahráva</string>
-	<string name="delay_to_start_navigation_descr">Automaticky spustiť navigáciu po určenom intervale</string>
-    <string name="delay_to_start_navigation">Preskočiť plánovanie trasy</string>
+	<string name="delay_to_start_navigation_descr">Zadajte dobu zotrvania na obrazovke plánovania trasy</string>
+    <string name="delay_to_start_navigation">Spustiť navigačné pokyny po</string>
     <string name="shared_string_go">Ísť</string>
 	
 	<string name="action_create">Vytvoriť akciu</string>
@@ -2131,8 +2131,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="osmo_grop_name_length_alert">Názov skupiny by mal mať aspoň 3 písmená!</string>
 	<string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom. OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Povoľte funkciu oznamovania len ak ste na to oprávnený.</string>
 	<string name="welmode_download_maps">Stiahnuť mapy</string>
-	<string name="welcome_select_region">Vyberte svoj región</string>
-	<string name="welcome_text">OsmAnd vám umožňuje používať mapy a navigáciu offline!</string>
+	<string name="welcome_select_region">Vyberte svoj región, aby bolo možné správne nastaviť dopravné predpisy a zákony:</string>
+	<string name="welcome_text">OsmAnd poskytuje offline mapy a offline navigáciu!</string>
 	<string name="welcome_header">Vitajte</string>
     <string name="current_route">Súčasná trasa</string>
     <string name="osm_changes_added_to_local_edits">Zmeny OSM pridané do lokálnych zmien</string>
@@ -2140,4 +2140,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="agps_info">Informácie o A-GPS</string>
 	<string name="agps_data_last_downloaded">A-GPS dáta boli naposledy stiahnuté: %1$s</string>
     <string name="shared_string_message">Správa</string>
+	<string name="shared_string_do_not_use">Nepoužívať</string>
+	<string name="shared_string_address">Adresa</string>
 	</resources>

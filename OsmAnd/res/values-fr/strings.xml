@@ -1935,7 +1935,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Piste</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistes</string>
 	<string name="watch">Montre</string>
 	<string name="shared_string_audio">Audio</string>
 	
@@ -2008,4 +2008,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
     <string name="shared_string_message">Message</string>
 	<string name="shared_string_do_not_use">Ne pas utiliser</string>
+	<string name="shared_string_address">Adresse</string>
 	</resources>
