@@ -52,10 +52,6 @@
 	<dimen name="osmo_header_height">56dp</dimen>
 	<!--  map buttons -->
 	<dimen name="map_trans_seek_size">80dp</dimen>
-	<dimen name="map_widget_text_size">23sp</dimen>
-	<dimen name="map_widget_text_size_small">15sp</dimen>
-	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
-	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_route_buttons_width">60dp</dimen>
 	<dimen name="map_route_buttons_height">54dp</dimen>
 	<dimen name="map_route_buttons_height_land">48dp</dimen>
@@ -66,7 +62,7 @@
 	<dimen name="map_ruler_bottom_margin">7dp</dimen>
 	<dimen name="map_button_shadow_width">54dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
-	<dimen name="map_alarm_text_size">25sp</dimen>
+	
 	
 	<dimen name="map_alarm_bottom_margin">87dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">55dp</dimen>
@@ -85,17 +81,25 @@
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1px</dimen>
 	
+	<dimen name="map_widget_text_size">23sp</dimen>
+	<dimen name="map_widget_text_size_small">15sp</dimen>
+	<dimen name="map_button_text_size">18sp</dimen>
+	<dimen name="map_alarm_text_size">25sp</dimen>
+	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
+	
 
     <!-- TextSizes -->
+    <dimen name="default_list_text_size_small">17sp</dimen>
+    <dimen name="default_list_text_size">20sp</dimen>
 	<dimen name="list_header_text_size">14sp</dimen>
     <dimen name="showAllButtonTextSize">12sp</dimen>
 	<dimen name="download_descr_text_size">12sp</dimen>
     <dimen name="subHeaderTextSize">14sp</dimen>
-    <dimen name="dashFavNameTextSize">16sp</dimen>
+    <dimen name="dashFavNameTextSize">15sp</dimen>
     <dimen name="dashFavDescTextSize">14sp</dimen>
     <dimen name="dashProgressTextSize">14sp</dimen>
-    <dimen name="dashParkingTextSize">24sp</dimen>
-	<dimen name="dash_parking_big_text_size">18sp</dimen>
+    <dimen name="dashParkingTextSize">25sp</dimen>
+	<dimen name="dash_parking_big_text_size">17sp</dimen>
 	<dimen name="dash_parking_small_text_size">14sp</dimen>
-	<dimen name="welcome_header_text_size">22sp</dimen>
+	<dimen name="welcome_header_text_size">23sp</dimen>
 </resources>

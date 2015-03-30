@@ -79,10 +79,10 @@
 	</style>
 
     <style name="ListText">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/default_list_text_size</item>
     </style>
     <style name="ListText.Small">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">@dimen/default_list_text_size_small</item>
     </style>
     
     <style name="OsmandListView" parent="@android:style/Widget.ListView">
