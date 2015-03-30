@@ -223,6 +223,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		});
 		
 		if (waypointsVisible && getMyApplication().getWaypointHelper().getAllPoints().size() > 0) {
+			if (mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
+				sort.setVisibility(View.VISIBLE);
+				sort.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						hideDashboard();
+						IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity, getMyApplication(), true);
+					}
+				});
+			}
 			edit.setVisibility(View.VISIBLE);
 			edit.setOnClickListener(new View.OnClickListener() {
 
@@ -256,17 +267,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					hideDashboard();
 				}
 			});
-			if (mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
-				sort.setVisibility(View.VISIBLE);
-				sort.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						hideDashboard();
-						IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity, getMyApplication(), true);
-					}
-				});
-			}
 		}
 		if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU) {
 			settings.setVisibility(View.VISIBLE);

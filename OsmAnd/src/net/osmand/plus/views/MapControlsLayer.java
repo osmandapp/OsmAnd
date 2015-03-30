@@ -8,6 +8,7 @@ import java.util.List;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -16,6 +17,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
@@ -23,6 +25,7 @@ import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -41,6 +44,7 @@ import android.widget.TextView;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
+	public static final int REQUEST_ADDRESS_SELECT = 2;
 
 	public MapHudButton createHudButton(View iv, int resId) {
 		MapHudButton mc = new MapHudButton();
@@ -809,5 +813,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		};
 		return listener;
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK){
+			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
+			LatLon latLon = new LatLon(
+					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0), 
+					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
+			if(name != null){
+				mapRouteInfoControlDialog.selectAddress(name, latLon, false);
+			} else {
+				mapRouteInfoControlDialog.selectAddress("", latLon, true);
+			}
+		}		
 	}
 }

@@ -78,8 +78,10 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		if(tb.getZoom() < 3) {
+			return;
+		}
 		int index = 0;
-		
 		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
 		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
 			index ++;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -13,6 +14,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchAddressActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -20,6 +24,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -172,6 +177,11 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 					selectFavorite(parentView, false);
 				} else if(position == 2) {
 					selectOnScreen(parentView, false);
+				} else if(position == 3) {
+					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
 				}				
 			}
 
@@ -186,6 +196,11 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 					selectFavorite(parentView, true);
 				} else if(position == 2) {
 					selectOnScreen(parentView, true);
+				} else if(position == 3) {
+					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
 				}				
 			}
 
@@ -200,6 +215,16 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		selectFromMapTouch = true;
 		selectFromMapForTarget =  target;
 		hideDialog();
+	}
+	
+	public void selectAddress(String name, LatLon l, final boolean target) {
+		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
+		if(target) {
+			getTargets().navigateToPoint(l, true, -1, pd);
+		} else {
+			getTargets().setStartPoint(l, true, pd);
+		}
+		showDialog();
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
@@ -361,6 +386,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		fromActions.add(mapActivity.getString(R.string.route_descr_current_location));
 		fromActions.add(mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis));
 		fromActions.add(mapActivity.getString(R.string.shared_string_select_on_map));
+		fromActions.add(mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis));
 		
 		TargetPoint start = getTargets().getPointToStart();
 		if (start != null) {
@@ -400,6 +426,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		}
 		toActions.add(mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis));
 		toActions.add(mapActivity.getString(R.string.shared_string_select_on_map));
+		toActions.add(mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis));
 		
 		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
 				android.R.layout.simple_spinner_item, 
