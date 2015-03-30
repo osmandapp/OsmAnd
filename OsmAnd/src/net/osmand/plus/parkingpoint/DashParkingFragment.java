@@ -114,7 +114,7 @@ public class DashParkingFragment extends DashLocationFragment {
 		if (loc != null) {
 			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);
 			dv.paint = false;
-			dv.arrowResId = R.drawable.ic_parking_postion_arrow;
+			dv.arrowResId = R.drawable.ic_action_start_navigation;
 			distances.add(dv);
 		}
 
