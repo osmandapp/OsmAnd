@@ -668,7 +668,7 @@
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
-  <string name="shared_string_download_successful">Локальная карта успешно загружена</string>
+  <string name="shared_string_download_successful">Загрузка завершена успешно</string>
   
   
   
