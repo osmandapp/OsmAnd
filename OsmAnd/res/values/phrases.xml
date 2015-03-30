@@ -436,7 +436,7 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_theme_park">Theme park</string>
 	
-	<string name="poi_attraction">Attraction touristique</string>
+	<string name="poi_attraction">Tourist Attraction</string>
 	<string name="poi_attraction_amusement_ride">Amusement ride</string>
 	<string name="poi_attraction_animal">Animal (attraction)</string>
 	<string name="poi_attraction_big_wheel">Ferris wheel</string>
