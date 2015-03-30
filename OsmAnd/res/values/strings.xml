@@ -710,8 +710,8 @@
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Define/Edit…</string>
 	<string name="map_widget_fps_info">FPS debug info</string>
-	<string name="driving_region_descr">Select Driving Region: US, Europe, UK, Asia and Others</string>
-	<string name="driving_region">Driving Region</string>
+	<string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and Others</string>
+	<string name="driving_region">Driving region</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">United States</string>
 	<string name="driving_region_canada">Canada</string>
