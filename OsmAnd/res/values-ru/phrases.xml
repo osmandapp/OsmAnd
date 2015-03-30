@@ -681,4 +681,8 @@
 	<string name="poi_internet_access_service">Доступ в Интернет: сервис</string>
 	
 	<string name="poi_farm">Фермерский магазин</string>
-	</resources>
+	<string name="poi_personal_transport">Личный транспорт</string>
+		<string name="poi_public_transport">Общественный транспорт</string>
+		<string name="poi_air_transport">Воздушный транспорт</string>
+		<string name="poi_water_transport">Водный транспорт</string>
+		</resources>
