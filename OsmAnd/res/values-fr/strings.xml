@@ -2008,4 +2008,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
     <string name="shared_string_message">Message</string>
 	<string name="shared_string_do_not_use">Ne pas utiliser</string>
+	<string name="shared_string_address">Adresse</string>
 	</resources>
