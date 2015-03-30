@@ -1356,7 +1356,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="edit_tilesource_expiration_time">Expiration (en minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Royaume-Uni, Asie et autres</string>
+    <string name="driving_region_descr">Sélectionnez la région de conduite : États-Unis, Europe, Royaume-Uni, Asie et autres</string>
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
