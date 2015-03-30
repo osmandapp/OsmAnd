@@ -330,7 +330,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).setIconColorId(0).setRoundTransparent());
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -346,7 +346,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).setIconColorId(0).setRoundTransparent());
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
