@@ -1941,7 +1941,7 @@
 	<string name="osmo_grop_name_length_alert">Имя группы должно быть минимум 3 символа!</string>
 	<string name="current_route">Текущий маршрут</string>
     <string name="welmode_download_maps">Скачать карты</string>
-	<string name="welcome_select_region">Выберите свой регион</string>
+	<string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
 	<string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
 	<string name="welcome_text">OsmAnd дает вам возможность использовать карты и автономную (оффлайн) навигацию!</string>
