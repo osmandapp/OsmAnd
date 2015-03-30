@@ -1971,7 +1971,7 @@
 	<string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
 	<string name="delay_to_start_navigation_descr">Start navigation automatisk efter angivne interval</string>
-    <string name="delay_to_start_navigation">Spring ruteplanlægning over</string>
+    <string name="delay_to_start_navigation">Start sving-for-sving navigation efter</string>
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
 	<string name="confirmation_to_clear_history">Skal hele historikken slettes?</string>
@@ -1988,4 +1988,5 @@
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
     <string name="shared_string_message">Besked</string>
+	<string name="shared_string_do_not_use">Brug ikke</string>
 	</resources>
