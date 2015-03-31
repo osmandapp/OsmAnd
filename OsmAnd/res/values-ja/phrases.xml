@@ -203,4 +203,39 @@
 	<string name="poi_public_transport_platform_tram">トラム停留所(Tram stop)</string>
 	<string name="poi_tram_stop">トラム停留所(Tram stop)</string>
 	<string name="poi_public_transport_station">公共交通機関駅(Public transport station)</string>
+	<string name="poi_bus_station">バスターミナル(Bus station)</string>
+	<string name="poi_railway_station">鉄道駅(Railway station)</string>
+	<string name="poi_railway_platform">鉄道プラットホーム(Railway platform)</string>
+	<string name="poi_halt">鉄道停車位置(Railway stop)</string>
+	<string name="poi_railway_subway_entrance">地下鉄入り口(Subway entrance)</string>
+	<string name="poi_subway_station">地下鉄駅(Subway station)</string>
+	<string name="poi_railway_buffer_stop">鉄道用車止め(Railway buffer stop)</string>
+	<string name="poi_helipad">ヘリポート(Helipad)</string>
+	<string name="poi_runway">滑走路(Runway)</string>
+	<string name="poi_aeroway_terminal">空港旅客ターミナル(Aeroway terminal)</string>
+	<string name="poi_aeroway_gate">飛行機搭乗ゲート(Aeroway gate)</string>
+
+	<string name="poi_slipway">進水路(Slipway)</string>
+	<string name="poi_ferry_terminal">フェリーターミナル(Ferry terminal)</string>
+	<string name="poi_lighthouse">灯台(Lighthouse)</string>
+
+	<string name="poi_bicycle_rental">自転車レンタル(Bicycle rental)</string>
+	<string name="poi_bicycle_parking">自転車駐輪場(Bicycle parking)</string>
+
+	<string name="poi_aerialway_station">リフト・ゴンドラ乗降場(Aerialway station)</string>
+	<string name="poi_aerialway_cable_car">ロープウェイ(Cable car)</string>
+	<string name="poi_aerialway_gondola">ゴンドラ(Gondola)</string>
+	<string name="poi_aerialway_chair_lift">リフト(Chair lift)</string>
+	<string name="poi_aerialway_t_bar">Tバーリフト(T-bar lift)</string>
+	<string name="poi_aerialway_j_bar">Jバーリフト(J-bar lift)</string>
+	<string name="poi_aerialway_platter">プラッターリフト(Platter lift)</string>
+	<string name="poi_aerialway_mixed_lift">高速リフト(Mixed lift)</string>
+	<string name="poi_aerialway_drag_lift">ドラッグリフト(Drag lift)</string>
+	<string name="poi_aerialway_rope_tow">ロープトゥ(Rope tow lift)</string>
+	<string name="poi_aerialway_goods">貨物用リフト(Goods lift)</string>
+	<string name="poi_aerialway_magic_carpet">マジックカーペットスキーリフト(Carpet lift)</string>
+
+	<string name="poi_tunnel">トンネル(Tunnel)</string>
+	<string name="poi_bridge">橋(Bridge)</string>
+
 	</resources>
