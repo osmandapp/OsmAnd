@@ -208,14 +208,17 @@ public class PoiFiltersHelper {
 	public List<PoiLegacyFilter> getTopStandardFilters() {
 		if (cacheTopStandardFilters == null) {
 			cacheTopStandardFilters = new ArrayList<PoiLegacyFilter>();
-			PoiLegacyFilter filter = new PoiLegacyFilter(application.getString(R.string.poi_filter_custom_filter),
+
+			PoiLegacyFilter filter = new SearchByNameFilter(application);
+			filter.setStandardFilter(true);
+			cacheTopStandardFilters.add(filter);
+
+			filter = new PoiLegacyFilter(application.getString(R.string.poi_filter_custom_filter),
 					PoiLegacyFilter.CUSTOM_FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			filter.setStandardFilter(true);
 			cacheTopStandardFilters.add(filter);
+
 			cacheTopStandardFilters.add(new PoiLegacyFilter(null, application));
-			filter = new SearchByNameFilter(application);
-			filter.setStandardFilter(true);
-			cacheTopStandardFilters.add(filter);
 		}
 		return Collections.unmodifiableList(cacheTopStandardFilters);
 	}
