@@ -1970,7 +1970,7 @@
 	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">tilbage</string> <string name="parking_place_limited">Parkering er tidsbegrænset til</string>
 	<string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
-	<string name="delay_to_start_navigation_descr">Start navigation automatisk efter angivne interval</string>
+	<string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på ruteplanlægning skærm</string>
     <string name="delay_to_start_navigation">Start sving-for-sving navigation efter…</string>
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
@@ -1981,7 +1981,7 @@
    	<string name="mark_to_delete">Marker for at slette</string>
 	<string name="current_route">Aktuel rute</string>
     <string name="welmode_download_maps">Hent kort</string>
-	<string name="welcome_select_region">For korrekt at afspejle trafikskilte og love, vælg region:</string>
+	<string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
 	<string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kort browsing, og global offline navigation!</string>
 	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af hastighed kamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik på Ja, hvis du er berettiget til at bruge denne funktion.</string>
