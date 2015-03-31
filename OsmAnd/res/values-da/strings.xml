@@ -512,7 +512,7 @@
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
-	<string name="auto_follow_route_never">Aldrig (tryk på blå pil for at starte vejledning manuelt)</string>
+	<string name="auto_follow_route_never">Aldrig (tryk \'Start\' for at starte vejledning manuelt)</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
 	<string name="auto_follow_location_enabled">Autocentrer kort.</string>
