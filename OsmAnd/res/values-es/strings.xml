@@ -112,7 +112,7 @@
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
   <string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
   <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
-  <string name="auto_follow_route_never">Nunca (pulsa la flecha azul para iniciar manualmente el guiado)</string>
+  <string name="auto_follow_route_never">Nunca (pulsa \'Ir\' para iniciar manualmente el guiado)</string>
   <string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
   <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
   <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
@@ -1334,7 +1334,7 @@
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa y Asia</string>
 	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
-	<string name="driving_region_descr">Selecciona la región de conducción: EEUU, Europa, Reino Unido, Asia y Otras</string>
+	<string name="driving_region_descr">Selecciona la región de conducción: EEUU, Europa, Reino Unido, Asia, u Otras</string>
 	<string name="driving_region">Región de conducción</string>
 	<string name="edit_tilesource_minzoom">Acercamiento mínimo</string>
     <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
@@ -1888,7 +1888,7 @@
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
     
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-	<string name="navigation_over_track">¿Empezar navegación sobre traza?</string>
+	<string name="navigation_over_track">¿Empezar navegación a lo largo de la traza?</string>
 	<string name="avoid_roads_msg">Puedes obtener una ruta alternativa seleccionando las carreteras a evitar</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Configura un proxy de acceso a Internet</string>
@@ -1925,7 +1925,7 @@
 	<string name="get_plugin">Obtener</string>
 <string name="free">"Libre %1$s "</string>
 	<string name="device_memory">Memoria del dispositivo</string>
-    <string name="rendering_attr_pisteRoutes_name">Rutas de pista</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de entrenamiento</string>
     <string name="roads_only">Sólo carreteras</string>
     <string name="share_note">Compartir nota</string>
@@ -1963,7 +1963,7 @@
 	<string name="action_modify">Acción modificar</string>
 	<string name="action_delete">Acción borrar</string>
 	<string name="osm_edits">Ediciones OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Izquierda</string> <string name="parking_place_limited">Aparcamiento de tiempo limitado a</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">queda(n)</string> <string name="parking_place_limited">Tiempo de aparcamiento limitado a</string>
 	<string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar después</string>
     <string name="waypoint_visit_before">Visitar antes</string>
@@ -1984,22 +1984,24 @@
 	<string name="route_points">Puntos de la ruta</string>
 	<string name="shared_string_release">Liberado</string>
 	<string name="osmand_parking_overdue">Obsoleto</string>
-	<string name="delay_to_start_navigation">Saltar la planificación de ruta</string>
+	<string name="delay_to_start_navigation">Iniciar navegación giro-a-giro después de…</string>
     <string name="shared_string_go">Ir</string>
-	<string name="delay_to_start_navigation_descr">Comienza la navegación automáticamente después de un intervalo dado</string>
+	<string name="delay_to_start_navigation_descr">Especifica el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
     <string name="shared_string_not_use">No usar</string>
 	<string name="local_osm_changes_upload_all_confirm">Estás a punto de subir %1$d cambios a OSM. ¿Estás seguro?</string>
-    <string name="confirmation_to_clear_history">¿Quieres borrar toda la historia?</string>
-    <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos 3 símbolos!</string>
-	<string name="osm_changes_added_to_local_edits">Cambios OSM añadidos a los cambios locales</string>
+    <string name="confirmation_to_clear_history">¿Quieres borrar la historia?</string>
+    <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos una longitud de 3 caracteres!</string>
+	<string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios locales</string>
    	<string name="mark_to_delete">Marca para eliminar</string>
 	<string name="welmode_download_maps">Descargar mapas</string>
-	<string name="welcome_select_region">Seleccione su región</string>
+	<string name="welcome_select_region">Para reflejar correctamente las señales de tráfico y regulaciones, por favor selecciona tu región de conducción:</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
-    <string name="welcome_text">¡OsmAnd te permite usar mapas y navegación desconectado!</string>
+    <string name="welcome_text">¡OsmAnd proporciona visualización de mapas globales y navegación global sin conexión!</string>
 	<string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisadores de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Por favor, haga clic en sí si usted es elegible para utilizar esta función.</string>
 	<string name="agps_info">Info A-GPS</string>
 	<string name="shared_string_message">Mensaje</string>
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
-    </resources>
+    <string name="shared_string_do_not_use">No usar</string>
+	<string name="shared_string_address">Dirección</string>
+	</resources>
