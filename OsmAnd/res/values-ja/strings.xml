@@ -1191,7 +1191,7 @@ POIの更新は利用できません</string>
 	<string name="auto_follow_route_never">使用しない(手動で案内を開始するには青矢印をタップ)</string>
 	<string name="auto_follow_route_navigation">ナビゲーションのみ</string>
 	<string name="auto_follow_route_navigation_descr">マップの自動中心表示はナビゲーション中のみ。</string>
-	<string name="auto_follow_location_enabled">マップの自動中心表示を使用。</string>
+	<string name="auto_follow_location_enabled">設定に従い、現在地をマップ中心に表示します。</string>
 	<string name="pref_vector_rendering">ベクターレンダラ固有のオプション</string>
 	<string name="pref_overlay">オーバーレイ/アンダーレイ</string>
 	<string name="pref_raster_map">マップソースの設定</string>
@@ -1941,7 +1941,7 @@ POIの更新は利用できません</string>
 	<string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で訪問</string>
     <string name="waypoint_visit_before">前に訪問</string>
-    <string name="simulate_your_location">自分の位置をシミュレート</string>
+    <string name="simulate_your_location">経路シミュレーション</string>
     <string name="drawer">フラットリスト</string>
     <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
     <string name="tips_and_tricks_descr">よくある質問(FAQ)</string>
@@ -2001,12 +2001,13 @@ POIの更新は利用できません</string>
    	<string name="mark_to_delete">削除用にマーク</string>
 	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも記号3文字以上にする必要があります！</string>
 	<string name="welmode_download_maps">マップダウンロード</string>
-	<string name="welcome_select_region">お住まいの地域を選択</string>
-	<string name="welcome_text">OsmAndは、オフラインで地図の閲覧とナビゲーションを使用することができます！</string>
+	<string name="welcome_select_region">交通標識や交通法を正しく反映するために、運転地域を選択してください:</string>
+	<string name="welcome_text">OsmAndは、完全なオフラインでの地図閲覧とナビゲーションを提供しています！</string>
 	<string name="welcome_header">ようこそ</string>
     <string name="current_route">現在のルート</string>
     <string name="agps_info">A-GPS情報</string>
 	<string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
     <string name="confirm_usage_speed_cameras">国によっては法律によりスピードカメラ警告の使用ができません。(ドイツ、フランス、イタリア、その他の国)。OsmAndは、法律に違反した場合の責任は一切負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
 	<string name="shared_string_message">メッセージ</string>
+	<string name="shared_string_do_not_use">使用しない</string>
 	</resources>
