@@ -1887,23 +1887,33 @@ s často kladenými otázkami.</string>
     <string name="tips_and_tricks_descr">Často pokládané dotazy, nedávné změny a další</string>
     <string name="days_behind">dnů po</string>
 	<string name="shared_string_release">Vydáno</string>
-	<string name="delay_to_start_navigation_descr">Automaticky spustit navigaci po určeném intervalu</string>
-    <string name="delay_to_start_navigation">Přeskočit plánování trasy</string>
+	<string name="delay_to_start_navigation_descr">Zadejte dobu setrvání na obrazovce plánování trasy</string>
+    <string name="delay_to_start_navigation">Spustit navigaci krok za krokem za…</string>
     <string name="shared_string_go">Start</string>
 	<string name="action_create">Vytvořit akci</string>
 	<string name="action_modify">Změnit akci</string>
 	<string name="action_delete">Odstranit akci</string>
 	<string name="osm_edits">Editace OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="parking_place_limited">Čas parkovacího místa vymezen do</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="parking_place_limited">Čas parkování vymezen do</string>
 	<string name="osmand_parking_overdue">vypršel</string>
-	<string name="osmand_parking_time_left">Zbývá</string>
+	<string name="osmand_parking_time_left">zbývá</string>
 	<string name="your_edits">Vaše změny</string>
     <string name="waypoint_visit_after">Navštívit po</string>
     <string name="waypoint_visit_before">Navštívit před</string>
     <string name="shared_string_not_use">Nepoužívat</string>
-	<string name="confirmation_to_clear_history">Chcete vyčistit celou historii?</string>
+	<string name="confirmation_to_clear_history">Chcete vyčistit historii?</string>
     <string name="local_osm_changes_upload_all_confirm">Požadujete nahrát %1$d změn do OSM. Jste si jist?</string>
     <string name="shared_string_collapse">Sbalit</string>
 	<string name="agps_info">Info o A-GPS</string>
 	<string name="agps_data_last_downloaded">Datum posledního stažení A-GPS dat: %1$s</string>
-    </resources>
+    <string name="shared_string_message">Zpráva</string>
+	<string name="welmode_download_maps">Stáhnout mapy</string>
+	<string name="welcome_header">Vítejte</string>
+    <string name="current_route">Současná trasa</string>
+    <string name="osm_changes_added_to_local_edits">OSM změny přidány do lokální změnové sady</string>
+   	<string name="mark_to_delete">Označit pro smazání</string>
+	<string name="osmo_grop_name_length_alert">Název skupiny by měl být minimálně 3 znaky dlouhý!</string>
+	<string name="welcome_select_region">Pro správné promítnutí vašich dopravních značek a předpisů, prosím vyberte váš dopravní region:</string>
+	<string name="welcome_text">OsmAnd poskytuje celosvětové prohlížení map a celosvětovou offline navigaci!</string>
+	<string name="confirm_usage_speed_cameras">V mnoha zemích (Německo, Francie, Itálie a dalších) je použití varování před rychlostními kamerami zakázané zákonem. OsmAnd nepřebírá žádnou zodpovědnost pokud porušíte zákon. Prosím označte Ano pouze v případě, pokud máte oprávnění používat tuto vlastnost.</string>
+	</resources>
