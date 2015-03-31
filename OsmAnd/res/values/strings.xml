@@ -14,17 +14,17 @@
 	<string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
     <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
 	<string name="welmode_download_maps">Download maps</string>
-	<string name="welcome_select_region">To correctly reflect your traffic signs and laws, please select your driving region:</string>
-	<string name="welcome_text">OsmAnd provides fully offline map browsing, and fully offline navigation!</string>
+	<string name="welcome_select_region">To correctly reflect your traffic signs and regulations, please select your driving region:</string>
+	<string name="welcome_text">OsmAnd provides global offline map browsing, and global offline navigation!</string>
 	<string name="welcome_header">Welcome</string>
     <string name="current_route">Current route</string>
-    <string name="osm_changes_added_to_local_edits">OSM changes added to local changes</string>
+    <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
    	<string name="mark_to_delete">Mark to delete</string>
-	<string name="osmo_grop_name_length_alert">Group name should be at least 3 symbols long!</string>
+	<string name="osmo_grop_name_length_alert">Group name should be at least 3 characters long!</string>
 	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to OSM. Are you sure?</string>
-    <string name="confirmation_to_clear_history">Do you want to clear the whole history?</string>
+    <string name="confirmation_to_clear_history">Do you want to clear the history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen</string>
-    <string name="delay_to_start_navigation">Start turn-by-turn navigation after</string>
+    <string name="delay_to_start_navigation">Start turn-by-turn navigation after…</string>
     <string name="shared_string_go">Go</string>
 	<string name="osmand_parking_overdue">overdue</string>
 	<string name="action_create">Action create</string>
@@ -35,16 +35,16 @@
 	<string name="osmand_parking_hour">h</string>
 	<!-- means first letter of word *minute*-->
 	<string name="osmand_parking_minute">min</string>
-	<string name="parking_place_limited">Parking place time limited to</string>
+	<string name="parking_place_limited">Parking time limited to</string>
 	<!-- used to describe time left, not left direction -->
-	<string name="osmand_parking_time_left">Left</string>
-	<string name="your_edits">Your Edits</string>
+	<string name="osmand_parking_time_left">left</string>
+	<string name="your_edits">Your edits</string>
     <string name="waypoint_visit_after">Visit after</string>
     <string name="waypoint_visit_before">Visit before</string>
     <string name="simulate_your_location">Simulate your position</string>
     <string name="drawer">Flat list</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Frequently asked questions, recent changes and others</string>
+    <string name="tips_and_tricks_descr">Frequently asked questions, recent changes, and others</string>
     <string name="routing_settings_2">Navigation settings</string>
     <string name="general_settings_2">General settings</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -184,7 +184,7 @@
 	<string name="notes">Notes</string>
 	<string name="online_map">Online map</string>
 	<string name="roads_only">Roads only</string>
-    <string name="rendering_attr_pisteRoutes_name">Piste routes</string>
+    <string name="rendering_attr_pisteRoutes_name">Ski slopes</string>
 	<string name="free">Free %1$s </string>
 	<string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>
@@ -202,7 +202,7 @@
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
     <string name="osm_editing_manage">Manage</string>
-	<string name="navigation_over_track">Start navigation over track?</string>
+	<string name="navigation_over_track">Start navigation along track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
