@@ -376,7 +376,7 @@
 	<string name="init_native_library">初始化原生函式庫…</string>
 	<string name="choose_auto_follow_route">地圖檢視自動置中</string>
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
-	<string name="auto_follow_route_never">永不（輕點藍色箭頭可啟動手動引導）</string>
+	<string name="auto_follow_route_never">永不（輕點 \'Go\' 手動開始引導）</string>
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
@@ -1311,7 +1311,7 @@
 	<string name="speak_street_names">通報街道名稱 (TTS)</string>
         
     
-    <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其他</string>
+    <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其它</string>
 	<string name="driving_region_japan">日本</string>
 	<string name="driving_region_us">美國</string>
 	<string name="driving_region_canada">加拿大</string>
@@ -1809,7 +1809,7 @@
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
     <string name="speak_pedestrian">通報行人穿越道</string>
     
-	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
+	<string name="navigation_over_track">沿著軌跡開始導航嗎？</string>
 	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
     <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
 	
@@ -1847,7 +1847,7 @@
 	<string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="free">"%1$s 可用 "</string>
 	<string name="device_memory">裝置記憶體</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪道路線</string>
+    <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
 	<string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
 	<string name="notes">備註</string>
@@ -1927,7 +1927,7 @@
 
 	<string name="simulate_your_location">模擬您的位置</string>
     <string name="short_location_on_map">緯度 %1$s\n 經度 %2$s</string>
-    <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其他</string>
+    <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它</string>
     <string name="routing_settings_2">導航設定</string>
     <string name="general_settings_2">一般設定</string>
 	<string name="waypoint_visit_after">隨後造訪</string>
@@ -1942,22 +1942,24 @@
 	<string name="action_modify">行動修改</string>
 	<string name="action_delete">行動刪除</string>
 	<string name="osmand_parking_overdue">已過時</string>
-	<string name="delay_to_start_navigation_descr">指定的時間間隔後自動開始導航</string>
-    <string name="delay_to_start_navigation">跳過航路規劃</string>
+	<string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
+    <string name="delay_to_start_navigation">導航後啟動轉向指示…</string>
     <string name="shared_string_go">執行</string>
 	<string name="shared_string_not_use">不使用</string>
-	<string name="confirmation_to_clear_history">您想要清除所有過去的記錄嗎？</string>
+	<string name="confirmation_to_clear_history">您想要清除過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
-    <string name="osmo_grop_name_length_alert">群組名稱至少須要 3 個字符長！</string>
-    <string name="osm_changes_added_to_local_edits">OSM 變更已加到本機更改</string>
+    <string name="osmo_grop_name_length_alert">群組名稱至少須要有 3 個字元長！</string>
+    <string name="osm_changes_added_to_local_edits">OSM 的變更已加到本機更改設定</string>
    	<string name="mark_to_delete">刪除標記</string>
 	<string name="current_route">目前的路線</string>
     <string name="welmode_download_maps">下載地圖</string>
-	<string name="welcome_select_region">選擇您所在的地區</string>
-	<string name="welcome_text">OsmAnd 允許您使用地圖和離線導航！</string>
+	<string name="welcome_select_region">為了正確的反映您所在的交通號誌和規則，請選擇您的駕駛區域：</string>
+	<string name="welcome_text">OsmAnd 提供全球離線地圖瀏覽和全球離線導航！</string>
 	<string name="welcome_header">歡迎</string>
     <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請您只在有資格時，才按下 \"是\" 使用此一功能。</string>
 	<string name="agps_info">A-GPS 資訊</string>
 	<string name="agps_data_last_downloaded">A-GPS 資料上次下載：%1$s</string>
     <string name="shared_string_message">訊息</string>
+	<string name="shared_string_do_not_use">不使用</string>
+	<string name="shared_string_address">地址</string>
 	</resources>
