@@ -376,7 +376,7 @@
 	<string name="init_native_library">初始化原生函式庫…</string>
 	<string name="choose_auto_follow_route">地圖檢視自動置中</string>
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
-	<string name="auto_follow_route_never">永不（輕點 \'Go\' 手動開始引導）</string>
+	<string name="auto_follow_route_never">永不（輕點 \'執行\' 手動開始引導）</string>
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
