@@ -683,9 +683,9 @@
 	<string name="poi_club">Клуб</string>
 	<string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
 	<string name="poi_shop_food">Продовольственный магазин</string>
-	<string name="poi_filling_station">Автозаправочная станция</string>
+	<string name="poi_filling_station">Заправочная станция</string>
 		<string name="poi_aerialway_transport">Канатный транспорт</string>
-	<string name="poi_transport_construction">Транспортное строительство</string>
+	<string name="poi_transport_construction">Транспортное сооружение</string>
 		<string name="poi_water_supply">Водоснабжение</string>
 		<string name="poi_communication">Коммуникации</string>
 		<string name="poi_trash_disposal">Утилизация мусора</string>
