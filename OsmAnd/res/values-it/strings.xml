@@ -2147,21 +2147,22 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
 	<string name="your_edits">Le tue modifiche</string>
     <string name="osmand_parking_overdue">obsoleto</string>
-	<string name="delay_to_start_navigation_descr">Avvia automaticamente la navigazione dopo l\'intervallo specificato</string>
+	<string name="delay_to_start_navigation_descr">Specifica il tempo di permanenza nella schermata di pianificazione dell\'itinerario</string>
     <string name="delay_to_start_navigation">Salta la pianificazione del percorso</string>
     <string name="shared_string_go">Vai</string>
 	<string name="shared_string_not_use">Non usare</string>
-	<string name="confirmation_to_clear_history">Vuoi cancellare l\'intera cronologia?</string>
+	<string name="confirmation_to_clear_history">Vuoi cancellare la cronologia?</string>
     <string name="local_osm_changes_upload_all_confirm">Stai per inviare %1$d cambiamenti a OSM. Sei sicuro?</string>
     <string name="agps_info">Info A-GPS</string>
 	<string name="agps_data_last_downloaded">A-GPS ultimo aggiornamento dati: %1$s</string>
     <string name="welmode_download_maps">Scarica mappe</string>
-	<string name="welcome_select_region">Seleziona la tua regione</string>
+	<string name="welcome_select_region">Per rappresentare correttamente i segnali stradali e le restrizioni per favore seleziona la tua regione di guida:</string>
 	<string name="confirm_usage_speed_cameras">In molti paesi (Germania, Francia, Italia, e altri) l\'utilizzo degli avvertimenti di presenza di autovelox non è legale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di cliccare si solo in caso di utilizzo autorizzato di questa funzionalità.</string>
-	<string name="welcome_text">OsmAnd ti permette di utilizzzare mappe e navigazione offline!</string>
+	<string name="welcome_text">OsmAnd fornisce mappe consultabili e di navigazione offline globali!</string>
 	<string name="welcome_header">Benvenuto</string>
     <string name="current_route">Percorso attuale</string>
     <string name="osm_changes_added_to_local_edits">Modifiche a OsmAnd aggiunte alle modifiche locali</string>
    	<string name="mark_to_delete">Marca da eliminare</string>
-	<string name="osmo_grop_name_length_alert">I nomi dei gruppi devono essere almeno di 3 simboli!</string>
+	<string name="osmo_grop_name_length_alert">I nomi dei gruppi devono essere almeno di 3 caratteri!</string>
+	<string name="shared_string_message">Messaggio</string>
 	</resources>
