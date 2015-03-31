@@ -1935,7 +1935,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistes</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistes de ski</string>
 	<string name="watch">Montre</string>
 	<string name="shared_string_audio">Audio</string>
 	
@@ -1986,22 +1986,22 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="action_modify">Action modifier</string>
 	<string name="action_delete">Action supprimer</string>
 	<string name="osm_edits">Éditions OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">restant</string> <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
 	<string name="your_edits">Vos modifications</string>
     <string name="osmand_parking_overdue">Expiré</string>
 	<string name="delay_to_start_navigation_descr">Temps d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation</string>
     <string name="shared_string_go">Aller</string>
 	<string name="shared_string_not_use">Non utilisé</string>
-	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
+	<string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
-    <string name="delay_to_start_navigation">Démarrer la navigation après</string>
+    <string name="delay_to_start_navigation">Démarrer la navigation après…</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
 	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
 	<string name="current_route">Itinéraire actuel</string>
     <string name="welmode_download_maps">Télécharger les cartes</string>
 	<string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, merci de sélectionner votre région :</string>
-	<string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau !</string>
+	<string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau dans le monde entier !</string>
 	<string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
 	<string name="agps_info">Données A-GPS</string>
