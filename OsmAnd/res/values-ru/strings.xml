@@ -1928,9 +1928,9 @@
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
-	<string name="osmand_parking_overdue">Просрочено</string>
-	<string name="delay_to_start_navigation_descr">Автоматический запуск навигации после заданного интервала\n\nУкажите время задержки на экране планирования маршрута</string>
-    <string name="delay_to_start_navigation">Старт навигации после</string>
+	<string name="osmand_parking_overdue">просрочено</string>
+	<string name="delay_to_start_navigation_descr">Укажите время задержки на экране планирования маршрута</string>
+    <string name="delay_to_start_navigation">Задержка начала навигации</string>
     <string name="shared_string_go">Поехали</string>
 	<string name="shared_string_not_use">Не использовать</string>
 	<string name="plugin_nautical_descr">"Плагин обогащает карты и навигацию OsmAnd, а также делает доступными морские карты для катания на лодках, парусного спорта, и других видов спорта.
