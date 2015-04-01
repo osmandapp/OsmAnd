@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,7 +36,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -47,6 +47,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -199,7 +200,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					editPoint(point);
+					editPoint(getActivity(), point, new Runnable() {
+						public void run() {
+							favouritesAdapter.synchronizeGroups();		
+						}
+					});
 					return true;
 				}
 			});
@@ -220,11 +225,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
-	private boolean editPoint(final FavouritePoint point) {
-		Builder builder = new AlertDialog.Builder(getActivity());
+	public static boolean editPoint(Context ctx, final FavouritePoint point, final Runnable callback) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.favorite_edit_dialog,
-				getExpandableListView(), false);
+		final View v = LayoutInflater.from(ctx).inflate(R.layout.favorite_edit_dialog,
+				null, false);
 		final AutoCompleteTextView cat = (AutoCompleteTextView) v.findViewById(R.id.Category);
 		final EditText editText = (EditText) v.findViewById(R.id.Name);
 		final EditText editDescr = (EditText) v.findViewById(R.id.descr);
@@ -233,20 +239,22 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		editDescr.setText(point.getDescription());
 		cat.setText(point.getCategory());
 		cat.setThreshold(1);
+		final FavouritesDbHelper helper = app.getFavorites();
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
 		String[] list = new String[gs.size()];
 		for(int i = 0; i < list.length; i++) {
 			list[i] =gs.get(i).name;
 		}
-		cat.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_textview, list));
+		cat.setAdapter(new ArrayAdapter<String>(ctx, R.layout.list_textview, list));
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()
 						.toString(), editDescr.getText().toString());
-				if (edited) {
-					favouritesAdapter.synchronizeGroups();
+				if (edited && callback != null) {
+					callback.run();
+					
 				}
 
 			}

@@ -37,7 +37,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:completionThreshold="1"
-			android:inputType="textCapWords"
 			android:selectAllOnFocus="true"/>
 
 		<TextView
@@ -50,8 +49,9 @@
 			android:id="@+id/descr"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:completionThreshold="1"
-			android:inputType="textCapWords"
+			android:inputType="textMultiLine" 
+			android:minLines="2"
+			 android:scrollbars="vertical"
 			android:selectAllOnFocus="true"/>
 	</LinearLayout>
 
