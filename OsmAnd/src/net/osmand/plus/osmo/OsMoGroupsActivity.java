@@ -472,7 +472,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
 				}
 				if (group != null) {
-					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_dark,
+					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_gabout_dark,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
@@ -888,7 +888,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		};
 		ImageButton info = (ImageButton) v.findViewById(R.id.info);
-		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_info_dark));
+		info.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_gabout_dark));
 		info.setOnClickListener(click);
 		warnCreateDesc.setOnClickListener(click);
 		
