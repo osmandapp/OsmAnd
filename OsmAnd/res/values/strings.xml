@@ -782,7 +782,6 @@
     <string name="distance_measurement_finish_editing">Finish editing</string>
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
     <string name="distance_measurement_clear_route">Clear all points</string>
-    <string name="distance_measurement_save_gpx">Save as GPX</string>
     <string name="distance_measurement_load_gpx">Open existing GPX</string>
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia</string>

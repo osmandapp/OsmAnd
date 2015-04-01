@@ -154,7 +154,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if(measurementPoints.size() > 0) {
 			list.add(R.string.distance_measurement_finish_subtrack);
 			list.add(R.string.distance_measurement_clear_route);
-			list.add(R.string.distance_measurement_save_gpx);
+			list.add(R.string.shared_string_save_as_gpx);
 		}
 		list.add(R.string.distance_measurement_load_gpx);
 		String[] items = new String[list.size()];
@@ -177,7 +177,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					distanceMeasurementMode = 0;
 					measurementPoints.clear();
 					calculateDistance();
-				} else if (id == R.string.distance_measurement_save_gpx) {
+				} else if (id == R.string.shared_string_save_as_gpx) {
 					saveGpx(activity);
 				} else if (id == R.string.distance_measurement_load_gpx) {
 					loadGpx(activity);
@@ -234,13 +234,26 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		LinearLayout ll = new LinearLayout(activity);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setPadding(5, 5, 5, 5);
+		ll.setPadding(7, 7, 7, 7);
 		final TextView tv = new TextView(activity);
 		tv.setText("");
+		
 		tv.setTextColor(Color.RED);
 		ll.addView(tv);
 		final EditText editText = new EditText(activity);
 		editText.setHint(R.string.gpx_file_name);
+		if(originalGPX != null && originalGPX.path != null){
+			String p = originalGPX.path;
+			int li = p.lastIndexOf('/');
+			if(li >= 0) {
+				p = p.substring(li + 1);
+			}
+			int pi = p.lastIndexOf('.');
+			if(pi >= 0) {
+				p = p.substring(0, pi);
+			}
+			editText.setText(p);
+		}
 		editText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -291,27 +304,27 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			protected String doInBackground(Void... params) {
 				toSave = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileNameSave);
 				GPXFile gpx;
-				boolean saveTrackToRte = false;
-				if(originalGPX != null) {
+				boolean saveTrackToRte = measurementPoints.size() <= 1;
+				if (originalGPX != null) {
 					gpx = originalGPX;
 					saveTrackToRte = originalGPX.routes.size() > 0 && originalGPX.tracks.size() == 0;
 					gpx.tracks.clear();
 					gpx.routes.clear();
 					gpx.points.clear();
 				} else {
-					gpx = new GPXFile(); 
+					gpx = new GPXFile();
 				}
-				for(int i = 0; i<measurementPoints.size(); i++) {
+				for (int i = 0; i < measurementPoints.size(); i++) {
 					LinkedList<WptPt> lt = measurementPoints.get(i);
-					if(lt.size() == 1) {
+					if (lt.size() == 1) {
 						gpx.points.add(lt.getFirst());
-					} else if(lt.size() > 1) {
-						if(saveTrackToRte) {
+					} else if (lt.size() > 1) {
+						if (saveTrackToRte) {
 							Route rt = new Route();
 							gpx.routes.add(rt);
 							rt.points.addAll(lt);
 						} else {
-							if(gpx.tracks.size() == 0) {
+							if (gpx.tracks.size() == 0) {
 								gpx.tracks.add(new Track());
 							}
 							Track ts = gpx.tracks.get(gpx.tracks.size() - 1);
