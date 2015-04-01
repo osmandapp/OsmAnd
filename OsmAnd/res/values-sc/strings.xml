@@ -915,7 +915,7 @@
 	<string name="tip_day_night_mode">Modalidade die/note</string>
 	<string name="tip_osm_improve">Megiora sos datos OSM</string>
 	<string name="tip_navigation">Nàvigu</string>
-	<string name="auto_follow_route_never">Mai (carca sa fritza biaita pro aviare manualmente sa ghia)</string>
+	<string name="auto_follow_route_never">Mai (carca \'Bae\' pro aviare manualmente sa ghia)</string>
 	<string name="keep_informing_never">Manualmente ebbia (carca sa fritza)</string>
     <string name="keep_informing">Torra a repìtere sas istrutziones de nàvigu</string>
 	<string name="pref_raster_map">Impostaduras de sa mitza de sa mapa</string>
@@ -1857,7 +1857,7 @@
 	<string name="rendering_attr_pisteGrooming_name">Pista abbatigada</string>
     <string name="free">"Lìbera %1$s "</string>
 	<string name="device_memory">Memòria dispositivu</string>
-    <string name="rendering_attr_pisteRoutes_name">Àndalas in pista</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistas de iscì</string>
 	<string name="roads_only">Istradas ebbia</string>
     <string name="watch">Relògiu</string>
 	<string name="notes">Notas</string>
@@ -1896,7 +1896,7 @@
 	<string name="action_modify">Atzione modìfica</string>
 	<string name="action_delete">Atzione burra</string>
 	<string name="osm_edits">Modìficas OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">galu</string> <string name="parking_place_limited">Parchègiu cun tempus limitadu a</string>
 	<string name="your_edits">Modìficas tuas</string>
     <string name="waypoint_visit_after">Vìsita a pustis</string>
     <string name="waypoint_visit_before">Vìsita in antis</string>
@@ -1917,17 +1917,17 @@
 	<string name="route_points">Puntos de s\'àndala</string>
 	<string name="shared_string_release">Essidu</string>
 	<string name="osmand_parking_overdue">Iscadidu</string>
-	<string name="delay_to_start_navigation_descr">Incumentza automaticamente su nàvigu a pustis de s\'intervallu dislindadu</string>
+	<string name="delay_to_start_navigation_descr">Dislinda su tempus de permanèntzia in s\'ischermu de pianificatzione de s\'àndala, in antis de su cumintzu de su nàvigu</string>
     <string name="shared_string_not_use">No impreare</string>
 	<string name="shared_string_go">Bae</string>
-	<string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala</string>
-    <string name="confirmation_to_clear_history">Boles burrare totu s’istòria?</string>
+	<string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala…</string>
+    <string name="confirmation_to_clear_history">Boles burrare s’istòria?</string>
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
-    <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 sìmbulos!</string>
+    <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 caràteres!</string>
 	<string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
    	<string name="welmode_download_maps">Iscàrriga mapas</string>
-	<string name="welcome_select_region">Pro ammustrare mègius sos cartellos e sas leges locales tuas, pro piaghere ischerta sa regione tua:</string>
-	<string name="welcome_text">OsmAnd ti cunsentit de impreare mapas e nàvigu sena lìnia!</string>
+	<string name="welcome_select_region">Pro ammustrare mègius sos cartellos e sas restritziones locales tuas, pro piaghere ischerta sa regione tua:</string>
+	<string name="welcome_text">OsmAnd frunit e ti cunsentit de impreare mapas globales e nàvigu sena lìnia!</string>
 	<string name="welcome_header">Benènnidu</string>
     <string name="current_route">Àndala atuale</string>
     <string name="mark_to_delete">Marca pro burrare</string>
@@ -1935,4 +1935,6 @@
 	<string name="agps_info">Informatziones A-GPS</string>
 	<string name="agps_data_last_downloaded">Ùrtimu agiornamentu datos A-GPS: %1$s</string>
     <string name="shared_string_message">Messàgiu</string>
+	<string name="shared_string_do_not_use">No impreare</string>
+	<string name="shared_string_address">Indiritzu</string>
 	</resources>

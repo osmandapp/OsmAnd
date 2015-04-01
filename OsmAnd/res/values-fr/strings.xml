@@ -18,7 +18,7 @@
   
   <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
   <string name="local_openstreetmap_delete">Supprimer la modification</string>
-  <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM :</string>
+  <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
   <string name="local_openstreetmap_settings">PI/Notes OSM enregistrés en local</string>
   <string name="local_openstreetmap_settings_descr">Afficher et gérer les PI/Notes OSM enregistrés dans la base de données locale</string>
   
@@ -144,7 +144,7 @@
   <string name="search_position_current_location_search">Recherche de la position…</string>
   <string name="search_position_current_location_found">Position trouvée</string>
   <string name="search_position_address">Adresse…</string>
-  <string name="search_position_favorites">Favoris…</string>
+  <string name="search_position_favorites">Favori…</string>
   <string name="search_position_undefined">Non défini</string>
   
   <string name="search_position_current_location">Position actuelle</string>
@@ -571,7 +571,7 @@
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
-  <string name="shared_string_download_successful">Téléchargement de l\'index réussi</string>
+  <string name="shared_string_download_successful">Téléchargement terminé</string>
   
   
   
@@ -613,7 +613,7 @@
   <string name="shared_string_close">Fermer</string>
   <string name="loading_data">Chargement des données</string>
   <string name="reading_indexes">Lecture des index…</string>
-  <string name="previous_run_crashed">OsmAnd s\'est arrêté anormalement. Souhaitez-vous nous envoyer le fichier journal {0} ?</string>
+  <string name="previous_run_crashed">Oups ... OsmAnd a planté. Souhaitez-vous nous envoyer le fichier journal ?</string>
   <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
   <string name="finished_task">Terminé</string>
   
@@ -626,7 +626,7 @@
   <string name="data_settings_descr">Indiquez la langue, mettre à jour les données</string>
   <string name="data_settings">Données</string>
   
-  <string name="osm_settings">Édition OSM</string>
+  <string name="osm_settings">Contribuer à OSM</string>
   <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
   <string name="auto_zoom_map">Zoom automatique de la carte</string>
   <string name="additional_settings">Paramètres supplémentaires</string>
@@ -780,7 +780,7 @@
   
   
   <string name="osmand_development_plugin_description">Ce greffon permet de gérer les paramètres de développement et de débogage tels que la simulation de navigation ou l\'affichage des performances du rendu. Ces paramètres sont conçus pour les développeurs et peuvent être ignorés par les autres utilisateurs.</string>
-  <string name="plugins_screen">Gestionnaire des greffons</string>
+  <string name="plugins_screen">Gestionnaire de greffons</string>
   
   <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des paramètres avancés et des fonctionnalités supplémentaires.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
@@ -898,20 +898,20 @@
   <string name="gpxup_identifiable">Identifiable</string>
   <string name="gpxup_trackable">Suivi</string>
   <string name="gpxup_private">Privé</string>
-  <string name="osmand_parking_event">Récupérer votre véhicule du parking</string>
+  <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
   <string name="osmand_parking_warning">Avertissement</string>
-  <string name="osmand_parking_warning_text">Une notification pour récupérer votre véhicule a été ajoutée dans votre agenda. Elle y restera jusqu\'à ce que vous la supprimiez manuellement.</string>
-  <string name="osmand_parking_time_limit_title">Indiquez une heure de fin de stationnement</string>
+  <string name="osmand_parking_warning_text">Un rendez-vous pour récupérer votre véhicule a été ajouté dans votre agenda. Il y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
+  <string name="osmand_parking_time_limit_title">Indiquez la durée de stationnement autorisée</string>
   <string name="osmand_parking_delete_confirm">Voulez-vous supprimer l\'emplacement de stationnement du véhicule ?</string>
   <string name="osmand_parking_delete">Supprimer l\'emplacement de stationnement</string>
   <string name="osmand_parking_choose_type">Type de stationnement</string>
   <string name="osmand_parking_lim_text">Temps limité</string>
   <string name="osmand_parking_no_lim_text">Temps illimité</string>
-  <string name="osmand_parking_add_event">Ajouter une notification dans l\'agenda</string>
+  <string name="osmand_parking_add_event">Ajouter un rendez-vous dans l\'agenda</string>
   <string name="osmand_parking_time_limit">Stationnement avec limite de temps</string>
   <string name="osmand_parking_time_no_limit">Stationnement sans limite de temps</string>
   <string name="osmand_parking_position_description">La position de stationnement de votre véhicule. %1$s</string>
-  <string name="osmand_parking_position_description_add">Pour récupérer le véhicule à :</string>
+  <string name="osmand_parking_position_description_add">Vous devez récupérer votre véhicule au plus tard à :</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Emplacement de stationnement</string>
@@ -929,11 +929,11 @@
   
   <string name="osmand_parking_hours">Heures</string>
   <string name="osmand_parking_minutes">Minutes</string>
-  <string name="osmand_parking_position_description_add_time">La voiture est garée à :</string>
+  <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à :</string>
   <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera calculé dès votre position connue</string>
-  <string name="continue_follow_previous_route_auto">La navigation précédente a été interrompue. Souhaitez-vous reprendre cette navigation ? (%1$s secondes)</string>
+  <string name="continue_follow_previous_route_auto">La navigation a été interrompue. Souhaitez-vous la reprendre ? (%1$s secondes)</string>
   
   
   
@@ -1307,8 +1307,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
     <string name="distance_measurement_start_editing">Démarrer la mesure sur la carte</string>
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
-    <string name="distance_measurement_save_gpx">Enregistrer comme GPX...</string>
-    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX existant...</string>
+    <string name="distance_measurement_save_gpx">Enregistrer en GPX sous...</string>
+    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX...</string>
     <string name="wait_current_task_finished">Veuillez attendre jusqu\'à ce que la tâche actuelle soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
@@ -1316,7 +1316,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
     <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
-    <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant soit en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
+    <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant ou en modifiant un fichier GPX existant; ainsi que de mesurer la distance entre des points. L\'itinéraire peut être enregistré dans un fichier GPX qui peut lui-même être utilisé plus tard pour une navigation.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
@@ -1567,8 +1567,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
 	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Vous pouvez ainsi créer des groupes anonymes, partager vos positions et communiquer ensemble. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
-	<string name="osmo_plugin_name">OsMo surveillance</string>
-	<string name="osmo_settings">OsMo surveillance</string>
+	<string name="osmo_plugin_name">Suivi OsMo</string>
+	<string name="osmo_settings">Suivi OsMo</string>
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
@@ -1630,7 +1630,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_activity">Suivi OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     
-	<string name="import_file_favourites">Enregistrer comme fichier GPX ou transformer en favoris ?</string>
+	<string name="import_file_favourites">Enregistrer sous fichier GPX ou transformer en favoris ?</string>
 	
 	<string name="color_red">Rouge</string>
 	<string name="color_pink">Rose</string>
@@ -1793,7 +1793,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
-    <string name="record_plugin_name">Enregistrez votre itinéraire</string>
+    <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
@@ -1915,7 +1915,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">État du GPS</string>
     <string name="parking_place">Place de stationnement</string>
-    <string name="remove_the_tag">Retirer l\'étiquette</string>
+    <string name="remove_the_tag">Supprimer l\'emplacement</string>
     <string name="shared_string_disabled">Désactivé</string>
 	<string name="shared_string_enabled">Activé</string>
 <string name="plugin_description_title">Description</string>
@@ -1935,7 +1935,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistes</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistes de ski</string>
 	<string name="watch">Montre</string>
 	<string name="shared_string_audio">Audio</string>
 	
@@ -1986,22 +1986,22 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="action_modify">Action modifier</string>
 	<string name="action_delete">Action supprimer</string>
 	<string name="osm_edits">Éditions OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Restant</string> <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">restantes</string> <string name="parking_place_limited">Stationnement d\'une durée limitée à</string>
 	<string name="your_edits">Vos modifications</string>
     <string name="osmand_parking_overdue">Expiré</string>
 	<string name="delay_to_start_navigation_descr">Temps d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation</string>
     <string name="shared_string_go">Aller</string>
 	<string name="shared_string_not_use">Non utilisé</string>
-	<string name="confirmation_to_clear_history">Souhaitez-vous effacer tout l\'historique ?</string>
+	<string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
-    <string name="delay_to_start_navigation">Démarrer la navigation après</string>
+    <string name="delay_to_start_navigation">Démarrer la navigation après…</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
-	<string name="osm_changes_added_to_local_edits">Modifications OSM ajoutées localement</string>
+	<string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
 	<string name="current_route">Itinéraire actuel</string>
-    <string name="welmode_download_maps">Télécharger les cartes</string>
+    <string name="welmode_download_maps">Télécharger des cartes</string>
 	<string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, merci de sélectionner votre région :</string>
-	<string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau !</string>
+	<string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau dans le monde entier !</string>
 	<string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
 	<string name="agps_info">Données A-GPS</string>

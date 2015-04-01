@@ -10,7 +10,7 @@
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Autocentrowanie mapy</string>
   <string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
-  <string name="auto_follow_route_never">Nigdy (dotknij niebieskiej strzałki, aby rozpocząć ręcznie)</string>
+  <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
   <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
@@ -2020,8 +2020,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="action_modify">Zmodyfikuj</string>
 	<string name="action_delete">Usuń</string>
 	<string name="osm_edits">Edycje OSM</string>
-	<string name="osmand_parking_hour">godz</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Pozostało</string> <string name="parking_place_limited">Miejsce parkingowe ograniczone czasowo do</string>
-	<string name="your_edits">Twoje edycje</string>
+	<string name="osmand_parking_hour">godz</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">pozostało</string> <string name="parking_place_limited">Czas parkowania ograniczony do</string>
+	<string name="your_edits">Twoje zmiany</string>
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symuluj lokalizację</string>
@@ -2049,14 +2049,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="plugin_touringview_name">Widok mapy turystycznej</string>
 	<string name="plugin_touringview_descr">"Włączenie tego widoku zmienia styl mapy OsmAnd na \'turystyczny\', który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.\n\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).\n\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.\n\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.\n\nNie potrzeba ściągać specjalnej mapy, ten widok jest tworzony z map standardowych.\n\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
 	<string name="watch">Oglądaj</string>
-	<string name="rendering_attr_pisteRoutes_name">Trasy narciarskie</string>
+	<string name="rendering_attr_pisteRoutes_name">Stoki narciarskie</string>
 	<string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
     <string name="world_ski_missing">Trzeba pobrać specjalną mapę offline, aby wyświetlać mapy narciarskie</string>
     <string name="nautical_maps_missing">Trzeba pobrać specjalną mapę offline, aby wyświetlać mapy żeglugowe</string>
 	<string name="remove_the_tag">Usuń tag</string>
     <string name="version_settings">Kompilacja</string>
     <string name="points">Punkty</string>
-    <string name="navigation_over_track">Rozpocząć nawigację na trasie?</string>
+    <string name="navigation_over_track">Rozpocząć nawigację wzdłuż trasy?</string>
 	<string name="save_track_to_gpx_globally_headline">Zapis trasy na żądanie</string>
 	<string name="enable_proxy_descr">Skonfiguruj proxy HTTP dla wszystkich zapytań sieciowych</string>
 	<string name="proxy_host_descr">Skonfiguruj nazwę hosta proxy (np. 127.0.0.1)</string>
@@ -2064,24 +2064,27 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_release">Wypuszczony</string>
 	<string name="get_plugin">Pobierz</string>
 <string name="local_osm_changes_upload_all_confirm">Zamierzasz wysłać %1$d zmian na OSM. Czy jesteś pewien?</string>
-    <string name="confirmation_to_clear_history">Czy chcesz wyczyścić całą historię?</string>
-    <string name="delay_to_start_navigation_descr">Automatycznie rozpocznij nawigację po upłynięciu określonego czasu</string>
-    <string name="delay_to_start_navigation">Pomiń planowanie trasy</string>
+    <string name="confirmation_to_clear_history">Czy chcesz wyczyścić historię?</string>
+    <string name="delay_to_start_navigation_descr">Określ czas pozostawania na ekranie planowania trasy</string>
+    <string name="delay_to_start_navigation">Rozpocznij nawigację turn-by-turn za…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
 	<string name="agps_info">Informacje A-GPS</string>
 	<string name="agps_data_last_downloaded">Dane A-GPS pobrano ostatnio: %1$s</string>
     <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. OsmAnd nie bierze żadnej odpowiedzialności, jeśli złamiesz prawo. Kliknij \"Tak\", jeśli wolno używać tej funkcji.</string>
 	<string name="welmode_download_maps">Pobierz mapy</string>
-	<string name="welcome_select_region">Wybierz region</string>
-	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline!</string>
+	<string name="welcome_select_region">Wybierz region, w którym się poruszasz, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
+	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline na całym świecie!</string>
 	<string name="welcome_header">Witaj</string>
     <string name="current_route">Bieżąca trasa</string>
-    <string name="osm_changes_added_to_local_edits">Zmiany OSM dodane do zmian lokalnych</string>
+    <string name="osm_changes_added_to_local_edits">Zmiany OSM dodane do zestawu zmian lokalnych</string>
    	<string name="mark_to_delete">Zaznacz, aby usunąć</string>
 	<string name="osmo_grop_name_length_alert">Nazwa grupy powinna mieć co najmniej 3 znaki długości!</string>
 	<string name="shared_string_go">Idź</string>
 	<string name="shared_string_not_use">Nie używaj</string>
 	<string name="plugin_nautical_descr">"Ta wtyczka wzbogaca aplikację OsmAnd, by tworzyć mapy nawigacyjne dla łodzi, żaglówek oraz innych sportów wodnych.\n\nSpecjalny dodatek do Osm And wstawia znaki nawigacyjne i oznaczenia map morskich dla nawigacji śródlądowej oraz przybrzeżnej. Opis każdego znaku dostarcza szczegółów potrzebnych do ich identyfikacji oraz ich przeznaczenia (kategoria, kształt, kolor, kolejność, odniesienie itd.).\n\nW razie potrzeby wyłącz tę wtyczkę lub zmień styl w opcjach \'Styl mapy\' w menu \'Konfiguracja mapy\', aby powrócić do jednego z typowych stylów map OsmAnd. "</string>
 	<string name="plugin_ski_descr">"Ta wtyczka dodaje do OsmAnd szczegóły dotyczące stoków narciarskich, tras biegowych, tras skitour, kolejek linowych i wyciągów narciarskich na świecie. Trasy i szlaki są pokolorowane według trudności i przedstawione w specjalnym zimowym stylu mapy, imitującym krajobraz pokryty śniegiem.\n\nWłączenie tego widoku zmienia styl mapy na \'Zima i narty\', ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu \'Styl mapy\' w \'Konfiguracji mapy\'. "</string>
+	<string name="shared_string_message">Wiadomość</string>
+	<string name="shared_string_do_not_use">Nie używaj</string>
+	<string name="shared_string_address">Adres</string>
 	</resources>

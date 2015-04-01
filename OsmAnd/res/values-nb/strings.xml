@@ -234,7 +234,7 @@
 	 
 	<string name="choose_auto_follow_route">Auto-sentrer kartvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid til kartvisning synkroniseres med gjeldende posisjon</string>
-	<string name="auto_follow_route_never">Aldri (trykk blå pil for å starte veiledning manuelt)</string>
+	<string name="auto_follow_route_never">Aldri (trykk \'Start\' for å starte veiledning manuelt)</string>
 	<string name="pref_raster_map">Kartkilde-innstillinger</string>
 	<string name="pref_vector_map">Vektorkart-innstillinger</string>
 	<string name="delete_confirmation_msg">Slette %1$s?</string>
@@ -624,7 +624,7 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa og Asia</string>
 	<string name="driving_region_uk">England, India, Australia og andre</string>
-	<string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia og andre</string>
+	<string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia, og andre</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region">Region for bilkjøring</string>
 	    
@@ -1250,10 +1250,10 @@
 	<string name="shared_string_ellipsis">…</string>
 	<string name="osmand_parking_overdue">utløpt</string>
 	<string name="osm_edits">OSM-redigeringer</string>
-	<string name="osmand_parking_time_left">Igjen</string> <string name="your_edits">Dine redigeringer</string>
+	<string name="osmand_parking_time_left">igjen</string> <string name="your_edits">Dine redigeringer</string>
     <string name="waypoint_visit_after">Besøk etter</string>
     <string name="waypoint_visit_before">Besøk før</string>
-    <string name="tips_and_tricks_descr">Ofte stilte spørsmål, siste endringer og annet</string>
+    <string name="tips_and_tricks_descr">Ofte stilte spørsmål, siste endringer, og annet</string>
     <string name="routing_settings_2">Navigeringsinnstillinger</string>
     <string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="parking_place_limited">Parkeringstid begrenset til</string>
 	<string name="simulate_your_location">Simuler din posisjon</string>
@@ -1265,10 +1265,20 @@
 	<string name="shared_string_action_template">Handling {0}</string>
 	<string name="watch">Se</string>
 	<string name="local_osm_changes_upload_all_confirm">Du kommer til å laste opp %1$d endringer til OSM. Er du sikker?</string>
-    <string name="confirmation_to_clear_history">Vil du slette hele historikken?</string>
-    <string name="delay_to_start_navigation">Hopp over ruteplanlegging</string>
+    <string name="confirmation_to_clear_history">Vil du slette historikken?</string>
+    <string name="delay_to_start_navigation">Start trinnvis navigering etter…</string>
     <string name="welmode_download_maps">Last ned kart</string>
-	<string name="welcome_select_region">Velg region</string>
+	<string name="welcome_select_region">For å korrekt gjenspeile trafikkskilt og trafikkregler, velg region for kjøringen:</string>
 	<string name="welcome_header">Velkommen</string>
     <string name="mark_to_delete">Merk for å slette</string>
-	</resources>
+	<string name="agps_info">A-GPS-info</string>
+	<string name="shared_string_message">Melding</string>
+	<string name="agps_data_last_downloaded">A-GPS-data sist nedlastet: %1$s</string>
+    <string name="welcome_text">OsmAnd gir global offline kartlesing, og global offline navigering!</string>
+	<string name="current_route">Gjeldende rute</string>
+    <string name="osmo_grop_name_length_alert">Gruppenavn skal være på minst 3 tegn!</string>
+	<string name="shared_string_go">Start</string>
+	<string name="shared_string_do_not_use">Ikke bruk</string>
+	<string name="shared_string_address">Adresse</string>
+	<string name="delay_navigation_start">Start trinnvis veiledning automatisk</string>
+    </resources>

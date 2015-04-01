@@ -1923,20 +1923,20 @@
 	<string name="action_modify">Изменить действие</string>
 	<string name="action_create">Создать действие</string>
 	<string name="osm_edits">OSM правки</string>
-	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">мин</string><string name="osmand_parking_time_left">Осталось</string> <string name="parking_place_limited">Парковочное место ограничено временем</string>
+	<string name="osmand_parking_hour">ч</string><string name="osmand_parking_minute">мин</string><string name="osmand_parking_time_left">осталось</string> <string name="parking_place_limited">Парковка ограничена временем</string>
 	<string name="your_edits">Ваши правки</string>
     <string name="waypoint_visit_after">Посетить после</string>
     <string name="waypoint_visit_before">Посетить до</string>
     <string name="plugin_touringview_name">Туристическая карта</string>
-	<string name="osmand_parking_overdue">Просрочено</string>
-	<string name="delay_to_start_navigation_descr">Автоматический запуск навигации после заданного интервала\n\nУкажите время задержки на экране планирования маршрута</string>
-    <string name="delay_to_start_navigation">Старт навигации после</string>
+	<string name="osmand_parking_overdue">просрочено</string>
+	<string name="delay_to_start_navigation_descr">Укажите время задержки на экране планирования маршрута</string>
+    <string name="delay_to_start_navigation">Задержка начала навигации…</string>
     <string name="shared_string_go">Поехали</string>
 	<string name="shared_string_not_use">Не использовать</string>
 	<string name="plugin_nautical_descr">"Плагин обогащает карты и навигацию OsmAnd, а также делает доступными морские карты для катания на лодках, парусного спорта, и других видов спорта.
 \n\nСпециальная карта дополнение для OsmAnd добавляет морские навигационные и условные знаки, для внутренней, так и для прибрежной навигации. Описание каждой навигационной отметки содержит информацию, необходимую для идентификации, а также её значение (категория, форма, цвет, последовательность, ссылка и т.д.).\n\nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый \"Стиль карты\" в разделе \"Настройка карты\". "</string>
 	<string name="local_osm_changes_upload_all_confirm">Вы собираетесь загрузить %1$d изменений OSM. Вы уверены?</string>
-    <string name="confirmation_to_clear_history">Вы хотите очистить всю историю?</string>
+    <string name="confirmation_to_clear_history">Вы хотите очистить историю?</string>
     <string name="plugin_ski_descr">"Плагин обеспечивает вам доступ к данным о горнолыжных трассах, маршрутах для беговых лыж, альпийских спусках, фуникулерах и горнолыжных подъемниках. Маршруты и спуски отмечены разными цветами в зависимости от их сложности и изображены с использованием специального \"зимнего\" стиля карты, который заключается в том, что используются \"снежные\" цвета зимнего пейзажа.\n\nВ случае активации этого вида, стиль карты меняется на \"Winter and ski\", показывая все детали пейзажа так, как они выглядят зимой. Такой (зимний) вид может быть отменен либо путем деактивации здесь, либо если вы поменяете \"Стиль карты\" в меню \"Настройка карты\" на желаемый вид. "</string>
 	<string name="osmo_grop_name_length_alert">Имя группы должно быть минимум 3 символа!</string>
 	<string name="current_route">Текущий маршрут</string>
@@ -1951,4 +1951,5 @@
 	<string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
     <string name="shared_string_message">Сообщение</string>
 	<string name="shared_string_do_not_use">Не использовать</string>
+	<string name="shared_string_address">Адрес</string>
 	</resources>

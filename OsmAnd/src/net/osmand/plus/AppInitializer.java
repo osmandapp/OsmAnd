@@ -391,8 +391,7 @@ public class AppInitializer implements IProgress {
 			// native depends on renderers
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-			
-			
+
 			app.poiFilters.reloadAllPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);			
 			indexRegionsBoundaries(warnings);

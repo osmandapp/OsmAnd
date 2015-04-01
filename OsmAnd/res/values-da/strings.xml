@@ -512,7 +512,7 @@
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
-	<string name="auto_follow_route_never">Aldrig (tryk på blå pil for at starte vejledning manuelt)</string>
+	<string name="auto_follow_route_never">Aldrig (tryk \'Start\' for at starte vejledning manuelt)</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
 	<string name="auto_follow_location_enabled">Autocentrer kort.</string>
@@ -1819,7 +1819,7 @@
     <string name="speak_pedestrian">Fodgængerovergange</string>
     
 	<string name="save_track_to_gpx_globally_headline">Sporingslogning på efterspørgsel</string>
-	<string name="navigation_over_track">Start navigation langs spor?</string>
+	<string name="navigation_over_track">Start navigation langs sporet?</string>
 	<string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
     
 	<string name="proxy_pref_title">Proxy</string>
@@ -1852,7 +1852,7 @@
 	<string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">"Tilgængelig %1$s "</string>
 	<string name="device_memory">Lagerplads</string>
-    <string name="rendering_attr_pisteRoutes_name">Pisteruter</string>
+    <string name="rendering_attr_pisteRoutes_name">Skiløjper</string>
 	<string name="roads_only">Kun veje</string>
     <string name="notes">Noter</string>
 	<string name="online_map">Online kort</string>
@@ -1952,7 +1952,7 @@
 	<string name="simulate_your_location">Simuler position</string>
     <string name="drawer">Enkel liste</string>
     <string name="short_location_on_map">Lat %1$s\nLong %2$s</string>
-    <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger</string>
+    <string name="tips_and_tricks_descr">Ofte stillede spaørgsmål, de seneste ændringer og andre oplysninger</string>
     <string name="routing_settings_2">Navigationsindstillinger</string>
     <string name="general_settings_2">Generelleindstillinger</string>
 	<string name="shared_string_clear_all">Slet alle</string>
@@ -1967,26 +1967,27 @@
 	<string name="action_modify">Handling: rediger</string>
 	<string name="action_delete">Handling: slet</string>
 	<string name="osm_edits">OSM redigeringer</string>
-	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Tilbage</string> <string name="parking_place_limited">Parkering er tidsbegrænset til</string>
+	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">tilbage</string> <string name="parking_place_limited">Parkering er tidsbegrænset til</string>
 	<string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
-	<string name="delay_to_start_navigation_descr">Start navigation automatisk efter angivne interval</string>
-    <string name="delay_to_start_navigation">Start sving-for-sving navigation efter</string>
+	<string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på ruteplanlægning skærm</string>
+    <string name="delay_to_start_navigation">Start sving-for-sving navigation efter…</string>
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
-	<string name="confirmation_to_clear_history">Skal hele historikken slettes?</string>
+	<string name="confirmation_to_clear_history">Skal historikken slettes?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
     <string name="osmo_grop_name_length_alert">Gruppenavn skal være på mindst 3 tegn!</string>
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
    	<string name="mark_to_delete">Marker for at slette</string>
 	<string name="current_route">Aktuel rute</string>
     <string name="welmode_download_maps">Hent kort</string>
-	<string name="welcome_select_region">Vælg region</string>
+	<string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
 	<string name="welcome_header">Velkommen</string>
-    <string name="welcome_text">OsmAnd anvender offline kort og navigation!</string>
+    <string name="welcome_text">OsmAnd giver globale offline kort browsing, og global offline navigation!</string>
 	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af hastighed kamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik på Ja, hvis du er berettiget til at bruge denne funktion.</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
     <string name="shared_string_message">Besked</string>
 	<string name="shared_string_do_not_use">Brug ikke</string>
+	<string name="shared_string_address">Adresse</string>
 	</resources>
