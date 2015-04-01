@@ -245,6 +245,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		Builder bs = new AlertDialog.Builder(view.getContext());
 		bs.setTitle(a.getName(view.getContext()));
 		bs.setMessage(a.getDescription());
+		bs.setPositiveButton(R.string.shared_string_ok, null);
 		bs.show();
 	}
 

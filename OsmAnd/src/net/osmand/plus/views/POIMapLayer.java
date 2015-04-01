@@ -309,6 +309,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false));
 		}
+		bs.setPositiveButton(R.string.shared_string_ok, null);
 		bs.show();
 	}
 
