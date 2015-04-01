@@ -197,7 +197,7 @@ public class OsmAndFormatter {
 			String key = e.getKey();
 			String vl = e.getValue();
 			if(Amenity.DESCRIPTION.equals(key)) {
-				if(amenity.getType().isWiki() && shortDescription) {
+				if(shortDescription) {
 					continue;
 				}
 			} else if(Amenity.OPENING_HOURS.equals(key)) {
