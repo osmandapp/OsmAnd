@@ -1851,4 +1851,6 @@
     <string name="agps_info">A-GPS-info</string>
 	<string name="shared_string_message">Meddelande</string>
 	<string name="agps_data_last_downloaded">A-GPS-data senast nedladdat: %1$s</string>
-    </resources>
+    <string name="shared_string_do_not_use">Använd inte</string>
+	<string name="shared_string_address">Adress</string>
+	</resources>
