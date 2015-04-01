@@ -73,19 +73,35 @@ public class DirectionDrawable extends Drawable {
 	public void setAngle(float angle) {
 		this.angle = angle;
 	}
+	
+
+	@Override
+	public int getIntrinsicWidth() {
+		if (arrowImage != null) {
+			return arrowImage.getIntrinsicWidth();
+		}
+		return super.getIntrinsicWidth();
+	}
+	
+	@Override
+	public int getIntrinsicHeight() {
+		if (arrowImage != null) {
+			return arrowImage.getIntrinsicHeight();
+		}
+		return super.getIntrinsicHeight();
+	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		canvas.save();
-		
 		if (arrowImage != null) {
 			int w = arrowImage.getIntrinsicWidth();
 			int h = arrowImage.getIntrinsicHeight();
 			int dx = canvas.getWidth() - w;
 			int dy = canvas.getHeight() - h;
 			arrowImage.setBounds(0, 0, w, h);
-			canvas.rotate(angle, canvas.getWidth() / 2, canvas.getHeight() / 2);
-			canvas.translate(dx/2, dy/2);
+			canvas.rotate(angle, w / 2, h / 2);
+			canvas.translate(dx / 3, dy / 3);
 			arrowImage.draw(canvas);
 		} else {
 			canvas.rotate(angle, canvas.getWidth() / 2, canvas.getHeight() / 2);

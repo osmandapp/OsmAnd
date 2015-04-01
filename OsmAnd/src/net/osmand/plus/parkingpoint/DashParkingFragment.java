@@ -114,13 +114,8 @@ public class DashParkingFragment extends DashLocationFragment {
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null) {
 			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);
-//			Drawable dds = getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation,
-//					R.color.color_distance);
-//			DirectionDrawable dd = new DirectionDrawable(mainView.getContext(), 
-//					dds.getIntrinsicWidth(), dds.getIntrinsicHeight());
-//			direction.setImageDrawable(dd);
 			dv.paint = false;
-			dv.arrowResId = R.drawable.ic_action_start_navigation;
+			dv.arrowResId = R.drawable.ic_action_start_navigation; 
 			distances.add(dv);
 		}
 

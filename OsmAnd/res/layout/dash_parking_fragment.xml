@@ -21,7 +21,7 @@
 			android:layout_marginLeft="@dimen/dashboard_parking_left_margin"
 			android:layout_marginRight="@dimen/dashFavIconMargin"
 			android:src="@drawable/ic_action_start_navigation"
-			android:scaleType="centerInside"
+			android:scaleType="center"
 			android:background="@drawable/btn_inset_circle_no_shadow"/>
 
 		<LinearLayout
