@@ -162,7 +162,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		adapter.item(R.string.layer_osm_bugs).selected(settings.SHOW_OSM_BUGS.get() ? 1 : 0)
 				.iconColor(R.drawable.ic_action_bug_dark).listen(new OnContextMenuClick() {
 
@@ -170,6 +170,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						if (itemId == R.string.layer_osm_bugs) {
 							settings.SHOW_OSM_BUGS.set(isChecked);
+							updateLayers(mapActivity.getMapView(), mapActivity);
 						}
 						return true;
 					}
