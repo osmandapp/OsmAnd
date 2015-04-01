@@ -861,7 +861,7 @@ public class GeoPointParserUtil {
 							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, params.get("text"));
 						}
 					}
-				} else if (host.matches("(?:www\\.)?(?:maps\\.)?google\\.[a-z]+")) {
+				} else if (host.matches("(?:www\\.)?(?:maps\\.)?google\\.[a-z.]+")) {
 					Map<String, String> params = getQueryParameters(uri);
 					if(params.containsKey("daddr")){
 						return parseGoogleMapsPath(params.get("daddr"), params);
