@@ -33,12 +33,14 @@ public class DirectionDrawable extends Drawable {
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
 		this.resourceId = resourceId;
+		onBoundsChange(getBounds());
 	}
 
 	public void setImage(int resourceId) {
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, 0);
 		this.resourceId = resourceId;
+		onBoundsChange(getBounds());
 	}
 	
 	public DirectionDrawable(Context ctx, float width, float height) {
@@ -90,18 +92,26 @@ public class DirectionDrawable extends Drawable {
 		}
 		return super.getIntrinsicHeight();
 	}
+	
+	@Override
+	protected void onBoundsChange(Rect bounds) {
+		super.onBoundsChange(bounds);
+		if (arrowImage != null) {
+			Rect r = getBounds();
+			int w = arrowImage.getIntrinsicWidth();
+			int h = arrowImage.getIntrinsicHeight();
+			int dx = r.width() - w;
+			int dy = r.height() - h;
+			arrowImage.setBounds(r.left + dx / 2, r.top + dy / 2, r.right - dx / 2, r.bottom - dy / 2);
+		}
+	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		canvas.save();
 		if (arrowImage != null) {
-			int w = arrowImage.getIntrinsicWidth();
-			int h = arrowImage.getIntrinsicHeight();
-			int dx = canvas.getWidth() - w;
-			int dy = canvas.getHeight() - h;
-			arrowImage.setBounds(0, 0, w, h);
-			canvas.rotate(angle, w / 2, h / 2);
-			canvas.translate(dx / 3, dy / 3);
+			Rect r = getBounds();
+			canvas.rotate(angle, r.centerX(), r.centerY());
 			arrowImage.draw(canvas);
 		} else {
 			canvas.rotate(angle, canvas.getWidth() / 2, canvas.getHeight() / 2);
