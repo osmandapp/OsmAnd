@@ -186,7 +186,7 @@
 	<string name="init_native_library">기본 라이브러리 초기화중…</string>
 	<string name="choose_auto_follow_route">자동-센터 지도 보기</string>
 	<string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
-	<string name="auto_follow_route_never">결코(Never : 수동으로 길안내를 시작하기 위해 파란 화살표를 누르세요)</string>
+	<string name="auto_follow_route_never">결코(Never : 수동으로 음성안내를 시작하려면 \'Go\'를 탭하세요)</string>
 	<string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
 	<string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
 	<string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
@@ -2081,7 +2081,7 @@
     <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
     <string name="nautical_maps_missing">항해 지도 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
-    <string name="rendering_attr_pisteRoutes_name">Piste 경로</string>
+    <string name="rendering_attr_pisteRoutes_name">스키 슬로프</string>
 	<string name="free">"무료 %1$s "</string>
 	<string name="device_memory">장치 메모리</string>
     <string name="roads_only">도로 전용</string>
@@ -2199,18 +2199,18 @@
 	<string name="action_modify">액션 수정</string>
 	<string name="action_delete">액션 삭제</string>
 	<string name="osm_edits">OSM 편집</string>
-	<string name="osmand_parking_hour">시간</string><string name="osmand_parking_minute">분</string><string name="osmand_parking_time_left">남은 시간</string> <string name="parking_place_limited">주차 장소 시간 제한</string>
+	<string name="osmand_parking_hour">시간</string><string name="osmand_parking_minute">분</string><string name="osmand_parking_time_left">남은 시간</string> <string name="parking_place_limited">주차 시간 제한</string>
 	<string name="your_edits">편집</string>
     <string name="osmand_parking_overdue">시간 초과</string>
 	<string name="delay_to_start_navigation_descr">지정된 시간 경과후 자동으로 운행 시작</string>
-    <string name="delay_to_start_navigation">경로 계획 생략</string>
+    <string name="delay_to_start_navigation">~ 이후 턴-바이-턴 운행을 시작…</string>
     <string name="shared_string_go">실행</string>
 	<string name="shared_string_not_use">사용 하지 않음</string>
 	<string name="local_osm_changes_upload_all_confirm">OSM에 %1$d 변경 사항을 업로드 하려고 합니다. 확실합니까?</string>
     <string name="confirmation_to_clear_history">모든 기록을 삭제 하시겠습니까?</string>
     <string name="osm_changes_added_to_local_edits">OSM 변경 내용이 로컬 변경 내용에 추가</string>
    	<string name="mark_to_delete">표시하여 삭제</string>
-	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 심볼 이상 이어야 합니다!</string>
+	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 문자 이상 이어야 합니다!</string>
 	<string name="agps_info">A-GPS 정보</string>
 	<string name="shared_string_message">메세지</string>
 	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$ s</string>
@@ -2220,4 +2220,6 @@
 	<string name="welcome_text">OsmAnd는 전세계 오프라인 지도 보기 및 전세계 오프라인 운행을 제공합니다!</string>
 	<string name="welcome_header">환영 합니다</string>
     <string name="current_route">현재 루트</string>
-    </resources>
+    <string name="shared_string_do_not_use">사용 하지 마십시오</string>
+	<string name="shared_string_address">주소</string>
+	</resources>
