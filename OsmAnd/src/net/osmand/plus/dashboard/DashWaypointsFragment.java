@@ -71,6 +71,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		}		
 		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
 		((Button) mainView.findViewById(R.id.show_all)).setText(getString(R.string.shared_string_show_all));
+		((Button) mainView.findViewById(R.id.show_all)).setVisibility(View.VISIBLE);
 		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -83,6 +84,8 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for(int i = 0; i < 3 && i < allPoints.size(); i++) {
 			LocationPointWrapper ps = allPoints.get(i);
+			View dv = getActivity().getLayoutInflater().inflate(R.layout.divider, null);
+			favorites.addView(dv);
 			View v = WaypointDialogHelper.updateWaypointItemView(false, null, getMyApplication(), getActivity(), null, ps, null);
 			favorites.addView(v);
 

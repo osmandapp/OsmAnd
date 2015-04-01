@@ -235,7 +235,7 @@ public class MapRoutePreferencesControl {
 		}
 		GeneralRouter rm = SettingsNavigationActivity.getRouter(mapActivity.getMyApplication()
 				.getDefaultRoutingConfig(), am);
-		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute())) {
+		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
 		for (RoutingParameter r : rm.getParameters().values()) {
