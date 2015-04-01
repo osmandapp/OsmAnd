@@ -93,7 +93,7 @@
   <string name="init_native_library">Inizializzazione libreria nativa…</string>
   <string name="choose_auto_follow_route">Centra automaticamente la mappa</string>
   <string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
-  <string name="auto_follow_route_never">Mai (tap sulla freccia blu per avviare la navigazione manualmente)</string>
+  <string name="auto_follow_route_never">Mai (tap \'Vai\' per avviare la navigazione manualmente)</string>
   <string name="auto_follow_route_navigation">Centra automaticamente solo in navigazione</string>
   <string name="auto_follow_route_navigation_descr">Centra automaticamente la visione della mappa solo durante la navigazione.</string>
   <string name="auto_follow_location_enabled">Visualizzazione mappa centrata automaticamente.</string>
@@ -1489,7 +1489,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
         
     
-    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre</string>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o Altre</string>
 	<string name="driving_region">Regione di guida</string>
 	<string name="driving_region_japan">Giappone</string>
 	<string name="driving_region_us">Stati Uniti</string>
@@ -2025,7 +2025,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rendering_attr_pisteGrooming_name">Batti pista</string>
     <string name="free">"Libera %1$s "</string>
 	<string name="device_memory">Memoria dispositivo</string>
-    <string name="rendering_attr_pisteRoutes_name">Percorsi su pista</string>
+    <string name="rendering_attr_pisteRoutes_name">Discese sciistiche</string>
 	<string name="roads_only">Solo strade</string>
     <string name="watch">Guarda</string>
 	<string name="notes">Note</string>
@@ -2129,7 +2129,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="simulate_your_location">Posizione fittizia</string>
     <string name="drawer">Solo lista</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">"Domande frequenti, ultimi cambiamenti  e altro"</string>
+    <string name="tips_and_tricks_descr">Domande frequenti, ultimi cambiamenti e altro</string>
     <string name="routing_settings_2">Impostazioni di navigazione</string>
     <string name="general_settings_2">Impostazioni generali</string>
 	<string name="shared_string_clear_all">Cancella tutto</string>
@@ -2144,11 +2144,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="action_modify">Azione modifica</string>
 	<string name="action_delete">Azione elimina</string>
 	<string name="osm_edits">Modifiche OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">mancano</string> <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
 	<string name="your_edits">Le tue modifiche</string>
     <string name="osmand_parking_overdue">obsoleto</string>
 	<string name="delay_to_start_navigation_descr">Specifica il tempo di permanenza nella schermata di pianificazione dell\'itinerario</string>
-    <string name="delay_to_start_navigation">Salta la pianificazione del percorso</string>
+    <string name="delay_to_start_navigation">Avvia la navigazione svolta per svolta dopo…</string>
     <string name="shared_string_go">Vai</string>
 	<string name="shared_string_not_use">Non usare</string>
 	<string name="confirmation_to_clear_history">Vuoi cancellare la cronologia?</string>
@@ -2162,7 +2162,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="welcome_header">Benvenuto</string>
     <string name="current_route">Percorso attuale</string>
     <string name="osm_changes_added_to_local_edits">Modifiche a OsmAnd aggiunte alle modifiche locali</string>
-   	<string name="mark_to_delete">Marca da eliminare</string>
+   	<string name="mark_to_delete">Contrassegna da eliminare</string>
 	<string name="osmo_grop_name_length_alert">I nomi dei gruppi devono essere almeno di 3 caratteri!</string>
 	<string name="shared_string_message">Messaggio</string>
+	<string name="shared_string_do_not_use">Non usare</string>
+	<string name="shared_string_address">Indirizzi</string>
 	</resources>
