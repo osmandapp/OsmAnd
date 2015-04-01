@@ -140,7 +140,7 @@
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application.</string>
   <string name="shared_string_rename">Renommer</string>
   
-  <string name="poi_filter_nominatim">Nominatim en ligne</string>
+  <string name="poi_filter_nominatim">Recherche OSM Nominatim (en ligne)</string>
   <string name="search_position_current_location_search">Recherche de la position…</string>
   <string name="search_position_current_location_found">Position trouvée</string>
   <string name="search_position_address">Adresse…</string>
@@ -558,7 +558,7 @@
   <string name="search_nothing_found">Rien n\'a été trouvé</string>
   <string name="searching">Recherche en cours…</string>
   <string name="searching_address">Recherche de l\'adresse…</string>
-  <string name="search_osm_nominatim">Recherche de l\'adresse via OSM Nominatim</string>
+  <string name="search_osm_nominatim">Recherche avec le service web OSM Nominatim</string>
   <string name="hint_search_online">Recherche en ligne : Numéro, rue, ville</string>
   <string name="search_offline_address">Hors-ligne</string>
   <string name="search_online_address">Internet</string>
