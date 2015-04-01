@@ -487,7 +487,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof StageFavorite) {
 			final StageFavorite sf = ((StageFavorite)layers.getContextMenuLayer().getFirstSelectedObject());
 			if(selectedStage != null) {
-				adapter.item(R.string.show_waypoint_information).iconColor(R.drawable.ic_action_info_dark).position(0)
+				adapter.item(R.string.show_waypoint_information).iconColor(R.drawable.ic_action_gabout_dark).position(0)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -561,7 +561,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					}).reg();
 		}
 		//important info
-		adapter.item(R.string.sherpafy_tour_info_txt).iconColor(R.drawable.ic_action_info_dark)
+		adapter.item(R.string.sherpafy_tour_info_txt).iconColor(R.drawable.ic_action_gabout_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

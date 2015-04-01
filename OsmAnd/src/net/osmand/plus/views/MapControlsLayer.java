@@ -453,7 +453,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 //				&& (!routeFollowingMode || settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get());
 		boolean showButtons = routePlanningMode || !routeFollowingMode || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS);  
 		updateMyLocation(rh);
-		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_info_dark : R.drawable.ic_action_gdirections_dark	);
+		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.ic_action_gdirections_dark	);
 		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
 
 		menuControl.setIconResId(settings.USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? R.drawable.ic_dashboard_dark
