@@ -318,10 +318,6 @@ public class AppInitializer implements IProgress {
 
 
 
-	public void initPlugins() {
-		OsmandPlugin.initPlugins(app);		
-	}
-
 	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
 		long tm = System.currentTimeMillis();
 		try {
