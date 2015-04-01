@@ -715,7 +715,7 @@
 	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
 	<string name="voice_provider_descr">選擇導航語音導引</string>
-	<string name="voice_provider">語音導航</string>
+	<string name="voice_provider">語音指引</string>
 	<string name="voice_data_initializing">初始化語音資料…</string>
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
 	<string name="voice_data_corrupted">指定的語音已損毀</string>
@@ -1608,7 +1608,7 @@
     <string name="loading_smth">正在載入 %1$s …</string>
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
-    <string name="delay_navigation_start">自動啟動轉向建議指引</string>
+    <string name="delay_navigation_start">自動開始轉向建議指引</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
 	<string name="gpx_info_maximum_speed">"最高速度：%1$s "</string>
@@ -1943,7 +1943,7 @@
 	<string name="action_delete">行動刪除</string>
 	<string name="osmand_parking_overdue">已過時</string>
 	<string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
-    <string name="delay_to_start_navigation">導航後啟動轉向指示…</string>
+    <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
 	<string name="shared_string_not_use">不使用</string>
 	<string name="confirmation_to_clear_history">您想要清除過去的記錄嗎？</string>
