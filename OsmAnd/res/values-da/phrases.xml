@@ -724,8 +724,8 @@
 	<string name="poi_cafe_and_restaurant">Cafe og restaurant</string>
 	<string name="poi_craft">Håndværk</string>
 	<string name="poi_medical_supply">Medicinsk forsyning</string>
-	<string name="poi_training">Træningsanlæg</string>
+	<string name="poi_training">Træningscenter</string>
 	<string name="poi_field_hockey">Hockey</string>
-	<string name="poi_smoking_area">Ryge område</string>
+	<string name="poi_smoking_area">Rygeområde</string>
 	<string name="poi_quarter">Kvarter</string>
 	</resources>
