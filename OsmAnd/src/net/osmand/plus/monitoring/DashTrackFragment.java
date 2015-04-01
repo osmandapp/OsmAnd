@@ -9,6 +9,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -75,10 +76,6 @@ public class DashTrackFragment extends DashBaseFragment {
 	public void onCloseDash() {
 		updateEnable = false;
 	}
-
-	
-	
-	
 
 	private void setupGpxFiles() {
 		View mainView = getView();
@@ -154,6 +151,26 @@ public class DashTrackFragment extends DashBaseFragment {
 				}
 			});
 			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
+			showOnMap.setVisibility(View.VISIBLE);
+			updateShowOnMap(app, f, showOnMap);
+			tracks.addView(v);
+		}
+	}
+
+	private void updateShowOnMap(final OsmandApplication app, final File f, final ImageButton showOnMap) {
+		final GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		final SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
+		if(selected != null) {
+			showOnMap.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_show_on_map, R.color.color_distance));
+			showOnMap.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), false, false);
+					updateShowOnMap(app, f, showOnMap);
+				}
+			});
+		} else {
+			showOnMap.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
 			showOnMap.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -166,9 +183,6 @@ public class DashTrackFragment extends DashBaseFragment {
 					run.run();
 				}
 			});
-			showOnMap.setVisibility(View.VISIBLE);
-			showOnMap.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_show_on_map));
-			tracks.addView(v);
 		}
 	}
 
