@@ -1295,8 +1295,8 @@
     <string name="edit_tilesource_elliptic_tile">Ελλειπτικό Μερκάτωρ</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Επιλογή υπάρχοντος…</string>
-    <string name="driving_region_descr">Επιλέξτε Περιοχή Οδήγησης: ΗΠΑ, Ευρώπη, ΗΒ, Ασία κλπ</string>
-	<string name="driving_region">Περιοχή Οδήγησης</string>
+    <string name="driving_region_descr">Επιλέξτε περιοχή οδήγησης: ΗΠΑ, Ευρώπη, ΗΒ, Ασία, κλπ</string>
+	<string name="driving_region">Περιοχή οδήγησης</string>
 	<string name="av_photo_play_sound_descr">Επιλέξτε εάν θα αναπαράγεται ήχος κατά τη λήψη φωτογραφίας</string>
 <string name="app_modes_choose">Προφίλ εφαρμογής</string>
 	<string name="map_widget_map_rendering">Σχεδιασμός χάρτη</string>
@@ -1706,7 +1706,7 @@
 	<string name="shared_string_video">Εικόνα</string>
 	<string name="shared_string_photo">Φωτογραφία</string>
 
-	<string name="osmand_parking_time_left">Αριστερά</string> <string name="your_edits">Η Επεξεργασίες σου</string>
+	<string name="osmand_parking_time_left">αριστερά</string> <string name="your_edits">Η επεξεργασίες σου</string>
     <string name="waypoint_visit_after">Επίσκεψη μετά</string>
     <string name="waypoint_visit_before">Επίσκεψη πριν</string>
     <string name="routing_settings_2">Ρυθμίσεις πλοήγησης</string>
@@ -1723,7 +1723,7 @@
     <string name="mark_to_delete">Σήμανση για διαγραφή</string>
 	<string name="osmo_grop_name_length_alert">Το όνομα της ομάδας θα πρέπει να είναι τουλάχιστον 3 χαρακτήρες!</string>
 	<string name="local_osm_changes_upload_all_confirm">Πρόκειται να αποστείλετε %1$d αλλαγές στο OSM. Είστε σίγουρος;</string>
-    <string name="confirmation_to_clear_history">Θέλετε να καθαρίσετε όλο το ιστορικό;</string>
+    <string name="confirmation_to_clear_history">Θέλετε να καθαρίσετε το ιστορικό;</string>
     <string name="osm_edits">Επεξεργασίες OSM</string>
 	<string name="osmand_parking_hour">ω</string>
 	<string name="osmand_parking_minute">λεπτά</string>
