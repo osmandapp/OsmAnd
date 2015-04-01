@@ -152,12 +152,12 @@ public class DashTrackFragment extends DashBaseFragment {
 			});
 			ImageButton showOnMap = ((ImageButton) v.findViewById(R.id.show_on_map));
 			showOnMap.setVisibility(View.VISIBLE);
-			updateShowOnMap(app, f, showOnMap);
+			updateShowOnMap(app, f, v, showOnMap);
 			tracks.addView(v);
 		}
 	}
 
-	private void updateShowOnMap(final OsmandApplication app, final File f, final ImageButton showOnMap) {
+	private void updateShowOnMap(final OsmandApplication app, final File f, View v, final ImageButton showOnMap) {
 		final GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 		final SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
 		if(selected != null) {
@@ -166,7 +166,11 @@ public class DashTrackFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View v) {
 					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), false, false);
-					updateShowOnMap(app, f, showOnMap);
+					AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
+					info.subfolder = "";
+					info.file = f;
+					AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
+					updateShowOnMap(app, f, v, showOnMap);
 				}
 			});
 		} else {

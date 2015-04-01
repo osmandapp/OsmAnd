@@ -208,7 +208,9 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
-
+		if(dashboardOnMap != null) {
+			dashboardOnMap.updateLocation(true, true, false);
+		}
 	}
 
 	private void checkAppInitialization() {
@@ -231,6 +233,9 @@ public class MapActivity extends AccessibleActivity {
 					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
 						mapView.refreshMap(true);
+						if(dashboardOnMap != null) {
+							dashboardOnMap.updateLocation(true, true, false);
+						}
 					}
 				}
 
@@ -240,6 +245,9 @@ public class MapActivity extends AccessibleActivity {
 						setupOpenGLView(false);
 					}
 					mapView.refreshMap(true);
+					if(dashboardOnMap != null) {
+						dashboardOnMap.updateLocation(true, true, false);
+					}
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
 					findViewById(R.id.drawer_layout).invalidate();
 				}
