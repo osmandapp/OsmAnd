@@ -11,12 +11,11 @@
 
     <ImageView
         android:id="@+id/folder_icon"
-        android:layout_width="37dip"
+        android:layout_width="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
-        android:layout_height="fill_parent"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="2dp" />
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
 
     <TextView
         android:id="@+id/folder_label"
@@ -31,11 +30,10 @@
 
     <ImageView
         android:id="@+id/folder_edit_icon"
-        android:layout_width="37dip"
-        android:layout_height="fill_parent"
+        android:layout_width="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
-        android:paddingLeft="4dp"
-        android:paddingRight="8dp"
-        android:paddingTop="2dp"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:src="@drawable/ic_action_filter_dark" />
 </LinearLayout>

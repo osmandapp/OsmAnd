@@ -12,8 +12,8 @@
 
 	<ImageView
 		android:id="@+id/poi_icon"
-		android:layout_width="26dp"
-		android:layout_height="26dp"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"
 		tools:visiblity="visible"/>
