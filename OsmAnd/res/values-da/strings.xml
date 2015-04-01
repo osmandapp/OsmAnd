@@ -1983,7 +1983,7 @@
     <string name="welmode_download_maps">Hent kort</string>
 	<string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
 	<string name="welcome_header">Velkommen</string>
-    <string name="welcome_text">OsmAnd giver globale offline kort browsing, og global offline navigation!</string>
+    <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
 	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af hastighed kamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik på Ja, hvis du er berettiget til at bruge denne funktion.</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
