@@ -1272,7 +1272,7 @@
 	\n* Slet SRTM filer
 	\n* Understøttelse af OSM-Noter 
     </string>
-    <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimal rute fra kortposition til destination.</string>
+    <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimere rækkefølgen fra nuværende position til destination.</string>
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
     <string name="destination_point">Destinationen %1$s</string>
@@ -1984,7 +1984,7 @@
 	<string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
 	<string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
-	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af hastighed kamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik på Ja, hvis du er berettiget til at bruge denne funktion.</string>
+	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
     <string name="shared_string_message">Besked</string>
