@@ -1990,4 +1990,5 @@
     <string name="shared_string_message">Besked</string>
 	<string name="shared_string_do_not_use">Brug ikke</string>
 	<string name="shared_string_address">Adresse</string>
+	<string name="shared_string_show_description">Vis beskrivelse</string>
 	</resources>
