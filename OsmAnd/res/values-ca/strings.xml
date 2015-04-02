@@ -61,7 +61,7 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar fàcilment quan es va aparcar i quant temps us queda si l\'aparcament té una limitació de temps màxim. Podreu trobar el lloc d\'aparcament i quant temps ja fa a la tarja de la consola i al giny del mapa.\nS\'inclou una notificació al calendari si així ho voleu, per tenir-ne un recordatori.</string>
+<string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar fàcilment quan es va aparcar i quant temps us queda si l\'aparcament té una limitació de temps màxim. El lloc d\'aparcament i el temps que fa que he aparcat se us mostra a la targeta del tauler i al giny del mapa.\nS\'inclou una notificació al calendari si voleu tenir-ne un recordatori.</string>
 <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
@@ -208,7 +208,7 @@
 <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
 <string name="use_short_object_names">Utilitza el nom dels objectes</string>
 <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
-<string name="local_openstreetmap_settings">PDI/Notes d\'OSM desats localment</string>
+<string name="local_openstreetmap_settings">PDI/notes d\'OSM desades localment</string>
 <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/Notes d\'OSM de les bases de dades locals</string>
 
 <string name="day_night_info">Informació de dia/nit</string>
@@ -422,7 +422,7 @@
 <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
 
 
-<string name="osmand_development_plugin_description">"Aquest connector mostra la configuració de característiques per desenvolupament i depuració com la verificació o simulació de rutes,  el rendiment del renderitzat o indicacions de veu.  Aquestes configuracions estan adreçades a desenvolupadors i no són d\'utilitat pel usuari normal."</string>
+<string name="osmand_development_plugin_description">Aquest connector mostra la configuració de característiques per al desenvolupament i depuració com la verificació o simulació de rutes, el rendiment del renderitzat o les indicacions de veu. Aquestes configuracions s\'adrecen a desenvolupadors i no són d\'utilitat per a un usuari normal.</string>
 <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
 <string name="zoomIs">El nivell de zoom és</string>
 <string name="settings_direction_style_descr">Trieu l\'estil per expressar les direccions relatives mentres s\'està movent</string>
@@ -1341,7 +1341,7 @@
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
 	<string name="intermediate_items_sort_return">S\'han reordenat les fites intermèdies per optimitzar la ruta des de la ubicació actual fins a la destinació.</string>
-    <string name="osmand_distance_planning_plugin_description">Aquest connector proporciona un giny de la pantalla del mapa que permet crear itineraris prement sobre el mapa, o usant o modificant fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un arxiu GPX que podreu usar més endavant com una referència.</string>
+    <string name="osmand_distance_planning_plugin_description">Aquest connector proporciona un giny de la pantalla del mapa que permet crear itineraris en prémer sobre el mapa o bé amb l\'ús o la modificació de fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
@@ -1902,7 +1902,7 @@
 	
 	<string name="share_note">Comparteix la nota</string>
 	
-	<string name="watch">Mira</string>
+	<string name="watch">Visualitza</string>
 	<string name="notes">Notes</string>
 	<string name="online_map">Mapa en línia</string>
 	<string name="roads_only">Només carreteres</string>
@@ -1956,8 +1956,8 @@
 	<string name="welcome_text">OsmAnd us permet utilitzar mapes i navegar sense connexió!</string>
 	<string name="welcome_header">Benvingut</string>
     <string name="current_route">Ruta actual</string>
-    <string name="rename_failed">Reanomenat fallit.</string>
-	<string name="back_to_map">Retorn al mapa</string>
+    <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
+	<string name="back_to_map">Torna al mapa</string>
 	<string name="location_on_map">Posició:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rendering_attr_pisteRoutes_name">Rutes de pista</string>
 	<string name="shared_string_release">Alliberat</string>
