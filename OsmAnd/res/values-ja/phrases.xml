@@ -238,4 +238,11 @@
 	<string name="poi_tunnel">トンネル(Tunnel)</string>
 	<string name="poi_bridge">橋(Bridge)</string>
 
+	<string name="poi_speed_camera">スピードカメラ(Speed camera)</string>
+	<string name="poi_turning_circle">転回所(Turning circle)</string>
+	<string name="poi_motorway_junction">高速道路ジャンクション・JCT(Motorway junction)</string>
+
+	<string name="poi_water_well">井戸(Water well)</string>
+	<string name="poi_standpipe">消火栓(Standpipe)</string>
+	<string name="poi_water_works">浄水場(Water works)</string>
 	</resources>
