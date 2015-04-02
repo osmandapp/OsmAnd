@@ -209,7 +209,7 @@
 <string name="use_short_object_names">Utilitza el nom dels objectes</string>
 <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
 <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
-<string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/Notes d\'OSM de les bases de dades locals</string>
+<string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM de la base de dades local</string>
 
 <string name="day_night_info">Informació de dia/nit</string>
 <string name="map_widget_day_night">Mapa dia/nit</string>
@@ -639,7 +639,7 @@
 <string name="use_osmand_routing_service">Navegacio d\'OsmAnd&gt;20Km</string>
 <string name="osmand_net_previously_installed">Hi ha una versió preveia d\'OsmAnd instal·lada. Totes les dades offline seran suportades per la nova aplicació .Peró els punts preferits hauran de ser exportats a la versió vella i després importats a la nova.</string>
 <string name="install_selected_build">Vols instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
-<string name="gps_status_app_not_found">L\'aplicació GPS status no està instal·lada. Buscar en el Market?</string>
+<string name="gps_status_app_not_found">L\'aplicació GPS status no està instal·lada. Voleu cercar-la al Market?</string>
 <string name="filter_existing_indexes">Filtre baixat</string>
 <string name="continuous_rendering">Dibuixat continu</string>
 <string name="use_high_res_maps">Pantalla d\'alta resolució</string>
