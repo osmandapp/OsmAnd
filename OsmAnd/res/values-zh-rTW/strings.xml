@@ -310,7 +310,7 @@
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
-	<string name="poi_context_menu_showdescription">顯示興趣點敘述</string>
+	<string name="poi_context_menu_showdescription">顯示興趣點記述</string>
 	<string name="index_name_north_america">北美洲</string>
 	<string name="index_name_us">北美 - 美國</string>
 	<string name="index_name_central_america">中美洲</string>
@@ -1962,4 +1962,5 @@
     <string name="shared_string_message">訊息</string>
 	<string name="shared_string_do_not_use">不使用</string>
 	<string name="shared_string_address">地址</string>
+	<string name="shared_string_show_description">顯示記述</string>
 	</resources>
