@@ -208,7 +208,7 @@
 <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
 <string name="use_short_object_names">Utilitza el nom dels objectes</string>
 <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
-<string name="local_openstreetmap_settings">PDI/notes d\'OSM desades localment</string>
+<string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
 <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/Notes d\'OSM de les bases de dades locals</string>
 
 <string name="day_night_info">Informació de dia/nit</string>
