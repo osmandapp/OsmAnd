@@ -1912,11 +1912,11 @@
 	<string name="track_points">Punts de traça</string>
 	<string name="plugin_touringview_name">Vista turística del mapa</string>
 	<string name="plugin_touringview_descr">"En activar el canvi en l\'estil de la vista del mapa de l\'OsmAnd a «Vista turística del mapa», es mostra una vista especial de gran detall per viatgers i conductors professionals.\n\nAquesta vista proporciona, per a qualsevol nivell de zoom al mapa, la quantitat màxima de detalls de viatge disponibles a les dades del mapa (particularment carreteres, pistes, camins i senyals d\'orientació).\n\nTambé es discrimina amb nitidesa tots els tipus de carreteres pel codi de colors, la qual cosa és molt útil, per exemple, conduint vehicles pesats.\n\nNo cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes estàndards.\n\nAquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi. "</string>
-	<string name="osmo_grop_name_length_alert">El nom de grup ha de tenir una mida mínima de 3 símbols!</string>
+	<string name="osmo_grop_name_length_alert">El nom de grup ha de tenir una mida mínima de 3 caràcters!</string>
 	<string name="local_osm_changes_upload_all_confirm">Esteu a punt de pujar %1$d modificacions a OSM. N\'esteu segur?</string>
-    <string name="confirmation_to_clear_history">Voleu esborrar completament l\'històric?</string>
-    <string name="delay_to_start_navigation_descr">Inici automàtic de navegació un cop transcorregut l\'interval indicat</string>
-    <string name="delay_to_start_navigation">Sense planificació de ruta</string>
+    <string name="confirmation_to_clear_history">Voleu esborrar l\'històric?</string>
+    <string name="delay_to_start_navigation_descr">Indiqueu el temps d\'espera sense canvis per tancar la pantalla de planificació de la ruta</string>
+    <string name="delay_to_start_navigation">Inici de navegació gir a gir després de…</string>
     <string name="shared_string_go">Vés</string>
 	<string name="osmand_parking_overdue">obsolet</string>
 	<string name="action_create">Acció de crear</string>
@@ -1926,11 +1926,11 @@
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
 	<string name="parking_place_limited">Durada d\'aparcament limitada a</string>
-	<string name="osmand_parking_time_left">Pendent</string>
+	<string name="osmand_parking_time_left">pendent</string>
 	<string name="your_edits">Les vostres edicions</string>
     <string name="waypoint_visit_after">Visiteu després</string>
     <string name="waypoint_visit_before">Visiteu abans</string>
-    <string name="osm_changes_added_to_local_edits">Els canvis d\'OSM s\'han afegit als canvis locals</string>
+    <string name="osm_changes_added_to_local_edits">Els canvis d\'OSM s\'han afegit al conjunt de canvis locals</string>
    	<string name="mark_to_delete">Marqueu per esborrar</string>
 	<string name="simulate_your_location">Simula la vostra ubicació</string>
     <string name="drawer">Llista senzilla</string>
@@ -1952,8 +1952,8 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Fites</string>
 	<string name="welmode_download_maps">Baixa mapes</string>
-	<string name="welcome_select_region">Seleccioneu la vostra regió</string>
-	<string name="welcome_text">OsmAnd us permet utilitzar mapes i navegar sense connexió!</string>
+	<string name="welcome_select_region">Seleccioneu la vostra regió per poder reflectir correctament els senyals i el reglament de tràfic:</string>
+	<string name="welcome_text">OsmAnd us permet consultar el mapa de tot el món i navegar per tot arreu sense connexió!</string>
 	<string name="welcome_header">Benvingut</string>
     <string name="current_route">Ruta actual</string>
     <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
@@ -1965,4 +1965,7 @@
 	<string name="agps_data_last_downloaded">Darreres dades A-GPS baixades: %1$s</string>
     <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars no és permès per la llei. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Feu clic a «sí» només si se us permet utilitzar aquesta funció.</string>
 	<string name="agps_info">Informació A-GPS</string>
+	<string name="shared_string_show_description">Mostra la descripció</string>
+	<string name="shared_string_do_not_use">No utilitzeu</string>
+	<string name="shared_string_address">Adreça</string>
 	</resources>
