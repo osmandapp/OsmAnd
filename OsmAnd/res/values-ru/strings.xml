@@ -1952,4 +1952,5 @@
     <string name="shared_string_message">Сообщение</string>
 	<string name="shared_string_do_not_use">Не использовать</string>
 	<string name="shared_string_address">Адрес</string>
+	<string name="rendering_attr_pisteRoutes_name">Горнолыжные склоны</string>
 	</resources>
