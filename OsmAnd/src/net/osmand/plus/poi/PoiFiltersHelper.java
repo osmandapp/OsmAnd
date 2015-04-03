@@ -307,7 +307,7 @@ public class PoiFiltersHelper {
 	public class PoiFilterDbHelper  {
 
 		public static final String DATABASE_NAME = "poi_filters"; //$NON-NLS-1$
-	    private static final int DATABASE_VERSION = 2;
+	    private static final int DATABASE_VERSION = 4;
 	    private static final String FILTER_NAME = "poi_filters"; //$NON-NLS-1$
 	    private static final String FILTER_COL_NAME = "name"; //$NON-NLS-1$
 	    private static final String FILTER_COL_ID = "id"; //$NON-NLS-1$
@@ -399,11 +399,12 @@ public class PoiFiltersHelper {
 		}
 		
 		public void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
-			if (newVersion == 2 || newVersion == 3) {
-				upgradeFilters(conn, false);
-			} else {
-				upgradeFilters(conn, true);
-			}
+//			if (newVersion == 2 || newVersion == 3) {
+//				upgradeFilters(conn, false);
+//			} else {
+			// from version 4 (upgrade) 
+			upgradeFilters(conn, true);
+//			}
 			conn.setVersion(newVersion);
 		}
 	    

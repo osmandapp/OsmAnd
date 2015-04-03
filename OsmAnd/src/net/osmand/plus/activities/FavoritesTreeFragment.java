@@ -457,7 +457,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			if(getMyApplication().getRoutingHelper().isRouteCalculated()) {
 				targetPointsHelper.updateRouteAndReferesh(true);
 			}
-			IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), false);
+			IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), true);
 			//MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}

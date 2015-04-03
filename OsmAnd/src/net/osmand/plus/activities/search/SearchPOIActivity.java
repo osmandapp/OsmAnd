@@ -3,6 +3,45 @@
  */
 package net.osmand.plus.activities.search;
 
+import gnu.trove.set.hash.TLongHashSet;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.EditPOIFilterActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.SearchByNameFilter;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -39,47 +78,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibleToast;
-import net.osmand.access.NavigationInfo;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.EditPOIFilterActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.poi.NameFinderPoiFilter;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.plus.poi.SearchByNameFilter;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.DirectionDrawable;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import gnu.trove.set.hash.TLongHashSet;
 
 /**
  * Search poi activity
@@ -779,7 +777,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 			DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height,
 					R.drawable.ic_destination_arrow_white, 
-					
 					R.color.color_distance);
 			int screenOrientation = DashLocationFragment.getScreenOrientation(SearchPOIActivity.this);
 			if (loc != null) {

@@ -224,12 +224,11 @@ public class MapPoiTypes {
 	}
 
 	public String getTranslation(AbstractPoiType abstractPoiType) {
-		String translation = null;
 		if(poiTranslator != null) {
-			translation = poiTranslator.getTranslation(abstractPoiType);
-		}
-		if(translation != null) {
-			return translation;
+			String translation = poiTranslator.getTranslation(abstractPoiType);
+			if(translation != null) {
+				return translation;
+			}
 		}
 		return Algorithms.capitalizeFirstLetterAndLowercase(abstractPoiType.getName().replace('_', ' '));
 	}
