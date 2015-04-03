@@ -785,7 +785,8 @@ public class WaypointHelper {
 		
 		@Override
 		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI, OsmAndFormatter.getPoiSimpleFormat(a, ctx, app.getSettings().usingEnglishNames()));
+			return new PointDescription(PointDescription.POINT_TYPE_POI, 
+					OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().usingEnglishNames()));
 		}
 
 		@Override

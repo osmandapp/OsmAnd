@@ -35,5 +35,6 @@
         android:layout_height="@dimen/standard_icon_size"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
+        android:background="?attr/dashboard_button"
         android:src="@drawable/ic_action_filter_dark" />
 </LinearLayout>

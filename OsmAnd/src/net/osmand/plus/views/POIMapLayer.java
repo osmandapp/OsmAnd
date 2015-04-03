@@ -158,7 +158,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
-		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getApplication(),
+		String format = OsmAndFormatter.getPoiStringWithoutType(n,
 				view.getSettings().usingEnglishNames());
 		res.append(" " + format + "\n" + OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n, true));
 		return res;
@@ -302,8 +302,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private void showDescriptionDialog(Amenity a) {
 		Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getApplication(),
-				view.getSettings().usingEnglishNames()));
+		bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(a, view.getSettings().usingEnglishNames()));
 		if (a.getType().isWiki()) {
 			bs.setMessage(a.getDescription());
 		} else {
