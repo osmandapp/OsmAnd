@@ -157,7 +157,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void updateShowOnMap(final OsmandApplication app, final File f, View v, final ImageButton showOnMap) {
+	private void updateShowOnMap(final OsmandApplication app, final File f, final View pView, final ImageButton showOnMap) {
 		final GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 		final SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
 		if(selected != null) {
@@ -169,7 +169,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 					info.subfolder = "";
 					info.file = f;
-					AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
+					AvailableGPXFragment.udpateGpxInfoView(pView, info, app, true);
 					updateShowOnMap(app, f, v, showOnMap);
 				}
 			});

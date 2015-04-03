@@ -691,4 +691,8 @@
 		<string name="poi_trash_disposal">Утилизация мусора</string>
 	<string name="poi_accomodation">Проживание</string>
 		<string name="poi_child_clothes">Детская одежда</string>
+	<string name="poi_training">Учебный центр</string>
+	<string name="poi_quarter">Квартал</string>
+	<string name="poi_field_hockey">Хоккейная площадка</string>
+	<string name="poi_team_handball">Командный гандбол</string>
 	</resources>
