@@ -2222,4 +2222,5 @@
     <string name="current_route">현재 루트</string>
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
 	<string name="shared_string_address">주소</string>
+	<string name="shared_string_show_description">설명 표시</string>
 	</resources>
