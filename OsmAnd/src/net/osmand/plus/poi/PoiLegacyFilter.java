@@ -293,7 +293,7 @@ public class PoiLegacyFilter {
 		this.filterByName = filterByName;
 	}
 	
-	public boolean isStandardFilter(){
+	public boolean isStandardFilter() {
 		return isStandardFilter;
 	}
 	

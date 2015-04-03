@@ -107,7 +107,7 @@ public class MapPoiTypes {
 			name = "leisure";
 		}
 		for(PoiCategory p : categories ) {
-			if(p.getName().equals(name)) {
+			if(p.getName().equals(name) || p.getKey().equalsIgnoreCase(name)) {
 				return p;
 			}
 		}
