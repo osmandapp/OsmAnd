@@ -709,4 +709,9 @@
 	<string name="poi_smoking_area">Зона для паленьня</string>
 	<string name="poi_training">Навучальны цэнтар</string>
 	<string name="poi_quarter">Квартал</string>
+	<string name="poi_rest_area">Зона адпачынку</string>
+
+	<string name="poi_reservoir">Рэзэрвуар</string>
+	<string name="poi_gasometer">Газасховішча</string>
+	<string name="poi_silo">Сілас</string>
 	</resources>

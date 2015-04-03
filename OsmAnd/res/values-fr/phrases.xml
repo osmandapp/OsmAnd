@@ -694,4 +694,9 @@
 	<string name="poi_field_hockey">Hockey sur gazon</string>
 	<string name="poi_smoking_area">Zone fumeur</string>
 	<string name="poi_quarter">Quartier</string>
+	<string name="poi_rest_area">Aire de repos</string>
+
+	<string name="poi_reservoir">Réservoir</string>
+	<string name="piste_ice_skate">Patinoire</string>
+
 	</resources>
