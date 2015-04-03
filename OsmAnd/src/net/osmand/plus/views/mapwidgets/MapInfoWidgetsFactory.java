@@ -231,6 +231,9 @@ public class MapInfoWidgetsFactory {
 				if (routingHelper.isFollowingMode()) {
 					if(settings.SHOW_STREET_NAME.get()) {
 						text = routingHelper.getCurrentName(type);
+						if(text == null) {
+							text = "";
+						}
 					}
 				} else {
 					int di = MapRouteInfoControl.getDirectionInfo();
@@ -243,6 +246,9 @@ public class MapInfoWidgetsFactory {
 //						if(next.distance > 0) {
 //							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
 //						}
+						if(text == null) {
+							text = "";
+						}
 						
 					}
 				}
@@ -252,7 +258,8 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
-				} else {
+				} 
+				if(text == null) {
 					text = "";
 				}
 			}
