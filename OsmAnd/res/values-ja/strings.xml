@@ -312,8 +312,7 @@ MB)をダウンロードしますか?</string>
      <string name="background_router_service_descr">背景サービスを有効化して
 長期間位置を追跡する</string>
      <string name="background_router_service">バックグラウンドサービスを使用</string>
-     <string name="off_router_service_no_gps_available">背景ルーティングサービスを動かすには
-位置ソースを動作させる必要があります。</string>
+     <string name="off_router_service_no_gps_available">スリープモードナビゲーション機能を有効にするには、位置取得機能(GPS等)をオンにする必要があります。</string>
      <string name="routing_settings_descr">ルート計算方法、ナビゲーションに関する設定</string>
      <string name="routing_settings">ナビゲーション設定</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
@@ -746,7 +745,7 @@ POIの更新は利用できません</string>
     <string name="use_magnetic_sensor">磁気センサーを使用</string>
     <string name="other_location">その他</string>
     <string name="files_limit">%1$d ファイルが残っています</string>
-    <string name="available_downloads_left">%1$d のファイルがダウンロード可能です</string>
+    <string name="available_downloads_left">あと%1$d個のファイルがダウンロード可能です</string>
     <string name="install_paid">フルバージョン</string>
     <string name="cancel_route">ルートを却下</string>
     <string name="cancel_navigation">ナビを停止</string>
@@ -836,7 +835,7 @@ POIの更新は利用できません</string>
 	<string name="animate_route">シミュレーション開始</string>
 	<string name="left_side_navigation">左側通行に設定</string>
 	<string name="left_side_navigation_descr">車が道路を左側通行する国は選択してください</string>
-	<string name="delete_target_point">経由地点の削除</string>
+	<string name="delete_target_point">経由地点も削除します、よろしいですか？</string>
 	<string name="target_point">経由地点 %1$s</string>
     <string name="intermediate_point">経由地点 %1$s</string>
     <string name="context_menu_item_last_intermediate_point">最後の経由地点として追加</string>
@@ -1157,7 +1156,7 @@ POIの更新は利用できません</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
 	<string name="gpx_monitoring_disabled_warn">\'旅程の記録\'での設定を使用しGPXウィジェットを使って経路を記録します。</string>
 	<string name="show_current_gpx_title">現在のトラックを表示</string>
-	<string name="free_version_message">このOsmAnd 無料版はダウンロード数が%1$s個に制限されており、オフラインでのWikipediaの利用をサポートしておりません。</string>
+	<string name="free_version_message">このOsmAnd 無料版はダウンロード数が%1$s個に制限されており、オフラインでのWikipedia記事利用もサポートしていません。</string>
 	<string name="free_version_title">無料版</string>
 	<string name="poi_context_menu_showdescription">POIの説明文を表示</string>
 	<string name="index_name_north_america">北米</string>
@@ -1311,7 +1310,7 @@ POIの更新は利用できません</string>
 \n\t* ユーザーインターフェイスの変更
 \n\t* 距離表示、GPXアナライザ、経由地点処理、ウィジェット、OSMのアップロード、httpsの取り扱い等のバグ修正 "</string>
     <string name="tip_recent_changes_1_4_t">"1.4での変更点:
-\n\t* 経由地点順にすべての訪問する場合の最適化(トラベリングセールスマンやドア·ツー·ドア手法)
+\n\t* 経由地点順にすべて立ち寄る場合の最適化(トラベリングセールスマンやドア·ツー·ドア手法)
 \n\t* 通りの名前で検索(近郊)
 \n\t* 計画モードのプラグイン(ロード/編集/GPXトラックを保存)
 \n\t* 新しいダウンロード画面(バックグラウンドでダウンロード)
@@ -1889,7 +1888,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_my_location">現在地点</string>
     <string name="osm_editing_manage">管理</string>
     
-	<string name="navigation_over_track">経路を超えてナビゲーションを開始しますか？</string>
+	<string name="navigation_over_track">経路に沿って居ナビゲーションを開始しますか？</string>
 	<string name="avoid_roads_msg">使用しない道路を選択することで、別の経路を検索することができます</string>
     
 	<string name="speak_pedestrian">横断歩道をアナウンス</string>
@@ -1939,8 +1938,8 @@ POIの更新は利用できません</string>
 	<string name="osm_edits">OSM の編集</string>
 	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">残り時間</string> <string name="parking_place_limited">駐車場の制限時間</string>
 	<string name="your_edits">あなたの編集</string>
-    <string name="waypoint_visit_after">後で訪問</string>
-    <string name="waypoint_visit_before">前に訪問</string>
+    <string name="waypoint_visit_after">後で立ち寄る</string>
+    <string name="waypoint_visit_before">先に立ち寄る</string>
     <string name="simulate_your_location">経路シミュレーション</string>
     <string name="drawer">フラットリスト</string>
     <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
@@ -1965,11 +1964,11 @@ POIの更新は利用できません</string>
 	<string name="track_segments">経路セグメント</string>
 	<string name="track_points">経路地点</string>
 	<string name="delay_to_start_navigation_descr">指定時間経過後、自動的にナビゲーションを開始</string>
-    <string name="delay_to_start_navigation">ルートプラン指定をスキップ</string>
+    <string name="delay_to_start_navigation">指定時間後にターン・バイ・ターンナビゲーションを開始…</string>
     <string name="shared_string_go">出発</string>
 	<string name="shared_string_not_use">使用しない</string>
 	<string name="plugin_touringview_name">ツーリングマップ表示</string>
-	<string name="confirmation_to_clear_history">全体履歴を消去しますか？</string>
+	<string name="confirmation_to_clear_history">履歴を消去しますか？</string>
     <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します(特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク)。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
 	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
@@ -1986,7 +1985,7 @@ POIの更新は利用できません</string>
 	<string name="notes">メモ</string>
 	<string name="online_map">オンラインマップ</string>
 	<string name="roads_only">道路のみ</string>
-    <string name="rendering_attr_pisteRoutes_name">ゲレンデルート</string>
+    <string name="rendering_attr_pisteRoutes_name">スキー場</string>
 	<string name="free">"空き %1$s "</string>
 	<string name="device_memory">デバイス容量</string>
     <string name="rendering_attr_pisteGrooming_name">ゲレンデ圧雪</string>
@@ -1997,12 +1996,12 @@ POIの更新は利用できません</string>
 	<string name="plugin_description_title">説明</string>
 	<string name="plugin_install_needs_network">このプラグインのインストールには、インターネット接続が必要です。</string>
 	<string name="get_plugin">取得</string>
-<string name="osm_changes_added_to_local_edits">OSMにローカルで変更された点を追加します</string>
+<string name="osm_changes_added_to_local_edits">OSMにローカルで変更された項目を追加します</string>
    	<string name="mark_to_delete">削除用にマーク</string>
-	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも記号3文字以上にする必要があります！</string>
+	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも3文字以上にする必要があります！</string>
 	<string name="welmode_download_maps">マップダウンロード</string>
-	<string name="welcome_select_region">交通標識や交通法を正しく反映するために、運転地域を選択してください:</string>
-	<string name="welcome_text">OsmAndは、完全なオフラインでの地図閲覧とナビゲーションを提供しています！</string>
+	<string name="welcome_select_region">交通標識や交通規制を正しく反映するために、運転地域を選択してください:</string>
+	<string name="welcome_text">OsmAndは、世界各国のオフライン地図の閲覧、そしてそれを利用したナビゲーションを提供しています！</string>
 	<string name="welcome_header">ようこそ</string>
     <string name="current_route">現在のルート</string>
     <string name="agps_info">A-GPS情報</string>
@@ -2010,4 +2009,6 @@ POIの更新は利用できません</string>
     <string name="confirm_usage_speed_cameras">国によっては法律によりスピードカメラ警告の使用ができません。(ドイツ、フランス、イタリア、その他の国)。OsmAndは、法律に違反した場合の責任は一切負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
 	<string name="shared_string_message">メッセージ</string>
 	<string name="shared_string_do_not_use">使用しない</string>
+	<string name="shared_string_show_description">説明表示</string>
+	<string name="shared_string_address">住所</string>
 	</resources>
