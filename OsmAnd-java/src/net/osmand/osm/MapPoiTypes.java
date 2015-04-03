@@ -25,6 +25,7 @@ public class MapPoiTypes {
 	
 	static final String OSM_WIKI_CATEGORY = "osmwiki";
 	private PoiTranslator poiTranslator = null;
+	private boolean init;
 	
 	public MapPoiTypes(String fileName){
 		this.resourceName = fileName;
@@ -50,7 +51,10 @@ public class MapPoiTypes {
 		}
 		return DEFAULT_INSTANCE;
 	}
-
+	
+	public boolean isInit() {
+		return init;
+	}
 	
 	public PoiCategory getOtherPoiCategory() {
 		return otherCategory;
@@ -185,6 +189,7 @@ public class MapPoiTypes {
 			throw new RuntimeException(e);
 		}
 		findDefaultOtherCategory();
+		init = true;
 	}
 	
 	private void findDefaultOtherCategory() {
