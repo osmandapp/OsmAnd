@@ -140,7 +140,7 @@
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application.</string>
   <string name="shared_string_rename">Renommer</string>
   
-  <string name="poi_filter_nominatim">Recherche OSM Nominatim (en ligne)</string>
+  <string name="poi_filter_nominatim">Recherche OSM en ligne</string>
   <string name="search_position_current_location_search">Recherche de la position…</string>
   <string name="search_position_current_location_found">Position trouvée</string>
   <string name="search_position_address">Adresse…</string>
@@ -257,7 +257,7 @@
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
   <string name="select_tile_source_to_install">Sélectionnez les cartes à installer ou mettre à jour</string>
-  <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération mais est indisponible</string>
+  <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération</string>
   <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
   <string name="tip_update_index_t">"Il est très important d\'avoir des données cartographiques à jour pour la visualisation des cartes hors-ligne, la recherche de points d\'intérêt ou d\'adresses, et la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
@@ -558,7 +558,7 @@
   <string name="search_nothing_found">Rien n\'a été trouvé</string>
   <string name="searching">Recherche en cours…</string>
   <string name="searching_address">Recherche de l\'adresse…</string>
-  <string name="search_osm_nominatim">Recherche avec le service web OSM Nominatim</string>
+  <string name="search_osm_nominatim">Rechercher en ligne avec OSM Nominatim</string>
   <string name="hint_search_online">Recherche en ligne : Numéro, rue, ville</string>
   <string name="search_offline_address">Hors-ligne</string>
   <string name="search_online_address">Internet</string>
@@ -658,7 +658,7 @@
   <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
   <string name="show_poi_over_map">Afficher PI</string>
   <string name="map_tile_source_descr">Choisir la source des tuiles de carte (en ligne ou en cache)</string>
-  <string name="map_tile_source">Source de la carte</string>
+  <string name="map_tile_source">Source de la carte (tuiles)</string>
   <string name="map_source">Source cartographique</string>
   <string name="use_internet">Utiliser internet</string>
   <string name="show_location">Afficher votre position</string>
@@ -1924,7 +1924,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
 <string name="shared_string_enable">Activer</string>
 	<string name="shared_string_disable">Désactiver</string>
-	<string name="get_plugin">Obtenir</string>
+	<string name="get_plugin">Installer</string>
 <string name="plugin_ski_name">Pistes de ski</string>
     <string name="plugin_nautical_name">Carte marine</string>
     <string name="world_ski_missing">Pour afficher les pistes de ski, une carte hors ligne doit être téléchargée.</string>
