@@ -227,6 +227,7 @@
 	<string name="poi_speed_camera">Speed camera</string>
 	<string name="poi_turning_circle">Turning circle</string>
 	<string name="poi_motorway_junction">Motorway junction</string>
+	<string name="poi_rest_area">Rest area</string>
 
 	<string name="poi_water_well">Water well</string>
 	<string name="poi_standpipe">Standpipe</string>
@@ -274,6 +275,7 @@
 	<string name="poi_vineyard">Vineyard</string>
 	<string name="poi_orchard">Orchard</string>
 	<string name="poi_salt_pond">Salt pond</string>
+	<string name="poi_reservoir">Reservoir</string>
 	<string name="poi_cricket_nets">Cricket nets</string>
 
 	<string name="poi_college">College</string>
