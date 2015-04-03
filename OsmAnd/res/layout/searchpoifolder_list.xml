@@ -30,11 +30,10 @@
 
     <ImageView
         android:id="@+id/folder_edit_icon"
-        android:layout_width="@dimen/standard_icon_size"
+        android:layout_width="@dimen/list_item_height"
 		android:layout_gravity="center_vertical"
-        android:layout_height="@dimen/standard_icon_size"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_height="@dimen/list_item_height"
+        android:scaleType="center"
         android:background="?attr/dashboard_button"
         android:src="@drawable/ic_action_filter_dark" />
 </LinearLayout>
