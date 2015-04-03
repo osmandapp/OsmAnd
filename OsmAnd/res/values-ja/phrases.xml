@@ -245,4 +245,18 @@
 	<string name="poi_water_well">井戸(Water well)</string>
 	<string name="poi_standpipe">消火栓(Standpipe)</string>
 	<string name="poi_water_works">浄水場(Water works)</string>
+	<string name="poi_boatyard">ボートヤード(Boatyard)</string>
+	<string name="poi_wastewater_plant">下水処理場(Wastewater plant)</string>
+	<string name="poi_water_tower">貯水塔(Water tower)</string>
+	<string name="poi_lock_gate">閘門型水門(Lock gate)</string>
+	<string name="poi_waterway_turning_point">船舶転回所(Waterway turning point)</string>
+	<string name="poi_weir">堰(Weir)</string>
+	<string name="poi_dam">ダム(Dam)</string>
+	<string name="poi_water_mill">水車小屋(Water mill)</string>
+
+	<string name="poi_power_substation">変電所(Substation)</string>
+	<string name="poi_power_transformer">変圧器・トランス(Transformer)</string>
+	<string name="poi_power_plant">発電所・発電施設(Power plant)</string>
+	<string name="poi_power_generator">発電機(Power generator)</string>
+
 	</resources>
