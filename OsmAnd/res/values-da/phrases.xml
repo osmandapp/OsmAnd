@@ -735,10 +735,10 @@
 	<string name="poi_storage_tank">Lagertank</string>
 
 	<string name="piste_downhill">Styrtløb</string>
-	<string name="piste_nordic">Nordisk</string>
+	<string name="piste_nordic">Langrend</string>
 	<string name="piste_skitour">Skitur</string>
 	<string name="piste_hike">Vandretur</string>
-	<string name="piste_sleigh">Slæde</string>
+	<string name="piste_sleigh">Kane</string>
 	<string name="piste_sled">Slæde</string>
 	<string name="piste_snow_park">Snepark</string>
 	<string name="piste_playground">Legeplads</string>
