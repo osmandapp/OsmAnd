@@ -1972,8 +1972,8 @@
 
 Un complement de mapa específic per OsmAnd us proporcionarà tot tipus de senyals nàutiques i símbols gràfics, per navegació interior o propera a la costa. La descripció de cada senyal de navegació us donarà els detalls que calguin per identificar-les i del seu significat (categoria, forma, color, seqüència, referència, etc.).
 
-Per retornar a l'estil habitual dels mapes d'OsmAnd, només cal desactivar aquest connector o canviar a com es desitgi &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt;. </string>
-	<string name="plugin_ski_descr">Aquest connector per OsmAnd us proporciona els detalls de les pistes d'esquí en baixada, de travessa i alpí  així com de telefèrics i remuntadors a tot el món. Les rutes i pistes es mostren amb codi de colors que els hi correspon segons la seva dificultat i amb un estil de mapa especial "Hivern"  que s'associa a un paisatge nevat.
+Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aquest connector o canviar a com es desitgi &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt;. </string>
+	<string name="plugin_ski_descr">Aquest connector per OsmAnd us proporciona els detalls de les pistes d\'esquí en baixada, de travessa i alpí  així com de telefèrics i remuntadors a tot el món. Les rutes i pistes es mostren amb codi de colors que els hi correspon segons la seva dificultat i amb un estil de mapa especial "Hivern"  que s\'associa a un paisatge nevat.
 
-Activant aquests canvis de visualització l'estil del mapa canvia a "Hibern i esquí", mostrant totes les característiques del paisatge a l'hibern. Aquesta vista es pot revertir tant activant-la altra cop com canviant-la com es vulgui a &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt; </string>
+Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i esquí", mostrant totes les característiques del paisatge a l\'hibern. Aquesta vista es pot revertir tant activant-la altra cop com canviant-la com es vulgui a &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt; </string>
 	</resources>
