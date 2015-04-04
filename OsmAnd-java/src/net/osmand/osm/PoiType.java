@@ -51,6 +51,11 @@ public class PoiType extends AbstractPoiType {
 	public PoiCategory getCategory() {
 		return category;
 	}
+
+
+	public void setReference(boolean b) {
+		
+	}
 	
 
 }

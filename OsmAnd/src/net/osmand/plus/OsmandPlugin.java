@@ -112,6 +112,10 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 		
+		activatePlugins(app, enabledPlugins);
+	}
+
+	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
 				try {

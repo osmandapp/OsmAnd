@@ -34,6 +34,7 @@ public class MapPoiTypes {
 	public interface PoiTranslator {
 		
 		public String getTranslation(AbstractPoiType type);
+		
 	}
 	
 	public static MapPoiTypes getDefaultNoInit() {
@@ -153,6 +154,14 @@ public class MapPoiTypes {
 								parser.getAttributeValue("", "name"));
 						lastFilter = tp;
 						lastCategory.addPoiType(tp);
+					} else if(name.equals("poi_reference")){
+						PoiType tp = new PoiType(this,
+								lastCategory, parser.getAttributeValue("","name"));
+						tp.setReference(true);
+						if(lastFilter != null) {
+							lastFilter.addPoiType(tp);
+						}
+						lastCategory.addPoiType(tp);
 					} else if(name.equals("poi_type")){
 						PoiType tp = new PoiType(this,
 								lastCategory, parser.getAttributeValue("","name"));
@@ -225,7 +234,9 @@ public class MapPoiTypes {
 	}
 
 	public static void main(String[] args) {
-		print(getDefault())	;
+		DEFAULT_INSTANCE = new MapPoiTypes("/Users/victorshcherb/osmand/repos/resources/poi/poi_types.xml");
+		DEFAULT_INSTANCE.init();
+		print(DEFAULT_INSTANCE)	;
 	}
 
 	public String getTranslation(AbstractPoiType abstractPoiType) {
