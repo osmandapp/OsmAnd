@@ -290,21 +290,27 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			localOsmEditsInternal.registerObject(point.getLatitude(), point.getLongitude(), point);
 		}
 	}
+	
+	public void collectLocalOsmEdits() {
+		DataTileManager<OsmPoint> res = new DataTileManager<OsmPoint>();
+		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
+		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
+
+		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
+		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
+		for (OsmPoint point : l1) {
+			res.registerObject(point.getLatitude(), point.getLongitude(), point);
+		}
+		for (OsmPoint point : l2) {
+			res.registerObject(point.getLatitude(), point.getLongitude(), point);
+		}
+		localOsmEditsInternal = res;
+		
+	}
 
 	public DataTileManager<OsmPoint> getLocalOsmEdits(){
 		if(localOsmEditsInternal == null) {
-			localOsmEditsInternal = new DataTileManager<OsmPoint>();
-			OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
-			OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
-
-			List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
-			List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
-			for (OsmPoint point : l1) {
-				localOsmEditsInternal.registerObject(point.getLatitude(), point.getLongitude(), point);
-			}
-			for (OsmPoint point : l2) {
-				localOsmEditsInternal.registerObject(point.getLatitude(), point.getLongitude(), point);
-			}
+			collectLocalOsmEdits();
 		}
 		return localOsmEditsInternal;
 	}
@@ -342,4 +348,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static String getPrefix(OsmPoint osmPoint) {
 		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
 	}
+
+	
 }
