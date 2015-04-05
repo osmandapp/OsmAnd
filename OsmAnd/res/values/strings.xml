@@ -417,7 +417,7 @@
     <string name="osmo_auto_connect">Auto-connect</string>
     <string name="osmo_start_service">OsMo service</string>
     <string name="osmo_gpx_track_downloaded">OsMo track %1$s downloaded.</string>
-    <string name="no_index_file_to_download">No downloads found, please check your Internet connection.</string>
+    <string name="no_index_file_to_download">Downloads not found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="none_selected_gpx">No GPX files selected. In order to select press and hold on available track.</string>
     <string name="local_index_select_gpx_file">Select to show</string>
