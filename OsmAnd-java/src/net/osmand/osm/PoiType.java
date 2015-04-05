@@ -1,15 +1,35 @@
 package net.osmand.osm;
 
 public class PoiType extends AbstractPoiType {
+	
+	private PoiCategory category;
+	private PoiType referenceType;
+	private String osmTag;
+	private String osmTag2;
+	private String osmValue;
+	private String osmValue2;
 
-
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name){
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {
 		super(name, poiTypes);
 		this.category = category;
 	}
-
 	
+	public PoiType getReferenceType() {
+		return referenceType;
+	}
+	
+	public void setReferenceType(PoiType referenceType) {
+		this.referenceType = referenceType;
+	}
+	
+	public boolean isReference() {
+		return referenceType != null;
+	}
+
 	public String getOsmTag() {
+		if(isReference()) {
+			return referenceType.getOsmTag();
+		}
 		return osmTag;
 	}
 
@@ -18,6 +38,9 @@ public class PoiType extends AbstractPoiType {
 	}
 
 	public String getOsmTag2() {
+		if(isReference()) {
+			return referenceType.getOsmTag2();
+		}
 		return osmTag2;
 	}
 
@@ -26,6 +49,9 @@ public class PoiType extends AbstractPoiType {
 	}
 
 	public String getOsmValue() {
+		if(isReference()) {
+			return referenceType.getOsmValue();
+		}
 		return osmValue;
 	}
 
@@ -34,6 +60,9 @@ public class PoiType extends AbstractPoiType {
 	}
 
 	public String getOsmValue2() {
+		if(isReference()) {
+			return referenceType.getOsmValue2();
+		}
 		return osmValue2;
 	}
 
@@ -41,21 +70,9 @@ public class PoiType extends AbstractPoiType {
 		this.osmValue2 = osmValue2;
 	}
 
-	private PoiCategory category;
-	private String osmTag;
-	private String osmTag2;
-	private String osmValue;
-	private String osmValue2;
-	
-	
 	public PoiCategory getCategory() {
 		return category;
 	}
 
-
-	public void setReference(boolean b) {
-		
-	}
-	
 
 }

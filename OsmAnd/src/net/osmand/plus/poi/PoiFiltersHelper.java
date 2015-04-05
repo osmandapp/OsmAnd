@@ -229,10 +229,10 @@ public class PoiFiltersHelper {
 	
 	
 	public List<PoiLegacyFilter> getOsmDefinedPoiFilters(){
-		if(cacheOsmDefinedFilters == null){
+		if (cacheOsmDefinedFilters == null) {
 			cacheOsmDefinedFilters = new ArrayList<PoiLegacyFilter>();
 			MapPoiTypes poiTypes = application.getPoiTypes();
-			for(PoiCategory t : poiTypes.getCategories()){
+			for (PoiCategory t : poiTypes.getCategories()) {
 				cacheOsmDefinedFilters.add(new PoiLegacyFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();

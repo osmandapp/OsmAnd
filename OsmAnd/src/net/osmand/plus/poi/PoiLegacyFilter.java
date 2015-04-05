@@ -14,6 +14,8 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -55,6 +57,22 @@ public class PoiLegacyFilter {
 			initSearchAll();
 		} else {
 			acceptedTypes.put(type, null);
+			addReferenceTypes(type);
+		}
+	}
+
+	private void addReferenceTypes(PoiFilter type) {
+		for(PoiType pt :  type.getPoiTypes()) {
+			if (pt.isReference()) {
+				PoiCategory refCat = pt.getReferenceType().getCategory();
+				if (!acceptedTypes.containsKey(refCat)) {
+					acceptedTypes.put(refCat, new LinkedHashSet<String>());
+				}
+				LinkedHashSet<String> ls = acceptedTypes.get(refCat);
+				if (ls != null) {
+					ls.add(pt.getKeyName());
+				}
+			}
 		}
 	}
 	

@@ -70,21 +70,23 @@ public class MapPoiTypes {
 		return getPoiCategoryByName(name, false);
 	}
 	
-
-	public PoiCategory getPoiCategoryBySubtypeName(String name) {
+	public PoiType getPoiTypeByKey(String name) {
 		for(PoiCategory pc : categories) {
 			PoiType pt = pc.getPoiTypeByKeyName(name);
-			if(pt != null) {
-				return pc;
+			if(pt != null && !pt.isReference()) {
+				return pt;
 			}
 		}
-		return otherCategory;
+		return null;
 	}
 	
 	public Map<String, PoiType> getAllTranslatedNames() {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
+				if(pt.isReference()) {
+					continue;
+				}
 				translation.put(pt.getTranslation(), pt);
 			}
 		}
@@ -131,6 +133,7 @@ public class MapPoiTypes {
 
 	public void init(){
 		InputStream is;
+		List<PoiType> referenceTypes = new ArrayList<PoiType>();
 		try {
 			if(resourceName == null){
 				is = MapRenderingTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
@@ -157,7 +160,8 @@ public class MapPoiTypes {
 					} else if(name.equals("poi_reference")){
 						PoiType tp = new PoiType(this,
 								lastCategory, parser.getAttributeValue("","name"));
-						tp.setReference(true);
+						referenceTypes.add(tp);
+						tp.setReferenceType(tp);
 						if(lastFilter != null) {
 							lastFilter.addPoiType(tp);
 						}
@@ -197,6 +201,14 @@ public class MapPoiTypes {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+		for (PoiType gt : referenceTypes) {
+			PoiType pt = getPoiTypeByKey(gt.keyName);
+			if (pt == null || pt.getOsmTag() == null) {
+				throw new IllegalStateException("Can't find poi type for poi reference '" + gt.keyName + "'");
+			} else {
+				gt.setReferenceType(pt);
+			}
+		}
 		findDefaultOtherCategory();
 		init = true;
 	}
@@ -229,7 +241,8 @@ public class MapPoiTypes {
 	
 	private static void print(String indent, PoiFilter f) {
 		for(PoiType pt : f.getPoiTypes()) {
-			System.out.println(indent + " Type " + pt.getName());
+			System.out.println(indent + " Type " + pt.getName() + 
+					(pt.isReference() ? (" -> " + pt.getReferenceType().getCategory().getKey()  ): ""));
 		}
 	}
 
@@ -253,9 +266,5 @@ public class MapPoiTypes {
 	public boolean isRegisteredType(PoiCategory t) {
 		return getPoiCategoryByName(t.getKeyName()) != otherCategory;
 	}
-
-
-	
-
 	
 }

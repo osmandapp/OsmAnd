@@ -47,4 +47,6 @@ public class PoiCategory extends PoiFilter {
 		return regId;
 	}
 
+	
+
 }
