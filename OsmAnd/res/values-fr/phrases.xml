@@ -699,4 +699,16 @@
 	<string name="poi_reservoir">Réservoir</string>
 	<string name="piste_ice_skate">Patinoire</string>
 
+	<string name="poi_gasometer">Réservoir de gaz</string>
+	<string name="poi_silo">Silo</string>
+	<string name="poi_storage_tank">Réservoir de stockage</string>
+
+	<string name="piste_downhill">Ski alpin</string>
+	<string name="piste_nordic">Ski nordique</string>
+	<string name="piste_skitour">Ski de randonnée</string>
+	<string name="piste_hike">Randonnée</string>
+	<string name="piste_sleigh">Traîneau</string>
+	<string name="piste_sled">Luge</string>
+	<string name="piste_snow_park">Snow park</string>
+	<string name="piste_playground">Jardin de neige</string>
 	</resources>
