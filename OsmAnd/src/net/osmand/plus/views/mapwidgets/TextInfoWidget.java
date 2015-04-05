@@ -149,6 +149,8 @@ public class TextInfoWidget  {
 				view.setVisibility(View.GONE);
 			}
 			view.invalidate();
+			if (app.accessibilityEnabled())
+				view.setFocusable(visible);
 			return true;
 		}
 		return false;
