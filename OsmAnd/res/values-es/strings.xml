@@ -1702,7 +1702,7 @@
     <string name="none_selected_gpx">No hay archivos GPX seleccionados. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
     
     <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
-    <string name="no_index_file_to_download">No se han encontrado descargas, compruebe su conexión a Internet.</string>
+    <string name="no_index_file_to_download">No se han encontrado descargas, por favor comprueba tu conexión a Internet.</string>
     <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
@@ -2004,4 +2004,5 @@
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="shared_string_do_not_use">No usar</string>
 	<string name="shared_string_address">Dirección</string>
+	<string name="shared_string_show_description">Mostrar descripción</string>
 	</resources>
