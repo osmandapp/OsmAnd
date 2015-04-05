@@ -25,6 +25,7 @@ public class MapPoiTypes {
 	
 	static final String OSM_WIKI_CATEGORY = "osmwiki";
 	private PoiTranslator poiTranslator = null;
+	private boolean init;
 	
 	public MapPoiTypes(String fileName){
 		this.resourceName = fileName;
@@ -33,6 +34,7 @@ public class MapPoiTypes {
 	public interface PoiTranslator {
 		
 		public String getTranslation(AbstractPoiType type);
+		
 	}
 	
 	public static MapPoiTypes getDefaultNoInit() {
@@ -50,7 +52,10 @@ public class MapPoiTypes {
 		}
 		return DEFAULT_INSTANCE;
 	}
-
+	
+	public boolean isInit() {
+		return init;
+	}
 	
 	public PoiCategory getOtherPoiCategory() {
 		return otherCategory;
@@ -103,7 +108,7 @@ public class MapPoiTypes {
 			name = "leisure";
 		}
 		for(PoiCategory p : categories ) {
-			if(p.getName().equals(name)) {
+			if(p.getName().equals(name) || p.getKey().equalsIgnoreCase(name)) {
 				return p;
 			}
 		}
@@ -149,6 +154,14 @@ public class MapPoiTypes {
 								parser.getAttributeValue("", "name"));
 						lastFilter = tp;
 						lastCategory.addPoiType(tp);
+					} else if(name.equals("poi_reference")){
+						PoiType tp = new PoiType(this,
+								lastCategory, parser.getAttributeValue("","name"));
+						tp.setReference(true);
+						if(lastFilter != null) {
+							lastFilter.addPoiType(tp);
+						}
+						lastCategory.addPoiType(tp);
 					} else if(name.equals("poi_type")){
 						PoiType tp = new PoiType(this,
 								lastCategory, parser.getAttributeValue("","name"));
@@ -185,6 +198,7 @@ public class MapPoiTypes {
 			throw new RuntimeException(e);
 		}
 		findDefaultOtherCategory();
+		init = true;
 	}
 	
 	private void findDefaultOtherCategory() {
@@ -220,7 +234,9 @@ public class MapPoiTypes {
 	}
 
 	public static void main(String[] args) {
-		print(getDefault())	;
+		DEFAULT_INSTANCE = new MapPoiTypes("/Users/victorshcherb/osmand/repos/resources/poi/poi_types.xml");
+		DEFAULT_INSTANCE.init();
+		print(DEFAULT_INSTANCE)	;
 	}
 
 	public String getTranslation(AbstractPoiType abstractPoiType) {

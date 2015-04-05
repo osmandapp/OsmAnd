@@ -160,22 +160,14 @@ public class OsmAndFormatter {
 		return "";
 	}
 
-		
-	public static String getPoiSimpleFormat(Amenity amenity, Context ctx, boolean en) {
-		return getPoiStringWithoutType(amenity, en,
-				amenity.getType().getTranslation() + ": " + amenity.getSubType()); //$NON-NLS-1$
-	}
-	
 	public static String getPoiStringWithoutType(Amenity amenity, boolean en) {
-		return getPoiStringWithoutType(amenity, en, amenity.getSubType());
-	}
-	
-	public static String getPoiStringWithoutType(Amenity amenity, boolean en, String defName) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-		String nm = defName;
+		String nm = amenity.getSubType();
 		if (pt != null) {
 			nm = pt.getTranslation();
+		} else if(nm != null){
+			nm = Algorithms.capitalizeFirstLetterAndLowercase(nm.replace('_', ' '));
 		}
 		String n = amenity.getName(en);
 		if (n.indexOf(nm) != -1) {

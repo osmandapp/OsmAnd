@@ -509,4 +509,45 @@
 	<string name="poi_military_range">Vojenská strelnica</string>
 	<string name="poi_military_naval_base">Námorná základňa</string>
 	<string name="poi_military_nuclear_explosion_site">Miesto atómového výbuchu</string>
-</resources>
+<string name="poi_shop_food">Obchod s jedlom</string>
+	<string name="poi_road_obstacle">Cestná prekážka</string>
+		<string name="poi_filling_station">Čerpacia stanica</string>
+		<string name="poi_personal_transport">Osobná doprava</string>
+		<string name="poi_public_transport">Hromadná doprava</string>
+		<string name="poi_air_transport">Letecká doprava</string>
+		<string name="poi_water_transport">Lodná doprava</string>
+		<string name="poi_bicycle_transport">Cyklodoprava</string>
+		<string name="poi_aerialway_transport">Lanovky</string>
+	<string name="poi_transport_construction">Dopravné dielo</string>
+		<string name="poi_water_supply">Dodávka vody</string>
+		<string name="poi_power">Energia</string>
+		<string name="poi_communication">Komunikácia</string>
+		<string name="poi_trash_disposal">Likvidácia odpadu</string>
+	<string name="poi_sightseeing">Turistické zaujímavosti</string>
+		<string name="poi_accomodation">Ubytovanie</string>
+		<string name="poi_internet_access">Prístup na Internet</string>
+	<string name="poi_club">Klub</string>
+	<string name="poi_cafe_and_restaurant">Kaviareň a reštaurácia</string>
+	<string name="poi_craft">Remeslo</string>
+	<string name="poi_medical_supply">Zdravotnícke potreby</string>
+	<string name="poi_tableware">Stolovacie potreby</string>
+	<string name="poi_sewing">Potreby na šitie</string>
+
+	<string name="poi_ambulance_station">Stanovište sanitiek</string>
+	<string name="poi_rest_area">Odpočívadlo</string>
+
+	<string name="poi_reservoir">Nádrž</string>
+	<string name="poi_gasometer">Plynojem</string>
+	<string name="poi_silo">Silo</string>
+	<string name="poi_storage_tank">Cisterna</string>
+
+	<string name="poi_training">Školiace stredisko</string>
+	<string name="poi_register_office">Matričný úrad</string>
+	<string name="poi_pension_fund">Dôchodkový fond</string>
+	<string name="poi_migration">Imigračný úrad</string>
+	<string name="poi_tax_inspection">Daňová kontrola</string>
+	<string name="poi_quarter">Štvrť</string>
+	<string name="poi_attraction_summer_toboggan">Suchá bobová dráha</string>
+	<string name="poi_attraction_swing_carousel">Kolotoč s hojdačkami</string>
+	<string name="poi_smoking_area">Fajčiarsky priestor</string>
+	</resources>

@@ -547,7 +547,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
+		String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity,
 				settings.usingEnglishNames());
 		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 		int z = Math.max(16, settings.getLastKnownMapZoom());
@@ -572,7 +572,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 					// Create dialog
 					Builder bs = new AlertDialog.Builder(view.getContext());
-					bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
+					bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, 
 							settings.usingEnglishNames()));
 					bs.setMessage(spannable);
 					AlertDialog dialog = bs.show();
@@ -857,7 +857,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	private void showPOIDetails(final Amenity amenity, boolean en) {
 		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
-		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), en));
+		b.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, en));
 		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -98,7 +98,7 @@
 <string name="online_map_settings_descr">Configureu les fonts de mapes de tessel·les en línia o desades a la memòria cau</string>
 
 
-<string name="osmand_accessibility_description">Us mostra la configuració per les característiques especials d\'accessibilitat.</string>
+<string name="osmand_accessibility_description">"Aquest connector fa disponible directament des OsmAnd  les característiques d\'accessibilitat del dispositiu. Us permet, per exemple,  ajustar la velocitat de la veu en la síntesi TTS , configurar la pantalla de navegació, l\'ús del ratolí de bola pel zoom o de la veu sintetitzada, com per anunciar automàticament la vostra posició."</string>
 
 <string name="plugins_screen">Gestor de connectors</string>
 
@@ -233,7 +233,7 @@
 <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
 <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
 <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
-<string name="auto_follow_route_never">Mai (premeu la fletxa blava per iniciar la navegació manualment)</string>
+<string name="auto_follow_route_never">Mai (premeu &lt;&lt;Anar&gt;&gt;  per iniciar la navegació manualment)</string>
 <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
@@ -798,7 +798,7 @@
 <string name="poi_filter_public_transport">Transport públic</string>
 <string name="poi_filter_emergency">Emergències</string>
 <string name="poi_filter_restaurants">Restaurants</string>
-<string name="osm_editing_plugin_description">Mostra la configuració necessària per la retroalimentació d\'OSM com ara recollir/modificar els PDI d\'OSM, obrir/comentar els errors d\'OSM i contribuir amb fitxers GPX enregistrats (calen les credencials d\'OSM).</string>
+<string name="osm_editing_plugin_description">"Amb aquest connector d\'OsmAnd podeu fer contribucions a OSM com la creació o modificació de PDI,  obrir o comentar errors OSM o contribuir amb fitxers GPX registrats. OSM és un projecte de cartografia global, de domini públic i gestionat per una comunitat. Per més detalls dirigiu-vos a  http://openstreetmap.org. La participació activa és d\'agrair i aquestes contribucions es poden directament des OsmAnd, si heu indicat les vostres credencials personals d\'OSM a l\'aplicació."</string>
 <string name="tip_rotation_switching_t_v2">Podeu canviar com gira el mapa tocant repetidament la icona de la brúixola de la pantalla.
 		\n\nLes opcions son:
 		\n\t\'No girar (el nord es amunt)\' - El mapa no girarà, el nord sempre serà a dalt.
@@ -1083,7 +1083,7 @@
 	
 	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX durant la navegació</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-	<string name="srtm_plugin_description">"Un giny extern (a descarregar a part) permet baixar relleu i corbes de nivell  fora de línia («Paràmetres» → «Gestió d\'arxius de mapes» → «Baixa» → Selecció del tipus de mapa desitjat). Tot això es pot mostrar alhora combinat amb els mapes fora de línia d\'OsmAnd."</string>
+	<string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per posar a sobre els mapes locals de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
 	<string name="tip_recent_changes_1_0_0_t">Canvis a la 1.0.0 :
 	\n\t* Encaminament millorat: més ràpid, més precís, fins a 250 km
@@ -1424,7 +1424,7 @@
 		\n\t* Filtre Kalman per la bruíxola
 		\n\t* Suport rellotges Pebble
 	</string>
-    <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per posar a sobre els mapes locals de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
     <string name="keep_and_add_destination_point">Afegeix com a punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
@@ -1858,7 +1858,7 @@
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
     
-	<string name="navigation_over_track">Voleu iniciar la navegació sobre la traça?</string>
+	<string name="navigation_over_track">Voleu iniciar la navegació seguint la traça?</string>
 	<string name="avoid_roads_msg">Podeu generar una ruta alternativa amb la selecció de les vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
 	
@@ -1959,7 +1959,7 @@
     <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
 	<string name="back_to_map">Torna al mapa</string>
 	<string name="location_on_map">Posició:\n Lat %1$s\n Lon %2$s</string>
-	<string name="rendering_attr_pisteRoutes_name">Rutes de pista</string>
+	<string name="rendering_attr_pisteRoutes_name">Pistes d\'esquí</string>
 	<string name="shared_string_release">Alliberat</string>
 	<string name="shared_string_message">Missatge</string>
 	<string name="agps_data_last_downloaded">Darreres dades A-GPS baixades: %1$s</string>
@@ -1968,4 +1968,12 @@
 	<string name="shared_string_show_description">Mostra la descripció</string>
 	<string name="shared_string_do_not_use">No utilitzeu</string>
 	<string name="shared_string_address">Adreça</string>
+	<string name="plugin_nautical_descr">Aquest connector completa el mapa OsmAnd i la seva navegació en produir mapes nàutics per cabotatge, regates i altres tipus de esports d\'aigua.
+
+Un complement de mapa específic per OsmAnd us proporcionarà tot tipus de senyals nàutiques i símbols gràfics, per navegació interior o propera a la costa. La descripció de cada senyal de navegació us donarà els detalls que calguin per identificar-les i del seu significat (categoria, forma, color, seqüència, referència, etc.).
+
+Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aquest connector o canviar a com es desitgi &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt;. </string>
+	<string name="plugin_ski_descr">Aquest connector per OsmAnd us proporciona els detalls de les pistes d\'esquí en baixada, de travessa i alpí  així com de telefèrics i remuntadors a tot el món. Les rutes i pistes es mostren amb codi de colors que els hi correspon segons la seva dificultat i amb un estil de mapa especial "Hivern"  que s\'associa a un paisatge nevat.
+
+Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i esquí", mostrant totes les característiques del paisatge a l\'hibern. Aquesta vista es pot revertir tant activant-la altra cop com canviant-la com es vulgui a &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt; </string>
 	</resources>

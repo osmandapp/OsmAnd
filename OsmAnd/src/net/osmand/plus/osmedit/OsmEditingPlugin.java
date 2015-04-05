@@ -41,7 +41,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	DataTileManager<OsmPoint> localOsmEdits = new DataTileManager<>();
+	DataTileManager<OsmPoint> localOsmEditsInternal = null;
 
 	@Override
 	public String getId() {
@@ -50,7 +50,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;
-		collectLocalOsmEdits();
 	}
 	
 	@Override
@@ -225,7 +224,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	public void onLocalItemDeleted(OsmPoint point) {
-		localOsmEdits.unregisterObject(point.getLatitude(), point.getLongitude(), point);
+		if(localOsmEditsInternal != null) {
+			localOsmEditsInternal.unregisterObject(point.getLatitude(), point.getLongitude(), point);
+		}
 	}
 
 	public enum UploadVisibility implements IEnumWithResource {
@@ -285,30 +286,37 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	public void onLocalOsmEditAdded(OsmPoint point){
-		localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+		if(localOsmEditsInternal != null) {
+			localOsmEditsInternal.registerObject(point.getLatitude(), point.getLongitude(), point);
+		}
 	}
-
+	
 	public void collectLocalOsmEdits() {
-		localOsmEdits.clear();
+		DataTileManager<OsmPoint> res = new DataTileManager<OsmPoint>();
 		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
 		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
 
 		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
 		for (OsmPoint point : l1) {
-			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+			res.registerObject(point.getLatitude(), point.getLongitude(), point);
 		}
 		for (OsmPoint point : l2) {
-			localOsmEdits.registerObject(point.getLatitude(), point.getLongitude(), point);
+			res.registerObject(point.getLatitude(), point.getLongitude(), point);
 		}
+		localOsmEditsInternal = res;
+		
 	}
 
 	public DataTileManager<OsmPoint> getLocalOsmEdits(){
-		return localOsmEdits;
+		if(localOsmEditsInternal == null) {
+			collectLocalOsmEdits();
+		}
+		return localOsmEditsInternal;
 	}
 
 	public List<OsmPoint> getAllEdits(){
-		return localOsmEdits.getAllObjects();
+		return getLocalOsmEdits().getAllObjects();
 	}
 
 	@Override
@@ -340,4 +348,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private static String getPrefix(OsmPoint osmPoint) {
 		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
 	}
+
+	
 }

@@ -1629,7 +1629,7 @@
     
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">目的地</string>
-    <string name="no_index_file_to_download">無法下載，請檢查您的網路連線。</string>
+    <string name="no_index_file_to_download">下載未找到，請檢查您的網路連線。</string>
     <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
     <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
     <string name="osmo_auto_connect">自動連線</string>

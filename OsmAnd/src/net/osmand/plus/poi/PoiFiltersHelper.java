@@ -33,7 +33,6 @@ public class PoiFiltersHelper {
 	private static final String UDF_SIGHTSEEING = "sightseeing";
 	private static final String UDF_EMERGENCY = "emergency";
 	private static final String UDF_PUBLIC_TRANSPORT = "public_transport";
-	private static final String UDF_ENTERTAINMENT = "entertainment";
 	private static final String UDF_ACCOMMODATION = "accomodation";
 	private static final String UDF_RESTAURANTS = "restaurants";
 	private static final String UDF_PARKING = "parking";
@@ -74,74 +73,68 @@ public class PoiFiltersHelper {
 	}
 	
 	
-	public MapPoiTypes getPoiTypes() {
-		return application.getPoiTypes();
-	}
-	
-	private void putAll(Map<PoiCategory, LinkedHashSet<String>> types, String tp) {
-		types.put(getPoiTypes().getPoiCategoryByName(tp), null);
+	private void putAll(MapPoiTypes poiTypes, Map<PoiCategory, LinkedHashSet<String>> types, String tp) {
+		types.put(poiTypes.getPoiCategoryByName(tp), null);
 	}
 
-	private void putValues(Map<PoiCategory, LinkedHashSet<String>> types, String p, String... vls) {
+	private void putValues(MapPoiTypes poiTypes, Map<PoiCategory, LinkedHashSet<String>> types, String p, String... vls) {
 		LinkedHashSet<String> list = new LinkedHashSet<String>();
 		Collections.addAll(list, vls);
-		types.put(getPoiTypes().getPoiCategoryByName(p), list);
+		PoiCategory pc = poiTypes.getPoiCategoryByName(p);
+		if(pc == null) {
+			throw new NullPointerException("Category " + p + " was not found");
+		}
+		types.put(poiTypes.getPoiCategoryByName(p), list);
 	}
 	
-	private List<PoiLegacyFilter> getUserDefinedDefaultFilters() {
+	private List<PoiLegacyFilter> getUserDefinedDefaultFilters(MapPoiTypes poiTypes) {
 		List<PoiLegacyFilter> filters = new ArrayList<PoiLegacyFilter>();
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_accomodation), PoiLegacyFilter.USER_PREFIX + UDF_ACCOMMODATION,
-				configureDefaultUserDefinedFilter(null, UDF_ACCOMMODATION), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_ACCOMMODATION), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_car_aid), PoiLegacyFilter.USER_PREFIX + UDF_CAR_AID,
-				configureDefaultUserDefinedFilter(null, UDF_CAR_AID), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_CAR_AID), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_food_shop), PoiLegacyFilter.USER_PREFIX + UDF_FOOD_SHOP,
-				configureDefaultUserDefinedFilter(null, UDF_FOOD_SHOP), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_FOOD_SHOP), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_for_tourists), PoiLegacyFilter.USER_PREFIX + UDF_FOR_TOURISTS,
-				configureDefaultUserDefinedFilter(null, UDF_FOR_TOURISTS), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_FOR_TOURISTS), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_fuel), PoiLegacyFilter.USER_PREFIX + UDF_FUEL,
-				configureDefaultUserDefinedFilter(null, UDF_FUEL), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_FUEL), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_parking), PoiLegacyFilter.USER_PREFIX + UDF_PARKING,
-				configureDefaultUserDefinedFilter(null, UDF_PARKING), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_PARKING), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_public_transport),
-				PoiLegacyFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT, configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT), application));
+				PoiLegacyFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT, configureDefaultUserDefinedFilter(poiTypes, UDF_PUBLIC_TRANSPORT), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_restaurants), PoiLegacyFilter.USER_PREFIX + UDF_RESTAURANTS,
-				configureDefaultUserDefinedFilter(null, UDF_RESTAURANTS), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_RESTAURANTS), application));
 		filters.add(new PoiLegacyFilter(application.getString(R.string.poi_filter_sightseeing), PoiLegacyFilter.USER_PREFIX + UDF_SIGHTSEEING,
-				configureDefaultUserDefinedFilter(null, UDF_SIGHTSEEING), application));
+				configureDefaultUserDefinedFilter(poiTypes, UDF_SIGHTSEEING), application));
 		// UDF_EMERGENCY = "emergency";
 		// UDF_ENTERTAINMENT = "entertainment";
 		return filters;
 	}
 	
-	private Map<PoiCategory, LinkedHashSet<String>> configureDefaultUserDefinedFilter(Map<PoiCategory, LinkedHashSet<String>> types, String key) {
-		if(types == null) {
-			types = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
-		}
+	private Map<PoiCategory, LinkedHashSet<String>> configureDefaultUserDefinedFilter(MapPoiTypes poiTypes, String key) {
+		Map<PoiCategory, LinkedHashSet<String>> types = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
 		if(UDF_ACCOMMODATION.equals(key)){
-			putValues(types, "tourism", "camp_site",
+			putValues(poiTypes, types, "tourism", "camp_site",
 					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
 					"hostel", "hotel","motel");
 		} else if (UDF_CAR_AID.equals(key)) {
-			putValues(types, "transportation", "fuel", "car_wash", "car_repair","car", "car_sharing");
-			putValues(types, "shop", "fuel", "car_wash", "car_repair","car", "car_parts");
+			putValues(poiTypes, types, "transportation", "fuel", "car_wash", "car_repair","car", "car_sharing");
+			putValues(poiTypes, types, "shop", "fuel", "car_wash", "car_repair","car", "car_parts");
 		} else if (UDF_FOOD_SHOP.equals(key)) {
-			putValues(types, "shop", "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
+			putValues(poiTypes, types, "shop", "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
 					"convenience", "farm", "general", "ice_cream", "kiosk", "seafood", "supermarket", "variety_store");
 		} else if(UDF_FOR_TOURISTS.equals(key)){
-			putAll(types, "historic");
-			putAll(types, "tourism");
-			putAll(types, "finance");
-			putAll(types, "osmwiki");
-			putValues(types, "other", "place_of_worship", "internet_access_wlan", "internet_access_wired",
-					"internet_access_terminal", "internet_access_public", "internet_access_service",
-					"embassy", "marketplace", "post_office", "telephone", "toilets", "emergency_phone");
+			putAll(poiTypes, types, "tourism");
+			putAll(poiTypes, types, "finance");
+			putAll(poiTypes, types, "osmwiki");
 		} else if(UDF_FUEL.equals(key)){
-			putValues(types, "transportation", "fuel");
+			putValues(poiTypes, types, "transportation", "fuel");
 		} else if (UDF_PARKING.equals(key)) {
-			putValues(types, "transportation", "parking",
+			putValues(poiTypes, types, "transportation", "parking",
 					"bicycle_parking");
 		} else if (UDF_PUBLIC_TRANSPORT.equals(key)) {
-			putValues(types, "transportation", "public_transport_stop_position", "public_transport_platform",
+			putValues(poiTypes, types, "transportation", "public_transport_stop_position", "public_transport_platform",
 					"public_transport_station",
 					// railway
 					"railway_platform", "railway_station", "halt", "tram_stop", "subway_entrance", "railway_buffer_stop",
@@ -156,19 +149,16 @@ public class PoiFiltersHelper {
 					// "rail", "tram", "light_rail", "subway", "railway_narrow_gauge", "railway_monorail", "railway_funicular"
 					);
 		} else if (UDF_RESTAURANTS.equals(key)) {
-			putValues(types, "sustenance", "restaurant",
-					"cafe", "food_court", "fast_food", "pub", "bar", "biergarten");
+			putValues(poiTypes, types, "sustenance", "restaurant_not_found",
+					"cafe", "food_court", "pub", "bar", "biergarten");
 		} else if (UDF_SIGHTSEEING.equals(key)) {
-			putAll(types, "historic");
-			putValues(types, "tourism", "attraction",
-					"artwork","zoo","theme_park", "museum","viewpoint");
-			putAll(types, "osmwiki");
-			putValues(types, "other", "place_of_worship");
+			// TODO filter only sightseeing from tourimsm
+//			putValues(types, "tourism", "...","...");
+			putAll(poiTypes, types, "tourism");
+			putAll(poiTypes, types, "osmwiki");
 		} else if (UDF_EMERGENCY.equals(key)) {
-			putAll(types, "healthcare");
-			putAll(types, "emergency");
-		} else if (UDF_ENTERTAINMENT.equals(key)) {
-			putAll(types, "entertainment");
+			putAll(poiTypes, types, "healthcare");
+			putAll(poiTypes, types, "emergency");
 		}
 		return types;
 	}
@@ -188,10 +178,12 @@ public class PoiFiltersHelper {
 		if(cacheUserDefinedFilters == null){
 			cacheUserDefinedFilters = new ArrayList<PoiLegacyFilter>();
 			PoiFilterDbHelper helper = openDbHelper();
-			List<PoiLegacyFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
-			sortListOfFiltersByName(userDefined);
-			cacheUserDefinedFilters.addAll(userDefined);
-			helper.close();
+			if (helper != null) {
+				List<PoiLegacyFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
+				sortListOfFiltersByName(userDefined);
+				cacheUserDefinedFilters.addAll(userDefined);
+				helper.close();
+			}
 		}
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
 	}
@@ -229,15 +221,18 @@ public class PoiFiltersHelper {
 	
 	public void updateFilters(boolean onlyAddFilters){
 		PoiFilterDbHelper helper = openDbHelper();
-		helper.upgradeFilters(helper.getWritableDatabase(), onlyAddFilters);
-		helper.close();	
+		if(helper != null ) {
+			helper.upgradeFilters(helper.getWritableDatabase(), onlyAddFilters);
+			helper.close();
+		}
 	}
 	
 	
 	public List<PoiLegacyFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiLegacyFilter>();
-			for(PoiCategory t : getPoiTypes().getCategories()){
+			MapPoiTypes poiTypes = application.getPoiTypes();
+			for(PoiCategory t : poiTypes.getCategories()){
 				cacheOsmDefinedFilters.add(new PoiLegacyFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();
@@ -252,7 +247,10 @@ public class PoiFiltersHelper {
 	}
 	
 	private PoiFilterDbHelper openDbHelper(){
-		return new PoiFilterDbHelper(application); 
+		if(!application.getPoiTypes().isInit()) {
+			return null;
+		}
+		return new PoiFilterDbHelper(application.getPoiTypes(), application); 
 	}
 	
 	public boolean removePoiFilter(PoiLegacyFilter filter){
@@ -324,8 +322,10 @@ public class PoiFiltersHelper {
 	    CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + ", " +  CATEGORIES_COL_SUBCATEGORY + ");"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		private OsmandApplication context;
 		private SQLiteConnection conn;
+		private MapPoiTypes mapPoiTypes;
 
-	    PoiFilterDbHelper(OsmandApplication context) {
+	    PoiFilterDbHelper(MapPoiTypes mapPoiTypes, OsmandApplication context) {
+			this.mapPoiTypes = mapPoiTypes;
 			this.context = context;
 	    }
 	    
@@ -369,8 +369,8 @@ public class PoiFiltersHelper {
 	    }
 
 		public void upgradeFilters(SQLiteConnection conn, boolean onlyAdd) {
-			List<PoiLegacyFilter> filters = PoiFilterDbHelper.this.getFilters(conn);
-			List<PoiLegacyFilter> def = getUserDefinedDefaultFilters();
+			List<PoiLegacyFilter> filters = PoiFilterDbHelper.this.getFilters( conn);
+			List<PoiLegacyFilter> def = getUserDefinedDefaultFilters(mapPoiTypes);
 	        for(PoiLegacyFilter f : filters){
 	        	PoiLegacyFilter std = null;
 	        	for(PoiLegacyFilter d : def){
@@ -399,12 +399,7 @@ public class PoiFiltersHelper {
 		}
 		
 		public void onUpgrade(SQLiteConnection conn, int oldVersion, int newVersion) {
-//			if (newVersion == 2 || newVersion == 3) {
-//				upgradeFilters(conn, false);
-//			} else {
-			// from version 4 (upgrade) 
-			upgradeFilters(conn, true);
-//			}
+			upgradeFilters(conn, false);
 			conn.setVersion(newVersion);
 		}
 	    
@@ -418,13 +413,13 @@ public class PoiFiltersHelper {
 	    		for(PoiCategory a : types.keySet()){
 	    			if(types.get(a) == null){
 		    			insertCategories.bindString(1, p.getFilterId());
-						insertCategories.bindString(2, a.getTranslation());
+						insertCategories.bindString(2, a.getKey());
 						insertCategories.bindNull(3);
     					insertCategories.execute();
 	    			} else {
 	    				for(String s : types.get(a)){
 	    					insertCategories.bindString(1, p.getFilterId());
-	    					insertCategories.bindString(2, a.getTranslation());
+	    					insertCategories.bindString(2, a.getKey());
 	    					insertCategories.bindString(3, s);
 	    					insertCategories.execute();
 	    				}
@@ -449,7 +444,7 @@ public class PoiFiltersHelper {
 	    					map.put(filterId, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
 	    				}
 	    				Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
-	    				PoiCategory a = getPoiTypes().getPoiCategoryByName(query.getString(1));
+	    				PoiCategory a = mapPoiTypes.getPoiCategoryByName(query.getString(1));
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);
