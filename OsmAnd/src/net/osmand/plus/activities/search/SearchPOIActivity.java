@@ -774,6 +774,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					timeIcon.setVisibility(View.GONE);
 					timeText.setVisibility(View.GONE);
 				}
+			} else {
+				timeIcon.setVisibility(View.GONE);
+				timeText.setVisibility(View.GONE);
 			}
 			Drawable dd = direction.getDrawable();
 			DirectionDrawable draw;
@@ -794,11 +797,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (loc != null) {
 				float a = heading != null ? heading : 0;
 				draw.setAngle(mes[1] - a + 180 + screenOrientation);
-				draw.setColorId(color.color_myloc_distance);
 			} else {
 				draw.setAngle(0);
-				draw.setColorId(color.color_distance);
 			}
+			draw.setColorId(searchNearBy ? color.color_myloc_distance : color.color_distance);
 			direction.setImageDrawable(draw);
 			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			if (st != null) {

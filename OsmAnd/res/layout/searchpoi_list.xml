@@ -19,9 +19,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="bottom"
         android:paddingRight="3dp" >
 
         <TextView
@@ -29,13 +29,17 @@
             style="@style/ListText.Small"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:maxLines="1"
+            android:maxLines="2"
             tools:text="@string/lorem_ipsum" />
 
         <LinearLayout
             android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal" >
 
             <ImageView

@@ -111,18 +111,18 @@ public class OpeningHoursParser {
 			for (OpeningHoursRule r : rules){
 				if(r.containsDay(cal) && r.containsMonth(cal)){
 					if(r.isOpenedForTime(cal, false)) {
-						ruleOpen = r.toRuleString();
+						ruleOpen = r.toRuleString(true);
 					} else {
-						ruleClosed = r.toRuleString();
+						ruleClosed = r.toRuleString(true);
 					}
 				}
 			}
 			for (OpeningHoursRule r : rules){
 				if(r.containsPreviousDay(cal) && r.containsMonth(cal)){
 					if(r.isOpenedForTime(cal, true)) {
-						ruleOpen = r.toRuleString();
+						ruleOpen = r.toRuleString(true);
 					} else {
-						ruleClosed = r.toRuleString();
+						ruleClosed = r.toRuleString(true);
 					}
 				}
 			}
@@ -190,7 +190,8 @@ public class OpeningHoursParser {
 		 */
 		public boolean containsMonth(Calendar cal);
 		
-		public String toRuleString();
+		
+		public String toRuleString(boolean avoidMonths);
 	}
 	
 	/**
@@ -365,31 +366,33 @@ public class OpeningHoursParser {
 		
 		
 		@Override
-		public String toRuleString() {
+		public String toRuleString(boolean avoidMonths) {
 			StringBuilder b = new StringBuilder(25);
 			// Month
 			boolean dash  = false;
 			boolean first = true;
-			for (int i = 0; i < 12; i++) {
-				if (months[i]) {
-					if (i > 0 && months[i - 1] && i < 11 && months[i + 1]) {
-						if (!dash) {
-							dash = true;
-							b.append("-"); //$NON-NLS-1$
+			if (!avoidMonths) {
+				for (int i = 0; i < 12; i++) {
+					if (months[i]) {
+						if (i > 0 && months[i - 1] && i < 11 && months[i + 1]) {
+							if (!dash) {
+								dash = true;
+								b.append("-"); //$NON-NLS-1$
+							}
+							continue;
 						}
-						continue;
+						if (first) {
+							first = false;
+						} else if (!dash) {
+							b.append(", "); //$NON-NLS-1$
+						}
+						b.append(monthsStr[i]);
+						dash = false;
 					}
-					if (first) {
-						first = false;
-					} else if (!dash) {
-						b.append(", "); //$NON-NLS-1$
-					}
-					b.append(monthsStr[i]);
-					dash = false;
 				}
-			}
-			if (b.length() != 0) {
-				b.append(": ");
+				if (b.length() != 0) {
+					b.append(": ");
+				}
 			}
 			// Day
 			boolean open24_7 = true;
@@ -441,7 +444,7 @@ public class OpeningHoursParser {
 		
 		@Override
 		public String toString() {
-			return toRuleString();
+			return toRuleString(false);
 		}
 
 		/**
