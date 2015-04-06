@@ -1811,7 +1811,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auto_connect">Auto-podłączenie</string>
     <string name="osmo_start_service">Serwis OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pobrano %1$s ścieżek OsMo.</string>
-    <string name="no_index_file_to_download">Brak danych do pobrania, proszę sprawdzić połączenie internetowe.</string>
+    <string name="no_index_file_to_download">Nie znaleziono pobranych danych, proszę sprawdzić połączenie internetowe.</string>
     <string name="osmo_auth_error_short">Błąd autoryzacji</string>
     <string name="osmo_auth_error">Wystąpił błąd autoryzacji OsMo: %1$s.\n To może być przerwa w działaniu usługi lub twoja rejestracja straciła ważność.\n Chcesz kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>

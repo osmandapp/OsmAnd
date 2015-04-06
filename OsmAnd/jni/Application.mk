@@ -1,5 +1,6 @@
 APP_STL := gnustl_shared
 APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
+APP_SHORT_COMMANDS := true
 
 ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.7),)
 	NDK_TOOLCHAIN_VERSION := 4.8

@@ -35,7 +35,7 @@
 
 	<string name="poi_bicycle">Taller de bicicletes</string>
 	<string name="poi_anime">Botiga d\'anime</string>
-	<string name="poi_baby_goods">Articles per a bebès</string>
+	<string name="poi_baby_goods">Articles per nadons</string>
 	<string name="poi_bathroom_furnishing">Mobles de bany</string>
 	<string name="poi_bed">Matalasseria</string>
 	<string name="poi_boutique">Boutique</string>
@@ -69,7 +69,7 @@
 	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>
 <string name="poi_military_range">Camp d\'instrucció</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
-	<string name="poi_military">Zona militar</string>
+	<string name="poi_military">Militar</string>
 	<string name="poi_military_airfield">Base aèria militar</string>
 	<string name="poi_military_bunker">Búnquer militar</string>
 	<string name="poi_military_barracks">Barracons militars</string>
@@ -106,9 +106,9 @@
 
 	<string name="poi_public_transport_platform_bus">Parada d\'autobús</string>
 	<string name="poi_public_transport_platform_trolleybus">Parada de troleibús</string>
-	<string name="poi_bus_stop">Parada d\'autobús (obsolet)</string>
+	<string name="poi_bus_stop">Parada d\'autobús</string>
 	<string name="poi_public_transport_platform_tram">Parada de tramvia</string>
-	<string name="poi_tram_stop">Parada de tramvia (obsolet)</string>
+	<string name="poi_tram_stop">Parada de tramvia</string>
 	<string name="poi_public_transport_station">Estació de transport públic</string>
 	<string name="poi_historic_mine">Mina històrica</string>
 	<string name="poi_gate">Porta</string>
@@ -119,9 +119,9 @@
 	<string name="poi_curtain">Pelleteria</string>
 	<string name="poi_fabric">Botiga de teixits</string>
 	<string name="poi_public_transport_platform">Parada de transport públic</string>
-	<string name="poi_bus_station">Estació d\'autobús (obsolet)</string>
-	<string name="poi_railway_station">Estació de tren (obsolet)</string>
-	<string name="poi_railway_platform">Andana de tren (obsolet)</string>
+	<string name="poi_bus_station">Estació d\'autobusos</string>
+	<string name="poi_railway_station">Estació de tren</string>
+	<string name="poi_railway_platform">Andana</string>
 	<string name="poi_railway_halt">Parada de tren (obsolet)</string>
 	<string name="poi_railway_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estació de metro</string>
@@ -205,7 +205,7 @@
 	<string name="poi_prison">Presó</string>
 	<string name="poi_register_office">Oficina de registre civil</string>
 	<string name="poi_embassy">Ambaixada</string>
-	<string name="poi_government">Oficina governamental</string>
+	<string name="poi_government">Govern</string>
 	<string name="poi_prosecutor">Fiscal</string>
 	<string name="poi_bailiff">Batlle</string>
 	<string name="poi_pension_fund">Fons de pensions</string>
@@ -255,7 +255,7 @@
 	<string name="poi_it">Consultoria en TIC</string>
 	<string name="poi_architect">Gabinet d\'arquitectura</string>
 	<string name="poi_advertising_agency">Agència de publicitat</string>
-	<string name="poi_studio">Estudi de gravació, ràdio o TV</string>
+	<string name="poi_studio">Estudi</string>
 	<string name="poi_bookmaker">Casa d\'apostes</string>
 
 	<string name="poi_stadium">Estadi</string>
@@ -278,7 +278,7 @@
 	<string name="poi_basketball">Basquetbol</string>
 	<string name="poi_beachvolleyball">Voleibol de platja</string>
 	<string name="poi_bmx">Bicicròs</string>
-	<string name="poi_boules">Joc de botxes</string>
+	<string name="poi_boules">Pista de petanca</string>
 	<string name="poi_canadian_football">Futbol canadenc</string>
 	<string name="poi_chess">Escacs</string>
 	<string name="poi_climbing">Escalada</string>
@@ -350,7 +350,7 @@
 	<string name="poi_aquarium">Aquari</string>
 	<string name="poi_theme_park">Parc temàtic</string>
 	
-	<string name="poi_attraction">Atractiu turístic</string>
+	<string name="poi_attraction">Atracció turística</string>
 	<string name="poi_memorial">Memorial</string>
 	<string name="poi_artwork">Obra d\'art</string>
 	<string name="poi_battlefield">Antic camp de batalla</string>

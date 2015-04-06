@@ -714,4 +714,16 @@
 	<string name="poi_reservoir">Рэзэрвуар</string>
 	<string name="poi_gasometer">Газасховішча</string>
 	<string name="poi_silo">Сілас</string>
+	<string name="poi_storage_tank">Бак (рэзэрвуар)</string>
+
+	<string name="piste_nordic">Лыжня</string>
+	<string name="piste_snow_park">Сноўпарк</string>
+	<string name="piste_playground">Вучэбны схіл</string>
+	<string name="piste_downhill">Гарналыжная траса</string>
+	<string name="piste_skitour">Скітур</string>
+	<string name="piste_ice_skate">Канькабежная траса</string>
+
+	<string name="piste_sled">Санкавы схіл</string>
+	<string name="piste_sleigh">Нартавая дарога</string>
+	<string name="piste_hike">Зімовая сьцежка</string>
 	</resources>

@@ -557,8 +557,8 @@
     <string name="osmo_gpx_points_downloaded">Igarrigados puntos %1$s de OsMo.</string>
     <string name="osmo_start_service">Servìtziu OsMo</string>
     <string name="osmo_gpx_track_downloaded">Igarrigadas rastas %1$s de OsMo.</string>
-    <string name="no_index_file_to_download">Nudda de isgarrigare, pro piaghere compida sa connessione internet.</string>
-    <string name="select_index_file_to_download">No est istadu agatau nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
+    <string name="no_index_file_to_download">Nudda de iscarrigare, pro piaghere còmpida sa cunnessione ìnternet.</string>
+    <string name="select_index_file_to_download">No est istadu agatadu nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
     <string name="none_selected_gpx">Perunu documentu GPX ischertau. Pro ischertare tene carcau in supra de una de sas rastas disponìbiles.</string>
     
     <string name="local_index_select_gpx_file">Ischerta pro l\'ammustrare</string>
