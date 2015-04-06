@@ -177,7 +177,7 @@
   <string name="init_native_library">Inicializuji Android native library…</string>
   <string name="choose_auto_follow_route">Automatické centrování</string>
   <string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
-  <string name="auto_follow_route_never">Nikdy (klepnout na modrou šipku pro spuštění navigování)</string>
+  <string name="auto_follow_route_never">Nikdy (klepnout na \'Start\' pro spuštění pokynů)</string>
   <string name="auto_follow_route_navigation">Automatické sledování pozice</string>
   <string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
   <string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
@@ -1848,7 +1848,7 @@ s často kladenými otázkami.</string>
 	<string name="notes">Poznámky</string>
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Pouze cesty</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžařské tratě</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžařské svahy</string>
 	<string name="free">"%1$s volných "</string>
 	<string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
@@ -1916,4 +1916,7 @@ s často kladenými otázkami.</string>
 	<string name="welcome_select_region">Pro správné promítnutí vašich dopravních značek a předpisů, prosím vyberte váš dopravní region:</string>
 	<string name="welcome_text">OsmAnd poskytuje celosvětové prohlížení map a celosvětovou offline navigaci!</string>
 	<string name="confirm_usage_speed_cameras">V mnoha zemích (Německo, Francie, Itálie a dalších) je použití varování před rychlostními kamerami zakázané zákonem. OsmAnd nepřebírá žádnou zodpovědnost pokud porušíte zákon. Prosím označte Ano pouze v případě, pokud máte oprávnění používat tuto vlastnost.</string>
+	<string name="shared_string_show_description">Zobrazit popis</string>
+	<string name="shared_string_do_not_use">Nepoužívat</string>
+	<string name="shared_string_address">Adresa</string>
 	</resources>
