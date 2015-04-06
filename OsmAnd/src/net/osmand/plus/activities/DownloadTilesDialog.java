@@ -13,7 +13,9 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
+import net.osmand.plus.WDebug;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -124,29 +126,51 @@ public class DownloadTilesDialog {
 			int y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
 			numberTiles += (x2 - x1 + 1) * (y2 - y1 + 1);
 		}
+		
+		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(app));
+		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
+				new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());
+		
 		final ProgressDialog progressDlg = new ProgressDialog(ctx);
 		progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		progressDlg.setMessage(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis));
 		progressDlg.setCancelable(true);
 		progressDlg.setMax(numberTiles);
 		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
-
 			@Override
 			public void onCancel(DialogInterface dialog) {
-				cancel = true;
+				if(progressDlg.getProgress()>=progressDlg.getMax()) {
+					cancel = true;
+				}
+				else {
+					new AlertDialog.Builder(ctx).setTitle("").setMessage("Dismiss")
+					.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){public void onClick(DialogInterface arg0, int arg1){progressDlg.show();}})
+					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){public void onClick(DialogInterface arg0, int arg1){cancel = true;}})
+					.setOnCancelListener(new DialogInterface.OnCancelListener(){public void onCancel(DialogInterface dialog){/*Neither was pressed*/progressDlg.show();}}
+					).create().show();
+				}
+//				cancel = true;
+				if(cancel) {
+					if(map instanceof SQLiteTileSource){
+						((SQLiteTileSource) map).endTransaction();
+					}
+					mapView.refreshMap();
+					instance.getDownloaderCallbacks().clear();
+					instance.getDownloaderCallbacks().addAll(previousCallbacks);
+					app.getResourceManager().reloadTilesFromFS();
+					progressDlg.dismiss();
+
+				}			
 			}
 		});
-		
-		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(app));
-		
-		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
-			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());
+				
 		instance.getDownloaderCallbacks().clear();
 		instance.addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if (request != null) {
-					progressDlg.setProgress(progressDlg.getProgress() + 1);
+					WDebug.log("ready "+request.url+" "+progressDlg.getProgress());
+					progressDlg.incrementProgressBy(1);
 				}
 			}
 		});
@@ -154,10 +178,15 @@ public class DownloadTilesDialog {
 		Runnable r = new Runnable(){
 			@Override
 			public void run() {
-				int requests = 0;
-				int limitRequests = 50;
+				//int requests = 0;
+				//int limitRequests = 50;
 				try {
 					ResourceManager rm = app.getResourceManager();
+					WDebug.log("before open transaction ");
+					if(map instanceof SQLiteTileSource){
+						((SQLiteTileSource) map).beginTransaction();
+					}
+					WDebug.log("opened transaction ");
 					for (int z = zoom; z <= zoom + progress && !cancel; z++) {
 						int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
 						int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);
@@ -167,12 +196,16 @@ public class DownloadTilesDialog {
 							for (int y = y1; y <= y2 && !cancel; y++) {
 								String tileId = rm.calculateTileId(map, x, y, z);
 								if (rm.tileExistOnFileSystem(tileId, map, x, y, z)) {
-									progressDlg.setProgress(progressDlg.getProgress() + 1);
+									WDebug.log("already exists "+tileId+" "+progressDlg.getProgress());
+									progressDlg.incrementProgressBy(1);
 								} else {
+									WDebug.log("download "+tileId);
 									rm.getTileImageForMapSync(tileId, map, x, y, z, true);
-									requests++;
+									//requests++;
 								}
-								if (!cancel) {
+								progressDlg.incrementSecondaryProgressBy(1);
+								//ilasica I think we don`t need it
+								/*if (!cancel) {
 									if (requests >= limitRequests) {
 										requests = 0;
 
@@ -184,14 +217,15 @@ public class DownloadTilesDialog {
 											}
 										}
 									}
-								}
+								}*/
 							}
 						}
 						
 					}
 					if(cancel){
 						instance.refuseAllPreviousRequests();
-					} else {
+					} //ilasica I think we don`t need it
+					/*else {
 						while (instance.isSomethingBeingDownloaded()) {
 							try {
 								Thread.sleep(500);
@@ -199,17 +233,19 @@ public class DownloadTilesDialog {
 								throw new IllegalArgumentException(e);
 							}
 						}
-					}
-					mapView.refreshMap();
+					}*/
+//					mapView.refreshMap();
+					
 				} catch (Exception e) {
 					log.error("Exception while downloading tiles ", e); //$NON-NLS-1$
 					instance.refuseAllPreviousRequests();
-				} finally {
+//				} finally {
 					instance.getDownloaderCallbacks().clear();
 					instance.getDownloaderCallbacks().addAll(previousCallbacks);
 					app.getResourceManager().reloadTilesFromFS();
+					progressDlg.dismiss();
 				}
-				progressDlg.dismiss();
+//				progressDlg.dismiss();
 			}
 			
 		};
