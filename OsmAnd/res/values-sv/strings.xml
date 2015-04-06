@@ -1514,7 +1514,7 @@
 	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
     
     <string name="local_index_select_gpx_file">Markera för att visa</string>
-    <string name="no_index_file_to_download">Inget att ladda ner; kolla din Internetanslutning.</string>
+    <string name="no_index_file_to_download">Hittar inget att ladda ner; kolla din Internetanslutning.</string>
     <string name="osmo_gpx_points_downloaded">OsMo-punkter %1$s nedladdade.</string>
     <string name="osmo_auto_connect_descr">Anslut automatiskt till tjänsten när appen startats</string>
     <string name="osmo_auto_connect">Auto-anslut</string>
@@ -1853,4 +1853,5 @@
 	<string name="agps_data_last_downloaded">A-GPS-data senast nedladdat: %1$s</string>
     <string name="shared_string_do_not_use">Använd inte</string>
 	<string name="shared_string_address">Adress</string>
+	<string name="shared_string_show_description">Visa beskrivning</string>
 	</resources>
