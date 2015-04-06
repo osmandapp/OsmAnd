@@ -1,7 +1,9 @@
 package net.osmand.osm;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 
 public class PoiCategory extends PoiFilter {
@@ -33,6 +35,13 @@ public class PoiCategory extends PoiFilter {
 	public void setDefaultTag(String defaultTag) {
 		this.defaultTag = defaultTag;
 	}
+	
+	public Map<PoiCategory, LinkedHashSet<String>> putTypes(
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+		acceptedTypes.put(this, null);
+		addReferenceTypes(acceptedTypes);
+		return acceptedTypes;
+	}
 
 	
 	public boolean isWiki() {
@@ -46,5 +55,7 @@ public class PoiCategory extends PoiFilter {
 	public int ordinal() {
 		return regId;
 	}
+
+	
 
 }

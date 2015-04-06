@@ -81,38 +81,30 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-//				if(path) {
-//					RouteCalculationResult result = routingHelper.getRoute();
-//					return resourceManager.searchAmenitiesOnThePath(result.getImmutableAllLocations(), radius, filter, null);
-//				} else {
-					return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
-							latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
+				if (filter == null) {
+					return new ArrayList<Amenity>();
+				}
+				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
+						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
-								@Override
-								public boolean publish(Amenity object) {
-									return true;
-								}
+							@Override
+							public boolean publish(Amenity object) {
+								return true;
+							}
 
-								@Override
-								public boolean isCancelled() {
-									return isInterrupted();
-								}
-							});
-//				}
+							@Override
+							public boolean isCancelled() {
+								return isInterrupted();
+							}
+						});
 			}
 		};
-	}
-
-	public PoiLegacyFilter getFilter() {
-		return filter;
 	}
 
 	public void setFilter(PoiLegacyFilter filter) {
 		this.filter = filter;
 		data.clearCache();
 	}
-	
-	
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
 		List<Amenity> objects = data.getResults();

@@ -24,7 +24,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public class NameFinderPoiFilter extends PoiLegacyFilter {
 
-	public static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
+	public static final String FILTER_ID = NAME_FINDER_FILTER_ID; //$NON-NLS-1$
 	private static final Log log = PlatformUtil.getLog(NameFinderPoiFilter.class);
 	private static final int LIMIT = 300;
 	

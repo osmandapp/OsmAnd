@@ -380,10 +380,6 @@ public class MapActivity extends AccessibleActivity {
 
 		String filterId = settings.getPoiFilterForMap();
 		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
-		if (poiFilter == null) {
-			poiFilter = new PoiLegacyFilter(null, app);
-		}
-
 		mapLayers.getPoiMapLayer().setFilter(poiFilter);
 
 		// if destination point was changed try to recalculate route

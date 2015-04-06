@@ -14,6 +14,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,6 +27,7 @@ public class PoiLegacyFilter {
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
+	public static final String NAME_FINDER_FILTER_ID = "name_finder";
 	
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 			LinkedHashSet<String>>();
@@ -45,18 +47,20 @@ public class PoiLegacyFilter {
 	
 	
 	// constructor for standard filters
-	public PoiLegacyFilter(PoiCategory type, OsmandApplication application){
+	public PoiLegacyFilter(PoiFilter type, OsmandApplication application) {
 		this.app = application;
 		isStandardFilter = true;
-		filterId = STD_PREFIX + (type == null? null: type.getName());
+		filterId = STD_PREFIX + (type == null ? null : type.getName());
 		poiTypes = application.getPoiTypes();
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
 		if (type == null) {
 			initSearchAll();
 		} else {
-			acceptedTypes.put(type, null);
+			type.putTypes(acceptedTypes);
 		}
 	}
+
+	
 	
 	// constructor for user defined filters
 	public PoiLegacyFilter(String name, String filterId, Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
