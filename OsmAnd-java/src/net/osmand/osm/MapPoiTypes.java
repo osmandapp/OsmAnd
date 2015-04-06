@@ -3,7 +3,12 @@ package net.osmand.osm;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -59,6 +64,33 @@ public class MapPoiTypes {
 	
 	public PoiCategory getOtherPoiCategory() {
 		return otherCategory;
+	}
+	
+	public List<PoiFilter> getTopVisibleFilters() {
+		List<PoiFilter> lf = new ArrayList<PoiFilter>();
+		for(PoiCategory pc : categories) {
+			if(pc.isTopVisible()) {
+				lf.add(pc);
+			}
+			for(PoiFilter p : pc.getPoiFilters()) {
+				if(p.isTopVisible()) {
+					lf.add(p);
+				}
+			}
+		}
+		sortList(lf);
+		return lf;
+	}
+
+
+	private void sortList(List<? extends PoiFilter> lf) {
+		final Collator instance = Collator.getInstance();
+		Collections.sort(lf, new Comparator<PoiFilter>() {
+			@Override
+			public int compare(PoiFilter object1, PoiFilter object2) {
+				return instance.compare(object1.getTranslation(), object2.getTranslation());
+			}
+		});
 	}
 	
 	public PoiCategory getUserDefinedCategory() {
@@ -128,6 +160,8 @@ public class MapPoiTypes {
 	
 	public void setPoiTranslator(PoiTranslator poiTranslator) {
 		this.poiTranslator = poiTranslator;
+		sortList(categories);
+		
 	}
 	
 
@@ -151,10 +185,12 @@ public class MapPoiTypes {
 					String name = parser.getName();
 					if (name.equals("poi_category")) { 
 						lastCategory = new PoiCategory(this, parser.getAttributeValue("","name"), categories.size());
+						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("","top")));
 						categories.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory,
 								parser.getAttributeValue("", "name"));
+						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("","top")));
 						lastFilter = tp;
 						lastCategory.addPoiType(tp);
 					} else if(name.equals("poi_reference")){
@@ -249,7 +285,17 @@ public class MapPoiTypes {
 	public static void main(String[] args) {
 		DEFAULT_INSTANCE = new MapPoiTypes("/Users/victorshcherb/osmand/repos/resources/poi/poi_types.xml");
 		DEFAULT_INSTANCE.init();
-		print(DEFAULT_INSTANCE)	;
+//		print(DEFAULT_INSTANCE)	;
+//		System.out.println("-----------------");
+		List<PoiFilter> lf = DEFAULT_INSTANCE.getTopVisibleFilters();
+		for(PoiFilter l : lf) {
+			System.out.println("----------------- " + l.getKeyName());
+			print("", l);
+			Map<PoiCategory, LinkedHashSet<String>> m = 
+					l.putTypes(new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
+			System.out.println(m);
+		}
+		
 	}
 
 	public String getTranslation(AbstractPoiType abstractPoiType) {

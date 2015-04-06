@@ -259,16 +259,13 @@ public class MapActivityLayers {
 		OsmandApplication app = (OsmandApplication)getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
-		
-		Item is = adapter.item(getString(R.string.any_poi));
-		if(RenderingIcons.containsBigIcon("null")) {
-			is.icon(RenderingIcons.getBigIconResourceId("null"));
-		}
-		is.reg();
-		// 2nd custom
-		adapter.item(getString(R.string.poi_filter_custom_filter)).icon(RenderingIcons.getBigIconResourceId("user_defined")).reg();
-		
-		for (PoiLegacyFilter f : poiFilters.getUserDefinedPoiFilters()) {
+		final List<PoiLegacyFilter> list = new ArrayList<PoiLegacyFilter>();
+		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
+			if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(f.getFilterId()) || 
+					PoiLegacyFilter.NAME_FINDER_FILTER_ID.equals(f.getFilterId())) {
+				continue;
+			}
+			list.add(f);
 			Item it = adapter.item(f.getName());
 			if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
 				it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
@@ -278,22 +275,15 @@ public class MapActivityLayers {
 			it.reg();
 			userDefined.add(f);
 		}
-		final List<PoiCategory> categories = getApplication().getPoiTypes().getCategories();
-		for(PoiCategory t : categories){
-			Item it = adapter.item(t.getTranslation());
-			if(RenderingIcons.containsBigIcon(t.getKeyName())) {
-				it.icon(RenderingIcons.getBigIconResourceId(t.getKeyName()));
-			}
-			it.reg();
-		}
 		Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter =adapter.createListAdapter(activity, app.getSettings().isLightContent());
+		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(which == 1){
-					String filterId = PoiLegacyFilter.CUSTOM_FILTER_ID; 
+				PoiLegacyFilter pf = list.get(which);
+				String filterId = pf.getFilterId();
+				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					Intent newIntent = new Intent(activity, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
@@ -301,23 +291,15 @@ public class MapActivityLayers {
 					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, mapView.getLongitude());
 					activity.startActivity(newIntent);
 				} else {
-					String filterId;
-					if (which == 0) {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
-					} else if (which <= userDefined.size() + 1) {
-						filterId = userDefined.get(which - 2).getFilterId();
-					} else {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories.get(which - userDefined.size() - 2));
-					}
 					getApplication().getSettings().setPoiFilterForMap(filterId);
-					PoiLegacyFilter f = poiFilters.getFilterById(filterId);
-					if (f != null) {
-						f.clearNameFilter();
+					pf = poiFilters.getFilterById(filterId);
+					if (pf != null && pf.isStandardFilter()) {
+						pf.clearNameFilter();
 					}
-					poiMapLayer.setFilter(f);
+					poiMapLayer.setFilter(pf);
 					mapView.refreshMap();
 					if(selected != null && selected.length > 0) {
-						selected[0] = f;
+						selected[0] = pf;
 					}
 				}
 			}

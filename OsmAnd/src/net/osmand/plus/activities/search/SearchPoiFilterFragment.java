@@ -71,10 +71,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	public void refreshPoiListAdapter() {
 		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		List<PoiLegacyFilter> filters = new ArrayList<PoiLegacyFilter>() ;
-		filters.addAll(poiFilters.getTopStandardFilters());
-		filters.addAll(poiFilters.getUserDefinedPoiFilters());
-		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
-		filters.add(poiFilters.getNameFinderPOIFilter());
+		filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 	
