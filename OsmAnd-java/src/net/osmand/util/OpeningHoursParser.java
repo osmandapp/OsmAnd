@@ -105,6 +105,33 @@ public class OpeningHoursParser {
 			return isOpenDay || isOpenPrevious;
 		}
 		
+		public String getCurrentRuleTime(Calendar cal) {
+			String ruleOpen = null;
+			String ruleClosed = null;
+			for (OpeningHoursRule r : rules){
+				if(r.containsDay(cal) && r.containsMonth(cal)){
+					if(r.isOpenedForTime(cal, false)) {
+						ruleOpen = r.toRuleString();
+					} else {
+						ruleClosed = r.toRuleString();
+					}
+				}
+			}
+			for (OpeningHoursRule r : rules){
+				if(r.containsPreviousDay(cal) && r.containsMonth(cal)){
+					if(r.isOpenedForTime(cal, true)) {
+						ruleOpen = r.toRuleString();
+					} else {
+						ruleClosed = r.toRuleString();
+					}
+				}
+			}
+			if(ruleOpen != null) {
+				return ruleOpen;
+			}
+			return ruleClosed;			
+		}
+		
 		@Override
 		public String toString(){
 			StringBuilder s = new StringBuilder();
@@ -119,6 +146,8 @@ public class OpeningHoursParser {
 			
 			return s.substring(0, s.length()-2);
 		}
+
+		
 		
 	}
 	

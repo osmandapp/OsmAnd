@@ -1,61 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:minHeight="@dimen/list_item_height"
-	android:background="?attr/expandable_list_item_background"
-	android:orientation="horizontal"
-	android:paddingLeft="@dimen/list_content_padding"
-	android:paddingRight="@dimen/list_content_padding">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding" >
 
-	<ImageView
-		android:id="@+id/poi_icon"
-		android:layout_width="@dimen/standard_icon_size"
-		android:layout_height="@dimen/standard_icon_size"
-		android:layout_gravity="center_vertical"
-		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		tools:visiblity="visible"/>
+    <ImageView
+        android:id="@+id/poi_icon"
+        android:layout_width="@dimen/standard_icon_size"
+        android:layout_height="@dimen/standard_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/favorites_icon_right_margin"
+        tools:visiblity="visible" />
 
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center_vertical"
-		android:orientation="vertical"
-		android:paddingRight="3dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingRight="3dp" >
 
-		<TextView
-			android:id="@+id/poi_label"
-			style="@style/ListText.Small"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:gravity="center_vertical"
-			android:maxLines="1"
-			tools:text="@string/lorem_ipsum"/>
+        <TextView
+            android:id="@+id/poi_label"
+            style="@style/ListText.Small"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            tools:text="@string/lorem_ipsum" />
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-			<ImageView
-				android:id="@+id/poi_direction"
-				android:layout_width="@dimen/dashFavDirectionSize"
-				android:layout_height="@dimen/dashFavDirectionSize"
-				android:layout_gravity="center_vertical"
-				tools:visiblity="visible"/>
+            <ImageView
+                android:id="@+id/poi_direction"
+                android:layout_width="@dimen/dashFavDirectionSize"
+                android:layout_height="@dimen/dashFavDirectionSize"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_destination_arrow_white" 
+                tools:visiblity="visible" />
 
-			<TextView
-				android:id="@+id/distance"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/color_distance"
-				android:maxLines="1"
-				tools:text="@string/lorem_ipsum"/>
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/download_descr_text_size"
+                android:layout_marginRight="@dimen/gpx_small_text_margin"
+                tools:text="300 km" />
 
-		</LinearLayout>
+            <ImageView
+                android:id="@+id/time_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                android:src="@drawable/ic_small_time" />
 
-	</LinearLayout>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/gpx_small_text_margin"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/download_descr_text_size" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

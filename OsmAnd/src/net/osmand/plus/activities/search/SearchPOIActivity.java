@@ -25,6 +25,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.R.color;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -716,6 +717,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	class AmenityAdapter extends ArrayAdapter<Amenity> {
 		private AmenityFilter listFilter;
 		private List<Amenity> originalAmenityList;
+		private int screenOrientation;
 
 		AmenityAdapter(List<Amenity> list) {
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
@@ -729,6 +731,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		public void setNewModel(List<Amenity> amenityList, String filter) {
 			setNotifyOnChange(false);
+			screenOrientation = DashLocationFragment.getScreenOrientation(SearchPOIActivity.this);
 			originalAmenityList = new ArrayList<Amenity>(amenityList);
 			clear();
 			for (Amenity obj : amenityList) {
@@ -750,9 +753,37 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
+			TextView timeText = (TextView) row.findViewById(R.id.time);
 			ImageView direction = (ImageView) row.findViewById(R.id.poi_direction);
+			ImageView timeIcon = (ImageView) row.findViewById(R.id.time_icon);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
+			if (amenity.getOpeningHours() != null) {
+				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				if (rs != null) {
+					Calendar inst = Calendar.getInstance();
+					inst.setTimeInMillis(System.currentTimeMillis());
+					boolean work = rs.isOpenedForTime(inst);
+					timeIcon.setVisibility(View.VISIBLE);
+					timeText.setVisibility(View.VISIBLE);
+					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, work ? R.color.color_ok : R.color.color_warning));
+					timeText.setTextColor(app.getResources().getColor(work ? R.color.color_ok : R.color.color_warning));
+					String rt = rs.getCurrentRuleTime(inst);
+					timeText.setText(rt == null ? "" : rt);
+				} else {
+					timeIcon.setVisibility(View.GONE);
+					timeText.setVisibility(View.GONE);
+				}
+			}
+			Drawable dd = direction.getDrawable();
+			DirectionDrawable draw;
+			if (dd instanceof DirectionDrawable) {
+				draw = (DirectionDrawable) dd;
+			} else {
+				draw = new DirectionDrawable(SearchPOIActivity.this, width, height,
+						R.drawable.ic_destination_arrow_white, R.color.color_distance);
+				direction.setImageDrawable(draw);
+			}
 			net.osmand.Location loc = location;
 			if (loc != null) {
 				mes = new float[2];
@@ -760,33 +791,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				net.osmand.Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(),
 						loc.getLongitude(), mes);
 			}
-			int opened = -1;
-			if (amenity.getOpeningHours() != null) {
-				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null) {
-					Calendar inst = Calendar.getInstance();
-					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean work = false;
-					work = rs.isOpenedForTime(inst);
-					if (work) {
-						opened = 0;
-					} else {
-						opened = 1;
-					}
-				}
-			}
-			DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height,
-					R.drawable.ic_destination_arrow_white, 
-					R.color.color_distance);
-			int screenOrientation = DashLocationFragment.getScreenOrientation(SearchPOIActivity.this);
 			if (loc != null) {
 				float a = heading != null ? heading : 0;
 				draw.setAngle(mes[1] - a + 180 + screenOrientation);
+				draw.setColorId(color.color_myloc_distance);
 			} else {
 				draw.setAngle(0);
+				draw.setColorId(color.color_distance);
 			}
-
-			draw.setOpenedColor(opened);
 			direction.setImageDrawable(draw);
 			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			if (st != null) {

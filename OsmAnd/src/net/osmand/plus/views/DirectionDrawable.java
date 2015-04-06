@@ -53,21 +53,13 @@ public class DirectionDrawable extends Drawable {
 		paintRouteDirection.setAntiAlias(true);
 	}
 
-	public void setOpenedColor(int opened) {
+	public void setColorId(int clrId) {
+		// R.color.color_ok, R.color.color_unknown, R.color.color_warning
 		if(arrowImage != null) {
 			IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
-			if (opened == 0) {
-				arrowImage = iconsCache.getIcon(resourceId, R.color.color_ok);
-			} else if (opened != -1) {
-				arrowImage = iconsCache.getIcon(resourceId, R.color.color_warning);
-			}
-		}
-		if (opened == 0) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_ok));
-		} else if (opened == -1) {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_unknown));
+			arrowImage = iconsCache.getIcon(resourceId, clrId);
 		} else {
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_warning));
+			paintRouteDirection.setColor(ctx.getResources().getColor(clrId));
 		}
 	}
 
