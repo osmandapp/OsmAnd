@@ -93,6 +93,8 @@ public class ConfigureMapMenu {
 		public boolean onContextMenuClick(final ArrayAdapter<?> adapter, int itemId, final int pos, boolean isChecked) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			if (itemId == R.string.layer_poi) {
+				settings.setPoiFilterForMap(null);
+				ma.getMapLayers().getPoiMapLayer().setFilter(null);
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
 				if (isChecked) {
 					selectPOILayer(settings);
