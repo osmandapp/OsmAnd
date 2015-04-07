@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -120,6 +121,31 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
+	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
+		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
+		for(PoiCategory pc : categories) {
+			addIf(tm, pc, matcher);
+			for(PoiFilter pt :  pc.getPoiFilters()) {
+				addIf(tm, pt, matcher);
+			}
+			for(PoiType pt :  pc.getPoiTypes()) {
+				if(pt.isReference()) {
+					continue;
+				}
+				addIf(tm, pt, matcher);
+			}
+		}
+		return tm;
+	}
+	
+	private void addIf(Map<String, AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
+		if(matcher.matches(pc.getTranslation()) || matcher.matches(pc.getKeyName().replace('_', ' '))) {
+			tm.put(pc.getTranslation(), pc);
+		}
+	}
+
+
 	public Map<String, PoiType> getAllTranslatedNames(PoiCategory pc, boolean onlyTranslation) {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>();
 		for (PoiType pt : pc.getPoiTypes()) {
