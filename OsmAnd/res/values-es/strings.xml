@@ -673,7 +673,7 @@
   <string name="choose_available_region">Elegir región de la lista</string>
   <string name="choose_intersected_street">Elige intersección</string>
   <string name="Closest_Amenities">Instalaciones más cercanas</string>
-  <string name="app_mode_default">Predeterminado</string>
+  <string name="app_mode_default">Ver mapa</string>
   <string name="app_mode_car">Automóvil</string>
   <string name="app_mode_bicycle">Bicicleta</string>
   <string name="app_mode_pedestrian">Peatón</string>
