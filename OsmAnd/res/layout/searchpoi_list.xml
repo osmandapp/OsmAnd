@@ -7,7 +7,9 @@
     android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding" >
+    android:paddingRight="@dimen/list_content_padding" 
+    android:descendantFocusability="blocksDescendants"
+    >
 
     <ImageView
         android:id="@+id/poi_icon"

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -47,10 +48,10 @@ public class PoiLegacyFilter {
 	
 	
 	// constructor for standard filters
-	public PoiLegacyFilter(PoiFilter type, OsmandApplication application) {
+	public PoiLegacyFilter(AbstractPoiType type, OsmandApplication application) {
 		this.app = application;
 		isStandardFilter = true;
-		filterId = STD_PREFIX + (type == null ? null : type.getName());
+		filterId = STD_PREFIX + (type == null ? null : type.getKeyName());
 		poiTypes = application.getPoiTypes();
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
 		if (type == null) {

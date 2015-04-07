@@ -183,18 +183,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			updateSelectionMode(actionMode);
 		} else {
 			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-
-			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
-			qa.setAnchor(v);
 			final OsmandSettings settings = getMyApplication().getSettings();
-
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, 
 					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 
-			boolean light = getMyApplication().getSettings().isLightContent();
 			MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
 					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

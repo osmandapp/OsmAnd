@@ -13,6 +13,7 @@ import java.util.Map;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -23,6 +24,9 @@ public class PoiFiltersHelper {
 	private final OsmandApplication application;
 	
 	private NameFinderPoiFilter nameFinderPOIFilter;
+	private PoiLegacyFilter searchByNamePOIFilter;
+	private PoiLegacyFilter customPOIFilter;
+	private PoiLegacyFilter showAllPOIFilter;
 	private List<PoiLegacyFilter> cacheTopStandardFilters;
 	
 	private static final String UDF_CAR_AID = "car_aid";
@@ -44,6 +48,7 @@ public class PoiFiltersHelper {
 	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
 	}
+	
 	public NameFinderPoiFilter getNameFinderPOIFilter() {
 		if(nameFinderPOIFilter == null){
 			nameFinderPOIFilter = new NameFinderPoiFilter(application);
@@ -51,7 +56,43 @@ public class PoiFiltersHelper {
 		return nameFinderPOIFilter;
 	}
 	
+	public PoiLegacyFilter getSearchByNamePOIFilter() {
+		if(searchByNamePOIFilter == null){
+			PoiLegacyFilter filter = new SearchByNameFilter(application);
+			filter.setStandardFilter(true);
+			searchByNamePOIFilter = filter;
+		}
+		return searchByNamePOIFilter;
+	}
 	
+	public PoiLegacyFilter getCustomPOIFilter() {
+		if(customPOIFilter == null){
+			PoiLegacyFilter filter = new PoiLegacyFilter(application.getString(R.string.poi_filter_custom_filter),
+					PoiLegacyFilter.CUSTOM_FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			filter.setStandardFilter(true);
+			customPOIFilter = filter;
+		}
+		return customPOIFilter;
+	}
+	
+	public PoiLegacyFilter getShowAllPOIFilter() {
+		if(showAllPOIFilter == null){
+			PoiLegacyFilter filter = new PoiLegacyFilter(null, application); //$NON-NLS-1$
+			filter.setStandardFilter(true);
+			showAllPOIFilter = filter;
+		}
+		return showAllPOIFilter;
+	}
+	
+	
+	private PoiLegacyFilter getFilterById(String filterId, PoiLegacyFilter... filters){
+		for(PoiLegacyFilter pf : filters) {
+			if(pf.getFilterId().equals(filterId)){
+				return pf;
+			}
+		}
+		return null;
+	}
 	
 	public PoiLegacyFilter getFilterById(String filterId){
 		if(filterId == null){
@@ -60,6 +101,18 @@ public class PoiFiltersHelper {
 		for(PoiLegacyFilter f : getTopDefinedPoiFilters()) {
 			if(f.getFilterId().equals(filterId)){
 				return f;
+			}
+		}
+		PoiLegacyFilter ff = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
+				getShowAllPOIFilter(), getNameFinderPOIFilter());
+		if (ff != null) {
+			return ff;
+		}
+		if(filterId.startsWith(PoiLegacyFilter.STD_PREFIX)) {
+			String typeId = filterId.substring(PoiLegacyFilter.STD_PREFIX.length());
+			PoiType tp = application.getPoiTypes().getPoiTypeByKey(typeId);
+			if(tp != null) {
+				return new PoiLegacyFilter(tp, application);
 			}
 		}
 		return null;
@@ -117,19 +170,6 @@ public class PoiFiltersHelper {
 	public List<PoiLegacyFilter> getTopDefinedPoiFilters() {
 		if (cacheTopStandardFilters == null) {
 			cacheTopStandardFilters = new ArrayList<PoiLegacyFilter>();
-			// by name
-			PoiLegacyFilter filter = new SearchByNameFilter(application);
-			filter.setStandardFilter(true);
-			cacheTopStandardFilters.add(filter);
-			// custom
-			filter = new PoiLegacyFilter(application.getString(R.string.poi_filter_custom_filter),
-					PoiLegacyFilter.CUSTOM_FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application); //$NON-NLS-1$
-			filter.setStandardFilter(true);
-			cacheTopStandardFilters.add(filter);
-			// all
-			cacheTopStandardFilters.add(new PoiLegacyFilter(null, application));
-			// name finder
-			cacheTopStandardFilters.add(getNameFinderPOIFilter());
 			// user defined
 			cacheTopStandardFilters.addAll(getUserDefinedPoiFilters());
 			// default
@@ -139,7 +179,10 @@ public class PoiFiltersHelper {
 			}
 			sortListOfFilters(cacheTopStandardFilters);
 		}
-		return Collections.unmodifiableList(cacheTopStandardFilters);
+		List<PoiLegacyFilter> result = new ArrayList<PoiLegacyFilter>();
+		result.add(getShowAllPOIFilter());
+		result.addAll(cacheTopStandardFilters);
+		return result;
 	}
 	
 	private PoiFilterDbHelper openDbHelper(){
@@ -287,13 +330,13 @@ public class PoiFiltersHelper {
 	    		for(PoiCategory a : types.keySet()){
 	    			if(types.get(a) == null){
 		    			insertCategories.bindString(1, p.getFilterId());
-						insertCategories.bindString(2, a.getKey());
+						insertCategories.bindString(2, a.getKeyName());
 						insertCategories.bindNull(3);
     					insertCategories.execute();
 	    			} else {
 	    				for(String s : types.get(a)){
 	    					insertCategories.bindString(1, p.getFilterId());
-	    					insertCategories.bindString(2, a.getKey());
+	    					insertCategories.bindString(2, a.getKeyName());
 	    					insertCategories.bindString(3, s);
 	    					insertCategories.execute();
 	    				}
@@ -318,7 +361,7 @@ public class PoiFiltersHelper {
 	    					map.put(filterId, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
 	    				}
 	    				Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
-	    				PoiCategory a = mapPoiTypes.getPoiCategoryByName(query.getString(1));
+	    				PoiCategory a = mapPoiTypes.getPoiCategoryByName(query.getString(1).toLowerCase(), false);
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);

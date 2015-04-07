@@ -255,26 +255,14 @@ public class MapActivityLayers {
 	
 	
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiLegacyFilter[] selected){
-		final List<PoiLegacyFilter> userDefined = new ArrayList<PoiLegacyFilter>();
-		OsmandApplication app = (OsmandApplication)getApplication();
+		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		final List<PoiLegacyFilter> list = new ArrayList<PoiLegacyFilter>();
 		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
-			if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(f.getFilterId()) || 
-					PoiLegacyFilter.NAME_FINDER_FILTER_ID.equals(f.getFilterId())) {
-				continue;
-			}
-			list.add(f);
-			Item it = adapter.item(f.getName());
-			if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
-				it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
-			} else {
-				it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
-			}
-			it.reg();
-			userDefined.add(f);
+			addFilterToList(adapter, list, f);
 		}
+		addFilterToList(adapter, list, poiFilters.getCustomPOIFilter());
 		Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
@@ -307,6 +295,17 @@ public class MapActivityLayers {
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		return builder.show();
+	}
+
+	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiLegacyFilter> list, PoiLegacyFilter f) {
+		list.add(f);
+		Item it = adapter.item(f.getName());
+		if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
+			it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
+		} else {
+			it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
+		}
+		it.reg();
 	}
 
 	public void selectMapLayer(final OsmandMapTileView mapView){

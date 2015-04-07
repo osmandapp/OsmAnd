@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -97,11 +98,6 @@ public class MapPoiTypes {
 		return otherCategory;
 	}
 	
-	public PoiCategory getPoiCategoryByName(String name) {
-		name = name.toLowerCase();
-		return getPoiCategoryByName(name, false);
-	}
-	
 	public PoiType getPoiTypeByKey(String name) {
 		for(PoiCategory pc : categories) {
 			PoiType pt = pc.getPoiTypeByKeyName(name);
@@ -125,6 +121,31 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
+	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
+		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
+		for(PoiCategory pc : categories) {
+			addIf(tm, pc, matcher);
+			for(PoiFilter pt :  pc.getPoiFilters()) {
+				addIf(tm, pt, matcher);
+			}
+			for(PoiType pt :  pc.getPoiTypes()) {
+				if(pt.isReference()) {
+					continue;
+				}
+				addIf(tm, pt, matcher);
+			}
+		}
+		return tm;
+	}
+	
+	private void addIf(Map<String, AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
+		if(matcher.matches(pc.getTranslation()) || matcher.matches(pc.getKeyName().replace('_', ' '))) {
+			tm.put(pc.getTranslation(), pc);
+		}
+	}
+
+
 	public Map<String, PoiType> getAllTranslatedNames(PoiCategory pc, boolean onlyTranslation) {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>();
 		for (PoiType pt : pc.getPoiTypes()) {
@@ -137,12 +158,19 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
+	public PoiCategory getPoiCategoryByName(String name) {
+		return getPoiCategoryByName(name, false);
+	}
+	
 	public PoiCategory getPoiCategoryByName(String name, boolean create) {
-		if(name.equals("entertainment") && !create) {
-			name = "leisure";
+		if(name.equals("leisure") && !create) {
+			name = "entertainment";
+		}
+		if(name.equals("historic") && !create) {
+			name = "tourism";
 		}
 		for(PoiCategory p : categories ) {
-			if(p.getName().equals(name) || p.getKey().equalsIgnoreCase(name)) {
+			if(p.getKeyName().equalsIgnoreCase(name)) {
 				return p;
 			}
 		}
@@ -265,9 +293,9 @@ public class MapPoiTypes {
 	private static void print(MapPoiTypes df) {
 		List<PoiCategory> pc = df.getCategories();
 		for(PoiCategory p : pc) {
-			System.out.println("Category " + p.getName());
+			System.out.println("Category " + p.getKeyName());
 			for(PoiFilter f : p.getPoiFilters()) {
-				System.out.println(" Filter " + f.getName());
+				System.out.println(" Filter " + f.getKeyName());
 				print("  ", f);
 			}
 			print(" ", p);
@@ -277,8 +305,8 @@ public class MapPoiTypes {
 	
 	private static void print(String indent, PoiFilter f) {
 		for(PoiType pt : f.getPoiTypes()) {
-			System.out.println(indent + " Type " + pt.getName() + 
-					(pt.isReference() ? (" -> " + pt.getReferenceType().getCategory().getKey()  ): ""));
+			System.out.println(indent + " Type " + pt.getKeyName() + 
+					(pt.isReference() ? (" -> " + pt.getReferenceType().getCategory().getKeyName()  ): ""));
 		}
 	}
 
@@ -305,7 +333,7 @@ public class MapPoiTypes {
 				return translation;
 			}
 		}
-		return Algorithms.capitalizeFirstLetterAndLowercase(abstractPoiType.getName().replace('_', ' '));
+		return Algorithms.capitalizeFirstLetterAndLowercase(abstractPoiType.getKeyName().replace('_', ' '));
 	}
 
 

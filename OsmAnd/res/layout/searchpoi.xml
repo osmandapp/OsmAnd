@@ -1,46 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/SearchFilterLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:textColor="?android:textColorPrimary"
-			tools:text="@string/lorem_ipsum"
-            android:text="@string/search_poi_filter" />
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:src="@android:drawable/ic_search_category_default" />
+
+        <!-- to not gain focus everytime  -->
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <EditText
-            android:id="@+id/SearchFilter"
-            android:layout_width="fill_parent"
+            android:id="@+id/edit"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="" />
+            android:layout_gravity="bottom"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:layout_weight="1"
+            android:hint="@string/shared_string_search"
+            android:maxLines="1"
+            android:nextFocusLeft="@id/edit"
+            android:nextFocusUp="@id/edit"
+            android:textColor="?android:textColorPrimary"
+            tools:text="@string/lorem_ipsum" >
+        </EditText>
+
+        <ImageView
+            android:id="@+id/options"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/dashboard_button"
+            android:scaleType="center"
+            android:src="?attr/ic_action_overflow" />
     </LinearLayout>
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-            android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <net.osmand.plus.activities.search.toolbar.SplitToolbar
-            android:orientation="horizontal"
-            android:background="?attr/bottomToolBarColor"
-            android:id="@+id/bottomControls"
-            android:layout_width="fill_parent"
-			android:layout_height="wrap_content"/>
+        android:id="@+id/poiSplitbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bottomToolBarColor"
+        android:orientation="horizontal" />
 
 </LinearLayout>
