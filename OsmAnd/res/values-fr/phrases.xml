@@ -711,4 +711,10 @@
 	<string name="piste_sled">Luge</string>
 	<string name="piste_snow_park">Snow park</string>
 	<string name="piste_playground">Jardin de neige</string>
+	<string name="poi_canal">Canal</string>
+	<string name="poi_bench">Banc</string>
+	<string name="poi_valley">Vallée</string>
+	<string name="poi_water">Eau</string>
+	<string name="poi_wood">Bois</string>
+	<string name="poi_allotments">Lotissement</string>
 	</resources>
