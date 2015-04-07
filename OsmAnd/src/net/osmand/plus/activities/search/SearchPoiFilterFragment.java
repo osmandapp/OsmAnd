@@ -50,13 +50,16 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	private EditText searchEditText;
 	private SearchPoiByNameTask currentTask = null;
+	private PoiFiltersAdapter poiFitlersAdapter;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchpoi, container, false);
+        
+        v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
         setupSearchEditText((EditText) v.findViewById(R.id.edit));
         setupOptions(v.findViewById(R.id.options));
-        v.findViewById(R.id.bottomControls).setVisibility(View.GONE);
+        v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
         return v;
     }
 	
@@ -89,15 +92,16 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		setHasOptionsMenu(true);
 		refreshPoiListAdapter();
+		setHasOptionsMenu(true);
 	}
 
 	public void refreshPoiListAdapter() {
 		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		List<PoiLegacyFilter> filters = new ArrayList<PoiLegacyFilter>() ;
 		filters.addAll(poiFilters.getTopDefinedPoiFilters());
-		setListAdapter(new AmenityAdapter(filters));
+		poiFitlersAdapter = new PoiFiltersAdapter(filters);
+		setListAdapter(poiFitlersAdapter);
 	}
 	
 	public OsmandApplication getApp(){
@@ -139,12 +143,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
-		final PoiLegacyFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
-		if (filter.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
-			filter.clearFilter();
-			showEditActivity(filter);
-			return;
-		}
+		final PoiLegacyFilter filter = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
 		if(!(filter instanceof NameFinderPoiFilter)){
 			ResourceManager rm = getApp().getResourceManager();
 			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
@@ -177,10 +176,10 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	}
 
 
-	class AmenityAdapter extends ArrayAdapter<PoiLegacyFilter> {
+	class PoiFiltersAdapter extends ArrayAdapter<PoiLegacyFilter> {
 		
 
-		AmenityAdapter(List<PoiLegacyFilter> list) {
+		PoiFiltersAdapter(List<PoiLegacyFilter> list) {
 			super(getActivity(), R.layout.searchpoifolder_list, list);
 		}
 

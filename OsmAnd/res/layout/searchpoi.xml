@@ -10,6 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:visibility="gone"
         android:orientation="horizontal" >
 
         <ImageView
@@ -59,7 +60,7 @@
         android:layout_weight="1" />
 
     <net.osmand.plus.activities.search.toolbar.SplitToolbar
-        android:id="@+id/bottomControls"
+        android:id="@+id/poiSplitbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bottomToolBarColor"

@@ -48,9 +48,6 @@ public class PoiCategory extends PoiFilter {
 		return keyName.equals(MapPoiTypes.OSM_WIKI_CATEGORY);
 	}
 
-	public String getKey() {
-		return keyName;
-	}
 
 	public int ordinal() {
 		return regId;

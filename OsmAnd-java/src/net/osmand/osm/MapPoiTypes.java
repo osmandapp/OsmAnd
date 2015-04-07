@@ -144,7 +144,7 @@ public class MapPoiTypes {
 			name = "tourism";
 		}
 		for(PoiCategory p : categories ) {
-			if(p.getName().equals(name) || p.getKey().equalsIgnoreCase(name)) {
+			if(p.getKeyName().equalsIgnoreCase(name)) {
 				return p;
 			}
 		}
@@ -267,9 +267,9 @@ public class MapPoiTypes {
 	private static void print(MapPoiTypes df) {
 		List<PoiCategory> pc = df.getCategories();
 		for(PoiCategory p : pc) {
-			System.out.println("Category " + p.getName());
+			System.out.println("Category " + p.getKeyName());
 			for(PoiFilter f : p.getPoiFilters()) {
-				System.out.println(" Filter " + f.getName());
+				System.out.println(" Filter " + f.getKeyName());
 				print("  ", f);
 			}
 			print(" ", p);
@@ -279,8 +279,8 @@ public class MapPoiTypes {
 	
 	private static void print(String indent, PoiFilter f) {
 		for(PoiType pt : f.getPoiTypes()) {
-			System.out.println(indent + " Type " + pt.getName() + 
-					(pt.isReference() ? (" -> " + pt.getReferenceType().getCategory().getKey()  ): ""));
+			System.out.println(indent + " Type " + pt.getKeyName() + 
+					(pt.isReference() ? (" -> " + pt.getReferenceType().getCategory().getKeyName()  ): ""));
 		}
 	}
 
@@ -307,7 +307,7 @@ public class MapPoiTypes {
 				return translation;
 			}
 		}
-		return Algorithms.capitalizeFirstLetterAndLowercase(abstractPoiType.getName().replace('_', ' '));
+		return Algorithms.capitalizeFirstLetterAndLowercase(abstractPoiType.getKeyName().replace('_', ' '));
 	}
 
 

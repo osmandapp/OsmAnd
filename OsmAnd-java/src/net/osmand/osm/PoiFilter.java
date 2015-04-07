@@ -27,15 +27,15 @@ public class PoiFilter extends AbstractPoiType {
 	}
 	
 	public void addPoiType(PoiType type) {
-		if(!map.containsKey(type.getName())) {
+		if(!map.containsKey(type.getKeyName())) {
 			poiTypes.add(type);
-			map.put(type.getName(), type);
+			map.put(type.getKeyName(), type);
 		} else {
-			PoiType prev = map.get(type.getName());
+			PoiType prev = map.get(type.getKeyName());
 			if(prev.isReference()) {
 				poiTypes.remove(prev);
 				poiTypes.add(type);
-				map.put(type.getName(), type);
+				map.put(type.getKeyName(), type);
 			}
 		}
 	}
@@ -71,10 +71,6 @@ public class PoiFilter extends AbstractPoiType {
 		return poiTypes;
 	}
 	
-	public String getName() {
-		return keyName;
-	}
-
 	public void setTopVisible(boolean topVisible) {
 		this.topVisible = topVisible;
 	}

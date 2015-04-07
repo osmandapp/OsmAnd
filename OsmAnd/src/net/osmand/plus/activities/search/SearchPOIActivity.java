@@ -52,7 +52,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -61,21 +60,17 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,7 +99,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private net.osmand.Location location = null;
 	private Float heading = null;
 
-	private Handler uiHandler;
 	private OsmandSettings settings;
 
 	private float width = 24;
@@ -116,7 +110,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem showFilterItem;
 	private MenuItem showOnMapItem;
 	private MenuItem searchPOILevel;
-	private Button searchFooterButton;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -188,7 +181,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	public Toolbar getClearToolbar(boolean visible) {
-		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		final Toolbar tb = (Toolbar) findViewById(R.id.poiSplitbar);
 		tb.setTitle(null);
 		tb.getMenu().clear();
 		tb.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -229,7 +222,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		app = (OsmandApplication) getApplication();
 
-		uiHandler = new Handler();
 		searchFilter = (EditText) findViewById(R.id.edit);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 
@@ -245,9 +237,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 						searchPOILevel.setEnabled(true);
 						searchPOILevel.setTitle(R.string.search_button);
 					}
-					searchFooterButton.setEnabled(true);
-					searchFooterButton.setText(R.string.search_button);
-					// Cancel current search request here?
 				}
 			}
 
@@ -267,7 +256,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 		});
-		addFooterView();
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
 
@@ -278,25 +266,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		} else {
 			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		}
-	}
-
-	private void addFooterView() {
-		final FrameLayout ll = new FrameLayout(this);
-		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
-		lp.gravity = Gravity.CENTER_HORIZONTAL;
-		searchFooterButton = new Button(this);
-		searchFooterButton.setText(R.string.search_POI_level_btn);
-		searchFooterButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				searchMore();
-			}
-		});
-		searchFooterButton.setLayoutParams(lp);
-		ll.addView(searchFooterButton);
-
-		getListView().addFooterView(ll);
 	}
 
 	@Override
@@ -435,14 +404,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (searchPOILevel != null) {
 			searchPOILevel.setEnabled(enabled);
 			searchPOILevel.setTitle(title);
-		}
-		// if(ResourcesCompat.getResources_getBoolean(this, R.bool.abs__split_action_bar_is_narrow)) {
-		if (true) {
-			searchFooterButton.setVisibility(View.GONE);
-		} else {
-			searchFooterButton.setVisibility(View.VISIBLE);
-			searchFooterButton.setEnabled(enabled);
-			searchFooterButton.setText(title);
 		}
 	}
 
@@ -637,7 +598,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (searchPOILevel != null) {
 				searchPOILevel.setEnabled(false);
 			}
-			searchFooterButton.setEnabled(false);
 			existingObjects = new TLongHashSet();
 			updateExisting = new TLongHashSet();
 			if (request.type == SearchAmenityRequest.NEW_SEARCH_INIT) {
