@@ -727,4 +727,12 @@
 	<string name="piste_playground">놀이터</string>
 	<string name="piste_ice_skate">아이스 스케이트</string>
 
+	<string name="poi_allotments">부담금</string>
+	<string name="poi_forest">국립공원</string>
+
+	<string name="poi_canal">운하</string>
+	<string name="poi_bench">벤치</string>
+	<string name="poi_valley">계곡</string>
+	<string name="poi_water">수로</string>
+	<string name="poi_wood">나무</string>
 	</resources>

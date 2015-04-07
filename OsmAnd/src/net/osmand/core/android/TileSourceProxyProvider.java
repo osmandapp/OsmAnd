@@ -95,11 +95,6 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		return AlphaChannelPresence.Unknown;
 	}
 
-	@Override
-	public IMapDataProvider.SourceType getSourceType() {
-		return IMapDataProvider.SourceType.NetworkDirect;
-	}
-
 	private static class TileReadyCallback implements MapTileDownloader.IMapDownloaderCallback {
 		private final ITileSource tileSource;
 		private final int x;

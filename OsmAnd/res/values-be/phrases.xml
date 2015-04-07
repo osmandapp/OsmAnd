@@ -209,7 +209,7 @@
 	<string name="poi_recycling">Перапрацоўка адыходаў</string>
 	<string name="poi_landfill">Звалка</string>
 	<string name="poi_waste_disposal">Смецьцевы кантэйнер</string>
-	<string name="poi_waste_basket">Урна для смецьця</string>
+	<string name="poi_waste_basket">Сьметніца</string>
 
 	<string name="poi_pier">Пірс</string>
 	<string name="poi_surveillance">Камэра відэаназіраньня</string>
@@ -726,4 +726,7 @@
 	<string name="piste_sled">Санкавы схіл</string>
 	<string name="piste_sleigh">Нартавая дарога</string>
 	<string name="piste_hike">Сьцежка</string>
+	<string name="poi_canal">Канал</string>
+	<string name="poi_bench">Лаўка</string>
+	<string name="poi_water">Вада</string>
 	</resources>

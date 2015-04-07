@@ -737,7 +737,7 @@
 	<string name="piste_downhill">Styrtløb</string>
 	<string name="piste_nordic">Langrend</string>
 	<string name="piste_skitour">Skitur</string>
-	<string name="piste_hike">Vandretur</string>
+	<string name="piste_hike">Vandring</string>
 	<string name="piste_sleigh">Kane</string>
 	<string name="piste_sled">Slæde</string>
 	<string name="piste_snow_park">Snepark</string>
@@ -745,4 +745,12 @@
 	<string name="piste_ice_skate">Isskøjte</string>
 
 	<string name="poi_gasometer">Gasbeholder</string>
+	<string name="poi_allotments">Kolonihaver</string>
+	<string name="poi_forest">Dyrket skov</string>
+
+	<string name="poi_canal">Kanal</string>
+	<string name="poi_bench">Bænk</string>
+	<string name="poi_valley">Dal</string>
+	<string name="poi_water">Vand</string>
+	<string name="poi_wood">Træ</string>
 	</resources>

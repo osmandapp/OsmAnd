@@ -1970,7 +1970,7 @@
 	<string name="osmand_parking_hour">t</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">tilbage</string> <string name="parking_place_limited">Parkering er tidsbegrænset til</string>
 	<string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
-	<string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på skærmbilledet for ruteplanlægning</string>
+	<string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på skærmen for ruteplanlægning</string>
     <string name="delay_to_start_navigation">Start sving-for-sving navigation efter…</string>
     <string name="shared_string_go">Udfør</string>
 	<string name="shared_string_not_use">Ikke brugt</string>
