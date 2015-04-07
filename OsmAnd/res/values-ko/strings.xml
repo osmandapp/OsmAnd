@@ -1859,7 +1859,7 @@
     <string name="sort_by_name">이름으로 정렬</string>
     
     <string name="route_descr_destination">도착지</string>
-    <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 체크하세요.</string>
+    <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 확인하세요.</string>
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
