@@ -706,4 +706,12 @@
 	<string name="piste_sleigh"/>
 	<string name="piste_playground">Игровая площадка</string>
 	<string name="poi_smoking_area">Место для курения</string>
+	<string name="poi_canal">Канал</string>
+	<string name="poi_water">Вода</string>
+	<string name="poi_wood">Лес</string>
+	<string name="poi_valley">Долина</string>
+	<string name="poi_bench">Скамейка</string>
+	<string name="piste_ice_skate">Ледовый каток</string>
+
+	<string name="piste_snow_park">Снежный парк</string>
 	</resources>
