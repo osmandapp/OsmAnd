@@ -257,6 +257,13 @@
 	<string name="poi_waste_disposal">Waste disposal</string>
 	<string name="poi_waste_basket">Waste basket</string>
 
+	<string name="poi_quarry">Quarry</string>
+	<string name="poi_vineyard">Vineyard</string>
+	<string name="poi_orchard">Orchard</string>
+	<string name="poi_allotments">Allotments</string>
+	<string name="poi_forest">Human maintained forest</string>
+
+	<string name="poi_canal">Canal</string>
 	<string name="poi_pier">Pier</string>
 	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_observatory">Observatory</string>
@@ -271,9 +278,6 @@
 	<string name="poi_petroleum_well">Petroleum well</string>
 	<string name="poi_survey_point">Survey point</string>
 	<string name="poi_windmill">Windmill</string>
-	<string name="poi_quarry">Quarry</string>
-	<string name="poi_vineyard">Vineyard</string>
-	<string name="poi_orchard">Orchard</string>
 	<string name="poi_salt_pond">Salt pond</string>
 	<string name="poi_reservoir">Reservoir</string>
 	<string name="poi_cricket_nets">Cricket nets</string>
@@ -554,6 +558,7 @@
 	<string name="poi_marina">Marina</string>
 	<string name="poi_miniature_golf">Miniature golf</string>
 	<string name="poi_playground">Playground</string>
+	<string name="poi_bench">Bench</string>
 	<string name="poi_swimming_pool">Swimming pool</string>
 	<string name="poi_water_park">Water park</string>
 	<string name="poi_park">Park</string>
@@ -664,7 +669,10 @@
 	<string name="poi_bay">Bay</string>
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_reef">Reef</string>
+	<string name="poi_valley">Valley</string>
+	<string name="poi_water">Water</string>
 	<string name="poi_wetland">Wetland</string>
+	<string name="poi_wood">Wood</string>
 	<string name="poi_nature_reserve">Nature reserve</string>
 	<string name="poi_strait">Strait</string>
 	<string name="poi_island">Island</string>
