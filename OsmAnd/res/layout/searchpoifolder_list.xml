@@ -6,15 +6,13 @@
 	android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal"
     android:background="?attr/expandable_list_item_background"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding">
+    android:paddingLeft="@dimen/list_content_padding">
 
     <ImageView
         android:id="@+id/folder_icon"
         android:layout_width="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
         android:layout_height="@dimen/standard_icon_size"
-        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"/>
 
     <TextView
@@ -26,14 +24,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
 		android:maxLines="1"
-		tools:text="@string/lorem_ipsum"/>
-
+		tools:text="@string/lorem_ipsum"
+    	android:layout_marginRight="@dimen/list_content_padding"/>
+         
     <ImageView
-        android:id="@+id/folder_edit_icon"
+        android:id="@+id/options"
         android:layout_width="@dimen/list_item_height"
 		android:layout_gravity="center_vertical"
         android:layout_height="@dimen/list_item_height"
         android:scaleType="center"
+        android:visibility="gone"
         android:background="?attr/dashboard_button"
-        android:src="@drawable/ic_action_filter_dark" />
+        android:src="?attr/ic_action_overflow" />
 </LinearLayout>

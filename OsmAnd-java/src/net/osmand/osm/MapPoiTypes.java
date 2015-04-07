@@ -97,11 +97,6 @@ public class MapPoiTypes {
 		return otherCategory;
 	}
 	
-	public PoiCategory getPoiCategoryByName(String name) {
-		name = name.toLowerCase();
-		return getPoiCategoryByName(name, false);
-	}
-	
 	public PoiType getPoiTypeByKey(String name) {
 		for(PoiCategory pc : categories) {
 			PoiType pt = pc.getPoiTypeByKeyName(name);
@@ -137,9 +132,16 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
+	public PoiCategory getPoiCategoryByName(String name) {
+		return getPoiCategoryByName(name, false);
+	}
+	
 	public PoiCategory getPoiCategoryByName(String name, boolean create) {
-		if(name.equals("entertainment") && !create) {
-			name = "leisure";
+		if(name.equals("leisure") && !create) {
+			name = "entertainment";
+		}
+		if(name.equals("historic") && !create) {
+			name = "tourism";
 		}
 		for(PoiCategory p : categories ) {
 			if(p.getName().equals(name) || p.getKey().equalsIgnoreCase(name)) {

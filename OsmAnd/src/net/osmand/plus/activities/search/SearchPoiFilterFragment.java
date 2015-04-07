@@ -3,21 +3,8 @@
  */
 package net.osmand.plus.activities.search;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -32,9 +19,26 @@ import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.poi.SearchByNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
+import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 
@@ -44,26 +48,47 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	public static final int REQUEST_POI_EDIT = 55;
 
+	private EditText searchEditText;
+	private SearchPoiByNameTask currentTask = null;
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.searchpoi, container, false);
+        setupSearchEditText((EditText) v.findViewById(R.id.edit));
+        setupOptions(v.findViewById(R.id.options));
+        v.findViewById(R.id.bottomControls).setVisibility(View.GONE);
+        return v;
+    }
+	
+	private void setupOptions(View options) {
+		options.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showOptionsMenu(v);
+			}
+		});
+	}
 
+	private void setupSearchEditText(EditText e) {
+		searchEditText = e;
+		searchEditText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
+	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// ListActivity has a ListView, which you can get with:
-		ListView lv = getListView();
-
-		// Then you can create a listener like so:
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				PoiLegacyFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				if(!poi.isStandardFilter() || poi.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
-					showEditActivity(poi);
-					return true;
-				}
-				return false;
-			}
-		});
 		setHasOptionsMenu(true);
 		refreshPoiListAdapter();
 	}
@@ -113,7 +138,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	}
 
 	@Override
-	public void onListItemClick(ListView parent, View v, int position, long id) {
+	public void onListItemClick(ListView listView, View v, int position, long id) {
 		final PoiLegacyFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
 		if (filter.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
 			filter.clearFilter();
@@ -127,15 +152,34 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				return;
 			}
 		}
+		showFilterActivity(filter);
+	}
+
+	private void showFilterActivity(final PoiLegacyFilter filter) {
 		final Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		updateIntentToLaunch(newIntent);
 		startActivityForResult(newIntent, 0);
 	}
 
+	class SearchPoiByNameTask extends AsyncTask<Void, PoiLegacyFilter, List<PoiLegacyFilter>> {
+
+		@Override
+		protected List<PoiLegacyFilter> doInBackground(Void... params) {
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(List<PoiLegacyFilter> result) {
+			super.onPostExecute(result);
+		}
+		
+	}
 
 
 	class AmenityAdapter extends ArrayAdapter<PoiLegacyFilter> {
+		
+
 		AmenityAdapter(List<PoiLegacyFilter> list) {
 			super(getActivity(), R.layout.searchpoifolder_list, list);
 		}
@@ -164,23 +208,29 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 					icon.setImageResource(R.drawable.mx_user_defined);
 				}
 			}
-			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
-			editIcon.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
-			if (model.isStandardFilter()) {
-				editIcon.setVisibility(View.GONE);
-			} else {
-				editIcon.setVisibility(View.VISIBLE);
-			}
-			editIcon.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					showEditActivity(model);
-				}
-			});
-			
 			return (row);
 		}
+	}
+	
+	private void showOptionsMenu(View v) {
+		// Show menu with search all, name finder, name finder poi
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+
+		MenuItem item = optionsMenu.getMenu().add(R.string.poi_filter_custom_filter)
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				PoiLegacyFilter filter = getApp().getPoiFilters().getFilterById(PoiLegacyFilter.CUSTOM_FILTER_ID);
+				if(filter != null) {
+					filter.clearFilter();
+					showEditActivity(filter);
+				}
+				return true;
+			}
+		});
+		optionsMenu.show();
 
 	}
 

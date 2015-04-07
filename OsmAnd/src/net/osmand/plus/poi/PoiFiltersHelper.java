@@ -318,7 +318,7 @@ public class PoiFiltersHelper {
 	    					map.put(filterId, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
 	    				}
 	    				Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
-	    				PoiCategory a = mapPoiTypes.getPoiCategoryByName(query.getString(1));
+	    				PoiCategory a = mapPoiTypes.getPoiCategoryByName(query.getString(1).toLowerCase(), false);
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);

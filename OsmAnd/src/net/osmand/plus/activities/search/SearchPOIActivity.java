@@ -25,10 +25,10 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.R.color;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.R.color;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
@@ -121,7 +121,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu = getClearToolbar(true).getMenu();
-		boolean light = getMyApplication().getSettings().isLightActionBar();
 		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
 		MenuItemCompat.setShowAsAction(searchPOILevel, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -231,7 +230,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		app = (OsmandApplication) getApplication();
 
 		uiHandler = new Handler();
-		searchFilter = (EditText) findViewById(R.id.SearchFilter);
+		searchFilter = (EditText) findViewById(R.id.edit);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 
 		settings = ((OsmandApplication) getApplication()).getSettings();
@@ -352,7 +351,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().registerOrUnregisterCompassListener(true);
 		}
-		searchFilter.requestFocus();
+		if(searchFilterLayout.getVisibility() == View.VISIBLE) {
+			searchFilter.requestFocus();
+		}
 	}
 
 	private void updateShowFilterItem() {
