@@ -2168,4 +2168,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_do_not_use">Non usare</string>
 	<string name="shared_string_address">Indirizzi</string>
 	<string name="shared_string_show_description">Mostra la descrizione</string>
+	<string name="shared_string_places">Luoghi</string>
+	<string name="shared_string_search">Cerca</string>
 	</resources>
