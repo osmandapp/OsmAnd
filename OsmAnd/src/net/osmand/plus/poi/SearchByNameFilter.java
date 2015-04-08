@@ -16,46 +16,33 @@ public class SearchByNameFilter extends PoiLegacyFilter {
 
 	public static final String FILTER_ID = PoiLegacyFilter.BY_NAME_FILTER_ID; //$NON-NLS-1$
 	
-	List<Amenity> searchedAmenities = new ArrayList<Amenity>();
-	
-	private String query = ""; //$NON-NLS-1$
-	
 	public SearchByNameFilter(OsmandApplication application) {
-		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application);
+		super(application);
+		this.name = application.getString(R.string.poi_filter_by_name);
+		this.filterId = FILTER_ID;
 		this.distanceToSearchValues = new double[] {100, 1000, 5000};
-		this.isStandardFilter = true;
 	}
 	
 	@Override
-	public List<Amenity> searchAgain(double lat, double lon) {
-		MapUtils.sortListOfMapObject(searchedAmenities, lat, lon);
-		return searchedAmenities;
-	}
-	
-	public String getQuery() {
-		return query;
-	}
-	
-	public void setQuery(String query) {
-		this.query = query;
+	public boolean isAutomaticallyIncreaseSearch() {
+		return false;
 	}
 	
 	@Override
-	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
+	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
-		searchedAmenities.clear();
+		currentSearchResult = new ArrayList<Amenity>();
 		final int limit = distanceInd == 0 ? 500 : -1;
-		
-		List<Amenity> result = app.getResourceManager().searchAmenitiesByName(query, 
+		List<Amenity> result = app.getResourceManager().searchAmenitiesByName(getFilterByName(), 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
 					boolean elimit = false;
 					@Override
 					public boolean publish(Amenity object) {
-						if(limit != -1 && searchedAmenities.size() > limit) {
+						if (limit != -1 && currentSearchResult.size() > limit) {
 							elimit = true;
 						}
-						if(matcher.publish(object)) {
-							searchedAmenities.add(object);
+						if (matcher.publish(object)) {
+							currentSearchResult.add(object);
 							return true;
 						}
 						return false;
@@ -67,15 +54,8 @@ public class SearchByNameFilter extends PoiLegacyFilter {
 					}
 				});
 		MapUtils.sortListOfMapObject(result, lat, lon);
-		searchedAmenities = result;
-		return searchedAmenities;
+		currentSearchResult = result;
+		return currentSearchResult;
 	}
-	
-	
-	public List<Amenity> getSearchedAmenities() {
-		return searchedAmenities;
-	}
-
-	
 
 }

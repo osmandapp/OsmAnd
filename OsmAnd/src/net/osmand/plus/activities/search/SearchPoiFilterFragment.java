@@ -15,13 +15,14 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.plus.poi.SearchByNameFilter;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -107,6 +108,12 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		setListAdapter(poiFitlersAdapter);
 		setHasOptionsMenu(true);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		poiFitlersAdapter.setResult(getFilters(searchEditText == null ? "" : searchEditText.getText().toString()));
+	}
 
 	public List<Object> getFilters(String s) {
 		List<Object> filters = new ArrayList<Object>() ;
@@ -116,7 +123,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		} else {
 			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 			for(PoiLegacyFilter pf : poiFilters.getTopDefinedPoiFilters()) {
-				if(!pf.isStandardFilter()) {
+				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
 				}
 			}
@@ -124,6 +131,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 					getApp().getPoiTypes().getAllTypesTranslatedNames(new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 			for(AbstractPoiType p : res.values()) {
 				filters.add(p);
+			}
+			filters.add(poiFilters.getSearchByNamePOIFilter());
+			if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+				filters.add(poiFilters.getNominatimPOIFilter());
+				filters.add(poiFilters.getNominatimAddressFilter());
 			}
 		}
 		return filters;
@@ -156,16 +168,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 		updateIntentToLaunch(newIntent);
-		startActivityForResult(newIntent, REQUEST_POI_EDIT);
+		startActivity(newIntent);
 	}
 	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == REQUEST_POI_EDIT) {
-			poiFitlersAdapter.setResult(getFilters(searchEditText == null ? "" : searchEditText.getText().toString()));
-		}
-	}
-
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
 		final Object item = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
@@ -175,9 +180,21 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			return;
 		}
 		if (item instanceof PoiLegacyFilter) {
-			showFilterActivity(((PoiLegacyFilter) item).getFilterId());
+			PoiLegacyFilter model = ((PoiLegacyFilter) item);
+			if (PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
+					|| model instanceof NominatimPoiFilter) {
+				model.setFilterByName(searchEditText.getText().toString());
+			} else {
+				model.setFilterByName(model.getSavedFilterByName());
+			}
+			showFilterActivity(model.getFilterId());
 		} else {
-			showFilterActivity(PoiLegacyFilter.STD_PREFIX +  ((AbstractPoiType) item).getKeyName());
+			PoiLegacyFilter custom = getApp().getPoiFilters().getFilterById(PoiLegacyFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
+			if(custom != null) {
+				custom.setFilterByName(null);
+				custom.updateTypesToAccept(((AbstractPoiType) item));
+				showFilterActivity(custom.getFilterId());
+			}
 		}
 	}
 
@@ -237,6 +254,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				final PoiLegacyFilter model = (PoiLegacyFilter) item;
 				if (RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
+				} else if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
+						model instanceof NominatimPoiFilter){
+					icon.setImageResource(R.drawable.mx_name_finder);
 				} else {
 					icon.setImageResource(R.drawable.mx_user_defined);
 				}

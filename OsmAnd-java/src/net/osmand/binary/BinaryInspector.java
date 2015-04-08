@@ -735,8 +735,12 @@ public class BinaryInspector {
 
 				@Override
 				public int compare(MapStatKey o1, MapStatKey o2) {
-					return -Long.compare(o1.statObjectSize, o2.statObjectSize);
+					return compare(o1.statObjectSize, o2.statObjectSize);
 				}
+				
+				public int compare(long x, long y) {
+			        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+			    }
 			});
 			
 			for(MapStatKey s : stats) {
@@ -1007,6 +1011,11 @@ public class BinaryInspector {
 					@Override
 					public boolean accept(PoiCategory type, String subcategory) {
 						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
 					}
 					
 				},

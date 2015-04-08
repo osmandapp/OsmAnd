@@ -1539,6 +1539,7 @@ public class BinaryMapIndexReader {
 		
 		public boolean accept(PoiCategory type, String subcategory);
 		
+		public boolean isEmpty();
 	}
 	
 	public static class MapObjectStat {
@@ -1992,6 +1993,11 @@ public class BinaryMapIndexReader {
 				return false;
 			}
 
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+
 		}, null);
 		req.zoom = -1;
 		List<Amenity> results = reader.searchPoi(req);
@@ -2102,6 +2108,11 @@ public class BinaryMapIndexReader {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				return true;
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
 			}
 
 		}, null);

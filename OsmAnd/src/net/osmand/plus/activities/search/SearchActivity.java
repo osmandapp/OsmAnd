@@ -162,7 +162,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		if(tab == POI_TAB_INDEX) {
 			return SearchPoiFilterFragment.class;
 		} else if(tab == ADDRESS_TAB_INDEX) {
-			return searchOnLine ? SearchAddressOnlineFragment.class : SearchAddressFragment.class;
+//			return searchOnLine ? SearchAddressOnlineFragment.class : SearchAddressFragment.class;
+			return SearchAddressFragment.class;
 		} else if(tab == LOCATION_TAB_INDEX) {
 			return NavigatePointFragment.class;
 		} else if(tab == HISTORY_TAB_INDEX) {
@@ -358,15 +359,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public void setAddressSpecContent() {
-//		mTabsAdapter.mViewPager.setCurrentItem(0);
-//		mTabsAdapter.mTabHost.setCurrentTab(0);
-//		if (searchOnLine) {
-//			mTabsAdapter.mTabs.get(1).clss = SearchAddressOnlineFragment.class;
-//		} else {
-//			mTabsAdapter.mTabs.get(1).clss = SearchAddressFragment.class;
-//		}
-//		mTabsAdapter.notifyDataSetChanged();
-//		mTabsAdapter.mViewPager.invalidate();
 		Intent intent = getIntent();
 		finish();
 		startActivity(intent);

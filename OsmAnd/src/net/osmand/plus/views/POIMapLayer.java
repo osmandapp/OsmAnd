@@ -12,7 +12,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -84,19 +83,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (filter == null) {
 					return new ArrayList<Amenity>();
 				}
-				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
+				return filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
-							@Override
-							public boolean publish(Amenity object) {
-								return true;
-							}
+					@Override
+					public boolean publish(Amenity object) {
+						return true;
+					}
 
-							@Override
-							public boolean isCancelled() {
-								return isInterrupted();
-							}
-						});
+					@Override
+					public boolean isCancelled() {
+						return isInterrupted();
+					}
+				});
 			}
 		};
 	}
@@ -198,7 +197,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			data.queryNewData(tileBox);
 			objects = data.getResults();
 			if (objects != null) {
-				MapPoiTypes poiTypes = view.getApplication().getPoiTypes();
 				int r = getRadiusPoi(tileBox);
 				for (Amenity o : objects) {
 					int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
@@ -214,8 +212,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							id = st.getKeyName();
 						} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 							id = st.getOsmTag() + "_" + st.getOsmValue();
-						} else if (RenderingIcons.containsIcon(st.getOsmValue())) {
-							id = st.getOsmValue();
 						}
 					}
 					if (id != null) {

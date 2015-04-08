@@ -1,13 +1,18 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
-import android.graphics.*;
-import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Created by Denis
@@ -29,6 +34,16 @@ public class DirectionDrawable extends Drawable {
 		this.resourceId = resourceId;
 	}
 	
+	public DirectionDrawable(Context ctx, float width, float height) {
+		this.ctx = ctx;
+		this.width = width;
+		this.height = height;
+		paintRouteDirection = new Paint();
+		paintRouteDirection.setStyle(Paint.Style.FILL_AND_STROKE);
+		paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_unknown));
+		paintRouteDirection.setAntiAlias(true);
+	}
+	
 	public void setImage(int resourceId, int clrId) {
 		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
@@ -43,16 +58,7 @@ public class DirectionDrawable extends Drawable {
 		onBoundsChange(getBounds());
 	}
 	
-	public DirectionDrawable(Context ctx, float width, float height) {
-		this.ctx = ctx;
-		this.width = width;
-		this.height = height;
-		paintRouteDirection = new Paint();
-		paintRouteDirection.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_unknown));
-		paintRouteDirection.setAntiAlias(true);
-	}
-
+	
 	public void setColorId(int clrId) {
 		// R.color.color_ok, R.color.color_unknown, R.color.color_warning
 		if(arrowImage != null) {
