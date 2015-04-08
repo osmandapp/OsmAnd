@@ -227,10 +227,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		((TextView) v.findViewById(R.id.points_count)).setText(sth.getPoints() + "");
 		((TextView) v.findViewById(R.id.distance))
 				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
-		v.findViewById(R.id.points_count).setVisibility(View.VISIBLE);
 		v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
-		v.findViewById(R.id.distance).setVisibility(View.VISIBLE);
-		v.findViewById(R.id.distance_icon).setVisibility(View.VISIBLE);
+		ImageView distance = (ImageView) v.findViewById(R.id.distance_icon);
+		distance.setVisibility(View.VISIBLE);
+		distance.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_distance));
+		ImageView pointsCount = (ImageView) v.findViewById(R.id.points_icon);
+		pointsCount.setVisibility(View.VISIBLE);
+		pointsCount.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_point));
+
 	}
 
 	@Override
