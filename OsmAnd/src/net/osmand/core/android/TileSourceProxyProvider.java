@@ -13,6 +13,8 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
+import net.osmand.core.jni.IMapTiledDataProvider;
+import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
@@ -45,18 +47,23 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_QByteArray obtainImage(TileId tileId, ZoomLevel zoom) {
+	public boolean supportsNaturalObtainData() {
+		return true;
+	}
+
+	@Override
+	public SWIGTYPE_p_QByteArray obtainImage(IMapTiledDataProvider.Request request) {
 		byte[] image;
 		try {
 			ResourceManager rm = app.getResourceManager();
-			String tileFilename = rm.calculateTileId(tileSource, tileId.getX(), tileId.getY(),
-					zoom.swigValue());
+			String tileFilename = rm.calculateTileId(tileSource, request.getTileId().getX(), request.getTileId().getY(),
+					request.getZoom().swigValue());
 
 			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource,
-					tileId.getX(), tileId.getY(), zoom.swigValue());
+					request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue());
 			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-			while (rm.getTileImageForMapAsync(tileFilename, tileSource, tileId.getX(), tileId.getY(),
-					zoom.swigValue(), true) == null) {
+			while (rm.getTileImageForMapAsync(tileFilename, tileSource, request.getTileId().getX(), request.getTileId().getY(),
+					request.getZoom().swigValue(), true) == null) {
 				synchronized (tileReadyCallback.getSync()) {
 					if (tileReadyCallback.isReady()) {
 						break;
@@ -69,7 +76,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			}
 			rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
 
-			image = tileSource.getBytes(tileId.getX(), tileId.getY(), zoom.swigValue(),
+			image = tileSource.getBytes(request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue(),
 					app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
 		} catch(IOException e) {
 			return SwigUtilities.emptyQByteArray();
@@ -78,6 +85,17 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			return SwigUtilities.emptyQByteArray();
 
 		return SwigUtilities.createQByteArrayAsCopyOf(image);
+	}
+
+	@Override
+	public boolean supportsNaturalObtainDataAsync() {
+		return false;
+	}
+
+	@Override
+	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImage asyncImage) {
+		//TODO: Launch the request via manager and after image is ready (or error is ready)
+		// call asyncImage.submit()
 	}
 	
 	@Override
