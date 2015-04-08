@@ -1987,9 +1987,10 @@
 	<string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
 	<string name="agps_info">A-GPS information</string>
 	<string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
-    <string name="shared_string_message">Besked</string>
+    <string name="shared_string_message">Meddelelse</string>
 	<string name="shared_string_do_not_use">Brug ikke</string>
 	<string name="shared_string_address">Adresse</string>
 	<string name="shared_string_show_description">Vis beskrivelse</string>
 	<string name="shared_string_search">Søg</string>
+	<string name="shared_string_places">Steder</string>
 	</resources>
