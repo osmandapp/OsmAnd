@@ -2,14 +2,22 @@ package net.osmand.plus.download;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -17,7 +25,6 @@ import net.osmand.plus.R;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -265,6 +272,7 @@ public class UpdatesIndexFragment extends ListFragment {
 				description.setText("");
 				ch.setVisibility(View.INVISIBLE);
 				setSelectAllVisibility(false);
+				v.setOnClickListener(null);
 				return v;
 			} else {
 				ch.setVisibility(View.VISIBLE);
