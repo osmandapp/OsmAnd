@@ -105,7 +105,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				return searchMore();
+				return search();
 			}
 
 		});
@@ -159,7 +159,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		return tb;
 	}
 
-	private boolean searchMore() {
+	private boolean search() {
 		String query = searchFilter.getText().toString().trim();
 		if (query.length() < 2 && isNameSearch()) {
 			AccessibleToast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG)
@@ -171,6 +171,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			filter.setFilterByName(query);
 			runNewSearchQuery(location, NEW_SEARCH_INIT);
 		} else {
+			filter.setFilterByName(query);
 			runNewSearchQuery(location, SEARCH_FURTHER);
 		}
 		return true;
@@ -244,6 +245,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		updateButtonState();
 		if (filter != null) {
+			String text = filter.getFilterByName() != null ? filter.getFilterByName() : "";
+			searchFilter.setText(text);
+			searchFilterLayout.setVisibility(text.length() > 0 || isNameSearch() ? View.VISIBLE : View.GONE);
+		}
+		if (filter != null) {
 			if (searchNearBy) {
 				app.getLocationProvider().addLocationListener(this);
 				location = app.getLocationProvider().getLastKnownLocation();
@@ -251,15 +257,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 			updateLocation(location);
 		}
-		if (isNameSearch()) {
-			searchFilterLayout.setVisibility(View.VISIBLE);
-		}
-		if(searchFilterLayout.getVisibility() == View.VISIBLE) {
-			searchFilter.requestFocus();
-		}
-		if(filter != null) {
-			searchFilter.setText(filter.getFilterByName() != null ? filter.getFilterByName() : "");
-		}
+		
 		// Freeze the direction arrows (reference is constant north) when Accessibility mode = ON, so screen can be read
 		// aloud without continuous updates
 		if (!app.accessibilityEnabled()) {
@@ -272,10 +270,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void changeFilter(CharSequence s) {
 		// if (!isNameSearch() ) {
 		amenityAdapter.getFilter().filter(s);
-		if (filter != null && !isNameSearch()) {
+		String cfilter = filter.getFilterByName() == null  ? "" : 
+			filter.getFilterByName().toLowerCase();
+		if(!isNameSearch() && !s.toString().toLowerCase().startsWith(cfilter)) {
 			filter.setFilterByName(s.toString());
+			runNewSearchQuery(location, SEARCH_AGAIN);
 		}
-		
 		updateButtonState();
 	}
 
@@ -298,8 +298,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			boolean enabled = taskAlreadyFinished && location != null && 
 					filter != null && filter.isSearchFurtherAvailable();
 			if(isNameSearch() && !Algorithms.objectEquals(searchFilter.getText().toString(), filter.getFilterByName())) {
-				searchPOILevel.setEnabled(true);
-				searchPOILevel.setTitle(R.string.search_button);
+				enabled = true;
+				title = R.string.search_button;
 			}
 			searchPOILevel.setEnabled(enabled);
 			searchPOILevel.setTitle(title);
@@ -470,7 +470,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		@Override
 		protected void onPreExecute() {
-			// getSherlock().setProgressBarIndeterminateVisibility(true);
+			setSupportProgressBarIndeterminateVisibility(true);
 			if (searchPOILevel != null) {
 				searchPOILevel.setEnabled(false);
 			}
@@ -492,7 +492,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		@Override
 		protected void onPostExecute(List<Amenity> result) {
-			// getSherlock().setProgressBarIndeterminateVisibility(false);
+			setSupportProgressBarIndeterminateVisibility(false);
 			currentSearchTask = null;
 			updateButtonState();
 			if (isNameSearch()) {

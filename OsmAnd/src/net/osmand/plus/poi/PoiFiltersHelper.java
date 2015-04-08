@@ -130,6 +130,8 @@ public class PoiFiltersHelper {
 	
 	public void reloadAllPoiFilters() {
 		cacheTopStandardFilters = null;
+		showAllPOIFilter = null;
+		getShowAllPOIFilter();
 		getTopDefinedPoiFilters();
 	}
 	

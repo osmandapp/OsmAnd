@@ -312,6 +312,11 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		}
 	}
 	
+	public void updateTypesToAccept(AbstractPoiType pt) {
+		acceptedTypes.clear();
+		pt.putTypes(acceptedTypes);
+	}
+	
 	
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
 		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);

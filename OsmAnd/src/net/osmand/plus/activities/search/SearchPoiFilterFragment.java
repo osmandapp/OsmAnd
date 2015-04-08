@@ -190,7 +190,10 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			}
 			showFilterActivity(model.getFilterId());
 		} else {
-			showFilterActivity(PoiLegacyFilter.STD_PREFIX +  ((AbstractPoiType) item).getKeyName());
+			PoiLegacyFilter custom = getApp().getPoiFilters().getCustomPOIFilter();
+			custom.setFilterByName(null);
+			custom.updateTypesToAccept(((AbstractPoiType) item));
+			showFilterActivity(custom.getFilterId());
 		}
 	}
 
