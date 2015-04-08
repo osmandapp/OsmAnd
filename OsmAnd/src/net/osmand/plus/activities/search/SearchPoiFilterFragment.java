@@ -108,6 +108,12 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		setListAdapter(poiFitlersAdapter);
 		setHasOptionsMenu(true);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		poiFitlersAdapter.setResult(getFilters(searchEditText == null ? "" : searchEditText.getText().toString()));
+	}
 
 	public List<Object> getFilters(String s) {
 		List<Object> filters = new ArrayList<Object>() ;
@@ -162,16 +168,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 		updateIntentToLaunch(newIntent);
-		startActivityForResult(newIntent, REQUEST_POI_EDIT);
+		startActivity(newIntent);
 	}
 	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == REQUEST_POI_EDIT) {
-			poiFitlersAdapter.setResult(getFilters(searchEditText == null ? "" : searchEditText.getText().toString()));
-		}
-	}
-
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
 		final Object item = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
@@ -185,8 +184,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			if (PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
 					|| model instanceof NominatimPoiFilter) {
 				model.setFilterByName(searchEditText.getText().toString());
-			} else if(model.isStandardFilter()) {
-				model.setFilterByName(null);
+			} else {
+				model.setFilterByName(model.getSavedFilterByName());
 			}
 			showFilterActivity(model.getFilterId());
 		} else {

@@ -281,8 +281,8 @@ public class MapActivityLayers {
 				} else {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					pf = poiFilters.getFilterById(filterId);
-					if (pf != null && pf.isStandardFilter()) {
-						pf.setFilterByName(null);
+					if (pf != null) {
+						pf.setFilterByName(pf.getSavedFilterByName());
 					}
 					poiMapLayer.setFilter(pf);
 					mapView.refreshMap();

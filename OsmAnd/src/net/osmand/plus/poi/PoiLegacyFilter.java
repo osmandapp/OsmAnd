@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -270,6 +271,43 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public String getGeneratedName(int chars) {
+		if (areAllTypesAccepted() || acceptedTypes.isEmpty()) {
+			return getName();
+		}
+		StringBuilder res = new StringBuilder();
+		for (PoiCategory p : acceptedTypes.keySet()) {
+			LinkedHashSet<String> set = acceptedTypes.get(p);
+			if (set == null) {
+				if (res.length() > 0) {
+					res.append(", ");
+				}
+				res.append(p.getTranslation());
+			}
+			if (res.length() > chars) {
+				return res.toString();
+			}
+		}
+		for (PoiCategory p : acceptedTypes.keySet()) {
+			LinkedHashSet<String> set = acceptedTypes.get(p);
+			if (set != null) {
+				for (String st : set) {
+					if (res.length() > 0) {
+						res.append(", ");
+					}
+					PoiType pt = poiTypes.getPoiTypeByKey(st);
+					if (pt != null) {
+						res.append(pt.getTranslation());
+						if (res.length() > chars) {
+							return res.toString();
+						}
+					}
+				}
+			}
+		}
+		return res.toString();
 	}
 	
 	/**

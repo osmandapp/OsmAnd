@@ -10,11 +10,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -172,7 +174,9 @@ public class PoiFiltersHelper {
 			sortListOfFilters(cacheTopStandardFilters);
 		}
 		List<PoiLegacyFilter> result = new ArrayList<PoiLegacyFilter>();
-		result.add(getShowAllPOIFilter());
+		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
+			result.add(getShowAllPOIFilter());
+		}
 		result.addAll(cacheTopStandardFilters);
 		return result;
 	}

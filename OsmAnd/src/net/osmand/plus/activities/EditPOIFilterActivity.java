@@ -4,6 +4,25 @@
 package net.osmand.plus.activities;
 
 
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -19,35 +38,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPOIActivity;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.util.Algorithms;
-
-import java.text.Collator;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * 
@@ -59,8 +52,6 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	private static final int FILTER = 2;
-	private static final int DELETE_FILTER = 3;
-	private static final int SAVE_FILTER = 4;
 	
 
 	@Override
@@ -90,33 +81,20 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		if (item.getItemId() == FILTER) {
 			filterPOI();
 			return true;
-		} else if (item.getItemId() == DELETE_FILTER) {
-			removePoiFilter();
-			return true;
-		} else if (item.getItemId() == SAVE_FILTER) {
-			savePoiFilter();
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if(filter == null) {
 			return super.onCreateOptionsMenu(menu);
 		}
-		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item,
-				R.drawable.ic_action_gsave_dark ,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
-				0, 
+				R.drawable.ic_action_done, 
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
 				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		if(!filter.isStandardFilter()){
-			createMenuItem(menu, DELETE_FILTER, R.string.shared_string_delete, 
-					R.drawable.ic_action_delete_dark,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-		}
 		return super.onCreateOptionsMenu(menu);
 	}	
 	
@@ -156,55 +134,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 	}
 	
-	public void savePoiFilter() {
-		Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.edit_filter_save_as_menu_item);
-		final EditText editText = new EditText(this);
-		LinearLayout ll = new LinearLayout(this);
-		ll.setPadding(5, 3, 5, 0);
-		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		builder.setView(ll);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), 
-						null, 
-						filter.getAcceptedTypes(), (OsmandApplication) getApplication());
-				if (helper.createPoiFilter(nFilter)) {
-					AccessibleToast.makeText(
-							EditPOIFilterActivity.this,
-							MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
-									editText.getText().toString()), Toast.LENGTH_SHORT).show();
-				}
-				EditPOIFilterActivity.this.finish();
-			}
-		});
-		builder.create().show();
-		
-	}
 
 	
 
-	private void removePoiFilter() {
-		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(R.string.edit_filter_delete_dialog_title);
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (helper.removePoiFilter(filter)) {
-					AccessibleToast.makeText(
-							EditPOIFilterActivity.this,
-							MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
-									filter.getName()), Toast.LENGTH_SHORT).show();
-					EditPOIFilterActivity.this.finish();
-				}
-
-			}
-		});
-		builder.create().show();
-	}
 	
 	private void showDialog(final PoiCategory poiCategory) {
 		ListView lv = EditPOIFilterActivity.this.getListView();

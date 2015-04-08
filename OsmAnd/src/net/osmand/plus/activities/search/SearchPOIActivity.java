@@ -5,6 +5,7 @@ package net.osmand.plus.activities.search;
 
 import gnu.trove.set.hash.TLongHashSet;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -40,6 +41,7 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -60,11 +62,14 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +86,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SEARCH_MORE = 0;
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
+	
+	private static final int EDIT_FILTER = 4;
+	private static final int DELETE_FILTER = 5;
+	private static final int SAVE_FILTER = 6;
+	
 
 	private PoiLegacyFilter filter;
 	private AmenityAdapter amenityAdapter;
@@ -98,8 +108,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem searchPOILevel;
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu = getClearToolbar(true).getMenu();
+	public boolean onCreateOptionsMenu(Menu omenu) {
+		Menu menu = getClearToolbar(true).getMenu();
 		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
 		MenuItemCompat.setShowAsAction(searchPOILevel, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -119,6 +129,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				if (searchFilterLayout.getVisibility() == View.GONE) {
 					searchFilterLayout.setVisibility(View.VISIBLE);
 					searchFilter.requestFocus();
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.showSoftInput(searchFilter, InputMethodManager.SHOW_IMPLICIT);
 				} else {
 					if(filter != null) {
 						searchFilter.setText(filter.getSavedFilterByName() == null ? "" :
@@ -148,6 +160,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 			}
 		});
+		if (filter != null && !isNameSearch()) {
+			createMenuItem(omenu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, R.drawable.ic_action_gsave_dark,
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+			if (!filter.isStandardFilter()) {
+				createMenuItem(omenu, DELETE_FILTER, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+			}
+		}
 		updateButtonState();
 		return true;
 	}
@@ -272,7 +292,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void changeFilter(CharSequence s) {
 		// if (!isNameSearch() ) {
 		amenityAdapter.getFilter().filter(s);
-		String cfilter = filter.getFilterByName() == null  ? "" : 
+		String cfilter = filter == null || filter.getFilterByName() == null  ? "" : 
 			filter.getFilterByName().toLowerCase();
 		if(!isNameSearch() && !s.toString().toLowerCase().startsWith(cfilter)) {
 			filter.setFilterByName(s.toString());
@@ -286,13 +306,17 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			showFilterItem.setVisible(filter != null && !isNameSearch());
 		}
 		if (filter != null) {
-			String name = filter.getName();
+			int maxLength = 30;
+			String name = filter.getGeneratedName(maxLength);
+			if(name.length() >= maxLength) {
+				name = name.substring(0, maxLength) + getString(R.string.shared_string_ellipsis);
+			}
 			if(filter instanceof NominatimPoiFilter && !((NominatimPoiFilter) filter).isPlacesQuery()) {
 				// nothing to add
 			} else {
 				name += " " + filter.getSearchArea();
 			}
-			getSupportActionBar().setSubtitle(name);
+			getSupportActionBar().setTitle(name);
 		}
 		if (searchPOILevel != null) {
 			int title = location == null ? R.string.search_poi_location : R.string.search_POI_level_btn;
@@ -732,5 +756,69 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		b.show();
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == DELETE_FILTER) {
+			removePoiFilter();
+			return true;
+		} else if (item.getItemId() == SAVE_FILTER) {
+			savePoiFilter();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
+	
+	private void removePoiFilter() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.edit_filter_delete_dialog_title);
+		builder.setNegativeButton(R.string.shared_string_no, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				if (app.getPoiFilters().removePoiFilter(filter)) {
+					AccessibleToast.makeText(
+							SearchPOIActivity.this,
+							MessageFormat.format(SearchPOIActivity.this.getText(R.string.edit_filter_delete_message).toString(),
+									filter.getName()), Toast.LENGTH_SHORT).show();
+					SearchPOIActivity.this.finish();
+				}
+
+			}
+		});
+		builder.create().show();
+	}
+	
+	public void savePoiFilter() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.edit_filter_save_as_menu_item);
+		final EditText editText = new EditText(this);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setPadding(5, 3, 5, 0);
+		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		builder.setView(ll);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), 
+						null, 
+						filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+				if(searchFilter.getText().toString().length() > 0) {
+					nFilter.setFilterByName(searchFilter.getText().toString());
+				}
+				if (app.getPoiFilters().createPoiFilter(nFilter)) {
+					AccessibleToast.makeText(
+							SearchPOIActivity.this,
+							MessageFormat.format(SearchPOIActivity.this.getText(R.string.edit_filter_create_message).toString(),
+									editText.getText().toString()), Toast.LENGTH_SHORT).show();
+				}
+				SearchPOIActivity.this.finish();
+			}
+		});
+		builder.create().show();
+		
+	}
 }
