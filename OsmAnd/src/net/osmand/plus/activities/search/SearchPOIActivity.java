@@ -118,6 +118,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				if (searchFilterLayout.getVisibility() == View.GONE) {
 					searchFilterLayout.setVisibility(View.VISIBLE);
+					searchFilter.requestFocus();
 				} else {
 					if(filter != null) {
 						searchFilter.setText(filter.getSavedFilterByName() == null ? "" :
@@ -187,6 +188,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		setSupportProgressBarIndeterminateVisibility(false);
 
 		app = (OsmandApplication) getApplication();
+		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
+		setListAdapter(amenityAdapter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		searchFilter = (EditText) findViewById(R.id.edit);
 		searchFilter.addTextChangedListener(new TextWatcher() {
@@ -211,8 +214,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 		});
-		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
-		setListAdapter(amenityAdapter);
+		
 	}
 	
 	
