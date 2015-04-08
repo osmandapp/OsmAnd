@@ -306,7 +306,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			showFilterItem.setVisible(filter != null && !isNameSearch());
 		}
 		if (filter != null) {
-			int maxLength = 30;
+			int maxLength = 24;
 			String name = filter.getGeneratedName(maxLength);
 			if(name.length() >= maxLength) {
 				name = name.substring(0, maxLength) + getString(R.string.shared_string_ellipsis);
@@ -807,7 +807,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 						null, 
 						filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 				if(searchFilter.getText().toString().length() > 0) {
-					nFilter.setFilterByName(searchFilter.getText().toString());
+					nFilter.setSavedFilterByName(searchFilter.getText().toString());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter)) {
 					AccessibleToast.makeText(

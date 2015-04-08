@@ -274,7 +274,8 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	}
 	
 	public String getGeneratedName(int chars) {
-		if (areAllTypesAccepted() || acceptedTypes.isEmpty()) {
+		if (!filterId.equals(CUSTOM_FILTER_ID) ||
+				areAllTypesAccepted() || acceptedTypes.isEmpty()) {
 			return getName();
 		}
 		StringBuilder res = new StringBuilder();

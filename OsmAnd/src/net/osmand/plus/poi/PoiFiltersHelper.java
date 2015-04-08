@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -123,7 +124,10 @@ public class PoiFiltersHelper {
 			String typeId = filterId.substring(PoiLegacyFilter.STD_PREFIX.length());
 			PoiType tp = application.getPoiTypes().getPoiTypeByKey(typeId);
 			if(tp != null) {
-				return new PoiLegacyFilter(tp, application);
+				PoiLegacyFilter lf = new PoiLegacyFilter(tp, application);
+				cacheTopStandardFilters.add(lf);
+				sortListOfFilters(cacheTopStandardFilters);
+				return lf;
 			}
 		}
 		return null;
@@ -423,5 +427,6 @@ public class PoiFiltersHelper {
 
 
 	}
+
 
 }

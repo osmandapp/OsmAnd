@@ -123,7 +123,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		} else {
 			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 			for(PoiLegacyFilter pf : poiFilters.getTopDefinedPoiFilters()) {
-				if(!pf.isStandardFilter()) {
+				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
 				}
 			}
@@ -189,10 +189,12 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			}
 			showFilterActivity(model.getFilterId());
 		} else {
-			PoiLegacyFilter custom = getApp().getPoiFilters().getCustomPOIFilter();
-			custom.setFilterByName(null);
-			custom.updateTypesToAccept(((AbstractPoiType) item));
-			showFilterActivity(custom.getFilterId());
+			PoiLegacyFilter custom = getApp().getPoiFilters().getFilterById(PoiLegacyFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
+			if(custom != null) {
+				custom.setFilterByName(null);
+				custom.updateTypesToAccept(((AbstractPoiType) item));
+				showFilterActivity(custom.getFilterId());
+			}
 		}
 	}
 
