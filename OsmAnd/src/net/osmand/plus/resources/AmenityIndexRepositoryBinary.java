@@ -83,42 +83,29 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
-			final PoiLegacyFilter filter, final List<Amenity> amenities, ResultMatcher<Amenity> matcher) {
+			final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
-		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return filter.acceptTypeSubtype(type, subcategory);
-			}
-		};
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
-				poiTypeFilter, filter == null ? matcher : filter.getResultMatcher(matcher));
+				filter, matcher);
+		List<Amenity> result = null;
 		try {
-			List<Amenity> result = index.searchPoi(req);
-			amenities.addAll(result);
+			result = index.searchPoi(req);
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
-			return amenities;
 		}
-		if (log.isDebugEnabled()) {
+		if (log.isDebugEnabled() && result != null) {
 			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, result.size())); //$NON-NLS-1$
 		}
-		return amenities;
+		return result;
 	}
 
 	@Override
-	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final PoiLegacyFilter filter, ResultMatcher<Amenity> matcher) {
+	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
-		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
-			@Override
-			public boolean accept(PoiCategory type, String subcategory) {
-				return filter.acceptTypeSubtype(type, subcategory);
-			}
-		};
 		List<Amenity> result = null;
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(locations, radius,
-				poiTypeFilter, filter == null ? matcher : filter.getResultMatcher(matcher));
+				filter, matcher );
 		try {
 			result = index.searchPoi(req);
 		} catch (IOException e) {

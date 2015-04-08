@@ -282,7 +282,7 @@ public class MapActivityLayers {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					pf = poiFilters.getFilterById(filterId);
 					if (pf != null && pf.isStandardFilter()) {
-						pf.clearNameFilter();
+						pf.setFilterByName(null);
 					}
 					poiMapLayer.setFilter(pf);
 					mapView.refreshMap();
@@ -303,7 +303,7 @@ public class MapActivityLayers {
 		if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
 			it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
 		} else {
-			it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
+			it.icon(R.drawable.mx_user_defined);
 		}
 		it.reg();
 	}

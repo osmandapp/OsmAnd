@@ -23,7 +23,9 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 public class PoiFiltersHelper {
 	private final OsmandApplication application;
 	
-	private NameFinderPoiFilter nameFinderPOIFilter;
+	private NominatimPoiFilter nominatimPOIFilter;
+	private NominatimPoiFilter nominatimAddresFilter;
+	
 	private PoiLegacyFilter searchByNamePOIFilter;
 	private PoiLegacyFilter customPOIFilter;
 	private PoiLegacyFilter showAllPOIFilter;
@@ -49,11 +51,18 @@ public class PoiFiltersHelper {
 		this.application = application;
 	}
 	
-	public NameFinderPoiFilter getNameFinderPOIFilter() {
-		if(nameFinderPOIFilter == null){
-			nameFinderPOIFilter = new NameFinderPoiFilter(application);
+	public NominatimPoiFilter getNominatimPOIFilter() {
+		if(nominatimPOIFilter == null){
+			nominatimPOIFilter = new NominatimPoiFilter(application, false);
 		}
-		return nameFinderPOIFilter;
+		return nominatimPOIFilter;
+	}
+	
+	public NominatimPoiFilter getNominatimAddressFilter() {
+		if(nominatimAddresFilter == null){
+			nominatimAddresFilter = new NominatimPoiFilter(application, true);
+		}
+		return nominatimAddresFilter;
 	}
 	
 	public PoiLegacyFilter getSearchByNamePOIFilter() {
@@ -104,7 +113,7 @@ public class PoiFiltersHelper {
 			}
 		}
 		PoiLegacyFilter ff = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
-				getShowAllPOIFilter(), getNameFinderPOIFilter());
+				getShowAllPOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
 		if (ff != null) {
 			return ff;
 		}
@@ -139,28 +148,9 @@ public class PoiFiltersHelper {
 	public void sortListOfFilters(List<PoiLegacyFilter> list) {
 		final Collator instance = Collator.getInstance();
 		Collections.sort(list, new Comparator<PoiLegacyFilter>() {
-			private int getRank(PoiLegacyFilter lf) {
-				if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(lf.getFilterId())) {
-					return 0;
-				} else if(lf.areAllTypesAccepted()) {
-					return 3;
-				} else if(PoiLegacyFilter.CUSTOM_FILTER_ID.equals(lf.getFilterId())) {
-					return 4;
-				} else if(PoiLegacyFilter.NAME_FINDER_FILTER_ID.equals(lf.getFilterId())) {
-					return 5;
-				} else if(lf.isStandardFilter()) {
-					return 2;
-				}
-				return 1;
-			}
 
 			@Override
 			public int compare(PoiLegacyFilter lhs, PoiLegacyFilter rhs) {
-				int lr = getRank(lhs);
-				int rr = getRank(rhs);
-				if(lr != rr) {
-					return lr < rr ? -1 : 1;
-				}
 				return instance.compare(lhs.getName(), rhs.getName());
 			}
 		});
@@ -383,7 +373,7 @@ public class PoiFiltersHelper {
 	    				if(map.containsKey(filterId)){
 	    					PoiLegacyFilter filter = new PoiLegacyFilter(query.getString(1), filterId,
 	    							map.get(filterId), application);
-	    					filter.setFilterByName(query.getString(2));
+	    					filter.setSavedFilterByName(query.getString(2));
 	    					list.add(filter);
 	    				}
 	    			} while(query.moveToNext());

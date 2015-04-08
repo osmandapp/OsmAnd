@@ -168,7 +168,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), 
+						null, 
+						filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 				if (helper.createPoiFilter(nFilter)) {
 					AccessibleToast.makeText(
 							EditPOIFilterActivity.this,

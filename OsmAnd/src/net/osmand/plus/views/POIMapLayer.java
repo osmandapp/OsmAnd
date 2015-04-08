@@ -84,19 +84,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (filter == null) {
 					return new ArrayList<Amenity>();
 				}
-				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
+				return filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
-							@Override
-							public boolean publish(Amenity object) {
-								return true;
-							}
+					@Override
+					public boolean publish(Amenity object) {
+						return true;
+					}
 
-							@Override
-							public boolean isCancelled() {
-								return isInterrupted();
-							}
-						});
+					@Override
+					public boolean isCancelled() {
+						return isInterrupted();
+					}
+				});
 			}
 		};
 	}

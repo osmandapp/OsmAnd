@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 	<string name="agps_info">A-GPS info</string>
+	<string name="shared_string_places">Places</string>
 	<string name="shared_string_search">Search</string>
 	<string name="shared_string_show_description">Show description</string>
 	<string name="shared_string_message">Message</string>

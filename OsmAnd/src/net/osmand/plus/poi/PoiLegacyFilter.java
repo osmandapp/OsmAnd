@@ -1,42 +1,44 @@
 package net.osmand.plus.poi;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.Location;
+import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 
-public class PoiLegacyFilter {
+public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
-	public static final String NAME_FINDER_FILTER_ID = "name_finder";
 	
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 			LinkedHashSet<String>>();
-	private String filterByName = null;
 
 	protected String filterId;
 	protected String name;
-	protected String nameFilter;
 	protected boolean isStandardFilter;
 	
 	protected final OsmandApplication app;
@@ -44,8 +46,13 @@ public class PoiLegacyFilter {
 	protected int distanceInd = 1;
 	// in kilometers
 	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500 };
+	
 	private final MapPoiTypes poiTypes;
 	
+	protected String filterByName = null;
+	protected String savedFilterByName = null;
+	protected List<Amenity> currentSearchResult = null;
+	private Collator collator;
 	
 	// constructor for standard filters
 	public PoiLegacyFilter(AbstractPoiType type, OsmandApplication application) {
@@ -60,11 +67,18 @@ public class PoiLegacyFilter {
 			type.putTypes(acceptedTypes);
 		}
 	}
+	
+	// search by name standard
+	protected PoiLegacyFilter(OsmandApplication application) {
+		this.app = application;
+		isStandardFilter = true;
+		filterId = STD_PREFIX; // overridden
+		poiTypes = application.getPoiTypes();
+	}
 
-	
-	
 	// constructor for user defined filters
-	public PoiLegacyFilter(String name, String filterId, Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
+	public PoiLegacyFilter(String name, String filterId, 
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		this.app = app;
 		isStandardFilter = false;
 		poiTypes = app.getPoiTypes();
@@ -79,21 +93,48 @@ public class PoiLegacyFilter {
 			this.acceptedTypes.putAll(acceptedTypes);
 		}
 	}
+
+	public String getFilterByName() {
+		return filterByName;
+	}
 	
-	public void setNameFilter(String nameFilter) {
-		if(nameFilter != null) {
-			this.nameFilter = nameFilter.toLowerCase();
+	public void setFilterByName(String filterByName) {
+		this.filterByName = filterByName;
+	}
+	
+	public void setSavedFilterByName(String filterByName) {
+		this.filterByName = filterByName;
+		this.savedFilterByName = filterByName;
+	}
+	
+	public String getSavedFilterByName() {
+		return savedFilterByName;
+	}
+	
+	public List<Amenity> getCurrentSearchResult() {
+		return currentSearchResult;
+	}
+	
+	
+	public List<Amenity> searchAgain(double lat, double lon) {
+		List<Amenity> amenityList ;
+		if(currentSearchResult != null) {
+			amenityList = currentSearchResult;
 		} else {
-			clearNameFilter();
+			amenityList = searchAmenities(lat, lon, null);
 		}
+		MapUtils.sortListOfMapObject(amenityList, lat, lon);
+		return amenityList;
 	}
 	
-	public String getNameFilter() {
-		return nameFilter;
-	}
-	
-	public void clearNameFilter(){
-		nameFilter = null;
+
+	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
+		if(distanceInd < distanceToSearchValues.length - 1){
+			distanceInd ++;
+		}
+		List<Amenity> amenityList = searchAmenities( latitude, longitude, matcher);
+		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
+		return amenityList;
 	}
 	
 	private void initSearchAll(){
@@ -109,15 +150,7 @@ public class PoiLegacyFilter {
 	}
 	
 	
-	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
-		if(distanceInd < distanceToSearchValues.length - 1){
-			distanceInd ++;
-		}
-		List<Amenity> amenityList = searchAmenities( latitude, longitude, matcher);
-		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
-		
-		return amenityList;
-	}
+	
 	
 	public String getSearchArea(){
 		double val = distanceToSearchValues[distanceInd];
@@ -141,55 +174,98 @@ public class PoiLegacyFilter {
 				amenityList.remove(amenityList.size() - 1);
 			}
 		}
+		if (amenityList.size() == 0 && isAutomaticallyIncreaseSearch()) {
+			int step = 5;
+			while (amenityList.size() == 0 && step-- > 0 && isSearchFurtherAvailable()) {
+				amenityList = searchFurther(lat, lon, matcher);
+			}
+		}
 		return amenityList; 
+	}
+	
+	public boolean isAutomaticallyIncreaseSearch() {
+		return true;
 	}
 	
 	private List<Amenity> searchAmenities(double lat, double lon, ResultMatcher<Amenity> matcher) {
 		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
 		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
 		double distance = distanceToSearchValues[distanceInd] * 1000;
-		
 		double topLatitude = Math.min(lat + (distance/ baseDistY ), 84.);
 		double bottomLatitude = Math.max(lat - (distance/ baseDistY ), -84.);
 		double leftLongitude = Math.max(lon - (distance / baseDistX), -180);
 		double rightLongitude = Math.min(lon + (distance/ baseDistX), 180);
-		
-		return searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
+		return searchAmenitiesInternal(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
 	}
 	
-	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
-		final String filter = nameFilter;
-		if(filter != null) {
-			final boolean en = app.getSettings().usingEnglishNames();
-			return new ResultMatcher<Amenity>() {
-				@Override
-				public boolean publish(Amenity object) {
-					if(!OsmAndFormatter.getPoiStringWithoutType(object, en).toLowerCase().contains(filter) || 
-							(matcher != null && !matcher.publish(object))) {
-						return false;
+	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom,
+			ResultMatcher<Amenity> matcher) {
+		List<Amenity> results = new ArrayList<Amenity>();
+		List<Amenity> tempResults = currentSearchResult;
+		if (tempResults != null) {
+			for (Amenity a : tempResults) {
+				LatLon l = a.getLocation();
+				if (l != null && l.getLatitude() <= top && l.getLatitude() >= bottom && l.getLongitude() >= left
+						&& l.getLongitude() <= right) {
+					if (matcher == null || matcher.publish(a)) {
+						results.add(a);
 					}
-					return true;
 				}
-				
-				@Override
-				public boolean isCancelled() {
-					return (matcher != null && matcher.isCancelled());
-				}
-			};
+			}
 		}
-		return matcher;
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(this, top, left, bottom, right, zoom,
+				wrapResultMatcher(matcher));
+		results.addAll(amenities);
+		return results;
 	}
-
-	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
+	
+	public List<Amenity> searchAmenitiesOnThePath(List<Location> locs, int poiSearchDeviationRadius) {
+		return app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius, this, wrapResultMatcher(null));
+	}
+	
+	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, matcher);
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, wrapResultMatcher(matcher));
+	}
+	
+	public boolean checkNameFilter(Amenity object, String filter, boolean en) {
+		boolean publish = false;
+		if (Algorithms.isEmpty(filter)) {
+			publish = true;
+		} else {
+			String lower = OsmAndFormatter.getPoiStringWithoutType(object, en);
+			publish = CollatorStringMatcher.ccontains(getCollator(), lower, filter);
+		}
+		return publish;
 	}
 
-	public List<Amenity> searchAgain(double lat, double lon) {
-		List<Amenity> amenityList = searchAmenities(lat, lon, null);
-		MapUtils.sortListOfMapObject(amenityList, lat, lon);
-		return amenityList;
+	private Collator getCollator() {
+		if (collator == null) {
+			collator = OsmAndCollator.primaryCollator();
+		}
+		return collator;
+	}
+	
+	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
+		final boolean en = app.getSettings().usingEnglishNames();
+		return new ResultMatcher<Amenity>() {
+			
+			@Override
+			public boolean publish(Amenity a) {
+				if (checkNameFilter(a, filterByName, en)) {
+					if (matcher == null || matcher.publish(a)) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return matcher != null && matcher.isCancelled();
+			}
+		};
 	}
 	
 	public String getName(){
@@ -211,24 +287,7 @@ public class PoiLegacyFilter {
 		return acceptedTypes.containsKey(t);
 	}
 	
-	public boolean acceptTypeSubtype(PoiCategory t, String subtype){
-		if(t == null) {
-			return true;
-		}
-		if(!poiTypes.isRegisteredType(t)) {
-			t = poiTypes.getOtherPoiCategory();
-		}
-		if(!acceptedTypes.containsKey(t)){
-			return false;
-		}
-		LinkedHashSet<String> set = acceptedTypes.get(t);
-		if(set == null){
-			return true;
-		}
-		return set.contains(subtype);
-	}
-	
-	public void clearFilter(){
+	public void clearFilter() {
 		acceptedTypes = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
 	}
 	
@@ -253,20 +312,6 @@ public class PoiLegacyFilter {
 		}
 	}
 	
-	public void setMapToAccept(Map<PoiCategory, List<String>> newMap) {
-		Iterator<Entry<PoiCategory, List<String>>> iterator = newMap.entrySet().iterator();
-		acceptedTypes.clear();
-		while(iterator.hasNext()){
-			Entry<PoiCategory, List<String>> e = iterator.next();
-			if(e.getValue() == null){
-				acceptedTypes.put(e.getKey(), null);
-			} else {
-				acceptedTypes.put(e.getKey(), new LinkedHashSet<String>(e.getValue()));
-			}
-		}
-	}
-	
-	
 	
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
 		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
@@ -289,15 +334,6 @@ public class PoiLegacyFilter {
 		return filterId;
 	}
 	
-	
-	public String getFilterByName() {
-		return filterByName;
-	}
-	
-	public void setFilterByName(String filterByName) {
-		this.filterByName = filterByName;
-	}
-	
 	public boolean isStandardFilter() {
 		return isStandardFilter;
 	}
@@ -310,4 +346,27 @@ public class PoiLegacyFilter {
 		return app;
 	}
 	
+	@Override
+	public boolean accept(PoiCategory type, String subtype) {
+		if(type == null) {
+			return true;
+		}
+		if(!poiTypes.isRegisteredType(type)) {
+			type = poiTypes.getOtherPoiCategory();
+		}
+		if(!acceptedTypes.containsKey(type)){
+			return false;
+		}
+		LinkedHashSet<String> set = acceptedTypes.get(type);
+		if(set == null){
+			return true;
+		}
+		return set.contains(subtype);
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return acceptedTypes.isEmpty();
+	}
+
 }

@@ -527,19 +527,7 @@ public class WaypointHelper {
 		PoiLegacyFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
-			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius,
-					pf, new ResultMatcher<Amenity>() {
-
-						@Override
-						public boolean publish(Amenity object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
+			List<Amenity> amenities = pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius);
 			for (Amenity a : amenities) {
 				AmenityRoutePoint rp = a.getRoutePoint();
 				int i = locs.indexOf(rp.pointA);
