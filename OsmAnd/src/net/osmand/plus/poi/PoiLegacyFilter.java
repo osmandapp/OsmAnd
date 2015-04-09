@@ -360,7 +360,6 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	public void updateTypesToAccept(PoiLegacyFilter f) {
 		acceptedTypes.clear();
 		acceptedTypes.putAll(f.acceptedTypes);
-		filterByName = f.filterByName;
 	}
 	
 	

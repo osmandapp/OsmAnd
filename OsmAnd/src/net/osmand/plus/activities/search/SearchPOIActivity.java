@@ -110,6 +110,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem showOnMapItem;
 	private MenuItem searchPOILevel;
 	private static int RESULT_REQUEST_CODE = 54;
+	private static int RESULT_CUSTOM_REQUEST_CODE = 55;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu omenu) {
@@ -262,7 +263,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		String filterId = bundle.getString(AMENITY_FILTER);
 		this.filter = app.getPoiFilters().getFilterById(filterId);
 		if (filter != null) {
-			if(filter.isEmpty()) {
+			if(filter.isEmpty() && !isNameSearch()) {
 				showEditActivity(filter);
 			} else {
 				filter.clearPreviousZoom();
@@ -333,13 +334,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				if(!f.isStandardFilter()) {
-					showEditActivity(f);
-				} else {
-					PoiLegacyFilter filter = getMyApplication().getPoiFilters().getCustomPOIFilter();
-					filter.updateTypesToAccept(f);
-					showEditActivity(filter);
-				}
+				PoiLegacyFilter custom = getMyApplication().getPoiFilters().getCustomPOIFilter();
+				custom.updateTypesToAccept(f);
+				showEditActivity(custom);
 				return true;
 			}
 		});
@@ -354,17 +351,24 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
 		}
-		startActivityForResult(newIntent, RESULT_REQUEST_CODE);
+		startActivityForResult(newIntent, poi.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID) ? 
+				RESULT_CUSTOM_REQUEST_CODE : RESULT_REQUEST_CODE);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == RESULT_REQUEST_CODE) {
-			String filterId = getIntent().getExtras().getString(AMENITY_FILTER);
-			PoiLegacyFilter filter = app.getPoiFilters().getFilterById(filterId);
-			if (filter == null || filter.isEmpty()) {
-				finish();
+		if (requestCode == RESULT_REQUEST_CODE && resultCode == EditPOIFilterActivity.EDIT_ACTIVITY_RESULT_OK) {
+			PoiLegacyFilter custom = app.getPoiFilters().getCustomPOIFilter();
+			if(this.filter.isStandardFilter()) {
+				PoiLegacyFilter old = this.filter;
+				this.filter = custom;
+				this.filter.setFilterByName(old.getFilterByName());
+			} else {
+				this.filter.updateTypesToAccept(custom);
 			}
+		}
+		if (filter == null || filter.isEmpty()) {
+			finish();
 		}
 	}
 
@@ -862,6 +866,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.edit_filter_save_as_menu_item);
 		final EditText editText = new EditText(this);
+		if(filter.isStandardFilter()) {
+			editText.setText((filter.getName() + " " + searchFilter.getText()).trim());
+		} else {
+			editText.setText(filter.getName());
+		}
 		LinearLayout ll = new LinearLayout(this);
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));

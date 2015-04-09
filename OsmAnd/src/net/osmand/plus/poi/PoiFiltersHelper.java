@@ -5,6 +5,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -215,7 +216,14 @@ public class PoiFiltersHelper {
 		if(helper == null){
 			return false;
 		}
-		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false);
+		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
+		Iterator<PoiLegacyFilter> it = cacheTopStandardFilters.iterator();
+		while(it.hasNext()) {
+			if(it.next().getFilterId().equals(filter.getFilterId())) {
+				it.remove();
+			}
+		}
+		res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
 			cacheTopStandardFilters.add(filter);
 			sortListOfFilters(cacheTopStandardFilters);
