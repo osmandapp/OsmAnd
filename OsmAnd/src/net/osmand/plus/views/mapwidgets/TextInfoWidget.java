@@ -14,16 +14,13 @@ import android.widget.TextView;
 public class TextInfoWidget  {
 
 	private String contentTitle;
-	
 	private View view;
 	private ImageView imageView;
 	private TextView textView;
 	private TextView smallTextView;
 	private ImageView topImageView;
 	private TextView topTextView;
-
 	private boolean explicitlyVisible;
-
 	private OsmandApplication app;
 
 
@@ -47,7 +44,7 @@ public class TextInfoWidget  {
 	}
 	
 	public void setImageDrawable(int res) {
-		setImageDrawable(app.getIconsCache().getIcon(res, R.color.map_widget_icon_color), false);
+		setImageDrawable(app.getIconsCache().getIcon(res, 0), false);
 	}
 	
 	
