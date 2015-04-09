@@ -506,4 +506,7 @@
 <string name="poi_military_naval_base">Wojskowa baza morska</string>
 	<string name="poi_military_danger_area">Strefa zagrożenia</string>
 	<string name="poi_military_landuse">Strefa wojskowa</string>
+	<string name="poi_accomodation">Noclegi</string>
+		<string name="poi_club">Klub</string>
+	<string name="poi_cafe_and_restaurant">Kawiarnia i restauracja</string>
 	</resources>
