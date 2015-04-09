@@ -1938,7 +1938,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="duration">Dauer</string>
     <string name="distance">Distanz</string>
     <string name="index_tours">Touren</string>
-    <string name="flat_list_waypoints">Alle</string>
+    <string name="shared_string_all">Alle</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>

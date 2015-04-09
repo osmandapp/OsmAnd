@@ -1793,7 +1793,7 @@ POIの更新は利用できません</string>
     
 <string name="route_descr_destination">目的地</string>
     <string name="index_tours">旅行</string>
-    <string name="flat_list_waypoints">全て</string>
+    <string name="shared_string_all">全て</string>
     <string name="waypoints">経由地点</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通警告</string>

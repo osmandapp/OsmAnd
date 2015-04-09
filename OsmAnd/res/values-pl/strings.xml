@@ -1884,7 +1884,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="duration">Czas trwania</string>
     <string name="distance">Odległość</string>
     <string name="index_tours">Wycieczki</string>
-    <string name="flat_list_waypoints">Wszystkie</string>
+    <string name="shared_string_all">Wszystkie</string>
     <string name="waypoints">Punkty trasy</string>
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>

@@ -1857,7 +1857,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="int_hour">ur</string>
     <string name="duration">Trajanje</string>
     <string name="distance">Razdalja</string>
-    <string name="flat_list_waypoints">Vse</string>
+    <string name="shared_string_all">Vse</string>
     <string name="targets">Cilji</string>
     <string name="confirm_every_run">Vsakič vprašaj</string>
 	<string name="save_global_track_interval">Splošni interval beleženja</string>

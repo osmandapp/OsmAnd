@@ -1903,7 +1903,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="duration">مدت زمان</string>
     <string name="distance">فاصله</string>
     <string name="index_tours">سفرها</string>
-    <string name="flat_list_waypoints">همه</string>
+    <string name="shared_string_all">همه</string>
     <string name="waypoints">نقاط بین راهی</string>
     <string name="targets">مقاصد</string>
     <string name="way_alarms">موانع ترافیکی</string>

@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -354,6 +355,11 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	public void updateTypesToAccept(AbstractPoiType pt) {
 		acceptedTypes.clear();
 		pt.putTypes(acceptedTypes);
+	}
+	
+	public void updateTypesToAccept(PoiLegacyFilter f) {
+		acceptedTypes.clear();
+		acceptedTypes.putAll(f.acceptedTypes);
 	}
 	
 	

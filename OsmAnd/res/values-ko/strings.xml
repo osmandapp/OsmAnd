@@ -1942,7 +1942,7 @@
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
-    <string name="flat_list_waypoints">모두</string>
+    <string name="shared_string_all">모두</string>
     <string name="waypoints">경유지</string>
     <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>

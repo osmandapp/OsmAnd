@@ -1,6 +1,9 @@
 package net.osmand.osm;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 public class PoiType extends AbstractPoiType {
@@ -11,6 +14,7 @@ public class PoiType extends AbstractPoiType {
 	private String osmTag2;
 	private String osmValue;
 	private String osmValue2;
+	private List<PoiType> poiAdditionals = null;
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {
 		super(name, poiTypes);
@@ -77,6 +81,20 @@ public class PoiType extends AbstractPoiType {
 		return category;
 	}
 	
+	public void addPoiAdditional(PoiType tp) {
+		if(poiAdditionals == null) {
+			poiAdditionals = new ArrayList<PoiType>();
+		}
+		poiAdditionals.add(tp);
+	}
+	
+	public List<PoiType> getPoiAdditionals() {
+		if(poiAdditionals == null) {
+			return Collections.emptyList();
+		}
+		return poiAdditionals;
+	}
+	
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		PoiType rt = getReferenceType();
 		PoiType poiType = rt != null ? rt : this;
@@ -89,5 +107,7 @@ public class PoiType extends AbstractPoiType {
 		}
 		return acceptedTypes;
 	}
+
+	
 
 }

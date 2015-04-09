@@ -52,6 +52,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	private static final int FILTER = 2;
+	public static final int EDIT_ACTIVITY_RESULT_OK = 20;
 	
 
 	@Override
@@ -79,7 +80,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == FILTER) {
-			filterPOI();
+//			filterPOI();
+			setResult(EDIT_ACTIVITY_RESULT_OK);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -112,21 +115,10 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 		final double lat = latitude;
 		final double lon = longitude;
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		if (searchNearBy) {
-			AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
-			b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 1) {
-								newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
-								newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
-							}
-							startActivity(newIntent);
-						}
-					});
-			b.show();
+			startActivity(newIntent);
 		} else {
 			newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
 			newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
@@ -261,7 +253,16 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			check.setChecked(filter.isTypeAccepted(model));
 
 			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
-			text.setText(model.getTranslation());
+			String textString = model.getTranslation();
+			Set<String> subtypes = filter.getAcceptedSubtypes(model);
+			if(filter.isTypeAccepted(model)) {
+				if(subtypes == null) {
+					textString += " (" + getString(R.string.shared_string_all) +")";
+				} else {
+					textString += " (" + subtypes.size() +")";
+				}
+			}
+			text.setText(textString);
 			addRowListener(model, text, check);
 			return (row);
 		}

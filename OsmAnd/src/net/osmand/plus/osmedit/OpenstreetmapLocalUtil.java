@@ -61,7 +61,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 							   n.getLocation().getLongitude(),
 							   nodeId);
 		entity.putTag(st.getOsmTag(), st.getOsmValue());
-		entity.putTag(st.getOsmTag2(), st.getOsmValue2());
+		if(st.getOsmTag2() != null) {
+			entity.putTag(st.getOsmTag2(), st.getOsmValue2());
+		}
 		entity.putTag(OSMTagKey.NAME.getValue(), n.getName());
 		entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
  

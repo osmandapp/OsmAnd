@@ -11,6 +11,8 @@
     -->
     <string name="rendering_attr_OSMMapperAssistant_name">OSM mapper assistant</string>
 	<string name="agps_info">A-GPS info</string>
+	<string name="shared_string_manage">Manage</string>
+	<string name="shared_string_edit">Edit</string>
 	<string name="shared_string_places">Places</string>
 	<string name="shared_string_search">Search</string>
 	<string name="shared_string_show_description">Show description</string>
@@ -205,7 +207,6 @@
     <string name="proxy_pref_descr">Setup a proxy internet communication</string>
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
-    <string name="osm_editing_manage">Manage</string>
 	<string name="navigation_over_track">Start navigation along track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
@@ -359,7 +360,7 @@
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
     <string name="index_tours">Tours</string>
-    <string name="flat_list_waypoints">All</string>
+    <string name="shared_string_all">All</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>

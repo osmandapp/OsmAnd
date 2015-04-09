@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
@@ -262,7 +263,9 @@ public class MapActivityLayers {
 		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
-		addFilterToList(adapter, list, poiFilters.getCustomPOIFilter());
+		list.add(poiFilters.getCustomPOIFilter());
+		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
+		
 		Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
@@ -272,12 +275,10 @@ public class MapActivityLayers {
 				PoiLegacyFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
 				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
-					getApplication().getSettings().setPoiFilterForMap(filterId);
-					Intent newIntent = new Intent(activity, EditPOIFilterActivity.class);
-					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, mapView.getLatitude());
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, mapView.getLongitude());
-					activity.startActivity(newIntent);
+					Intent search = new Intent(activity, SearchActivity.class);
+					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
+					activity.startActivity(search);
 				} else {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					pf = poiFilters.getFilterById(filterId);

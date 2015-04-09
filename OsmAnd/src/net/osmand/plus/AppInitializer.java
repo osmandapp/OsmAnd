@@ -194,11 +194,6 @@ public class AppInitializer implements IProgress {
 
 	}
 
-	public void startMapActivity(final Activity ctx) {
-		final Intent mapIndent = new Intent(ctx, ((OsmandApplication)ctx.getApplication()).getAppCustomization().getMapActivity());
-		ctx.startActivityForResult(mapIndent, 0);
-	}
-
 	// TODO
 	private void applicationInstalledFirstTime(final Activity ctx) {
 		final OsmandApplication app = (OsmandApplication)ctx.getApplication();

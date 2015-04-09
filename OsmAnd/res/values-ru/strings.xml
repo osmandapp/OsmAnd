@@ -1705,7 +1705,7 @@
     <string name="speak_favorites">Объявлять близлежащие избранные</string>
     <string name="speak_poi">Объявлять близлежащие POI</string>
     <string name="index_tours">Туры</string>
-    <string name="flat_list_waypoints">Все</string>
+    <string name="shared_string_all">Все</string>
     <string name="distance">Расстояние</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
 	<string name="route_descr_destination">Пункт назначения</string>
