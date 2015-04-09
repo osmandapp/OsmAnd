@@ -1855,4 +1855,6 @@
 	<string name="shared_string_address">Adress</string>
 	<string name="shared_string_show_description">Visa beskrivning</string>
 	<string name="shared_string_search">Sök</string>
+	<string name="shared_string_places">Platser</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM kartassistent</string>
 	</resources>

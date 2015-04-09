@@ -1938,4 +1938,6 @@
 	<string name="shared_string_do_not_use">No impreare</string>
 	<string name="shared_string_address">Indiritzu</string>
 	<string name="shared_string_show_description">Ammustra descritzione</string>
+	<string name="shared_string_places">Logos</string>
+	<string name="shared_string_search">Chirca</string>
 	</resources>

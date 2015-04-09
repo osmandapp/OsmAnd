@@ -19,6 +19,7 @@
 		<string name="poi_power">Power</string>
 		<string name="poi_communication">Communication</string>
 		<string name="poi_trash_disposal">Trash disposal</string>
+		<string name="poi_landuse">Landuse</string>
 	<string name="poi_education">Education</string>
 	<string name="poi_administrative">Administrative</string>
 	<string name="poi_healthcare">Healthcare</string>
@@ -170,6 +171,29 @@
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
 	<string name="poi_fuel">Gas station</string>
+	<string name="poi_fuel_diesel_yes">Diesel</string>
+	<string name="poi_fuel_gtl_diesel_yes">GTL diesel</string>
+	<string name="poi_fuel_hgv_diesel_yes">HGV diesel</string>
+	<string name="poi_fuel_biodiesel_yes">Bio diesel</string>
+	<string name="poi_fuel_lpg_yes">LPG</string>
+	<string name="poi_fuel_octane_80_yes">Octane 80</string>
+	<string name="poi_fuel_octane_91_yes">Octane 91</string>
+	<string name="poi_fuel_octane_92_yes">Octane 92</string>
+	<string name="poi_fuel_octane_95_yes">Octane 95</string>
+	<string name="poi_fuel_octane_98_yes">Octane 98</string>
+	<string name="poi_fuel_octane_100_yes">Octane 100</string>
+	<string name="poi_fuel_cng_yes">CNG</string>
+	<string name="poi_fuel_1_25_yes">1:25 fuel</string>
+	<string name="poi_fuel_1_50_yes">1:50 fuel</string>
+	<string name="poi_fuel_ethanol_yes">Ethanol</string>
+	<string name="poi_fuel_methanol_yes">Methanol</string>
+	<string name="poi_fuel_svo_yes">SVO</string>
+	<string name="poi_fuel_e10_yes">E10</string>
+	<string name="poi_fuel_e20_yes">E20</string>
+	<string name="poi_fuel_e85_yes">E85</string>
+	<string name="poi_fuel_biogas_yes">E85</string>
+	<string name="poi_fuel_LH2_yes">Liquid hydrogen</string>
+	<string name="poi_fuel_electricity_yes">Electricity</string>
 	<string name="poi_charging_station">Charging station</string>
 	<string name="poi_vehicle_ramp">Vehicle ramp</string>
 	<string name="poi_compressed_air">Compressed air</string>
@@ -227,6 +251,7 @@
 	<string name="poi_speed_camera">Speed camera</string>
 	<string name="poi_turning_circle">Turning circle</string>
 	<string name="poi_motorway_junction">Motorway junction</string>
+	<string name="poi_junction">Junction</string>
 	<string name="poi_rest_area">Rest area</string>
 
 	<string name="poi_water_well">Water well</string>
@@ -257,11 +282,15 @@
 	<string name="poi_waste_disposal">Waste disposal</string>
 	<string name="poi_waste_basket">Waste basket</string>
 
+	<string name="poi_industrial">Industrial area</string>
 	<string name="poi_quarry">Quarry</string>
 	<string name="poi_vineyard">Vineyard</string>
 	<string name="poi_orchard">Orchard</string>
 	<string name="poi_allotments">Allotments</string>
 	<string name="poi_forest">Human maintained forest</string>
+	<string name="poi_farmyard">Farmyard</string>
+	<string name="poi_meadow">Meadow</string>
+	<string name="poi_landuse_railway">Railroad area</string>
 
 	<string name="poi_canal">Canal</string>
 	<string name="poi_pier">Pier</string>
@@ -316,6 +345,7 @@
 	<string name="poi_locality">Locality</string>
 	<string name="poi_place_allotments">Allotments</string>
 	<string name="poi_place_farm">Farm</string>
+	<string name="poi_residential">Residential area</string>
 
 	<string name="poi_pharmacy">Pharmacy</string>
 	<string name="poi_hospital">Hospital</string>
@@ -562,6 +592,8 @@
 	<string name="poi_swimming_pool">Swimming pool</string>
 	<string name="poi_water_park">Water park</string>
 	<string name="poi_park">Park</string>
+	<string name="poi_recreation_ground">Recreation ground</string>
+	<string name="poi_village_green">Village green</string>
 
 	<string name="poi_cafe">Cafe</string>
 	<string name="poi_biergarten">Biergarten</string>
