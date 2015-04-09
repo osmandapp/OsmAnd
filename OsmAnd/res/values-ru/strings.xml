@@ -1954,4 +1954,6 @@
 	<string name="shared_string_address">Адрес</string>
 	<string name="rendering_attr_pisteRoutes_name">Горнолыжные склоны</string>
 	<string name="shared_string_show_description">Показать описание</string>
+	<string name="shared_string_places">Места</string>
+	<string name="shared_string_search">Поиск</string>
 	</resources>

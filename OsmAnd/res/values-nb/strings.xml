@@ -332,7 +332,7 @@
 \n\nVelg enten \'Start navigering\', som betyr at OsmAnd gir veiledning og taleinstruksjoner (hvis aktivert) etc. Eller velg \'Vis rute\', som resulterer i en statisk rute uten veiledning eller justeringer mens du beveger deg.
 \n\nFor å vise en rute til det valgte reisemålet fra ethvert punkt annet enn din gjeldende posisjon, velg startpunktet på kartet og trykk \'Anvisninger fra\'.
 \n\nHvis du bruker \'Anvisninger fra\' sammen med \'Start navigering\', vil OsmAnd skifte til din faktiske posisjon så snart den er funnet (slik at dette kan brukes til å hurtig-starte ruting før posisjonen er funnet), mens \'Anvisninger fra\' i kombinasjon med \'Vis rute\' bare viser deg ruten fra ethvert vilkårlig punkt du hadde valgt uten påfølgende oppdateringer. "</string>
-	<string name="tip_search">Søk</string>
+	<string name="tip_search">Søker</string>
 	<string name="tip_search_t">"Du kan søke etter steder direkte på kartet via \'Bruk posisjon\' → \'Søk nær her\', eller ved å kalle søkeskjermen via \'Meny\' → \'Søk\'.
 \n\nSøkeskjermen gir maler for søk
 \n\t* etter adresse
@@ -1281,4 +1281,7 @@
 	<string name="shared_string_do_not_use">Ikke bruk</string>
 	<string name="shared_string_address">Adresse</string>
 	<string name="delay_navigation_start">Start trinnvis veiledning automatisk</string>
-    </resources>
+    <string name="shared_string_places">Steder</string>
+	<string name="shared_string_search">Søk</string>
+	<string name="shared_string_show_description">Vis beskrivelse</string>
+	</resources>
