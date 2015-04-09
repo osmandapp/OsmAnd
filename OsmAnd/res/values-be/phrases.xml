@@ -747,4 +747,21 @@
 	<string name="poi_fuel_octane_98_yes">Актан 98</string>
 	<string name="poi_fuel_octane_100_yes">Актан 100</string>
 	<string name="poi_fuel_cng_yes">Сьціснуты прыродны газ</string>
+	<string name="poi_fuel_1_25_yes">Паліва 1:25</string>
+	<string name="poi_fuel_1_50_yes">Паліва 1:50</string>
+	<string name="poi_fuel_ethanol_yes">Этаноль</string>
+	<string name="poi_fuel_methanol_yes">Мэтаноль</string>
+	<string name="poi_fuel_svo_yes">Алейнае паліва</string>
+	<string name="poi_fuel_e10_yes">E10</string>
+	<string name="poi_fuel_e20_yes">E20</string>
+	<string name="poi_fuel_e85_yes">E85</string>
+	<string name="poi_fuel_biogas_yes">E85</string>
+	<string name="poi_fuel_LH2_yes">Вадкі вадарод</string>
+	<string name="poi_fuel_electricity_yes">Электрычнасьць</string>
+	<string name="poi_farmyard">Падворак</string>
+	<string name="poi_meadow">Луг</string>
+
+	<string name="poi_recreation_ground">Пляцоўка для адпачынку</string>
+	<string name="poi_village_green">Трава</string>
+
 	</resources>
