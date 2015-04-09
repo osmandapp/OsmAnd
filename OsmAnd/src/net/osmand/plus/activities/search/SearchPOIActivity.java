@@ -35,6 +35,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiLegacyFilter.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
@@ -339,9 +340,28 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				return true;
 			}
 		});
+		addFilter(optionsMenu, getString(R.string.shared_string_open).toLowerCase());
+		addFilter(optionsMenu, "24/7");
+		
 		optionsMenu.show();
 	}
 	
+	private void addFilter(PopupMenu optionsMenu, final String value) {
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + " " + value)
+				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_filter_dark));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				if(searchFilterLayout.getVisibility() == View.GONE) {
+					searchFilterLayout.setVisibility(View.VISIBLE);
+				}
+				searchFilter.setText((searchFilter.getText().toString() + " " + value).trim());
+				return true;
+			}
+		});
+	}
+
 	private void showEditActivity(PoiLegacyFilter poi) {
 		Intent newIntent = new Intent(this, EditPOIFilterActivity.class);
 		// folder selected
@@ -357,10 +377,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == RESULT_REQUEST_CODE && resultCode == EditPOIFilterActivity.EDIT_ACTIVITY_RESULT_OK) {
 			PoiLegacyFilter custom = app.getPoiFilters().getCustomPOIFilter();
-			if(this.filter.isStandardFilter()) {
-				PoiLegacyFilter old = this.filter;
+			if (this.filter.isStandardFilter()) {
 				this.filter = custom;
-				this.filter.setFilterByName(old.getFilterByName());
+				if (!Algorithms.isEmpty(searchFilter.getText().toString())) {
+					this.filter.setFilterByName(searchFilter.getText().toString());
+				} else {
+					this.filter.setFilterByName(null);
+				}
 			} else {
 				this.filter.updateTypesToAccept(custom);
 			}
@@ -771,11 +794,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					results.values = listToFilter;
 					results.count = listToFilter.size();
 				} else {
-					boolean en = app.getSettings().usingEnglishNames();
-					String lowerCase = constraint.toString().toLowerCase();
 					List<Amenity> res = new ArrayList<Amenity>();
+					AmenityNameFilter nm = filter.getNameFilter(constraint.toString().toLowerCase());
 					for (Amenity item : listToFilter) {
-						if (filter.checkNameFilter(item, lowerCase, en)) {
+						if (nm.accept(item)) {
 							res.add(item);
 						}
 					}
