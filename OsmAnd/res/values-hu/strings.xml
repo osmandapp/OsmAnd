@@ -1794,7 +1794,7 @@
     <string name="shared_string_dismiss">Elutasít</string>
     <string name="everything_up_to_date">Minden fájl naprakész</string>
     <string name="use_opengl_render">OpenGL megjelenítő használata</string>
-    <string name="use_opengl_render_descr">Hardveresen gyorsított OpenGL renderelő (néhány eszközön nem működik)</string>
+    <string name="use_opengl_render_descr">Hardveresen gyorsított OpenGL megjelenítő (néhány eszközön esetleg nem működik)</string>
     <string name="voices">Hangutasítások</string>
 	<string name="navigate_point_northing">Északi</string>
     <string name="navigate_point_easting">Keleti</string>
