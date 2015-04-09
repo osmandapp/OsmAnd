@@ -2012,4 +2012,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_show_description">Afficher la description</string>
 	<string name="shared_string_search">Rechercher</string>
 	<string name="shared_string_places">Lieux</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">Assistant pour la cartographie OSM</string>
+	<string name="shared_string_manage">Gérer</string>
+	<string name="shared_string_edit">Modifier</string>
 	</resources>
