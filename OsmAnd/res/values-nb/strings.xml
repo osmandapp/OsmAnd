@@ -1281,4 +1281,7 @@
 	<string name="shared_string_do_not_use">Ikke bruk</string>
 	<string name="shared_string_address">Adresse</string>
 	<string name="delay_navigation_start">Start trinnvis veiledning automatisk</string>
-    </resources>
+    <string name="shared_string_places">Steder</string>
+	<string name="shared_string_search">Søk</string>
+	<string name="shared_string_show_description">Vis beskrivelse</string>
+	</resources>
