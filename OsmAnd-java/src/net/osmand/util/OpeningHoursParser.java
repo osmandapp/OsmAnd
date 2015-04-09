@@ -654,6 +654,9 @@ public class OpeningHoursParser {
 	 * @return null when parsing was unsuccessful
 	 */
 	public static OpeningHours parseOpenedHours(String format){
+		if(format == null) {
+			return null;
+		}
 		// split the OSM string in multiple rules
 		String[] rules = format.split(";"); //$NON-NLS-1$
 		// FIXME: What if the semicolon is inside a quoted string?
