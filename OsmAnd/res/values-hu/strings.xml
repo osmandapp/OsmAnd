@@ -165,7 +165,7 @@
   <string name="init_native_library">Natív renderelő inicializálása…</string>
   <string name="choose_auto_follow_route">Automatikus követés ideje</string>
   <string name="choose_auto_follow_route_descr">Válaszd ki, mennyi idő múlva ugorjon vissza a térkép a pozíciódhoz</string>
-  <string name="auto_follow_route_never">Soha (a vezetés manuális indításához kattints a kék nyílra)</string>
+  <string name="auto_follow_route_never">Soha (a vezetés kézi indításához koppintson az „Indításra”)</string>
   <string name="auto_follow_route_navigation">Követés csak navigáció közben</string>
   <string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat a térkép.</string>
   <string name="auto_follow_location_enabled">Automatikus követés.</string>
@@ -1285,7 +1285,7 @@
 	<string name="av_camera_focus_continuous">A kamera folyamatosan próbál fókuszálni</string>
 	<string name="av_photo_play_sound">Hangjelzés elsütéskor</string>
 	<string name="av_photo_play_sound_descr">Válassz, hogy szeretnél-e hangjelzést fénykép készítésekor</string>
-<string name="driving_region_descr">Válassz vezetési területet: USA, Európa, UK, Ázsia, stb.</string>
+<string name="driving_region_descr">Vezetési területet kiválasztása: USA, Európa, UK, Ázsia és egyebek</string>
 	<string name="driving_region">Vezetési terület</string>
 	<string name="driving_region_japan">Japán</string>
 	<string name="driving_region_us">USA</string>
@@ -1606,7 +1606,7 @@
 	
 	<string name="shared_string_share">Megosztás</string>
 	<string name="share_fav_subject">OsmAndból megosztott kedvencek</string>
-	<string name="no_index_file_to_download">Nem találhatók letöltések, ellenőrizd az internetkapcsolatot.</string>
+	<string name="no_index_file_to_download">Nem találhatók letöltések, ellenőrizze az internetkapcsolatát.</string>
     <string name="none_selected_gpx">Nincs GPX fájl kiválasztva. A kiválasztáshoz nyomj hosszan egy nyomvonalra.</string>
     
     <string name="local_index_select_gpx_file">Kiválasztás megjelenítésre</string>
@@ -1823,7 +1823,7 @@
     <string name="shared_string_my_location">Pozícióm</string>
     <string name="osm_editing_manage">Kezelés</string>
     
-	<string name="navigation_over_track">Indítasz navigációt a nyomvonal mentén?</string>
+	<string name="navigation_over_track">Elindítja a navigációt a nyomvonal mentén?</string>
 	<string name="avoid_roads_msg">Elkerülendő utcák kiválasztásával megváltoztathatod a tervezett útvonalat</string>
     <string name="enable_proxy_title">HTTP proxy engedélyezése</string>
 	<string name="enable_proxy_descr">HTTP proxy beállítása minden hálózati kéréshez</string>
@@ -1877,12 +1877,12 @@
 	<string name="action_modify">Módosítás művelet</string>
 	<string name="action_delete">Törlés művelet</string>
 	<string name="osm_edits">OSM szerkesztések</string>
-	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">perc</string><string name="osmand_parking_time_left">Bal</string> <string name="confirmation_to_clear_history">A teljes előzményt törölni szeretné?</string>
-    <string name="delay_to_start_navigation_descr">Navigáció automatikus indítása egy megadott idő után</string>
+	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">perc</string><string name="osmand_parking_time_left">bal</string> <string name="confirmation_to_clear_history">Szeretné törölni az előzményeket?</string>
+    <string name="delay_to_start_navigation_descr">A hátralévő várakozási idő megadása az útvonaltervezés képernyőn</string>
     <string name="delay_to_start_navigation">Útvonaltervezés kihagyása</string>
     <string name="shared_string_go">Indítás</string>
 	
-	<string name="parking_place_limited">A parkolóhely időkorlátos</string>
+	<string name="parking_place_limited">A parkolási idő korlátozott</string>
 	<string name="your_edits">Az Ön szerkesztései</string>
     <string name="waypoint_visit_after">Megtekintés ez után:</string>
     <string name="simulate_your_location">Pozíció szimulálása</string>
@@ -1903,17 +1903,23 @@
 	<string name="shared_string_release">Megjelent</string>
 	<string name="days_behind">napos</string>
 	<string name="welmode_download_maps">Térképek letöltése</string>
-	<string name="confirm_usage_speed_cameras">"Néhány országban (pl. Németország, Franciaország, Olaszország) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérlek kattints az Igen gombra, ha jogosult vagy a funkció használatára. "</string> 
+	<string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérem kattintson az Igen gombra, ha jogosult a funkció használatára.</string> 
 	<string name="welcome_select_region">Válaszd ki a régiódat</string>
-	<string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát!</string>
+	<string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát az egész világon!</string>
 	<string name="current_route">Jelenlegi útvonal</string>
-    <string name="osmo_grop_name_length_alert">A csoportnév legalább 3 karakter hosszú kell legyen!</string>
+    <string name="osmo_grop_name_length_alert">A csoportnévnek legalább 3 karakter hosszúnak kell lennie!</string>
 	<string name="local_osm_changes_upload_all_confirm">%1$d módosítást fogsz feltölteni OSM-re. Biztos vagy benne?</string>
     <string name="osmand_parking_overdue">lejár</string>
 	<string name="waypoint_visit_before">Megtekintés ez előtt:</string>
     <string name="agps_info">A-GPS információk</string>
 	<string name="agps_data_last_downloaded">Legutóbb letöltött A-GPS adatok: %1$s</string>
     <string name="welcome_header">Üdvözöljük</string>
-    <string name="osm_changes_added_to_local_edits">Az OSM változások hozzáadva a helyi változásokhoz</string>
+    <string name="osm_changes_added_to_local_edits">Az OSM változások hozzáadva a helyi változáscsomaghoz</string>
    	<string name="mark_to_delete">Megjelölés törlésre</string>
+	<string name="shared_string_places">Helyek</string>
+	<string name="shared_string_search">Keresés</string>
+	<string name="shared_string_show_description">Leírás megjelenítése</string>
+	<string name="shared_string_message">Üzenet</string>
+	<string name="shared_string_do_not_use">Ne használja</string>
+	<string name="shared_string_address">Cím</string>
 	</resources>
