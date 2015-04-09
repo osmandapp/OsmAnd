@@ -270,14 +270,14 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 			
 			@Override
 			public boolean accept(Amenity a) {
-				if(sm != null) {
-				String lower = OsmAndFormatter.getPoiStringWithoutType(a, en);
-				if(!sm.matches(lower)) {
-					return false;
+				if (sm != null) {
+					String lower = OsmAndFormatter.getPoiStringWithoutType(a, en);
+					if (!sm.matches(lower)) {
+						return false;
+					}
 				}
-				}
-				if(allTime) {
-					if(!"24/7".equalsIgnoreCase(a.getOpeningHours())) {
+				if (allTime) {
+					if (!"24/7".equalsIgnoreCase(a.getOpeningHours())) {
 						return false;
 					}
 				}
