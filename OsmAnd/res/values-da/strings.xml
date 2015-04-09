@@ -1993,4 +1993,5 @@
 	<string name="shared_string_show_description">Vis beskrivelse</string>
 	<string name="shared_string_search">Søg</string>
 	<string name="shared_string_places">Steder</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM kortlægger assistent</string>
 	</resources>
