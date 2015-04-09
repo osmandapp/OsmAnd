@@ -766,8 +766,8 @@
 	<string name="poi_fuel_octane_98_yes">Oktan 98</string>
 	<string name="poi_fuel_octane_100_yes">Oktan 100</string>
 	<string name="poi_fuel_cng_yes">CNG</string>
-	<string name="poi_fuel_1_25_yes">1:25 brændstof</string>
-	<string name="poi_fuel_1_50_yes">1:50 brændstof</string>
+	<string name="poi_fuel_1_25_yes">1:25 benzin</string>
+	<string name="poi_fuel_1_50_yes">1:50 benzin</string>
 	<string name="poi_fuel_ethanol_yes">Ethanol</string>
 	<string name="poi_fuel_methanol_yes">Methanol</string>
 	<string name="poi_fuel_svo_yes">SVO</string>
