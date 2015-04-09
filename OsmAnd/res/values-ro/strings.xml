@@ -1361,7 +1361,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Durată</string>
     <string name="distance">Distanță</string>
-    <string name="flat_list_waypoints">Toate</string>
+    <string name="shared_string_all">Toate</string>
     <string name="waypoints">Puncte de referință</string>
     <string name="targets">Destinații</string>
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>

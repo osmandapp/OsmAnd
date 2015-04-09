@@ -112,6 +112,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 		final double lat = latitude;
 		final double lon = longitude;
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		if (searchNearBy) {
 			AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
@@ -261,7 +262,16 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			check.setChecked(filter.isTypeAccepted(model));
 
 			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
-			text.setText(model.getTranslation());
+			String textString = model.getTranslation();
+			Set<String> subtypes = filter.getAcceptedSubtypes(model);
+			if(filter.isTypeAccepted(model)) {
+				if(subtypes == null) {
+					textString += " (" + getString(R.string.shared_string_all) +")";
+				} else {
+					textString += " (" + subtypes.size() +")";
+				}
+			}
+			text.setText(textString);
 			addRowListener(model, text, check);
 			return (row);
 		}

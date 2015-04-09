@@ -108,6 +108,24 @@ public class MapPoiTypes {
 		return null;
 	}
 	
+	public AbstractPoiType getAnyPoiTypeByKey(String name) {
+		for(PoiCategory pc : categories) {
+			if(pc.getKeyName().equals(name)) {
+				return pc;
+			}
+			for(PoiFilter pf : pc.getPoiFilters()) {
+				if(pf.getKeyName().equals(name)) {
+					return pf;
+				}	
+			}
+			PoiType pt = pc.getPoiTypeByKeyName(name);
+			if(pt != null && !pt.isReference()) {
+				return pt;
+			}
+		}
+		return null;
+	}
+	
 	public Map<String, PoiType> getAllTranslatedNames() {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
 		for(PoiCategory pc : categories) {
@@ -208,6 +226,7 @@ public class MapPoiTypes {
 			parser.setInput(is, "UTF-8");
 			PoiCategory lastCategory = null;
 			PoiFilter lastFilter = null;
+			PoiType lastType = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
@@ -230,6 +249,16 @@ public class MapPoiTypes {
 							lastFilter.addPoiType(tp);
 						}
 						lastCategory.addPoiType(tp);
+					} else if(name.equals("poi_additional")){
+						PoiType tp = new PoiType(this,
+								lastCategory, parser.getAttributeValue("","name"));
+						tp.setOsmTag(parser.getAttributeValue("","tag"));
+						tp.setOsmValue(parser.getAttributeValue("","value"));
+						tp.setOsmTag2(parser.getAttributeValue("","tag2"));
+						tp.setOsmValue2(parser.getAttributeValue("","value2"));
+						if(lastType != null) {
+							lastType.addPoiAdditional(tp);
+						}
 					} else if(name.equals("poi_type")){
 						PoiType tp = new PoiType(this,
 								lastCategory, parser.getAttributeValue("","name"));
@@ -237,7 +266,7 @@ public class MapPoiTypes {
 						tp.setOsmValue(parser.getAttributeValue("","value"));
 						tp.setOsmTag2(parser.getAttributeValue("","tag2"));
 						tp.setOsmValue2(parser.getAttributeValue("","value2"));
-						
+						lastType = tp;
 						if(lastFilter != null) {
 							lastFilter.addPoiType(tp);
 						}
@@ -247,7 +276,9 @@ public class MapPoiTypes {
 					String name = parser.getName();
 					if (name.equals("poi_filter")) { 
 						lastFilter = null;
-					}
+					} else if (name.equals("poi_type")) { 
+						lastType = null;
+					} 
 				}
 			}
 			log.info("Time to init poi types" + (System.currentTimeMillis() - time)); //$NON-NLS-1$

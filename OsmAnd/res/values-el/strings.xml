@@ -1561,7 +1561,7 @@
 	<string name="gpx_monitoring_stop">Παύση καταγραφής GPX</string>
     <string name="gpx_start_new_segment">Έναρξη νέου τμήματος</string>
     <string name="osmo_settings">Παρακολούθηση OsMo</string>
-    <string name="flat_list_waypoints">Όλα</string>
+    <string name="shared_string_all">Όλα</string>
     <string name="targets">Προορισμοί</string>
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
     <string name="speak_favorites">Ανακοίνωση κοντινών Αγαπημένων</string>

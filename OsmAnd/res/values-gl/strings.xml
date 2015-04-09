@@ -53,7 +53,7 @@
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="index_tours">Visitas</string>
-    <string name="flat_list_waypoints">Todo</string>
+    <string name="shared_string_all">Todo</string>
     <string name="waypoints">Puntos de pasaxe</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Anunciar os puntos de pasaxe do GPX</string>

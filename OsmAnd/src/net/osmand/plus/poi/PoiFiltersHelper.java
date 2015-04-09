@@ -122,7 +122,7 @@ public class PoiFiltersHelper {
 		}
 		if(filterId.startsWith(PoiLegacyFilter.STD_PREFIX)) {
 			String typeId = filterId.substring(PoiLegacyFilter.STD_PREFIX.length());
-			PoiType tp = application.getPoiTypes().getPoiTypeByKey(typeId);
+			AbstractPoiType tp = application.getPoiTypes().getAnyPoiTypeByKey(typeId);
 			if(tp != null) {
 				PoiLegacyFilter lf = new PoiLegacyFilter(tp, application);
 				cacheTopStandardFilters.add(lf);

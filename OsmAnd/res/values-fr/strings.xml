@@ -1790,7 +1790,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Annoncer les favoris proches</string>
     <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
-    <string name="flat_list_waypoints">Tous</string>
+    <string name="shared_string_all">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>

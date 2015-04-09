@@ -1708,7 +1708,7 @@ s často kladenými otázkami.</string>
     <string name="duration">Trvání</string>
     <string name="distance">Vzdálenost</string>
     <string name="index_tours">Cesty</string>
-    <string name="flat_list_waypoints">Všechny</string>
+    <string name="shared_string_all">Všechny</string>
     <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
 	<string name="waypoints">Body na trase</string>
     <string name="targets">Cíle</string>

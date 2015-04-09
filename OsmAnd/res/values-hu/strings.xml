@@ -1695,7 +1695,7 @@
     <string name="rendering_attr_osmcTraces_description">OSMC stílusú túrajelzések megjelenítése</string>
     
 	<string name="index_tours">Túrák</string>
-    <string name="flat_list_waypoints">Összes</string>
+    <string name="shared_string_all">Összes</string>
     <string name="waypoints">Útpontok</string>
     <string name="targets">Úti célok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>

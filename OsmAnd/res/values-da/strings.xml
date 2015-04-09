@@ -1719,7 +1719,7 @@
     <string name="way_alarms">Trafikadvarsler</string>
     <string name="speak_favorites">Favoritter i nærheden</string>
     <string name="speak_poi">Interessepunkt (IP) i nærheden</string>
-    <string name="flat_list_waypoints">Alle</string>
+    <string name="shared_string_all">Alle</string>
     <string name="index_tours">Ture</string>
     <string name="distance">Afstand</string>
     <string name="duration">Varighed</string>

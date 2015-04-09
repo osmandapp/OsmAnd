@@ -1711,7 +1711,7 @@
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">通報附近我的最愛</string>
     <string name="speak_poi">通報附近 POI</string>
-    <string name="flat_list_waypoints">全部</string>
+    <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具以啟動去記錄和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n記錄的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用記錄的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
     <string name="record_plugin_name">正在記錄行程</string>
