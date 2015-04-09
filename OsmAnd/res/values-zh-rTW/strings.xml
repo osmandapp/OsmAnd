@@ -1964,4 +1964,5 @@
 	<string name="shared_string_address">地址</string>
 	<string name="shared_string_show_description">顯示記述</string>
 	<string name="shared_string_search">搜尋</string>
+	<string name="shared_string_places">地點</string>
 	</resources>
