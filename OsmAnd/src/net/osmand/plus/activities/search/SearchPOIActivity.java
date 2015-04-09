@@ -110,7 +110,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private MenuItem showOnMapItem;
 	private MenuItem searchPOILevel;
 	private static int RESULT_REQUEST_CODE = 54;
-	private static int RESULT_CUSTOM_REQUEST_CODE = 55;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu omenu) {
@@ -351,8 +350,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
 		}
-		startActivityForResult(newIntent, poi.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID) ? 
-				RESULT_CUSTOM_REQUEST_CODE : RESULT_REQUEST_CODE);
+		startActivityForResult(newIntent, RESULT_REQUEST_CODE);
 	}
 	
 	@Override
