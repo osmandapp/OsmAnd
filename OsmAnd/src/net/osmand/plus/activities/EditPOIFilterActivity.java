@@ -73,7 +73,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				if (selectAll.isChecked()) {
 					selectAll();
 				} else {
-					//deselectAll();
+					deselectAll();
 				}
 			}
 		});
@@ -252,6 +252,16 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			final int top = (v == null) ? 0 : v.getTop();
 			lv.setSelectionFromTop(index, top);
 		}
+	}
+
+	private void deselectAll(){
+		AmenityAdapter adapter = getListAdapter();
+		int count = adapter.getCount();
+		for (int i =0; i< count; i++) {
+			filter.setTypeToAccept(adapter.getItem(i), false);
+		}
+		ListView lv = EditPOIFilterActivity.this.getListView();
+		lv.deferNotifyDataSetChanged();
 	}
 
 	@Override
