@@ -1921,4 +1921,7 @@ s často kladenými otázkami.</string>
 	<string name="shared_string_address">Adresa</string>
 	<string name="shared_string_places">Místa</string>
 	<string name="shared_string_search">Hledat</string>
-	</resources>
+	<string name="shared_string_manage">Spravovat</string>
+	<string name="shared_string_edit">Upravit</string>
+	<string name="shared_string_open">Otevřít</string>
+    </resources>
