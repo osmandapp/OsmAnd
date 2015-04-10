@@ -1940,4 +1940,8 @@
 	<string name="shared_string_show_description">Ammustra descritzione</string>
 	<string name="shared_string_places">Logos</string>
 	<string name="shared_string_search">Chirca</string>
+	<string name="shared_string_open">Abertu</string>
+    <string name="shared_string_manage">Amministra</string>
+	<string name="shared_string_edit">Modìfica</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">Assistente mapadura OSM</string>
 	</resources>
