@@ -4,10 +4,13 @@ package net.osmand.plus.poi;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.CollatorStringMatcher;
@@ -20,6 +23,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -39,6 +43,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 			LinkedHashSet<String>>();
+	private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
 
 	protected String filterId;
 	protected String name;
@@ -65,8 +70,9 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
 		if (type == null) {
 			initSearchAll();
+			updatePoiAdditionals();
 		} else {
-			type.putTypes(acceptedTypes);
+			updateTypesToAccept(type);
 		}
 	}
 	
@@ -94,7 +100,10 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		} else {
 			this.acceptedTypes.putAll(acceptedTypes);
 		}
+		updatePoiAdditionals();
 	}
+
+	
 
 	public String getFilterByName() {
 		return filterByName;
@@ -245,6 +254,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		String[] items = filter.split(" ");
 		boolean allTime = false;
 		boolean open = false;
+		Map<PoiType, String> poiAdditionalsFilter =  null;
 		for(String s : items) {
 			s = s.trim();
 			if(!Algorithms.isEmpty(s)){
@@ -252,16 +262,21 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 					allTime = true;
 				} else if(getNameTokenOpen().equalsIgnoreCase(s)){
 					open = true;
+				} else if(poiAdditionals.containsKey(s.toLowerCase())) {
+					if(poiAdditionalsFilter == null) {
+						poiAdditionalsFilter = new LinkedHashMap<PoiType, String>();
+					}
+					poiAdditionalsFilter.put(poiAdditionals.get(s.toLowerCase()), null);
 				} else {
 					nmFilter.append(s).append(" ");
 				}
 			}
 		}
-		return getNameFilterInternal(nmFilter, allTime, open);
+		return getNameFilterInternal(nmFilter, allTime, open, poiAdditionalsFilter);
 	}
 
 	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter, 
-			final boolean allTime, final boolean open) {
+			final boolean allTime, final boolean open, final Map<PoiType, String> poiAdditionals) {
 		final CollatorStringMatcher sm =
 				nmFilter.length() > 0 ?
 				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
@@ -274,6 +289,18 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 					String lower = OsmAndFormatter.getPoiStringWithoutType(a, en);
 					if (!sm.matches(lower)) {
 						return false;
+					}
+				}
+				if(poiAdditionals != null) {
+					Iterator<Entry<PoiType, String>> it = poiAdditionals.entrySet().iterator();
+					while(it.hasNext()) {
+						Entry<PoiType, String> e = it.next();
+						String inf = a.getAdditionalInfo(e.getKey().getKeyName());
+						if(inf == null) {
+							return false;
+						} else if(e.getValue() != null && !e.getValue().equalsIgnoreCase(inf)) {
+							return false;
+						}
 					}
 				}
 				if (allTime) {
@@ -388,6 +415,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	public void clearFilter() {
 		acceptedTypes = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
+		poiAdditionals.clear();
 	}
 	
 	public boolean areAllTypesAccepted(){
@@ -403,22 +431,45 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	}
 	
 	
-	public void setTypeToAccept(PoiCategory type, boolean accept){
-		if(accept){
-			acceptedTypes.put(type, new LinkedHashSet<String>());
-		} else {
-			acceptedTypes.remove(type);
-		}
-	}
-	
 	public void updateTypesToAccept(AbstractPoiType pt) {
 		acceptedTypes.clear();
 		pt.putTypes(acceptedTypes);
+		poiAdditionals.clear();
+		fillPoiAdditionals(pt);
 	}
 	
+	private void fillPoiAdditionals(AbstractPoiType pt) {
+		for(PoiType add : pt.getPoiAdditionals()) {
+			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
+			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
+		}
+		if(pt instanceof PoiFilter) {
+			for(PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
+				fillPoiAdditionals(ps);
+			}
+		}
+	}
+	
+	private void updatePoiAdditionals() {
+		Iterator<Entry<PoiCategory, LinkedHashSet<String>>> e = acceptedTypes.entrySet().iterator();
+		poiAdditionals.clear();
+		while(e.hasNext()) {
+			Entry<PoiCategory, LinkedHashSet<String>> pc = e.next();
+			fillPoiAdditionals(pc.getKey());
+			if(pc.getValue() != null) {
+				for(String s : pc.getValue()) {
+					PoiType subtype = poiTypes.getPoiTypeByKey(s);
+					fillPoiAdditionals(subtype);
+				}
+			}
+		}
+	}
+
 	public void updateTypesToAccept(PoiLegacyFilter f) {
 		acceptedTypes.clear();
 		acceptedTypes.putAll(f.acceptedTypes);
+		poiAdditionals.clear();
+		poiAdditionals.putAll(f.poiAdditionals);
 	}
 	
 	
@@ -428,10 +479,25 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept){
 		acceptedTypes.put(t, accept);
+		fillPoiAdditionals(t);
+	}
+	
+	public void setTypeToAccept(PoiCategory poiCategory, boolean b) {
+		if(b) {
+			acceptedTypes.put(poiCategory, null);
+		} else {
+			acceptedTypes.remove(poiCategory);
+		}
+		updatePoiAdditionals();
+		
 	}
 	
 	public String getFilterId(){
 		return filterId;
+	}
+	
+	public Map<String, PoiType> getPoiAdditionals() {
+		return poiAdditionals;
 	}
 	
 	public String getSimplifiedId(){
@@ -483,4 +549,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		
 		public boolean accept(Amenity a) ;
 	}
+
+
+	
 }
