@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -656,6 +657,24 @@ public class OsmandSettings {
 				((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
+		};
+		
+		protected DrivingRegion getDefaultValue() {
+			Locale df = Locale.getDefault();
+			if(df == null) {
+				return DrivingRegion.EUROPE_ASIA;
+			}
+			if(df.getCountry().equalsIgnoreCase(Locale.US.getCountry())) {
+				return DrivingRegion.US;
+			} else if(df.getCountry().equalsIgnoreCase(Locale.CANADA.getCountry())) {
+				return DrivingRegion.CANADA;
+			} else if(df.getCountry().equalsIgnoreCase(Locale.JAPAN.getCountry())) {
+				return DrivingRegion.JAPAN;
+			// potentially wrong in europe
+//			} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
+//				return DrivingRegion.UK_AND_OTHERS;
+			}
+			return DrivingRegion.EUROPE_ASIA;
 		};
 	}.makeGlobal().cache();
 	
