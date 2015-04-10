@@ -282,4 +282,9 @@
 	<string name="poi_fuel_e85_yes">E85・バイオエタノール85％混合ガソリン(E85)</string>
 	<string name="poi_fuel_biogas_yes">E85・バイオエタノール85％混合ガソリン(E85)</string>
 	<string name="poi_fuel_LH2_yes">液体水素(Liquid hydrogen)</string>
+	<string name="poi_fuel_electricity_yes">電気(Electricity)</string>
+	<string name="poi_junction">ジャンクション(Junction)</string>
+	<string name="poi_rest_area">PA・SA(Rest area)</string>
+
+	<string name="poi_post_office">郵便局(Post office)</string>
 	</resources>
