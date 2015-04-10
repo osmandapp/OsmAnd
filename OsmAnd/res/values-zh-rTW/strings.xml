@@ -1965,4 +1965,8 @@
 	<string name="shared_string_show_description">顯示記述</string>
 	<string name="shared_string_search">搜尋</string>
 	<string name="shared_string_places">地點</string>
+	<string name="shared_string_open">開啓</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM 制圖助手</string>
+	<string name="shared_string_manage">管理</string>
+	<string name="shared_string_edit">編輯</string>
 	</resources>

@@ -739,7 +739,7 @@
 
 	<string name="poi_landuse">Occupation du sol</string>
 	<string name="poi_fuel_diesel_yes">Gazole</string>
-	<string name="poi_fuel_gtl_diesel_yes">GPL</string>
+	<string name="poi_fuel_gtl_diesel_yes">Gazole liquéfié</string>
 	<string name="poi_fuel_hgv_diesel_yes">Gazole poids lourds</string>
 	<string name="poi_fuel_biodiesel_yes">Bio-gazole</string>
 	<string name="poi_fuel_lpg_yes">GPL</string>

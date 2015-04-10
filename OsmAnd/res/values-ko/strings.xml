@@ -2223,4 +2223,10 @@
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
 	<string name="shared_string_address">주소</string>
 	<string name="shared_string_show_description">설명 표시</string>
+	<string name="shared_string_open">열기</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM 지도작성 도우미</string>
+	<string name="shared_string_manage">관리</string>
+	<string name="shared_string_edit">편집</string>
+	<string name="shared_string_places">장소</string>
+	<string name="shared_string_search">검색</string>
 	</resources>

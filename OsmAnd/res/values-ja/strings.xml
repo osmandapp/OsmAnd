@@ -2011,4 +2011,10 @@ POIの更新は利用できません</string>
 	<string name="shared_string_do_not_use">使用しない</string>
 	<string name="shared_string_show_description">説明表示</string>
 	<string name="shared_string_address">住所</string>
-	</resources>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM マップ作成アシスタント</string>
+	<string name="shared_string_manage">管理</string>
+	<string name="shared_string_edit">編集</string>
+	<string name="shared_string_places">場所</string>
+	<string name="shared_string_search">検索</string>
+	<string name="shared_string_open">開く</string>
+    </resources>
