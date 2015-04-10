@@ -443,7 +443,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
-		if(pt instanceof PoiFilter) {
+		if(pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
 			for(PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
 				fillPoiAdditionals(ps);
 			}
