@@ -287,4 +287,56 @@
 	<string name="poi_rest_area">PA・SA(Rest area)</string>
 
 	<string name="poi_post_office">郵便局(Post office)</string>
+	<string name="poi_post_box">郵便ポスト(Post box)</string>
+	<string name="poi_telephone">公衆電話(Telephone)</string>
+	<string name="poi_communication_tower">電波塔(Communication tower)</string>
+	<string name="poi_telephone_exchange">電話収容局・交換局(Telephone exchange)</string>
+
+	<string name="poi_recycling">リサイクル施設・資源ごみ回収所(Recycling)</string>
+	<string name="poi_landfill">ゴミ埋立地(Landfill)</string>
+	<string name="poi_waste_disposal">ゴミ捨て場(Waste disposal)</string>
+	<string name="poi_waste_basket">ゴミ箱(Waste basket)</string>
+
+	<string name="poi_industrial">工業地域(Industrial area)</string>
+	<string name="poi_quarry">採石場(Quarry)</string>
+	<string name="poi_vineyard">葡萄畑(Vineyard)</string>
+	<string name="poi_orchard">果樹園(Orchard)</string>
+	<string name="poi_allotments">小規模農園(Allotments)</string>
+	<string name="poi_forest">植林地帯(Human maintained forest)</string>
+	<string name="poi_farmyard">農場(Farmyard)</string>
+	<string name="poi_meadow">牧草地(Meadow)</string>
+	<string name="poi_landuse_railway">鉄道用地(Railroad area)</string>
+
+	<string name="poi_canal">運河(Canal)</string>
+	<string name="poi_pier">桟橋(Pier)</string>
+	<string name="poi_surveillance">監視区域(Surveillance)</string>
+	<string name="poi_observatory">観測台(Observatory)</string>
+	<string name="poi_astronomical_observatory">天文台(Astronomical observatory)</string>
+	<string name="poi_tower">塔(Tower)</string>
+	<string name="poi_mast">柱(Mast)</string>
+	<string name="poi_radar">レーダー(Radar)</string>
+	<string name="poi_construction">工事現場(Construction)</string>
+	<string name="poi_works">工場(Works)</string>
+	<string name="poi_mineshaft">縦坑(Mineshaft)</string>
+	<string name="poi_adit">坑道入口(Adit)</string>
+	<string name="poi_petroleum_well">油井(Petroleum well)</string>
+	<string name="poi_survey_point">測地基準点(Survey point)</string>
+	<string name="poi_windmill">風車(Windmill)</string>
+	<string name="poi_salt_pond">塩田(Salt pond)</string>
+	<string name="poi_reservoir">貯水池(Reservoir)</string>
+	<string name="poi_cricket_nets">クリケット練習場(Cricket nets)</string>
+	<string name="poi_gasometer">ガスタンク(Gasometer)</string>
+	<string name="poi_silo">サイロ(Silo)</string>
+	<string name="poi_storage_tank">貯蔵タンク(Storage tank)</string>
+
+	<string name="poi_driving_school">自動車教習所(Driving school)</string>
+	<string name="poi_training">訓練施設(Training facility)</string>
+	<string name="poi_social_facility">社会福祉施設(Social facility)</string>
+	<string name="poi_courthouse">裁判所(Courthouse)</string>
+	<string name="poi_prison">刑務所(Prison)</string>
+	<string name="poi_register_office">役所の市民課・住民登録所(Civil registry office)</string>
+	<string name="poi_government">政府機関(Government)</string>
+	<string name="poi_bailiff">裁判所・簡易裁判所(Bailiff)</string>
+	<string name="poi_prosecutor">検察官(Prosecutor)</string>
+	<string name="poi_pension_fund">年金基金(Pension fund)</string>
 	</resources>
