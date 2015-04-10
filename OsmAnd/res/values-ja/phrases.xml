@@ -339,4 +339,15 @@
 	<string name="poi_bailiff">裁判所・簡易裁判所(Bailiff)</string>
 	<string name="poi_prosecutor">検察官(Prosecutor)</string>
 	<string name="poi_pension_fund">年金基金(Pension fund)</string>
+	<string name="poi_tax_inspection">税務調査(Tax inspection)</string>
+	<string name="poi_office_administrative">地方自治体(Administrative office)</string>
+	<string name="poi_customs">税関(Customs)</string>
+	<string name="poi_town">町(Town)</string>
+	<string name="poi_village">村(Village)</string>
+	<string name="poi_hamlet">集落(Hamlet)</string>
+	<string name="poi_isolated_dwelling">孤立住居(Isolated dwelling)</string>
+	<string name="poi_suburb">区・区画(Suburb)</string>
+	<string name="poi_quarter">大字(Quarter)</string>
+	<string name="poi_neighbourhood">町丁(Neighbourhood)</string>
+	<string name="poi_locality">非居住地(Locality)</string>
 	</resources>
