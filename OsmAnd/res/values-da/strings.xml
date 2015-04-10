@@ -1994,4 +1994,7 @@
 	<string name="shared_string_search">Søg</string>
 	<string name="shared_string_places">Steder</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM kortlægger assistent</string>
+	<string name="shared_string_open">Åben</string>
+    <string name="shared_string_manage">Administrer</string>
+	<string name="shared_string_edit">Rediger</string>
 	</resources>
