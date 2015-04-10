@@ -163,14 +163,6 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		}
 	}
 
-	private void showEditActivity(PoiLegacyFilter poi) {
-		Intent newIntent = new Intent(getActivity(), EditPOIFilterActivity.class);
-		// folder selected
-		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
-		updateIntentToLaunch(newIntent);
-		startActivity(newIntent);
-	}
-	
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
 		final Object item = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
@@ -292,7 +284,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			public boolean onMenuItemClick(MenuItem item) {
 				PoiLegacyFilter filter = getApp().getPoiFilters().getCustomPOIFilter();
 				filter.clearFilter();
-				showEditActivity(filter);
+				showFilterActivity(filter.getFilterId());
 				return true;
 			}
 		});

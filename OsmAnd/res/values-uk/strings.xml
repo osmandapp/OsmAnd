@@ -1906,7 +1906,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="duration">Тривалісьть</string>
     <string name="distance">Віддаль</string>
     <string name="index_tours">Подорожі</string>
-    <string name="flat_list_waypoints">Усі</string>
+    <string name="shared_string_all">Усі</string>
     <string name="waypoints">Путьові точки</string>
     <string name="targets">Цілі</string>
     <string name="way_alarms">Перешкоди</string>

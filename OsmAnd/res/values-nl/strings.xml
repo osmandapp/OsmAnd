@@ -1889,7 +1889,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="way_alarms">Filemeldingen</string>
     <string name="speak_favorites">Meld favorieten in de buurt</string>
     <string name="speak_poi">Meld POI in de buurt</string>
-    <string name="flat_list_waypoints">Alle</string>
+    <string name="shared_string_all">Alle</string>
     <string name="index_tours">Reizen</string>
     <string name="record_plugin_name">Route opname</string>
     <string name="int_hour">u.</string>

@@ -2,6 +2,7 @@ package net.osmand.plus.poi;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -9,10 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.Location;
-import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
@@ -26,6 +26,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.content.Context;
 
 public class PoiLegacyFilter implements SearchPoiTypeFilter {
@@ -53,7 +55,6 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	protected String filterByName = null;
 	protected String savedFilterByName = null;
 	protected List<Amenity> currentSearchResult = null;
-	private Collator collator;
 	
 	// constructor for standard filters
 	public PoiLegacyFilter(AbstractPoiType type, OsmandApplication application) {
@@ -230,31 +231,90 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, wrapResultMatcher(matcher));
 	}
 	
-	public boolean checkNameFilter(Amenity object, String filter, boolean en) {
-		boolean publish = false;
+	public AmenityNameFilter getNameFilter(String filter) {
 		if (Algorithms.isEmpty(filter)) {
-			publish = true;
-		} else {
-			String lower = OsmAndFormatter.getPoiStringWithoutType(object, en);
-			publish = CollatorStringMatcher.ccontains(getCollator(), lower, filter);
+			return new AmenityNameFilter() {
+				
+				@Override
+				public boolean accept(Amenity a) {
+					return true;
+				}
+			};
 		}
-		return publish;
+		StringBuilder nmFilter = new StringBuilder();
+		String[] items = filter.split(" ");
+		boolean allTime = false;
+		boolean open = false;
+		for(String s : items) {
+			s = s.trim();
+			if(!Algorithms.isEmpty(s)){
+				if(getNameToken24H().equalsIgnoreCase(s)){
+					allTime = true;
+				} else if(getNameTokenOpen().equalsIgnoreCase(s)){
+					open = true;
+				} else {
+					nmFilter.append(s).append(" ");
+				}
+			}
+		}
+		return getNameFilterInternal(nmFilter, allTime, open);
 	}
 
-	private Collator getCollator() {
-		if (collator == null) {
-			collator = OsmAndCollator.primaryCollator();
-		}
-		return collator;
+	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter, 
+			final boolean allTime, final boolean open) {
+		final CollatorStringMatcher sm =
+				nmFilter.length() > 0 ?
+				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
+		final boolean en = app.getSettings().usingEnglishNames();
+		return new AmenityNameFilter() {
+			
+			@Override
+			public boolean accept(Amenity a) {
+				if (sm != null) {
+					String lower = OsmAndFormatter.getPoiStringWithoutType(a, en);
+					if (!sm.matches(lower)) {
+						return false;
+					}
+				}
+				if (allTime) {
+					if (!"24/7".equalsIgnoreCase(a.getOpeningHours())) {
+						return false;
+					}
+				}
+				if (open) {
+					OpeningHours rs = OpeningHoursParser.parseOpenedHours(a.getOpeningHours());
+					if (rs != null) {
+						Calendar inst = Calendar.getInstance();
+						inst.setTimeInMillis(System.currentTimeMillis());
+						boolean work = rs.isOpenedForTime(inst);
+						if (!work) {
+							return false;
+						}
+					} else {
+						return false;
+					}
+				}
+				return true;
+			}
+		};
 	}
 	
+	public String getNameToken24H() {
+		return "24/7";
+	}
+	
+	public String getNameTokenOpen() {
+		return app.getString(R.string.shared_string_open);
+	}
+	
+	
 	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
-		final boolean en = app.getSettings().usingEnglishNames();
+		final AmenityNameFilter nm = getNameFilter(filterByName);
 		return new ResultMatcher<Amenity>() {
 			
 			@Override
 			public boolean publish(Amenity a) {
-				if (checkNameFilter(a, filterByName, en)) {
+				if (nm.accept(a)) {
 					if (matcher == null || matcher.publish(a)) {
 						return true;
 					}
@@ -356,6 +416,11 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		pt.putTypes(acceptedTypes);
 	}
 	
+	public void updateTypesToAccept(PoiLegacyFilter f) {
+		acceptedTypes.clear();
+		acceptedTypes.putAll(f.acceptedTypes);
+	}
+	
 	
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
 		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
@@ -413,4 +478,9 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		return acceptedTypes.isEmpty();
 	}
 
+	
+	public interface AmenityNameFilter {
+		
+		public boolean accept(Amenity a) ;
+	}
 }

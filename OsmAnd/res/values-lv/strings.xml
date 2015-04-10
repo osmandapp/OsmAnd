@@ -1782,7 +1782,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="duration">Laiks</string>
     <string name="distance">Attālums</string>
     <string name="index_tours">Braucieni</string>
-    <string name="flat_list_waypoints">Visi</string>
+    <string name="shared_string_all">Visi</string>
     <string name="waypoints">Ceļapunkti</string>
     <string name="targets">Galamērķi</string>
     <string name="rendering_value_browse_map_name">Atvērt karti</string>  

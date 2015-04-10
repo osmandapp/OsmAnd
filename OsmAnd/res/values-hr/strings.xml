@@ -1195,7 +1195,7 @@
     <string name="save_track_to_gpx_globally">Spremi rutu kao GPX trag</string>
 	<string name="duration">Trajanje</string>
     <string name="distance">Udaljenost</string>
-    <string name="flat_list_waypoints">Sve</string>
+    <string name="shared_string_all">Sve</string>
     <string name="targets">Destinacije</string>
     <string name="way_alarms">Prometna upozorenja</string>
     <string name="speak_favorites">Najavi favorite u blizini</string>

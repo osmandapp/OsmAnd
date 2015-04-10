@@ -1784,7 +1784,7 @@
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Anunciar favoritos cercanos</string>
     <string name="speak_poi">Anunciar PDI cercano</string>
-    <string name="flat_list_waypoints">Todos</string>
+    <string name="shared_string_all">Todos</string>
     <string name="index_tours">Excursiones</string>
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>

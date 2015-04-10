@@ -1774,7 +1774,7 @@
     <string name="shared_string_more">Dar…</string>
     <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
     <string name="index_tours">Turai</string>
-    <string name="flat_list_waypoints">Visi</string>
+    <string name="shared_string_all">Visi</string>
     <string name="targets">Tikslai</string>
     <string name="waypoints">Tarpiniai taškai</string>
     <string name="way_alarms">Eismo perspėjimai</string>

@@ -1597,7 +1597,7 @@
     <string name="speak_favorites">Meddela om närbelägna favoriter</string>
     <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
-    <string name="flat_list_waypoints">Alla</string>
+    <string name="shared_string_all">Alla</string>
     <string name="record_plugin_description">"Denna modul aktiveras funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-inspelning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
 \n\nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet etc och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
     <string name="record_plugin_name">Inspelning av resor</string>
@@ -1855,4 +1855,6 @@
 	<string name="shared_string_address">Adress</string>
 	<string name="shared_string_show_description">Visa beskrivning</string>
 	<string name="shared_string_search">Sök</string>
+	<string name="shared_string_places">Platser</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM kartassistent</string>
 	</resources>

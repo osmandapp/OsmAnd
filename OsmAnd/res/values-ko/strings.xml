@@ -1942,7 +1942,7 @@
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
-    <string name="flat_list_waypoints">모두</string>
+    <string name="shared_string_all">모두</string>
     <string name="waypoints">경유지</string>
     <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
@@ -2223,4 +2223,10 @@
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
 	<string name="shared_string_address">주소</string>
 	<string name="shared_string_show_description">설명 표시</string>
+	<string name="shared_string_open">열기</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM 지도작성 도우미</string>
+	<string name="shared_string_manage">관리</string>
+	<string name="shared_string_edit">편집</string>
+	<string name="shared_string_places">장소</string>
+	<string name="shared_string_search">검색</string>
 	</resources>

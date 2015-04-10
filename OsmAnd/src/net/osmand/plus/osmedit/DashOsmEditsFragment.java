@@ -42,7 +42,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		TextView header = ((TextView) view.findViewById(R.id.fav_text));
 		header.setText(R.string.osm_settings);
 		Button manage = ((Button) view.findViewById(R.id.show_all));
-		manage.setText(R.string.osm_editing_manage);
+		manage.setText(R.string.shared_string_manage);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

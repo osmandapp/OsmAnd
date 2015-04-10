@@ -1867,7 +1867,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="way_alarms">Dopravné varovania</string>
     <string name="speak_favorites">Oznamovať blízke obľúbené body</string>
     <string name="speak_poi">Oznamovať blízke body záujmu</string>
-    <string name="flat_list_waypoints">Všetky</string>
+    <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla nahrávania GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>

@@ -1661,7 +1661,7 @@
 	<string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией?</string>
     <string name="osmo_not_signed_in">Не удалось войти в OsMo</string>
     <string name="osmo_gpx_track_downloaded">OsMo трек %1$s загружен.</string>
-    <string name="no_index_file_to_download">Загрузок не найдено. Проверьте подключение к Интернет.</string>
+    <string name="no_index_file_to_download">Загрузок не найдено, проверьте подключение к Интернет.</string>
     <string name="osmo_expire_group">Истекает</string>
     <string name="osmo_gpx_points_downloaded">Точки OsMo %1$s загружены.</string>
     <string name="osmo_session_not_available">Сессия недоступна, пожалуйста проверьте, что \"отправка местоположения\" включена.</string>
@@ -1705,7 +1705,7 @@
     <string name="speak_favorites">Объявлять близлежащие избранные</string>
     <string name="speak_poi">Объявлять близлежащие POI</string>
     <string name="index_tours">Туры</string>
-    <string name="flat_list_waypoints">Все</string>
+    <string name="shared_string_all">Все</string>
     <string name="distance">Расстояние</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
 	<string name="route_descr_destination">Пункт назначения</string>

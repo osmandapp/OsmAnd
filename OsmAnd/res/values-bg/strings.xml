@@ -1653,7 +1653,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="duration">Продължителност</string>
     <string name="distance">Разстояние</string>
     <string name="index_tours">Пътувания</string>
-    <string name="flat_list_waypoints">Всички</string>
+    <string name="shared_string_all">Всички</string>
     <string name="waypoints">Точки</string>
     <string name="targets">Дестинации</string>
     <string name="way_alarms">Предупреждения</string>

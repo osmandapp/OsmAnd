@@ -338,7 +338,7 @@
 	<string name="poi_attraction_big_wheel">Diabelski młyn</string>
 	<string name="poi_attraction_carousel">Karuzela</string>
 	<string name="poi_attraction_maze">Labirynt</string>
-	<string name="poi_attraction_roller_coaster">Roller coaster</string>
+	<string name="poi_attraction_roller_coaster">Kolejka górska</string>
 	<string name="poi_attraction_water_slide">Zjeżdżalnia wodna</string>
 
 	<string name="poi_hotel">Hotel</string>
@@ -486,4 +486,36 @@
 	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">Bule</string>
 	<string name="poi_battlefield">Miejsce bitwy</string>
+	<string name="poi_shop_food">Sklep spożywczy</string>
+	<string name="poi_road_obstacle">Przeszkoda drogowa</string>
+		<string name="poi_filling_station">Stacja benzynowa</string>
+		<string name="poi_personal_transport">Transport własny</string>
+		<string name="poi_public_transport">Transport publiczny</string>
+		<string name="poi_air_transport">Transport lotniczy</string>
+		<string name="poi_water_transport">Transport wodny</string>
+		<string name="poi_bicycle_transport">Transport rowerowy</string>
+		<string name="poi_water_supply">Wodociąg</string>
+		<string name="poi_power">Energia</string>
+		<string name="poi_communication">Komunikacja</string>
+		<string name="poi_trash_disposal">Utylizacja śmieci</string>
+		<string name="poi_office">Biuro</string>
+	<string name="poi_sightseeing">Zwiedzanie</string>
+		<string name="poi_internet_access">Dostęp do Internetu</string>
+	<string name="poi_farm">Sklep rolniczy</string>
+	<string name="poi_military_nuclear_explosion_site">Miejsce eksplozji jądrowej</string>
+<string name="poi_military_naval_base">Wojskowa baza morska</string>
+	<string name="poi_military_danger_area">Strefa zagrożenia</string>
+	<string name="poi_military_landuse">Strefa wojskowa</string>
+	<string name="poi_accomodation">Noclegi</string>
+		<string name="poi_club">Klub</string>
+	<string name="poi_cafe_and_restaurant">Kawiarnia i restauracja</string>
+	<string name="poi_car">Sklep motoryzacyjny</string>
+	<string name="poi_fuel_biodiesel_yes">Biodiesel</string>
+	<string name="poi_fuel_lpg_yes">LPG</string>
+	<string name="poi_fuel_cng_yes">CNG</string>
+	<string name="poi_public_transport_stop_position">"Przystanek transpoertu  publicznego"</string>
+	<string name="poi_halt">Przystanek kolejowy</string>
+	<string name="poi_rest_area">Miejsce odpoczynku</string>
+
+	<string name="poi_industrial">Tereny przemysłowe</string>
 	</resources>

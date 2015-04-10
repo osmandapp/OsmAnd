@@ -251,6 +251,7 @@
 	<string name="poi_speed_camera">Speed camera</string>
 	<string name="poi_turning_circle">Turning circle</string>
 	<string name="poi_motorway_junction">Motorway junction</string>
+	<string name="poi_junction">Junction</string>
 	<string name="poi_rest_area">Rest area</string>
 
 	<string name="poi_water_well">Water well</string>
@@ -281,6 +282,7 @@
 	<string name="poi_waste_disposal">Waste disposal</string>
 	<string name="poi_waste_basket">Waste basket</string>
 
+	<string name="poi_industrial">Industrial area</string>
 	<string name="poi_quarry">Quarry</string>
 	<string name="poi_vineyard">Vineyard</string>
 	<string name="poi_orchard">Orchard</string>
@@ -288,6 +290,7 @@
 	<string name="poi_forest">Human maintained forest</string>
 	<string name="poi_farmyard">Farmyard</string>
 	<string name="poi_meadow">Meadow</string>
+	<string name="poi_landuse_railway">Railroad area</string>
 
 	<string name="poi_canal">Canal</string>
 	<string name="poi_pier">Pier</string>
@@ -342,6 +345,7 @@
 	<string name="poi_locality">Locality</string>
 	<string name="poi_place_allotments">Allotments</string>
 	<string name="poi_place_farm">Farm</string>
+	<string name="poi_residential">Residential area</string>
 
 	<string name="poi_pharmacy">Pharmacy</string>
 	<string name="poi_hospital">Hospital</string>
