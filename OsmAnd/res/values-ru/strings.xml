@@ -1956,4 +1956,8 @@
 	<string name="shared_string_show_description">Показать описание</string>
 	<string name="shared_string_places">Места</string>
 	<string name="shared_string_search">Поиск</string>
+	<string name="shared_string_open">Открыть</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM помощник картографа</string>
+	<string name="shared_string_manage">Управление</string>
+	<string name="shared_string_edit">Редактировать</string>
 	</resources>
