@@ -833,11 +833,11 @@
   
   <string name="osmand_rastermaps_plugin_description">"Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott Openstreetmap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, hegyárnyékolási rétegek, stb.\n\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép borításaként vagy alátétjeként (mint például az OsmAnd szokásos kapcsolat nélküli térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül.\n\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan sqlite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő. "</string>
   <string name="osmand_background_plugin_description">Megjeleníti az útvonal követéséhez és a navigációhoz engedélyezett beállításokat alvó üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt.</string>
-  <string name="osmand_accessibility_description">Megjeleníti a beállításokat a speciális akadálymentesítési lehetőségek aktiválásához.</string>
+  <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, mint például a pozíció automatikus bejelentésénél.</string>
   
   
   
-  <string name="osmand_development_plugin_description">Megjeleníti a beállításokat a fejlesztéshez és szolgáltatások hibakereséséhez, mint például útvonal szimuláció vagy megjelenítési teljesítmény kijelzés.</string>
+  <string name="osmand_development_plugin_description">Ez a bővítmény beállításokat jelenít meg olyan fejlesztői és hibakeresési szolgáltatásokhoz, mint például útvonaltervezés tesztelése vagy szimulálása, a képernyő megjelenítésének teljesítménye, vagy hangalapú figyelmeztetések. Ezeket a beállításokat fejlesztőknek szánják, és nem szükségesek az átlagos felhasználónak.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
   
   <string name="prefs_plugins_descr">A bővítmények további funkciókkal és beállításokkal bővítik az alkalmazást</string>
@@ -895,7 +895,7 @@
   <string name="osmand_parking_pm">du.</string>
   <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
-  <string name="osmand_parking_plugin_description">Ezt a bővítményt azért fejlesztették, hogy az OsmAnd használatával könnyedén megjegyezhesse, hogy hol parkolta le az autóját.</string>
+  <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkolt le az autójával, és mennyi idő van még hátra, ha a parkolás időben korlátozott. A vezérlőpult kártyáján és a térkép felületi elemen megtalálható a parkolási hely és idő.\nÉrtesítést ad hozzá a naptárhoz abban az esetben, ha emlékeztetőt szeretne kérni erről.</string>
   <string name="osmand_parking_plugin_name">Parkolási hely</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -1225,7 +1225,7 @@
     <string name="plugin_distance_point">Pont</string>
     <string name="gpx_file_name">GPX fájlnév</string>
     <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
-    <string name="osmand_distance_planning_plugin_description">A pontok közti távolság méréséhez készíts egy útvonalat. Nyiss meg egy meglévő GPX fájlt szerkesztésre és mentsd el. Használhatod GPX alapú útvonaltervezésre is.</string>
+    <string name="osmand_distance_planning_plugin_description">Ez a bővítmény egy térkép képernyő felületi elemet biztosít, amely lehetővé teszi útvonalak létrehozását a térképen való koppintással, vagy meglévő GPX fájlok használatát vagy módosítását egy út megtervezéséhez és a pontok közötti távolság méréséhez. Az eredmény elmenthető GPX fájlként, amely később használható a vezetéshez.</string>
     <string name="osmand_distance_planning_plugin_name">Távolságszámító és tervezőeszköz</string>
     <string name="use_distance_measurement_help">* Pont lerakásához koppints.\n * Nyomd meg hosszan a térképet az előző pont törléséhez.\n * Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.\n * További műveletekért kattints a vezérlőgombra.</string>
     <string name="shared_string_do_not_show_again">Ne mutassa újra</string>
@@ -1923,4 +1923,7 @@
 	<string name="shared_string_do_not_use">Ne használja</string>
 	<string name="shared_string_address">Cím</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM térképező segéd</string>
+	<string name="shared_string_open">Megnyitás</string>
+    <string name="shared_string_manage">Kezelés</string>
+	<string name="shared_string_edit">Szerkesztés</string>
 	</resources>
