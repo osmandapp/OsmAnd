@@ -714,4 +714,7 @@
 	<string name="piste_ice_skate">Ледовый каток</string>
 
 	<string name="piste_snow_park">Снежный парк</string>
+	<string name="poi_fuel_diesel_yes">Дизель</string>
+	<string name="poi_fuel_ethanol_yes">Этанол</string>
+	<string name="poi_fuel_methanol_yes">Метанол</string>
 	</resources>
