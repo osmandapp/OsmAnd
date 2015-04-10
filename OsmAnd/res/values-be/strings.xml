@@ -1950,4 +1950,5 @@
 	<string name="rendering_attr_OSMMapperAssistant_name">Памагаты картографа OSM</string>
 	<string name="shared_string_manage">Кіраваць</string>
 	<string name="shared_string_edit">Правіць</string>
-	</resources>
+	<string name="shared_string_open">Адчыніць</string>
+    </resources>
