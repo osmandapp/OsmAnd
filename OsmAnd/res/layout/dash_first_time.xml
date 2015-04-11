@@ -10,7 +10,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@color/color_distance"
+		android:background="@color/osmand_orange"
 		android:orientation="vertical"
 		android:paddingBottom="@dimen/list_content_padding"
 		android:paddingLeft="@dimen/list_content_padding"
@@ -56,17 +56,22 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
+			android:paddingBottom="12dp"
+			android:paddingTop="12dp"
 			android:orientation="vertical">
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/welcome_select_region"/>
+				android:text="@string/welcome_select_region"
+				android:textSize="@dimen/download_descr_text_size"/>
 
 			<TextView
 				android:id="@+id/region"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textSize="@dimen/dash_parking_big_text_size"
+				android:layout_marginTop="@dimen/dashPadding"
 				tools:text="@string/driving_region"/>
 		</LinearLayout>
 

@@ -101,7 +101,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
 	private boolean portrait;
-	
+
+	int baseColor;
 	
 	private WaypointDialogHelper waypointDialogHelper;
 	private final int[] running = new int[] { -1 };
@@ -125,6 +126,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	public void createDashboardView() {
+		baseColor =  mapActivity.getResources().getColor(R.color.osmand_orange);
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
@@ -807,7 +809,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
 			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
 			t = Math.max(0, t);
-			int baseColor = 0xff8f00;
+
 			int alpha = (int) (t * 255);
 			// in order to have proper fast scroll down
 			int malpha = t == 1 ? alpha = 0 : alpha;
