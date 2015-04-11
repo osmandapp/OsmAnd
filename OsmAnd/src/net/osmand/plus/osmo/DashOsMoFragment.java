@@ -1,5 +1,22 @@
 package net.osmand.plus.osmo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,20 +31,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
@@ -169,8 +172,6 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		ArrayList<OsMoGroupsStorage.OsMoGroup> groups = new ArrayList<>(grps.getGroups());
 
 		List<OsMoGroupsStorage.OsMoDevice> devices = getOsMoDevices(groups);
-
-
 		setupDeviceViews(contentList, devices);
 	}
 
@@ -221,7 +222,28 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	private void sortDevices(List<OsMoGroupsStorage.OsMoDevice> devices) {
-		//TODO implement sorting somehow
+		try {
+			Collections.sort(devices, new Comparator<OsMoDevice>() {
+
+				@Override
+				public int compare(OsMoDevice lhs, OsMoDevice rhs) {
+					Location ll = lhs.getLastLocation();
+					Location rl = rhs.getLastLocation();
+					double maxDist = 50000;
+					double ld = ll == null || lastUpdatedLocation == null ? maxDist :
+							MapUtils.getDistance(lastUpdatedLocation, ll.getLatitude(), ll.getLongitude());
+					double rd = ll == null || lastUpdatedLocation == null ? maxDist :
+						MapUtils.getDistance(lastUpdatedLocation, rl.getLatitude(), rl.getLongitude());
+					if(ld == rd) {
+						return lhs.getVisibleName().compareTo(rhs.getVisibleName());
+					}
+					return Double.compare(ld, rd);
+				}
+			});
+		} catch (RuntimeException e) {
+			// sorting could be unstable due to location change
+			e.printStackTrace();
+		}
 	}
 
 	private LinearLayout getClearContentList(View mainView) {
