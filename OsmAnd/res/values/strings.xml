@@ -411,7 +411,7 @@
     <string name="osmo_group_by_invite">Enter by invite</string>
     <string name="osmo_group_information_desc">
         - All created groups are public! If you want to be anonymous, connect devices directly via Tracker ids.\n
-        - The group could be registered up to 16 people.\n
+        - Private groups are limited to 8 persons \n
         - In case of inactivity or only 1 person activity for 2 weeks, group will be deleted.\n
         - You can restrict group entrance, as only by invite, but to control group you need to go to admin console.\n
         - If you need to create a group, but with other conditions please contact http://osmo.mobi</string>
