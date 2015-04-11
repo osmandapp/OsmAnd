@@ -2091,4 +2091,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_places">Miejsca</string>
 	<string name="shared_string_search">Szukaj</string>
 	<string name="shared_string_open">Otwórz</string>
-    </resources>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asystent OSM</string>
+	<string name="shared_string_manage">Zarządzaj</string>
+	<string name="shared_string_edit">Edytuj</string>
+	</resources>
