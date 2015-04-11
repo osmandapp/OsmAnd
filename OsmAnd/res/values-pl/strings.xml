@@ -2090,4 +2090,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_show_description">Pokaż opis</string>
 	<string name="shared_string_places">Miejsca</string>
 	<string name="shared_string_search">Szukaj</string>
-	</resources>
+	<string name="shared_string_open">Otwórz</string>
+    </resources>
