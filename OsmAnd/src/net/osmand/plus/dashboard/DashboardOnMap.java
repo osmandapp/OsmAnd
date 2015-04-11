@@ -628,7 +628,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	
 
 	private void addOrUpdateDashboardFragments(boolean firstTime) {
-		firstTime = true;
 //		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
 		boolean showCards = !firstTime;
 		
