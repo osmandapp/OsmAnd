@@ -736,12 +736,12 @@
 
 	<string name="piste_downhill">Styrtløb</string>
 	<string name="piste_nordic">Langrend</string>
-	<string name="piste_skitour">Skitur</string>
+	<string name="piste_skitour">Skitouring</string>
 	<string name="piste_hike">Vandring</string>
 	<string name="piste_sleigh">Kane</string>
 	<string name="piste_sled">Slæde</string>
 	<string name="piste_snow_park">Snepark</string>
-	<string name="piste_playground">Legeplads</string>
+	<string name="piste_playground">Snelegeplads</string>
 	<string name="piste_ice_skate">Isskøjte</string>
 
 	<string name="poi_gasometer">Gasbeholder</string>
