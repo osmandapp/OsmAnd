@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -342,6 +344,16 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		addFilter(optionsMenu, getString(R.string.shared_string_open).toLowerCase());
 		addFilter(optionsMenu, "24/7");
+		Map<String, PoiType> poiAdditionals = f.getPoiAdditionals();
+		if(poiAdditionals != null) {
+			TreeMap<String, PoiType> adds = new TreeMap<String, PoiType>();
+			for(PoiType vtype : poiAdditionals.values()) {
+				adds.put(vtype.getTranslation().replace(' ', ':').toLowerCase(), vtype);
+			}
+			for(String vtype : adds.keySet()) {
+				addFilter(optionsMenu, vtype);
+			}
+		}
 		
 		optionsMenu.show();
 	}
