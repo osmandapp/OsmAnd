@@ -126,7 +126,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	public void createDashboardView() {
-		baseColor =  mapActivity.getResources().getColor(R.color.osmand_orange);
+		baseColor =  mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
@@ -628,7 +628,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	
 
 	private void addOrUpdateDashboardFragments(boolean firstTime) {
-		
+		firstTime = true;
 //		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
 		boolean showCards = !firstTime;
 		
