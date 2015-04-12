@@ -285,7 +285,7 @@ public class ConfigureMapMenu {
 									mapContext.updateMapSettings();
 								}
 								adapter.setItemDescription(pos, activity.getMyApplication().getSettings().MAP_DENSITY.get());
-								ad.notifyDataSetInvalidated()
+								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}
 						});
