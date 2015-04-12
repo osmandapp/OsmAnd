@@ -36,7 +36,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private String region;
 	
 	
-	private final LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
+	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	private int ZOOM_QTREE = 10;
 	private QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
 			1 << (ZOOM_QTREE + 1)), 8, 0.55f);
@@ -63,8 +63,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			try {
 				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
 						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+				LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>();
 				for (City c : cs) {
-					cities.put(c.getId(), c);
+					ncities.put(c.getId(), c);
 					LatLon loc = c.getLocation();
 					if(loc != null) {
 						int y31 = MapUtils.get31TileNumberY(loc.getLatitude());
@@ -73,6 +74,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						citiesQtree.insert(c, new QuadRect((x31 >> dz) - 1, (y31 >> dz) - 1, (x31 >> dz) + 1, (y31 >> dz) + 1));
 					}
 				}
+				cities = ncities;
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
@@ -118,20 +120,21 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
-	public synchronized void addCityToPreloadedList(City city) {
+	public void addCityToPreloadedList(City city) {
 		if (!cities.containsKey(city.getId())) {
-			cities.put(city.getId(), city);
+			LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>(cities);
+			ncities.put(city.getId(), city);
+			cities = ncities;
 		}
 	}
 	
 	@Override
-	public synchronized List<City> getLoadedCities(){
+	public List<City> getLoadedCities(){
 		return new ArrayList<City>(cities.values());
 	}
 	
 	@Override
 	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
-		//TODO: Check NPE, looks like o can be null here, question is why
 		Collection<Street> streets = o.getStreets();
 		if(!streets.isEmpty()){
 			return;
@@ -148,7 +151,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 //			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
 	
 	@Override
-	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
+	public synchronized List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
 		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name);
 		try {
 			file.searchAddressDataByName(req);
@@ -160,7 +163,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
+	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<City>();
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
@@ -338,7 +341,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public void clearCache() {
-		cities.clear();
+		cities = new LinkedHashMap<Long, City>();
 		citiesQtree.clear();
 		postCodes.clear();
 		
