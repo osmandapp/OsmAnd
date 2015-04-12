@@ -1718,7 +1718,7 @@
     <string name="osmo_auth_error_short">Falló la autorización</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n ¿Quieres realizar un nuevo registro?</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
-    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quieres ser anónimo, conecta dispositivos directamente a través de identificadores Tracker.\n - El grupo puede ser registrado hasta por 16 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada de grupo, como sólo por invitación, pero para controlar el grupo tienes que ir a la consola de administración.\n - Si tienes que crear un grupo, pero con otras condiciones, contacta con http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quieres ser anónimo, conecta dispositivos directamente a través de identificadores Tracker.\n - Los grupos privados están limitados a 8 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada de grupo, como sólo por invitación, pero para controlar el grupo tienes que ir a la consola de administración.\n - Si tienes que crear un grupo, pero con otras condiciones, contacta con http://osmo.mobi"</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo en conexión a OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
@@ -2005,4 +2005,10 @@
     <string name="shared_string_do_not_use">No usar</string>
 	<string name="shared_string_address">Dirección</string>
 	<string name="shared_string_show_description">Mostrar descripción</string>
+	<string name="shared_string_open">Abrir</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asistente de mapeador OSM</string>
+	<string name="shared_string_manage">Gestionar</string>
+	<string name="shared_string_edit">Editar</string>
+	<string name="shared_string_places">Lugares</string>
+	<string name="shared_string_search">Buscar</string>
 	</resources>
