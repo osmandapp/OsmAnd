@@ -244,7 +244,7 @@ public class ConfigureMapMenu {
 
 		adapter.item(R.string.map_magnifier).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(View notUseCouldBeNull) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
 				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
