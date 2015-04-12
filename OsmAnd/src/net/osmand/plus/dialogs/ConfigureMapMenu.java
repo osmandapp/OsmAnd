@@ -242,6 +242,54 @@ public class ConfigureMapMenu {
 			}
 		}).layout(R.layout.drawer_list_doubleitem).reg();
 
+		adapter.item(R.string.map_magnifier).listen(new OnContextMenuClick() {
+			@Override
+			public boolean onLongClick(View notUseCouldBeNull) {
+				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+				int p = (int) (mapDensity.get() * 100);
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 33, 50, 75, 100, 150, 200, 300, 400 });
+				final List<String> values = new ArrayList<String>();
+				int i = -1;
+				for (int k = 0; k <= tlist.size(); k++) {
+					final boolean end = k == tlist.size();
+					if (i == -1) {
+						if ((end || p < tlist.get(k))) {
+							values.add(p + "%");
+							i = k;
+						} else if (p == tlist.get(k)) {
+							i = k;
+						}
+
+					}
+					if (k < tlist.size()) {
+						values.add(tlist.get(k) + "%");
+					}
+				}
+				if (values.size() != tlist.size()) {
+					tlist.insert(i, p);
+				}
+
+				bld.setTitle(R.string.map_magnifier);
+				bld.setSingleChoiceItems(values.toArray(new String[values.size()]), i,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								int p = tlist.get(which);
+								mapDensity.set(p / 100.0f);
+								view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+								MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+								if (mapContext != null) {
+									mapContext.updateMapSettings();
+								}
+								dialog.dismiss();
+							}
+						});
+				bld.show();
+				return true;
+			}
+		}).description(activity.getMyApplication().getSettings().MAP_DENSITY.get()).layout(R.layout.drawer_list_doubleitem).reg();
+
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
