@@ -719,7 +719,7 @@
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначана</string>
 	
-	<string name="search_position_current_location">Бягучае месцазнаходжаньне…</string>
+	<string name="search_position_current_location">Бягучае становішча…</string>
 	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
@@ -815,7 +815,7 @@
 	<string name="install_more">Усталяваць яшчэ…</string>
 	<string name="level_to_switch_vector_raster_descr">Мінімальнае павелічэньне для выкарыстаньня вектарных мапаў</string>
 	<string name="level_to_switch_vector_raster">Мінімальнае павелічэньне вектарных мапаў</string>
-	<string name="tip_location_sharing">Дзяліцца месцазнаходжаньнем</string>
+	<string name="tip_location_sharing">Падзяліцца месцазнаходжаньнем</string>
 	<string name="tip_location_sharing_t">"Вы можаце падзяліцца размяшчэньнем цікавых месцаў з вашага падарожжа з сям\'ёй або сябрамі. Каб падзяліцца месцам: скарыстайцеся пунктам у кантэкстным мэню мапы \'Падзяліцца месцам\'. ↵
 \n\nПотым абярыце спосаб распаўсюду. Гэта можа быць: E-Mail, SMS (тэкст), ці нават капіяваньне каардынат у буфер абмену. ↵ "</string>
 	<string name="tip_favorites">Упадабаныя месцы</string>
@@ -831,7 +831,7 @@
 	<string name="tip_app_mode_t_v2">"OsmAnd падтрымлівае розныя профілі для розных рэжымаў. ↵
 \n\nВы можаце змяніць бягучы профіль, націснуўшы кнопку выбару профіляў ў ніжнім левым куце экрана мапы (абразок аўтамабіля, ровара або пешахода) або пры пабудове маршруту (\'рэжым перамяшчэньня\'). ↵ "</string>
 	<string name="tip_search">Пошук</string>
-	<string name="tip_map_context_menu">Кантэкстнае меню мапы</string>
+	<string name="tip_map_context_menu">Кантэкстнае мэню мапы</string>
 	<string name="tip_map_context_menu_t">"\'Кантэкстнае мэню\' мапы зьмяшчае ўсе магчымыя дзеяньні, якія адносяцца да абранай кропкі (месца). ↵
 \n\nЯно даступна, калі націснуць і ўтрымліваць кропку на мапе (затым націснуць на яе маркер), або націснуўшы на кнопку джойсціка, або выбраўшы праз \'Мэню\' → \'Кантэкстнае мэню\' (два апошнія спосабы спасылаюцца на кропку ў сярэдзіне экрана) ↵
 \n\nВакенца маркера хаваецца доўгім націсканьнем на яго. ↵ "</string>
@@ -980,7 +980,7 @@
 	<string name="context_menu_item_search_poi">Пошук POI</string>
 	<string name="use_trackball_descr">Выкарыстоўвайце трэкбол для перамяшчэньня мапы</string>
 	<string name="use_trackball">Выкарыстоўвайце трэкбол</string>
-	<string name="background_service_wait_int_descr">Задаць максімальны час чаканьня для кожнага фонавага вызначэньня каардынатаў</string>
+	<string name="background_service_wait_int_descr">Задаць максімальны час чаканьня для кожнага фонавага вызначэньня становішча</string>
 	<string name="background_service_wait_int">Максімальны час чаканьня вызначэньня каардынат</string>
 	<string name="service_stop_background_service">Выключыць фонавы рэжым навігацыі OsmAnd</string>
 	<string name="where_am_i">Дзе я?</string>
@@ -993,7 +993,7 @@
 	<string name="background_service_int">Інтэрвал абуджэньня GPS</string>
 	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня фонавым сэрвісам</string>
 	<string name="background_service_provider">Крыніца каардынат</string>
-	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочваньня месцазнаходжаньня пры выключаным экране</string>
+	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочваньня становішча пры выключаным экране</string>
 	<string name="background_router_service">Працаваць ў фонавым рэжыме</string>
 	<string name="off_router_service_no_gps_available">Фонаваму сэрвісу неабходная інфармацыя пра месцазнаходжаньне.</string>
 	<string name="hide_poi_filter">Схаваць фільтр</string>
@@ -1156,7 +1156,7 @@
 	<string name="map_tile_source">Крыніца растравых мапаў</string>
 	<string name="map_source">Крыніца мапы</string>
 	<string name="use_internet">Выкарыстоўваць Інтэрнэт</string>
-	<string name="show_location">Паказаць ваша месцазнаходжаньне</string>
+	<string name="show_location">Паказаць ваша становішча</string>
 	
 	
 	<string name="show_gps_coordinates_text">Паказаць GPS каардынаты на мапе</string>
@@ -1193,7 +1193,7 @@
 	<string name="search_address_building">Будынак</string>
 	<string name="search_address_building_option">Дом</string>
 	<string name="search_address_street_option">Перакрыжаваньне</string>
-	<string name="search_tabs_location">Месца</string>
+	<string name="search_tabs_location">Каардынаты</string>
 	
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
