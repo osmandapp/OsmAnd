@@ -112,7 +112,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//pref.setEnabled(false);
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
-			public void onPreferenceClick(Preference preference) {
+			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
 					if(getMyApplication().getLocationProvider().agpsDownloaded() == true) {
@@ -122,6 +122,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 					}
 				}
+			return true;
 			}
 		});
 		cat.addPreference(pref);
