@@ -233,9 +233,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					redownloadAGPS();
 					if(agpsDownloaded == true) {
 						app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
-					} else {
-						//try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
-						app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
+					//for debugging only: try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
+					//} else {
+					//	app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 					}
 				}
 			}

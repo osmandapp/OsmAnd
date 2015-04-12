@@ -117,9 +117,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 					getMyApplication().getLocationProvider().redownloadAGPS();
 					if(getMyApplication().getLocationProvider().agpsDownloaded() == true) {
 						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
-					} else {
-						//try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
-						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
+					//for debugging only: try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
+					//} else {
+					//	getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 					}
 				}
 			return true;
