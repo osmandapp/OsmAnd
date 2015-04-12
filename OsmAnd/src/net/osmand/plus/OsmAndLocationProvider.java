@@ -225,13 +225,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if(app.getSettings().isInternetConnectionAvailable()) {
 			long time = System.currentTimeMillis();
 			if(time - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
-				agpsDownloaded = false;
-				redownloadAGPS();
-				if(agpsDownloaded == true) {
-					app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
-				} else {
-					//try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
-					app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
+				//force an updated check for internet connectivity here before destroying A-GPS-data
+				if(app.getSettings().isInternetConnectionAvailable(true)) {
+					agpsDownloaded = false;
+					redownloadAGPS();
+					if(agpsDownloaded == true) {
+						app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
+					} else {
+						//try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
+						app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
+					}
 				}
 			}
 		}
