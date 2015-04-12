@@ -623,7 +623,7 @@
   <string name="error_occurred_loading_gpx">Chyba pri načítavaní GPX</string>
   <string name="send_report">Odoslať hlásenie</string>
   <string name="none_region_found">Žiadne regióny neboli nájdené na SD karte. Skúste stiahnuť regióny z internetu.</string>
-  <string name="poi_namefinder_query_empty">Vaša požiadavka na nájdenie POI</string>
+  <string name="poi_namefinder_query_empty">Zadajte požiadavku na nájdenie POI</string>
   <string name="any_poi">Akékoľvek</string>
   <string name="layer_transport_route">Trasa hromadnej dopravy</string>
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>

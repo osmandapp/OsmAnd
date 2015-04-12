@@ -97,19 +97,27 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
 		cat.addPreference(pref);
-		
-		long agpsLastDownloaded = settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get();
+
 		pref = new Preference(this);
 		pref.setTitle(R.string.agps_info);
-		if (agpsLastDownloaded != 0L) {
+		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(agpsLastDownloaded)));
+			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 		} else {
 			pref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
 		}
-		pref.setSelectable(false);
+		pref.setSelectable(true);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+					getMyApplication().getLocationProvider().redownloadAGPS();
+				}
+			return true;
+			}
+		});
 		cat.addPreference(pref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();

@@ -2170,4 +2170,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_show_description">Mostra la descrizione</string>
 	<string name="shared_string_places">Luoghi</string>
 	<string name="shared_string_search">Cerca</string>
+	<string name="shared_string_open">Apri</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Assistente mappatura OSM</string>
+	<string name="shared_string_manage">Gestisci</string>
+	<string name="shared_string_edit">Modifica</string>
 	</resources>

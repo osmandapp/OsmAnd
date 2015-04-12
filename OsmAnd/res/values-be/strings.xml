@@ -67,7 +67,7 @@
     <string name="context_menu_item_directions_from">Маршрут ад</string>
     <string name="route_descr_map_location">Мапа: </string>
     <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
-    <string name="route_descr_current_location">Гэтае месца</string>
+    <string name="route_descr_current_location">Бягучае становішча</string>
     <string name="route_to">Да:</string>
     <string name="route_via">Праз:</string>
     <string name="route_from">З:</string>
@@ -307,7 +307,7 @@
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
-	<string name="auto_zoom_map_descr">Аўтаматычна памяншаць/павялічваць мапу згодна вашай хуткасьці (калі мапа сынхранізуецца з месцам)</string>
+	<string name="auto_zoom_map_descr">Аўтаматычна памяншаць/павялічваць мапу згодна вашай хуткасьці (калі мапа сынхранізуецца зь бягучым становішчам)</string>
 	<string name="auto_zoom_map">Аўтаматычнае памяншэньне/павелічэньне</string>
 	<string name="snap_to_road_descr">Прывязвацца за дарог падчас навігацыі</string>
 	<string name="snap_to_road">Прывязвацца за дарогі</string>
@@ -377,7 +377,7 @@
 	<string name="show_traffic_warnings">Абмежаваньне руху</string>
 	<string name="avoid_toll_roads">Пазьбягаць платных дарог</string>
 	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю? (%1$s сэкундаў)</string>
-	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначацца кардынаты</string>
+	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначыцца становішча</string>
 	<string name="osmand_parking_hours">Гадзін</string>
 	<string name="osmand_parking_minutes">Хвiлiн</string>
 	<string name="osmand_parking_position_description_add_time">Аўтамабіль быў прыпаркаваны ў:</string>
@@ -448,7 +448,7 @@
 	<string name="left_side_navigation_descr">Абраць для краін з леваручным рухам</string>
 	
 	<string name="unknown_from_location">Першапачатковае месцазнаходжаньне не вызначана</string>
-	<string name="unknown_location">Месца пакуль ня вызначанае</string>
+	<string name="unknown_location">Становішча пакуль ня вызначанае</string>
 	<string name="modify_transparency">Зьмяніць празрыстасьць (0 - празрысты, 255 - непразрысты)</string>
 	<string name="confirm_interrupt_download">Перапыніць cьцягваньне файла?</string>
 	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць POI і грамадзкі транспарт.</string>    
@@ -507,8 +507,8 @@
 	<string name="support_new_features_descr">Ахвяраваць, каб убачыць новыя магчымасьці, рэалізаванымі ў праграме</string>
 	<string name="show_ruler_level">Паказваць маштаб</string>	
 	<string name="info_button">Інфармацыя</string>
-	<string name="back_to_location">Вярнуцца да пазіцыі</string>
-	<string name="show_details">Паказаць дэталі</string>
+	<string name="back_to_location">Вярнуцца да становішча</string>
+	<string name="show_details">Падрабязнасьці аб становішчы</string>
 	<string name="accessibility_extensions_descr">Пашырэньні даступнасьці для старых вэрсій Android</string>
 	<string name="accessibility_extensions">Пашырэньні даступнасьці</string>
 	<string name="accessibility_mode">Рэжым даступнасьці</string>
@@ -674,7 +674,7 @@
 	<string name="native_library_not_supported">Свойскія бібліятэкі не падтрымліваюцца гэтай прыладай.</string>
 	<string name="init_native_library">Ініцыалізацыя свойскіх бібліятэк…</string>
 	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
-	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да бягучага месцазнаходжаньня</string>
+	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да бягучага становішча</string>
 	<string name="auto_follow_route_never">Ніколі (націсьніце на \"Паехалі\" для навігацыі)</string>
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
@@ -713,13 +713,13 @@
 	<string name="map_version_changed_info">Сэрвер утрымлівае файлы мапаў, якія не сумяшчальныя з вашай вэрсіяй праграмы. Каб сьцягнуць і карыстацца імі трэба абнавіць праграму да новай вэрсіі.</string>
 	
 	<string name="poi_filter_nominatim">Сеткавы Nominatim</string>
-	<string name="search_position_current_location_search">Вызначэньне месцазнаходжаньня…</string>
-	<string name="search_position_current_location_found">Месцазнаходжаньне (знойдзена)</string>
+	<string name="search_position_current_location_search">Вызначэньне становішча…</string>
+	<string name="search_position_current_location_found">Становішча (знойдзена)</string>
 	<string name="search_position_address">Адрас…</string>
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначана</string>
 	
-	<string name="search_position_current_location">Бягучае месцазнаходжаньне…</string>
+	<string name="search_position_current_location">Бягучае становішча…</string>
 	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
@@ -815,7 +815,7 @@
 	<string name="install_more">Усталяваць яшчэ…</string>
 	<string name="level_to_switch_vector_raster_descr">Мінімальнае павелічэньне для выкарыстаньня вектарных мапаў</string>
 	<string name="level_to_switch_vector_raster">Мінімальнае павелічэньне вектарных мапаў</string>
-	<string name="tip_location_sharing">Дзяліцца месцазнаходжаньнем</string>
+	<string name="tip_location_sharing">Падзяліцца месцазнаходжаньнем</string>
 	<string name="tip_location_sharing_t">"Вы можаце падзяліцца размяшчэньнем цікавых месцаў з вашага падарожжа з сям\'ёй або сябрамі. Каб падзяліцца месцам: скарыстайцеся пунктам у кантэкстным мэню мапы \'Падзяліцца месцам\'. ↵
 \n\nПотым абярыце спосаб распаўсюду. Гэта можа быць: E-Mail, SMS (тэкст), ці нават капіяваньне каардынат у буфер абмену. ↵ "</string>
 	<string name="tip_favorites">Упадабаныя месцы</string>
@@ -831,7 +831,7 @@
 	<string name="tip_app_mode_t_v2">"OsmAnd падтрымлівае розныя профілі для розных рэжымаў. ↵
 \n\nВы можаце змяніць бягучы профіль, націснуўшы кнопку выбару профіляў ў ніжнім левым куце экрана мапы (абразок аўтамабіля, ровара або пешахода) або пры пабудове маршруту (\'рэжым перамяшчэньня\'). ↵ "</string>
 	<string name="tip_search">Пошук</string>
-	<string name="tip_map_context_menu">Кантэкстнае меню мапы</string>
+	<string name="tip_map_context_menu">Кантэкстнае мэню мапы</string>
 	<string name="tip_map_context_menu_t">"\'Кантэкстнае мэню\' мапы зьмяшчае ўсе магчымыя дзеяньні, якія адносяцца да абранай кропкі (месца). ↵
 \n\nЯно даступна, калі націснуць і ўтрымліваць кропку на мапе (затым націснуць на яе маркер), або націснуўшы на кнопку джойсціка, або выбраўшы праз \'Мэню\' → \'Кантэкстнае мэню\' (два апошнія спосабы спасылаюцца на кропку ў сярэдзіне экрана) ↵
 \n\nВакенца маркера хаваецца доўгім націсканьнем на яго. ↵ "</string>
@@ -980,7 +980,7 @@
 	<string name="context_menu_item_search_poi">Пошук POI</string>
 	<string name="use_trackball_descr">Выкарыстоўвайце трэкбол для перамяшчэньня мапы</string>
 	<string name="use_trackball">Выкарыстоўвайце трэкбол</string>
-	<string name="background_service_wait_int_descr">Задаць максімальны час чаканьня для кожнага фонавага вызначэньня каардынатаў</string>
+	<string name="background_service_wait_int_descr">Задаць максімальны час чаканьня для кожнага фонавага вызначэньня становішча</string>
 	<string name="background_service_wait_int">Максімальны час чаканьня вызначэньня каардынат</string>
 	<string name="service_stop_background_service">Выключыць фонавы рэжым навігацыі OsmAnd</string>
 	<string name="where_am_i">Дзе я?</string>
@@ -993,7 +993,7 @@
 	<string name="background_service_int">Інтэрвал абуджэньня GPS</string>
 	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня фонавым сэрвісам</string>
 	<string name="background_service_provider">Крыніца каардынат</string>
-	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочваньня месцазнаходжаньня пры выключаным экране</string>
+	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочваньня становішча пры выключаным экране</string>
 	<string name="background_router_service">Працаваць ў фонавым рэжыме</string>
 	<string name="off_router_service_no_gps_available">Фонаваму сэрвісу неабходная інфармацыя пра месцазнаходжаньне.</string>
 	<string name="hide_poi_filter">Схаваць фільтр</string>
@@ -1156,7 +1156,7 @@
 	<string name="map_tile_source">Крыніца растравых мапаў</string>
 	<string name="map_source">Крыніца мапы</string>
 	<string name="use_internet">Выкарыстоўваць Інтэрнэт</string>
-	<string name="show_location">Паказаць ваша месцазнаходжаньне</string>
+	<string name="show_location">Паказаць ваша становішча</string>
 	
 	
 	<string name="show_gps_coordinates_text">Паказаць GPS каардынаты на мапе</string>
@@ -1193,7 +1193,7 @@
 	<string name="search_address_building">Будынак</string>
 	<string name="search_address_building_option">Дом</string>
 	<string name="search_address_street_option">Перакрыжаваньне</string>
-	<string name="search_tabs_location">Месца</string>
+	<string name="search_tabs_location">Каардынаты</string>
 	
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>

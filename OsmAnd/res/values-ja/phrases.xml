@@ -301,7 +301,7 @@
 	<string name="poi_quarry">採石場(Quarry)</string>
 	<string name="poi_vineyard">葡萄畑(Vineyard)</string>
 	<string name="poi_orchard">果樹園(Orchard)</string>
-	<string name="poi_allotments">小規模農園(Allotments)</string>
+	<string name="poi_allotments">住居付き農園(Allotments)</string>
 	<string name="poi_forest">植林地帯(Human maintained forest)</string>
 	<string name="poi_farmyard">農場(Farmyard)</string>
 	<string name="poi_meadow">牧草地(Meadow)</string>
@@ -350,4 +350,20 @@
 	<string name="poi_quarter">大字(Quarter)</string>
 	<string name="poi_neighbourhood">町丁(Neighbourhood)</string>
 	<string name="poi_locality">非居住地(Locality)</string>
+	<string name="poi_place_allotments">住居付き農園(Allotments)</string>
+	<string name="poi_place_farm">農場(Farm)</string>
+	<string name="poi_residential">住宅地(Residential area)</string>
+
+	<string name="poi_pharmacy">薬局(Pharmacy)</string>
+	<string name="poi_hospital">病院(Hospital)</string>
+	<string name="poi_doctors">診療所・医院(Doctors)</string>
+	<string name="poi_clinic">医療施設・健康センター(Clinic)</string>
+	<string name="poi_first_aid">応急処置施設(First aid)</string>
+	<string name="poi_nursing_home">老人ホーム(Nursing home)</string>
+	<string name="poi_baby_hatch">赤ちゃんポスト(Baby hatch)</string>
+	<string name="poi_veterinary">獣医(Veterinary)</string>
+	<string name="poi_sanatorium">療養所(Sanatorium)</string>
+	<string name="poi_healthcare_alternative">代替医療(Alternative medicine)</string>
+	<string name="poi_audiologist">聴覚医(Audiologist)</string>
+	<string name="poi_blood_bank">血液バンク(Blood bank)</string>
 	</resources>
