@@ -260,6 +260,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			service.sendExtraCommand("gps", "force_time_injection", bundle);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
 		} catch (Exception e) {
+			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 			e.printStackTrace();
 		}		
 	}
