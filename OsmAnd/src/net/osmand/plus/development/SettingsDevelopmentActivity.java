@@ -107,9 +107,23 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		} else {
 			pref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
 		}
-		pref.setSelectable(false);
+		pref.setSelectable(true);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public void onPreferenceClick(Preference preference) {
+				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+					getMyApplication().getLocationProvider().redownloadAGPS();
+					if(getMyApplication().getLocationProvider().agpsDownloaded() == true) {
+						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
+					} else {
+						//try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
+						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
+					}
+				}
+			}
+		});
 		cat.addPreference(pref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
