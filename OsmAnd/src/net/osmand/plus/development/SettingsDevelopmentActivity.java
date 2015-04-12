@@ -98,7 +98,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//pref.setEnabled(false);
 		cat.addPreference(pref);
 
-		pref = new Preference(this);
+		final pref = new Preference(this);
 		pref.setTitle(R.string.agps_info);
 		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -114,6 +114,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
+					SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+					pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 				}
 			return true;
 			}
