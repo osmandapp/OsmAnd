@@ -21,6 +21,9 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
+import gnu.trove.list.array.TIntArrayList;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -244,7 +247,8 @@ public class ConfigureMapMenu {
 
 		adapter.item(R.string.map_magnifier).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onLongClick(View notUseCouldBeNull) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
+				final OsmandMapTileView view = activity.getMapView();
 				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
@@ -255,15 +259,14 @@ public class ConfigureMapMenu {
 					final boolean end = k == tlist.size();
 					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
-							values.add(p + "%");
+							values.add(p + " %");
 							i = k;
 						} else if (p == tlist.get(k)) {
 							i = k;
 						}
-
 					}
 					if (k < tlist.size()) {
-						values.add(tlist.get(k) + "%");
+						values.add(tlist.get(k) + " %");
 					}
 				}
 				if (values.size() != tlist.size()) {
@@ -282,13 +285,15 @@ public class ConfigureMapMenu {
 								if (mapContext != null) {
 									mapContext.updateMapSettings();
 								}
+								adapter.setItemDescription(pos, String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
+								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}
 						});
 				bld.show();
 				return true;
 			}
-		}).description(activity.getMyApplication().getSettings().MAP_DENSITY.get()).layout(R.layout.drawer_list_doubleitem).reg();
+		}).description(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %").layout(R.layout.drawer_list_doubleitem).reg();
 
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
