@@ -259,14 +259,14 @@ public class ConfigureMapMenu {
 					final boolean end = k == tlist.size();
 					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
-							values.add(p + "%");
+							values.add(p + " %");
 							i = k;
 						} else if (p == tlist.get(k)) {
 							i = k;
 						}
 					}
 					if (k < tlist.size()) {
-						values.add(tlist.get(k) + "%");
+						values.add(tlist.get(k) + " %");
 					}
 				}
 				if (values.size() != tlist.size()) {
@@ -285,7 +285,7 @@ public class ConfigureMapMenu {
 								if (mapContext != null) {
 									mapContext.updateMapSettings();
 								}
-								adapter.setItemDescription(pos, String.format("%.2f", activity.getMyApplication().getSettings().MAP_DENSITY.get()));
+								adapter.setItemDescription(pos, String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %");
 								ad.notifyDataSetInvalidated();
 								dialog.dismiss();
 							}
@@ -293,7 +293,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return true;
 			}
-		}).description(String.format("%.2f", activity.getMyApplication().getSettings().MAP_DENSITY.get())).layout(R.layout.drawer_list_doubleitem).reg();
+		}).description(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %").layout(R.layout.drawer_list_doubleitem).reg();
 
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override

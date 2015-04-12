@@ -778,7 +778,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					final boolean end = k == tlist.size();
 					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
-							values.add(p + "%");
+							values.add(p + " %");
 							i = k;
 						} else if (p == tlist.get(k)) {
 							i = k;
@@ -786,7 +786,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 					}
 					if (k < tlist.size()) {
-						values.add(tlist.get(k) + "%");
+						values.add(tlist.get(k) + " %");
 					}
 				}
 				if (values.size() != tlist.size()) {
