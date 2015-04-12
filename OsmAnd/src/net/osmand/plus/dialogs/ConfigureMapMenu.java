@@ -244,7 +244,8 @@ public class ConfigureMapMenu {
 
 		adapter.item(R.string.map_magnifier).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onLongClick(View notUseCouldBeNull) {
+			public boolean onContextMenuClick(View notUseCouldBeNull) {
+				final OsmandMapTileView view = activity.getMapView();
 				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
@@ -260,7 +261,6 @@ public class ConfigureMapMenu {
 						} else if (p == tlist.get(k)) {
 							i = k;
 						}
-
 					}
 					if (k < tlist.size()) {
 						values.add(tlist.get(k) + "%");
