@@ -98,29 +98,29 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//pref.setEnabled(false);
 		cat.addPreference(pref);
 
-		final pref = new Preference(this);
-		pref.setTitle(R.string.agps_info);
+		final Preference agpspref = new Preference(this);
+		agpspref.setTitle(R.string.agps_info);
 		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
+			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 		} else {
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
+			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
 		}
-		pref.setSelectable(true);
+		agpspref.setSelectable(true);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		agpspref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
 					SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-					pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
+					agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 				}
 			return true;
 			}
 		});
-		cat.addPreference(pref);
+		cat.addPreference(agpspref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
 		pref = new Preference(this);
