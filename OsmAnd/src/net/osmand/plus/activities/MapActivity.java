@@ -159,8 +159,6 @@ public class MapActivity extends AccessibleActivity {
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();
-		//next line destroys AGPS data if no Internet connectivity is present! AGPS must never be re-downloaded without prior Internet connectivity check!
-		//getMyApplication().getLocationProvider().redownloadAGPS();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
