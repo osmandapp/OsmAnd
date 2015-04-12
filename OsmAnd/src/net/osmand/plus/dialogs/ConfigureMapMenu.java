@@ -21,6 +21,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.views.OsmandMapTileView;
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -282,6 +283,8 @@ public class ConfigureMapMenu {
 								if (mapContext != null) {
 									mapContext.updateMapSettings();
 								}
+								adapter.setItemDescription(pos, activity.getMyApplication().getSettings().MAP_DENSITY.get());
+								ad.notifyDataSetInvalidated()
 								dialog.dismiss();
 							}
 						});
