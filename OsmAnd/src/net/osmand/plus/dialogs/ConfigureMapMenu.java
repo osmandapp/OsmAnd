@@ -292,7 +292,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return true;
 			}
-		}).description(activity.getMyApplication().getSettings().MAP_DENSITY.get()).layout(R.layout.drawer_list_doubleitem).reg();
+		}).description(String.format("%.2f", activity.getMyApplication().getSettings().MAP_DENSITY.get())).layout(R.layout.drawer_list_doubleitem).reg();
 
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
