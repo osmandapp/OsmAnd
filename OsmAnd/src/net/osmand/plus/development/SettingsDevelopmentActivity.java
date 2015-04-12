@@ -114,14 +114,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
-					if(getMyApplication().getLocationProvider().agpsDownloaded() == true) {
-						getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
-						SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-						pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
-					//for debugging only: try catch issue here where A-GPS data sometimes seems destroyed but not reloaded
-					//} else {
-					//	getMyApplication().getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
-					}
 				}
 			return true;
 			}
