@@ -1557,7 +1557,7 @@ POIの更新は利用できません</string>
     <string name="osmo_auth_error">OsMoの認証エラーが発生しました:%1$s\nサーバーが一時的にダウンしているか、あなたの登録情報が失効している可能性があります。\n新しく登録しますか？</string>
     <string name="osmo_group_by_invite">招待枠での認証</string>
     <string name="stop_navigation_service">停止</string>
-	<string name="osmo_group_information_desc">" - 作成した全てのグループは公開されます、匿名を希望する場合はトラッカーIDを経由して直接デバイスを接続します。\n - 一つのグループは16人まで登録できます。\n - 非アクティブであるか2週間に1人しかアクティブされなかった場合グループは削除されます。\n - あなたが招待した人のみ入れるようグループの入り口を制限することができますが、グループを制御するために管理コンソールに移動する必要があります。\n - グループを作成する際、他の条件を必要としたいので 以下のURLまでご連絡下さい。http://osmo.mobi"</string>
+	<string name="osmo_group_information_desc">" - 作成した全てのグループは公開されます、匿名を希望する場合はトラッカーIDを経由して直接デバイスを接続します。\n - プライベートグループは8人に制限されています。\n - 非アクティブであるか2週間に1人しかアクティブされなかった場合グループは削除されます。\n - あなたが招待した人のみ入れるようグループの入り口を制限することができますが、グループを制御するために管理コンソールに移動する必要があります。\n - グループを作成する際、他の条件を必要としたいので 以下のURLまでご連絡下さい。http://osmo.mobi"</string>
     <string name="osmo_group_information">グループを作成する前に必ずお読み下さい！</string>
     <string name="gpx_start_new_segment">新しいセグメントの開始</string>
     <string name="osmo_not_signed_in">OsMoログインの失敗</string>
