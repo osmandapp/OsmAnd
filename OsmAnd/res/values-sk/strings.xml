@@ -1796,7 +1796,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_auth_error_short">Autorizácia zlyhala</string>
     <string name="osmo_auth_error">Chyba pri autorizácii OsMo : %1$s.\n Možno je služba dočasne nedostupná alebo vám skončila registrácia.\n Chcete pokračovať v novej registrácii?</string>
     <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
-    <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Skupina môže zaregistrovať až do 16 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Súkromné skupiny sú obmedzené na 8 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
     <string name="stop_navigation_service">Prerušiť</string>
 	<string name="enable_sleep_mode">Zapnúť režim spánku GPS</string>
