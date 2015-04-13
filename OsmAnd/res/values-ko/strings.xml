@@ -1863,7 +1863,7 @@
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
+    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id를 통해 직접 장치를 연결 합니다.\n -개인 그룹는 8명까지 제한됩니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
 \n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
     <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
     <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
