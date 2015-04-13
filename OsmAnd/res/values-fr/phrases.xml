@@ -747,7 +747,7 @@
 	<string name="poi_fuel_1_25_yes">Carburant 1:25</string>
 	<string name="poi_fuel_1_50_yes">Carburant 1:50</string>
 	<string name="poi_fuel_svo_yes">Huile Végétale Brute (HVB)</string>
-	<string name="poi_junction">Jonction</string>
+	<string name="poi_junction">Carrefour</string>
 	<string name="poi_forest">Sylviculture</string>
 	<string name="poi_landuse_railway">Zone de chemins de fer</string>
 

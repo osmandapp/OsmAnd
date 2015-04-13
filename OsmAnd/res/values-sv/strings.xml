@@ -1833,7 +1833,7 @@
 	<string name="osm_edits">OSM-redigeringar</string>
 	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">kvar</string> <string name="parking_place_limited">Tidsbegränsad parkering till</string>
 	<string name="your_edits">Dina redigeringar</string>
-    <string name="osmand_parking_overdue">Föråldrad</string>
+    <string name="osmand_parking_overdue">över tiden</string>
 	<string name="delay_to_start_navigation_descr">Ange väntetid att bli kvar på ruttplaneringsskärmen</string>
     <string name="delay_to_start_navigation">Börja sväng-efter-sväng-navigering efter …</string>
     <string name="shared_string_go">Kör</string>
@@ -1857,4 +1857,7 @@
 	<string name="shared_string_search">Sök</string>
 	<string name="shared_string_places">Platser</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM kartassistent</string>
+	<string name="shared_string_open">Öppna</string>
+    <string name="shared_string_manage">Hantera</string>
+	<string name="shared_string_edit">Redigera</string>
 	</resources>

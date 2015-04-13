@@ -65,15 +65,15 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-//				"-vpoi",
-				"-vmap",// "-vmapobjects", 
+				"-vpoi",
+//				"-vmap",// "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16",
-				"-vstats",
-				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"
+//				"-vstats",
+//				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"
 //				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
 					});
 		} else {
@@ -1047,7 +1047,7 @@ public class BinaryInspector {
 			PoiSubType st = p.subTypes.get(i);
 			println("\t\t\t" + st.name + " " + (st.text ? "text":(" encoded " + st.possibleValues.size())));
 		}
-		req.poiTypeFilter = null;//for test only
+//		req.poiTypeFilter = null;//for test only
 		index.searchPoi(p, req);
 		
 	}

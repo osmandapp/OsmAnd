@@ -1325,6 +1325,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			v.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
+			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
+			distanceI.setVisibility(View.VISIBLE);
+			distanceI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_distance));
+			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
+			pointsI.setVisibility(View.VISIBLE);
+			pointsI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_point));
+			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
+			timeI.setVisibility(View.VISIBLE);
+			timeI.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_time));
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);

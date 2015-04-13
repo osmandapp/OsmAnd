@@ -258,6 +258,10 @@ public class MapPoiTypes {
 						tp.setOsmValue2(parser.getAttributeValue("","value2"));
 						if(lastType != null) {
 							lastType.addPoiAdditional(tp);
+						} else if(lastFilter != null) {
+							lastFilter.addPoiAdditional(tp);
+						} else if(lastCategory != null) {
+							lastCategory.addPoiAdditional(tp);
 						}
 					} else if(name.equals("poi_type")){
 						PoiType tp = new PoiType(this,

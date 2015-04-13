@@ -201,12 +201,14 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			ImageView giImage= (ImageView)row.findViewById(R.id.group_image);
 			direction.setVisibility(View.VISIBLE);
 			final FavouritePoint favorite = getItem(position);
 			if (!favorite.getCategory().isEmpty()) {
-				row.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
+				giImage.setVisibility(View.VISIBLE);
+				giImage.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_group));
 			} else {
-				row.findViewById(R.id.group_image).setVisibility(View.GONE);
+				giImage.setVisibility(View.GONE);
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
@@ -216,7 +218,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			
 			name.setText(getName(favorite));
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
+			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			return row;
 		}
