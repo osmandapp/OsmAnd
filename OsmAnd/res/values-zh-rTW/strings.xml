@@ -1636,7 +1636,7 @@
     <string name="osmo_start_service">OsMo 服務</string>
     <string name="osmo_gpx_track_downloaded">OsMo 軌跡 %1$s 已下載。</string>
     <string name="osmo_group_by_invite">輸入邀請</string>
-    <string name="osmo_group_information_desc">" - 所有建立的群組都是公開的！如果您希望匿名，可透過追蹤的 IDS 直接連接裝置。\n - 群組可以註冊多達16人。\n - 假使閒置或僅一人於二個星期裡活動，那群組將會被刪除。\n - 因為只能靠邀請，您可以限制群組的進入，但要控管群組您需要去管理主控台。\n - 如果您需要建立一個群組，但是具有其它條件，請連絡 http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - 所有建立的群組都是公開的！如果您希望匿名，可透過追蹤的 IDS 直接連接裝置。\n - 私人群組僅限於 8 個人\n - 假使閒置或僅一人於二個星期裡活動，那群組將會被刪除。\n - 因為只能靠邀請，您可以限制群組的進入，但要控管群組您需要去管理主控台。\n - 如果您需要建立一個群組，但是具有其它條件，請連絡 http://osmo.mobi"</string>
     <string name="osmo_group_information">請在建立群組之前，仔細閱讀！</string>
     <string name="osmo_not_signed_in">OsMo 登入失敗</string>
     <string name="osmo_auth_error_short">授權失敗</string>
