@@ -1673,7 +1673,7 @@
     <string name="osmo_specify_tracker_id">Kérlek adj meg azonosítót</string>
     <string name="osmo_auth_error">Az OsMo engedélyezési hiba történt: %1$s.\n Ez lehet egy átmeneti szolgáltatás kimaradás, vagy a regisztrációd járt le.\n Szeretnéd új regisztrációval folytatni?</string>
     <string name="osmo_group_by_invite">Belépés meghívásra</string>
-    <string name="osmo_group_information_desc">" - Az összes létrehozott csoport publikus! Ha névtelen szeretnél lenni, kapcsold össze az eszközöket Tracker id-vel.\n- A csoportba legfeljebb 16 tag regisztrálhat.\n- Inaktivitás esetén, vagy ha 2 héten keresztül csak 1 tag aktív, a csoport törlődik.\n- Korlátozhatod a csoportba belépést meghívásosra, de a csoport kezeléséhez az admin konzolt kell használnod.\n- Ha más feltételekkel kéne csoportot létrehoznod, lépj kapcsolatba velünk: http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Az összes létrehozott csoport publikus! Ha névtelen szeretnél lenni, kapcsold össze az eszközöket közvetlenül a Tracker azonosítókkal.\n - A személyes csoportok 8 személyre vannak korlátozva.\n - Inaktivitás esetén, vagy ha 2 héten keresztül csak 1 tag aktív, a csoport törlődik.\n - Korlátozhatod a csoportba belépést meghívásosra, de a csoport kezeléséhez az admin konzolt kell használnod.\n - Ha más feltételekkel kéne csoportot létrehoznod, lépj kapcsolatba velünk: http://osmo.mobi"</string>
     <string name="osmo_group_information">Csoport létrehozása előtt kérlek olvasd el!</string>
     <string name="osmo_not_signed_in">OsMo bejelentkezés sikertelen</string>
     <string name="osmo_gpx_points_downloaded">OsMo pont %1$s letöltve.</string>
