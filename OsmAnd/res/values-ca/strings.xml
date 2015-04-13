@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1679,7 +1679,7 @@
     <string name="osmo_gpx_track_downloaded">S\'ha baixat la traça OsMo %1$s.</string>
     <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
     <string name="osmo_group_by_invite">Entreu per convidar</string>
-    <string name="osmo_group_information_desc">" - Tots els grups creats són públics! Si es vol ser anònim, afegiu directament els aparells via identificació de Tracker.\n - Dins el grup es poden registrar fins un màxim de 16 persones.\n - Cas d\'inactivitat o d\'activitat d\'una sola persona durant 2 setmanes, el grup serà esborrat.\n - Es pot restringir l\'entrada al grup, a només per invitació, però per controlar el grup es necessitarà accedir a la consola d\'administració.\n - Si us cal crear un grup, però amb altres condicions, contacteu  http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Tots els grups creats són públics! Si es vol ser anònim, afegiu directament els aparells via identificació de Tracker.\n - Els grups privats estan limitats fins un màxim de 8 persones.\n - Cas d\'inactivitat o d\'activitat d\'una sola persona durant 2 setmanes, el grup serà esborrat.\n - Es pot restringir l\'entrada al grup, a només per invitació, però per controlar el grup es necessitarà accedir a la consola d\'administració.\n - Si us cal crear un grup, però amb altres condicions, contacteu  http://osmo.mobi"</string>
     <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup.</string>
     <string name="osmo_auth_error_short">Ha fallat l\'autorització</string>
     <string name="osmo_auth_error">S\'ha trobat un error d\'autorització OsMo: %1$s.\n Pot ser per una caiguda temporal del servei o bé pel venciment del vostre usuari.\n Voleu crear un nou usuari nou?</string>
@@ -1976,4 +1976,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="plugin_ski_descr">Aquest connector per OsmAnd us proporciona els detalls de les pistes d\'esquí en baixada, de travessa i alpí  així com de telefèrics i remuntadors a tot el món. Les rutes i pistes es mostren amb codi de colors que els hi correspon segons la seva dificultat i amb un estil de mapa especial "Hivern"  que s\'associa a un paisatge nevat.
 
 Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i esquí", mostrant totes les característiques del paisatge a l\'hibern. Aquesta vista es pot revertir tant activant-la altra cop com canviant-la com es vulgui a &lt;&lt;Estil del Mapa&gt;&gt; dins &lt;&lt;Configuració del Mapa&gt;&gt; </string>
+	<string name="shared_string_open">Obre</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Assistent cartogràfic per OSM</string>
+	<string name="shared_string_manage">Gestiona</string>
+	<string name="shared_string_edit">Edita</string>
+	<string name="shared_string_places">Llocs</string>
+	<string name="shared_string_search">Cerca</string>
 	</resources>
