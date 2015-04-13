@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	
 	
@@ -191,7 +192,7 @@
 	<string name="rendering_attr_contourLines_name">Prikaži izohipse</string>
 	<string name="zoomOut">Oddalji</string>
 	<string name="zoomIn">Približaj</string>
-	<string name="zoomIs">Povečava je</string>
+	<string name="zoomIs">Nivo povečave je</string>
 	<string name="north">sever</string>
 	<string name="north_north_east">sever-severovzhod</string>
 	<string name="north_east">severovzhod</string>
@@ -210,11 +211,11 @@
 	<string name="north_north_west">sever-severozahod</string>
 	<string name="front">Spredaj</string>
 	<string name="front_right">Spredaj desno</string>
-	<string name="right">Desno</string>
+	<string name="right">Na desno</string>
 	<string name="back_right">Zadaj desno</string>
 	<string name="back">Zadaj</string>
 	<string name="back_left">Zadaj levo</string>
-	<string name="left">Levo</string>
+	<string name="left">Na levo</string>
 	<string name="front_left">Spredaj levo</string>
 	<string name="oclock">uri</string>
 	<string name="towards">proti</string>
@@ -626,7 +627,7 @@
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Nazaj na mesto</string>
 	<string name="shared_string_help">Pomoč</string>
-	<string name="show_details">Pokaži podrobnosti</string>
+	<string name="show_details">Pokaži podrobnosti lokacije</string>
 	<string name="accessibility_extensions_descr">Razširitve dostopnosti za stare različice Android</string>
 	<string name="accessibility_extensions">Razširitve dostopnosti</string>
 	<string name="accessibility_mode">Način dostopnosti</string>
@@ -1255,7 +1256,7 @@
     <string name="context_menu_item_destination_point">Nastavi kot cilj</string>
     <string name="please_select_address">Najprej morate izbrati kraj ali ulico</string>
     <string name="search_street_in_neighborhood_cities">Iskanje ulice v sosednjih krajih</string>
-    <string name="intermediate_items_sort_return">Vmesne točke so razvrščene po vrsti na poti do cilja.</string>
+    <string name="intermediate_items_sort_return">Vmesne točke so razvrščene po vrsti na poti od trenutne lokacije do cilja.</string>
     <string name="local_osm_changes_backup_successful">Uspešno ustvarjena datoteka sprememb za OSM %1$s</string>
     <string name="local_osm_changes_backup_failed">Varnostna kopija sprememb za OSM ni uspela</string>
     <string name="local_osm_changes_backup">Varnostna kopija sprememb za OSM</string>
@@ -1523,7 +1524,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="app_mode_aircraft">Letalo</string>
     <string name="tip_faq_t">Obiščite https://code.google.com/p/osmand/wiki/FAQ za ogled pogosto zastavljenih vprašanj.</string>
     <string name="tip_faq">Pogosto zastavljena vprašanja</string>
-    <string name="local_osm_changes_delete_all_confirm">Izbrisali boste %1$d osm sprememb. Ali ste prepričani?</string>
+    <string name="local_osm_changes_delete_all_confirm">Izbrisali boste %1$d OSM sprememb. Ali ste prepričani?</string>
     <string name="shared_string_delete_all">Izbriši vse</string>
     <string name="map_widget_map_rendering">Upodabljanje zemljevida</string>
     <string name="amenity_type_seamark">Pomorski znak</string>
@@ -2002,7 +2003,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	
 	<string name="plugin_install_needs_network">Za namestitev tega vtičnika potrebujete internetno povezavo.</string>
 	<string name="get_plugin">Pridobi</string>
-<string name="rendering_attr_pisteRoutes_name">Smučarske proge</string>
+<string name="rendering_attr_pisteRoutes_name">Smušišča</string>
 	<string name="free">"Prosto %1$s "</string>
 	<string name="device_memory">Pomnilnik naprave</string>
     <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>
@@ -2012,7 +2013,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="action_modify">Sprememba dejanja</string>
 	<string name="action_delete">Brisanje dejanja</string>
 	<string name="osm_edits">OSM urejanje</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">Ostaja</string> <string name="parking_place_limited">Parkirno mesto časovno omejeno</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">ostaja</string> <string name="parking_place_limited">Parkiranje časovno omejeno na</string>
 	<string name="your_edits">Vaše spremembe</string>
     <string name="drawer">Seznam</string>
     <string name="short_location_on_map">Šir %1$s\n Dol %2$s</string>
@@ -2041,4 +2042,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="online_map">Spletni zemljevid</string>
 	<string name="roads_only">Le ceste</string>
     <string name="shared_string_release">Izdano</string>
+	<string name="shared_string_open">Odpri</string>
+    <string name="shared_string_message">Sporočilo</string>
+	<string name="welcome_header">Dobrodošli</string>
+    <string name="shared_string_go">Pojdi</string>
+	<string name="osmand_parking_overdue">prekoračen čas</string>
+	<string name="shared_string_places">Kraji</string>
 	</resources>
