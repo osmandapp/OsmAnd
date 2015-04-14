@@ -178,7 +178,6 @@
 	<string name="poi_speed_camera">Fotoradar</string>
 	<string name="poi_emergency_access_point">Ambulatoryjne świadczenia zdrowotne</string>
 
-	<string name="poi_halt">Dworzec kolejowy (nieaktualne)</string>
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 

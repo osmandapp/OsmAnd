@@ -147,7 +147,6 @@
 	<string name="poi_bus_station">Аўтобусная станцыя</string>
 	<string name="poi_railway_station">Чыгуначная станцыя</string>
 	<string name="poi_railway_platform">Чыгуначная плятформа</string>
-	<string name="poi_halt">Чыгуначная плятформа (састар.)</string>
 	<string name="poi_railway_subway_entrance">Уваход у мэтро</string>
 	<string name="poi_subway_station">Станцыя мэтро</string>
 	<string name="poi_taxi">Стаянка таксі</string>

@@ -275,7 +275,6 @@
 	<string name="poi_raceway">Circuit</string>
 	<string name="poi_racquet">Sport de raquette</string>
 	<string name="poi_radar_transponder">Transpondeur radar (amer)</string>
-	<string name="poi_halt">Gare ferroviaire (halte)</string>
 	<string name="poi_railway_platform">Quai de gare</string>
 	<string name="poi_railway_station">Gare ferroviaire</string>
 	<string name="poi_rapids">Rapides</string>

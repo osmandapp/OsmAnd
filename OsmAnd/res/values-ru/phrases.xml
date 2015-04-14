@@ -143,7 +143,6 @@
 	<string name="poi_bus_station">Автобусная станция</string>
 	<string name="poi_railway_station">Ж/д станция</string>
 	<string name="poi_railway_platform">Ж/д платформа</string>
-	<string name="poi_halt">Ж/д платформа</string>
 	<string name="poi_railway_subway_entrance">Вход в метро</string>
 	<string name="poi_subway_station">Станция метро</string>
 	<string name="poi_taxi">Стоянка такси</string>
