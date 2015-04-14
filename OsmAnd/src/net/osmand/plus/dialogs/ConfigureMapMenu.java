@@ -378,7 +378,7 @@ public class ConfigureMapMenu {
 	}
 	
 	static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
-			"hr", "hu", "it", "ja", "ko", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
+			"hr", "hu", "it", "ja", "ko", "lt", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
 
 	private String[] getMapNamesValues(Context ctx) {
 		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),
