@@ -65,7 +65,7 @@
 	<string name="poi_buoy_isolated_danger">Bouée de danger isolé (balise flottante)</string>
 	<string name="poi_buoy_lateral">Bouée latérale (balise flottante)</string>
 	<string name="poi_buoy_safe_water">Bouée d\'eaux saines (balise flottante)</string>
-	<string name="poi_seamark_buoy_special_purpose">Marque spéciale (balise flottante)</string>
+	<string name="poi_buoy_special_purpose">Marque spéciale (balise flottante)</string>
 	<string name="poi_bus_station">Gare routière</string>
 	<string name="poi_bus_stop">Arrêt de bus</string>
 	<string name="poi_butcher">Boucherie - Charcuterie</string>
@@ -598,8 +598,8 @@
 	<string name="poi_attraction_train">Train touristique</string>
 	<string name="poi_attraction_water_slide">Toboggan aquatique</string>
 
-	<string name="poi_halt_union">Club de rugby</string>
-	<string name="poi_halt_league">Ligue de rugby</string>
+	<string name="poi_rugby_union">Club de rugby</string>
+	<string name="poi_rugby_league">Ligue de rugby</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_attraction_amusement_ride">Attractions mécaniques</string>
 	<string name="poi_attraction_slide">Toboggan</string>
