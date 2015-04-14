@@ -473,7 +473,6 @@
 	<string name="poi_wine">Sklep z winami</string>
 
 	<string name="poi_child_clothes">Odzież dla dzieci</string>
-	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_recycling">Recykling</string>
 	<string name="poi_pharmacy">Apteka</string>
 	<string name="poi_first_aid">Pierwsza pomoc</string>
@@ -501,7 +500,6 @@
 		<string name="poi_office">Biuro</string>
 	<string name="poi_sightseeing">Zwiedzanie</string>
 		<string name="poi_internet_access">Dostęp do Internetu</string>
-	<string name="poi_farm">Sklep rolniczy</string>
 	<string name="poi_military_nuclear_explosion_site">Miejsce eksplozji jądrowej</string>
 <string name="poi_military_naval_base">Wojskowa baza morska</string>
 	<string name="poi_military_danger_area">Strefa zagrożenia</string>
@@ -509,7 +507,6 @@
 	<string name="poi_accomodation">Noclegi</string>
 		<string name="poi_club">Klub</string>
 	<string name="poi_cafe_and_restaurant">Kawiarnia i restauracja</string>
-	<string name="poi_car">Sklep motoryzacyjny</string>
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_cng">CNG</string>

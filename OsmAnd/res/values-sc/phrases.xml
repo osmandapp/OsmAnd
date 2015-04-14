@@ -617,12 +617,8 @@
 	<string name="poi_internet_access_public">Atzessu ìnternet: pùblicu</string>
 	<string name="poi_internet_access_service">Atzessu ìnternet: servìtziu</string>
 	
-	<string name="poi_farm">Fatoria: butega</string>
 	<string name="poi_wine">Butega de binos</string>
 
-	<string name="poi_child_clothes">Butega de bestires pro pitzinnos</string>
-	<string name="poi_car">Cuntzessionàriu de màchinas</string>
-	<string name="poi_car_parts">Cantos de màchinas</string>
 	<string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
 	<string name="poi_halt">Firmada de sa ferrovia</string>
 	<string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>

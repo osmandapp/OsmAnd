@@ -7,7 +7,6 @@
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
 	<string name="poi_deli">Деликатесы</string>
-	<string name="poi_farm">Фермерские продукты</string>
 	<string name="poi_greengrocer">Овощи и фрукты</string>
 	<string name="poi_seafood">Морепродукты</string>
 	<string name="poi_confectionery">Кондитерская</string>
@@ -655,8 +654,6 @@
 	<string name="poi_entertainment">Досуг</string>
 	<string name="poi_wine">Винный магазин</string>
 
-	<string name="poi_car">Автомобильный магазин</string>
-	<string name="poi_car_parts">Автозапчасти</string>
 	<string name="poi_halt">Железнодорожная остановка</string>
 	<string name="poi_emergency">Экстренные службы</string>
 	<string name="poi_transportation">Транспорт</string>
