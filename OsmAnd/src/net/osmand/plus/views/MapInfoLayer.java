@@ -127,7 +127,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget alt = mic.createAltitudeControl(map);
 		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
-		registerSideWidget(plainTime, R.drawable.ic_action_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 25);
 	}
 	
 	

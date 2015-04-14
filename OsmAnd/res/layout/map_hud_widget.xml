@@ -39,6 +39,7 @@
             android:layout_width="@dimen/map_widget_icon"
             android:layout_height="@dimen/map_widget_icon"
             android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/map_widget_icon_margin"
             android:gravity="center"
             android:src="@drawable/ic_action_test_light" />
 
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:maxLines="1"
             android:minWidth="10dp"

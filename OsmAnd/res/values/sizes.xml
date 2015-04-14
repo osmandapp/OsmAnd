@@ -59,9 +59,10 @@
 	<dimen name="map_address_height">40dp</dimen>
 	<dimen name="map_button_size">52dp</dimen>
 	<dimen name="map_small_button_size">44dp</dimen>
+	<dimen name="map_small_button_margin">5dp</dimen>
 	
 	<dimen name="map_ruler_width">120dp</dimen>
-	<dimen name="map_ruler_bottom_margin">7dp</dimen>
+	<dimen name="map_ruler_bottom_margin">9dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
 	
 	
@@ -69,7 +70,7 @@
 	<dimen name="map_alarm_bottom_margin_land">57dp</dimen>
 	<dimen name="map_button_shadow_height">85dp</dimen>
 	<dimen name="map_button_shadow_width">56dp</dimen>
-	<dimen name="map_button_shadow_margin">5dp</dimen>
+	<dimen name="map_button_shadow_margin">4dp</dimen>
 	<dimen name="map_widget_icon">24dp</dimen>
 	<dimen name="map_widget_height">32dp</dimen>
 	<dimen name="map_widget_image">80dp</dimen>
@@ -82,13 +83,14 @@
 	<dimen name="map_button_inset_shadow">2dp</dimen>
 	<dimen name="map_button_inset">2dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
-	<dimen name="map_button_stroke">1px</dimen>
+	<dimen name="map_button_stroke">1dp</dimen>
 	
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
-	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
+	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
+	<dimen name="map_widget_icon_margin">4dp</dimen>
 	
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>

@@ -284,7 +284,7 @@ public class RouteInfoWidgetsFactory {
 			};
 		};
 		plainTimeControl.setText(null, null);
-		plainTimeControl.setIcons(R.drawable.widget_time_to_distance_day, R.drawable.widget_time_to_distance_night);
+		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
 		return plainTimeControl;
 	}
 	
