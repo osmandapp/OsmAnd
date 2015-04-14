@@ -250,29 +250,25 @@ public class MapActivityLayers {
 			return GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
 		}
 	}
-	
-	
-	
-	
-	
+
+
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiLegacyFilter[] selected){
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
+		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
 		final List<PoiLegacyFilter> list = new ArrayList<PoiLegacyFilter>();
 		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
 		list.add(poiFilters.getCustomPOIFilter());
-		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
 		
 		Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
-
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiLegacyFilter pf = list.get(which);
+				PoiLegacyFilter pf = list.get(which - 1);
 				String filterId = pf.getFilterId();
 				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
 					Intent search = new Intent(activity, SearchActivity.class);

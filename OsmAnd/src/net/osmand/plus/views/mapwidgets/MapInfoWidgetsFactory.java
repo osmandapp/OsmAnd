@@ -70,7 +70,7 @@ public class MapInfoWidgetsFactory {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(R.drawable.widget_altitude);
+		altitudeControl.setIcons(R.drawable.widget_altitude_day, R.drawable.widget_altitude_night);
 		return altitudeControl;
 	}
 	
@@ -93,7 +93,7 @@ public class MapInfoWidgetsFactory {
 				return false;
 			}
 		};
-		gpsInfoControl.setImageDrawable(R.drawable.widget_gps_info);
+		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
 		gpsInfoControl.setText(null, null);
 		gpsInfoControl.setOnClickListener(new View.OnClickListener() {
 			@Override

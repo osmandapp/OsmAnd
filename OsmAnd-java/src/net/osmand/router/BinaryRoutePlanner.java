@@ -101,8 +101,8 @@ public class BinaryRoutePlanner {
 			if(TRACE_ROUTING){
 				printRoad(">", segment, !forwardSearch);
 			}
-			if(segment.getParentRoute() != null)
-			System.out.println(segment.getRoad().getId() + " - " + segment.getParentRoute().getRoad().getId());
+//			if(segment.getParentRoute() != null)
+//			System.out.println(segment.getRoad().getId() + " - " + segment.getParentRoute().getRoad().getId());
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1<<20))+ " mb");

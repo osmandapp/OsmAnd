@@ -255,8 +255,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				name = model.getName();
 			} else {
 				AbstractPoiType st = (AbstractPoiType) item;
-				if (RenderingIcons.containsBigIcon(st.getKeyName())) {
-					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), st.getKeyName()));
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), st.getIconKeyName()));
 				} else if (st instanceof PoiType
 						&& RenderingIcons.containsBigIcon(((PoiType) st).getOsmTag() + "_"
 								+ ((PoiType) st).getOsmValue())) {

@@ -208,8 +208,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					String id = null;
 					PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
 					if (st != null) {
-						if (RenderingIcons.containsIcon(st.getKeyName())) {
-							id = st.getKeyName();
+						if (RenderingIcons.containsIcon(st.getIconKeyName())) {
+							id = st.getIconKeyName();
 						} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 							id = st.getOsmTag() + "_" + st.getOsmValue();
 						}

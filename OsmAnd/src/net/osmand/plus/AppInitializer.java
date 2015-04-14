@@ -251,7 +251,7 @@ public class AppInitializer implements IProgress {
 			@Override
 			public String getTranslation(AbstractPoiType type) {
 				try {
-					Field f = R.string.class.getField("poi_" + type.getKeyName());
+					Field f = R.string.class.getField("poi_" + type.getIconKeyName());
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);

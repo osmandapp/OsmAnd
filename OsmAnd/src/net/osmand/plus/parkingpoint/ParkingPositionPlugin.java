@@ -191,7 +191,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
 			mapInfoLayer.registerSideWidget(parkingPlaceControl,
-					R.drawable.ic_action_parking_dark, R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
+					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, "parking", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -495,7 +495,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setImageDrawable(R.drawable.widget_parking);
+		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
 		return parkingPlaceControl;
 	}
 	

@@ -76,6 +76,7 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -479,7 +480,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		if (handled) {
 			this.location = location;
-			amenityAdapter.notifyDataSetChanged();
+			amenityAdapter.notifyDataSetInvalidated();
+			ListView lv = getListView();
+			final int index = lv.getFirstVisiblePosition();
+			View v = lv.getChildAt(0);
+			final int top = (v == null) ? 0 : v.getTop();
+			lv.setSelectionFromTop(index, top);
 			updateButtonState();
 		}
 
@@ -631,7 +637,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 							Toast.LENGTH_LONG).show();
 				}
 				amenityAdapter.setNewModel(result);
-				showOnMapItem.setEnabled(amenityAdapter.getCount() > 0);
+				if(showOnMapItem != null) {
+					showOnMapItem.setEnabled(amenityAdapter.getCount() > 0);
+				}
 			} else {
 				amenityAdapter.setNewModel(result);
 			}
@@ -767,8 +775,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			direction.setImageDrawable(draw);
 			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			if (st != null) {
-				if (RenderingIcons.containsBigIcon(st.getKeyName())) {
-					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getKeyName()));
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
 				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
 				} else {

@@ -21,6 +21,11 @@ public abstract class AbstractPoiType {
 		return keyName;
 	}
 	
+	public String getIconKeyName() {
+		return keyName.replace(':', '_');
+	}
+	
+	
 	public String getTranslation() {
 		return registry.getTranslation(this);
 	}

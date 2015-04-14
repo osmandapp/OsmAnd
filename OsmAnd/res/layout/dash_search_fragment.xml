@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/card_bg"
+    android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -19,6 +23,7 @@
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/recents"
+            android:layout_width="wrap_content"
             style="?attr/dashboardGeneralButtonStyle"
             android:text="@string/shared_string_history"
             osmand:textAllCapsCompat="true"

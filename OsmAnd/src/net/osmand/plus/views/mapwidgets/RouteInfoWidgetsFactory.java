@@ -196,8 +196,10 @@ public class RouteInfoWidgetsFactory {
 
 	public TextInfoWidget createTimeControl(final MapActivity map){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
-		final int time = R.drawable.widget_time;
-		final int timeToGo = R.drawable.widget_time_to_distance;
+		final int time = R.drawable.widget_time_day;
+		final int timeN = R.drawable.widget_time_night;
+		final int timeToGo = R.drawable.widget_time_to_distance_day;
+		final int timeToGoN = R.drawable.widget_time_to_distance_night;
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 		final TextInfoWidget leftTimeControl = new TextInfoWidget(map) {
@@ -248,13 +250,15 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public void onClick(View v) {
 				showArrival.set(!showArrival.get());
-				leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
+				leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
+						showArrival.get() ? timeN : timeToGoN);
 				map.getMapView().refreshMap();
 			}
 			
 		});
 		leftTimeControl.setText(null, null);
-		leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
+		leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
+				showArrival.get() ? timeN : timeToGoN);
 		return leftTimeControl;
 	}
 	
@@ -280,7 +284,7 @@ public class RouteInfoWidgetsFactory {
 			};
 		};
 		plainTimeControl.setText(null, null);
-		plainTimeControl.setImageDrawable(R.drawable.widget_time_to_distance);
+		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
 		return plainTimeControl;
 	}
 	
@@ -323,7 +327,7 @@ public class RouteInfoWidgetsFactory {
 				return false;
 			}
 		};
-		speedControl.setImageDrawable(R.drawable.widget_max_speed);
+		speedControl.setIcons(R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -367,7 +371,7 @@ public class RouteInfoWidgetsFactory {
 				return false;
 			}
 		};
-		speedControl.setImageDrawable(R.drawable.widget_speed);
+		speedControl.setIcons(R.drawable.widget_speed_day, R.drawable.widget_speed_night);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -378,10 +382,10 @@ public class RouteInfoWidgetsFactory {
 		private float[] calculations = new float[1];
 		private int cachedMeters;
 
-		public DistanceToPointInfoControl(MapActivity ma, int res) {
+		public DistanceToPointInfoControl(MapActivity ma, int res, int resNight) {
 			super(ma);
 			this.view = ma.getMapView();
-			setImageDrawable(res);
+			setIcons(res, resNight);
 			setText(null, null);
 			setOnClickListener(new View.OnClickListener() {
 
@@ -437,7 +441,8 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	public TextInfoWidget createDistanceControl(final MapActivity map) {
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map,R.drawable.widget_target) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map,R.drawable.widget_target_day,
+				R.drawable.widget_target_night) {
 			@Override
 			public LatLon getPointToNavigate() {
 				TargetPoint p = map.getPointToNavigate();
@@ -457,7 +462,8 @@ public class RouteInfoWidgetsFactory {
 	
 	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map) {
 		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_intermediate) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_intermediate_day,
+				R.drawable.widget_intermediate_night) {
 
 			@Override
 			protected void click(OsmandMapTileView view) {

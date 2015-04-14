@@ -26,11 +26,11 @@
 	<color name="list_item_background_dark_pressed">#be39464d</color>
 	
 	<color name="map_widget_icon_color">#ff8f00</color>
-	<color name="map_widget_stroke">#333333</color>
+	<color name="map_widget_stroke">#4C000000</color>
 	<color name="map_widget_light">#ffffff</color>
 	<color name="map_widget_dark">#bb3f3f3f</color>
 	<color name="map_widget_dark_pressed">#ddcccccc</color>
-	<color name="map_widget_light_trans">#40ffffff</color>
+	<color name="map_widget_light_trans">#80ffffff</color>
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>

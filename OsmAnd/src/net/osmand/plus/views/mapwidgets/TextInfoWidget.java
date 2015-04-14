@@ -23,6 +23,9 @@ public class TextInfoWidget  {
 	private boolean explicitlyVisible;
 	private OsmandApplication app;
 
+	private int dayIcon;
+	private int nightIcon;
+	private boolean isNight;
 
 
 	public TextInfoWidget(Activity activity) {
@@ -70,6 +73,12 @@ public class TextInfoWidget  {
 		}
 		topTextView.invalidate();
 		topImageView.invalidate();
+	}
+	
+	public void setIcons(int widgetDayIcon, int widgetNightIcon) {
+		dayIcon = widgetDayIcon;
+		nightIcon = widgetNightIcon;
+		setImageDrawable(!isNight ? dayIcon : nightIcon);
 	}
 	
 	
@@ -154,6 +163,13 @@ public class TextInfoWidget  {
 	public boolean isExplicitlyVisible() {
 		return explicitlyVisible;
 	}
+	
+	public void updateIconMode(boolean night) {
+		isNight = night;
+		if(dayIcon != 0) {
+			setImageDrawable(!night? dayIcon : nightIcon);
+		}
+	}
 
 	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
 		updateTextColor(smallTextView, textColor, textShadowColor, bold, rad);
@@ -166,6 +182,8 @@ public class TextInfoWidget  {
 		tv.setShadowLayer(rad, 0, 0, textShadowColor);
 		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
+
+	
 
 	
 	
