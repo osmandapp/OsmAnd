@@ -189,8 +189,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
 					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
-					setIcons(R.drawable.widget_monitoring_rec_inactive_day,
-							R.drawable.widget_monitoring_rec_inactive_night);
+					if (globalRecord) {
+						setIcons(R.drawable.widget_monitoring_rec_small_day,
+							R.drawable.widget_monitoring_rec_small_night);
+					} else {
+						setIcons(R.drawable.widget_monitoring_rec_small_day,
+								R.drawable.widget_monitoring_rec_small_night);
+					}
 					
 					map.getMyApplication().runInUIThread(new Runnable() {
 						@Override
