@@ -127,7 +127,7 @@
                         android:id="@+id/map_layers_button"
                         android:layout_width="@dimen/map_small_button_size"
                         android:layout_height="@dimen/map_small_button_size"
-                        android:background="@drawable/btn_inset_circle"
+                        android:background="@drawable/btn_inset_circle_trans"
                         android:src="@drawable/ic_action_test_light" />
 
                     <ImageButton
@@ -192,7 +192,7 @@
                         android:layout_width="@dimen/map_small_button_size"
                         android:layout_height="@dimen/map_small_button_size"
                         android:layout_gravity="top|center_horizontal"
-                        android:background="@drawable/btn_inset_circle"
+                        android:background="@drawable/btn_inset_circle_trans"
                         android:src="@drawable/ic_action_test_light" />
                 </LinearLayout>
             </FrameLayout>
