@@ -113,7 +113,7 @@
         <string name="poi_border_control">Grænsekontrol</string>
         <string name="poi_traffic_calming_bump">Bumb</string>
         <string name="poi_traffic_calming_hump">Bumb</string>
-        <string name="poi_traffic_calming_cushion">Pude bumb</string>
+        <string name="poi_traffic_calming_cushion">Pudebumb</string>
         <string name="poi_traffic_calming_chicane">Chikane</string>
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
         <string name="poi_traffic_calming_table">Plateau bumb</string>
@@ -138,7 +138,7 @@
         <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
         <string name="poi_bus_stop">Busstoppested</string>
         <string name="poi_public_transport_platform_tram">Sporvognsstoppested</string>
-        <string name="poi_tram_stop">Sporvognsstoppestedet</string>
+        <string name="poi_tram_stop">Sporvognsstoppested</string>
         <string name="poi_public_transport_station">Offentligtransport station</string>
         <string name="poi_bus_station">Busstation</string>
         <string name="poi_railway_station">Banegård</string>
@@ -381,7 +381,7 @@
         <string name="poi_monastery">Kloster</string>
         <string name="poi_historic_monastery">Historisk kloster</string>
         <string name="poi_wayside_cross">Vejside kors</string>
-        <string name="poi_wayside_shrine">Vejkants alter</string>
+        <string name="poi_wayside_shrine">Vejkantsalter</string>
         <string name="poi_information">Turistinformation</string>
         <string name="poi_clock">Ur</string>
         <string name="poi_travel_agent">Rejsebureau</string>
@@ -409,7 +409,7 @@
         <string name="poi_club_fan">Fanklub</string>
         <string name="poi_club_fishing">Lystfiskerklub</string>
         <string name="poi_club_veterans">Veteranforening</string>
-        <string name="poi_club_linux">Linux klub</string>
+        <string name="poi_club_linux">Linuxklub</string>
         <string name="poi_club_theatre">Teaterklub</string>
         <string name="poi_club_history">Historieklub</string>
         <string name="poi_club_music">Musikklub</string>
@@ -550,7 +550,7 @@
         <string name="poi_islet">Holm</string>
 
         <string name="poi_anchorage">Ankerplads</string>
-        <string name="poi_anchor_berth">Ankerplads</string>
+        <string name="poi_anchor_berth">Forankringsplads</string>
         <string name="poi_beacon">Båke</string>
         <string name="poi_beacon_cardinal">Kompasbåke</string>
         <string name="poi_beacon_lateral">Sidebåke</string>
@@ -604,7 +604,7 @@
 	<string name="poi_hamlet">Lille landsby</string>
 	<string name="poi_isolated_dwelling">Bebyggelse</string>
 	<string name="poi_suburb">Forstad</string>
-	<string name="poi_neighbourhood">Kvarter</string>
+	<string name="poi_neighbourhood">Nabolag</string>
 	<string name="poi_locality">Lokalitet</string>
 
 	<string name="poi_healthcare_alternative">Alternativ medicin</string>
@@ -676,7 +676,7 @@
 	<string name="poi_tourism">Turisme</string>
 	<string name="poi_entertainment">Fritid</string>
 	<string name="poi_sustenance">Mad og spise</string>
-	<string name="poi_service">Tjenesteydelse</string>
+	<string name="poi_service">Tjenesteydelse og håndværk</string>
 	<string name="poi_finance">Finansiel</string>
 	<string name="poi_natural">Natur</string>
 	<string name="poi_seamark">Maritimt</string>
@@ -746,7 +746,7 @@
 
 	<string name="poi_gasometer">Gasbeholder</string>
 	<string name="poi_allotments">Kolonihaver</string>
-	<string name="poi_forest">Plantage</string>
+	<string name="poi_forest">Skovbrug</string>
 
 	<string name="poi_canal">Kanal</string>
 	<string name="poi_bench">Bænk</string>
