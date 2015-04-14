@@ -1838,7 +1838,7 @@
     <string name="delay_to_start_navigation">Börja sväng-efter-sväng-navigering efter …</string>
     <string name="shared_string_go">Kör</string>
 	<string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
-    <string name="confirmation_to_clear_history">Vill du ta bort historiken?</string>
+    <string name="confirmation_to_clear_history">Vill du tömma historiken?</string>
     <string name="osmo_grop_name_length_alert">Gruppnamn bör vara minst tre tecken långa!</string>
 	<string name="current_route">Aktuell rutt</string>
     <string name="osm_changes_added_to_local_edits">OSM-ändringar lades till i lokala ändringar</string>
