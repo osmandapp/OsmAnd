@@ -142,15 +142,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		}
 	}
 
-	private void addErrorFragment() {
-		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null) {
-			DashErrorFragment errorFragment = new DashErrorFragment();
-			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG).commit();
-		}
-	}
-
 
 	private void startMapActivity() {
 		final Intent mapIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());

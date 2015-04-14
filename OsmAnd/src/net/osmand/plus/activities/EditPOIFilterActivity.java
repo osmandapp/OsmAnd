@@ -241,16 +241,11 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		return lv;
 	}
 
-	private void selectAll(){
+	private void selectAll() {
 		AmenityAdapter adapter = getListAdapter();
 		int count = adapter.getCount();
-		for (int i =0; i< count; i++) {
+		for (int i = 0; i < count; i++) {
 			selectAllFromCategory(adapter.getItem(i));
-			ListView lv = EditPOIFilterActivity.this.getListView();
-			final int index = lv.getFirstVisiblePosition();
-			View v = lv.getChildAt(0);
-			final int top = (v == null) ? 0 : v.getTop();
-			lv.setSelectionFromTop(index, top);
 		}
 	}
 
@@ -260,8 +255,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		for (int i =0; i< count; i++) {
 			filter.setTypeToAccept(adapter.getItem(i), false);
 		}
-		ListView lv = EditPOIFilterActivity.this.getListView();
-		lv.deferNotifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
