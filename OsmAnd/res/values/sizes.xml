@@ -88,7 +88,7 @@
 	<dimen name="map_widget_text_bottom_margin">0sp</dimen>
 	
 	<dimen name="dash_margin">2dp</dimen>
-	<dimen name="dash_margin_h">2dp</dimen>
+	<dimen name="dash_margin_h">6dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="default_list_text_size_small">17sp</dimen>
