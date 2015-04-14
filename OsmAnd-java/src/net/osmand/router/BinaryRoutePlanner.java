@@ -101,6 +101,8 @@ public class BinaryRoutePlanner {
 			if(TRACE_ROUTING){
 				printRoad(">", segment, !forwardSearch);
 			}
+			if(segment.getParentRoute() != null)
+			System.out.println(segment.getRoad().getId() + " - " + segment.getParentRoute().getRoad().getId());
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1<<20))+ " mb");
@@ -312,8 +314,8 @@ public class BinaryRoutePlanner {
 			pr = "";
 		}
 		String p = "";
-		if(reverseWaySearch != null) {
-			p = (reverseWaySearch?"B" : "F");
+		if (reverseWaySearch != null) {
+			p = (reverseWaySearch ? "B" : "F");
 		}
 		println(p+prefix  +"" + segment.road + " dir="+segment.getDirectionAssigned()+" ind=" + segment.getSegmentStart() + 
 				" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
