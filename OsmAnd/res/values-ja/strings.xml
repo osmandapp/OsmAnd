@@ -749,7 +749,7 @@ POIの更新は利用できません</string>
     <string name="install_paid">フルバージョン</string>
     <string name="cancel_route">ルートを却下</string>
     <string name="cancel_navigation">ナビを停止</string>
-    <string name="clear_destination">目的地を削除</string>
+    <string name="clear_destination">選択した目的地、経由地点を削除します、よろしいですか？</string>
     <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続を使用したままダウンロードを続行しますか？</string>
     <string name="street_name">通り</string>
 	<string name="hno">家屋番号</string>
@@ -825,7 +825,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">メモ</string>
+    <string name="shared_string_control_start">記録</string>
     <string name="map_widget_av_notes">音声/ビデオメモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -835,7 +835,7 @@ POIの更新は利用できません</string>
 	<string name="animate_route">シミュレーション開始</string>
 	<string name="left_side_navigation">左側通行に設定</string>
 	<string name="left_side_navigation_descr">車が道路を左側通行する国は選択してください</string>
-	<string name="delete_target_point">経由地点も削除します、よろしいですか？</string>
+	<string name="delete_target_point">選択地点の削除</string>
 	<string name="target_point">経由地点 %1$s</string>
     <string name="intermediate_point">経由地点 %1$s</string>
     <string name="context_menu_item_last_intermediate_point">最後の経由地点として追加</string>
