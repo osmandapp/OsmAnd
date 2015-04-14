@@ -268,6 +268,9 @@ public class MapActivityLayers {
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					which = list.size() + 2;
+				}
 				PoiLegacyFilter pf = list.get(which - 1);
 				String filterId = pf.getFilterId();
 				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
