@@ -8,7 +8,7 @@
 	<string name="poi_beverages">음료 가게</string>
 	<string name="poi_butcher">고기 시장</string>
 	<string name="poi_deli">델리</string>
-	<string name="poi_shop_farm">농장 가게</string>
+	<string name="poi_farm">농장 가게</string>
 	<string name="poi_greengrocer">그린그로서리</string>
 	<string name="poi_seafood">해산물 가게</string>
 	<string name="poi_confectionery">과자</string>
@@ -31,7 +31,7 @@
 	<string name="poi_carpet">카펫 가게</string>
 	<string name="poi_chemist">약국</string>
 	<string name="poi_clothes">의류 매장</string>
-	<string name="poi_children_clothes">어린이 의류</string>
+	<string name="poi_child_clothes">어린이 의류</string>
 	<string name="poi_shoes">신발 가게</string>
 	<string name="poi_computer">컴퓨터 가게</string>
 	<string name="poi_copyshop">복사 가게</string>
@@ -85,8 +85,8 @@
 	<string name="poi_window_blind">창문 블라인드 가게</string>
 	<string name="poi_department_store">백화점</string>
 	<string name="poi_electronics">전자 제품 매장</string>
-	<string name="poi_car_shop">자동차 판매소</string>
-	<string name="poi_car_parts_shop">자동차 부품</string>
+	<string name="poi_car">자동차 판매소</string>
+	<string name="poi_car_parts">자동차 부품</string>
 	<string name="poi_atv">쿼드 가게</string>
 	<string name="poi_cosmetics">화장품</string>
 	<string name="poi_marketplace">마켓 플레이스</string>
@@ -141,7 +141,7 @@
 	<string name="poi_bus_station">버스 정류장</string>
 	<string name="poi_railway_station">기차역</string>
 	<string name="poi_railway_platform">철도 플랫폼</string>
-	<string name="poi_railway_halt">철도 정류장 (사용 되지 않음)</string>
+	<string name="poi_halt">철도 정류장 (사용 되지 않음)</string>
 	<string name="poi_railway_subway_entrance">지하철 입구</string>
 	<string name="poi_subway_station">지하철 역</string>
 	<string name="poi_taxi">택시 승차장</string>

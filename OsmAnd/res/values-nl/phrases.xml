@@ -9,7 +9,7 @@
 	<string name="poi_beverages">Drankwinkel</string>
 	<string name="poi_butcher">Vleesmarkt</string>
 	<string name="poi_deli">Delicatessenwinkel</string>
-	<string name="poi_shop_farm">Boerderijwinkel</string>
+	<string name="poi_farm">Boerderijwinkel</string>
 	<string name="poi_greengrocer">Groentewinkel</string>
 	<string name="poi_seafood">Viswinkel</string>
 	<string name="poi_confectionery">Banketbakkerij</string>
@@ -33,7 +33,7 @@
 	<string name="poi_carpet">Tapijtwinkel</string>
 	<string name="poi_chemist">Drogisterij</string>
 	<string name="poi_clothes">Kledingwinkel</string>
-	<string name="poi_children_clothes">Kinderkledingwinkel</string>
+	<string name="poi_child_clothes">Kinderkledingwinkel</string>
 	<string name="poi_shoes">Schoenenwinkel</string>
 	<string name="poi_computer">Computerwinkel</string>
 	<string name="poi_copyshop">Kopieerzaak</string>
@@ -87,8 +87,8 @@
 	<string name="poi_window_blind">Rolluikenwinkel</string>
 	<string name="poi_department_store">Warenhuis</string>
 	<string name="poi_electronics">Elektronica-winkel</string>
-	<string name="poi_car_shop">Autohandelaar</string>
-	<string name="poi_car_parts_shop">Auto-onderdelenwinkel</string>
+	<string name="poi_car">Autohandelaar</string>
+	<string name="poi_car_parts">Auto-onderdelenwinkel</string>
 	<string name="poi_atv">Quad-winkel</string>
 	<string name="poi_cosmetics">Cosmeticazaak</string>
 	<string name="poi_marketplace">Marktplaats</string>
@@ -135,7 +135,7 @@
 	<string name="poi_bus_station">Busstation</string>
 	<string name="poi_railway_station">Treinstation</string>
 	<string name="poi_railway_platform">Perron</string>
-	<string name="poi_railway_halt">Treinhalte (verouderd)</string>
+	<string name="poi_halt">Treinhalte (verouderd)</string>
 	<string name="poi_railway_subway_entrance">Metro-ingang</string>
 	<string name="poi_subway_station">Metrostation</string>
 	<string name="poi_taxi">Taxistandplaats</string>

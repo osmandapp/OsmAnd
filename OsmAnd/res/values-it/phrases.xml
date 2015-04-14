@@ -14,7 +14,7 @@
 	<string name="poi_beverages">Negozio di bevande</string>
 	<string name="poi_butcher">Macelleria</string>
 	<string name="poi_deli">Gastronomia</string>
-	<string name="poi_shop_farm">Vendita prodotti di fattoria</string>
+	<string name="poi_farm">Vendita prodotti di fattoria</string>
 	<string name="poi_greengrocer">Fruttivendolo</string>
 	<string name="poi_confectionery">Negozio di dolciumi</string>
 	<string name="poi_ice_cream">Gelateria</string>
@@ -29,7 +29,7 @@
 	<string name="poi_carpet">Negozio tappeti</string>
 	<string name="poi_chemist">Farmacia</string>
 	<string name="poi_clothes">Abbigliamento</string>
-	<string name="poi_children_clothes">Abbigliamento bambini</string>
+	<string name="poi_child_clothes">Abbigliamento bambini</string>
 	<string name="poi_shoes">Negozio calzature</string>
 	<string name="poi_computer">Negozio di computer</string>
 	<string name="poi_copyshop">Copisteria</string>
@@ -114,8 +114,8 @@
 	<string name="poi_window_blind">Negozio finestre cieche</string>
 	<string name="poi_department_store">Grande magazzino</string>
 	<string name="poi_electronics">Negozio elettronica</string>
-	<string name="poi_car_shop">Autosalone</string>
-	<string name="poi_car_parts_shop">Autoricambi</string>
+	<string name="poi_car">Autosalone</string>
+	<string name="poi_car_parts">Autoricambi</string>
 	<string name="poi_atv">Negozio quad</string>
 	<string name="poi_cosmetics">Negozio cosmetici</string>
 	<string name="poi_marketplace">Mercato</string>

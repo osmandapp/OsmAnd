@@ -6,7 +6,7 @@
 	<string name="poi_beverages">Napoje</string>
 	<string name="poi_butcher">Sklep mięsny</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_shop_farm">Produkty rolne</string>
+	<string name="poi_farm">Produkty rolne</string>
 	<string name="poi_greengrocer">Warzywniak</string>
 	<string name="poi_seafood">Owoce morza</string>
 	<string name="poi_confectionery">Cukiernia</string>
@@ -31,7 +31,7 @@
 	<string name="poi_carpet">Sklep z dywanami</string>
 	<string name="poi_chemist">Sklep z narkotykami</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
-	<string name="poi_children_clothes">Sklep odzieżowy dla dzieci</string>
+	<string name="poi_child_clothes">Sklep odzieżowy dla dzieci</string>
 	<string name="poi_shoes">Sklep obuwniczy</string>
 	<string name="poi_computer">Sklep komputerowy</string>
 	<string name="poi_curtain">Sklep z zasłonami</string>
@@ -85,8 +85,8 @@
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
 	<string name="poi_electronics">RTV</string>
-	<string name="poi_car_shop">Motoryzacyjny</string>
-	<string name="poi_car_parts_shop">Części samochodowe</string>
+	<string name="poi_car">Motoryzacyjny</string>
+	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_atv">Quady</string>
 	<string name="poi_cosmetics">Kosmetyki</string>
 	<string name="poi_marketplace">Bazar</string>
@@ -178,7 +178,7 @@
 	<string name="poi_speed_camera">Fotoradar</string>
 	<string name="poi_emergency_access_point">Ambulatoryjne świadczenia zdrowotne</string>
 
-	<string name="poi_railway_halt">Dworzec kolejowy (nieaktualne)</string>
+	<string name="poi_halt">Dworzec kolejowy (nieaktualne)</string>
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 

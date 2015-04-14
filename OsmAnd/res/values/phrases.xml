@@ -73,6 +73,7 @@
 	<string name="poi_bed">Bed room furnishings</string>
 	<string name="poi_boutique">Fashion boutique</string>
 	<string name="poi_carpet">Carpet shop</string>
+	<string name="poi_charity">Charity shop</string>
 	<string name="poi_chemist">Drug store</string>
 	<string name="poi_clothes">Apparel store</string>
 	<string name="poi_child_clothes">Childrens apparel</string>
@@ -442,6 +443,7 @@
 	<string name="poi_rowing">Rowing</string>
 	<string name="poi_rugby_union">Rugby union</string>
 	<string name="poi_rugby_league">Rugby league</string>
+	<string name="poi_sailing">Sailing</string>
 	<string name="poi_shooting">Shooting</string>
 	<string name="poi_skating">Skating</string>
 	<string name="poi_skateboard">Skateboard</string>

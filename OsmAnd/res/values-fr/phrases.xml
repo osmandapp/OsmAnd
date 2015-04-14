@@ -65,7 +65,7 @@
 	<string name="poi_buoy_isolated_danger">Bouée de danger isolé (balise flottante)</string>
 	<string name="poi_buoy_lateral">Bouée latérale (balise flottante)</string>
 	<string name="poi_buoy_safe_water">Bouée d\'eaux saines (balise flottante)</string>
-	<string name="poi_seamark_uoy_special_purpose">Marque spéciale (balise flottante)</string>
+	<string name="poi_seamark_buoy_special_purpose">Marque spéciale (balise flottante)</string>
 	<string name="poi_bus_station">Gare routière</string>
 	<string name="poi_bus_stop">Arrêt de bus</string>
 	<string name="poi_butcher">Boucherie - Charcuterie</string>
@@ -73,8 +73,8 @@
 	<string name="poi_camp_site">Camping</string>
 	<string name="poi_canoe">Canoë-kayak</string>
 	<string name="poi_cape">Cap</string>
-	<string name="poi_car_shop">Magasin de voitures</string>
-	<string name="poi_car_parts_shop">Pièces d\'automobile</string>
+	<string name="poi_car">Magasin de voitures</string>
+	<string name="poi_car_parts">Pièces d\'automobile</string>
 	<string name="poi_car_rental">Location de voitures</string>
 	<string name="poi_car_repair">Atelier de réparation automobile</string>
 	<string name="poi_car_sharing">Autopartage</string>
@@ -275,7 +275,7 @@
 	<string name="poi_raceway">Circuit</string>
 	<string name="poi_racquet">Sport de raquette</string>
 	<string name="poi_radar_transponder">Transpondeur radar (amer)</string>
-	<string name="poi_railway_halt">Gare ferroviaire (halte)</string>
+	<string name="poi_halt">Gare ferroviaire (halte)</string>
 	<string name="poi_railway_platform">Quai de gare</string>
 	<string name="poi_railway_station">Gare ferroviaire</string>
 	<string name="poi_rapids">Rapides</string>
@@ -286,7 +286,6 @@
 	<string name="poi_restaurant">Restaurant</string>
 	<string name="poi_ridge">Crête</string>
 	<string name="poi_river">Rivière</string>
-	<string name="poi_rugby">Rugby</string>
 	<string name="poi_historic_ruins">Ruines historiques</string>
 	<string name="poi_salt_pond">Marais salants</string>
 	<string name="poi_sanatorium">Sanatorium</string>
@@ -403,7 +402,7 @@
 	<string name="poi_chess">Échecs</string>
 	<string name="poi_palaeontological_site">Site paléontologique</string>
 
-	<string name="poi_shop_farm">Vente à la ferme</string>
+	<string name="poi_farm">Vente à la ferme</string>
 	<string name="poi_anime">Librairie spécialisée en bandes dessinées</string>
 	<string name="poi_antiques">Antiquaire</string>
 	<string name="poi_hunting">Equipement de chasse</string>
@@ -536,7 +535,7 @@
 	<string name="poi_frame">Magasin d\'encadrement</string>
 	<string name="poi_bathroom_furnishing">Magasin d\'équipement pour la salle de bain</string>
 	<string name="poi_bed">Magasin d\'équipement pour la chambre</string>
-	<string name="poi_children_clothes">Vêtements pour enfants</string>
+	<string name="poi_child_clothes">Vêtements pour enfants</string>
 	<string name="poi_curtain">Boutique de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
 	<string name="poi_baby_goods">Articles pour bébé</string>
@@ -600,8 +599,8 @@
 	<string name="poi_attraction_train">Train touristique</string>
 	<string name="poi_attraction_water_slide">Toboggan aquatique</string>
 
-	<string name="poi_rugby_union">Club de rugby</string>
-	<string name="poi_rugby_league">Ligue de rugby</string>
+	<string name="poi_halt_union">Club de rugby</string>
+	<string name="poi_halt_league">Ligue de rugby</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_attraction_amusement_ride">Attractions mécaniques</string>
 	<string name="poi_attraction_slide">Toboggan</string>

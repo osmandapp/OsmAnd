@@ -7,7 +7,7 @@
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
 	<string name="poi_deli">Деликатесы</string>
-	<string name="poi_shop_farm">Фермерские продукты</string>
+	<string name="poi_farm">Фермерские продукты</string>
 	<string name="poi_greengrocer">Овощи и фрукты</string>
 	<string name="poi_seafood">Морепродукты</string>
 	<string name="poi_confectionery">Кондитерская</string>
@@ -28,10 +28,10 @@
 	<string name="poi_bed">Спальные принадлежности</string>
 	<string name="poi_boutique">Бутик</string>
 	<string name="poi_carpet">Магазин ковров</string>
-	<string name="poi_charity_shop">Благотворительный магазин</string>
+	<string name="poi_charity">Благотворительный магазин</string>
 	<string name="poi_chemist">Бытовая химия, косметика</string>
 	<string name="poi_clothes">Одежда</string>
-	<string name="poi_children_clothes">Детская одежда</string>
+	<string name="poi_child_clothes">Детская одежда</string>
 	<string name="poi_shoes">Обувь</string>
 	<string name="poi_computer">Компьютеры</string>
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
@@ -85,8 +85,8 @@
 	<string name="poi_window_blind">Жалюзи, ставни, маркизы</string>
 	<string name="poi_department_store">Универмаг</string>
 	<string name="poi_electronics">Электроника</string>
-	<string name="poi_car_shop">Автосалон</string>
-	<string name="poi_car_parts_shop">Автозапчасти</string>
+	<string name="poi_car">Автосалон</string>
+	<string name="poi_car_parts">Автозапчасти</string>
 	<string name="poi_atv">Квадроциклы</string>
 	<string name="poi_cosmetics">Косметика, парфюмерия</string>
 	<string name="poi_marketplace">Рынок</string>
@@ -144,7 +144,7 @@
 	<string name="poi_bus_station">Автобусная станция</string>
 	<string name="poi_railway_station">Ж/д станция</string>
 	<string name="poi_railway_platform">Ж/д платформа</string>
-	<string name="poi_railway_halt">Ж/д платформа</string>
+	<string name="poi_halt">Ж/д платформа</string>
 	<string name="poi_railway_subway_entrance">Вход в метро</string>
 	<string name="poi_subway_station">Станция метро</string>
 	<string name="poi_taxi">Стоянка такси</string>

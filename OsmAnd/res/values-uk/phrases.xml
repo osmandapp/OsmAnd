@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Напої</string>
 	<string name="poi_butcher">М’ясо</string>
 	<string name="poi_deli">Делікатеси</string>
-	<string name="poi_shop_farm">Продукти з села</string>
+	<string name="poi_farm">Продукти з села</string>
 	<string name="poi_greengrocer">Овочі, фрукти</string>
 	<string name="poi_seafood">Морепродукти</string>
 	<string name="poi_confectionery">Кондитерські вироби</string>
@@ -31,7 +31,7 @@
 	<string name="poi_carpet">Килими</string>
 	<string name="poi_chemist">Аптека</string>
 	<string name="poi_clothes">Магазин одягу</string>
-	<string name="poi_children_clothes">Дитячий одяг</string>
+	<string name="poi_child_clothes">Дитячий одяг</string>
 	<string name="poi_shoes">Магазин взуття</string>
 	<string name="poi_computer">Комп’ютерний магазин</string>
 	<string name="poi_copyshop">Копіювальні послуги, полігрфафія</string>
@@ -85,8 +85,8 @@
 	<string name="poi_window_blind">Жалюзі, віконниці, маркізи</string>
 	<string name="poi_department_store">Универмаг</string>
 	<string name="poi_electronics">Електороніка</string>
-	<string name="poi_car_shop">Автосалон</string>
-	<string name="poi_car_parts_shop">Автозапчастини</string>
+	<string name="poi_car">Автосалон</string>
+	<string name="poi_car_parts">Автозапчастини</string>
 	<string name="poi_atv">Квадроцикли</string>
 	<string name="poi_cosmetics">Косметика</string>
 	<string name="poi_marketplace">Ринок</string>
