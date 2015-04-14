@@ -388,7 +388,8 @@ public class ConfigureMapMenu {
 				ctx.getString(R.string.lang_es), ctx.getString(R.string.lang_fi), ctx.getString(R.string.lang_fr),
 				ctx.getString(R.string.lang_he), ctx.getString(R.string.lang_hi), ctx.getString(R.string.lang_hr),
 				ctx.getString(R.string.lang_hu), ctx.getString(R.string.lang_it), ctx.getString(R.string.lang_ja),
-				ctx.getString(R.string.lang_ko), ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_nl),
+				ctx.getString(R.string.lang_ko), ctx.getString(R.string.lang_lt),
+				ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_nl),
 				ctx.getString(R.string.lang_pl), ctx.getString(R.string.lang_ro), ctx.getString(R.string.lang_ru),
 				ctx.getString(R.string.lang_sk), ctx.getString(R.string.lang_sl), ctx.getString(R.string.lang_sv),
 				ctx.getString(R.string.lang_sw), ctx.getString(R.string.lang_zh) };

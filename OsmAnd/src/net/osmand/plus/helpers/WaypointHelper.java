@@ -666,9 +666,9 @@ public class WaypointHelper {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
 				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 				if (st != null) {
-					if (RenderingIcons.containsBigIcon(st.getKeyName())) {
+					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
 						return uiCtx.getResources().getDrawable(
-								RenderingIcons.getBigIconResourceId(st.getKeyName()));
+								RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
 					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 						return uiCtx.getResources().getDrawable(
 								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));

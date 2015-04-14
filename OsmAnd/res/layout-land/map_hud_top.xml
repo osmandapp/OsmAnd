@@ -112,11 +112,38 @@
             </LinearLayout>
         </FrameLayout>
 
+                        <!-- CENTER -->
+        
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
-            <!-- CENTER -->
+        
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginTop="@dimen/map_button_margin"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/map_layers_button"
+                    android:layout_width="@dimen/map_small_button_size"
+                    android:layout_height="@dimen/map_small_button_size"
+                    android:background="@drawable/btn_inset_circle_trans"
+                    android:src="@drawable/ic_action_test_light" />
+
+                <ImageButton
+                    android:id="@+id/map_compass_button"
+                    android:layout_width="@dimen/map_small_button_size"
+                    android:layout_marginLeft="@dimen/map_small_button_margin"
+                    android:layout_height="@dimen/map_small_button_size"
+                    android:background="@drawable/btn_inset_circle_trans"
+                    android:src="@drawable/ic_action_test_light" />
+            </LinearLayout>
+            
 
             <LinearLayout
                 android:id="@+id/map_center_info"
@@ -154,30 +181,6 @@
                     android:progress="60"
                     android:visibility="gone" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|left"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginTop="@dimen/map_button_margin"
-                android:orientation="horizontal" >
-
-                <ImageButton
-                    android:id="@+id/map_layers_button"
-                    android:layout_width="@dimen/map_small_button_size"
-                    android:layout_height="@dimen/map_small_button_size"
-                    android:background="@drawable/btn_inset_circle"
-                    android:src="@drawable/ic_action_test_light" />
-
-                <ImageButton
-                    android:id="@+id/map_compass_button"
-                    android:layout_width="@dimen/map_small_button_size"
-                    android:layout_marginLeft="@dimen/map_small_button_margin"
-                    android:layout_height="@dimen/map_small_button_size"
-                    android:background="@drawable/btn_inset_circle"
-                    android:src="@drawable/ic_action_test_light" />
-            </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 
@@ -211,7 +214,7 @@
                 android:layout_width="@dimen/map_small_button_size"
                 android:layout_height="@dimen/map_small_button_size"
                 android:layout_gravity="top|center_horizontal"
-                android:background="@drawable/btn_inset_circle"
+                android:background="@drawable/btn_inset_circle_trans"
                 android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </FrameLayout>

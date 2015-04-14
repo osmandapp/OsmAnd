@@ -127,7 +127,7 @@
                         android:id="@+id/map_layers_button"
                         android:layout_width="@dimen/map_small_button_size"
                         android:layout_height="@dimen/map_small_button_size"
-                        android:background="@drawable/btn_inset_circle"
+                        android:background="@drawable/btn_inset_circle_trans"
                         android:src="@drawable/ic_action_test_light" />
 
                     <ImageButton
@@ -147,45 +147,7 @@
                 android:layout_weight="0.6" >
             </LinearLayout>
         </LinearLayout>
-        <!-- CENTER -->
-
-        <LinearLayout
-            android:id="@+id/map_center_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center"
-            android:layout_marginTop="@dimen/map_button_margin"
-            android:background="@drawable/btn_round"
-            android:visibility="gone"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/map_lanes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/map_lanes_dist_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:maxLines="1"
-                android:text="1048 km"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/map_widget_text_size_small" />
-
-            <ProgressBar
-                android:id="@+id/map_horizontal_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="@dimen/map_routing_progress_width"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginRight="@dimen/map_button_margin"
-                android:max="100"
-                android:progress="60"
-                android:visibility="gone" />
-        </LinearLayout>
+       
         <!-- RIGHT widgets colon -->
 
         <LinearLayout
@@ -230,10 +192,49 @@
                         android:layout_width="@dimen/map_small_button_size"
                         android:layout_height="@dimen/map_small_button_size"
                         android:layout_gravity="top|center_horizontal"
-                        android:background="@drawable/btn_inset_circle"
+                        android:background="@drawable/btn_inset_circle_trans"
                         android:src="@drawable/ic_action_test_light" />
                 </LinearLayout>
             </FrameLayout>
+        </LinearLayout>
+         <!-- CENTER -->
+
+        <LinearLayout
+            android:id="@+id/map_center_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="@dimen/map_button_margin"
+            android:background="@drawable/btn_round"
+            android:visibility="gone"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/map_lanes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/map_lanes_dist_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="1048 km"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_widget_text_size_small" />
+
+            <ProgressBar
+                android:id="@+id/map_horizontal_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="@dimen/map_routing_progress_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginRight="@dimen/map_button_margin"
+                android:max="100"
+                android:progress="60"
+                android:visibility="gone" />
         </LinearLayout>
     </FrameLayout>
 

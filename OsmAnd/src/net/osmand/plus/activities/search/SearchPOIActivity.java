@@ -775,8 +775,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			direction.setImageDrawable(draw);
 			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			if (st != null) {
-				if (RenderingIcons.containsBigIcon(st.getKeyName())) {
-					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getKeyName()));
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
 				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
 				} else {
