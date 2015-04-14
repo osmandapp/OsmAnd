@@ -258,20 +258,17 @@ public class MapActivityLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
 		final List<PoiLegacyFilter> list = new ArrayList<PoiLegacyFilter>();
+		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
-		list.add(poiFilters.getCustomPOIFilter());
 		
 		Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					which = list.size() + 2;
-				}
-				PoiLegacyFilter pf = list.get(which - 1);
+				PoiLegacyFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
 				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
 					Intent search = new Intent(activity, SearchActivity.class);
