@@ -4,25 +4,6 @@
 package net.osmand.plus.activities;
 
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPOIActivity;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -41,6 +22,26 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.util.Algorithms;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -63,9 +64,20 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		filter = helper.getFilterById(filterId);
 		super.onCreate(icicle);
 
-		setContentView(R.layout.editing_poi_filter);
+		setContentView(R.layout.update_index);
+		((TextView)findViewById(R.id.header)).setText(R.string.shared_string_select_all);
+		final CheckBox selectAll = (CheckBox) findViewById(R.id.select_all);
+		selectAll.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (selectAll.isChecked()) {
+					selectAll();
+				} else {
+					deselectAll();
+				}
+			}
+		});
 		getSupportActionBar().setTitle(R.string.filterpoi_activity);
-//		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
 
 		if (filter != null) {
 			getSupportActionBar().setSubtitle(filter.getName());
@@ -204,11 +216,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				filter.selectSubTypesToAccept(poiCategory, null);
-				helper.editPoiFilter(filter);
-				ListView lv = EditPOIFilterActivity.this.getListView();
-				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
-				la.notifyDataSetInvalidated();
+				ListView lv = selectAllFromCategory(poiCategory);
 				lv.setSelectionFromTop(index, top);
 			}
 		});
@@ -223,8 +231,39 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.show();
 
 	}
-	
-	
+
+	public ListView selectAllFromCategory(PoiCategory poiCategory) {
+		filter.selectSubTypesToAccept(poiCategory, null);
+		helper.editPoiFilter(filter);
+		ListView lv = this.getListView();
+		AmenityAdapter la = this.getListAdapter();
+		la.notifyDataSetInvalidated();
+		return lv;
+	}
+
+	private void selectAll(){
+		AmenityAdapter adapter = getListAdapter();
+		int count = adapter.getCount();
+		for (int i =0; i< count; i++) {
+			selectAllFromCategory(adapter.getItem(i));
+			ListView lv = EditPOIFilterActivity.this.getListView();
+			final int index = lv.getFirstVisiblePosition();
+			View v = lv.getChildAt(0);
+			final int top = (v == null) ? 0 : v.getTop();
+			lv.setSelectionFromTop(index, top);
+		}
+	}
+
+	private void deselectAll(){
+		AmenityAdapter adapter = getListAdapter();
+		int count = adapter.getCount();
+		for (int i =0; i< count; i++) {
+			filter.setTypeToAccept(adapter.getItem(i), false);
+		}
+		ListView lv = EditPOIFilterActivity.this.getListView();
+		lv.deferNotifyDataSetChanged();
+	}
+
 	@Override
 	public AmenityAdapter getListAdapter() {
 		return (AmenityAdapter) super.getListAdapter();

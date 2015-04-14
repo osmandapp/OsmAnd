@@ -435,6 +435,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			private OsMoGroup group;
 			private Menu menu;
 
+			private MenuItem createActionModeMenuItem(final ActionMode actionMode, Menu m, int id, int titleRes, int icon, int menuItemType){
+				final MenuItem menuItem = createMenuItem(m, id, titleRes, icon,
+						menuItemType);
+				menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						onActionItemClicked(actionMode, menuItem);
+						return true;
+					}
+				});
+				return menuItem;
+			}
+
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectedObject = o;
@@ -449,34 +462,37 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				group = (OsMoGroup) (o instanceof OsMoGroup ? o : null);
 				MenuItem mi = null;
 				if (device != null) {
-					mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.shared_string_ok, 0, 0,
+					mi = createActionModeMenuItem(actionMode, menu, ON_OFF_ACTION_ID, R.string.shared_string_ok, 0,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+					mode.setTitle(device.getVisibleName());
 				}
 				if (device != null && device.getLastLocation() != null) {
-					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_dark,
+					createActionModeMenuItem(actionMode, menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map, R.drawable.ic_action_marker_dark,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
 				}
-				createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
+				createActionModeMenuItem(actionMode, menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 						// there is a bug in Android 4.2 layout
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
+					createActionModeMenuItem(actionMode, menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if (device != null && device.getLastLocation() != null) {
-					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
+					MenuItem menuItem = createActionModeMenuItem(actionMode, menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
 												// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
 				}
 				if (group != null) {
-					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_gabout_dark,
+					mode.setTitle(group.getVisibleName(OsMoGroupsActivity.this));
+					createActionModeMenuItem(actionMode, menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_gabout_dark,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
-					createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
+					createActionModeMenuItem(actionMode, menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 							R.drawable.ic_action_delete_dark,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
@@ -981,7 +997,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			public void onClick(DialogInterface dialog, int which) {
 				final String nameUser = name.getText().toString();
 				final String id = tracker.getText().toString();
-				final String nick = nickname.getText().toString();
+				String nick = nickname.getText().toString().isEmpty() ? "user" : nickname.getText().toString();
+
 				if(id.length() == 0) {
 					app.showToastMessage(R.string.osmo_specify_tracker_id);
 					connectToDevice();
