@@ -105,19 +105,20 @@ public class PointLocationLayer extends OsmandMapLayer {
 		if (isLocationVisible(box, lastKnownLocation)) {
 			checkAppMode(view.getSettings().getApplicationMode());
 			boolean isBearing = lastKnownLocation.hasBearing();
-			if (!isBearing) {
-				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2, locationY - locationIcon.getHeight() / 2,
-						locationPaint);
-			}
+
 			Float heading = locationProvider.getHeading();
 			if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
-				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE, true, headingPaint);
+				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE,
+						true, headingPaint);
 			}
 			if (isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
-				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2, locationY - bearingIcon.getHeight() / 2,
-						locationPaint);
+				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2,
+						locationY - bearingIcon.getHeight() / 2, locationPaint);
+			} else {
+				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2,
+						locationY - locationIcon.getHeight() / 2, locationPaint);
 			}
 
 		}

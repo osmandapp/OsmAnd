@@ -520,7 +520,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl = new TextInfoWidget(activity);
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}
@@ -539,13 +539,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void updateWidgetIcon(final TextInfoWidget recordPlaceControl) {
-		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_inactive));
+		recordPlaceControl.setIcons(R.drawable.widget_icon_av_inactive_day,
+				R.drawable.widget_icon_av_inactive_night);
 		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_video);
+			recordPlaceControl.setIcons(R.drawable.widget_icon_video,
+					R.drawable.widget_icon_video);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_photo);
+			recordPlaceControl.setIcons(R.drawable.widget_icon_video,
+					R.drawable.widget_icon_video);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_AUDIO) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_audio);
+			recordPlaceControl.setIcons(R.drawable.widget_icon_audio,
+					R.drawable.widget_icon_audio);
 		}
 	}
 

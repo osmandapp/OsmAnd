@@ -89,9 +89,9 @@ public class MapWidgetRegistry {
 			}
 		}
 	}
-	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableMenu, int drawableMap,
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableMenu, 
 			int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,  drawableMap,
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,  
 				messageId, priorityOrder, left);
 		for (ApplicationMode ms : ApplicationMode.values(settings)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
@@ -309,7 +309,6 @@ public class MapWidgetRegistry {
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
 		public final TextInfoWidget widget;
 		public final int drawableMenu;
-		public final int drawableMap;
 		public final int messageId;
 		public final String key;
 		public final boolean left;
@@ -319,12 +318,10 @@ public class MapWidgetRegistry {
 		private Runnable stateChangeListener = null;
 		
 		public MapWidgetRegInfo(String key, TextInfoWidget widget, int drawableMenu, 
-				int drawableMap, int messageId, int priorityOrder,
-				boolean left) {
+				int messageId, int priorityOrder, boolean left) {
 			this.key = key;
 			this.widget = widget;
 			this.drawableMenu = drawableMenu;
-			this.drawableMap = drawableMap;
 			this.messageId = messageId;
 			this.priorityOrder = priorityOrder;
 			this.left = left;

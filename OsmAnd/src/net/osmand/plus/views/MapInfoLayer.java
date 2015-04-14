@@ -82,9 +82,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public void registerSideWidget(TextInfoWidget widget, int drawableMenu, int drawableMap, 
+	public void registerSideWidget(TextInfoWidget widget, int drawableMenu, 
 			int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, drawableMap, messageId, key, left, priorityOrder);
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
 	}
 	
@@ -105,29 +105,29 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// register left stack
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
-		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
-		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
-		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
+		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
-		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
+		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map);
-		registerSideWidget(dist, R.drawable.ic_action_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
+		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map);
-		registerSideWidget(time, R.drawable.ic_action_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
+		registerSideWidget(time, R.drawable.ic_action_time, R.string.map_widget_time, "time", false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map);
-		registerSideWidget(speed, R.drawable.ic_action_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
+		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
-		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		registerSideWidget(maxspeed, R.drawable.ic_action_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		registerSideWidget(maxspeed, R.drawable.ic_action_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
-		registerSideWidget(alt, R.drawable.ic_action_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
-		registerSideWidget(plainTime, R.drawable.ic_action_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		registerSideWidget(plainTime, R.drawable.ic_action_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 	}
 	
 	
@@ -155,6 +155,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private static class TextState {
 		boolean textBold ;
+		boolean night;
 		int textColor ;
 		int textShadowColor ;
 		int boxTop;
@@ -202,6 +203,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if(v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
 			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
+			reg.widget.updateIconMode(ts.night);
 		}
 	}
 
@@ -211,6 +213,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		boolean following = routeLayer.getHelper().isFollowingMode();
 		TextState ts = new TextState();
 		ts.textBold = following;
+		ts.night = nightMode;
 		ts.textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
 		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
 		// night skin (from box_night_free_simple.9.png)
