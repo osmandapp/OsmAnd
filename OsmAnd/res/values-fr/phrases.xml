@@ -749,4 +749,6 @@
 	<string name="poi_sailing">Navigation à voile</string>
 	<string name="poi_charity">Boutique de charité</string>
 	<string name="poi_tomb">Sépulture</string>
+	<string name="poi_wilderness_hut">Cabane en pleine nature</string>
+
 	</resources>
