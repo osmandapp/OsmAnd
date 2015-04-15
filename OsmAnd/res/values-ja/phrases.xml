@@ -471,4 +471,12 @@
 	<string name="poi_castle">城(Castle)</string>
 	<string name="poi_city_gate">市壁・城壁門(City gate)</string>
 	<string name="poi_fort">砦(Fort)</string>
+	<string name="poi_fountain">噴水(Fountain)</string>
+	<string name="poi_historic_ruins">古跡・廃墟(Historic ruins)</string>
+	<string name="poi_rune_stone">ルーン石碑(Rune stone)</string>
+	<string name="poi_wreck">難破船・座礁船(Shipwreck)</string>
+	<string name="poi_historic_ship">退役船(Historic ship)</string>
+	<string name="poi_historic_mine">廃鉱山(Historic mine)</string>
+	<string name="poi_monument">モニュメント・記念碑(Monument)</string>
+	<string name="poi_aquarium">水族館(Aquarium)</string>
 	</resources>
