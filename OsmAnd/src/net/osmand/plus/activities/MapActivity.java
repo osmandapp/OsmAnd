@@ -232,7 +232,8 @@ public class MapActivity extends AccessibleActivity {
 						openGlSetup = true;
 					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
-						mapView.refreshMap(true);
+						// TODO investigate if this false cause any issues!
+						mapView.refreshMap(false);
 						if(dashboardOnMap != null) {
 							dashboardOnMap.updateLocation(true, true, false);
 						}
@@ -244,7 +245,7 @@ public class MapActivity extends AccessibleActivity {
 					if(!openGlSetup) {
 						setupOpenGLView(false);
 					}
-					mapView.refreshMap(true);
+					mapView.refreshMap(false);
 					if(dashboardOnMap != null) {
 						dashboardOnMap.updateLocation(true, true, false);
 					}

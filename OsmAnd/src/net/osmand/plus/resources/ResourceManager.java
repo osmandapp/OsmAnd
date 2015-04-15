@@ -865,7 +865,6 @@ public class ResourceManager {
 	}
 	
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){
-		log.info("RENDER MAP: force update the map");
 		renderer.interruptLoadingMap();
 		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox));
 	}

@@ -182,13 +182,16 @@ public class MapRenderRepositories {
 			return false;
 		}
 		if (requestedBox == null) {
+			log.info("RENDER MAP: update due to start");
 			return true;
 		}
 		if (drawSettings.isUpdateVectorRendering()) {
+			log.info("RENDER MAP: update due to request");
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom() ||
 				requestedBox.getMapDensity() != box.getMapDensity()) {
+			log.info("RENDER MAP: update due zoom/map density");
 			return true;
 		}
 
@@ -199,9 +202,14 @@ public class MapRenderRepositories {
 			deltaRotate += 360;
 		}
 		if (Math.abs(deltaRotate) > 25) {
+			log.info("RENDER MAP: update due to rotation");
 			return true;
 		}
-		return !requestedBox.containsTileBox(box);
+		boolean upd = !requestedBox.containsTileBox(box);
+		if(upd) {
+			log.info("RENDER MAP: update due to tile box");
+		}
+		return upd;
 	}
 
 	public boolean isEmpty() {
