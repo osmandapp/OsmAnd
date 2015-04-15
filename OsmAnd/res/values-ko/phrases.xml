@@ -765,4 +765,7 @@
 	<string name="poi_recreation_ground">레크리에이션 지역</string>
 	<string name="poi_village_green">녹색 마을</string>
 
+	<string name="poi_charity">자선 가게</string>
+	<string name="poi_photo">사진관</string>
+	<string name="poi_sailing">항해</string>
 	</resources>
