@@ -184,8 +184,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
-			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
-			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius);
+			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
+			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius / 2);
 			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
 			leftStack.invalidate();
@@ -195,7 +195,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private void updateStreetName(boolean nightMode, TextState ts) {
 		streetNameView.setBackgroundResource(ScreenOrientationHelper.isOrientationPortrait(map) ? ts.boxTop
 				: ts.boxFree);
-		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
+		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {

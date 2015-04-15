@@ -88,10 +88,11 @@ public class WaypointDialogHelper {
 			textDist.setText("");
 		}
 		String descr = PointDescription.getSimpleName(point, app);
-		text.setText(descr);
 		if(textShadow != null) {
 			textShadow.setText(descr);
 		}
+		text.setText(descr);
+		
 //			((Spannable) text.getText()).setSpan(
 //					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 //					0);

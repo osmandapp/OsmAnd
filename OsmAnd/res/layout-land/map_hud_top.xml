@@ -48,6 +48,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" >
+                
+                <TextView
+                    android:id="@+id/map_address_text_shadow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Long Street Name"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/map_widget_text_size" >
+                </TextView>
 
                 <TextView
                     android:id="@+id/map_address_text"
@@ -61,17 +73,7 @@
                     android:textSize="@dimen/map_widget_text_size" >
                 </TextView>
 
-                <TextView
-                    android:id="@+id/map_address_text_shadow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Long Street Name"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size" >
-                </TextView>
+                
             </FrameLayout>
 
             <LinearLayout
@@ -107,15 +109,6 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1" >
 
-                    <TextView
-                        android:id="@+id/waypoint_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="Waypoint"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/map_button_text_size" />
                     
                     <TextView
                         android:id="@+id/waypoint_text_shadow"
@@ -126,6 +119,17 @@
                         android:text="Waypoint"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/map_button_text_size" />
+                    
+                    <TextView
+                        android:id="@+id/waypoint_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Waypoint"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_button_text_size" />
+                    
                 </FrameLayout>
 
                 <ImageButton
@@ -195,6 +199,16 @@
                     android:layout_weight="1" >
 
                     <TextView
+                        android:id="@+id/map_lanes_dist_text_shadow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="1048 km"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+                    
+                    <TextView
                         android:id="@+id/map_lanes_dist_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -204,15 +218,7 @@
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/map_widget_text_size_small" />
 
-                    <TextView
-                        android:id="@+id/map_lanes_dist_text_shadow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:maxLines="1"
-                        android:text="1048 km"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/map_widget_text_size_small" />
+                    
                 </FrameLayout>
 
                 <ProgressBar

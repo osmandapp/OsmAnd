@@ -283,12 +283,12 @@ public class MapInfoWidgetsFactory {
 				if (update) {
 					if (type[0] != null) {
 						addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
+						addressTextShadow.setCompoundDrawablePadding(4);
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
 						addressText.setCompoundDrawablePadding(4);
-						addressTextShadow.setCompoundDrawablePadding(4);
 					} else {
-						addressText.setCompoundDrawables(null, null, null, null);
 						addressTextShadow.setCompoundDrawables(null, null, null, null);
+						addressText.setCompoundDrawables(null, null, null, null);
 					}
 				}
 				if (!text.equals(addressText.getText().toString())) {
@@ -297,8 +297,8 @@ public class MapInfoWidgetsFactory {
 					} else {
 						topBar.setContentDescription(map.getResources().getString(R.string.map_widget_top_text));
 					}
-					addressText.setText(text);
 					addressTextShadow.setText(text);
+					addressText.setText(text);
 					return true;
 				}
 			}
