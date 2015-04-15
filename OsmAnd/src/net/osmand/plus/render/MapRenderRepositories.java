@@ -216,6 +216,7 @@ public class MapRenderRepositories {
 		if (searchRequest != null) {
 			searchRequest.setInterrupted(true);
 		}
+		log.info("Interrupt rendering map");
 	}
 
 	private boolean checkWhetherInterrupted() {
