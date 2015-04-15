@@ -11,22 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <TextView android:id="@+id/widget_top_icon_text"
+        <TextView
+            android:id="@+id/widget_top_icon_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="2dp"
             android:textColor="@color/color_black"
             android:textSize="@dimen/map_widget_text_size"
-            android:visibility="gone" 
-            />
+            android:visibility="gone" />
+
         <ImageView
             android:id="@+id/widget_top_icon"
             android:layout_width="@dimen/map_widget_image"
             android:layout_height="@dimen/map_widget_image"
+            android:layout_marginTop="2dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_action_test_light"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
     </FrameLayout>
 
     <LinearLayout
@@ -43,36 +45,63 @@
             android:gravity="center"
             android:src="@drawable/ic_action_test_light" />
 
-        <TextView
-            android:id="@+id/widget_text"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:minWidth="10dp"
-            android:shadowColor="@color/color_myloc_distance"
-            android:shadowRadius="10"
-            android:text="1048"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/map_widget_text_size" />
+            android:layout_weight="1" >
 
-        <TextView
-            android:id="@+id/widget_text_small"
+            <TextView
+                android:id="@+id/widget_text_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:maxLines="1"
+                android:minWidth="10dp"
+                android:text="1048"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/map_widget_text_size" />
+
+            <TextView
+                android:id="@+id/widget_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:maxLines="1"
+                android:minWidth="10dp"
+                android:text="1048"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_widget_text_size" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/map_widget_text_bottom_margin"
+            android:layout_marginBottom="@dimen/map_widget_text_small_bottom_margin"
             android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:maxLines="1"
-            android:shadowColor="@color/color_myloc_distance"
-            android:shadowRadius="10"
-            android:text="km"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/map_widget_text_size_small" />
+            android:layout_marginRight="4dp" >
+
+            <TextView
+                android:id="@+id/widget_text_small_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="km"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/map_widget_text_size_small" />
+            
+            <TextView
+                android:id="@+id/widget_text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="km"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_widget_text_size_small" />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

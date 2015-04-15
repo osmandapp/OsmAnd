@@ -221,7 +221,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (!transparent && !nightMode) {
 			ts.textShadowColor = Color.TRANSPARENT;
 		}
-		ts.textShadowRadius = ts.textShadowColor == 0 ? 0 : 15; 
+		ts.textShadowRadius = (int) (ts.textShadowColor == 0 ? 0 : 4 * view.getDensity()); 
 		if (transparent) {
 			ts.boxTop = R.drawable.btn_flat_transparent;
 			ts.rightRes = R.drawable.btn_left_round_transparent;

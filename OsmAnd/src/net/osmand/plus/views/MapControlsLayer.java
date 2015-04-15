@@ -173,8 +173,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark).setIconColorId(0).setBg(
-				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night));
+		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark).setIconColorId(0));
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -184,8 +183,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
-		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).setBg(
-				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
+		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0);
 		compassHud.compass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(new View.OnClickListener() {

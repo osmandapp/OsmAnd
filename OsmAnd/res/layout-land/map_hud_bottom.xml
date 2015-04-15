@@ -105,17 +105,31 @@
             android:layout_width="@dimen/map_ruler_width"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" >
+            
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/map_ruler_bottom_margin" >
 
-            <TextView
-                android:id="@+id/map_ruler_text"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/map_ruler_bottom_margin"
-                android:gravity="center_horizontal"
-                android:text="100 m"
-                android:textSize="@dimen/map_widget_text_size_small" />
+                    <TextView
+                        android:id="@+id/map_ruler_text"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:text="100 m"
+                        android:textSize="@dimen/map_widget_text_size_small" />
 
+                    <TextView
+                        android:id="@+id/map_ruler_text_shadow"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:text="100 m"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+                </FrameLayout>
+            
             <ImageView
                 android:id="@+id/map_ruler_image"
                 android:layout_width="fill_parent"

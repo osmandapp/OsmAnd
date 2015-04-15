@@ -168,6 +168,7 @@ public class MapInfoWidgetsFactory {
 		private final MapActivity map;
 		private View topBar;
 		private TextView addressText;
+		private TextView addressTextShadow;
 		private OsmAndLocationProvider locationProvider;
 		private WaypointHelper waypointHelper;
 		private OsmandSettings settings;
@@ -178,6 +179,7 @@ public class MapInfoWidgetsFactory {
 		public TopTextView(OsmandApplication app, MapActivity map) {
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
+			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
 			waypointInfoBar = map.findViewById(R.id.waypoint_info_bar);
 			this.routingHelper = app.getRoutingHelper();
 			locationProvider = app.getLocationProvider();
@@ -206,9 +208,11 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
-			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
-			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text), textColor, textShadowColor,
-					bold, rad);
+			TextInfoWidget.updateTextColor(addressText, addressTextShadow, textColor, textShadowColor, bold, rad);
+			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
+					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
+					textColor, textShadowColor, bold, rad);
+			
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 			all.setImageDrawable(map.getMyApplication().getIconsCache()
@@ -217,11 +221,7 @@ public class MapInfoWidgetsFactory {
 					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 		
-		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
-			tv.setTextColor(textColor);
-			tv.setShadowLayer(rad, 0, 0, textShadowColor);
-			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-		}
+		
 
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
@@ -266,22 +266,29 @@ public class MapInfoWidgetsFactory {
 			if(!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
 				updateVisibility(addressText, false);
+				updateVisibility(addressTextShadow, false);
 			} else if(text == null) {
 				updateVisibility(false);
 			} else {
 				updateVisibility(true);
 				updateVisibility(waypointInfoBar, false);
 				updateVisibility(addressText, true);
+				updateVisibility(addressTextShadow, true);
 				boolean update = turnDrawable.setTurnType(type[0]);
+				
 				int h = addressText.getHeight() / 4 * 3;
 				if (h != turnDrawable.getBounds().bottom) {
 					turnDrawable.setBounds(0, 0, h, h);
 				}
 				if (update) {
 					if (type[0] != null) {
+						addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+						addressText.setCompoundDrawablePadding(4);
+						addressTextShadow.setCompoundDrawablePadding(4);
 					} else {
 						addressText.setCompoundDrawables(null, null, null, null);
+						addressTextShadow.setCompoundDrawables(null, null, null, null);
 					}
 				}
 				if (!text.equals(addressText.getText().toString())) {
@@ -291,6 +298,7 @@ public class MapInfoWidgetsFactory {
 						topBar.setContentDescription(map.getResources().getString(R.string.map_widget_top_text));
 					}
 					addressText.setText(text);
+					addressTextShadow.setText(text);
 					return true;
 				}
 			}
@@ -307,6 +315,7 @@ public class MapInfoWidgetsFactory {
 				return false;
 			} else {
 				updateVisibility(addressText, false);
+				updateVisibility(addressTextShadow, false);
 				boolean updated = updateVisibility(waypointInfoBar, true);
 				// pass top bar to make it clickable
 				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 

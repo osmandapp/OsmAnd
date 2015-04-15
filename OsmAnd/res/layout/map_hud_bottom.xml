@@ -11,27 +11,30 @@
 
         <FrameLayout
             android:id="@+id/map_alarm_warning"
+            android:layout_width="@dimen/map_alarm_size"
+            android:layout_height="@dimen/map_alarm_size"
             android:layout_gravity="bottom|left"
             android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
-            android:layout_marginLeft="@dimen/map_button_shadow_margin"
-            android:layout_width="@dimen/map_alarm_size"
-            android:layout_height="@dimen/map_alarm_size">
+            android:layout_marginLeft="@dimen/map_button_shadow_margin" >
+
             <ImageView
                 android:id="@+id/map_alarm_warning_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/warnings_limit" />
+
             <TextView
                 android:id="@+id/map_alarm_warning_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textStyle="bold"
+                android:text="60"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/map_alarm_text_size"
-                android:text="60"/>
+                android:textStyle="bold" />
         </FrameLayout>
+
         <FrameLayout
             android:id="@+id/map_app_mode_shadow"
             android:layout_width="@dimen/map_button_shadow_width"
@@ -60,18 +63,17 @@
 
         <LinearLayout
             android:id="@+id/map_transparency_layout"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="@dimen/map_button_size"
             android:orientation="horizontal" >
 
             <SeekBar
                 android:id="@+id/map_transparency_seekbar"
+                android:layout_width="@dimen/map_trans_seek_size"
                 android:layout_height="wrap_content"
-                android:layout_width="@dimen/map_trans_seek_size" 
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
             <ImageButton
                 android:id="@+id/map_transparency_hide"
@@ -103,30 +105,44 @@
                 android:layout_marginLeft="@dimen/map_button_spacing"
                 android:background="@drawable/btn_round"
                 android:src="@drawable/ic_action_test_light" />
-            
+
             <FrameLayout
                 android:id="@+id/map_ruler_layout"
                 android:layout_width="@dimen/map_ruler_width"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="@dimen/map_button_margin">
-                <TextView
-                    android:id="@+id/map_ruler_text"
-                	android:layout_width="fill_parent"
-                	android:layout_height="fill_parent" 
-                	android:layout_marginBottom="@dimen/map_ruler_bottom_margin"
-                	android:text="100 m"
-                	android:gravity="center_horizontal"
-                	android:layout_gravity="bottom"
-                	android:textSize="@dimen/map_widget_text_size_small"
-                    />
-                <ImageView 
+                android:layout_marginLeft="@dimen/map_button_margin" >
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/map_ruler_bottom_margin" >
+
+                    <TextView
+                        android:id="@+id/map_ruler_text"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:text="100 m"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+
+                    <TextView
+                        android:id="@+id/map_ruler_text_shadow"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:gravity="center_horizontal"
+                        android:text="100 m"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+                </FrameLayout>
+
+                <ImageView
                     android:id="@+id/map_ruler_image"
-                	android:layout_width="fill_parent"
-                	android:layout_height="wrap_content"
-                	android:layout_gravity="bottom" 
-                	android:background="@drawable/ruler"
-                    />
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/ruler" />
             </FrameLayout>
         </LinearLayout>
 

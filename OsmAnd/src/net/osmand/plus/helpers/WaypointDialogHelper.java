@@ -60,6 +60,7 @@ public class WaypointDialogHelper {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
+		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -86,7 +87,11 @@ public class WaypointDialogHelper {
 		} else {
 			textDist.setText("");
 		}
-		text.setText(PointDescription.getSimpleName(point, app));
+		String descr = PointDescription.getSimpleName(point, app);
+		text.setText(descr);
+		if(textShadow != null) {
+			textShadow.setText(descr);
+		}
 //			((Spannable) text.getText()).setSpan(
 //					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 //					0);

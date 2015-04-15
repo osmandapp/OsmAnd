@@ -520,6 +520,7 @@ public class RouteInfoWidgetsFactory {
 		private OsmandSettings settings;
 		private ImageView lanesView;
 		private TextView lanesText;
+		private TextView lanesShadowText;
 		private OsmandApplication app;
 		private int dist;
 		private LanesDrawable lanesDrawable;
@@ -529,6 +530,7 @@ public class RouteInfoWidgetsFactory {
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
 			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
 			lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
+			lanesShadowText = (TextView) map.findViewById(R.id.map_lanes_dist_text_shadow);
 			centerInfo = (View) map.findViewById(R.id.map_center_info);
 			progress = (View) map.findViewById(R.id.map_horizontal_progress);
 			lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
@@ -541,9 +543,7 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
-			lanesText.setTextColor(textColor);
-			lanesText.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-			lanesText.setShadowLayer(shadowRadius, 0, 0, textShadowColor);
+			TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textColor, textShadowColor, textBold, shadowRadius);
 		}
 		
 		public boolean updateInfo(DrawSettings drawSettings) {
@@ -604,13 +604,17 @@ public class RouteInfoWidgetsFactory {
 					this.dist = dist;
 					if(dist == 0) {
 						lanesText.setText("");
+						lanesShadowText.setText("");
 					} else {
 						lanesText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+						lanesShadowText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 					}
 					lanesText.invalidate();
+					lanesShadowText.invalidate();
 				}
 			}
 			updateVisibility(lanesText, visible);
+			updateVisibility(lanesShadowText, visible);
 			updateVisibility(lanesView, visible);
 			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);
 			return true;
@@ -715,6 +719,7 @@ public class RouteInfoWidgetsFactory {
 		private View layout;
 		private ImageView icon;
 		private TextView text;
+		private TextView textShadow;
 		private MapActivity ma;
 		private String cacheRulerText;
 		private int maxWidth;
@@ -728,13 +733,13 @@ public class RouteInfoWidgetsFactory {
 			layout = ma.findViewById(R.id.map_ruler_layout);
 			icon = (ImageView) ma.findViewById(R.id.map_ruler_image);
 			text = (TextView) ma.findViewById(R.id.map_ruler_text);
+			textShadow = (TextView) ma.findViewById(R.id.map_ruler_text_shadow);
 			maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 			orientationPortrait = ScreenOrientationHelper.isOrientationPortrait(ma);
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
-			text.setTextColor(textColor);
-			text.setShadowLayer(shadowRadius, 0, 0, textShadowColor);
+			TextInfoWidget.updateTextColor(text, textShadow, textColor, textShadowColor, false, 3);
 			icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 		}
 		
@@ -759,6 +764,7 @@ public class RouteInfoWidgetsFactory {
 				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
 				cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication());
 				text.setText(cacheRulerText);
+				textShadow.setText(cacheRulerText);
 				ViewGroup.LayoutParams lp = layout.getLayoutParams();
 				lp.width = cacheRulerDistPix;
 				layout.setLayoutParams(lp);
