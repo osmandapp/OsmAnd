@@ -74,9 +74,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			DataTileManager<OsmPoint> points = plugin.getLocalOsmEdits();
 			final QuadRect latlon = tileBox.getLatLonBounds();
 			List<OsmPoint> objects = points.getObjects(latlon. top, latlon.left, latlon.bottom, latlon.right);
+			
 			for (OsmPoint o : objects) {
-				int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				int locationX = tileBox.getPixXFromLonNoRot(o.getLongitude());
+				int locationY = tileBox.getPixYFromLatNoRot(o.getLatitude());
+				canvas.rotate(-view.getRotate(), locationX, locationY);	
 				Bitmap b;
 				if (o.getGroup() == OsmPoint.Group.POI) {
 					b = poi;
@@ -84,9 +86,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 					b = bug;
 				} else {
 					b = poi;
-
 				}
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight(), paintIcon);
+				canvas.drawBitmap(b, locationX - b.getWidth() / 2, locationY - b.getHeight(), paintIcon);
+				canvas.rotate(view.getRotate(), locationX, locationY);
 			}
 		}
 	}
