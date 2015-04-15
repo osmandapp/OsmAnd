@@ -509,7 +509,7 @@
 	<string name="poi_craft_rigger">리거</string>
 	<string name="poi_craft_saddler">새들러</string>
 	<string name="poi_craft_sailmaker">Sail 메이커</string>
-	<string name="poi_cannon">역사적인 대포</string>
+	<string name="poi_historic_cannon">역사적인 대포</string>
 	<string name="poi_harbour">항구</string>
 	<string name="poi_craft_sawmill">제재소</string>
 	<string name="poi_craft_scaffolder">스카프폴더</string>

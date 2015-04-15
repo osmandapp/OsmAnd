@@ -222,7 +222,7 @@
 	<string name="poi_memorial">Gedenkteken</string>
 	<string name="poi_archaeological_site">Archeologische site</string>
 	<string name="poi_battlefield">Slagveld</string>
-	<string name="poi_cannon">Historisch kanon</string>
+	<string name="poi_historic_cannon">Historisch kanon</string>
 	<string name="poi_castle">Kasteel</string>
 	<string name="poi_city_gate">Stadspoort</string>
 	<string name="poi_fort">Fort</string>
