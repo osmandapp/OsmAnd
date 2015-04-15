@@ -3,9 +3,7 @@ package net.osmand.plus.dialogs;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.AndroidUtils;
@@ -14,30 +12,28 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class FavoriteDialogs {
@@ -46,87 +42,19 @@ public class FavoriteDialogs {
 	public static Dialog createReplaceFavouriteDialog(final Activity activity, final Bundle args) {
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		final Collator ci = java.text.Collator.getInstance();
-		final boolean distance = args.containsKey("DISTANCE");
-		Collections.sort(points, new Comparator<FavouritePoint>() {
+		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, 
+				((OsmandApplication) activity.getApplication()).getFavorites().getFavouritePoints());
+		final Dialog[] dlgHolder = new Dialog[1];
+		OnItemClickListener click = new AdapterView.OnItemClickListener() {
 
 			@Override
-			public int compare(FavouritePoint o1, FavouritePoint o2) {
-				if (distance && activity instanceof MapActivity) {
-					float f1 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o1.getLatitude(),
-							o1.getLongitude());
-					float f2 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o2.getLatitude(),
-							o2.getLongitude());
-					return Float.compare(f1, f2);
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				FavouritePoint fp = favouritesAdapter.getItem(position);
+				if(dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
+					dlgHolder[0].dismiss();
 				}
-				return ci.compare(o1.getCategory() + " " + o1.getName(), o2.getCategory() + " " + o2.getName());
-			}
-		});
-		final String[] names = new String[points.size()];
-		if(points.size() == 0){
-			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			return null;
-		}
-			
-		Builder b = new AlertDialog.Builder(activity);
-		final FavouritePoint[] favs = new FavouritePoint[points.size()];
-		Iterator<FavouritePoint> it = points.iterator();
-		int i=0;
-		while (it.hasNext()) {
-			FavouritePoint fp = it.next();
-			// filter gpx points
-			favs[i] = fp;
-			if(fp.getCategory().trim().length() ==0){
-				names[i] = fp.getName();
-			} else {
-				names[i] = fp.getCategory() + ": " + fp.getName();
-			}
-			if(activity instanceof MapActivity) {
-				names[i] += "  " + OsmAndFormatter.getFormattedDistance(
-						(float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), fp.getLatitude(), 
-								fp.getLongitude()), ((MapActivity) activity).getMyApplication());
-			}
-			i++;
-		}
-		final int layout;
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			layout = R.layout.list_menu_item;
-		} else {
-			layout = R.layout.list_menu_item_native;
-		}
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
-				names) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layout, null);
-					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, activity.getResources()
-							.getDisplayMetrics());
-					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
-					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
-					v.findViewById(R.id.icon).setLayoutParams(ll);
-				}
-				ImageView icon = (ImageView) v.findViewById(R.id.icon);
-				FavouritePoint fp = points.get(position);
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, fp.getColor()));
-				
-				icon.setVisibility(View.VISIBLE);
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(names[position]);
-				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-					ch.setVisibility(View.INVISIBLE);
-				return v;
-			}
-		};
-		b.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				FavouritePoint fv = favs[which];
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				if (helper.editFavourite(fv, point.getLatitude(), point.getLongitude())) {
+				if (helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
 					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited),
 							Toast.LENGTH_SHORT).show();
 				}
@@ -134,24 +62,16 @@ public class FavoriteDialogs {
 					((MapActivity) activity).getMapView().refreshMap();
 				}
 			}
-		});
+		};
 		if (activity instanceof MapActivity) {
-			b.setPositiveButton(distance ? R.string.sort_by_name : R.string.sort_by_distance,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (distance) {
-								args.remove("DISTANCE");
-							} else {
-								args.putBoolean("DISTANCE", true);
-							}
-							createReplaceFavouriteDialog(activity, args).show();
-						}
-					});
+			favouritesAdapter.updateLocation(((MapActivity) activity).getMapLocation());
 		}
-		AlertDialog al = b.create();
-		return al;
+		final String[] names = new String[points.size()];
+		if(points.size() == 0){
+			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			return null;
+		}
+		return showFavoritesDialog(activity, favouritesAdapter, click, null, dlgHolder, true);
 	}
 	
 	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, PointDescription desc) {
@@ -241,5 +161,50 @@ public class FavoriteDialogs {
 		});
 		return builder.create();
     }
+	
+	public static final AlertDialog showFavoritesDialog(
+			final Context uiContext,
+			final FavouritesAdapter favouritesAdapter, final OnItemClickListener click,
+			final OnDismissListener dismissListener, final Dialog[] dialogHolder, final boolean sortByDist) {
+		ListView listView = new ListView(uiContext);
+		Builder bld = new AlertDialog.Builder(uiContext);
+		final Collator inst = Collator.getInstance();
+		favouritesAdapter.sort(new Comparator<FavouritePoint>() {
+
+			@Override
+			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
+				if (sortByDist) {
+					if (favouritesAdapter.getLocation() == null) {
+						return 0;
+					}
+					double ld = MapUtils.getDistance(favouritesAdapter.getLocation(), lhs.getLatitude(),
+							lhs.getLongitude());
+					double rd = MapUtils.getDistance(favouritesAdapter.getLocation(), rhs.getLatitude(),
+							rhs.getLongitude());
+					return Double.compare(ld, rd);
+				}
+				return inst.compare(lhs.getName(), rhs.getName());
+			}
+		});
+		
+		listView.setAdapter(favouritesAdapter);
+		listView.setOnItemClickListener(click);
+		bld.setPositiveButton(sortByDist ? R.string.sort_by_name :
+			R.string.sort_by_distance, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				showFavoritesDialog(uiContext, favouritesAdapter, click, dismissListener, dialogHolder, !sortByDist);
+			}
+		});
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.setView(listView);
+		AlertDialog dlg = bld.show();
+		if(dialogHolder != null) {
+			dialogHolder[0] = dlg;
+		}
+		dlg.setOnDismissListener(dismissListener);
+		return dlg;
+	}
 	
 }
