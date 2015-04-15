@@ -7,7 +7,6 @@
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
 	<string name="poi_deli">Деликатесы</string>
-	<string name="poi_shop_farm">Фермерские продукты</string>
 	<string name="poi_greengrocer">Овощи и фрукты</string>
 	<string name="poi_seafood">Морепродукты</string>
 	<string name="poi_confectionery">Кондитерская</string>
@@ -28,10 +27,10 @@
 	<string name="poi_bed">Спальные принадлежности</string>
 	<string name="poi_boutique">Бутик</string>
 	<string name="poi_carpet">Магазин ковров</string>
-	<string name="poi_charity_shop">Благотворительный магазин</string>
+	<string name="poi_charity">Благотворительный магазин</string>
 	<string name="poi_chemist">Бытовая химия, косметика</string>
 	<string name="poi_clothes">Одежда</string>
-	<string name="poi_children_clothes">Детская одежда</string>
+	<string name="poi_child_clothes">Детская одежда</string>
 	<string name="poi_shoes">Обувь</string>
 	<string name="poi_computer">Компьютеры</string>
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
@@ -85,8 +84,8 @@
 	<string name="poi_window_blind">Жалюзи, ставни, маркизы</string>
 	<string name="poi_department_store">Универмаг</string>
 	<string name="poi_electronics">Электроника</string>
-	<string name="poi_car_shop">Автосалон</string>
-	<string name="poi_car_parts_shop">Автозапчасти</string>
+	<string name="poi_car">Автосалон</string>
+	<string name="poi_car_parts">Автозапчасти</string>
 	<string name="poi_atv">Квадроциклы</string>
 	<string name="poi_cosmetics">Косметика, парфюмерия</string>
 	<string name="poi_marketplace">Рынок</string>
@@ -144,7 +143,6 @@
 	<string name="poi_bus_station">Автобусная станция</string>
 	<string name="poi_railway_station">Ж/д станция</string>
 	<string name="poi_railway_platform">Ж/д платформа</string>
-	<string name="poi_railway_halt">Ж/д платформа</string>
 	<string name="poi_railway_subway_entrance">Вход в метро</string>
 	<string name="poi_subway_station">Станция метро</string>
 	<string name="poi_taxi">Стоянка такси</string>
@@ -620,7 +618,7 @@
 	<string name="poi_bmx">Веломотокросс</string>
 	<string name="poi_canadian_football">Канадский футбол</string>
 	<string name="poi_surfing">Серфинг</string>
-	<string name="poi_cannon">Исторические пушки</string>
+	<string name="poi_historic_cannon">Исторические пушки</string>
 	<string name="poi_harbour">Гавань</string>
 	<string name="poi_attraction_big_wheel">Колесо обозрения</string>
 	<string name="poi_attraction_carousel">Карусель</string>
@@ -655,8 +653,6 @@
 	<string name="poi_entertainment">Досуг</string>
 	<string name="poi_wine">Винный магазин</string>
 
-	<string name="poi_car">Автомобильный магазин</string>
-	<string name="poi_car_parts">Автозапчасти</string>
 	<string name="poi_halt">Железнодорожная остановка</string>
 	<string name="poi_emergency">Экстренные службы</string>
 	<string name="poi_transportation">Транспорт</string>
@@ -690,7 +686,6 @@
 		<string name="poi_communication">Коммуникации</string>
 		<string name="poi_trash_disposal">Утилизация мусора</string>
 	<string name="poi_accomodation">Проживание</string>
-		<string name="poi_child_clothes">Детская одежда</string>
 	<string name="poi_training">Учебный центр</string>
 	<string name="poi_quarter">Квартал</string>
 	<string name="poi_field_hockey">Хоккейная площадка</string>
@@ -702,19 +697,19 @@
 	<string name="poi_silo">Силос</string>
 	<string name="poi_apartment">Квартира</string>
 
-	<string name="piste_skitour">Скитур</string>
-	<string name="piste_sleigh"/>
-	<string name="piste_playground">Игровая площадка</string>
+	<string name="poi_piste_skitour">Скитур</string>
+	<string name="poi_piste_sleigh"/>
+	<string name="poi_piste_playground">Игровая площадка</string>
 	<string name="poi_smoking_area">Место для курения</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_water">Вода</string>
 	<string name="poi_wood">Лес</string>
 	<string name="poi_valley">Долина</string>
 	<string name="poi_bench">Скамейка</string>
-	<string name="piste_ice_skate">Ледовый каток</string>
+	<string name="poi_piste_ice_skate">Ледовый каток</string>
 
-	<string name="piste_snow_park">Снежный парк</string>
-	<string name="poi_fuel_diesel_yes">Дизель</string>
-	<string name="poi_fuel_ethanol_yes">Этанол</string>
-	<string name="poi_fuel_methanol_yes">Метанол</string>
+	<string name="poi_piste_snow_park">Снежный парк</string>
+	<string name="poi_fuel:diesel">Дизель</string>
+	<string name="poi_fuel:ethanol">Этанол</string>
+	<string name="poi_fuel:methanol">Метанол</string>
 	</resources>

@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Напоі</string>
 	<string name="poi_butcher">Ятка</string>
 	<string name="poi_deli">Дэлікатэсы</string>
-	<string name="poi_shop_farm">Фермерскія прадукты</string>
+	<string name="poi_farm">Фермерскія прадукты</string>
 	<string name="poi_greengrocer">Гародніна і садавіна</string>
 	<string name="poi_seafood">Морапрадукты</string>
 	<string name="poi_confectionery">Кандытарская</string>
@@ -39,7 +39,7 @@
 	<string name="poi_boutique">Буцік</string>
 	<string name="poi_chemist">Аптэка</string>
 	<string name="poi_clothes">Крама адзеньня</string>
-	<string name="poi_children_clothes">Дзіцячае адзеньне</string>
+	<string name="poi_child_clothes">Дзіцячае адзеньне</string>
 	<string name="poi_shoes">Крама абутку</string>
 	<string name="poi_computer">Кампутары</string>
 	<string name="poi_copyshop">Капіявальныя паслугі</string>
@@ -87,8 +87,8 @@
 	<string name="poi_window_blind">Жалюзі, аканіцы, маркізы</string>
 	<string name="poi_department_store">Універмаг</string>
 	<string name="poi_electronics">Электроніка</string>
-	<string name="poi_car_shop">Аўтасалон</string>
-	<string name="poi_car_parts_shop">Аўтазапчасткі</string>
+	<string name="poi_car">Аўтасалон</string>
+	<string name="poi_car_parts">Аўтазапчасткі</string>
 	<string name="poi_atv">Квадрацыклы</string>
 	<string name="poi_cosmetics">Касметыка, парфумерыя</string>
 	<string name="poi_marketplace">Рынак</string>
@@ -147,7 +147,6 @@
 	<string name="poi_bus_station">Аўтобусная станцыя</string>
 	<string name="poi_railway_station">Чыгуначная станцыя</string>
 	<string name="poi_railway_platform">Чыгуначная плятформа</string>
-	<string name="poi_railway_halt">Чыгуначная плятформа (састар.)</string>
 	<string name="poi_railway_subway_entrance">Уваход у мэтро</string>
 	<string name="poi_subway_station">Станцыя мэтро</string>
 	<string name="poi_taxi">Стаянка таксі</string>
@@ -368,7 +367,7 @@
 	<string name="poi_archaeological_site">Раскопы</string>
 	<string name="poi_battlefield">Поле бітвы</string>
 	<string name="poi_boundary_stone">Межавы камень</string>
-	<string name="poi_cannon">Гістарычныя гарматы</string>
+	<string name="poi_historic_cannon">Гістарычныя гарматы</string>
 	<string name="poi_castle">Замак</string>
 	<string name="poi_city_gate">Гарадзкая брама</string>
 	<string name="poi_fort">Фартыфікацыйныя збудаваньні</string>
@@ -668,10 +667,8 @@
 	<string name="poi_man_made">Антрапагеннае</string>
 	<string name="poi_apartment">Апартамэнты</string>
 
-	<string name="poi_child_clothes">Дзіцячае адзеньне</string>
 	<string name="poi_wine">Вінная крама</string>
 
-	<string name="poi_car_parts">Аўтазапчасткі</string>
 	<string name="poi_public_transport_stop_position">Месца прыпынку грамадзкага транспарту</string>
 	<string name="poi_halt">Чыгуначны прыпынак</string>
 	<string name="poi_internet_access_wlan">Доступ у Інтэрнэт: WLAN</string>
@@ -680,8 +677,6 @@
 	<string name="poi_internet_access_public">Доступ у Інтэрнэт: агульны</string>
 	<string name="poi_internet_access_service">Доступ у Інтэрнэт: паслугі</string>
 	
-	<string name="poi_farm">Фермэрская крама</string>
-	<string name="poi_car">Аўтакрама</string>
 	<string name="poi_lodging">Начлег</string>
 	<string name="poi_railway_buffer_stop">Чыгуначны тупіковы ўпор</string>
 	<string name="poi_club">Клюб</string>
@@ -716,16 +711,16 @@
 	<string name="poi_silo">Сілас</string>
 	<string name="poi_storage_tank">Бак (рэзэрвуар)</string>
 
-	<string name="piste_nordic">Лыжня</string>
-	<string name="piste_snow_park">Сноўпарк</string>
-	<string name="piste_playground">Вучэбны схіл</string>
-	<string name="piste_downhill">Гарналыжная траса</string>
-	<string name="piste_skitour">Скітур</string>
-	<string name="piste_ice_skate">Канькабежная траса</string>
+	<string name="poi_piste_nordic">Лыжня</string>
+	<string name="poi_piste_snow_park">Сноўпарк</string>
+	<string name="poi_piste_playground">Вучэбны схіл</string>
+	<string name="poi_piste_downhill">Гарналыжная траса</string>
+	<string name="poi_piste_skitour">Скітур</string>
+	<string name="poi_piste_ice_skate">Канькабежная траса</string>
 
-	<string name="piste_sled">Санкавы схіл</string>
-	<string name="piste_sleigh">Нартавая дарога</string>
-	<string name="piste_hike">Сьцежка</string>
+	<string name="poi_piste_sled">Санкавы схіл</string>
+	<string name="poi_piste_sleigh">Нартавая дарога</string>
+	<string name="poi_piste_hike">Сьцежка</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_bench">Лаўка</string>
 	<string name="poi_water">Вада</string>
@@ -735,29 +730,29 @@
 	<string name="poi_valley">Даліна</string>
 	<string name="poi_wood">Лес</string>
 	<string name="poi_landuse">Землекарыстаньне</string>
-	<string name="poi_fuel_diesel_yes">Дызэль</string>
-	<string name="poi_fuel_gtl_diesel_yes">GTL-дызэль</string>
-	<string name="poi_fuel_hgv_diesel_yes">HGV-дызэль</string>
-	<string name="poi_fuel_biodiesel_yes">Біядызэль</string>
-	<string name="poi_fuel_lpg_yes">Звадкаваны газ</string>
-	<string name="poi_fuel_octane_80_yes">Актан 80</string>
-	<string name="poi_fuel_octane_91_yes">Актан 91</string>
-	<string name="poi_fuel_octane_92_yes">Актан 92</string>
-	<string name="poi_fuel_octane_95_yes">Актан 95</string>
-	<string name="poi_fuel_octane_98_yes">Актан 98</string>
-	<string name="poi_fuel_octane_100_yes">Актан 100</string>
-	<string name="poi_fuel_cng_yes">Сьціснуты прыродны газ</string>
-	<string name="poi_fuel_1_25_yes">Паліва 1:25</string>
-	<string name="poi_fuel_1_50_yes">Паліва 1:50</string>
-	<string name="poi_fuel_ethanol_yes">Этаноль</string>
-	<string name="poi_fuel_methanol_yes">Мэтаноль</string>
-	<string name="poi_fuel_svo_yes">Алейнае паліва</string>
-	<string name="poi_fuel_e10_yes">E10</string>
-	<string name="poi_fuel_e20_yes">E20</string>
-	<string name="poi_fuel_e85_yes">E85</string>
-	<string name="poi_fuel_biogas_yes">E85</string>
-	<string name="poi_fuel_LH2_yes">Вадкі вадарод</string>
-	<string name="poi_fuel_electricity_yes">Электрычнасьць</string>
+	<string name="poi_fuel:diesel">Дызэль</string>
+	<string name="poi_fuel:gtl_diesel">GTL-дызэль</string>
+	<string name="poi_fuel:hgv_diesel">HGV-дызэль</string>
+	<string name="poi_fuel:biodiesel">Біядызэль</string>
+	<string name="poi_fuel:lpg">Звадкаваны газ</string>
+	<string name="poi_fuel:octane_80">Актан 80</string>
+	<string name="poi_fuel:octane_91">Актан 91</string>
+	<string name="poi_fuel:octane_92">Актан 92</string>
+	<string name="poi_fuel:octane_95">Актан 95</string>
+	<string name="poi_fuel:octane_98">Актан 98</string>
+	<string name="poi_fuel:octane_100">Актан 100</string>
+	<string name="poi_fuel:cng">Сьціснуты прыродны газ</string>
+	<string name="poi_fuel:1_25">Паліва 1:25</string>
+	<string name="poi_fuel:1_50">Паліва 1:50</string>
+	<string name="poi_fuel:ethanol">Этаноль</string>
+	<string name="poi_fuel:methanol">Мэтаноль</string>
+	<string name="poi_fuel:svo">Алейнае паліва</string>
+	<string name="poi_fuel:e10">E10</string>
+	<string name="poi_fuel:e20">E20</string>
+	<string name="poi_fuel:e85">E85</string>
+	<string name="poi_fuel:biogas">E85</string>
+	<string name="poi_fuel:lh2">Вадкі вадарод</string>
+	<string name="poi_fuel:electricity">Электрычнасьць</string>
 	<string name="poi_farmyard">Падворак</string>
 	<string name="poi_meadow">Луг</string>
 
@@ -770,4 +765,8 @@
 	<string name="poi_landuse_railway">Чыгуначная паласа</string>
 
 	<string name="poi_junction">Перакрыжаваньне</string>
+	<string name="poi_sailing">Парусны спорт</string>
+	<string name="poi_charity">Дабрачынная крама</string>
+	<string name="poi_photo">Фота</string>
+	<string name="poi_tomb">Магіла</string>
 	</resources>

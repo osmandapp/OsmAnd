@@ -6,7 +6,7 @@
 	<string name="poi_beverages">Obchod s nápoji</string>
 	<string name="poi_butcher">Masna</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_shop_farm">Farmářský obchod</string>
+	<string name="poi_farm">Farmářský obchod</string>
 	<string name="poi_greengrocer">Zelinářství</string>
 	<string name="poi_seafood">Obchod mořskými plody</string>
 	<string name="poi_supermarket">Supermarket</string>
@@ -18,7 +18,7 @@
 	<string name="poi_bed">Vybavení ložnic</string>
 	<string name="poi_boutique">Módní butik</string>
 	<string name="poi_chemist">Drogerie</string>
-	<string name="poi_children_clothes">Dětské oblečení</string>
+	<string name="poi_child_clothes">Dětské oblečení</string>
 	<string name="poi_shoes">Obuv</string>
 	<string name="poi_hardware">Železářství</string>
 	<string name="poi_tobacco">Tabák</string>
@@ -86,10 +86,10 @@
 	<string name="poi_first_aid">První pomoc</string>
 	<string name="poi_dentist">Zubař</string>
 	<string name="poi_veterinary">Veterinář</string>
-	<string name="blood_bank">Krevní banka</string>
-	<string name="optometrist">Optik</string>
-	<string name="physiotherapist">Fyzioterapeut</string>
-	<string name="psychotherapist">Psychoterapeut</string>
+	<string name="poi_blood_bank">Krevní banka</string>
+	<string name="poi_optometrist">Optik</string>
+	<string name="poi_physiotherapist">Fyzioterapeut</string>
+	<string name="poi_psychotherapist">Psychoterapeut</string>
 
 	<string name="poi_company">Společnost</string>
 	<string name="poi_insurance">Pojištění</string>
@@ -230,7 +230,6 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">Uživatelsky definovaný</string>
 	
-	<string name="poi_farm">Farmářský obchod</string>
 	<string name="poi_wine">Vinotéka</string>
 
 	<string name="poi_shop">Obchod</string>

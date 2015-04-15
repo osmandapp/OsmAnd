@@ -7,7 +7,7 @@
         <string name="poi_beverages">Drikkevarebutik</string>
         <string name="poi_butcher">Kødmarked</string>
         <string name="poi_deli">Delikatesse</string>
-        <string name="poi_shop_farm">Gårdbutik</string>
+        <string name="poi_farm">Gårdbutik</string>
         <string name="poi_greengrocer">Grønthandler</string>
         <string name="poi_seafood">Fiskehandler</string>
         <string name="poi_confectionery">Konfektureforretning</string>
@@ -30,7 +30,6 @@
         <string name="poi_carpet">Tæppeforretning</string>
         <string name="poi_chemist">Materialist</string>
         <string name="poi_clothes">Tøjbutik</string>
-        <string name="poi_children_clothes">Børnetøj</string>
         <string name="poi_shoes">Skobutik</string>
         <string name="poi_computer">Computerbutik</string>
         <string name="poi_copyshop">Kopicenter</string>
@@ -84,8 +83,8 @@
         <string name="poi_window_blind">Persienner</string>
         <string name="poi_department_store">Stormagasin</string>
         <string name="poi_electronics">Elektronik</string>
-        <string name="poi_car_shop">Autohandel</string>
-        <string name="poi_car_parts_shop">Biltilbehør</string>
+        <string name="poi_car">Autohandel</string>
+        <string name="poi_car_parts">Biltilbehør</string>
         <string name="poi_atv">ATV</string>
         <string name="poi_cosmetics">Kosmetik</string>
         <string name="poi_marketplace">Markedsplads</string>
@@ -143,7 +142,6 @@
         <string name="poi_bus_station">Busstation</string>
         <string name="poi_railway_station">Banegård</string>
         <string name="poi_railway_platform">Perron</string>
-        <string name="poi_railway_halt">Trinbrædt (forældet)</string>
         <string name="poi_railway_subway_entrance">Metroindgang</string>
         <string name="poi_subway_station">Metrostation</string>
         <string name="poi_taxi">Taxaholdeplads</string>
@@ -252,19 +250,6 @@
         <string name="poi_baby_hatch">Babyluge</string>
         <string name="poi_veterinary">Dyrlæge</string>
         <string name="poi_sanatorium">Sanatorium</string>
-        <string name="healthcare_alternative">Sundhedspleje alternativ</string>
-        <string name="audiologist">Audiolog</string>
-        <string name="blood_bank">Blodbank</string>
-        <string name="healthcare_centre">Sundhedspleje alternativ</string>
-        <string name="midwife">Jordemoder</string>
-        <string name="occupational_therapist">Ergoterapeut</string>
-        <string name="optometrist">Optometrist</string>
-        <string name="physiotherapist">Fysioterapeut</string>
-        <string name="podiatrist">Ortopæd</string>
-        <string name="psychotherapist">Psykoterapeut</string>
-        <string name="healthcare_rehabilitation">Rehabilitering</string>
-        <string name="speech_therapist">Talepædagog</string>
-        <string name="healthcare_yes">Sundhedspleje</string>
 
         <string name="poi_company">Firma</string>
         <string name="poi_insurance">Forsikring</string>
@@ -644,7 +629,7 @@
 	<string name="poi_canadian_football">Canadisk fodbold</string>
 	<string name="poi_surfing">Surfing</string>
 	<string name="poi_base">Base jumping</string>
-	<string name="poi_cannon">Historisk kanon</string>
+	<string name="poi_historic_cannon">Historisk kanon</string>
 	<string name="poi_harbour">Havn</string>
 	<string name="poi_dock">Dok</string>
 	<string name="poi_attraction_amusement_ride">Forlystelse</string>
@@ -687,8 +672,6 @@
 	<string name="poi_child_clothes">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
-	<string name="poi_farm">Gårdbutik</string>
-	<string name="poi_car_parts">Bilreservedele</string>
 	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
 	<string name="poi_halt">Jernbane stop</string>
 	<string name="poi_lodging">Logi</string>
@@ -699,7 +682,6 @@
 	<string name="poi_internet_access_service">Internetadgang: service</string>
 	
 	
-	<string name="poi_car">Bilforhandler</string>
 	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 
@@ -734,15 +716,15 @@
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Lagertank</string>
 
-	<string name="piste_downhill">Styrtløb</string>
-	<string name="piste_nordic">Langrend</string>
-	<string name="piste_skitour">Skitouring</string>
-	<string name="piste_hike">Vandring</string>
-	<string name="piste_sleigh">Kane</string>
-	<string name="piste_sled">Slæde</string>
-	<string name="piste_snow_park">Snepark</string>
-	<string name="piste_playground">Snelegeplads</string>
-	<string name="piste_ice_skate">Isskøjte</string>
+	<string name="poi_piste_downhill">Styrtløb</string>
+	<string name="poi_piste_nordic">Langrend</string>
+	<string name="poi_piste_skitour">Skitouring</string>
+	<string name="poi_piste_hike">Vandring</string>
+	<string name="poi_piste_sleigh">Kane</string>
+	<string name="poi_piste_sled">Slæde</string>
+	<string name="poi_piste_snow_park">Snepark</string>
+	<string name="poi_piste_playground">Snelegeplads</string>
+	<string name="poi_piste_ice_skate">Isskøjte</string>
 
 	<string name="poi_gasometer">Gasbeholder</string>
 	<string name="poi_allotments">Kolonihaver</string>
@@ -754,29 +736,29 @@
 	<string name="poi_water">Vand</string>
 	<string name="poi_wood">Træ</string>
 	<string name="poi_landuse">Arealanvendelse</string>
-	<string name="poi_fuel_diesel_yes">Diesel</string>
-	<string name="poi_fuel_gtl_diesel_yes">GTL diesel</string>
-	<string name="poi_fuel_hgv_diesel_yes">HGV diesel</string>
-	<string name="poi_fuel_biodiesel_yes">Bio-diesel</string>
-	<string name="poi_fuel_lpg_yes">LPG</string>
-	<string name="poi_fuel_octane_80_yes">Oktan 80</string>
-	<string name="poi_fuel_octane_91_yes">Oktan 91</string>
-	<string name="poi_fuel_octane_92_yes">Oktan 92</string>
-	<string name="poi_fuel_octane_95_yes">Oktan 95</string>
-	<string name="poi_fuel_octane_98_yes">Oktan 98</string>
-	<string name="poi_fuel_octane_100_yes">Oktan 100</string>
-	<string name="poi_fuel_cng_yes">CNG</string>
-	<string name="poi_fuel_1_25_yes">1:25 benzin</string>
-	<string name="poi_fuel_1_50_yes">1:50 benzin</string>
-	<string name="poi_fuel_ethanol_yes">Ethanol</string>
-	<string name="poi_fuel_methanol_yes">Methanol</string>
-	<string name="poi_fuel_svo_yes">SVO</string>
-	<string name="poi_fuel_e10_yes">E10</string>
-	<string name="poi_fuel_e20_yes">E20</string>
-	<string name="poi_fuel_e85_yes">E85</string>
-	<string name="poi_fuel_biogas_yes">E85</string>
-	<string name="poi_fuel_LH2_yes">Flydende brint</string>
-	<string name="poi_fuel_electricity_yes">Elektricitet</string>
+	<string name="poi_fuel:diesel">Diesel</string>
+	<string name="poi_fuel:gtl_diesel">GTL diesel</string>
+	<string name="poi_fuel:hgv_diesel">HGV diesel</string>
+	<string name="poi_fuel:biodiesel">Bio-diesel</string>
+	<string name="poi_fuel:lpg">LPG</string>
+	<string name="poi_fuel:octane_80">Oktan 80</string>
+	<string name="poi_fuel:octane_91">Oktan 91</string>
+	<string name="poi_fuel:octane_92">Oktan 92</string>
+	<string name="poi_fuel:octane_95">Oktan 95</string>
+	<string name="poi_fuel:octane_98">Oktan 98</string>
+	<string name="poi_fuel:octane_100">Oktan 100</string>
+	<string name="poi_fuel:cng">CNG</string>
+	<string name="poi_fuel:1_25">1:25 benzin</string>
+	<string name="poi_fuel:1_50">1:50 benzin</string>
+	<string name="poi_fuel:ethanol">Ethanol</string>
+	<string name="poi_fuel:methanol">Methanol</string>
+	<string name="poi_fuel:svo">SVO</string>
+	<string name="poi_fuel:e10">E10</string>
+	<string name="poi_fuel:e20">E20</string>
+	<string name="poi_fuel:e85">E85</string>
+	<string name="poi_fuel:biogas">E85</string>
+	<string name="poi_fuel:lh2">Flydende brint</string>
+	<string name="poi_fuel:electricity">Elektricitet</string>
 	<string name="poi_industrial">Industriområde</string>
 	<string name="poi_farmyard">Gårdsplads</string>
 	<string name="poi_meadow">Eng</string>
@@ -785,7 +767,11 @@
 	<string name="poi_residential">Boligområde</string>
 
 	<string name="poi_recreation_ground">Rekreativtområde</string>
-	<string name="poi_village_green">Grønning</string>
+	<string name="poi_village_green">Forte</string>
 
 	<string name="poi_junction">Vejkryds</string>
+	<string name="poi_sailing">Sejlads</string>
+	<string name="poi_charity">Genbrugsbutik</string>
+	<string name="poi_photo">Fotoforretning</string>
+	<string name="poi_tomb">Grav</string>
 	</resources>

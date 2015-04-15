@@ -65,7 +65,7 @@
 	<string name="poi_buoy_isolated_danger">Bouée de danger isolé (balise flottante)</string>
 	<string name="poi_buoy_lateral">Bouée latérale (balise flottante)</string>
 	<string name="poi_buoy_safe_water">Bouée d\'eaux saines (balise flottante)</string>
-	<string name="poi_seamark_uoy_special_purpose">Marque spéciale (balise flottante)</string>
+	<string name="poi_buoy_special_purpose">Marque spéciale (balise flottante)</string>
 	<string name="poi_bus_station">Gare routière</string>
 	<string name="poi_bus_stop">Arrêt de bus</string>
 	<string name="poi_butcher">Boucherie - Charcuterie</string>
@@ -73,8 +73,8 @@
 	<string name="poi_camp_site">Camping</string>
 	<string name="poi_canoe">Canoë-kayak</string>
 	<string name="poi_cape">Cap</string>
-	<string name="poi_car_shop">Magasin de voitures</string>
-	<string name="poi_car_parts_shop">Pièces d\'automobile</string>
+	<string name="poi_car">Magasin de voitures</string>
+	<string name="poi_car_parts">Pièces d\'automobile</string>
 	<string name="poi_car_rental">Location de voitures</string>
 	<string name="poi_car_repair">Atelier de réparation automobile</string>
 	<string name="poi_car_sharing">Autopartage</string>
@@ -275,7 +275,6 @@
 	<string name="poi_raceway">Circuit</string>
 	<string name="poi_racquet">Sport de raquette</string>
 	<string name="poi_radar_transponder">Transpondeur radar (amer)</string>
-	<string name="poi_railway_halt">Gare ferroviaire (halte)</string>
 	<string name="poi_railway_platform">Quai de gare</string>
 	<string name="poi_railway_station">Gare ferroviaire</string>
 	<string name="poi_rapids">Rapides</string>
@@ -286,7 +285,6 @@
 	<string name="poi_restaurant">Restaurant</string>
 	<string name="poi_ridge">Crête</string>
 	<string name="poi_river">Rivière</string>
-	<string name="poi_rugby">Rugby</string>
 	<string name="poi_historic_ruins">Ruines historiques</string>
 	<string name="poi_salt_pond">Marais salants</string>
 	<string name="poi_sanatorium">Sanatorium</string>
@@ -403,7 +401,7 @@
 	<string name="poi_chess">Échecs</string>
 	<string name="poi_palaeontological_site">Site paléontologique</string>
 
-	<string name="poi_shop_farm">Vente à la ferme</string>
+	<string name="poi_farm">Vente à la ferme</string>
 	<string name="poi_anime">Librairie spécialisée en bandes dessinées</string>
 	<string name="poi_antiques">Antiquaire</string>
 	<string name="poi_hunting">Equipement de chasse</string>
@@ -462,7 +460,6 @@
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_anchorage">Mouillage</string>
 	<string name="poi_seamark_building">Bâtiment remarquable (amer)</string>
-	<string name="poi_buoy_special_purpose">Marque spéciale (balise flottante)</string>
 	<string name="poi_dry_dock">Cale sèche</string>
 	<string name="poi_mooring">Mouillage</string>
 	<string name="poi_seamark_wreck">Épave</string>
@@ -536,7 +533,7 @@
 	<string name="poi_frame">Magasin d\'encadrement</string>
 	<string name="poi_bathroom_furnishing">Magasin d\'équipement pour la salle de bain</string>
 	<string name="poi_bed">Magasin d\'équipement pour la chambre</string>
-	<string name="poi_children_clothes">Vêtements pour enfants</string>
+	<string name="poi_child_clothes">Vêtements pour enfants</string>
 	<string name="poi_curtain">Boutique de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
 	<string name="poi_baby_goods">Articles pour bébé</string>
@@ -570,7 +567,7 @@
 	<string name="poi_running_track">Piste de course</string>
 	<string name="poi_base">Saut B.A.S.E.</string>
 	<string name="poi_roller_skating">Roller skating</string>
-	<string name="poi_cannon">Canon historique</string>
+	<string name="poi_historic_cannon">Canon historique</string>
 	<string name="poi_club_automobile">Club automobile</string>
 	<string name="poi_club_history">Association du patrimoine</string>
 	<string name="poi_harbour">Port</string>
@@ -651,12 +648,8 @@
 	<string name="poi_user_defined_other">Défini par l\'utilisateur</string>
 	
 	<string name="poi_military_landuse">Zone militaire</string>
-	<string name="poi_farm">Vente à la ferme</string>
 	<string name="poi_wine">Caviste</string>
 
-	<string name="poi_child_clothes">Vêtements pour enfants</string>
-	<string name="poi_car">Concessionnaire automobile</string>
-	<string name="poi_car_parts">Pièces automobiles</string>
 	<string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
 	<string name="poi_halt">Arrêt ferroviaire</string>
 	<string name="poi_lodging">Hébergement</string>
@@ -697,40 +690,40 @@
 	<string name="poi_rest_area">Aire de repos</string>
 
 	<string name="poi_reservoir">Réservoir</string>
-	<string name="piste_ice_skate">Patinoire</string>
+	<string name="poi_piste_ice_skate">Patinoire</string>
 
 	<string name="poi_gasometer">Réservoir de gaz</string>
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Réservoir de stockage</string>
 
-	<string name="piste_downhill">Ski alpin</string>
-	<string name="piste_nordic">Ski nordique</string>
-	<string name="piste_skitour">Ski de randonnée</string>
-	<string name="piste_hike">Randonnée</string>
-	<string name="piste_sleigh">Traîneau</string>
-	<string name="piste_sled">Luge</string>
-	<string name="piste_snow_park">Snow park</string>
-	<string name="piste_playground">Jardin de neige</string>
+	<string name="poi_piste_downhill">Ski alpin</string>
+	<string name="poi_piste_nordic">Ski nordique</string>
+	<string name="poi_piste_skitour">Ski de randonnée</string>
+	<string name="poi_piste_hike">Randonnée</string>
+	<string name="poi_piste_sleigh">Traîneau</string>
+	<string name="poi_piste_sled">Luge</string>
+	<string name="poi_piste_snow_park">Snow park</string>
+	<string name="poi_piste_playground">Jardin de neige</string>
 	<string name="poi_canal">Canal</string>
 	<string name="poi_bench">Banc</string>
 	<string name="poi_valley">Vallée</string>
 	<string name="poi_water">Eau</string>
 	<string name="poi_wood">Bois</string>
 	<string name="poi_allotments">Lotissement</string>
-	<string name="poi_fuel_octane_80_yes">Octane 80</string>
-	<string name="poi_fuel_octane_91_yes">Octane 91</string>
-	<string name="poi_fuel_octane_92_yes">Octane 92</string>
-	<string name="poi_fuel_octane_95_yes">Octane 95</string>
-	<string name="poi_fuel_octane_98_yes">Octane 98</string>
-	<string name="poi_fuel_octane_100_yes">Octane 100</string>
-	<string name="poi_fuel_ethanol_yes">Éthanol</string>
-	<string name="poi_fuel_methanol_yes">Méthanol</string>
-	<string name="poi_fuel_e85_yes">E85</string>
-	<string name="poi_fuel_biogas_yes">E85</string>
-	<string name="poi_fuel_e20_yes">E20</string>
-	<string name="poi_fuel_LH2_yes">Hydrogène liquide</string>
-	<string name="poi_fuel_electricity_yes">Électricité</string>
-	<string name="poi_fuel_e10_yes">E10</string>
+	<string name="poi_fuel:octane_80">Octane 80</string>
+	<string name="poi_fuel:octane_91">Octane 91</string>
+	<string name="poi_fuel:octane_92">Octane 92</string>
+	<string name="poi_fuel:octane_95">Octane 95</string>
+	<string name="poi_fuel:octane_98">Octane 98</string>
+	<string name="poi_fuel:octane_100">Octane 100</string>
+	<string name="poi_fuel:ethanol">Éthanol</string>
+	<string name="poi_fuel:methanol">Méthanol</string>
+	<string name="poi_fuel:e85">E85</string>
+	<string name="poi_fuel:biogas">E85</string>
+	<string name="poi_fuel:e20">E20</string>
+	<string name="poi_fuel:lh2">Hydrogène liquide</string>
+	<string name="poi_fuel:electricity">Électricité</string>
+	<string name="poi_fuel:e10">E10</string>
 	<string name="poi_farmyard">Cour de ferme</string>
 	<string name="poi_meadow">Prairie</string>
 	<string name="poi_recreation_ground">Terrain de jeu</string>
@@ -738,19 +731,22 @@
 	<string name="poi_residential">Zone résidentielle</string>
 
 	<string name="poi_landuse">Occupation du sol</string>
-	<string name="poi_fuel_diesel_yes">Gazole</string>
-	<string name="poi_fuel_gtl_diesel_yes">Gazole liquéfié</string>
-	<string name="poi_fuel_hgv_diesel_yes">Gazole poids lourds</string>
-	<string name="poi_fuel_biodiesel_yes">Bio-gazole</string>
-	<string name="poi_fuel_lpg_yes">GPL</string>
-	<string name="poi_fuel_cng_yes">Gaz naturel compressé</string>
-	<string name="poi_fuel_1_25_yes">Carburant 1:25</string>
-	<string name="poi_fuel_1_50_yes">Carburant 1:50</string>
-	<string name="poi_fuel_svo_yes">Huile Végétale Brute (HVB)</string>
+	<string name="poi_fuel:diesel">Gazole</string>
+	<string name="poi_fuel:gtl_diesel">Gazole liquéfié</string>
+	<string name="poi_fuel:hgv_diesel">Gazole poids lourds</string>
+	<string name="poi_fuel:biodiesel">Bio-gazole</string>
+	<string name="poi_fuel:lpg">GPL</string>
+	<string name="poi_fuel:cng">Gaz naturel compressé</string>
+	<string name="poi_fuel:1_25">Carburant 1:25</string>
+	<string name="poi_fuel:1_50">Carburant 1:50</string>
+	<string name="poi_fuel:svo">Huile Végétale Brute (HVB)</string>
 	<string name="poi_junction">Carrefour</string>
 	<string name="poi_forest">Sylviculture</string>
 	<string name="poi_landuse_railway">Zone de chemins de fer</string>
 
 	<string name="poi_village_green">Village vert</string>
 
+	<string name="poi_sailing">Navigation à voile</string>
+	<string name="poi_charity">Boutique de charité</string>
+	<string name="poi_tomb">Sépulture</string>
 	</resources>

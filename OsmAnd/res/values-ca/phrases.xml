@@ -25,7 +25,7 @@
 	<string name="poi_optician">Optometria</string>
 	<string name="poi_convenience">Botiga de queviures</string>
 	<string name="poi_deli">Delicadeses</string>
-	<string name="poi_shop_farm">Productes de granja</string>
+	<string name="poi_farm">Productes de granja</string>
 	<string name="poi_greengrocer">Verdureria</string>
 	<string name="poi_confectionery">Confiteria</string>
 	<string name="poi_ice_cream">Gelateria</string>
@@ -115,14 +115,14 @@
 	<string name="poi_tobacco">Venda de tabac</string>
 	<string name="poi_carpet">Botiga de catifes</string>
 	<string name="poi_clothes">Magatzem de roba</string>
-	<string name="poi_children_clothes">Roba infantil</string>
+	<string name="poi_child_clothes">Roba infantil</string>
 	<string name="poi_curtain">Pelleteria</string>
 	<string name="poi_fabric">Botiga de teixits</string>
 	<string name="poi_public_transport_platform">Parada de transport públic</string>
 	<string name="poi_bus_station">Estació d\'autobusos</string>
 	<string name="poi_railway_station">Estació de tren</string>
 	<string name="poi_railway_platform">Andana</string>
-	<string name="poi_railway_halt">Parada de tren (obsolet)</string>
+	<string name="poi_halt">Parada de tren (obsolet)</string>
 	<string name="poi_railway_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
@@ -305,7 +305,7 @@
 	<string name="poi_bedding">Matalasseria</string>
 	<string name="poi_gas">Gas liquat</string>
 	<string name="poi_department_store">Gran magatzem</string>
-	<string name="poi_car_parts_shop">Recanvis d\'automòbil</string>
+	<string name="poi_car_parts">Recanvis d\'automòbil</string>
 	<string name="poi_fire_water_pond">Punt d\'aigua per incendis</string>
 	<string name="poi_grit_bin">Reserva de sal</string>
 	<string name="poi_emergency_access_point">Punt d\'accés d\'emergència</string>
@@ -340,7 +340,7 @@
 	<string name="poi_museum">Museu</string>
 	<string name="poi_archaeological_site">Restes arqueològiques</string>
 	<string name="poi_boundary_stone">Fita de terme</string>
-	<string name="poi_cannon">Canó històric</string>
+	<string name="poi_historic_cannon">Canó històric</string>
 	<string name="poi_castle">Castell</string>
 	<string name="poi_fort">Fortalesa</string>
 	<string name="poi_rune_stone">Pedra rúnica</string>

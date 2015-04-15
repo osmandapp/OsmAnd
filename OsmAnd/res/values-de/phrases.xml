@@ -92,11 +92,11 @@
 	<string name="poi_camp_site">Campingplatz</string>
 	<string name="poi_canoe">Kanu</string>
 	<string name="poi_cape">Kap</string>
-	<string name="poi_car_parts_shop">Autoteilehändler</string>
+	<string name="poi_car_parts">Autoteilehändler</string>
 	<string name="poi_car_rental">Autovermietung</string>
 	<string name="poi_car_repair">Kfz-Werkstatt</string>
 	<string name="poi_car_sharing">Fahrgemeinschaft</string>
-	<string name="poi_car_shop">Autohändler</string>
+	<string name="poi_car">Autohändler</string>
 	<string name="poi_car_wash">Autowaschanlage</string>
 	<string name="poi_caravan_site">Campingplatz</string>
 	<string name="poi_craft_carpenter">Tischler</string>
@@ -111,7 +111,7 @@
 	<string name="poi_charging_station">Ladestation</string>
 	<string name="poi_chemist">Drogerie</string>
 	<string name="poi_chess">Schach</string>
-	<string name="poi_children_clothes">Kinderbekleidungsgeschäft</string>
+	<string name="poi_child_clothes">Kinderbekleidungsgeschäft</string>
 	<string name="poi_cinema">Kino</string>
 	<string name="poi_circus">Zirkus</string>
 	<string name="poi_city">Stadt</string>
@@ -397,7 +397,7 @@
 	<string name="poi_raceway">Gerinne</string>
 	<string name="poi_racquet">Schläger</string>
 	<string name="poi_radiotechnics">Radiotechniker</string>
-	<string name="poi_railway_halt">Eisenbahnhaltestelle (obsolet)</string>
+	<string name="poi_halt">Eisenbahnhaltestelle (obsolet)</string>
 	<string name="poi_railway_platform">Bahnsteig (obsolet)</string>
 	<string name="poi_railway_station">Bahnhof (obsolet)</string>
 	<string name="poi_rapids">Stromschnelle</string>
@@ -482,7 +482,7 @@
 	<string name="poi_craft_shoemaker">Schuster</string>
 	<string name="poi_shoes">Schuhgeschäft</string>
 	<string name="poi_shooting">Schießbude</string>
-	<string name="poi_shop_farm">Landwirtschaft</string>
+	<string name="poi_farm">Landwirtschaft</string>
 	<string name="poi_shop_tea">Tee-Haus</string>
 	<string name="poi_sinkhole">Senkgrube</string>
 	<string name="poi_skateboard">Skateboard</string>
@@ -593,7 +593,7 @@
 	<string name="poi_bmx">BMX</string>
 	<string name="poi_canadian_football">Kanad. Football</string>
 	<string name="poi_surfing">Surfen</string>
-	<string name="poi_cannon">Historische Kanone</string>
+	<string name="poi_historic_cannon">Historische Kanone</string>
 	<string name="poi_harbour">Hafen</string>
 	<string name="poi_dock">Dock</string>
 	<string name="poi_attraction_amusement_ride">Vergnügungsfahrt</string>

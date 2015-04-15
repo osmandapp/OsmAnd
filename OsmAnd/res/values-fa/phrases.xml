@@ -10,7 +10,7 @@
 <string name="poi_beverages">فروشگاه محصولات غذایی</string>
 <string name="poi_butcher">قصابی</string>
 <string name="poi_deli">بقالی</string>
-<string name="poi_shop_farm">فروشگاه محصولات دامی</string>
+<string name="poi_farm">فروشگاه محصولات دامی</string>
 <string name="poi_greengrocer">سبزی فروشی</string>
 <string name="poi_seafood">فروشگاه غذاهای دریایی</string>
 <string name="poi_confectionery">شیرینی فروشی</string>
@@ -33,7 +33,7 @@
 <string name="poi_carpet">فروشگاه فرش</string>
 <string name="poi_chemist">فروشگاه مواد مخدر</string>
 <string name="poi_clothes">فروشگاه پوشاک</string>
-<string name="poi_children_clothes">\فروشگاه پوشاک کودکان</string>
+<string name="poi_child_clothes">\فروشگاه پوشاک کودکان</string>
 <string name="poi_shoes">کفش فروشی</string>
 <string name="poi_computer">فروشگاه کامپیوتر</string>
 <string name="poi_copyshop">فروشگاه چاپ و تکثیر</string>
@@ -87,8 +87,8 @@
 <string name="poi_window_blind">در و پنجره سازی</string>
 <string name="poi_department_store">بخش فروش</string>
 <string name="poi_electronics">فروشگاه های لوازم الکترونیکی</string>
-<string name="poi_car_shop">فروشگاه ماشین</string>
-<string name="poi_car_parts_shop">فروشگاه قطعات خودرو</string>
+<string name="poi_car">فروشگاه ماشین</string>
+<string name="poi_car_parts">فروشگاه قطعات خودرو</string>
 <string name="poi_atv">Quad store</string>
 <string name="poi_cosmetics">آرایشی و بهداشتی</string>
 <string name="poi_marketplace">بازار</string>
@@ -146,7 +146,7 @@
 <string name="poi_bus_station">ایستگاه اتوبوس (منسوخ)</string>
 <string name="poi_railway_station">ایستگاه راه آهن (منسوخ)</string>
 <string name="poi_railway_platform">پلت فرم راه آهن (منسوخ)</string>
-<string name="poi_railway_halt">ایستگاه راه آهن (منسوخ)</string>
+<string name="poi_halt">ایستگاه راه آهن (منسوخ)</string>
 <string name="poi_railway_subway_entrance">ورودی مترو</string>
 <string name="poi_subway_station">ایستگاه مترو</string>
 <string name="poi_taxi">ایستگاه تاکسی</string>
@@ -371,7 +371,7 @@
 <string name="poi_archaeological_site">مرکز باستان شناسی</string>
 <string name="poi_battlefield">میدان جنگ</string>
 <string name="poi_boundary_stone">سنگ یادبود</string>
-<string name="poi_cannon">توپ تاریخی</string>
+<string name="poi_historic_cannon">توپ تاریخی</string>
 <string name="poi_castle">قلعه</string>
 <string name="poi_city_gate">دروازه شهرستان</string>
 <string name="poi_fort">برج و بارو</string>

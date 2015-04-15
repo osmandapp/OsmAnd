@@ -17,7 +17,7 @@
 	<string name="poi_art">Tenda de arte</string>
 	<string name="poi_boutique">Tenda de moda</string>
 	<string name="poi_carpet">Tenda de alfombras</string>
-	<string name="poi_children_clothes">Roupa infantil</string>
+	<string name="poi_child_clothes">Roupa infantil</string>
 	<string name="poi_shoes">Zapataría</string>
 	<string name="poi_computer">Tenda de informática</string>
 	<string name="poi_copyshop">Copistaría</string>
@@ -48,7 +48,7 @@
 	<string name="poi_vacuum_cleaner">Tenda de aspiradoras</string>
 	<string name="poi_department_store">Grandes almacéns</string>
 	<string name="poi_electronics">Tenda de electrónica</string>
-	<string name="poi_car_parts_shop">Recambios de automóbil</string>
+	<string name="poi_car_parts">Recambios de automóbil</string>
 	<string name="poi_atv">Tenda de quads</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>

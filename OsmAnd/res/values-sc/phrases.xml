@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Butega de bèvidas</string>
 	<string name="poi_butcher">Bancu</string>
 	<string name="poi_deli">Gastronomia</string>
-	<string name="poi_shop_farm">Butega prodotos de fatoria</string>
+	<string name="poi_farm">Butega prodotos de fatoria</string>
 	<string name="poi_greengrocer">Bendidore de frùtora</string>
 	<string name="poi_seafood">Pischeria</string>
 	<string name="poi_confectionery">Butega de durches</string>
@@ -31,7 +31,7 @@
 	<string name="poi_carpet">Butega de tapetes</string>
 	<string name="poi_chemist">Potecaria</string>
 	<string name="poi_clothes">Bestimenta</string>
-	<string name="poi_children_clothes">Bestimenta pro pitzinnos</string>
+	<string name="poi_child_clothes">Bestimenta pro pitzinnos</string>
 	<string name="poi_shoes">Butega de iscarpas</string>
 	<string name="poi_computer">Butega de informàtica</string>
 	<string name="poi_copyshop">Copisteria</string>
@@ -78,8 +78,8 @@
 	<string name="poi_vacuum_cleaner">Butega de suspidoras</string>
 	<string name="poi_video">Videonolègiu</string>
 	<string name="poi_electronics">Butega de eletrònica</string>
-	<string name="poi_car_shop">Butega de automòbiles</string>
-	<string name="poi_car_parts_shop">Autoricàmbios</string>
+	<string name="poi_car">Butega de automòbiles</string>
+	<string name="poi_car_parts">Autoricàmbios</string>
 	<string name="poi_atv">Butega de quad</string>
 	<string name="poi_cosmetics">Butega de bellettos</string>
 	<string name="poi_marketplace">Mercadu</string>
@@ -120,7 +120,6 @@
 	<string name="poi_bus_station">Istatzione bus</string>
 	<string name="poi_railway_station">Istatzione de sos trenos</string>
 	<string name="poi_railway_platform">Piattaredda ferroviària</string>
-	<string name="poi_railway_halt">Firmada de sos trenos (disusada)</string>
 	<string name="poi_railway_subway_entrance">Intrada de sa metropolitana</string>
 	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
 	<string name="poi_taxi">Postèggiu de sos taxi</string>
@@ -574,7 +573,7 @@
 
 	<string name="poi_waterway_turning_point">Furriada de martza pro naviles</string>
 	<string name="poi_customs">Dogana</string>
-	<string name="poi_cannon">Cannone istòricu</string>
+	<string name="poi_historic_cannon">Cannone istòricu</string>
 	<string name="poi_attraction_big_wheel">Roda panoràmica</string>
 	<string name="poi_attraction_carousel">Giostra</string>
 	<string name="poi_attraction_maze">Labirintu</string>
@@ -617,12 +616,8 @@
 	<string name="poi_internet_access_public">Atzessu ìnternet: pùblicu</string>
 	<string name="poi_internet_access_service">Atzessu ìnternet: servìtziu</string>
 	
-	<string name="poi_farm">Fatoria: butega</string>
 	<string name="poi_wine">Butega de binos</string>
 
-	<string name="poi_child_clothes">Butega de bestires pro pitzinnos</string>
-	<string name="poi_car">Cuntzessionàriu de màchinas</string>
-	<string name="poi_car_parts">Cantos de màchinas</string>
 	<string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
 	<string name="poi_halt">Firmada de sa ferrovia</string>
 	<string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>
@@ -647,6 +642,6 @@
 	<string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
 		<string name="poi_accomodation">Allògiu</string>
 		<string name="poi_smoking_area">Àrea fumatores</string>
-	<string name="piste_playground">Parcu giogos</string>
+	<string name="poi_piste_playground">Parcu giogos</string>
 	<string name="poi_car_sharing"></string>
 	</resources>

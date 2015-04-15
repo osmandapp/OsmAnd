@@ -6,7 +6,7 @@
 	<string name="poi_beverages">Napoje</string>
 	<string name="poi_butcher">Sklep mięsny</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_shop_farm">Produkty rolne</string>
+	<string name="poi_farm">Produkty rolne</string>
 	<string name="poi_greengrocer">Warzywniak</string>
 	<string name="poi_seafood">Owoce morza</string>
 	<string name="poi_confectionery">Cukiernia</string>
@@ -31,7 +31,7 @@
 	<string name="poi_carpet">Sklep z dywanami</string>
 	<string name="poi_chemist">Sklep z narkotykami</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
-	<string name="poi_children_clothes">Sklep odzieżowy dla dzieci</string>
+	<string name="poi_child_clothes">Sklep odzieżowy dla dzieci</string>
 	<string name="poi_shoes">Sklep obuwniczy</string>
 	<string name="poi_computer">Sklep komputerowy</string>
 	<string name="poi_curtain">Sklep z zasłonami</string>
@@ -85,8 +85,8 @@
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
 	<string name="poi_electronics">RTV</string>
-	<string name="poi_car_shop">Motoryzacyjny</string>
-	<string name="poi_car_parts_shop">Części samochodowe</string>
+	<string name="poi_car">Motoryzacyjny</string>
+	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_atv">Quady</string>
 	<string name="poi_cosmetics">Kosmetyki</string>
 	<string name="poi_marketplace">Bazar</string>
@@ -178,7 +178,6 @@
 	<string name="poi_speed_camera">Fotoradar</string>
 	<string name="poi_emergency_access_point">Ambulatoryjne świadczenia zdrowotne</string>
 
-	<string name="poi_railway_halt">Dworzec kolejowy (nieaktualne)</string>
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 
@@ -320,7 +319,7 @@
 	<string name="poi_memorial">Pomnik</string>
 	<string name="poi_archaeological_site">Wykopalisko archeologiczne</string>
 	<string name="poi_boundary_stone">Kamień graniczny</string>
-	<string name="poi_cannon">Historyczne armaty</string>
+	<string name="poi_historic_cannon">Historyczne armaty</string>
 	<string name="poi_castle">Zamek</string>
 	<string name="poi_city_gate">Brama miasta</string>
 	<string name="poi_fort">Fort</string>
@@ -472,8 +471,6 @@
 	
 	<string name="poi_wine">Sklep z winami</string>
 
-	<string name="poi_child_clothes">Odzież dla dzieci</string>
-	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_recycling">Recykling</string>
 	<string name="poi_pharmacy">Apteka</string>
 	<string name="poi_first_aid">Pierwsza pomoc</string>
@@ -501,7 +498,6 @@
 		<string name="poi_office">Biuro</string>
 	<string name="poi_sightseeing">Zwiedzanie</string>
 		<string name="poi_internet_access">Dostęp do Internetu</string>
-	<string name="poi_farm">Sklep rolniczy</string>
 	<string name="poi_military_nuclear_explosion_site">Miejsce eksplozji jądrowej</string>
 <string name="poi_military_naval_base">Wojskowa baza morska</string>
 	<string name="poi_military_danger_area">Strefa zagrożenia</string>
@@ -509,10 +505,9 @@
 	<string name="poi_accomodation">Noclegi</string>
 		<string name="poi_club">Klub</string>
 	<string name="poi_cafe_and_restaurant">Kawiarnia i restauracja</string>
-	<string name="poi_car">Sklep motoryzacyjny</string>
-	<string name="poi_fuel_biodiesel_yes">Biodiesel</string>
-	<string name="poi_fuel_lpg_yes">LPG</string>
-	<string name="poi_fuel_cng_yes">CNG</string>
+	<string name="poi_fuel:biodiesel">Biodiesel</string>
+	<string name="poi_fuel:lpg">LPG</string>
+	<string name="poi_fuel:cng">CNG</string>
 	<string name="poi_public_transport_stop_position">"Przystanek transpoertu  publicznego"</string>
 	<string name="poi_halt">Przystanek kolejowy</string>
 	<string name="poi_rest_area">Miejsce odpoczynku</string>
@@ -525,26 +520,26 @@
 		<string name="poi_craft">Rzemieślnik</string>
 	<string name="poi_seamark">Wodny</string>
 	<string name="poi_medical_supply">Artykuły medyczne</string>
-	<string name="poi_fuel_diesel_yes">Olej napędowy</string>
-	<string name="poi_fuel_gtl_diesel_yes">Modyfikowany olej napędowy</string>
-	<string name="poi_fuel_hgv_diesel_yes">Ulepszony olej napędowy</string>
-	<string name="poi_fuel_octane_80_yes">Benzyna 80 oktanów</string>
-	<string name="poi_fuel_octane_91_yes">Benzyna 91 oktanów</string>
-	<string name="poi_fuel_octane_92_yes">Benzyna 92 oktany</string>
-	<string name="poi_fuel_octane_95_yes">Benzyna 95 oktanów</string>
-	<string name="poi_fuel_octane_98_yes">Benzyna 98 oktanów</string>
-	<string name="poi_fuel_octane_100_yes">Benzyna 100 oktanów</string>
-	<string name="poi_fuel_1_25_yes">Paliwo 1:25</string>
-	<string name="poi_fuel_1_50_yes">Paliwo 1:50</string>
-	<string name="poi_fuel_ethanol_yes">Paliwo: etanol</string>
-	<string name="poi_fuel_methanol_yes">Paliwo: metanol</string>
-	<string name="poi_fuel_svo_yes">Paliwo: SVO (olej roślinny)</string>
-	<string name="poi_fuel_e10_yes">Paliwo: E10</string>
-	<string name="poi_fuel_e20_yes">Paliwo: E20</string>
-	<string name="poi_fuel_e85_yes">Paliwo: E85</string>
-	<string name="poi_fuel_biogas_yes">Paliwo: biogaz</string>
-	<string name="poi_fuel_LH2_yes">Paliwo: ciekły wodór</string>
-	<string name="poi_fuel_electricity_yes">Paliwo: elektryczność</string>
+	<string name="poi_fuel:diesel">Olej napędowy</string>
+	<string name="poi_fuel:gtl_diesel">Modyfikowany olej napędowy</string>
+	<string name="poi_fuel:hgv_diesel">Ulepszony olej napędowy</string>
+	<string name="poi_fuel:octane_80">Benzyna 80 oktanów</string>
+	<string name="poi_fuel:octane_91">Benzyna 91 oktanów</string>
+	<string name="poi_fuel:octane_92">Benzyna 92 oktany</string>
+	<string name="poi_fuel:octane_95">Benzyna 95 oktanów</string>
+	<string name="poi_fuel:octane_98">Benzyna 98 oktanów</string>
+	<string name="poi_fuel:octane_100">Benzyna 100 oktanów</string>
+	<string name="poi_fuel:1_25">Paliwo 1:25</string>
+	<string name="poi_fuel:1_50">Paliwo 1:50</string>
+	<string name="poi_fuel:ethanol">Paliwo: etanol</string>
+	<string name="poi_fuel:methanol">Paliwo: metanol</string>
+	<string name="poi_fuel:svo">Paliwo: SVO (olej roślinny)</string>
+	<string name="poi_fuel:e10">Paliwo: E10</string>
+	<string name="poi_fuel:e20">Paliwo: E20</string>
+	<string name="poi_fuel:e85">Paliwo: E85</string>
+	<string name="poi_fuel:biogas">Paliwo: biogaz</string>
+	<string name="poi_fuel:lh2">Paliwo: ciekły wodór</string>
+	<string name="poi_fuel:electricity">Paliwo: elektryczność</string>
 	<string name="poi_railway_buffer_stop">Ogranicznik kolejowy</string>
 	<string name="poi_junction">Skrzyżowanie</string>
 	<string name="poi_lock_gate">Zamknięta brama</string>

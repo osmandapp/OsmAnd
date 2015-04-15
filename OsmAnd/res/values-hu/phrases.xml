@@ -7,7 +7,7 @@
 	<string name="poi_beverages">Italbolt</string>
 	<string name="poi_butcher">Hentes</string>
 	<string name="poi_deli">Delikatesz bolt</string>
-	<string name="poi_shop_farm">Farm bolt</string>
+	<string name="poi_farm">Farm bolt</string>
 	<string name="poi_greengrocer">Zöldséges</string>
 	<string name="poi_seafood">Halárus</string>
 	<string name="poi_confectionery">Cukrászda</string>
@@ -35,8 +35,8 @@
 	<string name="poi_toys">Játékbolt</string>
 	<string name="poi_variety_store">100 forintos bolt</string>
 	<string name="poi_department_store">Áruház</string>
-	<string name="poi_car_shop">Autókereskedés</string>
-	<string name="poi_car_parts_shop">Autóalkatrész</string>
+	<string name="poi_car">Autókereskedés</string>
+	<string name="poi_car_parts">Autóalkatrész</string>
 	<string name="poi_marketplace">Piac</string>
 	<string name="poi_police">Rendőrség</string>
 	<string name="poi_fire_station">Tűzoltóság</string>
