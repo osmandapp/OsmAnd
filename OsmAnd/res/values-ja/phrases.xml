@@ -441,4 +441,34 @@
 	<string name="poi_sport_multi">総合競技・複合競技(Multi sport)</string>
 	<string name="poi_orienteering">オリエンテーリング(Orienteering)</string>
 	<string name="poi_paddle_tennis">パドルテニス(Paddle tennis)</string>
+	<string name="poi_paragliding">パラグライダー(Paragliding)</string>
+	<string name="poi_pelota">球技総合(Pelota)</string>
+	<string name="poi_racquet">ラケット競技総合(Racquet)</string>
+	<string name="poi_roller_skating">ローラースケート(Roller skating)</string>
+	<string name="poi_rowing">ボート競技(Rowing)</string>
+	<string name="poi_rugby_union">ラグビーユニオン・ラグビー(Rugby union)</string>
+	<string name="poi_rugby_league">ラグビーリーグ・別種ラグビー(Rugby league)</string>
+	<string name="poi_shooting">射撃競技(Shooting)</string>
+	<string name="poi_skating">スケート・アイススケート(Skating)</string>
+	<string name="poi_skateboard">スケートボード・スケボー(Skateboard)</string>
+	<string name="poi_skiing">スキー(Skiing)</string>
+	<string name="poi_soccer">サッカー(Soccer)</string>
+	<string name="poi_surfing">サーフィン(Surfing)</string>
+	<string name="poi_swimming">水泳(Swimming)</string>
+	<string name="poi_table_tennis">卓球(Table tennis)</string>
+	<string name="poi_team_handball">チームハンドボール(曖昧につき使用非推奨・Team handball)</string>
+	<string name="poi_tennis">テニス(Tennis)</string>
+	<string name="poi_toboggan">トボガンぞり(Toboggan)</string>
+	<string name="poi_volleyball">バレーボール(Volleyball)</string>
+
+	<string name="poi_museum">博物館(Museum)</string>
+	<string name="poi_memorial">記念碑(Memorial)</string>
+	<string name="poi_artwork">芸術作品・アートワーク(Artwork)</string>
+	<string name="poi_archaeological_site">遺跡(Archaeological site)</string>
+	<string name="poi_battlefield">古戦場(Battlefield)</string>
+	<string name="poi_boundary_stone">境界標石(Boundary stone)</string>
+	<string name="poi_cannon">歴史保存用大砲(Historic cannon)</string>
+	<string name="poi_castle">城(Castle)</string>
+	<string name="poi_city_gate">市壁・城壁門(City gate)</string>
+	<string name="poi_fort">砦(Fort)</string>
 	</resources>
