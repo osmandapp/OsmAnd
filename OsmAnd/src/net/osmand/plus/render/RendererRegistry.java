@@ -187,7 +187,7 @@ public class RendererRegistry {
 	}
 
 	public File getFileForInternalStyle(String name) {
-		if(internalRenderers.containsKey(name)) {
+		if(!internalRenderers.containsKey(name)) {
 			return new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "style.render.xml");
 		}
 		File fl = new File(app.getAppPath(IndexConstants.RENDERERS_DIR), internalRenderers.get(name));
