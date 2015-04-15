@@ -81,6 +81,7 @@
 
 	<Button
 		android:id="@+id/remove_tag"
+		android:gravity="center"
 		style="?attr/dashboardGeneralButtonStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

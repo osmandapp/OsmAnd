@@ -1,14 +1,14 @@
 package net.osmand.plus;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -39,16 +39,15 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -194,39 +193,6 @@ public class AppInitializer implements IProgress {
 
 	}
 
-	// TODO
-	private void applicationInstalledFirstTime(final Activity ctx) {
-		final OsmandApplication app = (OsmandApplication)ctx.getApplication();
-		boolean netOsmandWasInstalled = false;
-		try {
-			ApplicationInfo applicationInfo = ctx.getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
-			netOsmandWasInstalled = applicationInfo != null && !Version.isFreeVersion(app);
-		} catch (PackageManager.NameNotFoundException e) {
-			netOsmandWasInstalled = false;
-		}
-
-		if (netOsmandWasInstalled) {
-//			Builder builder = new AccessibleAlertBuilder(this);
-//			builder.setMessage(R.string.osmand_net_previously_installed);
-//			builder.setPositiveButton(R.string.shared_string_ok, null);
-//			builder.show();
-		} else {
-			AlertDialog.Builder builder = new AccessibleAlertBuilder(ctx);
-			builder.setMessage(R.string.first_time_msg);
-			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.startActivity(new Intent(ctx, app.getAppCustomization().getDownloadIndexActivity()));
-				}
-
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-	}
-	
-	
 	private void indexRegionsBoundaries(List<String> warnings) {
 		try {
 			File file = app.getAppPath("regions.ocbf");
@@ -245,7 +211,11 @@ public class AppInitializer implements IProgress {
 
 	
 	private void initPoiTypes() {
-		app.poiTypes.init();
+		if(app.getAppPath("poi_types.xml").exists()) {
+			app.poiTypes.init(app.getAppPath("poi_types.xml").getAbsolutePath());
+		} else {
+			app.poiTypes.init();
+		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 			
 			@Override
@@ -296,7 +266,7 @@ public class AppInitializer implements IProgress {
 		String clang = "".equals(lang) ? new Locale(lang).getLanguage() : lang;
 		app.regions.setLocale(clang);
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
-		app.rendererRegistry = startupInit(new RendererRegistry(), RendererRegistry.class);
+		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 	}
 
@@ -374,10 +344,10 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			// init poi types before indexes and before POI
 			initPoiTypes();
-			
+			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			
-			app.resourceManager.initRenderers(this);
+			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
 			initNativeCore();
@@ -473,6 +443,7 @@ public class AppInitializer implements IProgress {
 					LOG.info("Native library could not be loaded!");
 				}
 			}
+			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 	}
 	

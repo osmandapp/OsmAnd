@@ -17,7 +17,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -154,12 +153,15 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			loc = ((SearchActivity) parent).getSearchPoint();
 			searchAround = ((SearchActivity) parent).isSearchAroundCurrentLocation();
 		}
-		if (loc == null && !searchAround) {
+		if (loc == null) {
 			loc = getApp().getSettings().getLastKnownMapLocation();
 		}
-		if(loc != null && !searchAround) {
+		if(loc != null) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+		}
+		if(searchAround) {
+			intentToLaunch.putExtra(SearchActivity.SEARCH_NEARBY, true);
 		}
 	}
 

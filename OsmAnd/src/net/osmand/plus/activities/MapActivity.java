@@ -149,7 +149,8 @@ public class MapActivity extends AccessibleActivity {
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
-		mapView = new OsmandMapTileView(this);
+		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
+				getWindow().getDecorView().getHeight());
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
@@ -587,6 +588,9 @@ public class MapActivity extends AccessibleActivity {
 			LatLon loc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			if(mapViewTrackingUtilities.isMapLinkedToLocation()) {
+				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+			}
 			startActivity(newIntent);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			return true;

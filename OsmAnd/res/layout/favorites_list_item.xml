@@ -61,10 +61,10 @@
 
                 <ImageView
                     android:id="@+id/direction"
-                    android:layout_width="@dimen/dashFavDirectionSize"
-                    android:layout_height="@dimen/dashFavDirectionSize"
-                    android:layout_gravity="center_vertical"
-                    android:visibility="gone" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_destination_arrow_white"
+                    android:layout_gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/distance"
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/showAllButtonTextSize" />
             </LinearLayout>

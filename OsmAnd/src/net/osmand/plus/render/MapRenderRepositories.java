@@ -216,6 +216,7 @@ public class MapRenderRepositories {
 		if (searchRequest != null) {
 			searchRequest.setInterrupted(true);
 		}
+		log.info("Interrupt rendering map");
 	}
 
 	private boolean checkWhetherInterrupted() {
@@ -246,12 +247,16 @@ public class MapRenderRepositories {
 
 		// check that everything is initialized
 		for (String mapName : files.keySet()) {
-			if (!nativeFiles.contains(mapName)) {
-				nativeFiles.add(mapName);
-				if (!library.initMapFile(mapName)) {
-					continue;
+			BinaryMapIndexReader fr = files.get(mapName);
+			if (fr != null && fr.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
+				if (!nativeFiles.contains(mapName)) {
+					long time = System.currentTimeMillis();
+					nativeFiles.add(mapName);
+					if (!library.initMapFile(mapName)) {
+						continue;
+					}
+					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		

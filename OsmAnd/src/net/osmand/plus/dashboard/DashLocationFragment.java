@@ -128,19 +128,25 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			Location.distanceBetween(toLat, toLon, fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
 		}
 		if (arrow != null) {
-			if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
-				DirectionDrawable dd = new DirectionDrawable(ctx, 10, 10);
-				arrow.setImageDrawable(dd);
-			}
+			boolean newImage = false;
 			if (arrowResId == 0) {
 				arrowResId = R.drawable.ic_destination_arrow_white;
 			}
-			DirectionDrawable dd = (DirectionDrawable) arrow.getDrawable();
+			DirectionDrawable dd;
+			if(!(arrow.getDrawable() instanceof DirectionDrawable)) {
+				newImage = true;
+				dd = new DirectionDrawable(ctx, arrow.getWidth(), arrow.getHeight());
+			} else {
+				dd = (DirectionDrawable) arrow.getDrawable();
+			}
 			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 			if (fromLoc == null || h == null) {
 				dd.setAngle(0);
 			} else {
 				dd.setAngle(mes[1] - h + 180 + screenOrientation);
+			}
+			if (newImage) {
+				arrow.setImageDrawable(dd);
 			}
 			arrow.invalidate();
 		}

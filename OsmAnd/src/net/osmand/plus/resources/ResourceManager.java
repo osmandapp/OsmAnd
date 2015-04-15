@@ -34,6 +34,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -50,7 +51,6 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -451,18 +451,25 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.getFullVersion(context)
-				.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		String fv = Version.getFullVersion(context);
+		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
 			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
-			if(applicationDataDir.canWrite()){
+			if (applicationDataDir.canWrite()) {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
+					copyPoiTypes();
+					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
+						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
+						if (fl.exists()) {
+							context.getRendererRegistry().copyFileForInternalStyle(internalStyle);
+						}
+					}
 				} catch (SQLiteException e) {
 					log.error(e.getMessage(), e);
 				} catch (IOException e) {
@@ -479,8 +486,22 @@ public class ResourceManager {
 		try {
 			File file = context.getAppPath("regions.ocbf");
 			if (file != null) {
-				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), new FileOutputStream(
-						file));
+				FileOutputStream fout = new FileOutputStream(file);
+				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), fout);
+				fout.close();
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	private void copyPoiTypes() {
+		try {
+			File file = context.getAppPath("poi_types.xml");
+			if (file != null) {
+				FileOutputStream fout = new FileOutputStream(file);
+				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
+				fout.close();
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -542,7 +563,6 @@ public class ResourceManager {
 		isBundledAssetsXml.close();
 	}
 
-	//TODO consider some other place for this method?
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
 		if(file.exists()){
 			Algorithms.removeAllFiles(file);
@@ -555,31 +575,6 @@ public class ResourceManager {
 		Algorithms.closeStream(is);
 	}
 
-	public void initRenderers(IProgress progress) {
-		File file = context.getAppPath(IndexConstants.RENDERERS_DIR);
-		file.mkdirs();
-		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
-		if (file.exists() && file.canRead()) {
-			File[] lf = file.listFiles();
-			if (lf != null) {
-				for (File f : lf) {
-					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
-						String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
-						externalRenderers.put(name, f);
-					}
-				}
-			}
-		}
-		context.getRendererRegistry().setExternalRenderers(externalRenderers);
-		String r = context.getSettings().RENDERER.get();
-		if(r != null){
-			RenderingRulesStorage obj = context.getRendererRegistry().getRenderer(r);
-			if(obj != null){
-				context.getRendererRegistry().setCurrentSelectedRender(obj);
-			}
-		}
-	}
-	
 	private List<File> collectFiles(File dir, String ext, List<File> files) {
 		if(dir.exists() && dir.canRead()) {
 			File[] lf = dir.listFiles();
@@ -691,7 +686,6 @@ public class ResourceManager {
 				log.error("Index file could not be written", e);
 			}
 		}
-		initMapBoundariesCacheNative();
 		return warnings;
 	}
 

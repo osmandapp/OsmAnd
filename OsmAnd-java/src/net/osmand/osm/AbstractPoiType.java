@@ -22,7 +22,7 @@ public abstract class AbstractPoiType {
 	}
 	
 	public String getIconKeyName() {
-		return keyName.replace(':', '_');
+		return getKeyName().replace(':', '_');
 	}
 	
 	

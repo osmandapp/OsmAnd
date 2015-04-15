@@ -51,6 +51,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	private static final int REQUEST_FAVORITE_SELECT = 1;
 	private static final int REQUEST_ADDRESS_SELECT = 2;
 	
+	public static final String SEARCH_NEARBY = "net.osmand.search_nearby"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
