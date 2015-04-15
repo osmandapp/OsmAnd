@@ -860,11 +860,12 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings){
-		return renderer.updateMapIsNeeded(rotatedTileBox,drawSettings);
+	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings) {
+		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
 	
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){
+		log.info("RENDER MAP: force update the map");
 		renderer.interruptLoadingMap();
 		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox));
 	}

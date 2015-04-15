@@ -107,7 +107,7 @@ public class AsyncLoadingThread extends Thread {
 						if (!mapLoaded) {
 							MapLoadRequest r = (MapLoadRequest) req;
 							resourceManger.getRenderer().loadMap(r.tileBox, resourceManger.getMapTileDownloader().getDownloaderCallbacks());
-							mapLoaded = true;
+							mapLoaded = !resourceManger.getRenderer().wasInterrupted();
 						}
 					}
 				}

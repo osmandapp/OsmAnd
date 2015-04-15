@@ -216,7 +216,11 @@ public class MapRenderRepositories {
 		if (searchRequest != null) {
 			searchRequest.setInterrupted(true);
 		}
-		log.info("Interrupt rendering map");
+		log.info("RENDER MAP: Interrupt rendering map");
+	}
+	
+	public boolean wasInterrupted() {
+		return interrupted;
 	}
 
 	private boolean checkWhetherInterrupted() {
@@ -572,7 +576,11 @@ public class MapRenderRepositories {
 	
 
 	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
+		boolean prevInterrupted = interrupted;
 		interrupted = false;
+		// prevent editing
+		requestedBox = new RotatedTileBox(tileRect);
+		log.info("RENDER MAP: new request " + tileRect ); 
 		if (currentRenderingContext != null) {
 			currentRenderingContext = null;
 		}
@@ -613,15 +621,14 @@ public class MapRenderRepositories {
 			renderingReq.saveState();
 			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 
-			// prevent editing
-			requestedBox = new RotatedTileBox(tileRect);
+
 			// calculate data box
 			QuadRect dataBox = requestedBox.getLatLonBounds();
 			int dataBoxZoom = requestedBox.getZoom();
 			long now = System.currentTimeMillis();
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top < dataBox.top || cObjectsBox.right < dataBox.right
 					|| cObjectsBox.bottom > dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)
-					|| dataBoxZoom != cObjectsZoom) {
+					|| dataBoxZoom != cObjectsZoom || prevInterrupted) {
 				// increase data box in order for rotate
 				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
 					double wi = (dataBox.right - dataBox.left) * .05;
