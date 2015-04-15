@@ -61,8 +61,8 @@
 
                 <ImageView
                     android:id="@+id/direction"
-                    android:layout_width="@dimen/dashFavDirectionSize"
-                    android:layout_height="@dimen/dashFavDirectionSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_destination_arrow_white"
                     android:layout_gravity="center_vertical"/>
 
