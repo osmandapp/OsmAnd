@@ -195,7 +195,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private void updateStreetName(boolean nightMode, TextState ts) {
 		streetNameView.setBackgroundResource(ScreenOrientationHelper.isOrientationPortrait(map) ? ts.boxTop
 				: ts.boxFree);
-		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
+		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -219,9 +219,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// night skin (from box_night_free_simple.9.png)
 		ts.textShadowColor = nightMode ? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
 		if (!transparent && !nightMode) {
-			ts.textShadowColor = Color.TRANSPARENT;
+//			ts.textShadowColor = Color.TRANSPARENT;
+			ts.textShadowRadius = 0;
+		} else {
+			ts.textShadowRadius = (int) (4 * view.getDensity());
 		}
-		ts.textShadowRadius = (int) (ts.textShadowColor == 0 ? 0 : 4 * view.getDensity()); 
 		if (transparent) {
 			ts.boxTop = R.drawable.btn_flat_transparent;
 			ts.rightRes = R.drawable.btn_left_round_transparent;

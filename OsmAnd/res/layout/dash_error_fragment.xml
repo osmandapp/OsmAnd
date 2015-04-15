@@ -53,6 +53,7 @@
 			android:id="@+id/error_btn"
 			style="?attr/dashboardGeneralButtonStyle"
 			android:layout_width="0dp"
+			android:gravity="center"
 			android:layout_weight="1"
 			android:text="@string/send_report"/>
 
@@ -65,6 +66,7 @@
 			android:id="@+id/error_cancel"
 			style="?attr/dashboardGeneralButtonStyle"
 			android:layout_width="0dp"
+			android:gravity="center"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:text="@string/shared_string_dismiss"/>

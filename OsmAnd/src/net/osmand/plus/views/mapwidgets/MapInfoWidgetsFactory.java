@@ -211,7 +211,7 @@ public class MapInfoWidgetsFactory {
 			TextInfoWidget.updateTextColor(addressText, addressTextShadow, textColor, textShadowColor, bold, rad);
 			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
 					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
-					textColor, textShadowColor, bold, rad);
+					textColor, textShadowColor, bold, rad / 2);
 			
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
