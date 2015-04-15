@@ -86,9 +86,10 @@ import android.widget.Toast;
 public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
+	public static final String SEARCH_NEARBY = SearchActivity.SEARCH_NEARBY; //$NON-NLS-1$
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
-	private static final float MIN_DISTANCE_TO_RESEARCH = 20;
+	private static final float MIN_DISTANCE_TO_RESEARCH = 100;
 	private static final float MIN_DISTANCE_TO_REFRESH = 5;
 	private static final int SEARCH_MORE = 0;
 	private static final int SHOW_ON_MAP = 1;
@@ -257,11 +258,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			location = new net.osmand.Location("internal"); //$NON-NLS-1$
 			location.setLatitude(bundle.getDouble(SEARCH_LAT));
 			location.setLongitude(bundle.getDouble(SEARCH_LON));
-			searchNearBy = false;
-		} else {
-			location = null;
-			searchNearBy = true;
 		}
+		searchNearBy = bundle.containsKey(SEARCH_NEARBY);
 
 		String filterId = bundle.getString(AMENITY_FILTER);
 		this.filter = app.getPoiFilters().getFilterById(filterId);
@@ -379,9 +377,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		Intent newIntent = new Intent(this, EditPOIFilterActivity.class);
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
-		if(location != null && !searchNearBy) {
+		if(location != null) {
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
+		}
+		if(searchNearBy) {
+			newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 		}
 		startActivityForResult(newIntent, RESULT_REQUEST_CODE);
 	}

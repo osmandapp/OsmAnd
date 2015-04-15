@@ -4,10 +4,25 @@
 package net.osmand.plus.activities;
 
 
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
@@ -23,26 +38,6 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPOIActivity;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.util.Algorithms;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * 
  */
@@ -50,8 +45,6 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
 	private PoiLegacyFilter filter;
 	private PoiFiltersHelper helper;
-	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
-	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	private static final int FILTER = 2;
 	public static final int EDIT_ACTIVITY_RESULT_OK = 20;
 	
@@ -113,34 +106,6 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		return super.onCreateOptionsMenu(menu);
 	}	
 	
-	private void filterPOI() {
-		Bundle extras = getIntent().getExtras();
-		boolean searchNearBy = true;
-		LatLon lastKnownMapLocation = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
-		double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
-		double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
-		final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
-		if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
-			latitude = extras.getDouble(SEARCH_LAT);
-			longitude = extras.getDouble(SEARCH_LON);
-			searchNearBy = false;
-		}
-		final double lat = latitude;
-		final double lon = longitude;
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-		if (searchNearBy) {
-			startActivity(newIntent);
-		} else {
-			newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
-			newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
-			startActivity(newIntent);
-		}
-	}
-	
-
-	
-
 	
 	private void showDialog(final PoiCategory poiCategory) {
 		ListView lv = EditPOIFilterActivity.this.getListView();

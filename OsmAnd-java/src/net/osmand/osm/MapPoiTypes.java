@@ -209,18 +209,25 @@ public class MapPoiTypes {
 		sortList(categories);
 		
 	}
-	
+	public void init() {
+		init(null);
+	}
 
-	public void init(){
+	public void init(String resourceName) {
 		InputStream is;
+		long time = System.currentTimeMillis();
 		List<PoiType> referenceTypes = new ArrayList<PoiType>();
+		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
+		if(resourceName != null) {
+			this.resourceName = resourceName;
+		}
 		try {
-			if(resourceName == null){
-				is = MapRenderingTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
+			if (this.resourceName == null) {
+				is = MapPoiTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
 			} else {
-				is = new FileInputStream(resourceName);
+				is = new FileInputStream(this.resourceName);
 			}
-			long time = System.currentTimeMillis();
+			time = System.currentTimeMillis();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
 			parser.setInput(is, "UTF-8");
@@ -230,62 +237,58 @@ public class MapPoiTypes {
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
-					if (name.equals("poi_category")) { 
-						lastCategory = new PoiCategory(this, parser.getAttributeValue("","name"), categories.size());
-						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("","top")));
+					if (name.equals("poi_category")) {
+						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categories.size());
+						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 						categories.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
-						PoiFilter tp = new PoiFilter(this, lastCategory,
-								parser.getAttributeValue("", "name"));
-						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("","top")));
+						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
+						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 						lastFilter = tp;
 						lastCategory.addPoiType(tp);
-					} else if(name.equals("poi_reference")){
-						PoiType tp = new PoiType(this,
-								lastCategory, parser.getAttributeValue("","name"));
+					} else if (name.equals("poi_reference")) {
+						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
 						referenceTypes.add(tp);
 						tp.setReferenceType(tp);
-						if(lastFilter != null) {
+						if (lastFilter != null) {
 							lastFilter.addPoiType(tp);
 						}
 						lastCategory.addPoiType(tp);
-					} else if(name.equals("poi_additional")){
-						PoiType tp = new PoiType(this,
-								lastCategory, parser.getAttributeValue("","name"));
-						tp.setOsmTag(parser.getAttributeValue("","tag"));
-						tp.setOsmValue(parser.getAttributeValue("","value"));
-						tp.setOsmTag2(parser.getAttributeValue("","tag2"));
-						tp.setOsmValue2(parser.getAttributeValue("","value2"));
-						if(lastType != null) {
+					} else if (name.equals("poi_additional")) {
+						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
+						tp.setOsmTag(parser.getAttributeValue("", "tag"));
+						tp.setOsmValue(parser.getAttributeValue("", "value"));
+						tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
+						tp.setOsmValue2(parser.getAttributeValue("", "value2"));
+						if (lastType != null) {
 							lastType.addPoiAdditional(tp);
-						} else if(lastFilter != null) {
+						} else if (lastFilter != null) {
 							lastFilter.addPoiAdditional(tp);
-						} else if(lastCategory != null) {
+						} else if (lastCategory != null) {
 							lastCategory.addPoiAdditional(tp);
 						}
-					} else if(name.equals("poi_type")){
-						PoiType tp = new PoiType(this,
-								lastCategory, parser.getAttributeValue("","name"));
-						tp.setOsmTag(parser.getAttributeValue("","tag"));
-						tp.setOsmValue(parser.getAttributeValue("","value"));
-						tp.setOsmTag2(parser.getAttributeValue("","tag2"));
-						tp.setOsmValue2(parser.getAttributeValue("","value2"));
+					} else if (name.equals("poi_type")) {
+						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
+						tp.setOsmTag(parser.getAttributeValue("", "tag"));
+						tp.setOsmValue(parser.getAttributeValue("", "value"));
+						tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
+						tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 						lastType = tp;
-						if(lastFilter != null) {
+						if (lastFilter != null) {
 							lastFilter.addPoiType(tp);
 						}
+						allTypes.put(tp.getKeyName(), tp);
 						lastCategory.addPoiType(tp);
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
 					String name = parser.getName();
-					if (name.equals("poi_filter")) { 
+					if (name.equals("poi_filter")) {
 						lastFilter = null;
-					} else if (name.equals("poi_type")) { 
+					} else if (name.equals("poi_type")) {
 						lastType = null;
-					} 
+					}
 				}
 			}
-			log.info("Time to init poi types" + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			is.close();
 		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
@@ -301,7 +304,7 @@ public class MapPoiTypes {
 			throw new RuntimeException(e);
 		}
 		for (PoiType gt : referenceTypes) {
-			PoiType pt = getPoiTypeByKey(gt.keyName);
+			PoiType pt = allTypes.get(gt.getKeyName());
 			if (pt == null || pt.getOsmTag() == null) {
 				throw new IllegalStateException("Can't find poi type for poi reference '" + gt.keyName + "'");
 			} else {
@@ -310,6 +313,7 @@ public class MapPoiTypes {
 		}
 		findDefaultOtherCategory();
 		init = true;
+		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
 	
 	private void findDefaultOtherCategory() {

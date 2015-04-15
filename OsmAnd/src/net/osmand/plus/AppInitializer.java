@@ -1,14 +1,14 @@
 package net.osmand.plus;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -39,16 +39,15 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -245,7 +244,11 @@ public class AppInitializer implements IProgress {
 
 	
 	private void initPoiTypes() {
-		app.poiTypes.init();
+		if(app.getAppPath("poi_types.xml").exists()) {
+			app.poiTypes.init(app.getAppPath("poi_types.xml").getAbsolutePath());
+		} else {
+			app.poiTypes.init();
+		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 			
 			@Override
@@ -374,7 +377,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			// init poi types before indexes and before POI
 			initPoiTypes();
-			
+			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			
 			app.resourceManager.initRenderers(this);
@@ -473,6 +476,7 @@ public class AppInitializer implements IProgress {
 					LOG.info("Native library could not be loaded!");
 				}
 			}
+			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 	}
 	

@@ -577,6 +577,9 @@ public class MapActivityActions implements DialogProvider {
 						LatLon loc = mapActivity.getMapLocation();
 						newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 						newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+						if(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+						}
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						mapActivity.startActivity(newIntent);
 						return true;

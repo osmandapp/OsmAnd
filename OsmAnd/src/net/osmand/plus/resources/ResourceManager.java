@@ -34,6 +34,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -451,18 +452,19 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.getFullVersion(context)
-				.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		String fv = Version.getFullVersion(context);
+		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
 			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
-			if(applicationDataDir.canWrite()){
+			if (applicationDataDir.canWrite()) {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
+					copyPoiTypes();
 				} catch (SQLiteException e) {
 					log.error(e.getMessage(), e);
 				} catch (IOException e) {
@@ -480,6 +482,18 @@ public class ResourceManager {
 			File file = context.getAppPath("regions.ocbf");
 			if (file != null) {
 				Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"), new FileOutputStream(
+						file));
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	private void copyPoiTypes() {
+		try {
+			File file = context.getAppPath("poi_types.xml");
+			if (file != null) {
+				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), new FileOutputStream(
 						file));
 			}
 		} catch (Exception e) {
@@ -691,7 +705,6 @@ public class ResourceManager {
 				log.error("Index file could not be written", e);
 			}
 		}
-		initMapBoundariesCacheNative();
 		return warnings;
 	}
 
