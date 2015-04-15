@@ -184,8 +184,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
-			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
-			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textShadowRadius);
+			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
+			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
 			this.expand.setBackgroundResource(ts.expand);
 			rightStack.invalidate();
 			leftStack.invalidate();
@@ -219,9 +219,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// night skin (from box_night_free_simple.9.png)
 		ts.textShadowColor = nightMode ? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
 		if (!transparent && !nightMode) {
-			ts.textShadowColor = Color.TRANSPARENT;
+//			ts.textShadowColor = Color.TRANSPARENT;
+			ts.textShadowRadius = 0;
+		} else {
+			ts.textShadowRadius = (int) (4 * view.getDensity());
 		}
-		ts.textShadowRadius = ts.textShadowColor == 0 ? 0 : 15; 
 		if (transparent) {
 			ts.boxTop = R.drawable.btn_flat_transparent;
 			ts.rightRes = R.drawable.btn_left_round_transparent;

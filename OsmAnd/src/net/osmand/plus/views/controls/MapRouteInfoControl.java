@@ -1,6 +1,8 @@
 package net.osmand.plus.views.controls;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.data.FavouritePoint;
@@ -14,22 +16,25 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchAddressActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
+import net.osmand.plus.activities.search.SearchAddressActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.PointF;
@@ -38,6 +43,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -52,7 +58,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
 	private Dialog dialog;
-	private AlertDialog favoritesDialog;
 	private boolean selectFromMapTouch; 
 	private boolean selectFromMapForTarget;
 
@@ -229,12 +234,29 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
-		Builder bld = new AlertDialog.Builder(mapActivity);
-		ListView listView = new ListView(mapActivity);
-		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication().getFavorites().getFavouritePoints());
+		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
+				.getFavorites().getFavouritePoints());
+		Dialog[] dlgHolder = new Dialog[1];
+		OnItemClickListener click = getOnClickListener(target, favouritesAdapter, dlgHolder);
+		OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
+
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				if (target) {
+					setupToSpinner(parentView);
+				} else {
+					setupFromSpinner(parentView);
+				}
+			}
+		};
 		favouritesAdapter.updateLocation(mapActivity.getMapLocation());
-		listView.setAdapter(favouritesAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		FavoriteDialogs.showFavoritesDialog(mapActivity, favouritesAdapter, click, dismissListener, dlgHolder, true);
+	}
+
+
+	private OnItemClickListener getOnClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,
+			final Dialog[] dlg) {
+		return new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -245,25 +267,14 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				} else {
 					getTargets().setStartPoint(point, true, fp.getPointDescription());
 				}
-				favoritesDialog.dismiss();
+				if(dlg != null && dlg.length > 0 && dlg[0] != null) {
+					dlg[0].dismiss();
+				}
 				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
 				hideDialog();
 				showDialog();
 			}
-		});
-		bld.setView(listView);
-		favoritesDialog = bld.show();
-		favoritesDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if(target){
-					setupToSpinner(parentView);
-				} else {
-					setupFromSpinner(parentView);
-				}
-			}
-		});
+		};
 	}
 
 	public static int getDirectionInfo() {

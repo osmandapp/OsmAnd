@@ -95,12 +95,16 @@ public class DirectionDrawable extends Drawable {
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
 		if (arrowImage != null) {
-			Rect r = getBounds();
+			Rect r = bounds;
 			int w = arrowImage.getIntrinsicWidth();
 			int h = arrowImage.getIntrinsicHeight();
-			int dx = r.width() - w;
-			int dy = r.height() - h;
-			arrowImage.setBounds(r.left + dx / 2, r.top + dy / 2, r.right - dx / 2, r.bottom - dy / 2);
+			int dx = Math.max(0, r.width() - w);
+			int dy = Math.max(0, r.height() - h);
+			if(r.width() == 0 && r.height() == 0) {
+				arrowImage.setBounds(0, 0, w, h);
+			} else {
+				arrowImage.setBounds(r.left + dx / 2, r.top + dy / 2, r.right - dx / 2, r.bottom - dy / 2);
+			}
 		}
 	}
 

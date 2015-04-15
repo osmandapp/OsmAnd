@@ -4,6 +4,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
+import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -17,7 +18,9 @@ public class TextInfoWidget  {
 	private View view;
 	private ImageView imageView;
 	private TextView textView;
+	private TextView textViewShadow;
 	private TextView smallTextView;
+	private TextView smallTextViewShadow;
 	private ImageView topImageView;
 	private TextView topTextView;
 	private boolean explicitlyVisible;
@@ -35,6 +38,8 @@ public class TextInfoWidget  {
 		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
 		textView = (TextView) view.findViewById(R.id.widget_text);
+		textViewShadow = (TextView) view.findViewById(R.id.widget_text_shadow);
+		smallTextViewShadow = (TextView) view.findViewById(R.id.widget_text_small_shadow);
 		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
 	}
 	
@@ -121,13 +126,17 @@ public class TextInfoWidget  {
 //		}
 		if(text == null) {
 			textView.setText("");
+			textViewShadow.setText("");
 		} else {
 			textView.setText(text);
+			textViewShadow.setText(text);
 		}
 		if(subtext == null) {
 			smallTextView.setText("");
+			smallTextViewShadow.setText("");
 		} else {
 			smallTextView.setText(subtext);
+			smallTextViewShadow.setText(subtext);
 		}
 	}
 	
@@ -172,14 +181,26 @@ public class TextInfoWidget  {
 	}
 
 	public void updateTextColor(int textColor, int textShadowColor, boolean bold, int rad) {
-		updateTextColor(smallTextView, textColor, textShadowColor, bold, rad);
-		updateTextColor(textView, textColor, textShadowColor, bold, rad);
-		updateTextColor(topTextView, textColor, textShadowColor, bold, rad);
+		updateTextColor(smallTextView, smallTextViewShadow, textColor, textShadowColor, bold, rad);
+		updateTextColor(textView, textViewShadow, textColor, textShadowColor, bold, rad);
+		updateTextColor(topTextView, null, textColor, textShadowColor, bold, rad);
 	}
 	
-	private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
+	public static void updateTextColor(TextView tv, TextView shadow, int textColor, int textShadowColor, boolean textBold, int rad) {
+		if(shadow != null) {
+			if(rad > 0) {
+				shadow.setVisibility(View.VISIBLE);
+				shadow.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
+				shadow.getPaint().setStrokeWidth(rad);
+				shadow.getPaint().setStyle(Style.STROKE);
+				shadow.setTextColor(textShadowColor);
+//				tv.getPaint().setStyle(Style.FILL);
+			} else {
+//				tv.getPaint().setStyle(Style.FILL_AND_STROKE);
+				shadow.setVisibility(View.GONE);
+			}
+		}
 		tv.setTextColor(textColor);
-		tv.setShadowLayer(rad, 0, 0, textShadowColor);
 		tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 	}
 

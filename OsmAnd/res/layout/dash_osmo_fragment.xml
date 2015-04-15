@@ -57,6 +57,7 @@
 				android:id="@+id/share"
 				android:layout_width="@dimen/dashListItemHeight"
 				android:layout_height="@dimen/dashListItemHeight"
+				android:gravity="center"
 				style="?attr/dashboardGeneralButtonStyle"/>
 
 			<include layout="@layout/check_item_rel"/>
