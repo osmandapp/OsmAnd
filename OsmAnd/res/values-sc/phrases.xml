@@ -642,6 +642,6 @@
 	<string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
 		<string name="poi_accomodation">Allògiu</string>
 		<string name="poi_smoking_area">Àrea fumatores</string>
-	<string name="piste_playground">Parcu giogos</string>
+	<string name="poi_piste_playground">Parcu giogos</string>
 	<string name="poi_car_sharing"></string>
 	</resources>

@@ -697,19 +697,19 @@
 	<string name="poi_silo">Силос</string>
 	<string name="poi_apartment">Квартира</string>
 
-	<string name="piste_skitour">Скитур</string>
-	<string name="piste_sleigh"/>
-	<string name="piste_playground">Игровая площадка</string>
+	<string name="poi_piste_skitour">Скитур</string>
+	<string name="poi_piste_sleigh"/>
+	<string name="poi_piste_playground">Игровая площадка</string>
 	<string name="poi_smoking_area">Место для курения</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_water">Вода</string>
 	<string name="poi_wood">Лес</string>
 	<string name="poi_valley">Долина</string>
 	<string name="poi_bench">Скамейка</string>
-	<string name="piste_ice_skate">Ледовый каток</string>
+	<string name="poi_piste_ice_skate">Ледовый каток</string>
 
-	<string name="piste_snow_park">Снежный парк</string>
-	<string name="poi_fuel_diesel">Дизель</string>
-	<string name="poi_fuel_ethanol">Этанол</string>
-	<string name="poi_fuel_methanol">Метанол</string>
+	<string name="poi_piste_snow_park">Снежный парк</string>
+	<string name="poi_fuel:diesel">Дизель</string>
+	<string name="poi_fuel:ethanol">Этанол</string>
+	<string name="poi_fuel:methanol">Метанол</string>
 	</resources>
