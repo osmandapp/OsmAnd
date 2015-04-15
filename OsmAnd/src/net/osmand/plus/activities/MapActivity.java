@@ -149,7 +149,8 @@ public class MapActivity extends AccessibleActivity {
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
-		mapView = new OsmandMapTileView(this);
+		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
+				getWindow().getDecorView().getHeight());
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
