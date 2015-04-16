@@ -121,6 +121,7 @@ public class FavoriteImageDrawable extends Drawable {
 		FavoriteImageDrawable drawable = cache.get(hash);
 		if (drawable == null) {
 			drawable = new FavoriteImageDrawable(a, color, density);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			cache.put(hash, drawable);
 		}
 		return drawable;
