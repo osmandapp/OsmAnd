@@ -105,7 +105,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	}
 
-	public void updateDownloadButton(boolean scroll) {
+	public void updateDownloadButton() {
 
 	}
 

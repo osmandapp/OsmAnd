@@ -151,7 +151,7 @@ public class DownloadIndexesThread {
 				if (o instanceof DownloadEntry) {
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton(false);
+						uiActivity.updateDownloadButton();
 						DownloadEntry item = (DownloadEntry)o;
 						String name = item.item.getBasename();
 						long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
@@ -166,7 +166,7 @@ public class DownloadIndexesThread {
 					entriesToDownload.remove(o);
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton(false);
+						uiActivity.updateDownloadButton();
 						IndexItem item = (IndexItem)o;
 
 						long count = dbHelper.getCount(item.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) + 1;

@@ -151,12 +151,12 @@ public class UpdatesIndexFragment extends ListFragment {
 		if (ch.isChecked()) {
 			ch.setChecked(!ch.isChecked());
 			getDownloadActivity().getEntriesToDownload().remove(e);
-			getDownloadActivity().updateDownloadButton(true);
+			getDownloadActivity().updateDownloadButton();
 		} else {
 			List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
 			if (download.size() > 0) {
 				getDownloadActivity().getEntriesToDownload().put(e, download);
-				getDownloadActivity().updateDownloadButton(true);
+				getDownloadActivity().updateDownloadButton();
 				ch.setChecked(!ch.isChecked());
 			}
 		}
@@ -217,7 +217,7 @@ public class UpdatesIndexFragment extends ListFragment {
 		AccessibleToast.makeText(getDownloadActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if (selected > 0) {
-			getDownloadActivity().updateDownloadButton(true);
+			getDownloadActivity().updateDownloadButton();
 		}
 	}
 

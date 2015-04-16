@@ -1,18 +1,10 @@
 package net.osmand.plus.download;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -20,16 +12,29 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 /**
@@ -230,7 +235,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 					determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 				}
 			}
-			updateDownloadButton(false);
+			updateDownloadButton();
 
 		}
 	}
@@ -292,7 +297,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	}
 
 	@Override
-	public void updateDownloadButton(boolean scroll) {
+	public void updateDownloadButton() {
 //		View view = getView();
 //		if (view == null || getExpandableListView() == null){
 //			return;
@@ -314,7 +319,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
-				int countedDownloads = DownloadActivity.downloadListIndexThread.getDownloads();
 				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
 				boolean excessLimit = left < 0;
 				if (left < 0)
@@ -324,6 +328,24 @@ public class DownloadActivity extends BaseDownloadActivity {
 				}
 			}
 			((Button) findViewById(R.id.DownloadButton)).setText(text);
+		}
+		
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (!f.isDetached()) {
+				if (f instanceof OsmandExpandableListFragment) {
+					ExpandableListAdapter ad = ((OsmandExpandableListFragment) f).getExpandableListView()
+							.getExpandableListAdapter();
+					if (ad instanceof OsmandBaseExpandableListAdapter) {
+						((OsmandBaseExpandableListAdapter) ad).notifyDataSetChanged();
+					}
+				} else if(f instanceof ListFragment) {
+					ListAdapter la = ((ListFragment) f).getListAdapter();
+					if(la instanceof BaseAdapter) {
+						((BaseAdapter) la).notifyDataSetChanged();
+					}
+				}
+			}
 		}
 //		if (scroll) {
 //			getExpandableListView().scrollTo(x, y);
