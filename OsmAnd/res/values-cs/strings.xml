@@ -1834,8 +1834,8 @@ s často kladenými otázkami.</string>
 	<string name="proxy_port_descr">Nastavit číslo portu proxy (např. 8118)</string>
 	<string name="parking_place">Parkovací místo</string>
     <string name="remove_the_tag">ODSTRANIT ZNAČKU</string>
-    <string name="shared_string_disabled">Zakázaný</string>
-	<string name="shared_string_enabled">Povolený</string>
+    <string name="shared_string_disabled">Zakázán</string>
+	<string name="shared_string_enabled">Povolen</string>
 	<string name="plugin_description_title">Popisek</string>
 	
 <string name="edit_group">Upravit skupinu</string>
@@ -1924,4 +1924,5 @@ s často kladenými otázkami.</string>
 	<string name="shared_string_manage">Spravovat</string>
 	<string name="shared_string_edit">Upravit</string>
 	<string name="shared_string_open">Otevřít</string>
-    </resources>
+    <string name="rendering_attr_OSMMapperAssistant_name">Pomocník editorů OSM map</string>
+	</resources>

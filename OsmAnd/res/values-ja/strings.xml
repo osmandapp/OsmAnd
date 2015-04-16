@@ -1475,7 +1475,7 @@ POIの更新は利用できません</string>
 	<string name="tip_map_switch_t_v2">"マップソースとマップレイヤーの変更は\'メニュー\'→\'マップ設定\'から。
 \n\n\'マップソース...\'から事前にロードされたオフラインベクター形式マップを選択することができます(オフラインナビゲーションには必要です)、もしくは事前に設定された(オンラインまたはオフラインキャッシュ)タイルマップ(有効化するには\'オンラインマップ\'プラグインは\'設定\'→\'プラグイン\')もしくは、PCのOsmAndMapCreato等で作成されたものも使用できます。
 \n\nOsmAndはカスタムソースもサポートしています。 "</string>
-	<string name="keep_and_add_destination_point">目的地として追加</string>
+	<string name="keep_and_add_destination_point">最終目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
     <string name="shared_string_select_on_map">マップ上を選択</string>
