@@ -136,7 +136,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			if (db != null) {
 				try {
 					Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
-					boolean has = q.moveToFirst();
+					//Looks like db is created even if user cancels out of "start recording" dialogue, hence also ask if db contains track points at all here
+					boolean has = q.moveToFirst() && (getLastTrackPointTime() > 0L);
 					q.close();
 					if (has) {
 						return true;
