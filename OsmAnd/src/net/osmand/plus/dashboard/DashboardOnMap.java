@@ -147,7 +147,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
 			mFlexibleBlurSpaceHeight = mapActivity.getResources().getDimensionPixelSize(
-					R.dimen.dashboard_map_top_blur);
+					R.dimen.dashboard_map_toolbar);
 			// Set padding view for ListView. This is the flexible space.
 			paddingView = new View(mapActivity);
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,

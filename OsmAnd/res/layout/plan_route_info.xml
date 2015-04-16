@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/ValidateTextView"
-                android:textSize="16sp"
+                android:textSize="@dimen/default_desc_text_size"
                 android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:drawablePadding="3dp"
                 android:text="@string/target_points"
                 android:id="@+id/Targets"
-                android:textSize="24sp" />
+                android:textSize="@dimen/default_list_text_size_large"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -47,14 +47,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
 
                 <Spinner
                     android:id="@+id/FromSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:gravity="left"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/default_list_text_size" />
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_to"
-                    android:textSize="18sp">
+                    android:textSize="@dimen/default_list_text_size">
 
                 </TextView>
 
@@ -89,7 +89,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"/>
+                    android:textSize="@dimen/default_list_text_size"/>
             </LinearLayout>
 
             <View

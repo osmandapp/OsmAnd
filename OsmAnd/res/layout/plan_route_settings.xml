@@ -19,16 +19,16 @@
 
         <ImageView
             android:id="@+id/avoid_roads"
-            android:layout_width="@dimen/dashListItemHeight"
-            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
             android:background="@drawable/dashboard_button_light"
             android:scaleType="center"
             android:src="@drawable/ic_action_road_works_dark" />
 
         <ImageView
             android:id="@+id/mute"
-            android:layout_width="@dimen/dashListItemHeight"
-            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
             android:background="@drawable/dashboard_button_light"
             android:scaleType="center"
             android:src="@drawable/ic_action_volume_off" />
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="@string/gpx_navigation"
-            android:textSize="18sp" >
+            android:textSize="@dimen/default_list_text_size" >
         </TextView>
 
         <Spinner
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:textSize="18sp" >
+            android:textSize="@dimen/default_list_text_size" >
         </Spinner>
     </LinearLayout>
 

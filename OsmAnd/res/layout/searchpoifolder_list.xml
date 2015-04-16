@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/folder_label"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
 		android:layout_gravity="center_vertical"
 		android:textColor="?android:textColorPrimary"
         android:layout_width="0dp"

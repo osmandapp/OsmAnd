@@ -80,7 +80,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
 				android:text="@string/osmo_group_information"
-				android:textSize="18sp"/>
+				android:textSize="@dimen/default_list_text_size"/>
 
 			<ImageButton
 				android:id="@+id/info"
@@ -95,7 +95,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/osmo_group_information_desc"
-			android:textSize="16sp"
+			android:textSize="@dimen/default_desc_text_size"
 			android:visibility="gone"/>
 
 

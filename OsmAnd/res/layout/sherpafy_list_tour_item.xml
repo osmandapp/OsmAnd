@@ -39,7 +39,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/color_white"
-                android:textSize="23sp" />
+                android:textSize="@dimen/default_list_text_size_large" />
         </FrameLayout>
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="16sp" />
+            android:textSize="@dimen/default_list_text_size"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -67,7 +67,7 @@
                 android:id="@+id/MoreInformation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/default_desc_text_size"
                 android:focusable="false" />
         </LinearLayout>
 

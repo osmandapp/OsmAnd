@@ -89,6 +89,6 @@
 		android:layout_marginBottom="8dip"
 		android:autoLink="web"
 		android:gravity="center"
-		android:textSize="18sp"/>
+		android:textSize="@dimen/default_desc_text_size"/>
 
 </LinearLayout>

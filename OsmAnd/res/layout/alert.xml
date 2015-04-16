@@ -12,7 +12,7 @@
         android:layout_marginRight="4dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_list_text_size"
         android:gravity="fill_horizontal" />
 
 </LinearLayout>

@@ -69,7 +69,7 @@
                 android:layout_marginLeft="4dp"
                 android:maxLines="2"
                 android:textColor="@color/wpt_distance_color"
-                android:textSize="15sp"
+                android:textSize="@dimen/default_desc_text_size"
                 android:textStyle="bold" />
 
                   <FrameLayout

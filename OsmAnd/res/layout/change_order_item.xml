@@ -23,7 +23,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_list_text_size"
         android:textColor="@color/color_black"
         android:layout_weight="1" />
 

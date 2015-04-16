@@ -14,7 +14,7 @@
 		android:layout_weight="1"
 		android:layout_marginTop="@dimen/list_header_top_margin"
 		android:maxLines="1"
-		android:textSize="@dimen/list_header_text_size"
+		android:textSize="@dimen/default_desc_text_size"
 		tools:text="@string/app_version"/>
 
 	<TextView
@@ -23,7 +23,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/list_header_top_margin"
 		android:maxLines="1"
-		android:textSize="@dimen/list_header_text_size"
+		android:textSize="@dimen/default_desc_text_size"
 		tools:text="@string/app_version"/>
 
 </LinearLayout>

@@ -232,7 +232,7 @@
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:textSize="20sp"
+                android:textSize="@dimen/default_list_text_size"
                 android:textStyle="bold" />
         </LinearLayout>
 

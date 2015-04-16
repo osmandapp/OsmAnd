@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/toolbar_back"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="left"
         android:scaleType="center"
         android:background="@drawable/dashboard_button_light"
@@ -31,8 +31,8 @@
     
     <ImageView
         android:id="@+id/toolbar_list"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
@@ -40,8 +40,8 @@
     
     <ImageView
         android:id="@+id/toolbar_settings"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
@@ -50,8 +50,8 @@
     
     <ImageView
         android:id="@+id/toolbar_ok"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
@@ -59,8 +59,8 @@
     
     <ImageView
         android:id="@+id/toolbar_sort"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
@@ -69,8 +69,8 @@
     
     <ImageView
         android:id="@+id/toolbar_flat"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
@@ -79,8 +79,8 @@
 
     <ImageView
         android:id="@+id/toolbar_edit"
-        android:layout_width="@dimen/dashListItemHeight"
-        android:layout_height="@dimen/dashListItemHeight"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"

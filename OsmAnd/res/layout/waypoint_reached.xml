@@ -26,7 +26,7 @@
         android:textColor="@color/wpt_distance_color"
         android:maxLines="2"
         android:textStyle="bold"
-        android:textSize="15sp"/>
+        android:textSize="@dimen/default_list_text_size"/>
 
     <TextView
         android:id="@+id/waypoint_text"
@@ -37,7 +37,7 @@
         android:ellipsize="end"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:textSize="@dimen/default_list_text_size" />
 
     <ImageButton
         android:id="@+id/all_points"

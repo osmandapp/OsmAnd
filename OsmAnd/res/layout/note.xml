@@ -46,7 +46,7 @@
 
 			<TextView
 				android:id="@+id/name"
-				style="@style/ListText.Small"
+				android:textSize="@dimen/default_list_text_size"
 				android:textColor="?android:textColorPrimary"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorSecondary"
 				android:gravity="center_vertical"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				android:maxLines="25"
 				tools:text="@string/app_mode_aircraft"/>
 
@@ -77,8 +77,8 @@
 
 		<ImageButton
 			android:id="@+id/play"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/dashFavIconMargin"
 			android:background="?attr/dashboard_button"

@@ -38,5 +38,17 @@
 	<dimen name="map_button_stroke">1dp</dimen>
 
 	<dimen name="map_widget_icon_margin">6dp</dimen>
+	<!-- General -->
+	
+	<dimen name="list_item_height">65dp</dimen>
+	<dimen name="list_header_height">60dp</dimen>
+	<dimen name="dashboard_map_top_padding">480dp</dimen>
+	<dimen name="dashboard_land_width">480dp</dimen>
+	    <!-- TextSizes -->
+    <dimen name="default_list_text_size_large">24sp</dimen>
+    <dimen name="default_list_text_size">19sp</dimen>
+    <dimen name="default_desc_text_size">16sp</dimen>
+    <dimen name="default_sub_text_size">15sp</dimen>
+	<dimen name="welcome_header_text_size">27sp</dimen>
     
 </resources>

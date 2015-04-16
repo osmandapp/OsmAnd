@@ -135,9 +135,9 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		final List<DownloadActivityType> downloadTypes = getDownloadActivity().getDownloadTypes();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), android.R.layout.simple_spinner_item,
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.spinner_item,
 				toString(downloadTypes)) ;
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
 
 			@Override

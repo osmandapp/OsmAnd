@@ -11,6 +11,6 @@
         android:layout_marginLeft="20dip"
         android:layout_marginTop="12dip"
         android:gravity="center_vertical"
-        android:textSize="20sp"></TextView>
+        android:textSize="@dimen/default_list_text_size_large"></TextView>
 
 </LinearLayout>

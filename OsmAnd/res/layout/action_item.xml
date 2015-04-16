@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_vertical|center_horizontal"
-        android:textSize="12sp"
+        android:textSize="@dimen/default_sub_text_size"
         android:textColor="#666" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/dashListItemHeight"
+	android:layout_height="@dimen/list_item_height"
 	android:layout_marginLeft="@dimen/dashFavIconMargin"
 	android:layout_marginRight="@dimen/dashFavIconMargin"
 	android:orientation="vertical">
@@ -32,7 +32,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/dashFavNameTextSize"
+				android:textSize="@dimen/default_list_text_size"
 				android:lines="1"
 				android:maxLines="1"
 				android:ellipsize="end"
@@ -55,8 +55,8 @@
 
 		<ImageView
 			android:id="@+id/btn_download"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
 			android:background="?attr/dashboard_button"
 			android:scaleType="center"

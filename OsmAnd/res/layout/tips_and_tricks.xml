@@ -6,7 +6,7 @@
 
     <net.osmand.access.ExplorableTextView
         android:id="@+id/TipDescription"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="4dp"

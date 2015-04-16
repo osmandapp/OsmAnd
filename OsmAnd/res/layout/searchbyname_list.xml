@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/NameLabel"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 </LinearLayout>

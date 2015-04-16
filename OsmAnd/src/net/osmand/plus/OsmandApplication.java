@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
@@ -20,7 +18,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
@@ -29,16 +26,11 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.CommandPlayerFactory;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -47,7 +39,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -65,7 +56,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import btools.routingapp.BRouterServiceConnection;
@@ -584,11 +574,10 @@ public class OsmandApplication extends Application {
 
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandDarkTheme;
-        boolean mainmenu = c instanceof MainMenuActivity;
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = mainmenu ? R.style.DashboardDarkTheme : R.style.OsmandDarkTheme;
+			t = R.style.OsmandDarkTheme;
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = mainmenu ? R.style.DashboardLightTheme : R.style.OsmandLightTheme;
+			t = R.style.OsmandLightTheme;
 		}
 		setLanguage(c);
 		c.setTheme(t);

@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_desc_text_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -41,8 +41,8 @@
 
         <ImageButton
             android:id="@+id/play"
-            android:layout_width="@dimen/dashListItemHeight"
-            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"

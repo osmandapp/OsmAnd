@@ -90,6 +90,6 @@
 		android:layout_height="wrap_content"
 		android:autoLink="web"
 		android:gravity="center"
-		android:textSize="16sp"/>
+		android:textSize="@dimen/default_list_text_size"/>
 
 </LinearLayout>

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        android:textSize="17sp"
+        android:textSize="@dimen/default_list_text_size"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1" />

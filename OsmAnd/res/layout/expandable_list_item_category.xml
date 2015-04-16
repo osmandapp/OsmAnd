@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/list_header_text_left_margin"
-        android:textSize="@dimen/list_header_text_size"
+        android:textSize="@dimen/default_desc_text_size"
         tools:text="@string/lorem_ipsum" />
     
     <ImageView

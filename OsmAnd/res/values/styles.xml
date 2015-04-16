@@ -7,33 +7,21 @@
     	<item name="android:windowContentOverlay">@null</item>
     	<item name="android:backgroundDimEnabled">false</item>
 	</style>
-
+    
+    <style name="OsmandListView" parent="@android:style/Widget.ListView">
+    </style>
+	
+    <!-- Dashboard styles -->
 	<style name="DashboardSubHeader">
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_weight">1</item>
 		<item name="android:layout_height">fill_parent</item>
         <item name="android:paddingBottom">@dimen/subHeaderPadding</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/subHeaderTextSize</item>
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
 		<item name="typeface">@string/font_roboto_medium</item>
-    </style>
-
-	<!-- Pre-v17 version -->
-	<style name="DashboardSubHeader.Compat" parent="DashboardSubHeader">
+		<item name="android:textColor">?attr/dashboard_subheader_text_color</item>
 		<item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
-	</style>
-
-	<style name="DashboardSubHeader.Light" parent="DashboardSubHeader.Compat">
-		<item name="android:textColor">@color/dashboard_subheader_text_light</item>
-	</style>
-
-	<style name="DashboardSubHeader.Dark" parent="DashboardSubHeader.Compat">
-		<item name="android:textColor">@color/dashboard_subheader_text_dark</item>
-	</style>
-
-    <style name="DashParkingText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/dashParkingTextSize</item>
     </style>
 
 	<style name="DashboardGeneralButton">
@@ -41,24 +29,12 @@
         <item name="android:gravity">center_vertical|right</item>
         <item name="android:layout_height">@dimen/showAllButtonHeight</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/showAllButtonTextSize</item>
+        <item name="android:textSize">@dimen/default_sub_text_size</item>
         <item name="typeface">@string/font_roboto_medium</item>
+        <item name="android:textColor">?attr/dashboard_general_button_text_color</item>
+        <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
+		<item name="android:background">?attr/dashboard_button</item>
     </style>
-
-	<!-- Pre-v17 version -->
-	<style name="DashboardGeneralButton.Compat" parent="DashboardGeneralButton">
-		<item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
-	</style>
-
-	<style name="DashboardGeneralButton.Light" parent="DashboardGeneralButton.Compat">
-		<item name="android:textColor">@color/dashboard_general_button_text_light</item>
-		<item name="android:background">@drawable/dashboard_button_light</item>
-	</style>
-
-	<style name="DashboardGeneralButton.Dark" parent="DashboardGeneralButton.Compat">
-		<item name="android:textColor">@color/dashboard_general_button_text_dark</item>
-		<item name="android:background">@drawable/dashboard_button_dark</item>
-	</style>
 
     <style name="DashboardSearchButton">
         <item name="android:paddingTop">@dimen/dashSearchPaddingTop</item>
@@ -66,58 +42,13 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
 		<item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textSize">@dimen/showAllButtonTextSize</item>
+        <item name="android:textSize">@dimen/default_desc_text_size</item>
 		<item name="android:gravity">bottom|center_horizontal</item>
 		<item name="android:paddingBottom">@dimen/dashSearchPaddingBot</item>
+		<item name="android:background">?attr/dashboard_button</item>
     </style>
 
-	<style name="DashboardSearchButton.Light" parent="DashboardSearchButton">
-		<item name="android:background">@drawable/dashboard_button_light</item>
-	</style>
-
-	<style name="DashboardSearchButton.Dark" parent="DashboardSearchButton">
-		<item name="android:background">@drawable/dashboard_button_dark</item>
-	</style>
-
-    <style name="ListText">
-        <item name="android:textSize">@dimen/default_list_text_size</item>
-    </style>
-    <style name="ListText.Small">
-        <item name="android:textSize">@dimen/default_list_text_size_small</item>
-    </style>
-    
-    <style name="OsmandListView" parent="@android:style/Widget.ListView">
-    </style>
-    
-    <style name="MainMenuActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-		<!--<item name="android:windowActionBarOverlay">true</item>-->
-
-		<!-- Support library compatibility -->
-		<item name="windowActionBarOverlay">true</item>
-    </style>
-
-	<style name="SettingsLightTheme" parent="Theme.AppCompat.Light">
-		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
-		<item name="android:textColorPrimary">@color/color_black</item>
-		<item name="android:textColorSecondary">@color/color_black</item>
-	</style>
-
-	<style name="SettingsDarkTheme" parent="Theme.AppCompat">
-		<item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-		<item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
-	</style>
-
-    <style name="DashboardLightTheme" parent="OsmandLightTheme">
-        <item name="windowActionBarOverlay">true</item>
-    </style>
-
-    <style name="DashboardDarkTheme" parent="OsmandDarkTheme">
-        <item name="windowActionBarOverlay">true</item>
-    </style>
-
+	<!-- Osmand themes styles -->
 	<style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
 	    <item name="ic_action_overflow">@drawable/ic_overflow_menu_light</item>
 		<item name="options_button_background">@drawable/dashboard_button_light</item>
@@ -130,23 +61,15 @@
         <item name="pstsIndicatorColor">@color/color_white</item>
         <item name="pstsTextColor">@color/color_white</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionModeBackground">@color/actionbar_light_color</item>
-        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="card_bg_color">@color/card_bg_color_light</item>
 		<item name="card_bg">@drawable/bg_card_light</item>
-		<item name="dashboardGeneralButtonStyle">@style/DashboardGeneralButton.Light</item>
-		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Light</item>
 		<item name="dashboard_divider">@color/dashboard_divider_light</item>
 		<item name="dashboard_button">@drawable/dashboard_button_light</item>
-		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Light</item>
         <item name="search_background">@color/search_background_dark</item>
-        <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
-        <item name="android:actionModeStyle">@style/WhiteActionMode</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
-        <item name="android:actionMenuTextColor">@color/color_white</item>
         <item name="actionMenuTextColor">@color/color_white</item>
 		<item name="switch_ex_background">@drawable/switch_ex_background_light</item>
 		<item name="switch_ex_text_color">@color/switch_ex_button_text_light</item>
@@ -159,9 +82,20 @@
 		<item name="size_progress_bar">@drawable/size_progressbar_light</item>
 		<item name="dash_parking_bg">@drawable/dash_parking_light</item>
 		<item name="osmo_header_background">@color/osmo_header_light</item>
+		<item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_light</item>
+        <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_light</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
+        <item name="android:textColorPrimary">@color/color_black</item>
+        <item name="spinnerItemTextColor">@color/color_white</item>
+		
+		<item name="android:actionModeBackground">@color/actionbar_light_color</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
+        <item name="android:actionModeStyle">@style/WhiteActionMode</item>
+        <item name="android:actionMenuTextColor">@color/color_white</item>
 	</style>
-
-    <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+	
+	    <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="ic_action_overflow">@drawable/ic_overflow_menu_dark</item>
 		<item name="options_button_background">@drawable/dashboard_button_dark</item>
 		<item name="list_divider">@color/list_divider_light</item>
@@ -172,17 +106,12 @@
         <item name="pstsUnderlineColor">@color/actionbar_dark_color</item>
         <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
         <item name="pstsTextColor">@color/color_white</item>
-        <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
-        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
 		<item name="card_bg">@drawable/bg_card_dark</item>
 		<item name="card_bg_color">@color/card_bg_color_dark</item>
-		<item name="dashboardGeneralButtonStyle">@style/DashboardGeneralButton.Dark</item>
-		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Dark</item>
 		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
 		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
-		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Dark</item>
 		<item name="search_background">@color/color_white</item>
 		<item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
 		<item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
@@ -195,8 +124,20 @@
 		<item name="size_progress_bar">@drawable/size_progressbar_dark</item>
 		<item name="dash_parking_bg">@drawable/dash_parking_dark</item>
 		<item name="osmo_header_background">@color/osmo_header_dark</item>
+		<item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
+		<item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark</item>
+		<item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
+		<item name="android:textColorPrimary">@color/color_white</item>
+		<item name="spinnerItemTextColor">@color/color_white</item>
+		
+		
+		<item name="android:actionModeBackground">@color/actionbar_dark_color</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
 	</style>
-
+	
+    
+	
+    <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/actionbar_dark_color</item>
         <item name="android:background">@color/actionbar_dark_color</item>
@@ -205,14 +146,13 @@
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
-        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
 		<item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-		<item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
 		<item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-		<item name="android:actionDropDownStyle">@style/ActionBarDropDownLight</item>
-		<item name="actionDropDownStyle">@style/ActionBarDropDownLight</item>
-		<item name="android:actionBarWidgetTheme">@style/ActionBarWidgetLight</item>
-		<item name="actionBarWidgetTheme">@style/ActionBarWidgetLight</item>
+		<item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
+		
+		<item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+		<item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
@@ -220,32 +160,14 @@
     </style>
 
 	<style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
-		<item name="android:titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
 		<item name="titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
+		<item name="android:titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
 	</style>
 
 	<style name="WhiteActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
 		<item name="android:textColor">@color/color_white</item>
 	</style>
-
-	<style name="ActionBarWidgetLight" parent="@style/Theme.AppCompat">
-		<item name="android:spinnerDropDownItemStyle">@style/ActionBarDropDownSpinnerLight</item>
-	</style>
-
-	<style name="ActionBarDropDownLight" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
-		<item name="background">@color/actionbar_light_color</item>
-		<item name="android:background">@color/actionbar_light_color</item>
-		<item name="android:popupBackground">@color/actionbar_light_color</item>
-	</style>
-
-	<style name="ActionBarDropDownSpinnerLight" parent="Widget.AppCompat.DropDownItem.Spinner">
-		<item name="android:textAppearance">@style/ActionBarDropDownTextLight</item>
-	</style>
-
-	<style name="ActionBarDropDownTextLight" parent="TextAppearance.AppCompat.Widget.DropDownItem">
-		<item name="android:textColor">@color/color_white</item>
-	</style>
-
+	
 	<!-- Dialog popup -->
 	<style name="Animations" />
 	<!-- PopDownMenu -->

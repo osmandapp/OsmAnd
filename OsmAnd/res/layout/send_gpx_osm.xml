@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/DescriptionTextTop"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"

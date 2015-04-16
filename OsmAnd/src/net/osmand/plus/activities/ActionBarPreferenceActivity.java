@@ -1,8 +1,9 @@
 package net.osmand.plus.activities;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import android.app.Activity;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -13,9 +14,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 
 public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 	private Toolbar tb;
@@ -25,16 +23,15 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 		return tb;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		//settings needed it's own theme because of check boxes not styled properly
 		OsmandSettings settings = ((OsmandApplication)getApplication()).getSettings();
-		int t = R.style.SettingsLightTheme;
+		int t = R.style.OsmandLightTheme;
 		if (settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = R.style.SettingsDarkTheme;
+			t = R.style.OsmandDarkTheme;
 		} else if (settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = R.style.SettingsLightTheme;
+			t = R.style.OsmandLightTheme;
 		}
 		setTheme(t);
 		super.onCreate(savedInstanceState);

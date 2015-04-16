@@ -17,7 +17,6 @@
 
 	<TextView
 		android:id="@+id/category_name"
-		style="@style/ListText"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
@@ -26,7 +25,7 @@
 		android:layout_weight="1"
 		android:maxLines="1"
 		android:textColor="?android:textColorPrimary"
-		android:textSize="18sp"
+		android:textSize="@dimen/default_list_text_size"
 		tools:text="@string/lorem_ipsum"/>
 
 	<include layout="@layout/check_item_rel"/>

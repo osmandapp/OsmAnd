@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="16sp"
+        android:textSize="@dimen/default_list_text_size"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:textStyle="bold" />

@@ -188,7 +188,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 
 	private void setTopSpinner() {
-		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), android.R.layout.simple_spinner_item,
+		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_item,
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
 						getString(R.string.search_position_current_location),
@@ -197,7 +197,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 						getString(R.string.search_position_address)
 					}))
 				);
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override

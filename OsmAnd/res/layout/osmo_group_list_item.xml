@@ -19,7 +19,7 @@
 
 	<TextView
 		android:id="@+id/osmo_label"
-		style="@style/ListText"
+		android:textSize="@dimen/default_list_text_size_large"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="10dp"
@@ -30,7 +30,7 @@
 
 	<TextView
 		android:id="@+id/osmo_label_time"
-		style="@style/ListText.Small"
+		android:textSize="@dimen/default_list_text_size"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="3dp"/>
