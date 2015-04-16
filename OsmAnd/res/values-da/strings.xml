@@ -1780,7 +1780,7 @@
     
 	<string name="osmo_use_https_descr">Brug sikker forbindelse til server</string>
     <string name="osmo_use_https">Brug HTTPS</string>
-	<string name="home_button">Start</string>
+	<string name="home_button">Hjem</string>
     <string name="search_for">Søg efter</string>
 	
 	<string name="coordinates">Koordinater</string>
