@@ -140,13 +140,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					boolean has = q.moveToFirst() && (getLastTrackPointTime() > 0L);
 					q.close();
 					if (has) {
-						return true;
+					//	return true;
 					}
 					q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
 					has = q.moveToFirst() && (getLastTrackPointTime() > 0L);
 					q.close();
 					if (has) {
-						return true;
+					//	return true;
 					}
 				} finally {
 					db.close();
