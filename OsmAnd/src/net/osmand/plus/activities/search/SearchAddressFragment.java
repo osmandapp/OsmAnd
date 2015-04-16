@@ -10,6 +10,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
@@ -305,24 +306,20 @@ public class SearchAddressFragment extends Fragment {
 		
 		public static AddressInformation build2StreetIntersection(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
-			String postcode = settings.getLastSearchedPostcode();
-			String city = settings.getLastSearchedCityName();
-			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
+			String cityName = getCityName(settings);
 			ai.objectName = settings.getLastSearchedStreet() +" x " +
  					settings.getLastSearchedIntersectedStreet() + " " + cityName;
-			ai.objectType = ctx.getString(R.string.search_address_street_option);
+			ai.objectType = cityName;
 			ai.zoom = 17;
 			return ai;
 		}
 		
 		public static AddressInformation buildStreet(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
-			String postcode = settings.getLastSearchedPostcode();
-			String city = settings.getLastSearchedCityName();
-			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
+			String cityName = getCityName(settings);
 			String street = settings.getLastSearchedStreet();
-			ai.objectName = cityName + ", " + street;
-			ai.objectType = ctx.getString(R.string.search_address_street);
+			ai.objectName = street;
+			ai.objectType = cityName;
 			ai.zoom = 16;
 			return ai;
 		}
@@ -330,22 +327,32 @@ public class SearchAddressFragment extends Fragment {
 		
 		public static AddressInformation buildBuilding(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
+			String cityName = getCityName(settings);
+			String street = settings.getLastSearchedStreet();
+			String building = settings.getLastSearchedBuilding();
+			ai.objectName = street + " " + building;
+			ai.objectType = cityName;
+			ai.zoom = 17;
+			return ai;
+		}
+
+		private static String getCityName(OsmandSettings settings) {
 			String postcode = settings.getLastSearchedPostcode();
 			String city = settings.getLastSearchedCityName();
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
-			String street = settings.getLastSearchedStreet();
-			String building = settings.getLastSearchedBuilding();
-			ai.objectName = cityName+", "+ street + " " + building;
-			ai.objectType = ctx.getString(R.string.search_address_building);;
-			ai.zoom = 17;
-			return ai;
+			return cityName;
+		}
+
+		private static String getRegionName(Context ctx, OsmandSettings settings) {
+			return FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) ctx.getApplicationContext())
+					.getResourceManager().getOsmandRegions(), settings.getLastSearchedRegion());
 		}
 		
 		public static AddressInformation buildCity(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String city = settings.getLastSearchedCityName();
 			ai.objectName = city;
-			ai.objectType = ctx.getString(R.string.search_address_city);
+			ai.objectType = getRegionName(ctx, settings);
 			ai.zoom = 14;
 			return ai;
 		}
@@ -361,19 +368,19 @@ public class SearchAddressFragment extends Fragment {
 		if (!Algorithms.isEmpty(street2) && !Algorithms.isEmpty(street)) {
 			ai = AddressInformation.build2StreetIntersection(getActivity(), osmandSettings);
 			pointDescription.setName(street2);
-			pointDescription.setTypeName(region + ", " + city);
+			pointDescription.setTypeName(getRegionName() + ", " + city);
 		} else if (!Algorithms.isEmpty(building)) {
 			ai = AddressInformation.buildBuilding(getActivity(), osmandSettings);
 			pointDescription.setName(street + ", " + building);
-			pointDescription.setTypeName(region + ", " + city);
+			pointDescription.setTypeName(getRegionName() + ", " + city);
 		} else if (!Algorithms.isEmpty(street)) {
 			ai = AddressInformation.buildStreet(getActivity(), osmandSettings);
 			pointDescription.setName(street);
-			pointDescription.setTypeName(region + ", " + city);
+			pointDescription.setTypeName(getRegionName() + ", " + city);
 		} else if(!Algorithms.isEmpty(city)) {
 			ai = AddressInformation.buildCity(getActivity(), osmandSettings);
 			pointDescription.setName(city);
-			pointDescription.setTypeName(region);
+			pointDescription.setTypeName(getRegionName());
 		}
 
 		if(mode == ADD_TO_FAVORITE) {
@@ -430,7 +437,8 @@ public class SearchAddressFragment extends Fragment {
 		if(Algorithms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
 		} else {
-			countryButton.setText(region.replace('_', ' '));
+			String rnname = getRegionName();
+			countryButton.setText(rnname);
 		}
 
 		findViewById(R.id.ResetCity).setEnabled(!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
@@ -462,6 +470,13 @@ public class SearchAddressFragment extends Fragment {
 			((RadioButton)findViewById(R.id.RadioIntersStreet)).setChecked(true);
 		}
 		updateBuildingSection();
+	}
+
+
+
+	private String getRegionName() {
+		return FileNameTranslationHelper.getFileName(getActivity(),
+				((OsmandApplication) getActivity().getApplication()).getResourceManager().getOsmandRegions(), region);
 	}
 	
 	public void loadData() {

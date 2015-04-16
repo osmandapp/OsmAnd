@@ -3,6 +3,7 @@
 
 	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
+	<color name="recording_color">#F44336</color>
 
 	<color name="dash_search_icon_light">#536DFE</color>
 	<color name="dash_search_icon_dark">#606E78</color>

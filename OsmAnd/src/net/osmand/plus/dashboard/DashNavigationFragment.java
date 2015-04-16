@@ -103,7 +103,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 	private void updatePlayButton(final RoutingHelper routingHelper, final MapActivity map, final ImageView play) {
 		boolean toContinueNavigation = routingHelper.isRoutePlanningMode();
 		play.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(
-				toContinueNavigation? R.drawable.ic_play_dark : R.drawable.ic_action_rec_stop ) 
+				toContinueNavigation? R.drawable.ic_play_dark : R.drawable.ic_pause ) 
 				);
 		play.setContentDescription(getString(toContinueNavigation ? R.string.continue_navigation :
 			R.string.pause_navigation));
