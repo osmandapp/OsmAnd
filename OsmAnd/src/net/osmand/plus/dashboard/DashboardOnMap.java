@@ -788,8 +788,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		
 		if (actionButton != null && portrait && isActionButtonVisible()) {
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
-			int originalPosition = (int) (160 * scale);
-			int minTop = (int) (65 * scale);
+			int originalPosition = mFlexibleSpaceImageHeight - (int) (80 * scale);
+			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
 			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
 			if (minTop > originalPosition - scrollY) {
 				actionButton.hide();
