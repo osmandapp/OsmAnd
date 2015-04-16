@@ -101,7 +101,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			}
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
-					getActivity(), point.getColor()));
+					getActivity(), point.getColor(), 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);

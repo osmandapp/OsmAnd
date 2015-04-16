@@ -72,14 +72,14 @@ public class PointDescription {
 	}
 
 	@NonNull
-	public String getSimpleName(Context ctx, double lat, double lon) {
+	public String getSimpleName(Context ctx, double lat, double lon, boolean addTypeName) {
 		if (isLocation()) {
 			return getLocationName(ctx, lat, lon, true).replace('\n', ' ');
 		}
 		if (!Algorithms.isEmpty(typeName)) {
 			if (Algorithms.isEmpty(name)) {
 				return typeName;
-			} else {
+			} else if(addTypeName){
 				return typeName.trim() + ": " + name;
 			}
 		}
@@ -182,7 +182,7 @@ public class PointDescription {
 	
 	public static String getSimpleName(LocationPoint o, Context ctx) {
 		PointDescription pd = o.getPointDescription(ctx);
-		return pd.getSimpleName(ctx, o.getLatitude(), o.getLongitude());
+		return pd.getSimpleName(ctx, o.getLatitude(), o.getLongitude(), true);
 //		return o.getPointDescription(ctx).getFullPlainName(ctx, o.getLatitude(), o.getLongitude());
 	}
 

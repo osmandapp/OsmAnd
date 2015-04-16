@@ -113,8 +113,8 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			cache.add(o);
 			int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor());
-			fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
+			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), tileBox.getDensity());
+			fid.drawBitmapInCenter(canvas, x, y);
 //					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
 //							y - favoriteIcon.getHeight(), paint);
 		}

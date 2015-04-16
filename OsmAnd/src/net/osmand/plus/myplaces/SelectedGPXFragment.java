@@ -426,7 +426,7 @@ public class SelectedGPXFragment extends ListFragment {
 					if(groupColor == 0) {
 						groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
 					}
-					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor));
+					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor, 0));
 				}
 			}
 			row.setTag(child);

@@ -253,13 +253,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				for (WptPt o : pts) {
 					boolean visit = isPointVisited(o);
 					int pointColor = visit ? visitedColor : o.getColor(fcolor);
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor);
+					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, 
+							tileBox.getDensity());
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
 						cache.add(o);
 						int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
 						int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
-						fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
+						fid.drawBitmapInCenter(canvas, x, y);
 //							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
 //									y - favoriteIcon.getHeight(), paint);
 					}

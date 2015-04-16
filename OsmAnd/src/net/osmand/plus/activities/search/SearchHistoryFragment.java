@@ -252,7 +252,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		}
 		distanceText.setText(distance);
 		PointDescription pd = historyEntry.getName();
-		nameText.setText(pd.getSimpleName(activity, historyEntry.getLat(), historyEntry.getLon()), BufferType.SPANNABLE);
+		nameText.setText(pd.getSimpleName(activity, historyEntry.getLat(), historyEntry.getLon(), false), BufferType.SPANNABLE);
 		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
 
 		if (historyEntry.getName().isAddress()) {
@@ -277,7 +277,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 		String typeName = historyEntry.getName().getTypeName();
 		if (typeName != null && !typeName.isEmpty()) {
-			ImageView group = (ImageView)row.findViewById(R.id.type_name_icon);
+			ImageView group = (ImageView) row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);
 			group.setImageDrawable(ic.getContentIcon(R.drawable.ic_small_group));
 			((TextView) row.findViewById(R.id.type_name)).setText(typeName);

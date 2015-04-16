@@ -680,7 +680,7 @@ public class WaypointHelper {
 					R.drawable.list_intermediate;
 				return uiCtx.getResources().getDrawable(i);
 			} else if(type == FAVORITES || type == WAYPOINTS) {
-				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), 0);
 			} else if(type == ALARMS) {
 				//assign alarm list icons manually for now
 				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {

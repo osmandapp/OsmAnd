@@ -793,7 +793,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor()));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor(), 0));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));

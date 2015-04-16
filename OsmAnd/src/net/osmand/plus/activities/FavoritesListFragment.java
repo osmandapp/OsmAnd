@@ -212,7 +212,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor()));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), 0));
 			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude(), screenOrientation, app, activity);
 			

@@ -111,6 +111,21 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	
 	public void setFilterByName(String filterByName) {
 		this.filterByName = filterByName;
+		updateFilterResults();
+	}
+	
+	public void updateFilterResults() {
+		List<Amenity> prev = currentSearchResult;
+		if(prev != null) {
+			AmenityNameFilter nameFilter = getNameFilter(filterByName);
+			List<Amenity> newResults = new ArrayList<Amenity>();
+			for(Amenity a : prev) {
+				if(nameFilter.accept(a)) {
+					newResults.add(a);
+				}
+			}
+			currentSearchResult = newResults;
+		}
 	}
 	
 	public void setSavedFilterByName(String filterByName) {

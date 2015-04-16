@@ -161,6 +161,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandSettings settings = app.getSettings();
+				filter.setFilterByName(searchFilter.getText().toString().trim());
 				settings.setPoiFilterForMap(filter.getFilterId());
 				settings.SHOW_POI_OVER_MAP.set(true);
 				if (location != null) {
@@ -171,6 +172,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 			}
 		});
+		showOnMapItem.setEnabled(!isNameSearch() || amenityAdapter.getCount() > 0);
 		if (filter != null && !isNameSearch()) {
 			createMenuItem(omenu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, R.drawable.ic_action_gsave_dark,
 					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -483,11 +485,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		if (handled) {
 			this.location = location;
-			amenityAdapter.notifyDataSetInvalidated();
 			ListView lv = getListView();
 			final int index = lv.getFirstVisiblePosition();
 			View v = lv.getChildAt(0);
 			final int top = (v == null) ? 0 : v.getTop();
+			amenityAdapter.notifyDataSetChanged();
 			lv.setSelectionFromTop(index, top);
 			updateButtonState();
 		}
