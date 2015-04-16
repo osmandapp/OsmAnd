@@ -17,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -105,7 +104,11 @@ public class UpdatesIndexFragment extends ListFragment {
 		updateHeader();
 		if (indexItems.size() == 0) {
 			indexItems.clear();
-			indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
+			if (DownloadActivity.downloadListIndexThread.isDownloadedFromInternet()) {
+				indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
+			} else {
+				indexItems.add(new IndexItem(getString(R.string.no_index_file_to_download), "", 0, "", 0, 0, null));
+			}
 		}
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
@@ -267,7 +270,8 @@ public class UpdatesIndexFragment extends ListFragment {
 			TextView updateDescr = (TextView) v.findViewById(R.id.update_descr);
 			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 			IndexItem e = items.get(position);
-			if (e.getFileName().equals(getString(R.string.everything_up_to_date))) {
+			if (e.getFileName().equals(getString(R.string.everything_up_to_date)) ||
+					e.getFileName().equals(getString(R.string.no_index_file_to_download))) {
 				name.setText(e.getFileName());
 				description.setText("");
 				ch.setVisibility(View.INVISIBLE);
