@@ -142,8 +142,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if (has) {
 						return true;
 					}
-					q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+					q = db.query(false, POINT_NAME, new String[]{POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
 					has = q.moveToFirst();
+					while(has) {
+						if(q.getDouble(0) != 0 || q.getDouble(1) != 0) {
+							break;
+						}
+						if(!q.moveToNext()) {
+							has = false;
+							break;
+						}
+					}
 					q.close();
 					if (has) {
 						return true;
