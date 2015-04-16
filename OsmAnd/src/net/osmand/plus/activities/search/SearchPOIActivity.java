@@ -107,9 +107,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	private boolean searchNearBy = false;
 	private net.osmand.Location location = null;
+	private net.osmand.Location lastSearchedLocation = null;
 	private Float heading = null;
 
 	private SearchAmenityTask currentSearchTask = null;
+	
 	private OsmandApplication app;
 	private MenuItem showFilterItem;
 	private MenuItem showOnMapItem;
@@ -461,7 +463,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public void updateLocation(net.osmand.Location location) {
 		boolean handled = false;
 		if (location != null && filter != null) {
-			net.osmand.Location searchedLocation = currentSearchTask == null ? null : currentSearchTask.getSearchedLocation();
+			net.osmand.Location searchedLocation = lastSearchedLocation;
 			if (searchedLocation == null) {
 				if (!isNameSearch()) {
 					runNewSearchQuery(location, NEW_SEARCH_INIT);
@@ -593,16 +595,16 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		private int requestType;
 		private TLongHashSet existingObjects = null;
 		private TLongHashSet updateExisting;
-		private Location location;
+		private Location searchLocation;
 
 		public SearchAmenityTask(net.osmand.Location location, int requestType) {
-			this.location = location;
+			this.searchLocation = location;
 			this.requestType = requestType;
 
 		}
 
 		net.osmand.Location getSearchedLocation() {
-			return location ;
+			return searchLocation ;
 		}
 
 		@Override
@@ -644,6 +646,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			} else {
 				amenityAdapter.setNewModel(result);
 			}
+			lastSearchedLocation = searchLocation;
 			
 		}
 
@@ -656,14 +659,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		@Override
 		protected List<Amenity> doInBackground(Void... params) {
-			if (location != null) {
+			if (searchLocation != null) {
 				if (requestType == NEW_SEARCH_INIT) {
-					return filter.initializeNewSearch(location.getLatitude(), location.getLongitude(),
+					return filter.initializeNewSearch(searchLocation.getLatitude(), searchLocation.getLongitude(),
 							-1, this);
 				} else if (requestType == SEARCH_FURTHER) {
-					return filter.searchFurther(location.getLatitude(), location.getLongitude(), this);
+					return filter.searchFurther(searchLocation.getLatitude(), searchLocation.getLongitude(), this);
 				} else if (requestType == SEARCH_AGAIN) {
-					return filter.searchAgain(location.getLatitude(), location.getLongitude());
+					return filter.searchAgain(searchLocation.getLatitude(), searchLocation.getLongitude());
 				}
 			}
 			return Collections.emptyList();
