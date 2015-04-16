@@ -247,7 +247,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			items.add(R.string.save_current_track);
 		}
 		String[] strings = new String[items.size()];
-		for(int i =0; i < strings.length; i++) {
+		for (int i = 0; i < strings.length; i++) {
 			strings[i] = app.getString(items.get(i));
 		}
 		final int[] holder = new int[] {0};
@@ -322,13 +322,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void startGPXMonitoring(Activity map) {
-		app.getSavingTrackHelper().startNewSegment();
 		final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 		final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
 		choice.value = settings.SAVE_GLOBAL_TRACK_REMEMBER.get();
 		final Runnable runnable = new Runnable() {
 			public void run() {
+				app.getSavingTrackHelper().startNewSegment();
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
