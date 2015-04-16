@@ -454,7 +454,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return true;
 		}
 		selectedItems.add(child);
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 		return true;
 	}
 	
