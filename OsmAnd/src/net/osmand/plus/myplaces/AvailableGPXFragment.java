@@ -826,7 +826,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			checkItem.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectedGpxHelper.selectGpxFile(child.gpx, !isChecked, true);
+					selectedGpxHelper.selectGpxFile(child.gpx, !isChecked, false);
 					notifyDataSetChanged();
 				}
 			});

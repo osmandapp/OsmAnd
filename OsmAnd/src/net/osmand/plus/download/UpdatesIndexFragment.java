@@ -1,5 +1,17 @@
 package net.osmand.plus.download;
 
+import java.text.MessageFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,18 +29,6 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-
-import java.text.MessageFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Denis
@@ -292,7 +292,7 @@ public class UpdatesIndexFragment extends ListFragment {
 			Map<String, String> indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
 			String dt = indexActivatedFileNames.get(sfName);
 			updateDescr.setText("");
-			if(dt != null ) {
+			if (dt != null) {
 				try {
 					Date tm = format.parse(dt);
 					long days = Math.max(1, (e.getTimestamp() -  tm.getTime()) / (24 * 60 * 60 * 1000) + 1);  
