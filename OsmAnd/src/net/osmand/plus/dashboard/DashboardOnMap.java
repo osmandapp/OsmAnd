@@ -579,6 +579,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
+		hideDashboard(true);
 	}
 
 
@@ -884,6 +885,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 //	                ab.show();
 //	            }
 //	        }		
+	}
+
+
+	public <T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {
+		for(WeakReference<DashBaseFragment> f: fragList) {
+			DashBaseFragment b = f.get();
+			if(b != null && !b.isDetached() && class1.isInstance(b)) {
+				return (T) b;
+			}
+		}
+		return null;
 	}
 
 
