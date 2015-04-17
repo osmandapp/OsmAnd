@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="filter_poi_hint">Filter by name</string>
+    <string name="search_poi_category_hint">Type to search all</string>
     <string name="shared_string_open">Open</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM mapper assistant</string>
 	<string name="agps_info">A-GPS info</string>

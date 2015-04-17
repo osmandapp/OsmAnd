@@ -35,7 +35,6 @@
             android:layout_gravity="bottom"
             android:layout_marginRight="@dimen/list_content_padding"
             android:layout_weight="1"
-            android:hint="@string/shared_string_search"
             android:maxLines="1"
             android:nextFocusLeft="@id/edit"
             android:nextFocusUp="@id/edit"

@@ -247,6 +247,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 		});
+		((EditText)findViewById(R.id.edit)).setHint(R.string.filter_poi_hint);
+        ((ImageView)findViewById(R.id.search_icon)).setImageDrawable(
+        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_filter_dark));
+		
 		findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
