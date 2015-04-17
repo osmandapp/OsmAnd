@@ -317,7 +317,7 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), false);
 				if (groups.size() > 0) {
 					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
 							: null);

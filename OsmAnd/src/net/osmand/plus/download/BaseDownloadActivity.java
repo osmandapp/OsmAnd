@@ -201,7 +201,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
 			} else {
-				AccessibleToast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
 			downloadFilesPreCheckSpace();

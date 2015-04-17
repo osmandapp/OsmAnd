@@ -372,8 +372,8 @@ public class GpxSelectionHelper {
 		return sf;
 	}
 	
-	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean showNavigationDialog) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, showNavigationDialog);
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		saveCurrentSelections();
 		return sf;
 	}
