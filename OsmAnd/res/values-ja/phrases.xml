@@ -480,4 +480,21 @@
 	<string name="poi_monument">モニュメント・記念碑(Monument)</string>
 	<string name="poi_aquarium">水族館(Aquarium)</string>
 	<string name="poi_attraction">観光名所(Tourist attraction)</string>
+	<string name="poi_charity">チャリティーショップ(Charity shop)</string>
+	<string name="poi_photo">写真屋(Photo shop)</string>
+	<string name="poi_sailing">セーリング(Sailing)</string>
+	<string name="poi_attraction_amusement_ride">遊園地の乗り物(Amusement ride)</string>
+	<string name="poi_attraction_animal">動物園(Animal [attraction])</string>
+	<string name="poi_attraction_big_wheel">観覧車(Ferris wheel)</string>
+	<string name="poi_attraction_carousel">回転木馬・メリーゴーランド(Carousel)</string>
+	<string name="poi_attraction_maze">迷路アトラクション(Maze)</string>
+	<string name="poi_attraction_roller_coaster">ジェットコースター(Roller coaster)</string>
+	<string name="poi_attraction_slide">滑り台(Slide)</string>
+	<string name="poi_attraction_summer_toboggan">サマーボブスレー(Summer toboggan)</string>
+	<string name="poi_attraction_swing_carousel">回転ブランコ(Swing carousel)</string>
+	<string name="poi_attraction_train">遊園地の列車(Train [attraction])</string>
+	<string name="poi_attraction_water_slide">ウォータースライダー(Water slide)</string>
+
+	<string name="poi_lodging">宿泊施設(Lodging)</string>
+	<string name="poi_guest_house">ゲストハウス(Guest house)</string>
 	</resources>
