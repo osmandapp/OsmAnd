@@ -520,4 +520,27 @@
 	<string name="poi_internet_access_public">インターネット有り・種別不明(Internet access: public)</string>
 	<string name="poi_internet_access_service">インターネット・接続サポート有り(Internet access: service)</string>
 	
+	<string name="poi_monastery">修道院(Monastery)</string>
+	<string name="poi_historic_monastery">歴史的修道院(Historic monastery)</string>
+	<string name="poi_wayside_cross">十字架(Wayside cross)</string>
+	<string name="poi_wayside_shrine">歴史的礼拝所・地蔵(Wayside shrine)</string>
+	<string name="poi_information">旅行案内所(Tourist information)</string>
+	<string name="poi_clock">時計(Clock)</string>
+	<string name="poi_travel_agent">旅行代理店(Travel agent)</string>
+	<string name="poi_viewpoint">展望台(Viewpoint)</string>
+	<string name="poi_camp_site">キャンプ場(Camp site)</string>
+	<string name="poi_caravan_site">トレーラーハウス駐車場・オートキャンプ場(Caravan site)</string>
+	<string name="poi_picnic_site">ピクニック場(Picnic site)</string>
+	<string name="poi_spring">泉(Spring)</string>
+	<string name="poi_hot_spring">温泉(Hot spring)</string>
+	<string name="poi_geyser">間欠泉(Geyser)</string>
+	<string name="poi_cemetery">霊園、墓園(Cemetery)</string>
+	<string name="poi_grave_yard">墓地(Graveyard)</string>
+	<string name="poi_tomb">墓(Tomb)</string>
+	<string name="poi_shelter">シェルター・避難所(Shelter)</string>
+	<string name="poi_funicular">ケーブルカー(Funicular)</string>
+	<string name="poi_resort">リゾート地(Resort)</string>
+
+	<string name="poi_club_art">芸術クラブ(Art club)</string>
+	<string name="poi_club_astronomy">天文クラブ(Astronomy club)</string>
 	</resources>
