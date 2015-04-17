@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -700,4 +701,52 @@
 	<string name="driving_region_uk">Iso Britannia, Intia, Australia ja muut</string>
 	<string name="amenity_type_seamark">Merimerkki</string>
     <string name="app_modes_choose_descr">Valitse näkyvät profiilit</string>
-    </resources>
+    <string name="shared_string_open">Avaa</string>
+    <string name="shared_string_edit">Muokkaa</string>
+	<string name="shared_string_places">Paikat</string>
+	<string name="shared_string_search">Etsi</string>
+	<string name="shared_string_show_description">Näytä kuvaus</string>
+	<string name="shared_string_message">Viesti</string>
+	<string name="confirm_usage_speed_cameras">Monissa maissa (Saksa, Ranska, Italia, ym.) nopeusvalvontakameroiden varoitukset eivät ole käytettävissä lakien vuoksi. OsmAnd ei ota vastuutaa mikäli rikot näitä lakeja. Valitse kyllä vain jos olet valtuutettu käyttämään ominaisuutta.</string>
+	<string name="welmode_download_maps">Lataa kartta</string>
+	<string name="welcome_header">Tervetuloa</string>
+    <string name="current_route">Nykyinen reitti</string>
+    <string name="mark_to_delete">Merkitse poistaaksesi</string>
+	<string name="shared_string_go">Mene</string>
+	<string name="shared_string_do_not_use">Älä käytä</string>
+	<string name="shared_string_dismiss">Unohda</string>
+	<string name="shared_string_next">Seuraava</string>
+	<string name="shared_string_enable">Ota käyttöön</string>
+	<string name="shared_string_disable">Pois käytöstä</string>
+	<string name="shared_string_enabled">Käytössä</string>
+	<string name="shared_string_disabled">Ei käytössä</string>
+	<string name="shared_string_or">tai</string>
+	<string name="shared_string_and">ja</string>
+	<string name="shared_string_select_on_map">Valitse kartalta</string>
+	<string name="shared_string_deselect">Poista valinta</string>
+	<string name="shared_string_deselect_all">Poista kaikki valinnat</string>
+	<string name="shared_string_save_as_gpx">Tallena GPX reittinä</string>
+	<string name="shared_string_delete_all">Poista kaikki</string>
+	<string name="shared_string_share">Jaa</string>
+	<string name="shared_string_export">Vie</string>
+	<string name="shared_string_control_start">Aloita</string>
+	<string name="shared_string_control_stop">Lopeta</string>
+	<string name="shared_string_more">Lisää…</string>
+	<string name="shared_string_more_actions">Lisää toimintoja</string>
+	<string name="shared_string_remember_my_choice">Muista valinta</string>
+	<string name="shared_string_download">Lataa</string>
+	<string name="shared_string_downloading">Lataus käynnissä</string>
+	<string name="shared_string_show">Näytä</string>
+	<string name="shared_string_show_all">Näytä kaikki</string>
+	<string name="shared_string_favorite">Suosikki</string>
+	<string name="shared_string_favorites">Suosikit</string>
+	<string name="shared_string_address">Osoite</string>
+	<string name="shared_string_my_location">Sijainti</string>
+	<string name="shared_string_my_places">Omat paikat</string>
+	<string name="shared_string_my_favorites">Omat suosikit</string>
+	<string name="shared_string_my_tracks">Reittini</string>
+	<string name="shared_string_audio">Ääni</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Kuva</string>
+	<string name="audionotes_plugin_name">Ääni/video muistiinpanot</string>
+	</resources>
