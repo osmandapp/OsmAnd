@@ -497,4 +497,27 @@
 
 	<string name="poi_lodging">宿泊施設(Lodging)</string>
 	<string name="poi_guest_house">ゲストハウス(Guest house)</string>
+	<string name="poi_hostel">ユースホステル(Hostel)</string>
+	<string name="poi_motel">ドライバー向け宿泊施設・モーターホテル(Motel)</string>
+	<string name="poi_alpine_hut">山小屋(Alpine hut)</string>
+	<string name="poi_chalet">コテージ・バンガロー(Chalet)</string>
+	<string name="poi_apartment">アパート・マンション(Apartment)</string>
+	<string name="poi_wilderness_hut">避難小屋(Wilderness hut)</string>
+
+	<string name="poi_place_of_worship">寺社・教会・モスク(Place of worship)</string>
+	<string name="poi_religion_christian">教会・礼拝堂：キリスト教(Place of worship: christian)</string>
+	<string name="poi_religion_jewish">礼拝所：ユダヤ教(Place of worship: jewish)</string>
+	<string name="poi_religion_muslim">モスク・礼拝堂(イスラム教)</string>
+	<string name="poi_religion_sikh">寺院：シク教(Place of worship: sikh)</string>
+	<string name="poi_religion_buddhist">寺院：仏教(Place of worship: buddhist)</string>
+	<string name="poi_religion_hindu">寺院：ヒンドゥー教(Place of worship: hindu)</string>
+	<string name="poi_religion_shinto">神社・大社：神道(Place of worship: shinto)</string>
+	<string name="poi_religion_taoist">寺院：道教(Place of worship: taoist)</string>
+
+	<string name="poi_internet_access_wlan">インターネット・無線LAN有り(Internet access: wlan)</string>
+	<string name="poi_internet_access_terminal">インターネット・接続端末有り(Internet access: terminal)</string>
+	<string name="poi_internet_access_wired">インターネット・有線接続有り(Internet access: wired)</string>
+	<string name="poi_internet_access_public">インターネット有り・種別不明(Internet access: public)</string>
+	<string name="poi_internet_access_service">インターネット・接続サポート有り(Internet access: service)</string>
+	
 	</resources>
