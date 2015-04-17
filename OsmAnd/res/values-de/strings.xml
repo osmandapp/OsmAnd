@@ -2093,4 +2093,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
-	</resources>
+	<string name="shared_string_open">Öffnen</string>
+    </resources>
