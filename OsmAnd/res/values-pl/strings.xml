@@ -1803,7 +1803,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Wejdź do grupy przez zaproszenie</string>
-    <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.↵\n - Grupa może posiadać do 16 zarejestrowanych osób.↵\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.↵\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.↵\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.\n - Prywatne grupy są ograniczone do 8 osób.\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
     <string name="osmo_group_information">Przeczytaj przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie powiodło się logowanie do OsMo</string>
     <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
