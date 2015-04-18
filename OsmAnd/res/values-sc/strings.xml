@@ -1944,4 +1944,5 @@
     <string name="shared_string_manage">Amministra</string>
 	<string name="shared_string_edit">Modìfica</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">Assistente mapadura OSM</string>
-	</resources>
+	<string name="filter_poi_hint">Filtra pro nùmene</string>
+    </resources>
