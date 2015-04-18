@@ -612,4 +612,28 @@
 	<string name="poi_radar">Radar</string>
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_team_handball">Handball</string>
-  </resources>
+  <string name="poi_shop">Geschäft</string>
+		<string name="poi_shop_food">Lebensmittel</string>
+	<string name="poi_emergency">Notfall</string>
+	<string name="poi_road_obstacle">Straßemhindernis</string>
+		<string name="poi_filling_station">Tankstelle</string>
+		<string name="poi_public_transport">ÖPNV</string>
+		<string name="poi_man_made">von Menschenhand</string>
+		<string name="poi_water_supply">Wasserversorgung</string>
+		<string name="poi_communication">Kommunikation</string>
+		<string name="poi_trash_disposal">Entsorgung</string>
+		<string name="poi_landuse">Landnutzung</string>
+	<string name="poi_education">Bildung</string>
+	<string name="poi_administrative">Verwaltung</string>
+	<string name="poi_healthcare">Gesundheitsektor</string>
+	<string name="poi_office">Büro</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Tourismus</string>
+		<string name="poi_sightseeing">Sehenswürdigkeiten</string>
+		<string name="poi_accomodation">Unterkunft</string>
+		<string name="poi_internet_access">Internet-Zugang</string>
+	<string name="poi_entertainment">Freizeit</string>
+		<string name="poi_club">Club</string>
+	<string name="poi_sustenance">Gastronomie</string>
+	<string name="poi_cafe_and_restaurant">Cafe und Restaurant</string>
+	</resources>
