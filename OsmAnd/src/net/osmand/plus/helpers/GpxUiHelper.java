@@ -374,7 +374,7 @@ public class GpxUiHelper {
 				if(l1== null) {
 					l1 = 0l;
 				}
-				return l1 < l2 ? 1 : (l1 == l2 ? 0 : -1);
+				return l2.compareTo(l1);
 			}
 		});
 		return list;
