@@ -368,13 +368,9 @@ public class GpxUiHelper {
 			public int compare(String object1, String object2) {
 				Long l1 = mp.get(object1);
 				Long l2 = mp.get(object2);
-				if(l2 == null) {
-					l2 = 0l;
-				}
-				if(l1== null) {
-					l1 = 0l;
-				}
-				return l1 < l2 ? 1 : (l1 == l2 ? 0 : -1);
+				long lhs = l1 == null ? 0 : l1.longValue();
+				long rhs = l2 == null ? 0 : l2.longValue();
+				return lhs < rhs ? 1 : (lhs == rhs ? 0 : -1);
 			}
 		});
 		return list;
@@ -388,12 +384,7 @@ public class GpxUiHelper {
 		Collections.sort(list, new Comparator<String>() {
 			@Override
 			public int compare(String object1, String object2) {
-				if (object1.compareTo(object2) > 0) {
-					return -1;
-				} else if (object1.equals(object2)) {
-					return 0;
-				}
-				return 1;
+				return -object1.compareTo(object2);
 			}
 
 		});

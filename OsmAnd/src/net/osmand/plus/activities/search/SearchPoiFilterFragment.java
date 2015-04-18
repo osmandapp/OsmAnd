@@ -61,8 +61,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchpoi, container, false);
-        
         v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
+        ((EditText)v.findViewById(R.id.edit)).setHint(R.string.search_poi_category_hint);
+        ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
+        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
+        
         setupSearchEditText((EditText) v.findViewById(R.id.edit));
         setupOptions(v.findViewById(R.id.options));
         v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
