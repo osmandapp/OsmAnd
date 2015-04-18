@@ -454,7 +454,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	}
 	
 	private void fillPoiAdditionals(AbstractPoiType pt) {
-		for(PoiType add : pt.getPoiAdditionals()) {
+		for (PoiType add : pt.getPoiAdditionals()) {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
@@ -471,10 +471,12 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		while(e.hasNext()) {
 			Entry<PoiCategory, LinkedHashSet<String>> pc = e.next();
 			fillPoiAdditionals(pc.getKey());
-			if(pc.getValue() != null) {
-				for(String s : pc.getValue()) {
+			if (pc.getValue() != null) {
+				for (String s : pc.getValue()) {
 					PoiType subtype = poiTypes.getPoiTypeByKey(s);
-					fillPoiAdditionals(subtype);
+					if (subtype != null) {
+						fillPoiAdditionals(subtype);
+					}
 				}
 			}
 		}
@@ -504,7 +506,6 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 			acceptedTypes.remove(poiCategory);
 		}
 		updatePoiAdditionals();
-		
 	}
 	
 	public String getFilterId(){
