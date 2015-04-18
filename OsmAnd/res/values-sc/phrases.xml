@@ -643,5 +643,34 @@
 		<string name="poi_accomodation">Allògiu</string>
 		<string name="poi_smoking_area">Àrea fumatores</string>
 	<string name="poi_piste_playground">Parcu giogos</string>
-	<string name="poi_car_sharing"></string>
+	<string name="poi_car_sharing"/>
+	<string name="poi_photo">Butega de fotografia</string>
+	<string name="poi_fuel:diesel">Diesel</string>
+	<string name="poi_fuel:gtl_diesel">GTL diesel</string>
+	<string name="poi_fuel:hgv_diesel">HGV diesel</string>
+	<string name="poi_fuel:biodiesel">Bio diesel</string>
+	<string name="poi_fuel:lpg">LPG</string>
+	<string name="poi_fuel:ethanol">Etanolo</string>
+	<string name="poi_fuel:methanol">Metanolo</string>
+	<string name="poi_fuel:lh2">Idrògenu lìcuidu</string>
+	<string name="poi_fuel:electricity">Eletritzidade</string>
+	<string name="poi_rest_area">Logu de pasada</string>
+
+	<string name="poi_industrial">Àrea industriale</string>
+	<string name="poi_forest">Padente artifitziale o amministrada dae sas pessones</string>
+	<string name="poi_meadow">Pradu</string>
+	<string name="poi_canal">Canale</string>
+	<string name="poi_reservoir">Lagu artifitziale</string>
+	<string name="poi_gasometer">Gasòmetru</string>
+	<string name="poi_silo">Lòssia</string>
+	<string name="poi_storage_tank">Serbatòiu</string>
+
+	<string name="poi_training">Istrutura de addestramentu</string>
+	<string name="poi_quarter">Bighinadu</string>
+	<string name="poi_residential">Àrea de residèntzia</string>
+
+	<string name="poi_handball">Botza-manu (Pallamanu)</string>
+	<string name="poi_tomb">Tumba/losa</string>
+	<string name="poi_water">Abba</string>
+	<string name="poi_wood">Linna</string>
 	</resources>
