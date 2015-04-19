@@ -10,7 +10,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/TopBar"
+            android:id="@+id/app_modes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
                 android:id="@+id/avoid_roads"
                 android:layout_width="@dimen/list_item_height"
                 android:layout_height="@dimen/list_item_height"
-                android:background="@drawable/dashboard_button_light"
+                android:background="?attr/dashboard_button"
                 android:scaleType="center"
                 android:src="@drawable/ic_action_road_works_dark" />
 
@@ -36,7 +36,7 @@
                 android:id="@+id/mute"
                 android:layout_width="@dimen/list_item_height"
                 android:layout_height="@dimen/list_item_height"
-                android:background="@drawable/dashboard_button_light"
+                android:background="?attr/dashboard_button"
                 android:scaleType="center"
                 android:src="@drawable/ic_action_volume_off" />
         </LinearLayout>
@@ -85,4 +85,6 @@
         android:layout_marginTop="5dp" >
     </ListView>
 
+    <include layout="@layout/map_route_prepare_bottom" />
+    
 </LinearLayout>

@@ -9,6 +9,7 @@
         <attr name="bottomToolBarColor" format="color" />
 		<attr name="downloadButtonBackground" format="reference" />
 		<attr name="card_bg" format="reference" />
+		<attr name="btn_flat_bg" format="reference" />
 		<attr name="card_bg_color" format="reference" />
 		<attr name="ic_action_overflow" format="reference" />
 		<attr name="options_button_background" format="reference"/>

@@ -11,7 +11,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -44,8 +43,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -280,7 +279,6 @@ public class MapRoutePreferencesControl {
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				final LocalRoutingParameter rp = getItem(position);
 				tv.setText(rp.getText(mapActivity));
-				tv.setPadding((int) (5 * scaleCoefficient), 0, 0, 0);
 				if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
 					// if short route settings - it should be inverse of fast_route_mode
 					ch.setChecked(!settings.FAST_ROUTE_MODE.get());
@@ -308,7 +306,7 @@ public class MapRoutePreferencesControl {
 		};
 
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				(ViewGroup) settingsDlg.findViewById(R.id.TopBar), true, new View.OnClickListener() {
+				(ViewGroup) settingsDlg.findViewById(R.id.app_modes), true, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {

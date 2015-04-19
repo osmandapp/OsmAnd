@@ -57,7 +57,7 @@ public abstract class OsmandMapLayer {
 		private final boolean updateVectorRendering;
 
 		public DrawSettings(boolean nightMode) {
-			this(nightMode,false);
+			this(nightMode, false);
 		}
 
 		public DrawSettings(boolean nightMode, boolean updateVectorRendering) {

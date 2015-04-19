@@ -192,50 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:id="@+id/map_route_preparation_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/map_route_buttons_height"
-            android:layout_gravity="bottom" >
-
-            <ImageButton
-                android:id="@+id/map_cancel_route_button"
-                android:layout_width="@dimen/map_route_buttons_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_test_light" />
-
-            <ImageButton
-                android:id="@+id/map_waypoints_route_button"
-                android:layout_width="@dimen/map_route_buttons_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_test_light" />
-
-            <ImageButton
-                android:id="@+id/map_options_route_button"
-                android:layout_width="@dimen/map_route_buttons_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_flat"
-                android:src="@drawable/ic_action_test_light" />
-
-            <TextView
-                android:id="@+id/map_go_route_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_flat"
-                android:drawableLeft="@drawable/ic_action_test_light"
-                android:drawablePadding="4dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="12dp"
-                android:textSize="@dimen/default_list_text_size"
-                android:textStyle="bold" />
-        </LinearLayout>
-
+        <include layout="@layout/map_route_prepare_bottom"/>
         <LinearLayout
             android:id="@+id/map_context_menu_layout"
             android:layout_width="match_parent"

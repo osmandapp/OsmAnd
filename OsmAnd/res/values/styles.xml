@@ -7,6 +7,22 @@
     	<item name="android:windowContentOverlay">@null</item>
     	<item name="android:backgroundDimEnabled">false</item>
 	</style>
+	
+	<style name="Dialog_Fullscreen_Dark" parent="OsmandDarkTheme"> 
+		<item name="android:windowNoTitle">true</item> 
+		<item name="android:windowIsTranslucent">true</item>
+    	<item name="android:windowBackground">@color/color_transparent</item>
+    	<item name="android:windowContentOverlay">@null</item>
+    	<item name="android:backgroundDimEnabled">false</item>
+	</style>
+	
+	<style name="Dialog_Fullscreen_Light" parent="OsmandLightTheme"> 
+		<item name="android:windowNoTitle">true</item> 
+		<item name="android:windowIsTranslucent">true</item>
+    	<item name="android:windowBackground">@color/color_transparent</item>
+    	<item name="android:windowContentOverlay">@null</item>
+    	<item name="android:backgroundDimEnabled">false</item>
+	</style>
     
     <style name="OsmandListView" parent="@android:style/Widget.ListView">
     </style>
@@ -60,6 +76,7 @@
         <item name="pstsUnderlineColor">@color/actionbar_light_color</item>
         <item name="pstsIndicatorColor">@color/color_white</item>
         <item name="pstsTextColor">@color/color_white</item>
+        <item name="btn_flat_bg">@drawable/btn_flat</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -106,6 +123,7 @@
         <item name="pstsUnderlineColor">@color/actionbar_dark_color</item>
         <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
         <item name="pstsTextColor">@color/color_white</item>
+        <item name="btn_flat_bg">@drawable/btn_flat_night</item>
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
 		<item name="card_bg">@drawable/bg_card_dark</item>

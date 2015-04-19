@@ -45,7 +45,7 @@
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
-        android:src="@drawable/ic_action_settings_enabled_dark" />
+        android:src="@drawable/ic_action_settings" />
     
     
     <ImageView
