@@ -1860,4 +1860,6 @@
 	<string name="shared_string_open">Öppna</string>
     <string name="shared_string_manage">Hantera</string>
 	<string name="shared_string_edit">Redigera</string>
-	</resources>
+	<string name="filter_poi_hint">Filtrera efter namn</string>
+    <string name="search_poi_category_hint">Skriv för att söka alla</string>
+    </resources>
