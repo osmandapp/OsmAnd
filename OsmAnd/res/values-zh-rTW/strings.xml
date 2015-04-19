@@ -1969,4 +1969,6 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM 制圖助手</string>
 	<string name="shared_string_manage">管理</string>
 	<string name="shared_string_edit">編輯</string>
-	</resources>
+	<string name="filter_poi_hint">依名稱篩選</string>
+    <string name="search_poi_category_hint">鍵入以搜尋全部</string>
+    </resources>
