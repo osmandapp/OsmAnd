@@ -1960,4 +1960,5 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Помощник картографа OSM</string>
 	<string name="shared_string_manage">Управление</string>
 	<string name="shared_string_edit">Редактировать</string>
-	</resources>
+	<string name="filter_poi_hint">Фильтровать по имени</string>
+    </resources>
