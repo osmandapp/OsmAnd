@@ -110,8 +110,8 @@
         <string name="poi_lift_gate">Vippebom</string>
         <string name="poi_toll_booth">Betalingsanlæg</string>
         <string name="poi_border_control">Grænsekontrol</string>
-        <string name="poi_traffic_calming_bump">Bumb</string>
-        <string name="poi_traffic_calming_hump">Bumb</string>
+        <string name="poi_traffic_calming_bump">Vejbumb</string>
+        <string name="poi_traffic_calming_hump">Vejbumb, bredt</string>
         <string name="poi_traffic_calming_cushion">Pudebumb</string>
         <string name="poi_traffic_calming_chicane">Chikane</string>
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
@@ -132,7 +132,7 @@
         <string name="poi_parking_entrance">Indgang til parkering</string>
         <string name="poi_garages">Garage</string>
 
-        <string name="poi_public_transport_platform">Offentlig transport stoppested</string>
+        <string name="poi_public_transport_platform">Stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
         <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
         <string name="poi_bus_stop">Busstoppested</string>
@@ -414,7 +414,7 @@
         <string name="poi_social_centre">Socialcenter</string>
         <string name="poi_theatre">Teater</string>
         <string name="poi_circus">Cirkus</string>
-        <string name="poi_dance_floor">Dansegulv</string>
+        <string name="poi_dance_floor">Dansested</string>
         <string name="poi_nightclub">Natklub</string>
         <string name="poi_stripclub">Stripklub</string>
         <string name="poi_beach_resort">Badeby</string>
@@ -482,7 +482,7 @@
         <string name="poi_craft_sweep">Skorstensfejer</string>
         <string name="poi_craft_tailor">Skrædder</string>
         <string name="poi_craft_tiler">Brolægger</string>
-        <string name="poi_craft_tinsmith">Blikkenslager</string>
+        <string name="poi_craft_tinsmith">Pladesmed</string>
         <string name="poi_craft_upholsterer">Møbelpolstrer</string>
         <string name="poi_craft_watchmaker">Urmager</string>
         <string name="poi_craft_window_construction">Vinduefremstilling</string>
@@ -672,7 +672,7 @@
 	<string name="poi_child_clothes">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
-	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
+	<string name="poi_public_transport_stop_position">Offentlig transport stopposition</string>
 	<string name="poi_halt">Jernbane stop</string>
 	<string name="poi_lodging">Logi</string>
 	<string name="poi_internet_access_wlan">Internetadgang: wlan</string>
@@ -767,11 +767,11 @@
 	<string name="poi_residential">Boligområde</string>
 
 	<string name="poi_recreation_ground">Rekreativtområde</string>
-	<string name="poi_village_green">Forte</string>
+	<string name="poi_village_green">Grønning</string>
 
 	<string name="poi_junction">Vejkryds</string>
 	<string name="poi_sailing">Sejlads</string>
-	<string name="poi_charity">Genbrugsbutik</string>
+	<string name="poi_charity">Genbrugsbutik, velgørenhed</string>
 	<string name="poi_photo">Fotoforretning</string>
 	<string name="poi_tomb">Grav</string>
 	<string name="poi_wilderness_hut">Vildmarkshytte</string>
