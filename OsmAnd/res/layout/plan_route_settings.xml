@@ -5,58 +5,78 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/TopBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/avoid_roads"
-            android:layout_width="@dimen/list_item_height"
-            android:layout_height="@dimen/list_item_height"
-            android:background="@drawable/dashboard_button_light"
-            android:scaleType="center"
-            android:src="@drawable/ic_action_road_works_dark" />
+        <LinearLayout
+            android:id="@+id/TopBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="horizontal" />
 
-        <ImageView
-            android:id="@+id/mute"
-            android:layout_width="@dimen/list_item_height"
-            android:layout_height="@dimen/list_item_height"
-            android:background="@drawable/dashboard_button_light"
-            android:scaleType="center"
-            android:src="@drawable/ic_action_volume_off" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/avoid_roads"
+                android:layout_width="@dimen/list_item_height"
+                android:layout_height="@dimen/list_item_height"
+                android:background="@drawable/dashboard_button_light"
+                android:scaleType="center"
+                android:src="@drawable/ic_action_road_works_dark" />
+
+            <ImageView
+                android:id="@+id/mute"
+                android:layout_width="@dimen/list_item_height"
+                android:layout_height="@dimen/list_item_height"
+                android:background="@drawable/dashboard_button_light"
+                android:scaleType="center"
+                android:src="@drawable/ic_action_volume_off" />
+        </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:focusable="false" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginLeft="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
             android:text="@string/gpx_navigation"
-            android:textSize="@dimen/default_list_text_size" >
+            android:textSize="@dimen/default_sub_text_size" >
         </TextView>
 
         <Spinner
             android:id="@+id/GPXRouteSpinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:textSize="@dimen/default_list_text_size" >
         </Spinner>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:focusable="false" />
 
     <ListView
         android:id="@android:id/list"

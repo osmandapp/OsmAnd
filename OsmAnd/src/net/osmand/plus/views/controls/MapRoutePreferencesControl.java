@@ -267,8 +267,6 @@ public class MapRoutePreferencesControl {
 		
 		ImageView avoidRoads = (ImageView) settingsDlg.findViewById(R.id.avoid_roads);
 		setAvoidRoads(avoidRoads);
-		
-		
 
 		setupSpinner(settingsDlg);
 		final float scaleCoefficient = mapActivity.getMapView().getScaleCoefficient();

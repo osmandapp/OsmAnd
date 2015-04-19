@@ -95,6 +95,7 @@
 	
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
+	
 
     <!-- TextSizes -->
     <dimen name="default_list_text_size_large">19sp</dimen>

@@ -468,7 +468,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	private void updatePoiAdditionals() {
 		Iterator<Entry<PoiCategory, LinkedHashSet<String>>> e = acceptedTypes.entrySet().iterator();
 		poiAdditionals.clear();
-		while(e.hasNext()) {
+		while (e.hasNext()) {
 			Entry<PoiCategory, LinkedHashSet<String>> pc = e.next();
 			fillPoiAdditionals(pc.getKey());
 			if (pc.getValue() != null) {

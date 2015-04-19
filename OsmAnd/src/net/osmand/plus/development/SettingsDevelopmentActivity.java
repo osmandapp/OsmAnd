@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.Version;
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.util.SunriseSunset;
 import android.app.AlertDialog;
