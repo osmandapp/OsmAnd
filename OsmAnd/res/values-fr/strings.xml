@@ -2016,4 +2016,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_manage">Gérer</string>
 	<string name="shared_string_edit">Modifier</string>
 	<string name="shared_string_open">Ouvrir</string>
+    <string name="filter_poi_hint">Filtrer par nom</string>
+    <string name="search_poi_category_hint">Rechercher partout</string>
     </resources>
