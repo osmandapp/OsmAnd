@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:background="?attr/card_bg_color"
     android:orientation="vertical"
     android:id="@+id/plan_route_info" >
@@ -52,7 +52,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp" 
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -185,7 +186,7 @@
                         android:id="@+id/InfoIcon"
                         android:layout_width="@dimen/list_item_height"
                         android:layout_height="@dimen/list_item_height"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center_vertical"
                         android:contentDescription="@string/info_button"
                         android:scaleType="center"
                         android:src="@drawable/ic_action_info_dark" />
@@ -215,7 +216,9 @@
                     android:background="?android:attr/listDivider"
                     android:focusable="false" />
             </LinearLayout>
+            <View android:layout_width="fill_parent" android:layout_height="fill_parent" />
         </LinearLayout>
+        
     </ScrollView>
 
     <include layout="@layout/map_route_prepare_bottom" />

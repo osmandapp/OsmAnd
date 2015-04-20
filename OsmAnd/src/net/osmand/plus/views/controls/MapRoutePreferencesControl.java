@@ -22,24 +22,30 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.MapUtils;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -54,9 +60,11 @@ public class MapRoutePreferencesControl {
 	private Dialog dialog;
 	private ArrayAdapter<LocalRoutingParameter> listAdapter;
 	private MapActivity mapActivity;
+	private MapControlsLayer controlsLayer;
 
-	public MapRoutePreferencesControl(MapActivity mapActivity) {
+	public MapRoutePreferencesControl(MapActivity mapActivity, MapControlsLayer controlsLayer) {
 		this.mapActivity = mapActivity;
+		this.controlsLayer = controlsLayer;
 		settings = mapActivity.getMyApplication().getSettings();
 	}
 
@@ -81,6 +89,10 @@ public class MapRoutePreferencesControl {
 			property.set(isChecked);
 		}
 
+	}
+	
+	private static class GpxLocalRoutingParameter extends LocalRoutingParameter {
+		
 	}
 
 	private static class OtherLocalRoutingParameter extends LocalRoutingParameter {
@@ -127,21 +139,32 @@ public class MapRoutePreferencesControl {
 	}
 
 	private Dialog showDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		Dialog dialog = new Dialog(mapActivity);
 		View ll = createLayout();
-		builder.setView(ll);
-		// builder.setTitle(R.string.route_preferences);
-		Dialog dialog = builder.create();
-		dialog.setCanceledOnTouchOutside(true);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-		lp.copyFrom(dialog.getWindow().getAttributes());
-		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		//lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		ll.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY), 
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY));
+		int h = ll.getHeight();
+		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+			lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 260, mapActivity.getResources()
+					.getDisplayMetrics());
+		} else {
+			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		}
 		lp.gravity = Gravity.BOTTOM;
-		// TODO
-//		lp.y = (int) (settingsAppModeButton.getBottom() - settingsAppModeButton.getTop() + scaleCoefficient * 5);
+		if(mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
+			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Dark);
+		} else {
+			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Light);
+		}
+		
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+				WindowManager.LayoutParams.WRAP_CONTENT));
+		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
 		return dialog;
 	}
@@ -244,6 +267,7 @@ public class MapRoutePreferencesControl {
 				list.add(rp);
 			}
 		}
+		list.add(new GpxLocalRoutingParameter());
 
 		return list;
 	}
@@ -255,30 +279,52 @@ public class MapRoutePreferencesControl {
 	private View createLayout() {
 		View settingsDlg = View.inflate(mapActivity, R.layout.plan_route_settings, null);
 		Context ctx = mapActivity;
-		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		ApplicationMode am = settings.APPLICATION_MODE.get();
-		final ListView lv = (ListView) settingsDlg.findViewById(android.R.id.list);
-		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
-		selected.add(am);
-		
 		ImageView muteBtn = (ImageView) settingsDlg.findViewById(R.id.mute);
 		setMuteBtn(muteBtn);
 		
 		ImageView avoidRoads = (ImageView) settingsDlg.findViewById(R.id.avoid_roads);
 		setAvoidRoads(avoidRoads);
 
-		setupSpinner(settingsDlg);
-		final float scaleCoefficient = mapActivity.getMapView().getScaleCoefficient();
+		
+		setupListParameters(settingsDlg, ctx);
+		setupApplicationModes(settingsDlg);
+		controlsLayer.updateRouteButtons(settingsDlg, false);
+		
+		return settingsDlg;
+	}
 
+	private void setupListParameters(View settingsDlg, Context ctx) {
+		final ListView lv = (ListView) settingsDlg.findViewById(android.R.id.list);
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				CheckBox ch = (CheckBox) view.findViewById(R.id.check_item);
+				if(ch != null) {
+					ch.setChecked(!ch.isChecked());
+				}
+			}
+		});
 		listAdapter = new ArrayAdapter<LocalRoutingParameter>(ctx, R.layout.layers_list_activity_item, R.id.title,
-				getRoutingParameters(am)) {
+				getRoutingParameters(settings.APPLICATION_MODE.get())) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
+				LocalRoutingParameter parameter = getItem(position);
+				if(parameter instanceof GpxLocalRoutingParameter) {
+					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
+					setupGPXSpinner(v);
+					return v;
+				}
+				return inflateRoutingParameter(position);
+			}
+
+			private View inflateRoutingParameter(final int position) {
 				View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 				final TextView tv = (TextView) v.findViewById(R.id.title);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				final LocalRoutingParameter rp = getItem(position);
 				tv.setText(rp.getText(mapActivity));
+				ch.setOnCheckedChangeListener(null);
 				if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
 					// if short route settings - it should be inverse of fast_route_mode
 					ch.setChecked(!settings.FAST_ROUTE_MODE.get());
@@ -304,7 +350,13 @@ public class MapRoutePreferencesControl {
 				return v;
 			}
 		};
+		lv.setAdapter(listAdapter);
+	}
 
+	private void setupApplicationModes(View settingsDlg) {
+		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
+		selected.add(settings.APPLICATION_MODE.get());
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
 				(ViewGroup) settingsDlg.findViewById(R.id.app_modes), true, new View.OnClickListener() {
 					@Override
@@ -318,14 +370,12 @@ public class MapRoutePreferencesControl {
 					}
 
 				});
-		lv.setAdapter(listAdapter);
-		return settingsDlg;
 	}
+	
 
 	private void setAvoidRoads(ImageView avoidRoads) {
 		avoidRoads.setContentDescription(mapActivity.getString(R.string.impassable_road));
-		avoidRoads.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_road_works_dark
-				, R.color.icon_color_light));
+		avoidRoads.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_road_works_dark));
 		avoidRoads.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -346,7 +396,7 @@ public class MapRoutePreferencesControl {
 			icon = R.drawable.ic_action_volume_up;
 		}
 		muteBtn.setContentDescription(mapActivity.getString(t));
-		muteBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(icon, R.color.icon_color_light));
+		muteBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(icon));
 		muteBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -367,7 +417,7 @@ public class MapRoutePreferencesControl {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void setupSpinner(View settingsDlg) {
+	private void setupGPXSpinner(View settingsDlg) {
 		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
 		updateSpinnerItems(gpxSpinner);
 		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -391,6 +441,17 @@ public class MapRoutePreferencesControl {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+		final ImageView settings = (ImageView) settingsDlg.findViewById(R.id.settings);
+		settings.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_gsettings_dark));
+		settings.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
+				settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
+				mapActivity.startActivity(settings);
 			}
 		});
 	}
@@ -427,6 +488,16 @@ public class MapRoutePreferencesControl {
 			gpxSpinner.setSelection(2);
 		} else {
 			gpxSpinner.setSelection(0);
+		}
+	}
+	
+	public boolean isDialogVisible() {
+		return dialog != null && dialog.isShowing();
+	}
+
+	public void hideDialog() {
+		if(dialog != null) {
+			dialog.hide();
 		}
 	}
 

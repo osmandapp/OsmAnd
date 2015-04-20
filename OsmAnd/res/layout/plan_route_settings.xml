@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?attr/card_bg_color"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -48,29 +49,7 @@
         android:background="?android:attr/listDivider"
         android:focusable="false" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/list_content_padding"
-        android:layout_marginRight="@dimen/list_content_padding"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gpx_navigation"
-            android:textSize="@dimen/default_sub_text_size" >
-        </TextView>
-
-        <Spinner
-            android:id="@+id/GPXRouteSpinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textSize="@dimen/default_list_text_size" >
-        </Spinner>
-    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -81,8 +60,8 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="5dp" >
+        android:layout_height="0dp" 
+        android:layout_weight="1">
     </ListView>
 
     <include layout="@layout/map_route_prepare_bottom" />

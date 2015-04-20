@@ -26,6 +26,7 @@ import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -37,9 +38,11 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.PointF;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
@@ -63,11 +66,13 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 
 	private boolean showDialog = false;
 	private MapActivity mapActivity;
+	private MapControlsLayer mapControlsLayer;
 
 	public MapRouteInfoControl(ContextMenuLayer contextMenu,
-			MapActivity mapActivity) {
+			MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
 		this.contextMenu = contextMenu;
 		this.mapActivity = mapActivity;
+		this.mapControlsLayer = mapControlsLayer;
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
@@ -115,12 +120,20 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	
 	private Dialog createDialog() {
 		Dialog dialog = new Dialog(mapActivity);
-		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
-		updateInfo(lmain);
+		View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
+		updateInfo(ll);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		//lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		ll.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY), 
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY));
+		int h = ll.getHeight();
+		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+			lp.height = //Math.max(h,
+					(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
+		} else {
+			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		}
 		lp.gravity = Gravity.BOTTOM;
 		if(mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
 			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Dark);
@@ -130,7 +143,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(lmain, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
@@ -149,6 +162,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		updateFromSpinner(main);
 		updateToSpinner(main);
 		updateApplicationModes(main);
+		mapControlsLayer.updateRouteButtons(main, true);
 		boolean addButtons = routingHelper.isRouteCalculated();
 		if(addButtons) {
 			updateRouteButtons(main);
@@ -194,8 +208,10 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		ApplicationMode am = settings.APPLICATION_MODE.get();
 		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
 		selected.add(am);
+		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
+		vg.removeAllViews();
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
-				(ViewGroup) parentView.findViewById(R.id.app_modes), true, new View.OnClickListener() {
+				vg, true, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (selected.size() > 0) {
@@ -333,6 +349,10 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public static int getDirectionInfo() {
 		return directionInfo;
 	}
+	
+	public boolean isDialogVisible() {
+		return dialog != null && dialog.isShowing();
+	}
 
 	public static boolean isControlVisible() {
 		return controlVisible;
@@ -457,10 +477,13 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		if (points.size() == 0) {
 			return via;
 		}
-		for (int i = 0; i < points.size() ; i++) {
-			via += "\n - " + getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName());
+		for (int i = 0; i < points.size(); i++) {
+			if (i > 0) {
+				via += "\n";
+			}
+			via += " " + getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName());
 		}
-		return mapActivity.getString(R.string.route_via) + via;
+		return via;
 	}
 	
 	public String getRoutePointDescription(double lat, double lon) {
