@@ -171,6 +171,7 @@
                     android:id="@+id/Info"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/list_item_height"
+                    android:background="?attr/dashboard_button"
                     android:orientation="horizontal" >
 
                     <ImageView

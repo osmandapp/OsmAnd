@@ -298,14 +298,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	protected void clickRouteParams() {
 		notifyClicked();
-		optionsRouteControlDialog.showAndHideDialog();
 		mapRouteInfoControlDialog.hideDialog();
+		optionsRouteControlDialog.showAndHideDialog();
 	}
 	
 	protected void clickRouteWaypoints() {
 		notifyClicked();
-		mapRouteInfoControlDialog.showHideDialog();
 		optionsRouteControlDialog.hideDialog();
+		mapRouteInfoControlDialog.showHideDialog();
 	}
 	
 	protected void clickRouteCancel() {

@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/list_item_height"
     android:paddingLeft="@dimen/list_content_padding"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    >
 
     <LinearLayout
         android:layout_width="0dp"
@@ -18,7 +19,6 @@
             android:text="@string/gpx_navigation"
             android:textSize="@dimen/default_sub_text_size" >
         </TextView>
-
         <Spinner
             android:id="@+id/GPXRouteSpinner"
             android:layout_width="fill_parent"
@@ -27,13 +27,5 @@
             android:textSize="@dimen/default_list_text_size" >
         </Spinner>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/settings"
-        android:layout_width="@dimen/list_item_height"
-        android:layout_height="@dimen/list_item_height"
-        android:scaleType="center"
-        android:background="?attr/dashboard_button"
-        android:src="@drawable/ic_action_settings" />
 
 </LinearLayout>

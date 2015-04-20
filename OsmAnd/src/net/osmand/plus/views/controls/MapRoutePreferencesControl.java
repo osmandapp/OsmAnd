@@ -94,6 +94,10 @@ public class MapRoutePreferencesControl {
 	private static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 		
 	}
+	
+	private static class OtherSettingsRoutingParameter extends LocalRoutingParameter {
+		
+	}
 
 	private static class OtherLocalRoutingParameter extends LocalRoutingParameter {
 		public String text;
@@ -268,6 +272,7 @@ public class MapRoutePreferencesControl {
 			}
 		}
 		list.add(new GpxLocalRoutingParameter());
+		list.add(new OtherSettingsRoutingParameter());
 
 		return list;
 	}
@@ -299,9 +304,15 @@ public class MapRoutePreferencesControl {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				CheckBox ch = (CheckBox) view.findViewById(R.id.check_item);
-				if(ch != null) {
-					ch.setChecked(!ch.isChecked());
+				if(listAdapter.getItem(position) instanceof OtherSettingsRoutingParameter) {
+					final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
+					settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
+					mapActivity.startActivity(settings);
+				} else {
+					CheckBox ch = (CheckBox) view.findViewById(R.id.check_item);
+					if (ch != null) {
+						ch.setChecked(!ch.isChecked());
+					}
 				}
 			}
 		});
@@ -313,6 +324,15 @@ public class MapRoutePreferencesControl {
 				if(parameter instanceof GpxLocalRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
 					setupGPXSpinner(v);
+					return v;
+				}
+				if(parameter instanceof OtherSettingsRoutingParameter) {
+					View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+					final ImageView icon = (ImageView) v.findViewById(R.id.icon);
+					icon.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_gsettings_dark));
+					icon.setVisibility(View.VISIBLE);
+					((TextView)v.findViewById(R.id.title)).setText(R.string.routing_settings_2);
+					v.findViewById(R.id.check_item).setVisibility(View.GONE);
 					return v;
 				}
 				return inflateRoutingParameter(position);
@@ -420,6 +440,42 @@ public class MapRoutePreferencesControl {
 	private void setupGPXSpinner(View settingsDlg) {
 		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
 		updateSpinnerItems(gpxSpinner);
+		
+	}
+
+	protected void openGPXFileSelection(final Spinner gpxSpinner) {
+		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+
+			@Override
+			public boolean processResult(GPXFile[] result) {
+				mapActivity.getMapActions().setGPXRouteParams(result[0]);
+				mapActivity.getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
+				updateSpinnerItems(gpxSpinner);
+				updateParameters();
+				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+				return true;
+			}
+		});
+	}
+
+	private void updateSpinnerItems(final Spinner gpxSpinner) {
+		ArrayList<String> gpxActions = new ArrayList<String>();
+		gpxActions.add(mapActivity.getString(R.string.shared_string_none));
+		gpxActions.add(mapActivity.getString(R.string.select_gpx));
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		if (rp != null) {
+			gpxActions.add(new File(rp.getFile().path).getName());
+		}
+
+		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, android.R.layout.simple_spinner_item,
+				gpxActions);
+		gpxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gpxSpinner.setAdapter(gpxAdapter);
+		if (rp != null) {
+			gpxSpinner.setSelection(2);
+		} else {
+			gpxSpinner.setSelection(0);
+		}
 		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
@@ -443,52 +499,6 @@ public class MapRoutePreferencesControl {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		final ImageView settings = (ImageView) settingsDlg.findViewById(R.id.settings);
-		settings.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_gsettings_dark));
-		settings.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
-				settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
-				mapActivity.startActivity(settings);
-			}
-		});
-	}
-
-	protected void openGPXFileSelection(final Spinner gpxSpinner) {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-
-			@Override
-			public boolean processResult(GPXFile[] result) {
-				mapActivity.getMapActions().setGPXRouteParams(result[0]);
-				mapActivity.getMyApplication().getTargetPointsHelper().updateRouteAndReferesh(true);
-				updateSpinnerItems(gpxSpinner);
-				updateParameters();
-				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-				return true;
-			}
-		});
-	}
-
-	private void updateSpinnerItems(Spinner gpxSpinner) {
-		ArrayList<String> gpxActions = new ArrayList<String>();
-		gpxActions.add(mapActivity.getString(R.string.shared_string_none));
-		gpxActions.add(mapActivity.getString(R.string.select_gpx));
-		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		if (rp != null) {
-			gpxActions.add(new File(rp.getFile().path).getName());
-		}
-
-		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, android.R.layout.simple_spinner_item,
-				gpxActions);
-		gpxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gpxSpinner.setAdapter(gpxAdapter);
-		if (rp != null) {
-			gpxSpinner.setSelection(2);
-		} else {
-			gpxSpinner.setSelection(0);
-		}
 	}
 	
 	public boolean isDialogVisible() {
@@ -498,6 +508,7 @@ public class MapRoutePreferencesControl {
 	public void hideDialog() {
 		if(dialog != null) {
 			dialog.hide();
+			dialog = null;
 		}
 	}
 
