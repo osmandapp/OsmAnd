@@ -686,4 +686,17 @@
 
 	<string name="poi_cave_entrance">洞窟入口(Cave entrance)</string>
 	<string name="poi_peak">山頂(Mountain peak)</string>
+	<string name="poi_migration">移住(Migration)</string>
+	<string name="poi_saddle">鞍部(Saddle)</string>
+	<string name="poi_volcano">火山(Volcano)</string>
+	<string name="poi_crater">噴火口・クレーター(Crater)</string>
+	<string name="poi_ridge">尾根(Ridge)</string>
+	<string name="poi_glacier">氷河・氷床(Glacier)</string>
+	<string name="poi_sinkhole">窪地(Sinkhole)</string>
+	<string name="poi_waterfall">滝(Waterfall)</string>
+	<string name="poi_river">川(River)</string>
+	<string name="poi_stream">小川(Stream)</string>
+	<string name="poi_rapids">急流部(Rapids)</string>
+	<string name="poi_stone">目印岩(Remarkable stone)</string>
+	<string name="poi_cape">岬(Cape)</string>
 	</resources>
