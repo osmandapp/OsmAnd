@@ -131,4 +131,12 @@
 	<string name="poi_osmwiki">Вікіпедія</string>
 	<string name="poi_user_defined_other">Визначено користувачем</string>
 	
-	</resources>
+	<string name="poi_shop_food">Продовольчий магазин</string>
+	<string name="poi_road_obstacle">Дорожні перешкоди</string>
+		<string name="poi_filling_station">АЗС</string>
+		<string name="poi_personal_transport">Особистий транспорт</string>
+		<string name="poi_public_transport">Громадський транспорт</string>
+		<string name="poi_air_transport">Авіаційний транспорт</string>
+		<string name="poi_water_transport">Водний транспорт</string>
+		<string name="poi_bicycle_transport">Велосипедний траспорт</string>
+		</resources>

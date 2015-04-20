@@ -199,7 +199,7 @@
   <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
   <string name="choose_auto_follow_route">Kaartpositie volgen</string>
   <string name="choose_auto_follow_route_descr">Tijd totdat kaartweergave wordt gesynchroniseerd met de positie</string>
-  <string name="auto_follow_route_never">Nooit (druk op de blauwe pijl om begeleiding handmatig te starten)</string>
+  <string name="auto_follow_route_never">Nooit (druk op \'Start\' om de begeleiding te starten)</string>
   <string name="auto_follow_route_navigation">Alleen automatisch volgen tijdens navigatie</string>
   <string name="auto_follow_route_navigation_descr">Alleen automatisch volgen tijdens navigatie.</string>
   <string name="auto_follow_location_enabled">Automatisch kaart volgen in gebruik.</string>
@@ -1487,8 +1487,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="speak_street_names">Straatnamen aankondigen (TTS)</string>
         
     
-    <string name="driving_region_descr">Regio voor autorijden: VS, Europa, GB, Azië en andere</string>
-	<string name="driving_region">Land</string>
+    <string name="driving_region_descr">Regio voor autorijden: VS, Europa, GB, Azië en overige</string>
+	<string name="driving_region">Regio voor autorijden</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">Verenigde Staten</string>
 	<string name="driving_region_canada">Canada</string>
@@ -1808,13 +1808,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
     <string name="route_descr_destination">Bestemming</string>
-    <string name="no_index_file_to_download">Geen bestanden gevonden: controleer de internetverbinding.</string>
+    <string name="no_index_file_to_download">Geen downloads gevonden: controleer de internetverbinding.</string>
     <string name="osmo_gpx_points_downloaded">OsMo punten: %1$s opgehaald.</string>
     <string name="osmo_auto_connect_descr">Verbind automatisch met OsMo service bij het opstarten van de applicatie</string>
     <string name="osmo_auto_connect">Automatisch verbinding maken</string>
     <string name="osmo_start_service">OsMo service</string>
     <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
-    <string name="osmo_group_information_desc">" - Alle groepen zijn openbaar! Om anoniem te blijven moet u apparaten rechtstreeks met elkaar verbinden via hun Tracker-ID, en niet in een groep.\n- Er kunnen maximaal 16 deelnemers in een groep.\n- Als er gedurende 2 weken geen of nog maar 1 deelnemer actief is, wordt de groep verwijderd.\n- Een groep kan besloten worden gemaakt (\"alleen op uitnodiging\"). Het beheer daarvan moet op de beheerspagina gebeuren.\n- Als u een groep nodig heeft met andere voorwaarden, ga dan naar http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Alle groepen zijn openbaar! Om anoniem te blijven moet u apparaten rechtstreeks met elkaar verbinden via hun Tracker-ID, en niet in een groep.\n- Er kunnen maximaal 8 deelnemers in een groep.\n- Als er gedurende 2 weken geen of nog maar 1 deelnemer actief is, wordt de groep verwijderd.\n- Een groep kan besloten worden gemaakt (\"alleen op uitnodiging\"). Het beheer daarvan moet op de beheerspagina gebeuren.\n- Als u een groep nodig heeft met andere voorwaarden, ga dan naar http://osmo.mobi"</string>
     <string name="osmo_group_information">Lees dit voordat u een groep maakt!</string>
     <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
@@ -2152,4 +2152,16 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="osmo_grop_name_length_alert">De naam van een groep moet uit minstens 3 tekens bestaan!</string>
 	<string name="agps_info">A-GPS info</string>
 	<string name="agps_data_last_downloaded">Laatste A-GPS data gedownload: %1$s</string>
-    </resources>
+    <string name="filter_poi_hint">Filter op naam</string>
+    <string name="search_poi_category_hint">Tik om alles te doorzoeken</string>
+    <string name="shared_string_open">Open</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM cartografie-assistent</string>
+	<string name="shared_string_manage">Beheer</string>
+	<string name="shared_string_edit">Bewerk</string>
+	<string name="shared_string_places">Plaatsen</string>
+	<string name="shared_string_search">Zoek</string>
+	<string name="shared_string_show_description">Toon beschrijving</string>
+	<string name="shared_string_message">Bericht</string>
+	<string name="shared_string_do_not_use">Niet gebruiken</string>
+	<string name="shared_string_address">Adres</string>
+	</resources>

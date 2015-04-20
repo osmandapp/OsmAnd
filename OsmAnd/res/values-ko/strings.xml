@@ -2229,4 +2229,6 @@
 	<string name="shared_string_edit">편집</string>
 	<string name="shared_string_places">장소</string>
 	<string name="shared_string_search">검색</string>
-	</resources>
+	<string name="filter_poi_hint">이름으로 필터링</string>
+    <string name="search_poi_category_hint">모든 검색 유형</string>
+    </resources>

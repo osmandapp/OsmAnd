@@ -1951,4 +1951,6 @@
 	<string name="shared_string_manage">Кіраваць</string>
 	<string name="shared_string_edit">Правіць</string>
 	<string name="shared_string_open">Адчыніць</string>
+    <string name="filter_poi_hint">Фільтраваць паводле назвы</string>
+    <string name="search_poi_category_hint">Друкуйце, каб знайсьці ўсё</string>
     </resources>

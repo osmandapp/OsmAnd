@@ -800,7 +800,7 @@
   <string name="backToMenu">Torna al menu</string>
   <string name="zoomOut">Zoom indietro</string>
   <string name="zoomIn">Zoom avanti</string>
-  <string name="zoomIs">Lo zoom è</string>
+  <string name="zoomIs">Il livello dello zoom è</string>
   <string name="north">nord</string>
   <string name="north_north_east">nord-nord-est</string>
   <string name="north_east">nord-est</string>
@@ -834,8 +834,8 @@
   <string name="direction_style_clockwise">Bussola (12 settori)</string>
   <string name="settings_direction_style">Stile della direzione</string>
   <string name="settings_direction_style_descr">Scegli lo stile in cui vengono espresse in movimento le direzioni relative</string>
-  <string name="auto_announce_on">Inizia l\'auto-segnalazione</string>
-  <string name="auto_announce_off">Ferma l\'autosegnalazione</string>
+  <string name="auto_announce_on">Avvia gli annunci automatici</string>
+  <string name="auto_announce_off">Ferma gli annunci automatici</string>
   <string name="scroll_map_by_gestures_descr">Muovi la mappa con i gesti sullo schermo tattile</string>
   <string name="scroll_map_by_gestures">Scorrimento naturale della mappa</string>
   <string name="i_am_here">Io sono qui</string>
@@ -2134,8 +2134,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="general_settings_2">Impostazioni generali</string>
 	<string name="shared_string_clear_all">Cancella tutto</string>
 	<string name="shared_string_my_location">Mia posizione</string>
-	<string name="shared_string_my_favorites">Miei preferiti</string>
-	<string name="shared_string_my_tracks">Mie tracce</string>
+	<string name="shared_string_my_favorites">I miei preferiti</string>
+	<string name="shared_string_my_tracks">Le mie tracce</string>
 	<string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
 	<string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>
@@ -2171,7 +2171,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_places">Luoghi</string>
 	<string name="shared_string_search">Cerca</string>
 	<string name="shared_string_open">Apri</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Assistente mappatura OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Assistente mappatore OSM</string>
 	<string name="shared_string_manage">Gestisci</string>
 	<string name="shared_string_edit">Modifica</string>
-	</resources>
+	<string name="filter_poi_hint">Filtra per nome</string>
+    <string name="search_poi_category_hint">Scrivi cercare fra tutti</string>
+    </resources>

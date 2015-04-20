@@ -1982,4 +1982,6 @@ Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i e
 	<string name="shared_string_edit">Edita</string>
 	<string name="shared_string_places">Llocs</string>
 	<string name="shared_string_search">Cerca</string>
-	</resources>
+	<string name="filter_poi_hint">Filtre per nom</string>
+    <string name="search_poi_category_hint">Escriviu per cercar-ho tot</string>
+    </resources>

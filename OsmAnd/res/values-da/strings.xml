@@ -1995,4 +1995,6 @@
 	<string name="shared_string_open">Åben</string>
     <string name="shared_string_manage">Administrer</string>
 	<string name="shared_string_edit">Rediger</string>
-	</resources>
+	<string name="filter_poi_hint">Filtrer efter navn</string>
+    <string name="search_poi_category_hint">Tast for at søge alt</string>
+    </resources>
