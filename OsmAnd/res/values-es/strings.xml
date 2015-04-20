@@ -2011,4 +2011,6 @@
 	<string name="shared_string_edit">Editar</string>
 	<string name="shared_string_places">Lugares</string>
 	<string name="shared_string_search">Buscar</string>
-	</resources>
+	<string name="filter_poi_hint">Filtrar por nombre</string>
+    <string name="search_poi_category_hint">Teclea para buscar</string>
+    </resources>
