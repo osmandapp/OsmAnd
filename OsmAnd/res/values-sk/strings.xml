@@ -2149,4 +2149,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_OSMMapperAssistant_name">Asistent mapera OSM</string>
 	<string name="shared_string_manage">Spravovať</string>
 	<string name="shared_string_edit">Upraviť</string>
-	</resources>
+	<string name="filter_poi_hint">Filtrovať podľa názvu</string>
+    <string name="search_poi_category_hint">Píšte pre vyhľadanie všetkých</string>
+    </resources>
