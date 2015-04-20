@@ -82,6 +82,9 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.startsWith("gb_") || lc.startsWith("british")) {
 				nameId = R.string.index_name_gb;
 				order = 19;
+			} else if ( lc.contains("netherlands")) {
+				nameId = R.string.index_name_netherlands;
+				order = 20;
 			} else if (lc.contains("russia")) {
 				nameId = R.string.index_name_russia;
 				order = 25;

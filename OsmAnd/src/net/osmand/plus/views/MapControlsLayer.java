@@ -173,7 +173,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark).setIconColorId(0));
+		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark)
+				.setIconColorId(R.drawable.map_layer_dark, R.drawable.map_layer_night));
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -396,7 +397,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).setIconColorId(0).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).
+				setIconColorId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent());
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -412,7 +414,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).setIconColorId(0).setRoundTransparent());
+		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).
+				setIconColorId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent());
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -524,14 +527,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean showRouteCalculationControls = routePlanningMode;
-
-//		boolean showDefaultButtons = !routePlanningMode
-//				&& (!routeFollowingMode || settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get());
-		boolean showButtons = routePlanningMode || !routeFollowingMode || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS);  
+		boolean showRouteCalculationControls = routePlanningMode ||
+				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
+		boolean showButtons = routePlanningMode || !routeFollowingMode;
 		updateMyLocation(rh);
-		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.map_directions	);
-		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
+//		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.map_directions	);
+//		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
+		routePlanningBtn.setIconResId(R.drawable.map_directions	);
+		routePlanningBtn.updateVisibility(!routeFollowingMode && !routePlanningMode);
 
 		menuControl.updateVisibility(showButtons);
 

@@ -16,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
