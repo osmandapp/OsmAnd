@@ -9,11 +9,12 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="@dimen/list_item_height"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height"
-        android:background="?attr/dashboard_button"
         android:scaleType="center"
-        android:visibility="gone"
+	    android:visibility="gone"
+        android:layout_marginRight="@dimen/list_content_padding"
+        android:gravity="center_vertical"
         android:src="@drawable/ic_action_settings" />
 
     <TextView

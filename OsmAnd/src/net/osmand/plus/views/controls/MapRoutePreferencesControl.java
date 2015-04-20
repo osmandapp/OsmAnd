@@ -36,8 +36,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
@@ -52,7 +54,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MapRoutePreferencesControl {
@@ -225,8 +226,15 @@ public class MapRoutePreferencesControl {
 			settings.ANNOUNCE_NEARBY_FAVORITES.set(selected);
 		}
 	}
-
+	
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
+		List<LocalRoutingParameter> list = getRoutingParametersInner(am);
+		list.add(new GpxLocalRoutingParameter());
+		list.add(new OtherSettingsRoutingParameter());
+		return list;
+	}
+
+	private List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
 		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteService.OSMAND;
@@ -271,8 +279,6 @@ public class MapRoutePreferencesControl {
 				list.add(rp);
 			}
 		}
-		list.add(new GpxLocalRoutingParameter());
-		list.add(new OtherSettingsRoutingParameter());
 
 		return list;
 	}
@@ -308,6 +314,8 @@ public class MapRoutePreferencesControl {
 					final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
 					settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
 					mapActivity.startActivity(settings);
+				} else if(view.findViewById(R.id.GPXRouteSpinner) != null) {
+					showOptionsMenu((TextView) view.findViewById(R.id.GPXRouteSpinner));
 				} else {
 					CheckBox ch = (CheckBox) view.findViewById(R.id.check_item);
 					if (ch != null) {
@@ -323,7 +331,8 @@ public class MapRoutePreferencesControl {
 				LocalRoutingParameter parameter = getItem(position);
 				if(parameter instanceof GpxLocalRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
-					setupGPXSpinner(v);
+					final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
+					updateSpinnerItems(gpxSpinner);
 					return v;
 				}
 				if(parameter instanceof OtherSettingsRoutingParameter) {
@@ -437,13 +446,8 @@ public class MapRoutePreferencesControl {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void setupGPXSpinner(View settingsDlg) {
-		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
-		updateSpinnerItems(gpxSpinner);
-		
-	}
 
-	protected void openGPXFileSelection(final Spinner gpxSpinner) {
+	protected void openGPXFileSelection(final TextView gpxSpinner) {
 		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 
 			@Override
@@ -458,47 +462,48 @@ public class MapRoutePreferencesControl {
 		});
 	}
 
-	private void updateSpinnerItems(final Spinner gpxSpinner) {
-		ArrayList<String> gpxActions = new ArrayList<String>();
-		gpxActions.add(mapActivity.getString(R.string.shared_string_none));
-		gpxActions.add(mapActivity.getString(R.string.select_gpx));
+	private void updateSpinnerItems(final TextView gpxSpinner) {
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		if (rp != null) {
-			gpxActions.add(new File(rp.getFile().path).getName());
-		}
+		gpxSpinner.setText(rp == null ? mapActivity.getString(R.string.shared_string_none) : 
+			new File(rp.getFile().path).getName());
+	}
 
-		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, android.R.layout.simple_spinner_item,
-				gpxActions);
-		gpxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gpxSpinner.setAdapter(gpxAdapter);
-		if (rp != null) {
-			gpxSpinner.setSelection(2);
-		} else {
-			gpxSpinner.setSelection(0);
-		}
-		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+	private void showOptionsMenu(final TextView gpxSpinner) {
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		final PopupMenu optionsMenu = new PopupMenu(gpxSpinner.getContext(), gpxSpinner);
+		MenuItem item = optionsMenu.getMenu().add(
+				mapActivity.getString(R.string.shared_string_none));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 0) {
-					if (mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
-						mapActivity.getRoutingHelper().setGpxParams(null);
-						settings.FOLLOW_THE_GPX_ROUTE.set(null);
-						mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-					}
-					updateParameters();
-				} else if (position == 1) {
-					openGPXFileSelection(gpxSpinner);
-				} else if (position == 2) {
-					// nothing to change
+			public boolean onMenuItemClick(MenuItem item) {
+				if (mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
+					mapActivity.getRoutingHelper().setGpxParams(null);
+					settings.FOLLOW_THE_GPX_ROUTE.set(null);
+					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				}
-
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
+				updateParameters();
+				return true;
 			}
 		});
+		item = optionsMenu.getMenu().add(mapActivity.getString(R.string.select_gpx));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				openGPXFileSelection(gpxSpinner);
+				return true;
+			}
+		});
+		if(rp != null) {
+			item = optionsMenu.getMenu().add(new File(rp.getFile().path).getName());
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					// nothing to change
+					return true;
+				}
+			});
+		}
+		optionsMenu.show();
 	}
 	
 	public boolean isDialogVisible() {

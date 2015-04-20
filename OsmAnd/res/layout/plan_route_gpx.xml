@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/list_item_height"
     android:paddingLeft="@dimen/list_content_padding"
-    android:orientation="horizontal" 
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants" 
     >
 
     <LinearLayout
@@ -19,13 +20,13 @@
             android:text="@string/gpx_navigation"
             android:textSize="@dimen/default_sub_text_size" >
         </TextView>
-        <Spinner
+        <TextView
             android:id="@+id/GPXRouteSpinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textSize="@dimen/default_list_text_size" >
-        </Spinner>
+        </TextView>
     </LinearLayout>
 
 </LinearLayout>
