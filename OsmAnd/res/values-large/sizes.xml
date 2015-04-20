@@ -35,8 +35,7 @@
 	<dimen name="map_button_inset_shadow">3dp</dimen>
 	<dimen name="map_button_inset">3dp</dimen>
 	<dimen name="map_button_rect_rad">4dp</dimen>
-	<dimen name="map_button_stroke">1dp</dimen>
-	<dimen name="map_button_stroke_dark">2dp</dimen>
+	
 
 	<dimen name="map_widget_icon_margin">6dp</dimen>
 	<!-- General -->

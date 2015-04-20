@@ -132,7 +132,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
 		MenuItemCompat.setShowAsAction(showFilterItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showFilterItem = showFilterItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(
+		showFilterItem = showFilterItem.setIcon(getMyApplication().getIconsCache().getIcon(
 				R.drawable.ic_action_filter_dark));
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -155,7 +155,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(
+		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getIconsCache().getIcon(
 				R.drawable.ic_show_on_map));
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override

@@ -174,7 +174,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
 		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark)
-				.setIconColorId(R.drawable.map_layer_dark, R.drawable.map_layer_night));
+				.setIconsId(R.drawable.map_layer_dark, R.drawable.map_layer_night)
+				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night));
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -184,7 +185,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
-		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0);
+		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).
+				setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		compassHud.compass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(new View.OnClickListener() {
@@ -345,8 +347,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
-
+		controls.add(createHudButton(mapActivity.findViewById(R.id.map_app_mode_shadow), 0).setBg(
+				R.drawable.btn_round_trans, R.drawable.btn_round_transparent));
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
+		
+		
 		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.map_dashboard).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(menuControl);
@@ -398,7 +403,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
 		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).
-				setIconColorId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent());
+				setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent());
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -415,7 +420,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
 		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).
-				setIconColorId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent());
+				setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent());
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -546,7 +551,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
 				appModeIcon.setImageDrawable(
-						app.getIconsCache().getActionBarIcon(
+						app.getIconsCache().getIcon(
 								settings.getApplicationMode().getSmallIconDark(), !isNight));
 			} else {
 				zoomText.setVisibility(View.VISIBLE);
@@ -698,15 +703,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int bgDark;
 		int bgLight;
 		int resId;
-		int resLight = R.color.icon_color_light;
-		int resDark = 0;
+		int resLightId;
+		int resDarkId;
+		int resClrLight = R.color.icon_color_light;
+		int resClrDark = 0;
+		
 
 		boolean nightMode = false;
 		boolean f = true;
 		boolean compass;
 		
 		public MapHudButton setRoundTransparent() {
-			setBg(R.drawable.btn_circle_trans);
+			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night); 
 			return this;
 		}
 
@@ -754,21 +762,31 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public MapHudButton setIconColorId(int clr) {
-			if (resLight == clr && resDark == clr) {
+			if (resClrLight == clr && resClrDark == clr) {
 				return this;
 			}
-			resLight = clr;
-			resDark = clr;
+			resClrLight = clr;
+			resClrDark = clr;
+			f = true;
+			return this;
+		}
+		
+		public MapHudButton setIconsId(int icnLight, int icnDark) {
+			if (resLightId == icnLight && resDarkId == icnDark) {
+				return this;
+			}
+			resLightId = icnLight;
+			resDarkId = icnDark;
 			f = true;
 			return this;
 		}
 		
 		public MapHudButton setIconColorId(int clrLight, int clrDark) {
-			if (resLight == clrLight && resDark == clrDark) {
+			if (resClrLight == clrLight && resClrDark == clrDark) {
 				return this;
 			}
-			resLight = clrLight;
-			resDark = clrDark;
+			resClrLight = clrLight;
+			resClrDark = clrDark;
 			f = true;
 			return this;
 		}
@@ -778,21 +796,28 @@ public class MapControlsLayer extends OsmandMapLayer {
 				return;
 			}
 			f = false;
-			nightMode = night;
+			nightMode = night; 
 			if (bgDark != 0 && bgLight != 0) {
 				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
 			}
+			Drawable d = null;
+			if(resDarkId != 0 && nightMode) {
+				d = ctx.getIconsCache().getIcon(resDarkId);
+			} else if(resLightId != 0 && !nightMode) {
+				d = ctx.getIconsCache().getIcon(resLightId);
+			} else if(resId != 0){
+				d = ctx.getIconsCache().getIcon(resId,	nightMode ? resClrDark : resClrLight);	
+			}
+				
 			if (iv instanceof ImageView) {
 				if (compass) {
-					((ImageView) iv).setImageDrawable(new CompassDrawable(ctx.getIconsCache().getIcon(resId,
-							nightMode ? resDark : resLight)));
+					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
-					((ImageView) iv).setImageDrawable(ctx.getIconsCache()
-							.getIcon(resId, nightMode ? resDark : resLight));
+					((ImageView) iv).setImageDrawable(d);
 				}
 			} else if (iv instanceof TextView) {
 				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(
-						ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight), null, null, null);
+						d, null, null, null);
 			}
 		}
 

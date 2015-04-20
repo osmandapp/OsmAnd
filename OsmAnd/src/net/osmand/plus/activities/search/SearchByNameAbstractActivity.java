@@ -508,7 +508,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_gdirections_dark));
 			menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -521,12 +521,12 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
 				MenuItemCompat.setShowAsAction(menuItem,
 						MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark));
+				menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flage_dark));
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
 				MenuItemCompat.setShowAsAction(menuItem,
 						MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon( R.drawable.ic_action_flag_dark));
+				menuItem = menuItem.setIcon(app.getIconsCache().getIcon( R.drawable.ic_action_flag_dark));
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -538,7 +538,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_marker_dark));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_marker_dark));
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -551,7 +551,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 			MenuItemCompat.setShowAsAction(menuItem,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_fav_dark));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_fav_dark));
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
