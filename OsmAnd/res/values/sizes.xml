@@ -84,7 +84,7 @@
 	<dimen name="map_button_inset">2dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1dp</dimen>
-	<dimen name="map_button_stroke_dark">2dp</dimen>
+	<dimen name="map_button_stroke_dark">1dp</dimen>
 	
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>

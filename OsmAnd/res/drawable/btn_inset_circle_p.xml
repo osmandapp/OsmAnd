@@ -12,7 +12,7 @@
             android:insetRight="@dimen/map_button_inset"
             android:insetTop="@dimen/map_button_inset" >
             <shape android:shape="oval" >
-                <solid android:color="@color/map_widget_light_pressed" />
+                <solid android:color="@color/map_widget_dark_pressed" />
             </shape>
         </inset>
     </item>
