@@ -535,7 +535,7 @@
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
   <string name="transport_route_distance">Distance de l\'itinéraire :</string>
   <string name="transport">Transport</string>
-  <string name="shared_string_ok">OK</string>
+  <string name="shared_string_ok">Ok</string>
   <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
   <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
   <string name="hello">Application de navigation OsmAnd</string>
@@ -550,7 +550,7 @@
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori </string>
+  <string name="favorite">Favori</string>
   <string name="shared_string_clear_all">Supprimer tout</string>
   <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
