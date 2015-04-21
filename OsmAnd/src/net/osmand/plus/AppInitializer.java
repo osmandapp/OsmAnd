@@ -242,7 +242,6 @@ public class AppInitializer implements IProgress {
 		if (!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
-		osmandSettings.USE_DASHBOARD_INSTEAD_OF_DRAWER.set(true);
 		startTime = System.currentTimeMillis();
 		try {
 			app.bRouterServiceConnection = startupInit(BRouterServiceConnection.connect(app), BRouterServiceConnection.class);

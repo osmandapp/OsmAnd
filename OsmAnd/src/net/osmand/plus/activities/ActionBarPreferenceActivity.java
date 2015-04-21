@@ -44,7 +44,7 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 			shadowView = null;
 		}
 		tb.setClickable(true);
-		tb.setNavigationIcon(((OsmandApplication)getApplication()).getIconsCache().getActionBarIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		tb.setNavigationIcon(((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
 		tb.setNavigationOnClickListener(new View.OnClickListener() {

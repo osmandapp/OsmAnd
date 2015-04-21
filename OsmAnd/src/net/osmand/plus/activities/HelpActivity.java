@@ -155,7 +155,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconDark, int menuItemType) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (iconDark != 0) {
-			menuItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(iconDark));
+			menuItem.setIcon(getMyApplication().getIconsCache().getIcon(iconDark));
 		}
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

@@ -55,11 +55,11 @@ public class IconsCache {
 	}
 
 
-	public Drawable getActionBarIcon(int id) {
+	public Drawable getIcon(int id) {
 		return getDrawable(id, 0);
 	}
 	
-	public Drawable getActionBarIcon(int id, boolean light) {
+	public Drawable getIcon(int id, boolean light) {
 		return getDrawable(id, light ? R.color.icon_color_light : 0);
 	}
 

@@ -542,14 +542,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordPlaceControl.setIcons(R.drawable.widget_icon_av_inactive_day,
 				R.drawable.widget_icon_av_inactive_night);
 		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
-			recordPlaceControl.setIcons(R.drawable.widget_icon_video,
-					R.drawable.widget_icon_video);
+			recordPlaceControl.setIcons(R.drawable.widget_av_video_day,
+					R.drawable.widget_av_video_night);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			recordPlaceControl.setIcons(R.drawable.widget_icon_video,
-					R.drawable.widget_icon_video);
+			recordPlaceControl.setIcons(R.drawable.widget_av_photo_day,
+					R.drawable.widget_av_photo_night);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_AUDIO) {
-			recordPlaceControl.setIcons(R.drawable.widget_icon_audio,
-					R.drawable.widget_icon_audio);
+			recordPlaceControl.setIcons(R.drawable.widget_av_audio_day,
+					R.drawable.widget_av_audio_night);
 		}
 	}
 

@@ -476,7 +476,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				///
 				if (device != null) {
-					createActionModeMenuItem(actionMode, menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings_enabled_dark,
+					createActionModeMenuItem(actionMode, menu, SETTINGS_DEV_ID, R.string.shared_string_settings, R.drawable.ic_action_settings,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
@@ -1046,7 +1046,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				R.drawable.ic_group_add,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(oldMenu, SETTINGS_ID, R.string.shared_string_settings,
-				R.drawable.ic_action_settings_enabled_dark,
+				R.drawable.ic_action_settings,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -1244,7 +1244,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-				v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings_enabled_dark));
+				v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings));
 
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {

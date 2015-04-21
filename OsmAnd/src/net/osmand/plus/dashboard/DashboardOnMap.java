@@ -215,7 +215,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
 		back.setImageDrawable(
-				((OsmandApplication)getMyApplication()).getIconsCache().getActionBarIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+				((OsmandApplication)getMyApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 		back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -247,7 +247,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
 				flat.setVisibility(View.VISIBLE);
 				final boolean flatNow = visibleType == DashboardType.WAYPOINTS_FLAT;
-				flat.setImageDrawable(iconsCache.getActionBarIcon(flatNow ? R.drawable.ic_tree_list_dark
+				flat.setImageDrawable(iconsCache.getIcon(flatNow ? R.drawable.ic_tree_list_dark
 						: R.drawable.ic_flat_list_dark));
 				flat.setOnClickListener(new View.OnClickListener() {
 
@@ -284,9 +284,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			});
 			lst.setVisibility(View.VISIBLE);
 			if (visibleType == DashboardType.DASHBOARD) {
-				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_navigation_drawer));
+				lst.setImageDrawable(iconsCache.getIcon(R.drawable.ic_navigation_drawer));
 			} else if (visibleType == DashboardType.LIST_MENU) {
-				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_dashboard_dark));
+				lst.setImageDrawable(iconsCache.getIcon(R.drawable.ic_dashboard_dark));
 			}
 			lst.setOnClickListener(new View.OnClickListener() {
 				@Override

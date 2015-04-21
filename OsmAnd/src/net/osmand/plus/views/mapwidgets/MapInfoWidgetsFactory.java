@@ -216,9 +216,9 @@ public class MapInfoWidgetsFactory {
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 			all.setImageDrawable(map.getMyApplication().getIconsCache()
-					.getActionBarIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+					.getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
 			remove.setImageDrawable(map.getMyApplication().getIconsCache()
-					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
+					.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 		
 		

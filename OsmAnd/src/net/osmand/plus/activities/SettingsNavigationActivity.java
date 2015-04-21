@@ -46,6 +46,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
+	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG"; 
 	
 	public SettingsNavigationActivity() {
 		super(true);
@@ -202,7 +203,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.DELAY_TO_START_NAVIGATION, screen, delayIntervalNames, delayIntervals);
 
 
-		profileDialog();
+		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {
+			setSelectedAppMode(settings.getApplicationMode());
+		} else {
+			profileDialog();
+		}
 	}
 	
 

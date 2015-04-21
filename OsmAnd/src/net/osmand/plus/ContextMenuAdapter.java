@@ -137,7 +137,7 @@ public class ContextMenuAdapter {
 		}
 		int lstLight = iconListLight.get(pos);
 		if(lstLight != 0) {
-			return ctx.getIconsCache().getActionBarIcon(lstLight, light);
+			return ctx.getIconsCache().getIcon(lstLight, light);
 		}
 		return null;
 	}

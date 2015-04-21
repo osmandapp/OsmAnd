@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants" 
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@string/gpx_navigation"
+            android:textSize="@dimen/default_sub_text_size" >
+        </TextView>
+        <TextView
+            android:id="@+id/GPXRouteSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textSize="@dimen/default_list_text_size" >
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

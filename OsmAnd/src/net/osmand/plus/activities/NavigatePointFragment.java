@@ -122,7 +122,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		}
 		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_gdirections_dark, light));
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
@@ -135,11 +135,11 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		if (targets.getPointToNavigate() != null) {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark, light));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flage_dark, light));
 		} else {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flag_dark, light));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, light));
 		}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -151,7 +151,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		//}
 		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_marker_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_marker_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -163,7 +163,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		
 		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_fav_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_fav_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override

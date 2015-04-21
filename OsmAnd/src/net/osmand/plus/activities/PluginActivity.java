@@ -130,7 +130,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
 		IconsCache ic = ((OsmandApplication) getApplication()).getIconsCache();
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(ic.getContentIcon(
-				R.drawable.ic_action_settings_enabled_dark), null, null, null);
+				R.drawable.ic_action_settings), null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
 		if (plugin.needsInstallation()) {
