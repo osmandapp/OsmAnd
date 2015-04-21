@@ -569,10 +569,14 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	
 	public void showDialog() {
 		dialog = createDialog();
+		final boolean switched = mapControlsLayer.switchToRoutePlanningLayout();
 		dialog.show();
 		dialog.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dlg) {
+				if(switched) {
+					mapControlsLayer.switchToRouteFollowingLayout();
+				}
 				dialog = null;
 			}
 		});

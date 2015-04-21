@@ -526,6 +526,7 @@ public class RouteInfoWidgetsFactory {
 		private LanesDrawable lanesDrawable;
 		private View centerInfo;
 		private View progress;
+		private int shadowRadius;
 
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
 			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
@@ -543,6 +544,7 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
+			this.shadowRadius = shadowRadius;
 			TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textColor, textShadowColor, textBold, shadowRadius);
 		}
 		
@@ -613,7 +615,7 @@ public class RouteInfoWidgetsFactory {
 					lanesText.invalidate();
 				}
 			}
-			updateVisibility(lanesShadowText, visible);
+			updateVisibility(lanesShadowText, visible && shadowRadius > 0);
 			updateVisibility(lanesText, visible);
 			updateVisibility(lanesView, visible);
 			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);

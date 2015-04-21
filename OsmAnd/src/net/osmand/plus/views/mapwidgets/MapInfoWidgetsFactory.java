@@ -30,7 +30,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -175,6 +174,7 @@ public class MapInfoWidgetsFactory {
 		private View waypointInfoBar;
 		private LocationPointWrapper lastPoint;
 		private TurnDrawable turnDrawable;
+		private int shadowRad;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
 			topBar = map.findViewById(R.id.map_top_bar);
@@ -208,6 +208,7 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
+			this.shadowRad = rad;
 			TextInfoWidget.updateTextColor(addressText, addressTextShadow, textColor, textShadowColor, bold, rad);
 			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
 					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
@@ -263,7 +264,7 @@ public class MapInfoWidgetsFactory {
 					text = "";
 				}
 			}
-			if(!showNextTurn && updateWaypoint()) {
+			if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
 				updateVisibility(addressText, false);
 				updateVisibility(addressTextShadow, false);
@@ -273,7 +274,7 @@ public class MapInfoWidgetsFactory {
 				updateVisibility(true);
 				updateVisibility(waypointInfoBar, false);
 				updateVisibility(addressText, true);
-				updateVisibility(addressTextShadow, true);
+				updateVisibility(addressTextShadow,  shadowRad > 0);
 				boolean update = turnDrawable.setTurnType(type[0]);
 				
 				int h = addressText.getHeight() / 4 * 3;

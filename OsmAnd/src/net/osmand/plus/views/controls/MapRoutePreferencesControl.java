@@ -132,18 +132,22 @@ public class MapRoutePreferencesControl {
 			dialog.hide();
 			dialog = null;
 		} else {
-			dialog = showDialog();
+			final boolean switched = controlsLayer.switchToRoutePlanningLayout();
+			dialog = createDialog();
 			dialog.show();
 			dialog.setOnDismissListener(new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dlg) {
 					dialog = null;
+					if(switched) {
+						controlsLayer.switchToRouteFollowingLayout();
+					}
 				}
 			});
 		}
 	}
 
-	private Dialog showDialog() {
+	private Dialog createDialog() {
 		Dialog dialog = new Dialog(mapActivity);
 		View ll = createLayout();
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
