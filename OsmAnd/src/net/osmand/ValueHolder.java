@@ -1,4 +1,4 @@
-package net.osmand.plus.monitoring;
+package net.osmand;
 
 public class ValueHolder<T> {
 

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -476,9 +477,12 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 
 
 	@Override
-	public void newRouteIsCalculated(boolean newRoute) {
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 		directionInfo = -1;
 		updateDialog();
+		if(isDialogVisible()) {
+			showToast.value = false;
+		}
 	}
 	
 	public String generateViaDescription() {
