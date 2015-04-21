@@ -41,9 +41,10 @@ import android.graphics.PointF;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -119,34 +120,44 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	}
 	
 	private Dialog createDialog() {
-		Dialog dialog = new Dialog(mapActivity);
-		View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
+		final Dialog dialog = new Dialog(mapActivity);
+		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		updateInfo(ll);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		//lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 		ll.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY), 
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY));
-		int h = ll.getHeight();
+		final int maxHeight ;
 		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			lp.height = //Math.max(h,
-					(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
+			maxHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
 		} else {
-			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+			maxHeight = -1;
 		}
+		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		lp.gravity = Gravity.BOTTOM;
-		if(mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
-			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Dark);
-		} else {
-			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Light);
-		}
-		
+		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			boolean wrap = true;
+			@Override
+			public void onGlobalLayout() {
+				if(ll.getHeight() > maxHeight && maxHeight != -1) {
+					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+							maxHeight));
+					wrap = false;
+				} else if(ll.getHeight() < maxHeight && !wrap){
+					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+							ll.getHeight()));
+					wrap = true;
+				}
+			}
+		});
 		return dialog;
 	}
 	
