@@ -1945,4 +1945,6 @@
 	<string name="shared_string_edit">Modìfica</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">Assistente mapadura OSM</string>
 	<string name="filter_poi_hint">Filtra pro nùmene</string>
+    <string name="index_name_netherlands">Europa - Olanda</string>
+	<string name="search_poi_category_hint">Iscrie pro chircare totu</string>
     </resources>
