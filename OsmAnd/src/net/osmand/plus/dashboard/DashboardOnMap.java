@@ -304,13 +304,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private void initActionButton() {
 		actionButton = new ActionButton(mapActivity);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 
+				ViewGroup.LayoutParams.WRAP_CONTENT);
 		int marginRight = convertPixelsToDp(16, mapActivity);
 		params.setMargins(0, landscape ? 0 : convertPixelsToDp(164, mapActivity), marginRight, landscape ? marginRight : 0);
 
 		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
 		actionButton.setLayoutParams(params);
-		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_get_my_location));
+		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.map_my_location));
 		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.map_widget_blue));
 		actionButton.setButtonColorPressed(mapActivity.getResources().getColor(R.color.map_widget_blue_pressed));
 		actionButton.hide();

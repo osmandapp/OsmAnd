@@ -120,48 +120,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		}
 	}
 	
-	private Dialog createDialog() {
-		final Dialog dialog = new Dialog(mapActivity);
-		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
-		updateInfo(ll);
-		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-		//lp.copyFrom(dialog.getWindow().getAttributes());
-		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-		ll.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY), 
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY));
-		final int maxHeight ;
-		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			maxHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
-		} else {
-			maxHeight = -1;
-		}
-		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		lp.gravity = Gravity.BOTTOM;
-		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
-		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-				WindowManager.LayoutParams.WRAP_CONTENT));
-		dialog.setCanceledOnTouchOutside(true);
-		dialog.getWindow().setAttributes(lp);
-		ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			boolean wrap = true;
-			@Override
-			public void onGlobalLayout() {
-				if(ll.getHeight() > maxHeight && maxHeight != -1) {
-					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-							maxHeight));
-					wrap = false;
-				} else if(ll.getHeight() < maxHeight && !wrap){
-					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-							ll.getHeight()));
-					wrap = true;
-				}
-			}
-		});
-		return dialog;
-	}
-	
 	public void updateDialog() {
 		if(dialog != null) {
 			updateInfo(dialog.findViewById(R.id.plan_route_info));
@@ -443,7 +401,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
 			textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart() + " " + OsmAndFormatter.getFormattedDistance(ri.distance, ctx));
 		} else {
-			textView.setText(ctx.getRoutingHelper().getGeneralRouteInformation());
+			textView.setText(ctx.getRoutingHelper().getGeneralRouteInformation().replace(",", ",\n"));
 		}
 	}
 
@@ -583,7 +541,9 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	
 	
 	public void showDialog() {
-		dialog = createDialog();
+		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
+		updateInfo(ll);
+		dialog = MapRoutePreferencesControl.createDialog(mapActivity, ll);
 		final boolean switched = mapControlsLayer.switchToRoutePlanningLayout();
 		dialog.show();
 		dialog.setOnDismissListener(new OnDismissListener() {

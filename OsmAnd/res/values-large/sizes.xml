@@ -7,6 +7,9 @@
 	<dimen name="map_route_buttons_width">90dp</dimen>
 	<dimen name="map_route_buttons_height">81dp</dimen>
 	<dimen name="map_route_buttons_height_land">72dp</dimen>
+	<dimen name="map_route_planning_max_height">400dp</dimen>
+	<dimen name="map_minwidth_widget">160dp</dimen>
+	<dimen name="map_route_planning_land_width">420dp</dimen>
 	
 	<dimen name="map_address_height">60dp</dimen>
 	<dimen name="map_button_size">78dp</dimen>
@@ -14,7 +17,7 @@
 	<dimen name="map_small_button_margin">9dp</dimen>
 	<dimen name="map_ruler_width">180dp</dimen>
 	<dimen name="map_ruler_bottom_margin">17dp</dimen>
-	<dimen name="map_button_shadow_height">112dp</dimen>
+	<dimen name="map_button_shadow_height">120dp</dimen>
 	<dimen name="map_button_shadow_margin">6dp</dimen>
 	<dimen name="map_button_shadow_width">84dp</dimen>
 	<dimen name="map_alarm_size">116dp</dimen>

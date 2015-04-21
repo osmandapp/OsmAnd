@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="map_go_button_width">200dp</dimen>
 </resources>

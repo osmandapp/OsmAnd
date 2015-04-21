@@ -10,18 +10,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.app.Activity;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 public class AppModeDialog {
-	private static final int TOGGLE_SIZE = 48;
 
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
 			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
@@ -107,7 +103,7 @@ public class AppModeDialog {
 
 
 	static private View createToggle(LayoutInflater layoutInflater, OsmandApplication ctx, LinearLayout layout, ApplicationMode mode){
-		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TOGGLE_SIZE, ctx.getResources().getDisplayMetrics());
+		int metrics = (int) ctx.getResources().getDimension(R.dimen.list_item_height);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);		
 		tb.findViewById(R.id.app_mode_icon).setContentDescription(mode.toHumanString(ctx));
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);

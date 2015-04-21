@@ -134,7 +134,7 @@ public class MapRoutePreferencesControl {
 			dialog = null;
 		} else {
 			final boolean switched = controlsLayer.switchToRoutePlanningLayout();
-			dialog = createDialog();
+			dialog = createDialog(mapActivity, createLayout());
 			dialog.show();
 			dialog.setOnDismissListener(new OnDismissListener() {
 				@Override
@@ -148,20 +148,21 @@ public class MapRoutePreferencesControl {
 		}
 	}
 
-	private Dialog createDialog() {
+	public static Dialog createDialog(MapActivity mapActivity, final View ll) {
 		final Dialog dialog = new Dialog(mapActivity);
-		final View ll = createLayout();
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-		//lp.copyFrom(dialog.getWindow().getAttributes());
-		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 		final int maxHeight ;
 		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			maxHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
+			maxHeight = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_max_height);
+			lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+			lp.gravity = Gravity.BOTTOM;
 		} else {
 			maxHeight = -1;
+			lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+			lp.width = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_max_height);
+			lp.gravity = Gravity.BOTTOM | Gravity.LEFT;
 		}
-		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		lp.gravity = Gravity.BOTTOM;
 		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -169,21 +170,23 @@ public class MapRoutePreferencesControl {
 				WindowManager.LayoutParams.WRAP_CONTENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
-		ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			boolean wrap = true;
-			@Override
-			public void onGlobalLayout() {
-				if(ll.getHeight() > maxHeight && maxHeight != -1) {
-					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-							maxHeight));
-					wrap = false;
-				} else if(ll.getHeight() < maxHeight && !wrap){
-					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-							ll.getHeight()));
-					wrap = true;
+		if (maxHeight != -1) {
+			ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+				boolean wrap = true;
+
+				@Override
+				public void onGlobalLayout() {
+					if (ll.getHeight() > maxHeight) {
+						dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, maxHeight));
+						wrap = false;
+					} else if (ll.getHeight() < maxHeight && !wrap) {
+						dialog.setContentView(ll,
+								new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, ll.getHeight()));
+						wrap = true;
+					}
 				}
-			}
-		});
+			});
+		}
 		return dialog;
 	}
 
@@ -443,7 +446,9 @@ public class MapRoutePreferencesControl {
 			
 			@Override
 			public void onClick(View v) {
-				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+				boolean mt = !routingHelper.getVoiceRouter().isMute();
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(mt);
+				routingHelper.getVoiceRouter().setMute(mt);
 				setMuteBtn(muteBtn);
 			}
 		});

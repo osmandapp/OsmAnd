@@ -79,6 +79,7 @@ public class VoiceRouter {
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
         this.settings = settings;
+        this.mute = settings.VOICE_MUTE.get();
 
 		empty = new Struct("");
 		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();

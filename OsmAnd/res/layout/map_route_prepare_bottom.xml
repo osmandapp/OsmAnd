@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/map_go_route_button"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_width="fill_parent"
         android:layout_gravity="center_vertical"
         android:background="?attr/btn_flat_bg"
         android:drawableLeft="@drawable/ic_action_test_light"

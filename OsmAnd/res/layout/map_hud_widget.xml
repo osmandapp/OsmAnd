@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/btn_left_round"
-    android:minWidth="100dp"
+    android:minWidth="@dimen/map_minwidth_widget"
     android:orientation="vertical" >
 
     <FrameLayout
