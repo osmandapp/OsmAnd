@@ -1996,6 +1996,6 @@
     <string name="shared_string_manage">Administrer</string>
 	<string name="shared_string_edit">Rediger</string>
 	<string name="filter_poi_hint">Filtrer efter navn</string>
-    <string name="search_poi_category_hint">Tast for at søge alt</string>
+    <string name="search_poi_category_hint">Tast for at søge alle</string>
     <string name="index_name_netherlands">Europa - Holland</string>
 	</resources>
