@@ -1289,7 +1289,7 @@
     <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
     <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
-    <string name="shared_string_downloading">Parsiunčiama …</string>
+    <string name="shared_string_downloading">Parsiunčiama</string>
 	<string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM pakeitimų atsarginės kopijos išsaugoti nepavyko</string>
     <string name="local_osm_changes_backup">Išsaugoti vietinę OSM pakeitimų kopiją</string>
@@ -1476,8 +1476,8 @@
     <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
     <string name="select_gpx">Pasirinkti GPX…</string>
     <string name="route_descr_select_destination">Pasirinkti kelionės tikslą</string>
-    <string name="shared_string_select_on_map">Pasirinkti žemėlapyje…</string>
-    <string name="shared_string_favorite">Įsiminta vieta…</string>
+    <string name="shared_string_select_on_map">Pasirinkti žemėlapyje</string>
+    <string name="shared_string_favorite">Įsiminta vieta</string>
     <string name="route_preferences">Maršruto parinktys</string>
     <string name="route_info">Maršruto informacija</string>
     <string name="use_displayed_track_for_navigation">Ar rodomą maršrutą norite naudoti navigacijai?</string>
@@ -1843,7 +1843,7 @@
     <string name="osmo_use_https">Naudoti HTTPS</string>
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     
-	<string name="home_button">Namai</string>
+	<string name="home_button">Namo</string>
     <string name="map_update">Liko atnaujinti %1$s žemėlapių</string>
 	<string name="search_for">Ieškoti (ko)</string>
 	
@@ -1871,7 +1871,7 @@
     <string name="rendering_value_orange_name">Oranžinis</string>
     <string name="rendering_value_germanRoadAtlas_name">Vokietijos kelių atlasas</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikos kelių atlasas</string>
-    <string name="routing_attr_no_new_routing_name">Nenaudoti 1.9 versijos maršrutizavimo</string>
+    <string name="routing_attr_no_new_routing_name">Nenaudoti 1.9 versijos maršrutizavimo taisyklių</string>
     <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
     <string name="shared_string_dismiss">Nesiųsti</string>
@@ -1921,7 +1921,7 @@
     <string name="device_memory">Įrenginio atmintis</string>
     <string name="free">"Laisva %1$s "</string>
 	<string name="roads_only">Tik keliai</string>
-    <string name="watch">Stebėti</string>
+    <string name="watch">Žiūrėti</string>
 	<string name="notes">Pastabos</string>
 	<string name="online_map">Žemėlapis online</string>
 	<string name="shared_string_audio">Garsas</string>
@@ -1930,8 +1930,8 @@
 	
     <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
 	<string name="shared_string_export">Eksportuoti</string>
-	<string name="days_behind">dienas atsilikęs</string>
-	<string name="plugin_nautical_descr">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
+	<string name="days_behind">dienų senumo</string>
+	<string name="plugin_nautical_descr">"Šis įskiepis papildo OsmAnd programą jūrlapiais skirtais laivybai, būriavimui ir kitoms vandens sporto veikloms.\n\nSpecialus OsmAnd žemėlpaio įskiepis pateiks visus navigacinius ženklus ir jūrlapių simbolius reikalingus jūros ir vidaus vandenų navigacijai. Kiekvieno navigacinio žeklo aprašymas pateiks informaciją apie jų reikšmę (kategorija, forma, spalva, eiliškumas, nuoroda ir kt.).\n\nNorėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą papraščiausiai išjunkite šį įskiepį arba pakeiskite \'Žemėlapio nustatymų\' skirsnyje pakeiskite \'Žemėlapio stilių\' į pageidaujamą. "</string>
 	<string name="rename_failed">Nepavyko pervardinti.</string>
 	<string name="back_to_map">Grįžti į žemėlapį</string>
 	<string name="shared_string_selected">Pasirinkta</string>
@@ -1982,4 +1982,5 @@
 	<string name="route_points">Maršruto taškai</string>
 	<string name="plugin_touringview_name">Turistinis žemėlapis</string>
 	<string name="shared_string_release">Išleista</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Tako priežiūra</string>
+    </resources>

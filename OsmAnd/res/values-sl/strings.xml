@@ -1874,7 +1874,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="pause_navigation">Zaustavi navigacijo</string>
     <string name="save_global_track_interval_descr">Izerite interval beleženja za splošno snemanje sledi (omogočeno z gumbom za snemanje GPX na zemljevidu)</string>
 	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX lahko vklopite ali izklopite z gumbom za snemanje na ekranu z zemljevidom</string>
-	<string name="record_plugin_description">Shranite vaše sledi s pritiskom na gumb na oknu z zemljevidom. Pokaži nastavitve za snemanje vaših potovanj v krajevne datoteke GPX ali v oblak z uporabo spletnih storitev.</string>
+	<string name="record_plugin_description">"Ta vtičnik aktivira funkcijo snemanja in shranjevanja svojih sledi, če pritisnete na gradnik GPX snemanje, ki je na zaslonu zemljevida, ali pa tudi samodejno shranjevanje vseh vaših poti v GPX datoteko.\n\nPosnete sledi lahko delite s prijatelji ali uporabite kot OSM prispevke. Športniki lahko uporabite zabeležene sledi za spremljanje svojih treningov. Nekatere osnovne analize sledi lahko izvedete neposredno v OsmAnd-u, kot so čas kroga, povprečna hitrost, itd. Sledi seveda lahko  tudi pozneje analizirate v drugih posebnih orodjih za analizo. "</string>
     <string name="rendering_attr_osmcTraces_description">Prikaz stez po OSMC sledeh</string>
     
 	<string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
@@ -1926,7 +1926,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     
     <string name="lock_screen_request_explanation">%1$s potrebuje to dovoljenje za izklop zaslona za funkcijo varčevanja z energijo.</string>
     <string name="fav_point_emoticons_message">Ime vaše priljubljene lokacije je bilo spremenjeno v %1$s, da se omogoči pravilno shranjevanje nizov s smeški v datoteko.</string>
-    <string name="routing_attr_no_new_routing_name">Ne pravil usmerjanja v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ne uporabljati novih v1.9 pravil usmerjanja</string>
     <string name="routing_attr_no_new_routing_description">Ne uporabljaj pravil usmerjanja uvedenih z v1.9</string>
     <string name="rendering_attr_roadStyle_name">Slog cest</string>
     <string name="rendering_value_default_name">Privzeto</string>
@@ -2013,7 +2013,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="action_modify">Sprememba dejanja</string>
 	<string name="action_delete">Brisanje dejanja</string>
 	<string name="osm_edits">OSM urejanje</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">ostaja</string> <string name="parking_place_limited">Parkiranje časovno omejeno na</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">ostaja</string> <string name="parking_place_limited">Parkiranje časovno omejeno na</string>
 	<string name="your_edits">Vaše spremembe</string>
     <string name="drawer">Seznam</string>
     <string name="short_location_on_map">Šir %1$s\n Dol %2$s</string>
@@ -2048,4 +2048,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="shared_string_go">Pojdi</string>
 	<string name="osmand_parking_overdue">prekoračen čas</string>
 	<string name="shared_string_places">Kraji</string>
+	<string name="watch">Poglej</string>
 	</resources>

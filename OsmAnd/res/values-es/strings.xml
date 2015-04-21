@@ -1963,7 +1963,7 @@
 	<string name="action_modify">Acción modificar</string>
 	<string name="action_delete">Acción borrar</string>
 	<string name="osm_edits">Ediciones OSM</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">queda(n)</string> <string name="parking_place_limited">Tiempo de aparcamiento limitado a</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">m</string><string name="osmand_parking_time_left">restantes</string> <string name="parking_place_limited">Tiempo de aparcamiento limitado a</string>
 	<string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar después</string>
     <string name="waypoint_visit_before">Visitar antes</string>
@@ -2012,5 +2012,6 @@
 	<string name="shared_string_places">Lugares</string>
 	<string name="shared_string_search">Buscar</string>
 	<string name="filter_poi_hint">Filtrar por nombre</string>
-    <string name="search_poi_category_hint">Teclea para buscar</string>
-    </resources>
+    <string name="search_poi_category_hint">Escribe para buscar todas</string>
+    <string name="index_name_netherlands">Europa - Países Bajos</string>
+	</resources>
