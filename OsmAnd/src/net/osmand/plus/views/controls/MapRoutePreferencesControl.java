@@ -160,8 +160,8 @@ public class MapRoutePreferencesControl {
 		} else {
 			maxHeight = -1;
 			lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-			lp.width = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_max_height);
-			lp.gravity = Gravity.BOTTOM | Gravity.LEFT;
+			lp.width = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_land_width);
+			lp.gravity = Gravity.LEFT;
 		}
 		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
