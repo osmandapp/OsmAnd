@@ -44,6 +44,7 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -132,45 +133,57 @@ public class MapRoutePreferencesControl {
 			dialog.hide();
 			dialog = null;
 		} else {
-			dialog = showDialog();
+			final boolean switched = controlsLayer.switchToRoutePlanningLayout();
+			dialog = createDialog();
 			dialog.show();
 			dialog.setOnDismissListener(new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dlg) {
 					dialog = null;
+					if(switched) {
+						controlsLayer.switchToRouteFollowingLayout();
+					}
 				}
 			});
 		}
 	}
 
-	private Dialog showDialog() {
-		Dialog dialog = new Dialog(mapActivity);
-		View ll = createLayout();
+	private Dialog createDialog() {
+		final Dialog dialog = new Dialog(mapActivity);
+		final View ll = createLayout();
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		//lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-		ll.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY), 
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY));
-		int h = ll.getHeight();
-		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
-			lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 260, mapActivity.getResources()
-					.getDisplayMetrics());
+		final int maxHeight ;
+		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+			maxHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, mapActivity.getResources().getDisplayMetrics());
 		} else {
-			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+			maxHeight = -1;
 		}
+		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 		lp.gravity = Gravity.BOTTOM;
-		if(mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
-			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Dark);
-		} else {
-			dialog.getContext().setTheme(R.style.Dialog_Fullscreen_Light);
-		}
-		
+		dialog.getContext().setTheme(R.style.Dialog_Fullscreen);
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			boolean wrap = true;
+			@Override
+			public void onGlobalLayout() {
+				if(ll.getHeight() > maxHeight && maxHeight != -1) {
+					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+							maxHeight));
+					wrap = false;
+				} else if(ll.getHeight() < maxHeight && !wrap){
+					dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+							ll.getHeight()));
+					wrap = true;
+				}
+			}
+		});
 		return dialog;
 	}
 

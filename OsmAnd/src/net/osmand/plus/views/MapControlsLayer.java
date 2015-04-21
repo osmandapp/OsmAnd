@@ -388,16 +388,31 @@ public class MapControlsLayer extends OsmandMapLayer {
 				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
 				} else {
-					mapActivity.getRoutingHelper().setRoutePlanningMode(true);
-					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-					mapActivity.refreshMap();
+					switchToRoutePlanningLayout();
 				}
 			}
+
+			
 		});
 	}
 	
 	
+	public void switchToRouteFollowingLayout() {
+		touchEvent = 0;
+		mapActivity.getMyApplication().getRoutingHelper().setRoutePlanningMode(false);
+		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		mapActivity.refreshMap();
+	}
 	
+	public boolean switchToRoutePlanningLayout() {
+		if (!mapActivity.getRoutingHelper().isRoutePlanningMode() && mapActivity.getRoutingHelper().isFollowingMode()) {
+			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.refreshMap();
+			return true;
+		}
+		return false;
+	}
 
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
@@ -436,12 +451,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
-			routingHelper.setRoutePlanningMode(false);
-			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			switchToRouteFollowingLayout();
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				mapRouteInfoControlDialog.showDialog();
 			} else {
+				touchEvent = 0;
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
@@ -452,6 +467,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 	}
+
+	
 
 	private void stopCounter() {
 		startCounter = 0;
@@ -534,14 +551,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
-		boolean showButtons = routePlanningMode || !routeFollowingMode;
+		boolean showMenuButton = showRouteCalculationControls || !routeFollowingMode;
 		updateMyLocation(rh);
 //		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.map_directions	);
 //		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
 		routePlanningBtn.setIconResId(R.drawable.map_directions	);
 		routePlanningBtn.updateVisibility(!routeFollowingMode && !routePlanningMode);
 
-		menuControl.updateVisibility(showButtons);
+		menuControl.updateVisibility(showMenuButton);
 
 		if(routeFollowingMode || routePlanningMode) {
 			mapAppModeShadow.setVisibility(View.GONE);

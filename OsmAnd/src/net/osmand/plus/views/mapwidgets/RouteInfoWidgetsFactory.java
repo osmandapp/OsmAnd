@@ -41,7 +41,6 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -49,8 +48,6 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class RouteInfoWidgetsFactory {
@@ -526,6 +523,7 @@ public class RouteInfoWidgetsFactory {
 		private LanesDrawable lanesDrawable;
 		private View centerInfo;
 		private View progress;
+		private int shadowRadius;
 
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
 			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
@@ -543,6 +541,7 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
+			this.shadowRadius = shadowRadius;
 			TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textColor, textShadowColor, textBold, shadowRadius);
 		}
 		
@@ -613,7 +612,7 @@ public class RouteInfoWidgetsFactory {
 					lanesText.invalidate();
 				}
 			}
-			updateVisibility(lanesShadowText, visible);
+			updateVisibility(lanesShadowText, visible && shadowRadius > 0);
 			updateVisibility(lanesText, visible);
 			updateVisibility(lanesView, visible);
 			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);
