@@ -2013,4 +2013,5 @@
 	<string name="shared_string_search">Buscar</string>
 	<string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar todas</string>
-    </resources>
+    <string name="index_name_netherlands">Europa - Países Bajos</string>
+	</resources>
