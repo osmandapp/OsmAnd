@@ -37,7 +37,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -123,7 +123,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 
-		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
+		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((ActionBarProgressActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);

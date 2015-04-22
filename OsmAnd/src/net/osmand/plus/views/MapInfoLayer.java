@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -193,7 +193,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void updateStreetName(boolean nightMode, TextState ts) {
-		streetNameView.setBackgroundResource(ScreenOrientationHelper.isOrientationPortrait(map) ? ts.boxTop
+		streetNameView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? ts.boxTop
 				: ts.boxFree);
 		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}

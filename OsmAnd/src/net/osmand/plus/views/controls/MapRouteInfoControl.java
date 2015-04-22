@@ -27,7 +27,6 @@ import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -39,15 +38,8 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.PointF;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -543,15 +535,10 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public void showDialog() {
 		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		updateInfo(ll);
-		dialog = MapRoutePreferencesControl.createDialog(mapActivity, ll);
-		final boolean switched = mapControlsLayer.switchToRoutePlanningLayout();
-		dialog.show();
-		dialog.setOnDismissListener(new OnDismissListener() {
+		dialog = MapRoutePreferencesControl.showDialog(mapControlsLayer, mapActivity, ll, new OnDismissListener() {
+
 			@Override
-			public void onDismiss(DialogInterface dlg) {
-				if(switched) {
-					mapControlsLayer.switchToRouteFollowingLayout();
-				}
+			public void onDismiss(DialogInterface dialog) {
 				dialog = null;
 			}
 		});

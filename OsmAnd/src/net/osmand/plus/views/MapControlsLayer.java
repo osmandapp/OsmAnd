@@ -514,22 +514,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		updateControls(tileBox, nightMode);
-		boolean b = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoControlDialog.isDialogVisible();
-		updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), !b);
 	}
 	
-	protected boolean updateVisibility(View view, boolean visible) {
-		if (view != null && visible != (view.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				view.setVisibility(View.VISIBLE);
-			} else {
-				view.setVisibility(View.GONE);
-			}
-			view.invalidate();
-			return true;
-		}
-		return false;
-	}
+	
 
 	private void updateControls(RotatedTileBox tileBox, DrawSettings nightMode) {
 		boolean isNight = nightMode != null && nightMode.isNightMode();

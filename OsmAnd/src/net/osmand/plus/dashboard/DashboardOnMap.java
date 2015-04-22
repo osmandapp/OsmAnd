@@ -22,7 +22,7 @@ import net.osmand.plus.development.DashSimulateFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.DashTrackFragment;
@@ -126,7 +126,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void createDashboardView() {
 		baseColor =  mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
+		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
@@ -138,7 +138,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
-		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
 			scrollView.setScrollViewCallbacks(this);
 			((ObservableListView) listView).setScrollViewCallbacks(this);

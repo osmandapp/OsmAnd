@@ -113,7 +113,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float rotate; // accumulate
 
 	private int mapPosition;
-
+	
+	private int mapPositionX;
+	
 	private boolean showMapPosition = true;
 
 	private IMapLocationListener locationListener;
@@ -398,6 +400,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setMapPosition(int type) {
 		this.mapPosition = type;
 	}
+	
+	public void setMapPositionX(int type) {
+		this.mapPositionX = type;
+	}
 
 	public OsmandSettings getSettings() {
 		return settings;
@@ -472,10 +478,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.85f : 0.5f;
+		final float ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
 		final int cy = (int) (ratioy * view.getHeight());
+		final int cx = (int) (ratiox * view.getWidth());
 		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
-				currentViewport.getCenterPixelY() != cy) {
-			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), 0.5f, ratioy);
+				currentViewport.getCenterPixelY() != cy || 
+				currentViewport.getCenterPixelX() != cx) {
+			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
 			refreshBufferImage(drawSettings);
 		}
 		if (view instanceof SurfaceView) {

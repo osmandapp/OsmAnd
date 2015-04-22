@@ -80,7 +80,7 @@ import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
@@ -451,7 +451,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectedObject = o;
-				boolean portrait = ScreenOrientationHelper.isOrientationPortrait(OsMoGroupsActivity.this);
+				boolean portrait = AndroidUiHelper.isOrientationPortrait(OsMoGroupsActivity.this);
 				if (portrait) {
 					menu = getClearToolbar(true).getMenu();
 				} else {
@@ -524,7 +524,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			public void onDestroyActionMode(ActionMode mode) {
 				selectedObject = null;
 				refreshList();
-				if (ScreenOrientationHelper.isOrientationPortrait(OsMoGroupsActivity.this)){
+				if (AndroidUiHelper.isOrientationPortrait(OsMoGroupsActivity.this)){
 					onCreateOptionsMenu(menu);
 				}
 			}
@@ -1030,7 +1030,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.clear();
 		Menu oldMenu = menu;
-		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(this);
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(this);
 		if (portrait) {
 			menu = getClearToolbar(true).getMenu();
 		} else {

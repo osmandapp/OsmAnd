@@ -11,7 +11,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
@@ -84,7 +84,7 @@ public class SearchAddressFragment extends Fragment {
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		Menu menu = onCreate;
-		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		if(getActivity() instanceof SearchActivity) {
 			if (portrait) {
 				menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();

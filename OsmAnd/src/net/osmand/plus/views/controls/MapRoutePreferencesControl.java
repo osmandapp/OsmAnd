@@ -22,7 +22,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -37,11 +37,9 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -133,26 +131,23 @@ public class MapRoutePreferencesControl {
 			dialog.hide();
 			dialog = null;
 		} else {
-			final boolean switched = controlsLayer.switchToRoutePlanningLayout();
-			dialog = createDialog(mapActivity, createLayout());
-			dialog.show();
-			dialog.setOnDismissListener(new OnDismissListener() {
+			dialog = showDialog(controlsLayer, mapActivity, createLayout(), new OnDismissListener() {
+				
 				@Override
-				public void onDismiss(DialogInterface dlg) {
-					dialog = null;
-					if(switched) {
-						controlsLayer.switchToRouteFollowingLayout();
-					}
+				public void onDismiss(DialogInterface dialog) {
+					dialog = null;				
 				}
 			});
 		}
 	}
 
-	public static Dialog createDialog(MapActivity mapActivity, final View ll) {
+	public static Dialog showDialog(final MapControlsLayer controlsLayer, final MapActivity mapActivity, final View ll,
+			final OnDismissListener dismiss) {
+		final boolean switched = controlsLayer.switchToRoutePlanningLayout();
 		final Dialog dialog = new Dialog(mapActivity);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		final int maxHeight ;
-		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(mapActivity);
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		if(portrait) {
 			maxHeight = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_max_height);
 			lp.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -188,8 +183,37 @@ public class MapRoutePreferencesControl {
 				}
 			});
 		}
+		if(!portrait) {
+			mapActivity.getMapView().setMapPositionX(1);
+			mapActivity.getMapView().refreshMap();
+		}
+		dialog.show();
+		if(!AndroidUiHelper.isLargeDevice(mapActivity)) {
+			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
+			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), false);
+		}
+		if(!portrait) {
+			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
+		}
+		dialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dlg) {
+				mapActivity.getMapView().setMapPositionX(0);
+				mapActivity.getMapView().refreshMap();
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
+				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), true);
+				if(switched) {
+					controlsLayer.switchToRouteFollowingLayout();
+				}
+				if(dismiss != null){
+					dismiss.onDismiss(dialog);
+				}
+			}
+		});
 		return dialog;
 	}
+	
 
 	private void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
 		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();

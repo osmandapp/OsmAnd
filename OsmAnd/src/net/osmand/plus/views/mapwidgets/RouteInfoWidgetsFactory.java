@@ -19,7 +19,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -734,7 +734,7 @@ public class RouteInfoWidgetsFactory {
 			text = (TextView) ma.findViewById(R.id.map_ruler_text);
 			textShadow = (TextView) ma.findViewById(R.id.map_ruler_text_shadow);
 			maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
-			orientationPortrait = ScreenOrientationHelper.isOrientationPortrait(ma);
+			orientationPortrait = AndroidUiHelper.isOrientationPortrait(ma);
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {

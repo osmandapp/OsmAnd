@@ -54,7 +54,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.MapUtils;
 
@@ -371,7 +371,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
+		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);

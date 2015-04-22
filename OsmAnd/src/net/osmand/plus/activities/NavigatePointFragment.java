@@ -10,7 +10,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.content.Intent;
@@ -109,7 +109,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean light = app.getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		if(getActivity() instanceof SearchActivity) {
