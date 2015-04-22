@@ -152,7 +152,8 @@ public class MapRoutePreferencesControl {
 		final Dialog dialog = new Dialog(mapActivity);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		final int maxHeight ;
-		if(ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(mapActivity);
+		if(portrait) {
 			maxHeight = (int) mapActivity.getResources().getDimension(R.dimen.map_route_planning_max_height);
 			lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 			lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -167,7 +168,7 @@ public class MapRoutePreferencesControl {
 		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(ll, new LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-				WindowManager.LayoutParams.WRAP_CONTENT));
+				portrait ? WindowManager.LayoutParams.WRAP_CONTENT : WindowManager.LayoutParams.MATCH_PARENT));
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.getWindow().setAttributes(lp);
 		if (maxHeight != -1) {
