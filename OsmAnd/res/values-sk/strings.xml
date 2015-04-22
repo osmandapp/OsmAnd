@@ -2151,4 +2151,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_edit">Upraviť</string>
 	<string name="filter_poi_hint">Filtrovať podľa názvu</string>
     <string name="search_poi_category_hint">Píšte pre vyhľadanie všetkých</string>
-    </resources>
+    <string name="index_name_netherlands">Európa - Holandsko</string>
+	</resources>
