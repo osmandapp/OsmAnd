@@ -200,16 +200,9 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
 	private TextInfoWidget createOsMoControl(final MapActivity map) {
-		
-		final Drawable srcSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_small);
-		final Drawable srcSignalSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
-		final Drawable srcBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_big);
-		final Drawable srcSignalBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
-//		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.mon_osmo_inactive);
-		final Drawable srcSignalinactive = map.getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
 		final TextInfoWidget osmoControl = new TextInfoWidget(map) {
 			long lastUpdateTime;
-			private Drawable blinkImg;
+			private int  blinkImg;
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				String txt = "OsMo";
@@ -238,12 +231,19 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						}
 					}
 				}
-				Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
-				Drawable big = srcSignalinactive; // tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+				boolean night  = drawSettings != null && drawSettings.isNightMode();
+				int srcSignalinactive =  !night ? R.drawable.widget_osmo_inactive_day : R.drawable.widget_osmo_inactive_night;
+				int small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+				int big = srcSignalinactive; // tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 				long last = service.getLastCommandTime();
 				if (service.isActive()) {
-					small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
-					big = tracker.isEnabledTracker() ? srcSignalBig : srcBig;
+					if(tracker.isEnabledTracker() ) {
+						small = night ? R.drawable.widget_osmo_connected_location_night : R.drawable.widget_osmo_connected_location_day;
+						big = night ? R.drawable.widget_osmo_connected_location_night : R.drawable.widget_osmo_connected_location_day;
+					} else {
+						small = night ? R.drawable.widget_osmo_connected_night : R.drawable.widget_osmo_connected_day;
+						big = night ? R.drawable.widget_osmo_connected_night : R.drawable.widget_osmo_connected_day;
+					}
 				}
 				setText(txt, subtxt);
 				if(blinkImg != small) {
@@ -257,13 +257,13 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				return true;
 			}
 			
-			private void blink(Drawable bigger, final Drawable smaller ) {
+			private void blink(int bigger, final int smaller ) {
 				blinkImg = smaller;
 				setImageDrawable(bigger);
 				map.getMyApplication().runInUIThread(new Runnable() {
 					@Override
 					public void run() {
-						blinkImg = null;
+						blinkImg = 0;
 						setImageDrawable(smaller);
 					}
 				}, 500);
