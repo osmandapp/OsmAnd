@@ -546,7 +546,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	
 	public void hideDialog() {
 		if (dialog != null) {
-			dialog.hide();
+			dialog.dismiss();
 			dialog = null;
 		}
 	}

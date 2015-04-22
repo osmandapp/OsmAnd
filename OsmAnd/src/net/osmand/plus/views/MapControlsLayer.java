@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
@@ -83,6 +84,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private View mapAppModeShadow;
 	private MapHudButton routePlanningBtn;
 	private long touchEvent;
+	private MapHudButton mapZoomOut;
+	private MapHudButton mapZoomIn;
+	private MapHudButton layersHud;
+	private MapHudButton mapDashControl;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -173,9 +178,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark)
-				.setIconsId(R.drawable.map_layer_dark, R.drawable.map_layer_night)
-				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night));
+		layersHud = createHudButton((ImageView) configureMap, R.drawable.map_layer_dark)
+		.setIconsId(R.drawable.map_layer_dark, R.drawable.map_layer_night)
+		.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+		controls.add(layersHud);
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -201,6 +207,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		routePreparationLayout = mapActivity.findViewById(R.id.map_route_preparation_layout);
+		View dashRouteButton = mapActivity.findViewById(R.id.map_dashboard_route_button);
+		mapDashControl = createHudButton((ImageView) dashRouteButton, R.drawable.map_dashboard).setBg(
+				R.drawable.btn_flat, R.drawable.btn_flat_night);
+		controls.add(mapDashControl);
+
+		dashRouteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+			}
+
+			
+		});
+		
 		View cancelRouteButton = mapActivity.findViewById(R.id.map_cancel_route_button);
 		controls.add(createHudButton((ImageView) cancelRouteButton, R.drawable.map_action_cancel).setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night));
@@ -256,6 +276,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 	
 	public void updateRouteButtons(View main, boolean routeInfo) {
+		ImageView dashButton = (ImageView) main.findViewById(R.id.map_dashboard_route_button);
+		dashButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_dashboard));
+		dashButton.setVisibility(AndroidUiHelper.isOrientationPortrait(mapActivity) ? 
+				View.GONE : View.VISIBLE);
+		dashButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapRouteInfoControlDialog.hideDialog();
+				optionsRouteControlDialog.hideDialog();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+			}
+		});
 		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
 		cancelRouteButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_action_cancel));
 		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
@@ -417,8 +449,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).
-				setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent());
+		mapZoomIn = createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).
+		setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent();
+		controls.add(mapZoomIn);
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -434,8 +467,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).
-				setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent());
+		mapZoomOut = createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).
+		setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent();
+		controls.add(mapZoomOut);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -527,6 +561,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			// TODO
 			// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		}
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		// default buttons
 		boolean routePlanningMode = false;
 		RoutingHelper rh = mapActivity.getRoutingHelper();
@@ -536,16 +571,22 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
+		boolean dialogOpened = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoControlDialog.isDialogVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
-		boolean showMenuButton = showRouteCalculationControls || !routeFollowingMode;
-		updateMyLocation(rh);
+		boolean showMenuButton = (showRouteCalculationControls && portrait) || 
+				(!routeFollowingMode && !routePlanningMode);
+		updateMyLocation(rh, dialogOpened);
 //		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.map_directions	);
 //		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
 		routePlanningBtn.setIconResId(R.drawable.map_directions	);
 		routePlanningBtn.updateVisibility(!routeFollowingMode && !routePlanningMode);
 
-		menuControl.updateVisibility(showMenuButton);
+		menuControl.updateVisibility(showMenuButton && !dialogOpened);
+		mapZoomIn.updateVisibility(!dialogOpened);
+		mapZoomOut.updateVisibility(!dialogOpened);
+		compassHud.updateVisibility(!dialogOpened);
+		layersHud.updateVisibility(!dialogOpened);
 
 		if(routeFollowingMode || routePlanningMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
@@ -566,18 +607,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int vis = showRouteCalculationControls ? View.VISIBLE : View.GONE;
 		if (showRouteCalculationControls) {
 			((TextView) routeGoControl.iv).setTextColor(textColor);
-			final String text;
+			String text = portrait ? mapActivity.getString(R.string.shared_string_go) : "";
 			if (startCounter > 0) {
 				int get = (int) ((startCounter - System.currentTimeMillis()) / 1000l);
-				text = mapActivity.getString(R.string.shared_string_go) + " (" + get + ")";
-			} else {
-				text = mapActivity.getString(R.string.shared_string_go);
+				text += " (" + get + ")";
 			}
 			((TextView) routeGoControl.iv).setText(text);
 		}
 
 		if (routePreparationLayout.getVisibility() != vis) {
 			routePreparationLayout.setVisibility(vis);
+			mapDashControl.updateVisibility(showRouteCalculationControls && !portrait);
 			mapRouteInfoControlDialog.setVisible(showRouteCalculationControls);
 			if (showRouteCalculationControls) {
 				if (!mapActivity.getRoutingHelper().isFollowingMode()
@@ -612,7 +652,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void updateMyLocation(RoutingHelper rh) {
+	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
 		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		
@@ -627,7 +667,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.setBg(R.drawable.btn_circle_blue);
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible);
+		backToLocationControl.updateVisibility(visible && !dialogOpened);
 	}
 
 

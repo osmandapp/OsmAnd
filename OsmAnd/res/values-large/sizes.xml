@@ -9,7 +9,7 @@
 	<dimen name="map_route_buttons_height_land">72dp</dimen>
 	<dimen name="map_route_planning_max_height">400dp</dimen>
 	<dimen name="map_minwidth_widget">160dp</dimen>
-	<dimen name="map_route_planning_land_width">440dp</dimen>
+	<dimen name="map_route_planning_land_width">510dp</dimen>
 	
 	<dimen name="map_address_height">60dp</dimen>
 	<dimen name="map_button_size">78dp</dimen>

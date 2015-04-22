@@ -21,8 +21,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -195,7 +195,7 @@ public class MapRoutePreferencesControl {
 		if(!portrait) {
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), true);
 		}
-		dialog.setOnDismissListener(new OnDismissListener() {
+		OnDismissListener dismissList = new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dlg) {
 				mapActivity.getMapView().setMapPositionX(0);
@@ -210,7 +210,8 @@ public class MapRoutePreferencesControl {
 					dismiss.onDismiss(dialog);
 				}
 			}
-		});
+		};
+		dialog.setOnDismissListener(dismissList);
 		return dialog;
 	}
 	
@@ -555,7 +556,7 @@ public class MapRoutePreferencesControl {
 
 	public void hideDialog() {
 		if(dialog != null) {
-			dialog.hide();
+			dialog.dismiss();
 			dialog = null;
 		}
 	}

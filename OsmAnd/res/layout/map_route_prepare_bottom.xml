@@ -7,6 +7,15 @@
     android:layout_gravity="bottom" >
 
     <ImageButton
+        android:id="@+id/map_dashboard_route_button"
+        android:layout_width="@dimen/map_route_buttons_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/btn_flat_bg"
+        android:visibility="gone"
+        android:src="@drawable/ic_action_test_light" />
+    
+    <ImageButton
         android:id="@+id/map_cancel_route_button"
         android:layout_width="@dimen/map_route_buttons_width"
         android:layout_height="match_parent"

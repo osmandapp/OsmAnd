@@ -85,7 +85,7 @@
 	<dimen name="map_button_rect_rad">3dp</dimen>
 	<dimen name="map_button_stroke">1dp</dimen>
 	<dimen name="map_button_stroke_dark">1dp</dimen>
-	<dimen name="map_route_planning_land_width">280dp</dimen>
+	<dimen name="map_route_planning_land_width">320dp</dimen>
 	<dimen name="map_route_planning_max_height">280dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
 	
