@@ -1,40 +1,11 @@
 package net.osmand.plus.dashboard;
 
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.TranslateAnimation;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.software.shell.fab.ActionButton;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -61,12 +32,39 @@ import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 /**
  */
@@ -76,7 +74,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
 	
 	private MapActivity mapActivity;
-	private ActionButton actionButton;
+	private ImageView actionButton;
 	private FrameLayout dashboardView;
 	
 	private ArrayAdapter<?> listAdapter;
@@ -303,18 +301,22 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	private void initActionButton() {
-		actionButton = new ActionButton(mapActivity);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 
-				ViewGroup.LayoutParams.WRAP_CONTENT);
-		int marginRight = convertPixelsToDp(16, mapActivity);
-		params.setMargins(0, landscape ? 0 : convertPixelsToDp(164, mapActivity), marginRight, landscape ? marginRight : 0);
-
+		actionButton = new ImageView(mapActivity);
+		int btnSize = (int) mapActivity.getResources().getDimension(R.dimen.map_button_size);
+		int topPad = (int) mapActivity.getResources().getDimension(R.dimen.dashboard_map_top_padding);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				btnSize,btnSize
+				);
+		int marginRight = btnSize / 4;
+		params.setMargins(0, landscape ? 0 : topPad - 2 * btnSize, 
+				marginRight, landscape ? marginRight : 0);
 		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
 		actionButton.setLayoutParams(params);
+		actionButton.setScaleType(ScaleType.CENTER);
 		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.map_my_location));
-		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.map_widget_blue));
-		actionButton.setButtonColorPressed(mapActivity.getResources().getColor(R.color.map_widget_blue_pressed));
-		actionButton.hide();
+		
+		actionButton.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.btn_circle_blue));
+		hideActionButton();
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -328,6 +330,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		});
 	}
 	
+
+	private void hideActionButton() {
+		actionButton.setVisibility(View.GONE);		
+	}
+
 
 	public static int convertPixelsToDp(float dp, Context context){
 		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -402,7 +409,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			dashboardView.setVisibility(View.VISIBLE);
 			if(isActionButtonVisible()) {
-				actionButton.show();
+				actionButton.setVisibility(View.VISIBLE);
 			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
@@ -436,7 +443,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-			actionButton.hide();
+			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
 					df.get().onCloseDash();
@@ -794,9 +801,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
 			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
 			if (minTop > originalPosition - scrollY) {
-				actionButton.hide();
+				hideActionButton();
 			} else {
-				actionButton.show();
+				actionButton.setVisibility(View.VISIBLE);
 				lp.topMargin = originalPosition - scrollY;
 				((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
 			}
