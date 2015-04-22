@@ -1862,4 +1862,5 @@
 	<string name="shared_string_edit">Redigera</string>
 	<string name="filter_poi_hint">Filtrera efter namn</string>
     <string name="search_poi_category_hint">Skriv för att söka alla</string>
-    </resources>
+    <string name="index_name_netherlands">Europa - Nederländerna</string>
+	</resources>

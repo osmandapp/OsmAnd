@@ -682,6 +682,7 @@
 
 	<string name="poi_bank">Bank</string>
 	<string name="poi_atm">ATM</string>
+	<string name="poi_payment_terminal">Payment terminal</string>
 	<string name="poi_money_lender">Money lender</string>
 	<string name="poi_pawnbroker">Pawnbroker</string>
 	<string name="poi_bureau_de_change">Bureau de change</string>

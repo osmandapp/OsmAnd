@@ -1931,7 +1931,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="logged_as">Registrato come %1$s</string>
 	<string name="rendering_category_routes">Percorsi</string>
     <string name="rendering_category_details">Dettagli</string>
-    <string name="rendering_category_transport">Trasporto pubblico</string>
+    <string name="rendering_category_transport">Trasporto</string>
     <string name="rendering_category_others">Altri attributi della mappa</string>
     <string name="map_widget_right">Pannello destro</string>
 	<string name="map_widget_left">Pannello sinistro</string>
@@ -2176,4 +2176,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_edit">Modifica</string>
 	<string name="filter_poi_hint">Filtra per nome</string>
     <string name="search_poi_category_hint">Scrivi cercare fra tutti</string>
-    </resources>
+    <string name="index_name_netherlands">Europa - Paesi Bassi</string>
+	</resources>

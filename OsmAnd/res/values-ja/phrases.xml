@@ -699,4 +699,20 @@
 	<string name="poi_rapids">急流部(Rapids)</string>
 	<string name="poi_stone">目印岩(Remarkable stone)</string>
 	<string name="poi_cape">岬(Cape)</string>
+	<string name="poi_beach">砂浜(Beach)</string>
+	<string name="poi_bay">湾(Bay)</string>
+	<string name="poi_fjord">断崖湾・フィヨルド(Fjord)</string>
+	<string name="poi_reef">珊瑚礁・岩礁・砂州(Reef)</string>
+	<string name="poi_valley">谷(Valley)</string>
+	<string name="poi_water">水域(Water)</string>
+	<string name="poi_wetland">潟(Wetland)</string>
+	<string name="poi_wood">森林・自然林(Wood)</string>
+	<string name="poi_nature_reserve">自然保護区域(Nature reserve)</string>
+	<string name="poi_strait">海峡・水道・瀬戸(Strait)</string>
+	<string name="poi_island">島(Island)</string>
+	<string name="poi_islet">小島(Islet)</string>
+
+	<string name="poi_anchorage">投錨地・停泊域(Anchorage)</string>
+	<string name="poi_anchor_berth">水上飛行機などの停泊地(Anchor berth)</string>
+	<string name="poi_beacon">ビーコン・導灯(Beacon)</string>
 	</resources>

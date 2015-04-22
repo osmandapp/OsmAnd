@@ -2017,4 +2017,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_places">場所</string>
 	<string name="shared_string_search">検索</string>
 	<string name="shared_string_open">開く</string>
-    </resources>
+    <string name="filter_poi_hint">名前でフィルター</string>
+    <string name="search_poi_category_hint">名称でフィルター</string>
+    <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
+	</resources>
