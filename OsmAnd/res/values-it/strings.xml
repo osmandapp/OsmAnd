@@ -750,7 +750,7 @@
   
   
   
-  <string name="osmand_development_plugin_description">"Visualizza le impostazioni per le funzionalità di sviluppo e debug come la simulazione di navigazione  o visualizzare l\'indicazione della prestazione del rendering."</string>
+  <string name="osmand_development_plugin_description">"Questo plugin visualizza le impostazioni per le funzionalità di sviluppo e debug come la simulazione di navigazione  o la visualizzare dell\'indicazione della prestazione del rendering o le indicazioni vocali. Queste impostazioni sono ad uso agli sviluppatori e non sono necessarie per gli utilizzatori."</string>
   <string name="plugins_screen">Componenti aggiuntivi</string>
   
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
@@ -766,7 +766,7 @@
 		\n\t- *Miglioramento usabilità e UI*
 		\n\t- Miglioramenti in svariate aree		
 	</string>
-  <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per dare contributi a OSM quali la creazione  o modifica dei PDI di OSM, aprire o commentare errori di OSM e inviare i file GPX registrati. Usare queste funzionalità richiede le credenziali personali di OSM."</string>
+  <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commendo errori di OSM oppure inviando i file GPX registrati. OSM un progetto della comunità di mappatura libera globale. Per maggiori informazioni http://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   
   <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce attualmente selezionata</string>
@@ -1819,7 +1819,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">" - Tutti i gruppi creati sono pubblici! Se volete rimanere anonimi connettete i dispositivi direttamente tramite gli id di tracciamento.\n - Al gruppo possono essere registrate fino a 16 persone.\n - Nel caso di inattività o di attività di una sola persona per due settimane, il gruppo sarà cancellato.\n - È possibile limitare l\'accesso al gruppo, tipo solo su invito, per amministrare il gruppo devi andare al pannello di amministrazione.\n - Se avete bisogno di creare un gruppo ad altre condizioni per favore visitate http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Tutti i gruppi creati sono pubblici! Se volete rimanere anonimi connettete i dispositivi direttamente tramite gli id di tracciamento.\n - I gruppi privati sono limitati a 8 persone.\n - Nel caso di inattività o di attività di una sola persona per due settimane, il gruppo sarà cancellato.\n - È possibile limitare l\'accesso al gruppo, tipo solo su invito, per amministrare il gruppo devi andare al pannello di amministrazione.\n - Se avete bisogno di creare un gruppo ad altre condizioni per favore visitate http://osmo.mobi"</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
