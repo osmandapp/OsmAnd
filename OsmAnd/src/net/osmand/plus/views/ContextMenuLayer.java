@@ -103,10 +103,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
-		
-		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
-		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
-		
 		textView = new TextView(view.getContext());
 		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
@@ -120,6 +116,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		textPadding = new Rect();
+		textView.setTextColor(Color.WHITE);
 		textView.getBackground().getPadding(textPadding);
 //		textView.setPadding(0, 0, CLOSE_BTN + 3, 0);
 		
@@ -144,13 +141,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon != null){
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			
-			int tx = x - boxLeg.getMinimumWidth() / 2;
+			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
 			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
-			canvas.translate(tx, ty);
-			boxLeg.draw(canvas);
-			canvas.translate(-tx, -ty);
-			
 			if (textView.getText().length() > 0) {
 				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
 				int c = textView.getLineCount();
