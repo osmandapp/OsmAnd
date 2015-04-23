@@ -69,7 +69,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private int CLOSE_BTN = 8;
 	
 	private final MapActivity activity;
-	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
 	private Rect textPadding;
 	private CallbackWithObject<LatLon> selectOnMap = null;
@@ -142,7 +141,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
-			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
+			int ty = y;// - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
 			if (textView.getText().length() > 0) {
 				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
 				int c = textView.getLineCount();
@@ -283,7 +282,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int x = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
 			int y = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
-			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
+			y += bs.height();
 			int localSize = CLOSE_BTN * 3 / 2;
 			int dclosex = x - bs.width() + closes.width();
 			int dclosey = y - closes.height() / 2;
