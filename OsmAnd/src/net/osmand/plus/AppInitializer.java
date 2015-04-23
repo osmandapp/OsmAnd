@@ -46,8 +46,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -70,6 +68,7 @@ public class AppInitializer implements IProgress {
 	
 	private boolean initSettings = false;
 	private boolean firstTime;
+	private boolean activityChangesShowed = false;
 	private boolean appVersionChanged;
 	private long startTime;
 	private long startBgTime;
@@ -124,17 +123,24 @@ public class AppInitializer implements IProgress {
 	}
 	
 	public boolean isFirstTime(Activity activity) {
-		SharedPreferences pref = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
-		return !pref.contains(FIRST_TIME_APP_RUN);
+		initUiVars(activity);
+		return firstTime;
+	}
+	
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
 	}
 	
 	public boolean checkAppVersionChanged(Activity activity) {
 		initUiVars(activity);
-		if (!firstTime && appVersionChanged) {
+		boolean showRecentChangesDialog = !firstTime && appVersionChanged;
+//		showRecentChangesDialog = true;
+		if (showRecentChangesDialog && !activityChangesShowed) {
 			final Intent helpIntent = new Intent(activity, HelpActivity.class);
 			helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(app));
 			helpIntent.putExtra(HelpActivity.URL, LATEST_CHANGES_URL);
 			activity.startActivity(helpIntent);
+			activityChangesShowed = true;
 			return true;
 		}
 		return false;

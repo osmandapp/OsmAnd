@@ -1152,7 +1152,9 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
+		String defaultLocation =
+				Environment.getExternalStorageDirectory().getAbsolutePath();
+//		ctx.getExternalFilesDirs(type)
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
 	}

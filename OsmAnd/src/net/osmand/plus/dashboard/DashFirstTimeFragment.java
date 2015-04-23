@@ -67,7 +67,8 @@ public class DashFirstTimeFragment extends DashBaseFragment {
 		view.findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MapActivity)getActivity()).userClosedWelcomeCard();
+				getMyApplication().getAppInitializer().setFirstTime(false);
+				dashboard.refreshDashboardFragments();
 			}
 		});
 

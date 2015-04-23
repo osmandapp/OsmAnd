@@ -127,16 +127,6 @@ public class MapActivity extends AccessibleActivity {
 		return notification;
 	}
 
-	public boolean isFirstTime(){
-		return firstTime;
-	}
-
-	public void userClosedWelcomeCard(){
-		firstTime = false;
-		dashboardOnMap.refreshDashboardFragments();
-
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		long tm = System.currentTimeMillis();
@@ -151,12 +141,12 @@ public class MapActivity extends AccessibleActivity {
 
 		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
 				getWindow().getDecorView().getHeight());
+		app.getAppInitializer().checkAppVersionChanged(this);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
-		firstTime = app.getAppInitializer().isFirstTime(this);
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();

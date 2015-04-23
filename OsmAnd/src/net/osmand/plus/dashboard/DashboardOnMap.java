@@ -388,7 +388,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void refreshDashboardFragments(){
-		addOrUpdateDashboardFragments(mapActivity.isFirstTime());
+		addOrUpdateDashboardFragments();
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
@@ -415,7 +415,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
 			if(visibleType == DashboardType.DASHBOARD) {
-				addOrUpdateDashboardFragments(mapActivity.isFirstTime());
+				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
 				onScrollChanged(scrollView.getScrollY(), false, false);
@@ -636,7 +636,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 	
 
-	private void addOrUpdateDashboardFragments(boolean firstTime) {
+	private void addOrUpdateDashboardFragments() {
+		boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(mapActivity);
 //		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
 		boolean showCards = !firstTime;
 		
