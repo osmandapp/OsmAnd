@@ -4,7 +4,7 @@
         <string name="poi_alcohol">Spiritus</string>
         <string name="poi_convenience">Nærbutik</string>
         <string name="poi_mall">Butikscenter</string>
-        <string name="poi_beverages">Drikkevarebutik</string>
+        <string name="poi_beverages">Drikkevarer</string>
         <string name="poi_butcher">Kødmarked</string>
         <string name="poi_deli">Delikatesse</string>
         <string name="poi_farm">Gårdbutik</string>
@@ -23,17 +23,17 @@
         <string name="poi_antiques">Antikviteter</string>
         <string name="poi_art">Kunsthandler</string>
         <string name="poi_baby_goods">Babyudstryr</string>
-        <string name="poi_bag">Taskebutik</string>
+        <string name="poi_bag">Tasker</string>
         <string name="poi_bathroom_furnishing">Badeværelsesinventar</string>
         <string name="poi_bed">Soveværelsesmøbler</string>
         <string name="poi_boutique">Modebutik</string>
-        <string name="poi_carpet">Tæppeforretning</string>
+        <string name="poi_carpet">Tæpper</string>
         <string name="poi_chemist">Materialist</string>
         <string name="poi_clothes">Tøjbutik</string>
         <string name="poi_shoes">Skobutik</string>
         <string name="poi_computer">Computerbutik</string>
         <string name="poi_copyshop">Kopicenter</string>
-        <string name="poi_curtain">Gardinforretning</string>
+        <string name="poi_curtain">Gardiner</string>
         <string name="poi_fabric">Stofbutik</string>
         <string name="poi_bedding">Sengetøj</string>
         <string name="poi_dive">Dykkerudstyr</string>
@@ -42,7 +42,7 @@
         <string name="poi_fishing">Fiskegrej</string>
         <string name="poi_florist">Blomsterhandler</string>
         <string name="poi_frame">Rammer</string>
-        <string name="poi_furniture">Møbelforretning</string>
+        <string name="poi_furniture">Møbeler</string>
         <string name="poi_garden_centre">Havecenter</string>
         <string name="poi_gas">Flaskegas</string>
         <string name="poi_general">Landhandel</string>
@@ -55,7 +55,7 @@
         <string name="poi_houseware">Husholdningsartikler</string>
         <string name="poi_hunting">Jagtudstyr</string>
         <string name="poi_interior_decoration">Boligindretning</string>
-        <string name="poi_jewelry">Smykkeforretning</string>
+        <string name="poi_jewelry">Smykker</string>
         <string name="poi_kiosk">Kiosk</string>
         <string name="poi_kitchen">Køkkenudstyr</string>
         <string name="poi_mobile_phone">Mobiltelefoner</string>
@@ -685,7 +685,7 @@
 	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 
-	<string name="poi_shop_food">Fødevarebutik</string>
+	<string name="poi_shop_food">Fødevarer</string>
 	<string name="poi_road_obstacle">Vejhindring</string>
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_personal_transport">Personlig transport</string>
