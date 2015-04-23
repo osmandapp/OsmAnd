@@ -29,7 +29,8 @@
     <TableRow
         android:minHeight="@dimen/list_item_height"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/GpxSpinnerRow">
 
         <TextView
             android:layout_width="wrap_content"

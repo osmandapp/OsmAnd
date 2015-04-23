@@ -266,6 +266,7 @@ public class SelectedGPXFragment extends ListFragment {
 		final TIntArrayList timeSplit = new TIntArrayList();
 		if(groups.size() == 0) {
 			sp.setVisibility(View.GONE);
+			view.findViewById(R.id.GpxSpinnerRow).setVisibility(View.GONE);
 		} else {
 			sp.setVisibility(View.VISIBLE);
 
@@ -317,7 +318,7 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), false);
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
 				if (groups.size() > 0) {
 					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
 							: null);
