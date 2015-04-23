@@ -62,7 +62,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "changes-1.9.html";
+	public static final String LATEST_CHANGES_URL = "changes-2.0.html";
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	private OsmandApplication app;
