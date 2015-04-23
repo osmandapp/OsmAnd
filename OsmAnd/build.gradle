@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-// Global Paramers accepted
+// Global Parameters accepted
 // APK_NUMBER_VERSION - version number of apk
 // APK_VERSION - build number like #9999Z, for dev builds appended to app_version like 2.0.0 in no_translate.xml)
 //               flavor                 Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
@@ -19,8 +19,7 @@ apply plugin: 'com.android.application'
 // Less important
 // 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
 // 3. sherpafy/free/paid
-// 4. Release signature
-// 5. TARGET_APP_NAME, APP_EDITION uses flavor
+// 4. TARGET_APP_NAME, APP_EDITION uses flavor
 
 android {
 	compileSdkVersion 21
@@ -37,7 +36,7 @@ android {
 		publishing {
 			storeFile file("osmand_key")
 			storePassword System.getenv("OSMAND_APK_PASSWORD")
-			keyAlias "androiddebugkey"
+			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
 		}
 	}
