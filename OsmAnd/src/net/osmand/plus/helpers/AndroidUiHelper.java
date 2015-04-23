@@ -90,9 +90,9 @@ public class AndroidUiHelper {
 		return false;
 	}
     
-	public static boolean isLargeDevice(Activity ctx) {
-		return (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) 
-				== Configuration.SCREENLAYOUT_SIZE_LARGE;
+	public static boolean isXLargeDevice(Activity ctx) {
+		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
 	}
 
 	public static boolean isOrientationPortrait(Activity ctx) {

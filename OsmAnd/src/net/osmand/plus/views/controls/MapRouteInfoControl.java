@@ -33,6 +33,7 @@ import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapRoutePreferencesControl.RoutePrepareDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -538,16 +539,22 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		dialog = MapRoutePreferencesControl.showDialog(mapControlsLayer, mapActivity, ll, new OnDismissListener() {
 
 			@Override
-			public void onDismiss(DialogInterface dialog) {
+			public void onDismiss(DialogInterface d) {
 				dialog = null;
 			}
 		});
 	}
 	
 	public void hideDialog() {
+		Dialog dialog = this.dialog;
 		if (dialog != null) {
+			if(dialog instanceof RoutePrepareDialog && 
+				((RoutePrepareDialog) dialog).getListener() != null) {
+				((RoutePrepareDialog) dialog).getListener().onDismiss(dialog);
+				((RoutePrepareDialog) dialog).cancelDismissListener();
+			}
 			dialog.dismiss();
-			dialog = null;
+			this.dialog = null;
 		}
 	}
 

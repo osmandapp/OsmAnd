@@ -319,7 +319,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
 		routeGoButton.setCompoundDrawables(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
-		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
+		routeGoButton.setText(AndroidUiHelper.isOrientationPortrait(mapActivity) ?
+				mapActivity.getString(R.string.shared_string_go) : "");
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

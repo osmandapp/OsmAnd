@@ -128,23 +128,52 @@ public class MapRoutePreferencesControl {
 
 	public void showAndHideDialog() {
 		if (dialog != null) {
-			dialog.hide();
-			dialog = null;
+			hideDialog();
 		} else {
 			dialog = showDialog(controlsLayer, mapActivity, createLayout(), new OnDismissListener() {
-				
 				@Override
-				public void onDismiss(DialogInterface dialog) {
+				public void onDismiss(DialogInterface d) {
 					dialog = null;				
 				}
 			});
 		}
 	}
 
+	public static class RoutePrepareDialog extends Dialog {
+
+		private OnDismissListener listener;
+
+		public RoutePrepareDialog(Context context) {
+			super(context);
+		}
+		
+		public OnDismissListener getListener() {
+			return listener;
+		}
+		
+		@Override
+		public void setOnDismissListener(OnDismissListener l) {
+			this.listener = l;
+			super.setOnDismissListener(new OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					if(listener != null) {
+						listener.onDismiss(dialog);
+					}
+				}
+			});
+		}
+
+		public void cancelDismissListener() {
+			this.listener = null;
+		}
+		
+	}
 	public static Dialog showDialog(final MapControlsLayer controlsLayer, final MapActivity mapActivity, final View ll,
 			final OnDismissListener dismiss) {
 		final boolean switched = controlsLayer.switchToRoutePlanningLayout();
-		final Dialog dialog = new Dialog(mapActivity);
+		final RoutePrepareDialog dialog = new RoutePrepareDialog(mapActivity);
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		final int maxHeight ;
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -188,7 +217,7 @@ public class MapRoutePreferencesControl {
 			mapActivity.getMapView().refreshMap();
 		}
 		dialog.show();
-		if(!AndroidUiHelper.isLargeDevice(mapActivity)) {
+		if(!AndroidUiHelper.isXLargeDevice(mapActivity)) {
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), false);
 		}
@@ -555,9 +584,15 @@ public class MapRoutePreferencesControl {
 	}
 
 	public void hideDialog() {
+		Dialog dialog = this.dialog;
 		if(dialog != null) {
+			if(dialog instanceof RoutePrepareDialog && 
+					((RoutePrepareDialog) dialog).getListener() != null) {
+					((RoutePrepareDialog) dialog).getListener().onDismiss(dialog);
+					((RoutePrepareDialog) dialog).cancelDismissListener();
+			}
 			dialog.dismiss();
-			dialog = null;
+			this.dialog = null;
 		}
 	}
 
