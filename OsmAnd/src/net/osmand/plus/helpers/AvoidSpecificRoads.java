@@ -109,7 +109,7 @@ public class AvoidSpecificRoads {
 			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					RouteDataObject obj = getMissingRoads().get(which - 1);
+					RouteDataObject obj = getMissingRoads().get(which);
 					double lat = MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
 					double lon = MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 					showOnMap(app, mapActivity, lat, lon, getText(obj), dialog);
