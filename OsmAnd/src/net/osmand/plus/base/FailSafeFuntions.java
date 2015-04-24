@@ -174,6 +174,9 @@ public class FailSafeFuntions {
 		routingHelper.setFollowingMode(true);
 		app.getTargetPointsHelper().updateRouteAndReferesh(true);
 		app.initVoiceCommandPlayer(ma);
+		if(ma.getDashboard().isVisible()) {
+			ma.getDashboard().hideDashboard();
+		}
 	}
 	
 	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){

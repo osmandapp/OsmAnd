@@ -198,9 +198,7 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
-		if(dashboardOnMap != null) {
-			dashboardOnMap.updateLocation(true, true, false);
-		}
+		dashboardOnMap.updateLocation(true, true, false);
 	}
 
 	private void checkAppInitialization() {
