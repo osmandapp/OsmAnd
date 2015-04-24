@@ -35,5 +35,5 @@
         android:scaleType="center"
         android:visibility="gone"
         android:background="?attr/dashboard_button"
-        android:src="?attr/ic_action_overflow" />
+        android:src="@drawable/ic_overflow_menu_white"/>
 </LinearLayout>

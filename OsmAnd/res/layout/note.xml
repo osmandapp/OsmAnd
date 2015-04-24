@@ -73,7 +73,7 @@
 			android:layout_gravity="center_vertical"
 			android:background="?attr/options_button_background"
 			android:focusable="false"
-			android:src="?attr/ic_action_overflow"/>
+			android:src="@drawable/ic_overflow_menu_white"/>
 
 		<ImageButton
 			android:id="@+id/play"

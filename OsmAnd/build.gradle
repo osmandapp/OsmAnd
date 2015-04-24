@@ -8,8 +8,8 @@ apply plugin: 'com.android.application'
 // APP_EDITION - date stamp of builds
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
-// TODO
-// 1. Filter fonts
+
+// 1. To be done Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
 //                <include name="assets/**/map/fonts/OpenSans/*"/>
@@ -17,9 +17,6 @@ apply plugin: 'com.android.application'
 //            </patternset>
 //        </unzip>
 // Less important
-// 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
-// 3. sherpafy/free/paid
-// 4. TARGET_APP_NAME, APP_EDITION uses flavor
 
 android {
 	compileSdkVersion 21
