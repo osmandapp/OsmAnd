@@ -385,8 +385,8 @@
 	<string name="pref_vector_map">Einstellungen Vektorkarten</string>
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
 	<string name="city_type_suburb">Stadtteil</string>
-	<string name="city_type_hamlet">Dorf</string>
-	<string name="city_type_village">Gemeinde</string>
+	<string name="city_type_hamlet">Weiler</string>
+	<string name="city_type_village">Dorf</string>
 	<string name="city_type_town">Stadt</string>
 	<string name="city_type_city">Großstadt</string>
 	
