@@ -11,8 +11,6 @@
 		<attr name="card_bg" format="reference" />
 		<attr name="btn_flat_bg" format="reference" />
 		<attr name="card_bg_color" format="reference" />
-		<attr name="ic_action_overflow" format="reference" />
-		<attr name="options_button_background" format="reference"/>
 		<attr name="spinnerItemTextColor" format="reference" />
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />

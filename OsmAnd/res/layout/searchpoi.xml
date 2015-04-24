@@ -49,7 +49,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
             android:scaleType="center"
-            android:src="?attr/ic_action_overflow" />
+            android:src="@drawable/ic_overflow_menu_white" />
     </LinearLayout>
 
     <ListView

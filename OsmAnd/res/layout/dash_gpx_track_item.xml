@@ -166,7 +166,7 @@
 			android:layout_height="@dimen/list_item_height"
 			android:background="?attr/options_button_background"
 			android:focusable="false"
-			android:src="?attr/ic_action_overflow"
+			android:src="@drawable/ic_overflow_menu_white"
 			android:visibility="gone"/>
 
 		<include android:layout_width="wrap_content"

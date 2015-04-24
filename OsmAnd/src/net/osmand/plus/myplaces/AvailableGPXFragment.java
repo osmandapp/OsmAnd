@@ -776,6 +776,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
+			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

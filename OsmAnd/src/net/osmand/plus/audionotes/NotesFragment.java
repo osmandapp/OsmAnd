@@ -100,6 +100,7 @@ public class NotesFragment extends ListFragment {
 					.getContentIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
+			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

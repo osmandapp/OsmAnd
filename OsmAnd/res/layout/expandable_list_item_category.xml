@@ -40,7 +40,7 @@
 		android:focusable="false"
 		android:visibility="gone"
 		android:background="?attr/options_button_background"
-		android:src="?attr/ic_action_overflow"/>
+		android:src="@drawable/ic_overflow_menu_white"/>
     
 
 </LinearLayout>

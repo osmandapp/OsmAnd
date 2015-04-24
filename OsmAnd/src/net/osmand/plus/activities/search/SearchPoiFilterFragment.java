@@ -67,12 +67,13 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
         		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
         
         setupSearchEditText((EditText) v.findViewById(R.id.edit));
-        setupOptions(v.findViewById(R.id.options));
+        setupOptions((ImageView) v.findViewById(R.id.options));
         v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
         return v;
     }
 	
-	private void setupOptions(View options) {
+	private void setupOptions(ImageView options) {
+		options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

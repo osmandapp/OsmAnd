@@ -411,7 +411,8 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 				ch.setVisibility(View.GONE);
 			}
 
-			v.findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
+			((ImageView) options).setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					openPopUpMenu(v, child);
