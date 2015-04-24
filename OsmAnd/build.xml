@@ -78,7 +78,6 @@
 	<target name="copy_resources">
 		<copy todir="assets">
 			<fileset dir="../../resources/">
-				<include name="specialphrases/**" />
 				<include name="voice/**/*.p" />
 			</fileset>
 		</copy>
