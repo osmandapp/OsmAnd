@@ -360,4 +360,12 @@
 	<string name="poi_historic_ship">Vaixell històric</string>
 	<string name="poi_dyke">Dic</string>
 	<string name="poi_floating_dock">Moll flotant</string>
-	</resources>
+	<string name="poi_shop">Botiga</string>
+		<string name="poi_shop_food">Queviures</string>
+	<string name="poi_public_transport">Transport públic</string>
+		<string name="poi_air_transport">Transport aéri</string>
+		<string name="poi_personal_transport">Transport privat</string>
+		<string name="poi_transportation">Transport</string>
+		<string name="poi_emergency">Emergències</string>
+	<string name="poi_filling_station">Punt de proveïment</string>
+		</resources>

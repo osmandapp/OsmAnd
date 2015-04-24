@@ -186,12 +186,6 @@ task collectVoiceAssets(type: Sync) {
 	include "**/*.p"
 }
 
-task collectSpecialPhrasesAssets(type: Sync) {
-	from "../../resources/specialphrases"
-	into "assets/specialphrases"
-	include "*.txt"
-}
-
 task collectHelpContentsAssets(type: Sync) {
 	from "../../help"
 	into "assets/help"
@@ -239,7 +233,6 @@ task copyStyleIcons(type: Copy) {
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
-		collectSpecialPhrasesAssets,
 		collectHelpContentsAssets,
 		collectRoutingResources,
 		collectRenderingStylesResources,
