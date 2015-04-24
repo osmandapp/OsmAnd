@@ -1284,4 +1284,6 @@
     <string name="shared_string_places">Steder</string>
 	<string name="shared_string_search">Søk</string>
 	<string name="shared_string_show_description">Vis beskrivelse</string>
+	<string name="filter_poi_hint">Filtrer etter navn</string>
+    <string name="shared_string_edit">Rediger</string>
 	</resources>
