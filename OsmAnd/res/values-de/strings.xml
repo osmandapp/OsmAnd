@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
+	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
+	<string name="simulate_your_location">Simulieren der Position</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM-Mapper-Assistent</string>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
 	<string name="traffic_warning_payment">Mautstelle</string>
@@ -64,7 +68,7 @@
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
-	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
+	<string name="rendering_attr_osmcTraces_name">Wanderwege anzeigen</string>
 	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
 	<string name="arrival_distance_factor_early">Früh</string>
 	<string name="arrival_distance_factor_normally">Normal</string>
@@ -325,11 +329,13 @@
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Profil gespeichert. Hier Standardprofil vorauswählen.</string>
 
 	<string name="routing_settings">Navigation</string>
+	<string name="routing_settings_2">Navigationseinstellungen</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Karten-Management</string>
 	<string name="index_settings_descr">Laden und Verwalten von Landkarten</string>
 	<string name="general_settings">Allgemein</string>
+	<string name="general_settings_2">Allgemeine Einstellungen</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
 	<string name="user_name">OSM-Benutzername</string>
@@ -378,7 +384,7 @@
 	<string name="pref_raster_map">Einstellungen Kartenquelle</string>
 	<string name="pref_vector_map">Einstellungen Vektorkarten</string>
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
-	<string name="city_type_suburb">Vorstadt</string>
+	<string name="city_type_suburb">Stadtteil</string>
 	<string name="city_type_hamlet">Dorf</string>
 	<string name="city_type_village">Gemeinde</string>
 	<string name="city_type_town">Stadt</string>
