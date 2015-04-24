@@ -237,6 +237,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		// try to always ask for network provide : it is faster way to find location
 		
 		List<String> providers = service.getProviders(true);
+		if(providers == null) {
+			return;
+		}
 		for (String provider : providers) {
 			if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
 				continue;
