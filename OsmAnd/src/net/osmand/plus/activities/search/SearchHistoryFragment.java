@@ -226,6 +226,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText, 
 					historyEntry.getLat(), historyEntry.getLon(), screenOrientation, getMyApplication(), getActivity()); 
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
+			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 			options.setVisibility(View.VISIBLE);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
