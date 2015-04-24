@@ -188,8 +188,8 @@
 	<string name="poi_craft_electrician">Elektriker</string>
 	<string name="poi_electronics">Elektronik-Geschäft</string>
 	<string name="poi_embassy">Botschaft</string>
-	<string name="poi_emergency_access_point">Nofall-Zugangspunkt</string>
-	<string name="poi_emergency_phone">Nofall-Telefon</string>
+	<string name="poi_emergency_access_point">Rettungspunkt</string>
+	<string name="poi_emergency_phone">Notfall-Telefon</string>
 	<string name="poi_employment_agency">Arbeitsamt</string>
 	<string name="poi_equestrian">Reiter</string>
 	<string name="poi_erotic">Sex-Shop</string>
@@ -271,7 +271,7 @@
 	<string name="poi_internet_cafe">Internet Cafe</string>
 	<string name="poi_island">Insel</string>
 	<string name="poi_islet">Inselchen</string>
-	<string name="poi_isolated_dwelling">Freistehendes Haus</string>
+	<string name="poi_isolated_dwelling">Einzelsiedlung</string>
 	<string name="poi_it">IT-Dienst</string>
 	<string name="poi_craft_jeweller">Juwelier</string>
 	<string name="poi_jewelry">Juwelier</string>
@@ -507,7 +507,7 @@
 	<string name="poi_stream">Fluss</string>
 	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_studio">Studio</string>
-	<string name="poi_suburb">Vorstadt</string>
+	<string name="poi_suburb">Stadtteil</string>
 	<string name="poi_railway_subway_entrance">U-Bahnhofeingang</string>
 	<string name="poi_subway_station">U-Bahnhof</string>
 	<string name="poi_craft_sun_protection">Lichtschutz</string>
