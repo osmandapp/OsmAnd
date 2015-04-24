@@ -9,8 +9,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -19,6 +17,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
@@ -69,9 +68,6 @@ public class OsmAndAppCustomization {
 		return FavoritesActivity.class;
 	}
 
-	public Class<MainMenuActivity> getMainMenuActivity() {
-		return MainMenuActivity.class;
-	}
 	
 	public Class<? extends Activity> getDownloadIndexActivity() {
 		return DownloadActivity.class;

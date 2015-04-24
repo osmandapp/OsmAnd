@@ -71,7 +71,7 @@
 			android:layout_width="@dimen/list_item_height"
 			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
-			android:background="?attr/options_button_background"
+			android:background="?attr/dashboard_button"
 			android:focusable="false"
 			android:src="@drawable/ic_overflow_menu_white"/>
 

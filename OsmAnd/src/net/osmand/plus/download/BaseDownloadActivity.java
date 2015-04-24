@@ -8,13 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
@@ -23,16 +16,18 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
-
-import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 
 /**
  * Created by Denis
@@ -234,9 +229,9 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			t.setInterrupted(true);
 		}
 		// list of items to download need to be cleared in case of dashboard activity
-		if (this instanceof MainMenuActivity) {
-			getEntriesToDownload().clear();
-		}
+//		if (this instanceof MainMenuActivity) {
+//			getEntriesToDownload().clear();
+//		}
 	}
 
 	private void prepareDownloadDirectory() {
