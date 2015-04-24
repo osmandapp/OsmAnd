@@ -20,6 +20,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import gnu.trove.list.array.TIntArrayList;
@@ -429,13 +430,13 @@ public class ConfigureMapMenu {
 	protected String getDescription(final List<OsmandSettings.CommonPreference<Boolean>> prefs) {
 		int count = 0;
 		int enabled = 0;
-		for(OsmandSettings.CommonPreference<Boolean> p : prefs) {
-			count ++;
-			if(p.get()) {
+		for (OsmandSettings.CommonPreference<Boolean> p : prefs) {
+			count++;
+			if (p.get()) {
 				enabled++;
 			}
 		}
-		final String descr = enabled +"/"+count;
+		final String descr = enabled + "/" + count;
 		return descr;
 	}
 
@@ -487,7 +488,12 @@ public class ConfigureMapMenu {
 	}
 
 	protected String getRenderDescr(final MapActivity activity) {
-		return activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
+		RendererRegistry rr = activity.getMyApplication().getRendererRegistry();
+		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
+		if (storage == null) {
+			return "";
+		}
+		return storage.getName();
 	}
 
 	protected String getDayNightDescr(final MapActivity activity) {

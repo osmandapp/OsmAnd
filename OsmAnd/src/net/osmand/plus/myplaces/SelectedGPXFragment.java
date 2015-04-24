@@ -154,7 +154,11 @@ public class SelectedGPXFragment extends ListFragment {
 	protected void updateContent() {
 		adapter.clear();
 		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterType());
-		adapter.addAll(flatten(groups));
+		adapter.setNotifyOnChange(false);
+		for(GpxDisplayItem i: flatten(groups)) {
+			adapter.add(i);
+		}
+		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 	}
 
