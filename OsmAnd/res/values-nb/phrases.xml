@@ -81,4 +81,11 @@
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_hairdresser">Frisør</string>
 	<string name="poi_island">Øy</string>
+	<string name="poi_antiques">Antikvitetsbutikk</string>
+	<string name="poi_historic_cannon">Historisk kanon</string>
+	<string name="poi_historic_ruins">Historiske ruiner</string>
+	<string name="poi_historic_ship">Historisk skip</string>
+	<string name="poi_historic_mine">Historisk gruve</string>
+	<string name="poi_historic_monastery">Historisk kloster</string>
+	<string name="poi_beacon">Fyrtårn</string>
 	</resources>
