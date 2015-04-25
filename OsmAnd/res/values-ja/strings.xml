@@ -938,7 +938,7 @@ POIの更新は利用できません</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目的地</string>
 	<string name="map_widget_altitude">高度</string>
-	<string name="map_widget_time">予想到達時刻</string>
+	<string name="map_widget_time">予想到着時刻</string>
 	<string name="map_widget_next_turn">次の曲がる方向</string>
 	<string name="map_widget_next_turn_small">次の曲がる方向(小さいアイコン)</string>
 	<string name="map_widget_next_next_turn">次々回の曲がる方向</string>
@@ -1370,7 +1370,7 @@ POIの更新は利用できません</string>
 \n\t* マップに1つ以上の自転車用道路を追加しました(自転車用道路=トラック)
 \n\t* バグ修正 "</string>
 	<string name="tip_recent_changes_0_8_2_t">"0.8.2での変更点:
-\n\t* ルート設定の改善
+\n\t* ルート計算の改善
 \n\t* ダイナミックマップウィジェット
 \n\t* マップ設定画面をマップ上に移動
 \n\t* スクリーンロックボタンとログ記録サービス
