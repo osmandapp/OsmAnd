@@ -92,7 +92,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				int locationY = tb.getPixYFromLatNoRot(ip.getLatitude());
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(intermediatePoint, locationX - marginX, locationY - marginY, bitmapPaint);
-				marginX = intermediatePoint.getWidth() / 5;
+				marginX = intermediatePoint.getWidth() / 4;
 				canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5, textPaint);
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
