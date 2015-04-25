@@ -2152,4 +2152,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="filter_poi_hint">Filtrovať podľa názvu</string>
     <string name="search_poi_category_hint">Píšte pre vyhľadanie všetkých</string>
     <string name="index_name_netherlands">Európa - Holandsko</string>
+	<string name="rendering_value__name">Predvolené</string>
+    <string name="rendering_value_highContrastRoads_name">Vysoko kontrastné cesty</string>
 	</resources>
