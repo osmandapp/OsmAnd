@@ -218,6 +218,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	public void itemSelected(Street obj) {
 		if(!Algorithms.objectEquals(settings.getLastSearchedCity(), obj.getCity().getId())) {
 			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(region.useEnglishNames()), obj.getLocation());
+			region.addCityToPreloadedList(obj.getCity());
 		}
 		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
 //		if(obj.getBuildings().size() == 0){
