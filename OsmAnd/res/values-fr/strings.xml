@@ -2019,4 +2019,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="filter_poi_hint">Filtrer par nom</string>
     <string name="search_poi_category_hint">Rechercher partout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
+	<string name="rendering_value__name">Par défaut</string>
+    <string name="rendering_value_highContrastRoads_name">Routes en contraste élevé</string>
 	</resources>
