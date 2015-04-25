@@ -1961,4 +1961,6 @@
 	<string name="shared_string_manage">Управление</string>
 	<string name="shared_string_edit">Редактировать</string>
 	<string name="filter_poi_hint">Фильтровать по имени</string>
-    </resources>
+    <string name="rendering_value__name">По умолчанию</string>
+    <string name="rendering_value_highContrastRoads_name">Высокий контраст</string>
+	</resources>
