@@ -52,8 +52,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		pointAtUI.setColor(0xa0FF3344);
 		pointAtUI.setStyle(Paint.Style.FILL);
 
-		poi = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_origin);
-		bug = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_destination);
+		poi = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_poi);
+		bug = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_poi);
 
 		paintIcon = new Paint();
 

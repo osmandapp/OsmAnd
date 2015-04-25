@@ -175,6 +175,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
 				} else if (id == R.string.distance_measurement_clear_route) {
 					distanceMeasurementMode = 0;
+					originalGPX = null;
 					measurementPoints.clear();
 					calculateDistance();
 				} else if (id == R.string.shared_string_save_as_gpx) {

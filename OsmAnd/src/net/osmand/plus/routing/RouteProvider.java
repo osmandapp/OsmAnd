@@ -354,8 +354,7 @@ public class RouteProvider {
 		// get the closest point to start and to end
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
 		if(routeParams.gpxRoute.useIntermediatePointsRTE){
-			final List<Location> intermediates = gpxParams.points;
-			return calculateOsmAndRouteWithIntermediatePoints(routeParams, intermediates);
+			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
 		}
 		List<Location> gpxRoute ;
 		int[] startI = new int[]{0};
@@ -399,7 +398,19 @@ public class RouteProvider {
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
 		rp.previousToRecalculate =  routeParams.previousToRecalculate;
 		rp.intermediates = new ArrayList<LatLon>();
-		for(Location w : intermediates) {
+		int closest = 0;
+		double maxDist = Double.POSITIVE_INFINITY;
+		for (int i = 0; i < intermediates.size(); i++) {
+			Location loc = intermediates.get(i);
+			double dist = MapUtils.getDistance(loc.getLatitude(), loc.getLongitude(), rp.start.getLatitude(),
+					rp.start.getLongitude());
+			if (dist <= maxDist) {
+				closest = i;
+				maxDist = dist;
+			}
+		}
+		for(int i = closest; i< intermediates.size() ; i++ ){
+			Location w = intermediates.get(i);
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
 		}
 		return findVectorMapsRoute(rp, false);
