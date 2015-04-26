@@ -368,4 +368,12 @@
 		<string name="poi_transportation">Transport</string>
 		<string name="poi_emergency">Emergències</string>
 	<string name="poi_filling_station">Punt de proveïment</string>
-		</resources>
+		<string name="poi_water_transport">Transport naval</string>
+		<string name="poi_bicycle_transport">Transport en bicicleta</string>
+		<string name="poi_aerialway_transport">Transport per cable</string>
+	<string name="poi_water_supply">Subministrament d\'aigua</string>
+		<string name="poi_power">Energia</string>
+		<string name="poi_communication">Comunicacions</string>
+		<string name="poi_trash_disposal">Recollida de residus</string>
+		<string name="poi_landuse">Ús del sòl</string>
+	</resources>
