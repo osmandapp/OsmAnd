@@ -1,2 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">商店</string>
+		<string name="poi_shop_food">食品商店</string>
+	<string name="poi_emergency">緊急救助</string>
+	<string name="poi_transportation">交通工具</string>
+		<string name="poi_road_obstacle">道路阻礙</string>
+		<string name="poi_filling_station">加油站</string>
+		<string name="poi_personal_transport">個人交通工具</string>
+		<string name="poi_public_transport">公共交通工具</string>
+		<string name="poi_air_transport">航空運輸工具</string>
+		<string name="poi_water_transport">水上運輸工具</string>
+		<string name="poi_bicycle_transport">自行車交通工具</string>
+		<string name="poi_aerialway_transport">纜車運輸</string>
+	<string name="poi_man_made">人造設施</string>
+		<string name="poi_transport_construction">交通施工</string>
+		<string name="poi_water_supply">飲水供應</string>
+		<string name="poi_power">電源</string>
+		<string name="poi_communication">通訊</string>
+		<string name="poi_trash_disposal">垃圾處理</string>
+		<string name="poi_landuse">土地利用</string>
+	<string name="poi_education">教育</string>
+	<string name="poi_administrative">行政機關</string>
+	<string name="poi_healthcare">醫療</string>
+	<string name="poi_office">公司行號</string>
+	<string name="poi_sport">運動</string>
+	<string name="poi_tourism">旅遊</string>
+		<string name="poi_sightseeing">觀光</string>
+		<string name="poi_accomodation">膳宿</string>
+		<string name="poi_internet_access">網際網路存取</string>
+	<string name="poi_entertainment">休閒</string>
+		<string name="poi_club">俱樂部</string>
+	</resources>
