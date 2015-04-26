@@ -1,2 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Tienda</string>
+		<string name="poi_shop_food">Tienda de alimentos</string>
+	<string name="poi_emergency">Emergencia</string>
+	<string name="poi_transportation">Transporte</string>
+		<string name="poi_road_obstacle">Obstáculo de carretera</string>
+		<string name="poi_filling_station">Estación de servicio</string>
+		<string name="poi_personal_transport">Transporte personal</string>
+		<string name="poi_public_transport">Transporte público</string>
+		<string name="poi_air_transport">Transporte aéreo</string>
+		<string name="poi_water_transport">Transporte fluvial</string>
+		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
+		<string name="poi_aerialway_transport">Transporte elevado</string>
+	<string name="poi_man_made">Hecho por el hombre</string>
+		<string name="poi_transport_construction">Transporte en construcción</string>
+		<string name="poi_water_supply">Suministro de agua</string>
+		<string name="poi_power">Energía</string>
+		<string name="poi_communication">Comunicación</string>
+		<string name="poi_trash_disposal">Disposición de la basura</string>
+		<string name="poi_landuse">Uso de suelo</string>
+	<string name="poi_education">Educación</string>
+	<string name="poi_administrative">Administrativo</string>
+	<string name="poi_healthcare">Asistencia médica</string>
+	<string name="poi_office">Oficina</string>
+	<string name="poi_sport">Deporte</string>
+	<string name="poi_tourism">Turismo</string>
+		<string name="poi_sightseeing">Turismo</string>
+		<string name="poi_accomodation">Alojamiento</string>
+		<string name="poi_internet_access">Acceso a Internet</string>
+	<string name="poi_entertainment">Ocio</string>
+		<string name="poi_club">Club</string>
+	<string name="poi_sustenance">Comida</string>
+	<string name="poi_cafe_and_restaurant">Café y restaurante</string>
+	<string name="poi_service">Servicio</string>
+		<string name="poi_craft">Artesanía</string>
+	<string name="poi_finance">Finanzas</string>
+	<string name="poi_natural">Naturaleza</string>
+	<string name="poi_seamark">Naútico</string>
+	<string name="poi_military">Militar</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">Definido por el usuario</string>
+	
+	<string name="poi_palaeontological_site">Yacimiento paleontológico</string>
+
+	<string name="poi_bakery">Panadería</string>
+	<string name="poi_alcohol">Licorería</string>
+	<string name="poi_convenience">Tienda</string>
+	<string name="poi_mall">Centro comercial</string>
+	<string name="poi_beverages">Tienda de bebidas</string>
+	<string name="poi_butcher">Lugar de encuentro</string>
+	<string name="poi_deli">Gourmet</string>
+	</resources>
