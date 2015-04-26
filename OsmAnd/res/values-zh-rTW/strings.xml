@@ -1972,4 +1972,6 @@
 	<string name="filter_poi_hint">依名稱篩選</string>
     <string name="search_poi_category_hint">鍵入以搜尋全部</string>
     <string name="index_name_netherlands">歐洲 - 荷蘭</string>
+	<string name="rendering_value__name">預設值</string>
+    <string name="rendering_value_highContrastRoads_name">高對比道路</string>
 	</resources>
