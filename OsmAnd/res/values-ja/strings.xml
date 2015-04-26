@@ -1002,7 +1002,7 @@ POIの更新は利用できません</string>
 	<string name="rendering_attr_hmRendered_name">マップの詳細表示</string>
 	<string name="local_index_routing_data">ルートのデータ</string>
 	<string name="navigate_point_format">形式</string>
-	<string name="poi_search_desc">POI(興味のあるポイント)検索</string>
+	<string name="poi_search_desc">POI(特定地点、各種施設)検索</string>
 	<string name="address_search_desc">住所検索</string>
 	<string name="navpoint_search_desc">座標</string>
 	<string name="transport_search_desc">公共交通機関検索</string>
@@ -1108,7 +1108,7 @@ POIの更新は利用できません</string>
 	<string name="offline_edition_descr">常にオフライン編集を使用</string>
 	<string name="update_poi_does_not_change_indexes">アプリケーション内部POIの変更はローカルファイルに保存され、ダウンロードしたマップファイルには影響しません。</string>
 	<string name="local_openstreetmap_uploading">アップロード中…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/バグ報告はアップロードされました</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/メモはアップロードされました</string>
 	<string name="local_openstreetmap_uploadall">すべてのアップロード</string>
 	
 	<string name="local_openstreetmap_upload">OSMへの変更をアップロードする</string>
@@ -2020,4 +2020,6 @@ POIの更新は利用できません</string>
     <string name="filter_poi_hint">名前でフィルター</string>
     <string name="search_poi_category_hint">名称でフィルター</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
+	<string name="rendering_value__name">標準</string>
+    <string name="rendering_value_highContrastRoads_name">ハイコントラスト道路</string>
 	</resources>
