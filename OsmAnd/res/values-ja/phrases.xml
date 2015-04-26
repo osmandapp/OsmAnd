@@ -750,4 +750,17 @@
 	<string name="poi_seamark_light_minor">光源-小、海岸沿い(Minor light, seamark)</string>
 	<string name="poi_seamark_light_float">ボート状光源、海上(Float light, seamark)</string>
 	<string name="poi_seamark_light_vessel">光源-船舶、海上(Vessel light, seamark)</string>
+	<string name="poi_notice">標識, 海上</string>
+	<string name="poi_pile">杭</string>
+	<string name="poi_radar_transponder">レーダー中継機・トランスポンダ, 海上</string>
+	<string name="poi_radio_station">無線局, 海上</string>
+	<string name="poi_signal_station_traffic">信号所, 通航</string>
+	<string name="poi_signal_station_warning">信号所, 警告</string>
+	<string name="poi_small_craft_facility">小型船舶用設備</string>
+	<string name="poi_topmark">トップマーク, 海上</string>
+	<string name="poi_seamark_rock">岩, 海上</string>
+	<string name="poi_seamark_wreck">難破船等, 海上</string>
+
+	<string name="poi_seamark_building">航路標識建造物</string>
+	<string name="poi_seamark_light">導灯, 航路標識</string>
 	</resources>
