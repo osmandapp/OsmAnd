@@ -365,7 +365,7 @@
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_landuse">Arealbruk</string>
 	<string name="amenity_type_leisure">Fritid</string>
-	<string name="amenity_type_man_made">Menneskelagd</string>
+	<string name="amenity_type_man_made">Menneskeskapt</string>
 	<string name="amenity_type_military">Militære</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Kontor</string>
@@ -1294,4 +1294,5 @@
 	<string name="settings_privacy">Personvern</string>
     <string name="download_type_to_filter">Filtrer</string>
 	<string name="get_plugin">Hent</string>
-</resources>
+<string name="shared_string_open">Åpne</string>
+    </resources>
