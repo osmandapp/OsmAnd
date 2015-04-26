@@ -1,9 +1,5 @@
 package net.osmand.plus;
 
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import android.app.AlarmManager;
@@ -56,34 +52,7 @@ public class NavigationService extends Service implements LocationListener {
 	private PendingIntent pendingIntent;
 	private BroadcastReceiver broadcastReceiver;
 	private int usedBy = 0;
-	
-	
-	private static Method mStartForeground;
-	private static Method mStopForeground;
-	private static Method mSetForeground;
 	private OsmAndLocationProvider locationProvider;
-
-	private void checkForegroundAPI() {
-		// check new API
-		try {
-			mStartForeground = getClass().getMethod("startForeground", new Class[] {int.class, Notification.class});
-			mStopForeground = getClass().getMethod("stopForeground", new Class[] {boolean.class});
-			Log.d(PlatformUtil.TAG, "startForeground and stopForeground available");
-		} catch (NoSuchMethodException e) {
-			mStartForeground = null;
-			mStopForeground = null;
-			Log.d(PlatformUtil.TAG, "startForeground and stopForeground not available");
-		}
-
-		// check old API
-		try {
-			mSetForeground = getClass().getMethod("setForeground", new Class[] {boolean.class});
-			Log.d(PlatformUtil.TAG, "setForeground available");
-		} catch (NoSuchMethodException e) {
-			mSetForeground = null;
-			Log.d(PlatformUtil.TAG, "setForeground not available");
-		}
-	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -222,34 +191,14 @@ public class NavigationService extends Service implements LocationListener {
 
 		notification.setLatestEventInfo(this, Version.getAppName(cl) + " " + getString(R.string.osmand_service), nt,
 				PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		if (mStartForeground != null) {
-			Log.d(PlatformUtil.TAG, "invoke startForeground");
-			try {
-				mStartForeground.invoke(this, NOTIFICATION_SERVICE_ID, notification);
-			} catch (InvocationTargetException e) {
-				Log.d(PlatformUtil.TAG, "invoke startForeground failed");
-			} catch (IllegalAccessException e) {
-				Log.d(PlatformUtil.TAG, "invoke startForeground failed");
-			}
-		} else {
-			Log.d(PlatformUtil.TAG, "invoke setForeground");
-			mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
-			try {
-				mSetForeground.invoke(this, Boolean.TRUE);
-			} catch (InvocationTargetException e) {
-				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-			} catch (IllegalAccessException e) {
-				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-			}
-		}
+
+		startForeground(NOTIFICATION_SERVICE_ID, notification);
 	}
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		// initializing variables
-		checkForegroundAPI();
 	}
 	
 	private boolean isContinuous(){
@@ -287,26 +236,7 @@ public class NavigationService extends Service implements LocationListener {
 			broadcastReceiver = null;
 		}
 
-		if (mStopForeground != null) {
-			Log.d(PlatformUtil.TAG, "invoke stopForeground");
-			try {
-				mStopForeground.invoke(this, Boolean.TRUE);
-			} catch (InvocationTargetException e) {
-				Log.d(PlatformUtil.TAG, "invoke stopForeground failed");
-			} catch (IllegalAccessException e) {
-				Log.d(PlatformUtil.TAG, "invoke stopForeground failed");
-			}
-		}
-		else {
-			Log.d(PlatformUtil.TAG, "invoke setForeground");
-			try {
-				mSetForeground.invoke(this, Boolean.FALSE);
-			} catch (InvocationTargetException e) {
-				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-			} catch (IllegalAccessException e) {
-				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-			}
-		}
+		stopForeground(Boolean.TRUE);
 	}
 
 	@Override
