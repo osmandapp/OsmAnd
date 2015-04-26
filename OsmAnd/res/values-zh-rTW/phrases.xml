@@ -29,4 +29,32 @@
 		<string name="poi_internet_access">網際網路存取</string>
 	<string name="poi_entertainment">休閒</string>
 		<string name="poi_club">俱樂部</string>
+	<string name="poi_sustenance">食品</string>
+	<string name="poi_cafe_and_restaurant">咖啡廳和餐廳</string>
+	<string name="poi_service">服務</string>
+		<string name="poi_craft">手工藝</string>
+	<string name="poi_finance">金融</string>
+	<string name="poi_natural">自然景觀</string>
+	<string name="poi_seamark">航海</string>
+	<string name="poi_military">軍事地</string>
+	<string name="poi_osmwiki">維基百科</string>
+	<string name="poi_user_defined_other">使用者定義</string>
+	
+	<string name="poi_palaeontological_site">古生物網站</string>
+
+	<string name="poi_bakery">麵包店</string>
+	<string name="poi_alcohol">酒品店</string>
+	<string name="poi_convenience">便利商店</string>
+	<string name="poi_mall">購物中心</string>
+	<string name="poi_beverages">飲料店</string>
+	<string name="poi_butcher">肉品市場</string>
+	<string name="poi_deli">熟食店</string>
+	<string name="poi_farm">農產品店</string>
+	<string name="poi_greengrocer">蔬果店</string>
+	<string name="poi_seafood">海産店</string>
+	<string name="poi_confectionery">糖果糕點店</string>
+	<string name="poi_ice_cream">冰淇淋店</string>
+	<string name="poi_supermarket">超市</string>
+	<string name="poi_shop_tea">茶飲店</string>
+	<string name="poi_dairy">乳品店</string>
 	</resources>
