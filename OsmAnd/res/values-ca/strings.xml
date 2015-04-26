@@ -1985,4 +1985,6 @@ Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i e
 	<string name="filter_poi_hint">Filtre per nom</string>
     <string name="search_poi_category_hint">Escriviu per cercar-ho tot</string>
     <string name="index_name_netherlands">Europa - Països Baixos</string>
+	<string name="rendering_value__name">Per defecte</string>
+    <string name="rendering_value_highContrastRoads_name">Vies més contrastades</string>
 	</resources>
