@@ -61,4 +61,9 @@
 	<string name="poi_wine">販酒商店</string>
 
 	<string name="poi_books">書店</string>
+	<string name="poi_bicycle">自行車店</string>
+	<string name="poi_anime">動漫店</string>
+	<string name="poi_antiques">古董店</string>
+	<string name="poi_art">藝品店</string>
+	<string name="poi_baby_goods">嬰幼童商店</string>
 	</resources>
