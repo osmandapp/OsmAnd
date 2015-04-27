@@ -2154,4 +2154,14 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="index_name_netherlands">Európa - Holandsko</string>
 	<string name="rendering_value__name">Predvolené</string>
     <string name="rendering_value_highContrastRoads_name">Vysoko kontrastné cesty</string>
-	</resources>
+	<string name="specified_directiory_not_writeable">V zadanom priečinku nemohli byť vytvorené mapy</string>
+	<string name="copying_osmand_file_failed">Kopírovanie súborov zlyhalo</string>    
+    <string name="storage_directory_external">Externé úložisko</string>
+    <string name="storage_directory_multiuser">Úložisko pre viacerých používateľov</string>
+    <string name="storage_directory_internal_app">Interná pamäť aplikácie</string>
+    <string name="storage_directory_manual">Ručne zadané</string>
+    <string name="storage_directory_default">Interná pamäť</string>
+    <string name="storage_directory">Úložisko máp</string>
+    <string name="shared_string_copy">Kopírovať</string>
+    <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
+    </resources>
