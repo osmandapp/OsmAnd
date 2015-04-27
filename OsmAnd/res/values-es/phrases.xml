@@ -47,7 +47,7 @@
 	<string name="poi_convenience">Tienda</string>
 	<string name="poi_mall">Centro comercial</string>
 	<string name="poi_beverages">Tienda de bebidas</string>
-	<string name="poi_butcher">Lugar de encuentro</string>
+	<string name="poi_butcher">Carnicería</string>
 	<string name="poi_deli">Delicatessen</string>
 	<string name="poi_seafood">Tienda de mariscos</string>
 	<string name="poi_ice_cream">Heladería</string>
@@ -210,8 +210,8 @@
 	<string name="poi_town">Pueblo</string>
 	<string name="poi_village">Villa</string>
 	<string name="poi_hamlet">Aldea</string>
-	<string name="poi_suburb">Suburbio</string>
-	<string name="poi_neighbourhood">Barrio</string>
+	<string name="poi_suburb">Barrio</string>
+	<string name="poi_neighbourhood">Vecindario</string>
 	<string name="poi_locality">Localidad</string>
 	<string name="poi_place_farm">Granja</string>
 	<string name="poi_residential">Área residencial</string>
@@ -679,7 +679,7 @@
 	<string name="poi_9pin">Bolera</string>
 	<string name="poi_10pin">Bolera</string>
 	<string name="poi_boules">Bolos</string>
-	<string name="poi_cricket">Cricket</string>
+	<string name="poi_cricket">Críquet</string>
 	<string name="poi_scuba_diving">Submarinismo</string>
 	<string name="poi_handball">Balonmano</string>
 	<string name="poi_pelota">Frontón</string>
@@ -687,4 +687,24 @@
 	<string name="poi_skiing">Esquí</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_team_handball">Balonmano</string>
+	<string name="poi_korfbal">Baloncesto</string>
+	<string name="poi_boundary_stone">Mojón</string>
+	<string name="poi_attraction_amusement_ride">Atracción de feria</string>
+	<string name="poi_attraction_big_wheel">Rueda de la fortuna</string>
+	<string name="poi_attraction_swing_carousel">Carrusel de oscilación</string>
+	<string name="poi_religion_jewish">Lugar de adoración: judía</string>
+	<string name="poi_internet_access_service">Servicio de acceso a Internet</string>
+	
+	<string name="poi_spring">Primavera</string>
+	<string name="poi_funicular">Funicular</string>
+	<string name="poi_bailiff">Alguacil</string>
+	<string name="poi_piste_skitour">Esquí de travesía</string>
+	<string name="poi_piste_sled">Trineo</string>
+	<string name="poi_craft_pottery">Artesano de cerámica</string>
+	<string name="poi_craft_roofer">Techador</string>
+	<string name="poi_funeral_directors">Funeraria</string>
+	<string name="poi_ridge">Cresta</string>
+	<string name="poi_anchorage">Anclaje</string>
+	<string name="poi_beacon_special_purpose">Baliza especial</string>
+	<string name="poi_seamark_building">Edificio balizado</string>
 	</resources>
