@@ -1659,7 +1659,7 @@
     <string name="lang_sw">斯瓦希里</string>
     <string name="lang_he">希伯來</string>
     <string name="forward">往前</string>
-    <string name="home">主頁</string>
+    <string name="home">首頁</string>
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
