@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import android.support.v7.app.ActionBar;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -33,7 +32,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
@@ -41,6 +39,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -54,10 +53,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -94,16 +93,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			osmandSettings.OSMAND_THEME.set(OsmandSettings.OSMAND_LIGHT_THEME);
 		}
 		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
-		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
+		toursFolder = app.getAppPath("tours");
 
 	}
 
-	@Override
-	public File getExternalStorageDir() {
-		final String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
-		return new File(originalApi.getString(originalGlobal, OsmandSettings.EXTERNAL_STORAGE_DIR,
-				defaultLocation));
-	}
+
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();

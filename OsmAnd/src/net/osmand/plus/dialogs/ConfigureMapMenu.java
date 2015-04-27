@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -58,6 +59,15 @@ public class ConfigureMapMenu {
 		});
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
+		adapter.item(R.string.layer_map_appearance).
+			iconColor(R.drawable.ic_configure_screen_dark).listen(new OnContextMenuClick() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					ma.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
+					return false;
+				}
+			}).reg();
+		
 		return adapter;
 	}
 	

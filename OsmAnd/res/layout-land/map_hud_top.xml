@@ -51,7 +51,10 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center"
+                 >
                 
                 <TextView
                     android:id="@+id/map_address_text_shadow"
@@ -60,6 +63,7 @@
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:singleLine="true"
                     android:text="Long Street Name"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_widget_text_size" >
@@ -72,6 +76,7 @@
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:singleLine="true"
                     android:text="Long Street Name"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/map_widget_text_size" >

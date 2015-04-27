@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
@@ -101,6 +102,7 @@ public class OsmandApplication extends Application {
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale defaultLocale;
+	private File externalStorageDirectory;
 	
 	
 	// Typeface
@@ -127,6 +129,7 @@ public class OsmandApplication extends Application {
 		}
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
+		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
 		
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
@@ -576,8 +579,13 @@ public class OsmandApplication extends Application {
 		if(path == null) {
 			path = "";
 		}
-
-		return new File(getAppCustomization().getExternalStorageDir(), IndexConstants.APP_DIR + path);
+		return new File(externalStorageDirectory, path);
+	}
+	
+	public void setExternalStorageDirectory(int type, String directory){
+		osmandSettings.setExternalStorageDirectory(type, directory);
+		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		getResourceManager().resetStoreDirectory();
 	}
 
 	public void applyTheme(Context c) {

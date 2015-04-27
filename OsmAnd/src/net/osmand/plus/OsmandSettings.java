@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
+import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -31,7 +32,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
-import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
@@ -1151,116 +1152,56 @@ public class OsmandSettings {
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
+	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$
+	public static final String EXTERNAL_STORAGE_DIR_TYPE_V19 = "external_storage_dir_type_V19"; //$NON-NLS-1$
+	public static final int EXTERNAL_STORAGE_TYPE_DEFAULT = 0; // Environment.getExternalStorageDirectory()
+	public static final int EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE = 1; // ctx.getExternalFilesDirs(null)
+	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
+	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
+	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4; 
+
 	public File getExternalStorageDirectory() {
-		String defaultLocation =
-				Environment.getExternalStorageDirectory().getAbsolutePath();
-//		ctx.getExternalFilesDirs(type)
-		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
-				defaultLocation));
-	}
-	
-	public Object getGlobalPreferences() {
-		return globalPreferences;
-	}
-	
-	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
-
-	public String getDefaultExternalStorageLocation() {
-		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
-		return defaultLocation;
-	}
-	
-	private static List<String> getWritableSecondaryStorages() {
-	 	List<String> writableSecondaryStorage = new ArrayList<String>();
-		try {
-			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
-			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0) {
-				for (String secondaryPath : rawSecondaryStorage.split(":")) {
-					File testFile = new File(secondaryPath);
-					if (isWritable(testFile)) {
-						writableSecondaryStorage.add(secondaryPath);
-					}
-				}
-			}
-		} catch (RuntimeException e) {
- 			e.printStackTrace();
- 		}
-		return writableSecondaryStorage;
-	}
-	
-	@SuppressLint("NewApi")
-	public String getMatchingExternalFilesDir(String dir) {
-		// only API 19 !!
-		try {
-			File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
-			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
-			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0 && externalFilesDirs != null) {
-				for (String secondaryPath : rawSecondaryStorage.split(":")) {
-					if (dir.startsWith(secondaryPath)) {
-						for (File externFileDir : externalFilesDirs) {
-							if (externFileDir != null && externFileDir.getAbsolutePath().startsWith(secondaryPath)) {
-								return externFileDir.getAbsolutePath();
-							}
-						}
-					}
-				}
-			}
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+			return getExternalStorageDirectoryPre19();
+		} else {
+			return getExternalStorageDirectoryV19();
 		}
 	}
-
-	@SuppressLint("NewApi")
-	public List<String> getWritableSecondaryStorageDirectorys() {
-		// only API 19 !!
-		// primary external storage directory
-		String primaryExternalStorageDirectory = getDefaultExternalStorageLocation();
-		// also creates directories, if they don't exist until now
-		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
-		List<String> writableSecondaryStorages = getWritableSecondaryStorages();
-		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
-		try {
-			boolean primaryExternalStorageFound = false;
-			if(externalFilesDirs != null) {
-				for (File externFileDir : externalFilesDirs) {
-					if (externFileDir != null) {
-						final String externalFilePath = externFileDir.getAbsolutePath();
-						if (externalFilePath.startsWith(primaryExternalStorageDirectory) && !primaryExternalStorageFound) {
-							// exclude primary external storage
-							// no special location is required
-							primaryExternalStorageFound = true;
-						} else {
-							// secondary storage
-							// check if special location is required
-							boolean specialPathRequired = true;
-							for (String writableSecondaryStorage : writableSecondaryStorages) {
-								if (externalFilePath.startsWith(writableSecondaryStorage)) {
-									// no special location required
-									writableSecondaryStorageDirectory.add(writableSecondaryStorage);
-									specialPathRequired = false;
-									break;
-								}
-							}
-							if (specialPathRequired == true) {
-								// special location required
-								writableSecondaryStorageDirectory.add(externalFilePath);
-							}
-						}
-					}
-				}	
+	
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public File getExternalStorageDirectoryV19() {
+		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+		File location = getDefaultLocationV19();
+		if (type == -1) {
+			if(isWritable(location)) {
+				return location;
 			}
-			
-		} catch (RuntimeException e) {
-			e.printStackTrace();
+			File[] external = ctx.getExternalFilesDirs(null);
+			if(external != null && external.length > 0 && external[0] != null) {
+				location = external[0];
+			} else {
+				File[] obbDirs = ctx.getObbDirs();
+				if(obbDirs != null && obbDirs.length > 0 && obbDirs[0] != null) {
+					location = obbDirs[0];
+				} else {
+					location = ctx.getFilesDir();
+				}
+			}
 		}
-		return writableSecondaryStorageDirectory;
+		return location;
+	}
+
+	public File getDefaultLocationV19() {
+		String location = settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR_V19,
+				getExternalStorageDirectoryPre19().getAbsolutePath());
+		return new File(location);
 	}
 	
+
 	public static boolean isWritable(File dirToTest) {
 		boolean isWriteable = false;
 		try {
+			dirToTest.mkdirs();
 			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
 			isWriteable = writeTestFile.exists();
 			writeTestFile.delete();
@@ -1270,9 +1211,53 @@ public class OsmandSettings {
 		return isWriteable;
 	}
 	
-	public boolean setExternalStorageDirectory(String externalStorageDir) {
+	public boolean isExternalStorageDirectorySpecifiedV19() {
+		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19);
+	}
+	
+	public int getExternalStorageDirectoryTypeV19() {
+		return settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+	}
+	
+	public File getExternalStorageDirectoryPre19() {
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
+		File rootFolder = new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
+				defaultLocation));
+		return new File(rootFolder, IndexConstants.APP_DIR);
+	}
+
+	public File getDefaultInternalStorage() {
+		return new File(Environment.getExternalStorageDirectory(), IndexConstants.APP_DIR);
+	}
+	
+	public boolean setExternalStorageDirectoryV19(int type, String externalStorageDir) {
+		return settingsAPI.edit(globalPreferences).
+				putInt(EXTERNAL_STORAGE_DIR_TYPE_V19, type).
+				putString(EXTERNAL_STORAGE_DIR_V19, externalStorageDir).commit();
+	}
+	
+	public void setExternalStorageDirectory(int type, String directory) {
+		if(Build.VERSION.SDK_INT < 19) {
+			setExternalStorageDirectoryPre19(directory);
+		} else {
+			setExternalStorageDirectoryV19(type, directory);
+		}
+		
+	}
+	
+	public boolean isExternalStorageDirectorySpecifiedPre19() {
+		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR);
+	}
+	
+	public boolean setExternalStorageDirectoryPre19(String externalStorageDir) {
 		return settingsAPI.edit(globalPreferences).putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
 	}
+	
+	
+	public Object getGlobalPreferences() {
+		return globalPreferences;
+	}
+	
 	
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
@@ -1947,6 +1932,8 @@ public class OsmandSettings {
 		}
 
 	}
+
+	
 
 	
 

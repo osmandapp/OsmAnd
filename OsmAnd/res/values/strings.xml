@@ -9,6 +9,15 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
+	<string name="copying_osmand_file_failed">Copying files failed</string>    
+    <string name="storage_directory_external">External storage</string>
+    <string name="storage_directory_multiuser">Multiuser storage</string>
+    <string name="storage_directory_internal_app">Internal application memory</string>
+    <string name="storage_directory_manual">Manually specified</string>
+    <string name="storage_directory_default">Internal memory</string>
+    <string name="storage_directory">Map Storage</string>
+    <string name="shared_string_copy">Copy</string>
     <string name="filter_poi_hint">Filter by name</string>
     <string name="search_poi_category_hint">Type to search all</string>
     <string name="shared_string_open">Open</string>

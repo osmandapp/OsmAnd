@@ -40,7 +40,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			setImageDrawable(turnDrawable, false);
 			setTopImageDrawable(null, null);
 		} else {
-			setImageDrawable(null, false);
+			setImageDrawable(null, true);
 			setTopImageDrawable(turnDrawable, "");
 		}
 	}
