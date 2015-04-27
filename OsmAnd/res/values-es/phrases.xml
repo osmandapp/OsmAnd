@@ -90,7 +90,7 @@
 	<string name="poi_ticket">Boletería</string>
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Puesto comercial</string>
-	<string name="poi_variety_store">Tienda de variedades</string>
+	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_video">Videoclub</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Tienda de electrónica</string>
@@ -154,10 +154,10 @@
 	<string name="poi_ferry_terminal">Terminal de transbordador</string>
 	<string name="poi_lighthouse">Faro</string>
 
-	<string name="poi_bicycle_rental">Renta de bicicletas</string>
+	<string name="poi_bicycle_rental">Alquiler de bicicletas</string>
 	<string name="poi_bicycle_parking">Aparcamiento de bicicletas</string>
 
-	<string name="poi_aerialway_gondola">Góndola</string>
+	<string name="poi_aerialway_gondola">Telehuevo</string>
 	<string name="poi_tunnel">Túnel</string>
 	<string name="poi_bridge">Puente</string>
 
@@ -172,7 +172,7 @@
 	<string name="poi_power_plant">Central eléctrica</string>
 	<string name="poi_power_generator">Generador eléctrico</string>
 
-	<string name="poi_post_office">Oficina de correo</string>
+	<string name="poi_post_office">Oficina de correos</string>
 	<string name="poi_post_box">Buzón de correo</string>
 	<string name="poi_telephone">Teléfono</string>
 	<string name="poi_communication_tower">Torre de comunicación</string>
@@ -192,7 +192,7 @@
 	<string name="poi_construction">Construcción</string>
 	<string name="poi_works">Fábrica</string>
 	<string name="poi_survey_point">Vértice geodésico</string>
-	<string name="poi_reservoir">Reservorio</string>
+	<string name="poi_reservoir">Embalse</string>
 	<string name="poi_gasometer">Gasómetro</string>
 	<string name="poi_silo">Silo</string>
 	<string name="poi_college">Colegio</string>
@@ -403,7 +403,7 @@
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
 	<string name="poi_tobacco">Tienda de tabaco</string>
 	<string name="poi_vacuum_cleaner">Tienda de aspiradoras</string>
-	<string name="poi_sewing">Tienda de telas</string>
+	<string name="poi_sewing">Tienda de confección</string>
 
 	<string name="poi_grit_bin">Cubo de grava</string>
 	<string name="poi_traffic_calming_cushion">Cojín</string>
@@ -425,11 +425,11 @@
 	<string name="poi_railway_platform">Andén</string>
 	<string name="poi_aeroway_gate">Puerta de embarque</string>
 
-	<string name="poi_slipway">Grada</string>
+	<string name="poi_slipway">Rampa</string>
 	<string name="poi_aerialway_station">Estación de transporte elevado</string>
 	<string name="poi_aerialway_cable_car">Teleférico</string>
 	<string name="poi_aerialway_chair_lift">Telesilla</string>
-	<string name="poi_aerialway_platter">Elevación de plato</string>
+	<string name="poi_aerialway_platter">Plato de elevación</string>
 	<string name="poi_aerialway_mixed_lift">Elevador mixto</string>
 	<string name="poi_aerialway_rope_tow">Elevador de remolque</string>
 	<string name="poi_aerialway_goods">Montacargas</string>
@@ -487,7 +487,7 @@
 	<string name="poi_pier">Embarcadero</string>
 	<string name="poi_mineshaft">Pozo de mina</string>
 	<string name="poi_artwork">Obra de arte</string>
-	<string name="poi_adit">Galería de mina</string>
+	<string name="poi_adit">Boca de mina</string>
 	<string name="poi_petroleum_well">Pozo de petróleo</string>
 	<string name="poi_windmill">Molino de viento</string>
 	<string name="poi_salt_pond">Laguna salada</string>
