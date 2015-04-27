@@ -229,7 +229,7 @@
 	<string name="tip_day_night_mode">Dag/natt-modus</string>
 	<string name="tip_day_night_mode_t_v2">"Kartutseende kan for offline-vektorkart endres mellom dag (lysere) og natt (mørkere).\tNattfarger er tryggere og mer komfortable for mørkekjøring.
 \n\nSett regler for skifte av dag/natt i \'Meny\' → \'Still inn kart\' → \'Dag/natt-kart\'.
-\n\nValgene er: ↵\n→* \'Soloppgang/-nedgang\': Automatisk modus, kontrollert av solens posisjon (standard) ↵\n→* \'Dag\': Bruk alltid dagmodus ↵\n→* \'Natt\': Bruk alltid nattmodus ↵\n→* \'Lyssensor\': Kartutseende styres av lyssensoren på enheten (kun hvis utstyrt med) "</string>	
+\n\nValgene er: ↵\n→* \'Soloppgang/solnedgang\': Automatisk modus, kontrollert av solens posisjon (standard) ↵\n→* \'Dag\': Bruk alltid dagmodus ↵\n→* \'Natt\': Bruk alltid nattmodus ↵\n→* \'Lyssensor\': Kartutseende styres av lyssensoren på enheten (kun hvis utstyrt med) "</string>	
 	
 	 
 	<string name="choose_auto_follow_route">Auto-sentrer kartvisning</string>
@@ -365,7 +365,7 @@
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_landuse">Arealbruk</string>
 	<string name="amenity_type_leisure">Fritid</string>
-	<string name="amenity_type_man_made">Menneskelagd</string>
+	<string name="amenity_type_man_made">Menneskeskapt</string>
 	<string name="amenity_type_military">Militære</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Kontor</string>
@@ -390,7 +390,7 @@
 	<string name="application_dir">Datalagringsmappe</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Natt</string>
-	<string name="daynight_mode_auto">Soloppgang/-nedgang</string>
+	<string name="daynight_mode_auto">Soloppgang/solnedgang</string>
 	<string name="daynight_mode_sensor">Lyssensor</string>
 	<string name="daynight_descr">Velg bytteregel for dag/natt-modus</string>
 	<string name="daynight">Dag/natt-modus</string>
@@ -632,10 +632,10 @@
     <string name="announce_gpx_waypoints">Meld om GPX-rutepunkter</string>
     <string name="speak_title">Meld om…</string>
 	<string name="speak_descr">Still inn for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
-	<string name="speak_street_names">Meddel gatenavn (TTS)</string>
+	<string name="speak_street_names">Meld om gatenavn (TTS)</string>
     <string name="speak_speed_limit">Meld om fartsgrense</string>
     <string name="speak_cameras">Meld om fotobokser</string>
-	<string name="speak_traffic_warnings">Meld trafikkvarsler</string>
+	<string name="speak_traffic_warnings">Meld om trafikkvarsler</string>
     <string name="tip_recent_changes_1_5_t">"Endringer i 1.5:↵ →\n\t* Talevarslinger om fartsgrenser og fotobokser ↵ →\n\t* Flere muligheter for talemeldinger (gatenavn blir meddelt) ↵ →\n\t* Kartikoner i høy oppløsning ↵ →\n\t* Flere endringer i brukergrensesnittet ↵ →\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https-håndtering "</string>
     <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
     <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
@@ -895,7 +895,7 @@
 	<string name="voice_stream_notification">Varslingslyd</string>
 	<string name="voice_stream_music">Media-/musikklyd</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomnivå for å bruke vektorkart</string>
-	<string name="level_to_switch_vector_raster">Min. vektor-zoomnivå</string>
+	<string name="level_to_switch_vector_raster">Minimum vektor-zoomnivå</string>
 	<string name="incomplete_locale">ufullstendig</string>
 	<string name="context_menu_item_add_waypoint">Legg til GPX-rutepunkt</string>
 	<string name="voice_is_not_available_title">Ingen taleveiledning valgt</string>
@@ -1172,11 +1172,11 @@
 	<string name="layer_overlay">Overleggskart…</string>
 	<string name="map_overlay">Overleggskart</string>
 	<string name="map_overlay_descr">Velg overleggskart</string>
-	<string name="audionotes_plugin_name">Audio/video-merknader</string>
+	<string name="audionotes_plugin_name">Audio/video-notater</string>
 	<string name="osm_settings">OSM-redigering</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
-	<string name="plugin_ski_name">Skikartsvisning</string>
+	<string name="plugin_ski_name">Skikartvisning</string>
 	<string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
 	<string name="rename_failed">Navneendring feilet.</string>
 	
@@ -1286,4 +1286,13 @@
 	<string name="shared_string_show_description">Vis beskrivelse</string>
 	<string name="filter_poi_hint">Filtrer etter navn</string>
     <string name="shared_string_edit">Rediger</string>
-	</resources>
+	<string name="search_poi_category_hint">Søk alle</string>
+    <string name="delay_to_start_navigation_descr">Spesifiser ventetid til å forbli på ruteplanleggingsskjermen</string>
+    <string name="plugin_nautical_name">Sjøkartvisning</string>
+	<string name="osmand_parking_plugin_name">Parkeringsposisjon</string>
+	<string name="days_behind">dager etter</string>
+	<string name="settings_privacy">Personvern</string>
+    <string name="download_type_to_filter">Filtrer</string>
+	<string name="get_plugin">Hent</string>
+<string name="shared_string_open">Åpne</string>
+    </resources>

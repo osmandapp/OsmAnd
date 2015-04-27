@@ -167,7 +167,7 @@
   <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (carreteras, etc.) a niveles inferiores de acercamiento</string>
   <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
   <string name="favorite_delete_multiple">Va a borrar %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
-  <string name="favorite_home_category">Casa</string>
+  <string name="favorite_home_category">Inicio</string>
   <string name="favorite_friends_category">Amigos</string>
   <string name="favorite_places_category">Lugares</string>
   <string name="favorite_default_category">Otros</string>
@@ -501,7 +501,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesita algunos datos regionales que puede descargar a través de \'Opciones\' → \'Gestionar mapas\'. Entonces podrá ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesita algunos datos regionales que puede descargar a través de \'Opciones\' → \'Gestionar mapas\'. Después será capaz de ver los mapas, ubicar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -871,7 +871,7 @@
   <string name="favourites_search_desc">Buscar favorito</string>
   
   <string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa</string>
-  <string name="rendering_attr_noPolygons_name">Sin polígonos</string>
+  <string name="rendering_attr_noPolygons_name">Ocultar polígonos</string>
   <string name="rendering_attr_appMode_name">Modo de dibujo</string>
   <string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string>
   <string name="rendering_attr_contourLines_description">Muestra a partir del nivel de acercameinto (necesita datos de curvas):</string>
@@ -1433,7 +1433,7 @@
 	<string name="auto_zoom_far">Para mediano alcance</string>
 	<string name="auto_zoom_farthest">Para largo alcance</string>
 	<string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
-    <string name="animate_routing_route">"Simulae usando la ruta calculada "</string>
+    <string name="animate_routing_route">"Simular usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simula usando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1712,8 +1712,8 @@
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Ocultar restricciones de acceso</string>
     <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carretera</string>
-    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carretera</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de las carreteras</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de las carreteras</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
     <string name="osmo_auth_error_short">Falló la autorización</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n ¿Quieres realizar un nuevo registro?</string>
@@ -1755,7 +1755,7 @@
 	<string name="rendering_attr_subwayMode_name">Rutas de metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
-	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
+	<string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_osmcTraces_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
@@ -1767,7 +1767,7 @@
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tarde</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
-    <string name="rendering_attr_coloredBuildings_name">Edificios coloreados según el tipo</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificios por código de color según el tipo</string>
     
 <string name="av_camera_pic_size">Tamaño de foto</string>
 	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
@@ -1817,7 +1817,7 @@
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
 	<string name="speed_limit_exceed_message">Selecciona el margen de tolerancia sobre el límite de velocidad con el cual recibirás un aviso de voz.</string>
 	<string name="osmo_device_not_found">Dispositivo no encontrado</string>
-    <string name="osmo_no_connection_msg">Servicio OsMo no disponible:\n- comprueba la conexión;\n- comprueba la configuración;\n- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Servicio OsMo no disponible:\n- compruebe la conexión;\n- compruebe las opciones;\n- compruebe nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como %1$s</string>
@@ -1872,12 +1872,12 @@
     <string name="navigate_point_zone">Zona</string>
     <string name="voices">Indicaciones de voz</string>
 	<string name="dash_download_msg_none">¿Quieres descargar mapas sin conexión?</string>
-    <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
+    <string name="rendering_attr_roadStyle_name">Estilo carretera</string>
     <string name="rendering_value_default_name">Predeterminado</string>
-    <string name="rendering_value_orange_name">Naranja</string>
+    <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de ruteo v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de ruteo introducidas en v.1.9</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas alemán de carreteras</string>
 	<string name="traffic_warning_railways">Cruce de ferrocarril</string>
 	<string name="traffic_warning_pedestrian">Paso de peatones</string>
 	<string name="show_railway_warnings">Mostrar cruces de ferrocarril</string>
@@ -1944,8 +1944,8 @@
 \n\nActivando esta vista cambia el estilo de mapa a \'Invierno y esquí\', mostrando las características de terreno en condiciones invernales. Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado. "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo de mapa a la \'Vista Turística\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.
 \n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación).
-\n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mistrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
-\n\nEsta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\' si lo desea. "</string>
+\n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mostrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
+\n\nEsta vista puede ser revertida desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\' si lo desea. "</string>
 	<string name="days_behind">días atrás</string>
 	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
@@ -2014,4 +2014,6 @@
 	<string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar todas</string>
     <string name="index_name_netherlands">Europa - Países Bajos</string>
+	<string name="rendering_value__name">Predeterminado</string>
+    <string name="rendering_value_highContrastRoads_name">Carreteras en alto contraste</string>
 	</resources>

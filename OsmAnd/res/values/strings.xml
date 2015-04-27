@@ -223,9 +223,11 @@
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
+    <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">German road atlas</string>
+    <string name="rendering_value_highContrastRoads_name">High contrast roads</string>
 	<string name="traffic_warning_railways">Railroad crossing</string>
 	<string name="traffic_warning_pedestrian">Pedestrian crosswalk</string>
 	<string name="show_railway_warnings">Show railroad crossings</string>

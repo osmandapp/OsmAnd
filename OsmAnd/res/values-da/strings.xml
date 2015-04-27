@@ -1998,4 +1998,6 @@
 	<string name="filter_poi_hint">Filtrer efter navn</string>
     <string name="search_poi_category_hint">Tast for at søge alle</string>
     <string name="index_name_netherlands">Europa - Holland</string>
+	<string name="rendering_value__name">Standard</string>
+    <string name="rendering_value_highContrastRoads_name">Veje med høj kontrast</string>
 	</resources>

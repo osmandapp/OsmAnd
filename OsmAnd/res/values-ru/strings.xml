@@ -25,7 +25,7 @@
 \n\t* Аудио-видео заметки (плагин)
 \n\t* Линии высот (плагин)
 \n\t* Исправление ошибок
-\n\t* \"Универсальный Вид\" опция стиля карты с болльшей детализацией, новыми дорожными стилями, большим контрастом и шкалой SAC
+\n\t* \"Универсальный Вид\" опция стиля карты с большей детализацией, новыми дорожными стилями, большим контрастом и шкалой SAC
 \n\t* EGM96 коррекция для GPS высот "</string>
     <string name="recording_unavailable">недоступно</string>
     <string name="recording_context_menu_arecord">Создать аудио заметку</string>
@@ -1961,4 +1961,6 @@
 	<string name="shared_string_manage">Управление</string>
 	<string name="shared_string_edit">Редактировать</string>
 	<string name="filter_poi_hint">Фильтровать по имени</string>
-    </resources>
+    <string name="rendering_value__name">По умолчанию</string>
+    <string name="rendering_value_highContrastRoads_name">Высокий контраст</string>
+	</resources>

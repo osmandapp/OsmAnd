@@ -2017,9 +2017,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
     <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
+    <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Deutscher Straßenatlas</string>
+    <string name="rendering_value_highContrastRoads_name">Kontrastreiche Straßen</string>
     <string name="traffic_warning_railways">Bahnübergang</string>
     <string name="traffic_warning_pedestrian">Fußgängerübergang</string>
     <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>

@@ -2094,4 +2094,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_OSMMapperAssistant_name">Asystent OSM</string>
 	<string name="shared_string_manage">Zarządzaj</string>
 	<string name="shared_string_edit">Edytuj</string>
-	</resources>
+	<string name="filter_poi_hint">Filtruj po nazwie</string>
+    </resources>
