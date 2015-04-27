@@ -2232,4 +2232,6 @@
 	<string name="filter_poi_hint">이름으로 필터링</string>
     <string name="search_poi_category_hint">모든 검색 유형</string>
     <string name="index_name_netherlands">유럽-네덜란드</string>
+	<string name="rendering_value__name">기본값</string>
+    <string name="rendering_value_highContrastRoads_name">높은 콘트라스트 도로</string>
 	</resources>
