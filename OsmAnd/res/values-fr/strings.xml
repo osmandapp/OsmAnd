@@ -2021,4 +2021,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
 	<string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes en contraste élevé</string>
-	</resources>
+	<string name="specified_directiory_not_writeable">Impossible de créer les cartes dans le dossier spécifié</string>
+	<string name="copying_osmand_file_failed">Échec lors de la copie des fichiers</string>    
+    <string name="storage_directory_external">Stockage externe</string>
+    <string name="storage_directory_multiuser">Stockage multi-utilisateurs</string>
+    <string name="storage_directory_internal_app">Mémoire interne de l\'application</string>
+    <string name="storage_directory_manual">Défini manuellement</string>
+    <string name="storage_directory_default">Mémoire interne</string>
+    <string name="storage_directory">Stockage de la carte</string>
+    <string name="shared_string_copy">Copier</string>
+    </resources>

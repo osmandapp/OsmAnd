@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -547,7 +548,7 @@
 	<string name="osmand_parking_time_no_limit">Zaman-sınırsız park et</string>
 	<string name="osmand_parking_position_description_add">De arabayı almak için:</string>
 	<string name="osmand_parking_plugin_description">Bu eklenti arabanızın parkedilen yeri saklamaya izin verir.</string>
-	<string name="osmand_parking_plugin_name">Park etme pozisyonu eklentisi</string>
+	<string name="osmand_parking_plugin_name">Park Etme Konumu</string>
 	<string name="context_menu_item_delete_parking_point">Bir park etme işareti sil</string>
 	<string name="gpxup_public">Halk</string>
 	<string name="gpxup_identifiable">Teşhis edilebilir</string>
@@ -1068,7 +1069,7 @@
 	<string name="sd_dir_not_accessible">SD karttaki kayıt dizini ulaşılabilir değil</string>
 	<string name="download_question">{0} - {1} indir ?</string>
 	<string name="download_question_exist">{0} için çevrimdışı veri zaten mevcut ({1}). Güncellemek ister misiniz ({2}) ?</string>
-	<string name="shared_string_downloading">İndiriliyor…</string>
+	<string name="shared_string_downloading">İndiriliyor</string>
 	<string name="downloading_list_indexes">Mevcut bölgelerin listesi indiriliyor…</string>
 	<string name="list_index_files_was_not_loaded">osmand.net\'ten bölgelerin listesi alınamadı.</string>
 	<string name="update_existing">Değiştir</string>
@@ -1202,4 +1203,30 @@
         \n\t* Yeniden tasarlanmış arayüz↵
 →→\n\t* Ashklat düzeltmek ↵
     </string>
+    <string name="specified_directiory_not_writeable">Haritalar belirtilen dizinde oluşturulamadı</string>
+	<string name="copying_osmand_file_failed">Dosyaları kopyalama başarısız oldu</string>    
+    <string name="storage_directory_external">Harici depolama</string>
+    <string name="storage_directory_multiuser">Çok kullanıcılı depolama</string>
+    <string name="storage_directory_internal_app">Dahili uygulama hafızası</string>
+    <string name="storage_directory_manual">El ile belirtilmiş</string>
+    <string name="storage_directory_default">Dahili hafıza</string>
+    <string name="storage_directory">Harita Depolama</string>
+    <string name="shared_string_copy">Kopyala</string>
+    <string name="filter_poi_hint">Ada göre süz</string>
+    <string name="search_poi_category_hint">Tümünü aramak için yazın</string>
+    <string name="shared_string_open">Aç</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM haritalama yardımcısı</string>
+	<string name="agps_info">A-GPS bilgisi</string>
+	<string name="shared_string_manage">Yönet</string>
+	<string name="shared_string_edit">Düzenle</string>
+	<string name="shared_string_places">Yerler</string>
+	<string name="shared_string_search">Ara</string>
+	<string name="shared_string_show_description">Açıklama göster</string>
+	<string name="shared_string_message">İleti</string>
+	<string name="agps_data_last_downloaded">A-GPS verisi son indirilen: %1$s</string>
+    <string name="welmode_download_maps">Haritaları indir</string>
+	<string name="welcome_header">Hoş Geldiniz</string>
+    <string name="current_route">Şu anki rota</string>
+    <string name="mark_to_delete">Silmek için işaretle</string>
+	<string name="confirmation_to_clear_history">Geçmişi temizlemek istiyor musunuz?</string>
     </resources>

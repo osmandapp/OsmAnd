@@ -1932,4 +1932,16 @@
 	<string name="plugin_ski_descr">"Az OsmAnd ezen bővítménye a keze ügyébe helyezi a globális lesikló pályák, az országok közti sífutópályák, az alpesi síutak, kabinok és sífelvonók részleteit. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva, amely beolvaszt egy hószínű téli tájat.\n\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
 	<string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépelj az összes kereséséhez</string>
-    </resources>
+    <string name="specified_directiory_not_writeable">A térképeket nem sikerült létrehozni a megadott könyvtárban</string>
+	<string name="copying_osmand_file_failed">A fájlok másolása sikertelen</string>    
+    <string name="storage_directory_external">Külső tároló</string>
+    <string name="storage_directory_multiuser">Többfelhasználós tároló</string>
+    <string name="storage_directory_internal_app">Belső alkalmazás-memória</string>
+    <string name="storage_directory_manual">Kézileg megadva</string>
+    <string name="storage_directory_default">Belső memória</string>
+    <string name="storage_directory">Térképtároló</string>
+    <string name="shared_string_copy">Másolás</string>
+    <string name="rendering_value__name">Alapértelmezett</string>
+    <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
+	<string name="index_name_netherlands">Európa - Hollandia</string>
+	</resources>

@@ -1956,4 +1956,13 @@
     <string name="index_name_netherlands">Эўропа - Нідэрлянды</string>
 	<string name="rendering_value__name">Па змоўчаньні</string>
     <string name="rendering_value_highContrastRoads_name">Высокая кантрастнасьць дарог</string>
-	</resources>
+	<string name="specified_directiory_not_writeable">Мапы не могуць быць створаны ў пазначанай дырэкторыі</string>
+	<string name="copying_osmand_file_failed">Капіяваньне файлаў не атрымалася</string>    
+    <string name="storage_directory_internal_app">Унутраная памяць праграмы</string>
+    <string name="storage_directory_manual">Зададзены ўручную</string>
+    <string name="storage_directory_default">Унутраная памяць</string>
+    <string name="shared_string_copy">Капіяваць</string>
+    <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
+    <string name="storage_directory">Захоўваньне мапы</string>
+    <string name="storage_directory_multiuser">Агульнае сховішча</string>
+    </resources>
