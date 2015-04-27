@@ -64,6 +64,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -802,6 +803,9 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void checkExternalStorage() {
+		if(Build.VERSION.SDK_INT >= 19) {
+			return;
+		}
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// ok

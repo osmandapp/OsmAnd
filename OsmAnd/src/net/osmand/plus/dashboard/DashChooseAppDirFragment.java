@@ -22,6 +22,7 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,9 +32,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -59,9 +61,23 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	private File selectedFile = new File("/");
 	private File currentAppFile;
 	private OsmandSettings settings;
+	private Activity activity;
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		this.activity = activity;
+	}
+	
 
 	@Override
 	public void onOpenDash() {
+	}
+	
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return initView(inflater, container);
 	}
 	
 	private String getFreeSpace(File dir) {
@@ -85,30 +101,38 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 			locationPath.setText(R.string.storage_directory_manual);
 		}
 		locationDesc.setText(selectedFile.getAbsolutePath() + " \u2022 " + getFreeSpace(selectedFile));
-		boolean readOnlyAndFileExist = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath()) && 
-				!OsmandSettings.isWritable(currentAppFile) && !mapsCopied;
-		if (readOnlyAndFileExist) {
-			readOnlyAndFileExist = false;
+		boolean copyFiles = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath()) &&
+				!mapsCopied;
+		if (copyFiles) {
+			copyFiles = false;
 			File[] lf = currentAppFile.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null) {
 						if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-							readOnlyAndFileExist = true;
+							copyFiles = true;
 							break;
 						}
 					}
 				}
 			}
 		}
-		warningReadonly.setVisibility(readOnlyAndFileExist ? View.VISIBLE : View.GONE);
-		warningReadonly.setText(getString(R.string.android_19_location_disabled, currentAppFile.getAbsolutePath()));
-		copyMapsBtn.setVisibility(readOnlyAndFileExist ? View.VISIBLE : View.GONE);
+		warningReadonly.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
+		if(copyFiles) {
+			if(OsmandSettings.isWritable(currentAppFile)) {
+				warningReadonly.setText(getString(R.string.android_19_location_disabled, currentAppFile.getAbsolutePath()));
+			} else {
+				warningReadonly.setText(getString(R.string.application_dir_change_warning3));
+			}
+		}
+		
+		copyMapsBtn.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_storage_type_fragment, container, false);
+
+
+	public View initView(LayoutInflater inflater, ViewGroup container) {
+		View view = inflater.inflate(R.layout.dash_storage_type_fragment, container, false);
 		settings = getMyApplication().getSettings();
 		locationPath = (TextView) view.findViewById(R.id.location_path);
 		locationDesc = (TextView) view.findViewById(R.id.location_desc);
@@ -136,7 +160,7 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	
 	@TargetApi(Build.VERSION_CODES.KITKAT)
 	protected void showSelectDialog19() {
-		AlertDialog.Builder editalert = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder editalert = new AlertDialog.Builder(activity);
 		editalert.setTitle(R.string.application_dir);
 		final List<String> items = new ArrayList<String>();
 		final List<String> paths = new ArrayList<String>();
@@ -224,9 +248,9 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	}
 	
 	public void showOtherDialog(){
-		AlertDialog.Builder editalert = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder editalert = new AlertDialog.Builder(activity);
 		editalert.setTitle(R.string.application_dir);
-		final EditText input = new EditText(getActivity());
+		final EditText input = new EditText(activity);
 		input.setText(selectedFile.getAbsolutePath());
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 		        LinearLayout.LayoutParams.MATCH_PARENT,
@@ -262,51 +286,62 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 		copyMapsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(getActivity(), currentAppFile,
+				MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, currentAppFile,
 						selectedFile) {
-					protected Boolean doInBackground(Void[] params) {
-						Boolean result = super.doInBackground(params);
+
+					@Override
+					protected void onPostExecute(Boolean result) {
+						super.onPostExecute(result);
 						if (result) {
 							mapsCopied = true;
 							getMyApplication().getResourceManager().resetStoreDirectory();
 						} else {
-							AccessibleToast.makeText(getActivity(), R.string.copying_osmand_file_failed,
-									Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(activity, R.string.copying_osmand_file_failed, Toast.LENGTH_SHORT)
+									.show();
 						}
 						updateView();
-						return result;
 					}
 				};
 				task.execute();
 			}
 		});
-		confirmBtn.setOnClickListener(new View.OnClickListener() {
+		confirmBtn.setOnClickListener(getConfirmListener());
+				
+	}
+
+	public OnClickListener getConfirmListener() {
+		return new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				boolean wr = OsmandSettings.isWritable(selectedFile);
 				if(wr) {
 					boolean changed = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath());
-					getMyApplication().setExternalStorageDirectory(type, currentAppFile.getAbsolutePath());
+					getMyApplication().setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
 					if(changed) {
 						reloadData();
 					}
-					ActionBarActivity dashboardActivity = ((ActionBarActivity) getActivity());
-					if (dashboardActivity != null) {
-						dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashChooseAppDirFragment.this)
+					if (activity instanceof FragmentActivity) {
+						((FragmentActivity)activity).getSupportFragmentManager().beginTransaction().remove(DashChooseAppDirFragment.this)
 								.commit();
 					}
 				} else {
-					AccessibleToast.makeText(getActivity(), R.string.specified_directiory_not_writeable, 
+					AccessibleToast.makeText(activity, R.string.specified_directiory_not_writeable, 
 							Toast.LENGTH_LONG).show();
 				}
 			}
-		});
-				
+		};
 	}
 
 	protected void reloadData() {
-		new ReloadData(getActivity(), getMyApplication()).execute((Void)null );
+		new ReloadData(activity, getMyApplication()).execute((Void)null );
+	}
+	
+	public OsmandApplication getMyApplication(){
+		if (activity == null){
+			return null;
+		}
+		return (OsmandApplication) activity.getApplication();
 	}
 	
 	public static class ReloadData extends AsyncTask<Void, Void, Boolean> {
@@ -343,7 +378,9 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 			return false;
 		}
-		return !settings.isExternalStorageDirectorySpecifiedV19();
+		// TODO
+		return true;
+//		return !settings.isExternalStorageDirectorySpecifiedV19();
 	}
 	
 	public static HashSet<String> getExternalMounts() {

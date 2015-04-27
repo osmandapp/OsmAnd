@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -27,8 +26,11 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -36,6 +38,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -304,7 +307,63 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			}
 		});
 	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public void showAppDirDialog(){
+		if(Build.VERSION.SDK_INT >= 19) {
+			 ChooseAppDirDialogFragment newFragment = ChooseAppDirDialogFragment.newInstance();
+			 newFragment.show(getFragmentManager(), "dialog");
+		}
+		AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
+		editalert.setTitle(R.string.application_dir);
+		final EditText input = new EditText(SettingsGeneralActivity.this);
+		input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+		        LinearLayout.LayoutParams.MATCH_PARENT,
+		        LinearLayout.LayoutParams.MATCH_PARENT);
+		lp.leftMargin = lp.rightMargin = 5;
+		lp.bottomMargin = lp.topMargin = 5;
+		input.setLayoutParams(lp);
+		settings.getExternalStorageDirectory().getAbsolutePath();
+		editalert.setView(input);
+		editalert.setNegativeButton(R.string.shared_string_cancel, null);
+		editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int whichButton) {
+		    	warnAboutChangingStorage(input.getText().toString());
+		    }
+		});
+		editalert.show();
+		
+	}
+	
+	@SuppressLint("NewApi")
+	public static class ChooseAppDirDialogFragment extends android.app.DialogFragment {
+		
+		@Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+			Bundle args = getArguments();
+			final DashChooseAppDirFragment ssf = new DashChooseAppDirFragment();
+			ssf.setArguments(args);
+			ssf.onAttach(getActivity());
+            AlertDialog dlg = new AlertDialog.Builder(getActivity())
+            		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
+            		.setNegativeButton(R.string.shared_string_cancel, null)
+                    .setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							android.view.View.OnClickListener cf = ssf.getConfirmListener();
+							cf.onClick(null);
+						}
+					})
+                    .create();
+            return dlg;
+        }
 
+		public static ChooseAppDirDialogFragment newInstance() {
+			return new ChooseAppDirDialogFragment();
+		}
+    }
 
 
 	private void addMiscPreferences(PreferenceGroup misc) {
@@ -314,30 +373,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			applicationDir.setKey("external_storage_dir");
 			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				
-				public void showOtherDialog(){
-					AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
-					editalert.setTitle(R.string.application_dir);
-					final EditText input = new EditText(SettingsGeneralActivity.this);
-					input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
-					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					        LinearLayout.LayoutParams.MATCH_PARENT,
-					        LinearLayout.LayoutParams.MATCH_PARENT);
-					lp.leftMargin = lp.rightMargin = 5;
-					lp.bottomMargin = lp.topMargin = 5;
-					input.setLayoutParams(lp);
-					settings.getExternalStorageDirectory().getAbsolutePath();
-					editalert.setView(input);
-					editalert.setNegativeButton(R.string.shared_string_cancel, null);
-					editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog, int whichButton) {
-					    	warnAboutChangingStorage(input.getText().toString());
-					    }
-					});
-					editalert.show();
-				}
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
-					showOtherDialog();
+					showAppDirDialog();
 					return false;
 				}
 			});
@@ -444,7 +482,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			return;
 		}
 		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.application_dir_change_warning2));
+		builder.setMessage(getString(R.string.application_dir_change_warning3));
 		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
