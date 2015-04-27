@@ -2000,4 +2000,13 @@
     <string name="index_name_netherlands">Europa - Holland</string>
 	<string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veje med høj kontrast</string>
-	</resources>
+	<string name="specified_directiory_not_writeable">Kort kunne ikke oprettes i angivne bibliotek</string>
+	<string name="copying_osmand_file_failed">Kopiering af filer mislykkedes</string>    
+    <string name="storage_directory_external">Ekstern lager</string>
+    <string name="storage_directory_multiuser">Flerbruger lager</string>
+    <string name="storage_directory_internal_app">Intern program hukommelse</string>
+    <string name="storage_directory_manual">Manuelt angivet</string>
+    <string name="storage_directory_default">Intern hukommelse</string>
+    <string name="storage_directory">Lagring af kort</string>
+    <string name="shared_string_copy">Kopi</string>
+    </resources>
