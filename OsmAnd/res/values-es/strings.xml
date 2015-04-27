@@ -2016,4 +2016,13 @@
     <string name="index_name_netherlands">Europa - Países Bajos</string>
 	<string name="rendering_value__name">Predeterminado</string>
     <string name="rendering_value_highContrastRoads_name">Carreteras en alto contraste</string>
-	</resources>
+	<string name="specified_directiory_not_writeable">No se pueden crear mapas en el directorio especificado</string>
+	<string name="copying_osmand_file_failed">Error al copiar archivos</string>    
+    <string name="storage_directory_external">Almacenamiento externo</string>
+    <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
+    <string name="storage_directory_internal_app">Memoria de las aplicaciones internas</string>
+    <string name="storage_directory_manual">Especificar manualmente</string>
+    <string name="storage_directory_default">Memoria interna</string>
+    <string name="storage_directory">Mapa de almacenamiento</string>
+    <string name="shared_string_copy">Copiar</string>
+    </resources>
