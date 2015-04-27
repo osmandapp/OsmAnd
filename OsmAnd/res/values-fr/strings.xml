@@ -2030,4 +2030,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="storage_directory_default">Mémoire interne</string>
     <string name="storage_directory">Stockage de la carte</string>
     <string name="shared_string_copy">Copier</string>
+    <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
     </resources>
