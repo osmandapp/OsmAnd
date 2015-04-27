@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -26,8 +27,6 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -308,11 +307,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		});
 	}
 	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	
 	public void showAppDirDialog(){
 		if(Build.VERSION.SDK_INT >= 19) {
-			 ChooseAppDirDialogFragment newFragment = ChooseAppDirDialogFragment.newInstance();
-			 newFragment.show(getFragmentManager(), "dialog");
+			 showAppDirDialogV19();
+			 return;
 		}
 		AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
 		editalert.setTitle(R.string.application_dir);
@@ -336,34 +335,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 	}
 	
-	@SuppressLint("NewApi")
-	public static class ChooseAppDirDialogFragment extends android.app.DialogFragment {
-		
-		@Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Bundle args = getArguments();
-			final DashChooseAppDirFragment ssf = new DashChooseAppDirFragment();
-			ssf.setArguments(args);
-			ssf.onAttach(getActivity());
-            AlertDialog dlg = new AlertDialog.Builder(getActivity())
-            		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-            		.setNegativeButton(R.string.shared_string_cancel, null)
-                    .setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							android.view.View.OnClickListener cf = ssf.getConfirmListener();
-							cf.onClick(null);
-						}
-					})
-                    .create();
-            return dlg;
-        }
+	private void showAppDirDialogV19() {
+		Builder bld = new AlertDialog.Builder(this);
+		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null);
+		bld.setView(frg.initView(getLayoutInflater(), null));
+		AlertDialog dlg = bld.show();
+		frg.setDialog(dlg);
+	}
 
-		public static ChooseAppDirDialogFragment newInstance() {
-			return new ChooseAppDirDialogFragment();
-		}
-    }
 
 
 	private void addMiscPreferences(PreferenceGroup misc) {
