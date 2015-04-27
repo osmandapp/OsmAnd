@@ -640,7 +640,7 @@ POIの更新は利用できません</string>
     
     
     
-    <string name="map_magnifier">マップ拡大鏡</string>
+    <string name="map_magnifier">マップ拡大鏡倍率</string>
     <string name="tip_map_styles_t">"OsmAndのオフラインベクターマップは必要に応じて異なるマップスタイルを使えるように出来ています:
 \n\nバランスの良い \'デフォルト\' マップスタイルの他に、\'メニュー\' → \'マップ設定\' → \'マップスタイル\' から選択できます。例えば、
 \n\t* \'ツーリングビュー\' スタイルという旅行やツーリング、プロの運転手(より高いコントラストで区別可能な道路)、そしてアルパインハイキングのためのオプション(SACスケール)、自転車ルート、ハイキング用のシンボルマークなどの表示をさせることができます。
@@ -1531,7 +1531,7 @@ POIの更新は利用できません</string>
 	<string name="sleep_mode_stop_dialog">GPSのスリープモードを停止しますか？</string>
 	<string name="map_preferred_locale_descr">マップ上の名称の優先言語(利用できない場合は、英語またはローカル名に切り替わります)</string>
     <string name="map_preferred_locale">地名等の優先言語</string>
-    <string name="local_map_names">ローカル名(その国での名称)</string>
+    <string name="local_map_names">ローカル名(その国での呼称)</string>
     <string name="lang_sw">スワヒリ語</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">自宅</string>
