@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
+    android:layout_marginTop="@dimen/dash_margin"
+    android:background="?attr/card_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/osmand_orange"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding"
+        android:paddingTop="@dimen/list_content_padding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_header_bottom_margin"
+            android:text="@string/storage_directory"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/default_list_text_size_large" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/location_path"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location path"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_list_text_size" />
+
+                <TextView
+                    android:id="@+id/location_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location path  \u2022 300 MB"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_sub_text_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/edit_icon"
+                android:layout_width="@dimen/list_item_height"
+                android:layout_height="@dimen/list_item_height"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/dashboard_button"
+                android:scaleType="center"
+                android:src="@drawable/ic_action_edit_dark" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingBottom="3dp"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding"
+        android:paddingTop="3dp"
+        android:id="@+id/android_19_location_changed"
+        android:text="@string/android_19_location_disabled"
+        android:textSize="@dimen/default_sub_text_size" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/copy_maps"
+            style="@style/DashboardGeneralButton"
+            android:gravity="center"
+            android:text="@string/shared_string_copy"
+            osmand:textAllCapsCompat="true"
+            osmand:typeface="@string/font_roboto_medium" />
+
+        <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/confirm"
+            style="@style/DashboardGeneralButton"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/shared_string_ok"
+            osmand:textAllCapsCompat="true"
+            osmand:typeface="@string/font_roboto_medium" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
@@ -310,9 +309,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			html.append("</body>");
 			html.append("</html>");
 
-			file = new File(((OsmandApplication) getApplication())
-					.getAppCustomization().getExternalStorageDir(),
-					IndexConstants.APP_DIR + FILE_NAME);
+			file = ((OsmandApplication) getApplication()).getAppPath(FILE_NAME);
 			fos = new FileOutputStream(file);
 			fos.write(html.toString().getBytes("UTF-8"));
 			fos.flush();

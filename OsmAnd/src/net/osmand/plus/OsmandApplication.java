@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
@@ -18,6 +19,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
@@ -100,6 +102,7 @@ public class OsmandApplication extends Application {
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale defaultLocale;
+	private File externalStorageDirectory;
 	
 	
 	// Typeface
@@ -126,6 +129,7 @@ public class OsmandApplication extends Application {
 		}
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
+		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
 		
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
@@ -395,27 +399,34 @@ public class OsmandApplication extends Application {
 			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnyway(activity, true);
+					closeApplicationAnywayImpl(activity, true);
 				}
 			});
 			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnyway(activity, false);
+					closeApplicationAnywayImpl(activity, false);
 				}
 			});
 			bld.show();
 		} else {
-			closeApplicationAnyway(activity, true);
+			closeApplicationAnywayImpl(activity, true);
 		}
 	}
-
+	
 	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
+		activity.finish();
+		Intent newIntent = new Intent(activity, ExitActivity.class);
+		newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		newIntent.putExtra(ExitActivity.DISABLE_SERVICE, disableService);
+		startActivity(newIntent);
+	}
+
+	public void closeApplicationAnywayImpl(final Activity activity, boolean disableService) {
 		if (appInitializer.isAppInitializing()) {
 			resourceManager.close();
 		}
 		activity.finish();
-
 		if (getNavigationService() == null) {
 			fullExit();
 		} else if (disableService) {
@@ -568,8 +579,13 @@ public class OsmandApplication extends Application {
 		if(path == null) {
 			path = "";
 		}
-
-		return new File(getAppCustomization().getExternalStorageDir(), IndexConstants.APP_DIR + path);
+		return new File(externalStorageDirectory, path);
+	}
+	
+	public void setExternalStorageDirectory(int type, String directory){
+		osmandSettings.setExternalStorageDirectory(type, directory);
+		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		getResourceManager().resetStoreDirectory();
 	}
 
 	public void applyTheme(Context c) {

@@ -143,11 +143,6 @@ public class OsmAndAppCustomization {
 	}
 
 
-	public File getExternalStorageDir() {
-		return osmandSettings.getExternalStorageDirectory();
-	}
-
-
 	public boolean onlyTourDownload() {
 		return false;
 	}

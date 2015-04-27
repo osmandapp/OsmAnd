@@ -645,6 +645,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
 		showFragment(manager, fragmentTransaction, DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, firstTime);
+		showFragment(manager, fragmentTransaction, DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, 
+				DashChooseAppDirFragment.isDashNeeded(getMyApplication().getSettings()));
 
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
 				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity) && showCards);

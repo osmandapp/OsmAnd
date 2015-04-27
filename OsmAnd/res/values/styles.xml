@@ -43,7 +43,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
 		<item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textSize">@dimen/default_desc_text_size</item>
+        <item name="android:textSize">@dimen/default_sub_text_size</item>
 		<item name="android:gravity">bottom|center_horizontal</item>
 		<item name="android:paddingBottom">@dimen/dashSearchPaddingBot</item>
 		<item name="android:background">?attr/dashboard_button</item>

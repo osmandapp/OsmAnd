@@ -31,7 +31,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
