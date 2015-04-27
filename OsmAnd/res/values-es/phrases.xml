@@ -458,7 +458,7 @@
 	<string name="poi_fuel:e20">E20</string>
 	<string name="poi_fuel:e85">E85</string>
 	<string name="poi_fuel:biogas">Biogás</string>
-	<string name="poi_railway_buffer_stop">Tope de tren</string>
+	<string name="poi_railway_buffer_stop">Topera</string>
 	<string name="poi_aerialway_t_bar">Telesquí (T)</string>
 	<string name="poi_aerialway_j_bar">Telesquí (J)</string>
 	<string name="poi_aerialway_drag_lift">Cable de arrastre</string>
@@ -559,12 +559,12 @@
 	<string name="poi_lodging">Alojamiento</string>
 	<string name="poi_wilderness_hut">Choza de desierto</string>
 
-	<string name="poi_religion_muslim">Lugar de adoración: musulmán</string>
-	<string name="poi_religion_sikh">Lugar de adoración: sikh</string>
-	<string name="poi_religion_buddhist">Lugar de adoración: budista</string>
-	<string name="poi_religion_hindu">Lugar de adoración: hindú</string>
-	<string name="poi_religion_shinto">Lugar de adoración: shinto</string>
-	<string name="poi_religion_taoist">Lugar de adoración: taoísta</string>
+	<string name="poi_religion_muslim">Lugar de culto: musulmán</string>
+	<string name="poi_religion_sikh">Lugar de culto: sijismo</string>
+	<string name="poi_religion_buddhist">Lugar de culto: budista</string>
+	<string name="poi_religion_hindu">Lugar de culto: hindú</string>
+	<string name="poi_religion_shinto">Lugar de culto: sintoísmo</string>
+	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
 
 	<string name="poi_wayside_cross">Camino cruzado</string>
 	<string name="poi_wayside_shrine">Ermita</string>
@@ -609,7 +609,7 @@
 	<string name="poi_craft_basket_maker">Cestero</string>
 	<string name="poi_craft_beekeeper">Apicultor</string>
 	<string name="poi_craft_brewery">Cervecería</string>
-	<string name="poi_craft_boatbuilder">Constructor</string>
+	<string name="poi_craft_boatbuilder">Constructor de botes</string>
 	<string name="poi_craft_bookbinder">Encuadernador</string>
 	<string name="poi_craft_caterer">Servicio de catering</string>
 	<string name="poi_craft_dressmaker">Modista</string>
@@ -724,7 +724,7 @@
 	<string name="poi_craft_saddler">Guarnicionero</string>
 	<string name="poi_craft_sailmaker">Astillero artesanal</string>
 	<string name="poi_craft_stand_builder">Diseño de stands</string>
-	<string name="poi_craft_sun_protection">Fábrica de Toldos</string>
+	<string name="poi_craft_sun_protection">Fábrica de toldos</string>
 	<string name="poi_craft_sweep">Deshollinador</string>
 	<string name="poi_craft_tiler">Alicatador</string>
 	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
@@ -758,7 +758,7 @@
 	<string name="poi_military_airfield">Aeródromo militar</string>
 	<string name="poi_military_bunker">Búnker</string>
 	<string name="poi_military_barracks">Barracones</string>
-	<string name="poi_military_danger_area">Zona de peligro</string>
+	<string name="poi_military_danger_area">Zona peligrosa</string>
 	<string name="poi_military_range">Campo de tiro militar</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military_nuclear_explosion_site">Sitio de explosión nuclear</string>
