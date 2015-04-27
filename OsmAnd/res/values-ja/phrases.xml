@@ -85,7 +85,7 @@
 	<string name="poi_bicycle">自転車屋(Bicycle shop)</string>
 	<string name="poi_anime">アニメショップ(Anime shop)</string>
 	<string name="poi_antiques">骨董品店(Antiques store)</string>
-	<string name="poi_art">画材屋(Art shop)</string>
+	<string name="poi_art">絵画商・私設ギャラリー(Art shop)</string>
 	<string name="poi_baby_goods">ベビー用品(Baby goods)</string>
 	<string name="poi_bag">カバン店(Bag shop)</string>
 	<string name="poi_bathroom_furnishing">浴室及びトイレ家具</string>
@@ -233,7 +233,7 @@
 	<string name="poi_aerialway_drag_lift">ドラッグリフト(Drag lift)</string>
 	<string name="poi_aerialway_rope_tow">ロープトゥ(Rope tow lift)</string>
 	<string name="poi_aerialway_goods">貨物用リフト(Goods lift)</string>
-	<string name="poi_aerialway_magic_carpet">マジックカーペットスキーリフト(Carpet lift)</string>
+	<string name="poi_aerialway_magic_carpet">マジックカーペット・動く歩道スキーリフト(Carpet lift)</string>
 
 	<string name="poi_tunnel">トンネル(Tunnel)</string>
 	<string name="poi_bridge">橋(Bridge)</string>
