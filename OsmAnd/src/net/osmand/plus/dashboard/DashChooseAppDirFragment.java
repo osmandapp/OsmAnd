@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
+import net.osmand.ValueHolder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -54,7 +55,7 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	private View confirmBtn;
 	private boolean mapsCopied = false;
 	private TextView warningReadonly;
-	private int type = OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT;
+	private int type = -1;
 	private File selectedFile = new File("/");
 	private File currentAppFile;
 	private OsmandSettings settings;
@@ -72,7 +73,7 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	}
 	
 	public void updateView() {
-		if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT) {
+		if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT ) {
 			locationPath.setText(R.string.storage_directory_default);
 		} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE) {
 			locationPath.setText(R.string.storage_directory_external);
@@ -116,6 +117,14 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 		selectedFile = currentAppFile;
 		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
 			type = settings.getExternalStorageDirectoryTypeV19();
+		} else {
+			ValueHolder<Integer> vh = new ValueHolder<Integer>();
+			settings.getExternalStorageDirectory(vh);
+			if (vh.value != null && vh.value >= 0) {
+				type = vh.value;
+			} else {
+				type = 0;
+			}
 		}
 		editBtn = (ImageView) view.findViewById(R.id.edit_icon);
 		copyMapsBtn = view.findViewById(R.id.copy_maps);
@@ -180,7 +189,7 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 			}
 		}
 		
-		String pth = getMyApplication().getFilesDir().getAbsolutePath();
+		String pth = settings.getInternalAppPath().getAbsolutePath();
 		if(selectedFile.getAbsolutePath().equals(pth) ) {
 			selected = items.size();
 		}

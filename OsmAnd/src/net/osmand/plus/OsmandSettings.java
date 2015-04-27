@@ -1160,31 +1160,66 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4; 
 
+	
 	public File getExternalStorageDirectory() {
+		return getExternalStorageDirectory(null);
+	}
+	
+	public File getExternalStorageDirectory(ValueHolder<Integer> type) {
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 			return getExternalStorageDirectoryPre19();
 		} else {
-			return getExternalStorageDirectoryV19();
+			return getExternalStorageDirectoryV19(type);
 		}
 	}
 	
+	@TargetApi(19)
+	public File getInternalAppPath() {
+		if(Build.VERSION.SDK_INT >= 21) {
+			File fl = getNoBackupPath();
+			if(fl != null) {
+				return fl;
+			}
+		}
+		return ctx.getFilesDir();
+	}
+	
+	@TargetApi(21)
+	private File getNoBackupPath() {
+		return ctx.getNoBackupFilesDir();
+	}
+
 	@TargetApi(Build.VERSION_CODES.KITKAT)
-	public File getExternalStorageDirectoryV19() {
+	public File getExternalStorageDirectoryV19(ValueHolder<Integer> tp) {
 		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
 		File location = getDefaultLocationV19();
 		if (type == -1) {
 			if(isWritable(location)) {
+				if(tp != null) {
+					tp.value = settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_V19) ?
+							EXTERNAL_STORAGE_TYPE_SPECIFIED :
+							EXTERNAL_STORAGE_TYPE_DEFAULT;
+				}
 				return location;
 			}
 			File[] external = ctx.getExternalFilesDirs(null);
 			if(external != null && external.length > 0 && external[0] != null) {
 				location = external[0];
+				if(tp != null) {
+					tp.value = EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE;
+				}
 			} else {
 				File[] obbDirs = ctx.getObbDirs();
 				if(obbDirs != null && obbDirs.length > 0 && obbDirs[0] != null) {
 					location = obbDirs[0];
+					if(tp != null) {
+						tp.value = EXTERNAL_STORAGE_TYPE_OBB;
+					}
 				} else {
-					location = ctx.getFilesDir();
+					location = getInternalAppPath();
+					if(tp != null) {
+						tp.value = EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
+					}
 				}
 			}
 		}
@@ -1932,6 +1967,8 @@ public class OsmandSettings {
 		}
 
 	}
+
+	
 
 	
 
