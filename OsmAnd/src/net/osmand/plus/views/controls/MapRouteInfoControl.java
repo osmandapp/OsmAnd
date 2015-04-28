@@ -62,6 +62,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private boolean showDialog = false;
 	private MapActivity mapActivity;
 	private MapControlsLayer mapControlsLayer;
+	public static final String TARGET_SELECT = "TARGET_SELECT";
 
 	public MapRouteInfoControl(ContextMenuLayer contextMenu,
 			MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
@@ -208,7 +209,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				} else if(position == 3) {
 					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+					intent.putExtra(TARGET_SELECT, true);
 					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
 				}				
 			}
@@ -237,7 +238,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				} else if(position == 3) {
 					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+					intent.putExtra(TARGET_SELECT, false);
 					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
 				}				
 			}

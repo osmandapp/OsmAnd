@@ -25,6 +25,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -104,6 +105,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		});
 	}
 	
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -120,11 +122,10 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	public List<Object> getFilters(String s) {
 		List<Object> filters = new ArrayList<Object>() ;
+		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		if (Algorithms.isEmpty(s)) {
-			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 			filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		} else {
-			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 			for(PoiLegacyFilter pf : poiFilters.getTopDefinedPoiFilters()) {
 				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
