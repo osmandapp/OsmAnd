@@ -170,10 +170,6 @@ def replaceNoTranslate(line) {
 }
 
 task updateNoTranslate(type: Copy) {
-	inputs.property 'appName', System.getenv().get("APP_NAME")
-	inputs.property 'appEdition', System.getenv().get("APP_EDITION")
-	inputs.property 'appFeatures', System.getenv().get("APP_FEATURES")
-	inputs.property 'apkVersion', System.getenv().get("APK_VERSION")
 	from('.') {
 		include 'no_translate.xml'
 		filter {
