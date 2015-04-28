@@ -2162,7 +2162,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="welcome_header">Benvenuto</string>
     <string name="current_route">Percorso attuale</string>
     <string name="osm_changes_added_to_local_edits">Modifiche a OsmAnd aggiunte alle modifiche locali</string>
-   	<string name="mark_to_delete">Contrassegna da eliminare</string>
+   	<string name="mark_to_delete">Marca per eliminare</string>
 	<string name="osmo_grop_name_length_alert">I nomi dei gruppi devono essere almeno di 3 caratteri!</string>
 	<string name="shared_string_message">Messaggio</string>
 	<string name="shared_string_do_not_use">Non usare</string>
@@ -2183,4 +2183,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="specified_directiory_not_writeable">Le mappe non possono essere create nella destinazione specificata</string>
 	<string name="storage_directory_manual">Specificata manualmente</string>
     <string name="storage_directory_default">Memoria interna</string>
+    <string name="storage_directory">Posizione di memorizzazione delle mappe</string>
+    <string name="shared_string_copy">Copia</string>
+    <string name="storage_directory_internal_app">Memoria interna applicazione</string>
+    <string name="rendering_value__name">Default</string>
+    <string name="rendering_value_highContrastRoads_name">Alto contrasto strade</string>
+	<string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     </resources>
