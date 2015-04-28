@@ -855,7 +855,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     
     <string name="tip_altitude_offset">Höjdvisning - Offset-korrigering</string>
-	<string name="map_widget_max_speed">Hastighets- begränsning</string>
+	<string name="map_widget_max_speed">Hastighetsbegränsning</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Inga byggnader hittades.</string>
     <string name="incremental_search_city">Sök stad stegvis</string>
@@ -1865,4 +1865,14 @@
     <string name="index_name_netherlands">Europa - Nederländerna</string>
 	<string name="rendering_value_highContrastRoads_name">Högkontrastvägar</string>
 	<string name="rendering_value__name">Standard</string>
+    <string name="application_dir_change_warning3">Vill du att OsmAnd kopierar även sina datafiler till den nya destinationen?</string>
+    <string name="specified_directiory_not_writeable">Kunde inte skapa kartor i den angivna mappen</string>
+	<string name="copying_osmand_file_failed">Kopieringen misslyckades</string>    
+    <string name="storage_directory_external">Extern lagring</string>
+    <string name="storage_directory_multiuser">Lagring för flera användare</string>
+    <string name="storage_directory_internal_app">Internt appminne</string>
+    <string name="storage_directory_manual">Manuellt specificerad</string>
+    <string name="storage_directory_default">Internminne</string>
+    <string name="storage_directory">Kartlagring</string>
+    <string name="shared_string_copy">Kopiera</string>
     </resources>

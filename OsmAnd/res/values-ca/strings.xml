@@ -1987,4 +1987,14 @@ Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i e
     <string name="index_name_netherlands">Europa - Països Baixos</string>
 	<string name="rendering_value__name">Per defecte</string>
     <string name="rendering_value_highContrastRoads_name">Vies més contrastades</string>
-	</resources>
+	<string name="application_dir_change_warning3">Voleu que OsmAnd també copiï els seus arxius de dades a la nova destinació?</string>
+    <string name="specified_directiory_not_writeable">Creació de mapes al directori indicat fallida</string>
+	<string name="copying_osmand_file_failed">Error en copiar fitxers</string>    
+    <string name="storage_directory_external">Emmagatzemament extern</string>
+    <string name="storage_directory_multiuser">Emmagatzemant multiusuari</string>
+    <string name="storage_directory_internal_app">Memòria interna de l\'aplicació</string>
+    <string name="storage_directory_manual">Definit manualment</string>
+    <string name="storage_directory_default">Memòria interna</string>
+    <string name="storage_directory">Emmagatzement de mapes</string>
+    <string name="shared_string_copy">Copia</string>
+    </resources>

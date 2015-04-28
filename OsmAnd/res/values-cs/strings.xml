@@ -437,7 +437,7 @@
   <string name="use_osmand_routing_service_descr">Používat offline navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je experimentální a funguje jen pro vzdálenosti do 20 km.\n\nNavigační služba je dočasně přepnuta na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
-  <string name="application_dir">Úložiště pro data</string>
+  <string name="application_dir">Adresář pro data</string>
   
   <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS není nainstalovaná. Hledat v Obchodě?</string>
   <string name="voice_is_not_available_msg">Hlasové navádění není dostupné, jděte prosím do \'Nastavení\' → \'Obecné\' → \'Hlasové pokyny\' a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
@@ -1933,4 +1933,14 @@ s často kladenými otázkami.</string>
 	<string name="index_name_netherlands">Evropa - Holandsko</string>
 	<string name="rendering_value__name">Výchozí</string>
     <string name="rendering_value_highContrastRoads_name">Vysoce kontrastní cesty</string>
-	</resources>
+	<string name="application_dir_change_warning3">Chcete aby OsmAnd také zkopíroval datové soubory do nového cíle?</string>
+    <string name="specified_directiory_not_writeable">V zadaném adresáři nemohly být mapy vytvořené</string>
+	<string name="copying_osmand_file_failed">Kopírování souborů selhalo</string>    
+    <string name="storage_directory_external">Externí úložiště</string>
+    <string name="storage_directory_multiuser">Víceuživatelské úložiště</string>
+    <string name="storage_directory_internal_app">Interní paměť aplikace</string>
+    <string name="storage_directory_manual">Ručně zadané</string>
+    <string name="storage_directory_default">Interní paměť</string>
+    <string name="storage_directory">Úložiště map</string>
+    <string name="shared_string_copy">Kopírovat</string>
+    </resources>

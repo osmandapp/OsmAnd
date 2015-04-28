@@ -136,8 +136,8 @@
 	<string name="shared_string_yes">Eja</string>
 	<string name="tip_map_styles_t">"OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s’adatare a sas esigentzias tuas:
 \n\nDiferentes dae sos istiles balansados preimpostados de sa mapa, los agatas suta \'Menu\' -&gt; \'Cunfigura sa mapa\' -&gt; \'Istile Mapa\' issèbera pro esempru
-\n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.
-\n\t* \'Contrastu istradas artu\' ammustrat sas istradas cun una lughentesa de sos colores atzentuata meda pro sas situatziones de illuminadura mala.
+\n\t* S’istile \'Vista turìstica\': cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.
+\n\t* \'Istradas a cuntrastu artu\' ammustrat sas istradas cun una lughentesa de sos colores atzentuata meda pro sas situatziones de illuminadura mala.
 \n\t* \'Ierru e isci\' crea una vista de su paesàgiu ierrale (cucuzau dae su nie), e visione globale de sas pistas de isci e de sos impiantos de artziada (in acrobada cun s’isgarrigamentu de sa mapa \'World ski\' ) "</string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informatziones</string>
@@ -370,7 +370,7 @@
 \n\t* Plugin pro sas notas àudio/vìdeo
 \n\t* Plugin pro sas lìnias de livellu
 \n\t* Curretziones de errores
-\n\t* Optzione \'Touring view\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
+\n\t* Optzione \'Vista turìstica\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
 \n\t* Curretzione EGM96 de s’iscostamentu de sas leghiduras de s’artària GPS "</string>
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
@@ -1947,4 +1947,14 @@
 	<string name="filter_poi_hint">Filtra pro nùmene</string>
     <string name="index_name_netherlands">Europa - Olanda</string>
 	<string name="search_poi_category_hint">Iscrie pro chircare totu</string>
-    </resources>
+    <string name="specified_directiory_not_writeable">Sas mapas non podent èssere creadas in sa cartella dislindada</string>
+	<string name="copying_osmand_file_failed">Còpia de sos documentos faddida</string>    
+    <string name="storage_directory_external">Memòria esterna</string>
+    <string name="storage_directory_manual">Dislindada manualmente</string>
+    <string name="storage_directory_default">Memòria interna</string>
+    <string name="shared_string_copy">Còpia</string>
+    <string name="application_dir_change_warning3">Boles chi OsmAnd copiet in sa destinatzione noa fintzas sos documentos de sos datos suos?</string>
+    <string name="storage_directory_internal_app">Memòria interna de s\'aplicu</string>
+    <string name="rendering_value__name">Predefinidu</string>
+    <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
+	</resources>

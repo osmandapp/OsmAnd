@@ -67,4 +67,18 @@
 	<string name="poi_art">藝品店</string>
 	<string name="poi_baby_goods">嬰幼童商店</string>
 	<string name="poi_bag">包包店</string>
+	<string name="poi_bathroom_furnishing">浴室裝備</string>
+	<string name="poi_bed">臥室裝備</string>
+	<string name="poi_boutique">時尚精品</string>
+	<string name="poi_carpet">地毯店</string>
+	<string name="poi_charity">慈善義賣店</string>
+	<string name="poi_chemist">藥品店</string>
+	<string name="poi_clothes">服飾店</string>
+	<string name="poi_child_clothes">兒童服飾</string>
+	<string name="poi_shoes">鞋店</string>
+	<string name="poi_computer">電腦商店</string>
+	<string name="poi_copyshop">複印店</string>
+	<string name="poi_curtain">窗簾店</string>
+	<string name="poi_fabric">布店</string>
+	<string name="poi_bedding">寢具商店</string>
 	</resources>
