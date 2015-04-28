@@ -2009,4 +2009,5 @@
     <string name="storage_directory_default">Intern hukommelse</string>
     <string name="storage_directory">Lagring af kort</string>
     <string name="shared_string_copy">Kopi</string>
+    <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
     </resources>
