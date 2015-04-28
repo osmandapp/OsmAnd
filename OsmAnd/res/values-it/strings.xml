@@ -2177,4 +2177,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="filter_poi_hint">Filtra per nome</string>
     <string name="search_poi_category_hint">Scrivi cercare fra tutti</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
-	</resources>
+	<string name="copying_osmand_file_failed">Copia dei file fallita</string>    
+    <string name="storage_directory_external">Memoria esterna</string>
+    <string name="application_dir_change_warning3">Vuoi che OsmAnd copi anche i sui file di dati nella nuova destinazione?</string>
+    <string name="specified_directiory_not_writeable">Le mappe non possono essere create nella destinazione specificata</string>
+	<string name="storage_directory_manual">Specificata manualmente</string>
+    <string name="storage_directory_default">Memoria interna</string>
+    </resources>
