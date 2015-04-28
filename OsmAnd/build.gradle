@@ -273,7 +273,7 @@ task cleanupDuplicatesInCore() {
 	}
 }
 tasks.withType(JavaCompile) {
-	compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
+	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
 repositories {
