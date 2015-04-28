@@ -578,7 +578,7 @@
 <string name="m">m</string>
 <string name="old_map_index_is_not_supported">Det föråldrade kartdataformatet \"{0}\" stöds inte</string>
 <string name="poi_filter_car_aid">Bilhjälp</string>
-<string name="poi_filter_closest_poi">Närmaste intressepunkt</string>
+<string name="poi_filter_closest_poi">Närmaste intressepunkter</string>
 <string name="poi_filter_custom_filter">Anpassat filter</string>
 <string name="poi_filter_food_shop">Mataffär</string>
 <string name="poi_filter_for_tourists">För turister</string>
@@ -708,7 +708,7 @@
 	<string name="layer_route">Rutt</string>
 	<string name="layer_osm_bugs">OSM-anteckningar (online)</string>
 	<string name="layer_transport">Hållplatser</string>
-	<string name="layer_poi">Intressepunkt …</string>
+	<string name="layer_poi">Intressepunkter (POI) …</string>
 	<string name="layer_map">Kartkälla …</string>
 	<string name="menu_layers">Kartlager</string>
 	<string name="context_menu_item_search_poi">Sök intressepunkt</string>

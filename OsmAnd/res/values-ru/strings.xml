@@ -1782,7 +1782,7 @@
     <string name="download_tab_local">Локальные</string>
 	<string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
-    <string name="shared_string_dismiss">Не отправлять</string>
+    <string name="shared_string_dismiss">Отклонить</string>
     <string name="dash_download_msg_none">Вы хотите загрузить оффлайн карты?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
@@ -1963,4 +1963,14 @@
 	<string name="filter_poi_hint">Фильтровать по имени</string>
     <string name="rendering_value__name">По умолчанию</string>
     <string name="rendering_value_highContrastRoads_name">Высокий контраст</string>
-	</resources>
+	<string name="storage_directory_default">Внутренняя память</string>
+    <string name="specified_directiory_not_writeable">Не возможно создать карты в указанном каталоге</string>
+	<string name="copying_osmand_file_failed">Не удалось переместить файлы</string>    
+    <string name="storage_directory_external">Внешнее хранилище</string>
+    <string name="storage_directory_multiuser">Многопользовательское хранилище</string>
+    <string name="storage_directory_internal_app">Внутренняя память приложения</string>
+    <string name="storage_directory_manual">Указать вручную</string>
+    <string name="storage_directory">Хранилище карт</string>
+    <string name="shared_string_copy">Переместить</string>
+    <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
+    </resources>
