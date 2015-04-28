@@ -1974,4 +1974,14 @@
     <string name="index_name_netherlands">歐洲 - 荷蘭</string>
 	<string name="rendering_value__name">預設值</string>
     <string name="rendering_value_highContrastRoads_name">高對比道路</string>
-	</resources>
+	<string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案，複製到新的目的地嗎？</string>
+    <string name="specified_directiory_not_writeable">地圖不能建立在指定的目錄</string>
+	<string name="copying_osmand_file_failed">複製檔案時失敗</string>    
+    <string name="storage_directory_external">外部存儲器</string>
+    <string name="storage_directory_multiuser">多使用者存儲器</string>
+    <string name="storage_directory_internal_app">內部應用程式記憶體</string>
+    <string name="storage_directory_manual">手動指定</string>
+    <string name="storage_directory_default">內部記憶體</string>
+    <string name="storage_directory">地圖存儲</string>
+    <string name="shared_string_copy">複製</string>
+    </resources>
