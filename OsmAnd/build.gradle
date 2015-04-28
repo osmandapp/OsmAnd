@@ -239,11 +239,11 @@ collectExternalResources.dependsOn collectVoiceAssets,
 		collectMiscResources,
 		copyStyleIcons,
 		updateNoTranslate
-tasks.whenTaskAdded { task ->
-	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
-		task.dependsOn collectExternalResources
-	}
-}
+// tasks.whenTaskAdded { task ->
+//	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
+//		task.dependsOn collectExternalResources
+//	}
+// }
 
 // Legacy core build
 import org.apache.tools.ant.taskdefs.condition.Os
