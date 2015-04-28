@@ -2022,7 +2022,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
     <string name="world_ski_missing">Per visualizzare le mappe per lo sci è necessario scaricare la mappa speciale offline</string>
     <string name="nautical_maps_missing">Per visualizzare le mappe nautiche è necessario scaricare la mappa speciale offline</string>
-	<string name="rendering_attr_pisteGrooming_name">Batti pista</string>
+	<string name="rendering_attr_pisteGrooming_name">Piste da fondo</string>
     <string name="free">"Libera %1$s "</string>
 	<string name="device_memory">Memoria dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Discese sciistiche</string>
