@@ -468,7 +468,7 @@
 	<string name="poi_clinic">Poliklinika</string>
 	<string name="poi_nursing_home">Ošetřovatelský dům</string>
 	<string name="poi_baby_hatch">Babybox</string>
-	<string name="poi_sanatorium">Sanatorium</string>
+	<string name="poi_sanatorium">Ozdravovna</string>
 	<string name="poi_healthcare_alternative">Alternativní medicína</string>
 	<string name="poi_audiologist">Ušní</string>
 	<string name="poi_healthcare_centre">Zdravotnické centrum</string>
@@ -755,4 +755,10 @@
 	<string name="poi_radio_station">Rádiová stanice, vodní značka</string>
 	<string name="poi_signal_station_traffic">Signální stanice, doprava</string>
 	<string name="poi_signal_station_warning">Signální stanice, varování</string>
-	</resources>
+	<string name="poi_small_craft_facility">Zařízení pro malé lodě</string>
+	<string name="poi_topmark">Horní značka, vodní značka</string>
+	<string name="poi_seamark_rock">Skála, vodní značka</string>
+	<string name="poi_seamark_wreck">Vrak, vodní značka</string>
+
+	<string name="poi_military_nuclear_explosion_site">Místo atomového výbuchu</string>
+</resources>
