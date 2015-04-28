@@ -57,6 +57,7 @@ public class TextRenderer {
 		int textWrap = 0;
 		boolean bold = false;
 		String shieldRes = null;
+		String shieldResIcon = null;
 		int textOrder = 100;
 		int textShadowColor = Color.WHITE;
 
@@ -80,6 +81,9 @@ public class TextRenderer {
 			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE);
 			if (render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
 				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
+			}
+			if (render.isSpecified(render.ALL.R_ICON)) {
+				shieldResIcon = render.getStringPropertyValue(render.ALL.R_ICON);
 			}
 			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 100);
 		}
@@ -251,26 +255,31 @@ public class TextRenderer {
 						cv.drawTextOnPath(text.text, text.drawOnPath, 0, 
 								text.vOffset - ( paintText.ascent()/2 + paintText.descent()), paintText);
 					} else {
-						if (text.shieldRes != null) {
-							float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
-							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
-							if (ico != null) {
-								float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
-								float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
-								if(rc.screenDensityRatio != 1f){
-									RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
-											top + ico.getHeight() * coef);
-									Rect src = new Rect(0, 0, ico.getWidth(), ico
-											.getHeight());
-									cv.drawBitmap(ico, src, rf, paintIcon);
-								} else {
-									cv.drawBitmap(ico, left, top, paintIcon);
-								}
-							}
-						}
+						drawShieldIcon(rc, cv, text, text.shieldRes);
+						drawShieldIcon(rc, cv, text, text.shieldResIcon);
 
 						drawWrappedText(cv, text, textSize);
 					}
+				}
+			}
+		}
+	}
+
+	private void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
+		if (sr != null) {
+			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
+			Bitmap ico = RenderingIcons.getIcon(context, sr);
+			if (ico != null) {
+				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
+				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
+				if(rc.screenDensityRatio != 1f){
+					RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
+							top + ico.getHeight() * coef);
+					Rect src = new Rect(0, 0, ico.getWidth(), ico
+							.getHeight());
+					cv.drawBitmap(ico, src, rf, paintIcon);
+				} else {
+					cv.drawBitmap(ico, left, top, paintIcon);
 				}
 			}
 		}
