@@ -1965,4 +1965,5 @@
     <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
     <string name="storage_directory">Захоўваньне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
+    <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
     </resources>
