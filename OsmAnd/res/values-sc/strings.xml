@@ -1957,4 +1957,6 @@
     <string name="storage_directory_internal_app">Memòria interna de s\'aplicu</string>
     <string name="rendering_value__name">Predefinidu</string>
     <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
-	</resources>
+	<string name="storage_directory_multiuser">Memòria multi-impreadore</string>
+    <string name="storage_directory">Memòria de sas mapas</string>
+    </resources>
