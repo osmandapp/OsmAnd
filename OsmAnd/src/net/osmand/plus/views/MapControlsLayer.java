@@ -966,13 +966,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK){
 			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
+			boolean target = data.getBooleanExtra(MapRouteInfoControl.TARGET_SELECT, true);
 			LatLon latLon = new LatLon(
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0), 
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
 			if(name != null){
-				mapRouteInfoControlDialog.selectAddress(name, latLon, false);
+				mapRouteInfoControlDialog.selectAddress(name, latLon, target);
 			} else {
-				mapRouteInfoControlDialog.selectAddress("", latLon, true);
+				mapRouteInfoControlDialog.selectAddress("", latLon, target);
 			}
 		}		
 	}
