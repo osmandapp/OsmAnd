@@ -230,14 +230,14 @@
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
 	<string name="poi_town_hall">Municipio</string>
-	<string name="poi_employment_agency">Oficina de trabajo</string>
+	<string name="poi_employment_agency">Oficina de empleo</string>
 	<string name="poi_studio">Estudio</string>
 	<string name="poi_stadium">Estadio</string>
 	<string name="poi_sports_centre">Centro de deportes</string>
 	<string name="poi_golf_course">Campo de golf</string>
 	<string name="poi_pitch">Cancha</string>
 	<string name="poi_raceway">Pista de carreras</string>
-	<string name="poi_archery">Arquería</string>
+	<string name="poi_archery">Tiro con arco</string>
 	<string name="poi_american_football">Fútbol americano</string>
 	<string name="poi_australian_football">Fútbol autraliano</string>
 	<string name="poi_baseball">Béisbol</string>
@@ -248,8 +248,8 @@
 	<string name="poi_canoe">Canoa</string>
 	<string name="poi_chess">Ajedrez</string>
 	<string name="poi_cycling">Ciclismo</string>
-	<string name="poi_dog_racing">Carrera de perros</string>
-	<string name="poi_equestrian">Ecuestre</string>
+	<string name="poi_dog_racing">Canódromo</string>
+	<string name="poi_equestrian">Equitación</string>
 	<string name="poi_field_hockey">Hockey sobre césped</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_hockey">Hockey</string>
@@ -259,7 +259,7 @@
 	<string name="poi_rugby_league">Liga de rugby</string>
 	<string name="poi_skateboard">Patineta</string>
 	<string name="poi_soccer">Fútbol</string>
-	<string name="poi_swimming">Nado</string>
+	<string name="poi_swimming">Natación</string>
 	<string name="poi_table_tennis">Tenis de mesa</string>
 	<string name="poi_tennis">Tenis</string>
 	<string name="poi_toboggan">Tobogán</string>
@@ -505,8 +505,8 @@
 	<string name="poi_isolated_dwelling">Vivienda aislada</string>
 	<string name="poi_place_allotments">Parcelas</string>
 	<string name="poi_first_aid">Primeros auxilios</string>
-	<string name="poi_nursing_home">Hogar de ancianos</string>
-	<string name="poi_audiologist">Audiólogo</string>
+	<string name="poi_nursing_home">Residencia de ancianos</string>
+	<string name="poi_audiologist">Otólogo</string>
 	<string name="poi_midwife">Partera</string>
 	<string name="poi_occupational_therapist">Terapeuta ocupacional</string>
 	<string name="poi_optometrist">Optometrista</string>
@@ -514,7 +514,7 @@
 	<string name="poi_podiatrist">Podólogo</string>
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitación</string>
-	<string name="poi_healthcare_yes">Centro médico</string>
+	<string name="poi_healthcare_yes">Instalación médica</string>
 
 	<string name="poi_insurance">Seguros</string>
 	<string name="poi_office_telecommunication">Oficina de telecomunicaciones</string>
@@ -525,7 +525,7 @@
 	<string name="poi_advertising_agency">Agencia de publicidad</string>
 	<string name="poi_educational_institution">Institución educativa</string>
 	<string name="poi_ice_rink">Pista de hielo</string>
-	<string name="poi_running_track">Pista de atletismo</string>
+	<string name="poi_running_track">Pista para correr</string>
 	<string name="poi_bicycle_track">Pista para bicicletas</string>
 	<string name="poi_horse_track">Hipódromo</string>
 	<string name="poi_athletics">Atletismo</string>
@@ -550,7 +550,7 @@
 	<string name="poi_city_gate">Puerta de ciudad</string>
 	<string name="poi_fort">Fuerte</string>
 	<string name="poi_rune_stone">Piedra rúnica</string>
-	<string name="poi_wreck">Naufragio</string>
+	<string name="poi_wreck">Pecio</string>
 	<string name="poi_attraction_animal">Animal (atracción)</string>
 	<string name="poi_attraction_carousel">Carrusel</string>
 	<string name="poi_attraction_maze">Laberinto</string>
@@ -672,10 +672,10 @@
 	<string name="poi_seamark_harbour">Puerto</string>
 	<string name="poi_baby_hatch">Escotilla de bebé</string>
 	<string name="poi_speech_therapist">Logopeda</string>
-	<string name="poi_newspaper">Oficina del periódico</string>
+	<string name="poi_newspaper">Oficina de periódico</string>
 	<string name="poi_bookmaker">Casa de apuestas</string>
 
-	<string name="poi_leisure_track">Pista de carreras</string>
+	<string name="poi_leisure_track">Pista de atletismo</string>
 	<string name="poi_9pin">Bolera</string>
 	<string name="poi_10pin">Bolera</string>
 	<string name="poi_boules">Bolos</string>
