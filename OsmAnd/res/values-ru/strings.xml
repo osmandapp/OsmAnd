@@ -1973,4 +1973,5 @@
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Переместить</string>
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
+    <string name="search_poi_category_hint">Напечатайте для поиска</string>
     </resources>
