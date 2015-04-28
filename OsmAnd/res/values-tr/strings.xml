@@ -163,7 +163,7 @@
     <string name="layer_recordings">Kayıt katmanı</string>
     <string name="recording_can_not_be_played">Kayıt oynatılamaz</string>
     <string name="recording_context_menu_delete">Kayıt sil</string>
-    <string name="recording_description">Kayıt %3$\'nın %1$s %2$s</string>
+    <string name="recording_description">Kayıt %3$s nın %1$s %2$s</string>
     <string name="recording_default_name">kayıt</string>
     <string name="shared_string_control_stop">durdur</string>
     <string name="shared_string_control_start">başlat</string>

@@ -965,8 +965,8 @@
 	<string name="map_widget_monitoring_services">ჟურნალირების სერვისები</string>
 	<string name="no_route">გზა ვერ მოიძებნა</string>
 	<string name="delete_target_point">გზის სანიშნის მოცილება</string>
-	<string name="target_point">გზის სანიშნი %1$ს</string>
-    <string name="intermediate_point">გზის სანიშნი %1$ს</string>
+	<string name="target_point">გზის სანიშნი %1$s</string>
+    <string name="intermediate_point">გზის სანიშნი %1$s</string>
     <string name="context_menu_item_last_intermediate_point">გზის ბოლო ნიშნის დამატება</string>
     <string name="context_menu_item_first_intermediate_point">გზის პირველი წერტილის დამატება</string>
     <string name="add_as_last_destination_point">გზის ბოლო წერტილის დამატება</string>
@@ -1032,7 +1032,7 @@
     <string name="recording_can_not_be_played">ჩანაწერის დაკვრა შეუძლებელია</string>
     <string name="recording_context_menu_delete">ჩანაწერის წაშლა</string>
     <string name="recording_context_menu_play">დაკვრა</string>
-    <string name="recording_description">ჩანაწერი %1$s %2$ს %3$s-დან</string>
+    <string name="recording_description">ჩანაწერი %1$s %2$s %3$s-დან</string>
     <string name="recording_default_name">ჩანაწერი</string>
     <string name="map_widget_av_notes">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის</string>

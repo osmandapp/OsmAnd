@@ -1773,7 +1773,7 @@
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
 	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
-	<string name="map_update">有 %1$ 個地圖可更新</string>
+	<string name="map_update">有 %1$s 個地圖可更新</string>
 	<string name="search_for">查尋</string>
 	
 	<string name="coordinates">座標</string>
