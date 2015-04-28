@@ -762,4 +762,6 @@
 	<string name="poi_military_range">Campo de tiro militar</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military_nuclear_explosion_site">Sitio de explosión nuclear</string>
-</resources>
+<string name="poi_ice_stock">Curling bávaro</string>
+	<string name="poi_stone">Roca sobresaliente</string>
+	</resources>
