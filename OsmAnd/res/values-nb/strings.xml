@@ -238,7 +238,7 @@
 	<string name="pref_raster_map">Kartkilde-innstillinger</string>
 	<string name="pref_vector_map">Vektorkart-innstillinger</string>
 	<string name="delete_confirmation_msg">Slette %1$s?</string>
-	<string name="city_type_suburb">Forstad</string>
+	<string name="city_type_suburb">Bydel</string>
 	<string name="city_type_hamlet">Grend</string>
 	<string name="city_type_village">Landsby</string>
 	<string name="city_type_town">By</string>
@@ -1295,4 +1295,14 @@
     <string name="download_type_to_filter">Filtrer</string>
 	<string name="get_plugin">Hent</string>
 <string name="shared_string_open">Åpne</string>
+    <string name="application_dir_change_warning3">Vil du at OsmAnd også kopierer sine datafiler til den nye destinasjonen?</string>
+    <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
+	<string name="copying_osmand_file_failed">Kopiering av filer mislyktes</string>    
+    <string name="storage_directory_external">Ekstern lagring</string>
+    <string name="storage_directory_multiuser">Flerbruker-lagring</string>
+    <string name="storage_directory_internal_app">Internt programminne</string>
+    <string name="storage_directory_manual">Manuelt spesifisert</string>
+    <string name="storage_directory_default">Internminne</string>
+    <string name="storage_directory">Kartlagring</string>
+    <string name="shared_string_copy">Kopier</string>
     </resources>

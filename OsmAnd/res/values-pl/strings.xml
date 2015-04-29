@@ -2095,4 +2095,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_manage">Zarządzaj</string>
 	<string name="shared_string_edit">Edytuj</string>
 	<string name="filter_poi_hint">Filtruj po nazwie</string>
-    </resources>
+    <string name="application_dir_change_warning3">Czy chcesz aby OsmAnd skopiował swoje pliki danych do nowego miejsca przeznaczenia?</string>
+    <string name="specified_directiory_not_writeable">Mapy nie może zostać zapisane we wskazanym katalogu</string>
+	<string name="copying_osmand_file_failed">Kopiowanie plików nie powiodło się</string>    
+    <string name="storage_directory_external">Pamięć zewnętrzna</string>
+    <string name="storage_directory_default">Pamięć wewnętrzna</string>
+    <string name="shared_string_copy">Kopiuj</string>
+    <string name="rendering_value__name">Domyślna</string>
+    <string name="rendering_value_highContrastRoads_name">Wysoki kontrast dróg</string>
+	<string name="index_name_netherlands">Europa - Holandia</string>
+	</resources>

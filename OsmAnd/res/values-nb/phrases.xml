@@ -150,4 +150,5 @@
 	<string name="poi_fog_signal">Tåkesignal</string>
 	<string name="poi_harbour_basin">Havnebasseng</string>
 	<string name="poi_seamark_harbour">Havn</string>
+	<string name="poi_fuel">Bensinstasjon</string>
 	</resources>
