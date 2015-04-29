@@ -41,7 +41,7 @@
 	<string name="poi_fire_extinguisher">Hasicí přístroj</string>
 	<string name="poi_ambulance_station">Ambulance</string>
 	<string name="poi_ford">Brod</string>
-	<string name="poi_mountain_pass">Horské sedlo</string>
+	<string name="poi_mountain_pass_yes">Horské sedlo</string>
 	<string name="poi_gate">Brána</string>
 	<string name="poi_toll_booth">Mýtné</string>
 	<string name="poi_border_control">Hraniční kontrola</string>

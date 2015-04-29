@@ -167,7 +167,7 @@
 	<string name="poi_emergency_access_point">森林内番地札(Emergency access point)</string>
 
 	<string name="poi_ford">道路上水没地点(Ford)</string>
-	<string name="poi_mountain_pass">峠(Mountain pass)</string>
+	<string name="poi_mountain_pass_yes">峠(Mountain pass)</string>
 	<string name="poi_gate">門(Gate)</string>
 	<string name="poi_city_wall">市壁・城壁(City wall)</string>
 	<string name="poi_lift_gate">遮断機(Lift gate)</string>
