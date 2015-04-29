@@ -153,7 +153,7 @@
 	<string name="poi_emergency_access_point">Emergency access point</string>
 
 	<string name="poi_ford">Ford</string>
-	<string name="poi_mountain_pass">Mountain pass</string>
+	<string name="poi_mountain_pass_yes">Mountain pass</string>
 	<string name="poi_gate">Gate</string>
 	<string name="poi_city_wall">City wall</string>
 	<string name="poi_lift_gate">Lift gate</string>
@@ -564,6 +564,7 @@
 	<string name="poi_club_tourism">Tourism club</string>
 	<string name="poi_club_charity">Charity club</string>
 
+	<string name="poi_piste">Piste</string>
 	<string name="poi_piste_downhill">Downhill</string>
 	<string name="poi_piste_nordic">Nordic</string>
 	<string name="poi_piste_skitour">Skitour</string>

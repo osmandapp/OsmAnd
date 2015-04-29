@@ -474,7 +474,7 @@
 	<string name="poi_tableware">Boutique de vaisselle</string>
 	<string name="poi_ticket">Guichet</string>
 	<string name="poi_vacuum_cleaner">Boutique de gadgets</string>
-	<string name="poi_mountain_pass">Col</string>
+	<string name="poi_mountain_pass_yes">Col</string>
 	<string name="poi_garages">Garages</string>
 
 	<string name="poi_aerialway_rope_tow">Télécorde</string>
@@ -752,4 +752,5 @@
 	<string name="poi_wilderness_hut">Cabane en pleine nature</string>
 
 	<string name="poi_payment_terminal">Terminal de paiement</string>
+	<string name="poi_piste">Piste</string>
 	</resources>

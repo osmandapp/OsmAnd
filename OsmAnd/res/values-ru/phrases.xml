@@ -105,7 +105,7 @@
 	<string name="poi_emergency_access_point">Табличка с кодом для службы спасения</string>
 
 	<string name="poi_ford">Брод</string>
-	<string name="poi_mountain_pass">Перевал</string>
+	<string name="poi_mountain_pass_yes">Перевал</string>
 	<string name="poi_gate">Ворота</string>
 	<string name="poi_city_wall">Городская стена</string>
 	<string name="poi_lift_gate">Шлагбаум</string>
@@ -697,6 +697,7 @@
 	<string name="poi_silo">Силос</string>
 	<string name="poi_apartment">Квартира</string>
 
+	<string name="poi_piste">Лыжная трасса</string>
 	<string name="poi_piste_skitour">Скитур</string>
 	<string name="poi_piste_sleigh"/>
 	<string name="poi_piste_playground">Игровая площадка</string>

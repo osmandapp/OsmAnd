@@ -104,7 +104,7 @@
         <string name="poi_emergency_access_point">Nødstilfælde punkt</string>
 
         <string name="poi_ford">Vadested</string>
-        <string name="poi_mountain_pass">Bjergpas</string>
+        <string name="poi_mountain_pass_yes">Bjergpas</string>
         <string name="poi_gate">Port</string>
         <string name="poi_city_wall">Bymur</string>
         <string name="poi_lift_gate">Vippebom</string>
@@ -705,7 +705,7 @@
 	<string name="poi_club">Klub</string>
 	<string name="poi_cafe_and_restaurant">Cafe og restaurant</string>
 	<string name="poi_craft">Håndværk</string>
-	<string name="poi_medical_supply">Medicinsk forsyning</string>
+	<string name="poi_medical_supply">Medicinaludstyr</string>
 	<string name="poi_training">Træningscenter</string>
 	<string name="poi_field_hockey">Hockey</string>
 	<string name="poi_smoking_area">Rygeområde</string>
@@ -777,4 +777,5 @@
 	<string name="poi_wilderness_hut">Vildmarkshytte</string>
 
 	<string name="poi_payment_terminal">Betalingsterminal</string>
+	<string name="poi_piste">Skipiste</string>
 	</resources>

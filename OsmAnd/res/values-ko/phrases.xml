@@ -102,7 +102,7 @@
 	<string name="poi_emergency_access_point">긴급 액세스 포인트</string>
 
 	<string name="poi_ford">포드</string>
-	<string name="poi_mountain_pass">마운틴 패스</string>
+	<string name="poi_mountain_pass_yes">마운틴 패스</string>
 	<string name="poi_gate">게이트</string>
 	<string name="poi_city_wall">도시 벽</string>
 	<string name="poi_lift_gate">리프트 게이트</string>

@@ -123,7 +123,7 @@
 	<string name="poi_emergency_access_point">Bod príchodu záchrany</string>
 
 	<string name="poi_ford">Brod</string>
-	<string name="poi_mountain_pass">Horský priesmyk</string>
+	<string name="poi_mountain_pass_yes">Horský priesmyk</string>
 	<string name="poi_gate">Brána</string>
 	<string name="poi_city_wall">Mestské hradby</string>
 	<string name="poi_lift_gate">Závora</string>
@@ -553,4 +553,15 @@
 	<string name="poi_landuse">Využitie územia</string>
 	<string name="poi_charity">Charitatívny obchod</string>
 	<string name="poi_photo">Fotografický obchod</string>
+	<string name="poi_traffic_calming_hump">Dlhší retardér</string>
+	<string name="poi_traffic_calming_cushion">Retardér s medzerami</string>
+	<string name="poi_traffic_calming_chicane">Šikana</string>
+	<string name="poi_traffic_calming_rumble_strip">Zvukový retardér</string>
+	<string name="poi_traffic_calming_choker">Zúženie ulice</string>
+	<string name="poi_fuel:diesel">Nafta</string>
+	<string name="poi_fuel:gtl_diesel">GTL nafta</string>
+	<string name="poi_fuel:hgv_diesel">Nafta pre nákladné autá</string>
+	<string name="poi_fuel:biodiesel">Bionafta</string>
+	<string name="poi_fuel:lpg">LPG</string>
+	<string name="poi_fuel:octane_80">80-oktánový</string>
 	</resources>

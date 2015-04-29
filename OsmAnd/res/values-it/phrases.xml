@@ -46,7 +46,7 @@
 	<string name="poi_garden_centre">Articoli per Giardinaggio</string>
 	<string name="poi_gas">Negozio gas</string>
 	<string name="poi_ford">Guado</string>
-	<string name="poi_mountain_pass">Passo montano</string>
+	<string name="poi_mountain_pass_yes">Passo montano</string>
 	<string name="poi_gate">Ponte</string>
 	<string name="poi_city_wall">Mura cittadine</string>
 	<string name="poi_lift_gate">Ponte levatoio</string>

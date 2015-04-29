@@ -2025,5 +2025,5 @@
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Mapa de almacenamiento</string>
     <string name="shared_string_copy">Copiar</string>
-    <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los datos de sus archivos al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los datos de tus archivos al nuevo destino?</string>
     </resources>
