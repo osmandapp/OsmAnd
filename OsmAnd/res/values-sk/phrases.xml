@@ -553,4 +553,13 @@
 	<string name="poi_landuse">Využitie územia</string>
 	<string name="poi_charity">Charitatívny obchod</string>
 	<string name="poi_photo">Fotografický obchod</string>
+	<string name="poi_traffic_calming_hump">Dlhší retardér</string>
+	<string name="poi_traffic_calming_cushion">Retardér s medzerami</string>
+	<string name="poi_traffic_calming_chicane">Šikana</string>
+	<string name="poi_traffic_calming_rumble_strip">Zvukový retardér</string>
+	<string name="poi_traffic_calming_choker">Zúženie ulice</string>
+	<string name="poi_fuel:diesel">Nafta</string>
+	<string name="poi_fuel:gtl_diesel">GTL nafta</string>
+	<string name="poi_fuel:hgv_diesel">Nafta pre nákladné autá</string>
+	<string name="poi_fuel:biodiesel">Bionafta</string>
 	</resources>
