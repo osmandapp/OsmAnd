@@ -733,7 +733,7 @@
 	<string name="poi_saddle">Guarnicionero</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
-	<string name="poi_seamark_bridge">Puente balazido</string>
+	<string name="poi_seamark_bridge">Puente balizado</string>
 	<string name="poi_buoy_isolated_danger">Boya, peligro aislado</string>
 	<string name="poi_daymark">Señal diurna</string>
 	<string name="poi_landmark">Punto de referencia</string>
