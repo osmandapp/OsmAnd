@@ -317,7 +317,7 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 	
-	private RouteSegment getRecalculationEnd(final RoutingContext ctx) {
+	public RouteSegment getRecalculationEnd(final RoutingContext ctx) {
 		RouteSegment recalculationEnd = null;
 		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
 				&& ctx.config.recalculateDistance != 0;
