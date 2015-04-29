@@ -1795,7 +1795,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="shared_string_search">Търсене</string>
 	<string name="shared_string_show_description">Покажи описанието</string>
 	<string name="shared_string_message">Съобщение</string>
-	<string name="agps_data_last_downloaded">A-GPS данни изтеглени преди: %1$ s</string>
+	<string name="agps_data_last_downloaded">A-GPS данни изтеглени преди: %1$s</string>
     <string name="routing_attr_no_new_routing_name">Без ползване на алгоритми от v1.9</string>
     <string name="routing_attr_no_new_routing_description">Да не се ползват алгоритми за маршрути въведени във версия 1.9</string>
     </resources>

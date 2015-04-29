@@ -2009,7 +2009,7 @@
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
-    <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
+    <string name="lock_screen_request_explanation">%1$s 의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     
 	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버에 보안 연결 이용</string>
@@ -2213,7 +2213,7 @@
 	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 문자 이상 이어야 합니다!</string>
 	<string name="agps_info">A-GPS 정보</string>
 	<string name="shared_string_message">메세지</string>
-	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$ s</string>
+	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$s</string>
     <string name="confirm_usage_speed_cameras">(독일, 프랑스, 이탈리아, 등) 많은 국가에서 속도 카메라 경고를 사용하는 것은 법률에 의해 허용 되지 않습니다. OsmAnd은 법률을 위반할 경우 어떤 책임도 지지 않습니다. 이 기능을 이해하는 경우에 [예] 를 클릭 하십시오.</string>
 	<string name="welmode_download_maps">지도 다운로드</string>
 	<string name="welcome_select_region">교통 표지판 및 규정을 제대로 반영 하기 위해 , 운전 지역을 선택 하십시오:</string>
