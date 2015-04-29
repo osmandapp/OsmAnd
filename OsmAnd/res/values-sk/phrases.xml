@@ -562,4 +562,5 @@
 	<string name="poi_fuel:gtl_diesel">GTL nafta</string>
 	<string name="poi_fuel:hgv_diesel">Nafta pre nákladné autá</string>
 	<string name="poi_fuel:biodiesel">Bionafta</string>
+	<string name="poi_fuel:lpg">LPG</string>
 	</resources>
