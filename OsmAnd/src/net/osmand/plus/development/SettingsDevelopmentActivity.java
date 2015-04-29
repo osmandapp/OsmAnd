@@ -40,6 +40,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(dbg);
 		
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING, R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
+	
+		cat.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION, "Smart route recalculation", "Recalculate only initial part of the route for long trips"));
+		
 		
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
 

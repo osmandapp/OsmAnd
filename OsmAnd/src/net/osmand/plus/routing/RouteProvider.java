@@ -630,6 +630,7 @@ public class RouteProvider {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
+		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		
 		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
@@ -666,6 +667,9 @@ public class RouteProvider {
 				RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;
+			if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
+				complexCtx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			}	
 		}
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;

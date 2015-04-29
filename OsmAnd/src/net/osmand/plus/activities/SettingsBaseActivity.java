@@ -89,6 +89,17 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		return p;
 	}
 	
+	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, String title, String summary) {
+		CheckBoxPreference p = new CheckBoxPreference(this);
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+		return p;
+	}
+	
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b) {
 		CheckBoxPreference p = new CheckBoxPreference(this);
 		p.setKey(b.getId());
