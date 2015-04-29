@@ -133,7 +133,7 @@
 	<string name="poi_compressed_air">Aire comprimido</string>
 	<string name="poi_parking">Aparcamiento</string>
 	<string name="poi_motorcycle_parking">Aparcamiento de motocicletas</string>
-	<string name="poi_public_transport_platform">Parada de transporte público</string>
+	<string name="poi_public_transport_platform">Plataforma de transporte público</string>
 	<string name="poi_public_transport_platform_bus">Plataforma de autobús</string>
 	<string name="poi_public_transport_platform_trolleybus">Plataforma de trolebús</string>
 	<string name="poi_bus_stop">Parada de autobús</string>
