@@ -470,7 +470,7 @@
   <string name="use_osmand_routing_service_descr">Использовать автономную навигацию на большие расстояние (экспериментально)</string>
   <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае для прокладывания маршрута используется online-сервис CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
-  <string name="application_dir">Директория хранения данных</string>
+  <string name="application_dir">Каталог для хранения данных</string>
   
   <string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
   <string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
@@ -664,7 +664,7 @@
   <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч %3$d мин.</string>
   <string name="router_service_descr">Выберите онлайн или оффлайн сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
-  <string name="sd_dir_not_accessible">Директория хранения данных на SD-карте не доступна!</string>
+  <string name="sd_dir_not_accessible">Каталог для хранения данных на SD-карте не доступна!</string>
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
