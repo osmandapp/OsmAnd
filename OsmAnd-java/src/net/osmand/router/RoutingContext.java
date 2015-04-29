@@ -207,10 +207,14 @@ public class RoutingContext {
 	}
 	
 	public void initStartAndTargetPoints(RouteSegment start, RouteSegment end) {
-		targetX = end.road.getPoint31XTile(end.getSegmentStart());
-		targetY = end.road.getPoint31YTile(end.getSegmentStart());
+		initTargetPoint(end);
 		startX = start.road.getPoint31XTile(start.getSegmentStart());
 		startY = start.road.getPoint31YTile(start.getSegmentStart());		
+	}
+
+	public void initTargetPoint(RouteSegment end) {
+		targetX = end.road.getPoint31XTile(end.getSegmentStart());
+		targetY = end.road.getPoint31YTile(end.getSegmentStart());
 	}
 	
 	public void unloadAllData() {

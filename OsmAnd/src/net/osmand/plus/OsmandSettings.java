@@ -623,7 +623,7 @@ public class OsmandSettings {
 		registeredPreferences.put(id, p);
 		return p;
 	}
-	
+	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();

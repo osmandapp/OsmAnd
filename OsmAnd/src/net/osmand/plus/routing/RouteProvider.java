@@ -44,6 +44,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -630,6 +631,7 @@ public class RouteProvider {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
+		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		
 		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
@@ -661,17 +663,24 @@ public class RouteProvider {
 		RoutingContext complexCtx = null;
 		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
 				&& precalculated == null;
-		if(complex) {
-			complexCtx = router.buildRoutingContext(cf, lib,files,
-				RouteCalculationMode.COMPLEX);
-			complexCtx.calculationProgress = params.calculationProgress;
-			complexCtx.leftSideNavigation = params.leftSide;
-		}
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
+		if(complex && router.getRecalculationEnd(ctx) != null) {
+			complex = false;
+		}
+		if(complex) {
+			complexCtx = router.buildRoutingContext(cf, lib,files,
+				RouteCalculationMode.COMPLEX);
+			complexCtx.calculationProgress = params.calculationProgress;
+			complexCtx.leftSideNavigation = params.leftSide;
+			if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
+				complexCtx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			}	
+		}
+		
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
 		List<LatLon> inters  = new ArrayList<LatLon>();
