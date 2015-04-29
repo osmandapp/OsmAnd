@@ -113,4 +113,18 @@
 	<string name="poi_outdoor">戶外用品店</string>
 	<string name="poi_paint">油漆店</string>
 	<string name="poi_pet">寵物店</string>
+	<string name="poi_photo">照相館</string>
+	<string name="poi_radiotechnics">無線電商店</string>
+	<string name="poi_second_hand">二手商店</string>
+	<string name="poi_ship_chandler">船具商</string>
+	<string name="poi_sports">運動用品</string>
+	<string name="poi_stationery">文具店</string>
+	<string name="poi_tableware">餐具店</string>
+	<string name="poi_ticket">售票處</string>
+	<string name="poi_tobacco">煙酒專賣店</string>
+	<string name="poi_toys">玩具店</string>
+	<string name="poi_trade">交易所</string>
+	<string name="poi_vacuum_cleaner">真空吸塵器商店</string>
+	<string name="poi_variety_store">雜貨店</string>
+	<string name="poi_video">影碟店</string>
 	</resources>
