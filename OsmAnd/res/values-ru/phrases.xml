@@ -697,6 +697,7 @@
 	<string name="poi_silo">Силос</string>
 	<string name="poi_apartment">Квартира</string>
 
+	<string name="poi_piste">Горнолыжная трасса</string>
 	<string name="poi_piste_skitour">Скитур</string>
 	<string name="poi_piste_sleigh"/>
 	<string name="poi_piste_playground">Игровая площадка</string>

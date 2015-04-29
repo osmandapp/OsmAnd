@@ -564,6 +564,7 @@
 	<string name="poi_club_tourism">Tourism club</string>
 	<string name="poi_club_charity">Charity club</string>
 
+	<string name="poi_piste">Piste</string>
 	<string name="poi_piste_downhill">Downhill</string>
 	<string name="poi_piste_nordic">Nordic</string>
 	<string name="poi_piste_skitour">Skitour</string>
