@@ -63,7 +63,7 @@
 	<string name="poi_fire_extinguisher">Extintor</string>
 	<string name="poi_fire_hose">Mànega d\'incendis</string>
 	<string name="poi_ambulance_station">Parc d\'ambulàncies</string>
-	<string name="poi_mountain_pass">Coll</string>
+	<string name="poi_mountain_pass_yes">Coll</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
 	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>

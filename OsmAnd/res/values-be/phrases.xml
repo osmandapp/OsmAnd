@@ -108,7 +108,7 @@
 	<string name="poi_emergency_access_point">Таблічка з кодам для службы выратаваньня</string>
 
 	<string name="poi_ford">Брод</string>
-	<string name="poi_mountain_pass">Перавал</string>
+	<string name="poi_mountain_pass_yes">Перавал</string>
 	<string name="poi_gate">Вароты</string>
 	<string name="poi_city_wall">Гарадзкая сьцяна</string>
 	<string name="poi_lift_gate">Шлагбаўм</string>

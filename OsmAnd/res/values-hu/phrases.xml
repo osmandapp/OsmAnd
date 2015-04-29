@@ -44,7 +44,7 @@
 	<string name="poi_fire_hydrant">Tűzcsap</string>
 	<string name="poi_ambulance_station">Mentőállomás</string>
 	<string name="poi_ford">Gázló</string>
-	<string name="poi_mountain_pass">Hágó</string>
+	<string name="poi_mountain_pass_yes">Hágó</string>
 	<string name="poi_gate">Kapu</string>
 	<string name="poi_city_wall">Városfal</string>
 	<string name="poi_lift_gate">Sorompó</string>

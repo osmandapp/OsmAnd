@@ -123,7 +123,7 @@
 	<string name="poi_emergency_access_point">Bod príchodu záchrany</string>
 
 	<string name="poi_ford">Brod</string>
-	<string name="poi_mountain_pass">Horský priesmyk</string>
+	<string name="poi_mountain_pass_yes">Horský priesmyk</string>
 	<string name="poi_gate">Brána</string>
 	<string name="poi_city_wall">Mestské hradby</string>
 	<string name="poi_lift_gate">Závora</string>
