@@ -82,11 +82,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		long t = System.currentTimeMillis();
  		setContentView(R.layout.tab_content);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		Integer tab = settings.SEARCH_TAB.get();
+		
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
 		getSupportActionBar().setTitle("");
 		getSupportActionBar().setElevation(0);
-
+		Integer tab = settings.SEARCH_TAB.get();
 		if (!showOnlyOneTab) {
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
@@ -304,6 +304,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (!showOnlyOneTab) {
+			Integer tab = settings.SEARCH_TAB.get();
+			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
+		}
 	}
 	
 	@Override
