@@ -72,7 +72,6 @@ public class TrackActivity extends TabActivity {
 
 		setViewPagerAdapter(mViewPager, new ArrayList<TabActivity.TabItem>());
 		mSlidingTabLayout.setViewPager(mViewPager);
-
 		new AsyncTask<Void, Void, GPXFile>() {
 
 			protected void onPreExecute() {
@@ -114,6 +113,9 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public List<GpxSelectionHelper.GpxDisplayGroup> getResult() {
+		if(result == null) {
+			return new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		}
 		if (result.modifiedTime != modifiedTime) {
 			modifiedTime = result.modifiedTime;
 			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
@@ -171,11 +173,11 @@ public class TrackActivity extends TabActivity {
 	}
 
 	boolean isHavingWayPoints(){
-		return getGpx().hasWptPt();
+		return getGpx() != null && getGpx().hasWptPt();
 	}
 
 	boolean isHavingRoutePoints(){
-		return getGpx().hasRtePt();
+		return getGpx() != null && getGpx().hasRtePt();
 	}
 
 	public GPXFile getGpx() {

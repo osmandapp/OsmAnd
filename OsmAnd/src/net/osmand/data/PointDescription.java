@@ -117,7 +117,13 @@ public class PointDescription {
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.northing) + " "
 					+ ((long) pnt.easting);
 		} else {
-			return ctx.getString( sh? R.string.short_location_on_map : R.string.location_on_map, convert(lat, f), convert(lon, f));
+			try {
+				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, convert(lat, f),
+						convert(lon, f));
+			} catch(RuntimeException e) {
+				e.printStackTrace();
+				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
+			}
 		}
 	}
 
