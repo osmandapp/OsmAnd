@@ -669,7 +669,7 @@
   <string name="loading_streets">Straten worden geladen…</string>
   <string name="loading_cities">Steden worden geladen…</string>
   
-  <string name="poi">Interessepunt (POI)</string>
+  <string name="poi">Interessepunt</string>
   <string name="error_occurred_saving_gpx">Fout bij het opslaan van GPX</string>
   <string name="error_calculating_route">Fout bij routeberekening</string>
   <string name="error_calculating_route_occured">Fout bij routeberekening</string>
@@ -1825,13 +1825,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
     <string name="rendering_attr_buildings15zoom_name">Gebouwen tonen vanaf zoomstap 15</string>
-    <string name="rendering_attr_moreDetailed_name">Meer details</string>
+    <string name="rendering_attr_moreDetailed_name">Toon meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
     <string name="rendering_attr_hideAccess_name">Toegankelijkheid niet tonen</string>
     <string name="rendering_attr_showAccess_name">Toegangsbeperkingen tonen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
-    <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
+    <string name="rendering_attr_showCycleRoutes_name">Fietsroutes tonen</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt)</string>
     <string name="map_preferred_locale">Taal voor teksten op de kaart</string>
     <string name="local_map_names">Plaatselijke namen</string>
@@ -1863,7 +1863,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="pause_navigation">navigatie pauzeren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
-    <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
+    <string name="rendering_attr_osmcTraces_name">Wandelroutes tonen</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
