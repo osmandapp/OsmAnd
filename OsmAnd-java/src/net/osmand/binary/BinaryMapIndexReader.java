@@ -536,7 +536,7 @@ public class BinaryMapIndexReader {
 				return r;
 			}
 		}
-		throw new IllegalArgumentException(name);
+		return null;
 	}
 	
 	public List<City> getCities(String region, SearchRequest<City> resultMatcher,  
@@ -547,6 +547,9 @@ public class BinaryMapIndexReader {
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
+		if(r == null) {
+			return cities;
+		}
 		for(CitiesBlock block : r.cities) {
 			if(block.type == cityType) {
 				codedIS.seek(block.filePointer);

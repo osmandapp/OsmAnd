@@ -4,14 +4,10 @@ package net.osmand.plus.views;
 import java.lang.reflect.Field;
 
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
@@ -28,7 +24,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -71,8 +66,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
-		
+		mapInfoControls = map.getMapLayers().getMapWidgetRegistry() ;
 		leftStack = (LinearLayout) map.findViewById(R.id.map_left_widgets_panel);
 		rightStack = (LinearLayout) map.findViewById(R.id.map_right_widgets_panel);
 		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
@@ -307,32 +301,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 
 	
-	public ContextMenuAdapter getViewConfigureMenuAdapter() {
-		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
-		cm.setDefaultLayoutId(R.layout.drawer_list_item);
-		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
-		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
-			
-			@Override
-			public void onClick(boolean allModes) {
-				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter());
-			}
-		});
-		cm.item(R.string.map_widget_reset) 
-				.iconColor(R.drawable.ic_action_reset_to_default_dark).listen(new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapInfoControls.resetToDefault();
-						recreateControls();
-						adapter.notifyDataSetInvalidated();
-						return false;
-					}
-				}).reg();
-		final ApplicationMode mode = settings.getApplicationMode();
-		mapInfoControls.addControls(this, cm, mode);
-		return cm;
-	}
+	
 
 	
 	

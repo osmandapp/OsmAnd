@@ -106,7 +106,7 @@ public class SelectedGPXFragment extends ListFragment {
 		super.onResume();
 		updateContent();
 		updateEnable = true;
-		if(getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
+		if(getGpx() != null && getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
 			startHandler();
 		}
 	}
@@ -121,8 +121,8 @@ public class SelectedGPXFragment extends ListFragment {
 
 
 	protected List<GpxDisplayGroup> filterGroups(GpxDisplayItemType type) {
-		List<GpxDisplayGroup> result = ((TrackActivity)getActivity()).getResult();
-		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(); 
+		List<GpxDisplayGroup> result = ((TrackActivity) getActivity()).getResult();
+		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		for (GpxDisplayGroup group : result) {
 			boolean add = group.getType() == type || type == null;
 			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
@@ -238,7 +238,7 @@ public class SelectedGPXFragment extends ListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		((TrackActivity) getActivity()).getClearToolbar(false);
-		if (getGpx().path != null && !getGpx().showCurrentTrack) {
+		if (getGpx() != null && getGpx().path != null && !getGpx().showCurrentTrack) {
 			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override

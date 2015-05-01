@@ -31,6 +31,7 @@ import net.osmand.plus.osmo.DashOsMoFragment;
 import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -422,8 +423,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
-				if(listView instanceof ObservableListView) {
-					onScrollChanged(((ObservableListView)listView).getScrollY(), false, false);
+				if (listView instanceof ObservableListView) {
+					onScrollChanged(((ObservableListView) listView).getScrollY(), false, false);
 				}
 				if(refresh) {
 					refreshContent(false);
@@ -471,7 +472,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 		} else {
 			if (DashboardType.CONFIGURE_SCREEN == visibleType) {
-				cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
+				cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 			} else if(DashboardType.CONFIGURE_MAP == visibleType) {
 				cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 			} else if(DashboardType.LIST_MENU == visibleType) {
@@ -779,7 +780,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 		// Translate list background
 		if (portrait) {
-			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+			if(listBackgroundView != null) {
+				setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+			}
 		}
 		if (portrait) {
 			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
@@ -839,7 +842,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
 		this.listAdapterOnClickListener = listener;
-		if(this.listView != null) {
+		if (this.listView != null) {
 			listView.setAdapter(listAdapter);
 			if(!portrait) {
 				listView.setOnItemClickListener(this.listAdapterOnClickListener);

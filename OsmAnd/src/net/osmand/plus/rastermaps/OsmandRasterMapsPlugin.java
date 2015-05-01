@@ -216,9 +216,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		};
 		adapter.item(R.string.layer_map).iconColor(R.drawable.ic_world_globe_dark)
 				.listen(listener).position(3).reg();
-		adapter.item(R.string.layer_overlay).selected(overlayLayer.getMap() != null ? 1 : 0).
+		adapter.item(R.string.layer_overlay).selected(overlayLayer != null && overlayLayer.getMap() != null ? 1 : 0).
 				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
-		adapter.item(R.string.layer_underlay).selected(underlayLayer.getMap() != null ? 1 : 0) 
+		adapter.item(R.string.layer_underlay).selected(underlayLayer != null && underlayLayer.getMap() != null ? 1 : 0) 
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 	

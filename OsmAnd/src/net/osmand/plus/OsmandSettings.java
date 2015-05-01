@@ -433,7 +433,7 @@ public class OsmandSettings {
 
 		@Override
 		protected boolean setValue(Object prefs, Integer val) {
-			return settingsAPI.edit( prefs).putInt(getId(), val).commit();
+			return settingsAPI.edit(prefs).putInt(getId(), val).commit();
 		}
 
 	}

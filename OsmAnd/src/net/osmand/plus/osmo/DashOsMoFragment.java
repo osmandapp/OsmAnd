@@ -3,6 +3,7 @@ package net.osmand.plus.osmo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.Location;
@@ -201,13 +202,16 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		}
 
 		//remove all inactive devices
-		for (OsMoGroupsStorage.OsMoDevice device : devices) {
-			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
-				devices.remove(device);
-			}
+		Iterator<OsMoDevice> it = devices.iterator();
+		while (it.hasNext()) {
 			if (devices.size() < 4) {
 				break;
 			}
+			OsMoGroupsStorage.OsMoDevice device = it.next();
+			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
+				it.remove();
+			}
+			
 		}
 
 		sortDevices(devices);

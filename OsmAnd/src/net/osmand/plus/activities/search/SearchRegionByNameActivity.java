@@ -44,6 +44,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	protected LatLon getLocation(RegionAddressRepository item) {
 		return item.getEstimatedRegionCenter();
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
