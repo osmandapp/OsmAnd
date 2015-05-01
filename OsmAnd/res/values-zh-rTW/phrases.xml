@@ -230,4 +230,25 @@
 	<string name="poi_ferry_terminal">輪渡碼頭</string>
 	<string name="poi_lighthouse">燈塔</string>
 
+	<string name="poi_bicycle_rental">自行車租賃站</string>
+	<string name="poi_bicycle_parking">自行車停車場</string>
+
+	<string name="poi_aerialway_station">纜車站</string>
+	<string name="poi_aerialway_cable_car">纜車</string>
+	<string name="poi_aerialway_gondola">吊艙</string>
+	<string name="poi_aerialway_chair_lift">空中纜椅</string>
+	<string name="poi_aerialway_t_bar">T 型架纜車</string>
+	<string name="poi_aerialway_j_bar">J 型架纜車</string>
+	<string name="poi_aerialway_platter">盤型架纜車</string>
+	<string name="poi_aerialway_mixed_lift">混合型纜車</string>
+	<string name="poi_aerialway_drag_lift">拉桿纜車</string>
+	<string name="poi_aerialway_rope_tow">滑雪牽引纜</string>
+	<string name="poi_aerialway_goods">載貨纜車</string>
+	<string name="poi_aerialway_magic_carpet">滑雪輸升帶</string>
+
+	<string name="poi_tunnel">隧道</string>
+	<string name="poi_bridge">橋</string>
+
+	<string name="poi_speed_camera">測速照相</string>
+	<string name="poi_turning_circle">迴轉圈</string>
 	</resources>

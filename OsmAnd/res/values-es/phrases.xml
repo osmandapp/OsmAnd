@@ -59,7 +59,7 @@
 	<string name="poi_antiques">Tienda de antigüedades</string>
 	<string name="poi_art">Tienda de arte</string>
 	<string name="poi_baby_goods">Artículos para bebés</string>
-	<string name="poi_computer">Tienda de ordenadores</string>
+	<string name="poi_computer">Tienda de computadoras</string>
 	<string name="poi_florist">Florería</string>
 	<string name="poi_furniture">Mueblería</string>
 	<string name="poi_garden_centre">Jardinería</string>
@@ -68,8 +68,8 @@
 	<string name="poi_gift">Tienda de regalos</string>
 	<string name="poi_glaziery">Cristalería</string>
 	<string name="poi_herbalist">Herboristería</string>
-	<string name="poi_houseware">Tienda de artículos del hogar</string>
-	<string name="poi_interior_decoration">Tienda de decoración de interiores</string>
+	<string name="poi_houseware">Artículos del hogar</string>
+	<string name="poi_interior_decoration">Decoración de interiores</string>
 	<string name="poi_jewelry">Joyería</string>
 	<string name="poi_kiosk">Quiosco</string>
 	<string name="poi_kitchen">Muebles de cocina</string>
@@ -78,7 +78,7 @@
 	<string name="poi_motorcycle">Tienda de motocicletas</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
-	<string name="poi_optician">Optometrista</string>
+	<string name="poi_optician">Óptica</string>
 	<string name="poi_organic">Comida orgánica</string>
 	<string name="poi_outdoor">Tienda de actividades al aire libre</string>
 	<string name="poi_paint">Tienda de pinturas</string>
@@ -686,7 +686,7 @@
 	<string name="poi_roller_skating">Patinaje sobre ruedas</string>
 	<string name="poi_skiing">Esquí</string>
 	<string name="poi_surfing">Surf</string>
-	<string name="poi_team_handball">Balonmano de equipo</string>
+	<string name="poi_team_handball">Balonmano en equipo</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_boundary_stone">Mojón</string>
 	<string name="poi_attraction_amusement_ride">Atracción de feria</string>
