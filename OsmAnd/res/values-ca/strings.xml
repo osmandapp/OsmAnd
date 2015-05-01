@@ -195,7 +195,7 @@
 <string name="tip_rotation_switching">Orientació del mapa</string>
 <string name="tip_day_night_mode">Mode dia/nit</string>
 <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
-<string name="download_files_question_space">Ara disposeu de {2} MB d\'espai lliure. Voleu baixar {0} fitxer(s) ({1} MB)?</string>
+<string name="download_files_question_space">Queden {2} MB d\'espai lliure. Voleu baixar {0} fitxer(s) ({1} MB)?</string>
 <string name="use_transparent_map_theme">Tema transparent</string>
 
 <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
@@ -598,7 +598,7 @@
 <string name="error_occurred_loading_gpx">S\'ha produït un error en carregar el GPX</string>
 <string name="send_report">Envia un informe</string>
 <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta SD. Cal que us baixeu les regions des d\'Internet.</string>
-<string name="layer_yandex_traffic">Tràfic Yandex</string>
+<string name="layer_yandex_traffic">Trànsit Yandex</string>
 <string name="layer_route">Ruta</string>
 <string name="shared_string_favorites">Preferits</string>
 <string name="menu_layers">Defineix la visualització</string>
@@ -1952,7 +1952,7 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Fites</string>
 	<string name="welmode_download_maps">Baixa mapes</string>
-	<string name="welcome_select_region">Seleccioneu la vostra regió per poder reflectir correctament els senyals i el reglament de tràfic:</string>
+	<string name="welcome_select_region">Trieu la vostra regió per mostrar correctament els senyals i les normes de circulació:</string>
 	<string name="welcome_text">OsmAnd us permet consultar el mapa de tot el món i navegar per tot arreu sense connexió!</string>
 	<string name="welcome_header">Benvingut</string>
     <string name="current_route">Ruta actual</string>
@@ -1990,11 +1990,11 @@ Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i e
 	<string name="application_dir_change_warning3">Voleu que OsmAnd també copiï els seus arxius de dades a la nova destinació?</string>
     <string name="specified_directiory_not_writeable">Creació de mapes al directori indicat fallida</string>
 	<string name="copying_osmand_file_failed">Error en copiar fitxers</string>    
-    <string name="storage_directory_external">Emmagatzemament extern</string>
-    <string name="storage_directory_multiuser">Emmagatzemant multiusuari</string>
+    <string name="storage_directory_external">Emmagatzematge exterior</string>
+    <string name="storage_directory_multiuser">Emmagatzematge multiusuari</string>
     <string name="storage_directory_internal_app">Memòria interna de l\'aplicació</string>
     <string name="storage_directory_manual">Definit manualment</string>
     <string name="storage_directory_default">Memòria interna</string>
-    <string name="storage_directory">Emmagatzement de mapes</string>
+    <string name="storage_directory">Emmagatzematge de mapes</string>
     <string name="shared_string_copy">Copia</string>
     </resources>

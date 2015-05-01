@@ -423,4 +423,54 @@
 	<string name="poi_public_transport_stop_position">Localització de parada de transport públic</string>
 	<string name="poi_aeroway_gate">Porta d\'embarcament</string>
 
+	<string name="poi_slipway">Grada</string>
+	<string name="poi_aerialway_platter">Teleesquí</string>
+	<string name="poi_aerialway_magic_carpet">Catifa rodant</string>
+
+	<string name="poi_speed_camera">Radar de trànsit</string>
+	<string name="poi_junction">Creuament</string>
+	<string name="poi_rest_area">Àrea de descans</string>
+
+	<string name="poi_standpipe">Boca d\'incendis</string>
+	<string name="poi_water_works">Subministrament d\'aigua</string>
+	<string name="poi_fire_flapper">Xafa focs</string>
+	<string name="poi_fuel:e10">10% etanol</string>
+	<string name="poi_fuel:e20">20% etanol</string>
+	<string name="poi_fuel:e85">85% etanol</string>
+	<string name="poi_fuel:biogas">85% etanol</string>
+	<string name="poi_fuel:gtl_diesel">Gasoil extra</string>
+	<string name="poi_fuel:lpg">Gas liquat del petroli</string>
+	<string name="poi_fuel:cng">Gas natural comprimit</string>
+	<string name="poi_fuel:1_25">Benzina amb 1:25 d\'oli</string>
+	<string name="poi_fuel:1_50">Benzina amb 1:50 d\'oli</string>
+	<string name="poi_fuel:svo">Carburant d\'oli vegetal</string>
+	<string name="poi_railway_buffer_stop">Topall de via</string>
+	<string name="poi_industrial">Àrea industrial</string>
+	<string name="poi_meadow">Prat</string>
+	<string name="poi_canal">Canal navegable</string>
+	<string name="poi_mast">Pal</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_petroleum_well">Pou de petroli</string>
+	<string name="poi_reservoir">Embassament</string>
+	<string name="poi_gasometer">Gasòmetre</string>
+	<string name="poi_silo">Sitja</string>
+	<string name="poi_storage_tank">Dipòsit d\'emmagatzematge</string>
+
+	<string name="poi_office_administrative">Administració local</string>
+	<string name="poi_quarter">Barri</string>
+	<string name="poi_neighbourhood">Veïnatge</string>
+	<string name="poi_locality">Assentament</string>
+	<string name="poi_residential">Àrea residencial</string>
+
+	<string name="poi_dentist">Dentista</string>
+	<string name="poi_nursing_home">Residència d\'avis</string>
+	<string name="poi_field_hockey">Hoquei sobre herba</string>
+	<string name="poi_sport_multi">Poliesportiu</string>
+	<string name="poi_sailing">Navegació a vela</string>
+	<string name="poi_attraction_maze">Laberint</string>
+	<string name="poi_attraction_roller_coaster">Muntanya russa</string>
+	<string name="poi_attraction_slide">Tobogan</string>
+	<string name="poi_attraction_water_slide">Tobogan aquàtic</string>
+
+	<string name="poi_lodging">Allotjament</string>
 	</resources>
