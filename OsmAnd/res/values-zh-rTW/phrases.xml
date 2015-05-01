@@ -217,4 +217,13 @@
 	<string name="poi_halt">火車站</string>
 	<string name="poi_railway_subway_entrance">捷運入口</string>
 	<string name="poi_subway_station">捷運車站</string>
+	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
+	<string name="poi_taxi">計程車站</string>
+
+	<string name="poi_airport">機場</string>
+	<string name="poi_helipad">直升機停機坪</string>
+	<string name="poi_runway">跑道</string>
+	<string name="poi_aeroway_terminal">機場航廈</string>
+	<string name="poi_aeroway_gate">登機門</string>
+
 	</resources>

@@ -358,7 +358,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">Points d\'Intérêt les plus proches</string>
+  <string name="poi_filter_closest_poi">Plus proches points d\'intérêt (PI)string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
