@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -8,4 +9,6 @@
     <string name="av_def_action_video">ڤیدیۆ تۆمارکه</string>
     <string name="av_def_action_audio">دەنگ تۆمارکه</string>
     <string name="recording_camera_not_available">کامێرا له به رده ست نيه</string>
-    </resources>
+    <string name="application_dir_change_warning3">Vai vēlaties, lai OsmAnd kopē uz jauno vietu arī savus datu failus?</string>
+    <string name="specified_directiory_not_writeable">Norādītajā direktorijā nevar veidot Kartes</string>
+	</resources>

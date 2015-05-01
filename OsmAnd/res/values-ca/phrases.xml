@@ -378,4 +378,20 @@
 		<string name="poi_landuse">Ús del sòl</string>
 	<string name="poi_beacon">Balisa</string>
 	<string name="poi_man_made">Artificial</string>
-		</resources>
+		<string name="poi_transport_construction">Construcció de mitjans de transport</string>
+		<string name="poi_education">Educació</string>
+	<string name="poi_administrative">Administració</string>
+	<string name="poi_healthcare">Centre de salut</string>
+	<string name="poi_office">Despatx</string>
+	<string name="poi_sport">Esport</string>
+	<string name="poi_tourism">Turisme</string>
+		<string name="poi_sightseeing">Visita interesant</string>
+		<string name="poi_accomodation">Allotjament</string>
+		<string name="poi_internet_access">Accés d\'Internet</string>
+	<string name="poi_entertainment">Esbarjo</string>
+		<string name="poi_club">Club</string>
+	<string name="poi_sustenance">Menjar</string>
+	<string name="poi_cafe_and_restaurant">Cafè i restaurant</string>
+	<string name="poi_service">Servei</string>
+		<string name="poi_craft">Artesania</string>
+	</resources>

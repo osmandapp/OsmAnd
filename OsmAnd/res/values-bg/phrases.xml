@@ -51,4 +51,14 @@
 	<string name="poi_deli">Деликатеси</string>
 	<string name="poi_farm">Магазин на ферма</string>
 	<string name="poi_greengrocer">Плодове и зеленчуци</string>
+	<string name="poi_seafood">Морска храна</string>
+	<string name="poi_confectionery">Сладкарски изделия</string>
+	<string name="poi_ice_cream">Сладолед</string>
+	<string name="poi_supermarket">Супермаркет</string>
+	<string name="poi_shop_tea">Чай и кафе</string>
+	<string name="poi_dairy">Млечни произведения</string>
+	<string name="poi_vending_machine">Автомат за кафе/храна</string>
+	<string name="poi_wine">Вино и алкохол</string>
+
+	<string name="poi_books">Книжарница</string>
 	</resources>
