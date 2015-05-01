@@ -126,8 +126,10 @@ public class PoiFiltersHelper {
 			AbstractPoiType tp = application.getPoiTypes().getAnyPoiTypeByKey(typeId);
 			if(tp != null) {
 				PoiLegacyFilter lf = new PoiLegacyFilter(tp, application);
-				cacheTopStandardFilters.add(lf);
-				sortListOfFilters(cacheTopStandardFilters);
+				ArrayList<PoiLegacyFilter> copy = new ArrayList<PoiLegacyFilter>(cacheTopStandardFilters);
+				copy.add(lf);
+				sortListOfFilters(copy);
+				cacheTopStandardFilters = copy;
 				return lf;
 			}
 		}
@@ -136,9 +138,9 @@ public class PoiFiltersHelper {
 	
 	
 	public void reloadAllPoiFilters() {
-		cacheTopStandardFilters = null;
 		showAllPOIFilter = null;
 		getShowAllPOIFilter();
+		cacheTopStandardFilters = null;
 		getTopDefinedPoiFilters();
 	}
 	
@@ -168,15 +170,16 @@ public class PoiFiltersHelper {
 	
 	public List<PoiLegacyFilter> getTopDefinedPoiFilters() {
 		if (cacheTopStandardFilters == null) {
-			cacheTopStandardFilters = new ArrayList<PoiLegacyFilter>();
+			List<PoiLegacyFilter> top = new ArrayList<PoiLegacyFilter>();
 			// user defined
-			cacheTopStandardFilters.addAll(getUserDefinedPoiFilters());
+			top.addAll(getUserDefinedPoiFilters());
 			// default
 			MapPoiTypes poiTypes = application.getPoiTypes();
 			for (PoiFilter t : poiTypes.getTopVisibleFilters()) {
-				cacheTopStandardFilters.add(new PoiLegacyFilter(t, application));
+				top.add(new PoiLegacyFilter(t, application));
 			}
-			sortListOfFilters(cacheTopStandardFilters);
+			sortListOfFilters(top);
+			cacheTopStandardFilters = top;
 		}
 		List<PoiLegacyFilter> result = new ArrayList<PoiLegacyFilter>();
 		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
@@ -205,7 +208,9 @@ public class PoiFiltersHelper {
 		}
 		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
 		if(res){
-			cacheTopStandardFilters.remove(filter);
+			ArrayList<PoiLegacyFilter> copy = new ArrayList<>(cacheTopStandardFilters);
+			copy.remove(filter);
+			cacheTopStandardFilters = copy;
 		}
 		helper.close();
 		return res;
@@ -225,8 +230,10 @@ public class PoiFiltersHelper {
 		}
 		res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
-			cacheTopStandardFilters.add(filter);
-			sortListOfFilters(cacheTopStandardFilters);
+			ArrayList<PoiLegacyFilter> copy = new ArrayList<>(cacheTopStandardFilters);
+			copy.add(filter);
+			sortListOfFilters(copy);
+			cacheTopStandardFilters = copy;
 		}
 		helper.close();
 		return res;

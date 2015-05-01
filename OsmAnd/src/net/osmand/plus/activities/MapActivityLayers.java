@@ -46,6 +46,7 @@ import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -76,9 +77,15 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-
+	private MapWidgetRegistry mapWidgetRegistry;
+	
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
+		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
+	}
+	
+	public MapWidgetRegistry getMapWidgetRegistry() {
+		return mapWidgetRegistry;
 	}
 
 	public OsmandApplication getApplication(){
