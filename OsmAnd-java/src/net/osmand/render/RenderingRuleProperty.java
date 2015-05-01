@@ -33,7 +33,7 @@ public class RenderingRuleProperty {
 	protected String[] possibleValues;
 	protected String category;
 	
-	private RenderingRuleProperty(String attrName, int type, boolean input){
+	protected RenderingRuleProperty(String attrName, int type, boolean input){
 		this.attrName = attrName;
 		this.type = type;
 		this.input = input;
