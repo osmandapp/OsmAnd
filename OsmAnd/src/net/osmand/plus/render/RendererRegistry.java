@@ -15,6 +15,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.render.DefaultRenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.util.Algorithms;
@@ -29,6 +30,7 @@ public class RendererRegistry {
 	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
 	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
+	public final static String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
 	public final static String TOURING_VIEW = "Touring view (contrast and details)";  //$NON-NLS-1$
 	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
@@ -51,7 +53,7 @@ public class RendererRegistry {
 	
 	public RendererRegistry(OsmandApplication app){
 		this.app = app;
-		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
+		internalRenderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
 		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
@@ -74,7 +76,9 @@ public class RendererRegistry {
 			return null;
 		}
 		try {
+			log.info("INIT start loading style");
 			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
+			log.info("INIT finish loading style");
 			renderers.put(name, r);
 			return r;
 		} catch (IOException e) {
@@ -91,6 +95,12 @@ public class RendererRegistry {
 	
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
+//		if (name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) {
+//			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
+//			new DefaultRenderingRulesStorage().createStyle(rrs);
+//			log.info("INIT rendering from class");
+//			return rrs;
+//		}
 		InputStream is = getInputStream(name);
 		if(is == null) {
 			return null;
