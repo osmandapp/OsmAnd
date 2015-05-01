@@ -693,7 +693,7 @@
   <string name="data_settings_descr">Specificeer taal, download gegevens</string>
   <string name="data_settings">Gegevens</string>
   
-  <string name="osm_settings">OSM bewerken</string>
+  <string name="osm_settings">Openstreetmap bewerken</string>
   <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
@@ -838,7 +838,7 @@
   
   <string name="osmand_rastermaps_plugin_description">"Geeft toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaat kaarten, geologische kaarten, reliëflagen, enz.\n\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de gewone offline kaarten van OsmAnd). Om een achtergrond laag beter zichtbaar te maken, kunnen enkele elementen van de OsmAnd kaarten eenvoudig worden verborgen via het menu \'Kaart instellen\'.\n\nTegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensfolder) als SQLite database door een verscheidenheid aan 3de-partij kaart bewerkingsapplicaties. "</string>
   <string name="osmand_background_plugin_description">Toont de instellingen om tracking en navigatie tijdens slaapmodus (scherm uit) in te schakelen door periodiek ontwaken van het GPS-toestel.</string>
-  <string name="osmand_accessibility_description">Deze plug-in maakt de toegankelijkheid opties van uw toestel beschikbaar in OsmAnd. Het vergemakkelijkt b.v. het aanpassen van de spreeksnelheid voor TTS stemmen, het configureren van D-pad scherm navigatie door gebruik van een trackbal voor zoomregeling of het gebruiken van tekst-naar-spraak opties voor het automatisch aankondigen van uw positie.</string>
+  <string name="osmand_accessibility_description">Maakt de toegankelijkheid-opties van uw toestel beschikbaar in OsmAnd. Het vergemakkelijkt o.a. het aanpassen van de spreeksnelheid, het configureren van D-pad scherm navigatie door gebruik van een trackbal voor zoomregeling of het gebruiken van tekst-naar-spraak opties voor het automatisch aankondigen van uw positie.</string>
   
   
   
@@ -858,7 +858,7 @@
 	\n\t- *Gebruiksvriendelijkheid en interface*
 	\n\t	- Op vele punten verbeterd		
 	</string>
-  <string name="osm_editing_plugin_description">Via deze plugin kan OsmAnd gebruikt worden om bij te dragen aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-bugs, en opgenomen GPX-tracks bij te dragen. OSM is een wereldwijde communitygedreven, publiek domein karteringsproject. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM aanmeldgegevens zijn ingevuld in de app.</string>
+  <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan Openstreetmap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-bugs, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie http://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM aanmeldgegevens zijn ingevuld in de app.</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
   <string name="search_position_current_location_found">Positie (Gevonden)</string>
@@ -918,7 +918,7 @@
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
   <string name="osmand_parking_plugin_description">Met de Parkeerplaats plug-in kan eenvoudig de locatie waar de auto geparkeerd staat en de gekozen parkeertijd vastgelegd worden. U kunt uw parkeerplaats en resterende parkeertijd vinden op het kaart scherm en op de kaart widget.\nIndien gewenst kan het een herinnering plaatsen in uw agenda.</string>
-  <string name="osmand_parking_plugin_name">Locatie van uw parkeerplaats</string>
+  <string name="osmand_parking_plugin_name">Parkeerplaats</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
@@ -1419,8 +1419,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="plugin_distance_point">Punt</string>
     <string name="gpx_file_name">GPX-bestandsnaam</string>
     <string name="gpx_saved_sucessfully">GPX-bestand succesvol opgeslagen als {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Deze plug-in biedt een kaart scherm hulpmiddel om een route te maken door routepunten op de kaart aan te tikken, of om een bestaand GPX-bestand te gebruik of te wijzigen, en om de afstand tussen de routepunten te berekenen. De resultaten kunnen worden opgeslagen als een GPX-bestand, om later te gebruiken als route navigatie.</string>
-    <string name="osmand_distance_planning_plugin_name">Afstand berekenings- en plannings-hulpmiddel</string>
+    <string name="osmand_distance_planning_plugin_description">Maak een route door op de kaart te tikken of gebruik of wijzig GpX-bestanden. Plan een reis en bereken de afstand tussen punten. Het resultaat kan worden bewaard als GPX-bestand, om later te gebruiken als navigatieroute.</string>
+    <string name="osmand_distance_planning_plugin_name">Route plannen en afstand berekenen</string>
     <string name="use_distance_measurement_help">* Klik om een punt te markeren.\n * Klik lang op de kaart om het vorige punt te verwijderen.\n * Klik lang op een punt om de beschrijving te zien en toe te voegen.\n * Klik op de meet-widget om meer acties te zien.</string>
     <string name="distance_measurement_start_editing">Begin met bewerken</string>
     <string name="distance_measurement_finish_editing">Bewerken beëindigen</string>
