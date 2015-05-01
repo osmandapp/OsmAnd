@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">OsmAnd~</string>
-    <string name="app_version">2.0.0</string>
+    <string name="app_version">2.1.0</string>
     <!--
     Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
              X.X.X#YYYYZ , where
