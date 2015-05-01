@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Магазин</string>
+		<string name="poi_shop_food">Магазин за хранителни стоки</string>
+	<string name="poi_emergency">Спешна помощ</string>
+	<string name="poi_transportation">Транспорт</string>
+		<string name="poi_road_obstacle">Препятствие на пътя</string>
+		<string name="poi_filling_station">Бензиностанция</string>
+		<string name="poi_personal_transport">Личен транспорт</string>
+		<string name="poi_public_transport">Обществен транспорт</string>
+		<string name="poi_air_transport">Въздушен транспорт</string>
+		<string name="poi_water_transport">Воден транспорт</string>
+		<string name="poi_bicycle_transport">Велосипед</string>
+		<string name="poi_aerialway_transport">Въжени линии</string>
+	<string name="poi_man_made">Изкуствени</string>
+		<string name="poi_transport_construction">Транспортно строителство</string>
+		<string name="poi_water_supply">Водоснабдяване</string>
+		<string name="poi_power">Енергия</string>
+		<string name="poi_communication">Комуникации</string>
+		<string name="poi_trash_disposal">Отпадъци</string>
+		<string name="poi_landuse">Земеползване</string>
+	<string name="poi_education">Образование</string>
+	<string name="poi_administrative">Административни</string>
+	<string name="poi_healthcare">Здравеопазване</string>
+	<string name="poi_office">Офис</string>
+	<string name="poi_sport">Спорт</string>
+	<string name="poi_tourism">Туризъм</string>
+		<string name="poi_sightseeing">Забележителности</string>
+		<string name="poi_accomodation">Настаняване</string>
+		<string name="poi_internet_access">Достъп до интернет</string>
+	<string name="poi_entertainment">Отдих</string>
+		<string name="poi_club">Клуб</string>
+	<string name="poi_sustenance">Храна</string>
+	<string name="poi_cafe_and_restaurant">Кафе и ресторант</string>
+	<string name="poi_service">Сервиз</string>
+		<string name="poi_craft">Занаяти</string>
+	<string name="poi_finance">Финанси</string>
+	<string name="poi_natural">Природа</string>
+	<string name="poi_seamark">Морски</string>
+	<string name="poi_military">Военни</string>
+	<string name="poi_osmwiki">Уикипедия</string>
+	<string name="poi_user_defined_other">Дефинирани от потребителя</string>
+	
+	<string name="poi_palaeontological_site">Палеонтология</string>
+
+	<string name="poi_bakery">Пекарна</string>
+	<string name="poi_alcohol">Магазин за алкохол</string>
+	<string name="poi_convenience">Бакалия</string>
+	<string name="poi_mall">Мол</string>
+	<string name="poi_beverages">Магазин за напитки</string>
+	<string name="poi_butcher">Пазар за месо</string>
+	<string name="poi_deli">Деликатеси</string>
+	<string name="poi_farm">Магазин на ферма</string>
+	<string name="poi_greengrocer">Плодове и зеленчуци</string>
+	</resources>
