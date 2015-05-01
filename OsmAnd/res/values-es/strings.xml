@@ -2003,7 +2003,7 @@
     <string name="current_route">Ruta actual</string>
     <string name="welcome_text">¡OsmAnd proporciona visualización de mapas globales y navegación global sin conexión!</string>
 	<string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de advertencias de radares no está permitido por ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para utilizar esta característica.</string>
-	<string name="agps_info">Info A-GPS</string>
+	<string name="agps_info">Información de A-GPS</string>
 	<string name="shared_string_message">Mensaje</string>
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="shared_string_do_not_use">No usar</string>
