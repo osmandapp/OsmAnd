@@ -394,6 +394,9 @@ public class RenderingRulesStorage {
 				vl = ns.remove("value");
 				// reset rendering rule attributes
 				renderingRule.init(ns);
+				if(STORE_ATTTRIBUTES) {
+					renderingRule.storeAttributes(ns);
+				}
 				
 				registerGlobalRule(renderingRule, state, tg, vl);
 				if (applyRules != null) {
@@ -500,14 +503,14 @@ public class RenderingRulesStorage {
 				return depends;
 			}
 		};
-//		storage.parseRulesFromXmlInputStream(is, resolver);
+		storage.parseRulesFromXmlInputStream(is, resolver);
 		
-		storage = new RenderingRulesStorage("", null);
-		new DefaultRenderingRulesStorage().createStyle(storage);
+//		storage = new RenderingRulesStorage("", null);
+//		new DefaultRenderingRulesStorage().createStyle(storage);
 		
 		
-//		printAllRules(storage);
-		testSearch(storage);
+		printAllRules(storage);
+//		testSearch(storage);
 		
 	}
 	

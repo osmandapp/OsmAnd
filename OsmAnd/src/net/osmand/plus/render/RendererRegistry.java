@@ -76,9 +76,7 @@ public class RendererRegistry {
 			return null;
 		}
 		try {
-			log.info("INIT start loading style");
 			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
-			log.info("INIT finish loading style");
 			renderers.put(name, r);
 			return r;
 		} catch (IOException e) {
@@ -93,14 +91,15 @@ public class RendererRegistry {
 		return externalRenderers.containsKey(name) || internalRenderers.containsKey(name);
 	}
 	
+	private static boolean USE_PRECOMPILED_STYLE = false;
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
-//		if (name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) {
-//			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
-//			new DefaultRenderingRulesStorage().createStyle(rrs);
-//			log.info("INIT rendering from class");
-//			return rrs;
-//		}
+		if ((name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) && USE_PRECOMPILED_STYLE) {
+			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
+			new DefaultRenderingRulesStorage().createStyle(rrs);
+			log.info("INIT rendering from class");
+			return rrs;
+		}
 		InputStream is = getInputStream(name);
 		if(is == null) {
 			return null;

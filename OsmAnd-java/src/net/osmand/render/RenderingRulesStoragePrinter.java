@@ -29,6 +29,7 @@ public class RenderingRulesStoragePrinter {
 		if(args != null && args.length > 0) {
 			is = new FileInputStream(args[0]);
 		}
+		// buggy attributes
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
