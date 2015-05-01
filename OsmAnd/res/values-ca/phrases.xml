@@ -394,4 +394,33 @@
 	<string name="poi_cafe_and_restaurant">Cafè i restaurant</string>
 	<string name="poi_service">Servei</string>
 		<string name="poi_craft">Artesania</string>
+	<string name="poi_natural">Natura</string>
+	<string name="poi_seamark">Nàutica</string>
+	<string name="poi_osmwiki">Viquipèdia</string>
+	<string name="poi_user_defined_other">Definit per l\'usuari</string>
+	
+	<string name="poi_wine">Venda de vi</string>
+
+	<string name="poi_charity">Botiga benèfica</string>
+	<string name="poi_kitchen">Mobles de cuina</string>
+	<string name="poi_medical_supply">Subministraments mèdics</string>
+	<string name="poi_photo">Fotografia</string>
+	<string name="poi_fuel:diesel">Dièsel</string>
+	<string name="poi_fuel:hgv_diesel">Gasoil de vehicles pesants</string>
+	<string name="poi_fuel:biodiesel">Gasoil biològic</string>
+	<string name="poi_fuel:octane_80">80 octans</string>
+	<string name="poi_fuel:octane_91">91 octans</string>
+	<string name="poi_fuel:octane_92">92 octans</string>
+	<string name="poi_fuel:octane_95">95 octans</string>
+	<string name="poi_fuel:octane_98">98 octans</string>
+	<string name="poi_fuel:octane_100">100 octans</string>
+	<string name="poi_fuel:ethanol">Etanol</string>
+	<string name="poi_fuel:methanol">Metanol</string>
+	<string name="poi_fuel:lh2">Hidrogen líquid</string>
+	<string name="poi_fuel:electricity">Electricitat</string>
+	<string name="poi_vehicle_ramp">Rampa per vehicles</string>
+	<string name="poi_compressed_air">Aire comprimit</string>
+	<string name="poi_public_transport_stop_position">Localització de parada de transport públic</string>
+	<string name="poi_aeroway_gate">Porta d\'embarcament</string>
+
 	</resources>

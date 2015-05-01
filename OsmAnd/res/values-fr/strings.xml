@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
-  <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
+  <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :poi_filter_closest_poi
 \n\t- Modification hors-ligne des PI
 \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
 \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte
@@ -358,7 +358,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">Plus proches points d\'intérêt (PI)string>
+  <string name="poi_filter_closest_poi">Plus proches points d\'intérêt (PI)</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
