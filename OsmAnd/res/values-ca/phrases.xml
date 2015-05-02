@@ -487,4 +487,5 @@
 	<string name="poi_general">Basar</string>
 	<string name="poi_turning_circle">Mini-rotonda</string>
 	<string name="poi_mineshaft">Pou de mina</string>
+	<string name="poi_adit">Boca de mina</string>
 	</resources>
