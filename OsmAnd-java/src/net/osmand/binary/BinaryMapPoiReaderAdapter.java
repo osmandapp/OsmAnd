@@ -324,7 +324,7 @@ public class BinaryMapPoiReaderAdapter {
 				
 				
 				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
-						"ms. Found " + offKeys.length +" subtress");
+						"ms. Found " + offKeys.length +" subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
 					int len = readInt();
@@ -482,7 +482,7 @@ public class BinaryMapPoiReaderAdapter {
 					skipTiles.clear();
 				}
 				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
-						"ms. Found " + offsets.length +" subtress");
+						"ms. Found " + offsets.length +" subtrees");
 				for (int j = 0; j < offsets.length; j++) {
 					codedIS.seek(offsets[j] + indexOffset);
 					int len = readInt();
@@ -866,8 +866,8 @@ public class BinaryMapPoiReaderAdapter {
 				long l = ((((x << zoom) | y) << 5) | zoom);
 				boolean read = true;
 				if(req.tiles != null) {
-					int zx = x << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
-					int zy = y << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
+					long zx = x << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
+					long zy = y << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
 					read = req.tiles.contains((zx << SearchRequest.ZOOM_TO_SEARCH_POI) + zy);
 				}
 				int offset = readInt();
