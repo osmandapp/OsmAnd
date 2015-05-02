@@ -125,8 +125,8 @@
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach (Zarządzanie plikami map) lub przełączyć się na mapy online (włącz plugin map online).</string>
-  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline.
-\n\t\n\tAby użyć wybierz \'Menu\' → \'Konfiguruj mapę\' → \'Źródło mapy…\' → \'Wektorowe mapy offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Dla bieżącej lokalizacji dostępna jest wektorowa mapa offline.
+\n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Konfiguruj mapę” → „Źródło mapy…” → „Wektorowe mapy offline”.</string>
   
   <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
   <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
@@ -180,7 +180,7 @@
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Wybierz źródło mapy</string>
   
-  <string name="tip_app_mode">Wybierz Profil</string>
+  <string name="tip_app_mode">Wybierz profil</string>
   
   <string name="tip_navigation">Nawigacja</string>
   <string name="tip_navigation_t">"W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawiguj do\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
@@ -293,9 +293,9 @@
   
   <string name="shared_string_select_all">Zaznacz wszystko</string>
   <string name="shared_string_refresh">Wczytaj ponownie</string>
-  <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia dotyczące aplikacji</string>
+  <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
   <string name="general_settings">Główne</string>
-  <string name="index_settings_descr">Pobieraj i zarządzaj plikami map przechowywanymi na urządzeniu</string>
+  <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
   <string name="index_settings">Zarządzanie plikami map</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
@@ -388,7 +388,7 @@
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
   <string name="background_router_service">Użyj usługi w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
-  <string name="routing_settings_descr">Określ opcje dla nawigacji</string>
+  <string name="routing_settings_descr">Określa opcje nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
   <string name="hide_poi_filter">Ukryj filtr</string>
   <string name="show_poi_filter">Pokaż filtr</string>
@@ -680,7 +680,7 @@
   <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
   
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
-  <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
+  <string name="confirm_interrupt_download">Przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
   
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
@@ -699,7 +699,7 @@
   <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania wskazówek głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
   <string name="plugins_screen">Wtyczki</string>
   
-  <string name="prefs_plugins_descr">Wtyczki aktywują zaawansowane ustawienia i dodatkową funkcjonalność</string>
+  <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność</string>
   <string name="prefs_plugins">Wtyczki</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0:
 \n\t- *Obsługa wtyczek*\n\t- Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t- Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t- Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Nawigacja offline*\n\t- Nawigacja offline została poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t- Poprawione w wielu kwestiach "</string>
@@ -708,7 +708,7 @@
   
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
   <string name="debugging_and_development">Rozwój OsmAnd</string>
-  <string name="native_rendering">Rysowanie natywne</string>
+  <string name="native_rendering">Renderowanie natywne</string>
   
   <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>
   <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2:
@@ -1335,7 +1335,7 @@
     <string name="local_index_tile_data_name">Dane kafelkowe: %1$s</string>
     <string name="about_version">Wersja:</string>
     <string name="about_settings">Informacje</string>
-    <string name="about_settings_descr">Informacje o wersji, licencje, współtwórcy</string>
+    <string name="about_settings_descr">Wypisuje informacje o wersji, licencje, współtwórców</string>
     
     <string name="tip_map_styles">Style map</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
@@ -2026,7 +2026,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symuluj lokalizację</string>
     <string name="short_location_on_map">Szer %1$s↵\nDług %2$s</string>
-    <string name="tips_and_tricks_descr">FAQ, ostatnie zmiany i inne</string>
+    <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
     <string name="general_settings_2">Ustawienia ogólne</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -2061,7 +2061,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="enable_proxy_descr">Skonfiguruj proxy HTTP dla wszystkich zapytań sieciowych</string>
 	<string name="proxy_host_descr">Skonfiguruj nazwę hosta proxy (np. 127.0.0.1)</string>
 	<string name="proxy_port_descr">Skonfiguruj numer portu proxy (np. 8118)</string>
-	<string name="shared_string_release">Wypuszczony</string>
+	<string name="shared_string_release">Data wydania</string>
 	<string name="get_plugin">Pobierz</string>
 <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
@@ -2104,8 +2104,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value__name">Domyślna</string>
     <string name="rendering_value_highContrastRoads_name">Wysoki kontrast dróg</string>
 	<string name="index_name_netherlands">Europa - Holandia</string>
-	<string name="storage_directory_manual">Określone ręcznie</string>
+	<string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Wyszukiwanie</string>
+    <string name="search_poi_category_hint">Proszę wprowadzić, aby wyszukać</string>
     </resources>
