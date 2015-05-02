@@ -26,4 +26,4 @@
 -keep interface net.osmand.** { *; }
 -keep class alice.** { *; }
 -keep interface alice.** { *; }
--dontwarn alice.** { *; }
+-dontwarn alice.**
