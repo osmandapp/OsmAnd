@@ -10,8 +10,12 @@
 -keep class !android.support.v7.internal.view.menu.**,android.support.** {*;}
 -keep class net.osmand.** { *; }
 -keep interface net.osmand.** { *; }
--keep class com.** { *; }
--keep interface com.** { *; }
+
+-keep class com.google.** { *; }
+-keep interface com.google.** { *; }
+-keep class com.jwetherell.** { *; }
+-keep interface com.jwetherell.** { *; }
+
 -keep class btools.** { *; }
 -keep interface btools.** { *; }
 -keep class alice.** { *; }
