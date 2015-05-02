@@ -363,7 +363,7 @@
 	<string name="poi_shop">Botiga</string>
 		<string name="poi_shop_food">Queviures</string>
 	<string name="poi_public_transport">Transport públic</string>
-		<string name="poi_air_transport">Transport aéri</string>
+		<string name="poi_air_transport">Transport aeri</string>
 		<string name="poi_personal_transport">Transport privat</string>
 		<string name="poi_transportation">Transport</string>
 		<string name="poi_emergency">Emergències</string>
@@ -385,9 +385,9 @@
 	<string name="poi_office">Despatx</string>
 	<string name="poi_sport">Esport</string>
 	<string name="poi_tourism">Turisme</string>
-		<string name="poi_sightseeing">Visita interesant</string>
+		<string name="poi_sightseeing">Visita interessant</string>
 		<string name="poi_accomodation">Allotjament</string>
-		<string name="poi_internet_access">Accés d\'Internet</string>
+		<string name="poi_internet_access">Accés a Internet</string>
 	<string name="poi_entertainment">Esbarjo</string>
 		<string name="poi_club">Club</string>
 	<string name="poi_sustenance">Menjar</string>
@@ -473,4 +473,15 @@
 	<string name="poi_attraction_water_slide">Tobogan aquàtic</string>
 
 	<string name="poi_lodging">Allotjament</string>
+	<string name="poi_finance">Finances</string>
+	<string name="poi_bag">Maletes i bosses</string>
+	<string name="poi_outdoor">Botiga d\'esports a l\'aire lliure</string>
+	<string name="poi_ship_chandler">Accessoris per a vaixells</string>
+	<string name="poi_car">Botiga d\'automòbils</string>
+	<string name="poi_atv">Botiga de quads</string>
+	<string name="poi_allotments">Horts familiars</string>
+	<string name="poi_forest">Bosc amb manteniment humà</string>
+	<string name="poi_farmyard">Granja</string>
+	<string name="poi_landuse_railway">Àrea ferroviària</string>
+
 	</resources>
