@@ -531,14 +531,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i, R.string.context_menu_item_share_location);
 		//poi
-		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
+		if (osmandSettings.SELECTED_POI_FILTER_FOR_MAP.get()!= null) {
 			adapter.item(R.string.sherpafy_disable_poi).iconColor(
 					R.drawable.ic_action_gremove_dark)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					app.getSettings().SHOW_POI_OVER_MAP.set(false);
-					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+					app.getSettings().SELECTED_POI_FILTER_FOR_MAP.set(null);
+					mapActivity.refreshMap();
 					return true;
 				}
 			}).reg();
@@ -548,8 +548,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
-							app.getSettings().SHOW_POI_OVER_MAP.set(true);
-							mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
 							return true;
 						}
 					}).reg();

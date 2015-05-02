@@ -592,7 +592,7 @@ public class WaypointHelper {
 
 	/// 
 	public PoiLegacyFilter getPoiFilter() {
-		return app.getPoiFilters().getFilterById(app.getSettings().getPoiFilterForMap());
+		return app.getPoiFilters().getFilterById(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get());
 	}
 	public boolean showPOI() {
 		return app.getSettings().SHOW_NEARBY_POI.get();

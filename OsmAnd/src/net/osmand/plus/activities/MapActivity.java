@@ -368,9 +368,6 @@ public class MapActivity extends AccessibleActivity {
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings();
 
-		String filterId = settings.getPoiFilterForMap();
-		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
-		mapLayers.getPoiMapLayer().setFilter(poiFilter);
 
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
