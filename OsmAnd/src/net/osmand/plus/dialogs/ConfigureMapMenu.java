@@ -92,7 +92,7 @@ public class ConfigureMapMenu {
 		
 		@Override
 		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
-			if(itemId == R.string.layer_poi && cm.getSelection(pos) == 1) {
+			if(itemId == R.string.layer_poi) {
 				selectPOILayer(ma.getMyApplication().getSettings());
 				return false;
 			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
@@ -107,13 +107,10 @@ public class ConfigureMapMenu {
 		public boolean onContextMenuClick(final ArrayAdapter<?> adapter, int itemId, final int pos, boolean isChecked) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			if (itemId == R.string.layer_poi) {
-				settings.setPoiFilterForMap(null);
-				ma.getMapLayers().getPoiMapLayer().setFilter(null);
-				settings.SHOW_POI_OVER_MAP.set(isChecked);
+				settings.SELECTED_POI_FILTER_FOR_MAP.set(null);
 				if (isChecked) {
 					selectPOILayer(settings);
 				}
-				
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
 			} else if (itemId == R.string.shared_string_favorites) {
@@ -140,15 +137,12 @@ public class ConfigureMapMenu {
 		}
 
 		protected void selectPOILayer(final OsmandSettings settings) {
-			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1]; 
+			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
 			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-				
+
 				@Override
 				public void onDismiss(DialogInterface dialog) {
-					if(selected[0] == null) {		
-						settings.SHOW_POI_OVER_MAP.set(selected[0] != null);
-					}
 					ma.getDashboard().refreshContent(true);
 				}
 			});
@@ -161,7 +155,7 @@ public class ConfigureMapMenu {
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.item(R.string.shared_string_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
+		adapter.item(R.string.layer_poi).selected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null ? 1 : 0)
 				.iconColor(R.drawable.ic_action_info_dark).listen(l).reg();
 		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0)
 				.iconColor(R.drawable.ic_action_text_dark).listen(l).reg();

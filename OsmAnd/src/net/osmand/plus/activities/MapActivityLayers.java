@@ -124,8 +124,10 @@ public class MapActivityLayers {
 		// 2. osm bugs layer
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer(activity);
+		mapView.addLayer(poiMapLayer, 3);
 		// 4. favorites layer
 		favoritesLayer = new FavoritesLayer();
+		mapView.addLayer(favoritesLayer, 4);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
 		// 5.5 transport info layer 
@@ -171,22 +173,6 @@ public class MapActivityLayers {
 				mapView.addLayer(transportStopsLayer, 5);
 			} else {
 				mapView.removeLayer(transportStopsLayer);
-			}
-		}
-
-		if(mapView.getLayers().contains(poiMapLayer) != settings.SHOW_POI_OVER_MAP.get()){
-			if(settings.SHOW_POI_OVER_MAP.get()){
-				mapView.addLayer(poiMapLayer, 3);
-			} else {
-				mapView.removeLayer(poiMapLayer);
-			}
-		}
-		
-		if(mapView.getLayers().contains(favoritesLayer) != settings.SHOW_FAVORITES.get()){
-			if(settings.SHOW_FAVORITES.get()){
-				mapView.addLayer(favoritesLayer, 4);
-			} else {
-				mapView.removeLayer(favoritesLayer);
 			}
 		}
 		OsmandPlugin.refreshLayers(mapView, activity);
@@ -283,12 +269,11 @@ public class MapActivityLayers {
 					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
 					activity.startActivity(search);
 				} else {
-					getApplication().getSettings().setPoiFilterForMap(filterId);
 					pf = poiFilters.getFilterById(filterId);
 					if (pf != null) {
 						pf.setFilterByName(pf.getSavedFilterByName());
 					}
-					poiMapLayer.setFilter(pf);
+					getApplication().getSettings().SELECTED_POI_FILTER_FOR_MAP.set(filterId);
 					mapView.refreshMap();
 					if(selected != null && selected.length > 0) {
 						selected[0] = pf;
