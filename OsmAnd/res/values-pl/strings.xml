@@ -128,8 +128,8 @@
   <string name="switch_to_vector_map_to_see">Dla bieżącej lokalizacji dostępna jest wektorowa mapa offline.
 \n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Konfiguruj mapę” → „Źródło mapy…” → „Wektorowe mapy offline”.</string>
   
-  <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
-  <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
+  <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
+  <string name="choose_audio_stream_descr">Określa kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
   <string name="voice_stream_notification">Kanał powiadomień</string>
   <string name="voice_stream_music">Kanał media/music</string>
@@ -279,8 +279,8 @@
   <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
   <string name="contribution_activity">Specialne opcje dla wersji \"contribution\"</string>
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS status. Wyszukać ją w Market?</string>
-  <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do \'Ustawienia\'→\'Ogólne\'→\'Nawigacja głosowa\', wybierz ulubiony zestaw i zainstaluj go.</string>
-  <string name="voice_is_not_available_title">Nie wybrano głosu nawigatora</string>
+  <string name="voice_is_not_available_msg">Nawigacja głosowa jest niedostępna. Proszę przejść do „Ustawienia”→„Ogólne”→„Nawigacja głosowa”, wybrać zestaw poleceń głosowych i zainstalować go.</string>
+  <string name="voice_is_not_available_title">Nie wybrano nawigacji głosowej</string>
   <string name="daynight_mode_day">Dzień</string>
   <string name="daynight_mode_night">Noc</string>
   <string name="daynight_mode_auto">Wschód/zachód Słońca</string>
@@ -395,8 +395,8 @@
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Wyłącz dźwięk</string>
   <string name="menu_mute_on">Włącz dźwięk</string>
-  <string name="voice_provider_descr">Wybierz głos nawigatora</string>
-  <string name="voice_provider">Głos nawigatora</string>
+  <string name="voice_provider_descr">Wybiera głos wskazówek nawigatora</string>
+  <string name="voice_provider">Nawigacja głosowa</string>
   <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
   <string name="voice_data_corrupted">Wybrane dane z głosem są uszkodzone</string>
@@ -536,7 +536,7 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil.</string>
+  <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji</string>
   <string name="settings_preset">Domyślny profil</string>
   <string name="shared_string_settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
@@ -710,7 +710,7 @@
   <string name="debugging_and_development">Rozwój OsmAnd</string>
   <string name="native_rendering">Renderowanie natywne</string>
   
-  <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>
+  <string name="test_voice_prompts">Przetestuj komunikaty głosowe</string>
   <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2:
 \n\t- Natywne renderowanie dla wszystkich urządzeń
 \n\t- Edytowanie POI w trybie offline
@@ -828,8 +828,8 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
   <string name="index_name_wiki">Wikipedia dla POI</string>
-  <string name="index_name_voice">Wskazówki głosowe (nagrane, ograniczone możliwości)</string>
-  <string name="index_name_tts_voice">Wskazówki głosowe (TTS, zalecane)</string>
+  <string name="index_name_voice">Komunikaty głosowe (nagrane, ograniczone możliwości)</string>
+  <string name="index_name_tts_voice">Komunikaty głosowe (TTS, zalecane)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
@@ -1065,7 +1065,7 @@
 	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
     <string name="download_roads_only_item">Samochodowe</string>
     <string name="download_roads_only_maps">Tylko mapy samochodowe</string>
-    <string name="safe_mode_description">Uruchom program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
+    <string name="safe_mode_description">Uruchamia program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego)</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Zatrzymać ją także?</string>
@@ -1645,8 +1645,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_item_nation_addresses">Adresy krajowe</string>
 	<string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Przerwij muzykę podczas komunikatów</string>
-	<string name="interrupt_music">Przerwij muzykę</string>
+    <string name="interrupt_music_descr">Przerywa odtwarzanie muzyki podczas komunikatów</string>
+	<string name="interrupt_music">Przerywanie muzyki</string>
 	<string name="always_center_position_on_map">Pozycja w centrum wyświetlacza</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
@@ -1979,7 +1979,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="navigate_point_easting">Linia współrzędnych x\"</string>
     <string name="download_tab_local">W urządzeniu</string>
 	<string name="no_internet_connection">Pobieranie niemożliwe. Proszę sprawdzić połączenie internetowe.</string>
-    <string name="voices">Wskazówki głosowe</string>
+    <string name="voices">Komunikaty głosowe</string>
 	<string name="traffic_warning_railways">Przejazd kolejowy</string>
 	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
