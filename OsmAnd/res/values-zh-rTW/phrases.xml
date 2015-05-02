@@ -251,4 +251,46 @@
 
 	<string name="poi_speed_camera">測速照相</string>
 	<string name="poi_turning_circle">迴轉圈</string>
+	<string name="poi_motorway_junction">高速公路交流道</string>
+	<string name="poi_junction">交叉路口</string>
+	<string name="poi_rest_area">休息服務區</string>
+
+	<string name="poi_water_well">水井</string>
+	<string name="poi_standpipe">豎管</string>
+	<string name="poi_water_works">自來水廠</string>
+	<string name="poi_boatyard">船塢</string>
+	<string name="poi_wastewater_plant">污水處理廠</string>
+	<string name="poi_water_tower">水塔</string>
+	<string name="poi_lock_gate">水閘</string>
+	<string name="poi_waterway_turning_point">水路轉折點</string>
+	<string name="poi_weir">堰</string>
+	<string name="poi_dam">水壩</string>
+	<string name="poi_water_mill">水磨坊</string>
+
+	<string name="poi_power_substation">變電所</string>
+	<string name="poi_power_transformer">變壓器</string>
+	<string name="poi_power_plant">發電廠</string>
+	<string name="poi_power_generator">發電機</string>
+
+	<string name="poi_post_office">郵局</string>
+	<string name="poi_post_box">郵箱</string>
+	<string name="poi_telephone">公共電話</string>
+	<string name="poi_communication_tower">通信塔台</string>
+	<string name="poi_telephone_exchange">電話交換機</string>
+
+	<string name="poi_recycling">資源回收</string>
+	<string name="poi_landfill">垃圾掩埋場</string>
+	<string name="poi_waste_disposal">廢棄物處理</string>
+	<string name="poi_waste_basket">垃圾桶</string>
+
+	<string name="poi_industrial">工業區</string>
+	<string name="poi_quarry">採石場</string>
+	<string name="poi_vineyard">葡萄園</string>
+	<string name="poi_orchard">果園</string>
+	<string name="poi_allotments">社區農圃</string>
+	<string name="poi_forest">人造林場</string>
+	<string name="poi_farmyard">農家庭院</string>
+	<string name="poi_meadow">草地</string>
+	<string name="poi_landuse_railway">鐵路區域</string>
+
 	</resources>
