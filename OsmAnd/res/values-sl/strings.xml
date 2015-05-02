@@ -570,8 +570,8 @@
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
 	<string name="tip_initial_t">"OsmAnd je navigacijska aplikacija s številnimi funkcijami.
 \n\nOsnovni uvod, nekaj uporabnih namigov in trikov je na voljo na povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
-	<string name="shared_string_next">Naprej</string>
-	<string name="shared_string_previous">Nazaj</string>
+	<string name="shared_string_next">Naslednji</string>
+	<string name="shared_string_previous">Predhodni</string>
 	
 	<string name="tip_search">Iskanje</string>
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
@@ -632,8 +632,8 @@
 	<string name="accessibility_extensions">Razširitve dostopnosti</string>
 	<string name="accessibility_mode">Način dostopnosti</string>
 	<string name="accessibility_mode_descr">Vklopi zmožnosti dostopnosti</string>
-	<string name="shared_string_on">Vklopljeno</string>
-	<string name="shared_string_off">Izklopljeno</string>
+	<string name="shared_string_on">Omogočeno</string>
+	<string name="shared_string_off">Onemogočeno</string>
 	<string name="accessibility_default">Glede na splošne sistemske nastavitve</string>
 	<string name="backToMenu">Nazaj v meni</string>
 	<string name="auto_announce_on">Začni s samodejnimi najavami</string>
@@ -1610,7 +1610,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="keep_and_add_destination_point">Dodaj kot ciljno točko</string>
     <string name="select_gpx">Izberite GPX …</string>
     <string name="route_descr_select_destination">Izberite cilj</string>
-    <string name="shared_string_select_on_map">Izberite na zemljevidu</string>
+    <string name="shared_string_select_on_map">Izberi na zemljevidu</string>
     <string name="shared_string_favorite">Priljubljene</string>
     <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
 \n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
@@ -1946,7 +1946,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="download_tab_updates">Posodobitve</string>
     <string name="download_tab_local">Krajevno</string>
 	<string name="no_internet_connection">Prenos ni mogoč. Prosim, preverite vašo internetno povezavo.</string>
-    <string name="shared_string_dismiss">Zapri</string>
+    <string name="shared_string_dismiss">Opusti</string>
     <string name="everything_up_to_date">Vse datoteke posodobljene</string>
     <string name="osmo_use_https">Uporabi HTTPS</string>
 	
@@ -2010,19 +2010,19 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="track_segments">Segmenti sledi</string>
 	<string name="track_points">Točke sledi</string>
 	<string name="action_create">Ustvarjanje dejanja</string>
-	<string name="action_modify">Sprememba dejanja</string>
+	<string name="action_modify">Spreminjanje dejanja</string>
 	<string name="action_delete">Brisanje dejanja</string>
-	<string name="osm_edits">OSM urejanje</string>
-	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">ostaja</string> <string name="parking_place_limited">Parkiranje časovno omejeno na</string>
-	<string name="your_edits">Vaše spremembe</string>
+	<string name="osm_edits">Urejanje OSM</string>
+	<string name="osmand_parking_hour">h</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">preostalo je</string> <string name="parking_place_limited">Parkiranje je časovno omejeno na</string>
+	<string name="your_edits">Vaša urejanja</string>
     <string name="drawer">Seznam</string>
-    <string name="short_location_on_map">Šir %1$s\n Dol %2$s</string>
-    <string name="tips_and_tricks_descr">Pogosto zastavljena vprašanja, nedavne spremembe in ostalo</string>
+    <string name="short_location_on_map">ZD (λ) %1$s\n ZŠ (β) %2$s</string>
+    <string name="tips_and_tricks_descr">Pogosta vprašanja, nedavne spremembe in druge podrobnosti</string>
     <string name="routing_settings_2">Nastavitve navigacije</string>
     <string name="general_settings_2">Splošne nastavitve</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Izbrano</string>
-	<string name="shared_string_deselect">Odstrani iz izbora</string>
+	<string name="shared_string_deselect">Odstrani izbiro</string>
 	<string name="shared_string_deselect_all">Počisti izbor</string>
 	<string name="shared_string_export">Izvozi</string>
 	<string name="shared_string_unexpected_error">Prišlo je do nepričakovane napake</string>
@@ -2045,8 +2045,42 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="shared_string_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
 	<string name="welcome_header">Dobrodošli</string>
-    <string name="shared_string_go">Pojdi</string>
+    <string name="shared_string_go">Začni</string>
 	<string name="osmand_parking_overdue">prekoračen čas</string>
 	<string name="shared_string_places">Kraji</string>
 	<string name="watch">Poglej</string>
+	<string name="application_dir_change_warning3">Ali želite kopirati podatkovne datoteke tudi na novo ciljno mesto?</string>
+    <string name="specified_directiory_not_writeable">V navedeni mapi ni mogoče shraniti zemljevidov.</string>
+	<string name="copying_osmand_file_failed">Kopiranje datotek je spodletelo</string>    
+    <string name="storage_directory_external">Zunanje mesto za shranjevanje</string>
+    <string name="storage_directory_multiuser">Shranjevanje za različne uporabnike</string>
+    <string name="storage_directory_internal_app">Notranji pomnilnik programa</string>
+    <string name="storage_directory_manual">Uporabniško določeno</string>
+    <string name="storage_directory_default">Notranji pomnilnik</string>
+    <string name="storage_directory">Mapa za shranjevanje</string>
+    <string name="shared_string_copy">Kopiraj</string>
+    <string name="filter_poi_hint">Filtriraj po imenu</string>
+    <string name="search_poi_category_hint">Vrsta za iskanje</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Pomočnik OSM</string>
+	<string name="agps_info">Podrobnosti A-GPS</string>
+	<string name="shared_string_manage">Upravljaj</string>
+	<string name="shared_string_edit">Uredi</string>
+	<string name="shared_string_search">Poišči</string>
+	<string name="shared_string_show_description">Pokaži opis</string>
+	<string name="agps_data_last_downloaded">Zadnja sovežitev podatkov A-GPS: %1$s</string>
+    <string name="confirm_usage_speed_cameras">V mnogih državah (na primer v Nemčiji, Franciji, Italiji in drugih) je uporaba kamer za merjenje hitrosti prepovedana z zakonom. Razvijalci programa ne sprejemamo odgovornosti za tako rabo. Potrdite uporabo le, če ste res prepričani v svoje ravnanje.</string>
+	<string name="welmode_download_maps">Prejemanje zemljevidov</string>
+	<string name="welcome_select_region">Za pravilno rabo prometnih znakov in predpisov izberite ustrezen prometni režim:</string>
+	<string name="welcome_text">Program OsmAnd omogoča uporabo zemljevidov brez povezave in za navigacijo z dostopom do kakovostnih brezplačnih zemljevidov!</string>
+	<string name="current_route">Trenutna pot</string>
+    <string name="osm_changes_added_to_local_edits">Spremembe nastavitev OSM so dodane med nastavitve</string>
+   	<string name="mark_to_delete">Označi za urejanje</string>
+	<string name="osmo_grop_name_length_alert">Ime skupine mora biti daljše od 3 znakov!</string>
+	<string name="local_osm_changes_upload_all_confirm">Poslanih bo %1$d sprememb. Ali ste prepričani, da želite nadaljevati?</string>
+    <string name="confirmation_to_clear_history">Ali želite počistiti zgodovino?</string>
+    <string name="delay_to_start_navigation">Začni vodenje od zavoja do zavoja po …</string>
+    <string name="waypoint_visit_after">Obišči po</string>
+    <string name="waypoint_visit_before">Obišči pred</string>
+    <string name="simulate_your_location">Navidezno določi mesto</string>
+    <string name="shared_string_do_not_use">Ne uporabi</string>
 	</resources>
