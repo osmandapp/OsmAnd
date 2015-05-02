@@ -365,7 +365,7 @@
 	<string name="poi_crematorium">Crematorio</string>
 	<string name="poi_bank">Banco</string>
 	<string name="poi_atm">Cajero automático</string>
-	<string name="poi_accountant">Contable</string>
+	<string name="poi_accountant">Contador</string>
 	<string name="poi_cave_entrance">Entrada a cueva</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
@@ -566,7 +566,7 @@
 	<string name="poi_religion_shinto">Lugar de culto: sintoísta</string>
 	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
 
-	<string name="poi_wayside_cross">Crucero</string>
+	<string name="poi_wayside_cross">Cruz en el camino</string>
 	<string name="poi_wayside_shrine">Ermita en el camino</string>
 	<string name="poi_geyser">Géiser</string>
 	<string name="poi_grave_yard">Camposanto</string>
@@ -639,7 +639,7 @@
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
 
 	<string name="poi_peak">Pico de montaña</string>
-	<string name="poi_sinkhole">Sima</string>
+	<string name="poi_sinkhole">Sumidero</string>
 	<string name="poi_waterfall">Cascada</string>
 	<string name="poi_bay">Bahía</string>
 	<string name="poi_fjord">Fiordo</string>
@@ -715,7 +715,7 @@
 	<string name="poi_resort">Complejo turístico</string>
 
 	<string name="poi_biergarten">Terraza</string>
-	<string name="poi_craft_carpet_layer">Instalador de moqueta</string>
+	<string name="poi_craft_carpet_layer">Instalador de alfombras</string>
 	<string name="poi_craft_glaziery">Vidriero</string>
 	<string name="poi_craft_hvac">Calefacción, ventilación, aire acondicionado</string>
 	<string name="poi_craft_key_cutter">Duplicación de llaves</string>
