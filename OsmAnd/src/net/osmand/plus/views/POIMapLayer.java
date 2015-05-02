@@ -94,8 +94,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (filter == null) {
 					return new ArrayList<Amenity>();
 				}
+				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2)); 
+				
 				return filter.searchAmenities(latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
+						latLonBounds.bottom, latLonBounds.right, z , new ResultMatcher<Amenity>() {
 
 					@Override
 					public boolean publish(Amenity object) {
