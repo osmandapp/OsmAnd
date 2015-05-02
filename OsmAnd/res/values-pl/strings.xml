@@ -176,7 +176,7 @@
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
   <string name="system_locale">Systemowy</string>
-  <string name="preferred_locale_descr">Wybierz język interfejsu (zrestartuj OsmAnd po zmianie)</string>
+  <string name="preferred_locale_descr">Wybiera język interfejsu (po zmianie należy uruchomić program ponownie)</string>
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Wybierz źródło mapy</string>
   
@@ -318,7 +318,7 @@
   <string name="poi_context_menu_call">Pokaż nr tel. tego POI</string>
   <string name="website">Strona WWW</string>
   <string name="phone">Telefon</string>
-  <string name="download_type_to_filter">wprowadź tekst, aby filtrować dane</string>
+  <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
   <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
   <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
   <string name="unknown_location">Pozycja nie jest jeszcze znana</string>
@@ -344,7 +344,7 @@
   <string name="rotate_map_compass_opt">Względem kompasu</string>
   <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
   <string name="rotate_map_none_opt">Nie obracaj (północ na górze)</string>
-  <string name="rotate_map_to_bearing_descr">Wybierz sposób obracania mapy</string>
+  <string name="rotate_map_to_bearing_descr">Wybiera sposób obracania mapy</string>
   <string name="rotate_map_to_bearing">Orientacja mapy</string>
   <string name="show_route">Szczegóły trasy</string>
   <string name="fav_imported_sucessfully">Ulubione zostały zaimportowane</string>
@@ -423,7 +423,7 @@
   <string name="map_orientation_portrait">Pionowo</string>
   <string name="map_orientation_landscape">Poziomo</string>
   <string name="map_screen_orientation">Orientacja ekranu</string>
-  <string name="map_screen_orientation_descr">Wybierz orientację ekranu</string>
+  <string name="map_screen_orientation_descr">Określa orientację ekranu</string>
   <string name="opening_hours_not_supported">Format godzina otwarcia nie jest obsługiwany</string>
   <string name="add_new_rule">Dodaj nową regułę</string>
   <string name="transport_Routes">Trasy</string>
@@ -966,7 +966,7 @@
   <string name="layer_map_appearance">Konfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikaj…</string>
+  <string name="avoid_in_routing_title">Unikanie</string>
   <string name="avoid_in_routing_descr">Unikaj dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
   <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
@@ -1235,7 +1235,7 @@
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
     <string name="local_indexes_cat_srtm">Dane poziomic</string>
     <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
-    <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
+    <string name="use_kalman_filter_compass">Użycie filtru Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie</string>
@@ -2107,5 +2107,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Proszę wprowadzić, aby wyszukać</string>
+    <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     </resources>
