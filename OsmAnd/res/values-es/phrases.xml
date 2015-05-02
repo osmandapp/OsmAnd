@@ -288,7 +288,7 @@
 	<string name="poi_motel">Motel</string>
 	<string name="poi_alpine_hut">Cabaña alpina</string>
 	<string name="poi_chalet">Chalé</string>
-	<string name="poi_apartment">Departamento</string>
+	<string name="poi_apartment">Apartamento</string>
 	<string name="poi_place_of_worship">Lugar de culto</string>
 	<string name="poi_religion_christian">Lugar de culto: cristiano</string>
 	<string name="poi_internet_access_wlan">Acceso a Internet: inalámbrico</string>
@@ -557,16 +557,16 @@
 	<string name="poi_attraction_water_slide">Tobogán de agua</string>
 
 	<string name="poi_lodging">Alojamiento</string>
-	<string name="poi_wilderness_hut">Choza de desierto</string>
+	<string name="poi_wilderness_hut">Cabaña</string>
 
 	<string name="poi_religion_muslim">Lugar de culto: musulmán</string>
 	<string name="poi_religion_sikh">Lugar de culto: sijista</string>
 	<string name="poi_religion_buddhist">Lugar de culto: budista</string>
 	<string name="poi_religion_hindu">Lugar de culto: hindú</string>
-	<string name="poi_religion_shinto">Lugar de culto: shinto</string>
+	<string name="poi_religion_shinto">Lugar de culto: sintoísta</string>
 	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
 
-	<string name="poi_wayside_cross">Cruz en el camino</string>
+	<string name="poi_wayside_cross">Crucero</string>
 	<string name="poi_wayside_shrine">Ermita en el camino</string>
 	<string name="poi_geyser">Géiser</string>
 	<string name="poi_grave_yard">Campo santo</string>
@@ -710,7 +710,7 @@
 	<string name="poi_quarter">Distrito</string>
 	<string name="poi_attraction_summer_toboggan">Tobogán de verano</string>
 	<string name="poi_internet_access_terminal">Acceso a Internet: terminal</string>
-	<string name="poi_caravan_site">Campamento para casas rodantes</string>
+	<string name="poi_caravan_site">Campamento de caravanas</string>
 	<string name="poi_hot_spring">Fuente termal</string>
 	<string name="poi_resort">Complejo turístico</string>
 
