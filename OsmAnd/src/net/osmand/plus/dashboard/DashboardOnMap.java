@@ -31,7 +31,6 @@ import net.osmand.plus.osmo.DashOsMoFragment;
 import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.app.Activity;

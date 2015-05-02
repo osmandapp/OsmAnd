@@ -15,6 +15,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -39,6 +40,8 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	private FavouritesDbHelper favorites;
 	protected List<LocationPoint> cache = new ArrayList<LocationPoint>();
 	private MapTextLayer textLayer;
+
+	private OsmandSettings settings;
 //	private Bitmap d;
 
 	
@@ -61,7 +64,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		paint.setAntiAlias(true);
 		paint.setFilterBitmap(true);
 		paint.setDither(true);
-		
+		settings = view.getApplication().getSettings();
 		favorites = view.getApplication().getFavorites();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 //		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
@@ -93,17 +96,20 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		cache.clear();
-		if (tileBox.getZoom() >= startZoom) {
-			// request to load
-			final QuadRect latLonBounds = tileBox.getLatLonBounds();
-			for (LocationPoint o : getPoints()) {
-				drawPoint(canvas, tileBox, latLonBounds, o);
+		if (this.settings.SHOW_FAVORITES.get()) {
+			if (tileBox.getZoom() >= startZoom) {
+				// request to load
+				final QuadRect latLonBounds = tileBox.getLatLonBounds();
+				for (LocationPoint o : getPoints()) {
+					drawPoint(canvas, tileBox, latLonBounds, o);
+				}
+
 			}
-			
 		}
 		if(textLayer.isVisible()) {
 			textLayer.putData(this, cache);
 		}
+
 	}
 
 

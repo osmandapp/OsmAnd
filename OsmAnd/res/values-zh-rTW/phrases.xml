@@ -293,4 +293,17 @@
 	<string name="poi_meadow">草地</string>
 	<string name="poi_landuse_railway">鐵路區域</string>
 
+	<string name="poi_canal">運河</string>
+	<string name="poi_pier">碼頭</string>
+	<string name="poi_surveillance">監視器</string>
+	<string name="poi_observatory">天文台</string>
+	<string name="poi_astronomical_observatory">天文觀測台</string>
+	<string name="poi_tower">塔</string>
+	<string name="poi_mast">通信基地台</string>
+	<string name="poi_radar">雷達</string>
+	<string name="poi_construction">施工中</string>
+	<string name="poi_works">工廠</string>
+	<string name="poi_mineshaft">礦井</string>
+	<string name="poi_adit">坑道入口</string>
+	<string name="poi_petroleum_well">油井</string>
 	</resources>

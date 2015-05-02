@@ -238,7 +238,7 @@ public class WaypointDialogHelper {
 	private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 						   final boolean enable, Activity ctx) {
 		if (ctx instanceof MapActivity &&
-				!PoiLegacyFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
+				!PoiLegacyFilter.CUSTOM_FILTER_ID.equals(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get())) {
 			MapActivity map = (MapActivity) ctx;
 			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
 			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);

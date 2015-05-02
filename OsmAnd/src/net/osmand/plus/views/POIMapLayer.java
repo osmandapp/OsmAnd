@@ -17,14 +17,18 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -59,10 +63,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private MapLayerData<List<Amenity>> data;
 
+	private OsmandSettings settings;
+
+	private OsmandApplication app;
+
 
 	public POIMapLayer(final MapActivity activity) {
 		routingHelper = activity.getRoutingHelper();
 		routingHelper.addListener(this);
+		settings = activity.getMyApplication().getSettings();
+		app = activity.getMyApplication();
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 			{
 				ZOOM_THRESHOLD = 0;
@@ -101,10 +111,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		};
 	}
 
-	public void setFilter(PoiLegacyFilter filter) {
-		this.filter = filter;
-		data.clearCache();
-	}
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
 		List<Amenity> objects = data.getResults();
@@ -193,39 +199,50 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if(!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(), 
+				filter == null ? null : filter.getFilterId())) {
+			if(this.settings.SELECTED_POI_FILTER_FOR_MAP.get() == null) {
+				this.filter = null;
+			} else {
+				PoiFiltersHelper pfh = app.getPoiFilters();
+				this.filter = pfh.getFilterById(this.settings.SELECTED_POI_FILTER_FOR_MAP.get());
+			}
+			data.clearCache();
+		}
 		List<Amenity> objects = Collections.emptyList();
-		if (tileBox.getZoom() >= startZoom) {
-			data.queryNewData(tileBox);
-			objects = data.getResults();
-			if (objects != null) {
-				int r = getRadiusPoi(tileBox);
-				for (Amenity o : objects) {
-					int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-							.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-							.getLongitude());
-					canvas.drawCircle(x, y, r, pointAltUI);
-					canvas.drawCircle(x, y, r, point);
-					String id = null;
-					PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-					if (st != null) {
-						if (RenderingIcons.containsIcon(st.getIconKeyName())) {
-							id = st.getIconKeyName();
-						} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-							id = st.getOsmTag() + "_" + st.getOsmValue();
+		if (filter != null) {
+			if (tileBox.getZoom() >= startZoom) {
+				data.queryNewData(tileBox);
+				objects = data.getResults();
+				if (objects != null) {
+					int r = getRadiusPoi(tileBox);
+					for (Amenity o : objects) {
+						int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+								.getLongitude());
+						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+								.getLongitude());
+						canvas.drawCircle(x, y, r, pointAltUI);
+						canvas.drawCircle(x, y, r, point);
+						String id = null;
+						PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+						if (st != null) {
+							if (RenderingIcons.containsIcon(st.getIconKeyName())) {
+								id = st.getIconKeyName();
+							} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+								id = st.getOsmTag() + "_" + st.getOsmValue();
+							}
 						}
-					}
-					if (id != null) {
-						Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
-						if (bmp != null) {
-							canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+						if (id != null) {
+							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
+							if (bmp != null) {
+								canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+							}
 						}
 					}
 				}
 			}
 		}
 		mapTextLayer.putData(this, objects);
-
 	}
 
 	@Override

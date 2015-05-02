@@ -35,7 +35,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -199,13 +198,9 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
-		dashboardOnMap.updateLocation(true, true, false);
 	}
 
 	private void checkAppInitialization() {
-		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
-		}
 		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
@@ -338,6 +333,12 @@ public class MapActivity extends AccessibleActivity {
 	protected void onResume() {
 		super.onResume();
 		long tm = System.currentTimeMillis();
+		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
+			if(!dashboardOnMap.isVisible()) {
+				dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+			}
+		}
+		dashboardOnMap.updateLocation(true, true, false);
 
 		cancelNotification();
 		// fixing bug with action bar appearing on android 2.3.3
@@ -368,9 +369,6 @@ public class MapActivity extends AccessibleActivity {
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings();
 
-		String filterId = settings.getPoiFilterForMap();
-		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
-		mapLayers.getPoiMapLayer().setFilter(poiFilter);
 
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
