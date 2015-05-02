@@ -326,11 +326,11 @@
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
 	<string name="poi_harbour">Puerto</string>
 	<string name="poi_marina">Marina</string>
-	<string name="poi_miniature_golf">Golf en miniatura</string>
+	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_bench">Banco</string>
 	<string name="poi_water_park">Parque acuático</string>
 	<string name="poi_park">Parque</string>
-	<string name="poi_recreation_ground">Parque de recreación</string>
+	<string name="poi_recreation_ground">Zona recreativa</string>
 	<string name="poi_cafe">Café</string>
 	<string name="poi_restaurant">Restaurante</string>
 	<string name="poi_fast_food">Comida rápida</string>
@@ -350,22 +350,22 @@
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_photographer">Fotógrafo</string>
 	<string name="poi_craft_photographic_laboratory">Laboratorio fotográfico</string>
-	<string name="poi_craft_plumber">Plomero</string>
+	<string name="poi_craft_plumber">Fontanero</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_beauty">Salón de belleza</string>
 	<string name="poi_hairdresser">Peluquería</string>
 	<string name="poi_massage">Salón de masajes</string>
 	<string name="poi_tattoo">Salón de tatuajes</string>
 	<string name="poi_laundry">Lavandería</string>
-	<string name="poi_car_rental">Alquiler de auto</string>
+	<string name="poi_car_rental">Alquiler de coches</string>
 	<string name="poi_sauna">Sauna</string>
 	<string name="poi_brothel">Burdel</string>
-	<string name="poi_smoking_area">Área de fumar</string>
-	<string name="poi_mortuary">Mortuario</string>
+	<string name="poi_smoking_area">Área de fumadores</string>
+	<string name="poi_mortuary">Morgue</string>
 	<string name="poi_crematorium">Crematorio</string>
 	<string name="poi_bank">Banco</string>
 	<string name="poi_atm">Cajero automático</string>
-	<string name="poi_accountant">Contador</string>
+	<string name="poi_accountant">Contable</string>
 	<string name="poi_cave_entrance">Entrada a cueva</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
@@ -597,27 +597,27 @@
 	<string name="poi_piste_ice_skate">Patín de hielo</string>
 
 	<string name="poi_dance_floor">Pista de baile</string>
-	<string name="poi_beach_resort">Balneario</string>
+	<string name="poi_beach_resort">Complejo turístico de playa</string>
 	<string name="poi_hunting_stand">Soporte de caza</string>
 	<string name="poi_playground">Parque infantil</string>
 	<string name="poi_swimming_pool">Piscina</string>
-	<string name="poi_village_green">Aldea verde</string>
+	<string name="poi_village_green">Zona verde</string>
 
-	<string name="poi_food_court">Patio de comidas</string>
+	<string name="poi_food_court">Plaza de comidas</string>
 	<string name="poi_drinking_water">Agua potable</string>
 	<string name="poi_craft_agricultural_engines">Motores agrícolas</string>
 	<string name="poi_craft_basket_maker">Cestero</string>
 	<string name="poi_craft_beekeeper">Apicultor</string>
-	<string name="poi_craft_brewery">Cervecero</string>
-	<string name="poi_craft_boatbuilder">Fabricante de botes</string>
+	<string name="poi_craft_brewery">Cervecera</string>
+	<string name="poi_craft_boatbuilder">Fabricante de embarcaciones</string>
 	<string name="poi_craft_bookbinder">Encuadernador</string>
 	<string name="poi_craft_caterer">Catering</string>
 	<string name="poi_craft_dressmaker">Modista</string>
-	<string name="poi_craft_insulation">Aislador</string>
+	<string name="poi_craft_insulation">Aislamientos</string>
 	<string name="poi_craft_plasterer">Yesero</string>
 	<string name="poi_craft_rigger">Montador</string>
 	<string name="poi_craft_sawmill">Aserradero</string>
-	<string name="poi_craft_scaffolder">Monta andamios</string>
+	<string name="poi_craft_scaffolder">Montador de andamios</string>
 	<string name="poi_craft_shoemaker">Zapatero</string>
 	<string name="poi_craft_stonemason">Albañil</string>
 	<string name="poi_craft_tailor">Sastre</string>
@@ -639,7 +639,7 @@
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
 
 	<string name="poi_peak">Pico de montaña</string>
-	<string name="poi_sinkhole">Sumidero</string>
+	<string name="poi_sinkhole">Sima</string>
 	<string name="poi_waterfall">Cascada</string>
 	<string name="poi_bay">Bahía</string>
 	<string name="poi_fjord">Fiordo</string>
@@ -647,17 +647,17 @@
 	<string name="poi_valley">Valle</string>
 	<string name="poi_water">Agua</string>
 	<string name="poi_wetland">Humedal</string>
-	<string name="poi_wood">Madera</string>
+	<string name="poi_wood">Bosque</string>
 	<string name="poi_nature_reserve">Reserva natural</string>
 	<string name="poi_strait">Estrecho</string>
 	<string name="poi_island">Isla</string>
 	<string name="poi_islet">Islote</string>
 
-	<string name="poi_beacon">Faro</string>
-	<string name="poi_beacon_cardinal">Faro cardinal</string>
-	<string name="poi_beacon_lateral">Faro lateral</string>
-	<string name="poi_beacon_safe_water">Faro de agua potable</string>
-	<string name="poi_berth">Litera</string>
+	<string name="poi_beacon">Baliza</string>
+	<string name="poi_beacon_cardinal">Baliza cardinal</string>
+	<string name="poi_beacon_lateral">Baliza lateral</string>
+	<string name="poi_beacon_safe_water">Baliza de aguas seguras</string>
+	<string name="poi_berth">Atraque</string>
 	<string name="poi_buoy_cardinal">Boya cardinal</string>
 	<string name="poi_buoy_installation">Boya de instalación</string>
 	<string name="poi_buoy_lateral">Boya lateral</string>
@@ -700,13 +700,13 @@
 	<string name="poi_bailiff">Alguacil</string>
 	<string name="poi_piste_skitour">Esquí de travesía</string>
 	<string name="poi_piste_sled">Trineo</string>
-	<string name="poi_craft_pottery">Artesano de cerámica</string>
+	<string name="poi_craft_pottery">Alfarería</string>
 	<string name="poi_craft_roofer">Techador</string>
 	<string name="poi_funeral_directors">Funeraria</string>
 	<string name="poi_ridge">Cresta</string>
 	<string name="poi_anchorage">Anclaje</string>
-	<string name="poi_beacon_special_purpose">Faro de propósito especial</string>
-	<string name="poi_seamark_building">Edificio náutico notable</string>
+	<string name="poi_beacon_special_purpose">Baliza de propósito especial</string>
+	<string name="poi_seamark_building">Edificio náutico</string>
 	<string name="poi_quarter">Distrito</string>
 	<string name="poi_attraction_summer_toboggan">Tobogán de verano</string>
 	<string name="poi_internet_access_terminal">Acceso a Internet: terminal</string>
@@ -714,9 +714,9 @@
 	<string name="poi_hot_spring">Fuente termal</string>
 	<string name="poi_resort">Complejo turístico</string>
 
-	<string name="poi_biergarten">Cerveza al aire libre</string>
-	<string name="poi_craft_carpet_layer">Instalador de alfombras</string>
-	<string name="poi_craft_glaziery">Cristalero</string>
+	<string name="poi_biergarten">Terraza</string>
+	<string name="poi_craft_carpet_layer">Instalador de moqueta</string>
+	<string name="poi_craft_glaziery">Vidriero</string>
 	<string name="poi_craft_hvac">Calefacción, ventilación, aire acondicionado</string>
 	<string name="poi_craft_key_cutter">Duplicación de llaves</string>
 	<string name="poi_craft_metal_construction">Construcciones de metal</string>
@@ -729,11 +729,11 @@
 	<string name="poi_craft_tiler">Alicatador</string>
 	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
 
-	<string name="poi_craft_computer">Reparación de computadoras</string>
-	<string name="poi_saddle">Guarnicionero</string>
+	<string name="poi_craft_computer">Montaje de computadoras</string>
+	<string name="poi_saddle">Collado</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
-	<string name="poi_seamark_bridge">Señal de puente</string>
+	<string name="poi_seamark_bridge">Puente náutico</string>
 	<string name="poi_buoy_isolated_danger">Boya de peligro aislado</string>
 	<string name="poi_daymark">Señal diurna</string>
 	<string name="poi_landmark">Referencia terrestre</string>
@@ -763,6 +763,6 @@
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military_nuclear_explosion_site">Sitio de explosión nuclear</string>
 <string name="poi_ice_stock">Curling bávaro</string>
-	<string name="poi_stone">Roca sobresaliente</string>
+	<string name="poi_stone">Roca reseñable</string>
 	<string name="poi_piste">Pista</string>
 	</resources>
