@@ -70,8 +70,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
-		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
-				|| Version.isDeveloperVersion(getMyApplication())) &&
+		if ((Version.isDeveloperVersion(getMyApplication())) &&
 				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
 			version = new Preference(this);
 			version.setOnPreferenceClickListener(this);
