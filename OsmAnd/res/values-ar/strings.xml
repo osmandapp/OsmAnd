@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -743,7 +744,7 @@
     <string name="app_modes_choose">ملامح التطبيق</string>
 	<string name="tip_faq">أسئلة شائعة</string>
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
-    <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
+    <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة الشائعة.</string>
     <string name="local_osm_changes_delete_all_confirm">ستحذف %1$d من التغيرات .هل انت متأكد ؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
     
@@ -855,7 +856,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	</string>
 	<string name="osmand_rastermaps_plugin_description">تظهر الإعدادات لتكوين مجموعة متنوعة من الخرائط عبر الإنترنت أو مؤقتا البلاط كما الخريطة الأساسية أو تراكب / خرائط الأساس الذي تقوم عليه. ويمكن أيضا أن هذه الخرائط تكون مستعدة حاليا ونسخها إلى مجلد OsmAnd</string>
 	
-	<string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثر تحميل ملفات الخرائط، يتم حفظ التغييرات إلى ملف محلي بدلا</string>
+	<string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
 	<string name="av_camera_focus_descr">تحديد نوع الكاميرا الداخلية ,التركيز</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		↵
@@ -1073,14 +1074,14 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 →
 	</string>
 	<string name="use_transparent_map_theme">السمة الشفافة</string>
-	<string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز</string>
+	<string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز.</string>
 	<string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
 	<string name="choose_auto_follow_route">عرض خريطة في المنتصف تلقائيًا</string>
 	<string name="choose_auto_follow_route_descr">الوقت حتى عرض خريطة بالتزامن مع الموضع الحالي</string>
 	<string name="auto_follow_route_never">ابدا</string>
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
-	<string name="auto_follow_route_navigation_descr">خريطة صناعة السيارات في مركز عرض فقط أثناء التنقل</string>
-	<string name="auto_follow_location_enabled">توسيط عرض الخريطة الحالية تلقائيا</string>
+	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء التنقل.</string>
+	<string name="auto_follow_location_enabled">توسيط عرض الخريطة تلقائيا مفعل.</string>
 	<string name="pref_vector_rendering">خيارات محددةناقلات العارض</string>
 	<string name="pref_overlay">غطاء/بطانة</string>
 	<string name="pref_raster_map">اعدادات مصدر الخريطة</string>
@@ -1105,11 +1106,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 → → \ ن \ ر التحسينات الصغيرة ↵
 →
 	</string>
-	<string name="file_can_not_be_renamed">لا يمكن اعادة تسمية الملف</string>
-	<string name="file_with_name_already_exists">يوجد بالفعل ملف بهذا الاسم</string>
+	<string name="file_can_not_be_renamed">لا يمكن اعادة تسمية الملف.</string>
+	<string name="file_with_name_already_exists">يوجد بالفعل ملف بهذا الاسم.</string>
 	<string name="gpx_navigation">الطريق GPX</string>
-	<string name="poi_query_by_name_matches_categories">وجد عدةملفات POI قابلة للاستعمال</string>
-	<string name="data_to_search_poi_not_available">البيانات المحلية للبحث POI غير موجودة</string>
+	<string name="poi_query_by_name_matches_categories">وجد عدة تصنيفات POI توافق الاستعلام:</string>
+	<string name="data_to_search_poi_not_available">البيانات المحلية لبحث POI غير موجودة.</string>
 	<string name="poi_filter_by_name">البحث بالاسم</string>
 	<string name="old_poi_file_should_be_deleted">ملف بيانات POI \'%1$s\' لا لزوم له ويمكن حذفه.</string>
 	<string name="update_poi_file_not_found">ملف المحلية للحفاظ على التغييرات POI لم يتم العثور على وتعذر إنشاء.</string>
@@ -1120,11 +1121,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="poi_filter_nominatim">تشعبات على الانترنت</string>
 	<string name="search_position_current_location_search">يبحث عن الموضع…</string>
 	<string name="search_position_current_location_found">اسس موقف</string>
-	<string name="search_position_address">عنوان</string>
-	<string name="search_position_favorites">المفضلة</string>
+	<string name="search_position_address">عنوان…</string>
+	<string name="search_position_favorites">المفضلة…</string>
 	<string name="search_position_undefined">غير محدد</string>
 	
-	<string name="search_position_current_location">الوضع الحالى</string>
+	<string name="search_position_current_location">الموقع الحالي…</string>
 	<string name="search_position_map_view">مشاركةعرض الخريطة</string>
 	<string name="select_search_position">بحث قريب</string>
 	<string name="context_menu_item_search">بحث بالقرب من هنا</string>
@@ -1142,9 +1143,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 →
 	</string>
 	<string name="shared_string_save_as_gpx">حفظ الطريق كمسار GPX</string>
-	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح</string>
+	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح ك \'%1$s\'.</string>
 	<string name="filename_input">اسم الملف </string>
-	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا</string>
+	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا.</string>
 	<string name="shared_string_save">حفظ</string>
 	
 	<string name="local_index_upload_gpx_description">رفع ملفات GPX إلى مجتمع OSM. ستستخدم لتحسين الخرائط.</string>
@@ -1154,14 +1155,14 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="show_more_map_detail_descr">إظهار بعض تفاصيل الخريطة المتجهية (الطرق ...الخ) عند تقريبها أكثر</string>
 	<string name="favourites_delete_multiple_succesful">حٌذفت النقطة المفضلة بنجاح.</string>
 	<string name="favorite_delete_multiple">"أنت بصدد حذف %1$d نقطة مفضلة  و٪2$d مجموعة مفضلات. هل أنت متأكد؟"</string>
-	<string name="favorite_home_category">منزل</string>
+	<string name="favorite_home_category">المنزل</string>
 	<string name="favorite_friends_category">اصدقاء</string>
 	<string name="favorite_places_category">الاماكن</string>
 	<string name="favorite_default_category">اخرون</string>
 	<string name="favourites_edit_dialog_name">اسم</string>
 	<string name="favourites_edit_dialog_category">فئة</string>
 	<string name="vector_map_not_needed">لا"شكرا</string>
-	<string name="basemap_missing">خريطة العالم الأساسية (التي تغطي العالم كله في الأزيز صغيرة) مفقود. يرجى النظر تحميله World_basemap_x.obf للبيئة كاملة</string>
+	<string name="basemap_missing">خريطة العالم الأساسية (التي تغطي العالم كله بتقريب صغير) مفقودة. يرجى تحميل World_basemap_x.obf لبيئة كاملة.</string>
 	<string name="vector_data_missing">على متن (\'حاليا \') البيانات مفقود على بطاقة SD. يرجى النظر إلى تحميل البرنامج من اجل استخدام الخرائط دون اتصال.</string>
 	<string name="local_index_gpx_info_show">\n\nاضغط باستمرار لعرض الخيارات</string>
 	
@@ -1226,10 +1227,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="overlay_transparency">شفافية التراكب</string>
 	<string name="map_transparency_descr">تعديل شفافية الخريطة القاعدة</string>
 	<string name="map_transparency">شفافية الخريطة القاعدة</string>
-	<string name="layer_underlay">الاساس الذي تقوم عليه الخريطة</string>
+	<string name="layer_underlay">خريطة تحتية…</string>
 	<string name="map_underlay">خريطة الاساس الذي تقوم عليها</string>
 	<string name="map_underlay_descr">اختيار خريطة الاساس الذي تقوم عليه</string>
-	<string name="layer_overlay">خريطة تراكب</string>
+	<string name="layer_overlay">خريطة فوقية…</string>
 	<string name="shared_string_none">لا شيء</string>
 	<string name="map_overlay">خريطة تراكب</string>
 	<string name="map_overlay_descr">اختيار خريطة التراكب</string>
@@ -1301,7 +1302,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="unit_of_length_descr">تغيير وحدات الطول والسرعة</string>
 	<string name="unit_of_length">وحدة القياس</string>
 	<string name="si_mi_foots">ميل/قدم</string>
-	<string name="si_mi_yard">ميل/ متر</string>
+	<string name="si_mi_yard">ميل/ ياردة</string>
 	<string name="si_km_m">كيلومتر/متر</string>
 	<string name="yard">ياردة</string>
 	<string name="foot">قدم</string>
@@ -1435,7 +1436,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="keep_informing_never">أبدًا</string>
     
 	<string name="specified_dir_doesnt_exist">تعذر العثور على الدليل المحدد.</string>
-	<string name="application_dir">دليل التخزين</string>
+	<string name="application_dir">مجلد تخزين البيانات</string>
 	
 	<string name="osmand_net_previously_installed">هناك نسخة سابقة مثبّتة من OsmAnd. سوف تُنقل كل البيانات المُخزنة إلى التطبيق الجديد ما عدا النقاط المفضلة التي يجب عليك تصديرها من التطبيق القديم ثم استيرادها في التطبيق الجديد.</string>
 	<string name="gps_status_app_not_found">تطبيق GPS Status غير مثبّت. هل تريد البحث عنه في المتجر؟</string>
@@ -1444,4 +1445,34 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	
 	
+    <string name="application_dir_change_warning3">هل ترغب أن يقوم OsmAnd بنسخ بياناته أيضا إلى المسار الجديد؟</string>
+    <string name="specified_directiory_not_writeable">لم يمكن إنشاء الخرائط في المجلد المحدد</string>
+	<string name="copying_osmand_file_failed">فشل نسخ الملفات</string>    
+    <string name="storage_directory_external">تخزين خارجي</string>
+    <string name="storage_directory_multiuser">تخزين متعدد المستخدمين</string>
+    <string name="storage_directory_internal_app">ذاكرة التطبيق الداخلية</string>
+    <string name="storage_directory_manual">محدد يدويا</string>
+    <string name="storage_directory_default">الذاكرة الداخلية</string>
+    <string name="storage_directory">تخزين الخريطة</string>
+    <string name="shared_string_copy">نسخ</string>
+    <string name="filter_poi_hint">فلترة حسب الاسم</string>
+    <string name="search_poi_category_hint">اكتب للبحث عن الجميع</string>
+    <string name="shared_string_open">فتح</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">مساعد OSM mapper</string>
+	<string name="agps_info">معلومات A-GPS</string>
+	<string name="shared_string_manage">إدارة</string>
+	<string name="shared_string_edit">تحرير</string>
+	<string name="shared_string_places">أماكن</string>
+	<string name="shared_string_search">بحث</string>
+	<string name="shared_string_show_description">عرض الوصف</string>
+	<string name="shared_string_message">رسالة</string>
+	<string name="welmode_download_maps">حمل الخرائط</string>
+	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
+	<string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
+	<string name="shared_string_my_places">المفضلة</string>
+	<string name="days_behind">يوما متأخرة</string>
+	<string name="watch">شاهد</string>
+	<string name="routing_attr_no_new_routing_name">لا تستخدم قواعد الإصدار 1.9</string>
+    <string name="navigate_point_northing">نحو الشمال</string>
+    <string name="home_button">البداية</string>
     </resources>
