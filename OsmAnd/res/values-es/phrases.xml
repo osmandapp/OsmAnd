@@ -661,7 +661,7 @@
 	<string name="poi_buoy_cardinal">Boya cardinal</string>
 	<string name="poi_buoy_installation">Boya de instalación</string>
 	<string name="poi_buoy_lateral">Boya lateral</string>
-	<string name="poi_buoy_safe_water">Boya de agua potable</string>
+	<string name="poi_buoy_safe_water">Señal de aguas seguras</string>
 	<string name="poi_buoy_special_purpose">Boya de propósito especial</string>
 	<string name="poi_distance_mark">Señal de distancia</string>
 	<string name="poi_dry_dock">Dique seco</string>
@@ -733,14 +733,14 @@
 	<string name="poi_saddle">Guarnicionero</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
-	<string name="poi_seamark_bridge">Puente náutico notable</string>
-	<string name="poi_buoy_isolated_danger">Boya, peligro aislado</string>
+	<string name="poi_seamark_bridge">Señal de puente</string>
+	<string name="poi_buoy_isolated_danger">Boya de peligro aislado</string>
 	<string name="poi_daymark">Señal diurna</string>
 	<string name="poi_landmark">Referencia terrestre</string>
 	<string name="poi_seamark_light">Luz náutica</string>
 	<string name="poi_seamark_light_minor">Luz náutica menor</string>
 	<string name="poi_seamark_light_float">Luz náutica flotante</string>
-	<string name="poi_seamark_light_vessel">Luz náutica en barco</string>
+	<string name="poi_seamark_light_vessel">Buque faro</string>
 	<string name="poi_seamark_light_major">Luz náutica mayor</string>
 	<string name="poi_mooring">Amarre</string>
 	<string name="poi_notice">Aviso náutico</string>

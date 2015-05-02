@@ -489,4 +489,22 @@
 	<string name="poi_mineshaft">Pou de mina</string>
 	<string name="poi_adit">Boca de mina</string>
 	<string name="poi_sanatorium">Sanatori</string>
+	<string name="poi_9pin">Bitlles alemanyes</string>
+	<string name="poi_bowls">Bowls</string>
+	<string name="poi_canoe">Canoa</string>
+	<string name="poi_racquet">Raqueta</string>
+	<string name="poi_hotel">Hotel</string>
+	<string name="poi_hostel">Alberg</string>
+	<string name="poi_motel">Motel</string>
+	<string name="poi_alpine_hut">Refugi de muntanya</string>
+	<string name="poi_chalet">Xalet</string>
+	<string name="poi_apartment">Apartament</string>
+	<string name="poi_wilderness_hut">Cabana</string>
+
+	<string name="poi_place_of_worship">Temple</string>
+	<string name="poi_religion_christian">Temple: cristià</string>
+	<string name="poi_religion_jewish">Temple: sinagoga</string>
+	<string name="poi_religion_muslim">Temple: mesquita</string>
+	<string name="poi_religion_sikh">Temple: sikhisme</string>
+	<string name="poi_religion_buddhist">Temple budista</string>
 	</resources>
