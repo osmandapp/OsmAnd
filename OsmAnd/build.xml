@@ -92,7 +92,7 @@
 			</fileset>
 		</copy>
 		<sync todir="assets/help/">
-			<fileset dir="../../help/">
+			<fileset dir="../../help/help">
 				<include name="*.html" />
 				<include name="images/**/*.png" />
 			</fileset>

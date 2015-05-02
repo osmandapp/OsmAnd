@@ -141,12 +141,10 @@ android {
 
 	buildTypes {
 		debug {
-		    minifyEnabled true
 		    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
-		    minifyEnabled true
 		    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
 			signingConfig signingConfigs.publishing
 		}
@@ -267,13 +265,13 @@ task cleanupDuplicatesInCore() {
 	// doesn't work for legacy debug builds
 	doLast {
 		file("libgnustl/armeabi").mkdirs()
-		println file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
+		file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
 		file("libgnustl/armeabi-v7a").mkdirs()
-		println file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
+		file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
 		file("libgnustl/mips").mkdirs()
-		println file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
+		file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
 		file("libgnustl/x86").mkdirs()
-		println file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
+		file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
 	}
 }
 tasks.withType(JavaCompile) {
