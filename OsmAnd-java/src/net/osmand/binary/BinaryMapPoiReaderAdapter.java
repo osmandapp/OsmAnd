@@ -21,11 +21,9 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
-import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -40,6 +38,7 @@ public class BinaryMapPoiReaderAdapter {
 	
 	public static final int SHIFT_BITS_CATEGORY = 7;
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1 ;
+	private static final int ZOOM_TO_SKIP_FILTER_READ = 6;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
 	private static final int BUCKET_SEARCH_BY_NAME = 5;
 	
@@ -451,10 +450,8 @@ public class BinaryMapPoiReaderAdapter {
 		int indexOffset = codedIS.getTotalBytesRead();
 		long time = System.currentTimeMillis();
 		TLongHashSet skipTiles = null;
-		int zoomToSkip = 31;
 		if(req.zoom != -1){
 			skipTiles = new TLongHashSet();
-			zoomToSkip = req.zoom + ZOOM_TO_SKIP_FILTER;
 		}
 		int length ;
 		int oldLimit ;
@@ -481,13 +478,27 @@ public class BinaryMapPoiReaderAdapter {
 				if(skipTiles != null){
 					skipTiles.clear();
 				}
-				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
-						"ms. Found " + offsets.length +" subtrees");
+				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) + " ms. Found "
+						+ offsets.length + " subtrees");
 				for (int j = 0; j < offsets.length; j++) {
+					long skipVal = offsetsMap.get(offsets[j]);
+					if (skipTiles != null && skipVal != -1) {
+						int dzoom = ZOOM_TO_SKIP_FILTER_READ - ZOOM_TO_SKIP_FILTER;
+						long dx = (skipVal >> ZOOM_TO_SKIP_FILTER_READ);
+						long dy = skipVal - (dx << ZOOM_TO_SKIP_FILTER_READ);
+						skipVal = ((dx >> dzoom) << ZOOM_TO_SKIP_FILTER) | (dy >> dzoom);
+						if (skipVal != -1 && skipTiles.contains(skipVal)) {
+							continue;
+						}
+					}
 					codedIS.seek(offsets[j] + indexOffset);
 					int len = readInt();
 					int oldLim = codedIS.pushLimit(len);
-					readPoiData(left31, right31, top31, bottom31, req, region, skipTiles, zoomToSkip);
+					boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
+							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER );
+					if(read && skipVal != -1 && skipTiles != null) {
+						skipTiles.add(skipVal);
+					}
 					codedIS.popLimit(oldLim);
 					if(req.isCancelled()){
 						return;
@@ -542,20 +553,21 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiData(int left31, int right31, int top31, int bottom31, 
+	private boolean readPoiData(int left31, int right31, int top31, int bottom31, 
 			SearchRequest<Amenity> req, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
+		boolean read = false;
 		while(true){
 			if(req.isCancelled()){
-				return;
+				return read;
 			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return;
+				return read;
 			case OsmandOdb.OsmAndPoiBoxData.X_FIELD_NUMBER :
 				x = codedIS.readUInt32();
 				break;
@@ -574,19 +586,21 @@ public class BinaryMapPoiReaderAdapter {
 					if (toSkip != null) {
 						int xp = (int) MapUtils.getTileNumberX(zSkip, am.getLocation().getLongitude());
 						int yp = (int) MapUtils.getTileNumberY(zSkip, am.getLocation().getLatitude());
-						long val = (((long) xp) << zSkip) | yp;
-						if (!toSkip.contains(val)) {
+						long valSkip = (((long) xp) << zSkip) | yp;
+						if (!toSkip.contains(valSkip)) {
 							boolean publish = req.publish(am);
 							if(publish) {
-								toSkip.add(val);
+								read = true;
+								toSkip.add(valSkip);
 							}
-						}
-						if(zSkip <= zoom){
+						} else if(zSkip <= zoom){
 							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-							return;
+							return read;
 						}
 					} else {
-						req.publish(am);
+						if(req.publish(am)) {
+							read = true;
+						}
 					}
 				}
 				break;
@@ -788,9 +802,10 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private boolean readBoxField(int left31, int right31, int top31, int bottom31,
-			int px, int py, int pzoom, TIntLongHashMap offsetsMap, TLongHashSet skipTiles, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+			int px, int py, int pzoom, TIntLongHashMap offsetsMap, TLongHashSet skipTiles, 
+			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
 		req.numberOfReadSubtrees++;
-		int zoomToSkip = req.zoom + ZOOM_TO_SKIP_FILTER;
+		int zoomToSkip = req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER_READ;
 		boolean checkBox = true;
 		boolean existsCategories = false;
 		int zoom = pzoom;
@@ -863,7 +878,6 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER: {
 				int x = dx + (px << (zoom - pzoom));
 				int y = dy + (py << (zoom - pzoom));
-				long l = ((((x << zoom) | y) << 5) | zoom);
 				boolean read = true;
 				if(req.tiles != null) {
 					long zx = x << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
@@ -872,11 +886,13 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				int offset = readInt();
 				if (read) {
-					offsetsMap.put(offset, l);
 					if (skipTiles != null && zoom >= zoomToSkip) {
-						long val = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip)
+						long valSkip = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip)
 								| (((long) y) >> (zoom - zoomToSkip));
-						skipTiles.add(val);
+						offsetsMap.put(offset, valSkip);
+						skipTiles.add(valSkip);
+					} else {
+						offsetsMap.put(offset, -1);
 					}
 				}
 			}	break;
