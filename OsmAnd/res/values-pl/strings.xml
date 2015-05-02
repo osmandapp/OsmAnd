@@ -207,8 +207,8 @@
 \n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="shared_string_next">Następny</string>
   <string name="shared_string_previous">Wstecz</string>
-  <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
-  <string name="unit_of_length">Jednostki długości</string>
+  <string name="unit_of_length_descr">Zmienia jednostki długości i prędkości</string>
+  <string name="unit_of_length">Jednostki miar</string>
   <string name="si_mi_foots">Mile/stopy</string>
   <string name="si_mi_yard">Mile/jardy</string>
   <string name="si_km_m">Kilometry/metry</string>
@@ -835,7 +835,7 @@
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
   <string name="profile_settings">Ustawienia specyficzne dla profilu</string>
   <string name="global_settings">Ustawienia ogólne</string>
-  <string name="global_app_settings">Ustawienia globalne aplikacji</string>
+  <string name="global_app_settings">Ustawienia ogólne</string>
   <string name="tip_osm_improve">Poprawa danych OSM</string>
   <string name="tip_osm_improve_t">OsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.
 		\n\nW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'
@@ -1206,9 +1206,9 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
 	<string name="street_name">Ulica</string>
 	<string name="hno">Numer domu</string>
-    <string name="choose_osmand_theme">Motyw aplikacji</string>
+    <string name="choose_osmand_theme">Styl</string>
     <string name="accessibility_options">Opcje ułatwień dostępu</string>
-    <string name="choose_osmand_theme_descr">Wybierz motyw aplikacji</string>
+    <string name="choose_osmand_theme_descr">Wybiera styl graficzny programu</string>
     
     <string name="monitoring_settings_descr">Skonfiguruj opcje zapisywania swoich wycieczek</string>
     
@@ -1956,7 +1956,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="coordinates">Współrzędne</string>
 	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
-    <string name="use_opengl_render">Użyj renderowania OpenGL</string>
+    <string name="use_opengl_render">Renderowanie OpenGL</string>
     <string name="use_opengl_render_descr">Używa sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
     <string name="error_avoid_specific_road">Nie znaleziono objazdu</string>
     <string name="dash_download_msg_none">Czy chcesz pobrać mapy offline?</string>
