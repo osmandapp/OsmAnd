@@ -6,7 +6,7 @@
   <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
   <string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
   <string name="pref_overlay">Podkłady / nakładki</string>
-  <string name="pref_raster_map">Ustawienia źródła mapy</string>
+  <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Autocentrowanie mapy</string>
   <string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
@@ -395,7 +395,7 @@
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Wyłącz dźwięk</string>
   <string name="menu_mute_on">Włącz dźwięk</string>
-  <string name="voice_provider_descr">Wybiera głos wskazówek nawigatora</string>
+  <string name="voice_provider_descr">Wybiera głos komunikatów nawigatora</string>
   <string name="voice_provider">Nawigacja głosowa</string>
   <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
@@ -685,7 +685,7 @@
   
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
   <string name="map_online_data">Mapy online i kafelki</string>
-  <string name="map_online_data_descr">Użyj map online (pobieraj i przechowuj kafelki na karcie SD)</string>
+  <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie SD)</string>
   <string name="online_map_settings">Mapy online</string>
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   
@@ -807,7 +807,7 @@
   <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=szer., {1}=dł., {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, kierunek={6}</string>
   <string name="live_monitoring_url">Adres śledzenia online</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia \'Nagrywanie trasy\'.</string>
-  <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
+  <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
 \n\t- Dane Wikipedii z artykułami w trybie offline
 \n\t- Uaktualnione mapy
@@ -1051,7 +1051,7 @@
 	</string>
 	<string name="email">email</string>
 <string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
-    <string name="map_widget_show_destination_arrow">Pokaż kierunek do celu</string>
+    <string name="map_widget_show_destination_arrow">Kierunek do celu</string>
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
@@ -1830,8 +1830,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Uruchom śledzenie online</string>
 	<string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
-	<string name="gpx_monitoring_start">Uruchom nagrywanie GPX</string>
-	<string name="gpx_monitoring_stop">Zatrzymaj nagrywanie GPX</string>
+	<string name="gpx_monitoring_start">Rozpocznij rejestrowanie GPX</string>
+	<string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie GPX</string>
     <string name="gpx_start_new_segment">Zacznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Ukrywanie budynków</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ukryj trasy niedostępne dla aut</string>
