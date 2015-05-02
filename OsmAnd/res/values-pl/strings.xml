@@ -1536,7 +1536,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_mode_motorcycle">Motocykl</string>
     <string name="app_mode_boat">Łódź</string>
     <string name="app_mode_aircraft">Samolot</string>
-    <string name="map_widget_map_rendering">Rysowanie mapy</string>
+    <string name="map_widget_map_rendering">Renderowanie mapy</string>
     <string name="app_modes_choose">Profile aplikacji</string>
 	<string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
@@ -1804,7 +1804,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Wejdź do grupy przez zaproszenie</string>
     <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.\n - Prywatne grupy są ograniczone do 8 osób.\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
-    <string name="osmo_group_information">Przeczytaj przed założeniem grupy!</string>
+    <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie udało się zalogować do OsMo</string>
     <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
     <string name="osmo_auto_connect_descr">Automatycznie połącz to serwisu po uruchomieniu programu</string>
@@ -1812,8 +1812,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_start_service">Serwis OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pobrano %1$s ścieżek OsMo.</string>
     <string name="no_index_file_to_download">Nie znaleziono pobranych danych, proszę sprawdzić połączenie internetowe.</string>
-    <string name="osmo_auth_error_short">Błąd autoryzacji</string>
-    <string name="osmo_auth_error">Wystąpił błąd autoryzacji OsMo: %1$s.\n To może być przerwa w działaniu usługi lub twoja rejestracja straciła ważność.\n Chcesz kontynuować z nową rejestracją?</string>
+    <string name="osmo_auth_error_short">Nie udało się uwierzytelnić</string>
+    <string name="osmo_auth_error">Wystąpił błąd uwierzytelnienia OsMo: %1$s.\n To może być wina przerwy w działaniu usługi lub rejestracja użytkownika straciła ważność.\n Kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
 	<string name="stop_navigation_service">Wyłącz</string>
 	<string name="enable_sleep_mode">Włącz tryb uśpienia GPS</string>
@@ -1841,10 +1841,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
     <string name="rendering_attr_hideAccess_name">Ukryj ograniczenia dostępu</string>
-    <string name="rendering_attr_showAccess_name">Pokaż ograniczenia dostępu</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Pokaż jakość dróg</string>
-    <string name="rendering_attr_showSurfaces_name">Pokaż nawierzchnię dróg</string>
-    <string name="rendering_attr_showCycleRoutes_name">Pokaż ścieżki rowerowe</string>
+    <string name="rendering_attr_showAccess_name">Ograniczenia dostępu</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Jakość dróg</string>
+    <string name="rendering_attr_showSurfaces_name">Nawierzchnia dróg</string>
+    <string name="rendering_attr_showCycleRoutes_name">Ścieżki rowerowe</string>
     <string name="lang_al">Albański</string>
 	<string name="lang_ar">Arabski</string>
 	<string name="lang_fa">Perski</string>
@@ -1928,7 +1928,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_widget_top">Pasek statusu</string>
 	<string name="map_widget_right">Prawy panel</string>
 	<string name="map_widget_left">Lewy panel</string>
-    <string name="shared_string_show">Wyświetl</string>
+    <string name="shared_string_show">Wyświetlanie</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włącz ekran</string>
@@ -1950,7 +1950,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	
 	<string name="home_button">Ekran startowy</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
-	<string name="search_for">Wyszukaj</string>
+	<string name="search_for">Wyszukiwanie</string>
 	
 	<string name="shared_string_show_all">WYŚWIETL WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
