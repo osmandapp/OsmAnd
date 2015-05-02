@@ -613,7 +613,7 @@
 		\n\t* إصلاح العديد من العلل
     </string>
     <string name="download_hillshade_item">الظل</string>
-    <string name="download_hillshade_maps">تراكب الظّل</string>
+    <string name="download_hillshade_maps">ظل المرتفعات فوقي</string>
     <string name="tip_recent_changes_1_1_2_t">التّغييرات في 1.1.2:
 		\n\t* تحسينات في ملحق الصّوت و الصّورة (صور مع بيانات EXIF)
 		\n\t* مُلحق يضبط الاستعمال الثّاني و يعيد هيكلة الخطوط المحيطية
@@ -854,7 +854,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 قائمة البلدان المدعومة ( أساسا في جميع أنحاء العالم ! ) : ↵
 أفغانستان ، ألبانيا ، الجزائر ، أندورا ، أنغولا ، أنغيلا ، أنتيغوا و بربودا، الأرجنتين، أرمينيا، أروبا، أستراليا ، النمسا ، أذربيجان ، جزر البهاما، البحرين ، بنغلاديش ، بربادوس، بيلاروس ، بلجيكا، بليز، بنن ، برمودا ، بوتان ، بوليفيا ، بونير ، البوسنة و الهرسك ، بوتسوانا ، البرازيل ، جزر فيرجين البريطانية ، بروناي ، بلغاريا ، بوركينا فاسو، بوروندي ، كمبوديا ، الكاميرون، كندا، الرأس الأخضر ، جمهورية أفريقيا الوسطى ، تشاد ، شيلي ، الصين ، كولومبيا ، جزر القمر، الكونغو ، كوستاريكا وساحل العاج و كرواتيا وكوبا و جزر الأنتيل ، قبرص ، جمهورية التشيك ، الدنمارك ، جيبوتي ، دومينيكا ، جمهورية الدومينيكان ، الإكوادور ، مصر ، السلفادور ، غينيا الاستوائية ، إريتريا ، إستونيا ، إثيوبيا ، فيجي ، فنلندا ، فرنسا ، غيانا الفرنسية، الفرنسية بولينيزيا، الغابون ، غامبيا ، جورجيا ، ألمانيا، غانا ، جبل طارق، اليونان ، جرينلاند ، وغرينادا ، جوادلوب ، وغوام ، وغواتيمالا، غيرنسي ، وغينيا ، وغينيا بيساو ، وغيانا، وهايتي، و الفاتيكان ، وهندوراس، هونغ كونغ ، هنغاريا، آيسلندا ، الهند ، إندونيسيا ، إيران ، العراق ، ايرلندا ، جزيرة مان ، اسرائيل، ايطاليا ، جامايكا ، اليابان ، جيرسي، الأردن ، كازاخستان، كينيا ، كيريباتي ، كوريا الشمالية وكوريا الجنوبية، الكويت ، قرغيزستان ، لاوس ، لاتفيا، لبنان ، ليسوتو ، ليبيريا ، ليبيا ، ليختنشتاين، ليتوانيا ، لوكسمبورغ، ماكاو ، مقدونيا ، مدغشقر ، ملاوي ، ماليزيا ، جزر المالديف ، مالي ، مالطا ، مارتينيك، موريتانيا ، موريشيوس ، مايوت ، المكسيك ، ميكرونيزيا، مولدوفا ، موناكو ، ومنغوليا، الجبل الأسود ، ومونتسيرات، و المغرب وموزامبيق ، ميانمار ، ناميبيا ، ناورو ، نيبال، هولندا ، جزر الأنتيل الهولندية ، كاليدونيا الجديدة، نيوزيلندا ، نيكاراغوا ، النيجر ، نيجيريا ، النرويج، عمان، باكستان ، بالاو، الأراضي الفلسطينية ، بنما ، بابوا غينيا الجديدة ، باراغواي ، بيرو ، الفلبين ، بولندا ، البرتغال ، بورتوريكو، قطر ، رومانيا ، روسيا ، رواندا ، سانت بارتيليمي ، وسانت هيلانة ، وسانت كيتس و نيفيس ، سانت لوسيا ، وسانت مارتن ، وسانت بيير و ميكلون، سانت فنسنت وجزر غرينادين ، ساموا ، سان مارينو ، المملكة العربية السعودية، السنغال ، صربيا ، سيشيل ، سيراليون ، سنغافورة ، سلوفاكيا ، سلوفينيا ، الصومال ، جنوب أفريقيا ، جورجيا الجنوبية ، وجنوب السودان، أسبانيا، سري ل انكا، السودان، سورينام ، سوازيلاند ، السويد، سويسرا، سوريا، تايوان ، طاجيكستان ، تنزانيا ، تايلاند ، وتيمور الشرقية ، وتوغو ، وتوكيلاو ، وتونغا ، وترينيداد و توباغو، تونس، تركيا ، تركمانستان ، توفالو، أوغندا ، أوكرانيا ، الإمارات العربية المتحدة ، المملكة المتحدة (UK ) ، الولايات المتحدة الأمريكية (USA) ، أوروغواي ، أوزبكستان ، فانواتو ، فنزويلا ، فيتنام ، واليس و فوتونا، الصحراء الغربية ، اليمن ، زامبيا ، زيمبابوي. ↵
 	</string>
-	<string name="osmand_rastermaps_plugin_description">تظهر الإعدادات لتكوين مجموعة متنوعة من الخرائط عبر الإنترنت أو مؤقتا البلاط كما الخريطة الأساسية أو تراكب / خرائط الأساس الذي تقوم عليه. ويمكن أيضا أن هذه الخرائط تكون مستعدة حاليا ونسخها إلى مجلد OsmAnd</string>
+	<string name="osmand_rastermaps_plugin_description">"عن طريق هذه الإضافة يمكنك الوصول إلى أنواع عديدة من الخرائط الحية (مسبقة التجهيز)، بدءا من خرائط Openstreetmap مسبقة التجهيز (مثل Mapnik) إلى صور الأقمار الصناعية والطبقات محددة الغرض مثل خرائط الطقس، وخرائط المناخ، والخرائط الجيولوجية،،، إلخ.\n\nأي من هذه الخرائط يمكن استخدامه كخريطة أساسية (قاعدة) لعرضها على واجهة خريطة OsmAnd، أو كخريطة فوقية أو تحتية لخريطة أساسية أخرى (مثل خرائط أوسمند العادية). ولكي تجعل أي خريطة تحتية أكثر ظهورا، فيمكنك إخفاء عناصر محددة من خرائط OsmAnd المتجهية عن طريق قائمة \'ضبط الخريطة\' كما ترغب.\n\nالخرائط مسبقة التجهيز يمكن الحصول عليها إما مباشرة من مصادر أونلاين، أو يمكن تجهيزها للاستخدام بدون اتصال (ونسخها يدويا إلى مجلد بيانات OsmAnd) بصيغة قواعد بيانات sqlite والتي يمكن إنشاؤها من خلال أدوات خارجية متوفرة ومتنوعة لإعداد الخرائط. "</string>
 	
 	<string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
 	<string name="av_camera_focus_descr">تحديد نوع الكاميرا الداخلية ,التركيز</string>
@@ -1232,7 +1232,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="map_underlay_descr">اختيار خريطة الاساس الذي تقوم عليه</string>
 	<string name="layer_overlay">خريطة فوقية…</string>
 	<string name="shared_string_none">لا شيء</string>
-	<string name="map_overlay">خريطة تراكب</string>
+	<string name="map_overlay">خريطة فوقية</string>
 	<string name="map_overlay_descr">اختيار خريطة التراكب</string>
 	<string name="poi_dialog_other_tags_message">يتم الاحتفاظ بكافة العلامات الاخري</string>
 	<string name="amenity_type_seamark">سيمارك</string>
@@ -1475,4 +1475,57 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="routing_attr_no_new_routing_name">لا تستخدم قواعد الإصدار 1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
     <string name="home_button">البداية</string>
-    </resources>
+    <string name="agps_data_last_downloaded">آخر ما تحميله من بيانات A-GPS: %1$s</string>
+    <string name="welcome_text">OsmAnd يوفر تصفح خرائط عالمي بدون اتصال، وكذلك تنقل عالمي بدون اتصال!</string>
+	<string name="welcome_header">أهلا</string>
+    <string name="current_route">الطريق الحالي</string>
+    <string name="mark_to_delete">اختر للحذف</string>
+	<string name="osmo_grop_name_length_alert">اسم المجموعة ينبغي أن يكون 3 أحرف على الأقل!</string>
+	<string name="confirmation_to_clear_history">هل ترغب في حذف السجلات؟</string>
+    <string name="shared_string_go">ذهاب</string>
+	<string name="osmand_parking_overdue">تأخر</string>
+	<string name="osmand_parking_time_left">يسار</string>
+	<string name="your_edits">تعديلاتك</string>
+    <string name="waypoint_visit_after">زيارة بعد</string>
+    <string name="waypoint_visit_before">زيارة قبل</string>
+    <string name="simulate_your_location">محاكاة الموقع الخاص بك</string>
+    <string name="short_location_on_map">العرض %1$s\nالطول %2$s</string>
+    <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى</string>
+    <string name="routing_settings_2">إعدادات التنقل</string>
+    <string name="general_settings_2">إعدادات عامة</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_ok">موافق</string>
+	<string name="shared_string_dismiss">تجاهل</string>
+	<string name="shared_string_do_not_use">لا تستخدم</string>
+	<string name="shared_string_enable">تفعيل</string>
+	<string name="shared_string_disable">تعطيل</string>
+	<string name="shared_string_enabled">مفعل</string>
+	<string name="shared_string_disabled">معطل</string>
+	<string name="shared_string_selected">محدد</string>
+	<string name="shared_string_selected_lowercase">محدد</string>
+	<string name="shared_string_never">أبداً</string>
+	<string name="shared_string_history">السجلات</string>
+	<string name="shared_string_select_on_map">حدد على الخريطة</string>
+	<string name="shared_string_select_all">تحديد الكل</string>
+	<string name="shared_string_deselect">قم بإلغاء تحديد</string>
+	<string name="shared_string_deselect_all">قم بإلغاء تحديد الكل</string>
+	<string name="shared_string_clear_all">مسح الكل</string>
+	<string name="shared_string_share">مشاركة</string>
+	<string name="shared_string_import">استيراد</string>
+	<string name="shared_string_export">تصدير</string>
+	<string name="shared_string_more">أكثر…</string>
+	<string name="shared_string_refresh">تحديث</string>
+	<string name="shared_string_downloading">تحميل</string>
+	<string name="shared_string_download_successful">تم التحميل بنجاح</string>
+	<string name="shared_string_unexpected_error">حدث خطأ غير متوقع</string>
+	<string name="shared_string_action_template">الإجراء {0}</string>
+	<string name="shared_string_close">إغلاق</string>
+	<string name="shared_string_show">عرض</string>
+	<string name="shared_string_show_all">عرض الكل</string>
+	<string name="shared_string_favorite">مفضلة</string>
+	<string name="shared_string_favorites">المفضلة</string>
+	<string name="shared_string_address">عنوان</string>
+	<string name="shared_string_my_location">موقعي</string>
+	<string name="shared_string_my_favorites">مفضلاتي</string>
+	<string name="shared_string_my_tracks">مساراتي</string>
+	</resources>
