@@ -2030,4 +2030,5 @@
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_copy">Copiar</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     </resources>
