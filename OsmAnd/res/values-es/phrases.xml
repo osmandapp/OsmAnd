@@ -757,7 +757,7 @@
 	<string name="poi_military_landuse">Zona militar</string>
 	<string name="poi_military_airfield">Aeródromo militar</string>
 	<string name="poi_military_bunker">Búnker militar</string>
-	<string name="poi_military_barracks">Barracones</string>
+	<string name="poi_military_barracks">Cuarteles</string>
 	<string name="poi_military_danger_area">Área peligrosa</string>
 	<string name="poi_military_range">Campo de tiro militar</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
