@@ -1945,4 +1945,5 @@
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
 	<string name="index_name_netherlands">Európa - Hollandia</string>
 	<string name="application_dir_change_warning3">Szeretné, hogy az OsmAnd az adatfájljait is az új helyre másolja?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
     </resources>
