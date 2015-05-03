@@ -1,5 +1,6 @@
 include ':OsmAnd-java'
 include ':OsmAnd'
+include ':eclipse-compile:appcompat'
 include ':plugins:OsmAnd-AddressPlugin'
 include ':plugins:Osmand-ParkingPlugin'
 include ':plugins:Osmand-Sherpafy'
