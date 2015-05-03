@@ -666,7 +666,11 @@ public class RouteProvider {
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
-			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			int currentRoute = params.previousToRecalculate.getCurrentRoute();
+			List<RouteSegmentResult> originalRoute = params.previousToRecalculate.getOriginalRoute();
+			if(originalRoute != null && currentRoute < originalRoute.size()) {
+				ctx.previouslyCalculatedRoute = originalRoute.subList(currentRoute, originalRoute.size());
+			}
 		}
 		if(complex && router.getRecalculationEnd(ctx) != null) {
 			complex = false;
@@ -676,9 +680,7 @@ public class RouteProvider {
 				RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;
-			if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
-				complexCtx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
-			}	
+			complexCtx.previouslyCalculatedRoute = ctx.previouslyCalculatedRoute;
 		}
 		
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
