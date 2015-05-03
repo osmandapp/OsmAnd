@@ -355,4 +355,7 @@
 	<string name="poi_first_aid">急救</string>
 	<string name="poi_dentist">牙醫</string>
 	<string name="poi_nursing_home">安養院</string>
+	<string name="poi_baby_hatch">棄嬰保護艙</string>
+	<string name="poi_veterinary">獸醫</string>
+	<string name="poi_sanatorium">療養院</string>
 	</resources>
