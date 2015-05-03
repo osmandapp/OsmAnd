@@ -700,7 +700,7 @@ public class WaypointHelper {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
 					}
 				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
+					return uiCtx.getResources().getDrawable(R.drawable.mx_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
