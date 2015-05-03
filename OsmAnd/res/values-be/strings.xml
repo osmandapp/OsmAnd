@@ -890,7 +890,7 @@
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
 	<string name="use_osmand_routing_service">Навігацыя OsmAnd &gt; 20 км</string>
 	<string name="use_osmand_routing_service_descr">Выкарыстоўваць аўтаномную OsmAnd навігацыю на адлегласьці &gt; 20 км (экспэрыментальная)</string>
-	<string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd зьяўляецца экспэрыментальнай і не працуе на адлегласцях больш 20 км.\n\nУ гэтым выпадку для пракладкі маршруту выкарыстоўваецца онлайн сэрвіс CloudMade.</string>
+	<string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd зьяўляецца экспэрыментальнай і не працуе на адлегласьцях больш за 20 км.\n\nУ гэтым выпадку для пракладкі маршруту выкарыстоўваецца онлайн сэрвіс CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня зьвестак</string>
 	
@@ -1867,7 +1867,7 @@
 	<string name="shared_string_do_not_show_again">Больш не паказваць</string>
 	<string name="shared_string_remember_my_choice">Запомніць мой выбар</string>
 	<string name="shared_string_refresh">Абнавіць</string>
-	<string name="shared_string_download">Сцягнуць</string>
+	<string name="shared_string_download">Сьцягнуць</string>
 	<string name="shared_string_downloading">Сьцягваньне</string>
 	<string name="shared_string_download_successful">Пасьпяхова сьцягнута</string>
 	<string name="shared_string_io_error">Адбылася памылка ўводу/вываду</string>

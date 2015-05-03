@@ -306,4 +306,30 @@
 	<string name="poi_mineshaft">礦井</string>
 	<string name="poi_adit">坑道入口</string>
 	<string name="poi_petroleum_well">油井</string>
+	<string name="poi_survey_point">勘測點</string>
+	<string name="poi_windmill">風車</string>
+	<string name="poi_salt_pond">鹽田</string>
+	<string name="poi_reservoir">蓄水池</string>
+	<string name="poi_cricket_nets">板球網</string>
+	<string name="poi_gasometer">儲氣槽</string>
+	<string name="poi_silo">圓榖倉</string>
+	<string name="poi_storage_tank">貯存槽</string>
+
+	<string name="poi_college">大學</string>
+	<string name="poi_driving_school">駕駛訓練班</string>
+	<string name="poi_kindergarten">幼稚園</string>
+	<string name="poi_school">學校</string>
+	<string name="poi_training">培訓設施</string>
+	<string name="poi_university">大學</string>
+
+	<string name="poi_social_facility">公共設施</string>
+	<string name="poi_courthouse">法院</string>
+	<string name="poi_prison">監獄</string>
+	<string name="poi_register_office">民事登記處</string>
+	<string name="poi_embassy">大使館</string>
+	<string name="poi_government">政府機構</string>
+	<string name="poi_bailiff">法警</string>
+	<string name="poi_prosecutor">檢察官</string>
+	<string name="poi_pension_fund">退休基金</string>
+	<string name="poi_migration">遷移</string>
 	</resources>

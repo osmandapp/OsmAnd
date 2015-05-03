@@ -736,7 +736,7 @@
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
   
-  <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe online per scegliere altre sorgenti di mappe</string>
+  <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe Online per scegliere altre sorgenti di mappe</string>
   <string name="map_online_data">Mappe online e a tasselli</string>
   <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD)</string>
   <string name="online_map_settings">Mappe online</string>
@@ -2052,7 +2052,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	
 	
 	<string name="days_behind">giorni fa</string>
-	<string name="track_segments">Spezzoni di traccia</string>
+	<string name="track_segments">Segmenti di traccia</string>
 	<string name="track_points">Punti della traccia</string>
 	<string name="route_points">Punti del percorso</string>
 	<string name="shared_string_release">Rilasciato</string>
@@ -2126,7 +2126,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
-	<string name="simulate_your_location">Posizione fittizia</string>
+	<string name="simulate_your_location">Posizione simulata</string>
     <string name="drawer">Solo lista</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Domande frequenti, ultimi cambiamenti e altro</string>
@@ -2179,7 +2179,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
 	<string name="copying_osmand_file_failed">Copia dei file fallita</string>    
     <string name="storage_directory_external">Memoria esterna</string>
-    <string name="application_dir_change_warning3">Vuoi che OsmAnd copi anche i sui file di dati nella nuova destinazione?</string>
+    <string name="application_dir_change_warning3">Vuoi che OsmAnd copi anche i suoi file di dati nella nuova destinazione?</string>
     <string name="specified_directiory_not_writeable">Le mappe non possono essere create nella destinazione specificata</string>
 	<string name="storage_directory_manual">Specificata manualmente</string>
     <string name="storage_directory_default">Memoria interna</string>
