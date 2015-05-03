@@ -56,7 +56,7 @@
                     android:id="@+id/dash_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?attr/card_bg_color"
+                    android:background="?attr/bg_color"
                     android:fadeScrollbars="true" >
                 </com.github.ksoichiro.android.observablescrollview.ObservableListView>
             </FrameLayout>

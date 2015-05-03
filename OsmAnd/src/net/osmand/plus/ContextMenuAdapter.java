@@ -144,9 +144,9 @@ public class ContextMenuAdapter {
 	
 	public int getBackgroundColor(Context ctx, boolean holoLight) {
 		if (holoLight) {
-			return ctx.getResources().getColor(R.color.color_white);
+			return ctx.getResources().getColor(R.color.bg_color_light);
 		} else {
-			return ctx.getResources().getColor(R.color.list_background_dark);
+			return ctx.getResources().getColor(R.color.bg_color_dark);
 		}
 	}
 	

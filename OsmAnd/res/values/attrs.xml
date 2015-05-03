@@ -4,25 +4,27 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+        <!-- list colors -->
 		<attr name="list_divider" format="color"/>
+		<attr name="btn_flat_bg" format="reference" />
+		<attr name="expandable_list_item_background" format="color"/>
+		<attr name="expandable_list_background" format="color"/>
+		<attr name="bg_color" format="reference" />
+		
+		<attr name="dashboard_divider" format="reference" />
+		<attr name="dashboard_button" format="reference" />
+		
+		
         <attr name="expandable_category_color" format="reference"/>
         <attr name="bottomToolBarColor" format="color" />
 		<attr name="downloadButtonBackground" format="reference" />
-		<attr name="card_bg" format="reference" />
-		<attr name="btn_flat_bg" format="reference" />
-		<attr name="card_bg_color" format="reference" />
 		<attr name="spinnerItemTextColor" format="reference" />
-		<attr name="dashboard_divider" format="reference" />
-		<attr name="dashboard_button" format="reference" />
 		<attr name="search_background" format="reference" />
 		<attr name="switch_ex_background" format="reference" />
 		<attr name="switch_ex_text_color" format="color|reference" />
 		<attr name="bg_plugin_logo_disabled" format="reference" />
-		<attr name="plugin_details_header_bg" format="color|reference" />
 		<attr name="plugin_details_install_header_bg" format="color|reference" />
-		<attr name="plugin_description_header_text_color" format="color|reference" />
-		<attr name="expandable_list_item_background" format="color"/>
-		<attr name="expandable_list_background" format="color"/>
+		
 		<attr name="size_progress_bar" format="reference"/>
 		<attr name="dash_parking_bg" format="reference"/>
 		<attr name="osmo_header_background" format="color"/>
