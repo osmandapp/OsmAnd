@@ -151,4 +151,8 @@
 	<string name="poi_harbour_basin">Havnebasseng</string>
 	<string name="poi_seamark_harbour">Havn</string>
 	<string name="poi_fuel">Bensinstasjon</string>
+	<string name="poi_convenience">Dagligvare</string>
+	<string name="poi_mall">Kjøpesenter</string>
+	<string name="poi_farm">Gårdsbutikk</string>
+	<string name="poi_greengrocer">Grønthandel</string>
 	</resources>
