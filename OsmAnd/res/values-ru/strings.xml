@@ -1974,4 +1974,5 @@
     <string name="shared_string_copy">Переместить</string>
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
     </resources>

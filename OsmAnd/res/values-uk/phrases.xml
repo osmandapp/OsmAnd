@@ -14,7 +14,7 @@
 	<string name="poi_confectionery">Кондитерські вироби</string>
 	<string name="poi_ice_cream">Кафе-морозиво</string>
 	<string name="poi_supermarket">Супермаркет</string>
-	<string name="poi_shop_tea">Чай</string>
+	<string name="poi_tea">Чай</string>
 	<string name="poi_dairy">Молочний магазин</string>
 	<string name="poi_vending_machine">Торговий автомат</string>
 
@@ -139,4 +139,25 @@
 		<string name="poi_air_transport">Авіаційний транспорт</string>
 		<string name="poi_water_transport">Водний транспорт</string>
 		<string name="poi_bicycle_transport">Велосипедний траспорт</string>
-		</resources>
+		<string name="poi_aerialway_transport">Канатна дорога</string>
+	<string name="poi_water_supply">Водопостачання</string>
+		<string name="poi_power">Енергетика</string>
+		<string name="poi_communication">Зв’язок</string>
+		<string name="poi_trash_disposal">Утилізація сміття</string>
+		<string name="poi_landuse">Землекористування</string>
+	<string name="poi_sightseeing">Визначні пам’ятки</string>
+		<string name="poi_accomodation">Житло</string>
+		<string name="poi_internet_access">Доступ до Інтернету</string>
+	<string name="poi_club">Клуб</string>
+	<string name="poi_cafe_and_restaurant">Кафе і ресторан</string>
+	<string name="poi_craft">Ремесло</string>
+	<string name="poi_seamark">Морські</string>
+	<string name="poi_wine">Винний магазин</string>
+
+	<string name="poi_charity">Благодійний магазин</string>
+	<string name="poi_medical_supply">Медичне постачання</string>
+	<string name="poi_photo">Фото магазин</string>
+	<string name="poi_traffic_calming_bump">Лежачий поліцейський</string>
+	<string name="poi_traffic_calming_hump">Горб</string>
+	<string name="poi_traffic_calming_chicane">Шикана</string>
+	</resources>

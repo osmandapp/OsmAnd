@@ -36,7 +36,7 @@
   <string name="poi_filter_restaurants">Reštaurácie</string>
   <string name="poi_filter_sightseeing">Pamiatky</string>
   <string name="poi_filter_car_aid">Pomoc s automobilom</string>
-  <string name="poi_filter_food_shop">Jedlo</string>
+  <string name="poi_filter_food_shop">Potraviny</string>
   <string name="poi_filter_for_tourists">Pre turistov</string>
   <string name="poi_filter_fuel">Palivo</string>
   <string name="btn_add_tag">Pridať značku</string>
@@ -2164,4 +2164,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="storage_directory">Úložisko máp</string>
     <string name="shared_string_copy">Kopírovať</string>
     <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Skryť čísla domov</string>
     </resources>

@@ -686,7 +686,7 @@
   <string name="sd_dir_not_accessible">Тека даних на SD-карті не доступна!</string>
   <string name="download_question">Завантажити {0} - {1} ?</string>
   <string name="download_question_exist">Оффлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
-  <string name="address">Адрес</string>
+  <string name="address">Адреса</string>
   <string name="shared_string_download_successful">Успішно завантажена</string>
   
   
@@ -813,7 +813,7 @@
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
   <string name="shared_string_show_on_map">Показати</string>
   
-  <string name="search_address_top_text">Виберіть адрес</string>
+  <string name="search_address_top_text">Виберіть адресу</string>
   <string name="search_address_region">Регіон</string>
   <string name="search_address_city">Місто</string>
   <string name="search_address_street">Вулиця</string>
@@ -2128,4 +2128,20 @@ OsmAnd має відкриті сирці і активно розвиваєть
 \n\nЦей вид можна де-активувати тут або змінити на інший, змінивши \'Стиль мапи\' на потрібний в \'Налаштувані мапи\'. "</string>
 	<string name="plugin_ski_descr">"Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального \"зимового\" стилю мапи, який полягає в тому, що використовуються \"снігові\" кольори зимового пейзажу.
 \n\nУ разі активації цього виду, стиль мапи змінюється на \"Winter and ski\", показуючи всі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте \"Стиль мапи\" в меню \"Налаштування мапи\" на бажаний вид. "</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Приховати номери будинків</string>
+    <string name="application_dir_change_warning3">Ви хочете, щоб OsmAnd також перемістив свої файли даних по новому призначенню?</string>
+    <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказанії теці</string>
+	<string name="copying_osmand_file_failed">Не вдалося скопіювати файли</string>    
+    <string name="storage_directory_external">Зовнішнє сховище</string>
+    <string name="storage_directory_multiuser">Толочне сховище</string>
+    <string name="storage_directory_internal_app">Внутрішня пам’ять застосунку</string>
+    <string name="storage_directory_manual">Вказано вручну</string>
+    <string name="storage_directory_default">Внутрішня пам’ять</string>
+    <string name="storage_directory">Сховище мап</string>
+    <string name="shared_string_copy">Копіювати</string>
+    <string name="filter_poi_hint">Фільтрувати за назвою</string>
+    <string name="search_poi_category_hint">Введіть текст для пошуку всіх</string>
+    <string name="rendering_value__name">Типово</string>
+    <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
+	<string name="index_name_netherlands">Європа - Нідерланди</string>
 	</resources>
