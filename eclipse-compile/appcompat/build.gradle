@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+dependencies {
+    compile files('libs/android-support-v4.jar')
+}
+
+android {
+	compileSdkVersion 21
+	buildToolsVersion "21.1.2"
+
+	defaultConfig {
+		minSdkVersion 9
+		targetSdkVersion 21
+	}
+	sourceSets {
+		main {
+			manifest.srcFile "AndroidManifest.xml"
+			aidl.srcDirs = ["src"]
+			java.srcDirs = ["src"]
+			resources.srcDirs = ["src"]
+			renderscript.srcDirs = ["src"]
+			res.srcDirs = ["res"]
+			assets.srcDirs = ["assets"]
+		}
+	}
+
+}
