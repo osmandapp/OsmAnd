@@ -1889,7 +1889,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="text_size">Velikost napisov</string>
     <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>
     
-    <string name="impassable_road">Izogibanje cestam…</string>
+    <string name="impassable_road">Izogibanje cestam …</string>
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
     <string name="rendering_attr_busRoutes_name">Proge avtobusov</string>
     <string name="rendering_category_hide">Skrij</string>
