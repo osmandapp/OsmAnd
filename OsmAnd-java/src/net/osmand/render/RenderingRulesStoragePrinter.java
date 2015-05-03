@@ -1,6 +1,7 @@
 package net.osmand.render;
 
 import gnu.trove.iterator.TIntObjectIterator;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,7 +60,12 @@ public class RenderingRulesStoragePrinter {
 			}
 		};
 		storage.parseRulesFromXmlInputStream(is, resolver);
-		new RenderingRulesStoragePrinter().printJavaFile(storage);
+		new RenderingRulesStoragePrinter().printCppRules(storage, RenderingRulesStorage.ORDER_RULES);
+	}
+	
+	protected void printCppRules(RenderingRulesStorage storage, int rules) throws IOException  {
+		TIntObjectHashMap<RenderingRule> rp = storage.tagValueGlobalRules[rules];
+		
 	}
 	
 	protected void printJavaFile(RenderingRulesStorage storage) throws IOException {
