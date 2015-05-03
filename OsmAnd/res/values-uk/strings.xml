@@ -888,7 +888,7 @@
   <string name="osmand_parking_warning_text">Нагадування про обмеження часу паркування автомобіля вже додано в календар. Вам необхідно його вилучити вручну.</string>
   <string name="osmand_parking_time_limit_title">Вкажіть максимальний час стоянки</string>
   <string name="osmand_parking_delete_confirm">Вилучити розташування припаркованого автомобіля?</string>
-  <string name="osmand_parking_delete">Вилучити маркер місця паркування</string>
+  <string name="osmand_parking_delete">Вилучити маркер місця стоянки</string>
   <string name="osmand_parking_choose_type">Виберіть тип паркування</string>
   <string name="osmand_parking_lim_text">З обмеженням по часу</string>
   <string name="osmand_parking_no_lim_text">Без обмеження по часу</string>
@@ -902,9 +902,9 @@
   <string name="osmand_parking_position_name">Місце паркування</string>
   <string name="osmand_parking_plugin_description">Втулок “Місце стоянки” дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом. Ви можете знайти місце стоянки та час на панелі керування та на віповідному віджеті на мапі.
 \n Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
-  <string name="osmand_parking_plugin_name">Місця паркування</string>
+  <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
-  <string name="context_menu_item_delete_parking_point">Вилучити маркер місця паркування</string>
+  <string name="context_menu_item_delete_parking_point">Вилучити маркер місця стоянки</string>
   <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
   <string name="shared_location">Загальні місця</string>
   
