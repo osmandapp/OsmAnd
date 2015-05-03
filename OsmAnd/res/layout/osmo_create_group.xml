@@ -30,7 +30,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/osmo_grop_name_length_alert"
-			android:textColor="@color/fab_material_red_500"/>
+			android:textColor="@color/osmbug_closed"/>
 
 		<TextView
 			android:layout_width="wrap_content"
