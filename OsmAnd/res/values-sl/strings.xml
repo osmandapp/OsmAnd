@@ -1899,8 +1899,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_shareTaxiRoutes_name">Proge deljenih taksijev</string>
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
-    <string name="wake_on_voice">Vklopiti zaslon</string>
-    <string name="wake_on_voice_descr">Vklopi zaslon naprave (če izklopljen), ko se približujete obratu</string>
+    <string name="wake_on_voice">Vklopi zaslon</string>
+    <string name="wake_on_voice_descr">Vklopi zaslon naprave (če je izklopljen), ko se med vodenjem pojavi zavoj</string>
     <string name="shared_string_never">Nikoli</string>
     <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_others">Druge lastnosti zemljevida</string>
@@ -1924,61 +1924,61 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="fav_point_dublicate">Podvojeno ime priljubljene lokacije</string>
     <string name="fav_point_dublicate_message">Ime vaše priljubljene lokacije je bilo spremenjeno v %1$s, da bi se izognili podvojenih imen.</string>
     
-    <string name="lock_screen_request_explanation">%1$s potrebuje to dovoljenje za izklop zaslona za funkcijo varčevanja z energijo.</string>
+    <string name="lock_screen_request_explanation">%1$s zahteva dovoljenje za izklop zaslona za varčevanje z energijo.</string>
     <string name="fav_point_emoticons_message">Ime vaše priljubljene lokacije je bilo spremenjeno v %1$s, da se omogoči pravilno shranjevanje nizov s smeški v datoteko.</string>
-    <string name="routing_attr_no_new_routing_name">Ne uporabljati novih v1.9 pravil usmerjanja</string>
-    <string name="routing_attr_no_new_routing_description">Ne uporabljaj pravil usmerjanja uvedenih z v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ne omogoči pravil usmerjanja v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Ne omogoči uporabe pravil usmerjanja, ki so bile uvedene z različico v1.9</string>
     <string name="rendering_attr_roadStyle_name">Slog cest</string>
     <string name="rendering_value_default_name">Privzeto</string>
     <string name="rendering_value_orange_name">Oranžno</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemški cestni atlas</string>
 	<string name="traffic_warning_railways">Železniški prehod</string>
 	<string name="traffic_warning_pedestrian">Prehod za pešce</string>
-	<string name="show_railway_warnings">Prikaz železniških prehodov</string>
-	<string name="show_pedestrian_warnings">Prikaži prehode za pešce</string>
+	<string name="show_railway_warnings">Pokaži železniške prehode</string>
+	<string name="show_pedestrian_warnings">Pokaži prehode za pešce</string>
     <string name="rendering_value_americanRoadAtlas_name">Ameriški cestni atlas</string>
-    <string name="dash_download_msg_none">Ali želite prenesti offline zemljevide?</string>
-    <string name="dash_download_msg">Prenesli ste %1$s zemljevidov</string>
+    <string name="dash_download_msg_none">Ali želite prejeti zemljevide za navigacijo brez povezave?</string>
+    <string name="dash_download_msg">Do sedaj ste prejeli %1$s zemljevidov za navigacijo brez povezave</string>
     <string name="dash_download_manage">Upravljaj</string>
-    <string name="dash_download_new_one">Prenesi nov zemljevid</string>
+    <string name="dash_download_new_one">Prejmi posodobljen zemljevid</string>
     <string name="map_locale">Jezik zemljevida</string>
-    <string name="download_tab_downloads">Vsi prenosi</string>
+    <string name="download_tab_downloads">Vsi prejemi</string>
     <string name="download_tab_updates">Posodobitve</string>
     <string name="download_tab_local">Krajevno</string>
-	<string name="no_internet_connection">Prenos ni mogoč. Prosim, preverite vašo internetno povezavo.</string>
+	<string name="no_internet_connection">Prejem ni mogoč; najverjetneje so težave s povezavo na internet.</string>
     <string name="shared_string_dismiss">Opusti</string>
-    <string name="everything_up_to_date">Vse datoteke posodobljene</string>
-    <string name="osmo_use_https">Uporabi HTTPS</string>
+    <string name="everything_up_to_date">Vse datoteke so posodobljene</string>
+    <string name="osmo_use_https">Uporabi protokol HTTPS</string>
 	
 	<string name="map_update">Na voljo je %1$s posodobitev zemljevidov</string>
-	<string name="search_for">Išči</string>
+	<string name="search_for">Poišči</string>
 	
 	<string name="shared_string_show_all">Pokaži vse</string>
 	<string name="coordinates">Koordinate</string>
-	<string name="rendering_attr_transportStops_name">Postajališča</string>
-    <string name="use_opengl_render">Za izris uporabi OpenGL</string>
-    <string name="use_opengl_render_descr">Za izris uporabi strojno pospešen OpenGL (morda ne deluje na nekaterih napravah)</string>
-    <string name="home_button">Začetni ekran</string>
+	<string name="rendering_attr_transportStops_name">Postajališča javnega prevoza</string>
+    <string name="use_opengl_render">Uporabi izrisovanje OpenGL</string>
+    <string name="use_opengl_render_descr">Uporabi strojno pospešeno izrisovanje OpenGL (na nekaterih napravah morda ne deluje)</string>
+    <string name="home_button">Začetni zaslon</string>
     <string name="osmo_use_https_descr">Uporabi varno povezavo s strežnikom</string>
-    <string name="error_avoid_specific_road">Ni najdena nobena obvoznica</string>
+    <string name="error_avoid_specific_road">Ni najdenih možnosti obvoza</string>
     <string name="voices">Glasovna navodila</string>
-	<string name="speak_pedestrian">Napovej prehode za pešce</string>
+	<string name="speak_pedestrian">Najavi prehode za pešce</string>
     <string name="navigate_point_zone">Območje</string>
-    <string name="navigate_point_northing">y koordinata</string>
-    <string name="navigate_point_easting">x koordinata</string>
+    <string name="navigate_point_northing">Koordinata v smeri proti severu</string>
+    <string name="navigate_point_easting">Koordinata v smeri proti vzhodu</string>
     
 	
-	<string name="navigation_over_track">Začetek navigacije po sledi?</string>
-	<string name="avoid_roads_msg">Alternativno pot lahko spremenite posledično tako, da izberete ceste, katerih se je treba izogibati</string>
+	<string name="navigation_over_track">Ali želite začeti navigacijo po sledi?</string>
+	<string name="avoid_roads_msg">Drugo pot lahko določite tako, da izberete tiste, ki se jim želite izogniti</string>
     <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
 	<string name="parking_place">Parkirno mesto</string>
     <string name="remove_the_tag">ODSTRANJEVANJE OZNAKE</string>
     <string name="gps_status">Stanje GPS</string>
-    <string name="version_settings_descr">Prenos nočne gradnje</string>
-    <string name="version_settings">Gradnje</string>
+    <string name="version_settings_descr">Prejmi razvojno različico</string>
+    <string name="version_settings">Izgradnje</string>
     <string name="rendering_attr_streetLighting_name">Ulična razsvetljava</string>
-    <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Nastavitev proxy internetne komunikacije</string>
+    <string name="proxy_pref_title">Posredniški strežnik</string>
+    <string name="proxy_pref_descr">Nastavi povezovanje preko posredniškega strežnika</string>
     <string name="settings_privacy">Zasebnost</string>
     <string name="points">Točke</string>
     
@@ -1994,8 +1994,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="shared_string_enabled">Omogočeno</string>
 <string name="plugin_ski_name">Zemljevidi smučišč</string>
     <string name="plugin_nautical_name">Pomorska karta</string>
-    <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
-    <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
+    <string name="world_ski_missing">Za prikaz zemljevidov smučišč je treba prejeti posebne datoteke za delovanje brez povezave</string>
+    <string name="nautical_maps_missing">Za prikaz pomorskih zemljevidov je treba prejeti posebne datoteke za delovanje brez povezave</string>
 	<string name="edit_group">Urejanje skupine</string>
     <string name="shared_string_enable">Omogoči</string>
 	<string name="shared_string_disable">Onemogoči</string>
@@ -2003,8 +2003,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	
 	<string name="plugin_install_needs_network">Za namestitev tega vtičnika potrebujete internetno povezavo.</string>
 	<string name="get_plugin">Pridobi</string>
-<string name="rendering_attr_pisteRoutes_name">Smušišča</string>
-	<string name="free">"Prosto %1$s "</string>
+<string name="rendering_attr_pisteRoutes_name">Smučišča</string>
+	<string name="free">"Na voljo je še %1$s "</string>
 	<string name="device_memory">Pomnilnik naprave</string>
     <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>
     <string name="track_segments">Odsek sledi</string>
@@ -2036,9 +2036,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="rename_failed">Preimenovanje je spodletelo.</string>
 	<string name="days_behind">dni star</string>
 	<string name="back_to_map">Nazaj na zemljevid</string>
-	<string name="share_note">Deli opombo</string>
-    <string name="location_on_map">Lokacija:\n Šir %1$s\n Dol %2$s</string>
-	<string name="notes">Osombe</string>
+	<string name="share_note">Objavi opombo</string>
+    <string name="location_on_map">Koordinate:\nZŠ (β) %1$s\nZD (λ) %2$s</string>
+	<string name="notes">Opombe</string>
 	<string name="online_map">Spletni zemljevid</string>
 	<string name="roads_only">Le ceste</string>
     <string name="shared_string_release">Izdano</string>
@@ -2085,4 +2085,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="shared_string_do_not_use">Ne uporabi</string>
 	<string name="shared_string_address">Naslov</string>
 	<string name="plugin_touringview_name">Touring pogled zemljevida</string>
+	<string name="rendering_value__name">Privzeto</string>
+    <string name="rendering_value_highContrastRoads_name">Visok kontrast poti</string>
 	</resources>
