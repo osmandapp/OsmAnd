@@ -31,6 +31,7 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.util.FloatMath;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -174,7 +175,7 @@ public class RouteLayer extends OsmandMapLayer {
 				tx.add(x);
 				ty.add(y);
 			}
-			int pth = calculatePath(tb, tx, ty, path, null);
+			calculatePath(tb, tx, ty, path);
 			
 			if(isPaint_1) {
 				canvas.drawPath(path, paint_1);
@@ -186,41 +187,55 @@ public class RouteLayer extends OsmandMapLayer {
 			if(isPaint2) {
 				canvas.drawPath(path, paint2);
 			}
-			if(tb.getZoomAnimation() == 0) {
-				if(pth <= 1) {
-					drawArrowsOverPath(canvas, path, coloredArrowUp);
-				} else {
-					ArrayList<Path> lst = new ArrayList<Path>();
-					calculatePath(tb, tx, ty, path, lst);
-					for(Path l : lst) {
-						drawArrowsOverPath(canvas, l, coloredArrowUp);
-					}
-				}
+			if (tb.getZoomAnimation() == 0) {
+				TIntArrayList lst = new TIntArrayList(50);
+				calculateSplitPaths(tb, tx, ty, lst);
+				drawArrowsOverPath(canvas, lst, coloredArrowUp);
 			}
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
 
-	private void drawArrowsOverPath(Canvas canvas, Path path, Bitmap arrow) {
-		PathMeasure pm = new PathMeasure();
-		pm.setPath(path, false);
+	private void drawArrowsOverPath(Canvas canvas, TIntArrayList lst, Bitmap arrow) {
 		float pxStep = arrow.getHeight() * 4f;
-		float dist = pxStep;
-		double length = pm.getLength();
 		Matrix matrix = new Matrix();
-		float[] pos = new float[2];
-		float[] tan = new float[2];
-		while(dist < length) {
-			if(pm.getPosTan(dist, pos, tan)) {
-				matrix.reset();
-				matrix.postTranslate(0, - arrow.getHeight() / 2);
-				matrix.postRotate((float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI) + 90f, 
-						arrow.getWidth() / 2, 0);
-				matrix.postTranslate(pos[0] - arrow.getWidth() / 2, pos[1]);
-				canvas.drawBitmap(arrow, matrix, paintIcon);
+		float dist = 0;
+		for (int i = 0; i < lst.size(); i += 4) {
+			int px = lst.get(i);
+			int py = lst.get(i + 1);
+			int x = lst.get(i + 2);
+			int y = lst.get(i + 3);
+			float angleRad = (float) Math.atan2(y - py, x - px);
+			float angle = (float) (angleRad * 180 / Math.PI) + 90f;
+			float distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			if(distSegment == 0) {
+				continue;
 			}
-			dist += pxStep;
+			int len = (int) (distSegment / pxStep);
+			if (len > 0) {
+				float pdx = ((x - px) / len);
+				float pdy = ((y - py) / len);
+				for (int k = 1; k <= len; k++) {
+					matrix.reset();
+					matrix.postTranslate(0, -arrow.getHeight() / 2);
+					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
+					matrix.postTranslate(px + k * pdx- arrow.getWidth() / 2 , py + pdy * k);
+					canvas.drawBitmap(arrow, matrix, paintIcon);
+					dist = 0;
+				}
+			} else {
+				if(dist > pxStep) {
+					matrix.reset();
+					matrix.postTranslate(0, -arrow.getHeight() / 2);
+					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
+					matrix.postTranslate(px + (x - px) / 2 - arrow.getWidth() / 2, py + (y - py) / 2);
+					canvas.drawBitmap(arrow, matrix, paintIcon);
+					dist = 0;
+				} else {
+					dist += distSegment;
+				}
+			}
 		}
 	}
 	
