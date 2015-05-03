@@ -2,7 +2,7 @@
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
-	<string name="poi_convenience">Магазин</string>
+	<string name="poi_convenience">Продуктовый магазин</string>
 	<string name="poi_mall">Торговый центр</string>
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
@@ -12,7 +12,7 @@
 	<string name="poi_confectionery">Кондитерская</string>
 	<string name="poi_ice_cream">Мороженое</string>
 	<string name="poi_supermarket">Супермаркет</string>
-	<string name="poi_shop_tea">Чайный магазин</string>
+	<string name="poi_tea">Чайный магазин</string>
 	<string name="poi_dairy">Молочный магазин</string>
 	<string name="poi_vending_machine">Торговый автомат</string>
 
@@ -58,7 +58,7 @@
 	<string name="poi_interior_decoration">Декор и оформление</string>
 	<string name="poi_jewelry">Ювелирный магазин</string>
 	<string name="poi_kiosk">Киоск, ларёк</string>
-	<string name="poi_kitchen">Кухонные принадлежности</string>
+	<string name="poi_kitchen">Кухни</string>
 	<string name="poi_mobile_phone">Салон связи</string>
 	<string name="poi_motorcycle">Мотоциклы</string>
 	<string name="poi_musical_instrument">Музыкальные инструменты</string>

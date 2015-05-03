@@ -280,7 +280,7 @@ tasks.withType(JavaCompile) {
 
 clean.dependsOn 'cleanNoTranslate'
 
-cleanNoTranslate {
+task cleanNoTranslate() {
     delete ('res/values/no_translate.xml')
 }
 
