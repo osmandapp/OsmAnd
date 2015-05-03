@@ -282,9 +282,7 @@ tasks.withType(JavaCompile) {
 	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
-tasks.withType(clean) {
-	cleanTask -> cleanTask.dependsOn << [cleanNoTranslate]
-}
+clean.dependsOn 'cleanNoTranslate'
 
 cleanNoTranslate {
     delete ('res/values/no_translate.xml')
