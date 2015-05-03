@@ -387,9 +387,9 @@
 	<string name="delete_confirmation_msg">刪除 %1$s？</string>
 	<string name="city_type_suburb">市郊</string>
 	<string name="city_type_hamlet">村莊</string>
-	<string name="city_type_village">農村</string>
+	<string name="city_type_village">村鎮</string>
 	<string name="city_type_town">鎮</string>
-	<string name="city_type_city">市</string>
+	<string name="city_type_city">城市</string>
 	
 	<string name="animate_route_off">停止模擬</string>
 	<string name="animate_route">開始模擬</string>
@@ -1984,4 +1984,5 @@
     <string name="storage_directory_default">內部記憶體</string>
     <string name="storage_directory">地圖存儲</string>
     <string name="shared_string_copy">複製</string>
+    <string name="rendering_attr_hideHouseNumbers_name">隱藏門牌號碼</string>
     </resources>

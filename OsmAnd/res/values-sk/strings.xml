@@ -2164,4 +2164,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="storage_directory">Úložisko máp</string>
     <string name="shared_string_copy">Kopírovať</string>
     <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Skryť čísla domov</string>
     </resources>

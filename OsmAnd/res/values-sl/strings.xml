@@ -402,8 +402,8 @@
 	<string name="osmand_parking_position_description">Položaj vašega parkiranega avtomobila: %1$s</string>
 	<string name="osmand_parking_position_description_add">Prevzem avtomobila ob:</string>
 	<string name="osmand_parking_position_name">Točka parkiranja</string>
-	<string name="osmand_parking_plugin_description">Ta vtičnik omogoča enostavno shranjevanje mesta parkiranja vašega avtomobila v OsmAnd.</string>
-	<string name="osmand_parking_plugin_name">Parkirni položaj</string>
+	<string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.\nOmogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča ...).</string>
+	<string name="osmand_parking_plugin_name">Parkiranje (mesto in čas)</string>
 	<string name="context_menu_item_add_parking_point">Označi kot parkirni položaj</string>
 	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
@@ -453,9 +453,9 @@
 	<string name="show_poi_over_map_description">Prikaži POI na zemljevidu (nazadnje izbran filter)</string>
 	
 	<string name="prefs_plugins_descr">Vtičniki omogočajo napredne nastavitve in dodatne funkcionalnosti</string>
-	<string name="osmand_development_plugin_description">Prikaži nastavitve za razvoj in razhroščevanje, kot so animirana navigacija ali prikaz hitrosti izrisa.</string>
+	<string name="osmand_development_plugin_description">Vstavek omogoča prikaz nastavitev za razvoj in razhroščevanje programa. Med možnostmi so simuliranje vodenja poti, hitrost izrisovanja zemljevida na zaslonu, glasovni opomniki in podobno. Nastavitve so namenjene razvijalcem programske opreme.</string>
 	
-	<string name="osmand_accessibility_description">Prikaz nastavitev za aktivacijo posebnih funkcij dostopnosti.</string>
+	<string name="osmand_accessibility_description">Vstavek omogoča nastavljanje in uporabo možnosti dostopnosti pri uporabi programa OsmAnd. Podpira prilagajanje hitrosti govora med vodenjem, nastavljanje prikaza zaslona in prikaz sledilnika za nadzor pogleda zemljevida. Omogoča tudi glasovno objavljanje mesta.</string>
 	<string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v načinu spanja (ugasnjen ekran in občasna uporaba GPS-a).</string>
 	<string name="shared_string_close">Zapri</string>
 	<string name="opening_hours">Delovni čas</string>
@@ -615,9 +615,9 @@
 	<string name="online_map_settings">Spletni zemljevidi</string>
 	<string name="online_map_settings_descr">Nastavitev virov spletnih zemljevidov ali predpomnjenih ploščic</string>
 	<string name="osmand_rastermaps_plugin_description">"Pokaži nastavitve za nastavitev različnih spletnih ali predpomnjenih ploščic zemljevidov kot osnovni zemljevid ali zgornje / spodnje plasti. Te zemljevide lahko pripravite, tudi ko niste povezani, in jih kopirate v mapo OsmAnd. "</string>
-	<string name="osm_editing_plugin_description">Pokaži nastavitve, ki so zahtevane za povratne informacije OSM kot so zbiranje/spreminjanje predmetov POI OSM, odpiranje/komentiranje hroščev OSM in prispevanje posnetih sledi GPX (zahteva poverila OSM).</string>
+	<string name="osm_editing_plugin_description">Vstavek podpira prikaz nastavitev, ki omogočajo pošiljanje odzivov na delovanje programa OsmAnd, kot so posodobljeni podatki o točkah POI, pošiljanje poročil in opomb o programskih hroščih in objavljanje sledi GPX (zahteva ustrezna poverila OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se bodo verjetno prikazali hitreje. Morda na nekaterih napravah ne bodo dobro delovali.</string>
-	<string name="debugging_and_development">Razvoj OsmAnd</string>
+	<string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
 	<string name="native_rendering">Izvirno upodabljanje</string>
 	<string name="switch_to_raster_map_to_see">Za to mesto krajevni zemljevidi niso prisotni. Prejmete jih lahko v nastavitvah (Upravljanje datotek zemljevidov) ali preklopite na spletne zemljevide (za to morate omogočiti vtičnik za spletne zemljevide).</string>
 	<string name="gpx_tags_txt">Oznake</string>
@@ -639,7 +639,7 @@
 	<string name="auto_announce_on">Začni s samodejnimi najavami</string>
 	<string name="auto_announce_off">Končaj s samodejnimi najavami</string>
 	<string name="tip_osm_improve">Izboljševanje OSM podatkov</string>
-	<string name="osm_settings">OSM urejanje</string>
+	<string name="osm_settings">Urejanje nastavitev OSM</string>
 	<string name="website">Spletna stran</string>
 	<string name="osb_add_dialog_title">Vnos OSM napake</string>
 	<string name="osb_comment_dialog_message">Sporočilo</string>
@@ -1111,7 +1111,7 @@
     
     
 	<string name="index_srtm_ele">Izohipse</string>
-    <string name="srtm_plugin_description">Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape).</string>
+    <string name="srtm_plugin_description">"Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape). "</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
@@ -1119,14 +1119,14 @@
     <string name="recording_default_name">Snemanje</string>
     <string name="shared_string_control_stop">Zaustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
+    <string name="osmand_srtm_short_description_80_chars">Vstavek za prikaz izohips v programu OsmAnd (brez povezave)</string>
     
     
     <string name="map_widget_distancemeasurement">Merjenje razdalj</string>
     
     <string name="map_widget_audionotes">Zvočni zapisi</string>
-    <string name="audionotes_plugin_description">Ta vtičnik omogoča snemanje avdio, fotografskih in video opomb med potovanjem</string>
-    <string name="audionotes_plugin_name">Vtičnik za zvočne zapise</string>
+    <string name="audionotes_plugin_description">Vstavek za snemanje zvočnih in video zaznamkov omogoča beleženje podrobnosti med potovanjem. Možnost se omogoči z izbiro vstavka ali preko vsebinskega menija zemljevida.</string>
+    <string name="audionotes_plugin_name">Zvočni in video zaznamki</string>
     <string name="index_srtm_parts">deli</string>
     <string name="download_srtm_maps">Podatki izohips</string>
     <string name="recording_playing">Predvajanje zvoka iz izbranega posnetka.\n%1$s</string>
@@ -1162,10 +1162,10 @@
     <string name="av_settings">"Nastavitve za zvok/video "</string>
     <string name="recording_error">Med snemanjem je prišlo do napake </string>
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems). "</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse v trgovini Market, da bi tako podprli nadaljnji razvoj.</string>
-    <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
+    <string name="srtm_paid_version_title">Vstavek Izohipse</string>
     
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
@@ -1267,7 +1267,7 @@
 \n\t* Brisanje SRTM datotek
 \n\t* Podpora OSM opomb "</string>
     <string name="intermediate_items_sort_by_distance">Razvrščanje (od vrat do vrat)</string>
-    <string name="osmand_distance_planning_plugin_description">Ustvarite poti (ali uporabite/spremenite obstoječe GPX datoteke) za merjenje razdalj med točkami. Shrani kot GPX se lahko uporabi za načrtovanje GPX poti.</string>
+    <string name="osmand_distance_planning_plugin_description">Vstavek omogoča načrtovanje poti (ali uporabo/spreminjanje obstoječih datotek GPX) in merjenje razdalj med točkami na sledi. Podatke je mogoče shraniti kot poti GPX in jih kasneje uporabiti tudi na poti.</string>
     <string name="osmand_distance_planning_plugin_name">Računanje razdalj in orodje za načrtovanje</string>
     <string name="distance_measurement_finish_subtrack">Začni novo pod-sled</string>
     <string name="wait_current_task_finished">Počakajte, da je trenutna naloga končana</string>
@@ -1646,8 +1646,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     </string>
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
-    <string name="osmo_plugin_description">"OpenStreetMap napredno sledenje v živo, oglejte si http://osmo.mobi. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
-    <string name="osmo_plugin_name">OsMo spremljanje</string>
+    <string name="osmo_plugin_description">"Vstavek OsMo omogoča napredno sledenje v živo. Za več informacij si oglejte spletno stran http://osmo.mobi.\n\nSledilnik Osmo omogoča sledenje napravam, ki objavljajo položaj. Na ta način lahko skupina omogoči sočasno sledenje mesta. Spletni sistem omogoča ustvarjanje brezimnih skupin posameznikov, ki objavljajo svoj položaj in želijo biti med seboj v stiku. Možni so različni načini sledenja od začasnega do trajnega.\n\nBrezimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
+    <string name="osmo_plugin_name">Sledilnik OsMo</string>
     <string name="keep_informing_never">Samo ročno (tapnite puščico)</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
@@ -1865,7 +1865,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
 	<string name="save_track_interval_globally">Interval beleženja</string>
 	<string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
-	<string name="record_plugin_name">Registracija potovanj</string>
+	<string name="record_plugin_name">Dnevnik potovanj</string>
     <string name="index_tours">Izleti</string>
     <string name="waypoints">Točke</string>
     <string name="speak_poi">Najavi bližnji POI</string>
@@ -1874,7 +1874,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="pause_navigation">Zaustavi navigacijo</string>
     <string name="save_global_track_interval_descr">Izerite interval beleženja za splošno snemanje sledi (omogočeno z gumbom za snemanje GPX na zemljevidu)</string>
 	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX lahko vklopite ali izklopite z gumbom za snemanje na ekranu z zemljevidom</string>
-	<string name="record_plugin_description">"Ta vtičnik aktivira funkcijo snemanja in shranjevanja svojih sledi, če pritisnete na gradnik GPX snemanje, ki je na zaslonu zemljevida, ali pa tudi samodejno shranjevanje vseh vaših poti v GPX datoteko.\n\nPosnete sledi lahko delite s prijatelji ali uporabite kot OSM prispevke. Športniki lahko uporabite zabeležene sledi za spremljanje svojih treningov. Nekatere osnovne analize sledi lahko izvedete neposredno v OsmAnd-u, kot so čas kroga, povprečna hitrost, itd. Sledi seveda lahko  tudi pozneje analizirate v drugih posebnih orodjih za analizo. "</string>
+	<string name="record_plugin_description">"Ta vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
     <string name="rendering_attr_osmcTraces_description">Prikaz stez po OSMC sledeh</string>
     
 	<string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
@@ -1992,7 +1992,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
 	<string name="shared_string_disabled">Onemogočeno</string>
 	<string name="shared_string_enabled">Omogočeno</string>
-<string name="plugin_ski_name">Pogled smučarska karta</string>
+<string name="plugin_ski_name">Zemljevidi smučišč</string>
     <string name="plugin_nautical_name">Pomorska karta</string>
     <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
     <string name="nautical_maps_missing">Če želite prikazati pomorske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
@@ -2033,7 +2033,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Fotografija</string>
 	<string name="route_points">Točke poti</string>
-	<string name="rename_failed">Preimenovanje ni uspelo.</string>
+	<string name="rename_failed">Preimenovanje je spodletelo.</string>
 	<string name="days_behind">dni star</string>
 	<string name="back_to_map">Nazaj na zemljevid</string>
 	<string name="share_note">Deli opombo</string>
@@ -2084,4 +2084,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="simulate_your_location">Navidezno določi mesto</string>
     <string name="shared_string_do_not_use">Ne uporabi</string>
 	<string name="shared_string_address">Naslov</string>
+	<string name="plugin_touringview_name">Touring pogled zemljevida</string>
 	</resources>

@@ -22,7 +22,7 @@ import android.os.Build;
 import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.internal.view.SupportMenuItem;
 import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.internal.view.menu.MenuWrapperFactory;
+import android.support.v7.internal.view.renamemenu.MenuWrapperFactory;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;

@@ -28,7 +28,7 @@ import android.support.v7.internal.view.ViewPropertyAnimatorCompatSet;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.ActionMenuPresenter;
 import android.support.v7.widget.ActionMenuView;
-import android.support.v7.internal.view.menu.MenuBuilder;
+import android.support.v7.internal.view.renamemenu.MenuBuilder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

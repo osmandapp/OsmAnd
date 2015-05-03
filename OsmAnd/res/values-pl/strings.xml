@@ -366,7 +366,7 @@
   <string name="layer_osm_bugs">Notatki OSM (online)</string>
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>
-  <string name="layer_map">Źródło mapy…</string>
+  <string name="layer_map">Zasób mapy…</string>
   <string name="menu_layers">Warstwy mapy</string>
   <string name="context_menu_item_search_poi">Szukaj POI</string>
   
@@ -573,7 +573,7 @@
   <string name="show_poi_over_map">Pokaż POI</string>
   <string name="map_tile_source_descr">Wybierz źródło kafelków mapy (online lub offline)</string>
   <string name="map_tile_source">Źródło kafelków mapy</string>
-  <string name="map_source">Źródło mapy</string>
+  <string name="map_source">Zasób mapy</string>
   <string name="use_internet">Korzystaj z Internetu</string>
   <string name="show_location">Pokaż lokalizację</string>
   
@@ -592,7 +592,7 @@
   <string name="incremental_search_city">Znajdź miejscowość wpisując pierwsze litery</string>
   <string name="incremental_search_street">Znajdź ulicę</string>
   <string name="incremental_search_building">Znajdź numer domu</string>
-  <string name="choose_available_region">Wybierz region z listy</string>
+  <string name="choose_available_region">Proszę wybrać region z listy</string>
   <string name="choose_intersected_street">Ulica przecinająca</string>
   <string name="Closest_Amenities">Najbliższe usługi</string>
   <string name="app_mode_default">Przeglądanie mapy</string>
@@ -601,7 +601,7 @@
   <string name="app_mode_pedestrian">Pieszo</string>
   <string name="position_on_map_center">Centralnie</string>
   <string name="position_on_map_bottom">Na dole</string>
-  <string name="navigate_point_top_text">Wprowadź szerokość i długość geo w wybranym formacie (D - stopnie, M - minuty, S - sekundy)</string>
+  <string name="navigate_point_top_text">Proszę wprowadzić szerokość i długość geograficzną w wybranym formacie (D - stopnie, M - minuty, S - sekundy)</string>
   <string name="navigate_point_latitude">Szerokość</string>
   <string name="navigate_point_longitude">Długość</string>
   <string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -1323,8 +1323,8 @@
 	<string name="driving_region_us">Stany Zjednoczone</string>
 	<string name="driving_region_europe_asia">Europa i Azja</string>
 	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
-	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
-	<string name="driving_region">Region poruszania się</string>
+	<string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
+	<string name="driving_region">Region ruchu</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="map_widget_fps_info">Informacje debugowania FPS</string>
 	<string name="local_index_tile_data_zooms">Pobrane poziomy: %1$s</string>
@@ -1645,7 +1645,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_item_nation_addresses">Adresy krajowe</string>
 	<string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Przerywa odtwarzanie muzyki podczas komunikatów</string>
+    <string name="interrupt_music_descr">Wstrzymuje odtwarzanie muzyki podczas komunikatów</string>
 	<string name="interrupt_music">Przerywanie muzyki</string>
 	<string name="always_center_position_on_map">Pozycja w centrum wyświetlacza</string>
     <string name="voice_pref_title">Głos</string>
@@ -2073,7 +2073,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="agps_data_last_downloaded">Dane A-GPS ostatnio pobrane: %1$s</string>
     <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. OsmAnd nie bierze żadnej odpowiedzialności, jeśli złamiesz prawo. Kliknij \"Tak\", jeśli wolno używać tej funkcji.</string>
 	<string name="welmode_download_maps">Pobierz mapy</string>
-	<string name="welcome_select_region">Wybierz region, w którym się poruszasz, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
+	<string name="welcome_select_region">Proszę wybrać region ruchu, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
 	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline na całym świecie!</string>
 	<string name="welcome_header">Witamy</string>
     <string name="current_route">Bieżąca trasa</string>

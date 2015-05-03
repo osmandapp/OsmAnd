@@ -1365,7 +1365,7 @@
     
     
     
-    <string name="map_magnifier">Kortforstørrelse</string>
+    <string name="map_magnifier">Kortlup</string>
     
     <string name="route_is_too_long">OsmAnd offline ruteplanlægning kan tage meget lang tid (eller nogle gange ikke virker) for punkter mere end 200 km fra hinanden. Man kan tilføje mellemliggende rutepunkter for bedre ydelse.</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
@@ -2010,4 +2010,5 @@
     <string name="storage_directory">Kortagring</string>
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
     </resources>

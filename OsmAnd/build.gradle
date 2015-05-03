@@ -282,6 +282,12 @@ tasks.withType(JavaCompile) {
 	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
+clean.dependsOn 'cleanNoTranslate'
+
+task cleanNoTranslate() {
+    delete ('res/values/no_translate.xml')
+}
+
 repositories {
 	ivy {
 		name = "OsmAndBinariesIvy"
@@ -302,10 +308,9 @@ dependencies {
 			exclude: [
 					"QtAndroid-bundled.jar",
 					"QtAndroidAccessibility-bundled.jar",
-					"android-support*.jar",
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
-	compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
+	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
 	// compile "com.android.support:appcompat-v7:21.0.3"
 	// compile "com.github.shell-software:fab:1.0.5"
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
