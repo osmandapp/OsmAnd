@@ -4,7 +4,7 @@
     android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_card"
+    android:background="?attr/bg_card"
     android:layout_marginTop="@dimen/dash_margin"
     android:layout_marginBottom="@dimen/dash_margin"
     android:layout_marginLeft="@dimen/dash_margin_h"

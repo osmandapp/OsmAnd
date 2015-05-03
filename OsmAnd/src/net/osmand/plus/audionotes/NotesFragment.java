@@ -1,5 +1,18 @@
 package net.osmand.plus.audionotes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +22,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,23 +37,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.myplaces.FavoritesActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Denis on 18.02.2015.
  */
-public class NotesFragment extends ListFragment {
+public class NotesFragment extends OsmAndListFragment {
 	AudioVideoNotesPlugin plugin;
 	List<AudioVideoNotesPlugin.Recording> items;
 	NotesAdapter listAdapter;

@@ -3,18 +3,23 @@ package net.osmand.plus.sherpafy;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.*;
-import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
@@ -24,7 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class SherpafyTourFragment extends ListFragment {
+public class SherpafyTourFragment extends OsmAndListFragment {
 	private static final int SHARE_ID = 6;
 	private static final int START = 7;
 	OsmandApplication app;
@@ -238,10 +243,6 @@ public class SherpafyTourFragment extends ListFragment {
 			}
 			return row;
 		}
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 }

@@ -12,10 +12,10 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
@@ -34,7 +34,7 @@ import android.widget.Toast;
  * Created by Denis
  * on 09.09.2014.
  */
-public class UpdatesIndexFragment extends ListFragment {
+public class UpdatesIndexFragment extends OsmAndListFragment {
 
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;

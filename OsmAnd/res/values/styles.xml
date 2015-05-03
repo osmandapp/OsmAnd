@@ -64,6 +64,7 @@
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/bg_color_light</item>
+        <item name="bg_card">@drawable/bg_card_light</item>
 		<item name="dashboard_divider">@color/dashboard_divider_light</item>
 		<item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="search_background">@color/search_background_dark</item>
@@ -105,6 +106,7 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
 		<item name="bg_color">@color/bg_color_dark</item>
+		<item name="bg_card">@drawable/bg_card_dark</item>
 		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
 		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
 		<item name="search_background">@color/color_white</item>

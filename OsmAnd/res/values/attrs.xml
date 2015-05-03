@@ -10,6 +10,7 @@
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
+		<attr name="bg_card" format="reference" />
 		
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />

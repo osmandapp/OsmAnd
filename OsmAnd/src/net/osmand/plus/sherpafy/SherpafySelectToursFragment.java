@@ -2,21 +2,26 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
-import android.support.v4.app.ListFragment;
-import android.support.v4.view.MenuItemCompat;
-import android.view.*;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -28,7 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class SherpafySelectToursFragment extends ListFragment {
+public class SherpafySelectToursFragment extends OsmAndListFragment {
 	private static final int ACTION_DOWNLOAD = 5;
 	OsmandApplication app;
 	private SherpafyCustomization custom;

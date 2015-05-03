@@ -36,7 +36,7 @@ import android.widget.TextView;
 /**
  *
  */
-public class FavoritesListFragment extends ListFragment implements SearchActivityChild, OsmAndCompassListener {
+public class FavoritesListFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY";
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
