@@ -39,6 +39,15 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		}
 		return v;
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getExpandableListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
+								: R.color.bg_color_dark));
+	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
 		setHasOptionsMenu(true);
@@ -64,7 +73,9 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		}
 	}
 
-	public ExpandableListView getExpandableListView() { return listView; }
+	public ExpandableListView getExpandableListView() {
+		return listView;
+	}
 
 	public void setListView(ExpandableListView listView) {
 		this.listView = listView;

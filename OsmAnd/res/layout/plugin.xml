@@ -10,6 +10,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
+		android:background="?attr/bg_color"
 		tools:context=".activities.PluginActivity">
 
 		<ImageView
@@ -144,7 +145,6 @@
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			android:layout_marginTop="14dp"
-			android:text="HHHE"
 			android:textSize="@dimen/default_list_text_size"
 			android:textColor="?android:textColorPrimary"
 			osmand:typeface="@string/font_roboto_regular"

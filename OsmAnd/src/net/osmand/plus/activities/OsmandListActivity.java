@@ -9,6 +9,7 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import android.app.ActionBar;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,6 +26,15 @@ public abstract class OsmandListActivity extends
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		getListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
+								: R.color.bg_color_dark));
 	}
 
 

@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import android.app.ActionBar;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,6 +23,14 @@ public abstract class OsmandExpandableListActivity extends
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 	}
+	
+	protected void onStart() {
+		super.onStart();
+		getExpandableListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
+								: R.color.bg_color_dark));
+	};
 
 
 	public OsmandApplication getMyApplication() {
