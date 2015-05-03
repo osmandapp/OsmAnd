@@ -42,6 +42,9 @@
              in place of the usual title bar. -->
         <attr name="windowActionBar" format="boolean" />
 
+        <!-- Flag indicating whether there should be no title on this window. -->
+        <attr name="windowNoTitle" format="boolean" />
+
         <!-- Flag indicating whether this window's Action Bar should overlay
              application content. Does nothing if the window would not
              have an Action Bar. -->
@@ -70,6 +73,7 @@
         <attr name="windowFixedHeightMajor" format="dimension|fraction" />
 
         <attr name="android:windowIsFloating" />
+        <attr name="android:windowAnimationStyle" />
 
         <!-- =================== -->
         <!-- Action bar styles   -->
@@ -162,6 +166,17 @@
 
 
         <!-- =================== -->
+        <!-- Dialog styles -->
+        <!-- =================== -->
+        <eat-comment />
+
+        <!-- Theme to use for dialogs spawned from this theme. -->
+        <attr name="dialogTheme" format="reference" />
+        <!-- Preferred padding for dialog content. -->
+        <attr name="dialogPreferredPadding" format="dimension" />
+
+
+        <!-- =================== -->
         <!-- Other widget styles -->
         <!-- =================== -->
         <eat-comment />
@@ -181,11 +196,9 @@
         <!-- Default action button style. -->
         <attr name="actionButtonStyle" format="reference"/>
 
-        <!-- A style that may be applied to horizontal LinearLayouts
-         to form a button bar. -->
+        <!-- Style for button bars -->
         <attr name="buttonBarStyle" format="reference"/>
-        <!-- A style that may be applied to Buttons placed within a
-             LinearLayout with the style buttonBarStyle to form a button bar. -->
+        <!-- Style for buttons within button bars -->
         <attr name="buttonBarButtonStyle" format="reference"/>
         <!-- A style that may be applied to buttons or other selectable items
              that should react to pressed and focus states, but that do not
@@ -431,6 +444,35 @@
              always request focus regardless of this view.  It only impacts where
              focus navigation will try to move focus. -->
         <attr name="android:focusable" />
+
+        <!-- Deprecated. -->
+        <attr name="theme" format="reference" />
+
+        <!-- Specifies a theme override for a view. When a theme override is set, the
+             view will be inflated using a {@link android.content.Context} themed with
+             the specified resource. -->
+        <attr name="android:theme" />
+
+        <!-- Tint to apply to the background. -->
+        <attr name="backgroundTint" format="color" />
+
+        <!-- Blending mode used to apply the background tint. -->
+        <attr name="backgroundTintMode">
+            <!-- The tint is drawn on top of the drawable.
+                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
+            <enum name="src_over" value="3" />
+            <!-- The tint is masked by the alpha channel of the drawable. The drawable’s
+                 color channels are thrown out. [Sa * Da, Sc * Da] -->
+            <enum name="src_in" value="5" />
+            <!-- The tint is drawn above the drawable, but with the drawable’s alpha
+                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] -->
+            <enum name="src_atop" value="9" />
+            <!-- Multiplies the color and alpha channels of the drawable with those of
+                 the tint. [Sa * Da, Sc * Dc] -->
+            <enum name="multiply" value="14" />
+            <!-- [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] -->
+            <enum name="screen" value="15" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="MenuView">
@@ -626,6 +668,8 @@
         <attr name="goIcon" format="reference" />
         <!-- Search icon -->
         <attr name="searchIcon" format="reference" />
+        <!-- Search icon displayed as a text field hint -->
+        <attr name="searchHintIcon" format="reference" />
         <!-- Voice button icon -->
         <attr name="voiceIcon" format="reference" />
         <!-- Commit icon shown in the query suggestion row -->
@@ -655,6 +699,7 @@
     <declare-styleable name="CompatTextView">
         <!-- Present the text in ALL CAPS. This may use a small-caps form when available. -->
         <attr name="textAllCaps" format="reference|boolean" />
+        <attr name="android:textAppearance" />
     </declare-styleable>
 
     <declare-styleable name="LinearLayoutCompat">
@@ -718,13 +763,6 @@
         <attr name="contentInsetRight" />
         <attr name="maxButtonHeight" format="dimension" />
 
-        <!-- Specifies a theme override for a view. When a theme override is set, the
-             view will be inflated using a {@link android.content.Context} themed with
-             the specified resource. During XML inflation, any child views under the
-             view with a theme override will inherit the themed context. -->
-        <attr name="theme" format="reference" />
-
-        <!-- Icon drawable to use for the collapse button. -->
         <attr name="collapseIcon" format="reference" />
         <!-- Text to set as the content description for the collapse button. -->
         <attr name="collapseContentDescription" format="string" />
@@ -812,6 +850,14 @@
         <attr name="splitTrack" format="boolean" />
         <!-- Whether to draw on/off text. -->
         <attr name="showText" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="TextAppearance">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:textStyle" />
+        <attr name="android:typeface" />
+        <attr name="textAllCaps" />
     </declare-styleable>
 
 </resources>
