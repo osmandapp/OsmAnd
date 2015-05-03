@@ -1942,4 +1942,5 @@ s často kladenými otázkami.</string>
     <string name="storage_directory_default">Interní paměť</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
     </resources>
