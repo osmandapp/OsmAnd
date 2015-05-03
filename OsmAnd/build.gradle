@@ -282,6 +282,10 @@ tasks.withType(JavaCompile) {
 	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
+clean.doLast{
+    delete ('res/values/no_translate.xml')
+}
+
 repositories {
 	ivy {
 		name = "OsmAndBinariesIvy"
