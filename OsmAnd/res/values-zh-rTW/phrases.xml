@@ -332,4 +332,11 @@
 	<string name="poi_prosecutor">檢察官</string>
 	<string name="poi_pension_fund">退休基金</string>
 	<string name="poi_migration">遷移</string>
+	<string name="poi_tax_inspection">稅務稽查</string>
+	<string name="poi_office_administrative">行政辦公室</string>
+	<string name="poi_customs">海關</string>
+	<string name="poi_city">城市</string>
+	<string name="poi_town">鎮</string>
+	<string name="poi_village">村鎮</string>
+	<string name="poi_hamlet">村莊</string>
 	</resources>
