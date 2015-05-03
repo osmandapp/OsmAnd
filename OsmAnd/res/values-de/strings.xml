@@ -2,6 +2,7 @@
 <resources>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
+	<string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen</string>
 	<string name="simulate_your_location">Simulieren der Position</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM-Mapper-Assistent</string>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
@@ -833,7 +834,7 @@
 	<string name="poi_context_menu_call">POI-Telefon anzeigen</string>
 	<string name="website">Internetseite</string>
 	<string name="phone">Telefon</string>
-	<string name="download_type_to_filter">Filtern nach Typ</string>
+	<string name="download_type_to_filter">Nach Typ filtern</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
 	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
 	<string name="unknown_location">Standort noch nicht ermittelt</string>
@@ -2102,4 +2103,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
 	<string name="shared_string_open">Öffnen</string>
+
     </resources>
