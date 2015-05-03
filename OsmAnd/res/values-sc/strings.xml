@@ -1959,4 +1959,5 @@
     <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
 	<string name="storage_directory_multiuser">Memòria multi-impreadore</string>
     <string name="storage_directory">Memòria de sas mapas</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Cua sos nùmeros de sas domos</string>
     </resources>
