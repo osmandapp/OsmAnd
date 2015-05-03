@@ -59,7 +59,7 @@
                 android:id="@+id/dash_list_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/card_bg_color" />
+                android:background="?attr/bg_color" />
 
             <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"

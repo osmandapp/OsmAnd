@@ -27,7 +27,7 @@
 			android:id="@+id/plugin_header"
 			android:layout_width="match_parent"
 			android:layout_height="66dp"
-			android:background="?attr/plugin_details_header_bg"
+			android:background="?attr/expandable_list_item_background"
 			android:paddingLeft="16dp"
 			android:paddingRight="16dp">
 
@@ -86,7 +86,7 @@
 					android:paddingLeft="9.5dp"
 					android:paddingRight="9.5dp"
 					android:paddingTop="8dp"
-					android:textColor="@color/get_button_text"
+					android:textColor="@color/color_white"
 					android:text="@string/get_plugin"
 					android:textSize="@dimen/default_sub_text_size"
 					android:visibility="gone"
@@ -120,7 +120,7 @@
 				android:layout_height="wrap_content"
 				android:paddingLeft="16dp"
 				android:paddingRight="16dp"
-				android:textColor="?attr/plugin_description_header_text_color"
+				android:textColor="?android:textColorSecondary"
 				android:text="@string/plugin_install_needs_network"
 				osmand:typeface="@string/font_roboto_regular"/>
 		</LinearLayout>
@@ -132,8 +132,8 @@
 			android:layout_marginRight="16dp"
 			android:layout_marginTop="16dp"
 			android:text="@string/plugin_description_title"
+			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			android:textColor="?attr/plugin_description_header_text_color"
 			osmand:textAllCapsCompat="true"
 			osmand:typeface="@string/font_roboto_medium"/>
 
@@ -144,6 +144,7 @@
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			android:layout_marginTop="14dp"
+			android:text="HHHE"
 			android:textSize="@dimen/default_list_text_size"
 			android:textColor="?android:textColorPrimary"
 			osmand:typeface="@string/font_roboto_regular"

@@ -8,7 +8,7 @@
 		android:id="@+id/current_track"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/card_bg"
+		android:background="@drawable/bg_card"
 		android:orientation="vertical">
 
 		<include

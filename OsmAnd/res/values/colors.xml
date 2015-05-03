@@ -16,15 +16,22 @@
 	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
-
+	
+	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
+	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
+	
 	<color name="list_divider_dark">#1f2326</color>
 	<color name="list_divider_light">@color/color_white</color>
-	<color name="list_background_dark">#292f33</color>
 	<color name="list_sub_menu_background_dark">#475259</color>
-	<color name="list_item_light">@color/color_white</color>
+	<!-- <color name="list_item_light">@color/color_white</color> 
+	<color name="list_item_background_dark">#333b40</color> -->
+	<color name="list_item_light">#00000000</color> 
+	<color name="list_item_dark">#00000000</color>
 	<color name="list_item_light_pressed">#8cd0d0d0</color>
-	<color name="list_item_background_dark">#333b40</color>
-	<color name="list_item_background_dark_pressed">#be39464d</color>
+	<color name="list_item_dark_pressed">#be39464d</color>
+	<color name="bg_color_light">#ffffff</color>
+	<color name="bg_color_dark">#333b40</color>
+	
 	
 	<color name="map_widget_icon_color">#ff8f00</color>
 	<color name="map_widget_stroke">#4C000000</color>
@@ -114,7 +121,6 @@
 
 	<color name="gpx_track">#B4B319FF</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
-	<!-- <color name="gpx_track_fluorescent">#B4FF00FF</color>  Magenta is alternate track color for cyan but less contrast in many situations:  -->
 
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>
@@ -136,19 +142,8 @@
 
 	
 	<color name="shadow_color">#33888888</color>
+	
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
-	<color name="dark_drawer_bg_color">#303030</color>
-
-	<color name="card_bg_color_light">#ffffff</color>
-	<color name="card_bg_color_dark">#333b40</color>
-
-	<color name="get_button_text">#ffffff</color>
-
-	<color name="plugin_details_header_bg_light">#ffffff</color>
-
-
-	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
-	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 </resources>
