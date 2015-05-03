@@ -26,7 +26,7 @@ import android.os.Bundle;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.view.SupportMenuInflater;
 import android.support.v7.internal.view.WindowCallbackWrapper;
-import android.support.v7.internal.view.menu.MenuBuilder;
+import android.support.v7.internal.view.renamemenu.MenuBuilder;
 import android.support.v7.internal.widget.TintTypedArray;
 import android.support.v7.view.ActionMode;
 import android.view.KeyEvent;

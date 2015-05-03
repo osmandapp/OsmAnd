@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.menu;
+package android.support.v7.internal.view.renamemenu;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

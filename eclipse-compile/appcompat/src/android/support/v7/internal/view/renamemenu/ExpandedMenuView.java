@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.menu;
+package android.support.v7.internal.view.renamemenu;
 
 import android.content.Context;
-import android.support.v7.internal.view.menu.MenuBuilder;
-import android.support.v7.internal.view.menu.MenuBuilder.ItemInvoker;
-import android.support.v7.internal.view.menu.MenuView;
+import android.support.v7.internal.view.renamemenu.MenuBuilder;
+import android.support.v7.internal.view.renamemenu.MenuView;
+import android.support.v7.internal.view.renamemenu.MenuBuilder.ItemInvoker;
 import android.support.v7.internal.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
