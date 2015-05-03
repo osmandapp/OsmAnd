@@ -36,12 +36,12 @@
 
     <style name="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.AppCompat.DialogWhenLarge"
@@ -57,9 +57,8 @@
     <style name="Theme.AppCompat.Light.Dialog" parent="Base.Theme.AppCompat.Light.Dialog" />
 
     <!-- Menu/item attributes -->
-    <style name="Theme.AppCompat.CompactMenu"
-           parent="Base.Theme.AppCompat.CompactMenu">
-    </style>
+    <style name="Theme.AppCompat.CompactMenu" parent="Base.Theme.AppCompat.CompactMenu" />
+
 
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat" />
 

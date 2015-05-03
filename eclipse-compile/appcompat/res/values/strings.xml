@@ -41,6 +41,8 @@
 
     <!-- SearchView accessibility description for search button [CHAR LIMIT=NONE] -->
     <string name="abc_searchview_description_search">Search</string>
+    <!-- Default hint text for the system-wide search UI's text field. [CHAR LIMIT=30] -->
+    <string name="abc_search_hint">Search…</string>
     <!-- SearchView accessibility description for search text field [CHAR LIMIT=NONE] -->
     <string name="abc_searchview_description_query">Search query</string>
     <!-- SearchView accessibility description for clear button [CHAR LIMIT=NONE] -->

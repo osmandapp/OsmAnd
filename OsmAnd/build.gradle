@@ -142,14 +142,14 @@ android {
 	buildTypes {
 		debug {
 		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-		    minifyEnabled true
-		    proguardFiles 'proguard-project.txt'
+		    // minifyEnabled true
+		    // proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
 		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-		    minifyEnabled true
-		    proguardFiles 'proguard-project.txt'
+		    // minifyEnabled true
+		    //proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -294,6 +294,7 @@ repositories {
 }
 
 dependencies {
+    compile project(path: ":eclipse-compile:appcompat", configuration: "android")
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile fileTree(
 			dir: "libs",
@@ -305,8 +306,8 @@ dependencies {
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
 	compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
-	compile "com.android.support:appcompat-v7:21.0.3"
-	compile "com.github.shell-software:fab:1.0.5"
+	// compile "com.android.support:appcompat-v7:21.0.3"
+	// compile "com.github.shell-software:fab:1.0.5"
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"

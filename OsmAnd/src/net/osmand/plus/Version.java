@@ -96,8 +96,7 @@ public class Version {
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
-		return "osmand~".equalsIgnoreCase(getAppName(ctx)) || "osmand~f".equalsIgnoreCase(getAppName(ctx)) ;
-		
+		return getAppName(ctx).contains("~");
 	}
 	
 	public static String getVersionForTracker(OsmandApplication ctx) {

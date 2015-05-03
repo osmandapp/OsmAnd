@@ -78,6 +78,7 @@
 
     <style name="Base.Widget.AppCompat.ActionButton.CloseMode"
            parent="android:Widget.Material.ActionButton.CloseMode">
+        <item name="android:minWidth">56dp</item>
     </style>
 
     <style name="Base.Widget.AppCompat.ActionButton.Overflow"
@@ -111,6 +112,8 @@
            parent="android:Widget.Material.DropDownItem.Spinner"/>
 
     <style name="Base.Widget.AppCompat.Spinner" parent="android:Widget.Material.Spinner" />
+
+    <style name="Base.Widget.AppCompat.Spinner.Underlined" parent="android:Widget.Material.Spinner.Underlined" />
 
     <style name="Base.Widget.AppCompat.Spinner.DropDown.ActionBar" parent="android:Widget.Material.Spinner">
         <item name="spinnerMode">dropdown</item>
@@ -162,16 +165,30 @@
     <!-- Search View result styles -->
 
     <style name="Base.TextAppearance.AppCompat.SearchResult.Title"
-           parent="@android:TextAppearance.Material.SearchResult.Title">
+           parent="android:TextAppearance.Material.SearchResult.Title">
     </style>
 
     <style name="Base.TextAppearance.AppCompat.SearchResult.Subtitle"
-           parent="@android:TextAppearance.Material.SearchResult.Subtitle">
+           parent="android:TextAppearance.Material.SearchResult.Subtitle">
     </style>
 
     <style name="Base.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.Material.AutoCompleteTextView" />
 
-    <style name="Base.Widget.AppCompat.Light.AutoCompleteTextView" parent="android:Widget.Material.AutoCompleteTextView" />
+    <style name="Base.Widget.AppCompat.RatingBar" parent="android:Widget.Material.RatingBar" />
+
+    <style name="Base.Widget.AppCompat.Button" parent="android:Widget.Material.Button" />
+
+    <style name="Base.Widget.AppCompat.Button.Small" parent="android:Widget.Material.Button.Small" />
+
+    <style name="Base.Widget.AppCompat.Button.Borderless" parent="android:Widget.Material.Button.Borderless" />
+
+    <style name="Base.Widget.AppCompat.Button.Borderless.Colored" parent="android:Widget.Material.Button.Borderless.Colored" />
+
+    <style name="Base.Widget.AppCompat.ButtonBar" parent="android:Widget.Material.ButtonBar" />
+
+    <style name="Base.Widget.AppCompat.CompoundButton.CheckBox" parent="android:Widget.Material.CompoundButton.CheckBox" />
+
+    <style name="Base.Widget.AppCompat.CompoundButton.RadioButton" parent="android:Widget.Material.CompoundButton.RadioButton" />
 
     <!-- Progress Bar -->
 
@@ -183,13 +200,8 @@
            parent="android:Widget.Material.ProgressBar">
     </style>
 
-    <!-- TODO. Needs updating for Material -->
-    <style name="Base.Widget.AppCompat.ActivityChooserView" parent="">
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/abc_ab_share_pack_holo_dark</item>
-        <item name="android:divider">?attr/dividerVertical</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:dividerPadding">6dip</item>
-    </style>
+    <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem" />
+
+    <style name="Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem" parent="android:TextAppearance.Material.Widget.TextView.SpinnerItem" />
 
 </resources>
