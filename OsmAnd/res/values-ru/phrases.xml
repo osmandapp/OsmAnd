@@ -2,7 +2,7 @@
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
-	<string name="poi_convenience">Магазин</string>
+	<string name="poi_convenience">Продуктовый магазин</string>
 	<string name="poi_mall">Торговый центр</string>
 	<string name="poi_beverages">Напитки</string>
 	<string name="poi_butcher">Мясная лавка</string>
