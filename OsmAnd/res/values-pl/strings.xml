@@ -1258,7 +1258,7 @@
     <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>
     <string name="distance_measurement_clear_route">Wyczyść punkty</string>
     <string name="distance_measurement_save_gpx">Zapisz jako GPX</string>
-    <string name="distance_measurement_load_gpx">Otwórz istniejący GPX</string>
+    <string name="distance_measurement_load_gpx">Otwórz plik GPX</string>
     <string name="delete_point">Usuń punkt</string>
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został pomyślnie wygenerowany %1$s</string>
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
@@ -1536,7 +1536,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_mode_motorcycle">Motocykl</string>
     <string name="app_mode_boat">Łódź</string>
     <string name="app_mode_aircraft">Samolot</string>
-    <string name="map_widget_map_rendering">Renderowanie mapy</string>
+    <string name="map_widget_map_rendering">Renderowanie</string>
     <string name="app_modes_choose">Profile aplikacji</string>
 	<string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
@@ -1890,7 +1890,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pokazuj okoliczne Ulubione</string>
     <string name="speak_poi">Pokazuj okoliczne punkty POI</string>
-    <string name="save_track_to_gpx_globally">Zapisz ścieżkę do pliku GPX</string>
+    <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania śladów, które dostępne są poprzez widżet na ekranie mapy. Udostępnia też możliwość automatycznego zapisywania śladów nawigacji do pliku GPX.\n\nZapisane ślady mogą zostać udostępnione znajomym lub użyte do rozwoju projektu OSM. Sportowcy mogą korzystać ze ścieżek do monitorowania treningów. Podstawowa analiza śladów może zostać wykonana bezpośrednio w OsmAnd (czasy okrążeń, średnia prędkość, itp.). "</string>
@@ -1923,7 +1923,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="rendering_category_routes">Trasy</string>
     <string name="rendering_category_details">Szczegóły</string>
     <string name="rendering_category_transport">Transport</string>
-    <string name="rendering_category_others">Inne atrybuty mapy</string>
+    <string name="rendering_category_others">Inne atrybuty</string>
     <string name="map_widget_appearance_rem">Pozostałe elementy</string>
     <string name="map_widget_top">Pasek statusu</string>
 	<string name="map_widget_right">Prawy panel</string>
@@ -2039,7 +2039,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_unexpected_error">Wystąpił nieoczekiwany błąd</string>
 	<string name="shared_string_action_template">Działanie {0}</string>
 	<string name="shared_string_collapse">Zwiń</string>
-	<string name="shared_string_currently_recording_track">Aktualnie rejestrowana trasa</string>
+	<string name="shared_string_currently_recording_track">Rejestrowana trasa</string>
 	<string name="shared_string_audio">Dźwięk</string>
 	<string name="shared_string_video">Wideo</string>
 	<string name="shared_string_photo">Obraz</string>
