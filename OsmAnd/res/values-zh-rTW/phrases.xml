@@ -358,4 +358,14 @@
 	<string name="poi_baby_hatch">棄嬰保護艙</string>
 	<string name="poi_veterinary">獸醫</string>
 	<string name="poi_sanatorium">療養院</string>
+	<string name="poi_healthcare_alternative">另類醫療</string>
+	<string name="poi_audiologist">聽覺病矯治專家</string>
+	<string name="poi_blood_bank">血庫</string>
+	<string name="poi_healthcare_centre">醫療中心</string>
+	<string name="poi_midwife">助產士</string>
+	<string name="poi_occupational_therapist">職能治療師</string>
+	<string name="poi_optometrist">驗光師</string>
+	<string name="poi_physiotherapist">物理治療師</string>
+	<string name="poi_podiatrist">足科醫師</string>
+	<string name="poi_psychotherapist">心理治療師</string>
 	</resources>
