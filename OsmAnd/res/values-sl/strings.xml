@@ -2033,7 +2033,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Fotografija</string>
 	<string name="route_points">Točke poti</string>
-	<string name="rename_failed">Preimenovanje ni uspelo.</string>
+	<string name="rename_failed">Preimenovanje je spodletelo.</string>
 	<string name="days_behind">dni star</string>
 	<string name="back_to_map">Nazaj na zemljevid</string>
 	<string name="share_note">Deli opombo</string>
