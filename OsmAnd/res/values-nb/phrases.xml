@@ -155,4 +155,14 @@
 	<string name="poi_mall">Kjøpesenter</string>
 	<string name="poi_farm">Gårdsbutikk</string>
 	<string name="poi_greengrocer">Grønthandel</string>
+	<string name="poi_sports">Sportsforretning</string>
+	<string name="poi_public_transport_platform">Holdeplass</string>
+	<string name="poi_public_transport_stop_position">Stoppested</string>
+	<string name="poi_public_transport_station">Off. transportmiddel-stasjon</string>
+	<string name="poi_water_tower">Vanntårn</string>
+	<string name="poi_watermill">Vannmølle</string>
+
+	<string name="poi_sports_centre">Sportssenter</string>
+	<string name="poi_memorial">Minnesmerke</string>
+	<string name="poi_drinking_water">Drikkevann</string>
 	</resources>
