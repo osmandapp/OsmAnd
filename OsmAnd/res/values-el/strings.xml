@@ -324,7 +324,7 @@
 	<string name="live_monitoring_interval">Διάστημα online ιχνηλάτησης</string>
 	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5},bearing={6}</string>
 	<string name="live_monitoring_url">Διαδικτυακή διεύθυνση online ιχνηλάτησης</string>
-	<string name="gpx_monitoring_disabled_warn">Παρακαλώ ενεργοποιήστε τις ρυθμίσεις \'Εγγραφή ίχνους σε αρχείο GPX\'.</string>
+	<string name="gpx_monitoring_disabled_warn">\'Εγγραφή ίχνους χρησιμοποιώντας το γραφικό στοιχείο GPX\', ή μέσω των ρυθμίσεων \'Εγγραφή ταξιδιού\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>
 	<string name="tip_recent_changes_0_7_0_t">"Αλλαγές στην 0.7.0 :
 \n\t- Offline wikipedia data with articles
@@ -1654,7 +1654,7 @@
     <string name="points">Σημεία</string>
     
     
-	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
+	<string name="navigation_over_track">Έναρξη πλοήγησης κατά μήκος του ίχνους;</string>
 	<string name="edit_group">Επεξεργασία ομάδας</string>
     <string name="remove_the_tag">ΑΦΑΙΡΕΣΗ ΕΤΙΚΕΤΑΣ</string>
     <string name="proxy_pref_title">Διαμεσολαβητής</string>
@@ -1744,4 +1744,5 @@
     <string name="rendering_attr_subwayMode_name">Δρομολόγια μετρό</string>
     <string name="enable_proxy_title">Ενεργοποίηση διακομιστή μεσολάβησης HTTP</string>
 	<string name="proxy_host_title">Διαμεσολαβητής</string>
-	</resources>
+	<string name="rendering_attr_hideHouseNumbers_name">Απόκρυψη αριθμών σπιτιών</string>
+    </resources>
