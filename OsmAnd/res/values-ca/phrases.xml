@@ -557,4 +557,8 @@
 	<string name="poi_library">Biblioteca</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_waterway_turning_point">Punt de canvi de sentit naval</string>
+	<string name="poi_training">Centre de formació</string>
+	<string name="poi_baby_hatch">Recollida de nadons</string>
+	<string name="poi_newspaper">Oficina de premsa</string>
+	<string name="poi_military_landuse">Zona militar</string>
 	</resources>
