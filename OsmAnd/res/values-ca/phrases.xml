@@ -163,7 +163,7 @@
 	<string name="poi_lock_gate">Resclosa</string>
 	<string name="poi_weir">Sobreeixidor</string>
 	<string name="poi_dam">Presa d\'aigua</string>
-	<string name="poi_water_mill">Molí hidràulic</string>
+	<string name="poi_watermill">Molí hidràulic</string>
 
 	<string name="poi_power_substation">Subestació elèctrica</string>
 	<string name="poi_power_transformer">Transformador elèctric</string>

@@ -252,7 +252,7 @@
 	<string name="poi_waterway_turning_point">船舶転回所(Waterway turning point)</string>
 	<string name="poi_weir">堰(Weir)</string>
 	<string name="poi_dam">ダム(Dam)</string>
-	<string name="poi_water_mill">水車小屋(Water mill)</string>
+	<string name="poi_watermill">水車小屋(Water mill)</string>
 
 	<string name="poi_power_substation">変電所(Substation)</string>
 	<string name="poi_power_transformer">変圧器・トランス(Transformer)</string>

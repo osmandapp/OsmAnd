@@ -100,7 +100,7 @@
 	<string name="poi_wastewater_plant">Estación depuradora de augas residuais</string>
 	<string name="poi_water_tower">Depósito de auga</string>
 	<string name="poi_dam">Encoro</string>
-	<string name="poi_water_mill">Aceña</string>
+	<string name="poi_watermill">Aceña</string>
 
 	<string name="poi_power_substation">Subestación</string>
 	<string name="poi_power_transformer">Transformador</string>
