@@ -135,7 +135,7 @@
 	<string name="poi_speed_camera">Autovelox</string>
 	<string name="poi_turning_circle">Rotonda per inversione di marcia</string>
 	<string name="poi_wastewater_plant">Depuratore acque</string>
-	<string name="poi_water_mill">Mulino ad acqua</string>
+	<string name="poi_watermill">Mulino ad acqua</string>
 
 	<string name="poi_power_substation">Sottostazione</string>
 	<string name="poi_power_transformer">Trasformatore</string>

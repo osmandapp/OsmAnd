@@ -433,7 +433,7 @@
 	<string name="poi_lock_gate">Schutsluis</string>
 	<string name="poi_waterway_turning_point">Zwaaikom</string>
 	<string name="poi_weir">Stuw</string>
-	<string name="poi_water_mill">Watermolen</string>
+	<string name="poi_watermill">Watermolen</string>
 
 	<string name="poi_power_substation">Onderstation</string>
 	<string name="poi_power_transformer">Transformator</string>
