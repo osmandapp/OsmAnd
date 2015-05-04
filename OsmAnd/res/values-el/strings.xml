@@ -1745,4 +1745,18 @@
     <string name="enable_proxy_title">Ενεργοποίηση διακομιστή μεσολάβησης HTTP</string>
 	<string name="proxy_host_title">Διαμεσολαβητής</string>
 	<string name="rendering_attr_hideHouseNumbers_name">Απόκρυψη αριθμών σπιτιών</string>
-    </resources>
+    <string name="copying_osmand_file_failed">Η αντιγραφή των αρχείων απέτυχε</string>    
+    <string name="storage_directory_external">Εξωτερικό αποθηκευτικό μέσο</string>
+    <string name="storage_directory_internal_app">Εσωτερική μνήμη εφαρμογής</string>
+    <string name="storage_directory_manual">Καθορισμένο χειροκίνητα</string>
+    <string name="storage_directory_default">Εσωτερική μνήμη</string>
+    <string name="shared_string_copy">Αντιγραφή</string>
+    <string name="shared_string_open">Άνοιγμα</string>
+    <string name="shared_string_edit">Επεξεργασία</string>
+	<string name="shared_string_places">Μέρη</string>
+	<string name="shared_string_search">Αναζήτηση</string>
+	<string name="shared_string_show_description">Εμφάνιση περιγραφής</string>
+	<string name="shared_string_message">Μήνυμα</string>
+	<string name="shared_string_address">Διεύθυνση</string>
+	<string name="avoid_roads_msg">Μπορείτε να προκαλέσετε μια εναλλακτική διαδρομή επιλέγοντας δρόμους προς αποφυγή</string>
+	</resources>
