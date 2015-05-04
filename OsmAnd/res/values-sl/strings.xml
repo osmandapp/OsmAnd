@@ -1105,7 +1105,7 @@
     
     
 	<string name="index_srtm_ele">Izohipse</string>
-    <string name="srtm_plugin_description">"Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape). "</string>
+    <string name="srtm_plugin_description">"Omogoča prenos podatkov o izohipsah in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje datotek zemljevidov\' → \'Prenos\' → Izbira vrste mape). "</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
