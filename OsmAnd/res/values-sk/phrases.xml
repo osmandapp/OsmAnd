@@ -205,7 +205,7 @@
 	<string name="poi_waterway_turning_point">Obratisko na vode</string>
 	<string name="poi_weir">Vzdúvacia hrádza</string>
 	<string name="poi_dam">Priehrada/Hrádza</string>
-	<string name="poi_water_mill">Vodný mlyn</string>
+	<string name="poi_watermill">Vodný mlyn</string>
 
 	<string name="poi_power_substation">Elektrická stanica</string>
 	<string name="poi_power_transformer">Transformátor</string>

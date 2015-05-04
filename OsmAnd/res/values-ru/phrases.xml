@@ -189,7 +189,7 @@
 	<string name="poi_waterway_turning_point">Поворотная точка на воде</string>
 	<string name="poi_weir">Небольшая плотина</string>
 	<string name="poi_dam">Дамба</string>
-	<string name="poi_water_mill">Водяная мельница</string>
+	<string name="poi_watermill">Водяная мельница</string>
 
 	<string name="poi_power_substation">Подстанция</string>
 	<string name="poi_power_transformer">Трансформатор</string>

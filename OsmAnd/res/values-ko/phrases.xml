@@ -182,7 +182,7 @@
 	<string name="poi_lock_gate">게이트 잠금</string>
 	<string name="poi_waterway_turning_point">수로 터닝 포인트</string>
 	<string name="poi_dam">댐</string>
-	<string name="poi_water_mill">물방앗간</string>
+	<string name="poi_watermill">물방앗간</string>
 
 	<string name="poi_power_substation">변전소</string>
 	<string name="poi_power_transformer">변압기</string>
