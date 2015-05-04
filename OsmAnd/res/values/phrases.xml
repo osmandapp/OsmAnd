@@ -277,6 +277,8 @@
 	<string name="poi_post_box">Post box</string>
 	<string name="poi_telephone">Telephone</string>
 	<string name="poi_communication_tower">Communication tower</string>
+	<string name="poi_observation_tower">Observation tower</string>
+	<string name="poi_bell_tower">Bell tower</string>
 	<string name="poi_telephone_exchange">Telephone exchange</string>
 
 	<string name="poi_recycling">Recycling</string>
@@ -379,7 +381,7 @@
 	<string name="poi_lawyer">Lawyer</string>
 	<string name="poi_office_telecommunication">Telecommunication office</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_town_hall">Town hall</string>
+	<string name="poi_townhall">Town hall</string>
 	<string name="poi_employment_agency">Employment office</string>
 	<string name="poi_research">Research office</string>
 	<string name="poi_it">IT office</string>

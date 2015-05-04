@@ -538,7 +538,7 @@
 	<string name="poi_toll_booth">Mautstelle</string>
 	<string name="poi_information">Fremdenverkehrsamt</string>
 	<string name="poi_town">Kleinstadt</string>
-	<string name="poi_town_hall">Rathaus</string>
+	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
 	<string name="poi_trade">Geschäftszentrum</string>
 	<string name="poi_traffic_calming_bump">Bodenwelle</string>

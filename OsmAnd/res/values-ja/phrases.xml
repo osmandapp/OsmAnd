@@ -383,7 +383,7 @@
 	<string name="poi_lawyer">法律事務所(Lawyer)</string>
 	<string name="poi_office_telecommunication">通信会社事務所(Telecommunication office)</string>
 	<string name="poi_ngo">NGO・非政府組織(NGO)</string>
-	<string name="poi_town_hall">町役場・市庁舎(Town hall)</string>
+	<string name="poi_townhall">町役場・市庁舎(Town hall)</string>
 	<string name="poi_employment_agency">職業紹介所(Employment office)</string>
 	<string name="poi_research">研究所(Research office)</string>
 	<string name="poi_it">IT関連事務所(IT office)</string>
