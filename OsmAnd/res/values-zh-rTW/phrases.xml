@@ -368,4 +368,26 @@
 	<string name="poi_physiotherapist">物理治療師</string>
 	<string name="poi_podiatrist">足科醫師</string>
 	<string name="poi_psychotherapist">心理治療師</string>
+	<string name="poi_healthcare_rehabilitation">康復</string>
+	<string name="poi_speech_therapist">言語治療師</string>
+	<string name="poi_healthcare_yes">醫療設施</string>
+
+	<string name="poi_company">公司</string>
+	<string name="poi_insurance">保險</string>
+	<string name="poi_estate_agent">不動產經紀人</string>
+	<string name="poi_lawyer">律師</string>
+	<string name="poi_office_telecommunication">電信局</string>
+	<string name="poi_ngo">非政府組織</string>
+	<string name="poi_town_hall">市政廳</string>
+	<string name="poi_employment_agency">就業中心</string>
+	<string name="poi_research">研究室</string>
+	<string name="poi_it">IT 辦公室</string>
+	<string name="poi_newspaper">報社</string>
+	<string name="poi_architect">建築師事務所</string>
+	<string name="poi_advertising_agency">廣告代理商</string>
+	<string name="poi_educational_institution">教育機構</string>
+	<string name="poi_studio">廣播室</string>
+	<string name="poi_bookmaker">賭馬業者</string>
+
+	<string name="poi_stadium">體育場</string>
 	</resources>
