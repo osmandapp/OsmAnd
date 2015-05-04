@@ -27,7 +27,7 @@
 	<string name="shared_string_show_on_map">Pokaži na zemljevidu</string>
 	
 	<string name="search_address_top_text">Izberi naslov</string>
-	<string name="search_address_region">Regija</string>
+	<string name="search_address_region">Država</string>
 	<string name="search_address_city">Kraj</string>
 	<string name="search_address_street">Ulica</string>
 	<string name="search_address_building">Hiša</string>
@@ -49,7 +49,7 @@
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
 	<string name="add_favorite_dialog_favourite_added_template">Točka \'\'{0}\'\' je bila uspešno dodana med priljubljene.</string>
 	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno lokacijo \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je bila izbrisana.</string>
+	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je izbrisana.</string>
 	<string name="poi_edit_title">Uredi POI</string>
 	<string name="poi_create_title">Ustvari POI</string>
 	<string name="poi_error_poi_not_found">Točke ni mogoče najti ali pa usluga ni samostojna točka</string>
@@ -118,12 +118,12 @@
 	<string name="use_internet_to_download_tile">Uporabi internet za prenos manjkajočih delov karte</string>
 	<string name="app_description">Navigacijska aplikacija</string>
 	<string name="use_internet">Uporabi internet</string>
-	<string name="show_poi_over_map">Prikaži POI</string>
-	<string name="choose_city">Izberi mesto</string>
-	<string name="choose_building">Izberi hišno številko</string>
-	<string name="choose_street">Izberi ulico</string>
-	<string name="ChooseCountry">Izberi državo</string>
-	<string name="show_view_angle">Prikaži smer</string>
+	<string name="show_poi_over_map">Prikaži točke POI</string>
+	<string name="choose_city">Izbor mesta</string>
+	<string name="choose_building">Izbor hišne številke</string>
+	<string name="choose_street">Izbor ulice</string>
+	<string name="ChooseCountry">Izbor države</string>
+	<string name="show_view_angle">Pokaži smer pogleda</string>
 	
 	<string name="shared_string_add_to_favorites">Dodaj med priljubljene</string>
 	<string name="use_english_names_descr">Izberi prikaz avtohtonih oz. angleških imen</string>
@@ -447,7 +447,7 @@
 	
 	<string name="opening_changeset">Odpiranje paketa sprememb …</string>
 	<string name="closing_changeset">Zapiranje paketa sprememb …</string>
-	<string name="show_poi_over_map_description">Prikaži POI na zemljevidu (nazadnje izbran filter)</string>
+	<string name="show_poi_over_map_description">Prikaži točke POI na zemljevidu (nazadnje izbran filter)</string>
 	
 	<string name="prefs_plugins_descr">Vstavki omogočajo podporo za dodatne možnosti in nastavitve programa</string>
 	<string name="osmand_development_plugin_description">Vstavek omogoča prikaz nastavitev za razvoj in razhroščevanje programa. Med možnostmi so simuliranje vodenja poti, hitrost izrisovanja zemljevida na zaslonu, glasovni opomniki in podobno. Nastavitve so namenjene razvijalcem programske opreme.</string>
@@ -508,7 +508,7 @@
 	<string name="search_position_undefined">Nedoločeno</string>
 	
 	<string name="search_position_current_location">Trenutni položaj …</string>
-	<string name="search_position_map_view">Center trenutnega zemljevida</string>
+	<string name="search_position_map_view">Trenutno središče zemljevida</string>
 	<string name="search_position_address">Naslov …</string>
 	<string name="city_type_city">Mesto</string>
 	<string name="city_type_hamlet">Zaselek</string>
@@ -655,10 +655,9 @@
 \n\nZa dodajanje novih točk POI je treba te ustvariti preko vsebinskega menija \'Uporabi mesto\'. Pojavno okno zahteva vpis podatkov o točki poj. Ko je vpis končan, ga je mogoče objaviti.
 \n\nPrav tako je mogoče sporočati tudi napake na zemljevidu. Objave preko skupnosti OSM, ki se ukvarja z odpravljanjem hroščev je lažje in hitrejše. Poročilo o hrošču oddate preko sistema razhroščevanja med možnostmi \'Prijave napake v OSM\'. Tudi tu je treba najprej vpisati podatke o hrošči, po vnosu, pa sistem dovoli oddajanje hrošča.\n\nProgram OsmAnd omogoča predpomnjenje vpisov v načinu brez povezave (med nastavitvami je več možnosti delovanja), vendar pa je povezava nujna za posodobitev in nalaganje datotek OSM na napravo in za objavljanje poročil na spletu. "</string>
 	<string name="tip_map_context_menu">Meni \'Uporabi lokacijo\'</string>
-	<string name="tip_map_context_menu_t">\'Uporabi lokacijo\' kontekstni meni vsebuje vse ukaze, ki se nanašajo na točko (lokacijo).
-		\n\nTa je na voljo z dolgim pritiskom na katerokoli točko na zemljevidu (nato pritisnite na oznako) ali s pritiskom na gumb kroglico, ali z izbiro \'Meni\' → \'Uporabi lokacijo\' (zadnja dva načina uporabijo center zemljevida kot referenčno točko).
-		\n\nOznako lahko spet skrijete če dolgo kliknete nanjo.
-	</string>
+	<string name="tip_map_context_menu_t">"\'Uporabi lokacijo\' kontekstni meni vsebuje vse ukaze, ki se nanašajo na točko (lokacijo).
+\n\nTa je na voljo z dolgim pritiskom na katerokoli točko na zemljevidu (nato pritisnite na oznako) ali s pritiskom na gumb kroglico, ali z izbiro \'Meni\' → \'Uporabi lokacijo\' (zadnja dva načina uporabijo center zemljevida kot referenčno točko).
+\n\nOznako lahko spet skrijete če dolgo kliknete nanjo. "</string>
 	<string name="tip_search_t">"Kraje in zanimivosti je mogoče iskati preko \'Uporabi mesto\' → \'Poišči v bližini\', ali pa z iskalnikom preko \'Menija\' → \'Poišči\'.\n\nIskalno okno omogoča filtriranje iskanja:\n\t* po naslovu,
 \n\t* s koordinatami,
 \n\t* kot točke POI (po imenu ali vrsti),
@@ -1060,14 +1059,9 @@
 \n\t- New translations (Vienamese, Polish)
 \n\t- Other small features "</string>
 	<string name="tip_recent_changes_0_6_8_t">"Spremembe v 0.6.8:
-\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-\n\t- Implement POI search by name in big areas (countries)
-\n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Auto-center map view option (Issue 356)
-\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-\n\t- POI data included in .obf file (all download indexes after 01/10/11)
-\n\t- Voice prompt fixes (GPS position fix, omitting first command)
-\n\t- Small improvements "</string>
+\n\t- Popolnoma predelano iskanje (naslovi in točke POI)! Iskanje je veliko hitrejše in bolj odzivno. Ustvarjen je enoten vmesnik z več različnimi možnostmi filtriranja.
+\n\t- Možnost iskanja točk POI po imenu (države)\n\t- Popravek utripanja zaslona na tabličnih napravah (napaka 641)\n\t- Možnost samodejnega sredinjenja zemljevida (napaka 356)\n\t- Možnost izbire navigacije z GPX je prestavljena med \'Navigacijo\', možnost \'Shrani navigacijo\' pa v \'O poti\'
+\n\t- Podatki točk POI so vključeni v datoteki .obf (vse posodobitve po 01.10.2011)\n\t- Popravki glasovnega vodenja (popravki določanja položaja GPS)\n\t- Manjše izboljšave "</string>
 	<string name="tip_recent_changes_0_6_7_t">"Nedavne spremembe za 0.6.7 :
 \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
@@ -1807,7 +1801,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
     <string name="rendering_attr_busRoutes_name">Proge avtobusov</string>
     <string name="rendering_category_hide">Podrobnosti izrisa</string>
-    <string name="rendering_category_routes">Proge</string>
+    <string name="rendering_category_routes">Dodatne oznake poti</string>
     <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
     <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Proge souporabe taksijev</string>
