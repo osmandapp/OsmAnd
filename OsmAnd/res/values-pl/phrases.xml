@@ -146,7 +146,7 @@
 	<string name="poi_subway_station">Stacja metra</string>
 	<string name="poi_taxi">Postój TAXI</string>
 
-	<string name="poi_airport">Lotnisko</string>
+	<string name="poi_aerodrome">Lotnisko</string>
 	<string name="poi_helipad">Lądowisko helikopterów</string>
 	<string name="poi_runway">Pas startowy</string>
 	<string name="poi_aeroway_terminal">Terminal lotniczy</string>

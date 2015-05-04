@@ -21,7 +21,7 @@
 	<string name="poi_aeroway_gate">Flughafengate</string>
 	<string name="poi_aeroway_terminal">Flughafenterminal</string>
 	<string name="poi_craft_agricultural_engines">Landmaschinen</string>
-	<string name="poi_airport">Flughafen</string>
+	<string name="poi_aerodrome">Flughafen</string>
 	<string name="poi_alcohol">Spirituosenladen</string>
 	<string name="poi_alpine_hut">Berghütte</string>
 	<string name="poi_ambulance_station">Rettungswache</string>

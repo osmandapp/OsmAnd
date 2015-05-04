@@ -127,7 +127,7 @@
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
-	<string name="poi_airport">Aeroport</string>
+	<string name="poi_aerodrome">Aeroport</string>
 	<string name="poi_helipad">Heliport</string>
 	<string name="poi_runway">Pista d\'aterratge</string>
 	<string name="poi_aeroway_terminal">Terminal d\'aeroport</string>

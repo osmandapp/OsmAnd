@@ -71,7 +71,7 @@
 	<string name="poi_subway_station">Metrómegálló</string>
 	<string name="poi_taxi">Taxidroszt</string>
 
-	<string name="poi_airport">Repülőtér</string>
+	<string name="poi_aerodrome">Repülőtér</string>
 	<string name="poi_runway">Kifutópálya</string>
 	<string name="poi_aeroway_terminal">Utasterminál</string>
 	<string name="poi_aeroway_gate">Reptér kapu</string>

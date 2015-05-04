@@ -221,7 +221,7 @@
 	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
-	<string name="poi_airport">Airport</string>
+	<string name="poi_aerodrome">Airport</string>
 	<string name="poi_helipad">Helipad</string>
 	<string name="poi_runway">Runway</string>
 	<string name="poi_aeroway_terminal">Aeroway terminal</string>
