@@ -73,7 +73,7 @@
 	<string name="poi_bus_station">Stazione bus (obsoleto)</string>
 	<string name="poi_railway_subway_entrance">Entrata metropolitana</string>
 	<string name="poi_subway_station">Stazione metropolitana</string>
-	<string name="poi_airport">Aeroporto</string>
+	<string name="poi_aerodrome">Aeroporto</string>
 	<string name="poi_helipad">Eliporto</string>
 	<string name="poi_bicycle_rental">Noleggio bici</string>
 	<string name="poi_bicycle_parking">Parcheggio bici</string>

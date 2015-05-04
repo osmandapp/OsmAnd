@@ -220,7 +220,7 @@
 	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
 	<string name="poi_taxi">計程車站</string>
 
-	<string name="poi_airport">機場</string>
+	<string name="poi_aerodrome">機場</string>
 	<string name="poi_helipad">直升機停機坪</string>
 	<string name="poi_runway">跑道</string>
 	<string name="poi_aeroway_terminal">機場航廈</string>

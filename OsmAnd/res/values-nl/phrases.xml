@@ -139,7 +139,7 @@
 	<string name="poi_subway_station">Metrostation</string>
 	<string name="poi_taxi">Taxistandplaats</string>
 
-	<string name="poi_airport">Luchthaven</string>
+	<string name="poi_aerodrome">Luchthaven</string>
 	<string name="poi_helipad">Helikopterplatform</string>
 	<string name="poi_runway">Landingsbaan</string>
 	<string name="poi_aeroway_terminal">Terminal</string>

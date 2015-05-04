@@ -163,7 +163,7 @@
 	<string name="poi_railway_buffer_stop">Železničná zarážka</string>
 	<string name="poi_taxi">Stanovište taxíkov</string>
 
-	<string name="poi_airport">Letisko</string>
+	<string name="poi_aerodrome">Letisko</string>
 	<string name="poi_helipad">Plocha pre vrtuľníky</string>
 	<string name="poi_runway">Pristávacia dráha</string>
 	<string name="poi_aeroway_terminal">Terminál</string>
