@@ -33,7 +33,7 @@
 	<string name="shared_string_show_description">Show description</string>
 	<string name="shared_string_message">Message</string>
 	<string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
-    <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
+    <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is not permitted by law. OsmAnd does not assume any liability if you violate the law. Please click yes only if you are eligible to use this feature.</string>
 	<string name="welmode_download_maps">Download maps</string>
 	<string name="welcome_select_region">To correctly reflect your traffic signs and regulations, please select your driving region:</string>
 	<string name="welcome_text">OsmAnd provides global offline map browsing, and global offline navigation!</string>
@@ -181,8 +181,8 @@
 		\n\nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.
 	</string>
 	<string name="plugin_ski_name">Ski map view</string>
-	<string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingetips the details on global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
-		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
+	<string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
+		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
 	<string name="audionotes_plugin_name">Audio/video notes</string>
 	<string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map screen, or directly the context menu for any position on the map.</string>
