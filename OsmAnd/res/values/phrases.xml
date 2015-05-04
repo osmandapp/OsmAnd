@@ -482,6 +482,7 @@
 	<string name="poi_theme_park">Theme park</string>
 	
 	<string name="poi_attraction">Tourist attraction</string>
+	<string name="poi_general_tourist_attraction_yes">General tourist attraction</string>
 	<string name="poi_attraction_amusement_ride">Amusement ride</string>
 	<string name="poi_attraction_animal">Animal (attraction)</string>
 	<string name="poi_attraction_big_wheel">Ferris wheel</string>
@@ -503,6 +504,9 @@
 	<string name="poi_chalet">Chalet</string>
 	<string name="poi_apartment">Apartment</string>
 	<string name="poi_wilderness_hut">Wilderness hut</string>
+	<string name="poi_cabin">Cabin</string>
+	<string name="poi_lean_to">Lean-to</string>
+	<string name="poi_hunting_lodge">Hunting lodge</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
 	<string name="poi_religion_christian">Place of worship: christian</string>
@@ -531,6 +535,7 @@
 	<string name="poi_camp_site">Camp site</string>
 	<string name="poi_caravan_site">Caravan site</string>
 	<string name="poi_picnic_site">Picnic site</string>
+	<string name="poi_picnic_table">Picnic table</string>
 	<string name="poi_spring">Spring</string>
 	<string name="poi_hot_spring">Hot spring</string>
 	<string name="poi_geyser">Geyser</string>
@@ -540,6 +545,9 @@
 	<string name="poi_shelter">Shelter</string>
 	<string name="poi_funicular">Funicular</string>
 	<string name="poi_resort">Resort</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Wine cellar</string>
+	<string name="poi_winery">Winery</string>
 
 	<string name="poi_club_art">Art club</string>
 	<string name="poi_club_astronomy">Astronomy club</string>
@@ -586,6 +594,7 @@
 	<string name="poi_social_centre">Social centre</string>
 	<string name="poi_theatre">Theatre</string>
 	<string name="poi_circus">Circus</string>
+	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
 	<string name="poi_stripclub">Stripclub</string>
@@ -604,6 +613,7 @@
 	<string name="poi_park">Park</string>
 	<string name="poi_recreation_ground">Recreation ground</string>
 	<string name="poi_village_green">Village green</string>
+	<string name="poi_trail_riding_station">Trail riding station</string>
 
 	<string name="poi_cafe">Cafe</string>
 	<string name="poi_biergarten">Biergarten</string>
