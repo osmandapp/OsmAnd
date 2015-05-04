@@ -390,4 +390,12 @@
 	<string name="poi_bookmaker">賭馬業者</string>
 
 	<string name="poi_stadium">體育場</string>
+	<string name="poi_sports_centre">體育中心</string>
+	<string name="poi_golf_course">高爾夫球場</string>
+	<string name="poi_ice_rink">溜冰場</string>
+	<string name="poi_pitch">運動場</string>
+	<string name="poi_leisure_track">操場</string>
+	<string name="poi_running_track">賽跑跑道</string>
+	<string name="poi_bicycle_track">自行車道</string>
+	<string name="poi_horse_track">馬道</string>
 	</resources>
