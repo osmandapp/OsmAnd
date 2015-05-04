@@ -202,7 +202,7 @@
 	
 	
 	
-	<string name="osmand_development_plugin_description">Εμφάνιση των ρυθμίσεων για τα χαρακτηριστικά ανάπτυξης και αποσφαλμάτωσης όπως προσομοίωση πλοήγησης ή επιδόσεις απεικόνισης.</string>
+	<string name="osmand_development_plugin_description">Αυτό το πρόσθετο εμφανίζει τις ρυθμίσεις για τα χαρακτηριστικά ανάπτυξης και αποσφαλμάτωσης όπως η δοκιμή ή η προσομοίωση πλοήγησης, η απόδοση απεικόνισης οθόνης, ή η φωνητική καθοδήγηση. Αυτές οι ρυθμίσεις προορίζονται για τους προγραμματιστές και δεν χρειάζονται στον απλό χρήστη.</string>
 	<string name="plugins_screen">Πρόσθετα</string>
 	
 	<string name="prefs_plugins_descr">Τα πρόσθετα ενεργοποιούν προχωρημένες ρυθμίσεις και επιπλέον λειτουργικότητα</string>
@@ -1090,7 +1090,7 @@
 <string name="index_srtm_parts">μέρη</string>
     
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
-    <string name="audionotes_plugin_description">Κάντε σημειώσεις ήχου/video κατά τη διάρκεια του ταξιδιού</string>
+    <string name="audionotes_plugin_description">Το πρόσθετο σημειώσεων ήχου/video παρέχει τη λειτουργία λήψης σημειώσεων ήχου/φωτογραφίας/video κατά τη διάρκεια του ταξιδιού, χρησιμοποιώντας είτε ένα κουμπί στην οθόνη χάρτη, ή απευθείας στο αναδυόμενο μενού για οποιοδήποτε σημείο στον χάρτη.</string>
     <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
     
     <string name="osmand_srtm_short_description_80_chars">Πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
