@@ -603,7 +603,7 @@
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">"Dateiname: "</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
-	<string name="shared_string_save">Speichern</string>
+	<string name="shared_string_save">speichern</string>
 	
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
@@ -1115,7 +1115,7 @@
 	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 	<string name="context_menu_item_create_poi">POI einsenden</string>
 	<string name="shared_string_yes">Ja</string>
-	<string name="shared_string_cancel">Abbrechen</string>
+	<string name="shared_string_cancel">abbrechen</string>
 	<string name="shared_string_apply">Übernehmen</string>
 	<string name="shared_string_add">Hinzufügen</string>
 	<string name="shared_string_no">Nein</string>
@@ -1146,7 +1146,7 @@
 	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
 	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 	<string name="poi_remove_title">POI löschen</string>
-	<string name="shared_string_delete">Löschen</string>
+	<string name="shared_string_delete">löschen</string>
 	<string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
