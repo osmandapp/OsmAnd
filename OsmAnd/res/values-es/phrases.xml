@@ -751,7 +751,7 @@
 	<string name="poi_signal_station_warning">Estación de señales de advertencia</string>
 	<string name="poi_small_craft_facility">Instalaciones para pequeñas embarcaciones</string>
 	<string name="poi_topmark">Tope náutico</string>
-	<string name="poi_seamark_rock">Roca, náutica</string>
+	<string name="poi_seamark_rock">Roca náutica</string>
 	<string name="poi_seamark_wreck">Pecio</string>
 
 	<string name="poi_military_landuse">Zona militar</string>
