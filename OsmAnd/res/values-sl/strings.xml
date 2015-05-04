@@ -43,11 +43,11 @@
 	<string name="context_menu_item_open_bug">Prijavi OSM napako</string>
 	<string name="context_menu_item_update_map">Osveži karto</string>
 	<string name="search_tabs_location">Mesto</string>
-	<string name="add_favorite_dialog_default_favourite_name">Priljubljena lokacija</string>
+	<string name="add_favorite_dialog_default_favourite_name">Priljubljeno mesto</string>
 	<string name="add_favorite_dialog_top_text">Vnesite ime priljubljene lokacije</string>
 	<string name="favourites_context_menu_edit">Uredi priljubljeno lokacijo</string>
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
-	<string name="add_favorite_dialog_favourite_added_template">Priljubljena lokacija \'\'{0}\'\' je bila dodana.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Točka \'\'{0}\'\' je bila uspešno dodana med priljubljene.</string>
 	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno lokacijo \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je bila izbrisana.</string>
 	<string name="poi_edit_title">Uredi POI</string>
@@ -523,8 +523,8 @@
 	<string name="favorite_delete_multiple">Izbrisali boste %1$d lokacijo in %2$d skupino. Ali ste prepričani?</string>
 	<string name="favourites_delete_multiple_succesful">Priljubljene lokacije so uspešno izbrisane.</string>
 	
-	<string name="favorite">Priljubljena</string>
-	<string name="fav_points_edited">Priljubljena lokacija je bila urejena</string>
+	<string name="favorite">Priljubljene</string>
+	<string name="fav_points_edited">Priljubljena točka je urejena</string>
 	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
 	<string name="incomplete_locale">nedokončano</string>
 	<string name="download_roads_only_item">Le ceste</string>
@@ -1525,7 +1525,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="select_gpx">Izberite GPX …</string>
     <string name="route_descr_select_destination">Izberite cilj</string>
     <string name="shared_string_select_on_map">Izberi na zemljevidu</string>
-    <string name="shared_string_favorite">Priljubljena</string>
+    <string name="shared_string_favorite">Priljubljene</string>
     <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
 \n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
 \n Opomba 2: v novem mestu shrambe si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti podatkov.</string>
