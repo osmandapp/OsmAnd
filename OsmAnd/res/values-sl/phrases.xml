@@ -82,4 +82,39 @@
 	<string name="poi_tram_stop">Postajališče tramvaja</string>
 	<string name="poi_bus_station">Avtobusna postaja</string>
 	<string name="poi_railway_station">Železniška postaja</string>
+	<string name="poi_sightseeing">Krajevna znamenitost</string>
+		<string name="poi_lighthouse">Svetilnik</string>
+
+	<string name="poi_bicycle_rental">Izposojevalnica koles</string>
+	<string name="poi_aerialway_gondola">Žičnica</string>
+	<string name="poi_aerialway_chair_lift"/>
+	<string name="poi_tunnel">Tunel</string>
+	<string name="poi_bridge">Most</string>
+
+	<string name="poi_speed_camera">Hitrostna kamera</string>
+	<string name="poi_junction">Križišče</string>
+	<string name="poi_rest_area">Počivališče</string>
+
+	<string name="poi_water_well">Vodni vir</string>
+	<string name="poi_dam">Jez</string>
+	<string name="poi_watermill">Mlin na vodo</string>
+
+	<string name="poi_post_office">Pošta</string>
+	<string name="poi_post_box">Poštni nabiralnik</string>
+	<string name="poi_telephone">Telefonska govorilnica</string>
+	<string name="poi_vineyard">Vinograd</string>
+	<string name="poi_observatory">Observatorij</string>
+	<string name="poi_astronomical_observatory">Astronomski observatorij</string>
+	<string name="poi_tower">Stolp</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_windmill">Mlin na veter</string>
+	<string name="poi_silo">Silos</string>
+	<string name="poi_driving_school">Avtošola</string>
+	<string name="poi_kindergarten">Vrtec</string>
+	<string name="poi_school">Šola</string>
+	<string name="poi_courthouse">Sodišče</string>
+	<string name="poi_prison">Zapor</string>
+	<string name="poi_city">Mesto</string>
+	<string name="poi_town">Mesto</string>
+	<string name="poi_village">Vas</string>
 	</resources>
