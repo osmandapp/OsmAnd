@@ -420,7 +420,7 @@
 	<string name="poi_podiatrist">Podologue</string>
 	<string name="poi_psychotherapist">Psychothérapeute</string>
 	<string name="poi_company">Entreprise</string>
-	<string name="poi_town_hall">Mairie</string>
+	<string name="poi_townhall">Mairie</string>
 	<string name="poi_educational_institution">Institution éducative</string>
 	<string name="poi_bicycle_track">Piste cycable</string>
 	<string name="poi_australian_football">Football autralien</string>

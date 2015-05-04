@@ -229,7 +229,7 @@
 	<string name="poi_company">Empresa</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
-	<string name="poi_town_hall">Municipio</string>
+	<string name="poi_townhall">Municipio</string>
 	<string name="poi_employment_agency">Oficina de empleo</string>
 	<string name="poi_studio">Estudio</string>
 	<string name="poi_stadium">Estadio</string>

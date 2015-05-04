@@ -122,7 +122,7 @@
 	<string name="poi_dentist">Fogorvos</string>
 	<string name="poi_veterinary">Állatorvos</string>
 	<string name="poi_sanatorium">Szanatórium</string>
-	<string name="poi_town_hall">Városháza</string>
+	<string name="poi_townhall">Városháza</string>
 	<string name="poi_stadium">Stadion</string>
 	<string name="poi_sports_centre">Sportközpont</string>
 	<string name="poi_golf_course">Golfpálya</string>

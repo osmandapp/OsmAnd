@@ -291,7 +291,7 @@
 	<string name="poi_lawyer">Právnik</string>
 	<string name="poi_office_telecommunication">Telekomunikácie</string>
 	<string name="poi_ngo">Nezisková organizácia</string>
-	<string name="poi_town_hall">Radnica</string>
+	<string name="poi_townhall">Radnica</string>
 	<string name="poi_employment_agency">Personálna agentúra</string>
 	<string name="poi_research">Výskumný ústav</string>
 	<string name="poi_it">Informačné technológie</string>
