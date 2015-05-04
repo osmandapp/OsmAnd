@@ -151,7 +151,7 @@
 <string name="poi_subway_station">ایستگاه مترو</string>
 <string name="poi_taxi">ایستگاه تاکسی</string>
 
-<string name="poi_airport">فرودگاه</string>
+<string name="poi_aerodrome">فرودگاه</string>
 <string name="poi_helipad">جایگاه هلیکوپتر</string>
 <string name="poi_runway">باند فرودگاه</string>
 <string name="poi_aeroway_terminal">ترمینال Aeroway</string>

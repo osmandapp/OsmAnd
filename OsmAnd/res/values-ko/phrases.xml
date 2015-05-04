@@ -145,7 +145,7 @@
 	<string name="poi_subway_station">지하철 역</string>
 	<string name="poi_taxi">택시 승차장</string>
 
-	<string name="poi_airport">공항</string>
+	<string name="poi_aerodrome">공항</string>
 	<string name="poi_helipad">헬리콥터 이착륙지</string>
 	<string name="poi_runway">활주로</string>
 	<string name="poi_aeroway_terminal">Aeroway 터미널</string>

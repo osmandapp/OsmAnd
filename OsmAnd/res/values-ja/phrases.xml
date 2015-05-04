@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="poi_airport">空港(Aireport)</string>
+	<string name="poi_aerodrome">空港(Aireport)</string>
 	<string name="poi_bank">銀行(Bank)</string>
 	<string name="poi_bus_stop">バス停(Bus stop)</string>
 	<string name="poi_car_rental">レンタカー(Car rental)</string>
