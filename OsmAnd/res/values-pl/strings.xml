@@ -9,7 +9,7 @@
   <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Autocentrowanie mapy</string>
-  <string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
+  <string name="choose_auto_follow_route_descr">Określa opóźnienie nadążania mapy za aktualną lokalizacją</string>
   <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
@@ -300,7 +300,7 @@
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
-  <string name="fast_route_mode_descr">Włącz, aby obliczać najszybszą trasę lub wyłącz dla najkrótszej </string>
+  <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
   <string name="context_menu_item_download_map">Pobierz mapę</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
@@ -468,7 +468,7 @@
   <string name="max_level_download_tile">Maks. zoom online</string>
   <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
   <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d godz %3$d min.</string>
-  <string name="router_service_descr">Wybierz usługę nawigacyjną (online lub offline)</string>
+  <string name="router_service_descr">Wybiera usługę nawigacyjną online lub offline</string>
   <string name="router_service">Usługa nawigacyjna</string>
   <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>
   <string name="download_question">Pobrać {0} - {1} ?</string>
@@ -1549,7 +1549,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
-    <string name="routing_preferences_descr">Ustawienia obliczania trasy</string>
+    <string name="routing_preferences_descr">Wyznaczanie trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
     <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowego położenia…</string>
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowego położenia (%s)…</string>
@@ -1931,8 +1931,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_show">Wyświetlanie</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
-    <string name="wake_on_voice">Włącz ekran</string>
-    <string name="wake_on_voice_descr">Włącz ekran urządzenia podczas zbliżania się do skrętu</string>
+    <string name="wake_on_voice">Włączanie ekranu</string>
+    <string name="wake_on_voice_descr">Włącza ekran urządzenia podczas zbliżania się do zakrętu</string>
     
     <string name="impassable_road">Unikaj dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
