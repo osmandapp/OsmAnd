@@ -576,6 +576,7 @@
 	<string name="poi_piste_snow_park">Snow park</string>
 	<string name="poi_piste_playground">Playground</string>
 	<string name="poi_piste_ice_skate">Ice skate</string>
+	<string name="poi_ski_rental">Ski rental</string>
 
 	<string name="poi_library">Library</string>
 	<string name="poi_arts_centre">Arts centre</string>
@@ -588,6 +589,7 @@
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
 	<string name="poi_stripclub">Stripclub</string>
+	<string name="poi_ski_resort">Ski resort</string>
 	<string name="poi_beach_resort">Beach resort</string>
 	<string name="poi_dog_park">Dog park</string>
 	<string name="poi_leisure_fishing">Fishing place</string>
