@@ -365,7 +365,7 @@
 	<string name="poi_crematorium">Crematorio</string>
 	<string name="poi_bank">Banco</string>
 	<string name="poi_atm">Cajero automático</string>
-	<string name="poi_accountant">Contador</string>
+	<string name="poi_accountant">Contable/Contador</string>
 	<string name="poi_cave_entrance">Entrada a cueva</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
@@ -639,7 +639,7 @@
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
 
 	<string name="poi_peak">Pico de montaña</string>
-	<string name="poi_sinkhole">Sumidero</string>
+	<string name="poi_sinkhole">Sima</string>
 	<string name="poi_waterfall">Cascada</string>
 	<string name="poi_bay">Bahía</string>
 	<string name="poi_fjord">Fiordo</string>
