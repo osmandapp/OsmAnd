@@ -783,4 +783,17 @@
 	<string name="poi_ski_rental">Skiudlejning</string>
 
 	<string name="poi_ski_resort">Skisportssted</string>
+	<string name="poi_general_tourist_attraction_yes">Generel turistattraktion</string>
+	<string name="poi_cabin">Hytte</string>
+	<string name="poi_hunting_lodge">Jagthytte</string>
+
+	<string name="poi_picnic_table">Picnicbord</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Vinkælder</string>
+	<string name="poi_winery">Vingård</string>
+
+	<string name="poi_gallery">Kunstgalleri</string>
+	<string name="poi_trail_riding_station">Trail ridning station</string>
+
+	<string name="poi_lean_to">Lean-to shelter</string>
 	</resources>
