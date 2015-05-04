@@ -202,7 +202,7 @@
 	<string name="poi_post_office">Пошта</string>
 	<string name="poi_post_box">Паштовая скрыня</string>
 	<string name="poi_telephone">Тэлефон</string>
-	<string name="poi_communication_tower">Вышка сувязі</string>
+	<string name="poi_communication_tower">Вежа сувязі</string>
 	<string name="poi_telephone_exchange">АТС</string>
 
 	<string name="poi_recycling">Перапрацоўка адыходаў</string>
@@ -773,4 +773,6 @@
 
 	<string name="poi_payment_terminal">Плацёжны тэрмінал</string>
 	<string name="poi_piste">Лыжная траса</string>
+	<string name="poi_observation_tower">Назіральная вежа</string>
+	<string name="poi_bell_tower">Званіца</string>
 	</resources>
