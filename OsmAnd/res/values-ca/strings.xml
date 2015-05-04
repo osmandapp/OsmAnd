@@ -1997,4 +1997,5 @@ Activant aquests canvis de visualització l\'estil del mapa canvia a "Hibern i e
     <string name="storage_directory_default">Memòria interna</string>
     <string name="storage_directory">Emmagatzematge de mapes</string>
     <string name="shared_string_copy">Copia</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Amaga la numeració de finques</string>
     </resources>
