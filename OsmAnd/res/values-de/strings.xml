@@ -2104,4 +2104,34 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
 	<string name="shared_string_open">Öffnen</string>
 
-    </resources>
+    <string name="rendering_attr_hideHouseNumbers_name">Hausnummern verbergen</string>
+    <string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>
+    <string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
+	<string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen</string>    
+    <string name="storage_directory_external">Externer Speicher</string>
+    <string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
+    <string name="storage_directory_internal_app">Interner Anwendungsspeicher</string>
+    <string name="storage_directory_manual">Manuell spezifiziert</string>
+    <string name="storage_directory_default">Interner Speicher</string>
+    <string name="storage_directory">Kartenspeicher</string>
+    <string name="shared_string_copy">Kopieren</string>
+    <string name="filter_poi_hint">Nach Name filtern</string>
+    <string name="agps_info">A-GPS Info</string>
+	<string name="shared_string_manage">Verwalten</string>
+	<string name="shared_string_edit">Bearbeiten</string>
+	<string name="shared_string_search">Suchen</string>
+	<string name="shared_string_show_description">Beschreibung anzeigen</string>
+	<string name="shared_string_message">Nachricht</string>
+	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
+    <string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
+	<string name="welmode_download_maps">Karten herunterladen</string>
+	<string name="welcome_header">Willkommen</string>
+    <string name="current_route">Aktuelle Route</string>
+    <string name="mark_to_delete">Zum Löschen markieren</string>
+	<string name="osmo_grop_name_length_alert">Der Gruppenname sollte mindestens 3 Zeichen lang sein!</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d Änderungen werden jetzt zu OSM hinaufgeladen. Sind Sie sicher?</string>
+    <string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
+    <string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_minute">min</string>
+	<string name="osmand_parking_time_left">links</string>
+	</resources>
