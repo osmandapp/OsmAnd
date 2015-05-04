@@ -1833,8 +1833,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">V bližini</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
-    <string name="osmo_no_connection_msg">Storitev sledilnika OsMo ni na voljo:\n- preverite povezavo,\n- preverite nastavitve,\n- spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- ustvariti skupin,\n- usklajevati skupin in naprav s strežnikom,\n- zasebno upravljati skupin in naprav.</string>
+    <string name="osmo_no_connection_msg">Storitev sledilnika OsMo ni na voljo:\n- Preverite povezavo\n- Preverite nastavitve\n- Spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- Ustvariti skupin\n- Usklajevati skupin in naprav s strežnikom\n- Zasebno upravljati skupin in naprav.</string>
     <string name="anonymous_user">Brezimni uporabnik</string>
     <string name="logged_as">Prijava kot %1$s</string>
 	<string name="speed_limit_exceed">Upoštevanje omejitve hitrosti</string>

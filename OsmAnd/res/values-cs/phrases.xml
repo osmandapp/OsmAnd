@@ -769,4 +769,6 @@
 	<string name="poi_paddle_tennis">Pádel tenis</string>
 	<string name="poi_piste">Sjezdovka</string>
 	<string name="poi_piste_skitour">Lyžařský okruh</string>
+	<string name="poi_observation_tower">Rozhledna</string>
+	<string name="poi_bell_tower">Zvonice</string>
 	</resources>
