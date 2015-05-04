@@ -1717,7 +1717,7 @@
 	<string name="agps_info">Πληροφορίες A-GPS</string>
 	<string name="agps_data_last_downloaded">Τελευταία λήψη δεδομένων A-GPS: %1$s</string>
     <string name="welmode_download_maps">Λήψη χαρτών</string>
-	<string name="welcome_select_region">Επιλέξτε την περιοχή σας</string>
+	<string name="welcome_select_region">Για να αντικατοπτρίζονται σωστά ο κώδικας και τα σήματα κυκλοφορίας, παρακαλώ επιλέξτε την περιοχή οδήγησής σας:</string>
 	<string name="welcome_header">Καλώς ήλθατε</string>
     <string name="current_route">Τρέχουσα διαδρομή</string>
     <string name="mark_to_delete">Σήμανση για διαγραφή</string>
