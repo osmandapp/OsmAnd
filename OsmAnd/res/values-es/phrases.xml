@@ -628,7 +628,7 @@
 	<string name="poi_dry_cleaning">Limpieza en seco</string>
 	<string name="poi_car_sharing">Coche compartido</string>
 	<string name="poi_boat_sharing">Barco compartido</string>
-	<string name="poi_dock">Muelle</string>
+	<string name="poi_dock">Dársena</string>
 	<string name="poi_toilets">Baño</string>
 	<string name="poi_internet_cafe">Cibercafé</string>
 
@@ -668,7 +668,7 @@
 	<string name="poi_dyke">Dique</string>
 	<string name="poi_floating_dock">Dique flotante</string>
 	<string name="poi_fog_signal">Señal de niebla</string>
-	<string name="poi_harbour_basin">Dársena</string>
+	<string name="poi_harbour_basin">Cuenca portuaria</string>
 	<string name="poi_seamark_harbour">Puerto</string>
 	<string name="poi_baby_hatch">Escotilla de bebé</string>
 	<string name="poi_speech_therapist">Fonoaudiólogo</string>
@@ -778,4 +778,7 @@
 	<string name="poi_winery">Vinatería</string>
 
 	<string name="poi_gallery">Galería de arte</string>
+	<string name="poi_hunting_lodge">Pabellón de caza</string>
+
+	<string name="poi_hanami">Hanami</string>
 	</resources>
