@@ -561,4 +561,11 @@
 	<string name="poi_baby_hatch">Recollida de nadons</string>
 	<string name="poi_newspaper">Oficina de premsa</string>
 	<string name="poi_military_landuse">Zona militar</string>
+	<string name="poi_observation_tower">Torre de guaita</string>
+	<string name="poi_bell_tower">Campanar</string>
+	<string name="poi_educational_institution">Centre educatiu</string>
+	<string name="poi_roller_skating">Patinatge sobre rodes</string>
+	<string name="poi_craft_carpet_layer">Instal·lador de moqueta</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Celler</string>
 	</resources>
