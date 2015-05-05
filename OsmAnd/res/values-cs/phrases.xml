@@ -61,7 +61,7 @@
 	<string name="poi_bus_stop">Zastávka autobusu</string>
 	<string name="poi_public_transport_platform_tram">Tramvajová zastávka</string>
 	<string name="poi_public_transport_station">Zastávka veřejné dopravy</string>
-	<string name="poi_airport">Letiště</string>
+	<string name="poi_aerodrome">Letiště</string>
 	<string name="poi_lighthouse">Maják</string>
 
 	<string name="poi_bicycle_rental">Půjčovna kol</string>
@@ -393,7 +393,7 @@
 	<string name="poi_waterway_turning_point">Vodní obratiště</string>
 	<string name="poi_weir">Hráz</string>
 	<string name="poi_dam">Přehrada</string>
-	<string name="poi_water_mill">Vodní mlýn</string>
+	<string name="poi_watermill">Vodní mlýn</string>
 
 	<string name="poi_power_substation">Transformátorová stanice</string>
 	<string name="poi_power_transformer">Transformátor</string>
@@ -482,7 +482,7 @@
 	<string name="poi_estate_agent">Realitní kancelář</string>
 	<string name="poi_office_telecommunication">Telekomunikace</string>
 	<string name="poi_ngo">Nezisková organizace</string>
-	<string name="poi_town_hall">Radnice</string>
+	<string name="poi_townhall">Radnice</string>
 	<string name="poi_employment_agency">Úřad práce</string>
 	<string name="poi_research">Výzkumný ústav</string>
 	<string name="poi_it">Informační technologie</string>

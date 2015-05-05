@@ -82,7 +82,7 @@
 	<string name="poi_subway_station">Estación de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
-	<string name="poi_airport">Aeroporto</string>
+	<string name="poi_aerodrome">Aeroporto</string>
 	<string name="poi_helipad">Heliporto</string>
 	<string name="poi_lighthouse">Faro</string>
 
@@ -100,7 +100,7 @@
 	<string name="poi_wastewater_plant">Estación depuradora de augas residuais</string>
 	<string name="poi_water_tower">Depósito de auga</string>
 	<string name="poi_dam">Encoro</string>
-	<string name="poi_water_mill">Aceña</string>
+	<string name="poi_watermill">Aceña</string>
 
 	<string name="poi_power_substation">Subestación</string>
 	<string name="poi_power_transformer">Transformador</string>
@@ -167,7 +167,7 @@
 	<string name="poi_lawyer">Avogado</string>
 	<string name="poi_office_telecommunication">Oficina de telecomunicacións</string>
 	<string name="poi_ngo">ONG</string>
-	<string name="poi_town_hall">Casa do Concello</string>
+	<string name="poi_townhall">Casa do Concello</string>
 	<string name="poi_employment_agency">Oficina de emprego</string>
 	<string name="poi_research">Oficina de investigación</string>
 	<string name="poi_advertising_agency">Axencia de publicidade</string>

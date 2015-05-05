@@ -21,7 +21,7 @@
 	<string name="poi_aeroway_gate">Flughafengate</string>
 	<string name="poi_aeroway_terminal">Flughafenterminal</string>
 	<string name="poi_craft_agricultural_engines">Landmaschinen</string>
-	<string name="poi_airport">Flughafen</string>
+	<string name="poi_aerodrome">Flughafen</string>
 	<string name="poi_alcohol">Spirituosenladen</string>
 	<string name="poi_alpine_hut">Berghütte</string>
 	<string name="poi_ambulance_station">Rettungswache</string>
@@ -538,7 +538,7 @@
 	<string name="poi_toll_booth">Mautstelle</string>
 	<string name="poi_information">Fremdenverkehrsamt</string>
 	<string name="poi_town">Kleinstadt</string>
-	<string name="poi_town_hall">Rathaus</string>
+	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
 	<string name="poi_trade">Geschäftszentrum</string>
 	<string name="poi_traffic_calming_bump">Bodenwelle</string>
@@ -571,7 +571,7 @@
 	<string name="poi_waste_disposal">Deponie</string>
 	<string name="poi_wastewater_plant">Abwasseranlage</string>
 	<string name="poi_craft_watchmaker">Uhrmacher</string>
-	<string name="poi_water_mill">Wassermühle</string>
+	<string name="poi_watermill">Wassermühle</string>
 	<string name="poi_water_park">Wasserpark</string>
 	<string name="poi_water_tower">Wasserturm</string>
 	<string name="poi_water_well">Wasserbrunnen</string>

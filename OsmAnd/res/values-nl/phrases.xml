@@ -139,7 +139,7 @@
 	<string name="poi_subway_station">Metrostation</string>
 	<string name="poi_taxi">Taxistandplaats</string>
 
-	<string name="poi_airport">Luchthaven</string>
+	<string name="poi_aerodrome">Luchthaven</string>
 	<string name="poi_helipad">Helikopterplatform</string>
 	<string name="poi_runway">Landingsbaan</string>
 	<string name="poi_aeroway_terminal">Terminal</string>
@@ -209,7 +209,7 @@
 	<string name="poi_estate_agent">Vastgoedmakelaar</string>
 	<string name="poi_lawyer">Advocaat</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_town_hall">Stadhuis</string>
+	<string name="poi_townhall">Stadhuis</string>
 	<string name="poi_advertising_agency">Reclamebureau</string>
 	<string name="poi_educational_institution">Onderwijsinstelling</string>
 	<string name="poi_architect">Architectenkantoor</string>
@@ -433,7 +433,7 @@
 	<string name="poi_lock_gate">Schutsluis</string>
 	<string name="poi_waterway_turning_point">Zwaaikom</string>
 	<string name="poi_weir">Stuw</string>
-	<string name="poi_water_mill">Watermolen</string>
+	<string name="poi_watermill">Watermolen</string>
 
 	<string name="poi_power_substation">Onderstation</string>
 	<string name="poi_power_transformer">Transformator</string>

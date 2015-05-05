@@ -145,7 +145,7 @@
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_railway_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estación de metro</string>
-	<string name="poi_airport">Aeropuerto</string>
+	<string name="poi_aerodrome">Aeropuerto</string>
 	<string name="poi_helipad">Helipuerto</string>
 	<string name="poi_taxi">Parada de taxi</string>
 
@@ -229,7 +229,7 @@
 	<string name="poi_company">Empresa</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
 	<string name="poi_lawyer">Abogado</string>
-	<string name="poi_town_hall">Municipio</string>
+	<string name="poi_townhall">Municipio</string>
 	<string name="poi_employment_agency">Oficina de empleo</string>
 	<string name="poi_studio">Estudio</string>
 	<string name="poi_stadium">Estadio</string>
@@ -471,7 +471,7 @@
 	<string name="poi_waterway_turning_point">Punto de giro fluvial</string>
 	<string name="poi_weir">Aliviadero</string>
 	<string name="poi_dam">Presa</string>
-	<string name="poi_water_mill">Molino de agua</string>
+	<string name="poi_watermill">Molino de agua</string>
 
 	<string name="poi_telephone_exchange">Central telefónica</string>
 

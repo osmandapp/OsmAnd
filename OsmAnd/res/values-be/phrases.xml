@@ -151,7 +151,7 @@
 	<string name="poi_subway_station">Станцыя мэтро</string>
 	<string name="poi_taxi">Стаянка таксі</string>
 
-	<string name="poi_airport">Аэрапорт</string>
+	<string name="poi_aerodrome">Аэрапорт</string>
 	<string name="poi_helipad">Шрубалётная пляцоўка</string>
 	<string name="poi_runway">Узлётная паласа</string>
 	<string name="poi_aeroway_terminal">Тэрмінал аэрапорту</string>
@@ -192,7 +192,7 @@
 	<string name="poi_waterway_turning_point">Паваротная кропка на вадзе</string>
 	<string name="poi_weir">Невялікая плаціна</string>
 	<string name="poi_dam">Дамба</string>
-	<string name="poi_water_mill">Вадзяны млын</string>
+	<string name="poi_watermill">Вадзяны млын</string>
 
 	<string name="poi_power_substation">Падстанцыя</string>
 	<string name="poi_power_transformer">Трансфарматар</string>
@@ -285,7 +285,7 @@
 	<string name="poi_lawyer">Юрыдычныя паслугі</string>
 	<string name="poi_office_telecommunication">Тэлекамунікацыйная кампанія</string>
 	<string name="poi_ngo">Грамадзкая арганізацыя</string>
-	<string name="poi_town_hall">Адміністрацыя населенага пункта</string>
+	<string name="poi_townhall">Адміністрацыя населенага пункта</string>
 	<string name="poi_employment_agency">Біржа працы</string>
 	<string name="poi_research">Дасьледчы цэнтар</string>
 	<string name="poi_it">Інфармацыйныя тэхналёгіі</string>

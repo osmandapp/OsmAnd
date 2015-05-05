@@ -145,7 +145,7 @@
 	<string name="poi_subway_station">지하철 역</string>
 	<string name="poi_taxi">택시 승차장</string>
 
-	<string name="poi_airport">공항</string>
+	<string name="poi_aerodrome">공항</string>
 	<string name="poi_helipad">헬리콥터 이착륙지</string>
 	<string name="poi_runway">활주로</string>
 	<string name="poi_aeroway_terminal">Aeroway 터미널</string>
@@ -182,7 +182,7 @@
 	<string name="poi_lock_gate">게이트 잠금</string>
 	<string name="poi_waterway_turning_point">수로 터닝 포인트</string>
 	<string name="poi_dam">댐</string>
-	<string name="poi_water_mill">물방앗간</string>
+	<string name="poi_watermill">물방앗간</string>
 
 	<string name="poi_power_substation">변전소</string>
 	<string name="poi_power_transformer">변압기</string>
@@ -277,7 +277,7 @@
 	<string name="poi_lawyer">변호사</string>
 	<string name="poi_office_telecommunication">원거리 통신 사무실</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_town_hall">타운 홀</string>
+	<string name="poi_townhall">타운 홀</string>
 	<string name="poi_employment_agency">Employment 사무실</string>
 	<string name="poi_research">연구 사무실</string>
 	<string name="poi_it">IT 사무실</string>

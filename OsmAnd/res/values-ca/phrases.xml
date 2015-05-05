@@ -127,7 +127,7 @@
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
-	<string name="poi_airport">Aeroport</string>
+	<string name="poi_aerodrome">Aeroport</string>
 	<string name="poi_helipad">Heliport</string>
 	<string name="poi_runway">Pista d\'aterratge</string>
 	<string name="poi_aeroway_terminal">Terminal d\'aeroport</string>
@@ -163,7 +163,7 @@
 	<string name="poi_lock_gate">Resclosa</string>
 	<string name="poi_weir">Sobreeixidor</string>
 	<string name="poi_dam">Presa d\'aigua</string>
-	<string name="poi_water_mill">Molí hidràulic</string>
+	<string name="poi_watermill">Molí hidràulic</string>
 
 	<string name="poi_power_substation">Subestació elèctrica</string>
 	<string name="poi_power_transformer">Transformador elèctric</string>
@@ -249,7 +249,7 @@
 	<string name="poi_lawyer">Gabinet d\'advocats</string>
 	<string name="poi_office_telecommunication">Empresa de telecomunicacions</string>
 	<string name="poi_ngo">ONG</string>
-	<string name="poi_town_hall">Ajuntament</string>
+	<string name="poi_townhall">Ajuntament</string>
 	<string name="poi_employment_agency">Oficina d\'ocupació</string>
 	<string name="poi_research">Oficina de recerca i desenvolupament</string>
 	<string name="poi_it">Consultoria en TIC</string>

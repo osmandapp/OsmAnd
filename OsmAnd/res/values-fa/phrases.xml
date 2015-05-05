@@ -151,7 +151,7 @@
 <string name="poi_subway_station">ایستگاه مترو</string>
 <string name="poi_taxi">ایستگاه تاکسی</string>
 
-<string name="poi_airport">فرودگاه</string>
+<string name="poi_aerodrome">فرودگاه</string>
 <string name="poi_helipad">جایگاه هلیکوپتر</string>
 <string name="poi_runway">باند فرودگاه</string>
 <string name="poi_aeroway_terminal">ترمینال Aeroway</string>
@@ -194,7 +194,7 @@
 <string name="poi_waterway_turning_point">نقطه گردش آب</string>
 <string name="poi_weir">خاکریز</string>
 <string name="poi_dam">سد</string>
-<string name="poi_water_mill">اسیاب</string>
+<string name="poi_watermill">اسیاب</string>
 
 <string name="poi_power_substation">ایستگاه فرعی</string>
 <string name="poi_power_transformer">ترانسفورماتور</string>
@@ -289,7 +289,7 @@
 <string name="poi_lawyer">دفتر وکالت</string>
 <string name="poi_office_telecommunication">دفتر مخابراتی</string>
 <string name="poi_ngo">NGO</string>
-<string name="poi_town_hall">شهرداری</string>
+<string name="poi_townhall">شهرداری</string>
 <string name="poi_employment_agency">کاریابی</string>
 <string name="poi_research">مرکز تحقیقاتی</string>
 <string name="poi_it">دفتر فناوری اطلاعات</string>

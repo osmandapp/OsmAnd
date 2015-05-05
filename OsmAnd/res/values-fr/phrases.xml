@@ -12,7 +12,7 @@
 	<string name="poi_aerialway_station">Station de transport aérien par câble</string>
 	<string name="poi_aeroway_gate">Porte d\'embarquement</string>
 	<string name="poi_runway">Aérodrome : piste</string>
-	<string name="poi_airport">Aérodrome</string> 
+	<string name="poi_aerodrome">Aérodrome</string> 
 	<string name="poi_alcohol">Magasin de boissons alcoolisées</string>
 	<string name="poi_alpine_hut">Refuge</string>
 	<string name="poi_ambulance_station">Station d\'ambulances</string>
@@ -372,7 +372,7 @@
 	<string name="poi_water_well">Puits</string>
 	<string name="poi_water_works">Usine d\'eau potable</string>
 	<string name="poi_waterfall">Chute d\'eau</string>
-	<string name="poi_water_mill">Moulin à eau</string>
+	<string name="poi_watermill">Moulin à eau</string>
 	<string name="poi_wayside_cross">Calvaire</string>
 	<string name="poi_wayside_shrine">Oratoire</string>
 	<string name="poi_wetland">Zone humide</string>
@@ -420,7 +420,7 @@
 	<string name="poi_podiatrist">Podologue</string>
 	<string name="poi_psychotherapist">Psychothérapeute</string>
 	<string name="poi_company">Entreprise</string>
-	<string name="poi_town_hall">Mairie</string>
+	<string name="poi_townhall">Mairie</string>
 	<string name="poi_educational_institution">Institution éducative</string>
 	<string name="poi_bicycle_track">Piste cycable</string>
 	<string name="poi_australian_football">Football autralien</string>
