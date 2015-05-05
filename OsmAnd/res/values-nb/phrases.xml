@@ -165,4 +165,9 @@
 	<string name="poi_sports_centre">Sportssenter</string>
 	<string name="poi_memorial">Minnesmerke</string>
 	<string name="poi_drinking_water">Drikkevann</string>
+	<string name="poi_sightseeing">Sightseeing</string>
+		<string name="poi_seafood">Sjømatforretning</string>
+	<string name="poi_confectionery">Konditori</string>
+	<string name="poi_fast_food">Hurtigmat</string>
+	<string name="poi_food_court">Mathall</string>
 	</resources>
