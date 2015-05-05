@@ -730,4 +730,17 @@
 	<string name="poi_valley">Údolie</string>
 	<string name="poi_water">Voda</string>
 	<string name="poi_wood">Les</string>
+	<string name="poi_observation_tower">Vyhliadková veža</string>
+	<string name="poi_bell_tower">Zvonica</string>
+	<string name="poi_general_tourist_attraction_yes">Všeobecná turistická atrakcia</string>
+	<string name="poi_cabin">Chatka</string>
+	<string name="poi_lean_to">Trojstranný prístrešok</string>
+	<string name="poi_picnic_table">Piknikový stôl</string>
+	<string name="poi_wine_cellar">Vínna pivnica</string>
+	<string name="poi_winery">Vinárstvo</string>
+
+	<string name="poi_ski_rental">Požičovňa lyží</string>
+
+	<string name="poi_gallery">Galéria</string>
+	<string name="poi_ski_resort">Lyžiarske stredisko</string>
 	</resources>
