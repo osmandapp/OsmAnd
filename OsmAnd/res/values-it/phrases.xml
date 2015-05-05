@@ -558,4 +558,8 @@
 	<string name="poi_man_made">Artificiale</string>
 	<string name="poi_historic_mine">Miniera storica</string>
 	<string name="poi_aquarium">Acquario</string>
-	</resources>
+	<string name="poi_shop_food">Alimentari</string>
+	<string name="poi_filling_station">Stazione di servizio</string>
+		<string name="poi_public_transport">Trasporti pubblici</string>
+		<string name="poi_air_transport">Trasporto aereo</string>
+		</resources>
