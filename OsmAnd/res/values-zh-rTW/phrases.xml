@@ -398,4 +398,16 @@
 	<string name="poi_running_track">賽跑跑道</string>
 	<string name="poi_bicycle_track">自行車道</string>
 	<string name="poi_horse_track">馬道</string>
+	<string name="poi_observation_tower">觀測塔</string>
+	<string name="poi_bell_tower">鐘樓</string>
+	<string name="poi_raceway">賽車跑道</string>
+	<string name="poi_9pin">九瓶保齡球</string>
+	<string name="poi_10pin">保齡球</string>
+	<string name="poi_archery">射箭</string>
+	<string name="poi_athletics">田徑</string>
+	<string name="poi_american_football">美式橄榄球</string>
+	<string name="poi_australian_football">澳大利亞足球</string>
+	<string name="poi_base">定點跳傘</string>
+	<string name="poi_piste_sleigh">雪橇</string>
+	<string name="poi_picnic_site">野餐地點</string>
 	</resources>
