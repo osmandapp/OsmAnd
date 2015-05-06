@@ -58,6 +58,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textSize="@dimen/default_sub_text_size"
+				android:textColor="@color/color_ok"
 				tools:text="@string/lorem_ipsum"
 				android:visibility="gone"
 				android:maxLines="1"/>

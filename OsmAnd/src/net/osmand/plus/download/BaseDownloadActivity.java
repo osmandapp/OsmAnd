@@ -38,11 +38,11 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		if (downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
+		super.onCreate(savedInstanceState);
 		// Having the next line here causes bug AND-197: The storage folder dialogue popped up upon EVERY app startup, because the map list is not indexed yet.
 		// Hence line moved to updateDownloads() now.
 		// prepareDownloadDirectory();
