@@ -141,7 +141,7 @@
 	<string name="unknown_location">Trenutno mesto še ni določeno</string>
 	<string name="modify_transparency">Spremeni prosojnost (0 - prosojno, 255 - neprosojno)</string>
 	<string name="confirm_interrupt_download">Ali želite prekiniti prejemanje datoteke?</string>
-	<string name="basemap_was_selected_to_download">Basemap je potrebna za pravilno delovanje programa in je bila izbrana za prenos.</string>
+	<string name="basemap_was_selected_to_download">Za pravilno delovanje programa mora biti nameščen osnovni zemljevid sveta. Paket je izbran in pripravljen za prejem.</string>
 	<string name="map_widget_reset">Povrni na privzeto</string>
 	<string name="map_widget_parking">Parkiranje</string>
 	<string name="map_widget_monitoring">Sledenje GPX</string>
@@ -589,18 +589,18 @@
     <string name="download_roads_only_maps">Zemljevidi le s cestami</string>
     <string name="background_service_is_enabled_question">Storitev v ozadju se še vedno izvaja. Ali jo želite preklicati?</string>
     <string name="select_index_file_to_download">Ni najdenih ustreznih podatkov. Če izbranega področja ni, ga lahko ustvarite sami (več informacij na http://osmand.net).</string>
-	<string name="local_indexes_cat_map">Krajevni zemljevidi (vektorski)</string>
+	<string name="local_indexes_cat_map">Shranjeni (vektorski) zemljevidi</string>
 	<string name="index_settings_descr">Prejemanje in upravljanje datotek zemljevidov, shranjenih na napravi</string>
 	<string name="map_online_plugin_is_not_installed">Omogočite vstavek spletnih zemljevidov za izbiro različnih virov zemljevidov</string>
-	<string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in predpomnjenje ploščic na kartici SD)</string>
+	<string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in shranjevanje na kartici SD)</string>
 	<string name="online_map_settings">Spletni zemljevidi</string>
-	<string name="online_map_settings_descr">Nastavitev virov spletnih zemljevidov ali predpomnjenih ploščic</string>
+	<string name="online_map_settings_descr">Nastavitev virov spletnih in shranjenih zemljevidov</string>
 	<string name="osmand_rastermaps_plugin_description">"Pokaži nastavitve za nastavitev različnih spletnih ali predpomnjenih ploščic zemljevidov kot osnovni zemljevid ali zgornje / spodnje plasti. Te zemljevide lahko pripravite, tudi ko niste povezani, in jih kopirate v mapo OsmAnd. "</string>
 	<string name="osm_editing_plugin_description">Vstavek podpira prikaz nastavitev, ki omogočajo pošiljanje odzivov na delovanje programa OsmAnd, kot so posodobljeni podatki o točkah POI, pošiljanje poročil in opomb o programskih hroščih in objavljanje sledi GPX (zahteva ustrezna poverila OSM).</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se bodo verjetno prikazali hitreje. Morda na nekaterih napravah ne bodo dobro delovali.</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
 	<string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
-	<string name="native_rendering">Izvirno upodabljanje</string>
-	<string name="switch_to_raster_map_to_see">Za to območje krajevni zemljevidi niso na voljo. Prejmete jih lahko preko izbirnika v nastavitvah (Upravljanje datotek zemljevidov) ali pa preklopite na prikaz spletnih zemljevidov (zahteva vstavek za podporo spletnim zemljevidom).</string>
+	<string name="native_rendering">Izvorno izrisovanje</string>
+	<string name="switch_to_raster_map_to_see">Za to mesto krajevni zemljevidi niso na voljo. Prejmete jih lahko v nastavitvah (krajevni podatki) ali preklopite na spletne zemljevide.</string>
 	<string name="gpx_tags_txt">Oznake</string>
 	<string name="gpx_description_txt">Opis</string>
 	<string name="default_buttons_support">Podpora</string>
@@ -654,9 +654,9 @@
     
     <string name="route_descr_lat_lon">ZD (λ) %1$.3f; ZŠ (β) %2$.3f</string>
     <string name="route_descr_current_location">Trenutno mesto</string>
-    <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za polno uporabnost tega programa je treba namestiti datoteke s krajevnimi podatki. Te lahko prejmete \'Nastavitev\' → \'Upravljanje datotek zemljevidov\'. Naloženi zemljevidi omogočajo iskanje naslovov, točk POI, postajališč mestnega prometa in še mnogo več.</string>    
-	<string name="local_indexes_cat_tile">Spletni zemljevidi in ploščice zemljevidov</string>
-	<string name="map_online_data">Spletni zemljevidi in ploščice zemljevidov</string>
+    <string name="first_time_msg">Zahvaljujemo se vam za uporabo programa OsmAnd. Za različne možnosti programa je treba naložiti krajevne podatke. Urejevalnik je na voljo med \'Nastavitvami\' → \'Upravljanje s podatki\'. Po namestitvi bo mogoče pregledovati zemljevid, iskati naslove in zanimive točke POI ter načrtovati možne poti javnega prevoza kraja.</string>    
+	<string name="local_indexes_cat_tile">Spletni in shranjeni zemljevidi</string>
+	<string name="map_online_data">Spletni in shranjeni zemljevidi</string>
 	<string name="shared_string_clear">Počisti</string>
 	<string name="scroll_map_by_gestures_descr">Drsanje po zemljevidi s kretnjami na zaslonu na dotik</string>
 	<string name="scroll_map_by_gestures">Naravno drsenje zemljevida</string>
@@ -1011,15 +1011,14 @@
 	<string name="map_tile_source">Vir koščkov zemljevida</string>
 	<string name="map_source">Vir zemljevida</string>
 	
-	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:\n\t- *Plugin functionality*
-\n\t - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
-\n\t- *New offline map data support*
-\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
-\n\t - You need to download completely new offline data (old data will not be supported anymore)
-\n\t- *Offline Routing*
-\n\t - Offline routing becomes more robust
-\n\t *Usability and UI experience*
-\n\t - Improved in many areas "</string>
+	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:\n\t- *Možnost dodajanja vstavkov*
+\n\t - Večino zmožnosti je urejenih po funkciji in jih je mogoče enostavno omogočiti/onemogočiti med Nastavitvami vstavkov. Omogočena je podpora za spletne in shranjene vektorske zemljevide, nastavitve sledenja in še veliko novih možnosti uporabe
+\n\t- *Nov način podpore shranjenih zemljevidov*
+\n\t - Izrisovanje zemljevidov je hitrejše in bol natančno (težave z obalnimi področji in področji pogostih poplav so rešene).
+\n\t - Posodobitev programa zahteva tudi posodobitev zemljevidov (stari podatki ne bodo delovali)\n\t- *Usmerjanje poti brez povezave*
+\n\t - Vodenje poti je bolj natančno in se  hitreje odziva.
+\n\t *Uporabnost in uporabniški vmesnik*
+\n\t - Več manjših posodobitev "</string>
 	<string name="tip_recent_changes_0_7_2_t">"Spremembe v 0.7.2:
 \n\t- Native rendering for all devices
 \n\t- Offline POI editing
