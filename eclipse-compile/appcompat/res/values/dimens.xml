@@ -84,4 +84,5 @@
     <!-- Dialog button bar height -->
     <dimen name="abc_alert_dialog_button_bar_height">48dp</dimen>
 	<dimen name="checkbox_padding">12dp</dimen>
+	<dimen name="radio_padding">30dp</dimen>
 </resources>
