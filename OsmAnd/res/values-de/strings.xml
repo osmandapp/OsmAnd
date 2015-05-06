@@ -69,7 +69,7 @@
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
-	<string name="rendering_attr_osmcTraces_name">Wanderwege anzeigen</string>
+	<string name="rendering_attr_osmcTraces_name">Wandersymboleinblendung</string>
 	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
 	<string name="arrival_distance_factor_early">Früh</string>
 	<string name="arrival_distance_factor_normally">Normal</string>
@@ -95,7 +95,7 @@
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
 	
-	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
+	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenanzeige (Offset)</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen die Höhenangaben im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
@@ -167,7 +167,7 @@
 	<string name="route_kl">Links halten, dann</string>
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
-	<string name="rendering_attr_noPolygons_name">Keine Flächen anzeigen</string>
+	<string name="rendering_attr_noPolygons_name">Flächen ausblenden</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
 	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt Höhenlinien-Datei):</string>
@@ -210,7 +210,7 @@
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Zurück zum Standort</string>
 	<string name="shared_string_help">Hilfe</string>
-	<string name="show_details">Zeige Details</string>
+	<string name="show_details">Positionsdetails anzeigen</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
 	<string name="accessibility_extensions">Barrierefreiheit-Erweiterungen</string>
 	<string name="accessibility_mode">Barrierefreiheit-Modus</string>
@@ -240,11 +240,11 @@
 	<string name="north_north_west">Nord-Nord-West</string>
 	<string name="front">Vorne</string>
 	<string name="front_right">Vorne rechts</string>
-	<string name="right">Rechts</string>
+	<string name="right">Auf der rechten Seite</string>
 	<string name="back_right">Hinten rechts</string>
 	<string name="back">Hinten</string>
 	<string name="back_left">Hinten links</string>
-	<string name="left">Links</string>
+	<string name="left">Auf der linken Seite</string>
 	<string name="front_left">Vorne links</string>
 	<string name="oclock">Uhr</string>
 	<string name="towards">nach</string>
@@ -255,8 +255,8 @@
 	<string name="direction_style_clockwise">Im Uhrzeigersinn (12 Sektoren)</string>
 	<string name="settings_direction_style">Richtungsart</string>
 	<string name="settings_direction_style_descr">Wähle eine Art um relative Richtungen während der Bewegung auszudrücken</string>
-	<string name="auto_announce_on">Auto. Ankündigungen ein</string>
-	<string name="auto_announce_off">Auto. Ankündigungen aus</string>
+	<string name="auto_announce_on">Automatische Ankündigungen ein</string>
+	<string name="auto_announce_off">Automatische Ankündigungen aus</string>
 	<string name="scroll_map_by_gestures_descr">Scrolle die Karte mit Gesten auf dem Touchscreen</string>
 	<string name="scroll_map_by_gestures">Natürliches Scrollen der Karte</string>
 	<string name="i_am_here">Ich bin hier</string>
@@ -273,15 +273,15 @@
 	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
 	<string name="local_openstreetmap_uploading">Hochladen…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Hinweise wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
 	
 	
 	<string name="local_openstreetmap_upload">Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">Änderung löschen</string>
 	<string name="local_openstreetmap_descr_title">Asynchrone OSM Bearbeitung:</string>
-	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte/Bugs</string>
-	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte/Bugs anzeigen und verwalten</string>
+	<string name="local_openstreetmap_settings">Lokal gespeicherte OSM POIs/Hinweise</string>
+	<string name="local_openstreetmap_settings_descr">In der lokalen Datenbank vermerkte OSM POIs/Hinweise anzeigen und verwalten</string>
 
 	<string name="live_monitoring_m">Online Verfolgung (benötigt GPX)</string>
 	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
@@ -376,7 +376,7 @@
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
-	<string name="auto_follow_route_never">Nie (Auf blauen Pfeil tippen startet Navigation manuell)</string>
+	<string name="auto_follow_route_never">Nie (Auf \'Los\' tippen, um die Navigation manuell zu starten)</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
@@ -623,7 +623,7 @@
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
 
-	<string name="local_index_installed">Ausgabe</string>
+	<string name="local_index_installed">Lokale Version</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
@@ -791,7 +791,7 @@
 	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
-	<string name="application_dir">Daten-Ordner</string>
+	<string name="application_dir">Datenspeicherungsordner</string>
 	
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
@@ -879,7 +879,7 @@
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="shared_string_favorites">Favoriten</string>
-	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
+	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_amenity_label">Punkt-Namen</string>
@@ -976,10 +976,10 @@
 	<string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
 	<string name="hint_search_online">Online-Suche: Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline-Suche</string>
-	<string name="search_online_address">Internet verwenden</string>
+	<string name="search_online_address">Online-Suche</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_general_information">Gesamtentfernung: %1$s\nReisezeit: %2$d h %3$d min</string>
+	<string name="route_general_information">Gesamtentfernung: %1$s, Reisezeit: %2$d h %3$d min</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
 	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der SD-Karte kann nicht zugegriffen werden!</string>
@@ -1405,7 +1405,7 @@
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
-	<string name="shared_string_downloading">Herunterladen…</string>
+	<string name="shared_string_downloading">Herunterladen</string>
 	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
 	<string name="local_osm_changes_backup_failed">Fehler beim Zwischenspeichern der bearbeiteten OSM-Daten</string>
 	<string name="local_osm_changes_backup">Als OSM-Daten-Änderung zwischenspeichern</string>
@@ -1533,8 +1533,8 @@
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
 	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
 	<string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
-	<string name="shared_string_select_on_map">Auf Karte auswählen…</string>
-	<string name="shared_string_favorite">Favorit…</string>
+	<string name="shared_string_select_on_map">Auf Karte auswählen</string>
+	<string name="shared_string_favorite">Favorit</string>
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
@@ -1588,7 +1588,7 @@
 	<string name="rendering_attr_hideText_name">Text ausblenden</string>
 	<string name="rendering_attr_hideWoodScrubs_name">Wälder und Gebüsch ausblenden</string>
 	<string name="rendering_attr_buildings15zoom_name">Gebäude ab Zoomstufe 15 anzeigen</string>
-	<string name="rendering_attr_moreDetailed_name">Mehr Details in Karte</string>
+	<string name="rendering_attr_moreDetailed_name">Mehr Details</string>
 	<string name="rendering_attr_lessDetailed_name">Weniger Details in Karte</string>
 	<string name="rendering_attr_hideAccess_name">Zugangsbeschrünkungen verbergen</string>
 	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
@@ -1939,7 +1939,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
-    <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
+    <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
@@ -1976,7 +1976,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="configure_map">Karte konfigurieren</string>
     <string name="search_radius_proximity">Im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
-    <string name="rendering_category_others">Sonstiges</string>
+    <string name="rendering_category_others">Weitere Kartenmerkmale</string>
     <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
@@ -2017,7 +2017,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
-    <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
+    <string name="rendering_attr_roadStyle_name">Straßendarstellung</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -2046,7 +2046,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_my_location">Mein Ort</string>
     <string name="osm_editing_manage">Verwalten</string>
     
-    <string name="navigation_over_track">Navigation über Strecke starten?</string>
+    <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
     <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
@@ -2093,7 +2093,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="notes">Notizen</string>
 	<string name="online_map">Online-Karte</string>
 	<string name="roads_only">Nur Straßen</string>
-    <string name="rendering_attr_pisteRoutes_name">Pisten</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
 	<string name="shared_string_export">Export</string>
 	<string name="watch">Ansehen</string>
 	
@@ -2152,4 +2152,16 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_places">Orte</string>
 	<string name="welcome_select_region">Um korrekte Straßenschilder und Beschränkungen zu erhalten, wähle bitte eine Region:</string>
 	<string name="welcome_text">OsmAnd bietet globale offline Karten und globale offline Navigation!</string>
+	<string name="waypoint_visit_before">Besuch nach</string>
+    <string name="action_create">Aktion erstellen</string>
+	<string name="action_modify">Aktion ändern</string>
+	<string name="action_delete">Aktion löschen</string>
+	<string name="drawer">Flache Liste</string>
+    <string name="shared_string_action_template">Aktion {0}</string>
+	<string name="route_points">Routenpunkte</string>
+	<string name="track_segments">Spurensegmente</string>
+	<string name="track_points">Spurenpunkte</string>
+	<string name="plugin_touringview_name">Tourenkartenansicht</string>
+	<string name="index_name_netherlands">Europa - Niederlande</string>
+	<string name="shared_string_release">Veröffentlicht</string>
 	</resources>
