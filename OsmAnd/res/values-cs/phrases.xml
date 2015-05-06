@@ -771,4 +771,17 @@
 	<string name="poi_piste_skitour">Lyžařský okruh</string>
 	<string name="poi_observation_tower">Rozhledna</string>
 	<string name="poi_bell_tower">Zvonice</string>
+	<string name="poi_general_tourist_attraction_yes">Všeobecná turistická atrakce</string>
+	<string name="poi_cabin">Chatka</string>
+	<string name="poi_lean_to">Trojstranný přístřešek</string>
+	<string name="poi_picnic_table">Piknikový stůl</string>
+	<string name="poi_wine_cellar">Vinný sklípek</string>
+	<string name="poi_winery">Vinařství</string>
+
+	<string name="poi_ski_rental">Půjčovna lyží</string>
+
+	<string name="poi_gallery">Umělecká galerie</string>
+	<string name="poi_ski_resort">Lyžařské středisko</string>
+	<string name="poi_trail_riding_station">Jezdecká stanice</string>
+
 	</resources>
