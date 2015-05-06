@@ -128,62 +128,62 @@
 	<string name="use_english_names">Uporabi angleška imena na karti</string>
 	<string name="app_settings">Nastavitve programa</string>
 	<string name="search_address">Iskanje naslova</string>
-	<string name="poi_search_desc">Iskanje POI (Zanimivosti)</string>
+	<string name="poi_search_desc">Iskanje zanimivih točk POI</string>
 	<string name="address_search_desc">Iskanje naslova</string>
 	<string name="navpoint_search_desc">Koordinate</string>
-	<string name="transport_search_desc">Iskanje javnih prevozov</string>
-	<string name="favourites_search_desc">Iskanje priljubljenih</string>
+	<string name="transport_search_desc">Iskanje javnega prevoza</string>
+	<string name="favourites_search_desc">Iskanje med priljubljenimi</string>
 	
-	<string name="offline_navigation_not_available">OsmAnd offline navigacija trenutno ni na voljo.</string>
+	<string name="offline_navigation_not_available">Navigacija OsmAnd brez povezave trenutno ni na voljo.</string>
 	<string name="left_side_navigation">Vožnja po levi strani</string>
-	<string name="left_side_navigation_descr">Izberite za države, kjer se vozi po levi strani ceste</string>
-	<string name="unknown_from_location">Izhodišče ni še določeno</string>
-	<string name="unknown_location">Lokacija še ni znana</string>
+	<string name="left_side_navigation_descr">Možnost izberite za države, kjer se vozi po levi strani ceste</string>
+	<string name="unknown_from_location">Izhodiščna točka še ni določena</string>
+	<string name="unknown_location">Trenutno mesto še ni določeno</string>
 	<string name="modify_transparency">Spremeni prosojnost (0 - prosojno, 255 - neprosojno)</string>
-	<string name="confirm_interrupt_download">Ali želite prekiniti nalaganje datoteke?</string>
+	<string name="confirm_interrupt_download">Ali želite prekiniti prejemanje datoteke?</string>
 	<string name="basemap_was_selected_to_download">Basemap je potrebna za pravilno delovanje programa in je bila izbrana za prenos.</string>
-	<string name="map_widget_reset">Nastavi na privzeto</string>
+	<string name="map_widget_reset">Povrni na privzeto</string>
 	<string name="map_widget_parking">Parkiranje</string>
-	<string name="map_widget_monitoring">Sledenje</string>
+	<string name="map_widget_monitoring">Sledenje GPX</string>
 	<string name="map_widget_speed">Hitrost</string>
 	
 	
 	<string name="map_widget_compass">Kompas</string>
-	<string name="map_widget_lock_screen">Zakleni ekran</string>
-	<string name="map_widget_back_to_loc">Kje sem</string>
+	<string name="map_widget_lock_screen">Zakleni zaslon</string>
+	<string name="map_widget_back_to_loc">Kje sem?</string>
 	<string name="map_widget_config">Nastavite zaslona</string>
 	
 	<string name="map_widget_distance">Cilj</string>
 	<string name="map_widget_altitude">Nadmorska višina</string>
 	<string name="map_widget_time">Čas do cilja</string>
 	<string name="map_widget_next_turn">Naslednji zavoj</string>
-	<string name="map_widget_next_turn_small">Naslednji zavoj (majhen)</string>
+	<string name="map_widget_next_turn_small">Naslednji zavoj (manjši)</string>
 	<string name="map_widget_next_next_turn">Drugi naslednji zavoj</string>
-	<string name="bg_service_screen_lock">Zakleni ekran</string>
-	<string name="bg_service_screen_unlock">Odkleni ekran</string>
-	<string name="bg_service_screen_lock_toast">Ekran je zaklenjen</string>
-	<string name="bg_service_interval">Nastavitev intervala prebujanja:</string>
+	<string name="bg_service_screen_lock">Zakleni zaslon</string>
+	<string name="bg_service_screen_unlock">Odkleni zaslon</string>
+	<string name="bg_service_screen_lock_toast">Zaslon je zaklenjen</string>
+	<string name="bg_service_interval">Nastavitev časovnega razmika prebujanja:</string>
 	<string name="show_cameras">Pokaži hitrostne kamere</string>
 	<string name="show_traffic_warnings">Prikaži omejitve hitrosti</string>
 	<string name="avoid_toll_roads">Izogni se cestninjenju</string>
-	<string name="continue_follow_previous_route_auto">Prejšnje vodenje ni končano. Nadaljujem vodenje? (%1$s sekund)</string>
-	<string name="route_updated_loc_found">Pot bo ponovno izračunana, ko bo določena lokacija</string>
-	<string name="osmand_parking_hours">Ur</string>
-	<string name="osmand_parking_minutes">Minut</string>
-	<string name="osmand_parking_position_description_add_time">Avto je bil parkiran na:</string>
+	<string name="continue_follow_previous_route_auto">Prejšnje vodenje še ni končano. Ali želite nadaljevati do tega cilja? (%1$s sekund)</string>
+	<string name="route_updated_loc_found">Pot bo ponovno preračunana, ko bo določeno trenutno mesto</string>
+	<string name="osmand_parking_hours">Ure</string>
+	<string name="osmand_parking_minutes">Minute</string>
+	<string name="osmand_parking_position_description_add_time">Avto je parkiran na:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Spremembe v 0.8.1:
 \n\t* Natančnejše poti (počasnejše izrisovanje)\n\t* Pameten in hiter ponoven izračun poti
 \n\t* Usmerjanje vozila po pasovih
 \n\t* Podatki o omejitvah hitrosti, radarjih in ležečih ovirah\n\t* Izboljšano glasovno vodenje na avtocestah
-\n\t* Vstavek za za parkiranje (\'Kje imam parkiran avto?\')
+\n\t* Vstavek za za parkiranje (\'Kje imam parkirano vozilo?\')
 \n\t* Gradnik za vklop in izklop beleženja "</string>
-	<string name="global_app_allocated_memory_descr">Uporabljen pomnilnik %1$s MB (Android %2$s MB, Dalvik %3$s MB).</string>
+	<string name="global_app_allocated_memory_descr">Uporabljenih je %1$s MB pomnilnika (Omejitev na androidu je %2$s MB, na dalviku %3$s MB).</string>
 	<string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
-	<string name="starting_point_too_far">Izhodišče predaleč od najbližje ceste.</string>
-	<string name="rendering_attr_noPolygons_description">Naredite vse ploskovne entitete na zemljevidu prosojne</string>
+	<string name="starting_point_too_far">Izhodišče je predaleč od najbližje ceste.</string>
+	<string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne</string>
 	<string name="rendering_attr_noPolygons_name">Ne izriši ploskev območij</string>
-	<string name="rendering_attr_appMode_name">Način upodabljanja</string>
-	<string name="rendering_attr_appMode_description">Optimiziranje karte za</string>
+	<string name="rendering_attr_appMode_name">Način izrisa</string>
+	<string name="rendering_attr_appMode_description">Prilagodi zemljevid za</string>
 	<string name="rendering_attr_contourLines_name">Izriši izohipse</string>
 	<string name="zoomOut">Oddalji</string>
 	<string name="zoomIn">Približaj</string>
@@ -326,30 +326,30 @@
 	<string name="tip_update_index">Poteka posodabljanje shranjenih zemljevidov</string>
 	<string name="filterpoi_activity">Ustvari filter POI</string>
 	<string name="recalculate_route_to_your_location">Način prevoza:</string>
-	<string name="select_navigation_mode">Izberi način prevoza</string>
+	<string name="select_navigation_mode">Izbor načina prevoza</string>
 	
-	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
+	<string name="day_night_info_description">Sončni vzhod: %1$s\nSončni zahod: %2$s</string>
 	
 	
 	
 	
 	<string name="layer_map_appearance">Nastavitve zaslona</string>
-	<string name="show_lanes">Prikaži vozne pasove</string>
+	<string name="show_lanes">Pokaži vozne pasove</string>
 	<string name="avoid_in_routing_title">Izogibanje …</string>
 	<string name="avoid_ferries">Izogni se trajektom</string>
-	<string name="avoid_unpaved">Izogni se neasfaltiranim cestam</string>
-	<string name="avoid_in_routing_descr">Izogibanje cestnin, makadama, trajektov</string>
+	<string name="avoid_unpaved">Izogni se neasfaltiranim potem</string>
+	<string name="avoid_in_routing_descr">Izogibanje cestninam, makadamskim potem, trajektom</string>
 	<string name="tip_recent_changes_0_8_2_t">"Spremembe v 0.8.2:
 \n\t* Izboljšano usmerjanje\n\t* Gradnik dinamičnega zemljevida\n\t* Nastavitve zemljevida prestavljene v okno zemljevida\n\t* Zaklepanje zaslona s storitvijo beleženja\n\t* Popravljena arabščina in drugi jeziki s pisanjem z desne proti levi "</string>
 	<string name="map_widget_fluorescent">Fluorescentne poti</string>
 	<string name="map_widget_show_ruler">Merilo</string>
 	
 	<string name="map_widget_view_direction">Smer gledanja</string>
-	<string name="map_widget_transparent">Prosojna koža</string>
+	<string name="map_widget_transparent">Prosojna plast</string>
 	<string name="use_transparent_map_theme">Prosojna tema</string>
-	<string name="bg_service_sleep_mode_off">Omogoči\n spalni način</string>
-	<string name="bg_service_sleep_mode_on">Prekini\n spalni način</string>
-	<string name="gps_wakeup_interval">Interval prebujanja GPS-a: %s</string>
+	<string name="bg_service_sleep_mode_off">Omogoči\n način spanja</string>
+	<string name="bg_service_sleep_mode_on">Ustavi\n način spanja</string>
+	<string name="gps_wakeup_interval">Časovni razmik prebujanja GPS: %s</string>
 	<string name="int_continuosly">Neprekinjeno</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
 	<string name="map_widget_top_text">Pokaži imena cest</string>
@@ -363,40 +363,40 @@
 	<string name="gpxup_identifiable">Določljivo</string>
 	<string name="gpxup_trackable">Sledljivo</string>
 	<string name="gpxup_private">Zasebno</string>
-	<string name="asap">Čimprej</string>
-	<string name="route_roundabout">Krožišče: uporabite %1$d izvoz</string>
-	<string name="route_kl">Držite se levo</string>
-	<string name="route_kr">Držite se desno</string>
-	<string name="rendering_attr_contourLines_description">Prikaži pod povečavo (potrebuje datoteko SRTM):</string>
-	<string name="rendering_attr_hmRendered_description">Povečaj število podrobnosti karte</string>
-	<string name="rendering_attr_hmRendered_name">Pokaži podrobnejšo karto</string>
+	<string name="asap">Čim prej</string>
+	<string name="route_roundabout">Krožišče: zapeljite v %1$d izvoz</string>
+	<string name="route_kl">Držite se leve</string>
+	<string name="route_kr">Držite se desne</string>
+	<string name="rendering_attr_contourLines_description">Prikaži pod povečavo (zahteva podatke izohips):</string>
+	<string name="rendering_attr_hmRendered_description">Povečaj podrobnost izrisa zemljevida</string>
+	<string name="rendering_attr_hmRendered_name">Pokaži podrobnejši izris</string>
 	<string name="navigate_point_format">Oblika</string>
 	<string name="day_night_info">Podrobnosti dneva in noči</string>
-	<string name="map_widget_day_night">Zemljevid dan/noč</string>
+	<string name="map_widget_day_night">Dnevni/Nočni zemljevid</string>
 	<string name="map_widget_vector_attributes">Značilnosti izrisovanja</string>
-	<string name="map_widget_renderer">Slog upodabljanja</string>
-	<string name="native_app_allocated_memory_descr">Skupni izvirni pomnilnik uporabljen od aplikacije %1$s MB (Dalvik %2$s MB, drugo %3$s MB). Sorazmerni pomnilnik %4$s MB (omejitev Androida %5$s MB, Dalvik %6$s MB).</string>
-	<string name="native_app_allocated_memory">Skupni izvirni pomnilnik</string>
+	<string name="map_widget_renderer">Slog zemljevida</string>
+	<string name="native_app_allocated_memory_descr">Skupna dodeljena velikost pomnilnika je %1$s MB (Dalvik %2$s MB, drugo %3$s MB). Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na dalviku %6$s MB).</string>
+	<string name="native_app_allocated_memory">Skupni izvorni pomnilnik</string>
 	
-	<string name="shared_location">Mesto v skupni rabi</string>
-	<string name="osmand_parking_event">Odpeljite avto s parkirišča</string>
-	<string name="osmand_parking_warning_text">Obvestilo, da vzemite avto je bilo že prej dodano v koledar. Ostalo bo tam dokler ga boste ročno izbrisali.</string>    
+	<string name="shared_location">Objavljen položaj</string>
+	<string name="osmand_parking_event">Odpeljite vozilo s parkirišča</string>
+	<string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo z parkirišča, je bilo že prej dodano v koledar. Ostalo bo tam, dokler ga ne izbrišete ročno.</string>    
 	<string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
-	<string name="osmand_parking_delete_confirm">Ali želite odstraniti mesto kjer je parkiran avtomobil?</string>
-	<string name="osmand_parking_delete">Brisanje označevalnika parkiranja</string>
+	<string name="osmand_parking_delete_confirm">Ali želite odstraniti mesto, kjer je vozilo parkirano?</string>
+	<string name="osmand_parking_delete">Izbriši mesto parkiranja</string>
 	<string name="osmand_parking_choose_type">Izbira vrste parkiranja</string>
 	<string name="osmand_parking_lim_text">Časovno omejeno</string>
 	<string name="osmand_parking_no_lim_text">Časovno neomejeno</string>
 	<string name="osmand_parking_add_event">Dodaj obvestilo v Koledar</string>
 	<string name="osmand_parking_time_limit">Časovno omejeno parkiranje</string>
 	<string name="osmand_parking_time_no_limit">Časovno neomejeno parkiranje</string>
-	<string name="osmand_parking_position_description">Položaj vašega parkiranega avtomobila: %1$s</string>
-	<string name="osmand_parking_position_description_add">Prevzem avtomobila ob:</string>
+	<string name="osmand_parking_position_description">Položaj parkiranega vozila: %1$s</string>
+	<string name="osmand_parking_position_description_add">Prevzem vozila ob:</string>
 	<string name="osmand_parking_position_name">Točka parkiranja</string>
 	<string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.\nOmogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča ...).</string>
 	<string name="osmand_parking_plugin_name">Parkiranje (mesto in čas)</string>
-	<string name="context_menu_item_add_parking_point">Označi kot parkirni položaj</string>
-	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
+	<string name="context_menu_item_add_parking_point">Označi kot kraj parkiranja</string>
+	<string name="context_menu_item_delete_parking_point">Izbriši oznako parkirnega mesta</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
 	<string name="search_position_favorites">Priljubljene …</string>
 	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih zemljevidov</string>
@@ -1420,8 +1420,8 @@
     <string name="calculate_osmand_route_gpx">Izračun poti brez povezave</string>
     <string name="interrupt_music_descr">Ob najavah prekini predvajanje glasbe</string>
 	<string name="interrupt_music">Prekini predvajanje glasbe</string>
-	<string name="share_route_as_gpx">Delitev poti kot datoteka GPX</string>
-	<string name="share_route_subject">Pot deljena preko OsmAnd-a</string>
+	<string name="share_route_as_gpx">Objavi pot kot datoteko GPX</string>
+	<string name="share_route_subject">Objavi pot preko spletišča OsmAnd</string>
 	<string name="navigation_intent_invalid">Neveljavna oblika: %s</string>
 <string name="tip_recent_changes_1_7_1_t">"Spremembe v 1.7:
 \n\t* POMEMBNO: omogočena je le podpora za zemljevide, objavljene po februarju 2014.\n\t* Popolnoma posodobljeno določanje poti (hitro in natančno)\n\t* Nov vmesnik za določanja poti (bolj intuitiven in enostavneje nastavljiv)\n\t** OPOMBA: Dostop do poti GPX je sedaj mogoče preko gumba nastavitev poti\n\t* Samodejno skrivanje gumbov v načinu navigacije\n\t* Izračunavanje poti brez povezave do prve točke GPX (možnost \'določi celotno sled\')\n\t* Dejavna simulacija v tunelih in predorih\n\t* Mnogo manjših popravkov vmesnika in načina uporabe programa\n\t* Nastavitev dostopnosti hitrosti govora "</string>
@@ -1665,7 +1665,7 @@
     <string name="traffic_warning">Prometno opozorilo</string>
 	<string name="traffic_warning_speed_camera">Hitrostna kamera</string>
     <string name="traffic_warning_calming">Ležeče ovire</string>
-    <string name="local_index_description">Kliknite katerikoli obstoječi element za ogled podrobnosti, pritisnite in držite za izklop ali izbris. Trenutni podatki na napravi (%1$s prosto):</string>
+    <string name="local_index_description">Pritisnite na katerokoli predmet za prikaz podrobnosti, za izbris ali izklop, pritisk na predmetu zadržite. Na napravi je na voljo še %1$s:</string>
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
     <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>

@@ -784,4 +784,7 @@
 	<string name="poi_ski_resort">Lyžařské středisko</string>
 	<string name="poi_trail_riding_station">Jezdecká stanice</string>
 
+	<string name="poi_piste_nordic">Klasické lyžování</string>
+	<string name="poi_hunting_lodge">Lovecká chata</string>
+
 	</resources>
