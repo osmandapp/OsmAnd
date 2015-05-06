@@ -778,4 +778,17 @@
 	<string name="poi_ski_rental">Пракат лыж</string>
 
 	<string name="poi_ski_resort">Лыжны курорт</string>
+	<string name="poi_cabin">Хата</string>
+	<string name="poi_hunting_lodge">Паляўнічая хатка</string>
+
+	<string name="poi_picnic_table">Cтол для пікніка</string>
+	<string name="poi_hanami">Ханамі</string>
+	<string name="poi_wine_cellar">Вінны склеп</string>
+	<string name="poi_winery">Вінны завод</string>
+
+	<string name="poi_gallery">Галерэя мастацтваў</string>
+	<string name="poi_lean_to">Лабаз</string>
+	<string name="poi_general_tourist_attraction_yes">Турыстычная славутасьць</string>
+	<string name="poi_trail_riding_station">Станцыя для вершнікаў</string>
+
 	</resources>
