@@ -146,7 +146,7 @@
 	<string name="poi_subway_station">Stacja metra</string>
 	<string name="poi_taxi">Postój TAXI</string>
 
-	<string name="poi_airport">Lotnisko</string>
+	<string name="poi_aerodrome">Lotnisko</string>
 	<string name="poi_helipad">Lądowisko helikopterów</string>
 	<string name="poi_runway">Pas startowy</string>
 	<string name="poi_aeroway_terminal">Terminal lotniczy</string>
@@ -188,7 +188,7 @@
 	<string name="poi_wastewater_plant">Oczyszczalnia ścieków</string>
 	<string name="poi_water_tower">Wieża ciśnień</string>
 	<string name="poi_dam">Tama</string>
-	<string name="poi_water_mill">Młyn wodny</string>
+	<string name="poi_watermill">Młyn wodny</string>
 
 	<string name="poi_power_substation">Podstacja</string>
 	<string name="poi_power_transformer">Transformator</string>
@@ -269,7 +269,7 @@
 	<string name="poi_estate_agent">Agent nieruchomości</string>
 	<string name="poi_lawyer">Prawnik</string>
 	<string name="poi_ngo">Organizacja pozarządowa</string>
-	<string name="poi_town_hall">Ratusz</string>
+	<string name="poi_townhall">Ratusz</string>
 	<string name="poi_employment_agency">Urząd pracy</string>
 	<string name="poi_advertising_agency">Agencja reklamowa</string>
 	<string name="poi_educational_institution">Instytucja edukacyjna</string>

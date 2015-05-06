@@ -603,7 +603,7 @@
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">"Dateiname: "</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
-	<string name="shared_string_save">Speichern</string>
+	<string name="shared_string_save">speichern</string>
 	
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
@@ -1115,7 +1115,7 @@
 	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 	<string name="context_menu_item_create_poi">POI einsenden</string>
 	<string name="shared_string_yes">Ja</string>
-	<string name="shared_string_cancel">Abbrechen</string>
+	<string name="shared_string_cancel">abbrechen</string>
 	<string name="shared_string_apply">Übernehmen</string>
 	<string name="shared_string_add">Hinzufügen</string>
 	<string name="shared_string_no">Nein</string>
@@ -1146,7 +1146,7 @@
 	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
 	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 	<string name="poi_remove_title">POI löschen</string>
-	<string name="shared_string_delete">Löschen</string>
+	<string name="shared_string_delete">löschen</string>
 	<string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
@@ -1882,7 +1882,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
-	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer Gruppe können sich bis zu 16 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
+	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer privaten Gruppe können sich bis zu 8 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
 	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
 	<string name="osmo_not_signed_in">OsMo-Anmeldung fehlgeschlagen</string>
 	<string name="osmo_gpx_points_downloaded">OsMo-Punkte %1$s heruntergeladen.</string>
@@ -2104,4 +2104,52 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
 	<string name="shared_string_open">Öffnen</string>
 
-    </resources>
+    <string name="rendering_attr_hideHouseNumbers_name">Verberge Hausnummern</string>
+    <string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>
+    <string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
+	<string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen</string>    
+    <string name="storage_directory_external">Externer Speicher</string>
+    <string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
+    <string name="storage_directory_internal_app">Interner Anwendungsspeicher</string>
+    <string name="storage_directory_manual">Manuell spezifiziert</string>
+    <string name="storage_directory_default">Interner Speicher</string>
+    <string name="storage_directory">Kartenspeicher</string>
+    <string name="shared_string_copy">Kopieren</string>
+    <string name="filter_poi_hint">Nach Name filtern</string>
+    <string name="agps_info">A-GPS Info</string>
+	<string name="shared_string_manage">Verwalten</string>
+	<string name="shared_string_edit">Bearbeiten</string>
+	<string name="shared_string_search">Suchen</string>
+	<string name="shared_string_show_description">Beschreibung anzeigen</string>
+	<string name="shared_string_message">Nachricht</string>
+	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
+    <string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
+	<string name="welmode_download_maps">Karten herunterladen</string>
+	<string name="welcome_header">Willkommen</string>
+    <string name="current_route">Aktuelle Route</string>
+    <string name="mark_to_delete">Zum Löschen markieren</string>
+	<string name="osmo_grop_name_length_alert">Der Gruppenname sollte mindestens 3 Zeichen lang sein!</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d Änderungen werden jetzt zu OSM hinaufgeladen. Sind Sie sicher?</string>
+    <string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
+    <string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_minute">min</string>
+	<string name="osmand_parking_time_left">links</string>
+	<string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
+   	<string name="shared_string_go">Los</string>
+	<string name="osmand_parking_overdue">überfällig</string>
+	<string name="osm_edits">OSM-Änderungen</string>
+	<string name="parking_place_limited">Parkzeit begrenzt auf</string>
+	<string name="your_edits">Deine Änderungen</string>
+    <string name="waypoint_visit_after">Besuch nach</string>
+    <string name="shared_string_deselect">Deselektieren</string>
+	<string name="shared_string_do_not_use">nicht benutzen</string>
+	<string name="shared_string_deselect_all">Alles deselektieren</string>
+	<string name="shared_string_unexpected_error">Ein unerwarteter Fehler ist aufgetreten</string>
+	<string name="shared_string_collapse">Einklappen</string>
+	<string name="shared_string_address">Adresse</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="shared_string_places">Orte</string>
+	<string name="welcome_select_region">Um korrekte Straßenschilder und Beschränkungen zu erhalten, wähle bitte eine Region:</string>
+	<string name="welcome_text">OsmAnd bietet globale offline Karten und globale offline Navigation!</string>
+	</resources>

@@ -163,7 +163,7 @@
 	<string name="poi_railway_buffer_stop">Železničná zarážka</string>
 	<string name="poi_taxi">Stanovište taxíkov</string>
 
-	<string name="poi_airport">Letisko</string>
+	<string name="poi_aerodrome">Letisko</string>
 	<string name="poi_helipad">Plocha pre vrtuľníky</string>
 	<string name="poi_runway">Pristávacia dráha</string>
 	<string name="poi_aeroway_terminal">Terminál</string>
@@ -205,7 +205,7 @@
 	<string name="poi_waterway_turning_point">Obratisko na vode</string>
 	<string name="poi_weir">Vzdúvacia hrádza</string>
 	<string name="poi_dam">Priehrada/Hrádza</string>
-	<string name="poi_water_mill">Vodný mlyn</string>
+	<string name="poi_watermill">Vodný mlyn</string>
 
 	<string name="poi_power_substation">Elektrická stanica</string>
 	<string name="poi_power_transformer">Transformátor</string>
@@ -291,7 +291,7 @@
 	<string name="poi_lawyer">Právnik</string>
 	<string name="poi_office_telecommunication">Telekomunikácie</string>
 	<string name="poi_ngo">Nezisková organizácia</string>
-	<string name="poi_town_hall">Radnica</string>
+	<string name="poi_townhall">Radnica</string>
 	<string name="poi_employment_agency">Personálna agentúra</string>
 	<string name="poi_research">Výskumný ústav</string>
 	<string name="poi_it">Informačné technológie</string>
@@ -730,4 +730,17 @@
 	<string name="poi_valley">Údolie</string>
 	<string name="poi_water">Voda</string>
 	<string name="poi_wood">Les</string>
+	<string name="poi_observation_tower">Vyhliadková veža</string>
+	<string name="poi_bell_tower">Zvonica</string>
+	<string name="poi_general_tourist_attraction_yes">Všeobecná turistická atrakcia</string>
+	<string name="poi_cabin">Chatka</string>
+	<string name="poi_lean_to">Trojstranný prístrešok</string>
+	<string name="poi_picnic_table">Piknikový stôl</string>
+	<string name="poi_wine_cellar">Vínna pivnica</string>
+	<string name="poi_winery">Vinárstvo</string>
+
+	<string name="poi_ski_rental">Požičovňa lyží</string>
+
+	<string name="poi_gallery">Galéria</string>
+	<string name="poi_ski_resort">Lyžiarske stredisko</string>
 	</resources>

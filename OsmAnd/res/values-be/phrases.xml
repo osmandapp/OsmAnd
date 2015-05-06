@@ -151,7 +151,7 @@
 	<string name="poi_subway_station">Станцыя мэтро</string>
 	<string name="poi_taxi">Стаянка таксі</string>
 
-	<string name="poi_airport">Аэрапорт</string>
+	<string name="poi_aerodrome">Аэрапорт</string>
 	<string name="poi_helipad">Шрубалётная пляцоўка</string>
 	<string name="poi_runway">Узлётная паласа</string>
 	<string name="poi_aeroway_terminal">Тэрмінал аэрапорту</string>
@@ -192,7 +192,7 @@
 	<string name="poi_waterway_turning_point">Паваротная кропка на вадзе</string>
 	<string name="poi_weir">Невялікая плаціна</string>
 	<string name="poi_dam">Дамба</string>
-	<string name="poi_water_mill">Вадзяны млын</string>
+	<string name="poi_watermill">Вадзяны млын</string>
 
 	<string name="poi_power_substation">Падстанцыя</string>
 	<string name="poi_power_transformer">Трансфарматар</string>
@@ -202,7 +202,7 @@
 	<string name="poi_post_office">Пошта</string>
 	<string name="poi_post_box">Паштовая скрыня</string>
 	<string name="poi_telephone">Тэлефон</string>
-	<string name="poi_communication_tower">Вышка сувязі</string>
+	<string name="poi_communication_tower">Вежа сувязі</string>
 	<string name="poi_telephone_exchange">АТС</string>
 
 	<string name="poi_recycling">Перапрацоўка адыходаў</string>
@@ -285,7 +285,7 @@
 	<string name="poi_lawyer">Юрыдычныя паслугі</string>
 	<string name="poi_office_telecommunication">Тэлекамунікацыйная кампанія</string>
 	<string name="poi_ngo">Грамадзкая арганізацыя</string>
-	<string name="poi_town_hall">Адміністрацыя населенага пункта</string>
+	<string name="poi_townhall">Адміністрацыя населенага пункта</string>
 	<string name="poi_employment_agency">Біржа працы</string>
 	<string name="poi_research">Дасьледчы цэнтар</string>
 	<string name="poi_it">Інфармацыйныя тэхналёгіі</string>
@@ -773,4 +773,22 @@
 
 	<string name="poi_payment_terminal">Плацёжны тэрмінал</string>
 	<string name="poi_piste">Лыжная траса</string>
+	<string name="poi_observation_tower">Назіральная вежа</string>
+	<string name="poi_bell_tower">Званіца</string>
+	<string name="poi_ski_rental">Пракат лыж</string>
+
+	<string name="poi_ski_resort">Лыжны курорт</string>
+	<string name="poi_cabin">Хата</string>
+	<string name="poi_hunting_lodge">Паляўнічая хатка</string>
+
+	<string name="poi_picnic_table">Cтол для пікніка</string>
+	<string name="poi_hanami">Ханамі</string>
+	<string name="poi_wine_cellar">Вінны склеп</string>
+	<string name="poi_winery">Вінны завод</string>
+
+	<string name="poi_gallery">Галерэя мастацтваў</string>
+	<string name="poi_lean_to">Лабаз</string>
+	<string name="poi_general_tourist_attraction_yes">Турыстычная славутасьць</string>
+	<string name="poi_trail_riding_station">Станцыя для вершнікаў</string>
+
 	</resources>

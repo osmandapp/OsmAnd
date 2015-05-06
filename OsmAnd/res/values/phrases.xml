@@ -27,7 +27,7 @@
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Tourism</string>
 		<string name="poi_sightseeing">Sightseeing</string>
-		<string name="poi_accomodation">Accomodation</string>
+		<string name="poi_accomodation">Accommodation</string>
 		<string name="poi_internet_access">Internet access</string>
 	<string name="poi_entertainment">Leisure</string>
 		<string name="poi_club">Club</string>
@@ -221,7 +221,7 @@
 	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
-	<string name="poi_airport">Airport</string>
+	<string name="poi_aerodrome">Airport</string>
 	<string name="poi_helipad">Helipad</string>
 	<string name="poi_runway">Runway</string>
 	<string name="poi_aeroway_terminal">Aeroway terminal</string>
@@ -266,7 +266,7 @@
 	<string name="poi_waterway_turning_point">Waterway turning point</string>
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
-	<string name="poi_water_mill">Water mill</string>
+	<string name="poi_watermill">Water mill</string>
 
 	<string name="poi_power_substation">Substation</string>
 	<string name="poi_power_transformer">Transformer</string>
@@ -277,6 +277,8 @@
 	<string name="poi_post_box">Post box</string>
 	<string name="poi_telephone">Telephone</string>
 	<string name="poi_communication_tower">Communication tower</string>
+	<string name="poi_observation_tower">Observation tower</string>
+	<string name="poi_bell_tower">Bell tower</string>
 	<string name="poi_telephone_exchange">Telephone exchange</string>
 
 	<string name="poi_recycling">Recycling</string>
@@ -379,7 +381,7 @@
 	<string name="poi_lawyer">Lawyer</string>
 	<string name="poi_office_telecommunication">Telecommunication office</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_town_hall">Town hall</string>
+	<string name="poi_townhall">Town hall</string>
 	<string name="poi_employment_agency">Employment office</string>
 	<string name="poi_research">Research office</string>
 	<string name="poi_it">IT office</string>
@@ -480,6 +482,7 @@
 	<string name="poi_theme_park">Theme park</string>
 	
 	<string name="poi_attraction">Tourist attraction</string>
+	<string name="poi_general_tourist_attraction_yes">General tourist attraction</string>
 	<string name="poi_attraction_amusement_ride">Amusement ride</string>
 	<string name="poi_attraction_animal">Animal (attraction)</string>
 	<string name="poi_attraction_big_wheel">Ferris wheel</string>
@@ -501,6 +504,9 @@
 	<string name="poi_chalet">Chalet</string>
 	<string name="poi_apartment">Apartment</string>
 	<string name="poi_wilderness_hut">Wilderness hut</string>
+	<string name="poi_cabin">Cabin</string>
+	<string name="poi_lean_to">Lean-to</string>
+	<string name="poi_hunting_lodge">Hunting lodge</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
 	<string name="poi_religion_christian">Place of worship: christian</string>
@@ -529,6 +535,7 @@
 	<string name="poi_camp_site">Camp site</string>
 	<string name="poi_caravan_site">Caravan site</string>
 	<string name="poi_picnic_site">Picnic site</string>
+	<string name="poi_picnic_table">Picnic table</string>
 	<string name="poi_spring">Spring</string>
 	<string name="poi_hot_spring">Hot spring</string>
 	<string name="poi_geyser">Geyser</string>
@@ -538,6 +545,9 @@
 	<string name="poi_shelter">Shelter</string>
 	<string name="poi_funicular">Funicular</string>
 	<string name="poi_resort">Resort</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Wine cellar</string>
+	<string name="poi_winery">Winery</string>
 
 	<string name="poi_club_art">Art club</string>
 	<string name="poi_club_astronomy">Astronomy club</string>
@@ -574,6 +584,7 @@
 	<string name="poi_piste_snow_park">Snow park</string>
 	<string name="poi_piste_playground">Playground</string>
 	<string name="poi_piste_ice_skate">Ice skate</string>
+	<string name="poi_ski_rental">Ski rental</string>
 
 	<string name="poi_library">Library</string>
 	<string name="poi_arts_centre">Arts centre</string>
@@ -583,9 +594,11 @@
 	<string name="poi_social_centre">Social centre</string>
 	<string name="poi_theatre">Theatre</string>
 	<string name="poi_circus">Circus</string>
+	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
 	<string name="poi_stripclub">Stripclub</string>
+	<string name="poi_ski_resort">Ski resort</string>
 	<string name="poi_beach_resort">Beach resort</string>
 	<string name="poi_dog_park">Dog park</string>
 	<string name="poi_leisure_fishing">Fishing place</string>
@@ -600,6 +613,7 @@
 	<string name="poi_park">Park</string>
 	<string name="poi_recreation_ground">Recreation ground</string>
 	<string name="poi_village_green">Village green</string>
+	<string name="poi_trail_riding_station">Trail riding station</string>
 
 	<string name="poi_cafe">Cafe</string>
 	<string name="poi_biergarten">Biergarten</string>

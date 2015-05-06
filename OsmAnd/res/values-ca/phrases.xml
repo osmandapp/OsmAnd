@@ -127,7 +127,7 @@
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
-	<string name="poi_airport">Aeroport</string>
+	<string name="poi_aerodrome">Aeroport</string>
 	<string name="poi_helipad">Heliport</string>
 	<string name="poi_runway">Pista d\'aterratge</string>
 	<string name="poi_aeroway_terminal">Terminal d\'aeroport</string>
@@ -163,7 +163,7 @@
 	<string name="poi_lock_gate">Resclosa</string>
 	<string name="poi_weir">Sobreeixidor</string>
 	<string name="poi_dam">Presa d\'aigua</string>
-	<string name="poi_water_mill">Molí hidràulic</string>
+	<string name="poi_watermill">Molí hidràulic</string>
 
 	<string name="poi_power_substation">Subestació elèctrica</string>
 	<string name="poi_power_transformer">Transformador elèctric</string>
@@ -249,7 +249,7 @@
 	<string name="poi_lawyer">Gabinet d\'advocats</string>
 	<string name="poi_office_telecommunication">Empresa de telecomunicacions</string>
 	<string name="poi_ngo">ONG</string>
-	<string name="poi_town_hall">Ajuntament</string>
+	<string name="poi_townhall">Ajuntament</string>
 	<string name="poi_employment_agency">Oficina d\'ocupació</string>
 	<string name="poi_research">Oficina de recerca i desenvolupament</string>
 	<string name="poi_it">Consultoria en TIC</string>
@@ -556,4 +556,25 @@
 	<string name="poi_piste_sled">Trineu</string>
 	<string name="poi_library">Biblioteca</string>
 	<string name="poi_cinema">Cinema</string>
+	<string name="poi_waterway_turning_point">Punt de canvi de sentit naval</string>
+	<string name="poi_training">Centre de formació</string>
+	<string name="poi_baby_hatch">Recollida de nadons</string>
+	<string name="poi_newspaper">Oficina de premsa</string>
+	<string name="poi_military_landuse">Zona militar</string>
+	<string name="poi_observation_tower">Torre de guaita</string>
+	<string name="poi_bell_tower">Campanar</string>
+	<string name="poi_educational_institution">Centre educatiu</string>
+	<string name="poi_roller_skating">Patinatge sobre rodes</string>
+	<string name="poi_craft_carpet_layer">Instal·lador de moqueta</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Celler</string>
+	<string name="poi_piste_ice_skate">Patinatge sobre gel</string>
+	<string name="poi_ski_rental">Lloguer d\'esquis</string>
+
+	<string name="poi_theatre">Teatre</string>
+	<string name="poi_circus">Circ</string>
+	<string name="poi_gallery">Galeria d\'art</string>
+	<string name="poi_dance_floor">Sala de ball</string>
+	<string name="poi_nightclub">Club nocturn</string>
+	<string name="poi_ski_resort">Estació d\'esquí</string>
 	</resources>

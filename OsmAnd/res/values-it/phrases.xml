@@ -73,7 +73,7 @@
 	<string name="poi_bus_station">Stazione bus (obsoleto)</string>
 	<string name="poi_railway_subway_entrance">Entrata metropolitana</string>
 	<string name="poi_subway_station">Stazione metropolitana</string>
-	<string name="poi_airport">Aeroporto</string>
+	<string name="poi_aerodrome">Aeroporto</string>
 	<string name="poi_helipad">Eliporto</string>
 	<string name="poi_bicycle_rental">Noleggio bici</string>
 	<string name="poi_bicycle_parking">Parcheggio bici</string>
@@ -135,7 +135,7 @@
 	<string name="poi_speed_camera">Autovelox</string>
 	<string name="poi_turning_circle">Rotonda per inversione di marcia</string>
 	<string name="poi_wastewater_plant">Depuratore acque</string>
-	<string name="poi_water_mill">Mulino ad acqua</string>
+	<string name="poi_watermill">Mulino ad acqua</string>
 
 	<string name="poi_power_substation">Sottostazione</string>
 	<string name="poi_power_transformer">Trasformatore</string>
@@ -484,7 +484,7 @@
 	<string name="poi_craft_tinsmith">Lattoniere</string>
 	<string name="poi_craft_upholsterer">Tappezziere</string>
 	<string name="poi_funeral_directors">Impresa di pompe funebri</string>
-	<string name="poi_town_hall">Municipio</string>
+	<string name="poi_townhall">Municipio</string>
 	<string name="poi_research">Centro di ricerca e sviluppo</string>
 	<string name="poi_it">Ufficio IT</string>
 	<string name="poi_newspaper">Redazione giornalistica</string>
@@ -558,4 +558,8 @@
 	<string name="poi_man_made">Artificiale</string>
 	<string name="poi_historic_mine">Miniera storica</string>
 	<string name="poi_aquarium">Acquario</string>
-	</resources>
+	<string name="poi_shop_food">Alimentari</string>
+	<string name="poi_filling_station">Stazione di servizio</string>
+		<string name="poi_public_transport">Trasporti pubblici</string>
+		<string name="poi_air_transport">Trasporto aereo</string>
+		</resources>

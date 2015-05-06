@@ -124,7 +124,7 @@
 	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
 	<string name="poi_taxi">Postèggiu de sos taxi</string>
 
-	<string name="poi_airport">Aeroportu</string>
+	<string name="poi_aerodrome">Aeroportu</string>
 	<string name="poi_helipad">Eliportu</string>
 	<string name="poi_runway">Pista d\'aterazu</string>
 	<string name="poi_slipway">Lassinadòrju</string>
@@ -155,7 +155,7 @@
 	<string name="poi_wastewater_plant">Depuradore de sas abbas</string>
 	<string name="poi_water_tower">Turre ìdrica</string>
 	<string name="poi_dam">Diga</string>
-	<string name="poi_water_mill">Mulinu ad abba</string>
+	<string name="poi_watermill">Mulinu ad abba</string>
 
 	<string name="poi_power_transformer">Trasformadore</string>
 	<string name="poi_power_plant">Tzentrale elètrica</string>
@@ -224,7 +224,7 @@
 	<string name="poi_estate_agent">Butega immobiliare</string>
 	<string name="poi_lawyer">Abogadu</string>
 	<string name="poi_ngo">ONG</string>
-	<string name="poi_town_hall">Munitzìpiu</string>
+	<string name="poi_townhall">Munitzìpiu</string>
 	<string name="poi_employment_agency">Ufìtziu pro su traballu</string>
 	<string name="poi_it">Ufìtziu IT</string>
 	<string name="poi_newspaper">Redatzione de giornale</string>

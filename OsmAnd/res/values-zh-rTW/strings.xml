@@ -1839,7 +1839,7 @@
     <string name="shared_string_enable">啟用</string>
 	<string name="shared_string_disable">停用</string>
 	<string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
-	<string name="get_plugin">接收</string>
+	<string name="get_plugin">取得</string>
 <string name="plugin_ski_name">檢視滑雪地圖</string>
     <string name="plugin_nautical_name">檢視航海地圖</string>
     <string name="world_ski_missing">要顯示滑雪地圖，需要有已下載的專用離線地圖</string>
@@ -1956,7 +1956,7 @@
 	<string name="welcome_select_region">為了正確的反映您所在的交通號誌和規則，請選擇您的駕駛區域：</string>
 	<string name="welcome_text">OsmAnd 提供全球離線地圖瀏覽和全球離線導航！</string>
 	<string name="welcome_header">歡迎</string>
-    <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請您只在有資格時，才按下 \"是\" 使用此一功能。</string>
+    <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請只在您有資格使用此功能時，才按下 \"是\" 。</string>
 	<string name="agps_info">A-GPS 資訊</string>
 	<string name="agps_data_last_downloaded">A-GPS 資料上次下載：%1$s</string>
     <string name="shared_string_message">訊息</string>

@@ -39,7 +39,7 @@
 	<string name="poi_subway_station">T-banestasjon</string>
 	<string name="poi_taxi">Taxiholdeplass</string>
 
-	<string name="poi_airport">Flyplass</string>
+	<string name="poi_aerodrome">Flyplass</string>
 	<string name="poi_ferry_terminal">Fergeterminal</string>
 	<string name="poi_lighthouse">Fyrtårn</string>
 
@@ -155,4 +155,19 @@
 	<string name="poi_mall">Kjøpesenter</string>
 	<string name="poi_farm">Gårdsbutikk</string>
 	<string name="poi_greengrocer">Grønthandel</string>
+	<string name="poi_sports">Sportsforretning</string>
+	<string name="poi_public_transport_platform">Holdeplass</string>
+	<string name="poi_public_transport_stop_position">Stoppested</string>
+	<string name="poi_public_transport_station">Off. transportmiddel-stasjon</string>
+	<string name="poi_water_tower">Vanntårn</string>
+	<string name="poi_watermill">Vannmølle</string>
+
+	<string name="poi_sports_centre">Sportssenter</string>
+	<string name="poi_memorial">Minnesmerke</string>
+	<string name="poi_drinking_water">Drikkevann</string>
+	<string name="poi_sightseeing">Sightseeing</string>
+		<string name="poi_seafood">Sjømatforretning</string>
+	<string name="poi_confectionery">Konditori</string>
+	<string name="poi_fast_food">Hurtigmat</string>
+	<string name="poi_food_court">Mathall</string>
 	</resources>

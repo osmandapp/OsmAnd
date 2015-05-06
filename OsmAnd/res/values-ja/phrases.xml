@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="poi_airport">空港(Aireport)</string>
+	<string name="poi_aerodrome">空港(Aireport)</string>
 	<string name="poi_bank">銀行(Bank)</string>
 	<string name="poi_bus_stop">バス停(Bus stop)</string>
 	<string name="poi_car_rental">レンタカー(Car rental)</string>
@@ -46,7 +46,7 @@
 	<string name="poi_sport">スポーツ(Sport)</string>
 	<string name="poi_tourism">観光(Tourism)</string>
 		<string name="poi_sightseeing">観光(Sightseeing)</string>
-		<string name="poi_accomodation">宿泊施設(Accomodation)</string>
+		<string name="poi_accomodation">宿泊施設(Accommodation)</string>
 		<string name="poi_internet_access">インターネット有り(Internet access)</string>
 	<string name="poi_entertainment">レジャー(Leisure)</string>
 		<string name="poi_club">クラブ(Club)</string>
@@ -252,7 +252,7 @@
 	<string name="poi_waterway_turning_point">船舶転回所(Waterway turning point)</string>
 	<string name="poi_weir">堰(Weir)</string>
 	<string name="poi_dam">ダム(Dam)</string>
-	<string name="poi_water_mill">水車小屋(Water mill)</string>
+	<string name="poi_watermill">水車小屋(Water mill)</string>
 
 	<string name="poi_power_substation">変電所(Substation)</string>
 	<string name="poi_power_transformer">変圧器・トランス(Transformer)</string>
@@ -383,7 +383,7 @@
 	<string name="poi_lawyer">法律事務所(Lawyer)</string>
 	<string name="poi_office_telecommunication">通信会社事務所(Telecommunication office)</string>
 	<string name="poi_ngo">NGO・非政府組織(NGO)</string>
-	<string name="poi_town_hall">町役場・市庁舎(Town hall)</string>
+	<string name="poi_townhall">町役場・市庁舎(Town hall)</string>
 	<string name="poi_employment_agency">職業紹介所(Employment office)</string>
 	<string name="poi_research">研究所(Research office)</string>
 	<string name="poi_it">IT関連事務所(IT office)</string>
@@ -763,4 +763,23 @@
 
 	<string name="poi_seamark_building">航路標識建造物(Seamark building)</string>
 	<string name="poi_seamark_light">導灯、航路標識(Light, seamark)</string>
+	<string name="poi_observation_tower">観測塔(Observation tower)</string>
+	<string name="poi_bell_tower">鐘楼(Bell tower)</string>
+	<string name="poi_general_tourist_attraction_yes">一般的な観光名所(General tourist attraction)</string>
+	<string name="poi_cabin">小屋(Cabin)</string>
+	<string name="poi_lean_to">下家・差し掛け小屋(Lean-to)</string>
+	<string name="poi_hunting_lodge">狩猟小屋(Hunting lodge)</string>
+
+	<string name="poi_picnic_table">ピクニックテーブル(Picnic table)</string>
+	<string name="poi_hanami">お花見スポット・桜の名所(Hanami)</string>
+	<string name="poi_wine_cellar">ワインセラー(Wine cellar)</string>
+	<string name="poi_winery">ワイナリー(Winery)</string>
+
+	<string name="poi_piste">ゲレンデ・スノーコース(Piste)</string>
+	<string name="poi_ski_rental">レンタルスキー(Ski rental)</string>
+
+	<string name="poi_gallery">美術館(Art gallery)</string>
+	<string name="poi_ski_resort">スキーリゾート(Ski resort)</string>
+	<string name="poi_trail_riding_station">トレイルライディング小屋(Trail riding station)</string>
+
 	</resources>

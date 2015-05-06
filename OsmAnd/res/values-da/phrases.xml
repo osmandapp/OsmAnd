@@ -146,7 +146,7 @@
         <string name="poi_subway_station">Metrostation</string>
         <string name="poi_taxi">Taxaholdeplads</string>
 
-        <string name="poi_airport">Lufthavn</string>
+        <string name="poi_aerodrome">Lufthavn</string>
         <string name="poi_helipad">Helikopterlandingsplads</string>
         <string name="poi_runway">Landingsbane</string>
         <string name="poi_aeroway_terminal">Lufthavnsterminal</string>
@@ -188,7 +188,7 @@
         <string name="poi_waterway_turning_point">Vendepunkt på vandet</string>
         <string name="poi_weir">Stemmeværk</string>
         <string name="poi_dam">Dæmning</string>
-        <string name="poi_water_mill">Vandmølle</string>
+        <string name="poi_watermill">Vandmølle</string>
 
         <string name="poi_power_substation">Transformerstation</string>
         <string name="poi_power_transformer">Transformator</string>
@@ -257,7 +257,7 @@
         <string name="poi_lawyer">Advokat</string>
         <string name="poi_office_telecommunication">Telekommunikation selskab</string>
         <string name="poi_ngo">NGO</string>
-        <string name="poi_town_hall">Rådhus</string>
+        <string name="poi_townhall">Rådhus</string>
         <string name="poi_employment_agency">Arbejdsformidling</string>
         <string name="poi_research">Forskning</string>
         <string name="poi_it">IT kontor</string>
@@ -778,4 +778,22 @@
 
 	<string name="poi_payment_terminal">Betalingsterminal</string>
 	<string name="poi_piste">Skipiste</string>
+	<string name="poi_observation_tower">Udsigtstårn</string>
+	<string name="poi_bell_tower">Klokketårn</string>
+	<string name="poi_ski_rental">Skiudlejning</string>
+
+	<string name="poi_ski_resort">Skisportssted</string>
+	<string name="poi_general_tourist_attraction_yes">Generel turistattraktion</string>
+	<string name="poi_cabin">Hytte</string>
+	<string name="poi_hunting_lodge">Jagthytte</string>
+
+	<string name="poi_picnic_table">Bordbænkesæt</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Vinkælder</string>
+	<string name="poi_winery">Vingård</string>
+
+	<string name="poi_gallery">Kunstgalleri</string>
+	<string name="poi_trail_riding_station">Trailridning station</string>
+
+	<string name="poi_lean_to">Lean-to shelter</string>
 	</resources>

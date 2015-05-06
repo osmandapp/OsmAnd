@@ -1350,12 +1350,11 @@
 	<string name="auto_zoom_far">Stredné priblíženie</string>
 	<string name="auto_zoom_farthest">Malé priblíženie</string>
     
-    <string name="tip_map_styles_t">OsmAnd umožňuje zobrazenie vektorových máp v rôznych štýloch podľa vašich potrieb:
-		\n\nOkrem vyváženého štýlu "default" môžete v "Menu" → "Konfigurovať obrazovku" → "Štýl vykresľovania" vybrať napríklad:
-		\n\t* Štýl "Touring view", ktorý zobrazuje najpodrobnejšie informácie  pre cestovanie , vrátane vylepšení pre profesionálnych vodičov (vyšší kontrast, dobre rozlíšiteľné cesty), voľby pre Alpskú turistiku (stupnicu SAC), cyklotrasy, turistické značky a pod.
-		\n\t* "High contrast roads" zobrazuje cesty vo zvýraznených farbách pre prípad silného okolitého osvetlenia.
-		\n\t* "Winter and ski" vytvorí (zasneženú) zimnú krajinu s lyžiarskymi svahmi a vlekmi (spolu s mapou "World ski")
-	</string>
+    <string name="tip_map_styles_t">"OsmAnd umožňuje zobrazenie vektorových máp v rôznych štýloch podľa vašich potrieb:
+\n\nOkrem vyváženého štýlu default môžete v Menu → Konfigurovať obrazovku → Štýl vykresľovania vybrať napríklad:
+\n\t* Štýl \"Touring view\", ktorý zobrazuje najpodrobnejšie informácie pre cestovanie , vrátane vylepšení pre profesionálnych vodičov (vyšší kontrast, dobre rozlíšiteľné cesty), voľby pre Alpskú turistiku (stupnicu SAC), cyklotrasy, turistické značky a pod.
+\n\t* \"High contrast roads\" zobrazuje cesty vo zvýraznených farbách pre prípad silného okolitého osvetlenia.
+\n\t* \"Winter and ski\" vytvorí (zasneženú) zimnú krajinu s lyžiarskymi svahmi a vlekmi (spolu s mapou \"World ski\") "</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom ku kvalitným celosvetovým údajom z OpenStreetMap (OSM). Všetky údaje máp môžu byť uložené na pamäťovej karte vo vašom zariadení pre použitie bez prístupu na Internet (offline). Pomocou GPS vo vašom zariadení môže OsmAnd ponúknuť navigovanie vizuálnymi a hlasovými usmerneniami pre automobil, bicykel a chodca. Všetky hlavné funkcie pracujú online aj offline (bez nutnosti prístupu na Internet).
 
@@ -2006,13 +2005,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="notes">Poznámky</string>
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Iba cesty</string>
-	<string name="plugin_nautical_descr">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.
-		\n\nMapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".
-		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
-	</string>
-	<string name="plugin_ski_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Winter and ski\", ktorý zobrazuje krajinné útvary v zimných podmienkach.
-		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
-	</string>
+	<string name="plugin_nautical_descr">"Tento modul obohatí OsmAnd o možnosť zobrazenia námorných máp pre lode, plachetnice a iné vodné športy.\n\nPoskytuje navigačné značky a mapové symboly pre vnútrozemskú aj pobrežnú navigáciu. Popis každej navigačnej značky poskytne podrobnosti potrebné na jej identifikáciu a význam (kategóriu, tvar, farbu, poradie, číslo, atď.).\n\nTento pohľad môže byť vypnutý deaktivovaním modulu tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\". "</string>
+	<string name="plugin_ski_descr">"Tento modul vám sprístupní celosvetové zjazdovky, bežecké trate, alpinistické trasy, lanovky a lyžiarske vleky. Trasy a zjazdovky sú farebne rozlíšené podľa obtiažnosti a zobrazené v špeciálnom \"zimnom\" štýle, ktorý pripomína zasneženú krajinu. 
+\n\nAktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý zobrazuje krajinné útvary v zimných podmienkach. Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\". "</string>
 	<string name="plugin_touringview_descr">"Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.
 \n\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky).
 \n\nTaktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.

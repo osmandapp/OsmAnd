@@ -501,7 +501,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesita algunos datos regionales fuera de línea que puede descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Después será capaz de ver los mapas, ubicar direcciones, buscar PDIs y encontrar el transporte público.</string>
+  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesitas algunos datos regionales fuera de línea que puedes descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Después serás capaz de ver los mapas, ubicar direcciones, buscar PDIs y encontrar el transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -1998,12 +1998,12 @@
 	<string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios locales</string>
    	<string name="mark_to_delete">Marcar para borrar</string>
 	<string name="welmode_download_maps">Descargar mapas</string>
-	<string name="welcome_select_region">Para reflejar correctamente las señales de tráfico y regulaciones, seleccione su región de conducción:</string>
+	<string name="welcome_select_region">Para reflejar correctamente las señales de tráfico y regulaciones, por favor selecciona tu región de conducción:</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
-    <string name="welcome_text">¡OsmAnd proporciona visualización de mapas globales y navegación global en línea!</string>
+    <string name="welcome_text">¡OsmAnd proporciona visualización de mapas globales y navegación global sin conexión!</string>
 	<string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de advertencias de radares no está permitido por ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para utilizar esta característica.</string>
-	<string name="agps_info">Información de A-GPS</string>
+	<string name="agps_info">Información A-GPS</string>
 	<string name="shared_string_message">Mensaje</string>
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="shared_string_do_not_use">No usar</string>
@@ -2016,7 +2016,7 @@
 	<string name="shared_string_places">Lugares</string>
 	<string name="shared_string_search">Buscar</string>
 	<string name="filter_poi_hint">Filtrar por nombre</string>
-    <string name="search_poi_category_hint">Escriba para buscar todas</string>
+    <string name="search_poi_category_hint">Escribe para buscar todas</string>
     <string name="index_name_netherlands">Europa - Países Bajos</string>
 	<string name="rendering_value__name">Predeterminado</string>
     <string name="rendering_value_highContrastRoads_name">Carreteras en alto contraste</string>
@@ -2024,11 +2024,11 @@
 	<string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
-    <string name="storage_directory_internal_app">Memoria de la aplicación interna</string>
+    <string name="storage_directory_internal_app">Memoria de aplicación interna</string>
     <string name="storage_directory_manual">Especificar manualmente</string>
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_copy">Copiar</string>
-    <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     </resources>

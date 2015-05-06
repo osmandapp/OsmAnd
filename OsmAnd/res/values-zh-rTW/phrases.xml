@@ -25,7 +25,7 @@
 	<string name="poi_sport">運動</string>
 	<string name="poi_tourism">旅遊</string>
 		<string name="poi_sightseeing">觀光</string>
-		<string name="poi_accomodation">膳宿</string>
+		<string name="poi_accomodation">住宿</string>
 		<string name="poi_internet_access">網際網路存取</string>
 	<string name="poi_entertainment">休閒</string>
 		<string name="poi_club">俱樂部</string>
@@ -220,7 +220,7 @@
 	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
 	<string name="poi_taxi">計程車站</string>
 
-	<string name="poi_airport">機場</string>
+	<string name="poi_aerodrome">機場</string>
 	<string name="poi_helipad">直升機停機坪</string>
 	<string name="poi_runway">跑道</string>
 	<string name="poi_aeroway_terminal">機場航廈</string>
@@ -265,7 +265,7 @@
 	<string name="poi_waterway_turning_point">水路轉折點</string>
 	<string name="poi_weir">堰</string>
 	<string name="poi_dam">水壩</string>
-	<string name="poi_water_mill">水磨坊</string>
+	<string name="poi_watermill">水磨坊</string>
 
 	<string name="poi_power_substation">變電所</string>
 	<string name="poi_power_transformer">變壓器</string>
@@ -368,4 +368,46 @@
 	<string name="poi_physiotherapist">物理治療師</string>
 	<string name="poi_podiatrist">足科醫師</string>
 	<string name="poi_psychotherapist">心理治療師</string>
+	<string name="poi_healthcare_rehabilitation">康復</string>
+	<string name="poi_speech_therapist">言語治療師</string>
+	<string name="poi_healthcare_yes">醫療設施</string>
+
+	<string name="poi_company">公司</string>
+	<string name="poi_insurance">保險</string>
+	<string name="poi_estate_agent">不動產經紀人</string>
+	<string name="poi_lawyer">律師</string>
+	<string name="poi_office_telecommunication">電信局</string>
+	<string name="poi_ngo">非政府組織</string>
+	<string name="poi_townhall">市政廳</string>
+	<string name="poi_employment_agency">就業中心</string>
+	<string name="poi_research">研究室</string>
+	<string name="poi_it">IT 辦公室</string>
+	<string name="poi_newspaper">報社</string>
+	<string name="poi_architect">建築師事務所</string>
+	<string name="poi_advertising_agency">廣告代理商</string>
+	<string name="poi_educational_institution">教育機構</string>
+	<string name="poi_studio">廣播室</string>
+	<string name="poi_bookmaker">賭馬業者</string>
+
+	<string name="poi_stadium">體育場</string>
+	<string name="poi_sports_centre">體育中心</string>
+	<string name="poi_golf_course">高爾夫球場</string>
+	<string name="poi_ice_rink">溜冰場</string>
+	<string name="poi_pitch">運動場</string>
+	<string name="poi_leisure_track">操場</string>
+	<string name="poi_running_track">賽跑跑道</string>
+	<string name="poi_bicycle_track">自行車道</string>
+	<string name="poi_horse_track">馬道</string>
+	<string name="poi_observation_tower">觀測塔</string>
+	<string name="poi_bell_tower">鐘樓</string>
+	<string name="poi_raceway">賽車跑道</string>
+	<string name="poi_9pin">九瓶保齡球</string>
+	<string name="poi_10pin">保齡球</string>
+	<string name="poi_archery">射箭</string>
+	<string name="poi_athletics">田徑</string>
+	<string name="poi_american_football">美式橄榄球</string>
+	<string name="poi_australian_football">澳大利亞足球</string>
+	<string name="poi_base">定點跳傘</string>
+	<string name="poi_piste_sleigh">雪橇</string>
+	<string name="poi_picnic_site">野餐地點</string>
 	</resources>

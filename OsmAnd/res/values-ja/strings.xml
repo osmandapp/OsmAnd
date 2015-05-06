@@ -2006,7 +2006,7 @@ POIの更新は利用できません</string>
     <string name="current_route">現在のルート</string>
     <string name="agps_info">A-GPS情報</string>
 	<string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
-    <string name="confirm_usage_speed_cameras">国によっては法律によりスピードカメラ警告の使用ができません。(ドイツ、フランス、イタリア、その他の国)。OsmAndは、法律に違反した場合の責任は一切負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
+    <string name="confirm_usage_speed_cameras">多くの国(ドイツ、フランス、イタリア、その他)ではスピードカメラ警告の使用が法律で許可されていません。あなたが法律に違反した場合OsmAndは一切の責任を負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
 	<string name="shared_string_message">メッセージ</string>
 	<string name="shared_string_do_not_use">使用しない</string>
 	<string name="shared_string_show_description">説明表示</string>
@@ -2022,4 +2022,15 @@ POIの更新は利用できません</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
 	<string name="rendering_value__name">標準</string>
     <string name="rendering_value_highContrastRoads_name">ハイコントラスト道路</string>
-	</resources>
+	<string name="rendering_attr_hideHouseNumbers_name">番地を非表示</string>
+    <string name="application_dir_change_warning3">OsmAndとそのデータファイルを新しい保存先にコピーしますか？</string>
+    <string name="specified_directiory_not_writeable">指定したディレクトリ内にマップを作成できませんでした</string>
+	<string name="copying_osmand_file_failed">ファイルのコピーに失敗しました</string>    
+    <string name="storage_directory_external">外部ストレージ</string>
+    <string name="storage_directory_multiuser">マルチユーザーストレージ</string>
+    <string name="storage_directory_internal_app">内部アプリケーションメモリ</string>
+    <string name="storage_directory_manual">手動で指定</string>
+    <string name="storage_directory_default">内部メモリ</string>
+    <string name="storage_directory">マップストレージ</string>
+    <string name="shared_string_copy">コピー</string>
+    </resources>

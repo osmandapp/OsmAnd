@@ -1943,9 +1943,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="share_note">Partager la note</string>
 	
 	<string name="shared_string_export">Exporter</string>
-	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
-		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
-	</string>
+	<string name="plugin_ski_descr">"Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski (ventilées par difficultés grâce à des codes couleurs) ou les remontées mécaniques.\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
 \n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage des pistes cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
 \n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>

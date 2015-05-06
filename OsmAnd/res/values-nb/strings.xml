@@ -1305,4 +1305,5 @@
     <string name="storage_directory_default">Internminne</string>
     <string name="storage_directory">Kartlagring</string>
     <string name="shared_string_copy">Kopier</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
     </resources>
