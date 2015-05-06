@@ -1282,7 +1282,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi tappando sulla mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, i quali potrebbe essere utilizzati in seguito come guida.</string>
+    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra i punti. I risultati possono essere salvati come file GPX, che possono essere utilizzati in seguito come guida.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>
@@ -1919,7 +1919,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_release">Rilasciato</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
-	<string name="shared_string_cancel">Abbandona</string>
+	<string name="shared_string_cancel">Annulla</string>
 	<string name="shared_string_dismiss">Abbandona</string>
 	<string name="shared_string_yes">Si</string>
 	<string name="shared_string_no">No</string>
