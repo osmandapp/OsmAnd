@@ -103,7 +103,6 @@ public class UpdatesIndexFragment extends ListFragment {
 	private void createListView() {
 		updateHeader();
 		if (indexItems.size() == 0) {
-			indexItems.clear();
 			if (DownloadActivity.downloadListIndexThread.isDownloadedFromInternet()) {
 				indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
 			} else {

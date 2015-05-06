@@ -310,7 +310,7 @@
   
   
   
-  <string name="local_index_installed">Локальная версия</string>
+  <string name="local_index_installed">Загружено</string>
   <string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
   <string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
   <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>

@@ -84,8 +84,9 @@ public class DownloadOsmandIndexesHelper {
 				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_ttsconfig.p".length());
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, 
-							"0.1", 1024*100, key, destFile.getPath(), DownloadActivityType.VOICE_FILE));
+					
+					result.add(new AssetIndexItem(voice + ext, "voice", date, dateModified, "0.1", destFile.length(), key,
+							destFile.getPath(), DownloadActivityType.VOICE_FILE));
 				}
 			}
 			result.sort();
