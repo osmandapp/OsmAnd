@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Like in themes_base.xml, the namespace "Base.AppCompat.*" is used to
          define base styles for the platform version. The "*.AppCompat"
@@ -372,6 +372,8 @@
     <style name="Base.Widget.AppCompat.CompoundButton.CheckBox" parent="android:Widget.CompoundButton.CheckBox">
         <item name="android:button">?android:attr/listChoiceIndicatorMultiple</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:paddingLeft">@dimen/checkbox_padding</item>
+        <item name="android:paddingRight">@dimen/checkbox_padding</item>
     </style>
 
     <style name="Base.Widget.AppCompat.CompoundButton.RadioButton" parent="android:Widget.CompoundButton.RadioButton">

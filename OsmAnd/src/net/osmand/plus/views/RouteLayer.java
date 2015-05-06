@@ -4,6 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.Location;
@@ -13,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -31,6 +33,7 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.util.FloatMath;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -38,7 +41,9 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	private final RoutingHelper helper;
 	private List<Location> points = new ArrayList<Location>();
+	private List<Location> actionPoints = new ArrayList<Location>();
 	private Paint paint;
+	private Paint actionPaint;
 	private Paint paint2;
 	private boolean isPaint2;
 	private Paint shadowPaint;
@@ -63,11 +68,16 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void initUI() {
 		paint = new Paint();
-		
 		paint.setStyle(Style.STROKE);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
+		
+		actionPaint = new Paint();
+		actionPaint.setStyle(Style.STROKE);
+		actionPaint.setAntiAlias(true);
+		actionPaint.setStrokeCap(Cap.ROUND);
+		actionPaint.setStrokeJoin(Join.ROUND);
 		path = new Path();
 		
 		paintIcon = new Paint();
@@ -101,6 +111,8 @@ public class RouteLayer extends OsmandMapLayer {
 					rc.setDensityValue((float) tileBox.getMapDensity());
 //					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 					osmandRenderer.updatePaint(req, paint, 0, false, rc);
+					osmandRenderer.updatePaint(req, actionPaint, 0, false, rc);
+					actionPaint.setColor(Color.WHITE);
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
 					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
@@ -111,7 +123,8 @@ public class RouteLayer extends OsmandMapLayer {
 					}
 				} else {
 					System.err.println("Rendering attribute route is not found !");
-					paint.setStrokeWidth(7 * view.getDensity());
+					paint.setStrokeWidth(12 * view.getDensity());
+					actionPaint.setStrokeWidth(12 * view.getDensity());
 				}
 			}
 		}
@@ -160,6 +173,29 @@ public class RouteLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
 
+	private void drawAction(RotatedTileBox tb, Canvas canvas) {
+		if (actionPoints.size() > 0) {
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			TIntArrayList tx = new TIntArrayList();
+			TIntArrayList ty = new TIntArrayList();
+			for (int i = 0; i < actionPoints.size(); i++) {
+				Location o = actionPoints.get(i);
+				int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				tx.add(x);
+				ty.add(y);
+			}
+			Path pth = new Path();
+			for(int i = 0; i < tx.size(); i += 3) {
+				pth.reset();
+				pth.moveTo(tx.get(i), tx.get(i));
+				pth.lineTo(tx.get(i + 1), tx.get(i + 1));
+				pth.lineTo(tx.get(i + 2), tx.get(i + 2));
+				canvas.drawPath(pth, actionPaint);
+			}
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		}
+	}
 
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
@@ -174,7 +210,7 @@ public class RouteLayer extends OsmandMapLayer {
 				tx.add(x);
 				ty.add(y);
 			}
-			int pth = calculatePath(tb, tx, ty, path, null);
+			calculatePath(tb, tx, ty, path);
 			
 			if(isPaint_1) {
 				canvas.drawPath(path, paint_1);
@@ -186,46 +222,61 @@ public class RouteLayer extends OsmandMapLayer {
 			if(isPaint2) {
 				canvas.drawPath(path, paint2);
 			}
-			if(tb.getZoomAnimation() == 0) {
-				if(pth <= 1) {
-					drawArrowsOverPath(canvas, path, coloredArrowUp);
-				} else {
-					ArrayList<Path> lst = new ArrayList<Path>();
-					calculatePath(tb, tx, ty, path, lst);
-					for(Path l : lst) {
-						drawArrowsOverPath(canvas, l, coloredArrowUp);
-					}
-				}
+			if (tb.getZoomAnimation() == 0) {
+				TIntArrayList lst = new TIntArrayList(50);
+				calculateSplitPaths(tb, tx, ty, lst);
+				drawArrowsOverPath(canvas, lst, coloredArrowUp);
 			}
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
 
-	private void drawArrowsOverPath(Canvas canvas, Path path, Bitmap arrow) {
-		PathMeasure pm = new PathMeasure();
-		pm.setPath(path, false);
+	private void drawArrowsOverPath(Canvas canvas, TIntArrayList lst, Bitmap arrow) {
 		float pxStep = arrow.getHeight() * 4f;
-		float dist = pxStep;
-		double length = pm.getLength();
 		Matrix matrix = new Matrix();
-		float[] pos = new float[2];
-		float[] tan = new float[2];
-		while(dist < length) {
-			if(pm.getPosTan(dist, pos, tan)) {
-				matrix.reset();
-				matrix.postTranslate(0, - arrow.getHeight() / 2);
-				matrix.postRotate((float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI) + 90f, 
-						arrow.getWidth() / 2, 0);
-				matrix.postTranslate(pos[0] - arrow.getWidth() / 2, pos[1]);
-				canvas.drawBitmap(arrow, matrix, paintIcon);
+		float dist = 0;
+		for (int i = 0; i < lst.size(); i += 4) {
+			int px = lst.get(i);
+			int py = lst.get(i + 1);
+			int x = lst.get(i + 2);
+			int y = lst.get(i + 3);
+			float angleRad = (float) Math.atan2(y - py, x - px);
+			float angle = (float) (angleRad * 180 / Math.PI) + 90f;
+			float distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			if(distSegment == 0) {
+				continue;
 			}
-			dist += pxStep;
+			int len = (int) (distSegment / pxStep);
+			if (len > 0) {
+				float pdx = ((x - px) / len);
+				float pdy = ((y - py) / len);
+				for (int k = 1; k <= len; k++) {
+					matrix.reset();
+					matrix.postTranslate(0, -arrow.getHeight() / 2);
+					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
+					matrix.postTranslate(px + k * pdx- arrow.getWidth() / 2 , py + pdy * k);
+					canvas.drawBitmap(arrow, matrix, paintIcon);
+					dist = 0;
+				}
+			} else {
+				if(dist > pxStep) {
+					matrix.reset();
+					matrix.postTranslate(0, -arrow.getHeight() / 2);
+					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
+					matrix.postTranslate(px + (x - px) / 2 - arrow.getWidth() / 2, py + (y - py) / 2);
+					canvas.drawBitmap(arrow, matrix, paintIcon);
+					dist = 0;
+				} else {
+					dist += distSegment;
+				}
+			}
 		}
 	}
 	
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		points.clear();
+		actionPoints.clear();
 		boolean previousVisible = false;
 		Location lastProjection = helper.getLastProjection();
 		if (lastProjection != null) {
@@ -236,11 +287,26 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 		}
 		List<Location> routeNodes = helper.getRoute().getRouteLocations();
+		int cd = helper.getRoute().getCurrentRoute();
+		List<RouteDirectionInfo> rd = helper.getRouteDirections();
+		Iterator<RouteDirectionInfo> it = rd.iterator();
+		RouteDirectionInfo nf = null;
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
+			if(nf != null && nf.routePointOffset < i + cd) {
+				nf = null;
+			}
+			while (nf != null && it.hasNext()) {
+				nf = it.next();
+				if (nf.routePointOffset < i + cd) {
+					nf = null;
+				}
+			}
+			boolean action = nf != null && nf.routePointOffset == i + cd;
 			if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
 					&& ls.getLatitude() <= topLatitude) {
 				points.add(ls);
+				
 				if (!previousVisible) {
 					if (i > 0) {
 						points.add(0, routeNodes.get(i - 1));
@@ -248,16 +314,29 @@ public class RouteLayer extends OsmandMapLayer {
 						points.add(0, lastProjection);
 					}
 				}
+				if(action) {
+					if (i > 0) {
+						actionPoints.add(0, routeNodes.get(i - 1));
+					} else if (lastProjection != null) {
+						actionPoints.add(0, lastProjection);
+					}
+					actionPoints.add(ls);
+					if(i < routeNodes.size() - 1) {
+						actionPoints.add(routeNodes.get(i + 1));
+					} else {
+						actionPoints.add(ls);
+					}
+				}
 				previousVisible = true;
 			} else if (previousVisible) {
 				points.add(ls);
-				
 				drawSegment(tb, canvas);
 				previousVisible = false;
 				points.clear();
 			}
 		}
 		drawSegment(tb, canvas);
+		drawAction(tb, canvas);
 	}
 	
 	public RoutingHelper getHelper() {

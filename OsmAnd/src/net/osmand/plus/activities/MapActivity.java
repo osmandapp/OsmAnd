@@ -843,8 +843,8 @@ public class MapActivity extends AccessibleActivity {
 		Intent intent = getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if ("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost())
-					&& "/go".equals(data.getPath())) {
+			if ("http".equalsIgnoreCase(data.getScheme()) && data.getHost() != null && data.getHost().contains("osmand.net") &&
+					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
 				if (lat != null && lon != null) {

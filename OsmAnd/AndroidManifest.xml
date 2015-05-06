@@ -81,7 +81,7 @@
 				<data android:scheme="https" />
 				<data android:host="osmand.net" />
 				<data android:host="download.osmand.net" />
-				<data android:path="go" />
+				<data android:pathPrefix="/go" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
