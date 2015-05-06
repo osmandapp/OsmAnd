@@ -2107,6 +2107,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
+    <string name="search_poi_category_hint">Wprowadzić tekst, aby wyszukać we wszystkich kategoriach</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     </resources>
