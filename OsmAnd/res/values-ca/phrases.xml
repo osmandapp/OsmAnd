@@ -568,4 +568,13 @@
 	<string name="poi_craft_carpet_layer">Instal·lador de moqueta</string>
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_wine_cellar">Celler</string>
+	<string name="poi_piste_ice_skate">Patinatge sobre gel</string>
+	<string name="poi_ski_rental">Lloguer d\'esquis</string>
+
+	<string name="poi_theatre">Teatre</string>
+	<string name="poi_circus">Circ</string>
+	<string name="poi_gallery">Galeria d\'art</string>
+	<string name="poi_dance_floor">Sala de ball</string>
+	<string name="poi_nightclub">Club nocturn</string>
+	<string name="poi_ski_resort">Estació d\'esquí</string>
 	</resources>
