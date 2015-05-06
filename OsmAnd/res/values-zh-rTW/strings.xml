@@ -1839,7 +1839,7 @@
     <string name="shared_string_enable">啟用</string>
 	<string name="shared_string_disable">停用</string>
 	<string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
-	<string name="get_plugin">接收</string>
+	<string name="get_plugin">取得</string>
 <string name="plugin_ski_name">檢視滑雪地圖</string>
     <string name="plugin_nautical_name">檢視航海地圖</string>
     <string name="world_ski_missing">要顯示滑雪地圖，需要有已下載的專用離線地圖</string>
