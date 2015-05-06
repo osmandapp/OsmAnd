@@ -1882,7 +1882,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
-	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer Gruppe können sich bis zu 16 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
+	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer privaten Gruppe können sich bis zu 8 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
 	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
 	<string name="osmo_not_signed_in">OsMo-Anmeldung fehlgeschlagen</string>
 	<string name="osmo_gpx_points_downloaded">OsMo-Punkte %1$s heruntergeladen.</string>
@@ -2104,7 +2104,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
 	<string name="shared_string_open">Öffnen</string>
 
-    <string name="rendering_attr_hideHouseNumbers_name">Hausnummern verbergen</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Verberge Hausnummern</string>
     <string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>
     <string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
 	<string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen</string>    
@@ -2134,4 +2134,22 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
 	<string name="osmand_parking_time_left">links</string>
+	<string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
+   	<string name="shared_string_go">Los</string>
+	<string name="osmand_parking_overdue">überfällig</string>
+	<string name="osm_edits">OSM-Änderungen</string>
+	<string name="parking_place_limited">Parkzeit begrenzt auf</string>
+	<string name="your_edits">Deine Änderungen</string>
+    <string name="waypoint_visit_after">Besuch nach</string>
+    <string name="shared_string_deselect">Deselektieren</string>
+	<string name="shared_string_do_not_use">nicht benutzen</string>
+	<string name="shared_string_deselect_all">Alles deselektieren</string>
+	<string name="shared_string_unexpected_error">Ein unerwarteter Fehler ist aufgetreten</string>
+	<string name="shared_string_collapse">Einklappen</string>
+	<string name="shared_string_address">Adresse</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="shared_string_places">Orte</string>
+	<string name="welcome_select_region">Um korrekte Straßenschilder und Beschränkungen zu erhalten, wähle bitte eine Region:</string>
+	<string name="welcome_text">OsmAnd bietet globale offline Karten und globale offline Navigation!</string>
 	</resources>
