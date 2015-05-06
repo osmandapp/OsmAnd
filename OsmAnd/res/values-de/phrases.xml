@@ -85,7 +85,7 @@
 	<string name="poi_craft_brewery">Brauerei</string>
 	<string name="poi_bridge">Brücke</string>
 	<string name="poi_brothel">Bordell</string>
-	<string name="poi_bus_station">Bushaltestelle (obsolet)</string>
+	<string name="poi_bus_station">Busbahnhof</string>
 	<string name="poi_bus_stop">Bushaltestelle</string>
 	<string name="poi_butcher">Fleischerei</string>
 	<string name="poi_cafe">Café</string>
@@ -217,7 +217,7 @@
 	<string name="poi_funeral_directors">Bestatter</string>
 	<string name="poi_funicular">Seilbahn</string>
 	<string name="poi_furniture">Möbelgeschäft</string>
-	<string name="poi_garages">Garage</string>
+	<string name="poi_garages">Garagen</string>
 	<string name="poi_garden_centre">Gartencenter</string>
 	<string name="poi_craft_gardener">Gärtner</string>
 	<string name="poi_gas">Flüssiggas</string>
@@ -298,7 +298,7 @@
 	<string name="poi_craft_metal_construction">Metallbau</string>
 	<string name="poi_midwife">Hebamme</string>
 	<string name="poi_migration">Wanderung</string>
-	<string name="poi_military">Militärzone</string>
+	<string name="poi_military">Militär</string>
 	<string name="poi_military_airfield">Fliegerhorst</string>
 	<string name="poi_military_barracks">Barracke</string>
 	<string name="poi_military_bunker">Bunker</string>
@@ -388,7 +388,7 @@
 	<string name="poi_prosecutor">Staatsanwalt</string>
 	<string name="poi_psychotherapist">Psychotherapeut</string>
 	<string name="poi_pub">Kneipe</string>
-	<string name="poi_public_transport_platform">Öff. Personennahverkehr</string>
+	<string name="poi_public_transport_platform">ÖPNV-Haltestelle</string>
 	<string name="poi_public_transport_platform_bus">Bushaltestelle</string>
 	<string name="poi_public_transport_platform_tram">Straßenbahnhaltestelle</string>
 	<string name="poi_public_transport_platform_trolleybus">Oberleitungsbushaltestelle</string>
@@ -398,8 +398,8 @@
 	<string name="poi_racquet">Schläger</string>
 	<string name="poi_radiotechnics">Radiotechniker</string>
 	<string name="poi_halt">Eisenbahnhaltestelle (obsolet)</string>
-	<string name="poi_railway_platform">Bahnsteig (obsolet)</string>
-	<string name="poi_railway_station">Bahnhof (obsolet)</string>
+	<string name="poi_railway_platform">Bahnsteig</string>
+	<string name="poi_railway_station">Bahnhof</string>
 	<string name="poi_rapids">Stromschnelle</string>
 	<string name="poi_recycling">Abfallverwertung</string>
 	<string name="poi_reef">Riff</string>
@@ -549,7 +549,7 @@
 	<string name="poi_traffic_calming_rumble_strip">Holperstreifen</string>
 	<string name="poi_traffic_calming_table">Bodenwelle</string>
 	<string name="poi_traffic_signals">Ampel</string>
-	<string name="poi_tram_stop">Straßenbahnhaltestelle (obsolet)</string>
+	<string name="poi_tram_stop">Straßenbahnhaltestelle</string>
 	<string name="poi_travel_agent">Reisebüro</string>
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_turning_circle">Wendehammer</string>
@@ -636,4 +636,54 @@
 		<string name="poi_club">Club</string>
 	<string name="poi_sustenance">Gastronomie</string>
 	<string name="poi_cafe_and_restaurant">Cafe und Restaurant</string>
+	<string name="poi_transportation">Transport</string>
+		<string name="poi_personal_transport">Individualverkehr</string>
+		<string name="poi_air_transport">Lufttransport</string>
+		<string name="poi_water_transport">Wassertransport</string>
+		<string name="poi_bicycle_transport">Fahrradtransport</string>
+		<string name="poi_service">Dienstleistung</string>
+		<string name="poi_craft">Handwerk</string>
+	<string name="poi_finance">Finanzwesen</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">Benutzerdefiniert</string>
+	
+	<string name="poi_aerialway_transport">Luftseilbahntransport</string>
+	<string name="poi_wine">Weinhandlung</string>
+
+	<string name="poi_medical_supply">Medizinische Versorgung</string>
+	<string name="poi_photo">Fotogeschäft</string>
+	<string name="poi_fuel:diesel">Diesel</string>
+	<string name="poi_fuel:gtl_diesel">GtL-Diesel</string>
+	<string name="poi_fuel:hgv_diesel">Lkw-Diesel</string>
+	<string name="poi_fuel:biodiesel">Biodiesel</string>
+	<string name="poi_fuel:lpg">Autogas</string>
+	<string name="poi_fuel:octane_80">80 Oktan</string>
+	<string name="poi_fuel:octane_91">91 Oktan</string>
+	<string name="poi_fuel:octane_92">92 Oktan</string>
+	<string name="poi_fuel:octane_95">95 Oktan</string>
+	<string name="poi_fuel:octane_98">98 Oktan</string>
+	<string name="poi_fuel:octane_100">100 Oktan</string>
+	<string name="poi_fuel:cng">Komprimiertes Erdgas</string>
+	<string name="poi_fuel:1_25">Kraftstoffgemisch 1:25</string>
+	<string name="poi_fuel:1_50">Kraftstoffgemisch 1:50</string>
+	<string name="poi_fuel:ethanol">Ethanol</string>
+	<string name="poi_fuel:methanol">Methanol</string>
+	<string name="poi_fuel:e10">E10</string>
+	<string name="poi_fuel:e20">E20</string>
+	<string name="poi_fuel:e85">E85</string>
+	<string name="poi_fuel:biogas">E85</string>
+	<string name="poi_fuel:lh2">Flüssigwasserstoff</string>
+	<string name="poi_fuel:electricity">Strom</string>
+	<string name="poi_public_transport_stop_position">ÖPNV-Halteposition</string>
+	<string name="poi_railway_buffer_stop">Eisenbahnprellbock</string>
+	<string name="poi_junction">Kreuzung</string>
+	<string name="poi_rest_area">Rastplatz</string>
+
+	<string name="poi_observation_tower">Aussichtsturm</string>
+	<string name="poi_bell_tower">Glockenturm</string>
+	<string name="poi_industrial">Industriegebiet</string>
+	<string name="poi_allotments">Kleingärten</string>
+	<string name="poi_farmyard">Hof</string>
+	<string name="poi_meadow">Wiese</string>
+	<string name="poi_canal">Kanal</string>
 	</resources>

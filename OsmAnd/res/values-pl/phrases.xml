@@ -508,7 +508,7 @@
 	<string name="poi_fuel:biodiesel">Biodiesel</string>
 	<string name="poi_fuel:lpg">LPG</string>
 	<string name="poi_fuel:cng">CNG</string>
-	<string name="poi_public_transport_stop_position">"Przystanek transpoertu  publicznego"</string>
+	<string name="poi_public_transport_stop_position">"Przystanek transportu  publicznego"</string>
 	<string name="poi_halt">Przystanek kolejowy</string>
 	<string name="poi_rest_area">Miejsce odpoczynku</string>
 
@@ -666,4 +666,20 @@
 	<string name="poi_fast_food">Bar szybkiej obsługi</string>
 	<string name="poi_craft_handicraft">Rzemiosło</string>
 	<string name="poi_paddle_tennis">Tenis stołowy</string>
+	<string name="poi_observation_tower">Wieża widokowa</string>
+	<string name="poi_bell_tower">Dzwonnica</string>
+	<string name="poi_korfbal">Koszykówka</string>
+	<string name="poi_sport_multi">Wiele dyscyplin</string>
+	<string name="poi_pelota">Piłika</string>
+	<string name="poi_racquet">Rakieta</string>
+	<string name="poi_roller_skating">Jazda na rolkach</string>
+	<string name="poi_skateboard">Deskorolka</string>
+	<string name="poi_team_handball">Drużyna piłki ręcznej</string>
+	<string name="poi_general_tourist_attraction_yes">Ogólne atrakcje turystyczne</string>
+	<string name="poi_attraction_slide">Ślizgawka</string>
+	<string name="poi_attraction_summer_toboggan">Letni tor saneczkowy</string>
+	<string name="poi_picnic_table">Stół piknikowy</string>
+	<string name="poi_winery">Winiarnia</string>
+
+	<string name="poi_piste">Stok</string>
 	</resources>
