@@ -453,8 +453,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	
 
 	private void warnAboutChangingStorage(final String newValue) {
-		final String newDir = newValue != null ? newValue.trim() : newValue;
-		File path = new File(newDir);
+		String newDir = newValue != null ? newValue.trim() : newValue;
+		if(!newDir.replace('/', ' ').trim().
+				toLowerCase().endsWith(IndexConstants.APP_DIR.replace('/', ' ').trim())) {
+			newDir += "/" +IndexConstants.APP_DIR; 
+		}
+		final File path = new File(newDir);
 		path.mkdirs();
 		if (!path.canRead() || !path.exists()) {
 			AccessibleToast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
@@ -467,12 +471,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =
 						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this, 
-						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), new File(newDir,
-								IndexConstants.APP_DIR));
+						settings.getExternalStorageDirectory(), path);
 				task.setRunOnSuccess(new Runnable() {
 					@Override
 					public void run() {
-						updateSettingsToNewDir(newDir);						
+						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());						
 					}
 				});
 				task.execute();
@@ -482,7 +485,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updateSettingsToNewDir(newDir);								
+				updateSettingsToNewDir(path.getParentFile().getAbsolutePath());								
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -490,7 +493,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 	
 	private void updateSettingsToNewDir(final String newDir) {
-		// TODO v19
 		// edit the preference
 		settings.setExternalStorageDirectoryPre19(newDir);
 		getMyApplication().getResourceManager().resetStoreDirectory();
