@@ -61,4 +61,25 @@
 	<string name="poi_wine">Вино и алкохол</string>
 
 	<string name="poi_books">Книжарница</string>
+	<string name="poi_bicycle">Велосипеди</string>
+	<string name="poi_anime">Магазин за комикси</string>
+	<string name="poi_antiques">Антиквариат</string>
+	<string name="poi_art">Арт-магазин</string>
+	<string name="poi_baby_goods">Бебешки стоки</string>
+	<string name="poi_bag">Магазин за чанти</string>
+	<string name="poi_bathroom_furnishing">Обзавеждане за баня</string>
+	<string name="poi_bed">Обзавеждане за спални</string>
+	<string name="poi_boutique">Моден бутик</string>
+	<string name="poi_carpet">Магазин за килими</string>
+	<string name="poi_charity">Благотворителност</string>
+	<string name="poi_chemist">Аптека</string>
+	<string name="poi_clothes">Магазин за дрехи</string>
+	<string name="poi_child_clothes">Детско облекло</string>
+	<string name="poi_shoes">Магазин за обувки</string>
+	<string name="poi_computer">Магазин за компютри</string>
+	<string name="poi_copyshop">Копирен център</string>
+	<string name="poi_curtain">Завеси и покривки</string>
+	<string name="poi_fabric">Магазин за пердета</string>
+	<string name="poi_bedding">Чаршафи и завивки</string>
+	<string name="poi_dive">Екипировка за гмуркане</string>
 	</resources>
