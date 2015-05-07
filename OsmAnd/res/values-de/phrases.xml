@@ -686,4 +686,35 @@
 	<string name="poi_farmyard">Hof</string>
 	<string name="poi_meadow">Wiese</string>
 	<string name="poi_canal">Kanal</string>
+	<string name="poi_power">Energie</string>
+		<string name="poi_seamark">Nautisch</string>
+	<string name="poi_landuse_railway">Bahngelände</string>
+
+	<string name="poi_silo">Silo</string>
+	<string name="poi_storage_tank">Speicher</string>
+
+	<string name="poi_residential">Wohngebiet</string>
+
+	<string name="poi_field_hockey">Feldhockey</string>
+	<string name="poi_sailing">Segeln</string>
+	<string name="poi_apartment">Apartment</string>
+	<string name="poi_internet_access_wlan">Internetzugang: Wlan</string>
+	<string name="poi_internet_access_wired">Internetzugang: Kabel</string>
+	<string name="poi_internet_access_public">Internetzugang: öffentlich</string>
+	<string name="poi_picnic_table">Picknicktisch</string>
+	<string name="poi_wine_cellar">Weinkeller</string>
+	<string name="poi_piste">Piste</string>
+	<string name="poi_piste_nordic">Nordisch</string>
+	<string name="poi_piste_skitour">Skitour</string>
+	<string name="poi_piste_playground">Spielplatz</string>
+	<string name="poi_ski_rental">Skiverleih</string>
+
+	<string name="poi_gallery">Kunstgalerie</string>
+	<string name="poi_gasometer">Gasometer</string>
+	<string name="poi_bench">Sitzbank</string>
+	<string name="poi_recreation_ground">Erholungsgebiet</string>
+	<string name="poi_smoking_area">Raucherbereich</string>
+	<string name="poi_valley">Tal</string>
+	<string name="poi_water">Wasser</string>
+	<string name="poi_military_landuse">Militärgebiet</string>
 	</resources>
