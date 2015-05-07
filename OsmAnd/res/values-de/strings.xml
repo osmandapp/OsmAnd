@@ -2069,7 +2069,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="plugin_nautical_name">See-Karten-Ansicht</string>
     <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
-    <string name="get_plugin">Erhalten</string>
+    <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
 	<string name="shared_string_currently_recording_track">Derzeit aufnehmender Track</string>
 	<string name="back_to_map">Zurück zur Karte</string>
@@ -2164,4 +2164,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="plugin_touringview_name">Tourenkartenansicht</string>
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
-	</resources>
+	<string name="search_poi_category_hint">Suchbegriff hier eingeben</string>
+    </resources>
