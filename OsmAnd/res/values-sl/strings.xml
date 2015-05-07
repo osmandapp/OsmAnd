@@ -263,7 +263,7 @@
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
-	<string name="poi_filter_closest_poi">Najbližja točka POI</string>
+	<string name="poi_filter_closest_poi">Najbližje točke POI</string>
 	
 	<string name="poi_context_menu_modify">Spremeni točko POI</string>
 	<string name="poi_context_menu_delete">Izbriši točko POI</string>
@@ -296,7 +296,7 @@
 	<string name="user_password">Geslo OSM</string>
 	<string name="user_name_descr">Zahtevano za prenos podatkov na openstreetmap.org</string>
 	<string name="user_password_descr">Zahtevano za pošiljanje podatkov na openstreetmap.org</string>
-	<string name="routing_settings_descr">Določitev možnosti za določitev poti in navigacijo</string>
+	<string name="routing_settings_descr">Prilagajanje možnosti za določevanje poti in navigacijo</string>
 	<string name="general_settings">Splošne nastavitve</string>
 	<string name="general_settings_descr">Prilagajanje splošnih nastavitve programa</string>
 	<string name="global_app_settings">Splošne nastavitve programa</string>
@@ -308,7 +308,7 @@
     <string name="gps_not_available">Možnosti GPS je treba omogočiti med nastavitvami</string>
     <string name="map_widget_monitoring_services">Storitve beleženja</string>
 	<string name="no_route">Ni določene poti</string>
-	<string name="delete_target_point">Odstraniti vmesno točko</string>
+	<string name="delete_target_point">Odstranjevanje točk</string>
 	<string name="target_point">Ciljna točka %1$s</string>
     <string name="intermediate_point">Vmesna točka %1$s</string>
     <string name="target_points">Ciljne točke</string>
@@ -372,7 +372,7 @@
 	<string name="rendering_attr_hmRendered_name">Pokaži podrobnejši izris</string>
 	<string name="navigate_point_format">Oblika</string>
 	<string name="day_night_info">Podrobnosti dneva in noči</string>
-	<string name="map_widget_day_night">Dnevni/Nočni zemljevid</string>
+	<string name="map_widget_day_night">Svetlobni učinek</string>
 	<string name="map_widget_vector_attributes">Značilnosti izrisovanja</string>
 	<string name="map_widget_renderer">Slog zemljevida</string>
 	<string name="native_app_allocated_memory_descr">Skupna dodeljena velikost pomnilnika je %1$s MB (Dalvik %2$s MB, drugo %3$s MB). Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na dalviku %6$s MB).</string>
@@ -380,7 +380,7 @@
 	
 	<string name="shared_location">Objavljen položaj</string>
 	<string name="osmand_parking_event">Odpeljite vozilo s parkirišča</string>
-	<string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo z parkirišča, je bilo že prej dodano v koledar. Ostalo bo tam, dokler ga ne izbrišete ročno.</string>    
+	<string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo prej dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>    
 	<string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
 	<string name="osmand_parking_delete_confirm">Ali želite odstraniti mesto, kjer je vozilo parkirano?</string>
 	<string name="osmand_parking_delete">Izbriši mesto parkiranja</string>
@@ -684,7 +684,7 @@
 	<string name="live_monitoring_url_descr">Za navajanje spletnih naslovov je treba uporabiti določeno skladnjo za parametre: ZŠ (β)={0}, ZD (λ)={1}, čas={2}, hdop={3}, nadmorska višina (h)={4}, hitrost (s)={5}, usmeritev={6}</string>
 	<string name="live_monitoring_url">Spletni naslov za sledenje v živo</string>
 	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
-	<string name="profile_settings">Za profil določene nastavitve</string>
+	<string name="profile_settings">Izbor profila nastavitev</string>
 	<string name="settings_preset">Privzeti profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
 	<string name="index_settings">Upravljalnik datotek zemljevidov</string>
@@ -696,9 +696,9 @@
 	<string name="daynight_mode_day">Dnevni</string>
 	<string name="daynight_mode_night">Nočni</string>
 	<string name="daynight_mode_sensor">Svetlobno tipalo</string>
-	<string name="daynight">Dnevni / nočni način</string>
-	<string name="daynight_descr">Izberi način preklopa za Dnevni / Nočni način</string>
-	<string name="tip_day_night_mode_t_v2">"Barve zemljevida se lahko spreminjajo med dnevnim (svetlejšim) in nočnim (temnejšim) prikazom zemljevida. Temnejši nabor barv za nočne barve je ustreznejši za nočno vožnjo.
+	<string name="daynight">Svetlobni učinek izrisa</string>
+	<string name="daynight_descr">Izberi način svetlobnega učinka za izris zemljevida (dnevni/nočni način)</string>
+	<string name="tip_day_night_mode_t_v2">"Svetlobni učinek na izris zemljevida je mogoče prilagajati med dnevnim (svetlejšim) in nočnim (temnejšim) prikazom. Temnejši nabor barv za nočne barve je ustreznejši za nočno vožnjo.
 \n\nPreklop med dnevnim in nočnim načinom je mogoče preko \'Menija\' → \'Nastavitve zaslona\' → \'Dnevni/Nočni način\'.\n\nMožnosti so:
 \n\t* \'Sončni vzhod / zahod\': samodejni način preklopa glede na položaj sonca (privzeto)
 \n\t* \'Dnevni\': vedno je v uporabi dnevni način\n\t* \'Nočni\': vedno je v uporabi nočni način
@@ -807,7 +807,7 @@
 	<string name="mark_point">Cilj</string>
 	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
-	<string name="int_seconds">sekund</string>
+	<string name="int_seconds">sekundah</string>
 	<string name="int_min">min.</string>
 	<string name="gps_provider">GPS</string>
 	<string name="previous_run_crashed">Pri prejšnji uporabi programa OsmAnd je prišlo do sesutja. Datoteka z dnevnikom se nahaja v {0}. Prosim, prijavite težavo in priložite to datoteko.</string>
@@ -825,8 +825,8 @@
 	<string name="install_selected_build">Ali želite namestiti OsmAnd - {0} z {1}{2}MB?</string>
 	<string name="loading_builds_failed">Pridobivanje seznama gradenj OsmAnd je spodletelo</string>
 	<string name="loading_builds">Nalaganje OsmAnd graditev …</string>
-	<string name="select_build_to_install">Izberite eno od gradenj OsmAnd za namestitev</string>
-	<string name="contribution_activity">Namesti različico</string>
+	<string name="select_build_to_install">Izbor različice programa OsmAnd za posodobitev</string>
+	<string name="contribution_activity">Nameščanje različic</string>
 	<string name="items_were_selected">{0} predmet(ov) je izbran(ih)</string>
 	<string name="filter_existing_indexes">Filtriraj prejeto</string>
 	
@@ -1047,7 +1047,7 @@
     <string name="tip_altitude_offset">Popravek zamika višine</string>
 	<string name="tip_altitude_offset_t">"Večina naprav GPS sporoča določanje nadmorske višine glede na elipsoidni referenčni sistem WGS84, ki zahteva popravek pri pretvarjanju v krajevni sistem.
 \n\nVgrajen je tudi boljši približek preko referenčnega sistema EGM96 (geoid).\n\nProgram OsmAnd pokaže položaj v sistemu EGM96, ko je naložen vstavek \'Svetovni popravek nadmorske višine\' (WW15MGH.DAC) preko \'Nastavitev\' → \'Upravljanje s podatki\' (Program je na voljo tudi na spletni strani http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.). "</string>
-    <string name="monitoring_control_start">Začni GPX</string>
+    <string name="monitoring_control_start">Beleženje GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
 	<string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej na ravneh približanja od 5 do 9</string>
 	
@@ -1087,7 +1087,7 @@
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
     <string name="layer_recordings">Plast posnetkov</string>
-    <string name="shared_string_control_start">Začni ..</string>
+    <string name="shared_string_control_start">Razdalje ...</string>
     
     
     <string name="av_def_action_video">Snemanje videa</string>
@@ -1374,7 +1374,7 @@
 	<string name="routing_attr_avoid_motorway_name">Izogni se avtocestam</string>
 	<string name="routing_attr_avoid_motorway_description">Izbor poti ne bo upošteval avtocest</string>
 	<string name="routing_attr_weight_name">Omejitev teže vozila</string>
-	<string name="routing_attr_weight_description">Označuje dovoljeno težo vozila na poti</string>
+	<string name="routing_attr_weight_description">Vodenje po poteh z omejitvijo dovoljene teže vozila</string>
     <string name="app_mode_truck">Tovorno vozilo</string>
     <string name="index_item_world_bitcoin_payments">Svetovna plačila Bitcoin</string>
 	<string name="index_item_world_basemap">Pregledni zemljevid sveta</string>
@@ -1421,7 +1421,7 @@
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih zamikih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
 	<string name="osmo_settings">Sledenje OsMo</string>
-   	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
+   	<string name="arrival_distance_descr">Kako hitro naj se najavi napovedan čas prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
     
     <string name="osmo_io_error">"Povezava z OsMo je spodletela: "</string>
@@ -1631,7 +1631,7 @@
     <string name="targets">Cilji</string>
     <string name="confirm_every_run">Vedno vprašaj</string>
 	<string name="save_global_track_interval">Časovni razmik beleženja</string>
-	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
+	<string name="save_track_to_gpx_globally">Beleženje sledi v datoteko GPX</string>
 	<string name="save_track_interval_globally">Časovni razmik beleženja</string>
 	<string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
 	<string name="record_plugin_name">Dnevnik potovanj</string>
@@ -1666,12 +1666,12 @@
     <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
     <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Proge souporabe taksijev</string>
-    <string name="rendering_category_details">Podrobnosti</string>
+    <string name="rendering_category_details">Podrobnost prikaza</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopi zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če je izklopljen), ko se med vodenjem pojavi zavoj</string>
     <string name="shared_string_never">Nikoli</string>
-    <string name="rendering_category_transport">Javni prevoz</string>
+    <string name="rendering_category_transport">Javni prevozi</string>
     <string name="rendering_category_others">Druge značilnosti zemljevida</string>
     <string name="map_widget_appearance_rem">Preostali elementi</string>
     <string name="map_widget_top">Vrstica stanja</string>
@@ -1697,7 +1697,7 @@
     <string name="fav_point_emoticons_message">Ime priljubljene točke je bilo spremenjeno v %1$s, s čimer se omogoči pravilno shranjevanje nizov z izraznimi ikonami v datoteko.</string>
     <string name="routing_attr_no_new_routing_name">Ne omogoči pravil usmerjanja v1.9</string>
     <string name="routing_attr_no_new_routing_description">Ne omogoči uporabe pravil usmerjanja, ki so bile uvedene z različico v1.9</string>
-    <string name="rendering_attr_roadStyle_name">Slog cest</string>
+    <string name="rendering_attr_roadStyle_name">Slog izrisa cest</string>
     <string name="rendering_value_default_name">Privzeto</string>
     <string name="rendering_value_orange_name">Oranžno</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemški cestni atlas</string>
@@ -1743,8 +1743,8 @@
 	<string name="parking_place">Parkirno mesto</string>
     <string name="remove_the_tag">ODSTRANJEVANJE OZNAKE</string>
     <string name="gps_status">Stanje GPS</string>
-    <string name="version_settings_descr">Prejmi razvojno različico</string>
-    <string name="version_settings">Izgradnje</string>
+    <string name="version_settings_descr">Nameščanje in posodabljanje različic programa OsmAnd</string>
+    <string name="version_settings">Nameščanje različic</string>
     <string name="rendering_attr_streetLighting_name">Ulična razsvetljava</string>
     <string name="proxy_pref_title">Posredniški strežnik</string>
     <string name="proxy_pref_descr">Nastavi povezovanje preko posredniškega strežnika</string>
@@ -1850,7 +1850,7 @@
     <string name="delay_to_start_navigation">Začni vodenje od zavoja do zavoja po …</string>
     <string name="waypoint_visit_after">Obišči po</string>
     <string name="waypoint_visit_before">Obišči pred</string>
-    <string name="simulate_your_location">Navidezno določi mesto</string>
+    <string name="simulate_your_location">Navidezna navigacija</string>
     <string name="shared_string_do_not_use">Ne uporabi</string>
 	<string name="shared_string_address">Naslov</string>
 	<string name="plugin_touringview_name">Touring pogled zemljevida</string>
@@ -1859,4 +1859,11 @@
 	<string name="rendering_attr_hideHouseNumbers_name">Ne pokaži hišnih številk</string>
     <string name="index_name_netherlands">Evropa – Nizozemska</string>
 	<string name="delay_to_start_navigation_descr">Določite čas, preden se zapre zaslon načrtovanja poti</string>
-    </resources>
+    <string name="plugin_touringview_descr">"S spreminjanjem tega pogleda, se spremeni slog prikazovanja zemljevidov \'potovalni način\' (Touring view). To je posebni, zelo podrobni pogled za popotnike in profesionalne voznike.
+\n\nPogled omogoča največji možni nabor podrobnosti pri katerikoli povečavi. To vključuje podrobnosti zemljevida s poudarkom na cestah, , poteh, sledeh in oznak za hitro orientacijo v okolju.
+\n\nEnostavno je razločevanje tudi med različnimi vrstami cest. Te so označene z različnimi barvami glede na vrsto vozišča, ker je še posebej uporabno za voznike velikih oziroma težkih vozil.
+\n\nOmogoča tudi posebne možnosti potovanja, kot je kolesarjenje ali pohodništvo v odročnih, gorskih ali težko prehodnih krajih.
+\n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
+\n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
+	<string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
+	</resources>
