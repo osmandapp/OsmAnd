@@ -177,11 +177,11 @@
   
   
   <string name="local_index_installed">Versione locale</string>
-  <string name="local_index_items_backuped">%1$d su %2$d oggetto/i disattivati correttamente.</string>
+  <string name="local_index_items_backuped">%1$d su %2$d oggetto/i disattivato/i correttamente.</string>
   <string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i correttamente.</string>
   <string name="local_index_items_restored">%1$d su %2$d oggetto/i ripristinato/i.</string>
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
-  <string name="local_index_action_do">Stai per %1$s %2$s oggetti/i. Continuare?</string>
+  <string name="local_index_action_do">Stai per %1$s %2$s oggetto/i. Continuare?</string>
   <string name="local_index_descr_title">Gestisci i file delle mappe</string>
   <string name="local_index_mi_restore">Attiva</string>
   <string name="local_index_mi_backup">Disattiva</string>

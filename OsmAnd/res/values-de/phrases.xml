@@ -717,4 +717,18 @@
 	<string name="poi_valley">Tal</string>
 	<string name="poi_water">Wasser</string>
 	<string name="poi_military_landuse">Militärgebiet</string>
+	<string name="poi_forest">Forstwald</string>
+	<string name="poi_reservoir">Reservoir</string>
+	<string name="poi_general_tourist_attraction_yes">Allgemeine Attraktion</string>
+	<string name="poi_fuel:svo">Bio-Kraftstoff</string>
+	<string name="poi_training">Übungsgelände</string>
+	<string name="poi_quarter">Quartier</string>
+	<string name="poi_hunting_lodge">Jagdhütte</string>
+
+	<string name="poi_tomb">Grab</string>
+	<string name="poi_winery">Weinkellerei</string>
+
+	<string name="poi_piste_hike">Wandern</string>
+	<string name="poi_piste_ice_skate">Eislaufen</string>
+	<string name="poi_payment_terminal">Bezahl-Terminal</string>
 	</resources>

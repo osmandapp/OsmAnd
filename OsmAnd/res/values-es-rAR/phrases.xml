@@ -471,7 +471,7 @@
 	<string name="poi_fountain">Fuente</string>
 	<string name="poi_historic_ruins">Ruinas históricas</string>
 	<string name="poi_rune_stone">Piedra rúnica</string>
-	<string name="poi_wreck">Pecio</string>
+	<string name="poi_wreck">Restos náuticos</string>
 	<string name="poi_historic_ship">Barco histórico</string>
 	<string name="poi_historic_mine">Mina histórica</string>
 	<string name="poi_monument">Monumento</string>
@@ -501,7 +501,7 @@
 	<string name="poi_alpine_hut">Cabaña alpina</string>
 	<string name="poi_chalet">Chalé</string>
 	<string name="poi_apartment">Apartamento</string>
-	<string name="poi_wilderness_hut">Cabaña</string>
+	<string name="poi_wilderness_hut">Cabaña aislada</string>
 	<string name="poi_cabin">Cabaña</string>
 	<string name="poi_lean_to">Cobertizo</string>
 	<string name="poi_hunting_lodge">Pabellón de caza</string>
@@ -619,7 +619,7 @@
 	<string name="poi_fast_food">Comida rápida</string>
 	<string name="poi_bar">Bar</string>
 	<string name="poi_pub">Pub</string>
-	<string name="poi_food_court">Plaza de comidas</string>
+	<string name="poi_food_court">Patio de comidas</string>
 	<string name="poi_drinking_water">Agua potable</string>
 	<string name="poi_barbecue">Parrilla</string>
 
@@ -651,7 +651,7 @@
 	<string name="poi_craft_photographer">Fotógrafo</string>
 	<string name="poi_craft_photographic_laboratory">Laboratorio fotográfico</string>
 	<string name="poi_craft_plasterer">Yesero</string>
-	<string name="poi_craft_plumber">Plomero/Fontanero</string>
+	<string name="poi_craft_plumber">Plomero</string>
 	<string name="poi_craft_pottery">Alfarería</string>
 	<string name="poi_craft_rigger">Montador</string>
 	<string name="poi_craft_roofer">Techador</string>
@@ -699,7 +699,7 @@
 	<string name="poi_money_lender">Prestamista</string>
 	<string name="poi_pawnbroker">Casa de empeños</string>
 	<string name="poi_bureau_de_change">Casa de cambio</string>
-	<string name="poi_accountant">Contable/Contador</string>
+	<string name="poi_accountant">Contador</string>
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
 
 	<string name="poi_cave_entrance">Entrada a cueva</string>
@@ -737,4 +737,46 @@
 	<string name="poi_beacon_safe_water">Baliza de aguas seguras</string>
 	<string name="poi_beacon_special_purpose">Baliza de propósito especial</string>
 	<string name="poi_berth">Atraque</string>
-	</resources>
+	<string name="poi_seamark_building">Edificio náutico</string>
+	<string name="poi_seamark_bridge">Puente náutico</string>
+	<string name="poi_buoy_cardinal">Boya cardinal</string>
+	<string name="poi_buoy_installation">Boya de instalación</string>
+	<string name="poi_buoy_isolated_danger">Boya de peligro aislado</string>
+	<string name="poi_buoy_lateral">Boya lateral</string>
+	<string name="poi_buoy_safe_water">Señal de aguas seguras</string>
+	<string name="poi_buoy_special_purpose">Boya de propósito especial</string>
+	<string name="poi_daymark">Señal diurna</string>
+	<string name="poi_distance_mark">Señal de distancia</string>
+	<string name="poi_dry_dock">Dique seco</string>
+	<string name="poi_dyke">Dique</string>
+	<string name="poi_floating_dock">Dique flotante</string>
+	<string name="poi_fog_signal">Señal de niebla</string>
+	<string name="poi_harbour_basin">Cuenca portuaria</string>
+	<string name="poi_seamark_harbour">Puerto</string>
+	<string name="poi_landmark">Referencia terrestre</string>
+	<string name="poi_seamark_light">Luz náutica</string>
+	<string name="poi_seamark_light_major">Luz náutica mayor</string>
+	<string name="poi_seamark_light_minor">Luz náutica menor</string>
+	<string name="poi_seamark_light_float">Luz náutica flotante</string>
+	<string name="poi_seamark_light_vessel">Buque faro</string>
+	<string name="poi_mooring">Amarre</string>
+	<string name="poi_notice">Aviso náutico</string>
+	<string name="poi_pile">Pilote</string>
+	<string name="poi_radar_transponder">Trasponder de radar náutico</string>
+	<string name="poi_radio_station">Estación de radio náutica</string>
+	<string name="poi_signal_station_traffic">Estación de señales de tráfico</string>
+	<string name="poi_signal_station_warning">Estación de señales de advertencia</string>
+	<string name="poi_small_craft_facility">Instalaciones para pequeñas embarcaciones</string>
+	<string name="poi_topmark">Tope náutico</string>
+	<string name="poi_seamark_rock">Roca náutica</string>
+	<string name="poi_seamark_wreck">Pecio</string>
+
+	<string name="poi_military_landuse">Zona militar</string>
+	<string name="poi_military_airfield">Aeródromo militar</string>
+	<string name="poi_military_bunker">Búnker militar</string>
+	<string name="poi_military_barracks">Cuarteles</string>
+	<string name="poi_military_danger_area">Área peligrosa</string>
+	<string name="poi_military_range">Campo de tiro militar</string>
+	<string name="poi_military_naval_base">Base naval militar</string>
+	<string name="poi_military_nuclear_explosion_site">Sitio de explosión nuclear</string>
+</resources>

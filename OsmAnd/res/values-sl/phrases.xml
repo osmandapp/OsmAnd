@@ -211,4 +211,10 @@
 	<string name="poi_military_danger_area">Nevarno območje</string>
 	<string name="poi_military_naval_base">Vojaška pomorska baza</string>
 	<string name="poi_aerialway_station">Pogonska žičniška postaja</string>
+	<string name="poi_traffic_calming_table">Ležeče ovire</string>
+	<string name="poi_picnic_site">Urejen prostor za izletnike</string>
+	<string name="poi_piste_sleigh">Sankaška steza</string>
+	<string name="poi_trail_riding_station">Jahaško počivališče</string>
+
+	<string name="poi_craft_plumber">Vodovodar</string>
 	</resources>

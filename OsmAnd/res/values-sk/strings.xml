@@ -1599,7 +1599,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="index_item_world_ski">Svetová lyžiarska mapa</string>
     <string name="lang_hr">Chorvátsky (Hrvatski)</string>
     <string name="lang_zh">Čínsky (中国的)</string>
-    <string name="index_name_canada">Severná amerika - Kanada</string>
+    <string name="index_name_canada">Severná Amerika - Kanada</string>
     <string name="interrupt_music">Prerušiť hudbu</string>
 	<string name="interrupt_music_descr">Prerušiť hudbu keď prichádza oznam</string>
 	<string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
