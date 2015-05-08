@@ -200,6 +200,20 @@ public class RouteDataObject {
 		return def;
 	}
 	
+	public static float parseHeight(String v, float def) {
+		// 14"10' not supported
+		int i = Algorithms.findFirstNumberEndIndex(v);
+		if (i > 0) {
+			float f = Float.parseFloat(v.substring(0, i));
+			if (v.contains("\"") || v.contains("ft")) {
+				// foot to meters
+				f *= 0.3048;
+			}
+			return f;
+		}
+		return def;
+	}
+	
 	public static float parseWeightInTon(String v, float def) {
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
