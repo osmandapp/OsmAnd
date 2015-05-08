@@ -1,4 +1,4 @@
-package net.osmand.parkingPlugin;
+package net.osmand.nautical;
 
 import net.osmand.nauticalPlugin.R;
 import android.app.Activity;
