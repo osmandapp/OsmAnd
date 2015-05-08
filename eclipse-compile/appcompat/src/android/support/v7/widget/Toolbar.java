@@ -31,11 +31,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.view.SupportMenuInflater;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuItemImpl;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
-import android.support.v7.internal.view.renamemenu.MenuView;
-import android.support.v7.internal.view.renamemenu.SubMenuBuilder;
 import android.support.v7.internal.widget.DecorToolbar;
 import android.support.v7.internal.widget.RtlSpacingHelper;
 import android.support.v7.internal.widget.TintManager;
@@ -57,6 +52,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuItemImpl;
+import androidv7.rmenu.MenuPresenter;
+import androidv7.rmenu.MenuView;
+import androidv7.rmenu.SubMenuBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,7 +171,7 @@ public class Toolbar extends ViewGroup {
     private ActionMenuPresenter mOuterActionMenuPresenter;
     private ExpandedActionViewMenuPresenter mExpandedMenuPresenter;
     private MenuPresenter.Callback mActionMenuPresenterCallback;
-    private MenuBuilder.Callback mMenuBuilderCallback;
+    private MBuilder.Callback mMenuBuilderCallback;
 
     private boolean mCollapsible;
     private int mMinHeight;
@@ -369,13 +369,13 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    public void setMenu(MenuBuilder menu, ActionMenuPresenter outerPresenter) {
+    public void setMenu(MBuilder menu, ActionMenuPresenter outerPresenter) {
         if (menu == null && mMenuView == null) {
             return;
         }
 
         ensureMenuView();
-        final MenuBuilder oldMenu = mMenuView.peekMenu();
+        final MBuilder oldMenu = mMenuView.peekMenu();
         if (oldMenu == menu) {
             return;
         }
@@ -825,7 +825,7 @@ public class Toolbar extends ViewGroup {
         ensureMenuView();
         if (mMenuView.peekMenu() == null) {
             // Initialize a new menu for the first time.
-            final MenuBuilder menu = (MenuBuilder) mMenuView.getMenu();
+            final MBuilder menu = (MBuilder) mMenuView.getMenu();
             if (mExpandedMenuPresenter == null) {
                 mExpandedMenuPresenter = new ExpandedActionViewMenuPresenter();
             }
@@ -1767,7 +1767,7 @@ public class Toolbar extends ViewGroup {
      * Must be called before the menu is accessed
      * @hide
      */
-    public void setMenuCallbacks(MenuPresenter.Callback pcb, MenuBuilder.Callback mcb) {
+    public void setMenuCallbacks(MenuPresenter.Callback pcb, MBuilder.Callback mcb) {
         mActionMenuPresenterCallback = pcb;
         mMenuBuilderCallback = mcb;
     }
@@ -1904,11 +1904,11 @@ public class Toolbar extends ViewGroup {
     }
 
     private class ExpandedActionViewMenuPresenter implements MenuPresenter {
-        MenuBuilder mMenu;
+        MBuilder mMenu;
         MenuItemImpl mCurrentExpandedItem;
 
         @Override
-        public void initForMenu(Context context, MenuBuilder menu) {
+        public void initForMenu(Context context, MBuilder menu) {
             // Clear the expanded action view when menus change.
             if (mMenu != null && mCurrentExpandedItem != null) {
                 mMenu.collapseItemActionView(mCurrentExpandedItem);
@@ -1955,7 +1955,7 @@ public class Toolbar extends ViewGroup {
         }
 
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         }
 
         @Override
@@ -1964,7 +1964,7 @@ public class Toolbar extends ViewGroup {
         }
 
         @Override
-        public boolean expandItemActionView(MenuBuilder menu, MenuItemImpl item) {
+        public boolean expandItemActionView(MBuilder menu, MenuItemImpl item) {
             ensureCollapseButtonView();
             if (mCollapseButtonView.getParent() != Toolbar.this) {
                 addView(mCollapseButtonView);
@@ -1991,7 +1991,7 @@ public class Toolbar extends ViewGroup {
         }
 
         @Override
-        public boolean collapseItemActionView(MenuBuilder menu, MenuItemImpl item) {
+        public boolean collapseItemActionView(MBuilder menu, MenuItemImpl item) {
             // Do this before detaching the actionview from the hierarchy, in case
             // it needs to dismiss the soft keyboard, etc.
             if (mExpandedActionView instanceof CollapsibleActionView) {

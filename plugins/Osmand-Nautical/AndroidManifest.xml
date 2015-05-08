@@ -12,7 +12,7 @@
         android:icon="@drawable/icon"
         android:label="OsmAnd Nautical" >
         <activity
-            android:name=".NauticalActivity"
+            android:name="net.osmand.nautical.NauticalActivity"
             android:label="@string/app_name" >
             <!-- 
             <intent-filter>

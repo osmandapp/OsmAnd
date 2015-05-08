@@ -28,13 +28,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.transition.ActionBarTransition;
 import android.support.v7.internal.view.ActionBarPolicy;
-import android.support.v7.internal.view.renamemenu.ActionMenuItemView;
-import android.support.v7.internal.view.renamemenu.BaseMenuPresenter;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuItemImpl;
-import android.support.v7.internal.view.renamemenu.MenuPopupHelper;
-import android.support.v7.internal.view.renamemenu.MenuView;
-import android.support.v7.internal.view.renamemenu.SubMenuBuilder;
 import android.support.v7.internal.widget.TintImageView;
 import android.util.SparseBooleanArray;
 import android.view.MenuItem;
@@ -42,6 +35,13 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import androidv7.rmenu.ActionMenuItemView;
+import androidv7.rmenu.BaseMenuPresenter;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuItemImpl;
+import androidv7.rmenu.MenuPopupHelper;
+import androidv7.rmenu.MenuView;
+import androidv7.rmenu.SubMenuBuilder;
 
 import java.util.ArrayList;
 
@@ -87,7 +87,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter
     }
 
     @Override
-    public void initForMenu(Context context, MenuBuilder menu) {
+    public void initForMenu(Context context, MBuilder menu) {
         super.initForMenu(context, menu);
 
         final Resources res = context.getResources();
@@ -510,7 +510,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter
     }
 
     @Override
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         dismissPopupMenus();
         super.onCloseMenu(menu, allMenusAreClosing);
     }
@@ -669,7 +669,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter
 
     private class OverflowPopup extends MenuPopupHelper {
 
-        public OverflowPopup(Context context, MenuBuilder menu, View anchorView,
+        public OverflowPopup(Context context, MBuilder menu, View anchorView,
                 boolean overflowOnly) {
             super(context, menu, anchorView, overflowOnly, R.attr.actionOverflowMenuStyle);
             setGravity(GravityCompat.END);
@@ -723,7 +723,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter
     private class PopupPresenterCallback implements Callback {
 
         @Override
-        public boolean onOpenSubMenu(MenuBuilder subMenu) {
+        public boolean onOpenSubMenu(MBuilder subMenu) {
             if (subMenu == null) return false;
 
             mOpenSubMenuId = ((SubMenuBuilder) subMenu).getItem().getItemId();
@@ -732,7 +732,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         }
 
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
             if (menu instanceof SubMenuBuilder) {
                 ((SubMenuBuilder) menu).getRootMenu().close(false);
             }

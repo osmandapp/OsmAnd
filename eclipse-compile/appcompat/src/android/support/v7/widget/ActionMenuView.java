@@ -18,11 +18,6 @@ package android.support.v7.widget;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.support.v7.internal.view.renamemenu.ActionMenuItemView;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuItemImpl;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
-import android.support.v7.internal.view.renamemenu.MenuView;
 import android.support.v7.internal.widget.ViewUtils;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -33,6 +28,11 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import androidv7.rmenu.ActionMenuItemView;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuItemImpl;
+import androidv7.rmenu.MenuPresenter;
+import androidv7.rmenu.MenuView;
 
 /**
  * ActionMenuView is a presentation of a series of menu options as a View. It provides
@@ -40,7 +40,7 @@ import android.view.accessibility.AccessibilityEvent;
  * items in an overflow menu. This allows applications to present packs of actions inline with
  * specific or repeating content.
  */
-public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.ItemInvoker,
+public class ActionMenuView extends LinearLayoutCompat implements MBuilder.ItemInvoker,
         MenuView {
 
     private static final String TAG = "ActionMenuView";
@@ -48,7 +48,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
     static final int MIN_CELL_SIZE = 56; // dips
     static final int GENERATED_ITEM_PADDING = 4; // dips
 
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
 
     private Context mContext;
 
@@ -61,7 +61,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
     private boolean mReserveOverflow;
     private ActionMenuPresenter mPresenter;
     private MenuPresenter.Callback mActionMenuPresenterCallback;
-    private MenuBuilder.Callback mMenuBuilderCallback;
+    private MBuilder.Callback mMenuBuilderCallback;
     private boolean mFormatItems;
     private int mFormatItemsWidth;
     private int mMinCellSize;
@@ -604,7 +604,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
     }
 
     /** @hide */
-    public void initialize(MenuBuilder menu) {
+    public void initialize(MBuilder menu) {
         mMenu = menu;
     }
 
@@ -619,7 +619,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
     public Menu getMenu() {
         if (mMenu == null) {
             final Context context = getContext();
-            mMenu = new MenuBuilder(context);
+            mMenu = new MBuilder(context);
             mMenu.setCallback(new MenuBuilderCallback());
             mPresenter = new ActionMenuPresenter(context);
             mPresenter.setReserveOverflow(true);
@@ -636,7 +636,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
      * Must be called before the first call to getMenu()
      * @hide
      */
-    public void setMenuCallbacks(MenuPresenter.Callback pcb, MenuBuilder.Callback mcb) {
+    public void setMenuCallbacks(MenuPresenter.Callback pcb, MBuilder.Callback mcb) {
         mActionMenuPresenterCallback = pcb;
         mMenuBuilderCallback = mcb;
     }
@@ -645,7 +645,7 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
      * Returns the current menu or null if one has not yet been configured.
      * @hide Internal use only for action bar integration
      */
-    public MenuBuilder peekMenu() {
+    public MBuilder peekMenu() {
         return mMenu;
     }
 
@@ -734,15 +734,15 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
         public boolean onMenuItemClick(MenuItem item);
     }
 
-    private class MenuBuilderCallback implements MenuBuilder.Callback {
+    private class MenuBuilderCallback implements MBuilder.Callback {
         @Override
-        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+        public boolean onMenuItemSelected(MBuilder menu, MenuItem item) {
             return mOnMenuItemClickListener != null &&
                     mOnMenuItemClickListener.onMenuItemClick(item);
         }
 
         @Override
-        public void onMenuModeChange(MenuBuilder menu) {
+        public void onMenuModeChange(MBuilder menu) {
             if (mMenuBuilderCallback != null) {
                 mMenuBuilderCallback.onMenuModeChange(menu);
             }
@@ -751,11 +751,11 @@ public class ActionMenuView extends LinearLayoutCompat implements MenuBuilder.It
 
     private class ActionMenuPresenterCallback implements ActionMenuPresenter.Callback {
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         }
 
         @Override
-        public boolean onOpenSubMenu(MenuBuilder subMenu) {
+        public boolean onOpenSubMenu(MBuilder subMenu) {
             return false;
         }
     }
