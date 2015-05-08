@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,7 +51,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  *
  * @hide
  */
-public class MenuBuilder implements SupportMenu {
+public class MBuilder implements SupportMenu {
 
     private static final String TAG = "MenuBuilder";
 
@@ -188,14 +188,14 @@ public class MenuBuilder implements SupportMenu {
          * @param item The menu item that is selected
          * @return whether the menu item selection was handled
          */
-        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item);
+        public boolean onMenuItemSelected(MBuilder menu, MenuItem item);
 
         /**
          * Called when the mode of the menu changes (for example, from icon to expanded).
          *
          * @param menu the menu that has changed modes
          */
-        public void onMenuModeChange(MenuBuilder menu);
+        public void onMenuModeChange(MBuilder menu);
     }
 
     /**
@@ -206,7 +206,7 @@ public class MenuBuilder implements SupportMenu {
         public boolean invokeItem(MenuItemImpl item);
     }
 
-    public MenuBuilder(Context context) {
+    public MBuilder(Context context) {
         mContext = context;
         mResources = context.getResources();
 
@@ -222,7 +222,7 @@ public class MenuBuilder implements SupportMenu {
         setShortcutsVisibleInner(true);
     }
 
-    public MenuBuilder setDefaultShowAsAction(int defaultShowAsAction) {
+    public MBuilder setDefaultShowAsAction(int defaultShowAsAction) {
         mDefaultShowAsAction = defaultShowAsAction;
         return this;
     }
@@ -798,7 +798,7 @@ public class MenuBuilder implements SupportMenu {
         return mContext;
     }
 
-    boolean dispatchMenuItemSelected(MenuBuilder menu, MenuItem item) {
+    boolean dispatchMenuItemSelected(MBuilder menu, MenuItem item) {
         return mCallback != null && mCallback.onMenuItemSelected(menu, item);
     }
 
@@ -862,7 +862,7 @@ public class MenuBuilder implements SupportMenu {
         for (int i = 0; i < N; i++) {
             MenuItemImpl item = mItems.get(i);
             if (item.hasSubMenu()) {
-                ((MenuBuilder)item.getSubMenu()).findItemsWithShortcutForKey(items, keyCode, event);
+                ((MBuilder)item.getSubMenu()).findItemsWithShortcutForKey(items, keyCode, event);
             }
             final char shortcutChar = qwerty ? item.getAlphabeticShortcut() : item.getNumericShortcut();
             if (((metaState & (KeyEvent.META_SHIFT_ON | KeyEvent.META_SYM_ON)) == 0) &&
@@ -1208,7 +1208,7 @@ public class MenuBuilder implements SupportMenu {
      * @param title The new title.
      * @return This MenuBuilder so additional setters can be called.
      */
-    protected MenuBuilder setHeaderTitleInt(CharSequence title) {
+    protected MBuilder setHeaderTitleInt(CharSequence title) {
         setHeaderInternal(0, title, 0, null, null);
         return this;
     }
@@ -1220,7 +1220,7 @@ public class MenuBuilder implements SupportMenu {
      * @param titleRes The new title (as a resource ID).
      * @return This MenuBuilder so additional setters can be called.
      */
-    protected MenuBuilder setHeaderTitleInt(int titleRes) {
+    protected MBuilder setHeaderTitleInt(int titleRes) {
         setHeaderInternal(titleRes, null, 0, null, null);
         return this;
     }
@@ -1232,7 +1232,7 @@ public class MenuBuilder implements SupportMenu {
      * @param icon The new icon.
      * @return This MenuBuilder so additional setters can be called.
      */
-    protected MenuBuilder setHeaderIconInt(Drawable icon) {
+    protected MBuilder setHeaderIconInt(Drawable icon) {
         setHeaderInternal(0, null, 0, icon, null);
         return this;
     }
@@ -1244,7 +1244,7 @@ public class MenuBuilder implements SupportMenu {
      * @param iconRes The new icon (as a resource ID).
      * @return This MenuBuilder so additional setters can be called.
      */
-    protected MenuBuilder setHeaderIconInt(int iconRes) {
+    protected MBuilder setHeaderIconInt(int iconRes) {
         setHeaderInternal(0, null, iconRes, null, null);
         return this;
     }
@@ -1256,7 +1256,7 @@ public class MenuBuilder implements SupportMenu {
      * @param view The new view.
      * @return This MenuBuilder so additional setters can be called.
      */
-    protected MenuBuilder setHeaderViewInt(View view) {
+    protected MBuilder setHeaderViewInt(View view) {
         setHeaderInternal(0, null, 0, null, view);
         return this;
     }
@@ -1278,7 +1278,7 @@ public class MenuBuilder implements SupportMenu {
      *
      * @return The root menu.
      */
-    public MenuBuilder getRootMenu() {
+    public MBuilder getRootMenu() {
         return this;
     }
 

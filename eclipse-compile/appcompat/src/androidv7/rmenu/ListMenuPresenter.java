@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -42,7 +42,7 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
 
     Context mContext;
     LayoutInflater mInflater;
-    MenuBuilder mMenu;
+    MBuilder mMenu;
 
     ExpandedMenuView mMenuView;
 
@@ -80,7 +80,7 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
     }
 
     @Override
-    public void initForMenu(Context context, MenuBuilder menu) {
+    public void initForMenu(Context context, MBuilder menu) {
         if (mThemeRes != 0) {
             mContext = new ContextThemeWrapper(context, mThemeRes);
             mInflater = LayoutInflater.from(mContext);
@@ -147,7 +147,7 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
     }
 
     @Override
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         if (mCallback != null) {
             mCallback.onCloseMenu(menu, allMenusAreClosing);
         }
@@ -174,11 +174,11 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
         return false;
     }
 
-    public boolean expandItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean expandItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 
-    public boolean collapseItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean collapseItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 

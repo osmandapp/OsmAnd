@@ -28,8 +28,6 @@ import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.appcompat.R;
-import android.support.v7.internal.view.renamemenu.MenuItemImpl;
-import android.support.v7.internal.view.renamemenu.MenuItemWrapperICS;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -39,6 +37,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import androidv7.rmenu.MenuItemImpl;
+import androidv7.rmenu.MenuItemWrapperICS;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

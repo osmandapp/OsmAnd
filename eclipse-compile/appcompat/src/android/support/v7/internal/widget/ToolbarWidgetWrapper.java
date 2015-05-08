@@ -24,9 +24,6 @@ import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.appcompat.R;
-import android.support.v7.internal.view.renamemenu.ActionMenuItem;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
 import android.support.v7.widget.ActionMenuPresenter;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -39,6 +36,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.SpinnerAdapter;
+import androidv7.rmenu.ActionMenuItem;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPresenter;
 
 /**
  * Internal class used to interact with the Toolbar widget without
@@ -411,7 +411,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
             mActionMenuPresenter.setId(R.id.action_menu_presenter);
         }
         mActionMenuPresenter.setCallback(cb);
-        mToolbar.setMenu((MenuBuilder) menu, mActionMenuPresenter);
+        mToolbar.setMenu((MBuilder) menu, mActionMenuPresenter);
     }
 
     @Override
@@ -699,7 +699,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
 
     @Override
     public void setMenuCallbacks(MenuPresenter.Callback actionMenuPresenterCallback,
-            MenuBuilder.Callback menuBuilderCallback) {
+            MBuilder.Callback menuBuilderCallback) {
         mToolbar.setMenuCallbacks(actionMenuPresenterCallback, menuBuilderCallback);
     }
 

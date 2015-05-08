@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.view.SupportMenuInflater;
 import android.support.v7.internal.view.WindowCallbackWrapper;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
 import android.support.v7.internal.widget.TintTypedArray;
 import android.support.v7.view.ActionMode;
 import android.view.KeyEvent;
@@ -34,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
+import androidv7.rmenu.MBuilder;
 
 abstract class AppCompatDelegateImplBase extends AppCompatDelegate {
 
@@ -243,7 +243,7 @@ abstract class AppCompatDelegateImplBase extends AppCompatDelegate {
 
         @Override
         public boolean onCreatePanelMenu(int featureId, Menu menu) {
-            if (featureId == Window.FEATURE_OPTIONS_PANEL && !(menu instanceof MenuBuilder)) {
+            if (featureId == Window.FEATURE_OPTIONS_PANEL && !(menu instanceof MBuilder)) {
                 // If this is an options menu but it's not an AppCompat menu, we eat the event
                 // and return false
                 return false;
@@ -253,7 +253,7 @@ abstract class AppCompatDelegateImplBase extends AppCompatDelegate {
 
         @Override
         public boolean onPreparePanel(int featureId, View view, Menu menu) {
-            if (featureId == Window.FEATURE_OPTIONS_PANEL && !(menu instanceof MenuBuilder)) {
+            if (featureId == Window.FEATURE_OPTIONS_PANEL && !(menu instanceof MBuilder)) {
                 // If this is an options menu but it's not an AppCompat menu, we eat the event
                 // and return false
                 return false;

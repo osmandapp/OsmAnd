@@ -21,15 +21,15 @@ import android.content.Context;
 import android.support.annotation.MenuRes;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.view.SupportMenuInflater;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPopupHelper;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
-import android.support.v7.internal.view.renamemenu.SubMenuBuilder;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPopupHelper;
+import androidv7.rmenu.MenuPresenter;
+import androidv7.rmenu.SubMenuBuilder;
 
 /**
  * Static library support version of the framework's {@link android.widget.PopupMenu}.
@@ -38,9 +38,9 @@ import android.view.View;
  * to switch to the framework's implementation. See the framework SDK
  * documentation for a class overview.
  */
-public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
+public class PopupMenu implements MBuilder.Callback, MenuPresenter.Callback {
     private Context mContext;
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
     private View mAnchor;
     private MenuPopupHelper mPopup;
     private OnMenuItemClickListener mMenuItemClickListener;
@@ -105,7 +105,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     public PopupMenu(Context context, View anchor, int gravity, int popupStyleAttr,
             int popupStyleRes) {
         mContext = context;
-        mMenu = new MenuBuilder(context);
+        mMenu = new MBuilder(context);
         mMenu.setCallback(this);
         mAnchor = anchor;
         mPopup = new MenuPopupHelper(context, mMenu, anchor, false, popupStyleAttr, popupStyleRes);
@@ -222,7 +222,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     /**
      * @hide
      */
-    public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+    public boolean onMenuItemSelected(MBuilder menu, MenuItem item) {
         if (mMenuItemClickListener != null) {
             return mMenuItemClickListener.onMenuItemClick(item);
         }
@@ -232,7 +232,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     /**
      * @hide
      */
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         if (mDismissListener != null) {
             mDismissListener.onDismiss(this);
         }
@@ -241,7 +241,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     /**
      * @hide
      */
-    public boolean onOpenSubMenu(MenuBuilder subMenu) {
+    public boolean onOpenSubMenu(MBuilder subMenu) {
         if (subMenu == null) return false;
 
         if (!subMenu.hasVisibleItems()) {
@@ -262,7 +262,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     /**
      * @hide
      */
-    public void onMenuModeChange(MenuBuilder menu) {
+    public void onMenuModeChange(MBuilder menu) {
     }
 
     /**

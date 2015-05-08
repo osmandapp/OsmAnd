@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -35,12 +35,12 @@ public class MenuDialogHelper implements DialogInterface.OnKeyListener,
         DialogInterface.OnClickListener,
         DialogInterface.OnDismissListener,
         MenuPresenter.Callback {
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
     private AlertDialog mDialog;
     ListMenuPresenter mPresenter;
     private MenuPresenter.Callback mPresenterCallback;
 
-    public MenuDialogHelper(MenuBuilder menu) {
+    public MenuDialogHelper(MBuilder menu) {
         mMenu = menu;
     }
 
@@ -51,7 +51,7 @@ public class MenuDialogHelper implements DialogInterface.OnKeyListener,
      */
     public void show(IBinder windowToken) {
         // Many references to mMenu, create local reference
-        final MenuBuilder menu = mMenu;
+        final MBuilder menu = mMenu;
 
         // Get the builder for the dialog
         final AlertDialog.Builder builder = new AlertDialog.Builder(menu.getContext());
@@ -149,7 +149,7 @@ public class MenuDialogHelper implements DialogInterface.OnKeyListener,
     }
 
     @Override
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         if (allMenusAreClosing || menu == mMenu) {
             dismiss();
         }
@@ -159,7 +159,7 @@ public class MenuDialogHelper implements DialogInterface.OnKeyListener,
     }
 
     @Override
-    public boolean onOpenSubMenu(MenuBuilder subMenu) {
+    public boolean onOpenSubMenu(MBuilder subMenu) {
         if (mPresenterCallback != null) {
             return mPresenterCallback.onOpenSubMenu(subMenu);
         }

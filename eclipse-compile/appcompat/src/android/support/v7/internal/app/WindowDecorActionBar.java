@@ -36,9 +36,6 @@ import android.support.v7.appcompat.R;
 import android.support.v7.internal.view.ActionBarPolicy;
 import android.support.v7.internal.view.ViewPropertyAnimatorCompatSet;
 import android.support.v7.internal.view.SupportMenuInflater;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPopupHelper;
-import android.support.v7.internal.view.renamemenu.SubMenuBuilder;
 import android.support.v7.internal.widget.ActionBarContainer;
 import android.support.v7.internal.widget.ActionBarContextView;
 import android.support.v7.internal.widget.ActionBarOverlayLayout;
@@ -59,6 +56,9 @@ import android.view.Window;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AnimationUtils;
 import android.widget.SpinnerAdapter;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPopupHelper;
+import androidv7.rmenu.SubMenuBuilder;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -949,9 +949,9 @@ public class WindowDecorActionBar extends ActionBar implements
     /**
      * @hide
      */
-    public class ActionModeImpl extends ActionMode implements MenuBuilder.Callback {
+    public class ActionModeImpl extends ActionMode implements MBuilder.Callback {
         private final Context mActionModeContext;
-        private final MenuBuilder mMenu;
+        private final MBuilder mMenu;
 
         private ActionMode.Callback mCallback;
         private WeakReference<View> mCustomView;
@@ -959,7 +959,7 @@ public class WindowDecorActionBar extends ActionBar implements
         public ActionModeImpl(Context context, ActionMode.Callback callback) {
             mActionModeContext = context;
             mCallback = callback;
-            mMenu = new MenuBuilder(context)
+            mMenu = new MBuilder(context)
                     .setDefaultShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             mMenu.setCallback(this);
         }
@@ -1083,7 +1083,7 @@ public class WindowDecorActionBar extends ActionBar implements
             return mCustomView != null ? mCustomView.get() : null;
         }
 
-        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+        public boolean onMenuItemSelected(MBuilder menu, MenuItem item) {
             if (mCallback != null) {
                 return mCallback.onActionItemClicked(this, item);
             } else {
@@ -1091,7 +1091,7 @@ public class WindowDecorActionBar extends ActionBar implements
             }
         }
 
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         }
 
         public boolean onSubMenuSelected(SubMenuBuilder subMenu) {
@@ -1110,7 +1110,7 @@ public class WindowDecorActionBar extends ActionBar implements
         public void onCloseSubMenu(SubMenuBuilder menu) {
         }
 
-        public void onMenuModeChange(MenuBuilder menu) {
+        public void onMenuModeChange(MBuilder menu) {
             if (mCallback == null) {
                 return;
             }

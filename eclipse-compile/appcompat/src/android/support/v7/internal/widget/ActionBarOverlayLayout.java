@@ -31,7 +31,6 @@ import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v4.widget.ScrollerCompat;
 import android.support.v7.appcompat.R;
 import android.support.v7.internal.VersionUtils;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -39,6 +38,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import androidv7.rmenu.MenuPresenter;
 
 /**
  * Special layout for the containing of an overlay action bar (and its content) to correctly handle

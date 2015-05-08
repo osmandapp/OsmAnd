@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -67,7 +67,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     private int mIconResId = NO_ICON;
 
     /** The menu to which this item belongs */
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
     /** If this item should launch a sub menu, this is the sub menu to launch */
     private SubMenuBuilder mSubMenu;
 
@@ -116,7 +116,7 @@ public final class MenuItemImpl implements SupportMenuItem {
      * @param categoryOrder The ordering for this item.
      * @param title The text to display for the item.
      */
-    MenuItemImpl(MenuBuilder menu, int group, int id, int categoryOrder, int ordering,
+    MenuItemImpl(MBuilder menu, int group, int id, int categoryOrder, int ordering,
             CharSequence title, int showAsAction) {
 
         /*if (sPrependShortcutLabel == null) {
