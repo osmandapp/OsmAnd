@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.graphics.drawable.Drawable;
 
 /**
- * Minimal interface for a menu view.  {@link #initialize(MenuBuilder)} must be called for the
+ * Minimal interface for a menu view.  {@link #initialize(MBuilder)} must be called for the
  * menu to be functional.
  *
  * @hide
@@ -31,7 +31,7 @@ public interface MenuView {
      *
      * @param menu The menu that this MenuView should display.
      */
-    public void initialize(MenuBuilder menu);
+    public void initialize(MBuilder menu);
 
     /**
      * Returns the default animations to be used for this menu when entering/exiting.
@@ -49,8 +49,8 @@ public interface MenuView {
          * inflated.
          * @param itemData The item that this ItemView should display.
          * @param menuType The type of this menu, one of
-         *            {@link MenuBuilder#TYPE_ICON}, {@link MenuBuilder#TYPE_EXPANDED},
-         *            {@link MenuBuilder#TYPE_DIALOG}).
+         *            {@link MBuilder#TYPE_ICON}, {@link MBuilder#TYPE_EXPANDED},
+         *            {@link MBuilder#TYPE_DIALOG}).
          */
         public void initialize(MenuItemImpl itemData, int menuType);
 

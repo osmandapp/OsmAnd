@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 class BaseWrapper<T> {
 

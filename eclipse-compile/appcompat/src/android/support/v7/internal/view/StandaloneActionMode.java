@@ -18,9 +18,6 @@ package android.support.v7.internal.view;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPopupHelper;
-import android.support.v7.internal.view.renamemenu.SubMenuBuilder;
 import android.support.v7.internal.widget.ActionBarContextView;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -28,13 +25,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPopupHelper;
+import androidv7.rmenu.SubMenuBuilder;
 
 import java.lang.ref.WeakReference;
 
 /**
  * @hide
  */
-public class StandaloneActionMode extends ActionMode implements MenuBuilder.Callback {
+public class StandaloneActionMode extends ActionMode implements MBuilder.Callback {
     private Context mContext;
     private ActionBarContextView mContextView;
     private ActionMode.Callback mCallback;
@@ -42,7 +42,7 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
     private boolean mFinished;
     private boolean mFocusable;
 
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
 
     public StandaloneActionMode(Context context, ActionBarContextView view,
             ActionMode.Callback callback, boolean isFocusable) {
@@ -50,7 +50,7 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
         mContextView = view;
         mCallback = callback;
 
-        mMenu = new MenuBuilder(context).setDefaultShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        mMenu = new MBuilder(context).setDefaultShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         mMenu.setCallback(this);
         mFocusable = isFocusable;
     }
@@ -133,11 +133,11 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
         return new MenuInflater(mContext);
     }
 
-    public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+    public boolean onMenuItemSelected(MBuilder menu, MenuItem item) {
         return mCallback.onActionItemClicked(this, item);
     }
 
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
     }
 
     public boolean onSubMenuSelected(SubMenuBuilder subMenu) {
@@ -152,7 +152,7 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
     public void onCloseSubMenu(SubMenuBuilder menu) {
     }
 
-    public void onMenuModeChange(MenuBuilder menu) {
+    public void onMenuModeChange(MBuilder menu) {
         invalidate();
         mContextView.showOverflowMenu();
     }

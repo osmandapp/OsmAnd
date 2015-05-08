@@ -43,10 +43,6 @@ import android.support.v7.internal.app.ToolbarActionBar;
 import android.support.v7.internal.app.WindowDecorActionBar;
 import android.support.v7.internal.view.ContextThemeWrapper;
 import android.support.v7.internal.view.StandaloneActionMode;
-import android.support.v7.internal.view.renamemenu.ListMenuPresenter;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
-import android.support.v7.internal.view.renamemenu.MenuView;
 import android.support.v7.internal.widget.ActionBarContextView;
 import android.support.v7.internal.widget.DecorContentParent;
 import android.support.v7.internal.widget.FitWindowsViewGroup;
@@ -78,6 +74,10 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import androidv7.rmenu.ListMenuPresenter;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPresenter;
+import androidv7.rmenu.MenuView;
 import static android.support.v4.view.WindowCompat.FEATURE_ACTION_BAR;
 import static android.support.v4.view.WindowCompat.FEATURE_ACTION_BAR_OVERLAY;
 import static android.support.v4.view.WindowCompat.FEATURE_ACTION_MODE_OVERLAY;
@@ -86,7 +86,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.Window.FEATURE_OPTIONS_PANEL;
 
 class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
-        implements MenuBuilder.Callback, LayoutInflaterFactory {
+        implements MBuilder.Callback, LayoutInflaterFactory {
 
     private DecorContentParent mDecorContentParent;
     private ActionMenuPresenterCallback mActionMenuPresenterCallback;
@@ -545,7 +545,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
     }
 
     @Override
-    public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+    public boolean onMenuItemSelected(MBuilder menu, MenuItem item) {
         final Window.Callback cb = getWindowCallback();
         if (cb != null && !isDestroyed()) {
             final PanelFeatureState panel = findMenuPanel(menu.getRootMenu());
@@ -557,7 +557,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
     }
 
     @Override
-    public void onMenuModeChange(MenuBuilder menu) {
+    public void onMenuModeChange(MBuilder menu) {
         reopenMenu(menu, true);
     }
 
@@ -927,7 +927,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
         return true;
     }
 
-    private void reopenMenu(MenuBuilder menu, boolean toggleMenuMode) {
+    private void reopenMenu(MBuilder menu, boolean toggleMenuMode) {
         if (mDecorContentParent != null && mDecorContentParent.canShowOverflowMenu() &&
                 (!ViewConfigurationCompat.hasPermanentMenuKey(ViewConfiguration.get(mContext)) ||
                         mDecorContentParent.isOverflowMenuShowPending())) {
@@ -1007,7 +1007,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
             }
         }
 
-        final MenuBuilder menu = new MenuBuilder(context);
+        final MBuilder menu = new MBuilder(context);
         menu.setCallback(this);
         st.setMenu(menu);
 
@@ -1137,7 +1137,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
         return true;
     }
 
-    private void checkCloseActionMenu(MenuBuilder menu) {
+    private void checkCloseActionMenu(MBuilder menu) {
         if (mClosingActionMenu) {
             return;
         }
@@ -1506,7 +1506,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
 
     private final class PanelMenuPresenterCallback implements MenuPresenter.Callback {
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
             final Menu parentMenu = menu.getRootMenu();
             final boolean isSubMenu = parentMenu != menu;
             final PanelFeatureState panel = findMenuPanel(isSubMenu ? parentMenu : menu);
@@ -1523,7 +1523,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
         }
 
         @Override
-        public boolean onOpenSubMenu(MenuBuilder subMenu) {
+        public boolean onOpenSubMenu(MBuilder subMenu) {
             if (subMenu == null && mHasActionBar) {
                 Window.Callback cb = getWindowCallback();
                 if (cb != null && !isDestroyed()) {
@@ -1536,7 +1536,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
 
     private final class ActionMenuPresenterCallback implements MenuPresenter.Callback {
         @Override
-        public boolean onOpenSubMenu(MenuBuilder subMenu) {
+        public boolean onOpenSubMenu(MBuilder subMenu) {
             Window.Callback cb = getWindowCallback();
             if (cb != null) {
                 cb.onMenuOpened(FEATURE_ACTION_BAR, subMenu);
@@ -1545,7 +1545,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
         }
 
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
             checkCloseActionMenu(menu);
         }
     }
@@ -1575,7 +1575,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
         View createdPanelView;
 
         /** Use {@link #setMenu} to set this. */
-        MenuBuilder menu;
+        MBuilder menu;
 
         ListMenuPresenter listMenuPresenter;
 
@@ -1670,7 +1670,7 @@ class AppCompatDelegateImplV7 extends AppCompatDelegateImplBase
             a.recycle();
         }
 
-        void setMenu(MenuBuilder menu) {
+        void setMenu(MBuilder menu) {
             if (menu == this.menu) return;
 
             if (this.menu != null) {

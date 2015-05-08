@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -52,7 +52,7 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
 
     private final Context mContext;
     private final LayoutInflater mInflater;
-    private final MenuBuilder mMenu;
+    private final MBuilder mMenu;
     private final MenuAdapter mAdapter;
     private final boolean mOverflowOnly;
     private final int mPopupMaxWidth;
@@ -76,20 +76,20 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
 
     private int mDropDownGravity = Gravity.NO_GRAVITY;
 
-    public MenuPopupHelper(Context context, MenuBuilder menu) {
+    public MenuPopupHelper(Context context, MBuilder menu) {
         this(context, menu, null, false, R.attr.popupMenuStyle);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView) {
+    public MenuPopupHelper(Context context, MBuilder menu, View anchorView) {
         this(context, menu, anchorView, false, R.attr.popupMenuStyle);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView,
+    public MenuPopupHelper(Context context, MBuilder menu, View anchorView,
             boolean overflowOnly, int popupStyleAttr) {
         this(context, menu, anchorView, overflowOnly, popupStyleAttr, 0);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView,
+    public MenuPopupHelper(Context context, MBuilder menu, View anchorView,
             boolean overflowOnly, int popupStyleAttr, int popupStyleRes) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -244,7 +244,7 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     }
 
     @Override
-    public void initForMenu(Context context, MenuBuilder menu) {
+    public void initForMenu(Context context, MBuilder menu) {
         // Don't need to do anything; we added as a presenter in the constructor.
     }
 
@@ -295,7 +295,7 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     }
 
     @Override
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         // Only care about the (sub)menu we're presenting.
         if (menu != mMenu) return;
 
@@ -310,11 +310,11 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
         return false;
     }
 
-    public boolean expandItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean expandItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 
-    public boolean collapseItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean collapseItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 
@@ -333,10 +333,10 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     }
 
     private class MenuAdapter extends BaseAdapter {
-        private MenuBuilder mAdapterMenu;
+        private MBuilder mAdapterMenu;
         private int mExpandedIndex = -1;
 
-        public MenuAdapter(MenuBuilder menu) {
+        public MenuAdapter(MBuilder menu) {
             mAdapterMenu = menu;
             findExpandedIndex();
         }

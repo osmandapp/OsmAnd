@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuView;
-import android.support.v7.internal.view.renamemenu.MenuBuilder.ItemInvoker;
 import android.support.v7.internal.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuView;
+import androidv7.rmenu.MBuilder.ItemInvoker;
 
 /**
  * The expanded menu view is a list-like menu with all of the available menu items.  It is opened
@@ -41,7 +41,7 @@ public final class ExpandedMenuView extends ListView
             android.R.attr.divider
     };
 
-    private MenuBuilder mMenu;
+    private MBuilder mMenu;
 
     /** Default animations for this menu */
     private int mAnimations;
@@ -66,7 +66,7 @@ public final class ExpandedMenuView extends ListView
     }
 
     @Override
-    public void initialize(MenuBuilder menu) {
+    public void initialize(MBuilder menu) {
         mMenu = menu;
     }
 

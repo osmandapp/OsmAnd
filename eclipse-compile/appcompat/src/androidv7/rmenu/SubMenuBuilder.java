@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -30,11 +30,11 @@ import android.view.View;
  *
  * @hide
  */
-public class SubMenuBuilder extends MenuBuilder implements SubMenu {
-    private MenuBuilder mParentMenu;
+public class SubMenuBuilder extends MBuilder implements SubMenu {
+    private MBuilder mParentMenu;
     private MenuItemImpl mItem;
 
-    public SubMenuBuilder(Context context, MenuBuilder parentMenu, MenuItemImpl item) {
+    public SubMenuBuilder(Context context, MBuilder parentMenu, MenuItemImpl item) {
         super(context);
 
         mParentMenu = parentMenu;
@@ -75,12 +75,12 @@ public class SubMenuBuilder extends MenuBuilder implements SubMenu {
     }
 
     @Override
-    public MenuBuilder getRootMenu() {
+    public MBuilder getRootMenu() {
         return mParentMenu;
     }
 
     @Override
-    boolean dispatchMenuItemSelected(MenuBuilder menu, MenuItem item) {
+    boolean dispatchMenuItemSelected(MBuilder menu, MenuItem item) {
         return super.dispatchMenuItemSelected(menu, item) ||
                 mParentMenu.dispatchMenuItemSelected(menu, item);
     }

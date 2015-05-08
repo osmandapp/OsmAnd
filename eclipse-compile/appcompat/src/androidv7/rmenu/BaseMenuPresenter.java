@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
@@ -35,7 +35,7 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
 
     protected Context mSystemContext;
     protected Context mContext;
-    protected MenuBuilder mMenu;
+    protected MBuilder mMenu;
     protected LayoutInflater mSystemInflater;
     protected LayoutInflater mInflater;
     private Callback mCallback;
@@ -62,7 +62,7 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
     }
 
     @Override
-    public void initForMenu(Context context, MenuBuilder menu) {
+    public void initForMenu(Context context, MBuilder menu) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mMenu = menu;
@@ -202,7 +202,7 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         return true;
     }
 
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+    public void onCloseMenu(MBuilder menu, boolean allMenusAreClosing) {
         if (mCallback != null) {
             mCallback.onCloseMenu(menu, allMenusAreClosing);
         }
@@ -219,11 +219,11 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         return false;
     }
 
-    public boolean expandItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean expandItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 
-    public boolean collapseItemActionView(MenuBuilder menu, MenuItemImpl item) {
+    public boolean collapseItemActionView(MBuilder menu, MenuItemImpl item) {
         return false;
     }
 

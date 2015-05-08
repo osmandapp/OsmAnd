@@ -20,14 +20,14 @@ package android.support.v7.internal.widget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
-import android.support.v7.internal.view.renamemenu.MenuBuilder;
-import android.support.v7.internal.view.renamemenu.MenuPresenter;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.SpinnerAdapter;
+import androidv7.rmenu.MBuilder;
+import androidv7.rmenu.MenuPresenter;
 
 /**
  * Common interface for a toolbar that sits as part of the window decor.
@@ -98,7 +98,7 @@ public interface DecorToolbar {
     void setVisibility(int visible);
     int getVisibility();
     void setMenuCallbacks(MenuPresenter.Callback presenterCallback,
-            MenuBuilder.Callback menuBuilderCallback);
+            MBuilder.Callback menuBuilderCallback);
     Menu getMenu();
     int getPopupTheme();
 }

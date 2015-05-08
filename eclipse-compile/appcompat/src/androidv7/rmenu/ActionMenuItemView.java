@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package android.support.v7.internal.view.renamemenu;
+package androidv7.rmenu;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -52,7 +52,7 @@ public class ActionMenuItemView extends CompatTextView
     private MenuItemImpl mItemData;
     private CharSequence mTitle;
     private Drawable mIcon;
-    private MenuBuilder.ItemInvoker mItemInvoker;
+    private MBuilder.ItemInvoker mItemInvoker;
     private ListPopupWindow.ForwardingListener mForwardingListener;
     private PopupCallback mPopupCallback;
 
@@ -144,7 +144,7 @@ public class ActionMenuItemView extends CompatTextView
         }
     }
 
-    public void setItemInvoker(MenuBuilder.ItemInvoker invoker) {
+    public void setItemInvoker(MBuilder.ItemInvoker invoker) {
         mItemInvoker = invoker;
     }
 
