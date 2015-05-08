@@ -17,7 +17,7 @@
   <string name="osmand_parking_pm">po piet</string>
   <string name="osmand_parking_am">ryto</string>
   <string name="osmand_parking_position_name">Statymo vieta</string>
-  <string name="osmand_parking_plugin_description">Šis įskiepis leidžia įsiminti vietą, kurioje palikote savo automobilį ir kiek laiko liko iki parkavimo pabaigos. Parkavimo vietą ir laiką galite surasti dashboard\'e bei žemėlapio widget\'e.\nTaip pat šis įskiepis įrašo priminimą į kalendorių, jei jūs to pageidaujate,</string>
+  <string name="osmand_parking_plugin_description">Šis įskiepis leidžia įsiminti vietą, kurioje palikote savo automobilį ir kiek laiko liko iki parkavimo pabaigos. Parkavimo vietą ir laiką galite surasti dashboard\'e bei žemėlapio widget\'e.\nTaip pat šis įskiepis įrašo priminimą į kalendorių, jei jūs to pageidaujate.</string>
   <string name="osmand_parking_plugin_name">Statymo vieta</string>
   <string name="context_menu_item_add_parking_point">Žymėti statymo vietą</string>
   <string name="context_menu_item_delete_parking_point">Naikinti statymo žymę</string>
@@ -79,7 +79,7 @@
   
   <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd duomenų segtuvą.</string>
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
-  <string name="osmand_accessibility_description">Šis įskiepis įgalina įtenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą.</string>
+  <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą.</string>
   
   
   
@@ -1141,7 +1141,8 @@
     
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
-    <string name="srtm_plugin_description">Leidžia parsisiųsti kontūrines linijas ir kalnų šešėlius (\'Nustatymai\' → \'Valdyti žemėlapius\' → \'Parsiųsti\' → Pasirinkite pageidaujamą žemėlapio tipą).</string>
+    <string name="srtm_plugin_description">"Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra.
+\nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas. "</string>
     <string name="srtm_plugin_name">SRTM įskiepis</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
@@ -1150,7 +1151,8 @@
     
 	
 <string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis, skirtas aukščio kontūrų linijoms</string>
-    <string name="osmand_srtm_long_description_1000_chars">Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Pasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra.
+\nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas. "</string>
     
     
     <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
@@ -1997,4 +1999,17 @@
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM žymėtojo pagalbininkas</string>
 	<string name="shared_string_manage">Valdymas</string>
 	<string name="track_segments">Kelio segmentai</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Slėpti namų numerius</string>
+    <string name="specified_directiory_not_writeable">Nepavyko sukurti žemėlapių nurodytoje direktorijoje</string>
+	<string name="copying_osmand_file_failed">Nepavyko nukopijuoti failo</string>    
+    <string name="storage_directory_external">Išorinė saugykla</string>
+    <string name="storage_directory_default">Vidinė atmintis</string>
+    <string name="storage_directory">Žemėlapių saugykla</string>
+    <string name="shared_string_copy">Kopijuoti</string>
+    <string name="rendering_value__name">Numatytasis</string>
+    <string name="rendering_value_highContrastRoads_name">Raiškaus kontrasto keliai</string>
+	<string name="application_dir_change_warning3">Ar norite, kad OsmAnd taip pat nukopijuotų duomenų failus į naują vietą?</string>
+    <string name="osmand_parking_overdue">pradelsta</string>
+	<string name="shared_string_currently_recording_track">Šiuo metu įrašomas maršrutas</string>
+	<string name="plugin_touringview_descr">"Aktyvus šį rodinį pasikeis OsmAnd\'s žemėlapių stilius į \"Touring view\", kuris yra detalus duomenų rodinys turistas ir profesionaliems vairuotojams. "</string>
 	</resources>
