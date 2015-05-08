@@ -222,6 +222,8 @@ public class GeneralRouter implements VehicleRouter {
 			vl = RouteDataObject.parseWeightInTon(value, vl);
 		} else if("length".equals(type)) {
 			vl = RouteDataObject.parseLength(value, vl);
+		} else if("height".equals(type)) {
+			vl = RouteDataObject.parseHeight(value, vl);
 		} else {
 			int i = Algorithms.findFirstNumberEndIndex(value);
 			if (i > 0) {
