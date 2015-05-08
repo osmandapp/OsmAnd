@@ -729,7 +729,7 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		if(p.link != null) {
 			serializer.startTag(null, "link");
-			serializer.attribute(null, "link", p.link);
+			serializer.attribute(null, "href", p.link);
 			serializer.endTag(null, "link");
 		}
 		writeNotNullText(serializer, "type", p.category);
