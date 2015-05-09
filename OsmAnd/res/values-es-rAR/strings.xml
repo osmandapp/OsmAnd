@@ -147,7 +147,7 @@
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
 	<string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de aparcamiento</string>
-    <string name="gps_status">GPS status</string>
+    <string name="gps_status">Estado del GPS</string>
     <string name="version_settings_descr">Descarga versiones nocturnas</string>
     <string name="version_settings">Compilaciones</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
@@ -492,8 +492,8 @@
 	<string name="osmand_accessibility_description">Este complemento habilita las características de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su posición.</string>
 	<string name="osm_editing_plugin_description">Mediante este complemento OsmAnd se puede utilizar para hacer contribuciones en OSM como crear o modificar objetos PDI de OSM, abrir o comentar errores de OSM, y contribuir con archivos grabados de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte http://openstreetmap.org. Se aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
 	<string name="osmand_development_plugin_description">Este complemento muestra los ajustes de características de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o la voz hablada. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
-	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial fuera de línea</string>
-    <string name="nautical_maps_missing">Para mostrar mapas naúticos, necesita ser descargado el mapa especial fuera de línea</string>
+	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial sin conexión</string>
+    <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita ser descargado el mapa especial sin conexión</string>
 	<string name="proxy_pref_descr">Configura un proxy de acceso a Internet</string>
     <string name="avoid_roads_msg">Puede obtener una ruta alternativa seleccionando las carreteras a evitar</string>
 	<string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
