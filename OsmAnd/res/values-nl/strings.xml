@@ -584,7 +584,7 @@
   <string name="route_head">Koers</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
-  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of deze zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
+  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of deze zelf aanmaken. Daarna kan je de kaart bekijken, navigeren en adressen, interessepunten en openbaar vervoer opzoeken.</string>
   <string name="search_poi_location">Naar signaal zoeken…</string>
   <string name="search_near_map">Zoek bij het midden van de kaart</string>
   <string name="search_nearby">Zoek dichtbij</string>
@@ -2041,7 +2041,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="free">"Vrij %1$s "</string>
 	<string name="device_memory">Apparaatgeheugen</string>
  	<string name="route_points">Route punten</string>
-	<string name="days_behind">Achterstand</string>
+	<string name="days_behind">dagen oud</string>
 	<string name="shared_string_release">Vrijgegeven</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
