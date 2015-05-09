@@ -743,4 +743,13 @@
 
 	<string name="poi_gallery">Galéria</string>
 	<string name="poi_ski_resort">Lyžiarske stredisko</string>
+	<string name="poi_paddle_tennis">Padel</string>
+	<string name="poi_hunting_lodge">Lovecká chata</string>
+
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_trail_riding_station">Nocľaháreň pre koňa a jazdca</string>
+
+	<string name="poi_seamark_wreck">Vrak, námorná značka</string>
+
+	<string name="poi_seamark_rock">Skala, námorná značka</string>
 	</resources>
