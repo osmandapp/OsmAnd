@@ -6,9 +6,9 @@
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
   <string name="avoid_ferries">Vermijd veerboten</string>
   <string name="avoid_in_routing_title">Vermijd…</string>
-  <string name="avoid_in_routing_descr">Vermijd tolwegen, onverharde wegen, veerboten</string>
+  <string name="avoid_in_routing_descr">Wel of geen tolwegen, onverharde wegen, veerboten...</string>
   <string name="show_warnings_title">Toon waarschuwing…</string>
-  <string name="show_warnings_descr">Toon rijstroken, snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
+  <string name="show_warnings_descr">Wel of geen rijstroken, snelheidslimieten, snelheidscamera\'s en verkeersdrempels...</string>
   <string name="map_widget_fluorescent">Fluorescerende routes</string>
   <string name="map_widget_show_ruler">Schaalaanduiding</string>
   
@@ -1961,7 +1961,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_opengl_render">Gebruik OpenGL</string>
     <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
-    <string name="no_internet_connection">Kan niet downloaden, gelieve uw internetverbinding na te kijken.</string>
+    <string name="no_internet_connection">Downloaden mislukt. Controleer de internetverbinding.</string>
     <string name="download_tab_downloads">Alle downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Geïnstalleerd</string>
@@ -2001,7 +2001,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="osm_editing_manage">Beheer</string>
     
-	<string name="navigation_over_track">Navigatie over spoor starten?</string>
+	<string name="navigation_over_track">Navigatie langs getoonde GPX-spoor starten?</string>
 	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
     <string name="save_track_to_gpx_globally_headline">Gpx spoor loggen op aanvraag</string>
 	<string name="enable_proxy_title">HTTP-proxy aanzetten</string>
@@ -2019,7 +2019,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
 	<string name="get_plugin">Krijgen</string>
 	<string name="watch">Bekijk</string>
-	<string name="rendering_attr_pisteRoutes_name">Piste routes</string>
+	<string name="rendering_attr_pisteRoutes_name">Ski-pistes</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
     <string name="track_segments">Route segmenten</string>
 	<string name="track_points">Route punten</string>
@@ -2113,22 +2113,22 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 
-	<string name="delay_to_start_navigation_descr">Start de navigatie automatisch na een aangegeven periode</string>
-    <string name="delay_to_start_navigation">Routeplanning overslaan</string>
+	<string name="delay_to_start_navigation_descr">Stel in hoe lang het routeplanning-scherm getoond wordt voordat de navigatie start</string>
+    <string name="delay_to_start_navigation">Start navigatie na…</string>
     <string name="shared_string_go">Start</string>
 	
 	<string name="action_create">Actie: maak</string>
 	<string name="action_modify">Actie: wijzig</string>
 	<string name="action_delete">Actie: verwijder</string>
 	<string name="osm_edits">OSM wijzigingen</string>
-	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">Over</string> <string name="parking_place_limited">Parkeertijd beperkt tot</string>
+	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">over</string> <string name="parking_place_limited">Parkeertijd beperkt tot</string>
 	<string name="your_edits">Uw wijzigingen</string>
     <string name="waypoint_visit_after">Bezoek na</string>
     <string name="waypoint_visit_before">Bezoek voor</string>
     <string name="simulate_your_location">Simuleer je positie</string>
     <string name="drawer">Eenvoudige lijst</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen, enz</string>
+    <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen en meer</string>
     <string name="routing_settings_2">Navigatie instellingen</string>
     <string name="general_settings_2">Algemene instellingen</string>
 	<string name="shared_string_clear_all">Wis alles</string>
@@ -2138,13 +2138,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_my_tracks">Mijn Routes</string>
 	<string name="shared_string_currently_recording_track">Route wordt opgenomen</string>
 	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
-    <string name="confirmation_to_clear_history">Wil je de hele geschiedenis verwijderen?</string>
+    <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
 	<string name="shared_string_not_use">Niet gebruikt</string>
-	<string name="confirm_usage_speed_cameras">In sommige landen (Duitsland, Frankrijk, Italië en meer) is het verboden om waarschuwingen voor snelheidscontroles te gebruiken. Osmand neemt geen verantwoording als u de wet overtreedt. Gebruik deze funtie alleen als dat toegestaan is.</string>
+	<string name="confirm_usage_speed_cameras">In veel landen (Duitsland, Frankrijk, Italië en meer) is het verboden om waarschuwingen voor snelheidscontroles te gebruiken. Osmand neemt geen verantwoording als u de wet overtreedt. Druk alleen op Ja als u deze functie mag gebruiken.</string>
 	<string name="welmode_download_maps">Kaarten downloaden</string>
-	<string name="welcome_select_region">Kies uw regio</string>
-	<string name="welcome_text">Met OsmAnd kunt u offline kaarten gebruiken en navigeren!</string>
+	<string name="welcome_select_region">Kies uw regio om de juiste verkeersborden en -regels te tonen:</string>
+	<string name="welcome_text">Met OsmAnd kunt u zonder internetverbinding kaarten van de hele wereld gebruiken en ermee navigeren!</string>
 	<string name="welcome_header">Welkom</string>
     <string name="current_route">Huidige route</string>
     <string name="osm_changes_added_to_local_edits">OSM-aanpasingen toegevoegd aan lokale wijzigingen</string>
@@ -2164,4 +2164,18 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_message">Bericht</string>
 	<string name="shared_string_do_not_use">Niet gebruiken</string>
 	<string name="shared_string_address">Adres</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Verberg huisnummers</string>
+    <string name="application_dir_change_warning3">Moet OsmAnd de gegevensbestanden ook naar de nieuwe locatie kopiëren?</string>
+    <string name="specified_directiory_not_writeable">In de opgegeven directory kunnen geen kaarten opgeslagen worden</string>
+	<string name="copying_osmand_file_failed">Het kopiëren van bestanden is niet gelukt</string>    
+    <string name="storage_directory_external">Externe opslag</string>
+    <string name="storage_directory_multiuser">Opslag voor meer gebruikers</string>
+    <string name="storage_directory_internal_app">Intern applicatie-geheugen</string>
+    <string name="storage_directory_manual">Handmatig opgegeven</string>
+    <string name="storage_directory_default">Interne opslag</string>
+    <string name="storage_directory">Opslag van de kaart</string>
+    <string name="shared_string_copy">Kopiëren</string>
+    <string name="rendering_value__name">Standaard</string>
+    <string name="rendering_value_highContrastRoads_name">Wegen met hoog contrast</string>
+	<string name="index_name_netherlands">Europa - Nederland</string>
 	</resources>
