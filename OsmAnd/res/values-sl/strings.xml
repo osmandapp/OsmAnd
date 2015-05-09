@@ -866,7 +866,7 @@
 	<string name="poi_namefinder_query_empty">Za iskanje točke POI je treba vpisati iskalni niz</string>
 	<string name="any_poi">Katerokoli</string>
 	<string name="layer_transport_route">Pot javnega prevoza</string>
-	<string name="thanks_yandex_traffic">Zahvala gre Yandex-u za prometne informacije.</string>
+	<string name="thanks_yandex_traffic">Za podatke o prometu gre zahvala spletišču Yandex.</string>
 	<string name="layer_yandex_traffic">Yandex promet</string>
 	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
 	<string name="layer_route">Pot</string>
