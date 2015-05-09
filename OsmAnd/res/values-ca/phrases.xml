@@ -584,4 +584,11 @@
 	<string name="poi_aerialway_goods">Remuntador de mercaderies</string>
 	<string name="poi_trail_riding_station">Hostal amb cavallerissa</string>
 
+	<string name="poi_attraction_amusement_ride">Atracció de fira</string>
+	<string name="poi_attraction_animal">Animals captius</string>
+	<string name="poi_attraction_summer_toboggan">Tobogan de trineus</string>
+	<string name="poi_attraction_swing_carousel">Cavallets de gronxadors</string>
+	<string name="poi_attraction_train">Trenet de fira</string>
+	<string name="poi_guest_house">Casa d\'hostes</string>
+	<string name="poi_cabin">Cabana</string>
 	</resources>
