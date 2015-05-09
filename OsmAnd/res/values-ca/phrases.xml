@@ -149,7 +149,7 @@
 	<string name="poi_aerialway_station">Estació de remuntador</string>
 	<string name="poi_aerialway_gondola">Telecabina</string>
 	<string name="poi_aerialway_chair_lift">Telecadira</string>
-	<string name="poi_aerialway_t_bar">Teleesquí</string>
+	<string name="poi_aerialway_t_bar">Teleesquí doble</string>
 	<string name="poi_tunnel">Túnel</string>
 	<string name="poi_bridge">Pont</string>
 
@@ -424,7 +424,7 @@
 	<string name="poi_aeroway_gate">Porta d\'embarcament</string>
 
 	<string name="poi_slipway">Grada</string>
-	<string name="poi_aerialway_platter">Teleesquí</string>
+	<string name="poi_aerialway_platter">Teleesquí de plat</string>
 	<string name="poi_aerialway_magic_carpet">Catifa rodant</string>
 
 	<string name="poi_speed_camera">Radar de trànsit</string>
@@ -577,4 +577,11 @@
 	<string name="poi_dance_floor">Sala de ball</string>
 	<string name="poi_nightclub">Club nocturn</string>
 	<string name="poi_ski_resort">Estació d\'esquí</string>
+	<string name="poi_aerialway_j_bar">Teleesquí individual</string>
+	<string name="poi_aerialway_mixed_lift">Telemix</string>
+	<string name="poi_aerialway_drag_lift">Teleesquí</string>
+	<string name="poi_aerialway_rope_tow">Tele corda</string>
+	<string name="poi_aerialway_goods">Remuntador de mercaderies</string>
+	<string name="poi_trail_riding_station">Hostal amb cavallerissa</string>
+
 	</resources>
