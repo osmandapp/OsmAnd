@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_bakery">Pekarna</string>
 	<string name="poi_mall">Nakupovalno središče</string>
-	<string name="poi_healthcare">Zdravstvene ustanove</string>
+	<string name="poi_healthcare">Zdravstvene storitve</string>
 	<string name="poi_office">Pisarna</string>
 	<string name="poi_sport">Športni parki</string>
 	<string name="poi_tourism">Turistične znamenitosti</string>
@@ -217,4 +217,6 @@
 	<string name="poi_trail_riding_station">Jahaško počivališče</string>
 
 	<string name="poi_craft_plumber">Vodovodar</string>
+	<string name="poi_landuse">Uporaba zemljišč</string>
+	<string name="poi_administrative">Upravna ustanova</string>
 	</resources>
