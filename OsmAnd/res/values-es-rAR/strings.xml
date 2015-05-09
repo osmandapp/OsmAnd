@@ -26,16 +26,16 @@
 	<string name="welcome_text">¡OsmAnd proporciona visualización de mapas globales y navegación global sin conexión!</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
-    <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios locales</string>
+    <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
    	<string name="mark_to_delete">Marcar para borrar</string>
-	<string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos una longitud de 3 caracteres!</string>
-	<string name="local_osm_changes_upload_all_confirm">Va a subir %1$d cambios a OSM. ¿Está seguro?</string>
+	<string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
+	<string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambios a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
     <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
 	<string name="delay_to_start_navigation_descr">Especifique el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
-    <string name="delay_to_start_navigation">Iniciar navegación giro-a-giro después de…</string>
+    <string name="delay_to_start_navigation">Iniciar navegación giro-a-giro luego de…</string>
     <string name="shared_string_go">Ir</string>
 	<string name="osmand_parking_overdue">vencido</string>
 	<string name="action_create">Acción crear</string>
@@ -47,7 +47,7 @@
 	<string name="parking_place_limited">Tiempo de aparcamiento limitado a</string>
 	<string name="osmand_parking_time_left">restante</string>
 	<string name="your_edits">Tus ediciones</string>
-    <string name="waypoint_visit_after">Visitar después</string>
+    <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular tu ubicación</string>
     <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
@@ -83,7 +83,7 @@
 	<string name="shared_string_clear">Limpiar</string>
 	<string name="shared_string_clear_all">Limpiar todo</string>
 	<string name="shared_string_save">Guardar</string>
-	<string name="shared_string_save_as_gpx">Guardar la ruta como traza GPX</string>
+	<string name="shared_string_save_as_gpx">Guardar como traza GPX</string>
 	<string name="shared_string_rename">Renombrar</string>
 	<string name="shared_string_delete">Borrar</string>
 	<string name="shared_string_delete_all">Borrar todo</string>
@@ -129,10 +129,10 @@
 	<string name="online_map_settings">Mapas en línea</string>
 	<string name="record_plugin_name">Grabar viajes</string>
 	<string name="osmo_plugin_name">Rastreo OsMo</string>
-	<string name="plugin_touringview_name">Mapa vista turística</string>
-	<string name="plugin_nautical_name">Mapa vista náutica</string>
+	<string name="plugin_touringview_name">Mapa de vista turística</string>
+	<string name="plugin_nautical_name">Mapa de vista náutica</string>
 	<string name="plugin_ski_name">Mapa vista esquí</string>
-	<string name="audionotes_plugin_name">Notas de audio/vídeo</string>
+	<string name="audionotes_plugin_name">Notas de audio/video</string>
 	<string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
 	<string name="accessibility_preferences">Accesibilidad</string>
 	<string name="osm_settings">Edición OSM</string>
@@ -142,7 +142,7 @@
     <string name="location_on_map">Ubicación:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
 	<string name="notes">Notas</string>
-	<string name="online_map">Mapa con conexión</string>
+	<string name="online_map">Mapa en línea</string>
 	<string name="roads_only">Sólo carreteras</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
 	<string name="edit_group">Editar grupo</string>
@@ -446,7 +446,7 @@
 	<string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_mr">Marathi</string>
-	<string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel en línea</string>
+	<string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
 	<string name="srtm_plugin_name">Curvas de nivel</string>
 	<string name="osmand_distance_planning_plugin_name">Calculador de distancias y herramienta de planificación</string>
 	<string name="rename_failed">Falló el renombrado.</string>
@@ -471,7 +471,7 @@
 	<string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para el rastreo avanzado en directo OsMo, ver http://osmo.mobi.
 \n\nPuede hacer un seguimiento de otros dispositivos y ser rastreado. Puede crear espontáneamente grupos anónimos, compartir la ubicación de cada uno, y comunicarse. Viene con varias opciones para el seguimiento por sesión o seguimiento permanente.
 \n\nLos grupos anónimos se crean para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
-	<string name="srtm_paid_version_title">Complemento curvas de nivel</string>
+	<string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas en línea de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
 	<string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas en línea de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
