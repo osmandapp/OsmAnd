@@ -82,4 +82,18 @@
 	<string name="poi_fabric">Магазин за пердета</string>
 	<string name="poi_bedding">Чаршафи и завивки</string>
 	<string name="poi_dive">Екипировка за гмуркане</string>
+	<string name="poi_fishing">Рибарски принадлежности</string>
+	<string name="poi_florist">Магазин за цветя</string>
+	<string name="poi_frame">Магазин за рамки</string>
+	<string name="poi_furniture">Магазин за мебели</string>
+	<string name="poi_garden_centre">Градински център</string>
+	<string name="poi_gas">Втечнен газ</string>
+	<string name="poi_general">Смесен магазин</string>
+	<string name="poi_gift">Подаръци</string>
+	<string name="poi_hardware">Железария</string>
+	<string name="poi_hearing_aids">Слухови апарати</string>
+	<string name="poi_herbalist">Билкова аптека</string>
+	<string name="poi_hifi">Електроника</string>
+	<string name="poi_hunting">Ловно оборудване</string>
+	<string name="poi_kiosk">Павилион</string>
 	</resources>
