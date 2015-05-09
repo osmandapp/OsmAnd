@@ -44,7 +44,7 @@
 	<string name="osm_edits">Ediciones OSM</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
-	<string name="parking_place_limited">Tiempo de aparcamiento limitado a</string>
+	<string name="parking_place_limited">Tiempo de estacionamiento limitado a</string>
 	<string name="osmand_parking_time_left">restante</string>
 	<string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar luego</string>
@@ -133,7 +133,7 @@
 	<string name="plugin_nautical_name">Mapa de vista náutica</string>
 	<string name="plugin_ski_name">Mapa vista esquí</string>
 	<string name="audionotes_plugin_name">Notas de audio/video</string>
-	<string name="osmand_parking_plugin_name">Posición de aparcamiento</string>
+	<string name="osmand_parking_plugin_name">Ubicación de estacionamiento</string>
 	<string name="accessibility_preferences">Accesibilidad</string>
 	<string name="osm_settings">Edición OSM</string>
 	<string name="debugging_and_development">Desarrollo de OsmAnd</string>
@@ -146,9 +146,9 @@
 	<string name="roads_only">Sólo carreteras</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
 	<string name="edit_group">Editar grupo</string>
-    <string name="parking_place">Lugar de aparcamiento</string>
+    <string name="parking_place">Lugar de estacionamiento</string>
     <string name="gps_status">Estado del GPS</string>
-    <string name="version_settings_descr">Descarga versiones nocturnas</string>
+    <string name="version_settings_descr">Descargar versiones nocturnas</string>
     <string name="version_settings">Compilaciones</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="proxy_pref_title">Proxy</string>
@@ -167,7 +167,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Atlas americano de carreteras</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de navegación introducidas en v.1.9</string>
-    <string name="dash_download_msg_none">¿Quiere descargar los mapas fuera de línea?</string>
+    <string name="dash_download_msg_none">¿Quiere descargar los mapas sin conexión?</string>
     <string name="dash_download_msg">Ha descargado %1$s mapa(s)</string>
     <string name="dash_download_new_one">Descargar nuevo mapa</string>
     <string name="dash_download_manage">Gestionar</string>
@@ -189,7 +189,7 @@
 	<string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="impassable_road">Evitar carreteras…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi compartido</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
@@ -208,11 +208,11 @@
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
 	<string name="print_route">Imprimir ruta</string>
-    <string name="text_size">Tamaño de texto</string>
+    <string name="text_size">Tamaño del texto</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Peaje</string>
-    <string name="traffic_warning_stop">Señal de stop</string>
+    <string name="traffic_warning_stop">Señal de alto</string>
     <string name="traffic_warning_calming">Reductores de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
@@ -486,7 +486,7 @@
 	<string name="plugin_ski_descr">"Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad, y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
 \n\nActivando esta vista cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="audionotes_plugin_description">El complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
-	<string name="osmand_parking_plugin_description">"El complemento de posición de aparcamiento te deja memorizar fácilmente cuándo se aparcó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
+	<string name="osmand_parking_plugin_description">"El complemento de ubicación de estacionamiento te deja memorizar fácilmente cuándo se estacionó el auto y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
 \n\nAñade una notificación al calendario en el caso de que  desee tener un recordatorio al respecto."</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa que permite crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX, y utilizarse después para la orientación.</string>
 	<string name="osmand_accessibility_description">Este complemento habilita las características de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su posición.</string>
@@ -903,7 +903,7 @@
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
-    <string name="poi_filter_parking">Aparcamiento</string>
+    <string name="poi_filter_parking">Estacionamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
@@ -1086,7 +1086,7 @@
 	<string name="map_widget_lock_screen">Bloquear pantalla</string>
 	<string name="map_widget_compass">Brújula</string>
 	<string name="map_widget_reset">Restablecer valores predeterminados</string>
-	<string name="map_widget_parking">Aparcamiento</string>
+	<string name="map_widget_parking">Estacionamiento</string>
 	<string name="map_widget_monitoring">Grabando GPX</string>
 	<string name="map_widget_speed">Velocidad</string>
 	<string name="map_widget_distance">Destino</string>
@@ -1107,14 +1107,14 @@
 	<string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
 	<string name="osmand_parking_hours">Horas</string>
 	<string name="osmand_parking_minutes">Minutos</string>
-	<string name="osmand_parking_position_description_add_time">El automóvil fue aparcado en:</string>
+	<string name="osmand_parking_position_description_add_time">El auto fue estacionado en:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1:
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
 \n\t* Direcciones por carriles
 \n\t* Información sobre límites de velocidad, radares y reductores de velocidad
 \n\n\t* Mejoras en la guía por voz en carreteras
-\n\t* Agregado de aparcamiento (¿Dónde está aparcado mi autoóvil?)
+\n\t* Agregado de estacionamiento (¿Dónde está estacionado mi auto?)
 \n\t* Habilitar/Deshabilitar el widget de registro "</string>
 	<string name="select_animate_speedup">Seleccionar la velocidad del simulador de ruta</string>
     	<string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Límite Android %2$s MB, Dalvik %3$s MB).</string>
@@ -1123,25 +1123,25 @@
 	<string name="native_app_allocated_memory">Memoria nativa total</string>
 	<string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
 	<string name="shared_location">Compartir localización</string>
-	<string name="osmand_parking_event">Recoger el automóvil del aparcamiento</string>
+	<string name="osmand_parking_event">Recoger el auto del estacionamiento</string>
 	<string name="osmand_parking_warning">Advertencia</string>
-	<string name="osmand_parking_warning_text">La notificación para recoger tu automóvil fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>    
-	<string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparacamiento</string>
-	<string name="osmand_parking_delete_confirm">¿Quieres eliminar la ubicación del automóvil aparcado?</string>
-	<string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
-	<string name="osmand_parking_choose_type">Elija el tipo de aparcamiento</string>
+	<string name="osmand_parking_warning_text">La notificación para recoger tu auto fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>    
+	<string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del estacionamiento</string>
+	<string name="osmand_parking_delete_confirm">¿Quieres eliminar la ubicación del auto estacionado?</string>
+	<string name="osmand_parking_delete">Borrar un marcador de estacionamiento</string>
+	<string name="osmand_parking_choose_type">Elija el tipo de estacionamiento</string>
 	<string name="osmand_parking_lim_text">Tiempo limitado</string>
 	<string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
-	<string name="osmand_parking_add_event">Añadir notificación a la aplicación Calendario</string>
-	<string name="osmand_parking_time_limit">Aparcamiento de tiempo limitado</string>
-	<string name="osmand_parking_time_no_limit">Aparcamiento sin tiempo limitado</string>
-	<string name="osmand_parking_position_description">La posición de su automóvil aparcado. %1$s</string>
-	<string name="osmand_parking_position_description_add">Recoger el automóvil a las:</string>
+	<string name="osmand_parking_add_event">Añadir una notificación a la aplicación Calendario</string>
+	<string name="osmand_parking_time_limit">Estacionamiento de tiempo limitado</string>
+	<string name="osmand_parking_time_no_limit">Estacionamiento de tiempo ilimitado</string>
+	<string name="osmand_parking_position_description">La ubicación de su auto estacionado. %1$s</string>
+	<string name="osmand_parking_position_description_add">Recoger el auto a las:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Punto de aparcamiento</string>
-	<string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
-	<string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
+	<string name="osmand_parking_position_name">Punto de estacionamiento</string>
+	<string name="context_menu_item_add_parking_point">Marcar como ubicación de estacionamiento</string>
+	<string name="context_menu_item_delete_parking_point">Borrar un marcador de estacionamiento</string>
 	<string name="gpxup_public">Público</string>
 	<string name="gpxup_identifiable">Identificable</string>
 	<string name="gpxup_trackable">Trazable</string>
