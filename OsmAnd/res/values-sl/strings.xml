@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Iskanje</string>
-	<string name="search_activity">Iskanje</string>
+<resources><string name="search_button">Poišči</string>
+	<string name="search_activity">Iskanje podatkov</string>
 	
 	
 	
-	<string name="choose_available_region">Izberi regijo iz seznama</string>
+	<string name="choose_available_region">Izberi regijo s seznama</string>
 	<string name="incremental_search_city">Sprotno iskanje mest</string>
-	<string name="searchpoi_activity">Izberi POI</string>
+	<string name="searchpoi_activity">Izberi točko POI</string>
 	<string name="search_POI_level_btn">Več zadetkov</string>
 	<string name="incremental_search_street">Sprotno iskanje ulice</string>
 	<string name="incremental_search_building">Sprotno iskanje hišne številke</string>
@@ -14,13 +14,13 @@
 	<string name="Closest_Amenities">Najbližje usluge</string>
 	<string name="app_mode_car">Avto</string>
 	<string name="app_mode_bicycle">Kolo</string>
-	<string name="app_mode_pedestrian">Peš</string>
+	<string name="app_mode_pedestrian">Pešačenje</string>
 	<string name="app_mode_default">Poišči na zemljevidu</string>
 	<string name="position_on_map_center">Sredina</string>
 	<string name="position_on_map_bottom">Dno</string>
 	<string name="navigate_point_top_text">Vnesi zemljepisno širino in dolžino v izbrani obliki (D - stopinje, M - minute, S - sekunde)</string>
-	<string name="navigate_point_latitude">Širina</string>
-	<string name="navigate_point_longitude">Dolžina</string>
+	<string name="navigate_point_latitude">Zemljepisna širina</string>
+	<string name="navigate_point_longitude">Zemljepisna dolžina</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
@@ -30,7 +30,7 @@
 	<string name="search_address_region">Država</string>
 	<string name="search_address_city">Kraj</string>
 	<string name="search_address_street">Ulica</string>
-	<string name="search_address_building">Hiša</string>
+	<string name="search_address_building">Zgradba</string>
 	<string name="search_address_building_option">Hiša</string>
 	<string name="search_address_street_option">Sekajoča cesta</string>
 	
@@ -39,44 +39,44 @@
 	<string name="shared_string_cancel">Prekliči</string>
 	<string name="shared_string_add">Dodaj</string>
 	<string name="shared_string_apply">Uporabi</string>
-	<string name="context_menu_item_create_poi">Ustvari POI</string>
-	<string name="context_menu_item_open_bug">Prijavi OSM napako</string>
-	<string name="context_menu_item_update_map">Osveži karto</string>
+	<string name="context_menu_item_create_poi">Ustvari točko POI</string>
+	<string name="context_menu_item_open_bug">Prijavi napako OSM</string>
+	<string name="context_menu_item_update_map">Osveži zemljevid</string>
 	<string name="search_tabs_location">Mesto</string>
-	<string name="add_favorite_dialog_default_favourite_name">Priljubljeno mesto</string>
-	<string name="add_favorite_dialog_top_text">Vnesite ime priljubljene lokacije</string>
-	<string name="favourites_context_menu_edit">Uredi priljubljeno lokacijo</string>
-	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
-	<string name="add_favorite_dialog_favourite_added_template">Točka \'\'{0}\'\' je bila uspešno dodana med priljubljene.</string>
-	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno lokacijo \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je izbrisana.</string>
-	<string name="poi_edit_title">Uredi POI</string>
-	<string name="poi_create_title">Ustvari POI</string>
-	<string name="poi_error_poi_not_found">Točke ni mogoče najti ali pa usluga ni samostojna točka</string>
-	<string name="poi_remove_confirm_template">Brisanje {0} (vpišite komentar)?</string>
-	<string name="poi_remove_title">Briši POI</string>
+	<string name="add_favorite_dialog_default_favourite_name">Priljubljena točka</string>
+	<string name="add_favorite_dialog_top_text">Vnesite ime priljubljene točke</string>
+	<string name="favourites_context_menu_edit">Uredi priljubljeno točko</string>
+	<string name="favourites_context_menu_delete">Izbriši priljubljeno točko</string>
+	<string name="add_favorite_dialog_favourite_added_template">Točka \'\'{0}\'\' je uspešno dodana med priljubljene.</string>
+	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno točko \'%s\'?</string>
+	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je uspešno izbrisana.</string>
+	<string name="poi_edit_title">Uredi točko POI</string>
+	<string name="poi_create_title">Ustvari točko POI</string>
+	<string name="poi_error_poi_not_found">Točke ni mogoče najti, ali pa usluga ni samostojna točka</string>
+	<string name="poi_remove_confirm_template">Ali želite izbrisati {0} (vpišite opombo)?</string>
+	<string name="poi_remove_title">Izbriši točko POI</string>
 	<string name="shared_string_delete">Izbriši</string>
-	<string name="poi_remove_success">POI je bila uspešno izbrisana</string>
-	<string name="poi_action_add">Dodajanje</string>
-	<string name="poi_action_change">Popravljanje</string>
-	<string name="poi_action_succeded_template">{0} je bilo uspešno.</string>
-	<string name="poi_error_unexpected_template">Med izvajanjem dejanja {0} prišlo do nepričakovane napake.</string>
-	<string name="poi_error_io_error_template">Prišlo je do I/O napake pri izvajanju dejanja {0}.</string>
+	<string name="poi_remove_success">Točka POI je uspešno izbrisana</string>
+	<string name="poi_action_add">dodaj</string>
+	<string name="poi_action_change">spremeni</string>
+	<string name="poi_action_succeded_template">Opravilo {0} je bilo uspešno končano.</string>
+	<string name="poi_error_unexpected_template">Med izvajanjem opravila {0} prišlo do nepričakovane napake.</string>
+	<string name="poi_error_io_error_template">Prišlo je do I/O napake med izvajanjem opravila {0}.</string>
 	<string name="poi_error_info_not_loaded">Podrobnosti o točki niso naložene</string>
 	<string name="poi_dialog_name">Ime</string>
 	<string name="poi_dialog_opening_hours">Odprto</string>
 	<string name="poi_dialog_comment">Opomba</string>
-	<string name="poi_dialog_comment_default">Opis spremembe</string>
+	<string name="poi_dialog_comment_default">Opis spremembe POI</string>
 	<string name="poi_dialog_other_tags_message">Vse ostale oznake se ohranjajo</string>
-	<string name="default_buttons_commit">Pošlji</string>
+	<string name="default_buttons_commit">Uveljavi</string>
 	<string name="filter_current_poiButton">Filter</string>
 	
 	<string name="edit_filter_save_as_menu_item">Shrani kot</string>
 	<string name="edit_filter_delete_dialog_title">Ali želite izbrisati izbrani filter?</string>
-	<string name="edit_filter_delete_message">Filter {0} je bil izbrisan</string>
-	<string name="edit_filter_create_message">Filter {0} je bil ustvarjen</string>
+	<string name="edit_filter_delete_message">Filter {0} je izbrisan</string>
+	<string name="edit_filter_create_message">Filter {0} je ustvarjen</string>
 	
-	<string name="email">E-pošta</string>
+	<string name="email">elektronski naslov</string>
 <string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:
 \n\t* Odpravljene so nekatere napake delovanja\n\t* Zemljevid med prekinitvami ne izgubi pridobljenega položaja
 \n\t* Med navigacijo je omogočeno izvajanje storitev v pripravljenosti "</string>
@@ -111,10 +111,10 @@
 	<string name="shared_string_exit">Končaj</string>
 	
 	
-	<string name="show_gps_coordinates_text">Prikaži GPS koordinate na karti</string>
-	<string name="show_location">Prikaži trenutno mesto</string>
-	<string name="use_internet_to_download_tile">Uporabi internet za prenos manjkajočih delov karte</string>
-	<string name="app_description">Navigacijska aplikacija</string>
+	<string name="show_gps_coordinates_text">Pokaži koordinate GPS na zemljevidu</string>
+	<string name="show_location">Pokaži trenutno mesto</string>
+	<string name="use_internet_to_download_tile">Prejmi manjkajoče predmete zemljevida iz spleta</string>
+	<string name="app_description">Program za navigacijo</string>
 	<string name="use_internet">Uporabi internet</string>
 	<string name="show_poi_over_map">Prikaži točke POI</string>
 	<string name="choose_city">Izbor mesta</string>
@@ -124,8 +124,8 @@
 	<string name="show_view_angle">Pokaži smer pogleda</string>
 	
 	<string name="shared_string_add_to_favorites">Dodaj med priljubljene</string>
-	<string name="use_english_names_descr">Izberi prikaz avtohtonih oz. angleških imen</string>
-	<string name="use_english_names">Uporabi angleška imena na karti</string>
+	<string name="use_english_names_descr">Izbor prikaza izvornih oz. angleških imen</string>
+	<string name="use_english_names">Na zemljevidu uporabi angleška imena</string>
 	<string name="app_settings">Nastavitve programa</string>
 	<string name="search_address">Iskanje naslova</string>
 	<string name="poi_search_desc">Iskanje zanimivih točk POI</string>
@@ -432,8 +432,8 @@
 	<string name="menu_layers">Sloji zemljevida</string>
 	<string name="where_am_i">Kje sem?</string>
 	<string name="hide_poi_filter">Ne pokaži filtra</string>
-	<string name="show_poi_filter">Prikaži filter</string>
-	<string name="search_nearby">Išči v bližini</string>
+	<string name="show_poi_filter">Pokaži filter</string>
+	<string name="search_nearby">Poišči v bližini</string>
 	<string name="transport_finish_search">Končaj iskanje</string>
 	
 	<string name="opening_changeset">Odpiranje paketa sprememb …</string>
@@ -460,9 +460,9 @@
 	<string name="voice_is_not_available_title">Izbrano ni nobeno glasovno vodenje</string>
 	<string name="voice">Posneti glas</string>
 	<string name="voice_provider_descr">Izberite glasovno vodenje za navigacijo</string>
-	<string name="voice_data_initializing">Začenjanje podatkov govora …</string>
+	<string name="voice_data_initializing">Poteka nalaganje podpore za govor …</string>
 	<string name="voice_data_not_supported">Nepodprta različica podatkov govora</string>
-	<string name="voice_data_corrupted">Izbrani podatki govora so pokvarjeni</string>
+	<string name="voice_data_corrupted">Izbrani podatki govora so okvarjeni</string>
 	<string name="voice_data_unavailable">Izbrani podatki govora niso na voljo</string>
 	<string name="voice_stream_voice_call">Zvok glasovnega klica</string>
 	<string name="voice_provider">Glasovno vodenje</string>
@@ -471,7 +471,7 @@
 	<string name="use_osmand_routing_service">Navigacija OsmAnd &gt; 20 km</string>
 	<string name="service_stop_background_service">Izklopi navigacijsko storitev v ozadju</string>
 	<string name="process_navigation_service">Navigacijska storitev OsmAnd</string>
-	<string name="hello">Navigacijska aplikacija OsmAnd</string>
+	<string name="hello">Program za navigacijo OsmAnd</string>
 	<string name="router_service">Navigacijska storitev</string>
 	<string name="menu_mute_off">Zvok je vključen</string>
 	<string name="menu_mute_on">Zvok je izključen</string>
@@ -515,8 +515,8 @@
 	<string name="favourites_delete_multiple_succesful">Priljubljene točke so uspešno izbrisane.</string>
 	
 	<string name="favorite">Priljubljene</string>
-	<string name="fav_points_edited">Priljubljena točka je urejena</string>
-	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
+	<string name="fav_points_edited">Priljubljena točka je uspešno urejena.</string>
+	<string name="fav_points_not_exist">Ni priljubljenih točk</string>
 	<string name="incomplete_locale">nedokončano</string>
 	<string name="download_roads_only_item">Le ceste</string>
     <string name="download_regular_maps">Običajni zemljevidi</string>
@@ -546,8 +546,8 @@
 	
 	<string name="phone">Telefon</string>
 	<string name="get_directions">Navigacija</string>
-	<string name="follow">Začni navigacijo</string>
-	<string name="only_show">Prikaži pot</string>
+	<string name="follow">Začni z navigacijo</string>
+	<string name="only_show">Pokaži pot</string>
 	<string name="update_existing">Zamenjaj</string>
 	<string name="send_location">Pošlji mesto</string>
 	<string name="amenity_type_transportation">Prevoz</string>
@@ -618,21 +618,21 @@
 	<string name="tip_osm_improve">Izpopolnjevanje podatkov OSM</string>
 	<string name="osm_settings">Urejanje točk OSM</string>
 	<string name="website">Spletna stran</string>
-	<string name="osb_add_dialog_title">Vnos OSM napake</string>
+	<string name="osb_add_dialog_title">Vnos napake OSM</string>
 	<string name="osb_comment_dialog_message">Sporočilo</string>
 	<string name="osb_comment_dialog_author">Ime avtorja</string>
-	<string name="osb_add_dialog_success">Napaka uspešno prijavljena</string>
-	<string name="osb_add_dialog_error">Prišlo je do napake: napaka ni bila prijavljena</string>
-	<string name="osb_comment_dialog_add_button">Dodaj komentar</string>
+	<string name="osb_add_dialog_success">Poročilo o hrošču je uspešno ustvarjeno</string>
+	<string name="osb_add_dialog_error">Prišlo je do napake: napaka ni bila ustvarjena</string>
+	<string name="osb_comment_dialog_add_button">Dodaj opis napake</string>
 	<string name="osb_comment_menu_item">Dodaj opis napake</string>
 	<string name="osb_comment_dialog_title">Dodajanje opisa napake</string>
-	<string name="osb_comment_dialog_success">Komentar je bil uspešno dodan</string>
-	<string name="osb_comment_dialog_error">Prišlo je do napake: komentar ni bil dodan</string>
-	<string name="osb_close_menu_item">Zapri napako</string>
-	<string name="osb_close_dialog_title">Zapiranje napake</string>
-	<string name="osb_close_dialog_close_button">Zapri napako</string>
-	<string name="osb_close_dialog_success">Napaka je bila uspešno zaprta</string>
-	<string name="osb_close_dialog_error">Prišlo je do napake: napaka ni bila zaprta</string>
+	<string name="osb_comment_dialog_success">Opomba je bila uspešno dodana</string>
+	<string name="osb_comment_dialog_error">Prišlo je do napake: opomba ni bila dodana</string>
+	<string name="osb_close_menu_item">Zapri hrošča</string>
+	<string name="osb_close_dialog_title">Zapiranje hrošča</string>
+	<string name="osb_close_dialog_close_button">Zapri hrošča</string>
+	<string name="osb_close_dialog_success">Hrošč je bil uspešno zaprt</string>
+	<string name="osb_close_dialog_error">Prišlo je do napake: hrošča ni mogoče zapreti</string>
 	<string name="tip_osm_improve_t">"Program OsmAnd uporablja zemljevide, ki temeljijo na podatkih Openstreetmap.org (OSM). Podatke je mogoče posodabljati in izboljšati kakovost OSM. Mogoče je ustvarjati, posodabljati in dodajati nove točke POI.\n\nZa uporabo je treba najprej omogočiti vstavek OSM preko \'Nastavitev\' → \'Vstavki\' in nato ustvariti račun OSM med \'Nastavitvami\' → \'Urejanje OSM\'.\n\nZa dodajanje novih točk POI je treba te ustvariti preko vsebinskega menija \'Uporabi mesto\'. Pojavno okno zahteva vpis podatkov o točki poj. Ko je vpis končan, ga je mogoče objaviti.
 \n\nPrav tako je mogoče sporočati tudi napake na zemljevidu. Objave preko skupnosti OSM, ki se ukvarja z odpravljanjem hroščev je lažje in hitrejše. Poročilo o hrošču oddate preko sistema razhroščevanja med možnostmi \'Prijave napake v OSM\'. Tudi tu je treba najprej vpisati podatke o hrošči, po vnosu, pa sistem dovoli oddajanje hrošča.\n\nProgram OsmAnd omogoča predpomnjenje vpisov v načinu brez povezave (med nastavitvami je več možnosti delovanja), vendar pa je povezava nujna za posodobitev in nalaganje datotek OSM na napravo in za objavljanje poročil na spletu. "</string>
 	<string name="tip_map_context_menu">Meni \'Uporabi trenutno mesto\'</string>
@@ -799,10 +799,10 @@
 	<string name="mark_point">Cilj</string>
 	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
-	<string name="int_seconds">sekund</string>
+	<string name="int_seconds">sek</string>
 	<string name="int_min">min</string>
 	<string name="gps_provider">GPS</string>
-	<string name="previous_run_crashed">Pri prejšnji uporabi programa OsmAnd je prišlo do sesutja. Datoteka z dnevnikom se nahaja v {0}. Prosim, prijavite težavo in priložite to datoteko.</string>
+	<string name="previous_run_crashed">Pri zadnjem zagonu programa OsmAnd je prišlo do napake v delovanju. Dnevniška datoteka je shranjena v {0}. Pošljite poročilo o napaki in priložite to datoteko.</string>
 	<string name="amenity_type_emergency">Nujna medicinska pomoč</string>
 	<string name="amenity_type_geocache">Zaklad Geocache</string>
 	<string name="poi_filter_namefinder">Spletni iskalnik imen</string>
@@ -867,32 +867,32 @@
 	<string name="any_poi">Katerokoli</string>
 	<string name="layer_transport_route">Pot javnega prevoza</string>
 	<string name="thanks_yandex_traffic">Za podatke o prometu gre zahvala spletišču Yandex.</string>
-	<string name="layer_yandex_traffic">Yandex promet</string>
+	<string name="layer_yandex_traffic">Promet Yandex</string>
 	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
 	<string name="layer_route">Pot</string>
 	<string name="shared_string_favorites">Pokaži priljubljene točke</string>
-	<string name="layer_osm_bugs">Opombe OSM (zahteva povezavo)</string>
+	<string name="layer_osm_bugs">Hrošči OSM (zahteva povezavo)</string>
 	<string name="layer_transport">Postaje prevoza</string>
 	<string name="layer_poi">Izbor točk POI …</string>
 	<string name="layer_map">Vir zemljevida …</string>
 	<string name="context_menu_item_search_poi">Iskanje točk POI</string>
 	<string name="use_trackball_descr">Uporabite sledilno kroglico za premikanje zemljevida</string>
 	<string name="use_trackball">Uporabite sledilno kroglico</string>
-	<string name="background_service_wait_int_descr">Nastavitev največje čakalne dobe za vsak fix položaja v ozadju</string>
-	<string name="background_service_wait_int">Največje čakanje za fix</string>
+	<string name="background_service_wait_int_descr">Nastavitev najdaljšega časa čakanja za prilagajanje trenutne točke</string>
+	<string name="background_service_wait_int">Najdaljši časa čakanja prilagajanja</string>
 	<string name="network_provider">Omrežje</string>
 	<string name="background_service_int_descr">Nastavitev intervala prebujanja v ozadju</string>
 	<string name="background_service_int">Interval prebujanja sprejemnika GPS</string>
 	<string name="background_service_provider_descr">Izberite ponudnika mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
-	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju, da omogoča spremljanje položaja, ko je zaslon izklopljen</string>
+	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju in omogoča spremljanje položaja, ko je zaslon izklopljen</string>
 	<string name="background_router_service">Izvajaj v ozadju</string>
 	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je vsaj en ponudnik mesta vklopljen.</string>
 	<string name="search_poi_filter">Filter</string>
 	
-	<string name="sd_unmounted">SD kartica ni dosegljiva.\nNe boste mogli gledati zemljevidov ali najti stvari.</string>
-	<string name="sd_mounted_ro">SD kartica je samo za branje.\nVidite lahko samo prednaloženi zemljevid in ne more prenesti z interneta.</string>
-	<string name="unzipping_file">Odzipanje datoteke …</string>
+	<string name="sd_unmounted">Kartica SD ni priklopljena.\nBrez podatkov ni mogoče uporabljati zemljevidov ali iskati mest.</string>
+	<string name="sd_mounted_ro">Kartica SD je nastavljena le za branje.\nNa voljo bodo le nameščeni zemljevidi. Novih ne bo mogoče prejeti.</string>
+	<string name="unzipping_file">Poteka odpakiranje datoteke …</string>
 	<string name="route_tr">Zavijte desno in pojdite</string>
 	<string name="route_tshr">Zavijte ostro desno in pojdite</string>
 	<string name="route_tslr">Zavijte rahlo desno in pojdite</string>
@@ -902,17 +902,17 @@
 	<string name="route_tu">Polkrožno obrnite in pojdite</string>
 	<string name="route_head">Začetek poti</string>
 	<string name="first_time_continue">Kasneje</string>
-	<string name="first_time_download">Prenos območij</string>
-	<string name="search_poi_location">Iskanje znaka …</string>
-	<string name="search_near_map">Iskanje v bližini zadnje lokacije na zemljevidu</string>
+	<string name="first_time_download">Prejem območij</string>
+	<string name="search_poi_location">Iskanje signala …</string>
+	<string name="search_near_map">Poišči v bližini trenutne sredine zemljevida</string>
 	<string name="tip_map_switch_t_v2">"Vir zemljevida lahko spreminjate preko \'Menija\' → \'Plasti zemljevida\'.\n\nMed možnostmi \'Vira zemljevida …\' so na voljo shranjeni vektorski zemljevidi (za delo brez povezave), vnaprej določeni spletni zemljevidi (podpora z vstavkom, ki ga omogočite med \'Nastavitvami\' → \'Vstavki\' in tam izberete \'Spletni zemljevidi\') in  s programom OsmAndMapCreator ustvarjeni (predpomnjeni) zemljevidi.\n\nPodprti so tudi viri po meri. "</string>
 	<string name="fav_saved_sucessfully">Priljubljene točke uspešno shranjene v {0}</string>
-	<string name="opening_hours_not_supported">Oblika delovnega časa ni podprta za urejanje</string>
+	<string name="opening_hours_not_supported">Oblike zapisa delovnega časa ni mogoče urejati</string>
 	<string name="add_new_rule">Dodajanje novega pravila</string>
 	<string name="transport_Routes">Poti</string>
 	<string name="transport_Stop">Postaja</string>
 	<string name="transport_stops">postaje</string>
-	<string name="transport_search_after">Naknadna pot</string>	
+	<string name="transport_search_after">Naslednja pot</string>	
 	<string name="transport_search_before">Prejšnja pot</string>
 	<string name="transport_stop_to_go_out">Izberite izstopno postajo</string>
 	<string name="transport_to_go_after">prejšnja razdalja</string>
@@ -920,81 +920,81 @@
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
 	<string name="transport_route_distance">Razdalja poti</string>
 	<string name="shared_string_ok">V redu</string>
-	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
+	<string name="show_transport_over_map_description">Pokaži postaje javnega prevoza na zemljevidu</string>
 	<string name="show_transport_over_map">Pokaži postaje prevoza</string>
-	<string name="update_poi_success">POI podatki so bili uspešno posodobljeni ({0} naloženih)</string>
-	<string name="update_poi_error_local">Napaka pri posodabljanju lokalnega seznama POI</string>
-	<string name="update_poi_error_loading">Napaka pri nalaganju podatkov iz strežnika</string>
-	<string name="update_poi_no_offline_poi_index">Ni krajevnih POI podatkov za to področje</string>
-	<string name="update_poi_is_not_available_for_zoom">Posodabljanje POI ni na voljo pri majhnih povečavah</string>
+	<string name="update_poi_success">Podatki POI podatki so uspešno posodobljeni ({0} naloženih)</string>
+	<string name="update_poi_error_local">Napaka med posodabljanjem seznama POI</string>
+	<string name="update_poi_error_loading">Napaka med nalaganjem podatkov iz strežnika</string>
+	<string name="update_poi_no_offline_poi_index">Ni krajevnih podatkov POI za to območje</string>
+	<string name="update_poi_is_not_available_for_zoom">Posodabljanje POI pri majhnih povečavah ni mogoče</string>
 	<string name="context_menu_item_update_poi">Posodobi točko POI</string>
-	<string name="context_menu_item_update_map_confirm">Posodobitev lokalnih podatkov prek interneta?</string>
+	<string name="context_menu_item_update_map_confirm">Ali naj se posodobijo krajevni podatki prek interneta?</string>
 	<string name="search_history_city">Mesto: {0}</string>
 	<string name="search_history_street">Ulica: {0}, {1}</string>
 	<string name="search_history_int_streets">Križišče: {0} z {1} v {2}</string>
 	<string name="search_history_building">Zgradba: {0}, {1}, {2}</string>
 	<string name="shared_string_clear_all">Počisti vse</string>
 	<string name="shared_string_history">Zgodovina</string>
-	<string name="uploading_data">Nalaganje podatkov …</string>
-	<string name="uploading">Nalaganje …</string>
-	<string name="search_nothing_found">Ničesar najdeno</string>
+	<string name="uploading_data">Poteka pošiljanje podatkov …</string>
+	<string name="uploading">Pošiljanje …</string>
+	<string name="search_nothing_found">Ni zadetkov</string>
 	<string name="searching">Iskanje …</string>
 	<string name="searching_address">Iskanje naslova …</string>
 	<string name="search_osm_nominatim">Iskanje naslova z OSM Nominatim</string>
 	<string name="hint_search_online">Spletno iskanje: hišna številka, ulica, kraj</string>
 	<string name="search_offline_address">Iskanje brez povezave</string>
 	<string name="search_online_address">Iskanje v povezavi</string>
-	<string name="max_level_download_tile">Maks. povečava za spletne</string>
-	<string name="max_level_download_tile_descr">Izbira najvišje stopnje povečave za prenos spletnih zemljevidov</string>
-	<string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d u %3$d m.</string>
+	<string name="max_level_download_tile">Največje približanje pri spletnih zemljevidih</string>
+	<string name="max_level_download_tile_descr">Izbira največjega približanja za prejem spletnih zemljevidov</string>
+	<string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d h %3$d m.</string>
 	<string name="router_service_descr">Izbira spletne ali krajevne navigacijske storitve</string>
-	<string name="sd_dir_not_accessible">Shranjevalnega imenika na SD kartici ni na voljo!</string>
-	<string name="download_question">Prenesti {0} - {1}?</string>
+	<string name="sd_dir_not_accessible">Shranjevalnega imenika na kartici SD ni na voljo!</string>
+	<string name="download_question">Prejmi {0} – {1}?</string>
 	<string name="download_question_exist">Krajevni podatki za {0} že obstajajo ({1}). Ali jih želite posodobiti ({2})?</string>
 	<string name="address">Naslov</string>
 	<string name="shared_string_download_successful">Prejem uspešno končan</string>
 	
-	<string name="downloading_list_indexes">Prenašanje seznama razpoložljivih območij …</string>
-	<string name="list_index_files_was_not_loaded">Seznam območij ni bil pridobljen iz osmand.net.</string>
-	<string name="mark_final_location_first">Prosim, najprej izberite cilj</string>
+	<string name="downloading_list_indexes">Prejemanje seznama območij zemljevida …</string>
+	<string name="list_index_files_was_not_loaded">Seznam območij ni bil pridobljen z osmand.net.</string>
+	<string name="mark_final_location_first">Najprej je treba izbrati cilj</string>
 	<string name="commiting_node">Posredovanje vozlišča …</string>
-	<string name="loading_poi_obj">Nalaganje POI …</string>
-	<string name="auth_failed">Pooblastitev ni uspela</string>
-	<string name="failed_op">ni uspelo</string>
-	<string name="converting_names">Pretvarjanje domačih/angleških imen …</string>
+	<string name="loading_poi_obj">Nalaganje podatkov POI …</string>
+	<string name="auth_failed">Pooblastitev je spodletela</string>
+	<string name="failed_op">spodletelo</string>
+	<string name="converting_names">Pretvarjanje izvornih/angleških imen …</string>
 	<string name="loading_streets_buildings">Nalaganje ulic/zgradb …</string>
 	<string name="loading_postcodes">Nalaganje poštnih številk …</string>
 	<string name="loading_streets">Nalaganje ulic …</string>
 	<string name="loading_cities">Nalaganje mest …</string>
 	
 	<string name="poi">Točke POI</string>
-	<string name="error_occurred_saving_gpx">Napaka med shranjevanjem GPX-a</string>
-	<string name="error_calculating_route">Napaka pri izračunu poti</string>
-	<string name="error_calculating_route_occured">Zgodila se je napaka pri izračunu poti</string>
+	<string name="error_occurred_saving_gpx">Napaka med shranjevanjem sledi GPX</string>
+	<string name="error_calculating_route">Napaka izračunavanja poti</string>
+	<string name="error_calculating_route_occured">Prišlo je do napake med izračunavanjem poti</string>
 	<string name="empty_route_calculated">Napaka: izračunana pot je prazna</string>					
 	<string name="new_route_calculated_dist">Izračunana nova pot, razdalja</string>
 	<string name="arrived_at_destination">Prispeli ste na cilj</string>
-	<string name="invalid_locations">Koordinate so neveljavne!</string>
-	<string name="go_back_to_osmand">Pojdi nazaj na OsmAnd zemljevid</string>
+	<string name="invalid_locations">Koordinate niso veljavne!</string>
+	<string name="go_back_to_osmand">Pojdi nazaj na zemljevid OsmAnd</string>
 	<string name="loading_data">Nalaganje podatkov …</string>
-	<string name="reading_indexes">Branje lokalnih podatkov …</string>
-	<string name="saving_gpx_tracks">Shranjevanje GPX sledi na SD kartico …</string>
+	<string name="reading_indexes">Nalaganje krajevnih podatkov …</string>
+	<string name="saving_gpx_tracks">Poteka shranjevanje sledi GPX na kartico SD …</string>
 	<string name="finished_task">Končano</string>
 	
 	
 	
 	<string name="use_online_routing_descr">Uporabi internet za izračun poti</string>
 	<string name="use_online_routing">Uporabi spletno navigacijo</string>
-	<string name="osm_settings_descr">Določi nastavitve Openstreetmap.org (OSM), ki so zahtevane za pošiljanje na OSM</string>
+	<string name="osm_settings_descr">Določi nastavitve Openstreetmap.org (OSM), ki so zahtevane za pošiljanje podatkov na strežnik</string>
 	<string name="data_settings_descr">Določi jezik, prejmi/ponovno naloži podatke</string>
 	<string name="data_settings">Podatki</string>
 	
 	<string name="update_tile">Posodobi zemljevid</string>
-	<string name="reload_tile">Ponovno naloži košček zemljevida</string>
+	<string name="reload_tile">Ponovno naloži predmet zemljevida</string>
 	<string name="map_view_3d_descr">Omogoči 3D pogled zemljevida</string>
 	<string name="map_view_3d">3D pogled zemljevida</string>
-	<string name="map_tile_source_descr">Izberite vir spletnih ali predpomnjenih delčkov zemljevida</string>
-	<string name="map_tile_source">Vir koščkov zemljevida</string>
+	<string name="map_tile_source_descr">Izberite vir spletnih ali predpomnjenih ploščic zemljevida</string>
+	<string name="map_tile_source">Vir ploščic zemljevida</string>
 	<string name="map_source">Vir zemljevida</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:\n\t- *Možnost dodajanja vstavkov*
@@ -1211,13 +1211,13 @@
 	<string name="av_camera_focus">Vrsta ostrenja kamere</string>
 	<string name="av_camera_focus_descr">Izberite vrsto ostrenja vgrajene kamere</string>
 	<string name="av_camera_focus_auto">Samodejno ostrenje</string>
-	<string name="av_camera_focus_hiperfocal">Hiperfokalno ostrenje</string>
+	<string name="av_camera_focus_hiperfocal">Daljinsko ostrenje</string>
 	<string name="av_camera_focus_edof">Povečana globinska ostrina (EDOF)</string>
 	<string name="av_camera_focus_infinity">Ostrenje je nastavljeno na neskončno</string>
 	<string name="av_camera_focus_macro">Makro (close-up) način ostrenja</string>
-	<string name="av_camera_focus_continuous">Kamera nenehno poskuša ostriti</string>
+	<string name="av_camera_focus_continuous">Nenehno ostrenje</string>
 	<string name="av_photo_play_sound">Predvajaj zvok pri slikanju</string>
-	<string name="av_photo_play_sound_descr">Izberite ali naj se predvaja zvok ob fotografiranju</string>
+	<string name="av_photo_play_sound_descr">Ali naj se med fotografiranjem predvaja zvok</string>
 
 	
     <string name="speak_speed_limit">Najavi omejitve hitrosti</string>
@@ -1235,7 +1235,7 @@
     <string name="route_to">Pot do:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Pot od:</string>
-    <string name="osb_author_dialog_password">OSM geslo (neobvezno)</string>
+    <string name="osb_author_dialog_password">Geslo OSM (neobvezno)</string>
         
     
     <string name="announce_gpx_waypoints">Najavljanje vmesnih točk GPX</string>
@@ -1402,7 +1402,7 @@
 	<string name="interrupt_music">Prekini predvajanje glasbe</string>
 	<string name="share_route_as_gpx">Objavi pot kot datoteko GPX</string>
 	<string name="share_route_subject">Objavi pot preko spletišča OsmAnd</string>
-	<string name="navigation_intent_invalid">Neveljavna oblika: %s</string>
+	<string name="navigation_intent_invalid">Neveljaven zapis: %s</string>
 <string name="tip_recent_changes_1_7_1_t">"Spremembe v 1.7:
 \n\t* POMEMBNO: omogočena je le podpora za zemljevide, objavljene po februarju 2014.\n\t* Popolnoma posodobljeno določanje poti (hitro in natančno)\n\t* Nov vmesnik za določanja poti (bolj intuitiven in enostavneje nastavljiv)\n\t** OPOMBA: Dostop do poti GPX je sedaj mogoče preko gumba nastavitev poti\n\t* Samodejno skrivanje gumbov v načinu navigacije\n\t* Izračunavanje poti brez povezave do prve točke GPX (možnost \'določi celotno sled\')\n\t* Dejavna simulacija v tunelih in predorih\n\t* Mnogo manjših popravkov vmesnika in načina uporabe programa\n\t* Nastavitev dostopnosti hitrosti govora "</string>
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
@@ -1858,4 +1858,5 @@
 \n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
 \n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
 	<string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
+	<string name="plugin_nautical_descr">"Ta vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov. "</string>
 	</resources>
