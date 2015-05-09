@@ -271,7 +271,7 @@
 	<string name="add_favorite_dialog_default_favourite_name">مفضلة</string>
 	<string name="shared_string_apply">تطبق</string>
 	<string name="shared_string_add">إضافة</string>
-	<string name="shared_string_no">ليس</string>
+	<string name="shared_string_no">لا</string>
 	<string name="shared_string_yes">نعم</string>
 	<string name="shared_string_cancel">إلغاء</string>
 	<string name="context_menu_item_update_map">تحديث الخريطة</string>
@@ -388,7 +388,7 @@
     <string name="local_osm_changes_backup">نسخ الاحتياطي كتغيير OSM</string>
     <string name="files_limit">%1$d ملف بقى</string>
     
-    <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والتنقل في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
+    <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين التتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر إيقاظ دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين لحساب المسارات بدقة دون أخطاء. لا يزال محدود المسافة وبطيء.</string>
     <string name="recording_photo_description">صورة %1$s %2$s</string>
     <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة المسارات و الملاحظات الصوتية والمرئية مع حسابك في دروب بوكس.</string>
@@ -1080,7 +1080,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="choose_auto_follow_route_descr">الوقت حتى عرض خريطة بالتزامن مع الموضع الحالي</string>
 	<string name="auto_follow_route_never">أبدا (اضغط \'ذهاب\' لتبدأ التوجيه يدويا)</string>
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
-	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء التنقل.</string>
+	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء الملاحة.</string>
 	<string name="auto_follow_location_enabled">توسيط عرض الخريطة تلقائيا مفعل.</string>
 	<string name="pref_vector_rendering">خيارات محددةناقلات العارض</string>
 	<string name="pref_overlay">غطاء/بطانة</string>
@@ -1208,7 +1208,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="voice_not_use">لا تستخدم</string>
 	
 	<string name="installing_new_resources">يثبت البيانات الجديدة…</string>
-	<string name="internet_connection_required_for_online_route">خدمة التنقل على الانترنت محدّدة ولكن لا اتصال متاح بالإنترنت.</string>
+	<string name="internet_connection_required_for_online_route">خدمة الملاحة على الانترنت محدّدة ولكن لا اتصال متاح بالإنترنت.</string>
 	<string name="tts_language_not_supported_title">لغة غير مدعومة</string>
 	<string name="tts_language_not_supported">اللغة المحددة غير مدعومة من قبل محرك أندرويد لتحويل النص إلى كلام (TTS). هل تريد البحث عن محركات أخرى في السوق؟ إذا لم يكن، ستُستخدم اللغة السابقة في المحرك.</string>
 	<string name="tts_missing_language_data_title">البيانات ناقصة</string>
@@ -1473,7 +1473,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="navigate_point_northing">نحو الشمال</string>
     <string name="home_button">البداية</string>
     <string name="agps_data_last_downloaded">آخر ما تحميله من بيانات A-GPS: %1$s</string>
-    <string name="welcome_text">OsmAnd يوفر تصفح خرائط عالمي بدون اتصال، وكذلك تنقل عالمي بدون اتصال!</string>
+    <string name="welcome_text">OsmAnd يوفر تصفح خرائط عالمي بدون اتصال، وكذلك ملاحة عالمية بدون اتصال!</string>
 	<string name="welcome_header">أهلا</string>
     <string name="current_route">الطريق الحالي</string>
     <string name="mark_to_delete">اختر للحذف</string>
@@ -1488,7 +1488,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="simulate_your_location">محاكاة الموقع الخاص بك</string>
     <string name="short_location_on_map">العرض %1$s\nالطول %2$s</string>
     <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى</string>
-    <string name="routing_settings_2">إعدادات التنقل</string>
+    <string name="routing_settings_2">إعدادات الملاحة</string>
     <string name="general_settings_2">إعدادات عامة</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">موافق</string>
@@ -1548,7 +1548,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_currently_recording_track">المسار الجاري تسجيله</string>
 	<string name="record_plugin_name">تسجيل الرحلة</string>
 	<string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل لتسجيل المسار العام (ممكن عن طريق ويدجت تسجيل GPX على الخريطة)</string>
-	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء التنقل</string>
+	<string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
 	<string name="voice">صوت مسج</string>
 	<string name="get_directions">الاتجاهات</string>
 	<string name="show_point_options">استخدام الموقع…</string>
@@ -1594,7 +1594,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="proxy_pref_descr">إعداد اتصال بروكسي إنترنت</string>
     <string name="settings_privacy">الخصوصية</string>
     <string name="points">نقاط</string>
-	<string name="navigation_over_track">بدء التنقل على طول المسار؟</string>
+	<string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
 	<string name="avoid_roads_msg">يمكنك تشغيل مسار بديل عن طريق تحديد طرق لتجنبها</string>
 	<string name="rendering_attr_roadStyle_name">نمط الطريق</string>
     <string name="rendering_value__name">الافتراضي</string>
@@ -1655,10 +1655,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="enable_sleep_mode">تمكين وضع السكون لتحديد المواقع</string>
 	<string name="save_track_to_gpx_globally">سجل المسار إلى ملف GPX</string>
 	<string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن</string>
-	<string name="save_track_to_gpx">سجل المسار إلى ملف GPX أثناء التنقل</string>
-	<string name="save_track_to_gpx_descrp">سيتم حفظ المسارات إلى مجلد المسارات أثناء التنقل</string>
+	<string name="save_track_to_gpx">سجل المسار إلى ملف GPX أثناء الملاحة</string>
+	<string name="save_track_to_gpx_descrp">سيتم حفظ المسارات إلى مجلد المسارات أثناء الملاحة</string>
 	<string name="save_track_interval_globally">الفاصل الزمني للتسجيل</string>
-	<string name="save_track_interval">"الفاصل الزمني للتسجيل  أثناء التنقل"</string>
+	<string name="save_track_interval">"الفاصل الزمني للتسجيل  أثناء الملاحة"</string>
 	<string name="voice_provider_descr">تحديد التوجيه الصوتي للتنقل</string>
 	<string name="voice_provider">التوجيه الصوتي</string>
 	
@@ -1678,8 +1678,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_coloredBuildings_name">تلوين المباني حسب النوع</string>
     <string name="osmo_invite">دعوة…</string>
     <string name="osmo_specify_tracker_id">الرجاء تحديد معرف</string>
-    <string name="continue_navigation">مواصلة التنقل</string>
-    <string name="pause_navigation">توقيف التنقل مؤقتا</string>
+    <string name="continue_navigation">مواصلة الملاحة</string>
+    <string name="pause_navigation">توقيف الملاحة مؤقتا</string>
  	<string name="keep_navigation_service">البقاء</string>
 	<string name="gps_wake_up_timer">الفاصل الزمني لإيقاظ GPS</string>
 	<string name="map_preferred_locale">لغة الخريطة المفضلة</string>
@@ -1706,7 +1706,12 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="gpx_split_interval">فاصل التقسيم</string>
     <string name="sort_by_distance">ترتيب حسب المسافة</string>
     <string name="sort_by_name">ترتيب حسب الاسم</string>
-    <string name="show_zoom_buttons_navigation_descr">"عرض  أزرار التقريب أثناء التنقل"</string>
+    <string name="show_zoom_buttons_navigation_descr">"عرض  أزرار التقريب أثناء الملاحة"</string>
     <string name="select_destination_and_intermediate_points">حدد نقاط الطريق</string>
     <string name="gpx_wpt">إحداثية</string>
+    <string name="rendering_attr_hideHouseNumbers_name">إخفاء أرقام البيوت</string>
+    <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر فوق \"نعم\" فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
+	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
+   	<string name="local_osm_changes_upload_all_confirm">"أنت ستقوم برفع تغييرات  %1$d  إلى OSM. هل أنت متأكد؟"</string>
+    <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق</string>
     </resources>
