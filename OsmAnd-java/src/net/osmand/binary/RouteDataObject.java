@@ -187,63 +187,33 @@ public class RouteDataObject {
 	}
 	
 	public static float parseLength(String v, float def) {
-		// Supported formats:
-		// 10 m
-		// 10m
-		// 14'10"
-		// 14.5'
-		// 15ft
-		// Even values with any more characters after these formats are rejected, e.g. (14'10"x) or (10 metres).
+		float f = 0;
+		// 14'10" 14 - inches, 10 feet
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
-			float f = Float.parseFloat(v.substring(0, i));
-			if (i == v.Length()) {
-				// Value with no unit means meters. Done.
-				return f;
-			} else {
-				if (v.charAt(i) == " ") {
-					i++;
-				}
-				if (v.charAt(i) == "m") {
-					// Meters, no conversion needed, done.
-					if (i == v.Length()) {
-						return f;
-					} else {
-						return def;
+			f += Float.parseFloat(v.substring(0, i));
+			String pref = v.substring(i, v.length()).trim();
+			float add = 0;
+			for(int ik = 0; ik < pref.length(); ik++) {
+				if(Character.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
+					int first = Algorithms.findFirstNumberEndIndex(pref.substring(ik));
+					if(first != -1) {
+						add = parseLength(pref.substring(ik), 0);
+						pref = pref.substring(0, ik);
 					}
-				}
-				if (v.charAt(i) == "'") {
-					// Convert feet to meters.
-					f *= 0.3048;
-					i++;
-				} else if (v.charAt(i) == "f" && i < v.Length() && v.charAt(i+1) != "t") {
-					// 'ft' is a discouraged unit per the wiki, but we know what it means.
-					// Convert feet to meters.
-					f *= 0.3048;
-					// When 'ft' is used, no inches are expected.
-					if (i == v.Length()) {
-						return f;
-					} else {
-						return def;
-					}
-				}
-				if (i < v.Length()) {
-					String w = v.substring(i);
-					int j = Algorithms.findFirstNumberEndIndex(w);
-					if (j > 0 && w.charAt(0) == "\"") {
-						float g = Float.parseFloat(w.substring(0, j))
-						// Convert inches to meters.
-						f += g * 0.0254;
-						if (i + j == v.Length()) {
-							return f;
-						} else {
-							return def;
-					        }
-					}
-				} else {
-					return f;
+					break;
 				}
 			}
+			if(pref.contains("km")) {
+				f *= 1000;  
+			}
+			if(pref.contains("\"")) {
+				f *= 0.0254; 
+			} else if (pref.contains("\'") || pref.contains("ft")) {
+				// foot to meters
+				f *= 0.3048;
+			}
+			return f + add;
 		}
 		return def;
 	}
@@ -411,6 +381,27 @@ public class RouteDataObject {
 
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+	}
+	
+	private static void assertTrueLength(String vl, float exp){
+		float dest = parseLength(vl, 0);
+		if(exp != dest) {
+			System.err.println("FAIL " + vl + " " + dest);
+		} else {
+			System.out.println("OK " + vl);
+		}
+	}
+	
+	public static void main(String[] args) {
+		assertTrueLength("10 km", 10000);
+		assertTrueLength("0.01 km", 10);
+		assertTrueLength("0.01 km 10 m", 20);
+		assertTrueLength("10 m", 10);
+		assertTrueLength("10m", 10);
+		assertTrueLength("3.4 m", 3.4f);
+		assertTrueLength("14'10\"", 4.5212f);
+		assertTrueLength("14.5'", 4.4196f);
+		assertTrueLength("15ft", 4.572f);
 	}
 	
 	
