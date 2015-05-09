@@ -197,9 +197,9 @@
 	<string name="poi_charging_station">Estación de carga</string>
 	<string name="poi_vehicle_ramp">Rampa de vehículos</string>
 	<string name="poi_compressed_air">Aire comprimido</string>
-	<string name="poi_parking">Aparcamiento</string>
-	<string name="poi_motorcycle_parking">Aparcamiento de motocicletas</string>
-	<string name="poi_parking_entrance">Entrada al aparcamiento</string>
+	<string name="poi_parking">Estacionamiento</string>
+	<string name="poi_motorcycle_parking">Estacionamiento de motocicletas</string>
+	<string name="poi_parking_entrance">Entrada de estacionamiento</string>
 	<string name="poi_garages">Garajes</string>
 
 	<string name="poi_public_transport_platform">Plataforma de transporte público</string>
@@ -214,8 +214,8 @@
 	<string name="poi_railway_station">Estación de tren</string>
 	<string name="poi_railway_platform">Andén</string>
 	<string name="poi_halt">Parada de tren</string>
-	<string name="poi_railway_subway_entrance">Entrada de metro</string>
-	<string name="poi_subway_station">Estación de metro</string>
+	<string name="poi_railway_subway_entrance">Entrada de subte</string>
+	<string name="poi_subway_station">Estación de subte</string>
 	<string name="poi_railway_buffer_stop">Topera</string>
 	<string name="poi_taxi">Parada de taxi</string>
 
@@ -230,7 +230,7 @@
 	<string name="poi_lighthouse">Faro</string>
 
 	<string name="poi_bicycle_rental">Alquiler de bicicletas</string>
-	<string name="poi_bicycle_parking">Aparcamiento de bicicletas</string>
+	<string name="poi_bicycle_parking">Estacionamiento de bicicletas</string>
 
 	<string name="poi_aerialway_station">Estación de transporte elevado</string>
 	<string name="poi_aerialway_cable_car">Teleférico</string>
