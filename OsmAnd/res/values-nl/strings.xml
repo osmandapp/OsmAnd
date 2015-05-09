@@ -6,9 +6,9 @@
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
   <string name="avoid_ferries">Vermijd veerboten</string>
   <string name="avoid_in_routing_title">Vermijd…</string>
-  <string name="avoid_in_routing_descr">Wel of geen tolwegen, onverharde wegen, veerboten...</string>
+  <string name="avoid_in_routing_descr">Wel of geen tolwegen, onverharde wegen, veerboten</string>
   <string name="show_warnings_title">Toon waarschuwing…</string>
-  <string name="show_warnings_descr">Wel of geen rijstroken, snelheidslimieten, snelheidscamera\'s en verkeersdrempels...</string>
+  <string name="show_warnings_descr">Wel of geen rijstroken, snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
   <string name="map_widget_fluorescent">Fluorescerende routes</string>
   <string name="map_widget_show_ruler">Schaalaanduiding</string>
   
