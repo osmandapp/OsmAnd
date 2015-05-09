@@ -187,15 +187,63 @@ public class RouteDataObject {
 	}
 	
 	public static float parseLength(String v, float def) {
-		// 14"10' not supported
+		// Supported formats:
+		// 10 m
+		// 10m
+		// 14'10"
+		// 14.5'
+		// 15ft
+		// Even values with any more characters after these formats are rejected, e.g. (14'10"x) or (10 metres).
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
 			float f = Float.parseFloat(v.substring(0, i));
-			if (v.contains("\"") || v.contains("ft")) {
-				// foot to meters
-				f *= 0.3048;
+			if (i == v.Length()) {
+				// Value with no unit means meters. Done.
+				return f;
+			} else {
+				if (v.charAt(i) == " ") {
+					i++;
+				}
+				if (v.charAt(i) == "m") {
+					// Meters, no conversion needed, done.
+					if (i == v.Length()) {
+						return f;
+					} else {
+						return def;
+					}
+				}
+				if (v.charAt(i) == "'") {
+					// Convert feet to meters.
+					f *= 0.3048;
+					i++;
+				} else if (v.charAt(i) == "f" && i < v.Length() && v.charAt(i+1) != "t") {
+					// 'ft' is a discouraged unit per the wiki, but we know what it means.
+					// Convert feet to meters.
+					f *= 0.3048;
+					// When 'ft' is used, no inches are expected.
+					if (i == v.Length()) {
+						return f;
+					} else {
+						return def;
+					}
+				}
+				if (i < v.Length()) {
+					String w = v.substring(i);
+					int j = Algorithms.findFirstNumberEndIndex(w);
+					if (j > 0 && w.charAt(0) == "\"") {
+						float g = Float.parseFloat(w.substring(0, j))
+						// Convert inches to meters.
+						f += g * 0.0254;
+						if (i + j == v.Length()) {
+							return f;
+						} else {
+							return def;
+					        }
+					}
+				} else {
+					return f;
+				}
 			}
-			return f;
 		}
 		return def;
 	}
