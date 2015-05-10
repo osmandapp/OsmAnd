@@ -55,11 +55,11 @@
     <string name="download_regular_maps">Almindelige kort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
+	<string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
 	
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale grænser (admin niveau 5-9)</string>
     
     
     <string name="tip_altitude_offset">Højdekorrektion</string>
