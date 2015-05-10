@@ -23,6 +23,7 @@
 			android:id="@+id/Name"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
+			android:inputType="textCapSentences"
 			android:selectAllOnFocus="true"/>
 
 
@@ -49,7 +50,7 @@
 			android:id="@+id/descr"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:inputType="textMultiLine" 
+			android:inputType="textMultiLine|textCapSentences" 
 			android:minLines="2"
 			 android:scrollbars="vertical"
 			android:selectAllOnFocus="true"/>
