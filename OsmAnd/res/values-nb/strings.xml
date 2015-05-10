@@ -1306,4 +1306,10 @@
     <string name="storage_directory">Kartlagring</string>
     <string name="shared_string_copy">Kopier</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
-    </resources>
+    <string name="shared_string_release">Utgitt</string>
+	<string name="local_index_items_backuped">%1$d av %2$d element(er) vellykket deaktivert.</string>
+	<string name="local_index_items_deleted">%1$d av %2$d element(er) vellykket slettet.</string>
+	<string name="local_index_items_restored">%1$d av %2$d element(er) vellykket aktivert.</string>
+	<string name="local_index_no_items_to_do">Aksjon %1$s: Ingen elementer finnes</string>
+	<string name="local_index_action_do">%1$s: %2$s element(er). Fortsette?</string>
+	</resources>
