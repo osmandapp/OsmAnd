@@ -487,7 +487,7 @@
 	<string name="poi_pier">Muelle</string>
 	<string name="poi_mineshaft">Pozo de mina</string>
 	<string name="poi_artwork">Obra de arte</string>
-	<string name="poi_adit">Boca de mina</string>
+	<string name="poi_adit">Bocamina</string>
 	<string name="poi_petroleum_well">Pozo de petróleo</string>
 	<string name="poi_windmill">Molino de viento</string>
 	<string name="poi_salt_pond">Laguna salada</string>
