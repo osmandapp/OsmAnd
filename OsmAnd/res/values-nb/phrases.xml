@@ -170,4 +170,9 @@
 	<string name="poi_confectionery">Konditori</string>
 	<string name="poi_fast_food">Hurtigmat</string>
 	<string name="poi_food_court">Mathall</string>
+	<string name="poi_air_transport">Lufttransport</string>
+		<string name="poi_water_transport">Vanntransport</string>
+		<string name="poi_bicycle_transport">Sykkeltransport</string>
+		<string name="poi_aerialway_transport">Heistransport</string>
+	<string name="poi_piste_sleigh">Slede</string>
 	</resources>
