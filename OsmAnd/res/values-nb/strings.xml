@@ -1312,4 +1312,23 @@
 	<string name="local_index_items_restored">%1$d av %2$d element(er) vellykket aktivert.</string>
 	<string name="local_index_no_items_to_do">Aksjon %1$s: Ingen elementer finnes</string>
 	<string name="local_index_action_do">%1$s: %2$s element(er). Fortsette?</string>
-	</resources>
+	<string name="shared_string_audio">Lyd</string>
+	<string name="index_name_netherlands">Europa - Nederland</string>
+	<string name="user_name">Ditt OSM-brukernavn</string>
+	<string name="user_password">Ditt OSM-passord</string>
+	<string name="tip_osm_improve">Forbedre OSM-data</string>
+	<string name="local_index_items_uploaded">%1$d av %2$d element(er) vellykket lastet opp.</string>
+	<string name="tip_recent_changes">Siste endringer</string>
+	<string name="installing_new_resources">Pakker ut nye data…</string>
+	<string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
+	<string name="poi_context_menu_website">Vis nettside til interessepunkt</string>
+	<string name="transport_context_menu">Søk etter transport ved stoppested</string>
+	<string name="use_trackball_descr">Bruk styrekule til å bevege kartet</string>
+	<string name="use_trackball">Bruk styrekule</string>
+	<string name="reading_indexes">Leser lokale data…</string>
+	<string name="osb_author_dialog_password">OSM-passord (valgfritt)</string>
+	<string name="osb_comment_dialog_author">Forfatternavn</string>
+	<string name="av_camera_focus_edof">Utvidet dybdeskarphet (EDOF)</string>
+	<string name="av_camera_pic_size">Bildestørrelse til kamera</string>
+	<string name="av_camera_pic_size_descr">Velg bildestørrelse til internt kamera</string>
+    </resources>
