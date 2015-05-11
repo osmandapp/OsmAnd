@@ -905,7 +905,7 @@
   <string name="osmand_parking_warning_text">Er staat nog een notitie voor het ophalen van de auto in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
   <string name="osmand_parking_delete_confirm">De locatie van de geparkeerde auto verwijderen?</string>
-  <string name="osmand_parking_delete">Verwijder de parkeer-markering</string>
+  <string name="osmand_parking_delete">Verwijder parkeerlocatie</string>
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
   <string name="osmand_parking_no_lim_text">Zonder tijdslimiet</string>
@@ -1989,7 +1989,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_pedestrian">Meld oversteekplaatsen</string>
     
 	<string name="parking_place">Parkeerplaats</string>
-    <string name="remove_the_tag">VERWIJDER DE TAG</string>
+    <string name="remove_the_tag">Verwijder de parkeerlocatie</string>
     <string name="gps_status">GPS-status</string>
     <string name="version_settings_descr">Nightly builds downloaden</string>
     <string name="version_settings">Builds</string>
