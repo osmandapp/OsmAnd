@@ -463,7 +463,7 @@
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Turystyka</string>
 	<string name="poi_entertainment">Wypoczynek</string>
-	<string name="poi_sustenance">Jedzenie</string>
+	<string name="poi_sustenance">Gastronomia</string>
 	<string name="poi_finance">Finanse</string>
 	<string name="poi_natural">Natura</string>
 	<string name="poi_osmwiki">Wikipedia</string>
@@ -682,4 +682,13 @@
 	<string name="poi_winery">Winiarnia</string>
 
 	<string name="poi_piste">Stok</string>
+	<string name="poi_money_lender">Kredytodawca</string>
+	<string name="poi_payment_terminal">Terminal płatniczy</string>
+	<string name="poi_biergarten">Pijalnia piwa</string>
+	<string name="poi_food_court">Punkt gastronomiczny</string>
+	<string name="poi_cape">Przylądek</string>
+	<string name="poi_cave_entrance">Wejście do jaskini</string>
+	<string name="poi_rapids">Katarakta</string>
+	<string name="poi_stone">Głaz</string>
+	<string name="poi_ridge">Grzbiet górski</string>
 	</resources>
