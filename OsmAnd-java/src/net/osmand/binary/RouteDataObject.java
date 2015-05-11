@@ -192,26 +192,37 @@ public class RouteDataObject {
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
 			f += Float.parseFloat(v.substring(0, i));
-			String pref = v.substring(i, v.length()).trim();
+			String unit = v.substring(i).trim();
 			float add = 0;
-			for(int ik = 0; ik < pref.length(); ik++) {
-				if(Character.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
-					int first = Algorithms.findFirstNumberEndIndex(pref.substring(ik));
-					if(first != -1) {
-						add = parseLength(pref.substring(ik), 0);
-						pref = pref.substring(0, ik);
+			for (int ik = 0; ik < unit.length(); ik++) {
+				// search if there is next number after the unit
+				if (Character.isDigit(unit.charAt(ik)) || unit.charAt(ik) == '.' || unit.charAt(ik) == '-') {
+					int first = Algorithms.findFirstNumberEndIndex(unit.substring(ik));
+					if (first != -1) {
+						// if so, try to parse the next block with sub unit
+						add = parseLength(unit.substring(ik), 0);
+						if (add == def) {
+							// If a sub unit couldn't be parsed, fail the whole expression
+							return def;
+						}
+						unit = unit.substring(0, ik).trim();
 					}
 					break;
 				}
 			}
-			if(pref.contains("km")) {
+			if (unit.isEmpty() || unit.equals("m") || ) {
+				// meters
+			} else if (unit.equals("km")) {
 				f *= 1000;  
-			}
-			if(pref.contains("\"")) {
+			} else if (unit.equals("\"") || unit.equals("in")) {
+				// inch to meters
 				f *= 0.0254; 
-			} else if (pref.contains("\'") || pref.contains("ft")) {
+			} else if (unit.equals("\'") || unit.equals("ft")) {
 				// foot to meters
 				f *= 0.3048;
+			} else {
+				// unknown unit, bail out.
+				return def;
 			}
 			return f + add;
 		}
@@ -384,7 +395,7 @@ public class RouteDataObject {
 	}
 	
 	private static void assertTrueLength(String vl, float exp){
-		float dest = parseLength(vl, 0);
+		float dest = parseLength(vl, -1);
 		if(exp != dest) {
 			System.err.println("FAIL " + vl + " " + dest);
 		} else {
@@ -393,15 +404,31 @@ public class RouteDataObject {
 	}
 	
 	public static void main(String[] args) {
+		// our parsing is a bit more relaxed than what the wiki allows
 		assertTrueLength("10 km", 10000);
 		assertTrueLength("0.01 km", 10);
 		assertTrueLength("0.01 km 10 m", 20);
 		assertTrueLength("10 m", 10);
 		assertTrueLength("10m", 10);
 		assertTrueLength("3.4 m", 3.4f);
+		assertTrueLength("3.40 m", 3.4f);
+		assertTrueLength("10 m 10m", 20);
 		assertTrueLength("14'10\"", 4.5212f);
 		assertTrueLength("14.5'", 4.4196f);
+		assertTrueLength("14.5 ft", 4.4196f);
+		assertTrueLength("14'0\"", 4.2672f);
 		assertTrueLength("15ft", 4.572f);
+		assertTrueLength("15 ft 1 in", 4.5974f);
+		
+		float badValue = -1;
+		assertTrueLength("14 mile", badValue);
+		assertTrueLength("14 cm", badValue);
+		assertTrueLength("4.1 metres", badValue);
+		assertTrueLength("m 4.1", badValue);
+		assertTrueLength("none", badValue);
+		assertTrueLength("14'0''", badValue);
+		assertTrueLength("14 feet", badValue);
+		assertTrueLength("1F4 m", badValue);
 	}
 	
 	
