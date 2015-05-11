@@ -1791,7 +1791,7 @@
     <string name="everything_up_to_date">Alt er opdateret</string>
     <string name="no_internet_connection">Ikke muligt at hente, kontroller internetforbindelsen.</string>
     <string name="download_tab_downloads">Hent</string>
-    <string name="download_tab_updates">Opdater</string>
+    <string name="download_tab_updates">Opdateringer</string>
     <string name="download_tab_local">Lokal</string>
 	<string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordlig</string>
