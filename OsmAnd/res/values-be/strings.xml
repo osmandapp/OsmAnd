@@ -461,7 +461,7 @@
 	<string name="map_online_data">Сеціўныя і растравыя мапы</string>
 	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cьцягнуць і захоўваць фрагмэнты на картцы SD)</string>
 	<string name="online_map_settings">Сеціўныя мапы</string>
-	<string name="online_map_settings_descr">Настройка крыніц сеціўных або кэшаваных растравых мапаў</string>
+	<string name="online_map_settings_descr">Наладзьце крыніцы сеціўных або кэшаваных растравых мапаў</string>
 	
 	
 	<string name="osmand_rastermaps_plugin_description">"З дапамогай гэтага модуля вы можаце атрымаць доступ да мноства відаў інтэрнэт мапаў (тайлавых або растравых), ад папярэдне створаных фрагмэнтаў OpenStreetMap (Mapnik) да спадарожнікавых здымкаў і слаёў спэцыяльнага прызначэньня, такіх як мапы надвор\'я, кліматычныя мапы, геалагічных мапы, пласты зацямненьня вышынь і г.д.\n\nЛюбая з гэтых мапаў можа быць выкарыстана ў якасьці асноўнай (базавай) мапы для адлюстраваньня на экране OsmAnd або ў выглядзе накладаньня / падкладкі да іншай базавай мапы (звычайнай аўтаномнай мапы OsmAnd). Для таго каб зрабіць любую падкладку больш бачнай, некаторыя элемэнты вэктарнай мапы OsmAnd могуць быць па жаданьні лёгка схаваныя праз мэню \"Налады мапы\".\n\nТайлавыя мапы могуць быць атрыманы непасрэдна з дапамогай онлайн-крыніц або могуць быць падрыхтаваныя для выкарыстаньня ў аўтаномным рэжыме (і ўручную скапіяваныя ў тэчку дадзеных OsmAnd) як база дадзеных SQLite, якая можа быць атрымана з дапамогай розных інструмэнтаў падрыхтоўкі мапаў іншых вытворцаў. "</string>
@@ -824,7 +824,7 @@
 	<string name="system_locale">Сістэмная</string>
 	<string name="preferred_locale_descr">Выбар мовы інтэрфэйсу (перазапусьціце OsmAnd пасьля зьмены)</string>
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
-	<string name="incomplete_locale">няскончаны</string>
+	<string name="incomplete_locale">няпоўны</string>
 	<string name="tip_map_switch">Абраць крыніцу мапы</string>
 	<string name="tip_app_mode">Профіль</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd падтрымлівае розныя профілі для розных рэжымаў. ↵
@@ -1709,7 +1709,7 @@
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
 	<string name="osmo_no_connection_msg">Сэрвіс OsMo не даступны:\n- Праверце злучэньне;\n- Праверце налады;\n- Праверце наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Ананімнаму карыстальніку недаступныя:\n- Стварэньне груп;\n- Сінхранізацыя груп і прыстасаваньняў з серверам;\n- Кіраваньне групамі і прыстасаваньнямі ў асабістым кабінеце.</string>
-    <string name="configure_map">Настройка мапы</string>
+    <string name="configure_map">Налады мапы</string>
     <string name="search_radius_proximity">Паблізу ад</string>
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
