@@ -1833,7 +1833,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="gpx_monitoring_start">Rozpocznij rejestrowanie GPX</string>
 	<string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie GPX</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
-    <string name="rendering_attr_hideBuildings_name">Ukrycie budynków</string>
+    <string name="rendering_attr_hideBuildings_name">Ukrywanie budynków</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ukryj trasy niedostępne dla aut</string>
     <string name="rendering_attr_hideText_name">Ukryj opisy</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ukryj drewna i zarośla</string>
@@ -2091,7 +2091,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_places">Miejsca</string>
 	<string name="shared_string_search">Wyszukaj</string>
 	<string name="shared_string_open">Otwórz</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Asystent OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asystent mapowanie OSM</string>
 	<string name="shared_string_manage">Zarządzaj</string>
 	<string name="shared_string_edit">Edytuj</string>
 	<string name="filter_poi_hint">Filtruj po nazwie</string>
@@ -2109,4 +2109,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="storage_directory">Przechowywanie map</string>
     <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
+    <string name="storage_directory_multiuser">Pamięć wieloużytkownikowa</string>
     </resources>
