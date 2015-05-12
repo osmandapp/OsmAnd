@@ -1923,7 +1923,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="rendering_category_routes">Trasy</string>
     <string name="rendering_category_details">Szczegóły</string>
     <string name="rendering_category_transport">Transport</string>
-    <string name="rendering_category_others">Inne atrybuty</string>
+    <string name="rendering_category_others">Inne atrybuty mapy</string>
     <string name="map_widget_appearance_rem">Pozostałe elementy</string>
     <string name="map_widget_top">Pasek stanu</string>
 	<string name="map_widget_right">Prawy panel</string>
