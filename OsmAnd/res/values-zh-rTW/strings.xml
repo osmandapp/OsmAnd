@@ -12,21 +12,21 @@
 	<string name="gps_not_available">請在設定中啟用 GPS</string>
 	<string name="map_widget_monitoring_services">日誌記錄服務</string>
 	<string name="no_route">沒有路線</string>
-	<string name="delete_target_point">移除中途點</string>
-	<string name="target_point">中途點 %1$s</string>
-    <string name="intermediate_point">中途點 %1$s</string>
+	<string name="delete_target_point">移除航點</string>
+	<string name="target_point">航點 %1$s</string>
+    <string name="intermediate_point">航點 %1$s</string>
     
-    <string name="context_menu_item_last_intermediate_point">增為最後一個中途點</string>
-    <string name="context_menu_item_first_intermediate_point">增為第一個中途點</string>
-    <string name="add_as_last_destination_point">增為最後一個中途點</string>
-    <string name="add_as_first_destination_point">增為第一個中途點</string>
+    <string name="context_menu_item_last_intermediate_point">增為最後一個航點</string>
+    <string name="context_menu_item_first_intermediate_point">增為第一個航點</string>
+    <string name="add_as_last_destination_point">增為最後一個航點</string>
+    <string name="add_as_first_destination_point">增為第一個航點</string>
     <string name="replace_destination_point">替換目的地標點</string>
     <string name="new_destination_point_dialog">您已經有設定了目的地標點。</string>
-    <string name="target_points">中途點</string>
-    <string name="intermediate_point_too_far">中途點 %1$s 離最近的道路太遠。</string>
-    <string name="arrived_at_intermediate_point">您已經來到您的中途點</string>
-    <string name="context_menu_item_intermediate_point">增為中途點</string>
-    <string name="map_widget_intermediate_distance">中途點</string>
+    <string name="target_points">航點</string>
+    <string name="intermediate_point_too_far">航點 %1$s 離最近的道路太遠。</string>
+    <string name="arrived_at_intermediate_point">您已經抵達您的航點</string>
+    <string name="context_menu_item_intermediate_point">增為航點</string>
+    <string name="map_widget_intermediate_distance">航點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
     <string name="btn_add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
@@ -163,7 +163,7 @@
 	<string name="route_kl">靠左行走</string>
 	<string name="route_kr">靠右行走</string>
 	<string name="rendering_attr_noPolygons_description">讓地圖上所有的陸地區域特徵具透明性</string>
-	<string name="rendering_attr_noPolygons_name">隱藏多角形</string>
+	<string name="rendering_attr_noPolygons_name">隱藏多邊形</string>
 	<string name="rendering_attr_appMode_name">繪製模式</string>
 	<string name="rendering_attr_appMode_description">為地圖最佳化</string>
 	<string name="rendering_attr_contourLines_description">顯示縮放比級別(需要輪廓資料)：</string>
@@ -557,9 +557,9 @@
 	<string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent 連結 %2$s</string>
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
-	<string name="add_waypoint_dialog_added">GPX 中途點\'\'{0}\'\'已成功加入</string>
-	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 軌跡</string>
-	<string name="context_menu_item_add_waypoint">增加 GPX 中途點</string>
+	<string name="add_waypoint_dialog_added">GPX 航點 \'\'{0}\'\' 已成功加入</string>
+	<string name="add_waypoint_dialog_title">增加航點到已記錄的 GPX 軌跡</string>
+	<string name="context_menu_item_add_waypoint">增加 GPX 航點</string>
 	<string name="amenity_type_administrative">行政機關</string>
 	<string name="amenity_type_barrier">路障</string>
 	<string name="amenity_type_education">教育</string>
@@ -965,7 +965,7 @@
     <string name="intermediate_items_sort_by_distance">排序(送貨到門)</string>
     <string name="plugin_distance_point_time">時間</string>
     <string name="plugin_distance_point_speed">速度</string>
-    <string name="plugin_distance_point_ele">標高</string>
+    <string name="plugin_distance_point_ele">海拔</string>
     <string name="gpx_file_name">GPX 檔案名稱</string>
     <string name="gpx_saved_sucessfully">GPX 檔案已完全成功儲存到{0}</string>
     <string name="osmand_distance_planning_plugin_description">這個外掛元件提供了地圖螢幕小工具，允許在地圖上透過點觸建立路徑或是使用，又或修改現有的 GPX 檔案，來規劃行程和測量兩點之間的距離。其結果可以存為 GPX 檔案，以後可以用於導航。</string>
@@ -1017,13 +1017,13 @@
     <string name="prefer_in_routing_title">優先權…</string>
 	<string name="prefer_motorways">高速公路優先權</string>
 	<string name="download_hillshade_item">地形陰影</string>
-    <string name="download_hillshade_maps">地形陰影覆疊</string>
+    <string name="download_hillshade_maps">地形陰影覆疊層</string>
     
     
     <string name="local_indexes_cat_srtm">等高線資料</string>
     <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定要停止導航嗎？</string>
-    <string name="clear_dest_confirm">您確定想要清除您的目的地標點(含中途點)？</string>
+    <string name="clear_dest_confirm">您確定想要清除您的目的地標點(含航點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
@@ -1043,15 +1043,14 @@
     <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊輸出格式</string>
     <string name="av_video_format">視訊輸出格式</string>
-    <string name="tip_recent_changes_1_4_t">在1.4的變更：
-	\n\t* 排列中途點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)
-	\n\t* 按名稱查尋街道(在附近一帶)
-	\n\t* 規劃模式外掛元件(載入/編輯/儲存 GPX 軌跡)
-	\n\t* 新的下載螢幕畫面(在背景下載)
-	\n\t* 支援 GPX 子檔案夾(組成您的 GPX 軌跡)
-	\n\t* 刪除 SRTM 檔案
-	\n\t* 支援 OSM 注解 
-    </string>
+    <string name="tip_recent_changes_1_4_t">"在1.4的變更：
+\n\t* 排列航點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)
+\n\t* 按名稱查尋街道(在附近一帶)
+\n\t* 規劃模式外掛元件(載入/編輯/儲存 GPX 軌跡)
+\n\t* 新的下載螢幕畫面(在背景下載)
+\n\t* 支援 GPX 子檔案夾(組成您的 GPX 軌跡)
+\n\t* 刪除 SRTM 檔案
+\n\t* 支援 OSM 注解 "</string>
     <string name="search_street_in_neighborhood_cities">在附近一帶的城市查尋街道</string>
     <string name="av_settings_descr">組態音訊和視訊設定</string>
     <string name="av_settings">音訊/視訊設定 </string>
@@ -1091,7 +1090,7 @@
     <string name="download_regular_maps">正常地圖</string>
     <string name="download_roads_only_maps">僅道路地圖</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">隱藏界限</string>
+	<string name="rendering_attr_noAdminboundaries_name">隱藏界線</string>
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
     
     
@@ -1127,7 +1126,7 @@
     <string name="distance_measurement_clear_route">清除所有的標點</string>
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
-	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的中途點已採取了最佳化排列。</string>
+	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的航點已採取了最佳化排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
     <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
@@ -1282,13 +1281,12 @@
 	<string name="av_camera_focus_continuous">相機連續對焦</string>
 	<string name="av_photo_play_sound">快門音效</string>
 	<string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
-<string name="tip_recent_changes_1_5_t">在1.5.0的變更：
-	\n\t* 車速限制和測速照相的語音警告
-	\n\t* 更多的語音提示能力（街道名稱通報）
-	\n\t* 高密度地圖圖示
-	\n\t* 更改很多的使用者界面
-	\n\t* 距離顯示的錯誤修正，GPX 分析器，中途點的管理，計劃小工具，OSM 上傳，HTTPS 管理
-    </string>
+<string name="tip_recent_changes_1_5_t">"在1.5.0的變更：
+\n\t* 車速限制和測速照相的語音警告
+\n\t* 更多的語音提示能力（街道名稱通報）
+\n\t* 高密度地圖圖示
+\n\t* 更改很多的使用者界面
+\n\t* 距離顯示的錯誤修正，GPX 分析器，航點的管理，計劃小工具，OSM 上傳，HTTPS 管理 "</string>
     <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
@@ -1305,7 +1303,7 @@
     <string name="speak_cameras">通報測速照相</string>
 	<string name="speak_traffic_warnings">通報交通流量警示</string>
 	<string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-	<string name="announce_gpx_waypoints">通報 GPX 中途點</string>
+	<string name="announce_gpx_waypoints">通報 GPX 航點</string>
     <string name="speak_title">通報…</string>
 	<string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
 	<string name="speak_street_names">通報街道名稱 (TTS)</string>
@@ -1368,7 +1366,7 @@
     <string name="auto_zoom_close">近距</string>
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
-    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
+    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加航點。</string>
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
@@ -1614,10 +1612,10 @@
 	<string name="gpx_info_maximum_speed">"最高速度：%1$s "</string>
 	<string name="gpx_info_avg_altitude">平均海拔：%1$s</string>
 	<string name="gpx_info_diff_altitude">海拔高度範圍：%1$s</string>
-	<string name="gpx_wpt">中途點</string>
-    <string name="gpx_info_waypoints">中途點：%1$s </string>
+	<string name="gpx_wpt">航點</string>
+    <string name="gpx_info_waypoints">"航點：%1$s "</string>
 	<string name="save_as_favorites_points">另存為我的最愛群組</string>
-    <string name="select_destination_and_intermediate_points">選擇中途點</string>
+    <string name="select_destination_and_intermediate_points">選擇航點</string>
     <string name="layer_amenity_label">標點標籤</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
@@ -1646,14 +1644,14 @@
     <string name="rendering_attr_hideText_name">隱藏文字</string>
     <string name="rendering_attr_hideWoodScrubs_name">隱藏樹木和灌樹叢</string>
     <string name="rendering_attr_buildings15zoom_name">建築物在 15 級縮放</string>
-    <string name="rendering_attr_moreDetailed_name">較多細節</string>
+    <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">隱藏存取限制</string>
     <string name="rendering_attr_showAccess_name">顯示存取限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
-    <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
+    <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     
-    <string name="rendering_attr_showCycleRoutes_name">顯示自行車道</string>
+    <string name="rendering_attr_showCycleRoutes_name">顯示自行車路線</string>
     <string name="map_preferred_locale">地圖上優先的語言</string>
     <string name="local_map_names">本地名稱</string>
     <string name="lang_sw">斯瓦希里</string>
@@ -1686,7 +1684,7 @@
 	<string name="osmo_invite">邀請…</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
-    <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
     <string name="rendering_attr_osmcTraces_name">徒步符號覆疊層</string>
     <string name="rendering_attr_alpineHiking_description">按照 SAC 比例繪製路徑</string>
     <string name="rendering_attr_osmcTraces_description">按照 OSMC 軌跡繪製路徑</string>
@@ -1695,7 +1693,7 @@
     <string name="arrival_distance_factor_normally">正常</string>
     <string name="arrival_distance_factor_late">稍遲</string>
     <string name="arrival_distance_factor_at_last">在最後一米</string>
-    <string name="rendering_attr_coloredBuildings_name">以色彩編碼區分建築物類型</string>
+    <string name="rendering_attr_coloredBuildings_name">按類型用色碼區分建築物</string>
     
 <string name="av_camera_pic_size">相機照片的大小</string>
 	<string name="av_camera_pic_size_descr">選擇內部相機照片的大小</string>
@@ -1706,7 +1704,7 @@
     <string name="rendering_value_pedestrian_name">步行</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     
-    <string name="waypoints">中途點</string>
+    <string name="waypoints">航點</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">通報附近我的最愛</string>
@@ -1718,7 +1716,7 @@
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
-    <string name="rendering_attr_publicTransportMode_name">公車、無軌電車、班車路線</string>
+    <string name="rendering_attr_publicTransportMode_name">公車、無軌電車，班車路線</string>
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
 	<string name="save_track_to_gpx_globally_descr">通常位置記錄到 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
@@ -1757,7 +1755,7 @@
 	<string name="map_widget_left">左面板</string>
 	<string name="configure_map">組態地圖</string>
     <string name="search_radius_proximity">在接近度上</string>
-    <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近中途點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
+    <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近航點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
     <string name="rendering_category_routes">導航路線</string>
     <string name="rendering_attr_trainLightrailRoutes_name">火車路線</string>
     <string name="rendering_attr_tramRoutes_name">有軌電車路線</string>
@@ -1813,7 +1811,7 @@
 	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
     <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
 	
-	<string name="rendering_attr_streetLighting_name">街道照明設備</string>
+	<string name="rendering_attr_streetLighting_name">街道照明</string>
     <string name="proxy_pref_title">代理伺服器</string>
     <string name="proxy_pref_descr">設定代理伺服器網路通信</string>
     <string name="settings_privacy">隱私</string>
@@ -1860,7 +1858,7 @@
 \n\n此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。\n\n它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。
 \n\n並提供了特別的旅遊選項，比如顯示自行車路線或登山的路線。\n\n此檢視是從我們的標準地圖所建立，不需要下載特殊的地圖。
 \n\n此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。 "</string>
-	<string name="days_behind">之後的日子</string>
+	<string name="days_behind">天前</string>
 	<string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
 	<string name="rename_failed">重新命名失敗。</string>
 	<string name="back_to_map">返回地圖</string>
@@ -1966,13 +1964,13 @@
 	<string name="shared_string_search">搜尋</string>
 	<string name="shared_string_places">地點</string>
 	<string name="shared_string_open">開啓</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM 制圖助手</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM 製圖助手</string>
 	<string name="shared_string_manage">管理</string>
 	<string name="shared_string_edit">編輯</string>
 	<string name="filter_poi_hint">依名稱篩選</string>
     <string name="search_poi_category_hint">鍵入以搜尋全部</string>
     <string name="index_name_netherlands">歐洲 - 荷蘭</string>
-	<string name="rendering_value__name">預設值</string>
+	<string name="rendering_value__name">預設</string>
     <string name="rendering_value_highContrastRoads_name">高對比道路</string>
 	<string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案，複製到新的目的地嗎？</string>
     <string name="specified_directiory_not_writeable">地圖不能建立在指定的目錄</string>
