@@ -625,4 +625,8 @@
 	<string name="poi_craft_basket_maker">Cisteller</string>
 	<string name="poi_craft_beekeeper">Apicultor</string>
 	<string name="poi_craft_blacksmith">Ferrer</string>
+	<string name="poi_craft_brewery">Cervesa artesana</string>
+	<string name="poi_craft_boatbuilder">Artesà de bots</string>
+	<string name="poi_craft_bookbinder">Enquadernador</string>
+	<string name="poi_craft_carpenter">Fuster</string>
 	</resources>
