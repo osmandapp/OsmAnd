@@ -20,7 +20,7 @@
 
 	<string name="poi_books">Księgarnia</string>
 	<string name="poi_bicycle">Sklep rowerowy</string>
-	<string name="poi_antiques">Sklep z antykami</string>
+	<string name="poi_antiques">Antykwariat</string>
 	<string name="poi_anime">Sklep z anime</string>
 	<string name="poi_art">Sklep ze sztuką</string>
 	<string name="poi_baby_goods">Towary dziecięce</string>
@@ -29,7 +29,7 @@
 	<string name="poi_bed">Wyposażenie pokoji</string>
 	<string name="poi_boutique">Butik</string>
 	<string name="poi_carpet">Sklep z dywanami</string>
-	<string name="poi_chemist">Sklep z narkotykami</string>
+	<string name="poi_chemist">Apteka / Drogeria</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
 	<string name="poi_child_clothes">Sklep odzieżowy dla dzieci</string>
 	<string name="poi_shoes">Sklep obuwniczy</string>
@@ -47,13 +47,13 @@
 	<string name="poi_furniture">Sklep meblowy</string>
 	<string name="poi_garden_centre">Centrum ogrodnicze</string>
 	<string name="poi_gas">Magazyn gazu płynnego</string>
-	<string name="poi_general">Magazyn</string>
-	<string name="poi_gift">Sklep pamiątkarski</string>
+	<string name="poi_general">Sklep wielobranżowy</string>
+	<string name="poi_gift">Sklep z pamiątkami</string>
 	<string name="poi_glaziery">Szklarz</string>
 	<string name="poi_hardware">Sklep z narzędziami</string>
 	<string name="poi_hearing_aids">Aparaty słuchowe</string>
 	<string name="poi_herbalist">Sklep zielarski</string>
-	<string name="poi_hifi">Sklep ze sprzętem hifi</string>
+	<string name="poi_hifi">Sklep ze sprzętem HiFi</string>
 	<string name="poi_houseware">Sklep z AGD</string>
 	<string name="poi_hunting">Sprzęt do polowań</string>
 	<string name="poi_interior_decoration">Dekoracja wnętrz</string>
@@ -70,26 +70,26 @@
 	<string name="poi_paint">Farby</string>
 	<string name="poi_pet">Zoologiczny</string>
 	<string name="poi_radiotechnics">Art. RTV</string>
-	<string name="poi_second_hand">Rzeczy \"z drugiej ręki\"</string>
+	<string name="poi_second_hand">Ciuchland</string>
 	<string name="poi_ship_chandler">Armator</string>
 	<string name="poi_sports">Sportowy</string>
 	<string name="poi_stationery">Papierniczy</string>
 	<string name="poi_tableware">Zastawy stołowe</string>
 	<string name="poi_ticket">Bilety</string>
-	<string name="poi_tobacco">Papierosy</string>
+	<string name="poi_tobacco">Tytoniowy</string>
 	<string name="poi_toys">Zabawki</string>
-	<string name="poi_trade">Sklep wielobranżowy</string>
+	<string name="poi_trade">Stoisko handlowe</string>
 	<string name="poi_vacuum_cleaner">Odkurzacze</string>
 	<string name="poi_variety_store">Sklep wielobranżowy</string>
 	<string name="poi_video">Filmy</string>
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
 	<string name="poi_electronics">RTV</string>
-	<string name="poi_car">Motoryzacyjny</string>
+	<string name="poi_car">Salony i komisy samochodowe</string>
 	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_atv">Quady</string>
-	<string name="poi_cosmetics">Kosmetyki</string>
-	<string name="poi_marketplace">Bazar</string>
+	<string name="poi_cosmetics">Drogeria</string>
+	<string name="poi_marketplace">Targowisko</string>
 	<string name="poi_sewing">Pasmanteria</string>
 
 	<string name="poi_police">Policja</string>
@@ -101,7 +101,7 @@
 	<string name="poi_fire_hose">Wąż pożarniczy</string>
 	<string name="poi_fire_water_pond">Zbiornik przeciwpożarowy</string>
 	<string name="poi_grit_bin">Piasek gaśniczy</string>
-	<string name="poi_ambulance_station">Karetka</string>
+	<string name="poi_ambulance_station">Stacja karetek</string>
 	<string name="poi_ses_station">Powiadamianie kryzysowe</string>
 	<string name="poi_mountain_pass_yes">Przejście górskie</string>
 	<string name="poi_ford">Bród</string>
@@ -110,12 +110,12 @@
 	<string name="poi_lift_gate">Podnoszona bramka</string>
 	<string name="poi_toll_booth">Budka telefoniczna</string>
 	<string name="poi_border_control">Kontrola graniczna</string>
-	<string name="poi_traffic_calming_bump">Próg zwalniający</string>
-	<string name="poi_traffic_calming_hump">Próg zwalniający</string>
+	<string name="poi_traffic_calming_bump">Krótki próg zwalniający</string>
+	<string name="poi_traffic_calming_hump">Długi próg zwalniający</string>
 	<string name="poi_traffic_calming_cushion">Wysepka zwalniająca</string>
 	<string name="poi_traffic_calming_chicane">Szykana</string>
 	<string name="poi_traffic_calming_rumble_strip">Pasek ostrzegawczy</string>
-	<string name="poi_traffic_calming_table">Próg zwalniający</string>
+	<string name="poi_traffic_calming_table">Podest zwalniający</string>
 	<string name="poi_traffic_calming_choker">Zwężka</string>
 	<string name="poi_traffic_signals">Światło stop</string>
 
@@ -181,8 +181,8 @@
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 
-	<string name="poi_water_well">Fontanna</string>
-	<string name="poi_standpipe">Fontanna</string>
+	<string name="poi_water_well">Wodospad</string>
+	<string name="poi_standpipe">Rura</string>
 	<string name="poi_water_works">Wodociąg</string>
 	<string name="poi_boatyard">Stocznia</string>
 	<string name="poi_wastewater_plant">Oczyszczalnia ścieków</string>
@@ -190,7 +190,7 @@
 	<string name="poi_dam">Tama</string>
 	<string name="poi_watermill">Młyn wodny</string>
 
-	<string name="poi_power_substation">Podstacja</string>
+	<string name="poi_power_substation">Stacja elektroenergetyczna</string>
 	<string name="poi_power_transformer">Transformator</string>
 	<string name="poi_post_office">Urząd pocztowy</string>
 	<string name="poi_post_box">Skrzynka pocztowa</string>
@@ -199,7 +199,7 @@
 
 	<string name="poi_historic_mine">Zabytkowa kopalnia</string>
 	<string name="poi_waterway_turning_point">Żeglugowy punkt zwrotny</string>
-	<string name="poi_weir">Grobla</string>
+	<string name="poi_weir">Zapora wodna</string>
 	<string name="poi_power_plant">Elektrownia</string>
 	<string name="poi_power_generator">Generator prądu</string>
 
@@ -253,7 +253,7 @@
 	<string name="poi_nursing_home">Dom opieki</string>
 	<string name="poi_baby_hatch">Okno życia</string>
 	<string name="poi_veterinary">Weterynarz</string>
-	<string name="poi_sanatorium">Sanatorium</string>
+	<string name="poi_sanatorium">Uzdrowisko</string>
 	<string name="poi_healthcare_alternative">Medycyna alternatywna</string>
 	<string name="poi_audiologist">Audiolog</string>
 	<string name="poi_blood_bank">Bank krwi</string>
@@ -475,13 +475,13 @@
 	<string name="poi_pharmacy">Apteka</string>
 	<string name="poi_first_aid">Pierwsza pomoc</string>
 	<string name="poi_midwife">Położna</string>
-	<string name="poi_occupational_therapist">Terapeuta zajęciowy</string>
+	<string name="poi_occupational_therapist">Terapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitacja</string>
 	<string name="poi_office_telecommunication">Urząd telekomunikacji</string>
 	<string name="poi_research">Biuro badań</string>
 	<string name="poi_newspaper">Redakcja gazety</string>
 	<string name="poi_bmx">BMX</string>
-	<string name="poi_boules">Bule</string>
+	<string name="poi_boules">Pole do gry w Boule</string>
 	<string name="poi_battlefield">Miejsce bitwy</string>
 	<string name="poi_shop_food">Sklep spożywczy</string>
 	<string name="poi_road_obstacle">Przeszkoda drogowa</string>
@@ -545,18 +545,18 @@
 	<string name="poi_lock_gate">Zamknięta brama</string>
 	<string name="poi_allotments">Ogródki działkowe</string>
 	<string name="poi_forest">Las</string>
-	<string name="poi_farmyard">Farma</string>
+	<string name="poi_farmyard">Podwórze w gospodarstwie</string>
 	<string name="poi_meadow">Łąka</string>
 	<string name="poi_landuse_railway">Obszar kolejowy</string>
 
 	<string name="poi_canal">Kanał</string>
 	<string name="poi_survey_point">Punkt geodezyjny</string>
 	<string name="poi_salt_pond">Solanka</string>
-	<string name="poi_reservoir">Rezerwuar</string>
+	<string name="poi_reservoir">Zbiornik wodny</string>
 	<string name="poi_cricket_nets">Siatki do krykieta</string>
-	<string name="poi_gasometer">Miernik gazu</string>
+	<string name="poi_gasometer">Zbiornik gazu</string>
 	<string name="poi_silo">Silos</string>
-	<string name="poi_storage_tank">Kontener</string>
+	<string name="poi_storage_tank">Zbiornik</string>
 
 	<string name="poi_training">Urządzenie treningowe</string>
 	<string name="poi_migration">Migracja</string>
@@ -566,7 +566,7 @@
 	<string name="poi_neighbourhood">Sąsiedztwo</string>
 	<string name="poi_locality">Miejscowość</string>
 	<string name="poi_place_allotments">Ogródki działkowe</string>
-	<string name="poi_place_farm">Farma</string>
+	<string name="poi_place_farm">Gospodarstwo rolne</string>
 	<string name="poi_residential">Dzielnica mieszkaniowa</string>
 
 	<string name="poi_podiatrist">Podiatra (od stóp)</string>
@@ -574,7 +574,7 @@
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
 	<string name="poi_bicycle_track">Tor rowerowy</string>
-	<string name="poi_9pin">Bowling</string>
+	<string name="poi_9pin">Kręgielnia</string>
 	<string name="poi_climbing">Wspinaczka</string>
 	<string name="poi_canoe">Kajak</string>
 	<string name="poi_croquet">Krokiet</string>
@@ -601,7 +601,7 @@
 	<string name="poi_camp_site">Kemping</string>
 	<string name="poi_caravan_site">Pole kempingowe</string>
 	<string name="poi_picnic_site">Miejsce na piknik</string>
-	<string name="poi_spring">Źródła</string>
+	<string name="poi_spring">Źródło</string>
 	<string name="poi_hot_spring">Gorące źródła</string>
 	<string name="poi_tomb">Grób</string>
 	<string name="poi_shelter">Schronisko</string>
@@ -633,7 +633,7 @@
 
 	<string name="poi_charity">Sklep charytatywny</string>
 	<string name="poi_photo">Sklep fotograficzny</string>
-	<string name="poi_10pin">Kręgielnia</string>
+	<string name="poi_10pin">Bowling</string>
 	<string name="poi_bowls">Kręgielnia</string>
 	<string name="poi_sport_motor">Sporty motorowe</string>
 	<string name="poi_rugby_union">Rugby</string>
@@ -673,7 +673,7 @@
 	<string name="poi_pelota">Piłika</string>
 	<string name="poi_racquet">Rakieta</string>
 	<string name="poi_roller_skating">Jazda na rolkach</string>
-	<string name="poi_skateboard">Deskorolka</string>
+	<string name="poi_skateboard">Skate park</string>
 	<string name="poi_team_handball">Drużyna piłki ręcznej</string>
 	<string name="poi_general_tourist_attraction_yes">Ogólne atrakcje turystyczne</string>
 	<string name="poi_attraction_slide">Ślizgawka</string>
@@ -690,5 +690,11 @@
 	<string name="poi_cave_entrance">Wejście do jaskini</string>
 	<string name="poi_rapids">Katarakta</string>
 	<string name="poi_stone">Głaz</string>
-	<string name="poi_ridge">Grzbiet górski</string>
+	<string name="poi_ridge">Wzgórze</string>
+	<string name="poi_saddle">Przełęcz</string>
+	<string name="poi_sinkhole">Dolina</string>
+	<string name="poi_water">Zbiornik wodny</string>
+	<string name="poi_wood">Las</string>
+	<string name="poi_car_sharing">Wypozyczalnia samochodów</string>
+	<string name="poi_boat_sharing">Wypozyczalnia łodzi</string>
 	</resources>
