@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="poi_shop">Tienda</string>
+<resources><string name="poi_shop">Comercio</string>
 		<string name="poi_shop_food">Tienda de alimentos</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
@@ -130,7 +130,7 @@
 	<string name="poi_window_blind">Tienda de persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Tienda de electrónica</string>
-	<string name="poi_car">Tienda de automóviles</string>
+	<string name="poi_car">Concesionaria</string>
 	<string name="poi_car_parts">Autopartes</string>
 	<string name="poi_atv">Tienda de cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
@@ -166,10 +166,10 @@
 	<string name="poi_traffic_calming_choker">Gargantilla</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
-	<string name="poi_car_repair">Taller de automóviles</string>
+	<string name="poi_car_repair">Taller de autos</string>
 	<string name="poi_service_tyres">Neumáticos</string>
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
-	<string name="poi_car_wash">Lavadero de automóviles</string>
+	<string name="poi_car_wash">Lavadero de autos</string>
 	<string name="poi_fuel">Gasolinera</string>
 	<string name="poi_fuel:diesel">Diésel</string>
 	<string name="poi_fuel:gtl_diesel">Diésel GTL</string>
@@ -355,7 +355,7 @@
 	<string name="poi_clinic">Clínica</string>
 	<string name="poi_first_aid">Primeros auxilios</string>
 	<string name="poi_dentist">Dentista</string>
-	<string name="poi_nursing_home">Residencia de ancianos</string>
+	<string name="poi_nursing_home">Geriátrico</string>
 	<string name="poi_baby_hatch">Escotilla de bebé</string>
 	<string name="poi_veterinary">Veterinario</string>
 	<string name="poi_sanatorium">Sanatorio</string>
@@ -681,7 +681,7 @@
 	<string name="poi_tattoo">Salón de tatuajes</string>
 	<string name="poi_dry_cleaning">Limpieza en seco</string>
 	<string name="poi_laundry">Lavandería</string>
-	<string name="poi_car_rental">Alquiler de coches</string>
+	<string name="poi_car_rental">Alquiler de autos</string>
 	<string name="poi_car_sharing">Coche compartido</string>
 	<string name="poi_boat_sharing">Barco compartido</string>
 	<string name="poi_dock">Dársena</string>
@@ -709,7 +709,7 @@
 	<string name="poi_crater">Cráter</string>
 	<string name="poi_ridge">Cresta</string>
 	<string name="poi_glacier">Glaciar</string>
-	<string name="poi_sinkhole">Sima</string>
+	<string name="poi_sinkhole">Dolina</string>
 	<string name="poi_waterfall">Cascada</string>
 	<string name="poi_river">Río</string>
 	<string name="poi_stream">Arroyo</string>
