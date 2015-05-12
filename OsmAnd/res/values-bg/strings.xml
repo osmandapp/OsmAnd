@@ -1755,7 +1755,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="configure_map">Настройка на картата</string>
     <string name="rendering_attr_tramTrainRoutes_name">Трамвайни и влакови маршрути</string>
 	<string name="lock_screen_request_explanation">%1$s изисква това разрешение за да изключи екрана с цел пестене на енергия.</string>
-    <string name="wake_on_voice">Включи екрана</string>
+    <string name="wake_on_voice">Включване на екрана</string>
     <string name="wake_on_voice_descr">Включване на екрана на телефона, когато наближава завой</string>
     <string name="shared_string_never">Никога</string>
     
@@ -1932,4 +1932,32 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="get_plugin">Вземи</string>
 <string name="osmo_cancel_moving_target">Откажете подвижната цел</string>
     <string name="osmo_set_moving_target">Установете като подвижна цел</string>
-    </resources>
+    <string name="download_tab_updates">Нови</string>
+    <string name="map_update">%1$s карти са обновени</string>
+	<string name="rendering_attr_pisteGrooming_name">Обработена ски писта</string>
+    <string name="world_ski_missing">Трябва да изтеглите специалната карта за скиори за правилното изобразяване на ски писти и други подробности.</string>
+    <string name="nautical_maps_missing">За правилното изобразяване на морските навигационни ориентири трябва да изтеглите специална карта за тях.</string>
+	<string name="edit_group">Редактиране на група</string>
+    <string name="speak_pedestrian">Обявяване на пешеходни пътеки</string>
+    <string name="rendering_value__name">По подразбиране</string>
+    <string name="rendering_value_default_name">По подразбиране</string>
+    <string name="rendering_value_highContrastRoads_name">Контрастни пътища</string>
+	<string name="traffic_warning_railways">ЖП прелези</string>
+	<string name="traffic_warning_pedestrian">Пешеходна пътека</string>
+	<string name="dash_download_msg_none">Искате ли да свалите карти?</string>
+    <string name="dash_download_msg">Свалихте %1$s карти</string>
+    <string name="dash_download_new_one">Свалете нова карта</string>
+    <string name="dash_download_manage">Управление</string>
+    <string name="map_locale">Език на картата</string>
+    <string name="download_tab_downloads">Всички</string>
+    <string name="download_tab_local">Местни</string>
+	<string name="no_internet_connection">Свалянето не е възможно, моля проверете Вашата интернет връзка.</string>
+    <string name="everything_up_to_date">Всички файлове са актуални</string>
+    <string name="use_opengl_render">OpenGL изчертаване</string>
+    <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (може да не работи на някои устройства)</string>
+    <string name="error_avoid_specific_road">Няма намерен заобиколен път</string>
+    <string name="home_button">Начало</string>
+    <string name="osmo_use_https_descr">Използвайте защитена връзка към сървър</string>
+    <string name="osmo_use_https">Използване на HTTPS</string>
+	<string name="coordinates">Координати</string>
+	</resources>
