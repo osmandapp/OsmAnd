@@ -4,7 +4,7 @@
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
   <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
-  <string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
+  <string name="pref_vector_rendering">Opcje dotyczące renderera wektorowego</string>
   <string name="pref_overlay">Podkłady / nakładki</string>
   <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
@@ -14,7 +14,7 @@
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
   <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
-  <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
+  <string name="delete_confirmation_msg">Usunąć %1$s?</string>
   <string name="city_type_suburb">Dzielnica</string>
   <string name="city_type_hamlet">Przysiółek</string>
   <string name="city_type_village">Wieś</string>
@@ -32,7 +32,7 @@
 \n\t- dane POI teraz są w plikach .obf
 \n\t- poprawiono błędy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy)
 \n\t- naprawiono inne, drobne błędy "</string>
-  <string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
+  <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
   <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
   <string name="gpx_navigation">Trasa GPX</string>
   <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania POI.</string>
@@ -57,18 +57,18 @@
   <string name="context_menu_item_search">Szukaj w pobliżu</string>
   <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
   <string name="shared_string_save_as_gpx">Zapisz jako ślad GPX</string>
-  <string name="route_successfully_saved_at">Trasa została zapisana jako \'%1$s\'.</string>
+  <string name="route_successfully_saved_at">Zapisano trasę jako „%1$s”.</string>
   <string name="filename_input">Nazwa pliku: </string>
   <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
   <string name="shared_string_save">Zapisz</string>
   
   <string name="local_index_upload_gpx_description">Wyślij ślady GPX do społeczności OSM. Pomoże to ulepszyć mapę.</string>
-  <string name="local_index_items_uploaded">%1$d z %2$d został wysłany.</string>
+  <string name="local_index_items_uploaded">Wysłano %1$d z %2$d.</string>
   <string name="local_index_mi_upload_gpx">Wyślij do OSM</string>
   <string name="show_more_map_detail">Pokaż więcej szczegółów na mapie</string>
   <string name="show_more_map_detail_descr">Pokazuje więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
-  <string name="favourites_delete_multiple_succesful">Ulubiony punkt został skasowany.</string>
-  <string name="favorite_delete_multiple">Zamierzasz usunąć %1$d ulubiony punkt i %2$d grupę ulubionych. Czy na pewno?</string>
+  <string name="favourites_delete_multiple_succesful">Usunięto ulubiony punkt.</string>
+  <string name="favorite_delete_multiple">Usunąć %1$d ulubiony punkt i %2$d grupę ulubionych?</string>
   <string name="favorite_home_category">Dom</string>
   <string name="favorite_friends_category">Znajomi</string>
   <string name="favorite_places_category">Miejsca</string>
@@ -81,9 +81,9 @@
   
   
   <string name="local_index_installed">Wersja lokalna</string>
-  <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
-  <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
-  <string name="local_index_items_restored">%1$d z %2$d przywrócono.</string>
+  <string name="local_index_items_backuped">Zarchiwizowano %1$d z %2$d.</string>
+  <string name="local_index_items_deleted">Skasowano %1$d z %2$d.</string>
+  <string name="local_index_items_restored">Przywrócono %1$d z %2$d.</string>
   <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
   <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
   <string name="local_index_descr_title">Zarządzanie plikami map</string>
@@ -96,10 +96,10 @@
   <string name="local_index_poi_data">Dane POI</string>
   <string name="local_index_address_data">Dane adresowe</string>
   <string name="local_index_transport_data">Dane transportu publicznego</string>
-  <string name="local_index_map_data">Dane mapowe</string>
+  <string name="local_index_map_data">Dane mapy</string>
   <string name="local_indexes_cat_backup">Kopia zapasowa</string>
   <string name="local_indexes_cat_tts">Komunikaty głosowe (TTS)</string>
-  <string name="local_indexes_cat_voice">Dane głosowe (media)</string>
+  <string name="local_indexes_cat_voice">Komunikaty głosowe (media)</string>
   
   <string name="local_indexes_cat_tile">Mapy online i kafelki</string>
   <string name="local_indexes_cat_map">Mapy offline (wektorowe)</string>
@@ -108,15 +108,15 @@
   <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
   <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
   <string name="map_text_size">Rozmiar tekstu</string>
-  <string name="trace_rendering">Informacje o rysowaniu</string>
-  <string name="trace_rendering_descr">Wyświetlaj informacje o wydajności rysowania mapy</string>
-  <string name="tip_recent_changes">Ostatnie Zmiany</string>
+  <string name="trace_rendering">Informacje o diagnozowaniu błędów renderowania</string>
+  <string name="trace_rendering_descr">Wyświetlaj informacje o wydajności renderowania</string>
+  <string name="tip_recent_changes">Ostatnie zmiany</string>
   <string name="tip_recent_changes_0_6_6_t">"Zmiany dla 0.6.6: \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS \n\t- render mapy pokazuje więcej szczegółów \n\t- mapa podstawowa zawarta w aplikacji \n\t- ulepszenie routingu offline (ciągle eksperymentalny) \n\t- opcje routingu dla GPX \n\t- aktualizacja interfejsu i poprawka wielu błędów "</string>
   <string name="voice_not_use">Nie używaj</string>
   
   <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
   <string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
-  <string name="tts_language_not_supported_title">Język niewspierany</string>
+  <string name="tts_language_not_supported_title">Nieobsługiwany język</string>
   <string name="tts_language_not_supported">Wybrany język jest niewspierany przez zainstalowany mechanizm TTS (text-to-speech). Czy chcesz odwiedzić Android Market, by poszukać innego silnika TTS? W innym przypadku zostanie użyty bieżący język.</string>
   <string name="tts_missing_language_data_title">Brakujące dane</string>
   <string name="tts_missing_language_data">Brak danych dla wybranego języka. Czy chcesz odwiedzić Android Market, by zainstalować?</string>
@@ -308,7 +308,7 @@
   <string name="continuous_rendering">Rysowanie ciągłe</string>
   <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
   <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
-  <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, by wyświetlić wybrany obszar</string>
+  <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
   <string name="show_point_options">Użyj lokalizacji…</string>
   <string name="renderer_load_sucess">Renderer pomyślnie wczytany</string>
   <string name="renderer_load_exception">Wystąpił błąd: renderer nie został wczytany</string>
@@ -370,8 +370,8 @@
   <string name="menu_layers">Warstwy mapy</string>
   <string name="context_menu_item_search_poi">Szukaj POI</string>
   
-  <string name="use_trackball_descr">Użyj trackballa do przesuwania mapy</string>
-  <string name="use_trackball">Używaj trackballa</string>
+  <string name="use_trackball_descr">Umożliwia przesuwanie mapy za pomocą trackballa</string>
+  <string name="use_trackball">Używanie trackballa</string>
   <string name="background_service_wait_int_descr">Czas oczekiwania na poprawną pozycję GPS</string>
   <string name="background_service_wait_int">Czas oczekiwania</string>
   <string name="service_stop_background_service">Wyłącz usługę nawigacji w tle</string>
@@ -526,7 +526,7 @@
   <string name="use_online_routing_descr">Użyj Internetu do wyznaczenia trasy</string>
   <string name="use_online_routing">Użyj routingu online</string>
   <string name="user_password_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
-  <string name="user_password">Hasło do konta OSM</string>
+  <string name="user_password">Hasło konta OSM</string>
   <string name="osm_settings_descr">Skonfiguruj ustawienia dotyczące potrzebne do wysyłania danych do Openstreetmap.org (OSM)</string>
   
   <string name="data_settings_descr">Ustaw język, pobierz/przeładuj dane</string>
@@ -549,7 +549,7 @@
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
-  <string name="user_name">Twoja nazwa konta OSM</string>
+  <string name="user_name">Nazwa użytkownika OSM</string>
   <string name="mark_point">Cel</string>
   <string name="show_osm_bugs_descr">Pokaż OpenStreetBugs na mapie</string>
   <string name="show_osm_bugs">Pokaż OpenStreetBugs</string>
@@ -779,7 +779,7 @@
   <string name="scroll_map_by_gestures">Naturalne przesuwanie mapy</string>
   <string name="i_am_here">Jestem tutaj</string>
   <string name="zoom_by_trackball_descr">Zmieniaj poziom przybliżenia mapy za pomocą trackballa</string>
-  <string name="zoom_by_trackball">Użyj trackballa do kontroli przybliżenia</string>
+  <string name="zoom_by_trackball">Umożliwia przybliżanie mapy za pomocą trackballa</string>
   <string name="use_short_object_names_descr">Używaj krótkich nazw obiektów w trybie eksploracji dotykowej</string>
   <string name="use_short_object_names">Użyj krótkich nazw obiektów</string>
   <string name="accessibility_preferences_descr">Ustawienia ułatwienia dostępu</string>
@@ -792,7 +792,7 @@
 \n\t- Edycja POI w trybie offline\n\t- Opcja zapisywania ścieżki online - cykliczne wysyłanie informacji o pozycji do usługi sieciowej (przeczytaj jak ustawić własną usługę sieciową w artykułach HowTo)\n\t- Pokazywanie aktualnie nagranego śladu na mapie\n\t- Wykrywanie kierunku poruszania: Nakazanie \'Zawróć\' podczas poruszania w przeciwnym kierunku lub po przeoczeniu zakrętu\n\t- Nowa podpowiedź głosowa - \'Trasa przeliczona\'
 \n\t- Optyczne wskazanie bliskości zakrętu w odległości nie większej niż 100m prze zmianę koloru strzałki\n\t- Zdezaktywowane pliki indeksów są teraz pokazywane w ekranie pobrań w kolorze ciemno zielonym i ciemno niebieskim\n\t- Inne zmiany "</string>
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Notatek zostało wysłanych</string>
+  <string name="local_openstreetmap_were_uploaded">Wysłano {0} POI/notatek</string>
   <string name="local_openstreetmap_uploadall">Wyślij wszystkie</string>
   
   <string name="local_openstreetmap_upload">Wyślij modyfikacje do OSM</string>
@@ -832,7 +832,7 @@
   <string name="index_name_tts_voice">Komunikaty głosowe (TTS, zalecane)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
-  <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
+  <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Zastąpić go?</string>
   <string name="profile_settings">Ustawienia specyficzne dla profilu</string>
   <string name="global_settings">Ustawienia ogólne</string>
   <string name="global_app_settings">Ustawienia ogólne</string>
@@ -1235,7 +1235,7 @@
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
     <string name="local_indexes_cat_srtm">Dane poziomic</string>
     <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
-    <string name="use_kalman_filter_compass">Użycie filtru Kalmana</string>
+    <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie</string>
@@ -1663,8 +1663,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
-	<string name="arrival_distance">Informacja o odległości do celu</string>
-    <string name="arrival_distance_descr">Z jakim wyprzedzeniem ma się pojawić informacja o odległości do celu podróży?</string>
+	<string name="arrival_distance">Powiadomienia osiągnięcia celu</string>
+    <string name="arrival_distance_descr">Określa wyprzedzenie powiadamiania o osiągnięciu celu</string>
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
@@ -2107,6 +2107,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Wyszukać tekst we wszystkich kategoriach</string>
+    <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     </resources>
