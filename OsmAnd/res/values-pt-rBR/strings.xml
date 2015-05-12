@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="shared_string_my_places">Meus locais</string>
+	<string name="days_behind">dias atrás</string>
+	<string name="watch">Ver</string>
+	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
+    <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
+    <string name="navigate_point_northing">Ao norte</string>
+    <string name="navigate_point_easting">Ao leste</string>
+    <string name="home_button">Início</string>
+    <string name="first_time_msg">Obrigado por usar OsmAnd. Para usufruir de todos os recursos do aplicativo, você precisa de alguns dados regionais offline, que você pode baixar em \'Configurações\' → \'Gerenciar mapas\'. Depois, você poderá procurar por um endereço, um Ponto de Interesse (POI) ou um meio de transporte público.</string>    
+	<string name="favorite_home_category">Casa</string>
+	<string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
+	</resources>
