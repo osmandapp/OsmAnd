@@ -1662,9 +1662,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_settings">Monitoring OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
-    <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
+    <string name="keep_informing">Powtarzanie instrukcji nawigacji</string>
 	<string name="arrival_distance">Powiadomienia osiągnięcia celu</string>
-    <string name="arrival_distance_descr">Określa wyprzedzenie powiadamiania o osiągnięciu celu</string>
+    <string name="arrival_distance_descr">Określa moment powiadamiania o osiągnięciu celu</string>
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
