@@ -1101,7 +1101,7 @@
     
     
     <string name="no_buildings_found">無建築物符合。</string>
-    <string name="search_villages_and_postcodes">查尋城鎮/郵遞區號</string>
+    <string name="search_villages_and_postcodes">查尋更多城鎮/郵遞區號</string>
 	<string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>
 	<string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>
     <string name="safe_mode_description">應用程式執行在安全模式下(使用較慢的 Android 而非原生碼)。</string>
