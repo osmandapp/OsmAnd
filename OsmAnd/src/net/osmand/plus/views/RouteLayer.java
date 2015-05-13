@@ -125,10 +125,9 @@ public class RouteLayer extends OsmandMapLayer {
 						paint.setStrokeWidth(12 * view.getDensity());
 					}
 					osmandRenderer.updatePaint(req, actionPaint, 2, false, rc);
-					actionPaint.setColor(Color.BLUE);
-					paintIconAction.setColorFilter(new PorterDuffColorFilter(actionPaint.getColor(), Mode.MULTIPLY));
 					// TODO remove
-					// actionPaint.setColor(Color.WHITE);
+					// actionPaint.setColor(Color.BLUE);
+					paintIconAction.setColorFilter(new PorterDuffColorFilter(actionPaint.getColor(), Mode.MULTIPLY));
 					
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
@@ -366,19 +365,24 @@ public class RouteLayer extends OsmandMapLayer {
 		double actionDist = 0;
 		Location previousAction = null; 
 		actionPoints.clear();
-		int prevPoint = -1;
+		int prevPoint = -2;
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
-			if(nf != null && nf.routePointOffset < i + cd) {
-				nf = null;
-			}
-			while (nf == null && it.hasNext()) {
-				nf = it.next();
-				if (nf.routePointOffset < i + cd) {
+			if(nf != null) {
+				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
+				if(pnt < i + cd ) {
 					nf = null;
 				}
 			}
-			boolean action = nf != null && nf.routePointOffset == i + cd;
+			while (nf == null && it.hasNext()) {
+				nf = it.next();
+				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
+				if (pnt < i + cd) {
+					nf = null;
+				}
+			}
+			boolean action = nf != null && (nf.routePointOffset == i + cd ||
+					(nf.routePointOffset <= i + cd && i + cd  <= nf.routeEndPointOffset));
 			if(!action && previousAction == null) {
 				continue;
 			}
@@ -420,7 +424,7 @@ public class RouteLayer extends OsmandMapLayer {
 								if(prevPoint == k) {
 									actionPoints.remove(ind - 1);
 									actionPoints.remove(ind - 1);
-									prevPoint = -1;
+									prevPoint = -2;
 								}
 								actionPoints.add(ind, l);
 								lp = l;
