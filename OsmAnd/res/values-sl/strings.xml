@@ -398,7 +398,7 @@
 	<string name="context_menu_item_add_parking_point">Označi kot kraj parkiranja</string>
 	<string name="context_menu_item_delete_parking_point">Izbriši oznako parkirnega mesta</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
-	<string name="search_position_favorites">Priljubljene …</string>
+	<string name="search_position_favorites">Izbor priljubljene točke …</string>
 	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih zemljevidov</string>
 	<string name="level_to_switch_vector_raster">Najmanjša povečava za vektorske zemljevide</string>
 	<string name="tip_location_sharing">Objavljanje trenutnega mesta</string>
@@ -568,7 +568,7 @@
 \n\t \'brez obračanja\': zemljevid se ne obrača (sever je vedno usmerjen proti vrhu zaslona).
 \n\t \'obračanje glede na premikanje\': zemljevid se usmeri s potjo premikanja.
 \n\t \'obračanje po kompasu\': zemljevid je vedno usmerjen po kompasu, torej poravnan z okolico. "</string>
-	<string name="tip_update_index_t">"Posodobljeni zemljevidi so ključni za natančno navigacijo. Program omogoča posodabljanje zemljevidov (in drugih datotek) na enostaven in hiter način.\t\t\n\nPrejemanje posodobitev je mogoče upravljati preko \'Nastavitev\' → \'Upravljanje s podatki\' → \'Prejmi podatke za delo brez povezave\'.\n\nKo je seznam zemljevidov prejet, lahko s s klikom na katerikoli predmet zemljevid posodobite. Bodite pozorni, da je izbrana tudi ustrezna vrsta (običajni zemljevidi, senčenje, prekrivni zemljevid in drugo).\n\nPosamezne zemljevide je mogoče filtrirati z vpisom nekaj črk v iskalno polje, lahko pa te izberete tudi preko  \'Nastavitve\' → \'Filtriraj prejeto\' in si ogledate le posodobitve tistih zemljevidov, ki so že na napravi. Razpoložljivost posodobitev je označena z barvami:\n\n\t* Vnosi, obarvani \'zeleno\', označujejo posodobljene zemljevide\n\t* Vnosi, obarvani \'modro\', označujejo nove posodobitve\n\t* Vnosi, zapisani ležeče, pa označujejo zemljevide, ki so onemogočeni za prikazovanje "</string>
+	<string name="tip_update_index_t">"Posodobljeni zemljevidi so ključni za natančno navigacijo. Program omogoča posodabljanje zemljevidov (in drugih datotek) na enostaven in hiter način.\t\t\n\nPrejemanje posodobitev je mogoče upravljati preko \'Nastavitev\' → \'Upravljanje s podatki\' → \'Prejmi podatke za delo brez povezave\'.\n\nKo je seznam zemljevidov prejet, lahko s s klikom na katerikoli predmet zemljevid posodobite. Bodite pozorni, da je izbrana tudi ustrezna vrsta (običajni zemljevidi, senčenje, prekrivni zemljevid in drugo).\n\nPosamezne zemljevide je mogoče filtrirati z vpisom nekaj črk v iskalno polje, lahko pa te izberete tudi preko \'Nastavitev\' → \'Filtriraj prejeto\' in si ogledate le posodobitve tistih zemljevidov, ki so že na napravi. Razpoložljivost posodobitev je označena z barvami:\n\n\t* Vnosi, obarvani \'zeleno\', označujejo posodobljene zemljevide\n\t* Vnosi, obarvani \'modro\', označujejo nove posodobitve\n\t* Vnosi, zapisani ležeče, pa označujejo zemljevide, ki so onemogočeni za prikazovanje "</string>
 	<string name="download_files_question">Prejmi datoteke ({0}/{1} MB)?</string>
 	
 	
@@ -591,7 +591,7 @@
 	<string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in shranjevanje na kartici SD)</string>
 	<string name="online_map_settings">Spletni zemljevidi</string>
 	<string name="online_map_settings_descr">Nastavitev virov spletnih in shranjenih zemljevidov</string>
-	<string name="osmand_rastermaps_plugin_description">"Vstavek omogoča dostop do različnih vrst zemljevidov od vektorskih OpenStreetMap do satelitskih slik, ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki in drugi zemljevidi. Vstavek omogoča tudi podporo za izrisovanje izohips, senčenje hribovitih predelov in podobno.\n\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim zemljevidom. V ta namen je treba vektorske zemljevide OsmAnd skriti oziroma narediti prosojne med \'Nastavitvami zemljevida\' v vsebinskem meniju.\n\nVektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite. "</string>
+	<string name="osmand_rastermaps_plugin_description">"Vstavek omogoča dostop do različnih vrst zemljevidov od vektorskih OpenStreetMap do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki in drugi zemljevidi. Vstavek omogoča tudi podporo za izrisovanje izohips, senčenje hribovitih predelov in podobno.\n\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim zemljevidom. V ta namen je treba vektorske zemljevide OsmAnd skriti oziroma narediti prosojne med \'Nastavitvami zemljevida\' v vsebinskem meniju.\n\nVektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite. "</string>
 	<string name="osm_editing_plugin_description">Vstavek podpira prikaz nastavitev, ki omogočajo pošiljanje odzivov na delovanje programa OsmAnd, kot so posodobljeni podatki o točkah POI, pošiljanje poročil in opomb o programskih hroščih in objavljanje sledi GPX (zahteva ustrezna poverila OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
 	<string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
@@ -1232,9 +1232,9 @@
     <string name="context_menu_item_directions_to">Navigacija do ...</string>
     <string name="context_menu_item_directions_from">Navigacija od ...</string>
     <string name="route_descr_map_location">Zemljevid: </string>
-    <string name="route_to">Pot do:</string>
+    <string name="route_to">Konec poti:</string>
     <string name="route_via">Preko:</string>
-    <string name="route_from">Pot od:</string>
+    <string name="route_from">Začetek poti:</string>
     <string name="osb_author_dialog_password">Geslo OSM (neobvezno)</string>
         
     
@@ -1635,7 +1635,7 @@
     <string name="pause_navigation">Ustavi navigacijo</string>
     <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za snemanje sledi GPX na zemljevidu)</string>
 	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za snemanje na zaslonu zemljevida</string>
-	<string name="record_plugin_description">"Ta vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
+	<string name="record_plugin_description">"Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
     <string name="rendering_attr_osmcTraces_description">Izris stez po sledeh OSMC</string>
     
 	<string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
@@ -1858,5 +1858,5 @@
 \n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
 \n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
 	<string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
-	<string name="plugin_nautical_descr">"Ta vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov. "</string>
+	<string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.\n\nS tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica ...).\n\nVrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju. "</string>
 	</resources>
