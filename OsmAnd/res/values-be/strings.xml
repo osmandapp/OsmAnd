@@ -246,7 +246,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Будынкаў ня знойдзена.</string>
     <string name="incremental_search_city">Выберыце горад</string>
-    <string name="search_villages_and_postcodes">Пошук вёсак і паштовага індэкса</string>
+    <string name="search_villages_and_postcodes">Дадатковы пошук вёсак і паштовага індэкса</string>
 	<string name="rendering_attr_showRoadMaps_description">Абярыце калі паказваць дарожныя мапы:</string>
 	<string name="rendering_attr_showRoadMaps_name">Мапы толькі дарог</string>
     <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але бяз свойскіх бібліятэк).</string>
