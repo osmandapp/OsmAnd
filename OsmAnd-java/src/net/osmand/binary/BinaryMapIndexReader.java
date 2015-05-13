@@ -289,6 +289,18 @@ public class BinaryMapIndexReader {
 		return routingIndexes.size() > 0;
 	}
 	
+	public boolean containsRouteData(int left31x, int top31y, int right31x, int bottom31y, int zoom) {
+		for (RouteRegion ri : routingIndexes) {
+			List<RouteSubregion> sr = ri.getSubregions();
+			for (RouteSubregion r : sr) {
+				if (right31x >= r.left && left31x <= r.right && r.top <= bottom31y && r.bottom >= top31y) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public boolean containsPoiData(double latitude, double longitude) {
 		for (PoiRegion index : poiIndexes) {
 			if (index.rightLongitude >= longitude && index.leftLongitude <= longitude &&
