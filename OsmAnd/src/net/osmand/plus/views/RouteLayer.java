@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
@@ -57,6 +58,7 @@ public class RouteLayer extends OsmandMapLayer {
 	private Bitmap actionArrow;
 
 	private Paint paintIcon;
+	private Paint paintIconAction;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -79,7 +81,7 @@ public class RouteLayer extends OsmandMapLayer {
 		actionPaint.setAntiAlias(true);
 		actionPaint.setStrokeCap(Cap.BUTT);
 		actionPaint.setStrokeJoin(Join.ROUND);
-		actionPaint.setStrokeWidth(7 * view.getDensity());
+		actionPaint.setStrokeWidth(7 * view.getScaleCoefficient());
 		actionPaint.setColor(Color.WHITE);
 		path = new Path();
 		
@@ -88,6 +90,11 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon.setAntiAlias(true);
 		paintIcon.setColor(Color.BLACK);
 		paintIcon.setStrokeWidth(3);
+		
+
+		paintIconAction = new Paint();
+		paintIconAction.setFilterBitmap(true);
+		paintIconAction.setAntiAlias(true);
 		
 	}
 	
@@ -118,9 +125,11 @@ public class RouteLayer extends OsmandMapLayer {
 						paint.setStrokeWidth(12 * view.getDensity());
 					}
 					osmandRenderer.updatePaint(req, actionPaint, 2, false, rc);
+					actionPaint.setColor(Color.BLUE);
+					paintIconAction.setColorFilter(new PorterDuffColorFilter(actionPaint.getColor(), Mode.MULTIPLY));
 					// TODO remove
-					actionPaint.setStrokeWidth(7 * view.getDensity());
-					actionPaint.setColor(Color.WHITE);
+					// actionPaint.setColor(Color.WHITE);
+					
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
 					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
@@ -132,8 +141,8 @@ public class RouteLayer extends OsmandMapLayer {
 				} else {
 					System.err.println("Rendering attribute route is not found !");
 					paint.setStrokeWidth(12 * view.getDensity());
-					actionPaint.setStrokeWidth(7 * view.getDensity());
 				}
+				actionPaint.setStrokeWidth(7 * view.getScaleCoefficient());
 			}
 		}
 	}
@@ -192,9 +201,9 @@ public class RouteLayer extends OsmandMapLayer {
 				Location o = actionPoints.get(i);
 				if (o == null) {
 					canvas.drawPath(pth, actionPaint);
-					float angleRad = (float) Math.atan2(y - py, x - px);
-					float angle = (float) (angleRad * 180 / Math.PI) + 90f;
-					float distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+					double angleRad = Math.atan2(y - py, x - px);
+					double angle = (angleRad * 180 / Math.PI) + 90f;
+					double distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 					if (distSegment == 0) {
 						continue;
 					}
@@ -203,9 +212,9 @@ public class RouteLayer extends OsmandMapLayer {
 					float pdy = y - py;
 					matrix.reset();
 					matrix.postTranslate(0, -actionArrow.getHeight() / 2);
-					matrix.postRotate(angle, actionArrow.getWidth() / 2, 0);
+					matrix.postRotate((float) angle, actionArrow.getWidth() / 2, 0);
 					matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2, py + pdy);
-					canvas.drawBitmap(actionArrow, matrix, paintIcon);
+					canvas.drawBitmap(actionArrow, matrix, paintIconAction);
 					first = true;
 				} else {
 					px = x;
@@ -343,7 +352,7 @@ public class RouteLayer extends OsmandMapLayer {
 		drawSegment(tb, canvas);
 		if (tb.getZoom() >= 14) {
 			calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection,
-					routeNodes, cd, it);
+					routeNodes, cd, it, tb.getZoom());
 			drawAction(tb, canvas);
 		}
 	}
@@ -351,12 +360,13 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void calculateActionPoints(double topLatitude, double leftLongitude, double bottomLatitude,
 			double rightLongitude, Location lastProjection, List<Location> routeNodes, int cd,
-			Iterator<RouteDirectionInfo> it) {
+			Iterator<RouteDirectionInfo> it, int zoom) {
 		RouteDirectionInfo nf = null;
-		double DISTANCE_ACTION = 35;
+		double DISTANCE_ACTION = zoom >= 17 ? 15 : 35;
 		double actionDist = 0;
 		Location previousAction = null; 
 		actionPoints.clear();
+		int prevPoint = -1;
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
 			if(nf != null && nf.routePointOffset < i + cd) {
@@ -379,8 +389,8 @@ public class RouteLayer extends OsmandMapLayer {
 					float loc = ls.distanceTo(previousAction);
 					actionDist += loc;
 					if(actionDist >= DISTANCE_ACTION) {
-						// calculate distance proj?
 						actionPoints.add(calculateProjection(1 - (actionDist - DISTANCE_ACTION) / loc, previousAction, ls));
+						prevPoint = i;
 						actionPoints.add(null);
 						previousAction = null;
 						actionDist = 0;
@@ -407,6 +417,11 @@ public class RouteLayer extends OsmandMapLayer {
 								}
 								break;
 							} else {
+								if(prevPoint == k) {
+									actionPoints.remove(ind - 1);
+									actionPoints.remove(ind - 1);
+									prevPoint = -1;
+								}
 								actionPoints.add(ind, l);
 								lp = l;
 							}
