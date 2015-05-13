@@ -558,7 +558,7 @@
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
 	<string name="add_waypoint_dialog_added">GPX 航點 \'\'{0}\'\' 已成功加入</string>
-	<string name="add_waypoint_dialog_title">增加航點到已記錄的 GPX 軌跡</string>
+	<string name="add_waypoint_dialog_title">增加航點到已錄製的 GPX 軌跡</string>
 	<string name="context_menu_item_add_waypoint">增加 GPX 航點</string>
 	<string name="amenity_type_administrative">行政機關</string>
 	<string name="amenity_type_barrier">路障</string>
