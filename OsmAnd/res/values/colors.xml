@@ -109,6 +109,8 @@
 	<color name="color_unknown">#C8C8C8</color>
 	<!-- good state, localindex loaded, poi_open, osm_create, index_ok   -->
 	<color name="color_ok">#32CD32</color>
+	<!-- intermediate state - poi is going to be closed -->
+	<color name="color_intermediate">#FFDD00</color>
 	<!-- update good state, osm_modify, index_update -->
 	<color name="color_update">#0080FF</color>
 	
