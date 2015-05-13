@@ -1082,7 +1082,7 @@
     <string name="download_roads_only_maps">Cartes routières uniquement</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
-    <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
+    <string name="search_villages_and_postcodes">Étendre la rechercher des villages et des codes postaux</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Position actuelle</string>
     
