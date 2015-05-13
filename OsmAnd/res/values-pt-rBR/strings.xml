@@ -279,4 +279,8 @@
 	<string name="osmo_auth_error">Encontrado erro de autorização de OsMo: %1$s.\n Pode ser devido a um serviço temporário fora do ar ou o seu registo expirou.\n Você quer continuar com um novo registro?</string>
     <string name="osmo_gpx_points_downloaded">Pontos OsMo %1$s baixados.</string>
     <string name="osmo_credentials_not_valid">Suas credenciais de OsMo não são válidas.</string>
+    <string name="osmo_share_connect_device">Permitir seguir permanentemente este dispositivo</string>
+    <string name="osmo_connect_to_device">Conectar a um</string>
+    <string name="osmo_connect_to_group">Conectar a um grupo</string>
+    <string name="minutes_ago">min. atrás</string>
     </resources>
