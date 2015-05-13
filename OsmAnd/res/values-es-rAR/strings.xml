@@ -777,7 +777,7 @@
     <string name="select_address_activity">Selecciona la dirección</string>
     <string name="favourites_list_activity">Selecciona favorito</string>
     <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
-	<string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición del relieve sombreado más fácil (requiere extra de Curvas de nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
+	<string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Corregido Geo Intent (Foursquare, c: geo)\n\t* Corregido el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición del relieve sombreado más fácil (requiere complemento de Curvas de nivel)\n\t* Ahora acepta enlaces de ubicación de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
     <string name="layer_hillshade">Capa del relieve sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "</string>
@@ -791,7 +791,7 @@
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="download_hillshade_item">Relieve sombreado</string>
     <string name="download_hillshade_maps">Superposición del relieve sombreado</string>
-    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y arreglada\n\t* Paquetes del relieve sombreado para el extra de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en complemento de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento de curvas de nivel reestructurada y corregida\n\t* Paquetes del relieve sombreado para el complemento de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
@@ -855,14 +855,14 @@
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
 	<string name="tip_altitude_offset">Corrección de Altitud</string>
-	<string name="tip_altitude_offset_t">"La mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
-\n\nUna mejor aproximación a estos sistemas locales es la referencia EGM96 (geoide).
+	<string name="tip_altitude_offset_t">"La mayoría de los dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
+\n\nUna mejor aproximación a estos sistemas locales, es la referencia EGM96 (geoide).
 \n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'Corrección mundial de altitud\' (WW15MGH.DAC) mediante \'Ajustes\'→\'Gestionar mapas\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No se encontró edificios.</string>
     <string name="incremental_search_city">Buscar ciudades incrementalmente</string>
-    <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
+    <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
 	<string name="rendering_attr_showRoadMaps_description">Selecciona cuándo mostrar mapas sólo de carreteras:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas sólo de carreteras</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
