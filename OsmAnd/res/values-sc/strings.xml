@@ -417,7 +417,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
-    <string name="search_villages_and_postcodes">Chirca biddas/còdighes postales</string>
+    <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
 	<string name="voice_stream_voice_call">Àudio mutidas bogales</string>
 	<string name="voice_stream_notification">Àudio notìficas</string>
 	<string name="voice_stream_music">Àudio media/mùsica</string>
