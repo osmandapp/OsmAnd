@@ -2,7 +2,7 @@
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
+    <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 錄製，線上追蹤)</string>
     <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
 	\n\t* Some bug fixes
@@ -104,7 +104,7 @@
 	
 	
 	<string name="map_widget_parking">停車場</string>
-	<string name="map_widget_monitoring">GPX 記錄中</string>
+	<string name="map_widget_monitoring">GPX 錄製中</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
 	<string name="map_widget_altitude">高度</string>
@@ -212,7 +212,7 @@
 	
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 http://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
+	<string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供錄製的 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 http://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">用目前選擇的語音播放指令</string>
 	<string name="debugging_and_development">OsmAnd 開發</string>
@@ -306,7 +306,7 @@
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
 	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
-	<string name="gpx_monitoring_disabled_warn">使用 GPX 小工具或透過 \'錄製旅程\'的設定以記錄軌跡。</string>
+	<string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
@@ -843,7 +843,7 @@
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">在導航期間的記錄間隔</string>
-	<string name="save_track_interval_descr">在整個導航期間，為軌跡記錄選取記錄間隔</string>
+	<string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔</string>
 	<string name="save_track_to_gpx_descrp">在整個導航期間，軌跡將會儲存在 track 資料夾</string>
 	<string name="save_track_to_gpx">導航期間記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
@@ -993,7 +993,7 @@
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">錄製旅程</string>
-    <string name="monitoring_settings_descr">組態如何記錄您的旅程</string>
+    <string name="monitoring_settings_descr">組態如何錄製您的旅程</string>
     
     
     <string name="choose_osmand_theme_descr">挑選應用程式主題</string>
@@ -1054,11 +1054,11 @@
     <string name="search_street_in_neighborhood_cities">在附近一帶的城市查尋街道</string>
     <string name="av_settings_descr">組態音訊和視訊設定</string>
     <string name="av_settings">音訊/視訊設定 </string>
-    <string name="recording_error">錄製途中發生錯誤 </string>
+    <string name="recording_error">"在錄製時發生錯誤 "</string>
     <string name="recording_camera_not_available">相機失效</string>
-    <string name="recording_playing">從已指定的記錄開始播放音訊。\n%1$s</string>
+    <string name="recording_playing">從已指定的錄音開始播放音訊。\n%1$s</string>
     <string name="recording_open_external_player">開啟外部播放</string>
-    <string name="recording_delete_confirm">您想移除此記錄嗎？</string>
+    <string name="recording_delete_confirm">您想移除此錄製嗎？</string>
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄取音訊注解</string>
     <string name="destination_point">目的地 ％1$S</string>
@@ -1068,9 +1068,9 @@
     <string name="av_use_external_recorder">使用系統錄製</string>
     <string name="av_use_external_camera_descr">使用系統應用程式拍照</string>
     <string name="av_use_external_camera">使用相機應用程式</string>
-    <string name="recording_is_recorded">音訊/視訊開始錄製。要停止按下AV小工具。</string>
+    <string name="recording_is_recorded">音訊/視訊開始錄製。要停止時按下 AV 小工具。</string>
     <string name="recording_can_not_be_played">不能播放記錄</string>
-    <string name="recording_context_menu_delete">刪除記錄</string>
+    <string name="recording_context_menu_delete">刪除錄製</string>
     <string name="recording_context_menu_play">播放</string>
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
@@ -1661,12 +1661,12 @@
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
-	<string name="gpx_monitoring_start">開始 GPX 記錄</string>
-	<string name="gpx_monitoring_stop">停止 GPX 記錄</string>
+	<string name="gpx_monitoring_start">開始 GPX 錄製</string>
+	<string name="gpx_monitoring_stop">停止 GPX 錄製</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
 	<string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
-    <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，發送軌跡到指定的 web 服務。</string>
+    <string name="live_monitoring_m_descr">如果已啟用了 GPX 錄製，發送軌跡到指定的 web 服務。</string>
 	<string name="keep_navigation_service">保持</string>
 	<string name="stop_navigation_service">中斷</string>
 	<string name="enable_sleep_mode">啟用 GPS 休眠模式</string>
@@ -1711,7 +1711,7 @@
     <string name="speak_poi">通報附近 POI</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
-    <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具以啟動去記錄和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n記錄的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用記錄的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
+    <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 錄製小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
     <string name="record_plugin_name">錄製旅程</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
@@ -1719,9 +1719,9 @@
     <string name="rendering_attr_publicTransportMode_name">公車、無軌電車，班車路線</string>
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
-	<string name="save_track_to_gpx_globally_descr">通常位置記錄到 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
+	<string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 錄製小工具，可以開啟或關閉</string>
 	<string name="confirm_every_run">始終詢問</string>
-	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇記錄間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
+	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 錄製小工具啟用）</string>
 	<string name="save_global_track_interval">通常的記錄間隔</string>
 	<string name="traffic_warning_speed_limit">速限</string>
     <string name="traffic_warning_border_control">邊境管制</string>
