@@ -428,6 +428,9 @@ public class RouteProvider {
 				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI[0];
+					if(info.routeEndPointOffset != 0) {
+						ch.routeEndPointOffset = info.routeEndPointOffset - startI[0];
+					}
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
 					directions.add(ch);
 				}

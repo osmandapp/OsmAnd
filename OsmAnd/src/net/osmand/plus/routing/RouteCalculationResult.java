@@ -243,12 +243,12 @@ public class RouteCalculationResult {
                 if (routeInd  < list.size()) {
                     int lind = routeInd;
                     if(turn.isRoundAbout()) {
-                        int roundAboutEnd = prevLocationSize - 1;
+                        int roundAboutEnd = prevLocationSize ;
                     	// take next name for roundabout (not roundabout name)
-                    	while(lind < list.size() -1 && list.get(lind).getObject().roundabout()) {
-                    		roundAboutEnd += Math.abs(list.get(lind).getEndPointIndex()-list.get(lind).getStartPointIndex());
-                    		lind++;
-                    	}
+						while (lind < list.size() - 1 && list.get(lind).getObject().roundabout()) {
+							roundAboutEnd++;
+							lind++;
+						}
                     	// Consider roundabout end.
                     	info.routeEndPointOffset = roundAboutEnd;
                     }
@@ -811,6 +811,7 @@ public class RouteCalculationResult {
 									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
 						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
 						p.routePointOffset = i.routePointOffset;
+						p.routeEndPointOffset = i.routeEndPointOffset;
 						p.setDestinationName(i.getDestinationName());
 						p.setRef(i.getRef());
 						p.setStreetName(i.getStreetName());
