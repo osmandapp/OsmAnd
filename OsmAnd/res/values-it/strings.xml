@@ -1556,8 +1556,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente la sessione di tracciamento</string>
     <string name="osmo_tracker_id">ID tracciamento personale</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
- Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona Opzione rigenera.</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità. Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona l\'opzione Rigenera l\'id.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
