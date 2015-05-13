@@ -212,10 +212,10 @@
     <string name="rendering_value_highContrastRoads_name">Estradas em alto contraste</string>
 	<string name="traffic_warning_railways">Cruzamento de ferrovia</string>
 	<string name="traffic_warning_pedestrian">Travessia de pedestres</string>
-	<string name="show_railway_warnings">Mostrar cruzamento de ferrovia</string>
+	<string name="show_railway_warnings">Cruzamento de ferrovia</string>
 	<string name="rendering_value_americanRoadAtlas_name">Atlas de estradas americanas</string>
     <string name="dash_download_msg_none">Deseja baixar mapas offline?</string>
-    <string name="dash_download_msg">Você baixou %1$s mapas</string>
+    <string name="dash_download_msg">Você baixou %1$s mapa(s)</string>
     <string name="dash_download_manage">Gerenciar</string>
     <string name="map_locale">Idioma do mapa</string>
     <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
@@ -224,10 +224,10 @@
     <string name="download_tab_downloads">Todas as transferências</string>
     <string name="download_tab_updates">Atualizações</string>
     <string name="download_tab_local">Local</string>
-	<string name="no_internet_connection">Não é possível baixar, por favor, verifique sua conexão com a Internet.</string>
+	<string name="no_internet_connection">Não foi possível baixar, por favor, verifique sua conexão com a Internet.</string>
     <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
     <string name="use_opengl_render">Usar renderizador OpenGL</string>
-    <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
+    <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (talvez não funcione em alguns aparelhos)</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
     <string name="osmo_use_https_descr">Usar conexão segura com o servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>
@@ -258,4 +258,19 @@
 	<string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">Na proximidade de</string>
     <string name="osmo_device_not_found">Aparelho não encontrado</string>
-    </resources>
+    <string name="osmo_no_connection_msg">Serviço OsMo não está disponível:\n- verificar a conexão;\n- verificar as configurações;\n- conferir nosso Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Um usuário anônimo não pode:\n- criar grupos;\n- sincronizar aparelhos e grupos com o servidor;\n- gerenciar grupos e aparelhos em uma sala particular.</string>
+    <string name="anonymous_user">Usuário anônimo</string>
+    <string name="logged_as">Conectado como %1$s</string>
+	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
+	<string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
+	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$ s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
+    <string name="speak_title">Anunciar…</string>
+	<string name="show_pedestrian_warnings">Faixas de pedestre</string>
+    <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9</string>
+    <string name="dash_download_new_one">Baixar um novo mapa</string>
+    <string name="map_update">Atualizações disponíveis para %1$s mapa(s)</string>
+	<string name="fav_point_dublicate_message">Nós mudamos o nome do favorito para %1$s a fim de evitar nomes duplicados.</string>
+    <string name="traffic_warning_speed_camera">Controlador de velocidade</string>
+    <string name="speak_favorites">Anunciar favoritos próximos</string>
+	</resources>
