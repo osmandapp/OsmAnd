@@ -744,11 +744,15 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				if (rs != null) {
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean work = rs.isOpenedForTime(inst);
+					boolean worksNow = rs.isOpenedForTime(inst);
+					inst.setTimeInMillis(System.currentTimeMillis() + 30 * 60 * 1000); // 30 minutes later
+					boolean worksLater = rs.isOpenedForTime(inst);
+					int colorId = worksNow ? worksLater ? color.color_ok : color.color_intermediate : color.color_warning;
+
 					timeIcon.setVisibility(View.VISIBLE);
 					timeText.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, work ? R.color.color_ok : R.color.color_warning));
-					timeText.setTextColor(app.getResources().getColor(work ? R.color.color_ok : R.color.color_warning));
+					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, colorId));
+					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
