@@ -579,7 +579,7 @@
 	<string name="rotate_map_compass_opt">- obračanje zemljevida po kompasu</string>
 	<string name="rotate_map_bearing_opt">- obračanje zemljevida glede na smer premikanja</string>
 	<string name="rotate_map_none_opt">- brez obračanja zemljevida (sever je vedno zgoraj)</string>
-	<string name="search_villages_and_postcodes">Poišči vasi ali poštne številke</string>
+	<string name="search_villages_and_postcodes">Poišči več vasi ali poštnih številk</string>
 	<string name="rendering_attr_showRoadMaps_description">Izberite kdaj naj bodo prikazani zemljevidi le s cestami:</string>
 	<string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
     <string name="download_roads_only_maps">Zemljevidi le s cestami</string>
