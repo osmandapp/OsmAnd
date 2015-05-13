@@ -283,4 +283,30 @@
     <string name="osmo_connect_to_device">Conectar a um</string>
     <string name="osmo_connect_to_group">Conectar a um grupo</string>
     <string name="minutes_ago">min. atrás</string>
-    </resources>
+    <string name="print_route">Imprimir rota</string>
+    <string name="fav_point_dublicate">Nome de favorito duplicado</string>
+    <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
+    <string name="text_size">Tamanho do texto</string>
+    <string name="traffic_warning_speed_limit">Limite de velocidade</string>
+    <string name="traffic_warning_border_control">Controle de fronteira</string>
+    <string name="traffic_warning_payment">Cabine de pedágio</string>
+    <string name="traffic_warning_stop">Placa pare</string>
+    <string name="traffic_warning_calming">Moderador de tráfego</string>
+    <string name="traffic_warning">Congestionamento</string>
+	<string name="speak_poi">POIs próximos</string>
+	<string name="way_alarms">Avisos de tráfego</string>
+	<string name="tip_navigation">Navegação</string>
+	<string name="tip_navigation_t">"Para obter direções para um lugar, faça um toque longo sobre ele no mapa (então toque no marcador da descrição e selecione \'Direções para\') ou selecione \'Direções para\' após tocar qualquer entrada na lista de resultados de pesquisa ou na lista de favoritos.
+\n\nO destino é marcado com uma \'bandeira\' no mapa e OsmAnd exibe a distância e a direção para ele (triângulo laranja), conforme esteja definido em \'Configurar tela\'.
+\n\nVocê pode optar também por \'Iniciar navegação\' , que significa que o OsmAnd te guiará, dê instruções de voz (se habilitado), etc. Ou você pode selecionar \'Mostrar rota\', o que somente exibirá a rota, sem quaisquer ajustes ou instruções conforme você se move.
+\n\nPara exibir uma rota para o destino selecionado a partir de qualquer ponto que não seja a sua posição atual, selecione (toque longo) o ponto inicial no mapa e toque \'Direções de\'.
+\n\nSe você usar \'Direções de\' junto com \'Iniciar navegação\', OsmAnd vai mudar para sua real posição assim que ela for encontrada (por isso pode ser usado para iniciar o roteamento antes de encontrar a posição real), enquanto \'Direções de\' em combinação com a \'Mostrar rota\' apenas mostrará a rota a partir de qualquer ponto arbitrário que tenha selecionado sem atualizações subsequentes. "</string>
+	<string name="tip_search">Pesquisando</string>
+	<string name="tip_search_t">"Você pode procurar lugares diretamente no mapa através de Usar posição\' → \'Pesquisar perto daqui\', ou mediante a tela de pesquisa através de \'Menu\' → \'Pesquisar\'.↵\n↵\nA tela de pesquisa fornece modelos para a busca↵\n→* pelo endereço ↵\n→* por coordenadas  ↵\n→* por POI (por categoria ou nome) ↵\n→* por seu histórico de pesquisa ↵\n→* ou por seus favoritos. ↵\n\nPara todos os pontos, se oferece um menu de contexto ou barra de ação com opções como \'Direções para\' ou \'Mostrar no mapa\', etc. "</string>
+	<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está em execução em segundo plano. Você quer interrompê-lo, também?</string>
+	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
+	<string name="stop_navigation_service">Interrupção</string>
+	<string name="confirm_every_run">Sempre perguntar</string>
+	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de gravação GPX no mapa)</string>
+	<string name="save_global_track_interval">Intervalo de registro geral</string>
+	</resources>
