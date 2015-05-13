@@ -1831,7 +1831,7 @@
 	<string name="proxy_port_descr">Cunfigura su nùmeru de sa ghenna proxy tua (es. 8118)</string>
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Imposta una cunnessione a ìnternet tramite proxy</string>
-    <string name="rendering_attr_streetLighting_name">Illuminatzione pùbblica</string>
+    <string name="rendering_attr_streetLighting_name">Illuminatzione pùblica</string>
     <string name="version_settings_descr">Iscàrriga versiones de isvilupu</string>
     <string name="version_settings">Versiones</string>
     <string name="points">Puntos</string>
