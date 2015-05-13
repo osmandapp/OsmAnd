@@ -1076,7 +1076,7 @@
     <string name="close_changeset">Zavrieť súbor zmien</string>
 	<string name="incomplete_locale">nedokončený</string>
 	<string name="no_buildings_found">Neboli nájdené žiadne budovy.</string>
-    <string name="search_villages_and_postcodes">Vyhľadať obce/PSČ</string>
+    <string name="search_villages_and_postcodes">Hľadať viac obcí/PSČ</string>
 	<string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
     <string name="route_descr_current_location">Aktuálna pozícia</string>
     
