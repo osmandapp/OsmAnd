@@ -2147,7 +2147,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="welcome_text">Met OsmAnd kunt u zonder internetverbinding kaarten van de hele wereld gebruiken en ermee navigeren!</string>
 	<string name="welcome_header">Welkom</string>
     <string name="current_route">Huidige route</string>
-    <string name="osm_changes_added_to_local_edits">OSM-aanpasingen toegevoegd aan lokale wijzigingen</string>
+    <string name="osm_changes_added_to_local_edits">OSM-aanpassingen toegevoegd aan lokale wijzigingen</string>
    	<string name="mark_to_delete">Markeer om te verwijderen</string>
 	<string name="osmo_grop_name_length_alert">De naam van een groep moet uit minstens 3 tekens bestaan!</string>
 	<string name="agps_info">A-GPS info</string>
