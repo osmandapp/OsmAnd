@@ -64,7 +64,7 @@ public class EntityParser {
 		if (e instanceof Way) {
 			nodes = ((Way) e).getNodes();
 		} else if (e instanceof Relation) {
-			nodes = new ArrayList<>();
+			nodes = new ArrayList<Node>();
 			for (Entity member : ((Relation) e).getMembers(null)) {
 				if (member instanceof Way) {
 					nodes.addAll(((Way) member).getNodes());
