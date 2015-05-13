@@ -273,4 +273,10 @@
 	<string name="fav_point_dublicate_message">Nós mudamos o nome do favorito para %1$s a fim de evitar nomes duplicados.</string>
     <string name="traffic_warning_speed_camera">Controlador de velocidade</string>
     <string name="speak_favorites">Anunciar favoritos próximos</string>
-	</resources>
+	<string name="proxy_host_title">Servidor Proxy</string>
+	<string name="enable_proxy_descr">Configurar o Proxy HTTP para todas as solicitações de rede</string>
+	<string name="enable_proxy_title">Ativar Proxy HTTP</string>
+	<string name="osmo_auth_error">Encontrado erro de autorização de OsMo: %1$s.\n Pode ser devido a um serviço temporário fora do ar ou o seu registo expirou.\n Você quer continuar com um novo registro?</string>
+    <string name="osmo_gpx_points_downloaded">Pontos OsMo %1$s baixados.</string>
+    <string name="osmo_credentials_not_valid">Suas credenciais de OsMo não são válidas.</string>
+    </resources>
