@@ -949,7 +949,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
-    <string name="search_villages_and_postcodes">Search villages/postcode</string>
+    <string name="search_villages_and_postcodes">Search more villages/postcode</string>
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
 	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
