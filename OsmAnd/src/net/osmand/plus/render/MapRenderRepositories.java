@@ -260,7 +260,8 @@ public class MapRenderRepositories {
 		// check that everything is initialized
 		for (String mapName : files.keySet()) {
 			BinaryMapIndexReader fr = files.get(mapName);
-			if (fr != null && fr.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
+			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) || 
+					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
