@@ -179,7 +179,7 @@
 \n\t* Gradnik za vklop in izklop beleženja "</string>
 	<string name="global_app_allocated_memory_descr">Uporabljenih je %1$s MB pomnilnika (Omejitev na androidu je %2$s MB, na dalviku %3$s MB).</string>
 	<string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
-	<string name="starting_point_too_far">Izhodišče je predaleč od najbližje ceste.</string>
+	<string name="starting_point_too_far">- izhodišče je predaleč od najbližje ceste.</string>
 	<string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne</string>
 	<string name="rendering_attr_noPolygons_name">Ne izriši ploskev območij</string>
 	<string name="rendering_attr_appMode_name">Način izrisa</string>
@@ -495,7 +495,7 @@
 	<string name="choose_auto_follow_route_descr">Časovni zamik, preden se položaj samodejno postavi v središče zemljevida</string>
 	<string name="auto_follow_route_never">Nikoli (pritisnite na \'Začni\' za ročni začetek navigacije)</string>
 	<string name="fast_route_mode">Najhitrejša pot</string>
-	<string name="fast_route_mode_descr">Vključi za najhitrejšo oz. izključi za najkrajšo pot </string>
+	<string name="fast_route_mode_descr">"Izbrana možnost določa izbor najhitrejše poti, neizbrana pa po razdalji najkrajše. "</string>
 	<string name="search_position_undefined">Nedoločeno</string>
 	
 	<string name="search_position_current_location">Trenutno mesto …</string>
@@ -1546,7 +1546,7 @@
     <string name="no_index_file_to_download">Prejetih datotek ni mogoče najti. Preverite internetno povezavo.</string>
     <string name="keep_navigation_service">Obdrži</string>
 	<string name="stop_navigation_service">Prekini</string>
-	<string name="enable_sleep_mode">Omogoči način spanja sprejemnika GPS</string>
+	<string name="enable_sleep_mode">Način delovanja sprejemnika GPS</string>
 	<string name="gps_wake_up_timer">Interval prebujanja GPS</string>
 	<string name="sleep_mode_stop_dialog">Ali naj se prekine neaktivnost sprejemnika GPS?</string>
 	<string name="map_preferred_locale_descr">Prednostno uporabljeni jezik oznak na zemljevidu (če jezik ni na voljo, so uporabljene angleške ali krajevne oznake)</string>
