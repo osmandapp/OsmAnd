@@ -295,14 +295,12 @@ public class RenderingRuleProperty {
 						}
 					}
 				} else {
-					String ts = val.substring(0, k);
-					if (ts != null) {
-						int[] additionalTypes = obj.getAdditionalTypes();
-						for (int i = 0; i < additionalTypes.length; i++) {
-							TagValuePair vp = obj.getMapIndex().decodeType(additionalTypes[i]);
-							if (vp != null && ts.equals(vp.tag)) {
-								return true;
-							}
+					String ts = val;
+					int[] additionalTypes = obj.getAdditionalTypes();
+					for (int i = 0; i < additionalTypes.length; i++) {
+						TagValuePair vp = obj.getMapIndex().decodeType(additionalTypes[i]);
+						if (vp != null && ts.equals(vp.tag)) {
+							return true;
 						}
 					}
 				}
