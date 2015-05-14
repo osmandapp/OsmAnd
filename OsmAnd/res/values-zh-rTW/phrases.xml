@@ -426,4 +426,21 @@
 	<string name="poi_diving">跳水</string>
 	<string name="poi_scuba_diving">潛水</string>
 	<string name="poi_dog_racing">賽狗</string>
+	<string name="poi_equestrian">騎馬</string>
+	<string name="poi_field_hockey">曲棍球</string>
+	<string name="poi_golf">高爾夫</string>
+	<string name="poi_gymnastics">體操</string>
+	<string name="poi_handball">手球</string>
+	<string name="poi_hockey">曲棍球</string>
+	<string name="poi_horse_racing">賽馬</string>
+	<string name="poi_ice_skating">溜冰</string>
+	<string name="poi_ice_stock">冰上滑盤</string>
+	<string name="poi_korfbal">合球</string>
+	<string name="poi_sport_motor">汽車運動</string>
+	<string name="poi_sport_multi">綜合運動</string>
+	<string name="poi_orienteering">定向運動</string>
+	<string name="poi_paddle_tennis">槳網球</string>
+	<string name="poi_paragliding">飛行傘</string>
+	<string name="poi_pelota">回力球</string>
+	<string name="poi_racquet">球拍</string>
 	</resources>
