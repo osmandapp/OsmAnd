@@ -12,7 +12,7 @@
     <string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar todas</string>
     <string name="shared_string_open">Abrir</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Asistente de mapeador OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asistente al mapeador OSM</string>
 	<string name="agps_info">Información A-GPS</string>
 	<string name="shared_string_manage">Gestionar</string>
 	<string name="shared_string_edit">Editar</string>
@@ -544,7 +544,7 @@
     <string name="index_tours">Excursiones</string>
     <string name="rendering_value_browse_map_name">Ver mapa</string>  
     <string name="rendering_value_car_name">Auto</string>
-    <string name="rendering_attr_coloredBuildings_name">Edificios por código de color según el tipo</string>
+    <string name="rendering_attr_coloredBuildings_name">Color de los edificios según el tipo</string>
     <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
     <string name="osmo_specify_tracker_id">Especifique el ID</string>
     <string name="gps_wake_up_timer">Intervalo para despertar el GPS</string>
@@ -630,7 +630,7 @@
     <string name="complex_route_calculation_failed">Falló el cálculo rápido de la ruta (%s), volviendo a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Inhabilitar la planificación de ruta de dos fases para la navegación con auto</string>
     <string name="disable_complex_routing">Inhabilitar ruteo complejo</string>
-    <string name="amenity_type_seamark">Náutica</string>
+    <string name="amenity_type_seamark">Náutico</string>
     <string name="app_modes_choose_descr">Elige los perfiles de uso que son visibles en la aplicación</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
 	<string name="map_widget_map_rendering">Renderizado del mapa</string>
@@ -640,7 +640,7 @@
     <string name="app_mode_aircraft">Avión</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
-    <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios OSM. ¿Estás seguro?</string>
+    <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) OSM. ¿Estás seguro?</string>
     <string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
     <string name="animate_routing_route">"Simular usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular usando traza GPX</string>
@@ -770,7 +770,7 @@
 \n\t* Ajustes adicionales para la estabilización de la brújula
 \n\t* Botón superior izquierdo en la pantalla del mapa reemplaza el botón Menú "</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-    <string name="contribution_activity">Actividad especial para versión de donación</string>
+    <string name="contribution_activity">Instalar versión</string>
     <string name="choose_osmand_theme_descr">Elije el aspecto de la aplicación</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
@@ -1237,7 +1237,7 @@
 	<string name="west_north_west">oestenoroeste</string>
 	<string name="north_west">noroeste</string>
 	<string name="north_north_west">nornoroeste</string>
-	<string name="front">hacia adelante</string>
+	<string name="front">de frente</string>
 	<string name="front_right">hacia adelante a la derecha</string>
 	<string name="right">a la derecha</string>
 	<string name="back_right">hacia atrás a la derecha</string>
@@ -1279,7 +1279,7 @@
 	<string name="local_openstreetmap_uploading">Subiendo…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} PDIs/Notas subidos</string>
 	<string name="local_openstreetmap_uploadall">Enviar todos</string>
-	<string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
+	<string name="local_openstreetmap_upload">Enviar cambio a OSM</string>
 	<string name="local_openstreetmap_delete">Quitar modificación</string>
 	<string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
 	<string name="local_openstreetmap_settings">PDIs/Notas OSM guardados localmente</string>
@@ -1363,7 +1363,7 @@
 	<string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
     <string name="keep_informing_descr">Repetir instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
-	<string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
+	<string name="auto_follow_route_navigation">Auto-centrar al navegar</string>
 	<string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
 	<string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
 	<string name="pref_vector_rendering">Opciones específicas de visualización de vectores</string>
@@ -1371,7 +1371,7 @@
 	<string name="pref_raster_map">Ajustes de fuente del mapa</string>
 	<string name="pref_vector_map">Ajustes del mapa vectorial</string>
 	<string name="delete_confirmation_msg">¿Borrar %1$s?</string>
-	<string name="city_type_suburb">Barrio</string>
+	<string name="city_type_suburb">Suburbio</string>
 	<string name="city_type_hamlet">Aldea</string>
 	<string name="city_type_village">Villa</string>
 	<string name="city_type_town">Pueblo</string>
