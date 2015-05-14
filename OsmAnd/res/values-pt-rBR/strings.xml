@@ -309,4 +309,43 @@
 	<string name="confirm_every_run">Sempre perguntar</string>
 	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de gravação GPX no mapa)</string>
 	<string name="save_global_track_interval">Intervalo de registro geral</string>
-	</resources>
+	<string name="background_service_int">Intervalo de ativação do GPS</string>
+	<string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
+	<string name="save_track_to_gpx_globally">Salvar trajetos em arquivo GPX</string>
+	<string name="save_track_to_gpx_globally_headline">Registro de trajeto sob demanda</string>
+	<string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de gravação GPX na tela do mapa</string>
+	<string name="save_current_track_descr">Salvar o trajeto atual no SD agora</string>
+	<string name="save_current_track">Salvar o trajeto atual</string>
+	<string name="save_track_to_gpx">Registrar o trajeto para arquivo GPX durante a navegação</string>
+	<string name="save_track_to_gpx_descrp">Trajetos serão salvos no diretório de trajetos durante a navegação</string>
+	<string name="save_track_interval_globally">Intervalo de registro</string>
+	<string name="save_track_interval">Intervalo de registro durante a navegação</string>
+	<string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trajeto durante a navegação</string>
+	<string name="voice_provider_descr">Selecione a voz para instruções de navegação</string>
+	<string name="voice_provider">Instruções por voz</string>
+	
+	<string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1)</string>
+	<string name="proxy_port_title">Porta do proxy</string>
+	<string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex., 8118)</string>
+	<string name="tip_initial_t">"OsmAnd é um aplicativo de navegação com muitos recursos.
+\n\nComo uma introdução básica, algumas dicas de uso e truques são ligadas através de \'Menu\' → \'Configurações\' → \'Ajuda\' na tela do mapa. "</string>
+    <string name="monitoring_settings">Gravação de viagem</string>
+    <string name="monitoring_settings_descr">Configurar como gravar suas viagens</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeiro e último segmeto de rota</string>
+    <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação?</string>
+    <string name="routing_attr_prefer_motorway_name">Autoestradas</string>
+	<string name="routing_attr_prefer_motorway_description">Autoestradas</string>
+	<string name="routing_attr_short_way_name">Rota mais curta</string>
+	<string name="routing_attr_short_way_description">Usar o caminho mais curto</string>
+	<string name="routing_attr_avoid_toll_name">Pedágios</string>
+	<string name="routing_attr_avoid_toll_description">Evitar estradas com pedágio</string>
+	<string name="routing_attr_avoid_unpaved_name">Vias não pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas</string>
+	<string name="routing_attr_avoid_ferries_description">Evitar os balsas</string>
+	<string name="routing_attr_weight_name">Limite de peso</string>
+	<string name="routing_attr_weight_description">Especificar o peso do veículo permitido nas rotas</string>
+    <string name="copying_osmand_files_descr">Copiar arquivos de dados do OsmAnd para o novo destino (%s)...</string>
+    <string name="copying_osmand_files">Copiando arquivos de dados do OsmAnd...</string>
+    <string name="calculate_osmand_route_gpx">Calcular rota off-line OsmAnd</string>
+    <string name="app_mode_truck">Caminhão</string>
+    </resources>
