@@ -83,7 +83,7 @@
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_dive">Equipo de buceo</string>
 	<string name="poi_doityourself">Tienda de mejoras para el hogar</string>
-	<string name="poi_erotic">Tienda erótica</string>
+	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
 	<string name="poi_frame">Tienda de marcos</string>
@@ -104,7 +104,7 @@
 	<string name="poi_kiosk">Quiosco</string>
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
-	<string name="poi_mobile_phone">Tienda de teléfonos móviles</string>
+	<string name="poi_mobile_phone">Local de telefonía celular</string>
 	<string name="poi_motorcycle">Concesionario de motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
@@ -166,7 +166,7 @@
 	<string name="poi_traffic_calming_choker">Gargantilla</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
-	<string name="poi_car_repair">Taller de autos</string>
+	<string name="poi_car_repair">Taller mecánico</string>
 	<string name="poi_service_tyres">Neumáticos</string>
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de autos</string>
@@ -203,9 +203,9 @@
 	<string name="poi_garages">Garajes</string>
 
 	<string name="poi_public_transport_platform">Plataforma de transporte público</string>
-	<string name="poi_public_transport_platform_bus">Plataforma de autobús</string>
+	<string name="poi_public_transport_platform_bus">Plataforma de colectivo</string>
 	<string name="poi_public_transport_platform_trolleybus">Plataforma de trolebús</string>
-	<string name="poi_bus_stop">Parada de autobús</string>
+	<string name="poi_bus_stop">Parada de colectivo</string>
 	<string name="poi_public_transport_stop_position">Parada de transporte público</string>
 	<string name="poi_public_transport_platform_tram">Plataforma de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
@@ -216,7 +216,7 @@
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_railway_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
-	<string name="poi_railway_buffer_stop">Topera</string>
+	<string name="poi_railway_buffer_stop">Fin de vía</string>
 	<string name="poi_taxi">Parada de taxi</string>
 
 	<string name="poi_aerodrome">Aeropuerto</string>
@@ -235,7 +235,7 @@
 	<string name="poi_aerialway_station">Estación de transporte elevado</string>
 	<string name="poi_aerialway_cable_car">Teleférico</string>
 	<string name="poi_aerialway_gondola">Góndola</string>
-	<string name="poi_aerialway_chair_lift">Telesilla</string>
+	<string name="poi_aerialway_chair_lift">Aerosilla</string>
 	<string name="poi_aerialway_t_bar">Telesquí (T)</string>
 	<string name="poi_aerialway_j_bar">Telesquí (J)</string>
 	<string name="poi_aerialway_platter">Elevador de plato</string>
@@ -250,7 +250,7 @@
 
 	<string name="poi_speed_camera">Radar</string>
 	<string name="poi_turning_circle">Círculo de giro</string>
-	<string name="poi_motorway_junction">Cruce de autopista</string>
+	<string name="poi_motorway_junction">Salida de autopista</string>
 	<string name="poi_junction">Cruce</string>
 	<string name="poi_rest_area">Área de descanso</string>
 
@@ -306,17 +306,17 @@
 	<string name="poi_works">Fábrica</string>
 	<string name="poi_mineshaft">Pozo de mina</string>
 	<string name="poi_adit">Boca de mina</string>
-	<string name="poi_petroleum_well">Pozo de petróleo</string>
+	<string name="poi_petroleum_well">Pozo petrolero</string>
 	<string name="poi_survey_point">Vértice geodésico</string>
 	<string name="poi_windmill">Molino de viento</string>
-	<string name="poi_salt_pond">Laguna salada</string>
+	<string name="poi_salt_pond">Salina</string>
 	<string name="poi_reservoir">Embalse</string>
 	<string name="poi_cricket_nets">Redes de críquet</string>
 	<string name="poi_gasometer">Gasómetro</string>
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Tanque de almacenamiento</string>
 
-	<string name="poi_college">Escuela profesional</string>
+	<string name="poi_college">Colegio</string>
 	<string name="poi_driving_school">Autoescuela</string>
 	<string name="poi_kindergarten">Jardín de infantes</string>
 	<string name="poi_school">Escuela</string>
