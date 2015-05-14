@@ -635,4 +635,10 @@
 	<string name="poi_craft_electrician">Electricista</string>
 	<string name="poi_craft_gardener">Jardiner</string>
 	<string name="poi_craft_glaziery">Vidrier</string>
+	<string name="poi_craft_hvac">Calefacció, ventilació, aire condicionat</string>
+	<string name="poi_craft_insulation">Aillaments</string>
+	<string name="poi_craft_handicraft">Fabricació manual</string>
+	<string name="poi_craft_jeweller">Joier</string>
+	<string name="poi_craft_locksmith">Manyà</string>
+	<string name="poi_craft_key_cutter">Duplicat de claus</string>
 	</resources>
