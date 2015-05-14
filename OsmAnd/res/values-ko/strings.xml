@@ -2236,7 +2236,7 @@
     <string name="rendering_value_highContrastRoads_name">높은 콘트라스트 도로</string>
 	<string name="rendering_attr_hideHouseNumbers_name">집 주소 숨기기</string>
     <string name="application_dir_change_warning3">OsmAnd가 새로운 도착지의 데이터 파일을 복사하시겠습니까?</string>
-    <string name="specified_directiory_not_writeable">지도는 지정된 디렉터리에 만들 수 없습니다.</string>
+    <string name="specified_directiory_not_writeable">지도는 지정된 디렉터리에 만들 수 없습니다</string>
 	<string name="copying_osmand_file_failed">파일 복사 실패</string>    
     <string name="storage_directory_external">외장 스토리지</string>
     <string name="storage_directory_multiuser">멀티유저 저장</string>

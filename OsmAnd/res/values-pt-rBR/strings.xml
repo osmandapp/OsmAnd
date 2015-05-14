@@ -283,4 +283,77 @@
     <string name="osmo_connect_to_device">Conectar a um</string>
     <string name="osmo_connect_to_group">Conectar a um grupo</string>
     <string name="minutes_ago">min. atrás</string>
+    <string name="print_route">Imprimir rota</string>
+    <string name="fav_point_dublicate">Nome de favorito duplicado</string>
+    <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
+    <string name="text_size">Tamanho do texto</string>
+    <string name="traffic_warning_speed_limit">Limite de velocidade</string>
+    <string name="traffic_warning_border_control">Controle de fronteira</string>
+    <string name="traffic_warning_payment">Cabine de pedágio</string>
+    <string name="traffic_warning_stop">Placa pare</string>
+    <string name="traffic_warning_calming">Moderador de tráfego</string>
+    <string name="traffic_warning">Congestionamento</string>
+	<string name="speak_poi">POIs próximos</string>
+	<string name="way_alarms">Avisos de tráfego</string>
+	<string name="tip_navigation">Navegação</string>
+	<string name="tip_navigation_t">"Para obter direções para um lugar, faça um toque longo sobre ele no mapa (então toque no marcador da descrição e selecione \'Direções para\') ou selecione \'Direções para\' após tocar qualquer entrada na lista de resultados de pesquisa ou na lista de favoritos.
+\n\nO destino é marcado com uma \'bandeira\' no mapa e OsmAnd exibe a distância e a direção para ele (triângulo laranja), conforme esteja definido em \'Configurar tela\'.
+\n\nVocê pode optar também por \'Iniciar navegação\' , que significa que o OsmAnd te guiará, dê instruções de voz (se habilitado), etc. Ou você pode selecionar \'Mostrar rota\', o que somente exibirá a rota, sem quaisquer ajustes ou instruções conforme você se move.
+\n\nPara exibir uma rota para o destino selecionado a partir de qualquer ponto que não seja a sua posição atual, selecione (toque longo) o ponto inicial no mapa e toque \'Direções de\'.
+\n\nSe você usar \'Direções de\' junto com \'Iniciar navegação\', OsmAnd vai mudar para sua real posição assim que ela for encontrada (por isso pode ser usado para iniciar o roteamento antes de encontrar a posição real), enquanto \'Direções de\' em combinação com a \'Mostrar rota\' apenas mostrará a rota a partir de qualquer ponto arbitrário que tenha selecionado sem atualizações subsequentes. "</string>
+	<string name="tip_search">Pesquisando</string>
+	<string name="tip_search_t">"Você pode procurar lugares diretamente no mapa através de Usar posição\' → \'Pesquisar perto daqui\', ou mediante a tela de pesquisa através de \'Menu\' → \'Pesquisar\'.↵\n↵\nA tela de pesquisa fornece modelos para a busca↵\n→* pelo endereço ↵\n→* por coordenadas  ↵\n→* por POI (por categoria ou nome) ↵\n→* por seu histórico de pesquisa ↵\n→* ou por seus favoritos. ↵\n\nPara todos os pontos, se oferece um menu de contexto ou barra de ação com opções como \'Direções para\' ou \'Mostrar no mapa\', etc. "</string>
+	<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está em execução em segundo plano. Você quer interrompê-lo, também?</string>
+	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
+	<string name="stop_navigation_service">Interrupção</string>
+	<string name="confirm_every_run">Sempre perguntar</string>
+	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de gravação GPX no mapa)</string>
+	<string name="save_global_track_interval">Intervalo de registro geral</string>
+	<string name="background_service_int">Intervalo de ativação do GPS</string>
+	<string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
+	<string name="save_track_to_gpx_globally">Salvar trajetos em arquivo GPX</string>
+	<string name="save_track_to_gpx_globally_headline">Registro de trajeto sob demanda</string>
+	<string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de gravação GPX na tela do mapa</string>
+	<string name="save_current_track_descr">Salvar o trajeto atual no SD agora</string>
+	<string name="save_current_track">Salvar o trajeto atual</string>
+	<string name="save_track_to_gpx">Registrar o trajeto para arquivo GPX durante a navegação</string>
+	<string name="save_track_to_gpx_descrp">Trajetos serão salvos no diretório de trajetos durante a navegação</string>
+	<string name="save_track_interval_globally">Intervalo de registro</string>
+	<string name="save_track_interval">Intervalo de registro durante a navegação</string>
+	<string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trajeto durante a navegação</string>
+	<string name="voice_provider_descr">Selecione a voz para instruções de navegação</string>
+	<string name="voice_provider">Instruções por voz</string>
+	
+	<string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1)</string>
+	<string name="proxy_port_title">Porta do proxy</string>
+	<string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex., 8118)</string>
+	<string name="tip_initial_t">"OsmAnd é um aplicativo de navegação com muitos recursos.
+\n\nComo uma introdução básica, algumas dicas de uso e truques são ligadas através de \'Menu\' → \'Configurações\' → \'Ajuda\' na tela do mapa. "</string>
+    <string name="monitoring_settings">Gravação de viagem</string>
+    <string name="monitoring_settings_descr">Configurar como gravar suas viagens</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeiro e último segmeto de rota</string>
+    <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação?</string>
+    <string name="routing_attr_prefer_motorway_name">Autoestradas</string>
+	<string name="routing_attr_prefer_motorway_description">Autoestradas</string>
+	<string name="routing_attr_short_way_name">Rota mais curta</string>
+	<string name="routing_attr_short_way_description">Usar o caminho mais curto</string>
+	<string name="routing_attr_avoid_toll_name">Pedágios</string>
+	<string name="routing_attr_avoid_toll_description">Evitar estradas com pedágio</string>
+	<string name="routing_attr_avoid_unpaved_name">Vias não pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas</string>
+	<string name="routing_attr_avoid_ferries_description">Evitar os balsas</string>
+	<string name="routing_attr_weight_name">Limite de peso</string>
+	<string name="routing_attr_weight_description">Especificar o peso do veículo permitido nas rotas</string>
+    <string name="copying_osmand_files_descr">Copiar arquivos de dados do OsmAnd para o novo destino (%s)...</string>
+    <string name="copying_osmand_files">Copiando arquivos de dados do OsmAnd...</string>
+    <string name="calculate_osmand_route_gpx">Calcular rota off-line OsmAnd</string>
+    <string name="app_mode_truck">Caminhão</string>
+    <string name="auto_zoom_far">Visão intermédia</string>
+	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
+    <string name="edit_tilesource_successfully">A origem da quadrícula %1$s foi salva com sucesso</string>
+    <string name="speak_traffic_warnings">Avisos de trânsito</string>
+    <string name="context_menu_item_directions_from">Direções de</string>
+    <string name="app_mode_default">Explorar mapa</string>
+	<string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
+    <string name="stop_routing_confirm">Certeza que quer parar a navegação?</string>
     </resources>

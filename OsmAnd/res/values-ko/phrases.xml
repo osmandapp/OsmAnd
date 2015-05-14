@@ -772,4 +772,23 @@
 
 	<string name="poi_tomb">무덤</string>
 	<string name="poi_payment_terminal">지불 단말기</string>
+	<string name="poi_observation_tower">관측 탑</string>
+	<string name="poi_bell_tower">종각</string>
+	<string name="poi_general_tourist_attraction_yes">일반 관광 명소</string>
+	<string name="poi_cabin">오두막</string>
+	<string name="poi_lean_to">임대한 방</string>
+	<string name="poi_hunting_lodge">사냥 별장</string>
+
+	<string name="poi_picnic_table">피크닉 테이블</string>
+	<string name="poi_hanami">꽃을 볼 수 있는 명소</string>
+	<string name="poi_wine_cellar">와인 저장고</string>
+	<string name="poi_winery">와이너리</string>
+
+	<string name="poi_piste">피스트</string>
+	<string name="poi_ski_rental">스키 렌탈</string>
+
+	<string name="poi_gallery">아트 갤러리</string>
+	<string name="poi_ski_resort">스키 리조트</string>
+	<string name="poi_trail_riding_station">트레일 라이딩 역</string>
+
 	</resources>
