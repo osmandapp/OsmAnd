@@ -2136,7 +2136,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="shared_string_my_location">Mijn Locatie</string>
 	<string name="shared_string_my_favorites">Mijn Favorieten</string>
 	<string name="shared_string_my_tracks">Mijn Routes</string>
-	<string name="shared_string_currently_recording_track">Route wordt opgenomen</string>
+	<string name="shared_string_currently_recording_track">Opnemen van route</string>
 	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
