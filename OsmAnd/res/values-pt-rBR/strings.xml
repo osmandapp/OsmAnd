@@ -348,4 +348,12 @@
     <string name="copying_osmand_files">Copiando arquivos de dados do OsmAnd...</string>
     <string name="calculate_osmand_route_gpx">Calcular rota off-line OsmAnd</string>
     <string name="app_mode_truck">Caminhão</string>
+    <string name="auto_zoom_far">Visão intermédia</string>
+	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
+    <string name="edit_tilesource_successfully">A origem da quadrícula %1$s foi salva com sucesso</string>
+    <string name="speak_traffic_warnings">Avisos de trânsito</string>
+    <string name="context_menu_item_directions_from">Direções de</string>
+    <string name="app_mode_default">Explorar mapa</string>
+	<string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
+    <string name="stop_routing_confirm">Certeza que quer parar a navegação?</string>
     </resources>
