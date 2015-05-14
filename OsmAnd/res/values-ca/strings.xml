@@ -1004,7 +1004,7 @@
 	<string name="native_library_not_running">L\'aplicació encara s\'està executant en mode segur(desactiveu-lo a «Preferències»).</string>
     <string name="rendering_attr_showRoadMaps_name">Mapes amb només carreteres</string>
     <string name="no_buildings_found">No s\'han trobat edificis.</string>
-    <string name="search_villages_and_postcodes">Cerca municipis i codis postals</string>
+    <string name="search_villages_and_postcodes">Cerca addicional de municipis i codis postals</string>
 	
     
     <string name="route_descr_lat_lon">Lat %1$.3f long %2$.3f</string>
