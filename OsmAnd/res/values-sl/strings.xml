@@ -345,12 +345,12 @@
 	<string name="map_widget_show_ruler">Merilo</string>
 	
 	<string name="map_widget_view_direction">Smer gledanja</string>
-	<string name="map_widget_transparent">Prosojna plast</string>
+	<string name="map_widget_transparent">Prosojni bočni pult</string>
 	<string name="use_transparent_map_theme">Prosojna tema</string>
 	<string name="bg_service_sleep_mode_off">Omogoči\n način spanja</string>
 	<string name="bg_service_sleep_mode_on">Ustavi\n način spanja</string>
-	<string name="gps_wakeup_interval">Interval prebujanja GPS: %s</string>
-	<string name="int_continuosly">Neprekinjeno</string>
+	<string name="gps_wakeup_interval">Interval prebujanja GPS: na %s</string>
+	<string name="int_continuosly">neprekinjeno delovanje</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
 	<string name="map_widget_top_text">Pokaži imena cest</string>
 	
@@ -1078,7 +1078,7 @@
     <string name="recording_can_not_be_played">Posnetka ni mogoče predvajati</string>
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
-    <string name="layer_recordings">Plast posnetkov</string>
+    <string name="layer_recordings">Sloj posnetka</string>
     <string name="shared_string_control_start">Razdalje ...</string>
     
     
@@ -1730,7 +1730,7 @@
     
 	
 	<string name="navigation_over_track">Ali želite začeti navigacijo po sledi?</string>
-	<string name="avoid_roads_msg">Drugo pot lahko določite tako, da izberete tiste, ki se jim želite izogniti</string>
+	<string name="avoid_roads_msg">Izbor druge poti lahko določite tako, da izberete tiste poti, ki se jim želite izogniti.</string>
     <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
 	<string name="parking_place">Parkirno mesto</string>
     <string name="remove_the_tag">ODSTRANI OZNAKO</string>
