@@ -733,4 +733,7 @@
 	<string name="poi_storage_tank">Резервуар</string>
 
 	<string name="poi_neighbourhood">Микрорайон</string>
+	<string name="poi_residential">Жилой район</string>
+
+	<string name="poi_general_tourist_attraction_yes">Основная туристическая достопримечательность</string>
 	</resources>
