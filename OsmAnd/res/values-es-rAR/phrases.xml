@@ -325,7 +325,7 @@
 
 	<string name="poi_social_facility">Centro social</string>
 	<string name="poi_courthouse">Juzgado</string>
-	<string name="poi_prison">Prisión</string>
+	<string name="poi_prison">Cárcel</string>
 	<string name="poi_register_office">Registro civil</string>
 	<string name="poi_embassy">Embajada</string>
 	<string name="poi_government">Gubernamental</string>
@@ -365,7 +365,7 @@
 	<string name="poi_healthcare_centre">Centro médico</string>
 	<string name="poi_midwife">Partera</string>
 	<string name="poi_occupational_therapist">Terapeuta ocupacional</string>
-	<string name="poi_optometrist">Optometrista</string>
+	<string name="poi_optometrist">Oftalmólogo</string>
 	<string name="poi_physiotherapist">Fisioterapeuta</string>
 	<string name="poi_podiatrist">Podólogo</string>
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
@@ -434,7 +434,7 @@
 	<string name="poi_ice_stock">Curling bávaro</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
-	<string name="poi_sport_multi">Deporte múltiple</string>
+	<string name="poi_sport_multi">Multi deportes</string>
 	<string name="poi_orienteering">Orientación</string>
 	<string name="poi_paddle_tennis">Pádel</string>
 	<string name="poi_paragliding">Parapente</string>
@@ -666,7 +666,7 @@
 	<string name="poi_craft_sun_protection">Fábrica de toldos</string>
 	<string name="poi_craft_sweep">Deshollinador</string>
 	<string name="poi_craft_tailor">Sastre</string>
-	<string name="poi_craft_tiler">Alicatador</string>
+	<string name="poi_craft_tiler">Albañil (azulejos)</string>
 	<string name="poi_craft_tinsmith">Hojalatero</string>
 	<string name="poi_craft_upholsterer">Tapicero</string>
 	<string name="poi_craft_watchmaker">Relojero (watchmaker)</string>
