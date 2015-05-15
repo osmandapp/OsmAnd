@@ -9,7 +9,7 @@
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte fluvial</string>
-		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
+		<string name="poi_bicycle_transport">Transporte ciclista</string>
 		<string name="poi_aerialway_transport">Transporte elevado</string>
 	<string name="poi_man_made">Artificial</string>
 		<string name="poi_transport_construction">Transporte en construcción</string>
@@ -60,7 +60,7 @@
 	<string name="poi_vending_machine">Máquina expendedora</string>
 	<string name="poi_wine">Vinoteca</string>
 
-	<string name="poi_books">Librería</string>
+	<string name="poi_books">Librería (libros)</string>
 	<string name="poi_bicycle">Bicicletería (venta)</string>
 	<string name="poi_anime">Tienda de anime</string>
 	<string name="poi_antiques">Antigüedades</string>
@@ -70,13 +70,13 @@
 	<string name="poi_bathroom_furnishing">Muebles de baño</string>
 	<string name="poi_bed">Muebles de dormitorio</string>
 	<string name="poi_boutique">Boutique de moda</string>
-	<string name="poi_carpet">Tienda de alfombras</string>
+	<string name="poi_carpet">Alfombras</string>
 	<string name="poi_charity">Negocio benéfico</string>
 	<string name="poi_chemist">Perfumería</string>
 	<string name="poi_clothes">Negocio de ropa</string>
-	<string name="poi_child_clothes">Ropa para niños</string>
+	<string name="poi_child_clothes">Ropa infantil</string>
 	<string name="poi_shoes">Zapatería</string>
-	<string name="poi_computer">Tienda de computadoras</string>
+	<string name="poi_computer">Computadoras</string>
 	<string name="poi_copyshop">Fotocopiadora</string>
 	<string name="poi_curtain">Blanquería</string>
 	<string name="poi_fabric">Mercería</string>
@@ -130,7 +130,7 @@
 	<string name="poi_window_blind">Tienda de persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Electrónicos</string>
-	<string name="poi_car">Concesionaria</string>
+	<string name="poi_car">Concesionario de autos</string>
 	<string name="poi_car_parts">Autopartes</string>
 	<string name="poi_atv">Concesionario de cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
@@ -198,21 +198,21 @@
 	<string name="poi_vehicle_ramp">Rampa de vehículos</string>
 	<string name="poi_compressed_air">Aire comprimido</string>
 	<string name="poi_parking">Estacionamiento</string>
-	<string name="poi_motorcycle_parking">Estacionamiento de motocicletas</string>
+	<string name="poi_motorcycle_parking">Estacionamiento de motos</string>
 	<string name="poi_parking_entrance">Entrada de estacionamiento</string>
 	<string name="poi_garages">Garajes</string>
 
-	<string name="poi_public_transport_platform">Plataforma de transporte público</string>
-	<string name="poi_public_transport_platform_bus">Plataforma de colectivo</string>
-	<string name="poi_public_transport_platform_trolleybus">Plataforma de trolebús</string>
+	<string name="poi_public_transport_platform">Andén de transporte público</string>
+	<string name="poi_public_transport_platform_bus">Andén de colectivo</string>
+	<string name="poi_public_transport_platform_trolleybus">Andén de trolebús</string>
 	<string name="poi_bus_stop">Parada de colectivo</string>
 	<string name="poi_public_transport_stop_position">Parada de transporte público</string>
-	<string name="poi_public_transport_platform_tram">Plataforma de tranvía</string>
+	<string name="poi_public_transport_platform_tram">Andén de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
-	<string name="poi_bus_station">Estación de autobús</string>
+	<string name="poi_bus_station">Estación de colectivo</string>
 	<string name="poi_railway_station">Estación de tren</string>
-	<string name="poi_railway_platform">Andén</string>
+	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_railway_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
