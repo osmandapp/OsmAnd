@@ -881,4 +881,6 @@
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
     <string name="rendering_attr_showRoadMaps_name">Apenas vias no mapa</string>
-    </resources>
+    <string name="safe_mode_description">Executar o aplicativo em modo de segurança (usando código de Android, mais lento, em vez de código nativo).</string>
+    <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na loja de apps?</string>
+	</resources>
