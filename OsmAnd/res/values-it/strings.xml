@@ -1962,7 +1962,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_refresh">Ricarica</string>
 	<string name="shared_string_download">Download</string>
 	<string name="shared_string_downloading">In download</string>
-	<string name="shared_string_download_successful">Download eseguito</string>
+	<string name="shared_string_download_successful">Download completato</string>
 	<string name="shared_string_io_error">Errore di I/O</string>
 	<string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
 	<string name="shared_string_action_template">"Azione {0}"</string>
