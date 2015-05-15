@@ -61,7 +61,7 @@
 	<string name="poi_wine">Vinoteca</string>
 
 	<string name="poi_books">Librería (libros)</string>
-	<string name="poi_bicycle">Bicicletería (venta)</string>
+	<string name="poi_bicycle">Bicicletería</string>
 	<string name="poi_anime">Tienda de anime</string>
 	<string name="poi_antiques">Antigüedades</string>
 	<string name="poi_art">Venta de arte</string>
@@ -82,7 +82,7 @@
 	<string name="poi_fabric">Mercería</string>
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_dive">Equipo de buceo</string>
-	<string name="poi_doityourself">Tienda de mejoras para el hogar</string>
+	<string name="poi_doityourself">Mejoras para el hogar</string>
 	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
@@ -104,7 +104,7 @@
 	<string name="poi_kiosk">Quiosco</string>
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
-	<string name="poi_mobile_phone">Local de telefonía celular</string>
+	<string name="poi_mobile_phone">Telefonía celular</string>
 	<string name="poi_motorcycle">Concesionario de motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
@@ -115,7 +115,7 @@
 	<string name="poi_pet">Tienda de mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
-	<string name="poi_second_hand">Tienda de segunda mano</string>
+	<string name="poi_second_hand">Local de segunda mano</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
 	<string name="poi_stationery">Librería</string>
@@ -124,7 +124,7 @@
 	<string name="poi_tobacco">Tienda de tabaco</string>
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Corralón</string>
-	<string name="poi_vacuum_cleaner">Tienda de aspiradoras</string>
+	<string name="poi_vacuum_cleaner">Aspiradoras</string>
 	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_video">Videoclub</string>
 	<string name="poi_window_blind">Tienda de persianas</string>
@@ -132,7 +132,7 @@
 	<string name="poi_electronics">Electrónicos</string>
 	<string name="poi_car">Concesionario de autos</string>
 	<string name="poi_car_parts">Autopartes</string>
-	<string name="poi_atv">Concesionario de cuatriciclos</string>
+	<string name="poi_atv">Cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>
 	<string name="poi_sewing">Tienda de confección</string>
@@ -318,7 +318,7 @@
 
 	<string name="poi_college">Colegio</string>
 	<string name="poi_driving_school">Autoescuela</string>
-	<string name="poi_kindergarten">Jardín de infantes</string>
+	<string name="poi_kindergarten">Jardín infantil</string>
 	<string name="poi_school">Escuela</string>
 	<string name="poi_training">Instalaciones de entrenamiento</string>
 	<string name="poi_university">Universidad</string>
