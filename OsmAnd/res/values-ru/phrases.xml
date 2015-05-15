@@ -720,4 +720,16 @@
 	<string name="poi_road_obstacle"/>
 		<string name="poi_medical_supply">Медицинские изделия</string>
 	<string name="poi_public_transport_stop_position">Остановка общественного транспорта</string>
+	<string name="poi_railway_buffer_stop">Железнодорожная остановка буфер</string>
+	<string name="poi_junction">Круговое движение</string>
+	<string name="poi_observation_tower">Смотровая башня</string>
+	<string name="poi_bell_tower">Колокольня</string>
+	<string name="poi_industrial">Промышленный район</string>
+	<string name="poi_allotments">Садоводство</string>
+	<string name="poi_farmyard">Сельскохозяственный двор</string>
+	<string name="poi_meadow">Луг</string>
+	<string name="poi_landuse_railway"/>
+
+	<string name="poi_storage_tank">Резервуар</string>
+
 	</resources>
