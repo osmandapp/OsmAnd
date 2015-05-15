@@ -863,7 +863,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="rendering_attr_appMode_name">Modo de Visualização</string>
   <string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string>
   <string name="rendering_attr_contourLines_description">Exibir a partir do nível de zoom (precisa arquivo SRTM):</string>
-  <string name="rendering_attr_contourLines_name">Mostrar linhas de contorno</string>
+  <string name="rendering_attr_contourLines_name">Mostrar curvas de nível</string>
   <string name="rendering_attr_hmRendered_description">Aumentar a quantidade de detalhe no mapa</string>
   <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
   <string name="route_roundabout">Roundabout : take %1$d exit</string>
@@ -1273,7 +1273,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="use_magnetic_sensor_descr">use o sensor magnético para determinar a direção da bússola em vez do sensor de orientação</string>
     <string name="use_magnetic_sensor">Use sensor magnético</string>
     <string name="other_location">Outro</string>
-    <string name="local_indexes_cat_srtm">Dados de linhas de contorno</string>
+    <string name="local_indexes_cat_srtm">Dados de curvas de nível</string>
     
     <string name="tip_altitude_offset_t">A Maioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
 		\n\nUma melhor aproximação para esses sistmas locais é a referência EGM96. OsmAnd agora também suporta a exibição automática de altitudes no sistema EGM96.
@@ -1394,18 +1394,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">Depuração FPS</string>
-	<string name="tip_recent_changes_1_6_t">Alterações na versão 1.6
-	\n\t* Suporte de dispositivos Full HD
-	\n\t* Suporte a fundo de mapa transparente
-	\n\t* Mostrar mapas transferidos e facilitar a transferência de mapas em falta diretamente na vista do mapa
-	\n\t* Ficheiros de linhas de contorno de mapas disponíveis para países e regiões
-	\n\t* Novo mapa mundial com as principais estradas, ferrovias e características de área, como florestas
-	\n\t* Uma lupa para o mapa (clique longo no botão de ampliação) - Útil para mapas vetoriais em em mosaico
-	\n\t* Possibilidade de definir/editar fontes de azulejos personalizados (e especificar tempo de expiração)
-	\n\t* Suporte a limites de velocidade condicionais (Holanda)  
-	\n\t* Melhorias no mapa de procura de endereços
-	\n\t* Correções de erros nas rotas e renderização
-    </string>
+	<string name="tip_recent_changes_1_6_t">"Alterações na versão 1.6
+\n\t* Suporte de dispositivos Full HD
+\n\t* Suporte a fundo de mapa transparente
+\n\t* Mostrar mapas transferidos e facilitar a transferência de mapas em falta diretamente na vista do mapa
+\n\t* Ficheiros de curvas de nível de mapas disponíveis para países e regiões
+\n\t* Novo mapa mundial com as principais estradas, ferrovias e características de área, como florestas
+\n\t* Uma lupa para o mapa (clique longo no botão de ampliação) - Útil para mapas vetoriais em em mosaico
+\n\t* Possibilidade de definir/editar fontes de azulejos personalizados (e especificar tempo de expiração)
+\n\t* Suporte a limites de velocidade condicionais (Holanda)  
+\n\t* Melhorias no mapa de procura de endereços
+\n\t* Correções de erros nas rotas e renderização "</string>
     
     
     
@@ -1435,81 +1434,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 → → - orientação opcional pista , display de limite de velocidade , registradas e TTS vozes ↵
 →
 	</string>
-	<string name="osmand_plus_extended_description_4000_chars">
-↵
-OsmAnd ( OSM automatizados direções de navegação ) é um mapa e aplicação de navegação com acesso aos OpenStreetMap ( OSM) de dados livre , em todo o mundo , e de alta qualidade . Todos os dados do mapa podem ser armazenados no cartão de seu dispositivo \'s de memória para uso offline. Via o seu dispositivo \'s GPS, OsmAnd oferece roteamento , com orientação ótica e voz , para o carro , bicicleta, e de pedestres. Todas as principais funcionalidades de trabalhar tanto on-line e off-line (sem internet necessário). ↵
-↵
-OsmAnd + é a versão do aplicativo pago. Ao comprá-lo você apoiar o projeto, financiar o desenvolvimento de novas funcionalidades, e receber as últimas atualizações. Você pode testar o aplicativo antes de comprar , instalando a versão gratuita chamada OsmAnd . ↵
-↵
-Algumas das principais características: ↵
-↵
-navegação ↵
- - Obras on-line (rápido) ou offline (sem tarifas de roaming quando estão no exterior ) ↵
- - Turn- by-turn orientação por voz ( gravada e vozes sintetizadas ) ↵
- - Orientação opcional pista , display nome da rua, e tempo estimado de chegada ↵
- - Suporta pontos intermediários em seu itinerário ↵
- - O reencaminhamento automático sempre que desviar da rota ↵
- - Procure lugares por endereço , por tipo (por exemplo : restaurante , hotel, posto de gasolina, museu) , ou através de coordenadas geográficas ↵
-↵
-Mapa Visualizando ↵
- - Indique sua posição e orientação no mapa ↵
- - Opcionalmente orientar o mapa de acordo com a bússola ou a sua direcção de movimento ↵
- - Salvar seus lugares mais importantes como favoritos ↵
- - Mostrar POIs ( ponto de interesse ) em torno de você ↵
- - Pode exibir mapas on-line especializadas azulejo ↵
- - Pode mostrar a vista de satélite ( a partir de Bing) ↵
- - Pode apresentar diferentes sobreposições , como turismo / navegação faixas GPX e mapas adicionais com transparência personalizável ↵
- - Opcionalmente exibir nomes de lugares em Inglês, local, ou ortografia fonética ↵
-↵
-Use OpenStreetMap e Wikipedia dados: ↵
- - Informações de alta qualidade com os melhores projetos de colaboração do mundo ↵
- - Mapas globais de OpenStreetMap , disponíveis por país ou região ↵
- - Wikipedia POIs , ótimo para passeios ↵
- - Unlimited download gratuito, diretamente do aplicativo ↵
- - Sempre mapas de up- to-date ( atualizado pelo menos uma vez por mês ) ↵
- - Mapas vetoriais compactos off-line ↵
- - Escolha entre os dados de mapas completos e apenas rede viária ( Exemplo: Todo o Japão é de 700 MB , ou 200 MB para a rede de estradas apenas) ↵
- - Também suporta mapas azulejo on-line ou em cache ↵
-↵
-Características de segurança ↵
- - Dia / noite visão automatizada opcional comutação ↵
- - Display opcional limite de velocidade , com lembrete , se você ultrapassá-lo ↵
- - Mapa em função da velocidade opcional zoom ↵
- - Compartilhe sua localização para que seus amigos possam encontrá-lo ↵
-↵
-Bicicleta e Recursos ↵
- - Os mapas incluem pé , caminhadas e ciclovias , ótimo para atividades ao ar livre ↵
- - Roteamento especial e modos de exibição de bicicleta e pedestre ↵
- - Opcionais paragens de transportes públicos ( autocarro, eléctrico, comboio ), incluindo nomes de linha ↵
- - Gravação de viagem opcional para o arquivo GPX local ou serviço online ↵
- - Velocidade e altitude Opcional exibir ↵
- - Apresentação de linhas de contorno e hill -shading (via plug-in adicional) ↵
-↵
-Contribuem diretamente para o OpenStreetMap ↵
- - Relatório mapa erros ↵
- - Envie GPX faixas para OSM diretamente do aplicativo ↵
- - Adicionar POIs e enviá-los diretamente para OSM (ou mais tarde, se offline) ↵
- - Gravação de viagem opcional também no modo de fundo ( enquanto o dispositivo estiver no modo sleep ) ↵
-↵
-OsmAnd é open source e sendo ativamente desenvolvida. Todos podem contribuir para a aplicação, por relatar bugs , melhorando as traduções, ou codificação novos recursos. O projeto está em um estado animado de melhoria contínua por todas estas formas de desenvolvimento e interação do usuário. O andamento do projeto também conta com contribuições financeiras para financiar o desenvolvimento , codificação e teste de novas funcionalidades. Ao comprar OsmAnd + você ajuda o aplicativo para ser ainda mais incrível! Também é possível financiar novas funcionalidades específicas , ou para fazer uma doação geral sobre osmand.net . ↵
-↵
-↵
-Cobertura do mapa aproximado e qualidade: ↵
- - Europa Ocidental : **** ↵
- - Europa Oriental : *** ↵
- - Rússia: *** ↵
- - América do Norte : *** ↵
- - América do Sul : ** ↵
- - Ásia : ** ↵
- - Japão e Coréia : *** ↵
- - Oriente Médio: ** ↵
- - África : ** ↵
- - Antarctica : * ↵
-↵
-Lista dos países apoiado (basicamente todo o mundo !) : ↵
-Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbuda, Argentina , Armênia , Aruba, Austrália, Áustria, Azerbaijão , Bahamas , Bahrein, Bangladesh , Barbados, Belarus , Bélgica , Belize, Benin , Bermudas , Butão, Bolívia, Bonaire, Bósnia e Herzegovina , Botswana, Brasil , Ilhas Virgens Britânicas , Brunei, Bulgária , Burkina Faso , Burundi, Camboja , Camarões , Canadá , Cabo Verde, República Centro Africano , Chade, Chile , China, Colombia , Comoros , Congo , Costa Rica , Costa do Marfim , Croácia , Cuba, Curaçao, Chipre, República Checa , Dinamarca , Djibuti, Dominica, República Dominicana, Equador , Egito, El Salvador, Guiné Equatorial , Eritréia, Estônia , Etiópia , Fiji, Finlândia, França, Guiana Francesa, Polinésia , Gabão, Gâmbia, Geórgia , Alemanha , Gana, Gibraltar , Grécia, Greenland , Grenada , Guadalupe , Guam , Guatemala, Guernsey , Guiné , Guiné-Bissau , Guiana , Haiti, Vaticano , Honduras , Hong Kong, Hungria, Islândia, Índia , Indonésia , Irã, Iraque , Irlanda, Ilha de Man , Israel, Itália , Jamaica, Japão , Jersey , Jordânia, Cazaquistão , Quênia , Kiribati , Coréia do Norte e Coréia do Sul , Kuwait, Quirguistão , Laos, Letônia , Líbano , Lesoto, Libéria , Líbia, Liechtenstein , Lituânia, Luxemburgo , Macau, Macedónia , Madagáscar, Malawi , Malásia, Maldivas , Mali, Malta , Martinica, Mauritânia, Maurícias , Mayotte , México, Micronésia, Moldávia , Mônaco , Mongólia , Montenegro, Montserrat, Marrocos, Moçambique , Myanmar, Namíbia , Nauru , Nepal, Holanda , Antilhas Holandesas , Nova Caledônia , Nova Zelândia, Nicarágua , Níger, Nigéria , Noruega , Omã, Paquistão , Palau, Território da Palestina , Panamá , Papua Nova Guiné, Paraguai , Peru, Filipinas, Polônia , Portugal , Porto Rico , Qatar, Romênia, Rússia, Ruanda, Saint Barthelemy , Santa Helena , São Cristóvão e Nevis , Santa Lúcia, Saint Martin, Saint Pierre e Miquelon , São Vicente e Granadinas, Samoa , San Marino , Arábia Saudita, Senegal , Sérvia , Seychelles, Serra Leoa, Cingapura , Eslováquia, Eslovênia , Somália, África do Sul, Geórgia do Sul , Sudão do Sul, Espanha , Sri Lanka , Sudão, Suriname , Suazilândia , Suécia, Suíça , Síria, Taiwan , Tajiquistão, Tanzânia, Tailândia , Timor -Leste , Togo, Tokelau , Tonga , Trinidad e Tobago , Tunísia, Turquia , Turcomenistão, Tuvalu , Uganda, Ucrânia , Emirados Árabes Unidos , Reino Unido (UK) , Estados Unidos da América (EUA), Uruguai , Uzbequistão , Vanuatu , Venezuela, Vietnam , Wallis e Futuna , Saara Ocidental , Yemen , Zâmbia, Zimbabwe. ↵
-→
-	</string>
+	<string name="osmand_plus_extended_description_4000_chars">" ↵ OsmAnd ( OSM automatizados direções de navegação ) é um mapa e aplicação de navegação com acesso aos OpenStreetMap ( OSM) de dados livre , em todo o mundo , e de alta qualidade . Todos os dados do mapa podem ser armazenados no cartão de seu dispositivo \'s de memória para uso offline. Via o seu dispositivo \'s GPS, OsmAnd oferece roteamento , com orientação ótica e voz , para o carro , bicicleta, e de pedestres. Todas as principais funcionalidades de trabalhar tanto on-line e off-line (sem internet necessário). ↵ ↵ OsmAnd + é a versão do aplicativo pago. Ao comprá-lo você apoiar o projeto, financiar o desenvolvimento de novas funcionalidades, e receber as últimas atualizações. Você pode testar o aplicativo antes de comprar , instalando a versão gratuita chamada OsmAnd . ↵ ↵ Algumas das principais características: ↵ ↵ navegação ↵  - Obras on-line (rápido) ou offline (sem tarifas de roaming quando estão no exterior ) ↵  - Turn- by-turn orientação por voz ( gravada e vozes sintetizadas ) ↵  - Orientação opcional pista , display nome da rua, e tempo estimado de chegada ↵  - Suporta pontos intermediários em seu itinerário ↵  - O reencaminhamento automático sempre que desviar da rota ↵  - Procure lugares por endereço , por tipo (por exemplo : restaurante , hotel, posto de gasolina, museu) , ou através de coordenadas geográficas ↵ ↵ Mapa Visualizando ↵  - Indique sua posição e orientação no mapa ↵  - Opcionalmente orientar o mapa de acordo com a bússola ou a sua direcção de movimento ↵  - Salvar seus lugares mais importantes como favoritos ↵  - Mostrar POIs ( ponto de interesse ) em torno de você ↵  - Pode exibir mapas on-line especializadas azulejo ↵  - Pode mostrar a vista de satélite ( a partir de Bing) ↵  - Pode apresentar diferentes sobreposições , como turismo / navegação faixas GPX e mapas adicionais com transparência personalizável ↵  - Opcionalmente exibir nomes de lugares em Inglês, local, ou ortografia fonética ↵ ↵ Use OpenStreetMap e Wikipedia dados: ↵  - Informações de alta qualidade com os melhores projetos de colaboração do mundo ↵  - Mapas globais de OpenStreetMap , disponíveis por país ou região ↵  - Wikipedia POIs , ótimo para passeios ↵  - Unlimited download gratuito, diretamente do aplicativo ↵  - Sempre mapas de up- to-date ( atualizado pelo menos uma vez por mês ) ↵  - Mapas vetoriais compactos off-line ↵  - Escolha entre os dados de mapas completos e apenas rede viária ( Exemplo: Todo o Japão é de 700 MB , ou 200 MB para a rede de estradas apenas) ↵  - Também suporta mapas azulejo on-line ou em cache ↵ ↵ Características de segurança ↵  - Dia / noite visão automatizada opcional comutação ↵  - Display opcional limite de velocidade , com lembrete , se você ultrapassá-lo ↵  - Mapa em função da velocidade opcional zoom ↵  - Compartilhe sua localização para que seus amigos possam encontrá-lo ↵ ↵ Bicicleta e Recursos ↵  - Os mapas incluem pé , caminhadas e ciclovias , ótimo para atividades ao ar livre ↵  - Roteamento especial e modos de exibição de bicicleta e pedestre ↵  - Opcionais paragens de transportes públicos ( autocarro, eléctrico, comboio ), incluindo nomes de linha ↵  - Gravação de viagem opcional para o arquivo GPX local ou serviço online ↵  - Velocidade e altitude Opcional exibir ↵  - Apresentação de curvas de nível e hill -shading (via plug-in adicional) ↵ ↵ Contribuem diretamente para o OpenStreetMap ↵  - Relatório mapa erros ↵  - Envie GPX faixas para OSM diretamente do aplicativo ↵  - Adicionar POIs e enviá-los diretamente para OSM (ou mais tarde, se offline) ↵  - Gravação de viagem opcional também no modo de fundo ( enquanto o dispositivo estiver no modo sleep ) ↵ ↵ OsmAnd é open source e sendo ativamente desenvolvida. Todos podem contribuir para a aplicação, por relatar bugs , melhorando as traduções, ou codificação novos recursos. O projeto está em um estado animado de melhoria contínua por todas estas formas de desenvolvimento e interação do usuário. O andamento do projeto também conta com contribuições financeiras para financiar o desenvolvimento , codificação e teste de novas funcionalidades. Ao comprar OsmAnd + você ajuda o aplicativo para ser ainda mais incrível! Também é possível financiar novas funcionalidades específicas , ou para fazer uma doação geral sobre osmand.net . ↵ ↵ ↵ Cobertura do mapa aproximado e qualidade: ↵  - Europa Ocidental : **** ↵  - Europa Oriental : *** ↵  - Rússia: *** ↵  - América do Norte : *** ↵  - América do Sul : ** ↵  - Ásia : ** ↵  - Japão e Coréia : *** ↵  - Oriente Médio: ** ↵  - África : ** ↵  - Antarctica : * ↵ ↵ Lista dos países apoiado (basicamente todo o mundo !) : ↵ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbuda, Argentina , Armênia , Aruba, Austrália, Áustria, Azerbaijão , Bahamas , Bahrein, Bangladesh , Barbados, Belarus , Bélgica , Belize, Benin , Bermudas , Butão, Bolívia, Bonaire, Bósnia e Herzegovina , Botswana, Brasil , Ilhas Virgens Britânicas , Brunei, Bulgária , Burkina Faso , Burundi, Camboja , Camarões , Canadá , Cabo Verde, República Centro Africano , Chade, Chile , China, Colombia , Comoros , Congo , Costa Rica , Costa do Marfim , Croácia , Cuba, Curaçao, Chipre, República Checa , Dinamarca , Djibuti, Dominica, República Dominicana, Equador , Egito, El Salvador, Guiné Equatorial , Eritréia, Estônia , Etiópia , Fiji, Finlândia, França, Guiana Francesa, Polinésia , Gabão, Gâmbia, Geórgia , Alemanha , Gana, Gibraltar , Grécia, Greenland , Grenada , Guadalupe , Guam , Guatemala, Guernsey , Guiné , Guiné-Bissau , Guiana , Haiti, Vaticano , Honduras , Hong Kong, Hungria, Islândia, Índia , Indonésia , Irã, Iraque , Irlanda, Ilha de Man , Israel, Itália , Jamaica, Japão , Jersey , Jordânia, Cazaquistão , Quênia , Kiribati , Coréia do Norte e Coréia do Sul , Kuwait, Quirguistão , Laos, Letônia , Líbano , Lesoto, Libéria , Líbia, Liechtenstein , Lituânia, Luxemburgo , Macau, Macedónia , Madagáscar, Malawi , Malásia, Maldivas , Mali, Malta , Martinica, Mauritânia, Maurícias , Mayotte , México, Micronésia, Moldávia , Mônaco , Mongólia , Montenegro, Montserrat, Marrocos, Moçambique , Myanmar, Namíbia , Nauru , Nepal, Holanda , Antilhas Holandesas , Nova Caledônia , Nova Zelândia, Nicarágua , Níger, Nigéria , Noruega , Omã, Paquistão , Palau, Território da Palestina , Panamá , Papua Nova Guiné, Paraguai , Peru, Filipinas, Polônia , Portugal , Porto Rico , Qatar, Romênia, Rússia, Ruanda, Saint Barthelemy , Santa Helena , São Cristóvão e Nevis , Santa Lúcia, Saint Martin, Saint Pierre e Miquelon , São Vicente e Granadinas, Samoa , San Marino , Arábia Saudita, Senegal , Sérvia , Seychelles, Serra Leoa, Cingapura , Eslováquia, Eslovênia , Somália, África do Sul, Geórgia do Sul , Sudão do Sul, Espanha , Sri Lanka , Sudão, Suriname , Suazilândia , Suécia, Suíça , Síria, Taiwan , Tajiquistão, Tanzânia, Tailândia , Timor -Leste , Togo, Tokelau , Tonga , Trinidad e Tobago , Tunísia, Turquia , Turcomenistão, Tuvalu , Uganda, Ucrânia , Emirados Árabes Unidos , Reino Unido (UK) , Estados Unidos da América (EUA), Uruguai , Uzbequistão , Vanuatu , Venezuela, Vietnam , Wallis e Futuna , Saara Ocidental , Yemen , Zâmbia, Zimbabwe. ↵ → "</string>
 	<string name="tip_map_styles_t">OsmAnd permite exibir mapas vetoriais, sem necessitar de conexão com a internet, em diferentes estilos dependendo das suas necessidades: ↵
 → → \n \n NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
 → → \n \t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
