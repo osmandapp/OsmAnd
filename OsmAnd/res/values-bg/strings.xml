@@ -1226,7 +1226,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="layer_yandex_traffic">Яндекс трафик</string>
 	<string name="layer_route">Маршрут</string>
 	<string name="shared_string_favorites">Любими места</string>
-	<string name="layer_osm_bugs">OSM неточности (bugs)</string>
+	<string name="layer_osm_bugs">OSM бележки (онлайн)</string>
 	<string name="layer_transport">Спирки на общ. транспорт</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Карти…</string>
@@ -1276,7 +1276,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="first_time_continue">По-късно</string>
 	<string name="first_time_download">Сваляне на карти</string>
 	<string name="search_poi_location">Търсене на сигнал…</string>
-	<string name="search_near_map">Търсене близо до последното място</string>
+	<string name="search_near_map">Търсене около центъра на картата</string>
 	<string name="search_nearby">Търси наблизо</string>
 	<string name="map_orientation_default">Същото като на устройството</string>
 	<string name="map_orientation_portrait">Портрет</string>
@@ -1295,7 +1295,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="transport_to_go_after">предна дистанция</string>
 	<string name="transport_to_go_before">следваща дистанция</string>
 	<string name="transport_stops_to_pass">спирки да се пропуснат</string>
-	<string name="transport_route_distance">Дистанция на маршрут</string>
+	<string name="transport_route_distance">Изчислена дистанция</string>
 	<string name="transport">Обществен транспорт</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="show_transport_over_map_description">Показване на спирките на обществения транспорт на картата</string>
@@ -1321,15 +1321,15 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="searching">Търсене…</string>
 	<string name="searching_address">Търсене на адрес…</string>
 	<string name="search_osm_nominatim">Търсене онлайн с OSM Nominatim</string>
-	<string name="hint_search_online">Номер, улица, град</string>
+	<string name="hint_search_online">Търсене в Интернет: Номер, улица, град</string>
 	<string name="search_offline_address">Търсене офлайн</string>
 	<string name="search_online_address">Търсене онлайн</string>
 	<string name="max_level_download_tile">Максимален мащаб при онлайн</string>
 	<string name="max_level_download_tile_descr">Изберете максимален мащаб за сваляне на онлайн картни фрагменти</string>
-	<string name="route_general_information">Обща дистанция: %1$s,\n време: %2$d ч. %3$d мин.</string>
+	<string name="route_general_information">Дистанция: %1$s,\nвреме: %2$d ч. %3$d мин.</string>
 	<string name="router_service_descr">Изберете онлайн или офлайн услуга за навигация</string>
 	<string name="router_service">Услуга за навигация</string>
-	<string name="sd_dir_not_accessible">Папката за запис на SD картата не е достъпна</string>
+	<string name="sd_dir_not_accessible">Папката за запис на SD картата не е достъпна!</string>
 	<string name="download_question">Сваляне {0} - {1} ?</string>
 	<string name="download_question_exist">Офлайн данни за {0} вече съществуват ({1}). Искате ли да ги обновите ({2}) ?</string>
 	<string name="address">Адрес</string>
@@ -1970,4 +1970,6 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="proxy_host_descr">Конфигуриране на хост на прокси сървър (например 127.0.0.1)</string>
 	<string name="proxy_port_title">Прокси порт</string>
 	<string name="proxy_port_descr">Конфигуриране номера на порта на прокси сървъра (например 8118)</string>
+	<string name="share_fav_subject">Споделени места чрез OsmAnd</string>
+	<string name="import_file_favourites">Запис като GPX файл или внасяне в \'Любими места\'?</string>
 	</resources>
