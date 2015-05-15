@@ -9,7 +9,7 @@
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte fluvial</string>
-		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
+		<string name="poi_bicycle_transport">Transporte ciclista</string>
 		<string name="poi_aerialway_transport">Transporte elevado</string>
 	<string name="poi_man_made">Artificial</string>
 		<string name="poi_transport_construction">Transporte en construcción</string>
@@ -60,8 +60,8 @@
 	<string name="poi_vending_machine">Máquina expendedora</string>
 	<string name="poi_wine">Vinoteca</string>
 
-	<string name="poi_books">Librería</string>
-	<string name="poi_bicycle">Bicicletería (venta)</string>
+	<string name="poi_books">Librería (libros)</string>
+	<string name="poi_bicycle">Bicicletería</string>
 	<string name="poi_anime">Tienda de anime</string>
 	<string name="poi_antiques">Antigüedades</string>
 	<string name="poi_art">Venta de arte</string>
@@ -70,19 +70,19 @@
 	<string name="poi_bathroom_furnishing">Muebles de baño</string>
 	<string name="poi_bed">Muebles de dormitorio</string>
 	<string name="poi_boutique">Boutique de moda</string>
-	<string name="poi_carpet">Tienda de alfombras</string>
+	<string name="poi_carpet">Alfombras</string>
 	<string name="poi_charity">Negocio benéfico</string>
 	<string name="poi_chemist">Perfumería</string>
 	<string name="poi_clothes">Negocio de ropa</string>
-	<string name="poi_child_clothes">Ropa para niños</string>
+	<string name="poi_child_clothes">Ropa infantil</string>
 	<string name="poi_shoes">Zapatería</string>
-	<string name="poi_computer">Tienda de computadoras</string>
+	<string name="poi_computer">Computadoras</string>
 	<string name="poi_copyshop">Fotocopiadora</string>
 	<string name="poi_curtain">Blanquería</string>
 	<string name="poi_fabric">Mercería</string>
 	<string name="poi_bedding">Tienda de ropa de cama</string>
 	<string name="poi_dive">Equipo de buceo</string>
-	<string name="poi_doityourself">Tienda de mejoras para el hogar</string>
+	<string name="poi_doityourself">Mejoras para el hogar</string>
 	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fishing">Equipos de pesca</string>
 	<string name="poi_florist">Florería</string>
@@ -104,7 +104,7 @@
 	<string name="poi_kiosk">Quiosco</string>
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
-	<string name="poi_mobile_phone">Local de telefonía celular</string>
+	<string name="poi_mobile_phone">Telefonía celular</string>
 	<string name="poi_motorcycle">Concesionario de motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
@@ -115,7 +115,7 @@
 	<string name="poi_pet">Tienda de mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
-	<string name="poi_second_hand">Tienda de segunda mano</string>
+	<string name="poi_second_hand">Local de segunda mano</string>
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
 	<string name="poi_stationery">Librería</string>
@@ -124,15 +124,15 @@
 	<string name="poi_tobacco">Tienda de tabaco</string>
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Corralón</string>
-	<string name="poi_vacuum_cleaner">Tienda de aspiradoras</string>
+	<string name="poi_vacuum_cleaner">Aspiradoras</string>
 	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_video">Videoclub</string>
 	<string name="poi_window_blind">Tienda de persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
 	<string name="poi_electronics">Electrónicos</string>
-	<string name="poi_car">Concesionaria</string>
+	<string name="poi_car">Concesionario de autos</string>
 	<string name="poi_car_parts">Autopartes</string>
-	<string name="poi_atv">Concesionario de cuatriciclos</string>
+	<string name="poi_atv">Cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>
 	<string name="poi_sewing">Tienda de confección</string>
@@ -198,21 +198,21 @@
 	<string name="poi_vehicle_ramp">Rampa de vehículos</string>
 	<string name="poi_compressed_air">Aire comprimido</string>
 	<string name="poi_parking">Estacionamiento</string>
-	<string name="poi_motorcycle_parking">Estacionamiento de motocicletas</string>
+	<string name="poi_motorcycle_parking">Estacionamiento de motos</string>
 	<string name="poi_parking_entrance">Entrada de estacionamiento</string>
 	<string name="poi_garages">Garajes</string>
 
-	<string name="poi_public_transport_platform">Plataforma de transporte público</string>
-	<string name="poi_public_transport_platform_bus">Plataforma de colectivo</string>
-	<string name="poi_public_transport_platform_trolleybus">Plataforma de trolebús</string>
+	<string name="poi_public_transport_platform">Andén de transporte público</string>
+	<string name="poi_public_transport_platform_bus">Andén de colectivo</string>
+	<string name="poi_public_transport_platform_trolleybus">Andén de trolebús</string>
 	<string name="poi_bus_stop">Parada de colectivo</string>
 	<string name="poi_public_transport_stop_position">Parada de transporte público</string>
-	<string name="poi_public_transport_platform_tram">Plataforma de tranvía</string>
+	<string name="poi_public_transport_platform_tram">Andén de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
-	<string name="poi_bus_station">Estación de autobús</string>
+	<string name="poi_bus_station">Estación de colectivo</string>
 	<string name="poi_railway_station">Estación de tren</string>
-	<string name="poi_railway_platform">Andén</string>
+	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_railway_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
@@ -318,14 +318,14 @@
 
 	<string name="poi_college">Colegio</string>
 	<string name="poi_driving_school">Autoescuela</string>
-	<string name="poi_kindergarten">Jardín de infantes</string>
+	<string name="poi_kindergarten">Jardín infantil</string>
 	<string name="poi_school">Escuela</string>
 	<string name="poi_training">Instalaciones de entrenamiento</string>
 	<string name="poi_university">Universidad</string>
 
 	<string name="poi_social_facility">Centro social</string>
 	<string name="poi_courthouse">Juzgado</string>
-	<string name="poi_prison">Prisión</string>
+	<string name="poi_prison">Cárcel</string>
 	<string name="poi_register_office">Registro civil</string>
 	<string name="poi_embassy">Embajada</string>
 	<string name="poi_government">Gubernamental</string>
@@ -333,7 +333,7 @@
 	<string name="poi_prosecutor">Fiscal</string>
 	<string name="poi_pension_fund">Fondo de pensiones</string>
 	<string name="poi_migration">Migración</string>
-	<string name="poi_tax_inspection">Inspecciones fiscales</string>
+	<string name="poi_tax_inspection">Inspección fiscal</string>
 	<string name="poi_office_administrative">Oficina administrativa</string>
 	<string name="poi_customs">Aduanas</string>
 	<string name="poi_city">Ciudad</string>
@@ -365,7 +365,7 @@
 	<string name="poi_healthcare_centre">Centro médico</string>
 	<string name="poi_midwife">Partera</string>
 	<string name="poi_occupational_therapist">Terapeuta ocupacional</string>
-	<string name="poi_optometrist">Optometrista</string>
+	<string name="poi_optometrist">Oftalmólogo</string>
 	<string name="poi_physiotherapist">Fisioterapeuta</string>
 	<string name="poi_podiatrist">Podólogo</string>
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
@@ -434,7 +434,7 @@
 	<string name="poi_ice_stock">Curling bávaro</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
-	<string name="poi_sport_multi">Deporte múltiple</string>
+	<string name="poi_sport_multi">Multi deportes</string>
 	<string name="poi_orienteering">Orientación</string>
 	<string name="poi_paddle_tennis">Pádel</string>
 	<string name="poi_paragliding">Parapente</string>
@@ -598,7 +598,7 @@
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_ski_resort">Estación de esquí</string>
 	<string name="poi_beach_resort">Complejo turístico de playa</string>
-	<string name="poi_dog_park">Parque de perros</string>
+	<string name="poi_dog_park">Parque canino</string>
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
 	<string name="poi_hunting_stand">Soporte de caza</string>
 	<string name="poi_harbour">Puerto</string>
@@ -608,7 +608,7 @@
 	<string name="poi_bench">Banco</string>
 	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
-	<string name="poi_park">Parque</string>
+	<string name="poi_park">Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
@@ -644,7 +644,7 @@
 	<string name="poi_craft_jeweller">Joyero</string>
 	<string name="poi_craft_locksmith">Cerrajero</string>
 	<string name="poi_craft_key_cutter">Duplicación de llaves</string>
-	<string name="poi_craft_metal_construction">Construcciones de metal</string>
+	<string name="poi_craft_metal_construction">Metalistería</string>
 	<string name="poi_craft_optician">Oculista</string>
 	<string name="poi_craft_painter">Pintor</string>
 	<string name="poi_craft_parquet_layer">Parquetista</string>
@@ -666,7 +666,7 @@
 	<string name="poi_craft_sun_protection">Fábrica de toldos</string>
 	<string name="poi_craft_sweep">Deshollinador</string>
 	<string name="poi_craft_tailor">Sastre</string>
-	<string name="poi_craft_tiler">Alicatador</string>
+	<string name="poi_craft_tiler">Albañil (azulejos)</string>
 	<string name="poi_craft_tinsmith">Hojalatero</string>
 	<string name="poi_craft_upholsterer">Tapicero</string>
 	<string name="poi_craft_watchmaker">Relojero (watchmaker)</string>

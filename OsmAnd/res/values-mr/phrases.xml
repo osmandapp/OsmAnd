@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">दुकान</string>
+		<string name="poi_emergency">तातडीची सेवा</string>
+	<string name="poi_public_transport">सार्वजनिक परिवहन</string>
+		<string name="poi_water_supply">पाणीपुरवठा</string>
+		<string name="poi_education">शिक्षण</string>
+	<string name="poi_administrative">प्रशासकीय</string>
+	<string name="poi_tourism">पर्यटन</string>
+		<string name="poi_public_transport_platform_bus">बस थांबा</string>
+	<string name="poi_public_transport_platform_tram">ट्राम थांबा</string>
+	<string name="poi_office">कार्यालय</string>
+	<string name="poi_osmwiki">विकिपीडिया</string>
+	<string name="poi_books">पुस्तकालय</string>
+	</resources>

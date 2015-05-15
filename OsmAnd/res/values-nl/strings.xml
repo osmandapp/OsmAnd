@@ -152,7 +152,7 @@
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
   <string name="fav_export_confirmation">Er is al een bestand met geëxporteerde favorieten. Wil je dat bestand overschrijven?</string>
-  <string name="profile_settings">Profielspecifieke instellingen</string>
+  <string name="profile_settings">Instellingen voor dit profiel</string>
   <string name="settings_preset">Standaardprofiel</string>
   <string name="settings_preset_descr">Kaart- en navigatieinstellingen worden per profiel onthouden. Kies hier het standaardprofiel.</string>
   
@@ -1542,7 +1542,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="animate_routing_route_not_calculated">Eerst de route laten berekenen alsjeblieft</string>
     <string name="animate_routing_route">Simuleer met de berekende route </string>
-    <string name="animate_routing_gpx">Simuleer met een GPX spoor</string>
+    <string name="animate_routing_gpx">Simuleer met een GPX-spoor</string>
     
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM-wijzigingen worden verwijderd. Doorgaan?</string>
     <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
@@ -2129,7 +2129,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="drawer">Eenvoudige lijst</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen en meer</string>
-    <string name="routing_settings_2">Navigatie instellingen</string>
+    <string name="routing_settings_2">Navigatie-instellingen</string>
     <string name="general_settings_2">Algemene instellingen</string>
 	<string name="shared_string_clear_all">Wis alles</string>
 	<string name="shared_string_collapse">Inklappen</string>
