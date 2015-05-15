@@ -48,8 +48,8 @@
   <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción \'Grabación de viaje\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
-  <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
-  <string name="free_version_title">Versión gratuita</string>
+  <string name="free_version_message">Esta versión libre de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
+  <string name="free_version_title">Versión libre</string>
   <string name="poi_context_menu_showdescription">Muestra la descripción del PDI</string>
   <string name="index_name_north_america">Norteamérica</string>
   <string name="index_name_us">Norteamérica - Estados Unidos</string>
@@ -101,7 +101,7 @@
 		\n\nLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, para que la comunidad OSM pueda resolver el problema. Usa la opción \'Abrir fallo OSM\' en el menú contextual de \'Usar localización…\'. Luego escribe la descripción detallada del problema y por último envíala pulsando el botón \'Añadir\'.
 		\n\nOsmAnd puede guardar localmente tus entradas (ver la opción correspondiente), pero necesitas conexión a Internet para enviar tus contribuciones a PDIs y fallos OSM.
 	</string>
-  <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
+  <string name="download_files_not_enough_space">No hay suficiente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
   
   
@@ -1061,7 +1061,7 @@
     
     
     <string name="no_buildings_found">No se han encontrado edificios.</string>
-    <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
+    <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
 	<string name="tip_altitude_offset_t">"La mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
 \n\nUna mejor aproximación a estos sistemas locales es la referencia EGM96 (geoide).
 \n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'Corrección mundial de altitud\' (WW15MGH.DAC) mediante \'Ajustes\'→\'Gestionar mapas\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
