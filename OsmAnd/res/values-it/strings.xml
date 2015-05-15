@@ -1111,7 +1111,7 @@
     
     
     <string name="no_buildings_found">Nessun edificio trovato.</string>
-    <string name="search_villages_and_postcodes">Ricerca comuni/codice postale</string>
+    <string name="search_villages_and_postcodes">Ricerca fra frazioni/codice postale</string>
 	<string name="rendering_attr_showRoadMaps_description">Seleziona quando visualizzare le mappe solo strade:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mappe solo strade</string>
     <string name="download_roads_only_item">Solo strade</string>
