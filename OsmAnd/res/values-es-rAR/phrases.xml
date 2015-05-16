@@ -119,7 +119,7 @@
 	<string name="poi_ship_chandler">Proveedor naval</string>
 	<string name="poi_sports">Artículos deportivos</string>
 	<string name="poi_stationery">Librería</string>
-	<string name="poi_tableware">Tienda de menaje</string>
+	<string name="poi_tableware">Vajillas</string>
 	<string name="poi_ticket">Boletería</string>
 	<string name="poi_tobacco">Tienda de tabaco</string>
 	<string name="poi_toys">Juguetería</string>
@@ -282,7 +282,7 @@
 	<string name="poi_recycling">Reciclaje</string>
 	<string name="poi_landfill">Vertedero de basura</string>
 	<string name="poi_waste_disposal">Contenedor de basura</string>
-	<string name="poi_waste_basket">Papelera</string>
+	<string name="poi_waste_basket">Cesto de basura</string>
 
 	<string name="poi_industrial">Área industrial</string>
 	<string name="poi_quarry">Cantera</string>
@@ -384,7 +384,7 @@
 	<string name="poi_research">Oficina de investigación</string>
 	<string name="poi_it">Oficina de IT</string>
 	<string name="poi_newspaper">Oficina de diario</string>
-	<string name="poi_architect">Oficina de arquitectura</string>
+	<string name="poi_architect">Arquitecto</string>
 	<string name="poi_advertising_agency">Agencia de publicidad</string>
 	<string name="poi_educational_institution">Institución educativa</string>
 	<string name="poi_studio">Estudio</string>
@@ -580,7 +580,7 @@
 	<string name="poi_piste_sleigh">Trineo (animales)</string>
 	<string name="poi_piste_sled">Trineo</string>
 	<string name="poi_piste_snow_park">Parque de nieve</string>
-	<string name="poi_piste_playground">Parque de esquí infantil</string>
+	<string name="poi_piste_playground">Parque infantil de esquí</string>
 	<string name="poi_piste_ice_skate">Patín de hielo</string>
 	<string name="poi_ski_rental">Alquiler de esquí</string>
 

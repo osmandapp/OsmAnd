@@ -736,4 +736,16 @@
 	<string name="poi_residential">Жилой район</string>
 
 	<string name="poi_general_tourist_attraction_yes">Основная туристическая достопримечательность</string>
+	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
+	<string name="poi_wilderness_hut">Лесной домик</string>
+	<string name="poi_hunting_lodge">Охотничий домик</string>
+
+	<string name="poi_picnic_table">Стол для пикника</string>
+	<string name="poi_tomb">Гробница</string>
+	<string name="poi_winery">Винный завод</string>
+
+	<string name="poi_piste_downhill">Скоростной спуск</string>
+	<string name="poi_gallery">Художественная галерея</string>
+	<string name="poi_ski_resort">Горнолыжный курорт</string>
+	<string name="poi_recreation_ground">Площадка для игр</string>
 	</resources>

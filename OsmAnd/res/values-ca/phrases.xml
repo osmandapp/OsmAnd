@@ -641,4 +641,11 @@
 	<string name="poi_craft_jeweller">Joier</string>
 	<string name="poi_craft_locksmith">Manyà</string>
 	<string name="poi_craft_key_cutter">Duplicat de claus</string>
+	<string name="poi_craft_optician">Òptica</string>
+	<string name="poi_craft_painter">Pintor</string>
+	<string name="poi_craft_parquet_layer">Instal·lació de parquet</string>
+	<string name="poi_craft_photographer">Fotògraf</string>
+	<string name="poi_craft_photographic_laboratory">Laboratori fotogràfic</string>
+	<string name="poi_craft_plasterer">Enguixador</string>
+	<string name="poi_craft_pottery">Terrissaire</string>
 	</resources>
