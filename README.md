@@ -65,16 +65,18 @@ Functionality
 
 
 ####  Approximate map coverage and quality:
- * Western Europe: ++++
- * Eastern Europe: +++
- * Russia: +++
- * North America: +++
- * South America: ++
- * Asia: ++
- * Japan &amp; Korea: +++
- * Middle East: ++
- * Africa: ++
- * Antarctica: +
+| Region         |      |
+|----------------|------|
+| Western Europe | ++++ |
+| Eastern Europe | +++  |
+| Russia         | +++  |
+| North America  | +++  |
+| South America  | ++   |
+| Asia           | ++   |
+| Japan & Korea  | +++  |
+| Middle East    | ++   |
+| Africa         | ++   |
+| Antarctica     | +    |
 
 <p>
 List of countries supported (basically world wide!):
