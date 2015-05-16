@@ -44,8 +44,8 @@
 	<string name="osm_edits">Ediciones OSM</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
-	<string name="parking_place_limited">Tiempo de estacionamiento limitado a</string>
-	<string name="osmand_parking_time_left">restante</string>
+	<string name="parking_place_limited">Estacionamiento limitado hasta las</string>
+	<string name="osmand_parking_time_left">restante(s)</string>
 	<string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
@@ -182,7 +182,7 @@
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="use_opengl_render">Usar renderizado OpenGL</string>
     <string name="home_button">Inicio</string>
-    <string name="osmo_use_https_descr">Usar conexión segura con el servidor</string>
+    <string name="osmo_use_https_descr">Usar una conexión segura con el servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>
 	<string name="search_for">Buscar</string>
 	<string name="coordinates">Coordenadas</string>
@@ -530,7 +530,7 @@
 	<string name="background_service_int">Intervalo de activación del GPS</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-	<string name="save_track_to_gpx_globally_descr">El registro de la ubicación en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="save_track_to_gpx_globally_descr">El registro de la ubicación en un archivo GPX puede des/activarse usando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
 	<string name="save_track_to_gpx_descrp">Las trazas se guardarán en la carpeta de trazas durante la navegación</string>
 	<string name="save_track_interval">Intervalo de guardado durante navegación</string>
@@ -594,9 +594,9 @@
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
     <string name="osmo_auto_send_locations_descr">Iniciar sesión de rastreo automáticamente y enviar ubicaciones luego de iniciar la aplicación</string>
     <string name="osmo_tracker_id">Id de rastreo personal</string>
-    <string name="osmo_tracker_id_descr">Clic para ver o compartir id de rastreo. ¡Usando el id de rastreo, los dispositivos conectados podrán monitorear todos los movimientos de este dispositivo! Para desconectar, seleccione la opción Regenerar.</string>
+    <string name="osmo_tracker_id_descr">Clic para ver o compartir id de rastreo. ¡Usando el id de rastreo, los dispositivos conectados podrán seguir todos los movimientos del dispositivo! Para desconectar, seleccione la opción Regenerar.</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
-    <string name="osmo_locations_sent">"Ubicaciones enviadas %1$d (en buffer %2$d) "</string>
+    <string name="osmo_locations_sent">"Ubicaciones enviadas %1$d (en memoria %2$d) "</string>
     <string name="tip_recent_changes_1_8_alpha">"Cambios en 1.8: * Calcular ruta entre puntos de ruta de una traza GPX * Cambiado el diseño de los países para descargar (soporta búsquedas de nombres locales) * Soporta importación GPX/KML (conversión de KML a GPX) * Las trazas GPX se han movido a \'Mis datos\' * Puede dividir las trazas GPX por distancia y comprobar la diferencia de altitud / velocidad * Auto iniciar la navegación tras un retraso "</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y el canal de rastreo personal</string>
     <string name="index_item_nation_addresses">direcciones nacionales</string>
@@ -825,7 +825,7 @@
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Eliminar esta grabación?</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Complemento de cálculo de distancia\n\t* Complemento de notas de audio\n\t* Complemento de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo del mapa \'Vista turística\' con más detalles, nuevos estilos viales, más contraste y opción para travesías alpinas (escala SAC)\n\t* Corrección de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar nota de audio</string>
@@ -846,7 +846,7 @@
     <string name="download_roads_only_item">Sólo caminos</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapas normales</string>
-    <string name="download_roads_only_maps">Mapas sólo de caminos</string>
+    <string name="download_roads_only_maps">Mapas viales</string>
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
@@ -863,12 +863,12 @@
     <string name="no_buildings_found">No se encontró edificios.</string>
     <string name="incremental_search_city">Buscar ciudades incrementalmente</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
-	<string name="rendering_attr_showRoadMaps_description">Selecciona cuando mostrar mapas sólo de caminos:</string>
-	<string name="rendering_attr_showRoadMaps_name">Mapas sólo de caminos</string>
+	<string name="rendering_attr_showRoadMaps_description">Elije cuando mostrar mapas viales:</string>
+	<string name="rendering_attr_showRoadMaps_name">Mapas viales</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
-    <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0.0:\n\t* Mejorado el enrutamiento: más rápido y preciso (hasta 250 km)\n\t* Introduce mapas sólo de caminos\n\t* El mapa no pierde el bloqueo de posición luego de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
+    <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0.0:\n\t* Mejorado el enrutamiento: más rápido y preciso (hasta 250 km)\n\t* Introduce mapas viales (sólo caminos)\n\t* El mapa no pierde el bloqueo de posición luego de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
     <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos corregidos\n\t* El mapa no pierde el bloqueo de posición luego de las interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
 	<string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en la Tienda?</string>
@@ -1107,7 +1107,7 @@
 	<string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
 	<string name="osmand_parking_hours">Horas</string>
 	<string name="osmand_parking_minutes">Minutos</string>
-	<string name="osmand_parking_position_description_add_time">El auto fue estacionado en:</string>
+	<string name="osmand_parking_position_description_add_time">Se estacionó el auto a las:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1:
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
@@ -1123,25 +1123,25 @@
 	<string name="native_app_allocated_memory">Memoria nativa total</string>
 	<string name="starting_point_too_far">Punto de inicio demasiado lejos del camino más cercano.</string>
 	<string name="shared_location">Compartir ubicación</string>
-	<string name="osmand_parking_event">Recoger el auto del estacionamiento</string>
+	<string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
 	<string name="osmand_parking_warning">Advertencia</string>
 	<string name="osmand_parking_warning_text">La notificación para recoger tu auto fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>    
 	<string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del estacionamiento</string>
-	<string name="osmand_parking_delete_confirm">¿Quieres eliminar la ubicación del auto estacionado?</string>
-	<string name="osmand_parking_delete">Borrar un marcador de estacionamiento</string>
+	<string name="osmand_parking_delete_confirm">¿Quitar ubicación del auto estacionado?</string>
+	<string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
 	<string name="osmand_parking_choose_type">Elija el tipo de estacionamiento</string>
 	<string name="osmand_parking_lim_text">Tiempo limitado</string>
 	<string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
 	<string name="osmand_parking_add_event">Añadir una notificación a la aplicación Calendario</string>
 	<string name="osmand_parking_time_limit">Estacionamiento de tiempo limitado</string>
 	<string name="osmand_parking_time_no_limit">Estacionamiento de tiempo ilimitado</string>
-	<string name="osmand_parking_position_description">La ubicación de su auto estacionado. %1$s</string>
-	<string name="osmand_parking_position_description_add">Recoger el auto a las:</string>
+	<string name="osmand_parking_position_description">Ubicación del auto estacionado. %1$s</string>
+	<string name="osmand_parking_position_description_add">Buscar el auto a las:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Punto de estacionamiento</string>
 	<string name="context_menu_item_add_parking_point">Marcar como ubicación de estacionamiento</string>
-	<string name="context_menu_item_delete_parking_point">Borrar un marcador de estacionamiento</string>
+	<string name="context_menu_item_delete_parking_point">Quitar marcador de estacionamiento</string>
 	<string name="gpxup_public">Público</string>
 	<string name="gpxup_identifiable">Identificable</string>
 	<string name="gpxup_trackable">Trazable</string>
@@ -1774,7 +1774,7 @@
 	<string name="follow">Seguir navegación</string>
 	<string name="mark_final_location_first">Seleccione primero el destino</string>
 	<string name="get_directions">Indicaciones</string>
-	<string name="opening_hours">Horario de apertura</string>
+	<string name="opening_hours">Horario de atención</string>
 	<string name="opening_changeset">Abriendo conjunto de cambios…</string>
 	<string name="closing_changeset">Cerrando conjunto de cambios…</string>
 	<string name="commiting_node">Cambiando nodo…</string>
