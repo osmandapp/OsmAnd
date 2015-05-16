@@ -203,7 +203,7 @@
 
         <string name="poi_recycling">Genbrugsplads</string>
         <string name="poi_landfill">Losseplads</string>
-        <string name="poi_waste_disposal">Affaldshåndtering</string>
+        <string name="poi_waste_disposal">Affaldsbortskaffelse</string>
         <string name="poi_waste_basket">Skraldespand</string>
 
         <string name="poi_surveillance">Overvågning</string>
@@ -497,7 +497,7 @@
         <string name="poi_dry_cleaning">Renseri</string>
         <string name="poi_laundry">Vaskeri</string>
         <string name="poi_car_rental">Biludlejning</string>
-        <string name="poi_car_sharing">Delebiler</string>
+        <string name="poi_car_sharing">Delebil</string>
         <string name="poi_boat_sharing">Delebåd</string>
         <string name="poi_toilets">Toilet</string>
         <string name="poi_sauna">Sauna</string>
