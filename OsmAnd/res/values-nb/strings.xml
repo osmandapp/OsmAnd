@@ -985,7 +985,7 @@
     <string name="download_roads_only_maps">Rene veikart</string>
     
 	<string name="tip_altitude_offset">Høydekorrigering</string>
-	<string name="search_villages_and_postcodes">Søk landsbyer/postnummer</string>
+	<string name="search_villages_and_postcodes">Søk flere landsbyer/postnummer</string>
 	<string name="rendering_attr_showRoadMaps_description">Velg når det skal vises rene veikart:</string>
 	<string name="rendering_attr_showRoadMaps_name">Rene veikart</string>
     <string name="osmand_play_title_30_chars">OsmAnd kart &amp; navigering</string>
@@ -1331,4 +1331,8 @@
 	<string name="av_camera_focus_edof">Utvidet dybdeskarphet (EDOF)</string>
 	<string name="av_camera_pic_size">Bildestørrelse til kamera</string>
 	<string name="av_camera_pic_size_descr">Velg bildestørrelse til internt kamera</string>
+    <string name="action_create">Aksjon opprette</string>
+	<string name="action_modify">Aksjon endre</string>
+	<string name="action_delete">Aksjon slette</string>
+	<string name="drawer">Flat liste</string>
     </resources>
