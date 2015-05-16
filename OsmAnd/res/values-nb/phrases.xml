@@ -175,4 +175,6 @@
 		<string name="poi_bicycle_transport">Sykkeltransport</string>
 		<string name="poi_aerialway_transport">Heistransport</string>
 	<string name="poi_piste_sleigh">Slede</string>
+	<string name="poi_public_transport_platform_trolleybus">Trolleybussholdeplass</string>
+	<string name="poi_public_transport_platform_tram">Sporvognholdeplass</string>
 	</resources>
