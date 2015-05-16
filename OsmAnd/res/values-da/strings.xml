@@ -1088,7 +1088,7 @@
 	<string name="only_show">Vis rute</string>
 	<string name="follow">Begynd navigation</string>
 	<string name="mark_final_location_first">Vælg først en destination</string>
-	<string name="get_directions">Kørselsvejledning</string>
+	<string name="get_directions">Rutevejledning</string>
 	
 	<string name="opening_hours">Åbningstider</string>
 	<string name="opening_changeset">Åbner ændringssæt…</string>
@@ -1306,8 +1306,8 @@
     <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
     <string name="keep_intermediate_points">Behold mellemliggende punkter</string>
     <string name="new_directions_point_dialog">Der er allerede mellemliggende punkter.</string>
-    <string name="context_menu_item_directions_to">Kørselsvejledning til</string>
-    <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
+    <string name="context_menu_item_directions_to">Rutevejledning til</string>
+    <string name="context_menu_item_directions_from">Rutevejledning fra</string>
     <string name="speak_title">Meddel…</string>
 	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser</string>
 	<string name="speak_street_names">Gadenavne (TTS)</string>
@@ -1952,7 +1952,7 @@
     <string name="short_location_on_map">Lat %1$s\nLong %2$s</string>
     <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger</string>
     <string name="routing_settings_2">Navigationsindstillinger</string>
-    <string name="general_settings_2">Generelleindstillinger</string>
+    <string name="general_settings_2">Generelle indstillinger</string>
 	<string name="shared_string_clear_all">Slet alle</string>
 	<string name="shared_string_my_location">Placering</string>
 	<string name="shared_string_my_favorites">Favoritter</string>
