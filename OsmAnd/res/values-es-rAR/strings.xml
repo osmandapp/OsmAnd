@@ -911,7 +911,7 @@
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="poi_filter_car_aid">Asistencia vehicular</string>
-	<string name="poi_filter_food_shop">Tienda de comida</string>
+	<string name="poi_filter_food_shop">Alimentación</string>
 	<string name="poi_filter_for_tourists">Para turistas</string>
 	<string name="poi_filter_fuel">Combustible</string>
 	<string name="show_warnings_title">Mostrar alarmas…</string>
