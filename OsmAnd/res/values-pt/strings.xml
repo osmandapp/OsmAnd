@@ -1833,7 +1833,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_go">Ir</string>
 	<string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">"Configurações gerais  "</string>
-	<string name="version_settings_descr">Baixar versões noturnas</string>
+	<string name="version_settings_descr">Baixando visões noturnas</string>
     <string name="proxy_pref_descr">Configurar proxy</string>
     <string name="dash_download_manage">Gerenciar</string>
     <string name="rendering_category_transport">Transporte</string>
