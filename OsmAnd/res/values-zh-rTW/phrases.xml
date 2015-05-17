@@ -619,7 +619,7 @@
 	<string name="poi_restaurant">餐廳</string>
 	<string name="poi_fast_food">速食</string>
 	<string name="poi_bar">酒吧</string>
-	<string name="poi_pub"/>
+	<string name="poi_pub">Pub</string>
 	<string name="poi_food_court">美食街</string>
 	<string name="poi_drinking_water">飲用水</string>
 	<string name="poi_barbecue">燒烤</string>
@@ -657,4 +657,34 @@
 	<string name="poi_craft_rigger">裝配工</string>
 	<string name="poi_craft_roofer">蓋屋頂工</string>
 	<string name="poi_craft_saddler">馬鞍匠</string>
+	<string name="poi_craft_sailmaker">縫帆匠</string>
+	<string name="poi_craft_sawmill">鋸木廠</string>
+	<string name="poi_craft_scaffolder">鷹架</string>
+	<string name="poi_craft_sculptor">雕刻家</string>
+	<string name="poi_craft_shoemaker">鞋匠</string>
+	<string name="poi_craft_stand_builder">活動展台</string>
+	<string name="poi_craft_stonemason">石匠</string>
+	<string name="poi_craft_sun_protection">遮陽篷行業</string>
+	<string name="poi_craft_sweep">煙囪清掃工</string>
+	<string name="poi_craft_tailor">裁縫</string>
+	<string name="poi_craft_tiler">磚瓦匠</string>
+	<string name="poi_craft_tinsmith">錫器匠</string>
+	<string name="poi_craft_upholsterer">家具、裝潢商</string>
+	<string name="poi_craft_watchmaker">鐘錶匠</string>
+	<string name="poi_craft_window_construction">門窗施工</string>
+
+	<string name="poi_funeral_directors">禮儀師</string>
+	<string name="poi_craft_computer">電腦專家</string>
+	<string name="poi_beauty">美容沙龍</string>
+	<string name="poi_beauty_salon_nails">美甲沙龍</string>
+	<string name="poi_hairdresser">美髮師</string>
+	<string name="poi_massage">按摩院</string>
+	<string name="poi_tattoo">刺青紋身館</string>
+	<string name="poi_dry_cleaning">乾洗店</string>
+	<string name="poi_laundry">洗衣店</string>
+	<string name="poi_car_rental">汽車租賃</string>
+	<string name="poi_car_sharing">汽車租賃站</string>
+	<string name="poi_boat_sharing">船舶租賃站</string>
+	<string name="poi_dock">船塢</string>
+	<string name="poi_toilets">洗手間</string>
 	</resources>
