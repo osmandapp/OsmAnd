@@ -1907,4 +1907,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="nautical_maps_missing">Para exibir mapas náuticos, o mapa offline especial precisa ser baixado</string>
 	<string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamento</string>
+    <string name="version_settings">Compilações</string>
     </resources>
