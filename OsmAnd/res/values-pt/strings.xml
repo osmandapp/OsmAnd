@@ -1912,4 +1912,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_attr_transportStops_name">Parada de transporte</string>
     
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
+    <string name="wake_on_voice">Acender a tela</string>
     </resources>
