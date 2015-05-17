@@ -706,8 +706,8 @@
 	<string name="native_library_not_supported">Izvorna knjižnica na tej napravi ni podprta.</string>
 	<string name="init_native_library">Nalaganje izvornih knjižnic …</string>
 	<string name="auto_follow_route_navigation">Samodejno središči le med navigacijo</string>
-	<string name="auto_follow_route_navigation_descr">Samodejno središčenje zemljevida le med navigacijo.</string>
-	<string name="auto_follow_location_enabled">Samodejno središčenje zemljevida, ki je v uporabi.</string>
+	<string name="auto_follow_route_navigation_descr">Zemljevid se samodejno središči le med navigacijo.</string>
+	<string name="auto_follow_location_enabled">Trenutna točka je med navigacijo samodejno postavljena v središče.</string>
 	<string name="pref_vector_rendering">Možnosti vektorskega izrisovanja</string>
 	<string name="pref_overlay">Prekrivni zemljevid/Zemljevid za podlogo</string>
 	<string name="pref_raster_map">Nastavitve vira zemljevidov</string>
@@ -1243,8 +1243,8 @@
 	<string name="speak_descr">Nastavitve za najavljanje imen ulic, prometnih opozoril (ležeče ovire in podobno), opozoril merilnikov hitrosti, omejitve hitrosti in drugo</string>
 	<string name="speak_street_names">Najavi imena ulic (TTS)</string>
     <string name="map_widget_fps_info">Podatki razhroščevanja FPS</string>
-	<string name="driving_region_descr">Izbira področja vožnje: ZDA, Evropa, Velika Britanija, Azija in druga</string>
-	<string name="driving_region">Področje vožnje</string>
+	<string name="driving_region_descr">Izbira določil vožnje: ZDA, Evropa, Velika Britanija, Azija in druga</string>
+	<string name="driving_region">Režim vožnje</string>
 	<string name="driving_region_japan">Japonska</string>
 	<string name="driving_region_us">Združene države</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1548,7 +1548,7 @@
 	<string name="stop_navigation_service">Prekini</string>
 	<string name="enable_sleep_mode">Način delovanja sprejemnika GPS</string>
 	<string name="gps_wake_up_timer">Interval prebujanja GPS</string>
-	<string name="sleep_mode_stop_dialog">Ali naj se prekine neaktivnost sprejemnika GPS?</string>
+	<string name="sleep_mode_stop_dialog">Nastavitve delovanja sprejemnika GPS</string>
 	<string name="map_preferred_locale_descr">Prednostno uporabljeni jezik oznak na zemljevidu (če jezik ni na voljo, so uporabljene angleške ali krajevne oznake)</string>
     <string name="map_preferred_locale">Jezik oznak na zemljevidu</string>
     <string name="local_map_names">Krajevna imena</string>
@@ -1830,9 +1830,9 @@
 	<string name="shared_string_show_description">Pokaži opis</string>
 	<string name="agps_data_last_downloaded">Zadnja osvežitev podatkov A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">V mnogih državah (na primer v Nemčiji, Franciji, Italiji in drugih) je uporaba kamer za merjenje hitrosti prepovedana z zakonom. Razvijalci programa ne sprejemamo odgovornosti za tako rabo. Potrdite uporabo le, če ste res prepričani v svoje ravnanje.</string>
-	<string name="welmode_download_maps">Prejemanje zemljevidov</string>
-	<string name="welcome_select_region">Za pravilno rabo prometnih znakov in predpisov izberite ustrezen prometni režim:</string>
-	<string name="welcome_text">Program OsmAnd omogoča uporabo zemljevidov brez povezave in za navigacijo z dostopom do kakovostnih brezplačnih zemljevidov.</string>
+	<string name="welmode_download_maps">Prejmi zemljevide</string>
+	<string name="welcome_select_region">Za pravilno prikazovanje prometnih določil mora biti izbran krajevni prometni režim. Trenutno dejaven je način:</string>
+	<string name="welcome_text">Program OsmAnd omogoča navigacijo s kakovostnimi brezplačnimi zemljevidi v načinu brez povezave.</string>
 	<string name="current_route">Trenutna pot</string>
     <string name="osm_changes_added_to_local_edits">Spremembe nastavitev OSM so dodane med nastavitve.</string>
    	<string name="mark_to_delete">Označi za brisanje</string>
