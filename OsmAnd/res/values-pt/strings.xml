@@ -72,7 +72,7 @@
   <string name="continuous_rendering_descr">Mostrar processamento contínuo ao invés de imagem inteira de uma vez</string>
   <string name="rendering_exception">Erro ao exibir a área selecionada</string>
   <string name="rendering_out_of_memory">Não há memória suficiente para exibir a área selecionada</string>
-  <string name="show_point_options">Usar localização-…</string>
+  <string name="show_point_options">Usar localização…</string>
   <string name="renderer_load_sucess">O motor de renderização foi carregado com sucesso</string>
   <string name="renderer_load_exception">Erro: O motor de renderização não foi carregado</string>
   <string name="renderers">Renderizadores de vetor</string>
@@ -129,7 +129,7 @@
   <string name="shared_string_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Bugs OSM</string>
   <string name="layer_transport">Paradas de transportes</string>
-  <string name="layer_poi">POI(Ponto de Interesse)…</string>
+  <string name="layer_poi">POI (Ponto de interesse)…</string>
   <string name="layer_map">Fonte dos mapas…</string>
   <string name="menu_layers">Camada de mapa</string>
   <string name="context_menu_item_search_poi">Encontre um Ponto de Interesse</string>
@@ -252,7 +252,7 @@
   <string name="update_existing">Modificar</string>
   <string name="only_show">Exibir rota</string>
   <string name="follow">Iniciar navegação</string>
-  <string name="recalculate_route_to_your_location">Modo de transporte:</string>
+  <string name="recalculate_route_to_your_location">Meio de transporte:</string>
   <string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
   <string name="get_directions">Navegação</string>
   <string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>
@@ -302,8 +302,8 @@
   <string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade</string>
   <string name="auto_zoom_map">Zoom automático do mapa</string>
   <string name="additional_settings">Outras definições</string>
-  <string name="settings_preset_descr">A vista de mapa e as definições de navegação são guardadas por perfil. Defina aqui o seu.</string>
-  <string name="settings_preset">Perfil pré-definido</string>
+  <string name="settings_preset_descr">A visão do mapa e as configurações de navegação são guardadas por perfil. Defina aqui o seu.</string>
+  <string name="settings_preset">Perfil predefinido</string>
   <string name="shared_string_settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
   <string name="save_current_track">Salvar a trilha atual</string>
@@ -443,7 +443,7 @@
   <string name="poi_search_desc">Pesquisar POI (ponto de interesse)</string>
   <string name="address_search_desc">Pesquisar endereço</string>
   <string name="navpoint_search_desc">Coordenadas</string>
-  <string name="transport_search_desc">Transport search</string>
+  <string name="transport_search_desc">Pesquisar transporte público</string>
   <string name="favourites_search_desc">Pesquisar favoritos</string>
   
   <string name="offline_navigation_not_available">Navegação OsmAnd offline está temporariamente indisponível.</string>
@@ -587,7 +587,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
-  <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings.</string>
+  <string name="gpx_monitoring_disabled_warn">Registro de trajeto usando widget GPX ou via \'Gravação de viagem\' nas configurações.</string>
   <string name="show_current_gpx_title">Mostrar rota atual</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
   <string name="free_version_message">Esta versão gratuita do OsmAnd é limitada a %1$s downloads e não suporta artigos off-line da Wikipedia.</string>
@@ -676,7 +676,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   
   <string name="search_position_current_location">Posição atual…</string>
   <string name="search_position_map_view">Última vista do mapa</string>
-  <string name="select_search_position">Search near :</string>
+  <string name="select_search_position">Pesquisar próximo a:</string>
   <string name="context_menu_item_search">Pesquisar aqui perto</string>
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="shared_string_save_as_gpx">Guardar a rota como trilha GPX</string>
@@ -711,7 +711,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_index_items_restored">%1$d de %2$d item(s) activados.</string>
   <string name="local_index_no_items_to_do">Sem items para %1$s</string>
   <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
-  <string name="local_index_descr_title">Gerenciar arquivos de mapas</string>
+  <string name="local_index_descr_title">Gerenciar mapas</string>
   <string name="local_index_mi_restore">Activar</string>
   <string name="local_index_mi_backup">Desactivar</string>
   
@@ -720,7 +720,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   
   <string name="local_index_poi_data">Dados POI</string>
   <string name="local_index_address_data">Dados de Endereço</string>
-  <string name="local_index_transport_data">Transport data</string>
+  <string name="local_index_transport_data">Dados de transporte público</string>
   <string name="local_index_map_data">Mapas</string>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Vozes (TTS)</string>
@@ -737,9 +737,9 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="installing_new_resources">Preparando novos dados…</string>
   <string name="internet_connection_required_for_online_route">Para usar o serviço de navegação on-line, precisa de uma ligação à Internet.</string>
   <string name="tts_language_not_supported_title">Linguagem não suportada</string>
-  <string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
+  <string name="tts_language_not_supported">O idioma selecionado não é suportados pelo mecanismo Android TTS (text-to-speech) instalado. Você quer por outro mecanismos TTS na Play Store? Caso contrário, o idioma TTS pré-definido será usado.</string>
   <string name="tts_missing_language_data_title">Faltam dados de voz TTS</string>
-  <string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to the Market to install?</string>
+  <string name="tts_missing_language_data">Nenhum dado para o idioma selecionado está instalado. Você quer ir para Play Store?</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Percorrer toda a rota</string>
   <string name="switch_to_vector_map_to_see">Mapa vetorial Offline disponível para esta localização.
@@ -971,7 +971,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 <string name="osmand_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
 <string name="filterpoi_activity">Criar filtro de POI</string>
-<string name="select_navigation_mode">Selecione o modo de transporte</string>
+<string name="select_navigation_mode">Selecione o meio de transporte</string>
 <string name="day_night_info_description">Nascer do sol: %1$s
 \nPôr-do-sol: %2$s</string>
 <string name="day_night_info">Dia/noite Informações</string>
@@ -1114,7 +1114,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     
     
     <string name="map_widget_distancemeasurement">Medição da distância</string>
-    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização-...\" para atribuir uma nota para o local especificado</string>
+    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização...\" para atribuir uma nota para o local especificado</string>
     
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
@@ -1178,7 +1178,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="clear_destination">Apagar local de destino</string>
     
     
-    <string name="download_hillshade_item">Sombras de colinas</string>
+    <string name="download_hillshade_item">Sombras de relevo</string>
     <string name="download_hillshade_maps">Sobreposições de Sombras de Colinas</string>
     <string name="files_limit">Restando %1$d arquivos</string>
     <string name="available_downloads_left">Disponível %1$d arquivos para download</string>
@@ -1468,7 +1468,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_modes_choose">Perfis da aplicação</string>
 	
     
-    <string name="route_descr_destination"> </string>
+    <string name="route_descr_destination">Destino</string>
     <string name="osmo_sign_in">Entrar</string>
     <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo.</string>
     <string name="osmo_credentials_not_valid">Os seus credenciais de osmo não são válidos.</string>
@@ -1586,7 +1586,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lang_hy">Armênio</string>
 	<string name="calculate_osmand_route_without_internet">Calcule segmento de rota OsmAnd sem internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeira e último segmeto de rota</string>
-    <string name="use_displayed_track_for_navigation">Você quer usar o track apresentado para a navegação ?</string>
+    <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação ?</string>
     <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
     <string name="select_gpx">Selecione GPX …</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
@@ -1632,11 +1632,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="gpx_selection_point">Ponto %1$s</string>
     <string name="gpx_selection_route_points">%1$s \nPontos de Rota %2$s</string>
     <string name="gpx_selection_points">%1$s\nPontos</string>
-    <string name="gpx_selection_track">%1$s \nTrilha %2$s</string>
+    <string name="gpx_selection_track">%1$s
+\nTrajeto %2$s</string>
     
     <string name="gpx_file_is_empty">O trilho Gpx está vazio</string>
     
-    <string name="shared_string_my_tracks">todas os trilhos</string>
+    <string name="shared_string_my_tracks">Meus trajetos</string>
     <string name="shared_string_my_favorites">Meus Favoritos</string>
     <string name="shared_string_my_places">Meus locais</string>
     
@@ -1791,7 +1792,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     
     <string name="impassable_road">Evitar estradas…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rota de trem</string>
-    <string name="rendering_attr_tramRoutes_name">Rota de bonde</string>
+    <string name="rendering_attr_tramRoutes_name">Rotas de bonde</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Compartilhar rota de taxi</string>
     <string name="rendering_attr_busRoutes_name">Rotas de onibus</string>
     <string name="rendering_category_hide">Ocultar</string>
@@ -1850,7 +1851,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d de mudanças ao OSM. Você está certo?</string>
     <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
-    <string name="delay_to_start_navigation">Iniciar navegação curva-à-curva depois de...</string>
+    <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de...</string>
     <string name="osmand_parking_overdue">atrasado</string>
 	<string name="action_create">Criar ação</string>
 	<string name="action_modify">Modificar ação</string>
@@ -1913,4 +1914,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
     <string name="wake_on_voice">Acender a tela</string>
-    </resources>
+    <string name="configure_map">Configurar mapa</string>
+    <string name="waypoints">Pontos de parada</string>
+    <string name="targets">Destinos</string>
+    <string name="shared_string_dismiss">Descartar</string>
+	</resources>
