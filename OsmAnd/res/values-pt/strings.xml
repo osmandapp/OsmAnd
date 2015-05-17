@@ -1907,7 +1907,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="world_ski_missing">Para exibir mapas de esqui, o mapa offline especial precisa ser baixado</string>
     <string name="nautical_maps_missing">Para exibir mapas náuticos, o mapa offline especial precisa ser baixado</string>
 	<string name="edit_group">Editar grupo</string>
-    <string name="parking_place">Lugar de estacionamento</string>
+    <string name="parking_place">Estacionamento</string>
     <string name="version_settings">Compilações</string>
     <string name="navigation_over_track">Iniciar navegação através do trajeto?</string>
 	<string name="rendering_attr_transportStops_name">Parada de transporte</string>
