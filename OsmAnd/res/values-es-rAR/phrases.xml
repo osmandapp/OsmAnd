@@ -105,14 +105,14 @@
 	<string name="poi_kitchen">Muebles de cocina</string>
 	<string name="poi_medical_supply">Artículos médicos</string>
 	<string name="poi_mobile_phone">Telefonía celular</string>
-	<string name="poi_motorcycle">Concesionario de motos</string>
+	<string name="poi_motorcycle">Motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
 	<string name="poi_newsagent">Agencia de noticias</string>
 	<string name="poi_optician">Óptica</string>
 	<string name="poi_organic">Comida orgánica</string>
 	<string name="poi_outdoor">Tienda de actividades al aire libre</string>
 	<string name="poi_paint">Pinturería</string>
-	<string name="poi_pet">Tienda de mascotas</string>
+	<string name="poi_pet">Mascotas</string>
 	<string name="poi_photo">Servicio fotográfico</string>
 	<string name="poi_radiotechnics">Tienda de radiotecnia</string>
 	<string name="poi_second_hand">Local de segunda mano</string>
@@ -121,7 +121,7 @@
 	<string name="poi_stationery">Librería</string>
 	<string name="poi_tableware">Vajillas</string>
 	<string name="poi_ticket">Boletería</string>
-	<string name="poi_tobacco">Tienda de tabaco</string>
+	<string name="poi_tobacco">Tabaquería</string>
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Corralón</string>
 	<string name="poi_vacuum_cleaner">Aspiradoras</string>
@@ -135,7 +135,7 @@
 	<string name="poi_atv">Cuatriciclos</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>
-	<string name="poi_sewing">Tienda de confección</string>
+	<string name="poi_sewing">Costuras</string>
 
 	<string name="poi_police">Policía</string>
 	<string name="poi_fire_station">Estación de bomberos</string>
@@ -456,7 +456,7 @@
 	<string name="poi_team_handball">Equipo de hándbol</string>
 	<string name="poi_tennis">Tenis</string>
 	<string name="poi_toboggan">Tobogán</string>
-	<string name="poi_volleyball">Voleibol</string>
+	<string name="poi_volleyball">Voley</string>
 
 	<string name="poi_museum">Museo</string>
 	<string name="poi_memorial">Monumento conmemorativo</string>
@@ -471,7 +471,7 @@
 	<string name="poi_fountain">Fuente</string>
 	<string name="poi_historic_ruins">Ruinas históricas</string>
 	<string name="poi_rune_stone">Piedra rúnica</string>
-	<string name="poi_wreck">Restos náuticos</string>
+	<string name="poi_wreck">Naufragio</string>
 	<string name="poi_historic_ship">Barco histórico</string>
 	<string name="poi_historic_mine">Mina histórica</string>
 	<string name="poi_monument">Monumento</string>
@@ -484,13 +484,13 @@
 	<string name="poi_attraction_amusement_ride">Atracción de feria</string>
 	<string name="poi_attraction_animal">Animal (atracción)</string>
 	<string name="poi_attraction_big_wheel">Noria</string>
-	<string name="poi_attraction_carousel">Carrusel</string>
+	<string name="poi_attraction_carousel">Calesita</string>
 	<string name="poi_attraction_maze">Laberinto</string>
 	<string name="poi_attraction_roller_coaster">Montaña rusa</string>
-	<string name="poi_attraction_slide">Deslizante</string>
-	<string name="poi_attraction_summer_toboggan">Tobogán de verano</string>
-	<string name="poi_attraction_swing_carousel">Carrusel de oscilación</string>
-	<string name="poi_attraction_train">Tren (atracción)</string>
+	<string name="poi_attraction_slide">Tobogán</string>
+	<string name="poi_attraction_summer_toboggan">Tobogán de agua</string>
+	<string name="poi_attraction_swing_carousel">Sillas voladoras</string>
+	<string name="poi_attraction_train">Trencito</string>
 	<string name="poi_attraction_water_slide">Tobogán de agua</string>
 
 	<string name="poi_lodging">Alojamiento</string>
@@ -516,11 +516,11 @@
 	<string name="poi_religion_shinto">Lugar de culto: sintoísta</string>
 	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
 
-	<string name="poi_internet_access_wlan">Acceso a Internet: inalámbrico</string>
-	<string name="poi_internet_access_terminal">Acceso a Internet: terminal</string>
-	<string name="poi_internet_access_wired">Acceso a Internet: cableado</string>
-	<string name="poi_internet_access_public">Acceso a Internet: público</string>
-	<string name="poi_internet_access_service">Acceso a Internet: servicio</string>
+	<string name="poi_internet_access_wlan">Internet inalámbrico</string>
+	<string name="poi_internet_access_terminal">PC con Internet</string>
+	<string name="poi_internet_access_wired">Internet cableado</string>
+	<string name="poi_internet_access_public">Internet público</string>
+	<string name="poi_internet_access_service">Servicio de Internet</string>
 	
 	<string name="poi_monastery">Monasterio</string>
 	<string name="poi_historic_monastery">Monasterio histórico</string>
@@ -557,7 +557,7 @@
 	<string name="poi_club_automobile">Club de automóviles</string>
 	<string name="poi_club_chess">Club de ajedrez</string>
 	<string name="poi_club_cinema">Cineclub</string>
-	<string name="poi_club_fan">Club de fanes</string>
+	<string name="poi_club_fan">Club de fans</string>
 	<string name="poi_club_fishing">Club de pesca</string>
 	<string name="poi_club_veterans">Club de veteranos</string>
 	<string name="poi_club_linux">Club de Linux</string>
@@ -581,7 +581,7 @@
 	<string name="poi_piste_sled">Trineo</string>
 	<string name="poi_piste_snow_park">Parque de nieve</string>
 	<string name="poi_piste_playground">Parque infantil de esquí</string>
-	<string name="poi_piste_ice_skate">Patín de hielo</string>
+	<string name="poi_piste_ice_skate">Patín sobre hielo</string>
 	<string name="poi_ski_rental">Alquiler de esquí</string>
 
 	<string name="poi_library">Biblioteca</string>
@@ -594,21 +594,21 @@
 	<string name="poi_circus">Circo</string>
 	<string name="poi_gallery">Galería de arte</string>
 	<string name="poi_dance_floor">Pista de baile</string>
-	<string name="poi_nightclub">Club nocturno</string>
+	<string name="poi_nightclub">Boliche</string>
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_ski_resort">Estación de esquí</string>
 	<string name="poi_beach_resort">Complejo turístico de playa</string>
 	<string name="poi_dog_park">Parque canino</string>
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
-	<string name="poi_hunting_stand">Soporte de caza</string>
+	<string name="poi_hunting_stand">Choza de caza</string>
 	<string name="poi_harbour">Puerto</string>
 	<string name="poi_marina">Marina</string>
 	<string name="poi_miniature_golf">Minigolf</string>
-	<string name="poi_playground">Parque infantil</string>
+	<string name="poi_playground">Juegos infantiles</string>
 	<string name="poi_bench">Banco</string>
-	<string name="poi_swimming_pool">Piscina</string>
+	<string name="poi_swimming_pool">Pileta</string>
 	<string name="poi_water_park">Parque acuático</string>
-	<string name="poi_park">Plaza</string>
+	<string name="poi_park">Parque/Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
@@ -624,7 +624,7 @@
 	<string name="poi_barbecue">Parrilla</string>
 
 	<string name="poi_craft_agricultural_engines">Motores agrícolas</string>
-	<string name="poi_craft_basket_maker">Cestero</string>
+	<string name="poi_craft_basket_maker">Mimbrería</string>
 	<string name="poi_craft_beekeeper">Apicultor</string>
 	<string name="poi_craft_blacksmith">Herrero</string>
 	<string name="poi_craft_brewery">Cervecería</string>
@@ -633,13 +633,13 @@
 	<string name="poi_craft_carpenter">Carpintero</string>
 	<string name="poi_craft_carpet_layer">Instalador de alfombras</string>
 	<string name="poi_craft_caterer">Catering</string>
-	<string name="poi_craft_clockmaker">Relojero (clockmaker)</string>
+	<string name="poi_craft_clockmaker">Relojero</string>
 	<string name="poi_craft_dressmaker">Modista</string>
 	<string name="poi_craft_electrician">Electricista</string>
 	<string name="poi_craft_gardener">Jardinero</string>
 	<string name="poi_craft_glaziery">Vidriero</string>
 	<string name="poi_craft_handicraft">Artesano</string>
-	<string name="poi_craft_hvac">Calefacción, ventilación, aire acondicionado</string>
+	<string name="poi_craft_hvac">Climatización</string>
 	<string name="poi_craft_insulation">Aislamientos</string>
 	<string name="poi_craft_jeweller">Joyero</string>
 	<string name="poi_craft_locksmith">Cerrajero</string>
@@ -670,10 +670,10 @@
 	<string name="poi_craft_tinsmith">Hojalatero</string>
 	<string name="poi_craft_upholsterer">Tapicero</string>
 	<string name="poi_craft_watchmaker">Relojero (watchmaker)</string>
-	<string name="poi_craft_window_construction">Fábrica de ventanas</string>
+	<string name="poi_craft_window_construction">Fábrica de aberturas</string>
 
 	<string name="poi_funeral_directors">Funeraria</string>
-	<string name="poi_craft_computer">Montaje de computadoras</string>
+	<string name="poi_craft_computer">Armado de PCs</string>
 	<string name="poi_beauty">Salón de belleza</string>
 	<string name="poi_beauty_salon_nails">Salón de manicura</string>
 	<string name="poi_hairdresser">Peluquería</string>
