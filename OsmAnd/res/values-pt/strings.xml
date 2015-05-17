@@ -711,7 +711,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_index_items_restored">%1$d de %2$d item(s) activados.</string>
   <string name="local_index_no_items_to_do">Sem items para %1$s</string>
   <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
-  <string name="local_index_descr_title">Gerenciar mapas</string>
+  <string name="local_index_descr_title">Gerir mapas</string>
   <string name="local_index_mi_restore">Activar</string>
   <string name="local_index_mi_backup">Desactivar</string>
   
@@ -737,9 +737,9 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="installing_new_resources">Preparando novos dados…</string>
   <string name="internet_connection_required_for_online_route">Para usar o serviço de navegação on-line, precisa de uma ligação à Internet.</string>
   <string name="tts_language_not_supported_title">Linguagem não suportada</string>
-  <string name="tts_language_not_supported">O idioma selecionado não é suportados pelo mecanismo Android TTS (text-to-speech) instalado. Você quer por outro mecanismos TTS na Play Store? Caso contrário, o idioma TTS pré-definido será usado.</string>
+  <string name="tts_language_not_supported">O idioma selecionado não é suportados pelo mecanismo Android TTS (text-to-speech) instalado. Você quer procurar por outro mecanismos TTS na loja de apps? Caso contrário, o idioma TTS predefinido será usado.</string>
   <string name="tts_missing_language_data_title">Faltam dados de voz TTS</string>
-  <string name="tts_missing_language_data">Nenhum dado para o idioma selecionado está instalado. Você quer ir para Play Store?</string>
+  <string name="tts_missing_language_data">Nenhum dado para o idioma selecionado está instalado. Você quer ir para a loja de apps?</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Percorrer toda a rota</string>
   <string name="switch_to_vector_map_to_see">Mapa vetorial Offline disponível para esta localização.
@@ -1564,9 +1564,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_settings_debug">Informação de debug</string>
     <string name="osmo_settings_descr">Configurar as definições de monitoramento e configuração do canal de monitoração pessoal</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitorização (beta)</string>
-    <string name="osmo_plugin_description">Este plugin fornece a funcionalidade para OsMo (onimtoramento avançado ao vivo), veja mais em http://osmo.mobi.
+    <string name="osmo_plugin_description">"Este plugin fornece a funcionalidade para OsMo (monitoramento avançado ao vivo), veja mais em http://osmo.mobi.
 \n\nVocê pode rastrear outros dispositivos e ser rastreado. Você espontaneamente pode criar grupos anônimos, compartilhar localização e se comunicar. Vem com várias opções para o controle de sessão ou acompanhamento permanente.
-\n\nGrupos anônimos são criados para um número especificado de dias e limitados a recursos definidos, ou seja, não há nenhum controle remoto e nenhum administrador de grupo. Grupos totalmente funcionais, por outro lado, podem ser criados no site e só usuários cadastrados têm acesso a eles.</string>
+\n\nGrupos anônimos são criados para um número especificado de dias e limitados a recursos definidos, ou seja, não há nenhum controle remoto e nenhum administrador de grupo. Grupos totalmente funcionais, por outro lado, podem ser criados no site e só usuários cadastrados têm acesso a eles. "</string>
     <string name="osmo_plugin_name">OsMO (rastreamento avançado ao vivo)</string>
    	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
@@ -1740,8 +1740,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="save_track_to_gpx_globally_descr">Posição geral de log para um arquivo GPX pode ser ativada ou desativado usando o GPX gravação widget na tela do mapa</string>
 	<string name="save_track_interval_globally">Intervalo de log</string>
 	<string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
-	<string name="record_plugin_description">Este plugin ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa, ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
-\n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinamentos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros.</string>
+	<string name="record_plugin_description">"Este plugin ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa, ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
+\n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinamentos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
     <string name="record_plugin_name">Gravação de viagem</string>
     <string name="int_hour">h</string>
     <string name="duration">Duração</string>
@@ -1851,7 +1851,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d de mudanças ao OSM. Você está certo?</string>
     <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
-    <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de...</string>
+    <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de…</string>
     <string name="osmand_parking_overdue">atrasado</string>
 	<string name="action_create">Criar ação</string>
 	<string name="action_modify">Modificar ação</string>
@@ -1878,7 +1878,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_string_deselect">Desmarcado</string>
 	<string name="shared_string_deselect_all">Desmarcar tudo</string>
 	<string name="shared_string_export">Exportar</string>
-	<string name="shared_string_more">Mais...</string>
+	<string name="shared_string_more">Mais…</string>
 	<string name="shared_string_unexpected_error">Ocorreu um erro inesperado</string>
 	<string name="shared_string_action_template">Ação {0}</string>
 	<string name="shared_string_show">Mostrar</string>
