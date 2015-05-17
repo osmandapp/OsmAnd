@@ -33,7 +33,7 @@ public class LocalIndexInfo {
 		this.type = type;
 		singleFile = !f.isDirectory();
 		if (singleFile) {
-			kbSize = (int) (f.length() >> 10);
+			kbSize = (int) ((f.length() + 512) >> 10);
 		}
 		this.backupedData = backuped;
 	}

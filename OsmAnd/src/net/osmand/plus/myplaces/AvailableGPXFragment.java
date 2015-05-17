@@ -1249,7 +1249,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (file == null) {
 					return -1;
 				}
-				sz = (int) (file.length() >> 10);
+				sz = (int) ((file.length() + 512) >> 10);
 			}
 			return sz;
 		}
