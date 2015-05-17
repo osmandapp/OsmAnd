@@ -1835,7 +1835,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="general_settings_2">"Configurações gerais  "</string>
 	<string name="version_settings_descr">Baixando visões noturnas</string>
     <string name="proxy_pref_descr">Informe um proxy de comunicação com a internet</string>
-    <string name="dash_download_manage">Gerenciar</string>
+    <string name="dash_download_manage">Gerenciador</string>
     <string name="rendering_category_transport">Transporte</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rotas de bonde e trem</string>
 	<string name="rendering_attr_streetLighting_name">Iluminação das vias</string>
