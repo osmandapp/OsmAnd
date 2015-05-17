@@ -1755,7 +1755,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     
 	<string name="speak_pedestrian">Anunciar faixas de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
-    <string name="rendering_value_default_name">Padrão</string>
+    <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Laranja</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de vias alemãs</string>
 	<string name="traffic_warning_railways">Cruzamento de ferrovia</string>
@@ -1908,4 +1908,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="edit_group">Editar grupo</string>
     <string name="parking_place">Lugar de estacionamento</string>
     <string name="version_settings">Compilações</string>
-    </resources>
+    <string name="navigation_over_track">Iniciar navegação através do trajeto?</string>
+	</resources>
