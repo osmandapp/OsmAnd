@@ -591,7 +591,7 @@
 	<string name="poi_landuse_railway">Železničný pozemok</string>
 
 	<string name="poi_canal">Prieplav</string>
-	<string name="poi_bailiff"></string>
+	<string name="poi_bailiff"/>
 	<string name="poi_prosecutor">Žalobca</string>
 	<string name="poi_residential">Obytná oblasť</string>
 
@@ -752,4 +752,24 @@
 	<string name="poi_seamark_wreck">Vrak, námorná značka</string>
 
 	<string name="poi_seamark_rock">Skala, námorná značka</string>
+	<string name="poi_beacon_safe_water">Maják bezpečnej vody</string>
+	<string name="poi_beacon_special_purpose">Maják pre zvláštny účel</string>
+	<string name="poi_berth">Kotvisko</string>
+	<string name="poi_seamark_building">Budova námorného významu</string>
+	<string name="poi_seamark_bridge">Most námorného významu</string>
+	<string name="poi_buoy_safe_water">Bója bezpečnej vody</string>
+	<string name="poi_buoy_special_purpose">Bója zvláštneho významu</string>
+	<string name="poi_daymark">Denná značka</string>
+	<string name="poi_distance_mark">Značka vzdialenosti</string>
+	<string name="poi_dry_dock">Suchý dok</string>
+	<string name="poi_dyke">Hrádza</string>
+	<string name="poi_floating_dock">Plávajúci dok</string>
+	<string name="poi_fog_signal">Signál v hmle</string>
+	<string name="poi_harbour_basin">Prístavný bazén</string>
+	<string name="poi_seamark_harbour">Prístav</string>
+	<string name="poi_mooring">Miesto na uviazanie lode</string>
+	<string name="poi_radio_station">Námorná rádiová stanica</string>
+	<string name="poi_signal_station_traffic">Signálna stanica, doprava</string>
+	<string name="poi_signal_station_warning">Signálna stanica, varovanie</string>
+	<string name="poi_small_craft_facility">Zariadenie pre malé lode</string>
 	</resources>
