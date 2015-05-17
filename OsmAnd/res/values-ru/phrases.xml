@@ -748,4 +748,6 @@
 	<string name="poi_gallery">Художественная галерея</string>
 	<string name="poi_ski_resort">Горнолыжный курорт</string>
 	<string name="poi_recreation_ground">Площадка для игр</string>
+	<string name="poi_dyke">Насыпь</string>
+	<string name="poi_payment_terminal">Платежный терминал</string>
 	</resources>
