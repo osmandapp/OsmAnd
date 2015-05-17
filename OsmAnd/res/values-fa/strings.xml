@@ -153,7 +153,7 @@
 	<string name="osmand_parking_am">قبل ازظهر</string>
 	<string name="osmand_parking_position_name">نقطه پارک</string>
 	<string name="osmand_parking_plugin_description">این افزونه اجازه میدهد تا محل خودرو خود را ذخیره کنید.</string>
-	<string name="osmand_parking_plugin_name">افزونه موفعیت پارکینگ</string>
+	<string name="osmand_parking_plugin_name">افزونه موقعیت پارکینگ</string>
 	<string name="context_menu_item_add_parking_point">علامتگذاری به عنوان محل پارک</string>
 	<string name="context_menu_item_delete_parking_point">حذف نشانگر محل پارک</string>
 	<string name="gpxup_public">عمومی</string>
