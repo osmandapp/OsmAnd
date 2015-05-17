@@ -464,7 +464,8 @@
   <string name="online_map_settings_descr">Configurar fontes de mosaicos ou de mapas on-line</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+  <string name="osmand_rastermaps_plugin_description">"Com este plugin você pode acessar muitos tipos de mapas online (também chamada de quadrícula ou ladrilho), de quadrículas pré-definidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline normal de OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.
+\n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes on-line ou podem ser preparados para uso off-line (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
   <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in sleep (screen off) mode by periodically waking up the GPS device.</string>
   <string name="osmand_accessibility_description">Mostrar configurações de características especiais de acessibilidade.</string>
   
@@ -902,7 +903,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Local de estacionamento</string>
   <string name="osmand_parking_plugin_description">Este plugin permite armazenar a localização do seu estacionamento.</string>
-  <string name="osmand_parking_plugin_name">Plugin Local de Estacionamento</string>
+  <string name="osmand_parking_plugin_name">Local de estacionamento</string>
   <string name="context_menu_item_add_parking_point">Marcar como local de estacionamento</string>
   <string name="context_menu_item_delete_parking_point">Apagar um marcador de estacionamento</string>
   <string name="starting_point_too_far">Ponto de partida demasiado distante da estrada mais próxima.</string>
@@ -1116,7 +1117,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização-...\" para atribuir uma nota para o local especificado</string>
     
     <string name="map_widget_audionotes">Notas de áudio</string>
-    <string name="audionotes_plugin_description">Tomar notas de audio/vídeo durante a viagem</string>
+    <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
     <string name="audionotes_plugin_name">Notas de Audio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
     <string name="index_srtm_ele">Curvas de nível</string>
@@ -1146,14 +1147,11 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 		\n\t*\'Na direcção do movimento\' - Mapa será continuamente alinhado com a sua direcção
 		\n\t*\'Na direcção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "
 	</string>
-	<string name="tip_day_night_mode_t_v2">A aparência do mapa pode para mapas vetoriais off-line ser alterado entre o dia (mais claro ) e noite ( mais escuro) .  Cores nocturnas são mais seguros e mais confortável para dirigir à noite .
-		\n\n Você pode definir uma política para o dia / noite de comutação em \ \'Menu \' → \ \' tela Configure \' → \' Dia / noite mapa \' .
-		\n\n As escolhas são:
-                \n\t* \' Sunrise / Sunset \' modo automático, controlado pela posição do sol (padrão): 
-		\n\t* \' Day \': sempre usar o modo de dia
-		\n\t* \'Night \' : sempre usar o modo noturno
-		\n\t* \' Sensor de luz \' : mapa aparência é controlada pelo sensor do dispositivo de luz (se equipado)
-	</string>	
+	<string name="tip_day_night_mode_t_v2">"A aparência dos mapas off-line pode ser alterada entre o modo dia (mais claro ) e noite ( mais escuro) . Cores noturnas são mais seguras e confortáveis para dirigir à noite.\n\nVocê pode definir uma política de alteração para o dia/noite em  \'Menu\' → \'Configurar mapa\' → \'Modo dia/noite\'.
+\n\n As escolhas são:
+\n\t* \'Nascer/Pôr-do-sol\': modo automático, controlado pela posição do sol (pré-definido):
+\n\t* \'Dia\': sempre usar o modo diurno\n\t* \'Noite\' : sempre usar o modo noturno
+\n\t* \'Sensor de luz\': a aparência do mapa é controlada pelo sensor de luz do aparelho (se equipado) "</string>	
 	<string name="incomplete_locale">incompleto</string>
 	<string name="street_name">Rua</string>
 	<string name="hno">Número de casa</string>
@@ -1747,7 +1745,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="int_hour">h</string>
     <string name="duration">Duração</string>
     <string name="distance">Distância</string>
-    <string name="gps_status">Status do GPS</string>
+    <string name="gps_status">Situação do GPS</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
@@ -1831,7 +1829,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="watch">Ver</string>
 	<string name="navigate_point_northing">Norte</string>
     <string name="navigate_point_easting">Leste</string>
-    <string name="storage_directory_internal_app">Memória internado do aplicativo</string>
+    <string name="storage_directory_internal_app">Memória interna do aplicativo</string>
     <string name="shared_string_go">Ir</string>
 	<string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">"Configurações gerais  "</string>
@@ -1843,4 +1841,70 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_attr_streetLighting_name">Iluminação das vias</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_highContrastRoads_name">Vias em alto contraste</string>
-	</resources>
+	<string name="welcome_text">OsmAnd oferece um explorador de mapa e navegador GPS offline!</string>
+	<string name="welcome_header">Bem-vindo</string>
+    <string name="current_route">Rota atual</string>
+    <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações local</string>
+   	<string name="mark_to_delete">Selecione para apagar</string>
+	<string name="osmo_grop_name_length_alert">O nome do grupo deve ter pelo menos 3 caracteres!</string>
+	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d de mudanças ao OSM. Você está certo?</string>
+    <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
+    <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
+    <string name="delay_to_start_navigation">Iniciar navegação curva-à-curva depois de...</string>
+    <string name="osmand_parking_overdue">atrasado</string>
+	<string name="action_create">Criar ação</string>
+	<string name="action_modify">Modificar ação</string>
+	<string name="action_delete">Apagar ação</string>
+	<string name="osm_edits">Edições no OSM</string>
+	<string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_minute">min</string>
+	<string name="parking_place_limited">Tempo de estacionamento limitado a</string>
+	<string name="osmand_parking_time_left">restante</string>
+	<string name="your_edits">Suas edições</string>
+    <string name="waypoint_visit_after">Passar depois</string>
+    <string name="waypoint_visit_before">Passar antes</string>
+    <string name="simulate_your_location">Simular sua posição</string>
+    <string name="drawer">Lista simples</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras</string>
+    <string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_do_not_use">Não usar</string>
+	<string name="shared_string_enable">Ativar</string>
+	<string name="shared_string_disable">Desativar</string>
+	<string name="shared_string_enabled">Ativado</string>
+	<string name="shared_string_disabled">Desativado</string>
+	<string name="shared_string_selected">Selecionado</string>
+	<string name="shared_string_deselect">Desmarcado</string>
+	<string name="shared_string_deselect_all">Desmarcar tudo</string>
+	<string name="shared_string_export">Exportar</string>
+	<string name="shared_string_more">Mais...</string>
+	<string name="shared_string_unexpected_error">Ocorreu um erro inesperado</string>
+	<string name="shared_string_action_template">Ação {0}</string>
+	<string name="shared_string_show">Mostrar</string>
+	<string name="shared_string_collapse">Recolher</string>
+	<string name="shared_string_address">Endereço</string>
+	<string name="shared_string_currently_recording_track">Atualmente gravando o trajeto</string>
+	<string name="shared_string_audio">Áudio</string>
+	<string name="shared_string_video">Vídeo</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="route_points">Pontos de rota</string>
+	<string name="track_segments">Segmentos do trajeto</string>
+	<string name="track_points">Pontos de trajeto</string>
+	<string name="plugin_touringview_name">Ver mapa de turismo</string>
+	<string name="plugin_nautical_name">Ver mapa náutico</string>
+	<string name="plugin_ski_name">Ver mapa de esqui</string>
+	<string name="rename_failed">Falha ao renomear.</string>
+	<string name="back_to_map">Voltar ao mapa</string>
+	<string name="share_note">Compartilhar nota</string>
+    <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
+	<string name="notes">Notas</string>
+	<string name="online_map">Mapa on-line</string>
+	<string name="roads_only">Apenas vias</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
+	<string name="free">"Livre %1$s "</string>
+	<string name="device_memory">Memória do aparelho</string>
+    <string name="world_ski_missing">Para exibir mapas de esqui, o mapa offline especial precisa ser baixado</string>
+    <string name="nautical_maps_missing">Para exibir mapas náuticos, o mapa offline especial precisa ser baixado</string>
+	<string name="edit_group">Editar grupo</string>
+    <string name="parking_place">Lugar de estacionamento</string>
+    </resources>
