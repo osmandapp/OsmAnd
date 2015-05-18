@@ -644,8 +644,12 @@
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
+	<string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
+	<string name="routing_attr_avoid_borders_description">Avoid crossing a border into another country</string>
 	<string name="routing_attr_weight_name">Weight limit</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>
+	<string name="routing_attr_height_name">Height limit</string>
+	<string name="routing_attr_height_description">Specify vehicle height to be permitted on routes</string>
     <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the previous storage folder (%s). Do you want to change to the permitted storage location and copy all OsmAnd files there?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
@@ -2138,4 +2142,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="plugin_description_title">Description</string>
 	<string name="plugin_install_needs_network">You need an Internet connection to install this plugin.</string>
 	<string name="get_plugin">Get</string>
+	<string name="use_fast_recalculation">Smart route recalculation</string>
+	<string name="use_fast_recalculation_desc">Recalculate only initial part of the route for long trips</string>
 </resources>
