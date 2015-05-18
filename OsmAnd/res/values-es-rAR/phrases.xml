@@ -5,7 +5,7 @@
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo del camino</string>
 		<string name="poi_filling_station">Estación de servicio</string>
-		<string name="poi_personal_transport">Transporte personal</string>
+		<string name="poi_personal_transport">Transporte particular</string>
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte fluvial</string>
@@ -107,7 +107,7 @@
 	<string name="poi_mobile_phone">Telefonía celular</string>
 	<string name="poi_motorcycle">Motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicales</string>
-	<string name="poi_newsagent">Agencia de noticias</string>
+	<string name="poi_newsagent">Diariería</string>
 	<string name="poi_optician">Óptica</string>
 	<string name="poi_organic">Comida orgánica</string>
 	<string name="poi_outdoor">Tienda de actividades al aire libre</string>
@@ -138,7 +138,7 @@
 	<string name="poi_sewing">Costuras</string>
 
 	<string name="poi_police">Policía</string>
-	<string name="poi_fire_station">Estación de bomberos</string>
+	<string name="poi_fire_station">Cuartel de bomberos</string>
 	<string name="poi_emergency_phone">Teléfono de emergencia</string>
 	<string name="poi_fire_hydrant">Hidrante</string>
 	<string name="poi_fire_extinguisher">Extintor de incendios</string>
@@ -162,7 +162,7 @@
 	<string name="poi_traffic_calming_cushion">Cojín</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
-	<string name="poi_traffic_calming_table">Plataforma elevada</string>
+	<string name="poi_traffic_calming_table">Peatonal elevada</string>
 	<string name="poi_traffic_calming_choker">Gargantilla</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
@@ -206,7 +206,7 @@
 	<string name="poi_public_transport_platform_bus">Andén de colectivo</string>
 	<string name="poi_public_transport_platform_trolleybus">Andén de trolebús</string>
 	<string name="poi_bus_stop">Parada de colectivo</string>
-	<string name="poi_public_transport_stop_position">Parada de transporte público</string>
+	<string name="poi_public_transport_stop_position">Punto de detención de transporte público</string>
 	<string name="poi_public_transport_platform_tram">Andén de tranvía</string>
 	<string name="poi_tram_stop">Parada de tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
@@ -305,7 +305,7 @@
 	<string name="poi_construction">Construcción</string>
 	<string name="poi_works">Fábrica</string>
 	<string name="poi_mineshaft">Pozo de mina</string>
-	<string name="poi_adit">Boca de mina</string>
+	<string name="poi_adit">Bocamina</string>
 	<string name="poi_petroleum_well">Pozo petrolero</string>
 	<string name="poi_survey_point">Vértice geodésico</string>
 	<string name="poi_windmill">Molino de viento</string>
@@ -483,7 +483,7 @@
 	<string name="poi_general_tourist_attraction_yes">Atracción turística general</string>
 	<string name="poi_attraction_amusement_ride">Atracción de feria</string>
 	<string name="poi_attraction_animal">Animal (atracción)</string>
-	<string name="poi_attraction_big_wheel">Noria</string>
+	<string name="poi_attraction_big_wheel">Rueda de la fortuna</string>
 	<string name="poi_attraction_carousel">Calesita</string>
 	<string name="poi_attraction_maze">Laberinto</string>
 	<string name="poi_attraction_roller_coaster">Montaña rusa</string>
@@ -714,7 +714,7 @@
 	<string name="poi_river">Río</string>
 	<string name="poi_stream">Arroyo</string>
 	<string name="poi_rapids">Rápidos</string>
-	<string name="poi_stone">Roca reseñable</string>
+	<string name="poi_stone">Roca sobresaliente</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_beach">Playa</string>
 	<string name="poi_bay">Bahía</string>
@@ -729,7 +729,7 @@
 	<string name="poi_island">Isla</string>
 	<string name="poi_islet">Islote</string>
 
-	<string name="poi_anchorage">Anclaje</string>
+	<string name="poi_anchorage">Amarradero</string>
 	<string name="poi_anchor_berth">Fondeadero</string>
 	<string name="poi_beacon">Baliza</string>
 	<string name="poi_beacon_cardinal">Baliza cardinal</string>
@@ -738,7 +738,7 @@
 	<string name="poi_beacon_special_purpose">Baliza de propósito especial</string>
 	<string name="poi_berth">Atraque</string>
 	<string name="poi_seamark_building">Edificio náutico</string>
-	<string name="poi_seamark_bridge">Puente náutico</string>
+	<string name="poi_seamark_bridge">Marca naval: Puente</string>
 	<string name="poi_buoy_cardinal">Boya cardinal</string>
 	<string name="poi_buoy_installation">Boya de instalación</string>
 	<string name="poi_buoy_isolated_danger">Boya de peligro aislado</string>
