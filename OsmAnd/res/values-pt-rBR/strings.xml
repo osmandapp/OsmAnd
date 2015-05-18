@@ -1651,7 +1651,7 @@
 	<string name="osb_close_dialog_title">Fechando o erro</string>
 	<string name="osb_close_dialog_close_button">Fechar o erro</string>
 	<string name="osb_close_dialog_success">Erro fechado</string>
-	<string name="osb_close_dialog_error">Erro: o alerta de erro não foi fechado.</string>
+	<string name="osb_close_dialog_error">Erro: o alerta de erro não foi fechado</string>
 	<string name="poi_create_title">Criar POI</string>
 	<string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
 	<string name="poi_remove_confirm_template">Apagar {0} (enter comment)?</string>
