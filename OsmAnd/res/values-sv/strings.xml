@@ -1875,4 +1875,9 @@
     <string name="storage_directory_default">Internminne</string>
     <string name="storage_directory">Kartlagring</string>
     <string name="shared_string_copy">Kopiera</string>
-    </resources>
+    <string name="rendering_attr_hideHouseNumbers_name">Göm husnummer</string>
+    <string name="routing_attr_avoid_borders_description">Undvik att korsa gränsen till ett annat land</string>
+	<string name="routing_attr_height_name">Höjdgräns</string>
+	<string name="use_fast_recalculation">Smart omräkning av rutt</string>
+	<string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
+</resources>
