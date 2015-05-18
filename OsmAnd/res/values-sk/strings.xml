@@ -2160,4 +2160,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="shared_string_copy">Kopírovať</string>
     <string name="application_dir_change_warning3">Chcete aby OsmAnd skopíroval svoje údaje do nového cieľa?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skryť čísla domov</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Vyhnúť sa prekročeniu hraníc</string>
+	<string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hranice do inej krajiny</string>
+	<string name="routing_attr_height_name">Výškový limit</string>
+	<string name="routing_attr_height_description">Zadajte výšku vozidla aká musí byť povolená na cestách</string>
+    <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
+	<string name="use_fast_recalculation_desc">Prepočítať iba začiatočný úsek trasy pri dlhých výletoch</string>
+</resources>
