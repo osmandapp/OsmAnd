@@ -1484,7 +1484,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Limite de poids</string>
-	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
+	<string name="routing_attr_weight_description">Spécifiez la limite de poids qui doit être respectée sur les routes empruntées</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
     <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
@@ -2032,8 +2032,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
     <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
 	<string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
-	<string name="routing_attr_height_name">Hauteur limitée</string>
-	<string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter pour emprunter les routes</string>
+	<string name="routing_attr_height_name">Limite de hauteur</string>
+	<string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
 	<string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire pour les longs trajets</string>
 </resources>
