@@ -2178,4 +2178,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value__name">Standaard</string>
     <string name="rendering_value_highContrastRoads_name">Wegen met hoog contrast</string>
 	<string name="index_name_netherlands">Europa - Nederland</string>
-	</resources>
+	<string name="routing_attr_avoid_borders_name">Vermijd grensovergangen</string>
+	<string name="routing_attr_avoid_borders_description">Vermijd het oversteken van landsgrenzen</string>
+	<string name="routing_attr_height_name">Hoogtelimiet</string>
+	<string name="routing_attr_height_description">Geef de massa van het voertuig dat toegestaan moet zijn op de routes</string>
+    <string name="use_fast_recalculation">Slim opnieuw berekenen van routes</string>
+	<string name="use_fast_recalculation_desc">Bereken alleen het begin van de route voor lange trajecten</string>
+</resources>
