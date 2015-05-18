@@ -48,6 +48,7 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:inputType="textMultiLine|textCapSentences"
+			android:minLines="2"
 			android:selectAllOnFocus="true"/>
 	</LinearLayout>
 
