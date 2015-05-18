@@ -732,4 +732,7 @@
 
 	<string name="poi_anchorage">下錨處</string>
 	<string name="poi_anchor_berth">錨停泊處</string>
+	<string name="poi_berth">泊位</string>
+	<string name="poi_military_range">軍事區</string>
+	<string name="poi_military_naval_base">軍方海軍基地</string>
 	</resources>
