@@ -1924,4 +1924,10 @@
 	<string name="plugin_description_title">Descripción</string>
 	<string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este complemento.</string>
 	<string name="get_plugin">Obtener</string>
+<string name="routing_attr_avoid_borders_name">Evitar cruzar fronteras</string>
+	<string name="routing_attr_avoid_borders_description">Evite cruzar fronteras con otro país</string>
+	<string name="routing_attr_height_name">Límite de altura</string>
+	<string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>
+    <string name="use_fast_recalculation">Recalculo inteligente de ruta</string>
+	<string name="use_fast_recalculation_desc">Recalcule sólo la parte inicial de la ruta para viajes largos</string>
 </resources>
