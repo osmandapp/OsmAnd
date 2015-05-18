@@ -2030,4 +2030,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
+	<string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
+	<string name="routing_attr_height_name">Hauteur limitée</string>
+	<string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter pour emprunter les routes</string>
+    <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
+	<string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire pour les longs trajets</string>
+</resources>
