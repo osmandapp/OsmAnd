@@ -1986,7 +1986,7 @@
     <string name="routing_attr_avoid_borders_name">防止越過邊境</string>
 	<string name="routing_attr_avoid_borders_description">防止越過邊界進入別國</string>
 	<string name="routing_attr_height_name">高度限制</string>
-	<string name="routing_attr_height_description">指定車輛在路線上被容許的高度</string>
+	<string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
 	<string name="use_fast_recalculation_desc">重新計算只有在長途航行路線的初始部分</string>
 </resources>
