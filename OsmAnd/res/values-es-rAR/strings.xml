@@ -1928,6 +1928,6 @@
 	<string name="routing_attr_avoid_borders_description">Evite cruzar fronteras con otro país</string>
 	<string name="routing_attr_height_name">Límite de altura</string>
 	<string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>
-    <string name="use_fast_recalculation">Recalculo inteligente de ruta</string>
+    <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcule sólo la parte inicial de la ruta para viajes largos</string>
 </resources>
