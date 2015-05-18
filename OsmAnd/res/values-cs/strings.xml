@@ -1884,7 +1884,7 @@ s často kladenými otázkami.</string>
 	<string name="shared_string_photo">Foto</string>
 	<string name="drawer">Seznam</string>
     <string name="tips_and_tricks_descr">Často pokládané dotazy, nedávné změny a další</string>
-    <string name="days_behind">dnů po lokální</string>
+    <string name="days_behind">dnů novější</string>
 	<string name="shared_string_release">Vydáno</string>
 	<string name="delay_to_start_navigation_descr">Zadejte dobu setrvání na obrazovce plánování trasy</string>
     <string name="delay_to_start_navigation">Spustit navigaci krok za krokem za…</string>
