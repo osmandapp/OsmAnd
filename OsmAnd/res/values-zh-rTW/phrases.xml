@@ -619,7 +619,7 @@
 	<string name="poi_restaurant">餐廳</string>
 	<string name="poi_fast_food">速食</string>
 	<string name="poi_bar">酒吧</string>
-	<string name="poi_pub">Pub</string>
+	<string name="poi_pub">酒館</string>
 	<string name="poi_food_court">美食街</string>
 	<string name="poi_drinking_water">飲用水</string>
 	<string name="poi_barbecue">燒烤</string>
@@ -687,4 +687,49 @@
 	<string name="poi_boat_sharing">船舶租賃站</string>
 	<string name="poi_dock">船塢</string>
 	<string name="poi_toilets">洗手間</string>
+	<string name="poi_sauna">三溫暖</string>
+	<string name="poi_brothel">妓院</string>
+	<string name="poi_smoking_area">吸煙區</string>
+	<string name="poi_mortuary">太平間</string>
+	<string name="poi_crematorium">火葬場</string>
+	<string name="poi_internet_cafe">網路咖啡館</string>
+
+	<string name="poi_bank">銀行</string>
+	<string name="poi_atm">自動提款機</string>
+	<string name="poi_payment_terminal">支付終端機</string>
+	<string name="poi_money_lender">放款人</string>
+	<string name="poi_pawnbroker">典當鋪</string>
+	<string name="poi_bureau_de_change">外匯兌換處</string>
+	<string name="poi_accountant">會計師</string>
+	<string name="poi_bitcoin_yes">比特幣付款</string>
+
+	<string name="poi_cave_entrance">洞窟入口處</string>
+	<string name="poi_peak">山峰</string>
+	<string name="poi_saddle">山脊鞍部</string>
+	<string name="poi_volcano">火山</string>
+	<string name="poi_crater">火山口</string>
+	<string name="poi_ridge">山脊</string>
+	<string name="poi_glacier">冰川</string>
+	<string name="poi_sinkhole">天坑</string>
+	<string name="poi_waterfall">瀑布</string>
+	<string name="poi_river">河流</string>
+	<string name="poi_stream">溪流</string>
+	<string name="poi_rapids">激流</string>
+	<string name="poi_stone">奇石</string>
+	<string name="poi_cape">海岬</string>
+	<string name="poi_beach">海灘</string>
+	<string name="poi_bay">海灣</string>
+	<string name="poi_fjord">峽灣</string>
+	<string name="poi_reef">礁石</string>
+	<string name="poi_valley">山谷</string>
+	<string name="poi_water">水</string>
+	<string name="poi_wetland">濕地</string>
+	<string name="poi_wood">樹木</string>
+	<string name="poi_nature_reserve">自然保護區</string>
+	<string name="poi_strait">海峽</string>
+	<string name="poi_island">島嶼</string>
+	<string name="poi_islet">小島</string>
+
+	<string name="poi_anchorage">下錨處</string>
+	<string name="poi_anchor_berth">錨停泊處</string>
 	</resources>
