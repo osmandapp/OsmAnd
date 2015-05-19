@@ -431,7 +431,7 @@
     <string name="delay_navigation_start">Iniciar automaticamente instruções curva a curva</string>
     <string name="local_index_gpx_info_show">\n\nToque e segure para opções</string>
 	<string name="gpx_info_subtracks">"Subtrajetos: %1$s "</string>
-	<string name="gpx_info_waypoints">"Parada: %1$s "</string>
+	<string name="gpx_info_waypoints">"Marco de trajeto: %1$s "</string>
 	<string name="gpx_info_distance">"Distância: %1$s (%2$s pontos) "</string>
 	<string name="gpx_info_start_time">"Hora de início: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">"Hora de fim: %1$tF, %1$tT "</string>
@@ -451,7 +451,7 @@
     <string name="gpx_file_is_empty">O trajeto GPX está vazio</string>
     <string name="osmo_user_joined">Usuário %1$s ingressou no grupo %2$s</string>
     <string name="osmo_user_left">O usuário %1$s deixou o grupo %2$s</string>
-    <string name="gpx_wpt">Parada</string>
+    <string name="gpx_wpt">Marco de trajeto</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="osmo_show_group_notifications">Mostrar notificações de grupo</string>
     <string name="osmo_show_group_notifications_descr">Mostrar mensagens quando usuário entra ou sai do grupo</string>
@@ -621,7 +621,7 @@
     <string name="animate_routing_route_not_calculated">Por favor, calcular a rota primeiro</string>
     <string name="animate_routing_route">"Simular usando a rota calculada "</string>
     <string name="animate_routing_gpx">Simular usando trajeto GPX</string>
-	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteador off-line OsmAnd. Em média, a rota off-line apenas é possível para distâncias de até 200 km. Por favor adicione um ou mais marcos de trajeto intermediários para calcular a rota.</string>
+	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteador off-line OsmAnd. Em média, a rota off-line apenas é possível para distâncias de até 200 km. Por favor adicione uma ou mais paradas para calcular a rota.</string>
 	<string name="auto_zoom_none">Sem zoom automático</string>
 	<string name="auto_zoom_close">Aproximar</string>
 	<string name="auto_zoom_farthest">Afastar</string>
@@ -692,7 +692,7 @@
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Definir como destino</string>
     <string name="please_select_address">Selecionar primeiro a cidade ou rua</string>
-    <string name="tip_recent_changes_1_4_t">Alterações na v1.4:\n\t* Organização de locais de passagem otimizada para os visitar todos (vendedor ambulante, porta a porta)\n\t* Procura de ruas por nome (na vizinhança)\n\t* Modo de planeamento (carregar/editar/gravar GPX)\n\t* Novo ecrã de transferências (transferência em segundo plano)\n\t* Suporte a subpastas GPX (organização de GPX )\n\t* Eliminação de ficheiros SRTM\n\t* Suporte a notas OSM</string>
+    <string name="tip_recent_changes_1_4_t">Alterações na v1.4:\n\t* Organização de paradas otimizada para visitar todos (vendedor ambulante, porta a porta)\n\t* Procura de ruas por nome (na vizinhança)\n\t* Modo de planeamento (carregar/editar/gravar GPX)\n\t* Novo ecrã de transferências (transferência em segundo plano)\n\t* Suporte a subpastas GPX (organização de GPX )\n\t* Eliminação de ficheiros SRTM\n\t* Suporte a notas OSM</string>
     <string name="search_street_in_neighborhood_cities">Pesquisar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Paradas intermediárias reordenadas para otimizar o caminho do local atual até o destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
