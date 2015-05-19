@@ -1180,7 +1180,7 @@
 	<string name="delete_confirmation_msg">Apagar %1$s?</string>
 	<string name="local_index_items_uploaded">%1$d de %2$d itens enviados com sucesso.</string>
 	<string name="internet_connection_required_for_online_route">Um serviço de navegação on-line está selecionado, mas não há conexão com a Internet.</string>
-	<string name="voice_stream_notification">Áudio de Notificação</string>
+	<string name="voice_stream_notification">Áudio de Notificação (viva voz)</string>
 	<string name="search_osm_offline">Pesquisar posição geográfica</string>
 	<string name="tip_map_switch">Selecionar uma fonte de mapa</string>
 	<string name="tip_map_context_menu_t">"O menu de contexto \'Usar posição\' contém todas as ações referentes a um ponto (local).
