@@ -258,7 +258,7 @@
 	<string name="poi_standpipe">Boca de incendios</string>
 	<string name="poi_water_works">Recolector de agua potable</string>
 	<string name="poi_boatyard">Astillero</string>
-	<string name="poi_wastewater_plant">Depuradora aguas residuales</string>
+	<string name="poi_wastewater_plant">Planta depuradora</string>
 	<string name="poi_water_tower">Torre de agua</string>
 	<string name="poi_lock_gate">Compuerta</string>
 	<string name="poi_waterway_turning_point">Punto de giro fluvial</string>
@@ -280,7 +280,7 @@
 	<string name="poi_telephone_exchange">Central telefónica</string>
 
 	<string name="poi_recycling">Reciclaje</string>
-	<string name="poi_landfill">Vertedero de basura</string>
+	<string name="poi_landfill">Basural</string>
 	<string name="poi_waste_disposal">Contenedor de basura</string>
 	<string name="poi_waste_basket">Cesto de basura</string>
 
