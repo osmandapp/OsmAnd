@@ -244,4 +244,24 @@
 	<string name="poi_motorcycle">Motoristična trgovina</string>
 	<string name="poi_optician">Okulist</string>
 	<string name="poi_pet">Trgovina z malimi živalmi</string>
+	<string name="poi_greengrocer">Sadje in zelenjava</string>
+	<string name="poi_dairy">Trgovina z mlečnimi izdelki</string>
+	<string name="poi_vending_machine">Prodajni avtomat</string>
+	<string name="poi_art">Trgovina z umetninami</string>
+	<string name="poi_baby_goods">Otroški izdelki</string>
+	<string name="poi_bag">Torbarnica</string>
+	<string name="poi_bathroom_furnishing">Kopalniška oprema</string>
+	<string name="poi_bed">Oprema za spalnice</string>
+	<string name="poi_charity">Dobrodelna trgovina</string>
+	<string name="poi_fabric">Trgovina z zavesami</string>
+	<string name="poi_bedding">Trgovina s posteljnino</string>
+	<string name="poi_kitchen">Kuhinjsko pohištvo</string>
+	<string name="poi_mobile_phone">Trgovina s telefonskimi aparati</string>
+	<string name="poi_paint">Trgovina z barvami</string>
+	<string name="poi_photo">Fototrgovina</string>
+	<string name="poi_radiotechnics">Radiotehnika</string>
+	<string name="poi_tobacco">Tobačnica</string>
+	<string name="poi_toys">Trgovina z igračami</string>
+	<string name="poi_electronics">Elektronika</string>
+	<string name="poi_cosmetics">Kozmetična trgovina</string>
 	</resources>
