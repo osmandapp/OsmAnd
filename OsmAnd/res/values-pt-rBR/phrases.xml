@@ -130,4 +130,8 @@
 		<string name="poi_alcohol">Loja de alcoólicos licenciada</string>
 	<string name="poi_beverages">Loja de bebidas</string>
 	<string name="poi_craft_carpet_layer">Colocador de carpete</string>
+	<string name="poi_department_store">Loja de departamentos</string>
+	<string name="poi_electronics">Loja de eletrônicos</string>
+	<string name="poi_fuel:octane_80">Octane 80</string>
+	<string name="poi_public_transport_platform_trolleybus">Parada de trólebus</string>
 	</resources>
