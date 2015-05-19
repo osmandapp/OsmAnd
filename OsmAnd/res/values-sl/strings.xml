@@ -637,11 +637,11 @@
 \n\nPrav tako je mogoče sporočati tudi napake na zemljevidu. Objave preko skupnosti OSM, ki se ukvarja z odpravljanjem hroščev je lažje in hitrejše. Poročilo o hrošču oddate preko sistema razhroščevanja med možnostmi \'Prijave napake v OSM\'. Tudi tu je treba najprej vpisati podatke o hrošči, po vnosu, pa sistem dovoli oddajanje hrošča.\n\nProgram OsmAnd omogoča predpomnjenje vpisov v načinu brez povezave (med nastavitvami je več možnosti delovanja), vendar pa je povezava nujna za posodobitev in nalaganje datotek OSM na napravo in za objavljanje poročil na spletu. "</string>
 	<string name="tip_map_context_menu">Meni \'Uporabi trenutno mesto\'</string>
 	<string name="tip_map_context_menu_t">"Možnost \\\'Uporabi mesto\\\' v vsebinskem meniju vključuje vsa dejanja, ki se nanašajo na mesto (točka na zemljevidu).\n\nDostop do menija je mogoč z dolgim zadržanjem pritiska na katerokoli mesto zemljevida (in nato pritisk na želeno možnost), ali pa z sledilnim kolescem preko \'Meni\' → \'Uporabi mesto\' (zadnji dve možnosti kot točko privzameta središče vidnega dela zemljevida).\n\nOznačevalnik zapremo s ponovnim dolgim pritiskom. "</string>
-	<string name="tip_search_t">"Kraje in zanimivosti je mogoče iskati preko \'Uporabi mesto\' → \'Poišči v bližini\', ali pa z iskalnikom preko \'Menija\' → \'Poišči\'.\n\nIskalno okno omogoča filtriranje iskanja:\n\t* po naslovu,
+	<string name="tip_search_t">"Kraje in zanimivosti je mogoče iskati preko možnosti \'Uporabi mesto\' → \'Poišči v bližini\', ali pa z iskalnikom preko \'Menija\' → \'Poišči\'.\n\nIskalnik omogoča iskanje:\n\t* po naslovu,
 \n\t* s koordinatami,
 \n\t* kot točke POI (po imenu ali vrsti),
 \n\t* po zgodovini in\n\t* po določenih priljubljenih mestih.
-\n\nZadetke je mogoče nadalje upravljati preko vsebinskega menija za določitev \'Navigacije\', \'Prikazovanju na zemljevidu\' in drugo. "</string>
+\n\nZadetke je mogoče nato upravljati preko vsebinskega menija za \'Navigacijo\', \'Prikaz na zemljevidu\' in drugo. "</string>
 	
     
     <string name="route_descr_lat_lon">ZD (λ) %1$.3f; ZŠ (β) %2$.3f</string>
@@ -1676,7 +1676,7 @@
 	<string name="speed_limit_exceed_message">Izberite mejo upoštevanja omejitve hitrosti, nad katero boste prejeli glasovno opozorilo.</string>
 	<string name="print_route">Tiskanje poti</string>
     
-    <string name="tip_recent_changes_1_9_t">"Spremembe v 1.9:\n\t* Posodobljen slog upodobitve zemljevidov, izris cestišč, transportnih sloje in pohodniških simbolov\n\t* Iskanje točk POI na poti\n\t* Označi cesto kot neprehodno\n\t* Enostavnejše prejemanje in posodabljanje zemljevidov\n\t* Vidna in zvočna obvestila, ki se izvedejo pri približevanju točkam\n\t* Tisk navodil poti in podrobnosti o zavojih\n\t* Podpora najave pasov pred zavijanjem\n\t* Podpora napravam Android Wear\n\t* Veliko sprememb grafičnega vmesnika\n\t* Ločena povečava za velikost črk na zemljevidu\n\t* Posebna zvočna obvestila v primeru zgrešene poti\n\t* Podpora vstavka sledilnika OsMo\n\t* Popravki nezdružljivosti različic OsMo "</string>
+    <string name="tip_recent_changes_1_9_t">"Spremembe v različici 1.9:\n\t* Posodobitev sloga upodobitve zemljevidov, izrisa cestišč, transportnih slojev in pohodniških simbolov\n\t* Iskanje točk POI na poti\n\t* Možnost označevanja ceste kot neprehodne\n\t* Enostavnejše prejemanje in posodabljanje zemljevidov\n\t* Vidna in zvočna obvestila, ki se izvedejo pri približevanju točkam\n\t* Možnost tiskanja navodil poti in podrobnosti o zavojih\n\t* Podpora najave pasov pred zavijanjem\n\t* Podpora napravam Android Wear\n\t* Več sprememb grafičnega vmesnika\n\t* Možnost ločenega povečevanja velikosti črk na zemljevidu\n\t* Posebna zvočna obvestila v primeru zgrešene poti\n\t* Podpora vstavka sledilnika OsMo\n\t* Popravki nezdružljivosti različic OsMo "</string>
     <string name="fav_point_dublicate">Podvojeno ime priljubljene točke</string>
     <string name="fav_point_dublicate_message">Ime priljubljene točke je bilo spremenjeno v %1$s, da bi se izognili podvajanjem imen.</string>
     
