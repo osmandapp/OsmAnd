@@ -763,4 +763,7 @@
 	<string name="poi_seamark_light_vessel">船艦燈、航線標識</string>
 	<string name="poi_mooring">繫泊設備</string>
 	<string name="poi_notice">通知、航線標識</string>
+	<string name="poi_radar_transponder">雷達收發機、航線標識</string>
+	<string name="poi_radio_station">無線電台、航線標識</string>
+	<string name="poi_signal_station_traffic">信號站、海上交通管制</string>
 	</resources>
