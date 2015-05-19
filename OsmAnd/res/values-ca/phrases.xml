@@ -650,4 +650,8 @@
 	<string name="poi_craft_pottery">Terrissaire</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_craft_shoemaker">Sabater</string>
+	<string name="poi_craft_sawmill">Serradora</string>
+	<string name="poi_craft_scaffolder">Bastides</string>
+	<string name="poi_craft_stonemason">Marbrista</string>
+	<string name="poi_craft_sun_protection">Tendals</string>
 	</resources>
