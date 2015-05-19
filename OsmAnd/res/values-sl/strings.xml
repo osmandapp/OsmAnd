@@ -1806,7 +1806,7 @@
 	<string name="shared_string_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
 	<string name="welcome_header">Dobrodošli</string>
-    <string name="shared_string_go">Začni .</string>
+    <string name="shared_string_go">Začni</string>
 	<string name="osmand_parking_overdue">prekoračen čas</string>
 	<string name="shared_string_places">Kraji</string>
 	<string name="watch">Poglej</string>
@@ -1859,4 +1859,10 @@
 \n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
 	<string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
 	<string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.\n\nS tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica ...).\n\nVrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju. "</string>
-	</resources>
+	<string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>
+	<string name="routing_attr_avoid_borders_description">Izogibanje prehodom meje z drugimi državami</string>
+	<string name="routing_attr_height_name">Omejitev višine</string>
+	<string name="routing_attr_height_description">Določitev omejitve višine vozila za določeno pot</string>
+    <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
+	<string name="use_fast_recalculation_desc">Preračunavanje je začetnega dela zelo dolge poti</string>
+</resources>
