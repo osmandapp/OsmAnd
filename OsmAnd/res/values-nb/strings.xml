@@ -1335,4 +1335,9 @@
 	<string name="action_modify">Aksjon endre</string>
 	<string name="action_delete">Aksjon slette</string>
 	<string name="drawer">Flat liste</string>
+    <string name="shared_string_export">Eksporter</string>
+	<string name="shared_string_collapse">Fold sammen</string>
+	<string name="shared_string_video">Video</string>
+	<string name="rendering_attr_pisteRoutes_name">Skibakker</string>
+	<string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
     </resources>
