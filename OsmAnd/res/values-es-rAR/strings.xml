@@ -213,7 +213,7 @@
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Peaje</string>
     <string name="traffic_warning_stop">Señal de alto</string>
-    <string name="traffic_warning_calming">Reductores de velocidad</string>
+    <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
 	<string name="speak_favorites">Anunciar favoritos cercanos</string>
