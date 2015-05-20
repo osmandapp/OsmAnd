@@ -2031,5 +2031,5 @@
 	<string name="routing_attr_height_name">Límite de altura</string>
 	<string name="routing_attr_height_description">Especifique la altura del vehículo que se permite en las rutas</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
-	<string name="use_fast_recalculation_desc">Recalcular sólo la parte inicial de la ruta para viajes largos</string>
+	<string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta para viajes largos</string>
 </resources>
