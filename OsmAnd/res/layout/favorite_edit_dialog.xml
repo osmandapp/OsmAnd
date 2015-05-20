@@ -52,4 +52,4 @@
 			android:selectAllOnFocus="true"/>
 	</LinearLayout>
 
-</LinearLayout>
+</ScrollView>
