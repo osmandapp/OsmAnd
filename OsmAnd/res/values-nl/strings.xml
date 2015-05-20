@@ -438,7 +438,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Verouderd kaartformaat \'\'{0}\'\' wordt niet ondersteund</string>
   <string name="poi_filter_car_aid">Auto hulp</string>
-  <string name="poi_filter_closest_poi">POI in de omgeving</string>
+  <string name="poi_filter_closest_poi">Interessepunten in de buurt</string>
   <string name="poi_filter_custom_filter">Eigen filter</string>
   <string name="poi_filter_food_shop">Eten en drinken (winkel)</string>
   <string name="poi_filter_for_tourists">Voor toeristen</string>
@@ -485,7 +485,7 @@
   <string name="show_point_options">Gebruik locatie…</string>
   <string name="renderer_load_sucess">Kaartgenerator succesvol geladen</string>
   <string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
-  <string name="renderers">Vector kaartgenerator</string>
+  <string name="renderers">Kaartstijl</string>
   <string name="renderers_descr">Kies kaartweergavestijl</string>
   <string name="poi_context_menu_website">Toon website</string>
   <string name="poi_context_menu_call">Toon telefoon</string>
@@ -807,9 +807,9 @@
   <string name="poi_action_succeded_template">Actie {0} succesvol verwerkt.</string>
   <string name="poi_error_unexpected_template">Fout opgetreden bij het uitvoeren van actie {0}.</string>
   <string name="poi_error_io_error_template">Lees/schrijffout opgetreden bij het uitvoeren van actie {0}.</string>
-  <string name="poi_error_info_not_loaded">Info over interessepunt niet geladen</string>
+  <string name="poi_error_info_not_loaded">Info over punt niet geladen</string>
   <string name="poi_dialog_name">Naam</string>
-  <string name="poi_dialog_opening_hours">Openingstijd</string>
+  <string name="poi_dialog_opening_hours">Openingstijden</string>
   <string name="poi_dialog_comment">Commentaar</string>
   <string name="poi_dialog_comment_default">Interessepunt aangepast</string>
   <string name="poi_dialog_other_tags_message">Alle andere tags blijven bewaard</string>
@@ -1132,7 +1132,7 @@
     
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
-    <string name="srtm_plugin_description">"Deze plug-in biedt zowel een contourlijn als een reliëf laag die over de OsmAnd\'s offline kaart wordt weergegeven. Deze functionaliteit zal zeer worden gewaardeerd door sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de reliëfstructuur van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Toon contourlijnen en een reliëflaag over de offline kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -1141,7 +1141,7 @@
 <string name="audionotes_plugin_description">De Audio/video notes plug-in bied de mogelijkheden voor het maken van audio-, foto- en videonotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu voor een zelfgekozen punt op de kaart.</string>
     <string name="audionotes_plugin_name">Audio/video-notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Deze plug-in biedt zowel een contourlijn als een reliëf laag die over de OsmAnd\'s offline kaart wordt weergegeven. Deze functionaliteit zal zeer worden gewaardeerd door sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de reliëfstructuur van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Toon contourlijnen en een reliëflaag over de offline kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
@@ -1448,16 +1448,16 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="destination_point">Bestemming %1$s</string>
     
 	
-	<string name="av_photo_play_sound">Speel geluid af na nemen van foto</string>
-	<string name="av_camera_focus">Scherpstelmethode van camera</string>
-	<string name="av_camera_focus_descr">Kies scherpstelmethode van interne camera</string>
+	<string name="av_photo_play_sound">Geluid bij het maken van foto</string>
+	<string name="av_camera_focus">Scherpstelmethode</string>
+	<string name="av_camera_focus_descr">Kies scherpstelmethode voor de camera</string>
 	<string name="av_camera_focus_auto">Automatisch scherpstellen</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfocaal scherpstellen</string>
 	<string name="av_camera_focus_edof">Grote scherptediepte (EDOF)</string>
 	<string name="av_camera_focus_infinity">Scherpstellen op oneindig</string>
 	<string name="av_camera_focus_macro">Macromodus (dichtbij scherpstellen)</string>
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
-	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld tijdens het nemen van foto\'s</string>
+	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld bij het nemen van foto\'s</string>
 
 	
     <string name="speak_speed_limit">Meld snelheidsbeperking</string>
@@ -1664,10 +1664,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="interrupt_music">Muziek onderbreken</string>
 	<string name="share_route_as_gpx">Deel route als GPX bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
-	<string name="navigation_intent_invalid">ongeldig formaat: %s</string>
+	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plug-in zorgt voor de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Gebrik de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo monitoring</string>
     <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -1875,8 +1875,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="arrival_distance_factor_late">Laat</string>
     <string name="arrival_distance_factor_at_last">Als bestemming bijna is bereikt</string>
     
-<string name="av_camera_pic_size">Camera Beeldformaat</string>
-	<string name="av_camera_pic_size_descr">Selecteer interne camera beeldformaat</string>
+<string name="av_camera_pic_size">Foto-formaat</string>
+	<string name="av_camera_pic_size_descr">Kies de grootte van de foto\'s</string>
     
 <string name="rendering_value_browse_map_name">Bekijk kaart</string>  
     <string name="rendering_value_car_name">Auto</string>
@@ -1888,14 +1888,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="targets">Bestemming(en)</string>
     <string name="way_alarms">Filemeldingen</string>
     <string name="speak_favorites">Meld favorieten in de buurt</string>
-    <string name="speak_poi">Meld POI in de buurt</string>
+    <string name="speak_poi">Meld interessepunt in de buurt</string>
     <string name="shared_string_all">Alle</string>
     <string name="index_tours">Reizen</string>
-    <string name="record_plugin_name">Route opname</string>
+    <string name="record_plugin_name">Spoor registeren</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">"Neem uw route op en bewaar deze via de GPX-knop op het kaartscherm, of sla al uw afgelegde routes automatisch op als GPX-bestanden.\n\nOpgenomen routes kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen routes gebruiken om hun trainingen te volgen. OsmAnd kan routes analyseren (rondetijden, gemiddelde snelheid enz.) en routes kunnen natuurlijk ook later worden geanalyseerd met speciale 3de-partij analysetools. "</string>
+    <string name="record_plugin_description">"Registreer uw afgelegde weg als spoor in een GPX-bestand. Gebruik de opnameknop op het kaartscherm, of laat alle reizen automatisch opslaan.\n\nOpgenomen sporen kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen routes gebruiken om hun trainingen te volgen. OsmAnd kan routes analyseren (rondetijden, gemiddelde snelheid enz.) en routes kunnen natuurlijk ook met andere programma\'s worden geanalyseerd. "</string>
     <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
@@ -2017,14 +2017,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="plugin_nautical_name">Nautische kaartweergave</string>
     <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
     <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
-	<string name="get_plugin">Krijgen</string>
+	<string name="get_plugin">Installeren</string>
 	<string name="watch">Bekijk</string>
 	<string name="rendering_attr_pisteRoutes_name">Ski-pistes</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste verzorging</string>
     <string name="track_segments">Route segmenten</string>
 	<string name="track_points">Route punten</string>
-	<string name="plugin_touringview_name">Toer kaartweergave</string>
-	<string name="plugin_touringview_descr">"Het activeren van deze weergave verandert OsmAnd\'s kaart stijl in \'Toer weergave (meer contrast en detail)\', dit is een speciale meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).\n\nHet onderscheid alle soorten wegen van elkaar d.m.v. een eenduidige kleurcodering, wat handig is bij – bijvoorbeeld – het besturen van een groot voertuig.\n\nEn het bied speciale toer opties zoals fietsroutes en bergwandelpaden.\n\nEen speciale kaart downloaden is niet nodig, de weergave wordt gecreëerd uit de standaard weergave.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Toer weergave (meer contrast en detail)\' in het Vector kaartgenerator overzicht, deze zit onder het menu \'Kaartstijl\' onder hoofdmenu optie \'Kaart instellen\'. "</string>
+	<string name="plugin_touringview_name">Touring-kaartweergave</string>
+	<string name="plugin_touringview_descr">"Verandert de kaartstijl in \'Touring-weergave (meer contrast en detail)\'. Dit is een speciale, meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).\n\nAlle soorten wegen zijn goed te herkennen door een eenduidige kleurcodering, wat bijvoorbeeld handig is bij het besturen van een groot voertuig.\n\nOok zijn er speciale touring-opties zoals fietsroutes en bergwandelpaden.\n\nEen speciale kaart downloaden is niet nodig; de weergave wordt gecreëerd van de gewone kaartgegevens.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Touring-weergave (meer contrast en detail)\' onder \'Kaart instellen\' en dan \'Kaartstijl\'. "</string>
 	<string name="plugin_nautical_descr">"Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken.\n\nDeze plugin biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.\n\nOm weer de gewone kaart te zien kunt u de plugin uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen. "</string>
 	<string name="plugin_ski_name">Ski kaartweergave</string>
 	<string name="plugin_ski_descr">"Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaart stijl die een met sneeuw bedekt winterlandschap voorstelt.\n\nHet activeren van deze weergave verandert de kaart in stijl \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door ofwel het de-activeren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
