@@ -603,4 +603,31 @@
 	<string name="poi_dance_floor">Pista de dança</string>
 	<string name="poi_nightclub">Danceteria</string>
 	<string name="poi_stripclub">Clube de striptease</string>
+	<string name="poi_ski_resort">Resort de esqui</string>
+	<string name="poi_beach_resort">Resort de praia</string>
+	<string name="poi_dog_park">Cachorródromo</string>
+	<string name="poi_leisure_fishing">Local de pesca</string>
+	<string name="poi_hunting_stand">Posto elevado de espera de caça</string>
+	<string name="poi_harbour">Porto</string>
+	<string name="poi_marina">Marina</string>
+	<string name="poi_miniature_golf">Minigolfe</string>
+	<string name="poi_playground">Parquinho</string>
+	<string name="poi_bench">Assento</string>
+	<string name="poi_swimming_pool">Piscina</string>
+	<string name="poi_water_park">Parque aquático</string>
+	<string name="poi_park">Parque/praça</string>
+	<string name="poi_recreation_ground">Área de recreação</string>
+	<string name="poi_village_green">Village green</string>
+	<string name="poi_cafe">Cafeteria</string>
+	<string name="poi_biergarten">Biergarten</string>
+	<string name="poi_restaurant">Restaurante</string>
+	<string name="poi_fast_food">Fast-food</string>
+	<string name="poi_bar">Bar</string>
+	<string name="poi_pub">Pub</string>
+	<string name="poi_food_court">Praça de alimentação</string>
+	<string name="poi_drinking_water">Fonte de água potável</string>
+	<string name="poi_barbecue">Churrasqueira</string>
+
+	<string name="poi_craft_agricultural_engines">Máquinas agrícolas</string>
+	<string name="poi_craft_basket_maker">Cesteiro</string>
 	</resources>
