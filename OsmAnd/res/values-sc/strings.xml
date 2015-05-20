@@ -1962,4 +1962,8 @@
     <string name="rendering_attr_hideHouseNumbers_name">Cua sos nùmeros de sas domos</string>
     <string name="routing_attr_height_name">Lìmite de artària</string>
 	<string name="routing_attr_height_description">Dislinda s’artària de su veìculu permitida pro sas istradas</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_description">Non rugrare sas fronteras intre sos istados</string>
+	<string name="use_fast_recalculation">Recàlculu intelligente de s’àndala</string>
+	<string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
+<string name="routing_attr_avoid_borders_name">Non rugres sas fronteras</string>
+	</resources>
