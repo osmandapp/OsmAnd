@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +42,6 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -80,7 +77,8 @@ public class RouteProvider {
 	
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
-			ORS("OpenRouteService"), OSRM("OSRM (only car)"),
+//			ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable) 
+			OSRM("OSRM (only car)"),
 			BROUTER("BRouter (offline)"), STRAIGHT("Straight line");
 		private final String name;
 		private RouteService(String name){
@@ -308,8 +306,8 @@ public class RouteProvider {
 					res = findBROUTERRoute(params);
 				} else if (params.type == RouteService.YOURS) {
 					res = findYOURSRoute(params);
-				} else if (params.type == RouteService.ORS) {
-					res = findORSRoute(params);
+//				} else if (params.type == RouteService.ORS) {
+//					res = findORSRoute(params);
 				} else if (params.type == RouteService.OSRM) {
 					res = findOSRMRoute(params);
 				} else if (params.type == RouteService.STRAIGHT){
@@ -1109,10 +1107,12 @@ public class RouteProvider {
 		// possibly hide that API key because it is privacy of osmand
 		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
 		String scheme = "";
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
-			scheme = "https";
-		else
+		// https certificate doesn't seem to be accepted on Android
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && false) {
+//			scheme = "https";
+//		} else {
 			scheme = "http";
+//		}
 		uri.append(scheme + "://router.project-osrm.org/viaroute?alt=false"); //$NON-NLS-1$
 		uri.append("&loc=").append(String.valueOf(params.start.getLatitude()));
 		uri.append(",").append(String.valueOf(params.start.getLongitude()));
