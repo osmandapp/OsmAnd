@@ -3,10 +3,10 @@
   
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
-  <string name="avoid_unpaved">Evitar carreteras sin pavimento</string>
+  <string name="avoid_unpaved">Evitar carreteras no pavimentadas</string>
   <string name="avoid_ferries">Evitar ferries</string>
   <string name="avoid_in_routing_title">Evitar…</string>
-  <string name="avoid_in_routing_descr">Evita carreteras de peaje, sin pavimentar, transbordadores</string>
+  <string name="avoid_in_routing_descr">Evita carreteras con peaje, no pavimentadas, ferries</string>
   <string name="show_warnings_title">Mostrar alarmas…</string>
   <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, badenes), advertencias de radares de velocidad, e información de carriles</string>
   <string name="map_widget_fluorescent">Rutas fluorescentes</string>
@@ -1465,12 +1465,12 @@
 	<string name="routing_attr_prefer_motorway_description">Prefierir autopistas en el ruteo</string>
 	<string name="routing_attr_short_way_name">Camino más corto</string>
 	<string name="routing_attr_short_way_description">Usar el camino corto</string>
-	<string name="routing_attr_avoid_toll_name">Evitar peajes</string>
+	<string name="routing_attr_avoid_toll_name">Evitar peajes de carreteras</string>
 	<string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
 	<string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_ferries_name">Evitar ferries</string>
-	<string name="routing_attr_avoid_ferries_description">Evita usar transbordadores</string>
+	<string name="routing_attr_avoid_ferries_description">Evita usar ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
@@ -2026,4 +2026,10 @@
     <string name="shared_string_copy">Copiar</string>
     <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Evitar el cruce de fronteras</string>
+	<string name="routing_attr_avoid_borders_description">Evita cruzar una frontera hacia otro país</string>
+	<string name="routing_attr_height_name">Límite de altura</string>
+	<string name="routing_attr_height_description">Especifique la altura del vehículo que se permite en las rutas</string>
+    <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
+	<string name="use_fast_recalculation_desc">Recalcular sólo la parte inicial de la ruta para viajes largos</string>
+</resources>
