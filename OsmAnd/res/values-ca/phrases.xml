@@ -650,4 +650,17 @@
 	<string name="poi_craft_pottery">Terrissaire</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_craft_shoemaker">Sabater</string>
+	<string name="poi_craft_sawmill">Serradora</string>
+	<string name="poi_craft_scaffolder">Bastides</string>
+	<string name="poi_craft_stonemason">Marbrista</string>
+	<string name="poi_craft_sun_protection">Tendals</string>
+	<string name="poi_craft_sweep">Escura-xemeneies</string>
+	<string name="poi_craft_tailor">Sastre</string>
+	<string name="poi_craft_tiler">Enrajolador</string>
+	<string name="poi_craft_tinsmith">Llauner</string>
+	<string name="poi_craft_upholsterer">Tapisser</string>
+	<string name="poi_craft_watchmaker">Rellotger</string>
+	<string name="poi_craft_window_construction">Construcció de finestres</string>
+
+	<string name="poi_funeral_directors">Funerària</string>
 	</resources>

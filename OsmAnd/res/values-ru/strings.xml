@@ -1975,4 +1975,10 @@
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Избегать пересечения границы</string>
+	<string name="routing_attr_avoid_borders_description">Избегать пересечение границы с другой страной</string>
+	<string name="routing_attr_height_name">Ограничение высоты</string>
+	<string name="routing_attr_height_description">Укажите высоту автомобиля для учёта при построении маршрута</string>
+    <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
+	<string name="use_fast_recalculation_desc">Перерасчет только начальной части маршрута для длительных поездок</string>
+</resources>

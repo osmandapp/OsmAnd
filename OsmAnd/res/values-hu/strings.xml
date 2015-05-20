@@ -1946,4 +1946,10 @@
 	<string name="index_name_netherlands">Európa - Hollandia</string>
 	<string name="application_dir_change_warning3">Szeretné, hogy az OsmAnd az adatfájljait is az új helyre másolja?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Határátlépések elkerülése</string>
+	<string name="routing_attr_avoid_borders_description">A határ átlépésének elkerülése egy másik országba</string>
+	<string name="routing_attr_height_name">Magasságkorlát</string>
+	<string name="routing_attr_height_description">Az utakon engedélyezett járműmagasság megadása</string>
+    <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
+	<string name="use_fast_recalculation_desc">Hosszú utaknál csak az útvonal kezdeti részének újraszámítása</string>
+</resources>
