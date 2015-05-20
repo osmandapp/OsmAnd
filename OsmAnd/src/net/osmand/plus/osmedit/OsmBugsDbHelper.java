@@ -87,6 +87,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 				} while (query.moveToNext());
 			}
 			query.close();
+			db.close();
 		}
 		return cachedOsmbugsPoints;
 	}
