@@ -177,4 +177,17 @@
 	<string name="poi_piste_sleigh">Slede</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolleybussholdeplass</string>
 	<string name="poi_public_transport_platform_tram">Sporvognholdeplass</string>
+	<string name="poi_theatre">Teater</string>
+	<string name="poi_circus">Sirkus</string>
+	<string name="poi_gallery">Kunstgalleri</string>
+	<string name="poi_beach_resort">Strandferiested</string>
+	<string name="poi_dog_park">Hundepark</string>
+	<string name="poi_leisure_fishing">Fiskeplass</string>
+	<string name="poi_harbour">Havn</string>
+	<string name="poi_playground">Lekeplass</string>
+	<string name="poi_bench">Benk</string>
+	<string name="poi_swimming_pool">Svømmebasseng</string>
+	<string name="poi_water_park">Vannpark</string>
+	<string name="poi_park">Park</string>
+	<string name="poi_recreation_ground">Friareal</string>
 	</resources>
