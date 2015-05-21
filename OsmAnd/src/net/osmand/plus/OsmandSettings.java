@@ -1815,7 +1815,7 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 	
 	public final CommonPreference<Integer> OSMAND_THEME = 
-			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 	
 	public boolean isLightActionBar(){
 		return true;
