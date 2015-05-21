@@ -511,16 +511,16 @@
 	<string name="poi_religion_shinto">Temple sintoista</string>
 	<string name="poi_religion_taoist">Temple taoista</string>
 
-	<string name="poi_internet_access_wlan">Accés a internet: wifi</string>
-	<string name="poi_internet_access_terminal">Accés a Internet : terminal</string>
-	<string name="poi_internet_access_wired">Accés a Internet : fil</string>
+	<string name="poi_internet_access_wlan">Accés a Internet: wifi</string>
+	<string name="poi_internet_access_terminal">Accés a Internet: terminal</string>
+	<string name="poi_internet_access_wired">Accés a Internet: fil</string>
 	<string name="poi_internet_access_public">Accés a Internet: públic</string>
-	<string name="poi_internet_access_service">Accés a Internet : servei</string>
+	<string name="poi_internet_access_service">Accés a Internet: servei</string>
 	
 	<string name="poi_monastery">Monestir</string>
 	<string name="poi_historic_monastery">Monestir històric</string>
 	<string name="poi_wayside_cross">Creu de terme</string>
-	<string name="poi_wayside_shrine">Peto de ànimes</string>
+	<string name="poi_wayside_shrine">Peto d\'ànimes</string>
 	<string name="poi_information">Informació turística</string>
 	<string name="poi_clock">Rellotge</string>
 	<string name="poi_travel_agent">Agència de viatges</string>
@@ -636,7 +636,7 @@
 	<string name="poi_craft_gardener">Jardiner</string>
 	<string name="poi_craft_glaziery">Vidrier</string>
 	<string name="poi_craft_hvac">Calefacció, ventilació, aire condicionat</string>
-	<string name="poi_craft_insulation">Aillaments</string>
+	<string name="poi_craft_insulation">Aïllaments</string>
 	<string name="poi_craft_handicraft">Fabricació manual</string>
 	<string name="poi_craft_jeweller">Joier</string>
 	<string name="poi_craft_locksmith">Manyà</string>
@@ -676,7 +676,7 @@
 	<string name="poi_bitcoin_yes">Pagament amb bitcoins</string>
 
 	<string name="poi_peak">Cim</string>
-	<string name="poi_volcano">Vulcà</string>
+	<string name="poi_volcano">Volcà</string>
 	<string name="poi_crater">Cràter</string>
 	<string name="poi_glacier">Glacera</string>
 	<string name="poi_sinkhole">Dolina</string>
