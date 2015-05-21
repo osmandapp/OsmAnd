@@ -151,4 +151,7 @@
 
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
+
+	<color name="spinner_list_background_light">#eeeeee</color>
+	<color name="spinner_list_background_dark">#303030</color>
 </resources>

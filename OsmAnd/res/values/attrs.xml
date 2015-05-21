@@ -12,6 +12,7 @@
 		<attr name="btn_flat_bg" format="reference" />
 		<attr name="card_bg_color" format="reference" />
 		<attr name="spinnerItemTextColor" format="reference" />
+        <attr name="spinnerListBackground" format="color|reference" />
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
 		<attr name="search_background" format="reference" />
