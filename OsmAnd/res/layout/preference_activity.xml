@@ -18,7 +18,8 @@
 				android:id="@+id/spinner_nav"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"/>
+				android:layout_gravity="center_horizontal"
+				android:popupBackground="?attr/spinnerListBackground"/>
 
 		<ProgressBar android:id="@+id/ProgressBar"
 					 android:layout_width="wrap_content"

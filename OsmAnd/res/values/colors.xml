@@ -148,4 +148,7 @@
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
+	<color name="spinner_list_background_light">#eeeeee</color>
+	<color name="spinner_list_background_dark">#303030</color>
+
 </resources>
