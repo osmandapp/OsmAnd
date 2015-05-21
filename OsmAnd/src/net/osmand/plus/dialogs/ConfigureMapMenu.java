@@ -17,10 +17,12 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -33,6 +35,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -111,6 +114,14 @@ public class ConfigureMapMenu {
 				if (isChecked) {
 					selectPOILayer(settings);
 				}
+			} else if (itemId == R.string.layer_map) {
+				if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+					Intent intent = new Intent(ma, PluginActivity.class);
+					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandRasterMapsPlugin.ID);
+					ma.startActivity(intent);
+				} else {
+					ma.getMapLayers().selectMapLayer(ma.getMapView());
+				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
 			} else if (itemId == R.string.shared_string_favorites) {
@@ -157,6 +168,8 @@ public class ConfigureMapMenu {
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SELECTED_POI_FILTER_FOR_MAP.get() != null ? 1 : 0)
 				.iconColor(R.drawable.ic_action_info_dark).listen(l).reg();
+		adapter.item(R.string.layer_map).iconColor(R.drawable.ic_world_globe_dark)
+				.listen(l).reg();
 		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0)
 				.iconColor(R.drawable.ic_action_text_dark).listen(l).reg();
 		adapter.item(R.string.shared_string_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0)
