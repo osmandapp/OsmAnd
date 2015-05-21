@@ -100,7 +100,7 @@
 		\n\t *Naudojimas ir vartotojo sąsaja*
 		\n\t 	- Patobulinta daugelyje vietų		
 	</string>
-  <string name="osm_editing_plugin_description">Rodyti ryšio su OSM nustatymus reikalingus pranešti / keisti LV objektus, pranešti / komentuoti OSM klaidas ir prisidėti išsaugotais GPX failais (reikalinga OSM vartotojo sąskaita).</string>
+  <string name="osm_editing_plugin_description">Šis įskiepis leidžia kurti ar redaguoti LV, užregistruoti ar komentuoti OSM klaidą, dalintis įrašytais GPX failais. OSM yra atviros visuomenės valdomas, viešas žemėlapio žymėjimo projektas. Dėl smulkesnės informacijos prašome rkeiptis į http://openstreetmap.org. Aktyvus dalyvavimas yra labai vertinamas, prisidėti galite tiesiai OsmAnd, jei programoje nurodysite savo prisijungimo duomenis.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoriniai žemėlapiai tikriausiai bus atvaizduojami sparčiau. Kaikuriuose įrenginiuose gali veikti prastai.</string>
   
   <string name="play_commands_of_currently_selected_voice">Groti šiuo metu pasirinkto balso komandas</string>
@@ -1467,7 +1467,7 @@
 	<string name="routing_attr_avoid_motorway_name">Vengti greitkelių</string>
 	<string name="routing_attr_avoid_motorway_description">Vengti greitkelių</string>
 	<string name="routing_attr_weight_name">Maksimalus svoris</string>
-	<string name="routing_attr_weight_description">Įvesti automobilio svorio apribojimą</string>
+	<string name="routing_attr_weight_description">Nurodykite transporto priemonės masę, leidžiamą maršrutuose</string>
     <string name="android_19_location_disabled">Pradedant Android 4.4 versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
@@ -2016,4 +2016,8 @@
 	<string name="routing_attr_avoid_borders_description">Vengti kirsti sieną išvažiuojant užsienio šalin</string>
 	<string name="routing_attr_height_name">Aukščio ribojimas</string>
 	<string name="use_fast_recalculation">Išmanusis maršruto perskaičiavimas</string>
-	</resources>
+	<string name="storage_directory_internal_app">Vidinė programos atmintis</string>
+    <string name="storage_directory_manual">Nurodyta rankiniu būdu</string>
+    <string name="routing_attr_height_description">Nurodykite transporto priemonės aukštį, leidžiamą maršrutuose</string>
+    <string name="use_fast_recalculation_desc">Perskaičiuoti tik pradinę ilgos kelionės maršruto dalį</string>
+</resources>

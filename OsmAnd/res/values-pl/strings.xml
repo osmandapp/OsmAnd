@@ -2,13 +2,13 @@
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
-  <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
-  <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
+  <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
+  <string name="init_native_library">Inicjowanie biblioteki renderowania natywnego…</string>
   <string name="pref_vector_rendering">Opcje dotyczące renderera wektorowego</string>
   <string name="pref_overlay">Podkłady / nakładki</string>
   <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
-  <string name="choose_auto_follow_route">Autocentrowanie mapy</string>
+  <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
   <string name="choose_auto_follow_route_descr">Określa opóźnienie nadążania mapy za aktualną lokalizacją</string>
   <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
@@ -533,7 +533,7 @@
   <string name="data_settings">Dane</string>
   
   <string name="osm_settings">Edycja OSM</string>
-  <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
+  <string name="auto_zoom_map_descr">Przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualną lokalizacją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
   <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji</string>
@@ -967,7 +967,7 @@
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
   <string name="avoid_in_routing_title">Unikanie</string>
-  <string name="avoid_in_routing_descr">Unikaj dróg płatnych, nieutwardzonych, promów</string>
+  <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
   <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
   
@@ -1055,7 +1055,7 @@
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
-    <string name="no_buildings_found">Nie znaleziono budynków.</string>
+    <string name="no_buildings_found">Nie odnaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżąca pozycja</string>
@@ -1086,7 +1086,7 @@
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     
 	<string name="tip_altitude_offset">Korekta wysokości</string>
-	<string name="monitoring_control_start">Start</string>
+	<string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
 		\n\nLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96.
 		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Ustawienia\'  → \'Zarządzanie plikami map\'. (Oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
@@ -1661,8 +1661,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_plugin_name">Monitoring OsMo</string>
     <string name="osmo_settings">Monitoring OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
-    <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
-    <string name="keep_informing">Powtarzanie instrukcji nawigacji</string>
+    <string name="keep_informing_descr">Podaje instrukcje nawigacji w regularnych odstępach czasu</string>
+    <string name="keep_informing">Powtarzanie instrukcji</string>
 	<string name="arrival_distance">Powiadomienia osiągnięcia celu</string>
     <string name="arrival_distance_descr">Określa moment powiadamiania o osiągnięciu celu</string>
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
@@ -1795,8 +1795,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
     
-    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
-    <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
+    <string name="show_zoom_buttons_navigation_descr">Wyświetla przyciski zbliżania i oddalania podczas nawigacji</string>
+    <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
     <string name="sort_by_name">Sortuj według nazwy</string>
     <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać proszę nacisnąć i przytrzymać dostępną ścieżkę.</string>
@@ -1912,7 +1912,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
-	<string name="speed_limit_exceed_message">Wybierz margines tolerancji ograniczenia prędkości, powyżej którego otrzymasz ostrzeżenie głosowe.</string>
+	<string name="speed_limit_exceed_message">Wybiera zakres tolerancji ograniczenia prędkości, powyżej którego zostanie użyte ostrzeżenie głosowe.</string>
 	<string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
@@ -2039,7 +2039,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_unexpected_error">Wystąpił nieoczekiwany błąd</string>
 	<string name="shared_string_action_template">Działanie {0}</string>
 	<string name="shared_string_collapse">Zwiń</string>
-	<string name="shared_string_currently_recording_track">Rejestrowana trasa</string>
+	<string name="shared_string_currently_recording_track">Aktualna trasa</string>
 	<string name="shared_string_audio">Dźwięk</string>
 	<string name="shared_string_video">Wideo</string>
 	<string name="shared_string_photo">Obraz</string>
@@ -2070,7 +2070,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
 	<string name="agps_info">Informacje A-GPS</string>
-	<string name="agps_data_last_downloaded">Dane A-GPS ostatnio pobrane: %1$s</string>
+	<string name="agps_data_last_downloaded">Ostatni pobrane dane A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. Twórcy programu nie biorą odpowiedzialności za łamanie prawa przez użytkowników. Proszę wybrać „Tak”, tylko jeśli wolno używać tej funkcji.</string>
 	<string name="welmode_download_maps">Pobierz mapy</string>
 	<string name="welcome_select_region">Proszę wybrać region ruchu, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
@@ -2096,7 +2096,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_edit">Edytuj</string>
 	<string name="filter_poi_hint">Filtruj po nazwie</string>
     <string name="application_dir_change_warning3">Skopiować pliki danych programu do nowego położenia?</string>
-    <string name="specified_directiory_not_writeable">Mapy nie mogą zostać zapisane we wskazanym katalogu</string>
+    <string name="specified_directiory_not_writeable">Nie można zapisać map we wskazanym katalogu</string>
 	<string name="copying_osmand_file_failed">Nie udało się skopiować plików</string>    
     <string name="storage_directory_external">Pamięć zewnętrzna</string>
     <string name="storage_directory_default">Pamięć wewnętrzna</string>
@@ -2109,5 +2109,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="storage_directory">Przechowywanie map</string>
     <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
-    <string name="storage_directory_multiuser">Pamięć wieloużytkownikowa</string>
-    </resources>
+    <string name="storage_directory_multiuser">Pamięć użytkownika</string>
+    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
+	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
+	<string name="routing_attr_height_name">Limit wysokości</string>
+	</resources>
