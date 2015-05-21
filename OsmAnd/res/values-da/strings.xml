@@ -2011,7 +2011,7 @@
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
-    <string name="routing_attr_avoid_borders_description">Undgå at krydse grænsen til et andet land</string>
+    <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
 	<string name="routing_attr_height_name">Højdegrænse</string>
 	<string name="routing_attr_avoid_borders_name">Undgå at krydse grænser</string>
 	<string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
