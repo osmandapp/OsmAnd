@@ -108,7 +108,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 
 	private void prepareProvider() {
 		poiTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes();
-		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
+		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(false);
 		settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		isLocalEdit = true;
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
@@ -610,7 +610,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 
 	private Map<String, PoiType> getSubCategoriesMap(PoiCategory poiCategory) {
 		Map<String, PoiType> subCategories = new LinkedHashMap<>(poiTypes.getAllTranslatedNames(poiCategory, false));
-		for (Map.Entry<String, PoiType> s : poiTypes.getAllTranslatedNames().entrySet()) {
+		for (Map.Entry<String, PoiType> s : allTranslatedSubTypes.entrySet()) {
 			if (!subCategories.containsKey(s.getKey())) {
 				subCategories.put(s.getKey(), s.getValue());
 			}

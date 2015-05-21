@@ -126,7 +126,7 @@ public class MapPoiTypes {
 		return null;
 	}
 	
-	public Map<String, PoiType> getAllTranslatedNames() {
+	public Map<String, PoiType> getAllTranslatedNames(boolean onlyTranslation) {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
@@ -134,6 +134,12 @@ public class MapPoiTypes {
 					continue;
 				}
 				translation.put(pt.getTranslation(), pt);
+				if(!onlyTranslation) {
+					String kn = pt.getKeyName().replace('_', ' ');
+					if(!pt.getTranslation().toLowerCase().contains(kn)) {
+						translation.put(Algorithms.capitalizeFirstLetterAndLowercase(kn), pt);
+					}
+				}
 			}
 		}
 		return translation;
@@ -169,8 +175,10 @@ public class MapPoiTypes {
 		for (PoiType pt : pc.getPoiTypes()) {
 			translation.put(pt.getTranslation(), pt);
 			if (!onlyTranslation) {
-//				translation.put(pt.getKeyName(), pt);
-				translation.put(Algorithms.capitalizeFirstLetterAndLowercase(pt.getKeyName().replace('_', ' ')), pt);
+				String kn = pt.getKeyName().replace('_', ' ');
+				if(!pt.getTranslation().toLowerCase().contains(kn)) {
+					translation.put(Algorithms.capitalizeFirstLetterAndLowercase(kn), pt);
+				}
 			}
 		}
 		return translation;
