@@ -188,7 +188,6 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
 		builder.setTitle(getString(R.string.delete_target_point));
-		//builder.setMessage(getString(R.string.clear_destination));
 		builder.setMessage(PointDescription.getSimpleName(point, getActivity()));
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
