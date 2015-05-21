@@ -1047,7 +1047,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_offline_geo_error">Заявката не може да бъде анализирана - \'%s\'</string>
 	<string name="search_osm_offline">Търсене на адрес в локалните карти</string>
 	<string name="system_locale">Система</string>
-	<string name="preferred_locale_descr">Избор на език за приложението</string>
+	<string name="preferred_locale_descr">Избор на език за приложението (изисква рестартиране)</string>
 	<string name="preferred_locale">Език</string>
 	<string name="incomplete_locale">непълен</string>
 	<string name="tip_map_switch">Изберете източник на карти</string>
@@ -1126,7 +1126,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="indexing_address">Индексиране на адресите…</string>
 	<string name="indexing_map">Индексиране на картата…</string>
 	<string name="indexing_poi">Индексиране на POI…</string>
-	<string name="indexing_transport">Индексиране на транспорт…</string>
+	<string name="indexing_transport">Индексиране на общ. транспорт…</string>
 	<string name="shared_string_io_error">Възникна входно/изходна грешка</string>
 	<string name="km">км</string>
 	<string name="km_h">км/ч</string>
@@ -1151,8 +1151,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="loading_builds_failed">Свалянето на списъка с версиите на OsmAnd се провали</string>
 	<string name="loading_builds">Зареждане на списъка с версиите на OsmAnd…</string>
 	<string name="select_build_to_install">Изберете версия на OsmAnd за инсталиране</string>
-	<string name="gps_status_app_not_found">Приложението GPS Status не е инсталирано. Да се потърси ли в Market?</string>
-	<string name="voice_is_not_available_msg">Гласовата навигация не е достъпна. Моля, отидете в Настройки, изберете гласов пакет и го свалете.</string>
+	<string name="gps_status_app_not_found">Няма инсталирано приложение показващо състоянието на GPS. Да се потърси ли в \'Market\'?</string>
+	<string name="voice_is_not_available_msg">Гласовите напътствия не са достъпни. Моля, отидете в \'Настройки\' → \'Общи\' → \'Гласови напътствия\', изберете гласов пакет и го свалете.</string>
 	<string name="voice_is_not_available_title">Няма избрано гласово напътствие</string>
 	<string name="daynight_mode_day">Ден</string>
 	<string name="daynight_mode_night">Нощ</string>
@@ -1192,7 +1192,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	
 	<string name="transport_search_again">Нулиране на търсенето за общ. транспорт</string>
 	
-	<string name="voice">Глас</string>
+	<string name="voice">Записан глас</string>
 	<string name="no_vector_map_loaded">Не са заредени векторни карти</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">Не са открити файлове GPX в папката /tracks</string>
@@ -1972,4 +1972,5 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="proxy_port_descr">Конфигуриране номера на порта на прокси сървъра (например 8118)</string>
 	<string name="share_fav_subject">Споделени места чрез OsmAnd</string>
 	<string name="import_file_favourites">Запис като GPX файл или внасяне в \'Любими места\'?</string>
+	<string name="voices">Гласови напътствия</string>
 	</resources>
