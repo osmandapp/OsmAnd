@@ -1951,7 +1951,7 @@
    	<string name="mark_to_delete">刪除標記</string>
 	<string name="current_route">目前的路線</string>
     <string name="welmode_download_maps">下載地圖</string>
-	<string name="welcome_select_region">為了正確的反映您所在的交通號誌和規則，請選擇您的駕駛區域：</string>
+	<string name="welcome_select_region">為了正確的反映您所在地的交通號誌和規則，請選擇您的駕駛區域：</string>
 	<string name="welcome_text">OsmAnd 提供全球離線地圖瀏覽和全球離線導航！</string>
 	<string name="welcome_header">歡迎</string>
     <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）法律上不容許使用測速照相警示。如果您違反了法律，OsmAnd 並不承擔任何的責任。請只在您有資格使用此功能時，才按下 \"是\" 。</string>
@@ -1973,7 +1973,7 @@
 	<string name="rendering_value__name">預設</string>
     <string name="rendering_value_highContrastRoads_name">高對比道路</string>
 	<string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案，複製到新的目的地嗎？</string>
-    <string name="specified_directiory_not_writeable">地圖不能建立在指定的目錄</string>
+    <string name="specified_directiory_not_writeable">在指定的目錄不能建立地圖</string>
 	<string name="copying_osmand_file_failed">複製檔案時失敗</string>    
     <string name="storage_directory_external">外部存儲器</string>
     <string name="storage_directory_multiuser">多使用者存儲器</string>
@@ -1988,5 +1988,5 @@
 	<string name="routing_attr_height_name">高度限制</string>
 	<string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
-	<string name="use_fast_recalculation_desc">重新計算只有在長途航行路線的初始部分</string>
+	<string name="use_fast_recalculation_desc">只有在長途航行路線的初始部分重新計算</string>
 </resources>
