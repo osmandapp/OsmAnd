@@ -84,7 +84,8 @@
         <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_light</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
         <item name="android:textColorPrimary">@color/color_black</item>
-        <item name="spinnerItemTextColor">@color/color_white</item>
+        <item name="spinnerItemTextColor">@color/color_black</item>
+		<item name="spinnerListBackground">@color/spinner_list_background_light</item>
 		
 		<item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -93,7 +94,7 @@
         <item name="android:actionMenuTextColor">@color/color_white</item>
 	</style>
 	
-	    <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+	<style name="OsmandDarkTheme" parent="Theme.AppCompat">
 		<item name="list_divider">@color/list_divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
@@ -124,7 +125,7 @@
 		<item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
 		<item name="android:textColorPrimary">@color/color_white</item>
 		<item name="spinnerItemTextColor">@color/color_white</item>
-		
+		<item name="spinnerListBackground">@color/spinner_list_background_dark</item>
 		
 		<item name="android:actionModeBackground">@color/actionbar_dark_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>

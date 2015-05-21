@@ -339,7 +339,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			}
 			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
 					R.layout.spinner_item, s);
-			int r = android.R.layout.simple_spinner_item;
 //			android.R.layout.simple_spinner_dropdown_item
 			spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

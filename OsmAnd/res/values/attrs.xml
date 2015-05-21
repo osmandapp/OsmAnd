@@ -20,6 +20,7 @@
         <attr name="bottomToolBarColor" format="color" />
 		<attr name="downloadButtonBackground" format="reference" />
 		<attr name="spinnerItemTextColor" format="reference" />
+        <attr name="spinnerListBackground" format="color|reference" />
 		<attr name="search_background" format="reference" />
 		<attr name="switch_ex_background" format="reference" />
 		<attr name="switch_ex_text_color" format="color|reference" />
