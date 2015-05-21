@@ -822,4 +822,25 @@
     <string name="waypoint_visit_before">Käy ennen</string>
     <string name="simulate_your_location">Simuloi sijaintisi</string>
     <string name="short_location_on_map">Lev %1$s\n Pit %2$s</string>
-    </resources>
+    <string name="tips_and_tricks_descr">Usein kysytyt kysymykset, viimeaikaiset muutokset, ja muut</string>
+    <string name="general_settings_2">Yleiset asetukset</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_selected">Valittu</string>
+	<string name="shared_string_selected_lowercase">valittu</string>
+	<string name="shared_string_never">Ei koskaan</string>
+	<string name="shared_string_io_error">I/O virhe tapahtui</string>
+	<string name="shared_string_unexpected_error">Odottamaton virhe tapahtui</string>
+	<string name="shared_string_action_template">Toiminto {0}</string>
+	<string name="shared_string_collapse">Paina kokoon</string>
+	<string name="shared_string_currently_recording_track">Reitin nauhoitus</string>
+	<string name="track_segments">Jälkijanat</string>
+	<string name="track_points">Jälkipisteet</string>
+	<string name="osmand_rastermaps_plugin_description">"Tällä lisäosalla voit päästä monenlaisiin online (ns. laatta tai rasteri) karttoihin, esimääritellyistä Openstreetmap laatoista (kuten Mapnik) satelliitti kuviin ja erityistarkoitus tasoihin kuten sääkarttoihin, ilmasto karttoihin, geologisiin karttoihin, mäkisävy tasoihin, jne.\n\nMitä tahansa näistä kartoista voidaan käyttää pää (pohja) karttana näytettäessä OsmAnd karttaruudulla, tai päällys- tai aluskerroksena toiselle pohjakartalle (kuten OsmAndin perus offline kartat). Saadaksesi mikä tahansa aluskerros näkyvämmäksi, tiettyjä osia OsmAnd vektorikartoista voi helposti piilottaa \'Kartta asetukset\' valikosta tarvittaessa.\n\nLaattakarttoja voi saada suoraan online lähteistä, tai voidaan valmistaa offline käyttöön (tai manuaalisesti kopioida OsmAndin kansioon) sqlite tietokantana jonka voi teihdä eri kolmannen osapuolen karttavalmistelu työkaluilla. "</string>
+	<string name="record_plugin_description">"Tämä lisäosa ottaa käyttöön toiminnallisuudet nauhoittaa ja tallentaa jälkiä manuaalisesti koskettamalla GPX nauhoitus toimintoja karttaruudulla, tai myös automaattisesti tallentaa kaikki navigointireitit GPX tiedostoon.\n\nNauhoitetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat nauhoittaa jälkiä harjoittelun seuraamiseen. Jotain perus jälkianalyysejä voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysty myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointi työkaluissa. "</string>
+	<string name="osmo_plugin_name">OsMo seuranta</string>
+	<string name="osmo_plugin_description">"Tämä lisäosa tarjoaa toiminnot OsMo kehittyneeseen live seurantaan, katso http://osmo.mobi.\n\nVoit seurata muita laitteita ja olla seurattuna. Voit spontaanisti luoda anonyymejä ryhmiä, jakaa toistenne sijainnin, ja viestitellä. Mukana tulee eri vaihtoehtoja harjoituksen seuraamiseen tai jatkuvaan seuraamiseen.\n\nAnonyymejä ryhmiä luodaan määritellyiksi päivämääriksi ja rajoitettuna määrättyihin toimintohin, esimerkiksi ei ole etäohjausta eikä ryhmän pääkäyttäjää. Täysin toimivia ryhmiä, toisaalta, voi luoda verkkosivuilla ja vain rekisteröityneillä käyttäjillä on pääsy niihin. "</string>
+	<string name="srtm_paid_version_title">Korkeuskäyrät lisäosa</string>
+	<string name="osmand_srtm_short_description_80_chars">OsmAnd lisäosa offline korkeuskäyrille</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.\n\nMaailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. "</string>
+	<string name="srtm_plugin_description">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.\n\nMaailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. "</string>
+	</resources>

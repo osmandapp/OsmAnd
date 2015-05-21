@@ -663,4 +663,42 @@
 	<string name="poi_craft_window_construction">Construcció de finestres</string>
 
 	<string name="poi_funeral_directors">Funerària</string>
+	<string name="poi_hairdresser">Perruqueria</string>
+	<string name="poi_laundry">Bugaderia</string>
+	<string name="poi_car_rental">Lloguer de cotxes</string>
+	<string name="poi_dock">Dàrsena</string>
+	<string name="poi_sauna">Sauna</string>
+	<string name="poi_mortuary">Dipòsit de cadàvers</string>
+	<string name="poi_crematorium">Crematori</string>
+	<string name="poi_bank">Banc</string>
+	<string name="poi_atm">Caixer automàtic</string>
+	<string name="poi_accountant">Comptable</string>
+	<string name="poi_bitcoin_yes">Pagament amb bitcoins</string>
+
+	<string name="poi_peak">Cim</string>
+	<string name="poi_volcano">Vulcà</string>
+	<string name="poi_crater">Cràter</string>
+	<string name="poi_glacier">Glacera</string>
+	<string name="poi_sinkhole">Dolina</string>
+	<string name="poi_waterfall">Cascada</string>
+	<string name="poi_river">Riu</string>
+	<string name="poi_stream">Curs d\'aigua</string>
+	<string name="poi_rapids">Ràpids</string>
+	<string name="poi_stone">Roc remarcable</string>
+	<string name="poi_cape">Cap</string>
+	<string name="poi_beach">Platja</string>
+	<string name="poi_bay">Badia</string>
+	<string name="poi_fjord">Fiord</string>
+	<string name="poi_reef">Escull</string>
+	<string name="poi_valley">Vall</string>
+	<string name="poi_water">Aigua</string>
+	<string name="poi_wetland">Zona humida</string>
+	<string name="poi_wood">Bosc</string>
+	<string name="poi_nature_reserve">Reserva natural</string>
+	<string name="poi_strait">Estret</string>
+	<string name="poi_island">Illa</string>
+	<string name="poi_islet">Illot</string>
+
+	<string name="poi_anchorage">Ancoratge</string>
+	<string name="poi_anchor_berth">Punt d\'ancoratge</string>
 	</resources>

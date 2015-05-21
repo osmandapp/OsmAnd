@@ -133,7 +133,7 @@
 	<string name="shared_string_my_location">Minha posição</string>
 	<string name="shared_string_my_favorites">Meus favoritos</string>
 	<string name="shared_string_my_tracks">Meus trajetos</string>
-	<string name="shared_string_currently_recording_track">Atualmente gravando trajeto</string>
+	<string name="shared_string_currently_recording_track">Gravando trajeto</string>
 	<string name="shared_string_audio">Áudio</string>
 	<string name="shared_string_video">Vídeo</string>
 	<string name="shared_string_photo">Foto</string>
@@ -362,7 +362,7 @@
     <string name="distance">Distância</string>
     <string name="index_tours">Excursões</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Marcos de trajeto</string>
+    <string name="waypoints">Pontos de parada</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Marcos de trajeto GPX</string>
     <string name="download_additional_maps">Baixar mapas que faltam %1$s (%2$d MB)?</string>
@@ -423,7 +423,7 @@
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="save_as_favorites_points">Salvar como grupo de favoritos</string>
-    <string name="select_destination_and_intermediate_points">Selecionar paradas</string>
+    <string name="select_destination_and_intermediate_points">Selecionar pontos de parada</string>
     <string name="layer_amenity_label">Rótulos do ponto</string>
     <string name="loading_smth">Carregando %1$s…</string>
     <string name="map_widget_plain_time">Hora atual</string>
@@ -621,7 +621,7 @@
     <string name="animate_routing_route_not_calculated">Por favor, calcular a rota primeiro</string>
     <string name="animate_routing_route">"Simular usando a rota calculada "</string>
     <string name="animate_routing_gpx">Simular usando trajeto GPX</string>
-	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteador off-line OsmAnd. Em média, a rota off-line apenas é possível para distâncias de até 200 km. Por favor adicione uma ou mais paradas para calcular a rota.</string>
+	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteador off-line OsmAnd. Em média, a rota off-line apenas é possível para distâncias de até 200 km. Por favor adicione um ou mais pontos de parada para calcular a rota.</string>
 	<string name="auto_zoom_none">Sem zoom automático</string>
 	<string name="auto_zoom_close">Aproximar</string>
 	<string name="auto_zoom_farthest">Afastar</string>
@@ -671,7 +671,7 @@
     <string name="route_descr_current_location">Posição atual</string>
     <string name="route_descr_destination">Destino</string>
     <string name="route_to">Para:</string>
-    <string name="clear_dest_confirm">Confirma que deseja apagar o destino (e paradas)?</string>
+    <string name="clear_dest_confirm">Confirma que deseja apagar o destino (e pontos de parada)?</string>
     <string name="av_settings">"Configurar áudio/vídeo "</string>
     <string name="route_via">Via:</string>
     <string name="route_from">De:</string>
@@ -692,7 +692,7 @@
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Definir como destino</string>
     <string name="please_select_address">Selecionar primeiro a cidade ou rua</string>
-    <string name="tip_recent_changes_1_4_t">Alterações na v1.4:\n\t* Organização de paradas otimizada para visitar todos (vendedor ambulante, porta a porta)\n\t* Procura de ruas por nome (na vizinhança)\n\t* Modo de planeamento (carregar/editar/gravar GPX)\n\t* Novo ecrã de transferências (transferência em segundo plano)\n\t* Suporte a subpastas GPX (organização de GPX )\n\t* Eliminação de ficheiros SRTM\n\t* Suporte a notas OSM</string>
+    <string name="tip_recent_changes_1_4_t">"Alterações na v1.4:\n\t* Organização de pontos de parada otimizada para visitar todos (vendedor ambulante, porta a porta)\n\t* Procura de ruas por nome (na vizinhança)\n\t* Modo de planeamento (carregar/editar/gravar GPX)\n\t* Novo ecrã de transferências (transferência em segundo plano)\n\t* Suporte a subpastas GPX (organização de GPX )\n\t* Eliminação de ficheiros SRTM\n\t* Suporte a notas OSM "</string>
     <string name="search_street_in_neighborhood_cities">Pesquisar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Paradas intermediárias reordenadas para otimizar o caminho do local atual até o destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
@@ -810,9 +810,9 @@
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar limites</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>
 	<string name="tip_altitude_offset">Correção de altitude</string>
-	<string name="target_point">Parada %1$s</string>
-    <string name="intermediate_point">Parada %1$s</string>
-    <string name="map_widget_intermediate_distance">Parada</string>
+	<string name="target_point">Ponto de parada %1$s</string>
+    <string name="intermediate_point">Ponto de parada %1$s</string>
+    <string name="map_widget_intermediate_distance">Ponto de parada</string>
     <string name="use_compass_navigation">Usar bússola</string>
 	<string name="avoid_motorway">Evitar autoestradas</string>
 	<string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade (enquanto o mapa é sincronizado com a posição atual)</string>
@@ -918,19 +918,19 @@
     <string name="tip_recent_changes_0_8_3_t">Mudanças na v0.8.3:\n\t* Paradas intermediárias\n\t* Melhoria na orientação de rota\n\t* Adicionada opção que permite evitar autoestradas ao planejar a rota\n\t* Adicionado mais um tipo de via para bicicletas no mapa (cycleway=track)\n\t* Correções de erros</string>
 	<string name="map_widget_monitoring_services">Serviços de registro</string>
 	<string name="no_route">Sem rota</string>
-	<string name="delete_target_point">Remover parada</string>
-	<string name="context_menu_item_last_intermediate_point">Adicionar como última parada</string>
-    <string name="context_menu_item_first_intermediate_point">Adicionar como primeira parada</string>
-    <string name="add_as_last_destination_point">Adicionar como última parada</string>
-    <string name="add_as_first_destination_point">Adicionar como primeira parada</string>
+	<string name="delete_target_point">Remover ponto de parada</string>
+	<string name="context_menu_item_last_intermediate_point">Adicionar como último ponto de parada</string>
+    <string name="context_menu_item_first_intermediate_point">Adicionar como primeiro ponto de parada</string>
+    <string name="add_as_last_destination_point">Adicionar como último ponto de parada</string>
+    <string name="add_as_first_destination_point">Adicionar como primeiro ponto de parada</string>
 
     <string name="replace_destination_point">Substituir o destino</string>
     <string name="new_destination_point_dialog">Você já tem o destino definido.</string>
-    <string name="target_points">Paradas</string>
+    <string name="target_points">Pontos de parada</string>
     <string name="show_warnings_descr">Configurar alertas de trânsito (limites de velocidade, paradas obrigatórias, lombadas), de radar e informações de faixa</string>
-	<string name="intermediate_point_too_far">Parada %1$s muito longe da via mais próxima.</string>
+	<string name="intermediate_point_too_far">Ponto de parada %1$s muito longe da via mais próxima.</string>
     <string name="arrived_at_intermediate_point">Você chegou na sua parada</string>
-    <string name="context_menu_item_intermediate_point">Adicionar como parada</string>
+    <string name="context_menu_item_intermediate_point">Adicionar como ponto de parada</string>
     <string name="ending_point_too_far">Destino muito longe da via mais próxima.</string>
     <string name="btn_add_tag">Adicionar etiqueta</string>
     <string name="btn_advanced_mode">Modo avançado…</string>
@@ -1354,9 +1354,9 @@
 	<string name="send_location_way_choose_title">Compartilhar posição usando</string>
 	<string name="send_location_sms_pattern">Posição: %1$s\n%2$s</string>
 	<string name="context_menu_item_share_location">Compartilhar posição</string>
-	<string name="add_waypoint_dialog_added">Parada GPX \'\'{0}\'\' foi adicionada</string>
+	<string name="add_waypoint_dialog_added">Marco de trajeto GPX \'\'{0}\'\' foi adicionado</string>
 	<string name="add_waypoint_dialog_title">Adicionar parada ao trajeto GPX gravado</string>
-	<string name="context_menu_item_add_waypoint">Adicionar parada GPX</string>
+	<string name="context_menu_item_add_waypoint">Adicionar marco de trajeto GPX</string>
 	<string name="amenity_type_administrative">Administrativo</string>
 	<string name="amenity_type_barrier">Barreira</string>
 	<string name="amenity_type_education">Educação</string>

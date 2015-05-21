@@ -1739,7 +1739,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="save_track_to_gpx_globally">Salvar trilhas em GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Posição geral de log para um arquivo GPX pode ser ativada ou desativado usando o GPX gravação widget na tela do mapa</string>
 	<string name="save_track_interval_globally">Intervalo de log</string>
-	<string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+	<string name="rendering_attr_publicTransportMode_name">Rotas de ônibus, trólebus</string>
 	<string name="record_plugin_description">"Este plugin ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa, ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
 \n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinamentos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
     <string name="record_plugin_name">Gravação de viagem</string>
@@ -1750,7 +1750,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
-    <string name="shared_string_my_location">Meus locais</string>
+    <string name="shared_string_my_location">Minha localização</string>
     
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
     
@@ -1918,4 +1918,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="waypoints">Pontos de parada</string>
     <string name="targets">Destinos</string>
     <string name="shared_string_dismiss">Descartar</string>
-	</resources>
+	<string name="rendering_category_others">Outros atributos do mapa</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar a qualidade da via</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
+    <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
+    <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
+    <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
+    <string name="rendering_attr_osmcTraces_name">Sobreposição de símbolo de montanhismo</string>
+    <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
+    <string name="rendering_attr_hideBuildings_name">Ocultar edifícios</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Rotas de trólebus</string>
+    </resources>
