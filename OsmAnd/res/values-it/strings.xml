@@ -2048,4 +2048,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
 	<string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Evita la frontiera</string>
+	<string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
+	<string name="routing_attr_height_name">Limite di altezza</string>
+	<string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
+    <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
+	<string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
+</resources>
