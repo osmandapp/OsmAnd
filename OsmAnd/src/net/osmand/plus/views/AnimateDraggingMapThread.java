@@ -21,9 +21,9 @@ public class AnimateDraggingMapThread {
 	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 	
 	private final static float DRAGGING_ANIMATION_TIME = 1200f;
-	private final static float ZOOM_ANIMATION_TIME = 500f;
-	private final static float ZOOM_MOVE_ANIMATION_TIME = 450f;
-	private final static float MOVE_MOVE_ANIMATION_TIME = 1300f;
+	private final static float ZOOM_ANIMATION_TIME = 250f;
+	private final static float ZOOM_MOVE_ANIMATION_TIME = 350f;
+	private final static float MOVE_MOVE_ANIMATION_TIME = 900f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
 	
 	private volatile boolean stopped;
