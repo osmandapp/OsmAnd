@@ -315,7 +315,7 @@ public class MapRenderingTypes {
 					if (name.equals("category")) { //$NON-NLS-1$
 						parentCategory = parseCategoryFromXml(parser);
 					} else if (name.equals("type")) {
-						parseTypeFromXML(parser, parentCategory);
+						parseAndRegisterTypeFromXML(parser, parentCategory);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
 					} else if (name.equals("entity_convert")) {
@@ -347,12 +347,17 @@ public class MapRenderingTypes {
 	protected void parseRouteTagFromXML(XmlPullParser parser) {
 	}
 
-	protected MapRulType parseTypeFromXML(XmlPullParser parser, MapRulType parentCategory) {
-		return parseBaseRuleType(parser, parentCategory, true);
+	protected void parseAndRegisterTypeFromXML(XmlPullParser parser, MapRulType parentCategory) {
+		parseBaseRuleType(parser, parentCategory, true);
 	}
-
+	
 	protected MapRulType parseBaseRuleType(XmlPullParser parser, MapRulType parentCategory, boolean filterOnlyMap) {
 		String tag = lc(parser.getAttributeValue("", "tag"));
+		return parseBaseRuleType(parser, parentCategory, filterOnlyMap, tag);
+	}
+
+	protected MapRulType parseBaseRuleType(XmlPullParser parser, MapRulType parentCategory, boolean filterOnlyMap,
+			String tag) {
 		String value = lc(parser.getAttributeValue("", "value"));
 		String additional = parser.getAttributeValue("", "additional");
 		if (value != null && value.length() == 0) { //$NON-NLS-1$
@@ -624,6 +629,7 @@ public class MapRenderingTypes {
 		// creation of only section
 		protected boolean onlyMap;
 		protected boolean onlyPoi;
+		protected boolean lang;
 		
 		// Needed only for map rules
 		protected int minzoom;
