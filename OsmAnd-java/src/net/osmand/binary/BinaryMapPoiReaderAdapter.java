@@ -5,12 +5,16 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -701,6 +705,31 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.TEXTVALUES_FIELD_NUMBER :
 				String str = codedIS.readString();
 				if(textTags != null && !textTags.isEmpty()) {
+					if(str.startsWith(" gz ")) {
+						int ind = 4;
+						byte[] bytes = new byte[str.length() - ind];
+						for(int i = ind; i < str.length(); i++ ) {
+							char ch = str.charAt(i) ;
+							if(ch < 0 || ch >= 256) {
+								throw new IllegalStateException();
+							}
+							if(ch >= 128) {
+								bytes[i - ind] = (byte) (ch - 256);	
+							} else if(ch >= 0){
+								bytes[i - ind] = (byte) ch;
+							}
+							
+						}
+						GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(
+								bytes));
+						BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
+						StringBuilder bld = new StringBuilder();
+						String s;
+						while((s = br.readLine()) != null) {
+							bld.append(s);
+						}
+						str = bld.toString();
+					}
 					am.setAdditionalInfo(textTags.poll(), str);
 				}
 				break;
