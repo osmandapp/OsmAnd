@@ -701,4 +701,25 @@
 
 	<string name="poi_anchorage">Ancoratge</string>
 	<string name="poi_anchor_berth">Punt d\'ancoratge</string>
+	<string name="poi_road_obstacle">Obstacle</string>
+		<string name="poi_general_tourist_attraction_yes">Atracció turística</string>
+	<string name="poi_club_art">Agrupació artística</string>
+	<string name="poi_club_computer">Associació informàtica</string>
+	<string name="poi_club_motorcycle">Club de motos</string>
+	<string name="poi_club_game">Associació lúdica</string>
+	<string name="poi_club_automobile">Club automobilista</string>
+	<string name="poi_club_fan">Grup de fans</string>
+	<string name="poi_club_fishing">Grup de pesca</string>
+	<string name="poi_club_veterans">Associació de veterans</string>
+	<string name="poi_club_linux">Associació d\'usuaris de Linux</string>
+	<string name="poi_club_history">Associació d\'història</string>
+	<string name="poi_club_music">Cub musical</string>
+	<string name="poi_club_ethnic">Agrupació ètnica</string>
+	<string name="poi_club_nature">Grup naturalista</string>
+	<string name="poi_club_photography">Associació fotogràfica</string>
+	<string name="poi_club_tourism">Associació de viatgers</string>
+	<string name="poi_club_charity">Agrupació benèfica</string>
+
+	<string name="poi_piste_downhill">Esquí alpí</string>
+	<string name="poi_piste_skitour">Esquí alpí i nòrdic</string>
 	</resources>

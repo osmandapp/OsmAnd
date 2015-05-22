@@ -29,7 +29,7 @@
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
    	<string name="mark_to_delete">Marcar para borrar</string>
 	<string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
-	<string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambios a OSM. ¿Está seguro?</string>
+	<string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
@@ -223,7 +223,7 @@
 	<string name="tip_search">Buscando</string>
 	<string name="stop_navigation_service">Interrumpir</string>
 	<string name="confirm_every_run">Preguntar siempre</string>
-	<string name="enable_sleep_mode">Habilita el modo reposo del GPS</string>
+	<string name="enable_sleep_mode">Activa el modo reposo del GPS</string>
 	<string name="save_current_track_descr">Guarde ahora la traza actual en la SD</string>
 	<string name="save_current_track">Guardar traza GPX actual</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
@@ -489,7 +489,7 @@
 	<string name="osmand_parking_plugin_description">"El complemento de ubicación de estacionamiento te deja memorizar fácilmente cuándo se estacionó el auto y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
 \n\nAñade una notificación al calendario en el caso de que  desee tener un recordatorio al respecto."</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y utilizarse luego para la orientación.</string>
-	<string name="osmand_accessibility_description">Este complemento habilita las funciones de accesibilidad del dispositivo directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su ubicación.</string>
+	<string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su ubicación.</string>
 	<string name="osm_editing_plugin_description">Mediante este complemento, OsmAnd se puede utilizar para hacer contribuciones en OSM como crear o modificar objetos PDI de OSM, abrir o comentar errores de OSM y contribuir con archivos grabados de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte https://openstreetmap.org/ . Se aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
 	<string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o la guía de voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
 	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial sin conexión</string>
@@ -525,7 +525,7 @@
 \n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones a\' o \'Mostrar en mapa\', etc. "</string>
 	<string name="background_service_is_enabled_question">El servicio de fondo aún está funcionando. ¿Quieres interrumpirlo también?</string>
 	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
-	<string name="save_global_track_interval_descr">Elige intervalo de guardado para la grabación de trazas general (habilitar mediante el control de guardado GPX en el mapa)</string>
+	<string name="save_global_track_interval_descr">Elige el intervalo de guardado para la grabación de trazas general (activar mediante el control de guardado GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo general de guardado</string>
 	<string name="background_service_int">Intervalo de activación del GPS</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
@@ -552,7 +552,7 @@
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
     <string name="home">Inicio</string>
-    <string name="live_monitoring_m_descr">Envíe el rastreo a un servicio web específico, si la grabación GPX está habilitada.</string>
+    <string name="live_monitoring_m_descr">Envíe el rastreo a un servicio web específico, si la grabación GPX está activada.</string>
 	<string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
 	<string name="live_monitoring_stop">Parar rastreo en línea</string>
@@ -1188,7 +1188,7 @@
 	<string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales</string>
 	<string name="prefs_plugins">Complementos</string>
 	<string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 :
-\n\t - *Funcionalidad de complementos*\n\t - La mayoría de las funcionalidades están agrupada por características y pueden ser des/activadas en Ajustes/Complementos. Puede habilitar fuentes de teselas de mapas (en línea o guardadas), ajustes de rastreo, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapas sin conexión*\n\t - Visualización del mapa más rápida y precisa (están mayormente corregidos, problemas con la línea de la costa y zonas inundadas).\n\t - Necesita descargarse datos sin conexión completamente nuevos (los datos antiguos no están soportados)\n\t - *Navegación sin conexión*
+\n\t - *Funcionalidad de complementos*\n\t - La mayoría de las funcionalidades están agrupada por características y pueden ser des/activadas en Ajustes/Complementos. Puede activar fuentes de teselas de mapas (en línea o guardadas), ajustes de rastreo, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapas sin conexión*\n\t - Visualización del mapa más rápida y precisa (están mayormente corregidos, problemas con la línea de la costa y zonas inundadas).\n\t - Necesita descargarse datos sin conexión completamente nuevos (los datos antiguos no están soportados)\n\t - *Navegación sin conexión*
 \n\t - La navegación sin conexión es más robusta\n\t - *Usabilidad y experiencia de usuario*
 \n\t - Mejoras en muchas áreas "</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
