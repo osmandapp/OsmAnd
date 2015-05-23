@@ -1687,7 +1687,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auth_pending">Oczekiwanie na uwierzytelnienie…</string>
     <string name="osmo_conn_successfull">"Nawiązano połączenie: %1$s "</string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
-    <string name="osmo_settings_debug">Informacje debugowania</string>
+    <string name="osmo_settings_debug">Informacje diagnozowania błędów</string>
     <string name="hours_ago">godzin temu</string>
     <string name="minutes_ago">minut temu</string>
     <string name="seconds_ago">sekund temu</string>
