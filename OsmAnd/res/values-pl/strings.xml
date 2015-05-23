@@ -419,7 +419,7 @@
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu aktualnego środka mapy</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
-  <string name="map_orientation_default">Jak w urządzeniu</string>
+  <string name="map_orientation_default">Określona przez urządzenie</string>
   <string name="map_orientation_portrait">Pionowo</string>
   <string name="map_orientation_landscape">Poziomo</string>
   <string name="map_screen_orientation">Orientacja ekranu</string>
@@ -1578,7 +1578,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
-    <string name="calculate_osmand_route_gpx">Przelicz trasę offline w OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Wyznacz trasę offline w OsmAnd</string>
     <string name="keep_and_add_destination_point">Dodaj jako cel podróży</string>
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
     <string name="tip_recent_changes_1_7_1_t">Zmiany w wersji 1.7:
@@ -1592,7 +1592,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	\n\t* Wiele małych usprawnień i poprawek interfejsu użytkownika
 	\n\t* Dostępne ustawienie prędkości wymowy
     </string>
-    <string name="calculate_osmand_route_without_internet">Przelicz segment trasy OsmAnd offline</string>
+    <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
     <string name="gpx_option_calculate_first_last_segment">Przelicz trasę według OsmAnd dla pierwszego i ostatniego segmentu trasy</string>
     <string name="lang_en">Angielski</string>
 	<string name="lang_af">Afrykański</string>
