@@ -76,7 +76,7 @@
   <string name="vector_map_not_needed">Niepotrzebne</string>
   <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
   <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
-  <string name="local_index_gpx_info_show">\n\nPrzytrzymaj, aby wyświetlić opcje</string>
+  <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>
   
   
   
@@ -382,7 +382,7 @@
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
-  <string name="background_service_int">Czas pomiędzy wybudzeniami GPS</string>
+  <string name="background_service_int">Częstość wybudzania GPS</string>
   <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
@@ -539,13 +539,13 @@
   <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji</string>
   <string name="settings_preset">Domyślny profil</string>
   <string name="shared_string_settings">Ustawienia</string>
-  <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
-  <string name="save_current_track">Zapisz bieżący ślad</string>
-  <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>
-  <string name="save_track_interval">Częstotliwość zapisywania podczas nawigacji</string>
+  <string name="save_current_track_descr">Zapisuje bieżący ślad do pliku GPX na karcie SD</string>
+  <string name="save_current_track">Zapisz aktualny ślad</string>
+  <string name="save_track_interval_descr">Wybiera tempo rejestrowania śladów podczas nawigacji</string>
+  <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
   
-  <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu ścieżek podczas nawigacji</string>
-  <string name="save_track_to_gpx">Zapisuj ślad do pliku GPX podczas nawigacji</string>
+  <string name="save_track_to_gpx_descrp">Zapisuje ślady do katalogu śladów podczas nawigacji</string>
+  <string name="save_track_to_gpx">Zapisywanie śladu do pliku GPX podczas nawigacji</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
@@ -607,7 +607,7 @@
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-  <string name="shared_string_show_on_map">Wyświetl na mapie</string>
+  <string name="shared_string_show_on_map">Wyświetlanie na mapie</string>
   
   <string name="search_address_top_text">Wybierz adres</string>
   <string name="search_address_region">Region</string>
@@ -1068,7 +1068,7 @@
     <string name="safe_mode_description">Uruchamia program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego)</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
-    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Zatrzymać ją także?</string>
+    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Zatrzymać ją?</string>
     <string name="tip_recent_changes_1_0_0_t">Zmiany w 1.0.0:
 \n\t* Poprawiony routing: szybszy, dokładniejszy, do 250 km
 \n\t* Wprowadzenie map tylko samochodowych
@@ -1210,7 +1210,7 @@
     <string name="accessibility_options">Opcje ułatwień dostępu</string>
     <string name="choose_osmand_theme_descr">Wybiera styl graficzny programu</string>
     
-    <string name="monitoring_settings_descr">Konfiguruje opcje rejestrowania wycieczek</string>
+    <string name="monitoring_settings_descr">Konfiguruje opcje rejestrowania tras</string>
     
     <string name="monitoring_settings">Rejestrowanie trasy</string>
     <string name="tip_recent_changes_1_3_t">Zmiany w 1.3:
@@ -1671,7 +1671,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="shared_string_share">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
-	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
+	<string name="use_points_as_intermediates">Wyznacz trasę pomiędzy punktami</string>
     <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:↵
         * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX↵
         * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)↵
@@ -1684,8 +1684,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
     <string name="osmo_tracker_id">Osobisty identyfikator trackera</string>
     <string name="osmo_session_token">Token sesji: %1$s</string>
-    <string name="osmo_auth_pending">Oczekiwanie na autoryzację…</string>
-    <string name="osmo_conn_successfull">Ustanowiono połączenie: %1$s </string>
+    <string name="osmo_auth_pending">Oczekiwanie na uwierzytelnienie…</string>
+    <string name="osmo_conn_successfull">"Nawiązano połączenie: %1$s "</string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
     <string name="osmo_settings_debug">Informacje debugowania</string>
     <string name="hours_ago">godzin temu</string>
@@ -1714,15 +1714,15 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_edit_color">Kolor wyświetlacza</string>
     <string name="osmo_group_info">Informacje</string>
     <string name="osmo_group">Grupa OsMo</string>
-    <string name="osmo_group_share">W celu dołączenia do grupy %2$s, określ identyfikator grupy (%1$s) lub kliknij %3$s.</string>
+    <string name="osmo_group_share">W celu dołączenia do grupy %2$s, proszę określić identyfikator grupy (%1$s) lub kliknąć %3$s.</string>
     <string name="osmo_share_connect_device">Pozwól na stałe śledzenie tego urządzenia</string>
     <string name="osmo_share_current_session">Udostępnij bieżącą sesję w przeglądarce</string>
     <string name="osmo_session_not_available">Sesja niedostępna, sprawdź, czy \'Wyślij lokalizację\' jest włączone.</string>
     <string name="osmo_share_session">Udostępnij sesję</string>
     <string name="osmo_session_id_share">Adres sesji, aby śledzić urządzenie (%1$s)</string>
     <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, kliknij w link %3$s lub określ identyfikator trackera (%1$s)</string>
-    <string name="osmo_track_interval">Interwał zapisu śledzenia</string>
-	<string name="osmo_track_interval_descr">Wybierz interwał wysyłania lokalizacji</string>
+    <string name="osmo_track_interval">Częstość rejestrowania położenia</string>
+	<string name="osmo_track_interval_descr">Wybiera tempo wysyłania bieżącego położenia</string>
     <string name="int_days">dni</string>
     <string name="osmo_connect_menu">Połącz</string>
     <string name="osmo_expire_group">Wygasa za</string>
@@ -1764,7 +1764,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
     
-    <string name="gpx_info_subtracks">Podścieżki: %1$s </string>
+    <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
 	<string name="gpx_info_distance">Odległość: %1$s (%2$s punktów) </string>
 	<string name="gpx_info_start_time">Czas rozpoczęcia: %1$tF, %1$tT </string>
@@ -1780,7 +1780,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_selection_number_of_points"> %1$s punktów</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     
-    <string name="gpx_selection_route_points">%1$s \n Punkty trasy %2$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\n Punkty wyznaczonej trasy %2$s</string>
     <string name="gpx_selection_points">%1$s \nPunkty</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
     
@@ -1802,7 +1803,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać proszę nacisnąć i przytrzymać dostępną ścieżkę.</string>
     
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
-    <string name="osmo_group_by_invite">Wejdź do grupy przez zaproszenie</string>
+    <string name="osmo_group_by_invite">Dołącz do grupy przez zaproszenie</string>
     <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.\n - Prywatne grupy są ograniczone do 8 osób.\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
     <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie udało się zalogować do OsMo</string>
@@ -1813,11 +1814,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_gpx_track_downloaded">Pobrano %1$s ścieżek OsMo.</string>
     <string name="no_index_file_to_download">Nie znaleziono pobranych danych, proszę sprawdzić połączenie internetowe.</string>
     <string name="osmo_auth_error_short">Nie udało się uwierzytelnić</string>
-    <string name="osmo_auth_error">Wystąpił błąd uwierzytelnienia OsMo: %1$s.\n To może być wina przerwy w działaniu usługi lub rejestracja użytkownika straciła ważność.\n Kontynuować z nową rejestracją?</string>
+    <string name="osmo_auth_error">Wystąpił błąd uwierzytelnienia OsMo: %1$s.\n Może to być wina przerwy w działaniu usługi lub rejestracja użytkownika straciła ważność.\n Kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
 	<string name="stop_navigation_service">Wyłącz</string>
 	<string name="enable_sleep_mode">Włącz tryb uśpienia GPS</string>
-	<string name="gps_wake_up_timer">Odstęp czasu wybudzania GPS</string>
+	<string name="gps_wake_up_timer">Częstość wybudzania GPS</string>
 	<string name="sleep_mode_stop_dialog">Wyłączyć tryb uśpienia GPS?</string>
 	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli niedostępny, zostanie wybrany język angielski lub lokalna nazwa)</string>
     <string name="map_preferred_locale">Preferowany język map</string>
@@ -1826,7 +1827,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_he">Hebrajski</string>
     <string name="forward">Naprzód</string>
     <string name="home">Dom</string>
-    <string name="live_monitoring_m_descr">Wysyłaj aktualną pozycję do określonej usługi internetowej, jeśli nagrywanie GPX jest włączone.</string>
+    <string name="live_monitoring_m_descr">Wysyła aktualne położenie do określonej usługi internetowej podczas nagrywania śladów</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
 	<string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
@@ -1890,13 +1891,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pokazuj okoliczne Ulubione</string>
     <string name="speak_poi">Pokazuj okoliczne punkty POI</string>
-    <string name="save_track_to_gpx_globally">Rejestrowanie trasy do pliku GPX</string>
-	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
-	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
+    <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
+	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
+	<string name="save_track_interval_globally">Częstość rejestrowania</string>
 	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania śladów, które dostępne są poprzez widżet na ekranie mapy. Udostępnia też możliwość automatycznego zapisywania śladów nawigacji do pliku GPX.\n\nZapisane ślady mogą zostać udostępnione znajomym lub użyte do rozwoju projektu OSM. Sportowcy mogą korzystać ze ścieżek do monitorowania treningów. Podstawowa analiza śladów może zostać wykonana bezpośrednio w OsmAnd (czasy okrążeń, średnia prędkość, itp.). "</string>
     <string name="confirm_every_run">Zawsze pytaj</string>
 	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
-	<string name="save_global_track_interval">Ogólna częstotliwość zapisywania</string>
+	<string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
 	<string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
@@ -2044,7 +2045,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_video">Wideo</string>
 	<string name="shared_string_photo">Obraz</string>
 	<string name="route_points">Punkty trasy</string>
-	<string name="track_segments">Segmenty trasy</string>
+	<string name="track_segments">Segmenty</string>
 	<string name="track_points">Punkty trasy</string>
 	<string name="plugin_touringview_name">Widok mapy turystycznej</string>
 	<string name="plugin_touringview_descr">"Włączenie tego widoku zmienia styl mapy OsmAnd na \'turystyczny\', który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.\n\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).\n\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.\n\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.\n\nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych.\n\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
@@ -2057,7 +2058,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="version_settings">Kompilacja</string>
     <string name="points">Punkty</string>
     <string name="navigation_over_track">Rozpocząć nawigację wzdłuż trasy?</string>
-	<string name="save_track_to_gpx_globally_headline">Zapis trasy na żądanie</string>
+	<string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
 	<string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych</string>
 	<string name="proxy_host_descr">Ustala nazwę hosta proxy (np. 127.0.0.1)</string>
 	<string name="proxy_port_descr">Określa numer portu proxy (np. 8118)</string>
