@@ -722,4 +722,10 @@
 
 	<string name="poi_piste_downhill">Esquí alpí</string>
 	<string name="poi_piste_skitour">Esquí alpí i nòrdic</string>
+	<string name="poi_craft_metal_construction">Distribució i manipulació de metalls</string>
+	<string name="poi_craft_rigger">Tramoista</string>
+	<string name="poi_craft_roofer">Muntatge de teulades</string>
+	<string name="poi_craft_saddler">Baster</string>
+	<string name="poi_craft_sailmaker">Drassana</string>
+	<string name="poi_craft_stand_builder">Aparadors i estands</string>
 	</resources>
