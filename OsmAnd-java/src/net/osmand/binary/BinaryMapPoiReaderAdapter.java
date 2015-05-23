@@ -710,14 +710,7 @@ public class BinaryMapPoiReaderAdapter {
 						byte[] bytes = new byte[str.length() - ind];
 						for(int i = ind; i < str.length(); i++ ) {
 							char ch = str.charAt(i) ;
-							if(ch < 0 || ch >= 256) {
-								throw new IllegalStateException();
-							}
-							if(ch >= 128) {
-								bytes[i - ind] = (byte) (ch - 256);	
-							} else if(ch >= 0){
-								bytes[i - ind] = (byte) ch;
-							}
+							bytes[i - ind] = (byte) ((int)ch - 128 - 32);	
 							
 						}
 						GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(
