@@ -274,8 +274,8 @@
   <string name="choose_auto_follow_route">Automatické centrovanie</string>
   <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
   <string name="auto_follow_route_never">Nikdy (použite \'Ísť\' pre spustenie pokynov)</string>
-  <string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
-  <string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
+  <string name="auto_follow_route_navigation">Automatické centrovanie iba pri navigácii</string>
+  <string name="auto_follow_route_navigation_descr">Povoliť automatické centrovanie pozície iba v režime navigácie.</string>
   <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
   <string name="pref_vector_rendering">Voľby pre vektorové vykresľovanie</string>
   <string name="pref_overlay">Prekrývacia/podkladová</string>
@@ -319,7 +319,7 @@
   <string name="search_position_undefined">Neurčené</string>
   
   <string name="search_position_current_location">Aktuálne umiestnenie…</string>
-  <string name="search_position_map_view">Terajší stred mapy</string>
+  <string name="search_position_map_view">Stred mapy teraz</string>
   <string name="select_search_position">Východzí bod:</string>
   <string name="context_menu_item_search">Hľadať</string>
   <string name="tip_recent_changes_0_6_7_t">"Novinky vo verzii 0.6.7 :
@@ -794,8 +794,8 @@
   <string name="data_settings">Údaje</string>
   
   <string name="osm_settings">OSM upravovanie</string>
-  <string name="auto_zoom_map_descr">Autom. priblíženie mapy podľa Vašej rýchlosti</string>
-  <string name="auto_zoom_map">Autom. priblíženie mapy</string>
+  <string name="auto_zoom_map_descr">Automatické priblíženie mapy podľa Vašej rýchlosti (keď je mapa synchronizované s aktuálnou polohou)</string>
+  <string name="auto_zoom_map">Automatické priblíženie mapy</string>
   <string name="additional_settings">Ďalšie nastavenia</string>
   <string name="settings_preset_descr">Výber profilu užívateľa s prispôsobenými nastaveniami mapy a navigácie.</string>
   <string name="settings_preset">Užívateľský profil</string>
@@ -1213,7 +1213,7 @@
     <string name="use_magnetic_sensor">Použiť magnetický senzor (kompas)</string>
     <string name="wait_current_task_finished">Prosím, čakajte, kým sa dokončí aktuálna úloha</string>
     <string name="use_kalman_filter_compass_descr">Zníži šum v hodnotách z kompasu, ale spomalí zmeny smeru</string>
-    <string name="use_kalman_filter_compass">Upožiť Kalmanov filter</string>
+    <string name="use_kalman_filter_compass">Použiť Kalmanov filter</string>
     <string name="access_mark_final_location_first">Režim zjednodušeného ovládania: prosím, najskôr vyberte cieľ</string> 
     <string name="delete_point">Odstrániť bod</string>
     <string name="plugin_distance_point_time">čas</string>
@@ -1311,7 +1311,7 @@
 	<string name="driving_region_uk">UK, India, Austrália a ostatné</string>
 	    
     
-    <string name="announce_gpx_waypoints">Ohlasovať GPX waypointy</string>
+    <string name="announce_gpx_waypoints">Ohlásiť GPX waypointy</string>
     <string name="speak_title">Ohlásiť…</string>
 	<string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
 	<string name="speak_street_names">Ohlásiť názvy ulíc (TTS)</string>
@@ -1649,7 +1649,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_settings">OsMo sledovanie</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
-    <string name="keep_informing">Opakuj navigačné pokyny</string>
+    <string name="keep_informing">Opakovať navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
     <string name="osmo_io_error">Problém s pripojením OsMo: </string>
@@ -1864,8 +1864,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
     <string name="way_alarms">Dopravné varovania</string>
-    <string name="speak_favorites">Oznamovať blízke obľúbené body</string>
-    <string name="speak_poi">Oznamovať blízke body záujmu</string>
+    <string name="speak_favorites">Ohlásiť blízke obľúbené body</string>
+    <string name="speak_poi">Ohlásiť blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla nahrávania GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
@@ -1963,7 +1963,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
     <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
-    <string name="speak_pedestrian">Oznamovať priechody pre chodcov</string>
+    <string name="speak_pedestrian">Ohlásiť priechody pre chodcov</string>
     
 	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
 	<string name="navigation_over_track">Spustiť navigáciu pozdĺž stopy?</string>
