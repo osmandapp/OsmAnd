@@ -1073,7 +1073,7 @@
     
     
     <string name="no_buildings_found">Будівлі не знайдено.</string>
-    <string name="search_villages_and_postcodes">Пошук по селу/індексу</string>
+    <string name="search_villages_and_postcodes">Шукати ще по селу/індексу</string>
 	<string name="rendering_attr_showRoadMaps_description">Виберіть коли показувати тільки дорожні мапи:</string>
 	<string name="rendering_attr_showRoadMaps_name">Тільки дорожні мапи</string>
     <string name="safe_mode_description">Запустити програму в безпечному режимі (сповільнює роботу програми, використовуючи тільки Android-функції).</string>
@@ -2144,4 +2144,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value__name">Типово</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
 	<string name="index_name_netherlands">Європа - Нідерланди</string>
-	</resources>
+	<string name="routing_attr_avoid_borders_name">Уникати перетину кордону</string>
+	<string name="routing_attr_avoid_borders_description">Уникати перетину кордону з іншою країною</string>
+	<string name="routing_attr_height_name">Обмеження висоти</string>
+	<string name="routing_attr_height_description">Вкажіть висоту автівки, щоб враховувати її під час прокладання маршрутів</string>
+    <string name="use_fast_recalculation">Інтелектуальне переобчисленя маршруту</string>
+	<string name="use_fast_recalculation_desc">Переобчислення тільки початкової частини маршруту для тривалих поїздок</string>
+</resources>
