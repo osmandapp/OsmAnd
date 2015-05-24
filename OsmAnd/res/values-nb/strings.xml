@@ -1340,4 +1340,6 @@
 	<string name="shared_string_video">Video</string>
 	<string name="rendering_attr_pisteRoutes_name">Skibakker</string>
 	<string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
-    </resources>
+    <string name="routing_attr_avoid_borders_name">Unngå grensekryssing</string>
+	<string name="routing_attr_avoid_borders_description">Unngå å krysse grensen til et annet land</string>
+	</resources>
