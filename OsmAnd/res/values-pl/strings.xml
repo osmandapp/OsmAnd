@@ -343,7 +343,7 @@
   <string name="poi_context_menu_delete">Usuń POI</string>
   <string name="rotate_map_compass_opt">Względem kompasu</string>
   <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
-  <string name="rotate_map_none_opt">Nie obracaj (północ na górze)</string>
+  <string name="rotate_map_none_opt">Bez obracania (północ na górze)</string>
   <string name="rotate_map_to_bearing_descr">Wybiera sposób obracania mapy</string>
   <string name="rotate_map_to_bearing">Orientacja mapy</string>
   <string name="show_route">Szczegóły trasy</string>
@@ -448,7 +448,7 @@
   <string name="update_poi_no_offline_poi_index">Brak danych offline o POI dla tego rejonu</string>
   <string name="update_poi_is_not_available_for_zoom">Uaktualnianie POI jest niedostępne dla małych poziomów przybliżenia</string>
   <string name="context_menu_item_update_poi">Uaktualnij POI</string>
-  <string name="context_menu_item_update_map_confirm">Zaktualizować dane lokalne przez Internet?</string>
+  <string name="context_menu_item_update_map_confirm">Uaktualnić dane lokalne przez Internet?</string>
   <string name="search_history_city">Miasto: {0}</string>
   <string name="search_history_street">Ulica: {0}, {1}</string>
   <string name="search_history_int_streets">Przecięcie: {0} x {1} in {2}</string>
@@ -802,10 +802,10 @@
   <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
   
   
-  <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
-  <string name="live_monitoring_interval">Interwał wysyłania danych</string>
-  <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=szer., {1}=dł., {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, kierunek={6}</string>
-  <string name="live_monitoring_url">Adres śledzenia online</string>
+  <string name="live_monitoring_interval_descr">Określa tempo wysyłania danych o położeniu</string>
+  <string name="live_monitoring_interval">Częstość wysyłania danych</string>
+  <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
+  <string name="live_monitoring_url">Adres usługi śledzenia</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia \'Nagrywanie trasy\'.</string>
   <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
@@ -864,7 +864,7 @@
   <string name="rendering_attr_appMode_name">Tryb rysowania</string>
   <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
   <string name="rendering_attr_contourLines_description">Wyświetlanie od poziomu powiększenia (wymagane dane poziomicowe):</string>
-  <string name="rendering_attr_contourLines_name">Pokaż poziomice</string>
+  <string name="rendering_attr_contourLines_name">Wyświetlanie poziomic</string>
   <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
   <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
   <string name="route_roundabout">Rondo: wybierz %1$d zjazd</string>
@@ -1033,7 +1033,7 @@
 	<string name="map_widget_show_ruler">Linijka</string>
 	
 	<string name="map_widget_view_direction">Kierunek patrzenia</string>
-	<string name="map_widget_transparent">Przezroczysta skórka</string>
+	<string name="map_widget_transparent">Przezroczysty interfejs</string>
 	
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
@@ -1058,7 +1058,7 @@
     <string name="no_buildings_found">Nie odnaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
-    <string name="route_descr_current_location">Bieżąca pozycja</string>
+    <string name="route_descr_current_location">Bieżące położenie</string>
     
     
     <string name="rendering_attr_showRoadMaps_description">Wybierz kiedy wyświetlać tylko mapy samochodowe:</string>
@@ -1760,7 +1760,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Wyświetla powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     
-    <string name="shared_string_my_tracks">Wszystkie trasy</string>
+    <string name="shared_string_my_tracks">Trasy</string>
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
     
@@ -2092,7 +2092,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_places">Miejsca</string>
 	<string name="shared_string_search">Wyszukaj</string>
 	<string name="shared_string_open">Otwórz</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Asystent mapowanie OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asystent mapowania OSM</string>
 	<string name="shared_string_manage">Zarządzaj</string>
 	<string name="shared_string_edit">Edytuj</string>
 	<string name="filter_poi_hint">Filtruj po nazwie</string>
