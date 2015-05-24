@@ -133,7 +133,7 @@
 	<string name="plugin_nautical_name">Mapa de vista náutica</string>
 	<string name="plugin_ski_name">Mapa de vista de esquí</string>
 	<string name="audionotes_plugin_name">Notas de audio/video</string>
-	<string name="osmand_parking_plugin_name">Ubicación de estacionamiento</string>
+	<string name="osmand_parking_plugin_name">Estacionamiento</string>
 	<string name="accessibility_preferences">Accesibilidad</string>
 	<string name="osm_settings">Edición OSM</string>
 	<string name="debugging_and_development">Desarrollo de OsmAnd</string>
@@ -486,7 +486,7 @@
 	<string name="plugin_ski_descr">"Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad, y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
 \n\nActivando esta vista cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="audionotes_plugin_description">El complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
-	<string name="osmand_parking_plugin_description">"El complemento de ubicación de estacionamiento te deja memorizar fácilmente cuándo se estacionó el auto y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
+	<string name="osmand_parking_plugin_description">"El complemento de estacionamiento te deja memorizar fácilmente cuándo se estacionó el auto y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
 \n\nAñade una notificación al calendario en el caso de que  desee tener un recordatorio al respecto."</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y utilizarse luego para la orientación.</string>
 	<string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su ubicación.</string>
@@ -649,7 +649,7 @@
 	<string name="auto_zoom_close">Para corto alcance</string>
 	<string name="auto_zoom_far">Para mediano alcance</string>
 	<string name="auto_zoom_farthest">Para largo alcance</string>
-	<string name="map_magnifier">Lupa</string>
+	<string name="map_magnifier">Ampliar mapa</string>
 	<string name="base_world_map">Mapa base mundial</string>
 	<string name="tip_map_styles">Estilos del mapa</string>
 	<string name="tip_map_styles_t">"OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
@@ -666,7 +666,7 @@
 \n\t* Descarga de mapas directamente mientras se visualiza
 \n\t* Curvas de nivel agrupados por país/región
 \n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril y bosques
-\n\t* Lupa (pulsación larga en el botón de acercamiento)
+\n\t* Ampliación del mapa (pulsación larga en el botón de acercamiento)
 \n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
 \n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Países Bajos)
 \n\t* Mejorada la búsqueda por dirección
@@ -825,7 +825,7 @@
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Eliminar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Complemento de cálculo de distancia\n\t* Complemento de notas de audio\n\t* Complemento de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo del mapa \'Vista turística\' con más detalles, nuevos estilos viales, más contraste y opción para travesías alpinas (escala SAC)\n\t* Corrección de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar nota de audio</string>
@@ -875,7 +875,7 @@
 	<string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de caminos</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Permite que el complemento de rastreo use el servicio de registro de posición (grabando GPX, rastreo en línea)</string>
+    <string name="enable_plugin_monitoring_services">Active el complemento de rastreo para usar el servicio de registro de posición (grabación GPX, rastreo en línea)</string>
     <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
 	<string name="gps_not_available">Habilite el GPS en ajustes</string>
     <string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3:
@@ -1087,7 +1087,7 @@
 	<string name="map_widget_compass">Brújula</string>
 	<string name="map_widget_reset">Restablecer valores a predeterminados</string>
 	<string name="map_widget_parking">Estacionamiento</string>
-	<string name="map_widget_monitoring">Grabando GPX</string>
+	<string name="map_widget_monitoring">Grabación GPX</string>
 	<string name="map_widget_speed">Velocidad</string>
 	<string name="map_widget_distance">Destino</string>
 	<string name="map_widget_altitude">Altitud</string>
@@ -1125,14 +1125,14 @@
 	<string name="shared_location">Compartir ubicación</string>
 	<string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
 	<string name="osmand_parking_warning">Advertencia</string>
-	<string name="osmand_parking_warning_text">La notificación para recoger tu auto fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>    
+	<string name="osmand_parking_warning_text">La notificación para recoger su auto fue previamente añadida al calendario. Permanecerá allí hasta que la borre manualmente.</string>    
 	<string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del estacionamiento</string>
 	<string name="osmand_parking_delete_confirm">¿Quitar ubicación del auto estacionado?</string>
 	<string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
 	<string name="osmand_parking_choose_type">Elija el tipo de estacionamiento</string>
 	<string name="osmand_parking_lim_text">Tiempo limitado</string>
 	<string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
-	<string name="osmand_parking_add_event">Añadir una notificación a la aplicación Calendario</string>
+	<string name="osmand_parking_add_event">Añadir notificación en el Calendario</string>
 	<string name="osmand_parking_time_limit">Estacionamiento de tiempo limitado</string>
 	<string name="osmand_parking_time_no_limit">Estacionamiento de tiempo ilimitado</string>
 	<string name="osmand_parking_position_description">Ubicación del auto estacionado. %1$s</string>
@@ -1140,7 +1140,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Punto de estacionamiento</string>
-	<string name="context_menu_item_add_parking_point">Marcar como ubicación de estacionamiento</string>
+	<string name="context_menu_item_add_parking_point">Fijar ubicación de estacionamiento</string>
 	<string name="context_menu_item_delete_parking_point">Quitar marcador de estacionamiento</string>
 	<string name="gpxup_public">Público</string>
 	<string name="gpxup_identifiable">Identificable</string>
@@ -1828,7 +1828,7 @@
 	<string name="use_internet">Usar Internet</string>
 	<string name="show_location">Mostrar tu ubicación</string>
 	<string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
-	<string name="use_internet_to_download_tile">Usar Internet para descargar las teselas que falten</string>
+	<string name="use_internet_to_download_tile">Use Internet para descargar las teselas faltantes</string>
 	<string name="app_description">Aplicación de navegación</string>
 	<string name="search_button">Buscar</string>
 	<string name="search_activity">Buscar</string>
@@ -1866,7 +1866,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
 	<string name="favourites_context_menu_edit">Editar favorito</string>
 	<string name="favourites_context_menu_delete">Borrar favorito</string>
-	<string name="favourites_remove_dialog_msg">¿Borrar el punto favorito \'%s\'?</string>
+	<string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
 	<string name="osb_add_dialog_title">Ingrese texto del fallo</string>
 	<string name="osb_add_dialog_success">Fallo creado correctamente</string>
