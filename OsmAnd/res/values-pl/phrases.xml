@@ -697,4 +697,10 @@
 	<string name="poi_wood">Las</string>
 	<string name="poi_car_sharing">Wypozyczalnia samochodów</string>
 	<string name="poi_boat_sharing">Wypozyczalnia łodzi</string>
+	<string name="poi_mooring">Cumowanie</string>
+	<string name="poi_notice">Wskazówka, znak wodny</string>
+	<string name="poi_radar_transponder">Transponder radarowy, znak wodny</string>
+	<string name="poi_radio_station">Stacja radiowa, znak wodny</string>
+	<string name="poi_signal_station_traffic">Stacja sygnalizacyjna, ruch</string>
+	<string name="poi_signal_station_warning">Stacja sygnalizacyjna, ostrzeżenie</string>
 	</resources>
