@@ -1056,7 +1056,7 @@
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
     <string name="no_buildings_found">Nie odnaleziono budynków.</string>
-    <string name="search_villages_and_postcodes">Szukaj wsi/kodów pocztowych</string>
+    <string name="search_villages_and_postcodes">Szukaj więcej wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżące położenie</string>
     
@@ -2114,4 +2114,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
-	</resources>
+	<string name="routing_attr_height_description">Określ wysokość pojazdu, jaka ma być dozwolone podczas nawigowania</string>
+    <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
+	<string name="use_fast_recalculation_desc">Przelicz tylko początkową część trasy dla długich podróży</string>
+</resources>
