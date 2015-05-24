@@ -2165,4 +2165,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
 	<string name="search_poi_category_hint">Suchbegriff hier eingeben</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     </resources>
