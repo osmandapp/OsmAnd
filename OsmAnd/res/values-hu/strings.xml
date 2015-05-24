@@ -1637,13 +1637,13 @@
     <string name="rendering_attr_hideText_name">Szövegek elrejtése</string>
     <string name="rendering_attr_hideWoodScrubs_name">Erdők, bozótok elrejtése</string>
     <string name="rendering_attr_buildings15zoom_name">Épületek 15-ös zoomon</string>
-    <string name="rendering_attr_moreDetailed_name">Részletesebb</string>
+    <string name="rendering_attr_moreDetailed_name">További részletek</string>
     <string name="rendering_attr_lessDetailed_name">Kevésbé részletes</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások elrejtése</string>
-    <string name="rendering_attr_showAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Útminőség</string>
-    <string name="rendering_attr_showSurfaces_name">Útfelület</string>
-    <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
+    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
+    <string name="rendering_attr_showSurfaces_name">Útfelület megjelenítése</string>
+    <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak megjelenítése</string>
     <string name="osmo_auth_error_short">Azonosítás sikertelen</string>
     <string name="home">Kezdőlap</string>
     <string name="lang_fa">perzsa</string>
@@ -1660,7 +1660,7 @@
 	<string name="lang_zh_TW">hagyományos kínai</string>
 	<string name="rendering_attr_alpineHiking_name">Alpesi túra besorolás (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények SAC nehézségi skála szerint</string>
-    <string name="rendering_attr_osmcTraces_name">Turistajelzések</string>
+    <string name="rendering_attr_osmcTraces_name">Turistajelzések rátét</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Normál</string>
     <string name="arrival_distance_factor_late">Későn</string>
@@ -1798,7 +1798,7 @@
     <string name="voices">Hangutasítások</string>
 	<string name="navigate_point_northing">Északi</string>
     <string name="navigate_point_easting">Keleti</string>
-    <string name="rendering_attr_roadStyle_name">Út stílus</string>
+    <string name="rendering_attr_roadStyle_name">Útstílus</string>
     <string name="rendering_value_default_name">Alapértelmezett</string>
     <string name="rendering_value_orange_name">Narancs</string>
     <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
