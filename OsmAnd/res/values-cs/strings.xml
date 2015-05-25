@@ -1943,8 +1943,8 @@ s často kladenými otázkami.</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
-    <string name="routing_attr_avoid_borders_name">Vyhnout se překročení hranic</string>
-	<string name="routing_attr_avoid_borders_description">Vyhnout se překročení hranice do jiné země</string>
+    <string name="routing_attr_avoid_borders_name">Nepřekračovat hranice</string>
+	<string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země</string>
 	<string name="routing_attr_height_name">Výškové omezení</string>
 	<string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
     <string name="use_fast_recalculation">inteligentní přepočítávání trasy</string>
