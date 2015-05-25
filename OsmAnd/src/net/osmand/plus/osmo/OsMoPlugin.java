@@ -97,6 +97,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
+		tracker.disableTracker();
 		service.disconnect();
 	}
 

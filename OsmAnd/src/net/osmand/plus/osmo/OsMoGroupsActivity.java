@@ -147,6 +147,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		super.onCreate(icicle);
 		app = (OsmandApplication) getApplication();
 		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+		if(osMoPlugin == null) {
+			osMoPlugin = OsmandPlugin.getPlugin(OsMoPlugin.class);
+			OsmandPlugin.enablePlugin(this, app, osMoPlugin, true);
+		}
 		if(getIntent() != null) {
 			if("http".equals(getIntent().getScheme())) {
 				new OsMoIntentHandler(app, osMoPlugin).execute(getIntent());
