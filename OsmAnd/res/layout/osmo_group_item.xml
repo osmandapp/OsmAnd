@@ -7,6 +7,16 @@
 			  android:paddingLeft="3dp"
 			  android:paddingRight="4dp"
 			  android:paddingTop="5dp">
+			  
+    
+	<CheckBox
+		android:id="@+id/settings"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="3dp"
+		android:layout_marginRight="3dp"
+		android:layout_gravity="center_vertical"
+		android:focusable="false"/>
 
 	<ImageView
 		android:id="@+id/explist_indicator"
@@ -31,14 +41,6 @@
 	<include layout="@layout/check_item_rel"/>
 
 
-	<ImageView
-		android:id="@+id/settings"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:layout_marginLeft="4dp"
-		android:layout_marginRight="1dp"
-		android:focusable="false"/>
 
 
 </LinearLayout>

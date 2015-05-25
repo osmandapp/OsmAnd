@@ -320,8 +320,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final Drawable srcSignalBig = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
 //		final Drawable srcinactive = getResources().getDrawable(R.drawable.mon_osmo_inactive);
 		final Drawable srcSignalinactive = getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
+//		final Drawable srcSignalinactive = app.getIconsCache().getPaintedContentIcon(R.drawable.mon_osmo_signal_inactive,
+//				Color.LTGRAY);
 		OsMoService service = osMoPlugin.getService();
 		OsMoTracker tracker = osMoPlugin.getTracker();
+		
 		Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 		Drawable big = srcSignalinactive;// tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 		long last = service.getLastCommandTime();
@@ -1302,12 +1305,15 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			ImageView v = (ImageView) row.findViewById(R.id.settings);
+			View v = (View) row.findViewById(R.id.settings);
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-				v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings));
+//				(ImageView) v.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_settings));
 
+				if((selectedObject == model) != ((CheckBox) v).isChecked()) {
+					((CheckBox) v).setChecked(selectedObject == model);
+				}
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {
 					
