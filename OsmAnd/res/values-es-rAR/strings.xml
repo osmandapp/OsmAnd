@@ -1930,4 +1930,6 @@
 	<string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcule sólo la parte inicial de la ruta para viajes largos</string>
-</resources>
+<string name="osmo_share_my_location">Compartir ubicación</string>
+    <string name="shared_string_logoff">Desconectarme</string>
+    </resources>
