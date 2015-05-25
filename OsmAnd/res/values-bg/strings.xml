@@ -606,7 +606,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="osmand_parking_pm">сл. обяд</string>
 	<string name="osmand_parking_am">сутринта</string>
 	<string name="osmand_parking_position_name">Паркинг</string>
-	<string name="osmand_parking_plugin_description">Тази добавка Ви помага за намиране на мястото на Вашата паркирана кола.</string>
+	<string name="osmand_parking_plugin_description">Тази добавка Ви помага за намиране на Вашата паркирана кола, а също и подсказва колко време Ви остава, ако платеният паркинг е ограничен по време. Можете да добавите и подсказка в календара.</string>
 	<string name="osmand_parking_plugin_name">Място на паркиране</string>
 	<string name="context_menu_item_add_parking_point">Маркирайте като място на паркиране</string>
 	<string name="context_menu_item_delete_parking_point">Изтриване на маркера за паркиране</string>
@@ -658,7 +658,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	
 	<string name="osmand_rastermaps_plugin_description">Настройки за ползване на онлайн карти като основни или като карти за подложка. Тези карти е възможно да се подготвят за ползване офлайн.</string>
 	
-	<string name="osmand_accessibility_description">Настройки за специалните функции за достъпност.</string>
+	<string name="osmand_accessibility_description">Настройки на специалните функции за достъпност. Настройване скоростта на гласовите напътствия и допълнителни настройки за хора със специални потребности.</string>
 	
 	
 	
@@ -1728,7 +1728,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="layer_amenity_label">Етикети на точките</string>
     <string name="loading_smth">Зареждане %1$s …</string>
     <string name="map_widget_plain_time">Текущо време</string>
-    <string name="gpx_wpt">Междинна точка</string>
+    <string name="gpx_wpt">Точка</string>
     <string name="selected_gpx_info_show">\n\nНатиснете и задръжте за показване на картата</string>
     <string name="text_size_descr">Въведете размер на текста върху картата.</string>
     <string name="text_size">Размер на текста</string>
@@ -1973,4 +1973,51 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="share_fav_subject">Споделени места чрез OsmAnd</string>
 	<string name="import_file_favourites">Запис като GPX файл или внасяне в \'Любими места\'?</string>
 	<string name="voices">Гласови напътствия</string>
-	</resources>
+	<string name="color_red">червен</string>
+	<string name="color_pink">розов</string>
+	<string name="speed_limit_exceed">Толеранс за скоростта</string>
+	<string name="delay_navigation_start">Автоматично стартиране на напътствията</string>
+    <string name="gpx_info_waypoints">"Точки: %1$s "</string>
+	<string name="gpx_info_distance">"Разстояние: %1$s (%2$s точки) "</string>
+	<string name="gpx_info_start_time">"Начало: %1$tF, %1$tT "</string>
+	<string name="gpx_info_end_time">"Край: %1$tF, %1$tT "</string>
+	<string name="gpx_info_average_speed">"Средна скорост: %1$s "</string>
+	<string name="gpx_info_maximum_speed">"Макс.скорост: %1$s "</string>
+	<string name="gpx_info_avg_altitude">Средна височина: %1$s</string>
+	<string name="gpx_info_diff_altitude">Разлика във височините: %1$s</string>
+	<string name="gpx_info_asc_altitude">Изкачване/слизане: %1$s</string>
+    <string name="gpx_timespan">Интервал: %1$s</string>
+	<string name="gpx_timemoving">Във движение: %1$s</string>
+    <string name="gpx_selection_segment_title">Сегмент</string>
+    <string name="gpx_selection_number_of_points">" %1$s точки"</string>
+    <string name="gpx_selection_point">Точка %1$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\nТочки %2$s</string>
+    <string name="speed_limit_exceed_message">Изберете толеранса на ограничението на скоростта, над което ще получите гласово предупреждение.</string>
+	<string name="fav_point_emoticons_message">Името на точката е променено на %1$ s с цел правилното записване на низ с емотикони във файл.</string>
+    <string name="osmo_gpx_track_downloaded">OsMo следата %1$s е изтеглена.</string>
+    <string name="no_index_file_to_download">Списъкът за сваляне не е намерен, моля проверете Вашата интернет връзка.</string>
+    <string name="gpx_selection_points">%1$s
+\nТочки</string>
+    <string name="osmo_user_joined">Потребителят %1$s се присъедини към група %2$s</string>
+    <string name="osmo_user_left">Потребителят %1$s напусна групата %2$s</string>
+    <string name="osmo_follow">Следвайте</string>
+    <string name="osmo_sign_in">Влизане</string>
+    <string name="osmo_create_groups_confirm">За да създадете групи, трябва да сте регистриран потребител на OsMo.</string>
+    <string name="osmo_credentials_not_valid">Вашите OsMo идентификационни данни не са валидни.</string>
+    <string name="osmo_center_location">Центъра на екрана</string>
+    <string name="osmo_use_server_name">Регистрирано име</string>
+    <string name="osmo_connect_to_my_nickname">Моят псевдоним</string>
+    <string name="osmo_user_name">Потребител</string>
+	<string name="color_brown">кафяв</string>
+	<string name="color_yellow">жълт</string>
+	<string name="color_lightblue">светло синьо</string>
+	<string name="color_blue">синьо</string>
+	<string name="color_green">зелен</string>
+	
+    <string name="osmo_edit_device">Промяна на свойствата на потребителя</string>
+    <string name="osmo_edit_color">Цвят на показване</string>
+    <string name="osmo_group_info">Инфо</string>
+    <string name="osmo_group">OsMo група</string>
+    <string name="osmo_share_session">Споделяне на сесия</string>
+    </resources>

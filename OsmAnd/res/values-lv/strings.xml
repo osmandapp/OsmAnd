@@ -178,7 +178,7 @@
   
   <string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
   <string name="native_library_not_supported">Iekļautā bibliotēka šajā iekārtā netiek atbalstīta.</string>
-  <string name="init_native_library">Tiek inicializēta iekļautā bibliotēka…</string>
+  <string name="init_native_library">Iekļautās bibliotēkas inicializēšana…</string>
   <string name="choose_auto_follow_route">Automātiski centrēt karti</string>
   <string name="choose_auto_follow_route_descr">Laiks līdz karte sinhronizējas ar tekošo pozīciju</string>
   <string name="auto_follow_route_never">Nekad (nospiediet zilo bultu, lai sāktu vadību)</string>
@@ -419,7 +419,7 @@
   <string name="use_osmand_routing_service_descr">OsmAnd bezsaistes navigācija darbojas tikai &gt; 20 km gariem maršrutiem (eksperimentāli)</string>
   <string name="osmand_routing_experimental">OsmAnd bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem, kas ir lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nevar atrast norādīto mapi.</string>
-  <string name="application_dir">Datu glabātuves mape</string>
+  <string name="application_dir">Datu uzglabāšanas mape</string>
   
   <string name="osmand_net_previously_installed">Ir atrasta vecāka OsmAnd versija. Bezsaistes dati ir atbalstīti jaunajā versijā,  bet izlasi vajadzēs eksportēt no vecās versijas, pēc tam importēt jaunajā versijā.</string>
   <string name="build_installed">Versija {0} ir veiksmīgi uzinstalēta ({1}).</string>
@@ -473,7 +473,7 @@
   
   <string name="transport_search_again">Atsākt no jauna meklēšanu</string>
   
-  <string name="voice">Ierakstītā balss</string>
+  <string name="voice">Ierakstīta balss</string>
   <string name="no_vector_map_loaded">Vektoru karte nav ielādēta</string>
   <string name="map_route_by_gpx">Navigācija pēc GPX</string>
   <string name="gpx_files_not_found">Treku mapē nav atrasti GPX faili</string>
@@ -727,7 +727,7 @@
   <string name="incremental_search_street">Meklēt ielas</string>
   <string name="incremental_search_building">Meklēt ēkas</string>
   <string name="choose_available_region">Izvēlieties reģionu</string>
-  <string name="choose_intersected_street">Izvēlēties ielu krustojumu</string>
+  <string name="choose_intersected_street">Izvēlēties krustojumu</string>
   <string name="Closest_Amenities">Tuvākie pakalpojumi</string>
   <string name="app_mode_default">Atvērt karti</string>
   <string name="app_mode_car">Auto</string>
@@ -909,7 +909,7 @@
 \n\t* Uzlabota navigācija
 \n\t* Dinamiski kartes instrumenti\n\t* Kartes uzstādījumi pārvietoti uz kartes ekrānu\n\t* Atslēgas ekrānpoga ar ieraksta servisu\n\t* Izlabotas Arābu, Kanādas skriptēšanas un RTL valodas</string>
   <string name="map_widget_top_text">Ielas nosaukums</string>
-  <string name="map_widget_config">Ekrāna uzstādījumi</string>
+  <string name="map_widget_config">Ekrāna skats</string>
   
   <string name="map_widget_back_to_loc">Kur es atrodos</string>
   <string name="map_widget_lock_screen">Noslēgt ekrānu</string>
@@ -937,7 +937,7 @@
   <string name="bg_service_sleep_mode_on">Izslēgt\n miega režīmu</string>
 
 
-<string name="layer_map_appearance">Ekrāna konfigurācija</string>
+<string name="layer_map_appearance">Ekrāna skats</string>
 <string name="show_lanes">Rādīt joslas</string>
 <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
 <string name="avoid_ferries">Izvairīties no prāmjiem</string>
@@ -1442,7 +1442,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	
     
-    <string name="speech_rate_descr">TTS (runas robots) vārdu teikšanas ātrums</string>
+    <string name="speech_rate_descr">TTS (runas robots) balss ātrums</string>
     <string name="speech_rate">Vārdu ātrums</string>
     
     <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lēnā aprēķināšana.</string>
@@ -1818,7 +1818,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rendering_attr_showAccess_name">Rādīt pieejas ierobežojumus</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rādīt ceļa kvalitāti</string>
     <string name="rendering_attr_showSurfaces_name">Rādīt ceļa segumu</string>
-    <string name="rendering_attr_showCycleRoutes_name">Rādīt velomaršrutus</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rādīt veloceliņus</string>
     <string name="osmo_auth_error">OsMo autorizācijas kļūda: %1$s↵\nIespējams īslaicīgs sakaru pārtraukums vai reģistrācijai ir iztecējis termiņš↵\nVai gribat veikt jaunu reģistrāciju?</string>
     <string name="osmo_group_by_invite">Ienākt pēc uzaicinājuma</string>
     <string name="osmo_group_information">Lūdzu izlasiet sekojošo, pirms veidojiet jaunu grupu!</string>
@@ -1893,7 +1893,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_right">Labais panelis</string>
 	<string name="map_widget_left">Kreisais panelis</string>
     <string name="shared_string_show">Rādīt</string>
-	<string name="configure_map">Konfigurēt karti</string>
+	<string name="configure_map">Kartes konfigurācija</string>
     <string name="osmo_device_not_found">Ierīce nav atrasta</string>
     <string name="anonymous_user">Anonīms lietotājs</string>
     <string name="anonymous_user_hint">Anonīms lietotājs nevar pārvaldīt grupas.</string>
@@ -1906,7 +1906,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="fav_point_dublicate">Šāds vārds izlasē jau eksistē</string>
     <string name="fav_point_dublicate_message">Mēs pārdēvējām izlases vietas vārdu uz %1$s, lai izvairītos no vienādiem vārdiem.</string>
     <string name="text_size_descr">Teksta lielums uz kartes.</string>
-    <string name="text_size">Teksta lielums</string>
+    <string name="text_size">Teksta izmērs</string>
     <string name="traffic_warning_speed_limit">Ātruma robeža</string>
     <string name="traffic_warning_border_control">Robežkontrole</string>
     <string name="traffic_warning_payment">Nodevu stends</string>
@@ -2033,15 +2033,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="plugin_install_needs_network">Lai instalētu spraudni, ir vajadzīgs interneta savienojums.</string>
 	<string name="get_plugin">Paņemt</string>
 <string name="rendering_attr_pisteGrooming_name">Sniega tīrīšana</string>
-    <string name="application_dir_change_warning3">Vai vēlaties lai OsmAnd uz jauno vietu kopē arī datu failus?</string>
-    <string name="specified_directiory_not_writeable">Dotajā direktorijā nevar veidot kartes</string>
-	<string name="copying_osmand_file_failed">Failu kopēšana neizdevās</string>    
-    <string name="storage_directory_external">Ārējā glabātuve</string>
-    <string name="storage_directory_multiuser">Vairāklietotāju glabātuve</string>
+    <string name="application_dir_change_warning3">Vai kopēt OsmAnd datu failus uz jauno vietu?</string>
+    <string name="specified_directiory_not_writeable">Norādītajā mapē nevar izveidot kartes</string>
+	<string name="copying_osmand_file_failed">Neizdevās nokopēt failus</string>    
+    <string name="storage_directory_external">Ārējā krātuve</string>
+    <string name="storage_directory_multiuser">Vairāklietotāju krātuve</string>
     <string name="storage_directory_internal_app">Aplikācijas iekšējā atmiņa</string>
     <string name="storage_directory_manual">Manuāli norādīts</string>
     <string name="storage_directory_default">Iekšējā atmiņa</string>
-    <string name="storage_directory">Kartes glabātuve</string>
+    <string name="storage_directory">Karšu krātuve</string>
     <string name="shared_string_copy">Kopēt</string>
     <string name="filter_poi_hint">Filtrēt pēc nosaukuma</string>
     <string name="search_poi_category_hint">Rakstiet lai meklētu visu</string>
@@ -2056,4 +2056,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_string_message">Ziņojums</string>
 	<string name="agps_data_last_downloaded">Pēdējie A-GPS dati lejuplādēti: %1$s</string>
     <string name="shared_string_do_not_use">Nelietot</string>
-	</resources>
+	<string name="rendering_attr_hideHouseNumbers_name">Nerādīt māju numurus</string>
+    </resources>

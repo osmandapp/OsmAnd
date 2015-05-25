@@ -1074,7 +1074,7 @@
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
     <string name="layer_recordings">Sloj posnetka</string>
-    <string name="shared_string_control_start">Razdalje ...</string>
+    <string name="shared_string_control_start">Začni</string>
     
     
     <string name="av_def_action_video">Snemanje videa</string>

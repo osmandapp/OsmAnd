@@ -684,7 +684,7 @@
 	<string name="osmand_short_description_80_chars">OsmAnd é um aplicativo de navegação de código aberto para mapas off-line e on-line</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd (Direções de Navegação Automatizada para OSM)\nOsmAnd é um aplicativo de navegação de código aberto com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados de mapas (mapas vetoriais ou quadrículas) podem ser armazenados na memória do aparelho para uso off-line. OsmAnd também oferece funcionalidade de roteamento online e offline, incluindo orientação por voz curva a curva.\n\nAlgumas das principais características:\n - Completa funcionalidade offline (armazenar mapas vetoriais ou quadrículas no armazenamento do aparelho)\n - Mapas vetoriais offline compactos para todo o mundo disponível\n - Baixar mapas de país ou região diretamente do app\n - Sobreposição de várias camadas do mapa, como trajetos GPX ou navegação, pontos de interesse, favoritos, linhas de contorno, paradas de transporte público, mapas adicionais com transparência personalizável - Pesquisa off-line de endereços e lugares (POIs)\n - Roteamento off-line para distâncias curtas (experimental)\n - Modos para carro, bicicleta e pedestres com: mudança automatizada de visão dia/noite; opcional zoom dependente da velocidade; alinhamento de mapa de acordo com a bússola ou a direção do movimento; opcional orientação de faixas, exibição de limite de velocidade, gravação e vozes TTS\n\nLimitações nesta versão gratuita do OsmAnd:\n - número limitado de transferências de mapas\n - sem acesso off-line a POIs da Wikipédia\n\nOsmAnd é ativamente desenvolvido e nosso projeto e seus progressos se baseiam em contribuir economicamente para financiar o desenvolvimento e testar novas funcionalidades. Por favor, considere comprar OsmAnd+, financiar específicos recursos novos ou fazer uma doação geral em osmand.net. "</string>
 	<string name="day_night_info_description">Nascer do Sol: %1$s ↵\nPôr do Sol: %2$s</string>
-	<string name="avoid_unpaved">Vias não pavimentadas</string>
+	<string name="avoid_unpaved">Vias não-pavimentadas</string>
 	<string name="avoid_in_routing_descr">Evitar vias com pedágio, não pavimentadas, balsas</string>
 	<string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
 	<string name="show_cameras">Radares</string>
@@ -814,7 +814,7 @@
     <string name="intermediate_point">Ponto de parada %1$s</string>
     <string name="map_widget_intermediate_distance">Ponto de parada</string>
     <string name="use_compass_navigation">Usar bússola</string>
-	<string name="avoid_motorway">Evitar autoestradas</string>
+	<string name="avoid_motorway">Evitar auto-estradas</string>
 	<string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade (enquanto o mapa é sincronizado com a posição atual)</string>
 	<string name="auto_zoom_map">Zoom automático</string>
 	<string name="interrupt_music_descr">Interromper a música quando fazer anúncio</string>
@@ -833,7 +833,7 @@
 	<string name="map_widget_renderer">Estilo do mapa</string>
 	<string name="layer_map_appearance">Configurar tela</string>
 	<string name="show_lanes">Mostrar faixas</string>
-	<string name="avoid_ferries">Balsas</string>
+	<string name="avoid_ferries">Evitar balsas</string>
 	<string name="avoid_in_routing_title">Evitar…</string>
 	<string name="map_widget_fluorescent">Rotas fluorescentes</string>
 	<string name="map_widget_show_ruler">Régua</string>
@@ -863,7 +863,7 @@
 	<string name="bg_service_screen_unlock">Desbloquear tela</string>
 	<string name="bg_service_screen_lock_toast">A tela está bloqueada</string>
 	<string name="bg_service_interval">Definir intervalo para ativar:</string>
-	<string name="avoid_toll_roads">Pedágios</string>
+	<string name="avoid_toll_roads">Evitar pedágios</string>
 	<string name="continue_follow_previous_route_auto">A navegação anterior não foi concluída, quer continuá-la? (%1$s segundos)</string>
 	<string name="route_updated_loc_found">Rota será recalculada quando a posição for encontrada</string>
 	<string name="osmand_parking_hours">Horas</string>

@@ -859,7 +859,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Inga byggnader hittades.</string>
     <string name="incremental_search_city">Sök stad stegvis</string>
-    <string name="search_villages_and_postcodes">Sök byar/postnummer</string>
+    <string name="search_villages_and_postcodes">Sök efter fler byar/postnummer</string>
 	<string name="rendering_attr_showRoadMaps_description">Välj när du vill visa kartor som endast har vägar:</string>
 	<string name="rendering_attr_showRoadMaps_name">Kartor med enbart vägar</string>
     <string name="download_roads_only_item">"Vägar "</string>
@@ -1552,7 +1552,7 @@
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Dölj tillfartsinskränkningar</string>
-    <string name="rendering_attr_showAccess_name">Visa tillfarts- inskränkningar</string>
+    <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
     <string name="rendering_attr_showCycleRoutes_name">Visa cykelleder</string>
@@ -1598,7 +1598,7 @@
     <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="shared_string_all">Alla</string>
-    <string name="record_plugin_description">"Denna modul aktiveras funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-inspelning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
+    <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-inspelning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
 \n\nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet etc och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
     <string name="record_plugin_name">Inspelning av resor</string>
     <string name="int_hour">h</string>
@@ -1690,7 +1690,7 @@
     <string name="navigate_point_zone">Zon</string>
     <string name="navigate_point_northing">Nordlig (y-koord.)</string>
     <string name="navigate_point_easting">Östlig (x-koord.)</string>
-    <string name="download_tab_downloads">Alla hämtningar</string>
+    <string name="download_tab_downloads">Alla kartor</string>
     <string name="download_tab_updates">Uppdateringar</string>
     <string name="download_tab_local">Hämtat</string>
 	<string name="route_descr_destination">Destination</string>
@@ -1744,10 +1744,9 @@
 		\n\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.
 		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
 	</string>
-	<string name="plugin_ski_descr">Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.
-		\n\nEn global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Hämtningar som \'World ski map\'.
-		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
-	</string>
+	<string name="plugin_ski_descr">"Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.
+\n\nEn global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Alla kartor som \'World ski map\'.
+\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor. "</string>
 	<string name="plugin_touringview_descr">"Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
 \n\nDenna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken).\n\nDen visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.
 \n\nOch den erbjuder också speciella alternativ såsom visning av cykelrutter eller rutter i Alperna.\n\nIngen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.
@@ -1843,7 +1842,7 @@
 	<string name="current_route">Aktuell rutt</string>
     <string name="osm_changes_added_to_local_edits">OSM-ändringar lades till i lokala ändringar</string>
    	<string name="mark_to_delete">Markera för att ta bort</string>
-	<string name="confirm_usage_speed_cameras">I många länder (Tyskland, Frankrike, Italien och andra) är det inte tillåtet att använda varningar om hastighetskameror. OsmAnd tar inget ansvar om du bryter mot lagen. Klicka på Ja endast om du får använda denna funktion.</string>
+	<string name="confirm_usage_speed_cameras">I många länder (Tyskland, Frankrike, Italien och andra) är det inte tillåtet att använda varningar för hastighetskameror. OsmAnd tar inget ansvar om du bryter mot lagen. Klicka på Ja endast om du får använda denna funktion.</string>
 	<string name="welmode_download_maps">Hämta kartor</string>
 	<string name="welcome_select_region">För att avspegla dina trafiksignaler och -förordningar på ett korrekt sätt, välj den region du kör i:</string>
 	<string name="welcome_text">OsmAnd erbjuder bläddring i globala offline-kartor och fullständig global navigering offline!</string>
@@ -1880,4 +1879,6 @@
 	<string name="routing_attr_height_name">Höjdgräns</string>
 	<string name="use_fast_recalculation">Smart omräkning av rutt</string>
 	<string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
-</resources>
+<string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
+	<string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
+    </resources>

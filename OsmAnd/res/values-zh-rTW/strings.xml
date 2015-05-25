@@ -57,7 +57,7 @@
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供了地圖檔案的管理用以下載那些離線圖資，並且檢查能用的更新。
 \n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
-\n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
+\n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、山體陰影層等）。
 \n\n您可以在篩選區域清單中輸入一些文字，或者您可以按選項的\'設定\' -&gt; \'篩選已下載的\'可看見已篩選出在您裝置上的更新資料。
 \n\t* 登錄為\'綠色\'，表示裝置與伺服器是相同的
 \n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
@@ -286,7 +286,7 @@
 	<string name="accessibility_preferences_descr">無障礙相關的偏好設定</string>
 	<string name="accessibility_preferences">無障礙</string>
 	<string name="rendering_out_of_memory">處理記憶體不足，無法顯示已選取的區域</string>
-	<string name="use_fluorescent_overlays">螢光覆疊層</string>
+	<string name="use_fluorescent_overlays">螢光層</string>
 	<string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
@@ -338,7 +338,7 @@
 	<string name="index_settings">管理地圖檔案</string>
 	<string name="general_settings">一般設定</string>
 	<string name="general_settings_descr">組態應用程式顯示和共通設定</string>
-	<string name="global_app_settings">全區程式設定</string>
+	<string name="global_app_settings">整體程式設定</string>
 	<string name="user_name">您 OSM 的使用者名稱</string>
 	<string name="user_name_descr">需要在 openstreetmap.org 註冊</string>
 	<string name="user_password">您 OSM 的密碼</string>
@@ -381,7 +381,7 @@
 	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
 	<string name="pref_vector_rendering">向量繪圖專用選項</string>
-	<string name="pref_overlay">上層 / 下層</string>
+	<string name="pref_overlay">上圖層 / 下圖層</string>
 	<string name="pref_raster_map">地圖來源設定</string>
 	<string name="pref_vector_map">向量地圖設定</string>
 	<string name="delete_confirmation_msg">刪除 %1$s？</string>
@@ -481,8 +481,8 @@
 	<string name="voice_stream_notification">通知音訊</string>
 	<string name="voice_stream_music">多媒體/音樂音訊</string>
 	<string name="warning_tile_layer_not_downloadable">無法下載 %1$s 圖層，請嘗試重新安裝。</string>
-	<string name="overlay_transparency_descr">修改上層圖的透明度</string>
-	<string name="overlay_transparency">上層圖透明度</string>
+	<string name="overlay_transparency_descr">修改上圖層的透明度</string>
+	<string name="overlay_transparency">上圖層透明度</string>
 	<string name="map_transparency_descr">修改底圖的透明度</string>
 	<string name="map_transparency">底圖透明度</string>
 	<string name="layer_underlay">下層地圖…</string>
@@ -1017,7 +1017,7 @@
     <string name="prefer_in_routing_title">優先權…</string>
 	<string name="prefer_motorways">高速公路優先權</string>
 	<string name="download_hillshade_item">地形陰影</string>
-    <string name="download_hillshade_maps">地形陰影覆疊層</string>
+    <string name="download_hillshade_maps">山體陰影層</string>
     
     
     <string name="local_indexes_cat_srtm">等高線資料</string>
@@ -1127,9 +1127,9 @@
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
 	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的航點已採取了最佳化排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線覆疊層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
+    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1685,7 +1685,7 @@
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
-    <string name="rendering_attr_osmcTraces_name">徒步符號覆疊層</string>
+    <string name="rendering_attr_osmcTraces_name">徒步符號層</string>
     <string name="rendering_attr_alpineHiking_description">按照 SAC 比例繪製路徑</string>
     <string name="rendering_attr_osmcTraces_description">按照 OSMC 軌跡繪製路徑</string>
     

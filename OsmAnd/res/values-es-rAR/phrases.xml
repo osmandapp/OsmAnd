@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_shop">Compras</string>
-		<string name="poi_shop_food">Tienda de alimentos</string>
+		<string name="poi_shop_food">Alimentación</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo del camino</string>
@@ -256,7 +256,7 @@
 
 	<string name="poi_water_well">Pozo de agua</string>
 	<string name="poi_standpipe">Boca de incendios</string>
-	<string name="poi_water_works">Recolector de agua potable</string>
+	<string name="poi_water_works">Planta potabilizadora</string>
 	<string name="poi_boatyard">Astillero</string>
 	<string name="poi_wastewater_plant">Planta depuradora</string>
 	<string name="poi_water_tower">Torre de agua</string>
@@ -532,7 +532,7 @@
 	<string name="poi_viewpoint">Mirador</string>
 	<string name="poi_camp_site">Campamento</string>
 	<string name="poi_caravan_site">Campamento de caravanas</string>
-	<string name="poi_picnic_site">Merendero</string>
+	<string name="poi_picnic_site">Área de picnic</string>
 	<string name="poi_picnic_table">Mesa de picnic</string>
 	<string name="poi_spring">Manantial</string>
 	<string name="poi_hot_spring">Fuente termal</string>
