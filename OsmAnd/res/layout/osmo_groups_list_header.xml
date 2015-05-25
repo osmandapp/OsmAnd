@@ -33,45 +33,6 @@
 			android:text="@string/osmo_start_service"/>
 	</LinearLayout>
 
-	<RelativeLayout
-		android:id="@+id/osmo_log_off_layout"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/dashboard_parking_left_margin"
-		android:layout_marginRight="@dimen/dashboard_parking_left_margin"
-		android:minHeight="@dimen/osmo_header_height">
-
-		<TextView
-			android:id="@+id/osmo_user_name_text_view"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_centerVertical="true"
-			android:text="@string/anonymous_user"
-			android:textAppearance="?android:attr/textAppearance"/>
-
-		<CheckBox
-			android:id="@+id/osmo_login_logoff"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			android:focusable="false"
-			android:gravity="center_vertical"/>
-
-		<Button
-			android:id="@+id/osmo_login_hint_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_centerVertical="true"
-			android:layout_toRightOf="@id/osmo_user_name_text_view"
-			android:minHeight="0dp"
-			android:minWidth="0dp"
-			android:text="\?"
-			android:textAppearance="?android:attr/textAppearance"/>
-
-	</RelativeLayout>
-
 	<CheckBox
 		android:id="@+id/enable_tracker"
 		android:layout_width="fill_parent"
