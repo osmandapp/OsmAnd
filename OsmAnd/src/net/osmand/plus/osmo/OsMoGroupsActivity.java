@@ -340,7 +340,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if(service.isConnected()) {
 			header.findViewById(R.id.motd).setVisibility(View.VISIBLE);
 			header.findViewById(R.id.share_my_location_layout).setVisibility(View.VISIBLE);
-			header.findViewById(R.id.share_my_location).setVisibility(tracker.isEnabledTracker() ? View.VISIBLE : View.GONE);
+			header.findViewById(R.id.share_my_location).setVisibility(tracker.isEnabledTracker() ? View.VISIBLE : View.INVISIBLE);
 			if (service.isLoggedIn()) {
 				getSupportActionBar().setTitle(app.getSettings().OSMO_USER_NAME.get());
 			} else {

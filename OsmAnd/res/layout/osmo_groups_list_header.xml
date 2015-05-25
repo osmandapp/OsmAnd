@@ -49,6 +49,7 @@
             android:background="?attr/dashboard_button"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_action_gshare_dark" />
 
         <include
