@@ -703,4 +703,15 @@
 	<string name="poi_radio_station">Stacja radiowa, znak wodny</string>
 	<string name="poi_signal_station_traffic">Stacja sygnalizacyjna, ruch</string>
 	<string name="poi_signal_station_warning">Stacja sygnalizacyjna, ostrzeżenie</string>
+	<string name="poi_wilderness_hut">Pustelnia</string>
+	<string name="poi_internet_access_service">Dostęp do Internetu: serwis</string>
+	
+	<string name="poi_wine_cellar">Winiarnia</string>
+	<string name="poi_ski_rental">Wypożyczalnia nart</string>
+
+	<string name="poi_gallery">Galeria sztuki</string>
+	<string name="poi_ski_resort">Ośrodek narciarski</string>
+	<string name="poi_village_green">Teren zieleni</string>
+	<string name="poi_craft_boatbuilder">Stocznia</string>
+	<string name="poi_craft_jeweller">Jubiler</string>
 	</resources>
