@@ -17,7 +17,7 @@ import android.util.FloatMath;
 public class TurnPathHelper {
 
 	// 72x72
-	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
+	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform, boolean smallIcon) {
 		if(turnType == null){
 			return;
 		}
@@ -43,13 +43,20 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(0, h);
 		} else if (TurnType.TR == turnType.getValue()|| TurnType.TL == turnType.getValue()) {
 			int b = TurnType.TR == turnType.getValue()? 1 : -1;
-			float quadShiftX = 18;
-			float quadShiftY = 18;
-			int wl = 10; // width
+			float quadShiftX = smallIcon ? 9 : 18;
+			float quadShiftY = smallIcon ? 9 : 18;
+			int wl = smallIcon ? 1 : 10; // width
 			int h = (int) (ha - quadShiftY - harrowL + hpartArrowL - 5);
+			if (smallIcon) {
+				h = 2 * h / 5;
+			}
 			int sl = wl + th / 2;
 			
-			pathForTurn.rMoveTo(-b * sl, 0);
+			if (!smallIcon) {
+				pathForTurn.rMoveTo(-b * sl, 0);
+			} else {
+				pathForTurn.rMoveTo(b * th, 0);
+			}
 			pathForTurn.rLineTo(0, -h);
 			pathForTurn.rQuadTo(0, -quadShiftY, b * quadShiftX, -quadShiftY);
 			pathForTurn.rLineTo(b * wl, 0);
@@ -260,7 +267,7 @@ public class TurnPathHelper {
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, TurnType.straight(), null);
+			TurnPathHelper.calcTurnPath(dp, TurnType.straight(), null, false);
 		}
 
 		@Override
@@ -271,7 +278,7 @@ public class TurnPathHelper {
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, t, null);
+			TurnPathHelper.calcTurnPath(p, t, null, false);
 			onBoundsChange(getBounds());
 		}
 

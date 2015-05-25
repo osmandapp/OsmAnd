@@ -181,7 +181,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		public boolean setTurnType(TurnType turnType) {
 			if(turnType != this.turnType) {
 				this.turnType = turnType;
-				TurnPathHelper.calcTurnPath(pathForTurn, turnType, null);
+				TurnPathHelper.calcTurnPath(pathForTurn, turnType, null, false);
 				onBoundsChange(getBounds());
 				return true;
 			}
