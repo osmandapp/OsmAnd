@@ -75,6 +75,7 @@ public class BinaryInspector {
 //				"-vstats",
 //				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"
 //				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
+				
 					});
 		} else {
 			in.inspector(args);

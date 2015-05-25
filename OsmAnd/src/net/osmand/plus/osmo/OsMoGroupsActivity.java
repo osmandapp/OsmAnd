@@ -85,7 +85,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -204,7 +203,16 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private void setupHeader() {
 		header = getLayoutInflater().inflate(R.layout.osmo_groups_list_header, null);
 		getExpandableListView().addHeaderView(header);
+		ImageView iv =  (ImageView) header.findViewById(R.id.share_my_location);
+		iv.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				shareSession();
+			}
+		});
 		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.enable_tracker);
+		trackr.setText(R.string.osmo_share_my_location);
 		if(osMoPlugin != null && osMoPlugin.getTracker() != null){
 			trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
 		}
@@ -233,6 +241,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		
 		CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 		srvc.setChecked(osMoPlugin.getService().isEnabled());
+		srvc.setText(R.string.osmo_start_service);
 		srvc.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -271,7 +280,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		TextView mtd = (TextView) header.findViewById(R.id.motd);
 		SessionInfo si = osMoPlugin.getService().getCurrentSessionInfo();
 		boolean visible = si != null && si.motd != null && si.motd.length() > 0;
-		mtd.setVisibility(visible? View.VISIBLE:View.GONE);
+		mtd.setVisibility(visible ? View.VISIBLE : View.GONE);
 		if(visible) {
 			mtd.setText(si.motd);
 			mtd.setLinksClickable(true);
@@ -330,7 +339,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		supportInvalidateOptionsMenu();
 		if(service.isConnected()) {
 			header.findViewById(R.id.motd).setVisibility(View.VISIBLE);
-			header.findViewById(R.id.enable_tracker).setVisibility(View.VISIBLE);
+			header.findViewById(R.id.share_my_location_layout).setVisibility(View.VISIBLE);
+			header.findViewById(R.id.share_my_location).setVisibility(tracker.isEnabledTracker() ? View.VISIBLE : View.GONE);
 			if (service.isLoggedIn()) {
 				getSupportActionBar().setTitle(app.getSettings().OSMO_USER_NAME.get());
 			} else {
@@ -338,7 +348,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		} else {
 			header.findViewById(R.id.motd).setVisibility(View.GONE);
-			header.findViewById(R.id.enable_tracker).setVisibility(View.GONE);
+			header.findViewById(R.id.share_my_location_layout).setVisibility(View.GONE);
 			getSupportActionBar().setTitle(R.string.osmo);
 		}
 	}

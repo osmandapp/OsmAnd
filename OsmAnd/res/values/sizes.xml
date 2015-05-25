@@ -49,7 +49,6 @@
 	
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
-	<dimen name="osmo_header_height">56dp</dimen>
 	<!--  map buttons -->
 	<dimen name="map_trans_seek_size">80dp</dimen>
 	<dimen name="map_route_buttons_width">60dp</dimen>

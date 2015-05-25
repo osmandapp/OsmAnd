@@ -1,56 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
-			  android:layout_width="fill_parent"
-			  android:layout_height="wrap_content"
-			  android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/osmo_header_background"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding" >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/osmo_header_background"
-		android:minHeight="@dimen/osmo_header_height"
-		android:orientation="horizontal"
-		android:paddingLeft="@dimen/dashboard_parking_left_margin"
-		android:paddingRight="@dimen/dashboard_parking_left_margin">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_header_height"
+        android:orientation="horizontal" >
 
-		<ImageView
-			android:id="@+id/osmo_status"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:paddingLeft="4dp"
-			android:paddingRight="4dp"
-			android:src="@drawable/mon_osmo_conn_small"/>
+        <ImageView
+            android:id="@+id/osmo_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/mon_osmo_conn_small" />
 
-		<CheckBox
-			android:id="@+id/enable_service"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:focusable="false"
-			android:textColor="@color/color_white"
-			android:text="@string/osmo_start_service"/>
-	</LinearLayout>
+        <include
+            android:id="@+id/enable_service"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            layout="@layout/check_item"
+            android:focusable="false"
+            android:text="@string/osmo_start_service"
+            android:textColor="@color/color_white" />
+    </LinearLayout>
 
-	<CheckBox
-		android:id="@+id/enable_tracker"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/dashboard_parking_left_margin"
-		android:layout_marginRight="@dimen/dashboard_parking_left_margin"
-		android:checked="false"
-		android:focusable="false"
-		android:gravity="center_vertical"
-		android:minHeight="@dimen/osmo_header_height"
-		android:text="@string/osmo_enable_tracker"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height"
+        android:id="@+id/share_my_location_layout"
+        android:orientation="horizontal" >
 
-	<TextView
-		android:id="@+id/motd"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:autoLink="web"
-		android:gravity="center"
-		android:textSize="@dimen/default_list_text_size"/>
+        <ImageView
+            android:id="@+id/share_my_location"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/dashboard_button"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:src="@drawable/ic_action_gshare_dark" />
+
+        <include
+            layout="@layout/check_item"
+            android:id="@+id/enable_tracker"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:focusable="false"
+            android:layout_gravity="center_vertical"
+            android:text="@string/osmo_enable_tracker"
+             />
+    </LinearLayout>
+    
+        <TextView
+        android:id="@+id/motd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/default_desc_text_size"
+        android:visibility="gone" />
+    
 
 </LinearLayout>
