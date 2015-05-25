@@ -579,7 +579,6 @@ public class MapRenderingTypes {
 		// creation of only section
 		protected boolean onlyMap;
 		protected boolean onlyPoi;
-		protected boolean lang;
 		
 		// Needed only for map rules
 		protected int minzoom;

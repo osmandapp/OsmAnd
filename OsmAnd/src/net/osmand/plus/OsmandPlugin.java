@@ -248,6 +248,16 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static <T extends OsmandPlugin> T getPlugin(Class<T> clz) {
+		for(OsmandPlugin lr : getAvailablePlugins()) {
+			if(clz.isInstance(lr)){
+				return (T) lr;
+			}
+		}
+		return null;
+	}
+	
 	public static List<String> onIndexingFiles(IProgress progress) {
 		List<String> l = new ArrayList<String>(); 
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
