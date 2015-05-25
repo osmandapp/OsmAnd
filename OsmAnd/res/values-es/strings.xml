@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   
-  <string name="layer_map_appearance">Configura pantalla</string>
+  <string name="layer_map_appearance">Configurar pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
   <string name="avoid_unpaved">Evitar carreteras no pavimentadas</string>
   <string name="avoid_ferries">Evitar ferries</string>
@@ -91,7 +91,7 @@
   
   <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial fuera de línea presente para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
   
-  <string name="tip_day_night_mode">Modo Día/Noche</string>
+  <string name="tip_day_night_mode">Modo día/noche</string>
   
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
   <string name="tip_osm_improve_t">"OsmAnd usa mapas basados en datos de OpenStreetMap.org (OSM) y puede utilizarse directamente para mejorar la calidad de los datos OSM. Puede crear y subir fácilmente nuevos PDIs (puntos de interés) o informes de fallos de OSM tan sólo con unos pocos clics.
@@ -114,10 +114,10 @@
   <string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
   <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
   <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
-  <string name="pref_vector_rendering">Opciones específicas de visualización de vectores</string>
+  <string name="pref_vector_rendering">Opciones específicas de renderizado vectorial</string>
   <string name="pref_overlay">Superpuesta / subyacente</string>
-  <string name="pref_raster_map">Ajustes fuente del mapa</string>
-  <string name="pref_vector_map">Ajustes mapa vectorial</string>
+  <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
+  <string name="pref_vector_map">Ajustes del mapa vectorial</string>
   <string name="delete_confirmation_msg">¿Borrar %1$s?</string>
   <string name="city_type_suburb">Barrio</string>
   <string name="city_type_hamlet">Aldea</string>
@@ -235,8 +235,8 @@
   <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-  <string name="switch_to_vector_map_to_see">Mapa vectorial sin conexión presente para esta ubicación.
-\n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales sin conexión\'.</string>
+  <string name="switch_to_vector_map_to_see">Mapa vectorial fuera de línea presente para esta ubicación.
+\n\t\n\tPara usarlo activa \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales fuera de línea\'.</string>
   <string name="choose_audio_stream">Salida de indicaciones de voz</string>
   <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
   <string name="voice_stream_voice_call">Audio de llamada de voz</string>
@@ -267,7 +267,7 @@
 \n\n\t* Entradas en \'verde\' indican archivos idénticos en el dispositivo y en el servidor
 \n\t* Entradas en \'azul\' indican actualizaciones disponibles en el servidor
 \n\t* Entradas en cursiva indican datos desactivados en el dispositivo "</string>
-  <string name="level_to_switch_vector_raster_descr">Nivel de acercamiento mínimo para utilizar dibujo de vectores en vez de teselas de mapa</string>
+  <string name="level_to_switch_vector_raster_descr">Nivel de acercamiento mínimo para utilizar los mapas vectoriales</string>
   <string name="level_to_switch_vector_raster">Mín. nivel de acercamiento vectorial</string>
   <string name="tip_location_sharing">Compartir una ubicación</string>
   <string name="tip_location_sharing_t">"Puedes compartir la ubicación de lugares interesantes en sus viajes con su familia o amigos mediante el menú contextual \'Usar ubicación\'→\'Compartir ubicación\'.
@@ -284,7 +284,7 @@
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Selecciona el idioma de visualización (reinicie OsmAnd después del cambio)</string>
   <string name="preferred_locale">Idioma de la pantalla</string>
-  <string name="tip_map_switch">Elige una Fuente de mapa</string>
+  <string name="tip_map_switch">Elige una fuente del mapa</string>
   
   <string name="tip_app_mode">Perfil de uso</string>
   
@@ -364,7 +364,7 @@
   <string name="poi_filter_for_tourists">Para turistas</string>
   <string name="poi_filter_fuel">Gasolinera</string>
   <string name="poi_filter_namefinder">NameFinder en línea</string>
-  <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
+  <string name="reading_cached_tiles">Leyendo teselas almacenadas localmente…</string>
   <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
   <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
   <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
@@ -389,7 +389,7 @@
   <string name="daynight_mode_auto">Alba/Ocaso</string>
   <string name="daynight_mode_sensor">Sensor de luz</string>
   <string name="daynight_descr">Elige la regla de cambio del modo día/noche</string>
-  <string name="daynight">Modo Día/Noche</string>
+  <string name="daynight">Modo día/noche</string>
   <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
   <string name="filter_existing_indexes">Descargados</string>
@@ -409,8 +409,8 @@
   <string name="show_point_options">Usar ubicación …</string>
   <string name="renderer_load_sucess">Visualización cargada</string>
   <string name="renderer_load_exception">Error: No se cargó la visualización</string>
-  <string name="renderers">Visualización de vectores</string>
-  <string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
+  <string name="renderers">Renderizado vectorial</string>
+  <string name="renderers_descr">Elige la apariencia del renderizado</string>
   <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
   <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
   <string name="website">Sitio web</string>
@@ -427,10 +427,10 @@
   <string name="transport_search_again">Reiniciar búsqueda de transporte</string>
   
   <string name="voice">Voz grabada</string>
-  <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
+  <string name="no_vector_map_loaded">Los mapas vectoriales no fueron cargados</string>
   <string name="map_route_by_gpx">Navegar usando GPX</string>
   <string name="gpx_files_not_found">No se encontraron archivos GPX en la carpeta de trazas</string>
-  <string name="layer_gpx_layer">Traza GPX…</string>
+  <string name="layer_gpx_layer">Trazas GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales fuera de línea</string>
   <string name="transport_context_menu">Buscar transporte en parada</string>
@@ -463,7 +463,7 @@
   <string name="layer_osm_bugs">Notas OSM (en línea)</string>
   <string name="layer_transport">Paradas de transporte</string>
   <string name="layer_poi">Puntos de interés…</string>
-  <string name="layer_map">Fuente de mapas…</string>
+  <string name="layer_map">Fuente del mapa…</string>
   <string name="menu_layers">Capas de mapas</string>
   <string name="context_menu_item_search_poi">Buscar PDI</string>
   
@@ -658,8 +658,8 @@
   <string name="map_view_3d">Visión 3D del mapa</string>
   <string name="show_poi_over_map_description">Muestra el PDI sobre el mapa (usando el último filtro seleccionado)</string>
   <string name="show_poi_over_map">Mostrar PDI</string>
-  <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas</string>
-  <string name="map_tile_source">Fuente de teselas de mapa</string>
+  <string name="map_tile_source_descr">Elige la fuente de las teselas de mapas en línea o almacenadas temporalmente</string>
+  <string name="map_tile_source">Fuente de teselas del mapa</string>
   <string name="map_source">Fuente de mapa</string>
   <string name="use_internet">Usar Internet</string>
   <string name="show_location">Mostrar tu posición</string>
@@ -682,10 +682,10 @@
   <string name="choose_available_region">Elegir región de la lista</string>
   <string name="choose_intersected_street">Elige intersección</string>
   <string name="Closest_Amenities">Instalaciones más cercanas</string>
-  <string name="app_mode_default">Ver mapa</string>
+  <string name="app_mode_default">Explorar mapa</string>
   <string name="app_mode_car">Automóvil</string>
   <string name="app_mode_bicycle">Bicicleta</string>
-  <string name="app_mode_pedestrian">Peatón</string>
+  <string name="app_mode_pedestrian">Peatonal</string>
   <string name="position_on_map_center">Centro</string>
   <string name="position_on_map_bottom">Fondo</string>
   <string name="navigate_point_top_text">Introduzca la latitud y longitud en el formato seleccionado (D - grados, M - minutos, S - segundos)</string>
@@ -772,14 +772,14 @@
   
   <string name="map_online_plugin_is_not_installed">Habilita el complemento mapas en línea para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas en línea y teselas</string>
-  <string name="map_online_data_descr">Usar mapas en línea (descarga y guarda teselas en la tarjeta SD)</string>
+  <string name="map_online_data_descr">Usa mapas en línea (teselas descargadas y almacenadas localmente en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas en línea</string>
-  <string name="online_map_settings_descr">Configura fuentes de mapas en línea o teselas guardadas</string>
+  <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas en línea o almacenadas localmente</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Este complemento puede acceder a muchos tipos de mapas (llamados teselas o ráster) con conexión, desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
-\n\nCualquiera de estos mapas puede ser utilizado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas normales de OsmAnd en línea). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando desee.
-\n\nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para su uso fuera de línea (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos sqlite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Este complemento puede acceder a muchos tipos de mapas (llamados teselas o ráster) en línea, desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
+\n\nCualquiera de estos mapas se puede utilizado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas normales de OsmAnd en línea). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando desee.
+\n\nLas teselas de mapas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para su uso fuera de línea (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos sqlite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra los ajustes para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
   <string name="osmand_accessibility_description">Este complemento habilita las características de accesibilidad del dispositivo directamente en OsmAnd. Facilita, por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su posición.</string>
   
@@ -791,7 +791,7 @@
   <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales</string>
   <string name="prefs_plugins">Complementos</string>
   <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 :
-\n\t - *Funcionalidad de complementos*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas/deshabilitadas en Ajustes/Complementos. Puede habilitar fuentes de teselas de mapas (en línea o guardadas), ajustes de seguimiento, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapa fuera de línea*\n\t - La visualización del mapa es más rápida y precisa (problemas con la línea de la costa y zonas inundadas están mayormente corregidos).\n\t - Necesita descargarse datos fuera de línea completamente nuevos (los datos antiguos no están soportados)\n\t - *Navegación fuera de línea*
+\n\t - *Funcionalidad de complementos*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas/deshabilitadas en Ajustes/Complementos. Puede habilitar fuentes de teselas de mapas (en línea o almacenadas localmente), ajustes de seguimiento, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapa fuera de línea*\n\t - La visualización del mapa es más rápida y precisa (problemas con la línea de la costa y zonas inundadas están mayormente corregidos).\n\t - Necesita descargarse datos fuera de línea completamente nuevos (los datos antiguos no están soportados)\n\t - *Navegación fuera de línea*
 \n\t - La navegación fuera de línea es más robusta\n\t - *Usabilidad y experiencia de usuario*
 \n\t - Mejoras en muchas áreas "</string>
   <string name="osm_editing_plugin_description">Mediante este complemento OsmAnd se puede utilizar para hacer contribuciones en OSM como crear o modificar objetos PDI (puntos de interés) de OSM, abrir o comentar errores de OSM, y contribuir con archivos grabados de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte http://openstreetmap.org. Se aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
@@ -886,7 +886,7 @@
   <string name="rendering_attr_noPolygons_name">Ocultar polígonos</string>
   <string name="rendering_attr_appMode_name">Modo de dibujo</string>
   <string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string>
-  <string name="rendering_attr_contourLines_description">Muestra a partir del nivel de acercamiento (necesita datos de curvas):</string>
+  <string name="rendering_attr_contourLines_description">Mostrar desde el nivel de acercamiento (requiere datos del contorno):</string>
   <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
   <string name="rendering_attr_hmRendered_description">Aumentar el detalle que se muestra del mapa</string>
   <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
@@ -996,7 +996,7 @@
 		\n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo
 	</string>
 <string name="tip_map_switch_t_v2">"La fuente del mapa y las capas mostradas se cambian a través de \'Menú\'→\'Configurar mapa\'.
-\n\nEn \'Fuente del mapa…\' puede elegir usar los mapas vectoriales fuera de línea precargados (predeterminado, también necesarios para navegación fuera de línea), fuentes de teselas (para esto active el complemento \'Mapas en línea\' bajo \'Ajustes\'→\'Complementos\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en una PC.
+\n\nEn \'Fuente del mapa...\' puede elegir usar los mapas vectoriales fuera de línea precargados (predeterminado, también necesarios para navegación fuera de línea), fuentes de teselas (para esto active el complemento \'Mapas en línea\' bajo \'Ajustes\' → \'Complementos\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en una PC.
 \n\nOsmAnd también soporta fuentes personalizadas. "</string>
 <string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (más brillante) y noche (más oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
 \n\nPuedes establecer una política para la conmutación día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
@@ -1006,9 +1006,25 @@
 \n\t* \'Noche\': utiliza siempre el modo noche
 \n\t* \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
 <string name="tip_app_mode_t_v2">"OsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
-\n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta (\'modo de transporte\'). "</string>
+\n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono automóvil, bicicleta o peatonal), o al crear una ruta (\'modo de transporte\'). "</string>
 <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM fuera y en línea</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso fuera de línea. OsmAnd también ofrece funcionalidad de rutas fuera y en línea incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapas de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista diurna/nocturna - opción de zoom dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección de movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas Limitaciones de la versión gratuita de OsmAnd: - Límite de número de mapas descargados - Sin acceso a los PDIs descargados de Wikipedia OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
+\n\nOsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (mapas vectoriales y teselas) pueden ser almacenados en la memoria del teléfono para su uso fuera de línea. OsmAnd también ofrece funcionalidad de navegación fuera y en línea incluyendo indicaciones giro-a-giro mediante voz.
+\n\nAlgunas de las características fundamentales:
+\n\n\t- Completa funcionalidad fuera de línea (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+\n\t- Mapas vectoriales compactos disponibles de todo el planeta
+\n\t- Descarga de mapas por país o región directamente desde la aplicación
+\n\t- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n\t- Búsqueda fuera de línea de direcciones y lugares (PDIs)
+\n\t- Navegación fuera de línea para distancias cortas (experimental)
+\n\t- Modo automóvil, bicicleta, y peatón con:
+\n\t\t- opción de cambio automático de vista diurna/nocturna
+\n\t\t- opción de acercamiento dependiente de la velocidad
+\n\t\t- opción de alineamiento del mapa opcional según brújula o dirección de movimiento
+\n\t\t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS\n\nLimitaciones de la versión gratuita de OsmAnd:
+\n\n\t- Limitado el número de mapas descargados
+\n\t- Sin acceso a los PDIs descargados de Wikipedia
+\n\nOsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Considere comprar OsmAnd+, financiar nuevas características específicas o hacer una donación en general a osmand.net. "</string>
 <string name="osmand_plus_short_description_80_chars">Visor de mapas y navegador móvil global para mapas de OSM con y sin conexión</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
 <string name="avoid_motorway">Evitar autopistas</string>
@@ -1167,24 +1183,24 @@
     <string name="item_unchecked">desmarcado</string>
     <string name="shared_string_map">Mapa</string>
     <string name="access_arrival_time">Hora de llegada</string>
-    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatonal. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
-\n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nueva características y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
+    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para automóvil, bicicleta y peatonal. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
+\n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las características principales:
 \n\n* Navegación:
-\n\n- Funciona conectado (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
+\n\n- Funciona en línea (rápido) o fuera de línea (sin cargos de roaming cuando está en el extranjero)
 \n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
-\n- Opcionalmente indicaciones de carril, mostrado de nombre de las calles y tiempo estimado de llegada
+\n- Indicaciones de carril opcional, mostrado de nombre de las calles y tiempo estimado de llegada
 \n- Soporta puntos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
 \n- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
-\n\n* Visualización del mapa:
+\n\n* Visualización:
 \n\n- Muestra su posición y orientación en el mapa
 \n- Opcionalmente orienta el mapa según la brújula o el sentido del movimiento
-\n- Guarda sus lugares más importantes como Favoritos
+\n- Guarda sus lugares más importantes como favoritos
 \n- Muestra PDIs (puntos de interés) a su alrededor
-\n- Puede mostrar mapas especializados con conexión
+\n- Puede mostrar mapas especializados en línea
 \n- Puede mostrar imágenes de satélite (de Bing)
-\n- Puede mostrar superposiciones diferentes como trazas de navegación/turismo GPX y mapas adicionales con transparencia personalizable
+\n- Puede mostrar superposiciones diferentes como trazas GPX de navegación/turismo y mapas adicionales con transparencia personalizable
 \n- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
 \n\nUso de datos de OpenStreetMap y Wikipedia:
 \n\n- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
@@ -1192,10 +1208,9 @@
 \n- Puntos de interés de Wikipedia, ideal para hacer visitas turísticas
 \n- Descarga ilimitada gratuita, directamente desde la aplicación
 \n- Mapas siempre actualizados (al menos una vez al mes)
-\n- Mapas vectoriales compactos sin conexión
+\n- Mapas vectoriales compactos fuera de línea
 \n- Selección entre mapas completos o sólo la red de carreteras (ejemplo: el mapa completo de Japón es de 700 MB y sólo 200 MB para la red de carreteras)
-\n- También admite mapas de teselas en línea o almacenados localmente
-\n\nCaracterísticas de seguridad:
+\n- También admite teselas de mapas en línea o almacenadas localmente\n\nCaracterísticas de seguridad:
 \n\n- Conmutación automática de la vista día/noche
 \n- Muestra opcionalmente límites de velocidad con recordatorio si se excede
 \n- Acercamiento opcional del mapa variable dependiente de su velocidad
@@ -1209,7 +1224,7 @@
 \n- Muestra curvas de nivel y relieve sombreado (a través de un complemento adicional)
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
-\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está sin conexión)
+\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
 \n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo de reposo)
 \n\nOsmAnd es código abierto y se es desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificación nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
 \n\nCobertura y calidad aproximadas del mapa:
@@ -1377,24 +1392,24 @@
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="map_widget_fps_info">Info depuración de FPS</string>
 	<string name="base_world_map">Mapa base mundial</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatonal. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
-\n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nueva características y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para automóvil, bicicleta y peatonal. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
+\n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las características principales:
 \n\n* Navegación:
-\n\n- Funciona conectado (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
+\n\n- Funciona en línea (rápido) o fuera de línea (sin cargos de roaming cuando está en el extranjero)
 \n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
-\n- Opcionalmente indicaciones de carril, mostrado de nombre de las calles y tiempo estimado de llegada
+\n- Indicaciones de carril opcional, mostrado de nombre de las calles y tiempo estimado de llegada
 \n- Soporta puntos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
 \n- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
-\n\n* Visualización del mapa:
+\n\n* Visualización:
 \n\n- Muestra su posición y orientación en el mapa
 \n- Opcionalmente orienta el mapa según la brújula o el sentido del movimiento
-\n- Guarda sus lugares más importantes como Favoritos
+\n- Guarda sus lugares más importantes como favoritos
 \n- Muestra PDIs (puntos de interés) a su alrededor
-\n- Puede mostrar mapas especializados con conexión
+\n- Puede mostrar mapas especializados en línea
 \n- Puede mostrar imágenes de satélite (de Bing)
-\n- Puede mostrar superposiciones diferentes como trazas de navegación/turismo GPX y mapas adicionales con transparencia personalizable
+\n- Puede mostrar superposiciones diferentes como trazas GPX de navegación/turismo y mapas adicionales con transparencia personalizable
 \n- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
 \n\nUso de datos de OpenStreetMap y Wikipedia:
 \n\n- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
@@ -1402,10 +1417,9 @@
 \n- Puntos de interés de Wikipedia, ideal para hacer visitas turísticas
 \n- Descarga ilimitada gratuita, directamente desde la aplicación
 \n- Mapas siempre actualizados (al menos una vez al mes)
-\n- Mapas vectoriales compactos sin conexión
+\n- Mapas vectoriales compactos fuera de línea
 \n- Selección entre mapas completos o sólo la red de carreteras (ejemplo: el mapa completo de Japón es de 700 MB y sólo 200 MB para la red de carreteras)
-\n- También admite mapas de teselas en línea o almacenados localmente
-\n\nCaracterísticas de seguridad:
+\n- También admite teselas de mapas en línea o almacenadas localmente\n\nCaracterísticas de seguridad:
 \n\n- Conmutación automática de la vista día/noche
 \n- Muestra opcionalmente límites de velocidad con recordatorio si se excede
 \n- Acercamiento opcional del mapa variable dependiente de su velocidad
@@ -1419,7 +1433,7 @@
 \n- Muestra curvas de nivel y relieve sombreado (a través de un complemento adicional)
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
-\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está sin conexión)
+\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
 \n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo de reposo)
 \n\nOsmAnd es código abierto y se es desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificación nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
 \n\nCobertura y calidad aproximadas del mapa:
@@ -1459,7 +1473,7 @@
     
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
-	<string name="map_widget_map_rendering">Renderizado de mapa</string>
+	<string name="map_widget_map_rendering">Renderizado del mapa</string>
     <string name="app_modes_choose_descr">Elige los perfiles de uso que son visibles en la aplicación</string>
     
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
@@ -1704,7 +1718,7 @@
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de interés</string>
     <string name="select_destination_and_intermediate_points">Seleccionar puntos de interés</string>
-    <string name="layer_amenity_label">Etiquetas de punto</string>
+    <string name="layer_amenity_label">Etiquetas de los puntos</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de acercamiento durante la navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de acercamiento</string>
@@ -1785,10 +1799,10 @@
 <string name="av_camera_pic_size">Tamaño de foto</string>
 	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
     
-<string name="rendering_value_browse_map_name">Ver mapa</string>  
-    <string name="rendering_value_car_name">Coche</string>
+<string name="rendering_value_browse_map_name">Explorar mapa</string>  
+    <string name="rendering_value_car_name">Automóvil</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
-    <string name="rendering_value_pedestrian_name">Peatón</string>
+    <string name="rendering_value_pedestrian_name">Peatonal</string>
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
     
