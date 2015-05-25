@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.osmo.OsMoPlugin;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -168,6 +169,13 @@ public class NavigationService extends Service implements LocationListener {
 				if(settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 				}
+				OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+				if(plugin != null) {
+					if(plugin.getTracker().isEnabledTracker()) {
+						plugin.getTracker().disableTracker();
+					}
+					plugin.getService().disconnect();
+ 				}
 				NavigationService.this.stopSelf();
 			}
 
