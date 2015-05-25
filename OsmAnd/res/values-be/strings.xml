@@ -1868,7 +1868,7 @@
 	<string name="shared_string_remember_my_choice">Запомніць мой выбар</string>
 	<string name="shared_string_refresh">Абнавіць</string>
 	<string name="shared_string_download">Сьцягнуць</string>
-	<string name="shared_string_downloading">Сьцягваньне</string>
+	<string name="shared_string_downloading">Сьцягваецца</string>
 	<string name="shared_string_download_successful">Пасьпяхова сьцягнута</string>
 	<string name="shared_string_io_error">Адбылася памылка ўводу/вываду</string>
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>
