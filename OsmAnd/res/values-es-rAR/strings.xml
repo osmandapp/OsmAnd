@@ -771,7 +771,7 @@
 \n\t* Botón superior izquierdo en la pantalla del mapa reemplaza el botón Menú "</string>
     <string name="osmand_background_plugin_description">Muestre los ajustes para activar el rastreo y la navegación en modo reposo (pantalla apagada), activando periódicamente el dispositivo GPS.</string>
     <string name="contribution_activity">Instalar versión</string>
-    <string name="choose_osmand_theme_descr">Elije el aspecto de la aplicación</string>
+    <string name="choose_osmand_theme_descr">Elige el aspecto de la aplicación</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Elija la dirección</string>
