@@ -188,7 +188,7 @@ public class OsmAndFormatter {
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
 			String vl = e.getValue();
-			if(Amenity.DESCRIPTION.equals(key)) {
+			if(vl.length() >= 150) {
 				if(shortDescription) {
 					continue;
 				}

@@ -1,8 +1,14 @@
 package net.osmand.data;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 import net.osmand.Location;
 import net.osmand.osm.PoiCategory;
@@ -59,7 +65,31 @@ public class Amenity extends MapObject  {
 		if(additionalInfo == null) {
 			return null;
 		}
-		return additionalInfo.get(key);
+		String str = additionalInfo.get(key);
+		if (str != null) {
+			if (str.startsWith(" gz ")) {
+				try {
+					int ind = 4;
+					byte[] bytes = new byte[str.length() - ind];
+					for (int i = ind; i < str.length(); i++) {
+						char ch = str.charAt(i);
+						bytes[i - ind] = (byte) ((int) ch - 128 - 32);
+
+					}
+					GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
+					BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
+					StringBuilder bld = new StringBuilder();
+					String s;
+					while ((s = br.readLine()) != null) {
+						bld.append(s);
+					}
+					str = bld.toString();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return str;
 	}
 	
 	public Map<String, String> getAdditionalInfo() {
@@ -135,13 +165,14 @@ public class Amenity extends MapObject  {
 		if (!Algorithms.isEmpty(getName())) {
 			return getName();
 		}
-		for (String nm : additionalInfo.keySet()) {
+		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
 				return getAdditionalInfo(nm);
 			}
 		}
 		return "";
 	}
+	
 	public String getContentLang(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
@@ -157,7 +188,7 @@ public class Amenity extends MapObject  {
 		if (!Algorithms.isEmpty(enName)) {
 			return enName;
 		}
-		for (String nm : additionalInfo.keySet()) {
+		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith(tag + ":")) {
 				return getAdditionalInfo(nm);
 			}
