@@ -2037,4 +2037,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
 	<string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire pour les longs trajets</string>
 <string name="osmo_share_my_location">Partager ma position</string>
+    <string name="shared_string_logoff">Se déconnecter</string>
     </resources>
