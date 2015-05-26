@@ -2166,4 +2166,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_height_description">Zadajte výšku vozidla aká musí byť povolená na cestách</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
 	<string name="use_fast_recalculation_desc">Prepočítať iba začiatočný úsek trasy pri dlhých výletoch</string>
-</resources>
+<string name="osmo_share_my_location">Zdieľať moju polohu</string>
+    <string name="shared_string_logoff">Odhlásiť</string>
+    </resources>

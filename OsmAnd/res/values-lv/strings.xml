@@ -290,7 +290,7 @@
   <string name="tts_language_not_supported">Izvēlētā valoda nav atbalstīta instalētajā ierīces Android TTS (teksta izrunāšana) dzinējā. Vai vēlaties meklēt citu TTS dzinēju? Pretējā gadījumā tiks lietota iepriekš uzstādītā TTS valoda.</string>
   <string name="tts_missing_language_data_title">Iztrūkst dati</string>
   <string name="tts_missing_language_data">Šai valodai nav pieejami valodas dati. Vai vēlaties atvērt Market, lai instalētu?</string>
-  <string name="gpx_option_reverse_route">Pretējais GPX virziens</string>
+  <string name="gpx_option_reverse_route">Pretējs GPX virziens</string>
   <string name="gpx_option_destination_point">Lietot esošo galamērķi</string>
   <string name="gpx_option_from_start_point">Sekot pa visu treku</string>
   <string name="switch_to_vector_map_to_see">Šai vietai ir pieejama bezsaistes vektoru karte. \n\t\n\tLai to lietotu, aktivizējiet \'Izvēlne\' -&gt; \'Definēt skatu\' -&gt; \'Kartes avots…\' -&gt; \'Bezsaistes vektoru kartes\'.</string>
@@ -309,7 +309,7 @@
   <string name="map_underlay">Paklāja karte</string>
   <string name="map_underlay_descr">Izvēlēties paklāja karti</string>
   <string name="layer_overlay">Pārklāja karte…</string>
-  <string name="shared_string_none">Nekas</string>
+  <string name="shared_string_none">Nav</string>
   <string name="map_overlay">Pārklāja karte</string>
   <string name="map_overlay_descr">Izvēlēties pārklāja karti</string>
   <string name="tile_source_already_installed">Karte jau ir instalēta, uzstādījumi tiks atjaunoti</string>
@@ -525,7 +525,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Uzstādiet pamošanās intervālu pozīcijas noteikšanai miega režīmā</string>
+  <string name="background_service_int_descr">Uzstādiet gps ieslēgšanas intervālu pozīcijas noteikšanai miega režīmā</string>
   <string name="background_service_int">GPS pamošanās intervāls</string>
   <string name="background_service_provider_descr">Izvēlieties gps signāla devēju  miega režīmam</string>
   <string name="background_service_provider">Vietas noteicējs</string>
@@ -654,7 +654,7 @@
   <string name="new_route_calculated_dist">Aprēķināts jauns ceļš, attālums</string>
   <string name="arrived_at_destination">Jūs esat ieradies galapunktā</string>
   <string name="invalid_locations">Koordinātas nav derīgas!</string>
-  <string name="go_back_to_osmand">Atpakaļ uz OsmAnd kartes</string>
+  <string name="go_back_to_osmand">Atpakaļ uz OsmAnd</string>
   <string name="shared_string_close">Aizvērt</string>
   <string name="loading_data">Ielādē datus…</string>
   <string name="reading_indexes">Nolasa vietējos datus…</string>
@@ -825,7 +825,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">Rādīt uzstādījumus tiešsaistes un saglabāto karšu pamata klājuma un paklāja/pārklāja konfigurēšanai. Kartes ir iespējams izveidot arī patstāvīgi un iekopēt Osmand mapē.</string>
-  <string name="osmand_background_plugin_description">Rādīt uzstādījumus, lai iespējotu sekošanu un navigāciju miega režīmā (izslēgts ekrāns), periodiski ieslēdzot GPS.</string>
+  <string name="osmand_background_plugin_description">Rādīt uzstādījumus navigācijai fonā (izslēgts ekrāns), periodiski ieslēdzot GPS.</string>
   <string name="osmand_accessibility_description">Rādīt uzstādījumus atsevišķām pieejamības iespējām kā TTS runas ātrums, atrašanās vietas izruna, ekrāna mērogošana u.t.t.</string>
   
   
@@ -940,9 +940,9 @@
 <string name="layer_map_appearance">Ekrāna skats</string>
 <string name="show_lanes">Rādīt joslas</string>
 <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
-<string name="avoid_ferries">Izvairīties no prāmjiem</string>
+<string name="avoid_ferries">Izvairīties no pārceltuvēm</string>
 <string name="avoid_in_routing_title">Izvairīties…</string>
-<string name="avoid_in_routing_descr">Izvairīties no maksas ceļiem, prāmjiem un ceļiem bez seguma</string>
+<string name="avoid_in_routing_descr">Izvairīties no maksas ceļiem, pārceltuvēm un ceļiem bez seguma</string>
 <string name="show_warnings_title">Rādīt brīdinājumus…</string>
 <string name="show_warnings_descr">Rādīt satiksmes brīdinājumus (ātruma limitus, fotoradarus, guļošos policistus u.c.)</string>
 <string name="map_widget_fluorescent">Fluorescējošs maršruts</string>
@@ -1244,7 +1244,7 @@
     <string name="safe_mode_description">Palaist programmu avārijas režīmā (lietojot lēnāku Android iebūvētā koda vietā).</string>
     <string name="safe_mode">Drošais režīms</string>
     <string name="native_library_not_running">Programma darbojas drošajā režīmā (atspējot uzstādījumos).</string>
-    <string name="background_service_is_enabled_question">OsmAnd miega režīms ir aktīvs. Vai vēlaties to izslēgt?</string>
+    <string name="background_service_is_enabled_question">OsmAnd fona serviss turpinās darboties. Vai vēlaties to izslēgt?</string>
     <string name="app_modes_choose">Lietotāja režīmi</string>
 	
     <string name="access_mark_final_location_first">Pieejamības režīms: lūdzu izvēlieties galamērķi</string> 
@@ -1470,13 +1470,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_avoid_toll_description">Jāmaksā nodeva par ceļa lietošanu</string>
 	<string name="routing_attr_avoid_unpaved_name">Izvairīties no neasfaltētiem ceļiem</string>
 	<string name="routing_attr_avoid_unpaved_description">Izvairīties no neapstrādātiem ceļiem bez seguma</string>
-	<string name="routing_attr_avoid_ferries_name">Izvairīties no prāmjiem</string>
-	<string name="routing_attr_avoid_ferries_description">Ivairīties no prāmjiem, pārceltuvēm pār upēm</string>
+	<string name="routing_attr_avoid_ferries_name">Izvairīties no pārceltuvēm</string>
+	<string name="routing_attr_avoid_ferries_description">Ivairīties no prāmju ceļiem un pārceltuvēm pāri upēm</string>
 	<string name="routing_attr_avoid_motorway_name">Izvairīties no automaģistrālēm</string>
 	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
 	<string name="routing_attr_weight_name">Svara limits</string>
 	<string name="routing_attr_weight_description">Norādīt maršrutos pieļaujamo transportlīdzekļa svaru</string>
-    <string name="select_gpx">Atzīmēt GPX…</string>
+    <string name="select_gpx">Paņemt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
     <string name="shared_string_select_on_map">Atzīmēt uz kartes</string>
     <string name="route_preferences">Maršruta uzstādījumi</string>
@@ -1930,7 +1930,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="confirmation_to_clear_history">Vai nodzēst vēsturi?</string>
     <string name="delay_to_start_navigation_descr">Norādīt cik ilgu laiku uzkavēties ceļa plānošanas ekrānā</string>
     <string name="delay_to_start_navigation">Izlaist maršruta plānošanu…</string>
-    <string name="shared_string_go">Iet</string>
+    <string name="shared_string_go">Sākt</string>
 	<string name="osmand_parking_overdue">nokavēts</string>
 	<string name="action_create">Darbības izveide</string>
 	<string name="action_modify">Labošanas darbība</string>

@@ -190,7 +190,7 @@
     <string name="gps_status">Situação do GPS</string>
     <string name="version_settings_descr">Baixar versões noturnas</string>
     <string name="version_settings">Compilações</string>
-    <string name="rendering_attr_streetLighting_name">Iluminação das vias</string>
+    <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos de trajeto</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece uma linha de contorno sobreposta e uma camada de sombras das colinas (relevo) por cima dos mapas off-line do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
@@ -204,16 +204,16 @@
 	<string name="navigation_over_track">Iniciar a navegação pelo trajeto?</string>
 	<string name="speak_pedestrian">Faixas de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
-    <string name="avoid_roads_msg">Você pode obter uma rota alternativa, selecionando quais estradas evitar</string>
+    <string name="avoid_roads_msg">Você pode obter uma rota alternativa, selecionando quais vias evitar</string>
 	<string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Laranja</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atlas de estradas alemãs</string>
-    <string name="rendering_value_highContrastRoads_name">Estradas em alto contraste</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de vias alemãs</string>
+    <string name="rendering_value_highContrastRoads_name">Vias em alto contraste</string>
 	<string name="traffic_warning_railways">Cruzamento de ferrovia</string>
 	<string name="traffic_warning_pedestrian">Travessia de pedestres</string>
 	<string name="show_railway_warnings">Cruzamento de ferrovia</string>
-	<string name="rendering_value_americanRoadAtlas_name">Atlas de estradas americanas</string>
+	<string name="rendering_value_americanRoadAtlas_name">Atlas de vias americanas</string>
     <string name="dash_download_msg_none">Deseja baixar mapas offline?</string>
     <string name="dash_download_msg">Você baixou %1$s mapa(s)</string>
     <string name="dash_download_manage">Gerenciar</string>
@@ -800,9 +800,9 @@
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="index_srtm_parts">partes</string>
     <string name="download_select_map_types">Outros mapas</string>
-    <string name="download_roads_only_item">Apenas vias</string>
+    <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapas normais</string>
-    <string name="download_roads_only_maps">Apenas vias no mapa</string>
+    <string name="download_roads_only_maps">Apenas estradas no mapa</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC</string>
     <string name="rendering_attr_osmcTraces_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_osmcTraces_description">Renderizar caminhos de acordo com traços OSMC</string>
@@ -880,7 +880,7 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
-    <string name="rendering_attr_showRoadMaps_name">Apenas vias no mapa</string>
+    <string name="rendering_attr_showRoadMaps_name">Apenas estradas no mapa</string>
     <string name="safe_mode_description">Executar o aplicativo em modo seguro (usando código de Android, mais lento, em vez de código nativo).</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na loja de apps?</string>
 	<string name="shared_location">Posição compartilhada</string>
@@ -1695,4 +1695,12 @@
 	<string name="tip_recent_changes_0_6_7_t">"Alterações recentes na v0.6.7:\n\t- Gerenciador de dados off-line (transferência, excluir, ativar/desativar dados offline diretamente no OsmAnd)\n\t- Pontos favoritos e grupos (categorizar, apagar, gerenciar favoritos)\n\t- Explorador de GPX no aplicativo (ver detalhe de trajeto, distância, velocidade média, altitude, etc.)
 \n\t- Navegação de GPX (mais opções, continuar navegação após falha, suporte a rotatórias)\n\t- Função para salvar a rota como trajeto GPX para uso off-line\n\t- Melhorado o monitoramento de GPX (filtrar alguma imprecisão na posição e salvar a precisão/elevação/velocidade)\n\t- Enviar GPX para comunidade OSM (http://download.osmand.net/gpx/)\n\t- Melhoria na renderização de vetor\n\t- Melhoria no mecanismo TTS (anunciar a distância exata, permite milhas)\n\t- Correções de erros "</string>
 	<string name="tip_recent_changes_0_6_6_t">"Alterações recentes na v0.6.6:\n\t- Mecanismo de Texto para Fata (em inglês, Text To Speech) para navegação de voz\n\t- Renderizador faz o mapa mais detalhado\n\t- Mapa base para todo o mundo empacotado com app\n\t- Ajustada a navegação off-line (ainda experimental)\n\t- Opções de navegação GPX\n\t- Atualização da interface de usuário e correção de diversos erros "</string>
-	</resources>
+	<string name="osmo_share_my_location">Compartilhar a minha posição</string>
+    <string name="shared_string_logoff">Desconectar</string>
+    <string name="routing_attr_avoid_borders_name">Evitar atravessar fronteiras</string>
+	<string name="routing_attr_avoid_borders_description">Evitar atravessar fronteiras com outro país</string>
+	<string name="routing_attr_height_name">Limite de altura</string>
+	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>
+    <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
+	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
+</resources>

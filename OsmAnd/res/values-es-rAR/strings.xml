@@ -132,7 +132,7 @@
 	<string name="plugin_touringview_name">Mapa de vista turística</string>
 	<string name="plugin_nautical_name">Mapa de vista náutica</string>
 	<string name="plugin_ski_name">Mapa de vista de esquí</string>
-	<string name="audionotes_plugin_name">Notas de audio/video</string>
+	<string name="audionotes_plugin_name">Notas multimedia</string>
 	<string name="osmand_parking_plugin_name">Estacionamiento</string>
 	<string name="accessibility_preferences">Accesibilidad</string>
 	<string name="osm_settings">Edición OSM</string>
@@ -459,7 +459,7 @@
     <string name="rendering_value_default_name">Predeterminado</string>
     <string name="navigate_point_northing">Al norte</string>
     <string name="navigate_point_easting">Al este</string>
-    <string name="use_opengl_render_descr">Use renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
+    <string name="use_opengl_render_descr">Use el renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
     <string name="error_avoid_specific_road">No se encontró desvío</string>
     <string name="map_update">Actualizaciones disponibles para %1$s mapa(s)</string>
 	<string name="wake_on_voice">Encender pantalla</string>
@@ -485,7 +485,7 @@
 \n\nPara volver a uno de los estilos del mapas convencionales de OsmAnd, simplemente desactive este complemento de nuevo, o cambie el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="plugin_ski_descr">"Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad, y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
 \n\nActivando esta vista cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
-	<string name="audionotes_plugin_description">El complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
+	<string name="audionotes_plugin_description">El complemento de notas multimedia, proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
 	<string name="osmand_parking_plugin_description">"El complemento de estacionamiento te deja memorizar fácilmente cuándo se estacionó el auto y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
 \n\nAñade una notificación al calendario en el caso de que  desee tener un recordatorio al respecto."</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y utilizarse luego para la orientación.</string>
@@ -503,7 +503,7 @@
     <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie del camino, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar caminos como intransitable por sesión * Más fácil la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de estar fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Correcciones en incompatibilidades de versión de OsMo "</string>
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
     <string name="map_widget_appearance_rem">Elementos restantes</string>
-    <string name="map_widget_vector_attributes">Atributos de dibujado</string>
+    <string name="map_widget_vector_attributes">Atributos de renderizado</string>
     <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
     <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
 	<string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
@@ -670,7 +670,7 @@
 \n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
 \n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Países Bajos)
 \n\t* Mejorada la búsqueda por dirección
-\n\t* Solucionados problemas con el cálculo de rutas y la visualización "</string>
+\n\t* Solucionados problemas con el cálculo de rutas y el renderizado "</string>
     <string name="local_index_tile_data_zooms">Acercamientos descargados: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
@@ -794,7 +794,7 @@
     <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en el complemento de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento de curvas de nivel reestructurada y corregida\n\t* Paquetes del relieve sombreado para el complemento de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
-    <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
+    <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quieres borrar tu punto de destino (y los puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilite para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
@@ -803,7 +803,7 @@
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Sacar una foto</string>
     <string name="recording_context_menu_precord">Sacar una foto</string>
-    <string name="dropbox_plugin_description">El complemento de Dropbox, permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
+    <string name="dropbox_plugin_description">El complemento de Dropbox, permite sincronizar trazas y notas multimedia con tu cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="srtm_paid_version_msg">Considere la compra del complemento de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
@@ -819,14 +819,14 @@
     <string name="av_use_external_camera_descr">Use la aplicación del sistema para fotos</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
     <string name="av_settings_descr">Configure los ajustes de audio y vídeo</string>
-    <string name="av_settings">"Ajustes de audio/vídeo "</string>
+    <string name="av_settings">"Ajustes de notas multimedia "</string>
     <string name="recording_error">"Error durante la grabación "</string>
     <string name="recording_camera_not_available">La cámara no está disponible</string>
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Complemento de cálculo de distancia\n\t* Complemento de notas de audio\n\t* Complemento de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo del mapa \'Vista turística\' con más detalles, nuevos estilos viales, más contraste y opción para travesías alpinas (escala SAC)\n\t* Corrección de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
+    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Complemento de cálculo de distancia\n\t* Complemento de notas multimedia\n\t* Complemento de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo del mapa \'Vista turística\' con más detalles, nuevos estilos viales, más contraste y opción para travesías alpinas (escala SAC)\n\t* Corrección de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar nota de audio</string>
     <string name="recording_context_menu_vrecord">Grabar nota de vídeo</string>
@@ -836,7 +836,7 @@
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="recording_default_name">Grabación</string>
-    <string name="map_widget_av_notes">Notas de audio/video</string>
+    <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. \"Usar ubicación…\" para asignar una nota a la ubicación indicada</string>
     <string name="map_widget_audionotes">Notas de audio</string>
@@ -929,7 +929,7 @@
 \n\t* Mejoras en navegación\n\t* Controles del mapas dinámicos\n\t* Ajustes del mapa movido a la pantalla del mapa\n\t* Botón de bloqueo del mapa con servicios de registro\n\t* Corregido los idiomas árabe, kannada e idiomas RTL "</string>
 	<string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
 	<string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en la memoria del dispositivo) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapa del país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista día/noche - opción de acercamiento dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección del movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas. Limitaciones de la versión gratuita de OsmAnd: - Límite del número de mapas descargados - Sin acceso a los PDIs descargados de Wikipedia. OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net. "</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapa del país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista día/noche - opción de acercamiento dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección del movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas. Limitaciones de la versión gratuita de OsmAnd: - Límite del número de mapas descargados - Sin acceso a los PDIs descargados de Wikipedia. OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net. "</string>
 	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatonal. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las funciones principales:
@@ -990,7 +990,7 @@
 \n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
 	<string name="osmand_plus_short_description_80_chars">Visor de mapas y navegador móvil global para mapas de OSM con y sin conexión</string>
-	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas funciones, y recibe las últimas actualizaciones. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (guardar los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas mundiales de vectores compactos disponibles - Descarga del mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista día/noche - Acercamiento opcional según de la velocidad - Alineación del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas funciones, y recibe las últimas actualizaciones. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) - Mapas mundiales vectoriales compactos disponibles - Descarga del mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista día/noche - Acercamiento opcional según de la velocidad - Alineación del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
 	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola soportas al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla, instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las funciones principales:
@@ -1366,7 +1366,7 @@
 	<string name="auto_follow_route_navigation">Auto-centrar al navegar</string>
 	<string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
 	<string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
-	<string name="pref_vector_rendering">Opciones específicas de visualización de vectores</string>
+	<string name="pref_vector_rendering">Opciones específicas de dibujo vectorial</string>
 	<string name="pref_overlay">Superpuesta / subyacente</string>
 	<string name="pref_raster_map">Ajustes de fuente del mapa</string>
 	<string name="pref_vector_map">Ajustes del mapa vectorial</string>
@@ -1502,7 +1502,7 @@
 	<string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar</string>
 	<string name="internet_not_available">Se necesita una conexión a Internet para esta operación pero no está disponible</string>
 	<string name="install_more">Instalar más…</string>
-	<string name="level_to_switch_vector_raster_descr">Nivel de acercamiento mínimo para utilizar los mapas de vectores</string>
+	<string name="level_to_switch_vector_raster_descr">Mínimo nivel de acercamiento para usar los mapas vectoriales</string>
 	<string name="level_to_switch_vector_raster">Mínimo nivel de acercamiento vectorial</string>
 	<string name="tip_location_sharing">Compartir ubicación</string>
 	<string name="tip_location_sharing_t">"Puedes compartir la Ubicación de lugares interesantes con tu familia y amigos mediante el menú contextual \'Usar ubicación…\'→\'Compartir ubicación\'.
@@ -1620,7 +1620,7 @@
 	<string name="show_point_options">Usar ubicación…</string>
 	<string name="renderer_load_sucess">Visualización cargada</string>
 	<string name="renderer_load_exception">Error: No se cargó la visualización</string>
-	<string name="renderers">Visualización de vectores</string>
+	<string name="renderers">Visualización vectorial</string>
 	<string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
 	<string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
 	<string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
@@ -1930,4 +1930,6 @@
 	<string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcule sólo la parte inicial de la ruta para viajes largos</string>
-</resources>
+<string name="osmo_share_my_location">Compartir ubicación</string>
+    <string name="shared_string_logoff">Desconectarme</string>
+    </resources>

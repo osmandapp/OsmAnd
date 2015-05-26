@@ -2002,4 +2002,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
 	<string name="use_fast_recalculation_desc">Torna a calcular només la part inicial de la ruta si són viatges llargs</string>
-</resources>
+<string name="osmo_share_my_location">Comparteix la meva posició</string>
+    <string name="shared_string_logoff">Sortir</string>
+    </resources>

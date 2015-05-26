@@ -1860,4 +1860,6 @@
 	<string name="routing_attr_height_description">Določitev omejitve višine vozila za določeno pot</string>
     <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
 	<string name="use_fast_recalculation_desc">Preračunavanje je začetnega dela zelo dolge poti</string>
-</resources>
+<string name="osmo_share_my_location">Deli mojo lokacijo</string>
+    <string name="shared_string_logoff">Odjava</string>
+    </resources>

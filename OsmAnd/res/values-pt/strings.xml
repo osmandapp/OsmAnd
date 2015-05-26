@@ -1839,7 +1839,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="dash_download_manage">Gerenciador</string>
     <string name="rendering_category_transport">Transporte</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rotas de bonde e trem</string>
-	<string name="rendering_attr_streetLighting_name">Iluminação das vias</string>
+	<string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_highContrastRoads_name">Vias em alto contraste</string>
 	<string name="welcome_text">OsmAnd oferece um explorador de mapa e navegador GPS offline!</string>

@@ -44,7 +44,7 @@
 <string name="avoid_in_routing_descr">Undvik motorvägar, betalvägar, oasfalterade vägar, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
 
-<string name="map_widget_view_direction">Rörelseriktning</string>
+<string name="map_widget_view_direction">Färdriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
 
 
@@ -941,7 +941,7 @@
     
     
     <string name="close_changeset">Stäng changeset</string>
-	<string name="map_widget_show_destination_arrow">Visa rörelseriktning</string>
+	<string name="map_widget_show_destination_arrow">Visa färdriktningen</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Loggningstjänster</string>
 	
@@ -1057,7 +1057,7 @@
     <string name="non_optimal_route_calculation">Beräkna kanske icke-optimal rutt över långa avstånd</string>
 	<string name="incremental_search_street">Sök gator stegvis</string>
 	<string name="incremental_search_building">Sök byggnader stegvis</string>
-	<string name="show_view_angle">Visa rörelseriktning</string>
+	<string name="show_view_angle">Visa färdriktning</string>
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">Skuggad relief</string>
