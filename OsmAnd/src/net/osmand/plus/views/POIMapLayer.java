@@ -50,6 +50,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
@@ -366,8 +367,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 		});
 		final WebView wv = new WebView(ctx);
-		wv.loadData(content, "HTML", "UTF-8");
-		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
+		WebSettings settings = wv.getSettings();
+		settings.setDefaultTextEncodingName("utf-8");
+		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
+//		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
 		ScrollView scrollView = new ScrollView(ctx);
 		ll.addView(tb);
 		ll.addView(scrollView);
