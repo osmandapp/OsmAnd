@@ -1078,22 +1078,21 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		createMenuItem(oldMenu, SETTINGS_ID, R.string.shared_string_settings, R.drawable.ic_action_settings,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(this);
-		if (portrait) {
-			menu = getClearToolbar(true).getMenu();
-		} else {
-			getClearToolbar(false);
+		if (selectedObject == null) {
+			if (portrait) {
+				menu = getClearToolbar(true).getMenu();
+			} else {
+				getClearToolbar(false);
+			}
+			createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 0, 0,/* R.drawable.ic_action_marker_light, */
+					MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			// createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session,
+			// R.drawable.ic_action_gshare_dark,
+			// MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 0, 0,
+			// R.drawable.ic_group_add,
+					MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
-		createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 
-				0, 0,/*R.drawable.ic_action_marker_light,*/
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-//		createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session, 
-//				R.drawable.ic_action_gshare_dark,
-//				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group,
-				0, 0,
-//				R.drawable.ic_group_add,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		
 		return super.onCreateOptionsMenu(menu);
 	}
 

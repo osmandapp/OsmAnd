@@ -541,7 +541,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		final OsmandSettings settings = app.getSettings();
 		String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity,
-				settings.usingEnglishNames());
+				app.getSettings().MAP_PREFERRED_LOCALE.get());
 		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		final PopupMenu optionsMenu = new PopupMenu(this, view);
@@ -566,7 +566,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					// Create dialog
 					Builder bs = new AlertDialog.Builder(view.getContext());
 					bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, 
-							settings.usingEnglishNames()));
+							app.getSettings().MAP_PREFERRED_LOCALE.get()));
 					bs.setMessage(spannable);
 					AlertDialog dialog = bs.show();
 
@@ -583,7 +583,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					showPOIDetails(amenity, settings.usingEnglishNames());
+					showPOIDetails(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
 					return true;
 				}
 			});
@@ -804,7 +804,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (mes != null) {
 				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], getMyApplication()) + "  "; //$NON-NLS-1$
 			}
-			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().usingEnglishNames());
+			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
 			label.setText(poiType);
 			distanceText.setText(distance);
 			return (row);
@@ -852,9 +852,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 	}
 
-	private void showPOIDetails(final Amenity amenity, boolean en) {
+	private void showPOIDetails(final Amenity amenity, String lang) {
 		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
-		b.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, en));
+		b.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
 		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {

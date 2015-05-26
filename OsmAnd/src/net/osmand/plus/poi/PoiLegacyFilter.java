@@ -295,13 +295,12 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		final CollatorStringMatcher sm =
 				nmFilter.length() > 0 ?
 				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
-		final boolean en = app.getSettings().usingEnglishNames();
 		return new AmenityNameFilter() {
 			
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
-					String lower = OsmAndFormatter.getPoiStringWithoutType(a, en);
+					String lower = OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().MAP_PREFERRED_LOCALE.get());
 					if (!sm.matches(lower)) {
 						return false;
 					}
