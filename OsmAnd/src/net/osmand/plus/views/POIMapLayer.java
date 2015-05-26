@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmo.OsMoService;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -29,17 +30,31 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.util.Algorithms;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.MotionEvent;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -309,16 +324,78 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	private void showDescriptionDialog(Amenity a) {
-		Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(a, view.getSettings().MAP_PREFERRED_LOCALE.get()));
+		String lang = view.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			bs.setMessage(a.getDescription(view.getSettings().MAP_PREFERRED_LOCALE.get()));
+			showWiki(view.getContext(), a.getName(lang), 
+					a.getDescription(lang));
 		} else {
+			Builder bs = new AlertDialog.Builder(view.getContext());
+			bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(a, lang));
 			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false));
+			bs.setPositiveButton(R.string.shared_string_ok, null);
+			bs.show();
 		}
-		bs.setPositiveButton(R.string.shared_string_ok, null);
-		bs.show();
 	}
+
+	static int getResIdFromAttribute(final Context ctx, final int attr) {
+		if (attr == 0)
+			return 0;
+		final TypedValue typedvalueattr = new TypedValue();
+		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
+		return typedvalueattr.resourceId;
+	}
+	
+	private void showWiki(Context ctx, String name, String content ) {
+		final Dialog dialog = new Dialog(ctx, 
+				app.getSettings().isLightContent() ?
+						R.style.OsmandLightTheme:
+							R.style.OsmandDarkTheme);
+		LinearLayout ll = new LinearLayout(ctx);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		Toolbar tb = new Toolbar(ctx);
+		tb.setClickable(true);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		tb.setNavigationIcon(back);
+		tb.setTitle(name);
+		tb.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
+		tb.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+		tb.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				dialog.dismiss();
+			}
+		});
+		final WebView wv = new WebView(ctx);
+		wv.loadData(content, "HTML", "UTF-8");
+		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
+		ScrollView scrollView = new ScrollView(ctx);
+		ll.addView(tb);
+		ll.addView(scrollView);
+		scrollView.addView(wv);
+		dialog.setContentView(ll);
+		wv.setFocusable(true);
+        wv.setFocusableInTouchMode(true);
+		wv.requestFocus(View.FOCUS_DOWN);
+		wv.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_UP:
+					if (!v.hasFocus()) {
+						v.requestFocus();
+					}
+					break;
+				}
+				return false;
+			}
+		});
+		
+		dialog.setCancelable(true);
+		dialog.show();		
+//		wv.setWebViewClient();		
+	}
+
 
 	@Override
 	public String getObjectDescription(Object o) {

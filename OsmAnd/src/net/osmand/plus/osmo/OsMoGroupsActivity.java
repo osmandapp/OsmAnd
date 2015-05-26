@@ -781,6 +781,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
+	
 	private void signinPost(final boolean createGroup) {
 		final Dialog dialog = new Dialog(this, 
 				app.getSettings().isLightContent() ?
