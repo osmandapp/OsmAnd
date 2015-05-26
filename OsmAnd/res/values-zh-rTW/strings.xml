@@ -104,7 +104,7 @@
 	
 	
 	<string name="map_widget_parking">停車場</string>
-	<string name="map_widget_monitoring">GPX 錄製中</string>
+	<string name="map_widget_monitoring">GPX 錄製</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
 	<string name="map_widget_altitude">高度</string>
@@ -1740,7 +1740,7 @@
     <string name="print_route">列印路線</string>
     <string name="fav_point_emoticons_message">我的最愛標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
     <string name="speed_limit_exceed">速限容許餘裕</string>
-	<string name="speed_limit_exceed_message">選擇速限容許餘裕界限，上述，您將收到語音警告。</string>
+	<string name="speed_limit_exceed_message">選擇速限容許餘裕界限，超過時您將會收到語音警告。</string>
 	<string name="osmo_device_not_found">未找到裝置</string>
     <string name="osmo_no_connection_msg">OsMo 服務無法使用：\n- 檢查連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在個人的辦事處所管理群組和裝置。</string>
@@ -1918,7 +1918,7 @@
 	<string name="shared_string_my_places">我的地點</string>
 	<string name="shared_string_my_favorites">我的最愛</string>
 	<string name="shared_string_my_tracks">我的軌跡</string>
-	<string name="shared_string_currently_recording_track">現在正在錄製軌跡</string>
+	<string name="shared_string_currently_recording_track">錄製軌跡</string>
 	<string name="shared_string_audio">音訊</string>
 	<string name="shared_string_video">視訊</string>
 	<string name="shared_string_photo">照片</string>
