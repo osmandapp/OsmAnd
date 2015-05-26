@@ -180,7 +180,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 		dlg.setTitle(MessageFormat.format(this.activity.getResources().getString(R.string.poi_remove_confirm_template), 
-				OsmAndFormatter.getPoiStringWithoutType(a, settings.usingEnglishNames())));
+				OsmAndFormatter.getPoiStringWithoutType(a, settings.MAP_PREFERRED_LOCALE.get())));
 	}
 	
 	private Dialog createDeleteDialog(final Bundle args) {

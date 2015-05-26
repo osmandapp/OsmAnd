@@ -160,7 +160,7 @@ public class OsmAndFormatter {
 		return "";
 	}
 
-	public static String getPoiStringWithoutType(Amenity amenity, boolean en) {
+	public static String getPoiStringWithoutType(Amenity amenity, String locale) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
 		String nm = amenity.getSubType();
@@ -169,7 +169,7 @@ public class OsmAndFormatter {
 		} else if(nm != null){
 			nm = Algorithms.capitalizeFirstLetterAndLowercase(nm.replace('_', ' '));
 		}
-		String n = amenity.getName(en);
+		String n = amenity.getName(locale);
 		if (n.indexOf(nm) != -1) {
 			// type is contained in name e.g.
 			// n = "Bakery the Corner"

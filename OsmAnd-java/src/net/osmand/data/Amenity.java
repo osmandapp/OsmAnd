@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.osmand.Location;
 import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 
 
 public class Amenity extends MapObject  {
@@ -14,6 +15,7 @@ public class Amenity extends MapObject  {
 	public static final String PHONE = "phone";
 	public static final String DESCRIPTION = "description";
 	public static final String OPENING_HOURS = "opening_hours";
+	public static final String CONTENT = "content";
 	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
@@ -118,8 +120,57 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(PHONE, phone);
 	}
 	
-	public String getDescription() {
-		return getAdditionalInfo(DESCRIPTION);
+	public String getName(String lang) {
+		if (lang != null) {
+			String translateName;
+			if (lang.equals("en")) {
+				translateName = getEnName();
+			} else {
+				translateName = getAdditionalInfo("name:" + lang);
+			}
+			if (!Algorithms.isEmpty(translateName)) {
+				return translateName;
+			}
+		}
+		if (!Algorithms.isEmpty(getName())) {
+			return getName();
+		}
+		for (String nm : additionalInfo.keySet()) {
+			if (nm.startsWith("name:")) {
+				return getAdditionalInfo(nm);
+			}
+		}
+		return "";
+	}
+	public String getContentLang(String tag, String lang) {
+		if (lang != null) {
+			String translateName = getAdditionalInfo(tag + ":" + lang);
+			if (!Algorithms.isEmpty(translateName)) {
+				return translateName;
+			}
+		}
+		String plainName = getAdditionalInfo(tag);
+		if (!Algorithms.isEmpty(plainName)) {
+			return plainName;
+		}
+		String enName = getAdditionalInfo(tag + ":en");
+		if (!Algorithms.isEmpty(enName)) {
+			return enName;
+		}
+		for (String nm : additionalInfo.keySet()) {
+			if (nm.startsWith(tag + ":")) {
+				return getAdditionalInfo(nm);
+			}
+		}
+		return null;
+	}
+	
+	public String getDescription(String lang) {
+		String info = getContentLang(DESCRIPTION, lang);
+		if(!Algorithms.isEmpty(info)) {
+			return info;
+		}
+		return getContentLang(CONTENT, lang);
 	}
 	
 	public void setDescription(String description) {
