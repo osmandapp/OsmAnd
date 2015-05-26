@@ -1949,6 +1949,6 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
     <string name="use_fast_recalculation">inteligentní přepočítávání trasy</string>
 	<string name="use_fast_recalculation_desc">Přepočítat pouze počáteční úsek trasy při dlouhých cestách</string>
-<string name="osmo_share_my_location">Sdílet moje umístení</string>
+<string name="osmo_share_my_location">Sdílet moji polohu</string>
     <string name="shared_string_logoff">Odhlásit</string>
     </resources>
