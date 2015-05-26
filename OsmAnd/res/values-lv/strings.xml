@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
-  <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
+  <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">Izmaiņas 0.8.0:
 	\n\t* Spraudņu funkcionalitāte
@@ -111,7 +111,7 @@
   <string name="local_openstreetmap_settings_descr">Pārvaldīt krātuvē ieliktos OSM POI/Kļūdas</string>
   
   
-  <string name="live_monitoring_interval_descr">Norādīt patreizējās pozīcijas nodošanas intervālu</string>
+  <string name="live_monitoring_interval_descr">Norādīt sekošanas intervālu</string>
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiešsaistes sekošanas web adrese</string>
@@ -145,12 +145,12 @@
   
   
   <string name="routing_settings">Navigācija</string>
-  <string name="routing_settings_descr">Norādīt navigācijas uzstādījumus</string>
+  <string name="routing_settings_descr">Mainīt profilu uzstādījumus</string>
   <string name="global_settings">Globālie uzstādījumi</string>
   <string name="index_settings">Bezsaistes dati</string>
-  <string name="index_settings_descr">"Lejupielādēt un pārvaldīt kartes daļas,  balss pakas un vikipēdijas interešu punktus (POI)"</string>
+  <string name="index_settings_descr">"Lejupielādēt un pārraudzīt kartes daļas,  balss pakas un vikipēdijas interešu punktus (POI)"</string>
   <string name="general_settings">Vispārīgie uzstādījumi</string>
-  <string name="general_settings_descr">Norādīt vispārīgos uzstādījumus</string>
+  <string name="general_settings_descr">Mainīt aplikācijas uzstādījumus</string>
   <string name="global_app_settings">Vispārīgie uzstādījumi</string>
   <string name="user_name">OSM lietotāja vārds</string>
   <string name="user_name_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
@@ -1227,7 +1227,7 @@
     <string name="download_roads_only_item">Tikai ceļi</string>
     <string name="download_srtm_maps">Kontūrlīnijas</string>
     <string name="download_regular_maps">Regulārās kartes</string>
-    <string name="download_roads_only_maps">Ceļu sazarojuma kartes</string>
+    <string name="download_roads_only_maps">Ceļu kartes</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Nerādīt robežas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Noņemt reģionālo robežu attēlošanu (admin līmeņi 5-9)</string>
@@ -1239,8 +1239,8 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
     <string name="search_villages_and_postcodes">Meklēt apdzīvotās vietas/pasta indeksus</string>
-	<string name="rendering_attr_showRoadMaps_description">Izvēlēties, kad rādīt ceļu sazarojuma kartes:</string>
-	<string name="rendering_attr_showRoadMaps_name">Ceļu sazarojuma kartes</string>
+	<string name="rendering_attr_showRoadMaps_description">Izvēlieties, kad rādīt tikai ceļu tīkla kartes:</string>
+	<string name="rendering_attr_showRoadMaps_name">Ceļu tīkla kartes</string>
     <string name="safe_mode_description">Palaist programmu avārijas režīmā (lietojot lēnāku Android iebūvētā koda vietā).</string>
     <string name="safe_mode">Drošais režīms</string>
     <string name="native_library_not_running">Programma darbojas drošajā režīmā (atspējot uzstādījumos).</string>
@@ -1868,7 +1868,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>
 	<string name="search_for">Ko meklēt</string>
 	
-	<string name="shared_string_show_all">Rādīt visu</string>
+	<string name="shared_string_show_all">Rādīt visus</string>
 	<string name="coordinates">Koordinātas</string>
 	<string name="rendering_attr_publicTransportMode_name">Autobusu, mikroautobusu un trolejbusu maršruti</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvaju un vilcienu maršruti</string>
@@ -1928,7 +1928,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmo_grop_name_length_alert">Grupas nosaukumam jābūt vismaz 3 simbolu garam!</string>
 	<string name="local_osm_changes_upload_all_confirm">Jūs augšupielādēsiet %1$d izmaiņas uz OSM. Vai turpināt?</string>
     <string name="confirmation_to_clear_history">Vai nodzēst vēsturi?</string>
-    <string name="delay_to_start_navigation_descr">Norādīt cik ilgu laiku uzkavēties ceļa plānošanas ekrānā</string>
+    <string name="delay_to_start_navigation_descr">Norādīt maršruta plānošanas uzvednes rādīšanas laiku</string>
     <string name="delay_to_start_navigation">Izlaist maršruta plānošanu…</string>
     <string name="shared_string_go">Sākt</string>
 	<string name="osmand_parking_overdue">nokavēts</string>
@@ -1946,9 +1946,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="simulate_your_location">Simulēt pozīciju</string>
     <string name="drawer">Saraksts</string>
     <string name="short_location_on_map">Lat %1$s↵\n Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Biežāk uzdotie jautājumi, jaunumi un citi</string>
-    <string name="routing_settings_2">Navigācijas uzstādījumi</string>
-    <string name="general_settings_2">Vispārējie uzstādījumi</string>
+    <string name="tips_and_tricks_descr">Biežāk uzdotie jautājumi, jaunumi un pārējais</string>
+    <string name="routing_settings_2">Maršruta uzstādījumi</string>
+    <string name="general_settings_2">Vispārīgie uzstādījumi</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_not_use">Netiek lietots</string>
 	<string name="shared_string_enable">Iespējot</string>

@@ -883,7 +883,7 @@
 	<string name="network_provider">Omrežje</string>
 	<string name="background_service_int_descr">Nastavitev intervala prebujanja v ozadju</string>
 	<string name="background_service_int">Interval prebujanja sprejemnika GPS</string>
-	<string name="background_service_provider_descr">Izberite ponudnika mesta med izvajanjem v ozadju</string>
+	<string name="background_service_provider_descr">Izberite ponudnika določevanja mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju in omogoča spremljanje položaja, ko je zaslon izklopljen</string>
 	<string name="background_router_service">Izvajaj v ozadju</string>
