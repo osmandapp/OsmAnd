@@ -39,7 +39,7 @@
 	<string name="poi_alcohol">Trgovina z alkoholom</string>
 	<string name="poi_convenience">Trgovina z mešanim blagom</string>
 	<string name="poi_beverages">Trgovina s pijačami</string>
-	<string name="poi_farm">Farma</string>
+	<string name="poi_farm">Prodajalna na kmetiji</string>
 	<string name="poi_seafood">Trgovine z morskimi živili</string>
 	<string name="poi_confectionery">Slaščičarna</string>
 	<string name="poi_ice_cream">Sladolednica</string>
@@ -96,7 +96,7 @@
 	<string name="poi_rest_area">Počivališče</string>
 
 	<string name="poi_water_well">Vodni vir</string>
-	<string name="poi_dam">Jez</string>
+	<string name="poi_dam">Pregradni jez</string>
 	<string name="poi_watermill">Mlin na vodo</string>
 
 	<string name="poi_post_office">Pošta</string>
@@ -126,11 +126,11 @@
 	<string name="poi_clinic">Klinika</string>
 	<string name="poi_first_aid">Prva pomoč</string>
 	<string name="poi_dentist">Zobar</string>
-	<string name="poi_nursing_home"/>
+	<string name="poi_nursing_home">Dom za bolniško nego</string>
 	<string name="poi_veterinary">Veterinarska postaja</string>
 	<string name="poi_physiotherapist">Fizioterapevt</string>
 	<string name="poi_psychotherapist">Psihoterapevt</string>
-	<string name="poi_lawyer">Odvetniška pisarna</string>
+	<string name="poi_lawyer">Odvetnik</string>
 	<string name="poi_educational_institution">Izobraževalna ustanova</string>
 	<string name="poi_sports_centre">Športno središče</string>
 	<string name="poi_golf_course">Golfišče</string>
@@ -264,4 +264,80 @@
 	<string name="poi_toys">Trgovina z igračami</string>
 	<string name="poi_electronics">Elektronika</string>
 	<string name="poi_cosmetics">Kozmetična trgovina</string>
+	<string name="poi_wastewater_plant">Čistilna naprava</string>
+	<string name="poi_water_tower">Vodni stolp</string>
+	<string name="poi_lock_gate">Zapornice</string>
+	<string name="poi_weir">Jez</string>
+	<string name="poi_power_transformer">Transformator</string>
+	<string name="poi_power_substation">Elektronapajalna postaja</string>
+	<string name="poi_communication_tower">Komunikacijski stolp</string>
+	<string name="poi_observation_tower">Opazovalni stolp</string>
+	<string name="poi_bell_tower">Zvonik</string>
+	<string name="poi_telephone_exchange">Telefonska centrala</string>
+
+	<string name="poi_landfill">Odlagališče</string>
+	<string name="poi_waste_disposal">Deponija</string>
+	<string name="poi_waste_basket">Koš za odpadke</string>
+
+	<string name="poi_industrial">Industrijsko območje</string>
+	<string name="poi_quarry">Kamnolom</string>
+	<string name="poi_orchard">Sadovnjak</string>
+	<string name="poi_forest">Upravljani gozd</string>
+	<string name="poi_farmyard">Kmetija</string>
+	<string name="poi_meadow">Pašnik</string>
+	<string name="poi_landuse_railway">Območje železnice</string>
+
+	<string name="poi_canal">Kanal</string>
+	<string name="poi_pier">Pomol</string>
+	<string name="poi_mineshaft">Rudniški jašek</string>
+	<string name="poi_training">Izobraževalna ustanova</string>
+	<string name="poi_university">Univerza</string>
+
+	<string name="poi_social_facility">Socialna ustanova</string>
+	<string name="poi_register_office">Matični urad</string>
+	<string name="poi_embassy">Ambasada</string>
+	<string name="poi_government">Vladna ustanova</string>
+	<string name="poi_bailiff">Sodni izvršitelj</string>
+	<string name="poi_prosecutor">Tožilec</string>
+	<string name="poi_pension_fund">Pokojninski sklad</string>
+	<string name="poi_tax_inspection">Davčni inšpekcijski organi</string>
+	<string name="poi_office_administrative">Upravni urad</string>
+	<string name="poi_customs">Carina</string>
+	<string name="poi_hamlet">Zaselek</string>
+	<string name="poi_isolated_dwelling">Izolirano bivališče</string>
+	<string name="poi_locality">Okraj</string>
+	<string name="poi_place_allotments">Vrtički</string>
+	<string name="poi_place_farm">Farma</string>
+	<string name="poi_residential">Stanovanjsko območje</string>
+
+	<string name="poi_sanatorium">Zdravilišče</string>
+	<string name="poi_healthcare_alternative">Alternativna medicina</string>
+	<string name="poi_audiologist">Avdiolog</string>
+	<string name="poi_blood_bank">Krvna banka</string>
+	<string name="poi_healthcare_centre">Zdravstvena ustanova</string>
+	<string name="poi_midwife">Babica</string>
+	<string name="poi_occupational_therapist">Poklicni terapevt</string>
+	<string name="poi_optometrist">Optik</string>
+	<string name="poi_podiatrist">Podiater</string>
+	<string name="poi_healthcare_rehabilitation">Rehabilitacijski center</string>
+	<string name="poi_speech_therapist">Govorni terapevt</string>
+	<string name="poi_healthcare_yes">Zdravstvena ustanova</string>
+
+	<string name="poi_insurance">Zavarovalnica</string>
+	<string name="poi_estate_agent">Nepremičninski zastopnik</string>
+	<string name="poi_ngo">NVO</string>
+	<string name="poi_townhall">Mestna hiša</string>
+	<string name="poi_employment_agency">Zavod za zaposlovanje</string>
+	<string name="poi_research">Raziskovalna ustanova</string>
+	<string name="poi_newspaper">Časopisna hiša</string>
+	<string name="poi_advertising_agency">Oglaševalska agencija</string>
+	<string name="poi_studio">Studio</string>
+	<string name="poi_bookmaker">Stavnica</string>
+
+	<string name="poi_stadium">Stadion</string>
+	<string name="poi_ice_rink">Drsališče</string>
+	<string name="poi_leisure_track">Športna steza</string>
+	<string name="poi_archery">Lokostrelstvo</string>
+	<string name="poi_athletics">Atletika</string>
+	<string name="poi_basketball">Košarka</string>
 	</resources>
