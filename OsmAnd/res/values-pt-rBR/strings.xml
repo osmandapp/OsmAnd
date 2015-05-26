@@ -1695,4 +1695,12 @@
 	<string name="tip_recent_changes_0_6_7_t">"Alterações recentes na v0.6.7:\n\t- Gerenciador de dados off-line (transferência, excluir, ativar/desativar dados offline diretamente no OsmAnd)\n\t- Pontos favoritos e grupos (categorizar, apagar, gerenciar favoritos)\n\t- Explorador de GPX no aplicativo (ver detalhe de trajeto, distância, velocidade média, altitude, etc.)
 \n\t- Navegação de GPX (mais opções, continuar navegação após falha, suporte a rotatórias)\n\t- Função para salvar a rota como trajeto GPX para uso off-line\n\t- Melhorado o monitoramento de GPX (filtrar alguma imprecisão na posição e salvar a precisão/elevação/velocidade)\n\t- Enviar GPX para comunidade OSM (http://download.osmand.net/gpx/)\n\t- Melhoria na renderização de vetor\n\t- Melhoria no mecanismo TTS (anunciar a distância exata, permite milhas)\n\t- Correções de erros "</string>
 	<string name="tip_recent_changes_0_6_6_t">"Alterações recentes na v0.6.6:\n\t- Mecanismo de Texto para Fata (em inglês, Text To Speech) para navegação de voz\n\t- Renderizador faz o mapa mais detalhado\n\t- Mapa base para todo o mundo empacotado com app\n\t- Ajustada a navegação off-line (ainda experimental)\n\t- Opções de navegação GPX\n\t- Atualização da interface de usuário e correção de diversos erros "</string>
-	</resources>
+	<string name="osmo_share_my_location">Compartilhar a minha posição</string>
+    <string name="shared_string_logoff">Desconectar</string>
+    <string name="routing_attr_avoid_borders_name">Evitar atravessar fronteiras</string>
+	<string name="routing_attr_avoid_borders_description">Evitar atravessar fronteiras com outro país</string>
+	<string name="routing_attr_height_name">Limite de altura</string>
+	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>
+    <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
+	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
+</resources>
