@@ -2168,4 +2168,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="use_fast_recalculation_desc">Prepočítať iba začiatočný úsek trasy pri dlhých výletoch</string>
 <string name="osmo_share_my_location">Zdieľať moju polohu</string>
     <string name="shared_string_logoff">Odhlásiť</string>
+    <string name="rendering_value_disabled_name">Vypnuté</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa rozsahu trasy</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa OSMC</string>
     </resources>
