@@ -2056,4 +2056,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
 <string name="osmo_share_my_location">Condividi la posizione</string>
     <string name="shared_string_logoff">Esci</string>
+    <string name="rendering_value_disabled_name">Disabilitato</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in accordo a OSMC</string>
     </resources>
