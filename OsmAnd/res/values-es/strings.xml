@@ -2060,4 +2060,9 @@
 	<string name="routing_attr_height_description">Especifique la altura del vehículo que se permite en las rutas</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta para viajes largos</string>
-</resources>
+<string name="rendering_value_disabled_name">Desactivado</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloreado según ámbito de la ruta</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Coloreado según OSMC</string>
+    <string name="osmo_share_my_location">Compartir mi ubicación</string>
+    <string name="shared_string_logoff">Cerrar sesión</string>
+    </resources>
