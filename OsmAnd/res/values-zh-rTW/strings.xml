@@ -1991,4 +1991,7 @@
 	<string name="use_fast_recalculation_desc">只有在長途航行路線的初始部分重新計算</string>
 <string name="osmo_share_my_location">分享我的位置</string>
     <string name="shared_string_logoff">登出</string>
+    <string name="rendering_value_disabled_name">已停用</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">依照路線的有效範圍著色</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">依照 OSMC 來著色</string>
     </resources>
