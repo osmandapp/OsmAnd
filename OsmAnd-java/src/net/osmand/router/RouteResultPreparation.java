@@ -638,12 +638,14 @@ public class RouteResultPreparation {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TL);
 					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					lanesArray[ind] |= 1;
 				}
 			} else {
 				if (!TurnType.isRightTurn(tt)) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TR);
 					TurnType.setSecondaryTurn(lanesArray, ind, tt);
+					lanesArray[ind] |= 1;
 				}
 			}
 			setAllowedLanes(tt, lanesArray);
