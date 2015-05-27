@@ -126,7 +126,7 @@
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach (Zarządzanie plikami map) lub przełączyć się na mapy online (włącz plugin map online).</string>
   <string name="switch_to_vector_map_to_see">Dla bieżącej lokalizacji dostępna jest wektorowa mapa offline.
-\n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Konfiguruj mapę” → „Źródło mapy…” → „Wektorowe mapy offline”.</string>
+\n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
   
   <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
   <string name="choose_audio_stream_descr">Określa kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
@@ -147,7 +147,7 @@
   <string name="map_overlay">Nakładka</string>
   <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
   <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>
-  <string name="select_tile_source_to_install">Zaznacz mapy (kafelkowe) do zainstalowania lub zaktualizowania</string>
+  <string name="select_tile_source_to_install">Proszę wybrać mapy (kafelkowe) do zainstalowania lub uaktualnienia</string>
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja map offline</string>
@@ -159,8 +159,8 @@
 		\n\t* Wpisy koloru niebieskiego oznaczają dostępne aktualizacje
 		\n\t* Wpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu
 	</string>
-  <string name="level_to_switch_vector_raster_descr">Minimalne zbliżenie dla map wektorowych</string>
-  <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
+  <string name="level_to_switch_vector_raster_descr">Określa najmniejszy poziom zbliżenia dla map wektorowych</string>
+  <string name="level_to_switch_vector_raster">Minimalne zbliżenie mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   
   <string name="tip_location_sharing">Udostępnij Pozycję</string>
@@ -169,9 +169,9 @@
 	</string>
   <string name="tip_favorites">Ulubione punkty</string>
   <string name="tip_favorites_t">"Często używane punkty mogą zostać zapisane jako Ulubione.
-\n\nAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę.
-\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Moje miejsca\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
-\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Konfiguruj mapę\'. "</string>
+\n\nAby zapisać punkt jako ulubiony proszę wyświetlić menu kontekstowe, wybrać „Opcje punktu” -&gt; „Dodaj do ulubionych” i wprowadzić jego nazwę.
+\n\nPo zapisaniu, punkt będzie można odnaleźć w głównym menu -&gt; „Moje miejsca”. Dłuższe naciśnięcie pozycji w „Ulubionych” wyświetli polecenia dotyczące tego punktu.
+\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, należy włączyć warstwę „Ulubione” w „Menu” → „Konfiguruj mapę”. "</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
@@ -571,15 +571,15 @@
   <string name="map_view_3d">Widok 3D mapy</string>
   <string name="show_poi_over_map_description">Pokaż POI na mapie (użyj ostatnio wybranego filtru)</string>
   <string name="show_poi_over_map">Pokaż POI</string>
-  <string name="map_tile_source_descr">Wybierz źródło kafelków mapy (online lub offline)</string>
-  <string name="map_tile_source">Źródło kafelków mapy</string>
+  <string name="map_tile_source_descr">Proszę wybrać zasób map kafelkowych online lub offline</string>
+  <string name="map_tile_source">Zasób mapy kafelkowej</string>
   <string name="map_source">Zasób mapy</string>
-  <string name="use_internet">Korzystaj z Internetu</string>
+  <string name="use_internet">Używanie połączenia internetowego</string>
   <string name="show_location">Pokaż lokalizację</string>
   
   
   <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
-  <string name="use_internet_to_download_tile">Użyj połączenia internetowego do pobrania brakujących kawałków map</string>
+  <string name="use_internet_to_download_tile">Pobiera brakujące kafelki map za pośrednictwem połączenia internetowego</string>
   <string name="app_description">Program do nawigacji satelitarnej</string>
   <string name="shared_string_exit">Zakończ</string>
   
@@ -933,7 +933,7 @@
 \n\t* Naprawione arabskie, kanadyjskie skrypty oraz języki RTL 
 	</string>
   <string name="map_widget_top_text">Ulica</string>
-  <string name="map_widget_config">Konfiguruj ekran</string>
+  <string name="map_widget_config">Skonfiguruj ekran</string>
   
   <string name="map_widget_back_to_loc">Gdzie jestem?</string>
   <string name="map_widget_lock_screen">Zablokuj ekran</string>
@@ -963,13 +963,13 @@
   <string name="day_night_info_description">Wschód: %1$s
 \nZachód: %2$s</string>
   <string name="map_widget_renderer">Styl mapy</string>
-  <string name="layer_map_appearance">Konfiguruj ekran</string>
+  <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
   <string name="avoid_in_routing_title">Unikanie</string>
   <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
-  <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
-  <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
+  <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
+  <string name="show_warnings_descr">Pokazuje ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
   
   <string name="tip_rotation_switching_t_v2">Możesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
 		\n\nMasz do wyboru:
@@ -1043,9 +1043,9 @@
 \n\t \'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
 \n\t \'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
 \n\t \'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz) "</string>	
-	<string name="tip_map_switch_t_v2">"Źródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Konfiguruj mapę\'.
-\n\nWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC.
-\n\nOsmAnd wspiera również własne źródła map. "</string>
+	<string name="tip_map_switch_t_v2">"Zasób mapy oraz wyświetlane warstwy można zmienić w „Menu” -&gt; „Konfiguruj mapę”.
+\n\nPolecenie „Zasoby mapy…” pozwala wyświetlić pobrane wcześniej mapy wektorowe (domyślnie, wymagane do nawigacji offline), zdefiniowane wcześniej (online lub w pamięci podręcznej) mapy kafelkowe (proszę włączyć wtyczkę „Mapy online”) lub mapy utworzone ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na komputerze osobistym.
+\n\nOsmAnd obsługuje również zasoby map zdefiniowane samemu. "</string>
 	<string name="tip_app_mode_t_v2">OsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.
 		\n\nProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy.
 	</string>
@@ -1326,7 +1326,7 @@
 	<string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
 	<string name="driving_region">Region ruchu</string>
 	<string name="driving_region_canada">Kanada</string>
-	<string name="map_widget_fps_info">Informacje debugowania FPS</string>
+	<string name="map_widget_fps_info">Informacje diagnozowania błędów FPS</string>
 	<string name="local_index_tile_data_zooms">Pobrane poziomy: %1$s</string>
     <string name="local_index_tile_data_expire">Wygaśnięcie (minuty): %1$s</string>
     <string name="local_index_tile_data_downloadable">Do pobrania: %1$s</string>
@@ -1338,11 +1338,11 @@
     <string name="about_settings_descr">Wypisuje informacje o wersji, licencje, współtwórców</string>
     
     <string name="tip_map_styles">Style mapy</string>
-	<string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
-    <string name="edit_tilesource_expiration_time">Wygasa (minuty)</string>
-    <string name="edit_tilesource_minzoom">Minimalne powiększenie</string>
-    <string name="edit_tilesource_choose_existing">Wybierz istniejący-…</string>
+	<string name="edit_tilesource_url_to_load">Adres URL</string>
+    <string name="edit_tilesource_maxzoom">Maksymalne przybliżenie</string>
+    <string name="edit_tilesource_expiration_time">Czas wygaśnięcia (minuty)</string>
+    <string name="edit_tilesource_minzoom">Minimalne przybliżenie</string>
+    <string name="edit_tilesource_choose_existing">Zdefiniowane…</string>
     <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
 	<string name="osmand_extended_description_4000_chars">
@@ -1432,7 +1432,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	\n\t* Szybsze wprowadzanie wyszukiwania adresu
 	\n\t* Poprawki do błędów nawigacji i rysowania
     </string>
-    <string name="edit_tilesource_successfully">Źródło płytek %1$s zostało zapisane z powodzeniem</string>
+    <string name="edit_tilesource_successfully">Zapisano zasób danych kafelkowych %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Eliptyczna Merkatora</string>
     <string name="route_descr_destination">Cel</string>
     <string name="osmand_plus_extended_description_4000_chars">
@@ -1895,7 +1895,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
 	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania śladów, które dostępne są poprzez widżet na ekranie mapy. Udostępnia też możliwość automatycznego zapisywania śladów nawigacji do pliku GPX.\n\nZapisane ślady mogą zostać udostępnione znajomym lub użyte do rozwoju projektu OSM. Sportowcy mogą korzystać ze ścieżek do monitorowania treningów. Podstawowa analiza śladów może zostać wykonana bezpośrednio w OsmAnd (czasy okrążeń, średnia prędkość, itp.). "</string>
-    <string name="confirm_every_run">Zawsze pytaj</string>
+    <string name="confirm_every_run">Ponawianie pytania</string>
 	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
 	<string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
@@ -1908,7 +1908,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
 	<string name="text_size_descr">Ustaw rozmiar tekstu na mapie.</string>
     <string name="text_size">Rozmiar tekstu</string>
-    <string name="fav_point_dublicate">Zduplikowana nazwa ulubionego punktu</string>
+    <string name="fav_point_dublicate">Powielona nazwa ulubionego punktu</string>
     <string name="fav_point_dublicate_message">Zmieniliśmy nazwa twojego ulubionego punktu na %1$s w celu uniknięcia powielonych nazw.</string>
     
     
@@ -1960,7 +1960,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_opengl_render">Renderowanie OpenGL</string>
     <string name="use_opengl_render_descr">Używa sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
     <string name="error_avoid_specific_road">Nie znaleziono objazdu</string>
-    <string name="dash_download_msg_none">Czy chcesz pobrać mapy offline?</string>
+    <string name="dash_download_msg_none">Pobrać mapy offline?</string>
     <string name="dash_download_msg">Pobrano %1$s map</string>
     <string name="dash_download_new_one">Pobierz nową mapę</string>
     <string name="dash_download_manage">Zarządzaj</string>
