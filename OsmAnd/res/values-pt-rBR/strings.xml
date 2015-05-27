@@ -392,7 +392,7 @@
 	<string name="gpx_monitoring_start">Iniciar gravação GPX</string>
 	<string name="gpx_monitoring_stop">Parar gravação GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
-    <string name="rendering_attr_hideBuildings_name">Ocultar edifícios</string>
+    <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar estradas não-trafegáveis</string>
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques e matas</string>
@@ -807,7 +807,7 @@
     <string name="rendering_attr_osmcTraces_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_osmcTraces_description">Renderizar caminhos de acordo com traços OSMC</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Ocultar limites</string>
+	<string name="rendering_attr_noAdminboundaries_name">Limites</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>
 	<string name="tip_altitude_offset">Correção de altitude</string>
 	<string name="target_point">Ponto de parada %1$s</string>
@@ -983,7 +983,7 @@
 	<string name="route_kl">Mantenha à esquerda e siga</string>
 	<string name="route_kr">Mantenha à direita e siga</string>
 	<string name="rendering_attr_noPolygons_description">Tornar transparente todas as características de terra no mapa</string>
-	<string name="rendering_attr_noPolygons_name">Ocultar polígonos</string>
+	<string name="rendering_attr_noPolygons_name">Polígonos</string>
 	<string name="rendering_attr_appMode_name">Modo de renderização</string>
 	<string name="rendering_attr_appMode_description">Otimizar o mapa para</string>
 	<string name="rendering_attr_contourLines_description">Exibir a partir do nível de zoom (requer dados de contorno):</string>
