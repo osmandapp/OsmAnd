@@ -40,6 +40,7 @@ import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.poi.PoiLegacyFilter.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -558,22 +559,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					// Build text(amenity)
-
-					// Find and format links
-					SpannableString spannable = new SpannableString(d);
-					Linkify.addLinks(spannable, Linkify.ALL);
-
-					// Create dialog
-					Builder bs = new AlertDialog.Builder(view.getContext());
-					bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, 
-							app.getSettings().MAP_PREFERRED_LOCALE.get()));
-					bs.setMessage(spannable);
-					AlertDialog dialog = bs.show();
-
-					// Make links clickable
-					TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-					textView.setMovementMethod(LinkMovementMethod.getInstance());
-					textView.setLinksClickable(true);
+					POIMapLayer.showDescriptionDialog(SearchPOIActivity.this, app, amenity);	
 					return true;
 				}
 			});

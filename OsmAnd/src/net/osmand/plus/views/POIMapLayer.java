@@ -47,6 +47,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +59,7 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -303,7 +307,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					} else if (itemId == R.string.poi_context_menu_showdescription) {
-						showDescriptionDialog(a);
+						showDescriptionDialog(view.getContext(), app, a);
 					}
 					return true;
 				}
@@ -324,17 +328,25 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 	}
 
-	private void showDescriptionDialog(Amenity a) {
-		String lang = view.getSettings().MAP_PREFERRED_LOCALE.get();
+	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
+		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			showWiki(view.getContext(), a.getName(lang), 
+			showWiki(ctx, app, a.getName(lang), 
 					a.getDescription(lang));
 		} else {
-			Builder bs = new AlertDialog.Builder(view.getContext());
+			String d = OsmAndFormatter.getAmenityDescriptionContent(app, a, false);
+			SpannableString spannable = new SpannableString(d);
+			Linkify.addLinks(spannable, Linkify.ALL);
+			
+			Builder bs = new AlertDialog.Builder(ctx);
 			bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(a, lang));
-			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false));
+			bs.setMessage(spannable);
 			bs.setPositiveButton(R.string.shared_string_ok, null);
-			bs.show();
+			AlertDialog dialog = bs.show();
+			// Make links clickable
+			TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			textView.setLinksClickable(true);
 		}
 	}
 
@@ -346,7 +358,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return typedvalueattr.resourceId;
 	}
 	
-	private void showWiki(Context ctx, String name, String content ) {
+	private static void showWiki(Context ctx, OsmandApplication app, String name, String content ) {
 		final Dialog dialog = new Dialog(ctx, 
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme:
