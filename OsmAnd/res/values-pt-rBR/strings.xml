@@ -1703,4 +1703,7 @@
 	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
 	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
-</resources>
+<string name="rendering_value_disabled_name">Desativado</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o alcance de rota</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com OSMC</string>
+    </resources>
