@@ -14,7 +14,7 @@
 <string name="map_widget_distance">Destination</string>
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa sväng</string>
-<string name="show_warnings_title">Visa larm …</string>
+<string name="show_warnings_title">Visa varningar …</string>
 <string name="show_warnings_descr">Konfigurera trafikvarningar (hastighetsbegränsningar, stopp, vägbulor), varning för fartkameror samt körfältsinformation</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
@@ -1883,4 +1883,5 @@
 	<string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
     <string name="osmo_share_my_location">Dela ut min plats</string>
     <string name="shared_string_logoff">Logga ut</string>
+    <string name="rendering_value_disabled_name">Inaktiverad</string>
     </resources>
