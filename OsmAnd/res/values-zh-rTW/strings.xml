@@ -236,7 +236,7 @@
 	<string name="accessibility_mode_descr">開啟無障礙功能</string>
 	<string name="shared_string_on">開啟</string>
 	<string name="shared_string_off">關閉</string>
-	<string name="accessibility_default">配合全系統設定</string>
+	<string name="accessibility_default">配合整體的系統設定</string>
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">放大</string>
@@ -1686,8 +1686,8 @@
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
     <string name="rendering_attr_osmcTraces_name">徒步符號層</string>
-    <string name="rendering_attr_alpineHiking_description">按照 SAC 比例繪製路徑</string>
-    <string name="rendering_attr_osmcTraces_description">按照 OSMC 軌跡繪製路徑</string>
+    <string name="rendering_attr_alpineHiking_description">依據 SAC 比例繪製路徑</string>
+    <string name="rendering_attr_osmcTraces_description">依據 OSMC 軌跡繪製路徑</string>
     
 	<string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
@@ -1992,6 +1992,6 @@
 <string name="osmo_share_my_location">分享我的位置</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">依照路線的有效範圍著色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">依照 OSMC 來著色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
     </resources>
