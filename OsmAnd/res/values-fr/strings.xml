@@ -2039,4 +2039,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="osmo_share_my_location">Partager ma position</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
     </resources>
