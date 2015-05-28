@@ -1966,4 +1966,7 @@
 	<string name="use_fast_recalculation">Recàlculu intelligente de s’àndala</string>
 	<string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
 <string name="routing_attr_avoid_borders_name">Non rugres sas fronteras</string>
-	</resources>
+	<string name="rendering_value_disabled_name">Disabilitadu</string>
+    <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
+    <string name="shared_string_logoff">Essi</string>
+    </resources>
