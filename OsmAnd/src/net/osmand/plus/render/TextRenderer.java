@@ -342,7 +342,7 @@ public class TextRenderer {
 							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
 							if (tagName2.equals(tagNameN2)) {
 								if (nname != null && nname.trim().length() > 0) {
-									text.text += " " + nname;
+									text.text += " (" + nname +")";
 								}
 								return false;
 							}
