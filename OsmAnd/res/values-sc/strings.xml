@@ -1969,4 +1969,6 @@
 	<string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
     <string name="shared_string_logoff">Essi</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
     </resources>
