@@ -284,7 +284,7 @@ public class OsmandRegions {
 				while(it.hasNext()) {
 					it.advance();
 					TagValuePair tp = mi.decodeType(it.key());
-					if(tp.tag.startsWith("name")) {
+					if(tp.tag.startsWith("name") || tp.tag.equals("key_name")) {
 						final String vl = it.value().toLowerCase();
 //						if (!CollatorStringMatcher.ccontains(clt, ind.toString(), vl)) {
 						if(ind.indexOf(vl) == -1) {
