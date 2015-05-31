@@ -77,7 +77,6 @@ public class RouteInfoWidgetsFactory {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 						if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
 							turnType = r.directionInfo.getTurnType();
-							setExitOut(turnType.getExitOut());
 							nextTurnDistance = r.distanceTo;
 							turnImminent = r.imminent;
 						}
