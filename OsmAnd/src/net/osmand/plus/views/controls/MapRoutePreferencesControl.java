@@ -480,6 +480,7 @@ public class MapRoutePreferencesControl {
 			
 			@Override
 			public void onClick(View v) {
+				hideDialog();
 				mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity);
 			}
 		});		
