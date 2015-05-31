@@ -324,9 +324,9 @@
   <string name="send_location_email_pattern">Para ver la ubicación sigue el enlace del navegador %1$s o el enlace interno de android %2$s</string>
   <string name="send_location">Enviar ubicación</string>
   <string name="context_menu_item_share_location">Compartir ubicación</string>
-  <string name="add_waypoint_dialog_added">El punto de interés GPX «{0}» fue añadido correctamente</string>
-  <string name="add_waypoint_dialog_title">Añadir punto de interés a la traza GPX grabada</string>
-  <string name="context_menu_item_add_waypoint">Añadir punto de interés GPX</string>
+  <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» fue añadido correctamente</string>
+  <string name="add_waypoint_dialog_title">Añade punto de ruta a la traza GPX grabada</string>
+  <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
   <string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barrera</string>
   <string name="amenity_type_education">Educación</string>
@@ -1030,7 +1030,7 @@
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
 <string name="avoid_motorway">Evitar autopistas</string>
 <string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3:
-\n\t* Puntos de interés\n\t* Mejoras en indicaciones de ruta
+\n\t* Puntos de ruta\n\t* Mejoras en indicaciones de ruta
 \n\t* Añadida un ajuste para evitar autopistas cuando se construye una ruta
 \n\t* Añadido un tipo más de carretera para bicicletas al mapa (Cycleway=track)
 \n\t* Corrección de errores "</string>
@@ -1038,18 +1038,18 @@
 <string name="snap_to_road">Ajustar a carreteras</string>
 <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos arreglados\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "
     </string>
-    <string name="context_menu_item_first_intermediate_point">Añadir como primer punto de interés</string>
-    <string name="context_menu_item_last_intermediate_point">Añadir como último punto de interés</string>
-    <string name="add_as_last_destination_point">Añadir como último punto de interés</string>
-    <string name="add_as_first_destination_point">Añadir como primer punto de interés</string>
+    <string name="context_menu_item_first_intermediate_point">Añadir como primer punto de ruta</string>
+    <string name="context_menu_item_last_intermediate_point">Añadir como último punto de ruta</string>
+    <string name="add_as_last_destination_point">Añadir como último punto de ruta</string>
+    <string name="add_as_first_destination_point">Añadir como primer punto de ruta</string>
     <string name="replace_destination_point">Sustituir punto de destino</string>
     <string name="new_destination_point_dialog">Ya ha fijado el punto de destino.</string>
-    <string name="target_point">Punto de interés %1$s</string>
-    <string name="target_points">Puntos de interés</string>
-    <string name="intermediate_point_too_far">Punto de interés %1$s demasiado lejos de la carretera más cercana.</string>
-    <string name="arrived_at_intermediate_point">Llegó a su punto de interés</string>
-    <string name="context_menu_item_intermediate_point">Añadir como punto de interés</string>
-    <string name="map_widget_intermediate_distance">Punto de interés</string>
+    <string name="target_point">Punto de ruta %1$s</string>
+    <string name="target_points">Puntos de ruta</string>
+    <string name="intermediate_point_too_far">Punto de ruta %1$s demasiado lejos de la carretera más cercana.</string>
+    <string name="arrived_at_intermediate_point">Has llegado a tu punto de ruta</string>
+    <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
+    <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
@@ -1062,8 +1062,8 @@
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
 	<string name="no_route">Sin ruta</string>
-	<string name="delete_target_point">Quitar punto de interés</string>
-	<string name="intermediate_point">Punto de interés %1$s</string>
+	<string name="delete_target_point">Quitar punto de ruta</string>
+	<string name="intermediate_point">Punto de ruta %1$s</string>
     <string name="gps_not_available">Habilite el GPS en los ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Habilita el complemento de seguimiento para que use el servicio de registro de posición (grabando GPX, seguimiento en línea)</string>
@@ -1161,7 +1161,7 @@
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de interés)?</string>
+    <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
@@ -1284,9 +1284,9 @@
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Seleccione primero la ciudad o calle</string>
-    <string name="tip_recent_changes_1_4_t">"Cambios en 1.4:\n\t* Ordena los puntos de interés de forma óptima para visitar todos (recorrido del viajante, puerta a puerta)\n\t* Busca la calle por nombre (en el barrio)\n\t* Complemento de modo de planificación (carga/edita/guarda pistas GPX)\n\t* Nueva pantalla de descarga (descargar en segundo plano)\n\t* Soporta subcarpetas GPX (organiza tus trazas GPX)\n\t* Borrar archivos SRTM\n\t* Soporta Notas OSM "</string>
+    <string name="tip_recent_changes_1_4_t">"Cambios en 1.4:\n\t* Ordena los puntos de ruta de forma óptima para visitar todos (recorrido del viajante, puerta a puerta)\n\t* Busca la calle por nombre (en el barrio)\n\t* Complemento de modo de planificación (carga/edita/guarda pistas GPX)\n\t* Nueva pantalla de descarga (descargar en segundo plano)\n\t* Soporta subcarpetas GPX (organiza tus trazas GPX)\n\t* Borrar archivos SRTM\n\t* Soporta Notas OSM "</string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en las ciudades vecinas</string>
-    <string name="intermediate_items_sort_return">Puntos de interés intermedios reordenados para optimizar su recorrido en la vía desde la ubicación actual hasta el destino.</string>
+    <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en la ruta desde la ubicación actual hasta el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
@@ -1332,7 +1332,7 @@
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
 	    
     
-    <string name="announce_gpx_waypoints">Anunciar los puntos de interés GPX</string>
+    <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad</string>
 	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
@@ -1341,7 +1341,7 @@
 \n\t* Más posibilidades de mensajes de voz (anuncio de nombres de calles)
 \n\t* Iconos de mapa de alta densidad
 \n\t* Multitud de cambios en la IU
-\n\t* Arreglo de fallos en visualización de la distancia, analizador de GPX, manejo de puntos de interés, control de planificación, subida a OSM, manejo de https "</string>
+\n\t* Arreglo de fallos en visualización de la distancia, analizador de GPX, manejo de puntos de ruta, control de planificación, subida a OSM, manejo de https "</string>
     <string name="osb_author_or_password_not_specified">Especifique el usuario OSM y contraseña en Ajustes</string>
     <string name="clear_intermediate_points">Borrar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
@@ -1451,7 +1451,7 @@
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
 \n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
 	<string name="map_magnifier">Ampliar el mapa</string>
-    <string name="route_is_too_long">El cálculo de navegación fuera de línea de OSMAnd puede tomar mucho tiempo (o a veces no funcionar) para puntos separados a más de 200km. Tal vez quiere añadir puntos de interés intermedios para un mejor rendimiento.</string>
+    <string name="route_is_too_long">El cálculo de la ruta de OsmAnd sin conexión puede tardar mucho tiempo (o a veces no funcionar) para puntos separados a más de 200km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
 	<string name="auto_zoom_none">Sin acercamiento automático</string>
 	<string name="shared_string_remember_my_choice">Recordar mi elección</string>
     
@@ -1707,7 +1707,7 @@
     <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Intérvalo de división</string>
     <string name="gpx_info_subtracks">Subpista: %1$s </string>
-	<string name="gpx_info_waypoints">"Puntos de interés: %1$s "</string>
+	<string name="gpx_info_waypoints">"Puntos de ruta: %1$s "</string>
 	<string name="gpx_info_distance">Distancia: %1$s (%2$s puntos) </string>
 	<string name="gpx_info_start_time">Tiempo de inicio: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Tiempo de finalización: %1$tF,  %1$tT </string>
@@ -1717,8 +1717,8 @@
 	<string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
 	<string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de interés</string>
-    <string name="select_destination_and_intermediate_points">Seleccionar puntos de interés</string>
+    <string name="gpx_wpt">Punto de ruta</string>
+    <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
     <string name="layer_amenity_label">Etiquetas de los puntos</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de acercamiento durante la navegación</string>
@@ -1807,7 +1807,7 @@
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
     
-    <string name="waypoints">Puntos de interés</string>
+    <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Anunciar favoritos cercanos</string>
@@ -1860,7 +1860,7 @@
     <string name="shared_string_show">Mostrar</string>
 	<string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">En las proximidades de</string>
-    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar carreteras como intransitable por sesión * Más fácil la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de estar fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Corregidas las incompatibilidades de versión de OsMo "</string>
+    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar carreteras como intransitable por sesión * Más fácil la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de estar fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Corregidas las incompatibilidades de versión de OsMo "</string>
     <string name="rendering_category_routes">Rutas</string>
     
     <string name="impassable_road">Evitar carreteras…</string>
