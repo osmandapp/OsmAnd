@@ -258,21 +258,7 @@ public class MapRenderRepositories {
 		long now = System.currentTimeMillis();
 
 		// check that everything is initialized
-		for (String mapName : files.keySet()) {
-			BinaryMapIndexReader fr = files.get(mapName);
-			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) || 
-					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
-				if (!nativeFiles.contains(mapName)) {
-					long time = System.currentTimeMillis();
-					nativeFiles.add(mapName);
-					if (!library.initMapFile(mapName)) {
-						continue;
-					}
-					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-			}
-		}
-		
+		checkInitialized(zoom, library, leftX, rightX, bottomY, topY);
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
 				checkForDuplicateObjectIds, this, "");
 		if (checkWhetherInterrupted()) {
@@ -289,6 +275,27 @@ public class MapRenderRepositories {
 				dataBox.bottom, dataBox.top, dataBox.left, dataBox.right, zoom));
 		log.info(String.format("Native search: %s ms ", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		return true;
+	}
+
+	public void checkInitialized(final int zoom, NativeOsmandLibrary library, int leftX, int rightX, int bottomY,
+			int topY) {
+		if(library == null) {
+			return;
+		}
+		for (String mapName : files.keySet()) {
+			BinaryMapIndexReader fr = files.get(mapName);
+			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) || 
+					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
+				if (!nativeFiles.contains(mapName)) {
+					long time = System.currentTimeMillis();
+					nativeFiles.add(mapName);
+					if (!library.initMapFile(mapName)) {
+						continue;
+					}
+					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+		}
 	}
 	
 	private void readRouteDataAsMapObjects(SearchRequest<BinaryMapDataObject> sr, BinaryMapIndexReader c, 
