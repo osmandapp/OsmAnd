@@ -657,6 +657,27 @@ public class RouteProvider {
 		}
 		// BUILD context
 		NativeOsmandLibrary lib = settings.SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary();
+		// check loaded files
+		int leftX = MapUtils.get31TileNumberX(params.start.getLongitude());
+		int rightX = leftX;
+		int bottomY = MapUtils.get31TileNumberY(params.start.getLatitude());
+		int topY = bottomY;
+		if (params.intermediates != null) {
+			for (LatLon l : params.intermediates) {
+				leftX = Math.min(MapUtils.get31TileNumberX(l.getLongitude()), leftX);
+				rightX = Math.max(MapUtils.get31TileNumberX(l.getLongitude()), rightX);
+				bottomY = Math.max(MapUtils.get31TileNumberY(l.getLatitude()), bottomY);
+				topY = Math.min(MapUtils.get31TileNumberY(l.getLatitude()), topY);
+			}
+		}
+		LatLon l = params.end;
+		leftX = Math.min(MapUtils.get31TileNumberX(l.getLongitude()), leftX);
+		rightX = Math.max(MapUtils.get31TileNumberX(l.getLongitude()), rightX);
+		bottomY = Math.max(MapUtils.get31TileNumberY(l.getLatitude()), bottomY);
+		topY = Math.min(MapUtils.get31TileNumberY(l.getLatitude()), topY);
+		
+		params.ctx.getResourceManager().getRenderer().checkInitialized(15, lib, leftX, rightX, bottomY, topY);
+		
 		RoutingContext ctx = router.buildRoutingContext(cf,
 				lib, files, 
 				RouteCalculationMode.NORMAL);
