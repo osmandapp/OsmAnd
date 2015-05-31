@@ -133,6 +133,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private MediaRecorder mediaRec;
 	private File lastTakingPhoto;
 
+	private final static char SPLIT_DESC = ' '; 
 	public static class Recording {
 		public Recording(File f) {
 			this.file = f;
@@ -174,18 +175,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public File getFile() {
 			return file;
 		}
+		
 
 		public boolean setName(String name) {
-			File directory = file.getParentFile();			
+			File directory = file.getParentFile();
 			String fileName = getFileName();
-			final String hashAndExtension;
-			int hashInd = fileName.lastIndexOf('_');
-			if (hashInd == -1 || hashInd < 8) {
-				hashAndExtension = "_" + fileName;
-			} else {
-				hashAndExtension = fileName.substring(hashInd, fileName.length());
-			}
-			File to = new File(directory, name+hashAndExtension);
+			File to = new File(directory, name + SPLIT_DESC + getOtherName(fileName));
 			if (file.renameTo(to)) {
 				file = to;
 				return true;
@@ -196,13 +191,35 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getFileName() {
 			return file.getName();
 		}
+		
+		public String getDescriptionName(String fileName) {
+			int hashInd = fileName.lastIndexOf(SPLIT_DESC);
+			//backward compatibility
+			if( fileName.indexOf('.') - fileName.indexOf('_') > 12 && 
+					hashInd < fileName.indexOf('_')) {
+				hashInd = fileName.indexOf('_');
+			}
+			if(hashInd == -1) {
+				return null;
+			} else {
+				return fileName.substring(0, hashInd);
+			}
+		}
+		
+		public String getOtherName(String fileName) {
+			String descriptionName = getDescriptionName(fileName);
+			if(descriptionName != null) {
+				return fileName.substring(descriptionName.length() + 1); // SPLIT_DESC
+			} else {
+				return fileName;
+			}
+		}
 
 		public String getName(Context ctx) {
 			String fileName = file.getName();
-
-			int hashInd = fileName.lastIndexOf('_');
-			if (hashInd != -1 && hashInd < 8) {
-				return fileName.substring(0, hashInd);
+			String desc = getDescriptionName(fileName);
+			if (desc != null) {
+				return desc;
 			} else if (this.isAudio()) {
 				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
@@ -605,7 +622,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		f.mkdirs();
 		File fl;
 		do {
-			fl = new File(f, basename + "-" + (k++) + "." + ext);
+			fl = new File(f, basename + "." + (k++) + "." + ext);
 		} while (fl.exists());
 		return fl;
 	}
@@ -990,17 +1007,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return false;
 		}
 		Recording r = new Recording(f);
-		String encodeName = f.getName();
-		int i = encodeName.lastIndexOf('_');
-		if (i >= 8) {
-			encodeName = encodeName.substring(i + 1);
-		}
-		i = encodeName.indexOf('.');
+		String fileName = f.getName();
+		String otherName = r.getOtherName(fileName);
+		int i = otherName.indexOf('.');
 		if (i > 0) {
-			encodeName = encodeName.substring(0, i);
+			otherName = otherName.substring(0, i);
 		}
 		r.file = f;
-		GeoParsedPoint geo = MapUtils.decodeShortLinkString(encodeName);
+		GeoParsedPoint geo = MapUtils.decodeShortLinkString(otherName);
 		r.lat = geo.getLatitude();
 		r.lon = geo.getLongitude();
 		Float heading = app.getLocationProvider().getHeading();
