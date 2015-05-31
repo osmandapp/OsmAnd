@@ -992,7 +992,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		Recording r = new Recording(f);
 		String encodeName = f.getName();
 		int i = encodeName.lastIndexOf('_');
-		if (i > 0 && i < 8) {
+		if (i >= 8) {
 			encodeName = encodeName.substring(i + 1);
 		}
 		i = encodeName.indexOf('.');
