@@ -1935,6 +1935,6 @@
 <string name="osmo_share_my_location">Compartir ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según el alcande de ruta</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     </resources>
