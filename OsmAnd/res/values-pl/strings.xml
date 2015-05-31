@@ -604,9 +604,9 @@
   <string name="navigate_point_top_text">Proszę wprowadzić szerokość i długość geograficzną w wybranym formacie (D - stopnie, M - minuty, S - sekundy)</string>
   <string name="navigate_point_latitude">Szerokość</string>
   <string name="navigate_point_longitude">Długość</string>
-  <string name="navigate_point_format_D">DDD.DDDDD</string>
-  <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
-  <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
+  <string name="navigate_point_format_D">DDD.DD</string>
+  <string name="navigate_point_format_DM">DDD MM.MM</string>
+  <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
   <string name="shared_string_show_on_map">Wyświetlanie na mapie</string>
   
   <string name="search_address_top_text">Wybierz adres</string>
@@ -628,39 +628,39 @@
   <string name="shared_string_no">Nie</string>
   <string name="add_favorite_dialog_top_text">Wprowadź nazwę</string>
   <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
-  <string name="add_favorite_dialog_favourite_added_template">Punkt ulubiony \"{0}\" został pomyślnie dodany.</string>
+  <string name="add_favorite_dialog_favourite_added_template">Dodano ulubiony punkt „{0}”.</string>
   <string name="favourites_context_menu_edit">Edytuj</string>
   <string name="favourites_context_menu_delete">Usuń</string>
-  <string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt \'%s\'?</string>
-  <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
-  <string name="osb_add_dialog_title">Wprowadź opis błędu</string>
-  <string name="osb_add_dialog_success">Błąd został zgłoszony</string>
-  <string name="osb_add_dialog_error">Wystąpił błąd: zgłoszenie nie zostało utworzone</string>
+  <string name="favourites_remove_dialog_msg">Usunąć ulubiony punkt „%s”?</string>
+  <string name="favourites_remove_dialog_success">Usunięto ulubiony punkt {0}.</string>
+  <string name="osb_add_dialog_title">Proszę wprowadzić opis błędu</string>
+  <string name="osb_add_dialog_success">Zgłoszono błąd</string>
+  <string name="osb_add_dialog_error">Wystąpił błąd: nie zgłoszono błędu</string>
   <string name="osb_comment_menu_item">Dodaj komentarz</string>
   <string name="osb_comment_dialog_message">Wiadomość</string>
   <string name="osb_comment_dialog_author">Nazwa autora</string>
-  <string name="osb_comment_dialog_title">Dodaj komentarz do błędu</string>
+  <string name="osb_comment_dialog_title">Dodawanie komentarza do błędu</string>
   <string name="osb_comment_dialog_add_button">Dodaj komentarz</string>
   <string name="osb_comment_dialog_success">Dodano komentarz</string>
-  <string name="osb_comment_dialog_error">Wystąpił błąd: komentarz nie został dodany</string>
-  <string name="osb_close_menu_item">Zamknij błąd</string>
-  <string name="osb_close_dialog_title">Zamykanie błędu</string>
-  <string name="osb_close_dialog_close_button">Zamknij błąd</string>
-  <string name="osb_close_dialog_success">Błąd został zamknięty</string>
-  <string name="osb_close_dialog_error">Wystąpił problem: błąd nie został zamknięty</string>
+  <string name="osb_comment_dialog_error">Wystąpił błąd: nie dodano komentarza</string>
+  <string name="osb_close_menu_item">Rozwiąż błąd</string>
+  <string name="osb_close_dialog_title">Rozwiązywanie błędu</string>
+  <string name="osb_close_dialog_close_button">Rozwiąż błąd</string>
+  <string name="osb_close_dialog_success">Rozwiązano błąd</string>
+  <string name="osb_close_dialog_error">Wystąpił problem: nie rozwiązano błędu</string>
   <string name="poi_edit_title">Edytuj POI</string>
   <string name="poi_create_title">Dodaj POI</string>
-  <string name="poi_error_poi_not_found">Nie mogę znaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
+  <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
   <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
   <string name="poi_remove_title">Usuń POI</string>
   <string name="shared_string_delete">Usuń</string>
-  <string name="poi_remove_success">POI został pomyślnie usunięty</string>
+  <string name="poi_remove_success">Usunięto POI</string>
   <string name="poi_action_add">dodaj</string>
   <string name="poi_action_change">zmień</string>
-  <string name="poi_action_succeded_template">Akcja {0} zakończona sukcesem.</string>
-  <string name="poi_error_unexpected_template">Wystąpił nieoczekiwany błąd podczas wykonywania akcji {0}.</string>
-  <string name="poi_error_io_error_template">Wystąpił błąd wejścia/wyjścia podczas wykonywania akcji {0}.</string>
-  <string name="poi_error_info_not_loaded">Informacje na temat węzła nie zostały załadowane</string>
+  <string name="poi_action_succeded_template">Zakończono czynność {0}.</string>
+  <string name="poi_error_unexpected_template">Wystąpił nieoczekiwany błąd podczas wykonywania czynności {0}.</string>
+  <string name="poi_error_io_error_template">Wystąpił błąd wejścia/wyjścia podczas wykonywania czynności {0}.</string>
+  <string name="poi_error_info_not_loaded">Nie wczytano informacji na temat węzła</string>
   <string name="poi_dialog_name">Nazwa</string>
   <string name="poi_dialog_opening_hours">Otwarte</string>
   <string name="poi_dialog_comment">Komentarz</string>
@@ -672,8 +672,8 @@
   
   <string name="edit_filter_save_as_menu_item">Zapisz jako</string>
   <string name="edit_filter_delete_dialog_title">Usunąć zaznaczony filtr?</string>
-  <string name="edit_filter_delete_message">Filtr {0} został usunięty</string>
-  <string name="edit_filter_create_message">Filtr {0} został utworzony</string>
+  <string name="edit_filter_delete_message">Usunięto filtr {0}</string>
+  <string name="edit_filter_create_message">Utworzono filtr {0}</string>
   
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
@@ -732,10 +732,10 @@
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
   <string name="accessibility_extensions">Rozszerzenia ułatwień dostępu</string>
   <string name="accessibility_mode">Tryb ułatwień dostępu</string>
-  <string name="accessibility_mode_descr">Włącz funkcje ułatwień dostępu</string>
+  <string name="accessibility_mode_descr">Przełącza funkcje ułatwień dostępu</string>
   <string name="shared_string_on">Włączone</string>
   <string name="shared_string_off">Wyłączone</string>
-  <string name="accessibility_default">Zgodnie z ustawieniami systemowymi urządzenia</string>
+  <string name="accessibility_default">Zgodnie z ustawieniami systemowymi</string>
   <string name="backToMenu">Powrót do menu</string>
   <string name="zoomOut">Oddal</string>
   <string name="zoomIn">Przybliż</string>
@@ -776,13 +776,13 @@
   <string name="auto_announce_on">Włącz automatyczne ogłaszanie</string>
   <string name="auto_announce_off">Wyłącz automatyczne ogłaszanie</string>
   <string name="scroll_map_by_gestures_descr">Przesuwaj mapę za pomocą gestów na ekranie dotykowym</string>
-  <string name="scroll_map_by_gestures">Naturalne przesuwanie mapy</string>
+  <string name="scroll_map_by_gestures">Naturalne przewijanie mapy</string>
   <string name="i_am_here">Jestem tutaj</string>
-  <string name="zoom_by_trackball_descr">Zmieniaj poziom przybliżenia mapy za pomocą trackballa</string>
-  <string name="zoom_by_trackball">Umożliwia przybliżanie mapy za pomocą trackballa</string>
-  <string name="use_short_object_names_descr">Używaj krótkich nazw obiektów w trybie eksploracji dotykowej</string>
-  <string name="use_short_object_names">Użyj krótkich nazw obiektów</string>
-  <string name="accessibility_preferences_descr">Ustawienia ułatwienia dostępu</string>
+  <string name="zoom_by_trackball_descr">Zmienia poziom przybliżenia mapy poziomymi ruchami trackballa</string>
+  <string name="zoom_by_trackball">Przybliżanie mapy za pomocą trackballa</string>
+  <string name="use_short_object_names_descr">Używa krótkich nazw obiektów w trybie eksploracji dotykowej</string>
+  <string name="use_short_object_names">Nazwy obiektów</string>
+  <string name="accessibility_preferences_descr">Ustawienia ułatwień dostępu</string>
   <string name="accessibility_preferences">Ułatwienia dostępu</string>
   <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
   <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
@@ -806,7 +806,7 @@
   <string name="live_monitoring_interval">Częstość wysyłania danych</string>
   <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
   <string name="live_monitoring_url">Adres usługi śledzenia</string>
-  <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia \'Nagrywanie trasy\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
   <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
 \n\t- Dane Wikipedii z artykułami w trybie offline
@@ -1542,7 +1542,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
     
     
-    <string name="speech_rate_descr">Określ tempo wymowy dla TTS</string>
+    <string name="speech_rate_descr">Określa tempo odtwarzania komunikatów głosowych TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
     
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
