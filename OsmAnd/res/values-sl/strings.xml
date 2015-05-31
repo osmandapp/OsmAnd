@@ -522,8 +522,8 @@
     <string name="download_regular_maps">Običajni zemljevidi</string>
     
 	
-	<string name="local_index_mi_restore">Omogoči shranjene</string>
-	<string name="local_index_mi_backup">Onemogoči dejavne</string>
+	<string name="local_index_mi_restore">Vklopi</string>
+	<string name="local_index_mi_backup">Odklopi</string>
 	
 	<string name="local_index_descr_title">Upravljalnik datotek zemljevidov</string>
 	<string name="local_index_items_backuped">Predmeti (%1$d od %2$d) so uspešno izklopljeni.</string>
