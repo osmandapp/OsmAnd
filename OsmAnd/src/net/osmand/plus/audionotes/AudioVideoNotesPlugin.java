@@ -180,7 +180,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String fileName = getFileName();
 			final String hashAndExtension;
 			int hashInd = fileName.lastIndexOf('_');
-			if (hashInd == -1) {
+			if (hashInd == -1 || hashInd < 8) {
 				hashAndExtension = "_" + fileName;
 			} else {
 				hashAndExtension = fileName.substring(hashInd, fileName.length());
