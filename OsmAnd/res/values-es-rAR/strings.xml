@@ -490,7 +490,9 @@
 \n\nAñade una notificación al calendario en el caso de que  desee tener un recordatorio al respecto."</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y utilizarse luego para la orientación.</string>
 	<string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de acercamiento, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de su ubicación.</string>
-	<string name="osm_editing_plugin_description">Este complemento se puede utilizar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de errores y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte https://openstreetmap.org/. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
+	<string name="osm_editing_plugin_description">Este complemento se puede utilizar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de errores y contribuir con archivos de trazas GPX.
+\n\nOSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte https://openstreetmap.org/.
+\n\nSe aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
 	<string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o la guía de voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
 	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita ser descargado el mapa especial sin conexión</string>
@@ -705,7 +707,7 @@
 \n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
 \n\t* Iconos de mapa de alta densidad
 \n\t* Multitud de cambios en la IU
-\n\t* Arreglo de fallos en visualización de la distacia, analizador de GPX, manejo de puntos de ruta, control de planificación, subida a OSM, manejo de https "</string>
+\n\t* Arreglo de fallos en visualización de la distancia, analizador de GPX, manejo de puntos de ruta, control de planificación, subida a OSM, manejo de https "</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
     <string name="clear_intermediate_points">Borrar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
@@ -1512,7 +1514,7 @@
 \n\nEn el menú contextual \'Usar ubicación\', para cualquier punto seleccione la opción \'Añadir a favoritos\' y a continuación escriba un nombre.
 \n\nLuego de guardar un Favorito, este será accesible a través de \'Menú\'→\'Mis sitios\'. Al tocar en cualquier entrada en la lista de \'Favoritos\', ofrecerá opciones para navegar hasta él, modificarlo o borrarlo.
 \n\nPara mostrar todos los puntos Favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Configurar mapa\'. "</string>
-	<string name="create_poi_link_to_osm_doc"> <u>OSM en línea</u> clasificación de mapa con imágenes\"</string>
+	<string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes</string>
 	<string name="error_doing_search">Ocurrió un error en la búsqueda</string>
 	<string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
 	<string name="search_osm_offline">Buscar dirección geográfica</string>
@@ -1797,7 +1799,7 @@
 	<string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
 	<string name="loading_data">Cargando datos…</string>
 	<string name="reading_indexes">Leyendo datos locales…</string>
-	<string name="previous_run_crashed">La última vez, la aplicación falló. El archivo de registro está en {0}. Envíenos el informe adjuntando el archivo.</string>
+	<string name="previous_run_crashed">La última vez, OsmAnd falló. El archivo de registro está en {0}. Envíenos el problema adjuntando el archivo.</string>
 	<string name="saving_gpx_tracks">Guardando trazas GPX en la SD…</string>
 	<string name="finished_task">Terminado</string>
 	<string name="use_online_routing_descr">Use Internet para calcular la ruta</string>
@@ -1897,7 +1899,7 @@
 	<string name="poi_error_io_error_template">Error de entrada/salida durante la acción {0}.</string>
 	<string name="poi_error_info_not_loaded">No se cargó la información del nodo</string>
 	<string name="poi_dialog_name">Nombre</string>
-	<string name="poi_dialog_opening_hours">Abrir</string>
+	<string name="poi_dialog_opening_hours">Abierto</string>
 	<string name="poi_dialog_comment">Comentario</string>
 	<string name="poi_dialog_comment_default">Cambiando PDI</string>
 	<string name="poi_dialog_other_tags_message">Se preservan las otras etiquetas</string>
@@ -1931,5 +1933,8 @@
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcule sólo la parte inicial de la ruta para viajes largos</string>
 <string name="osmo_share_my_location">Compartir ubicación</string>
-    <string name="shared_string_logoff">Desconectarme</string>
+    <string name="shared_string_logoff">Cerrar sesión</string>
+    <string name="rendering_value_disabled_name">Desactivado</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según el alcande de ruta</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     </resources>

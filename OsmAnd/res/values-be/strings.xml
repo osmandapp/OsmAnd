@@ -1974,4 +1974,7 @@
 	<string name="use_fast_recalculation_desc">Пераразьлічваць толькі пачатак маршруту для доўгіх паездак</string>
 <string name="osmo_share_my_location">Апублікаваць маё месцазнаходжаньне</string>
     <string name="shared_string_logoff">Выйсьці</string>
+    <string name="rendering_value_disabled_name">Адключана</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прагляду маршрута</string>
     </resources>

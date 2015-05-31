@@ -2004,4 +2004,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="use_fast_recalculation_desc">Torna a calcular només la part inicial de la ruta si són viatges llargs</string>
 <string name="osmo_share_my_location">Comparteix la meva posició</string>
     <string name="shared_string_logoff">Sortir</string>
+    <string name="rendering_value_disabled_name">Desactivat</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
     </resources>

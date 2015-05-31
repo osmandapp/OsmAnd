@@ -2017,6 +2017,9 @@
 	<string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
 	<string name="use_fast_recalculation_desc">Genberegn kun den indledende del af ruten for lange ture</string>
-<string name="osmo_share_my_location">Del min placering</string>
+<string name="osmo_share_my_location">Del placering</string>
     <string name="shared_string_logoff">Log af</string>
+    <string name="rendering_value_disabled_name">Deaktiveret</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge rute anvendelsesområde</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC</string>
     </resources>

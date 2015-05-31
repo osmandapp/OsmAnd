@@ -77,7 +77,7 @@
   <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd duomenų segtuvą.</string>
+  <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\nRodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd duomenų segtuvą. "</string>
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą.</string>
   
@@ -1303,7 +1303,7 @@
     <string name="plugin_distance_point">Taškas</string>
     <string name="gpx_file_name">GPX failo pavadinimas</string>
     <string name="gpx_saved_sucessfully">GPX failas sėkmingai išsaugotas {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti/keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
+    <string name="osmand_distance_planning_plugin_description">Įskiepis prideda programėle žemėlapio ekrane, kuri leidžia kurti maršrutus spūstelėjus žemėlapį, taip pat naudoti/keisti egzistuojančius GPX failus, planuoti maršrutus bei matuoti atstumus tarp taškų. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
     <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
     <string name="shared_string_do_not_show_again">Daugiau neberodyti</string>
@@ -2020,4 +2020,11 @@
     <string name="storage_directory_manual">Nurodyta rankiniu būdu</string>
     <string name="routing_attr_height_description">Nurodykite transporto priemonės aukštį, leidžiamą maršrutuose</string>
     <string name="use_fast_recalculation_desc">Perskaičiuoti tik pradinę ilgos kelionės maršruto dalį</string>
-</resources>
+<string name="rendering_value_disabled_name">Išjungtas</string>
+    <string name="osmo_share_my_location">Pasidalinti mano vieta</string>
+    <string name="shared_string_logoff">Atsijungti</string>
+    <string name="search_poi_category_hint">Rašykite, norėdami pradėti paiešką</string>
+    <string name="track_points">Maršruto taškai</string>
+	<string name="plugin_ski_descr">"Šis įskiepis suteikia priėjimą prie pasaulio kalnų slidinėjimo trasų, lygumų slidinėjimo trasų, kalnų slidinėjimo maršrutų, keltuvų ir slidinėjimo keltuvų duomenų. Maršrutai ir trasos yra nuspalvintos spalvomis atsižvelgiant į jų sudėtingumą bei atvaizduojami specialiu \"Žiemos\" žemėlapio stiliumi, kuris naudoja sniego spalvos žiemos peizažą.
+\n\nAktyvavus šį žemėlapio stilių, kraštovaizdis atvaizduojamas taip, kaip jis atrodytų žiemą. Šis rodinys gali būti išjungtas arba deaktyvuojant jį arba pakeitus \"Žemėlapio stilių\" meniu \"Žemėlapio nustatymuose\", į norimą. "</string>
+	</resources>

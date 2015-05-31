@@ -1952,4 +1952,9 @@
 	<string name="routing_attr_height_description">Az utakon engedélyezett járműmagasság megadása</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
 	<string name="use_fast_recalculation_desc">Hosszú utaknál csak az útvonal kezdeti részének újraszámítása</string>
-</resources>
+<string name="osmo_share_my_location">Helyzetem megosztása</string>
+    <string name="shared_string_logoff">Naplózás ki</string>
+    <string name="rendering_value_disabled_name">Letiltva</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hatálya szerint</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Színezés OSMC szerint</string>
+    </resources>

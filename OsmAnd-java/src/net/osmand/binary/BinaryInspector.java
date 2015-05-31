@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -1023,8 +1024,18 @@ public class BinaryInspector {
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
-						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " +
-									object.getAdditionalInfo());
+						Iterator<Entry<String, String>> it = object.getAdditionalInfo().entrySet().iterator();
+						String s = "";
+						while(it.hasNext()) {
+							Entry<String, String> e = it.next();
+							if(e.getValue().startsWith(" gz ")) {
+								s += e.getKey() +"=...";
+							} else {
+								s += e.getKey() +"=" +e.getValue();
+							}
+						}
+						
+						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " + s);
 						return false;
 					}
 					@Override

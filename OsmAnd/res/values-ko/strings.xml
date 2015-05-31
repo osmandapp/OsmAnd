@@ -2235,7 +2235,7 @@
 	<string name="rendering_value__name">기본값</string>
     <string name="rendering_value_highContrastRoads_name">높은 콘트라스트 도로</string>
 	<string name="rendering_attr_hideHouseNumbers_name">집 주소 숨기기</string>
-    <string name="application_dir_change_warning3">OsmAnd가 새로운 도착지의 데이터 파일을 복사하시겠습니까?</string>
+    <string name="application_dir_change_warning3">OsmAnd가 새로운 도착지와 관련된 데이터 파일을 복사하시겠습니까?</string>
     <string name="specified_directiory_not_writeable">지도는 지정된 디렉터리에 만들 수 없습니다</string>
 	<string name="copying_osmand_file_failed">파일 복사 실패</string>    
     <string name="storage_directory_external">외장 스토리지</string>
@@ -2245,4 +2245,15 @@
     <string name="storage_directory_default">내부 메모리</string>
     <string name="storage_directory">지도 저장소</string>
     <string name="shared_string_copy">복사</string>
-    </resources>
+    <string name="rendering_value_disabled_name">비활성화됨</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">루트 범위에 따라 색상변경</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
+    <string name="osmo_share_my_location">내 위치를 공유</string>
+    <string name="shared_string_logoff">로그 오프</string>
+    <string name="routing_attr_avoid_borders_name">국경 횡단 방지</string>
+	<string name="routing_attr_avoid_borders_description">타국의 국경 횡단 방지</string>
+	<string name="routing_attr_height_name">높이 제한</string>
+	<string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>
+    <string name="use_fast_recalculation">스마트한 경로 재계산</string>
+	<string name="use_fast_recalculation_desc">긴 여행인 경우 경로 다시 계산</string>
+</resources>
