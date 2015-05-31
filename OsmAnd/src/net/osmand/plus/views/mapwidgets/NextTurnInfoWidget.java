@@ -64,7 +64,6 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	public void setTurnImminent(int turnImminent, boolean deviatedFromRoute) {
 		if(turnDrawable.turnImminent != turnImminent || turnDrawable.deviatedFromRoute != deviatedFromRoute) {
 			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
-			updateDistance();
 		}
 	}
 	
@@ -93,14 +92,6 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		}
 	}
 	
-	public void setExitOut(int exit) {
-		// TODO exit
-//		if(turnDrawable.exitOut != exit) {
-//			turnDrawable.e
-//		}
-//		TODO;
-	}
-
 	@Override
 	public boolean updateInfo(DrawSettings drawSettings) {
 		return false;
@@ -152,6 +143,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			} else {
 				paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 			}
+			invalidateSelf();	
 			
 		}
 

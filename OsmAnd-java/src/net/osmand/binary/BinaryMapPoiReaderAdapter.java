@@ -12,8 +12,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
 import net.osmand.Collator;
@@ -276,7 +278,8 @@ public class BinaryMapPoiReaderAdapter {
 	
 	protected void searchPoiByName( PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
-		CollatorStringMatcher matcher = new CollatorStringMatcher(req.nameQuery, 
+		String query = req.nameQuery.toLowerCase();
+		CollatorStringMatcher matcher = new CollatorStringMatcher(query, 
 				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		long time = System.currentTimeMillis();
 		int indexOffset = codedIS.getTotalBytesRead();
@@ -293,7 +296,7 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
-				offsets = readPoiNameIndex(matcher.getCollator(), req.nameQuery, req);
+				offsets = readPoiNameIndex(matcher.getCollator(), query, req);
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER :
@@ -545,7 +548,17 @@ public class BinaryMapPoiReaderAdapter {
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					if(matcher.matches(am.getName(false)) || matcher.matches(am.getName(true))) {
+					boolean matches = matcher.matches(am.getName(false).toLowerCase()) || matcher.matches(am.getName(true).toLowerCase());
+					if (!matches) {
+						Iterator<Entry<String, String>> it = am.getAdditionalInfo().entrySet().iterator();
+						while (!matches && it.hasNext()) {
+							Entry<String, String> n = it.next();
+							if (n.getKey().startsWith("name:")) {
+								matches = matcher.matches(n.getValue().toLowerCase());
+							}
+						}
+					}
+					if(matches) {
 						req.publish(am);
 					}
 				}
