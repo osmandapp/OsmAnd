@@ -1512,8 +1512,8 @@
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
     <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat de monitorització avançada en temps real OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment d\'altres dispositius, així com ser seguit. Podeu crear grups anònims de manera espontània, compartir la ubicació amb els altres membres i comunicar-vos. Hi ha diferents paràmetres de seguiment: puntual i permanent.\n\nEls grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. ex. no tenen control remot ni administració de grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
-    <string name="osmo_plugin_name">Monitorització OsMo</string>
-    <string name="osmo_settings">Monitorització de l\'OsMo</string>
+    <string name="osmo_plugin_name">OsMo (Monitorització OSM)</string>
+    <string name="osmo_settings">OsMo</string>
    	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Atura la sessió a OsMo</string>    
