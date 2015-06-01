@@ -15,13 +15,14 @@ import android.content.Context;
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
 	private final Context ctx;
-	private final OpenstreetmapsDbHelper db;
 
 	public final static Log log = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
-	public OpenstreetmapLocalUtil(Context uiContext) {
+	private OsmEditingPlugin plugin;
+
+	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin, Context uiContext) {
+		this.plugin = plugin;
 		this.ctx = uiContext;
-		this.db = new OpenstreetmapsDbHelper(ctx);
 	}
 
 	@Override
@@ -33,16 +34,16 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet){
 		Node newNode = n;
 		if (n.getId() == -1) {
-			newNode = new Node(n, Math.min(-2, db.getMinID() - 1)); // generate local id for the created node
+			newNode = new Node(n, Math.min(-2, plugin.getDBPOI().getMinID() - 1)); // generate local id for the created node
 		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
 		p.setEntity(newNode);
 		p.setAction(action);
 		p.setComment(comment);
 		if (p.getAction() == OsmPoint.Action.DELETE && newNode.getId() < 0) { //if it is our local poi
-			db.deletePOI(p);
+			plugin.getDBPOI().deletePOI(p);
 		} else {
-			db.addOpenstreetmap(p);
+			plugin.getDBPOI().addOpenstreetmap(p);
 		}
 		return newNode;
 	}

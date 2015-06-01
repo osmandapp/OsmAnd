@@ -20,8 +20,6 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 
 	private OsmBugsRemoteUtil remotebug;
 
-	private OpenstreetmapsDbHelper dbpoi;
-	private OsmBugsDbHelper dbbug;
 
 	private int listSize = 0;
 
@@ -29,15 +27,18 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 
 	private Fragment ctx;
 
-	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,Fragment ctx, OpenstreetmapRemoteUtil remotepoi, OsmBugsRemoteUtil remotebug,
+	private OsmEditingPlugin plugin;
+
+	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,Fragment ctx,
+			OsmEditingPlugin plugin, 
+			OpenstreetmapRemoteUtil remotepoi, OsmBugsRemoteUtil remotebug,
 											 int listSize) {
 		this.progress = progress;
+		this.plugin = plugin;
 		this.remotepoi = remotepoi;
 		this.remotebug = remotebug;
 		this.listSize = listSize;
 		this.ctx = ctx;
-		dbpoi = new OpenstreetmapsDbHelper(ctx.getActivity());
-		dbbug = new OsmBugsDbHelper(ctx.getActivity());
 	}
 
 	@Override
@@ -56,7 +57,8 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 				}
 				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false);
 				if (n != null) {
-					dbpoi.deletePOI(p);
+					
+					plugin.getDBPOI().deletePOI(p);
 					publishProgress(p);
 					uploaded++;
 				}
@@ -71,7 +73,7 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 					success = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor()) == null;
 				}
 				if (success) {
-					dbbug.deleteAllBugModifications(p);
+					plugin.getDBBug().deleteAllBugModifications(p);
 					uploaded++;
 					publishProgress(p);
 				}

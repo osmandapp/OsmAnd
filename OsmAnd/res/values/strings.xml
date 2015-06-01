@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="osm_edit_context_menu_delete">Delete Osm Edit</string>    
+    <string name="rendering_value_disabled_name">Disabled</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
+    <string name="osmo_share_my_location">Share my location</string>
+    <string name="shared_string_logoff">Log Off</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Hide house numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
 	<string name="copying_osmand_file_failed">Copying files failed</string>    

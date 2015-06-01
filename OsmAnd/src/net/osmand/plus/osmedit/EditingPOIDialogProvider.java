@@ -112,10 +112,10 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		isLocalEdit = true;
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
-			this.openstreetmapUtil = new OpenstreetmapLocalUtil(activity);
+			this.openstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
 			this.openstreetmapUtilToLoad = openstreetmapUtil;
 		} else if(!settings.isInternetConnectionAvailable(true)) {
-			this.openstreetmapUtil = new OpenstreetmapLocalUtil(activity);
+			this.openstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
 			this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		} else {
 			isLocalEdit = false;
@@ -692,7 +692,6 @@ public class EditingPOIDialogProvider implements DialogProvider {
 			@Override
 			protected void onPostExecute(Node result) {
 				progress.dismiss();
-				plugin.collectLocalOsmEdits();
 				if (result != null) {
 					successAction.run();
 				}

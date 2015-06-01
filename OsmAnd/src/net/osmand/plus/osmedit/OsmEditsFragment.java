@@ -61,9 +61,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	private boolean selectionMode = false;
 
-	private OpenstreetmapsDbHelper dbpoi;
-	private OsmBugsDbHelper dbbug;
-
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 
@@ -82,8 +79,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		((TextView) view.findViewById(R.id.header)).setText(R.string.your_edits);
-		dbpoi = new OpenstreetmapsDbHelper(getActivity());
-		dbbug = new OsmBugsDbHelper(getActivity());
 
 		remotepoi = new OpenstreetmapRemoteUtil(getActivity());
 		remotebug = new OsmBugsRemoteUtil(getMyApplication());
@@ -307,13 +302,12 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 				while (it.hasNext()) {
 					OsmPoint omsPoint = it.next();
 					if (omsPoint.getGroup() == OsmPoint.Group.POI) {
-						dbpoi.deletePOI((OpenstreetmapPoint) omsPoint);
+						plugin.getDBPOI().deletePOI((OpenstreetmapPoint) omsPoint);
 					} else if (omsPoint.getGroup() == OsmPoint.Group.BUG) {
-						dbbug.deleteAllBugModifications((OsmNotesPoint) omsPoint);
+						plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) omsPoint);
 					}
 					it.remove();
 					listAdapter.delete(omsPoint);
-					plugin.onLocalItemDeleted(omsPoint);
 				}
 				listAdapter.notifyDataSetChanged();
 
@@ -327,8 +321,8 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 	public void onResume() {
 		super.onResume();
 		dataPoints = new ArrayList<>();
-		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
+		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
+		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
 		dataPoints.addAll(l1);
 		dataPoints.addAll(l2);
 		listAdapter = new OsmEditsAdapter(dataPoints);
@@ -507,7 +501,7 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 				getString(R.string.uploading),
 				getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
-		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog, this, remotepoi,
+		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog, this, plugin, remotepoi,
 				remotebug, toUpload.length);
 		uploadTask.execute(toUpload);
 
@@ -621,7 +615,6 @@ public class OsmEditsFragment extends ListFragment implements OsmEditsUploadList
 
 	@Override
 	public void uploadUpdated(OsmPoint point) {
-		plugin.onLocalItemDeleted(point);
 		listAdapter.delete(point);
 	}
 
