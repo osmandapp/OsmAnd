@@ -1645,8 +1645,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
     <string name="osmo_plugin_description">"Tento modul poskytuje funkcie pokročilého sledovania naživo cez OsMo, pozrite na http://osmo.mobi.\n\nMôžete sledovať iné zariadenia a sám byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny sú vytvorené na určený počet dní a funkcie sú obmedzené, napr. nie je diaľkové ovládanie ani administrátor skupiny. Na druhej strane, plne funkčné skupiny je možné vytvoriť na webstránke a sú prístupné len registrovaným používateľom. "</string>
-    <string name="osmo_plugin_name">OsMo sledovanie</string>
-    <string name="osmo_settings">OsMo sledovanie</string>
+    <string name="osmo_plugin_name">OsMo (sledovanie OSM)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakovať navigačné pokyny</string>
