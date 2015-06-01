@@ -228,6 +228,7 @@ public class ConfigureMapMenu {
 							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 						}
 						adapter.setItemDescription(pos, getRenderDescr(activity));
+						activity.getDashboard().refreshContent(true);
 						dialog.dismiss();
 					}
 
