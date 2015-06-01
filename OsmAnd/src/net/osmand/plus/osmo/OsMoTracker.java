@@ -82,7 +82,11 @@ public class OsMoTracker implements OsMoReactor {
 			Location loc = bufferOfLocations.poll();
 			lastSendLocation = loc;
 			locationsSent ++;
-			return "T|"+formatLocation(loc); 
+			if((System.currentTimeMillis() - loc.getTime()) > 2 * 60000 && loc.getTime() != 0) {
+				return "B|"+formatLocation(loc); 
+			} else {
+				return "T|"+formatLocation(loc); 
+			}
 		}
 		return null;
 	}
