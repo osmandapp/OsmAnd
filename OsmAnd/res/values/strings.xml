@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
+	<string name="osm_edit_context_menu_delete">Delete Osm Edit</string>    
     <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>

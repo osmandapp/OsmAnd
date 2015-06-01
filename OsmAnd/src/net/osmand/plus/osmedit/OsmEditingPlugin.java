@@ -1,23 +1,9 @@
 package net.osmand.plus.osmedit;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.data.DataTileManager;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -33,19 +19,46 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	DataTileManager<OsmPoint> localOsmEditsInternal = null;
+	OpenstreetmapsDbHelper dbpoi ;
+	OsmBugsDbHelper dbbug ;
 
 	@Override
 	public String getId() {
 		return ID;
+	}
+	
+	public OpenstreetmapsDbHelper getDBPOI() {
+		if(dbpoi == null) {
+			dbpoi = new OpenstreetmapsDbHelper(app);
+		}
+		return dbpoi;
+	}
+	
+	public OsmBugsDbHelper getDBBug() {
+		if(dbbug == null) {
+			dbbug = new OsmBugsDbHelper(app);
+		}
+		return dbbug;
 	}
 	
 	public OsmEditingPlugin(OsmandApplication app) {
@@ -150,9 +163,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
-		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(favoritesActivity);
-		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(favoritesActivity);
-		if (dbpoi.getOpenstreetmapPoints().size() > 0 || dbbug.getOsmbugsPoints().size() > 0){
+		if (getDBPOI().getOpenstreetmapPoints().size() > 0 || getDBBug().getOsmbugsPoints().size() > 0){
 			mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
 			if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
 				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
@@ -223,11 +234,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void onLocalItemDeleted(OsmPoint point) {
-		if(localOsmEditsInternal != null) {
-			localOsmEditsInternal.unregisterObject(point.getLatitude(), point.getLongitude(), point);
-		}
-	}
+	
 
 	public enum UploadVisibility implements IEnumWithResource {
 		Public(R.string.gpxup_public),
@@ -285,40 +292,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return true;
 	}
 
-	public void onLocalOsmEditAdded(OsmPoint point){
-		if(localOsmEditsInternal != null) {
-			localOsmEditsInternal.registerObject(point.getLatitude(), point.getLongitude(), point);
-		}
-	}
 	
-	public void collectLocalOsmEdits() {
-		DataTileManager<OsmPoint> res = new DataTileManager<OsmPoint>();
-		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(app);
-		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(app);
-
-		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
-		for (OsmPoint point : l1) {
-			res.registerObject(point.getLatitude(), point.getLongitude(), point);
-		}
-		for (OsmPoint point : l2) {
-			res.registerObject(point.getLatitude(), point.getLongitude(), point);
-		}
-		localOsmEditsInternal = res;
-		
-	}
-
-	public DataTileManager<OsmPoint> getLocalOsmEdits(){
-		if(localOsmEditsInternal == null) {
-			collectLocalOsmEdits();
-		}
-		return localOsmEditsInternal;
-	}
-
-	public List<OsmPoint> getAllEdits(){
-		return getLocalOsmEdits().getAllObjects();
-	}
-
 	@Override
 	public String getName() {
 		return app.getString(R.string.osm_settings);

@@ -1,5 +1,16 @@
 package net.osmand.plus.osmedit;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,18 +23,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.myplaces.FavoritesActivity;
-
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
@@ -135,17 +134,14 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				DashOsmEditsFragment.this, remotepoi, remotebug, toUpload.length);
+				DashOsmEditsFragment.this, plugin, remotepoi, remotebug, toUpload.length);
 		uploadTask.execute(toUpload);
 		dialog.show();
 	}
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
-		OpenstreetmapsDbHelper dbpoi = new OpenstreetmapsDbHelper(getActivity());
-		OsmBugsDbHelper dbbug = new OsmBugsDbHelper(getActivity());
-
-		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
-		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
+		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
+		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
 		if (l1.isEmpty()){
 			int i = 0;
 			for(OsmPoint point : l2){

@@ -12,7 +12,6 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,7 +39,6 @@ import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
 import android.util.Xml;
-import android.view.View;
 import android.widget.Toast;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
