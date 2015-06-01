@@ -1407,7 +1407,7 @@
     <string name="keep_informing_never">Samo ročno (pritisnite na puščico)</string>
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih zamikih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
-	<string name="osmo_settings">Sledenje OsMo</string>
+	<string name="osmo_settings">OsMo</string>
    	<string name="arrival_distance_descr">Kako hitro naj se najavi napovedan čas prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
     
