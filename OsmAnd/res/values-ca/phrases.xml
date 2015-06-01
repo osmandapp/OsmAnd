@@ -728,4 +728,36 @@
 	<string name="poi_craft_saddler">Baster</string>
 	<string name="poi_craft_sailmaker">Drassana</string>
 	<string name="poi_craft_stand_builder">Aparadors i estands</string>
+	<string name="poi_lean_to">Cobert</string>
+	<string name="poi_hunting_lodge">Refugi de caça</string>
+
+	<string name="poi_picnic_table">Taula de berena</string>
+	<string name="poi_winery">Celler</string>
+
+	<string name="poi_stripclub">Club de striptease</string>
+	<string name="poi_craft_computer">Ordinadors a mida</string>
+	<string name="poi_beauty">Estètica</string>
+	<string name="poi_beauty_salon_nails">Manicur</string>
+	<string name="poi_massage">Massatge</string>
+	<string name="poi_tattoo">Tatuatge</string>
+	<string name="poi_dry_cleaning">Neteja en sec</string>
+	<string name="poi_car_sharing">Cotxe multiusuari</string>
+	<string name="poi_boat_sharing">Vaixell multiusuari</string>
+	<string name="poi_toilets">Vàter públic</string>
+	<string name="poi_brothel">Bordell</string>
+	<string name="poi_smoking_area">Àrea de fumadors</string>
+	<string name="poi_internet_cafe">Ciberlocal</string>
+
+	<string name="poi_payment_terminal">Datàfon</string>
+	<string name="poi_money_lender">Usurer</string>
+	<string name="poi_pawnbroker">Casa de penyores</string>
+	<string name="poi_bureau_de_change">Canvi de moneda</string>
+	<string name="poi_cave_entrance">Entrada a la cova</string>
+	<string name="poi_saddle">Coll</string>
+	<string name="poi_ridge">Cresta</string>
+	<string name="poi_beacon_cardinal">Balisa direccional</string>
+	<string name="poi_beacon_lateral">Balisa de delimitació</string>
+	<string name="poi_beacon_safe_water">Balisa d\'aigües segures</string>
+	<string name="poi_beacon_special_purpose">Balisa especial</string>
+	<string name="poi_berth">Amarrador</string>
 	</resources>

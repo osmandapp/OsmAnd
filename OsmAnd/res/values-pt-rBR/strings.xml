@@ -144,7 +144,7 @@
 	<string name="record_plugin_name">Gravação de viagem</string>
 	<string name="record_plugin_description">"Este complemento ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
 \n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
-	<string name="osmo_plugin_name">Rastreamento OsMO</string>
+	<string name="osmo_plugin_name">OsMo (Rastreamento OSM)</string>
 	<string name="osmo_plugin_description">"Este complemento fornece a funcionalidade para OsMo (rastreamento avançado ao vivo), veja mais em http://osmo.mobi.\n\nVocê pode rastrear outros dispositivos e ser rastreado. Você espontaneamente pode criar grupos anônimos, compartilhar localização e se comunicar. Vem com várias opções para o controle de sessão ou acompanhamento permanente.\n\nGrupos anônimos são criados para um número especificado de dias e limitados a recursos definidos, ou seja, não há nenhum controle remoto e nenhum administrador de grupo. Grupos totalmente funcionais, por outro lado, podem ser criados no site e só usuários cadastrados têm acesso a eles. "</string>
 	<string name="srtm_paid_version_title">Complemento de curvas de nível</string>
 	<string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para curvas de nível off-line</string>
@@ -522,7 +522,7 @@
     <string name="osmo_mode_off">Iniciar sessão do OsMo</string>
     <string name="osmo_settings_debug">Informações de depuração</string>
     <string name="osmo_settings_descr">Configurações de monitoramento e canal de rastreamento pessoal</string>
-    <string name="osmo_settings">Rastreamento OsMO</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Sempre centralizar a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Diversos</string>

@@ -2027,7 +2027,7 @@
     <string name="track_points">Maršruto taškai</string>
 	<string name="plugin_ski_descr">"Šis įskiepis suteikia priėjimą prie pasaulio kalnų slidinėjimo trasų, lygumų slidinėjimo trasų, kalnų slidinėjimo maršrutų, keltuvų ir slidinėjimo keltuvų duomenų. Maršrutai ir trasos yra nuspalvintos spalvomis atsižvelgiant į jų sudėtingumą bei atvaizduojami specialiu \"Žiemos\" žemėlapio stiliumi, kuris naudoja sniego spalvos žiemos peizažą.
 \n\nAktyvavus šį žemėlapio stilių, kraštovaizdis atvaizduojamas taip, kaip jis atrodytų žiemą. Šis rodinys gali būti išjungtas arba deaktyvuojant jį arba pakeitus \"Žemėlapio stilių\" meniu \"Žemėlapio nustatymuose\", į norimą. "</string>
-	<string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvinimas atsižvelgiant į maršrutus</string>
+	<string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvinimas atsižvelgiant į maršrutų reikšmes</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas atsišvelgiant į OSMC</string>
     <string name="storage_directory_multiuser">Vartotojų talpykla</string>
     </resources>

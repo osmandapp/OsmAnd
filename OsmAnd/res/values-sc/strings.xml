@@ -281,8 +281,8 @@
     <string name="osmo_plugin_description">"Custu plugin frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta, bie http://osmo.mobi.
 \n\nSighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comùnica. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
 \n\nSos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
-    <string name="osmo_plugin_name">Compidada OsMo</string>
-    <string name="osmo_settings">Compidada OsMo</string>
+    <string name="osmo_plugin_name">OsMo (Compidada OSM)</string>
+    <string name="osmo_settings">OsMo</string>
    	
     
     <string name="osmand_background_plugin_description">Ammustrat sas impostaduras pro abilitare s’arrastamentu e su nàvigu in modalidade a reposu (ischermu istudadu) pro mèdiu de ischidaduras periòdicas de su GPS.</string>

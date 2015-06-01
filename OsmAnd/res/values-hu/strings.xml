@@ -1469,8 +1469,8 @@
     <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
     <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
     <string name="osmo_plugin_description">"Ez a bővítmény biztosítja az OsMo speciális valós idejű megfigyelésének lehetőségét. Bővebben: http://osmo.mobi.\n\nKövethet más eszközöket, vagy követhetik Önt. Igény szerint létrehozhat névtelen csoportokat, megoszthatják egymás helyzetét, és kommunikálhatnak. Különféle lehetőségekkel érkezik a munkamenet követéséhez vagy az állandó követéshez.\n\nA névtelen csoportok adott számú napig jönnek létre, és korlátozva vannak a meghatározott szolgáltatásokra, azaz nincs távirányítás és nincs csoport adminisztrátor. Másrészről teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, és kizárólag regisztrált felhasználók rendelkeznek hozzáféréssel. "</string>
-    <string name="osmo_plugin_name">OsMo megfigyelés</string>
-    <string name="osmo_settings">OsMo megfigyelés</string>
+    <string name="osmo_plugin_name">OsMo (OSM megfigyelés)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
