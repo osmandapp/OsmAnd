@@ -128,7 +128,7 @@
 	<string name="track_points">Puntos de la traza</string>
 	<string name="online_map_settings">Mapas en línea</string>
 	<string name="record_plugin_name">Grabación de viaje</string>
-	<string name="osmo_plugin_name">Rastreo OsMo</string>
+	<string name="osmo_plugin_name">OsMo (Rastreo OSM)</string>
 	<string name="plugin_touringview_name">Mapa de vista turística</string>
 	<string name="plugin_nautical_name">Mapa de vista náutica</string>
 	<string name="plugin_ski_name">Mapa de vista de esquí</string>
@@ -366,7 +366,7 @@
     <string name="osmo_mode_on">Parar sesión de OsMo</string>    
     <string name="osmo_mode_off">Iniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
-    <string name="osmo_settings">Rastreo OsMo</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Mostrar siempre posición en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
@@ -850,9 +850,9 @@
     <string name="download_regular_maps">Mapas normales</string>
     <string name="download_roads_only_maps">Mapas viales</string>
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Dibujar senderos de acuerdo a la escala SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Dibujar senderos de acuerdo a las trazas de OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Dibujar senderos según trazas de OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evitar mostrar fronteras regionales (niveles administrativos 5-9)</string>
