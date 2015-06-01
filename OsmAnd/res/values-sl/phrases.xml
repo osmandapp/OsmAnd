@@ -340,4 +340,59 @@
 	<string name="poi_archery">Lokostrelstvo</string>
 	<string name="poi_athletics">Atletika</string>
 	<string name="poi_basketball">Košarka</string>
+	<string name="poi_archaeological_site">Arheološko najdišče</string>
+	<string name="poi_museum">Muzej</string>
+	<string name="poi_memorial">Spomenik</string>
+	<string name="poi_castle">Graščina</string>
+	<string name="poi_city_gate">Mestna vrata</string>
+	<string name="poi_fountain">Vodnjak</string>
+	<string name="poi_monument">Spomenik</string>
+	<string name="poi_zoo">Živalski vrt</string>
+	<string name="poi_aquarium">Akvarij</string>
+	<string name="poi_theme_park">Tematski park</string>
+	
+	<string name="poi_attraction">Turistična znamenitost</string>
+	<string name="poi_general_tourist_attraction_yes">Splošna turistična znamenitost</string>
+	<string name="poi_attraction_carousel">Vrtiljak</string>
+	<string name="poi_attraction_maze">Labirint</string>
+	<string name="poi_hotel">Hotel</string>
+	<string name="poi_guest_house">Gostišče</string>
+	<string name="poi_hostel">Hostel</string>
+	<string name="poi_motel">Motel</string>
+	<string name="poi_alpine_hut">Alpska koča</string>
+	<string name="poi_apartment">Apartma</string>
+	<string name="poi_hunting_lodge">Lovska koča</string>
+
+	<string name="poi_place_of_worship">Svetišče</string>
+	<string name="poi_religion_christian">Svetišče: krščansko</string>
+	<string name="poi_religion_jewish">Svetišče: židovsko</string>
+	<string name="poi_religion_muslim">Svetišče: muslimansko</string>
+	<string name="poi_religion_sikh">Svetišče: sikhovsko</string>
+	<string name="poi_religion_buddhist">Svetišče: budistično</string>
+	<string name="poi_religion_hindu">Svetišče: hindujsko</string>
+	<string name="poi_religion_shinto">Svetišče: sintsko</string>
+	<string name="poi_religion_taoist">Svetišče: taoistično</string>
+
+	<string name="poi_internet_access_wlan">Internetni dostop: wlan</string>
+	<string name="poi_internet_access_terminal">Internetni dostop: terminalski</string>
+	<string name="poi_internet_access_wired">Internetni dostop: žično</string>
+	<string name="poi_internet_access_public">Internetni dostop: javno</string>
+	<string name="poi_internet_access_service">Internetni dostop: storitev</string>
+	
+	<string name="poi_monastery">Samostan</string>
+	<string name="poi_information">Turistične informacije</string>
+	<string name="poi_clock">Ura</string>
+	<string name="poi_travel_agent">Potovalna agencija</string>
+	<string name="poi_viewpoint">Razgledna točka</string>
+	<string name="poi_spring">Izvir</string>
+	<string name="poi_hot_spring">Vroči izvir</string>
+	<string name="poi_geyser">Gejzir</string>
+	<string name="poi_cemetery">Pokopališče</string>
+	<string name="poi_grave_yard">Cerkveno pokopališče</string>
+	<string name="poi_tomb">Grobnica</string>
+	<string name="poi_shelter">Zavetišče</string>
+	<string name="poi_funicular">Tirna vzpenjača</string>
+	<string name="poi_wine_cellar">Vinska klet</string>
+	<string name="poi_winery">Vinarna</string>
+
 	</resources>
