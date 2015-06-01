@@ -1495,8 +1495,8 @@
 	<string name="share_route_subject">藉由 OsmAnd 分享路線</string>
 	<string name="navigation_intent_invalid">無效的格式：%s</string>
 <string name="osmo_settings_uuid">專有的裝置 ID</string>
-    <string name="osmo_plugin_name">OsMo (監視)</string>
-    <string name="osmo_settings">OsMo 監控</string>
+    <string name="osmo_plugin_name">OsMo (OSM 監控)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
     <string name="osmo_plugin_description">"這個外掛元件同時提供了 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以跟蹤其它裝置並進行追蹤。您可以自發的建立匿名群組，分享彼此的位置和交流。具有各種選項用於連線階段追蹤或持續的追蹤。\n\n為指定的天數建立匿名群組和有限制的預設功能，例如沒有遠端控制和沒有群組管理員。另一方面完整的功能可以在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
