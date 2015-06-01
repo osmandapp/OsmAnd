@@ -1322,10 +1322,10 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public PointDescription getAndClearMapLabelToShow(){
+	public PointDescription getAndClearMapLabelToShow(LatLon l){
 		String label = settingsAPI.getString(globalPreferences,MAP_LABEL_TO_SHOW, null);
 		settingsAPI.edit(globalPreferences).remove(MAP_LABEL_TO_SHOW).commit();
-		return PointDescription.deserializeFromString(label);
+		return PointDescription.deserializeFromString(label, l);
 	}
 	
 	private Object objectToShow;
@@ -1414,12 +1414,12 @@ public class OsmandSettings {
 	
 	public PointDescription getStartPointDescription() {
 		return 
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""));
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""), getPointToStart());
 	}
 	
 	public PointDescription getPointNavigateDescription() {
 		return 
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""));
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""), getPointToNavigate());
 	}
 	
 	

@@ -39,7 +39,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startFavoritesActivity(FavoritesActivity.FAVORITES_TAB);
+				startFavoritesActivity(FavoritesActivity.FAV_TAB);
 			}
 		});
 		return view;

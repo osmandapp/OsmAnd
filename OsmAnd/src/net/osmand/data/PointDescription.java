@@ -19,6 +19,8 @@ public class PointDescription {
 	private String type = "";
 	private String name = "";
 	private String typeName;
+	private double lat = 0;
+	private double lon = 0;
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
@@ -36,6 +38,12 @@ public class PointDescription {
 	
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
+	
+	public PointDescription(double lat, double lon) {
+		this(POINT_TYPE_LOCATION, "");
+		this.lat = lat;
+		this.lon = lon;
+	}
 
 	public PointDescription(String type, String name) {
 		this.type = type;
@@ -52,6 +60,14 @@ public class PointDescription {
 		if (this.name == null) {
 			this.name = "";
 		}
+	}
+	
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+	
+	public void setLon(double lon) {
+		this.lon = lon;
 	}
 
 	public void setTypeName(String typeName){
@@ -72,7 +88,7 @@ public class PointDescription {
 	}
 
 	@NonNull
-	public String getSimpleName(Context ctx, double lat, double lon, boolean addTypeName) {
+	public String getSimpleName(Context ctx, boolean addTypeName) {
 		if (isLocation()) {
 			return getLocationName(ctx, lat, lon, true).replace('\n', ' ');
 		}
@@ -86,7 +102,7 @@ public class PointDescription {
 		return name;
 	}
 	
-	public String getFullPlainName(Context ctx, double lat, double lon) {
+	public String getFullPlainName(Context ctx) {
 		if (isLocation()) {
 			return getLocationName(ctx, lat, lon, false);
 		} else {
@@ -167,6 +183,8 @@ public class PointDescription {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((typeName == null) ? 0 : typeName.hashCode());
+		result = prime * result + ((lat == 0) ? 0 : new Double(lat).hashCode());
+		result = prime * result + ((lon == 0) ? 0 : new Double(lon).hashCode());
 		return result;
 	}
 
@@ -179,6 +197,8 @@ public class PointDescription {
 		PointDescription other = (PointDescription) obj;
 		if (Algorithms.objectEquals(other.name, name) 
 				&& Algorithms.objectEquals(other.type, type)
+				&& Algorithms.objectEquals(other.lat, lat)
+				&& Algorithms.objectEquals(other.lon, lon)
 				&& Algorithms.objectEquals(other.typeName, typeName)) {
 			return true;
 		}
@@ -188,7 +208,7 @@ public class PointDescription {
 	
 	public static String getSimpleName(LocationPoint o, Context ctx) {
 		PointDescription pd = o.getPointDescription(ctx);
-		return pd.getSimpleName(ctx, o.getLatitude(), o.getLongitude(), true);
+		return pd.getSimpleName(ctx, true);
 //		return o.getPointDescription(ctx).getFullPlainName(ctx, o.getLatitude(), o.getLongitude());
 	}
 
@@ -203,20 +223,25 @@ public class PointDescription {
 		return tp + "#" + p.name;
 	}
 
-	public static PointDescription deserializeFromString(String s) {
+	public static PointDescription deserializeFromString(String s, LatLon l) {
+		PointDescription pd = null;
 		if (s != null && s.length() > 0) {
 			int in = s.indexOf('#');
 			if (in >= 0) {
 				String nm = s.substring(in + 1).trim();
 				String tp = s.substring(0, in);
 				if(tp.contains(".")) {
-					return new PointDescription(tp.substring(0, tp.indexOf('.')), tp.substring(tp.indexOf('.') + 1), nm);
+					pd = new PointDescription(tp.substring(0, tp.indexOf('.')), tp.substring(tp.indexOf('.') + 1), nm);
 				} else {
-					return new PointDescription(tp, nm);
+					pd = new PointDescription(tp, nm);
 				}
 			}
 		}
-		return null;
+		if(pd != null && pd.isLocation() && l != null) {
+			pd.setLat(l.getLatitude());
+			pd.setLon(l.getLongitude());
+		}
+		return pd;
 	}
 	
 

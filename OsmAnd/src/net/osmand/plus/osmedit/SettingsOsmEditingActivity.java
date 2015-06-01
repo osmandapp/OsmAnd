@@ -46,7 +46,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 				final Intent favorites = new Intent(SettingsOsmEditingActivity.this,
 						appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.OSM_EDITS_TAB);
+				getMyApplication().getSettings().FAVORITES_TAB.set(R.string.osm_edits);
 				startActivity(favorites);
 				return true;
 			}

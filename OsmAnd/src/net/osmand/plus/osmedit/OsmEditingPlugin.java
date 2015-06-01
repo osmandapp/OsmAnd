@@ -155,7 +155,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (dbpoi.getOpenstreetmapPoints().size() > 0 || dbbug.getOsmbugsPoints().size() > 0){
 			mTabs.add(favoritesActivity.getTabIndicator(R.string.osm_edits, OsmEditsFragment.class));
 			if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.OSM_EDITS_TAB);
+				app.getSettings().FAVORITES_TAB.set(R.string.osm_edits);
 			}
 		}
 	}

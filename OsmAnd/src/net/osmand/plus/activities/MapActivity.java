@@ -461,7 +461,7 @@ public class MapActivity extends AccessibleActivity {
 	public void readLocationToShow() {
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
-		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow();
+		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow(latLonToShow);
 		Object toShow = settings.getAndClearObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		if (status != 0) {
@@ -481,7 +481,7 @@ public class MapActivity extends AccessibleActivity {
 			if (mapLabelToShow != null) {
 				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
 				mapLayers.getContextMenuLayer().setLocation(latLonToShow,
-						mapLabelToShow.getFullPlainName(this, latLonToShow.getLatitude(), latLonToShow.getLongitude()));
+						mapLabelToShow.getFullPlainName(this));
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),

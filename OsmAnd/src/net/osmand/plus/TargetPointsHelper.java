@@ -102,7 +102,7 @@ public class TargetPointsHelper {
 		List<LatLon> ips = settings.getIntermediatePoints();
 		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
 		for(int i = 0; i < ips.size(); i++) {
-			intermediatePoints.add(new TargetPoint(ips.get(i), PointDescription.deserializeFromString(desc.get(i)), i));
+			intermediatePoints.add(new TargetPoint(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)), i));
 		}
 	}
 	
