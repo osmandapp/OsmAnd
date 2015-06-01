@@ -77,13 +77,13 @@
   <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\nRodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd duomenų segtuvą. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\n\nKiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd offline žemėlapiuose). Tam, kad posluoksninie žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".\n\nTailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazė, kurią galima paruošti įvairiais trečių šalių įrankiais. "</string>
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
-  <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą.</string>
+  <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą, navigacijos ekrano kryptį, mąstelio reguliavimą.</string>
   
   
   
-  <string name="osmand_development_plugin_description">Rodyti nustatymus kūrimo ir klaidų paieškos funkcionalumui: pavyzdžiui animuotai navigacijai ar atvaizdavimo našumo informacijos rodymui.</string>
+  <string name="osmand_development_plugin_description">Įskiepis rodo nustatymus kūrimo ir klaidų paieškos funkcionalumui: patikrinti arba imituoti navigaciją, ekrano generavimo efektyvumo, balso pranešimų patikrinimui. Šie nustatymui akrtualūs programuotojui ir nėra įdomūs eiliniam vartotojui.</string>
   <string name="plugins_screen">Įskiepių valdymas</string>
   
   <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą</string>
@@ -1560,8 +1560,8 @@
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
     <string name="osmo_plugin_description">"Pateikia OsMo - pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
 \nSuteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
-    <string name="osmo_plugin_name">OsMo stebėjimas</string>
-    <string name="osmo_settings">OsMo stebėjimas</string>
+    <string name="osmo_plugin_name">OsMo (OSM stebėjimas)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
@@ -1952,7 +1952,7 @@
 	<string name="osmo_grop_name_length_alert">Grupės pavadinimą privalo sudaryti mažiausiai 3 simboliai!</string>
 	<string name="local_osm_changes_upload_all_confirm">Jūs ketinate nusiųsti %1$d pakitimų į OSM. Ar tikrai?</string>
     <string name="confirmation_to_clear_history">Ar norite išvalyti istoriją?</string>
-    <string name="delay_to_start_navigation_descr">Automatiškai pradėti navigaciją po nurodyto intervalo</string>
+    <string name="delay_to_start_navigation_descr">Nurodykite maršuto planavimo ekrane delsos laiką</string>
     <string name="shared_string_go">Pirmyn</string>
 	<string name="action_modify">Pakeisti veiksmą</string>
 	<string name="action_delete">Ištrinti veiksmą</string>
@@ -2027,4 +2027,7 @@
     <string name="track_points">Maršruto taškai</string>
 	<string name="plugin_ski_descr">"Šis įskiepis suteikia priėjimą prie pasaulio kalnų slidinėjimo trasų, lygumų slidinėjimo trasų, kalnų slidinėjimo maršrutų, keltuvų ir slidinėjimo keltuvų duomenų. Maršrutai ir trasos yra nuspalvintos spalvomis atsižvelgiant į jų sudėtingumą bei atvaizduojami specialiu \"Žiemos\" žemėlapio stiliumi, kuris naudoja sniego spalvos žiemos peizažą.
 \n\nAktyvavus šį žemėlapio stilių, kraštovaizdis atvaizduojamas taip, kaip jis atrodytų žiemą. Šis rodinys gali būti išjungtas arba deaktyvuojant jį arba pakeitus \"Žemėlapio stilių\" meniu \"Žemėlapio nustatymuose\", į norimą. "</string>
-	</resources>
+	<string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvinimas atsižvelgiant į maršrutus</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas atsišvelgiant į OSMC</string>
+    <string name="storage_directory_multiuser">Vartotojų talpykla</string>
+    </resources>
