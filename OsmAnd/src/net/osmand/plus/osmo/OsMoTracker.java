@@ -97,7 +97,7 @@ public class OsMoTracker implements OsMoReactor {
 			cmd.append("A").append((int)loc.getAltitude());
 		}
 		if(loc.hasSpeed()) {
-			cmd.append("S").append(((int)loc.getSpeed()*100)/100f);
+			cmd.append("S").append((float)((int)(loc.getSpeed()*100))/100f);
 		}
 		if(loc.hasBearing()) {
 			cmd.append("C").append((int)loc.getBearing());
