@@ -38,7 +38,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startFavoritesActivity(FavoritesActivity.NOTES_TAB);
+				startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
 			}
 		});
 		return view;

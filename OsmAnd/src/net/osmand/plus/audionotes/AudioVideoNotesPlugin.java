@@ -83,6 +83,7 @@ import android.widget.Toast;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
+	public static final int NOTES_TAB = R.string.notes;
 	public static final String ID = "osmand.audionotes";
 	public static final String THREEGP_EXTENSION = "3gp";
 	public static final String MPEG4_EXTENSION = "mp4";
@@ -994,9 +995,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 		if (getAllRecordings().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(R.string.notes, NotesFragment.class));
+			mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
 			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.NOTES_TAB);
+				app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 			}
 		}
 	}

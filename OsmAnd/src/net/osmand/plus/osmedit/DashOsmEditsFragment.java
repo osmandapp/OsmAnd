@@ -46,7 +46,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startFavoritesActivity(FavoritesActivity.OSM_EDITS_TAB);
+				startFavoritesActivity(R.string.osm_edits);
 			}
 		});
 

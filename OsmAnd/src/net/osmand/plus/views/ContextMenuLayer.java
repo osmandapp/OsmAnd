@@ -179,7 +179,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		latLon = loc;
 		if(latLon != null){
 			if(description == null){
-				description = PointDescription.LOCATION_POINT.getFullPlainName(activity, loc.getLatitude(), loc.getLongitude());
+				description = new PointDescription(loc.getLatitude(), loc.getLongitude()).getFullPlainName(activity);
 			}
 			textView.setText(Html.fromHtml(description.replace("\n", "<br/>")));
 		} else {
@@ -321,9 +321,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 				if(name) {
 					PointDescription nm = e.getValue().getObjectName(e.getKey());
-					LatLon ll = e.getValue().getObjectLocation(e.getKey());
-					description.append(nm.getFullPlainName(activity, ll == null? 0 : ll.getLatitude(), ll == null? 0 
-							: ll.getLongitude()));
+					description.append(nm.getFullPlainName(activity));
 				} else {
 					description.append(e.getValue().getObjectDescription(e.getKey()));
 				}
