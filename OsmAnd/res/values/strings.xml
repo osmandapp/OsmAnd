@@ -158,7 +158,7 @@
 	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX recording widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
-	<string name="osmo_plugin_name">OsMo monitoring</string>
+	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
 		\n\nYou can track other devices and be tracked. You can spontaneously create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
 		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator. 
@@ -567,7 +567,7 @@
     <string name="osmo_mode_off">Start OsMo session</string>
     <string name="osmo_settings_debug">Debug information</string>
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
-    <string name="osmo_settings">OsMo monitoring</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Miscellaneous</string>
