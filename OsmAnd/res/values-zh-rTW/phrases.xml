@@ -306,7 +306,7 @@
 	<string name="poi_mineshaft">礦井</string>
 	<string name="poi_adit">坑道入口</string>
 	<string name="poi_petroleum_well">油井</string>
-	<string name="poi_survey_point">勘測點</string>
+	<string name="poi_survey_point">人工基石</string>
 	<string name="poi_windmill">風車</string>
 	<string name="poi_salt_pond">鹽田</string>
 	<string name="poi_reservoir">蓄水池</string>
