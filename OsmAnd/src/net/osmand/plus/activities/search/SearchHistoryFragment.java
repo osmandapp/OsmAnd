@@ -253,7 +253,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		}
 		distanceText.setText(distance);
 		PointDescription pd = historyEntry.getName();
-		nameText.setText(pd.getSimpleName(activity, historyEntry.getLat(), historyEntry.getLon(), false), BufferType.SPANNABLE);
+		nameText.setText(pd.getSimpleName(activity, false), BufferType.SPANNABLE);
 		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
 
 		if (historyEntry.getName().isAddress()) {

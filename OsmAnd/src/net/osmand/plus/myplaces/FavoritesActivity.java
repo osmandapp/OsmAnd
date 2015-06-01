@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
@@ -24,12 +23,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -39,12 +36,9 @@ public class FavoritesActivity extends TabActivity {
 
 //	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
+	public static final int  GPX_TAB = R.string.shared_string_my_tracks;
+	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
 //	private static final String SELECTED_TRACK = "SELECTED_TRACK";
-	public static int FAVORITES_TAB = 0;
-	public static int GPX_TAB = 1;
-	public static int SELECTED_GPX_TAB = 2;
-	public static int NOTES_TAB = 3;
-	public static int OSM_EDITS_TAB = 4;
 	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
@@ -79,25 +73,15 @@ public class FavoritesActivity extends TabActivity {
 			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
 		}
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
-		
-		Integer tab = settings.FAVORITES_TAB.get();
-		if (tab == NOTES_TAB) {
-			if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null){
-				tab = mTabs.size() - 2;
-			} else {
-				tab = mTabs.size() - 1;
+		Integer tabId = settings.FAVORITES_TAB.get();
+		int tab = 0;
+		for(int i = 0; i < mTabs.size(); i++) {
+			if(mTabs.get(i).resId == tabId) {
+				tab = i;
 			}
-
-		} else if (tab == OSM_EDITS_TAB) {
-			tab = mTabs.size() - 1;
 		}
-		
 		setViewPagerAdapter(mViewPager, mTabs);
 		mSlidingTabLayout.setViewPager(mViewPager);
-
-		if (tab > mTabs.size() - 1){
-			tab = 0;
-		}
 		mViewPager.setCurrentItem(tab);
 		// setupHomeButton();
 	}

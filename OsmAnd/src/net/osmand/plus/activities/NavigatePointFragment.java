@@ -11,6 +11,7 @@ import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.content.Intent;
@@ -178,26 +179,19 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	public void onResume() {
 		super.onResume();
 
-		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
-		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		//Intent intent = getSherlockActivity().getIntent();
-		//if (intent != null) {
-		//	if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
-		//		double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
-		//		double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
-		//		if (lat != 0 || lon != 0) {
-		//			location = new LatLon(lat, lon);
-		//		}
-		//	}
-		//}
-		if (location == null && getActivity() instanceof SearchActivity) {
-			location = ((SearchActivity) getActivity()).getSearchPoint();
+
+		LatLon loc = null;
+		if (getActivity() instanceof SearchActivity) {
+			loc = ((SearchActivity) getActivity()).getSearchPoint();
 		}
-		if (location == null) {
-			location = app.getSettings().getLastKnownMapLocation();
+		if (loc == null) {
+			loc = app.getSettings().getLastKnownMapLocation();
 		}
-		locationUpdate(location);
+		if(!Algorithms.objectEquals(loc, location)) {
+			location = loc;
+			locationUpdate(location);
+		}
 	}
 	
 	@Override
@@ -385,19 +379,20 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			LatLon loc = parseLocation();
 			double lat = loc.getLatitude();
 			double lon = loc.getLongitude();
+			PointDescription pd = new PointDescription(lat, lon);
 			if(mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
 				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 				dlg.show();
-				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, PointDescription.LOCATION_POINT);
+				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, pd);
 			} else if (mode == NAVIGATE_TO) {
-				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, PointDescription.LOCATION_POINT);
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, pd);
 			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, PointDescription.LOCATION_POINT);
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, pd);
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
-						PointDescription.LOCATION_POINT);
+						pd);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 			

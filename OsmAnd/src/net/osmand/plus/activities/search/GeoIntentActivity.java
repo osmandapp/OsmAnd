@@ -168,7 +168,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
-			label.setText(getString(model).getFullPlainName(getApplication(), 0, 0));
+			label.setText(getString(model).getFullPlainName(getApplication()));
 			return row;
 		}
 	}

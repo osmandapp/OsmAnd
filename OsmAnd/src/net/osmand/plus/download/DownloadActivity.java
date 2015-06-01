@@ -99,9 +99,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_local), LocalIndexesFragment.class));
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_local, 
+					getString(R.string.download_tab_local), LocalIndexesFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads, 
+					getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates, 
+					getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 			viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 			mSlidingTabLayout.setViewPager(viewPager);
