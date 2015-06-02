@@ -1977,4 +1977,5 @@
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прагляду маршрута</string>
+    <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
     </resources>
