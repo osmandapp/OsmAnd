@@ -1591,7 +1591,7 @@
     <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para el rastreo avanzado en directo OsMo, ver http://osmo.mobi.
 \n\nPuede hacer un seguimiento de otros dispositivos y ser rastreado. Puede crear espontáneamente grupos anónimos, compartir la ubicación de cada uno, y comunicarse. Viene con varias opciones para el seguimiento por sesión o seguimiento permanente.
 \n\nLos grupos anónimos se crean para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitoreo OsMo)</string>
+    <string name="osmo_plugin_name">OsMo (Monitorización OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
