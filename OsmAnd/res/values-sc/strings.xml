@@ -1971,4 +1971,5 @@
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
+    <string name="osm_edit_context_menu_delete">Burra modìfica OSM</string>    
     </resources>
