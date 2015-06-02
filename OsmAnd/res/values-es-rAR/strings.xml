@@ -30,7 +30,7 @@
    	<string name="mark_to_delete">Marcar para borrar</string>
 	<string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener una longitud de al menos 3 caracteres!</string>
 	<string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
-    <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
+    <string name="confirmation_to_clear_history">¿Quiere quitar el historial?</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
@@ -80,8 +80,8 @@
 	<string name="shared_string_select_all">Seleccionar todo</string>
 	<string name="shared_string_deselect">Deseleccionar</string>
 	<string name="shared_string_deselect_all">Deseleccionar todo</string>
-	<string name="shared_string_clear">Limpiar</string>
-	<string name="shared_string_clear_all">Limpiar todo</string>
+	<string name="shared_string_clear">Quitar</string>
+	<string name="shared_string_clear_all">Quitar todo</string>
 	<string name="shared_string_save">Guardar</string>
 	<string name="shared_string_save_as_gpx">Guardar como traza GPX</string>
 	<string name="shared_string_rename">Renombrar</string>
@@ -367,7 +367,7 @@
     <string name="osmo_mode_off">Iniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
     <string name="osmo_settings">OsMo</string>
-   	<string name="always_center_position_on_map">Mostrar siempre posición en el centro</string>
+   	<string name="always_center_position_on_map">Mostrar posición en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
@@ -709,7 +709,7 @@
 \n\t* Multitud de cambios en la IU
 \n\t* Arreglo de fallos en visualización de la distancia, analizador de GPX, manejo de puntos de ruta, control de planificación, subida a OSM, manejo de https "</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
-    <string name="clear_intermediate_points">Borrar puntos intermedios</string>
+    <string name="clear_intermediate_points">Quitar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
     <string name="new_directions_point_dialog">Ya has definido puntos intermedios.</string>
     <string name="context_menu_item_directions_to">Indicaciones a</string>
@@ -747,7 +747,7 @@
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar una nueva subtraza</string>
-    <string name="distance_measurement_clear_route">Borrar todos los puntos</string>
+    <string name="distance_measurement_clear_route">Quitar todos los puntos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia</string>
@@ -761,7 +761,7 @@
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Descartar ruta</string>
     <string name="cancel_navigation">Parar navegación</string>
-    <string name="clear_destination">Borrar destino</string>
+    <string name="clear_destination">Quitar destino</string>
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Desea usar la conexión actual a Internet para descargar?</string>
     <string name="street_name">Calle</string>
 	<string name="hno">Número</string>
@@ -798,7 +798,7 @@
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Seguro que quiere parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y los puntos de ruta)?</string>
+    <string name="clear_dest_confirm">¿Quiere quitar su punto de destino (y los puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilite para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -852,7 +852,7 @@
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Dibujar senderos según trazas de OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Dibujar senderos según trazas OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evitar mostrar fronteras regionales (niveles administrativos 5-9)</string>
@@ -1151,7 +1151,7 @@
 	<string name="asap">Cuanto antes</string>
 	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
-	<string name="route_roundabout">Rotonda: tome la salida %1$d y continúe por</string>
+	<string name="route_roundabout">Rotonda: tome la %1$dª salida hacia</string>
 	<string name="route_kl">Manténgase a la izquierda y continúe por</string>
 	<string name="route_kr">Manténgase a la derecha y continúe por</string>
 	<string name="rendering_attr_noPolygons_description">Hacer todas las funciones del terreno transparentes en el mapa</string>
@@ -1298,7 +1298,7 @@
 \n\t- Otras pequeñas funcionalidades "</string>    
 	<string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
 	<string name="free_version_title">Versión gratuita</string>
-	<string name="poi_context_menu_showdescription">Mostrar descripción del PDI</string>
+	<string name="poi_context_menu_showdescription">Detalles del PDI</string>
 	<string name="index_name_north_america">Norteamérica</string>
 	<string name="index_name_netherlands">Europa - Países Bajos</string>
 	<string name="index_name_us">Norteamérica - Estados Unidos</string>
@@ -1702,14 +1702,14 @@
 	<string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura.
 \nSolamente puede ver el mapa precargado y no puede descargar de Internet.</string>
 	<string name="unzipping_file">Descomprimiendo archivo…</string>
-	<string name="route_tr">Gire a la derecha y continúe por</string>
-	<string name="route_tshr">Gire fuerte a la derecha y continúe por</string>
-	<string name="route_tslr">Gire ligeramente a la derecha y continúe por</string>
-	<string name="route_tl">Gire a la izquierda y continúe por</string>
-	<string name="route_tshl">Gire fuerte a la izquierda y continúe por</string>
-	<string name="route_tsll">Gire ligeramente a la izquierda y continúe por</string>
+	<string name="route_tr">Gire a la derecha hacia</string>
+	<string name="route_tshr">Gire fuerte a la derecha hacia</string>
+	<string name="route_tslr">Gire leve a la derecha hacia</string>
+	<string name="route_tl">Gire a la izquierda hacia</string>
+	<string name="route_tshl">Gire fuerte a la izquierda hacia</string>
+	<string name="route_tsll">Gire leve a la izquierda hacia</string>
 	<string name="route_tu">Dé la vuelta y continúe por</string>
-	<string name="route_head">Cabecera</string>
+	<string name="route_head">Inicie en</string>
 	<string name="first_time_continue">Luego</string>
 	<string name="first_time_download">Descargar regiones</string>
 	<string name="search_poi_location">Buscando señal…</string>
