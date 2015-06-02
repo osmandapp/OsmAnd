@@ -2022,4 +2022,5 @@
     <string name="rendering_value_disabled_name">Deaktiveret</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge rute anvendelsesområde</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC</string>
+    <string name="osm_edit_context_menu_delete">Slet Osm redigeringer</string>    
     </resources>
