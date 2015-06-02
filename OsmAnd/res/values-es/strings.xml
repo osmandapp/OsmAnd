@@ -2066,5 +2066,5 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osmo_share_my_location">Compartir mi ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
-    <string name="osm_edit_context_menu_delete">Borrar edición de Osm</string>    
+    <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>    
     </resources>
