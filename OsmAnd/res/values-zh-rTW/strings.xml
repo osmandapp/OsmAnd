@@ -1994,4 +1994,5 @@
     <string name="rendering_value_disabled_name">已停用</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
+    <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>    
     </resources>

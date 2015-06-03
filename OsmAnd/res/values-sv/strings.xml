@@ -359,12 +359,11 @@
 <string name="osmand_service">Viloläge</string>
 <string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
-<string name="tip_rotation_switching_t_v2">Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
-		\n\nAlternativen är:
-		\n\t*\ \'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
-		\n\t*\ \'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
-		\n\t*\ \'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompass.
-	</string>
+<string name="tip_rotation_switching_t_v2">"Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
+\n\nAlternativen är:
+\n\t* \'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
+\n\t* \'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
+\n\t* \'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt efter enhetens kompass. "</string>
 
 <string name="tip_day_night_mode">Dag-/Nattläge</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
@@ -688,7 +687,7 @@
 	<string name="poi_context_menu_modify">Ändra Intressepunkt</string>
 	<string name="poi_context_menu_delete">Ta bort POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
-	<string name="rotate_map_bearing_opt">I körriktningen</string>
+	<string name="rotate_map_bearing_opt">I rörelseriktningen</string>
 	<string name="rotate_map_none_opt">Vrid inte (norr är uppåt)</string>
 	<string name="rotate_map_to_bearing_descr">Välj justering av kartskärmen</string>
 	<string name="rotate_map_to_bearing">Kartorientering</string>
@@ -941,7 +940,7 @@
     
     
     <string name="close_changeset">Stäng changeset</string>
-	<string name="map_widget_show_destination_arrow">Visa färdriktningen</string>
+	<string name="map_widget_show_destination_arrow">Visa rörelseriktningen</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Loggningstjänster</string>
 	
@@ -1884,4 +1883,6 @@
     <string name="osmo_share_my_location">Dela ut min plats</string>
     <string name="shared_string_logoff">Logga ut</string>
     <string name="rendering_value_disabled_name">Inaktiverad</string>
+    <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
+    <string name="rendering_value_walkingRoutesOSMC_name">Färgläggning efter OSMC</string>
     </resources>

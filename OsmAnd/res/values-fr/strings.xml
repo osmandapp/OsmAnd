@@ -1567,8 +1567,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
 	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Vous pouvez ainsi créer des groupes anonymes, partager vos positions et communiquer ensemble. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
-	<string name="osmo_plugin_name">Suivi OsMo</string>
-	<string name="osmo_settings">Suivi OsMo</string>
+	<string name="osmo_plugin_name">OsMo (Suivi OSM)</string>
+	<string name="osmo_settings">OsMo</string>
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
@@ -2041,4 +2041,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
+    <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     </resources>

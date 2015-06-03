@@ -1706,4 +1706,5 @@
 <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o alcance de rota</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com OSMC</string>
+    <string name="osm_edit_context_menu_delete">Apagar Edição do OSM</string>
     </resources>
