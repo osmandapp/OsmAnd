@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="about_settings">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -390,5 +391,5 @@
     
     <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
-    <string name="home_button">Матица</string>
+    <string name="home_button">Кућа</string>
     </resources>
