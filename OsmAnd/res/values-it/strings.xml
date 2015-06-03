@@ -1539,8 +1539,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
     <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità per  il monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare altri dispositivi ed essere tracciato. Puoi creare gruppo anonimo autonomamente, condividere reciprocamente la posizione e comunicarla. Viene fornito con varie opzioni di monitoraggio della sessione in corso o permanentemente.\n\nI gruppi anonimi sono limitati a un numero specifico di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
-    <string name="osmo_plugin_name">Monitoraggio OsMo</string>
-    <string name="osmo_settings">Monitoraggio OsMO</string>
+    <string name="osmo_plugin_name">OsMo (monitoraggio OSM)</string>
+    <string name="osmo_settings">OsMO</string>
    	<string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
@@ -2059,4 +2059,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in accordo a OSMC</string>
+    <string name="osm_edit_context_menu_delete">Cancella le modifiche OSM</string>
     </resources>
