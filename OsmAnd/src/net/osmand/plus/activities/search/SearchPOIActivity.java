@@ -409,6 +409,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			} else {
 				this.filter.updateTypesToAccept(custom);
 			}
+			filter.clearPreviousZoom();
+			// run query again
+			runNewSearchQuery(location, NEW_SEARCH_INIT);
 		}
 		if (filter == null || filter.isEmpty()) {
 			finish();
