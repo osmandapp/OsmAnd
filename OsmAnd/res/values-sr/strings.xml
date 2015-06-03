@@ -393,4 +393,5 @@
     <string name="osm_editing_manage">Управљајте</string>
     <string name="home_button">Кућа</string>
     <string name="rendering_attr_subwayMode_name">Линије метроа</string>
+    <string name="search_radius_proximity">У близини</string>
     </resources>
