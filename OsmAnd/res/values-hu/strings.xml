@@ -1957,5 +1957,5 @@
     <string name="rendering_value_disabled_name">Letiltva</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hatálya szerint</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Színezés OSMC szerint</string>
-    <string name="osm_edit_context_menu_delete">Osm szerkesztés törlése</string>    
+    <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>    
     </resources>
