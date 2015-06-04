@@ -68,9 +68,9 @@ public class FileNameTranslationHelper {
 		int index = wikiWord.indexOf("(");
 		if (index >= 0) {
 			//removing word in "()" from recourse file
-			return wikiWord.substring(0, index) + wikiName;
+			return wikiName + wikiWord.substring(0, index);
 		}
-		return ctx.getString(R.string.amenity_type_osmwiki) + " " + wikiName;
+		return  wikiName + " " + ctx.getString(R.string.amenity_type_osmwiki);
 	}
 
 	public static String getVoiceName(Context ctx, String basename) {

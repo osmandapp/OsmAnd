@@ -241,6 +241,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				int cy = queriedBox.getCenter31Y();
 				if ((currentObjects != null && currentObjects.size() > 0)) {
 					for (int i = 0; i < currentObjects.size(); i++) {
+						// TODO regions=boundary
 						final BinaryMapDataObject o = currentObjects.get(i);
 						if (!osmandRegions.contain(o, cx, cy)) {
 							continue;
@@ -259,10 +260,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 							btnName.append(" ");
 						}
 						filter.append(name);
-						if (osmandRegions.getPrefix(o) != null) {
-							name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " "
-									+ name;
-						}
+//						String parent = osmandRegions.getParentFullName(o);
+//						if (osmandRegions.getParentFullName(o) != null) {
+//							name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " "
+//									+ name;
+//						}
 						btnName.append(name);
 					}
 				}

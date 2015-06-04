@@ -1014,8 +1014,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			String mapName = FileNameTranslationHelper.getFileName(ctx,
 					((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(),
 					child.getFileName());
-			if (mapDescr.length() > 0){
-				 return mapDescr + " - " + mapName;
+			if (mapDescr.length() > 0) {
+				return mapName + " - " + mapDescr;
 			} else {
 				return mapName;
 			}
