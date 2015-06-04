@@ -261,15 +261,17 @@ public class OsmandRegions {
 			public boolean publish(BinaryMapDataObject object) {
 				initTypes(object);
 				String downloadName = getDownloadName(object);
-				if(downloadName == null) {
-					return false;
-				}
-				downloadName = downloadName.toLowerCase();
 				String parentFullName = getParentFullName(object);
 				String fullName = getFullName(object);
 				if(!Algorithms.isEmpty(parentFullName)) {
 					parentRelations.put(fullName, parentFullName);
 				}
+				
+				if(downloadName == null) {
+					// continent
+					return false;
+				}
+				downloadName = downloadName.toLowerCase();
 				downloadNames.put(fullName, downloadName);
 				String locName = getLocaleName(object);
 				if(locName != null && locName.length() > 0){
