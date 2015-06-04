@@ -129,9 +129,9 @@
 	<string name="online_map_settings">Mapas en línea</string>
 	<string name="record_plugin_name">Grabación de viaje</string>
 	<string name="osmo_plugin_name">OsMo (Rastreo OSM)</string>
-	<string name="plugin_touringview_name">Mapa de vista turística</string>
-	<string name="plugin_nautical_name">Mapa de vista náutica</string>
-	<string name="plugin_ski_name">Mapa de vista de esquí</string>
+	<string name="plugin_touringview_name">Vista turística</string>
+	<string name="plugin_nautical_name">Vista náutica</string>
+	<string name="plugin_ski_name">Vista invernal</string>
 	<string name="audionotes_plugin_name">Notas multimedia</string>
 	<string name="osmand_parking_plugin_name">Estacionamiento</string>
 	<string name="accessibility_preferences">Accesibilidad</string>
@@ -494,7 +494,7 @@
 \n\nOSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte https://openstreetmap.org/.
 \n\nSe aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
 	<string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o la guía de voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
-	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial sin conexión</string>
+	<string name="world_ski_missing">Para mostrar mapas de esquí, necesita descargarse el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita ser descargado el mapa especial sin conexión</string>
 	<string name="proxy_pref_descr">Configure un proxy de acceso a Internet</string>
     <string name="avoid_roads_msg">Puede obtener una ruta alternativa seleccionando los caminos a evitar</string>
@@ -657,7 +657,7 @@
 	<string name="tip_map_styles_t">"OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a sus necesidades:
 \n\nAparte del estilo de mapa \'predeterminado\', es posible en el \'Menú\' → \'Configurar mapa\' →  \'Estilo del mapa\' seleccionar por ejemplo
 \n\t* El estilo \'Vista Turística\', contiene información detallada y adecuada para viajes y turismo, incluyendo optimización para profesionales de la conducción (mayor contraste, caminos distinguibles), opciones para senderismo Alpino (escala SAC), rutas de ciclismo, soporte para símbolos de senderismo, etc.
-\n\t* \'Caminos de alto contraste\' muestra los caminos en colores muy acentuados para situaciones con brillante iluminación ambiente\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (cobertura nevada), y muestra pistas y remontes (en relación con la descarga del mapa \'Mundo de esquí\') "</string>
+\n\t* \'Caminos de alto contraste\' muestra los caminos en colores muy acentuados para situaciones con brillante iluminación ambiente\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (cobertura nevada), y muestra pistas y remontes (en relación con la descarga del mapa \'Esquí mundial\') "</string>
     <string name="about_version">Versión:</string>
     <string name="about_settings">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
@@ -1359,7 +1359,7 @@
 	<string name="use_transparent_map_theme">Tema transparente</string>
 	<string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
 	<string name="init_native_library">Inicializando biblioteca nativa…</string>
-	<string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
+	<string name="choose_auto_follow_route">Auto-centrar vista del mapa</string>
 	<string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la ubicación actual</string>
 	<string name="auto_follow_route_never">Nunca (pulsa \'Ir\' para iniciar manualmente el guiado)</string>
 	<string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
@@ -1407,7 +1407,7 @@
 	<string name="search_position_favorites">Favoritos…</string>
 	<string name="search_position_undefined">Indefinido</string>
 	<string name="search_position_current_location">Ubicación actual…</string>
-	<string name="search_position_map_view">Centro del mapa actual</string>
+	<string name="search_position_map_view">Vista actual del mapa</string>
 	<string name="select_search_position">Origen:</string>
 	<string name="context_menu_item_search">Buscar cerca de aquí</string>
 	<string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 :
@@ -1702,13 +1702,13 @@
 	<string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura.
 \nSolamente puede ver el mapa precargado y no puede descargar de Internet.</string>
 	<string name="unzipping_file">Descomprimiendo archivo…</string>
-	<string name="route_tr">Gire a la derecha hacia</string>
-	<string name="route_tshr">Gire fuerte a la derecha hacia</string>
-	<string name="route_tslr">Gire leve a la derecha hacia</string>
-	<string name="route_tl">Gire a la izquierda hacia</string>
-	<string name="route_tshl">Gire fuerte a la izquierda hacia</string>
-	<string name="route_tsll">Gire leve a la izquierda hacia</string>
-	<string name="route_tu">Dé la vuelta y continúe por</string>
+	<string name="route_tr">Gire a la derecha en</string>
+	<string name="route_tshr">Gire fuerte a la derecha en</string>
+	<string name="route_tslr">Gire leve a la derecha en</string>
+	<string name="route_tl">Gire a la izquierda en</string>
+	<string name="route_tshl">Gire fuerte a la izquierda en</string>
+	<string name="route_tsll">Gire leve a la izquierda en</string>
+	<string name="route_tu">Dé la vuelta hacia</string>
 	<string name="route_head">Inicie en</string>
 	<string name="first_time_continue">Luego</string>
 	<string name="first_time_download">Descargar regiones</string>
@@ -1820,7 +1820,7 @@
 	<string name="choose_city">Elegir ciudad</string>
 	<string name="ChooseCountry">Elegir país</string>
 	<string name="show_view_angle">Mostrar dirección de visualización</string>
-	<string name="map_view_3d_descr">Habilite la vista 3D del mapa</string>
+	<string name="map_view_3d_descr">Active la vista 3D del mapa</string>
 	<string name="map_view_3d">Visión 3D del mapa</string>
 	<string name="show_poi_over_map_description">Muestre los PDIs sobre el mapa (usando el último filtro elegido)</string>
 	<string name="show_poi_over_map">Mostrar PDI</string>
