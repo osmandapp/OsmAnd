@@ -940,7 +940,7 @@
   <string name="select_animate_speedup">Seleccionar la velocidad del simulador de ruta</string>
   <string name="osmand_parking_hours">Horas</string>
   <string name="osmand_parking_minutes">Minutos</string>
-  <string name="osmand_parking_position_description_add_time">El automóvil fue aparcado en:</string>
+  <string name="osmand_parking_position_description_add_time">El automóvil fue aparcado a las:</string>
   <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
   <string name="use_compass_navigation">Usar brújula</string>
   <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>

@@ -2007,4 +2007,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
+    <string name="osm_edit_context_menu_delete">Suprimeix l\'edició d\'OSM</string>
     </resources>
