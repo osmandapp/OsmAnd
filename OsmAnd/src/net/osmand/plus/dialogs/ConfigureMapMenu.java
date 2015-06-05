@@ -310,7 +310,7 @@ public class ConfigureMapMenu {
 							}
 						});
 				bld.show();
-				return true;
+				return false;
 			}
 		}).description(String.format("%.0f", 100f * activity.getMyApplication().getSettings().MAP_DENSITY.get()) + " %").layout(R.layout.drawer_list_doubleitem).reg();
 
