@@ -675,7 +675,7 @@ public class MapActivityActions implements DialogProvider {
 //				// not exit
 //				newIntent.putExtra(AppInitializer.APP_EXIT_KEY, AppInitializer.APP_EXIT_CODE);
 //				mapActivity.startActivity(newIntent);
-//				// In future when map will be main screen this should change
+				// In future when map will be main screen this should change
 				app.closeApplication(mapActivity);
 				return true;
 			}
