@@ -665,21 +665,21 @@ public class MapActivityActions implements DialogProvider {
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-//		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
-//					.listen(new OnContextMenuClick() {
-//			@Override
-//			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-//				// 1. Work for almost all cases when user open apps from main menu
-////				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMapActivity());
-////				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////				// not exit
-////				newIntent.putExtra(AppInitializer.APP_EXIT_KEY, AppInitializer.APP_EXIT_CODE);
-////				mapActivity.startActivity(newIntent);
-//				// In future when map will be main screen this should change
-//				app.closeApplication(mapActivity);
-//				return true;
-//			}
-//		}).reg();
+		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
+					.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				// 1. Work for almost all cases when user open apps from main menu
+//				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMapActivity());
+//				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				// not exit
+//				newIntent.putExtra(AppInitializer.APP_EXIT_KEY, AppInitializer.APP_EXIT_CODE);
+//				mapActivity.startActivity(newIntent);
+				// In future when map will be main screen this should change
+				app.closeApplication(mapActivity);
+				return true;
+			}
+		}).reg();
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
