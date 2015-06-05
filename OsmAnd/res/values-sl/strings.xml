@@ -1631,7 +1631,7 @@
     <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za snemanje sledi GPX na zemljevidu)</string>
 	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za snemanje na zaslonu zemljevida</string>
 	<string name="record_plugin_description">"Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
-    <string name="rendering_attr_osmcTraces_description">Izris stez po sledeh OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Izris stez po sledeh OSMC</string>
     
 	<string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
     <string name="traffic_warning_border_control">Mejni prehod</string>
@@ -1643,7 +1643,7 @@
     <string name="local_index_description">Pritisnite na katerokoli predmet za prikaz podrobnosti, za izbris ali izklop, pritisk na predmetu zadržite. Na napravi je na voljo še %1$s:</string>
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
-    <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Prosojnica s simboli za pohodništvo</string>
     
     <string name="impassable_road">Izogni se cestam …</string>
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>

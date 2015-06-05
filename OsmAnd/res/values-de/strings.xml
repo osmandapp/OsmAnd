@@ -69,8 +69,8 @@
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
-	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
-	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
+	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymbole anzeigen</string>
+	<string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC)</string>
 	<string name="arrival_distance_factor_early">Früh</string>
 	<string name="arrival_distance_factor_normally">Normal</string>
 	<string name="arrival_distance_factor_late">Spät</string>

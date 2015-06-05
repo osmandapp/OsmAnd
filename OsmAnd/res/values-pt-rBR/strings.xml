@@ -804,8 +804,8 @@
     <string name="download_regular_maps">Mapas normais</string>
     <string name="download_roads_only_maps">Apenas estradas no mapa</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Sobreposição de símbolo de montanhismo</string>
-    <string name="rendering_attr_osmcTraces_description">Renderizar caminhos de acordo com traços OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Limites</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>

@@ -1682,8 +1682,8 @@ s často kladenými otázkami.</string>
 	<string name="lang_zh_TW">Tradiční čínština</string>
 	<string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Turistické trasy a značky</string>
-    <string name="rendering_attr_osmcTraces_description">Vykreslovat cesty podle OSMC značení</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy a značky</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení</string>
     
 	<string name="arrival_distance_factor_early">Brzy</string>
     <string name="arrival_distance_factor_normally">Normální</string>

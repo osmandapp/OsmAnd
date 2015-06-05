@@ -1868,8 +1868,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="pause_navigation">Wstrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Skala wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Symbol nakładki wędrówek</string>
-    <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Symbol nakładki wędrówek</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Renderuj ścieżki według śladów OSMC</string>
     
 	<string name="arrival_distance_factor_early">Wcześnie</string>
     <string name="arrival_distance_factor_normally">Normalnie</string>

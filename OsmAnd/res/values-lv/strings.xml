@@ -2024,7 +2024,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lang_zh_CN">Ķīniešu vienkāršotā</string>
 	<string name="lang_zh_TW">Ķīniešu tradicionālā</string>
 	<string name="route_descr_destination">Galamērķis</string>
-    <string name="rendering_attr_osmcTraces_name">Slēpošanas simbolu pārklājs</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Slēpošanas simbolu pārklājs</string>
     <string name="local_index_description">Nospiediet, lai redzētu detaļas, paturiet nospiestu, lai deaktivizētu vai dzēstu. Datu apjoms (%1$s brīvs):</string>
 	<string name="voices">Balss uzvednes</string>
 	<string name="av_camera_pic_size">Fotokameras bildes izmērs</string>

@@ -1863,8 +1863,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="pause_navigation">navigatie pauzeren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
-    <string name="rendering_attr_osmcTraces_name">Wandelroutes tonen</string>
-    <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes tonen</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Render paden volgens OSMC sporen</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="osmo_invite">Uitnodiging voor…</string>

@@ -1729,8 +1729,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="pause_navigation">Metti in pausa la navigazione</string>
 	<string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
-    <string name="rendering_attr_osmcTraces_description">Disegna i percorsi in base alle tracce OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Strato simboli escursionistici</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Disegna i percorsi in base alle tracce OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Colora gli edifici per tipo</string>
     <string name="arrival_distance_factor_early">Presto</string>

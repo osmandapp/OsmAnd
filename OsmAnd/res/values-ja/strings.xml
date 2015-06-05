@@ -1768,8 +1768,8 @@ POIの更新は利用できません</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
     <string name="rendering_attr_alpineHiking_name">トレッキングビュー</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
-    <string name="rendering_attr_osmcTraces_name">ハイキング用シンボルを重ねて表示</string>
-    <string name="rendering_attr_osmcTraces_description">OSMCトレースに従って道を描写</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">ハイキング用シンボルを重ねて表示</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写</string>
     
 	<string name="interrupt_music_descr">音声案内時に音楽を一時停止</string>
 	<string name="interrupt_music">音楽再生時の割り込み</string>

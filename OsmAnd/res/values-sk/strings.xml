@@ -1840,8 +1840,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="pause_navigation">Pozastaviť navigáciu</string>
 	<string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
-    <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Zobraziť turistické značky</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
     <string name="osmo_invite">Pozvať…</string>

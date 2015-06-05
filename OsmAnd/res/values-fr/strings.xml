@@ -1765,8 +1765,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_attr_subwayMode_name">Itinéraires de métropolitain</string>
  	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées en montagne</string>
     <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
-    <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Surcouche de symboles de rando</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins selon les traces OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>

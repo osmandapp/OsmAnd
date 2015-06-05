@@ -1569,8 +1569,8 @@
     <string name="pause_navigation">Pausa navigeringen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
-    <string name="rendering_attr_osmcTraces_name">Överlägg med vandringssymboler</string>
-    <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Överlägg med vandringssymboler</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Återge stigar enligt OSMC-spår</string>
     
 	<string name="osmo_invite">Bjud in…</string>
     <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>

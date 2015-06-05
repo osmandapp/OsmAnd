@@ -1880,8 +1880,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
  	<string name="rendering_attr_alpineHiking_name">Піший гірський туризм (шкала SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізація шляху за шкалою SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Шар символів для пішого туризму</string>
-    <string name="rendering_attr_osmcTraces_description">Візуалізація шляху відповідно до треків OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Шар символів для пішого туризму</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізація шляху відповідно до треків OSMC</string>
     
 	<string name="arrival_distance_factor_early">Завчасно</string>
     <string name="arrival_distance_factor_normally">Звичайно</string>

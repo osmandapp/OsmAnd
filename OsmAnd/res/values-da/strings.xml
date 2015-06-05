@@ -1691,8 +1691,8 @@
     <string name="pause_navigation">Pause navigation</string>
 	<string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
-    <string name="rendering_attr_osmcTraces_name">Vandresymbol overlejring</string>
-    <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Vandresymbol overlejring</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor</string>
     
 	<string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Forlad gruppen %$s?</string>

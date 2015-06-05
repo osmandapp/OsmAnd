@@ -1685,9 +1685,9 @@
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 （SAC）</string>
-    <string name="rendering_attr_osmcTraces_name">徒步符號層</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">徒步符號層</string>
     <string name="rendering_attr_alpineHiking_description">依據 SAC 比例繪製路徑</string>
-    <string name="rendering_attr_osmcTraces_description">依據 OSMC 軌跡繪製路徑</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑</string>
     
 	<string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>

@@ -869,7 +869,7 @@
     <string name="street_name">Gate</string>
 	<string name="choose_osmand_theme">Tema</string>
     <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og rutepunkter)?</string>
-    <string name="rendering_attr_osmcTraces_name">Fottursymbol-overlegg</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
     <string name="native_library_not_running">Programmet kjører i sikker modus (kan deaktiveres i Innstillinger).</string>
