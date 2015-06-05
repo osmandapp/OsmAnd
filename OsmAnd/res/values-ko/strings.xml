@@ -1915,8 +1915,8 @@
     <string name="pause_navigation">운행 일시중지</string>
 	<string name="rendering_attr_alpineHiking_name">고산 하이킹 규모 (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SAC Scale에 따른 경로 렌더링</string>
-    <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
-    <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">하이킹 심볼 오버레이</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">OSMC 흔적에 따라 경로 렌더링</string>
     
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
     <string name="osmo_invite">초대…</string>

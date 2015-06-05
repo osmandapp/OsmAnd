@@ -1660,7 +1660,7 @@
 	<string name="lang_zh_TW">hagyományos kínai</string>
 	<string name="rendering_attr_alpineHiking_name">Alpesi túra besorolás (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények SAC nehézségi skála szerint</string>
-    <string name="rendering_attr_osmcTraces_name">Turistajelzések rátét</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistajelzések rátét</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Normál</string>
     <string name="arrival_distance_factor_late">Későn</string>
@@ -1692,7 +1692,7 @@
     <string name="osmo_mode_on">OsMo munkamenet leállítása</string>    
     <string name="osmo_mode_off">OsMo munkamenet elindítása</string>
     <string name="osmo_settings_debug">Hibakeresési információk</string>
-    <string name="rendering_attr_osmcTraces_description">OSMC stílusú túrajelzések megjelenítése</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">OSMC stílusú túrajelzések megjelenítése</string>
     
 	<string name="index_tours">Túrák</string>
     <string name="shared_string_all">Összes</string>

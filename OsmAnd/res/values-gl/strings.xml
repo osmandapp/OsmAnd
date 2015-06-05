@@ -623,8 +623,8 @@
     <string name="download_roads_only_maps">Mapas só de estradas</string>
     <string name="rendering_attr_alpineHiking_name">Escala de excursionismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Mostrar as rutas seguindo a escala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Sobreposición de símbolos de sendeirismo</string>
-    <string name="rendering_attr_osmcTraces_description">Renderizar as pistas segundo os trazados de OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposición de símbolos de sendeirismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar as pistas segundo os trazados de OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Agochar as fronteiras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suprimir Suppress display of regional boundaries (admin levels 5-9)</string>

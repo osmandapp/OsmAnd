@@ -953,8 +953,8 @@
     <string name="pause_navigation">Pone in pasu su nàvigu</string>
     <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basande•ti in supra de s’iscala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Istratu sìmbulos escursionisticos</string>
-    <string name="rendering_attr_osmcTraces_description">Disinna sas camineras sighinde sas rastas OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Istratu sìmbulos escursionisticos</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC</string>
     
 	<string name="osmand_parking_delete_confirm">Boles remòvere sa positzione de sa màchina parchegiada?</string>
 	<string name="osmand_parking_delete">Burra su marcadore de parchègiu</string>

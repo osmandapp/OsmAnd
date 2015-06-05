@@ -1650,8 +1650,8 @@
     <string name="pause_navigation">Прыпыніць навігацыю</string>
     <string name="rendering_attr_alpineHiking_name">Пешы горны турызм</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізацыя шляху па шкале SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Накладаньне знакаў пешага турызму</string>
-    <string name="rendering_attr_osmcTraces_description">Візуалізацыя шляху згодна трасам OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Накладаньне знакаў пешага турызму</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трасам OSMC</string>
     
 	<string name="arrival_distance_factor_early">Раней</string>
     <string name="arrival_distance_factor_normally">Звычайна</string>

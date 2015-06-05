@@ -712,8 +712,8 @@
     <string name="download_roads_only_maps">Mapy toĺkі daroh</string>
     <string name="rendering_attr_alpineHiking_name">Piešy horny turyzm</string>
     <string name="rendering_attr_alpineHiking_description">Vіzualіzacyja šliachu pa škalie SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Nakladańnie znakaŭ piešaha turyzmu</string>
-    <string name="rendering_attr_osmcTraces_description">Vіzualіzacyja šliachu zhodna trasam OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Nakladańnie znakaŭ piešaha turyzmu</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Vіzualіzacyja šliachu zhodna trasam OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Schavać miežy</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nie adliustroŭvać rehіjanaĺnyja miežy (admіnіstatyŭnyja ŭzroŭnі 5-9)</string>

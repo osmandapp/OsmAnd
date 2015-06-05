@@ -851,8 +851,8 @@
     <string name="download_roads_only_maps">Mapas viales</string>
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Dibujar senderos según trazas OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evitar mostrar fronteras regionales (niveles administrativos 5-9)</string>

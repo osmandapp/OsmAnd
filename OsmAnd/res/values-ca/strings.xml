@@ -1728,8 +1728,8 @@
     <string name="pause_navigation">Suspèn la navegació</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
     <string name="rendering_attr_alpineHiking_description">Es dibuixen els camins segons l\'escala SAC (Club Alpí Suís)</string>
-    <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
-    <string name="rendering_attr_osmcTraces_description">Es dibuixen els camins segons les traces OSMC (símbols de colors)</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposar simbologia senderista</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Es dibuixen els camins segons les traces OSMC (símbols de colors)</string>
     
 	<string name="osmo_invite">Convida…</string>
     <string name="osmo_leave_confirmation_msg">Voleu deixar el grup %1$s?</string>

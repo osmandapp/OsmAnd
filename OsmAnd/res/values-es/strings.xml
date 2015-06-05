@@ -1785,8 +1785,8 @@
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar caminos de acuerdo a la escala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
     
 	<string name="osmo_invite">Invitar…</string>
     <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>

@@ -1269,8 +1269,8 @@
 	<string name="index_item_world_altitude_correction">Munduko Altitude Zuzenketa</string>
 	<string name="rendering_attr_alpineHiking_name">Alpetar ibilbide ikuspegia</string>
     <string name="rendering_attr_alpineHiking_description">Renderizatu bideak SAC eskalaren arabera</string>
-    <string name="rendering_attr_osmcTraces_name">Ibilbide simboloen gain-azala</string>
-    <string name="rendering_attr_osmcTraces_description">Renderizatu bideak OSMC aztarnen arabera</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Ibilbide simboloen gain-azala</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Renderizatu bideak OSMC aztarnen arabera</string>
     
 	
     
