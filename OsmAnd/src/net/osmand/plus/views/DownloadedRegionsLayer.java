@@ -117,7 +117,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				currentObjects != null) {
 			path.reset();
 			for (BinaryMapDataObject o : currentObjects) {
-				boolean downloaded = checkIfObjectDownloaded(o);
+				String downloadName = osmandRegions.getDownloadName(o);
+				boolean downloaded = checkIfObjectDownloaded(downloadName);
 				if (!downloaded) {
 					continue;
 				}
@@ -136,10 +137,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 
 
-	private boolean checkIfObjectDownloaded(BinaryMapDataObject o) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
+	private boolean checkIfObjectDownloaded(String downloadName) {
+		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o)) + "-roads"
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + "-roads"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
@@ -237,35 +238,34 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				btnName.append(view.getResources().getString(R.string.shared_string_download));
 				filter.setLength(0);
 				Set<String> set = new TreeSet<String>();
-				int cx = queriedBox.getCenter31X();
-				int cy = queriedBox.getCenter31Y();
+				int cx = view.getCurrentRotatedTileBox().getCenter31X();
+				int cy = view.getCurrentRotatedTileBox().getCenter31Y();
 				if ((currentObjects != null && currentObjects.size() > 0)) {
 					for (int i = 0; i < currentObjects.size(); i++) {
-						// TODO regions=boundary
 						final BinaryMapDataObject o = currentObjects.get(i);
 						if (!osmandRegions.contain(o, cx, cy)) {
 							continue;
 						}
-						if(checkIfObjectDownloaded(o)) {
-							return null;
+						String fullName = osmandRegions.getFullName(o);
+						String downloadName = osmandRegions.getMapDownloadType(fullName);
+						if (!Algorithms.isEmpty(downloadName)) {
+							String name = osmandRegions.getLocaleName(downloadName); // Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+							if (checkIfObjectDownloaded(downloadName)) {
+								return null;
+							}
+							if (!set.add(name)) {
+								continue;
+							}
+							if (set.size() > 1) {
+								btnName.append(" ").append(view.getResources().getString(R.string.shared_string_or))
+										.append(" ");
+								filter.append(", ");
+							} else {
+								btnName.append(" ");
+							}
+							filter.append(name);
+							btnName.append(name);
 						}
-						String name =  osmandRegions.getLocaleName(o); //Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
-						if (!set.add(name)) {
-							continue;
-						}
-						if (set.size() > 1) {
-							btnName.append(" ").append(view.getResources().getString(R.string.shared_string_or)).append(" ");
-							filter.append(", ");
-						} else {
-							btnName.append(" ");
-						}
-						filter.append(name);
-//						String parent = osmandRegions.getParentFullName(o);
-//						if (osmandRegions.getParentFullName(o) != null) {
-//							name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " "
-//									+ name;
-//						}
-						btnName.append(name);
 					}
 				}
 			}
