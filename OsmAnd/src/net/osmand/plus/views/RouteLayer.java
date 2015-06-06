@@ -124,8 +124,6 @@ public class RouteLayer extends OsmandMapLayer {
 						paint.setStrokeWidth(12 * view.getDensity());
 					}
 					osmandRenderer.updatePaint(req, actionPaint, 2, false, rc);
-					// TODO remove
-					// actionPaint.setColor(Color.BLUE);
 					paintIconAction.setColorFilter(new PorterDuffColorFilter(actionPaint.getColor(), Mode.MULTIPLY));
 					
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
@@ -191,79 +189,84 @@ public class RouteLayer extends OsmandMapLayer {
 	private void drawAction(RotatedTileBox tb, Canvas canvas) {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-			Path pth = new Path();
-			Matrix matrix = new Matrix();
-			boolean first = true;
-			int x = 0, px = 0, py = 0, y = 0;
-			for (int i = 0; i < actionPoints.size(); i++) {
-				Location o = actionPoints.get(i);
-				if (o == null) {
-					canvas.drawPath(pth, actionPaint);
-					double angleRad = Math.atan2(y - py, x - px);
-					double angle = (angleRad * 180 / Math.PI) + 90f;
-					double distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-					if (distSegment == 0) {
-						continue;
-					}
-					// int len = (int) (distSegment / pxStep);
-					float pdx = x - px;
-					float pdy = y - py;
-					matrix.reset();
-					matrix.postTranslate(0, -actionArrow.getHeight() / 2);
-					matrix.postRotate((float) angle, actionArrow.getWidth() / 2, 0);
-					matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2, py + pdy);
-					canvas.drawBitmap(actionArrow, matrix, paintIconAction);
-					first = true;
-				} else {
-					px = x;
-					py = y;
-					x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-					y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					if(first) {
-						pth.reset();
-						pth.moveTo(x, y);
-						first = false;
+			try {
+				Path pth = new Path();
+				Matrix matrix = new Matrix();
+				boolean first = true;
+				int x = 0, px = 0, py = 0, y = 0;
+				for (int i = 0; i < actionPoints.size(); i++) {
+					Location o = actionPoints.get(i);
+					if (o == null) {
+						canvas.drawPath(pth, actionPaint);
+						double angleRad = Math.atan2(y - py, x - px);
+						double angle = (angleRad * 180 / Math.PI) + 90f;
+						double distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+						if (distSegment == 0) {
+							continue;
+						}
+						// int len = (int) (distSegment / pxStep);
+						float pdx = x - px;
+						float pdy = y - py;
+						matrix.reset();
+						matrix.postTranslate(0, -actionArrow.getHeight() / 2);
+						matrix.postRotate((float) angle, actionArrow.getWidth() / 2, 0);
+						matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2, py + pdy);
+						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
+						first = true;
 					} else {
-						pth.lineTo(x, y);
+						px = x;
+						py = y;
+						x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+						y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+						if (first) {
+							pth.reset();
+							pth.moveTo(x, y);
+							first = false;
+						} else {
+							pth.lineTo(x, y);
+						}
 					}
 				}
+
+			} finally {
+				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
-			
-			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-			
-			TIntArrayList tx = new TIntArrayList();
-			TIntArrayList ty = new TIntArrayList();
-			for (int i = 0; i < points.size(); i++) {
-				Location o = points.get(i);
-				int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				tx.add(x);
-				ty.add(y);
+			try {
+				TIntArrayList tx = new TIntArrayList();
+				TIntArrayList ty = new TIntArrayList();
+				for (int i = 0; i < points.size(); i++) {
+					Location o = points.get(i);
+					int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					tx.add(x);
+					ty.add(y);
+				}
+				calculatePath(tb, tx, ty, path);
+
+				if (isPaint_1) {
+					canvas.drawPath(path, paint_1);
+				}
+				if (isShadowPaint) {
+					canvas.drawPath(path, shadowPaint);
+				}
+				canvas.drawPath(path, paint);
+				if (isPaint2) {
+					canvas.drawPath(path, paint2);
+				}
+				if (tb.getZoomAnimation() == 0) {
+					TIntArrayList lst = new TIntArrayList(50);
+					calculateSplitPaths(tb, tx, ty, lst);
+					drawArrowsOverPath(canvas, lst, coloredArrowUp);
+				}
+			} finally {
+				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
-			calculatePath(tb, tx, ty, path);
-			
-			if(isPaint_1) {
-				canvas.drawPath(path, paint_1);
-			}
-			if(isShadowPaint) {
-				canvas.drawPath(path, shadowPaint);
-			}
-			canvas.drawPath(path, paint);
-			if(isPaint2) {
-				canvas.drawPath(path, paint2);
-			}
-			if (tb.getZoomAnimation() == 0) {
-				TIntArrayList lst = new TIntArrayList(50);
-				calculateSplitPaths(tb, tx, ty, lst);
-				drawArrowsOverPath(canvas, lst, coloredArrowUp);
-			}
-			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
@@ -360,7 +363,15 @@ public class RouteLayer extends OsmandMapLayer {
 			double rightLongitude, Location lastProjection, List<Location> routeNodes, int cd,
 			Iterator<RouteDirectionInfo> it, int zoom) {
 		RouteDirectionInfo nf = null;
-		double DISTANCE_ACTION = zoom >= 17 ? 15 : 35;
+		
+		double DISTANCE_ACTION = 35;
+		if(zoom >= 17) {
+			DISTANCE_ACTION = 15;
+		} else if (zoom == 15) {
+			DISTANCE_ACTION = 70;
+		} else if (zoom < 15) {
+			DISTANCE_ACTION = 110;
+		}
 		double actionDist = 0;
 		Location previousAction = null; 
 		actionPoints.clear();
@@ -421,9 +432,10 @@ public class RouteLayer extends OsmandMapLayer {
 								break;
 							} else {
 								if(prevPoint == k) {
-									actionPoints.remove(ind - 1);
-									actionPoints.remove(ind - 1);
+									actionPoints.remove(actionPoints.size() - 1);
+									actionPoints.remove(actionPoints.size() - 1);
 									prevPoint = -2;
+									ind = actionPoints.size();
 								}
 								actionPoints.add(ind, l);
 								lp = l;

@@ -461,6 +461,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
+				canvas.restore();
 			}
 		}
 		Bitmap t = bufferBitmap;

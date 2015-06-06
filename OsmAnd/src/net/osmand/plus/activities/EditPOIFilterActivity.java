@@ -113,8 +113,6 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		View v = lv.getChildAt(0);
 		final int top = (v == null) ? 0 : v.getTop();
 		Builder builder = new AlertDialog.Builder(this);
-		ScrollView scroll = new ScrollView(this);
-		ListView listView = new ListView(this);
 		final LinkedHashMap<String, String> subCategories = new LinkedHashMap<String, String>();
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
 		if (acceptedCategories != null) {
@@ -150,9 +148,6 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				selected[i] = acceptedCategories.contains(subcategory);
 			}
 		}
-
-		scroll.addView(listView);
-		builder.setView(scroll);
 		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.shared_string_close), new DialogInterface.OnClickListener() {
 
 			@Override
