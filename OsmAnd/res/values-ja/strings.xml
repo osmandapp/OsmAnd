@@ -857,7 +857,7 @@ POIの更新は利用できません</string>
 	<string name="map_widget_max_speed">制限速度</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">該当する建物は見つかりませんでした。</string>
-    <string name="search_villages_and_postcodes">市町村検索/郵便番号</string>
+    <string name="search_villages_and_postcodes">さらに市町村検索/郵便番号</string>
 	<string name="rendering_attr_showRoadMaps_description">道路のみのマップを表示するときに選択します。</string>
 	<string name="rendering_attr_showRoadMaps_name">道路のみのマップ</string>
     <string name="safe_mode_description">セーフモード(ネイティブコードの代わりにやや遅いAndroid用コード)でアプリケーションを実行。</string>
@@ -1689,13 +1689,13 @@ POIの更新は利用できません</string>
     <string name="osmo_mode_off">OsMoセッションの開始</string>
     <string name="osmo_settings_debug">デバッグ情報</string>
     <string name="osmo_settings_descr">モニタリングについての設定と各個のモニタリングチャンネルのセットアップ</string>
-    <string name="osmo_settings">OsMoモニタリング</string>
+    <string name="osmo_settings">OsMo</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
     <string name="osmo_plugin_description">"このプラグインはOsMoの高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n他のデバイスとその経路を追跡することが出来ます。匿名のグループを即座に作成でき、互いの位置を共有し、伝え合うことが出来ます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
-    <string name="osmo_plugin_name">OsMoモニタリング</string>
+    <string name="osmo_plugin_name">OsMo(OSMモニタリング)</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
     <string name="misc_pref_title">その他備考</string>
@@ -2033,4 +2033,14 @@ POIの更新は利用できません</string>
     <string name="storage_directory_default">内部メモリ</string>
     <string name="storage_directory">マップストレージ</string>
     <string name="shared_string_copy">コピー</string>
-    </resources>
+    <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
+    <string name="rendering_value_disabled_name">無効</string>
+    <string name="osmo_share_my_location">現在地の共有</string>
+    <string name="shared_string_logoff">ログオフ</string>
+    <string name="routing_attr_avoid_borders_name">国境検問所を通過しない</string>
+	<string name="routing_attr_avoid_borders_description">国境越えを避ける</string>
+	<string name="routing_attr_height_name">高さ制限</string>
+	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定</string>
+    <string name="use_fast_recalculation">賢いルート再計算</string>
+	<string name="use_fast_recalculation_desc">長い旅程の最初の部分のみ再計算</string>
+</resources>
