@@ -31,9 +31,16 @@ import net.osmand.util.MapUtils;
 
 public class OsmandRegions {
 
+	private static final String MAP_TYPE = "region_map";
+//	regionSrtm = object.getMapIndex().getRule("region_srtm", null);
+//	regionWiki = object.getMapIndex().getRule("region_wiki", null);
+//	regionRoads = object.getMapIndex().getRule("region_roads", null);
+//	regionHillshade = object.getMapIndex().getRule("region_hillshade", null);
+	
 	private BinaryMapIndexReader reader;
 	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
 	Map<String, String> fullNamesToLocaleNames = new HashMap<String, String>();
+	Map<String, String> fullMapNamesToDownloadNames = new HashMap<String, String>();
 	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
 	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
 	QuadTree<String> quadTree = null ;
@@ -46,11 +53,6 @@ public class OsmandRegions {
 	Integer nameType = null;
 	Integer nameLocaleType = null;
 	String locale = "en";
-	Integer regionSrtm;
-	Integer regionWiki;
-	Integer regionMap;
-	Integer regionRoads;
-	Integer regionHillshade;
 
 
 	public void prepareFile(String fileName) throws IOException {
@@ -258,6 +260,10 @@ public class OsmandRegions {
 		this.locale = locale;
 	}
 	
+	public String getMapDownloadType(String fullname) {
+		return fullMapNamesToDownloadNames.get(fullname);
+	}
+	
 	public void initLocaleNames() throws IOException {
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<String, String>();
@@ -266,6 +272,13 @@ public class OsmandRegions {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				initTypes(object);
+				int[] types = object.getTypes();
+				for(int i = 0; i < types.length; i++ ) {
+					TagValuePair tp = object.getMapIndex().decodeType(types[i]);
+					if("boundary".equals(tp.value)) {
+						return false;
+					}
+				}
 				String parentFullName = getParentFullName(object);
 				String fullName = getFullName(object);
 				if(!Algorithms.isEmpty(parentFullName)) {
@@ -297,9 +310,13 @@ public class OsmandRegions {
 				String downloadName = getDownloadName(object);
 				if(downloadName != null) {
 					downloadNamesToFullNames.put(downloadName, fullName);
+					if(isDownloadOfType(object, MAP_TYPE)) {
+						fullMapNamesToDownloadNames.put(fullName, downloadName);
+					}
 				}
 				return false;
 			}
+
 
 			@Override
 			public boolean isCancelled() {
@@ -329,6 +346,17 @@ public class OsmandRegions {
 			}
 		}
 		
+	}
+	
+	private boolean isDownloadOfType(BinaryMapDataObject object, String type) {
+		int[] addtypes = object.getAdditionalTypes();
+		for(int i = 0; i < addtypes.length; i++) {
+			TagValuePair tp = object.getMapIndex().decodeType(addtypes[i]);
+			if(type.equals(tp.tag) && "yes".equals(tp.value)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 
@@ -402,11 +430,7 @@ public class OsmandRegions {
 			nameLocaleType = object.getMapIndex().getRule("name:" + locale, null);
 			parentFullName = object.getMapIndex().getRule("region_parent_name", null);
 			fullNameType = object.getMapIndex().getRule("region_full_name", null);
-			regionSrtm = object.getMapIndex().getRule("region_srtm", null);
-			regionWiki = object.getMapIndex().getRule("region_wiki", null);
-			regionMap = object.getMapIndex().getRule("region_map", null);
-			regionRoads = object.getMapIndex().getRule("region_roads", null);
-			regionHillshade = object.getMapIndex().getRule("region_hillshade", null);
+			
 			if (downloadNameType == null || nameType == null) {
 				throw new IllegalStateException();
 			}
