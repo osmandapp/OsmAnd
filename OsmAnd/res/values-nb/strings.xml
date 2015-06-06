@@ -745,8 +745,8 @@
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
-    <string name="osmo_plugin_name">OsMo-overvåking</string>
-    <string name="osmo_settings">OsMo-overvåking</string>
+    <string name="osmo_plugin_name">OsMo (OSM-overvåking)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="map_widget_top">Statuslinje</string>
 	<string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
