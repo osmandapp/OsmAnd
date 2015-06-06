@@ -841,7 +841,7 @@
 	
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
-	<string name="transport_searching_route">ÖPNV-Ergebnisse (Ziel {0}):</string>
+	<string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
 	
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	
