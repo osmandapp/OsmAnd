@@ -841,7 +841,7 @@
 	
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
-	<string name="transport_searching_route">ÖPNV-Ergebnisse (Ziel {0}):</string>
+	<string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
 	
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	
@@ -1991,7 +1991,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     
-    <string name="home_button">Startbildschirm</string>
+    <string name="home_button">Startseite</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
     <string name="osmo_use_https">HTTPS nutzen</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
@@ -2164,6 +2164,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="plugin_touringview_name">Tourenkartenansicht</string>
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
-	<string name="search_poi_category_hint">Suchbegriff hier eingeben</string>
+	<string name="search_poi_category_hint">Suchbegriff</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
-    </resources>
+    <string name="shared_string_logoff">Abmelden</string>
+    <string name="osmo_share_my_location">Meine Position teilen</string>
+    <string name="rendering_value_disabled_name">Deaktiviert</string>
+    <string name="routing_attr_avoid_borders_name">Überfahren von Grenzen vermeiden</string>
+	<string name="routing_attr_height_name">Höhenbeschränkung</string>
+	</resources>
