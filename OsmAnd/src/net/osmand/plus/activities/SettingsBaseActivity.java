@@ -171,6 +171,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	
 	public static String getStringPropertyValue(Context ctx, String propertyValue) {		
 		try {
+			if(propertyValue == null) {
+				return "";
+			}
 			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
 			Field f = R.string.class.getField("rendering_value_" + propertyValueReplaced + "_name");
 			if (f != null) {
