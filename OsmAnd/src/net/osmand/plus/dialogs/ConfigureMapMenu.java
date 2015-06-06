@@ -569,7 +569,9 @@ public class ConfigureMapMenu {
 						b.setTitle(propertyDescr);
 
 						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-						if(Algorithms.isEmpty(pref.get())) {
+						if (i >= 0) {
+							i++;
+						} else if (Algorithms.isEmpty(pref.get())) {
 							i = 0;
 						}
 
