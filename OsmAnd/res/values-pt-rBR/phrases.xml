@@ -5,7 +5,7 @@
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo na via</string>
 		<string name="poi_filling_station">Posto de combustível</string>
-		<string name="poi_personal_transport">Transporte individual</string>
+		<string name="poi_personal_transport">Transporte particular</string>
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte aquático</string>
