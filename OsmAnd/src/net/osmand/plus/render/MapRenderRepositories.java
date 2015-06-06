@@ -622,14 +622,16 @@ public class MapRenderRepositories {
 					if (!Algorithms.isEmpty(res)) {
 						if (customProp.isString()) {
 							renderingReq.setStringFilter(customProp, res);
-						} else if (customProp.isBoolean()) {
-							renderingReq.setBooleanFilter(customProp, "true".equalsIgnoreCase(res));
 						} else {
 							try {
 								renderingReq.setIntFilter(customProp, Integer.parseInt(res));
 							} catch (NumberFormatException e) {
 								e.printStackTrace();
 							}
+						}
+					} else {
+						if (customProp.isString()) {
+							renderingReq.setStringFilter(customProp, "");
 						}
 					}
 				}

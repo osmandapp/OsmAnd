@@ -31,6 +31,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -552,7 +553,13 @@ public class ConfigureMapMenu {
 			} else {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
-				String descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
+				String descr;
+				if(Algorithms.isEmpty(pref.get())) {
+					descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
+				} else {
+					descr = SettingsActivity.getStringPropertyValue(view.getContext(),
+							p.getDefaultValueDescription());
+				}
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
 
 					@Override
@@ -562,18 +569,27 @@ public class ConfigureMapMenu {
 						b.setTitle(propertyDescr);
 
 						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+						if(Algorithms.isEmpty(pref.get())) {
+							i = 0;
+						}
 
-						String[] possibleValuesString = new String[p.getPossibleValues().length];
+						String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
+						possibleValuesString[0] = SettingsActivity.getStringPropertyValue(view.getContext(),
+									p.getDefaultValueDescription());
 
 						for (int j = 0; j < p.getPossibleValues().length; j++) {
-							possibleValuesString[j] = SettingsActivity.getStringPropertyValue(view.getContext(),
+							possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(view.getContext(),
 									p.getPossibleValues()[j]);
 						}
 
 						b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								pref.set(p.getPossibleValues()[which]);
+								if(which == 0) {
+									pref.set("");
+								} else {
+									pref.set(p.getPossibleValues()[which - 1]);
+								}
 								refreshMapComplete(activity);
 								adapter.setItemDescription(pos, SettingsActivity.getStringPropertyValue(activity, pref.get()));
 								dialog.dismiss();

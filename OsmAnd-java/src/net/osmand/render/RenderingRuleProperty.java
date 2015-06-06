@@ -30,6 +30,7 @@ public class RenderingRuleProperty {
 	// use for custom rendering rule properties
 	protected String name;
 	protected String description;
+	protected String defaultValueDescription;
 	protected String[] possibleValues;
 	protected String category;
 	
@@ -74,12 +75,20 @@ public class RenderingRuleProperty {
 		return description;
 	}
 	
+	public String getDefaultValueDescription() {
+		return defaultValueDescription;
+	}
+	
 	protected void setName(String name) {
 		this.name = name;
 	}
 	
 	protected void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setDefaultValueDescription(String defaultValueDescription) {
+		this.defaultValueDescription = defaultValueDescription;
 	}
 	
 	public void setCategory(String category) {

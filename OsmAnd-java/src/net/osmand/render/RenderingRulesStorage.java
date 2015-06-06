@@ -287,6 +287,7 @@ public class RenderingRulesStorage {
 					prop = RenderingRuleProperty.createInputIntProperty(attr);
 				}
 				prop.setDescription(parser.getAttributeValue("", "description"));
+				prop.setDefaultValueDescription(parser.getAttributeValue("", "defaultValueDescription"));
 				prop.setCategory(parser.getAttributeValue("", "category"));
 				prop.setName(parser.getAttributeValue("", "name"));
 				if(parser.getAttributeValue("", "possibleValues") != null){

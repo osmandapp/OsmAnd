@@ -15,7 +15,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.render.DefaultRenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.util.Algorithms;
@@ -91,15 +90,15 @@ public class RendererRegistry {
 		return externalRenderers.containsKey(name) || internalRenderers.containsKey(name);
 	}
 	
-	private static boolean USE_PRECOMPILED_STYLE = false;
+//	private static boolean USE_PRECOMPILED_STYLE = false;
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
-		if ((name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) && USE_PRECOMPILED_STYLE) {
-			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
-			new DefaultRenderingRulesStorage().createStyle(rrs);
-			log.info("INIT rendering from class");
-			return rrs;
-		}
+//		if ((name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) && USE_PRECOMPILED_STYLE) {
+//			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
+//			new DefaultRenderingRulesStorage().createStyle(rrs);
+//			log.info("INIT rendering from class");
+//			return rrs;
+//		}
 		InputStream is = getInputStream(name);
 		if(is == null) {
 			return null;
