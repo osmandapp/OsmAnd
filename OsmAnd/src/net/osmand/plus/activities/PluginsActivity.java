@@ -152,7 +152,7 @@ public class PluginsActivity extends OsmandListActivity {
 					});
 		}
 
-		if (settingsActivity != null) {
+		if (settingsActivity != null && plugin.isActive()) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -162,7 +162,6 @@ public class PluginsActivity extends OsmandListActivity {
 					return true;
 				}
 			});
-			settingsItem.setEnabled(plugin.isActive());
 		}
 
 		optionsMenu.show();
