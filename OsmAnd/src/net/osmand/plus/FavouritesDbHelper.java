@@ -481,9 +481,9 @@ public class FavouritesDbHelper {
 				name = "";
 			}
 			// old way to store the category, in name.
-			if ("".equals(categoryName.trim()) && (c = p.name.lastIndexOf('_')) != -1) {
-				categoryName = p.name.substring(c + 1);
-				name = p.name.substring(0, c);
+			if ("".equals(categoryName.trim()) && (c = name.lastIndexOf('_')) != -1) {
+				categoryName = name.substring(c + 1);
+				name = name.substring(0, c);
 			}
 			FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
 			fp.setDescription(p.desc);
