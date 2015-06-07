@@ -595,7 +595,9 @@ public class ResourceManager {
 		ArrayList<File> files = new ArrayList<File>();
 		File appPath = context.getAppPath(null);
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		if(!Version.isFreeVersion(context)) {
+			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		}
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
@@ -626,7 +628,9 @@ public class ResourceManager {
 				} catch (IOException e) {
 					log.error(String.format("File %s could not be read", f.getName()), e);
 				}
-				if (index == null || (Version.isFreeVersion(context) && f.getName().contains("_wiki"))) {
+				if (index == null || (Version.isFreeVersion(context) && 
+						(f.getName().contains("_wiki") || f.getName().contains(".wiki"))
+						)) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (index.isBasemap()) {
