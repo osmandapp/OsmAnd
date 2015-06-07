@@ -1958,4 +1958,5 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hatálya szerint</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Színezés OSMC szerint</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>    
+    <string name="shared_string_show_details">Részletek megjelenítése</string>
     </resources>
