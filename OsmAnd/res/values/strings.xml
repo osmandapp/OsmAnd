@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM Edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
@@ -1408,7 +1409,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="show_ruler_level">Display ruler</string>	
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Back to position</string>
-	<string name="show_details">Display position details</string>
+	
 	<string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
 	<string name="accessibility_extensions">Accessibility extensions</string>
 	<string name="accessibility_mode">Accessibility mode</string>

@@ -568,7 +568,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			});
 		}
 		if (((OsmandApplication) getApplication()).accessibilityEnabled()) {
-			MenuItem item = optionsMenu.getMenu().add(R.string.show_details);
+			MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_details);
 			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

@@ -725,7 +725,7 @@ public class MapActivityActions implements DialogProvider {
 	public void whereAmIDialog() {
 		final List<String> items = new ArrayList<String>();
 		items.add(getString(R.string.show_location));
-		items.add(getString(R.string.show_details));
+		items.add(getString(R.string.shared_string_show_details));
 		AlertDialog.Builder menu = new AlertDialog.Builder(mapActivity);
 		menu.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
 			@Override
