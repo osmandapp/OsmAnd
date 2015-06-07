@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
@@ -1955,7 +1955,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
-    <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
+    <string name="fav_point_dublicate_message">Der angegebene Favoritenname wird bereits verwendet, und wird auf %1$s geändert.</string>
     <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
     <string name="print_route">Route drucken</string>
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
@@ -1997,7 +1997,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     
-    <string name="shared_string_show_all">ALLES ZEIGEN</string>
+    <string name="shared_string_show_all">ALLE ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="shared_string_dismiss">Ablehnen</string>

@@ -321,7 +321,7 @@
 	<string name="fav_point_emoticons_message">The favorite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
     <string name="print_route">Print route</string>
     <string name="fav_point_dublicate">Favorite point name duplicate</string>
-    <string name="fav_point_dublicate_message">We changed your favorite point name to %1$s to avoid duplicated names.</string>
+    <string name="fav_point_dublicate_message">Specified favorite name already in use, was changed to %1$s to avoid duplication.</string>
     <string name="text_size_descr">Set the text size on the map.</string>
     <string name="text_size">Text size</string>
     <string name="traffic_warning_speed_limit">Speed limit</string>
