@@ -1814,7 +1814,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="local_index_description">Cliquez sur n\'importe quel élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
 	<string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori.</string>
-    <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter les doublons.</string>
+    <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter un doublon.</string>
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
     
     
@@ -2042,4 +2042,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
+    <string name="shared_string_show_details">Montrer les détails</string>
     </resources>
