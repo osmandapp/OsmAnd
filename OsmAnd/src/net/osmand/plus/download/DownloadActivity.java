@@ -363,12 +363,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public List<DownloadActivityType> createDownloadTypes() {
 		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
 		items.add(DownloadActivityType.NORMAL_FILE);
+		if(!Version.isFreeVersion(getMyApplication())) {
+			items.add(DownloadActivityType.WIKIPEDIA_FILE);
+		}
 		items.add(DownloadActivityType.VOICE_FILE);
 		items.add(DownloadActivityType.ROADS_FILE);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
 			items.add(DownloadActivityType.HILLSHADE_FILE);
 			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
 		}
+		
 		getMyApplication().getAppCustomization().getDownloadTypes(items);
 		return items;
 	}

@@ -94,6 +94,7 @@ public class LocalIndexHelper {
 		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
+		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		
@@ -168,12 +169,30 @@ public class LocalIndexHelper {
 		}
 	}
 	
+	private void loadWikiData(File mapPath, List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+		if (mapPath.canRead()) {
+			for (File mapFile : listFilesSorted(mapPath)) {
+				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
+				}
+			}
+		}
+	}
+	
 	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					boolean srtm = mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-					LocalIndexInfo info = new LocalIndexInfo(srtm ? LocalIndexType.SRTM_DATA :LocalIndexType.MAP_DATA, mapFile, backup);
+					LocalIndexType lt = LocalIndexType.MAP_DATA;
+					if(mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+						lt = LocalIndexType.SRTM_DATA;
+					} else if(mapFile.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+						lt = LocalIndexType.WIKI_DATA;
+					}
+					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup);
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
 						info.setLoaded(true);
 					}
@@ -194,6 +213,7 @@ public class LocalIndexHelper {
 		MAP_DATA(R.string.local_indexes_cat_map),
 		TILES_DATA(R.string.local_indexes_cat_tile),
 		SRTM_DATA(R.string.local_indexes_cat_srtm),
+		WIKI_DATA(R.string.local_indexes_cat_wiki),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts);
 //		AV_DATA(R.string.local_indexes_cat_av);;

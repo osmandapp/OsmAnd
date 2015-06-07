@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="read_full_article">Read full article</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM Edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
@@ -875,6 +878,7 @@
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Hillshade</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="download_hillshade_maps">Hillshade overlays</string>
     <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
 		\n\t* Audio/video plugin enhancement (photos with EXIF information)

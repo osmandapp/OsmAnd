@@ -34,6 +34,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map");
 	public static final DownloadActivityType SRTM_COUNTRY_FILE  = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
 	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
+	public static final DownloadActivityType WIKIPEDIA_FILE = new DownloadActivityType(R.string.download_wikipedia_maps, "wikimap");
 	private int resource;
 	private String[] tags;
 
@@ -84,6 +85,9 @@ public class DownloadActivityType {
 					|| fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (VOICE_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION));
+		} else if (WIKIPEDIA_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP,
+					IndexConstants.BINARY_MAP_VERSION));
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
@@ -103,6 +107,8 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+		} else if (WIKIPEDIA_FILE == this) {
+			return ctx.getAppPath(IndexConstants.WIKI_INDEX_DIR);
 		} else if (HILLSHADE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		}
@@ -139,7 +145,9 @@ public class DownloadActivityType {
 		} else if (VOICE_FILE == this) {
 			return "";
 		} else if (SRTM_COUNTRY_FILE == this) {
-			return BINARY_SRTM_MAP_INDEX_EXT;
+			return IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+		} else if (WIKIPEDIA_FILE == this) {
+			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 		} else if (HILLSHADE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
 		}
@@ -151,6 +159,8 @@ public class DownloadActivityType {
 			return "&road=yes";
 		} else if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return "&srtmcountry=yes";
+		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+			return "&wiki=yes";
 		}else if (this== DownloadActivityType.HILLSHADE_FILE) {
 			return "&hillshade=yes";
 		}
@@ -202,6 +212,8 @@ public class DownloadActivityType {
 	public String getVisibleDescription(IndexItem indexItem, Context ctx) {
 		if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
+		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+			return ctx.getString(R.string.download_wikipedia_item);
 		} else if (this == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		}
@@ -263,6 +275,9 @@ public class DownloadActivityType {
 			String baseNameWithoutVersion = fileName.substring(0, l);
 			if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+			}
+			if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 			}
 			if (this == DownloadActivityType.ROADS_FILE) {
 				baseNameWithoutVersion += "-roads";

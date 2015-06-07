@@ -21,6 +21,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.osmo.OsMoService;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiLegacyFilter;
@@ -46,18 +48,25 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -331,8 +340,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			showWiki(ctx, app, a.getName(lang), 
-					a.getDescription(lang));
+			showWiki(ctx, app, a, lang);
 		} else {
 			String d = OsmAndFormatter.getAmenityDescriptionContent(app, a, false);
 			SpannableString spannable = new SpannableString(d);
@@ -358,21 +366,50 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return typedvalueattr.resourceId;
 	}
 	
-	private static void showWiki(Context ctx, OsmandApplication app, String name, String content ) {
+	private static void showWiki(final Context ctx,final OsmandApplication app, final Amenity a, final String lang ) {
 		final Dialog dialog = new Dialog(ctx, 
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme:
 							R.style.OsmandDarkTheme);
+		String content = a.getDescription(lang);
+		final String title = a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		Toolbar tb = new Toolbar(ctx);
-		tb.setClickable(true);
+		
+		final Toolbar topBar = new Toolbar(ctx);
+		topBar.setClickable(true);
 		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-		tb.setNavigationIcon(back);
-		tb.setTitle(name);
-		tb.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
-		tb.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
-		tb.setNavigationOnClickListener(new View.OnClickListener() {
+		topBar.setNavigationIcon(back);
+		topBar.setTitle(title);
+		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
+		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+		String lng = a.getNameSelected(lang);
+		if(Algorithms.isEmpty(lng)) {
+			lng = "EN";
+		}
+		final String langSelected = lng;
+		final Button bottomBar = new Button(ctx);
+		bottomBar.setText(R.string.read_full_article);
+		bottomBar.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String article = "http://"+langSelected.toLowerCase()+".wikipedia.org/wiki/" + title.replace(' ', '_');
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(article));
+				ctx.startActivity(i);
+			}
+		});
+		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener()  {
+			
+			@Override
+			public boolean onMenuItemClick(final MenuItem item) {
+				showPopupLangMenu(ctx, topBar, app, a, dialog);
+				return true;
+			}
+		});
+		MenuItemCompat.setShowAsAction(mi, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		topBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
 				dialog.dismiss();
@@ -384,8 +421,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
 		ScrollView scrollView = new ScrollView(ctx);
-		ll.addView(tb);
-		ll.addView(scrollView);
+		ll.addView(topBar);
+		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
+		lp.weight = 1;
+		ll.addView(scrollView, lp);
+		ll.addView(bottomBar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		scrollView.addView(wv);
 		dialog.setContentView(ll);
 		wv.setFocusable(true);
@@ -409,6 +449,27 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		dialog.setCancelable(true);
 		dialog.show();		
 //		wv.setWebViewClient();		
+	}
+
+
+	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
+			final OsmandApplication app, final Amenity a, final Dialog dialog) {
+		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
+		List<String> names = a.getNames("en");
+		for (final String n : names) {
+			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
+			MenuItem item = optionsMenu.getMenu().add(vn);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					dialog.dismiss();
+					showWiki(ctx, app, a, n);
+					return true;
+				}
+			});
+		}
+		optionsMenu.show();
+		
 	}
 
 

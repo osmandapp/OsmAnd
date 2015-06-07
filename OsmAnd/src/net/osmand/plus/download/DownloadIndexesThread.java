@@ -583,6 +583,7 @@ public class DownloadIndexesThread {
 				!date.equals(indexfilesdate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
+					item.getType() == DownloadActivityType.WIKIPEDIA_FILE ||
 					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 				outdated = true;
 			} else {

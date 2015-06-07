@@ -5,8 +5,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
@@ -150,6 +152,29 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(PHONE, phone);
 	}
 	
+	public String getNameSelected(String lang) {
+		if (lang != null) {
+			String translateName;
+			if (lang.equals("en")) {
+				translateName = getEnName();
+			} else {
+				translateName = getAdditionalInfo("name:" + lang);
+			}
+			if (!Algorithms.isEmpty(translateName)) {
+				return lang;
+			}
+		}
+		if (!Algorithms.isEmpty(getName())) {
+			return "";
+		}
+		for (String nm : getAdditionalInfo().keySet()) {
+			if (nm.startsWith("name:")) {
+				return nm.substring("name:".length());
+			}
+		}
+		return "";
+	}
+	
 	public String getName(String lang) {
 		if (lang != null) {
 			String translateName;
@@ -171,6 +196,20 @@ public class Amenity extends MapObject  {
 			}
 		}
 		return "";
+	}
+	
+	public List<String> getNames(String defName) {
+		List<String> l = new ArrayList<String>();
+		if (!Algorithms.isEmpty(getName())) {
+			l.add(defName);
+		}
+		for (String nm : getAdditionalInfo().keySet()) {
+			if (nm.startsWith("name:")) {
+				l.add(nm.substring("name:".length()));
+			}
+		}
+		
+		return l;
 	}
 	
 	public String getContentLang(String tag, String lang) {

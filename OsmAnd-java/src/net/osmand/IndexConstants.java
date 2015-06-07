@@ -13,6 +13,8 @@ public class IndexConstants {
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT = ".obf"; //$NON-NLS-1$
 	public static final String BINARY_SRTM_MAP_INDEX_EXT = ".srtm.obf"; //$NON-NLS-1$
+	public static final String BINARY_WIKI_MAP_INDEX_EXT_ZIP = ".wiki.obf.zip"; //$NON-NLS-1$
+	public static final String BINARY_WIKI_MAP_INDEX_EXT = ".wiki.obf"; //$NON-NLS-1$
 	public static final String BINARY_SRTM_MAP_INDEX_EXT_ZIP = ".srtm.obf.zip"; //$NON-NLS-1$
 	public static final String TOUR_INDEX_EXT = ".tour"; //$NON-NLS-1$
 	
@@ -42,6 +44,7 @@ public class IndexConstants {
 	public static final String TILES_INDEX_DIR= "tiles/";
 	public static final String TOURS_INDEX_DIR= "tours/";
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
+	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
 	public static final String AV_INDEX_DIR = "avnotes/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
