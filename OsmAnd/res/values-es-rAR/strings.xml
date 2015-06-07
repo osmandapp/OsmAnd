@@ -245,7 +245,7 @@
     <string name="rendering_value_pedestrian_name">Peatón</string>
     <string name="osmo_invite">Invitar…</string>
     <string name="continue_navigation">Continuar Navegación</string>
-    <string name="pause_navigation">Pausar Navegación</string>
+    <string name="pause_navigation">Pausar navegación</string>
  	<string name="keep_navigation_service">Conservar</string>
 	<string name="local_map_names">Nombres locales</string>
     <string name="lang_he">Hebreo</string>
@@ -295,7 +295,7 @@
 \n\t- Edición de PDI sin conexión
 \n\t- Opción seguimiento con conexión - envía las coordenadas a un servicio web periódicamente (lea cómo configurar su propio servicio web en los artículos HowTo)
 \n\t- Muestra el registro de la traza actual en el mapa
-\n\t- Detección de la dirección: \'Hacer vuelta en U\' se indica y anuncia cuando se orienta en la dirección opuesta o luego de saltarse un giro
+\n\t- Detección de la dirección: Se indica y anuncia \'Gire en U\', cuando se dirige en la dirección opuesta o luego de saltarse un giro
 \n\t- Nuevo anuncio de voz \'Ruta recalculada\'
 \n\t- Indicación óptica de un giro inminente en menos de 100m por el cambio de color en la flecha de dirección
 \n\t- Actualmente también los archivos índice desactivados se muestran en la pantalla de Descarga en verde oscuro y azul oscuro
@@ -754,7 +754,7 @@
     <string name="use_kalman_filter_compass">Usar filtro Kalman</string>
     <string name="access_mark_final_location_first">Modo Accesibilidad: Elige el destino primero</string> 
     <string name="use_magnetic_sensor_descr">Use el sensor magnético para determinar el valor de la brújula en vez del sensor de orientación</string>
-    <string name="use_magnetic_sensor">Usar el sensor magnético</string>
+    <string name="use_magnetic_sensor">Usar sensor magnético</string>
     <string name="other_location">Otra</string>
     <string name="files_limit">Quedan %1$d archivos</string>
     <string name="available_downloads_left">%1$d archivos disponibles para descargar</string>
@@ -840,7 +840,7 @@
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. \"Usar ubicación…\" para asignar una nota a la ubicación indicada</string>
+    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utilice \"Usar ubicación…\" para asignar una nota a la ubicación indicada</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
@@ -1174,7 +1174,7 @@
 	<string name="left_side_navigation_descr">Elige para países con tráfico por la izquierda</string>
 	<string name="local_index_description">Pulse cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
 	<string name="unknown_from_location">El punto de partida todavía no se determinó</string>
-	<string name="unknown_location">Ubicación aún desconocida</string>
+	<string name="unknown_location">Ubicación desconocida</string>
 	<string name="modify_transparency">Modificar transparencia (0 - transparente, 255 - opaco)</string>
 	<string name="confirm_interrupt_download">¿Interrumpir la descarga del archivo?</string>
 	<string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesita algunos datos regionales sin conexión que puedes descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Luego será capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>    
@@ -1611,7 +1611,7 @@
 	<string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
 	<string name="filter_existing_indexes">Descargados</string>
 	<string name="fast_route_mode">Ruta más rápida</string>
-	<string name="fast_route_mode_descr">"Marca para calcular la ruta más rápida o desmarca para la más corta "</string>
+	<string name="fast_route_mode_descr">"Active para calcular la ruta más rápida o desactive para la más corta "</string>
 	<string name="tiles_to_download_estimated_size">En la ampliación {0}, descarga {1} teselas ({2} MB)</string>
 	<string name="context_menu_item_download_map">Descargar mapa</string>
 	<string name="select_max_zoom_preload_area">Elige la ampliación máxima para precargar</string>
@@ -1708,7 +1708,7 @@
 	<string name="route_tl">Gire a la izquierda en</string>
 	<string name="route_tshl">Gire fuerte a la izquierda en</string>
 	<string name="route_tsll">Gire leve a la izquierda en</string>
-	<string name="route_tu">Dé la vuelta hacia</string>
+	<string name="route_tu">Gire en U en</string>
 	<string name="route_head">Inicie en</string>
 	<string name="first_time_continue">Luego</string>
 	<string name="first_time_download">Descargar regiones</string>
@@ -1793,7 +1793,7 @@
 	<string name="error_calculating_route">Error calculando ruta</string>
 	<string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
 	<string name="empty_route_calculated">Error: La ruta calculada está vacía</string>					
-	<string name="new_route_calculated_dist">Se calculó nueva ruta, distancia</string>
+	<string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
 	<string name="arrived_at_destination">Ha llegado a su destino</string>
 	<string name="invalid_locations">¡Las coordenadas son inválidas!</string>
 	<string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
