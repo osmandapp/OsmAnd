@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +18,10 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
+
+import org.apache.tools.bzip2.CBZip2OutputStream;
+
 import android.app.AlertDialog;
 import android.content.Context;
 
@@ -29,6 +35,8 @@ public class FavouritesDbHelper {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
 	
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
+	public static final String BACKUP_FOLDER = "backup"; //$NON-NLS-1$
+	public static final int BACKUP_CNT = 20; //$NON-NLS-1$
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
 
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
@@ -266,18 +274,36 @@ public class FavouritesDbHelper {
 	
 	public void saveCurrentPointsIntoFile() {
 		try {
-			Map<String, FavouritePoint> ex = new LinkedHashMap<String, FavouritePoint>();
-			loadGPXFile(getInternalFile(), ex);
+			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<String, FavouritePoint>();
+			loadGPXFile(getInternalFile(), deletedInMemory);
 			for(FavouritePoint fp : cachedFavoritePoints) {
-				ex.remove(getKey(fp));
+				deletedInMemory.remove(getKey(fp));
 			}
 			saveFile(cachedFavoritePoints, getInternalFile());
-			saveExternalFile(ex.keySet());
+			saveExternalFile(deletedInMemory.keySet());
+			backup(getBackupFile(), getExternalFile());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 	
+	private void backup(File backupFile, File externalFile) {
+		try {
+			File f = new File(backupFile.getParentFile(), backupFile.getName());
+			FileOutputStream fout = new FileOutputStream(f);
+			fout.write('B');
+			fout.write('Z');
+			CBZip2OutputStream out = new CBZip2OutputStream(fout);
+			FileInputStream fis = new FileInputStream(externalFile);
+			Algorithms.streamCopy(fis, out);
+			fis.close();
+			out.close();
+			fout.close();
+		} catch (Exception e) {
+			log.warn("Backup failed", e);
+		}
+	}
+
 	public String exportFavorites() {
 		return saveExternalFile(null);
 	}
@@ -285,18 +311,20 @@ public class FavouritesDbHelper {
 
 
 	private String saveExternalFile(Set<String> deleted) {
-		Map<String, FavouritePoint> ex = new LinkedHashMap<String, FavouritePoint>();
-		loadGPXFile(getExternalFile(), ex);
+		Map<String, FavouritePoint> all = new LinkedHashMap<String, FavouritePoint>();
+		loadGPXFile(getExternalFile(), all);
 		List<FavouritePoint> favoritePoints = new ArrayList<FavouritePoint>(cachedFavoritePoints);
 		if(deleted != null) {
 			for(String key : deleted) {
-				ex.remove(key);
+				all.remove(key);
 			}
 		}
+		// remove already existing in memory
 		for(FavouritePoint p : favoritePoints) {
-			ex.remove(getKey(p));
+			all.remove(getKey(p));
 		}
-		favoritePoints.addAll(ex.values());
+		// save favoritePoints from memory in order to update existing
+		favoritePoints.addAll(all.values());
 		return saveFile(favoritePoints, getExternalFile());
 	}
 
@@ -320,6 +348,27 @@ public class FavouritesDbHelper {
 
 	public File getExternalFile() {
 		return new File(context.getAppPath(null), FILE_TO_SAVE);
+	}
+	
+	public File getBackupFile() {
+		File fld = new File(context.getAppPath(null), BACKUP_FOLDER);
+		if(!fld.exists()) {
+			fld.mkdirs();
+		}
+		int back = 1;
+		File firstModified = null;
+		long firstModifiedMin = System.currentTimeMillis();
+		while(back <= BACKUP_CNT) {
+			File bak = new File(fld, BACKUP_FOLDER +"_" + back +".gpx.bz2");
+			if (!bak.exists()) {
+				return bak;
+			} else if (bak.lastModified() < firstModifiedMin) {
+				firstModified = bak;
+				firstModifiedMin = bak.lastModified();
+			}
+			back ++;
+		}
+		return firstModified;
 	}
 	
 	public String saveFile(List<FavouritePoint> favoritePoints, File f) {
