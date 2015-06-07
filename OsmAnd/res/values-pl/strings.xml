@@ -1658,8 +1658,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
     <string name="osmo_plugin_description">"Zapewnia funkcjonalność usługi OsMo - zaawansowanego monitorowania na żywo. Więcej szczegółów na http://osmo.mobi.
 \n\nZa jej pomocą można śledzić inne urządzenia lub samemu być śledzonym. Pozwala na tworzenie anonimowych grup, udostępnianie lokalizacji sobie nawzajem i komunikowanie ze sobą. Dostarcza różne opcje dla śledzenia sesji i śledzenia stałego.\n\nAnonimowe grupy tworzone są na określoną liczbę dni i limitowane są określonymi opcjami, np. brak zdalnego sterowania i brak administratora grupy. Natomiast w pełni funkcjonalne grupy mogą zostać utworzone na stronie, a dostęp do nich będą mieć tylko zarejestrowani użytkownicy. "</string>
-    <string name="osmo_plugin_name">Monitoring OsMo</string>
-    <string name="osmo_settings">Monitoring OsMo</string>
+    <string name="osmo_plugin_name">OsMo (Monitoring OSM)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
     <string name="keep_informing_descr">Podaje instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzanie instrukcji</string>
@@ -2117,4 +2117,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_height_description">Określ wysokość pojazdu, jaka ma być dozwolone podczas nawigowania</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
 	<string name="use_fast_recalculation_desc">Przelicz tylko początkową część trasy dla długich podróży</string>
-</resources>
+<string name="shared_string_logoff">Wyloguj się</string>
+    <string name="osmo_share_my_location">Udostępniaj moją lokalizację</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Kolorowanie wg zasad OSMC</string>
+    <string name="rendering_value_disabled_name">Wyłączony</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorowanie wg przeznaczenia trasy</string>
+    <string name="osm_edit_context_menu_delete">Usuń w Edytorze OSM</string>
+    </resources>
