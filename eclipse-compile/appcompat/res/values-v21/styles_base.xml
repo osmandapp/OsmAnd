@@ -121,8 +121,8 @@
         <item name="popupPromptView">@layout/abc_simple_dropdown_hint</item>
     </style>
 
-    <style name="Base.Widget.AppCompat.ListView.Menu"
-           parent="android:Widget.Material.ListView" />
+    <style name="Base.Widget.AppCompat.ListView" parent="android:Widget.Material.ListView" />
+    <style name="Base.Widget.AppCompat.ListView.Menu" />
 
     <!-- Popup Menu -->
 
