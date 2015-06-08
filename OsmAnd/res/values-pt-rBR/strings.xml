@@ -1454,7 +1454,7 @@
 	<string name="rotate_map_to_bearing">Orientação do mapa</string>
 	<string name="show_route">Detalhes da rota</string>
 	<string name="fav_imported_sucessfully">Favoritos importados</string>
-	<string name="import_file_favourites">Salvar como arquivo GPX ou importar nos favoritos ?</string>
+	<string name="import_file_favourites">Salvar pontos como arquivo GPX ou importar para os favoritos ?</string>
 	<string name="fav_file_to_load_not_found">O arquivo GPX contendo os favoritos não foi encontrado em {0}</string>
 	<string name="share_fav_subject">Favoritos compartilhados através do OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Erro ao carregar o arquivo GPX</string>
@@ -1712,4 +1712,6 @@
     <string name="download_wikipedia_item">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importar para OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
+	</resources>
