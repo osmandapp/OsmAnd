@@ -510,7 +510,7 @@
     <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
 	<string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Cambiamos el nombre de su punto favorito a %1$s para evitar nombres duplicados.</string>
+    <string name="fav_point_dublicate_message">El nombre del favorito elegido ya está en uso, se cambió a %1$s para evitar duplicación.</string>
     <string name="text_size_descr">Elige el tamaño del texto en el mapa.</string>
     <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Indicaciones a\'), o selecciona \'Indicaciones a\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
 \n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
@@ -1938,4 +1938,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osm_edit_context_menu_delete">Quitar edición OSM</string>    
+    <string name="read_full_article">Leer artículo completo</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Ver detalles</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
