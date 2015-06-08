@@ -1507,7 +1507,7 @@
     <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
     
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
-	<string name="import_file_favourites">Spara som GPX-fil eller importera till favoriter?</string>
+	<string name="import_file_favourites">Spara punkter som GPX-fil eller importera dem till favoriter?</string>
 	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
 	<string name="commiting_node">Skickar nod…</string>
 	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
@@ -1621,7 +1621,7 @@
 	<string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
     <string name="fav_point_dublicate">Duplicerat namn på favoritpunkt</string>
-    <string name="fav_point_dublicate_message">Namnet på din favoritpunkt %1$s ändrades för att undvika duplicerade namn.</string>
+    <string name="fav_point_dublicate_message">Det angivna favoritnamnet finns redan så det ändrades till %1$s för att undvika dubbletter.</string>
     
     
     <string name="print_route">Skriv ut rutt</string>
@@ -1889,4 +1889,6 @@
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
+    <string name="local_recordings_delete_all_confirm">Du håller på att ta bort %1$d anteckningar. Är du säker?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
