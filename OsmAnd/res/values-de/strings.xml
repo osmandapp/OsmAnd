@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="shared_string_import2osmand">Zu OsmAnd importieren</string>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
 	<string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen</string>
