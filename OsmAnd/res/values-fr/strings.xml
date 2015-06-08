@@ -2042,5 +2042,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
-    <string name="shared_string_show_details">Montrer les détails</string>
+    <string name="shared_string_show_details">Afficher les détails</string>
+    <string name="read_full_article">Lire l\'article complet</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
