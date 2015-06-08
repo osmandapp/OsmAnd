@@ -1602,7 +1602,7 @@
     </string>
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
     
-	<string name="import_file_favourites">Mentés GPX fájlként, vagy importálás a kedvencekbe?</string>
+	<string name="import_file_favourites">Pontok mentése GPX fájlként, vagy importálja a kedvencekbe?</string>
 	
 	<string name="shared_string_share">Megosztás</string>
 	<string name="share_fav_subject">OsmAndból megosztott kedvencek</string>
@@ -1963,4 +1963,6 @@
     <string name="download_wikipedia_item">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
+    <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos benne?</string>
+	</resources>
