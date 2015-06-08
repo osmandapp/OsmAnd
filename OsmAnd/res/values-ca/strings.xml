@@ -1780,7 +1780,7 @@
 	<string name="text_size_descr">Definiu la mida del text en el mapa.</string>
     <string name="text_size">Mida del text</string>
     <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
-    <string name="fav_point_dublicate_message">S\'ha canviat el nom del vostre punt preferit a %1$s per evitar duplicitats.</string>
+    <string name="fav_point_dublicate_message">El nom indicat del lloc preferit ja es fa servir, s\'ha canviat a %1$s per estalviar duplicitats.</string>
     
     
     <string name="fav_point_emoticons_message">El nom del vostre punt preferit s\'ha canviat a %1$s per facilitar el desar bé la cadena amb emoticones en un fitxer.</string>
@@ -2008,4 +2008,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
     <string name="osm_edit_context_menu_delete">Suprimeix l\'edició d\'OSM</string>
+    <string name="read_full_article">Llegiu l\'article complert</string>
+    <string name="download_wikipedia_item">Viquipèdia</string>
+    <string name="local_indexes_cat_wiki">Viquipèdia</string>
+    <string name="shared_string_show_details">Mostra els detalls</string>
+    <string name="download_wikipedia_maps">Viquipèdia</string>
     </resources>

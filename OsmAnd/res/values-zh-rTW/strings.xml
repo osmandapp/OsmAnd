@@ -1734,7 +1734,7 @@
 	<string name="text_size_descr">設定地圖上的文字大小。</string>
     <string name="text_size">文字大小</string>
     <string name="fav_point_dublicate">我的最愛標點，名稱重複</string>
-    <string name="fav_point_dublicate_message">我們把我的最愛標點名稱，改為 %1$s 以避免名稱重複。</string>
+    <string name="fav_point_dublicate_message">所指定我的最愛名稱業已使用，改為 %1$s 以避免重複。</string>
     
     
     <string name="print_route">列印路線</string>
@@ -1995,4 +1995,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>    
+    <string name="read_full_article">閱讀全部文章</string>
+    <string name="download_wikipedia_item">維基百科</string>
+    <string name="local_indexes_cat_wiki">維基百科</string>
+    <string name="shared_string_show_details">顯示詳細資訊</string>
+    <string name="download_wikipedia_maps">維基百科</string>
     </resources>
