@@ -2047,4 +2047,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="download_wikipedia_item">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
+	</resources>
