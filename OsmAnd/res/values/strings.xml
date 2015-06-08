@@ -52,6 +52,7 @@
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
    	<string name="mark_to_delete">Mark to delete</string>
 	<string name="osmo_grop_name_length_alert">Group name should be at least 3 characters long!</string>
+	<string name="local_recordings_delete_all_confirm">You are going to delete %1$d notes. Are you sure?</string>
 	<string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d changes to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Do you want to clear the history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen</string>
