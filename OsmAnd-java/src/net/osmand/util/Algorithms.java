@@ -125,6 +125,7 @@ public class Algorithms {
         	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
     	}
 	
+    	
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;
 		for (int k = 0; k < s.length(); k++) {
@@ -135,6 +136,16 @@ public class Algorithms {
 			}
 		}
 		return i;
+	}
+	
+	public static String extractIntegerPrefix(String s) {
+		int k = 0;
+		for (; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				return s.substring(0, k);
+			}
+		}
+		return "";
 	}
 	
 	public static String extractIntegerSuffix(String s) {
