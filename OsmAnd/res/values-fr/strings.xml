@@ -2044,7 +2044,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
-    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
