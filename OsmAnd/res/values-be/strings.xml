@@ -1983,4 +1983,5 @@
     <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
     <string name="shared_string_show_details">Паказаць падрабязнасьці</string>
     <string name="download_wikipedia_maps">Вікіпэдыя</string>
-    </resources>
+    <string name="local_recordings_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d нататкі. Вы ўпэўненыя?</string>
+	</resources>
