@@ -452,19 +452,36 @@ public class FavouritesDbHelper {
 				return collator.compare(lhs.name, rhs.name);
 			}
 		});
+		Comparator<FavouritePoint> favoritesComparator = getComparator();
+		for (FavoriteGroup g : favoriteGroups) {
+			Collections.sort(g.points, favoritesComparator);
+		}
+		if (cachedFavoritePoints != null) {
+			Collections.sort(cachedFavoritePoints, favoritesComparator);
+		}
+	}
+
+	public static Comparator<FavouritePoint> getComparator() {
+		final Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.SECONDARY);
 		Comparator<FavouritePoint> favoritesComparator = new Comparator<FavouritePoint>() {
 
 			@Override
-			public int compare(FavouritePoint object1, FavouritePoint object2) {
-				return collator.compare(object1.getName(), object2.getName());
+			public int compare(FavouritePoint o1, FavouritePoint o2) {
+				String s1 = o1.getName();
+				String s2 = o2.getName();
+				int i1 = Algorithms.extractIntegerNumber(s1);
+				int i2 = Algorithms.extractIntegerNumber(s2);
+				if(i1 == i2) {
+					String ot1 = Algorithms.extractIntegerPrefix(s1);
+					String ot2 = Algorithms.extractIntegerPrefix(s2);
+					return collator.compare(ot1, ot2);	
+				}
+				
+				return i1 - i2;
 			}
 		};
-		for(FavoriteGroup g : favoriteGroups) {
-			Collections.sort(g.points, favoritesComparator);
-		}
-		if(cachedFavoritePoints != null) {
-			Collections.sort(cachedFavoritePoints, favoritesComparator);
-		}
+		return favoritesComparator;
 	}
 	
 

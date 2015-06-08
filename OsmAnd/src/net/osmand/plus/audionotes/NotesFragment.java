@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.data.PointDescription;
@@ -15,8 +16,10 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
 import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
+import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.OsmEditsFragment.BackupOpenstreetmapPointAsyncTask;
 import android.app.AlertDialog;
@@ -87,10 +90,10 @@ public class NotesFragment extends OsmAndListFragment {
 		return view;
 	}
 	
-	private void selectAll(){
-		for(int i =0 ;i < listAdapter.getCount(); i++){
+	private void selectAll() {
+		for (int i = 0; i < listAdapter.getCount(); i++) {
 			Recording point = listAdapter.getItem(i);
-			if (!selected.contains(point)){
+			if (!selected.contains(point)) {
 				selected.add(point);
 			}
 		}
@@ -189,14 +192,39 @@ public class NotesFragment extends OsmAndListFragment {
 		selectAll.setChecked(true);
 	}
 	
-	private void deleteItems(ArrayList<Recording> selected) {
-		// TODO Auto-generated method stub
-		
+	private void deleteItems(final ArrayList<Recording> selected) {
+		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		b.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()));
+		b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Iterator<Recording> it = selected.iterator();
+				while (it.hasNext()) {
+					Recording pnt = it.next();
+					plugin.deleteRecording(pnt);
+					it.remove();
+					listAdapter.delete(pnt);
+				}
+				listAdapter.notifyDataSetChanged();
+
+			}
+		});
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();		
 	}
 	
 	private void shareItems(ArrayList<Recording> selected) {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent();
+		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+		intent.setType("image/*"); /* This example is sharing jpeg images. */
+
+		ArrayList<Uri> files = new ArrayList<Uri>();
+
+		for(Recording path : selected) {
+		    files.add(Uri.fromFile(path.getFile()));
+		}
+		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 	
 	private void enterDeleteMode(final int type) {
@@ -205,7 +233,12 @@ public class NotesFragment extends OsmAndListFragment {
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
-				MenuItem item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+				MenuItem item;
+				if(type == MODE_DELETE) {
+					item = menu.add(R.string.shared_string_delete_all).setIcon(R.drawable.ic_action_delete_dark);
+				} else {
+					item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_export);
+				}
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -257,6 +290,11 @@ public class NotesFragment extends OsmAndListFragment {
 
 		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
 			super(getActivity(), R.layout.note, recordingList);
+		}
+
+		public void delete(Recording pnt) {
+			remove(pnt);
+			
 		}
 
 		@Override
