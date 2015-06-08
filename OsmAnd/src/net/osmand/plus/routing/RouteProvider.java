@@ -66,7 +66,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
 

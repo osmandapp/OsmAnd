@@ -57,8 +57,11 @@ public class RoutingHelper {
 	private Location lastProjection;
 	private Location lastFixedLocation;
 	
+	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
+	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 120000;
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
+	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 	
 	private ApplicationMode mode;
@@ -563,16 +566,13 @@ public class RoutingHelper {
 					// This check is valid for Online/GPX services (offline routing is aware of route direction)
 					wrongMovementDirection = checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
 					// set/reset evalWaitInterval only if new route is in forward direction
-					
-					if (!wrongMovementDirection) {
+					if (wrongMovementDirection) {
 						evalWaitInterval = 3000;
 					} else {
-						if(evalWaitInterval == 0){
-							evalWaitInterval = 3000;
-						}
-						evalWaitInterval = evalWaitInterval * 3 / 2;
+						evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2);
 						evalWaitInterval = Math.min(evalWaitInterval, 120000);
 					}
+					
 				}
 			}
 
@@ -821,13 +821,20 @@ public class RoutingHelper {
 		// do not evaluate very often
 		if ((currentRunningJob == null && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
 				|| paramsChanged || !onlyStartPointChanged) {
+			if(System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
+				recalculateCountInInterval ++;
+			}
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
 			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
 			params.onlyStartPointChanged = onlyStartPointChanged;
-			params.previousToRecalculate = previousRoute;
+			if(recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE) {
+				params.previousToRecalculate = previousRoute;
+			} else {
+				recalculateCountInInterval = 0;
+			}
 			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
