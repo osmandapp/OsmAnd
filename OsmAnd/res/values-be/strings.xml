@@ -1700,7 +1700,7 @@
 	<string name="fav_point_emoticons_message">Назва ўлюбёнай кропкі была зьменена на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
     <string name="print_route">Паказаць маршрут</string>
     <string name="fav_point_dublicate">Дубляваньне назвы ўлюбёнага пункту</string>
-    <string name="fav_point_dublicate_message">Назва ўлюбёнага пункту %1$s была зьменена для прадухіленьня дубляваньня імёнаў.</string>
+    <string name="fav_point_dublicate_message">Улюбёны пункт з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
     
     
     <string name="local_index_description">Націсьніце на любы элемэнт сьпісу для прагляду больш падрабязнай інфармацыі, націсьніце і ўтрымлівайце, каб зьмясьціць у архіў ці выдаліць. Бягучыя дадзеныя на прыстасаваньні (%1$s вольна):</string>
@@ -1978,4 +1978,9 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прагляду маршрута</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
+    <string name="read_full_article">Чытаць артыкул цалкам</string>
+    <string name="download_wikipedia_item">Вікіпэдыя</string>
+    <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
+    <string name="shared_string_show_details">Паказаць падрабязнасьці</string>
+    <string name="download_wikipedia_maps">Вікіпэдыя</string>
     </resources>
