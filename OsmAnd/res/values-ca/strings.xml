@@ -1598,7 +1598,7 @@
     <string name="osmo_enable_tracker">Envia les meves ubicacions</string>
     <string name="osmo_control">Accés ràpid a OsMo</string>
     
-	<string name="import_file_favourites">Guardar com arxiu GPX o posar-lo als favorits?</string>
+	<string name="import_file_favourites">Desar els punts com un arxiu GPX o posar-lo als favorits?</string>
 	
 	<string name="osmo_follow">Segueix</string>
     <string name="osmo_sign_in">Inicia una sessió</string>

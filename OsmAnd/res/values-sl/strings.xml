@@ -1678,7 +1678,7 @@
     
     <string name="tip_recent_changes_1_9_t">"Spremembe v različici 1.9:\n\t* Posodobitev sloga upodobitve zemljevidov, izrisa cestišč, transportnih slojev in pohodniških simbolov\n\t* Iskanje točk POI na poti\n\t* Možnost označevanja ceste kot neprehodne\n\t* Enostavnejše prejemanje in posodabljanje zemljevidov\n\t* Vidna in zvočna obvestila, ki se izvedejo pri približevanju točkam\n\t* Možnost tiskanja navodil poti in podrobnosti o zavojih\n\t* Podpora najave pasov pred zavijanjem\n\t* Podpora napravam Android Wear\n\t* Več sprememb grafičnega vmesnika\n\t* Možnost ločenega povečevanja velikosti črk na zemljevidu\n\t* Posebna zvočna obvestila v primeru zgrešene poti\n\t* Podpora vstavka sledilnika OsMo\n\t* Popravki nezdružljivosti različic OsMo "</string>
     <string name="fav_point_dublicate">Podvojeno ime priljubljene točke</string>
-    <string name="fav_point_dublicate_message">Ime priljubljene točke je bilo spremenjeno v %1$s, da bi se izognili podvajanjem imen.</string>
+    <string name="fav_point_dublicate_message">Vpisano ime priljubljene točke je že v uporabi, zato je bilo samodejno spremenjeno v %1$s.</string>
     
     <string name="lock_screen_request_explanation">%1$s zahteva dovoljenje za izklop zaslona za varčevanje z energijo.</string>
     <string name="fav_point_emoticons_message">Ime priljubljene točke je bilo spremenjeno v %1$s, s čimer se omogoči pravilno shranjevanje nizov z izraznimi ikonami v datoteko.</string>
@@ -1866,4 +1866,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Barvanje poti po vrsti</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Barvanje poti po OSMC</string>
     <string name="osm_edit_context_menu_delete">Izbriši urejanje OSM</string>    
+    <string name="read_full_article">Pokaži celoten prispevek</string>
+    <string name="download_wikipedia_item">Wikipedija</string>
+    <string name="local_indexes_cat_wiki">Wikipedija</string>
+    <string name="shared_string_show_details">Pokaži podrobnosti</string>
+    <string name="download_wikipedia_maps">Wikipedija</string>
     </resources>

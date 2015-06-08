@@ -1564,7 +1564,7 @@
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     
-	<string name="import_file_favourites">Gem som GPX-fil eller importer til favoritter?</string>
+	<string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
 	
 	<string name="color_red">rød</string>
 	<string name="color_pink">lyserød</string>

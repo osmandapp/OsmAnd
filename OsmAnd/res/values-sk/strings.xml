@@ -1891,7 +1891,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="text_size_descr">Nastaviť veľkosť textu na mape.</string>
     <string name="text_size">Veľkosť textu</string>
     <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
-    <string name="fav_point_dublicate_message">Názov obľúbeného bodu bol zmenený na %1$s, aby nevznikla duplicita.</string>
+    <string name="fav_point_dublicate_message">Zadaný názov obľúbeného bodu už existuje. Nový bod bol zmenený na %1$s, aby nevznikla duplicita.</string>
     
     
     <string name="fav_point_emoticons_message">Názov obľúbeného bodu bol upravený na %1$s, aby bolo možné správne uložiť názov s emotikonom do súboru.</string>
@@ -2172,4 +2172,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa rozsahu trasy</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa OSMC</string>
     <string name="osm_edit_context_menu_delete">Odstrániť OSM zmenu</string>
+    <string name="read_full_article">Prečítať celý článok</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Zobraziť detaily</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
