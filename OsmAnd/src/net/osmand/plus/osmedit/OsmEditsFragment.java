@@ -269,9 +269,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements OsmEditsUplo
 			return;
 		}
 		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		for (int i =0; i<listAdapter.getCount();i++){
+		for (int i = 0; i < listAdapter.getCount(); i++) {
 			OsmPoint point = listAdapter.getItem(i);
-			if (!osmEditsSelected.contains(point)){
+			if (!osmEditsSelected.contains(point)) {
 				selectAll.setChecked(false);
 				return;
 			}

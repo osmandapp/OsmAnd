@@ -1,16 +1,12 @@
 package net.osmand.plus.myplaces;
 
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.R;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.R;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.activities.TrackActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
