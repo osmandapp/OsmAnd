@@ -966,7 +966,7 @@
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
-	<string name="shared_string_clear_all">Alles löschen</string>
+	<string name="shared_string_clear_all">Alle löschen</string>
 	<string name="shared_string_history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen…</string>
 	<string name="uploading">Hochladen…</string>
@@ -1499,7 +1499,7 @@
 	<string name="tip_faq_t">Auf http://code.google.com/p/osmand/wiki/FAQ finden sich häufige Fragen und Antworten.</string>
 	<string name="tip_faq">Häufige Fragen (FAQ)</string>
 	<string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
-	<string name="shared_string_delete_all">Alles löschen</string>
+	<string name="shared_string_delete_all">Alle löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
 	<string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
 	<string name="app_modes_choose">Anwendungsprofile</string>
