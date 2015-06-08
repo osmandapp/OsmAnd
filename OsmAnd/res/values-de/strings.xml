@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
@@ -1821,8 +1821,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
 	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
-	<string name="osmo_plugin_name">OsMo-Überwachung</string>
-	<string name="osmo_settings">OsMo-Überwachung</string>
+	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
+	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
@@ -2171,4 +2171,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     <string name="routing_attr_avoid_borders_name">Überfahren von Grenzen vermeiden</string>
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
-	</resources>
+	<string name="read_full_article">Vollständigen Artikel lesen</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Details anzeigen</string>
+    <string name="routing_attr_avoid_borders_description">Überqueren einer Staatsgrenze vermeiden</string>
+	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="use_fast_recalculation">schnelle Routen-Neuberechnung</string>
+	<string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen</string>
+</resources>
