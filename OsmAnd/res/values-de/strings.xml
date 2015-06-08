@@ -1560,14 +1560,10 @@
 	<string name="arrival_distance">Zielankündigung</string>
 	<string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
 	<string name="int_days">Tage</string>
-	
-	<string name="import_file_favourites">GPX-Datei speichern oder zu den Favoriten importieren?</string>
-	
-	
+	<string name="import_file_favourites">Punkte als GPX-Datei speichern oder zu den Favoriten importieren?</string>
 	<string name="shared_string_my_tracks">Alle Tracks</string>
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
-	
 	<string name="loading_smth">Lade %1$s …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>

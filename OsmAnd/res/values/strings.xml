@@ -1880,7 +1880,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
 	<string name="fav_imported_sucessfully">Favorites successfully imported</string>
-	<string name="import_file_favourites">Save as GPX file or import into favourites?</string>
+	<string name="import_file_favourites">Save points as GPX file or import them into favorites?</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
