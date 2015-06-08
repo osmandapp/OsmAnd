@@ -1630,7 +1630,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_activity">Suivi OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     
-	<string name="import_file_favourites">Enregistrer sous fichier GPX ou transformer en favoris ?</string>
+	<string name="import_file_favourites">Enregistrer les points comme fichier GPX ou les transformer en favoris ?</string>
 	
 	<string name="color_red">Rouge</string>
 	<string name="color_pink">Rose</string>
