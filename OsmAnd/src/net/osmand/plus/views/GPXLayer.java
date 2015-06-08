@@ -303,19 +303,30 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		for (List<WptPt> l : points) {
 			path.rewind();
 			int startIndex = -1;
+			int endIndex = -1;
+		    int prevCross = 0;
+		    boolean intersect = false;
 
 			for (int i = 0; i < l.size(); i++) {
 				WptPt ls = l.get(i);
-				if (startIndex == -1) {
-					if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1
-							&& ls.lon <= latLonBounds.right + 0.1) {
-						startIndex = i > 0 ? i - 1 : i;
+				int cross = 0;
+				cross |= (ls.lon < latLonBounds.left - 0.1 ? 1 : 0);
+				cross |= (ls.lon > latLonBounds.right + 0.1 ? 2 : 0);
+				cross |= (ls.lat > latLonBounds.top + 0.1 ? 4 : 0);
+				cross |= (ls.lat < latLonBounds.bottom - 0.1 ? 8 : 0);
+				if (i > 0) {
+					if ((prevCross & cross) == 0) {
+						if (prevCross != 0 || !intersect) {
+							if (startIndex > 0) {
+								drawSegment(canvas, tileBox, l, startIndex, endIndex);
+							}
+							startIndex = i - 1;
+						}
+						endIndex = i;
+						intersect = true;
 					}
-				} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
-						&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
-					drawSegment(canvas, tileBox, l, startIndex, i);
-					startIndex = -1;
 				}
+				prevCross = cross;
 			}
 			if (startIndex != -1) {
 				drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
