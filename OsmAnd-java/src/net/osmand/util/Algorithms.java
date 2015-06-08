@@ -138,6 +138,24 @@ public class Algorithms {
 		return i;
 	}
 	
+	public static int extractIntegerNumber(String s) {
+		int i = 0;
+		int k = 0;
+		for (k = 0; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				break;
+			}
+		}
+		for (; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				i = i * 10 + (s.charAt(k) - '0');
+			} else {
+				break;
+			}
+		}
+		return i;
+	}
+	
 	public static String extractIntegerPrefix(String s) {
 		int k = 0;
 		for (; k < s.length(); k++) {
