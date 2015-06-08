@@ -1510,7 +1510,7 @@
     <string name="osmo_activity">Маніторынг OpenStreetMap</string>
     <string name="osmo_enable_tracker">Адсылаць маё месцазнаходжаньне</string>
     
-	<string name="import_file_favourites">Захаваць як файл GPX або імпартаваць у абранае?</string>
+	<string name="import_file_favourites">Захаваць кропкі як GPX файл або імпартаваць у абранае?</string>
 	
 	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
 	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
