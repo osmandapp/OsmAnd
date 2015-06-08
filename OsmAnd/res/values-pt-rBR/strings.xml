@@ -270,7 +270,7 @@
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9</string>
     <string name="dash_download_new_one">Baixar um novo mapa</string>
     <string name="map_update">Atualizações disponíveis para %1$s mapa(s)</string>
-	<string name="fav_point_dublicate_message">Mudamos o nome do favorito para %1$s a fim de evitar nomes duplicados.</string>
+	<string name="fav_point_dublicate_message">O nome do favorito já está em uso, mudamos para %1$s a fim de evitar nomes duplicados.</string>
     <string name="traffic_warning_speed_camera">Radar</string>
     <string name="speak_favorites">Favoritos próximos</string>
 	<string name="proxy_host_title">Servidor Proxy</string>
@@ -1707,4 +1707,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o alcance de rota</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com OSMC</string>
     <string name="osm_edit_context_menu_delete">Apagar Edição do OSM</string>
+    <string name="shared_string_show_details">Mostrar detalhes</string>
+    <string name="read_full_article">Leia o artigo completo</string>
+    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="local_indexes_cat_wiki">Wikipédia</string>
+    <string name="download_wikipedia_maps">Wikipédia</string>
     </resources>
