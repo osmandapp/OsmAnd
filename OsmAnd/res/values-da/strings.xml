@@ -1742,7 +1742,7 @@
 	<string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
-    <string name="fav_point_dublicate_message">Favoritnavn er ændret til %1$s for at undgå dubletter.</string>
+    <string name="fav_point_dublicate_message">Angivne favoritnavn er allerede i brug, blev ændret til %1$s for at undgå dubletter.</string>
     
     
     <string name="print_route">Udskriv rute</string>
@@ -2023,4 +2023,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge rute anvendelsesområde</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC</string>
     <string name="osm_edit_context_menu_delete">Slet OSM redigering</string>    
+    <string name="read_full_article">Læs hele artiklen</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Vis detaljer</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
