@@ -1,18 +1,18 @@
 package net.osmand.plus.activities;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
-import android.view.ViewGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Denis
  * on 28.01.15.
  */
-public class OsmandActionBarActivity extends ActionBarActivity {
+public class OsmandActionBarActivity extends AppCompatActivity {
 
 	protected boolean haveHomeButton = true;
 

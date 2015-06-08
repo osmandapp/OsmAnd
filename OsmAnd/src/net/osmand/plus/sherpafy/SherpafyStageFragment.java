@@ -3,11 +3,9 @@ package net.osmand.plus.sherpafy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.view.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
@@ -16,7 +14,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
@@ -49,7 +54,7 @@ public class SherpafyStageFragment extends Fragment {
 		for(TourInformation ti : customization.getTourInformations()) {
 			if(ti.getId().equals(id)) {
 				tour = ti;
-				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(tour.getName());
+				((OsmandActionBarActivity)getActivity()).getSupportActionBar().setTitle(tour.getName());
 				break;
 			}
 		}
@@ -58,7 +63,7 @@ public class SherpafyStageFragment extends Fragment {
 			stage = tour.getStageInformation().get(k);
 		}
 		if (stage != null){
-			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(stage.getName());
+			((OsmandActionBarActivity)getActivity()).getSupportActionBar().setTitle(stage.getName());
 		}
 	}
 	

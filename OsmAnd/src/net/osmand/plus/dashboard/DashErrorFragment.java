@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -14,7 +15,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +77,7 @@ public class DashErrorFragment extends DashBaseFragment {
 		cancelBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActionBarActivity dashboardActivity = ((ActionBarActivity) getActivity());
+				OsmandActionBarActivity dashboardActivity = ((OsmandActionBarActivity) getActivity());
 				if (dashboardActivity != null) {
 					dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashErrorFragment.this)
 							.commit();

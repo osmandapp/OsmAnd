@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -285,9 +286,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements OsmEditsUplo
 		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 	}
 
-	public ActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof ActionBarActivity) {
-			return (ActionBarActivity) getActivity();
+	public OsmandActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity) {
+			return (OsmandActionBarActivity) getActivity();
 		}
 		return null;
 	}

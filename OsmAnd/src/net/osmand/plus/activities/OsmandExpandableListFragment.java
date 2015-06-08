@@ -124,9 +124,9 @@ public abstract class OsmandExpandableListFragment extends Fragment
 
 	}
 
-	public ActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof ActionBarActivity) {
-			return (ActionBarActivity) getActivity();
+	public OsmandActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity) {
+			return (OsmandActionBarActivity) getActivity();
 		}
 		return null;
 	}

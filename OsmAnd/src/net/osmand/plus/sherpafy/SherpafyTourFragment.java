@@ -7,12 +7,12 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -79,7 +79,7 @@ public class SherpafyTourFragment extends OsmAndListFragment {
 	public void onResume() {
 		super.onResume();
 		if(tour != null) {
-			((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(tour.getName());
+			((OsmandActionBarActivity) getActivity()).getSupportActionBar().setTitle(tour.getName());
 		}
 	}
 

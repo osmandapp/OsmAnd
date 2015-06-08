@@ -1,7 +1,7 @@
 package net.osmand.access;
 
-import android.view.MotionEvent;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import android.view.MotionEvent;
 
 // Provide some additional accessibility means for activity view elements.
 //

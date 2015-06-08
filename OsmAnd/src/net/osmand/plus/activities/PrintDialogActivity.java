@@ -3,7 +3,6 @@
  */
 package net.osmand.plus.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +29,7 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 	private WebView webView;
 	PrintJobId printJobId = null;
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle icicle) {
         //This has to be called before setContentView and you must use the

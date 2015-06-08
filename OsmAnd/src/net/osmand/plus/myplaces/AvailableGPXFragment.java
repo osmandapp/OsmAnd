@@ -1,5 +1,47 @@
 package net.osmand.plus.myplaces;
 
+import java.io.File;
+import java.text.Collator;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.LocalIndexesFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -13,7 +55,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SearchView;
@@ -33,48 +74,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.LocalIndexesFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.text.Collator;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -584,7 +583,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 			allGpxAdapter.clear();
 		}
 
@@ -614,7 +613,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			this.result = result;
 			allGpxAdapter.refreshSelected();
 			if (getActivity() != null) {
-				((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+				((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
 			if (allGpxAdapter.getGroupCount() > 0 && 
 					allGpxAdapter.isShowingSelection()) {

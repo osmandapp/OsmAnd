@@ -71,7 +71,6 @@
     </style>
 
     <!-- Action Button Styles -->
-
     <style name="Base.Widget.AppCompat.ActionButton"
            parent="android:Widget.Material.ActionButton">
     </style>
