@@ -292,14 +292,14 @@
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
 	<string name="update_poi_does_not_change_indexes">在程式中修改興趣點，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
 	<string name="local_openstreetmap_uploading">上傳中 …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} 興趣點/註解已上傳</string>
+	<string name="local_openstreetmap_were_uploaded">{0} 興趣點/注解已上傳</string>
 	<string name="local_openstreetmap_uploadall">全部上傳</string>
 	
 	<string name="local_openstreetmap_upload">上傳修改部份到 OSM</string>
 	<string name="local_openstreetmap_delete">刪除修改部份</string>
 	<string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
-	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/備註</string>
-	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/備註</string>
+	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/注解</string>
+	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/注解</string>
 	
 	
 	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
@@ -684,7 +684,7 @@
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
-	<string name="layer_osm_bugs">OSM 備註(線上)</string>
+	<string name="layer_osm_bugs">OSM 注解(線上)</string>
 	<string name="layer_transport">公車站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
@@ -1556,7 +1556,7 @@
     <string name="osmo_enable_tracker">傳送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     
-	<string name="import_file_favourites">儲存為 GPX 檔案或匯入到我的最愛嗎？</string>
+	<string name="import_file_favourites">儲存標點為 GPX 檔案或把它匯入到我的最愛？</string>
 	
 	<string name="color_red">紅色</string>
 	<string name="color_pink">粉紅色</string>
@@ -1848,9 +1848,9 @@
     <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
 	<string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
-	<string name="notes">備註</string>
+	<string name="notes">注解</string>
 	<string name="online_map">線上地圖</string>
-	<string name="share_note">分享筆記</string>
+	<string name="share_note">分享注解</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
 	<string name="plugin_nautical_descr">"這個外掛元件豐富了 OsmAnd 地圖和導航應用，也為了划船、帆船、與其他類型的水上運動，產生了航海地圖。\n\n一個為 OsmAnd 附加的特有地圖，將提供用於所有內陸近岸航行的航海導航標誌和圖表符號。每個導航標誌描述提供需識別出它們和它們含義的詳細資訊（類別、形狀、顏色、序列、參考等）。\n\n要返回到 OsmAnd 慣用的地圖模式，再次取消這個外掛元件的啟動，或 \'組態地圖\' 下的 \'地圖樣式\'，在這兩者中的任何一個的更改都可輕易的回復。 "</string>
 	<string name="plugin_ski_descr">"此外掛元件為 OsmAnd 所安置，讓您在全球下坡滑雪、越野滑雪、阿爾卑斯山的滑雪路線、纜車和滑雪纜車上的詳細資訊瞭若指掌。以顏色編碼顯示路線和滑雪道的困難度，並且在特殊的 \'冬季\' 地圖樣式描畫出，哪個在冬季景觀變成雪色。\n\n啟動此檢視，會更改地圖樣式到 \'冬季和滑雪 \'，顯示出冬季的條件下，所有的景觀特徵。此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。 "</string>
@@ -2000,4 +2000,6 @@
     <string name="local_indexes_cat_wiki">維基百科</string>
     <string name="shared_string_show_details">顯示詳細資訊</string>
     <string name="download_wikipedia_maps">維基百科</string>
-    </resources>
+    <string name="shared_string_import2osmand">匯入到 OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的注解。您確定嗎？</string>
+	</resources>
