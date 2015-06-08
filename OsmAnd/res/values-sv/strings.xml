@@ -36,7 +36,7 @@
 <string name="map_widget_vector_attributes">Renderingsattribut</string>
 
 
-<string name="layer_map_appearance">Konfigurera skärm</string>
+<string name="layer_map_appearance">Konfigurera skärmen</string>
 <string name="show_lanes">Visa körfält</string>
 <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
 <string name="avoid_ferries">Undvik färjor</string>
@@ -83,7 +83,7 @@
 <string name="context_menu_item_open_bug">Öppna OSM-bugg</string>
 <string name="context_menu_item_create_poi">Skapa POI</string>
 <string name="use_internet">Använd Internet</string>
-<string name="map_widget_config">Konfigurera skärm</string>
+<string name="map_widget_config">Konfigurera skärmen</string>
 <string name="map_widget_next_turn_small">Nästa sväng (liten)</string>
 <string name="map_widget_next_next_turn">Nästnästa sväng</string>
 <string name="map_widget_mini_route">Liten ruttkarta</string>
@@ -1633,7 +1633,7 @@
     <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter i ett privat kontor.</string>
     <string name="anonymous_user">Anonym användare</string>
     <string name="logged_as">Inloggad som %1$s</string>
-	<string name="configure_map">Konfigurera karta</string>
+	<string name="configure_map">Konfigurera kartan</string>
     <string name="search_radius_proximity">Närmare än</string>
     <string name="rendering_category_details">Detaljer</string>
     <string name="rendering_category_transport">Kollektivtrafik</string>
@@ -1885,4 +1885,8 @@
     <string name="rendering_value_disabled_name">Inaktiverad</string>
     <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
     <string name="rendering_value_walkingRoutesOSMC_name">Färgläggning efter OSMC</string>
+    <string name="read_full_article">Läs hela artikeln</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Visa detaljer</string>
     </resources>
