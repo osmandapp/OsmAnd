@@ -254,6 +254,12 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		if (indexFileNames != null && e.isAlreadyDownloaded(indexFileNames)) {
 			if (e.getType() == DownloadActivityType.HILLSHADE_FILE) {
 				String sfName = e.getTargetFileName();
+				boolean outdated = false;
+				String date = e.getDate(format); // same date
+				String updateDescr = downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
+						+ date;
+				uptodate.setText(updateDescr);
+				update.setText(updateDescr);
 				if (indexActivatedFileNames.containsKey(sfName)) {
 					name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					// next case since present hillshade files cannot be deactivated, but are not in
@@ -263,6 +269,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				} else {
 					name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}
+				uptodate.setVisibility(!outdated ? View.VISIBLE : View.GONE);
+				update.setVisibility(!outdated ? View.GONE : View.VISIBLE);
 			} else  {
 				String sfName = e.getTargetFileName();
 				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
