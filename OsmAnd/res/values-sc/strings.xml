@@ -1343,7 +1343,7 @@
 	<string name="rotate_map_to_bearing_descr">Isseberare s’alliniamentu de sa mapa a s’ischermu</string>
 	<string name="rotate_map_to_bearing">Orientamentu de sa mapa</string>
 	<string name="fav_imported_sucessfully">Importatzione de sos prefèrridos cumprida</string>
-	<string name="import_file_favourites">Sarbare comente documentu GPX o importare in sos prefèrridos?</string>
+	<string name="import_file_favourites">Sarbare sos puntos comente documentu GPX o importare in sos prefèrridos?</string>
 	
 	<string name="fav_file_to_load_not_found">Su documentu GPX chi càbit sos prefèrridos no est istadu agatadu in {0}</string>
 	<string name="fav_saved_sucessfully">Prefèrridos sarbados in {0}</string>
@@ -1739,7 +1739,7 @@
 	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus minujas, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
 	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
-    <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
+    <string name="fav_point_dublicate_message">Nùmene prefèrridu giai impreadu, cambiadu in %1$s pro non tènnere duplicados.</string>
     <string name="fav_point_dublicate">Nùmene dòpiu in sos prefèrridos</string>
     
     
@@ -1972,4 +1972,11 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
     <string name="osm_edit_context_menu_delete">Burra modìfica OSM</string>    
+    <string name="shared_string_import2osmand">Importa in OsmAnd</string>
+    <string name="read_full_article">Leghe s\'artìculu intreu</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Ammustra minujas</string>
+    <string name="local_recordings_delete_all_confirm">Istas pro burrare %1$d notas. Seguru ses?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
