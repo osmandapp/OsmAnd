@@ -1871,4 +1871,6 @@
     <string name="local_indexes_cat_wiki">Wikipedija</string>
     <string name="shared_string_show_details">Pokaži podrobnosti</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
-    </resources>
+    <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
+	</resources>
