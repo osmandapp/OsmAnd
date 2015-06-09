@@ -1471,8 +1471,8 @@ s často kladenými otázkami.</string>
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    <string name="osmo_plugin_name">OsMo monitorování</string>
-   	<string name="osmo_settings">OsMo sledování</string>
+    <string name="osmo_plugin_name">OsMo (OSM monitorování)</string>
+   	<string name="osmo_settings">OsMo</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
     <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
@@ -1553,7 +1553,7 @@ s často kladenými otázkami.</string>
     <string name="keep_informing_descr">Znovu opakovat navigační pokyny v pravidelných intervalech</string>
     <string name="keep_informing">Opakovat navigační pokyny</string>
 	
-	<string name="import_file_favourites">Uložit jako GPX soubor nebo importovat do oblíbených?</string>
+	<string name="import_file_favourites">Uložit body jako GPX soubor nebo je importovat do oblíbených?</string>
 	
 	<string name="shared_string_share">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
@@ -1730,7 +1730,7 @@ s často kladenými otázkami.</string>
 	<string name="text_size">Velikost písma</string>
     <string name="text_size_descr">Nastavit velikost písma na mapě.</string>
     <string name="fav_point_dublicate">Název oblíbeného bodu je již použit</string>
-    <string name="fav_point_dublicate_message">Aby nevznikla duplicita, oblíbený bod byl uložen jako %1$s.</string>
+    <string name="fav_point_dublicate_message">Zadaný název oblíbeného bodu již existuje. Nový bod byl změněn na %1$s, aby nevznikla duplicita.</string>
     
     
     <string name="print_route">Vytisknout trasu</string>
@@ -1951,4 +1951,15 @@ s často kladenými otázkami.</string>
 	<string name="use_fast_recalculation_desc">Přepočítat pouze počáteční úsek trasy při dlouhých cestách</string>
 <string name="osmo_share_my_location">Sdílet moji polohu</string>
     <string name="shared_string_logoff">Odhlásit</string>
+    <string name="shared_string_import2osmand">Importovat do OsmAnd</string>
+    <string name="read_full_article">Přečíst celý článek</string>
+    <string name="download_wikipedia_item">Wikipedie</string>
+    <string name="local_indexes_cat_wiki">Wikipedie</string>
+    <string name="shared_string_show_details">Zobrazit detaily</string>
+    <string name="osm_edit_context_menu_delete">Smazat OSM změnu</string>
+    <string name="rendering_value_disabled_name">Vypnuto</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zbarvení podle rozsahu trasy</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle OSMC</string>
+    <string name="local_recordings_delete_all_confirm">Chystáte se smazat %1$d poznámek. Jste si jistý?</string>
+	<string name="download_wikipedia_maps">Wikipedie</string>
     </resources>
