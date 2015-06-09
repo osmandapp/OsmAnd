@@ -1688,7 +1688,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
     
-	<string name="import_file_favourites">Uložiť ako súbor GPX alebo importovať do obľúbených?</string>
+	<string name="import_file_favourites">Uložiť body ako súbor GPX alebo ich importovať do obľúbených?</string>
 	
 	<string name="color_red">červená</string>
 	<string name="color_pink">ružová</string>
@@ -2177,4 +2177,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importovať do OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Chystáte sa vymazať %1$d poznámok. Ste si istí?</string>
+	</resources>
