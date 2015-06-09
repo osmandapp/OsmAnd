@@ -1652,7 +1652,7 @@
 	<string name="rotate_map_to_bearing">Orientación del mapa</string>
 	<string name="show_route">Detalle de la ruta</string>
 	<string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
-	<string name="import_file_favourites">¿Guardar como archivo GPX o importar a favoritos?</string>
+	<string name="import_file_favourites">¿Guardar puntos como GPX o importarlos en favoritos?</string>
 	<string name="fav_file_to_load_not_found">El archivo GPX de favoritos no se encontró en {0}</string>
 	<string name="fav_saved_sucessfully">Los puntos favoritos se guardaron correctamente en {0}</string>
 	<string name="no_fav_to_save">Sin puntos favoritos que guardar</string>
@@ -1943,4 +1943,6 @@
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importar a OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
+	</resources>
