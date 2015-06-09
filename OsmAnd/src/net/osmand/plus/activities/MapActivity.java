@@ -119,7 +119,7 @@ public class MapActivity extends AccessibleActivity {
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
+		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
