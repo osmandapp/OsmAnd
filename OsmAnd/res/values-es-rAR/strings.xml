@@ -572,7 +572,7 @@
     <string name="no_index_file_to_download">No se encontraron descargas, compruebe su conexión a Internet.</string>
     <string name="select_index_file_to_download">No se encontró nada. Si no puede encontrar su región, puede hacerla por si mismo (Vea http://osmand.net).</string>
     <string name="none_selected_gpx">Sin archivos GPX seleccionados. Para elegir, mantenga pulsado en la traza disponible.</string>
-    <string name="gpx_split_interval">Intérvalo de división</string>
+    <string name="gpx_split_interval">Intervalo de división</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="gpx_info_start_time">"Tiempo de inicio: %1$tF, %1$tT "</string>
