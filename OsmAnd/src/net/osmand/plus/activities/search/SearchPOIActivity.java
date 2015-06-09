@@ -36,8 +36,8 @@ import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.NominatimPoiFilter;
-import net.osmand.plus.poi.PoiLegacyFilter;
-import net.osmand.plus.poi.PoiLegacyFilter.AmenityNameFilter;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.POIMapLayer;
@@ -101,7 +101,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SAVE_FILTER = 6;
 	
 
-	private PoiLegacyFilter filter;
+	private PoiUIFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private EditText searchFilter;
 	private View searchFilterLayout;
@@ -338,13 +338,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
 
-		final PoiLegacyFilter f = this.filter;
+		final PoiUIFilter f = this.filter;
 		MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_edit)
 				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				PoiLegacyFilter custom = getMyApplication().getPoiFilters().getCustomPOIFilter();
+				PoiUIFilter custom = getMyApplication().getPoiFilters().getCustomPOIFilter();
 				custom.updateTypesToAccept(f);
 				showEditActivity(custom);
 				return true;
@@ -356,7 +356,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if(poiAdditionals != null) {
 			TreeMap<String, PoiType> adds = new TreeMap<String, PoiType>();
 			for(PoiType vtype : poiAdditionals.values()) {
-				adds.put(vtype.getTranslation().replace(' ', ':').toLowerCase(), vtype);
+				if(vtype.isTopVisible()) {
+					adds.put(vtype.getTranslation().replace(' ', ':').toLowerCase(), vtype);
+				}
 			}
 			for(String vtype : adds.keySet()) {
 				addFilter(optionsMenu, vtype);
@@ -382,7 +384,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 	}
 
-	private void showEditActivity(PoiLegacyFilter poi) {
+	private void showEditActivity(PoiUIFilter poi) {
 		Intent newIntent = new Intent(this, EditPOIFilterActivity.class);
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
@@ -399,7 +401,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == RESULT_REQUEST_CODE && resultCode == EditPOIFilterActivity.EDIT_ACTIVITY_RESULT_OK) {
-			PoiLegacyFilter custom = app.getPoiFilters().getCustomPOIFilter();
+			PoiUIFilter custom = app.getPoiFilters().getCustomPOIFilter();
 			if (this.filter.isStandardFilter()) {
 				this.filter = custom;
 				if (!Algorithms.isEmpty(searchFilter.getText().toString())) {
@@ -462,7 +464,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	public boolean isOfflineSearchByNameFilter() {
-		return filter != null && PoiLegacyFilter.BY_NAME_FILTER_ID.equals(filter.getFilterId());
+		return filter != null && PoiUIFilter.BY_NAME_FILTER_ID.equals(filter.getFilterId());
 	}
 	
 	public boolean isNameSearch() {
@@ -922,7 +924,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), 
+				PoiUIFilter nFilter = new PoiUIFilter(editText.getText().toString(), 
 						null, 
 						filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 				if(searchFilter.getText().toString().length() > 0) {

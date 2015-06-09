@@ -12,9 +12,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.MapUtils;
 
-public class SearchByNameFilter extends PoiLegacyFilter {
+public class SearchByNameFilter extends PoiUIFilter {
 
-	public static final String FILTER_ID = PoiLegacyFilter.BY_NAME_FILTER_ID; //$NON-NLS-1$
+	public static final String FILTER_ID = PoiUIFilter.BY_NAME_FILTER_ID; //$NON-NLS-1$
 	
 	public SearchByNameFilter(OsmandApplication application) {
 		super(application);

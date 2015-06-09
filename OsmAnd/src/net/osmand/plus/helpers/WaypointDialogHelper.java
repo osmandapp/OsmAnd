@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
@@ -219,7 +219,7 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
+					final PoiUIFilter[] selected = new PoiUIFilter[1];
 					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
@@ -238,9 +238,9 @@ public class WaypointDialogHelper {
 	private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 						   final boolean enable, Activity ctx) {
 		if (ctx instanceof MapActivity &&
-				!PoiLegacyFilter.CUSTOM_FILTER_ID.equals(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get())) {
+				!PoiUIFilter.CUSTOM_FILTER_ID.equals(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get())) {
 			MapActivity map = (MapActivity) ctx;
-			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
+			final PoiUIFilter[] selected = new PoiUIFilter[1];
 			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
 			dlg.setOnDismissListener(new OnDismissListener() {
 

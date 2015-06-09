@@ -108,7 +108,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 
 	private void prepareProvider() {
 		poiTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes();
-		allTranslatedSubTypes = poiTypes.getAllTranslatedNames(false);
+		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
 		settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		isLocalEdit = true;
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {

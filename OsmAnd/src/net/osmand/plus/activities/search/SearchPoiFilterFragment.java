@@ -21,7 +21,7 @@ import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
@@ -125,7 +125,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		if (Algorithms.isEmpty(s)) {
 			filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		} else {
-			for(PoiLegacyFilter pf : poiFilters.getTopDefinedPoiFilters()) {
+			for(PoiUIFilter pf : poiFilters.getTopDefinedPoiFilters()) {
 				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
 				}
@@ -177,9 +177,9 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			AccessibleToast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 			return;
 		}
-		if (item instanceof PoiLegacyFilter) {
-			PoiLegacyFilter model = ((PoiLegacyFilter) item);
-			if (PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
+		if (item instanceof PoiUIFilter) {
+			PoiUIFilter model = ((PoiUIFilter) item);
+			if (PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
 					|| model instanceof NominatimPoiFilter) {
 				model.setFilterByName(searchEditText.getText().toString());
 			} else {
@@ -187,9 +187,13 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			}
 			showFilterActivity(model.getFilterId());
 		} else {
-			PoiLegacyFilter custom = getApp().getPoiFilters().getFilterById(PoiLegacyFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
+			PoiUIFilter custom = getApp().getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
 			if(custom != null) {
-				custom.setFilterByName(null);
+				if(item instanceof PoiType && ((PoiType) item).isAdditional()) {
+					// it is already set
+				} else {
+					custom.setFilterByName(null);
+				}
 				custom.updateTypesToAccept(((AbstractPoiType) item));
 				showFilterActivity(custom.getFilterId());
 			}
@@ -248,11 +252,11 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			Object item = getItem(position);
 			String name;
-			if (item instanceof PoiLegacyFilter) {
-				final PoiLegacyFilter model = (PoiLegacyFilter) item;
+			if (item instanceof PoiUIFilter) {
+				final PoiUIFilter model = (PoiUIFilter) item;
 				if (RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
-				} else if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
+				} else if(PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
 						model instanceof NominatimPoiFilter){
 					icon.setImageResource(R.drawable.mx_name_finder);
 				} else {
@@ -288,7 +292,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				PoiLegacyFilter filter = getApp().getPoiFilters().getCustomPOIFilter();
+				PoiUIFilter filter = getApp().getPoiFilters().getCustomPOIFilter();
 				filter.clearFilter();
 				showFilterActivity(filter.getFilterId());
 				return true;

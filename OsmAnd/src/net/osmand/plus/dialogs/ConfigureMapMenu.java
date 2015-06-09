@@ -21,7 +21,7 @@ import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -149,7 +149,7 @@ public class ConfigureMapMenu {
 		}
 
 		protected void selectPOILayer(final OsmandSettings settings) {
-			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
+			final PoiUIFilter[] selected = new PoiUIFilter[1];
 			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 

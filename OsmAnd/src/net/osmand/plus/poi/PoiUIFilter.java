@@ -34,7 +34,7 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.content.Context;
 
-public class PoiLegacyFilter implements SearchPoiTypeFilter {
+public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
@@ -62,7 +62,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	protected List<Amenity> currentSearchResult = null;
 	
 	// constructor for standard filters
-	public PoiLegacyFilter(AbstractPoiType type, OsmandApplication application) {
+	public PoiUIFilter(AbstractPoiType type, OsmandApplication application) {
 		this.app = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + (type == null ? null : type.getKeyName());
@@ -72,12 +72,15 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 			initSearchAll();
 			updatePoiAdditionals();
 		} else {
+			if(type.isAdditional()) {
+				setSavedFilterByName(type.getKeyName().replace('_', ':'));
+			}
 			updateTypesToAccept(type);
 		}
 	}
 	
 	// search by name standard
-	protected PoiLegacyFilter(OsmandApplication application) {
+	protected PoiUIFilter(OsmandApplication application) {
 		this.app = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX; // overridden
@@ -85,7 +88,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 	}
 
 	// constructor for user defined filters
-	public PoiLegacyFilter(String name, String filterId, 
+	public PoiUIFilter(String name, String filterId, 
 			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		this.app = app;
 		isStandardFilter = false;
@@ -449,7 +452,11 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		acceptedTypes.clear();
 		pt.putTypes(acceptedTypes);
 		poiAdditionals.clear();
-		fillPoiAdditionals(pt);
+		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
+			fillPoiAdditionals(((PoiType) pt).getParentType());
+		} else {
+			fillPoiAdditionals(pt);
+		}
 	}
 	
 	private void fillPoiAdditionals(AbstractPoiType pt) {
@@ -481,7 +488,7 @@ public class PoiLegacyFilter implements SearchPoiTypeFilter {
 		}
 	}
 
-	public void updateTypesToAccept(PoiLegacyFilter f) {
+	public void updateTypesToAccept(PoiUIFilter f) {
 		acceptedTypes.clear();
 		acceptedTypes.putAll(f.acceptedTypes);
 		poiAdditionals.clear();

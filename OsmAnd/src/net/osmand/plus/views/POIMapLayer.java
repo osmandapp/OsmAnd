@@ -25,7 +25,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.osmo.OsMoService;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -85,7 +85,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private ResourceManager resourceManager;
 	private RoutingHelper routingHelper;
-	private PoiLegacyFilter filter;
+	private PoiUIFilter filter;
 	private MapTextLayer mapTextLayer;
 	
 	/// cache for displayed POI

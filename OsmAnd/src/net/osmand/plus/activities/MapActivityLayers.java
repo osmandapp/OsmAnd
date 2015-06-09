@@ -26,7 +26,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
@@ -245,14 +245,14 @@ public class MapActivityLayers {
 	}
 
 
-	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiLegacyFilter[] selected){
+	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiUIFilter[] selected){
 		OsmandApplication app = (OsmandApplication) getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		adapter.item(R.string.shared_string_search).iconColor(R.drawable.ic_action_search_dark).reg();
-		final List<PoiLegacyFilter> list = new ArrayList<PoiLegacyFilter>();
+		final List<PoiUIFilter> list = new ArrayList<PoiUIFilter>();
 		list.add(poiFilters.getCustomPOIFilter());
-		for (PoiLegacyFilter f : poiFilters.getTopDefinedPoiFilters()) {
+		for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
 			addFilterToList(adapter, list, f);
 		}
 		
@@ -261,9 +261,9 @@ public class MapActivityLayers {
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiLegacyFilter pf = list.get(which);
+				PoiUIFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
-				if(filterId.equals(PoiLegacyFilter.CUSTOM_FILTER_ID)){
+				if(filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)){
 					Intent search = new Intent(activity, SearchActivity.class);
 					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
@@ -286,7 +286,7 @@ public class MapActivityLayers {
 		return builder.show();
 	}
 
-	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiLegacyFilter> list, PoiLegacyFilter f) {
+	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, PoiUIFilter f) {
 		list.add(f);
 		Item it = adapter.item(f.getName());
 		if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {

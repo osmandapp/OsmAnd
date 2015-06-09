@@ -11,6 +11,8 @@ public abstract class AbstractPoiType {
 	protected final String keyName;
 	protected final MapPoiTypes registry;
 	private List<PoiType> poiAdditionals = null;
+	private boolean topVisible;
+
 	
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
@@ -23,6 +25,18 @@ public abstract class AbstractPoiType {
 	
 	public String getIconKeyName() {
 		return getKeyName().replace(':', '_');
+	}
+	
+	public void setTopVisible(boolean topVisible) {
+		this.topVisible = topVisible;
+	}
+	
+	public boolean isTopVisible() {
+		return topVisible;
+	}
+	
+	public boolean isAdditional() {
+		return this instanceof PoiType && ((PoiType) this).isAdditional();
 	}
 	
 	

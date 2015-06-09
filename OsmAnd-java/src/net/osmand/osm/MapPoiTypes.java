@@ -126,7 +126,7 @@ public class MapPoiTypes {
 		return null;
 	}
 	
-	public Map<String, PoiType> getAllTranslatedNames(boolean onlyTranslation) {
+	public Map<String, PoiType> getAllTranslatedNames() {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
@@ -134,12 +134,6 @@ public class MapPoiTypes {
 					continue;
 				}
 				translation.put(pt.getTranslation(), pt);
-				if(!onlyTranslation) {
-					String kn = pt.getKeyName().replace('_', ' ');
-					if(!pt.getTranslation().toLowerCase().contains(kn)) {
-						translation.put(Algorithms.capitalizeFirstLetterAndLowercase(kn), pt);
-					}
-				}
 			}
 		}
 		return translation;
@@ -147,25 +141,31 @@ public class MapPoiTypes {
 	
 	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
 		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
-		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
-		for(PoiCategory pc : categories) {
+		for (PoiCategory pc : categories) {
 			addIf(tm, pc, matcher);
-			for(PoiFilter pt :  pc.getPoiFilters()) {
+			for (PoiFilter pt : pc.getPoiFilters()) {
 				addIf(tm, pt, matcher);
 			}
-			for(PoiType pt :  pc.getPoiTypes()) {
-				if(pt.isReference()) {
+			for (PoiType pt : pc.getPoiTypes()) {
+				if (pt.isReference()) {
 					continue;
 				}
 				addIf(tm, pt, matcher);
 			}
 		}
+		
 		return tm;
 	}
 	
 	private void addIf(Map<String, AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
 		if(matcher.matches(pc.getTranslation()) || matcher.matches(pc.getKeyName().replace('_', ' '))) {
 			tm.put(pc.getTranslation(), pc);
+		}
+		List<PoiType> additionals = pc.getPoiAdditionals();
+		if (additionals != null) {
+			for (PoiType a : additionals) {
+				addIf(tm, a, matcher);
+			}
 		}
 	}
 
@@ -174,11 +174,10 @@ public class MapPoiTypes {
 		Map<String, PoiType> translation = new TreeMap<String, PoiType>();
 		for (PoiType pt : pc.getPoiTypes()) {
 			translation.put(pt.getTranslation(), pt);
+			
 			if (!onlyTranslation) {
-				String kn = pt.getKeyName().replace('_', ' ');
-				if(!pt.getTranslation().toLowerCase().contains(kn)) {
-					translation.put(Algorithms.capitalizeFirstLetterAndLowercase(kn), pt);
-				}
+//				translation.put(pt.getKeyName(), pt);
+				translation.put(Algorithms.capitalizeFirstLetterAndLowercase(pt.getKeyName().replace('_', ' ')), pt);
 			}
 		}
 		return translation;
@@ -264,6 +263,10 @@ public class MapPoiTypes {
 						lastCategory.addPoiType(tp);
 					} else if (name.equals("poi_additional")) {
 						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
+						tp.setAdditional(lastType != null ? lastType : 
+							 (lastFilter != null ? lastFilter : lastCategory));
+						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+
 						tp.setOsmTag(parser.getAttributeValue("", "tag"));
 						tp.setOsmValue(parser.getAttributeValue("", "value"));
 						tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
@@ -348,6 +351,42 @@ public class MapPoiTypes {
 			print(" ", p);
 		}
 		
+	}
+	
+	private PoiType getPoiAdditionalByKey(AbstractPoiType p, String name) {
+		List<PoiType> pp = p.getPoiAdditionals();
+		if (pp != null) {
+			for (PoiType pt : pp) {
+				if (pt.getKeyName().equals(name)) {
+					return pt;
+				}
+			}
+		}
+		return null;
+
+	}
+
+	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
+		PoiType add = null;
+		for (PoiCategory pc : categories) {
+			add = getPoiAdditionalByKey(pc, name);
+			if (add != null) {
+				return add;
+			}
+			for (PoiFilter pf : pc.getPoiFilters()) {
+				add = getPoiAdditionalByKey(pf, name);
+				if (add != null) {
+					return add;
+				}
+			}
+			for (PoiType p : pc.getPoiTypes()) {
+				add = getPoiAdditionalByKey(p, name);
+				if (add != null) {
+					return add;
+				}
+			}
+		}
+		return null;
 	}
 	
 	private static void print(String indent, PoiFilter f) {

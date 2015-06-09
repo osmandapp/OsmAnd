@@ -23,7 +23,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 
-public class NominatimPoiFilter extends PoiLegacyFilter {
+public class NominatimPoiFilter extends PoiUIFilter {
 
 	private static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
 	private static final Log log = PlatformUtil.getLog(NominatimPoiFilter.class);

@@ -645,15 +645,15 @@
 	<string name="poi_piste_playground">Parcu giogos</string>
 	<string name="poi_car_sharing"/>
 	<string name="poi_photo">Butega de fotografia</string>
-	<string name="poi_fuel:diesel">Diesel</string>
-	<string name="poi_fuel:gtl_diesel">GTL diesel</string>
-	<string name="poi_fuel:hgv_diesel">HGV diesel</string>
-	<string name="poi_fuel:biodiesel">Bio diesel</string>
-	<string name="poi_fuel:lpg">LPG</string>
-	<string name="poi_fuel:ethanol">Etanolo</string>
-	<string name="poi_fuel:methanol">Metanolo</string>
-	<string name="poi_fuel:lh2">Idrògenu lìcuidu</string>
-	<string name="poi_fuel:electricity">Eletritzidade</string>
+	<string name="poi_fuel_diesel">Diesel</string>
+	<string name="poi_fuel_gtl_diesel">GTL diesel</string>
+	<string name="poi_fuel_hgv_diesel">HGV diesel</string>
+	<string name="poi_fuel_biodiesel">Bio diesel</string>
+	<string name="poi_fuel_lpg">LPG</string>
+	<string name="poi_fuel_ethanol">Etanolo</string>
+	<string name="poi_fuel_methanol">Metanolo</string>
+	<string name="poi_fuel_lh2">Idrògenu lìcuidu</string>
+	<string name="poi_fuel_electricity">Eletritzidade</string>
 	<string name="poi_rest_area">Logu de pasada</string>
 
 	<string name="poi_industrial">Àrea industriale</string>

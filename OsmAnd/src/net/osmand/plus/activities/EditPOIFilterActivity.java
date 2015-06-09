@@ -18,7 +18,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -43,7 +43,7 @@ import android.widget.TextView;
  */
 public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	private PoiLegacyFilter filter;
+	private PoiUIFilter filter;
 	private PoiFiltersHelper helper;
 	private static final int FILTER = 2;
 	public static final int EDIT_ACTIVITY_RESULT_OK = 20;

@@ -710,9 +710,9 @@
 	<string name="poi_piste_ice_skate">Ледовый каток</string>
 
 	<string name="poi_piste_snow_park">Снежный парк</string>
-	<string name="poi_fuel:diesel">Дизель</string>
-	<string name="poi_fuel:ethanol">Этанол</string>
-	<string name="poi_fuel:methanol">Метанол</string>
+	<string name="poi_fuel_diesel">Дизель</string>
+	<string name="poi_fuel_ethanol">Этанол</string>
+	<string name="poi_fuel_methanol">Метанол</string>
 	<string name="poi_photo">Фото магазин</string>
 	<string name="poi_power">Энергетика</string>
 		<string name="poi_landuse">Землепользование</string>

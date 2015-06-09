@@ -6,6 +6,7 @@ import java.util.Map;
 public class PoiType extends AbstractPoiType {
 	
 	private PoiCategory category;
+	private AbstractPoiType parentType;
 	private PoiType referenceType;
 	private String osmTag;
 	private String osmTag2;
@@ -79,6 +80,9 @@ public class PoiType extends AbstractPoiType {
 	}
 	
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+		if (isAdditional()) {
+			return parentType.putTypes(acceptedTypes);
+		}
 		PoiType rt = getReferenceType();
 		PoiType poiType = rt != null ? rt : this;
 		if (!acceptedTypes.containsKey(poiType.category)) {
@@ -91,6 +95,16 @@ public class PoiType extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
-	
+    public void setAdditional(AbstractPoiType parentType) {
+        this.parentType = parentType;
+    }
+
+    public boolean isAdditional(){
+        return parentType != null;
+    }
+
+    public AbstractPoiType getParentType() {
+        return parentType;
+    }
 
 }
