@@ -1984,4 +1984,5 @@
     <string name="shared_string_show_details">Паказаць падрабязнасьці</string>
     <string name="download_wikipedia_maps">Вікіпэдыя</string>
     <string name="local_recordings_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d нататкі. Вы ўпэўненыя?</string>
-	</resources>
+	<string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
+    </resources>
