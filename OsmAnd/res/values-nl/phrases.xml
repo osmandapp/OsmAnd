@@ -679,7 +679,7 @@
 	<string name="poi_military_barracks">Kazerne</string>
 	<string name="poi_military_danger_area">Gevaarlijke gebied</string>
 	<string name="poi_military_range">Militaire schietbaan</string>
-	<string name="poi_shop_food">Supermarkt</string>
+	<string name="poi_shop_food">Algemene voeding</string>
 	<string name="poi_road_obstacle">Weg obstakels</string>
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_public_transport">Openbaar vervoer</string>
@@ -747,7 +747,7 @@
 	<string name="poi_tomb">Graf</string>
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_wine_cellar">Wijnkelder</string>
-	<string name="poi_piste_downhill">Bergski</string>
+	<string name="poi_piste_downhill">Alpijns skiën</string>
 	<string name="poi_piste_hike">Wandelen</string>
 	<string name="poi_piste_sleigh"/>
 	<string name="poi_piste_ice_skate">Schaatsen</string>
@@ -760,4 +760,9 @@
 	<string name="poi_valley">Vallei</string>
 	<string name="poi_water">Water</string>
 	<string name="poi_wood">Bos</string>
+	<string name="poi_communication">Communicatie</string>
+		<string name="poi_cabin">Hut</string>
+	<string name="poi_winery">Wijnhandel</string>
+
+	<string name="poi_piste_playground">Speeltuin</string>
 	</resources>

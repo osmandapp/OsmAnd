@@ -1960,6 +1960,6 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_disabled_name">Vypnuto</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zbarvení podle rozsahu trasy</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle OSMC</string>
-    <string name="local_recordings_delete_all_confirm">Chystáte se smazat %1$d poznámek. Jste si jistý?</string>
+    <string name="local_recordings_delete_all_confirm">Chystáte se smazat %1$d poznámek. Jste si jisti?</string>
 	<string name="download_wikipedia_maps">Wikipedie</string>
     </resources>
