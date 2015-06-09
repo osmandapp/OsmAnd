@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 dependencies {
     compile files('libs/android-support-v4.jar')
+    compile files('libs/android-support-v7-appcompat.jar')
 }
 
 android {
