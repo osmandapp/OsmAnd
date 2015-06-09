@@ -2028,4 +2028,6 @@
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Vis detaljer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    </resources>
+    <string name="shared_string_import2osmand">Importer til OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
+	</resources>
