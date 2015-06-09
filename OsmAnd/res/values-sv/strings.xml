@@ -1891,4 +1891,5 @@
     <string name="shared_string_show_details">Visa detaljer</string>
     <string name="local_recordings_delete_all_confirm">Du håller på att ta bort %1$d anteckningar. Är du säker?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     </resources>
