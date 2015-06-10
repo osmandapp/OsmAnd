@@ -1714,5 +1714,7 @@
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importar para OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
-	<string name="disable_recording_once_app_killed">Executar em segundo plano</string>
-    </resources>
+	<string name="disable_recording_once_app_killed">Impedir a gravação autônoma</string>
+    <string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
+    <string name="disable_recording_once_app_killed_descrp">"Se marcada, gravação de GPX pausará após o encerramento do app  (através de apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
+	</resources>
