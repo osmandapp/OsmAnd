@@ -267,15 +267,6 @@ public class OsMoThread {
 				while ((i = readCommand.indexOf('\n')) != -1) {
 					String cmd = readCommand.substring(0, i);
 					readCommand = readCommand.substring(i + 1);
-					if(sessionInfo != null && sessionInfo.clientDecCypher != null) {
-						try {
-							final byte[] inMsg = android.util.Base64.decode(cmd.getBytes(), android.util.Base64.DEFAULT);
-							final byte[] byts = sessionInfo.clientDecCypher.doFinal(inMsg);
-							cmd = new String(byts);
-						} catch (Exception e) {
-							exc("Error decrypting", e);
-						}
-					}
 					queueOfMessages.add(cmd.replace("\\n", "\n"));
 				}
 			}
@@ -473,13 +464,6 @@ public class OsMoThread {
 		}
 		
 		String finalCmd = res.toString().trim();
-		if(sessionInfo != null && sessionInfo.clientEncCypher != null) {
-			try {
-				finalCmd = Base64.encode(sessionInfo.clientEncCypher.doFinal(finalCmd.getBytes()));
-			} catch (Exception e) {
-				exc("Error encrypting", e);
-			}
-		}
 		return finalCmd + "=\n";
 	}
 
