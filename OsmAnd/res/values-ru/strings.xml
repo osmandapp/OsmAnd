@@ -1526,7 +1526,7 @@
     <string name="osmo_connect_to_device_tracker_id">ID трекера</string>
     <string name="osmo_auto_send_locations_descr">Автоматически стартовать сессию трекера и отправлять местоположение после запуска приложения</string>
     <string name="osmo_auto_send_locations">Автоматически запускать мониторинг</string>
-    <string name="osmo_tracker_id">Персональный ID трекера</string>
+    <string name="osmo_tracker_id">Персональный ID</string>
     <string name="osmo_session_token">Токен сессии: %1$s</string>
     <string name="tip_recent_changes_1_8_alpha">"Изменения в 1.8: * Расчёт маршрута между маршрутными точками трека GPX * Изменённый порядок стран для загрузок (поддерживается местный поиск имён) * Поддержка импорта GPX/KML (конвертация KML в GPX) * GPX треки перемещены в \"Мои данные\" * Вы можете разбить GPX трек по дистанции и сверить разницу высот/скорость * Автостарт навигации по тайм-ауту "</string>
     <string name="osmo_tracker_id_descr">Выберите чтобы посмотреть или поделиться ID трекера.

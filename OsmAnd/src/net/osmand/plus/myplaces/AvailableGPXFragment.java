@@ -178,7 +178,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	}
 
-	public static void updateCurrentTrack(View v, final Activity ctx, OsmandApplication app) {
+	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			return;
 		}
@@ -199,7 +199,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (isRecording) {
 					plugin.stopRecording();
 				} else {
-					plugin.startGPXMonitoring(ctx);
+					if (app.getLocationProvider().checkGPSEnabled(ctx)) {
+						plugin.startGPXMonitoring(ctx);
+					}
 				}
 			}
 		});
