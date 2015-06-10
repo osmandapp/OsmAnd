@@ -43,7 +43,7 @@
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
   <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
-  <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción \'Grabar viaje\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Registra trazas utilizando el control GPX o mediante la opción \'Grabar viaje\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
   <string name="free_version_message">Esta versión libre de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
@@ -159,7 +159,7 @@
   <string name="select_search_position">Origen:</string>
   <string name="context_menu_item_search">Busca cerca de aquí</string>
   <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
-  <string name="shared_string_save_as_gpx">Guardar la ruta como traza GPX</string>
+  <string name="shared_string_save_as_gpx">Guardar como traza GPX</string>
   <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
   <string name="filename_input">Nombre de archivo: </string>
   <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
@@ -235,7 +235,7 @@
   <string name="gpx_option_destination_point">Utilizar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
   <string name="switch_to_vector_map_to_see">Mapa vectorial fuera de línea presente para esta ubicación.
-\n\t\n\tPara utilizar active \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales fuera de línea\'.</string>
+\n\nPara utilizar active en \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales fuera de línea\'.</string>
   <string name="choose_audio_stream">Salida de indicaciones de voz</string>
   <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones de voz (dependiente del sistema)</string>
   <string name="voice_stream_voice_call">Audio de llamada de voz</string>
@@ -272,10 +272,10 @@
   <string name="tip_location_sharing_t">"Puede compartir la ubicación de lugares interesantes en sus viajes con su familia o amigos a través del menú contextual \'Utilizar ubicación\' → \'Compartir ubicación\'.
 \n\nLuego seleccione el modo de compartir su ubicación. Las opciones son: correo electrónico, SMS (texto), o copiar las coordenadas de la ubicación al portapapeles del dispositivo. "</string>
   <string name="tip_favorites">Puntos favoritos</string>
-  <string name="tip_favorites_t">"Los puntos usados frecuentemente se pueden guardar como Favoritos de la siguiente manera:
+  <string name="tip_favorites_t">"Los puntos utilizados frecuentemente se pueden guardar como favoritos de la siguiente manera:
 \n\nEn el menú contextual \'Utilizar ubicación\', para cualquier punto seleccione la opción \'Añadir a favoritos\' y a continuación escribe un nombre.
-\n\nDespués de guardar un Favorito, este será accesible a través de \'Menú\'→\'Mis sitios\'. Al tocar en cualquier entrada en la lista de \'Favoritos\' ofrecerá opciones para navegar hasta él, modificarlo o borrarlo.
-\n\nPara mostrar todos los puntos Favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Configurar mapa\'. "</string>
+\n\nDespués de guardar un Favorito, este será accesible a través de \'Menú\' → \'Mis sitios\'. Al tocar en cualquier entrada en la lista de \'Favoritos\' ofrecerá opciones para navegar hasta él, modificar o borrarlo.
+\n\nPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\' → \'Configurar mapa\'. "</string>
   <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes</string>
   <string name="error_doing_search">Se produjo un error en la búsqueda fuera de línea</string>
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
@@ -324,7 +324,7 @@
   <string name="send_location">Enviar ubicación</string>
   <string name="context_menu_item_share_location">Compartir ubicación</string>
   <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» fue añadido correctamente</string>
-  <string name="add_waypoint_dialog_title">Añade punto de ruta a la traza GPX grabada</string>
+  <string name="add_waypoint_dialog_title">Añadir el punto de ruta a la traza GPX grabada</string>
   <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
   <string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barrera</string>
@@ -428,7 +428,7 @@
   <string name="voice">Voz grabada</string>
   <string name="no_vector_map_loaded">Los mapas vectoriales no fueron cargados</string>
   <string name="map_route_by_gpx">Navegar utilizando GPX</string>
-  <string name="gpx_files_not_found">No se encontraron archivos GPX en la carpeta de trazas</string>
+  <string name="gpx_files_not_found">No se encontró archivos GPX en la carpeta de trazas</string>
   <string name="layer_gpx_layer">Trazas GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales fuera de línea</string>
@@ -525,7 +525,7 @@
   <string name="transport_stops">paradas</string>
   <string name="transport_search_after">Itinerario siguiente</string>
   <string name="transport_search_before">Itinerario anterior</string>
-  <string name="transport_finish_search">Finalizar búsqueda</string>
+  <string name="transport_finish_search">Terminar la búsqueda</string>
   <string name="transport_stop_to_go_out">Elige parada a la que ir</string>
   <string name="transport_to_go_after">distancia previa</string>
   <string name="transport_to_go_before">distancia siguiente</string>
@@ -555,7 +555,7 @@
   <string name="search_nothing_found">No se encontró nada</string>
   <string name="searching">Buscando…</string>
   <string name="searching_address">Buscando dirección…</string>
-  <string name="search_osm_nominatim">Buscar en línea usando OSM Nominatim</string>
+  <string name="search_osm_nominatim">Buscar en línea utilizando OSM Nominatim</string>
   <string name="hint_search_online">Búsqueda en línea: Número de casa, calle, ciudad</string>
   <string name="search_offline_address">Búsqueda sin conexión</string>
   <string name="search_online_address">Búsqueda en línea</string>
@@ -611,7 +611,7 @@
   <string name="loading_data">Cargando datos…</string>
   <string name="reading_indexes">Leyendo datos locales…</string>
   <string name="previous_run_crashed">La vez anterior OsmAnd falló. El archivo de registro está en {0}. Reporte este problema adjuntando el archivo de registro.</string>
-  <string name="saving_gpx_tracks">Guardando trazas GPX a la SD…</string>
+  <string name="saving_gpx_tracks">Guardando trazas GPX al SD…</string>
   <string name="finished_task">Terminado</string>
   
   
@@ -655,7 +655,7 @@
   <string name="show_view_angle">Mostrar dirección de la vista</string>
   <string name="map_view_3d_descr">Habilita visión 3D del mapa</string>
   <string name="map_view_3d">Visión 3D del mapa</string>
-  <string name="show_poi_over_map_description">Muestra el PDI sobre el mapa (usando el último filtro seleccionado)</string>
+  <string name="show_poi_over_map_description">Muestra el PDI sobre el mapa (utilizando el último filtro seleccionado)</string>
   <string name="show_poi_over_map">Mostrar PDI</string>
   <string name="map_tile_source_descr">Elige la fuente de las teselas de mapas en línea o almacenadas temporalmente</string>
   <string name="map_tile_source">Fuente de teselas del mapa</string>
@@ -806,11 +806,11 @@
 \n\t- Dibujo nativo para todos los dispositivos
 \n\t- Edición de PDI (puntos de interés) fuera de línea\n\t- Accesibilidad
 \n\t- Muchas correcciones "</string>
-  <string name="send_files_to_osm">¿Enviar ficheros GPX a OSM?</string>
+  <string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
   <string name="gpx_visibility_txt">Visibilidad</string>
   <string name="gpx_tags_txt">Etiquetas</string>
   <string name="gpx_description_txt">Descripción</string>
-  <string name="validate_gpx_upload_name_pwd">Especifique usuario y contraseña de OSM para subir ficheros GPX.</string>
+  <string name="validate_gpx_upload_name_pwd">Especifique el nombre de usuario y contraseña OSM para subir los archivos GPX.</string>
   <string name="default_buttons_support">Soporte</string>
   <string name="support_new_features">Soporte de nuevas características</string>
   
@@ -1049,7 +1049,7 @@
     <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
-    <string name="btn_add_tag">Añade Etiqueta</string>
+    <string name="btn_add_tag">Añadir etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">Aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
@@ -1072,7 +1072,7 @@
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
 	<string name="background_service_is_enabled_question">El servicio de suspensión de OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado la navegación: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
-    <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
+    <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (utilizando código Android más lento en lugar del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
     <string name="rendering_attr_showRoadMaps_description">Seleccione cuándo mostrar los mapas sólo de carreteras:</string>
@@ -1107,7 +1107,7 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     
 	
-<string name="audionotes_plugin_description">El complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
+<string name="audionotes_plugin_description">Este complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
     <string name="audionotes_plugin_name">Notas de audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel en línea</string>
     <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas en línea de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
@@ -1119,7 +1119,7 @@
     
     <string name="map_widget_audionotes">Notas de audio</string>
     
-    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
+    <string name="recording_is_recorded">Se está grabando un audio/vídeo. Para pararlo, pulsa el control AV.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
@@ -1299,11 +1299,11 @@
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa que permite crear caminos pulsando en el mapa, utilizar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX, y utilizarse después para la orientación.</string>
     <string name="osmand_distance_planning_plugin_name">Distancias y planificación</string>
-    <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para suprimir el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
+    <string name="use_distance_measurement_help">* Toque para marcar un punto.\n* Mantenga pulsado en el mapa para suprimir el punto anterior.\n* Mantenga pulsado en el punto para ver y adjuntar una descripción.\n* Pulse en el control de medición para ver más acciones.</string>
     <string name="shared_string_do_not_show_again">No mostrar de nuevo</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
-    <string name="distance_measurement_finish_editing">Acabar edición</string>
-    <string name="distance_measurement_finish_subtrack">Comenzar una nueva subpista</string>
+    <string name="distance_measurement_finish_editing">Terminar edición</string>
+    <string name="distance_measurement_finish_subtrack">Empezar una nueva subtraza</string>
     <string name="distance_measurement_clear_route">Borrar todos los puntos</string>
     <string name="distance_measurement_save_gpx">Guardar como GPX</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
@@ -1459,7 +1459,7 @@
 	<string name="auto_zoom_far">Para mediano alcance</string>
 	<string name="auto_zoom_farthest">Para largo alcance</string>
 	<string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
-    <string name="animate_routing_route">"Simular usando la ruta calculada "</string>
+    <string name="animate_routing_route">"Simular utilizando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simula utilizando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1627,13 +1627,13 @@
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="osmo_group">Grupo OsMo</string>
-    <string name="osmo_group_share">Para conectarse al grupo %2$s, especifica el id del grupo (%1$s) o pulsa %3$s.</string>
+    <string name="osmo_group_share">Para conectarse al grupo %2$s, especifique el identificador del grupo (%1$s) o haga clic en %3$s.</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_share_current_session">Compartir sesión actual en navegador</string>
     <string name="osmo_session_not_available">Sesión no disponible, compruebe que \'Enviar ubicaciones\' está activado.</string>
     <string name="osmo_share_session">Compartir sesión</string>
     <string name="osmo_session_id_share">Url de la sesión para seguir dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, pulsa en el enlace %3$s o especifica el id de rastreo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, haga clic en el enlace %3$s o especifique el identificador de seguimiento (%1$s)</string>
     <string name="osmo_track_interval">Intervalo de registro</string>
 	<string name="osmo_track_interval_descr">Elije el intervalo de tiempo para enviar la ubicación</string>
     <string name="int_days">días</string>
@@ -1641,7 +1641,7 @@
     <string name="osmo_expire_group">Expira en</string>
     <string name="osmo_group_description">Descripción</string>
     <string name="osmo_group_policy">Política</string>
-    <string name="osmo_connect_to_device_tracker_id">Id de rastreo</string>
+    <string name="osmo_connect_to_device_tracker_id">Identificador de seguimiento</string>
     <string name="osmo_connect_to_group_id">Id de grupo</string>
     <string name="osmo_group_name">Nombre de grupo</string>
     <string name="osmo_connect_to_device">Emparejar con dispositivo</string>
@@ -1655,10 +1655,10 @@
     <string name="hours_ago">horas antes</string>
     <string name="minutes_ago">minutos antes</string>
     <string name="seconds_ago">segundos antes</string>
-    <string name="osmo_auto_send_locations_descr">Automáticamente iniciar la sesión de seguimiento y enviar ubicaciones después de iniciar la aplicación</string>
+    <string name="osmo_auto_send_locations_descr">Automáticamente inicia la sesión de seguimiento y envía ubicaciones después de iniciar la aplicación</string>
     <string name="osmo_auto_send_locations">Automáticamente iniciar sesión de seguimiento</string>
-    <string name="osmo_tracker_id">Id de rastreo personal</string>
-    <string name="osmo_tracker_id_descr">Clic para ver o compartir el identificador de seguimiento. ¡Usando el identificador de seguimiento de los dispositivos conectados podrá vigilar todos los movimientos de este dispositivo! Para desconectar seleccione la opción Regenerar.</string>
+    <string name="osmo_tracker_id">Identificador de seguimiento personal</string>
+    <string name="osmo_tracker_id_descr">Clic para ver o compartir el identificador de seguimiento. ¡Utilizando el identificador de seguimiento de los dispositivos conectados podrá vigilar todos los movimientos de este dispositivo! Para desconectar seleccione la opción regenerar.</string>
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
@@ -1691,29 +1691,30 @@
     
     <string name="gpx_selection_route_points">%1$s \nPuntos de ruta %2$s</string>
     <string name="gpx_selection_points">%1$s\nPuntos</string>
-    <string name="gpx_timespan">Lapso de tiempo: %1$s</string>
-	<string name="gpx_timemoving">Tiempo en movimiento: %1$s</string>
+    <string name="gpx_timespan">Duración: %1$s</string>
+	<string name="gpx_timemoving">Tiempo moviéndose: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
-    <string name="gpx_selection_track">%1$s \nPista %2$s</string>
+    <string name="gpx_selection_track">%1$s
+\nTraza %2$s</string>
     
     <string name="gpx_file_is_empty">La traza GPX está vacía</string>
     
     <string name="shared_string_my_tracks">Mis trazas</string>
     <string name="loading_smth">Cargando %1$s…</string>
-    <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
+    <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver en el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la guía giro a giro</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>
-    <string name="gpx_split_interval">Intérvalo de división</string>
-    <string name="gpx_info_subtracks">Subpista: %1$s </string>
+    <string name="gpx_split_interval">Intervalo de división</string>
+    <string name="gpx_info_subtracks">"Subtrazas: %1$s "</string>
 	<string name="gpx_info_waypoints">"Puntos de ruta: %1$s "</string>
 	<string name="gpx_info_distance">Distancia: %1$s (%2$s puntos) </string>
-	<string name="gpx_info_start_time">Tiempo de inicio: %1$tF,  %1$tT </string>
-	<string name="gpx_info_end_time">Tiempo de finalización: %1$tF,  %1$tT </string>
-	<string name="gpx_info_average_speed">Velocidad media: %1$s </string>
+	<string name="gpx_info_start_time">"Hora inicio: %1$tF, %1$tT "</string>
+	<string name="gpx_info_end_time">"Hora fin: %1$tF, %1$tT "</string>
+	<string name="gpx_info_average_speed">"Velocidad promedio: %1$s "</string>
 	<string name="gpx_info_maximum_speed">Velocidad máxima: %1$s </string>
-	<string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
+	<string name="gpx_info_avg_altitude">Altitud promedio: %1$s</string>
 	<string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
-	<string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
+	<string name="gpx_info_asc_altitude">Descenso/ascenso: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de ruta</string>
     <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
@@ -1738,13 +1739,14 @@
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Ocultar restricciones de acceso</string>
     <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de las carreteras</string>
-    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de las carreteras</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carreteras</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
     <string name="osmo_auth_error_short">Fallo en la autorización</string>
     <string name="osmo_auth_error">Se encontró un error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que su registro ha expirado.\n ¿Quiere realizar un nuevo registro?</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
-    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quiere hacerse anónimo, conecte dispositivos directamente a través de identificadores Tracker.\n - Los grupos privados están limitados a 8 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada al grupo, como sólo por invitación pero para controlar el grupo necesita ir a la consola de administración.\n - Si tiene que crear un grupo pero con otras condiciones, contacte con http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quiere hacerse anónimo, conecte dispositivos directamente a través de los identificadores de seguimiento.\n - Los grupos privados están limitados a 8 personas.
+\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada al grupo, como sólo por invitación pero para controlar el grupo necesita ir a la consola de administración.\n - Si tiene que crear un grupo pero con otras condiciones, contacte con http://osmo.mobi"</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo al iniciar sesión en OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
@@ -1819,16 +1821,16 @@
     <string name="record_plugin_description">"Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden utilizar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
-	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
+	<string name="save_track_to_gpx_globally">Registrar traza en archivo GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
-	<string name="save_track_to_gpx_globally_descr">El registro de la posición en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="save_track_to_gpx_globally_descr">El registro de la posición general en un archivo GPX puede activarse o desactivarse utilizando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="confirm_every_run">Preguntar siempre</string>
-	<string name="save_global_track_interval_descr">Elegir intervalo de guardado para la grabación de trazas general (habilitar mediante el widget de guardado GPX en el mapa)</string>
+	<string name="save_global_track_interval_descr">Elegir intervalo de registro para la grabación de trazas en general (habilitar a través del control de grabado GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo de guardado general</string>
 	<string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Peaje</string>
-    <string name="traffic_warning_stop">Señal de stop</string>
+    <string name="traffic_warning_stop">Señal de detención</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
 	<string name="traffic_warning_calming">Reductores de velocidad</string>
@@ -1969,7 +1971,7 @@
 	<string name="plugin_ski_descr">"Este complemento para OsmAnd pone a su alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad, y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
 \n\nActivando esta vista cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo del mapa OSMAnd a la \'Vista turística\', que es una vista de alto detalle especial para viajeros y conductores profesionales.
-\n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, caminos y marcas de orientación).
+\n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
 \n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mostrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
 \n\nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' desde \'Configurar mapa\' cuando desee. "</string>
 	<string name="days_behind">días atrás</string>
@@ -2032,7 +2034,7 @@
 	<string name="shared_string_address">Dirección</string>
 	<string name="shared_string_show_description">Mostrar descripción</string>
 	<string name="shared_string_open">Abrir</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Asistente de mapeador OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asistente mapeador OSM</string>
 	<string name="shared_string_manage">Gestionar</string>
 	<string name="shared_string_edit">Editar</string>
 	<string name="shared_string_places">Lugares</string>
