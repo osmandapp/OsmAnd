@@ -2013,4 +2013,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="local_indexes_cat_wiki">Viquipèdia</string>
     <string name="shared_string_show_details">Mostra els detalls</string>
     <string name="download_wikipedia_maps">Viquipèdia</string>
-    </resources>
+    <string name="gps_network_not_enabled">El servei de posicionament està aturat. Voleu activar-lo?</string>
+    <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
+    <string name="disable_recording_once_app_killed_descrp">Si s\'activa, l\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). L\'indicador del procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android.</string>
+	<string name="shared_string_import2osmand">Importació a OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Sou a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
+	</resources>
