@@ -989,7 +989,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	private void connectToDevice() {
 		Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.osmo_connect_to_device);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_connect_to_device, getExpandableListView(), false);
 		final RadioButton device = (RadioButton) v.findViewById(R.id.ConnectToDevice);
 		//final RadioButton group = (RadioButton) v.findViewById(R.id.ConnectToGroup);
