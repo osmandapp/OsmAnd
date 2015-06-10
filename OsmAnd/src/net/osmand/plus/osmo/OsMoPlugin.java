@@ -53,7 +53,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	private TextInfoWidget osmoControl;
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
-	protected OsMoGroupsActivity groupsActivity;
+	protected Activity groupsActivity;
 	protected OsMoControlDevice deviceControl;
 	
 	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
@@ -86,11 +86,11 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 	
 	
-	public OsMoGroupsActivity getGroupsActivity() {
+	public Activity getGroupsActivity() {
 		return groupsActivity;
 	}
 	
-	public void setGroupsActivity(OsMoGroupsActivity groupsActivity) {
+	public void setGroupsActivity(Activity groupsActivity) {
 		this.groupsActivity = groupsActivity;
 	}
 
@@ -483,15 +483,15 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	
 	@Override
 	public void onConnected() {
-		if (groupsActivity != null) {
-			groupsActivity.handleConnect();
+		if (groupsActivity instanceof OsMoGroupsActivity) {
+			((OsMoGroupsActivity) groupsActivity).handleConnect();
 		}
 	}
 	
 	@Override
 	public void onDisconnected(String msg) {
-		if (groupsActivity != null) {
-			groupsActivity.handleDisconnect(msg);
+		if (groupsActivity instanceof OsMoGroupsActivity) {
+			((OsMoGroupsActivity) groupsActivity).handleDisconnect(msg);
 		}
 	}
 

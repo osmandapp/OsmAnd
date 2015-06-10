@@ -63,7 +63,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				launchOsMoGroupsActivity();
 			}
 		});
-
+		plugin.setGroupsActivity(getActivity());
 		setupHader(view);
 		return view;
 	}
@@ -75,6 +75,19 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			plugin.getGroups().addUiListeners(this);
 		}
 		setupOsMoView();
+		plugin.setGroupsActivity(getActivity());
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		plugin.setGroupsActivity(null);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		plugin.setGroupsActivity(null);
 	}
 
 	private void setupOsMoView() {

@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Notification;
@@ -332,7 +333,7 @@ public class OsMoService implements OsMoReactor {
 	}
 
 	private void runNotification(final String error) {
-		final OsMoGroupsActivity ga = plugin.getGroupsActivity();
+		final Activity ga = plugin.getGroupsActivity();
 		if(ga != null) {
 			app.runInUIThread(new Runnable() {
 				
@@ -360,7 +361,7 @@ public class OsMoService implements OsMoReactor {
 	}
 	
 
-	protected void showRegisterAgain(OsMoGroupsActivity ga, String msg) {
+	protected void showRegisterAgain(Activity ga, String msg) {
 		Builder bld = new AlertDialog.Builder(ga);
 		bld.setMessage(msg);
 		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
@@ -374,11 +375,6 @@ public class OsMoService implements OsMoReactor {
 		
 	}
 
-	private void showDialogAskToReregister(String error) {
-//		Builder bld = new AlertDialog.Builder(this);
-//		bld.setMessage(app.getString(R.string.osmo_io_error) +  error);
-//		bld.show();
-	}
 
 	public void showErrorMessage(String string) {
 		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		
