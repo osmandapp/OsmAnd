@@ -1985,4 +1985,6 @@
     <string name="download_wikipedia_maps">Вікіпэдыя</string>
     <string name="local_recordings_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d нататкі. Вы ўпэўненыя?</string>
 	<string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
-    </resources>
+    <string name="disable_recording_once_app_killed">Запусьціць у фоне</string>
+    <string name="disable_recording_once_app_killed_descrp">Спыняе запіс, калі праграма будзе спынена (праз надаўнія праграмы). Калі праграма запусьціцца, запіс пачнецца ізноў (апавяшчэнне на экране пра фонавы рэжым).</string>
+	</resources>
