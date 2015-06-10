@@ -94,6 +94,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				R.string.save_track_to_gpx_descrp));
 		cat.addPreference(createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED, R.string.disable_recording_once_app_killed,
+				R.string.disable_recording_once_app_killed_descrp));
 	}
 
 

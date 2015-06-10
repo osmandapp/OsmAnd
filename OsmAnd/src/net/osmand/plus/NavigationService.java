@@ -281,6 +281,21 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
+	
+	@Override
+	public void onTaskRemoved(Intent rootIntent) {
+		if (((OsmandApplication) getApplication()).getNavigationService() != null && 
+				((OsmandApplication) getApplication()).getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get())  {
+			OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+			if (plugin != null) {
+				if (plugin.getTracker().isEnabledTracker()) {
+					plugin.getTracker().disableTracker();
+				}
+				plugin.getService().disconnect();
+			}
+			NavigationService.this.stopSelf();
+		}
+	}
 
 	
 }
