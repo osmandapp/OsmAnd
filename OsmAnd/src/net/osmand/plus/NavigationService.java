@@ -22,6 +22,8 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -181,10 +183,9 @@ public class NavigationService extends Service implements LocationListener {
 
 		};
 		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
+
+        
 		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
-		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
-				System.currentTimeMillis());
-		notification.flags = Notification.FLAG_NO_CLEAR;
 
 		//Show currently active wake-up interval
 		int soi = settings.SERVICE_OFF_INTERVAL.get();
@@ -196,11 +197,21 @@ public class NavigationService extends Service implements LocationListener {
 		} else {
 			nt = nt + Integer.toString(soi/1000/60) + " " + getString(R.string.int_min);
 		}
-
-		notification.setLatestEventInfo(this, Version.getAppName(cl) + " " + getString(R.string.osmand_service), nt,
-				PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-		startForeground(NOTIFICATION_SERVICE_ID, notification);
+		PendingIntent broadcast = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
+//				System.currentTimeMillis());
+//		
+//		notification.setLatestEventInfo(this, Version.getAppName(cl) + " " + getString(R.string.osmand_service), nt,
+//				broadcast);
+//		notification.flags = Notification.FLAG_NO_CLEAR;
+//		startForeground(NOTIFICATION_SERVICE_ID, notification);
+		
+		final Builder noti = new NotificationCompat.Builder(
+	            this).setContentTitle(Version.getAppName(cl))
+	        .setContentText(getString(R.string.osmand_service)).setSmallIcon(R.drawable.bgs_icon)
+//	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
+	        .setContentIntent(broadcast).setOngoing(true);
+		startForeground(NOTIFICATION_SERVICE_ID, noti.build());
 	}
 	
 	@Override
