@@ -43,10 +43,12 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private final Map<String, City> postCodes;
 	private boolean useEnglishNames = false;
 	private final Collator collator;
+	private String fileName;
 	
-	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
+	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name, String fileName) {
 		this.file = file;
 		this.region = name;
+		this.fileName = fileName;
  	    this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}
@@ -263,6 +265,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public String getName() {
 		return region;
+	}
+	
+	@Override
+	public String getFileName() {
+		return fileName;
 	}
 	
 	@Override

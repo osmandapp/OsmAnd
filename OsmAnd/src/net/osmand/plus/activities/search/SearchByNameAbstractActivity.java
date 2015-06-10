@@ -288,6 +288,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 	public abstract String getText(T obj);
 	
+	public String getAdditionalFilterText(T obj) {
+		return null;
+	}
+	
 	public String getShortText(T obj) {
 		return getText(obj);
 	}
@@ -300,7 +304,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		if(filter == null || filter.length() == 0){
 			return true;
 		}
-		return CollatorStringMatcher.cmatches(collator, getText(obj), filter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		boolean matches = CollatorStringMatcher.cmatches(collator, getText(obj), filter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		if(!matches && getAdditionalFilterText(obj) != null) {
+			matches = CollatorStringMatcher.cmatches(collator, getAdditionalFilterText(obj), filter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		}
+		return matches;
 	}
 	
 

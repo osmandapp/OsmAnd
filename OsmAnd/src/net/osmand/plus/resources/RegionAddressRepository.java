@@ -17,6 +17,9 @@ public interface RegionAddressRepository {
 	
 	public String getName();
 	
+	public String getFileName() ;
+
+	
 	public LatLon getEstimatedRegionCenter();
 	
 	// is called on low memory

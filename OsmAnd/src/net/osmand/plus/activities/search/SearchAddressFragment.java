@@ -344,8 +344,14 @@ public class SearchAddressFragment extends Fragment {
 		}
 
 		private static String getRegionName(Context ctx, OsmandSettings settings) {
-			return FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) ctx.getApplicationContext())
-					.getResourceManager().getOsmandRegions(), settings.getLastSearchedRegion());
+			OsmandApplication app = ((OsmandApplication) ctx.getApplicationContext());
+			RegionAddressRepository reg = app.getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+			if(reg != null) {
+				return FileNameTranslationHelper.getFileName(ctx, 
+						app.getResourceManager().getOsmandRegions(), reg.getFileName());
+			} else {
+				return settings.getLastSearchedRegion().replace('_', ' ');
+			}
 		}
 		
 		public static AddressInformation buildCity(Context ctx, OsmandSettings settings){
@@ -475,8 +481,13 @@ public class SearchAddressFragment extends Fragment {
 
 
 	private String getRegionName() {
-		return FileNameTranslationHelper.getFileName(getActivity(),
-				((OsmandApplication) getActivity().getApplication()).getResourceManager().getOsmandRegions(), region);
+		RegionAddressRepository reg = getApplication().getResourceManager().getRegionRepository(region);
+		if(reg != null) {
+			return FileNameTranslationHelper.getFileName(getApplication(), 
+					getApplication().getResourceManager().getOsmandRegions(), reg.getFileName());
+		} else {
+			return region;
+		}
 	}
 	
 	public void loadData() {
