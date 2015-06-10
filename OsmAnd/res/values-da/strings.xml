@@ -2031,5 +2031,6 @@
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
 	<string name="disable_recording_once_app_killed">Kør i baggrunden</string>
-    <string name="disable_recording_once_app_killed_descrp">Stopper optagelsen, hvis programmet afsluttes (via seneste programmer). Når programmer startes, vil optagelsen starte igen (meddelese i notifikationslinien om baggrundsproces).</string>
-	</resources>
+    <string name="disable_recording_once_app_killed_descrp">Medmindre markeret vil GPX optagelsen stoppe, når programmet afsluttes (via seneste programmer). Ved genstart vil optagelsen starte igen (se meddelese i notifikationslinien om OsmAnd dvaletilstand).</string>
+	<string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Skal den slåes til?</string>
+    </resources>
