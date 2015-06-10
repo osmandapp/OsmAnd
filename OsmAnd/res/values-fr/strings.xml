@@ -2050,4 +2050,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
 	<string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
+    <string name="disable_recording_once_app_killed_descrp">Si activé, l\'enregistrement GPX sera mis en pause lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
+	<string name="disable_recording_once_app_killed">Interdire l\'enregistrement autonome</string>
     </resources>
