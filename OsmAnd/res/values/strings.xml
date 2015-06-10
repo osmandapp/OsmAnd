@@ -11,8 +11,8 @@
     -->
     
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
-    <string name="disable_recording_once_app_killed">Run in background</string>
-    <string name="disable_recording_once_app_killed_descrp">Unless checked, GPX recording will stop when the app is killed (via recent apps). Upon app restart, the recording will resume (see notification in the top bar about the OsmAnd Sleep mode process).</string>
+    <string name="disable_recording_once_app_killed">Prevent standalone recording</string>
+    <string name="disable_recording_once_app_killed_descrp">If checked, GPX recording will pause after the app is killed (via recent apps). (See OsmAnd Sleep mode indication in the Android notification bar.)</string>
 	<string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article</string>
     <string name="download_wikipedia_item">Wikipedia</string>
