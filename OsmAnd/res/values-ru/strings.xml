@@ -1733,7 +1733,7 @@
 	<string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
     <string name="print_route">Печать маршрута</string>
     <string name="fav_point_dublicate">Дублирование названия избранной точки</string>
-    <string name="fav_point_dublicate_message">Название избранной точки %1$s было изменено для предотвращения дублирования имен.</string>
+    <string name="fav_point_dublicate_message">Указанное название избранной точки уже используется, для предотвращения дублирования имен название было изменено на %1$s.</string>
     
     
     <string name="text_size_descr">Установите размер текста для карты.</string>
@@ -1995,4 +1995,6 @@
     <string name="read_full_article">Читать полный текст статьи</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Вы собираетесь удалить %1$d заметок. Вы уверены?</string>
+	<string name="gps_network_not_enabled">Служба определения координат не включена. Вы хотите включить её?</string>
+    <string name="disable_recording_once_app_killed_descrp">Если отмечено, то после завершения приложения (через последние приложений) запись GPX будет поставлена на паузу. (Индикация режима сна OsmAnd исчезнет с панели уведомлений Android).</string>
 	</resources>
