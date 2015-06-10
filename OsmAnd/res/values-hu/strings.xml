@@ -1965,4 +1965,5 @@
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
     <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos benne?</string>
-	</resources>
+	<string name="disable_recording_once_app_killed">Futtatás a háttérben</string>
+    </resources>

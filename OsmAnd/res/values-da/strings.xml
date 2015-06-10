@@ -2030,4 +2030,6 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
+	<string name="disable_recording_once_app_killed">Kør i baggrunden</string>
+    <string name="disable_recording_once_app_killed_descrp">Stopper optagelsen, hvis programmet afsluttes (via seneste programmer). Når programmer startes, vil optagelsen starte igen (meddelese i notifikationslinien om baggrundsproces).</string>
 	</resources>
