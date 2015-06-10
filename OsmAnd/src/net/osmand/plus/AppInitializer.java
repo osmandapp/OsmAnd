@@ -396,9 +396,6 @@ public class AppInitializer implements IProgress {
 
 
 	private void saveGPXTracks() {
-		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
-			app.startNavigationService(NavigationService.USED_BY_GPX);
-		}
 		if (app.savingTrackHelper.hasDataToSave()) {
 			long timeUpdated = app.savingTrackHelper.getLastTrackPointTime();
 			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
@@ -411,6 +408,9 @@ public class AppInitializer implements IProgress {
 			} else {
 				app.savingTrackHelper.loadGpxFromDatabase();
 			}
+		}
+		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
+			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
 	}
 
