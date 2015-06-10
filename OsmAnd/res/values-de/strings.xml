@@ -1,6 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="shared_string_import2osmand">Zu OsmAnd importieren</string>
+	<string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
+	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
+	<string name="disable_recording_once_app_killed_descrp">Pausiert die GPX-Aufzeichnung wenn OsmAnd gestoppt wird (via zuletzt verwendete Apps). (Der Hintergrunddienst-Indikator in der Android-Benachrichtigungsleiste verschwindet dann.)</string>
+	<string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
 	<string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen</string>
