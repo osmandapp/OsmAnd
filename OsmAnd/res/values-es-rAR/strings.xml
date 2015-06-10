@@ -1946,4 +1946,5 @@
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
 	<string name="disable_recording_once_app_killed">Ejecutar en segundo plano</string>
-    </resources>
+    <string name="disable_recording_once_app_killed_descrp">Salvo que esté marcado, la grabación GPX se detendrá cuando se cierre la aplicación (mediante aplicaciones recientes). Al reiniciar la aplicación, la grabación se reanudará (ver notificación en la barra superior sobre el proceso de modo de OsmAnd en modo reposo).</string>
+	</resources>
