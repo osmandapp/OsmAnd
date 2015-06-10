@@ -2049,4 +2049,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
-	</resources>
+	<string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
+    </resources>
