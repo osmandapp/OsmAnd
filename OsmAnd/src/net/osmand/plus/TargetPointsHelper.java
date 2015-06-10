@@ -290,7 +290,7 @@ public class TargetPointsHelper {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();
-		double dist = 300000;
+		double dist = 400000;
 		List<TargetPoint> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0).point, current.getLatitude(), current.getLongitude()) > dist) {
