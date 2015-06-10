@@ -1309,7 +1309,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
     <string name="distance_measurement_save_gpx">Enregistrer en GPX sous...</string>
     <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX...</string>
-    <string name="wait_current_task_finished">Veuillez attendre jusqu\'à ce que la tâche actuelle soit terminée</string>
+    <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
     <string name="plugin_distance_point_speed">vitesse</string>
