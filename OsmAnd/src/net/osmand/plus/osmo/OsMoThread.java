@@ -12,17 +12,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-
 import net.osmand.PlatformUtil;
-import net.osmand.osm.io.Base64;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
@@ -43,6 +38,7 @@ public class OsMoThread {
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
 	private static final long TIMEOUT_TO_RECONNECT = 60 * 1000;
+	private static final int SOCKET_TIMEOUT = 60 * 1000;
 	private static final long TIMEOUT_TO_PING = 5 * 60 * 1000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
 	private static final long SELECT_TIMEOUT = 500;
@@ -106,6 +102,7 @@ public class OsMoThread {
 		activeChannel.configureBlocking(true);
 		activeChannel.connect(new InetSocketAddress(sessionInfo.hostName, Integer.parseInt(sessionInfo.port)));
 		activeChannel.configureBlocking(false);
+		activeChannel.socket().setSoTimeout(SOCKET_TIMEOUT);
 		SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		connectionTime = System.currentTimeMillis();
 		if (this.activeChannel != null) {
