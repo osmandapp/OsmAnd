@@ -1714,4 +1714,5 @@
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importar para OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
-	</resources>
+	<string name="disable_recording_once_app_killed">Executar em segundo plano</string>
+    </resources>
