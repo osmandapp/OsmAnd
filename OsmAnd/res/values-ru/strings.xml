@@ -1993,4 +1993,6 @@
     <string name="shared_string_show_details">Показать детали</string>
     <string name="download_wikipedia_maps">Википедия</string>
     <string name="read_full_article">Читать полный текст статьи</string>
-    </resources>
+    <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Вы собираетесь удалить %1$d заметок. Вы уверены?</string>
+	</resources>
