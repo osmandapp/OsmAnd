@@ -325,13 +325,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				} else {
 					mainGroup.users.remove(gid);
 					storage.save();
-					if (obj != null) {
-						String errorDescription = obj
-								.optString("error_description");
-						if (!TextUtils.isEmpty(errorDescription)) {
-							app.showToastMessage(errorDescription);
-						}
-					} else {
+					if (obj == null) {
 						app.showToastMessage(app.getString(R.string.osmo_device_not_found));
 					}
 				}
@@ -345,13 +339,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				storage.save();
 			}
 			if (!OK.equals(data)) {
-				if (obj != null) {
-					String errorDescription = obj
-							.optString("error_description");
-					if (!TextUtils.isEmpty(errorDescription)) {
-						app.showToastMessage(errorDescription);
-					}
-				} else {
+				if (obj == null) {
 					app.showToastMessage(app.getString(R.string.osmo_device_not_found));
 				}
 			}
