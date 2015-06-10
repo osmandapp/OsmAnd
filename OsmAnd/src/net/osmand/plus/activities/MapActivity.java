@@ -40,7 +40,6 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -68,6 +67,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -119,12 +120,20 @@ public class MapActivity extends AccessibleActivity {
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
-				System.currentTimeMillis());
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
-				PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT));
-		return notification;
+		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
+//		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
+//				System.currentTimeMillis());
+//		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+//		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
+//				pi);
+		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
+		final Builder noti = new NotificationCompat.Builder(
+	            this).setContentTitle(Version.getAppName(app))
+	        .setContentText(getString(R.string.go_back_to_osmand))
+	        .setSmallIcon(smallIcon )
+//	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
+	        .setContentIntent(pi).setOngoing(true);
+		return noti.build();
 	}
 
 	@Override
