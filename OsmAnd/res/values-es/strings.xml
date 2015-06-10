@@ -269,8 +269,8 @@
   <string name="level_to_switch_vector_raster_descr">Nivel de acercamiento mínimo para utilizar los mapas vectoriales</string>
   <string name="level_to_switch_vector_raster">Mín. nivel de acercamiento vectorial</string>
   <string name="tip_location_sharing">Compartir una ubicación</string>
-  <string name="tip_location_sharing_t">"Puedes compartir la ubicación de lugares interesantes en sus viajes con su familia o amigos mediante el menú contextual \'Utilizar ubicación\'→\'Compartir ubicación\'.
-\n\nLuego seleccione el modo de compartir la ubicación. Las opciones son: correo electrónico, SMS (texto), o copiar las coordenadas de la ubicación al portapapeles del dispositivo. "</string>
+  <string name="tip_location_sharing_t">"Puede compartir la ubicación de lugares interesantes en sus viajes con su familia o amigos a través del menú contextual \'Utilizar ubicación\' → \'Compartir ubicación\'.
+\n\nLuego seleccione el modo de compartir su ubicación. Las opciones son: correo electrónico, SMS (texto), o copiar las coordenadas de la ubicación al portapapeles del dispositivo. "</string>
   <string name="tip_favorites">Puntos favoritos</string>
   <string name="tip_favorites_t">"Los puntos usados frecuentemente se pueden guardar como Favoritos de la siguiente manera:
 \n\nEn el menú contextual \'Utilizar ubicación\', para cualquier punto seleccione la opción \'Añadir a favoritos\' y a continuación escribe un nombre.
@@ -574,7 +574,7 @@
   
   <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
   <string name="list_index_files_was_not_loaded">La lista de regiones no fue recuperada desde osmand.net.</string>
-  <string name="select_index_file_to_download">No se encontró nada. Si no puedes encontrar tu región, puedes hacerla por ti mismo (Visita http://osmand.net).</string>
+  <string name="select_index_file_to_download">No se encontró nada. Si no encuentra su región, puede hacer el archivo usted mismo (vea http://osmand.net).</string>
   
   <string name="fav_points_edited">Se editó el punto favorito</string>
   <string name="fav_points_not_exist">No hay puntos favoritos</string>
@@ -766,7 +766,7 @@
   <string name="left_side_navigation_descr">Seleccione en países con tráfico por la izquierda</string>
   
   <string name="unknown_from_location">El punto de partida todavía no ha sido determinado</string>
-  <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
+  <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de archivos?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
   
   <string name="map_online_plugin_is_not_installed">Habilita el complemento mapas en línea para seleccionar diferentes fuentes de mapas</string>
@@ -894,7 +894,7 @@
   <string name="route_kl">Manténgase a la izquierda y continúe</string>
   <string name="route_kr">Manténgase a la derecha y continúe</string>
   
-  <string name="asap">Si puedes</string>
+  <string name="asap">ASAP</string>
   <string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1:
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
@@ -989,24 +989,23 @@
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado</string>
 <string name="map_widget_renderer">Estilo del mapa</string>
-<string name="tip_rotation_switching_t_v2">Puedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.
-		\n\nLas opciones son:
-		\n\t* \'No girar (norte arriba)\': el mapa no girará. El norte está siempre arriba
-		\n\t* \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección
-		\n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo
-	</string>
+<string name="tip_rotation_switching_t_v2">"Puede alternar cuándo y cómo el mapa se mostrará girado cliqueando repetidamente el icono brújula de la pantalla.
+\n\nLas opciones son:
+\n\t* \'No girar (norte arriba)\': el mapa no girará, el norte estará siempre arriba
+\n\t* \'En dirección al movimiento\': el mapa estará continuamente alineado con su dirección
+\n\t* \'A la brújula\': el mapa estará continuamente alineado con la lectura de la brújula del dispositivo "</string>
 <string name="tip_map_switch_t_v2">"La fuente del mapa y las capas mostradas se cambian a través de \'Menú\'→\'Configurar mapa\'.
 \n\nEn \'Fuente del mapa...\' puede elegir utilizar los mapas vectoriales fuera de línea precargados (predeterminado, también necesarios para navegación fuera de línea), fuentes de teselas (para esto active el complemento \'Mapas en línea\' bajo \'Ajustes\' → \'Complementos\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en una PC.
 \n\nOsmAnd también soporta fuentes personalizadas. "</string>
-<string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (más brillante) y noche (más oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
-\n\nPuedes establecer una política para la conmutación día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
+<string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales fuera de línea entre día (brillante) y noche (oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
+\n\nPuede establecer una política para el cambio día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
 \n\nLas opciones son:
 \n\t* \'Alba/Ocaso\': modo automático, controlado por la posición del sol (predeterminado)
-\n\t* \'Día\': utiliza siempre el modo día
-\n\t* \'Noche\': utiliza siempre el modo noche
+\n\t* \'Día\': utilizar siempre el modo día
+\n\t* \'Noche\': utilizar siempre el modo noche
 \n\t* \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
 <string name="tip_app_mode_t_v2">"OsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
-\n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono automóvil, bicicleta o peatonal), o al crear una ruta (\'modo de transporte\'). "</string>
+\n\nPuede cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono automóvil, bicicleta o peatonal), o al crear una ruta (\'modo de transporte\'). "</string>
 <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM fuera y en línea</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
 \n\nOsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (mapas vectoriales y teselas) pueden ser almacenados en la memoria del teléfono para su uso fuera de línea. OsmAnd también ofrece funcionalidad de navegación fuera y en línea incluyendo indicaciones giro-a-giro mediante voz.
@@ -1071,7 +1070,7 @@
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en el tienda de aplicaciones?</string>
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
-	<string name="background_service_is_enabled_question">El servicio de fondo aún está funcionando. ¿Quieres interrumpirlo también?</string>
+	<string name="background_service_is_enabled_question">El servicio de suspensión de OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado la navegación: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (usando código de Android, más lento, en vez del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
@@ -1122,7 +1121,7 @@
     
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Tomar una nota de audio</string>
     <string name="recording_context_menu_vrecord">Tomar una nota de vídeo</string>
@@ -1159,7 +1158,7 @@
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
-    <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
+    <string name="stop_routing_confirm">¿Está seguro que quiere parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
@@ -1468,7 +1467,7 @@
     <string name="app_mode_aircraft">Avión</string>
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
-    <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios OSM. ¿Quieres continuar?</string>
+    <string name="local_osm_changes_delete_all_confirm">Va a borrar %1$d cambios OSM. ¿Está seguro?</string>
     <string name="shared_string_delete_all">Borrar todo</string>
     
     <string name="amenity_type_seamark">Náutica</string>
@@ -1664,7 +1663,7 @@
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
     
-	<string name="import_file_favourites">¿Guardar como archivo GPX o importar a favoritos?</string>
+	<string name="import_file_favourites">¿Guardar puntos como archivo GPX o importarlos a favoritos?</string>
 	
 	<string name="osmo_follow">Seguir</string>
     <string name="osmo_sign_in">Ingresar</string>
@@ -1743,9 +1742,9 @@
     <string name="rendering_attr_showSurfaces_name">Mostrar superficie de las carreteras</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
     <string name="osmo_auth_error_short">Fallo en la autorización</string>
-    <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n ¿Quieres realizar un nuevo registro?</string>
+    <string name="osmo_auth_error">Se encontró un error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que su registro ha expirado.\n ¿Quiere realizar un nuevo registro?</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
-    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quieres ser anónimo, conecta dispositivos directamente a través de identificadores Tracker.\n - Los grupos privados están limitados a 8 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada de grupo, como sólo por invitación, pero para controlar el grupo tienes que ir a la consola de administración.\n - Si tienes que crear un grupo, pero con otras condiciones, contacta con http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quiere hacerse anónimo, conecte dispositivos directamente a través de identificadores Tracker.\n - Los grupos privados están limitados a 8 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada al grupo, como sólo por invitación pero para controlar el grupo necesita ir a la consola de administración.\n - Si tiene que crear un grupo pero con otras condiciones, contacte con http://osmo.mobi"</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo al iniciar sesión en OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
@@ -1788,7 +1787,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
     
 	<string name="osmo_invite">Invitar…</string>
-    <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
+    <string name="osmo_leave_confirmation_msg">¿Quiere abandonar el grupo %1$s?</string>
     <string name="osmo_specify_tracker_id">Especifique el id</string>
     <string name="arrival_distance_factor_early">Pronto</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -1837,7 +1836,7 @@
 	<string name="text_size_descr">Establece el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño de texto</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Hemos cambiado el nombre de tu punto favorito a %1$s para evitar nombres duplicados.</string>
+    <string name="fav_point_dublicate_message">El nombre del favorito especificado está en uso, fue cambiado a %1$s para evitar duplicados.</string>
     
     
     <string name="print_route">Imprimir ruta</string>
@@ -2052,7 +2051,7 @@
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_copy">Copiar</string>
-    <string name="application_dir_change_warning3">¿Quieres que OsmAnd también copie los archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="routing_attr_avoid_borders_name">Evitar cruce de fronteras</string>
 	<string name="routing_attr_avoid_borders_description">Evita cruzar una frontera hacia otro país</string>
@@ -2066,4 +2065,11 @@
     <string name="osmo_share_my_location">Compartir mi ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>    
+    <string name="shared_string_import2osmand">Importar a OsmAnd</string>
+    <string name="read_full_article">Leer el artículo completo</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Mostrar detalles</string>
+    <string name="local_recordings_delete_all_confirm">Va a borrar %1$d notas. ¿Está seguro?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
