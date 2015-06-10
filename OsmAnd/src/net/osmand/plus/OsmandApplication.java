@@ -668,6 +668,7 @@ public class OsmandApplication extends Application {
 			return 0;
 		}
 	}
+	
 
 	public void startNavigationService(int intent) {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);

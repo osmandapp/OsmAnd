@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.osmo.OsMoGroupsActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -258,7 +259,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				if(item == R.string.save_current_track){
 					saveCurrentTrack();
 				} else if(item == R.string.gpx_monitoring_start) {
-					startGPXMonitoring(map);
+					if (app.getLocationProvider().checkGPSEnabled(map)) {
+						startGPXMonitoring(map);
+					}
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {

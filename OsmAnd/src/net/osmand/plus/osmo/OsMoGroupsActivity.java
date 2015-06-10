@@ -221,12 +221,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked) {
-					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
-						osMoPlugin.getTracker().enableTracker();
+					if (app.getLocationProvider().checkGPSEnabled(OsMoGroupsActivity.this)) {
+						if (osMoPlugin != null && osMoPlugin.getTracker() != null) {
+							osMoPlugin.getTracker().enableTracker();
+						}
+						app.startNavigationService(NavigationService.USED_BY_LIVE);
+						// interval setting not needed here, handled centrally in app.startNavigationService
+						// app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 					}
-					app.startNavigationService(NavigationService.USED_BY_LIVE);
-					//interval setting not needed here, handled centrally in app.startNavigationService
-					//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 				} else {
 					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
 						osMoPlugin.getTracker().disableTracker();
