@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="disable_recording_once_app_killed">Run in background</string>
-    <string name="disable_recording_once_app_killed_descrp">Stops recording if the app is killed (via recent apps). When the app is started, the recording will start over (notification on the top about background process).</string>
+    <string name="disable_recording_once_app_killed_descrp">Unless checked, GPX recording will stop when the app is killed (via recent apps). Upon app restart, the recording will resume (see notification in the top bar about the OsmAnd Sleep mode process).</string>
 	<string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article</string>
     <string name="download_wikipedia_item">Wikipedia</string>
