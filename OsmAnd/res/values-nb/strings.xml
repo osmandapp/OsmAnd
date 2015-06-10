@@ -928,7 +928,7 @@
 	<string name="no_buildings_found">Ingen bygninger funnet.</string>
     <string name="loading_streets_buildings">Laster gater/bygninger…</string>
 	<string name="osmo_activity">OpenStreetMap-overvåking</string>
-    <string name="fav_point_dublicate_message">Favorittpunktnavn er endret til %1$s for å unngå dupliserte navn.</string>
+    <string name="fav_point_dublicate_message">Spesifisert favorittnavn er allerede i bruk og endres til %1$s for å unngå duplisering.</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
     <string name="color_red">rød</string>
@@ -1342,4 +1342,10 @@
 	<string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
     <string name="routing_attr_avoid_borders_name">Unngå grensekryssing</string>
 	<string name="routing_attr_avoid_borders_description">Unngå å krysse grensen til et annet land</string>
-	</resources>
+	<string name="shared_string_import2osmand">Importer til OsmAnd</string>
+    <string name="read_full_article">Les hele artikkelen</string>
+    <string name="shared_string_show_details">Vis detaljer</string>
+    <string name="osm_edit_context_menu_delete">Slett OSM-redigering</string>
+    <string name="rendering_value_disabled_name">Deaktivert</string>
+    <string name="osmo_share_my_location">Del min posisjon</string>
+    </resources>

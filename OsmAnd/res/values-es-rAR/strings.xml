@@ -276,7 +276,7 @@
     <string name="gpx_wpt">Punto de ruta</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
     <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>
-	<string name="gpx_info_subtracks">"Subpistas: %1$s "</string>
+	<string name="gpx_info_subtracks">"Subtrazas: %1$s "</string>
 	<string name="gpx_info_waypoints">"Puntos de ruta: %1$s "</string>
 	<string name="gpx_info_distance">"Distancia: %1$s (%2$s puntos) "</string>
 	<string name="gpx_info_average_speed">"Velocidad media: %1$s "</string>
@@ -284,8 +284,8 @@
 	<string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
 	<string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
 	<string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
-    <string name="gpx_timespan">Lapso de tiempo: %1$s</string>
-	<string name="gpx_timemoving">Tiempo moviéndote: %1$s</string>
+    <string name="gpx_timespan">Duración: %1$s</string>
+	<string name="gpx_timemoving">Tiempo moviéndose: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points">" %1$s puntos"</string>
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>
@@ -477,7 +477,7 @@
 	<string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas sin conexión de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo del mapa OSMAnd a la \'Vista turística\', que es una vista de alto detalle, especial para viajeros y conductores profesionales.
-\n\nEsta vista proporciona, en cualquier nivel de ampliación del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente caminos, pistas, senderos y marcas de orientación).
+\n\nEsta vista proporciona, en cualquier nivel de ampliación del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
 \n\nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
 \n\nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' desde \'Configurar mapa\' cuando desee. "</string>
 	<string name="plugin_nautical_descr">"Este complemento enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos.
@@ -527,10 +527,10 @@
 \n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones a\' o \'Mostrar en mapa\', etc. "</string>
 	<string name="background_service_is_enabled_question">El modo reposo, aún está funcionando. ¿Quiere interrumpirlo también?</string>
 	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
-	<string name="save_global_track_interval_descr">Elige el intervalo de guardado para la grabación de trazas general (activar mediante el control de guardado GPX en el mapa)</string>
+	<string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo general de guardado</string>
 	<string name="background_service_int">Intervalo de activación del GPS</string>
-	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
+	<string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	<string name="save_track_to_gpx_globally_descr">El registro de la ubicación en un archivo GPX puede des/activarse usando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
@@ -570,7 +570,7 @@
     <string name="osmo_auto_connect_descr">Conecte automáticamente al servicio luego de iniciar la aplicación</string>
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="no_index_file_to_download">No se encontraron descargas, compruebe su conexión a Internet.</string>
-    <string name="select_index_file_to_download">No se encontró nada. Si no puede encontrar su región, puede hacerla por si mismo (Vea http://osmand.net).</string>
+    <string name="select_index_file_to_download">No se encontró nada. Si no encuentra su región, puede hacerla por si mismo (Vea http://osmand.net).</string>
     <string name="none_selected_gpx">Sin archivos GPX seleccionados. Para elegir, mantenga pulsado en la traza disponible.</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
@@ -589,10 +589,10 @@
     <string name="osmo_regenerate_login_ids_confirm">¿Estás seguro de regenerar los identificadores personales? Todos los dispositivos conectados a ti, no serán capaces de seguirte nunca más.</string>
     <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
     <string name="osmo_set_moving_target">Establecer como objetivo móvil</string>
-    <string name="osmo_group_share">Para conectarse al grupo %2$s, indica el id del grupo (%1$s) o pulsa %3$s.</string>
+    <string name="osmo_group_share">Para conectarse al grupo %2$s, indique el id del grupo (%1$s) o pulse %3$s.</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_session_id_share">URL de sesión para seguir dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, pulsa en el enlace %3$s o indica el id de rastreo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, pulse en el enlace %3$s o indique el id de rastreo (%1$s)</string>
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
     <string name="osmo_auto_send_locations_descr">Iniciar sesión de rastreo automáticamente y enviar ubicaciones luego de iniciar la aplicación</string>
     <string name="osmo_tracker_id">Id de rastreo personal</string>
@@ -728,7 +728,7 @@
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
-    <string name="tip_recent_changes_1_4_t">"Cambios en 1.4:\n\t* Ordena los puntos de ruta de forma óptima para visitar todos (Recorrido del viajante, puerta a puerta)\n\t* Busca la calle por el nombre (en el barrio)\n\t* Extra de modo de planificación (carga/edita/guarda pistas GPX)\n\t* Nueva pantalla de descarga (descargar en segundo plano)\n\t* Soporta subcarpetas GPX (organiza sus trazas GPX)\n\t* Elimina archivos SRTM\n\t* Soporta Notas OSM "</string>
+    <string name="tip_recent_changes_1_4_t">"Cambios en 1.4:\n\t* Ordena los puntos de ruta de forma óptima para visitar todos (Recorrido del viajante, puerta a puerta)\n\t* Busca la calle por el nombre (en el barrio)\n\t* Extra de modo de planificación (carga/edita/guarda trazas GPX)\n\t* Nueva pantalla de descarga (descargar en segundo plano)\n\t* Soporta subcarpetas GPX (organiza sus trazas GPX)\n\t* Elimina archivos SRTM\n\t* Soporta Notas OSM "</string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en ciudades vecinas</string>
     <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
@@ -743,10 +743,10 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
-    <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para quitar el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
+    <string name="use_distance_measurement_help">* Toque para marcar un punto.\n * Mantenga pulsado el mapa para quitar el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
-    <string name="distance_measurement_finish_subtrack">Iniciar una nueva subtraza</string>
+    <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
     <string name="distance_measurement_clear_route">Quitar todos los puntos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
@@ -824,7 +824,7 @@
     <string name="av_settings">"Ajustes de notas multimedia "</string>
     <string name="recording_error">"Error durante la grabación "</string>
     <string name="recording_camera_not_available">La cámara no está disponible</string>
-    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
+    <string name="recording_is_recorded">Grabando audio/vídeo. Para pararlo, pulsa el control AV.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quiere quitar esta grabación?</string>
@@ -1148,7 +1148,7 @@
 	<string name="gpxup_identifiable">Identificable</string>
 	<string name="gpxup_trackable">Trazable</string>
 	<string name="gpxup_private">Privado</string>
-	<string name="asap">Cuanto antes</string>
+	<string name="asap">ASAP</string>
 	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="route_roundabout">Rotonda: tome la %1$dª salida hacia</string>
@@ -1202,11 +1202,11 @@
 \n\t- Dibujo nativo para todos los dispositivos
 \n\t- Edición de PDI sin conexión\n\t- Accessibilidad
 \n\t- Muchos arreglos de fallos "</string>
-	<string name="send_files_to_osm">¿Enviar ficheros GPX a OSM?</string>
+	<string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
 	<string name="gpx_visibility_txt">Visibilidad</string>
 	<string name="gpx_tags_txt">Etiquetas</string>
 	<string name="gpx_description_txt">Descripción</string>
-	<string name="validate_gpx_upload_name_pwd">Indica el usuario y contraseña de OSM para subir ficheros GPX.</string>
+	<string name="validate_gpx_upload_name_pwd">Indique el usuario y contraseña de OSM para subir archivos GPX.</string>
     	<string name="default_buttons_support">Soporte</string>
 	<string name="support_new_features">Soporte de nuevas funciones</string>
 	<string name="support_new_features_descr">Done para ver nuevas funciones implementadas en la aplicación</string>
@@ -1333,14 +1333,14 @@
 	<string name="osmand_service">Modo reposo</string>
 	<string name="osmand_service_descr">Ejecutar OsmAnd mientras la pantalla este apagada</string>
 	<string name="tip_rotation_switching">Orientación del mapa</string>
-	<string name="tip_rotation_switching_t_v2">"Puede cambiar si el mapa se gira y cómo, pulsando repetidamente el icono de la brújula.
+	<string name="tip_rotation_switching_t_v2">"Puede alternar cuándo y cómo el mapa se gira, pulsando repetidamente el icono de la brújula.
 \n\nLas opciones son:
-\n\t* \'No girar (norte arriba)\': el mapa no girará. El norte está siempre arriba
-\n\t* \'En la dirección de movimiento\': el mapa se alinea continuamente con su dirección
+\n\t* \'No girar (norte arriba)\': el mapa no girará, el norte está siempre arriba
+\n\t* \'En dirección al movimiento\': el mapa se alinea continuamente con su dirección
 \n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo "</string>
 	<string name="tip_day_night_mode">Modo Día/Noche</string>
-	<string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (más brillante) y noche (más oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
-\n\nPuede establecer una política para el intercambio día/noche en \'Menú\'→ \'Configurar mapa\'→ \'Mapa día/noche\'.
+	<string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (claro) y noche (oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
+\n\nPuede establecer una política de intercambio día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
 \n\nLas opciones son:
 \n\t* \'Alba/Ocaso\': modo automático, controlado por la posición del sol (predeterminado)
 \n\t* \'Día\': utiliza siempre el modo día
@@ -1637,7 +1637,7 @@
 	<string name="voices">Indicaciones de voz</string>
 	<string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
 	<string name="map_route_by_gpx">Navegar usando GPX</string>
-	<string name="gpx_files_not_found">No se encontraron archivos GPX en la carpeta de trazas</string>
+	<string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
 	<string name="layer_gpx_layer">Traza GPX…</string>
 	<string name="error_reading_gpx">Error leyendo datos GPX</string>
 	<string name="vector_data">Mapas vectoriales descargados</string>
@@ -1945,4 +1945,7 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
-	</resources>
+	<string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
+    <string name="disable_recording_once_app_killed_descrp">Si está marcado, la grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). La indicación de modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.</string>
+	<string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quiere activarlo?</string>
+    </resources>
