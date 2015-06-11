@@ -2032,5 +2032,5 @@
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
 	<string name="disable_recording_once_app_killed">Forhindre uafhængig logning</string>
     <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX logning blive pauset, når programmet afsluttes (via seneste programmer). OsmAnd dvaletilstandsmeddelse vil fosvinde fra notifikationslinien.</string>
-	<string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Skal den slåes til?</string>
+	<string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Aktiver?</string>
     </resources>
