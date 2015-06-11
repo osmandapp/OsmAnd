@@ -357,12 +357,13 @@ public class FavouritesDbHelper {
 		}
 		int back = 1;
 		String backPrefix = "" + back;
-		if(back < 10) {
-			backPrefix = "0"+backPrefix;
-		}
 		File firstModified = null;
 		long firstModifiedMin = System.currentTimeMillis();
 		while(back <= BACKUP_CNT) {
+			backPrefix = "" + back;
+			if(back < 10) {
+				backPrefix = "0"+backPrefix;
+			}
 			File bak = new File(fld, "favourites_bak_" + backPrefix +".gpx.bz2");
 			if (!bak.exists()) {
 				return bak;
