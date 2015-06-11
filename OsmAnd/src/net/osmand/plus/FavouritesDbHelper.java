@@ -356,11 +356,14 @@ public class FavouritesDbHelper {
 			fld.mkdirs();
 		}
 		int back = 1;
-		DecimalFormat formatter = new DecimalFormat("00");
+		String backPrefix = "" + back;
+		if(back < 10) {
+			backPrefix = "0"+backPrefix;
+		}
 		File firstModified = null;
 		long firstModifiedMin = System.currentTimeMillis();
 		while(back <= BACKUP_CNT) {
-			File bak = new File(fld, "favourites_bak_" + formatter.format(back) +".gpx.bz2");
+			File bak = new File(fld, "favourites_bak_" + backPrefix +".gpx.bz2");
 			if (!bak.exists()) {
 				return bak;
 			} else if (bak.lastModified() < firstModifiedMin) {

@@ -176,7 +176,6 @@ public class NavigationService extends Service implements LocationListener {
 					if(plugin.getTracker().isEnabledTracker()) {
 						plugin.getTracker().disableTracker();
 					}
-					plugin.getService().disconnect();
  				}
 				NavigationService.this.stopSelf();
 			}
