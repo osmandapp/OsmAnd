@@ -992,7 +992,7 @@
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
-    <string name="enable_plugin_monitoring_services">Enable trip recording plugin to use position logging services (GPX logging, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Enable the Trip recording plugin to use position logging services (GPX logging, online tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
