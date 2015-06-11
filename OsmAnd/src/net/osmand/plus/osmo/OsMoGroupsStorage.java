@@ -245,7 +245,7 @@ public class OsMoGroupsStorage {
 		}
 		
 		public List<OsMoDevice> getVisibleGroupUsers(String mygid) {
-			if(!isActive() &&  !isMainGroup()) {
+			if(!isActive() && !isMainGroup()) {
 				return Collections.emptyList();
 			}
 			return getGroupUsers(mygid);

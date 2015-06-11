@@ -131,11 +131,12 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
-							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
-							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
+							Location loc = o.getLastLocation();
+							double lat = loc == null ? latitude : loc.getLatitude();
+							double lon = loc == null ? longitude : loc.getLongitude();
 							mapActivity.getMapView().setLatLon(lat, lon);
 							MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
-							OsMoPositionLayer.setFollowTrackerId(o);
+							OsMoPositionLayer.setFollowTrackerId(o, loc);
 							return true;
 						}
 					}).position(0).reg();
