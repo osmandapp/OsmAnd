@@ -63,7 +63,9 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				launchOsMoGroupsActivity();
 			}
 		});
-		plugin.setGroupsActivity(getActivity());
+		if(plugin != null) {
+			plugin.setGroupsActivity(getActivity());
+		}
 		setupHader(view);
 		return view;
 	}
@@ -73,21 +75,26 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (plugin != null) {
 			plugin.getGroups().addUiListeners(this);
+			plugin.setGroupsActivity(getActivity());
 		}
 		setupOsMoView();
-		plugin.setGroupsActivity(getActivity());
+		
 	}
 	
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		plugin.setGroupsActivity(null);
+		if (plugin != null) {
+			plugin.setGroupsActivity(null);
+		}
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		plugin.setGroupsActivity(null);
+		if (plugin != null) {
+			plugin.setGroupsActivity(null);
+		}
 	}
 
 	private void setupOsMoView() {
@@ -152,14 +159,14 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private void updateStatus() {
 
 		View header = getView();
-		if (getView() == null) {
+		if (getView() == null ) {
 			return;
 		}
 
 		View cardContent = header.findViewById(R.id.card_content);
 		View enableOsmo = header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
 		View manage = header.findViewById(R.id.manage);
-		if (plugin.getService().isEnabled()) {
+		if (plugin != null && plugin.getService().isEnabled() ) {
 			cardContent.setVisibility(View.VISIBLE);
 			enableOsmo.setVisibility(View.GONE);
 			manage.setVisibility(View.VISIBLE);

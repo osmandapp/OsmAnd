@@ -711,7 +711,7 @@
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
     <string name="clear_intermediate_points">Quitar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
-    <string name="new_directions_point_dialog">Ya has definido puntos intermedios.</string>
+    <string name="new_directions_point_dialog">Ya definió puntos intermedios.</string>
     <string name="context_menu_item_directions_to">Indicaciones a</string>
     <string name="context_menu_item_directions_from">Indicaciones desde</string>
     <string name="route_descr_map_location">"Mapa: "</string>
@@ -871,7 +871,7 @@
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0.0:\n\t* Navegación mejorada: más rápida y precisa (hasta 250 km)\n\t* Introduce mapas viales (sólo caminos)\n\t* El mapa no pierde el bloqueo de posición luego de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
-    <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos corregidos\n\t* El mapa no pierde el bloqueo de posición luego de las interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
+    <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos corregidos\n\t* El mapa no pierde el bloqueo de posición luego de las interrupciones\n\t* Active el servicio de modo reposo durante la navegación "</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
 	<string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en la Tienda?</string>
 	<string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
@@ -1938,7 +1938,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osm_edit_context_menu_delete">Quitar edición OSM</string>    
-    <string name="read_full_article">Leer artículo completo</string>
+    <string name="read_full_article">Leer artículo completo (en línea)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Ver detalles</string>
@@ -1946,6 +1946,6 @@
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
 	<string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). La indicación de modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.</string>
+    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). (La indicación del modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
 	<string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quiere activarlo?</string>
     </resources>

@@ -3,7 +3,7 @@
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
-  <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
+  <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite modul Zaznamenávanie výletov (záznam GPX, stopovanie naživo)</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
   <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
     </string>
@@ -76,7 +76,7 @@
   
   
   <string name="map_widget_parking">Parkovanie</string>
-  <string name="map_widget_monitoring">Stopovanie</string>
+  <string name="map_widget_monitoring">Záznam GPX</string>
   <string name="map_widget_speed">Rýchlosť</string>
   <string name="map_widget_distance">Cieľ</string>
   <string name="map_widget_altitude">Nadm. výška</string>
@@ -1808,7 +1808,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_he">Hebrejsky (עִבְרִית)</string>
     <string name="forward">Dopredu</string>
     <string name="home">Domov</string>
-    <string name="live_monitoring_m_descr">Odosielať stopovanie určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
+    <string name="live_monitoring_m_descr">Odosielať stopovacie údaje určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
 	<string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
 	<string name="live_monitoring_stop">Zastaviť online stopovanie</string>
@@ -1868,13 +1868,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speak_poi">Ohlásiť blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla nahrávania GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
+    <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla záznamu GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
     <string name="distance">Vzdialenosť</string>
     <string name="confirm_every_run">Vždy sa pýtať</string>
-	<string name="save_global_track_interval_descr">Zvoľ interval pre všeobecné zaznamenávanie trasy (prístupné cez GPX tlačidlo na mape)</string>
+	<string name="save_global_track_interval_descr">Zvoľ interval pre všeobecné zaznamenávanie trasy (prístupné cez tlačidlo záznamu GPX na mape)</string>
 	<string name="save_global_track_interval">Interval všeobecného zaznamenávania</string>
 	<string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
 	<string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy</string>
@@ -2172,11 +2172,14 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa rozsahu trasy</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa OSMC</string>
     <string name="osm_edit_context_menu_delete">Odstrániť OSM zmenu</string>
-    <string name="read_full_article">Prečítať celý článok</string>
+    <string name="read_full_article">Prečítať celý článok (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importovať do OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Chystáte sa vymazať %1$d poznámok. Ste si istí?</string>
+	<string name="gps_network_not_enabled">Služba zisťovania pozície nie je zapnutá. Chcete ju teraz zapnúť?</string>
+    <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
+    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu spánku OsmAnd zmizne z notifikačnej oblasti Androidu.)</string>
 	</resources>

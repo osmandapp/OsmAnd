@@ -1708,7 +1708,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com OSMC</string>
     <string name="osm_edit_context_menu_delete">Apagar Edição do OSM</string>
     <string name="shared_string_show_details">Mostrar detalhes</string>
-    <string name="read_full_article">Leia o artigo completo</string>
+    <string name="read_full_article">Leia o artigo completo (on-line)</string>
     <string name="download_wikipedia_item">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
