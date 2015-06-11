@@ -578,7 +578,7 @@
 <string name="map_transparency">Opacitat del mapa base</string>
 <string name="trace_rendering">Informació de depuració de dibuixat</string>
 <string name="update_poi_file_not_found">El fitxer local per mantenir el canvis en els PDI no s\'ha trobat i podria no haver-se creat.</string>
-<string name="map_widget_monitoring">Seguiment</string>
+<string name="map_widget_monitoring">Enregistrament GPX</string>
 <string name="use_fluorescent_overlays">Capes superposades fluorescents</string>
 <string name="shared_string_refresh">Refresca</string>
 
@@ -965,7 +965,7 @@
 	<string name="tip_location_sharing_t">Podeu compartir la ubicació de llocs interessants durant el vostre viatge amb la família o els amics per mitjà del menú de context «Usa posició» → «Comparteix la ubicació».
 \n\nLlavors seleccioneu una via per compartir la vostra ubicació. Les opcions són: Correu electrònic, SMS(text) o només copiar les coordenades de la ubicació en el porta-retalls.
 	</string>
-	<string name="enable_plugin_monitoring_services">Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització</string>
+	<string name="enable_plugin_monitoring_services">Habilita el connector de monitorització (enregistrament GPX, seguiment en viu) per poder utilitzar els serveis de registre d\'ubicació</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
     <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar al Market?</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteres</string>
@@ -1704,12 +1704,12 @@
     <string name="lang_he">Hebreu</string>
     <string name="forward">Endavant</string>
     <string name="home">Punt inicial</string>
-    <string name="live_monitoring_m_descr">Envia el registre de traces a un servei web específic si s\'ha activat la gravació en un GPX.</string>
+    <string name="live_monitoring_m_descr">Envia el registre de la traça a un servei web específic si s\'ha activat la gravació en un GPX.</string>
 	<string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
 	<string name="live_monitoring_stop">Atura el registre de traça en línia</string>
-	<string name="gpx_monitoring_start">Inicia la gravació en un GPX</string>
-	<string name="gpx_monitoring_stop">Atura la gravació en el GPX</string>
+	<string name="gpx_monitoring_start">Inicia el registre GPX</string>
+	<string name="gpx_monitoring_stop">Atura el registre GPX</string>
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
 	<string name="keep_navigation_service">Mantén</string>
@@ -2015,7 +2015,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="download_wikipedia_maps">Viquipèdia</string>
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. Voleu activar-lo?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
-    <string name="disable_recording_once_app_killed_descrp">Si s\'activa, l\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). L\'indicador del procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android.</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android).</string>
 	<string name="shared_string_import2osmand">Importació a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Sou a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
 	</resources>

@@ -937,7 +937,7 @@
   
   
   <string name="map_widget_parking">Parkolás</string>
-  <string name="map_widget_monitoring">Útvonalrögzítés</string>
+  <string name="map_widget_monitoring">GPX naplózás</string>
   <string name="map_widget_speed">Sebesség</string>
   <string name="map_widget_distance">Cél</string>
   <string name="map_widget_altitude">Magasság</string>
@@ -1043,7 +1043,7 @@
 	<string name="intermediate_point">%1$s. útpont</string>
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
-    <string name="enable_plugin_monitoring_services">A monitorozási szolgáltatások használatához engedélyezd az Útvonalrögzítés és Alvó állapotú használat bővítményeket</string>
+    <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online követés) használatához engedélyezze az Útvonalrögzítés bővítményt</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Válassz egy útszínsémát:</string>
 	<string name="rendering_attr_roadColors_name">Útszínséma</string>
@@ -1625,12 +1625,12 @@
     <string name="lang_sw">szuahéli</string>
     <string name="lang_he">héber</string>
     <string name="forward">Előre</string>
-    <string name="live_monitoring_m_descr">Nyomvonal küldése egy megadott webes szolgáltatásnak, ha a GPX rögzítés aktív.</string>
+    <string name="live_monitoring_m_descr">Nyomvonaladatok küldése egy megadott webes szolgáltatásnak, ha a GPX naplózás engedélyezve van.</string>
 	<string name="live_monitoring_m">Online rögzítés (GPX szükséges)</string>
     <string name="live_monitoring_start">Online rögzítés indítása</string>
 	<string name="live_monitoring_stop">Online rögzítés megállítása</string>
-	<string name="gpx_monitoring_start">GPX rögzítés indítása</string>
-	<string name="gpx_monitoring_stop">GPX rögzítés megállítása</string>
+	<string name="gpx_monitoring_start">GPX naplózás indítása</string>
+	<string name="gpx_monitoring_stop">GPX naplózás leállítása</string>
     <string name="gpx_start_new_segment">Új szakasz kezdése</string>
     <string name="rendering_attr_hideBuildings_name">Épületek elrejtése</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Gyalogutak elrejtése</string>
@@ -1706,16 +1706,16 @@
     <string name="rendering_value_car_name">Autó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
-    <string name="record_plugin_description">"Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha kézzel megérinti a GPX rögzítő felületi elemet a térkép képernyőn, valamint minden navigációs útvonalat automatikusan egy GPX fájlba naplóz.\n\nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség, stb., és természetesen a nyomvonalak később speciális harmadik féltől származó elemzőeszközökkel is elemezhetők. "</string>
+    <string name="record_plugin_description">"Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha kézzel megérinti a GPX naplózó felületi elemet a térkép képernyőn, valamint minden navigációs útvonalat automatikusan egy GPX fájlba naplóz.\n\nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség, stb., és természetesen a nyomvonalak később speciális harmadik féltől származó elemzőeszközökkel is elemezhetők. "</string>
     <string name="record_plugin_name">Útvonal rögzítése</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
     <string name="confirm_every_run">Mindig kérdezz rá</string>
-	<string name="save_global_track_interval_descr">Válasszon naplózási időközt az általános nyomvonalrögzítéshez (a térképen lévő GPX rögzítés felületi elemen keresztül engedélyezve)</string>
+	<string name="save_global_track_interval_descr">Válasszon naplózási időközt az általános nyomvonalrögzítéshez (a térképen lévő GPX naplózó felületi elemen keresztül engedélyezve)</string>
 	<string name="save_global_track_interval">Általános naplózási időköz</string>
 	<string name="save_track_to_gpx_globally">Nyomvonal naplózása GPX fájlba</string>
-	<string name="save_track_to_gpx_globally_descr">Az általános pozíciónaplózás egy GPX fájlba be- vagy kikapcsolható a térkép képernyőn lévő GPX rögzítő felületi elem használatával</string>
+	<string name="save_track_to_gpx_globally_descr">Az általános pozíciónaplózás egy GPX fájlba be- vagy kikapcsolható a térkép képernyőn lévő GPX naplózó felületi elem használatával</string>
 	<string name="save_track_interval_globally">Rögzítési időköz</string>
 	<string name="rendering_attr_publicTransportMode_name">Busz, trolibusz, ingajáratok</string>
 	<string name="traffic_warning_speed_limit">Sebességhatár</string>
@@ -1965,5 +1965,7 @@
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
     <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos benne?</string>
-	<string name="disable_recording_once_app_killed">Futtatás a háttérben</string>
-    </resources>
+	<string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
+    <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretné kapcsolni?</string>
+    <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd alvó mód jelzője eltűnik az Android értesítési sávjáról.)</string>
+	</resources>

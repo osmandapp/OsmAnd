@@ -263,7 +263,7 @@
 	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
 	<string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэньня</string>
-    <string name="enable_plugin_monitoring_services">Дазволіць модулю адсочваньня выкарыстоўваць сэрвісы запісу сьледу (запіс GPX, адсочваньне праз сетку)</string>
+    <string name="enable_plugin_monitoring_services">Дазволіць модулю запісу падарожжа выкарыстоўваць сэрвісы запісу сьледу (запіс GPX, адсочваньне праз сетку)</string>
     <string name="non_optimal_route_calculation">Разьлічваць прыблізны шлях на вялікія адлегласьці</string>
 	<string name="gps_not_available">Калі ласка, уключыце GPS у наладах</string>
     <string name="tip_recent_changes_0_8_3_t">"Зьмены ў 0.8.3 :
@@ -1978,14 +1978,14 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з прызначэньнем маршруту</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
-    <string name="read_full_article">Чытаць артыкул цалкам</string>
+    <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     <string name="download_wikipedia_item">Вікіпэдыя</string>
     <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
     <string name="shared_string_show_details">Паказаць падрабязнасьці</string>
     <string name="download_wikipedia_maps">Вікіпэдыя</string>
     <string name="local_recordings_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d нататкі. Вы ўпэўненыя?</string>
 	<string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
-    <string name="disable_recording_once_app_killed">Запусьціць у фоне</string>
-    <string name="disable_recording_once_app_killed_descrp">Калі не ўсталяваны, запіс спыніцца, калі праграма будзе забіта (праз надаўнія праграмы). Калі праграма запусьціцца, запіс пачнецца ізноў (апавяшчэньне на экране пра фонавы рэжым OsmAnd).</string>
+    <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>
+    <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забіта (праз надаўнія праграмы). (Апавяшчэньне ў вобласьці падказак Android пра фонавы рэжым OsmAnd зьнікне.)</string>
 	<string name="gps_network_not_enabled">Служба месцазнаходжаньня не ўключаная. Вы хочаце ўключыць яе?</string>
     </resources>

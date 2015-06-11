@@ -2,7 +2,7 @@
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 錄製，線上追蹤)</string>
+    <string name="enable_plugin_monitoring_services">啟用旅程錄製外掛元件，以使用位置日誌服務(GPX 記錄，線上追蹤)</string>
     <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
 	\n\t* Some bug fixes
@@ -104,7 +104,7 @@
 	
 	
 	<string name="map_widget_parking">停車場</string>
-	<string name="map_widget_monitoring">GPX 錄製</string>
+	<string name="map_widget_monitoring">GPX 日誌記錄</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
 	<string name="map_widget_altitude">高度</string>
@@ -1661,12 +1661,12 @@
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
-	<string name="gpx_monitoring_start">開始 GPX 錄製</string>
-	<string name="gpx_monitoring_stop">停止 GPX 錄製</string>
+	<string name="gpx_monitoring_start">開始 GPX 記錄</string>
+	<string name="gpx_monitoring_stop">停止 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
 	<string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
-    <string name="live_monitoring_m_descr">如果已啟用了 GPX 錄製，發送軌跡到指定的 web 服務。</string>
+    <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
 	<string name="keep_navigation_service">保持</string>
 	<string name="stop_navigation_service">中斷</string>
 	<string name="enable_sleep_mode">啟用 GPS 休眠模式</string>
@@ -1711,7 +1711,7 @@
     <string name="speak_poi">通報附近 POI</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
-    <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 錄製小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
+    <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
     <string name="record_plugin_name">錄製旅程</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
@@ -1719,9 +1719,9 @@
     <string name="rendering_attr_publicTransportMode_name">公車、無軌電車，班車路線</string>
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
-	<string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 錄製小工具，可以開啟或關閉</string>
+	<string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
 	<string name="confirm_every_run">始終詢問</string>
-	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 錄製小工具啟用）</string>
+	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
 	<string name="save_global_track_interval">通常的記錄間隔</string>
 	<string name="traffic_warning_speed_limit">速限</string>
     <string name="traffic_warning_border_control">邊境管制</string>
@@ -1995,11 +1995,14 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>    
-    <string name="read_full_article">閱讀全部文章</string>
+    <string name="read_full_article">閱讀全部文章 (線上)</string>
     <string name="download_wikipedia_item">維基百科</string>
     <string name="local_indexes_cat_wiki">維基百科</string>
     <string name="shared_string_show_details">顯示詳細資訊</string>
     <string name="download_wikipedia_maps">維基百科</string>
     <string name="shared_string_import2osmand">匯入到 OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的注解。您確定嗎？</string>
+	<string name="gps_network_not_enabled">未啟用位置服務。您想要開啟它嗎？</string>
+    <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
+    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新近的 apps)。(OsmAnd 睡眠模式指示，從通知列消失。)</string>
 	</resources>

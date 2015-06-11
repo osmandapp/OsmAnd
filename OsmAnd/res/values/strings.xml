@@ -11,10 +11,10 @@
     -->
     
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
-    <string name="disable_recording_once_app_killed">Prevent standalone recording</string>
-    <string name="disable_recording_once_app_killed_descrp">Will pause GPX recording when the app is killed (via recent apps). (OsmAnd Sleep mode indication disappears from the Android notification bar.)</string>
+    <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
+    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd Sleep mode indication disappears from the Android notification bar.)</string>
 	<string name="shared_string_import2osmand">Import to OsmAnd</string>
-    <string name="read_full_article">Read full article</string>
+    <string name="read_full_article">Read full article (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
@@ -165,7 +165,7 @@
 		\n\nTile maps can be obtained directly via online sources, or can be prepared for offline use (and manually copied to OsmAnd\'s data folder) as an sqlite database which can be produced by a variety of 3rd party map preparation tools.
 	</string>
 	<string name="record_plugin_name">Trip recording</string>
-	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX recording widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
+	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
@@ -361,13 +361,13 @@
 	<string name="sleep_mode_stop_dialog">Interrupt GPS sleep mode?</string>
 	<string name="stop_navigation_service">Interrupt</string>
 	<string name="confirm_every_run">Always ask</string>
-	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX recording widget on the map)</string>
+	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX logging widget on the map)</string>
 	<string name="save_global_track_interval">General logging interval</string>
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
 	<string name="save_track_to_gpx_globally_headline">On demand track logging</string>
-	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
+	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
 	<string name="save_track_to_gpx">Log track to GPX file during navigation</string>
@@ -417,12 +417,12 @@
     <string name="lang_he">Hebrew</string>
     <string name="forward">Forward</string>
     <string name="home">Home</string>
-    <string name="live_monitoring_m_descr">Send tracking to a specified web service if GPX recording is enabled.</string>
+    <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is enabled.</string>
 	<string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
-	<string name="gpx_monitoring_start">Start GPX recording</string>
-	<string name="gpx_monitoring_stop">Stop GPX recording</string>
+	<string name="gpx_monitoring_start">Start GPX logging</string>
+	<string name="gpx_monitoring_stop">Stop GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
@@ -992,7 +992,7 @@
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
-    <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (GPX recording, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Enable the Trip recording plugin to use position logging services (GPX logging, online tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
@@ -1282,7 +1282,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_compass">Compass</string>
 	<string name="map_widget_reset">Reset to default</string>
 	<string name="map_widget_parking">Parking</string>
-	<string name="map_widget_monitoring">GPX recording</string>
+	<string name="map_widget_monitoring">GPX logging</string>
 	<string name="map_widget_speed">Speed</string>
 	<string name="map_widget_distance">Destination</string>
 	<string name="map_widget_altitude">Altitude</string>
