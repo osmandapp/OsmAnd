@@ -992,7 +992,7 @@
   
   
   <string name="map_widget_parking">Automobilio statymas</string>
-  <string name="map_widget_monitoring">Stebėjimas</string>
+  <string name="map_widget_monitoring">GPX įrašymas</string>
   <string name="map_widget_speed">Greitis</string>
   <string name="map_widget_distance">Tikslas</string>
   <string name="map_widget_altitude">Aukštis</string>
@@ -1099,7 +1099,7 @@
 	<string name="delete_target_point">Pašalinti tikslą</string>
 	<string name="intermediate_point">Tarpinis tikslas %1$s</string>
     <string name="map_widget_show_destination_arrow">Rodyti kryptį į kelionės tikslą</string>
-    <string name="enable_plugin_monitoring_services">Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai) įjunkite sekimo įskiepius</string>
+    <string name="enable_plugin_monitoring_services">Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai), įjunkite Kelionės sekimo įskiepį</string>
     <string name="non_optimal_route_calculation">Apskaičiuoti (tikėtinai) neoptimalų ilgo nuotolio maršrutą</string>
     <string name="gps_not_available">Įjunkite GPS telefono nustatymuose</string>
     <string name="rendering_attr_roadColors_description">Pasirinkti kelių spalvinimo schemą:</string>
@@ -1561,7 +1561,7 @@
     <string name="osmo_plugin_description">"Pateikia OsMo - pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi.
 \nSuteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (OSM stebėjimas)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OsMo\'as</string>
    	<string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
@@ -1804,7 +1804,7 @@
 	<string name="text_size_descr">Nustatyti teksto žemėlapyje dydį.</string>
     <string name="text_size">Teksto dydis</string>
     <string name="fav_point_dublicate">Pasikartojantis įsimintinos vietos pavadinimas</string>
-    <string name="fav_point_dublicate_message">Mes pakeitėme įsimintinos vietos pavadinimą į %1$s kad išvengtume pasikartojimų.</string>
+    <string name="fav_point_dublicate_message">Toks pavadinimas jau yra, todėl mes pakeitėme įsimintinos vietos pavadinimą į %1$s kad išvengtume pasikartojimų.</string>
     <string name="local_index_description">Spustelėkite bet kurį elementą, norėdami gauti daugiau informacijos, paspauskite ir laikykite, norėdami išjungti arba ištrinti. Dabartiniai duomenys įrenginyje (%1$s laisva):</string>
 	<string name="print_route">Išspausdinti maršrutą</string>
     <string name="fav_point_emoticons_message">Mes pakeitėme jūsų įsimintos vietos pavadinimą į %1$s, nes teksto su veidukais išsaugoti faile neįmanoma.</string>
@@ -2030,4 +2030,14 @@
 	<string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvinimas atsižvelgiant į maršrutų reikšmes</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas atsišvelgiant į OSMC</string>
     <string name="storage_directory_multiuser">Vartotojų talpykla</string>
-    </resources>
+    <string name="gps_network_not_enabled">Neįjungta vietos nustatymo paslauga. Įjungti?</string>
+    <string name="shared_string_import2osmand">Importavimas į OsmAnd</string>
+    <string name="read_full_article">Skaityti visą straipsnį (internete)</string>
+    <string name="download_wikipedia_item">Vikipedija</string>
+    <string name="local_indexes_cat_wiki">Vikipedija</string>
+    <string name="shared_string_show_details">Rodyti detales</string>
+    <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>
+    <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$ d pastabas. Ar tikrai to norite?</string>
+	<string name="download_wikipedia_maps">Vikipedija</string>
+    <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego režimo piktograma dings iš Android pranešimų juostos.)</string>
+	</resources>
