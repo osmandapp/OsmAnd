@@ -2023,7 +2023,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge rute anvendelsesområde</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC</string>
     <string name="osm_edit_context_menu_delete">Slet OSM redigering</string>    
-    <string name="read_full_article">Læs hele artiklen</string>
+    <string name="read_full_article">Læs hele artiklen (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Vis detaljer</string>
