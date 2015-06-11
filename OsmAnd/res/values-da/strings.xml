@@ -91,7 +91,7 @@
 	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver sporingsudvidelse for at bruge positionlogning tjenester (GPX-logning, online sporing)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver Optag ture udvidelse for at bruge positionlogning tjenester (GPX-logning, online sporing)</string>
     <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -244,7 +244,7 @@
 	
 	
 	<string name="map_widget_parking">Parkering</string>
-	<string name="map_widget_monitoring">GPX-optagelse</string>
+	<string name="map_widget_monitoring">GPX logning</string>
 	<string name="map_widget_speed">Hastighed</string>
 	<string name="map_widget_distance">Destination</string>
 	<string name="map_widget_altitude">Højde</string>
@@ -1665,12 +1665,12 @@
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
     <string name="home">Hjem</string>
-    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
+    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX logning er aktiveret.</string>
 	<string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
-	<string name="gpx_monitoring_start">Start GPX optagelse</string>
-	<string name="gpx_monitoring_stop">Stop GPX optagelse</string>
+	<string name="gpx_monitoring_start">Start GPX logning</string>
+	<string name="gpx_monitoring_stop">Stop GPX logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
 	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
@@ -1723,13 +1723,13 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag ture</string>
-    <string name="record_plugin_description">"Udvidelsen aktiverer funktionalitet til at registrere og gemme spor ved at klikke på GPX optagelse modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil.\n\nOptagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge indspillede spor at monitere træninger. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer. "</string>
+    <string name="record_plugin_description">"Udvidelsen aktiverer funktionalitet til at registrere og gemme spor ved at klikke på GPX logning modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil.\n\nOptagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge indspillede spor at monitere træninger. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer. "</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
-	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
+	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen</string>
 	<string name="confirm_every_run">Spørg altid</string>
-	<string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX optagelse\' på hovedskærmen)</string>
+	<string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX logning\' på hovedskærmen)</string>
 	<string name="save_global_track_interval">Generelt logningsinterval</string>
 	<string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -2030,7 +2030,7 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
-	<string name="disable_recording_once_app_killed">Forhindre uafhængige optagelse</string>
-    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX optagelsen blive pauset, når programmet afsluttes (via seneste programmer). OsmAnd dvaletilstandsmeddelse vil fosvinde fra notifikationslinien.</string>
+	<string name="disable_recording_once_app_killed">Forhindre uafhængig logning</string>
+    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX logning blive pauset, når programmet afsluttes (via seneste programmer). OsmAnd dvaletilstandsmeddelse vil fosvinde fra notifikationslinien.</string>
 	<string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Skal den slåes til?</string>
     </resources>
