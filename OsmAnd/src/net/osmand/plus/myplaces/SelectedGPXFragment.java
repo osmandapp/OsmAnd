@@ -15,6 +15,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -24,10 +25,12 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -265,6 +268,12 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT);
 
 		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		
+		final TIntArrayList list = new TIntArrayList();
+        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+        ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
+		
+		
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
 		Builder bld = new AlertDialog.Builder(getMyActivity());
 		final List<Double> distanceSplit = new ArrayList<Double>();
@@ -324,9 +333,22 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				int clr = list.get(colorSpinner.getSelectedItemPosition());
+				if(clr != 0 ) {
+					sf.getModifiableGpxFile().setColor(clr);
+					sf.processPoints();
+				}
 				if (groups.size() > 0) {
 					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
 							: null);
+				}
+				if(vis.isChecked() && sf.getGpxFile() != null) {
+					WptPt wpt = sf.getGpxFile().findPointToShow();
+					if (wpt != null) {
+						app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(), 15, null, false,
+								false); //$NON-NLS-1$
+						MapActivity.launchMapActivityMoveToTop(activity);
+					}
 				}
 			}
 		});
@@ -464,7 +486,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			OsmandSettings settings = app.getSettings();
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, child.locationStart, name, settings.getLastKnownMapZoom(),
-					getActivity(), true, false);
+					getActivity(), false, false);
 			optionsMenu.show();
 //		} else {
 //			child.expanded = !child.expanded;

@@ -506,8 +506,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
 		Builder bld = new AlertDialog.Builder(getActivity());
 		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
-		final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
         final TIntArrayList list = new TIntArrayList();
+        final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
         final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
         ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
 		

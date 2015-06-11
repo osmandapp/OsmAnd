@@ -546,12 +546,13 @@ public class GPXUtilities {
 		public List<TrkSegment> proccessPoints() {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			for (Track t : tracks) {
+				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
-						sgmt.setColor(t.getColor(0));
+						sgmt.setColor(trackColor);
 					}
 				}
 			}

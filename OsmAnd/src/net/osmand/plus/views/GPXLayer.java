@@ -363,7 +363,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			canvas.drawPath(path, shadowPaint);
 		}
 		int clr = paint.getColor();
-		if(clr != l.getColor(clr)) {
+		if(clr != l.getColor(clr) && l.getColor(clr) != 0) {
 			paint.setColor(l.getColor(clr));
 		}
 		canvas.drawPath(path, paint);
