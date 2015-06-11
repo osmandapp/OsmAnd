@@ -2190,4 +2190,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_walkingRoutesOSMC_name">Gekleurd volgens OSMC</string>
     <string name="osmo_share_my_location">Deel mijn positie</string>
     <string name="shared_string_logoff">Uitloggen</string>
-    </resources>
+    <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
+    <string name="read_full_article">Lees volledig artikel (online)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Toon details</string>
+    <string name="local_recordings_delete_all_confirm">Je staat op het punt %1$d notities te verwijderen. Weet je dat zeker?</string>
+	</resources>
