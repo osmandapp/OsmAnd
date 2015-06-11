@@ -387,7 +387,7 @@ public class GpxSelectionHelper {
 		private int color;
 		private GPXTrackAnalysis trackAnalysis;
 		private long modifiedTime = -1;
-		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
+		private List<TrkSegment> processedPointsToDisplay = new ArrayList<TrkSegment>();
 		private boolean routePoints;
 
 		private List<GpxDisplayGroup> displayGroups;
@@ -428,11 +428,11 @@ public class GpxSelectionHelper {
 			return routePoints;
 		}
 		
-		public List<List<WptPt>> getPointsToDisplay() {
+		public List<TrkSegment> getPointsToDisplay() {
 			return processedPointsToDisplay;
 		}
 		
-		public List<List<WptPt>> getModifiablePointsToDisplay() {
+		public List<TrkSegment> getModifiablePointsToDisplay() {
 			return processedPointsToDisplay;
 		}
 		

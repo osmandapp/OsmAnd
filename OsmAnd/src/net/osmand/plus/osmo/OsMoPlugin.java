@@ -417,21 +417,21 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 								}
 								fout.close();
 								is.close();
+								if(color != 0) {
+									try {
+										GPXFile loaded = GPXUtilities.loadGPXFile(app, f);
+										if(loaded.tracks.size() > 0) {
+											for(Track t : loaded.tracks) {
+												t.setColor(color);
+											}
+											GPXUtilities.writeGpxFile(f, loaded, app);
+										}
+									} catch (RuntimeException e) {
+										e.printStackTrace();
+									}
+								}
 								if(!f.setLastModified(timestamp)) {
 									log.error("Timestamp updates are not supported");
-								}
-							}
-							if(color != 0) {
-								try {
-									GPXFile loaded = GPXUtilities.loadGPXFile(app, f);
-									if(loaded.tracks.size() > 0) {
-										for(Track t : loaded.tracks) {
-											t.setColor(color);
-										}
-										GPXUtilities.writeGpxFile(f, loaded, app);
-									}
-								} catch (RuntimeException e) {
-									e.printStackTrace();
 								}
 							}
 							publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));

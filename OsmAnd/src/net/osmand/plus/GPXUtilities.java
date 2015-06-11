@@ -531,22 +531,27 @@ public class GPXUtilities {
 			return false;
 		}
 		
-		public List<List<WptPt>> processRoutePoints() {
-			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+		public List<TrkSegment> processRoutePoints() {
+			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {
 				for (Route r : routes) {
-					tpoints.add(r.points);
+					TrkSegment sgmt = new TrkSegment();
+					tpoints.add(sgmt);
+					sgmt.points.addAll(r.points);
 				}
 			}
 			return tpoints;
 		}
 
-		public List<List<WptPt>> proccessPoints() {
-			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+		public List<TrkSegment> proccessPoints() {
+			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			for (Track t : tracks) {
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
-						tpoints.add(ts.points);
+						TrkSegment sgmt = new TrkSegment();
+						tpoints.add(sgmt);
+						sgmt.points.addAll(ts.points);
+						sgmt.setColor(t.getColor(0));
 					}
 				}
 			}

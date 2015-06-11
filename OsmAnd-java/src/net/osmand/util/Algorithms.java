@@ -377,9 +377,16 @@ public class Algorithms {
 
 	public static String colorToString(int color) {
 		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+			return "#" + format(6, Integer.toHexString(color & 0x00FFFFFF)); //$NON-NLS-1$
 		} else {
-			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+			return "#" + format(8, Integer.toHexString(color)); //$NON-NLS-1$
 		}
+	}
+
+	private static String format(int i, String hexString) {
+		while(hexString.length() < i) {
+			hexString = "0" + hexString;
+		}
+		return hexString;
 	}
 }

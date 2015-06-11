@@ -228,7 +228,8 @@ public class OsMoGroupsStorage {
 		protected boolean active;
 		protected boolean deleted;
 		
-		protected Map<String, OsMoDevice> users = new ConcurrentHashMap<String, OsMoDevice>(); 
+		protected Map<String, OsMoDevice> users = new ConcurrentHashMap<String, OsMoDevice>();
+		protected List<String> groupTracks = new ArrayList<String>();
 		
 		public List<OsMoDevice> getGroupUsers(String mygid) {
 			// filter deleted
@@ -242,6 +243,10 @@ public class OsMoGroupsStorage {
 				}
 			}
 			return dvs;
+		}
+		
+		public List<String> getGroupTracks() {
+			return groupTracks;
 		}
 		
 		public List<OsMoDevice> getVisibleGroupUsers(String mygid) {

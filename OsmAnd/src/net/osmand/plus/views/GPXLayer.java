@@ -12,6 +12,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -69,7 +70,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private OsmandRenderer osmandRenderer;
 
-	private List<List<WptPt>> points;
+	private List<TrkSegment> points;
 	private GPXFile gpx;
 
 
@@ -272,7 +273,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			List<List<WptPt>> points = g.getPointsToDisplay();
+			List<TrkSegment> points = g.getPointsToDisplay();
 			boolean routePoints = g.isRoutePoints();
 			updatePaints(g.getColor(), routePoints, settings, tileBox);
 			drawSegments(canvas, tileBox, points);
@@ -298,17 +299,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return pts;
 	}
 
-	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points) {
+	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<TrkSegment> points) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
-		for (List<WptPt> l : points) {
+		for (TrkSegment l : points) {
 			path.rewind();
 			int startIndex = -1;
 			int endIndex = -1;
 		    int prevCross = 0;
 		    boolean intersect = false;
 
-			for (int i = 0; i < l.size(); i++) {
-				WptPt ls = l.get(i);
+			for (int i = 0; i < l.points.size(); i++) {
+				WptPt ls = l.points.get(i);
 				int cross = 0;
 				cross |= (ls.lon < latLonBounds.left - 0.1 ? 1 : 0);
 				cross |= (ls.lon > latLonBounds.right + 0.1 ? 2 : 0);
@@ -329,7 +330,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				prevCross = cross;
 			}
 			if (startIndex != -1) {
-				drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
+				drawSegment(canvas, tileBox, l, startIndex, l.points.size() - 1);
 			}
 		}
 	}
@@ -340,13 +341,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 
 	
-	private void drawSegment(Canvas canvas, RotatedTileBox tb, List<WptPt> l, int startIndex, int endIndex) {
+	private void drawSegment(Canvas canvas, RotatedTileBox tb, TrkSegment l, int startIndex, int endIndex) {
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
 		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 
 		for (int i = startIndex; i <= endIndex; i++) {
-			WptPt p = l.get(i);
+			WptPt p = l.points.get(i);
 			int x = (int) tb.getPixXFromLatLon(p.lat, p.lon);
 			int y = (int) tb.getPixYFromLatLon(p.lat, p.lon);
 //			int x = tb.getPixXFromLonNoRot(p.lon);
@@ -361,7 +362,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if(isShadowPaint) {
 			canvas.drawPath(path, shadowPaint);
 		}
+		int clr = paint.getColor();
+		if(clr != l.getColor(clr)) {
+			paint.setColor(l.getColor(clr));
+		}
 		canvas.drawPath(path, paint);
+		paint.setColor(clr);
 		if(isPaint2) {
 			canvas.drawPath(path, paint2);
 		}

@@ -7,6 +7,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -94,8 +95,8 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 		double left = llon, right = llon;
 		double top = llat, bottom = llat;
 		if (gpx != null) {
-			for (List<WptPt> list : gpx.proccessPoints()) {
-				for (WptPt l : list) {
+			for (TrkSegment list : gpx.proccessPoints()) {
+				for (WptPt l : list.points) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
 					top = Math.max(top, l.getLatitude());
