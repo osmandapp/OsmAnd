@@ -73,15 +73,18 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (plugin != null) {
 			plugin.getGroups().addUiListeners(this);
+			plugin.setGroupsActivity(getActivity());
 		}
 		setupOsMoView();
-		plugin.setGroupsActivity(getActivity());
+		
 	}
 	
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		plugin.setGroupsActivity(null);
+		if (plugin != null) {
+			plugin.setGroupsActivity(null);
+		}
 	}
 	
 	@Override
