@@ -1893,5 +1893,5 @@
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
-    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds sovlägesindikation försvinner från Androids aviseringsfält.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds vilolägesindikation försvinner från Androids aviseringsfält.)</string>
 	</resources>
