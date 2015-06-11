@@ -2171,7 +2171,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     <string name="routing_attr_avoid_borders_name">Überfahren von Grenzen vermeiden</string>
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
-	<string name="read_full_article">Vollständigen Artikel lesen</string>
+	<string name="read_full_article">Vollständigen Artikel lesen (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Details anzeigen</string>
