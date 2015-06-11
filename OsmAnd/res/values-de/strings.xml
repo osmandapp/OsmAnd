@@ -1,6 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
+	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
 	<string name="disable_recording_once_app_killed_descrp">Pausiert die GPX-Aufzeichnung wenn OsmAnd gestoppt wird (via zuletzt verwendete Apps). (Der Hintergrunddienst-Indikator in der Android-Benachrichtigungsleiste verschwindet dann.)</string>
 	<string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
