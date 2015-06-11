@@ -242,7 +242,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void registerDisablePreference(OsmandPreference p, String value, OsmandPreference<Boolean> disable) {
 		LinkedHashMap<String, Object> vals = (LinkedHashMap<String, Object>) listPrefValues.get(p.getId());
 		vals.put(value, disable);
@@ -304,7 +303,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			k++;
 		}
 		ListPreference lp = createListPreference(b, intDescriptions, ints, title, summary);
-		registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
+		if(disable != null) {
+			registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
+		}
 		return lp;
 	}
 
