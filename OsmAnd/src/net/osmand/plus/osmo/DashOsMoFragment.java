@@ -63,7 +63,9 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				launchOsMoGroupsActivity();
 			}
 		});
-		plugin.setGroupsActivity(getActivity());
+		if(plugin != null) {
+			plugin.setGroupsActivity(getActivity());
+		}
 		setupHader(view);
 		return view;
 	}
@@ -164,7 +166,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		View cardContent = header.findViewById(R.id.card_content);
 		View enableOsmo = header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
 		View manage = header.findViewById(R.id.manage);
-		if (plugin == null || plugin.getService().isEnabled() ) {
+		if (plugin != null && plugin.getService().isEnabled() ) {
 			cardContent.setVisibility(View.VISIBLE);
 			enableOsmo.setVisibility(View.GONE);
 			manage.setVisibility(View.VISIBLE);
