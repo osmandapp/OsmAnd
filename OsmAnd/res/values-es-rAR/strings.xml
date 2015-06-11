@@ -546,7 +546,7 @@
     <string name="index_tours">Excursiones</string>
     <string name="rendering_value_browse_map_name">Ver mapa</string>  
     <string name="rendering_value_car_name">Auto</string>
-    <string name="rendering_attr_coloredBuildings_name">Color de los edificios según el tipo</string>
+    <string name="rendering_attr_coloredBuildings_name">Colorear edificios según el tipo</string>
     <string name="osmo_leave_confirmation_msg">¿Quiere abandonar el grupo %1$s?</string>
     <string name="osmo_specify_tracker_id">Indique el ID</string>
     <string name="gps_wake_up_timer">Intervalo para despertar el GPS</string>
