@@ -568,7 +568,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 									new PointDescription(PointDescription.POINT_TYPE_MARKER, device.getVisibleName()), false,
 									device);
 						}
-						OsMoPositionLayer.setFollowTrackerId(device);
+						OsMoPositionLayer.setFollowTrackerId(device, location);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
 					}
 				} else if (item.getItemId() == ON_OFF_ACTION_ID) {

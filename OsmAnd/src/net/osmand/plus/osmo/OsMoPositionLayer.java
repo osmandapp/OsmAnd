@@ -297,10 +297,9 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private static String followDestinationId;
 	private static LatLon followTargetLocation;
 	
-	public static void setFollowTrackerId(OsMoDevice d) {
+	public static void setFollowTrackerId(OsMoDevice d, Location l) {
 		if(d != null) {
 			followTrackerId = d.trackerId;
-			Location l = d.getLastLocation();
 			if(l != null) {
 				followMapLocation = new LatLon(l.getLatitude(), l.getLongitude());
 			}
