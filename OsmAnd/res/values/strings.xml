@@ -14,7 +14,7 @@
     <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
     <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd Sleep mode indication disappears from the Android notification bar.)</string>
 	<string name="shared_string_import2osmand">Import to OsmAnd</string>
-    <string name="read_full_article">Read full article</string>
+    <string name="read_full_article">Read full article (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
