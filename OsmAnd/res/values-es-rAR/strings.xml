@@ -554,7 +554,7 @@
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
     <string name="home">Inicio</string>
-    <string name="live_monitoring_m_descr">Envíe el rastreo a un servicio web específico, si la grabación GPX está activada.</string>
+    <string name="live_monitoring_m_descr">Envíe los datos de rastreo a un servicio web específico, si la grabación GPX está activada.</string>
 	<string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
 	<string name="live_monitoring_stop">Parar rastreo en línea</string>
@@ -1946,6 +1946,6 @@
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
 	<string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">Si está marcado, la grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). La indicación de modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.</string>
+    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). La indicación de modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.</string>
 	<string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quiere activarlo?</string>
     </resources>
