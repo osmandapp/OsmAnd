@@ -179,7 +179,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		OsMoGroup group = null;
 		if(command.equalsIgnoreCase("GP")) {
 			group = storage.getGroup(gid);
-			if(group != null) {
+			if(group != null && gid.length() > 0) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);
 				String mygid = service.getMyGroupTrackerId();
 				StringBuilder b = new StringBuilder();

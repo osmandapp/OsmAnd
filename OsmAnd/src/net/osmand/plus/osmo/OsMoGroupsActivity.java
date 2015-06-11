@@ -16,6 +16,7 @@ import java.util.Map;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -103,7 +104,7 @@ import android.widget.Toast;
  *
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
-		OsmAndLocationListener, OsMoGroupsUIListener {
+		OsmAndLocationListener, OsMoGroupsUIListener, StateChangedListener<Boolean> {
 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
@@ -211,35 +212,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				shareSession();
 			}
 		});
-		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.enable_tracker);
-		trackr.setText(R.string.osmo_share_my_location);
-		if(osMoPlugin != null && osMoPlugin.getTracker() != null){
-			trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
-		}
-		trackr.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(isChecked) {
-					if (app.getLocationProvider().checkGPSEnabled(OsMoGroupsActivity.this)) {
-						if (osMoPlugin != null && osMoPlugin.getTracker() != null) {
-							osMoPlugin.getTracker().enableTracker();
-						}
-						app.startNavigationService(NavigationService.USED_BY_LIVE);
-						// interval setting not needed here, handled centrally in app.startNavigationService
-						// app.getSettings().SERVICE_OFF_INTERVAL.set(0);
-					}
-				} else {
-					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
-						osMoPlugin.getTracker().disableTracker();
-					}
-					if (app.getNavigationService() != null) {
-						app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_LIVE);
-					}
-				}
-				updateStatus();
-			}
-		});
+		updateTrackerButton();
 		
 		CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 		srvc.setChecked(osMoPlugin.getService().isEnabled());
@@ -290,6 +263,39 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		
 		
+	}
+
+	private void updateTrackerButton() {
+		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.enable_tracker);
+		trackr.setText(R.string.osmo_share_my_location);
+		if(osMoPlugin != null && osMoPlugin.getTracker() != null){
+			trackr.setOnCheckedChangeListener(null);
+			trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
+		}
+		trackr.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked) {
+					if (app.getLocationProvider().checkGPSEnabled(OsMoGroupsActivity.this)) {
+						if (osMoPlugin != null && osMoPlugin.getTracker() != null) {
+							osMoPlugin.getTracker().enableTracker();
+						}
+						app.startNavigationService(NavigationService.USED_BY_LIVE);
+						// interval setting not needed here, handled centrally in app.startNavigationService
+						// app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+					}
+				} else {
+					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
+						osMoPlugin.getTracker().disableTracker();
+					}
+					if (app.getNavigationService() != null) {
+						app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_LIVE);
+					}
+				}
+				updateStatus();
+			}
+		});
 	}
 
 	private void setupFooter() {
@@ -404,11 +410,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			adapter.synchronizeGroups();
 		}
 		osMoPlugin.setGroupsActivity(this);
+		app.getSettings().OSMO_SEND_LOCATIONS_STATE.addListener(this);
+		updateTrackerButton();
+	}
+	
+	@Override
+	public void stateChanged(Boolean change) {
+		updateTrackerButton();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		app.getSettings().OSMO_SEND_LOCATIONS_STATE.removeListener(this);
 		app.getLocationProvider().pauseAllUpdates();
 		if(!app.accessibilityEnabled()) {
 			app.getLocationProvider().removeCompassListener(this);
