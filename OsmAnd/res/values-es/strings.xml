@@ -1064,13 +1064,13 @@
 	<string name="intermediate_point">Punto de ruta %1$s</string>
     <string name="gps_not_available">Habilite el GPS en los ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Habilita el complemento de seguimiento para que use el servicio de registro de posición (grabando GPX, seguimiento en línea)</string>
+    <string name="enable_plugin_monitoring_services">Habilita el complemento de grabación de viajes para que use el servicio de registro de posición (grabando GPX, seguimiento en línea)</string>
     <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Seleccione un esquema de color de carreteras:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en el tienda de aplicaciones?</string>
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
-	<string name="background_service_is_enabled_question">El servicio de suspensión de OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
+	<string name="background_service_is_enabled_question">El servicio de suspensión OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado la navegación: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (utilizando código Android más lento en lugar del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
@@ -1766,7 +1766,7 @@
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Inicio</string>
-    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
+    <string name="live_monitoring_m_descr">Enviar los datos de seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
 	<string name="live_monitoring_stop">Parar seguimiento en línea</string>
@@ -1818,14 +1818,14 @@
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabar viajes</string>
-    <string name="record_plugin_description">"Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
+    <string name="record_plugin_description">"Este complemento activa la funcionalidad para grabar y guardar sus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden utilizar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
 	<string name="save_track_to_gpx_globally">Registrar traza en archivo GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
 	<string name="save_track_to_gpx_globally_descr">El registro de la posición general en un archivo GPX puede activarse o desactivarse utilizando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="confirm_every_run">Preguntar siempre</string>
-	<string name="save_global_track_interval_descr">Elegir intervalo de registro para la grabación de trazas en general (habilitar a través del control de grabado GPX en el mapa)</string>
+	<string name="save_global_track_interval_descr">Elegir el intervalo de registro para la grabación de trazas en general (habilitar a través del control de grabado GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo de guardado general</string>
 	<string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
@@ -2068,10 +2068,13 @@
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>    
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
-    <string name="read_full_article">Leer el artículo completo</string>
+    <string name="read_full_article">Leer el artículo completo (en línea)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Mostrar detalles</string>
     <string name="local_recordings_delete_all_confirm">Va a borrar %1$d notas. ¿Está seguro?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
-    </resources>
+    <string name="gps_network_not_enabled">El servicio de ubicación no está activado. ¿Quiere activarlo?</string>
+    <string name="disable_recording_once_app_killed">Evita el registro autónomo</string>
+    <string name="disable_recording_once_app_killed_descrp">Se pausará el registro GPX cuando se mate a la aplicación (a través de aplicaciones recientes). (Las indicaciones del modo reposo OsmAnd desaparecerán de la barra de notificaciones Android.)</string>
+	</resources>
