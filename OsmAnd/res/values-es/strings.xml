@@ -470,16 +470,16 @@
   <string name="use_trackball">Utilizar la bola de desplazamiento</string>
   <string name="background_service_wait_int_descr">Fijar el tiempo de espera máximo para determinar la posición en cada lectura del servicio de fondo</string>
   <string name="background_service_wait_int">Máx. espera para posicionamiento</string>
-  <string name="service_stop_background_service">Apagar servicio de navegación en modo reposo</string>
+  <string name="service_stop_background_service">Apagar el servicio de navegación en modo reposo de OsmAnd</string>
   <string name="where_am_i">¿Dónde estoy?</string>
   <string name="process_navigation_service">Servicio de navegación OsmAnd</string>
   <string name="network_provider">Red</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Fija el intervalo de activación del servicio de fondo</string>
+  <string name="background_service_int_descr">Establece el intervalo de activación utilizado por el servicio de modo reposo</string>
   <string name="background_service_int">Intervalo de activación GPS</string>
-  <string name="background_service_provider_descr">Elige el proveedor de ubicación utilizada por el servicio de modo reposo</string>
+  <string name="background_service_provider_descr">Elige el proveedor de ubicación utilizado por el servicio de modo reposo</string>
   <string name="background_service_provider">Proveedor de ubicación</string>
   <string name="background_router_service_descr">Ejecuta OsmAnd de fondo para trazar su posición con la pantalla apagada</string>
   <string name="background_router_service">Ejecutar en modo reposo</string>
@@ -1034,8 +1034,7 @@
 \n\t* Corrección de errores "</string>
 <string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
 <string name="snap_to_road">Ajustar a carreteras</string>
-<string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos arreglados\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "
-    </string>
+<string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos arreglados\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de modo reposo durante la navegación "</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer punto de ruta</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último punto de ruta</string>
     <string name="add_as_last_destination_point">Añadir como último punto de ruta</string>
@@ -1070,8 +1069,8 @@
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscar en el tienda de aplicaciones?</string>
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
-	<string name="background_service_is_enabled_question">El servicio de suspensión OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado la navegación: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
+	<string name="background_service_is_enabled_question">El servicio de modo reposo de OsmAnd aún está funcionando. ¿También quiere interrumpirlo?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado la navegación: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de modo reposo durante la navegación "</string>
     <string name="safe_mode_description">Ejecuta la aplicación en modo seguro (utilizando código Android más lento en lugar del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
@@ -1224,7 +1223,7 @@
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
 \n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
-\n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo de reposo)
+\n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo reposo)
 \n\nOsmAnd es código abierto y se es desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificación nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
 \n\nCobertura y calidad aproximadas del mapa:
 \n\n- Europa Occidental: ****
@@ -1340,10 +1339,10 @@
 \n\t* Iconos de mapa de alta densidad
 \n\t* Multitud de cambios en la IU
 \n\t* Arreglo de fallos en visualización de la distancia, analizador de GPX, manejo de puntos de ruta, control de planificación, subida a OSM, manejo de https "</string>
-    <string name="osb_author_or_password_not_specified">Especifique el usuario OSM y contraseña en Ajustes</string>
+    <string name="osb_author_or_password_not_specified">Especifique el nombre de usuario y contraseña OSM en ajustes</string>
     <string name="clear_intermediate_points">Borrar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
-    <string name="new_directions_point_dialog">Ya has definido puntos intermedios.</string>
+    <string name="new_directions_point_dialog">Ya tiene puntos intermedios definidos.</string>
     <string name="context_menu_item_directions_to">Cómo llegar a</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Hacia:</string>
@@ -1433,7 +1432,7 @@
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
 \n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
-\n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo de reposo)
+\n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo reposo)
 \n\nOsmAnd es código abierto y se es desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificación nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
 \n\nCobertura y calidad aproximadas del mapa:
 \n\n- Europa Occidental: ****
@@ -1673,7 +1672,7 @@
     <string name="osmo_regenerate_login_ids">Regenerar identificación del usuario</string>
     <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
     <string name="osmo_center_location">Centrar en la pantalla</string>
-    <string name="osmo_set_moving_target">Establecer como objetivo móvil</string>
+    <string name="osmo_set_moving_target">Fijar como objetivo móvil</string>
     <string name="osmo_use_server_name">Nombre registrado</string>
     <string name="osmo_connect_to_my_nickname">Mi apodo</string>
     <string name="osmo_user_name">Usuario</string>
@@ -1756,7 +1755,7 @@
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Interrumpir</string>
-	<string name="enable_sleep_mode">Habilita modo reposo del GPS</string>
+	<string name="enable_sleep_mode">Habilita el modo reposo del GPS</string>
 	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
 	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible se cambiará a inglés o a nombres locales)</string>
