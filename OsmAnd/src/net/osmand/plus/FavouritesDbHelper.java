@@ -360,7 +360,7 @@ public class FavouritesDbHelper {
 		File firstModified = null;
 		long firstModifiedMin = System.currentTimeMillis();
 		while(back <= BACKUP_CNT) {
-			File bak = new File(fld, "favourites_backup_" + formatter.format(back) +".gpx.bz2");
+			File bak = new File(fld, "favourites_bak_" + formatter.format(back) +".gpx.bz2");
 			if (!bak.exists()) {
 				return bak;
 			} else if (bak.lastModified() < firstModifiedMin) {
