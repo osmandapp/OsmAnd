@@ -1995,7 +1995,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>    
-    <string name="read_full_article">閱讀全部文章</string>
+    <string name="read_full_article">閱讀全部文章 (線上)</string>
     <string name="download_wikipedia_item">維基百科</string>
     <string name="local_indexes_cat_wiki">維基百科</string>
     <string name="shared_string_show_details">顯示詳細資訊</string>
