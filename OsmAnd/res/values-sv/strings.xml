@@ -9,7 +9,7 @@
 <string name="map_widget_lock_screen">Skärmlås</string>
 <string name="map_widget_compass">Kompass</string>
 <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_monitoring">GPX-inspelning</string>
+<string name="map_widget_monitoring">GPX-loggning</string>
 <string name="map_widget_speed">Hastighet</string>
 <string name="map_widget_distance">Destination</string>
 <string name="map_widget_altitude">Höjd</string>
@@ -1072,7 +1072,7 @@
     <string name="item_unchecked">ej markerad</string>
     <string name="av_def_action_choose">Välj vid användning</string>
     
-    <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
+    <string name="enable_plugin_monitoring_services">Aktivera Trippinspelningspluginen för att använda positionsloggningstjänster (GPX-loggning, online-spårning)</string>
     <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems). "</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1536,12 +1536,12 @@
     <string name="lang_he">Hebreiska</string>
     <string name="forward">Framåt</string>
     <string name="home">Hem</string>
-    <string name="live_monitoring_m_descr">Skicka spårning till en specificerad webbtjänst om GPX-inspelning är aktiverad.</string>
+    <string name="live_monitoring_m_descr">Skicka spårningsdata till en specificerad webbtjänst om GPX-loggning är aktiverad.</string>
 	<string name="live_monitoring_m">Online-spårning (GPX krävs)</string>
     <string name="live_monitoring_start">Starta online-spårning</string>
 	<string name="live_monitoring_stop">Stoppa online-spårning</string>
-	<string name="gpx_monitoring_start">Starta GPX-inspelning</string>
-	<string name="gpx_monitoring_stop">Stoppa GPX-inspelning</string>
+	<string name="gpx_monitoring_start">Starta GPX-loggning</string>
+	<string name="gpx_monitoring_stop">Stoppa GPX-loggning</string>
     <string name="gpx_start_new_segment">Starta nytt segment</string>
     <string name="rendering_attr_hideBuildings_name">Dölj byggnader</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Visa endast vägar för motorfordon</string>
@@ -1597,7 +1597,7 @@
     <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="shared_string_all">Alla</string>
-    <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-inspelning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
+    <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-loggning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
 \n\nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet etc och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
     <string name="record_plugin_name">Inspelning av resor</string>
     <string name="int_hour">h</string>
@@ -1605,10 +1605,10 @@
     <string name="distance">Sträcka</string>
     <string name="rendering_attr_publicTransportMode_name">Buss-, trådbuss-, matarbusslinjer</string>
 	<string name="save_track_to_gpx_globally">Logga spår till GPX-fil</string>
-	<string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-inspelningswidgeten på kartskärmen</string>
+	<string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-loggningswidgeten på kartskärmen</string>
 	<string name="save_track_interval_globally">Loggningsintervall</string>
 	<string name="confirm_every_run">Fråga alltid</string>
-	<string name="save_global_track_interval_descr">Välj loggningsintervall för den allmänna spårinspelningen (aktiverad via widgeten GPX-inspelning på kartan)</string>
+	<string name="save_global_track_interval_descr">Välj loggningsintervall för den allmänna spårinspelningen (aktiverad via widgeten GPX-loggning på kartan)</string>
 	<string name="save_global_track_interval">Allmänt loggningsintervall</string>
 	<string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
@@ -1885,11 +1885,13 @@
     <string name="rendering_value_disabled_name">Inaktiverad</string>
     <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
     <string name="rendering_value_walkingRoutesOSMC_name">Färgläggning efter OSMC</string>
-    <string name="read_full_article">Läs hela artikeln</string>
+    <string name="read_full_article">Läs hela artikeln (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
     <string name="local_recordings_delete_all_confirm">Du håller på att ta bort %1$d anteckningar. Är du säker?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
-    </resources>
+    <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
+    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds sovlägesindikation försvinner från Androids aviseringsfält.)</string>
+	</resources>
