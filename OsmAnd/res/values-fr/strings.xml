@@ -2043,13 +2043,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
-    <string name="read_full_article">Lire l\'article complet</string>
+    <string name="read_full_article">Lire l\'article complet (en ligne)</string>
     <string name="download_wikipedia_item">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
 	<string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
-    <string name="disable_recording_once_app_killed_descrp">Si activé, l\'enregistrement GPX sera mis en pause lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
+    <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
 	<string name="disable_recording_once_app_killed">Interdire l\'enregistrement autonome</string>
     </resources>
