@@ -142,7 +142,7 @@
 	<string name="online_map_settings">Mapas on-line</string>
 	<string name="osmand_rastermaps_plugin_description">"Com este complemento você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline normal de OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.\n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes on-line ou podem ser preparados para uso off-line (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
 	<string name="record_plugin_name">Gravação de viagem</string>
-	<string name="record_plugin_description">"Este complemento ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
+	<string name="record_plugin_description">"Este complemento ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de registro de GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
 \n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
 	<string name="osmo_plugin_name">OsMo (Rastreamento OSM)</string>
 	<string name="osmo_plugin_description">"Este complemento fornece a funcionalidade para OsMo (rastreamento avançado ao vivo), veja mais em http://osmo.mobi.\n\nVocê pode rastrear outros dispositivos e ser rastreado. Você espontaneamente pode criar grupos anônimos, compartilhar localização e se comunicar. Vem com várias opções para o controle de sessão ou acompanhamento permanente.\n\nGrupos anônimos são criados para um número especificado de dias e limitados a recursos definidos, ou seja, não há nenhum controle remoto e nenhum administrador de grupo. Grupos totalmente funcionais, por outro lado, podem ser criados no site e só usuários cadastrados têm acesso a eles. "</string>
@@ -307,13 +307,13 @@
 	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
 	<string name="stop_navigation_service">Interrupção</string>
 	<string name="confirm_every_run">Sempre perguntar</string>
-	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de gravação GPX no mapa)</string>
+	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de registro de GPX no mapa)</string>
 	<string name="save_global_track_interval">Intervalo de registro geral</string>
 	<string name="background_service_int">Intervalo de ativação do GPS</string>
 	<string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
 	<string name="save_track_to_gpx_globally">Salvar trajetos em arquivo GPX</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trajeto sob demanda</string>
-	<string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de gravação GPX na tela do mapa</string>
+	<string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX na tela do mapa</string>
 	<string name="save_current_track_descr">Salvar o trajeto atual no SD agora</string>
 	<string name="save_current_track">Salvar o trajeto GPX atual</string>
 	<string name="save_track_to_gpx">Registrar o trajeto para arquivo GPX durante a navegação</string>
@@ -385,12 +385,12 @@
     <string name="lang_he">Hebraico</string>
     <string name="forward">Avançar</string>
     <string name="home">Início</string>
-    <string name="live_monitoring_m_descr">Enviar o rastreamento para um serviço web especificado, se estiver ativada a gravação GPX.</string>
+    <string name="live_monitoring_m_descr">Enviar o rastreamento para um serviço web especificado, se estiver ativado o registro de GPX.</string>
 	<string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
 	<string name="live_monitoring_stop">Parar rastreamento on-line</string>
-	<string name="gpx_monitoring_start">Iniciar gravação GPX</string>
-	<string name="gpx_monitoring_stop">Parar gravação GPX</string>
+	<string name="gpx_monitoring_start">Iniciar registro de GPX</string>
+	<string name="gpx_monitoring_stop">Parar registro de GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar estradas não-trafegáveis</string>
@@ -850,7 +850,7 @@
 	<string name="map_widget_compass">Bússola</string>
 	<string name="map_widget_reset">Restaurar para predefinido</string>
 	<string name="map_widget_parking">Estacionamento</string>
-	<string name="map_widget_monitoring">Gravação de GPX</string>
+	<string name="map_widget_monitoring">Registro de GPX</string>
 	<string name="map_widget_speed">Velocidade</string>
 	<string name="map_widget_distance">Destino</string>
 	<string name="map_widget_altitude">Altitude</string>
@@ -912,7 +912,7 @@
 	<string name="rendering_attr_roadColors_description">Selecionar um esquema de cores das vias:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de cores das vias</string>
     <string name="map_widget_show_destination_arrow">Mostrar a direção do destino</string>
-    <string name="enable_plugin_monitoring_services">Ativar complemento de rastreamento para usar serviços de registro de posição (gravação GPX, monitoramento on-line)</string>
+    <string name="enable_plugin_monitoring_services">Ativar complemento de gravação de viagem para usar serviços de registro de posição (registro de GPX, rastreamento on-line)</string>
     <string name="non_optimal_route_calculation">Calcular rota possivelmente não ideal em longas distâncias</string>
 	<string name="gps_not_available">Por favor, ative o GPS nas configurações</string>
     <string name="tip_recent_changes_0_8_3_t">Mudanças na v0.8.3:\n\t* Paradas intermediárias\n\t* Melhoria na orientação de rota\n\t* Adicionada opção que permite evitar autoestradas ao planejar a rota\n\t* Adicionado mais um tipo de via para bicicletas no mapa (cycleway=track)\n\t* Correções de erros</string>
@@ -1714,7 +1714,7 @@
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importar para OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
-	<string name="disable_recording_once_app_killed">Impedir a gravação autônoma</string>
+	<string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
-    <string name="disable_recording_once_app_killed_descrp">"Pausará a gravação de GPX após o encerramento do app  (via apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
+    <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
 	</resources>
