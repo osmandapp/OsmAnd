@@ -164,9 +164,10 @@ public class Amenity extends MapObject  {
 				return lang;
 			}
 		}
-		if (!Algorithms.isEmpty(getName())) {
-			return "";
-		}
+		//check if this causes issue 1343
+		//if (!Algorithms.isEmpty(getName())) {
+		//	return "";
+		//}
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
 				return nm.substring("name:".length());
