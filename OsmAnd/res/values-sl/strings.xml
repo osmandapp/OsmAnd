@@ -303,7 +303,7 @@
 	<string name="preferred_locale">Jezik vmesnika</string>
 	<string name="preferred_locale_descr">Izbor jezika uporabniškega vmesnika (zahteva ponovni zagon OsmAnd)</string>
 	<string name="map_widget_show_destination_arrow">Pokaži smer cilja</string>
-    <string name="enable_plugin_monitoring_services">Omogoči vstavke za nadzor (beleženje, sledenje trenutnega mesta v živo) za uporabljanje nadzornih storitev</string>
+    <string name="enable_plugin_monitoring_services">Omogoči uporabo storitev določanja trenutnega položaja pri zagonu vstavka za beleženje poti (beleženje, sledenje trenutnega mesta v živo).</string>
     <string name="non_optimal_route_calculation">Izračunaj morda ne-optimalne poti na dolge razdalje</string>
     <string name="gps_not_available">Možnosti GPS je treba omogočiti med nastavitvami</string>
     <string name="map_widget_monitoring_services">Storitve beleženja</string>
@@ -1551,12 +1551,12 @@
     <string name="lang_he">Hebrejščina</string>
     <string name="forward">Naprej</string>
     <string name="home">Začetni zaslon</string>
-    <string name="live_monitoring_m_descr">Pošlji sledenje na določeno spletno storitev, če je beleženje GPX omogočeno.</string>
+    <string name="live_monitoring_m_descr">Pošlji podatke sledenja na določeno spletno storitev, če je beleženje GPX omogočeno.</string>
 	<string name="live_monitoring_m">Sledenje v živo (zahteva GPX)</string>
     <string name="live_monitoring_start">Začni sledenje v živo</string>
 	<string name="live_monitoring_stop">Končaj sledenje v živo</string>
 	<string name="gpx_monitoring_start">Začni beleženje GPX</string>
-	<string name="gpx_monitoring_stop">Končaj beleženje GPX</string>
+	<string name="gpx_monitoring_stop">Zaustavi beleženje GPX</string>
     <string name="gpx_start_new_segment">Začni nov odsek</string>
     <string name="rendering_attr_hideBuildings_name">Ne izriši stavb</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ne izriši neprevoznih cest</string>
@@ -1628,8 +1628,8 @@
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>  
     <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
-    <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za snemanje sledi GPX na zemljevidu)</string>
-	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za snemanje na zaslonu zemljevida</string>
+    <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za beleženje sledi GPX na zemljevidu)</string>
+	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za beleženje na zaslonu zemljevida</string>
 	<string name="record_plugin_description">"Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX.\n\nShranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mogoče slediti dejavnostim, treningom ali potovanjem. Nekaj osnovne analize, kot so čas kroga, povprečna hitrost, razdalja in podobno, omogoča že program OsmAnd, podrobnejša analiza pa je mogoča s posebnimi orodji. "</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Izris stez po sledeh OSMC</string>
     
@@ -1873,4 +1873,7 @@
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
+	<string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
+    <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
+    <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
 	</resources>
