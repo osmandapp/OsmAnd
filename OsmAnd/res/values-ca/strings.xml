@@ -2008,7 +2008,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
     <string name="osm_edit_context_menu_delete">Suprimeix l\'edició d\'OSM</string>
-    <string name="read_full_article">Llegiu l\'article complert</string>
+    <string name="read_full_article">Llegiu l\'article complert (en connexió)</string>
     <string name="download_wikipedia_item">Viquipèdia</string>
     <string name="local_indexes_cat_wiki">Viquipèdia</string>
     <string name="shared_string_show_details">Mostra els detalls</string>
