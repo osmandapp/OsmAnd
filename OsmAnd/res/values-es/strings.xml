@@ -630,7 +630,7 @@
   <string name="shared_string_settings">Ajustes</string>
   <string name="save_current_track_descr">Guarda la traza actual en la SD ahora</string>
   <string name="save_current_track">Guardar traza actual</string>
-  <string name="save_track_interval">Intervalo de guardado durante navegación</string>
+  <string name="save_track_interval">Intervalo de registro durante la navegación</string>
   <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
   <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en la carpeta de trazas durante la navegación</string>
   <string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
@@ -963,7 +963,7 @@
   
   
   <string name="map_widget_parking">Aparcamiento</string>
-  <string name="map_widget_monitoring">Grabando GPX</string>
+  <string name="map_widget_monitoring">Registrando GPX</string>
   <string name="map_widget_speed">Velocidad</string>
   <string name="map_widget_distance">Destino</string>
   <string name="map_widget_altitude">Altitud</string>
@@ -1063,7 +1063,7 @@
 	<string name="intermediate_point">Punto de ruta %1$s</string>
     <string name="gps_not_available">Habilite el GPS en los ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Habilita el complemento de grabación de viajes para que use el servicio de registro de posición (grabando GPX, seguimiento en línea)</string>
+    <string name="enable_plugin_monitoring_services">Habilita el complemento de grabación de viajes para que use el servicio de registro de posición (registro GPX, seguimiento en línea)</string>
     <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Seleccione un esquema de color de carreteras:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
@@ -1765,12 +1765,12 @@
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Inicio</string>
-    <string name="live_monitoring_m_descr">Enviar los datos de seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
+    <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico si el registro GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
 	<string name="live_monitoring_stop">Parar seguimiento en línea</string>
-	<string name="gpx_monitoring_start">Iniciar grabación GPX</string>
-	<string name="gpx_monitoring_stop">Parar grabación GPX</string>
+	<string name="gpx_monitoring_start">Iniciar registro GPX</string>
+	<string name="gpx_monitoring_stop">Parar registro GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
 	<string name="lang_al">Albano</string>
@@ -1821,11 +1821,11 @@
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden utilizar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
 	<string name="save_track_to_gpx_globally">Registrar traza en archivo GPX</string>
-	<string name="save_track_interval_globally">Intervalo de guardado</string>
-	<string name="save_track_to_gpx_globally_descr">El registro de la posición general en un archivo GPX puede activarse o desactivarse utilizando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="save_track_interval_globally">Intervalo de registro</string>
+	<string name="save_track_to_gpx_globally_descr">Registra la posición general en un archivo GPX pudiendo activar o desactivar utilizando el control de registro GPX en la pantalla del mapa</string>
 	<string name="confirm_every_run">Preguntar siempre</string>
-	<string name="save_global_track_interval_descr">Elegir el intervalo de registro para la grabación de trazas en general (habilitar a través del control de grabado GPX en el mapa)</string>
-	<string name="save_global_track_interval">Intervalo de guardado general</string>
+	<string name="save_global_track_interval_descr">Elegir el intervalo de registro para la grabación de trazas en general (habilitar a través del control de registro GPX en el mapa)</string>
+	<string name="save_global_track_interval">Intervalo de registro general</string>
 	<string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Peaje</string>
