@@ -532,7 +532,7 @@
 	<string name="background_service_int">Intervalo de activación del GPS</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-	<string name="save_track_to_gpx_globally_descr">El registro de la ubicación en un archivo GPX puede des/activarse usando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="save_track_to_gpx_globally_descr">Registre la ubicación en un archivo GPX, pudiendo des/activarlo usando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
 	<string name="save_track_to_gpx_descrp">Las trazas se guardarán en la carpeta de trazas durante la navegación</string>
 	<string name="save_track_interval">Intervalo de guardado durante navegación</string>
