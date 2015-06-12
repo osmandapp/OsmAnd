@@ -165,7 +165,7 @@ public class Amenity extends MapObject  {
 			}
 		}
 		if (!Algorithms.isEmpty(getName())) {
-			return lang;
+			return "";
 		}
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
