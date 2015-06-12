@@ -107,7 +107,7 @@
 	<string name="map_widget_monitoring">GPX 日誌記錄</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
-	<string name="map_widget_altitude">高度</string>
+	<string name="map_widget_altitude">海拔高度</string>
 	<string name="map_widget_time">剩餘時間</string>
 	<string name="map_widget_next_turn">下個轉彎</string>
 	<string name="map_widget_next_turn_small">下個轉彎(小)</string>
@@ -268,7 +268,7 @@
 	<string name="oclock">點鐘</string>
 	<string name="towards">將近</string>
 	<string name="accuracy">精確性</string>
-	<string name="altitude">高度</string>
+	<string name="altitude">海拔高度</string>
 	<string name="no_info">沒有數據</string>
 	<string name="direction_style_sidewise">橫向 (8 個扇區)</string>
 	<string name="direction_style_clockwise">順時鐘 (12 個扇區)</string>
@@ -1094,7 +1094,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
     
     
-	<string name="tip_altitude_offset">海拔高度偏移校正</string>
+	<string name="tip_altitude_offset">海拔高度偏移修正</string>
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
     <string name="route_descr_current_location">目前位置</string>
@@ -1193,7 +1193,7 @@
     
     <string name="tip_altitude_offset_t">"大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 \n\n到這些地方系統有一個更好的近似值參考是 EGM96。
-\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔矯正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
+\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔修正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
 	\n\t* Improved routing: faster, more precise, up to 250 km
@@ -1476,7 +1476,7 @@
     <string name="index_name_italy">歐洲 - 意大利</string>
     <string name="index_name_gb">歐洲 - 英國</string>
     <string name="index_item_nation_addresses">全國範圍的地址</string>
-	<string name="index_item_world_altitude_correction">全球海拔矯正</string>
+	<string name="index_item_world_altitude_correction">全球海拔修正</string>
 	<string name="index_item_world_seamarks">全球航線標識</string>
 	<string name="index_item_world_bitcoin_payments">全球比特幣支付</string>
 	<string name="index_item_world_basemap">全球地圖總覽</string>
