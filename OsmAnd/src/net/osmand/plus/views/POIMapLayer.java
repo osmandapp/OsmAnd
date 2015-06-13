@@ -392,11 +392,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 		if(Algorithms.isEmpty(lng)) {
 			//TODO: Third choice to display wiki article in if it does not exist in the OsmAnd locale or "en" should be the longest article (most information, usually the on in the region's local language)
-			lng = a.getNameSelected();
+			lng = a.getNameSelected(null);
 		}
 		// This should not occur
 		if(Algorithms.isEmpty(lng)) {
-			lng = "EN";
+			//lng = "EN";
+			lng = "XX";
 		}
 
 		final String langSelected = lng;
