@@ -22,8 +22,8 @@
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para utilizar esta función.</string>
 	<string name="welmode_download_maps">Descargar mapas</string>
-	<string name="welcome_select_region">Para reflejar correctamente las señales y regulaciones de tráfico, elija su región de conducción:</string>
-	<string name="welcome_text">¡OsmAnd proporciona visualización de mapas y navegación global sin conexión!</string>
+	<string name="welcome_select_region">Para reflejar correctamente las señales y normas de tráfico, elija su región de conducción:</string>
+	<string name="welcome_text">¡OsmAnd ofrece visualización de mapas y navegación global sin conexión!</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
