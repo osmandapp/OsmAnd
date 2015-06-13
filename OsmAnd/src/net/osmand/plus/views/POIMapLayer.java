@@ -340,7 +340,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			// first choice to display wiki article should be device display language, not map display language
+			// First choice to display wiki article in should be the selected OsmAnd locale (not the map display language)
 			//showWiki(ctx, app, a, lang);
 			showWiki(ctx, app, a, app.getSettings().PREFERRED_LOCALE.get());
 		} else {
@@ -386,6 +386,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 
 		String lng = a.getNameSelected(lang);
+		if(Algorithms.isEmpty(lng)) {
+			// Second choice to display wiki article in if it does not exist in the OsmAnd locale should be the longest article (most information, usually the on in the region's local language)
+			lng = a.getNameSelected("en");
+		}
+		if(Algorithms.isEmpty(lng)) {
+			//TODO: Third choice to display wiki article in if it does not exist in the OsmAnd locale or "en" should be the longest article (most information, usually the on in the region's local language)
+			lng = a.getNameSelected();
+		}
+		// This should not occur
 		if(Algorithms.isEmpty(lng)) {
 			lng = "EN";
 		}
