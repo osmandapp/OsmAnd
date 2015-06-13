@@ -71,7 +71,7 @@
 	
 	
 	<string name="map_widget_parking">Parkering</string>
-	<string name="map_widget_monitoring">GPX-opptak</string>
+	<string name="map_widget_monitoring">GPX-logging</string>
 	<string name="map_widget_speed">Hastighet</string>
 	<string name="map_widget_distance">Mål</string>
 	<string name="map_widget_altitude">Høyde</string>
@@ -1343,7 +1343,7 @@
     <string name="routing_attr_avoid_borders_name">Unngå grensekryssing</string>
 	<string name="routing_attr_avoid_borders_description">Unngå å krysse grensen til et annet land</string>
 	<string name="shared_string_import2osmand">Importer til OsmAnd</string>
-    <string name="read_full_article">Les hele artikkelen</string>
+    <string name="read_full_article">Les hele artikkelen (på nett)</string>
     <string name="shared_string_show_details">Vis detaljer</string>
     <string name="osm_edit_context_menu_delete">Slett OSM-redigering</string>
     <string name="rendering_value_disabled_name">Deaktivert</string>
