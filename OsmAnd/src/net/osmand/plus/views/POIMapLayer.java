@@ -392,21 +392,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			// If POI has no "en" name, "" is returned. Unfortunatley no easy way then to determine what the corresponding article language is.
 			// "" is also returned if no name can be found at all
 		}
-		if(Algorithms.isEmpty(lng)) {
-			lng = "Default language";
-		}
 
 		final String langSelected = lng;
 		String content = a.getDescription(langSelected);
 		final Button bottomBar = new Button(ctx);
 		bottomBar.setText(R.string.read_full_article);
 		bottomBar.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				String article = "http://"+langSelected.toLowerCase()+".wikipedia.org/wiki/" + title.replace(' ', '_');
-				// Use EN for the URL, unless we find a better way to determine what the articles default language is
-				if(langSelected.equals("Default language")) {
+				// If Default language, use EN for the URL, unless we find a better way to determine what the articles default language is
+				if(langSelected.equals("")) {
 					article = "http://en.wikipedia.org/wiki/" + title.replace(' ', '_');
 				}
 				Intent i = new Intent(Intent.ACTION_VIEW);
@@ -415,7 +411,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			}
 		});
 		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener()  {
-			
 			@Override
 			public boolean onMenuItemClick(final MenuItem item) {
 				showPopupLangMenu(ctx, topBar, app, a, dialog);
@@ -469,7 +464,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
 			final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		List<String> names = a.getNames("Default Language");
+		List<String> names = a.getNames("");
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
 			MenuItem item = optionsMenu.getMenu().add(vn);
