@@ -393,8 +393,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			// "" is also returned if no name can be found at all
 		}
 		if(Algorithms.isEmpty(lng)) {
-			// Temporary test, normally let us set to EN here
-			lng = "XX";
+			lng = "EN";
 		}
 
 		final String langSelected = lng;
@@ -466,7 +465,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
 			final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		List<String> names = a.getNames("en");
+		List<String> names = a.getNames("xx");
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
 			MenuItem item = optionsMenu.getMenu().add(vn);
