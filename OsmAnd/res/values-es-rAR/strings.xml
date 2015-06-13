@@ -511,7 +511,7 @@
 	<string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">El nombre del favorito elegido ya está en uso, se cambió a %1$s para evitar duplicación.</string>
-    <string name="text_size_descr">Elige el tamaño del texto en el mapa.</string>
+    <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Indicaciones a\'), o selecciona \'Indicaciones a\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
 \n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
 \n\nPuede elegir \'Iniciar Navegación\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puede elegir \'Mostrar ruta\', y solamente mostrará la ruta, sin indicaciones ni reajustes según se mueva.
@@ -588,7 +588,7 @@
     <string name="osmo_create_groups_confirm">Para crear grupos es necesario ser usuario registrado de OsMo.</string>
     <string name="osmo_regenerate_login_ids_confirm">¿Estás seguro de regenerar los identificadores personales? Todos los dispositivos conectados a ti, no serán capaces de seguirte nunca más.</string>
     <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
-    <string name="osmo_set_moving_target">Establecer como objetivo móvil</string>
+    <string name="osmo_set_moving_target">Definir como objetivo móvil</string>
     <string name="osmo_group_share">Para conectarse al grupo %2$s, indique el id del grupo (%1$s) o pulse %3$s.</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_session_id_share">URL de sesión para seguir dispositivo (%1$s)</string>
@@ -724,7 +724,7 @@
 	
 	<string name="app_mode_default">Ver mapa</string>
 	<string name="settings_preset">Perfil predeterminado</string>
-	<string name="settings_preset_descr">Los ajustes de la vista y navegación del mapa son recordados por el perfil usado. Establezca su perfil predeterminado aquí.</string>
+	<string name="settings_preset_descr">Los ajustes de la vista y navegación del mapa son recordados por el perfil usado. Defina su perfil predeterminado aquí.</string>
     <string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Fijar como destino</string>
     <string name="please_select_address">Elige primero la ciudad o calle</string>
@@ -779,8 +779,8 @@
     <string name="select_address_activity">Elija la dirección</string>
     <string name="favourites_list_activity">Elige favorito</string>
     <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
-	<string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Corregido Geo Intent (Foursquare, c: geo)\n\t* Corregido el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición del relieve sombreado más fácil (requiere complemento de Curvas de nivel)\n\t* Ahora acepta enlaces de ubicación de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
-    <string name="layer_hillshade">Capa del relieve sombreado</string>
+	<string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Corregido Geo Intent (Foursquare, c: geo)\n\t* Corregido el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición del sombreado más sencillo (requiere complemento de Curvas de nivel)\n\t* Ahora acepta enlaces de ubicación de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
+    <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "</string>
     <string name="access_arrival_time">Hora de llegada</string>
@@ -791,9 +791,9 @@
 	<string name="prefer_in_routing_descr">Preferir usar autopistas</string>
     <string name="max_speed_none">ninguna</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
-    <string name="download_hillshade_item">Relieve sombreado</string>
-    <string name="download_hillshade_maps">Superposición del relieve sombreado</string>
-    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en el complemento de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento de curvas de nivel reestructurada y corregida\n\t* Paquetes del relieve sombreado para el complemento de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
+    <string name="download_hillshade_item">Sombreado</string>
+    <string name="download_hillshade_maps">Superposición del sombreado</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en el complemento de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento de curvas de nivel reestructurada y corregida\n\t* Paquetes del sombreado para el complemento de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
@@ -991,7 +991,7 @@
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
 \n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
-	<string name="osmand_plus_short_description_80_chars">Visor de mapas y navegador móvil global para mapas de OSM con y sin conexión</string>
+	<string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global para mapas de OSM con y sin conexión</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas funciones, y recibe las últimas actualizaciones. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) - Mapas mundiales vectoriales compactos disponibles - Descarga del mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista día/noche - Ampliación opcional según la velocidad - Alineación del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
 	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para coche, bici y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola soportas al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla, instalando la versión libre llamada OsmAnd.
@@ -1051,7 +1051,7 @@
 \n- Antártida: *
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
 \n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
-	<string name="tip_update_index">Actualizar mapas sin conexión</string>
+	<string name="tip_update_index">Actualizando mapas sin conexión</string>
 	<string name="tip_update_index_t">"Es esencial tener datos de mapa actualizados tanto para visualización de mapas, búsqueda de direcciones/PDI y navegación sin conexión. OsmAnd proporciona un gestor de mapas para descargarlos y comprobar las actualizaciones disponibles.
 \n\nPara descargar los mapas, vaya a \'Ajustes\' → \'Gestionar mapas\' → \'Descargar\'.
 \n\nTras recuperar de Internet la lista de regiones, pulse en cualquier elemento para descargar o actualizar un archivo. Fíjese en el selector de tipo de archivo de la parte superior de la pantalla para seleccionar el tipo de descarga que quiere (mapas normales, relieve sombreado, etc.).
@@ -1087,7 +1087,7 @@
 	<string name="map_widget_back_to_loc">Dónde estoy</string>
 	<string name="map_widget_lock_screen">Bloquear pantalla</string>
 	<string name="map_widget_compass">Brújula</string>
-	<string name="map_widget_reset">Restablecer valores a predeterminados</string>
+	<string name="map_widget_reset">Restaurar valores predeterminados</string>
 	<string name="map_widget_parking">Estacionamiento</string>
 	<string name="map_widget_monitoring">Grabación GPX</string>
 	<string name="map_widget_speed">Velocidad</string>
@@ -1101,7 +1101,7 @@
 	<string name="bg_service_screen_lock">Bloquear pantalla</string>
 	<string name="bg_service_screen_unlock">Desbloquear pantalla</string>
 	<string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
-	<string name="bg_service_interval">Fijar intervalo de activación:</string>
+	<string name="bg_service_interval">Definir intervalo de activación:</string>
 	<string name="show_cameras">Mostrar radares</string>
 	<string name="show_traffic_warnings">Mostrar límites de velocidad</string>
 	<string name="avoid_toll_roads">Evitar peajes</string>
@@ -1128,7 +1128,7 @@
 	<string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
 	<string name="osmand_parking_warning">Advertencia</string>
 	<string name="osmand_parking_warning_text">La notificación para recoger su auto fue previamente añadida al calendario. Permanecerá allí hasta que la borre manualmente.</string>    
-	<string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del estacionamiento</string>
+	<string name="osmand_parking_time_limit_title">Definir el límite de tiempo del estacionamiento</string>
 	<string name="osmand_parking_delete_confirm">¿Quitar ubicación del auto estacionado?</string>
 	<string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
 	<string name="osmand_parking_choose_type">Elija el tipo de estacionamiento</string>
@@ -1340,7 +1340,7 @@
 \n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo "</string>
 	<string name="tip_day_night_mode">Modo Día/Noche</string>
 	<string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (claro) y noche (oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
-\n\nPuede establecer una política de intercambio día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
+\n\nPuede definir una política de intercambio día/noche en \'Menú\' → \'Configurar mapa\' → \'Mapa día/noche\'.
 \n\nLas opciones son:
 \n\t* \'Alba/Ocaso\': modo automático, controlado por la posición del sol (predeterminado)
 \n\t* \'Día\': utiliza siempre el modo día
@@ -1674,7 +1674,7 @@
 	<string name="context_menu_item_search_poi">Buscar PDI</string>
 	<string name="use_trackball_descr">Use la rueda de desplazamiento para mover el mapa</string>
 	<string name="use_trackball">Usar rueda de desplazamiento</string>
-	<string name="background_service_wait_int_descr">Fije el tiempo de espera máximo para determinar la ubicación en cada lectura del servicio de fondo</string>
+	<string name="background_service_wait_int_descr">Defina el tiempo de espera máximo para determinar la ubicación en cada lectura del servicio de fondo</string>
 	<string name="background_service_wait_int">Máxima espera para posicionamiento</string>
 	<string name="service_stop_background_service">Apagar servicio de navegación en modo reposo</string>
 	<string name="where_am_i">¿Dónde estoy?</string>
@@ -1683,7 +1683,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Fije el intervalo de activación del modo reposo</string>
+	<string name="background_service_int_descr">Defina el intervalo de activación del modo reposo</string>
 	<string name="background_service_provider_descr">Elige el proveedor de ubicación del modo reposo</string>
 	<string name="background_service_provider">Proveedor de ubicación</string>
 	<string name="background_router_service_descr">Ejecute OsmAnd de fondo para trazar su ubicación con la pantalla apagada</string>
@@ -1815,10 +1815,10 @@
 	<string name="use_english_names">Usar nombres ingleses en los mapas</string>
 	<string name="app_settings">Ajustes de aplicación</string>
 	<string name="search_address">Buscar dirección</string>
-	<string name="choose_building">Elegir edificio</string>
-	<string name="choose_street">Elegir calle</string>
-	<string name="choose_city">Elegir ciudad</string>
-	<string name="ChooseCountry">Elegir país</string>
+	<string name="choose_building">Elija el edificio</string>
+	<string name="choose_street">Elija la calle</string>
+	<string name="choose_city">Elija la ciudad</string>
+	<string name="ChooseCountry">Elija el país</string>
 	<string name="show_view_angle">Mostrar dirección de visualización</string>
 	<string name="map_view_3d_descr">Active la vista 3D del mapa</string>
 	<string name="map_view_3d">Visión 3D del mapa</string>
