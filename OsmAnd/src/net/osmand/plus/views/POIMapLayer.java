@@ -371,7 +371,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme:
 							R.style.OsmandDarkTheme);
-		String content = a.getDescription(lang);
 		final String title = a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -390,6 +389,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 
 		final String langSelected = lng;
+		String content = a.getDescription(langSelected);
 		final Button bottomBar = new Button(ctx);
 		bottomBar.setText(R.string.read_full_article);
 		bottomBar.setOnClickListener(new View.OnClickListener() {
