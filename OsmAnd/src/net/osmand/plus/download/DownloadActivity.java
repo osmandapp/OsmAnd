@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -379,8 +380,11 @@ public class DownloadActivity extends BaseDownloadActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					for(String w : wiki) {
 						File fl = new File(w);
-						File nf = new File(fl.getParentFile() +"/" + IndexConstants.BACKUP_INDEX_DIR, fl.getName());
-						fl.renameTo(nf);
+						File nf = new File(fl.getParentFile(), IndexConstants.BACKUP_INDEX_DIR + "/"+fl.getName());
+						boolean res = fl.renameTo(nf);
+						if(!res) {
+							System.err.println("Renaming from " + fl.getAbsolutePath() + " to " + nf.getAbsolutePath() + " failed");
+						}
 					}
 				}
 			});
