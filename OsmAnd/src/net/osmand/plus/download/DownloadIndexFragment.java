@@ -84,6 +84,11 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		filterText.setText(filter);
 		return view;
 	}
+	
+	@Override
+	public ExpandableListAdapter getAdapter() {
+		return adapter;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

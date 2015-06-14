@@ -1,17 +1,15 @@
 package net.osmand.plus.activities;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -60,6 +58,10 @@ public abstract class OsmandExpandableListFragment extends Fragment
 			listView.setAdapter(a);
 		}
 		
+	}
+	
+	public ExpandableListAdapter getAdapter() {
+		return adapter;
 	}
 	
 	public void fixBackgroundRepeat(View view) {

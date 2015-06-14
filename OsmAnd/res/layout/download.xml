@@ -100,6 +100,15 @@
         android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal" >
 
+        <ImageView
+            android:id="@+id/CancelAll"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_action_remove_dark"
+            android:background="?attr/downloadButtonBackground"
+            android:gravity="center"/>
+        
         <Button
             android:id="@+id/DownloadButton"
             android:layout_width="0dp"
@@ -115,6 +124,7 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:scaleType="centerInside"
+            android:src="@drawable/ic_action_wikipedia"
             android:background="?attr/downloadButtonBackground"
             android:gravity="center"/>
     </LinearLayout>

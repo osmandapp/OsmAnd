@@ -36,7 +36,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -230,7 +229,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				}
 			});
 			confirm.setNegativeButton(R.string.shared_string_no, null);
-			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
+			String fn = FileNameTranslationHelper.getFileName(getActivity(),
+					getMyApplication().getResourceManager().getOsmandRegions(),
+					info.getFileName());
+			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
 			new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);

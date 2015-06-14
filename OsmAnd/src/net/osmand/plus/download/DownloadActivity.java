@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
@@ -31,7 +32,9 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ImageView;
@@ -147,7 +150,26 @@ public class DownloadActivity extends BaseDownloadActivity {
 				downloadWikiFiles();
 			}
 		});
-		((ImageView)findViewById(R.id.WikiButton)).setImageResource(R.drawable.ic_action_wikipedia);
+		
+		findViewById(R.id.CancelAll).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				getEntriesToDownload().clear();
+				updateDownloadButton();
+				for(WeakReference<Fragment> ref : fragList) {
+					Fragment f = ref.get();
+					if(f instanceof OsmAndListFragment) {
+						if(!f.isDetached() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
+							((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
+						}
+					} else if (!f.isDetached() && f instanceof OsmandExpandableListFragment && 
+							((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter){
+						((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
+					}
+				}
+			}
+		});
 
 		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
@@ -310,19 +332,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	}
 
 	protected void downloadWikiFiles() {
-
 		if (Version.isFreeVersion(getMyApplication())) {
 			dialogToInstallPaid();
 		} else {
 			Builder bld = new AlertDialog.Builder(this);
-			// TODO message
-			String countries = "";
 			final List<IndexItem> wi = getWikipediaItems();
+			long size = 0;
 			for(IndexItem i : wi) {
-				countries += i.getDescription() +", ";
+				size += i.getSize();
 			}
-			bld.setMessage(countries);
-			
+			bld.setMessage(getString(R.string.download_wikipedia_files, (size >> 20)));
 			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -330,9 +349,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 					for(IndexItem i : wi) {
 						addToDownload(i);
 					}
+					updateDownloadButton();
 				}
 			});
-			bld.setPositiveButton(R.string.shared_string_cancel, null);
+			bld.setNegativeButton(R.string.shared_string_cancel, null);
 			if(wi.size() > 0) {
 				bld.show();
 			}
