@@ -193,7 +193,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	}
 
 	public ListView selectAllFromCategory(PoiCategory poiCategory) {
-		filter.selectSubTypesToAccept(poiCategory, null);
+		filter.updateTypesToAccept(poiCategory);
 		helper.editPoiFilter(filter);
 		ListView lv = this.getListView();
 		AmenityAdapter la = this.getListAdapter();
