@@ -401,10 +401,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			public void onClick(View v) {
 				String article = "http://"+langSelected.toLowerCase()+".wikipedia.org/wiki/" + title.replace(' ', '_');
-				// If Default language, use EN for the URL, unless we find a better way to determine what the articles default language is
-				if(langSelected.equals("")) {
-					article = "http://en.wikipedia.org/wiki/" + title.replace(' ', '_');
-				}
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(article));
 				ctx.startActivity(i);
