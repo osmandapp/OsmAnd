@@ -3,6 +3,8 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -321,7 +323,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					return true;
 				}
 			};
-			if (OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false).length() > 0) {
+			if (OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false).length() > 0 || 
+					a.getType().isWiki()) {
 				adapter.item(R.string.poi_context_menu_showdescription)
 						.iconColor(R.drawable.ic_action_note_dark).listen(listener).reg();
 			}
@@ -387,10 +390,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		String lng = a.getNameSelected(lang);
 		if(Algorithms.isEmpty(lng)) {
-			// Second choice to display wiki article in if it does not exist in the OsmAnd locale is EN
-			lng = a.getNameSelected("en");
-			// If POI has no "en" name, "" is returned. Unfortunatley no easy way then to determine what the corresponding article language is.
-			// "" is also returned if no name can be found at all
+			lng = "en";
 		}
 
 		final String langSelected = lng;
@@ -464,7 +464,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
 			final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		List<String> names = a.getNames("");
+		Set<String> names = new TreeSet<String>(); 
+		names.addAll(a.getNames("content"));
+		names.addAll(a.getNames("description"));
+		
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
 			MenuItem item = optionsMenu.getMenu().add(vn);

@@ -554,7 +554,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, amenity.getLocation(), amenity, name, z, this,
 				true);
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
-		if (d.toString().trim().length() > 0) {
+		if (d.toString().trim().length() > 0 || amenity.getType().isWiki()) {
 			MenuItem item = optionsMenu
 					.getMenu()
 					.add(R.string.poi_context_menu_showdescription)

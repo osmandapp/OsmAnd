@@ -68,6 +68,11 @@ public class Amenity extends MapObject  {
 			return null;
 		}
 		String str = additionalInfo.get(key);
+		str = unzipContent(str);
+		return str;
+	}
+
+	public String unzipContent(String str) {
 		if (str != null) {
 			if (str.startsWith(" gz ")) {
 				try {
@@ -164,9 +169,6 @@ public class Amenity extends MapObject  {
 				return lang;
 			}
 		}
-		if (!Algorithms.isEmpty(getName())) {
-			return "";
-		}
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
 				return nm.substring("name:".length());
@@ -187,7 +189,7 @@ public class Amenity extends MapObject  {
 				return translateName;
 			}
 		}
-		if (!Algorithms.isEmpty(getName())) {
+		if(!Algorithms.isEmpty(getName())) {
 			return getName();
 		}
 		for (String nm : getAdditionalInfo().keySet()) {
@@ -198,17 +200,13 @@ public class Amenity extends MapObject  {
 		return "";
 	}
 	
-	public List<String> getNames(String defName) {
+	public List<String> getNames(String tag) {
 		List<String> l = new ArrayList<String>();
-		if (!Algorithms.isEmpty(getName())) {
-			l.add(defName);
-		}
 		for (String nm : getAdditionalInfo().keySet()) {
-			if (nm.startsWith("name:")) {
-				l.add(nm.substring("name:".length()));
+			if (nm.startsWith(tag+":")) {
+				l.add(nm.substring(tag.length() +1));
 			}
 		}
-		
 		return l;
 	}
 	

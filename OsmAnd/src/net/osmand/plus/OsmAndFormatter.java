@@ -185,6 +185,9 @@ public class OsmAndFormatter {
 
 	public static String getAmenityDescriptionContent(Context ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
+		if(amenity.getType().isWiki()) {
+			return "";
+		}
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
 			String vl = e.getValue();
@@ -199,9 +202,7 @@ public class OsmAndFormatter {
 			} else if(Amenity.PHONE.equals(key)) {
 				d.append(ctx.getString(R.string.phone) + ": ");
 			} else if(Amenity.WEBSITE.equals(key)) {
-				if(amenity.getType().isWiki()) {
-					continue;
-				}
+				
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
 				PoiCategory pc = amenity.getType();
@@ -211,7 +212,7 @@ public class OsmAndFormatter {
 				} else {
 					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
 				}
-				vl += ": " + e.getValue();
+				vl += ": " + amenity.unzipContent(e.getValue());
 			}
 			d.append(vl).append('\n');
 		}
