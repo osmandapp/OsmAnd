@@ -465,8 +465,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
 		Set<String> names = new TreeSet<String>(); 
-		names.addAll(a.getNames("content"));
-		names.addAll(a.getNames("description"));
+		names.addAll(a.getNames("content", "en"));
+		names.addAll(a.getNames("description", "en"));
 		
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);

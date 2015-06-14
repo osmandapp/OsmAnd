@@ -120,7 +120,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		return true;
 	}
 
-	private void addToDownload(IndexItem item) {
+	protected void addToDownload(IndexItem item) {
 		List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
 		getEntriesToDownload().put(item, download);
 	}
@@ -152,28 +152,39 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	protected void downloadFilesCheckFreeVersion() {
 		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-			boolean wiki = false;
-			for (IndexItem es : DownloadActivity.downloadListIndexThread.getEntriesToDownload().keySet()) {
-				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
-					wiki = true;
-					break;
-				} else if (DownloadActivityType.isCountedInDownloads(es)) {
-					total++;
-				}
-			}
-			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
-				String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-				AlertDialog.Builder msg = new AlertDialog.Builder(this);
-				msg.setTitle(R.string.free_version_title);
-				msg.setMessage(msgTx);
-				msg.setPositiveButton(R.string.shared_string_ok, null);
-				msg.show();
+			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
+				dialogToInstallPaid();
 			} else {
 				downloadFilesCheckInternet();
 			}
 		} else {
 			downloadFilesCheckInternet();
 		}
+	}
+
+	protected void dialogToInstallPaid() {
+		String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
+		AlertDialog.Builder msg = new AlertDialog.Builder(this);
+		msg.setTitle(R.string.free_version_title);
+		msg.setMessage(msgTx);
+		if (Version.isMarketEnabled(getMyApplication())) {
+			msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication())
+							+ "net.osmand.plus"));
+					try {
+						startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+					}
+				}
+			});
+			msg.setNegativeButton(R.string.shared_string_cancel, null);
+		} else {
+			msg.setNeutralButton(R.string.shared_string_ok, null);
+		}
+		msg.show();
 	}
 
 	protected void downloadFilesCheckInternet() {
@@ -242,7 +253,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
 			msg.setMessage(m);
 			if (Version.isMarketEnabled(getMyApplication())) {
-				msg.setNeutralButton(R.string.install_paid, new DialogInterface.OnClickListener() {
+				msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + "net.osmand.plus"));
@@ -252,8 +263,11 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 						}
 					}
 				});
+				msg.setNegativeButton(R.string.shared_string_cancel, null);
+			} else {
+				msg.setNeutralButton(R.string.shared_string_ok, null);
 			}
-			msg.setPositiveButton(R.string.shared_string_ok, null);
+			
 			msg.show();
 		}
 	}
