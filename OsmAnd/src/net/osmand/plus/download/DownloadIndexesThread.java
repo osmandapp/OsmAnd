@@ -96,6 +96,11 @@ public class DownloadIndexesThread {
 		return indexFiles != null ? indexFiles.getIndexFiles() : null;
 	}
 
+	
+	public IndexFileList getIndexFiles() {
+		return indexFiles;
+	}
+	
 	public Map<String, String> getIndexFileNames(){
 		return indexFileNames;
 	}
@@ -424,7 +429,7 @@ public class DownloadIndexesThread {
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							if (uiActivity instanceof DownloadActivity){
-								uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+								((DownloadActivity)uiActivity).updateDownloadButton();
 							}
 						}
 					}

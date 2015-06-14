@@ -200,11 +200,13 @@ public class Amenity extends MapObject  {
 		return "";
 	}
 	
-	public List<String> getNames(String tag) {
+	public List<String> getNames(String tag, String defTag) {
 		List<String> l = new ArrayList<String>();
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith(tag+":")) {
 				l.add(nm.substring(tag.length() +1));
+			} else if(nm.equals(tag)) {
+				l.add(defTag);
 			}
 		}
 		return l;

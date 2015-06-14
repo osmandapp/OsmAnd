@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <net.osmand.plus.views.controls.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="visible" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -25,7 +25,7 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="5dp"
             android:gravity="center_vertical|left"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <ProgressBar
                 android:id="@+id/IndeterminateProgressBar"
@@ -71,7 +71,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <ProgressBar
                 android:id="@+id/memory_progress"
@@ -88,21 +88,35 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/DownloadButton"
+    <LinearLayout
         android:layout_width="fill_parent"
+        android:id="@+id/DownloadLayout"
         android:layout_height="@dimen/list_item_height"
-        android:background="?attr/downloadButtonBackground"
-        android:gravity="center"
-        android:text="@string/shared_string_download"
-        android:textColor="?attr/pstsTextColor"
-        android:visibility="gone" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/DownloadButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_weight="1"
+            android:background="?attr/downloadButtonBackground"
+            android:gravity="center"
+            android:text="@string/shared_string_download"
+            android:textColor="?attr/pstsTextColor"/>
+
+        <ImageView
+            android:id="@+id/WikiButton"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:scaleType="centerInside"
+            android:background="?attr/downloadButtonBackground"
+            android:gravity="center"/>
+    </LinearLayout>
 
 </LinearLayout>

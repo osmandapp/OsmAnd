@@ -3,8 +3,10 @@ package net.osmand.plus.download;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +21,7 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -137,6 +140,14 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 
 		});
+		findViewById(R.id.WikiButton).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				downloadWikiFiles();
+			}
+		});
+		((ImageView)findViewById(R.id.WikiButton)).setImageResource(R.drawable.ic_action_wikipedia);
 
 		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
@@ -158,9 +169,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		changeType(downloadTypes.get(0));
 	}
 
-
-
-
+	
+	
 	public Map<String, String> getIndexActivatedFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
 	}
@@ -299,6 +309,36 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	}
 
+	protected void downloadWikiFiles() {
+
+		if (Version.isFreeVersion(getMyApplication())) {
+			dialogToInstallPaid();
+		} else {
+			Builder bld = new AlertDialog.Builder(this);
+			// TODO message
+			String countries = "";
+			final List<IndexItem> wi = getWikipediaItems();
+			for(IndexItem i : wi) {
+				countries += i.getDescription() +", ";
+			}
+			bld.setMessage(countries);
+			
+			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					for(IndexItem i : wi) {
+						addToDownload(i);
+					}
+				}
+			});
+			bld.setPositiveButton(R.string.shared_string_cancel, null);
+			if(wi.size() > 0) {
+				bld.show();
+			}
+		}
+	}
+	
 	@Override
 	public void updateDownloadButton() {
 //		View view = getView();
@@ -308,7 +348,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 //		int x = getExpandableListView().getScrollX();
 //		int y = getExpandableListView().getScrollY();
 		if (getEntriesToDownload().isEmpty()) {
-			findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+			findViewById(R.id.DownloadLayout).setVisibility(View.GONE);
 		} else {
 			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
@@ -320,7 +360,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			} else {
 				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
 			}
-			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			findViewById(R.id.DownloadLayout).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
 				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
 				boolean excessLimit = left < 0;
@@ -331,6 +371,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 				}
 			}
 			((Button) findViewById(R.id.DownloadButton)).setText(text);
+			List<IndexItem> wikipediaItems = getWikipediaItems();
+			findViewById(R.id.WikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
 		}
 		
 		for(WeakReference<Fragment> ref : fragList) {
@@ -353,6 +395,38 @@ public class DownloadActivity extends BaseDownloadActivity {
 //		if (scroll) {
 //			getExpandableListView().scrollTo(x, y);
 //		}
+	}
+
+
+
+	private List<IndexItem> getWikipediaItems() {
+		Set<String> wikipediaItems = new HashSet<String>();
+		Map<String, String> indexed = getMyApplication().getResourceManager().getIndexFileNames();
+		for(IndexItem i : getEntriesToDownload().keySet()) {
+			if(i.getType() == DownloadActivityType.NORMAL_FILE) {
+				boolean fit = true;
+				fit = fit && i.getFileName().contains("obf");
+				fit = fit && !i.getFileName().contains("world");
+				String fname = i.getBasename();
+				if(fit && !indexed.containsKey(fname+".wiki.obf") ) {
+					wikipediaItems.add(fname);
+				}
+			} else if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+				wikipediaItems.remove(i.getBasename());
+			}
+		}
+		List<IndexItem> res = new ArrayList<IndexItem>();
+		IndexFileList list = downloadListIndexThread.getIndexFiles();
+		if (list != null) {
+			List<IndexItem> indexFiles = list.getIndexFiles();
+			for(IndexItem i : indexFiles) {
+				if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE && 
+						wikipediaItems.contains(i.getBasename())) {
+					res.add(i);
+				}
+			}
+		}
+		return res;
 	}
 	
 	
@@ -434,6 +508,11 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		}
 	}
+
+
+
+
+	
 
 
 }

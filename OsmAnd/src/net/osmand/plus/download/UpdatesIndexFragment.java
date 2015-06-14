@@ -226,8 +226,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	public void deselectAll() {
 		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
-
-		getDownloadActivity().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+		getDownloadActivity().updateDownloadButton();
 	}
 
 	private void filterExisting() {
