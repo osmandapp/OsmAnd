@@ -22,8 +22,8 @@
 	<string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para utilizar esta función.</string>
 	<string name="welmode_download_maps">Descargar mapas</string>
-	<string name="welcome_select_region">Para reflejar correctamente las señales y regulaciones de tráfico, elija su región de conducción:</string>
-	<string name="welcome_text">¡OsmAnd proporciona visualización de mapas y navegación global sin conexión!</string>
+	<string name="welcome_select_region">Para reflejar correctamente las señales y normas de tráfico, elija su región de conducción:</string>
+	<string name="welcome_text">¡OsmAnd ofrece visualización de mapas y navegación global sin conexión!</string>
 	<string name="welcome_header">Bienvenido</string>
     <string name="current_route">Ruta actual</string>
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
@@ -532,7 +532,7 @@
 	<string name="background_service_int">Intervalo de activación del GPS</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-	<string name="save_track_to_gpx_globally_descr">El registro de la ubicación en un archivo GPX puede des/activarse usando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="save_track_to_gpx_globally_descr">Registre la ubicación en un archivo GPX, pudiendo des/activarlo usando el control de grabación GPX en la pantalla del mapa</string>
 	<string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
 	<string name="save_track_to_gpx_descrp">Las trazas se guardarán en la carpeta de trazas durante la navegación</string>
 	<string name="save_track_interval">Intervalo de guardado durante navegación</string>

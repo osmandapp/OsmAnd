@@ -340,7 +340,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			showWiki(ctx, app, a, lang);
+			// First choice to display wiki article in should be the selected OsmAnd locale (not the map display language)
+			//showWiki(ctx, app, a, lang);
+			showWiki(ctx, app, a, app.getSettings().PREFERRED_LOCALE.get());
 		} else {
 			String d = OsmAndFormatter.getAmenityDescriptionContent(app, a, false);
 			SpannableString spannable = new SpannableString(d);
@@ -371,7 +373,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme:
 							R.style.OsmandDarkTheme);
-		String content = a.getDescription(lang);
 		final String title = a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -383,25 +384,33 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setTitle(title);
 		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+
 		String lng = a.getNameSelected(lang);
 		if(Algorithms.isEmpty(lng)) {
-			lng = "EN";
+			// Second choice to display wiki article in if it does not exist in the OsmAnd locale is EN
+			lng = a.getNameSelected("en");
+			// If POI has no "en" name, "" is returned. Unfortunatley no easy way then to determine what the corresponding article language is.
+			// "" is also returned if no name can be found at all
 		}
+
 		final String langSelected = lng;
+		String content = a.getDescription(langSelected);
 		final Button bottomBar = new Button(ctx);
 		bottomBar.setText(R.string.read_full_article);
 		bottomBar.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				String article = "http://"+langSelected.toLowerCase()+".wikipedia.org/wiki/" + title.replace(' ', '_');
+				// If Default language, use EN for the URL, unless we find a better way to determine what the articles default language is
+				if(langSelected.equals("")) {
+					article = "http://en.wikipedia.org/wiki/" + title.replace(' ', '_');
+				}
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(article));
 				ctx.startActivity(i);
 			}
 		});
 		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener()  {
-			
 			@Override
 			public boolean onMenuItemClick(final MenuItem item) {
 				showPopupLangMenu(ctx, topBar, app, a, dialog);
@@ -455,7 +464,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
 			final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		List<String> names = a.getNames("en");
+		List<String> names = a.getNames("");
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
 			MenuItem item = optionsMenu.getMenu().add(vn);

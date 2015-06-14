@@ -2245,7 +2245,7 @@
     <string name="storage_directory_default">내부 메모리</string>
     <string name="storage_directory">지도 저장소</string>
     <string name="shared_string_copy">복사</string>
-    <string name="rendering_value_disabled_name">비활성화됨</string>
+    <string name="rendering_value_disabled_name">사용 안 함</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">루트 범위에 따라 색상변경</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
     <string name="osmo_share_my_location">내 위치를 공유</string>
@@ -2256,4 +2256,14 @@
 	<string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>
     <string name="use_fast_recalculation">스마트한 경로 재계산</string>
 	<string name="use_fast_recalculation_desc">긴 여행인 경우 경로 다시 계산</string>
-</resources>
+<string name="gps_network_not_enabled">위치 서비스는 사용할 수 없습니다. 설정을 하시겠습니까?</string>
+    <string name="disable_recording_once_app_killed">단독 로깅 방지</string>
+    <string name="disable_recording_once_app_killed_descrp">앱이 죽을 때 GPX 로깅은 일시 중지 합니다. (OsmAnd 절전 모드 표시는 안드로이드 알림 표시줄에서 사라집니다.)</string>
+	<string name="shared_string_import2osmand">OsmAnd로 가져오기</string>
+    <string name="read_full_article">전체 기사 읽기 (온라인)</string>
+    <string name="download_wikipedia_item">위키백과</string>
+    <string name="local_indexes_cat_wiki">위키백과</string>
+    <string name="shared_string_show_details">세부 정보 보기</string>
+    <string name="osm_edit_context_menu_delete">OSM 편집을 삭제</string>
+    <string name="local_recordings_delete_all_confirm">%1$ 노트를 삭제 하려고 합니다. 확실한가요?</string>
+	</resources>

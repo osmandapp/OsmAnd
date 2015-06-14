@@ -333,7 +333,7 @@
 	<string name="poi_prosecutor">Fiscal</string>
 	<string name="poi_pension_fund">Seguridad social</string>
 	<string name="poi_migration">Migración</string>
-	<string name="poi_tax_inspection">Inspección fiscal</string>
+	<string name="poi_tax_inspection">Fiscalización (AFIP)</string>
 	<string name="poi_office_administrative">Oficina administrativa</string>
 	<string name="poi_customs">Aduanas</string>
 	<string name="poi_city">Ciudad</string>
@@ -605,7 +605,7 @@
 	<string name="poi_marina">Marina</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Juegos infantiles</string>
-	<string name="poi_bench">Banco</string>
+	<string name="poi_bench">"Banco (asiento) "</string>
 	<string name="poi_swimming_pool">Pileta</string>
 	<string name="poi_water_park">Parque acuático</string>
 	<string name="poi_park">Parque/Plaza</string>
