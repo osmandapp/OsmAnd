@@ -1988,4 +1988,6 @@
     <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>
     <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забіта (праз надаўнія праграмы). (Апавяшчэньне ў вобласьці падказак Android пра фонавы рэжым OsmAnd зьнікне.)</string>
 	<string name="gps_network_not_enabled">Служба месцазнаходжаньня не ўключаная. Вы хочаце ўключыць яе?</string>
+    <string name="archive_wikipedia_data">Сьцягнутыя зьвесткі Вікіпэдыі састарэлі і непрыдатныя. Вы хочаце заархіваваць іх?</string>
+    <string name="download_wikipedia_files">Вы хочаце сьцягнуць дадатковыя зьвесткі Вікіпэдыі (%1$s МБ) ?</string>
     </resources>

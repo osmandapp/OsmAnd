@@ -2018,4 +2018,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android).</string>
 	<string name="shared_string_import2osmand">Importació a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Sou a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
-	</resources>
+	<string name="archive_wikipedia_data">Teniu dades baixades de viquipèdia antigues i incompatibles. Les voleu desar?</string>
+    <string name="download_wikipedia_files">Voleu baixar dades addicionals de Viquipèdia (%1$s MB) ?</string>
+    </resources>
