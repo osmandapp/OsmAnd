@@ -402,7 +402,7 @@
   <string name="filter_existing_indexes">Descargados</string>
   
   <string name="shared_string_select_all">Seleccionar todo</string>
-  <string name="shared_string_refresh">Recargar</string>
+  <string name="shared_string_refresh">Actualizar</string>
   <string name="fast_route_mode">Ruta más rápida</string>
   <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la ruta más corta "</string>
   <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>
@@ -715,7 +715,7 @@
   <string name="context_menu_item_update_map">Actualizar mapa</string>
   <string name="context_menu_item_open_bug">Abrir nota en OSM</string>
   <string name="context_menu_item_create_poi">Crear PDI</string>
-  <string name="shared_string_yes">Si</string>
+  <string name="shared_string_yes">Sí</string>
   <string name="shared_string_cancel">Cancelar</string>
   <string name="shared_string_apply">Aplicar</string>
   <string name="shared_string_add">Añadir</string>
@@ -784,7 +784,7 @@
   <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas en línea o almacenadas localmente</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Este complemento puede acceder a muchos tipos de mapas (llamados teselas o ráster) en línea, desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
+  <string name="osmand_rastermaps_plugin_description">"Con este complemento puede acceder a muchos tipos de mapas en línea (llamados de teselas o ráster), desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n\nCualquiera de estos mapas se puede utilizado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas normales de OsmAnd en línea). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando desee.
 \n\nLas teselas de mapas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para su uso fuera de línea (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos sqlite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
   <string name="osmand_background_plugin_description">Muestra los ajustes para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
@@ -1118,8 +1118,8 @@
 <string name="audionotes_plugin_description">Este complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
     <string name="audionotes_plugin_name">Notas de audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel en línea</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas en línea de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
-\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
@@ -1595,7 +1595,7 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para el monitoreo avanzado en directo OsMo, ver http://osmo.mobi.
+    <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para la monitorización avanzada en directo OsMo, ver http://osmo.mobi.
 \n\nPuede hacer un seguimiento de otros dispositivos y ser rastreado. Puede crear espontáneamente grupos anónimos, compartir la ubicación de cada uno, y comunicarse. Viene con varias opciones para el seguimiento por sesión o seguimiento permanente.
 \n\nLos grupos anónimos se crean para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorización OSM)</string>
@@ -1826,7 +1826,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="record_plugin_name">Grabar viajes</string>
+    <string name="record_plugin_name">Grabación de viaje</string>
     <string name="record_plugin_description">"Este complemento activa la funcionalidad para grabar y guardar sus trazas manualmente tocando el control de registro GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden utilizar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
@@ -2023,7 +2023,7 @@
 	<string name="osmand_parking_overdue">vencido</string>
 	<string name="delay_to_start_navigation">Iniciar navegación giro-a-giro después de…</string>
     <string name="shared_string_go">Ir</string>
-	<string name="delay_to_start_navigation_descr">Especifique el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
+	<string name="delay_to_start_navigation_descr">Especifica el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
     <string name="shared_string_not_use">No usar</string>
 	<string name="local_osm_changes_upload_all_confirm">Va a subir %1$d cambios a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
@@ -2049,12 +2049,12 @@
 	<string name="shared_string_places">Lugares</string>
 	<string name="shared_string_search">Buscar</string>
 	<string name="filter_poi_hint">Filtrar por nombre</string>
-    <string name="search_poi_category_hint">Escribe para buscar en todo</string>
+    <string name="search_poi_category_hint">Escribe para buscar en todos</string>
     <string name="index_name_netherlands">Europa - Países Bajos</string>
 	<string name="rendering_value__name">Predeterminado</string>
     <string name="rendering_value_highContrastRoads_name">Carreteras en alto contraste</string>
 	<string name="specified_directiory_not_writeable">No se pueden crear mapas en el directorio especificado</string>
-	<string name="copying_osmand_file_failed">Fallo en el copiado de archivos</string>    
+	<string name="copying_osmand_file_failed">Fallo copiando archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
     <string name="storage_directory_internal_app">Memoria de aplicación interna</string>
@@ -2085,5 +2085,5 @@
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">El servicio de ubicación no está activado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Evita el registro autónomo</string>
-    <string name="disable_recording_once_app_killed_descrp">Se pausará el registro GPX cuando se mate a la aplicación (a través de aplicaciones recientes). (Las indicaciones del modo reposo OsmAnd desaparecerán de la barra de notificaciones Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Se pausará el registro GPX cuando se cierre la aplicación (a través de aplicaciones recientes). (Las indicación del modo reposo de OsmAnd desaparecerá de la barra de notificaciones de Android.)</string>
 	</resources>

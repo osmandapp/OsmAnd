@@ -443,7 +443,7 @@
 	<string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
 	<string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
-    <string name="enable_plugin_monitoring_services">"Abìlita su plugin de arrastamentu pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
+    <string name="enable_plugin_monitoring_services">"Abìlita su plugin de registratzione biàgios pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
 	<string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
     <string name="tip_recent_changes_0_8_3_t">"Mudas in sa 0.8.3:
@@ -1973,10 +1973,12 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
     <string name="osm_edit_context_menu_delete">Burra modìfica OSM</string>    
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
-    <string name="read_full_article">Leghe s\'artìculu intreu</string>
+    <string name="read_full_article">Leghe s\'artìculu intreu (in lìnia)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Ammustra minujas</string>
     <string name="local_recordings_delete_all_confirm">Istas pro burrare %1$d notas. Seguru ses?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="gps_network_not_enabled">Su servìtziu de localizatzione no est abilitadu. Lu boles allùere?</string>
+    <string name="disable_recording_once_app_killed">Èvita/istransi sa registratzione autònoma</string>
     </resources>

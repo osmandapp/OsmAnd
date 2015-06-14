@@ -2059,4 +2059,13 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_session_token">Маркер за сесия: %1$s</string>
     <string name="osmo_auth_pending">Чака за разрешение…</string>
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
-    </resources>
+    <string name="download_wikipedia_item">Уикипедия</string>
+    <string name="local_indexes_cat_wiki">Уикипедия</string>
+    <string name="shared_string_show_details">Покажи подробни данни</string>
+    <string name="gps_network_not_enabled">Услугата за местоположение не е разрешена. Искате ли да я включите?</string>
+    <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
+    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено. (Индикаторът за OsmAnd Sleep режим изчезва зоната за уведомяване на Андроид.)</string>
+	<string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
+    <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
+    <string name="local_recordings_delete_all_confirm">Възнамерявате да изтриете %1$d бележки. Сигурни ли сте?</string>
+	</resources>
