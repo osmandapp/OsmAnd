@@ -46,6 +46,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OpeningHoursView;
+import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
@@ -612,7 +613,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		Map<String, PoiType> subCategories = new LinkedHashMap<>(poiTypes.getAllTranslatedNames(poiCategory, false));
 		for (Map.Entry<String, PoiType> s : allTranslatedSubTypes.entrySet()) {
 			if (!subCategories.containsKey(s.getKey())) {
-				subCategories.put(s.getKey(), s.getValue());
+				subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(s.getKey()), s.getValue());
 			}
 		}
 		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(activity, R.layout.list_textview, 
