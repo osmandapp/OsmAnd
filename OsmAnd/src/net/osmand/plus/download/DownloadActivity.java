@@ -379,7 +379,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					for(String w : wiki) {
-						File fl = new File(w);
+						File fl = getMyApplication().getAppPath(w);
 						File nf = new File(fl.getParentFile(), IndexConstants.BACKUP_INDEX_DIR + "/"+fl.getName());
 						boolean res = fl.renameTo(nf);
 						if(!res) {
