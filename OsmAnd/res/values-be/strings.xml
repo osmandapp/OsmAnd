@@ -1918,7 +1918,7 @@
 	<string name="shared_string_currently_recording_track">Бягучы сьлед, які запісваецца</string>
 	<string name="plugin_touringview_name">Турыстычная мапа</string>
 	<string name="rename_failed">Не атрымалася перайменаваць.</string>
-	<string name="days_behind">дзён таму</string>
+	<string name="days_behind">дз. таму</string>
 	<string name="shared_string_release">Выдана</string>
 	<string name="shared_string_my_favorites">Мае ўлюбёныя</string>
 	<string name="confirmation_to_clear_history">Вы хочаце вычысьціць гісторыю?</string>
