@@ -404,8 +404,8 @@ public class EditingPOIDialogProvider implements DialogProvider {
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
 				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
-				String subType = typeText.getText().toString();
-				if (allTranslatedSubTypes.get(subType.trim()) != null) {
+				String subType = typeText.getText().toString().trim().toLowerCase();
+				if (allTranslatedSubTypes.get(subType) != null) {
 					PoiType pt = allTranslatedSubTypes.get(subType);
 					n.putTag(pt.getOsmTag(), pt.getOsmValue());
 					if (pt.getOsmTag2() != null) {
@@ -478,9 +478,9 @@ public class EditingPOIDialogProvider implements DialogProvider {
 	}
 	
 	private void updateOsmTagValue(final Amenity a) {
-		String subType = typeText.getText().toString();
+		String subType = typeText.getText().toString().trim().toLowerCase();
 		String s = "OSM ";
-		if (allTranslatedSubTypes.get(subType.trim()) != null) {
+		if (allTranslatedSubTypes.get(subType) != null) {
 			PoiType pt = allTranslatedSubTypes.get(subType);
 			s = pt.getOsmTag() + "=" + pt.getOsmValue();
 			if (pt.getOsmTag2() != null) {
@@ -519,7 +519,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 			public void afterTextChanged(Editable s) {
 				String str = s.toString();
 				a.setSubType(str);
-				PoiType st = allTranslatedSubTypes.get(str);
+				PoiType st = allTranslatedSubTypes.get(str.trim().toLowerCase());
 				if(st != null && a.getType() != st.getCategory() && st.getCategory() != null){
 					a.setType(st.getCategory());
 					typeButton.setText(st.getCategory().getTranslation());

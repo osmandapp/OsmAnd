@@ -133,7 +133,8 @@ public class MapPoiTypes {
 				if(pt.isReference()) {
 					continue;
 				}
-				translation.put(pt.getTranslation(), pt);
+				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
+				translation.put(pt.getTranslation().toLowerCase(), pt);
 			}
 		}
 		return translation;
@@ -415,7 +416,7 @@ public class MapPoiTypes {
 	public String getTranslation(AbstractPoiType abstractPoiType) {
 		if(poiTranslator != null) {
 			String translation = poiTranslator.getTranslation(abstractPoiType);
-			if(translation != null) {
+			if(!Algorithms.isEmpty(translation)) {
 				return translation;
 			}
 		}
