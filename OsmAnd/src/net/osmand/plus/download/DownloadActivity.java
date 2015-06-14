@@ -431,7 +431,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 				if(fit && !indexed.containsKey(fname+".wiki.obf") ) {
 					wikipediaItems.add(fname);
 				}
-			} else if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+			}
+		}
+		for(IndexItem i : getEntriesToDownload().keySet()) {
+			if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
 				wikipediaItems.remove(i.getBasename());
 			}
 		}
