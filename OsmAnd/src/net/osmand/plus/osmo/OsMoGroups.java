@@ -1,9 +1,18 @@
 package net.osmand.plus.osmo;
 
-import android.text.TextUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.osmand.Location;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
@@ -14,14 +23,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
@@ -206,6 +207,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				disconnectAllGroupUsers(group);
+				disableGroupTracks(group, group.groupTracks);
+				disableGroupTracks(group, Collections.singleton(group.name + " points.gpx"));
 			}
 			processed = true;
 		} else if(command.equalsIgnoreCase("GROUP_CONNECT")) {
@@ -354,6 +357,19 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		return processed;
 	}
 
+	private void disableGroupTracks(OsMoGroup group, Collection<String> tracks) {
+		if(!tracks.isEmpty()) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			for(String t : tracks) {
+				SelectedGpxFile sg = helper.getSelectedFileByName("osmo/"+t);
+				if(sg != null && sg.getGpxFile() != null) {
+					helper.selectGpxFile(sg.getGpxFile(), false, false);
+				}
+			}
+		}
+		
+	}
+
 	private OsMoGroup parseGroup(JSONObject obj) throws JSONException {
 		OsMoGroup groupe = new OsMoGroup();
 		groupe.enabled = !(obj.has(ACTIVE) && ("0".equals(obj.getString(ACTIVE)) || 
@@ -444,10 +460,16 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			if (obj.has(TRACK)) {
 				JSONArray ar = obj.getJSONArray(TRACK);
 				JSONObject[] a = new JSONObject[ar.length()];
+				Set<String> toDeleteT = new HashSet<String>(gr.groupTracks);
+				gr.groupTracks.clear();
 				for (int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);
+					String track = a[i].getString("name") + ".gpx";
+					gr.groupTracks.add(track);
+					toDeleteT.remove(track);
 				}
 				plugin.getDownloadGpxTask(true).execute(a);
+				disableGroupTracks(gr, toDeleteT);
 			}
 			
 			if (obj.has(POINT)) {

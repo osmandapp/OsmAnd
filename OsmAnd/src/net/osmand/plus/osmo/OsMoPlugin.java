@@ -1,6 +1,7 @@
 package net.osmand.plus.osmo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -400,8 +401,10 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						boolean visible = obj.has("visible");
 						boolean changed = false;
 						if(!f.exists() || (f.lastModified() != timestamp) ) {
-							boolean sizeEqual = f.exists() && obj.has("size") && obj.getLong("size") == f.length();
-							if(sizeEqual && !f.setLastModified(timestamp - 1)){
+							long len = !f.exists() ? -1 : f.length();
+							boolean sizeEqual = obj.has("size") && obj.getLong("size") == len;
+							boolean modifySupported = f.setLastModified(timestamp - 1);
+							if(sizeEqual && !modifySupported){
 								// false alarm
 							} else {
 								changed = true;
@@ -409,35 +412,21 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 								log.info("Download gpx " + url);
 								DownloadFileHelper df = new DownloadFileHelper(app);
 								InputStream is = df.getInputStreamToDownload(new URL(url), false);
-								FileOutputStream fout = new FileOutputStream(f);
-								byte[] buf = new byte[1024];
-								int k;
-								while ((k = is.read(buf)) >= 0) {
-									fout.write(buf, 0, k);
-								}
-								fout.close();
-								is.close();
-								if(color != 0) {
-									try {
-										GPXFile loaded = GPXUtilities.loadGPXFile(app, f);
-										if(loaded.tracks.size() > 0) {
-											for(Track t : loaded.tracks) {
-												t.setColor(color);
-											}
-											GPXUtilities.writeGpxFile(f, loaded, app);
-										}
-									} catch (RuntimeException e) {
-										e.printStackTrace();
-									}
-								}
-								if(!f.setLastModified(timestamp)) {
-									log.error("Timestamp updates are not supported");
+								int av = is.available();
+								if(av > 0 && !modifySupported && len == av) {
+									// ignore
+									is.close();
+								} else {
+									redownloadFile(f, timestamp, color, is);
+									publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));
 								}
 							}
-							publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));
 						}
 						if(visible && (changed || makeVisible)) {
 							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+							if(color != 0) {
+								selectGPXFile.setColor(color);
+							}
 							app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
 						}
 					} catch (JSONException e) {
@@ -449,6 +438,21 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					}
 				}
 				return errors;
+			}
+
+			private void redownloadFile(File f, long timestamp, int color, InputStream is)
+					throws FileNotFoundException, IOException {
+				FileOutputStream fout = new FileOutputStream(f);
+				byte[] buf = new byte[1024];
+				int k;
+				while ((k = is.read(buf)) >= 0) {
+					fout.write(buf, 0, k);
+				}
+				fout.close();
+				is.close();
+				if(!f.setLastModified(timestamp)) {
+					log.error("Timestamp updates are not supported");
+				}
 			}
 			
 			protected void onProgressUpdate(String... values) {
