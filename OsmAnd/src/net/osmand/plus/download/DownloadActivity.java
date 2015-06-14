@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -350,6 +351,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 						addToDownload(i);
 					}
 					updateDownloadButton();
+					checkOldWikiFiles();
 				}
 			});
 			bld.setNegativeButton(R.string.shared_string_cancel, null);
@@ -359,6 +361,34 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 	
+	protected void checkOldWikiFiles() {
+		Map<String, String> fileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		final Set<String> wiki = new HashSet<String>();
+		for(String  s : fileNames.keySet()) {
+			if(s.contains("_wiki")) {
+				wiki.add(s);
+			}
+		}
+		if(wiki.size() > 0) {
+			Builder bld = new AlertDialog.Builder(this);
+			bld.setMessage(R.string.archive_wikipedia_data);
+			bld.setNegativeButton(R.string.shared_string_cancel, null);
+			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					for(String w : wiki) {
+						File fl = new File(w);
+						File nf = new File(fl.getParentFile() +"/" + IndexConstants.BACKUP_INDEX_DIR, fl.getName());
+						fl.renameTo(nf);
+					}
+				}
+			});
+			bld.show();
+		}
+	}
+
+
 	@Override
 	public void updateDownloadButton() {
 //		View view = getView();
