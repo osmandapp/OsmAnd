@@ -1,5 +1,7 @@
 package net.osmand;
 
+import java.util.Locale;
+
 
 
 /**
@@ -23,7 +25,7 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
 		this.collator = OsmAndCollator.primaryCollator();
-		this.part = part;
+		this.part = part.toLowerCase(Locale.getDefault());
 		this.mode = mode;
 	}
 
@@ -94,8 +96,9 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @param theStart
 	 * @return true if searchIn starts with token
 	 */
-	public static boolean cstartsWith(Collator collator, String searchIn, String theStart, 
+	public static boolean cstartsWith(Collator collator, String searchInParam, String theStart, 
 			boolean checkBeginning, boolean checkSpaces) {
+		String searchIn = searchInParam.toLowerCase(Locale.getDefault());
 		int startLength = theStart.length();
 		int searchInLength = searchIn.length();
 		if (startLength == 0) {
