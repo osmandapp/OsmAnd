@@ -23,9 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.osmo.OsMoService;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -34,21 +32,18 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.util.Algorithms;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
@@ -64,7 +59,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -496,7 +490,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName()); 
+			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
+					view.getSettings().MAP_PREFERRED_LOCALE.get())); 
 		}
 		return null;
 	}
@@ -526,7 +521,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public String getText(Amenity o) {
-		return o.getName(view.getSettings().usingEnglishNames());
+		return o.getName(view.getSettings().MAP_PREFERRED_LOCALE.get());
 	}
 
 	@Override
