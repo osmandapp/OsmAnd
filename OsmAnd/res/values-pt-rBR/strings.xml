@@ -1717,4 +1717,6 @@
 	<string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
     <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
-	</resources>
+	<string name="archive_wikipedia_data">Você tem dados baixados da wikipédia antigos e incompatíveis. Quer arquivá-los?</string>
+    <string name="download_wikipedia_files">Você quer baixar dados adicionais da wikipédia (%1$s MB)?</string>
+    </resources>
