@@ -812,7 +812,7 @@
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adresser</string>
-	<string name="downloading_list_indexes">Hämtar lista med tillgängliga regioner …</string>
+	<string name="downloading_list_indexes">Hämtar lista över tillgängliga regioner …</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
 	
 	<string name="fav_points_edited">Favoritpunkten redigerades</string>
@@ -1894,4 +1894,6 @@
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
     <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds vilolägesindikation försvinner från Androids aviseringsfält.)</string>
-	</resources>
+	<string name="archive_wikipedia_data">Du har hämtat gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
+    <string name="download_wikipedia_files">Vill du hämta ytterligare data från Wikipedia (%1$s MB)?</string>
+    </resources>
