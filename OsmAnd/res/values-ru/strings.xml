@@ -1654,7 +1654,7 @@
 	<string name="sleep_mode_stop_dialog">Выключить фоновый режим GPS?</string>
 	<string name="stop_navigation_service">Выключить</string>
 	<string name="keep_navigation_service">Оставить</string>
-	<string name="live_monitoring_m_descr">Отправлять отслеживание на указанный веб-сервис, если включена запись GPX.</string>
+	<string name="live_monitoring_m_descr">Отправлять данные отслеживания на указанный веб-сервис, если включена запись GPX.</string>
 	<string name="live_monitoring_m">Онлайн слежение (требуется GPX)</string>
     <string name="live_monitoring_start">Начать онлайн слежение</string>
 	<string name="live_monitoring_stop">Остановить онлайн слежение</string>
@@ -1992,9 +1992,10 @@
     <string name="local_indexes_cat_wiki">Википедия</string>
     <string name="shared_string_show_details">Показать детали</string>
     <string name="download_wikipedia_maps">Википедия</string>
-    <string name="read_full_article">Читать полный текст статьи</string>
+    <string name="read_full_article">Читать полный текст статьи (онлайн)</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Вы собираетесь удалить %1$d заметок. Вы уверены?</string>
 	<string name="gps_network_not_enabled">Служба определения координат не включена. Вы хотите включить её?</string>
-    <string name="disable_recording_once_app_killed_descrp">Если отмечено, то после завершения приложения (через последние приложений) запись GPX будет поставлена на паузу. (Индикация режима сна OsmAnd исчезнет с панели уведомлений Android).</string>
-	</resources>
+    <string name="disable_recording_once_app_killed_descrp">Если отмечено, то после завершения приложения (через последние приложений) запись GPX будет поставлена на паузу. (Индикация режима сна OsmAnd исчезнет с панели уведомлений Android.)</string>
+	<string name="download_wikipedia_files">Хотите загрузить дополнительные данные Википедии (%1$s Мб) ?</string>
+    </resources>
