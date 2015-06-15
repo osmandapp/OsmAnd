@@ -157,7 +157,7 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(PHONE, phone);
 	}
 	
-	public String getNameSelected(String lang) {
+	public String getNameSelected(String lang, String defLang) {
 		if (lang != null) {
 			String translateName;
 			if (lang.equals("en")) {
@@ -168,6 +168,9 @@ public class Amenity extends MapObject  {
 			if (!Algorithms.isEmpty(translateName)) {
 				return lang;
 			}
+		}
+		if(!Algorithms.isEmpty(getName())) {
+			return defLang;
 		}
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
