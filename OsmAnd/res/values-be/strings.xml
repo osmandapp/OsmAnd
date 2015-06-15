@@ -1976,7 +1976,7 @@
     <string name="shared_string_logoff">Выйсьці</string>
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з прызначэньнем маршруту</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з праглядам маршруту</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     <string name="download_wikipedia_item">Вікіпэдыя</string>
