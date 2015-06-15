@@ -693,9 +693,9 @@ public class RoutingHelper {
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String nm = rs.getObject().getName();
+			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
 			String rf = rs.getObject().getRef();
-			String dn = rs.getObject().getDestinationName();
+			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get());
 			return formatStreetName(nm, rf, dn);
 		}
 		return null;

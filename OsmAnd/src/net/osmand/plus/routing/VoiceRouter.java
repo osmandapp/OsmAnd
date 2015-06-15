@@ -555,10 +555,11 @@ public class VoiceRouter {
 					getTermString(getSpeakablePointName(i.getDestinationName())) });
 			Term current = empty;
 			if (currentSegment != null) {
+				
 				RouteDataObject obj = currentSegment.getObject();
 				current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
-						getTermString(getSpeakablePointName(obj.getName())),
-						getTermString(getSpeakablePointName(obj.getDestinationName())) });
+						getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get()))),
+						getTermString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()))) });
 			}
 			Struct voice = new Struct("voice", next, current );
 			return voice;

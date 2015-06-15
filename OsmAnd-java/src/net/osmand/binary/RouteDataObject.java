@@ -61,6 +61,27 @@ public class RouteDataObject {
 		return null;
 	}
 	
+	
+	public String getName(String lang){
+		if(names != null ) {
+			if(Algorithms.isEmpty(lang)) {
+				return names.get(region.nameTypeRule);
+			}
+			int[] kt = names.keys();
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(("name:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+ 				
+			}
+			return names.get(region.nameTypeRule);
+		}
+		return null;
+	}
+	
 	public TIntObjectHashMap<String> getNames() {
 		return names;
 	}
@@ -76,8 +97,21 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationName(){
+	public String getDestinationName(String lang){
 		if(names != null) {
+			if(Algorithms.isEmpty(lang)) {
+				return names.get(region.destinationTypeRule);
+			}
+			int[] kt = names.keys();
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(("destination:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+ 				
+			}
 			return names.get(region.destinationTypeRule);
 		}
 		return null;

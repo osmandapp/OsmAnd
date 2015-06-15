@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -85,7 +86,7 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			Context ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints) {
+			OsmandApplication ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints) {
 		this.routingTime = routingTime;
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
@@ -207,7 +208,7 @@ public class RouteCalculationResult {
 	 * PREPARATION 
 	 */
 	private static List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list,
-			List<AlarmInfo> alarms, Context ctx) {
+			List<AlarmInfo> alarms, OsmandApplication ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
@@ -254,8 +255,8 @@ public class RouteCalculationResult {
                     }
                     RouteSegmentResult next = list.get(lind);
                     info.setRef(next.getObject().getRef());
-                    info.setStreetName(next.getObject().getName());
-                    info.setDestinationName(next.getObject().getDestinationName());
+                    info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
+                    info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
                 }
 
                 String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
