@@ -382,7 +382,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 
-		String lng = a.getNameSelected(lang, "en");
+		String lng = a.getContentSelected("content", lang, "en");
 		if(Algorithms.isEmpty(lng)) {
 			lng = "en";
 		}

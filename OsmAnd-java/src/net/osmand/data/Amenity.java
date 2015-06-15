@@ -157,27 +157,27 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(PHONE, phone);
 	}
 	
-	public String getNameSelected(String lang, String defLang) {
+	public String getContentSelected(String tag, String lang, String defLang) {
 		if (lang != null) {
-			String translateName;
-			if (lang.equals("en")) {
-				translateName = getEnName();
-			} else {
-				translateName = getAdditionalInfo("name:" + lang);
-			}
+			String translateName = getAdditionalInfo(tag + ":" + lang);
 			if (!Algorithms.isEmpty(translateName)) {
 				return lang;
 			}
 		}
-		if(!Algorithms.isEmpty(getName())) {
+		String plainName = getAdditionalInfo(tag);
+		if (!Algorithms.isEmpty(plainName)) {
 			return defLang;
+		}
+		String enName = getAdditionalInfo(tag + ":en");
+		if (!Algorithms.isEmpty(enName)) {
+			return enName;
 		}
 		for (String nm : getAdditionalInfo().keySet()) {
 			if (nm.startsWith("name:")) {
 				return nm.substring("name:".length());
 			}
 		}
-		return "";
+		return defLang;
 	}
 	
 	public String getName(String lang) {
