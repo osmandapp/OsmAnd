@@ -887,7 +887,7 @@
 	<string name="background_service_provider">Ponudnik mesta</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju in omogoča spremljanje položaja, ko je zaslon izklopljen</string>
 	<string name="background_router_service">Izvajaj v ozadju</string>
-	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je vsaj en ponudnik mesta vklopljen.</string>
+	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je zagnan vsaj en program, ki zahteva te podatke.</string>
 	<string name="search_poi_filter">Filter</string>
 	
 	<string name="sd_unmounted">Kartica SD ni priklopljena.\nBrez podatkov ni mogoče uporabljati zemljevidov ali iskati mest.</string>
@@ -1873,10 +1873,10 @@
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
-	<string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
+	<string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ne deluje. Ali jo želite zagnati?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
     <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
-	<string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz wikipedije (%1$s MB) ?</string>
+	<string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz Wikipedije (%1$s MB) ?</string>
     <string name="lang_vo">Volapik</string>
     <string name="lang_th">Tajščina</string>
     <string name="lang_te">Telugujščina</string>
@@ -1887,5 +1887,5 @@
     <string name="lang_gl">Galščina</string>
     <string name="lang_et">Estonščina</string>
     <string name="lang_ceb">Cebuanščina</string>
-    <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz wikipedije. Ali jih želite arhivirati?</string>
+    <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz Wikipedije. Ali jih želite arhivirati?</string>
     </resources>
