@@ -2007,4 +2007,14 @@
     <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新近的 apps)。(OsmAnd 睡眠模式指示，從通知列消失。)</string>
 	<string name="archive_wikipedia_data">您已下載有舊的且不相容的維基百科資料。您想要將其存檔嗎?</string>
     <string name="download_wikipedia_files">您想要下載增加的維基百科資料嗎 (%1$ MB)？</string>
+    <string name="lang_vo">沃拉普克語</string>
+    <string name="lang_th">泰語</string>
+    <string name="lang_te">泰盧固語</string>
+    <string name="lang_nn">新挪威語(耐諾斯克)</string>
+    <string name="lang_new">尼瓦爾 / 尼泊爾語</string>
+    <string name="lang_ms">馬來西亞</string>
+    <string name="lang_ht">海地</string>
+    <string name="lang_gl">加利西亞語</string>
+    <string name="lang_et">愛沙尼亞語</string>
+    <string name="lang_ceb">宿霧語</string>
     </resources>
