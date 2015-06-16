@@ -1091,7 +1091,7 @@
     <string name="gps_not_available">Attiva il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Visualizza la direzione della destinazione</string>
     <string name="non_optimal_route_calculation">Calcola un percorso, eventualmente anche non ottimale, su lunghe distanze</string>
-    <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio per utilizzare i servizi di registrazione della posizione (tracking, tracking in tempo reale)</string>
+    <string name="enable_plugin_monitoring_services">Abilita il plugin di registrazione del viaggio per utilizzare i servizi di registrazione della posizione (registrazione GPX, monitoraggio in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla in Market?</string>
@@ -1599,7 +1599,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_enable_tracker">Invia le mie posizioni</string>
     <string name="osmo_control">Accesso rapido ad OsMo</string>
     
-	<string name="import_file_favourites">Salvare come file GPX o importare nei favoriti?</string>
+	<string name="import_file_favourites">Salvare i punti come file GPX o importarli nei favoriti?</string>
 	
 	<string name="color_red">rosso</string>
 	<string name="color_pink">rosa</string>
@@ -1701,11 +1701,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
     <string name="home">Casa</string>
-    <string name="live_monitoring_m_descr">Invia il tracciamento a un specifico servizio web se la registrazione GPX è abilitata.</string>
+    <string name="live_monitoring_m_descr">Invia i dati di tracciamento a un specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
 	<string name="live_monitoring_stop">Ferma il tracciamento online</string>
-	<string name="gpx_monitoring_start">Avvio la registrazione GPX</string>
+	<string name="gpx_monitoring_start">Avvia la registrazione GPX</string>
 	<string name="gpx_monitoring_stop">Ferma la registrazione GPX</string>
     <string name="gpx_start_new_segment">Avvia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
@@ -1754,7 +1754,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutto</string>
-    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrazione delle tue tracce o manualmente attraverso il pulsante dedicato nello schermo della mappa oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcuni analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
+    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nello schermo della mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -1777,7 +1777,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="text_size_descr">Imposta la dimensione del testo sulla mappa.</string>
     <string name="text_size">Dimensione del testo</string>
     <string name="fav_point_dublicate">Duplicato del nome del punto preferito</string>
-    <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
+    <string name="fav_point_dublicate_message">Il nome indicato per i preferiti esiste già, per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
     
     
     <string name="print_route">Stampa percorso</string>
@@ -1839,7 +1839,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="dash_download_new_one">Scarica una nuova mappa</string>
     <string name="dash_download_manage">Gestisci</string>
     <string name="rendering_attr_roadStyle_name">Stile disegno delle strade</string>
-    <string name="rendering_value_default_name">Default</string>
+    <string name="rendering_value_default_name">Preimpostato</string>
     <string name="rendering_value_orange_name">Arancione</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
@@ -2060,4 +2060,16 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in accordo a OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella le modifiche OSM</string>
+    <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati desueti e incompatibili. Vuoi archiviarli?</string>
+    <string name="download_wikipedia_files">Vuoi scaricare dati Wikipedia aggiuntivi (%1$s MB) ?</string>
+    <string name="gps_network_not_enabled">Il servizio di localizazione non è attivo. Vuoi avviarlo?</string>
+    <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
+    <string name="disable_recording_once_app_killed_descrp">"Metterà in pausa la registrazione GPX quando l\'app viene terminata (attraverso le app recenti). (L\'indicatore della modalità OsmAnd quiescente  scomparirà dalla barra delle notifiche Android.)"</string>
+    <string name="shared_string_import2osmand">Importa in OsmAnd</string>
+    <string name="read_full_article">Leggi l\'articolo intero (online)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Mostra i dettagli</string>
+    <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
