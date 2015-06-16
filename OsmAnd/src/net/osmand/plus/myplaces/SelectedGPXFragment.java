@@ -271,7 +271,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		
 		final TIntArrayList list = new TIntArrayList();
         final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
-        ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
+        ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(), colorSpinner, list);
 		
 		
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
