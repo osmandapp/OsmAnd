@@ -9,6 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thai</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norwegian (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malaysian</string>
+    <string name="lang_ht">Haitian</string>
+    <string name="lang_gl">Galician</string>
+    <string name="lang_et">Estonian</string>
+    <string name="lang_ceb">Cebuano</string>
     <string name="archive_wikipedia_data">You have old incompatible Wikipedia data downloaded. Do you want to archive it?</string>
     <string name="download_wikipedia_files">Do you want to download additional Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>

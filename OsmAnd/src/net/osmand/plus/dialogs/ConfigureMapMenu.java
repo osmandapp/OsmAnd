@@ -397,22 +397,24 @@ public class ConfigureMapMenu {
 		}
 	}
 	
-	static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
-			"hr", "hu", "it", "ja", "ko", "lt", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
+	static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "bg", "ca", "ceb", "cs", "da", "de", "el", "et", "es", "fi", "fr", "gl", "he", "hi",
+			"hr", "ht", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "new", "nl", "nn", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sr", "sv", "sw", "te", "th", "tr", "uk", "vi", "vo", "zh" };
 
 	private String[] getMapNamesValues(Context ctx) {
 		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),
 				ctx.getString(R.string.lang_ar),
-				ctx.getString(R.string.lang_be), ctx.getString(R.string.lang_ca), ctx.getString(R.string.lang_cs),
-				ctx.getString(R.string.lang_da), ctx.getString(R.string.lang_de), ctx.getString(R.string.lang_el),
-				ctx.getString(R.string.lang_es), ctx.getString(R.string.lang_fi), ctx.getString(R.string.lang_fr),
+				ctx.getString(R.string.lang_be), ctx.getString(R.string.lang_bg), ctx.getString(R.string.lang_ca), ctx.getString(R.string.lang_ceb), ctx.getString(R.string.lang_cs),
+				ctx.getString(R.string.lang_da), ctx.getString(R.string.lang_de), ctx.getString(R.string.lang_el), ctx.getString(R.string.lang_et),
+				ctx.getString(R.string.lang_es), ctx.getString(R.string.lang_fi), ctx.getString(R.string.lang_fr), ctx.getString(R.string.lang_gl),
 				ctx.getString(R.string.lang_he), ctx.getString(R.string.lang_hi), ctx.getString(R.string.lang_hr),
-				ctx.getString(R.string.lang_hu), ctx.getString(R.string.lang_it), ctx.getString(R.string.lang_ja),
+				ctx.getString(R.string.lang_ht), ctx.getString(R.string.lang_hu), ctx.getString(R.string.lang_id), ctx.getString(R.string.lang_it), ctx.getString(R.string.lang_ja),
 				ctx.getString(R.string.lang_ko), ctx.getString(R.string.lang_lt),
-				ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_nl),
-				ctx.getString(R.string.lang_pl), ctx.getString(R.string.lang_ro), ctx.getString(R.string.lang_ru),
-				ctx.getString(R.string.lang_sk), ctx.getString(R.string.lang_sl), ctx.getString(R.string.lang_sv),
-				ctx.getString(R.string.lang_sw), ctx.getString(R.string.lang_zh) };
+				ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_ms), ctx.getString(R.string.lang_new), ctx.getString(R.string.lang_nl), ctx.getString(R.string.lang_nn),
+				ctx.getString(R.string.lang_no),
+				ctx.getString(R.string.lang_pl), ctx.getString(R.string.lang_pt), ctx.getString(R.string.lang_ro), ctx.getString(R.string.lang_ru),
+				ctx.getString(R.string.lang_sk), ctx.getString(R.string.lang_sl), ctx.getString(R.string.lang_sr), ctx.getString(R.string.lang_sv),
+				ctx.getString(R.string.lang_sw), ctx.getString(R.string.lang_te), ctx.getString(R.string.lang_th), ctx.getString(R.string.lang_tr), ctx.getString(R.string.lang_uk),
+				ctx.getString(R.string.lang_vi), ctx.getString(R.string.lang_vo), ctx.getString(R.string.lang_zh) };
 	}
 
 	private void createProperties(List<RenderingRuleProperty> customRules, final int strId, String cat, 
