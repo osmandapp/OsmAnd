@@ -395,4 +395,15 @@
 	<string name="poi_wine_cellar">Vinska klet</string>
 	<string name="poi_winery">Vinarna</string>
 
+	<string name="poi_craft_sawmill">Žaga (industrijski obrat)</string>
+	<string name="poi_craft_roofer">Krovstvo</string>
+	<string name="poi_craft_pottery">Lončarstvo</string>
+	<string name="poi_craft_rigger"/>
+	<string name="poi_craft_saddler">Sedlarstvo</string>
+	<string name="poi_craft_sailmaker"/>
+	<string name="poi_craft_locksmith">Ključavničarstvo</string>
+	<string name="poi_craft_painter">Slikarstvo</string>
+	<string name="poi_craft_parquet_layer">Paketarstvo</string>
+	<string name="poi_craft_photographer">Fotograf</string>
+	<string name="poi_craft_photographic_laboratory">Fotografski laboratorij</string>
 	</resources>
