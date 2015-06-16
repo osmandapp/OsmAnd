@@ -2035,4 +2035,14 @@
 	<string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Aktiver?</string>
     <string name="archive_wikipedia_data">"Der er hentet  gamle inkompatible Wikipedia data. Skal de arkiveres?"</string>
     <string name="download_wikipedia_files">Hent yderligere data fra Wikipedia (%1$s MB)?</string>
+    <string name="lang_vo">Volapyk</string>
+    <string name="lang_th">Thai</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Nynorsk</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malaysisk</string>
+    <string name="lang_ht">Haitisk</string>
+    <string name="lang_gl">Galicisk</string>
+    <string name="lang_et">Estisk</string>
+    <string name="lang_ceb">Cebuano</string>
     </resources>
