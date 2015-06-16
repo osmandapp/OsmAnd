@@ -943,7 +943,7 @@
   
   
   <string name="map_widget_parking">Parking</string>
-  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_monitoring">Rejestrowanie GPX</string>
   <string name="map_widget_speed">Prędkość</string>
   <string name="map_widget_distance">Cel</string>
   <string name="map_widget_altitude">Wysokość</string>
@@ -1054,7 +1054,7 @@
     <string name="map_widget_show_destination_arrow">Kierunek do celu</string>
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
-    <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
+    <string name="enable_plugin_monitoring_services">Włącz wtyczkę nagrywania Podróży, aby skorzystać z usług rejestrowania pozycji (rejestrowanie GPX, śledzenie online)</string>
     <string name="no_buildings_found">Nie odnaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj więcej wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
@@ -1738,7 +1738,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_enable_tracker">Wysyłaj moją lokalizację</string>
     <string name="osmo_control">Szybki dostęp do OsMo</string>
     
-	<string name="import_file_favourites">Zapisać jako plik GPX czy zaimportować do ulubionych?</string>
+	<string name="import_file_favourites">Zapisać punkty jako plik GPX czy zaimportować je do ulubionych?</string>
 	
 	<string name="osmo_follow">Śledź</string>
     <string name="osmo_sign_in">Zarejestruj</string>
@@ -1827,7 +1827,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_he">Hebrajski</string>
     <string name="forward">Naprzód</string>
     <string name="home">Dom</string>
-    <string name="live_monitoring_m_descr">Wysyła aktualne położenie do określonej usługi internetowej podczas nagrywania śladów</string>
+    <string name="live_monitoring_m_descr">Wysyła dane śledzenia do określonej usługi internetowej jeżeli rejestrowanie śladów jest włączone.</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
 	<string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
@@ -1894,9 +1894,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania śladów, które dostępne są poprzez widżet na ekranie mapy. Udostępnia też możliwość automatycznego zapisywania śladów nawigacji do pliku GPX.\n\nZapisane ślady mogą zostać udostępnione znajomym lub użyte do rozwoju projektu OSM. Sportowcy mogą korzystać ze ścieżek do monitorowania treningów. Podstawowa analiza śladów może zostać wykonana bezpośrednio w OsmAnd (czasy okrążeń, średnia prędkość, itp.). "</string>
+	<string name="record_plugin_description">"Wtyczka ta aktywuje funkcje nagrywania i zapisywania śladów ręcznie dotykając widgetu rejestrowania GPX na ekranie mapy, lub także automatyczne logowanie wszystkich tras nawigacyjnych do pliku GPX. ↵\n↵\nNagrane ślady mogą być dzielone ze swoimi przyjaciółmi lub być wykorzystywane jako wkład do rozwoju OSM. Sportowcy mogą korzystać z nagranych ścieżek do monitorowania treningów. Podstawowa analiza śladów może być wykonywane bezpośrednio w OsmAnd, podobnie jak czasy okrążeń, średniej prędkości itp, a ślady mogą być oczywiście później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
-	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
+	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
 	<string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
@@ -1909,7 +1909,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="text_size_descr">Ustaw rozmiar tekstu na mapie.</string>
     <string name="text_size">Rozmiar tekstu</string>
     <string name="fav_point_dublicate">Powielona nazwa ulubionego punktu</string>
-    <string name="fav_point_dublicate_message">Zmieniliśmy nazwa twojego ulubionego punktu na %1$s w celu uniknięcia powielonych nazw.</string>
+    <string name="fav_point_dublicate_message">Określone ulubiona nazwa jest już w użyciu, nazwa została zmieniona na %1$s aby uniknąć powielania.</string>
     
     
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
@@ -2123,4 +2123,21 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_disabled_name">Wyłączony</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorowanie wg przeznaczenia trasy</string>
     <string name="osm_edit_context_menu_delete">Usuń w Edytorze OSM</string>
+    <string name="lang_th">tajski</string>
+    <string name="lang_nn">norweski</string>
+    <string name="lang_ms">malezyjski</string>
+    <string name="lang_ht">haitański</string>
+    <string name="lang_gl">galicyjski</string>
+    <string name="lang_et">estoński</string>
+    <string name="archive_wikipedia_data">Posiadasz pobrane stare niezgodne dane Wikipedia. Czy chcesz je zarchiwizować?</string>
+    <string name="download_wikipedia_files">Czy chcesz pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Czy chcesz go włączyć?</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzymać rejestrowanie GPX, gdy aplikacja zostanie zabita (przez inne aplikacja). (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
+    <string name="shared_string_import2osmand">Import do OsmAnd</string>
+    <string name="read_full_article">Czytaj cały artykuł (online)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Pokaż szczegóły</string>
+    <string name="local_recordings_delete_all_confirm">Zamierzasz usunąć %1$d notatki. Czy jesteś pewny?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
     </resources>
