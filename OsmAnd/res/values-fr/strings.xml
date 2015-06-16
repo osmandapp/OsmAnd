@@ -2053,4 +2053,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
 	<string name="disable_recording_once_app_killed">Interdire l\'enregistrement autonome</string>
     <string name="download_wikipedia_files">Souhaitez-vous télécharger les données Wikipédia (%1$s MB) ?</string>
+    <string name="lang_ms">Malaisien</string>
+    <string name="lang_ht">Haïtien</string>
+    <string name="lang_gl">Galicien</string>
+    <string name="lang_et">Estonien</string>
     </resources>
