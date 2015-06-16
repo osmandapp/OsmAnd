@@ -1876,4 +1876,16 @@
 	<string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
     <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
-	</resources>
+	<string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz wikipedije (%1$s MB) ?</string>
+    <string name="lang_vo">Volapik</string>
+    <string name="lang_th">Tajščina</string>
+    <string name="lang_te">Telugujščina</string>
+    <string name="lang_nn">Norveščina (Norsk)</string>
+    <string name="lang_new">Nepalščina</string>
+    <string name="lang_ms">Malajščina</string>
+    <string name="lang_ht">Haitščina</string>
+    <string name="lang_gl">Galščina</string>
+    <string name="lang_et">Estonščina</string>
+    <string name="lang_ceb">Cebuanščina</string>
+    <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz wikipedije. Ali jih želite arhivirati?</string>
+    </resources>
