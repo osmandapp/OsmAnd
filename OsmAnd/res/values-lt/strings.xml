@@ -2041,4 +2041,5 @@
 	<string name="download_wikipedia_maps">Vikipedija</string>
     <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego režimo piktograma dings iš Android pranešimų juostos.)</string>
 	<string name="download_wikipedia_files">Ar norite atsisiųsti papildomų Wikipedia duomenų (%1$s MB)?</string>
+    <string name="archive_wikipedia_data">Jūsų turimi Wikipedia duomenys yra pasenę. Gal norite juos suarchyvuoti?</string>
     </resources>
