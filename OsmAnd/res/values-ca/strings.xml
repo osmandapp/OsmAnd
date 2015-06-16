@@ -1598,7 +1598,7 @@
     <string name="osmo_enable_tracker">Envia les meves ubicacions</string>
     <string name="osmo_control">Accés ràpid a OsMo</string>
     
-	<string name="import_file_favourites">Desar els punts com un arxiu GPX o posar-lo als favorits?</string>
+	<string name="import_file_favourites">Voleu desar els punts com un fitxer GPX o voleu importar-los als preferits?</string>
 	
 	<string name="osmo_follow">Segueix</string>
     <string name="osmo_sign_in">Inicia una sessió</string>
@@ -1764,7 +1764,7 @@
     <string name="distance">Distància</string>
     <string name="rendering_attr_publicTransportMode_name">Rutes de bus, troleibús i tramvia</string>
 	<string name="save_track_to_gpx_globally">Desa la traça a un arxiu GPX</string>
-	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
+	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un fitxer GPX es pot activar o desactivar amb el giny associat a la pantalla del mapa</string>
 	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
 	<string name="confirm_every_run">Es demana confirmació</string>
 	<string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa)</string>
@@ -1780,7 +1780,7 @@
 	<string name="text_size_descr">Definiu la mida del text en el mapa.</string>
     <string name="text_size">Mida del text</string>
     <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
-    <string name="fav_point_dublicate_message">El nom indicat del lloc preferit ja es fa servir, s\'ha canviat a %1$s per estalviar duplicitats.</string>
+    <string name="fav_point_dublicate_message">El nom indicat del lloc preferit ja es fa servir, s\'ha canviat a %1$s per evitar duplicitats.</string>
     
     
     <string name="fav_point_emoticons_message">El nom del vostre punt preferit s\'ha canviat a %1$s per facilitar el desar bé la cadena amb emoticones en un fitxer.</string>
@@ -2003,12 +2003,12 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
 	<string name="use_fast_recalculation_desc">Torna a calcular només la part inicial de la ruta si són viatges llargs</string>
 <string name="osmo_share_my_location">Comparteix la meva posició</string>
-    <string name="shared_string_logoff">Sortir</string>
+    <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
     <string name="osm_edit_context_menu_delete">Suprimeix l\'edició d\'OSM</string>
-    <string name="read_full_article">Llegiu l\'article complert (en connexió)</string>
+    <string name="read_full_article">Llegiu l\'article complet (en línia)</string>
     <string name="download_wikipedia_item">Viquipèdia</string>
     <string name="local_indexes_cat_wiki">Viquipèdia</string>
     <string name="shared_string_show_details">Mostra els detalls</string>
@@ -2016,8 +2016,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. Voleu activar-lo?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
     <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android).</string>
-	<string name="shared_string_import2osmand">Importació a OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Sou a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
+	<string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Esteu a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
 	<string name="archive_wikipedia_data">Teniu dades baixades de Viquipèdia, antigues i incompatibles. Les voleu desar?</string>
-    <string name="download_wikipedia_files">Voleu baixar dades addicionals de Viquipèdia (%1$s MB) ?</string>
+    <string name="download_wikipedia_files">Voleu baixar dades addicionals de la Viquipèdia (%1$s MB) ?</string>
     </resources>
