@@ -1719,4 +1719,13 @@
     <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
 	<string name="archive_wikipedia_data">Você tem dados baixados da Wikipédia antigos e incompatíveis. Quer arquivá-los?</string>
     <string name="download_wikipedia_files">Você quer baixar dados adicionais da wikipédia (%1$s MB)?</string>
+    <string name="lang_vo">Volapuque</string>
+    <string name="lang_th">Tailandês</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norueguês (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malásio</string>
+    <string name="lang_ht">Haitiano</string>
+    <string name="lang_gl">Galego</string>
+    <string name="lang_et">Estoniano</string>
     </resources>
