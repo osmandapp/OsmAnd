@@ -1982,7 +1982,7 @@
     <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
 	<string name="use_fast_recalculation_desc">Перерасчет только начальной части маршрута для длительных поездок</string>
 <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>    
-    <string name="rendering_value_disabled_name">Отключена</string>
+    <string name="rendering_value_disabled_name">Отключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска в соответствии с легендой маршрута</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Раскраска в соответствии с OSMC</string>
     <string name="osmo_share_my_location">Поделиться моим местоположением</string>
