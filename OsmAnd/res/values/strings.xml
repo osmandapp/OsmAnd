@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="lang_nb">Norwegian Bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thai</string>
     <string name="lang_te">Telugu</string>
