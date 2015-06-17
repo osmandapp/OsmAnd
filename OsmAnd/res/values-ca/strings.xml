@@ -2020,4 +2020,14 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="local_recordings_delete_all_confirm">Esteu a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
 	<string name="archive_wikipedia_data">Teniu dades baixades de Viquipèdia, antigues i incompatibles. Les voleu desar?</string>
     <string name="download_wikipedia_files">Voleu baixar dades addicionals de la Viquipèdia (%1$s MB) ?</string>
+    <string name="lang_vo">Volapük</string>
+    <string name="lang_th">Tailandès</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Noruec (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malai</string>
+    <string name="lang_ht">Crioll haitià</string>
+    <string name="lang_gl">Gallec</string>
+    <string name="lang_et">Estonià</string>
+    <string name="lang_ceb">Cebuà</string>
     </resources>
