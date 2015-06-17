@@ -796,4 +796,53 @@
 	<string name="poi_trail_riding_station">Trailridning station</string>
 
 	<string name="poi_lean_to">Bivuak</string>
-	</resources>
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">Engelsk wiki</string>
+	<string name="poi_wiki_lang_ar">Arabisk wiki</string>
+	<string name="poi_wiki_lang_be">Hviderussisk wiki</string>
+	<string name="poi_wiki_lang_bg">Bulgarsk wiki</string>
+	<string name="poi_wiki_lang_ca">Katalansk wiki</string>
+	<string name="poi_wiki_lang_ceb">Cebuano wiki</string>
+	<string name="poi_wiki_lang_cs">Tjekkisk wiki</string>
+	<string name="poi_wiki_lang_da">Dansk wiki</string>
+	<string name="poi_wiki_lang_de">Tysk wiki</string>
+	<string name="poi_wiki_lang_el">Græsk wiki</string>
+	<string name="poi_wiki_lang_et">Estisk wiki</string>
+	<string name="poi_wiki_lang_es">Spansk wiki</string>
+	<string name="poi_wiki_lang_fi">Finsk wiki</string>
+	<string name="poi_wiki_lang_fr">Fransk wiki</string>
+	<string name="poi_wiki_lang_gl">Galicisk wiki</string>
+	<string name="poi_wiki_lang_he">Hebræisk wiki</string>
+	<string name="poi_wiki_lang_hi">Hindi wiki</string>
+	<string name="poi_wiki_lang_hr">Kroatisk wiki</string>
+	<string name="poi_wiki_lang_ht">Haitisk wiki</string>
+	<string name="poi_wiki_lang_hu">Ungarsk wiki</string>
+	<string name="poi_wiki_lang_id">Indonesisk wiki</string>
+	<string name="poi_wiki_lang_it">Italiensk wiki</string>
+	<string name="poi_wiki_lang_ja">Japansk wiki</string>
+	<string name="poi_wiki_lang_ko">Koreansk wiki</string>
+	<string name="poi_wiki_lang_lt">Litauisk wiki</string>
+	<string name="poi_wiki_lang_lv">Lettisk wiki</string>
+	<string name="poi_wiki_lang_ms">Malay wiki</string>
+	<string name="poi_wiki_lang_new">Newar wiki</string>
+	<string name="poi_wiki_lang_nl">Hollandsk wiki</string>
+	<string name="poi_wiki_lang_nn">Nynorsk wiki</string>
+	<string name="poi_wiki_lang_no">Norsk wiki</string>
+	<string name="poi_wiki_lang_pl">Polsk wiki</string>
+	<string name="poi_wiki_lang_pt">Portugisisk wiki</string>
+	<string name="poi_wiki_lang_ro">Rumænsk wiki</string>
+	<string name="poi_wiki_lang_ru">Russisk wiki</string>
+	<string name="poi_wiki_lang_sk">Slovakisk wiki</string>
+	<string name="poi_wiki_lang_sl">Slovensk wiki</string>
+	<string name="poi_wiki_lang_sr">Serbisk wiki</string>
+	<string name="poi_wiki_lang_sv">Svensk wiki</string>
+	<string name="poi_wiki_lang_sw">Swahili wiki</string>
+	<string name="poi_wiki_lang_te">Telugu wiki</string>
+	<string name="poi_wiki_lang_th">Thai wiki</string>
+	<string name="poi_wiki_lang_tr">Tyrkisk wiki</string>
+	<string name="poi_wiki_lang_uk">Ukrainsk wiki</string>
+	<string name="poi_wiki_lang_vi">Vietnamesisk wiki</string>
+	<string name="poi_wiki_lang_vo">Volapyk wiki</string>
+	<string name="poi_wiki_lang_zh">Kinesisk wiki</string>
+
+</resources>
