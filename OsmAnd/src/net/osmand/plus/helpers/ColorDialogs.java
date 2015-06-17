@@ -96,11 +96,11 @@ public class ColorDialogs {
 	
 	public static String colorToString(int color) {
 		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
-		} else {
 			private final static String ZEROES = "000000";
-			String c = Integer.toHexString(color);
+			String c = Integer.toHexString(color & 0x00FFFFFF);
 			return "#" + c.length() <= 6 ? ZEROES.substring(c.length()) + c : c; //$NON-NLS-1$
+		} else {
+			return "#" + Integer.toHexString(color); //$NON-NLS-1$
 		}
 	}
 }
