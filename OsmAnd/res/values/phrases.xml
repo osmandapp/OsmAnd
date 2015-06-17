@@ -41,7 +41,7 @@
 	<string name="poi_military">Military</string>
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">User defined</string>
-	
+
 	<string name="poi_palaeontological_site">Palaeontological site</string>
 
 	<string name="poi_bakery">Bakery</string>
@@ -480,7 +480,7 @@
 	<string name="poi_zoo">Zoo</string>
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_theme_park">Theme park</string>
-	
+
 	<string name="poi_attraction">Tourist attraction</string>
 	<string name="poi_general_tourist_attraction_yes">General tourist attraction</string>
 	<string name="poi_attraction_amusement_ride">Amusement ride</string>
@@ -523,7 +523,7 @@
 	<string name="poi_internet_access_wired">Internet access: wired</string>
 	<string name="poi_internet_access_public">Internet access: public</string>
 	<string name="poi_internet_access_service">Internet access: service</string>
-	
+
 	<string name="poi_monastery">Monastery</string>
 	<string name="poi_historic_monastery">Historic monastery</string>
 	<string name="poi_wayside_cross">Wayside cross</string>
@@ -781,4 +781,53 @@
 	<string name="poi_military_range">Military range</string>
 	<string name="poi_military_naval_base">Military naval base</string>
 	<string name="poi_military_nuclear_explosion_site">Nuclear explosion site</string>
+
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">English wiki</string>
+	<string name="poi_wiki_lang_ar">Arabic wiki</string>
+	<string name="poi_wiki_lang_be">Belarusian wiki</string>
+	<string name="poi_wiki_lang_bg">Bulgarian wiki</string>
+	<string name="poi_wiki_lang_ca">Catalan wiki</string>
+	<string name="poi_wiki_lang_ceb">Cebuano wiki</string>
+	<string name="poi_wiki_lang_cs">Czech wiki</string>
+	<string name="poi_wiki_lang_da">Danish wiki</string>
+	<string name="poi_wiki_lang_de">German wiki</string>
+	<string name="poi_wiki_lang_el">Greek wiki</string>
+	<string name="poi_wiki_lang_et">Estonian wiki</string>
+	<string name="poi_wiki_lang_es">Spanish wiki</string>
+	<string name="poi_wiki_lang_fi">Finnish wiki</string>
+	<string name="poi_wiki_lang_fr">French wiki</string>
+	<string name="poi_wiki_lang_gl">Galician wiki</string>
+	<string name="poi_wiki_lang_he">Hebrew wiki</string>
+	<string name="poi_wiki_lang_hi">Hindi wiki</string>
+	<string name="poi_wiki_lang_hr">Croatian wiki</string>
+	<string name="poi_wiki_lang_ht">Haitian wiki</string>
+	<string name="poi_wiki_lang_hu">Hungarian wiki</string>
+	<string name="poi_wiki_lang_id">Indonesian wiki</string>
+	<string name="poi_wiki_lang_it">Italian wiki</string>
+	<string name="poi_wiki_lang_ja">Japanese wiki</string>
+	<string name="poi_wiki_lang_ko">Korean wiki</string>
+	<string name="poi_wiki_lang_lt">Lithuanian wiki</string>
+	<string name="poi_wiki_lang_lv">Latvian wiki</string>
+	<string name="poi_wiki_lang_ms">Malay wiki</string>
+	<string name="poi_wiki_lang_new">Newar wiki</string>
+	<string name="poi_wiki_lang_nl">Dutch wiki</string>
+	<string name="poi_wiki_lang_nn">Norwegian Nynorsk wiki</string>
+	<string name="poi_wiki_lang_no">Norwegian wiki</string>
+	<string name="poi_wiki_lang_pl">Polish wiki</string>
+	<string name="poi_wiki_lang_pt">Portuguese wiki</string>
+	<string name="poi_wiki_lang_ro">Romanian wiki</string>
+	<string name="poi_wiki_lang_ru">Russian wiki</string>
+	<string name="poi_wiki_lang_sk">Slovak wiki</string>
+	<string name="poi_wiki_lang_sl">Slovene wiki</string>
+	<string name="poi_wiki_lang_sr">Serbian wiki</string>
+	<string name="poi_wiki_lang_sv">Swedish wiki</string>
+	<string name="poi_wiki_lang_sw">Swahili wiki</string>
+	<string name="poi_wiki_lang_te">Telugu wiki</string>
+	<string name="poi_wiki_lang_th">Thai wiki</string>
+	<string name="poi_wiki_lang_tr">Turkish wiki</string>
+	<string name="poi_wiki_lang_uk">Ukrainian wiki</string>
+	<string name="poi_wiki_lang_vi">Vietnamese wiki</string>
+	<string name="poi_wiki_lang_vo">Volapük wiki</string>
+	<string name="poi_wiki_lang_zh">Chinese wiki</string>
 </resources>
