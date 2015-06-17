@@ -1990,4 +1990,13 @@
 	<string name="gps_network_not_enabled">Служба месцазнаходжаньня не ўключаная. Вы хочаце ўключыць яе?</string>
     <string name="archive_wikipedia_data">Сьцягнутыя зьвесткі Вікіпэдыі састарэлі і непрыдатныя. Вы хочаце заархіваваць іх?</string>
     <string name="download_wikipedia_files">Вы хочаце сьцягнуць дадатковыя зьвесткі Вікіпэдыі (%1$s МБ) ?</string>
+    <string name="lang_th">тайская</string>
+    <string name="lang_te">тэлугу</string>
+    <string name="lang_nn">нарвежская (нюнашк)</string>
+    <string name="lang_vo">валяпюк</string>
+    <string name="lang_ht">гаіцянская</string>
+    <string name="lang_gl">галіцкая</string>
+    <string name="lang_et">эстонская</string>
+    <string name="lang_ceb">Кебуано</string>
+    <string name="lang_ms">малазійская</string>
     </resources>
