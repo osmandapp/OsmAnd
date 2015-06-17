@@ -95,12 +95,18 @@ public class ColorDialogs {
 	}
 	
 	public static String colorToString(int color) {
+		String c = "";
 		if ((0xFF000000 & color) == 0xFF000000) {
-			String c = Integer.toHexString(color & 0x00FFFFFF);
+			c = Integer.toHexString(color & 0x00FFFFFF);
 			c = c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
-			return "#" + c; //$NON-NLS-1$
+		} else if ((0x00FFFFFF & color) == color) {
+			//issue: if alpha=00 this is wrong
+			c = Integer.toHexString(color);
+			c = c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
 		} else {
-			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+			c = Integer.toHexString(color);
+			c = c.length() <= 8 ? "00000000".substring(c.length()) + c : c; //$NON-NLS-1$
 		}
+		return "#" + c; //$NON-NLS-1$
 	}
 }
