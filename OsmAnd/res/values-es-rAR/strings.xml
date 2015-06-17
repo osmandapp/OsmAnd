@@ -1950,4 +1950,8 @@
 	<string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quiere activarlo?</string>
     <string name="archive_wikipedia_data">Tiene descargado datos de Wikipedia viejos e incompatibles. ¿Quiere archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
+    <string name="lang_vo">Volapuque</string>
+    <string name="lang_th">Tailandés</string>
+    <string name="lang_ms">Malasio</string>
+    <string name="lang_ht">Haitiano</string>
     </resources>
