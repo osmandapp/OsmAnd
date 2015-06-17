@@ -771,4 +771,43 @@
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_trail_riding_station">Refuge pour randonnée équestre</string>
 
-	</resources>
+	<string name="poi_wiki_place">Wikipédia</string>
+	<string name="poi_wiki_lang_en">Wiki anglais</string>
+	<string name="poi_wiki_lang_ar">Wiki arabe</string>
+	<string name="poi_wiki_lang_be">Wiki biélorusse</string>
+	<string name="poi_wiki_lang_bg">Wiki bulgare</string>
+	<string name="poi_wiki_lang_ca">Wiki catalan</string>
+	<string name="poi_wiki_lang_cs">Wiki tchèque</string>
+	<string name="poi_wiki_lang_da">Wiki danois</string>
+	<string name="poi_wiki_lang_de">Wiki allemand</string>
+	<string name="poi_wiki_lang_el">Wiki grecque</string>
+	<string name="poi_wiki_lang_et">Wiki estonien</string>
+	<string name="poi_wiki_lang_es">Wiki espagnol</string>
+	<string name="poi_wiki_lang_fi">Wiki finnois</string>
+	<string name="poi_wiki_lang_fr">Wiki français</string>
+	<string name="poi_wiki_lang_gl">Wiki galicien</string>
+	<string name="poi_wiki_lang_he">Wiki hébreu</string>
+	<string name="poi_wiki_lang_hr">Wiki croate</string>
+	<string name="poi_wiki_lang_ht">Wiki haïtien</string>
+	<string name="poi_wiki_lang_hu">Wiki hongrois</string>
+	<string name="poi_wiki_lang_id">Wiki indonésien</string>
+	<string name="poi_wiki_lang_it">Wiki italien</string>
+	<string name="poi_wiki_lang_ja">Wiki japonais</string>
+	<string name="poi_wiki_lang_ko">Wiki coréen</string>
+	<string name="poi_wiki_lang_lt">Wiki lithuanien</string>
+	<string name="poi_wiki_lang_nl">Wiki hollandais</string>
+	<string name="poi_wiki_lang_no">Wiki norvégien</string>
+	<string name="poi_wiki_lang_pl">Wiki polonais</string>
+	<string name="poi_wiki_lang_pt">Wiki portugais</string>
+	<string name="poi_wiki_lang_ro">Wiki roumain</string>
+	<string name="poi_wiki_lang_ru">Wiki russe</string>
+	<string name="poi_wiki_lang_sk">Wiki slovaque</string>
+	<string name="poi_wiki_lang_sl">Wiki slovène</string>
+	<string name="poi_wiki_lang_sr">Wiki serbe</string>
+	<string name="poi_wiki_lang_sv">Wiki suédois</string>
+	<string name="poi_wiki_lang_tr">Wiki turque</string>
+	<string name="poi_wiki_lang_uk">Wiki ukrainien</string>
+	<string name="poi_wiki_lang_vi">Wiki vietnamien</string>
+	<string name="poi_wiki_lang_zh">Wiki chinois</string>
+
+</resources>
