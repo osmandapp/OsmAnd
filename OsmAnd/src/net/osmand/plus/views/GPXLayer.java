@@ -52,7 +52,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int cachedHash;
 	private int cachedColor;
 
-	private Path path;
 	private static final int startZoom = 7;
 
 	
@@ -92,7 +91,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paint_1.setAntiAlias(true);
 		
 
-		path = new Path();
 		
 		paintBmp = new Paint();
 		paintBmp.setAntiAlias(true);
@@ -302,35 +300,40 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<TrkSegment> points) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		for (TrkSegment l : points) {
-			path.rewind();
 			int startIndex = -1;
 			int endIndex = -1;
 		    int prevCross = 0;
-		    boolean intersect = false;
-
+		    double shift = 0.1;
 			for (int i = 0; i < l.points.size(); i++) {
 				WptPt ls = l.points.get(i);
 				int cross = 0;
-				cross |= (ls.lon < latLonBounds.left - 0.1 ? 1 : 0);
-				cross |= (ls.lon > latLonBounds.right + 0.1 ? 2 : 0);
-				cross |= (ls.lat > latLonBounds.top + 0.1 ? 4 : 0);
-				cross |= (ls.lat < latLonBounds.bottom - 0.1 ? 8 : 0);
+				cross |= (ls.lon < latLonBounds.left - shift ? 1 : 0);
+				cross |= (ls.lon > latLonBounds.right + shift ? 2 : 0);
+				cross |= (ls.lat > latLonBounds.top + shift ? 4 : 0);
+				cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
 				if (i > 0) {
 					if ((prevCross & cross) == 0) {
-						if (prevCross != 0 || !intersect) {
+						if(prevCross == 0 && endIndex != -1) {
+							// continue previous line
+						} else {
+							// start new segment
 							if (startIndex > 0) {
 								drawSegment(canvas, tileBox, l, startIndex, endIndex);
 							}
 							startIndex = i - 1;
 						}
 						endIndex = i;
-						intersect = true;
+					} else {
+						if (startIndex != -1) {
+							drawSegment(canvas, tileBox, l, startIndex, endIndex);
+							startIndex = -1;
+						}
 					}
 				}
 				prevCross = cross;
 			}
 			if (startIndex != -1) {
-				drawSegment(canvas, tileBox, l, startIndex, l.points.size() - 1);
+				drawSegment(canvas, tileBox, l, startIndex, endIndex);
 			}
 		}
 	}
@@ -345,7 +348,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
 		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-
+		Path path = new Path();
 		for (int i = startIndex; i <= endIndex; i++) {
 			WptPt p = l.points.get(i);
 			int x = (int) tb.getPixXFromLatLon(p.lat, p.lon);
