@@ -97,7 +97,8 @@ public class ColorDialogs {
 	public static String colorToString(int color) {
 		if ((0xFF000000 & color) == 0xFF000000) {
 			String c = Integer.toHexString(color & 0x00FFFFFF);
-			return "#" + c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
+			c = c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
+			return "#" + c; //$NON-NLS-1$
 		} else {
 			return "#" + Integer.toHexString(color); //$NON-NLS-1$
 		}
