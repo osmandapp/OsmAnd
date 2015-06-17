@@ -1968,4 +1968,16 @@
 	<string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
     <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretné kapcsolni?</string>
     <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd alvó mód jelzője eltűnik az Android értesítési sávjáról.)</string>
-	</resources>
+	<string name="lang_vo">Volapük</string>
+    <string name="lang_th">Thai</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norvég (nynorsk)</string>
+    <string name="lang_new">Newar / nepáli bhása</string>
+    <string name="lang_ms">Maláj</string>
+    <string name="lang_ht">Haiti</string>
+    <string name="lang_gl">Galíciai</string>
+    <string name="lang_et">Észt</string>
+    <string name="lang_ceb">Szebuano</string>
+    <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretné archiválni?</string>
+    <string name="download_wikipedia_files">Szeretne további Wikipédia adatokat letölteni (%1$s MB)?</string>
+    </resources>
