@@ -1980,4 +1980,6 @@
     <string name="lang_ceb">Szebuano</string>
     <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretné archiválni?</string>
     <string name="download_wikipedia_files">Szeretne további Wikipédia adatokat letölteni (%1$s MB)?</string>
+    <string name="lang_es_ar">Argentin spanyol</string>
+    <string name="lang_nb">Norvég bokmål</string>
     </resources>
