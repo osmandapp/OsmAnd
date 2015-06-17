@@ -1705,7 +1705,7 @@
 	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
 <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorir de acordo com o alcance de rota</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorir de acordo com OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorir conforme OSMC</string>
     <string name="osm_edit_context_menu_delete">Apagar Edição do OSM</string>
     <string name="shared_string_show_details">Mostrar detalhes</string>
     <string name="read_full_article">Leia o artigo completo (on-line)</string>
@@ -1729,4 +1729,6 @@
     <string name="lang_gl">Galego</string>
     <string name="lang_et">Estoniano</string>
     <string name="lang_ceb">Cebuano</string>
+    <string name="lang_es_ar">Espanhol Argentino</string>
+    <string name="lang_nb">Norueguês Bokmål</string>
     </resources>
