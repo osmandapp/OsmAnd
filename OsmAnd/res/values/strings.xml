@@ -1,8 +1,8 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
-    	 Disclaimer: 
-         If you are going to translate strings, please make sure: 
+    	 Disclaimer:
+         If you are going to translate strings, please make sure:
          1. There is no duplicate strings by name
          2. Every apostrophe (quote) is preceded by a backslash (see others).
          If you are making/correcting English translations make sure:
@@ -182,7 +182,7 @@
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
 		\n\nYou can track other devices and be tracked. You can spontaneously create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
-		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator. 
+		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator.
 		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
 	<string name="srtm_paid_version_title">Contour lines plugin</string>
@@ -204,7 +204,7 @@
 	</string>
 	<string name="plugin_nautical_name">Nautical map view</string>
 	<string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports.
-		\n\nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland  as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.). 
+		\n\nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland  as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.).
 		\n\nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.
 	</string>
 	<string name="plugin_ski_name">Ski map view</string>
@@ -271,7 +271,7 @@
     <string name="dash_download_manage">Manage</string>
     <string name="map_locale">Map language</string>
     <string name="rendering_attr_transportStops_name">Transport stops</string>
-    
+
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
@@ -352,7 +352,7 @@
 	<string name="speak_poi">Announce nearby POI</string>
 	<string name="way_alarms">Traffic warnings</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list. 
+	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list.
 		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
 		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
@@ -388,14 +388,14 @@
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
-	
+
 	<string name="enable_proxy_title">Enable HTTP Proxy</string>
 	<string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
 	<string name="proxy_host_title">Proxy Host</string>
 	<string name="proxy_host_descr">Configure your proxy\'s hostname (e.g. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy Port</string>
 	<string name="proxy_port_descr">Configure your proxy\'s port number (e.g. 8118)</string>
-	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
+	<string name="tip_initial_t">OsmAnd is a navigation application with many features.
 		\n\nAs a basic introduction, some usage tips and tricks are linked via \'Menu\' → \'Help\' from the map screen.
 	</string>
     <string name="monitoring_settings">Trip recording</string>
@@ -409,7 +409,7 @@
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
-    <string name="rendering_value_browse_map_name">Browse map</string>  
+    <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
     <string name="rendering_value_pedestrian_name">Pedestrian</string>
@@ -527,7 +527,7 @@
 	<string name="color_lightblue">light blue</string>
 	<string name="color_blue">blue</string>
 	<string name="color_green">green</string>
-	
+
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>
@@ -566,7 +566,7 @@
     <string name="osmo_auto_send_locations_descr">Automatically start tracker session and send locations after application startup</string>
     <string name="osmo_auto_send_locations">Automatically start tracker session</string>
     <string name="osmo_tracker_id">Personal tracker id</string>
-    <string name="osmo_tracker_id_descr">Click to view or share tracker id. 
+    <string name="osmo_tracker_id_descr">Click to view or share tracker id.
         Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
     <string name="osmo_session_token">Session token: %1$s</string>
     <string name="osmo_auth_pending">Waiting for authorization…</string>
@@ -584,7 +584,7 @@
     </string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_mode_restart">Restart OsMo session</string>
-    <string name="osmo_mode_on">Stop OsMo session</string>    
+    <string name="osmo_mode_on">Stop OsMo session</string>
     <string name="osmo_mode_off">Start OsMo session</string>
     <string name="osmo_settings_debug">Debug information</string>
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
@@ -691,7 +691,7 @@
     <string name="speech_rate">Speech Rate</string>
     <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
     \n\t* IMPORTANT maps should be newer than February 2014.
-	\n\t* Completely updated routing (fast and precise) - 
+	\n\t* Completely updated routing (fast and precise) -
     \n\t* New screen with Route Planning (more intuitive and more powerful)
     \n\t** NOTE GPX route is available under Route Settings buttton
     \n\t* Auto hide buttons in navigation mode
@@ -740,8 +740,8 @@
 	\n\t* Support transparent map background
 	\n\t* Show downloaded maps and facilitate downloading missing maps directly from the map view
 	\n\t* Contour line map files now bundled for countries/regions
-	\n\t* New world basemap with major roads, railroads, and major areal features like forests 
-	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
+	\n\t* New world basemap with major roads, railroads, and major areal features like forests
+	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps
 	\n\t* Define/edit custom online tile sources (and specify expiration time)
 	\n\t* Support of time conditional speed limits (Netherlands)
 	\n\t* Faster search address input
@@ -796,7 +796,7 @@
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">From:</string>
-	
+
 	<string name="app_mode_default">Browse map</string>
 	<string name="settings_preset">Default profile</string>
 	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
@@ -805,12 +805,12 @@
     <string name="please_select_address">Select city or street first</string>
     <string name="tip_recent_changes_1_4_t">Changes in 1.4:
 	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
-	\n\t* Search street by name (in neighborhood) 
+	\n\t* Search street by name (in neighborhood)
 	\n\t* Planning mode plugin (load/edit/save GPX tracks)
 	\n\t* New download screen (download in background)
 	\n\t* Support GPX subfolders (organize your GPX tracks)
 	\n\t* Delete SRTM files
-	\n\t* Support OSM Notes 
+	\n\t* Support OSM Notes
     </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way from current location to the destination.</string>
@@ -826,7 +826,7 @@
     <string name="plugin_distance_point">Point</string>
     <string name="gpx_file_name">GPX file name</string>
     <string name="gpx_saved_sucessfully">GPX file successfully saved to {0}</string>
-    <string name="use_distance_measurement_help">* Tap to mark a point.\n 
+    <string name="use_distance_measurement_help">* Tap to mark a point.\n
         * Press and hold on the map to delete previous point.\n
         * Press and hold on point to view and attach description.\n
         * Click on measurement widget to see more actions.</string>
@@ -838,7 +838,7 @@
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
-    <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string> 
+    <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string>
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
     <string name="other_location">Other</string>
@@ -875,7 +875,7 @@
 		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
 		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
 		\n\t* Now accepts maps.google.com location links
-		\n\t* New widget (GPS info) 
+		\n\t* New widget (GPS info)
 		\n\t* Added multi-window support for recent Samsung devices
 		\n\t* Kalman filter for compass
 		\n\t* Pebble watch support
@@ -903,7 +903,7 @@
 		\n\t* Hillshade packages for Contour lines plugin
 		\n\t* Bug fixes (suboptimal routing)
     </string>
-    
+
     <string name="local_indexes_cat_srtm">Contour lines data</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
@@ -969,7 +969,7 @@
     <string name="rendering_attr_alpineHiking_description">Render paths according to SAC scale</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking symbol overlay</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces</string>
-    
+
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
 	<string name="tip_altitude_offset">Altitude Correction</string>
@@ -1060,7 +1060,7 @@
 		\n\t* Dynamic map widgets
 		\n\t* Map settings moved to map screen
 		\n\t* Lock screen button with logging services
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
+		\n\t* Fixed Arabic, Kannada scripting and RTL languages
 	</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
 	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
@@ -1072,7 +1072,7 @@
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
-		- Download of country or region maps directly from the app 
+		- Download of country or region maps directly from the app
 		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
@@ -1171,7 +1171,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
-		- Unlimited downloading of country or region maps directly from the app 
+		- Unlimited downloading of country or region maps directly from the app
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
 		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
@@ -1318,7 +1318,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* More precise routes (a bit slower)
 		\n\t* Smart and fast Route recalculation
 		\n\t* Direction by lanes
-		\n\t* Information about speed limits, speed cams, and speed bumps 
+		\n\t* Information about speed limits, speed cams, and speed bumps
 		\n\t* Improved voice guidance on highways
 		\n\t* Parking plugin (\'Where is my car parked at?\')
 		\n\t* Enable/disable logging widget
@@ -1333,7 +1333,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_location">Shared location</string>
 	<string name="osmand_parking_event">Pick up the car from parking</string>
 	<string name="osmand_parking_warning">Warning</string>
-	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    
+	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>
 	<string name="osmand_parking_time_limit_title">Set the time limit of parking</string>
 	<string name="osmand_parking_delete_confirm">Do you want to remove the location of the parked car?</string>
 	<string name="osmand_parking_delete">Delete a parking marker</string>
@@ -1384,7 +1384,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="unknown_location">Position not yet known</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transport.</string>    
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transport.</string>
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
@@ -1399,19 +1399,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
 		\n\t- *Plugin functionality*
 		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
-		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
+		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
 		\n\t- *New offline map data support*
-		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
+		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
 		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
-		\n\t- *Offline Routing* 
+		\n\t- *Offline Routing*
 		\n\t	- Offline routing becomes more robust
 		\n\t  *Usability and UI experience*
-		\n\t	- Improved in many areas		
+		\n\t	- Improved in many areas
 	</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="native_rendering">Native rendering</string>
-	<string name="test_voice_prompts">Test voice prompts</string>    
+	<string name="test_voice_prompts">Test voice prompts</string>
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Manage map files), or switch to online maps (enable online maps plugin for this).</string>
 	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
 		\n\t- Native rendering for all devices
@@ -1427,10 +1427,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     	<string name="default_buttons_support">Support</string>
 	<string name="support_new_features">Support new features</string>
 	<string name="support_new_features_descr">Donate to see new features implemented in the application</string>
-	<string name="show_ruler_level">Display ruler</string>	
+	<string name="show_ruler_level">Display ruler</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Back to position</string>
-	
+
 	<string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
 	<string name="accessibility_extensions">Accessibility extensions</string>
 	<string name="accessibility_mode">Accessibility mode</string>
@@ -1495,7 +1495,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="offline_edition">Offline editing</string>
 	<string name="offline_edition_descr">Always use offline editing</string>
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
-		\n\t- Offline POI editing 
+		\n\t- Offline POI editing
 		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
 		\n\t- Show currently recorded track on map
 		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
@@ -1523,7 +1523,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Offline wikipedia data with articles
 		\n\t- Updated maps
 		\n\t- Other small features
-	</string>    
+	</string>
 	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
@@ -1575,7 +1575,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'Day\': always use day mode
 		\n\t* \'Night\': always use night mode
 		\n\t* \'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
-	</string>	
+	</string>
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
 		\n\nFor this you need to activate the \'OSM Editing\' plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
@@ -1615,17 +1615,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="city_type_village">Village</string>
 	<string name="city_type_town">Town</string>
 	<string name="city_type_city">City</string>
-	
+
 	<string name="animate_route_off">Stop simulation</string>
 	<string name="animate_route">Start simulation</string>
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
 		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-		\n\t- Implement POI search by name in big areas (countries)  
+		\n\t- Implement POI search by name in big areas (countries)
 		\n\t- Fix flickering map screen for tablets (Issue 641)
 		\n\t- Auto-center map view option (Issue 356)
 		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-		\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
+		\n\t- POI data included in .obf file (all download indexes after 01/10/11)
+		\n\t- Voice prompt fixes (GPS position fix, omitting first command)
 		\n\t- Small improvements
 	</string>
 	<string name="file_can_not_be_renamed">File can not be renamed.</string>
@@ -1706,7 +1706,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Recent Changes</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
+	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6:
 		\n\t- Text To Speech engine for voice navigation
 		\n\t- Make map renderer more detailed
 		\n\t- Basemap for whole world packaged with app
@@ -1834,8 +1834,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
-	
-	
+
+
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build…</string>
@@ -2036,7 +2036,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
-	<string name="empty_route_calculated">Error: Calculated route is empty</string>					
+	<string name="empty_route_calculated">Error: Calculated route is empty</string>
 	<string name="new_route_calculated_dist">New route calculated, distance</string>
 	<string name="arrived_at_destination">You have arrived at your destination</string>
 	<string name="invalid_locations">Coordinates are invalid!</string>
