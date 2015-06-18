@@ -806,4 +806,32 @@
 	<string name="poi_wiki_lang_hr">Wiki en croat</string>
 	<string name="poi_wiki_lang_ht">Wiki en crioll haitià</string>
 	<string name="poi_wiki_lang_hu">Wiki en hongarès</string>
-	</resources>
+	<string name="poi_wiki_lang_id">Wiki en indonesi</string>
+	<string name="poi_wiki_lang_it">Wiki en italià</string>
+	<string name="poi_wiki_lang_ja">Wiki en japonès</string>
+	<string name="poi_wiki_lang_ko">Wiki en coreà</string>
+	<string name="poi_wiki_lang_lt">Wiki en lituà</string>
+	<string name="poi_wiki_lang_lv">Wiki en letó</string>
+	<string name="poi_wiki_lang_ms">Wiki en malai</string>
+	<string name="poi_wiki_lang_new">Wiki en newar</string>
+	<string name="poi_wiki_lang_nl">"Wiki en  holandès"</string>
+	<string name="poi_wiki_lang_nn">"Wiki en  noruec (nynorsk)"</string>
+	<string name="poi_wiki_lang_no">Wiki en noruec</string>
+	<string name="poi_wiki_lang_pl">Wiki en polonès</string>
+	<string name="poi_wiki_lang_pt">Wiki en portuguès</string>
+	<string name="poi_wiki_lang_ro">Wiki en romanès</string>
+	<string name="poi_wiki_lang_ru">Wiki en rus</string>
+	<string name="poi_wiki_lang_sk">Wiki en eslovac</string>
+	<string name="poi_wiki_lang_sl">Wiki en eslovè</string>
+	<string name="poi_wiki_lang_sr">Wiki en serbi</string>
+	<string name="poi_wiki_lang_sv">Wiki en suec</string>
+	<string name="poi_wiki_lang_sw">Wiki en suahili</string>
+	<string name="poi_wiki_lang_te">Wiki en telugu</string>
+	<string name="poi_wiki_lang_th">Wiki en tailandès</string>
+	<string name="poi_wiki_lang_tr">Wiki en turc</string>
+	<string name="poi_wiki_lang_uk">Wiki en ucraïnès</string>
+	<string name="poi_wiki_lang_vi">Wiki en vietnamita</string>
+	<string name="poi_wiki_lang_vo">Wiki en volapük</string>
+	<string name="poi_wiki_lang_zh">Wiki en xinès</string>
+
+</resources>
