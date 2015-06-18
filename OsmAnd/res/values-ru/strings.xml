@@ -1036,7 +1036,7 @@
   
   
   <string name="map_widget_parking">Парковка</string>
-  <string name="map_widget_monitoring">Мониторинг</string>
+  <string name="map_widget_monitoring">Запись GPX</string>
   <string name="map_widget_speed">Скорость</string>
   <string name="map_widget_distance">Цель</string>
   <string name="map_widget_altitude">Высота</string>
