@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
     <string name="lang_pms">Piedmontese</string>
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>

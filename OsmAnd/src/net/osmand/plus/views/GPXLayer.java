@@ -303,7 +303,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			int startIndex = -1;
 			int endIndex = -1;
 		    int prevCross = 0;
-		    double shift = 0.1;
+		    double shift = 0;
 			for (int i = 0; i < l.points.size(); i++) {
 				WptPt ls = l.points.get(i);
 				int cross = 0;
@@ -313,21 +313,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				cross |= (ls.lat < latLonBounds.bottom - shift ? 8 : 0);
 				if (i > 0) {
 					if ((prevCross & cross) == 0) {
-						if(prevCross == 0 && endIndex != -1) {
+						if (endIndex == i - 1 && startIndex != -1) {
 							// continue previous line
 						} else {
 							// start new segment
-							if (startIndex > 0) {
+							if (startIndex >= 0) {
 								drawSegment(canvas, tileBox, l, startIndex, endIndex);
 							}
 							startIndex = i - 1;
 						}
 						endIndex = i;
-					} else {
-						if (startIndex != -1) {
-							drawSegment(canvas, tileBox, l, startIndex, endIndex);
-							startIndex = -1;
-						}
 					}
 				}
 				prevCross = cross;
