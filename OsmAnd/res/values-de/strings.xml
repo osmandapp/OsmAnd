@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -288,7 +288,7 @@
 	<string name="local_openstreetmap_settings_descr">In der lokalen Datenbank vermerkte OSM POIs/Hinweise anzeigen und verwalten</string>
 
 	<string name="live_monitoring_m">Online Verfolgung (benötigt GPX)</string>
-	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
+	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet-Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
 	<string name="live_monitoring_url">Online-Tracking Web-Adresse</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Online-Tracking Web-Adresse mit Datenübergabe: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_interval">Online-Tracking Intervall</string>
@@ -1241,7 +1241,7 @@
 	
 	
 	<string name="map_widget_parking">Parken</string>
-	<string name="map_widget_monitoring">GPX-Aufnahme</string>
+	<string name="map_widget_monitoring">GPX-Aufzeichnung</string>
 	<string name="map_widget_speed">Geschwindigkeit</string>
 	<string name="map_widget_distance">Ziel</string>
 	<string name="map_widget_altitude">Höhe</string>
@@ -2002,7 +2002,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="shared_string_dismiss">Ablehnen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
-    <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
+    <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
     <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
@@ -2180,4 +2180,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_fast_recalculation">schnelle Routen-Neuberechnung</string>
 	<string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen</string>
-</resources>
+<string name="lang_es_ar">Spanisch (Argentinien)</string>
+    <string name="lang_th">Thailändisch</string>
+    <string name="lang_ms">Malaysisch</string>
+    <string name="lang_ht">Haitianisch</string>
+    <string name="lang_gl">Galizisch</string>
+    <string name="lang_et">Estisch</string>
+    <string name="archive_wikipedia_data">Es sind veraltete inkompatible Wikipedia-Daten vorhanden. Sollen diese gesichert werden?</string>
+    <string name="download_wikipedia_files">Sollen zusätzliche Wikipedia-Daten heruntergeladen werden (%1$s MB) ?</string>
+    <string name="osm_edit_context_menu_delete">OSM-Bearbeitungen löschen</string>
+    </resources>
