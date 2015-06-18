@@ -328,19 +328,22 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	}
 
 	private String getMapDescription(IndexItem item){
-		String typeName = getTypeName(item.getType().getResource());
+		String typeName = getTypeName(item, item.getType().getResource());
 		String date = item.getDate(format);
 		String size = item.getSizeDescription(getActivity());
 		return typeName + "  " + date + "  " + size;
 
 	}
 
-	private String getTypeName(int resId){
+	private String getTypeName(IndexItem item, int resId){
 		Activity activity = getActivity();
 		if (resId == R.string.download_regular_maps){
 			return activity.getString(R.string.shared_string_map);
-		} else if (resId == R.string.voices){
-			return activity.getString(R.string.ttsvoice);
+		} else if (resId == R.string.download_wikipedia_maps){
+			return activity.getString(R.string.download_wikipedia_item);
+		} else if (resId == R.string.voices) {
+			return item.getTargetFileName().contains("tts") ? activity.getString(R.string.ttsvoice) : activity
+					.getString(R.string.voice);
 		} else if (resId == R.string.download_roads_only_maps){
 			return activity.getString(R.string.roads_only);
 		} else if (resId == R.string.download_srtm_maps){
