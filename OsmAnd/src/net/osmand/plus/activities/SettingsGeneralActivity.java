@@ -388,7 +388,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		registerListPreference(
 				settings.OSMAND_THEME, misc,
-				new String[] { "Dark", "Light" }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
+				new String[] { getString(R.string.dark_theme), getString(R.string.light_theme) }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
 						OsmandSettings.OSMAND_LIGHT_THEME});
 		
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
