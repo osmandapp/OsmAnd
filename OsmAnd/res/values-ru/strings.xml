@@ -1130,7 +1130,7 @@
 	<string name="no_route">Нет маршрута</string>
 	<string name="gps_not_available">Включите GPS в настройках</string>
     <string name="map_widget_show_destination_arrow">Отображать направление к точке назначения</string>
-    <string name="enable_plugin_monitoring_services">Активировать плагины мониторинга (сопровождение, сопровождение в реальном времени) для использования сервисов мониторинга</string>
+    <string name="enable_plugin_monitoring_services">"Включите плагин \"Запись поездки\" для использования сервисов мониторинга  (запись GPX, сопровождение в реальном времени)"</string>
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
 	<string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
     <string name="route_descr_current_location">Текущая позиция</string>
