@@ -1,2 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
+    <string name="lang_th">ಥಾಯಿ</string>
+    <string name="lang_te">ತೆಲುಗು</string>
+    <string name="lang_nn"/>
+    <string name="lang_new">ನೇಪಾಳಿ</string>
+    <string name="lang_ms">ಮಲೇಷ್ಯಾ</string>
+    <string name="download_wikipedia_files">ನೀವು ಅಧಿಕ ವಿಕಿಪೀಡಿಯ ದತ್ತಾಂಶವನ್ನು (%1$s MB) ಡೌನ್ ಲೋಡ್ ಮಾಡಲು ಇಚ್ಚಿಸುವಿರಾ?</string>
+    </resources>
