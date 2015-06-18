@@ -19,6 +19,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.os.Build;
 
@@ -39,19 +40,11 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDateEdition(long t, TimeZone timeZone){
-		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-		if(timeZone != null) {
-			dateFormat.setTimeZone(timeZone);
-		}
-		return app.getString(R.string.local_index_installed) + " : " + dateFormat.format(new Date(t));
+		return app.getString(R.string.local_index_installed) + ": " + app.getResourceManager().getDateFormat().format(new Date(t));
 	}
 
 	public String getInstalledDate(long t, TimeZone timeZone){
-		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-		if(timeZone != null) {
-			dateFormat.setTimeZone(timeZone);
-		}
-		return dateFormat.format(new Date(t));
+		return app.getResourceManager().getDateFormat().format(new Date(t));
 	}
 
 	public void updateDescription(LocalIndexInfo info){
@@ -63,6 +56,10 @@ public class LocalIndexHelper {
 			} else {
 				info.setDescription(getInstalledDate(f));
 			}
+		} else if(info.getType() == LocalIndexType.WIKI_DATA){
+			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.SRTM_DATA){
+			info.setDescription(app.getString(R.string.download_srtm_maps));
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
