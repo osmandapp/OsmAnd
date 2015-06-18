@@ -267,9 +267,7 @@ public class AppInitializer implements IProgress {
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
-		String lang = osmandSettings.PREFERRED_LOCALE.get();
-		String clang = "".equals(lang) ? new Locale(lang).getLanguage() : lang;
-		app.regions.setLocale(clang);
+		app.regions.setLocale(app.getLanguage());
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
