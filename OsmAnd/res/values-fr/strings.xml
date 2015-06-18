@@ -2058,4 +2058,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_gl">Galicien</string>
     <string name="lang_et">Estonien</string>
     <string name="lang_es_ar">Espagnol argentin</string>
+    <string name="lang_pms">Piémontais</string>
+    <string name="lang_sh">Serbo-croate</string>
+    <string name="lang_br">Breton</string>
+    <string name="lang_sq">Albanais</string>
+    <string name="lang_is">Islandais</string>
+    <string name="lang_ga">Irlandais</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ku">Kurde</string>
+    <string name="lang_lb">Luxembourgeois</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>

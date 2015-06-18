@@ -1962,4 +1962,24 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_es_ar">Español Argentino</string>
     <string name="lang_nb">Noruego Bokmål</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="lang_pms">Piamontés</string>
+    <string name="lang_bn">Bengalí</string>
+    <string name="lang_sh">Serbo-croata</string>
+    <string name="lang_br">Bretón</string>
+    <string name="lang_sq">Albanés</string>
+    <string name="lang_is">Islandés</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandés</string>
+    <string name="lang_la">Latín</string>
+    <string name="lang_ku">Kurdo</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_tl">Tagalo</string>
+    <string name="lang_az">Azerbaiyán</string>
+    <string name="lang_bpy">Bishnupriya Manipuri</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Luxemburgués</string>
+    <string name="lang_os">Osetio</string>
     </resources>
