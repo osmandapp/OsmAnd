@@ -2072,4 +2072,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="shared_string_show_details">Mostra i dettagli</string>
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="lang_es_ar">Spagnolo argentino</string>
+    <string name="lang_nb">Norvegese Bokmål</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thailandese</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norwegian (Nynorsk)</string>
     </resources>

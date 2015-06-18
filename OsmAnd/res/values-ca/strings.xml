@@ -2030,4 +2030,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_gl">Gallec</string>
     <string name="lang_et">Estonià</string>
     <string name="lang_ceb">Cebuà</string>
+    <string name="lang_es_ar">Espanyol argentí</string>
+    <string name="lang_nb">Noruec bokmål</string>
     </resources>

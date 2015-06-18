@@ -70,31 +70,31 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
-		
-		
-		
+
+
+
 		ApplicationMode[] appModes = ApplicationMode.values(settings).toArray(new ApplicationMode[0]);
 		entries = new String[appModes.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = appModes[i].toHumanString(getMyApplication());
 		}
 		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
-		
+
 		// List preferences
-		registerListPreference(settings.ROTATE_MAP, screen, 
+		registerListPreference(settings.ROTATE_MAP, screen,
 				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
 				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
-		
-		registerListPreference(settings.MAP_SCREEN_ORIENTATION, screen, 
+
+		registerListPreference(settings.MAP_SCREEN_ORIENTATION, screen,
 				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
 				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
-		
+
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
-		
+
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
 		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
@@ -129,26 +129,26 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 	}
 
-	
+
 
 	private void addLocalPrefs(PreferenceGroup screen) {
 		String[] entries;
 		String[] entrieValues;
-		
+
 		DrivingRegion[] drs  = DrivingRegion.values();
 		entries = new String[drs.length];
 		for (int i = 0; i < entries.length; i++) {
 			entries[i] = getString(drs[i].name); // + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
 		}
 		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
-		
+
 		MetricsConstants[] mvls  = MetricsConstants.values();
 		entries = new String[mvls.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = mvls[i].toHumanString(getMyApplication());
 		}
 		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
-		
+
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
 		// Add this in Latin also so it can be more easily identified if foreign language has been selected by mistake
@@ -191,18 +191,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"fa",
 				"pl",
 				"pt",
-				"pt_br",
 				"ro",
 				"ru",
 				"sc",
 				"sr",
-				"zh_CN",
 				"sk",
 				"sl",
 				"es",
-				"es_ar",
 				"sv",
-				"zh_TW",
 				"tr",
 				"uk",
 				"vi",
@@ -243,18 +239,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_fa),
 				getString(R.string.lang_pl),
 				getString(R.string.lang_pt),
-				getString(R.string.lang_pt_br),
 				getString(R.string.lang_ro),
 				getString(R.string.lang_ru),
 				getString(R.string.lang_sc),
 				getString(R.string.lang_sr) + incompleteSuffix,
-				getString(R.string.lang_zh_CN) + incompleteSuffix,
 				getString(R.string.lang_sk),
 				getString(R.string.lang_sl),
 				getString(R.string.lang_es),
-				getString(R.string.lang_es_ar),
 				getString(R.string.lang_sv),
-				getString(R.string.lang_zh_TW),
 				getString(R.string.lang_tr) + incompleteSuffix,
 				getString(R.string.lang_uk),
 				getString(R.string.lang_vi) + incompleteSuffix,
@@ -312,8 +304,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			}
 		});
 	}
-	
-	
+
+
 	public void showAppDirDialog(){
 		if(Build.VERSION.SDK_INT >= 19) {
 			 showAppDirDialogV19();
@@ -338,9 +330,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		    }
 		});
 		editalert.show();
-		
+
 	}
-	
+
 	private void showAppDirDialogV19() {
 		Builder bld = new AlertDialog.Builder(this);
 		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null);
@@ -357,7 +349,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			applicationDir.setTitle(R.string.application_dir);
 			applicationDir.setKey("external_storage_dir");
 			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-				
+
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
 					showAppDirDialog();
@@ -373,26 +365,26 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				nativeCheckbox.setChecked(true);
 			}
 			misc.addPreference(nativeCheckbox);
-			
+
 			final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
 			misc.addPreference(openGlRender);
-			
+
 			int nav = getResources().getConfiguration().navigation;
-			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 
-					nav == Configuration.NAVIGATION_WHEEL || 
+			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL ||
+					nav == Configuration.NAVIGATION_WHEEL ||
 					nav == Configuration.NAVIGATION_UNDEFINED) {
 				misc.addPreference(createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, R.string.use_trackball,
 						R.string.use_trackball_descr));
 			}
 		}
-		
+
 		registerListPreference(
 				settings.OSMAND_THEME, misc,
 				new String[] { "Dark", "Light" }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
 						OsmandSettings.OSMAND_LIGHT_THEME});
-		
+
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
-		
+
 	}
 
 
@@ -455,14 +447,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		return true;
 	}
-	
-	
+
+
 
 	private void warnAboutChangingStorage(final String newValue) {
 		String newDir = newValue != null ? newValue.trim() : newValue;
 		if(!newDir.replace('/', ' ').trim().
 				toLowerCase().endsWith(IndexConstants.APP_DIR.replace('/', ' ').trim())) {
-			newDir += "/" +IndexConstants.APP_DIR; 
+			newDir += "/" +IndexConstants.APP_DIR;
 		}
 		final File path = new File(newDir);
 		path.mkdirs();
@@ -476,28 +468,28 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =
-						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this, 
+						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this,
 						settings.getExternalStorageDirectory(), path);
 				task.setRunOnSuccess(new Runnable() {
 					@Override
 					public void run() {
-						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());						
+						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 					}
 				});
 				task.execute();
 			}
 		});
 		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updateSettingsToNewDir(path.getParentFile().getAbsolutePath());								
+				updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
-	
+
 	private void updateSettingsToNewDir(final String newDir) {
 		// edit the preference
 		settings.setExternalStorageDirectoryPre19(newDir);
@@ -515,17 +507,17 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, 
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
 						new ArrayList<String>());
 			}
-			
+
 			protected void onPostExecute(List<String> result) {
 				showWarnings(result);
 				getToolbar().setTitle(oldTitle);
 				getToolbar().setSubtitle("");
 				setProgressVisibility(false);
 			}
-			
+
 		}.execute();
 	}
 
@@ -600,7 +592,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entries[k] = getString(R.string.install_more);
 		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
 	}
-	
+
 
 	private Set<String> getVoiceFiles() {
 		// read available voice data

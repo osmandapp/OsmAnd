@@ -2184,4 +2184,16 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu spánku OsmAnd zmizne z notifikačnej oblasti Androidu.)</string>
 	<string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipedie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Chcete stiahnuť ďalšie dáta z Wikipedie (%1$s MB) ?</string>
+    <string name="lang_es_ar">Argentínska Španielčina</string>
+    <string name="lang_nb">Nórsky Bokmål</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thajsky</string>
+    <string name="lang_te">Telugsky</string>
+    <string name="lang_nn">Nórsky (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepálsky Bhasa</string>
+    <string name="lang_ms">Malajsky</string>
+    <string name="lang_ht">Haitsky</string>
+    <string name="lang_gl">Galícijsky</string>
+    <string name="lang_et">Estónsky</string>
+    <string name="lang_ceb">Cebuano</string>
     </resources>

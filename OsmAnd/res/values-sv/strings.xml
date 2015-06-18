@@ -1896,14 +1896,16 @@
     <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds vilolägesindikation försvinner från Androids aviseringsfält.)</string>
 	<string name="archive_wikipedia_data">Du har hämtat gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
     <string name="download_wikipedia_files">Vill du hämta ytterligare data från Wikipedia (%1$s MB)?</string>
-    <string name="lang_vo">Volapuk</string>
+    <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Nynorska</string>
+    <string name="lang_nn">Norska (nynorska)</string>
     <string name="lang_new">Newar/Nepal Bhasa</string>
     <string name="lang_ms">Malajiska</string>
     <string name="lang_ht">Haitiska</string>
     <string name="lang_gl">Galiciska</string>
     <string name="lang_et">Estniska</string>
     <string name="lang_ceb">Cebuano/Visaya</string>
+    <string name="lang_es_ar">Argentisk spanska</string>
+    <string name="lang_nb">Norska (bokmål)</string>
     </resources>

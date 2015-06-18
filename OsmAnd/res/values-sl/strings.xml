@@ -1863,7 +1863,7 @@
 <string name="osmo_share_my_location">Deli mojo lokacijo</string>
     <string name="shared_string_logoff">Odjava</string>
     <string name="rendering_value_disabled_name">Onemogočeno</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Barvanje poti po vrsti</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Barvanje poti po vrsti poti</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Barvanje poti po OSMC</string>
     <string name="osm_edit_context_menu_delete">Izbriši urejanje OSM</string>    
     <string name="read_full_article">Pokaži celoten prispevek</string>
@@ -1888,4 +1888,6 @@
     <string name="lang_et">Estonščina</string>
     <string name="lang_ceb">Cebuanščina</string>
     <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz Wikipedije. Ali jih želite arhivirati?</string>
+    <string name="lang_es_ar">Argentinska španščina</string>
+    <string name="lang_nb">Norveščina (Bokmål)</string>
     </resources>
