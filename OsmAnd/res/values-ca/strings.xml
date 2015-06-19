@@ -2032,4 +2032,20 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_ceb">Cebuà</string>
     <string name="lang_es_ar">Espanyol argentí</string>
     <string name="lang_nb">Noruec bokmål</string>
+    <string name="light_theme">Lluminós</string>
+    <string name="dark_theme">Fosc</string>
+    <string name="lang_pms">Piamontès</string>
+    <string name="lang_bn">Bengalí</string>
+    <string name="lang_tl">Tagal</string>
+    <string name="lang_sh">Serbocroat</string>
+    <string name="lang_az">Àzeri</string>
+    <string name="lang_br">Bretó</string>
+    <string name="lang_sq">Albanès</string>
+    <string name="lang_is">Islandès</string>
+    <string name="lang_ga">Irlandès</string>
+    <string name="lang_la">Llatí</string>
+    <string name="lang_ku">Kurd</string>
+    <string name="lang_ta">Tàmil</string>
+    <string name="lang_lb">Luxemburguès</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
