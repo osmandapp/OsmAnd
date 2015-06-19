@@ -2196,4 +2196,24 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_gl">Galícijsky</string>
     <string name="lang_et">Estónsky</string>
     <string name="lang_ceb">Cebuano</string>
+    <string name="light_theme">Svetlá</string>
+    <string name="dark_theme">Tmavá</string>
+    <string name="lang_pms">Piedmontsky</string>
+    <string name="lang_bn">Bengálsky</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Srbochorvátsky</string>
+    <string name="lang_az">Azersky</string>
+    <string name="lang_br">Bretónsky</string>
+    <string name="lang_sq">Albánsky</string>
+    <string name="lang_is">Islandsky</string>
+    <string name="lang_bpy">Bišnupríjsky</string>
+    <string name="lang_nv">Navajsky</string>
+    <string name="lang_ga">Írsky</string>
+    <string name="lang_la">Latinsky</string>
+    <string name="lang_ku">Kurdsky</string>
+    <string name="lang_ta">Tamilsky</string>
+    <string name="lang_ml">Malajálamsky</string>
+    <string name="lang_lb">Luxembursky</string>
+    <string name="lang_os">Osetsky</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
