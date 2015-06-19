@@ -2019,4 +2019,10 @@
     <string name="lang_ceb">宿霧語</string>
     <string name="lang_es_ar">阿根廷的西班牙文</string>
     <string name="lang_nb">挪威布克莫爾語</string>
+    <string name="light_theme">明亮</string>
+    <string name="dark_theme">暗色</string>
+    <string name="lang_pms">皮埃蒙特語</string>
+    <string name="lang_bn">孟加拉語</string>
+    <string name="lang_tl">塔加洛語</string>
+    <string name="lang_sh">塞爾維亞-克羅埃西亞語</string>
     </resources>
