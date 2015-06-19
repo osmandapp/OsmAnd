@@ -1982,4 +1982,24 @@
     <string name="download_wikipedia_files">Szeretne további Wikipédia adatokat letölteni (%1$s MB)?</string>
     <string name="lang_es_ar">Argentin spanyol</string>
     <string name="lang_nb">Norvég bokmål</string>
+    <string name="light_theme">Világos</string>
+    <string name="dark_theme">Sötét</string>
+    <string name="lang_pms">Piemonti</string>
+    <string name="lang_bn">Bengáli</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Szerb-horvát</string>
+    <string name="lang_az">Azeri</string>
+    <string name="lang_br">Breton</string>
+    <string name="lang_sq">Albán</string>
+    <string name="lang_is">Izlandi</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Ír</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ku">Kurd</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malajálam</string>
+    <string name="lang_lb">Luxemburgi</string>
+    <string name="lang_os">Oszét</string>
+    <string name="lang_eo">Eszperantó</string>
     </resources>
