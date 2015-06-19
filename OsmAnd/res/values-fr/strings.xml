@@ -2068,4 +2068,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_ku">Kurde</string>
     <string name="lang_lb">Luxembourgeois</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="light_theme">Clair</string>
+    <string name="dark_theme">Sombre</string>
     </resources>
