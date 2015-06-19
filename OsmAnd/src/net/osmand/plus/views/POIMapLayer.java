@@ -337,9 +337,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
-			// First choice to display wiki article in should be the selected OsmAnd locale (not the map display language)
-			//showWiki(ctx, app, a, lang);
-			showWiki(ctx, app, a, app.getSettings().MAP_PREFERRED_LOCALE.get());
+			String preferredLang = lang;
+			if(Algorithms.isEmpty(preferredLang)) {
+				preferredLang = app.getLanguage();
+			}
+			showWiki(ctx, app, a, preferredLang);
 		} else {
 			String d = OsmAndFormatter.getAmenityDescriptionContent(app, a, false);
 			SpannableString spannable = new SpannableString(d);

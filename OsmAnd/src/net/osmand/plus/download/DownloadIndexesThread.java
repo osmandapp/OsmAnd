@@ -598,14 +598,17 @@ public class DownloadIndexesThread {
 						File file = new File(((AssetIndexItem) item).getDestFile());
 						oldItemSize = file.length();
 					} else {
-						oldItemSize = new File(item.getType().getDownloadFolder(app, item), sfName +"/_config.p").length();
-						try {
-							InputStream is = ctx.getAssets(). open("voice/" + sfName + "/config.p");
-							if(is != null) {
-								oldItemSize = is.available();
-								is.close();
+						File fl = new File(item.getType().getDownloadFolder(app, item), sfName +"/_config.p");
+						if (fl.exists()) {
+							oldItemSize = fl.length();
+							try {
+								InputStream is = ctx.getAssets().open("voice/" + sfName + "/config.p");
+								if (is != null) {
+									itemSize = is.available();
+									is.close();
+								}
+							} catch (IOException e) {
 							}
-						} catch (IOException e) {
 						}
 					}
 				}

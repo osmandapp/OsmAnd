@@ -78,7 +78,6 @@ public class OsmandApplication extends Application {
 	Handler uiHandler;
 
 	NavigationService navigationService;
-	private Locale preferredLocale = null;
 	
 	// start variables
 	ResourceManager resourceManager;
@@ -101,6 +100,7 @@ public class OsmandApplication extends Application {
 	
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
+	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
 	
@@ -131,11 +131,11 @@ public class OsmandApplication extends Application {
 		osmandSettings = appCustomization.getOsmandSettings();
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
 		
+		checkPreferredLocale();
 		appInitializer.onCreateApplication();
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-		checkPreferredLocale();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -621,6 +621,13 @@ public class OsmandApplication extends Application {
 				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 			}
 		}
+	}
+	
+	public String getLanguage() {
+		if(preferredLocale != null) {
+			return preferredLocale.getLanguage();
+		}
+		return Locale.getDefault().getLanguage();
 	}
 	
 	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
