@@ -2048,4 +2048,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_ta">Tàmil</string>
     <string name="lang_lb">Luxemburguès</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="lang_bpy">Bishnupriya manipuri</string>
+    <string name="lang_nv">Navaho</string>
+    <string name="lang_ml">Malaiàlam</string>
+    <string name="lang_os">Osseta</string>
     </resources>
