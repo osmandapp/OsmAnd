@@ -624,10 +624,16 @@ public class OsmandApplication extends Application {
 	}
 	
 	public String getLanguage() {
-		if(preferredLocale != null) {
-			return preferredLocale.getLanguage();
+		String lang = "";
+		if (preferredLocale != null) {
+			lang = preferredLocale.getLanguage();
+		} else {
+			lang = Locale.getDefault().getLanguage();
 		}
-		return Locale.getDefault().getLanguage();
+		if (lang != null && lang.length() > 2) {
+			lang = lang.substring(0, 2).toLowerCase();
+		}
+		return lang;
 	}
 	
 	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
