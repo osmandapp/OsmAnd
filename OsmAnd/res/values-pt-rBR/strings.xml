@@ -1731,4 +1731,24 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_es_ar">Espanhol Argentino</string>
     <string name="lang_nb">Norueguês Bokmål</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Escuro</string>
+    <string name="lang_pms">Piemontês</string>
+    <string name="lang_bn">Bengalês</string>
+    <string name="lang_tl">Tagalo</string>
+    <string name="lang_sh">Servo-croata</string>
+    <string name="lang_az">Azeri</string>
+    <string name="lang_br">Bretão</string>
+    <string name="lang_sq">Albanês</string>
+    <string name="lang_is">Islandês</string>
+    <string name="lang_bpy">Bishnupriya Manipuri</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandês</string>
+    <string name="lang_la">Latim</string>
+    <string name="lang_ku">Curdo</string>
+    <string name="lang_ta">Tâmil</string>
+    <string name="lang_ml">Malaiala</string>
+    <string name="lang_lb">Luxemburguês</string>
+    <string name="lang_os">Osseta</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
