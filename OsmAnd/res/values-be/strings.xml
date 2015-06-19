@@ -1999,4 +1999,23 @@
     <string name="lang_et">эстонская</string>
     <string name="lang_ceb">Кебуано</string>
     <string name="lang_ms">малазійская</string>
+    <string name="lang_eo">эспэранта</string>
+    <string name="lang_es_ar">аргентынская іспанская</string>
+    <string name="lang_nb">нарвежская (букмал)</string>
+    <string name="light_theme">Сьветлая</string>
+    <string name="dark_theme">Цёмная</string>
+    <string name="lang_bn">бенгальская</string>
+    <string name="lang_tl">тагальская</string>
+    <string name="lang_sh">сербахарвацкая</string>
+    <string name="lang_az">азэрбайджанская</string>
+    <string name="lang_br">брэтонская</string>
+    <string name="lang_sq">альбанская</string>
+    <string name="lang_is">ісландская</string>
+    <string name="lang_ga">ірландская</string>
+    <string name="lang_la">лацінская</string>
+    <string name="lang_ku">курдзкая</string>
+    <string name="lang_ta">тамільская</string>
+    <string name="lang_ml">малаялам</string>
+    <string name="lang_lb">люксембургская</string>
+    <string name="lang_os">асяцінская</string>
     </resources>
