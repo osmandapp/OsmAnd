@@ -2047,4 +2047,24 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="lang_nb">Norsk</string>
     <string name="lang_es_ar">Argentinsk spansk</string>
+    <string name="light_theme">Lys</string>
+    <string name="dark_theme">Mørk</string>
+    <string name="lang_pms">Piemontisk</string>
+    <string name="lang_bn">Bengalsk</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbokroatisk</string>
+    <string name="lang_az">Aserbajdsjansk</string>
+    <string name="lang_br">Bretonsk</string>
+    <string name="lang_sq">Albansk</string>
+    <string name="lang_is">Islandsk</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irsk</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ku">Kurdisk</string>
+    <string name="lang_ta">Tamilsk</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Luxembourgsk</string>
+    <string name="lang_os">Ossetiske</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
