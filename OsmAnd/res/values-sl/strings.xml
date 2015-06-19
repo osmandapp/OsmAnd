@@ -1890,4 +1890,24 @@
     <string name="archive_wikipedia_data">Nameščeni so zastareli in nepodprti podatki iz Wikipedije. Ali jih želite arhivirati?</string>
     <string name="lang_es_ar">Argentinska španščina</string>
     <string name="lang_nb">Norveščina (Bokmål)</string>
+    <string name="light_theme">Svetla</string>
+    <string name="dark_theme">Temna</string>
+    <string name="lang_pms">Pijemontščina</string>
+    <string name="lang_bn">Bengalščina</string>
+    <string name="lang_tl">Tagaloščina</string>
+    <string name="lang_sh">Srbohrvaščina</string>
+    <string name="lang_az">Azerbajdžanščina</string>
+    <string name="lang_br">Bretonščina</string>
+    <string name="lang_sq">Albanščina</string>
+    <string name="lang_is">Islandščina</string>
+    <string name="lang_bpy">Bišnuprija</string>
+    <string name="lang_nv">Navajščina</string>
+    <string name="lang_ga">Irščina</string>
+    <string name="lang_la">Latinščina</string>
+    <string name="lang_ku">Kurdščina</string>
+    <string name="lang_ta">Tamilščina</string>
+    <string name="lang_ml">Malajščina</string>
+    <string name="lang_lb">Luksemburščina</string>
+    <string name="lang_os">Osetijščina</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
