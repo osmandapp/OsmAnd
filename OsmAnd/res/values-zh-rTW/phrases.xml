@@ -433,7 +433,7 @@
 	<string name="poi_handball">手球</string>
 	<string name="poi_hockey">曲棍球</string>
 	<string name="poi_horse_racing">賽馬</string>
-	<string name="poi_ice_skating">溜冰</string>
+	<string name="poi_ice_skating">滑冰</string>
 	<string name="poi_ice_stock">冰上滑盤</string>
 	<string name="poi_korfbal">合球</string>
 	<string name="poi_sport_motor">汽車運動</string>
@@ -449,7 +449,7 @@
 	<string name="poi_rugby_league">聯盟式橄欖球</string>
 	<string name="poi_sailing">帆船</string>
 	<string name="poi_shooting">射擊</string>
-	<string name="poi_skating">溜冰</string>
+	<string name="poi_skating">滑冰</string>
 	<string name="poi_skateboard">滑板</string>
 	<string name="poi_skiing">滑雪</string>
 	<string name="poi_soccer">足球</string>
