@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -375,9 +377,6 @@ public class DownloadIndexesThread {
 			} else {
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
 			}
-			if (res && de.attachedEntry != null) {
-				return downloadFile(de.attachedEntry, filesToReindex, forceWifi);
-			}
 			return res;
 		}
 
@@ -593,8 +592,25 @@ public class DownloadIndexesThread {
 				outdated = true;
 			} else {
 				long itemSize = item.getContentSize();
-				File file = new File(item.getType().getDownloadFolder(app, item), sfName);
-				long oldItemSize = file.length();
+				long oldItemSize = 0;
+				if(item.getType() == DownloadActivityType.VOICE_FILE) {
+					if(item instanceof AssetIndexItem) {
+						File file = new File(((AssetIndexItem) item).getDestFile());
+						oldItemSize = file.length();
+					} else {
+						oldItemSize = new File(item.getType().getDownloadFolder(app, item), sfName +"/_config.p").length();
+						try {
+							InputStream is = ctx.getAssets(). open("voice/" + sfName + "/config.p");
+							if(is != null) {
+								oldItemSize = is.available();
+								is.close();
+							}
+						} catch (IOException e) {
+						}
+					}
+				}
+				
+				
 				if (itemSize != oldItemSize){
 					outdated = true;
 				}
