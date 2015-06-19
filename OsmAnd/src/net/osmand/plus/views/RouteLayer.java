@@ -375,7 +375,7 @@ public class RouteLayer extends OsmandMapLayer {
 		double actionDist = 0;
 		Location previousAction = null; 
 		actionPoints.clear();
-		int prevPoint = -2;
+		int prevFinishPoint = -2;
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
 			if(nf != null) {
@@ -400,12 +400,12 @@ public class RouteLayer extends OsmandMapLayer {
 					&& ls.getLatitude() <= topLatitude;
 			if(!action) {
 				if(previousAction != null) {
-					float loc = ls.distanceTo(previousAction);
-					actionDist += loc;
+					float dist = ls.distanceTo(previousAction);
+					actionDist += dist;
 					if(actionDist >= DISTANCE_ACTION) {
-						actionPoints.add(calculateProjection(1 - (actionDist - DISTANCE_ACTION) / loc, previousAction, ls));
-						prevPoint = i;
+						actionPoints.add(calculateProjection(1 - (actionDist - DISTANCE_ACTION) / dist, previousAction, ls));
 						actionPoints.add(null);
+						prevFinishPoint = i;
 						previousAction = null;
 						actionDist = 0;
 					} else {
@@ -416,37 +416,44 @@ public class RouteLayer extends OsmandMapLayer {
 			} else {
 				// action point
 				if(visible) {
-					int ind = actionPoints.size();
-					actionPoints.add(ls);
+					// visible action point
 					if (previousAction == null) {
-						Location lp = ls;
+						// put some points in front
+						int ind = actionPoints.size();
+						Location lprevious = ls;
 						double dist = 0;
 						for (int k = i - 1; k >= -1; k--) {
 							Location l = k == -1 ? lastProjection : routeNodes.get(k);
-							float loc = lp.distanceTo(l);
+							float loc = lprevious.distanceTo(l);
+							if(prevFinishPoint == k) {
+								if(ind >= 2) {
+									actionPoints.remove(ind - 2);
+									actionPoints.remove(ind - 2);
+								}
+								prevFinishPoint = -2;
+								break;
+							}
 							dist += loc;
 							if (dist >= DISTANCE_ACTION) {
 								if(loc > 1) {
-									actionPoints.add(ind, calculateProjection(1 - (dist - DISTANCE_ACTION) / loc, lp, l));
+									actionPoints.add(ind, calculateProjection(1 - (dist - DISTANCE_ACTION) / loc, lprevious, l));
 								}
 								break;
 							} else {
-								if(prevPoint == k) {
-									actionPoints.remove(actionPoints.size() - 1);
-									actionPoints.remove(actionPoints.size() - 1);
-									prevPoint = -2;
-									ind = actionPoints.size();
-								}
 								actionPoints.add(ind, l);
-								lp = l;
+								lprevious = l;
 							}
 							
 						}
 					}
+					actionPoints.add(ls);
 					previousAction = ls;
 					actionDist = 0;
 				}
 			}
+		}
+		if(previousAction != null) {
+			actionPoints.add(null);
 		}
 	}
 	
