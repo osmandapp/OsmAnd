@@ -2070,4 +2070,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_eo">Esperanto</string>
     <string name="light_theme">Clair</string>
     <string name="dark_theme">Sombre</string>
+    <string name="lang_bn">Bengali</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_th">Thaïlandais</string>
+    <string name="lang_nn">Norvégien</string>
+    <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Voulez-vous archiver ces données ?</string>
+    <string name="lang_te">Télougou</string>
     </resources>
