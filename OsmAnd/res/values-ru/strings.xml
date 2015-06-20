@@ -2012,4 +2012,24 @@
     <string name="lang_ceb">Себуанский</string>
     <string name="archive_wikipedia_data">У вас загружены старые несовместимые данные из Википедии. Вы хотите их заархивировать?</string>
     <string name="disable_recording_once_app_killed">Остановить автономную запись</string>
+    <string name="lang_pms">Пьемонтский</string>
+    <string name="lang_tl">Тагальский</string>
+    <string name="lang_sh">Сербохорватский</string>
+    <string name="lang_az">Азербайджанский</string>
+    <string name="lang_br">Бретонский</string>
+    <string name="lang_sq">Албанский</string>
+    <string name="lang_is">Исландский</string>
+    <string name="lang_bpy">Бишнуприя</string>
+    <string name="lang_nv">Навахо</string>
+    <string name="lang_ga">Ирландский</string>
+    <string name="lang_la">Латинский</string>
+    <string name="lang_ku">Курдский</string>
+    <string name="lang_ta">Тамильский</string>
+    <string name="lang_ml">Малаялам</string>
+    <string name="lang_lb">Люксембургский</string>
+    <string name="lang_os">Осетинский</string>
+    <string name="lang_eo">Эсперанто</string>
+    <string name="light_theme">Светлая</string>
+    <string name="dark_theme">Тёмная</string>
+    <string name="lang_bn">Бенгальский</string>
     </resources>
