@@ -170,4 +170,34 @@
 	<string name="poi_fuel_methanol">Метанол</string>
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_lh2">Течен водород</string>
+	<string name="poi_fuel_electricity">Електричество</string>
+	<string name="poi_charging_station">Зарядна станция</string>
+	<string name="poi_compressed_air">Сгъстен въздух</string>
+	<string name="poi_parking">Паркинг</string>
+	<string name="poi_motorcycle_parking">Паркинг за мотоциклети</string>
+	<string name="poi_garages">Гаражи</string>
+
+	<string name="poi_public_transport_platform">Спирка на обществения транспорт</string>
+	<string name="poi_public_transport_platform_bus">Автобусна спирка</string>
+	<string name="poi_public_transport_platform_trolleybus">Спирка на тролейбус</string>
+	<string name="poi_bus_stop">Автобусна спирка</string>
+	<string name="poi_public_transport_platform_tram">Трамвайна спирка</string>
+	<string name="poi_tram_stop">Трамвайна спирка</string>
+	<string name="poi_bus_station">Автогара</string>
+	<string name="poi_railway_station">Жп-гара</string>
+	<string name="poi_railway_platform">Перон</string>
+	<string name="poi_halt">Железопътна спирка</string>
+	<string name="poi_subway_station">Метростанция</string>
+	<string name="poi_taxi">Таксиметрова стоянка</string>
+
+	<string name="poi_aerodrome">Летище</string>
+	<string name="poi_helipad">Хеликоптерна площадка</string>
+	<string name="poi_runway">Писта</string>
+	<string name="poi_slipway">Хелинг</string>
+	<string name="poi_ferry_terminal">Фериботен терминал</string>
+	<string name="poi_lighthouse">Фар</string>
+
+	<string name="poi_bicycle_rental">Велосипеди под наем</string>
+	<string name="poi_aerialway_cable_car">Кабинков лифт</string>
 	</resources>
