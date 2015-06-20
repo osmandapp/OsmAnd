@@ -2075,4 +2075,24 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="keep_informing_descr">Повтаряне на гласовите напътствия през определено време</string>
     <string name="keep_informing_never">Само ръчно (докосване на стрелката)</string>
     <string name="index_name_netherlands">Европа - Холандия</string>
-	</resources>
+	<string name="light_theme">Светла</string>
+    <string name="dark_theme">Тъмна</string>
+    <string name="lang_pms">пиемонтски</string>
+    <string name="lang_bn">бенгалски</string>
+    <string name="lang_tl">тагалог (филипински)</string>
+    <string name="lang_sh">сърбо-хърватски</string>
+    <string name="lang_az">азерски</string>
+    <string name="lang_br">бретонски</string>
+    <string name="lang_sq">албански</string>
+    <string name="lang_is">исландски</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">навахо</string>
+    <string name="lang_ga">ирландски</string>
+    <string name="lang_la">латински</string>
+    <string name="lang_ku">кюрдски</string>
+    <string name="lang_ta">тамилски</string>
+    <string name="lang_ml">Малаялам</string>
+    <string name="lang_lb">люксембургски</string>
+    <string name="lang_eo">есперанто</string>
+    <string name="lang_et">естонски</string>
+    </resources>

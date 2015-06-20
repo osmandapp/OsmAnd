@@ -723,11 +723,11 @@
 	<string name="update_poi_is_not_available_for_zoom">S’agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
 	<string name="tip_update_index_t">"Mapas agiorndas sunt fundamentales pro sa visione sena lìnia, pro sa chirca tramite PDI/indiritzu, e pro su nàvigu sena lìnia. OsmAnd frunidi unu gestore de sas mapas pro las isgarrigare e pro chircare pro agiornamentos.
 \n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Amministra documentos de sas mapas\' → \'Isgàrriga\'.
-\n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere nota s’isseberadore de tipu de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
+\n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere abbaida s’isseberadore de tipu de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
 \n\nPodes filtrare sa lista de sas regiones iscrivende carchi lètera, o  ischertande s’optzione \'Impostaduras\' → \'Filtra isgarrigadas \' pro bìere agiornamentos pro petzi sos datos chi tenes giai in su dispositivu.
 \n\n\t* Boghes in \'birde\' indicana documentos de datos identicos in su dispositivu e in su server
 \n\t* Boghes in \'blu\' indicana agioramentos disponìbiles in su server
-\n\t* Boghes in corsivu indicana datos deativados in su dispositivu "</string>
+\n\t* Boghes in corsivu indicana datos disativados in su dispositivu "</string>
 	<string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
 	<string name="screen_is_locked">Pro disarreare s’ischermu carca s’icona de su luchete</string>
 	<string name="map_widget_top_text">Nùmene de s’istrada</string>
@@ -851,7 +851,7 @@
 	<string name="accessibility_mode">Modalidade atzessìbile</string>
 	<string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade</string>
 	<string name="shared_string_on">Ativau</string>
-	<string name="shared_string_off">Deativau</string>
+	<string name="shared_string_off">Istudadu</string>
 	<string name="backToMenu">Torra a su Menù</string>
 	<string name="zoomIs">Su livellu de zoom est</string>
 	<string name="north">nord</string>
@@ -1049,7 +1049,7 @@
 \n\t- Individuatzione diretzione: \'Faghe borta ad U\' est indicadu e annuntziadu cando b’est movimentu in sa diretzione opposta o si est istada brincada una borta
 \n\t- Avisu vocale nou: \'Àndala torrada a calculare\'
 \n\t- Indicatzione visiva, tramite muda de su colore de sa fritza, de bortada imbeniente intre 100m
-\n\t- Como fintzas sos documentos deativados benint visualizzados in s’ischermada de icarrigamentu, in birde e blu iscuru
+\n\t- Como fintzas sos documentos disativados benint visualizzados in s’ischermada de icarrigamentu, in birde e blu iscuru
 \n\t- Àteras mudas "</string>
 	<string name="update_poi_does_not_change_indexes">Sa modìficas de sos PDI intre s’aplicu non tenent efetos in sas mapas iscarrigadas, sunt imbetzes sarbadas in unu documentu locale.</string>
 	<string name="local_openstreetmap_were_uploaded">{0} sos PDI/Notas sunt istados carrigados</string>
@@ -1160,14 +1160,14 @@
 	<string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro zoom bassos). Podes iscarrigare World_basemap_x.obf pro unu sistema cumpridu.</string>
 	<string name="vector_data_missing">Fartant sos datos (\'non in lìnia\') in s’ischeda SD. Ti cussigiamus de los iscarrigare pro poder impreare sas mapas sena lìnia.</string>
 	<string name="local_index_installed">Versione locale</string>
-	<string name="local_index_items_backuped">%1$d de %2$d ogetu/os deativados curretamente.</string>
+	<string name="local_index_items_backuped">%1$d de %2$d ogetu/os istudados curretamente.</string>
 	<string name="local_index_items_deleted">%1$d de %2$d ogetu/os burradu curretamente.</string>
 	<string name="local_index_items_restored">%1$d de %2$d ogetu/os ativadu/os curretamente.</string>
 	<string name="local_index_no_items_to_do">Perunu ogetu dae %1$s</string>
 	<string name="local_index_action_do">Istas pro %1$s %2$s ogetu/os. Sighire?</string>
 	<string name="local_index_descr_title">Amministra sos documentos de sas mapas</string>
-	<string name="local_index_mi_restore">Ativa</string>
-	<string name="local_index_mi_backup">Deativa</string>
+	<string name="local_index_mi_restore">Allue</string>
+	<string name="local_index_mi_backup">Istuda</string>
 	
 	
 	<string name="local_index_mi_reload">Torra a carrigare dae s’ischeda SD</string>
@@ -1175,7 +1175,7 @@
 	<string name="local_index_address_data">Datos indiritzos</string>
 	<string name="local_index_transport_data">Datos trasportos pùblicos</string>
 	<string name="local_index_map_data">Datos mapa</string>
-	<string name="local_indexes_cat_backup">Deativadu</string>
+	<string name="local_indexes_cat_backup">Istudadu</string>
 	<string name="local_indexes_cat_tts">Boghes (TTS)</string>
 	<string name="local_indexes_cat_voice">Boghe (registrada)</string>
 	
@@ -1378,7 +1378,7 @@
 	<string name="show_poi_filter">Ammustra filtru</string>
 	<string name="search_poi_filter">Filtru</string>
 	<string name="menu_mute_off">S’àudio est disativadu</string>
-	<string name="menu_mute_on">Àudio deativadu</string>
+	<string name="menu_mute_on">Àudio istudadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
@@ -1672,7 +1672,7 @@
 	<string name="background_router_service_descr">Allughe su servìtziu a reposu de OsmAnd pro s’arrastamentu de sa positzione cando s’ischermu est istudadu</string>
 	<string name="off_router_service_no_gps_available">Su servìtziu de nàvigu a reposu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 	<string name="tip_recent_changes_0_6_7_t">"Mudas in sa 0.6.7:
-\n\t- Gestore datos non in lìnia (iscàrriga, burra, ativa / deativa datos sena lìnia deretamente dae OsmAnd)
+\n\t- Gestore datos non in lìnia (iscàrriga, burra, allue / istuda datos sena lìnia deretamente dae OsmAnd)
 \n\t- Puntos prefèrridos e grupos (categoriza, burra, amministra sos prefèrridos)
 \n\t- GPX Explorer in s’aplicu (bie minujas de sas rastas, distantzia, lestresa, artària, etc.)
 \n\t- Nàvigu GPX (prus optziones, sighi su nàvigu a pustis de un errore (crash), suportu pro sas rutundas)
@@ -1981,4 +1981,39 @@
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Su servìtziu de localizatzione no est abilitadu. Lu boles allùere?</string>
     <string name="disable_recording_once_app_killed">Èvita/istransi sa registratzione autònoma</string>
+    <string name="light_theme">Craru</string>
+    <string name="dark_theme">Iscuru</string>
+    <string name="lang_pms">Piemontesu</string>
+    <string name="lang_bn">Bengali</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbo-Croatu</string>
+    <string name="lang_az">Azeri</string>
+    <string name="lang_br">Bretonu</string>
+    <string name="lang_sq">Albanesu</string>
+    <string name="lang_is">Islandesu</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandesu</string>
+    <string name="lang_la">Latinu</string>
+    <string name="lang_ku">Kurdu</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Lussemburghesu</string>
+    <string name="lang_os">Ossetiu</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_es_ar">Ispagnolu argentinu</string>
+    <string name="lang_nb">Norvegesu Bokmål</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thailandesu</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norvegesu (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malesu</string>
+    <string name="lang_ht">Haitianu</string>
+    <string name="lang_gl">Galegu/Galizianu</string>
+    <string name="lang_et">Èstone</string>
+    <string name="lang_ceb">Cebuanu</string>
+    <string name="archive_wikipedia_data">Bi sunt datos Wikipedia bècios e non cumpatìbiles. Los boles archiviare?</string>
+    <string name="download_wikipedia_files">Boles iscarrigare àteros datos Wikipedia in prus (%1$s MB) ?</string>
+    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione GPX cando OsmAnd at a èssere istudadu (tràmite sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd a reposu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
     </resources>
