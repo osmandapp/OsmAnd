@@ -164,20 +164,27 @@ public class Amenity extends MapObject  {
 				return lang;
 			}
 		}
-		String plainName = getAdditionalInfo(tag);
-		if (!Algorithms.isEmpty(plainName)) {
+		String plainContent = getAdditionalInfo(tag);
+		if (!Algorithms.isEmpty(plainContent)) {
 			return defLang;
 		}
 		String enName = getAdditionalInfo(tag + ":en");
 		if (!Algorithms.isEmpty(enName)) {
 			return enName;
 		}
+		int maxLen = 0; 
+		String lng = defLang;
 		for (String nm : getAdditionalInfo().keySet()) {
-			if (nm.startsWith("name:")) {
-				return nm.substring("name:".length());
+			if (nm.startsWith(tag+":")) {
+				String key = nm.substring(tag.length() + 1);
+				String cnt = getAdditionalInfo(tag+":"+key);
+				if(!Algorithms.isEmpty(cnt) && cnt.length() > maxLen) {
+					maxLen = cnt.length();
+					lng = key;
+				}
 			}
 		}
-		return defLang;
+		return lng;
 	}
 	
 	public String getName(String lang) {
