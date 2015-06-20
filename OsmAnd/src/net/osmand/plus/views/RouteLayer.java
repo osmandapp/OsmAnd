@@ -197,6 +197,7 @@ public class RouteLayer extends OsmandMapLayer {
 				for (int i = 0; i < actionPoints.size(); i++) {
 					Location o = actionPoints.get(i);
 					if (o == null) {
+						first = true;
 						canvas.drawPath(pth, actionPaint);
 						double angleRad = Math.atan2(y - py, x - px);
 						double angle = (angleRad * 180 / Math.PI) + 90f;
@@ -212,7 +213,6 @@ public class RouteLayer extends OsmandMapLayer {
 						matrix.postRotate((float) angle, actionArrow.getWidth() / 2, 0);
 						matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2, py + pdy);
 						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
-						first = true;
 					} else {
 						px = x;
 						py = y;
@@ -375,85 +375,92 @@ public class RouteLayer extends OsmandMapLayer {
 		double actionDist = 0;
 		Location previousAction = null; 
 		actionPoints.clear();
-		int prevFinishPoint = -2;
-		for (int i = 0; i < routeNodes.size(); i++) {
-			Location ls = routeNodes.get(i);
+		int prevFinishPoint = -1;
+		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
+			Location loc = routeNodes.get(routePoint);
 			if(nf != null) {
 				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
-				if(pnt < i + cd ) {
+				if(pnt < routePoint + cd ) {
 					nf = null;
 				}
 			}
 			while (nf == null && it.hasNext()) {
 				nf = it.next();
 				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
-				if (pnt < i + cd) {
+				if (pnt < routePoint + cd) {
 					nf = null;
 				}
 			}
-			boolean action = nf != null && (nf.routePointOffset == i + cd ||
-					(nf.routePointOffset <= i + cd && i + cd  <= nf.routeEndPointOffset));
+			boolean action = nf != null && (nf.routePointOffset == routePoint + cd ||
+					(nf.routePointOffset <= routePoint + cd && routePoint + cd  <= nf.routeEndPointOffset));
 			if(!action && previousAction == null) {
+				// no need to check
 				continue;
 			}
-			boolean visible = leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
-					&& ls.getLatitude() <= topLatitude;
-			if(!action) {
-				if(previousAction != null) {
-					float dist = ls.distanceTo(previousAction);
-					actionDist += dist;
-					if(actionDist >= DISTANCE_ACTION) {
-						actionPoints.add(calculateProjection(1 - (actionDist - DISTANCE_ACTION) / dist, previousAction, ls));
-						actionPoints.add(null);
-						prevFinishPoint = i;
-						previousAction = null;
-						actionDist = 0;
-					} else {
-						actionPoints.add(ls);
-						previousAction = ls;
-					}
+			boolean visible = leftLongitude <= loc.getLongitude() && loc.getLongitude() <= rightLongitude && bottomLatitude <= loc.getLatitude()
+					&& loc.getLatitude() <= topLatitude;
+			if(action && !visible && previousAction == null) {
+				continue;
+			}
+			if (!action) {
+				// previousAction != null
+				float dist = loc.distanceTo(previousAction);
+				actionDist += dist;
+				if (actionDist >= DISTANCE_ACTION) {
+					actionPoints.add(calculateProjection(1 - (actionDist - DISTANCE_ACTION) / dist, previousAction, loc));
+					actionPoints.add(null);
+					prevFinishPoint = routePoint;
+					previousAction = null;
+					actionDist = 0;
+				} else {
+					actionPoints.add(loc);
+					previousAction = loc;
 				}
 			} else {
 				// action point
-				if(visible) {
-					// visible action point
-					if (previousAction == null) {
-						// put some points in front
-						int ind = actionPoints.size();
-						Location lprevious = ls;
-						double dist = 0;
-						for (int k = i - 1; k >= -1; k--) {
-							Location l = k == -1 ? lastProjection : routeNodes.get(k);
-							float loc = lprevious.distanceTo(l);
-							if(prevFinishPoint == k) {
-								if(ind >= 2) {
-									actionPoints.remove(ind - 2);
-									actionPoints.remove(ind - 2);
-								}
-								prevFinishPoint = -2;
-								break;
-							}
-							dist += loc;
-							if (dist >= DISTANCE_ACTION) {
-								if(loc > 1) {
-									actionPoints.add(ind, calculateProjection(1 - (dist - DISTANCE_ACTION) / loc, lprevious, l));
-								}
-								break;
-							} else {
-								actionPoints.add(ind, l);
-								lprevious = l;
-							}
-							
-						}
-					}
-					actionPoints.add(ls);
-					previousAction = ls;
-					actionDist = 0;
+				if (previousAction == null) {
+					addPreviousToActionPoints(lastProjection, routeNodes, DISTANCE_ACTION,
+							prevFinishPoint, routePoint, loc);
 				}
+				actionPoints.add(loc);
+				previousAction = loc;
+				prevFinishPoint = -1;
+				actionDist = 0;
 			}
 		}
 		if(previousAction != null) {
 			actionPoints.add(null);
+		}
+	}
+
+
+	private void addPreviousToActionPoints(Location lastProjection, List<Location> routeNodes, double DISTANCE_ACTION,
+			int prevFinishPoint, int routePoint, Location loc) {
+		// put some points in front
+		int ind = actionPoints.size();
+		Location lprevious = loc;
+		double dist = 0;
+		for (int k = routePoint - 1; k >= -1; k--) {
+			Location l = k == -1 ? lastProjection : routeNodes.get(k);
+			float locDist = lprevious.distanceTo(l);
+			dist += locDist;
+			if (dist >= DISTANCE_ACTION) {
+				if (locDist > 1) {
+					actionPoints.add(ind,
+							calculateProjection(1 - (dist - DISTANCE_ACTION) / locDist, lprevious, l));
+				}
+				break;
+			} else {
+				actionPoints.add(ind, l);
+				lprevious = l;
+			}
+			if (prevFinishPoint == k) {
+				if (ind >= 2) {
+					actionPoints.remove(ind - 2);
+					actionPoints.remove(ind - 2);
+				}
+				break;
+			}
 		}
 	}
 	
