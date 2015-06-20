@@ -810,4 +810,12 @@
 	<string name="poi_wiki_lang_vi">Wiki vietnamien</string>
 	<string name="poi_wiki_lang_zh">Wiki chinois</string>
 
-</resources>
+<string name="poi_wiki_lang_hi">Wiki hindi</string>
+	<string name="poi_wiki_lang_lv">Wiki letton</string>
+	<string name="poi_wiki_lang_ms">Wiki malaisien</string>
+	<string name="poi_wiki_lang_new">Wiki néwari</string>
+	<string name="poi_wiki_lang_nn">Wiki norvégien</string>
+	<string name="poi_wiki_lang_sw">Wiki swahili</string>
+	<string name="poi_wiki_lang_te">Wiki télougou</string>
+	<string name="poi_wiki_lang_th">Wiki thaïlandais</string>
+	</resources>
