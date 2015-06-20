@@ -261,7 +261,7 @@
 \n\t- Tillgänglighet
 \n\t- Massor av buggfixar
 	</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende zoomning - Valfri inställningen enligt kompass eller färdriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -362,7 +362,7 @@
 <string name="tip_rotation_switching_t_v2">"Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
 \n\nAlternativen är:
 \n\t* \'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
-\n\t* \'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
+\n\t* \'I färdriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
 \n\t* \'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt efter enhetens kompass. "</string>
 
 <string name="tip_day_night_mode">Dag-/Nattläge</string>
@@ -687,7 +687,7 @@
 	<string name="poi_context_menu_modify">Ändra Intressepunkt</string>
 	<string name="poi_context_menu_delete">Ta bort POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
-	<string name="rotate_map_bearing_opt">I rörelseriktningen</string>
+	<string name="rotate_map_bearing_opt">I färdriktningen</string>
 	<string name="rotate_map_none_opt">Vrid inte (norr är uppåt)</string>
 	<string name="rotate_map_to_bearing_descr">Välj justering av kartskärmen</string>
 	<string name="rotate_map_to_bearing">Kartorientering</string>
@@ -940,7 +940,7 @@
     
     
     <string name="close_changeset">Stäng changeset</string>
-	<string name="map_widget_show_destination_arrow">Visa rörelseriktningen</string>
+	<string name="map_widget_show_destination_arrow">Visa färdriktningen</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Loggningstjänster</string>
 	
@@ -1908,4 +1908,24 @@
     <string name="lang_ceb">Cebuano/Visaya</string>
     <string name="lang_es_ar">Argentisk spanska</string>
     <string name="lang_nb">Norska (bokmål)</string>
+    <string name="light_theme">Ljust</string>
+    <string name="dark_theme">Mörkt</string>
+    <string name="lang_pms">Piemontesiska</string>
+    <string name="lang_bn">Bengaliska</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbokroatiska</string>
+    <string name="lang_az">Azerbajdzjanska</string>
+    <string name="lang_br">Bretonska</string>
+    <string name="lang_sq">Albanska</string>
+    <string name="lang_is">Isländska</string>
+    <string name="lang_bpy">Bishnupriya manipuri</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Iriska</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ku">Kurdiska</string>
+    <string name="lang_ta">Tamilska</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Luxemburgiska</string>
+    <string name="lang_os">Ossetiska</string>
+    <string name="lang_eo">Esperanto</string>
     </resources>
