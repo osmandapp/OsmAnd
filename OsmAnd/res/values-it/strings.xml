@@ -1777,7 +1777,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="text_size_descr">Imposta la dimensione del testo sulla mappa.</string>
     <string name="text_size">Dimensione del testo</string>
     <string name="fav_point_dublicate">Duplicato del nome del punto preferito</string>
-    <string name="fav_point_dublicate_message">Il nome indicato per i preferiti esiste già, per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
+    <string name="fav_point_dublicate_message">Il nome indicato per i preferiti esiste già, per evitare duplicati il nome è stato modificato in %1$s.</string>
     
     
     <string name="print_route">Stampa percorso</string>
