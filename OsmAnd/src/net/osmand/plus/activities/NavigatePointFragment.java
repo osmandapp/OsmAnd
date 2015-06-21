@@ -59,7 +59,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	private OsmandApplication app;
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.navigate_point, container, false);
+		view = inflater.inflate(R.layout.search_point, container, false);
 		setHasOptionsMenu(true);
 
 		location = null;
