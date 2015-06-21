@@ -2080,4 +2080,26 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_nn">Norwegian (Nynorsk)</string>
     <string name="light_theme">Luce</string>
     <string name="dark_theme">Scuro</string>
+    <string name="lang_pms">Piemontese</string>
+    <string name="lang_bn">Bengalese</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbo-Croato</string>
+    <string name="lang_az">Azero</string>
+    <string name="lang_br">Bretone</string>
+    <string name="lang_sq">Albanese</string>
+    <string name="lang_is">Islandese</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandese</string>
+    <string name="lang_la">Latino</string>
+    <string name="lang_ku">Curdo</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Lussemburghese</string>
+    <string name="lang_os">Osseto</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_ms">Malese</string>
+    <string name="lang_gl">Gallego</string>
+    <string name="lang_et">Estone</string>
+    <string name="lang_ceb">Cebuano</string>
     </resources>
