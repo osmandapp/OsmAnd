@@ -2062,7 +2062,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osm_edit_context_menu_delete">Cancella le modifiche OSM</string>
     <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati desueti e incompatibili. Vuoi archiviarli?</string>
     <string name="download_wikipedia_files">Vuoi scaricare dati Wikipedia aggiuntivi (%1$s MB) ?</string>
-    <string name="gps_network_not_enabled">Il servizio di localizazione non è attivo. Vuoi avviarlo?</string>
+    <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
     <string name="disable_recording_once_app_killed_descrp">"Metterà in pausa la registrazione GPX quando l\'app viene terminata (attraverso le app recenti). (L\'indicatore della modalità OsmAnd quiescente  scomparirà dalla barra delle notifiche Android.)"</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
@@ -2078,4 +2078,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_th">Thailandese</string>
     <string name="lang_te">Telugu</string>
     <string name="lang_nn">Norwegian (Nynorsk)</string>
+    <string name="light_theme">Luce</string>
+    <string name="dark_theme">Scuro</string>
     </resources>
