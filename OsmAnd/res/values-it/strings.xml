@@ -1910,7 +1910,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	
 	
 	<string name="days_behind">giorni fa</string>
-	<string name="track_segments">Segmenti di traccia</string>
+	<string name="track_segments">Segmenti di tracciato</string>
 	<string name="track_points">Punti della traccia</string>
 	<string name="route_points">Punti del percorso</string>
 	<string name="shared_string_release">Rilasciato</string>
