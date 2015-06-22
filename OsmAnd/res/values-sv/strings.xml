@@ -1437,7 +1437,7 @@
     <string name="osmo_enable_tracker">Skicka mina positioner</string>
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
-    <string name="osmo_settings_debug">Avbuggningsinformation</string>
+    <string name="osmo_settings_debug">Felsökningsinformation</string>
     <string name="color_red">röd</string>
 	<string name="color_pink">skär</string>
 	<string name="color_orange">brandgul</string>
