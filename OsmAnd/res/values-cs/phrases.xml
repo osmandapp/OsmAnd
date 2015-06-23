@@ -788,4 +788,48 @@
 	<string name="poi_hunting_lodge">Lovecká chata</string>
 
 	<string name="poi_hanami">Hanami</string>
-	</resources>
+	<string name="poi_camera">Foto a optika</string>
+	<string name="poi_wiki_place">Wikipedie</string>
+	<string name="poi_wiki_lang_en">Anglická wiki</string>
+	<string name="poi_wiki_lang_ar">Arabská wiki</string>
+	<string name="poi_wiki_lang_be">Běloruská wiki</string>
+	<string name="poi_wiki_lang_bg">Bulharská wiki</string>
+	<string name="poi_wiki_lang_ca">Katalánská wiki</string>
+	<string name="poi_wiki_lang_cs">Česká wiki</string>
+	<string name="poi_wiki_lang_da">Dánská wiki</string>
+	<string name="poi_wiki_lang_de">Německá wiki</string>
+	<string name="poi_wiki_lang_el">Řecká wiki</string>
+	<string name="poi_wiki_lang_et">Estonská wiki</string>
+	<string name="poi_wiki_lang_es">Španělská wiki</string>
+	<string name="poi_wiki_lang_fi">Finská wiki</string>
+	<string name="poi_wiki_lang_fr">Francouzská wiki</string>
+	<string name="poi_wiki_lang_he">Hebrejská wiki</string>
+	<string name="poi_wiki_lang_hi">Hindská wiki</string>
+	<string name="poi_wiki_lang_hr">Chorvatská wiki</string>
+	<string name="poi_wiki_lang_ht"/>
+	<string name="poi_wiki_lang_hu">Maďarská wiki</string>
+	<string name="poi_wiki_lang_id">Indonéská wiki</string>
+	<string name="poi_wiki_lang_it">Italská wiki</string>
+	<string name="poi_wiki_lang_ja">Japonská wiki</string>
+	<string name="poi_wiki_lang_ko">Korejská wiki</string>
+	<string name="poi_wiki_lang_lt">Litevská wiki</string>
+	<string name="poi_wiki_lang_lv">Lotyšská wiki</string>
+	<string name="poi_wiki_lang_ms">Malajská wiki</string>
+	<string name="poi_wiki_lang_nl">Holandská wiki</string>
+	<string name="poi_wiki_lang_no">Norská wiki</string>
+	<string name="poi_wiki_lang_pl">Polská wiki</string>
+	<string name="poi_wiki_lang_pt">Portugalská wiki</string>
+	<string name="poi_wiki_lang_ro">Rumunská wiki</string>
+	<string name="poi_wiki_lang_ru">Ruská wiki</string>
+	<string name="poi_wiki_lang_sk">Slovenská wiki</string>
+	<string name="poi_wiki_lang_sl">Slovinská wiki</string>
+	<string name="poi_wiki_lang_sr">Srbská wiki</string>
+	<string name="poi_wiki_lang_sv">Švédská wiki</string>
+	<string name="poi_wiki_lang_sw">Svahilská wiki</string>
+	<string name="poi_wiki_lang_th">Thajská wiki</string>
+	<string name="poi_wiki_lang_tr">Turecká wiki</string>
+	<string name="poi_wiki_lang_uk">Ukrajinská wiki</string>
+	<string name="poi_wiki_lang_vi">Vietnamská wiki</string>
+	<string name="poi_wiki_lang_zh">Čínská wiki</string>
+
+</resources>
