@@ -1913,7 +1913,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="track_segments">Segmenti di tracciato</string>
 	<string name="track_points">Punti della traccia</string>
 	<string name="route_points">Punti del percorso</string>
-	<string name="shared_string_release">Rilasciato</string>
+	<string name="shared_string_release">Rilasciata</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Annulla</string>
