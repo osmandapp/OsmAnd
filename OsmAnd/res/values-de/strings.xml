@@ -2102,7 +2102,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
-	<string name="shared_string_open">Öffnen</string>
+	<string name="shared_string_open">Offen</string>
 
 	<string name="rendering_attr_hideHouseNumbers_name">Hausnummern verbergen</string>
 	<string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>
