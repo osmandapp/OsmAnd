@@ -1911,7 +1911,7 @@
     <string name="voices">Mensajes de voz</string>
 	<string name="dash_download_msg_none">¿Quiere descargar los mapas fuera de línea?</string>
     <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
-    <string name="rendering_value_default_name">Predeterminado</string>
+    <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No utilizar reglas de navegación introducidas en v.1.9</string>
@@ -2086,4 +2086,31 @@
     <string name="gps_network_not_enabled">El servicio de ubicación no está activado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Evita el registro autónomo</string>
     <string name="disable_recording_once_app_killed_descrp">Se pausará el registro GPX cuando se cierre la aplicación (a través de aplicaciones recientes). (Las indicación del modo reposo de OsmAnd desaparecerá de la barra de notificaciones de Android.)</string>
-	</resources>
+	<string name="light_theme">Luminoso</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="lang_pms">Piamontés</string>
+    <string name="lang_bn">Bengalí</string>
+    <string name="lang_tl">Tagalo</string>
+    <string name="lang_sh">Serbocroata</string>
+    <string name="lang_az">Azerí</string>
+    <string name="lang_br">Bretón</string>
+    <string name="lang_sq">Albanés</string>
+    <string name="lang_is">Islandés</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandés</string>
+    <string name="lang_la">Latín</string>
+    <string name="lang_ku">Kurdo</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_lb">Luxemburgués</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_es_ar">Español argentino</string>
+    <string name="lang_th">Tailandés</string>
+    <string name="lang_nn">Noruego (Nynorsk)</string>
+    <string name="lang_ms">Malayo</string>
+    <string name="lang_ht">Haitiano</string>
+    <string name="lang_gl">Gallego</string>
+    <string name="lang_et">Estonio</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="archive_wikipedia_data">Tienes datos descargados de Wikipedia que son antiguos e incompatibles. ¿Deseas archivarlos?</string>
+    <string name="download_wikipedia_files">¿Deseas descargar datos adicionales de la Wikipedia (%1$s MB)?</string>
+    </resources>
