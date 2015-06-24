@@ -1251,7 +1251,7 @@
 	<string name="search_position_undefined">Indefinido</string>
 	<string name="search_position_current_location">Posição atual…</string>
 	<string name="search_position_map_view">Centro atual do mapa</string>
-	<string name="select_search_position">Origem:</string>
+	<string name="select_search_position">Próximo a:</string>
 	<string name="route_successfully_saved_at">Rota salva como \'%1$s\'.</string>
 	<string name="filename_input">"Nome do arquivo: "</string>
 	<string name="file_with_name_already_exist">Já existe um arquivo com o mesmo nome.</string>
@@ -1584,7 +1584,7 @@
 	<string name="mark_point">Destino</string>
 	<string name="app_settings">Configurações do aplicativo</string>
 	<string name="search_address">Pesquisar endereço</string>
-	<string name="choose_building">Escolher edifício</string>
+	<string name="choose_building">Escolher número</string>
 	<string name="choose_street">Escolher rua</string>
 	<string name="choose_city">Escolher cidade</string>
 	<string name="ChooseCountry">Escolher país</string>
@@ -1606,7 +1606,7 @@
 	<string name="incremental_search_street">Pesquisar rua incrementalmente</string>
 	<string name="incremental_search_building">Pesquisar número incrementalmente</string>
 	<string name="choose_available_region">Escolher região da lista</string>
-	<string name="choose_intersected_street">Escolher a rua transversal</string>
+	<string name="choose_intersected_street">Escolher rua transversal</string>
 	<string name="Closest_Amenities">Lugares próximos</string>
 	<string name="app_mode_car">Carro</string>
 	<string name="app_mode_bicycle">Bicicleta</string>
