@@ -2189,4 +2189,24 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="archive_wikipedia_data">Es sind veraltete inkompatible Wikipedia-Daten vorhanden. Sollen diese gesichert werden?</string>
     <string name="download_wikipedia_files">Sollen zusätzliche Wikipedia-Daten heruntergeladen werden (%1$s MB) ?</string>
     <string name="osm_edit_context_menu_delete">OSM-Bearbeitungen löschen</string>
+    <string name="light_theme">Hell</string>
+    <string name="dark_theme">Dunkel</string>
+    <string name="lang_pms">Piemontesisch</string>
+    <string name="lang_bn">Bengalisch</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbokroatisch</string>
+    <string name="lang_az">Aserbaidschan</string>
+    <string name="lang_br">Bretonisch</string>
+    <string name="lang_sq">Albanisch</string>
+    <string name="lang_is">Isländisch</string>
+    <string name="lang_ga">Irisch</string>
+    <string name="lang_la">Lateinisch</string>
+    <string name="lang_ku">Kurdisch</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Luxemburgisch</string>
+    <string name="lang_os">Ossetisch</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_nb">Norwegische Buchsprache</string>
+    <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
     </resources>
