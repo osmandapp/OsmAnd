@@ -1839,12 +1839,12 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_he">Hebreeuws</string>
     <string name="forward">Vooruit</string>
     <string name="home">Thuis</string>
-    <string name="live_monitoring_m_descr">Stuur tracking naar een webservice als een GPX-track wordt gemaakt</string>
+    <string name="live_monitoring_m_descr">Stuur tracking-data naar een webservice als een GPX-track wordt gemaakt</string>
 	<string name="live_monitoring_m">Online tracking (GPX vereist)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
-	<string name="gpx_monitoring_start">Start GPX opname</string>
-	<string name="gpx_monitoring_stop">Stop GPX opname</string>
+	<string name="gpx_monitoring_start">Start GPX-opname</string>
+	<string name="gpx_monitoring_stop">Stop GPX-opname</string>
     <string name="gpx_start_new_segment">Start nieuw segment</string>
     <string name="keep_navigation_service">Houden</string>
 	<string name="stop_navigation_service">Onderbreek</string>
@@ -1901,7 +1901,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
 	<string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendelbuslijnen</string>
 	<string name="confirm_every_run">Altijd vragen</string>
-	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget in het scherm)</string>
+	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget op het kaartscherm)</string>
 	<string name="save_global_track_interval">Standaard loggings-interval</string>
 	<string name="traffic_warning_speed_limit">Maximum snelheid</string>
     <string name="traffic_warning_border_control">Grenscontrole</string>
@@ -1913,7 +1913,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
 	<string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
     <string name="text_size">Tekstgrootte</string>
-    <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s</string>
+    <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s.</string>
     <string name="fav_point_dublicate">Favoriet met deze naam bestaat al</string>
     
     
@@ -2196,4 +2196,27 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Toon details</string>
     <string name="local_recordings_delete_all_confirm">Je staat op het punt %1$d notities te verwijderen. Weet je dat zeker?</string>
-	</resources>
+	<string name="light_theme">Licht</string>
+    <string name="dark_theme">Donker</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Servo-Kroatisch</string>
+    <string name="lang_az">Azerbeidzjaans</string>
+    <string name="lang_br">Bretons</string>
+    <string name="lang_sq">Albanees</string>
+    <string name="lang_is">IJslands</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Iers</string>
+    <string name="lang_la">Latijn</string>
+    <string name="lang_ku">Koerdisch</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_lb">Luxemburgs</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_es_ar">Spaans (Argentinië)</string>
+    <string name="lang_th">Thais</string>
+    <string name="archive_wikipedia_data">Er zijn al (verouderde en incompatibele) Wikipedia-gegevens gedownload. Wilt u deze bewaren?</string>
+    <string name="download_wikipedia_files">Wilt u Wikipedia-artikelen downloaden (%1$s MB) ?</string>
+    <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
+    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoort als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
+    <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    </resources>
