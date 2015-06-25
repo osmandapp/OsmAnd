@@ -23,7 +23,7 @@
 	<string name="poi_craft_agricultural_engines">Landmaschinen</string>
 	<string name="poi_aerodrome">Flughafen</string>
 	<string name="poi_alcohol">Spirituosenladen</string>
-	<string name="poi_alpine_hut">Berghütte</string>
+	<string name="poi_alpine_hut">Schutzhütte</string>
 	<string name="poi_ambulance_station">Rettungswache</string>
 	<string name="poi_anime">Anime-Shop</string>
 	<string name="poi_antiques">Antiquitätenhändler</string>
@@ -736,4 +736,11 @@
 	<string name="poi_camera">Kameras und Objektive</string>
 	<string name="poi_charity">Karitativer Gebrauchtwarenladen</string>
 	<string name="poi_cabin">Hütte</string>
+	<string name="poi_lean_to">Unterstand</string>
+	<string name="poi_wilderness_hut">Wildnishütte</string>
+	<string name="poi_wiki_lang_zh">Chinesisches Wiki</string>
+
+<string name="poi_wiki_lang_tr">Türkisches Wiki</string>
+	<string name="poi_wiki_lang_uk">Ukrainisches Wiki</string>
+	<string name="poi_wiki_lang_vi">Vietnamesisches Wiki</string>
 	</resources>
