@@ -2037,7 +2037,7 @@
     <string name="local_indexes_cat_wiki">Vikipedija</string>
     <string name="shared_string_show_details">Rodyti detales</string>
     <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>
-    <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$ d pastabas. Ar tikrai to norite?</string>
+    <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$d pastabas. Ar tikrai to norite?</string>
 	<string name="download_wikipedia_maps">Vikipedija</string>
     <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego režimo piktograma dings iš Android pranešimų juostos.)</string>
 	<string name="download_wikipedia_files">Ar norite atsisiųsti papildomų Wikipedia duomenų (%1$s MB)?</string>
