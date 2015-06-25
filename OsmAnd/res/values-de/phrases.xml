@@ -101,7 +101,7 @@
 	<string name="poi_caravan_site">Campingplatz</string>
 	<string name="poi_craft_carpenter">Tischler</string>
 	<string name="poi_craft_carpet_layer">Teppichleger</string>
-	<string name="poi_carpet">Teppiche</string>
+	<string name="poi_carpet">Teppichgeschäft</string>
 	<string name="poi_casino">Casino</string>
 	<string name="poi_castle">Burg</string>
 	<string name="poi_craft_caterer">Partyservice</string>
@@ -152,7 +152,7 @@
 	<string name="poi_company">Firma</string>
 	<string name="poi_compressed_air">Druckluft</string>
 	<string name="poi_craft_computer">Computer</string>
-	<string name="poi_computer">Computer-Geschäft</string>
+	<string name="poi_computer">Computergeschäft</string>
 	<string name="poi_confectionery">Süßwaren</string>
 	<string name="poi_construction">Anlage</string>
 	<string name="poi_convenience">Lebensmittelgeschäft</string>
@@ -174,7 +174,7 @@
 	<string name="poi_deli">Delikatessen</string>
 	<string name="poi_dentist">Zahnarzt</string>
 	<string name="poi_department_store">Kaufhaus</string>
-	<string name="poi_dive">Tauchgerät</string>
+	<string name="poi_dive">Tauchausrüstung</string>
 	<string name="poi_diving">Tauschen</string>
 	<string name="poi_doctors">Arzt</string>
 	<string name="poi_dog_park">Hundepark</string>
@@ -212,7 +212,7 @@
 	<string name="poi_ford">Furt</string>
 	<string name="poi_fort">Festung</string>
 	<string name="poi_fountain">Brunnen</string>
-	<string name="poi_frame">Bilderrahmen-Geschäft</string>
+	<string name="poi_frame">Bilderrahmengeschäft</string>
 	<string name="poi_fuel">Tankstelle</string>
 	<string name="poi_funeral_directors">Bestatter</string>
 	<string name="poi_funicular">Seilbahn</string>
@@ -613,7 +613,7 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_team_handball">Handball</string>
   <string name="poi_shop">Geschäft</string>
-		<string name="poi_shop_food">Lebensmittel</string>
+		<string name="poi_shop_food">Lebensmittelgeschäft</string>
 	<string name="poi_emergency">Notfall</string>
 	<string name="poi_road_obstacle">Straßemhindernis</string>
 		<string name="poi_filling_station">Tankstelle</string>
@@ -731,4 +731,7 @@
 	<string name="poi_piste_hike">Wandern</string>
 	<string name="poi_piste_ice_skate">Eislaufen</string>
 	<string name="poi_payment_terminal">Bezahl-Terminal</string>
+	<string name="poi_transport_construction">Transportkonstruktion</string>
+		<string name="poi_natural">Natürlich</string>
+	<string name="poi_camera">Kameras und Objektive</string>
 	</resources>
