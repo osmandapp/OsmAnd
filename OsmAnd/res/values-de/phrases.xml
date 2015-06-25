@@ -59,7 +59,7 @@
 	<string name="poi_beachvolleyball">Beachvolleyball</string>
 	<string name="poi_beauty">Schönheitssalon</string>
 	<string name="poi_beauty_salon_nails">Nagelstudio</string>
-	<string name="poi_bed">Badezimmereinrichtung</string>
+	<string name="poi_bed">Schlafzimmereinrichtung</string>
 	<string name="poi_bedding">Bettwarengeschäft</string>
 	<string name="poi_craft_beekeeper">Bienenzüchter</string>
 	<string name="poi_beverages">Getränkegeschäft</string>
@@ -80,7 +80,7 @@
 	<string name="poi_border_control">Grenzkontrolle</string>
 	<string name="poi_boules">Bäcker</string>
 	<string name="poi_boundary_stone">Grenzstein</string>
-	<string name="poi_boutique">Boutique</string>
+	<string name="poi_boutique">Modehaus</string>
 	<string name="poi_bowls">Schüsseln</string>
 	<string name="poi_craft_brewery">Brauerei</string>
 	<string name="poi_bridge">Brücke</string>
@@ -734,5 +734,5 @@
 	<string name="poi_transport_construction">Transportkonstruktion</string>
 		<string name="poi_natural">Natürlich</string>
 	<string name="poi_camera">Kameras und Objektive</string>
-	<string name="poi_charity">Gebrauchtwarenladen</string>
+	<string name="poi_charity">Karitativer Gebrauchtwarenladen</string>
 	</resources>
