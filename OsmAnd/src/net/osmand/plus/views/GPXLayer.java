@@ -18,11 +18,13 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
@@ -127,7 +129,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	
-	private int updatePaints(int color, boolean routePoints, DrawSettings nightMode, RotatedTileBox tileBox){
+	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
 		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
@@ -137,8 +139,22 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
-				if(routePoints) {
-					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, "routePoints=true");
+				CommonPreference<Boolean> p = view.getSettings().getCustomRenderBooleanProperty("currentTrackColor");
+				if(p != null && p.isSet()) {
+					RenderingRuleProperty ctColor = rrs.PROPS.get("currentTrackColor");
+					if(ctColor != null) {
+						req.setBooleanFilter(ctColor, p.get());
+					}
+				}
+				String additional = "";
+				if (routePoints) {
+					additional = "routePoints=true";
+				}
+				if (currentTrack) {
+					additional = (additional.length() == 0 ? "" : ";") + "currentTrack=true";
+				}
+				if (additional.length() > 0) {
+					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 				}
 				if (req.searchRenderingAttribute("gpx")) {
 					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
@@ -148,10 +164,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
 					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
-					if(isShadowPaint) {
-						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR), Mode.SRC_IN);
+					if (isShadowPaint) {
+						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR),
+								Mode.SRC_IN);
 						shadowPaint.setColorFilter(cf);
-						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
+						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2
+								* rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
 					}
 				} else {
 					System.err.println("Rendering attribute gpx is not found !");
@@ -171,7 +189,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if(points != null) {
-			updatePaints(0, false, settings, tileBox);
+			updatePaints(0, false, false, settings, tileBox);
 			drawSegments(canvas, tileBox, points);
 		} else {
 			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
@@ -273,7 +291,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> points = g.getPointsToDisplay();
 			boolean routePoints = g.isRoutePoints();
-			updatePaints(g.getColor(), routePoints, settings, tileBox);
+			updatePaints(g.getColor(), g.isShowCurrentTrack(), routePoints, settings, tileBox);
 			drawSegments(canvas, tileBox, points);
 		}
 	}
