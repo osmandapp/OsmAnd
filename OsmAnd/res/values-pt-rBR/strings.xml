@@ -264,7 +264,7 @@
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
 	<string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
-	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$ s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
+	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="show_pedestrian_warnings">Faixas de pedestre</string>
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9</string>
