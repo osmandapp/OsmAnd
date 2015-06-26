@@ -268,7 +268,7 @@ public class TextRenderer {
 	private void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
-			Bitmap ico = RenderingIcons.getIcon(context, sr);
+			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
 			if (ico != null) {
 				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
 				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
