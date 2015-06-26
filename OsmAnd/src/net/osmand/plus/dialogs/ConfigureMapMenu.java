@@ -63,14 +63,14 @@ public class ConfigureMapMenu {
 		});
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
-		adapter.item(R.string.layer_map_appearance).
-			iconColor(R.drawable.ic_configure_screen_dark).listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					ma.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
-					return false;
-				}
-			}).reg();
+//		adapter.item(R.string.layer_map_appearance).
+//			iconColor(R.drawable.ic_configure_screen_dark).listen(new OnContextMenuClick() {
+//				@Override
+//				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+//					ma.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
+//					return false;
+//				}
+//			}).reg();
 		
 		return adapter;
 	}
@@ -556,7 +556,7 @@ public class ConfigureMapMenu {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
 				String descr;
-				if(Algorithms.isEmpty(pref.get())) {
+				if(!Algorithms.isEmpty(pref.get())) {
 					descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
 				} else {
 					descr = SettingsActivity.getStringPropertyValue(view.getContext(),

@@ -47,6 +47,16 @@
         android:scaleType="center"
         android:src="@drawable/ic_action_settings" />
     
+     <ImageView
+         android:id="@+id/toolbar_configure_screen"
+         android:layout_width="@dimen/list_item_height"
+         android:layout_height="@dimen/list_item_height"
+         android:layout_gravity="right"
+         android:background="@drawable/dashboard_button_light"
+         android:scaleType="center"
+         android:src="@drawable/ic_configure_screen_dark" />
+    
+    
     
     <ImageView
         android:id="@+id/toolbar_ok"

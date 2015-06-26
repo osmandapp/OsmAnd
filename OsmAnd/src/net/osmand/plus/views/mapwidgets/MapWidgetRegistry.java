@@ -378,7 +378,7 @@ public class MapWidgetRegistry {
 	}
 	
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
-		ContextMenuAdapter cm = new ContextMenuAdapter(map);
+		final ContextMenuAdapter cm = new ContextMenuAdapter(map);
 		cm.setDefaultLayoutId(R.layout.drawer_list_item);
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
@@ -398,7 +398,7 @@ public class MapWidgetRegistry {
 						if (mil != null) {
 							mil.recreateControls();
 						}
-						adapter.notifyDataSetInvalidated();
+						map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map));
 						return false;
 					}
 				}).reg();

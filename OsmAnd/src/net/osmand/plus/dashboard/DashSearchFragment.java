@@ -56,6 +56,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				dashboard.hideDashboard(false);
 				searchActivity(activity, appCustomization, SearchActivity.POI_TAB_INDEX);
 			}
 		});
@@ -66,6 +67,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				dashboard.hideDashboard(false);
 				searchActivity(activity, appCustomization, SearchActivity.ADDRESS_TAB_INDEX);
 			}
 		});
@@ -76,6 +78,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				dashboard.hideDashboard(false);
 				searchActivity(activity, appCustomization, SearchActivity.LOCATION_TAB_INDEX);
 			}
 		});
@@ -85,6 +88,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		(view.findViewById(R.id.recents)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				dashboard.hideDashboard(false);
 				searchActivity(activity, appCustomization, SearchActivity.HISTORY_TAB_INDEX);
 			}
 		});
