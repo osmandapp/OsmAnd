@@ -1122,7 +1122,7 @@
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s %3$s</string>
     <string name="recording_default_name">Nahrávka</string>
-    <string name="map_widget_av_notes">Zvukové poznámky</string>
+    <string name="map_widget_av_notes">Mediálne poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre offline vrstevnice</string>
     <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené na OsmAnd offline mapách. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu.\n\nGlobálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems). "</string>
     

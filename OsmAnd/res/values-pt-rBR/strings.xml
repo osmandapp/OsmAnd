@@ -60,7 +60,7 @@
 	<string name="your_edits">Suas edições</string>
     <string name="waypoint_visit_after">Passar depois</string>
     <string name="waypoint_visit_before">Passar antes</string>
-    <string name="simulate_your_location">Simular sua posição</string>
+    <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras</string>
@@ -238,7 +238,7 @@
 	<string name="rendering_attr_subwayMode_name">Rotas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
     <string name="wake_on_voice">Ligar tela</string>
-    <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligado) quando se aproxima da manobra</string>
+    <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra</string>
     <string name="impassable_road">Evitar estradas…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rotas de trem</string>
     <string name="rendering_attr_tramRoutes_name">Rotas de bonde</string>
@@ -264,7 +264,7 @@
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
 	<string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
-	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$ s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
+	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="show_pedestrian_warnings">Faixas de pedestre</string>
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9</string>
@@ -333,13 +333,13 @@
     <string name="monitoring_settings_descr">Configurar como gravar suas viagens</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota para o primeiro e último segmento</string>
     <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação?</string>
-    <string name="routing_attr_prefer_motorway_name">Autoestradas</string>
+    <string name="routing_attr_prefer_motorway_name">Preferir Autoestradas</string>
 	<string name="routing_attr_prefer_motorway_description">Preferir autoestradas na rota</string>
 	<string name="routing_attr_short_way_name">Rota mais curta</string>
 	<string name="routing_attr_short_way_description">Usar o caminho mais curto</string>
-	<string name="routing_attr_avoid_toll_name">Pedágios</string>
+	<string name="routing_attr_avoid_toll_name">Evitar pedágios</string>
 	<string name="routing_attr_avoid_toll_description">Evitar estradas com pedágio</string>
-	<string name="routing_attr_avoid_unpaved_name">Vias não pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_name">Evitar vias não-pavimentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas</string>
 	<string name="routing_attr_avoid_ferries_description">Evitar as balsas</string>
 	<string name="routing_attr_weight_name">Peso máximo</string>
@@ -362,7 +362,7 @@
     <string name="distance">Distância</string>
     <string name="index_tours">Excursões</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Pontos de parada</string>
+    <string name="waypoints">Marcos do trajeto</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Marcos de trajeto GPX</string>
     <string name="download_additional_maps">Baixar mapas que faltam %1$s (%2$d MB)?</string>
@@ -591,8 +591,8 @@
     <string name="route_descr_select_destination">Selecionar destino</string>
     <string name="route_preferences">Preferências de rota</string>
     <string name="route_info">Informações da rota</string>
-    <string name="routing_attr_avoid_ferries_name">Balsas</string>
-	<string name="routing_attr_avoid_motorway_name">Autoestradas</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar balsas</string>
+	<string name="routing_attr_avoid_motorway_name">Evitar autoestradas</string>
 	<string name="routing_attr_avoid_motorway_description">Evitar autoestradas</string>
 	<string name="android_19_location_disabled">Desde a versão Android 4.4 (KitKat) você não pode baixar e atualizar os mapas para o diretório de armazenamento anterior (%s). Você quer mudar para o local de armazenamento permitido e copiar todos os arquivos do OsmAnd para lá?\n\n Nota 1: Seus arquivos antigos permanecerão intactos (mas podem ser excluídos manualmente).
 \n Nota 2: No novo local de armazenamento não será possível compartilhar arquivos entre OsmAnd e OsmAnd+.</string>
@@ -685,7 +685,7 @@
 	<string name="osmand_long_description_1000_chars">" OsmAnd (Direções de Navegação Automatizada para OSM)\nOsmAnd é um aplicativo de navegação de código aberto com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados de mapas (mapas vetoriais ou quadrículas) podem ser armazenados na memória do aparelho para uso off-line. OsmAnd também oferece funcionalidade de roteamento online e offline, incluindo orientação por voz curva a curva.\n\nAlgumas das principais características:\n - Completa funcionalidade offline (armazenar mapas vetoriais ou quadrículas no armazenamento do aparelho)\n - Mapas vetoriais offline compactos para todo o mundo disponível\n - Baixar mapas de país ou região diretamente do app\n - Sobreposição de várias camadas do mapa, como trajetos GPX ou navegação, pontos de interesse, favoritos, linhas de contorno, paradas de transporte público, mapas adicionais com transparência personalizável - Pesquisa off-line de endereços e lugares (POIs)\n - Roteamento off-line para distâncias curtas (experimental)\n - Modos para carro, bicicleta e pedestres com: mudança automatizada de visão dia/noite; opcional zoom dependente da velocidade; alinhamento de mapa de acordo com a bússola ou a direção do movimento; opcional orientação de faixas, exibição de limite de velocidade, gravação e vozes TTS\n\nLimitações nesta versão gratuita do OsmAnd:\n - número limitado de transferências de mapas\n - sem acesso off-line a POIs da Wikipédia\n\nOsmAnd é ativamente desenvolvido e nosso projeto e seus progressos se baseiam em contribuir economicamente para financiar o desenvolvimento e testar novas funcionalidades. Por favor, considere comprar OsmAnd+, financiar específicos recursos novos ou fazer uma doação geral em osmand.net. "</string>
 	<string name="day_night_info_description">Nascer do Sol: %1$s ↵\nPôr do Sol: %2$s</string>
 	<string name="avoid_unpaved">Vias não-pavimentadas</string>
-	<string name="avoid_in_routing_descr">Evitar vias com pedágio, não pavimentadas, balsas</string>
+	<string name="avoid_in_routing_descr">Evitar vias com pedágio, não-pavimentadas, balsas</string>
 	<string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
 	<string name="show_cameras">Radares</string>
 	<string name="show_traffic_warnings">Alertas de trânsito</string>
@@ -802,7 +802,7 @@
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapas normais</string>
-    <string name="download_roads_only_maps">Apenas estradas no mapa</string>
+    <string name="download_roads_only_maps">Apenas mapa de estradas</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC</string>
@@ -863,7 +863,7 @@
 	<string name="bg_service_screen_unlock">Desbloquear tela</string>
 	<string name="bg_service_screen_lock_toast">A tela está bloqueada</string>
 	<string name="bg_service_interval">Definir intervalo para ativar:</string>
-	<string name="avoid_toll_roads">Evitar pedágios</string>
+	<string name="avoid_toll_roads">Pedágios</string>
 	<string name="continue_follow_previous_route_auto">A navegação anterior não foi concluída, quer continuá-la? (%1$s segundos)</string>
 	<string name="route_updated_loc_found">Rota será recalculada quando a posição for encontrada</string>
 	<string name="osmand_parking_hours">Horas</string>
@@ -880,7 +880,7 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
-    <string name="rendering_attr_showRoadMaps_name">Apenas estradas no mapa</string>
+    <string name="rendering_attr_showRoadMaps_name">Apenas mapa de estradas</string>
     <string name="safe_mode_description">Executar o aplicativo em modo seguro (usando código de Android, mais lento, em vez de código nativo).</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na loja de apps?</string>
 	<string name="shared_location">Posição compartilhada</string>
@@ -1251,7 +1251,7 @@
 	<string name="search_position_undefined">Indefinido</string>
 	<string name="search_position_current_location">Posição atual…</string>
 	<string name="search_position_map_view">Centro atual do mapa</string>
-	<string name="select_search_position">Origem:</string>
+	<string name="select_search_position">Próximo a:</string>
 	<string name="route_successfully_saved_at">Rota salva como \'%1$s\'.</string>
 	<string name="filename_input">"Nome do arquivo: "</string>
 	<string name="file_with_name_already_exist">Já existe um arquivo com o mesmo nome.</string>
@@ -1584,7 +1584,7 @@
 	<string name="mark_point">Destino</string>
 	<string name="app_settings">Configurações do aplicativo</string>
 	<string name="search_address">Pesquisar endereço</string>
-	<string name="choose_building">Escolher edifício</string>
+	<string name="choose_building">Escolher número</string>
 	<string name="choose_street">Escolher rua</string>
 	<string name="choose_city">Escolher cidade</string>
 	<string name="ChooseCountry">Escolher país</string>
@@ -1604,9 +1604,9 @@
 	<string name="searchpoi_activity">Escolher POI</string>
 	<string name="search_POI_level_btn">Encontrar mais</string>
 	<string name="incremental_search_street">Pesquisar rua incrementalmente</string>
-	<string name="incremental_search_building">Pesquisar edifícios incrementalmente</string>
+	<string name="incremental_search_building">Pesquisar número incrementalmente</string>
 	<string name="choose_available_region">Escolher região da lista</string>
-	<string name="choose_intersected_street">Escolher a rua transversal</string>
+	<string name="choose_intersected_street">Escolher rua transversal</string>
 	<string name="Closest_Amenities">Lugares próximos</string>
 	<string name="app_mode_car">Carro</string>
 	<string name="app_mode_bicycle">Bicicleta</string>

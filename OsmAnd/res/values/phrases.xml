@@ -527,6 +527,7 @@
 
 	<string name="poi_monastery">Monastery</string>
 	<string name="poi_historic_monastery">Historic monastery</string>
+	<string name="poi_religious">Religious area</string>
 	<string name="poi_wayside_cross">Wayside cross</string>
 	<string name="poi_wayside_shrine">Wayside shrine</string>
 	<string name="poi_information">Tourist information</string>

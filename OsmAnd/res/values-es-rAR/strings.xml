@@ -444,7 +444,7 @@
 	<string name="routing_attr_avoid_motorway_description">Evite usar las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
 	<string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas</string>
-    <string name="lang_sw">Swahili</string>
+    <string name="lang_sw">Suajili</string>
     <string name="lang_mr">Marathi</string>
 	<string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
 	<string name="srtm_plugin_name">Curvas de nivel</string>
@@ -778,7 +778,7 @@
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Elija la dirección</string>
     <string name="favourites_list_activity">Elige favorito</string>
-    <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
+    <string name="local_openstreetmap_act_title">Cambios OSM</string>
 	<string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Corregido Geo Intent (Foursquare, c: geo)\n\t* Corregido el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición del sombreado más sencillo (requiere complemento de Curvas de nivel)\n\t* Ahora acepta enlaces de ubicación de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
@@ -1861,7 +1861,7 @@
 	<string name="search_address_street_option">Intersección de calle</string>
 	<string name="search_tabs_location">Ubicación</string>
 	<string name="context_menu_item_update_map">Actualizar mapa</string>
-	<string name="context_menu_item_open_bug">Abrir fallo OSM</string>
+	<string name="context_menu_item_open_bug">Crear nota de OSM</string>
 	<string name="context_menu_item_create_poi">Crear PDI</string>
 	<string name="add_favorite_dialog_top_text">Ingrese nombre de favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
@@ -1952,7 +1952,7 @@
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandés</string>
-    <string name="lang_ms">Malasio</string>
+    <string name="lang_ms">Malayo</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estonio</string>
@@ -1977,8 +1977,8 @@
     <string name="lang_ta">Tamil</string>
     <string name="lang_eo">Esperanto</string>
     <string name="lang_tl">Tagalo</string>
-    <string name="lang_az">Azerbaiyán</string>
-    <string name="lang_bpy">Bishnupriya Manipuri</string>
+    <string name="lang_az">Azerbaiyano</string>
+    <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxemburgués</string>
     <string name="lang_os">Osetio</string>

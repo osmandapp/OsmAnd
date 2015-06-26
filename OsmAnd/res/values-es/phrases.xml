@@ -750,8 +750,8 @@
 	<string name="poi_signal_station_traffic">Estación de señales de tráfico</string>
 	<string name="poi_signal_station_warning">Estación de señales de advertencia</string>
 	<string name="poi_small_craft_facility">Instalaciones para pequeñas embarcaciones</string>
-	<string name="poi_topmark">Tope náutico</string>
-	<string name="poi_seamark_rock">Roca náutica</string>
+	<string name="poi_topmark">Marca de tope</string>
+	<string name="poi_seamark_rock">Bajo</string>
 	<string name="poi_seamark_wreck">Pecio</string>
 
 	<string name="poi_military_landuse">Zona militar</string>
@@ -783,4 +783,51 @@
 	<string name="poi_hanami">Hanami</string>
 	<string name="poi_trail_riding_station">Estación de pista de equitación</string>
 
+	<string name="poi_camera">Cámaras y lentes</string>
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">Wiki en inglés</string>
+	<string name="poi_wiki_lang_ar">Wiki en árabe</string>
+	<string name="poi_wiki_lang_be">Wiki en bielorruso</string>
+	<string name="poi_wiki_lang_bg">Wiki en búlgaro</string>
+	<string name="poi_wiki_lang_ca">Wiki en catalán</string>
+	<string name="poi_wiki_lang_cs">Wiki en checo</string>
+	<string name="poi_wiki_lang_da">Wiki en danés</string>
+	<string name="poi_wiki_lang_de">Wiki en alemán</string>
+	<string name="poi_wiki_lang_el">Wiki en griego</string>
+	<string name="poi_wiki_lang_et">Wiki en estonio</string>
+	<string name="poi_wiki_lang_es">Wiki en español</string>
+	<string name="poi_wiki_lang_fi">Wiki en finés</string>
+	<string name="poi_wiki_lang_fr">Wiki en francés</string>
+	<string name="poi_wiki_lang_gl">Wiki en gallego</string>
+	<string name="poi_wiki_lang_he">Wiki en hebreo</string>
+	<string name="poi_wiki_lang_hi">Wiki en hindi</string>
+	<string name="poi_wiki_lang_hr">Wiki en croata</string>
+	<string name="poi_wiki_lang_ht">Wiki en haitiano</string>
+	<string name="poi_wiki_lang_hu">Wiki en húngaro</string>
+	<string name="poi_wiki_lang_id">Wiki en indonesio</string>
+	<string name="poi_wiki_lang_zh">Wiki en chino</string>
+
+<string name="poi_wiki_lang_ceb">Wiki en cebuano</string>
+	<string name="poi_wiki_lang_it">Wiki en italiano</string>
+	<string name="poi_wiki_lang_ja">Wiki en japonés</string>
+	<string name="poi_wiki_lang_ko">Wiki en coreano</string>
+	<string name="poi_wiki_lang_lt">Wiki en lituano</string>
+	<string name="poi_wiki_lang_lv">Wiki en letón</string>
+	<string name="poi_wiki_lang_ms">Wiki en malayo</string>
+	<string name="poi_wiki_lang_nl">Wiki en holandés</string>
+	<string name="poi_wiki_lang_no">Wiki en noruego</string>
+	<string name="poi_wiki_lang_pl">Wiki en polaco</string>
+	<string name="poi_wiki_lang_pt">Wiki en portugués</string>
+	<string name="poi_wiki_lang_ro">Wiki en rumano</string>
+	<string name="poi_wiki_lang_ru">Wiki en ruso</string>
+	<string name="poi_wiki_lang_sk">Wiki en eslovaco</string>
+	<string name="poi_wiki_lang_sl">Wiki en esloveno</string>
+	<string name="poi_wiki_lang_sr">Wiki en serbio</string>
+	<string name="poi_wiki_lang_sv">Wiki en sueco</string>
+	<string name="poi_wiki_lang_sw">Wiki en suajili</string>
+	<string name="poi_wiki_lang_th">Wiki en tailandés</string>
+	<string name="poi_wiki_lang_tr">Wiki en turco</string>
+	<string name="poi_wiki_lang_uk">Wiki en ucranio</string>
+	<string name="poi_wiki_lang_vi">Wiki en vietnamita</string>
+	<string name="poi_religious">Área religiosa</string>
 	</resources>

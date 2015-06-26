@@ -1688,7 +1688,7 @@
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - Приватные группы ограничены 8 человеками.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Наложение символов пешего туризма</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Визуализация пути согласно трассам OSMC</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршруток</string>
     

@@ -992,7 +992,7 @@
     <string name="download_using_mobile_internet">WiFi 現在並未連線。您想要使用目前的網路連線下載嗎？</string>
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
-    <string name="monitoring_settings">錄製旅程</string>
+    <string name="monitoring_settings">旅程錄製</string>
     <string name="monitoring_settings_descr">組態如何錄製您的旅程</string>
     
     
@@ -1712,7 +1712,7 @@
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
-    <string name="record_plugin_name">錄製旅程</string>
+    <string name="record_plugin_name">旅程錄製</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
