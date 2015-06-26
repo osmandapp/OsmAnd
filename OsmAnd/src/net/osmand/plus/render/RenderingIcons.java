@@ -20,14 +20,14 @@ import android.graphics.drawable.Drawable;
 public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
-	private static Map<String, Integer> icons = new LinkedHashMap<String, Integer>();
+	private static Map<String, Integer> shaderIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
 //	private static DisplayMetrics dm;
 	
-	public static boolean containsIcon(String s){
-		return icons.containsKey(s);
+	public static boolean containsSmallIcon(String s){
+		return smallIcons.containsKey(s);
 	}
 	
 	public static boolean containsBigIcon(String s){
@@ -35,9 +35,10 @@ public class RenderingIcons {
 	}
 	
 	public static byte[] getIconRawData(Context ctx, String s) {
-		Integer resId = icons.get(s);
-		
-		// Quite bad error
+		Integer resId = shaderIcons.get(s);
+		if(resId == null) {
+			 resId = smallIcons.get(s);
+		}
 		if(resId == null)
 			return null;
 			
@@ -81,12 +82,15 @@ public class RenderingIcons {
 		return null;
 	}
 	
-	public static Bitmap getIcon(Context ctx, String s) {
+	public static Bitmap getIcon(Context ctx, String s, boolean includeShader) {
 		if(s == null) {
 			return null;
 		}
+		if(includeShader && shaderIcons.containsKey(s)) {
+			s = "h_" + s;
+		}
 		if (!iconsBmp.containsKey(s)) {
-			Integer resId = icons.get(s);
+			Integer resId = s.startsWith("h_") ? shaderIcons.get(s.substring(2)) : smallIcons.get(s);
 			if (resId != null) {
 				Bitmap bmp = BitmapFactory.decodeResource(ctx.getResources(), resId, null);
 				iconsBmp.put(s, bmp);
@@ -105,31 +109,18 @@ public class RenderingIcons {
 	public static void initIcons() {
 		Class<? extends drawable> cl = R.drawable.class;
 		for (Field f : cl.getDeclaredFields()) {
-			if (f.getName().startsWith("h_") || f.getName().startsWith("mm_")) {
-				try {
-					String id = f.getName().substring(f.getName().startsWith("mm_") ? 3 : 2);
-					int i = f.getInt(null);
-					// don't override shader or map icons (h) 
-					if(f.getName().startsWith("h_") || !icons.containsKey(id)) {
-						icons.put(id, i);
-					}
-					if(f.getName().startsWith("mm_")) {
-						smallIcons.put(id, i);
-					}
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-			if (f.getName().startsWith("mx_") ) {
-				try {
+			try {
+				if (f.getName().startsWith("h_")) {
+					shaderIcons.put(f.getName().substring(2), f.getInt(null));
+				} else if( f.getName().startsWith("mm_")) {
+					smallIcons.put(f.getName().substring(3), f.getInt(null));
+				} else if (f.getName().startsWith("mx_")) {
 					bigIcons.put(f.getName().substring(3), f.getInt(null));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
 				}
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
 			}
 		}
 	}

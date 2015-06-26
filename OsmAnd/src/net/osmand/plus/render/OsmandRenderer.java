@@ -156,7 +156,7 @@ public class OsmandRenderer {
 	public Shader getShader(String resId){
 		
 		if(shaders.get(resId) == null){
-			Bitmap bmp = RenderingIcons.getIcon(context, resId);
+			Bitmap bmp = RenderingIcons.getIcon(context, resId, true);
 			if(bmp != null){
 				Shader sh = new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT);
 				shaders.put(resId, sh);
@@ -319,7 +319,7 @@ public class OsmandRenderer {
 		
 		for (IconDrawInfo icon : rc.iconsToDraw) {
 			if (icon.resId != null) {
-				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
+				Bitmap ico = RenderingIcons.getIcon(context, icon.resId, true);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int visbleWidth = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getWidth();
@@ -340,7 +340,7 @@ public class OsmandRenderer {
 						}
 						
 						if (!intersects) {
-							Bitmap shield = icon.shieldId == null ? null : RenderingIcons.getIcon(context, icon.shieldId);
+							Bitmap shield = icon.shieldId == null ? null : RenderingIcons.getIcon(context, icon.shieldId, true);
 							if(shield != null) {
 								RectF shieldRf = calculateRect(rc, icon, shield.getWidth(), shield.getHeight());
 								if (coeff != 1f) {
@@ -352,19 +352,19 @@ public class OsmandRenderer {
 							}
 							if (coeff != 1f) {
 								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1, true), rf, src);
 								drawBitmap(cv, ico, rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4), rf, src);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2, true), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3, true), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4, true), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5, true), rf, src);
 							} else {
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1, true), rf);
 								drawBitmap(cv, ico, rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4), rf);
-								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2, true), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3, true), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4, true), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5, true), rf);
 							}
 							if(visibleRect != null) {
 								visibleRect.inset(-visibleRect.width() / 4, -visibleRect.height() / 4);

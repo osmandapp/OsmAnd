@@ -253,14 +253,14 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						String id = null;
 						PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
 						if (st != null) {
-							if (RenderingIcons.containsIcon(st.getIconKeyName())) {
+							if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
 								id = st.getIconKeyName();
-							} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+							} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 								id = st.getOsmTag() + "_" + st.getOsmValue();
 							}
 						}
 						if (id != null) {
-							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
+							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
 							if (bmp != null) {
 								canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 							}
