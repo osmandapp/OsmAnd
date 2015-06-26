@@ -268,4 +268,11 @@
 	<string name="poi_seamark">Hajózás</string>
 	<string name="poi_military">Katonai</string>
 	<string name="poi_osmwiki">Wikipédia</string>
+	<string name="poi_alcohol">Alkohol üzlet</string>
+	<string name="poi_wine">Borszaküzlet</string>
+
+	<string name="poi_bag">Táskabolt</string>
+	<string name="poi_bathroom_furnishing">Fürdőszoba bútor</string>
+	<string name="poi_bed">Hálószoba bútor</string>
+	<string name="poi_boutique">Divatszaküzlet</string>
 	</resources>
