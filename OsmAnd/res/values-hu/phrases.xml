@@ -259,4 +259,13 @@
 		<string name="poi_internet_access">Internetelérés</string>
 	<string name="poi_entertainment">Szabadidő</string>
 		<string name="poi_club">Klub</string>
+	<string name="poi_sustenance">Étkezés</string>
+	<string name="poi_cafe_and_restaurant">Kávézó és étterem</string>
+	<string name="poi_service">Szolgáltatás</string>
+		<string name="poi_craft">Szakember</string>
+	<string name="poi_finance">Pénzügy</string>
+	<string name="poi_natural">Természet</string>
+	<string name="poi_seamark">Hajózás</string>
+	<string name="poi_military">Katonai</string>
+	<string name="poi_osmwiki">Wikipédia</string>
 	</resources>
