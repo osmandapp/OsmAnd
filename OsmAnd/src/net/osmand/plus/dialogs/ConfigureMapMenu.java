@@ -556,7 +556,7 @@ public class ConfigureMapMenu {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
 				String descr;
-				if(Algorithms.isEmpty(pref.get())) {
+				if(!Algorithms.isEmpty(pref.get())) {
 					descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
 				} else {
 					descr = SettingsActivity.getStringPropertyValue(view.getContext(),
