@@ -208,6 +208,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		flat.setVisibility(View.GONE);
 		ImageView settings = (ImageView) dashboardView.findViewById(R.id.toolbar_settings);
 		settings.setVisibility(View.GONE);
+		ImageView configureScreen = (ImageView) dashboardView.findViewById(R.id.toolbar_configure_screen);
+		configureScreen.setVisibility(View.GONE);
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
@@ -269,6 +271,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			});
 		}
 		if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU) {
+            configureScreen.setVisibility(View.VISIBLE);
+            configureScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
+                    }
+            });
+            
+                       
+
 			settings.setVisibility(View.VISIBLE);
 			settings.setOnClickListener(new View.OnClickListener() {
 
