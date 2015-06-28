@@ -1718,7 +1718,7 @@
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OsMosms 실시간 모니터링을 사용하도록 설정을 보여줍니다. http://osmo.mobi를 참조하세요. 다른 장치를 추적하고 추적 받을 수 있습니다. 익명 그룹을 만들고, 서로의 위치를 공유하고, 통신 할 수 있습니다. 세션 트래킹 또는 영구 트래킹을 위한 다양한 설정을 합니다. ↵\n↵\n원격 제어 및 그룹 관리자가 없는 일부 기능 때문에 익명 그룹을 제한합니다. 완전한 기능의 그룹은 웹 사이트에 생성되고 등록된 사용자만 OsMo에 액세스 할 수 있어야 합니다. "</string>
     <string name="osmo_plugin_name">OsMo 모니터링</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">오스모(OsMo)</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
