@@ -1845,7 +1845,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="current_route">Текущ маршрут</string>
     <string name="mark_to_delete">Изберете за изтриване</string>
 	<string name="osmo_grop_name_length_alert">Името на групата трябва да бъде най-малко от 3 символа!</string>
-	<string name="local_osm_changes_upload_all_confirm">Ще да качите %1$ d промени към OSM. Сигурни ли сте?</string>
+	<string name="local_osm_changes_upload_all_confirm">Ще да качите %1$d промени към OSM. Сигурни ли сте?</string>
     <string name="confirmation_to_clear_history">Искате ли да изчистите хронологията?</string>
     <string name="delay_to_start_navigation">Стартиране на навигацията след…</string>
     <string name="shared_string_go">Старт</string>
@@ -1909,7 +1909,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="online_map">Онлайн карта</string>
 	<string name="roads_only">Само пътища</string>
     <string name="rendering_attr_pisteRoutes_name">Ски писти</string>
-	<string name="free">"Свободни %1$ s "</string>
+	<string name="free">"Свободни %1$s "</string>
 	<string name="device_memory">Памет на устройството</string>
     <string name="parking_place">Паркинг място</string>
     <string name="remove_the_tag">ПРЕМАХНИ ЕТИКЕТА</string>
@@ -1964,7 +1964,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="coordinates">Координати</string>
 	<string name="anonymous_user_hint">"Анонимен потребител не може  да:\n-създава групи;\n-синхронизира групи и устройства със сървъра;\n-управлява групи и устройства в частен режим."</string>
     <string name="anonymous_user">Анонимен потребител</string>
-    <string name="logged_as">Влезли сте като %1$ s</string>
+    <string name="logged_as">Влезли сте като %1$s</string>
 	<string name="print_route">Печат на маршрут</string>
     <string name="enable_proxy_title">Разреши HTTP прокси</string>
 	<string name="enable_proxy_descr">Конфигуриране на HTTP прокси за всички мрежови заявки</string>
@@ -1996,7 +1996,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="gpx_selection_route_points">%1$s
 \nТочки %2$s</string>
     <string name="speed_limit_exceed_message">Изберете толеранса на ограничението на скоростта, над което ще получите гласово предупреждение.</string>
-	<string name="fav_point_emoticons_message">Името на точката е променено на %1$ s с цел правилното записване на низ с емотикони във файл.</string>
+	<string name="fav_point_emoticons_message">Името на точката е променено на %1$s с цел правилното записване на низ с емотикони във файл.</string>
     <string name="osmo_gpx_track_downloaded">OsMo следата %1$s е изтеглена.</string>
     <string name="no_index_file_to_download">Списъкът за сваляне не е намерен, моля проверете Вашата интернет връзка.</string>
     <string name="gpx_selection_points">%1$s
