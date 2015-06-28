@@ -1185,7 +1185,7 @@
 	<string name="rendering_attr_roadColors_description">도로 색상을 선택합니다:</string>
 	<string name="rendering_attr_roadColors_name">도로 색상</string>
     <string name="map_widget_show_destination_arrow">도착지 방향 표시</string>
-    <string name="enable_plugin_monitoring_services">트랙로깅 서비스(GPX 기록, 온라인 트래킹)를 사용하여 트래킹 플러그인을 활성화</string>
+    <string name="enable_plugin_monitoring_services">위치 로깅 서비스(GPX 로깅, 온라인 트래킹)를 사용하여 트립 레코딩 플러그인을 활성화</string>
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비-최적 경로 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
     <string name="map_widget_monitoring_services">로깅 서비스</string>
@@ -1363,7 +1363,7 @@
 	
 	
 	<string name="map_widget_parking">주차</string>
-	<string name="map_widget_monitoring">GPX 레코딩</string>
+	<string name="map_widget_monitoring">GPX 로깅</string>
 	<string name="map_widget_speed">속도</string>
 	<string name="map_widget_distance">도착지</string>
 	<string name="map_widget_altitude">고도</string>
@@ -1718,7 +1718,7 @@
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OsMosms 실시간 모니터링을 사용하도록 설정을 보여줍니다. http://osmo.mobi를 참조하세요. 다른 장치를 추적하고 추적 받을 수 있습니다. 익명 그룹을 만들고, 서로의 위치를 공유하고, 통신 할 수 있습니다. 세션 트래킹 또는 영구 트래킹을 위한 다양한 설정을 합니다. ↵\n↵\n원격 제어 및 그룹 관리자가 없는 일부 기능 때문에 익명 그룹을 제한합니다. 완전한 기능의 그룹은 웹 사이트에 생성되고 등록된 사용자만 OsMo에 액세스 할 수 있어야 합니다. "</string>
     <string name="osmo_plugin_name">OsMo 모니터링</string>
-    <string name="osmo_settings">OsMo 모니터링</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1786,7 +1786,7 @@
     <string name="osmo_enable_tracker">내 위치 전송하기</string>
     <string name="osmo_control">OsMo 빠른 접근</string>
     
-	<string name="import_file_favourites">GPX 파일로 저장? 또는 즐겨찾기로 가져오기?</string>
+	<string name="import_file_favourites">장소를 GPX 파일로 저장 할까요? 또는 즐겨찾기로 가져오기 할까요?</string>
 	
 	<string name="color_red">빨강</string>
 	<string name="color_pink">분홍</string>
@@ -1896,12 +1896,12 @@
     <string name="lang_he">히브리어</string>
     <string name="forward">앞으로</string>
     <string name="home">홈</string>
-    <string name="live_monitoring_m_descr">GPX 레코딩이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
+    <string name="live_monitoring_m_descr">GPX 로깅이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
 	<string name="live_monitoring_m">온라인 트래킹 (GPX 파일 필요)</string>
     <string name="live_monitoring_start">온라인 트래킹 시작</string>
 	<string name="live_monitoring_stop">온라인 트래킹 중지</string>
-	<string name="gpx_monitoring_start">GPX 레코딩 시작</string>
-	<string name="gpx_monitoring_stop">GPX 레코딩 중지</string>
+	<string name="gpx_monitoring_start">GPX 로깅 시작</string>
+	<string name="gpx_monitoring_stop">GPX 로깅 중지</string>
     <string name="gpx_start_new_segment">새로운 세그먼트 시작</string>
     <string name="lang_fa">페르시아어</string>
 	<string name="lang_al">알바니아어</string>
@@ -1936,7 +1936,7 @@
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
-\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
+\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 모니터 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
     <string name="record_plugin_name">여행 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
@@ -1950,10 +1950,10 @@
     <string name="speak_poi">주변의 POI 알리기</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
-	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
+	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 로깅 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
 	<string name="confirm_every_run">항상 요청</string>
-	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 레코딩 위젯을 통해 사용 가능)</string>
+	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 로깅 위젯을 통해 사용 가능)</string>
 	<string name="save_global_track_interval">일반 로깅 간격</string>
 	<string name="traffic_warning_speed_limit">속도 제한</string>
     <string name="traffic_warning_border_control">국경 통제</string>
@@ -2256,7 +2256,7 @@
 	<string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>
     <string name="use_fast_recalculation">스마트한 경로 재계산</string>
 	<string name="use_fast_recalculation_desc">긴 여행인 경우 경로 다시 계산</string>
-<string name="gps_network_not_enabled">위치 서비스는 사용할 수 없습니다. 설정을 하시겠습니까?</string>
+<string name="gps_network_not_enabled">위치 서비스는 사용할 수 없습니다. 위치 서비스를 켜시겠습니까?</string>
     <string name="disable_recording_once_app_killed">단독 로깅 방지</string>
     <string name="disable_recording_once_app_killed_descrp">앱이 죽을 때 GPX 로깅은 일시 중지 합니다. (OsmAnd 절전 모드 표시는 안드로이드 알림 표시줄에서 사라집니다.)</string>
 	<string name="shared_string_import2osmand">OsmAnd로 가져오기</string>
@@ -2266,4 +2266,39 @@
     <string name="shared_string_show_details">세부 정보 보기</string>
     <string name="osm_edit_context_menu_delete">OSM 편집을 삭제</string>
     <string name="local_recordings_delete_all_confirm">%1$d 노트를 삭제 하려고 합니다. 확실한가요?</string>
-	</resources>
+	<string name="light_theme">밝은</string>
+    <string name="dark_theme">어두운</string>
+    <string name="lang_pms">피에몬테 어</string>
+    <string name="lang_bn">벵골어</string>
+    <string name="lang_tl">타갈로그어</string>
+    <string name="lang_sh">세르보-크로아티아어</string>
+    <string name="lang_az">아제리어</string>
+    <string name="lang_br">브루타뉴어</string>
+    <string name="lang_sq">알바니아어</string>
+    <string name="lang_is">아이슬란드어</string>
+    <string name="lang_bpy">비슈프리야어</string>
+    <string name="lang_nv">나바호어</string>
+    <string name="lang_ga">아일랜드어</string>
+    <string name="lang_la">라틴어</string>
+    <string name="lang_ku">쿠르드어</string>
+    <string name="lang_ta">타밀어</string>
+    <string name="lang_ml">말라얄람어</string>
+    <string name="lang_lb">룩셈부르크어</string>
+    <string name="lang_os">오세티아어</string>
+    <string name="lang_eo">에스페란토어</string>
+    <string name="lang_es_ar">아르헨티나 스페인어</string>
+    <string name="lang_nb">노르웨이 보크몰어</string>
+    <string name="lang_vo">볼라퓌크어</string>
+    <string name="lang_th">타일랜드어</string>
+    <string name="lang_te">텔루구어</string>
+    <string name="lang_nn">노르웨이어(니노르스크)</string>
+    <string name="lang_new">Newar / 네팔 Bhasa</string>
+    <string name="lang_ms">말레이시아어</string>
+    <string name="lang_ht">아이티어</string>
+    <string name="lang_gl">갈리시아어</string>
+    <string name="lang_et">에스토니아어</string>
+    <string name="lang_ceb">세부아노어</string>
+    <string name="archive_wikipedia_data">당신은 오래된 호환되지 않는 위키백과 데이터를 가지고 있습니다. 그것을 보관 하시겠습니까?</string>
+    <string name="download_wikipedia_files">추가 위키백과 데이터 (%1$s MB)을 다운로드 하시겠습니까?</string>
+    <string name="download_wikipedia_maps">위키백과</string>
+    </resources>
