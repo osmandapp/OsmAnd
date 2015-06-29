@@ -7,9 +7,12 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 import net.osmand.Location;
@@ -107,8 +110,15 @@ public class Amenity extends MapObject  {
 	}
 	
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
-		this.additionalInfo = additionalInfo;
-		openingHours = additionalInfo.get(OPENING_HOURS);
+		this.additionalInfo = null;
+		openingHours = null;
+		if(additionalInfo != null) {
+			Iterator<Entry<String, String>> it = additionalInfo.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, String> e = it.next();
+				setAdditionalInfo(e.getKey(), e.getValue());
+			}
+		}
 	}
 
 	public void setRoutePoint(AmenityRoutePoint routePoint) {
@@ -120,14 +130,16 @@ public class Amenity extends MapObject  {
 	}
 
 	public void setAdditionalInfo(String tag, String value) {
-		if(this.additionalInfo == null){
-			this.additionalInfo = new LinkedHashMap<String, String>();
-		}
 		if("name".equals(tag)) {
 			setName(value);
 		} else if("name:en".equals(tag)) {
 			setEnName(value);
+		} else if(tag.startsWith("name:")) {
+			setName(tag.substring("name:".length()), value);
 		} else {
+			if(this.additionalInfo == null){
+				this.additionalInfo = new LinkedHashMap<String, String>();
+			}
 			this.additionalInfo.put(tag, value);
 			if (OPENING_HOURS.equals(tag)) {
 				this.openingHours = value;
@@ -185,29 +197,6 @@ public class Amenity extends MapObject  {
 			}
 		}
 		return lng;
-	}
-	
-	public String getName(String lang) {
-		if (lang != null) {
-			String translateName;
-			if (lang.equals("en")) {
-				translateName = getEnName();
-			} else {
-				translateName = getAdditionalInfo("name:" + lang);
-			}
-			if (!Algorithms.isEmpty(translateName)) {
-				return translateName;
-			}
-		}
-		if(!Algorithms.isEmpty(getName())) {
-			return getName();
-		}
-		for (String nm : getAdditionalInfo().keySet()) {
-			if (nm.startsWith("name:")) {
-				return getAdditionalInfo(nm);
-			}
-		}
-		return "";
 	}
 	
 	public List<String> getNames(String tag, String defTag) {

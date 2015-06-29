@@ -5,10 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,7 +13,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -548,13 +544,13 @@ public class BinaryMapPoiReaderAdapter {
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					boolean matches = matcher.matches(am.getName(false).toLowerCase()) || matcher.matches(am.getName(true).toLowerCase());
+					boolean matches = matcher.matches(am.getName().toLowerCase()) || 
+							matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
-						Iterator<Entry<String, String>> it = am.getAdditionalInfo().entrySet().iterator();
-						while (!matches && it.hasNext()) {
-							Entry<String, String> n = it.next();
-							if (n.getKey().startsWith("name:")) {
-								matches = matcher.matches(n.getValue().toLowerCase());
+						for(String s : am.getAllNames()) {
+							matches = matcher.matches(s.toLowerCase());
+							if(matches) {
+								break;
 							}
 						}
 					}
@@ -663,9 +659,6 @@ public class BinaryMapPoiReaderAdapter {
 			}
 			switch (tag) {
 			case 0:
-				if(Algorithms.isEmpty(am.getEnName())){
-					am.setEnName(Junidecode.unidecode(am.getName()));
-				}
 				req.numberOfAcceptedObjects++;
 				if (req.radius > 0) {
 					LatLon loc = am.getLocation();

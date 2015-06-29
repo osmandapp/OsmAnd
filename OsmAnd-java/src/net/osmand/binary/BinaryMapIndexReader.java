@@ -554,9 +554,9 @@ public class BinaryMapIndexReader {
 	
 	public List<City> getCities(String region, SearchRequest<City> resultMatcher,  
 			int cityType) throws IOException {
-		return getCities(region, resultMatcher, null, false, cityType);
+		return getCities(region, resultMatcher, null, null, cityType);
 	}
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher, StringMatcher matcher, boolean useEn, 
+	public List<City> getCities(String region, SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, 
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
@@ -567,7 +567,7 @@ public class BinaryMapIndexReader {
 			if(block.type == cityType) {
 				codedIS.seek(block.filePointer);
 				int old = codedIS.pushLimit(block.length);
-				addressAdapter.readCities(cities, resultMatcher, matcher, useEn);
+				addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
 				codedIS.popLimit(old);
 			}
 		}
@@ -576,16 +576,16 @@ public class BinaryMapIndexReader {
 	
 	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher,  
 			int cityType) throws IOException {
-		return getCities(region, resultMatcher, null, false, cityType);
+		return getCities(region, resultMatcher, null, cityType);
 	}
-	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, StringMatcher matcher, boolean useEn, 
+	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, StringMatcher matcher,  
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		for(CitiesBlock block : region.cities) {
 			if(block.type == cityType) {
 				codedIS.seek(block.filePointer);
 				int old = codedIS.pushLimit(block.length);
-				addressAdapter.readCities(cities, resultMatcher, matcher, useEn);
+				addressAdapter.readCities(cities, resultMatcher, matcher, region.attributeTagsTable);
 				codedIS.popLimit(old);
 			}
 		}
@@ -2272,7 +2272,7 @@ public class BinaryMapIndexReader {
 				reader.preloadBuildings(s, buildAddressRequest((ResultMatcher<Building>) null));
 				buildings += s.getBuildings().size();
 			}
-			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true));
 		}
 //		int[] count = new int[1];
 		List<City> villages = reader.getCities(reg, buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);

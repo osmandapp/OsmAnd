@@ -164,6 +164,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		searchText.setText("");
 	}
 	
+	public String getLangPreferredName(MapObject mo) {
+		return mo.getName(settings.MAP_PREFERRED_LOCALE.get());
+	}
+	
 	protected void addFooterViews() {
 	}
 	
