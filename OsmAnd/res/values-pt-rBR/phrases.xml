@@ -830,4 +830,17 @@
 <string name="poi_wiki_lang_lv">Letão wiki</string>
 	<string name="poi_camera">Câmeras e lentes</string>
 	<string name="poi_religious">Área religiosa</string>
+	<string name="poi_bollard">Pilar</string>
+	<string name="poi_cycle_barrier">Barreira para bicicletas</string>
+	<string name="poi_motorcycle_barrier">Barreira para motos</string>
+	<string name="poi_block">Bloqueio</string>
+	<string name="poi_bus_trap">Armadilha de ônibus</string>
+	<string name="poi_cattle_grid">Mata-burro</string>
+	<string name="poi_full_height_turnstile">Catraca de altura completa</string>
+	<string name="poi_bump_gate">Porteira</string>
+	<string name="poi_general_barrier">Barreira geral</string>
+	<string name="poi_stile">Limitador de passagem</string>
+	<string name="poi_height_restrictor">Limitador de altura</string>
+	<string name="poi_horse_stile">Passagem para cavalos</string>
+	<string name="poi_turnstile">Catraca</string>
 	</resources>
