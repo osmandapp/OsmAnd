@@ -644,7 +644,7 @@ public class ResourceManager {
 					for (String rName : index.getRegionNames()) {
 						// skip duplicate names (don't make collision between getName() and name in the map)
 						// it can be dangerous to use one file to different indexes if it is multithreaded
-						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName, f.getName());
+						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, index, rName, f.getName());
 						addressMap.put(rName, rarb);
 					}
 					if (index.hasTransportData()) {

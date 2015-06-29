@@ -1,6 +1,8 @@
 package net.osmand.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -41,12 +43,10 @@ public class City extends MapObject {
 	}
 
 	private CityType type = null;
-	// Be attentive ! Working with street names ignoring case
-	private Map<String, Street> streets = new TreeMap<String, Street>(OsmAndCollator.primaryCollator());
-	private String isin = null;
+	private List<Street> listOfStreets = new ArrayList<Street>();
 	private String postcode = null;
 	private City closestCity = null;
-
+	
 	private static long POSTCODE_INTERNAL_ID = -1000;
 	public static City createPostcode(String postcode){
 		return new City(postcode, POSTCODE_INTERNAL_ID--);
@@ -72,19 +72,7 @@ public class City extends MapObject {
 	public boolean isPostcode(){
 		return type == null;
 	}
-
-	public boolean isEmptyWithStreets() {
-		return streets.isEmpty();
-	}
-
-
-	public Street unregisterStreet(String name) {
-		return streets.remove(name.toLowerCase());
-	}
-
-	public void removeAllStreets() {
-		streets.clear();
-	}
+	
 
 	public String getPostcode() {
 		return postcode;
@@ -102,24 +90,13 @@ public class City extends MapObject {
 		this.closestCity = closestCity;
 	}
 
-	protected Street registerStreet(Street street, boolean en) {
-		String name = en ? street.getEnName() : street.getName();
-		name = name.toLowerCase();
-		if (!Algorithms.isEmpty(name)) {
-			if (!streets.containsKey(name)) {
-				return streets.put(name, street);
-			} else {
-				// try to merge streets
-				Street prev = streets.get(name);
-				prev.mergeWith(street);
-				return prev;
-			}
-		}
-		return null;
-	}
 
-	public Street registerStreet(Street street) {
-		return registerStreet(street, false);
+	public void registerStreet(Street street) {
+		listOfStreets.add(street);
+	}
+	
+	public void unregisterStreet(Street candidate) {
+		listOfStreets.remove(candidate);
 	}
 
 	public CityType getType() {
@@ -127,12 +104,10 @@ public class City extends MapObject {
 	}
 
 	public Collection<Street> getStreets() {
-		return streets.values();
+		return listOfStreets;
 	}
 
-	public Street getStreet(String name) {
-		return streets.get(name.toLowerCase());
-	}
+	
 
 	@Override
 	public String toString() {
@@ -142,8 +117,25 @@ public class City extends MapObject {
 		return "City [" + type + "] " + getName(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
+	public Street getStreetByName(String name) {
+		for(Street s : listOfStreets) {
+			if(s.getName().equalsIgnoreCase(name)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+
+	// GENERATION
+	// Be attentive ! Working with street names ignoring case
+	private String isin = null;
+	
+		
 	public void setIsin(String isin) {
 		this.isin = isin;
 	}
+
+	
 
 }

@@ -139,7 +139,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 						int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 						int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 						if (Math.abs(x - ex) < getRadius(tileBox) * 3 /2 && Math.abs(y - ey) < getRadius(tileBox) * 3 /2) {
-							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().usingEnglishNames()) + " : " + //$NON-NLS-1$
+							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().MAP_PREFERRED_LOCALE.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$
 							, Toast.LENGTH_LONG).show();
 							return true;

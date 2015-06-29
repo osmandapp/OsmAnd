@@ -18,6 +18,8 @@ public interface RegionAddressRepository {
 	public String getName();
 	
 	public String getFileName() ;
+	
+	public String getLang();
 
 	
 	public LatLon getEstimatedRegionCenter();
@@ -28,11 +30,6 @@ public interface RegionAddressRepository {
 	// called to close resources
 	public void close();
 	
-	public boolean useEnglishNames();
-	
-	public void setUseEnglishNames(boolean useEnglishNames);
-	
-
 	
 	public void preloadCities(ResultMatcher<City> resultMatcher);
 	
@@ -62,12 +59,12 @@ public interface RegionAddressRepository {
 	
 	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
 		
-		private final boolean useEnName;
 		private Collator collator = Collator.getInstance();
 		private final LatLon location;
+		private final String lang;
 
-		public MapObjectNameDistanceComparator(boolean useEnName, LatLon location){
-			this.useEnName = useEnName;
+		public MapObjectNameDistanceComparator(String lang, LatLon location){
+			this.lang = lang;
 			this.location = location;
 		}
 
@@ -76,7 +73,7 @@ public interface RegionAddressRepository {
 			if(object1 == null || object2 == null){
 				return object2 == object1 ? 0 : (object1 == null ? -1 : 1); 
 			} else {
-				int c = collator.compare(object1.getName(useEnName), object2.getName(useEnName));
+				int c = collator.compare(object1.getName(lang), object2.getName(lang));
 				if(c == 0 && location != null){
 					LatLon l1 = object1.getLocation();
 					LatLon l2 = object2.getLocation();

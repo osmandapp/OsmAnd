@@ -67,15 +67,15 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 				"-vpoi",
-//				"-vmap",// "-vmapobjects", 
+				"-vmap", "-vmapobjects", 
 //				"-vrouting",
-//				"-vaddress", "-vcities","-vstreetgroups", 
-//				"-vstreets", "-vbuildings", "-vintersections", 
+				"-vaddress", "-vcities","-vstreetgroups", 
+				"-vstreets", "-vbuildings", "-vintersections", 
 				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-//				"/Users/victorshcherb/osmand/maps/srtm/Netherlands_europe_2.srtm.obf"
-//				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
+				"/Users/victorshcherb/osmand/osm-gen/Map.obf"
+				
 				
 					});
 		} else {
@@ -566,6 +566,7 @@ public class BinaryInspector {
 			BinaryMapAddressReaderAdapter.VILLAGES_TYPE,
 			BinaryMapAddressReaderAdapter.POSTCODES_TYPE
 		};
+		String lang = "ru";
 		
 		for (int j = 0; j < cityType.length; j++) {
 			int type = cityType[j];
@@ -587,7 +588,7 @@ public class BinaryInspector {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
-						new Object[]{c.getEnName(), c.getId(), streets.size(), size}));
+						new Object[]{c.getName(lang), c.getId(), streets.size(), size}));
 				if(!verbose.vstreets)
 		        {
 					println("");
@@ -605,20 +606,20 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 				
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getEnName(), t.getId(), buildings.size(), intersections.size()}));
+							new Object[]{t.getName(lang), t.getId(), buildings.size(), intersections.size()}));
 					
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(true), b.getId()}));
+									new Object[]{b.getName(lang), b.getId()}));
 						}
 					}
 					
 					if (intersections != null && !intersections.isEmpty() && verbose.vintersections) {
 						print("\t\t\t\tIntersects with:");
 						for (Street s : intersections) {
-							println("\t\t\t\t\t" + s.getEnName());
+							println("\t\t\t\t\t" + s.getName(lang));
 						}
 					}
 				}

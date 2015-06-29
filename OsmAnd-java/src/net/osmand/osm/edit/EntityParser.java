@@ -23,11 +23,16 @@ public class EntityParser {
 		if (mo.getName().length() == 0) {
 			mo.setName(e.getTag(OSMTagKey.NAME));
 		}
-		if (mo.getEnName().length() == 0) {
+		if (mo.getEnName(false).length() == 0) {
 			mo.setEnName(e.getTag(OSMTagKey.NAME_EN));
-			if (mo.getName().length() == 0) {
-				mo.setName(mo.getEnName());
+		}
+		for(String ts : e.getTags().keySet()) {
+			if(ts.startsWith(OSMTagKey.NAME + ":") && !ts.equals(OSMTagKey.NAME_EN)) {
+				mo.setName(ts.substring((OSMTagKey.NAME + ":").length()), e.getTag(ts));
 			}
+		}
+		if (mo.getName().length() == 0) {
+			mo.setName(mo.getEnName(false));
 		}
 		if (mo.getLocation() == null) {
 			LatLon l = null;

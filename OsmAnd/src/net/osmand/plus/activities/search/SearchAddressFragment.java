@@ -525,10 +525,6 @@ public class SearchAddressFragment extends Fragment {
 		street = null;
 		building = null;
 		region = osmandSettings.getLastSearchedRegion();
-		RegionAddressRepository reg = getApplication().getResourceManager().getRegionRepository(region);
-		if(reg != null && reg.useEnglishNames() != osmandSettings.usingEnglishNames()){
-			reg.setUseEnglishNames(osmandSettings.usingEnglishNames());
-		}
 		loadData();
 		updateUI();
 		
