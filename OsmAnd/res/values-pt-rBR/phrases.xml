@@ -830,17 +830,28 @@
 <string name="poi_wiki_lang_lv">Letão wiki</string>
 	<string name="poi_camera">Câmeras e lentes</string>
 	<string name="poi_religious">Área religiosa</string>
-	<string name="poi_bollard">Pilar</string>
-	<string name="poi_cycle_barrier">Barreira para bicicletas</string>
-	<string name="poi_motorcycle_barrier">Barreira para motos</string>
+	<string name="poi_bollard">Pilarete</string>
+	<string name="poi_cycle_barrier">Barreira para bicicleta</string>
+	<string name="poi_motorcycle_barrier">Barreira para moto</string>
 	<string name="poi_block">Bloqueio</string>
 	<string name="poi_bus_trap">Armadilha de ônibus</string>
 	<string name="poi_cattle_grid">Mata-burro</string>
 	<string name="poi_full_height_turnstile">Catraca de altura completa</string>
-	<string name="poi_bump_gate">Porteira</string>
+	<string name="poi_bump_gate">Bump gate</string>
 	<string name="poi_general_barrier">Barreira geral</string>
-	<string name="poi_stile">Limitador de passagem</string>
+	<string name="poi_stile">Travessia em cerca</string>
 	<string name="poi_height_restrictor">Limitador de altura</string>
 	<string name="poi_horse_stile">Passagem para cavalos</string>
 	<string name="poi_turnstile">Catraca</string>
-	</resources>
+	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_entrance_main">Entrada principal</string>
+	<string name="poi_entrance">Entrada</string>
+	<string name="poi_entrance_exit">Saída</string>
+
+	<string name="poi_kissing_gate">Kissing gate</string>
+	<string name="poi_sally_port">Portão de fortaleza</string>
+	<string name="poi_swing_gate">Swing gate</string>
+	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
+	<string name="poi_highway_crossing">Cruzamento de estrada</string>
+
+</resources>
