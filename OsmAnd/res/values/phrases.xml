@@ -842,7 +842,6 @@
 	<string name="poi_full-height_turnstile">Full-height turnstile</string>
 	<string name="poi_bump_gate">Bump gate</string>
 	<string name="poi_general_barrier">General barrier</string>
-	<string name="poi_lift_gate">Lift gate</string>
 	<string name="poi_stile">Stile</string>
 	<string name="poi_height_restrictor">Height restrictor</string>
 	<string name="poi_horse_stile">Horse stile</string>
