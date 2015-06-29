@@ -828,4 +828,7 @@
 	<string name="poi_highway_crossing">Échangeur autoroutier</string>
 
 <string name="poi_cattle_grid">Grille à bétail</string>
+	<string name="poi_bollard">Bollard</string>
+	<string name="poi_turnstile">Tourniquet</string>
+	<string name="poi_kent_carriage_gap">Plot anti-franchissement</string>
 	</resources>
