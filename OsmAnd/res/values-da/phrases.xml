@@ -847,4 +847,12 @@
 
 <string name="poi_camera">Kameraer og objektiver</string>
 	<string name="poi_religious">Religiøst område</string>
+	<string name="poi_bollard">Pullert</string>
+	<string name="poi_cycle_barrier">Cykelforhindring</string>
+	<string name="poi_motorcycle_barrier">Motorcykelforhindring</string>
+	<string name="poi_block">Blok</string>
+	<string name="poi_bus_trap">Bussluse</string>
+	<string name="poi_cattle_grid">Færist</string>
+	<string name="poi_full-height_turnstile">Fuld højde tælleapparatet</string>
+	<string name="poi_bump_gate">Bumplåge</string>
 	</resources>
