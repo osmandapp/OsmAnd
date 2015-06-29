@@ -833,4 +833,28 @@
 	<string name="poi_wiki_lang_vo">Volapük wiki</string>
 	<string name="poi_wiki_lang_zh">Chinese wiki</string>
 
+	<string name="poi_bollard">Bollard</string>
+	<string name="poi_cycle_barrier">Cycle barrier</string>
+	<string name="poi_motorcycle_barrier">Motorcycle barrier</string>
+	<string name="poi_block">Block</string>
+	<string name="poi_bus_trap">Bus trap</string>
+	<string name="poi_cattle_grid">Cattle grid</string>
+	<string name="poi_full_height_turnstile">Full-height turnstile</string>
+	<string name="poi_bump_gate">Bump gate</string>
+	<string name="poi_general_barrier">General barrier</string>
+	<string name="poi_stile">Stile</string>
+	<string name="poi_height_restrictor">Height restrictor</string>
+	<string name="poi_horse_stile">Horse stile</string>
+	<string name="poi_kissing_gate">Kissing gate</string>
+	<string name="poi_sally_port">Sally port</string>
+	<string name="poi_swing_gate">Swing gate</string>
+	<string name="poi_turnstile">Turnstile</string>
+	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
+	<string name="poi_barrier_entrance">Entrance</string>
+	<string name="poi_entrance_main">Main entrance</string>
+	<string name="poi_entrance">Entrance</string>
+	<string name="poi_entrance_exit">Exit</string>
+
+	<string name="poi_highway_crossing">Highway crossing</string>
+
 </resources>

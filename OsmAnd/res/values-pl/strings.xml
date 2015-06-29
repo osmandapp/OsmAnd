@@ -310,12 +310,12 @@
   <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
   <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
   <string name="show_point_options">Użyj lokalizacji…</string>
-  <string name="renderer_load_sucess">Renderer pomyślnie wczytany</string>
-  <string name="renderer_load_exception">Wystąpił błąd: renderer nie został wczytany</string>
-  <string name="renderers">Render wektorowy</string>
+  <string name="renderer_load_sucess">Wczytano renderer</string>
+  <string name="renderer_load_exception">Wystąpił błąd: nie wczytano renderera</string>
+  <string name="renderers">Renderer wektorowy</string>
   <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline</string>
-  <string name="poi_context_menu_website">Pokaż stronę WWW tego POI</string>
-  <string name="poi_context_menu_call">Pokaż nr tel. tego POI</string>
+  <string name="poi_context_menu_website">Wyświetl stronę internetową POI</string>
+  <string name="poi_context_menu_call">Wyświetl nr telefonu POI</string>
   <string name="website">Strona WWW</string>
   <string name="phone">Telefon</string>
   <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
@@ -330,9 +330,9 @@
   <string name="transport_search_again">Resetuj wyszukiwanie transportu</string>
   
   <string name="voice">Nagrany głos</string>
-  <string name="no_vector_map_loaded">Mapy wektorowe nie zostały wczytane</string>
+  <string name="no_vector_map_loaded">Nie wczytano map wektorowych</string>
   <string name="map_route_by_gpx">Nawiguj używając GPX</string>
-  <string name="gpx_files_not_found">Nie znaleziono plików GPX w katalogu tras</string>
+  <string name="gpx_files_not_found">Nie odnaleziono plików GPX w katalogu śladów</string>
   <string name="layer_gpx_layer">Ślad GPX…</string>
   <string name="error_reading_gpx">Błąd odczytu danych GPX</string>
   <string name="vector_data">Wektorowe mapy offline</string>
@@ -347,13 +347,13 @@
   <string name="rotate_map_to_bearing_descr">Wybiera sposób obracania mapy</string>
   <string name="rotate_map_to_bearing">Orientacja mapy</string>
   <string name="show_route">Szczegóły trasy</string>
-  <string name="fav_imported_sucessfully">Ulubione zostały zaimportowane</string>
-  <string name="fav_file_to_load_not_found">Plik GPX zawierający punkty ulubione nie został znaleziony w {0}</string>
-  <string name="fav_saved_sucessfully">Ulubione zostały zapisane do {0}</string>
+  <string name="fav_imported_sucessfully">Zaimportowano ulubione</string>
+  <string name="fav_file_to_load_not_found">Nie odnaleziono pliku GPX zawierającego punkty ulubione w {0}</string>
+  <string name="fav_saved_sucessfully">Zapisano ulubione do {0}</string>
   <string name="no_fav_to_save">Brak ulubionych punktów do zapisania</string>
   <string name="shared_string_import">Import</string>
   
-  <string name="error_occurred_loading_gpx">Wystąpił błąd podczas ładowania GPX</string>
+  <string name="error_occurred_loading_gpx">Wystąpił błąd podczas wczytywania GPX</string>
   <string name="send_report">Wyślij zgłoszenie</string>
   <string name="none_region_found">Brak danych offline na karcie SD. Pobierz je z Internetu.</string>
   <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>

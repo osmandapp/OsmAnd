@@ -793,4 +793,54 @@
 
 	<string name="poi_wiki_place">Вікіпэдыя</string>
 	<string name="poi_wiki_lang_en">Англійская Вікіпэдыя</string>
+	<string name="poi_camera">Фота і оптыка</string>
+	<string name="poi_religious">Рэлігійны пляц</string>
+	<string name="poi_wiki_lang_ar">Арабская Вікі</string>
+	<string name="poi_wiki_lang_be">Беларуская Вікі</string>
+	<string name="poi_wiki_lang_bg">Баўгарская Вікі</string>
+	<string name="poi_wiki_lang_ca">Каталанская Вікі</string>
+	<string name="poi_wiki_lang_zh">Кітайская Вікі</string>
+
+<string name="poi_wiki_lang_cs">Чэская Вікі</string>
+	<string name="poi_wiki_lang_da">Дацкая Вікі</string>
+	<string name="poi_wiki_lang_de">Нямецкая Вікі</string>
+	<string name="poi_wiki_lang_el">Грэцкая Вікі</string>
+	<string name="poi_wiki_lang_et">Эстонская Вікі</string>
+	<string name="poi_wiki_lang_es">Гішпанская Вікі</string>
+	<string name="poi_wiki_lang_fi">Фінская Вікі</string>
+	<string name="poi_wiki_lang_fr">Французкая Вікі</string>
+	<string name="poi_wiki_lang_gl">Галіцкая Вікі</string>
+	<string name="poi_wiki_lang_he">Габрэйская Вікі</string>
+	<string name="poi_wiki_lang_hr">Харвацкая Вікі</string>
+	<string name="poi_wiki_lang_ht">Гаіцянская Вікі</string>
+	<string name="poi_wiki_lang_hu">Вугорская Вікі</string>
+	<string name="poi_wiki_lang_id">Інданэзійская Вікі</string>
+	<string name="poi_wiki_lang_it">Італійская Вікі</string>
+	<string name="poi_wiki_lang_ja">Японская Вікі</string>
+	<string name="poi_wiki_lang_ko">Карэйская Вікі</string>
+	<string name="poi_wiki_lang_lt">Літоўская Вікі</string>
+	<string name="poi_wiki_lang_lv">Латвійская Вікі</string>
+	<string name="poi_wiki_lang_ms">Малайская Вікі</string>
+	<string name="poi_wiki_lang_new">Нэварская Вікі</string>
+	<string name="poi_wiki_lang_nl">Галяндзкая Вікі</string>
+	<string name="poi_wiki_lang_nn">Нованарвежская Вікі</string>
+	<string name="poi_wiki_lang_no">Нарвежская Вікі</string>
+	<string name="poi_wiki_lang_pl">Польская Вікі</string>
+	<string name="poi_wiki_lang_pt">Партугальская Вікі</string>
+	<string name="poi_wiki_lang_ro">Румынская Вікі</string>
+	<string name="poi_wiki_lang_ru">Расейская Вікі</string>
+	<string name="poi_wiki_lang_sk">Славацкая Вікі</string>
+	<string name="poi_wiki_lang_sl">Славенская Вікі</string>
+	<string name="poi_wiki_lang_sr">Сербская Вікі</string>
+	<string name="poi_wiki_lang_sv">Швэдзкая Вікі</string>
+	<string name="poi_wiki_lang_th">Тайская Вікі</string>
+	<string name="poi_wiki_lang_tr">Турэцкая Вікі</string>
+	<string name="poi_wiki_lang_uk">Украінская Вікі</string>
+	<string name="poi_wiki_lang_vi">В\'етнамская Вікі</string>
+	<string name="poi_wiki_lang_sw">Суахільская Вікі</string>
+	<string name="poi_barrier_entrance">Уваход</string>
+	<string name="poi_entrance_main">Асноўны ўваход</string>
+	<string name="poi_entrance">Уваход</string>
+	<string name="poi_entrance_exit">Выхад</string>
+
 	</resources>
