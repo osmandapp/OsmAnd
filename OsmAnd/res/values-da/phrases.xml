@@ -856,4 +856,5 @@
 	<string name="poi_full-height_turnstile">Fuld højde tælleapparatet</string>
 	<string name="poi_bump_gate">Bumplåge</string>
 	<string name="poi_general_barrier">Almindelig forhindring</string>
+	<string name="poi_stile">Stente</string>
 	</resources>
