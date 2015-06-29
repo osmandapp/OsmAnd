@@ -836,4 +836,10 @@
 
 <string name="poi_camera">Càmeres i òptiques</string>
 	<string name="poi_religious">Zona religiosa</string>
+	<string name="poi_bollard">Bol·lard</string>
+	<string name="poi_cycle_barrier">Barrera de bicicletes</string>
+	<string name="poi_motorcycle_barrier">Barrera de motos</string>
+	<string name="poi_block">Bloc de formigó</string>
+	<string name="poi_bus_trap">Parany de carril bus</string>
+	<string name="poi_cattle_grid">Pas canadenc</string>
 	</resources>
