@@ -839,4 +839,11 @@
 	<string name="poi_sally_port">Vstup do pevnosti</string>
 	<string name="poi_swing_gate">Otočná závora</string>
 	<string name="poi_turnstile">Turniket</string>
-	</resources>
+	<string name="poi_barrier_entrance">Vstup</string>
+	<string name="poi_entrance_main">Hlavný vchod</string>
+	<string name="poi_entrance">Vchod</string>
+	<string name="poi_entrance_exit">Východ</string>
+
+	<string name="poi_highway_crossing">Priechod pre chodcov</string>
+
+</resources>
