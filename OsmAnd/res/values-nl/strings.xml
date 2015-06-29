@@ -1736,7 +1736,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_enable_tracker">Verzend mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     
-	<string name="import_file_favourites">Bewaren als GPX bestand of importeren in favorieten?</string>
+	<string name="import_file_favourites">Punten bewaren als GPX-bestand of importeren in favorieten?</string>
 	
 	<string name="color_red">rood</string>
 	<string name="color_pink">roze</string>

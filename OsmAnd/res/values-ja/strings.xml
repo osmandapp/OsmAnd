@@ -1011,7 +1011,7 @@ POIの更新は利用できません</string>
 	<string name="offline_navigation_not_available">OsmAndオフラインナビゲーションが一時的に利用できません。</string>
 	
 	<string name="unknown_from_location">出発点は、まだ決定されていません</string>
-	<string name="basemap_was_selected_to_download">ベースマップはアプリケーションを機能させるに必須なデータです、よってダウンロードすることが選択されます。</string>
+	<string name="basemap_was_selected_to_download">ベースマップはアプリケーションの動作に必要なので、ダウンロード候補として選択されました。</string>
 	<string name="local_indexes_cat_tile">オンラインタイルマップ</string>
 	<string name="local_indexes_cat_map">オフラインマップ(ベクター形式)</string>
 	<string name="map_online_plugin_is_not_installed">別のマップソースを選択するためにオンラインマッププラグインを有効にする</string>
@@ -2043,4 +2043,36 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定</string>
     <string name="use_fast_recalculation">賢いルート再計算</string>
 	<string name="use_fast_recalculation_desc">長い旅程の最初の部分のみ再計算</string>
-</resources>
+<string name="light_theme">ライト</string>
+    <string name="dark_theme">ダーク</string>
+    <string name="lang_pms">ピエモンテ語</string>
+    <string name="lang_bn">ベンガル語</string>
+    <string name="lang_tl">タガログ語</string>
+    <string name="lang_sh">セルビア-クロアチア語</string>
+    <string name="lang_az">アゼルバイジャン語</string>
+    <string name="lang_br">ブルトン語</string>
+    <string name="lang_sq">アルバニア語</string>
+    <string name="lang_is">アイスランド語</string>
+    <string name="lang_bpy">ヴィシュヌプリヤ語(Bishnupriya)</string>
+    <string name="lang_nv">ナバホ語</string>
+    <string name="lang_ga">アイルランド語</string>
+    <string name="lang_la">ラテン語</string>
+    <string name="lang_ku">クルド語</string>
+    <string name="lang_ta">タミル語</string>
+    <string name="lang_ml">マラヤーラム語</string>
+    <string name="lang_lb">ルクセンブルク語</string>
+    <string name="lang_os">オセット語</string>
+    <string name="lang_eo">エスペラント語</string>
+    <string name="lang_es_ar">アルゼンチンのスペイン語</string>
+    <string name="lang_nb">ノルウェー語(ブークモール)</string>
+    <string name="lang_vo">ボラピューク語</string>
+    <string name="lang_th">タイ語</string>
+    <string name="lang_te">テルグ語</string>
+    <string name="lang_nn">ノルウェー語(ニーノシュク)</string>
+    <string name="lang_new">ネワール族/ネパール ・ バサ語</string>
+    <string name="lang_ms">マレーシア語</string>
+    <string name="lang_ht">ハイチ語</string>
+    <string name="lang_gl">ガリシア語</string>
+    <string name="lang_et">エストニア語</string>
+    <string name="lang_ceb">セブアノ語</string>
+    </resources>
