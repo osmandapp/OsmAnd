@@ -822,4 +822,21 @@
 	<string name="poi_wiki_lang_zh">Wikipedia čínsky</string>
 
 <string name="poi_camera">Fotoaparáty a šošovky</string>
+	<string name="poi_religious">Náboženská oblasť</string>
+	<string name="poi_bollard">Stĺpik</string>
+	<string name="poi_cycle_barrier">Cyklo-prekážka</string>
+	<string name="poi_motorcycle_barrier">Prekážka pre motocykle</string>
+	<string name="poi_block">Balvan</string>
+	<string name="poi_bus_trap">Autobusová uzávera</string>
+	<string name="poi_cattle_grid">Mreža proti dobytku</string>
+	<string name="poi_full_height_turnstile">Vysoký turniket</string>
+	<string name="poi_bump_gate">Brána otváraná nárazom</string>
+	<string name="poi_general_barrier">Všeobecná prekážka</string>
+	<string name="poi_stile">Priechod ponad prekážku</string>
+	<string name="poi_height_restrictor">Obmedzovač výšky</string>
+	<string name="poi_horse_stile">Priechod pre jazdcov ponad prekážku</string>
+	<string name="poi_kissing_gate">Brána proti dobytku</string>
+	<string name="poi_sally_port">Vstup do pevnosti</string>
+	<string name="poi_swing_gate">Otočná závora</string>
+	<string name="poi_turnstile">Turniket</string>
 	</resources>
