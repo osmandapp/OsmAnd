@@ -857,4 +857,17 @@
 	<string name="poi_bump_gate">Bumplåge</string>
 	<string name="poi_general_barrier">Almindelig forhindring</string>
 	<string name="poi_stile">Stente</string>
-	</resources>
+	<string name="poi_height_restrictor">Højdebegrænser</string>
+	<string name="poi_horse_stile">Hestestente</string>
+	<string name="poi_kissing_gate">Kysse gate</string>
+	<string name="poi_sally_port">Udfaldsport</string>
+	<string name="poi_swing_gate">Svingport</string>
+	<string name="poi_turnstile">Tælleapparatet</string>
+	<string name="poi_barrier_entrance">Indgang</string>
+	<string name="poi_entrance_main">Hovedindgang</string>
+	<string name="poi_entrance">Indgang</string>
+	<string name="poi_entrance_exit">Udgang</string>
+
+	<string name="poi_highway_crossing">Motorvejspassage</string>
+
+</resources>
