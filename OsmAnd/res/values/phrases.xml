@@ -46,6 +46,9 @@
 
 	<string name="poi_bakery">Bakery</string>
 	<string name="poi_alcohol">Liquor store</string>
+	<string name="poi_cheese">Cheese shop</string>
+	<string name="poi_chocolate">Chocolate shop</string>
+	<string name="poi_coffee">Coffee shop</string>
 	<string name="poi_convenience">Convenience store</string>
 	<string name="poi_mall">Mall</string>
 	<string name="poi_beverages">Beverage store</string>
@@ -58,6 +61,8 @@
 	<string name="poi_ice_cream">Ice cream parlor</string>
 	<string name="poi_supermarket">Supermarket</string>
 	<string name="poi_tea">Tea shop</string>
+	<string name="poi_pasta">Pasta shop</string>
+	<string name="poi_pastry">Pastry shop</string>
 	<string name="poi_dairy">Dairy shop</string>
 	<string name="poi_vending_machine">Vending machine</string>
 	<string name="poi_wine">Wine shop</string>
@@ -79,6 +84,7 @@
 	<string name="poi_clothes">Apparel store</string>
 	<string name="poi_child_clothes">Childrens apparel</string>
 	<string name="poi_shoes">Shoe store</string>
+	<string name="poi_candles">Candles store</string>
 	<string name="poi_computer">Computer store</string>
 	<string name="poi_copyshop">Copy shop</string>
 	<string name="poi_curtain">Curtain shop</string>
@@ -87,11 +93,15 @@
 	<string name="poi_dive">Diving equipment</string>
 	<string name="poi_doityourself">Home improvement store</string>
 	<string name="poi_erotic">Erotic shop</string>
+	<string name="poi_fashion">Fashion shop</string>
 	<string name="poi_fishing">Fishing tackle</string>
 	<string name="poi_florist">Flower shop</string>
 	<string name="poi_frame">Picture frame shop</string>
+	<string name="poi_free_flying">Free flying goods store</string>
+	<string name="poi_furnace">Heating units shop</string>
 	<string name="poi_furniture">Furniture store</string>
 	<string name="poi_garden_centre">Garden center</string>
+	<string name="poi_garden_furniture">Garden furniture store</string>
 	<string name="poi_gas">Liquid gas store</string>
 	<string name="poi_general">General store</string>
 	<string name="poi_gift">Gift shop</string>
@@ -106,9 +116,11 @@
 	<string name="poi_jewelry">Jewelry store</string>
 	<string name="poi_kiosk">Kiosk</string>
 	<string name="poi_kitchen">Kitchen furnishings</string>
+	<string name="poi_leather">Leather shop</string>
 	<string name="poi_medical_supply">Medical supply</string>
 	<string name="poi_mobile_phone">Cell phone store</string>
 	<string name="poi_motorcycle">Motorcycle shop</string>
+	<string name="poi_music">Music shop</string>
 	<string name="poi_musical_instrument">Musical instruments</string>
 	<string name="poi_newsagent">Newsagency</string>
 	<string name="poi_optician">Optometrist</string>
@@ -119,6 +131,7 @@
 	<string name="poi_photo">Photo shop</string>
 	<string name="poi_radiotechnics">Radiotechnics store</string>
 	<string name="poi_second_hand">Second hand store</string>
+	<string name="poi_scuba_diving">Scuba diving goods store</string>
 	<string name="poi_ship_chandler">Ship chandler</string>
 	<string name="poi_sports">Sporting goods</string>
 	<string name="poi_stationery">Stationery shop</string>
@@ -127,18 +140,28 @@
 	<string name="poi_tobacco">Tobacco store</string>
 	<string name="poi_toys">Toys store</string>
 	<string name="poi_trade">Trading post</string>
+	<string name="poi_tyres">Tyres store</string>
 	<string name="poi_vacuum_cleaner">Vacuum cleaner store</string>
 	<string name="poi_variety_store">Variety store</string>
 	<string name="poi_video">Video store</string>
 	<string name="poi_window_blind">Window blind store</string>
 	<string name="poi_department_store">Department store</string>
 	<string name="poi_electronics">Electronics store</string>
+	<string name="poi_energy">Energy store</string>
 	<string name="poi_car">Car shop</string>
 	<string name="poi_car_parts">Car parts</string>
 	<string name="poi_atv">Quad store</string>
 	<string name="poi_cosmetics">Cosmetics</string>
 	<string name="poi_marketplace">Marketplace</string>
 	<string name="poi_sewing">Dry goods store</string>
+	<string name="poi_watches">Watches shop</string>
+	<string name="poi_swimming_pool">Swimming pool goods store</string>
+	<string name="poi_games">Games</string>
+	<string name="poi_model">Scale models</string>
+	<string name="poi_trophy">Trophies, awards</string>
+	<string name="poi_video_games">Video games</string>
+	<string name="poi_pyrotechnics">Pyrotechnics</string>
+	<string name="poi_weapons">Weapons store</string>
 
 	<string name="poi_police">Police</string>
 	<string name="poi_fire_station">Fire station</string>
