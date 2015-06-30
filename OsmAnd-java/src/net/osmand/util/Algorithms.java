@@ -49,6 +49,7 @@ public class Algorithms {
 		}
 		Map<String, String> names = new HashMap<String, String>();
 		String[] split = s.split(CHAR_TOSPLIT + "");
+		// last split is an empty string
 		for (int i = 1; i < split.length; i += 2) {
 			names.put(split[i - 1], split[i]);
 		}
@@ -63,10 +64,9 @@ public class Algorithms {
 				Entry<String, String> e = it.next();
 				bld.append(e.getKey()).append(CHAR_TOSPLIT)
 						.append(e.getValue().replace(CHAR_TOSPLIT, (char)(CHAR_TOSPLIT + 1)));
-				if (it.hasNext()) {
-					bld.append(CHAR_TOSPLIT);
-				}
+				bld.append(CHAR_TOSPLIT);
 			}
+			return bld.toString();
 		}
 		return "";
 	}

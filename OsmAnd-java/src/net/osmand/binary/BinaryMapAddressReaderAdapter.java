@@ -171,7 +171,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	
-	protected void readCityStreets(SearchRequest<Street> resultMatcher, City city) throws IOException{
+	protected void readCityStreets(SearchRequest<Street> resultMatcher, City city, List<String> attributeTagsTable) throws IOException{
 		int x = MapUtils.get31TileNumberX(city.getLocation().getLongitude());
 		int y = MapUtils.get31TileNumberY(city.getLocation().getLatitude());
 		while(true){
@@ -185,7 +185,8 @@ public class BinaryMapAddressReaderAdapter {
 				s.setFileOffset(codedIS.getTotalBytesRead());
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);				
-				readStreet(s, null, false, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null);
+				readStreet(s, null, false, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null, 
+						attributeTagsTable);
 				if(resultMatcher == null || resultMatcher.publish(s)){
 					city.registerStreet(s);
 				}
@@ -240,9 +241,9 @@ public class BinaryMapAddressReaderAdapter {
 				int tgid = codedIS.readUInt32();
 				if(additionalTags == null) {
 					additionalTags = new LinkedList<String>();
-					if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
-						additionalTags.add(additionalTagsTable.get(tgid));
-					}
+				}
+				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
+					additionalTags.add(additionalTagsTable.get(tgid));
 				}
 				break;
 			case OsmandOdb.CityIndex.ATTRIBUTEVALUES_FIELD_NUMBER:
@@ -284,9 +285,12 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Street readStreet(Street s, SearchRequest<Building> buildingsMatcher, boolean loadBuildingsAndIntersected, int city24X, int city24Y, String postcodeFilter) throws IOException{
+	protected Street readStreet(Street s, SearchRequest<Building> buildingsMatcher,
+			boolean loadBuildingsAndIntersected, int city24X, int city24Y, String postcodeFilter, 
+			List<String> additionalTagsTable) throws IOException{
 		int x = 0;
 		int y = 0;
+		LinkedList<String> additionalTags = null;
 		boolean loadLocation = city24X != 0 || city24Y != 0;
 		while(true){
 			int t = codedIS.readTag();
@@ -299,6 +303,24 @@ public class BinaryMapAddressReaderAdapter {
 				return s;
 			case OsmandOdb.StreetIndex.ID_FIELD_NUMBER :
 				s.setId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.StreetIndex.ATTRIBUTETAGIDS_FIELD_NUMBER :
+				int tgid = codedIS.readUInt32();
+				if(additionalTags == null) {
+					additionalTags = new LinkedList<String>();
+				}
+				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
+					additionalTags.add(additionalTagsTable.get(tgid));
+				}
+				break;
+			case OsmandOdb.StreetIndex.ATTRIBUTEVALUES_FIELD_NUMBER :
+				String nm = codedIS.readString();
+				if(additionalTags != null && additionalTags.size() > 0) {
+					String tg = additionalTags.pollFirst();
+					if(tg.startsWith("name:")) {
+						s.setName(tg.substring("name:".length()), nm);
+					}
+				}
 				break;
 			case OsmandOdb.StreetIndex.NAME_EN_FIELD_NUMBER :
 				s.setEnName(codedIS.readString());
@@ -326,7 +348,7 @@ public class BinaryMapAddressReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				if(loadBuildingsAndIntersected){
 					int oldLimit = codedIS.pushLimit(length);
-					Street si = readIntersectedStreet(s.getCity(), x, y);
+					Street si = readIntersectedStreet(s.getCity(), x, y, additionalTagsTable);
 					s.addIntersectedStreet(si);
 					codedIS.popLimit(oldLimit);
 				} else {
@@ -338,7 +360,7 @@ public class BinaryMapAddressReaderAdapter {
 				length = codedIS.readRawVarint32();
 				if(loadBuildingsAndIntersected){
 					int oldLimit = codedIS.pushLimit(length);
-					Building b = readBuilding(offset, x, y);
+					Building b = readBuilding(offset, x, y, additionalTagsTable);
 					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
 						if (buildingsMatcher == null || buildingsMatcher.publish(b)) {
 							s.addBuilding(b);
@@ -356,10 +378,11 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Street readIntersectedStreet(City c, int street24X, int street24Y) throws IOException{
+	protected Street readIntersectedStreet(City c, int street24X, int street24Y, List<String> additionalTagsTable) throws IOException{
 		int x = 0;
 		int y = 0;
 		Street s = new Street(c);
+		LinkedList<String> additionalTags = null;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -376,6 +399,24 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.StreetIntersection.NAME_FIELD_NUMBER:
 				s.setName(codedIS.readString());
 				break;
+			case OsmandOdb.StreetIntersection.ATTRIBUTETAGIDS_FIELD_NUMBER :
+				int tgid = codedIS.readUInt32();
+				if(additionalTags == null) {
+					additionalTags = new LinkedList<String>();
+				}
+				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
+					additionalTags.add(additionalTagsTable.get(tgid));
+				}
+				break;
+			case OsmandOdb.StreetIntersection.ATTRIBUTEVALUES_FIELD_NUMBER :
+				String nm = codedIS.readString();
+				if(additionalTags != null && additionalTags.size() > 0) {
+					String tg = additionalTags.pollFirst();
+					if(tg.startsWith("name:")) {
+						s.setName(tg.substring("name:".length()), nm);
+					}
+				}
+				break;
 			case OsmandOdb.StreetIntersection.INTERSECTEDX_FIELD_NUMBER :
 				x =  codedIS.readSInt32() + street24X;
 				break;
@@ -389,11 +430,12 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Building readBuilding(int fileOffset, int street24X, int street24Y) throws IOException{
+	protected Building readBuilding(int fileOffset, int street24X, int street24Y, List<String> additionalTagsTable) throws IOException{
 		int x = 0;
 		int y = 0;
 		int x2 = 0;
 		int y2 = 0;
+		LinkedList<String> additionalTags = null;
 		Building b = new Building();
 		b.setFileOffset(fileOffset);
 		while(true){
@@ -415,6 +457,24 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
 				b.setName(codedIS.readString());
+				break;
+			case OsmandOdb.BuildingIndex.ATTRIBUTETAGIDS_FIELD_NUMBER :
+				int tgid = codedIS.readUInt32();
+				if(additionalTags == null) {
+					additionalTags = new LinkedList<String>();
+				}
+				if(additionalTagsTable != null && tgid < additionalTagsTable.size()) {
+					additionalTags.add(additionalTagsTable.get(tgid));
+				}
+				break;
+			case OsmandOdb.BuildingIndex.ATTRIBUTEVALUES_FIELD_NUMBER :
+				String nm = codedIS.readString();
+				if(additionalTags != null && additionalTags.size() > 0) {
+					String tg = additionalTags.pollFirst();
+					if(tg.startsWith("name:")) {
+						b.setName(tg.substring("name:".length()), nm);
+					}
+				}
 				break;
 			case OsmandOdb.BuildingIndex.NAME_EN2_FIELD_NUMBER :
 				// no where to set now
@@ -531,7 +591,8 @@ public class BinaryMapAddressReaderAdapter {
 								LatLon l = obj.getLocation();
 								Street s = new Street(obj);
 								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
-										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null);
+										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
+												reg.attributeTagsTable);
 								boolean matches = matcher.matches(s.getName());
 								if(!matches) {
 									for(String n : s.getAllNames()) {
@@ -553,7 +614,7 @@ public class BinaryMapAddressReaderAdapter {
 							codedIS.seek(list.get(j));
 							int len = codedIS.readRawVarint32();
 							int old = codedIS.pushLimit(len);
-							City obj = readCityHeader(matcher, list.get(j), null);
+							City obj = readCityHeader(matcher, list.get(j), reg.attributeTagsTable);
 							if (obj != null) {
 								req.publish(obj);
 							}

@@ -5866,6 +5866,13 @@ public final class OsmandOdb {
     public boolean hasBoundaries() { return hasBoundaries; }
     public net.osmand.binary.OsmandOdb.OsmAndTileBox getBoundaries() { return boundaries_; }
     
+    // optional .OsmAnd.OBF.StringTable attributeTagsTable = 4;
+    public static final int ATTRIBUTETAGSTABLE_FIELD_NUMBER = 4;
+    private boolean hasAttributeTagsTable;
+    private net.osmand.binary.OsmandOdb.StringTable attributeTagsTable_;
+    public boolean hasAttributeTagsTable() { return hasAttributeTagsTable; }
+    public net.osmand.binary.OsmandOdb.StringTable getAttributeTagsTable() { return attributeTagsTable_; }
+    
     // repeated .OsmAnd.OBF.OsmAndAddressIndex.CitiesIndex cities = 6;
     public static final int CITIES_FIELD_NUMBER = 6;
     private java.util.List<net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex> cities_ =
@@ -5885,17 +5892,10 @@ public final class OsmandOdb {
     public boolean hasNameIndex() { return hasNameIndex; }
     public net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData getNameIndex() { return nameIndex_; }
     
-    // optional .OsmAnd.OBF.StringTable attributeTagsTable = 8;
-    public static final int ATTRIBUTETAGSTABLE_FIELD_NUMBER = 8;
-    private boolean hasAttributeTagsTable;
-    private net.osmand.binary.OsmandOdb.StringTable attributeTagsTable_;
-    public boolean hasAttributeTagsTable() { return hasAttributeTagsTable; }
-    public net.osmand.binary.OsmandOdb.StringTable getAttributeTagsTable() { return attributeTagsTable_; }
-    
     private void initFields() {
       boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
-      nameIndex_ = net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.getDefaultInstance();
       attributeTagsTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+      nameIndex_ = net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasName) return false;
@@ -5923,14 +5923,14 @@ public final class OsmandOdb {
       if (hasBoundaries()) {
         output.writeMessage(3, getBoundaries());
       }
+      if (hasAttributeTagsTable()) {
+        output.writeMessage(4, getAttributeTagsTable());
+      }
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex element : getCitiesList()) {
         output.writeMessage(6, element);
       }
       if (hasNameIndex()) {
         output.writeMessage(7, getNameIndex());
-      }
-      if (hasAttributeTagsTable()) {
-        output.writeMessage(8, getAttributeTagsTable());
       }
       getUnknownFields().writeTo(output);
     }
@@ -5953,6 +5953,10 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getBoundaries());
       }
+      if (hasAttributeTagsTable()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getAttributeTagsTable());
+      }
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex element : getCitiesList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, element);
@@ -5960,10 +5964,6 @@ public final class OsmandOdb {
       if (hasNameIndex()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getNameIndex());
-      }
-      if (hasAttributeTagsTable()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getAttributeTagsTable());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6136,6 +6136,9 @@ public final class OsmandOdb {
         if (other.hasBoundaries()) {
           mergeBoundaries(other.getBoundaries());
         }
+        if (other.hasAttributeTagsTable()) {
+          mergeAttributeTagsTable(other.getAttributeTagsTable());
+        }
         if (!other.cities_.isEmpty()) {
           if (result.cities_.isEmpty()) {
             result.cities_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex>();
@@ -6144,9 +6147,6 @@ public final class OsmandOdb {
         }
         if (other.hasNameIndex()) {
           mergeNameIndex(other.getNameIndex());
-        }
-        if (other.hasAttributeTagsTable()) {
-          mergeAttributeTagsTable(other.getAttributeTagsTable());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6190,6 +6190,15 @@ public final class OsmandOdb {
               setBoundaries(subBuilder.buildPartial());
               break;
             }
+            case 34: {
+              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
+              if (hasAttributeTagsTable()) {
+                subBuilder.mergeFrom(getAttributeTagsTable());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setAttributeTagsTable(subBuilder.buildPartial());
+              break;
+            }
             case 50: {
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
@@ -6203,15 +6212,6 @@ public final class OsmandOdb {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setNameIndex(subBuilder.buildPartial());
-              break;
-            }
-            case 66: {
-              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
-              if (hasAttributeTagsTable()) {
-                subBuilder.mergeFrom(getAttributeTagsTable());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setAttributeTagsTable(subBuilder.buildPartial());
               break;
             }
           }
@@ -6295,6 +6295,43 @@ public final class OsmandOdb {
       public Builder clearBoundaries() {
         result.hasBoundaries = false;
         result.boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .OsmAnd.OBF.StringTable attributeTagsTable = 4;
+      public boolean hasAttributeTagsTable() {
+        return result.hasAttributeTagsTable();
+      }
+      public net.osmand.binary.OsmandOdb.StringTable getAttributeTagsTable() {
+        return result.getAttributeTagsTable();
+      }
+      public Builder setAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasAttributeTagsTable = true;
+        result.attributeTagsTable_ = value;
+        return this;
+      }
+      public Builder setAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        result.hasAttributeTagsTable = true;
+        result.attributeTagsTable_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (result.hasAttributeTagsTable() &&
+            result.attributeTagsTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+          result.attributeTagsTable_ =
+            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.attributeTagsTable_).mergeFrom(value).buildPartial();
+        } else {
+          result.attributeTagsTable_ = value;
+        }
+        result.hasAttributeTagsTable = true;
+        return this;
+      }
+      public Builder clearAttributeTagsTable() {
+        result.hasAttributeTagsTable = false;
+        result.attributeTagsTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
         return this;
       }
       
@@ -6383,43 +6420,6 @@ public final class OsmandOdb {
       public Builder clearNameIndex() {
         result.hasNameIndex = false;
         result.nameIndex_ = net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.getDefaultInstance();
-        return this;
-      }
-      
-      // optional .OsmAnd.OBF.StringTable attributeTagsTable = 8;
-      public boolean hasAttributeTagsTable() {
-        return result.hasAttributeTagsTable();
-      }
-      public net.osmand.binary.OsmandOdb.StringTable getAttributeTagsTable() {
-        return result.getAttributeTagsTable();
-      }
-      public Builder setAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasAttributeTagsTable = true;
-        result.attributeTagsTable_ = value;
-        return this;
-      }
-      public Builder setAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
-        result.hasAttributeTagsTable = true;
-        result.attributeTagsTable_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeAttributeTagsTable(net.osmand.binary.OsmandOdb.StringTable value) {
-        if (result.hasAttributeTagsTable() &&
-            result.attributeTagsTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
-          result.attributeTagsTable_ =
-            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.attributeTagsTable_).mergeFrom(value).buildPartial();
-        } else {
-          result.attributeTagsTable_ = value;
-        }
-        result.hasAttributeTagsTable = true;
-        return this;
-      }
-      public Builder clearAttributeTagsTable() {
-        result.hasAttributeTagsTable = false;
-        result.attributeTagsTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
         return this;
       }
       
@@ -7747,30 +7747,6 @@ public final class OsmandOdb {
     public boolean hasNameEn() { return hasNameEn; }
     public java.lang.String getNameEn() { return nameEn_; }
     
-    // repeated uint32 attributeTagIds = 11;
-    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 11;
-    private java.util.List<java.lang.Integer> attributeTagIds_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-      return attributeTagIds_;
-    }
-    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
-    public int getAttributeTagIds(int index) {
-      return attributeTagIds_.get(index);
-    }
-    
-    // repeated string attributeValues = 12;
-    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 12;
-    private java.util.List<java.lang.String> attributeValues_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAttributeValuesList() {
-      return attributeValues_;
-    }
-    public int getAttributeValuesCount() { return attributeValues_.size(); }
-    public java.lang.String getAttributeValues(int index) {
-      return attributeValues_.get(index);
-    }
-    
     // optional uint64 id = 4;
     public static final int ID_FIELD_NUMBER = 4;
     private boolean hasId;
@@ -7791,6 +7767,30 @@ public final class OsmandOdb {
     private int y_ = 0;
     public boolean hasY() { return hasY; }
     public int getY() { return y_; }
+    
+    // repeated uint32 attributeTagIds = 7;
+    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> attributeTagIds_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+      return attributeTagIds_;
+    }
+    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
+    public int getAttributeTagIds(int index) {
+      return attributeTagIds_.get(index);
+    }
+    
+    // repeated string attributeValues = 8;
+    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.String> attributeValues_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getAttributeValuesList() {
+      return attributeValues_;
+    }
+    public int getAttributeValuesCount() { return attributeValues_.size(); }
+    public java.lang.String getAttributeValues(int index) {
+      return attributeValues_.get(index);
+    }
     
     // optional fixed32 shiftToCityBlockIndex = 10;
     public static final int SHIFTTOCITYBLOCKINDEX_FIELD_NUMBER = 10;
@@ -7829,14 +7829,14 @@ public final class OsmandOdb {
       if (hasY()) {
         output.writeUInt32(6, getY());
       }
-      if (hasShiftToCityBlockIndex()) {
-        output.writeFixed32(10, getShiftToCityBlockIndex());
-      }
       for (int element : getAttributeTagIdsList()) {
-        output.writeUInt32(11, element);
+        output.writeUInt32(7, element);
       }
       for (java.lang.String element : getAttributeValuesList()) {
-        output.writeString(12, element);
+        output.writeString(8, element);
+      }
+      if (hasShiftToCityBlockIndex()) {
+        output.writeFixed32(10, getShiftToCityBlockIndex());
       }
       getUnknownFields().writeTo(output);
     }
@@ -7871,10 +7871,6 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(6, getY());
       }
-      if (hasShiftToCityBlockIndex()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(10, getShiftToCityBlockIndex());
-      }
       {
         int dataSize = 0;
         for (int element : getAttributeTagIdsList()) {
@@ -7892,6 +7888,10 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getAttributeValuesList().size();
+      }
+      if (hasShiftToCityBlockIndex()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(10, getShiftToCityBlockIndex());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8068,6 +8068,15 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
         if (!other.attributeTagIds_.isEmpty()) {
           if (result.attributeTagIds_.isEmpty()) {
             result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
@@ -8079,15 +8088,6 @@ public final class OsmandOdb {
             result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
           }
           result.attributeValues_.addAll(other.attributeValues_);
-        }
-        if (other.hasId()) {
-          setId(other.getId());
-        }
-        if (other.hasX()) {
-          setX(other.getX());
-        }
-        if (other.hasY()) {
-          setY(other.getY());
         }
         if (other.hasShiftToCityBlockIndex()) {
           setShiftToCityBlockIndex(other.getShiftToCityBlockIndex());
@@ -8141,15 +8141,11 @@ public final class OsmandOdb {
               setY(input.readUInt32());
               break;
             }
-            case 85: {
-              setShiftToCityBlockIndex(input.readFixed32());
-              break;
-            }
-            case 88: {
+            case 56: {
               addAttributeTagIds(input.readUInt32());
               break;
             }
-            case 90: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -8158,8 +8154,12 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
-            case 98: {
+            case 66: {
               addAttributeValues(input.readString());
+              break;
+            }
+            case 85: {
+              setShiftToCityBlockIndex(input.readFixed32());
               break;
             }
           }
@@ -8227,80 +8227,6 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated uint32 attributeTagIds = 11;
-      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
-      }
-      public int getAttributeTagIdsCount() {
-        return result.getAttributeTagIdsCount();
-      }
-      public int getAttributeTagIds(int index) {
-        return result.getAttributeTagIds(index);
-      }
-      public Builder setAttributeTagIds(int index, int value) {
-        result.attributeTagIds_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeTagIds(int value) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.attributeTagIds_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeTagIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.attributeTagIds_);
-        return this;
-      }
-      public Builder clearAttributeTagIds() {
-        result.attributeTagIds_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated string attributeValues = 12;
-      public java.util.List<java.lang.String> getAttributeValuesList() {
-        return java.util.Collections.unmodifiableList(result.attributeValues_);
-      }
-      public int getAttributeValuesCount() {
-        return result.getAttributeValuesCount();
-      }
-      public java.lang.String getAttributeValues(int index) {
-        return result.getAttributeValues(index);
-      }
-      public Builder setAttributeValues(int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.attributeValues_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeValues(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        result.attributeValues_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeValues(
-          java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        super.addAll(values, result.attributeValues_);
-        return this;
-      }
-      public Builder clearAttributeValues() {
-        result.attributeValues_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
       // optional uint64 id = 4;
       public boolean hasId() {
         return result.hasId();
@@ -8352,6 +8278,80 @@ public final class OsmandOdb {
       public Builder clearY() {
         result.hasY = false;
         result.y_ = 0;
+        return this;
+      }
+      
+      // repeated uint32 attributeTagIds = 7;
+      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
+      }
+      public int getAttributeTagIdsCount() {
+        return result.getAttributeTagIdsCount();
+      }
+      public int getAttributeTagIds(int index) {
+        return result.getAttributeTagIds(index);
+      }
+      public Builder setAttributeTagIds(int index, int value) {
+        result.attributeTagIds_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeTagIds(int value) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.attributeTagIds_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeTagIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.attributeTagIds_);
+        return this;
+      }
+      public Builder clearAttributeTagIds() {
+        result.attributeTagIds_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated string attributeValues = 8;
+      public java.util.List<java.lang.String> getAttributeValuesList() {
+        return java.util.Collections.unmodifiableList(result.attributeValues_);
+      }
+      public int getAttributeValuesCount() {
+        return result.getAttributeValuesCount();
+      }
+      public java.lang.String getAttributeValues(int index) {
+        return result.getAttributeValues(index);
+      }
+      public Builder setAttributeValues(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.attributeValues_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeValues(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.attributeValues_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeValues(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.attributeValues_);
+        return this;
+      }
+      public Builder clearAttributeValues() {
+        result.attributeValues_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -8888,30 +8888,6 @@ public final class OsmandOdb {
     public boolean hasNameEn() { return hasNameEn; }
     public java.lang.String getNameEn() { return nameEn_; }
     
-    // repeated uint32 attributeTagIds = 13;
-    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 13;
-    private java.util.List<java.lang.Integer> attributeTagIds_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-      return attributeTagIds_;
-    }
-    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
-    public int getAttributeTagIds(int index) {
-      return attributeTagIds_.get(index);
-    }
-    
-    // repeated string attributeValues = 14;
-    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 14;
-    private java.util.List<java.lang.String> attributeValues_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAttributeValuesList() {
-      return attributeValues_;
-    }
-    public int getAttributeValuesCount() { return attributeValues_.size(); }
-    public java.lang.String getAttributeValues(int index) {
-      return attributeValues_.get(index);
-    }
-    
     // required sint32 x = 3;
     public static final int X_FIELD_NUMBER = 3;
     private boolean hasX;
@@ -8932,6 +8908,30 @@ public final class OsmandOdb {
     private long id_ = 0L;
     public boolean hasId() { return hasId; }
     public long getId() { return id_; }
+    
+    // repeated uint32 attributeTagIds = 7;
+    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> attributeTagIds_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+      return attributeTagIds_;
+    }
+    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
+    public int getAttributeTagIds(int index) {
+      return attributeTagIds_.get(index);
+    }
+    
+    // repeated string attributeValues = 8;
+    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.String> attributeValues_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getAttributeValuesList() {
+      return attributeValues_;
+    }
+    public int getAttributeValuesCount() { return attributeValues_.size(); }
+    public java.lang.String getAttributeValues(int index) {
+      return attributeValues_.get(index);
+    }
     
     // repeated .OsmAnd.OBF.BuildingIndex buildings = 12;
     public static final int BUILDINGS_FIELD_NUMBER = 12;
@@ -8993,14 +8993,14 @@ public final class OsmandOdb {
       if (hasId()) {
         output.writeUInt64(6, getId());
       }
-      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
-        output.writeMessage(12, element);
-      }
       for (int element : getAttributeTagIdsList()) {
-        output.writeUInt32(13, element);
+        output.writeUInt32(7, element);
       }
       for (java.lang.String element : getAttributeValuesList()) {
-        output.writeString(14, element);
+        output.writeString(8, element);
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        output.writeMessage(12, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9035,10 +9035,6 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(6, getId());
       }
-      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, element);
-      }
       {
         int dataSize = 0;
         for (int element : getAttributeTagIdsList()) {
@@ -9056,6 +9052,10 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getAttributeValuesList().size();
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9237,6 +9237,15 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
         if (!other.attributeTagIds_.isEmpty()) {
           if (result.attributeTagIds_.isEmpty()) {
             result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
@@ -9248,15 +9257,6 @@ public final class OsmandOdb {
             result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
           }
           result.attributeValues_.addAll(other.attributeValues_);
-        }
-        if (other.hasX()) {
-          setX(other.getX());
-        }
-        if (other.hasY()) {
-          setY(other.getY());
-        }
-        if (other.hasId()) {
-          setId(other.getId());
         }
         if (!other.buildings_.isEmpty()) {
           if (result.buildings_.isEmpty()) {
@@ -9321,17 +9321,11 @@ public final class OsmandOdb {
               setId(input.readUInt64());
               break;
             }
-            case 98: {
-              net.osmand.binary.OsmandOdb.BuildingIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addBuildings(subBuilder.buildPartial());
-              break;
-            }
-            case 104: {
+            case 56: {
               addAttributeTagIds(input.readUInt32());
               break;
             }
-            case 106: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -9340,8 +9334,14 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
-            case 114: {
+            case 66: {
               addAttributeValues(input.readString());
+              break;
+            }
+            case 98: {
+              net.osmand.binary.OsmandOdb.BuildingIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addBuildings(subBuilder.buildPartial());
               break;
             }
           }
@@ -9388,80 +9388,6 @@ public final class OsmandOdb {
       public Builder clearNameEn() {
         result.hasNameEn = false;
         result.nameEn_ = getDefaultInstance().getNameEn();
-        return this;
-      }
-      
-      // repeated uint32 attributeTagIds = 13;
-      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
-      }
-      public int getAttributeTagIdsCount() {
-        return result.getAttributeTagIdsCount();
-      }
-      public int getAttributeTagIds(int index) {
-        return result.getAttributeTagIds(index);
-      }
-      public Builder setAttributeTagIds(int index, int value) {
-        result.attributeTagIds_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeTagIds(int value) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.attributeTagIds_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeTagIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.attributeTagIds_);
-        return this;
-      }
-      public Builder clearAttributeTagIds() {
-        result.attributeTagIds_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated string attributeValues = 14;
-      public java.util.List<java.lang.String> getAttributeValuesList() {
-        return java.util.Collections.unmodifiableList(result.attributeValues_);
-      }
-      public int getAttributeValuesCount() {
-        return result.getAttributeValuesCount();
-      }
-      public java.lang.String getAttributeValues(int index) {
-        return result.getAttributeValues(index);
-      }
-      public Builder setAttributeValues(int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.attributeValues_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeValues(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        result.attributeValues_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeValues(
-          java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        super.addAll(values, result.attributeValues_);
-        return this;
-      }
-      public Builder clearAttributeValues() {
-        result.attributeValues_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -9516,6 +9442,80 @@ public final class OsmandOdb {
       public Builder clearId() {
         result.hasId = false;
         result.id_ = 0L;
+        return this;
+      }
+      
+      // repeated uint32 attributeTagIds = 7;
+      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
+      }
+      public int getAttributeTagIdsCount() {
+        return result.getAttributeTagIdsCount();
+      }
+      public int getAttributeTagIds(int index) {
+        return result.getAttributeTagIds(index);
+      }
+      public Builder setAttributeTagIds(int index, int value) {
+        result.attributeTagIds_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeTagIds(int value) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.attributeTagIds_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeTagIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.attributeTagIds_);
+        return this;
+      }
+      public Builder clearAttributeTagIds() {
+        result.attributeTagIds_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated string attributeValues = 8;
+      public java.util.List<java.lang.String> getAttributeValuesList() {
+        return java.util.Collections.unmodifiableList(result.attributeValues_);
+      }
+      public int getAttributeValuesCount() {
+        return result.getAttributeValuesCount();
+      }
+      public java.lang.String getAttributeValues(int index) {
+        return result.getAttributeValues(index);
+      }
+      public Builder setAttributeValues(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.attributeValues_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeValues(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.attributeValues_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeValues(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.attributeValues_);
+        return this;
+      }
+      public Builder clearAttributeValues() {
+        result.attributeValues_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -9674,30 +9674,6 @@ public final class OsmandOdb {
     public boolean hasNameEn() { return hasNameEn; }
     public java.lang.String getNameEn() { return nameEn_; }
     
-    // repeated uint32 attributeTagIds = 6;
-    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> attributeTagIds_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-      return attributeTagIds_;
-    }
-    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
-    public int getAttributeTagIds(int index) {
-      return attributeTagIds_.get(index);
-    }
-    
-    // repeated string attributeValues = 7;
-    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.String> attributeValues_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAttributeValuesList() {
-      return attributeValues_;
-    }
-    public int getAttributeValuesCount() { return attributeValues_.size(); }
-    public java.lang.String getAttributeValues(int index) {
-      return attributeValues_.get(index);
-    }
-    
     // required sint32 intersectedX = 4;
     public static final int INTERSECTEDX_FIELD_NUMBER = 4;
     private boolean hasIntersectedX;
@@ -9711,6 +9687,30 @@ public final class OsmandOdb {
     private int intersectedY_ = 0;
     public boolean hasIntersectedY() { return hasIntersectedY; }
     public int getIntersectedY() { return intersectedY_; }
+    
+    // repeated uint32 attributeTagIds = 7;
+    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> attributeTagIds_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+      return attributeTagIds_;
+    }
+    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
+    public int getAttributeTagIds(int index) {
+      return attributeTagIds_.get(index);
+    }
+    
+    // repeated string attributeValues = 8;
+    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.String> attributeValues_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getAttributeValuesList() {
+      return attributeValues_;
+    }
+    public int getAttributeValuesCount() { return attributeValues_.size(); }
+    public java.lang.String getAttributeValues(int index) {
+      return attributeValues_.get(index);
+    }
     
     private void initFields() {
     }
@@ -9737,10 +9737,10 @@ public final class OsmandOdb {
         output.writeSInt32(5, getIntersectedY());
       }
       for (int element : getAttributeTagIdsList()) {
-        output.writeUInt32(6, element);
+        output.writeUInt32(7, element);
       }
       for (java.lang.String element : getAttributeValuesList()) {
-        output.writeString(7, element);
+        output.writeString(8, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9957,6 +9957,12 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
+        if (other.hasIntersectedX()) {
+          setIntersectedX(other.getIntersectedX());
+        }
+        if (other.hasIntersectedY()) {
+          setIntersectedY(other.getIntersectedY());
+        }
         if (!other.attributeTagIds_.isEmpty()) {
           if (result.attributeTagIds_.isEmpty()) {
             result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
@@ -9968,12 +9974,6 @@ public final class OsmandOdb {
             result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
           }
           result.attributeValues_.addAll(other.attributeValues_);
-        }
-        if (other.hasIntersectedX()) {
-          setIntersectedX(other.getIntersectedX());
-        }
-        if (other.hasIntersectedY()) {
-          setIntersectedY(other.getIntersectedY());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10016,11 +10016,11 @@ public final class OsmandOdb {
               setIntersectedY(input.readSInt32());
               break;
             }
-            case 48: {
+            case 56: {
               addAttributeTagIds(input.readUInt32());
               break;
             }
-            case 50: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -10029,7 +10029,7 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
-            case 58: {
+            case 66: {
               addAttributeValues(input.readString());
               break;
             }
@@ -10080,7 +10080,43 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated uint32 attributeTagIds = 6;
+      // required sint32 intersectedX = 4;
+      public boolean hasIntersectedX() {
+        return result.hasIntersectedX();
+      }
+      public int getIntersectedX() {
+        return result.getIntersectedX();
+      }
+      public Builder setIntersectedX(int value) {
+        result.hasIntersectedX = true;
+        result.intersectedX_ = value;
+        return this;
+      }
+      public Builder clearIntersectedX() {
+        result.hasIntersectedX = false;
+        result.intersectedX_ = 0;
+        return this;
+      }
+      
+      // required sint32 intersectedY = 5;
+      public boolean hasIntersectedY() {
+        return result.hasIntersectedY();
+      }
+      public int getIntersectedY() {
+        return result.getIntersectedY();
+      }
+      public Builder setIntersectedY(int value) {
+        result.hasIntersectedY = true;
+        result.intersectedY_ = value;
+        return this;
+      }
+      public Builder clearIntersectedY() {
+        result.hasIntersectedY = false;
+        result.intersectedY_ = 0;
+        return this;
+      }
+      
+      // repeated uint32 attributeTagIds = 7;
       public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
         return java.util.Collections.unmodifiableList(result.attributeTagIds_);
       }
@@ -10114,7 +10150,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated string attributeValues = 7;
+      // repeated string attributeValues = 8;
       public java.util.List<java.lang.String> getAttributeValuesList() {
         return java.util.Collections.unmodifiableList(result.attributeValues_);
       }
@@ -10151,42 +10187,6 @@ public final class OsmandOdb {
       }
       public Builder clearAttributeValues() {
         result.attributeValues_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // required sint32 intersectedX = 4;
-      public boolean hasIntersectedX() {
-        return result.hasIntersectedX();
-      }
-      public int getIntersectedX() {
-        return result.getIntersectedX();
-      }
-      public Builder setIntersectedX(int value) {
-        result.hasIntersectedX = true;
-        result.intersectedX_ = value;
-        return this;
-      }
-      public Builder clearIntersectedX() {
-        result.hasIntersectedX = false;
-        result.intersectedX_ = 0;
-        return this;
-      }
-      
-      // required sint32 intersectedY = 5;
-      public boolean hasIntersectedY() {
-        return result.hasIntersectedY();
-      }
-      public int getIntersectedY() {
-        return result.getIntersectedY();
-      }
-      public Builder setIntersectedY(int value) {
-        result.hasIntersectedY = true;
-        result.intersectedY_ = value;
-        return this;
-      }
-      public Builder clearIntersectedY() {
-        result.hasIntersectedY = false;
-        result.intersectedY_ = 0;
         return this;
       }
       
@@ -10243,30 +10243,6 @@ public final class OsmandOdb {
     public boolean hasNameEn() { return hasNameEn; }
     public java.lang.String getNameEn() { return nameEn_; }
     
-    // repeated uint32 attributeTagIds = 15;
-    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 15;
-    private java.util.List<java.lang.Integer> attributeTagIds_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-      return attributeTagIds_;
-    }
-    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
-    public int getAttributeTagIds(int index) {
-      return attributeTagIds_.get(index);
-    }
-    
-    // repeated string attributeValues = 16;
-    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 16;
-    private java.util.List<java.lang.String> attributeValues_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAttributeValuesList() {
-      return attributeValues_;
-    }
-    public int getAttributeValuesCount() { return attributeValues_.size(); }
-    public java.lang.String getAttributeValues(int index) {
-      return attributeValues_.get(index);
-    }
-    
     // optional string name2 = 3;
     public static final int NAME2_FIELD_NUMBER = 3;
     private boolean hasName2;
@@ -10280,30 +10256,6 @@ public final class OsmandOdb {
     private java.lang.String nameEn2_ = "";
     public boolean hasNameEn2() { return hasNameEn2; }
     public java.lang.String getNameEn2() { return nameEn2_; }
-    
-    // repeated uint32 attributeTagIds2 = 17;
-    public static final int ATTRIBUTETAGIDS2_FIELD_NUMBER = 17;
-    private java.util.List<java.lang.Integer> attributeTagIds2_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getAttributeTagIds2List() {
-      return attributeTagIds2_;
-    }
-    public int getAttributeTagIds2Count() { return attributeTagIds2_.size(); }
-    public int getAttributeTagIds2(int index) {
-      return attributeTagIds2_.get(index);
-    }
-    
-    // repeated string attributeValues2 = 18;
-    public static final int ATTRIBUTEVALUES2_FIELD_NUMBER = 18;
-    private java.util.List<java.lang.String> attributeValues2_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getAttributeValues2List() {
-      return attributeValues2_;
-    }
-    public int getAttributeValues2Count() { return attributeValues2_.size(); }
-    public java.lang.String getAttributeValues2(int index) {
-      return attributeValues2_.get(index);
-    }
     
     // optional sint32 interpolation = 5;
     public static final int INTERPOLATION_FIELD_NUMBER = 5;
@@ -10353,6 +10305,54 @@ public final class OsmandOdb {
     private java.lang.String postcode_ = "";
     public boolean hasPostcode() { return hasPostcode; }
     public java.lang.String getPostcode() { return postcode_; }
+    
+    // repeated uint32 attributeTagIds = 15;
+    public static final int ATTRIBUTETAGIDS_FIELD_NUMBER = 15;
+    private java.util.List<java.lang.Integer> attributeTagIds_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+      return attributeTagIds_;
+    }
+    public int getAttributeTagIdsCount() { return attributeTagIds_.size(); }
+    public int getAttributeTagIds(int index) {
+      return attributeTagIds_.get(index);
+    }
+    
+    // repeated string attributeValues = 16;
+    public static final int ATTRIBUTEVALUES_FIELD_NUMBER = 16;
+    private java.util.List<java.lang.String> attributeValues_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getAttributeValuesList() {
+      return attributeValues_;
+    }
+    public int getAttributeValuesCount() { return attributeValues_.size(); }
+    public java.lang.String getAttributeValues(int index) {
+      return attributeValues_.get(index);
+    }
+    
+    // repeated uint32 attributeTagIds2 = 17;
+    public static final int ATTRIBUTETAGIDS2_FIELD_NUMBER = 17;
+    private java.util.List<java.lang.Integer> attributeTagIds2_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getAttributeTagIds2List() {
+      return attributeTagIds2_;
+    }
+    public int getAttributeTagIds2Count() { return attributeTagIds2_.size(); }
+    public int getAttributeTagIds2(int index) {
+      return attributeTagIds2_.get(index);
+    }
+    
+    // repeated string attributeValues2 = 18;
+    public static final int ATTRIBUTEVALUES2_FIELD_NUMBER = 18;
+    private java.util.List<java.lang.String> attributeValues2_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getAttributeValues2List() {
+      return attributeValues2_;
+    }
+    public int getAttributeValues2Count() { return attributeValues2_.size(); }
+    public java.lang.String getAttributeValues2(int index) {
+      return attributeValues2_.get(index);
+    }
     
     private void initFields() {
     }
@@ -10680,35 +10680,11 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
-        if (!other.attributeTagIds_.isEmpty()) {
-          if (result.attributeTagIds_.isEmpty()) {
-            result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-          }
-          result.attributeTagIds_.addAll(other.attributeTagIds_);
-        }
-        if (!other.attributeValues_.isEmpty()) {
-          if (result.attributeValues_.isEmpty()) {
-            result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-          }
-          result.attributeValues_.addAll(other.attributeValues_);
-        }
         if (other.hasName2()) {
           setName2(other.getName2());
         }
         if (other.hasNameEn2()) {
           setNameEn2(other.getNameEn2());
-        }
-        if (!other.attributeTagIds2_.isEmpty()) {
-          if (result.attributeTagIds2_.isEmpty()) {
-            result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
-          }
-          result.attributeTagIds2_.addAll(other.attributeTagIds2_);
-        }
-        if (!other.attributeValues2_.isEmpty()) {
-          if (result.attributeValues2_.isEmpty()) {
-            result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
-          }
-          result.attributeValues2_.addAll(other.attributeValues2_);
         }
         if (other.hasInterpolation()) {
           setInterpolation(other.getInterpolation());
@@ -10730,6 +10706,30 @@ public final class OsmandOdb {
         }
         if (other.hasPostcode()) {
           setPostcode(other.getPostcode());
+        }
+        if (!other.attributeTagIds_.isEmpty()) {
+          if (result.attributeTagIds_.isEmpty()) {
+            result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.attributeTagIds_.addAll(other.attributeTagIds_);
+        }
+        if (!other.attributeValues_.isEmpty()) {
+          if (result.attributeValues_.isEmpty()) {
+            result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+          }
+          result.attributeValues_.addAll(other.attributeValues_);
+        }
+        if (!other.attributeTagIds2_.isEmpty()) {
+          if (result.attributeTagIds2_.isEmpty()) {
+            result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.attributeTagIds2_.addAll(other.attributeTagIds2_);
+        }
+        if (!other.attributeValues2_.isEmpty()) {
+          if (result.attributeValues2_.isEmpty()) {
+            result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
+          }
+          result.attributeValues2_.addAll(other.attributeValues2_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10881,80 +10881,6 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated uint32 attributeTagIds = 15;
-      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
-        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
-      }
-      public int getAttributeTagIdsCount() {
-        return result.getAttributeTagIdsCount();
-      }
-      public int getAttributeTagIds(int index) {
-        return result.getAttributeTagIds(index);
-      }
-      public Builder setAttributeTagIds(int index, int value) {
-        result.attributeTagIds_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeTagIds(int value) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.attributeTagIds_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeTagIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.attributeTagIds_.isEmpty()) {
-          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.attributeTagIds_);
-        return this;
-      }
-      public Builder clearAttributeTagIds() {
-        result.attributeTagIds_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated string attributeValues = 16;
-      public java.util.List<java.lang.String> getAttributeValuesList() {
-        return java.util.Collections.unmodifiableList(result.attributeValues_);
-      }
-      public int getAttributeValuesCount() {
-        return result.getAttributeValuesCount();
-      }
-      public java.lang.String getAttributeValues(int index) {
-        return result.getAttributeValues(index);
-      }
-      public Builder setAttributeValues(int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.attributeValues_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeValues(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        result.attributeValues_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeValues(
-          java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.attributeValues_.isEmpty()) {
-          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
-        }
-        super.addAll(values, result.attributeValues_);
-        return this;
-      }
-      public Builder clearAttributeValues() {
-        result.attributeValues_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
       // optional string name2 = 3;
       public boolean hasName2() {
         return result.hasName2();
@@ -10994,80 +10920,6 @@ public final class OsmandOdb {
       public Builder clearNameEn2() {
         result.hasNameEn2 = false;
         result.nameEn2_ = getDefaultInstance().getNameEn2();
-        return this;
-      }
-      
-      // repeated uint32 attributeTagIds2 = 17;
-      public java.util.List<java.lang.Integer> getAttributeTagIds2List() {
-        return java.util.Collections.unmodifiableList(result.attributeTagIds2_);
-      }
-      public int getAttributeTagIds2Count() {
-        return result.getAttributeTagIds2Count();
-      }
-      public int getAttributeTagIds2(int index) {
-        return result.getAttributeTagIds2(index);
-      }
-      public Builder setAttributeTagIds2(int index, int value) {
-        result.attributeTagIds2_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeTagIds2(int value) {
-        if (result.attributeTagIds2_.isEmpty()) {
-          result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.attributeTagIds2_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeTagIds2(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.attributeTagIds2_.isEmpty()) {
-          result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.attributeTagIds2_);
-        return this;
-      }
-      public Builder clearAttributeTagIds2() {
-        result.attributeTagIds2_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated string attributeValues2 = 18;
-      public java.util.List<java.lang.String> getAttributeValues2List() {
-        return java.util.Collections.unmodifiableList(result.attributeValues2_);
-      }
-      public int getAttributeValues2Count() {
-        return result.getAttributeValues2Count();
-      }
-      public java.lang.String getAttributeValues2(int index) {
-        return result.getAttributeValues2(index);
-      }
-      public Builder setAttributeValues2(int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.attributeValues2_.set(index, value);
-        return this;
-      }
-      public Builder addAttributeValues2(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  if (result.attributeValues2_.isEmpty()) {
-          result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
-        }
-        result.attributeValues2_.add(value);
-        return this;
-      }
-      public Builder addAllAttributeValues2(
-          java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.attributeValues2_.isEmpty()) {
-          result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
-        }
-        super.addAll(values, result.attributeValues2_);
-        return this;
-      }
-      public Builder clearAttributeValues2() {
-        result.attributeValues2_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -11197,6 +11049,154 @@ public final class OsmandOdb {
       public Builder clearPostcode() {
         result.hasPostcode = false;
         result.postcode_ = getDefaultInstance().getPostcode();
+        return this;
+      }
+      
+      // repeated uint32 attributeTagIds = 15;
+      public java.util.List<java.lang.Integer> getAttributeTagIdsList() {
+        return java.util.Collections.unmodifiableList(result.attributeTagIds_);
+      }
+      public int getAttributeTagIdsCount() {
+        return result.getAttributeTagIdsCount();
+      }
+      public int getAttributeTagIds(int index) {
+        return result.getAttributeTagIds(index);
+      }
+      public Builder setAttributeTagIds(int index, int value) {
+        result.attributeTagIds_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeTagIds(int value) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.attributeTagIds_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeTagIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.attributeTagIds_.isEmpty()) {
+          result.attributeTagIds_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.attributeTagIds_);
+        return this;
+      }
+      public Builder clearAttributeTagIds() {
+        result.attributeTagIds_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated string attributeValues = 16;
+      public java.util.List<java.lang.String> getAttributeValuesList() {
+        return java.util.Collections.unmodifiableList(result.attributeValues_);
+      }
+      public int getAttributeValuesCount() {
+        return result.getAttributeValuesCount();
+      }
+      public java.lang.String getAttributeValues(int index) {
+        return result.getAttributeValues(index);
+      }
+      public Builder setAttributeValues(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.attributeValues_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeValues(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.attributeValues_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeValues(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.attributeValues_.isEmpty()) {
+          result.attributeValues_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.attributeValues_);
+        return this;
+      }
+      public Builder clearAttributeValues() {
+        result.attributeValues_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated uint32 attributeTagIds2 = 17;
+      public java.util.List<java.lang.Integer> getAttributeTagIds2List() {
+        return java.util.Collections.unmodifiableList(result.attributeTagIds2_);
+      }
+      public int getAttributeTagIds2Count() {
+        return result.getAttributeTagIds2Count();
+      }
+      public int getAttributeTagIds2(int index) {
+        return result.getAttributeTagIds2(index);
+      }
+      public Builder setAttributeTagIds2(int index, int value) {
+        result.attributeTagIds2_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeTagIds2(int value) {
+        if (result.attributeTagIds2_.isEmpty()) {
+          result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.attributeTagIds2_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeTagIds2(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.attributeTagIds2_.isEmpty()) {
+          result.attributeTagIds2_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.attributeTagIds2_);
+        return this;
+      }
+      public Builder clearAttributeTagIds2() {
+        result.attributeTagIds2_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated string attributeValues2 = 18;
+      public java.util.List<java.lang.String> getAttributeValues2List() {
+        return java.util.Collections.unmodifiableList(result.attributeValues2_);
+      }
+      public int getAttributeValues2Count() {
+        return result.getAttributeValues2Count();
+      }
+      public java.lang.String getAttributeValues2(int index) {
+        return result.getAttributeValues2(index);
+      }
+      public Builder setAttributeValues2(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.attributeValues2_.set(index, value);
+        return this;
+      }
+      public Builder addAttributeValues2(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.attributeValues2_.isEmpty()) {
+          result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.attributeValues2_.add(value);
+        return this;
+      }
+      public Builder addAllAttributeValues2(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.attributeValues2_.isEmpty()) {
+          result.attributeValues2_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.attributeValues2_);
+        return this;
+      }
+      public Builder clearAttributeValues2() {
+        result.attributeValues2_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -23335,12 +23335,12 @@ public final class OsmandOdb {
       "\022\023\n\013stringNames\030\n \001(\014\022\n\n\002id\030\014 \002(\022\022\023\n\013ras" +
       "terBytes\030\017 \001(\014\"\364\003\n\022OsmAndAddressIndex\022\014\n" +
       "\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022-\n\nboundari" +
-      "es\030\003 \001(\0132\031.OsmAnd.OBF.OsmAndTileBox\022:\n\006c",
-      "ities\030\006 \003(\0132*.OsmAnd.OBF.OsmAndAddressIn" +
-      "dex.CitiesIndex\0229\n\tnameIndex\030\007 \001(\0132&.Osm" +
-      "And.OBF.OsmAndAddressNameIndexData\0223\n\022at" +
-      "tributeTagsTable\030\010 \001(\0132\027.OsmAnd.OBF.Stri" +
-      "ngTable\032\343\001\n\013CitiesIndex\022C\n\004type\030\002 \002(\01625." +
+      "es\030\003 \001(\0132\031.OsmAnd.OBF.OsmAndTileBox\0223\n\022a",
+      "ttributeTagsTable\030\004 \001(\0132\027.OsmAnd.OBF.Str" +
+      "ingTable\022:\n\006cities\030\006 \003(\0132*.OsmAnd.OBF.Os" +
+      "mAndAddressIndex.CitiesIndex\0229\n\tnameInde" +
+      "x\030\007 \001(\0132&.OsmAnd.OBF.OsmAndAddressNameIn" +
+      "dexData\032\343\001\n\013CitiesIndex\022C\n\004type\030\002 \002(\01625." +
       "OsmAnd.OBF.OsmAndAddressIndex.CitiesInde" +
       "x.CitiesType\022%\n\006cities\030\005 \003(\0132\025.OsmAnd.OB" +
       "F.CityIndex\022*\n\006blocks\030\007 \003(\0132\032.OsmAnd.OBF" +
@@ -23356,29 +23356,29 @@ public final class OsmandOdb {
       " \001(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\005" +
       "\022\030\n\020shiftToCityIndex\030\006 \003(\005\"\260\001\n\tCityIndex" +
       "\022\021\n\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007nam",
-      "e_en\030\003 \001(\t\022\027\n\017attributeTagIds\030\013 \003(\r\022\027\n\017a" +
-      "ttributeValues\030\014 \003(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 " +
-      "\002(\r\022\t\n\001y\030\006 \002(\r\022\035\n\025shiftToCityBlockIndex\030" +
+      "e_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006" +
+      " \002(\r\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attribu" +
+      "teValues\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex\030" +
       "\n \001(\007\"\202\001\n\016CityBlockIndex\022\030\n\020shiftToCityI" +
       "ndex\030\004 \001(\007\022,\n\tbuildings\030\n \003(\0132\031.OsmAnd.O" +
       "BF.BuildingIndex\022(\n\007streets\030\014 \003(\0132\027.OsmA" +
       "nd.OBF.StreetIndex\"\345\001\n\013StreetIndex\022\014\n\004na" +
-      "me\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\027\n\017attributeTa" +
-      "gIds\030\r \003(\r\022\027\n\017attributeValues\030\016 \003(\t\022\t\n\001x" +
-      "\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004\022,\n\tbuildin",
+      "me\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001" +
+      "y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007" +
+      " \003(\r\022\027\n\017attributeValues\030\010 \003(\t\022,\n\tbuildin",
       "gs\030\014 \003(\0132\031.OsmAnd.OBF.BuildingIndex\0225\n\ri" +
       "ntersections\030\005 \003(\0132\036.OsmAnd.OBF.StreetIn" +
       "tersection\"\221\001\n\022StreetIntersection\022\014\n\004nam" +
-      "e\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\027\n\017attributeTag" +
-      "Ids\030\006 \003(\r\022\027\n\017attributeValues\030\007 \003(\t\022\024\n\014in" +
-      "tersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\"\230" +
+      "e\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014intersectedX" +
+      "\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\022\027\n\017attribut" +
+      "eTagIds\030\007 \003(\r\022\027\n\017attributeValues\030\010 \003(\t\"\230" +
       "\002\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_e" +
-      "n\030\002 \001(\t\022\027\n\017attributeTagIds\030\017 \003(\r\022\027\n\017attr" +
-      "ibuteValues\030\020 \003(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name" +
-      "_en2\030\004 \001(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020",
-      "attributeValues2\030\022 \003(\t\022\025\n\rinterpolation\030" +
-      "\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022" +
-      "\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(" +
+      "n\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(\t" +
+      "\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030" +
+      "\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001(",
+      "\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017attributeTagIds\030\017" +
+      " \003(\r\022\027\n\017attributeValues\030\020 \003(\t\022\030\n\020attribu" +
+      "teTagIds2\030\021 \003(\r\022\030\n\020attributeValues2\030\022 \003(" +
       "\t\"=\n\017TransportRoutes\022*\n\006routes\030\006 \003(\0132\032.O" +
       "smAnd.OBF.TransportRoute\"\345\001\n\016TransportRo" +
       "ute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operato" +
@@ -23553,7 +23553,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndAddressIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndAddressIndex_descriptor,
-              new java.lang.String[] { "Name", "NameEn", "Boundaries", "Cities", "NameIndex", "AttributeTagsTable", },
+              new java.lang.String[] { "Name", "NameEn", "Boundaries", "AttributeTagsTable", "Cities", "NameIndex", },
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder.class);
           internal_static_OsmAnd_OBF_OsmAndAddressIndex_CitiesIndex_descriptor =
@@ -23593,7 +23593,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_CityIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_CityIndex_descriptor,
-              new java.lang.String[] { "CityType", "Name", "NameEn", "AttributeTagIds", "AttributeValues", "Id", "X", "Y", "ShiftToCityBlockIndex", },
+              new java.lang.String[] { "CityType", "Name", "NameEn", "Id", "X", "Y", "AttributeTagIds", "AttributeValues", "ShiftToCityBlockIndex", },
               net.osmand.binary.OsmandOdb.CityIndex.class,
               net.osmand.binary.OsmandOdb.CityIndex.Builder.class);
           internal_static_OsmAnd_OBF_CityBlockIndex_descriptor =
@@ -23609,7 +23609,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_StreetIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_StreetIndex_descriptor,
-              new java.lang.String[] { "Name", "NameEn", "AttributeTagIds", "AttributeValues", "X", "Y", "Id", "Buildings", "Intersections", },
+              new java.lang.String[] { "Name", "NameEn", "X", "Y", "Id", "AttributeTagIds", "AttributeValues", "Buildings", "Intersections", },
               net.osmand.binary.OsmandOdb.StreetIndex.class,
               net.osmand.binary.OsmandOdb.StreetIndex.Builder.class);
           internal_static_OsmAnd_OBF_StreetIntersection_descriptor =
@@ -23617,7 +23617,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_StreetIntersection_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_StreetIntersection_descriptor,
-              new java.lang.String[] { "Name", "NameEn", "AttributeTagIds", "AttributeValues", "IntersectedX", "IntersectedY", },
+              new java.lang.String[] { "Name", "NameEn", "IntersectedX", "IntersectedY", "AttributeTagIds", "AttributeValues", },
               net.osmand.binary.OsmandOdb.StreetIntersection.class,
               net.osmand.binary.OsmandOdb.StreetIntersection.Builder.class);
           internal_static_OsmAnd_OBF_BuildingIndex_descriptor =
@@ -23625,7 +23625,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_BuildingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_BuildingIndex_descriptor,
-              new java.lang.String[] { "Name", "NameEn", "AttributeTagIds", "AttributeValues", "Name2", "NameEn2", "AttributeTagIds2", "AttributeValues2", "Interpolation", "X", "Y", "X2", "Y2", "Id", "Postcode", },
+              new java.lang.String[] { "Name", "NameEn", "Name2", "NameEn2", "Interpolation", "X", "Y", "X2", "Y2", "Id", "Postcode", "AttributeTagIds", "AttributeValues", "AttributeTagIds2", "AttributeValues2", },
               net.osmand.binary.OsmandOdb.BuildingIndex.class,
               net.osmand.binary.OsmandOdb.BuildingIndex.Builder.class);
           internal_static_OsmAnd_OBF_TransportRoutes_descriptor =

@@ -593,35 +593,32 @@ public class BinaryMapIndexReader {
 	}
 	
 	public int preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
-		checkAddressIndex(c.getFileOffset());
+		AddressRegion reg = checkAddressIndex(c.getFileOffset());
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readCityStreets(resultMatcher, c);
+		addressAdapter.readCityStreets(resultMatcher, c, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		return size;
 	}
 	
-	private void checkAddressIndex(int offset){
-		boolean ok = false;
-		for(AddressRegion r : addressIndexes){
-			if(offset >= r.filePointer  && offset <= (r.length + r.filePointer)){
-				ok = true;
-				break;
+	private AddressRegion checkAddressIndex(int offset) {
+		for (AddressRegion r : addressIndexes) {
+			if (offset >= r.filePointer && offset <= (r.length + r.filePointer)) {
+				return r;
 			}
 		}
-		if(!ok){
-			throw new IllegalArgumentException("Illegal offset " + offset); //$NON-NLS-1$
-		}
+		throw new IllegalArgumentException("Illegal offset " + offset); //$NON-NLS-1$
 	}
 	
 	public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher) throws IOException {
-		checkAddressIndex(s.getFileOffset());
+		AddressRegion reg = checkAddressIndex(s.getFileOffset());
 		codedIS.seek(s.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
 		City city = s.getCity();
-		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, city != null  && city.isPostcode() ? city.getName() : null);
+		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, city != null  && city.isPostcode() ? city.getName() : null,
+				reg.attributeTagsTable);
 		codedIS.popLimit(old);
 	}
 	
@@ -1951,7 +1948,7 @@ public class BinaryMapIndexReader {
 
 	
 	private static boolean testMapSearch = false;
-	private static boolean testAddressSearch = false;
+	private static boolean testAddressSearch = true;
 	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
@@ -1966,7 +1963,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile("/Users/victorshcherb/osmand/maps/Canada_alberta_northamerica_wiki.obf", "r");
+		RandomAccessFile raf = new RandomAccessFile("/Users/victorshcherb/osmand/osm-gen/map.obf", "r");
 		
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		println("VERSION " + reader.getVersion()); //$NON-NLS-1$
@@ -2109,7 +2106,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "КАлг",  
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "кие",  
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
@@ -2247,7 +2244,7 @@ public class BinaryMapIndexReader {
 				if(object instanceof Street) {
 					System.out.println(object + " " + ((Street) object).getCity());
 				} else {
-					System.out.println(object);
+					System.out.println(object + " " + object.getId());
 				}
 				return false;
 			}
@@ -2255,7 +2252,7 @@ public class BinaryMapIndexReader {
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "lux");
+		}, "кие");
 		reader.searchAddressDataByName(req);
 	}
 	
@@ -2271,8 +2268,9 @@ public class BinaryMapIndexReader {
 				updateFrequence(streetFreq, s.getName());
 				reader.preloadBuildings(s, buildAddressRequest((ResultMatcher<Building>) null));
 				buildings += s.getBuildings().size();
+				println(s.getName() + " " + s.getName("ru"));
 			}
-			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true));
+			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true) + " " + c.getName("ru"));
 		}
 //		int[] count = new int[1];
 		List<City> villages = reader.getCities(reg, buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);

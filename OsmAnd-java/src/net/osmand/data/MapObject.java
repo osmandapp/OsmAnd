@@ -107,6 +107,9 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 				if(key.startsWith("name:")) {
 					key = key.substring("name:".length());
 				}
+				if(names == null) {
+					names = new HashMap<String, String>();
+				}
 				if(Algorithms.isEmpty(names.get(key))) {
 					names.put(key, e.getValue());
 				}

@@ -27,8 +27,8 @@ public class EntityParser {
 			mo.setEnName(e.getTag(OSMTagKey.NAME_EN));
 		}
 		for(String ts : e.getTags().keySet()) {
-			if(ts.startsWith(OSMTagKey.NAME + ":") && !ts.equals(OSMTagKey.NAME_EN)) {
-				mo.setName(ts.substring((OSMTagKey.NAME + ":").length()), e.getTag(ts));
+			if(ts.startsWith("name:") && !ts.equals(OSMTagKey.NAME_EN.getValue())) {
+				mo.setName(ts.substring(("name:").length()), e.getTag(ts));
 			}
 		}
 		if (mo.getName().length() == 0) {
