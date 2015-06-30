@@ -835,7 +835,7 @@
 	<string name="poi_motorcycle_barrier">Barrera para Motos</string>
 	<string name="poi_block">Bloque</string>
 	<string name="poi_bus_trap">Trampa para colectivos</string>
-	<string name="poi_cattle_grid">Rejilla de retención</string>
+	<string name="poi_cattle_grid">Paso canadiense</string>
 	<string name="poi_full_height_turnstile">Molinete de altura total</string>
 	<string name="poi_bump_gate">Puerta de golpe</string>
 	<string name="poi_general_barrier">Barrera general</string>
