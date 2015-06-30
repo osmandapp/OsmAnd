@@ -831,4 +831,27 @@
 <string name="poi_camera">相機和鏡頭</string>
 	<string name="poi_religious">宗教區域</string>
 	<string name="poi_bollard">系船柱</string>
-	</resources>
+	<string name="poi_cycle_barrier">自行車擋柵</string>
+	<string name="poi_motorcycle_barrier">摩托車擋柵</string>
+	<string name="poi_block">阻擋塊</string>
+	<string name="poi_bus_trap">限制小汽車通行</string>
+	<string name="poi_cattle_grid">擋畜溝柵</string>
+	<string name="poi_full_height_turnstile">全高十字旋轉門</string>
+	<string name="poi_bump_gate">凸碰柵門</string>
+	<string name="poi_general_barrier">一般障礙</string>
+	<string name="poi_stile">梯磴</string>
+	<string name="poi_height_restrictor">限高閘</string>
+	<string name="poi_horse_stile">馬梯</string>
+	<string name="poi_kissing_gate">小窄門</string>
+	<string name="poi_sally_port">暗門</string>
+	<string name="poi_swing_gate">搖擺彈門</string>
+	<string name="poi_turnstile">旋轉門</string>
+	<string name="poi_kent_carriage_gap">馬車間格柱</string>
+	<string name="poi_barrier_entrance">入口</string>
+	<string name="poi_entrance_main">主入口</string>
+	<string name="poi_entrance">入口</string>
+	<string name="poi_entrance_exit">出口</string>
+
+	<string name="poi_highway_crossing">斑馬線</string>
+
+</resources>
