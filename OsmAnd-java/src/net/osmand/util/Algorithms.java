@@ -8,6 +8,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
 
@@ -34,6 +39,36 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+	
+	private static final char CHAR_TOSPLIT = 0x01;
+
+	public static Map<String, String> decodeMap(String s) {
+		if (isEmpty(s)) {
+			return Collections.emptyMap();
+		}
+		Map<String, String> names = new HashMap<String, String>();
+		String[] split = s.split(CHAR_TOSPLIT + "");
+		for (int i = 1; i < split.length; i += 2) {
+			names.put(split[i - 1], split[i]);
+		}
+		return names;
+	}
+	
+	public static String encodeMap(Map<String, String> names) {
+		if (names != null) {
+			Iterator<Entry<String, String>> it = names.entrySet().iterator();
+			StringBuilder bld = new StringBuilder();
+			while (it.hasNext()) {
+				Entry<String, String> e = it.next();
+				bld.append(e.getKey()).append(CHAR_TOSPLIT)
+						.append(e.getValue().replace(CHAR_TOSPLIT, (char)(CHAR_TOSPLIT + 1)));
+				if (it.hasNext()) {
+					bld.append(CHAR_TOSPLIT);
+				}
+			}
+		}
+		return "";
 	}
 	
 	public static int findFirstNumberEndIndex(String value) {

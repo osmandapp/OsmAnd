@@ -3,6 +3,7 @@ package net.osmand.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -55,6 +56,21 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		names.put(lang, name);
 	}
 	
+	public Map<String, String> getNamesMap(boolean includeEn) {
+		if (!includeEn || Algorithms.isEmpty(enName)) {
+			if (names == null) {
+				return Collections.emptyMap();
+			}
+			return names;
+		}
+		Map<String, String> mp = new HashMap<String, String>();
+		if(names != null) {
+			mp.putAll(names);
+		}
+		mp.put("en", enName);		
+		return mp;
+	}
+	
 	public List<String> getAllNames() {
 		List<String> l = new ArrayList<String>();
 		if(!Algorithms.isEmpty(enName)) {
@@ -73,19 +89,29 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		if(Algorithms.isEmpty(enName)) {
 			enName = s.enName;
 		}
-		if(names == null) {
-			if(s.names != null) {
-				names = new HashMap<String, String>(s.names);
-			}
-		} else if(s.names != null){
-			Iterator<Entry<String, String>> it = s.names.entrySet().iterator();
+		copyNames(s.names);
+	}
+	
+	public void copyNames(Map<String, String> snames) {
+		if(snames != null && snames.containsKey("name:en")){
+			enName = snames.get("name:en");
+		}
+		if(snames != null && snames.containsKey("en")){
+			enName = snames.get("en");
+		}
+		if(snames != null){
+			Iterator<Entry<String, String>> it = snames.entrySet().iterator();
 			while(it.hasNext()) {
 				Entry<String, String> e = it.next();
-				if(Algorithms.isEmpty(names.get(e.getKey()))) {
-					names.put(e.getKey(), e.getValue());
+				String key = e.getKey();
+				if(key.startsWith("name:")) {
+					key = key.substring("name:".length());
+				}
+				if(Algorithms.isEmpty(names.get(key))) {
+					names.put(key, e.getValue());
 				}
 			}
-		}
+		}		
 	}
 	
 	public String getName(String lang) {
@@ -101,7 +127,7 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 				// get name
 				if(names != null) {
 					String nm = names.get(lang);
-					if(!Algorithms.isEmpty(lang)) {
+					if(!Algorithms.isEmpty(nm)) {
 						return nm;
 					}
 					if(transliterate) {

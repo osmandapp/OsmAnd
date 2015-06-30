@@ -422,6 +422,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			dashboardView.setVisibility(View.VISIBLE);
 			if(isActionButtonVisible()) {
 				actionButton.setVisibility(View.VISIBLE);
+			} else {
+				hideActionButton();
 			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
@@ -804,7 +806,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	private boolean isActionButtonVisible() {
-		return visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU;
+		return visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU || visibleType == DashboardType.CONFIGURE_SCREEN;
 	}
 	
 	private boolean isBackButtonVisible() {
