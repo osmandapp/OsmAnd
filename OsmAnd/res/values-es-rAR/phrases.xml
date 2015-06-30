@@ -835,8 +835,8 @@
 	<string name="poi_motorcycle_barrier">Barrera para Motos</string>
 	<string name="poi_block">Bloque</string>
 	<string name="poi_bus_trap">Trampa para colectivos</string>
-	<string name="poi_cattle_grid">Rejilla de retención</string>
-	<string name="poi_full_height_turnstile">Molinete alto</string>
+	<string name="poi_cattle_grid">Paso canadiense</string>
+	<string name="poi_full_height_turnstile">Molinete de altura total</string>
 	<string name="poi_bump_gate">Puerta de golpe</string>
 	<string name="poi_general_barrier">Barrera general</string>
 	<string name="poi_stile">Portilla peatonal</string>
@@ -844,4 +844,13 @@
 	<string name="poi_horse_stile">Portilla equina</string>
 	<string name="poi_kissing_gate">Portilla Kissing</string>
 	<string name="poi_sally_port">Poterna</string>
-	</resources>
+	<string name="poi_swing_gate">Barrera giratoria</string>
+	<string name="poi_turnstile">Molinete</string>
+	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_entrance_main">Entrada principal</string>
+	<string name="poi_entrance">Entrada</string>
+	<string name="poi_entrance_exit">Salida</string>
+
+	<string name="poi_highway_crossing">Cruce peatonal</string>
+
+</resources>

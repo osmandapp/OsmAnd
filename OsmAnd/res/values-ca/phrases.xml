@@ -734,7 +734,7 @@
 	<string name="poi_picnic_table">Taula de berena</string>
 	<string name="poi_winery">Celler</string>
 
-	<string name="poi_stripclub">Club de striptease</string>
+	<string name="poi_stripclub">Club d\'striptease</string>
 	<string name="poi_craft_computer">Ordinadors a mida</string>
 	<string name="poi_beauty">Estètica</string>
 	<string name="poi_beauty_salon_nails">Manicur</string>
@@ -836,4 +836,13 @@
 
 <string name="poi_camera">Càmeres i òptiques</string>
 	<string name="poi_religious">Zona religiosa</string>
+	<string name="poi_bollard">Bol·lard</string>
+	<string name="poi_cycle_barrier">Barrera de bicicletes</string>
+	<string name="poi_motorcycle_barrier">Barrera de motos</string>
+	<string name="poi_block">Bloc de formigó</string>
+	<string name="poi_bus_trap">Parany de carril bus</string>
+	<string name="poi_cattle_grid">Pas canadenc</string>
+	<string name="poi_full_height_turnstile">Torn d\'alçada completa</string>
+	<string name="poi_general_barrier">Barrera genèrica</string>
+	<string name="poi_height_restrictor">Limitador d\'alçada</string>
 	</resources>
