@@ -842,4 +842,7 @@
 	<string name="poi_block">Bloc de formigó</string>
 	<string name="poi_bus_trap">Parany de carril bus</string>
 	<string name="poi_cattle_grid">Pas canadenc</string>
+	<string name="poi_full_height_turnstile">Torn d\'alçada completa</string>
+	<string name="poi_general_barrier">Barrera genèrica</string>
+	<string name="poi_height_restrictor">Limitador d\'alçada</string>
 	</resources>
