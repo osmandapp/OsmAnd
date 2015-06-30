@@ -854,4 +854,26 @@
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
 	<string name="poi_highway_crossing">Cruzamento de estrada</string>
 
-</resources>
+<string name="poi_cheese">Queijaria</string>
+	<string name="poi_chocolate">Chocolateria</string>
+	<string name="poi_coffee">Cafeteria</string>
+	<string name="poi_pasta">Loja de massas</string>
+	<string name="poi_pastry">Pastelaria</string>
+	<string name="poi_candles">Loja de velas</string>
+	<string name="poi_fashion">Acessórios moda</string>
+	<string name="poi_free_flying">Artigos de voo livre</string>
+	<string name="poi_furnace">Artigos de calefação</string>
+	<string name="poi_garden_furniture">Móveis para jardim</string>
+	<string name="poi_leather">Artigos de couro</string>
+	<string name="poi_music">Loja de discos musicais</string>
+	<string name="poi_tyres">Borracharia</string>
+	<string name="poi_energy">Artigos de energia</string>
+	<string name="poi_watches">Relojoaria</string>
+	<string name="poi_games">Jogos</string>
+	<string name="poi_model">Modelos em escala</string>
+	<string name="poi_trophy">Troféus, prêmios</string>
+	<string name="poi_video_games">Jogos eletrônicos</string>
+	<string name="poi_pyrotechnics">Fogos de artifício</string>
+	<string name="poi_weapons">Loja de armas</string>
+
+	</resources>
