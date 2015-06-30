@@ -606,7 +606,7 @@
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Juegos infantiles</string>
 	<string name="poi_bench">"Banco (asiento) "</string>
-	<string name="poi_swimming_pool">Pileta</string>
+	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
 	<string name="poi_park">Parque/Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
@@ -853,4 +853,26 @@
 
 	<string name="poi_highway_crossing">Cruce peatonal</string>
 
-</resources>
+<string name="poi_cheese">Quesería</string>
+	<string name="poi_chocolate">Chocolatería</string>
+	<string name="poi_coffee">Cafetería</string>
+	<string name="poi_pasta">Fábrica de pastas</string>
+	<string name="poi_pastry">Pastelería</string>
+	<string name="poi_furnace">Artículos de calefacción</string>
+	<string name="poi_garden_furniture">Almacén de jardinería</string>
+	<string name="poi_leather">Marroquinería</string>
+	<string name="poi_tyres">Gomería</string>
+	<string name="poi_watches">Relojería</string>
+	<string name="poi_games">Juegos</string>
+	<string name="poi_model">Modelos a escala</string>
+	<string name="poi_trophy">Trofeos, premios</string>
+	<string name="poi_video_games">Videojuegos</string>
+	<string name="poi_pyrotechnics">Pirotecnia</string>
+	<string name="poi_weapons">Armería</string>
+
+	<string name="poi_candles">Tienda de velas</string>
+	<string name="poi_fashion">Tienda de modas</string>
+	<string name="poi_free_flying">Artículos de libre vuelo</string>
+	<string name="poi_music">Tienda de música</string>
+	<string name="poi_energy">Almacén de energía</string>
+	</resources>
