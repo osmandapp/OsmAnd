@@ -424,7 +424,7 @@
 	<string name="poi_croquet">槌球</string>
 	<string name="poi_cycling">自行車</string>
 	<string name="poi_diving">跳水</string>
-	<string name="poi_scuba_diving">潛水</string>
+	<string name="poi_scuba_diving">水肺潛水</string>
 	<string name="poi_dog_racing">賽狗</string>
 	<string name="poi_equestrian">騎馬</string>
 	<string name="poi_field_hockey">曲棍球</string>
@@ -863,4 +863,19 @@
 	<string name="poi_fashion">時尚服飾店</string>
 	<string name="poi_furnace">加熱元件店</string>
 	<string name="poi_garden_furniture">園藝器具店</string>
+	<string name="poi_free_flying">自由飛行用品店</string>
+	<string name="poi_leather">皮革製品店</string>
+	<string name="poi_music">唱片行</string>
+	<string name="poi_scuba_diving_shop">水肺潛水用品店</string>
+	<string name="poi_tyres">輪胎店</string>
+	<string name="poi_energy">爐具店</string>
+	<string name="poi_watches">鐘錶店</string>
+	<string name="poi_swimming_pool_shop">游泳用品店</string>
+	<string name="poi_model">比例模型</string>
+	<string name="poi_trophy">獎盃、獎狀</string>
+	<string name="poi_video_games">電視遊樂器</string>
+	<string name="poi_games">遊戲</string>
+	<string name="poi_pyrotechnics">煙火</string>
+	<string name="poi_weapons">武器商店</string>
+
 	</resources>
