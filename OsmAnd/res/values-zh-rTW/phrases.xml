@@ -854,4 +854,7 @@
 
 	<string name="poi_highway_crossing">斑馬線</string>
 
-</resources>
+<string name="poi_cheese">乳酪商店</string>
+	<string name="poi_chocolate">巧克力商店</string>
+	<string name="poi_coffee">咖啡館</string>
+	</resources>
