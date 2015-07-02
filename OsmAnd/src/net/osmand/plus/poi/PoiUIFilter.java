@@ -449,9 +449,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	
 	public void updateTypesToAccept(AbstractPoiType pt) {
-		acceptedTypes.clear();
 		pt.putTypes(acceptedTypes);
-		poiAdditionals.clear();
 		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
 			fillPoiAdditionals(((PoiType) pt).getParentType());
 		} else {
@@ -488,7 +486,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		}
 	}
 
-	public void updateTypesToAccept(PoiUIFilter f) {
+	public void replaceWithPoiFilter(PoiUIFilter f) {
 		acceptedTypes.clear();
 		acceptedTypes.putAll(f.acceptedTypes);
 		poiAdditionals.clear();
