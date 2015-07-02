@@ -167,7 +167,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	private void initSearchAll(){
-		for(PoiCategory t : poiTypes.getCategories()){
+		for(PoiCategory t : poiTypes.getCategories(false)){
 			acceptedTypes.put(t, null);
 		}
 		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
@@ -436,7 +436,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	public boolean areAllTypesAccepted(){
-		if(poiTypes.getCategories().size() == acceptedTypes.size()){
+		if(poiTypes.getCategories(false).size() == acceptedTypes.size()){
 			for(PoiCategory a : acceptedTypes.keySet()){
 				if(acceptedTypes.get(a) != null){
 					return false;

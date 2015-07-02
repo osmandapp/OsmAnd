@@ -74,7 +74,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		if (filter != null) {
 			getSupportActionBar().setSubtitle(filter.getName());
-			setListAdapter(new AmenityAdapter(  ((OsmandApplication) getApplication()).getPoiTypes().getCategories()));
+			setListAdapter(new AmenityAdapter(  ((OsmandApplication) getApplication()).getPoiTypes().getCategories(false)));
 		} else {
 			setListAdapter(new AmenityAdapter(new ArrayList<PoiCategory>()));
 		}
