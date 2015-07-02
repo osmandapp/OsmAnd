@@ -839,10 +839,10 @@
 	<string name="poi_full_height_turnstile">Molinete de altura total</string>
 	<string name="poi_bump_gate">Portón rural</string>
 	<string name="poi_general_barrier">Barrera general</string>
-	<string name="poi_stile">Portilla peatonal</string>
+	<string name="poi_stile">Escalera de paso</string>
 	<string name="poi_height_restrictor">Limitador de altura</string>
 	<string name="poi_horse_stile">Portilla equina</string>
-	<string name="poi_kissing_gate">Portilla Kissing</string>
+	<string name="poi_kissing_gate">Portilla giratoria</string>
 	<string name="poi_sally_port">Poterna</string>
 	<string name="poi_swing_gate">Barrera giratoria</string>
 	<string name="poi_turnstile">Molinete</string>
@@ -870,10 +870,10 @@
 	<string name="poi_pyrotechnics">Pirotecnia</string>
 	<string name="poi_weapons">Armería</string>
 
-	<string name="poi_candles">Tienda de velas</string>
+	<string name="poi_candles">Velas</string>
 	<string name="poi_fashion">Tienda de modas</string>
-	<string name="poi_free_flying">Artículos de libre vuelo</string>
-	<string name="poi_music">Tienda de música</string>
+	<string name="poi_free_flying">Artículos de paracaidismo</string>
+	<string name="poi_music">Disquería</string>
 	<string name="poi_energy">Almacén de energía</string>
 	<string name="poi_swimming_pool_shop">Artículos para natación</string>
 	<string name="poi_scuba_diving_shop">Artículos de buceo</string>

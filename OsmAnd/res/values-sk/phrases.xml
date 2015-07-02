@@ -867,4 +867,6 @@
 	<string name="poi_pyrotechnics">Obchod s pyrotechnikou</string>
 	<string name="poi_weapons">Obchod so zbraňami</string>
 
+	<string name="poi_scuba_diving_shop">Potápačské potreby</string>
+	<string name="poi_swimming_pool_shop">Kúpacie potreby</string>
 	</resources>
