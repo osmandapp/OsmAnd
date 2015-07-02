@@ -859,7 +859,7 @@
 	<string name="poi_stile">Stente</string>
 	<string name="poi_height_restrictor">Højdebegrænser</string>
 	<string name="poi_horse_stile">Hestestente</string>
-	<string name="poi_kissing_gate">Kysse gate</string>
+	<string name="poi_kissing_gate">Kissing gate</string>
 	<string name="poi_sally_port">Udfaldsport</string>
 	<string name="poi_swing_gate">Svingport</string>
 	<string name="poi_turnstile">Tælleapparatet</string>
@@ -870,4 +870,29 @@
 
 	<string name="poi_highway_crossing">Motorvejspassage</string>
 
-</resources>
+<string name="poi_chocolate">Chokoladebutik</string>
+	<string name="poi_cheese">Oste butik</string>
+	<string name="poi_coffee">Kaffeforretning</string>
+	<string name="poi_pasta">Pastaforretning</string>
+	<string name="poi_pastry">Konditori</string>
+	<string name="poi_candles">Stearinlys</string>
+	<string name="poi_fashion">Modebutik</string>
+	<string name="poi_garden_furniture">Havemøbler</string>
+	<string name="poi_leather">Lædervarebutik</string>
+	<string name="poi_music">Musikforretning</string>
+	<string name="poi_tyres">Dækbutik</string>
+	<string name="poi_energy">Energibutik</string>
+	<string name="poi_watches">Urbutik</string>
+	<string name="poi_games">Spil</string>
+	<string name="poi_model">Skalamodeller</string>
+	<string name="poi_trophy">Pokaler, trofæer, udmærkelser</string>
+	<string name="poi_video_games">Videospil</string>
+	<string name="poi_pyrotechnics">Pyroteknik</string>
+	<string name="poi_weapons">Våbenbutik</string>
+
+	<string name="poi_furnace">Opvarmnings artikler</string>
+	<string name="poi_free_flying">Freeflying udstyr</string>
+	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
+	<string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
+	<string name="poi_swimming_pool_shop">Svømmebassin udstyr</string>
+	</resources>

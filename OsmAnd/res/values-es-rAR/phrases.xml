@@ -606,7 +606,7 @@
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Juegos infantiles</string>
 	<string name="poi_bench">"Banco (asiento) "</string>
-	<string name="poi_swimming_pool">Pileta</string>
+	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
 	<string name="poi_park">Parque/Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
@@ -792,29 +792,29 @@
 	<string name="poi_wiki_lang_el">Wikipedia griega</string>
 	<string name="poi_wiki_lang_et">Wikipedia estoniana</string>
 	<string name="poi_wiki_lang_es">Wikipedia español</string>
-	<string name="poi_wiki_lang_fi">Wikipedia finlandés</string>
+	<string name="poi_wiki_lang_fi">Wikipedia finlandesa</string>
 	<string name="poi_wiki_lang_fr">Wikipedia francesa</string>
 	<string name="poi_wiki_lang_gl">Wikipedia gallega</string>
 	<string name="poi_wiki_lang_he">Wikipedia hebrea</string>
-	<string name="poi_wiki_lang_hi">Wikipedia hindi</string>
+	<string name="poi_wiki_lang_hi">Wikipedia hindú</string>
 	<string name="poi_wiki_lang_hr">Wikipedia croata</string>
 	<string name="poi_wiki_lang_ht">Wikipedia haitiana</string>
 	<string name="poi_wiki_lang_hu">Wikipedia húngara</string>
-	<string name="poi_wiki_lang_id">Wikipedia indonesia</string>
+	<string name="poi_wiki_lang_id">Wikipedia indonesa</string>
 	<string name="poi_wiki_lang_it">Wikipedia italiana</string>
 	<string name="poi_wiki_lang_ja">Wikipedia japonesa</string>
 	<string name="poi_wiki_lang_ko">Wikipedia coreana</string>
 	<string name="poi_wiki_lang_lt">Wikipedia lituana</string>
 	<string name="poi_wiki_lang_ms">Wikipedia malaya</string>
 	<string name="poi_wiki_lang_new">Wikipedia newar</string>
-	<string name="poi_wiki_lang_nl">Wikipedia neerlandesa</string>
+	<string name="poi_wiki_lang_nl">Wikipedia holandesa</string>
 	<string name="poi_wiki_lang_no">Wikipedia noruega</string>
 	<string name="poi_wiki_lang_pl">Wikipedia polaca</string>
 	<string name="poi_wiki_lang_pt">Wikipedia portuguesa</string>
 	<string name="poi_wiki_lang_ro">Wikipedia rumana</string>
 	<string name="poi_wiki_lang_ru">Wikipedia rusa</string>
 	<string name="poi_wiki_lang_sk">Wikipedia eslovaca</string>
-	<string name="poi_wiki_lang_sl">Wikipedia eslovenia</string>
+	<string name="poi_wiki_lang_sl">Wikipedia eslovena</string>
 	<string name="poi_wiki_lang_sr">Wikipedia serbia</string>
 	<string name="poi_wiki_lang_sv">Wikipedia suiza</string>
 	<string name="poi_wiki_lang_tr">Wikipedia turca</string>
@@ -837,7 +837,7 @@
 	<string name="poi_bus_trap">Trampa para colectivos</string>
 	<string name="poi_cattle_grid">Paso canadiense</string>
 	<string name="poi_full_height_turnstile">Molinete de altura total</string>
-	<string name="poi_bump_gate">Puerta de golpe</string>
+	<string name="poi_bump_gate">Portón rural</string>
 	<string name="poi_general_barrier">Barrera general</string>
 	<string name="poi_stile">Portilla peatonal</string>
 	<string name="poi_height_restrictor">Limitador de altura</string>
@@ -853,4 +853,28 @@
 
 	<string name="poi_highway_crossing">Cruce peatonal</string>
 
-</resources>
+<string name="poi_cheese">Quesería</string>
+	<string name="poi_chocolate">Chocolatería</string>
+	<string name="poi_coffee">Cafetería</string>
+	<string name="poi_pasta">Fábrica de pastas</string>
+	<string name="poi_pastry">Pastelería</string>
+	<string name="poi_furnace">Artículos de calefacción</string>
+	<string name="poi_garden_furniture">Almacén de jardinería</string>
+	<string name="poi_leather">Marroquinería</string>
+	<string name="poi_tyres">Gomería</string>
+	<string name="poi_watches">Relojería</string>
+	<string name="poi_games">Juegos</string>
+	<string name="poi_model">Modelos a escala</string>
+	<string name="poi_trophy">Trofeos, premios</string>
+	<string name="poi_video_games">Videojuegos</string>
+	<string name="poi_pyrotechnics">Pirotecnia</string>
+	<string name="poi_weapons">Armería</string>
+
+	<string name="poi_candles">Tienda de velas</string>
+	<string name="poi_fashion">Tienda de modas</string>
+	<string name="poi_free_flying">Artículos de libre vuelo</string>
+	<string name="poi_music">Tienda de música</string>
+	<string name="poi_energy">Almacén de energía</string>
+	<string name="poi_swimming_pool_shop">Artículos para natación</string>
+	<string name="poi_scuba_diving_shop">Artículos de buceo</string>
+	</resources>

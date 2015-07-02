@@ -296,7 +296,7 @@
 	<string name="poi_cricket">Krykiet</string>
 	<string name="poi_cycling">Jazda na rowerze</string>
 	<string name="poi_diving">Nurkowanie</string>
-	<string name="poi_scuba_diving">Nurkowanie z akwalungiem</string>
+	<string name="poi_scuba_diving">Nurkowanie</string>
 	<string name="poi_dog_racing">Wyścigi psów</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_gymnastics">Gimnastyka</string>
@@ -831,4 +831,30 @@
 	<string name="poi_wiki_lang_ceb">Cebuańska Wikipedia</string>
 	<string name="poi_wiki_lang_new">Newarskia Wikipedia</string>
 	<string name="poi_wiki_lang_vo">Wolapik Wikipedia</string>
+	<string name="poi_cheese">Sklep z serami</string>
+	<string name="poi_chocolate">Sklep z czekoladą</string>
+	<string name="poi_coffee">Sklep z kawą</string>
+	<string name="poi_pasta">Sklep z makaronami</string>
+	<string name="poi_pastry">Cukiernia</string>
+	<string name="poi_camera">Aparaty i obiektywy</string>
+	<string name="poi_candles">Sklep ze świecami</string>
+	<string name="poi_furnace">Sklep z urządzeniami grzewczymi</string>
+	<string name="poi_garden_furniture">Sklep z meblami ogrodowymi</string>
+	<string name="poi_music">Sklep muzyczny</string>
+	<string name="poi_tyres">Sklep z oponami</string>
+	<string name="poi_watches">Sklep z zegarkami</string>
+	<string name="poi_model">Modelarski</string>
+	<string name="poi_weapons">Sklep z bronią</string>
+
+	<string name="poi_highway_crossing">przejście autostradowe</string>
+
+<string name="poi_entrance">Wejście</string>
+	<string name="poi_entrance_exit">Wyjście</string>
+
+	<string name="poi_barrier_entrance">Wejście</string>
+	<string name="poi_entrance_main">Wejście główne</string>
+	<string name="poi_height_restrictor">Ogranicznik wysokości</string>
+	<string name="poi_religious">Obszar religijny</string>
+	<string name="poi_leather">Galanteria skórzana</string>
+	<string name="poi_scuba_diving_shop">Sklep z wyposażeniem dla nurków</string>
 	</resources>

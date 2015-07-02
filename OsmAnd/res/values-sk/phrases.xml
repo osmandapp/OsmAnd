@@ -846,4 +846,25 @@
 
 	<string name="poi_highway_crossing">Priechod pre chodcov</string>
 
-</resources>
+<string name="poi_cheese">Obchod so syrmi</string>
+	<string name="poi_chocolate">Obchod s čokoládou</string>
+	<string name="poi_coffee">Obchod s kávou</string>
+	<string name="poi_pasta">Obchod s cestovinami</string>
+	<string name="poi_pastry">Obchod s zákuskami</string>
+	<string name="poi_candles">Obchod so sviečkami</string>
+	<string name="poi_fashion">Módny butik</string>
+	<string name="poi_furnace">Obchod s kúrením</string>
+	<string name="poi_garden_furniture">Obchod so záhradným nábytkom</string>
+	<string name="poi_leather">Obchod s kožou</string>
+	<string name="poi_music">Hudobniny</string>
+	<string name="poi_tyres">Obchod s pneumatikami</string>
+	<string name="poi_energy">Obchod s energiami</string>
+	<string name="poi_watches">Obchod s hodinkami</string>
+	<string name="poi_games">Obchod s hrami</string>
+	<string name="poi_model">Obchod s modelmi</string>
+	<string name="poi_trophy">Obchod s trofejami</string>
+	<string name="poi_video_games">Obchod s videohrami</string>
+	<string name="poi_pyrotechnics">Obchod s pyrotechnikou</string>
+	<string name="poi_weapons">Obchod so zbraňami</string>
+
+	</resources>
