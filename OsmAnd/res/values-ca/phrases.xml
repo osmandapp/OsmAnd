@@ -845,4 +845,7 @@
 	<string name="poi_full_height_turnstile">Torn d\'alçada completa</string>
 	<string name="poi_general_barrier">Barrera genèrica</string>
 	<string name="poi_height_restrictor">Limitador d\'alçada</string>
+	<string name="poi_chocolate">Xocolateria</string>
+	<string name="poi_cheese">Formatgeria</string>
+	<string name="poi_pastry">Pastisseria</string>
 	</resources>
