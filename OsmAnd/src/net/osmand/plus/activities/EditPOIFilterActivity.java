@@ -74,7 +74,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 		if (filter != null) {
 			getSupportActionBar().setSubtitle(filter.getName());
-			setListAdapter(new AmenityAdapter(  ((OsmandApplication) getApplication()).getPoiTypes().getCategories()));
+			setListAdapter(new AmenityAdapter(  ((OsmandApplication) getApplication()).getPoiTypes().getCategories(false)));
 		} else {
 			setListAdapter(new AmenityAdapter(new ArrayList<PoiCategory>()));
 		}
@@ -197,7 +197,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		helper.editPoiFilter(filter);
 		ListView lv = this.getListView();
 		AmenityAdapter la = this.getListAdapter();
-		la.notifyDataSetInvalidated();
+		la.notifyDataSetChanged();
 		return lv;
 	}
 
@@ -207,6 +207,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		for (int i = 0; i < count; i++) {
 			selectAllFromCategory(adapter.getItem(i));
 		}
+		adapter.notifyDataSetChanged();
 	}
 
 	private void deselectAll(){

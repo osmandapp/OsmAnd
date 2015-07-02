@@ -167,7 +167,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	private void initSearchAll(){
-		for(PoiCategory t : poiTypes.getCategories()){
+		for(PoiCategory t : poiTypes.getCategories(false)){
 			acceptedTypes.put(t, null);
 		}
 		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
@@ -436,7 +436,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	}
 	
 	public boolean areAllTypesAccepted(){
-		if(poiTypes.getCategories().size() == acceptedTypes.size()){
+		if(poiTypes.getCategories(false).size() == acceptedTypes.size()){
 			for(PoiCategory a : acceptedTypes.keySet()){
 				if(acceptedTypes.get(a) != null){
 					return false;
@@ -449,9 +449,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	
 	
 	public void updateTypesToAccept(AbstractPoiType pt) {
-		acceptedTypes.clear();
 		pt.putTypes(acceptedTypes);
-		poiAdditionals.clear();
 		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
 			fillPoiAdditionals(((PoiType) pt).getParentType());
 		} else {
@@ -488,7 +486,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		}
 	}
 
-	public void updateTypesToAccept(PoiUIFilter f) {
+	public void replaceWithPoiFilter(PoiUIFilter f) {
 		acceptedTypes.clear();
 		acceptedTypes.putAll(f.acceptedTypes);
 		poiAdditionals.clear();

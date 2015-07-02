@@ -28,6 +28,7 @@ public class MapPoiTypes {
 	private String resourceName;
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
 	private PoiCategory otherCategory;
+	private PoiCategory otherMapCategory;
 	
 	static final String OSM_WIKI_CATEGORY = "osmwiki";
 	private PoiTranslator poiTranslator = null;
@@ -65,6 +66,13 @@ public class MapPoiTypes {
 	
 	public PoiCategory getOtherPoiCategory() {
 		return otherCategory;
+	}
+	
+	public PoiCategory getOtherMapCategory() {
+		if(otherMapCategory == null) {
+			otherMapCategory = getPoiCategoryByName("Other", true);
+		}
+		return otherMapCategory;
 	}
 	
 	public List<PoiFilter> getTopVisibleFilters() {
@@ -143,6 +151,9 @@ public class MapPoiTypes {
 	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
 		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
 		for (PoiCategory pc : categories) {
+			if(pc == otherMapCategory) {
+				continue;
+			}
 			addIf(tm, pc, matcher);
 			for (PoiFilter pt : pc.getPoiFilters()) {
 				addIf(tm, pt, matcher);
@@ -290,6 +301,9 @@ public class MapPoiTypes {
 							lastFilter.addPoiType(tp);
 						}
 						allTypes.put(tp.getKeyName(), tp);
+						if(lastCategory == null) {
+							lastCategory = getOtherMapCategory();
+						}
 						lastCategory.addPoiType(tp);
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
@@ -298,6 +312,8 @@ public class MapPoiTypes {
 						lastFilter = null;
 					} else if (name.equals("poi_type")) {
 						lastType = null;
+					} else if (name.equals("poi_category")) {
+						lastCategory = null;
 					}
 				}
 			}
@@ -336,13 +352,17 @@ public class MapPoiTypes {
 		otherCategory = pc;
 	}
 
-	public List<PoiCategory> getCategories() {
-		return categories;
+	public List<PoiCategory> getCategories(boolean includeMapCategory) {
+		ArrayList<PoiCategory> lst = new ArrayList<PoiCategory>(categories);
+		if(!includeMapCategory) {
+			lst.remove(getOtherMapCategory());
+		}
+		return lst;
 	}
 	
 	
 	private static void print(MapPoiTypes df) {
-		List<PoiCategory> pc = df.getCategories();
+		List<PoiCategory> pc = df.getCategories(true);
 		for(PoiCategory p : pc) {
 			System.out.println("Category " + p.getKeyName());
 			for(PoiFilter f : p.getPoiFilters()) {

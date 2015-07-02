@@ -731,7 +731,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		case DIALOG_POI_TYPES: {
 			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 			Builder builder = new AlertDialog.Builder(activity);
-			final List<PoiCategory> categories = poiTypes.getCategories();
+			final List<PoiCategory> categories = poiTypes.getCategories(true);
 			String[] vals = new String[categories.size()];
 			for (int i = 0; i < vals.length; i++) {
 				vals[i] = categories.get(i).getTranslation();
