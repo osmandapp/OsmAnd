@@ -345,7 +345,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				PoiUIFilter custom = getMyApplication().getPoiFilters().getCustomPOIFilter();
-				custom.updateTypesToAccept(f);
+				custom.replaceWithPoiFilter(f);
 				showEditActivity(custom);
 				return true;
 			}
@@ -410,7 +410,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					this.filter.setFilterByName(null);
 				}
 			} else {
-				this.filter.updateTypesToAccept(custom);
+				this.filter.replaceWithPoiFilter(custom);
 			}
 			filter.clearPreviousZoom();
 			// run query again

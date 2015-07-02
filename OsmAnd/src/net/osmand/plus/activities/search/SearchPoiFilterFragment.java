@@ -194,6 +194,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				} else {
 					custom.setFilterByName(null);
 				}
+				custom.clearFilter();
 				custom.updateTypesToAccept(((AbstractPoiType) item));
 				showFilterActivity(custom.getFilterId());
 			}

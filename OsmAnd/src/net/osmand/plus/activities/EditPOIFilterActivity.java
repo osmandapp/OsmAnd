@@ -197,7 +197,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		helper.editPoiFilter(filter);
 		ListView lv = this.getListView();
 		AmenityAdapter la = this.getListAdapter();
-		la.notifyDataSetInvalidated();
+		la.notifyDataSetChanged();
 		return lv;
 	}
 
@@ -207,6 +207,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		for (int i = 0; i < count; i++) {
 			selectAllFromCategory(adapter.getItem(i));
 		}
+		adapter.notifyDataSetChanged();
 	}
 
 	private void deselectAll(){
