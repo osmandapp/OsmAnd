@@ -533,4 +533,84 @@
 
 	<string name="poi_arts_centre">Kultúrközpont</string>
 	<string name="poi_social_centre">Közösségi központ</string>
-	</resources>
+	<string name="poi_ski_resort">Síközpont</string>
+	<string name="poi_dog_park">Kutyafuttató</string>
+	<string name="poi_leisure_fishing">Horgászhely</string>
+	<string name="poi_harbour">Kikötő</string>
+	<string name="poi_bench">Pad</string>
+	<string name="poi_water_park">Akvapark</string>
+	<string name="poi_recreation_ground">Szabadidőpark</string>
+	<string name="poi_village_green">Központi zöldterület</string>
+	<string name="poi_trail_riding_station">Lovastúra állomás</string>
+
+	<string name="poi_food_court">Étkezőtér</string>
+	<string name="poi_barbecue">Grillezőhely</string>
+
+	<string name="poi_craft_basket_maker">Kosárfonó</string>
+	<string name="poi_craft_boatbuilder">Csónakkészítő</string>
+	<string name="poi_funeral_directors">Temetkezési vállalkozó</string>
+	<string name="poi_beauty">Szépségszalon</string>
+	<string name="poi_beauty_salon_nails">Körömszalon</string>
+	<string name="poi_massage">Masszázsszalon</string>
+	<string name="poi_tattoo">Tetováló szalon</string>
+	<string name="poi_dry_cleaning">Vegytisztító</string>
+	<string name="poi_laundry">Mosoda</string>
+	<string name="poi_car_sharing">Autómegosztó</string>
+	<string name="poi_boat_sharing">Hajómegosztó</string>
+	<string name="poi_dock">Dokk</string>
+	<string name="poi_toilets">WC</string>
+	<string name="poi_sauna">Szauna</string>
+	<string name="poi_brothel">Bordély</string>
+	<string name="poi_smoking_area">Dohányzásra kijelölt hely</string>
+	<string name="poi_mortuary">Halottasház</string>
+	<string name="poi_crematorium">Krematórium</string>
+	<string name="poi_internet_cafe">Internetkávézó</string>
+
+	<string name="poi_money_lender">Pénzhitelező</string>
+	<string name="poi_pawnbroker">Zálogház</string>
+	<string name="poi_bitcoin_yes">Bitcoin fizetés</string>
+
+	<string name="poi_rapids">Zúgó</string>
+	<string name="poi_stone">Jellegzetes szikla</string>
+	<string name="poi_cape">Partfok</string>
+	<string name="poi_valley">Völgy</string>
+	<string name="poi_water">Víz</string>
+	<string name="poi_wood">Természetes erdő</string>
+	<string name="poi_strait">Szoros</string>
+	<string name="poi_islet">Kis sziget</string>
+
+	<string name="poi_anchorage">Horgonyzóhely</string>
+	<string name="poi_military_landuse">Katonai terület</string>
+	<string name="poi_military_airfield">Katonai repülőtér</string>
+	<string name="poi_military_bunker">Bunker</string>
+	<string name="poi_military_barracks">Laktanya</string>
+	<string name="poi_military_danger_area">Veszélyzóna</string>
+	<string name="poi_military_range">Katonai gyakorlóterep</string>
+	<string name="poi_military_naval_base">Haditengerészeti bázis</string>
+	<string name="poi_military_nuclear_explosion_site">Nukleáris robbantási hely</string>
+
+	<string name="poi_wiki_place">Wikipédia</string>
+	<string name="poi_wiki_lang_en">Angol wiki</string>
+	<string name="poi_wiki_lang_de">Német wiki</string>
+	<string name="poi_wiki_lang_hu">Magyar wiki</string>
+	<string name="poi_bollard">Oszlop</string>
+	<string name="poi_cycle_barrier">Kerékpáros akadály</string>
+	<string name="poi_motorcycle_barrier">Motorkerékpár akadály</string>
+	<string name="poi_block">Tömb</string>
+	<string name="poi_cattle_grid">Marharács</string>
+	<string name="poi_full_height_turnstile">Teljes forgóajtó</string>
+	<string name="poi_bump_gate">Lökőajtó</string>
+	<string name="poi_general_barrier">Általános akadály</string>
+	<string name="poi_stile">Létra</string>
+	<string name="poi_height_restrictor">Magasságkorlátozó</string>
+	<string name="poi_sally_port">Városkapu</string>
+	<string name="poi_swing_gate">Elfordítós sorompó</string>
+	<string name="poi_turnstile">Forgókapu</string>
+	<string name="poi_barrier_entrance">Bejárat</string>
+	<string name="poi_entrance_main">Főbejárat</string>
+	<string name="poi_entrance">Bejárat</string>
+	<string name="poi_entrance_exit">Kijárat</string>
+
+	<string name="poi_highway_crossing">Gyalogátkelő</string>
+
+</resources>
