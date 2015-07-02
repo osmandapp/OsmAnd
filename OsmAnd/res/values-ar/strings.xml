@@ -1173,7 +1173,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="local_index_items_deleted">حُذف %1$d عنصرًا من %2$d بنجاح.</string>
 	<string name="local_index_items_restored">نُشّط %1$d عنصرًا من %2$d بنجاح.</string>
 	<string name="local_index_no_items_to_do">لا عناصر لـ %1$s</string>
-	<string name="local_index_action_do">كنت على وشك أن٪ 1 $ و٪ 2 $ بنود ق). المتابعة؟</string>
 	<string name="local_index_descr_title">إدارة ملفات الخرائط</string>
 	<string name="local_index_mi_restore">فعّل</string>
 	<string name="local_index_mi_backup">عطّل</string>
