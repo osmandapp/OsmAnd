@@ -246,7 +246,7 @@ public class MapWidgetRegistry {
 		public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
 			pref.set(!pref.get());
 			map.updateApplicationModeSettings();
-			a.notifyDataSetInvalidated();
+			a.notifyDataSetChanged();;
 			return false;
 		}
 	};	

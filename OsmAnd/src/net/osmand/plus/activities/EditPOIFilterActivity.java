@@ -279,6 +279,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 						filter.setTypeToAccept(model, false);
 						helper.editPoiFilter(filter);
 					}
+					notifyDataSetChanged();
 				}
 			});
 		}
