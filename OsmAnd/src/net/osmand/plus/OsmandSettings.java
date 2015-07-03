@@ -359,7 +359,11 @@ public class OsmandSettings {
 		
 		@Override
 		public void resetToDefault(){
-			set(getDefaultValue());
+			T o = defaultValue; 
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				o = defaultValues.get(currentMode);
+			}
+			set(o);
 		}
 
 		@Override
