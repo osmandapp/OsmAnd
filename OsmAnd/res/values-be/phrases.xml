@@ -856,4 +856,9 @@
 	<string name="poi_pyrotechnics">Піратэхніка</string>
 	<string name="poi_weapons">Зброя</string>
 
+	<string name="poi_coffee">Крама кавы</string>
+	<string name="poi_pastry">Цукерня</string>
+	<string name="poi_leather">Галянтарэя</string>
+	<string name="poi_swimming_pool_shop">Тавары для басэйна</string>
+	<string name="poi_model">Мадэлістам</string>
 	</resources>
