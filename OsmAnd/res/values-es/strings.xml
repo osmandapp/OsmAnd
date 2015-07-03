@@ -2113,4 +2113,11 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="archive_wikipedia_data">Tienes datos descargados de Wikipedia que son antiguos e incompatibles. ¿Deseas archivarlos?</string>
     <string name="download_wikipedia_files">¿Deseas descargar datos adicionales de la Wikipedia (%1$s MB)?</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_os">Osetio</string>
+    <string name="lang_nb">Noruego (Bokmål)</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_te">Telugú</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
     </resources>
