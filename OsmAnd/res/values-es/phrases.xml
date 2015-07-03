@@ -830,4 +830,51 @@
 	<string name="poi_wiki_lang_uk">Wiki en ucranio</string>
 	<string name="poi_wiki_lang_vi">Wiki en vietnamita</string>
 	<string name="poi_religious">Área religiosa</string>
-	</resources>
+	<string name="poi_cheese">Quesería</string>
+	<string name="poi_chocolate">Chocolatería</string>
+	<string name="poi_coffee">Tienda de café</string>
+	<string name="poi_pasta">Fábrica de pastas</string>
+	<string name="poi_pastry">Pastelería</string>
+	<string name="poi_candles">Tienda de velas</string>
+	<string name="poi_fashion">Tienda de modas</string>
+	<string name="poi_free_flying">Artículos de paracaidismo</string>
+	<string name="poi_furnace">Tienda de calefactores</string>
+	<string name="poi_garden_furniture">Tienda de muebles de jardín</string>
+	<string name="poi_leather">Marroquinería</string>
+	<string name="poi_music">Disquería</string>
+	<string name="poi_scuba_diving_shop">Artículos de buceo</string>
+	<string name="poi_tyres">Tienda de neumáticos</string>
+	<string name="poi_energy">Acumulador de energía</string>
+	<string name="poi_watches">Tienda de relojes de pulsera</string>
+	<string name="poi_swimming_pool_shop">Artículos de piscina</string>
+	<string name="poi_games">Juegos</string>
+	<string name="poi_model">Modelos a escala</string>
+	<string name="poi_trophy">Trofeos, premios</string>
+	<string name="poi_video_games">Videojuegos</string>
+	<string name="poi_pyrotechnics">Pirotecnia</string>
+	<string name="poi_weapons">Armería</string>
+
+	<string name="poi_wiki_lang_new">Wiki de Newar</string>
+	<string name="poi_wiki_lang_te">Wiki de Telugú</string>
+	<string name="poi_wiki_lang_vo">Wiki de Volapük</string>
+	<string name="poi_bollard">Bolardo</string>
+	<string name="poi_cycle_barrier">Barrera para bicicletas</string>
+	<string name="poi_motorcycle_barrier">Barrera para motocicletas</string>
+	<string name="poi_block">Bloque</string>
+	<string name="poi_bus_trap">Trampa de autobús</string>
+	<string name="poi_cattle_grid">Rejilla para ganado</string>
+	<string name="poi_full_height_turnstile">Molinete de altura completa</string>
+	<string name="poi_bump_gate">Portón rural</string>
+	<string name="poi_general_barrier">Barrera general</string>
+	<string name="poi_stile">Escalera de paso</string>
+	<string name="poi_height_restrictor">Limitador de altura</string>
+	<string name="poi_swing_gate">Puerta de oscilación</string>
+	<string name="poi_turnstile">Molinete</string>
+	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_entrance_main">Entrada principal</string>
+	<string name="poi_entrance">Entrada</string>
+	<string name="poi_entrance_exit">Salida</string>
+
+	<string name="poi_highway_crossing">Cruce peatonal</string>
+
+</resources>
