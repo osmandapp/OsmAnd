@@ -1751,4 +1751,5 @@
     <string name="lang_lb">Luxemburguês</string>
     <string name="lang_os">Osseta</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="restart_is_required">Para aplicar as alterações, é necessário reiniciar o aplicativo.</string>
     </resources>
