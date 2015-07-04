@@ -47,12 +47,26 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 		registerWidget(activity);
 	}
+	
+	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(isActive()) {
+			registerWidget(activity);
+		} else {
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null && fps != null) {
+				mapInfoLayer.removeSideWidget(fps);
+				mapInfoLayer.recreateControls();
+				fps = null;
+			}
+		}
+	}
 
 	
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final OsmandMapTileView mv = activity.getMapView();
-		if (mapInfoLayer != null) {
+		if (mapInfoLayer != null && fps == null) {
 			fps = new TextInfoWidget(activity) {
 				@Override
 				public boolean updateInfo(DrawSettings drawSettings) {

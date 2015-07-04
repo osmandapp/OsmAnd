@@ -110,8 +110,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			createLayers();
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
-		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
-		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+		if(isActive()) {
+			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+		} else {
+			mapView.removeLayer(overlayLayer);
+			overlayLayer.setMap(null);
+		}
+		if(isActive()) {
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+		} else {
+			mapView.removeLayer(underlayLayer);
+			underlayLayer.setMap(null);
+		}
 		layers.updateMapSource(mapView, settingsToWarnAboutMap);
 	}
 	

@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.osmo.OsMoGroupsActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -105,8 +104,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if(monitoringControl == null) {
-			registerLayers(activity);
+		if (isActive()) {
+			if (monitoringControl == null) {
+				registerLayers(activity);
+			}
+		} else {
+			if (monitoringControl != null) {
+				MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+				layer.removeSideWidget(monitoringControl);
+				layer.recreateControls();
+				monitoringControl = null;
+			}
 		}
 	}
 

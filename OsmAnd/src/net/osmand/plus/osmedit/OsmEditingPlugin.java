@@ -76,15 +76,27 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private EditingPOIDialogProvider poiActions;
 	
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity){
-		if (osmBugsLayer == null) {
-			registerLayers(activity);
-		}
-		if(mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()){
-			if(settings.SHOW_OSM_BUGS.get()){
-				mapView.addLayer(osmBugsLayer, 2);
-			} else {
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if (isActive()) {
+			if (osmBugsLayer == null) {
+				registerLayers(activity);
+			}
+			if (!mapView.getLayers().contains(osmEditsLayer))  {
+				activity.getMapView().addLayer(osmEditsLayer, 3.5f);
+			}
+			if (mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()) {
+				if (settings.SHOW_OSM_BUGS.get()) {
+					mapView.addLayer(osmBugsLayer, 2);
+				} else {
+					mapView.removeLayer(osmBugsLayer);
+				}
+			}
+		} else {
+			if(osmBugsLayer != null) {
 				mapView.removeLayer(osmBugsLayer);
+			}
+			if(osmEditsLayer != null) {
+				mapView.removeLayer(osmEditsLayer);
 			}
 		}
 	}
@@ -93,7 +105,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity){
 		osmBugsLayer = new OsmBugsLayer(activity, this);
 		osmEditsLayer = new OsmEditsLayer(activity, this);
-		activity.getMapView().addLayer(osmEditsLayer, 3.5f);
 	}
 
 	public OsmEditsLayer getOsmEditsLayer(MapActivity activity){

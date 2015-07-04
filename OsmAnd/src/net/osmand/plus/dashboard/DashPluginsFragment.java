@@ -94,7 +94,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public void onOpenDash() {
 		View contentView = getView();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		initPlugins();
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.items);
 		pluginsContainer.removeAllViews();
 		for (OsmandPlugin p : plugins) {

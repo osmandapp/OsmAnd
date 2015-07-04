@@ -100,6 +100,26 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	public boolean init(OsmandApplication app, Activity activity) {
 		return true;
 	}
+	
+	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(isActive()) {
+			if(!mapView.isLayerVisible(distanceCalculatorLayer)) {
+				activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
+			}
+			registerWidget(activity);
+		} else {
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if(distanceCalculatorLayer != null) {
+				activity.getMapView().removeLayer(distanceCalculatorLayer);
+			}
+			if (mapInfoLayer != null && distanceControl != null ) {
+				mapInfoLayer.removeSideWidget(distanceControl);
+				mapInfoLayer.recreateControls();
+				distanceControl = null;
+			}
+		}
+	}
 
 	@Override
 	public void registerLayers(MapActivity activity) {
@@ -115,7 +135,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null ) {
+		if (mapInfoLayer != null && distanceControl == null ) {
 			distanceControl = createDistanceControl(activity);
 			mapInfoLayer.registerSideWidget(distanceControl,
 					R.drawable.ic_action_ruler_dark, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);

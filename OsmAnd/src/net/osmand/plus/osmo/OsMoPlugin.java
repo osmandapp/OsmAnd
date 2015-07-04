@@ -17,7 +17,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -30,6 +29,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -39,7 +39,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -170,19 +169,44 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 	
 	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(isActive()) {
+			if(olayer == null) {
+				registerLayers(activity);
+			} 
+			registerSideWidget(activity);
+		} else {
+			MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+			if (layer != null && osmoControl != null) {
+				layer.removeSideWidget(osmoControl);
+				osmoControl = null;
+				layer.recreateControls();
+			}
+			if(olayer != null) {
+				activity.getMapView().removeLayer(olayer);
+				olayer = null;
+			}
+		}
+	}
+	
+	@Override
 	public void registerLayers(MapActivity activity) {
-		super.registerLayers(activity);
-		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		osmoControl = createOsMoControl(activity);
-		layer.registerSideWidget(osmoControl,
-				R.drawable.ic_osmo_dark, R.string.osmo_control, "osmo_control", false, 18);
-		layer.recreateControls();
-		
+		registerSideWidget(activity);
 		if(olayer != null) {
 			activity.getMapView().removeLayer(olayer);
 		}
 		olayer = new OsMoPositionLayer(activity, this);
 		activity.getMapView().addLayer(olayer, 5.5f);
+	}
+
+	private void registerSideWidget(MapActivity activity) {
+		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+		if (layer != null && osmoControl == null) {
+			osmoControl = createOsMoControl(activity);
+			layer.registerSideWidget(osmoControl, R.drawable.ic_osmo_dark, R.string.osmo_control, "osmo_control",
+					false, 18);
+			layer.recreateControls();
+		}
 	}
 	
 	@Override

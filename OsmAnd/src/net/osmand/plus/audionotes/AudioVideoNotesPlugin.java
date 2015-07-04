@@ -443,7 +443,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		audioNotesLayer = new AudioNotesLayer(activity, this);
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
-		registerWidget(activity);
+		if(recordControl == null) {
+			registerWidget(activity);
+		}
 	}
 
 	private void registerMediaListener(AudioManager am) {
@@ -521,14 +523,30 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (SHOW_RECORDINGS.get()) {
-			if (audioNotesLayer == null) {
-				registerLayers(activity);
-			} else if (!mapView.getLayers().contains(audioNotesLayer)) {
-				mapView.addLayer(audioNotesLayer, 3.5f);
+		if (isActive()) {
+			if (SHOW_RECORDINGS.get()) {
+				if (audioNotesLayer == null) {
+					registerLayers(activity);
+				} else if (!mapView.getLayers().contains(audioNotesLayer)) {
+					mapView.addLayer(audioNotesLayer, 3.5f);
+				}
+			} else if (audioNotesLayer != null) {
+				mapView.removeLayer(audioNotesLayer);
 			}
-		} else if (audioNotesLayer != null) {
-			mapView.removeLayer(audioNotesLayer);
+			if(recordControl == null) {
+				registerWidget(activity);
+			}
+		} else {
+			if (audioNotesLayer != null) {
+				mapView.removeLayer(audioNotesLayer);
+				audioNotesLayer = null;
+			}
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if(recordControl != null && mapInfoLayer != null) {
+				mapInfoLayer.removeSideWidget(recordControl);
+				recordControl = null;
+				mapInfoLayer.recreateControls();
+			}
 		}
 	}
 

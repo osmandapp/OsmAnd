@@ -178,11 +178,24 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (parkingLayer == null) {
-			registerLayers(activity);
-		}
-		if (parkingPlaceControl == null) {
-			registerWidget(activity);
+		if (isActive()) {
+			if (parkingLayer == null) {
+				registerLayers(activity);
+			}
+			if (parkingPlaceControl == null) {
+				registerWidget(activity);
+			}
+		} else {
+			if (parkingLayer != null) {
+				activity.getMapView().removeLayer(parkingLayer);
+				parkingLayer = null;
+			}
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null && parkingPlaceControl != null) {
+				mapInfoLayer.removeSideWidget(parkingPlaceControl);
+				mapInfoLayer.recreateControls();
+				parkingPlaceControl = null;
+			}
 		}
 	}
 
