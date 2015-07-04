@@ -11,7 +11,6 @@
     -->
     <string name="rendering_attr_currentTrackColor_name">Current GPX color</string>
     <string name="rendering_value_red_name">Red</string>
-    <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_brown_name">Brown</string>
     <string name="rendering_value_yellow_name">Yellow</string>
     <string name="rendering_value_lightgreen_name">Lightgreen</string>
