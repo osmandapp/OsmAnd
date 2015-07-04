@@ -397,10 +397,10 @@ public class ConfigureMapMenu {
 		}
 	}
 	
-	static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "bg", "ca", "ceb", "cs", "da", "de", "el", "et", "es", "fi", "fr", "gl", "he", "hi",
+	public static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "bg", "ca", "ceb", "cs", "da", "de", "el", "et", "es", "fi", "fr", "gl", "he", "hi",
 			"hr", "ht", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "new", "nl", "nn", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sr", "sv", "sw", "te", "th", "tr", "uk", "vi", "vo", "zh" };
 
-	private String[] getMapNamesValues(Context ctx) {
+	public static String[] getMapNamesValues(Context ctx) {
 		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),
 				ctx.getString(R.string.lang_ar),
 				ctx.getString(R.string.lang_be), ctx.getString(R.string.lang_bg), ctx.getString(R.string.lang_ca), ctx.getString(R.string.lang_ceb), ctx.getString(R.string.lang_cs),

@@ -21,6 +21,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -256,6 +257,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
 			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
+		
+		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.mapNamesIds, ConfigureMapMenu.getMapNamesValues(this));
 	}
 
 
