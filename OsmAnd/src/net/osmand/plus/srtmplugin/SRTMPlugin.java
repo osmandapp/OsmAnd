@@ -84,7 +84,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (HILLSHADE.get()) {
+		if (HILLSHADE.get() && isActive()) {
 			if (hillshadeLayer == null) {
 				registerLayers(activity);
 			}

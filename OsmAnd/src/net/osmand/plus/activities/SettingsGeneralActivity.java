@@ -258,7 +258,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
 		
-		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.mapNamesIds, ConfigureMapMenu.getMapNamesValues(this));
+		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this), ConfigureMapMenu.mapNamesIds);
 	}
 
 

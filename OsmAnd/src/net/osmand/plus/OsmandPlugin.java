@@ -163,6 +163,9 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
+		if(activity instanceof MapActivity) {
+			plugin.updateLayers(((MapActivity) activity).getMapView(), (MapActivity) activity);
+		}
 		return true;
 	}
 	
@@ -209,7 +212,7 @@ public abstract class OsmandPlugin {
 	}
 	
 	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.updateLayers(mapView, activity);
 		}
 	}
