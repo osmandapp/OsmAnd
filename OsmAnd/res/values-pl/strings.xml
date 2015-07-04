@@ -9,7 +9,7 @@
   <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
-  <string name="choose_auto_follow_route_descr">Określ opóźnienie nadążania mapy za aktualną lokalizacją</string>
+  <string name="choose_auto_follow_route_descr">Określa opóźnienie nadążania mapy za aktualną lokalizacją</string>
   <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
@@ -66,7 +66,7 @@
   <string name="local_index_items_uploaded">Wysłano %1$d z %2$d.</string>
   <string name="local_index_mi_upload_gpx">Wyślij do OSM</string>
   <string name="show_more_map_detail">Pokaż więcej szczegółów na mapie</string>
-  <string name="show_more_map_detail_descr">Pokazuj więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
+  <string name="show_more_map_detail_descr">Wyświetla więcej szczegółów na mapie wektorowej na niższych stopniach przybliżenia</string>
   <string name="favourites_delete_multiple_succesful">Usunięto ulubiony punkt.</string>
   <string name="favorite_delete_multiple">Usunąć %1$d ulubiony punkt i %2$d grupę ulubionych?</string>
   <string name="favorite_home_category">Dom</string>
@@ -129,7 +129,7 @@
 \n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
   
   <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
-  <string name="choose_audio_stream_descr">Określ kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
+  <string name="choose_audio_stream_descr">Określa kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
   <string name="voice_stream_notification">Kanał powiadomień</string>
   <string name="voice_stream_music">Kanał media/music</string>
@@ -159,7 +159,7 @@
 		\n\t* Wpisy koloru niebieskiego oznaczają dostępne aktualizacje
 		\n\t* Wpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu
 	</string>
-  <string name="level_to_switch_vector_raster_descr">Określ najmniejszy poziom zbliżenia dla map wektorowych</string>
+  <string name="level_to_switch_vector_raster_descr">Określa najmniejszy poziom zbliżenia dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Minimalne zbliżenie mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   
@@ -175,7 +175,7 @@
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
   <string name="system_locale">Systemowy</string>
-  <string name="preferred_locale_descr">Wybierz język interfejsu (po zmianie należy uruchomić program ponownie)</string>
+  <string name="preferred_locale_descr">Wybiera język interfejsu (po zmianie należy uruchomić program ponownie)</string>
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Wybierz źródło mapy</string>
   
@@ -206,7 +206,7 @@
 \n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu „Menu” → „Pomoc” z ekranu mapy. "</string>
   <string name="shared_string_next">Następny</string>
   <string name="shared_string_previous">Wstecz</string>
-  <string name="unit_of_length_descr">Zmieniaj jednostki długości i prędkości</string>
+  <string name="unit_of_length_descr">Zmienia jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki miar</string>
   <string name="si_mi_foots">Mile/stopy</string>
   <string name="si_mi_yard">Mile/jardy</string>
@@ -292,14 +292,14 @@
   
   <string name="shared_string_select_all">Zaznacz wszystko</string>
   <string name="shared_string_refresh">Wczytaj ponownie</string>
-  <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia programu</string>
+  <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
   <string name="general_settings">Główne</string>
-  <string name="index_settings_descr">Pobierz i zarządzaj plikami map przechowywanymi na urządzeniu</string>
+  <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
   <string name="index_settings">Zarządzanie plikami map</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
-  <string name="fast_route_mode_descr">"Wyznaczaj najszybszą trasę zamiast najkrótszej "</string>
+  <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
   <string name="context_menu_item_download_map">Pobierz mapę</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
@@ -343,7 +343,7 @@
   <string name="rotate_map_compass_opt">Względem kompasu</string>
   <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
   <string name="rotate_map_none_opt">Bez obracania (północ na górze)</string>
-  <string name="rotate_map_to_bearing_descr">Wybierz sposób obracania mapy</string>
+  <string name="rotate_map_to_bearing_descr">Wybiera sposób obracania mapy</string>
   <string name="rotate_map_to_bearing">Orientacja mapy</string>
   <string name="show_route">Szczegóły trasy</string>
   <string name="fav_imported_sucessfully">Zaimportowano ulubione</string>
@@ -370,7 +370,7 @@
   <string name="context_menu_item_search_poi">Szukaj POI</string>
   
   <string name="use_trackball_descr">Umożliwia przesuwanie mapy za pomocą trackballa</string>
-  <string name="use_trackball">Używaj trackballa</string>
+  <string name="use_trackball">Używanie trackballa</string>
   <string name="background_service_wait_int_descr">Czas oczekiwania na poprawną pozycję GPS</string>
   <string name="background_service_wait_int">Czas oczekiwania</string>
   <string name="service_stop_background_service">Wyłącz usługę nawigacji w tle</string>
@@ -387,14 +387,14 @@
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
   <string name="background_router_service">Użyj usługi w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
-  <string name="routing_settings_descr">Określ opcje nawigacji</string>
+  <string name="routing_settings_descr">Określa opcje nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
   <string name="hide_poi_filter">Ukryj filtr</string>
   <string name="show_poi_filter">Pokaż filtr</string>
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Wyłącz dźwięk</string>
   <string name="menu_mute_on">Włącz dźwięk</string>
-  <string name="voice_provider_descr">Wybierz głos komunikatów głosowych</string>
+  <string name="voice_provider_descr">Wybiera głos komunikatów nawigatora</string>
   <string name="voice_provider">Nawigacja głosowa</string>
   <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
@@ -422,7 +422,7 @@
   <string name="map_orientation_portrait">Pionowo</string>
   <string name="map_orientation_landscape">Poziomo</string>
   <string name="map_screen_orientation">Orientacja ekranu</string>
-  <string name="map_screen_orientation_descr">Określ orientację ekranu</string>
+  <string name="map_screen_orientation_descr">Określa orientację ekranu</string>
   <string name="opening_hours_not_supported">Format godzina otwarcia nie jest obsługiwany</string>
   <string name="add_new_rule">Dodaj nową regułę</string>
   <string name="transport_Routes">Trasy</string>
@@ -467,7 +467,7 @@
   <string name="max_level_download_tile">Maks. zoom online</string>
   <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
   <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d godz %3$d min.</string>
-  <string name="router_service_descr">Wybierz usługę nawigacyjną online lub offline</string>
+  <string name="router_service_descr">Wybiera usługę nawigacyjną online lub offline</string>
   <string name="router_service">Usługa nawigacyjna</string>
   <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>
   <string name="download_question">Pobrać {0} - {1} ?</string>
@@ -532,15 +532,15 @@
   <string name="data_settings">Dane</string>
   
   <string name="osm_settings">Edycja OSM</string>
-  <string name="auto_zoom_map_descr">Przybliżaj mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualną lokalizacją)</string>
+  <string name="auto_zoom_map_descr">Przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualną lokalizacją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Ustal domyślny profil widoku mapy i ustawień nawigacji</string>
+  <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji</string>
   <string name="settings_preset">Domyślny profil</string>
   <string name="shared_string_settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisuje bieżący ślad do pliku GPX na karcie SD</string>
   <string name="save_current_track">Zapisz aktualny ślad</string>
-  <string name="save_track_interval_descr">Wybierz tempo rejestrowania śladów podczas nawigacji</string>
+  <string name="save_track_interval_descr">Wybiera tempo rejestrowania śladów podczas nawigacji</string>
   <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
   
   <string name="save_track_to_gpx_descrp">Zapisuje ślady do katalogu śladów podczas nawigacji</string>
@@ -573,12 +573,12 @@
   <string name="map_tile_source_descr">Proszę wybrać zasób map kafelkowych online lub offline</string>
   <string name="map_tile_source">Zasób mapy kafelkowej</string>
   <string name="map_source">Zasób mapy</string>
-  <string name="use_internet">Używaj połączenia internetowego</string>
+  <string name="use_internet">Używanie połączenia internetowego</string>
   <string name="show_location">Pokaż lokalizację</string>
   
   
   <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
-  <string name="use_internet_to_download_tile">Pobierz brakujące kafelki map za pośrednictwem połączenia internetowego</string>
+  <string name="use_internet_to_download_tile">Pobiera brakujące kafelki map za pośrednictwem połączenia internetowego</string>
   <string name="app_description">Program do nawigacji satelitarnej</string>
   <string name="shared_string_exit">Zakończ</string>
   
@@ -684,7 +684,7 @@
   
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
   <string name="map_online_data">Mapy online i kafelki</string>
-  <string name="map_online_data_descr">Używaj map online (pobieraj i przechowuj kafelki na karcie SD)</string>
+  <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie SD)</string>
   <string name="online_map_settings">Mapy online</string>
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   
@@ -698,7 +698,7 @@
   <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania wskazówek głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
   <string name="plugins_screen">Wtyczki</string>
   
-  <string name="prefs_plugins_descr">Aktywuj zaawansowane ustawienia i dodatkową funkcjonalność</string>
+  <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność</string>
   <string name="prefs_plugins">Wtyczki</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0:
 \n\t- *Obsługa wtyczek*\n\t- Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t- Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t- Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Nawigacja offline*\n\t- Nawigacja offline została poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t- Poprawione w wielu kwestiach "</string>
@@ -777,9 +777,9 @@
   <string name="scroll_map_by_gestures_descr">Przesuwaj mapę za pomocą gestów na ekranie dotykowym</string>
   <string name="scroll_map_by_gestures">Naturalne przewijanie mapy</string>
   <string name="i_am_here">Jestem tutaj</string>
-  <string name="zoom_by_trackball_descr">Zmieniaj poziom przybliżenia mapy poziomymi ruchami trackballa</string>
+  <string name="zoom_by_trackball_descr">Zmienia stopień przybliżenia mapy poziomymi ruchami trackballa</string>
   <string name="zoom_by_trackball">Przybliżanie mapy za pomocą trackballa</string>
-  <string name="use_short_object_names_descr">Używaj krótkich nazw obiektów w trybie eksploracji dotykowej</string>
+  <string name="use_short_object_names_descr">Używa krótkich nazw obiektów w trybie eksploracji dotykowej</string>
   <string name="use_short_object_names">Nazwy obiektów</string>
   <string name="accessibility_preferences_descr">Ustawienia ułatwień dostępu</string>
   <string name="accessibility_preferences">Ułatwienia dostępu</string>
@@ -801,9 +801,9 @@
   <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
   
   
-  <string name="live_monitoring_interval_descr">Określ interwał wysyłania danych o położeniu</string>
+  <string name="live_monitoring_interval_descr">Określa tempo wysyłania danych o położeniu</string>
   <string name="live_monitoring_interval">Częstość wysyłania danych</string>
-  <string name="live_monitoring_url_descr">Określ adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
+  <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
   <string name="live_monitoring_url">Adres usługi śledzenia</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
   <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
@@ -965,8 +965,8 @@
   <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikaj…</string>
-  <string name="avoid_in_routing_descr">Wyznaczaj trasy unikając dróg płatnych, nieutwardzonych, promów</string>
+  <string name="avoid_in_routing_title">Unikanie</string>
+  <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
   <string name="show_warnings_descr">Pokazuj ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
   
@@ -1064,7 +1064,7 @@
 	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
     <string name="download_roads_only_item">Samochodowe</string>
     <string name="download_roads_only_maps">Mapy samochodowe</string>
-    <string name="safe_mode_description">Uruchamiaj program w trybie bezpiecznym (użyj wolniejszego kodu Androida zamiast natywnego)</string>
+    <string name="safe_mode_description">Uruchamia program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego)</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Zatrzymać ją?</string>
@@ -1207,9 +1207,9 @@
 	<string name="hno">Numer domu</string>
     <string name="choose_osmand_theme">Styl</string>
     <string name="accessibility_options">Opcje ułatwień dostępu</string>
-    <string name="choose_osmand_theme_descr">Wybierz styl graficzny programu</string>
+    <string name="choose_osmand_theme_descr">Wybiera styl graficzny programu</string>
     
-    <string name="monitoring_settings_descr">Konfiguruj opcje rejestrowania tras</string>
+    <string name="monitoring_settings_descr">Konfiguruje opcje rejestrowania tras</string>
     
     <string name="monitoring_settings">Rejestrowanie trasy</string>
     <string name="tip_recent_changes_1_3_t">Zmiany w 1.3:
@@ -1233,8 +1233,8 @@
     <string name="use_magnetic_sensor_descr">Użyj czujnika pola magnetycznego, aby określić kierunek kompasu</string>
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
     <string name="local_indexes_cat_srtm">Dane poziomic</string>
-    <string name="use_kalman_filter_compass_descr">Redukuj szumy w odczytach kompasu, ale zwiększa bezwładność</string>
-    <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
+    <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
+    <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie</string>
@@ -1322,7 +1322,7 @@
 	<string name="driving_region_us">Stany Zjednoczone</string>
 	<string name="driving_region_europe_asia">Europa i Azja</string>
 	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
-	<string name="driving_region_descr">Wybierz region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz inne</string>
+	<string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
 	<string name="driving_region">Region ruchu</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="map_widget_fps_info">Informacje diagnozowania błędów FPS</string>
@@ -1334,7 +1334,7 @@
     <string name="local_index_tile_data_name">Dane kafelkowe: %1$s</string>
     <string name="about_version">Wersja:</string>
     <string name="about_settings">Informacje</string>
-    <string name="about_settings_descr">Wyświetl informacje o wersji, licencji, współtwórcach</string>
+    <string name="about_settings_descr">Wyświetla informacje o wersji, licencji, współtwórcach</string>
     
     <string name="tip_map_styles">Style mapy</string>
 	<string name="edit_tilesource_url_to_load">Adres URL</string>
@@ -1541,7 +1541,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
     
     
-    <string name="speech_rate_descr">Określ tempo odtwarzania komunikatów głosowych TTS</string>
+    <string name="speech_rate_descr">Określa tempo odtwarzania komunikatów głosowych TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
     
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
@@ -1660,10 +1660,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_plugin_name">OsMo (Monitoring OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
-    <string name="keep_informing_descr">Powtarzaj instrukcje nawigacji w regularnych odstępach czasu</string>
+    <string name="keep_informing_descr">Powtarza instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzanie instrukcji</string>
 	<string name="arrival_distance">Powiadomienia osiągnięcia celu</string>
-    <string name="arrival_distance_descr">Określ moment powiadamiania o osiągnięciu celu</string>
+    <string name="arrival_distance_descr">Określa moment powiadamiania o osiągnięciu celu</string>
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
@@ -1721,7 +1721,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_session_id_share">Adres sesji, aby śledzić urządzenie (%1$s)</string>
     <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, kliknij w link %3$s lub określ identyfikator trackera (%1$s)</string>
     <string name="osmo_track_interval">Częstość rejestrowania położenia</string>
-	<string name="osmo_track_interval_descr">Wybierz tempo wysyłania bieżącego położenia</string>
+	<string name="osmo_track_interval_descr">Wybiera tempo wysyłania bieżącego położenia</string>
     <string name="int_days">dni</string>
     <string name="osmo_connect_menu">Połącz</string>
     <string name="osmo_expire_group">Wygasa za</string>
@@ -1912,7 +1912,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
-	<string name="speed_limit_exceed_message">Wybierz tolerancję ograniczenia prędkości, powyżej której zostanie użyte ostrzeżenie głosowe.</string>
+	<string name="speed_limit_exceed_message">Wybiera zakres tolerancji ograniczenia prędkości, powyżej którego zostanie użyte ostrzeżenie głosowe.</string>
 	<string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
@@ -1932,7 +1932,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włączanie ekranu</string>
-    <string name="wake_on_voice_descr">Włączaj ekran urządzenia podczas zbliżania się do miejsca manewru</string>
+    <string name="wake_on_voice_descr">Włącza ekran urządzenia podczas zbliżania się do zakrętu</string>
     
     <string name="impassable_road">Unikaj dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
@@ -1956,8 +1956,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="coordinates">Współrzędne</string>
 	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
-    <string name="use_opengl_render">Renderuj używając OpenGL</string>
-    <string name="use_opengl_render_descr">Używaj sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
+    <string name="use_opengl_render">Renderowanie OpenGL</string>
+    <string name="use_opengl_render_descr">Używa sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
     <string name="error_avoid_specific_road">Nie znaleziono objazdu</string>
     <string name="dash_download_msg_none">Pobrać mapy offline?</string>
     <string name="dash_download_msg">Pobrano %1$s map</string>
@@ -2026,7 +2026,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symuluj lokalizację</string>
     <string name="short_location_on_map">Szer %1$s↵\nDług %2$s</string>
-    <string name="tips_and_tricks_descr">Wyświetl najczęściej zadawane pytania, ostatnie zmiany i inne</string>
+    <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
     <string name="general_settings_2">Ustawienia ogólne</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -2058,14 +2058,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="points">Punkty</string>
     <string name="navigation_over_track">Rozpocząć nawigację wzdłuż trasy?</string>
 	<string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
-	<string name="enable_proxy_descr">Konfiguruj proxy HTTP dla wszystkich zapytań sieciowych</string>
-	<string name="proxy_host_descr">Podaj nazwę hosta proxy (np. 127.0.0.1)</string>
-	<string name="proxy_port_descr">Podaj numer portu proxy (np. 8118)</string>
+	<string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych</string>
+	<string name="proxy_host_descr">Ustala nazwę hosta proxy (np. 127.0.0.1)</string>
+	<string name="proxy_port_descr">Określa numer portu proxy (np. 8118)</string>
 	<string name="shared_string_release">Data wydania</string>
 	<string name="get_plugin">Pobierz</string>
 <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
-    <string name="delay_to_start_navigation_descr">Określ czas wyświetlania ekranu planowania trasy</string>
+    <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy</string>
     <string name="delay_to_start_navigation">Rozpocznij nawigację turn-by-turn za…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
@@ -2110,7 +2110,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikaj przekraczania granicy</string>
+    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określ wysokość pojazdu, jaka ma być dozwolone podczas nawigowania</string>
