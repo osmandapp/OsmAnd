@@ -152,7 +152,7 @@
 
 	<string name="poi_ford">Vado</string>
 	<string name="poi_mountain_pass_yes">Paso de montaña</string>
-	<string name="poi_gate">Puerta</string>
+	<string name="poi_gate">Portón</string>
 	<string name="poi_city_wall">Muralla de la ciudad</string>
 	<string name="poi_lift_gate">Barrera levadiza</string>
 	<string name="poi_toll_booth">Peaje</string>
@@ -613,7 +613,7 @@
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
 
-	<string name="poi_cafe">Café</string>
+	<string name="poi_cafe">Cafetería</string>
 	<string name="poi_biergarten">Terraza</string>
 	<string name="poi_restaurant">Restaurante</string>
 	<string name="poi_fast_food">Comida rápida</string>
@@ -855,14 +855,14 @@
 
 <string name="poi_cheese">Quesería</string>
 	<string name="poi_chocolate">Chocolatería</string>
-	<string name="poi_coffee">Cafetería</string>
+	<string name="poi_coffee">Tienda de café</string>
 	<string name="poi_pasta">Fábrica de pastas</string>
 	<string name="poi_pastry">Pastelería</string>
 	<string name="poi_furnace">Artículos de calefacción</string>
 	<string name="poi_garden_furniture">Almacén de jardinería</string>
 	<string name="poi_leather">Marroquinería</string>
 	<string name="poi_tyres">Gomería</string>
-	<string name="poi_watches">Relojería</string>
+	<string name="poi_watches">Relojería (watches)</string>
 	<string name="poi_games">Juegos</string>
 	<string name="poi_model">Modelos a escala</string>
 	<string name="poi_trophy">Trofeos, premios</string>
