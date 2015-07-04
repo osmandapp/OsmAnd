@@ -150,6 +150,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						req.setStringFilter(ctColor, p.get());
 					}
 				}
+				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty("currentTrackWidth");
+				if(p2 != null && p2.isSet()) {
+					RenderingRuleProperty ctWidth = rrs.PROPS.get("currentTrackWidth");
+					if(ctWidth != null) {
+						req.setStringFilter(ctWidth, p2.get());
+					}
+				}
 				String additional = "";
 				if (routePoints) {
 					additional = "routePoints=true";

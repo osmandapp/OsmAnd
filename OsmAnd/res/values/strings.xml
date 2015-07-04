@@ -9,6 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_currentTrackColor_name">Current GPX color</string>
+    <string name="rendering_value_red_name">Red</string>
+    <string name="rendering_value_orange_name">Orange</string>
+    <string name="rendering_value_brown_name">Brown</string>
+    <string name="rendering_value_yellow_name">Yellow</string>
+    <string name="rendering_value_lightgreen_name">Lightgreen</string>
+    <string name="rendering_value_green_name">Green</string>
+    <string name="rendering_value_lightblue_name">Lightblue</string>
+    <string name="rendering_value_blue_name">Blue</string>
+    <string name="rendering_value_purple_name">Purple</string>
     <string name="restart_is_required">In order to apply the changes, restart of the application is required.</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
