@@ -929,7 +929,7 @@
 	<string name="renderers_descr">Абярыце стыль адмалёўкі мапы</string>
 	<string name="poi_context_menu_website">Паказаць сайт POI</string>
 	<string name="poi_context_menu_call">Паказаць тэлефон POI</string>
-	<string name="download_type_to_filter">набярыце каб фільтраваць</string>
+	<string name="download_type_to_filter">фільтраваць</string>
 	<string name="use_high_res_maps">Дысплей высокай рэзалюцыі</string>
 	<string name="use_high_res_maps_descr">Не расьцягваць (з размыццём) фрагмэнты мапы на дысплеях з высокай шчыльнасьцю</string>
 	
@@ -2022,5 +2022,5 @@
     <string name="lang_bpy">бішнупрыя</string>
     <string name="lang_nv">наваха</string>
     <string name="lang_new">неварская</string>
-    <string name="restart_is_required">Каб ужыць зьмены, трэба перезапусьць прагарму.</string>
+    <string name="restart_is_required">Каб ужыць зьмены, трэба перезапусьць праграму.</string>
     </resources>
