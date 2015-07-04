@@ -114,7 +114,7 @@
 	<string name="poi_border_control">Прикордонний контроль</string>
 	<string name="poi_shop">Магазин</string>
 	<string name="poi_emergency">Аварійні служби</string>
-	<string name="poi_transportation">Транспорт</string>
+	<string name="poi_transportation">Транспортування</string>
 	<string name="poi_man_made">Споруди</string>
 	<string name="poi_education">Освіта</string>
 	<string name="poi_administrative">Адміністративні об’єкти</string>
@@ -151,7 +151,7 @@
 	<string name="poi_club">Клуб</string>
 	<string name="poi_cafe_and_restaurant">Кафе і ресторан</string>
 	<string name="poi_craft">Ремесло</string>
-	<string name="poi_seamark">Морські</string>
+	<string name="poi_seamark">Морський</string>
 	<string name="poi_wine">Винний магазин</string>
 
 	<string name="poi_charity">Благодійний магазин</string>
@@ -206,4 +206,63 @@
 	<string name="poi_fuel_lh2">Рідкий водень</string>
 	<string name="poi_fuel_electricity">Електроенергія</string>
 	<string name="poi_charging_station">Станція зарядки</string>
+	<string name="poi_vehicle_ramp">Рампа для перевірки машини</string>
+	<string name="poi_compressed_air">Стиснене повітря</string>
+	<string name="poi_parking">Стоянка</string>
+	<string name="poi_motorcycle_parking">Стоянка для мотоциклів</string>
+	<string name="poi_parking_entrance">В\'їзд на стоянку</string>
+	<string name="poi_garages">Гаражі</string>
+
+	<string name="poi_public_transport_platform">Зупинка громадського транспорту</string>
+	<string name="poi_public_transport_platform_bus">Автобусна зупинка</string>
+	<string name="poi_public_transport_platform_trolleybus">Тролейбусна зупинка</string>
+	<string name="poi_bus_stop">Автобусна зупинка</string>
+	<string name="poi_public_transport_stop_position">Щупинка громадського транспорту</string>
+	<string name="poi_public_transport_platform_tram">Трамвайна зупинка</string>
+	<string name="poi_tram_stop">Трамвайна зупинка</string>
+	<string name="poi_public_transport_station">Станція громадського транспорту</string>
+	<string name="poi_bus_station">Автобусна станція</string>
+	<string name="poi_railway_station">Залізничний вокзал</string>
+	<string name="poi_railway_platform">Залізнична платформа</string>
+	<string name="poi_transport_construction">Транспортна будівля</string>
+		<string name="poi_cheese">Магазин сирів</string>
+	<string name="poi_chocolate">Магазин шоколаду</string>
+	<string name="poi_coffee">Магазин кави</string>
+	<string name="poi_pasta">Магазин пасти</string>
+	<string name="poi_pastry">Кондитерський магазин</string>
+	<string name="poi_camera">Камери та лінзи</string>
+	<string name="poi_candles">Магазин свічок</string>
+	<string name="poi_fashion">Магазин моди</string>
+	<string name="poi_free_flying">Магазин для стрибків з парашутом</string>
+	<string name="poi_furnace">Магазин обігрівачів</string>
+	<string name="poi_garden_furniture">Магазин садових меблів</string>
+	<string name="poi_fuel_biogas">Біопаливо(Е85)</string>
+	<string name="poi_halt">Зупинка поїздів</string>
+	<string name="poi_railway_subway_entrance">Вхід в метро</string>
+	<string name="poi_subway_station">Станція метро</string>
+	<string name="poi_taxi">Стоянка таксі</string>
+
+	<string name="poi_aerodrome">Аеропорт</string>
+	<string name="poi_helipad">Майданчик для гелікоптера</string>
+	<string name="poi_runway">Злітна смуга</string>
+	<string name="poi_aeroway_terminal">Термінал</string>
+	<string name="poi_aeroway_gate">Ворота</string>
+
+	<string name="poi_bicycle_rental">Прокат велосипедів</string>
+	<string name="poi_bicycle_parking">Стоянка для велосипедів</string>
+
+	<string name="poi_aerialway_cable_car">Канатна дорога</string>
+	<string name="poi_aerialway_gondola">Гондола</string>
+	<string name="poi_aerialway_chair_lift">Підйом на сидінні</string>
+	<string name="poi_tunnel">Тунель</string>
+	<string name="poi_bridge">Міст</string>
+
+	<string name="poi_speed_camera">Камера контролю швидкості</string>
+	<string name="poi_turning_circle">Круговий рух</string>
+	<string name="poi_junction">З\'єднання</string>
+	<string name="poi_motorway_junction">Автобан</string>
+	<string name="poi_rest_area">Зона відпочинку</string>
+
+	<string name="poi_water_well">Криниця</string>
+	<string name="poi_standpipe">Напірна труба</string>
 	</resources>

@@ -2095,4 +2095,13 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="lang_lb">люксембургски</string>
     <string name="lang_eo">есперанто</string>
     <string name="lang_et">естонски</string>
+    <string name="lang_os">Осетински</string>
+    <string name="lang_es_ar">Аржентински испански</string>
+    <string name="lang_nb">Норвежки (Букмол)</string>
+    <string name="lang_vo">Волапюк</string>
+    <string name="lang_th">Тайски</string>
+    <string name="lang_nn">Норвежки (Нюношк)</string>
+    <string name="lang_ceb">Себуански</string>
+    <string name="lang_ms">Малайски</string>
+    <string name="lang_ht">Хаитянски</string>
     </resources>
