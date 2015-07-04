@@ -2076,4 +2076,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_nn">Norvégien</string>
     <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Voulez-vous archiver ces données ?</string>
     <string name="lang_te">Télougou</string>
+    <string name="restart_is_required">Afin de prendre en compte vos modifications, un redémarrage de l\'application est nécessaire.</string>
     </resources>
