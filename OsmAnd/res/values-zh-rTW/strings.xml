@@ -2039,4 +2039,5 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
+    <string name="restart_is_required">為了套用變更，必需重新啟動應用程式。</string>
     </resources>
