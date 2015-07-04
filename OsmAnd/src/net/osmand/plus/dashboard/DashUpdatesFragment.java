@@ -56,6 +56,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
 				// intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
+				closeDashboard();
 			}
 		});
 		return view;

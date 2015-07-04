@@ -37,6 +37,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		@Override
 		public void onClick(View view) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+			closeDashboard();
 		}
 	};
 	}
@@ -48,6 +49,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 				Intent intent = new Intent(getActivity(), PluginActivity.class);
 				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 				startActivity(intent);
+				closeDashboard();
 			}
 		};
 	}
@@ -61,6 +63,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
+				closeDashboard();
 			}
 		});
 		initPlugins();

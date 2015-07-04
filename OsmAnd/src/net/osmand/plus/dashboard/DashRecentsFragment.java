@@ -52,6 +52,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
 				activity.startActivity(search);
+				closeDashboard();
 			}
 		});
 		return view;

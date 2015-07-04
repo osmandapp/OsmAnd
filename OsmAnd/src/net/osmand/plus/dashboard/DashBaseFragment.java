@@ -43,6 +43,10 @@ public abstract class DashBaseFragment extends Fragment {
 		onCloseDash();
 	}
 	
+	public void closeDashboard() {
+		dashboard.hideDashboard(false);
+	}
+	
 	@Override
 	public final void onResume() {
 		// use on open update

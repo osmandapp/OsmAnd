@@ -46,6 +46,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			@Override
 			public void onClick(View view) {
 				startFavoritesActivity(R.string.osm_edits);
+				closeDashboard();
 			}
 		});
 

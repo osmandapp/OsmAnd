@@ -60,6 +60,7 @@ public class DashTrackFragment extends DashBaseFragment {
 				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
+				closeDashboard();
 			}
 		});
 		return view;
