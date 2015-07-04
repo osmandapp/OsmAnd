@@ -446,8 +446,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		return true;
 	}
 	
-	
-
 	private void warnAboutChangingStorage(final String newValue) {
 		String newDir = newValue != null ? newValue.trim() : newValue;
 		if(!newDir.replace('/', ' ').trim().

@@ -190,11 +190,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		return app.getString(R.string.route_plugin_name);
 	}
 
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {

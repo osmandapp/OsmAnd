@@ -82,6 +82,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateReg(calculateTextState(), reg);
 	}
 	
+	public void removeSideWidget(TextInfoWidget widget) {
+		mapInfoControls.removeSideWidgetInternal(widget);
+	}
+	
 	public void registerAllControls(){
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
@@ -298,6 +302,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		return defValue;
 	}
+
+	
 
 
 	

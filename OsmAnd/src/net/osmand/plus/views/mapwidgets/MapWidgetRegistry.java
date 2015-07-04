@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -89,6 +90,24 @@ public class MapWidgetRegistry {
 			}
 		}
 	}
+	
+	
+	public void removeSideWidgetInternal(TextInfoWidget widget) {
+		Iterator<MapWidgetRegInfo> it = left.iterator();
+		while (it.hasNext()) {
+			if (it.next().widget == widget) {
+				it.remove();
+			}
+		}
+		it = right.iterator();
+		while (it.hasNext()) {
+			if (it.next().widget == widget) {
+				it.remove();
+			}
+		}
+	}
+	
+	
 	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableMenu, 
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,  

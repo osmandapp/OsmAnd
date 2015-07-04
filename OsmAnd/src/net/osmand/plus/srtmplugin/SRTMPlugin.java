@@ -29,6 +29,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		this.app = app;
+		HILLSHADE = app.getSettings().registerBooleanPreference("hillshade_layer", true);
 	}
 	
 	@Override
@@ -54,7 +55,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(final OsmandApplication app, Activity activity) {
-		HILLSHADE = app.getSettings().registerBooleanPreference("hillshade_layer", true);
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
 		if(pref.get().equals("")) {

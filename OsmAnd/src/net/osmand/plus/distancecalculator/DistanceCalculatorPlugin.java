@@ -97,8 +97,23 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(isActive()) {
+			if(!mapView.isLayerVisible(distanceCalculatorLayer)) {
+				activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
+			}
+			registerWidget(activity);
+		} else {
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if(distanceCalculatorLayer != null) {
+				activity.getMapView().removeLayer(distanceCalculatorLayer);
+			}
+			if (mapInfoLayer != null && distanceControl != null ) {
+				mapInfoLayer.removeSideWidget(distanceControl);
+				mapInfoLayer.recreateControls();
+				distanceControl = null;
+			}
+		}
 	}
 
 	@Override
