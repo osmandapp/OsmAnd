@@ -438,17 +438,29 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		} else if (id.equals(settings.PREFERRED_LOCALE.getId())) {
 			// restart application to update locale
 			getMyApplication().checkPreferredLocale();
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
+			restartApp();
 		} else if (id.equals(settings.OSMAND_THEME.getId())) {
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
+			restartApp();
 		} else {
 			updateAllSettings();
 		}
 		return true;
+	}
+
+
+
+	private void restartApp() {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setMessage(R.string.restart_is_required);
+		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = getIntent();
+				finish();
+				startActivity(intent);				
+			}
+		});
 	}
 
 
