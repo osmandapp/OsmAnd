@@ -144,12 +144,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return true;
 	}
 
-
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-
 	@Override
 	public String getId() {
 		return ID;

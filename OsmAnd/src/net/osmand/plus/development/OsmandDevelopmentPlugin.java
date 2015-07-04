@@ -4,16 +4,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.Activity;
-import android.content.Intent;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
@@ -25,10 +20,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		//ApplicationMode.regWidget("fps", new ApplicationMode[0]);
 	}
 	
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
 	
 	@Override
 	public String getId() {

@@ -97,11 +97,6 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-	
-	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(isActive()) {
 			if(!mapView.isLayerVisible(distanceCalculatorLayer)) {

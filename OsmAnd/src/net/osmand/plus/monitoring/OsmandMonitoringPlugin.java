@@ -54,6 +54,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidget("monitoring", am.toArray(new ApplicationMode[am.size()]));
+		settings = app.getSettings();
 	}
 	
 	@Override
@@ -69,12 +70,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.trip_recording;
-	}
-
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		settings = app.getSettings();
-		return true;
 	}
 
 	@Override

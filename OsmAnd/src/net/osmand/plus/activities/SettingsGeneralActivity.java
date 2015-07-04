@@ -461,6 +461,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				startActivity(intent);				
 			}
 		});
+		bld.show();
 	}
 
 

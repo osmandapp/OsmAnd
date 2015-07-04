@@ -64,9 +64,10 @@ public abstract class OsmandPlugin {
 	
 	/**
 	 * Initialize plugin runs just after creation
-	 * @param activity TODO
 	 */
-	public abstract boolean init(OsmandApplication app, Activity activity);
+	public boolean init(OsmandApplication app, Activity activity) {
+		return true;
+	}
 	
 	public void setActive(boolean active) {
 		this.active = active;

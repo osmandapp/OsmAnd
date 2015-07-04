@@ -63,12 +63,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;
-	}
-	
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
 		settings = app.getSettings();
-		return true;
 	}
 	
 	private OsmBugsLayer osmBugsLayer;
