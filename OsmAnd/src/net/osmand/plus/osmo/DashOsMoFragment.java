@@ -362,6 +362,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private void launchOsMoGroupsActivity() {
 		Intent intent = new Intent(getActivity(), OsMoGroupsActivity.class);
 		getActivity().startActivity(intent);
+		closeDashboard();
 	}
 
 	@Override

@@ -40,6 +40,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			@Override
 			public void onClick(View view) {
 				startFavoritesActivity(FavoritesActivity.FAV_TAB);
+				closeDashboard();
 			}
 		});
 		return view;

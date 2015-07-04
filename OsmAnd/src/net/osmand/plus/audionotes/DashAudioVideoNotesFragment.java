@@ -9,7 +9,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +38,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			@Override
 			public void onClick(View view) {
 				startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
+				closeDashboard();
 			}
 		});
 		return view;
