@@ -2067,4 +2067,5 @@
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="restart_is_required">For at anvende ændringerne, er genstart af programmet nødvendigt.</string>
     </resources>
