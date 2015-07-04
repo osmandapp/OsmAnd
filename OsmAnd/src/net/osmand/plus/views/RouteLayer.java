@@ -104,6 +104,9 @@ public class RouteLayer extends OsmandMapLayer {
 		initUI();
 	}
 
+	public void updateLayerStyle() {
+		cachedHash = -1;
+	}
 	
 	private void updatePaints(DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
@@ -501,6 +504,9 @@ public class RouteLayer extends OsmandMapLayer {
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
+
+
+	
 
 
 

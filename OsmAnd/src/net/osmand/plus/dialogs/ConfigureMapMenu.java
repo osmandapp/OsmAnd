@@ -24,7 +24,9 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import gnu.trove.list.array.TIntArrayList;
 import net.osmand.core.android.MapRendererContext;
@@ -191,6 +193,14 @@ public class ConfigureMapMenu {
 	protected void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
 		activity.updateMapSettings();
+		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);
+		if(gpx != null) {
+			gpx.updateLayerStyle();
+		}
+		RouteLayer rte = activity.getMapView().getLayerByClass(RouteLayer.class);
+		if(rte != null) {
+			rte.updateLayerStyle();
+		}
 		activity.getMapView().refreshMap(true);
 	}
 	
