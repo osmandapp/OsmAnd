@@ -2068,4 +2068,21 @@
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
     <string name="restart_is_required">For at anvende ændringerne, er genstart af programmet nødvendigt.</string>
+    <string name="rendering_attr_currentTrackColor_name">Áktuel GPX farve</string>
+    <string name="rendering_attr_currentTrackWidth_name">Aktuel GPX bredde</string>
+    <string name="rendering_value_red_name">Rød</string>
+    <string name="rendering_value_translucent_red_name">Gennemsigtig rød</string>
+    <string name="rendering_value_translucent_orange_name">Gennemsigtigt orange</string>
+    <string name="rendering_value_yellow_name">Gul</string>
+    <string name="rendering_value_translucent_yellow_name">Gennemsigtigt gul</string>
+    <string name="rendering_value_lightgreen_name">Lysegrøn</string>
+    <string name="rendering_value_translucent_lightgreen_name">Gennemsigtig lysegrøn</string>
+    <string name="rendering_value_green_name">Grøn</string>
+    <string name="rendering_value_translucent_green_name">Gennemsigtig grøn</string>
+    <string name="rendering_value_lightblue_name">Lyseblå</string>
+    <string name="rendering_value_translucent_lightblue_name">Gennemsigtig lyseblå</string>
+    <string name="rendering_value_blue_name">Blå</string>
+    <string name="rendering_value_translucent_blue_name">Gennemsigtig blå</string>
+    <string name="rendering_value_purple_name">Lilla</string>
+    <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
     </resources>
