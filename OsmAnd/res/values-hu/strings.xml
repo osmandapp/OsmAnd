@@ -2002,4 +2002,19 @@
     <string name="lang_lb">Luxemburgi</string>
     <string name="lang_os">Oszét</string>
     <string name="lang_eo">Eszperantó</string>
+    <string name="rendering_value_translucent_red_name">Átlátszó piros</string>
+    <string name="rendering_value_translucent_orange_name">Átlátszó narancs</string>
+    <string name="rendering_value_yellow_name">Sárga</string>
+    <string name="rendering_value_translucent_yellow_name">Átlátszó sárga</string>
+    <string name="rendering_value_lightgreen_name">Világoszöld</string>
+    <string name="rendering_value_translucent_lightgreen_name">Átlátszó világoszöld</string>
+    <string name="rendering_value_green_name">Zöld</string>
+    <string name="rendering_value_translucent_green_name">Átlátszó zöld</string>
+    <string name="rendering_value_lightblue_name">Világoskék</string>
+    <string name="rendering_value_translucent_lightblue_name">Átlátszó világoskék</string>
+    <string name="rendering_value_blue_name">Kék</string>
+    <string name="rendering_value_translucent_blue_name">Átlátszó kék</string>
+    <string name="rendering_value_purple_name">Lila</string>
+    <string name="rendering_value_translucent_purple_name">Átlátszó lila</string>
+    <string name="restart_is_required">A módosítások érvénybe lépéséhez újra kell indítani az alkalmazást.</string>
     </resources>
