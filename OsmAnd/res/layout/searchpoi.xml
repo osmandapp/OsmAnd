@@ -36,6 +36,8 @@
             android:layout_marginRight="@dimen/list_content_padding"
             android:layout_weight="1"
             android:maxLines="1"
+            android:singleLine="true"
+            android:lines="1"
             android:nextFocusLeft="@id/edit"
             android:nextFocusUp="@id/edit"
             android:textColor="?android:textColorPrimary"
