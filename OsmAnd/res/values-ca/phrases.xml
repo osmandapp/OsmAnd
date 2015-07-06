@@ -851,4 +851,9 @@
 	<string name="poi_candles">Cereria</string>
 	<string name="poi_leather">Pelleteria</string>
 	<string name="poi_watches">Rellotgeria</string>
+	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_entrance_main">Entrada principal</string>
+	<string name="poi_entrance">Entrada</string>
+	<string name="poi_entrance_exit">Sortida</string>
+
 	</resources>
