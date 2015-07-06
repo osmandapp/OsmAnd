@@ -1643,7 +1643,7 @@
     <string name="local_index_description">Pritisnite na katerokoli predmet za prikaz podrobnosti, za izbris ali izklop, pritisk na predmetu zadržite. Na napravi je na voljo še %1$s:</string>
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Prosojnica s simboli za pohodništvo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Prekrivna plast s simboli za pohodništvo</string>
     
     <string name="impassable_road">Izogni se cestam …</string>
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
@@ -1910,4 +1910,21 @@
     <string name="lang_lb">Luksemburščina</string>
     <string name="lang_os">Osetijščina</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="rendering_attr_currentTrackColor_name">Trenutna barva poti GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Širina poti GPX</string>
+    <string name="rendering_value_red_name">Rdeča</string>
+    <string name="rendering_value_translucent_red_name">Prosojna rdeča</string>
+    <string name="rendering_value_translucent_orange_name">Prosojna oranžna</string>
+    <string name="rendering_value_yellow_name">Rumena</string>
+    <string name="rendering_value_translucent_yellow_name">Prosojna rumena</string>
+    <string name="rendering_value_lightgreen_name">Svetlozelena</string>
+    <string name="rendering_value_translucent_lightgreen_name">Prosojna svetlozelena</string>
+    <string name="rendering_value_translucent_green_name">Prosojna zelena</string>
+    <string name="rendering_value_lightblue_name">Svetlomodra</string>
+    <string name="rendering_value_translucent_lightblue_name">Prosojna svetlomodra</string>
+    <string name="rendering_value_blue_name">Modra</string>
+    <string name="rendering_value_translucent_blue_name">Prosojna modra</string>
+    <string name="rendering_value_purple_name">Škrlatna</string>
+    <string name="rendering_value_translucent_purple_name">Prosojna škrlatna</string>
+    <string name="restart_is_required">Za uveljavitev sprememb je treba ponovno zagnati program.</string>
     </resources>
