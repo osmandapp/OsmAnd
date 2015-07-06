@@ -2194,4 +2194,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="lang_te">Телугу</string>
     <string name="lang_nn">Норвезька (Нюнорськ)</string>
     <string name="lang_new">Невар / непал-бхаса</string>
+    <string name="lang_ms">Малазійська</string>
+    <string name="lang_ht">Гаїтянська</string>
+    <string name="lang_gl">Галійська</string>
+    <string name="lang_et">Естонська</string>
+    <string name="lang_ceb">Себуанська</string>
+    <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні данні з Вікіпедії, Ви хочете їх заархівувати?</string>
+    <string name="download_wikipedia_files">Ви хочете завантажити додаткові дані з Вікіпедії (%1$s Мб) ?</string>
+    <string name="gps_network_not_enabled">Сервіс локації вимкнений. Бажаєте його ввімкнути?</string>
     </resources>
