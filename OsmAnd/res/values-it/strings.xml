@@ -2102,4 +2102,21 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estone</string>
     <string name="lang_ceb">Cebuano</string>
+    <string name="rendering_attr_currentTrackColor_name">Colore traccia GPX attuale</string>
+    <string name="rendering_attr_currentTrackWidth_name">Spessore traccia GPX corrente</string>
+    <string name="rendering_value_translucent_red_name">Rosso traslucido</string>
+    <string name="rendering_value_translucent_orange_name">Arancione traslucido</string>
+    <string name="rendering_value_yellow_name">Giallo</string>
+    <string name="rendering_value_translucent_yellow_name">Giallo traslucido</string>
+    <string name="rendering_value_lightgreen_name">Verde chiaro</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verde chiaro traslucido</string>
+    <string name="rendering_value_green_name">Verde</string>
+    <string name="rendering_value_translucent_green_name">Verde traslucido</string>
+    <string name="rendering_value_lightblue_name">Blu chiaro</string>
+    <string name="rendering_value_translucent_lightblue_name">Blu chiaro traslucido</string>
+    <string name="rendering_value_blue_name">Blu</string>
+    <string name="rendering_value_translucent_blue_name">Blu traslucido</string>
+    <string name="rendering_value_purple_name">Porpora</string>
+    <string name="rendering_value_translucent_purple_name">Porpora traslucido</string>
+    <string name="restart_is_required">Per applicare i cambiamenti riavvia l\'app se richiesto.</string>
     </resources>

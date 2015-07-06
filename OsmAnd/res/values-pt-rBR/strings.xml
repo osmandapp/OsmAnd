@@ -1752,4 +1752,21 @@
     <string name="lang_os">Osseta</string>
     <string name="lang_eo">Esperanto</string>
     <string name="restart_is_required">Para aplicar as alterações, é necessário reiniciar o aplicativo.</string>
+    <string name="rendering_attr_currentTrackColor_name">Cor atual do GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largura atual do GPX</string>
+    <string name="rendering_value_red_name">Vermelho</string>
+    <string name="rendering_value_translucent_red_name">Vermelho translúcido</string>
+    <string name="rendering_value_translucent_orange_name">Laranja translúcido</string>
+    <string name="rendering_value_yellow_name">Amarelo</string>
+    <string name="rendering_value_translucent_yellow_name">Amarelo translúcido</string>
+    <string name="rendering_value_lightgreen_name">Verde claro</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verde claro translúcido</string>
+    <string name="rendering_value_green_name">Verde</string>
+    <string name="rendering_value_translucent_green_name">Verde translúcido</string>
+    <string name="rendering_value_lightblue_name">Azul claro</string>
+    <string name="rendering_value_translucent_lightblue_name">Azul claro translúcido</string>
+    <string name="rendering_value_blue_name">Azul</string>
+    <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
+    <string name="rendering_value_purple_name">Roxo</string>
+    <string name="rendering_value_translucent_purple_name">Roxo translúcido</string>
     </resources>
