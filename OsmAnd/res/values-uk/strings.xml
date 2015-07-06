@@ -2202,4 +2202,19 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні данні з Вікіпедії, Ви хочете їх заархівувати?</string>
     <string name="download_wikipedia_files">Ви хочете завантажити додаткові дані з Вікіпедії (%1$s Мб) ?</string>
     <string name="gps_network_not_enabled">Сервіс локації вимкнений. Бажаєте його ввімкнути?</string>
+    <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
+    <string name="disable_recording_once_app_killed_descrp">Логування GPX буде призупинено коли додаток закрити (через недавні додатки). (Індикатор сну OsmAnd зникне з панелі сповіщень Android\'а)</string>
+    <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
+    <string name="read_full_article">Читати повну статтю (онлайн)</string>
+    <string name="download_wikipedia_item">Вікіпедія</string>
+    <string name="local_indexes_cat_wiki">Вікіпедія</string>
+    <string name="shared_string_show_details">Показати деталі</string>
+    <string name="osm_edit_context_menu_delete">Видалити OSM редагування</string>
+    <string name="rendering_value_disabled_name">Вимкнено</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Розмальовування відповідно до області маршруту</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно до OSMC</string>
+    <string name="osmo_share_my_location">Поділитися моїм місцезнаходженням</string>
+    <string name="shared_string_logoff">Вийти</string>
+    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d записів. Ви впевнені?</string>
+	<string name="download_wikipedia_maps">Вікіпедія</string>
     </resources>
