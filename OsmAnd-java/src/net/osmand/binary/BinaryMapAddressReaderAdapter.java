@@ -56,6 +56,10 @@ public class BinaryMapAddressReaderAdapter {
 			return cities;
 		}
 		
+		public List<String> getAttributeTagsTable() {
+			return attributeTagsTable;
+		}
+		
 		public int getIndexNameOffset() {
 			return indexNameOffset;
 		}
