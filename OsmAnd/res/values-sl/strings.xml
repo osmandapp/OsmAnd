@@ -1643,7 +1643,7 @@
     <string name="local_index_description">Pritisnite na katerokoli predmet za prikaz podrobnosti, za izbris ali izklop, pritisk na predmetu zadržite. Na napravi je na voljo še %1$s:</string>
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Prosojnica s simboli za pohodništvo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Prekrivna plast s simboli za pohodništvo</string>
     
     <string name="impassable_road">Izogni se cestam …</string>
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
