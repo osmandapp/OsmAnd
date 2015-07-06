@@ -21,6 +21,8 @@ public class RouteDataObject {
 	public int[] pointsY;
 	public long[] restrictions;
 	public int[][] pointTypes;
+	public String[][] pointNames;
+	public int[][] pointNameTypes;
 	public long id;
 	public TIntObjectHashMap<String> names;
 	public final static float NONE_MAX_SPEED = 40f;
@@ -47,6 +49,8 @@ public class RouteDataObject {
 		this.names = copy.names;
 		this.restrictions = copy.restrictions;
 		this.pointTypes = copy.pointTypes;
+		this.pointNames = copy.pointNames;
+		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
 	}
 
@@ -171,8 +175,23 @@ public class RouteDataObject {
 				pointTypes[i] = opointTypes[i - 1];
 			}
 		}
-
 	}
+	
+	public String[] getPointNames(int ind) {
+		if (pointNames == null || ind >= pointNames.length) {
+			return null;
+		}
+		return pointNames[ind];
+	}
+	
+	public int[] getPointNameTypes(int ind) {
+		if (pointNameTypes == null || ind >= pointNameTypes.length) {
+			return null;
+		}
+		return pointNameTypes[ind];
+	}
+	
+	
 
 	public int[] getPointTypes(int ind) {
 		if (pointTypes == null || ind >= pointTypes.length) {

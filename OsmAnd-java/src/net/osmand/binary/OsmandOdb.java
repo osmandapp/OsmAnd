@@ -20555,6 +20555,13 @@ public final class OsmandOdb {
     public boolean hasPointTypes() { return hasPointTypes; }
     public com.google.protobuf.ByteString getPointTypes() { return pointTypes_; }
     
+    // optional bytes pointNames = 5;
+    public static final int POINTNAMES_FIELD_NUMBER = 5;
+    private boolean hasPointNames;
+    private com.google.protobuf.ByteString pointNames_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasPointNames() { return hasPointNames; }
+    public com.google.protobuf.ByteString getPointNames() { return pointNames_; }
+    
     // required bytes types = 7;
     public static final int TYPES_FIELD_NUMBER = 7;
     private boolean hasTypes;
@@ -20594,6 +20601,9 @@ public final class OsmandOdb {
       if (hasPointTypes()) {
         output.writeBytes(4, getPointTypes());
       }
+      if (hasPointNames()) {
+        output.writeBytes(5, getPointNames());
+      }
       if (hasTypes()) {
         output.writeBytes(7, getTypes());
       }
@@ -20619,6 +20629,10 @@ public final class OsmandOdb {
       if (hasPointTypes()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getPointTypes());
+      }
+      if (hasPointNames()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getPointNames());
       }
       if (hasTypes()) {
         size += com.google.protobuf.CodedOutputStream
@@ -20796,6 +20810,9 @@ public final class OsmandOdb {
         if (other.hasPointTypes()) {
           setPointTypes(other.getPointTypes());
         }
+        if (other.hasPointNames()) {
+          setPointNames(other.getPointNames());
+        }
         if (other.hasTypes()) {
           setTypes(other.getTypes());
         }
@@ -20836,6 +20853,10 @@ public final class OsmandOdb {
             }
             case 34: {
               setPointTypes(input.readBytes());
+              break;
+            }
+            case 42: {
+              setPointNames(input.readBytes());
               break;
             }
             case 58: {
@@ -20894,6 +20915,27 @@ public final class OsmandOdb {
       public Builder clearPointTypes() {
         result.hasPointTypes = false;
         result.pointTypes_ = getDefaultInstance().getPointTypes();
+        return this;
+      }
+      
+      // optional bytes pointNames = 5;
+      public boolean hasPointNames() {
+        return result.hasPointNames();
+      }
+      public com.google.protobuf.ByteString getPointNames() {
+        return result.getPointNames();
+      }
+      public Builder setPointNames(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasPointNames = true;
+        result.pointNames_ = value;
+        return this;
+      }
+      public Builder clearPointNames() {
+        result.hasPointNames = false;
+        result.pointNames_ = getDefaultInstance().getPointNames();
         return this;
       }
       
@@ -23440,28 +23482,28 @@ public final class OsmandOdb {
       "ries\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032\n\007IdTabl" +
       "e\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n" +
       "\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n" +
-      "\003via\030\004 \001(\005\"d\n\tRouteData\022\016\n\006points\030\001 \002(\014\022" +
-      "\022\n\npointTypes\030\004 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007ro" +
-      "uteId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022Osm" +
-      "AndRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002" +
-      " \003(\01320.OsmAnd.OBF.OsmAndRoutingIndex.Rou" +
-      "teEncodingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmA",
-      "nd.OBF.OsmAndRoutingIndex.RouteDataBox\022A" +
-      "\n\014basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAnd" +
-      "RoutingIndex.RouteDataBox\022=\n\006blocks\030\005 \003(" +
-      "\0132-.OsmAnd.OBF.OsmAndRoutingIndex.RouteD" +
-      "ataBlock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002" +
-      "(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteD" +
-      "ataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003t" +
-      "op\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030" +
-      "\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAnd" +
-      "RoutingIndex.RouteDataBox\032\303\001\n\016RouteDataB",
-      "lock\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTab" +
-      "le\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF.Rou" +
-      "teData\0221\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OB" +
-      "F.RestrictionData\022,\n\013stringTable\030\010 \001(\0132\027" +
-      ".OsmAnd.OBF.StringTableB\036\n\021net.osmand.bi" +
-      "naryB\tOsmandOdb"
+      "\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022" +
+      "\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022" +
+      "\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013strin" +
+      "gNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004n" +
+      "ame\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.Os" +
+      "mAndRoutingIndex.RouteEncodingRule\022>\n\tro",
+      "otBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRouting" +
+      "Index.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\013" +
+      "2+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDa" +
+      "taBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAn" +
+      "dRoutingIndex.RouteDataBlock\032;\n\021RouteEnc" +
+      "odingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n" +
+      "\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021" +
+      "\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004" +
+      " \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\013" +
+      "2+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDa",
+      "taBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(" +
+      "\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 " +
+      "\003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restrictio" +
+      "ns\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n" +
+      "\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTa" +
+      "bleB\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -23785,7 +23827,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_RouteData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_RouteData_descriptor,
-              new java.lang.String[] { "Points", "PointTypes", "Types", "RouteId", "StringNames", },
+              new java.lang.String[] { "Points", "PointTypes", "PointNames", "Types", "RouteId", "StringNames", },
               net.osmand.binary.OsmandOdb.RouteData.class,
               net.osmand.binary.OsmandOdb.RouteData.Builder.class);
           internal_static_OsmAnd_OBF_OsmAndRoutingIndex_descriptor =

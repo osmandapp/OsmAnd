@@ -392,6 +392,7 @@ public class BinaryMapRouteReaderAdapter {
 		TIntArrayList pointsY = new TIntArrayList();
 		TIntArrayList types = new TIntArrayList();
 		List<TIntArrayList> globalpointTypes = new ArrayList<TIntArrayList>();
+		List<TIntArrayList> globalpointNames = new ArrayList<TIntArrayList>();
 		while (true) {
 			int ts = codedIS.readTag();
 			int tags = WireFormat.getTagFieldNumber(ts);
@@ -400,12 +401,27 @@ public class BinaryMapRouteReaderAdapter {
 				o.pointsX = pointsX.toArray();
 				o.pointsY = pointsY.toArray();
 				o.types = types.toArray();
-				if(globalpointTypes.size() > 0){
+				if (globalpointTypes.size() > 0) {
 					o.pointTypes = new int[globalpointTypes.size()][];
-					for(int k=0; k<o.pointTypes.length; k++) {
+					for (int k = 0; k < o.pointTypes.length; k++) {
 						TIntArrayList l = globalpointTypes.get(k);
-						if(l != null) {
+						if (l != null) {
 							o.pointTypes[k] = l.toArray();
+						}
+					}
+				}
+				if (globalpointNames.size() > 0) {
+					o.pointNames = new String[globalpointNames.size()][];
+					o.pointNameTypes = new int[globalpointNames.size()][];
+					for (int k = 0; k < o.pointNames.length; k++) {
+						TIntArrayList l = globalpointNames.get(k);
+						if (l != null) {
+							o.pointNameTypes[k] = new int[l.size() / 2];
+							o.pointNames[k] = new String[l.size() / 2];
+							for (int ik = 0; ik < l.size(); ik += 2) {
+								o.pointNameTypes[k][ik / 2] = l.get(ik);
+								o.pointNames[k][ik / 2] = ((char) l.get(ik + 1)) + "";
+							}
 						}
 					}
 				}
@@ -441,6 +457,25 @@ public class BinaryMapRouteReaderAdapter {
 					pointsY.add(y << SHIFT_COORDINATES);
 					px = x;
 					py = y;
+				}
+				codedIS.popLimit(oldLimit);
+				break;
+			case RouteData.POINTNAMES_FIELD_NUMBER:
+				len = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(len);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					int pointInd = codedIS.readRawVarint32();
+					int pointNameType = codedIS.readRawVarint32();
+					int nameInd = codedIS.readRawVarint32();
+					while (pointInd >= globalpointNames.size()) {
+						globalpointNames.add(null);
+					}
+					if(globalpointNames.get(pointInd)== null) {
+						TIntArrayList pointTypes = new TIntArrayList();
+						globalpointNames.set(pointInd, pointTypes);
+					}
+					globalpointNames.get(pointInd).add(pointNameType);
+					globalpointNames.get(pointInd).add(nameInd);
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -505,6 +540,15 @@ public class BinaryMapRouteReaderAdapter {
 							int[] keys = o.names.keys();
 							for (int j = 0; j < keys.length; j++) {
 								o.names.put(keys[j], stringTable.get(o.names.get(keys[j]).charAt(0)));
+							}
+						}
+						if (o.pointNames != null && stringTable != null) {
+							for(String[] ar : o.pointNames) {
+								if(ar != null) {
+									for(int j = 0; j < ar.length; j++) {
+										ar[j] = stringTable.get(ar[j].charAt(0));
+									}
+								}
 							}
 						}
 					}

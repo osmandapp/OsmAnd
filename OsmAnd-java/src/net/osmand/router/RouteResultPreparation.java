@@ -337,11 +337,25 @@ public class RouteResultPreparation {
 		boolean plus = res.getStartPointIndex() < res.getEndPointIndex();
 		for(int k = res.getStartPointIndex(); k != res.getEndPointIndex(); ) {
 			int[] tp = res.getObject().getPointTypes(k);
-			if(tp != null) {
-				for(int t = 0; t < tp.length; t++) {
-					RouteTypeRule rr = res.getObject().region.quickGetEncodingRule(tp[t]);
-					println("\t<point tag=\""+rr.getTag()+"\"" + " value=\""+rr.getValue()+"\"/>");
+			String[] pointNames = res.getObject().getPointNames(k);
+			int[] pointNameTypes = res.getObject().getPointNameTypes(k);
+			if (tp != null || pointNameTypes != null) {
+				StringBuilder bld = new StringBuilder();
+				bld.append("<point ");
+				if (tp != null) {
+					for (int t = 0; t < tp.length; t++) {
+						RouteTypeRule rr = res.getObject().region.quickGetEncodingRule(tp[t]);
+						bld.append(" " + rr.getTag() + "=\"" + rr.getValue() + "\"");
+					}
 				}
+				if (pointNameTypes != null) {
+					for (int t = 0; t < pointNameTypes.length; t++) {
+						RouteTypeRule rr = res.getObject().region.quickGetEncodingRule(pointNameTypes[t]);
+						bld.append(" " + rr.getTag() + "=\"" + pointNames[t] + "\"");
+					}
+				}
+				bld.append("/>");
+				println("\t"+bld.toString());
 			}
 			if(plus) {
 				k++;
