@@ -2052,4 +2052,22 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_nv">Navaho</string>
     <string name="lang_ml">Malaiàlam</string>
     <string name="lang_os">Osseta</string>
+    <string name="rendering_attr_currentTrackColor_name">Color GPX actual</string>
+    <string name="rendering_attr_currentTrackWidth_name">Amplada GPX actual</string>
+    <string name="rendering_value_red_name">Vermell</string>
+    <string name="rendering_value_translucent_red_name">Vermell translúcid</string>
+    <string name="rendering_value_translucent_orange_name">Taronja translúcid</string>
+    <string name="rendering_value_yellow_name">Groc</string>
+    <string name="rendering_value_translucent_yellow_name">Groc translúcid</string>
+    <string name="rendering_value_lightgreen_name">Verd clar</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verd clar translúcid</string>
+    <string name="rendering_value_green_name">Verd</string>
+    <string name="rendering_value_translucent_green_name">Verd translúcid</string>
+    <string name="rendering_value_lightblue_name">Blau cel</string>
+    <string name="rendering_value_translucent_lightblue_name">Blau cel translúcid</string>
+    <string name="rendering_value_blue_name">Blau</string>
+    <string name="rendering_value_translucent_blue_name">Blau translúcid</string>
+    <string name="rendering_value_purple_name">Porpra</string>
+    <string name="rendering_value_translucent_purple_name">Porpra translúcid</string>
+    <string name="restart_is_required">Per aplicar els canvis, cal que reinicieu l\'aplicació.</string>
     </resources>
