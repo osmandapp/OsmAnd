@@ -861,4 +861,9 @@
 	<string name="poi_leather">Галянтарэя</string>
 	<string name="poi_swimming_pool_shop">Тавары для басэйна</string>
 	<string name="poi_model">Мадэлістам</string>
+	<string name="poi_fashion">Крама моды</string>
+	<string name="poi_furnace">Крама абагравальнікаў</string>
+	<string name="poi_scuba_diving_shop">Крама для плаваньня з маскамі</string>
+	<string name="poi_trophy">Узнагароды, прызы</string>
+	<string name="poi_height_restrictor">Абмежавальнік вышыні</string>
 	</resources>

@@ -2216,4 +2216,21 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_lb">Luxembursky</string>
     <string name="lang_os">Osetsky</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="rendering_attr_currentTrackColor_name">Súčasná farba GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Súčasná šírka GPX</string>
+    <string name="rendering_value_red_name">Červená</string>
+    <string name="rendering_value_translucent_red_name">Priehľadná červená</string>
+    <string name="rendering_value_translucent_orange_name">Priehľadná oranžová</string>
+    <string name="rendering_value_yellow_name">Žltá</string>
+    <string name="rendering_value_translucent_yellow_name">Priehľadná žltá</string>
+    <string name="rendering_value_lightgreen_name">Svetlozelená</string>
+    <string name="rendering_value_translucent_lightgreen_name">Priehľadná svetlozelená</string>
+    <string name="rendering_value_green_name">Zelená</string>
+    <string name="rendering_value_translucent_green_name">Priehľadná zelená</string>
+    <string name="rendering_value_lightblue_name">Svetlomodrá</string>
+    <string name="rendering_value_translucent_lightblue_name">Priehľadná svetlomodrá</string>
+    <string name="rendering_value_blue_name">Modrá</string>
+    <string name="rendering_value_purple_name">Fialová</string>
+    <string name="rendering_value_translucent_purple_name">Priehľadná fialová</string>
+    <string name="restart_is_required">Pre použitie týchto zmien je nutné reštartovať aplikáciu.</string>
     </resources>

@@ -265,4 +265,6 @@
 
 	<string name="poi_water_well">Криниця</string>
 	<string name="poi_standpipe">Напірна труба</string>
-	</resources>
+	<string name="poi_highway_crossing">Переїзд</string>
+
+</resources>

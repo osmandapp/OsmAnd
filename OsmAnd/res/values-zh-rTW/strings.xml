@@ -2039,4 +2039,22 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
+    <string name="restart_is_required">為了套用變更，必需重新啟動應用程式。</string>
+    <string name="rendering_attr_currentTrackColor_name">目前 GPX 的顏色</string>
+    <string name="rendering_attr_currentTrackWidth_name">目前 GPX 的寬度</string>
+    <string name="rendering_value_red_name">紅色</string>
+    <string name="rendering_value_translucent_red_name">半透明的紅色</string>
+    <string name="rendering_value_translucent_orange_name">半透明的橙色</string>
+    <string name="rendering_value_yellow_name">黃色</string>
+    <string name="rendering_value_translucent_yellow_name">半透明的黃色</string>
+    <string name="rendering_value_lightgreen_name">淺綠色</string>
+    <string name="rendering_value_translucent_lightgreen_name">半透明的淺綠色</string>
+    <string name="rendering_value_green_name">綠色</string>
+    <string name="rendering_value_translucent_green_name">半透明的綠色</string>
+    <string name="rendering_value_lightblue_name">淡藍色</string>
+    <string name="rendering_value_translucent_lightblue_name">半透明的淡藍色</string>
+    <string name="rendering_value_blue_name">藍色</string>
+    <string name="rendering_value_translucent_blue_name">半透明的藍色</string>
+    <string name="rendering_value_purple_name">紫色</string>
+    <string name="rendering_value_translucent_purple_name">半透明的紫色</string>
     </resources>
