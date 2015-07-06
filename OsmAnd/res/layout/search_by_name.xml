@@ -27,6 +27,9 @@
             android:id="@+id/SearchText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:lines="1"
             android:layout_weight="1"/>
 
         <Button
