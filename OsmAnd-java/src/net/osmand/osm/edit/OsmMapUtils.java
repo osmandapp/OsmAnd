@@ -81,10 +81,10 @@ public class OsmMapUtils {
 	
 	public static LatLon getWeightCenterForWay(Way w) {
 		Collection<Node> nodes = w.getNodes();
-		boolean area = w.getFirstNodeId() == w.getLastNodeId();
 		if (nodes.isEmpty()) {
 			return null;
 		}
+		boolean area = w.getFirstNodeId() == w.getLastNodeId();
 		LatLon ll = area ? getMathWeightCenterForNodes(nodes) : getWeightCenterForNodes(nodes);
 		if(ll == null) {
 			return null;
@@ -97,8 +97,8 @@ public class OsmMapUtils {
 				if (n != null) {
 					double d = MapUtils.getDistance(n.getLatitude(), n.getLongitude(), ll.getLatitude(), ll.getLongitude());
 					if(d < minDistance) {
-						flon = n.getLongitude();
 						flat = n.getLatitude();
+						flon = n.getLongitude();
 						minDistance = d;
 					}
 				}
