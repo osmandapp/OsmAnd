@@ -89,6 +89,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
+		registerWidget(activity);
+	}
+
+	private void registerWidget(MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 		
@@ -101,7 +105,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if (isActive()) {
 			if (monitoringControl == null) {
-				registerLayers(activity);
+				registerWidget(activity);
 			}
 		} else {
 			if (monitoringControl != null) {

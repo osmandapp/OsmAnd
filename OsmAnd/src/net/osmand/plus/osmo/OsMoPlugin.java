@@ -174,7 +174,9 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 			if(olayer == null) {
 				registerLayers(activity);
 			} 
-			registerSideWidget(activity);
+			if(osmoControl == null) {
+				registerSideWidget(activity);
+			}
 		} else {
 			MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 			if (layer != null && osmoControl != null) {
@@ -201,7 +203,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 
 	private void registerSideWidget(MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		if (layer != null && osmoControl == null) {
+		if (layer != null) {
 			osmoControl = createOsMoControl(activity);
 			layer.registerSideWidget(osmoControl, R.drawable.ic_osmo_dark, R.string.osmo_control, "osmo_control",
 					false, 18);
