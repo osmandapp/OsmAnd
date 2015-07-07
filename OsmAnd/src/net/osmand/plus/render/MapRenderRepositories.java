@@ -731,24 +731,23 @@ public class MapRenderRepositories {
 			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
-			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
+			// necessary for transparent, otherwise 2 times smaller 
+			Config cfg = transparent ?  Config.ARGB_8888 : Config.RGB_565;
+			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height &&
+					cfg == reuse.getConfig()) {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
 			} else {
 				if(reuse != null){
 					log.warn(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
 				}
-				if(transparent) {
-					// necessary
-					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-				} else {
-					// better picture ? 
-					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, cfg);
+				if(reuse != null) {
+					reuse.recycle();
 				}
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-			
 			if(nativeLib != null) {
 				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, notifyList);
 			} else {

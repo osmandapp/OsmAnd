@@ -102,7 +102,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			if(!mapView.isLayerVisible(distanceCalculatorLayer)) {
 				activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
 			}
-			registerWidget(activity);
+			if(distanceControl == null) {
+				registerWidget(activity);
+			}
 		} else {
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 			if(distanceCalculatorLayer != null) {
