@@ -406,4 +406,11 @@
 	<string name="poi_craft_parquet_layer">Paketarstvo</string>
 	<string name="poi_craft_photographer">Fotograf</string>
 	<string name="poi_craft_photographic_laboratory">Fotografski laboratorij</string>
+	<string name="poi_candles">Svečarna</string>
+	<string name="poi_fashion">Modna trgovina</string>
+	<string name="poi_entrance_exit">Izhod</string>
+
+	<string name="poi_barrier_entrance">Vhod</string>
+	<string name="poi_entrance_main">Glavni vhod</string>
+	<string name="poi_entrance">Vhod</string>
 	</resources>
