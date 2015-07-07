@@ -107,6 +107,20 @@ public class MapWidgetRegistry {
 		}
 	}
 	
+	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
+		for(MapWidgetRegInfo ri : left) {
+			if(cl.isInstance(ri)) {
+				return (T) ri.widget;
+			}
+		}
+		for(MapWidgetRegInfo ri : right) {
+			if(cl.isInstance(ri)) {
+				return (T) ri.widget;
+			}
+		}
+		return null;
+	}
+	
 	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget, int drawableMenu, 
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,  

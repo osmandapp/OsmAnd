@@ -1,7 +1,10 @@
 package net.osmand.plus.routing;
 
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.Location;
@@ -40,7 +43,8 @@ public class RoutingHelper {
 	
 	private static final float POSITION_TOLERANCE = 60;
 	
-	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
+	
+	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<WeakReference<IRouteInformationListener>>();
 
 	private OsmandApplication app;
 	
@@ -154,8 +158,15 @@ public class RoutingHelper {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				for (IRouteInformationListener l : listeners) {
-					l.routeWasCancelled();
+				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IRouteInformationListener> ref = it.next();
+					IRouteInformationListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.routeWasCancelled();	
+					}
 				}
 			}
 		});
@@ -217,11 +228,20 @@ public class RoutingHelper {
 	}
 	
 	public void addListener(IRouteInformationListener l){
-		listeners.add(l);
+		listeners.add(new WeakReference<RoutingHelper.IRouteInformationListener>(l));
 	}
 	
-	public boolean removeListener(IRouteInformationListener l){
-		return listeners.remove(l);
+	public boolean removeListener(IRouteInformationListener lt){
+		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+		while(it.hasNext()) {
+			WeakReference<IRouteInformationListener> ref = it.next();
+			IRouteInformationListener l = ref.get();
+			if(l == null || lt == l) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void updateLocation(Location currentLocation) {
@@ -589,8 +609,15 @@ public class RoutingHelper {
 			public void run() {
 				ValueHolder<Boolean> showToast = new ValueHolder<Boolean>();
 				showToast.value = true;
-				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(newRoute, showToast);
+				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IRouteInformationListener> ref = it.next();
+					IRouteInformationListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.newRouteIsCalculated(newRoute, showToast);	
+					}
 				}
 				if (showToast.value) {
 					String msg = app.getString(R.string.new_route_calculated_dist) + ": "

@@ -38,6 +38,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -591,7 +592,7 @@ public class MapRenderRepositories {
 
 	
 
-	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
+	public synchronized void loadMap(RotatedTileBox tileRect, MapTileDownloader mapTileDownloader) {
 		boolean prevInterrupted = interrupted;
 		interrupted = false;
 		// prevent editing
@@ -745,14 +746,17 @@ public class MapRenderRepositories {
 					// better picture ? 
 					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
 				}
+				if(reuse != null) {
+					reuse.recycle();
+				}
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
 			
 			if(nativeLib != null) {
-				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, notifyList);
+				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, mapTileDownloader);
 			} else {
-				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, notifyList);
+				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, mapTileDownloader);
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
 			if(renderingReq != null){

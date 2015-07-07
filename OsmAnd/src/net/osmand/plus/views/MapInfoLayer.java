@@ -82,6 +82,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateReg(calculateTextState(), reg);
 	}
 	
+	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
+		return mapInfoControls.getSideWidget(cl);
+	}
+	
 	public void removeSideWidget(TextInfoWidget widget) {
 		mapInfoControls.removeSideWidgetInternal(widget);
 	}
