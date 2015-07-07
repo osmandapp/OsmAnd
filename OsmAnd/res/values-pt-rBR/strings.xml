@@ -291,10 +291,10 @@
     <string name="traffic_warning_border_control">Alfândega</string>
     <string name="traffic_warning_payment">Pedágio</string>
     <string name="traffic_warning_stop">Placa pare</string>
-    <string name="traffic_warning_calming">Obstáculo</string>
+    <string name="traffic_warning_calming">Moderador de tráfego</string>
     <string name="traffic_warning">Congestionamento</string>
 	<string name="speak_poi">POIs próximos</string>
-	<string name="way_alarms">Alertas de trânsito</string>
+	<string name="way_alarms">Moderadores de tráfego</string>
 	<string name="tip_navigation">Navegação</string>
 	<string name="tip_navigation_t">"Para obter direções para um lugar, faça um toque longo sobre ele no mapa (então toque no marcador da descrição e selecione \'Direções para\') ou selecione \'Direções para\' após tocar qualquer entrada na lista de resultados de pesquisa ou na lista de favoritos.
 \n\nO destino é marcado com uma \'bandeira\' no mapa e OsmAnd exibe a distância e a direção para ele (triângulo laranja), conforme esteja definido em \'Configurar tela\'.
@@ -351,7 +351,7 @@
     <string name="auto_zoom_far">Visão intermediária</string>
 	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva com sucesso</string>
-    <string name="speak_traffic_warnings">Alertas de trânsito</string>
+    <string name="speak_traffic_warnings">Moderadores de tráfego</string>
     <string name="context_menu_item_directions_from">Direções de</string>
     <string name="app_mode_default">Explorar</string>
 	<string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
@@ -656,7 +656,7 @@
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa e Ásia</string>
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
-    <string name="speak_descr">Configurar para anunciar nomes de ruas, alertas de trânsito (paradas obrigatórias, lombadas), de radar, limites de velocidade</string>
+    <string name="speak_descr">Configurar para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), de radar, limites de velocidade</string>
 	<string name="speak_street_names">Nome das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares</string>
@@ -688,7 +688,7 @@
 	<string name="avoid_in_routing_descr">Evitar vias com pedágio, não-pavimentadas, balsas</string>
 	<string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
 	<string name="show_cameras">Radares</string>
-	<string name="show_traffic_warnings">Alertas de trânsito</string>
+	<string name="show_traffic_warnings">Moderadores de tráfego</string>
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Definir como destino</string>
     <string name="please_select_address">Selecionar primeiro a cidade ou rua</string>
@@ -927,7 +927,7 @@
     <string name="replace_destination_point">Substituir o destino</string>
     <string name="new_destination_point_dialog">Você já tem o destino definido.</string>
     <string name="target_points">Pontos de parada</string>
-    <string name="show_warnings_descr">Configurar alertas de trânsito (limites de velocidade, paradas obrigatórias, lombadas), de radar e informações de faixa</string>
+    <string name="show_warnings_descr">Configurar moderadores de tráfego (limites de velocidade, paradas obrigatórias, lombadas), de radar e informações de faixa</string>
 	<string name="intermediate_point_too_far">Ponto de parada %1$s muito longe da via mais próxima.</string>
     <string name="arrived_at_intermediate_point">Você chegou na sua parada</string>
     <string name="context_menu_item_intermediate_point">Adicionar como ponto de parada</string>
