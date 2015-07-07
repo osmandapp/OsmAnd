@@ -43,7 +43,7 @@
     <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações locais</string>
    	<string name="mark_to_delete">Selecione para apagar</string>
 	<string name="osmo_grop_name_length_alert">O nome do grupo deve ter pelo menos 3 caracteres!</string>
-	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d de mudanças ao OSM. Você está certo?</string>
+	<string name="local_osm_changes_upload_all_confirm">Você enviará %1$d mudanças ao OSM. Tem certeza?</string>
     <string name="confirmation_to_clear_history">Você quer limpar o histórico?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota</string>
     <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de…</string>
@@ -81,8 +81,8 @@
 	<string name="shared_string_disable">Desativar</string>
 	<string name="shared_string_enabled">Ativado</string>
 	<string name="shared_string_disabled">Desativado</string>
-	<string name="shared_string_selected">Selecionado</string>
-	<string name="shared_string_selected_lowercase">selecionado</string>
+	<string name="shared_string_selected">Selecionado(s)</string>
+	<string name="shared_string_selected_lowercase">selecionado(s)</string>
 	<string name="shared_string_never">Nunca</string>
 	<string name="shared_string_none">Nenhum</string>
 	<string name="shared_string_and">e</string>
@@ -1273,7 +1273,7 @@
 	<string name="local_index_installed">Versão local</string>
 	<string name="local_index_items_backuped">%1$d de %2$d item(s) desativado(s).</string>
 	<string name="local_index_items_deleted">%1$d de %2$d item(s) apagado(s).</string>
-	<string name="local_index_items_restored">%1$d de %2$d item(ns) ativado(s).</string>
+	<string name="local_index_items_restored">%1$d de %2$d item(s) ativado(s).</string>
 	<string name="local_index_no_items_to_do">Sem itens para %1$s</string>
 	<string name="local_index_mi_restore">Ativar</string>
 	<string name="local_index_mi_backup">Desativar</string>
@@ -1411,7 +1411,7 @@
 	<string name="daynight_descr">Definir regra para mudança entre modo dia/noite</string>
 	<string name="daynight">Modo dia/noite</string>
 	<string name="download_files_question">Baixar {0} arquivo(s) ({1} MB)?</string>
-	<string name="items_were_selected">{0} item(ns) selecionado(s)</string>
+	<string name="items_were_selected">{0} elemento(s) selecionado(s)</string>
 	<string name="filter_existing_indexes">Baixado</string>
 	<string name="fast_route_mode">Rota mais rápida</string>
 	<string name="fast_route_mode_descr">"Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta "</string>
