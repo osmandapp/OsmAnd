@@ -326,6 +326,11 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 						n.putTag(rtag, entity.getTag(rtag));
 					}
 				}
+				if(MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
+					// avoid shifting due to round error
+					n.setLatitude(entity.getLatitude());
+					n.setLongitude(entity.getLongitude());
+				}
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				return entityInfo;
 			}
