@@ -13,7 +13,6 @@ import android.app.Activity;
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
 	private OsmandApplication app;
-	private TextInfoWidget fps;
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
@@ -45,11 +44,31 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			registerWidget(activity);
 		} else {
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-			if (mapInfoLayer != null && fps != null) {
-				mapInfoLayer.removeSideWidget(fps);
+			if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) != null) {
+				mapInfoLayer.removeSideWidget(mapInfoLayer.getSideWidget(FPSTextInfoWidget.class));
 				mapInfoLayer.recreateControls();
-				fps = null;
 			}
+		}
+	}
+	
+	public static class FPSTextInfoWidget extends TextInfoWidget {
+		
+		private OsmandMapTileView mv;
+
+		public FPSTextInfoWidget(OsmandMapTileView mv, Activity activity) {
+			super(activity);
+			this.mv = mv;
+		}
+
+		@Override
+		public boolean updateInfo(DrawSettings drawSettings) {
+			if(!mv.isMeasureFPS()) {
+				mv.setMeasureFPS(true);
+			}
+			setText("", Integer.toString((int) mv.getFPS()) + "/"
+					+ Integer.toString((int) mv.getSecondaryFPS())
+					+ " FPS");
+			return true;
 		}
 	}
 
@@ -57,19 +76,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final OsmandMapTileView mv = activity.getMapView();
-		if (mapInfoLayer != null && fps == null) {
-			fps = new TextInfoWidget(activity) {
-				@Override
-				public boolean updateInfo(DrawSettings drawSettings) {
-					if(!mv.isMeasureFPS()) {
-						mv.setMeasureFPS(true);
-					}
-					setText("", Integer.toString((int) mv.getFPS()) + "/"
-							+ Integer.toString((int) mv.getSecondaryFPS())
-							+ " FPS");
-					return true;
-				}
-			};
+		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
+			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
 			mapInfoLayer.registerSideWidget(fps, R.drawable.widget_no_icon,
 					R.string.map_widget_fps_info, "fps", false, 30);
 			mapInfoLayer.recreateControls();

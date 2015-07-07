@@ -17,6 +17,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
@@ -180,7 +181,7 @@ public class OsmandRenderer {
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
 			NativeSearchResult searchResultHandler, 
-			Bitmap bmp, RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
+			Bitmap bmp, RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
@@ -188,7 +189,7 @@ public class OsmandRenderer {
 			try {
 				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
 					final Handler h = new Handler(Looper.getMainLooper());
-					notifyListenersWithDelay(rc, notifyList, h);
+					notifyListenersWithDelay(rc, mapTileDownloader, h);
 				}
 				
 				// Native library will decide on it's own best way of rendering
@@ -197,7 +198,7 @@ public class OsmandRenderer {
 				final NativeLibrary.RenderingGenerationResult res = library.generateRendering(
 					rc, searchResultHandler, bmp, bmp.hasAlpha(), render);
 				rc.ended = true;
-				notifyListeners(notifyList);
+				notifyListeners(mapTileDownloader);
 				long time = System.currentTimeMillis() - now;
 				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
 						+ "(%s points, %s points inside, %s of %s objects visible)\n",//$NON-NLS-1$
@@ -240,7 +241,7 @@ public class OsmandRenderer {
 		}
 	
 	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
-				RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
+				RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		// fill area
 		Canvas cv = new Canvas(bmp);
@@ -273,10 +274,10 @@ public class OsmandRenderer {
 
 
 			long beforeIconTextTime = System.currentTimeMillis() - now;
-			notifyListeners(notifyList);
+			notifyListeners(mapTileDownloader);
 			drawIconsOverCanvas(rc, cv);
 
-			notifyListeners(notifyList);
+			notifyListeners(mapTileDownloader);
 			textRenderer.drawTextOverCanvas(rc, cv, rc.preferredLocale);
 
 			long time = System.currentTimeMillis() - now;
@@ -288,13 +289,13 @@ public class OsmandRenderer {
 		}
 	}
 
-	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {
+	private void notifyListenersWithDelay(final RenderingContext rc, final MapTileDownloader mapTileDownloader, final Handler h) {
 		h.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				if(!rc.ended) {
-					notifyListeners(notifyList);
-					notifyListenersWithDelay(rc, notifyList, h);
+					notifyListeners(mapTileDownloader);
+					notifyListenersWithDelay(rc, mapTileDownloader, h);
 				}
 			}
 		}, 800);
@@ -564,11 +565,9 @@ public class OsmandRenderer {
 		return Math.abs(area) * mult * mult * .5;
 	}
 
-	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
-		if (notifyList != null) {
-			for (IMapDownloaderCallback c : notifyList) {
-				c.tileDownloaded(null);
-			}
+	private void notifyListeners(MapTileDownloader mapTileDownloader) {
+		if (mapTileDownloader != null) {
+			mapTileDownloader.fireLoadCallback(null);
 		}
 	}
 

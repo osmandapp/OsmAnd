@@ -38,6 +38,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -591,7 +592,7 @@ public class MapRenderRepositories {
 
 	
 
-	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
+	public synchronized void loadMap(RotatedTileBox tileRect, MapTileDownloader mapTileDownloader) {
 		boolean prevInterrupted = interrupted;
 		interrupted = false;
 		// prevent editing
@@ -731,28 +732,27 @@ public class MapRenderRepositories {
 			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
-			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
+			// necessary for transparent, otherwise 2 times smaller 
+			Config cfg = transparent ?  Config.ARGB_8888 : Config.RGB_565;
+			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height &&
+					cfg == reuse.getConfig()) {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
 			} else {
 				if(reuse != null){
 					log.warn(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
 				}
-				if(transparent) {
-					// necessary
-					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-				} else {
-					// better picture ? 
-					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, cfg);
+				if(reuse != null) {
+					reuse.recycle();
 				}
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-			
 			if(nativeLib != null) {
-				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, notifyList);
+				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, mapTileDownloader);
 			} else {
-				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, notifyList);
+				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, mapTileDownloader);
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
 			if(renderingReq != null){

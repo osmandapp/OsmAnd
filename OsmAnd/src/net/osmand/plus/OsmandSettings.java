@@ -3,6 +3,7 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -67,22 +68,28 @@ public class OsmandSettings {
 	}
 	
 	private abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
-		private List<StateChangedListener<T>> l = null;
+		private List<WeakReference<StateChangedListener<T>>> l = null;
 		
 		@Override
 		public void addListener(StateChangedListener<T> listener) {
 			if(l == null) {
-				l = new LinkedList<StateChangedListener<T>>();
+				l = new LinkedList<WeakReference<StateChangedListener<T>>>();
 			}
-			if(!l.contains(listener)) {
-				l.add(listener);
+			if(!l.contains(new WeakReference<StateChangedListener<T>>(listener))) {
+				l.add(new WeakReference<StateChangedListener<T>>(listener));
 			}
 		}
 
 		public void fireEvent(T value){
 			if (l != null) {
-				for (StateChangedListener<T> t : l) {
-					t.stateChanged(value);
+				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
+				while(it.hasNext()) {
+					StateChangedListener<T> t = it.next().get();
+					if(t == null) {
+						it.remove();
+					} else {
+						t.stateChanged(value);
+					}
 				}
 			}
 		}
@@ -90,7 +97,13 @@ public class OsmandSettings {
 		@Override
 		public void removeListener(StateChangedListener<T> listener) {
 			if(l != null) {
-				l.remove(listener);
+				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
+				while(it.hasNext()) {
+					StateChangedListener<T> t = it.next().get();
+					if(t == listener) {
+						it.remove();
+					}
+				}
 			}
 		}
 	}

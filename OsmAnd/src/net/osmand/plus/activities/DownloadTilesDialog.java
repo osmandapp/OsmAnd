@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -139,9 +140,8 @@ public class DownloadTilesDialog {
 		
 		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(app));
 		
-		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
-			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());
-		instance.getDownloaderCallbacks().clear();
+		final List<IMapDownloaderCallback> previousCallbacks = instance.getDownloaderCallbacks();
+		instance.clearCallbacks();
 		instance.addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -205,8 +205,10 @@ public class DownloadTilesDialog {
 					log.error("Exception while downloading tiles ", e); //$NON-NLS-1$
 					instance.refuseAllPreviousRequests();
 				} finally {
-					instance.getDownloaderCallbacks().clear();
-					instance.getDownloaderCallbacks().addAll(previousCallbacks);
+					instance.clearCallbacks();
+					for(IMapDownloaderCallback cbck : previousCallbacks) {
+						instance.addDownloaderCallback(cbck);
+					}
 					app.getResourceManager().reloadTilesFromFS();
 				}
 				progressDlg.dismiss();
