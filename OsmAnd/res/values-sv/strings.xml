@@ -694,7 +694,7 @@
 	<string name="show_route">Ruttdetaljer</string>
 	<string name="fav_imported_sucessfully">Favoriterna importerades utan problem</string>
 	<string name="fav_file_to_load_not_found">GPX-fil med favoriter finns inte på {0}</string>
-	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem till {0}</string>
+	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem i {0}</string>
 	<string name="no_fav_to_save">Inga favoritpunkter att spara</string>
 	<string name="error_occurred_loading_gpx">Ett fel uppstod vid inläsning av GPX</string>
 	<string name="send_report">Skicka rapport</string>
