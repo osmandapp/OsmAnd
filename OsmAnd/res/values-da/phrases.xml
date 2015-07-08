@@ -853,7 +853,7 @@
 	<string name="poi_block">Blok</string>
 	<string name="poi_bus_trap">Bussluse</string>
 	<string name="poi_cattle_grid">Færist</string>
-	<string name="poi_full_height_turnstile">Fuld højde tælleapparatet</string>
+	<string name="poi_full_height_turnstile">Fuld højde drejekors</string>
 	<string name="poi_bump_gate">Bumplåge</string>
 	<string name="poi_general_barrier">Almindelig forhindring</string>
 	<string name="poi_stile">Stente</string>
@@ -862,7 +862,7 @@
 	<string name="poi_kissing_gate">Kissing gate</string>
 	<string name="poi_sally_port">Udfaldsport</string>
 	<string name="poi_swing_gate">Svingport</string>
-	<string name="poi_turnstile">Tælleapparatet</string>
+	<string name="poi_turnstile">Drejekors</string>
 	<string name="poi_barrier_entrance">Indgang</string>
 	<string name="poi_entrance_main">Hovedindgang</string>
 	<string name="poi_entrance">Indgang</string>
