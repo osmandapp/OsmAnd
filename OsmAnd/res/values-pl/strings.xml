@@ -965,7 +965,7 @@
   <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikanie</string>
+  <string name="avoid_in_routing_title">Unikanie…</string>
   <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
   <string name="show_warnings_descr">Pokazuj ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
@@ -2166,4 +2166,21 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_bpy">bisznuprija-manipuri (indyjski)</string>
     <string name="lang_ml">drawidyjski</string>
     <string name="lang_eo">międzynarodowy (Esperanto)</string>
+    <string name="rendering_attr_currentTrackColor_name">Aktualny kolor GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Aktualna szerokość GPX</string>
+    <string name="rendering_value_red_name">Czerwony</string>
+    <string name="rendering_value_translucent_orange_name">Półprzezroczysty pomarańczowy</string>
+    <string name="rendering_value_yellow_name">Żółty</string>
+    <string name="rendering_value_translucent_yellow_name">Półprzezroczysty żółty</string>
+    <string name="rendering_value_lightgreen_name">Jasnozielony</string>
+    <string name="rendering_value_translucent_lightgreen_name">Półprzezroczysty jasnozielony</string>
+    <string name="rendering_value_green_name">Zielony</string>
+    <string name="rendering_value_translucent_green_name">Półprzezroczysty zielony</string>
+    <string name="rendering_value_lightblue_name">Jasnoniebieski</string>
+    <string name="rendering_value_translucent_lightblue_name">Półprzezroczysty jasnoniebieski</string>
+    <string name="rendering_value_blue_name">Niebieski</string>
+    <string name="rendering_value_translucent_blue_name">Półprzezroczysty niebieski</string>
+    <string name="rendering_value_purple_name">Fioletowy</string>
+    <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
+    <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie aplikacji.</string>
     </resources>
