@@ -857,4 +857,27 @@
 	<string name="poi_religious">Obszar religijny</string>
 	<string name="poi_leather">Galanteria skórzana</string>
 	<string name="poi_scuba_diving_shop">Sklep z wyposażeniem dla nurków</string>
+	<string name="poi_fashion">Pokaz mody</string>
+	<string name="poi_free_flying">Darmowa przechowalnia lotniskowa</string>
+	<string name="poi_energy">Sklep energetyczny</string>
+	<string name="poi_swimming_pool_shop">Sklep ze sprzętem do pływania</string>
+	<string name="poi_games">Gry</string>
+	<string name="poi_trophy">Puchary, nagrody</string>
+	<string name="poi_video_games">Gry video</string>
+	<string name="poi_pyrotechnics">Materiały pirotechniczne</string>
+	<string name="poi_bollard">Słupek</string>
+	<string name="poi_cycle_barrier">Bariera rowerowa</string>
+	<string name="poi_motorcycle_barrier">Bariera motocyklowa</string>
+	<string name="poi_block">Blokada</string>
+	<string name="poi_bus_trap">Pułapka busów</string>
+	<string name="poi_cattle_grid">Przeszkoda dla bydła</string>
+	<string name="poi_full_height_turnstile">Kołowrót pełnej wysokości</string>
+	<string name="poi_bump_gate">Brama na popych</string>
+	<string name="poi_general_barrier">Ogólne bariery</string>
+	<string name="poi_stile">Przełaz</string>
+	<string name="poi_horse_stile">Przełaz dla koni</string>
+	<string name="poi_kissing_gate">Furtka</string>
+	<string name="poi_sally_port">Port wycieczkowy</string>
+	<string name="poi_swing_gate">Brama wahadłowa</string>
+	<string name="poi_turnstile">Bramka</string>
 	</resources>
