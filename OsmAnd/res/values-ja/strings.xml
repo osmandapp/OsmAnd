@@ -2075,4 +2075,27 @@ POIの更新は利用できません</string>
     <string name="lang_gl">ガリシア語</string>
     <string name="lang_et">エストニア語</string>
     <string name="lang_ceb">セブアノ語</string>
+    <string name="rendering_attr_currentTrackColor_name">現在のGPX経路の色</string>
+    <string name="rendering_attr_currentTrackWidth_name">現在のGPX経路の幅</string>
+    <string name="rendering_value_red_name">レッド</string>
+    <string name="rendering_value_translucent_red_name">レッド-半透明</string>
+    <string name="rendering_value_translucent_orange_name">オレンジ-半透明</string>
+    <string name="rendering_value_yellow_name">イエロー</string>
+    <string name="rendering_value_translucent_yellow_name">イエロー-半透明</string>
+    <string name="rendering_value_lightgreen_name">ライトグリーン</string>
+    <string name="rendering_value_translucent_lightgreen_name">ライトグリーン-半透明</string>
+    <string name="rendering_value_green_name">グリーン</string>
+    <string name="rendering_value_translucent_green_name">グリーン-半透明</string>
+    <string name="rendering_value_lightblue_name">ライトブルー</string>
+    <string name="rendering_value_translucent_lightblue_name">ライトブルー-半透明</string>
+    <string name="rendering_value_blue_name">ブルー</string>
+    <string name="rendering_value_translucent_blue_name">ブルー-半透明</string>
+    <string name="rendering_value_purple_name">パープル</string>
+    <string name="rendering_value_translucent_purple_name">パープル-半透明</string>
+    <string name="restart_is_required">変更を有効にするにはアプリケーションの再起動が必要です。</string>
+    <string name="archive_wikipedia_data">互換性のない古いWikipediaデータがあります。アーカイブ化しますか？</string>
+    <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
+    <string name="gps_network_not_enabled">位置情報サービス(GPS)がオフになっています。オンにしますか？</string>
+    <string name="disable_recording_once_app_killed">スタンドアロン動作時のログ記録を停止</string>
+    <string name="disable_recording_once_app_killed_descrp">アプリは(タスクリストから)停止された場合、GPX記録を一時停止します。 (OsmAndスリープモード動作表示は、Androidの通知エリアに表示されなくなります。)</string>
     </resources>

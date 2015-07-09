@@ -1377,4 +1377,20 @@
     <string name="lang_et">Estisk</string>
     <string name="light_theme">Lyst</string>
     <string name="dark_theme">Mørkt</string>
+    <string name="rendering_attr_currentTrackColor_name">Gjeldende GPX-farge</string>
+    <string name="rendering_attr_currentTrackWidth_name">Gjeldende GPX-bredde</string>
+    <string name="rendering_value_translucent_red_name">Gjennomskinnelig rød</string>
+    <string name="rendering_value_yellow_name">Gul</string>
+    <string name="rendering_value_translucent_yellow_name">Gjennomskinnelig gul</string>
+    <string name="rendering_value_lightgreen_name">Lysegrønn</string>
+    <string name="rendering_value_translucent_lightgreen_name">Gjennomskinnelig lysegrøn</string>
+    <string name="rendering_value_green_name">Grønn</string>
+    <string name="rendering_value_translucent_green_name">Gjennomskinnelig grønn</string>
+    <string name="rendering_value_lightblue_name">Lyseblå</string>
+    <string name="rendering_value_translucent_lightblue_name">Gjennomskinnelig lyseblå</string>
+    <string name="rendering_value_blue_name">Blå</string>
+    <string name="rendering_value_translucent_blue_name">Gjennomskinnelig blå</string>
+    <string name="rendering_value_purple_name">Lilla</string>
+    <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
+    <string name="restart_is_required">For å bruke endringene er omstart av programmet nødvendig.</string>
     </resources>

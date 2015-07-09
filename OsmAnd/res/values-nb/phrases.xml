@@ -190,4 +190,9 @@
 	<string name="poi_water_park">Vannpark</string>
 	<string name="poi_park">Park</string>
 	<string name="poi_recreation_ground">Friareal</string>
+	<string name="poi_dive">Dykkerutstyr</string>
+	<string name="poi_florist">Blomsterbutikk</string>
+	<string name="poi_photo">Fotobutikk</string>
+	<string name="poi_craft_photographer">Fotograf</string>
+	<string name="poi_craft_photographic_laboratory">Fotolaboratorium</string>
 	</resources>
