@@ -267,4 +267,6 @@
 	<string name="poi_standpipe">Напірна труба</string>
 	<string name="poi_highway_crossing">Переїзд</string>
 
-</resources>
+<string name="poi_energy">Енергетичний магазин</string>
+	<string name="poi_fuel_1_50">Паливо 1:50</string>
+	</resources>

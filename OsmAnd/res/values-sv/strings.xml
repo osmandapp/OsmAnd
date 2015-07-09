@@ -694,7 +694,7 @@
 	<string name="show_route">Ruttdetaljer</string>
 	<string name="fav_imported_sucessfully">Favoriterna importerades utan problem</string>
 	<string name="fav_file_to_load_not_found">GPX-fil med favoriter finns inte på {0}</string>
-	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem till {0}</string>
+	<string name="fav_saved_sucessfully">Favoriterna sparade utan problem i {0}</string>
 	<string name="no_fav_to_save">Inga favoritpunkter att spara</string>
 	<string name="error_occurred_loading_gpx">Ett fel uppstod vid inläsning av GPX</string>
 	<string name="send_report">Skicka rapport</string>
@@ -1152,7 +1152,7 @@
     <string name="gpx_saved_sucessfully">GPX-filen sparades utan problem till {0}</string>
     <string name="osmand_distance_planning_plugin_description">Denna modul erbjuder en widget på kartskärmen för att skapa spår genom att peta på kartan (eller använda/modifiera befintliga GPX-filer) för att planera en resa samt att mäta avståndet mellan punkter. Resultatet kan sparas i GPX-format som kan användas för att planera GPX-rutter.</string>
     <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
-    <string name="use_distance_measurement_help">* Peta för att markera en punkt\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
+    <string name="use_distance_measurement_help">* Peta på kartan för att markera en punkt.\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på en punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
     <string name="distance_measurement_start_editing">Börja redigera</string>
     <string name="distance_measurement_finish_editing">Avsluta redigeringen</string>
     <string name="distance_measurement_finish_subtrack">Starta ett nytt underspår</string>
@@ -1928,4 +1928,20 @@
     <string name="lang_lb">Luxemburgiska</string>
     <string name="lang_os">Ossetiska</string>
     <string name="lang_eo">Esperanto</string>
+    <string name="rendering_attr_currentTrackWidth_name">Aktuell GPX-bredd</string>
+    <string name="rendering_value_red_name">Röd</string>
+    <string name="rendering_value_translucent_red_name">Genomskinlig röd</string>
+    <string name="rendering_value_translucent_orange_name">Genomskinlig orange</string>
+    <string name="rendering_value_translucent_yellow_name">Genomskinlig gul</string>
+    <string name="rendering_value_lightgreen_name">Ljusgrön</string>
+    <string name="rendering_value_translucent_lightgreen_name">Genomskinlig ljusgrön</string>
+    <string name="rendering_value_green_name">Grön</string>
+    <string name="rendering_value_translucent_green_name">Genomskinlig grön</string>
+    <string name="rendering_value_lightblue_name">Ljusblå</string>
+    <string name="rendering_value_translucent_lightblue_name">Genomskinlig ljusblå</string>
+    <string name="rendering_value_blue_name">Blå</string>
+    <string name="rendering_value_translucent_blue_name">Genomskinlig blå</string>
+    <string name="rendering_value_purple_name">Purpur</string>
+    <string name="rendering_value_translucent_purple_name">Genomskinlig purpur</string>
+    <string name="restart_is_required">För att verkställa ändringarna måste appen startas om.</string>
     </resources>

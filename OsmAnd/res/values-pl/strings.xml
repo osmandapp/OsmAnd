@@ -9,7 +9,7 @@
   <string name="pref_raster_map">Zasoby mapy</string>
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
-  <string name="choose_auto_follow_route_descr">Określa opóźnienie nadążania mapy za aktualną lokalizacją</string>
+  <string name="choose_auto_follow_route_descr">Określ opóźnienie podążania mapy za aktualną lokalizacją</string>
   <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
@@ -129,7 +129,7 @@
 \n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
   
   <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
-  <string name="choose_audio_stream_descr">Określa kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
+  <string name="choose_audio_stream_descr">Określ kanał odtwarzania nawigacji głosowej (zależne od systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
   <string name="voice_stream_notification">Kanał powiadomień</string>
   <string name="voice_stream_music">Kanał media/music</string>
@@ -159,7 +159,7 @@
 		\n\t* Wpisy koloru niebieskiego oznaczają dostępne aktualizacje
 		\n\t* Wpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu
 	</string>
-  <string name="level_to_switch_vector_raster_descr">Określa najmniejszy poziom zbliżenia dla map wektorowych</string>
+  <string name="level_to_switch_vector_raster_descr">Określ najmniejszy poziom zbliżenia dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Minimalne zbliżenie mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   
@@ -387,7 +387,7 @@
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
   <string name="background_router_service">Użyj usługi w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
-  <string name="routing_settings_descr">Określa opcje nawigacji</string>
+  <string name="routing_settings_descr">Określ opcje nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
   <string name="hide_poi_filter">Ukryj filtr</string>
   <string name="show_poi_filter">Pokaż filtr</string>
@@ -422,7 +422,7 @@
   <string name="map_orientation_portrait">Pionowo</string>
   <string name="map_orientation_landscape">Poziomo</string>
   <string name="map_screen_orientation">Orientacja ekranu</string>
-  <string name="map_screen_orientation_descr">Określa orientację ekranu</string>
+  <string name="map_screen_orientation_descr">Określ orientację ekranu</string>
   <string name="opening_hours_not_supported">Format godzina otwarcia nie jest obsługiwany</string>
   <string name="add_new_rule">Dodaj nową regułę</string>
   <string name="transport_Routes">Trasy</string>
@@ -801,9 +801,9 @@
   <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
   
   
-  <string name="live_monitoring_interval_descr">Określa tempo wysyłania danych o położeniu</string>
+  <string name="live_monitoring_interval_descr">Określ tempo wysyłania danych o położeniu</string>
   <string name="live_monitoring_interval">Częstość wysyłania danych</string>
-  <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
+  <string name="live_monitoring_url_descr">Określ adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
   <string name="live_monitoring_url">Adres usługi śledzenia</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
   <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
@@ -965,7 +965,7 @@
   <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikanie</string>
+  <string name="avoid_in_routing_title">Unikaj…</string>
   <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
   <string name="show_warnings_descr">Pokazuj ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
@@ -1541,7 +1541,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
     
     
-    <string name="speech_rate_descr">Określa tempo odtwarzania komunikatów głosowych TTS</string>
+    <string name="speech_rate_descr">Określ tempo odtwarzania komunikatów głosowych TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
     
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
@@ -1663,7 +1663,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="keep_informing_descr">Powtarza instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzanie instrukcji</string>
 	<string name="arrival_distance">Powiadomienia osiągnięcia celu</string>
-    <string name="arrival_distance_descr">Określa moment powiadamiania o osiągnięciu celu</string>
+    <string name="arrival_distance_descr">Określ moment powiadamiania o osiągnięciu celu</string>
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
@@ -1888,8 +1888,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoints">Punkty trasy</string>
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
-    <string name="speak_favorites">Pokazuj okoliczne Ulubione</string>
-    <string name="speak_poi">Pokazuj okoliczne punkty POI</string>
+    <string name="speak_favorites">Okoliczne Ulubione</string>
+    <string name="speak_poi">Okoliczne punkty POI</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1984,7 +1984,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
 	<string name="show_pedestrian_warnings">Pokazuj przejścia dla pieszych</string>
-    <string name="speak_pedestrian">Informuj o przejściach dla pieszych</string>
+    <string name="speak_pedestrian">Przejścia dla pieszych</string>
     
 	<string name="gps_status">Status GPS</string>
     <string name="version_settings_descr">Pobierz nocne kompilacje</string>
@@ -2060,12 +2060,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
 	<string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych</string>
 	<string name="proxy_host_descr">Ustala nazwę hosta proxy (np. 127.0.0.1)</string>
-	<string name="proxy_port_descr">Określa numer portu proxy (np. 8118)</string>
+	<string name="proxy_port_descr">Określ numer portu proxy (np. 8118)</string>
 	<string name="shared_string_release">Data wydania</string>
 	<string name="get_plugin">Pobierz</string>
 <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
-    <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy</string>
+    <string name="delay_to_start_navigation_descr">Określ czas wyświetlania ekranu planowania trasy</string>
     <string name="delay_to_start_navigation">Rozpocznij nawigację turn-by-turn za…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
@@ -2110,7 +2110,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
+    <string name="routing_attr_avoid_borders_name">Unikaj przekraczania granic</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określ wysokość pojazdu, jaka ma być dozwolone podczas nawigowania</string>
@@ -2166,4 +2166,21 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_bpy">bisznuprija-manipuri (indyjski)</string>
     <string name="lang_ml">drawidyjski</string>
     <string name="lang_eo">międzynarodowy (Esperanto)</string>
+    <string name="rendering_attr_currentTrackColor_name">Aktualny kolor GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Aktualna szerokość GPX</string>
+    <string name="rendering_value_red_name">Czerwony</string>
+    <string name="rendering_value_translucent_orange_name">Półprzezroczysty pomarańczowy</string>
+    <string name="rendering_value_yellow_name">Żółty</string>
+    <string name="rendering_value_translucent_yellow_name">Półprzezroczysty żółty</string>
+    <string name="rendering_value_lightgreen_name">Jasnozielony</string>
+    <string name="rendering_value_translucent_lightgreen_name">Półprzezroczysty jasnozielony</string>
+    <string name="rendering_value_green_name">Zielony</string>
+    <string name="rendering_value_translucent_green_name">Półprzezroczysty zielony</string>
+    <string name="rendering_value_lightblue_name">Jasnoniebieski</string>
+    <string name="rendering_value_translucent_lightblue_name">Półprzezroczysty jasnoniebieski</string>
+    <string name="rendering_value_blue_name">Niebieski</string>
+    <string name="rendering_value_translucent_blue_name">Półprzezroczysty niebieski</string>
+    <string name="rendering_value_purple_name">Fioletowy</string>
+    <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
+    <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie aplikacji.</string>
     </resources>

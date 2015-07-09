@@ -28,7 +28,7 @@
 		<string name="poi_internet_access">Acesso à Internet</string>
 	<string name="poi_entertainment">Lazer</string>
 		<string name="poi_club">Clube</string>
-	<string name="poi_sustenance">Comida</string>
+	<string name="poi_sustenance">Comida e bebida</string>
 	<string name="poi_cafe_and_restaurant">Cafeteria e restaurante</string>
 	<string name="poi_service">Serviço</string>
 		<string name="poi_craft">Artesanato</string>
@@ -297,7 +297,7 @@
 	<string name="poi_place_farm">Lavoura</string>
 	<string name="poi_pharmacy">Farmácia</string>
 	<string name="poi_hospital">Hospital</string>
-	<string name="poi_doctors">Médicos</string>
+	<string name="poi_doctors">Consultório médico</string>
 	<string name="poi_clinic">Clínica</string>
 	<string name="poi_first_aid">Primeiros socorros</string>
 	<string name="poi_dentist">Dentista</string>
