@@ -549,6 +549,9 @@ public class MapPoiTypes {
 				return null;
 			}
 		}
+		if(pt.isMap()) {
+			return null;
+		}
 		if(!hasName && pt.isNameOnly()) {
 			return null;
 		}
