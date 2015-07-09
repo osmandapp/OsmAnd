@@ -153,7 +153,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 	}
 
 	private void showPOIDialog(int dialogID, Node n, PoiCategory type, String subType) {
-		Amenity a = EntityParser.parseAmenity(n, type, subType, null, MapRenderingTypes.getDefault());
+		Amenity a = EntityParser.parseAmenity(n, n.getTags(), type, subType, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
 		createPOIDialog(dialogID, dialogBundle).show();

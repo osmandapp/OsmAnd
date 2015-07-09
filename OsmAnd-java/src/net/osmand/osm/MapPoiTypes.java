@@ -15,6 +15,9 @@ import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
+import net.osmand.data.AmenityType;
+import net.osmand.osm.MapRenderingTypes.MapRulType;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -432,7 +435,7 @@ public class MapPoiTypes {
 		}
 		
 	}
-
+	
 	public String getTranslation(AbstractPoiType abstractPoiType) {
 		if(poiTranslator != null) {
 			String translation = poiTranslator.getTranslation(abstractPoiType);
@@ -447,5 +450,67 @@ public class MapPoiTypes {
 	public boolean isRegisteredType(PoiCategory t) {
 		return getPoiCategoryByName(t.getKeyName()) != otherCategory;
 	}
+
 	
+	public Map<String, String> getAmenityAdditionalInfo(Map<String, String> tags, AmenityType type, String subtype) {
+		TODO;
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		for (String tag : tags.keySet()) {
+			String val = tags.get(tag);
+			MapRulType rType = getAmenityRuleType(tag, val);
+			if (rType != null && val != null && val.length()  > 0) {
+				if(rType == nameEnRuleType && Algorithms.objectEquals(val, tags.get(OSMTagKey.NAME))) {
+					continue;
+				}
+				if (rType.isAdditionalOrText()) {
+					if (!rType.isText() && !Algorithms.isEmpty(rType.tagValuePattern.value)) {
+						val = rType.tagValuePattern.value;
+					}
+					map.put(rType.tagValuePattern.tag, val);
+				}
+			}
+		}
+		return map;
+	}
+	
+	public String getAmenitySubtype(String tag, String val){
+		String prefix = getAmenitySubtypePrefix(tag, val);
+		if(prefix != null){
+			return prefix + val;
+		}
+		return val;
+	}
+	
+	public String getAmenitySubtypePrefix(String tag, String val){
+		Map<String, MapRulType> rules = getEncodingRuleTypes();
+		MapRulType rt = rules.get(constructRuleKey(tag, val));
+		if(rt != null && rt.poiPrefix != null && rt.isPOI()) {
+			return rt.poiPrefix;
+		}
+		rt = rules.get(constructRuleKey(tag, null));
+		if(rt != null && rt.poiPrefix != null && rt.isPOI()) {
+			return rt.poiPrefix;
+		}
+		return null;
+	}
+	
+	public AmenityType getAmenityType(String tag, String val, boolean hasName){
+		TODO;
+		return getAmenityType(tag, val, false, hasName);
+	}
+	
+	public AmenityType getAmenityTypeForRelation(String tag, String val, boolean hasName){
+		TODO;
+		return getAmenityType(tag, val, true, hasName);
+	}
+
+
+	public boolean isTextAdditionalInfo(String key, String value) {
+		if(key.startsWith("name:")) {
+			return true;
+		}
+		TODO;
+		return true;
+	}
+
 }

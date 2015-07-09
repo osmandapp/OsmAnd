@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 public class OsmMapUtils {
@@ -27,7 +28,7 @@ public class OsmMapUtils {
 		if (e instanceof Node) {
 			return ((Node) e).getLatLon();
 		} else if (e instanceof Way) {
-			return getWeightCenterForNodes(((Way) e).getNodes());
+			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
 			List<LatLon> list = new ArrayList<LatLon>();
 			for (Entity fe : ((Relation) e).getMembers(null)) {
@@ -58,7 +59,7 @@ public class OsmMapUtils {
 		return new LatLon(latitude / nodes.size(), longitude / nodes.size());
 	}
 
-	public static LatLon getWeightCenterForNodes(Collection<Node> nodes) {
+	public static LatLon getWeightCenterForNodes(Collection<Node> nodes ) {
 		if (nodes.isEmpty()) {
 			return null;
 		}
@@ -77,6 +78,36 @@ public class OsmMapUtils {
 		}
 		return new LatLon(latitude / count, longitude / count);
 	}
+	
+	public static LatLon getWeightCenterForWay(Way w) {
+		Collection<Node> nodes = w.getNodes();
+		if (nodes.isEmpty()) {
+			return null;
+		}
+		boolean area = w.getFirstNodeId() == w.getLastNodeId();
+		LatLon ll = area ? getMathWeightCenterForNodes(nodes) : getWeightCenterForNodes(nodes);
+		if(ll == null) {
+			return null;
+		}
+		double flat = ll.getLatitude();
+		double flon = ll.getLongitude();
+		if(!area || !MapAlgorithms.containsPoint(nodes, ll.getLatitude(), ll.getLongitude())) {
+			double minDistance = Double.MAX_VALUE;
+			for (Node n : nodes) {
+				if (n != null) {
+					double d = MapUtils.getDistance(n.getLatitude(), n.getLongitude(), ll.getLatitude(), ll.getLongitude());
+					if(d < minDistance) {
+						flat = n.getLatitude();
+						flon = n.getLongitude();
+						minDistance = d;
+					}
+				}
+			}	
+		}
+		
+		return new LatLon(flat, flon);
+	}
+	
 
 	public static LatLon getMathWeightCenterForNodes(Collection<Node> nodes) {
 		if (nodes.isEmpty()) {
