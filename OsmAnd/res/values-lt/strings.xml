@@ -103,7 +103,7 @@
   <string name="osm_editing_plugin_description">Šis įskiepis leidžia kurti ar redaguoti LV, užregistruoti ar komentuoti OSM klaidą, dalintis įrašytais GPX failais. OSM yra atviros visuomenės valdomas, viešas žemėlapio žymėjimo projektas. Dėl smulkesnės informacijos prašome rkeiptis į http://openstreetmap.org. Aktyvus dalyvavimas yra labai vertinamas, prisidėti galite tiesiai OsmAnd, jei programoje nurodysite savo prisijungimo duomenis.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoriniai žemėlapiai tikriausiai bus atvaizduojami sparčiau. Kaikuriuose įrenginiuose gali veikti prastai.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Groti šiuo metu pasirinkto balso komandas</string>
+  <string name="play_commands_of_currently_selected_voice">Groti pasirinkto balso komandas</string>
   <string name="debugging_and_development">OsmAnd vystymas</string>
   <string name="native_rendering">Aparatinis atvaizdavimas</string>
   
@@ -2074,4 +2074,21 @@
     <string name="lang_pms">Pjemonto</string>
     <string name="lang_tl">Tagalų</string>
     <string name="lang_ml">Malajalių</string>
+    <string name="rendering_value_red_name">Raudona</string>
+    <string name="rendering_value_translucent_red_name">Permatomas raudona</string>
+    <string name="rendering_value_translucent_orange_name">Permatomas oranžinė</string>
+    <string name="rendering_value_yellow_name">Geltona</string>
+    <string name="rendering_value_translucent_yellow_name">Permatoma geltona</string>
+    <string name="rendering_value_lightgreen_name">Šviesiai žalia</string>
+    <string name="rendering_value_translucent_lightgreen_name">Permatoma šviesiai žalia</string>
+    <string name="rendering_value_green_name">Žalia</string>
+    <string name="rendering_value_translucent_green_name">Permatoma žalia</string>
+    <string name="rendering_value_lightblue_name">Šviesiai mėlyna</string>
+    <string name="rendering_value_translucent_lightblue_name">Permatoma šviesiai žalia</string>
+    <string name="rendering_value_blue_name">Mėlyna</string>
+    <string name="rendering_value_translucent_blue_name">Permatoma mėlyna</string>
+    <string name="rendering_value_purple_name">Purpurinė</string>
+    <string name="rendering_value_translucent_purple_name">Permatoma purpurinė</string>
+    <string name="restart_is_required">Siekiant pritaikyti pakeitimus, būtina iš naujo startuoti programą.</string>
+    <string name="lang_bpy">Bišnuprų</string>
     </resources>
