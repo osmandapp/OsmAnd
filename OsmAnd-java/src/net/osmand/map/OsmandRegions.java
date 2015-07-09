@@ -364,6 +364,7 @@ public class OsmandRegions {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
+			int c = 0;
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() < 1) {
@@ -371,6 +372,9 @@ public class OsmandRegions {
 				}
 				initTypes(object);
 				String nm = object.getNameByType(downloadNameType);
+				if(nm != null) {
+					System.out.println((c++) +" " + nm);
+				}
 				if (!countriesByDownloadName.containsKey(nm)) {
 					LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
 					countriesByDownloadName.put(nm, ls);
@@ -449,7 +453,9 @@ public class OsmandRegions {
 			if(nm == null) {
 				nm = b.getName();
 			}
-			found.add(nm.toLowerCase());
+			if(or.isDownloadOfType(b, MAP_TYPE)) {
+				found.add(nm.toLowerCase());
+			}
 		}
 
 		if (!found.equals(expected)) {
@@ -461,17 +467,17 @@ public class OsmandRegions {
 
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
-		or.prepareFile("/home/victor/projects/osmand/repo/resources/countries-info/regions.ocbf");
+		or.prepareFile("/Users/victorshcherb/osmand/repos/resources/countries-info/regions.ocbf");
 		or.cacheAllCountries();
 //		long t = System.currentTimeMillis();
 //		or.cacheAllCountries();
 //		System.out.println("Init " + (System.currentTimeMillis() - t));
 
 		//testCountry(or, 15.8, 23.09, "chad");
-		testCountry(or, 52.10, 4.92, "the netherlands");
+		testCountry(or, 52.10, 4.92, "the netherlands", "utrecht");
 		testCountry(or, 52.15, 7.50, "north rhine-westphalia");
-		testCountry(or, 40.0760, 9.2807, "italy", "sardinia");
-		testCountry(or, 28.8056, 29.9858, "africa", "egypt" );
+		testCountry(or, 28.8056, 29.9858, "egypt" );
+//		testCountry(or, 40.0760, 9.2807, "italy", "sardinia");
 		testCountry(or, 35.7521, 139.7887, "japan");
 		testCountry(or, 46.5145, 102.2580, "mongolia");
 		testCountry(or, 62.54, 43.36, "arkhangelsk oblast", "northwestern federal district");

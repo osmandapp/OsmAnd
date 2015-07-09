@@ -144,6 +144,21 @@ public class EntityParser {
 		}
 		return am;
 	}
+	
+	public static Amenity parseAmenity(Entity entity, Map<String, String> tagValues, PoiCategory type, String subtype, 
+			MapPoiTypes types) {
+		Amenity am = new Amenity();
+		parseMapObject(am, entity, tagValues);
+		am.setType(type);
+		am.setSubType(subtype);
+		AmenityType at = AmenityType.findOrCreateTypeNoReg(type.getKeyName());
+		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, at, subtype));
+		String wbs = getWebSiteURL(tagValues);
+		if(wbs != null) {
+			am.setAdditionalInfo("website", wbs);
+		}
+		return am;
+	}
 
 	
 
@@ -171,6 +186,28 @@ public class EntityParser {
 			}
 		}
 		return siteUrl;
+	}
+	
+	
+	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,List<Amenity> amenitiesList) {
+		amenitiesList.clear();
+		// it could be collection of amenities
+		boolean relation = entity instanceof Relation;
+		boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
+		boolean hasName = !Algorithms.isEmpty(tags.get("name"));
+		for (Map.Entry<String, String> e : tags.entrySet()) {
+			AmenityType type = purerelation ? poiTypes.getAmenityTypeForRelation(e.getKey(), e.getValue(), hasName)
+					: poiTypes.getAmenityType(e.getKey(), e.getValue(), hasName);
+			if (type != null) {
+				String subtype = poiTypes.getAmenitySubtype(e.getKey(), e.getValue());
+				PoiCategory pc = poiTypes.getPoiCategoryByName(type.getCategoryName(), true);
+				Amenity a = parseAmenity(entity, tags, pc, subtype, poiTypes);
+				if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
+					amenitiesList.add(a);
+				}
+			}
+		}
+		return amenitiesList;
 	}
 	
 	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
