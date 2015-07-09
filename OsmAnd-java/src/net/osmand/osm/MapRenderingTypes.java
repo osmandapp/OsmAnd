@@ -31,6 +31,9 @@ import org.xmlpull.v1.XmlPullParserException;
 public class MapRenderingTypes {
 
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
+	public static final String[] langs = new String[] { "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "id", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi",
+		"hr", "ht", "hu", "hy", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
+	
 	
 	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
 	public final static byte RESTRICTION_NO_LEFT_TURN = 2;

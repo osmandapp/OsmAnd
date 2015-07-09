@@ -136,7 +136,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 			
 			protected void onPostExecute(Node n) {
 				if(n != null){
-					showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
+					showPOIDialog(DIALOG_EDIT_POI, n, editA);
 				} else {
 					AccessibleToast.makeText(activity, activity.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 				}
@@ -148,12 +148,24 @@ public class EditingPOIDialogProvider implements DialogProvider {
 	public void showCreateDialog(double latitude, double longitude){
 		prepareProvider();
 		Node n = new Node(latitude, longitude, -1);
-		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
-		showPOIDialog(DIALOG_CREATE_POI, n, poiTypes.getOtherPoiCategory(), "");
+		showPOIDialog(DIALOG_CREATE_POI, n, null);
 	}
 
-	private void showPOIDialog(int dialogID, Node n, PoiCategory type, String subType) {
-		Amenity a = EntityParser.parseAmenity(n, n.getTags(), type, subType, MapRenderingTypes.getDefault());
+	private void showPOIDialog(int dialogID, Node n, Amenity a) {
+		Amenity am;
+		if(a == null) {
+			am = new Amenity();
+			am.setType(poiTypes.getOtherPoiCategory());
+			am.setSubType("");
+			am.setAdditionalInfo(OSMTagKey.OPENING_HOURS.getValue(), "");
+		} else {
+			am = new Amenity();
+			am.copyNames(a);
+			am.setType(a.getType());
+			am.setSubType(a.getSubType());
+			am.setAdditionalInfo(a.getAdditionalInfo());
+		}
+//		Amenity a = EntityParser.parseAmenity(n, n.getTags(), type, subType, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
 		createPOIDialog(dialogID, dialogBundle).show();
@@ -731,7 +743,7 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		case DIALOG_POI_TYPES: {
 			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 			Builder builder = new AlertDialog.Builder(activity);
-			final List<PoiCategory> categories = poiTypes.getCategories(true);
+			final List<PoiCategory> categories = poiTypes.getCategories(false);
 			String[] vals = new String[categories.size()];
 			for (int i = 0; i < vals.length; i++) {
 				vals[i] = categories.get(i).getTranslation();

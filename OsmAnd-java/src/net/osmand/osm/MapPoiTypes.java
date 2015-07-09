@@ -7,17 +7,17 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
-import net.osmand.data.AmenityType;
-import net.osmand.osm.MapRenderingTypes.MapRulType;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -277,37 +277,25 @@ public class MapPoiTypes {
 						}
 						lastCategory.addPoiType(tp);
 					} else if (name.equals("poi_additional")) {
-						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
-						tp.setAdditional(lastType != null ? lastType : 
-							 (lastFilter != null ? lastFilter : lastCategory));
-						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
-
-						tp.setOsmTag(parser.getAttributeValue("", "tag"));
-						tp.setOsmValue(parser.getAttributeValue("", "value"));
-						tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
-						tp.setOsmValue2(parser.getAttributeValue("", "value2"));
-						if (lastType != null) {
-							lastType.addPoiAdditional(tp);
-						} else if (lastFilter != null) {
-							lastFilter.addPoiAdditional(tp);
-						} else if (lastCategory != null) {
-							lastCategory.addPoiAdditional(tp);
-						}
-					} else if (name.equals("poi_type")) {
-						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
-						tp.setOsmTag(parser.getAttributeValue("", "tag"));
-						tp.setOsmValue(parser.getAttributeValue("", "value"));
-						tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
-						tp.setOsmValue2(parser.getAttributeValue("", "value2"));
-						lastType = tp;
-						if (lastFilter != null) {
-							lastFilter.addPoiType(tp);
-						}
-						allTypes.put(tp.getKeyName(), tp);
 						if(lastCategory == null) {
 							lastCategory = getOtherMapCategory();
 						}
-						lastCategory.addPoiType(tp);
+						if("true".equals(parser.getAttributeValue("", "lang"))) {
+							for(String lng : MapRenderingTypes.langs) {
+								parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng);
+							}
+						}
+						parsePoiAdditional(parser, lastCategory, lastFilter, lastType, null);
+					} else if (name.equals("poi_type")) {
+						if(lastCategory == null) {
+							lastCategory = getOtherMapCategory();
+						}
+						if("true".equals(parser.getAttributeValue("", "lang"))) {
+							for(String lng : MapRenderingTypes.langs) {
+								parsePoiType(allTypes, parser, lastCategory, lastFilter, lng);
+							}
+						}
+						lastType = parsePoiType(allTypes, parser, lastCategory, lastFilter, null);
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
 					String name = parser.getName();
@@ -345,6 +333,63 @@ public class MapPoiTypes {
 		findDefaultOtherCategory();
 		init = true;
 		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+	}
+
+
+	private void parsePoiAdditional(XmlPullParser parser, PoiCategory lastCategory, PoiFilter lastFilter,
+			PoiType lastType, String lang) {
+		String oname = parser.getAttributeValue("", "name");
+		if(lang != null) {
+			oname += ":" + lang;
+		}
+		String otag = parser.getAttributeValue("", "tag");
+		if(lang != null) {
+			otag += ":" + lang;
+		}
+		PoiType tp = new PoiType(this, lastCategory, oname);
+		tp.setAdditional(lastType != null ? lastType : 
+			 (lastFilter != null ? lastFilter : lastCategory));
+		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setOsmTag(otag);
+		tp.setOsmValue(parser.getAttributeValue("", "value"));
+		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
+		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
+		if (lastType != null) {
+			lastType.addPoiAdditional(tp);
+		} else if (lastFilter != null) {
+			lastFilter.addPoiAdditional(tp);
+		} else if (lastCategory != null) {
+			lastCategory.addPoiAdditional(tp);
+		}
+	}
+
+
+	private PoiType parsePoiType(final Map<String, PoiType> allTypes, XmlPullParser parser, PoiCategory lastCategory,
+			PoiFilter lastFilter, String lang) {
+		String oname = parser.getAttributeValue("", "name");
+		if(lang != null) {
+			oname += ":" + lang;
+		}
+		PoiType tp = new PoiType(this, lastCategory, oname);
+		String otag = parser.getAttributeValue("", "tag");
+		if(lang != null) {
+			otag += ":" + lang;
+		}
+		tp.setOsmTag(otag);
+		tp.setOsmValue(parser.getAttributeValue("", "value"));
+		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
+		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
+		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		tp.setNameOnly("true".equals(parser.getAttributeValue("", "name_only")));
+		tp.setRelation("relation".equals(parser.getAttributeValue("", "relation")));
+		tp.setMap("true".equals(parser.getAttributeValue("", "map")));
+		if (lastFilter != null) {
+			lastFilter.addPoiType(tp);
+		}
+		allTypes.put(tp.getKeyName(), tp);
+		lastCategory.addPoiType(tp);
+		return tp;
 	}
 	
 	private void findDefaultOtherCategory() {
@@ -452,65 +497,101 @@ public class MapPoiTypes {
 	}
 
 	
-	public Map<String, String> getAmenityAdditionalInfo(Map<String, String> tags, AmenityType type, String subtype) {
-		TODO;
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		for (String tag : tags.keySet()) {
-			String val = tags.get(tag);
-			MapRulType rType = getAmenityRuleType(tag, val);
-			if (rType != null && val != null && val.length()  > 0) {
-				if(rType == nameEnRuleType && Algorithms.objectEquals(val, tags.get(OSMTagKey.NAME))) {
-					continue;
+	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
+	
+	public void initPoiTypesByTag() {
+		if(!poiTypesByTag.isEmpty()) {
+			return;
+		}
+		for(PoiCategory poic : categories) {
+			for(PoiType p : poic.getPoiTypes()) {
+				initPoiType(p);
+				for(PoiType pts : p.getPoiAdditionals()) {
+					initPoiType(pts);
 				}
-				if (rType.isAdditionalOrText()) {
-					if (!rType.isText() && !Algorithms.isEmpty(rType.tagValuePattern.value)) {
-						val = rType.tagValuePattern.value;
-					}
-					map.put(rType.tagValuePattern.tag, val);
+			}
+			for(PoiType p : poic.getPoiAdditionals()) {
+				initPoiType(p);
+			}
+		}
+	}
+
+
+	private void initPoiType(PoiType p) {
+		if(!p.isReference()) {
+			String key = null;
+			if(p.isAdditional()) {
+				key = p.isText() ? p.getOsmTag() :
+						(p.getOsmTag() + "/" + p.getOsmValue());
+			} else {
+				key = p.getOsmTag() + "/" + p.getOsmValue();
+			}
+			if(poiTypesByTag.containsKey(key)) {
+				throw new UnsupportedOperationException("!! Duplicate poi type " + key);
+			}
+			poiTypesByTag.put(key, p);
+		}
+	}
+	
+	
+	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
+		boolean hasName = !Algorithms.isEmpty(otherTags.get("name"));
+		initPoiTypesByTag();
+		PoiType pt = poiTypesByTag.get(tag+"/"+val);
+		if(pt == null) {
+			 pt = poiTypesByTag.get(tag);
+		}
+		if(pt == null || pt.isAdditional()) {
+			return null;
+		}
+		if(!Algorithms.isEmpty(pt.getOsmTag2())) {
+			if(!Algorithms.objectEquals(otherTags.get(pt.getOsmTag2()), pt.getOsmValue2())) {
+				return null;
+			}
+		}
+		if(!hasName && pt.isNameOnly()) {
+			return null;
+		}
+		if(relation && !pt.isRelation()) {
+			return null;
+		}
+		
+		Amenity a = new Amenity();
+		a.setType(pt.getCategory());
+		a.setSubType(pt.getKeyName());
+		// additional info
+		Iterator<Entry<String, String>> it = otherTags.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<String, String> e = it.next();
+			String otag = e.getKey();
+			if(!otag.equals(tag)) {
+				PoiType pat = poiTypesByTag.get(otag+"/"+e.getValue());
+				if(pat == null) {
+					 pat = poiTypesByTag.get(otag);
+				}
+				if(pat != null && pat.isAdditional()) {
+					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}
 			}
 		}
-		return map;
+		
+		return a;
 	}
 	
-	public String getAmenitySubtype(String tag, String val){
-		String prefix = getAmenitySubtypePrefix(tag, val);
-		if(prefix != null){
-			return prefix + val;
-		}
-		return val;
-	}
-	
-	public String getAmenitySubtypePrefix(String tag, String val){
-		Map<String, MapRulType> rules = getEncodingRuleTypes();
-		MapRulType rt = rules.get(constructRuleKey(tag, val));
-		if(rt != null && rt.poiPrefix != null && rt.isPOI()) {
-			return rt.poiPrefix;
-		}
-		rt = rules.get(constructRuleKey(tag, null));
-		if(rt != null && rt.poiPrefix != null && rt.isPOI()) {
-			return rt.poiPrefix;
-		}
-		return null;
-	}
-	
-	public AmenityType getAmenityType(String tag, String val, boolean hasName){
-		TODO;
-		return getAmenityType(tag, val, false, hasName);
-	}
-	
-	public AmenityType getAmenityTypeForRelation(String tag, String val, boolean hasName){
-		TODO;
-		return getAmenityType(tag, val, true, hasName);
-	}
-
-
 	public boolean isTextAdditionalInfo(String key, String value) {
-		if(key.startsWith("name:")) {
+		if(key.startsWith("name:") || key.equals("name")) {
 			return true;
 		}
-		TODO;
-		return true;
+		initPoiTypesByTag();
+		PoiType pat = poiTypesByTag.get(key+"/"+value);
+		if(pat == null) {
+			 pat = poiTypesByTag.get(key);
+		}
+		if(pat == null) {
+			return true;
+		} else {
+			return pat.isText();
+		}
 	}
 
 }
