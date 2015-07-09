@@ -382,7 +382,7 @@ public class MapPoiTypes {
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setNameOnly("true".equals(parser.getAttributeValue("", "name_only")));
-		tp.setRelation("relation".equals(parser.getAttributeValue("", "relation")));
+		tp.setRelation("true".equals(parser.getAttributeValue("", "relation")));
 		tp.setMap("true".equals(parser.getAttributeValue("", "map")));
 		if (lastFilter != null) {
 			lastFilter.addPoiType(tp);
