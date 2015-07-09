@@ -449,7 +449,7 @@
 	<string name="opening_hours">Delovni čas</string>
 	<string name="send_location_way_choose_title">Za objavljanje trenutnega mesta uporabi:</string>
 	<string name="context_menu_item_share_location">Objavi trenutno mesto</string>
-	<string name="play_commands_of_currently_selected_voice">Predvajaj navodila s trenutno izbranim glasom</string>
+	<string name="play_commands_of_currently_selected_voice">Predvajaj navodila z izbranim glasom</string>
 	<string name="test_voice_prompts">Preizkusi glasovna navodila</string>    
 	<string name="local_indexes_cat_tts">Podatki govora (TTS)</string>
 	<string name="local_indexes_cat_voice">Posneti glasovi</string>
@@ -1927,4 +1927,5 @@
     <string name="rendering_value_purple_name">Škrlatna</string>
     <string name="rendering_value_translucent_purple_name">Prosojna škrlatna</string>
     <string name="restart_is_required">Za uveljavitev sprememb je treba ponovno zagnati program.</string>
+    <string name="rendering_value_green_name">Zelena</string>
     </resources>
