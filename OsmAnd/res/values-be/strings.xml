@@ -2040,4 +2040,6 @@
     <string name="rendering_value_translucent_blue_name">Празрысты сіні</string>
     <string name="rendering_value_purple_name">Фіялетавы</string>
     <string name="rendering_value_translucent_purple_name">Празрысты фіялетавы</string>
+    <string name="rendering_value_default13_name">Па змоўчаньні (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Па змоўчаньні (празрысты сіні)</string>
     </resources>
