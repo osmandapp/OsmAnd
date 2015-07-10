@@ -769,7 +769,7 @@
   <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando errori di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita http://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce attualmente selezionata</string>
+  <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce selezionata</string>
   <string name="debugging_and_development">Sviluppo di OsmAnd</string>
   <string name="native_rendering">Disegno nativo</string>
   
@@ -2102,8 +2102,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estone</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="rendering_attr_currentTrackColor_name">Colore traccia GPX attuale</string>
-    <string name="rendering_attr_currentTrackWidth_name">Spessore traccia GPX corrente</string>
+    <string name="rendering_attr_currentTrackColor_name">Colore GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Spessore traccia GPX</string>
     <string name="rendering_value_translucent_red_name">Rosso traslucido</string>
     <string name="rendering_value_translucent_orange_name">Arancione traslucido</string>
     <string name="rendering_value_yellow_name">Giallo</string>
@@ -2119,4 +2119,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_purple_name">Porpora</string>
     <string name="rendering_value_translucent_purple_name">Porpora traslucido</string>
     <string name="restart_is_required">Per applicare i cambiamenti riavvia l\'app se richiesto.</string>
+    <string name="rendering_value_defaultContourLineMinZoom_name">Default (13)</string>
+	<string name="rendering_value_defaultGpxColorTouringView_name">Default (Ciano traslucido)</string>
+    <string name="rendering_value_red_name">Rosso</string>
     </resources>
