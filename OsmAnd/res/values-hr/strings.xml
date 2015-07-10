@@ -1470,4 +1470,32 @@
     <string name="rendering_attr_pisteRoutes_name">Skijališta</string>
 	<string name="free">"Slobodno %1$s "</string>
 	<string name="device_memory">Memorija uređaja</string>
-    </resources>
+    <string name="world_ski_missing">Kako bi se prikazale skijaške karte, potrebno je preuzeti posebne offline karte</string>
+    <string name="nautical_maps_missing">Kako bi se prikazale nautičke karte, potrebno je preuzeti posebne offline karte</string>
+	<string name="edit_group">Uredi grupu</string>
+    <string name="parking_place">Parkirno mjesto</string>
+    <string name="remove_the_tag">Ukloniti oznaku</string>
+    <string name="gps_status">GPS status</string>
+    <string name="rendering_attr_streetLighting_name">Ulična rasvjeta</string>
+    <string name="navigation_over_track">Počnite navigaciju uz stazu?</string>
+	<string name="speak_pedestrian">Najaviti pješačke prijelaze</string>
+    <string name="rendering_value__name">Zadano</string>
+    <string name="rendering_value_default_name">Zadano</string>
+    <string name="traffic_warning_railways">Željeznički prijelaz</string>
+	<string name="traffic_warning_pedestrian">Pješački prijelaz</string>
+	<string name="show_railway_warnings">Pokaži željeznički prijelaz</string>
+	<string name="show_pedestrian_warnings">Pokaži pješački prijelaz</string>
+    <string name="dash_download_msg_none">Želite li preuzeti offline karte?</string>
+    <string name="dash_download_msg">Preuzeli ste %1$s karte</string>
+    <string name="dash_download_new_one">Preuzmite nove karte</string>
+    <string name="dash_download_manage">Upravljaj</string>
+    <string name="map_locale">Jezik karte</string>
+    <string name="download_tab_downloads">Sva preuzimanja</string>
+    <string name="download_tab_updates">Ažuriranja</string>
+    <string name="everything_up_to_date">Sve datoteke su ažurirane</string>
+    <string name="no_internet_connection">Preuzimanje nije moguće, provjerite internetsku vezu.</string>
+    <string name="navigate_point_easting"/>
+    <string name="search_for">Traži</string>
+	<string name="map_update">Ažuriranja dostupna za %1$s karte</string>
+	<string name="coordinates">koordinate</string>
+	</resources>
