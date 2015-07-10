@@ -1,4 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_shop">കട</string>
 		<string name="poi_internet_access">ഇന്റെര്‍നെറ്റ്</string>
+	<string name="poi_natural">നാച്ചുറല്‍</string>
+	<string name="poi_seamark">നോട്ടിക്കല്‍</string>
+	<string name="poi_osmwiki">വിക്കിപീഡിയ</string>
 	</resources>
