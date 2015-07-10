@@ -2052,8 +2052,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_nv">Navaho</string>
     <string name="lang_ml">Malaiàlam</string>
     <string name="lang_os">Osseta</string>
-    <string name="rendering_attr_currentTrackColor_name">Color GPX actual</string>
-    <string name="rendering_attr_currentTrackWidth_name">Amplada GPX actual</string>
+    <string name="rendering_attr_currentTrackColor_name">Color traça GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Amplada traça GPX</string>
     <string name="rendering_value_red_name">Vermell</string>
     <string name="rendering_value_translucent_red_name">Vermell translúcid</string>
     <string name="rendering_value_translucent_orange_name">Taronja translúcid</string>
