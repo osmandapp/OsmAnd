@@ -1591,7 +1591,7 @@
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
     <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">"Pakeitimai 1.8 versijoje: * Apskaičiouti maršrutą tarp GPX failo taškų * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška) * Palaiko GPX/KML importavimą (konvertuoja KML į GPX) * GPX maršrutai perkelti į \'Mano duomenys\' * GPX maršrutus galima padalinti į kelias dalis pagal atstumą ir patikrinti altitudės skirtumus ir greitį * Automatiškai pradėti navigaciją su uždelsimu "</string>
-    <string name="osmo_mode_restart">OsMo sesiją paleisti iš naujo</string>
+    <string name="osmo_mode_restart">Paleisti OsMo sesiją iš naujo</string>
     <string name="osmo_settings_debug">Derinimo informacija</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo grupė</string>
