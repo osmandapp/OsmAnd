@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configurar pantalla</string>
@@ -2120,8 +2120,8 @@
     <string name="lang_vo">Volapuk</string>
     <string name="lang_te">Telugú</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
-    <string name="rendering_value_defaultContourLineMinZoom_name">Predeterminado (13)</string>
-	<string name="rendering_value_defaultGpxColorTouringView_name">Predeterminado (cian translúcido)</string>
+    <string name="rendering_value_default13_name">Predeterminado (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predeterminado (cian translúcido)</string>
     <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Ancho del GPX</string>
     <string name="rendering_value_red_name">Rojo</string>
