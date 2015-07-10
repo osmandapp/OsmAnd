@@ -1982,8 +1982,8 @@
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxemburgués</string>
     <string name="lang_os">Osetio</string>
-    <string name="rendering_attr_currentTrackColor_name">Color actual del GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Ancho actual del GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Ancho del GPX</string>
     <string name="rendering_value_red_name">Rojo</string>
     <string name="rendering_value_translucent_red_name">Rojo translúcido</string>
     <string name="rendering_value_translucent_orange_name">Anaranjado translúcido</string>
@@ -2000,4 +2000,6 @@
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
     <string name="restart_is_required">Para aplicar los cambios, se necesita reiniciar la aplicación.</string>
+    <string name="rendering_value_defaultContourLineMinZoom_name">Predefinido (13)</string>
+	<string name="rendering_value_defaultGpxColorTouringView_name">Predefinido (cian translúcido)</string>
     </resources>
