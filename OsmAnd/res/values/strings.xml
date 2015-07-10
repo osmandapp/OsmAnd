@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="rendering_value_defaultContourLineMinZoom_name">Default (13)</string>
+	<string name="rendering_value_defaultGpxColorTouringView_name">Default (translucent cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
     <string name="rendering_value_red_name">Red</string>
