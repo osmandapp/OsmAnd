@@ -9,19 +9,20 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="rendering_attr_currentTrackColor_name">Current GPX color</string>
-    <string name="rendering_attr_currentTrackWidth_name">Current GPX width</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX color</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
     <string name="rendering_value_red_name">Red</string>
     <string name="rendering_value_translucent_red_name">Translucent red</string>
+    <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_translucent_orange_name">Translucent orange</string>
     <string name="rendering_value_yellow_name">Yellow</string>
     <string name="rendering_value_translucent_yellow_name">Translucent yellow</string>
-    <string name="rendering_value_lightgreen_name">Lightgreen</string>
-    <string name="rendering_value_translucent_lightgreen_name">Translucent lightgreen</string>
+    <string name="rendering_value_lightgreen_name">Light green</string>
+    <string name="rendering_value_translucent_lightgreen_name">Translucent light green</string>
     <string name="rendering_value_green_name">Green</string>
     <string name="rendering_value_translucent_green_name">Translucent green</string>
-    <string name="rendering_value_lightblue_name">Lightblue</string>
-    <string name="rendering_value_translucent_lightblue_name">Translucent lightblue</string>
+    <string name="rendering_value_lightblue_name">Light blue</string>
+    <string name="rendering_value_translucent_lightblue_name">Translucent ligh tblue</string>
     <string name="rendering_value_blue_name">Blue</string>
     <string name="rendering_value_translucent_blue_name">Translucent blue</string>
     <string name="rendering_value_purple_name">Purple</string>
@@ -295,7 +296,6 @@
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
-    <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">German road atlas</string>
     <string name="rendering_value_highContrastRoads_name">High contrast roads</string>
 	<string name="traffic_warning_railways">Railroad crossing</string>
