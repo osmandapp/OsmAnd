@@ -162,7 +162,7 @@ public class MapPoiTypes {
 				addIf(tm, pt, matcher);
 			}
 			for (PoiType pt : pc.getPoiTypes()) {
-				if (pt.isReference()) {
+				if (pt.isReference() || pt.isNameOnly()) {
 					continue;
 				}
 				addIf(tm, pt, matcher);
@@ -383,7 +383,6 @@ public class MapPoiTypes {
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setNameOnly("true".equals(parser.getAttributeValue("", "name_only")));
 		tp.setRelation("true".equals(parser.getAttributeValue("", "relation")));
-		tp.setMap("true".equals(parser.getAttributeValue("", "map")));
 		if (lastFilter != null) {
 			lastFilter.addPoiType(tp);
 		}
@@ -549,7 +548,7 @@ public class MapPoiTypes {
 				return null;
 			}
 		}
-		if(pt.isMap()) {
+		if(pt.getCategory() == getOtherMapCategory()) {
 			return null;
 		}
 		if(!hasName && pt.isNameOnly()) {

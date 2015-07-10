@@ -74,7 +74,7 @@ public class BinaryInspector {
 //				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/osm-gen/Andorra-latest.obf"
+				"/Users/victorshcherb/osmand/osm-gen/Synthetic_test_rendering.obf"
 					});
 		} else {
 			in.inspector(args);
