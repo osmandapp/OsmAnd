@@ -2085,4 +2085,6 @@
     <string name="rendering_value_translucent_blue_name">Gennemsigtig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
+    <string name="rendering_value_defaultContourLineMinZoom_name">Standard (13)</string>
+	<string name="rendering_value_defaultGpxColorTouringView_name">Standard (gennemsigtig cyan)</string>
     </resources>
