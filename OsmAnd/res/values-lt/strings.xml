@@ -2084,11 +2084,13 @@
     <string name="rendering_value_green_name">Žalia</string>
     <string name="rendering_value_translucent_green_name">Permatoma žalia</string>
     <string name="rendering_value_lightblue_name">Šviesiai mėlyna</string>
-    <string name="rendering_value_translucent_lightblue_name">Permatoma šviesiai žalia</string>
+    <string name="rendering_value_translucent_lightblue_name">Permatoma šviesiai mėlyna</string>
     <string name="rendering_value_blue_name">Mėlyna</string>
     <string name="rendering_value_translucent_blue_name">Permatoma mėlyna</string>
     <string name="rendering_value_purple_name">Purpurinė</string>
     <string name="rendering_value_translucent_purple_name">Permatoma purpurinė</string>
     <string name="restart_is_required">Siekiant pritaikyti pakeitimus, būtina iš naujo startuoti programą.</string>
     <string name="lang_bpy">Bišnuprų</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX spalva</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX plotis</string>
     </resources>
