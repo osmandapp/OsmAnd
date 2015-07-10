@@ -806,7 +806,7 @@
 \n\nSe aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Reproduce acciones de la voz seleccionada actualmente</string>
+  <string name="play_commands_of_currently_selected_voice">Reproduce acciones de la voz seleccionada</string>
   <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Dibujo nativo</string>
   
@@ -2120,4 +2120,24 @@
     <string name="lang_vo">Volapuk</string>
     <string name="lang_te">Telugú</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="rendering_value_defaultContourLineMinZoom_name">Predeterminado (13)</string>
+	<string name="rendering_value_defaultGpxColorTouringView_name">Predeterminado (cian translúcido)</string>
+    <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Ancho del GPX</string>
+    <string name="rendering_value_red_name">Rojo</string>
+    <string name="rendering_value_translucent_red_name">Rojo translúcido</string>
+    <string name="rendering_value_translucent_orange_name">Anaranjado translúcido</string>
+    <string name="rendering_value_yellow_name">Amarillo</string>
+    <string name="rendering_value_translucent_yellow_name">Amarillo translúcido</string>
+    <string name="rendering_value_lightgreen_name">Verde claro</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verde claro translúcido</string>
+    <string name="rendering_value_green_name">Verde</string>
+    <string name="rendering_value_translucent_green_name">Verde translúcido</string>
+    <string name="rendering_value_lightblue_name">Azul claro</string>
+    <string name="rendering_value_translucent_lightblue_name">Azul claro translúcido</string>
+    <string name="rendering_value_blue_name">Azul</string>
+    <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
+    <string name="rendering_value_purple_name">Púrpura</string>
+    <string name="rendering_value_translucent_purple_name">Púrpura translúcido</string>
+    <string name="restart_is_required">Para aplicar los cambios, es necesario reiniciar la aplicación.</string>
     </resources>
