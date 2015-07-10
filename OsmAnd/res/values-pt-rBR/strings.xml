@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
@@ -1769,6 +1769,6 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Roxo</string>
     <string name="rendering_value_translucent_purple_name">Roxo translúcido</string>
-    <string name="rendering_value_defaultContourLineMinZoom_name">Predefinido (13)</string>
-	<string name="rendering_value_defaultGpxColorTouringView_name">Predefinido (ciano translúcido)</string>
+    <string name="rendering_value_default13_name">Predefinido (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (ciano translúcido)</string>
     </resources>

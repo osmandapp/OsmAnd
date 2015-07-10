@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
@@ -2000,6 +2000,6 @@
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
     <string name="restart_is_required">Para aplicar los cambios, se necesita reiniciar la aplicación.</string>
-    <string name="rendering_value_defaultContourLineMinZoom_name">Predefinido (13)</string>
-	<string name="rendering_value_defaultGpxColorTouringView_name">Predefinido (cian translúcido)</string>
+    <string name="rendering_value_default13_name">Predefinido (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     </resources>

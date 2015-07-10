@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2085,6 +2085,6 @@
     <string name="rendering_value_translucent_blue_name">Gennemsigtig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
-    <string name="rendering_value_defaultContourLineMinZoom_name">Standard (13)</string>
-	<string name="rendering_value_defaultGpxColorTouringView_name">Standard (gennemsigtig cyan)</string>
+    <string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (gennemsigtig cyan)</string>
     </resources>
