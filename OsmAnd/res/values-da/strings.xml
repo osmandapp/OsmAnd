@@ -2068,8 +2068,8 @@
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
     <string name="restart_is_required">For at anvende ændringerne, er genstart af programmet nødvendigt.</string>
-    <string name="rendering_attr_currentTrackColor_name">Áktuel GPX farve</string>
-    <string name="rendering_attr_currentTrackWidth_name">Aktuel GPX bredde</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX farve</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX bredde</string>
     <string name="rendering_value_red_name">Rød</string>
     <string name="rendering_value_translucent_red_name">Gennemsigtig rød</string>
     <string name="rendering_value_translucent_orange_name">Gennemsigtigt orange</string>
