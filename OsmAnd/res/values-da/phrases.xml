@@ -895,4 +895,23 @@
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
 	<string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
 	<string name="poi_swimming_pool_shop">Svømmebassin udstyr</string>
-	</resources>
+	<string name="poi_breakwater">Bølgebryder</string>
+	<string name="poi_groyne">Høfde</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Kabel distribution skab</string>
+	<string name="poi_basin">Basin</string>
+	<string name="poi_conservation">Landbevaring</string>
+
+	<string name="poi_building_poi">Bygning</string>
+	<string name="poi_crane">Kran</string>
+	<string name="poi_cutline">Cutline</string>
+	<string name="poi_tree">Træ</string>
+	<string name="poi_icn_ref">International cykel knudepunkt netværk</string>
+	<string name="poi_ncn_ref">National cykel knudepunkt netværk</string>
+	<string name="poi_rcn_ref">Regional cykel knudepunkt netværk</string>
+	<string name="poi_lcn_ref">Lokal cykel knudepunkt netværk</string>
+
+	<string name="poi_abandoned">Forladt</string>
+	<string name="poi_disused">Nedlagt</string>
+
+</resources>
