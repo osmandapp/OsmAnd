@@ -850,4 +850,67 @@
 	<string name="poi_tree">Arbre</string>
 	<string name="poi_block">Quartier</string>
 	<string name="poi_abandoned">Abandonné</string>
+	<string name="poi_pasta">Boutique de pâtes</string>
+	<string name="poi_pastry">Pâtisserie</string>
+	<string name="poi_free_flying">Magasin d\'articles de vol libre</string>
+	<string name="poi_furnace">Boutique d\'articles de chauffage</string>
+	<string name="poi_leather">Boutique de cuir</string>
+	<string name="poi_energy">Réservoir d\'énergie</string>
+	<string name="poi_pyrotechnics">Pyrotechnie</string>
+	<string name="poi_weapons">Armurerie</string>
+
+	<string name="poi_breakwater">Brise-lames</string>
+	<string name="poi_power_cable_distribution_cabinet">Armoire de distribution électrique</string>
+	<string name="poi_basin">Bassin</string>
+	<string name="poi_conservation">Zone protégée</string>
+
+	<string name="poi_crane">Grue</string>
+	<string name="poi_tourism_attraction">Attraction touristique</string>
+	<string name="poi_wiki_lang_ceb">Wiki cébouano</string>
+	<string name="poi_wiki_lang_vo">Wiki volapük</string>
+	<string name="poi_cycle_barrier">Barrière cycliste</string>
+	<string name="poi_motorcycle_barrier">Barrière motocycle</string>
+	<string name="poi_bump_gate">Ralentisseur (dos d\'âne)</string>
+	<string name="poi_height_restrictor">Limiteur de hauteur</string>
+	<string name="poi_horse_stile">Échalier à chevaux</string>
+	<string name="poi_stile">Échalier</string>
+	<string name="poi_kissing_gate">Porte</string>
+	<string name="poi_sally_port">Poterne</string>
+	<string name="poi_swing_gate">Portillon pivotant</string>
+	<string name="poi_icn_ref">Réseau cycliste international</string>
+	<string name="poi_ncn_ref">Réseau cycliste national</string>
+	<string name="poi_rcn_ref">Réseau cycliste régional</string>
+	<string name="poi_lcn_ref">Réseau cycliste local</string>
+
+	<string name="poi_iwn_ref">Réseau international de randonnée pédestre</string>
+	<string name="poi_nwn_ref">Réseau national de randonnée pédestre</string>
+	<string name="poi_lwn_ref">Réseau local de randonnée pédestre</string>
+
+	<string name="poi_opening_hours">Heures d\'ouverture</string>
+	<string name="poi_description">Description</string>
+	<string name="poi_phone">Téléphone</string>
+	<string name="poi_website">Site web</string>
+	<string name="poi_service_times">Temps de service</string>
+	<string name="poi_maxheight">Hauteur maximale</string>
+	<string name="poi_maxweight">Poids maximal</string>
+	<string name="poi_disused">Désaffecté</string>
+
+	<string name="poi_operator">Opérateur</string>
+	<string name="poi_brand">Marque</string>
+
+	<string name="poi_enforcement_traffic_signals">Réglementation : feux de signalisation</string>
+	<string name="poi_enforcement_maxspeed">Réglementation : vitesse maximale</string>
+	<string name="poi_enforcement_maxheight">Réglementation : hauteur maximale</string>
+	<string name="poi_enforcement_mindistance">Réglementation : distance minimale</string>
+	<string name="poi_enforcement_check">Réglementation : contrôle</string>
+	<string name="poi_enforcement_access">Réglementation : accès</string>
+	<string name="poi_enforcement_toll">Réglementation : péage</string>
+
+<string name="poi_groyne">Épi (maritime/fluviale)</string>
+
+	<string name="poi_cutline">Layon de cloisonnement</string>
+	<string name="poi_full_height_turnstile">Tourniquet pleine hauteur</string>
+	<string name="poi_general_barrier">Barrière générale</string>
+	<string name="poi_collection_times">Heures de levée</string>
+	<string name="poi_bus_trap">Passe à bus</string>
 	</resources>

@@ -878,4 +878,48 @@
 
 	<string name="poi_scuba_diving_shop">Artigos de mergulho</string>
 	<string name="poi_swimming_pool_shop">Artigos de piscina</string>
+	<string name="poi_breakwater">Quebra-mar</string>
+	<string name="poi_groyne">Estacada</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Cabine de distribuição elétrica</string>
+	<string name="poi_basin">Bacia</string>
+	<string name="poi_building_poi">Edificio</string>
+	<string name="poi_crane">Guindaste</string>
+	<string name="poi_tourism_attraction">Atração turística</string>
+	<string name="poi_tree">Árvore</string>
+	<string name="poi_icn_ref">Ponto de rede cicloviária internacional</string>
+	<string name="poi_ncn_ref">Ponto de rede cicloviária nacional</string>
+	<string name="poi_rcn_ref">Ponto de rede cicloviária regional</string>
+	<string name="poi_lcn_ref">Ponto de rede cicloviária local</string>
+
+	<string name="poi_iwn_ref">Ponto de rede de caminhada internacional</string>
+	<string name="poi_nwn_ref">Ponto de rede de caminhada nacional</string>
+	<string name="poi_rwn_ref">Ponto de rede de caminhada regional</string>
+	<string name="poi_lwn_ref">Ponto de rede de caminhada local</string>
+
+	<string name="poi_opening_hours">Horário de funcionamento</string>
+	<string name="poi_description">Descrição</string>
+	<string name="poi_phone">Telefone</string>
+	<string name="poi_website">Site</string>
+	<string name="poi_service_times">Horário de serviço</string>
+	<string name="poi_maxheight">Altura máxima</string>
+	<string name="poi_maxweight">Peso máximo</string>
+	<string name="poi_abandoned">Abandonado</string>
+	<string name="poi_disused">Fora de uso</string>
+
+	<string name="poi_operator">Operador</string>
+	<string name="poi_brand">Bandeira</string>
+
+	<string name="poi_enforcement_traffic_signals">Fiscalização:semáforo</string>
+	<string name="poi_enforcement_maxspeed">Fiscalização:velocidade máxima</string>
+	<string name="poi_enforcement_maxheight">Fiscalização:peso máximo</string>
+	<string name="poi_enforcement_mindistance">Fiscalização:distância mínima</string>
+	<string name="poi_enforcement_access">Fiscalização:acesso</string>
+	<string name="poi_enforcement_toll">Fiscalização:pedágio</string>
+
+<string name="poi_conservation">Área de conservação</string>
+
+	<string name="poi_collection_times">Horário de coleta</string>
+	<string name="poi_enforcement_check">Fiscalização:verificação</string>
+	<string name="poi_cutline">Linha de corte</string>
 	</resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -2211,7 +2211,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_currentTrackColor_name">GPX -Trackfarbe</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-Trackbreite</string>
     <string name="rendering_value_red_name">Rot</string>
-    <string name="rendering_value_translucent_red_name">Transparentes rot</string>
+    <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
     <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
     <string name="rendering_value_yellow_name">Gelb</string>
     <string name="rendering_value_translucent_yellow_name">Transparentes Gelb</string>
