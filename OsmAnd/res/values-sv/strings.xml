@@ -194,7 +194,7 @@
 <string name="osmand_parking_pm">em</string>
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
-<string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och hur mycket parkeringstid det är kvar. Du hittar din parkeringsplats och -tid på kartwidgeten.\nEn notifierings läggs till i kalendern om du vill få en påminnelse.</string>
+<string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och vid behov hur mycket parkeringstid det är kvar. Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på kartskärmen. Du kan lägga till ett larm i kalendern som en påminnelse.</string>
 <string name="osmand_parking_plugin_name">Parkeringsplats</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
@@ -1379,7 +1379,7 @@
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo (OSM-spårning)</string>
     <string name="osmo_settings">OsMo</string>
-   	<string name="osmo_plugin_description">"Denna modul erbjuder funktioner för OsMo - avancerad direktspårning. Se http://osmo.mobi.\n\nDu kan spåra andra enheter och bli spårad själv. Du kan skapa anonyma grupper, dela med er av era positioner och kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.\n\nAnonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+   	<string name="osmo_plugin_description">"Denna modul erbjuder funktioner för modulen OsMo - avancerad direktspårning. Se http://osmo.mobi.\n\nDu kan spåra alla enheter som är medlemmar i en grupp i realtid och ni kan kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.\n\nAnonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1943,7 +1943,7 @@
     <string name="rendering_value_translucent_blue_name">Genomskinlig blå</string>
     <string name="rendering_value_purple_name">Purpur</string>
     <string name="rendering_value_translucent_purple_name">Genomskinlig purpur</string>
-    <string name="restart_is_required">För att verkställa ändringarna måste appen startas om.</string>
+    <string name="restart_is_required">För att verkställa ändringarna fullständigt måste appen startas om.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-färg</string>
     <string name="rendering_value_yellow_name">Gul</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
