@@ -223,9 +223,9 @@
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
-	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
-		\n\nYou can track other devices and be tracked. You can spontaneously create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
-		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator.
+	<string name="osmo_plugin_description">This Plugin provides the functionality of the so-called OsMo advanced live monitoring, see http://osmo.mobi.
+		\n\nYou can track all devices of a participating group in real time, and communicate with each other. Comes with various options for session tracking or permanent tracking.
+		\n\nAnonymous groups can be created spontaneously for a specified number of days and are limited to defined features, i.e. there is no remote control and no group administrator.
 		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
 	<string name="srtm_paid_version_title">Contour lines plugin</string>
