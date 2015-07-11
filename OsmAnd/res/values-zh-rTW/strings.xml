@@ -2057,4 +2057,6 @@
     <string name="rendering_value_translucent_blue_name">半透明的藍色</string>
     <string name="rendering_value_purple_name">紫色</string>
     <string name="rendering_value_translucent_purple_name">半透明的紫色</string>
+    <string name="rendering_value_default13_name">預設 (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">預設 (半透明青色)</string>
     </resources>
