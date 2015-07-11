@@ -1946,4 +1946,6 @@
     <string name="restart_is_required">För att verkställa ändringarna måste appen startas om.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-färg</string>
     <string name="rendering_value_yellow_name">Gul</string>
+    <string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (genomskinlig turkos)</string>
     </resources>
