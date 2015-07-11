@@ -149,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">如果停車有時間限制，停車外掛元件讓您很輕鬆的記住停車地點和剩餘時間。在儀表板和地圖小工具上，您可以找到您的停車地點和時間。\n假使您想要得到它相關的提醒，它會在日曆裡增加通知。</string>
+	<string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和停車剩餘時間（如果有時間限制）。\n位置和時間這兩者在 OsmAnd 操控板可以看見，在地圖螢幕上同一個小工具。警報可以作為提醒增加到 Android 的日曆。</string>
 	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -1498,7 +1498,7 @@
     <string name="osmo_plugin_name">OsMo (OSM 監控)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
-    <string name="osmo_plugin_description">"這個外掛元件同時提供了 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以跟蹤其它裝置並進行追蹤。您可以自發的建立匿名群組，分享彼此的位置和交流。具有各種選項用於連線階段追蹤或持續的追蹤。\n\n為指定的天數建立匿名群組和有限制的預設功能，例如沒有遠端控制和沒有群組管理員。另一方面完整的功能可以在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_plugin_description">"這個外掛元件同時提供了所謂的 OsMo 進階即時監控，請參閱 http://osmo.mobi。\n\n您可以即時追蹤所有參與群組的裝置，並且彼此互通。具有各種選項用於連線期間追蹤或持續的追蹤。\n\n匿名群組可以為指定的天數和有限制的預設功能自發的建立，例如沒有遠端控制和沒有群組管理員。另一方面，完整功能的群組可以在網站上建立，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -2039,7 +2039,7 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
-    <string name="restart_is_required">為了套用變更，必需重新啟動應用程式。</string>
+    <string name="restart_is_required">為了徹底的把變更套用，必需手動重新啟動應用程式。</string>
     <string name="rendering_attr_currentTrackColor_name">GPX 的顏色</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX 的寬度</string>
     <string name="rendering_value_red_name">紅色</string>

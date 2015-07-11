@@ -1988,4 +1988,6 @@ s často kladenými otázkami.</string>
     <string name="archive_wikipedia_data">Stáhli jste zastaralá nekompatibilní Wikipedia data. Chcete je archivovat?</string>
     <string name="download_wikipedia_files">Chcete stáhnout dodatečná Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Chcete ji aktivovat?</string>
+    <string name="disable_recording_once_app_killed">Zabránit samotnému logování</string>
+    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí z upozorňovacího řádku Androidu.)</string>
     </resources>

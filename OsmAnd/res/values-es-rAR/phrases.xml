@@ -877,4 +877,13 @@
 	<string name="poi_energy">Almacén de energía</string>
 	<string name="poi_swimming_pool_shop">Artículos para natación</string>
 	<string name="poi_scuba_diving_shop">Artículos de buceo</string>
-	</resources>
+	<string name="poi_breakwater">Rompeolas</string>
+	<string name="poi_power_cable_distribution_cabinet">Gabinete de distribución cableada</string>
+	<string name="poi_basin">Cuenca</string>
+	<string name="poi_building_poi">Edificio</string>
+	<string name="poi_crane">Grúa</string>
+	<string name="poi_tree">Árbol</string>
+	<string name="poi_abandoned">Abandonado</string>
+	<string name="poi_disused">En desuso</string>
+
+</resources>
