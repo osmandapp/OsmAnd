@@ -1566,7 +1566,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Vous pouvez ainsi créer des groupes anonymes, partager vos positions et communiquer ensemble. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
+	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Il existe différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
 	<string name="osmo_plugin_name">OsMo (Suivi OSM)</string>
 	<string name="osmo_settings">OsMo</string>
 	
@@ -2076,9 +2076,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_nn">Norvégien</string>
     <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Voulez-vous archiver ces données ?</string>
     <string name="lang_te">Télougou</string>
-    <string name="restart_is_required">Afin de prendre en compte vos modifications, un redémarrage de l\'application est nécessaire.</string>
-    <string name="rendering_attr_currentTrackColor_name">Couleur GPX actuelle</string>
-    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX actuelle</string>
+    <string name="restart_is_required">Afin de prendre en compte toutes vos modifications, vous devez redémarrer l\'application.</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
     <string name="rendering_value_translucent_red_name">Rouge translucide</string>
     <string name="rendering_value_translucent_orange_name">Orange translucide</string>
@@ -2104,4 +2104,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_new">Néwari / Népal Bhasa</string>
     <string name="lang_ceb">Cébouano</string>
     <string name="lang_tl">Tagalog</string>
+    <string name="rendering_value_default13_name">Par défaut (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Par défaut (cyan translucide)</string>
     </resources>
