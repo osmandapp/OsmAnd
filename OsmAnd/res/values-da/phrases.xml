@@ -922,4 +922,19 @@
 	<string name="poi_phone">Telefon</string>
 	<string name="poi_description">Beskrivelse</string>
 	<string name="poi_opening_hours">Åbningstider</string>
+	<string name="poi_iwn_ref">International vandre knudepunkt netværk</string>
+	<string name="poi_nwn_ref">Nationaæ vandre knudepunkt netværk</string>
+	<string name="poi_rwn_ref">Regional vandre knudepunkt netværk</string>
+	<string name="poi_lwn_ref">Lokal vandre knudepunkt netværk</string>
+
+	<string name="poi_collection_times">Tømnings antal</string>
+	<string name="poi_service_times">Service-tider</string>
+	<string name="poi_brand">Varemærke</string>
+
+	<string name="poi_enforcement_traffic_signals">Håndhævelse: trafiksignaler</string>
+	<string name="poi_enforcement_maxspeed">Håndhævelse: max hastighed</string>
+	<string name="poi_enforcement_maxheight">Håndhævelse: max højde</string>
+	<string name="poi_enforcement_mindistance">Håndhævelse: min afstand</string>
+	<string name="poi_enforcement_check">Håndhævelse: kontrol</string>
+	<string name="poi_enforcement_access">Håndhævelse: adgang</string>
 	</resources>
