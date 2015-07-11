@@ -278,9 +278,9 @@
     <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
     <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
-    <string name="osmo_plugin_description">"Custu plugin frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta, bie http://osmo.mobi.
-\n\nSighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comùnica. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
-\n\nSos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
+    <string name="osmo_plugin_description">"Custu plugin frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta OsMo, bie http://osmo.mobi.
+\n\nSighi totu sos dispositivos de unu grupu in ue e comùnica cun sos àteros. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
+\n\nSos grupos anònimos podent èssere creados pro su nùmeru pretzisu de dies e bi sunt lìmites pro calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
     <string name="osmo_plugin_name">OsMo (Compidada OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	
@@ -790,8 +790,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare cando sa màchina tua est istada parchegiada, in ue e, si su parchègiu tenet unu tempus limitadu, cantu tempus tenes galu tue. Podes agatare su logu e su tempus de parchègiu in su widget de sa mapa.
-\n Si ti diat dèpere servire un\'avisu pro ti l’ammentaret, podet annànghere notìficas in su calendàriu .</string>
+	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare in ue est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
+\nPodes agatare su logu e su tempus de parchègiu in su widget de sa mapa. Podes annànghere notìficas in su calendàriu pro ti l\'ammentare.</string>
 	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
 	<string name="gpxup_public">Pùblicu</string>
@@ -2032,6 +2032,8 @@
     <string name="rendering_value_translucent_blue_name">Biaitu translùcidu</string>
     <string name="rendering_value_purple_name">Pùrpura</string>
     <string name="rendering_value_translucent_purple_name">Pùrpura translùcidu</string>
-    <string name="restart_is_required">Pro aplicare sas modìficas, depes torrare a allùere s\'aplicatzione.</string>
+    <string name="restart_is_required">Pro aplicare de su totu sas modìficas, depes torrare a allùere manualmente s\'aplicatzione.</string>
     <string name="rendering_value_translucent_red_name">Ruju translùcidu</string>
+    <string name="rendering_value_default13_name">Predefinidu (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predefinidu (cianu translùcidu)</string>
     </resources>
