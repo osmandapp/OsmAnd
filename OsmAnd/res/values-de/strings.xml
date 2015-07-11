@@ -1208,7 +1208,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Park-Position</string>
-	<string name="osmand_parking_plugin_description">Dieses Modul (separater Download) speichert den Standort eines geparkten Fahrzeugs.</string>
+	<string name="osmand_parking_plugin_description">Dieses Plugin ermöglicht das Speichern des Standorts eines geparkten Fahrzeugs sowie die Anzeige der restlichen Parkzeit (falls das Parken zeitlich begrenzt ist).\n\nParkplatz und Restzeit werden sowohl auf dem OsmAnd Info-Bildschirm wie auch auf dem Kartenbildschirm dargestellt. Optional kann ein Kalendereintrag als Erinnerung erstellt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -1364,7 +1364,7 @@
 	<string name="monitoring_control_start">GPX</string>
 	
 	<string name="map_widget_audionotes">Audio-Notiz</string>
-	<string name="audionotes_plugin_description">Audio/Video-Notiz unterwegs aufnehmen</string>
+	<string name="audionotes_plugin_description">Das Audio/Video-Notiz Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Schaltfläche auf dem Kartenbildschirm, oder direkt im Kontext-Manu zu jeder Position auf der Karte.</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
@@ -2077,9 +2077,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 		\n\nEine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
 		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="plugin_ski_descr">Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.
-		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
-	</string>
+	<string name="plugin_ski_descr">"Dieses Plugin aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', enthalten sind global Skiabfahrten,  Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen. Landschaftselemente werden nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt.\n\nDiese spezielle Kartendarstellung kann zurückgestellt werden indem sie hier wieder deaktiviert oder indem die \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="plugin_touringview_descr">"Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
 \n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
 \n\nUnd es ermöglichte spezielle Touring-Optionen wie das Anzeigen von Radrouten oder Alpinen Bergrouten.\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
@@ -2234,4 +2232,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_new">Newar</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
-	</resources>
+	<string name="lang_te">Telugu</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Routenfarbe gemäß Routenscope</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
+    </resources>
