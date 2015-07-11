@@ -291,9 +291,12 @@
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
 	<string name="poi_watermill">Water mill</string>
+	<string name="poi_breakwater">Breakwater</string>
+	<string name="poi_groyne">Groyne</string>
 
 	<string name="poi_power_substation">Substation</string>
 	<string name="poi_power_transformer">Transformer</string>
+	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
 
@@ -319,8 +322,11 @@
 	<string name="poi_farmyard">Farmyard</string>
 	<string name="poi_meadow">Meadow</string>
 	<string name="poi_landuse_railway">Railroad area</string>
+	<string name="poi_basin">Basin</string>
+	<string name="poi_conservation">Conservation land</string>
 
 	<string name="poi_canal">Canal</string>
+	<string name="poi_building_poi">Building</string>
 	<string name="poi_pier">Pier</string>
 	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_observatory">Observatory</string>
@@ -328,6 +334,7 @@
 	<string name="poi_tower">Tower</string>
 	<string name="poi_mast">Mast</string>
 	<string name="poi_radar">Radar</string>
+	<string name="poi_crane">Crane</string>
 	<string name="poi_construction">Construction</string>
 	<string name="poi_works">Works</string>
 	<string name="poi_mineshaft">Mineshaft</string>
@@ -712,6 +719,7 @@
 	<string name="poi_car_sharing">Car sharing</string>
 	<string name="poi_boat_sharing">Boat sharing</string>
 	<string name="poi_dock">Dock</string>
+	<string name="poi_cutline">Cutline</string>
 	<string name="poi_toilets">Restroom</string>
 	<string name="poi_sauna">Sauna</string>
 	<string name="poi_brothel">Brothel</string>
@@ -751,6 +759,7 @@
 	<string name="poi_water">Water</string>
 	<string name="poi_wetland">Wetland</string>
 	<string name="poi_wood">Wood</string>
+	<string name="poi_tree">Tree</string>
 	<string name="poi_nature_reserve">Nature reserve</string>
 	<string name="poi_strait">Strait</string>
 	<string name="poi_island">Island</string>
@@ -879,5 +888,13 @@
 	<string name="poi_entrance_exit">Exit</string>
 
 	<string name="poi_highway_crossing">Highway crossing</string>
+
+	<string name="poi_icn_ref">International cycle node network</string>
+	<string name="poi_ncn_ref">National cycle node network</string>
+	<string name="poi_rcn_ref">Regional cycle node network</string>
+	<string name="poi_lcn_ref">Local cycle node network</string>
+
+	<string name="poi_abandoned">Abandoned</string>
+	<string name="poi_disused">Disused</string>
 
 </resources>
