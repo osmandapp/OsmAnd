@@ -2093,6 +2093,6 @@
     <string name="lang_bpy">Bišnuprų</string>
     <string name="rendering_attr_currentTrackColor_name">GPX spalva</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX plotis</string>
-    <string name="rendering_value_default13_name">Numatytasis (13)</string>
+    <string name="rendering_value_default13_name">Numatytoji (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Numatytoji (skaidri žalsvai mėlyna)</string>
     </resources>
