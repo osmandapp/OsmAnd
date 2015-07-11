@@ -29,7 +29,7 @@
     <string name="rendering_value_translucent_blue_name">Translucent blue</string>
     <string name="rendering_value_purple_name">Purple</string>
     <string name="rendering_value_translucent_purple_name">Translucent purple</string>
-    <string name="restart_is_required">In order to apply the changes, restart of the application is required.</string>
+    <string name="restart_is_required">In order to fully apply the changes, a manual application restart is required.</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="lang_pms">Piedmontese</string>
