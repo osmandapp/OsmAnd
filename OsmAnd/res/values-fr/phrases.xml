@@ -846,4 +846,8 @@
 	<string name="poi_tyres">Magasin de pneumatiques</string>
 	<string name="poi_scuba_diving_shop">Magasin de plongée sous-marine</string>
 	<string name="poi_swimming_pool_shop">Pisciniste</string>
+	<string name="poi_building_poi">Construction</string>
+	<string name="poi_tree">Arbre</string>
+	<string name="poi_block">Quartier</string>
+	<string name="poi_abandoned">Abandonné</string>
 	</resources>
