@@ -908,4 +908,9 @@
 
 <string name="poi_groyne">Épi (maritime/fluviale)</string>
 
+	<string name="poi_cutline">Layon de cloisonnement</string>
+	<string name="poi_full_height_turnstile">Tourniquet pleine hauteur</string>
+	<string name="poi_general_barrier">Barrière générale</string>
+	<string name="poi_collection_times">Heures de levée</string>
+	<string name="poi_bus_trap">Passe à bus</string>
 	</resources>
