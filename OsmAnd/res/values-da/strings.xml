@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2067,7 +2067,7 @@
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="restart_is_required">For at anvende ændringerne, er genstart af programmet nødvendigt.</string>
+    <string name="restart_is_required">For fuldt ud at anvende ændringerne, er en manuel genstart af programmet nødvendigt.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX farve</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX bredde</string>
     <string name="rendering_value_red_name">Rød</string>
