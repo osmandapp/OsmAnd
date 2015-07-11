@@ -2069,5 +2069,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_translucent_blue_name">Blau translúcid</string>
     <string name="rendering_value_purple_name">Porpra</string>
     <string name="rendering_value_translucent_purple_name">Porpra translúcid</string>
-    <string name="restart_is_required">Per aplicar els canvis, cal que reinicieu l\'aplicació.</string>
+    <string name="restart_is_required">Per aplicar totalment els canvis, cal que reinicieu manualment l\'aplicació.</string>
+    <string name="rendering_value_default13_name">Per defecte (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Per defecte (cian translúcid)</string>
     </resources>
