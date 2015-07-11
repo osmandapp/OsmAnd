@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -185,7 +185,7 @@
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over- &amp; Underlay Einstellungen</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterordner \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterordner \'tiles\' kopiert werden.</string>
+	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, et.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Overlay oder Unterlage für OsmAnds reguläre Offline-Karten verwendet werden. Um unterleget Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd Offline-Karten im Menü \'Karte konfigurieren\' ausgeblendet werden. verwendet werden).\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als sqlite-Datei vorbereitet und manuell in den OsmAnd \'tiles\' Unterordner kopiert werden. "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Zeigt die Einstellungen für spezielle Eingabehilfen.</string>
 	
@@ -1310,7 +1310,7 @@
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unfertig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
-	<string name="srtm_plugin_description">Dieses extra herunterladbare Plugin ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen -&gt; \'Karten-Management -&gt; \'Herunterladen -&gt; \'Kartentyp wählen). Diese Darstellung kann mit den regulären Offline-Karten von Osmand kombiniert werden.</string>
+	<string name="srtm_plugin_description">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1367,7 +1367,7 @@
 	<string name="audionotes_plugin_description">Audio/Video-Notiz unterwegs aufnehmen</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
-	<string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Wollen Sie das Ziel (inkl. Zwischenziele) wirklich löschen?</string>
 	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
@@ -1820,7 +1820,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
+	<string name="osmo_plugin_description">"Dieses Plugin stellt den Funktionsumfang der sogenannten OsMo Live-Überwachung bereit, siehe http://osmo.mobi.\n\nEs ermöglicht die temporäre oder dauerhafte Positionsdarstellung und Kommunikation einer Gruppe teilnehmender Geräte in Echtzeit. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung.\n\nAnonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -1949,7 +1949,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
+    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online via Web-Service) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme Schaltfläche auf dem Kartenbildschirm bei Bedarf, oder durch automatisches Speichern aller navigierten Routen.\n\nAufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, etc. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden. "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
@@ -2080,11 +2080,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="plugin_ski_descr">Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.
 		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="plugin_touringview_descr">Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
-		\n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
-		\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
-		\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
-	</string>
+	<string name="plugin_touringview_descr">"Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
+\n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
+\n\nUnd es ermöglichte spezielle Touring-Optionen wie das Anzeigen von Radrouten oder Alpinen Bergrouten.\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
+\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="shared_string_audio">Audio</string>
 	
 	
@@ -2209,4 +2208,30 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_eo">Esperanto</string>
     <string name="lang_nb">Norwegische Buchsprache</string>
     <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
-    </resources>
+    <string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX -Trackfarbe</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX-Trackbreite</string>
+    <string name="rendering_value_red_name">Rot</string>
+    <string name="rendering_value_translucent_red_name">Transparentes rot</string>
+    <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
+    <string name="rendering_value_yellow_name">Gelb</string>
+    <string name="rendering_value_translucent_yellow_name">Transparentes Gelb</string>
+    <string name="rendering_value_lightgreen_name">Hellgrün</string>
+    <string name="rendering_value_translucent_lightgreen_name">Transparentes Hellgrün</string>
+    <string name="rendering_value_green_name">Grün</string>
+    <string name="rendering_value_translucent_green_name">Transparentes Grün</string>
+    <string name="rendering_value_lightblue_name">Hellblau</string>
+    <string name="rendering_value_translucent_lightblue_name">Transparentes Hellblau</string>
+    <string name="rendering_value_blue_name">Blau</string>
+    <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
+    <string name="rendering_value_purple_name">Lila</string>
+    <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
+    <string name="restart_is_required">Zum Abschluss der Änderung ist ein manueller Neustart der Anwendung erforderlich.</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_vo">Volapük</string>
+    <string name="lang_new">Newar</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
+	</resources>
