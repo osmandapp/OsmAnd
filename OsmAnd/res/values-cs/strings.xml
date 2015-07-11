@@ -850,7 +850,7 @@
   <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM chyb a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na http://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny v aktuálně nastaveném hlase</string>
+  <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny zvoleným hlasem</string>
   <string name="debugging_and_development">Vývoj a ladění OsmAnd</string>
   <string name="native_rendering">Akcelerace vykreslování</string>
   
@@ -1054,7 +1054,7 @@
 	<string name="delete_target_point">Smazat cíl</string>
 	<string name="intermediate_point">Mezicíl %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
-    <string name="enable_plugin_monitoring_services">Zapněte modul \"služba na pozadí\", pro záznam trasy a přímý přenos souřadnic</string>
+    <string name="enable_plugin_monitoring_services">Zapněte modul \"služba na pozadí\" pro záznam trasy a přímý přenos souřadnic (GPX logování, online sledování)</string>
     <string name="non_optimal_route_calculation">Počítat možná méně výhodnou trasu na dlouhé vzdálenosti</string>
     <string name="gps_not_available">Prosím zapněte GPS přijímač v nastavení</string>
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
@@ -1487,7 +1487,7 @@ s často kladenými otázkami.</string>
 	* Můžete rozdělit GPX trasu podle vzdálenosti a kontrolovat výškový rozdíl/rychlost
 	* Automatický start navigace po uplynutí času
     </string>
-    <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat jiné zařízení nebo být sám sledován. Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny jsou vytvořené na určený počet dní a jsou omezené, například nemají dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
+    <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro takzvané OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase a vzájemně spolu komunikovat. Jsou dostupné různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny lze vytvářet spontáně na určený počet dní a jsou omezené na vybrané funkce, nemají například dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
 	<string name="color_pink">růžová</string>
 	<string name="color_orange">oranžová</string>
@@ -1649,12 +1649,12 @@ s často kladenými otázkami.</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokální názvy</string>
-    <string name="live_monitoring_m_descr">Pokud je zapnutý záznam GPX trasy, odesílat trasování určené webové službě.</string>
+    <string name="live_monitoring_m_descr">Pokud je zapnutý záznam GPX trasy, odesílat data trasování určené webové službě.</string>
 	<string name="live_monitoring_m">Online záznam trasy (nutné GPX)</string>
     <string name="live_monitoring_start">Zapnout online záznam trasy</string>
 	<string name="live_monitoring_stop">Zastavit online záznam trasy</string>
-	<string name="gpx_monitoring_start">Zapnout záznam GPX</string>
-	<string name="gpx_monitoring_stop">Zastavit záznam GPX</string>
+	<string name="gpx_monitoring_start">Zapnout GPX logování</string>
+	<string name="gpx_monitoring_stop">Zastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Skrýt cesty které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
@@ -1962,4 +1962,30 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle OSMC</string>
     <string name="local_recordings_delete_all_confirm">Chystáte se smazat %1$d poznámek. Jste si jisti?</string>
 	<string name="download_wikipedia_maps">Wikipedie</string>
+    <string name="rendering_value_red_name">Červená</string>
+    <string name="rendering_value_default13_name">Výchozí (13)</string>
+	<string name="rendering_attr_currentTrackColor_name">GPX barva</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX šířka</string>
+    <string name="rendering_value_yellow_name">Žlutá</string>
+    <string name="rendering_value_green_name">Zelená</string>
+    <string name="rendering_value_lightgreen_name">Světlezelená</string>
+    <string name="rendering_value_lightblue_name">Světlemodrá</string>
+    <string name="rendering_value_blue_name">Modrá</string>
+    <string name="rendering_value_purple_name">Fialová</string>
+    <string name="restart_is_required">Pro správné zobrazení změn je vyžadován manuální restart aplikace.</string>
+    <string name="light_theme">Světlý</string>
+    <string name="dark_theme">Tmavý</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Výchozí (průsvitná modrozelená)</string>
+    <string name="rendering_value_translucent_red_name">Průsvitná červená</string>
+    <string name="rendering_value_translucent_orange_name">Průsvitná oranžová</string>
+    <string name="rendering_value_translucent_yellow_name">Průsvitná žlutá</string>
+    <string name="rendering_value_translucent_lightgreen_name">Průsvitná světlezelená</string>
+    <string name="rendering_value_translucent_green_name">Průsvitná zelená</string>
+    <string name="rendering_value_translucent_lightblue_name">Průsvitná světlemodrá</string>
+    <string name="rendering_value_translucent_blue_name">Průsvitná modrá</string>
+    <string name="rendering_value_translucent_purple_name">Průsvitná fialová</string>
+    <string name="lang_pms">Piedmontese</string>
+    <string name="archive_wikipedia_data">Stáhli jste zastaralá nekompatibilní Wikipedia data. Chcete je archivovat?</string>
+    <string name="download_wikipedia_files">Chcete stáhnout dodatečná Wikipedia data (%1$s MB) ?</string>
+    <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Chcete ji aktivovat?</string>
     </resources>
