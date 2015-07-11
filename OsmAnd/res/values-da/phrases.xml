@@ -937,4 +937,6 @@
 	<string name="poi_enforcement_mindistance">Håndhævelse: min afstand</string>
 	<string name="poi_enforcement_check">Håndhævelse: kontrol</string>
 	<string name="poi_enforcement_access">Håndhævelse: adgang</string>
-	</resources>
+	<string name="poi_enforcement_toll">Håndhævelse: vejafgift</string>
+
+</resources>
