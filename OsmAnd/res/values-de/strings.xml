@@ -187,15 +187,15 @@
 	
 	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, et.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Overlay oder Unterlage für OsmAnds reguläre Offline-Karten verwendet werden. Um unterleget Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd Offline-Karten im Menü \'Karte konfigurieren\' ausgeblendet werden. verwendet werden).\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als sqlite-Datei vorbereitet und manuell in den OsmAnd \'tiles\' Unterordner kopiert werden. "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
-	<string name="osmand_accessibility_description">Zeigt die Einstellungen für spezielle Eingabehilfen.</string>
+	<string name="osmand_accessibility_description">Diese Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
 	
 	
 	
-	<string name="osmand_development_plugin_description">Zeigt die Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
+	<string name="osmand_development_plugin_description">Dieses Plugin aktiviert Einstellungen für Entwickler und Fehlersuchhilfen, wie simulierte Navigation, die Messung der Bildschirm-Anzeige- (Render-) Leistung, oder das Testen der Sprachansagen. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
 	<string name="prefs_plugins">Plugins</string>
-	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
+	<string name="osm_editing_plugin_description">Dieses Plugin ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).\n\nOSM ist ein globales Kartografierunngsprojekt, Details siehe http://openstreetmap.org. Jeder ist eingeladen, aktiv mitzuarbeiten, Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn man in den OsmAnd-Plugin-Einstellungen sein OSM Benutzerkonto hinterlegt.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der ausgewählten Stimme ab</string>
@@ -1419,7 +1419,7 @@
 	<string name="plugin_distance_point_speed">Geschwindigkeit</string>
 	<string name="plugin_distance_point_ele">Höhe</string>
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
-	<string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
+	<string name="intermediate_items_sort_return">Die Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
 	<string name="osmand_distance_planning_plugin_description">Dieses Plugin ermöglicht das Planen und erstellen von Routen durch Auswahl von Pinkten auf der Karte, oder Verwendung/Modifizierung bereits vorhandener GPX-Dateien, sowie die Entfernungsmessung zwischen Punkten. Resultate können als GPX-Dateien gespeichert und für eine Navigation verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
