@@ -1503,7 +1503,7 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi.\n\nSpor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing.\n\nAnonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og ingen gruppeadministrator. Fuldt funktionelle grupper, kan på den anden side oprettes på hjemmesiden, og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_description">"Udvidelsen giver funktionalitet for den såkaldte Osmo avancerede live overvågning, se http://osmo.mobi.\n\nSpor alle enheder i en deltagende gruppe tidstro og kommunikere med hinanden. Leveres med forskellige muligheder for sporing session eller permanent sporing.\n\nAnonyme grupper kan oprettes spontant for et bestemt antal dage, og der begrænset til definerede funktioner, dvs. der er ingen fjernbetjening og ingen gruppeadministrator. Fuldt funktionelle grupper, kan til gengæld oprettes på hjemmesiden, og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (OSM moniteing)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
