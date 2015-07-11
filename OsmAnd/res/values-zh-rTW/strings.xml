@@ -2039,7 +2039,7 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
-    <string name="restart_is_required">為了套用變更，必需重新啟動應用程式。</string>
+    <string name="restart_is_required">為了徹底的把變更套用，必需手動重新啟動應用程式。</string>
     <string name="rendering_attr_currentTrackColor_name">GPX 的顏色</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX 的寬度</string>
     <string name="rendering_value_red_name">紅色</string>
