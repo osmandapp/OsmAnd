@@ -297,7 +297,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget parkeringstid der er tilbage (hvis der er en tidsfrist).\nBåde placering og tid er synlige på én af Osmand dashboard samt i widget på kortskærmen. En alarm kan tilføjes til Android kalenderen, som en påmindelse.</string>
+	<string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget parkeringstid der er tilbage (hvis der er en tidsfrist).\nBåde placering og tid er synlige på OsmAnd betjeningspanelet samt i modul på kortskærmen. En alarm kan tilføjes til Android kalenderen, som en påmindelse.</string>
 	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
