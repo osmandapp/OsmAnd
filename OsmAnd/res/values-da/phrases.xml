@@ -914,4 +914,11 @@
 	<string name="poi_abandoned">Forladt</string>
 	<string name="poi_disused">Nedlagt</string>
 
-</resources>
+<string name="poi_tourism_attraction">Turistattraktion</string>
+	<string name="poi_operator">Operatør</string>
+	<string name="poi_maxweight">Max vægt</string>
+	<string name="poi_maxheight">Max højde</string>
+	<string name="poi_website">Hjemmeside</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_description">Beskrivelse</string>
+	</resources>
