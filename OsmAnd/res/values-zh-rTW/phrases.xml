@@ -889,4 +889,36 @@
 	<string name="poi_tourism_attraction">旅遊景點</string>
 	<string name="poi_cutline">圖例</string>
 	<string name="poi_tree">樹</string>
-	</resources>
+	<string name="poi_icn_ref">國際自行車節點網路</string>
+	<string name="poi_ncn_ref">全國自行車節點網路</string>
+	<string name="poi_rcn_ref">地區性自行車節點網路</string>
+	<string name="poi_lcn_ref">本地自行車節點網路</string>
+
+	<string name="poi_iwn_ref">國際步行節點網路</string>
+	<string name="poi_nwn_ref">全國步行節點網路</string>
+	<string name="poi_rwn_ref">地區性步行節點網路</string>
+	<string name="poi_lwn_ref">本地步行節點網路</string>
+
+	<string name="poi_opening_hours">營業時間</string>
+	<string name="poi_collection_times">採收時間</string>
+	<string name="poi_description">說明</string>
+	<string name="poi_phone">電話</string>
+	<string name="poi_website">網站</string>
+	<string name="poi_service_times">服務時間</string>
+	<string name="poi_maxheight">最高高度</string>
+	<string name="poi_maxweight">最大重量</string>
+	<string name="poi_abandoned">已遺棄的</string>
+	<string name="poi_disused">廢棄的</string>
+
+	<string name="poi_operator">經營者</string>
+	<string name="poi_brand">品牌</string>
+
+	<string name="poi_enforcement_traffic_signals">執法：交通號誌</string>
+	<string name="poi_enforcement_maxspeed">執法：最高速限</string>
+	<string name="poi_enforcement_maxheight">執法：最高高度</string>
+	<string name="poi_enforcement_mindistance">執法：最少間隔距離</string>
+	<string name="poi_enforcement_check">執法：檢查</string>
+	<string name="poi_enforcement_access">執法：進入</string>
+	<string name="poi_enforcement_toll">執法：收費</string>
+
+</resources>
