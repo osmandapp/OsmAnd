@@ -886,4 +886,36 @@
 	<string name="poi_abandoned">Abandonado</string>
 	<string name="poi_disused">En desuso</string>
 
-</resources>
+<string name="poi_groyne">Rompeolas</string>
+
+	<string name="poi_conservation">Conservación de la tierra</string>
+
+	<string name="poi_tourism_attraction">Atracción turística</string>
+	<string name="poi_cutline">Cortafuegos forestal</string>
+	<string name="poi_icn_ref">Red ciclista internacional</string>
+	<string name="poi_ncn_ref">Red ciclista nacional</string>
+	<string name="poi_rcn_ref">Red ciclista regional</string>
+	<string name="poi_lcn_ref">Red ciclista local</string>
+
+	<string name="poi_iwn_ref">Red de senderismo internacional</string>
+	<string name="poi_nwn_ref">Red de senderismo nacional</string>
+	<string name="poi_rwn_ref">Red de senderismo regional</string>
+	<string name="poi_lwn_ref">Red de senderismo local</string>
+
+	<string name="poi_opening_hours">Horario de atención</string>
+	<string name="poi_collection_times">Horario de recolección</string>
+	<string name="poi_description">Descripción</string>
+	<string name="poi_phone">Teléfono</string>
+	<string name="poi_website">Sitio web</string>
+	<string name="poi_service_times">Horario de servicio</string>
+	<string name="poi_maxheight">Altura máxima</string>
+	<string name="poi_maxweight">Peso máximo</string>
+	<string name="poi_operator">Operador</string>
+	<string name="poi_brand">Marca</string>
+
+	<string name="poi_enforcement_maxspeed">Cumplimiento de velocidad máxima</string>
+	<string name="poi_enforcement_traffic_signals">Cumplimiento de señales de tráfico</string>
+	<string name="poi_enforcement_maxheight">Cumplimiento de altura máxima</string>
+	<string name="poi_enforcement_mindistance">Cumplimiento de distancia mínima</string>
+	<string name="poi_enforcement_check">Cumplimiento de control</string>
+	</resources>
