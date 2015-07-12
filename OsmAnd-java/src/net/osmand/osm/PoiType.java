@@ -14,7 +14,6 @@ public class PoiType extends AbstractPoiType {
 	private String osmValue2;
 	
 	private boolean text;
-	private boolean map;
 	private boolean nameOnly;
 	private boolean relation;
 	
@@ -119,16 +118,6 @@ public class PoiType extends AbstractPoiType {
     public void setText(boolean text) {
     	this.text = text;
     }
-
-    
-
-	public boolean isMap() {
-		return map;
-	}
-
-	public void setMap(boolean map) {
-		this.map = map;
-	}
 
 	public boolean isNameOnly() {
 		return nameOnly;

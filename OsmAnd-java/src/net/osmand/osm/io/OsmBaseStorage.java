@@ -30,12 +30,16 @@ import org.xml.sax.helpers.DefaultHandler;
 public class OsmBaseStorage extends DefaultHandler {
 
 	protected static final String ELEM_OSM = "osm"; //$NON-NLS-1$
+	protected static final String ELEM_OSMCHANGE = "osmChange"; //$NON-NLS-1$
 	protected static final String ELEM_NODE = "node"; //$NON-NLS-1$
 	protected static final String ELEM_TAG = "tag"; //$NON-NLS-1$
 	protected static final String ELEM_WAY = "way"; //$NON-NLS-1$
 	protected static final String ELEM_ND = "nd"; //$NON-NLS-1$
 	protected static final String ELEM_RELATION = "relation"; //$NON-NLS-1$
 	protected static final String ELEM_MEMBER = "member"; //$NON-NLS-1$
+	protected static final String ELEM_MODIFY = "modify"; //$NON-NLS-1$
+	protected static final String ELEM_CREATE = "create"; //$NON-NLS-1$
+	protected static final String ELEM_DELETE = "delete"; //$NON-NLS-1$
 	
 	
 	protected static final String ATTR_VERSION = "version"; //$NON-NLS-1$
@@ -55,6 +59,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected static final String ATTR_ROLE = "role"; //$NON-NLS-1$
 	
 	protected Entity currentParsedEntity = null;
+	protected int currentModify = 0;
 	protected EntityInfo currentParsedEntityInfo = null;
 	
 	protected boolean parseStarted;
@@ -114,6 +119,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		this.supressWarnings = supressWarnings;
 	}
 	
+	private boolean osmChange;
 	protected SAXParser saxParser;
 	public SAXParser initSaxParser(){
 		if(saxParser != null){
@@ -157,9 +163,10 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 	protected void initRootElement(String uri, String localName, String name, Attributes attributes) throws OsmVersionNotSupported{
-		if(!ELEM_OSM.equals(name) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
+		if((!ELEM_OSM.equals(name) && !ELEM_OSMCHANGE.equals(name)) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
 			throw new OsmVersionNotSupported();
 		}
+		osmChange = ELEM_OSMCHANGE.equals(name);
 		parseStarted = true;	
 	}
 	
@@ -171,7 +178,13 @@ public class OsmBaseStorage extends DefaultHandler {
 		if(!parseStarted){
 			initRootElement(uri, localName, name, attributes);
 		}
-		if (currentParsedEntity == null) {
+		if (ELEM_MODIFY.equals(name) ) {
+			currentModify = Entity.MODIFY_MODIFIED;
+		} else if (ELEM_CREATE.equals(name) ) {
+			currentModify = Entity.MODIFY_CREATED;
+		} else if (ELEM_DELETE.equals(name) ) {
+			currentModify = Entity.MODIFY_DELETED;
+		} else if (currentParsedEntity == null) {
 			progressEntity ++;
 			if(progress != null && ((progressEntity % moduleProgress) == 0) && 
 					!progress.isIndeterminate() && streamForProgress != null){
@@ -191,14 +204,17 @@ public class OsmBaseStorage extends DefaultHandler {
 			} else {
 				// this situation could be logged as unhandled
 			}
-			if(parseEntityInfo && currentParsedEntity != null){
-				currentParsedEntityInfo = new EntityInfo();
-				currentParsedEntityInfo.setChangeset(attributes.getValue(ATTR_CHANGESET));
-				currentParsedEntityInfo.setTimestamp(attributes.getValue(ATTR_TIMESTAMP));
-				currentParsedEntityInfo.setUser(attributes.getValue(ATTR_USER));
-				currentParsedEntityInfo.setVersion(attributes.getValue(ATTR_VERSION));
-				currentParsedEntityInfo.setVisible(attributes.getValue(ATTR_VISIBLE));
-				currentParsedEntityInfo.setUid(attributes.getValue(ATTR_UID));
+			if (currentParsedEntity != null) {
+				currentParsedEntity.setModify(currentModify);
+				if (parseEntityInfo) {
+					currentParsedEntityInfo = new EntityInfo();
+					currentParsedEntityInfo.setChangeset(attributes.getValue(ATTR_CHANGESET));
+					currentParsedEntityInfo.setTimestamp(attributes.getValue(ATTR_TIMESTAMP));
+					currentParsedEntityInfo.setUser(attributes.getValue(ATTR_USER));
+					currentParsedEntityInfo.setVersion(attributes.getValue(ATTR_VERSION));
+					currentParsedEntityInfo.setVisible(attributes.getValue(ATTR_VISIBLE));
+					currentParsedEntityInfo.setUid(attributes.getValue(ATTR_UID));
+				}
 			}
 		} else {
 			if (ELEM_TAG.equals(name)) {
@@ -234,6 +250,12 @@ public class OsmBaseStorage extends DefaultHandler {
 			type = EntityType.WAY;
 		} else if (ELEM_RELATION.equals(name)){
 			type = EntityType.RELATION;
+		} else if (ELEM_MODIFY.equals(name) ) {
+			currentModify = 0;
+		} else if (ELEM_CREATE.equals(name) ) {
+			currentModify = 0;
+		} else if (ELEM_DELETE.equals(name) ) {
+			currentModify = 0;
 		}
 		if (type != null) {
 			if(currentParsedEntity != null){

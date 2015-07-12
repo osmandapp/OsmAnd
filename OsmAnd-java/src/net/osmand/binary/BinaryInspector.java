@@ -66,15 +66,15 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-				"-vpoi",
-//				"-vmap", "-vmapobjects", 
+//				"-vpoi",
+				"-vmap", "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
-//				"-zoom=16",
+				"-zoom=14",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/osm-gen/Andorra-latest.obf"
+				"/Users/victorshcherb/osmand/osm-gen/032.obf"
 					});
 		} else {
 			in.inspector(args);
