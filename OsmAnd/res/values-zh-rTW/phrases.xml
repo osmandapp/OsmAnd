@@ -878,4 +878,15 @@
 	<string name="poi_pyrotechnics">煙火</string>
 	<string name="poi_weapons">武器商店</string>
 
+	<string name="poi_breakwater">防波堤</string>
+	<string name="poi_groyne">丁壩</string>
+
+	<string name="poi_power_cable_distribution_cabinet">電纜配線箱</string>
+	<string name="poi_basin">盆地</string>
+	<string name="poi_conservation">保育土地</string>
+
+	<string name="poi_crane">起重機</string>
+	<string name="poi_tourism_attraction">旅遊景點</string>
+	<string name="poi_cutline">圖例</string>
+	<string name="poi_tree">樹</string>
 	</resources>
