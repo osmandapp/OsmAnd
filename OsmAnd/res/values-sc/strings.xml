@@ -790,7 +790,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare in ue est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
+	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare cando est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
 \nPodes agatare su logu e su tempus de parchègiu in su widget de sa mapa. Podes annànghere notìficas in su calendàriu pro ti l\'ammentare.</string>
 	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
