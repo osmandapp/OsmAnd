@@ -149,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和停車剩餘時間（如果有時間限制）。\n位置和時間這兩者在 OsmAnd 操控板可以看見，在地圖螢幕上同一個小工具。警報可以作為提醒增加到 Android 的日曆。</string>
+	<string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n位置和時間這兩者均可在 OsmAnd 操控板，地圖螢幕上的小工具看見。警報可以增加到 Android 的日曆作為提醒。</string>
 	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
