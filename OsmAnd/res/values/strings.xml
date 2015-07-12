@@ -9,24 +9,27 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="rendering_attr_currentTrackColor_name">Current GPX color</string>
-    <string name="rendering_attr_currentTrackWidth_name">Current GPX width</string>
+	<string name="rendering_value_default13_name">Default (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Default (translucent cyan)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX color</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
     <string name="rendering_value_red_name">Red</string>
     <string name="rendering_value_translucent_red_name">Translucent red</string>
+    <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_translucent_orange_name">Translucent orange</string>
     <string name="rendering_value_yellow_name">Yellow</string>
     <string name="rendering_value_translucent_yellow_name">Translucent yellow</string>
-    <string name="rendering_value_lightgreen_name">Lightgreen</string>
-    <string name="rendering_value_translucent_lightgreen_name">Translucent lightgreen</string>
+    <string name="rendering_value_lightgreen_name">Light green</string>
+    <string name="rendering_value_translucent_lightgreen_name">Translucent light green</string>
     <string name="rendering_value_green_name">Green</string>
     <string name="rendering_value_translucent_green_name">Translucent green</string>
-    <string name="rendering_value_lightblue_name">Lightblue</string>
-    <string name="rendering_value_translucent_lightblue_name">Translucent lightblue</string>
+    <string name="rendering_value_lightblue_name">Light blue</string>
+    <string name="rendering_value_translucent_lightblue_name">Translucent light blue</string>
     <string name="rendering_value_blue_name">Blue</string>
     <string name="rendering_value_translucent_blue_name">Translucent blue</string>
     <string name="rendering_value_purple_name">Purple</string>
     <string name="rendering_value_translucent_purple_name">Translucent purple</string>
-    <string name="restart_is_required">In order to apply the changes, restart of the application is required.</string>
+    <string name="restart_is_required">In order to fully apply the changes, a manual application restart is required.</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="lang_pms">Piedmontese</string>
@@ -220,9 +223,9 @@
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
-	<string name="osmo_plugin_description">This Plugin provides the functionality for OsMo advanced live monitoring, see http://osmo.mobi.
-		\n\nYou can track other devices and be tracked. You can spontaneously create anonymous groups, share each other\'s location, and communicate. Comes with various options for session tracking or permanent tracking.
-		\n\nAnonymous groups are created for a specified number of days and limited to defined features, i.e. there is no remote control and no group administrator.
+	<string name="osmo_plugin_description">This Plugin provides the functionality of the so-called OsMo advanced live monitoring, see http://osmo.mobi.
+		\n\nYou can track all devices of a participating group in real time, and communicate with each other. Comes with various options for session tracking or permanent tracking.
+		\n\nAnonymous groups can be created spontaneously for a specified number of days and are limited to defined features, i.e. there is no remote control and no group administrator.
 		Fully functional groups, on the other hand, can be created on the website and only registered users have access to them.
 	</string>
 	<string name="srtm_paid_version_title">Contour lines plugin</string>
@@ -254,7 +257,8 @@
 	<string name="audionotes_plugin_name">Audio/video notes</string>
 	<string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map screen, or directly the context menu for any position on the map.</string>
 	<string name="osmand_parking_plugin_name">Parking Position</string>
-	<string name="osmand_parking_plugin_description">Parking position plugin let you easily memorize when the car was parked and how much time left if the parking is limited by time. You can find your parking place and time on the card of the dashboard and on the map widget. \n It adds notification to the calendar in case you want to get a reminder about it.</string>
+	<string name="osmand_parking_plugin_description">The parking position plugin lets you memorize when your car is parked and how much parking time is left (if there is a time limit).
+	\nBoth the location and time are visible on the OsmAnd dashboard as well as in widget on the map screen. An alarm can be added to the Android calendar as a reminder.</string>
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
 	<string name="accessibility_preferences">Accessibility</string>
@@ -295,7 +299,6 @@
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
-    <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">German road atlas</string>
     <string name="rendering_value_highContrastRoads_name">High contrast roads</string>
 	<string name="traffic_warning_railways">Railroad crossing</string>

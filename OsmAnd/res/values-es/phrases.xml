@@ -680,7 +680,7 @@
 	<string name="poi_10pin">Bolera de 10 pinos</string>
 	<string name="poi_boules">Bolos</string>
 	<string name="poi_cricket">Críquet</string>
-	<string name="poi_scuba_diving">Submarinismo</string>
+	<string name="poi_scuba_diving">Buceo</string>
 	<string name="poi_handball">Balonmano</string>
 	<string name="poi_pelota">Frontón</string>
 	<string name="poi_roller_skating">Patinaje sobre ruedas</string>
@@ -877,4 +877,6 @@
 
 	<string name="poi_highway_crossing">Cruce peatonal</string>
 
-</resources>
+<string name="poi_wiki_lang_nn">Wiki Noruega (Nynorsk)</string>
+	<string name="poi_horse_stile">Portón equino</string>
+	</resources>

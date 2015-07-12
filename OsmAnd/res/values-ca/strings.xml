@@ -61,7 +61,8 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar fàcilment quan es va aparcar i quant temps us queda si l\'aparcament té una limitació de temps màxim. El lloc d\'aparcament i el temps que fa que heu aparcat se us mostra a la targeta del tauler i al giny del mapa.\nS\'inclou una notificació al calendari si voleu tenir-ne un recordatori.</string>
+<string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar quan es va aparcar el vostre cotxe i quant temps us queda, si l\'aparcament té una limitació de temps màxim.
+\nTant la situació com el temps que us queda es mostra al tauler d\'OsmAnd així com al giny en la mapa. Es pot afegir una alarma al vostre calendari d\'Android com a recordatori.</string>
 <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
@@ -1511,7 +1512,7 @@
 	</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat de monitorització avançada en temps real OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment d\'altres dispositius, així com ser seguit. Podeu crear grups anònims de manera espontània, compartir la ubicació amb els altres membres i comunicar-vos. Hi ha diferents paràmetres de seguiment: puntual i permanent.\n\nEls grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. ex. no tenen control remot ni administració de grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
+    <string name="osmo_plugin_description">"Aquest connector us ofereix la funcionalitat del seguiment avançat en temps real anomenat OsMo, consulteu http://osmo.mobi.\n\nPodeu fer el seguiment de tots els dispositius que integrin un grup i comunicar-vos amb qualsevol d\'ells. Hi ha diferents paràmetres segons el tipus de seguiment: puntual o permanent.\n\nEls grups anònims es poden crear al moment per un nombre de dies especificat i tenen les funcionalitats limitades, p. ex. no tenen control remot ni administració de grup. Els grups totalment operatius, per altra banda, poden crear-se des del lloc web i només els usuaris registrats hi tenen accés. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	
@@ -2052,8 +2053,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_nv">Navaho</string>
     <string name="lang_ml">Malaiàlam</string>
     <string name="lang_os">Osseta</string>
-    <string name="rendering_attr_currentTrackColor_name">Color GPX actual</string>
-    <string name="rendering_attr_currentTrackWidth_name">Amplada GPX actual</string>
+    <string name="rendering_attr_currentTrackColor_name">Color traça GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Amplada traça GPX</string>
     <string name="rendering_value_red_name">Vermell</string>
     <string name="rendering_value_translucent_red_name">Vermell translúcid</string>
     <string name="rendering_value_translucent_orange_name">Taronja translúcid</string>
@@ -2069,5 +2070,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_translucent_blue_name">Blau translúcid</string>
     <string name="rendering_value_purple_name">Porpra</string>
     <string name="rendering_value_translucent_purple_name">Porpra translúcid</string>
-    <string name="restart_is_required">Per aplicar els canvis, cal que reinicieu l\'aplicació.</string>
+    <string name="restart_is_required">Per aplicar totalment els canvis, cal que reinicieu manualment l\'aplicació.</string>
+    <string name="rendering_value_default13_name">Per defecte (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Per defecte (cian translúcid)</string>
     </resources>

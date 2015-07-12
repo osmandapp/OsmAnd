@@ -853,7 +853,7 @@
 	<string name="poi_block">Blok</string>
 	<string name="poi_bus_trap">Bussluse</string>
 	<string name="poi_cattle_grid">Færist</string>
-	<string name="poi_full_height_turnstile">Fuld højde indgangsmølle</string>
+	<string name="poi_full_height_turnstile">Fuld højde adgangsmølle</string>
 	<string name="poi_bump_gate">Bumplåge</string>
 	<string name="poi_general_barrier">Almindelig forhindring</string>
 	<string name="poi_stile">Stente</string>
@@ -862,7 +862,7 @@
 	<string name="poi_kissing_gate">Kissing gate</string>
 	<string name="poi_sally_port">Fæstningssport</string>
 	<string name="poi_swing_gate">Svingport</string>
-	<string name="poi_turnstile">Indgangsmølle</string>
+	<string name="poi_turnstile">Adgangsmølle</string>
 	<string name="poi_barrier_entrance">Indgang</string>
 	<string name="poi_entrance_main">Hovedindgang</string>
 	<string name="poi_entrance">Indgang</string>
@@ -895,4 +895,48 @@
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
 	<string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
 	<string name="poi_swimming_pool_shop">Svømmebassin udstyr</string>
-	</resources>
+	<string name="poi_breakwater">Bølgebryder</string>
+	<string name="poi_groyne">Høfde</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Kabel distribution skab</string>
+	<string name="poi_basin">Basin</string>
+	<string name="poi_conservation">Landbevaring</string>
+
+	<string name="poi_building_poi">Bygning</string>
+	<string name="poi_crane">Kran</string>
+	<string name="poi_cutline">Cutline</string>
+	<string name="poi_tree">Træ</string>
+	<string name="poi_icn_ref">International cykel knudepunkt netværk</string>
+	<string name="poi_ncn_ref">National cykel knudepunkt netværk</string>
+	<string name="poi_rcn_ref">Regional cykel knudepunkt netværk</string>
+	<string name="poi_lcn_ref">Lokal cykel knudepunkt netværk</string>
+
+	<string name="poi_abandoned">Forladt</string>
+	<string name="poi_disused">Nedlagt</string>
+
+<string name="poi_tourism_attraction">Turistattraktion</string>
+	<string name="poi_operator">Operatør</string>
+	<string name="poi_maxweight">Max vægt</string>
+	<string name="poi_maxheight">Max højde</string>
+	<string name="poi_website">Hjemmeside</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_description">Beskrivelse</string>
+	<string name="poi_opening_hours">Åbningstider</string>
+	<string name="poi_iwn_ref">International vandre knudepunkt netværk</string>
+	<string name="poi_nwn_ref">National vandre knudepunkt netværk</string>
+	<string name="poi_rwn_ref">Regional vandre knudepunkt netværk</string>
+	<string name="poi_lwn_ref">Lokal vandre knudepunkt netværk</string>
+
+	<string name="poi_collection_times">Tømnings antal</string>
+	<string name="poi_service_times">Service-tider</string>
+	<string name="poi_brand">Varemærke</string>
+
+	<string name="poi_enforcement_traffic_signals">Håndhævelse: trafiksignaler</string>
+	<string name="poi_enforcement_maxspeed">Håndhævelse: max hastighed</string>
+	<string name="poi_enforcement_maxheight">Håndhævelse: max højde</string>
+	<string name="poi_enforcement_mindistance">Håndhævelse: min afstand</string>
+	<string name="poi_enforcement_check">Håndhævelse: kontrol</string>
+	<string name="poi_enforcement_access">Håndhævelse: adgang</string>
+	<string name="poi_enforcement_toll">Håndhævelse: vejafgift</string>
+
+</resources>

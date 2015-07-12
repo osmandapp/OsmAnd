@@ -856,4 +856,27 @@
 	<string name="poi_entrance">Entrada</string>
 	<string name="poi_entrance_exit">Sortida</string>
 
+	<string name="poi_coffee">Coffee shop</string>
+	<string name="poi_pasta">Pasta shop</string>
+	<string name="poi_fashion">Botiga de moda</string>
+	<string name="poi_free_flying">Botiga de vol lliure</string>
+	<string name="poi_garden_furniture">Mobles de jardí</string>
+	<string name="poi_music">Botiga de música</string>
+	<string name="poi_scuba_diving_shop">Botiga de submarinisme</string>
+	<string name="poi_tyres">Venda de pneumàtics</string>
+	<string name="poi_energy">Centre d\'eficiència energètica</string>
+	<string name="poi_swimming_pool_shop">Productes de piscina</string>
+	<string name="poi_games">Jocs</string>
+	<string name="poi_model">Modelisme</string>
+	<string name="poi_video_games">Videojocs</string>
+	<string name="poi_pyrotechnics">Coets</string>
+	<string name="poi_weapons">Armeria</string>
+
+	<string name="poi_stile">Restricció de pas</string>
+	<string name="poi_horse_stile">Pas per cavalls</string>
+	<string name="poi_kissing_gate">porta laberíntica</string>
+	<string name="poi_sally_port">Porta llevadissa</string>
+	<string name="poi_swing_gate">Barrera griratòria</string>
+	<string name="poi_turnstile">Torn de pas</string>
+	<string name="poi_kent_carriage_gap">Pas exclusiu per carruatges</string>
 	</resources>

@@ -764,4 +764,7 @@
 	<string name="poi_wiki_lang_vo">Wiki in volapük</string>
 	<string name="poi_wiki_lang_zh">Wiki in tzinesu</string>
 
-</resources>
+<string name="poi_music">Butega de mùsica</string>
+	<string name="poi_games">Giogos</string>
+	<string name="poi_video_games">Videogiogos</string>
+	</resources>

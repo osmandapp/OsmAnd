@@ -297,7 +297,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Parkering udvidelsen gør det nemt huske, hvor bilen er parkeret, og hvor meget tid der er tilbage, hvis parkeringen er tidsbegrænset. Find parkeringsplads og tidspunkt på startsiden og på kortet.\nEn meddelelse kan tilføjes til kalenderen, hvis man ønsker at få en påmindelse.</string>
+	<string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget parkeringstid der er tilbage (hvis der er en tidsfrist).\nBåde placering og tid er synlige på OsmAnd betjeningspanelet samt i modul på kortskærmen. En alarm kan tilføjes til Android kalenderen, som en påmindelse.</string>
 	<string name="osmand_parking_plugin_name">Parkering</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
@@ -1503,7 +1503,7 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi.\n\nSpor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing.\n\nAnonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og ingen gruppeadministrator. Fuldt funktionelle grupper, kan på den anden side oprettes på hjemmesiden, og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_description">"Udvidelsen giver funktionalitet for den såkaldte Osmo avancerede live overvågning, se http://osmo.mobi.\n\nSpor alle enheder i en deltagende gruppe tidstro og kommunikere med hinanden. Leveres med forskellige muligheder for sporing session eller permanent sporing.\n\nAnonyme grupper kan oprettes spontant for et bestemt antal dage, og der begrænset til definerede funktioner, dvs. der er ingen fjernbetjening og ingen gruppeadministrator. Fuldt funktionelle grupper, kan til gengæld oprettes på hjemmesiden, og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (OSM moniteing)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -2067,9 +2067,9 @@
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="restart_is_required">For at anvende ændringerne, er genstart af programmet nødvendigt.</string>
-    <string name="rendering_attr_currentTrackColor_name">Áktuel GPX farve</string>
-    <string name="rendering_attr_currentTrackWidth_name">Aktuel GPX bredde</string>
+    <string name="restart_is_required">For fuldt ud at anvende ændringerne, er en manuel genstart af programmet nødvendigt.</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX farve</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX bredde</string>
     <string name="rendering_value_red_name">Rød</string>
     <string name="rendering_value_translucent_red_name">Gennemsigtig rød</string>
     <string name="rendering_value_translucent_orange_name">Gennemsigtigt orange</string>
@@ -2085,4 +2085,6 @@
     <string name="rendering_value_translucent_blue_name">Gennemsigtig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
+    <string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (gennemsigtig cyan)</string>
     </resources>

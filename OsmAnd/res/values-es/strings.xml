@@ -806,7 +806,7 @@
 \n\nSe aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Reproduce acciones de la voz seleccionada actualmente</string>
+  <string name="play_commands_of_currently_selected_voice">Reproduce acciones de la voz seleccionada</string>
   <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Dibujo nativo</string>
   
@@ -1912,7 +1912,7 @@
 	<string name="dash_download_msg_none">¿Quiere descargar los mapas fuera de línea?</string>
     <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
     <string name="rendering_value_default_name">Predefinido</string>
-    <string name="rendering_value_orange_name">Anaranjado</string>
+    <string name="rendering_value_orange_name">Naranja</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No utilizar reglas de navegación introducidas en v.1.9</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas alemán de carreteras</string>
@@ -2120,4 +2120,24 @@
     <string name="lang_vo">Volapuk</string>
     <string name="lang_te">Telugú</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="rendering_value_default13_name">Predeterminado (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predeterminado (cian translúcido)</string>
+    <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Anchura del GPX</string>
+    <string name="rendering_value_red_name">Rojo</string>
+    <string name="rendering_value_translucent_red_name">Rojo translúcido</string>
+    <string name="rendering_value_translucent_orange_name">Naranja translúcido</string>
+    <string name="rendering_value_yellow_name">Amarillo</string>
+    <string name="rendering_value_translucent_yellow_name">Amarillo translúcido</string>
+    <string name="rendering_value_lightgreen_name">Verde claro</string>
+    <string name="rendering_value_translucent_lightgreen_name">Verde claro translúcido</string>
+    <string name="rendering_value_green_name">Verde</string>
+    <string name="rendering_value_translucent_green_name">Verde translúcido</string>
+    <string name="rendering_value_lightblue_name">Azul claro</string>
+    <string name="rendering_value_translucent_lightblue_name">Azul claro translúcido</string>
+    <string name="rendering_value_blue_name">Azul</string>
+    <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
+    <string name="rendering_value_purple_name">Púrpura</string>
+    <string name="rendering_value_translucent_purple_name">Púrpura translúcido</string>
+    <string name="restart_is_required">Para aplicar los cambios, es necesario reiniciar manualmente la aplicación.</string>
     </resources>

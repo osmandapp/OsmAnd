@@ -119,7 +119,7 @@
 	</string>
   <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri http://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
-  <string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
+  <string name="play_commands_of_currently_selected_voice">Prehrať povely zvoleného hlasu</string>
   <string name="debugging_and_development">Vývoj OsmAndu</string>
   <string name="native_rendering">Natívne vykresľovanie</string>
   <string name="test_voice_prompts">Test hlasových povelov</string>
@@ -985,7 +985,7 @@
   <string name="osmand_parking_pm">popoludní</string>
   <string name="osmand_parking_am">dopoludnia</string>
   <string name="osmand_parking_position_name">Parkovací bod</string>
-  <string name="osmand_parking_plugin_description">Modul Parkovacie miesto umožňuje zapamätať si kedy bolo auto zaparkované a koľko zostáva času (ak je parkovanie časovo obmedzené). Miesto a miesto zaparkovania môžete nájsť na nástroji na mape.\n Tiež môže pridať pripomienku do kalendára.</string>
+  <string name="osmand_parking_plugin_description">Modul Parkovacie miesto umožňuje zapamätať si kedy bolo auto zaparkované a koľko zostáva času (ak je parkovanie časovo obmedzené).\nMiesto aj čas zaparkovania môžete nájsť na nástroji na mape aj úvodnom paneli OsmAnd. Tiež je možné pridať pripomienku do kalendára.</string>
   <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
   <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
@@ -1644,7 +1644,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">"Tento modul poskytuje funkcie pokročilého sledovania naživo cez OsMo, pozrite na http://osmo.mobi.\n\nMôžete sledovať iné zariadenia a sám byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny sú vytvorené na určený počet dní a funkcie sú obmedzené, napr. nie je diaľkové ovládanie ani administrátor skupiny. Na druhej strane, plne funkčné skupiny je možné vytvoriť na webstránke a sú prístupné len registrovaným používateľom. "</string>
+    <string name="osmo_plugin_description">"Tento modul poskytuje funkcie pokročilého sledovania naživo cez OsMo, pozrite na http://osmo.mobi.\n\nMôžete sledovať všetky zariadenia účastníkov v skupine a komunikovať spolu. Obsahuje možnosti nastavenia krátkodobého a dlhodobého sledovania.\n\nAnonymné skupiny môžu byť operatívne vytvorené na určený počet dní a ich funkcie sú obmedzené, napr. nie je diaľkové ovládanie ani administrátor skupiny. Na druhej strane, plne funkčné skupiny je možné vytvoriť na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo (sledovanie OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
@@ -2216,8 +2216,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_lb">Luxembursky</string>
     <string name="lang_os">Osetsky</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="rendering_attr_currentTrackColor_name">Súčasná farba GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Súčasná šírka GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Farba GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Šírka GPX</string>
     <string name="rendering_value_red_name">Červená</string>
     <string name="rendering_value_translucent_red_name">Priehľadná červená</string>
     <string name="rendering_value_translucent_orange_name">Priehľadná oranžová</string>
@@ -2232,5 +2232,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_blue_name">Modrá</string>
     <string name="rendering_value_purple_name">Fialová</string>
     <string name="rendering_value_translucent_purple_name">Priehľadná fialová</string>
-    <string name="restart_is_required">Pre použitie týchto zmien je nutné reštartovať aplikáciu.</string>
+    <string name="restart_is_required">Pre plné použitie týchto zmien je nutné manuálne reštartovať aplikáciu.</string>
+    <string name="rendering_value_default13_name">Predvolená (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predvolená (priehľadná azúrová)</string>
+    <string name="rendering_value_translucent_blue_name">Priehľadná modrá</string>
     </resources>

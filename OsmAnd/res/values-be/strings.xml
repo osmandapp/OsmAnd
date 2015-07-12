@@ -1384,7 +1384,7 @@
     <string name="interrupt_music">Перапыненьне музыкі</string>
 	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
     <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і наладзіць асабісты канал адсочваньня</string>
-    <string name="osmo_plugin_description">"Убудова забясьпечвае функцыянальнасьць для пашыранага жывога адсочваньня OsMo, гл. Http: //osmo.mobi.↵\n↵\nЁн дазваляе адсочваць іншыя прылады і адсочвацца самому. Вы можаце ствараць ананімныя групы, дзяліцца адзін з адным месцазнаходжаньнем і мець зносіны. Магчымыя розныя варыянты опцый для адсочваньня сэсіі або сталага адсочваньня.↵\n↵\nАнанімныя групы ствараюцца для пазначанай колькасьці дзён і з абмежаваным функцыяналам, гэта значыць няма дыстанцыйнага кіраваньня і няма адміністратара групы. Цалкам функцыянальныя групы, з другога боку, могуць быць створаны на вэб-сайце і толькі зарэгістраваныя карыстальнікі маюць да іх доступ. "</string>
+    <string name="osmo_plugin_description">"Модуль забясьпечвае функцыянальнасьць г. зв. пашыранага жывога адсочваньня OsMo, гл. Http: //osmo.mobi.↵\n↵\nЁн дазваляе адсочваць усе прылады ў вашай групе ў рэальным часе і мець зносіны. Магчымыя розныя варыянты опцый для адсочваньня сэсіі або сталага адсочваньня.↵\n↵\nАнанімныя групы ствараюцца па жаданьні на пэўную колькасьць дзён, але з абмежаваным функцыяналам, гэта значыць няма дыстанцыйнага кіраваньня і няма адміністратара групы. Цалкам функцыянальныя групы, з другога боку, могуць быць створаны на вэб-сайце і толькі зарэгістраваныя карыстальнікі маюць да іх доступ. "</string>
     <string name="osmo_plugin_name">OsMo (OSM адсочваньне)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
@@ -2022,16 +2022,16 @@
     <string name="lang_bpy">бішнупрыя</string>
     <string name="lang_nv">наваха</string>
     <string name="lang_new">неварская</string>
-    <string name="restart_is_required">Каб ужыць зьмены, трэба перезапусьць праграму.</string>
-    <string name="rendering_attr_currentTrackColor_name">Бягучы колер GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Бягучая шырыня GPX</string>
+    <string name="restart_is_required">Каб цалкам ужыць зьмены, трэба перезапусьць праграму ўручную.</string>
+    <string name="rendering_attr_currentTrackColor_name">Колер GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Шырыня GPX</string>
     <string name="rendering_value_red_name">Чырвоны</string>
     <string name="rendering_value_translucent_red_name">Празрысты чырвоны</string>
     <string name="rendering_value_translucent_orange_name">Празрысты аранжавы</string>
     <string name="rendering_value_yellow_name">Жоўты</string>
     <string name="rendering_value_translucent_yellow_name">Празрысты жоўты</string>
-    <string name="rendering_value_lightgreen_name">Сьветла-зялёны</string>
-    <string name="rendering_value_translucent_lightgreen_name">Празрысты сьветла-зялёны</string>
+    <string name="rendering_value_lightgreen_name">Сьветла зялёны</string>
+    <string name="rendering_value_translucent_lightgreen_name">Празрысты сьветла зялёны</string>
     <string name="rendering_value_green_name">Зялёны</string>
     <string name="rendering_value_translucent_green_name">Празрысты зялёны</string>
     <string name="rendering_value_lightblue_name">Блакітны</string>
@@ -2040,4 +2040,6 @@
     <string name="rendering_value_translucent_blue_name">Празрысты сіні</string>
     <string name="rendering_value_purple_name">Фіялетавы</string>
     <string name="rendering_value_translucent_purple_name">Празрысты фіялетавы</string>
+    <string name="rendering_value_default13_name">Па змоўчаньні (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Па змоўчаньні (празрысты сіні)</string>
     </resources>

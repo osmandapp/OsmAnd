@@ -1393,4 +1393,9 @@
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
     <string name="restart_is_required">For å bruke endringene er omstart av programmet nødvendig.</string>
+    <string name="plugin_touringview_name">Turkartvisning</string>
+	<string name="rendering_value__name">Standard</string>
+    <string name="rendering_value_highContrastRoads_name">Veier med høy kontrast</string>
+	<string name="rendering_value_red_name">Rød</string>
+    <string name="rendering_value_translucent_orange_name">Gjennomskinnelig orange</string>
     </resources>

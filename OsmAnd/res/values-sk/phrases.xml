@@ -869,4 +869,45 @@
 
 	<string name="poi_scuba_diving_shop">Potápačské potreby</string>
 	<string name="poi_swimming_pool_shop">Kúpacie potreby</string>
-	</resources>
+	<string name="poi_breakwater">Vlnolam</string>
+	<string name="poi_groyne">Pobrežná hrádza</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Káblová rozvodná skriňa</string>
+	<string name="poi_basin">Nádrž na dažďovú vodu</string>
+	<string name="poi_building_poi">Budova</string>
+	<string name="poi_crane">Žeriav</string>
+	<string name="poi_tourism_attraction">Turistická atrakcia</string>
+	<string name="poi_cutline">Výsek lesa</string>
+	<string name="poi_tree">Strom</string>
+	<string name="poi_conservation">Chránené územie</string>
+
+	<string name="poi_icn_ref">Medzinárodná cyklistická sieť</string>
+	<string name="poi_ncn_ref">Národná cyklistická sieť</string>
+	<string name="poi_rcn_ref">Regionálna cyklistická sieť</string>
+	<string name="poi_lcn_ref">Lokálna cyklistická sieť</string>
+
+	<string name="poi_iwn_ref">Medzinárodná pešia sieť</string>
+	<string name="poi_nwn_ref">Národná pešia sieť</string>
+	<string name="poi_rwn_ref">Regionálna pešia sieť</string>
+	<string name="poi_lwn_ref">Lokálna pešia sieť</string>
+
+	<string name="poi_collection_times">Čas výberu pošty</string>
+	<string name="poi_description">Popis</string>
+	<string name="poi_phone">Telefón</string>
+	<string name="poi_website">Webstránka</string>
+	<string name="poi_service_times">Čas služieb</string>
+	<string name="poi_maxheight">Maximálna výška</string>
+	<string name="poi_maxweight">Maximálna hmotnosť</string>
+	<string name="poi_abandoned">Opustené</string>
+	<string name="poi_disused">Nevyužívané</string>
+
+	<string name="poi_operator">Prevádzkovateľ</string>
+	<string name="poi_brand">Značka</string>
+
+	<string name="poi_enforcement_traffic_signals">Vynútenie:semafory</string>
+	<string name="poi_enforcement_maxheight">Vynútenie:maximálna výška</string>
+	<string name="poi_enforcement_check">Vynútenie:kontrola</string>
+	<string name="poi_enforcement_access">Vynútenie:prístup</string>
+	<string name="poi_enforcement_toll">Vynútenie:mýto</string>
+
+</resources>
