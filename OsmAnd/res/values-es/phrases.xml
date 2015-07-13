@@ -905,11 +905,23 @@
 	<string name="poi_operator">Operador</string>
 	<string name="poi_brand">Marca</string>
 
-	<string name="poi_enforcement_traffic_signals">Cumplimiento: semáforos</string>
-	<string name="poi_enforcement_maxspeed">Cumplimiento: velocidad máxima</string>
-	<string name="poi_enforcement_maxheight">Cumplimiento: altura máxima</string>
-	<string name="poi_enforcement_mindistance">Cumplimiento: distancia mínima</string>
-	<string name="poi_enforcement_check">Cumplimiento: control</string>
-	<string name="poi_enforcement_toll">Cumplimiento: peaje</string>
+	<string name="poi_enforcement_traffic_signals">Control de semáforos</string>
+	<string name="poi_enforcement_maxspeed">Control de velocidad máxima</string>
+	<string name="poi_enforcement_maxheight">Control de altura máxima</string>
+	<string name="poi_enforcement_mindistance">Control de distancia mínima</string>
+	<string name="poi_enforcement_check">Control</string>
+	<string name="poi_enforcement_toll">Control de peaje</string>
 
-</resources>
+<string name="poi_kissing_gate">Portilla giratoria</string>
+	<string name="poi_sally_port">Portón de muralla</string>
+	<string name="poi_ncn_ref">Red nacional de ciclismo</string>
+	<string name="poi_rcn_ref">Red regional de ciclismo</string>
+	<string name="poi_lcn_ref">Red local de ciclismo</string>
+
+	<string name="poi_iwn_ref">Red internacional de senderismo</string>
+	<string name="poi_nwn_ref">Red nacional de senderismo</string>
+	<string name="poi_rwn_ref">Red regional de senderismo</string>
+	<string name="poi_lwn_ref">Red local de senderismo</string>
+
+	<string name="poi_enforcement_access">Control de acceso</string>
+	</resources>
