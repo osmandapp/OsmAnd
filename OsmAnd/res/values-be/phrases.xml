@@ -893,4 +893,13 @@
 	<string name="poi_breakwater">Хвалялом</string>
 	<string name="poi_groyne">Хвалярэз</string>
 
+	<string name="poi_tourism_attraction">Турыстычная славутасьць</string>
+	<string name="poi_tree">Дрэва</string>
+	<string name="poi_opening_hours">Гадзіны працы</string>
+	<string name="poi_description">Апісаньне</string>
+	<string name="poi_phone">Тэлефон</string>
+	<string name="poi_website">Вэб-сайт</string>
+	<string name="poi_operator">Апэратар</string>
+	<string name="poi_brand">Брэнд</string>
+
 	</resources>
