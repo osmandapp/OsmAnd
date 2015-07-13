@@ -892,15 +892,15 @@
 
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
-	<string name="poi_icn_ref">Red ciclista internacional</string>
-	<string name="poi_ncn_ref">Red ciclista nacional</string>
-	<string name="poi_rcn_ref">Red ciclista regional</string>
-	<string name="poi_lcn_ref">Red ciclista local</string>
+	<string name="poi_icn_ref">Red internacional de ciclismo</string>
+	<string name="poi_ncn_ref">Red nacional de ciclismo</string>
+	<string name="poi_rcn_ref">Red regional de ciclismo</string>
+	<string name="poi_lcn_ref">Red local de ciclismo</string>
 
-	<string name="poi_iwn_ref">Red de senderismo internacional</string>
-	<string name="poi_nwn_ref">Red de senderismo nacional</string>
-	<string name="poi_rwn_ref">Red de senderismo regional</string>
-	<string name="poi_lwn_ref">Red de senderismo local</string>
+	<string name="poi_iwn_ref">Red internacional de senderismo</string>
+	<string name="poi_nwn_ref">Red nacional de senderismo</string>
+	<string name="poi_rwn_ref">Red regional de senderismo</string>
+	<string name="poi_lwn_ref">Red local de senderismo</string>
 
 	<string name="poi_opening_hours">Horario de atención</string>
 	<string name="poi_collection_times">Horario de recolección</string>
@@ -913,9 +913,12 @@
 	<string name="poi_operator">Operador</string>
 	<string name="poi_brand">Marca</string>
 
-	<string name="poi_enforcement_maxspeed">Cumplimiento de velocidad máxima</string>
-	<string name="poi_enforcement_traffic_signals">Cumplimiento de señales de tráfico</string>
-	<string name="poi_enforcement_maxheight">Cumplimiento de altura máxima</string>
-	<string name="poi_enforcement_mindistance">Cumplimiento de distancia mínima</string>
-	<string name="poi_enforcement_check">Cumplimiento de control</string>
-	</resources>
+	<string name="poi_enforcement_maxspeed">Control de velocidad</string>
+	<string name="poi_enforcement_traffic_signals">Control de semáforos</string>
+	<string name="poi_enforcement_maxheight">Control de altura máxima</string>
+	<string name="poi_enforcement_mindistance">Control de distancia mínima</string>
+	<string name="poi_enforcement_check">Control</string>
+	<string name="poi_enforcement_access">Control de acceso</string>
+	<string name="poi_enforcement_toll">Control de peaje</string>
+
+</resources>
