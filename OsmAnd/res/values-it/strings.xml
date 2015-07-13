@@ -913,8 +913,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto di parcheggio</string>
-  <string name="osmand_parking_plugin_description">"Il plugin posizione di parcheggio ti permette di memorizzare facilmente quando l\'auto è stata stata parcheggiata e quanto tempo rimane, se il parcheggio è a tempo. 
-\nPuoi trovare il luogo di parcheggio e il tempo rimanente nella scheda del plugin e nel widget sulla mappa.\nAggiunge una notifica al calendario se vuoi che te lo ricordi."</string>
+  <string name="osmand_parking_plugin_description">Il plugin posizione di parcheggio ti permette di memorizzare quando l\'auto è stata stata parcheggiata e quanto tempo rimane, se il parcheggio è a tempo.
+\n\nPuoi trovare il luogo di parcheggio e il tempo rimanente nella scheda del plugin e nel widget sulla mappa.\nAggiunge una notifica al calendario se vuoi che te lo ricordi.</string>
   <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
   <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
   <string name="context_menu_item_delete_parking_point">Elimina un marcatore di parcheggio</string>
