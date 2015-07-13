@@ -178,14 +178,12 @@ public class WaypointHelper {
 				LocationPointWrapper lwp = lp.get(kIterator);
 				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
 					// skip
-				} else if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS / 2) {
-					break;
 				} else {
-					AlarmInfo inf = (AlarmInfo) lwp.point;
 					int d = route.getDistanceToPoint(lwp.routeIndex);
 					if (d > LONG_ANNOUNCE_RADIUS) {
 						break;
 					}
+					AlarmInfo inf = (AlarmInfo) lwp.point;
 					float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 					int vl = inf.updateDistanceAndGetPriority(time, d);
