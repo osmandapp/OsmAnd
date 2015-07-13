@@ -1928,4 +1928,5 @@
     <string name="rendering_value_translucent_purple_name">Prosojna škrlatna</string>
     <string name="restart_is_required">Za uveljavitev sprememb je treba ponovno zagnati program.</string>
     <string name="rendering_value_green_name">Zelena</string>
-    </resources>
+    <string name="rendering_value_default13_name">Privzeto (13)</string>
+	</resources>
