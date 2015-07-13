@@ -136,6 +136,10 @@ public class OsmBaseStorage extends DefaultHandler {
 		}	
 	}
 	
+	public boolean isOsmChange() {
+		return osmChange;
+	}
+	
 	protected Long parseId(Attributes a, String name, long defId){
 		long id = defId; 
 		String value = a.getValue(name);
