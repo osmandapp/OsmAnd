@@ -879,4 +879,37 @@
 
 <string name="poi_wiki_lang_nn">Wiki Noruega (Nynorsk)</string>
 	<string name="poi_horse_stile">Portón equino</string>
-	</resources>
+	<string name="poi_breakwater">Rompeolas</string>
+	<string name="poi_groyne">Rompeolas</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Gabinete de distribución cableada</string>
+	<string name="poi_basin">Cuenca</string>
+	<string name="poi_conservation">Suelo de conservación</string>
+
+	<string name="poi_crane">Grúa</string>
+	<string name="poi_tourism_attraction">Atracción turística</string>
+	<string name="poi_cutline">Cortafuegos forestal</string>
+	<string name="poi_tree">Árbol</string>
+	<string name="poi_icn_ref">Nodo de red ciclista internacional</string>
+	<string name="poi_opening_hours">Horario de atención</string>
+	<string name="poi_collection_times">Horario de recolección</string>
+	<string name="poi_description">Descripción</string>
+	<string name="poi_phone">Teléfono</string>
+	<string name="poi_website">Sitio web</string>
+	<string name="poi_service_times">Horario de servicio</string>
+	<string name="poi_maxheight">Altura máxima</string>
+	<string name="poi_maxweight">Peso máximo</string>
+	<string name="poi_abandoned">Abandonado</string>
+	<string name="poi_disused">En desuso</string>
+
+	<string name="poi_operator">Operador</string>
+	<string name="poi_brand">Marca</string>
+
+	<string name="poi_enforcement_traffic_signals">Cumplimiento: semáforos</string>
+	<string name="poi_enforcement_maxspeed">Cumplimiento: velocidad máxima</string>
+	<string name="poi_enforcement_maxheight">Cumplimiento: altura máxima</string>
+	<string name="poi_enforcement_mindistance">Cumplimiento: distancia mínima</string>
+	<string name="poi_enforcement_check">Cumplimiento: control</string>
+	<string name="poi_enforcement_toll">Cumplimiento: peaje</string>
+
+</resources>

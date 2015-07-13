@@ -414,7 +414,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Месца стаянкі</string>
-	<string name="osmand_parking_plugin_description">Модуль месца паркоўкі дазваляе запомніць месца, дзе прыпаркаваны ваш аўтамабіль і колькі часу засталося ў выпадку абмежаванай па часе стаянкі. Вы можаце знайсьці вашае месца паркоўкі і час на картцы на панэлі кіраваньня і на віджэце на мапе.\n Ён дадае апавяшчэньне ў календары ў выпадку, калі вы хочаце атрымаць напамін.</string>
+	<string name="osmand_parking_plugin_description">Модуль месца паркоўкі дазваляе запомніць, калі быў прыпаркаваны ваш аўтамабіль і колькі часу засталося ў выпадку абмежаванай па часе стаянкі.\nМесца паркоўкі і час відаць на панэлі кіраваньня OsmAnd і на віджэце на экране з мапай. Апавяшчэньне ў календары Android можа быць дададзена для напаміну.</string>
 	<string name="osmand_parking_plugin_name">Месца стаянкі</string>
 	<string name="context_menu_item_add_parking_point">Пазначыць месца стаянкі</string>
 	<string name="context_menu_item_delete_parking_point">Выдаліць пазнаку месца стаянкі</string>

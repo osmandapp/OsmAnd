@@ -900,8 +900,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Місце паркування</string>
-  <string name="osmand_parking_plugin_description">Втулок “Місце стоянки” дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом. Ви можете знайти місце стоянки та час на панелі керування та на віповідному віджеті на мапі.
-\n Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
+  <string name="osmand_parking_plugin_description">Втулок “Місце стоянки” дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом.
+\n\nВи можете знайти місце стоянки та час на панелі керування та на віповідному віджеті на мапі. Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
   <string name="context_menu_item_delete_parking_point">Вилучити маркер місця стоянки</string>
@@ -1713,7 +1713,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
     <string name="osmo_settings">OsMo</string>
-    <string name="osmo_plugin_description">"Цей втулок надає можливість сучасного онлайн моніторингу OsMo, дивіться http://osmo.mobi.\n\nВідстежуйте інші пристрої та діліться з іншими вашим місцезнаходженням. Створюйте анонімні групи, діліться один з одним своїм положенням та спілкуйтесь. Втулок має різноманітні налаштування сесій чи постійного відстеження.\n\nАнонімні групи мають обмеження у кілька днів та у функціях, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
+    <string name="osmo_plugin_description">"Цей втулок надає можливість сучасного онлайн моніторингу OsMo, дивіться http://osmo.mobi.\n\nВи можете відстежувати пристрої учасників з вашох групи в поточному часі та підтримувати зв’язок друг з другом. Втулок має різноманітні налаштування сесій чи постійного відстеження.\n\nАнонімні групи можуть створюватись та існувати вказану кількість днів та мати зазначені функції, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
     <string name="osmo_plugin_name">OsMo (OSM моніторинг)</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
@@ -2153,8 +2153,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 <string name="light_theme">Світла</string>
     <string name="dark_theme">Темна</string>
     <string name="lang_pms">П\'ємондський</string>
-    <string name="rendering_attr_currentTrackColor_name">Поточний колір GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Поточна ширина GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Колір GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Ширина GPX</string>
     <string name="rendering_value_red_name">Червоний</string>
     <string name="rendering_value_translucent_red_name">Напівпрозорий червоний</string>
     <string name="rendering_value_yellow_name">Жовтий</string>
@@ -2163,13 +2163,13 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_translucent_lightgreen_name">Напівпрозорий світло зелений</string>
     <string name="rendering_value_green_name">Зелений</string>
     <string name="rendering_value_translucent_green_name">Напівпрозорий зелений</string>
-    <string name="rendering_value_lightblue_name">Світло синій</string>
-    <string name="rendering_value_translucent_lightblue_name">Напівпрозорий світло синій</string>
+    <string name="rendering_value_lightblue_name">Світло-блакиіний</string>
+    <string name="rendering_value_translucent_lightblue_name">Напівпрозорий світло-блакитний</string>
     <string name="rendering_value_blue_name">Синій</string>
     <string name="rendering_value_translucent_blue_name">Напівпрозорий синій</string>
     <string name="rendering_value_purple_name">Пурпурний</string>
     <string name="rendering_value_translucent_purple_name">Напівпрозорий пурпурний</string>
-    <string name="restart_is_required">Для того щоб застосувати зміни потрібно перезавантажити додаток.</string>
+    <string name="restart_is_required">Для того щоб повністю застосувати зміни потрібно перезавантажити застосунок.</string>
     <string name="lang_bn">Бенгальська</string>
     <string name="lang_tl">Тагальська</string>
     <string name="lang_sh">Сербсько-Хорватьська</string>
@@ -2217,4 +2217,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d записів. Ви впевнені?</string>
 	<string name="download_wikipedia_maps">Вікіпедія</string>
+    <string name="rendering_value_default13_name">Типово (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий балкитний)</string>
+    <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
     </resources>

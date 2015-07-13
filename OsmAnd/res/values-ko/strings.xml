@@ -2301,4 +2301,24 @@
     <string name="archive_wikipedia_data">당신은 오래된 호환되지 않는 위키백과 데이터를 가지고 있습니다. 그것을 보관 하시겠습니까?</string>
     <string name="download_wikipedia_files">추가 위키백과 데이터 (%1$s MB)을 다운로드 하시겠습니까?</string>
     <string name="download_wikipedia_maps">위키백과</string>
+    <string name="rendering_value_default13_name">기본 (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">기본 (반투명 녹청)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX 색상</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX 폭</string>
+    <string name="rendering_value_red_name">빨강</string>
+    <string name="rendering_value_translucent_red_name">반투명 빨강</string>
+    <string name="rendering_value_translucent_orange_name">반투명 오렌지</string>
+    <string name="rendering_value_yellow_name">노랑</string>
+    <string name="rendering_value_translucent_yellow_name">반투명 노랑</string>
+    <string name="rendering_value_lightgreen_name">가벼운 녹색</string>
+    <string name="rendering_value_translucent_lightgreen_name">반투명 가벼운 녹색</string>
+    <string name="rendering_value_green_name">녹색</string>
+    <string name="rendering_value_translucent_green_name">반투명 녹색</string>
+    <string name="rendering_value_lightblue_name">연한 파랑</string>
+    <string name="rendering_value_translucent_lightblue_name">반투명 밝은 파란색</string>
+    <string name="rendering_value_blue_name">파랑</string>
+    <string name="rendering_value_translucent_blue_name">반투명 블루</string>
+    <string name="rendering_value_purple_name">보라색</string>
+    <string name="rendering_value_translucent_purple_name">반투명 보라색</string>
+    <string name="restart_is_required">변화를 완전히 적용 하려면, 수동으로 응용 프로그램을 다시 시작해야 합니다.</string>
     </resources>

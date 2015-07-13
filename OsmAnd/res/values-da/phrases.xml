@@ -734,7 +734,7 @@
 	<string name="poi_bench">Bænk</string>
 	<string name="poi_valley">Dal</string>
 	<string name="poi_water">Vand</string>
-	<string name="poi_wood">Træ</string>
+	<string name="poi_wood">Skov</string>
 	<string name="poi_landuse">Arealanvendelse</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL diesel</string>
@@ -898,7 +898,7 @@
 	<string name="poi_breakwater">Bølgebryder</string>
 	<string name="poi_groyne">Høfde</string>
 
-	<string name="poi_power_cable_distribution_cabinet">Kabel distribution skab</string>
+	<string name="poi_power_cable_distribution_cabinet">Elskab</string>
 	<string name="poi_basin">Basin</string>
 	<string name="poi_conservation">Landbevaring</string>
 
