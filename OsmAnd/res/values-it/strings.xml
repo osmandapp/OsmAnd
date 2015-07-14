@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -2118,8 +2118,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_translucent_blue_name">Blu traslucido</string>
     <string name="rendering_value_purple_name">Porpora</string>
     <string name="rendering_value_translucent_purple_name">Porpora traslucido</string>
-    <string name="restart_is_required">Per applicare i cambiamenti riavvia l\'app se richiesto.</string>
+    <string name="restart_is_required">Per applicare le modifiche è necessario un riavvio manuale.</string>
     <string name="rendering_value_default13_name">Default (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Default (Ciano traslucido)</string>
     <string name="rendering_value_red_name">Rosso</string>
+    <string name="lang_ht">Haitiano</string>
     </resources>

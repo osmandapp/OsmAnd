@@ -895,7 +895,7 @@
   <string name="osmand_parking_pm">du.</string>
   <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
-  <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkolt le az autójával, és mennyi idő van még hátra, ha a parkolás időben korlátozott. A vezérlőpult kártyáján és a térkép felületi elemen megtalálható a parkolási hely és idő.\nÉrtesítést ad hozzá a naptárhoz abban az esetben, ha emlékeztetőt szeretne kérni erről.</string>
+  <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkolt le az autójával, és mennyi parkolási idő van még hátra (ha a parkolás időben korlátozott).\nA parkolási hely és az idő is látható az OsmAnd vezérlőpultján, valamint a térkép képernyő felületi elemén. Értesítés adható hozzá az Android naptárhoz emlékeztetőként.</string>
   <string name="osmand_parking_plugin_name">Parkolási hely</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -1468,7 +1468,7 @@
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
     <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
     <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
-    <string name="osmo_plugin_description">"Ez a bővítmény biztosítja az OsMo speciális valós idejű megfigyelésének lehetőségét. Bővebben: http://osmo.mobi.\n\nKövethet más eszközöket, vagy követhetik Önt. Igény szerint létrehozhat névtelen csoportokat, megoszthatják egymás helyzetét, és kommunikálhatnak. Különféle lehetőségekkel érkezik a munkamenet követéséhez vagy az állandó követéshez.\n\nA névtelen csoportok adott számú napig jönnek létre, és korlátozva vannak a meghatározott szolgáltatásokra, azaz nincs távirányítás és nincs csoport adminisztrátor. Másrészről teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, és kizárólag regisztrált felhasználók rendelkeznek hozzáféréssel. "</string>
+    <string name="osmo_plugin_description">"Ez a bővítmény biztosítja az úgynevezett OsMo speciális valós idejű megfigyelésének lehetőségét. Bővebben: http://osmo.mobi.\n\nValós időben követheti egy résztvevő csoport összes eszközét, és kommunikálhatnak egymással. Különféle lehetőségekkel érkezik a munkamenet követéséhez vagy az állandó követéshez.\n\nNévtelen csoportok hozhatók létre spontán adott számú napig, és korlátozva vannak a meghatározott szolgáltatásokra, azaz nincs távirányítás és nincs csoport adminisztrátor. Másrészről teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, és kizárólag regisztrált felhasználók rendelkeznek hozzáféréssel. "</string>
     <string name="osmo_plugin_name">OsMo (OSM megfigyelés)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
@@ -2016,7 +2016,7 @@
     <string name="rendering_value_translucent_blue_name">Átlátszó kék</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Átlátszó lila</string>
-    <string name="restart_is_required">A módosítások érvénybe lépéséhez újra kell indítani az alkalmazást.</string>
+    <string name="restart_is_required">A változtatások teljes alkalmazása érdekében az alkalmazás kézi újraindítása szükséges.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX szín</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX szélesség</string>
     <string name="rendering_value_red_name">Piros</string>
