@@ -301,7 +301,8 @@ public class MapAlgorithms {
 	 */
 	private static int countIntersections(Collection<Node> polyNodes, double latitude, double longitude) {
 		int intersections = 0;
-		if (polyNodes.size() == 0) return 0;
+		if (polyNodes.size() == 0)
+			return 0;
 		Node prev = null;
 		Node first = null;
 		Node last = null;
@@ -320,6 +321,9 @@ public class MapAlgorithms {
 				intersections++;
 			}
 			prev = n;
+		}
+		if(first == null || last == null) {
+			return 0;
 		}
 		// special handling, also count first and last, might not be closed, but
 		// we want this!
