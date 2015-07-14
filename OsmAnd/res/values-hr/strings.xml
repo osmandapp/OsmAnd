@@ -39,7 +39,7 @@
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
     <string name="shared_string_control_stop">stani</string>
-    <string name="shared_string_control_start">započni</string>
+    <string name="shared_string_control_start">Započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     
     
@@ -1088,13 +1088,13 @@
 	<string name="routing_attr_avoid_ferries_description">Izbjegavati trajekte</string>
 	<string name="routing_attr_avoid_motorway_name">Izbjegavati autoceste</string>
 	<string name="routing_attr_avoid_motorway_description">Izbjegavati autoceste</string>
-	<string name="routing_attr_weight_description">Odredite ograničenje težine</string>
-    <string name="routing_attr_weight_name">Težina</string>
+	<string name="routing_attr_weight_description">Odredite masu vozila da biste znali kojim putevima vam je dopušteno voziti</string>
+    <string name="routing_attr_weight_name">Ograničenje težine</string>
 	<string name="android_19_location_disabled">Od KitKat inačice androida ne možete preuzimati i ažurirati mape na prethodno mjesto pohrane (%s). Želite li dopustiti aplikaciji da kopira podatke na novo mjesto?
         \n Napomena : stare datoteke će ostati netaknute. 
         \n Napomena : neće biti moguće dijeliti datoteke između OsmAnd i OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd će pokušati premjestiti podatke na novo odredište. Da li to želite?</string>
-    <string name="copying_osmand_one_file_descr">Kopiranje datoteka (%s) na novo odredište ...</string>
+    <string name="copying_osmand_one_file_descr">Kopiranje datoteka (%s) na novo odredište …</string>
     <string name="copying_osmand_files_descr">Kopiranje OsmAnd datoteka na novo odredište (%s)</string>
     <string name="copying_osmand_files">Kopiranje OsmAnd datoteka</string>
     <string name="calculate_osmand_route_gpx">Izračunaj OsmAnd offline rutu</string>
@@ -1111,7 +1111,7 @@
 	<string name="routing_attr_short_way_description">Koristite kratak put</string>
 	<string name="amenity_type_seamark">Morske oznake</string>
 <string name="osmo_settings_uuid">Jedinstveni identitet uređaja</string>
-    <string name="osmo_settings_descr">Pogledaj jedinstveni registracijski ključ uređaja i druge određene postavke… </string>
+    <string name="osmo_settings_descr">Konfigurirajte postavke praćenja i postavljanje osobnih monitoring kanala</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Napredno praćenje uživo s puno mogućnosti za daljinsko upravljanje http://osmo.mobi</string>
     <string name="always_center_position_on_map">Prikaži položaj uvijek u centru</string>
     <string name="voice_pref_title">Glas</string>
@@ -1186,7 +1186,7 @@
     <string name="enable_sleep_mode">Omogućite stanje mirovanja GPS-a</string>
 	<string name="gps_wake_up_timer">Interval uključivanja GPS-a</string>
 	<string name="sleep_mode_stop_dialog">Prekinuti GPS stanje mirovanja?</string>
-	<string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti(ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
+	<string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti (ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
     <string name="map_preferred_locale">Jezik karte</string>
     <string name="local_map_names">Lokalni nazivi</string>
     <string name="lang_sw">Svahili</string>
@@ -1295,8 +1295,8 @@
     <string name="text_size">Veličina teksta</string>
     <string name="save_track_interval_globally">Interval bilježenja</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Tramvajske i željezničke rute</string>
-	<string name="wake_on_voice">Uključi ekran</string>
-    <string name="wake_on_voice_descr">Uključiti zaslon telefona kada se približavate skretanju</string>
+	<string name="wake_on_voice">Uključi zaslon</string>
+    <string name="wake_on_voice_descr">Uključiti zaslon telefona (ako je isključen) kada se približavate skretanju</string>
     <string name="shared_string_never">Nikad</string>
     
     <string name="impassable_road">Izbjegavaj ceste…</string>
@@ -1456,7 +1456,7 @@
 	<string name="shared_string_my_tracks">Moje trase</string>
 	<string name="shared_string_audio">Zvučni zapis</string>
 	<string name="shared_string_video">Video zapis</string>
-	<string name="shared_string_photo">Forografija</string>
+	<string name="shared_string_photo">Fotografija</string>
 	<string name="route_points">Točke rute</string>
 	<string name="plugin_nautical_name">Nautička karta</string>
 	<string name="plugin_ski_name">Skijaška karta</string>
@@ -1497,5 +1497,53 @@
     <string name="navigate_point_easting"/>
     <string name="search_for">Traži</string>
 	<string name="map_update">Ažuriranja dostupna za %1$s karte</string>
-	<string name="coordinates">koordinate</string>
-	</resources>
+	<string name="coordinates">Koordinate</string>
+	<string name="short_location_on_map">Širina %1$s\n Dužina %2$s</string>
+    <string name="settings_privacy">Privatnost</string>
+    <string name="avoid_roads_msg">Možete aktivirati alternativni pravac odabirom cesta koje želite izbjeći.</string>
+	<string name="rendering_attr_transportStops_name">Stanice javnog prijevoza</string>
+
+    <string name="navigate_point_zone">Zona</string>
+    <string name="use_opengl_render">Koristite OpenGL renderiranje</string>
+    <string name="osmo_no_connection_msg">Osmo usluga nije dostupna:\n- Provjerite vezu;\n- Provjerite postavke;\n- provjerite naš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonimni korisnik ne može:\n- Stvoriti grupe;\n- Sinkronizirati grupe i uređaje s poslužiteljem;\n- Upravljati skupinama i uređajima u privatnom uredu.</string>
+    <string name="int_hour">h</string>
+    <string name="live_monitoring_m_descr">Pošaljite podatke o praćenju određenom web servisu ako je omogućeno GPX bilježenje.</string>
+	<string name="live_monitoring_m">Online praćenje (potreban GPX )</string>
+    <string name="osmo_auth_error">Dogodila se pogreška prilikom OsMo autorizacije : %1$s.
+\nMoguće da usluga trenutno nije dostupna ili je vaša registracija istekla.\nŽelite li nastaviti s novom registracijom?</string>
+    <string name="osmo_not_signed_in">Osmo prijava nije uspjela</string>
+    <string name="osmo_gpx_points_downloaded">OsMo točke %1$s su preuzete.</string>
+    <string name="osmo_start_service">Osmo usluga</string>
+    <string name="osmo_gpx_track_downloaded">Osmo staze %1$s su preuzete.</string>
+    <string name="osmo_credentials_not_valid">Vaše Osmo vjerodajnice ne vrijede.</string>
+    <string name="osmo_connect_to_device">Veza s uređajem</string>
+    <string name="osmo_connect_to_group">Veza sa skupinom</string>
+    <string name="osmo_connect">Povezivanje s</string>
+    <string name="osmo_activity">OpenStreetMap praćenje</string>
+    <string name="osmo_enable_tracker">Pošalji moje lokacije</string>
+    <string name="osmo_control">Osmo brzi pristup</string>
+    <string name="osmo_connected_devices">Povezani uređaji</string>
+    <string name="osmo_groups">OsMo grupe/Uređaji</string>
+    <string name="osmo_auth_pending">Čeka se autorizacija</string>
+    <string name="osmo_locations_sent">"Lokacija poslana %1$d (u međuspremniku %2$d) "</string>
+    <string name="osmo_conn_successfull">"Veza uspostavljena: %1$s "</string>
+    <string name="osmo_io_error">"Problem sa povezivanjem na OsMo: "</string>
+    <string name="osmo_mode_restart">Ponovo pokreni OsMo sesiju</string>
+    <string name="osmo_mode_on">Zaustavi OsMo sesiju</string>
+    <string name="osmo_mode_off">Počnite OsMo sesiju</string>
+    <string name="osmo_settings">OsMo</string>
+   	<string name="lang_al">Albanski</string>
+	<string name="lang_ar">Arabski</string>
+	<string name="lang_fa">Perzijski</string>
+	<string name="lang_sr">Srpski</string>
+	<string name="lang_zh_CN">Pojednostavljeni Kineski</string>
+	<string name="lang_zh_TW">Tradicionalni kineski</string>
+	<string name="use_displayed_track_for_navigation">Želite li koristiti prikazan zapis za vašu navigaciju?</string>
+    <string name="route_preferences">Postavke rute</string>
+    <string name="route_info">Informacije o ruti</string>
+    <string name="routing_attr_avoid_borders_name">Izbjegavajt granične prijelaze</string>
+	<string name="routing_attr_avoid_borders_description">Izbjegavajte prelazak granice u drugu zemlju</string>
+	<string name="routing_attr_height_name">Ograničenje visine</string>
+	<string name="routing_attr_height_description">Odredite visinu vozila da biste znali kojim putevima vam je dopušteno voziti</string>
+    </resources>
