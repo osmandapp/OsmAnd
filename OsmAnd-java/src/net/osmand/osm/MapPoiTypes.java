@@ -388,6 +388,9 @@ public class MapPoiTypes {
 		}
 		allTypes.put(tp.getKeyName(), tp);
 		lastCategory.addPoiType(tp);
+		if("true".equals(parser.getAttributeValue("", "basemap"))) {
+			lastCategory.addBasemapPoi(tp);
+		}
 		return tp;
 	}
 	
