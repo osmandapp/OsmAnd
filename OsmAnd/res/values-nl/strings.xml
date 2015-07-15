@@ -1667,7 +1667,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Gebrik de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Gebruik de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2219,4 +2219,24 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoort als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="rendering_value_default13_name">Standaard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standaard (doorschijnend cyaan)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX kleur</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX breedte</string>
+    <string name="rendering_value_red_name">Rood</string>
+    <string name="rendering_value_translucent_red_name">Doorschijnend rood</string>
+    <string name="rendering_value_translucent_orange_name">Doorschijnend oranje</string>
+    <string name="rendering_value_yellow_name">Geel</string>
+    <string name="rendering_value_translucent_yellow_name">Doorschijnend geel</string>
+    <string name="rendering_value_lightgreen_name">Lichtgroen</string>
+    <string name="rendering_value_translucent_lightgreen_name">Doorschijnend lichtgroen</string>
+    <string name="rendering_value_green_name">Groen</string>
+    <string name="rendering_value_translucent_green_name">Doorschijnend groen</string>
+    <string name="rendering_value_lightblue_name">Lichtblauw</string>
+    <string name="rendering_value_translucent_lightblue_name">Doorschijnend lichtblauw</string>
+    <string name="rendering_value_blue_name">Blauw</string>
+    <string name="rendering_value_translucent_blue_name">Doorschijnend blauw</string>
+    <string name="rendering_value_purple_name">Paars</string>
+    <string name="rendering_value_translucent_purple_name">Doorschijnend paars</string>
+    <string name="restart_is_required">Om alle veranderingen op te slaan, moet de applicatie handmatig herstart worden.</string>
     </resources>

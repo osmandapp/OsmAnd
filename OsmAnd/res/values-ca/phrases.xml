@@ -882,4 +882,47 @@
 	<string name="poi_breakwater">Escullera</string>
 	<string name="poi_groyne">Espigó</string>
 
+	<string name="poi_power_cable_distribution_cabinet">Quadre elèctric</string>
+	<string name="poi_conservation">Reserva natural</string>
+
+	<string name="poi_crane">Grua</string>
+	<string name="poi_tourism_attraction">Atracció turística</string>
+	<string name="poi_cutline">Tallafoc</string>
+	<string name="poi_tree">Arbre</string>
+	<string name="poi_highway_crossing">Pas de vianants</string>
+
+	<string name="poi_icn_ref">Xarxa de nodes d\'una ruta ciclista internacional</string>
+	<string name="poi_ncn_ref">Xarxa de nodes d\'una ruta ciclista nacional</string>
+	<string name="poi_rcn_ref">Xarxa de nodes d\'una ruta ciclista regional</string>
+	<string name="poi_lcn_ref">Xarxa de nodes d\'una ruta ciclista local</string>
+
+	<string name="poi_iwn_ref">Xarxa de nodes d\'una ruta senderista internacional</string>
+	<string name="poi_nwn_ref">Xarxa de nodes d\'una ruta senderista nacional</string>
+	<string name="poi_rwn_ref">Xarxa de nodes d\'una ruta senderista regional</string>
+	<string name="poi_lwn_ref">Xarxa de nodes d\'una ruta senderista local</string>
+
+	<string name="poi_opening_hours">Horari de servei</string>
+	<string name="poi_collection_times">Horari de recollida</string>
+	<string name="poi_description">Descripció</string>
+	<string name="poi_phone">Telèfon</string>
+	<string name="poi_website">Lloc web</string>
+	<string name="poi_service_times">Temps de servei</string>
+	<string name="poi_maxheight">Alçada màxima</string>
+	<string name="poi_maxweight">Pes màxim</string>
+	<string name="poi_abandoned">Desatès</string>
+	<string name="poi_disused">En desús</string>
+
+	<string name="poi_operator">Operador</string>
+	<string name="poi_brand">Marca</string>
+
+	<string name="poi_enforcement_traffic_signals">Control de tràfic: obeir el semàfor</string>
+	<string name="poi_enforcement_maxspeed">Control de tràfic: velocitat màxima</string>
+	<string name="poi_enforcement_maxheight">Control de tràfic: alçada màxima</string>
+	<string name="poi_enforcement_mindistance">Control de tràfic: distància mínima</string>
+	<string name="poi_enforcement_check">Control de tràfic</string>
+	<string name="poi_enforcement_access">Control de tràfic: accés</string>
+	<string name="poi_enforcement_toll">Control de tràfic: peatge</string>
+
+<string name="poi_furnace">Botiga de calefactors</string>
+	<string name="poi_trophy">Trofeus i distincions</string>
 	</resources>
