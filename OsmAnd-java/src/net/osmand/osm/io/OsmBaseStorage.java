@@ -153,6 +153,9 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected double parseDouble(Attributes a, String name, double defVal){
 		double ret = defVal; 
 		String value = a.getValue(name);
+		if(value == null) {
+			return defVal;
+		}
 		try {
 			ret = Double.parseDouble(value);
 		} catch (NumberFormatException e) {
