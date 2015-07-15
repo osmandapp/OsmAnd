@@ -904,12 +904,12 @@
 
 	<string name="poi_building_poi">Bygning</string>
 	<string name="poi_crane">Kran</string>
-	<string name="poi_cutline">Cutline</string>
+	<string name="poi_cutline">Brandbælte</string>
 	<string name="poi_tree">Træ</string>
-	<string name="poi_icn_ref">International cykel knudepunkt netværk</string>
-	<string name="poi_ncn_ref">National cykel knudepunkt netværk</string>
-	<string name="poi_rcn_ref">Regional cykel knudepunkt netværk</string>
-	<string name="poi_lcn_ref">Lokal cykel knudepunkt netværk</string>
+	<string name="poi_icn_ref">International cykelrute</string>
+	<string name="poi_ncn_ref">National cykelrute</string>
+	<string name="poi_rcn_ref">Regional cykelrute</string>
+	<string name="poi_lcn_ref">Lokal cykelrute</string>
 
 	<string name="poi_abandoned">Forladt</string>
 	<string name="poi_disused">Nedlagt</string>
@@ -922,10 +922,10 @@
 	<string name="poi_phone">Telefon</string>
 	<string name="poi_description">Beskrivelse</string>
 	<string name="poi_opening_hours">Åbningstider</string>
-	<string name="poi_iwn_ref">International vandre knudepunkt netværk</string>
-	<string name="poi_nwn_ref">National vandre knudepunkt netværk</string>
-	<string name="poi_rwn_ref">Regional vandre knudepunkt netværk</string>
-	<string name="poi_lwn_ref">Lokal vandre knudepunkt netværk</string>
+	<string name="poi_iwn_ref">International vandrerute</string>
+	<string name="poi_nwn_ref">National vandrerute</string>
+	<string name="poi_rwn_ref">Regional vandrerute</string>
+	<string name="poi_lwn_ref">Lokal vandrerute</string>
 
 	<string name="poi_collection_times">Tømnings antal</string>
 	<string name="poi_service_times">Service-tider</string>
