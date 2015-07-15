@@ -915,7 +915,7 @@
     <string name="cancel_navigation">Zaustavi navigaciju</string>
     <string name="clear_destination">Obriši odredište</string>
     <string name="cancel_route">Odbaci rutu</string>
-    <string name="download_using_mobile_internet">WiFi trenutno nije spojen. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
+    <string name="download_using_mobile_internet">WiFi trenutno nije dostupan. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
     <string name="available_downloads_left">Dostupno je još %1$d preuzimanja</string>
     <string name="files_limit">%1$d datoteka preostalo</string>
     <string name="install_paid">Puna inačica</string>
@@ -1546,4 +1546,7 @@
 	<string name="routing_attr_avoid_borders_description">Izbjegavajte prelazak granice u drugu zemlju</string>
 	<string name="routing_attr_height_name">Ograničenje visine</string>
 	<string name="routing_attr_height_description">Odredite visinu vozila da biste znali kojim putevima vam je dopušteno voziti</string>
-    </resources>
+    <string name="route_descr_destination">Odredište</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="close_changeset">Zatvori promjene</string>
+	</resources>
