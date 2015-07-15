@@ -369,6 +369,7 @@
 	<string name="poi_tax_inspection">Tax inspection</string>
 	<string name="poi_office_administrative">Administrative office</string>
 	<string name="poi_customs">Customs</string>
+	<string name="poi_country">Country</string>
 	<string name="poi_city">City</string>
 	<string name="poi_town">Town</string>
 	<string name="poi_village">Village</string>
