@@ -903,4 +903,8 @@
 	<string name="poi_brand">Брэнд</string>
 
 	<string name="poi_power_cable_distribution_cabinet">Разьмеркавальная скрыня</string>
+	<string name="poi_basin">Штучны вадаём</string>
+	<string name="poi_crane">Кран</string>
+	<string name="poi_country">Краіна</string>
+	<string name="poi_cutline">Прасека</string>
 	</resources>
