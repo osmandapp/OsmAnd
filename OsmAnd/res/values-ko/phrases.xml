@@ -791,4 +791,44 @@
 	<string name="poi_ski_resort">스키 리조트</string>
 	<string name="poi_trail_riding_station">트레일 라이딩 역</string>
 
+	<string name="poi_cheese">치즈 가게</string>
+	<string name="poi_chocolate">초콜릿 가게</string>
+	<string name="poi_coffee">커피숍</string>
+	<string name="poi_pasta">파스타 가게</string>
+	<string name="poi_pastry">제과점</string>
+	<string name="poi_camera">카메라와 렌즈</string>
+	<string name="poi_candles">양초 가게</string>
+	<string name="poi_fashion">패션 상점</string>
+	<string name="poi_free_flying">무료 비행 용품 가게</string>
+	<string name="poi_furnace">난방 장치 상점</string>
+	<string name="poi_garden_furniture">정원 가구점</string>
+	<string name="poi_leather">가죽 상점</string>
+	<string name="poi_music">음악 상점</string>
+	<string name="poi_scuba_diving_shop">스쿠버 다이빙 용품 가게</string>
+	<string name="poi_tyres">타이어 가게</string>
+	<string name="poi_energy">에너지 저장소</string>
+	<string name="poi_watches">시계 가게</string>
+	<string name="poi_swimming_pool_shop">수영장 용품 가게</string>
+	<string name="poi_games">게임</string>
+	<string name="poi_model">스케일 모델</string>
+	<string name="poi_trophy">트로피, 상</string>
+	<string name="poi_video_games">비디오 게임</string>
+	<string name="poi_pyrotechnics">불꽃</string>
+	<string name="poi_weapons">무기 상점</string>
+
+	<string name="poi_breakwater">방파제</string>
+	<string name="poi_groyne">방사제</string>
+
+	<string name="poi_power_cable_distribution_cabinet">케이블 분배 캐비닛</string>
+	<string name="poi_basin">분지</string>
+	<string name="poi_conservation">보존 땅</string>
+
+	<string name="poi_crane">크레인</string>
+	<string name="poi_country">국가</string>
+	<string name="poi_tourism_attraction">관광 명소</string>
+	<string name="poi_religious">종교적인 영역</string>
+	<string name="poi_cutline">가공선</string>
+	<string name="poi_tree">나무</string>
+	<string name="poi_wiki_place">위키백과</string>
+	<string name="poi_wiki_lang_en">영어 위키</string>
 	</resources>
