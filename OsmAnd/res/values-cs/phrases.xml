@@ -839,4 +839,86 @@
 	<string name="poi_garden_furniture">Obchod zahradním nábytkem</string>
 	<string name="poi_leather">Obchod kůží</string>
 	<string name="poi_watches">Hodinářství</string>
-	</resources>
+	<string name="poi_pasta">Obchod s těstovinami</string>
+	<string name="poi_pastry">Cukrárna</string>
+	<string name="poi_candles">Obchod se svíčkami</string>
+	<string name="poi_furnace">Obchod s topnými jednotkami</string>
+	<string name="poi_music">Hudebniny</string>
+	<string name="poi_scuba_diving_shop">Potápěčské potřeby</string>
+	<string name="poi_tyres">Obchod s pneumatikami</string>
+	<string name="poi_energy">Obchod s energiemi</string>
+	<string name="poi_swimming_pool_shop">Bazénové potřeby</string>
+	<string name="poi_games">Hry</string>
+	<string name="poi_model">Modely</string>
+	<string name="poi_trophy">Trofeje</string>
+	<string name="poi_video_games">Videohry</string>
+	<string name="poi_pyrotechnics">Pyrotechnika</string>
+	<string name="poi_weapons">Obchod se zbraněmi</string>
+
+	<string name="poi_breakwater">Vlnolam</string>
+	<string name="poi_groyne">Pobřežní hráz</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Kabelová rozvodní skříň</string>
+	<string name="poi_basin">Nádrž</string>
+	<string name="poi_conservation">Chráněné území</string>
+
+	<string name="poi_crane">Jeřáb</string>
+	<string name="poi_tourism_attraction">Turistická atrakce</string>
+	<string name="poi_religious">Náboženská oblast</string>
+	<string name="poi_cutline">Výsek lesa</string>
+	<string name="poi_tree">Strom</string>
+	<string name="poi_bollard">Patník</string>
+	<string name="poi_cycle_barrier">Cyklo překážka</string>
+	<string name="poi_motorcycle_barrier">Překážka pro motocykly</string>
+	<string name="poi_block">Balvan</string>
+	<string name="poi_bus_trap">Autobusová uzávěra</string>
+	<string name="poi_cattle_grid">Mříž proti dobytku</string>
+	<string name="poi_full_height_turnstile">Vysoký turniket</string>
+	<string name="poi_bump_gate">Nárazová brána</string>
+	<string name="poi_general_barrier">Všeobecná překážka</string>
+	<string name="poi_stile">Schůdky přes ohradu</string>
+	<string name="poi_height_restrictor">Omezovač výšky</string>
+	<string name="poi_horse_stile">Přechod pro koně přes překážku</string>
+	<string name="poi_kissing_gate">Brána proti dobytku</string>
+	<string name="poi_sally_port">Vstup do pevnosti</string>
+	<string name="poi_swing_gate">Otočná závora</string>
+	<string name="poi_turnstile">Turniket</string>
+	<string name="poi_barrier_entrance">Vstup</string>
+	<string name="poi_entrance_main">Hlavní vchod</string>
+	<string name="poi_entrance">Vchod</string>
+	<string name="poi_entrance_exit">Východ</string>
+
+	<string name="poi_highway_crossing">Přechod pro chodce</string>
+
+	<string name="poi_icn_ref">Mezinárodní cyklistická síť</string>
+	<string name="poi_ncn_ref">Národní cyklistická síť</string>
+	<string name="poi_rcn_ref">Regionální cyklistická síť</string>
+	<string name="poi_lcn_ref">Lokální cyklistická síť</string>
+
+	<string name="poi_iwn_ref">Mezinárodní pěší síť</string>
+	<string name="poi_nwn_ref">Národní pěší síť</string>
+	<string name="poi_rwn_ref">Regionální pěší síť</string>
+	<string name="poi_lwn_ref">Lokální pěší síť</string>
+
+	<string name="poi_opening_hours">Otevírací hodiny</string>
+	<string name="poi_description">Popis</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_website">Webstránka</string>
+	<string name="poi_service_times">Časy služby</string>
+	<string name="poi_maxheight">Maximální výška</string>
+	<string name="poi_maxweight">Maximální hmotnost</string>
+	<string name="poi_abandoned">Opuštěné</string>
+	<string name="poi_disused">Nevyužívané</string>
+
+	<string name="poi_operator">Provozovatel</string>
+	<string name="poi_brand">Značka</string>
+
+	<string name="poi_enforcement_traffic_signals">Vynucení:semafory</string>
+	<string name="poi_enforcement_maxspeed">Vynucení:maximální rychlost</string>
+	<string name="poi_enforcement_maxheight">Vynucení:maximální výška</string>
+	<string name="poi_enforcement_mindistance">Vynucení:minimální vzdálenost</string>
+	<string name="poi_enforcement_check">Vynucení:kontrola</string>
+	<string name="poi_enforcement_access">Vynucení:přístup</string>
+	<string name="poi_enforcement_toll">Vynucení:mýto</string>
+
+</resources>
