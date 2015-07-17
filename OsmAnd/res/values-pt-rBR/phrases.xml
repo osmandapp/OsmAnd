@@ -923,4 +923,6 @@
 	<string name="poi_enforcement_check">Fiscalização:verificação</string>
 	<string name="poi_cutline">Linha de corte</string>
 	<string name="poi_country">País</string>
+	<string name="poi_fee">Taxa</string>
+
 	</resources>

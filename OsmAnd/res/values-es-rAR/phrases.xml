@@ -222,7 +222,7 @@
 	<string name="poi_aerodrome">Aeropuerto</string>
 	<string name="poi_helipad">Helipuerto</string>
 	<string name="poi_runway">Pista de rodaje</string>
-	<string name="poi_aeroway_terminal">Terminal de aeropuerto</string>
+	<string name="poi_aeroway_terminal">Aeroterminal</string>
 	<string name="poi_aeroway_gate">Puerta de embarque</string>
 
 	<string name="poi_slipway">Rampa</string>
@@ -921,4 +921,7 @@
 	<string name="poi_enforcement_access">Control de acceso</string>
 	<string name="poi_enforcement_toll">Control de peaje</string>
 
-</resources>
+<string name="poi_country">País</string>
+	<string name="poi_fee">Costo</string>
+
+	</resources>
