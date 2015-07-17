@@ -11,4 +11,10 @@
 	<string name="poi_office">कार्यालय</string>
 	<string name="poi_osmwiki">विकिपीडिया</string>
 	<string name="poi_books">पुस्तकालय</string>
-	</resources>
+	<string name="poi_transportation">परिवहन</string>
+		<string name="poi_road_obstacle">रस्त्यतील अडथळा</string>
+		<string name="poi_personal_transport">व्यक्तिगत परिवहन</string>
+		<string name="poi_air_transport">वायु परिवहन</string>
+		<string name="poi_water_transport">जल परिवहन</string>
+		<string name="poi_power">उर्जा</string>
+		</resources>
