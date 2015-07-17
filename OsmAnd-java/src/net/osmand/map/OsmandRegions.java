@@ -364,7 +364,7 @@ public class OsmandRegions {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
-			int c = 0;
+//			int c = 0;
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() < 1) {
@@ -372,9 +372,9 @@ public class OsmandRegions {
 				}
 				initTypes(object);
 				String nm = object.getNameByType(downloadNameType);
-				if(nm != null) {
-					System.out.println((c++) +" " + nm);
-				}
+//				if(nm != null) {
+//					System.out.println((c++) +" " + nm);
+//				}
 				if (!countriesByDownloadName.containsKey(nm)) {
 					LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
 					countriesByDownloadName.put(nm, ls);
