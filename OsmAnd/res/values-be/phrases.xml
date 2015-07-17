@@ -907,4 +907,20 @@
 	<string name="poi_crane">Кран</string>
 	<string name="poi_country">Краіна</string>
 	<string name="poi_cutline">Прасека</string>
+	<string name="poi_enforcement_toll">Кантроль:аплата</string>
+
+<string name="poi_enforcement_maxspeed">Патрабаванне:максімальная хуткасць</string>
+	<string name="poi_enforcement_maxheight">Патрабаванне:максімальная вышыня</string>
+	<string name="poi_enforcement_mindistance">Патрабаванне:мінімальная адлегласць</string>
+	<string name="poi_enforcement_check">Патрабаванне:кантроль</string>
+	<string name="poi_enforcement_access">Патрабаванне:доступ</string>
+	<string name="poi_enforcement_traffic_signals">Патрабаванне:святлафоры</string>
+	<string name="poi_fee">Аплата</string>
+
+	<string name="poi_disused">Невыкарыстоўваемы</string>
+
+	<string name="poi_abandoned">Закінуты</string>
+	<string name="poi_maxweight">Максімальная вага</string>
+	<string name="poi_maxheight">Максімальная вышыня</string>
+	<string name="poi_service_times">Гадзіны абслугоўвання</string>
 	</resources>
