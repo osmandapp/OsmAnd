@@ -767,4 +767,65 @@
 <string name="poi_music">Butega de mùsica</string>
 	<string name="poi_games">Giogos</string>
 	<string name="poi_video_games">Videogiogos</string>
-	</resources>
+	<string name="poi_cheese">Butega de casu</string>
+	<string name="poi_chocolate">Tziculateria</string>
+	<string name="poi_pasta">Butega de pasta</string>
+	<string name="poi_pastry">Pastisseria</string>
+	<string name="poi_camera">Càmeras e lentes</string>
+	<string name="poi_candles">Butega de candelas</string>
+	<string name="poi_fashion">Butega de moda</string>
+	<string name="poi_free_flying">Artìculos pro Freefly (paracadutismu)</string>
+	<string name="poi_furnace">Butega de calorìferos</string>
+	<string name="poi_garden_furniture">Butega de artìculos pro su giardinu</string>
+	<string name="poi_leather">Butega de còrgiu</string>
+	<string name="poi_tyres">Butega de pneumàticos</string>
+	<string name="poi_watches">Butega de relògios</string>
+	<string name="poi_swimming_pool_shop">Artìculos pro piscinas</string>
+	<string name="poi_model">Modellos a iscala</string>
+	<string name="poi_trophy">Trofeos, prèmios</string>
+	<string name="poi_pyrotechnics">Pirotècnica</string>
+	<string name="poi_weapons">Armeria</string>
+
+	<string name="poi_observation_tower">Turre de osservatzione</string>
+	<string name="poi_conservation">Àrea amparada</string>
+
+	<string name="poi_crane">Grue</string>
+	<string name="poi_country">Istadu</string>
+	<string name="poi_cabin">Cabina</string>
+	<string name="poi_religious">Àrea religiosa</string>
+	<string name="poi_village_green">Àrea birde comune de sa bidda</string>
+	<string name="poi_money_lender">Imprestadinare</string>
+	<string name="poi_tree">Àrbore</string>
+	<string name="poi_cycle_barrier">Barriera pro bitzicletas</string>
+	<string name="poi_motorcycle_barrier">Barriera pro mototzicletas</string>
+	<string name="poi_block">Isoladu (bighinadu)</string>
+	<string name="poi_bus_trap">Trampa pro postales</string>
+	<string name="poi_general_barrier">Barriera genèrica</string>
+	<string name="poi_height_restrictor">Limitadore de artària</string>
+	<string name="poi_turnstile">Tornellu</string>
+	<string name="poi_barrier_entrance">Intrada</string>
+	<string name="poi_entrance_main">Intrada printzipale</string>
+	<string name="poi_entrance">Intrada</string>
+	<string name="poi_entrance_exit">Essida</string>
+
+	<string name="poi_opening_hours">Oràrios de abertura</string>
+	<string name="poi_description">Descritzione</string>
+	<string name="poi_phone">Telèfonu</string>
+	<string name="poi_website">Giassu/situ web</string>
+	<string name="poi_service_times">Oràrios de servìtziu</string>
+	<string name="poi_maxheight">Artària màssima</string>
+	<string name="poi_maxweight">Pesu màssimu</string>
+	<string name="poi_abandoned">Abbandonadu</string>
+	<string name="poi_disused">Foras de usu (disusadu)</string>
+
+	<string name="poi_operator">Operadore</string>
+	<string name="poi_brand">Marca</string>
+	<string name="poi_enforcement_traffic_signals">Controllu: semàforos</string>
+	<string name="poi_enforcement_maxspeed">Controllu: lestresa màssima</string>
+	<string name="poi_enforcement_maxheight">Controllu: artària màssima</string>
+	<string name="poi_enforcement_mindistance">Controllu: distàntzia mìnima</string>
+	<string name="poi_enforcement_check">Controllu: ispetziones</string>
+	<string name="poi_enforcement_access">Controllu: atzessu</string>
+	<string name="poi_enforcement_toll">Controllu: pedàgiu</string>
+
+</resources>
