@@ -921,4 +921,6 @@
 	<string name="poi_enforcement_access">Vynucení:přístup</string>
 	<string name="poi_enforcement_toll">Vynucení:mýto</string>
 
-</resources>
+<string name="poi_fee">Poplatek</string>
+
+	</resources>
