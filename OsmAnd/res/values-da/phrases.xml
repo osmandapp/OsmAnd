@@ -940,4 +940,6 @@
 	<string name="poi_enforcement_toll">Håndhævelse: vejafgift</string>
 
 <string name="poi_country">Land</string>
+	<string name="poi_fee">Gebyr</string>
+
 	</resources>
