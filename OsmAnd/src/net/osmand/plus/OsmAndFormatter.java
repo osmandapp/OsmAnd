@@ -123,16 +123,16 @@ public class OsmAndFormatter {
 		ApplicationMode am = settings.getApplicationMode();
 		float kmh = metersperseconds * 3.6f;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			if (kmh >= 10 || am.hasFastSpeed()) {
-				// case of car
+			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
+			if (kmh >= 20 || am.hasFastSpeed()) {
 				return ((int) Math.round(kmh)) + " " + ctx.getString(R.string.km_h);
 			}
+			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = (int) Math.round(kmh * 10f);
-			// for smaller values display 1 decimal digit (x.0 km/h instead of x km/h)
 			return (kmh10 / 10f) + " " + ctx.getString(R.string.km_h);
 		} else {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-			if (mph >= 10 || am.hasFastSpeed()) {
+			if (mph >= 20 || am.hasFastSpeed()) {
 				return ((int) Math.round(mph)) + " " + ctx.getString(R.string.mile_per_hour);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
