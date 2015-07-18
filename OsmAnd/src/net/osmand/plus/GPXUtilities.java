@@ -306,7 +306,7 @@ public class GPXUtilities {
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 			if(speedCount > 0) {
 				if(timeMoving > 0){
-					avgSpeed = (float)totalDistanceMoving / (float)timeMoving * 1000;
+					avgSpeed = (float)totalDistanceMoving / (float)timeMoving * 1000f;
 				} else {
 					avgSpeed = (float)totalSpeedSum / (float)speedCount;
 				}
