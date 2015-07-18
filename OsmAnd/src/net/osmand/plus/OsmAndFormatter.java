@@ -132,7 +132,7 @@ public class OsmAndFormatter {
 			return (kmh10 / 10f) + " " + ctx.getString(R.string.km_h);
 		} else {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-			if (mph >= 10) {
+			if (mph >= 10 || am.hasFastSpeed()) {
 				return ((int) Math.round(mph)) + " " + ctx.getString(R.string.mile_per_hour);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
