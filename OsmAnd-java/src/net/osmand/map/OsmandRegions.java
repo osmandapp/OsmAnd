@@ -250,6 +250,7 @@ public class OsmandRegions {
 					}
 				}
 		);
+		sr.log = false;
 		if(reader != null) {
 			reader.searchMapIndex(sr);
 		}

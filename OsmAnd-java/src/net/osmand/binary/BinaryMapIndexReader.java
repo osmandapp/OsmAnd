@@ -855,7 +855,7 @@ public class BinaryMapIndexReader {
 				
 			}
 		}
-		if(req.numberOfVisitedObjects > 0) {
+		if(req.numberOfVisitedObjects > 0 && req.log) {
 			log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		}
@@ -1637,6 +1637,7 @@ public class BinaryMapIndexReader {
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
+		boolean log = true;
 		
 		protected SearchRequest(){
 		}
