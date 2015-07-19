@@ -1322,7 +1322,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="amenity_type_historic">تاريخي</string>
 	<string name="amenity_type_landuse">استخدام الاراضي</string>
 	<string name="amenity_type_leisure">وقت الفراغ</string>
-	<string name="amenity_type_man_made">من صنع الانسان</string>
+	<string name="amenity_type_man_made">من صنع الإنسان</string>
 	<string name="amenity_type_military">عسكري</string>
 	<string name="amenity_type_natural">طبيعي</string>
 	<string name="amenity_type_office">مكتب</string>

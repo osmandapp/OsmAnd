@@ -910,4 +910,10 @@
 	<string name="poi_enforcement_access">Vynútenie:prístup</string>
 	<string name="poi_enforcement_toll">Vynútenie:mýto</string>
 
-</resources>
+<string name="poi_country">Krajina</string>
+	<string name="poi_enforcement_mindistance">Vynútenie:minimálna vzdialenosť</string>
+	<string name="poi_enforcement_maxspeed">Vynútenie:maximálna rýchlosť</string>
+	<string name="poi_fee">Poplatok</string>
+
+	<string name="poi_opening_hours">Otváracie hodiny</string>
+	</resources>
