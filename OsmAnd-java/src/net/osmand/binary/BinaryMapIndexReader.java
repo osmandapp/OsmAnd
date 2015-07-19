@@ -1632,12 +1632,13 @@ public class BinaryMapIndexReader {
 		
 		
 		// TRACE INFO
+		public boolean log = true;
 		int numberOfVisitedObjects = 0;
 		int numberOfAcceptedObjects = 0;
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
 		boolean interrupted = false;
-		boolean log = true;
+		
 		
 		protected SearchRequest(){
 		}
