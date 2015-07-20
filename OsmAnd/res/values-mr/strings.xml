@@ -129,7 +129,7 @@
   <string name="favourites_edit_dialog_name">नाव</string>
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
   <string name="vector_map_not_needed">नाही, धन्यवाद</string>
-  <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
+  <string name="local_index_descr_title">नकाशाच्या फाइल्स मॅनेज करा</string>
   <string name="shared_string_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>
   <string name="search_offline_clear_search">नविन शोध</string>
@@ -180,7 +180,7 @@
   <string name="phone">फोन</string>
   
   
-  <string name="voice">आवाज</string>
+  <string name="voice">ध्वनीमुद्रित आवाज</string>
   <string name="poi_context_menu_modify">पिओआय बदला</string>
   <string name="poi_context_menu_delete">पिओआय काढून टाका</string>
   <string name="rotate_map_compass_opt">कंपास प्रमाणे</string>
@@ -278,7 +278,7 @@
   <string name="ChooseCountry">देश निवडा</string>
   <string name="map_source">नकाशाचा स्त्रोत</string>
   <string name="use_internet">इंटरनेट वापरा</string>
-  <string name="show_location">स्थान दाखवा</string>
+  <string name="show_location">तुमचे स्थान दाखवा</string>
   
   
   <string name="use_internet_to_download_tile">नसलेल्या टाइल्स डाउनलोड करण्यासाठी इंटरनेटचा वापर करा</string>
@@ -456,7 +456,7 @@
 	<string name="tip_map_switch">नकाशाचा स्त्रोत निवडा</string>
 	<string name="incomplete_locale">अपूर्ण</string>
 	<string name="preferred_locale">भाषा</string>
-	<string name="preferred_locale_descr">भाषा निवडा</string>
+	<string name="preferred_locale_descr">भाषा निवडा (बदलल्यावर ओएसएमएएनडी पुन्हा चालू करा)</string>
 	<string name="system_locale">सिस्टिम</string>
 	<string name="tip_favorites">आवडती ठिकाणे</string>
 	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक लपवा</string>
@@ -486,4 +486,23 @@
 	<string name="shared_string_audio">ध्वनि</string>
 	<string name="shared_string_video">चलच्चित्र</string>
 	<string name="shared_string_photo">छायाचित्र</string>
-	</resources>
+	<string name="rendering_attr_currentTrackColor_name">जिपिएक्स रंग</string>
+    <string name="rendering_attr_currentTrackWidth_name">जिपिएक्स रुंदी</string>
+    <string name="rendering_value_red_name">लाल</string>
+    <string name="rendering_value_orange_name">नारंगी</string>
+    <string name="rendering_value_yellow_name">पिवळा</string>
+    <string name="rendering_value_lightgreen_name">पोपटी</string>
+    <string name="rendering_value_green_name">हिरवा</string>
+    <string name="rendering_value_lightblue_name">आकाशी</string>
+    <string name="rendering_value_blue_name">निळा</string>
+    <string name="rendering_value_purple_name">जांभळा</string>
+    <string name="dark_theme">गडद</string>
+    <string name="lang_bn">बंगाली</string>
+    <string name="lang_la">लॅटिन</string>
+    <string name="lang_ta">तामिळ</string>
+    <string name="lang_ml">मल्याळम</string>
+    <string name="lang_th">थाइ</string>
+    <string name="lang_te">तेलगु</string>
+    <string name="read_full_article">पूर्ण लेख वाचा (ऑनलाइन)</string>
+    <string name="download_wikipedia_item">विकिपेडिया</string>
+    </resources>
