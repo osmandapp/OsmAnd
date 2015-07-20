@@ -570,7 +570,7 @@
 	<string name="voice_not_use">Ne koristi</string>
 	
 	<string name="installing_new_resources">Raspakiravam nove podatke…</string>
-	<string name="vector_map_not_needed">Ne, hvala</string>
+	<string name="shared_string_no_thanks">Ne, hvala</string>
 	<string name="favorite_home_category">Doma</string>
 	<string name="favorite_friends_category">Prijatelji</string>
 	<string name="favorite_places_category">Mjesta</string>

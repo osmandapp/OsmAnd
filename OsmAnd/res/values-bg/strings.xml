@@ -959,7 +959,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="favorite_default_category">Други</string>
 	<string name="favourites_edit_dialog_name">Име</string>
 	<string name="favourites_edit_dialog_category">Категория</string>
-	<string name="vector_map_not_needed">Не, благодаря</string>
+	<string name="shared_string_no_thanks">Не, благодаря</string>
 	<string name="basemap_missing">Липсва базовата карта (тази, която покрива целия свят в малък мащаб). Свалете World_basemap_x.obf за добра работа на системата.</string>
 	<string name="vector_data_missing">На SD картата липсват данни за ползване офлайн. Моля, обмислете нейното сваляне от Интернет за ползване на карти офлайн.</string>
 	<string name="local_index_gpx_info_show">\n\nНатиснете и задръжте за опции</string>

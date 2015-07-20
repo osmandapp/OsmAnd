@@ -73,7 +73,7 @@
   <string name="favorite_friends_category">Znajomi</string>
   <string name="favorite_places_category">Miejsca</string>
   <string name="favorite_default_category">Inne</string>
-  <string name="vector_map_not_needed">Niepotrzebne</string>
+  <string name="shared_string_no_thanks">Niepotrzebne</string>
   <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
   <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
   <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>

@@ -276,7 +276,7 @@
 	<string name="favorite_default_category">Остало</string>
 	<string name="favourites_edit_dialog_name">Име</string>
 	<string name="favourites_edit_dialog_category">Врста</string>
-	<string name="vector_map_not_needed">Не, хвала</string>
+	<string name="shared_string_no_thanks">Не, хвала</string>
 	<string name="basemap_missing">Основна мапа света (која покрива цео свет на малом увеличању) недостаје. Молим, преузмите World_basemap_x.obf ради целокупности средине.</string>
 	<string name="local_index_installed">Издање</string>
 	<string name="local_index_no_items_to_do">Нема ставки за %1$s</string>

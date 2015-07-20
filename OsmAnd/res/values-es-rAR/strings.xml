@@ -1437,7 +1437,7 @@
 	<string name="favorite_default_category">Otros</string>
 	<string name="favourites_edit_dialog_name">Nombre</string>
 	<string name="favourites_edit_dialog_category">Categoría</string>
-	<string name="vector_map_not_needed">No, gracias</string>
+	<string name="shared_string_no_thanks">No, gracias</string>
 	<string name="basemap_missing">El mapa base mundial (cubriendo todo el mundo a niveles de ampliación pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
 	<string name="vector_data_missing">Sin datos (\'descargados\') en la tarjeta SD. Considere descargarlos para usar los mapas sin conexión.</string>
 	<string name="shared_string_release">Liberado</string>

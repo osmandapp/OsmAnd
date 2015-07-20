@@ -169,7 +169,7 @@
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
   <string name="favorite_default_category">Altro</string>
-  <string name="vector_map_not_needed">No, grazie</string>
+  <string name="shared_string_no_thanks">No, grazie</string>
   <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
   <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
   <string name="local_index_gpx_info_show">\n\nClic lungo per visualizzare le opzioni</string>

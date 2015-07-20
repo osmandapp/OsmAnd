@@ -1161,7 +1161,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="favorite_default_category">أخرى</string>
 	<string name="favourites_edit_dialog_name">اسم</string>
 	<string name="favourites_edit_dialog_category">فئة</string>
-	<string name="vector_map_not_needed">لا"شكرا</string>
+	<string name="shared_string_no_thanks">لا"شكرا</string>
 	<string name="basemap_missing">خريطة العالم الأساسية (التي تغطي العالم كله بتقريب صغير) مفقودة. يرجى تحميل World_basemap_x.obf لبيئة كاملة.</string>
 	<string name="vector_data_missing">على متن (\'حاليا \') البيانات مفقود على بطاقة SD. يرجى النظر إلى تحميل البرنامج من اجل استخدام الخرائط دون اتصال.</string>
 	<string name="local_index_gpx_info_show">\n\nاضغط باستمرار لعرض الخيارات</string>

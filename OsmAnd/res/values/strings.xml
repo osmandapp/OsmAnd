@@ -1719,7 +1719,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favorite_default_category">Others</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Category</string>
-	<string name="vector_map_not_needed">No, thanks</string>
+	<string name="shared_string_no_thanks">No, thanks</string>
 	<string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
 	<string name="shared_string_release">Released</string>
@@ -2215,4 +2215,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="get_plugin">Get</string>
 	<string name="use_fast_recalculation">Smart route recalculation</string>
 	<string name="use_fast_recalculation_desc">Recalculate only initial part of the route for long trips</string>
+	<string name="do_you_like_osmand">Do you like OsmAnd?</string>
+	<string name="we_really_care">We really care</string>
+	<string name="rate_this_app">Rate this app</string>
+	<string name="rate_this_app_long">Please give OsmAnd a score on Google Play</string>
+	<string name="user_hates_app_get_feedback">Tell us why.</string>
+	<string name="user_hates_app_get_feedback_long">Please tell us what would you want to change in this app.</string>
 </resources>

@@ -128,7 +128,7 @@
   <string name="favorite_default_category">इतर</string>
   <string name="favourites_edit_dialog_name">नाव</string>
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
-  <string name="vector_map_not_needed">नाही, धन्यवाद</string>
+  <string name="shared_string_no_thanks">नाही, धन्यवाद</string>
   <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
   <string name="shared_string_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>

@@ -68,7 +68,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="favorite_places_category">Địa điểm</string>
 	<string name="favorite_default_category">Khác</string>
 
-	<string name="vector_map_not_needed">Không cần</string>
+	<string name="shared_string_no_thanks">Không cần</string>
 	<string name="basemap_missing">Bản đồ nền (bao phủ toàn bộ thế giới ở tỉ lệ xem nhỏ) bị thiếu. Hãy tải về tập tin World_basemap_x.obf để bổ sung đầy đủ.</string>
 	<string name="vector_data_missing">Dữ liệu (\'offline\') không có trên thẻ nhớ SD. Vui lòng tải về để cập nhật.</string>
 	<string name="local_index_gpx_info_show">\n\nGiữ một lúc để mở chi tiết hơn</string>

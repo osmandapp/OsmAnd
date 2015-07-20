@@ -1244,7 +1244,7 @@ POIの更新は利用できません</string>
 	<string name="favorite_default_category">その他</string>
 	<string name="favourites_edit_dialog_name">名前</string>
 	<string name="favourites_edit_dialog_category">カテゴリー</string>
-	<string name="vector_map_not_needed">必要ありません</string>
+	<string name="shared_string_no_thanks">必要ありません</string>
 	<string name="basemap_missing">ベースワールドマップ(小さなズームでのみ全世界をカバーします)が欠落しています。World_basemap_x.obfをダウンロードしてみてください。</string>
 	<string name="vector_data_missing">オンボード(オフライン)データがSDカード上に見つかりません。オフラインマップを使用するにはそれらをダウンロードしてください。</string>
 	<string name="local_index_gpx_info_show">\n\nオプションを表示するには長押しして下さい</string>

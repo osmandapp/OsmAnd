@@ -242,7 +242,7 @@
   <string name="favorite_default_category">Pārējais</string>
   <string name="favourites_edit_dialog_name">Nosaukums</string>
   <string name="favourites_edit_dialog_category">Kategorija</string>
-  <string name="vector_map_not_needed">Nē, paldies</string>
+  <string name="shared_string_no_thanks">Nē, paldies</string>
   <string name="basemap_missing">Pasaules karte (visa pasaule zemākā izšķirtspējā) nav pieejama. Lūdzu lejupielādējiet World_basemap_x.obf, pilnvērtīgai kartes pārlūkošanai.</string>
   <string name="vector_data_missing">SD kartē nav atrodami bezsaistes dati. Lai lietotu bezsaistes kartes, lūdzu lejupielādējiet tās, lai varētu lietot bezsaistē.</string>
   <string name="local_index_gpx_info_show">\n\nTuriet nospiestu izvēlnes atvēršanai</string>

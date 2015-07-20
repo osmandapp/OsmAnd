@@ -528,7 +528,7 @@
 	<string name="favorite_default_category">Altele</string>
 	<string name="favourites_edit_dialog_name">Nume</string>
 	<string name="favourites_edit_dialog_category">Categorie</string>
-	<string name="vector_map_not_needed">Nu, mulțumesc</string>
+	<string name="shared_string_no_thanks">Nu, mulțumesc</string>
 	<string name="basemap_missing">Lipsește harta lumii de bază - conține întreg globul la nivel mic de zoom. Vă rog să considerați descărcarea hărții World_basemap_*.obf pentru a completa mediul de lucru.</string>
 	<string name="vector_data_missing">Datele locale, (\'offline\'), lipsesc de pe cardul SD. Vă rog să considerați descărcarea acestora pentru a putea folosi hărți offline.</string>
 	<string name="local_index_gpx_info_show">\n\nApăsați prelung pentru afișarea opțiunilor</string>

@@ -348,7 +348,7 @@
   <string name="favorite_friends_category">Priatelia</string>
   <string name="favorite_places_category">Miesta</string>
   <string name="favorite_default_category">Iné</string>
-  <string name="vector_map_not_needed">Netreba</string>
+  <string name="shared_string_no_thanks">Netreba</string>
   <string name="basemap_missing">Chýba základná mapa sveta(World Basemap). Prosím, zvážte jej stiahnutie pre správnu funkčnosť.</string>
   <string name="vector_data_missing">Na SD karte chýbajú offline údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
   <string name="local_index_gpx_info_show">\n\nKliknite a podržte pre možnosti</string>

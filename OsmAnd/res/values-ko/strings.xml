@@ -267,7 +267,7 @@
 	<string name="favourites_edit_dialog_name">이름</string>
 	<string name="favourites_edit_dialog_category">카테고리</string>
 
-	<string name="vector_map_not_needed">필요없음</string>
+	<string name="shared_string_no_thanks">필요없음</string>
 	<string name="basemap_missing">기본 세계 지도가 없습니다.(작은 줌으로 전세계를 커버). 완전한 환경을 위해 World_basemap_x.obf 파일을 다운로드 하시기 바랍니다.</string>
 	<string name="vector_data_missing">탑재된 (\'오프라인\') 데이터가 SD 카드에 없습니다. 맵을 오프라인으로 사용하기 위해 다운로드 하시기 바랍니다.</string>
 	<string name="local_index_gpx_info_show">\n\n선택하려면 길게 클릭</string>

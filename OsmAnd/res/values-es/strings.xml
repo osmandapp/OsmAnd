@@ -186,7 +186,7 @@
   <string name="favorite_default_category">Otros</string>
   <string name="favourites_edit_dialog_name">Nombre</string>
   <string name="favourites_edit_dialog_category">Categoría</string>
-  <string name="vector_map_not_needed">No, gracias</string>
+  <string name="shared_string_no_thanks">No, gracias</string>
   <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de acercamiento pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
   <string name="vector_data_missing">No hay datos (\'fuera de línea\') en la tarjeta SD. Considere descargarlos para utilizar mapas fuera de línea.</string>
   <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>

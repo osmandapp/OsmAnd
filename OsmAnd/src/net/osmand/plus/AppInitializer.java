@@ -1,14 +1,12 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -39,13 +37,15 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -187,7 +187,7 @@ public class AppInitializer implements IProgress {
 				}
 
 			});
-			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
+			builder.setNeutralButton(R.string.shared_string_no_thanks, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					ctx.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();

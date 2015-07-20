@@ -1,37 +1,6 @@
 package net.osmand.plus.dashboard;
 
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
-import net.osmand.plus.development.DashSimulateFragment;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.osmedit.DashOsmEditsFragment;
-import net.osmand.plus.osmo.DashOsMoFragment;
-import net.osmand.plus.parkingpoint.DashParkingFragment;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -65,6 +34,38 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.IntermediatePointsDialog;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
+import net.osmand.plus.development.DashSimulateFragment;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.osmedit.DashOsmEditsFragment;
+import net.osmand.plus.osmo.DashOsMoFragment;
+import net.osmand.plus.parkingpoint.DashParkingFragment;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  */
@@ -655,10 +656,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(mapActivity);
 //		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
 		boolean showCards = !firstTime;
-		
+
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
+		showFragment(manager, fragmentTransaction, DashRateUsFragment.TAG, DashRateUsFragment.class,
+				DashRateUsFragment.shouldShow(getMyApplication().getSettings()));
 		showFragment(manager, fragmentTransaction, DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, firstTime);
 		showFragment(manager, fragmentTransaction, DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, 
 				DashChooseAppDirFragment.isDashNeeded(getMyApplication().getSettings()));

@@ -179,7 +179,7 @@
   <string name="favorite_friends_category">Amis</string>
   <string name="favorite_places_category">Lieux</string>
   <string name="favorite_default_category">Autres</string>
-  <string name="vector_map_not_needed">Pas nécessaire</string>
+  <string name="shared_string_no_thanks">Pas nécessaire</string>
   <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
   <string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors-ligne.</string>
  

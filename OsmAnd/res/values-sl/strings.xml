@@ -740,7 +740,7 @@
 	<string name="local_index_mi_upload_gpx">Pošlji na OSM</string>
 	<string name="show_more_map_detail">Pokaži več podrobnosti zemljevida</string>
 	<string name="show_more_map_detail_descr">Pokaži nekaj podrobnosti vektorskih zemljevidov (ceste, itd.) že pri oddaljenem pogledu</string>
-	<string name="vector_map_not_needed">Ne, hvala</string>
+	<string name="shared_string_no_thanks">Ne, hvala</string>
 	<string name="basemap_missing">Osnovni zemljevid sveta (pokriva cel svet pri majhnih povečavah) ni nameščen. Priporočljivo je prejeti datoteko world_basemap_x.obf in jo namestiti.</string>
 	<string name="vector_data_missing">Podatkov za delo brez povezave na kartici SD ni. Priporočljivo je datoteke prejeti in omogočiti navigacijo tudi v načinu brez vzpostavljene povezave.</string>
 	<string name="local_index_installed">Datum shranjene različice</string>

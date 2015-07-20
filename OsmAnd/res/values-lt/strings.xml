@@ -372,7 +372,7 @@
   <string name="favorite_default_category">Kitos</string>
   <string name="favourites_edit_dialog_name">Pavadinimas</string>
   <string name="favourites_edit_dialog_category">Kategorija</string>
-  <string name="vector_map_not_needed">Ačiū, ne</string>
+  <string name="shared_string_no_thanks">Ačiū, ne</string>
   <string name="basemap_missing">Trūksta bazinio viso pasaulio (mažo mastelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų sklandžiai veikti parsisiųskite World_basemap_x.obf.</string>
   <string name="vector_data_missing">SD kortelėje nėra parsiųstų žemėlapių. Pirmiausia parsisiųskite žemėlapius, kad vėliau galėtumėte jais naudotis be interneto.</string>
   <string name="local_index_gpx_info_show">\n\nPaspauskite ir laikykite nustatymams atidaryti</string>
