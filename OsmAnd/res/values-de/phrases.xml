@@ -615,7 +615,7 @@
   <string name="poi_shop">Geschäft</string>
 		<string name="poi_shop_food">Lebensmittelgeschäft</string>
 	<string name="poi_emergency">Notfall</string>
-	<string name="poi_road_obstacle">Straßemhindernis</string>
+	<string name="poi_road_obstacle">Straßenhindernis</string>
 		<string name="poi_filling_station">Tankstelle</string>
 		<string name="poi_public_transport">ÖPNV</string>
 		<string name="poi_man_made">von Menschenhand</string>
@@ -625,7 +625,7 @@
 		<string name="poi_landuse">Landnutzung</string>
 	<string name="poi_education">Bildung</string>
 	<string name="poi_administrative">Verwaltung</string>
-	<string name="poi_healthcare">Gesundheitsektor</string>
+	<string name="poi_healthcare">Gesundheitssektor</string>
 	<string name="poi_office">Büro</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Tourismus</string>
@@ -746,4 +746,14 @@
 	<string name="poi_internet_access_terminal">Internetzugang: Terminal</string>
 	<string name="poi_internet_access_service">Internetzugang: Dienst</string>
 
+	<string name="poi_fee">Gebühr</string>
+
+	<string name="poi_brand">Marke</string>
+	<string name="poi_maxweight">Maximalgewicht</string>
+	<string name="poi_operator">Betreiber</string>
+	<string name="poi_disused">Eingestellt</string>
+
+	<string name="poi_abandoned">Aufgelassen</string>
+	<string name="poi_maxheight">Maximale Höhe</string>
+	<string name="poi_phone">Telefon</string>
 	</resources>
