@@ -505,4 +505,8 @@
     <string name="lang_te">तेलगु</string>
     <string name="read_full_article">पूर्ण लेख वाचा (ऑनलाइन)</string>
     <string name="download_wikipedia_item">विकिपेडिया</string>
-    </resources>
+    <string name="local_indexes_cat_wiki">विकिपेडिया</string>
+    <string name="welmode_download_maps">नकाशे डाउनलोड करा</string>
+	<string name="current_route">सद्ध्याचा मार्ग</string>
+    <string name="shared_string_do_not_use">वापरू नका</string>
+	</resources>
