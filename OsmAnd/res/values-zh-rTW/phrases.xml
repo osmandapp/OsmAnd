@@ -921,4 +921,7 @@
 	<string name="poi_enforcement_access">執法：進入</string>
 	<string name="poi_enforcement_toll">執法：收費</string>
 
-</resources>
+<string name="poi_country">國家</string>
+	<string name="poi_fee">費用</string>
+
+	</resources>

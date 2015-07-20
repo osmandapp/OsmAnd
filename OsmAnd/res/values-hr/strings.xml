@@ -48,7 +48,7 @@
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>
     
     <string name="map_widget_audionotes">Zvučni zapisi</string>
-    <string name="audionotes_plugin_description">Zabilježi zvučne/video zapise tijekom putovanja</string>
+    <string name="audionotes_plugin_description">Audio/Video dodatak pruža mogućnost da zabilježite fotografiju ili video tokom puta, koristeći gumb na zaslonu karte, ili izravno u kontekstnom izborniku za bilo koje mjesto na karti.</string>
     <string name="download_select_map_types">Ostale karte</string>
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="download_regular_maps">Regularne karte</string>
@@ -595,7 +595,7 @@
 		\n\t* EGM96 geoid offset correction for GPS altitude readings "
     </string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
-    <string name="srtm_plugin_name">Dodatak za Slojnice</string>
+    <string name="srtm_plugin_name">Slojnice</string>
     
 	<string name="tip_recent_changes_1_0_0_t">"Promjene u 1.0.0:
 	\n\t* Poboljšana navigacija: brža i preciznija, do 250 km
@@ -708,7 +708,7 @@
 	<string name="loading_builds">Učitavanje OsmAnd nadogradnji-…</string>
 	<string name="select_build_to_install">Odaberite jednu od OsmAnd nadogradnji za instalaciju</string>
 	<string name="contribution_activity">Instalirajte verziju</string>
-	<string name="application_dir">Mapa za pohranu</string>
+	<string name="application_dir">Mapa za pohranu podataka</string>
 	<string name="osmand_net_previously_installed">Instalirana je prethodna inačica OsmAnd aplikacije. Svi offline podaci će biti podržani od strane nove inačice aplikacije. Ali Favorite treba izvesti iz stare aplikacije i kasnije uvesti u novu.</string>
 	
 	<string name="specified_dir_doesnt_exist">Ne mogu pronaći određenu mapu.</string>
@@ -1332,8 +1332,8 @@
     <string name="osmo_use_https">Koristiti HTTPS</string>
 	
 	<string name="lock_screen_request_explanation">%1$s treba dozvolu za isključivanje zaslona za značajku uštede energije.</string>
-    <string name="rendering_attr_currentTrackColor_name">Trenutna boja GPX traga</string>
-    <string name="rendering_attr_currentTrackWidth_name">Trenutna širina GPX traga</string>
+    <string name="rendering_attr_currentTrackColor_name">Boja GPX traga</string>
+    <string name="rendering_attr_currentTrackWidth_name">Širina GPX traga</string>
     <string name="rendering_value_red_name">Crvena</string>
     <string name="rendering_value_translucent_red_name">Prozirna crvena</string>
     <string name="rendering_value_translucent_orange_name">Prozirna narančasta</string>
@@ -1349,7 +1349,7 @@
     <string name="rendering_value_translucent_blue_name">Prozirna plava</string>
     <string name="rendering_value_purple_name">Ljubičasta</string>
     <string name="rendering_value_translucent_purple_name">Prozirna ljubičasta</string>
-    <string name="restart_is_required">Kako bi se primijenile promjene, potrebno je ponovno pokretanje aplikacije.</string>
+    <string name="restart_is_required">Kako bi se u potpunosti primijenile promjene, potrebno je ponovno pokrenuti aplikaciju.</string>
     <string name="light_theme">Svijetla</string>
     <string name="dark_theme">Tamna</string>
     <string name="lang_bn">Bengalski</string>
@@ -1549,4 +1549,11 @@
     <string name="route_descr_destination">Odredište</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="close_changeset">Zatvori promjene</string>
+	<string name="lang_pms"/>
+    <string name="storage_directory_default">Unutarnja memorija</string>
+    <string name="confirm_usage_speed_cameras">U mnogim zemljama (Njemačka, Francuska, Italija, i druge) Korištenje upozorenja za nadolazeće uređaje za mjerenje brzine nije dopušteno zakonom. OsmAnd ne preuzima nikakvu odgovornost ako kršite zakon. Molimo kliknite da samo ako ste sigurni da želite koristiti ovu značajku.</string>
+	<string name="osmand_parking_overdue">zakasnio</string>
+	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
+	<string name="watch">Prikaži</string>
+	<string name="download_tab_local">Lokalno</string>
 	</resources>

@@ -150,7 +150,7 @@
 	<string name="poi_taxi">Parada de taxi</string>
 
 	<string name="poi_runway">Pista de rodaje</string>
-	<string name="poi_aeroway_terminal">Terminal de aeropuerto</string>
+	<string name="poi_aeroway_terminal">Aeroterminal</string>
 	<string name="poi_ferry_terminal">Terminal de ferry</string>
 	<string name="poi_lighthouse">Faro</string>
 
@@ -877,7 +877,7 @@
 
 	<string name="poi_highway_crossing">Cruce peatonal</string>
 
-<string name="poi_wiki_lang_nn">Wiki Noruega (Nynorsk)</string>
+<string name="poi_wiki_lang_nn">Wiki de Noruega (Nynorsk)</string>
 	<string name="poi_horse_stile">Portón equino</string>
 	<string name="poi_breakwater">Rompeolas</string>
 	<string name="poi_groyne">Rompeolas</string>
@@ -924,4 +924,7 @@
 	<string name="poi_lwn_ref">Red local de senderismo</string>
 
 	<string name="poi_enforcement_access">Control de acceso</string>
+	<string name="poi_country">País</string>
+	<string name="poi_fee">Costo</string>
+
 	</resources>

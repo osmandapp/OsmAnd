@@ -155,6 +155,45 @@ public class OsmandRegions {
 		}
 		return t % 2 == 1;
 	}
+	
+	public boolean intersect(BinaryMapDataObject bo, int lx, int ty, int rx, int by) {
+		int t = 0;
+		// 1. polygon in object 
+		if(contain(bo, lx, ty)) {
+			return true;
+		}
+		// 2. object in polygon
+		if(bo.getPointsLength() == 0) {
+			return false;
+		}
+		if(bo.getPoint31XTile(0) >= lx && bo.getPoint31XTile(0) <= rx && 
+				bo.getPoint31YTile(0) >= ty && bo.getPoint31YTile(0) <= by ){
+			return true;
+		}
+			
+		// 3. find intersection
+		for (int i = 1; i < bo.getPointsLength(); i++) {
+			int px = bo.getPoint31XTile(i - 1);
+			int x = bo.getPoint31XTile(i);
+			int py = bo.getPoint31YTile(i - 1);
+			int y = bo.getPoint31YTile(i);
+			if(x < lx && px < lx) {
+				continue;
+			} else if(x > rx && px > rx) {
+				continue;
+			} else if(y > by && py > by) {
+				continue;
+			} else if(y < ty && py < ty) {
+				continue;
+			}
+			long in = MapAlgorithms.calculateIntersection(px, py, x, y, lx, rx, by, ty);
+			if(in != -1) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	private List<BinaryMapDataObject> getCountries(int tile31x, int tile31y) {
 		HashSet<String> set = new HashSet<String>(quadTree.queryInBox(new QuadRect(tile31x, tile31y, tile31x, tile31y),
@@ -250,6 +289,7 @@ public class OsmandRegions {
 					}
 				}
 		);
+		sr.log = false;
 		if(reader != null) {
 			reader.searchMapIndex(sr);
 		}
@@ -364,7 +404,7 @@ public class OsmandRegions {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
-			int c = 0;
+//			int c = 0;
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() < 1) {
@@ -372,9 +412,9 @@ public class OsmandRegions {
 				}
 				initTypes(object);
 				String nm = object.getNameByType(downloadNameType);
-				if(nm != null) {
-					System.out.println((c++) +" " + nm);
-				}
+//				if(nm != null) {
+//					System.out.println((c++) +" " + nm);
+//				}
 				if (!countriesByDownloadName.containsKey(nm)) {
 					LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
 					countriesByDownloadName.put(nm, ls);
@@ -484,4 +524,6 @@ public class OsmandRegions {
 
 
 	}
+
+	
 }

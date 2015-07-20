@@ -51,6 +51,14 @@ public class OsmAndMapLayersView extends View {
 	}
 	
 	@Override
+	public boolean onGenericMotionEvent(MotionEvent event) {
+		if(mapView == null) {
+			return super.onGenericMotionEvent(event);
+		}
+		return mapView.onGenericMotionEvent(event);
+	}
+
+	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if(mapView == null) {
 			return super.onTouchEvent(event);

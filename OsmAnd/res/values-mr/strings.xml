@@ -12,7 +12,7 @@
   
   <string name="plugins_screen">प्लगिन्स</string>
   <string name="prefs_plugins">प्लगिन्स</string>
-  <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
+  <string name="play_commands_of_currently_selected_voice">निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="send_files_to_osm">जिपीएक्स फाइल्स ओएसएम ला पाठवायच्या का?</string>
   <string name="gpx_description_txt">वर्णन</string>
@@ -29,7 +29,7 @@
   <string name="backToMenu">पुन्हा मेनूकडे</string>
   <string name="zoomOut">झूम कमी करा</string>
   <string name="zoomIn">झूम वाढवा</string>
-  <string name="zoomIs">झूम आहे</string>
+  <string name="zoomIs">झूम लेवल आहे</string>
   <string name="north">उत्तर</string>
   <string name="north_north_east">इशान्य-उत्तर</string>
   <string name="north_east">इशान्य</string>
@@ -48,11 +48,11 @@
   <string name="north_north_west">वायव्य-उत्तर</string>
   <string name="front">पुढचा</string>
   <string name="front_right">पुढील उजवा</string>
-  <string name="right">उजवा</string>
+  <string name="right">उजवीकडे</string>
   <string name="back_right">मागील उजवा</string>
-  <string name="back">मागचा</string>
+  <string name="back">मागे</string>
   <string name="back_left">मागील डावा</string>
-  <string name="left">डावा</string>
+  <string name="left">डावीकडे</string>
   <string name="front_left">पुढील डावा</string>
   <string name="oclock">वाजता</string>
   <string name="towards">कडे</string>
@@ -65,7 +65,7 @@
   <string name="i_am_here">मी इथे आहे</string>
   <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
   <string name="local_openstreetmap_uploading">अपलोड करत आहे …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} पीओआय/बग्स अपलोड झाले</string>
+  <string name="local_openstreetmap_were_uploaded">{0} पीओआय/नोट्स अपलोड झाले</string>
   
   <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
   <string name="local_openstreetmap_delete">बदल काढून टाका</string>
@@ -221,7 +221,7 @@
   <string name="transport_stops">थांबे</string>
   <string name="transport_finish_search">शोध संपवा</string>
   <string name="transport_stop_to_go_out">उतरण्याचा थांबा निवडा</string>
-  <string name="transport_route_distance">मार्गाचे अंतर</string>
+  <string name="transport_route_distance">प्रवासाचे अंतर</string>
   <string name="transport">परिवहन</string>
   <string name="shared_string_ok">ठीक</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
@@ -238,7 +238,7 @@
   <string name="searching_address">पत्ता शोधत आहे…</string>
   <string name="search_offline_address">ऑफलाएन शोध</string>
   <string name="search_online_address">ऑनलाएन शोध</string>
-  <string name="route_general_information">एकुण अंतर %1$s,\n प्रवासाचा वेळ %2$d ता %3$d मि.</string>
+  <string name="route_general_information">एकुण अंतर %1$s,\nप्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
   <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
@@ -443,7 +443,7 @@
 	<string name="vector_data">ऑफलाएन वेक्टर नकाशे</string>
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
 	
-	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
+	<string name="context_menu_item_search_transport">सार्वजनिक परिवहन शोधा</string>
 	
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
 	<string name="amenity_type_man_made">मानव निर्मित</string>

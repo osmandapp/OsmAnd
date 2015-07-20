@@ -11,4 +11,29 @@
 	<string name="poi_office">कार्यालय</string>
 	<string name="poi_osmwiki">विकिपीडिया</string>
 	<string name="poi_books">पुस्तकालय</string>
+	<string name="poi_transportation">परिवहन</string>
+		<string name="poi_road_obstacle">रस्त्यतील अडथळा</string>
+		<string name="poi_personal_transport">व्यक्तिगत परिवहन</string>
+		<string name="poi_air_transport">वायु परिवहन</string>
+		<string name="poi_water_transport">जल परिवहन</string>
+		<string name="poi_power">उर्जा</string>
+		<string name="poi_sport">क्रिडा</string>
+	<string name="poi_craft">कला</string>
+	<string name="poi_natural">नैसर्गिक</string>
+	<string name="poi_bakery">बेकरी</string>
+	<string name="poi_alcohol">मद्य</string>
+	<string name="poi_chocolate">चॉकलेट दुकान</string>
+	<string name="poi_coffee">कॉफी दुकान</string>
+	<string name="poi_mall">मॉल</string>
+	<string name="poi_butcher">मांस</string>
+	<string name="poi_tea">चहाचे दुकान</string>
+	<string name="poi_wine">वाइन दुकान</string>
+
+	<string name="poi_bicycle">सायकल दुकान</string>
+	<string name="poi_clothes">कपड्याचे दुकान</string>
+	<string name="poi_child_clothes">मुलांचे कपडे</string>
+	<string name="poi_computer">कॉम्प्युटर दुकान</string>
+	<string name="poi_curtain">पडद्याचे दुकान</string>
+	<string name="poi_florist">फुलांचे दुकान</string>
+	<string name="poi_furniture">फर्निचर</string>
 	</resources>

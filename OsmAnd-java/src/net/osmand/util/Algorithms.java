@@ -5,6 +5,7 @@ import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -212,6 +213,19 @@ public class Algorithms {
 	}
 	
 	
+	public static void fileCopy(File src, File dst) throws IOException {
+		FileOutputStream fout = new FileOutputStream(dst);
+		try {
+			FileInputStream fin = new FileInputStream(src);
+			try {
+				Algorithms.streamCopy(fin, fout);
+			} finally {
+				fin.close();
+			}
+		} finally {
+			fout.close();
+		}
+	}
 	public static void streamCopy(InputStream in, OutputStream out) throws IOException{
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;

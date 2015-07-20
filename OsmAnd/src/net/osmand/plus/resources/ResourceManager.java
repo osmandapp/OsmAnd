@@ -798,13 +798,20 @@ public class ResourceManager {
 				}
 			}
 		}
+//		int left = MapUtils.get31TileNumberX(leftLongitude);
+//		int top = MapUtils.get31TileNumberY(topLatitude);
+//		int right = MapUtils.get31TileNumberX(rightLongitude);
+//		int bottom = MapUtils.get31TileNumberY(bottomLatitude);
+		int left = 0;
+		int top = 0;
+		int right = Integer.MAX_VALUE;
+		int bottom = Integer.MAX_VALUE;
 		for (AmenityIndexRepositoryBinary index : list) {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
 			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat),
-					MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(topLatitude),
-					MapUtils.get31TileNumberX(rightLongitude), MapUtils.get31TileNumberY(bottomLatitude),
+					left, top, right, bottom,
 					searchQuery, matcher);
 			amenities.addAll(result);
 		}

@@ -890,7 +890,7 @@
 	<string name="poi_description">Description</string>
 	<string name="poi_phone">Téléphone</string>
 	<string name="poi_website">Site web</string>
-	<string name="poi_service_times">Temps de service</string>
+	<string name="poi_service_times">Horaires de service</string>
 	<string name="poi_maxheight">Hauteur maximale</string>
 	<string name="poi_maxweight">Poids maximal</string>
 	<string name="poi_disused">Désaffecté</string>
@@ -914,4 +914,7 @@
 	<string name="poi_collection_times">Heures de levée</string>
 	<string name="poi_bus_trap">Passe à bus</string>
 	<string name="poi_rwn_ref">Réseau régional de randonnée pédestre</string>
+	<string name="poi_country">Pays</string>
+	<string name="poi_fee">Tarif</string>
+
 	</resources>

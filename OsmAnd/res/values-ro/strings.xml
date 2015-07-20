@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     <string name="tip_recent_changes_1_0_0_t">Modificări în versiunea 1.0.0 :
 \n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
 \n\t* Posibilitate afișare hartă exclusiv pentru drumuri
@@ -1673,4 +1674,7 @@
     <string name="index_name_gb">Europa - Marea Britanie</string>
     <string name="calculate_osmand_route_without_internet">Se calculează segment de traseu OsmAnd fără Internet</string>
     <string name="routing_attr_short_way_description">Utilizaţi drumul cel mai scurt</string>
-	</resources>
+	<string name="rendering_value_default13_name">Implicit(13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Implicit(cyan transparent)</string>
+    <string name="rendering_attr_currentTrackColor_name">Culoare GPX</string>
+    </resources>
