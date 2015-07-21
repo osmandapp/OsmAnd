@@ -910,6 +910,7 @@
 	<string name="poi_maxheight">Maximum height</string>
 	<string name="poi_maxweight">Maximum weight</string>
 	<string name="poi_abandoned">Abandoned</string>
+	<string name="poi_abandoned_poi">Abandoned object</string>
 	<string name="poi_disused">Disused</string>
 
 	<string name="poi_operator">Operator</string>
