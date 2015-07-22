@@ -316,7 +316,7 @@
   <string name="favorite_default_category">Інше</string>
   <string name="favourites_edit_dialog_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
-  <string name="vector_map_not_needed">Ні, дякую</string>
+  <string name="shared_string_no_thanks">Ні, дякую</string>
   <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>

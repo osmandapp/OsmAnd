@@ -220,7 +220,7 @@
 	<string name="favorite_default_category">Muut</string>
 	<string name="favourites_edit_dialog_name">Nimi</string>
 	<string name="favourites_edit_dialog_category">Kategoria</string>
-	<string name="vector_map_not_needed">Ei kiitos</string>
+	<string name="shared_string_no_thanks">Ei kiitos</string>
 	
 	<string name="daynight_mode_day">Päivä</string>
 	<string name="daynight_mode_night">Yö</string>

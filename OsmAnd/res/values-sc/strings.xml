@@ -1156,7 +1156,7 @@
 	<string name="favorite_default_category">Àteru</string>
 	<string name="favourites_edit_dialog_name">Nùmene</string>
 	<string name="favourites_edit_dialog_category">Categoria</string>
-	<string name="vector_map_not_needed">No, gràtzias</string>
+	<string name="shared_string_no_thanks">No, gràtzias</string>
 	<string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro zoom bassos). Podes iscarrigare World_basemap_x.obf pro unu sistema cumpridu.</string>
 	<string name="vector_data_missing">Fartant sos datos (\'non in lìnia\') in s’ischeda SD. Ti cussigiamus de los iscarrigare pro poder impreare sas mapas sena lìnia.</string>
 	<string name="local_index_installed">Versione locale</string>

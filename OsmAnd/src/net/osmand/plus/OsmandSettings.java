@@ -1,6 +1,34 @@
 package net.osmand.plus;
 
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.Environment;
+
+import net.osmand.IndexConstants;
+import net.osmand.StateChangedListener;
+import net.osmand.ValueHolder;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.access.AccessibilityMode;
+import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.SettingsAPI.SettingsEditor;
+import net.osmand.plus.dashboard.DashRateUsFragment;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.render.RenderingRulesStorage;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -16,32 +44,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import net.osmand.IndexConstants;
-import net.osmand.StateChangedListener;
-import net.osmand.ValueHolder;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.access.RelativeDirectionStyle;
-import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.api.SettingsAPI.SettingsEditor;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.render.RenderingRulesStorage;
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Environment;
 
 public class OsmandSettings {
 	
@@ -1856,7 +1858,18 @@ public class OsmandSettings {
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v2", 0).makeGlobal();
-	
+
+	// For DashRateUsFragment
+	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
+            new LongPreference("last_display_time", 0).makeGlobal().cache();
+	public final OsmandPreference<Integer> NUMBER_OF_APPLICATION_STARTS =
+			new IntPreference("number_of_application_starts", 0).makeGlobal().cache();
+	public final OsmandPreference<DashRateUsFragment.RateUsState> RATE_US_STATE =
+            new EnumIntPreference<>("rate_us_state",
+                    DashRateUsFragment.RateUsState.INITIAL_STATE, DashRateUsFragment.RateUsState.values())
+                    .makeGlobal()
+                    .cache();
+
 	public boolean checkFreeDownloadsNumberZero(){
 		if(!settingsAPI.contains(globalPreferences,NUMBER_OF_FREE_DOWNLOADS.getId())){
 			NUMBER_OF_FREE_DOWNLOADS.set(0);
@@ -1976,12 +1989,5 @@ public class OsmandSettings {
 		}
 
 	}
-
-	
-
-	
-
-	
-
 	
 }

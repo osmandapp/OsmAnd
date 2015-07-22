@@ -622,7 +622,7 @@
 	<string name="favorite_default_category">Andere</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
-	<string name="vector_map_not_needed">Nicht verwendet</string>
+	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggf. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>

@@ -278,7 +278,7 @@
 	<string name="favorite_default_category">Andre</string>
 	<string name="favourites_edit_dialog_name">Navn</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
-	<string name="vector_map_not_needed">Nei takk</string>
+	<string name="shared_string_no_thanks">Nei takk</string>
 	<string name="basemap_missing">Basis-verdenskart (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
 	<string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
 	<string name="local_index_descr_title">Karthåndtering</string>

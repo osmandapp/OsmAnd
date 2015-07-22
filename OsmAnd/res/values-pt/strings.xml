@@ -698,7 +698,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="favorite_default_category">Outros</string>
   <string name="favourites_edit_dialog_name">Name</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
-  <string name="vector_map_not_needed">Não, obrigado</string>
+  <string name="shared_string_no_thanks">Não, obrigado</string>
   <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe). Pode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>
   <string name="vector_data_missing">Faltam os dados de mapas no cartão SD. Precisa de fazer download dos mapas, para os usar offline.</string>
   <string name="local_index_gpx_info_show">\n\nMantenha pressionado para opções</string>

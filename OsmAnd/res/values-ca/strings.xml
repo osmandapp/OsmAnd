@@ -519,7 +519,7 @@
 <string name="context_menu_item_download_map">Baixa el mapa</string>
 <string name="tiles_to_download_estimated_size">Per al nivell de zoom {0} es baixaran {1} tessel·les ({2} MB)</string>
 <string name="shared_string_ok">D\'acord</string>
-<string name="vector_map_not_needed">No, gràcies</string>
+<string name="shared_string_no_thanks">No, gràcies</string>
 <string name="yard">iardes</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">milles</string>

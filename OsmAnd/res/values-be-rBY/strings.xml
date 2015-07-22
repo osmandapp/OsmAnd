@@ -1256,7 +1256,7 @@
 	<string name="favorite_default_category">Іnšaje</string>
 	<string name="favourites_edit_dialog_name">Nazva</string>
 	<string name="favourites_edit_dialog_category">Katehoryja</string>
-	<string name="vector_map_not_needed">Nie, dziakuj</string>
+	<string name="shared_string_no_thanks">Nie, dziakuj</string>
 	<string name="basemap_missing">Niama asnoŭnaj mapy śvietu (jakaja pakryvaje ŭvieś śviet na malych maštabach). Kab mieć poŭnaje asiarodździe treba zladavać World_basemap_x.obf.</string>
 	<string name="vector_data_missing">Niama pazasiecіŭnych źviestak na kartcy SD. Kab karystacca mapaj pa-za sietkaj, treba іch zladavać.</string>
 	<string name="local_index_installed">Vydańnie</string>

@@ -430,7 +430,7 @@
 	<string name="favorite_default_category">其它</string>
 	<string name="favourites_edit_dialog_name">名稱</string>
 	<string name="favourites_edit_dialog_category">類別</string>
-	<string name="vector_map_not_needed">不需要，謝謝</string>
+	<string name="shared_string_no_thanks">不需要，謝謝</string>
 	<string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
 	<string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
 	<string name="local_index_gpx_info_show">\n\n長按會出現選項</string>
