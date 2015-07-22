@@ -2036,4 +2036,10 @@
     <string name="rendering_value_translucent_red_name">Ruju translùcidu</string>
     <string name="rendering_value_default13_name">Predefinidu (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinidu (cianu translùcidu)</string>
-    </resources>
+    <string name="do_you_like_osmand">T\'agradat OsmAnd?</string>
+	<string name="we_really_care">Nos importat meda</string>
+	<string name="rate_this_app">Vota cust’aplicatzione</string>
+	<string name="rate_this_app_long">Pro piaghere dae unu votu a OsmAnd in Google Play</string>
+	<string name="user_hates_app_get_feedback">Narade·nos proite.</string>
+	<string name="user_hates_app_get_feedback_long">Pro piaghere, faghe·nos ischire ite dias bòlere cambiare in custa aplicatzione.</string>
+</resources>
