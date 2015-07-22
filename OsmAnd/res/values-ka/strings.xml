@@ -260,7 +260,7 @@
   <string name="favorite_default_category">სხვები</string>
   <string name="favourites_edit_dialog_name">სახელი</string>
   <string name="favourites_edit_dialog_category">კატეგორია</string>
-  <string name="vector_map_not_needed">არა, მადლობა</string>
+  <string name="shared_string_no_thanks">არა, მადლობა</string>
   <string name="basemap_missing">მსოფლიოს ბაზური რუკა, რომელიც შეიცავს მთელ მსოფლიოს პატარა გადიდებისას, არ არსებობს. გთხოვთ გადმოწეროთ World_basemap_x.obf.</string>
   <string name="vector_data_missing">დასტაში \"offline\" sdcard-ზე არ არსებობს მონაცემები. გთხოვთ გადმოწეროთ რუკებით გათიშულ რეჟიმში სარგებლობისათვის .</string>
   <string name="local_index_gpx_info_show">"\n\nპარამეტრების შესაცვლელად დააჭირეთ და გეჭიროთ"</string>

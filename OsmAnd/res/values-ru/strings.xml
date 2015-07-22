@@ -303,7 +303,7 @@
   <string name="favorite_friends_category">Друзья</string>
   <string name="favorite_places_category">Места</string>
   <string name="favorite_default_category">Другое</string>
-  <string name="vector_map_not_needed">Не нужно</string>
+  <string name="shared_string_no_thanks">Не нужно</string>
   <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
   <string name="vector_data_missing">Локальные данные отсутствуют на SD-карте. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
   <string name="local_index_gpx_info_show">\n\nНажать и удерживать для вызова меню</string>

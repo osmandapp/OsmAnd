@@ -504,7 +504,7 @@
 	<string name="favorite_default_category">אחרים</string>
 	<string name="favourites_edit_dialog_name">שם</string>
 	<string name="favourites_edit_dialog_category">קטגוריה</string>
-	<string name="vector_map_not_needed">לא, תודה</string>
+	<string name="shared_string_no_thanks">לא, תודה</string>
 	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סביבה שלמה.</string>
 	<string name="vector_data_missing">נתונים מקומיים („בלתי מקוונים“) חסרים בכרטיס ה־SD. נא לשקול להוריד אותם כדי להשתמש במפות באופן בלתי מקוון.</string>
 	<string name="local_index_gpx_info_show">\n\nיש ללחוץ ולהחזיק כדי להגיע לאפשרויות</string>

@@ -481,7 +481,7 @@
 	<string name="favorite_default_category">Άλλα</string>
 	<string name="favourites_edit_dialog_name">Όνομα</string>
 	<string name="favourites_edit_dialog_category">Κατηγορία</string>
-	<string name="vector_map_not_needed">Όχι, ευχαριστώ</string>
+	<string name="shared_string_no_thanks">Όχι, ευχαριστώ</string>
 	<string name="basemap_missing">Λείπει ο βασικός παγκόσμιος χάρτης (καλύπτει όλο τον κόσμο στις μικρές κλίμακες). Παρακαλώ κατεβάστε το World_basemap_x.obf για ένα πλήρες περιβάλλον.</string>
 	<string name="vector_data_missing">Δεν υπάρχουν offline δεδομένα στην κάρτα SD. Παρακαλώ κατεβάστε τα  ώστε να μπορέσετε να χρησιμοποιήσετε χάρτες χωρίς σύνδεση.</string>
 	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε για επιλογές</string>

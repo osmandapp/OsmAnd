@@ -437,7 +437,7 @@
 <string name="favorite_default_category">Annat</string>
 <string name="favourites_edit_dialog_name">Namn</string>
 <string name="favourites_edit_dialog_category">Kategori</string>
-<string name="vector_map_not_needed">Nej, tack</string>
+<string name="shared_string_no_thanks">Nej, tack</string>
 <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en komplett miljö.</string>
 <string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
 <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>

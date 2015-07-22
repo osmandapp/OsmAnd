@@ -634,7 +634,7 @@
   <string name="favorite_default_category">Bestelakoak</string>
   <string name="favourites_edit_dialog_name">Izena</string>
   <string name="favourites_edit_dialog_category">Kategoria</string>
-  <string name="vector_map_not_needed">Ez, milesker</string>
+  <string name="shared_string_no_thanks">Ez, milesker</string>
   <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi guztia eduki ahal izateko.</string>
   <string name="vector_data_missing">Datu lokalak (lineaz kanpokoak) ez daude SD txartelean. Lineaz kanpoko mapak erabili nahi badituzu, jaitsi beharko zenituzke.</string>
   <string name="local_index_gpx_info_show">\n\nZanpatuta mantendu aukerentzat</string>

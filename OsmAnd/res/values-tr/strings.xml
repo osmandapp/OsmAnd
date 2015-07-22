@@ -351,7 +351,7 @@
 	<string name="favorite_default_category">Diğerleri</string>
 	<string name="favourites_edit_dialog_name">Ad</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
-	<string name="vector_map_not_needed">Hayır, teşekkürler</string>
+	<string name="shared_string_no_thanks">Hayır, teşekkürler</string>
 	
 	<string name="local_index_mi_reload">Sd card\'tan tekrar yükle</string>
 	<string name="shared_string_download">İndir</string>

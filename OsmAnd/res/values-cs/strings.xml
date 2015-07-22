@@ -254,7 +254,7 @@
   <string name="favorite_friends_category">Přátelé</string>
   <string name="favorite_places_category">Místa</string>
   <string name="favorite_default_category">Ostatní</string>
-  <string name="vector_map_not_needed">Není potřeba</string>
+  <string name="shared_string_no_thanks">Není potřeba</string>
   <string name="basemap_missing">Chybí základní mapa světa. Prosím stáhněte ji pro správnou funkci programu.</string>
   <string name="vector_data_missing">Na SD kartě nejsou uložena žádná offline data. Prosím stáhněte je pro použití map v offline módu.</string>
   <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>

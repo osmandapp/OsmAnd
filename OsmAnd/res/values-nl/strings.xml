@@ -262,7 +262,7 @@
   <string name="favorite_default_category">Diversen</string>
   <string name="favourites_edit_dialog_name">Naam</string>
   <string name="favourites_edit_dialog_category">Categorie</string>
-  <string name="vector_map_not_needed">Niet nodig</string>
+  <string name="shared_string_no_thanks">Niet nodig</string>
   <string name="basemap_missing">De basis-wereldkaart (ruwe kaart van de gehele wereld) ontbreekt. Overweeg om deze te downloaden (World_basemap_x.obf) voor een compleet kaartbeeld.</string>
   <string name="vector_data_missing">Er staan nog geen offline kaarten op de SD-kaart. Download kaarten om offline te kunnen werken.</string>
   <string name="local_index_gpx_info_show">\n\nLang drukken voor opties</string>

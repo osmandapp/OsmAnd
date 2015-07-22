@@ -1160,7 +1160,7 @@
 	<string name="favorite_default_category">Outros</string>
 	<string name="favourites_edit_dialog_name">Nome</string>
 	<string name="favourites_edit_dialog_category">Categoría</string>
-	<string name="vector_map_not_needed">Non, grazas</string>
+	<string name="shared_string_no_thanks">Non, grazas</string>
 	<string name="basemap_missing">Falta o mapa base mundial (que recobre todo o mundo en ampliacións pequenas). Considere a posibilidade de descargar World_basemap_x.obf para contar cun ambiente completo.</string>
 	<string name="vector_data_missing">Faltan datos de a bordo («sen conexión») no cartón SD. Considere a posibilidade de descargalos para poder empregar os mapas sen conexión.</string>
 	<string name="local_index_installed">Edición</string>

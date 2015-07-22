@@ -235,7 +235,7 @@
   <string name="favorite_default_category">Egyéb</string>
   <string name="favourites_edit_dialog_name">Név</string>
   <string name="favourites_edit_dialog_category">Kategória</string>
-  <string name="vector_map_not_needed">Nem szükséges</string>
+  <string name="shared_string_no_thanks">Nem szükséges</string>
   <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap.obf -et.</string>
   <string name="vector_data_missing">Nincsenek offline használható adatok az SD kártyán. A térképek offline használathoz le kell töltened a kívánt területet.</string>
   <string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
