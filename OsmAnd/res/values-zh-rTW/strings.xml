@@ -134,7 +134,7 @@
 	<string name="shared_location">分享位置</string>
 	<string name="osmand_parking_event">由停車場取車</string>
 	<string name="osmand_parking_warning">警示</string>
-	<string name="osmand_parking_warning_text">取車通知先前已加到您的行事曆中。它會留在那裡直到您手動刪除它。</string>    
+	<string name="osmand_parking_warning_text">取車通知在先前已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>    
 	<string name="osmand_parking_time_limit_title">設定停車時限</string>
 	<string name="osmand_parking_delete_confirm">您要移除停車位置嗎？</string>
 	<string name="osmand_parking_delete">刪除停車位置標記</string>
