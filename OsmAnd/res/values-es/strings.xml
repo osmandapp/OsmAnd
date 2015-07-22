@@ -2140,4 +2140,10 @@
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcido</string>
     <string name="restart_is_required">Para aplicar los cambios, es necesario reiniciar manualmente la aplicación.</string>
-    </resources>
+    <string name="do_you_like_osmand">¿Le gusta OsmAnd?</string>
+	<string name="we_really_care">Realmente nos interesa</string>
+	<string name="rate_this_app">Califica ésta aplicación</string>
+	<string name="rate_this_app_long">Por favor, califique a OsmAnd en Google Play</string>
+	<string name="user_hates_app_get_feedback">Dinos por que.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, díganos que cambiaría en esta aplicación.</string>
+</resources>
