@@ -1370,7 +1370,7 @@
 	<string name="amenity_type_leisure">Lazer</string>
 	<string name="amenity_type_man_made">Construção humana</string>
 	<string name="amenity_type_military">Militar</string>
-	<string name="amenity_type_natural">Natural</string>
+	<string name="amenity_type_natural">Natureza</string>
 	<string name="amenity_type_office">Escritório</string>
 	<string name="amenity_type_other">Outro</string>
 	<string name="amenity_type_shop">Loja</string>
@@ -1664,7 +1664,7 @@
 	<string name="poi_error_io_error_template">Erro de entrada/saída na execução da ação {0}.</string>
 	<string name="poi_error_info_not_loaded">As informações sobre o ponto não foram carregadas</string>
 	<string name="poi_dialog_name">Nome</string>
-	<string name="poi_dialog_opening_hours">Abrir</string>
+	<string name="poi_dialog_opening_hours">Aberto</string>
 	<string name="poi_dialog_comment">Comentário</string>
 	<string name="poi_dialog_comment_default">Alterando POI</string>
 	<string name="poi_dialog_other_tags_message">Todos os outros valores serão preservados</string>

@@ -615,7 +615,7 @@
   <string name="poi_shop">Geschäft</string>
 		<string name="poi_shop_food">Lebensmittelgeschäft</string>
 	<string name="poi_emergency">Notfall</string>
-	<string name="poi_road_obstacle">Straßemhindernis</string>
+	<string name="poi_road_obstacle">Straßenhindernis</string>
 		<string name="poi_filling_station">Tankstelle</string>
 		<string name="poi_public_transport">ÖPNV</string>
 		<string name="poi_man_made">von Menschenhand</string>
@@ -625,7 +625,7 @@
 		<string name="poi_landuse">Landnutzung</string>
 	<string name="poi_education">Bildung</string>
 	<string name="poi_administrative">Verwaltung</string>
-	<string name="poi_healthcare">Gesundheitsektor</string>
+	<string name="poi_healthcare">Gesundheitssektor</string>
 	<string name="poi_office">Büro</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Tourismus</string>
@@ -746,4 +746,66 @@
 	<string name="poi_internet_access_terminal">Internetzugang: Terminal</string>
 	<string name="poi_internet_access_service">Internetzugang: Dienst</string>
 
+	<string name="poi_fee">Gebühr</string>
+
+	<string name="poi_brand">Marke</string>
+	<string name="poi_maxweight">Maximalgewicht</string>
+	<string name="poi_operator">Betreiber</string>
+	<string name="poi_disused">Eingestellt</string>
+
+	<string name="poi_abandoned">Aufgelassen</string>
+	<string name="poi_maxheight">Maximale Höhe</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_website">Internetseite</string>
+	<string name="poi_description">Beschreibung</string>
+	<string name="poi_opening_hours">Öffnungszeiten</string>
+	<string name="poi_barrier_entrance">Eingang</string>
+	<string name="poi_entrance_main">Haupteingang</string>
+	<string name="poi_entrance">Eingang</string>
+	<string name="poi_entrance_exit">Ausgang</string>
+
+	<string name="poi_wiki_lang_vo">Volapük-Wiki</string>
+	<string name="poi_wiki_lang_th">Thai-Wiki</string>
+	<string name="poi_wiki_lang_sr">Serbisches Wiki</string>
+	<string name="poi_wiki_lang_sv">Schwedisches Wiki</string>
+	<string name="poi_wiki_lang_sw">Swahili-Wiki</string>
+	<string name="poi_wiki_lang_te">Telugu-Wiki</string>
+	<string name="poi_wiki_lang_sl">Slowenisches Wiki</string>
+	<string name="poi_wiki_lang_pt">Portugiesisches Wiki</string>
+	<string name="poi_wiki_lang_ro">Rumänisches Wiki</string>
+	<string name="poi_wiki_lang_ru">Russisches Wiki</string>
+	<string name="poi_wiki_lang_sk">Slowakisches Wiki</string>
+	<string name="poi_wiki_lang_pl">Polnisches Wiki</string>
+	<string name="poi_wiki_lang_nl">Niederländisches Wiki</string>
+	<string name="poi_wiki_lang_nn">Neu-Norwegisches Wiki</string>
+	<string name="poi_wiki_lang_no">Norwegisches Wiki</string>
+	<string name="poi_wiki_lang_hr">Kroatisches Wiki</string>
+	<string name="poi_wiki_lang_ht">Haïtianisches Wiki</string>
+	<string name="poi_wiki_lang_ca">Katalanisches Wiki</string>
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">Englisches Wiki</string>
+	<string name="poi_wiki_lang_ar">Arabisches Wiki</string>
+	<string name="poi_wiki_lang_be">Weißrussisches Wiki</string>
+	<string name="poi_wiki_lang_bg">Bulgarisches Wiki</string>
+	<string name="poi_wiki_lang_ceb">Cebuanosprachiges Wiki</string>
+	<string name="poi_wiki_lang_cs">Tschechisches Wiki</string>
+	<string name="poi_wiki_lang_da">Dänisches Wiki</string>
+	<string name="poi_wiki_lang_de">Deutsches Wiki</string>
+	<string name="poi_wiki_lang_el">Griechisches Wiki</string>
+	<string name="poi_wiki_lang_et">Estnisches Wiki</string>
+	<string name="poi_wiki_lang_es">Spanisches Wiki</string>
+	<string name="poi_wiki_lang_fi">Finnisches Wiki</string>
+	<string name="poi_wiki_lang_fr">Französisches Wiki</string>
+	<string name="poi_wiki_lang_gl">Galizisches Wiki</string>
+	<string name="poi_wiki_lang_he">Hebräisches Wiki</string>
+	<string name="poi_wiki_lang_hi">Hindisches Wiki</string>
+	<string name="poi_wiki_lang_hu">Ungarisches Wiki</string>
+	<string name="poi_wiki_lang_id">Indonesisches Wiki</string>
+	<string name="poi_wiki_lang_it">Italienisches Wiki</string>
+	<string name="poi_wiki_lang_ja">Japanisches Wiki</string>
+	<string name="poi_wiki_lang_ko">Koreanisches Wiki</string>
+	<string name="poi_wiki_lang_lt">Litauisches Wiki</string>
+	<string name="poi_wiki_lang_lv">Lettisches Wiki</string>
+	<string name="poi_wiki_lang_ms">Malaiisches Wiki</string>
+	<string name="poi_wiki_lang_new">Newarisches Wiki</string>
 	</resources>

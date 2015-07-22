@@ -155,7 +155,7 @@
 	<string name="poi_fire_water_pond">Reservatório de água contra incêndios</string>
 	<string name="poi_grit_bin">Caixa de sal-gema</string>
 	<string name="poi_ambulance_station">Posto de ambulância</string>
-	<string name="poi_ses_station">Posto de Defesa Civil</string>
+	<string name="poi_ses_station">Posto de defesa civil</string>
 	<string name="poi_emergency_access_point">Ponto de resgate emergencial</string>
 
 	<string name="poi_ford">Vau</string>
@@ -387,14 +387,14 @@
 
 	<string name="poi_healthcare_yes">Instalação médica</string>
 
-	<string name="poi_office_telecommunication">Escritório de telecomunicação</string>
+	<string name="poi_office_telecommunication">Telecomunicação</string>
 	<string name="poi_ngo">ONG</string>
 	<string name="poi_townhall">Paço Municipal</string>
 	<string name="poi_employment_agency">Agência de empregos</string>
-	<string name="poi_research">Escritório de pesquisa</string>
-	<string name="poi_it">Escritório de TI</string>
-	<string name="poi_newspaper">Escritório de jornal</string>
-	<string name="poi_architect">Escritório de arquiteto</string>
+	<string name="poi_research">Pesquisa</string>
+	<string name="poi_it">TI</string>
+	<string name="poi_newspaper">Jornal</string>
+	<string name="poi_architect">Arquiteto</string>
 	<string name="poi_advertising_agency">Agência de publicidade</string>
 	<string name="poi_educational_institution">Instituição de ensino</string>
 	<string name="poi_studio">Estúdio</string>
@@ -925,4 +925,5 @@
 	<string name="poi_country">País</string>
 	<string name="poi_fee">Taxa</string>
 
+	<string name="poi_abandoned_poi">Objeto abandonado</string>
 	</resources>
