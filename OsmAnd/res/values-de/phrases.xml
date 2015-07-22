@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_9pin">Kegeln</string>
@@ -536,7 +536,7 @@
 	<string name="poi_toboggan">Rodelschlitten</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
-	<string name="poi_information">Fremdenverkehrsamt</string>
+	<string name="poi_information">Information für Touristen</string>
 	<string name="poi_town">Kleinstadt</string>
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
