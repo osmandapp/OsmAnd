@@ -924,4 +924,5 @@
 <string name="poi_country">國家</string>
 	<string name="poi_fee">費用</string>
 
+	<string name="poi_abandoned_poi">已遺棄的物件</string>
 	</resources>
