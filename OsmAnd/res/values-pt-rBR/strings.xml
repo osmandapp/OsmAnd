@@ -1771,4 +1771,10 @@
     <string name="rendering_value_translucent_purple_name">Roxo translúcido</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (ciano translúcido)</string>
-    </resources>
+    <string name="do_you_like_osmand">Você curte o OsmAnd?</string>
+	<string name="rate_this_app">Avalie este app</string>
+	<string name="rate_this_app_long">Por favor, avalie o OsmAnd no Google Play</string>
+	<string name="user_hates_app_get_feedback">Diga-nos porquê.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, nos diga o que quer mudar neste app.</string>
+<string name="we_really_care">Nós realmente nos importamos</string>
+	</resources>
