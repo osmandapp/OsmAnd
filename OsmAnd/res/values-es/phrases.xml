@@ -105,7 +105,7 @@
 	<string name="poi_fire_extinguisher">Extintor de incendios</string>
 	<string name="poi_fire_hose">Manguera de incendio</string>
 	<string name="poi_ambulance_station">Estación de ambulancias</string>
-	<string name="poi_ses_station">Estación SES</string>
+	<string name="poi_ses_station">Defensa Civil (SES)</string>
 	<string name="poi_emergency_access_point">Punto de acceso de emergencia</string>
 
 	<string name="poi_mountain_pass_yes">Paso de montaña</string>
