@@ -923,4 +923,5 @@
 	<string name="poi_maxweight">Максімальная вага</string>
 	<string name="poi_maxheight">Максімальная вышыня</string>
 	<string name="poi_service_times">Гадзіны абслугоўвання</string>
+	<string name="poi_abandoned_poi">Закінуты аб\'ект</string>
 	</resources>
