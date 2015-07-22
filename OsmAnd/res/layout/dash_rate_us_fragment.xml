@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:id="@+id/search"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -10,17 +11,18 @@
               android:layout_marginRight="@dimen/dash_margin_h"
               android:orientation="vertical">
 
-    <TextView
+    <net.osmand.plus.widgets.TextViewEx
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/do_you_like_osmand"
         android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/welcome_header_text_size"
-        android:paddingBottom="@dimen/list_content_padding"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
         android:paddingLeft="@dimen/list_content_padding"
         android:paddingRight="@dimen/list_content_padding"
-        android:paddingTop="@dimen/list_content_padding"/>
+        android:paddingTop="8dp"
+        osmand:typeface="@string/font_roboto_medium"/>
 
     <TextView
         android:id="@+id/subheader"
@@ -60,8 +62,7 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/shared_string_no"
-            android:textColor="?attr/dashboard_subheader_text_color"/>
+            android:text="@string/shared_string_no" />
     </LinearLayout>
 
 </LinearLayout>

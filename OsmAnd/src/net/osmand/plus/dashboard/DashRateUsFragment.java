@@ -24,6 +24,9 @@ import java.util.Calendar;
 public class DashRateUsFragment extends DashBaseFragment {
     public static final String TAG = "DASH_RATE_US_FRAGMENT";
 
+    // TODO move to resources
+    public static final String EMAIL = "support@osmand.net";
+
     // Imported in shouldShow method
     private static OsmandSettings settings;
     private FragmentState state = FragmentState.INITIAL_STATE;
@@ -118,9 +121,6 @@ public class DashRateUsFragment extends DashBaseFragment {
 
         @Override
         public void onClick(View v) {
-            Log.v(TAG, "onClick(" + "v=" + v + ")");
-            Log.v(TAG, this.getClass().getName());
-            Log.v(TAG, "state=" + state);
             switch (state) {
                 case INITIAL_STATE:
                     state = FragmentState.USER_LIKES_APP;
@@ -129,7 +129,6 @@ public class DashRateUsFragment extends DashBaseFragment {
                     subheader.setText(getResources().getString(R.string.rate_this_app_long));
                     positiveButton.setText(getResources().getString(R.string.shared_string_ok));
                     negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
-                    Log.v(TAG, "state2=" + state);
                     return;
                 case USER_LIKES_APP:
                     settings.RATE_US_STATE.set(RateUsState.LIKED);
@@ -144,7 +143,6 @@ public class DashRateUsFragment extends DashBaseFragment {
                                         + getActivity().getPackageName())));
                     }
                     dashboard.refreshDashboardFragments();
-                    Log.v(TAG, "state2=" + state);
                     return;
                 case USER_HATES_APP:
                     settings.RATE_US_STATE.set(RateUsState.DISLIKED_WITH_MESSAGE);
@@ -153,10 +151,9 @@ public class DashRateUsFragment extends DashBaseFragment {
                     dashboard.refreshDashboardFragments();
                     Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
                     sendEmail.setType("text/plain");
-                    // TODO replace email address with constant
-                    sendEmail.putExtra(Intent.EXTRA_EMAIL, "support@osmand.net");
+                    sendEmail.setData(Uri.parse("mailto:" + EMAIL));
+                    sendEmail.putExtra(Intent.EXTRA_EMAIL, EMAIL);
                     startActivity(sendEmail);
-                    Log.v(TAG, "state2=" + state);
                     break;
             }
         }
@@ -179,8 +176,6 @@ public class DashRateUsFragment extends DashBaseFragment {
 
         @Override
         public void onClick(View v) {
-            Log.v(TAG, this.getClass().getName());
-            Log.v(TAG, "state=" + state);
             switch (state) {
                 case INITIAL_STATE:
                     state = FragmentState.USER_HATES_APP;
@@ -189,7 +184,6 @@ public class DashRateUsFragment extends DashBaseFragment {
                     subheader.setText(getResources().getString(R.string.user_hates_app_get_feedback_long));
                     positiveButton.setText(getResources().getString(R.string.shared_string_ok));
                     negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
-                    Log.v(TAG, "state2=" + state);
                     return;
                 case USER_LIKES_APP:
                     settings.RATE_US_STATE.set(RateUsState.IGNORED);
@@ -201,7 +195,6 @@ public class DashRateUsFragment extends DashBaseFragment {
             settings.NUMBER_OF_APPLICATION_STARTS.set(0);
             settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
             dashboard.refreshDashboardFragments();
-            Log.v(TAG, "state2=" + state);
         }
     }
 
