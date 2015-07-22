@@ -2002,4 +2002,10 @@
     <string name="restart_is_required">Para aplicar los cambios, se necesita reiniciar la aplicación.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
-    </resources>
+    <string name="do_you_like_osmand">¿Le gusta OsmAnd?</string>
+	<string name="we_really_care">Realmente nos importa</string>
+	<string name="rate_this_app">Califica la aplicación</string>
+	<string name="rate_this_app_long">Por favor, califica a OsmAnd en Google Play</string>
+	<string name="user_hates_app_get_feedback">Dinos por que.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, díganos lo que cambiaría en esta aplicación.</string>
+</resources>
