@@ -2108,8 +2108,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_value_defaultTranslucentCyan_name">Par défaut (cyan translucide)</string>
     <string name="do_you_like_osmand">Aimez-vous OsmAnd ?</string>
 	<string name="rate_this_app">Évaluer cette application</string>
-	<string name="rate_this_app_long">Merci de donner une évaluation à OsmAnd sur Google Play</string>
-	<string name="user_hates_app_get_feedback">Dites nous pourquoi.</string>
-	<string name="user_hates_app_get_feedback_long">Merci de nous dire ce que vous voudriez changer dans cette application.</string>
-<string name="we_really_care">Cela nous importe beaucoup.</string>
+	<string name="rate_this_app_long">Merci d\'évaluer OsmAnd sur Google Play</string>
+	<string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
+	<string name="user_hates_app_get_feedback_long">Merci de nous faire part de ce que vous voudriez améliorer dans cette application.</string>
+<string name="we_really_care">Nous sommes très attentifs</string>
 	</resources>
