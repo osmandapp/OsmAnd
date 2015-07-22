@@ -2059,4 +2059,10 @@
     <string name="rendering_value_translucent_purple_name">半透明的紫色</string>
     <string name="rendering_value_default13_name">預設 (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">預設 (半透明青色)</string>
-    </resources>
+    <string name="do_you_like_osmand">您喜歡 osmand 嗎？</string>
+	<string name="we_really_care">我們真的在乎意</string>
+	<string name="rate_this_app">評論這個 app</string>
+	<string name="rate_this_app_long">請在 Google Play 給 OsmAnd 分數</string>
+	<string name="user_hates_app_get_feedback">告訴我們為什麼。</string>
+	<string name="user_hates_app_get_feedback_long">請告訴我們這個應用程式您想要更改些什麼。</string>
+</resources>
