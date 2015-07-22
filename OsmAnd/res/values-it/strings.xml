@@ -1701,7 +1701,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
     <string name="home">Casa</string>
-    <string name="live_monitoring_m_descr">Invia i dati di tracciamento a un specifico servizio web se la registrazione GPX è abilitata.</string>
+    <string name="live_monitoring_m_descr">Invia i dati di tracciamento a uno specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
 	<string name="live_monitoring_stop">Ferma il tracciamento online</string>
@@ -1839,7 +1839,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="dash_download_new_one">Scarica una nuova mappa</string>
     <string name="dash_download_manage">Gestisci</string>
     <string name="rendering_attr_roadStyle_name">Stile disegno delle strade</string>
-    <string name="rendering_value_default_name">Preimpostato</string>
+    <string name="rendering_value_default_name">Predefinito</string>
     <string name="rendering_value_orange_name">Arancione</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
@@ -1896,7 +1896,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
-	<string name="plugin_ski_descr">"Questo plugin per OsmAnd ti mette a portata di mano i dettagli delle piste da sci di fondo e alpino mondiali, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà, e raffigurate in uno stile mappa speciale \'Inverno\', che sembra un paesaggio imbiancato dalla neve.\n\nAttivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere ripristinata sia disattivata nuovamente da qui cambiando lo \'Stile della mappa\' in \'Configura mappa\' come desiderato. "</string>
+	<string name="plugin_ski_descr">"Questo plugin per OsmAnd ti mette a portata di mano i dettagli delle piste da sci di fondo e alpino mondiali, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno stile mappa speciale \'Inverno\', che sembra un paesaggio imbiancato dalla neve.\n\nAttivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere ripristinata o disattivata nuovamente da qui o cambiando lo \'Stile della mappa\' in \'Configura mappa\' come desiderato. "</string>
 	<string name="plugin_touringview_descr">"Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali.
 \n\nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento).
 \n\nRappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.
@@ -2058,13 +2058,13 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in accordo a OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base a OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella le modifiche OSM</string>
     <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati desueti e incompatibili. Vuoi archiviarli?</string>
-    <string name="download_wikipedia_files">Vuoi scaricare dati Wikipedia aggiuntivi (%1$s MB) ?</string>
+    <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
-    <string name="disable_recording_once_app_killed_descrp">"Metterà in pausa la registrazione GPX quando l\'app viene terminata (attraverso le app recenti). (L\'indicatore della modalità OsmAnd quiescente  scomparirà dalla barra delle notifiche Android.)"</string>
+    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). (L\'indicatore della modalità quiescente di OsmAnd sparisce dalla barra delle notifiche di Android.)</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
@@ -2123,4 +2123,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rendering_value_defaultTranslucentCyan_name">Default (Ciano traslucido)</string>
     <string name="rendering_value_red_name">Rosso</string>
     <string name="lang_ht">Haitiano</string>
-    </resources>
+    <string name="do_you_like_osmand">Ti piace OsmAnd?</string>
+	<string name="we_really_care">Ci teniamo molto</string>
+	<string name="rate_this_app">Valuta questa app</string>
+	<string name="user_hates_app_get_feedback">Dicci perché.</string>
+	</resources>
