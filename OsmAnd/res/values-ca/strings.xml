@@ -2073,4 +2073,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="restart_is_required">Per aplicar totalment els canvis, cal que reinicieu manualment l\'aplicació.</string>
     <string name="rendering_value_default13_name">Per defecte (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Per defecte (cian translúcid)</string>
-    </resources>
+    <string name="do_you_like_osmand">Us agrada OsmAnd?</string>
+	<string name="we_really_care">Som molt receptius</string>
+	<string name="rate_this_app">Avalua aquesta aplicació</string>
+	<string name="rate_this_app_long">Us agrairíem que avaluéssiu OsmAnd en el Google Play</string>
+	<string name="user_hates_app_get_feedback">Digueu-nos el motiu.</string>
+	<string name="user_hates_app_get_feedback_long">Us agrairíem que ens diguéssiu que voldríeu canviar d\'aquesta aplicació.</string>
+</resources>
