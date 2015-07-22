@@ -2087,4 +2087,10 @@
     <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (gennemsigtig cyan)</string>
-    </resources>
+    <string name="do_you_like_osmand">Kan du lide OsmAnd?</string>
+	<string name="rate_this_app">Bedøm denne app</string>
+	<string name="rate_this_app_long">Vurder OsmAnd på Google Play</string>
+	<string name="user_hates_app_get_feedback">Fortæl os hvorfor.</string>
+	<string name="we_really_care">Dette er vigtigt for os</string>
+	<string name="user_hates_app_get_feedback_long">Fortæl os hvad du ønsker at ændre i denne app.</string>
+</resources>
