@@ -932,4 +932,7 @@
 	<string name="poi_route_hiking_lwn_poi">Rota de caminhada local</string>
 	<string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
 
-	</resources>
+	<string name="poi_traffic_enforcement">Fiscalização de trânsito</string>
+	<string name="poi_node_networks">Nós da rede de caminhada/ciclismo</string>
+		<string name="poi_hiking_routes">Rotas de caminhada</string>
+		</resources>
