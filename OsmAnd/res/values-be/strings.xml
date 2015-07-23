@@ -2042,4 +2042,10 @@
     <string name="rendering_value_translucent_purple_name">Празрысты фіялетавы</string>
     <string name="rendering_value_default13_name">Па змоўчаньні (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Па змоўчаньні (празрысты сіні)</string>
-    </resources>
+    <string name="do_you_like_osmand">Вам падабаецца OsmAnd?</string>
+	<string name="we_really_care">Нам сапраўды важна</string>
+	<string name="rate_this_app">Ацаніце гэту праграму</string>
+	<string name="rate_this_app_long">Калі ласка, дайце ацэнку OsmAnd на Google Play</string>
+	<string name="user_hates_app_get_feedback">Скажыце нам чаму.</string>
+	<string name="user_hates_app_get_feedback_long">Калі ласка, раскажыце нам, што вы хацелі б змяніць у гэтай праграме.</string>
+</resources>
