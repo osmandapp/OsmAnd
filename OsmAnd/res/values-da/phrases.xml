@@ -949,4 +949,6 @@
 	<string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
 	<string name="poi_route_hiking_ref_poi">Vandrerute reference</string>
 
-	</resources>
+	<string name="poi_node_networks">Vandring/cykling netværk knudepunkter</string>
+		<string name="poi_hiking_routes">Vandreruter</string>
+		</resources>
