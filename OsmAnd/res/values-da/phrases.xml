@@ -716,14 +716,14 @@
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Lagertank</string>
 
-	<string name="poi_piste_downhill">Styrtløb</string>
-	<string name="poi_piste_nordic">Langrend</string>
-	<string name="poi_piste_skitour">Skitouring</string>
-	<string name="poi_piste_hike">Vandring</string>
-	<string name="poi_piste_sleigh">Kane</string>
-	<string name="poi_piste_sled">Slæde</string>
+	<string name="poi_piste_downhill">Styrtløbspiste</string>
+	<string name="poi_piste_nordic">Langrendpiste</string>
+	<string name="poi_piste_skitour">Skitouring piste</string>
+	<string name="poi_piste_hike">Vandrepiste</string>
+	<string name="poi_piste_sleigh">Kanepiste</string>
+	<string name="poi_piste_sled">Slædepiste</string>
 	<string name="poi_piste_snow_park">Snow park</string>
-	<string name="poi_piste_playground">Legeplads</string>
+	<string name="poi_piste_playground">Legepiste</string>
 	<string name="poi_piste_ice_skate">Isskøjte-piste</string>
 
 	<string name="poi_gasometer">Gasbeholder</string>
@@ -777,7 +777,7 @@
 	<string name="poi_wilderness_hut">Vildmarkshytte</string>
 
 	<string name="poi_payment_terminal">Betalingsterminal</string>
-	<string name="poi_piste">Skipiste</string>
+	<string name="poi_piste">Piste</string>
 	<string name="poi_observation_tower">Udsigtstårn</string>
 	<string name="poi_bell_tower">Klokketårn</string>
 	<string name="poi_ski_rental">Skiudlejning</string>
