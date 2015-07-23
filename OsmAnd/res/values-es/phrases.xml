@@ -310,7 +310,7 @@
 	<string name="poi_club_veterans">Club de veteranos</string>
 	<string name="poi_club_ethnic">Club étnico</string>
 	<string name="poi_club_nature">Club naturista</string>
-	<string name="poi_piste_playground">Parque de esquí infantil</string>
+	<string name="poi_piste_playground">Pista de esquí infantil</string>
 	<string name="poi_piste_snow_park">Parque de nieve</string>
 	<string name="poi_library">Biblioteca</string>
 	<string name="poi_arts_centre">Centro de arte</string>
@@ -590,10 +590,10 @@
 	<string name="poi_club_tourism">Club de turismo</string>
 	<string name="poi_club_charity">Club de caridad</string>
 
-	<string name="poi_piste_downhill">Descenso</string>
-	<string name="poi_piste_nordic">Nórdico</string>
-	<string name="poi_piste_hike">Caminata</string>
-	<string name="poi_piste_sleigh">Trineo (animales)</string>
+	<string name="poi_piste_downhill">Pista de descenso</string>
+	<string name="poi_piste_nordic">Pista nórdica</string>
+	<string name="poi_piste_hike">Pista de senderismo</string>
+	<string name="poi_piste_sleigh">Pista de trineo (animales)</string>
 	<string name="poi_piste_ice_skate">Patín de hielo</string>
 
 	<string name="poi_dance_floor">Pista de baile</string>
@@ -698,8 +698,8 @@
 	<string name="poi_spring">Manantial</string>
 	<string name="poi_funicular">Funicular</string>
 	<string name="poi_bailiff">Alguacil</string>
-	<string name="poi_piste_skitour">Esquí de travesía</string>
-	<string name="poi_piste_sled">Trineo</string>
+	<string name="poi_piste_skitour">Pista de esquí de travesía</string>
+	<string name="poi_piste_sled">Pista de trineo</string>
 	<string name="poi_craft_pottery">Alfarería</string>
 	<string name="poi_craft_roofer">Techador</string>
 	<string name="poi_funeral_directors">Funeraria</string>
@@ -929,4 +929,10 @@
 
 	<string name="poi_kent_carriage_gap">Bolardos para carros a caballo</string>
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
+	<string name="poi_route_hiking_iwn_poi">Ruta internacional de senderismo</string>
+	<string name="poi_route_hiking_nwn_poi">Ruta nacional de senderismo</string>
+	<string name="poi_route_hiking_rwn_poi">Ruta regional de senderismo</string>
+	<string name="poi_route_hiking_lwn_poi">Ruta local de senderismo</string>
+	<string name="poi_route_hiking_ref_poi">Referencia de ruta de senderismo</string>
+
 	</resources>
