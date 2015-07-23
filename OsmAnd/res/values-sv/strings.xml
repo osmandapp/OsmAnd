@@ -1948,4 +1948,10 @@
     <string name="rendering_value_yellow_name">Gul</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (genomskinlig turkos)</string>
-    </resources>
+    <string name="do_you_like_osmand">Tycker du om OsmAnd?</string>
+	<string name="we_really_care">Vi bryr oss verkligen</string>
+	<string name="rate_this_app">Betygssätt denna app</string>
+	<string name="rate_this_app_long">Poängsätt OsmAnd på Google Play</string>
+	<string name="user_hates_app_get_feedback">Berätta för oss varför.</string>
+	<string name="user_hates_app_get_feedback_long">Berätta för oss vad du vill förändra i denna app.</string>
+</resources>
