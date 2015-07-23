@@ -408,7 +408,7 @@
 	<string name="poi_american_football">美式橄榄球</string>
 	<string name="poi_australian_football">澳大利亞足球</string>
 	<string name="poi_base">定點跳傘</string>
-	<string name="poi_piste_sleigh">雪橇</string>
+	<string name="poi_piste_sleigh">雪橇滑雪道</string>
 	<string name="poi_picnic_site">野餐地點</string>
 	<string name="poi_baseball">棒球</string>
 	<string name="poi_basketball">籃球</string>
@@ -577,11 +577,11 @@
 	<string name="poi_piste">滑雪道</string>
 	<string name="poi_piste_downhill">下坡滑雪道</string>
 	<string name="poi_piste_nordic">北歐滑雪道</string>
-	<string name="poi_piste_skitour">滑雪旅行</string>
-	<string name="poi_piste_hike">徒步旅行</string>
-	<string name="poi_piste_sled">雪橇</string>
+	<string name="poi_piste_skitour">滑雪旅行滑雪道</string>
+	<string name="poi_piste_hike">徒步旅行滑雪道</string>
+	<string name="poi_piste_sled">雪橇滑雪道</string>
 	<string name="poi_piste_snow_park">雪上公園</string>
-	<string name="poi_piste_playground">遊樂場</string>
+	<string name="poi_piste_playground">遊樂場滑雪道</string>
 	<string name="poi_piste_ice_skate">溜冰鞋</string>
 	<string name="poi_ski_rental">滑雪用具租賃</string>
 
@@ -925,4 +925,10 @@
 	<string name="poi_fee">費用</string>
 
 	<string name="poi_abandoned_poi">已遺棄的物件</string>
+	<string name="poi_route_hiking_iwn_poi">國際步行路線</string>
+	<string name="poi_route_hiking_nwn_poi">全國步行路線</string>
+	<string name="poi_route_hiking_rwn_poi">地區性步行路線</string>
+	<string name="poi_route_hiking_lwn_poi">當地步行路線</string>
+	<string name="poi_route_hiking_ref_poi">徒步旅行路線參考</string>
+
 	</resources>
