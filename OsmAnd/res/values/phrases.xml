@@ -896,10 +896,11 @@
 	<string name="poi_rcn_ref">Regional cycle node network</string>
 	<string name="poi_lcn_ref">Local cycle node network</string>
 
-	<string name="poi_iwn_ref">International walking node network</string>
-	<string name="poi_nwn_ref">National walking node network</string>
-	<string name="poi_rwn_ref">Regional walking node network</string>
-	<string name="poi_lwn_ref">Local walking node network</string>
+	<string name="poi_route_hiking_iwn_poi">International walking route</string>
+	<string name="poi_route_hiking_nwn_poi">National walking route</string>
+	<string name="poi_route_hiking_rwn_poi">Regional walking route</string>
+	<string name="poi_route_hiking_lwn_poi">Local walking route</string>
+	<string name="poi_route_hiking_ref_poi">Hiking route reference</string>
 
 	<string name="poi_opening_hours">Opening hours</string>
 	<string name="poi_collection_times">Collection times</string>
