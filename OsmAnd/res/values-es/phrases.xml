@@ -845,7 +845,7 @@
 	<string name="poi_scuba_diving_shop">Artículos de buceo</string>
 	<string name="poi_tyres">Tienda de neumáticos</string>
 	<string name="poi_energy">Acumulador de energía</string>
-	<string name="poi_watches">Tienda de relojes de pulsera</string>
+	<string name="poi_watches">Tienda de relojes pulsera</string>
 	<string name="poi_swimming_pool_shop">Artículos de piscina</string>
 	<string name="poi_games">Juegos</string>
 	<string name="poi_model">Modelos a escala</string>
@@ -890,7 +890,7 @@
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
 	<string name="poi_tree">Árbol</string>
-	<string name="poi_icn_ref">Nodo de red ciclista internacional</string>
+	<string name="poi_icn_ref">Red de nodos ciclista internacional</string>
 	<string name="poi_opening_hours">Horario de atención</string>
 	<string name="poi_collection_times">Horario de recolección</string>
 	<string name="poi_description">Descripción</string>
@@ -914,9 +914,9 @@
 
 <string name="poi_kissing_gate">Portilla giratoria</string>
 	<string name="poi_sally_port">Portón de muralla</string>
-	<string name="poi_ncn_ref">Red nacional de ciclismo</string>
-	<string name="poi_rcn_ref">Red regional de ciclismo</string>
-	<string name="poi_lcn_ref">Red local de ciclismo</string>
+	<string name="poi_ncn_ref">Red de nodos ciclista nacional</string>
+	<string name="poi_rcn_ref">Red de nodos ciclista regional</string>
+	<string name="poi_lcn_ref">Red de nodos ciclista local</string>
 
 	<string name="poi_iwn_ref">Red internacional de senderismo</string>
 	<string name="poi_nwn_ref">Red nacional de senderismo</string>
