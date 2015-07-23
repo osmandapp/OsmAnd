@@ -892,10 +892,10 @@
 
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
-	<string name="poi_icn_ref">Red internacional de ciclismo</string>
-	<string name="poi_ncn_ref">Red nacional de ciclismo</string>
-	<string name="poi_rcn_ref">Red regional de ciclismo</string>
-	<string name="poi_lcn_ref">Red local de ciclismo</string>
+	<string name="poi_icn_ref">Red de nodos ciclista internacional</string>
+	<string name="poi_ncn_ref">Red de nodos ciclista nacional</string>
+	<string name="poi_rcn_ref">Red de nodos ciclista regional</string>
+	<string name="poi_lcn_ref">Red de nodos ciclista local</string>
 
 	<string name="poi_iwn_ref">Red internacional de senderismo</string>
 	<string name="poi_nwn_ref">Red nacional de senderismo</string>
