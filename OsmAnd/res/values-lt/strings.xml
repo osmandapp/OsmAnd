@@ -2095,4 +2095,10 @@
     <string name="rendering_attr_currentTrackWidth_name">GPX plotis</string>
     <string name="rendering_value_default13_name">Numatytoji (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Numatytoji (skaidri žalsvai mėlyna)</string>
-    </resources>
+    <string name="do_you_like_osmand">"Ar jums  patinka OsmAnd?"</string>
+	<string name="we_really_care">Mums tikrai rūpi</string>
+	<string name="rate_this_app">Įvertinkite programėlę</string>
+	<string name="rate_this_app_long">Įvertinkite OsmAnd Google Play puslapyje</string>
+	<string name="user_hates_app_get_feedback">Pasakykite, kodėl.</string>
+	<string name="user_hates_app_get_feedback_long">Pasakykite, ką mes turėtume pakeisti programėlėje.</string>
+</resources>
