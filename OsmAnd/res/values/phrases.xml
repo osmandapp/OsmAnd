@@ -609,14 +609,14 @@
 	<string name="poi_club_charity">Charity club</string>
 
 	<string name="poi_piste">Piste</string>
-	<string name="poi_piste_downhill">Downhill</string>
-	<string name="poi_piste_nordic">Nordic</string>
-	<string name="poi_piste_skitour">Skitour</string>
-	<string name="poi_piste_hike">Hike</string>
-	<string name="poi_piste_sleigh">Sleigh</string>
-	<string name="poi_piste_sled">Sled</string>
+	<string name="poi_piste_downhill">Downhill piste</string>
+	<string name="poi_piste_nordic">Nordic piste</string>
+	<string name="poi_piste_skitour">Skitour piste</string>
+	<string name="poi_piste_hike">Hike piste</string>
+	<string name="poi_piste_sleigh">Sleigh piste</string>
+	<string name="poi_piste_sled">Sled piste</string>
 	<string name="poi_piste_snow_park">Snow park</string>
-	<string name="poi_piste_playground">Playground</string>
+	<string name="poi_piste_playground">Playground piste</string>
 	<string name="poi_piste_ice_skate">Ice skate</string>
 	<string name="poi_ski_rental">Ski rental</string>
 
