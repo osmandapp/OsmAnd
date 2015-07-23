@@ -34,8 +34,7 @@
 		<net.osmand.plus.widgets.AutoCompleteTextViewEx
 			android:id="@+id/Category"
 			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:completionThreshold="1"/>
+			android:layout_height="wrap_content"/>
 
 		<TextView
 			android:layout_width="wrap_content"
