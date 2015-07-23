@@ -31,11 +31,6 @@
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
 			android:text="@string/favourites_edit_dialog_category"/>
 
-		<!--<Spinner-->
-			<!--android:id="@+id/Category"-->
-			<!--android:layout_width="fill_parent"-->
-			<!--android:layout_height="wrap_content"/>-->
-
 		<net.osmand.plus.widgets.AutoCompleteTextViewEx
 			android:id="@+id/Category"
 			android:layout_width="fill_parent"
