@@ -575,8 +575,8 @@
 	<string name="poi_club_charity">慈善俱樂部</string>
 
 	<string name="poi_piste">滑雪道</string>
-	<string name="poi_piste_downhill">下坡</string>
-	<string name="poi_piste_nordic">北歐</string>
+	<string name="poi_piste_downhill">下坡滑雪道</string>
+	<string name="poi_piste_nordic">北歐滑雪道</string>
 	<string name="poi_piste_skitour">滑雪旅行</string>
 	<string name="poi_piste_hike">徒步旅行</string>
 	<string name="poi_piste_sled">雪橇</string>
