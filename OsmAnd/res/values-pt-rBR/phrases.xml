@@ -119,7 +119,7 @@
 	<string name="poi_traffic_calming_table">Faixa elevada</string>
 	<string name="poi_picnic_site">Local de piquenique</string>
 	<string name="poi_hanami">Hanami</string>
-	<string name="poi_piste_sleigh">Trenó</string>
+	<string name="poi_piste_sleigh">Pista de trenó</string>
 	<string name="poi_trail_riding_station">Local de equitação</string>
 
 	<string name="poi_craft_plumber">Encanador</string>
@@ -581,13 +581,13 @@
 	<string name="poi_club_charity">Clube de caridade</string>
 
 	<string name="poi_piste">Pista</string>
-	<string name="poi_piste_downhill">Descida</string>
-	<string name="poi_piste_nordic">Nórdico</string>
-	<string name="poi_piste_skitour">Passeio de esqui</string>
-	<string name="poi_piste_hike">Caminhada</string>
-	<string name="poi_piste_sled">Trenó</string>
+	<string name="poi_piste_downhill">Pista de descida</string>
+	<string name="poi_piste_nordic">Pista nórdica</string>
+	<string name="poi_piste_skitour">Pista de passeio</string>
+	<string name="poi_piste_hike">Pista de caminhada</string>
+	<string name="poi_piste_sled">Pista de trenó (carrinho)</string>
 	<string name="poi_piste_snow_park">Parque de neve</string>
-	<string name="poi_piste_playground">Parque infantil de esqui</string>
+	<string name="poi_piste_playground">Pista de diversão</string>
 	<string name="poi_piste_ice_skate">Patim de gelo</string>
 	<string name="poi_ski_rental">Aluguel de esqui</string>
 
@@ -926,4 +926,10 @@
 	<string name="poi_fee">Taxa</string>
 
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
+	<string name="poi_route_hiking_iwn_poi">Rota de caminhada internacional</string>
+	<string name="poi_route_hiking_nwn_poi">Rota de caminhada nacional</string>
+	<string name="poi_route_hiking_rwn_poi">Rota de caminhada regional</string>
+	<string name="poi_route_hiking_lwn_poi">Rota de caminhada local</string>
+	<string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
+
 	</resources>
