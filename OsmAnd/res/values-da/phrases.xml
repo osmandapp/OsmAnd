@@ -951,4 +951,5 @@
 
 	<string name="poi_node_networks">Vandring/cykling netværk knudepunkter</string>
 		<string name="poi_hiking_routes">Vandreruter</string>
-		</resources>
+		<string name="poi_traffic_enforcement">Trafik håndhævelse</string>
+	</resources>
