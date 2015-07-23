@@ -13,6 +13,9 @@
 		<string name="poi_water_transport">Water transport</string>
 		<string name="poi_bicycle_transport">Bicycle transport</string>
 		<string name="poi_aerialway_transport">Aerialway transport</string>
+		<string name="poi_node_networks">Hiking/cycling network nodes</string>
+		<string name="poi_hiking_routes">Hiking routes</string>
+		<string name="poi_traffic_enforcement">Traffic enforcement</string>
 	<string name="poi_man_made">Man made</string>
 		<string name="poi_transport_construction">Transport construction</string>
 		<string name="poi_water_supply">Water supply</string>
@@ -895,6 +898,10 @@
 	<string name="poi_ncn_ref">National cycle node network</string>
 	<string name="poi_rcn_ref">Regional cycle node network</string>
 	<string name="poi_lcn_ref">Local cycle node network</string>
+	<string name="poi_iwn_ref">International walking node network</string>
+	<string name="poi_nwn_ref">National walking node network</string>
+	<string name="poi_rwn_ref">Regional walking node network</string>
+	<string name="poi_lwn_ref">Local walking node network</string>
 
 	<string name="poi_route_hiking_iwn_poi">International walking route</string>
 	<string name="poi_route_hiking_nwn_poi">National walking route</string>
