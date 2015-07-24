@@ -550,10 +550,10 @@
 	<string name="poi_club_hunting">Club de caça</string>
 	<string name="poi_club_shooting">Tir</string>
 	<string name="poi_piste">Pista</string>
-	<string name="poi_piste_nordic">Nòrdic</string>
-	<string name="poi_piste_hike">Senderisme</string>
-	<string name="poi_piste_sleigh">Trineu</string>
-	<string name="poi_piste_sled">Trineu</string>
+	<string name="poi_piste_nordic">Pista d\'esquí nòrdic</string>
+	<string name="poi_piste_hike">Pista de senderisme</string>
+	<string name="poi_piste_sleigh">Pista de trineu</string>
+	<string name="poi_piste_sled">Pista de trineu</string>
 	<string name="poi_library">Biblioteca</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_waterway_turning_point">Punt de canvi de sentit naval</string>
@@ -592,7 +592,7 @@
 	<string name="poi_guest_house">Casa d\'hostes</string>
 	<string name="poi_cabin">Cabana</string>
 	<string name="poi_piste_snow_park">Pista de neu per infants</string>
-	<string name="poi_piste_playground">Pista de joc</string>
+	<string name="poi_piste_playground">Pista infantil</string>
 	<string name="poi_arts_centre">Centre artístic</string>
 	<string name="poi_casino">Casino</string>
 	<string name="poi_community_centre">Centre comunitari</string>
@@ -720,8 +720,8 @@
 	<string name="poi_club_tourism">Associació de viatgers</string>
 	<string name="poi_club_charity">Agrupació benèfica</string>
 
-	<string name="poi_piste_downhill">Esquí alpí</string>
-	<string name="poi_piste_skitour">Esquí alpí i nòrdic</string>
+	<string name="poi_piste_downhill">Pista d\'esquí alpí</string>
+	<string name="poi_piste_skitour">Pista d\'esquí alpí i nòrdic</string>
 	<string name="poi_craft_metal_construction">Distribució i manipulació de metalls</string>
 	<string name="poi_craft_rigger">Tramoista</string>
 	<string name="poi_craft_roofer">Muntatge de teulades</string>
@@ -931,4 +931,13 @@
 	<string name="poi_fee">Pagament</string>
 
 	<string name="poi_abandoned_poi">Objectes perduts</string>
+	<string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
+		<string name="poi_hiking_routes">Rutes de senderisme</string>
+		<string name="poi_traffic_enforcement">Control de tràfic</string>
+	<string name="poi_route_hiking_iwn_poi">Ruta internacional de senderisme</string>
+	<string name="poi_route_hiking_nwn_poi">Ruta nacional de senderisme</string>
+	<string name="poi_route_hiking_rwn_poi">Ruta senderista regional</string>
+	<string name="poi_route_hiking_lwn_poi">Ruta senderista local</string>
+	<string name="poi_route_hiking_ref_poi">Referència de ruta senderista</string>
+
 	</resources>
