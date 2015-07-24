@@ -931,7 +931,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen und Adressen, interessante Orte und Informationen zum ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -2235,4 +2235,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Routenfarbe gemäß Routenscope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
-    </resources>
+    <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
+	<string name="rate_this_app">Bewerten Sie diese App</string>
+	<string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
+	<string name="user_hates_app_get_feedback">Sagen Sie uns warum.</string>
+	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit welche Änderungen Sie sich für diese App wünschen.</string>
+</resources>
