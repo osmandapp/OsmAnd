@@ -1,47 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import java.io.File;
-import java.text.Collator;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.LocalIndexesFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -74,6 +32,49 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.LocalIndexesFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.text.Collator;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -115,7 +116,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void run() {
 				if (getView() != null && updateEnable) {
 					updateCurrentTrack(getView(), getActivity(), app);
-					if(selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
+					if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
 						allGpxAdapter.notifyDataSetChanged();
 					}
 					startHandler();
@@ -139,7 +140,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			allGpxAdapter.notifyDataSetChanged();
 		}
 		updateCurrentTrack();
-		
+
 		updateEnable = true;
 		startHandler();
 	}
@@ -152,14 +153,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			operationTask.cancel(true);
 		}
 	}
-	
+
 	public void updateCurrentTrack() {
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			return;
 		}
 		updateCurrentTrack(getView(), getActivity(), app);
 		final CheckBox checkbox = (CheckBox) getView().findViewById(R.id.check_local_index);
-		checkbox.setVisibility(selectionMode  && showOnMapMode? View.VISIBLE : View.GONE);
+		checkbox.setVisibility(selectionMode && showOnMapMode ? View.VISIBLE : View.GONE);
 		if (selectionMode && showOnMapMode) {
 			checkbox.setChecked(selectedItems.contains(currentRecording));
 			checkbox.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +188,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
-		if(isRecording) {
+		if (isRecording) {
 			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
 		} else {
 			stop.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_rec_start, R.color.recording_color));
@@ -210,15 +211,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Runnable run = new Runnable() {
-					@Override
-					public void run() {
-						final OsmandMonitoringPlugin plugin = OsmandPlugin
-								.getEnabledPlugin(OsmandMonitoringPlugin.class);
-						plugin.saveCurrentTrack();
-					}
-				};
-				run.run();
+				final OsmandMonitoringPlugin plugin = OsmandPlugin
+						.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				plugin.saveCurrentTrack();
 			}
 		});
 		if (sth.getPoints() > 0 || sth.getDistance() > 0) {
@@ -265,11 +260,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		return v;
 	}
-	
+
 	public static void openTrack(Activity a, final File f) {
 		Intent newIntent = new Intent(a, ((OsmandApplication) a.getApplication()).getAppCustomization().getTrackActivity());
 		// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		if(f == null) {
+		if (f == null) {
 			newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
 		} else {
 			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, f.getAbsolutePath());
@@ -435,7 +430,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void openShowOnMapMode() {
 		enableSelectionMode(true);
-		showOnMapMode = true; 
+		showOnMapMode = true;
 		selectedItems.clear();
 		final Set<GpxInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
 		selectedItems.addAll(originalSelectedItems);
@@ -487,7 +482,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void openSelectionMode(final int actionResId, int darkIcon, int lightIcon,
-			final DialogInterface.OnClickListener listener) {
+								  final DialogInterface.OnClickListener listener) {
 		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
 		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
@@ -617,7 +612,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (getActivity() != null) {
 				((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
-			if (allGpxAdapter.getGroupCount() > 0 && 
+			if (allGpxAdapter.getGroupCount() > 0 &&
 					allGpxAdapter.isShowingSelection()) {
 				getExpandableListView().expandGroup(0);
 			}
@@ -643,7 +638,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask, List<GpxInfo> progress,
-				String gpxSubfolder) {
+								   String gpxSubfolder) {
 			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isDirectory()) {
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
@@ -682,7 +677,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		public GpxIndexesAdapter(Context ctx) {
 			warningColor = ctx.getResources().getColor(R.color.color_warning);
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[] { android.R.attr.textColorPrimary });
+			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
 			ta.recycle();
 		}
@@ -766,7 +761,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
-				View convertView, ViewGroup parent) {
+								 View convertView, ViewGroup parent) {
 			View v = convertView;
 			final GpxInfo child = getChild(groupPosition, childPosition);
 			if (v == null) {
@@ -816,9 +811,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				checkItem.setVisibility(View.GONE);
 			}
 
-			
+
 			final boolean isChecked;
-			if(child.currentlyRecordingTrack) {
+			if (child.currentlyRecordingTrack) {
 				isChecked = selectedGpxHelper.getSelectedCurrentRecordingTrack() != null;
 			} else {
 				final SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByName(child.getFileName());
@@ -896,7 +891,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public String getGroup(int groupPosition) {
-			if(isSelectedGroup(groupPosition)) {
+			if (isSelectedGroup(groupPosition)) {
 				return app.getString(R.string.shared_string_selected);
 			}
 			return category.get(getGroupPosition(groupPosition));
@@ -1085,7 +1080,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		protected String doInBackground(GpxInfo... params) {
 			for (GpxInfo info : params) {
 				if (!isCancelled()) {
-					if(!info.currentlyRecordingTrack) {
+					if (!info.currentlyRecordingTrack) {
 						info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
 					}
 					publishProgress(info);
@@ -1183,7 +1178,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (!selectionMode) {
 			Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
 			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			if(item.currentlyRecordingTrack) {
+			if (item.currentlyRecordingTrack) {
 				newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
 			} else {
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, item.file.getAbsolutePath());
@@ -1298,7 +1293,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
-		SelectedGpxFile sgpx = child.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() : 
+		SelectedGpxFile sgpx = child.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
 				selectedGpxHelper.getSelectedFileByName(child.getFileName());
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
@@ -1314,7 +1309,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			String size = "";
 			if (child.getSize() >= 0) {
 				if (child.getSize() > 100) {
-					size = formatMb.format(new Object[] { (float) child.getSize() / (1 << 10) });
+					size = formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)});
 				} else {
 					size = child.getSize() + " kB";
 				}
@@ -1346,14 +1341,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 //			if (analysis.totalDistanceMoving != 0) {
 //				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
 //			} else {
-				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 //			}
 
 			if (analysis.isTimeSpecified()) {
 //				if (analysis.isTimeMoving()) {
 //					time.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000)) + "");
 //				} else {
-					time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000)) + "");
+				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000)) + "");
 //				}
 			} else {
 				time.setText("");
