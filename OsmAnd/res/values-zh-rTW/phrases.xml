@@ -931,4 +931,7 @@
 	<string name="poi_route_hiking_lwn_poi">當地步行路線</string>
 	<string name="poi_route_hiking_ref_poi">徒步旅行路線參考</string>
 
+	<string name="poi_node_networks">徒步旅行/自行車網路節點</string>
+		<string name="poi_hiking_routes">徒步路線</string>
+		<string name="poi_traffic_enforcement">交通執法</string>
 	</resources>
