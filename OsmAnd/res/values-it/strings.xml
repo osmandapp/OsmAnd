@@ -2127,4 +2127,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="we_really_care">Ci teniamo molto</string>
 	<string name="rate_this_app">Valuta questa app</string>
 	<string name="user_hates_app_get_feedback">Dicci perché.</string>
-	</resources>
+	<string name="rate_this_app_long">Per favore dai a OsmAnd la tua valutazione su Google Play</string>
+	<string name="user_hates_app_get_feedback_long">Per favore dicci cosa vorresti cambiare in quest\'app.</string>
+</resources>
