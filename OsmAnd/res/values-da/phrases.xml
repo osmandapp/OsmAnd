@@ -858,7 +858,7 @@
 	<string name="poi_general_barrier">Almindelig forhindring</string>
 	<string name="poi_stile">Stente</string>
 	<string name="poi_height_restrictor">Højdebegrænser</string>
-	<string name="poi_horse_stile">Hestestente</string>
+	<string name="poi_horse_stile">Stente for heste</string>
 	<string name="poi_kissing_gate">Kissing gate</string>
 	<string name="poi_sally_port">Fæstningssport</string>
 	<string name="poi_swing_gate">Svingport</string>
@@ -949,7 +949,7 @@
 	<string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
 	<string name="poi_route_hiking_ref_poi">Vandrerute reference</string>
 
-	<string name="poi_node_networks">Vandring/cykling netværk knudepunkter</string>
+	<string name="poi_node_networks">Vandrings/cyklings rutepunkter</string>
 		<string name="poi_hiking_routes">Vandreruter</string>
 		<string name="poi_traffic_enforcement">Trafik håndhævelse</string>
 	</resources>
