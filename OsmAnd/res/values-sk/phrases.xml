@@ -662,12 +662,12 @@
 
 	<string name="poi_tomb">Hrobka</string>
 	<string name="poi_piste">Zjazdovka</string>
-	<string name="poi_piste_downhill">Zjazdárska</string>
-	<string name="poi_piste_nordic">Beh na lyžiach</string>
+	<string name="poi_piste_downhill">Zjazdovka</string>
+	<string name="poi_piste_nordic">Trať pre beh na lyžiach</string>
 	<string name="poi_piste_skitour">Lyžiarsky okruh</string>
-	<string name="poi_piste_hike">Výletná trasa</string>
-	<string name="poi_piste_sleigh">Sane v záprahu</string>
-	<string name="poi_piste_sled">Sánkovanie</string>
+	<string name="poi_piste_hike">Výletná lyžiarska trasa</string>
+	<string name="poi_piste_sleigh">Trať pre sane v záprahu</string>
+	<string name="poi_piste_sled">Trať pre sánkovanie</string>
 	<string name="poi_piste_snow_park">Areál zimných športov</string>
 	<string name="poi_piste_playground">Lyžiarska škola</string>
 	<string name="poi_piste_ice_skate">Korčuľovanie</string>
