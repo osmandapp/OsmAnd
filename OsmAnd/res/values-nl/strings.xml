@@ -2239,4 +2239,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_purple_name">Paars</string>
     <string name="rendering_value_translucent_purple_name">Doorschijnend paars</string>
     <string name="restart_is_required">Om alle veranderingen op te slaan, moet de applicatie handmatig herstart worden.</string>
+    <string name="lang_bn">Bengaals</string>
+    <string name="lang_pms">Piëmontees</string>
+    <string name="lang_bpy">Bishnupriya</string>
     </resources>
