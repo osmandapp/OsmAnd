@@ -2236,4 +2236,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_default13_name">Predvolená (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predvolená (priehľadná azúrová)</string>
     <string name="rendering_value_translucent_blue_name">Priehľadná modrá</string>
-    </resources>
+    <string name="do_you_like_osmand">Páči sa vám OsmAnd?</string>
+	<string name="we_really_care">Zaujíma nás to</string>
+	<string name="rate_this_app">Ohodnotiť aplikáciu</string>
+	<string name="rate_this_app_long">Prosím dajte OsmAnd hodnotenie na Google Play</string>
+	<string name="user_hates_app_get_feedback">Povedzte nám prečo.</string>
+	<string name="user_hates_app_get_feedback_long">Prosím povedzte nám čo by ste chceli v aplikácii zmeniť.</string>
+</resources>
