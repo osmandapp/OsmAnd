@@ -705,7 +705,7 @@
   <string name="osm_editing_plugin_description">Umożliwia wprowadzanie zmian w zasobach OSM, takich jak dodawanie lub modyfikowanie obiektów POI, zgłaszanie i komentowanie błędów oraz wysyłanie zarejestrowanych plików GPX. OSM jest publicznym projektem tworzenia map przez społeczność. Więcej szczegółów pod adresem http://openstreetmap.org. Aktywny udział jest mile widziany, modyfikacji można dokonywać bezpośrednio z poziomu programu po wprowadzeniu danych uwierzytelniających OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
+  <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w wybranym głosie</string>
   <string name="debugging_and_development">Rozwój OsmAnd</string>
   <string name="native_rendering">Renderowanie natywne</string>
   
@@ -1655,8 +1655,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"Zapewnia funkcjonalność usługi OsMo - zaawansowanego monitorowania na żywo. Więcej szczegółów na http://osmo.mobi.
-\n\nZa jej pomocą można śledzić inne urządzenia lub samemu być śledzonym. Pozwala na tworzenie anonimowych grup, udostępnianie lokalizacji sobie nawzajem i komunikowanie ze sobą. Dostarcza różne opcje dla śledzenia sesji i śledzenia stałego.\n\nAnonimowe grupy tworzone są na określoną liczbę dni i limitowane są określonymi opcjami, np. brak zdalnego sterowania i brak administratora grupy. Natomiast w pełni funkcjonalne grupy mogą zostać utworzone na stronie, a dostęp do nich będą mieć tylko zarejestrowani użytkownicy. "</string>
+    <string name="osmo_plugin_description">"Wtyczka zapewnia funkcjonalność usługi OsMo - zaawansowanego monitorowania na żywo. Więcej szczegółów na http://osmo.mobi.
+\n\nZa jej pomocą można śledzić inne urządzenia lub samemu być śledzonym w obrębie grupy w czasie rzeczywistym oraz komunikować się ze sobą. Dostarcza różne opcje dla śledzenia sesji i śledzenia stałego.\n\nAnonimowe grupy tworzone są na określoną liczbę dni i limitowane są określonymi opcjami, np. brak zdalnego sterowania i brak administratora grupy. Natomiast w pełni funkcjonalne grupy mogą zostać utworzone na stronie, a dostęp do nich będą mieć tylko zarejestrowani użytkownicy. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoring OSM)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
@@ -2183,4 +2183,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_purple_name">Fioletowy</string>
     <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
     <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie programu.</string>
-    </resources>
+    <string name="rendering_value_translucent_red_name">Prześwitujący czerwony</string>
+    <string name="rendering_value_default13_name">Domyślny (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Domyślny (prześwitujący niebieski)</string>
+    <string name="do_you_like_osmand">Czy lubisz OsmAnd?</string>
+	<string name="we_really_care">Naprawdę nam zależy</string>
+	<string name="rate_this_app">Oceń tę aplikację</string>
+	<string name="rate_this_app_long">Określ jakość OsmAnd w witrynie Google Play</string>
+	<string name="user_hates_app_get_feedback">Powiedz nam, dlaczego.</string>
+	<string name="user_hates_app_get_feedback_long">Powiedz, co zmieniłbyś w aplikacji.</string>
+</resources>
