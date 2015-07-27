@@ -47,7 +47,6 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
-	private static final String TAG = "GeoIntentActivity";
 	private ProgressDialog progressDlg;
 	private LatLon location;
 
