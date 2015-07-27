@@ -3,7 +3,6 @@ package net.osmand.util;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -465,6 +464,14 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=34.99393%2C-106.61568&q=34.99393%2C-106.61568
+                z = GeoParsedPoint.NO_ZOOM;
+		url = "http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=" + dlat
+				+"%2C" + dlon + "&q=" + dlat + "%2C" + dlon + "((" + dlat + "%2C%20" + dlon + "))";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
 		// https://www.google.com/maps/place/34%C2%B059'38.1%22N+106%C2%B036'56.5%22W/@34.99393,-106.61568,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0
 		z = 17;
 		url = "https://www.google.com/maps/place/34%C2%B059'38.1%22N+106%C2%B036'56.5%22W/@" + dlat + "," + dlon + "," + z + "z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0";
@@ -785,7 +792,8 @@ public class GeoPointParserUtil {
             uri = URI.create(uriString.replaceAll("\\s+", "+")
                              .replaceAll("%20", "+")
                              .replaceAll("%2C", ",")
-                             .replaceAll("\\|", ";"));
+                             .replaceAll("\\|", ";")
+                             .replaceAll("\\(\\(\\S+\\)\\)", ""));
         } catch (IllegalArgumentException e) {
             return null;
         }
