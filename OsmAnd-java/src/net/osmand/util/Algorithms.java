@@ -9,7 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -40,6 +42,42 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+	
+	private static String simplifyName(String fn) {
+		String lc = fn.toLowerCase();
+		if (lc.indexOf(".") != -1) {
+			lc = lc.substring(0, lc.indexOf("."));
+		}
+		if (lc.endsWith("_2")) {
+			lc = lc.substring(0, lc.length() - "_2".length());
+		}
+		boolean hasTimestampEnd = false;
+		for(int i = 0; i < lc.length(); i++) {
+			if(lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
+				hasTimestampEnd = true;
+				break;
+			}
+		}
+		if(!hasTimestampEnd) {
+			lc += "_00_00_00";
+		}
+		return lc;
+	}
+	
+	public static File[] getSortedFilesVersions(File dir){
+		File[] listFiles = dir.listFiles();
+		if (listFiles != null) {
+			Arrays.sort(listFiles, new Comparator<File>() {
+				@Override
+				public int compare(File o1, File o2) {
+					return -simplifyName(o1.getName()).compareTo(simplifyName(o2.getName()));
+				}
+
+				
+			});
+		}
+		return listFiles;
 	}
 	
 	private static final char CHAR_TOSPLIT = 0x01;
