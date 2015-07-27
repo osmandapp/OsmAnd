@@ -350,7 +350,7 @@
 	<string name="poi_traffic_calming_cushion">Cuscini rallentatori</string>
 	<string name="poi_traffic_calming_table">Dosso tavola</string>
 	<string name="poi_traffic_calming_choker">Restringimento di carreggiata rallentatore</string>
-	<string name="poi_traffic_signals">Luce di stop</string>
+	<string name="poi_traffic_signals">Semaforo</string>
 
 	<string name="poi_vehicle_ramp">Rampa per veicoli</string>
 	<string name="poi_tram_stop">Fermata tram (absoleta)</string>
@@ -670,4 +670,46 @@
 	<string name="poi_crane">Gru</string>
 	<string name="poi_industrial">Area industriale</string>
 	<string name="poi_bell_tower">Torre campanaria</string>
+	<string name="poi_water_transport">Trasporto su acqua</string>
+		<string name="poi_bicycle_transport">Trasporto su bici</string>
+		<string name="poi_aerialway_transport">Trasporto aereo</string>
+		<string name="poi_node_networks">Nodo ciclistico/pedonale</string>
+		<string name="poi_hiking_routes">Percorso pedonale</string>
+		<string name="poi_power">Energia</string>
+		<string name="poi_communication">Comunicazioni</string>
+		<string name="poi_landuse">Uso del terreno</string>
+	<string name="poi_sustenance">Cibo</string>
+	<string name="poi_cafe_and_restaurant">Caffè e ristorante</string>
+	<string name="poi_craft">Artigiano</string>
+	<string name="poi_natural">Natura</string>
+	<string name="poi_seamark">Nautico</string>
+	<string name="poi_user_defined_other">Definito dall\'utente</string>
+
+	<string name="poi_cheese">Negozio di latticini</string>
+	<string name="poi_wine"/>
+
+	<string name="poi_camera">Foto-ottica</string>
+	<string name="poi_candles">Negozio di candele</string>
+	<string name="poi_leather">Negozio di pelletteria</string>
+	<string name="poi_music">Negozio di musica</string>
+	<string name="poi_tyres">Gommista</string>
+	<string name="poi_watches">Negozio di orologi</string>
+	<string name="poi_games">Giochi</string>
+	<string name="poi_model">Negozio di modellistica</string>
+	<string name="poi_video_games">Videogiochi</string>
+	<string name="poi_pyrotechnics">Fuochi d\'artifico</string>
+	<string name="poi_weapons">Armeria</string>
+
+	<string name="poi_fuel_biodiesel">Bio-diesel</string>
+	<string name="poi_fuel_lpg">GPL</string>
+	<string name="poi_fuel_octane_80">80 ottani</string>
+	<string name="poi_fuel_octane_91">91 ottani</string>
+	<string name="poi_fuel_octane_92">92 ottani</string>
+	<string name="poi_fuel_octane_95">95 ottani</string>
+	<string name="poi_fuel_octane_98">98 ottani</string>
+	<string name="poi_fuel_octane_100">100 ottani</string>
+	<string name="poi_fuel_ethanol">Etanolo</string>
+	<string name="poi_fuel_methanol">Metanolo</string>
+	<string name="poi_observation_tower">Torre di osservazione</string>
+	<string name="poi_landuse_railway">Area ferroviaria</string>
 	</resources>
