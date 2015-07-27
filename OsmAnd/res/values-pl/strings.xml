@@ -1888,8 +1888,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoints">Punkty trasy</string>
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
-    <string name="speak_favorites">Okoliczne Ulubione</string>
-    <string name="speak_poi">Okoliczne punkty POI</string>
+    <string name="speak_favorites">Ogłaszaj Ulubione</string>
+    <string name="speak_poi">Ogłaszaj punkty POI</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
