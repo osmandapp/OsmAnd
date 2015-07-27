@@ -645,7 +645,7 @@
 	<string name="poi_apartment">Apartament</string>
 	<string name="poi_piste_hike">Trasa piesza</string>
 	<string name="poi_piste_sleigh">Trasa saneczkarska</string>
-	<string name="poi_piste_sled">Sanki</string>
+	<string name="poi_piste_sled">Trasa saneczkarska</string>
 	<string name="poi_piste_playground">Plac zabaw dla dzieci</string>
 	<string name="poi_stripclub">Klub ze striptizem</string>
 	<string name="poi_beach_resort">Ośrodek nadmorski</string>
@@ -858,7 +858,7 @@
 	<string name="poi_leather">Galanteria skórzana</string>
 	<string name="poi_scuba_diving_shop">Sklep z wyposażeniem dla nurków</string>
 	<string name="poi_fashion">Pokaz mody</string>
-	<string name="poi_free_flying">Darmowa przechowalnia lotniskowa</string>
+	<string name="poi_free_flying">Sklep ze sprzętem do sportów spadochronowych</string>
 	<string name="poi_energy">Sklep energetyczny</string>
 	<string name="poi_swimming_pool_shop">Sklep ze sprzętem do pływania</string>
 	<string name="poi_games">Gry</string>
@@ -869,7 +869,7 @@
 	<string name="poi_cycle_barrier">Bariera rowerowa</string>
 	<string name="poi_motorcycle_barrier">Bariera motocyklowa</string>
 	<string name="poi_block">Blokada</string>
-	<string name="poi_bus_trap">Pułapka busów</string>
+	<string name="poi_bus_trap">Spowolnienie ruchu</string>
 	<string name="poi_cattle_grid">Przeszkoda dla bydła</string>
 	<string name="poi_full_height_turnstile">Kołowrót pełnej wysokości</string>
 	<string name="poi_bump_gate">Brama na popych</string>
@@ -879,5 +879,59 @@
 	<string name="poi_kissing_gate">Furtka</string>
 	<string name="poi_sally_port">Port wycieczkowy</string>
 	<string name="poi_swing_gate">Brama wahadłowa</string>
-	<string name="poi_turnstile">Bramka</string>
-	</resources>
+	<string name="poi_turnstile">Bramka obrotowa</string>
+	<string name="poi_node_networks">Węzły sieci pieszej/rowerowej</string>
+		<string name="poi_hiking_routes">Trasy piesze</string>
+		<string name="poi_traffic_enforcement">Kontrola ruchu</string>
+	<string name="poi_breakwater">Falochron</string>
+	<string name="poi_groyne">Ostroga brzegowa</string>
+
+	<string name="poi_basin">Umywalka</string>
+	<string name="poi_conservation">Obszar chroniony</string>
+
+	<string name="poi_crane">Dźwig</string>
+	<string name="poi_country">Kraj</string>
+	<string name="poi_tourism_attraction">Atrakcja turystyczna</string>
+	<string name="poi_cutline">Tablica wyjaśniająca</string>
+	<string name="poi_tree">Drzewo</string>
+	<string name="poi_kent_carriage_gap">Bramka (szerokość powozu)</string>
+	<string name="poi_icn_ref">Sieć węzłów międzynarodowej sieci rowerowej</string>
+	<string name="poi_ncn_ref">Sieć węzłów krajowej sieci rowerowej</string>
+	<string name="poi_rcn_ref">Sieć węzłów regionalnej sieci rowerowej</string>
+	<string name="poi_lcn_ref">Sieć węzłów lokalnej sieci rowerowej</string>
+	<string name="poi_iwn_ref">Sieć węzłów międzynarodowej sieci pieszej</string>
+	<string name="poi_nwn_ref">Sieć węzłów krajowej sieci pieszej</string>
+	<string name="poi_rwn_ref">Sieć węzłów regionalnej sieci pieszej</string>
+	<string name="poi_lwn_ref">Sieć węzłów lokalnej sieci pieszej</string>
+
+	<string name="poi_route_hiking_iwn_poi">Międzynarodowa trasa piesza</string>
+	<string name="poi_route_hiking_nwn_poi">Krajowa trasa piesza</string>
+	<string name="poi_route_hiking_rwn_poi">Regionalna trasa piesza</string>
+	<string name="poi_route_hiking_lwn_poi">Lokalna trasa piesza</string>
+	<string name="poi_route_hiking_ref_poi">Zestawienie tras pieszych</string>
+
+	<string name="poi_opening_hours">Godziny otwarcia</string>
+	<string name="poi_collection_times">Godziny urzędowania</string>
+	<string name="poi_description">Opis</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_website">Strona www</string>
+	<string name="poi_service_times">Godziny usług</string>
+	<string name="poi_maxheight">Maksymalna wysokość</string>
+	<string name="poi_maxweight">Maksymalna waga</string>
+	<string name="poi_abandoned">Opuszczony</string>
+	<string name="poi_abandoned_poi">Obiekt opuszczony</string>
+	<string name="poi_disused">Wyłączony z użycia</string>
+
+	<string name="poi_operator">Obsługujący</string>
+	<string name="poi_brand">Marka</string>
+	<string name="poi_fee">Opłata</string>
+
+	<string name="poi_enforcement_traffic_signals">Sygnalizacja świetlna</string>
+	<string name="poi_enforcement_maxspeed">Fotoradar</string>
+	<string name="poi_enforcement_maxheight">Kontrola wysokości pojazdu</string>
+	<string name="poi_enforcement_mindistance">Kontrola minimalnego dystansu</string>
+	<string name="poi_enforcement_check">Kontrola</string>
+	<string name="poi_enforcement_access">Kontrola dostępu</string>
+	<string name="poi_enforcement_toll">Kontrola opłat</string>
+
+</resources>
