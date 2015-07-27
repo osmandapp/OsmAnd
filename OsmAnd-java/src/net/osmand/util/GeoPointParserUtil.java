@@ -466,10 +466,11 @@ public class GeoPointParserUtil {
 
 		// http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=34.99393%2C-106.61568&q=34.99393%2C-106.61568
                 z = GeoParsedPoint.NO_ZOOM;
-		url = "http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=55.8063697%2C25.3749485&q=55.8063697%2C25.3749485((55.8063670%2C%2025.3749488))";
+		url = "http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=" + dlat
+				+"%2C" + dlon + "&q=" + dlat + "%2C" + dlon + "((" + dlat + "%2C%20" + dlon + "))";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(55.8063697, 25.3749485, z));
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// https://www.google.com/maps/place/34%C2%B059'38.1%22N+106%C2%B036'56.5%22W/@34.99393,-106.61568,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x0
 		z = 17;
