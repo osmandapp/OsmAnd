@@ -44,40 +44,44 @@ public class Algorithms {
 		return def;
 	}
 	
-	private static String simplifyName(String fn) {
-		String lc = fn.toLowerCase();
-		if (lc.indexOf(".") != -1) {
-			lc = lc.substring(0, lc.indexOf("."));
-		}
-		if (lc.endsWith("_2")) {
-			lc = lc.substring(0, lc.length() - "_2".length());
-		}
-		boolean hasTimestampEnd = false;
-		for(int i = 0; i < lc.length(); i++) {
-			if(lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
-				hasTimestampEnd = true;
-				break;
-			}
-		}
-		if(!hasTimestampEnd) {
-			lc += "_00_00_00";
-		}
-		return lc;
-	}
+	
 	
 	public static File[] getSortedFilesVersions(File dir){
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {
-			Arrays.sort(listFiles, new Comparator<File>() {
-				@Override
-				public int compare(File o1, File o2) {
-					return -simplifyName(o1.getName()).compareTo(simplifyName(o2.getName()));
-				}
-
-				
-			});
+			Arrays.sort(listFiles, getFileVersionComparator());
 		}
 		return listFiles;
+	}
+
+	public static Comparator<File> getFileVersionComparator() {
+		return new Comparator<File>() {
+			@Override
+			public int compare(File o1, File o2) {
+				return -simplifyFileName(o1.getName()).compareTo(simplifyFileName(o2.getName()));
+			}
+			
+			public String simplifyFileName(String fn) {
+				String lc = fn.toLowerCase();
+				if (lc.indexOf(".") != -1) {
+					lc = lc.substring(0, lc.indexOf("."));
+				}
+				if (lc.endsWith("_2")) {
+					lc = lc.substring(0, lc.length() - "_2".length());
+				}
+				boolean hasTimestampEnd = false;
+				for(int i = 0; i < lc.length(); i++) {
+					if(lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
+						hasTimestampEnd = true;
+						break;
+					}
+				}
+				if(!hasTimestampEnd) {
+					lc += "_00_00_00";
+				}
+				return lc;
+			}
+		};
 	}
 	
 	private static final char CHAR_TOSPLIT = 0x01;

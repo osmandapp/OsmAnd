@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +40,6 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -75,7 +75,7 @@ public class MapRenderRepositories {
 	private final static int zoomOnlyForBasemaps = 11;
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
-	private Map<String, BinaryMapIndexReader> files = new ConcurrentHashMap<String, BinaryMapIndexReader>();
+	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
 	
@@ -131,7 +131,9 @@ public class MapRenderRepositories {
 			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
 		
 		}
-		files.put(file.getAbsolutePath(), reader);
+		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
+		cpfiles.put(file.getAbsolutePath(), reader);
+		files = cpfiles;
 	}
 
 	public RotatedTileBox getBitmapLocation() {
@@ -143,7 +145,9 @@ public class MapRenderRepositories {
 	}
 
 	protected void closeConnection(BinaryMapIndexReader c, String file) {
-		files.remove(file);
+		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
+		cpfiles.remove(file);
+		files = cpfiles;
 		if(nativeFiles.contains(file)){
 			NativeOsmandLibrary lib = NativeOsmandLibrary.getLoadedLibrary();
 			if(lib != null) {
