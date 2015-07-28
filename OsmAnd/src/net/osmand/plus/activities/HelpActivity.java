@@ -1,21 +1,27 @@
 package net.osmand.plus.activities;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Window;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
-import android.os.Build;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.Toolbar;
-import android.view.*;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import android.os.Bundle;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 
 public class HelpActivity extends OsmandActionBarActivity {
@@ -27,7 +33,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	private static final int BACK = 2;
 	private static final int FORWARD = 3;
 	private static final int CLOSE = 4;
-	private WebView wv;
+	private WebView mWebView;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -53,38 +59,48 @@ public class HelpActivity extends OsmandActionBarActivity {
 		}
 		getSupportActionBar().setTitle(title);
 		setContentView(R.layout.help_activity);
-		wv = (WebView) findViewById(R.id.webView);
-		wv.setFocusable(true);
-        wv.setFocusableInTouchMode(true);
-		wv.requestFocus(View.FOCUS_DOWN);
-		wv.setOnTouchListener(new View.OnTouchListener() {
+		mWebView = (WebView) findViewById(R.id.webView);
+		mWebView.setFocusable(true);
+        mWebView.setFocusableInTouchMode(true);
+		mWebView.requestFocus(View.FOCUS_DOWN);
+		mWebView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public boolean onTouch(View view, MotionEvent event) {
 				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-				case MotionEvent.ACTION_UP:
-					if (!v.hasFocus()) {
-						v.requestFocus();
-					}
-					break;
+					case MotionEvent.ACTION_DOWN:
+					case MotionEvent.ACTION_UP:
+						if (!view.hasFocus()) {
+							view.requestFocus();
+						}
+						break;
 				}
 				return false;
 			}
 		});
-		
-		wv.setWebViewClient(new WebViewClient() {
-			
+
+		mWebView.setWebViewClient(new WebViewClient() {
+
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				wv.requestFocus(View.FOCUS_DOWN);
+				mWebView.requestFocus(View.FOCUS_DOWN);
 			}
-			
+
 			@Override
 			public void onLoadResource(WebView view, String url) {
 				super.onLoadResource(view, url);
 			}
 		});
-		wv.loadUrl(FILE_ANDROID_ASSET_HELP + url);  
+		if (savedInstanceState != null) {
+			mWebView.restoreState(savedInstanceState);
+		} else {
+			mWebView.loadUrl(FILE_ANDROID_ASSET_HELP + url);
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		mWebView.saveState(outState);
+		super.onSaveInstanceState(outState);
 	}
 
 	public String readContent(String url) throws IOException {
@@ -133,16 +149,16 @@ public class HelpActivity extends OsmandActionBarActivity {
 			finish();
 			return true;
 		case HOME:
-			wv.loadUrl(FILE_ANDROID_ASSET_HELP + "index.html");
+			mWebView.loadUrl(FILE_ANDROID_ASSET_HELP + "index.html");
 			return true;
 		case BACK:
-			if(wv.canGoBack()) {
-				wv.goBack();
+			if(mWebView.canGoBack()) {
+				mWebView.goBack();
 			}
 			return true;
 		case FORWARD:
-			if(wv.canGoForward()) {
-				wv.goForward();
+			if(mWebView.canGoForward()) {
+				mWebView.goForward();
 			}
 			return true;
 		case CLOSE:
