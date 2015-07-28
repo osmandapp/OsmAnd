@@ -470,7 +470,7 @@
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
-	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商場安裝嗎？</string>
+	<string name="tts_missing_language_data">您選的語言未安裝，您要轉到 Play 商場安裝嗎？</string>
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
