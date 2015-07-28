@@ -900,7 +900,7 @@
 
 	<string name="poi_power_cable_distribution_cabinet">Elskab</string>
 	<string name="poi_basin">Basin</string>
-	<string name="poi_conservation">Landbevaring</string>
+	<string name="poi_conservation">Beskyttet område</string>
 
 	<string name="poi_building_poi">Bygning</string>
 	<string name="poi_crane">Kran</string>
@@ -927,19 +927,19 @@
 	<string name="poi_rwn_ref">Regional vandrerute</string>
 	<string name="poi_lwn_ref">Lokal vandrerute</string>
 
-	<string name="poi_collection_times">Tømnings antal</string>
+	<string name="poi_collection_times">Tømningstider</string>
 	<string name="poi_service_times">Service-tider</string>
 	<string name="poi_brand">Varemærke</string>
 
-	<string name="poi_enforcement_traffic_signals">Håndhævelse: trafiksignaler</string>
-	<string name="poi_enforcement_maxspeed">Håndhævelse: max hastighed</string>
-	<string name="poi_enforcement_maxheight">Håndhævelse: max højde</string>
-	<string name="poi_enforcement_mindistance">Håndhævelse: min afstand</string>
-	<string name="poi_enforcement_check">Håndhævelse: kontrol</string>
-	<string name="poi_enforcement_access">Håndhævelse: adgang</string>
-	<string name="poi_enforcement_toll">Håndhævelse: vejafgift</string>
+	<string name="poi_enforcement_traffic_signals">Trafiksignaler</string>
+	<string name="poi_enforcement_maxspeed">Hastighedskontrol</string>
+	<string name="poi_enforcement_maxheight">Højdekontrol</string>
+	<string name="poi_enforcement_mindistance">Afstandskontrol</string>
+	<string name="poi_enforcement_check">Trafikontrol</string>
+	<string name="poi_enforcement_access">Adgangskontrol</string>
+	<string name="poi_enforcement_toll">Vejafgiftskontrol</string>
 
-<string name="poi_country">Land</string>
+<string name="poi_country">Landlig</string>
 	<string name="poi_fee">Gebyr</string>
 
 	<string name="poi_abandoned_poi">Forladt objekt</string>
@@ -949,7 +949,7 @@
 	<string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
 	<string name="poi_route_hiking_ref_poi">Vandrerute reference</string>
 
-	<string name="poi_node_networks">Vandrings/cyklings rutepunkter</string>
+	<string name="poi_node_networks">Vandre-/cykelrutepunkter</string>
 		<string name="poi_hiking_routes">Vandreruter</string>
-		<string name="poi_traffic_enforcement">Trafik håndhævelse</string>
+		<string name="poi_traffic_enforcement">Trafikovervågning</string>
 	</resources>
