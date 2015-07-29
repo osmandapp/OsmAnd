@@ -116,6 +116,7 @@ public class MapActivity extends AccessibleActivity {
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
+	private IMapDownloaderCallback downloaderCallback;
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -169,7 +170,8 @@ public class MapActivity extends AccessibleActivity {
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
 		mapViewTrackingUtilities.setMapView(mapView);
 
-		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback() {
+		// to not let it gc
+		downloaderCallback = new IMapDownloaderCallback() {
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if (request != null && !request.error && request.fileToSave != null) {
@@ -180,7 +182,8 @@ public class MapActivity extends AccessibleActivity {
 					mapView.tileDownloaded(request);
 				}
 			}
-		});
+		};
+		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
 		createProgressBarForRouting();
 		mapLayers.createLayers(mapView);
 		// This situtation could be when navigation suddenly crashed and after restarting

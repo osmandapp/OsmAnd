@@ -11,7 +11,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +118,8 @@ public class ResourceManager {
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
+	
+	protected final Map<String, String> liveUpdatesFiles = new ConcurrentHashMap<String, String>();
 	
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
 	
@@ -602,6 +603,10 @@ public class ResourceManager {
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
+		if(context.getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
+			collectFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		}
+		
 		Collections.sort(files, Algorithms.getFileVersionComparator());
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
@@ -642,7 +647,11 @@ public class ResourceManager {
 					if (dateCreated == 0) {
 						dateCreated = f.lastModified();
 					}
-					indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
+					if(f.getParentFile().getName().equals(IndexConstants.LIVE_INDEX_DIR)) {
+						liveUpdatesFiles.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
+					} else {
+						indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
+					}
 					for (String rName : index.getRegionNames()) {
 						// skip duplicate names (don't make collision between getName() and name in the map)
 						// it can be dangerous to use one file to different indexes if it is multithreaded
@@ -930,6 +939,7 @@ public class ResourceManager {
 		imagesOnFS.clear();
 		indexFileNames.clear();
 		basemapFileNames.clear();
+		liveUpdatesFiles.clear();
 		renderer.clearAllResources();
 		closeAmenities();
 		closeRouteFiles();
@@ -959,6 +969,10 @@ public class ResourceManager {
 
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<String, String>(indexFileNames);
+	}
+	
+	public Map<String, String> getLiveIndexFileNames() {
+		return new LinkedHashMap<String, String>(liveUpdatesFiles);
 	}
 	
 	public boolean containsBasemap(){

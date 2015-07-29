@@ -34,6 +34,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType SRTM_COUNTRY_FILE  = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
 	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
 	public static final DownloadActivityType WIKIPEDIA_FILE = new DownloadActivityType(R.string.download_wikipedia_maps, "wikimap");
+	public static final DownloadActivityType LIVE_UPDATES_FILE = new DownloadActivityType(R.string.download_live_updates, "live_updates");
 	private int resource;
 	private String[] tags;
 
@@ -108,6 +109,8 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 		} else if (WIKIPEDIA_FILE == this) {
 			return ctx.getAppPath(IndexConstants.WIKI_INDEX_DIR);
+		} else if (LIVE_UPDATES_FILE == this) {
+			return ctx.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		} else if (HILLSHADE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		}
@@ -115,7 +118,7 @@ public class DownloadActivityType {
 	}
 	
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this;
+		return HILLSHADE_FILE != this && LIVE_UPDATES_FILE != this;
 	}
 	
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -147,6 +150,8 @@ public class DownloadActivityType {
 			return IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 		} else if (WIKIPEDIA_FILE == this) {
 			return IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
+		} else if (LIVE_UPDATES_FILE == this) {
+			return BINARY_MAP_INDEX_EXT;
 		} else if (HILLSHADE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
 		}
@@ -265,6 +270,12 @@ public class DownloadActivityType {
 			return s;
 		} else if (this == HILLSHADE_FILE) {
 			return fileName.replace('_', ' ');
+		} else if (this == LIVE_UPDATES_FILE) {
+			int l = fileName.lastIndexOf('.');
+			if (l == -1) {
+				l = fileName.length();
+			}
+			return fileName.substring(0, l) + IndexConstants.BINARY_MAP_INDEX_EXT;
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 				|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			int l = fileName.lastIndexOf('_');

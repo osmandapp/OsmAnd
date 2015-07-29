@@ -114,6 +114,7 @@ public class DownloadTilesDialog {
 	}
 	
 	private volatile boolean cancel = false;
+	private IMapDownloaderCallback callback;
 	
 	public void run(final int zoom, final int progress, final QuadRect latlonRect, final ITileSource map){
 		cancel = false;
@@ -142,14 +143,15 @@ public class DownloadTilesDialog {
 		
 		final List<IMapDownloaderCallback> previousCallbacks = instance.getDownloaderCallbacks();
 		instance.clearCallbacks();
-		instance.addDownloaderCallback(new IMapDownloaderCallback(){
+		callback = new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if (request != null) {
 					progressDlg.setProgress(progressDlg.getProgress() + 1);
 				}
 			}
-		});
+		};
+		instance.addDownloaderCallback(callback);
 		
 		Runnable r = new Runnable(){
 			@Override
@@ -201,6 +203,7 @@ public class DownloadTilesDialog {
 						}
 					}
 					mapView.refreshMap();
+					callback = null;
 				} catch (Exception e) {
 					log.error("Exception while downloading tiles ", e); //$NON-NLS-1$
 					instance.refuseAllPreviousRequests();
