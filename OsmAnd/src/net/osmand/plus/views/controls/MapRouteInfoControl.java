@@ -1,9 +1,19 @@
 package net.osmand.plus.views.controls;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.graphics.PointF;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
@@ -24,7 +34,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.activities.search.SearchAddressActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -34,20 +43,11 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl.RoutePrepareDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
-import android.graphics.PointF;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MapRouteInfoControl implements IRouteInformationListener {
 	public static int directionInfo = -1;
@@ -268,7 +268,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 
 	protected void selectFavorite(final View parentView, final boolean target) {
 		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
-				.getFavorites().getFavouritePoints());
+				.getFavorites().getFavouritePoints(), false);
 		Dialog[] dlgHolder = new Dialog[1];
 		OnItemClickListener click = getOnClickListener(target, favouritesAdapter, dlgHolder);
 		OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {

@@ -1,22 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import java.text.Collator;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
-import net.osmand.AndroidUtils;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -36,6 +19,24 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.MapUtils;
+
+import java.text.Collator;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class FavoriteDialogs {
 	public static final String KEY_FAVORITE = "favorite";
 	
@@ -43,7 +44,8 @@ public class FavoriteDialogs {
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
 		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, 
-				((OsmandApplication) activity.getApplication()).getFavorites().getFavouritePoints());
+				((OsmandApplication) activity.getApplication()).getFavorites().getFavouritePoints(),
+				false);
 		final Dialog[] dlgHolder = new Dialog[1];
 		OnItemClickListener click = new AdapterView.OnItemClickListener() {
 
