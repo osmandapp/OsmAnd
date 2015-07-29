@@ -934,4 +934,12 @@
 	<string name="poi_node_networks">徒步旅行/自行車網路節點</string>
 		<string name="poi_hiking_routes">徒步路線</string>
 		<string name="poi_traffic_enforcement">交通執法</string>
+	<string name="poi_access_private">私人通路</string>
+	<string name="poi_access_no">禁止通行</string>
+	<string name="poi_access_destination">指定通行</string>
+	<string name="poi_access_permissive">容許通行</string>
+	<string name="poi_access_customers">顧客通行</string>
+	<string name="poi_access_delivery">交貨通行</string>
+	<string name="poi_access_agricultural">農用通路</string>
+
 	</resources>
