@@ -69,7 +69,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 						break;
 					}
 					try {
-						tileReadyCallback.getSync().wait(250);
+						tileReadyCallback.getSync().wait(50);
 					} catch (InterruptedException e) {
 					}
 				}

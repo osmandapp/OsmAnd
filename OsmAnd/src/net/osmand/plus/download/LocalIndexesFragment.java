@@ -57,9 +57,11 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -1160,6 +1162,26 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
+		if(getMyApplication().getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
+			item = optionsMenu.getMenu().add("Live updates")
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_refresh_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					String fileName = info.getFileName();
+					Toast.makeText(getActivity(), fileName, Toast.LENGTH_SHORT).show();
+					SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd");
+					fileName = fileName.substring(0, fileName.indexOf('.')) + "_" + sdf.format(new Date()) + ".obf";
+					IndexItem ii = 
+							new IndexItem(fileName, "Incremental update", new Date().getTime(), "1", 
+									1000, 1000, DownloadActivityType.LIVE_UPDATES_FILE);
+					
+					getDownloadActivity().addToDownload(ii);
+					return true;
+				}
+			});
+		}
+		
 		optionsMenu.show();
 	}
 

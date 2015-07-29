@@ -301,9 +301,7 @@ public class MapTileDownloader {
 		Iterator<WeakReference<IMapDownloaderCallback>> it = callbacks.iterator();
 		while(it.hasNext()) {
 			IMapDownloaderCallback c = it.next().get();
-			if(c == null) {
-				it.remove();
-			} else {
+			if(c != null) {
 				c.tileDownloaded(request);
 			}
 		}		

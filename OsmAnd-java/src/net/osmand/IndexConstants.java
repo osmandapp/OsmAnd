@@ -42,6 +42,7 @@ public class IndexConstants {
 	public static final String GPX_RECORDED_INDEX_DIR = GPX_INDEX_DIR + "rec/";
 	public static final String GPX_IMPORT_DIR = GPX_INDEX_DIR + "import/";
 	public static final String TILES_INDEX_DIR= "tiles/";
+	public static final String LIVE_INDEX_DIR= "live/";
 	public static final String TOURS_INDEX_DIR= "tours/";
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
