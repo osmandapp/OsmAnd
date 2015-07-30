@@ -2112,4 +2112,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
 	<string name="user_hates_app_get_feedback_long">Merci de nous faire part de ce que vous voudriez améliorer dans cette application.</string>
 <string name="we_really_care">Nous sommes très attentifs</string>
+	<string name="download_live_updates">Mises à jour en directs</string>
 	</resources>
