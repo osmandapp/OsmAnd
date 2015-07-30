@@ -34,12 +34,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class OsmEditUploadListenerHelper implements OsmEditsUploadListener {
+public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	public static final String TAG = "OsmEditUploadListenerHe";
 	private final FragmentActivity activity;
 	private final String numberFormat;
 
-	public OsmEditUploadListenerHelper(FragmentActivity activity, String numberFormat) {
+	public OsmEditsUploadListenerHelper(FragmentActivity activity, String numberFormat) {
 		this.activity = activity;
 		this.numberFormat = numberFormat;
 	}
@@ -103,7 +103,7 @@ public class OsmEditUploadListenerHelper implements OsmEditsUploadListener {
 		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(activity);
 		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil((OsmandApplication) activity.getApplication());
 
-		OsmEditUploadListenerHelper helper = new OsmEditUploadListenerHelper(activity,
+		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
 		Resources resources = activity.getResources();
@@ -191,7 +191,7 @@ public class OsmEditUploadListenerHelper implements OsmEditsUploadListener {
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									OsmEditUploadListenerHelper
+									OsmEditsUploadListenerHelper
 											.showUploadItemsProgressDialog(
 													UploadingMultipleErrorDialogFragment.this,
 													points);
