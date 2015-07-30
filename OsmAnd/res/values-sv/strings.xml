@@ -1954,4 +1954,5 @@
 	<string name="rate_this_app_long">Poängsätt OsmAnd på Google Play</string>
 	<string name="user_hates_app_get_feedback">Berätta för oss varför.</string>
 	<string name="user_hates_app_get_feedback_long">Berätta för oss vad du vill förändra i denna app.</string>
-</resources>
+<string name="download_live_updates">Liveuppdateringar</string>
+	</resources>
