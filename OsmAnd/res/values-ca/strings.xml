@@ -2079,4 +2079,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="rate_this_app_long">Us agrairíem que avaluéssiu OsmAnd en el Google Play</string>
 	<string name="user_hates_app_get_feedback">Digueu-nos el motiu.</string>
 	<string name="user_hates_app_get_feedback_long">Us agrairíem que ens diguéssiu que voldríeu canviar d\'aquesta aplicació.</string>
-</resources>
+<string name="download_live_updates">Actualitzacions al moment</string>
+	</resources>
