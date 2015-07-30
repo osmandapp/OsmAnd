@@ -2048,4 +2048,5 @@
 	<string name="rate_this_app_long">Калі ласка, дайце ацэнку OsmAnd на Google Play</string>
 	<string name="user_hates_app_get_feedback">Скажыце нам чаму.</string>
 	<string name="user_hates_app_get_feedback_long">Калі ласка, раскажыце нам, што вы хацелі б зьмяніць у гэтай праграме.</string>
-</resources>
+<string name="download_live_updates">Бягучыя абнаўленьні</string>
+	</resources>
