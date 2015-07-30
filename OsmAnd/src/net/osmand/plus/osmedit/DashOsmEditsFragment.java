@@ -133,7 +133,7 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
-		OsmEditsUploadListener listener = new OsmEditUploadListenerHelper(getActivity(),
+		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
 			public void uploadUpdated(OsmPoint point) {

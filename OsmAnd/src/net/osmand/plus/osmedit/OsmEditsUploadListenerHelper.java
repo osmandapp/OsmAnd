@@ -71,27 +71,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 					UploadingErrorDialogFragment.getInstance(message, point);
 			dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
 		} else {
-			Log.v(TAG, "in if2");
-			String[] pointNames = new String[loadErrorsMap.keySet().size()];
-			boolean[] hasErrors = new boolean[loadErrorsMap.keySet().size()];
-			ArrayList<OsmPoint> pointsWithErrors = new ArrayList<>();
-			int i = 0;
-			for (OsmPoint point : loadErrorsMap.keySet()) {
-				pointNames[i] = point.getGroup() == OsmPoint.Group.BUG ?
-						((OsmNotesPoint) point).getText() :
-						((OpenstreetmapPoint) point).getName();
-				pointNames[i] = TextUtils.isEmpty(pointNames[i]) ?
-						"id:" + point.getId() : pointNames[i];
-				hasErrors[i] = loadErrorsMap.get(point) != null;
-				if (hasErrors[i]) {
-					pointsWithErrors.add(point);
-				}
-				i++;
-			}
 			UploadingMultipleErrorDialogFragment dialogFragment =
-					UploadingMultipleErrorDialogFragment.getInstance(pointNames, hasErrors);
-			dialogFragment.setPointsToUpload(
-					pointsWithErrors.toArray(new OsmPoint[pointsWithErrors.size()]));
+					UploadingMultipleErrorDialogFragment.createInstance(loadErrorsMap);
 			dialogFragment.show(activity.getSupportFragmentManager(), "multiple_error_loading");
 
 		}
@@ -164,8 +145,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	public static final class UploadingMultipleErrorDialogFragment extends DialogFragment {
 		private static final String HAS_ERROR = "has_error";
 		private static final String POINT_NAMES = "point_names";
-
-		OsmPoint[] points;
+		private static final String POINTS_WITH_ERRORS = "points_with_errors";
 
 		@NonNull
 		@Override
@@ -173,6 +153,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			Bundle arguments = getArguments();
 			String[] pointNames = arguments.getStringArray(POINT_NAMES);
 			boolean[] hasErrors = arguments.getBooleanArray(HAS_ERROR);
+			final OsmPoint[] points = (OsmPoint[]) arguments.getSerializable(POINTS_WITH_ERRORS);
 			int successfulUploads = 0;
 			for (boolean hasError : hasErrors) {
 				if (!hasError) {
@@ -200,21 +181,36 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			return builder.create();
 		}
 
-		public void setPointsToUpload(OsmPoint[] points) {
-			this.points = points;
-		}
+		public static UploadingMultipleErrorDialogFragment createInstance(
+				Map<OsmPoint, String> loadErrorsMap) {
+			String[] pointNames = new String[loadErrorsMap.keySet().size()];
+			boolean[] hasErrors = new boolean[loadErrorsMap.keySet().size()];
+			ArrayList<OsmPoint> pointsWithErrors = new ArrayList<>();
+			int i = 0;
+			for (OsmPoint point : loadErrorsMap.keySet()) {
+				pointNames[i] = point.getGroup() == OsmPoint.Group.BUG ?
+						((OsmNotesPoint) point).getText() :
+						((OpenstreetmapPoint) point).getName();
+				pointNames[i] = TextUtils.isEmpty(pointNames[i]) ?
+						"id:" + point.getId() : pointNames[i];
+				hasErrors[i] = loadErrorsMap.get(point) != null;
+				if (hasErrors[i]) {
+					pointsWithErrors.add(point);
+				}
+				i++;
+			}
 
-		public static UploadingMultipleErrorDialogFragment getInstance(String[] pointNames,
-																	   boolean[] hasError) {
-			if (pointNames.length != hasError.length) {
+			if (pointNames.length != hasErrors.length) {
 				throw new IllegalArgumentException("pointNames and hasError arrays " +
 						"must me of equal length");
 			}
 			UploadingMultipleErrorDialogFragment fragment =
 					new UploadingMultipleErrorDialogFragment();
 			Bundle bundle = new Bundle();
+			bundle.putSerializable(POINTS_WITH_ERRORS,
+					pointsWithErrors.toArray(new OsmPoint[pointsWithErrors.size()]));
 			bundle.putStringArray(POINT_NAMES, pointNames);
-			bundle.putBooleanArray(HAS_ERROR, hasError);
+			bundle.putBooleanArray(HAS_ERROR, hasErrors);
 			fragment.setArguments(bundle);
 			return fragment;
 		}
