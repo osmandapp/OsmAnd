@@ -1,0 +1,289 @@
+package net.osmand.plus.osmedit;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Map;
+
+public class OsmEditUploadListenerHelper implements OsmEditsUploadListener {
+	public static final String TAG = "OsmEditUploadListenerHe";
+	private final FragmentActivity activity;
+	private final String numberFormat;
+
+	public OsmEditUploadListenerHelper(FragmentActivity activity, String numberFormat) {
+		this.activity = activity;
+		this.numberFormat = numberFormat;
+	}
+
+	@Override
+	public void uploadUpdated(OsmPoint point) {
+	}
+
+	@MainThread
+	@Override
+	public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+		int uploaded = 0;
+		int pointsNum = loadErrorsMap.keySet().size();
+		for (OsmPoint point : loadErrorsMap.keySet()) {
+			if (loadErrorsMap.get(point) == null) {
+				uploaded++;
+			}
+		}
+		if (uploaded == pointsNum) {
+			AccessibleToast.makeText(activity,
+					MessageFormat.format(numberFormat, uploaded),
+					Toast.LENGTH_LONG)
+					.show();
+		} else if (pointsNum == 1) {
+			Log.v(TAG, "in if1");
+			OsmPoint point = loadErrorsMap.keySet().iterator().next();
+			String message = loadErrorsMap.get(point);
+			DialogFragment dialogFragment =
+					UploadingErrorDialogFragment.getInstance(message, point);
+			dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
+		} else {
+			Log.v(TAG, "in if2");
+			String[] pointNames = new String[loadErrorsMap.keySet().size()];
+			boolean[] hasErrors = new boolean[loadErrorsMap.keySet().size()];
+			ArrayList<OsmPoint> pointsWithErrors = new ArrayList<>();
+			int i = 0;
+			for (OsmPoint point : loadErrorsMap.keySet()) {
+				pointNames[i] = point.getGroup() == OsmPoint.Group.BUG ?
+						((OsmNotesPoint) point).getText() :
+						((OpenstreetmapPoint) point).getName();
+				pointNames[i] = TextUtils.isEmpty(pointNames[i]) ?
+						"id:" + point.getId() : pointNames[i];
+				hasErrors[i] = loadErrorsMap.get(point) != null;
+				if (hasErrors[i]) {
+					pointsWithErrors.add(point);
+				}
+				i++;
+			}
+			UploadingMultipleErrorDialogFragment dialogFragment =
+					UploadingMultipleErrorDialogFragment.getInstance(pointNames, hasErrors);
+			dialogFragment.setPointsToUpload(
+					pointsWithErrors.toArray(new OsmPoint[pointsWithErrors.size()]));
+			dialogFragment.show(activity.getSupportFragmentManager(), "multiple_error_loading");
+
+		}
+	}
+
+	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
+		FragmentActivity activity = fragment.getActivity();
+		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(activity);
+		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil((OsmandApplication) activity.getApplication());
+
+		OsmEditUploadListenerHelper helper = new OsmEditUploadListenerHelper(activity,
+				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
+
+		Resources resources = activity.getResources();
+		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
+				activity,
+				resources.getString(R.string.uploading),
+				resources.getString(R.string.local_openstreetmap_uploading),
+				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
+				dialog, helper, plugin, remotepoi, remotebug, toUpload.length);
+		uploadTask.execute(toUpload);
+
+		dialog.show();
+	}
+
+	public static final class UploadingErrorDialogFragment extends DialogFragment {
+		private static final String ERROR_MESSAGE = "error_message";
+		private static final String POINT = "point";
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			Bundle argument = getArguments();
+			String errorMessage = argument.getString(ERROR_MESSAGE);
+			final OsmPoint point = (OsmPoint) argument.getSerializable(POINT);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(getResources().getString(R.string.failed_to_upload))
+					.setMessage(MessageFormat.format(
+							getResources().getString(R.string.error_message_pattern), errorMessage))
+					.setPositiveButton(R.string.shared_string_ok, null)
+					.setNeutralButton(getResources().getString(R.string.delete_change),
+							new DialogInterface.OnClickListener() {
+								public void onClick(@Nullable DialogInterface dialog, int id) {
+									OsmEditingPlugin plugin =
+											OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+									if (point.getGroup() == OsmPoint.Group.BUG) {
+										plugin.getDBBug().deleteAllBugModifications(
+												(OsmNotesPoint) point);
+									} else if (point.getGroup() == OsmPoint.Group.POI) {
+										plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
+									}
+								}
+							});
+			return builder.create();
+		}
+
+		public static UploadingErrorDialogFragment getInstance(String errorMessage,
+															   OsmPoint point) {
+			UploadingErrorDialogFragment fragment = new UploadingErrorDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString(ERROR_MESSAGE, errorMessage);
+			bundle.putSerializable(POINT, point);
+			fragment.setArguments(bundle);
+			return fragment;
+		}
+	}
+
+	public static final class UploadingMultipleErrorDialogFragment extends DialogFragment {
+		private static final String HAS_ERROR = "has_error";
+		private static final String POINT_NAMES = "point_names";
+
+		OsmPoint[] points;
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			Bundle arguments = getArguments();
+			String[] pointNames = arguments.getStringArray(POINT_NAMES);
+			boolean[] hasErrors = arguments.getBooleanArray(HAS_ERROR);
+			int successfulUploads = 0;
+			for (boolean hasError : hasErrors) {
+				if (!hasError) {
+					successfulUploads++;
+				}
+			}
+			PointsWithErrorsAdapter adapter =
+					PointsWithErrorsAdapter.createInstance(getActivity(), pointNames, hasErrors);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(MessageFormat.format(getResources()
+							.getString(R.string.successfully_uploaded_pattern),
+					successfulUploads, hasErrors.length))
+					.setAdapter(adapter, null)
+					.setPositiveButton(R.string.shared_string_ok, null)
+					.setNeutralButton(getResources().getString(R.string.try_again),
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									OsmEditUploadListenerHelper
+											.showUploadItemsProgressDialog(
+													UploadingMultipleErrorDialogFragment.this,
+													points);
+								}
+							});
+			return builder.create();
+		}
+
+		public void setPointsToUpload(OsmPoint[] points) {
+			this.points = points;
+		}
+
+		public static UploadingMultipleErrorDialogFragment getInstance(String[] pointNames,
+																	   boolean[] hasError) {
+			if (pointNames.length != hasError.length) {
+				throw new IllegalArgumentException("pointNames and hasError arrays " +
+						"must me of equal length");
+			}
+			UploadingMultipleErrorDialogFragment fragment =
+					new UploadingMultipleErrorDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putStringArray(POINT_NAMES, pointNames);
+			bundle.putBooleanArray(HAS_ERROR, hasError);
+			fragment.setArguments(bundle);
+			return fragment;
+		}
+	}
+
+	private static final class PointWithPotentialError {
+		String point;
+		boolean hasError;
+
+		public PointWithPotentialError(String point, boolean hasError) {
+			this.point = point;
+			this.hasError = hasError;
+		}
+	}
+
+	private static final class PointsWithErrorsAdapter extends ArrayAdapter<PointWithPotentialError> {
+		private final int layoutResourceId;
+		PointWithPotentialError[] data;
+		Activity context;
+
+		private PointsWithErrorsAdapter(Activity context, int layoutResourceId,
+										PointWithPotentialError[] objects) {
+			super(context, layoutResourceId, objects);
+			data = objects;
+			this.context = context;
+			this.layoutResourceId = layoutResourceId;
+		}
+
+		@Override
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			View row = convertView;
+			PointHolder holder = null;
+
+			if (row == null) {
+				LayoutInflater inflater = context.getLayoutInflater();
+				row = inflater.inflate(layoutResourceId, parent, false);
+
+				holder = new PointHolder();
+				holder.checkedUncheckedImageView = (ImageView) row.findViewById(R.id.iconImageView);
+				holder.pointNameTextView = (TextView) row.findViewById(R.id.nameTextView);
+
+				row.setTag(holder);
+			} else {
+				holder = (PointHolder) row.getTag();
+			}
+
+			PointWithPotentialError pointWrapper = data[position];
+			holder.pointNameTextView.setText(pointWrapper.point);
+			IconsCache cache = ((OsmandApplication) context.getApplication()).getIconsCache();
+			holder.checkedUncheckedImageView.setImageDrawable(pointWrapper.hasError ?
+					cache.getContentIcon(R.drawable.ic_action_remove_dark) :
+					cache.getContentIcon(R.drawable.ic_action_done));
+
+			return row;
+		}
+
+		public static PointsWithErrorsAdapter createInstance(Activity activity,
+															 String[] pointNames,
+															 boolean[] hasError) {
+			PointWithPotentialError[] array = new PointWithPotentialError[pointNames.length];
+			for (int i = 0; i < pointNames.length; i++) {
+				array[i] = new PointWithPotentialError(pointNames[i], hasError[i]);
+			}
+			return new PointsWithErrorsAdapter(activity, R.layout.osm_edit_list_item, array);
+		}
+
+		private static class PointHolder {
+			TextView pointNameTextView;
+			ImageView checkedUncheckedImageView;
+		}
+	}
+}

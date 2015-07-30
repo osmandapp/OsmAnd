@@ -1,11 +1,9 @@
 package net.osmand.plus.osmedit;
 
-import java.io.Serializable;
-
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 
-public class OpenstreetmapPoint extends OsmPoint implements Serializable {
+public class OpenstreetmapPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771467L;
 	private Node entity;
 	private String comment;

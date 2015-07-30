@@ -1,14 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
@@ -19,36 +10,42 @@ import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
-	
-	static String getNotesApi()
-	{
+
+	static String getNotesApi() {
 		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		
+
 		String RETURN_API;
-		
+
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
 			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
-		}
-		else {
+		} else {
 			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
 		}
-	
+
 		return RETURN_API;
 	}
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	
+
 	public OsmBugsRemoteUtil(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 	}
 
 	@Override
-	public String createNewBug(double latitude, double longitude, String text, String author){
+	public String createNewBug(double latitude, double longitude, String text, String author) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
 		b.append("lat=").append(latitude); //$NON-NLS-1$
@@ -58,21 +55,21 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String addingComment(long id, String text, String author){
+	public String addingComment(long id, String text, String author) {
 		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("/"); 
+		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$
 		b.append("/comment?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		return editingPOI(b.toString(), "POST", "adding comment"); //$NON-NLS-1$
 	}
 
 	@Override
-	public String closingBug(long id, String text, String author){
+	public String closingBug(long id, String text, String author) {
 		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("/"); 
+		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$
 		b.append("/close?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "POST", "close bug") ; //$NON-NLS-1$
+		return editingPOI(b.toString(), "POST", "close bug"); //$NON-NLS-1$
 	}
 
 	private String editingPOI(String url, String requestMethod, String userOperation) {
@@ -104,26 +101,24 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			boolean ok = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
 			log.info(msg); //$NON-NLS-1$
 			// populate return fields.
-			
+
 			StringBuilder responseBody = new StringBuilder();
-			if (true) {
-				responseBody.setLength(0);
-				InputStream i = connection.getInputStream();
-				if (i != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
-					String s;
-					boolean f = true;
-					while ((s = in.readLine()) != null) {
-						if (!f) {
-							responseBody.append("\n"); //$NON-NLS-1$
-						} else {
-							f = false;
-						}
-						responseBody.append(s);
+			responseBody.setLength(0);
+			InputStream i = connection.getInputStream();
+			if (i != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
+				String s;
+				boolean f = true;
+				while ((s = in.readLine()) != null) {
+					if (!f) {
+						responseBody.append("\n"); //$NON-NLS-1$
+					} else {
+						f = false;
 					}
+					responseBody.append(s);
 				}
-				log.info("Response : " + responseBody); //$NON-NLS-1$
 			}
+			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
 				return msg + "\n" + responseBody;
@@ -138,7 +133,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			return e.getMessage() + "";
 		} catch (IOException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			return e.getMessage() + "";
+			return e.getMessage() + " link unavailable";
 		}
 		return null;
 	}
