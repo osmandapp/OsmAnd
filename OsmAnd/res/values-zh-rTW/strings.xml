@@ -2065,4 +2065,5 @@
 	<string name="rate_this_app_long">請在 Google Play 給 OsmAnd 分數</string>
 	<string name="user_hates_app_get_feedback">告訴我們為什麼。</string>
 	<string name="user_hates_app_get_feedback_long">請告訴我們這個應用程式您想要更改些什麼。</string>
-</resources>
+<string name="download_live_updates">即時更新</string>
+	</resources>
