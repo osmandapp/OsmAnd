@@ -1,16 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -22,13 +11,23 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Denis
  * on 20.01.2015.
  */
-public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUploadListener {
+public class DashOsmEditsFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
 
 	OsmEditingPlugin plugin;
@@ -59,19 +58,19 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		if (plugin == null) {
 			plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		}
-		setupEditings();		
+		setupEditings();
 	}
-	
+
 	private void setupEditings() {
 		View mainView = getView();
-		if (plugin == null){
+		if (plugin == null) {
 			mainView.setVisibility(View.GONE);
 			return;
 		}
 
 		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
 		getOsmPoints(dataPoints);
-		if (dataPoints.size() == 0){
+		if (dataPoints.size() == 0) {
 			mainView.setVisibility(View.GONE);
 			return;
 		} else {
@@ -114,7 +113,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		}
 	}
 
-	private void uploadItem(final OsmPoint point){
+	private void uploadItem(final OsmPoint point) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, 1));
 		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -129,13 +128,31 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 
 	private void showProgressDialog(OsmPoint point) {
 		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		OsmPoint[] toUpload = new OsmPoint[] { point };
+		OsmPoint[] toUpload = new OsmPoint[]{point};
 		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
 		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		OsmEditsUploadListener listener = new OsmEditUploadListenerHelper(getActivity(),
+				getString(R.string.local_openstreetmap_were_uploaded)) {
+			@Override
+			public void uploadUpdated(OsmPoint point) {
+				super.uploadUpdated(point);
+				if (!DashOsmEditsFragment.this.isDetached()) {
+					onOpenDash();
+				}
+			}
+
+			@Override
+			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+				super.uploadEnded(loadErrorsMap);
+				if (!DashOsmEditsFragment.this.isDetached()) {
+					onOpenDash();
+				}
+			}
+		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				DashOsmEditsFragment.this, plugin, remotepoi, remotebug, toUpload.length);
+				listener, plugin, remotepoi, remotebug, toUpload.length);
 		uploadTask.execute(toUpload);
 		dialog.show();
 	}
@@ -143,9 +160,9 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
-		if (l1.isEmpty()){
+		if (l1.isEmpty()) {
 			int i = 0;
-			for(OsmPoint point : l2){
+			for (OsmPoint point : l2) {
 				if (i > 2) {
 					break;
 				}
@@ -154,7 +171,7 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 			}
 		} else if (l2.isEmpty()) {
 			int i = 0;
-			for(OsmPoint point : l1){
+			for (OsmPoint point : l1) {
 				if (i > 2) {
 					break;
 				}
@@ -164,30 +181,11 @@ public class DashOsmEditsFragment extends DashBaseFragment implements OsmEditsUp
 		} else {
 			dataPoints.add(l1.get(0));
 			dataPoints.add(l2.get(0));
-			if (l1.size() > 1){
+			if (l1.size() > 1) {
 				dataPoints.add(l1.get(1));
-			} else if (l2.size() > 1){
+			} else if (l2.size() > 1) {
 				dataPoints.add(l2.get(1));
 			}
-		}
-	}
-
-	@Override
-	public void uploadUpdated(OsmPoint point) {
-		if (!this.isDetached()){
-			onOpenDash();
-		}
-	}
-
-	@Override
-	public void uploadEnded(Integer result) {
-		if (result != null) {
-			AccessibleToast.makeText(getActivity(),
-					MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result), Toast.LENGTH_LONG)
-					.show();
-		}
-		if (!this.isDetached()){
-			onOpenDash();
 		}
 	}
 }

@@ -1,9 +1,10 @@
 package net.osmand.plus.osmedit;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class OsmPoint {
+public abstract class OsmPoint  implements Serializable {
 
 	public static enum Group {BUG, POI};
 

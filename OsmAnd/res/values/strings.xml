@@ -2221,4 +2221,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rate_this_app_long">Please give OsmAnd a score on Google Play</string>
 	<string name="user_hates_app_get_feedback">Tell us why.</string>
 	<string name="user_hates_app_get_feedback_long">Please tell us what would you want to change in this app.</string>
+	<string name="failed_to_upload">Failed to upload</string>
+	<string name="delete_change">Delete change</string>
+	<string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
+	<string name="try_again">Try again</string>
+	<string name="error_message_pattern">Error: {0}</string>
 </resources>
