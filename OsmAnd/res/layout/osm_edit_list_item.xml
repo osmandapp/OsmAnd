@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="@dimen/list_item_height">
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dialog_elements_vertical_margin"
+        android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/default_list_text_size"
+        tools:text="@string/lorem_ipsum"/>
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:src="@drawable/ic_action_remove_dark"
+        android:textSize="@dimen/default_desc_text_size"/>
+
+</LinearLayout>

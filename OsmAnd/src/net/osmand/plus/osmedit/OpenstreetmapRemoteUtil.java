@@ -1,20 +1,8 @@
 package net.osmand.plus.osmedit;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.content.Context;
+import android.util.Xml;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -37,9 +25,21 @@ import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.content.Context;
-import android.util.Xml;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
@@ -335,11 +335,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				return entityInfo;
 			}
 
-		} catch (IOException e) {
-			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
-					Toast.LENGTH_LONG).show();
-		} catch (SAXException e) {
+		} catch (IOException | SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
 					Toast.LENGTH_LONG).show();
