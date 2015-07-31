@@ -2049,4 +2049,9 @@
 	<string name="user_hates_app_get_feedback">Скажыце нам чаму.</string>
 	<string name="user_hates_app_get_feedback_long">Калі ласка, раскажыце нам, што вы хацелі б зьмяніць у гэтай праграме.</string>
 <string name="download_live_updates">Бягучыя абнаўленьні</string>
-	</resources>
+	<string name="failed_to_upload">Не ўдалося адаслаць</string>
+	<string name="delete_change">Выдаліць зьмены</string>
+	<string name="successfully_uploaded_pattern">{0}/{1} пасьпяхова адасланыя</string>
+	<string name="try_again">Паўтарыце спробу</string>
+	<string name="error_message_pattern">Памылка: {0}</string>
+</resources>
