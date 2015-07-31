@@ -1778,4 +1778,9 @@
 	<string name="user_hates_app_get_feedback_long">Por favor, nos diga o que quer mudar neste app.</string>
 <string name="we_really_care">Nós realmente nos importamos</string>
 	<string name="download_live_updates">Atualizações ao vivo</string>
-	</resources>
+	<string name="failed_to_upload">Falha no envio</string>
+	<string name="delete_change">Apagar mudança</string>
+	<string name="successfully_uploaded_pattern">Enviado com sucesso {0}/{1}</string>
+	<string name="try_again">Tentar novamente</string>
+	<string name="error_message_pattern">Erro: {0}</string>
+</resources>
