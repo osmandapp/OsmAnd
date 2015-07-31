@@ -2066,4 +2066,9 @@
 	<string name="user_hates_app_get_feedback">告訴我們為什麼。</string>
 	<string name="user_hates_app_get_feedback_long">請告訴我們這個應用程式您想要更改些什麼。</string>
 <string name="download_live_updates">即時更新</string>
-	</resources>
+	<string name="failed_to_upload">上載失敗</string>
+	<string name="delete_change">刪除更改</string>
+	<string name="successfully_uploaded_pattern">已成功上載 {0} / {1}</string>
+	<string name="try_again">再試一次</string>
+	<string name="error_message_pattern">錯誤：{0}</string>
+</resources>
