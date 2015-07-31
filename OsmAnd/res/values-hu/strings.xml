@@ -2028,4 +2028,5 @@
 	<string name="user_hates_app_get_feedback">Mondja el, hogy miért.</string>
 	<string name="user_hates_app_get_feedback_long">Mondja el nekünk, hogy mit változtatna az alkalmazáson.</string>
 <string name="rate_this_app_long">Adjon egy pontot az OsmAnd programnak a Google Play áruházban</string>
+	<string name="download_live_updates">Élő frissítések</string>
 	</resources>
