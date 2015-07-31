@@ -2009,7 +2009,7 @@
 	<string name="user_hates_app_get_feedback">Dinos por que.</string>
 	<string name="user_hates_app_get_feedback_long">Por favor, díganos lo que cambiaría en esta aplicación.</string>
 <string name="download_live_updates">Actualizaciones en vivo</string>
-	<string name="failed_to_upload">Falló al subir</string>
+	<string name="failed_to_upload">Subida fallida</string>
 	<string name="delete_change">Borrar cambio</string>
 	<string name="successfully_uploaded_pattern">Subido correctamente {0}/{1}</string>
 	<string name="try_again">Pruebe de nuevo</string>
