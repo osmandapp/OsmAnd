@@ -2080,4 +2080,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="user_hates_app_get_feedback">Digueu-nos el motiu.</string>
 	<string name="user_hates_app_get_feedback_long">Us agrairíem que ens diguéssiu que voldríeu canviar d\'aquesta aplicació.</string>
 <string name="download_live_updates">Actualitzacions al moment</string>
-	</resources>
+	<string name="failed_to_upload">S\'ha produït un error en la pujada</string>
+	<string name="delete_change">Suprimeix les modificacions</string>
+	<string name="successfully_uploaded_pattern">S\'ha pujat amb èxit {0}/{1}</string>
+	<string name="try_again">Torneu a provar-ho</string>
+	<string name="error_message_pattern">Error: {0}</string>
+</resources>
