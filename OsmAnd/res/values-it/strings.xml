@@ -2135,4 +2135,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="successfully_uploaded_pattern">Caricato con successo {0}/{1}</string>
 	<string name="try_again">Riprova</string>
 	<string name="error_message_pattern">Errore: {0}</string>
-</resources>
+<string name="no_updates_available">Non ci sono aggiornamenti disponibili</string>
+    </resources>
