@@ -1955,4 +1955,9 @@
 	<string name="user_hates_app_get_feedback">Berätta för oss varför.</string>
 	<string name="user_hates_app_get_feedback_long">Berätta för oss vad du vill förändra i denna app.</string>
 <string name="download_live_updates">Liveuppdateringar</string>
-	</resources>
+	<string name="failed_to_upload">Uppladdningen misslyckades</string>
+	<string name="delete_change">Ta bort ändringarna</string>
+	<string name="successfully_uploaded_pattern">Laddade upp {0}/{1} utan problem</string>
+	<string name="try_again">Försök igen</string>
+	<string name="error_message_pattern">Fel: {0}</string>
+</resources>
