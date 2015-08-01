@@ -236,9 +236,10 @@ public class OsmBaseStorage extends DefaultHandler {
 				}
 			} else if (ELEM_MEMBER.equals(name)) {
 				Long id = parseId(attributes, ATTR_REF, -1);
-				if(id != -1 && currentParsedEntity instanceof Relation){
+				if (id != -1 && currentParsedEntity instanceof Relation) {
+					System.out.println("Type " + attributes.getValue(ATTR_TYPE));
 					EntityType type = EntityType.valueOf(attributes.getValue(ATTR_TYPE).toUpperCase());
-					((Relation)currentParsedEntity).addMember(id, type, attributes.getValue(ATTR_ROLE));
+					((Relation) currentParsedEntity).addMember(id, type, attributes.getValue(ATTR_ROLE));
 				}
 
 			}  else {
