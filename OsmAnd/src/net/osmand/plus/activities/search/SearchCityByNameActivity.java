@@ -171,7 +171,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			}
 			return name;
 		} else {
-			return obj.getName(region.getLang());
+			return getShortText(obj);
 		}
 	}
 	
