@@ -726,10 +726,10 @@
 <string name="auto_zoom_map_descr">Zoom automàtic del mapa en funció de la velocitat (mentre el mapa està sincronitzat amb la posició actual)</string>
 <string name="auto_zoom_map">Zoom automàtic del mapa</string>
 <string name="tip_recent_changes_0_8_3_t">"Canvis a la versió 0.8.3:
+\n\t* Fites
 \n\t* Millora en el guiatge de rutes
 \n\t* Opció per evitar autopistes
 \n\t* Permet mostrar Cycleway=track
-\n\t* Millora en l\'acabat de les IU (icones)
 \n\t* S\'han corregit alguns errors de programació "</string>
 <string name="snap_to_road_descr">Ajusta la posició a les carreteres durant la navegació</string>
 <string name="snap_to_road">Desplaça a la carretera</string>
