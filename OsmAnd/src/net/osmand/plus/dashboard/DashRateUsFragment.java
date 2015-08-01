@@ -18,13 +18,9 @@ import net.osmand.plus.R;
 import java.util.Calendar;
 
 /**
- * Created by Denis on
- * 26.03.2015.
  */
 public class DashRateUsFragment extends DashBaseFragment {
     public static final String TAG = "DASH_RATE_US_FRAGMENT";
-
-    // TODO move to resources
     public static final String EMAIL = "support@osmand.net";
 
     // Imported in shouldShow method

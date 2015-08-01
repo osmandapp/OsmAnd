@@ -1205,6 +1205,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
 								iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
 						getDownloadActivity().addToDownload(ii);
+						getDownloadActivity().updateDownloadButton();
 					}
 				}
 

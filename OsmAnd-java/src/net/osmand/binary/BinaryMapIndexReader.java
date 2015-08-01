@@ -81,6 +81,7 @@ public class BinaryMapIndexReader {
 	public static boolean READ_STATS = false;
 	
 	private final RandomAccessFile raf;
+	protected final File file;
 	/*private*/ int version;
 	/*private */long dateCreated;
 	// keep them immutable inside
@@ -102,8 +103,9 @@ public class BinaryMapIndexReader {
 	private static String BASEMAP_NAME = "basemap";
 
 	
-	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
+	public BinaryMapIndexReader(final RandomAccessFile raf, File file) throws IOException {
 		this.raf = raf;
+		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
@@ -113,8 +115,9 @@ public class BinaryMapIndexReader {
 		init();
 	}
 	
-	/*private */BinaryMapIndexReader(final RandomAccessFile raf, boolean init) throws IOException {
+	/*private */BinaryMapIndexReader(final RandomAccessFile raf, File file, boolean init) throws IOException {
 		this.raf = raf;
+		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
@@ -128,6 +131,7 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, BinaryMapIndexReader referenceToSameFile) throws IOException {
 		this.raf = raf;
+		this.file = referenceToSameFile.file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		version = referenceToSameFile.version;
@@ -360,6 +364,10 @@ public class BinaryMapIndexReader {
 
 	public RandomAccessFile getRaf() {
 		return raf;
+	}
+	
+	public File getFile() {
+		return file;
 	}
 	
 	public int readByte() throws IOException{
@@ -1956,9 +1964,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile("/Users/victorshcherb/osmand/osm-gen/map.obf", "r");
+		File fl = new File("/Users/victorshcherb/osmand/osm-gen/map.obf");
+		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
 		println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
 

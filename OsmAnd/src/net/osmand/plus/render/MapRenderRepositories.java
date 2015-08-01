@@ -295,7 +295,7 @@ public class MapRenderRepositories {
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
-					if (!library.initMapFile(mapName)) {
+					if (!library.initMapFile(fr.getFile().getAbsolutePath())) {
 						continue;
 					}
 					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$

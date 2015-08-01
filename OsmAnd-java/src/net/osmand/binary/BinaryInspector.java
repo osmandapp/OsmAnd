@@ -290,7 +290,7 @@ public class BinaryInspector {
 				return null;
 			}
 			rafs[c] = new RandomAccessFile(f.getAbsolutePath(), "r");
-			indexes[c] = new BinaryMapIndexReader(rafs[c]);
+			indexes[c] = new BinaryMapIndexReader(rafs[c], f);
 			partsSet[c] = new LinkedHashSet<Float>();
 			if(version == -1){
 				version = indexes[c].getVersion();
@@ -446,12 +446,13 @@ public class BinaryInspector {
 	
 	public void printFileInformation(File file) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
-		printFileInformation(r, file.getName());
+		printFileInformation(r, file);
 	}
 
-	public  void printFileInformation(RandomAccessFile r, String filename) throws IOException {
+	public  void printFileInformation(RandomAccessFile r, File file ) throws IOException {
+		String filename = file.getName();
 		try {
-			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
+			BinaryMapIndexReader index = new BinaryMapIndexReader(r, file);
 			int i = 1;
 			println("Binary index " + filename + " version = " + index.getVersion() +" edition = " + new Date(index.getDateCreated()));
 			for(BinaryIndexPart p : index.getIndexes()){
