@@ -322,6 +322,12 @@ public class DownloadActivityType {
 			String s = fileName.substring(0, l);
 			return s;
 		}
+		if (this == LIVE_UPDATES_FILE) {
+			if(fileName.indexOf('.') > 0){
+				return fileName.substring(0, fileName.indexOf('.'));
+			}
+			return fileName;
+		}
 		int ls = fileName.lastIndexOf('_');
 		if (ls >= 0) {
 			return fileName.substring(0, ls);
