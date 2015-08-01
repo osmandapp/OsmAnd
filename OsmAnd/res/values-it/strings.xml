@@ -2136,4 +2136,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="try_again">Riprova</string>
 	<string name="error_message_pattern">Errore: {0}</string>
 <string name="no_updates_available">Non ci sono aggiornamenti disponibili</string>
-    </resources>
+    <string name="we_really_care_about_your_opinion">Ci teniamo molto alla tua opinione, è molto importante avere un tuo rimando.</string>
+	</resources>
