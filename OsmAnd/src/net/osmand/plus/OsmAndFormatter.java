@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -183,11 +185,12 @@ public class OsmAndFormatter {
 		return nm + " " + n; //$NON-NLS-1$
 	}
 
-	public static String getAmenityDescriptionContent(Context ctx, Amenity amenity, boolean shortDescription) {
+	public static String getAmenityDescriptionContent(OsmandApplication ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
 		if(amenity.getType().isWiki()) {
 			return "";
 		}
+		MapPoiTypes poiTypes = ctx.getPoiTypes();
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
 			String vl = e.getValue();
@@ -205,8 +208,7 @@ public class OsmAndFormatter {
 				
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(e.getKey());
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
 				if (pt != null) {
 					vl = pt.getTranslation();
 				} else {
