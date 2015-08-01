@@ -25,7 +25,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 			@Override
 			public int compare(RegionAddressRepository lhs,
 					RegionAddressRepository rhs) {
-				return col.compare(lhs.getName(), rhs.getName());
+				return col.compare(getText(lhs), getText(rhs));
 			}
 		};
 	}
@@ -68,7 +68,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 
 	@Override
 	public void itemSelected(RegionAddressRepository obj) {
-		((OsmandApplication) getApplication()).getSettings().setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
+		((OsmandApplication) getApplication()).getSettings().setLastSearchedRegion(obj.getFileName(), obj.getEstimatedRegionCenter());
 		quitActivity(SearchCityByNameActivity.class);
 	}
 
