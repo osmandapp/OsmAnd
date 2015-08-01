@@ -2129,4 +2129,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="user_hates_app_get_feedback">Dicci perché.</string>
 	<string name="rate_this_app_long">Per favore dai a OsmAnd la tua valutazione su Google Play</string>
 	<string name="user_hates_app_get_feedback_long">Per favore dicci cosa vorresti cambiare in quest\'app.</string>
+<string name="download_live_updates">Aggiornamenti automatici</string>
+	<string name="failed_to_upload">Caricamento fallito</string>
+	<string name="delete_change">Cancella le modifiche</string>
+	<string name="successfully_uploaded_pattern">Caricato con successo {0}/{1}</string>
+	<string name="try_again">Riprova</string>
+	<string name="error_message_pattern">Errore: {0}</string>
 </resources>
