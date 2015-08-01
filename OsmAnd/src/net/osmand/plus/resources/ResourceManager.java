@@ -613,6 +613,7 @@ public class ResourceManager {
 				log.error(e.getMessage(), e);
 			}
 		}
+		File liveDir = context.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
@@ -640,7 +641,7 @@ public class ResourceManager {
 					if (dateCreated == 0) {
 						dateCreated = f.lastModified();
 					}
-					if(f.getParentFile().getName().equals(IndexConstants.LIVE_INDEX_DIR)) {
+					if(f.getParentFile().getName().equals(liveDir.getName())) {
 						boolean toUse = changesManager.index(f, dateCreated, mapReader);
 						if(!toUse) {
 							try {
