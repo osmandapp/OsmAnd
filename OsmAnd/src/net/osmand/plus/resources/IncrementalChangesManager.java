@@ -45,6 +45,7 @@ public class IncrementalChangesManager {
 			for (String month : list) {
 				RegionUpdate ru = regionUpdateFiles.monthUpdates.get(month);
 				if (ru.obfCreated < dateCreated) {
+					log.info("Delete overlapping month update " + ru.file.getName());
 					resourceManager.closeFile(ru.file.getName());
 					regionUpdateFiles.monthUpdates.remove(month);
 					ru.file.delete();
@@ -60,6 +61,7 @@ public class IncrementalChangesManager {
 				while (it.hasNext()) {
 					RegionUpdate ru = it.next();
 					if (ru.obfCreated < dateCreated || (monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
+						log.info("Delete overlapping day update " + ru.file.getName());
 						resourceManager.closeFile(ru.file.getName());
 						it.remove();
 						ru.file.delete();
@@ -122,7 +124,7 @@ public class IncrementalChangesManager {
 			if(date.endsWith("00")) {
 				monthUpdates.put(monthYear, ru);
 			} else {
-				if (!dayUpdates.containsKey(date)) {
+				if (!dayUpdates.containsKey(monthYear)) {
 					dayUpdates.put(monthYear, new ArrayList<IncrementalChangesManager.RegionUpdate>());
 				}
 				dayUpdates.get(monthYear).add(ru);
