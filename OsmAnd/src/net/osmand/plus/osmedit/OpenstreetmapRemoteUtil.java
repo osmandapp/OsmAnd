@@ -3,7 +3,6 @@ package net.osmand.plus.osmedit;
 import android.content.Context;
 import android.util.Xml;
 import android.widget.Toast;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -23,6 +22,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
@@ -335,7 +335,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				return entityInfo;
 			}
 
-		} catch (IOException | SAXException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
 					Toast.LENGTH_LONG).show();
