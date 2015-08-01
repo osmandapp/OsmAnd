@@ -1595,8 +1595,8 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para la monitorización avanzada en directo llamada OsMo, ver http://osmo.mobi.
-\n\nPuede hacer un seguimiento de todos los dispositivos participando en un grupo en tiempo real, y comunicarse entre sí. Viene con varias opciones para el seguimiento por sesión o seguimiento permanente.
+    <string name="osmo_plugin_description">"Este complemento proporciona la función de monitorización avanzada en directo llamada OsMo, ver http://osmo.mobi.
+\n\nPuede rastrear todos los dispositivos participando en un grupo en tiempo real, y comunicarse entre sí. Viene con varias opciones para el seguimiento por sesión o permanente.
 \n\nLos grupos anónimos pueden crearse espontáneamente para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorización OSM)</string>
     <string name="osmo_settings">OsMo</string>
@@ -2119,7 +2119,7 @@
     <string name="lang_nb">Noruego (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_te">Telugú</string>
-    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_new">Newarí / Nepal Bhasa</string>
     <string name="rendering_value_default13_name">Predeterminado (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predeterminado (cian translúcido)</string>
     <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
