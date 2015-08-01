@@ -48,6 +48,7 @@ public class IncrementalChangesManager {
 					resourceManager.closeFile(ru.file.getName());
 					regionUpdateFiles.monthUpdates.remove(month);
 					ru.file.delete();
+					log.info("Delete overlapping month update " + ru.file.getName());
 				}
 			}
 		}
@@ -62,6 +63,7 @@ public class IncrementalChangesManager {
 						resourceManager.closeFile(ru.file.getName());
 						it.remove();
 						ru.file.delete();
+						log.info("Delete overlapping day update " + ru.file.getName());
 					}
 				}
 			}
