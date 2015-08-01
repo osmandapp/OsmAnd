@@ -2093,4 +2093,10 @@
 	<string name="user_hates_app_get_feedback">Fortæl os hvorfor.</string>
 	<string name="we_really_care">Dette er vigtigt for os</string>
 	<string name="user_hates_app_get_feedback_long">Fortæl os hvad du ønsker at ændre i denne app.</string>
-</resources>
+<string name="download_live_updates">Live-opdateringer</string>
+	<string name="delete_change">Slet ændring</string>
+	<string name="try_again">Prøv igen</string>
+	<string name="error_message_pattern">Fejl: {0}</string>
+<string name="failed_to_upload">Overførsel mislykkedes</string>
+	<string name="successfully_uploaded_pattern">Overført {0}/{1}</string>
+	</resources>

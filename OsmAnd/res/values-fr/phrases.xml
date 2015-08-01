@@ -696,12 +696,12 @@
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Réservoir de stockage</string>
 
-	<string name="poi_piste_downhill">Ski alpin</string>
-	<string name="poi_piste_nordic">Ski nordique</string>
-	<string name="poi_piste_skitour">Ski de randonnée</string>
-	<string name="poi_piste_hike">Randonnée</string>
-	<string name="poi_piste_sleigh">Traîneau</string>
-	<string name="poi_piste_sled">Luge</string>
+	<string name="poi_piste_downhill">Piste de ski alpin</string>
+	<string name="poi_piste_nordic">Piste de ski nordique</string>
+	<string name="poi_piste_skitour">Itinéraire de ski de randonnée</string>
+	<string name="poi_piste_hike">Chemin de randonnée</string>
+	<string name="poi_piste_sleigh">Piste pour chiens de traîneau</string>
+	<string name="poi_piste_sled">Piste de luge</string>
 	<string name="poi_piste_snow_park">Snow park</string>
 	<string name="poi_piste_playground">Jardin de neige</string>
 	<string name="poi_canal">Canal</string>
@@ -918,4 +918,9 @@
 	<string name="poi_fee">Tarif</string>
 
 	<string name="poi_abandoned_poi">Objet abandonné</string>
+	<string name="poi_access_private">Propriété privée</string>
+	<string name="poi_access_no">Accès interdit</string>
+	<string name="poi_access_permissive">Accès autorisé</string>
+	<string name="poi_access_customers">Accès réservé aux clients</string>
+	<string name="poi_access_delivery">Accès réservé aux livraisons</string>
 	</resources>

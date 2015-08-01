@@ -491,7 +491,7 @@
   <string name="poi_context_menu_call">Toon telefoon</string>
   <string name="website">Website</string>
   <string name="phone">Telefoon</string>
-  <string name="download_type_to_filter">type filtering</string>
+  <string name="download_type_to_filter">Tik om te zoeken</string>
   <string name="use_high_res_maps">Hoge resolutie beeldscherm</string>
   <string name="use_high_res_maps_descr">Rasterkaarten niet rekken op hoge-resolutie beeldschermen</string>
   <string name="unknown_location">Positie nog niet bekend</string>
@@ -1839,7 +1839,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_he">Hebreeuws</string>
     <string name="forward">Vooruit</string>
     <string name="home">Thuis</string>
-    <string name="live_monitoring_m_descr">Stuur tracking-data naar een webservice als een GPX-track wordt gemaakt</string>
+    <string name="live_monitoring_m_descr">Stuur tracking-data naar een webservice als een GPX-track wordt gemaakt.</string>
 	<string name="live_monitoring_m">Online tracking (GPX vereist)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
@@ -2242,4 +2242,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_bn">Bengaals</string>
     <string name="lang_pms">Piëmontees</string>
     <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_ml">Malayalam</string>
     </resources>

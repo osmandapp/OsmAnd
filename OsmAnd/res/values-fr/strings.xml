@@ -2112,4 +2112,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="user_hates_app_get_feedback">Indiquez-nous pourquoi.</string>
 	<string name="user_hates_app_get_feedback_long">Merci de nous faire part de ce que vous voudriez améliorer dans cette application.</string>
 <string name="we_really_care">Nous sommes très attentifs</string>
-	</resources>
+	<string name="download_live_updates">Mise à jour automatique</string>
+	<string name="failed_to_upload">Erreur lors de l\'envoi</string>
+	<string name="delete_change">Supprimer les modifications</string>
+	<string name="successfully_uploaded_pattern">Envoi avec succès {0}/{1}</string>
+	<string name="try_again">Merci de re-essayer</string>
+	<string name="error_message_pattern">Erreur : {0}</string>
+</resources>

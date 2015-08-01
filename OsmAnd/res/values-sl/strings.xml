@@ -1936,4 +1936,5 @@
 	<string name="rate_this_app_long">Ocenite program na Google Play</string>
 	<string name="user_hates_app_get_feedback">Povejte nam, zakaj.</string>
 	<string name="user_hates_app_get_feedback_long">Povejte nam, kaj želite spremeniti v programu.</string>
-</resources>
+<string name="download_live_updates">Sprotne posodobitve</string>
+	</resources>

@@ -940,4 +940,12 @@
 	<string name="poi_route_hiking_lwn_poi">Ruta senderista local</string>
 	<string name="poi_route_hiking_ref_poi">Referència de ruta senderista</string>
 
+	<string name="poi_access_private">Accés privat</string>
+	<string name="poi_access_no">Sense accés</string>
+	<string name="poi_access_destination">Accés a la destinació</string>
+	<string name="poi_access_permissive">Accés tolerat</string>
+	<string name="poi_access_customers">Accés de clients</string>
+	<string name="poi_access_delivery">Accés per lliuraments</string>
+	<string name="poi_access_agricultural">Accés per activitats agrícoles</string>
+
 	</resources>
