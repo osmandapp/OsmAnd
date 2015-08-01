@@ -1,5 +1,10 @@
 package net.osmand.plus.osmedit;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
@@ -7,16 +12,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
@@ -24,15 +22,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	static String getNotesApi() {
 		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-
 		String RETURN_API;
-
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
 			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
 		} else {
 			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
 		}
-
 		return RETURN_API;
 	}
 
@@ -102,22 +97,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info(msg); //$NON-NLS-1$
 			// populate return fields.
 
-			StringBuilder responseBody = new StringBuilder();
-			responseBody.setLength(0);
-			InputStream i = connection.getInputStream();
-			if (i != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
-				String s;
-				boolean f = true;
-				while ((s = in.readLine()) != null) {
-					if (!f) {
-						responseBody.append("\n"); //$NON-NLS-1$
-					} else {
-						f = false;
-					}
-					responseBody.append(s);
-				}
-			}
+			StringBuilder responseBody = Algorithms.readFromInputStream(connection.getInputStream());
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {

@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -265,10 +266,13 @@ public class DownloadFileHelper {
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {
 			copyFile(de, progress, fin, len, fin, de.fileToDownload);
+		} else if(de.urlToDownload.contains(".gz")) {
+			GZIPInputStream zipIn = new GZIPInputStream(fin);
+			copyFile(de, progress, fin, len, zipIn, de.fileToDownload);
 		} else {
 			if (de.unzipFolder) {
 				de.fileToDownload.mkdirs();
-			}
+			} 
 			ZipInputStream zipIn = new ZipInputStream(fin);
 			ZipEntry entry = null;
 			boolean first = true;
@@ -304,7 +308,8 @@ public class DownloadFileHelper {
 		fin.close();
 	}
 
-	private void copyFile(DownloadEntry de, IProgress progress, CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
+	private void copyFile(DownloadEntry de, IProgress progress, 
+			CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
 			throws IOException {
 		targetFile.getParentFile().mkdirs();
 		FileOutputStream out = new FileOutputStream(targetFile);

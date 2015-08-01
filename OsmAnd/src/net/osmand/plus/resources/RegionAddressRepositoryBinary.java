@@ -25,7 +25,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.util.MapUtils;
 
@@ -35,7 +34,6 @@ import org.apache.commons.logging.Log;
 public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private static final Log log = PlatformUtil.getLog(RegionAddressRepositoryBinary.class);
 	private BinaryMapIndexReader file;
-	private String region;
 	
 	
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
@@ -48,11 +46,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private ResourceManager mgr;
 	private OsmandPreference<String> langSetting;
 	
-	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapIndexReader file, String name, String fileName) {
+	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapIndexReader file, String fileName) {
 		this.mgr = mgr;
 		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
 		this.file = file;
-		this.region = name;
 		this.fileName = fileName;
  	    this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
@@ -68,7 +65,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized void preloadCities(ResultMatcher<City> resultMatcher) {
 		if (cities.isEmpty()) {
 			try {
-				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
+				List<City> cs = file.getCities(BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
 						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 				LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>();
 				for (City c : cs) {
@@ -189,7 +186,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			if (/*name.length() >= 2 && Algorithms.containsDigit(name) && */searchVillages) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				List<City> foundCities = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
+				List<City> foundCities = file.getCities(BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
 						new CollatorStringMatcher(uName, StringMatcherMode.CHECK_CONTAINS), lang, 
 						BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
 				for (City code : foundCities) {
@@ -216,7 +213,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			int initialsize = citiesToFill.size();
 			if (/*name.length() >= 3 && */searchVillages) {
 				
-				List<City> foundCities = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
+				List<City> foundCities = file.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
 					List<City> cache = new ArrayList<City>();
 					@Override
 					public boolean publish(City c) {
@@ -275,7 +272,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public String getName() {
-		return region;
+		if(fileName.indexOf('.') != -1) {
+			return fileName.substring(0, fileName.indexOf('.'));
+		}
+		return fileName;
 	}
 	
 	@Override
@@ -301,7 +301,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadCities(null);
 		if (!cities.containsKey(id)) {
 			try {
-				file.getCities(region, BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
+				file.getCities(BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
 					boolean canceled = false;
 
 					@Override
@@ -356,7 +356,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public LatLon getEstimatedRegionCenter() {
-		return file.getRegionCenter(region);
+		return file.getRegionCenter();
 	}
 
 	

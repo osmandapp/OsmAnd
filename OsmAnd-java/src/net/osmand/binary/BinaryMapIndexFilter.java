@@ -26,7 +26,7 @@ public class BinaryMapIndexFilter {
 	private final BinaryMapIndexReader reader;
 
 	public BinaryMapIndexFilter(File file) throws IOException{
-		reader = new BinaryMapIndexReader(new RandomAccessFile(file.getPath(), "r"));
+		reader = new BinaryMapIndexReader(new RandomAccessFile(file.getPath(), "r"), file);
 	}
 	
 	

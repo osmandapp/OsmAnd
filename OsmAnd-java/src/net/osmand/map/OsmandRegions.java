@@ -4,6 +4,7 @@ package net.osmand.map;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class OsmandRegions {
 
 
 	public void prepareFile(String fileName) throws IOException {
-		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"));
+		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 		initLocaleNames();
 	}
 

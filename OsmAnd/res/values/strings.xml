@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_updates_available">No updates available</string>
     <string name="download_live_updates">Live updates</string>
 	<string name="rendering_value_default13_name">Default (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Default (translucent cyan)</string>
@@ -2217,7 +2218,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_fast_recalculation">Smart route recalculation</string>
 	<string name="use_fast_recalculation_desc">Recalculate only initial part of the route for long trips</string>
 	<string name="do_you_like_osmand">Do you like OsmAnd?</string>
-	<string name="we_really_care">We really care</string>
+	<string name="we_really_care_about_your_opinion">We care much about your opinion and it is important for us to hear you back.</string>
 	<string name="rate_this_app">Rate this app</string>
 	<string name="rate_this_app_long">Please give OsmAnd a score on Google Play</string>
 	<string name="user_hates_app_get_feedback">Tell us why.</string>

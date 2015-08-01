@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/DashboardSubHeader"
-        android:text="@string/we_really_care"
+        android:text="@string/we_really_care_about_your_opinion"
         android:paddingBottom="@dimen/list_content_padding"/>
 
     <View
