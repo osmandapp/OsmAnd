@@ -2056,4 +2056,5 @@
 	<string name="user_hates_app_get_feedback_long">Пожалуйста скажите нам что вы хотите изменить в этом приложении.</string>
 <string name="rendering_attr_currentTrackColor_name">GPX цвет</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX толщина</string>
+    <string name="no_updates_available">Нет доступных обновлений</string>
     </resources>
