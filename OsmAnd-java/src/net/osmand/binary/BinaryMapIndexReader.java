@@ -535,40 +535,31 @@ public class BinaryMapIndexReader {
 		return names;
 	}
 	
-	public LatLon getRegionCenter(String name) {
-		AddressRegion rg = getRegionByName(name);
-		if (rg != null) {
-			return rg.calculatedCenter;
+	public LatLon getRegionCenter() {
+		for(AddressRegion r : addressIndexes) {
+			if(r.calculatedCenter != null)
+				return r.calculatedCenter;
 		}
 		return null;
 	}
 	
-	private AddressRegion getRegionByName(String name){
-		for(AddressRegion r : addressIndexes){
-			if(r.name.equals(name)){
-				return r;
-			}
-		}
-		return null;
+	public List<City> getCities(SearchRequest<City> resultMatcher,  
+			int cityType) throws IOException {
+		return getCities(resultMatcher, null, null, cityType);
 	}
+
 	
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher,  
-			int cityType) throws IOException {
-		return getCities(region, resultMatcher, null, null, cityType);
-	}
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, 
-			int cityType) throws IOException {
+	public List<City> getCities(SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, int cityType)
+			throws IOException {
 		List<City> cities = new ArrayList<City>();
-		AddressRegion r = getRegionByName(region);
-		if(r == null) {
-			return cities;
-		}
-		for(CitiesBlock block : r.cities) {
-			if(block.type == cityType) {
-				codedIS.seek(block.filePointer);
-				int old = codedIS.pushLimit(block.length);
-				addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
-				codedIS.popLimit(old);
+		for (AddressRegion r : addressIndexes) {
+			for (CitiesBlock block : r.cities) {
+				if (block.type == cityType) {
+					codedIS.seek(block.filePointer);
+					int old = codedIS.pushLimit(block.length);
+					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
+					codedIS.popLimit(old);
+				}
 			}
 		}
 		return cities;
@@ -2260,9 +2251,8 @@ public class BinaryMapIndexReader {
 	
 	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
 		// test address index search
-		String reg = reader.getRegionNames().get(0);
 		final Map<String, Integer> streetFreq = new HashMap<String, Integer>();
-		List<City> cs = reader.getCities(reg, null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+		List<City> cs = reader.getCities(null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 		for(City c : cs){
 			int buildings = 0;
 			reader.preloadStreets(c, null);
@@ -2275,7 +2265,7 @@ public class BinaryMapIndexReader {
 			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true) + " " + c.getName("ru"));
 		}
 //		int[] count = new int[1];
-		List<City> villages = reader.getCities(reg, buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+		List<City> villages = reader.getCities(buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 		for(City v : villages) {
 			reader.preloadStreets(v,  null);
 			for(Street s : v.getStreets()){

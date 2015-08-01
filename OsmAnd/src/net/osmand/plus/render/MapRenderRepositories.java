@@ -20,7 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.IProgress;
 import net.osmand.NativeLibrary.NativeSearchResult;
@@ -127,12 +126,12 @@ public class MapRenderRepositories {
 	}
 
 	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
-		if (files.containsKey(file.getAbsolutePath())) {
-			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
+		if (files.containsKey(file.getName())) {
+			closeConnection(file.getName());
 		
 		}
 		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
-		cpfiles.put(file.getAbsolutePath(), reader);
+		cpfiles.put(file.getName(), reader);
 		files = cpfiles;
 	}
 
@@ -144,21 +143,23 @@ public class MapRenderRepositories {
 		return prevBmpLocation;
 	}
 
-	protected void closeConnection(BinaryMapIndexReader c, String file) {
+	public void closeConnection(String file) {
 		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
-		cpfiles.remove(file);
+		BinaryMapIndexReader bmir = cpfiles.remove(file);
 		files = cpfiles;
-		if(nativeFiles.contains(file)){
+		if (nativeFiles.contains(file)) {
 			NativeOsmandLibrary lib = NativeOsmandLibrary.getLoadedLibrary();
-			if(lib != null) {
+			if (lib != null) {
 				lib.closeMapFile(file);
 				nativeFiles.remove(file);
 			}
 		}
-		try {
-			c.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (bmir != null) {
+			try {
+				bmir.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -178,7 +179,7 @@ public class MapRenderRepositories {
 		bmp = null;
 		bmpLocation = null;
 		for (String f : new ArrayList<String>(files.keySet())) {
-			closeConnection(files.get(f), f);
+			closeConnection(f);
 		}
 	}
 

@@ -118,7 +118,7 @@ public class DownloadActivityType {
 	}
 	
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && LIVE_UPDATES_FILE != this;
+		return HILLSHADE_FILE != this;
 	}
 	
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -161,6 +161,8 @@ public class DownloadActivityType {
 	public String getUrlSuffix(OsmandApplication ctx) {
 		if (this== DownloadActivityType.ROADS_FILE) {
 			return "&road=yes";
+		} else if (this == DownloadActivityType.LIVE_UPDATES_FILE) {
+			return "&osmc=yes";
 		} else if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return "&srtmcountry=yes";
 		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {

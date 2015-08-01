@@ -52,6 +52,9 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -1168,15 +1171,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					String fileName = info.getFileName();
-					Toast.makeText(getActivity(), fileName, Toast.LENGTH_SHORT).show();
-					SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd");
-					fileName = fileName.substring(0, fileName.indexOf('.')) + "_" + sdf.format(new Date()) + ".obf";
-					IndexItem ii = 
-							new IndexItem(fileName, "Incremental update", new Date().getTime(), "1", 
-									1000, 1000, DownloadActivityType.LIVE_UPDATES_FILE);
-					
-					getDownloadActivity().addToDownload(ii);
+					runLiveUpdate(info);
 					return true;
 				}
 			});
@@ -1184,7 +1179,42 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		optionsMenu.show();
 	}
+	
+	private void runLiveUpdate(final LocalIndexInfo info) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
+		new AsyncTask<Object, Object, IncrementalUpdateList>() {
+
+			protected void onPreExecute() {
+				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
+
+			};
+
+			@Override
+			protected IncrementalUpdateList doInBackground(Object... params) {
+				IncrementalChangesManager cm = getMyApplication().getResourceManager().getChangesManager();
+				return cm.getUpdatesByMonth(fnExt);
+			}
+
+			protected void onPostExecute(IncrementalUpdateList result) {
+				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+				if (result.errorMessage != null) {
+					Toast.makeText(getDownloadActivity(), result.errorMessage, Toast.LENGTH_SHORT).show();
+				} else {
+					List<IncrementalUpdate> ll = result.getItemsForUpdate();
+					for (IncrementalUpdate iu : ll) {
+						IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
+								iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
+						getDownloadActivity().addToDownload(ii);
+					}
+				}
+
+			};
+
+		}.execute(new Object[] { fnExt });
+	}
 
 
-	private DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
+	private DownloadActivity getDownloadActivity() {
+		return (DownloadActivity) getActivity();
+	}
 }

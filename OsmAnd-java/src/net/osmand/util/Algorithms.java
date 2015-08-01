@@ -1,6 +1,7 @@
 package net.osmand.util;
 
 
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
@@ -8,7 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,6 +45,16 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+	
+	
+	public static String getFileNameWithoutExtension(File f) {
+		String name = f.getName();
+		int i = name.indexOf('.');
+		if(i >= 0) {
+			name = name.substring(0, i);
+		}
+		return name;
 	}
 	
 	
@@ -304,6 +317,25 @@ public class Algorithms {
 			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 			
+	}
+	
+	public static StringBuilder readFromInputStream(InputStream i) throws IOException {
+		StringBuilder responseBody = new StringBuilder();
+		responseBody.setLength(0);
+		if (i != null) {
+			BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
+			String s;
+			boolean f = true;
+			while ((s = in.readLine()) != null) {
+				if (!f) {
+					responseBody.append("\n"); //$NON-NLS-1$
+				} else {
+					f = false;
+				}
+				responseBody.append(s);
+			}
+		}
+		return responseBody;
 	}
 	
 	public static boolean removeAllFiles(File f) {
