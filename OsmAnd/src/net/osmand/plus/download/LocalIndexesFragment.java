@@ -344,7 +344,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.SRTM_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
-			} else if(i.getFileName().endsWith(IndexConstants.ROADS_INDEX_DIR)){
+			} else if(i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)){
 				parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.WIKI_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);

@@ -594,6 +594,8 @@ public class ResourceManager {
 			if (f.getName().endsWith("-roads" + IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				f.renameTo(new File(roadsPath, f.getName().replace("-roads" + IndexConstants.BINARY_MAP_INDEX_EXT,
 						IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)));
+			} else if (f.getName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+				f.renameTo(new File(roadsPath, f.getName()));
 			}
 		}
 	}
