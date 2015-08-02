@@ -2085,4 +2085,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="successfully_uploaded_pattern">S\'ha pujat amb èxit {0}/{1}</string>
 	<string name="try_again">Torneu a provar-ho</string>
 	<string name="error_message_pattern">Error: {0}</string>
-</resources>
+<string name="no_updates_available">No hi ha actualitzacions disponibles</string>
+    <string name="we_really_care_about_your_opinion">"Valorem molt la vostra opinió i és important per nosaltres  disposar dels vostres comentaris."</string>
+	</resources>
