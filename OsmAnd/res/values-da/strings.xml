@@ -2099,6 +2099,6 @@
 	<string name="error_message_pattern">Fejl: {0}</string>
 <string name="failed_to_upload">Overførsel mislykkedes</string>
 	<string name="successfully_uploaded_pattern">Overført {0}/{1}</string>
-	<string name="no_updates_available">Ingen tilgængelige opdateringer</string>
-    <string name="we_really_care_about_your_opinion">Vi er meget interesseret din mening, og det er vigtigt for os at høre dig igen.</string>
+	<string name="no_updates_available">Ingen opdateringer tilgængelige</string>
+    <string name="we_really_care_about_your_opinion">Vi er meget interesseret i din mening, og det er vigtigt for os at høre fra dig.</string>
 	</resources>

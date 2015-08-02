@@ -759,7 +759,7 @@
     <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
     <string name="tip_faq">Frequently Asked Questions</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d OSM changes. Are you sure?</string>
-    <string name="animate_routing_route_not_calculated">Please, calculate the route first</string>
+    <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
 	<string name="route_is_too_long">OsmAnd offline routing may take very long (or sometimes not work) for points more than 200km apart. You may want to add intermediate waypoints for better performance.</string>

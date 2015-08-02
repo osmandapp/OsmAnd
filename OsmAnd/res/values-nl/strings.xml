@@ -2216,7 +2216,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="archive_wikipedia_data">Er zijn al (verouderde en incompatibele) Wikipedia-gegevens gedownload. Wilt u deze bewaren?</string>
     <string name="download_wikipedia_files">Wilt u Wikipedia-artikelen downloaden (%1$s MB) ?</string>
     <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
-    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoort als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoor als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>

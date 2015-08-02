@@ -643,7 +643,7 @@
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) OSM. ¿Estás seguro?</string>
-    <string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
+    <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular usando traza GPX</string>
 	<string name="route_is_too_long">El cálculo de ruta sin conexión de OsmAnd, podría tardar mucho tiempo (o a veces no funcionar) para tramos mayores de 200km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
@@ -2014,4 +2014,6 @@
 	<string name="successfully_uploaded_pattern">Subido correctamente {0}/{1}</string>
 	<string name="try_again">Pruebe de nuevo</string>
 	<string name="error_message_pattern">Error: {0}</string>
-</resources>
+<string name="no_updates_available">Sin actualizaciones disponibles</string>
+    <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír su opinión.</string>
+	</resources>
