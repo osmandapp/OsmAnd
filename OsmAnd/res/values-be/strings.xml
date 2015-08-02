@@ -2054,4 +2054,6 @@
 	<string name="successfully_uploaded_pattern">{0}/{1} пасьпяхова адасланыя</string>
 	<string name="try_again">Паўтарыце спробу</string>
 	<string name="error_message_pattern">Памылка: {0}</string>
-</resources>
+<string name="no_updates_available">Няма даступных абнаўленьняў</string>
+    <string name="we_really_care_about_your_opinion">Нас вельмі цікавіць ваша меркаваньне і нам важна пачуць вас.</string>
+	</resources>
