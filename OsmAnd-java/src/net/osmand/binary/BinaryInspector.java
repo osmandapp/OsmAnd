@@ -67,14 +67,14 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-				"-vmap", "-vmapobjects",  "-vmapcoordinates", 
+//				"-vmap", "-vmapobjects",  //	"-vmapcoordinates", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/maps/Netherlands_noord-holland_europe_15_07_28.obf"
+				"/Users/victorshcherb/osmand/temp/Angola_cuanza-sul_africa_2.srtm.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -264,7 +264,7 @@ public class BinaryInspector {
 			printFileInformation(f);
 		}
 	}
-	public  static final void writeInt(CodedOutputStream ous, int v) throws IOException {
+	public static final void writeInt(CodedOutputStream ous, int v) throws IOException {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
@@ -403,7 +403,7 @@ public class BinaryInspector {
 	}
 
 
-	private  static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
+	public static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
 			throws IOException {
 		raf.seek(fp);
 		int toRead = length;

@@ -11,24 +11,29 @@ public class IndexConstants {
 	public final static int TTSVOICE_VERSION = 1; //supported download versions
 	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
+	
 	public static final String BINARY_MAP_INDEX_EXT = ".obf"; //$NON-NLS-1$
-	public static final String BINARY_SRTM_MAP_INDEX_EXT = ".srtm.obf"; //$NON-NLS-1$
-	public static final String BINARY_WIKI_MAP_INDEX_EXT_ZIP = ".wiki.obf.zip"; //$NON-NLS-1$
+	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
+	
 	public static final String BINARY_WIKI_MAP_INDEX_EXT = ".wiki.obf"; //$NON-NLS-1$
+	public static final String BINARY_WIKI_MAP_INDEX_EXT_ZIP = ".wiki.obf.zip"; //$NON-NLS-1$
+	public static final String BINARY_ROAD_MAP_INDEX_EXT = ".road.obf"; //$NON-NLS-1$
+	public static final String BINARY_ROAD_MAP_INDEX_EXT_ZIP = ".road.obf.zip"; //$NON-NLS-1$
+	public static final String BINARY_SRTM_MAP_INDEX_EXT = ".srtm.obf"; //$NON-NLS-1$
 	public static final String BINARY_SRTM_MAP_INDEX_EXT_ZIP = ".srtm.obf.zip"; //$NON-NLS-1$
+	public static final String EXTRA_EXT = ".extra";
+	public static final String EXTRA_ZIP_EXT = ".extra.zip";
+	
 	public static final String TOUR_INDEX_EXT = ".tour"; //$NON-NLS-1$
+	public static final String TOUR_INDEX_EXT_ZIP = ".tour.zip"; //$NON-NLS-1$
 	
 	public static final String GEN_LOG_EXT = ".gen.log"; //$NON-NLS-1$
 	
-	public static final String POI_INDEX_EXT_ZIP = ".poi.zip"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
 	public static final String TTSVOICE_INDEX_EXT_ZIP = ".ttsvoice.zip"; //$NON-NLS-1$
 	public static final String ANYVOICE_INDEX_EXT_ZIP = "voice.zip"; //$NON-NLS-1$ //to cactch both voices, .voice.zip and .ttsvoice.zip
-	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
-	public static final String TOUR_INDEX_EXT_ZIP = ".tour.zip"; //$NON-NLS-1$
+
 	
-	public static final String EXTRA_ZIP_EXT = ".extra.zip";
-	public static final String EXTRA_EXT = ".extra";
 	
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	
