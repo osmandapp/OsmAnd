@@ -78,11 +78,12 @@ public class DownloadActivityType {
 	}
 	
 	public boolean isAccepted(String fileName) {
-		if (ROADS_FILE == this || NORMAL_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,
-					IndexConstants.BINARY_MAP_VERSION)) 
+		if(NORMAL_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION)) 
 					|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
 					|| fileName.endsWith(IndexConstants.SQLITE_EXT);
+		} else if(ROADS_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (VOICE_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION));
 		} else if (WIKIPEDIA_FILE == this) {
@@ -98,13 +99,15 @@ public class DownloadActivityType {
 	}
 	
 	public File getDownloadFolder(OsmandApplication ctx, IndexItem indexItem) {
-		if (ROADS_FILE == this || NORMAL_FILE == this) {
+		if (NORMAL_FILE == this) {
 			if(indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 			}
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (VOICE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		} else if (ROADS_FILE == this) {
+			return ctx.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 		} else if (WIKIPEDIA_FILE == this) {
@@ -143,7 +146,7 @@ public class DownloadActivityType {
 				return "";
 			}
 		} else if (ROADS_FILE == this) {
-			return "-roads" + BINARY_MAP_INDEX_EXT;
+			return IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 		} else if (VOICE_FILE == this) {
 			return "";
 		} else if (SRTM_COUNTRY_FILE == this) {
@@ -292,7 +295,7 @@ public class DownloadActivityType {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 			}
 			if (this == DownloadActivityType.ROADS_FILE) {
-				baseNameWithoutVersion += "-roads";
+				return baseNameWithoutVersion + IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}
 			baseNameWithoutVersion += IndexConstants.BINARY_MAP_INDEX_EXT;
 			return baseNameWithoutVersion;

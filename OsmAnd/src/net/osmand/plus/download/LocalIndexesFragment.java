@@ -344,6 +344,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.SRTM_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
+			} else if(i.getFileName().endsWith(IndexConstants.ROADS_INDEX_DIR)){
+				parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.WIKI_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
@@ -1112,16 +1114,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 
 		private String getMapDescription(String fileName){
-			int ls = fileName.lastIndexOf(".");
-			String name = fileName;
-			if (ls >= 0) {
-				name = fileName.substring(0, ls);
-			}
-
-			if (name.endsWith("-roads")) {
+			if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
 			}
-
 			return "";
 		}
 	}

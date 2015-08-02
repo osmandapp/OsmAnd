@@ -10,6 +10,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -585,18 +586,35 @@ public class ResourceManager {
 		}
 		return files;
 	}
+	
+	private void renameRoadsFiles(ArrayList<File> files, File roadsPath) {
+		Iterator<File> it = files.iterator();
+		while(it.hasNext()) {
+			File f = it.next();
+			if (f.getName().endsWith("-roads" + IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				f.renameTo(new File(roadsPath, f.getName().replace("-roads" + IndexConstants.BINARY_MAP_INDEX_EXT,
+						IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)));
+			}
+		}
+	}
 
 	public List<String> indexingMaps(final IProgress progress) {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<File>();
 		File appPath = context.getAppPath(null);
+		File roadsPath = context.getAppPath(IndexConstants.ROADS_INDEX_DIR);
+		roadsPath.mkdirs();
+		
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		renameRoadsFiles(files, roadsPath);
+		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if(!Version.isFreeVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
+		
 		if(context.getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
 			collectFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
@@ -713,6 +731,8 @@ public class ResourceManager {
 		}
 		return warnings;
 	}
+
+	
 
 	public void initMapBoundariesCacheNative() {
 		File indCache = context.getAppPath(INDEXES_CACHE);
