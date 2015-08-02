@@ -584,7 +584,7 @@ public class VoiceRouter {
 		if(pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
-			pn = pn.replace(';', ','); //some tts engines actually annoyingly pronounce this as "semicolon"
+			pn = pn.replace(';', '; '); // Trailing blank prevents punctuation beng prnoinced
 			if ((player != null) && (!"de".equals(player.getLanguage()))) {
 				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
 			}
