@@ -2072,4 +2072,5 @@
 	<string name="try_again">再試一次</string>
 	<string name="error_message_pattern">錯誤：{0}</string>
 <string name="no_updates_available">沒可用的更新</string>
-    </resources>
+    <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
+	</resources>
