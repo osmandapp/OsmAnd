@@ -952,12 +952,12 @@
 	<string name="poi_node_networks">Vandre-/cykelrutepunkter</string>
 		<string name="poi_hiking_routes">Vandreruter</string>
 		<string name="poi_traffic_enforcement">Trafikovervågning</string>
-	<string name="poi_access_private">Privat adgang</string>
+	<string name="poi_access_private">Adgang privat</string>
 	<string name="poi_access_no">Ingen adgang</string>
-	<string name="poi_access_destination">Destination adgang</string>
-	<string name="poi_access_permissive">Tolerant adgang</string>
-	<string name="poi_access_customers">Kunde adgang</string>
-	<string name="poi_access_delivery">Levering adgang</string>
-	<string name="poi_access_agricultural">Landbrugs adgang</string>
+	<string name="poi_access_destination">Adgang destination</string>
+	<string name="poi_access_permissive">Adgang tolerant</string>
+	<string name="poi_access_customers">Adgang for kunde</string>
+	<string name="poi_access_delivery">Adgang for levering</string>
+	<string name="poi_access_agricultural">Adgang for landbrug</string>
 
 	</resources>
