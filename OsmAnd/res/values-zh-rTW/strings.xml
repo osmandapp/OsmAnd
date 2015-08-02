@@ -2071,4 +2071,5 @@
 	<string name="successfully_uploaded_pattern">已成功上載 {0} / {1}</string>
 	<string name="try_again">再試一次</string>
 	<string name="error_message_pattern">錯誤：{0}</string>
-</resources>
+<string name="no_updates_available">沒可用的更新</string>
+    </resources>
