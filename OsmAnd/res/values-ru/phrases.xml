@@ -767,4 +767,12 @@
 	<string name="poi_fee_yes">Взимается оплата</string>
 	<string name="poi_fee_no">Оплата не взимается</string>
 
+	<string name="poi_access_private">Частный доступ</string>
+	<string name="poi_access_no">Нет доступа</string>
+	<string name="poi_access_destination">Доступ: пункт назначения</string>
+	<string name="poi_access_permissive">Доступ разрешен владельцем</string>
+	<string name="poi_access_customers">Доступ только для посетителей</string>
+	<string name="poi_access_delivery">Доступ только для доставки</string>
+	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
+
 	</resources>
