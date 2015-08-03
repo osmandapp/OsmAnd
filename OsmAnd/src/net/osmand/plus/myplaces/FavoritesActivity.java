@@ -41,6 +41,7 @@ public class FavoritesActivity extends TabActivity {
 //	private static final String SELECTED_TRACK = "SELECTED_TRACK";
 	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
+	private int tabSize;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -49,6 +50,33 @@ public class FavoritesActivity extends TabActivity {
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
+		
+		setContentView(R.layout.tab_content);
+		List<TabItem> mTabs = getTabItems();
+		setTabs(mTabs);
+		// setupHomeButton();
+	}
+	
+	
+
+	private void setTabs(List<TabItem> mTabs) {
+		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
+		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+		Integer tabId = settings.FAVORITES_TAB.get();
+		int tab = 0;
+		for(int i = 0; i < mTabs.size(); i++) {
+			if(mTabs.get(i).resId == tabId) {
+				tab = i;
+			}
+		}
+		tabSize = mTabs.size();
+		setViewPagerAdapter(mViewPager, mTabs);
+		mSlidingTabLayout.setViewPager(mViewPager);
+		mViewPager.setCurrentItem(tab);
+	}
+
+	private List<TabItem> getTabItems() {
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
 		boolean hasGpx = false;
 		if (lf != null) {
@@ -60,30 +88,13 @@ public class FavoritesActivity extends TabActivity {
 			}
 		}
 
-		setContentView(R.layout.tab_content);
-
-		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		
-		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-
 		List<TabItem> mTabs = new ArrayList<TabItem>();
 		mTabs.add(getTabIndicator(R.string.shared_string_my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
 			mTabs.add(getTabIndicator(R.string.shared_string_my_tracks, AvailableGPXFragment.class));
 		}
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
-		Integer tabId = settings.FAVORITES_TAB.get();
-		int tab = 0;
-		for(int i = 0; i < mTabs.size(); i++) {
-			if(mTabs.get(i).resId == tabId) {
-				tab = i;
-			}
-		}
-		setViewPagerAdapter(mViewPager, mTabs);
-		mSlidingTabLayout.setViewPager(mViewPager);
-		mViewPager.setCurrentItem(tab);
-		// setupHomeButton();
+		return mTabs;
 	}
 
 	@Override
@@ -94,7 +105,10 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		List<TabItem> mTabs = getTabItems();
+		if(mTabs.size() != tabSize ) {
+			setTabs(mTabs);
+		}
 	}
 
 	public OsmandApplication getMyApplication() {
