@@ -152,6 +152,7 @@ public class MapRenderRepositories {
 			if (lib != null) {
 				lib.closeMapFile(bmir != null ? bmir.getFile().getAbsolutePath() : file);
 				nativeFiles.remove(file);
+				clearCache();
 			}
 		}
 		if (bmir != null) {

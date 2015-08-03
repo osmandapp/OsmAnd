@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.io.NetworkUtils;
@@ -42,7 +43,10 @@ public class IncrementalChangesManager {
 			}
 			Set<String> existingFiles = new HashSet<String>();
 			for (File f : files) {
-				existingFiles.add(Algorithms.getFileNameWithoutExtension(f));
+				if(!f.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT) && 
+						!f.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+					existingFiles.add(Algorithms.getFileNameWithoutExtension(f));
+				}
 			}
 			for (File f : lf) {
 				if (f.getName().endsWith(ext)) {
