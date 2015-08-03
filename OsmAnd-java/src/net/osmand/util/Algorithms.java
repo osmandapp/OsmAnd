@@ -133,7 +133,7 @@ public class Algorithms {
 		if (value.length() > 0 && value.charAt(0) == '-') {
 			i++;
 		}
-		while (i < value.length() && (Character.isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+		while (i < value.length() && (isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
 			i++;
 			valid = true;
 		}
@@ -144,6 +144,10 @@ public class Algorithms {
 		}
 	}
 	
+	private static boolean isDigit(char charAt) {
+		return charAt >= '0' && charAt <= '9';
+	}
+
 	/**
 	 * Determine whether a file is a ZIP File.
 	 */
@@ -220,7 +224,7 @@ public class Algorithms {
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;
 		for (int k = 0; k < s.length(); k++) {
-			if (Character.isDigit(s.charAt(k))) {
+			if (isDigit(s.charAt(k))) {
 				i = i * 10 + (s.charAt(k) - '0');
 			} else {
 				break;
@@ -233,12 +237,12 @@ public class Algorithms {
 		int i = 0;
 		int k = 0;
 		for (k = 0; k < s.length(); k++) {
-			if (Character.isDigit(s.charAt(k))) {
+			if (isDigit(s.charAt(k))) {
 				break;
 			}
 		}
 		for (; k < s.length(); k++) {
-			if (Character.isDigit(s.charAt(k))) {
+			if (isDigit(s.charAt(k))) {
 				i = i * 10 + (s.charAt(k) - '0');
 			} else {
 				break;
